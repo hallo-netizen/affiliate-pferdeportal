@@ -1,0 +1,884 @@
+{
+  "contract": "HD001_RULE16_PENDING_FERTIGEN_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__13_OF_13_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Fermentation",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic fermentation orientation, core process concepts, hygiene and cross-method comparison. Kimchi, Koji, Kombucha, Sauerteig, Bier brauen and Cider herstellen retain their specific process and recipe intents.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bier brauen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Rezeptplanung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bier brauen für Anfänger",
+            "Erstes Bier-Rezept auswählen",
+            "Brautag Schritt für Schritt planen",
+            "Sudgröße für den Einstieg bestimmen",
+            "Stammwürze und Zielalkohol verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Zutaten",
+          "intent_count": 5,
+          "article_intents": [
+            "Malzsorten fürs Bierbrauen auswählen",
+            "Hopfensorten und Bittere verstehen",
+            "Bierhefe auswählen",
+            "Brauwasser für Hobbybrauer verstehen",
+            "Spezialmalze sinnvoll einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Brauausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Braukessel auswählen",
+            "Gärbehälter fürs Bierbrauen",
+            "Läuterbottich oder BIAB wählen",
+            "Messgeräte für Hobbybrauer",
+            "Abfüllausrüstung zusammenstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Maischen & Würzekochen",
+          "intent_count": 5,
+          "article_intents": [
+            "Maischetemperaturen richtig wählen",
+            "Rasten beim Maischen verstehen",
+            "Läutern ohne festgefahrenen Treber",
+            "Hopfengaben beim Würzekochen planen",
+            "Würze nach dem Kochen schnell kühlen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gärung, Abfüllung & Reifung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bier richtig anstellen",
+            "Gärtemperatur kontrollieren",
+            "Ende der Hauptgärung erkennen",
+            "Flaschengärung und Speise berechnen",
+            "Bier nach der Abfüllung richtig reifen lassen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Hygiene, Messwerte & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Braugeräte richtig reinigen und desinfizieren",
+            "Stammwürze mit Spindel messen",
+            "Gärung startet nicht: Ursachen",
+            "Bier schmeckt oxidiert: Ursachen",
+            "Überkarbonisierung in Flaschen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns home beer brewing from recipe and ingredients through mashing, fermentation and packaging. Generic fermentation theory stays with Fermentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Cider herstellen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Apfelauswahl",
+          "intent_count": 5,
+          "article_intents": [
+            "Cider selber machen für Anfänger",
+            "Apfelsorten für Cider auswählen",
+            "Süße und Säure im Most einschätzen",
+            "Cider-Rezept für den ersten Ansatz",
+            "Menge und Ausbeute beim Cider planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pressen, Saft & Ausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Äpfel für Cider zerkleinern",
+            "Obstpresse für Cider auswählen",
+            "Saft vor der Gärung behandeln",
+            "Gärbehälter für Cider auswählen",
+            "Messgeräte für Cider verwenden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gärung & Hefe",
+          "intent_count": 5,
+          "article_intents": [
+            "Hefe für Cider auswählen",
+            "Cider-Gärung starten",
+            "Gärtemperatur kontrollieren",
+            "Gärende beim Cider erkennen",
+            "Trockenen oder restsüßen Cider planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Abfüllung & Reifung",
+          "intent_count": 5,
+          "article_intents": [
+            "Cider still oder karbonisiert abfüllen",
+            "Flaschen für Cider auswählen",
+            "Nachgärung in der Flasche steuern",
+            "Cider reifen lassen",
+            "Cider richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fehler, Hygiene & Balance",
+          "intent_count": 5,
+          "article_intents": [
+            "Cider-Ausrüstung reinigen und desinfizieren",
+            "Cider riecht nach Schwefel: Ursachen",
+            "Zu sauren Cider ausbalancieren",
+            "Oxidation bei Cider vermeiden",
+            "Zu starke Flaschenkarbonisierung verhindern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns apple/fruit cider production and cider-specific fermentation, packaging and balance. Generic fermentation remains with Fermentation; beer-specific brewing stays with Bier brauen.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kaffee selbst rösten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Rohkaffee",
+          "intent_count": 5,
+          "article_intents": [
+            "Kaffee zuhause rösten für Anfänger",
+            "Rohkaffee auswählen",
+            "Arabica-Rohkaffee nach Herkunft vergleichen",
+            "Rohkaffee richtig lagern",
+            "Röstmenge für den Einstieg bestimmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Röster & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Kaffeeröster für zuhause auswählen",
+            "Heißluft- oder Trommelröster vergleichen",
+            "Kaffee im Popcornröster rösten",
+            "Abluft und Rauch beim Heimrösten handhaben",
+            "Rösttemperatur sinnvoll messen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Röstprofile & Phasen",
+          "intent_count": 5,
+          "article_intents": [
+            "Trocknungsphase beim Kaffeerösten",
+            "Maillard-Phase verstehen",
+            "First Crack erkennen",
+            "Development Time steuern",
+            "Helle und dunkle Röstprofile vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Verkostung & Profilentwicklung",
+          "intent_count": 5,
+          "article_intents": [
+            "Frisch gerösteten Kaffee verkosten",
+            "Röstprofil dokumentieren",
+            "Säure und Süße durch Röstung beeinflussen",
+            "Bitterkeit durch Röstung vermeiden",
+            "Röstprofile für Filter und Espresso anpassen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kühlung, Lagerung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Gerösteten Kaffee schnell kühlen",
+            "Kaffee nach der Röstung ausgasen lassen",
+            "Geröstete Bohnen richtig lagern",
+            "Scorching und Tipping vermeiden",
+            "Ungleichmäßige Röstung beheben"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hobby coffee roasting from green coffee selection through roasting profiles and evaluation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Käse herstellen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg, Milch & Kulturen",
+          "intent_count": 5,
+          "article_intents": [
+            "Käse selber machen für Anfänger",
+            "Geeignete Milch für Käse auswählen",
+            "Starterkulturen für Käse verstehen",
+            "Lab richtig dosieren",
+            "Erstes einfaches Käse-Rezept auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausrüstung & Hygiene",
+          "intent_count": 5,
+          "article_intents": [
+            "Käsetopf und Thermometer auswählen",
+            "Käseformen und Pressen verwenden",
+            "Käsetücher richtig einsetzen",
+            "Ausrüstung fürs Käsemachen reinigen",
+            "Arbeitsplatz hygienisch vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Dicklegen, Bruch & Erwärmen",
+          "intent_count": 5,
+          "article_intents": [
+            "Milch richtig dicklegen",
+            "Käsebruch schneiden",
+            "Bruchgröße und Feuchtigkeit steuern",
+            "Käsebruch richtig erwärmen",
+            "Molke sauber abtrennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Formen, Salzen & Reifen",
+          "intent_count": 5,
+          "article_intents": [
+            "Käse in Formen füllen",
+            "Käse richtig pressen",
+            "Trocken- oder Salzbad verwenden",
+            "Käse zum Reifen vorbereiten",
+            "Reifetemperatur und Luftfeuchte steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Sorten, Lagerung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Frischkäse zuhause herstellen",
+            "Schnittkäse selber machen",
+            "Schimmel auf Käse richtig beurteilen",
+            "Käse wird bitter: Ursachen",
+            "Selbstgemachten Käse richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns home cheesemaking process, equipment, cultures and maturation. General food fermentation remains with Fermentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kimchi",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Zutaten & Vorbereitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Kimchi für Anfänger",
+            "Chinakohl richtig salzen",
+            "Gemüse für Kimchi vorbereiten",
+            "Salzmenge für Kimchi bestimmen",
+            "Kimchi ohne Chinakohl variieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Würzpaste & Geschmack",
+          "intent_count": 5,
+          "article_intents": [
+            "Kimchi-Paste selber machen",
+            "Gochugaru richtig dosieren",
+            "Knoblauch und Ingwer ausbalancieren",
+            "Fischsauce im Kimchi ersetzen",
+            "Schärfe und Süße im Kimchi steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fermentation & Gefäße",
+          "intent_count": 5,
+          "article_intents": [
+            "Kimchi-Fermentation starten",
+            "Geeignetes Gefäß für Kimchi",
+            "Kimchi unter Lake halten",
+            "Fermentationstemperatur für Kimchi",
+            "Wann Kimchi fertig fermentiert ist"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Lagerung, Varianten & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Kimchi im Kühlschrank lagern",
+            "Kimchi zu sauer: was tun?",
+            "Kimchi bildet Kahmhefe: beurteilen",
+            "Kimchi riecht ungewöhnlich: Fehler erkennen",
+            "Reifes Kimchi sinnvoll weiterverwenden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kimchi-specific preparation, seasoning, fermentation and storage. Generic fermentation principles remain with Fermentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Koji",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Koji-kin",
+          "intent_count": 5,
+          "article_intents": [
+            "Koji für Anfänger",
+            "Koji-kin auswählen",
+            "Reis-Koji oder Gersten-Koji wählen",
+            "Koji-Sporen richtig lagern",
+            "Ersten Koji-Ansatz planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Reis, Gerste & Vorbereitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Reis für Koji waschen und einweichen",
+            "Reis für Koji richtig dämpfen",
+            "Gerste für Koji vorbereiten",
+            "Feuchtigkeit des Substrats einstellen",
+            "Koji-Ansatz gleichmäßig beimpfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Inkubation & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Temperatur beim Koji kontrollieren",
+            "Luftfeuchtigkeit beim Koji steuern",
+            "Koji regelmäßig wenden",
+            "Überhitzung beim Koji vermeiden",
+            "Reifegrad von Koji erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Koji verwenden & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Shio Koji selber machen",
+            "Amazake mit Koji herstellen",
+            "Koji für Miso vorbereiten",
+            "Koji trocknen und lagern",
+            "Fehlgeruch oder Fremdschimmel beim Koji erkennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns koji cultivation and koji-specific applications. Broader fermentation orientation stays with Fermentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kombucha",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & SCOBY",
+          "intent_count": 5,
+          "article_intents": [
+            "Kombucha für Anfänger",
+            "SCOBY und Starterflüssigkeit verstehen",
+            "Ersten Kombucha-Ansatz starten",
+            "Ansatzmenge und Gefäßgröße planen",
+            "Neuen SCOBY richtig übernehmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tee, Zucker & Wasser",
+          "intent_count": 5,
+          "article_intents": [
+            "Tee für Kombucha auswählen",
+            "Zuckermenge für Kombucha bestimmen",
+            "Wasserqualität für Kombucha",
+            "Schwarztee und Grüntee vergleichen",
+            "Tee richtig abkühlen vor dem Ansatz"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Erstfermentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Kombucha richtig fermentieren",
+            "Fermentationstemperatur steuern",
+            "Kombucha-Gefäß abdecken",
+            "Geschmack während der Gärung prüfen",
+            "Erstfermentation rechtzeitig beenden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Zweitfermentation & Aromen",
+          "intent_count": 5,
+          "article_intents": [
+            "Kombucha in Flaschen zweitfermentieren",
+            "Früchte für Kombucha verwenden",
+            "Karbonisierung steuern",
+            "Flaschendruck sicher kontrollieren",
+            "Aromen ohne Überkarbonisierung einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Hygiene, Lagerung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Kombucha-Ausrüstung sauber halten",
+            "Schimmel auf Kombucha erkennen",
+            "Kahmhefe von SCOBY unterscheiden",
+            "Kombucha zu sauer: Ursachen",
+            "Kombucha und SCOBY richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kombucha-specific brewing, SCOBY management, flavoring and troubleshooting.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pralinenherstellung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Schokolade",
+          "intent_count": 5,
+          "article_intents": [
+            "Pralinen selber machen für Anfänger",
+            "Kuvertüre für Pralinen auswählen",
+            "Schokolade richtig temperieren",
+            "Arbeitsplatz für Pralinen vorbereiten",
+            "Erste Pralinenart auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausrüstung & Formen",
+          "intent_count": 5,
+          "article_intents": [
+            "Pralinenformen auswählen",
+            "Thermometer fürs Temperieren",
+            "Spritzbeutel und Dosierwerkzeuge",
+            "Pralinenformen richtig polieren",
+            "Werkzeuge nach Schokolade reinigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Füllungen & Ganache",
+          "intent_count": 5,
+          "article_intents": [
+            "Ganache für Pralinen herstellen",
+            "Fruchtfüllungen für Pralinen",
+            "Nussfüllungen und Praliné",
+            "Karamellfüllung für Pralinen",
+            "Füllungen richtig portionieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Überziehen & Dekorieren",
+          "intent_count": 5,
+          "article_intents": [
+            "Pralinen sauber überziehen",
+            "Hohlkörperpralinen herstellen",
+            "Pralinen aus Formen lösen",
+            "Pralinen mit Kakao oder Nüssen dekorieren",
+            "Farben und Muster auf Pralinen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Haltbarkeit & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Pralinen richtig lagern",
+            "Haltbarkeit von Ganache-Füllungen",
+            "Schokolade wird grau: Ursachen",
+            "Pralinen lösen sich nicht aus der Form",
+            "Ganache trennt sich: Fehler beheben"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns chocolate praline making, fillings, tempering, moulding and storage. Bean-to-bar owns cocoa-to-chocolate production.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Räuchern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Räuchern für Anfänger",
+            "Kalträuchern oder Heißräuchern wählen",
+            "Geeignete Lebensmittel zum Räuchern",
+            "Räucherzeiten richtig planen",
+            "Sicheren Räucherplatz einrichten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Räuchergeräte & Brennstoff",
+          "intent_count": 5,
+          "article_intents": [
+            "Räucherofen auswählen",
+            "Tischräucherofen verwenden",
+            "Sparbrand fürs Kalträuchern",
+            "Räuchermehl und Holzarten auswählen",
+            "Temperatur im Räucherofen messen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalträuchern",
+          "intent_count": 5,
+          "article_intents": [
+            "Kalträuchern Schritt für Schritt",
+            "Temperatur beim Kalträuchern kontrollieren",
+            "Räucherpausen beim Kalträuchern",
+            "Käse kalt räuchern",
+            "Fisch kalt räuchern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Heißräuchern",
+          "intent_count": 5,
+          "article_intents": [
+            "Heißräuchern Schritt für Schritt",
+            "Fisch heiß räuchern",
+            "Geflügel heiß räuchern",
+            "Temperatur und Gargrad beim Heißräuchern",
+            "Rauchintensität beim Heißräuchern steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vorbereitung, Lagerung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Räuchergut vor dem Räuchern trocknen",
+            "Pökeln vor dem Räuchern richtig einordnen",
+            "Bitteren Rauchgeschmack vermeiden",
+            "Kondenswasser im Räucherofen vermeiden",
+            "Geräucherte Lebensmittel richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hobby hot/cold smoking equipment and process. Broad preservation and fermentation intents remain separate.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Sauerteig",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Starter ansetzen & pflegen",
+          "intent_count": 5,
+          "article_intents": [
+            "Sauerteigstarter ansetzen",
+            "Sauerteigstarter füttern",
+            "Anstellgut richtig aufbewahren",
+            "Sauerteigstarter reaktivieren",
+            "Fütterungsrhythmus anpassen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Mehl, Wasser & Temperatur",
+          "intent_count": 5,
+          "article_intents": [
+            "Mehl für Sauerteig auswählen",
+            "Roggen- und Weizensauer vergleichen",
+            "Wasseranteil im Sauerteigstarter",
+            "Teigtemperatur beim Sauerteig",
+            "Hydration verstehen und anpassen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Teigführung & Fermentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Stockgare bei Sauerteigbrot steuern",
+            "Stückgare richtig einschätzen",
+            "Dehnen und Falten beim Sauerteig",
+            "Übernachtgare im Kühlschrank",
+            "Reifegrad des Teigs erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Backen & Ofentrieb",
+          "intent_count": 5,
+          "article_intents": [
+            "Sauerteigbrot im Topf backen",
+            "Teigling richtig einschneiden",
+            "Dampf beim Brotbacken einsetzen",
+            "Ofentrieb verbessern",
+            "Kruste und Krumenstruktur steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fehler & Aufbewahrung",
+          "intent_count": 5,
+          "article_intents": [
+            "Sauerteigbrot wird flach: Ursachen",
+            "Teig ist zu klebrig: Ursachen",
+            "Sauerteigstarter riecht ungewöhnlich",
+            "Brot wird zu sauer: Ursachen",
+            "Sauerteigreste sinnvoll verwenden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns sourdough starter and sourdough baking practice. Generic fermentation theory remains with Fermentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Stempel schnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Motiv",
+          "intent_count": 5,
+          "article_intents": [
+            "Stempel schnitzen für Anfänger",
+            "Einfaches Motiv für ersten Stempel",
+            "Motiv spiegeln vor dem Schnitzen",
+            "Motiv auf Stempelmaterial übertragen",
+            "Linienstärke für Stempelmotive planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Material & Werkzeug",
+          "intent_count": 5,
+          "article_intents": [
+            "Stempelgummi auswählen",
+            "Schnitzmesser für Stempel auswählen",
+            "Schnitzwerkzeuge sicher halten",
+            "Stempelkissen und Farbe auswählen",
+            "Unterlage fürs Stempelschnitzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schnitztechniken",
+          "intent_count": 5,
+          "article_intents": [
+            "Konturen sauber schnitzen",
+            "Flächen aus Stempelgummi entfernen",
+            "Feine Details schnitzen",
+            "Positive und negative Motive planen",
+            "Mehrfarbige Stempel vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Drucken, Projekte & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Stempel gleichmäßig einfärben",
+            "Sauberen Stempeldruck erzeugen",
+            "Stempel für Karten gestalten",
+            "Stoff mit selbstgeschnitzten Stempeln bedrucken",
+            "Ausgerissene Kanten beim Stempelschnitzen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hand-carved stamp making and printing practice; generic block-printing ownership remains separate.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Zines herstellen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Idee & Redaktion",
+          "intent_count": 5,
+          "article_intents": [
+            "Zine für Anfänger planen",
+            "Thema für ein Zine finden",
+            "Inhalte für ein Zine strukturieren",
+            "Text und Bild im Zine kombinieren",
+            "Redaktionsplan für ein kleines Zine"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Format & Layout",
+          "intent_count": 5,
+          "article_intents": [
+            "Zine-Format auswählen",
+            "Seitenfolge für ein Zine planen",
+            "Layout per Hand erstellen",
+            "Zine digital layouten",
+            "Ränder und Beschnitt berücksichtigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bild, Text & Gestaltung",
+          "intent_count": 5,
+          "article_intents": [
+            "Illustrationen für Zines erstellen",
+            "Collage im Zine einsetzen",
+            "Typografie für Zines",
+            "Handschrift und Lettering im Zine",
+            "Schwarzweißgestaltung für Kopien"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Drucken, Falten & Binden",
+          "intent_count": 5,
+          "article_intents": [
+            "Zine am Kopierer vervielfältigen",
+            "Einblatt-Zine falten",
+            "Zine heften oder klammern",
+            "Zine mit einfacher Fadenheftung binden",
+            "Druckreihenfolge und Duplex richtig planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Auflage, Austausch & Archivierung",
+          "intent_count": 5,
+          "article_intents": [
+            "Kleine Zine-Auflage planen",
+            "Zines tauschen und verteilen",
+            "Zine-Ausgaben nummerieren",
+            "Zines geschützt lagern",
+            "Zine-Projekt dokumentieren und nachdrucken"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns self-published zine creation from editorial concept through layout, reproduction and simple binding; full bookbinding technique ownership remains with Buchbinden.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 13,
+    "hobby_hub": 12,
+    "orientation_universe": 1,
+    "visible_content_categories": 58,
+    "article_intents": 290
+  },
+  "next_action": "Continue with pending current CORE identities in Forschen."
+}
