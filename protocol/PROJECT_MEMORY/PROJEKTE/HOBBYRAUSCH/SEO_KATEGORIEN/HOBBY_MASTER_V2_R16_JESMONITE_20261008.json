@@ -1,0 +1,51 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Jesmonite",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 4,
+  "leaves": [
+    {
+      "label": "Mischen & Gießen",
+      "intents": [
+        "Mischverhältnis",
+        "Mischtechnik",
+        "Gießmenge",
+        "Verarbeitungszeit",
+        "Aushärtung"
+      ]
+    },
+    {
+      "label": "Formen & Pigmente",
+      "intents": [
+        "Formwahl",
+        "Pigmentdosierung",
+        "Farbmischung",
+        "Einlagen",
+        "Formtrennung"
+      ]
+    },
+    {
+      "label": "Terrazzo & Effekte",
+      "intents": [
+        "Chips herstellen",
+        "Chips einstreuen",
+        "Schichtaufbau",
+        "Musterplanung",
+        "Freilegen"
+      ]
+    },
+    {
+      "label": "Schleifen & Versiegeln",
+      "intents": [
+        "Entformen",
+        "Schleifstufen",
+        "Poren behandeln",
+        "Versiegelung",
+        "Pflege"
+      ]
+    }
+  ],
+  "validation": true
+}
