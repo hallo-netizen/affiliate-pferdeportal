@@ -1,0 +1,216 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_004_RULE16_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__9_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "source": {
+    "final_assessment": "HOBBY_MASTER_V2_BATCH_004_FINAL_ASSESSMENT_20261007.json",
+    "subject_preflight_library": "HOBBY_MASTER_V2_BATCH_004_SUBJECT_PREFLIGHT_20261008.json"
+  },
+  "corrections": {
+    "RC-Offroad": "ORIENTATION_UNIVERSE__MACRO_REVIEW__NO_LEAF_LAYER",
+    "Heimautomatisierung": "ORIENTATION_UNIVERSE__MACRO_REVIEW__NO_LEAF_LAYER"
+  },
+  "validation": {
+    "current_core_candidates_in_batch": 13,
+    "current_core_hobby_hubs": 9,
+    "visible_content_categories": 42,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "violations": 0
+  },
+  "hubs": {
+    "RC-Drift": [
+      [
+        "Einstieg & Drift-Chassis",
+        5
+      ],
+      [
+        "Motor, Regler & Übersetzung",
+        5
+      ],
+      [
+        "Lenkung & Fahrwerkssetup",
+        5
+      ],
+      [
+        "Reifen & Untergrund",
+        5
+      ],
+      [
+        "Fahrtechnik & Events",
+        5
+      ]
+    ],
+    "Modell-Dampfmaschinen": [
+      [
+        "Einstieg & Bauarten",
+        5
+      ],
+      [
+        "Kessel & Dampferzeugung",
+        5
+      ],
+      [
+        "Zylinder, Ventile & Mechanik",
+        5
+      ],
+      [
+        "Betrieb & Wartung",
+        5
+      ]
+    ],
+    "Stirlingmotoren": [
+      [
+        "Einstieg & Bauarten",
+        5
+      ],
+      [
+        "Bau & Materialien",
+        5
+      ],
+      [
+        "Wärmequelle & Betrieb",
+        5
+      ],
+      [
+        "Leistung & Fehler",
+        5
+      ]
+    ],
+    "CNC-Fräsen": [
+      [
+        "Einstieg & Maschinen",
+        5
+      ],
+      [
+        "Fräser & Werkzeuge",
+        5
+      ],
+      [
+        "CAM & G-Code",
+        5
+      ],
+      [
+        "Materialien & Schnittwerte",
+        5
+      ],
+      [
+        "Spannen, Genauigkeit & Fehler",
+        5
+      ]
+    ],
+    "Lasercutting": [
+      [
+        "Einstieg & Lasertypen",
+        5
+      ],
+      [
+        "Dateien & Vektoren",
+        5
+      ],
+      [
+        "Materialien schneiden",
+        5
+      ],
+      [
+        "Leistung, Geschwindigkeit & Fokus",
+        5
+      ],
+      [
+        "Projekte, Kanten & Fehler",
+        5
+      ]
+    ],
+    "Lasergravieren": [
+      [
+        "Einstieg & Geräte",
+        5
+      ],
+      [
+        "Motive & Bildvorbereitung",
+        5
+      ],
+      [
+        "Materialien gravieren",
+        5
+      ],
+      [
+        "Leistung, Tempo & Fokus",
+        5
+      ],
+      [
+        "Qualität, Finish & Fehler",
+        5
+      ]
+    ],
+    "Resin-3D-Druck": [
+      [
+        "Einstieg & Drucker",
+        5
+      ],
+      [
+        "Harze & Material",
+        5
+      ],
+      [
+        "Slicer & Supports",
+        5
+      ],
+      [
+        "Druck & Kalibrierung",
+        5
+      ],
+      [
+        "Waschen, Härten & Finish",
+        5
+      ]
+    ],
+    "3D-Scanning": [
+      [
+        "Einstieg & Scanner",
+        5
+      ],
+      [
+        "Objektvorbereitung & Aufnahme",
+        5
+      ],
+      [
+        "Scanführung & Genauigkeit",
+        5
+      ],
+      [
+        "Mesh-Reparatur & Export",
+        5
+      ]
+    ],
+    "CAD als Hobby": [
+      [
+        "Einstieg & Software",
+        5
+      ],
+      [
+        "Skizzen & Bemaßung",
+        5
+      ],
+      [
+        "3D-Modellierung",
+        5
+      ],
+      [
+        "Baugruppen & Mechanik",
+        5
+      ],
+      [
+        "Zeichnung, Export & Projekte",
+        5
+      ]
+    ]
+  },
+  "hard_result": "Every materialized HOBBY_HUB has 3-6 visible leaves and every leaf has 5 distinct subject-defined article intents. No empty/symmetry leaf was created.",
+  "wordpress_writes": 0
+}
