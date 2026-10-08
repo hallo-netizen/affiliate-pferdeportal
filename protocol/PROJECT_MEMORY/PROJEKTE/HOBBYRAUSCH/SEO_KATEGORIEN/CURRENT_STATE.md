@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR+TARGET-NAV+MAGAZIN LOKAL FULL POS/NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 59 AKTIVE ZWISCHENBEREICHE / 437 PHYSISCHE ZIELOBJEKTE / LEGACY-NAV-LEAK GESCHLOSSEN / TREIBHOLZ CORE-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 ERWEITERUNGS-ANKER FINAL BEWERTET: 12 HOBBY_HUB + 7 ORIENTATION_UNIVERSE / TARGET-DELTA AUSSTEHEND / KEIN LIVE-SYNC
+STATUS: V1.14.1 EXPANSION19 FINAL LOKAL FULL POS/NEG HARD PASS / 860 IDENTITÄTEN / 359 CORE / 501 FINDER-EDITORIAL / 60 AKTIVE ZWISCHENBEREICHE / 466 AKTIVE LOGIKKNOTEN / 457 PHYSISCHE ZIELOBJEKTE / 430 PAGES / 97 HEADER-EINTRÄGE / KEIN LIVE-DRY-RUN / KEIN LIVE-SYNC
 
 ## Ziel
 
@@ -871,21 +871,73 @@ Besondere Routingentscheidungen:
 - Gemüseanbau belegt erstmals den bisher leer gelassenen Konzeptast `Essbare Pflanzen`; Aktivierung wird erst im Target-Delta entschieden.
 - Heimwerken und Gärtnern erhalten in dieser Bewertungsstufe KEINEN künstlich erfundenen Zwischenbereich.
 
+## V1.14.1 – EXPANSION19 MASTER-/TARGET-DELTA LOKAL HARD PASS
+
+Belege:
+- `HD001_V1_14_1_EXPANSION19_TARGET_DELTA_20261008.json`
+- `HD001_V1_14_1_EXPANSION19_FULL_LOCAL_HARDPASS_20261008.json`
+
+Materialisiert:
+- 860 kanonische Identitäten;
+- 359 CORE;
+- 501 Finder/Editorial;
+- 60 aktive Zwischenbereiche;
+- 466 aktive Logikknoten;
+- 457 physische Zielobjekte;
+- 430 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 Relations;
+- 97 Header-Navigationseinträge.
+
+Konzeptregeln eingehalten:
+- keine neunte Welt;
+- keine Blind-Promotion aus Monetarisierung;
+- alle 19 neuen CORE-Identitäten bleiben monetarisierungsseitig UNKNOWN bis zu echtem Provider-Match und zugleich redaktionell erhalten;
+- keine globale künstliche Content-Kategorieebene;
+- `Essbare Pflanzen` wird erst jetzt aktiviert, weil `Gemüseanbau` den Ast real belegt;
+- `Heimwerken` und `Gärtnern` bleiben direkte Welt-Kinder; kein künstlicher Ein-Kind-Zwischenbereich;
+- direkte Hobbyseiten werden nicht als Zwischenbereiche in die Header-Navigation projiziert.
+
+Lokaler POSITIV:
+- Fresh Dry-Run: 457 CREATE / 0 Provider / 0 Writes;
+- Fresh Sync: 457/457 Readback COMPLETE;
+- zweiter identischer Sync: 457 UNCHANGED / 457 Readback COMPLETE;
+- Migration V1.14.0 → V1.14.1: 20 CREATE + 437 UPDATE + 0 ARCHIVE / 457 Readback COMPLETE;
+- danach 457 UNCHANGED;
+- 430/430 Page-Frontend PASS;
+- Header 97/97 PASS;
+- Hobbywelten/Magazin/Anbieter, Frontlinks, Footer und Final-Frontend-Readback PASS.
+
+Lokaler NEGATIV:
+- Readback-/Page-/Term-Fehler → ROLLED_BACK / semantisch exakte Wiederherstellung;
+- Ambiguity / Foreign-Slug / Missing-Taxonomy / Duplicate-Slug / falsche Monetarisierungsbehauptung / fehlende Editorial-Sicherung = BLOCKED/fail-closed;
+- unbewerteter Zusatzkandidat bleibt Editorial und wird nicht blind CORE;
+- V1.14.0-Regressionsprofil bleibt 841 / 340 / 437 PASS.
+
+Artefakt:
+`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`64735c31f474a782cc324c68218aade99ccfca4b54ab08091d5f28cfcecae95e`
+
+Profil SHA-256:
+`cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0`
+
+Master SHA-256:
+`adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_EXPANSION_ANCHORS_19_TARGET_DELTA_PENDING`
+`HD001_V1_14_1_LIVE_DRYRUN_PENDING`
 
-Die Bewertung ist abgeschlossen, aber die 19 neuen Identitäten sind noch nicht in den 841er Quellmaster bzw. in das V1.14-Zielprofil materialisiert.
-Der bestehende V1.14.0-Artefaktstand 841 / 340 / 437 bleibt deshalb unverändert der letzte lokal getestete Stand.
+V1.14.1 ist lokal vollständig positiv/negativ geprüft, aber noch nicht gegen den realen Hobby-Depot-WordPress-Bestand dry-run-gelesen.
 
 ## EXAKT EINE NEXT ACTION
 
-Die final bewerteten 19 Entscheidungen als begründetes Master-/Target-Delta materialisieren und daraus genau einen neuen V1.14-Finalkandidaten bauen.
+Das exakte V1.14.1-Artefakt installieren/verwenden und **genau einen read-only Live-Dry-Run** ausführen und als JSON zurücklesen.
 
-Danach:
-- kompletter lokaler POSITIV + NEGATIV E2E;
-- nur bei vollständigem PASS Live-Dry-Run;
-- erst danach kontrollierter Live-Sync.
-
-Bis dahin KEIN Live-Sync.
-
+Bis zur Abnahme dieses Live-Dry-Runs:
+- KEIN Sync;
+- KEIN Live-PASS behaupten.
