@@ -1998,11 +1998,11 @@ JS;
             return $content;
         }
         // KISS 6.72.204: Ein ausdrücklich im Beitrag gesetzter Tarifrechner
-        // ersetzt nur die automatische Bannerwerbung im Artikel. Rechner und
-        // Produktboxen bleiben unverändert. Kein zusätzlicher DB-/HTTP-Zugriff:
+        // ersetzt nur den automatischen Banner mitten im Artikel. Der untere
+        // Banner sowie Produktboxen bleiben unverändert. Kein zusätzlicher DB-/HTTP-Zugriff:
         // der rohe Beitragsinhalt ist an dieser Stelle bereits geladen.
-        $suppress_article_banners = has_shortcode($raw_post_content, 'affiliate_rechner');
-        return $this->article_plan_apply_to_content((string) $content, (int) $post_id, $suppress_article_banners);
+        $suppress_inline_banner = has_shortcode($raw_post_content, 'affiliate_rechner');
+        return $this->article_plan_apply_to_content((string) $content, (int) $post_id, $suppress_inline_banner);
     }
 
     public function auto_inject_affiliate_slots($content) {
@@ -2069,7 +2069,7 @@ JS;
     public function inject_glossary_single_banner($content) {
         if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
         if (!function_exists('is_singular') || !is_singular('uge_term') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (strpos((string) $content, 'pftk-gsingle-v150490') === false || strpos((string) $content, 'ppar-glossary-banner-v67244') !== false) { return $content; }
+        if (!preg_match('/\bpftk-gsingle-v[0-9]+\b/i', (string) $content) || strpos((string) $content, 'ppar-glossary-banner-v67244') !== false) { return $content; }
         $post_id = absint(get_the_ID());
         if ($post_id <= 0 || get_post_type($post_id) !== 'uge_term' || post_password_required($post_id)) { return $content; }
 
@@ -2086,7 +2086,7 @@ JS;
             ? '<div class="ppar-glossary-banner-v67244 ppar-glossary-banner-mobile-v67244" data-ppar-glossary-banner="mobile">' . $mobile_slot . '</div>'
             : '';
 
-        $pattern = '#(<aside\s+class="[^"]*pftk-gsingle-aside-v150490[^"]*"[^>]*>.*?</aside>)#is';
+        $pattern = '#(<aside\s+class="[^"]*pftk-gsingle-aside-v[0-9]+[^"]*"[^>]*>.*?</aside>)#is';
         if (!preg_match($pattern, (string) $content)) { return $content; }
         // V6.72.100 RESTORE: exakt der belegte LIVE-PASS-Pfad aus 6.72.60/57.
         // Mobil steht vor dem Aside. Desktop ist bewusst ein Geschwisterblock NACH
@@ -2098,7 +2098,7 @@ JS;
     public function inject_breed_single_banner($content) {
         if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
         if (!function_exists('is_singular') || !is_singular('pa_breed') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (strpos((string)$content, 'pftk-breed-single-v150506') === false || strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
+        if (!preg_match('/\bpftk-breed-single-v[0-9]+\b/i', (string)$content) || strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
         $post_id=absint(get_the_ID());
         if ($post_id<=0 || get_post_type($post_id)!=='pa_breed' || post_password_required($post_id)) { return $content; }
         $desktop_slot=$this->render_affiliate_slot($post_id,'breed_single_desktop_banner','portal_context','');
@@ -2109,7 +2109,7 @@ JS;
         // Exakt nach dem bestehenden Faktenblock. Desktop bleibt damit in der linken
         // Rail; mobil wird derselbe DOM-Punkt ueber die bestehende Grid-Reihenfolge
         // nach dem Lesetext und vor dem mobilen Tail angeordnet.
-        $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v150506[^"]*"[^>]*>.*?</section>)#is';
+        $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v[0-9]+[^"]*"[^>]*>.*?</section>)#is';
         if (!preg_match($pattern,(string)$content)) { return $content; }
         $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
         return is_string($replaced)&&$replaced!=='' ? $replaced : $content;
