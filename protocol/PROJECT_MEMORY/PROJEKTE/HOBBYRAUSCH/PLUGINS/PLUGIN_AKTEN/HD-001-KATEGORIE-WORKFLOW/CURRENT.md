@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 POST-ROLLBACK-DRYRUN PASS / MATERIALKUNST-ENTFERNUNG PLAN-GRAPH-SIMULATION PASS / 430 ZIELOBJEKTE ERWARTET / ECHTES V1.13.1-ARTEFAKT ZUR NEUERSTELLUNG NICHT IM CAMPUS/CHAT VERFÜGBAR / NOCH KEIN FINAL-SYNC
+STATUS: V1.13.1 MATERIALKUNST-FIX IM ECHTEN ARTEFAKT UMGESETZT / LOKAL PATCH-PASS / 430 ZIELOBJEKTE ERWARTET / ALTER V1.12-ROLLBACK TERMINAL / NOCH KEIN FINAL-SYNC / FRISCHER LIVE-DRYRUN OFFEN
 
 ## Plugin
 
@@ -245,37 +245,45 @@ Frischer Live-Dry-Run mit demselben V1.13.1-Kandidaten:
 Fachlicher Vollabgleich:
 `SEO_KATEGORIEN/HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md`
 
+## MATERIALKUNST-FIX – ECHTES ARTEFAKT
+
+Original:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
+SHA-256 `94dca6cfc6c792cf2b866fc76fef1bff12551f9b375b38a1a511a91876b1a7b5`
+
+Korrigiert:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS_MATERIALKUNST_FIX.zip`
+SHA-256 `ea5aa8316b2537695f2f805d0b9cc4b0d9f973fb609c231ab7c3067de419c263`
+
+Profil:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008_MATERIALKUNST_FIX.json`
+SHA-256 `2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95`
+
+Änderung:
+nur `core:gestalten:materialkunst` entfernt.
+
+Patch-Abnahme:
+- exakter Ein-Knoten-Diff PASS;
+- frischer PHP-Lint 33/33 PASS;
+- ZIP-Integrität PASS;
+- Plan-Graph-Simulation PASS;
+- erwartet 430 physische Zielobjekte / 403 Pages / 355 CREATE + 75 ADOPT.
+
+Die historischen 270/270-, 24/24- und 11/11-Entwicklungstests werden für diesen Patch NICHT fälschlich als neu ausgeführt behauptet; der Test-Harness steckt nicht im Produktions-ZIP.
+
+Beleg:
+`SEO_KATEGORIEN/HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_CORRECTED_ARTIFACT_SOURCE_REQUIRED`
-
-Materialkunst-Ursache und Korrektur sind fachlich geschlossen.
-
-Plan-Graph-Simulation:
-`SEO_KATEGORIEN/HD001_V1_13_1_MATERIALKUNST_PATCH_SIMULATION_20261008.json` = PASS.
-
-Simulierter korrigierter Zielstand:
-- 430 physische Zielobjekte;
-- 403 Pages;
-- 4 category;
-- 15 journal_cat;
-- 8 hp_listing_category;
-- 355 CREATE + 75 ADOPT beim aktuellen Live-Ist;
-- keine fehlenden Parents / Zyklen / doppelten IDs oder Slugs.
-
-Offen ist nur die physische Umsetzung im echten installierbaren V1.13.1-Artefakt.
-Dieses ZIP/Zielprofil liegt weder im Campus noch als aktuelle Gesprächsdatei vor.
+`HD001_V1_13_1_FRESH_LIVE_DRYRUN_AFTER_MATERIALKUNST_FIX_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Noch keinen Sync starten.
+Korrigiertes ZIP installieren/ersetzen.
+Dann genau einen finalen read-only Delta-Dry-Run ausführen und JSON-Readback exportieren.
 
-Das echte `HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip` bzw. dessen exaktes V1.13.1-Zielprofil bereitstellen.
-Dann ausschließlich den bereits definierten Ein-Knoten-Patch anwenden:
-`core:gestalten:materialkunst` entfernen.
-
-Danach:
-lokaler Hardtest → frischer Live-Dry-Run → JSON-Readback → erst bei PASS genau ein Final-Sync.
+Noch keinen Final-Sync starten.
 
 ## Release-/Artefaktgrenze
 
