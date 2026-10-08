@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Shibori",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Stoff & Vorbereitung",
+      "intents": [
+        "Stoffwahl",
+        "Vorwäsche",
+        "Markierung",
+        "Farbplanung",
+        "Materialvorbereitung"
+      ]
+    },
+    {
+      "label": "Falten & Klemmen",
+      "intents": [
+        "Falttechnik",
+        "Klemmtechnik",
+        "Geometrie",
+        "Fixierung",
+        "Symmetrie"
+      ]
+    },
+    {
+      "label": "Binden & Wickeln",
+      "intents": [
+        "Bindetechnik",
+        "Wickeltechnik",
+        "Knotung",
+        "Spannung",
+        "Musterwirkung"
+      ]
+    },
+    {
+      "label": "Nähen & Reservieren",
+      "intents": [
+        "Nähreservierung",
+        "Raffung",
+        "Fadenwahl",
+        "Linienmuster",
+        "Flächenmuster"
+      ]
+    },
+    {
+      "label": "Färben & Finish",
+      "intents": [
+        "Farbbad",
+        "Färbedauer",
+        "Oxidation",
+        "Ausspülen",
+        "Entfalten"
+      ]
+    }
+  ],
+  "validation": true
+}
