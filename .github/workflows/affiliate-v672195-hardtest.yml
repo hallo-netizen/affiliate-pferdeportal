@@ -11,7 +11,8 @@ on:
       - '.github/workflows/affiliate-v672195-hardtest.yml'
 
 permissions:
-  contents: read
+  contents: write
+  actions: read
 
 jobs:
   kiss-cleanup:
@@ -273,3 +274,69 @@ jobs:
           path: /tmp/AFFILIATE_ZENTRALE_6.72.209.zip
           if-no-files-found: error
           retention-days: 30
+
+
+      - name: Bind exact previously tested installer and restore workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          mapfile -t META < <(python3 - <<'PY'
+          import json, pathlib
+          d=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
+          state=d.get('execution_state') or {}
+          inst=state.get('final_installer') or {}
+          assert state.get('authorized_next_action') == 'FINALIZE_RELEASE'
+          assert inst.get('status') == 'EXACT_TESTED_INSTALLER_READY'
+          print(inst['filename'])
+          print(inst['sha256'])
+          print(inst['bytes'])
+          print(inst['workflow_artifact_id'])
+          PY
+          )
+          filename="${META[0]}"
+          expected_sha="${META[1]}"
+          expected_bytes="${META[2]}"
+          artifact_id="${META[3]}"
+
+          test "$filename" = "AFFILIATE_ZENTRALE_6.72.209.zip"
+          test "$expected_sha" = "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7"
+          test "$expected_bytes" = "810707"
+          test "$artifact_id" = "11551770130"
+
+          rm -rf /tmp/exact-tested-artifact /tmp/exact-tested-artifact.zip
+          mkdir -p /tmp/exact-tested-artifact
+          curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+            -o /tmp/exact-tested-artifact.zip
+          unzip -q /tmp/exact-tested-artifact.zip -d /tmp/exact-tested-artifact
+
+          exact="/tmp/exact-tested-artifact/$filename"
+          test -f "$exact"
+          test "$(sha256sum "$exact" | awk '{print $1}')" = "$expected_sha"
+          test "$(stat -c%s "$exact")" = "$expected_bytes"
+
+          target="release/affiliate-zentrale/artifacts/final/$filename"
+          mkdir -p "$(dirname "$target")"
+          cp "$exact" "$target"
+          test "$(sha256sum "$target" | awk '{print $1}')" = "$expected_sha"
+          test "$(stat -c%s "$target")" = "$expected_bytes"
+
+          # One-shot helper only: restore this workflow to the exact parent state
+          # in the same publish commit, so no permanent finalizer is left behind.
+          git checkout "$GITHUB_SHA^" -- .github/workflows/affiliate-v672195-hardtest.yml
+
+          git fetch origin affiliate-release-current
+          test "$(git rev-parse origin/affiliate-release-current)" = "$GITHUB_SHA"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$target" .github/workflows/affiliate-v672195-hardtest.yml
+          git diff --cached --quiet && { echo "Exact final artifact already bound."; exit 0; }
+          git commit -m "Publish exact tested Affiliate-Zentrale 6.72.209 installer [skip ci]"
+          git push origin HEAD:affiliate-release-current
