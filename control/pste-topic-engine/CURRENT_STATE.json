@@ -1,0 +1,78 @@
+{
+  "contract": "PSTE_PSERC_CURRENT_STATE_V1",
+  "authority_scope": "PFERDE_ATELIER_PSTE_PSERC_CLEANUP_ONLY",
+  "authority_branch": "pste-kiss-e2e-20261005",
+  "target_ref": "control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json",
+  "status": "BLOCKED_EXACT_PSTE_SOURCE_MISSING",
+  "verified_at_utc": "2026-10-08T09:21:13Z",
+  "verified_main_sha": "f1cb921861e56c296152793652ce536c71a08bd0",
+  "verified_facts": {
+    "pste": {
+      "exact_current_build_version": "UNKNOWN_NOT_PROVEN",
+      "exact_current_source_available": false,
+      "unproven_versions": [
+        "0.57.55",
+        "0.57.56",
+        "0.57.57"
+      ],
+      "repository_findings": [
+        "No committed PSTE 0.57.56 or 0.57.57 build/package was found on the PSTE work branch.",
+        "Exact PSTE 0.57.55 extraction from all Git refs failed with NO_05755_ZIP_FOUND in workflow run 37674012225.",
+        "Repository contains older/partial PSTE material, but no proven exact source of the currently installed PSTE plugin."
+      ],
+      "public_live_readback": {
+        "wp_plugins_route_http": 401,
+        "pste_readme_http": 404,
+        "pste_main_php_http": 404,
+        "public_pste_version_proven": false
+      }
+    },
+    "pserc": {
+      "live_package_version": "0.28.32",
+      "live_package_build": "0.28.32-paa-related-integrity-rootfix",
+      "live_package_binding_http": 200,
+      "live_readback_run_id": 37756019982,
+      "live_functional_paa_related_retest": "OPEN",
+      "live_contract_discrepancy": "portal-topic-evidence-gate-v1.json does not list PAA_RELATED in accepted_sources; functional live behavior therefore remains unproven."
+    },
+    "kiss_short_path": {
+      "existing_potential_count": 110,
+      "no_new_dataforseo_for_existing_material": true,
+      "duplicate_negative_blocks": true,
+      "incomplete_binding_negative_blocks": true,
+      "normal_production_interface": "PASS",
+      "exact_handoff_fields": [
+        "title",
+        "target_keyword",
+        "category",
+        "article_type",
+        "plan_slot"
+      ],
+      "proof_runs": [
+        37490890251,
+        37636661497
+      ]
+    }
+  },
+  "first_open_blocker": {
+    "code": "EXACT_INSTALLED_PSTE_SOURCE_NOT_AVAILABLE",
+    "detail": "The current installed PSTE plugin source/package cannot be recovered from Git history or public WordPress read-only routes, and no authenticated WordPress/SSH/FTP server credential is available in repository Actions secrets.",
+    "fail_closed": true
+  },
+  "next_action": {
+    "id": "RECOVER_EXACT_INSTALLED_PSTE_SOURCE_PACKAGE",
+    "action": "Obtain the exact currently installed PSTE plugin package/source from an authenticated WordPress or server export, then hash-bind that exact package as the only allowed cleanup build basis.",
+    "forbidden_until_complete": [
+      "DO_NOT_BIND_PSTE_0_57_57_AS_CURRENT",
+      "DO_NOT_BUILD_FROM_CHAT_OR_HANDOFF_RECONSTRUCTION",
+      "DO_NOT_START_PSTE_LIVE_ACCEPTANCE",
+      "DO_NOT_CREATE_A_NEW_PSTE_VERSION_FROM_AN_UNPROVEN_BASE"
+    ]
+  },
+  "completed_evidence": [
+    "KISS existing-material reentry simulation PASS",
+    "KISS one-path audit PASS",
+    "Fresh public PSERC live package readback proves 0.28.32 installed",
+    "Repository and public-route source recovery exhausted without exact current PSTE source"
+  ]
+}
