@@ -618,3 +618,35 @@ Regression:
 
 Live:
 0.57.39 noch nicht installiert/readback-bestätigt.
+
+## DELTA 2026-10-08 – PSTE 0.57.57 + PSERC 0.28.32 EXAKT WIEDERGEFUNDEN / LOKALER HARD-PASS
+
+Die exakten Nutzerartefakte lagen im Pferdeatelier-Bestand. Eine zwischenzeitliche Arbeitschat-Aussage, die aktuelle PSTE-/PSERC-Quelle fehle, war falsch und ist durch den frischen Artefaktreadback widerlegt.
+
+### Exakte Artefakte
+- PSTE `PSTE-0.57.57-KISS-SLIM-AUTOMATIK-KURZWEG.zip` / SHA-256 `c3a001cd06d20fb71d75a21d7aca3cde4436920f855e999a3c166f035de01107`.
+- PSERC `PSERC-0.28.32-PAA-RELATED-INTEGRITY-ROOTFIX.zip` / SHA-256 `be09a8bee9246b5fe7047242e97111ec16e11e4d4a063da806c4c7dd6d49b25d`.
+
+### Frische lokale Prüfung
+- PSTE: ZIP PASS / 116 Dateien / 79 PHP / PHP 79/79 / JSON 36/36.
+- PSERC: ZIP PASS / 63 Dateien / 43 PHP / PHP 43/43 / JSON 17/17 / Paketintegrität PASS.
+- manipulierte PSERC-Paketbindung blockiert fail-closed.
+- `PAA_RELATED` echte PHP-Gateprüfung positiv PASS; fehlende Evidenz, falscher Hash und Hard-Reason BLOCK.
+- PSERC Exact-Five-Boundary → PSTE-K0-Handoff positiv PASS.
+- sechstes Feld, falscher Batch-Hash, NO_READY und falsche K0-Identität BLOCK.
+- Automatik: 9 Positiv-/Negativzustände PASS.
+- Kurzer Dienstweg: Positiv-/Negativmatrix inklusive K0, Finanzierung und Versicherung PASS.
+
+### KISS / DB / Performance
+- genau vier sichtbare PSTE-Menüpunkte: Produktion, Themenprüfung, Datenquellen, Einstellungen.
+- alte sichtbare Produktionswege nicht mehr vorhanden.
+- Dashboard: eine Aggregate-Query; kein `payload_json`-Load.
+- Existing-only: bounded 25/40, Provideraufrufe 0.
+- Kurzer Dienstweg: kein globaler Backlog-Audit und keine Providerrecherche.
+
+### Restbefunde
+1. PSERC `contracts/portal-topic-evidence-gate-v1.json` ist gegenüber der tatsächlichen PHP-Gateklasse veraltet; die PHP-Laufzeit akzeptiert u. a. `PAA_RELATED`, die JSON-Liste nicht. Laufzeit-PASS bleibt belegt, Metadaten-/Integritätsartefakt muss beim Rest-Cleanup synchronisiert werden.
+2. PSTE besitzt noch versteckte alte Admin-/Diagnoseoberfläche. Nicht pauschal löschen: Sandbox-/Review-Funktionen können fail-closed Arbeitsfälle tragen. Nur referenz- und ersatzgeprüft tote Oberfläche entfernen.
+3. PSTE 0.57.57 ist lokal exakt geprüft; unabhängiger WordPress-Readback exakt dieser Version bleibt offen. PSERC 0.28.32 ist live als Package-Binding-Identität belegt.
+
+Autoritative Status-/NEXT-ACTION-Quelle bleibt ausschließlich `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
