@@ -1,7 +1,7 @@
 # HOBBY DEPOT – 3-SÄULEN-ZIELBAUM / NEUER KATEGORIENVERTRAG
 
 STAND: 2026-10-07
-STATUS: VERBINDLICHE NEUAUSRICHTUNG
+STATUS: VERBINDLICHE NEUAUSRICHTUNG / SICHTBARKEITS- UND HUB-REGEL 2026-10-08
 
 ## 1. Grundsatz
 
@@ -147,7 +147,7 @@ Sammeln:
 - Werkzeuge & Geräte
 - Alltagsobjekte
 
-Keine starre universelle Maximalzahl direkter Kinder wird erfunden. Die Ebene muss übersichtlich und logisch bleiben. Ein zu breiter Ast wird fachlich geteilt; ein zu dünner Ast wird nicht künstlich aufgefüllt.
+Keine starre universelle Maximalzahl direkter Kinder wird erfunden. Die Ebene muss übersichtlich und logisch bleiben. **Bis etwa 10–11 fachlich klare direkte Zwischenbereiche pro Welt sind zulässig**, wenn der reale Bestand sie trägt. Ein zu breiter Ast wird fachlich geteilt; ein zu dünner Ast wird nicht künstlich aufgefüllt. Echte Trennlinien dürfen nicht nur deshalb zusammengezogen werden, damit die Ebene optisch dünner wirkt.
 
 ## 4. Hobby-Ebene / Content-Kategorien
 
@@ -156,7 +156,9 @@ Ein Hobby ist ein stabiler eigener Knoten mit eigener hobby_id.
 Beispiel:
 Fertigen → Buch & Papier → Buchbinden.
 
-Darunter werden nur tatsächlich benötigte Content-Kategorien geführt. Prüfbereiche:
+Ein **HOBBY_HUB** führt darunter eine sichtbare Content-Kategorieebene. Ziel sind 3–6 tragfähige Content-Kategorien; 7–9 = Review, ab etwa 10 = Macro-/Split-Review.
+
+Prüfbereiche:
 - Einstieg
 - Ausrüstung
 - Material
@@ -165,15 +167,22 @@ Darunter werden nur tatsächlich benötigte Content-Kategorien geführt. Prüfbe
 - FAQ
 - optional Lernen & Kurse
 
-Nicht jeder Prüfbereich wird automatisch angelegt.
+Nicht jeder Prüfbereich wird automatisch angelegt. Jede tatsächlich angelegte Content-Kategorie muss den Leaf-Kapazitätsvertrag erfüllen; leere oder nur symmetrisch erzeugte Kategorien sind verboten.
+
+Reguläre HOBBY_HUB-Beiträge liegen nicht direkt unter dem Hobby, sondern genau in einer sichtbaren Content-Kategorie.
+
+### Frontend-Sichtbarkeit
+
+Alle tatsächlich vorhandenen kanonischen Ebenen sind im normalen Drill-down sichtbar:
+**Welt → Zwischenbereich → Hobby → Content-Kategorie → Beiträge**.
+
+Die globale Headernavigation darf klein bleiben. Das darf niemals dazu führen, dass die aktive Kindebene einer Welt-, Zwischenbereich- oder Hobbyseite ausgeblendet oder übersprungen wird.
+
 Keyword ≠ Kategorie.
 
 ## 5. Monetarisierungs-Gate
 
-Ein Hobby darf nur als eigenständiges Hauptportal-Hobby veröffentlicht werden, wenn:
-- monetization_fit = DIRECT oder ASSISTED;
-- mindestens ein konkreter monetization_path belegt ist;
-- die Begründung gespeichert ist.
+Monetarisierung darf eine fachliche Portalrolle nicht erzeugen oder verhindern. Ein fachlich tragfähiger HOBBY_HUB/ORIENTATION_UNIVERSE kann im Hauptportal existieren; Monetarisierung steuert Priorität, kommerzielle Tiefe und Anbieter-/Produktpfade.
 
 Erlaubte Pfade:
 - Produkte/Ausrüstung
@@ -183,9 +192,7 @@ Erlaubte Pfade:
 - Verleih
 - Reparatur/Service
 
-NONE oder UNKNOWN dürfen NICHT in das Hauptportal promoviert werden.
-
-Sie werden NICHT verworfen. Jeder fachlich gültige Kandidat bleibt im zentralen Bestand erhalten. Wenn kein DIRECT/ASSISTED-Fit vorliegt, gehört sein veröffentlichbarer SEO-/Inspirationsraum grundsätzlich in die redaktionelle Säule (Magazin/Journal) oder bleibt dort als geplanter redaktioneller Kandidat erhalten. Monetarisierung entscheidet damit über die SÄULE, nicht über das Behalten oder Löschen des Themas.
+NONE oder UNKNOWN führen nicht automatisch zu einer Promotion und nicht automatisch zu einer Demotion. Fachliche Rolle, Scope, Content Capacity und Ownership entscheiden über die Struktur. Monetarisierung beeinflusst Priorität und kommerziellen Ausbau. Fachlich gültige Themen bleiben in jedem Fall erhalten.
 
 Beispiel:
 Treibholz und Treibholz sammeln werden zuerst zu EINER hobby_id zusammengeführt.
