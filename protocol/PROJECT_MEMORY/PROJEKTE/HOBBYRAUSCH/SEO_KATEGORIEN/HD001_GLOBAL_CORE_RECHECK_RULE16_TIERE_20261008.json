@@ -1,0 +1,178 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE",
+  "date": "2026-10-08",
+  "status": "PASS__30_IDENTITIES__22_HOBBY_HUB__5_ORIENTATION__3_EDITORIAL",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "decisions": [
+    [
+      "Aquaristik",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Nano-Aquaristik",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Garnelenhaltung",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Biotop-Aquarien",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Schwarzwasser-Aquarien",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Meerwasseraquaristik",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Riffaquaristik",
+      "HOBBY_HUB",
+      6
+    ],
+    [
+      "Quallen-Aquarium",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Terraristik",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Spinnenterrarien",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Vogelspinnenhaltung",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Skorpionhaltung",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Reptilienhaltung",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Bioactive Terrariums",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Formicarienbau",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Asselhaltung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Isopoden-Zucht",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Stabschreckenhaltung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Gottesanbeterinnen",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Käferzucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Schmetterlingszucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Imkerei",
+      "HOBBY_HUB",
+      6
+    ],
+    [
+      "Wildbienenhotels",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Hummelkästen",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Schmetterlingsgärten",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Futtertierzucht",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Artemia-Zucht",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Daphnien-Zucht",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Triops",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Regenwurmzucht",
+      "HOBBY_HUB",
+      4
+    ]
+  ],
+  "validation": {
+    "identities": 30,
+    "hobby_hubs": 22,
+    "orientation_universe": 5,
+    "editorial_topic": 3,
+    "visible_content_categories": 99,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0,
+    "provider_calls": 0,
+    "wordpress_writes": 0
+  },
+  "full_detail": {
+    "local_artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json",
+    "sha256": "995a573b503ece1f4aceedd3e0a1a923bf08a5bea0bde482ebf2450b0712aabe",
+    "note": "Contains all leaf labels and distinct subject-defined article intents."
+  }
+}
