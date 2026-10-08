@@ -137,6 +137,25 @@ Lokaler V1.12.6-Preflight:
 - exakt 1 geplanter Paid Call;
 - 0 Strukturwrites.
 
+## BATCH 004 – VORBEREITET IM VORAUS
+
+Nur Vorarbeit; **noch nicht ausführen**, solange Batch 003 nicht final ist.
+
+Nächste 16:
+RC-Drift, RC-Offroad, RC-Trial, RC-Rennsport, Modell-Dampfmaschinen, Stirlingmotoren, Modellmotorenbau, Modellmaschinenbau, Mini-CNC, CNC-Fräsen, Lasercutting, Lasergravieren, Resin-3D-Druck, 3D-Scanning, CAD als Hobby, Heimautomatisierung.
+
+Vorbereitet:
+- 16 Kandidaten;
+- 54 Leafs;
+- 310 fachlich unterschiedliche Artikelintents;
+- 310 SEO-Seeds;
+- exakt 1 späterer Overview;
+- keine Depth-Recherche;
+- 0 Strukturwrites.
+
+Plan:
+`HOBBY_MASTER_V2_BATCH_004_PREPARED_20261008.json`
+
 ## Nächster Schritt
 
 Realen Batch-003-Overview genau einmal ausführen.
