@@ -1,0 +1,314 @@
+{
+  "contract": "HD001_RULE16_PENDING_GESTALTEN_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__4_OF_4_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Collage",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Grundlagen",
+          "intent_count": 5,
+          "article_intents": [
+            "Collage als Hobby: Einstieg und erste Schritte",
+            "Analoge Collage oder Mixed Media: Unterschiede",
+            "Geeigneten Untergrund für Collagen wählen",
+            "Erste Collage planen und Thema festlegen",
+            "Collage kleben ohne dass Papier wellt"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Material & Werkzeuge",
+          "intent_count": 5,
+          "article_intents": [
+            "Geeignete Papiere für Collagen auswählen",
+            "Kleber für Papiercollagen vergleichen",
+            "Schere oder Skalpell für Collagen",
+            "Schneidematte und Lineal sinnvoll einsetzen",
+            "Fundmaterialien und Ephemera für Collagen vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Komposition & Bildaufbau",
+          "intent_count": 5,
+          "article_intents": [
+            "Blickpunkt in einer Collage setzen",
+            "Farben in Collagen harmonisch kombinieren",
+            "Balance und Gewicht im Bild gestalten",
+            "Ebenen und Tiefenwirkung durch Schichtung",
+            "Typografie und Schrift in Collagen einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Techniken & Praxis",
+          "intent_count": 5,
+          "article_intents": [
+            "Reißen oder Schneiden: unterschiedliche Kantenwirkungen",
+            "Transparente Schichten in Collagen",
+            "Bildtransfer in Mixed-Media-Collagen",
+            "Übermalen und Zeichnen auf Collagen",
+            "Collagen versiegeln und schützen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Projekte & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Foto-Collage gestalten",
+            "Abstrakte Collage entwickeln",
+            "Reise- und Erinnerungscollage erstellen",
+            "Wellen und Blasen in Collagen beheben",
+            "Kleberflecken und lose Kanten reparieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns generic Collage hobby orientation, materials, techniques and practice. More specific application intents remain with their dedicated canonical identities where present.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Origami",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Faltgrundlagen",
+          "intent_count": 5,
+          "article_intents": [
+            "Origami für Anfänger: erste Modelle",
+            "Berg- und Talfalten richtig ausführen",
+            "Saubere Faltkanten ohne Werkzeug",
+            "Origami-Diagramme lesen lernen",
+            "Mit welchem Origami-Modell anfangen?"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Papier & Werkzeuge",
+          "intent_count": 5,
+          "article_intents": [
+            "Welches Papier eignet sich für Origami?",
+            "Origamipapier richtig zuschneiden",
+            "Papiergewicht für einfache und komplexe Modelle",
+            "Falzbein beim Origami sinnvoll einsetzen",
+            "Origamipapier lagern ohne Knicke"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundbasen & Symbole",
+          "intent_count": 5,
+          "article_intents": [
+            "Vogelbasis falten",
+            "Froschbasis falten",
+            "Wasserbombenbasis falten",
+            "Quadratbasis falten",
+            "Wichtige Origami-Symbole und Pfeile verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Modelle & Techniken",
+          "intent_count": 5,
+          "article_intents": [
+            "Origami-Kranich Schritt für Schritt",
+            "Origami-Tiere systematisch falten",
+            "Modulares Origami zusammensetzen",
+            "Reverse Fold richtig ausführen",
+            "Sink Fold bei komplexeren Modellen verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Präzision & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Unsymmetrische Faltungen korrigieren",
+            "Papier reißt beim Origami: Ursachen",
+            "Zu dicke Lagen sauber falten",
+            "Komplexe Modelle zwischenlagern ohne Verformen",
+            "Fertige Origami-Modelle schützen und präsentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns generic Origami hobby orientation, materials, techniques and practice. More specific application intents remain with their dedicated canonical identities where present.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Paper Quilling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Grundformen",
+          "intent_count": 5,
+          "article_intents": [
+            "Paper Quilling für Anfänger",
+            "Enge Spirale richtig rollen",
+            "Lose Spirale formen",
+            "Tropfenform beim Quilling",
+            "Marquise- und Augenform herstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Papier, Werkzeug & Kleber",
+          "intent_count": 5,
+          "article_intents": [
+            "Quilling-Papierbreite auswählen",
+            "Quilling-Stift oder Nadelwerkzeug wählen",
+            "Geeigneten Kleber für Quilling verwenden",
+            "Quilling-Schablone sinnvoll einsetzen",
+            "Papierstreifen selbst schneiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Formen & Techniken",
+          "intent_count": 5,
+          "article_intents": [
+            "Quilling-Spiralen gleichmäßig dimensionieren",
+            "Offene Rollen und Scrolls herstellen",
+            "Mehrere Quilling-Formen sauber verbinden",
+            "3D-Quilling aufbauen",
+            "Kontur-Quilling mit langen Papierstreifen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Motive & Projekte",
+          "intent_count": 5,
+          "article_intents": [
+            "Quilling-Blumen gestalten",
+            "Quilling-Schrift und Buchstaben",
+            "Grußkarten mit Quilling",
+            "Quilling-Bilder auf Rahmen gestalten",
+            "Schmuckelemente aus Quilling-Papier"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fehler, Stabilität & Finish",
+          "intent_count": 5,
+          "article_intents": [
+            "Quilling-Rollen springen auf: Ursachen",
+            "Zu viel Kleber beim Quilling vermeiden",
+            "Quilling-Elemente plan befestigen",
+            "Quilling-Projekte vor Feuchtigkeit schützen",
+            "Fertige Quilling-Arbeiten staubfrei präsentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns generic Paper Quilling hobby orientation, materials, techniques and practice. More specific application intents remain with their dedicated canonical identities where present.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Scrapbooking",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Albumplanung",
+          "intent_count": 5,
+          "article_intents": [
+            "Scrapbooking für Anfänger",
+            "Erstes Scrapbook-Thema auswählen",
+            "Seitenformat und Albumgröße planen",
+            "Fotos für ein Scrapbook auswählen",
+            "Reihenfolge und Geschichte eines Albums planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Papier, Fotos & Materialien",
+          "intent_count": 5,
+          "article_intents": [
+            "Scrapbooking-Papier auswählen",
+            "Cardstock und Designpapier kombinieren",
+            "Fotos archivfest vorbereiten",
+            "Embellishments gezielt auswählen",
+            "Journaling-Karten und Tags einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Werkzeuge & Kleben",
+          "intent_count": 5,
+          "article_intents": [
+            "Papierschneider für Scrapbooking",
+            "Archivfesten Kleber auswählen",
+            "Stanzer und Stanzformen einsetzen",
+            "Schneidematte und Präzisionsmesser verwenden",
+            "Klebepunkte, Tape und Flüssigkleber vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Layout, Typografie & Deko",
+          "intent_count": 5,
+          "article_intents": [
+            "Scrapbook-Layout mit Raster planen",
+            "Blickpunkt auf einer Scrapbook-Seite setzen",
+            "Farben aus Fotos im Layout aufnehmen",
+            "Titel und Typografie gestalten",
+            "Layering mit Papier und Dekoelementen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Archivierung & Projekte",
+          "intent_count": 5,
+          "article_intents": [
+            "Scrapbooks archivfest lagern",
+            "Fotos vor Säure und Feuchtigkeit schützen",
+            "Reise-Scrapbook gestalten",
+            "Familienalbum als Scrapbook aufbauen",
+            "Beschädigte Scrapbook-Seiten reparieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns generic Scrapbooking hobby orientation, materials, techniques and practice. More specific application intents remain with their dedicated canonical identities where present.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 4,
+    "hobby_hub": 4,
+    "orientation_universe": 0,
+    "editorial": 0,
+    "alias_only": 0,
+    "visible_content_categories": 20,
+    "article_intents": 100
+  },
+  "next_action": "Continue with pending current CORE identities in Fertigen."
+}
