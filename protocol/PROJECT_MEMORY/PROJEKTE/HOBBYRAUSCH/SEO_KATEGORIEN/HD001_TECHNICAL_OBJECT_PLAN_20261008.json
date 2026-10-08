@@ -1,0 +1,208 @@
+{
+  "contract": "HD001_TECHNICAL_OBJECT_PLAN",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__TECHNICAL_OBJECT_PLAN_COMPLETE__NO_PLUGIN_CHANGE__NO_WORDPRESS_WRITE",
+  "authority": {
+    "fach_sollprofil": "HD001_FINAL_VISIBLE_FACH_SOLLPROFIL_20261008.json",
+    "final_core_audit": "HD001_GLOBAL_CORE_359_RULE16_FINAL_AUDIT_20261008.json",
+    "world_intermediate_target": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json",
+    "current_live_dryrun": "hobby-depot-final-target-readback-20261008-150023-utc.json",
+    "current_profile_revision": "HD-TARGET-3P-V1.14.1-EXPANSION19-20261008+6bbea14b52435318"
+  },
+  "current_v1141": {
+    "physical_target_objects": 457,
+    "pages": 430,
+    "category": 4,
+    "journal_cat": 15,
+    "hp_listing_category": 8,
+    "relation_nodes": 9,
+    "archived_base_nodes": 5,
+    "current_core_source_names": 359
+  },
+  "final_target": {
+    "source_inventory_names": 860,
+    "alias_consolidations": 5,
+    "resolved_entities": 855,
+    "final_core_identity_roles": 332,
+    "hobby_hub": 279,
+    "orientation_universe": 53,
+    "retained_editorial_finder_entities": 523,
+    "worlds": 8,
+    "active_intermediate_pages": 65,
+    "content_categories": 1292,
+    "pages": 408,
+    "journal_cat": 15,
+    "hp_listing_category": 8,
+    "physical_target_objects": 1723,
+    "relation_nodes": 9,
+    "archived_base_nodes": 5,
+    "logical_nodes_including_relations_and_archived_base": 1737
+  },
+  "physical_delta_against_v1141": {
+    "create_intermediate_pages": 5,
+    "create_content_categories": 1288,
+    "total_creates": 1293,
+    "archive_core_identity_pages": 27,
+    "total_archives": 27,
+    "net_physical_object_change": 1266,
+    "structurally_retained_existing_content_categories": 4,
+    "note": "Actual later sync will also update revision metadata on retained managed objects; this plan counts structural object delta only."
+  },
+  "stable_identity_policy": {
+    "core:fertigen:holz-natur": {
+      "action": "REUSE_RENAME",
+      "final_display_name": "Holz",
+      "final_slug": "holz",
+      "reason": "Clear continuity: seven retained Holz hobbies remain on the existing node; only three Naturmaterial hobbies move."
+    },
+    "core:technik:rc-drohnen": {
+      "action": "REUSE_RENAME",
+      "final_display_name": "RC-Flug & Drohnen",
+      "final_slug": "rc-flug-drohnen",
+      "reason": "Clear semantic continuity with the existing RC/Drohnen node; six flight/drone identities remain on it."
+    }
+  },
+  "new_intermediate_pages": [
+    {
+      "node_id": "core:gestalten:oberflaeche-deko",
+      "display_name": "Oberfläche & Deko",
+      "slug": "oberflaeche-deko",
+      "parent_id": "core:world:gestalten"
+    },
+    {
+      "node_id": "core:fertigen:naturmaterial",
+      "display_name": "Naturmaterial",
+      "slug": "naturmaterial",
+      "parent_id": "core:world:fertigen"
+    },
+    {
+      "node_id": "core:technik:rc-fahrzeuge",
+      "display_name": "RC-Fahrzeuge",
+      "slug": "rc-fahrzeuge",
+      "parent_id": "core:world:technik"
+    },
+    {
+      "node_id": "core:technik:rc-boote",
+      "display_name": "RC-Boote",
+      "slug": "rc-boote-bereich",
+      "parent_id": "core:world:technik",
+      "note": "Visible name remains RC-Boote. Technical slug suffix is required because the retained hobby page already owns page slug rc-boote."
+    },
+    {
+      "node_id": "core:tiere:gehegegestaltung",
+      "display_name": "Gehegegestaltung",
+      "slug": "gehegegestaltung",
+      "parent_id": "core:world:tiere"
+    }
+  ],
+  "parent_moves": {
+    "core:gestalten:oberflaeche-deko": [
+      "Pinstriping",
+      "Schildermalerei",
+      "Glasmalerei"
+    ],
+    "core:fertigen:naturmaterial": [
+      "Korbflechten",
+      "Weidenflechten",
+      "Besenbinden"
+    ],
+    "core:technik:rc-fahrzeuge": [
+      "RC-Crawling",
+      "Scale-Crawling",
+      "RC-Baumaschinen",
+      "RC-LKW",
+      "RC-Drift",
+      "RC-Offroad",
+      "RC-Panzer"
+    ],
+    "core:technik:rc-boote": [
+      "RC-Boote",
+      "RC-Segelboote",
+      "RC-U-Boote"
+    ],
+    "core:tiere:gehegegestaltung": [
+      "Formicarienbau",
+      "Bioactive Terrariums"
+    ]
+  },
+  "parent_move_count": 18,
+  "demotions_to_editorial": [
+    "alte Werkzeuge",
+    "B-Movie-Poster",
+    "Bonsai aus Samen",
+    "Case-Modding",
+    "Dioramenmalerei",
+    "Heimrobotik",
+    "historische Karten",
+    "Hummelkästen",
+    "Lederprägen",
+    "Libellenbeobachtung",
+    "Mini-CNC",
+    "Morsefunk",
+    "Nachtvogel-Beobachtung",
+    "Orchideenbestäubung",
+    "Papierschöpfen",
+    "Pilzklonen",
+    "Pilzsubstrate herstellen",
+    "Saatgut-Tausch",
+    "Seiltechnik",
+    "Smart-Home-Basteln",
+    "Spinnenterrarien",
+    "Wildbienenhotels"
+  ],
+  "alias_consolidations": [
+    {
+      "alias": "Custom Keyboards",
+      "owner": "mechanische Tastaturen bauen"
+    },
+    {
+      "alias": "Chainmail",
+      "owner": "Kettenhemdflechten"
+    },
+    {
+      "alias": "Pyrographie",
+      "owner": "Brandmalerei"
+    },
+    {
+      "alias": "Karnivoren",
+      "owner": "fleischfressende Pflanzen"
+    },
+    {
+      "alias": "Mikrogrün",
+      "owner": "Microgreens"
+    }
+  ],
+  "content_category_object_rule": {
+    "existing_buchbinden_categories": "Preserve the four existing node IDs and slugs unchanged.",
+    "parent_rule": "Every new content category is a direct child of its retained HOBBY_HUB page node.",
+    "node_id_rule": "<existing_hobby_node_id>:content:<sanitized_leaf_label>",
+    "slug_rule": "<existing_hobby_page_slug>-<sanitized_leaf_label>",
+    "display_name_rule": "Use the frozen fachliche leaf label unchanged.",
+    "seo_seed_rule": "<canonical hobby name> <leaf label>",
+    "intent_key_rule": "core-content-<stable hash of hobby node id + leaf label>",
+    "fail_closed": "Any duplicate node_id, duplicate category slug, missing parent, depth > 4, or display_name > 36 blocks materialization."
+  },
+  "validation": {
+    "exact_role_counts": true,
+    "exact_intermediate_count": true,
+    "all_279_hubs_have_leaf_layer": true,
+    "exact_content_category_count": 1292,
+    "all_leaf_capacities_5_12": true,
+    "leaf_display_name_max_chars": 34,
+    "display_name_limit": 36,
+    "projected_new_category_slug_max_chars": 67,
+    "page_slug_collisions_resolved": [
+      "RC-Boote intermediate uses rc-boote-bereich"
+    ],
+    "duplicate_current_node_ids": 0,
+    "duplicate_current_target_slugs": 0,
+    "max_depth": 4,
+    "split_parent_coverage_complete": true,
+    "demotion_count": 22,
+    "alias_count": 5,
+    "wordpress_writes": 0,
+    "plugin_changes": 0
+  },
+  "next_action": "Materialize this PASS object plan into a standalone target-profile candidate using the existing V1.14.1 schema and resolver rules. Then run local positive/negative resolver validation. Do not install or sync WordPress."
+}
