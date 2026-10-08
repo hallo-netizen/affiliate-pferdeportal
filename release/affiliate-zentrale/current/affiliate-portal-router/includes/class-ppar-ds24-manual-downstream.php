@@ -19,7 +19,7 @@ final class PPAR_DS24_Manual_Downstream {
         // Start only after the final affiliation write, never on the earlier inventory write.
         add_action('update_option_ppar_digistore24_affiliations_v1', array(__CLASS__, 'on_affiliations_update'), 20, 3);
         add_action('add_option_ppar_digistore24_affiliations_v1', array(__CLASS__, 'on_affiliations_add'), 20, 2);
-        add_action('admin_notices', array(__CLASS__, 'render_notice'));
+        if (!((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) { add_action('admin_notices', array(__CLASS__, 'render_notice')); }
     }
 
     public static function on_affiliations_add($option, $value) {
