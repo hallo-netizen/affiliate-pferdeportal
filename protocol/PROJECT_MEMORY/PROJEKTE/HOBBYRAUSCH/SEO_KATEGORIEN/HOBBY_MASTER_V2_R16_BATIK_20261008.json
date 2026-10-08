@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Batik",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Stoff & Material",
+      "intents": [
+        "Stoffwahl",
+        "Vorbereitung",
+        "Wachswahl",
+        "Werkzeugwahl",
+        "Arbeitsplanung"
+      ]
+    },
+    {
+      "label": "Reservierung",
+      "intents": [
+        "Konturen",
+        "Flächen",
+        "Wachsauftrag",
+        "Struktureffekt",
+        "Korrektur"
+      ]
+    },
+    {
+      "label": "Färben",
+      "intents": [
+        "Farbbad",
+        "Farbstärke",
+        "Farbreihenfolge",
+        "Mehrfarbigkeit",
+        "Zwischenspülen"
+      ]
+    },
+    {
+      "label": "Muster & Schichten",
+      "intents": [
+        "Motivplanung",
+        "Schichttechnik",
+        "Geometrie",
+        "Freihand",
+        "Wiederholung"
+      ]
+    },
+    {
+      "label": "Finish",
+      "intents": [
+        "Wachs entfernen",
+        "Nachwäsche",
+        "Trocknung",
+        "Glätten",
+        "Pflege"
+      ]
+    }
+  ],
+  "validation": true
+}
