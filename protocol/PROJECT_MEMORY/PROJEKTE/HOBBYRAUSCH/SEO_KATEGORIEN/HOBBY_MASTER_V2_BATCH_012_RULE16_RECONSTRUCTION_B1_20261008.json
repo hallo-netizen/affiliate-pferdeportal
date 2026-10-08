@@ -1,0 +1,294 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_012_RULE16_RECONSTRUCTION_B1",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Weidenflechten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012b1:1:1",
+          "label": "Weide auswählen & vorbereiten",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Weidenruten nach Länge und Stärke sortieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Frische und getrocknete Weide unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Trockene Weide richtig einweichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Ruten vor dem Flechten richten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Weidenmaterial während der Arbeit feucht halten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:1:2",
+          "label": "Grundgerüst & Boden",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Weidenkreuz für einen Korbboden anlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Boden aus Weidenruten gleichmäßig flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Staken für eine Weidenform einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Gerüst für ein Weidenobjekt aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Form während des Aufbaus ausrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:1:3",
+          "label": "Strukturelles Flechten",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Zäunergeflecht mit Weide ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Kimning mit Weidenruten flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Weidenwand nach oben verjüngen oder weiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Rutenwechsel sauber einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Stabile Übergänge an Ecken und Rundungen flechten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:1:4",
+          "label": "Rand, Projekte & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Weidenrand stabil abschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Henkel aus Weide einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Einfache Rankhilfe aus Weidenruten flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Fertiges Weidenobjekt kontrolliert trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Weidengeflecht nach Trocknung auf lose Enden prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Besenbinden",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012b1:2:1",
+          "label": "Besenmaterial vorbereiten",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Reisig oder Pflanzenmaterial für Besen auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Besenmaterial nach Länge sortieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Material ausreichend trocknen oder konditionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Bündel für gleichmäßige Besenstärke vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Brüchiges Material vor dem Binden aussortieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:2:2",
+          "label": "Bündeln & Binden",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Besenmaterial gleichmäßig bündeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Bindedraht oder Schnur passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Besenbündel fest und dauerhaft verschnüren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Mehrere Lagen ohne lose Stellen aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Bindung gegen Verrutschen sichern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:2:3",
+          "label": "Stiel & Konstruktion",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Besenstiel passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Stielende für die Aufnahme vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Besenbündel gerade am Stiel ausrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Stiel belastbar mit dem Bündel verbinden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Übergang zwischen Stiel und Besenmaterial stabilisieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b1:2:4",
+          "label": "Form & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Besenfläche gleichmäßig beschneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Arbeitskante eines Besens formen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Überstehende Bindungen sauber sichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Fertigen Besen auf lockere Halme prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Besen trocken und formstabil lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
