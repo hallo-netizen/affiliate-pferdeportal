@@ -1,6 +1,6 @@
 {
   "contract": "PSTE_PSERC_CURRENT_STATE_V1",
-  "status": "BLOCKED_EXACT_PSTE_SOURCE_MISSING",
+  "status": "BLOCKED_EXACT_CURRENT_PLUGIN_PAIR_MISSING",
   "authority_branch": "pste-kiss-e2e-20261005",
   "target_ref": "control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json",
   "verified_facts": {
@@ -17,15 +17,47 @@
       "article_type",
       "plan_slot"
     ],
-    "cleanup": "TEMP_WORKFLOWS_INSPECTION_COPIES_PROOF_FILES_STATIC_COST_INVENTORY_REMOVED"
+    "cleanup": "TEMP_WORKFLOWS_INSPECTION_COPIES_PROOF_FILES_STATIC_COST_INVENTORY_REMOVED",
+    "local_simulation": {
+      "run_id": 37760332811,
+      "current_available_path": "PASS",
+      "control_selftest": {
+        "positive": 1,
+        "negative": 2,
+        "status": "PASS"
+      },
+      "ppm_679": {
+        "php_files": 220,
+        "lint_failures": 0,
+        "normal_draft_current_suite_passed": 6,
+        "normal_draft_e2e_cardinality": "1_TO_4_PASS",
+        "plan_cardinality": "PASS",
+        "qf03_readback_mutations": "PASS",
+        "active_negative_matrix_cases": 49,
+        "active_negative_matrix": "PASS"
+      },
+      "pserc_local": {
+        "package_sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+        "version": "0.28.18",
+        "php_files": 43,
+        "lint_failures": 0
+      },
+      "pserc_live": {
+        "version": "0.28.32",
+        "build": "0.28.32-paa-related-integrity-rootfix"
+      },
+      "live_vs_local_pserc": "MISMATCH_0.28.32_VS_0.28.18",
+      "full_current_one_to_one": "BLOCKED"
+    }
   },
-  "first_open_blocker": "Exact currently installed PSTE source/package is not available from Git history or public WordPress routes.",
+  "first_open_blocker": "Exact currently installed PSTE source/package is missing and the repository-local PSERC runtime package is 0.28.18 while live is 0.28.32; therefore a true current 1:1 PSTE→PSERC→PPM simulation cannot yet be claimed.",
   "next_action": {
-    "id": "RECOVER_EXACT_INSTALLED_PSTE_SOURCE_PACKAGE",
-    "action": "Obtain the exact currently installed PSTE plugin package/source from an authenticated WordPress or server export and bind that exact source as the only cleanup build basis."
+    "id": "RECOVER_EXACT_CURRENT_PSTE_AND_PSERC_PAIR",
+    "action": "Obtain the exact currently installed PSTE plugin package/source and the exact live PSERC 0.28.32 package/source, hash-bind both as the only allowed local 1:1 test basis, then rerun the same positive/negative chain."
   },
   "forbidden": [
-    "Do not assume 0.57.55, 0.57.56 or 0.57.57 is current.",
+    "Do not assume 0.57.55, 0.57.56 or 0.57.57 is the current PSTE source.",
+    "Do not substitute local PSERC 0.28.18 for live PSERC 0.28.32 in a claimed 1:1 test.",
     "Do not build from chat/handoff reconstruction.",
     "Do not add a new parallel architecture.",
     "Do not add global backlog scans or unnecessary DataForSEO calls."
