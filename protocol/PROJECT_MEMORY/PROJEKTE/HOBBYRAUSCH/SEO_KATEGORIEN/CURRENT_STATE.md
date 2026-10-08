@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELKORREKTUR AKTIV / ZIELVERTRAG 2.6 + ASSESSMENT 1.6 / ALLE KANONISCHEN EBENEN SICHTBAR / AUSGEWOGENER ZIELBAUM NEU ZU BAUEN / V1.14.2 NICHT MEHR SYNC-FREIGEGEBEN
+STATUS: REGELN 2.6/1.6 BEREINIGT / WELT-ZWISCHENSTRUKTUR FACHLICH GEPRÜFT / 299 CURRENT-CORE-ROLLENRECHECK PENDING / KEIN WORDPRESS-WRITE / KEIN PLUGIN-FIX
 
 ## Ziel
 
@@ -1007,19 +1007,44 @@ Aktueller V1.14.1/1.14.2-Zielbaum erfüllt diese neue verbindliche Regel NICHT v
 - nur Buchbinden besitzt derzeit die Content-Kategorieebene;
 - deshalb ist V1.14.2 nicht mehr als Sync-Ziel freigegeben.
 
+## AUSGEWOGENE WELT-/ZWISCHENSTRUKTUR – FACHLICH GEPRÜFT
+
+Beleg:
+`HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json`
+
+Wichtig:
+- alle vorhandenen Ebenen bleiben im Drill-down sichtbar;
+- keine künstliche Maximalzahl; bis etwa 10–11 Zwischenbereiche zulässig;
+- keine leeren Symmetrieäste;
+- Welt-/Zwischenstruktur ist fachlich als Arbeitsziel geprüft;
+- HOBBY_HUB benötigt weiterhin 3–6 sichtbare Content-Kategorien mit je ideal 5–12 eigenständigen Beitragsintentionen.
+
+Korrigierte Rollenbasis:
+- Batch 003 enthielt einen Zähl-/Rollenfehler;
+- FPV-Drohnen und RC-Flugzeuge sind nach realer Assessment-Evidence MACRO_REVIEW / ORIENTATION_UNIVERSE, nicht HOBBY_HUB;
+- Batch 004–019 sind historische Evidence, keine aktuelle Produktionsautorität;
+- aktuelle Produktionsquellen: Batch 001–003 + Expansion19.
+
+Aktuelle CORE-Abdeckung:
+- 359 aktuelle CORE-Identitäten;
+- 60 davon besitzen eine aktuelle produktionsgültige Rollenentscheidung aus diesen Quellen;
+- **299 sind noch nach Regeln 1.6 global zu revalidieren**.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_BALANCED_TARGET_TREE_REBUILD_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_299_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den vollständigen Zielbaum fachlich gegen Regeln 2.6/1.6 neu aufbauen:
-1. acht Welten und Zwischenbereiche ausgewogen aus dem realen CORE-Bestand prüfen;
-2. keine vorhandene Ebene verstecken;
-3. für jeden HOBBY_HUB die tragfähige Content-Kategorieebene bestimmen;
-4. erst danach ein neues Sollprofil erzeugen.
+Die 299 aktuellen CORE-Identitäten in **einem globalen Recheck** nach Regeln 1.6 prüfen.
+Historische Batch-004–019-Evidence darf dabei wiederverwendet werden, aber nicht blind als Entscheidung gelten.
+
+Danach:
+- HOBBY_HUBs verbindlich festlegen;
+- deren sichtbare Content-Kategorieebene materialisieren;
+- erst danach neues Sollprofil.
 
 Bis dahin:
-- V1.14.2 NICHT synchronisieren;
-- kein weiterer Plugin-Fix;
-- kein WordPress-Write.
+- kein Plugin-Fix;
+- kein WordPress-Write;
+- kein Sync.
