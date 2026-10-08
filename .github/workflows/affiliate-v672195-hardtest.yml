@@ -1,4 +1,4 @@
-name: Affiliate 6.72.207 Glossary Breed Real Injection Gate
+name: Affiliate 6.72.208 KISS Cleanup Gate
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  glossary-breed-real-injection:
+  kiss-cleanup:
     runs-on: ubuntu-24.04
     services:
       mariadb:
@@ -24,13 +24,10 @@ jobs:
           MARIADB_DATABASE: wordpress
           MARIADB_USER: wordpress
           MARIADB_PASSWORD: wordpress
-        ports:
-          - 3306:3306
+        ports: ['3306:3306']
         options: >-
           --health-cmd="healthcheck.sh --connect --innodb_initialized"
-          --health-interval=5s
-          --health-timeout=5s
-          --health-retries=30
+          --health-interval=5s --health-timeout=5s --health-retries=30
 
     steps:
       - uses: actions/checkout@v4
@@ -43,28 +40,65 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Exact current source
+      - name: Exact source and no-function-change diff
         shell: bash
         run: |
           set -euo pipefail
           python3 control/release-governance/release_guard.py governance-check
           python3 control/release-governance/release_guard.py source-check
-          python3 control/release-governance/release_guard.py start --branch affiliate-release-current
           python3 - <<'PY'
-          import hashlib,json,pathlib
+          import hashlib,json,pathlib,subprocess
           c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
           a=c['active_candidate']
-          assert a['version']=='6.72.207'
+          assert a['version']=='6.72.208'
           assert a['source_file_count']==28
           p=pathlib.Path(a['current_source_manifest_ref'])
           assert hashlib.sha256(p.read_bytes()).hexdigest()==a['current_source_manifest_sha256']
           assert len([x for x in p.read_text().splitlines() if x.strip()])==28
-          main=(pathlib.Path(a['source_root'])/'pferdeportal-affiliate-router.php').read_text()
-          assert 'Version: 6.72.207' in main
-          assert "const VERSION = '6.72.207';" in main
-          print('PASS CURRENT_672207_BOUND')
+          root='release/affiliate-zentrale/current/affiliate-portal-router'
+          changed=subprocess.check_output(['git','diff','--name-only','62f6febaf11c1e46e50663aa436e3845c0da1e27','HEAD','--',root],text=True).splitlines()
+          allowed={
+            root+'/pferdeportal-affiliate-router.php',
+            root+'/includes/class-ppar-admin-kiss.php',
+            root+'/readme.txt',
+          }
+          assert set(changed)==allowed, changed
+          protected=[
+            root+'/includes/trait-ppar-automation-suite.php',
+            root+'/includes/trait-ppar-creative-library.php',
+            root+'/includes/trait-ppar-output-objects.php',
+            root+'/includes/trait-ppar-article-plans.php',
+            root+'/includes/trait-ppar-tariff-tools.php',
+          ]
+          for f in protected:
+            assert subprocess.check_output(['git','diff','62f6febaf11c1e46e50663aa436e3845c0da1e27','HEAD','--',f],text=True)==''
+          main=pathlib.Path(root+'/pferdeportal-affiliate-router.php').read_text()
+          assert 'Version: 6.72.208' in main and "const VERSION = '6.72.208';" in main
+          admin=pathlib.Path(root+'/includes/class-ppar-admin-kiss.php').read_text()
+          assert 'remove_submenu_page' in admin
+          assert 'ppar-kiss-legacy-nav-hide' not in admin
+          assert 'Technischer Weg:' not in admin
+          print('PASS CLEANUP_SOURCE_DIFF_ONLY')
           PY
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Automation health invariants unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('release/affiliate-zentrale/current/affiliate-portal-router')
+          auto=(root/'includes/trait-ppar-automation-suite.php').read_text()
+          main=(root/'pferdeportal-affiliate-router.php').read_text()
+          assert "'schedule' => 'ppar_two_weeks'" in auto
+          assert "$missing >= 2 ? 'inactive_missing' : 'quarantine_missing'" in auto
+          assert "creative_library_deactivate_automatic_output_campaigns" in auto
+          assert "'schedule' => 'ppar_three_weeks'" in main
+          assert "'failure_threshold' => 3" in main
+          assert "run_scheduled_health_check" in main
+          print('PASS AUTOMATION_RECONCILE_HEALTH_UNCHANGED')
+          PY
 
       - name: Fresh WordPress MariaDB
         shell: bash
@@ -72,223 +106,104 @@ jobs:
           set -euo pipefail
           curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x /tmp/wp
-          rm -rf /tmp/wp-site
-          mkdir -p /tmp/wp-site
+          rm -rf /tmp/wp-site && mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672207 Real Injection' --admin_user=admin --admin_password='ci-672207!' --admin_email=ci@example.test --skip-email
-          mkdir -p /tmp/wp-site/wp-content/mu-plugins
-          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-live-types.php <<'PHP'
-          <?php
-          if (!class_exists('Pferde_Template_Kit')) {
-              class Pferde_Template_Kit {
-                  public static function affiliate_contract_version(){ return '1.0'; }
-                  public static function design_profile(){ return 'pferde_atelier'; }
-                  public static function design_profile_contract_version(){ return '1.0'; }
-                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
-              }
-          }
-          add_action('init', static function(){
-              if (!post_type_exists('uge_term')) register_post_type('uge_term',['public'=>true,'supports'=>['title','editor']]);
-              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',['uge_term'],['public'=>true,'hierarchical'=>true]);
-              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',['public'=>true,'supports'=>['title','editor']]);
-              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',['pa_breed'],['public'=>true,'hierarchical'=>true]);
-          },1);
-          PHP
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='672208 Cleanup' --admin_user=admin --admin_password='ci-672208!' --admin_email=ci@example.test --skip-email
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.207"){exit(2);} echo "PASS PLUGIN_672207_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.208") exit(2); echo "PASS PLUGIN_672208_ACTIVE\n";' --path=/tmp/wp-site
 
-      - name: Real glossary breed injection positive negative
+      - name: KISS backend and DB hard positive negative
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/wp-site/real_glossary_breed_672207.php <<'PHP'
+          cat >/tmp/wp-site/cleanup208.php <<'PHP'
           <?php
-          update_option('ppar_enabled','1');
+          wp_set_current_user(1);
+          $pass=0;$fail=0;
+          $ok=function($v,$n)use(&$pass,&$fail){if($v){echo "PASS $n\n";$pass++;}else{echo "FAIL $n\n";$fail++;}};
+
+          do_action('admin_menu');
+          global $submenu,$_registered_pages,$wpdb;
+          $rows=(array)($submenu['affiliate-portal-zentrale']??[]);
+          $visible=array_map(static function($r){return (string)($r[2]??'');},$rows);
+          $hidden=[
+            'affiliate-portal-outputs','affiliate-portal-control','affiliate-portal-creatives',
+            'affiliate-portal-assignments','affiliate-portal-preview','affiliate-portal-ebay-business',
+            'affiliate-portal-coverage','affiliate-portal-article-hybrid','affiliate-portal-networks',
+            'affiliate-portal-provider-awin','affiliate-portal-provider-adcell','affiliate-portal-ebay',
+            'affiliate-portal-provider-idealo','affiliate-portal-provider-digistore24',
+            'affiliate-portal-partners','affiliate-portal-sync','affiliate-portal-automation',
+            'affiliate-portal-stats','affiliate-portal-health','affiliate-portal-deals'
+          ];
+          foreach($hidden as $slug){$ok(!in_array($slug,$visible,true),'menu_pruned_'.$slug);}
+          foreach(['affiliate-portal-zentrale','affiliate-portal-creative-library','affiliate-portal-tariff-tools','affiliate-portal-kiss-products','affiliate-portal-kiss-partners','affiliate-portal-kiss-delivery','affiliate-portal-kiss-providers','affiliate-portal-kiss-system'] as $slug){
+              $ok(in_array($slug,$visible,true),'menu_kept_'.$slug);
+          }
+          $hook=get_plugin_page_hookname('affiliate-portal-automation','affiliate-portal-zentrale');
+          $ok($hook!=='' && isset($_registered_pages[$hook]),'hidden_specialist_page_still_registered');
+          $ok(!method_exists('PPAR_Affiliate_Admin_KISS','hide_legacy_navigation_css'),'old_css_hide_method_removed');
+
           $o=Pferdeportal_Affiliate_Router::instance();
           $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
-          $pass=0;$fail=0;
-          $ok=function($cond,$name)use(&$pass,&$fail){if($cond){echo "PASS $name\n";$pass++;}else{echo "FAIL $name\n";$fail++;}};
+          $o->maybe_install_automation_schema();
+          $jobs=$call('automation_jobs_table');
+          $old=time()-100*DAY_IN_SECONDS;
+          $base=[
+            'provider'=>'awin','partner_external_id'=>'kiss','stage'=>'complete','cursor_value'=>0,'offer_page'=>1,
+            'retry_count'=>0,'not_before'=>0,'lock_token'=>'','lock_expires_at'=>0,'heartbeat_at'=>0,
+            'counts'=>'{}','details'=>'{}','message'=>'test','created_at'=>$old,'updated_at'=>$old
+          ];
+          $a=$base;$a['job_uuid']='11111111-1111-1111-1111-111111111111';$a['run_uuid']='aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';$a['status']='completed';$a['finished_at']=$old;
+          $b=$base;$b['job_uuid']='22222222-2222-2222-2222-222222222222';$b['run_uuid']='bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb';$b['status']='queued';$b['finished_at']=0;$b['created_at']=time();$b['updated_at']=time();
+          $wpdb->insert($jobs,$a);$wpdb->insert($jobs,$b);
+          $db=$call('housekeeping_db_pass');
+          $oldCount=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$jobs} WHERE job_uuid=%s",$a['job_uuid']));
+          $liveCount=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$jobs} WHERE job_uuid=%s",$b['job_uuid']));
+          $ok($oldCount===0,'db_old_terminal_job_removed');
+          $ok($liveCount===1,'db_open_job_preserved');
+          $ok((int)($db['deleted']??0)>=1,'db_housekeeping_reports_delete');
 
-          $call('maybe_install_creative_library_schema');
-          $call('maybe_install_output_objects_schema');
-          $portalKey=$call('output_local_portal_key');
-          $portal=$call('output_portal_by_key',$portalKey,true);
-          $ok(is_array($portal),'portal_ready');
-
-          global $wpdb;
-          $table=$call('creative_library_table');
-          $seed=function($external,$w,$h)use($wpdb,$table){
-              $identity=hash('sha256','672207|'.$external);
-              $row=[
-                  'provider'=>'direct','partner_external_id'=>'kiss207','partner_name'=>'KISS 207',
-                  'external_id'=>$external,'identity_hash'=>$identity,'creative_type'=>'banner',
-                  'title'=>'KISS '.$external,'description'=>'','tags'=>'',
-                  'image_url'=>'https://example.com/'.$external.'.png',
-                  'destination_url'=>'https://example.com/','tracking_url'=>'https://example.com/t/'.$external,
-                  'width'=>$w,'height'=>$h,'source_status'=>'active','source_kind'=>'banner',
-                  'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'',
-                  'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'',
-                  'classified_at'=>0,'topic_status'=>'auto_verified','topic_score'=>0,'topic_targets'=>'[]',
-                  'source_hash'=>hash('sha256','src|'.$external),
-                  'payload'=>wp_json_encode([
-                      '_dimension_state'=>'verified','_image_sha256'=>hash('sha256','img|'.$external),
-                      '_image_mime'=>'image/png','_image_bytes'=>1000,'_measured_at'=>time(),
-                      '_destination_source'=>'provider_explicit'
-                  ],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
-                  'first_seen'=>time(),'last_seen'=>time()
-              ];
-              $wpdb->insert($table,$row,array_fill(0,count($row),'%s'));
-              return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",(int)$wpdb->insert_id),ARRAY_A);
-          };
-
-          $desktop=$seed('desktop-square',310,310);
-          $mobile=$seed('mobile-wide',600,100);
-          $pd=$call('output_plan_creative',$desktop,true,$portalKey);
-          $pm=$call('output_plan_creative',$mobile,true,$portalKey);
-          echo "DESKTOP_PLAN=".wp_json_encode($pd,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
-          echo "MOBILE_PLAN=".wp_json_encode($pm,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
-          $ot=$call('output_objects_table');
-          foreach([$desktop['identity_hash'],$mobile['identity_hash']] as $ih){
-              $rows=$wpdb->get_results($wpdb->prepare("SELECT creative_identity_hash,output_type,target_type,target_key,slot_id,status,decision_source,decision_reason,image_width,image_height FROM {$ot} WHERE creative_identity_hash=%s ORDER BY id",$ih),ARRAY_A);
-              echo "OUTPUT_ROWS_".$ih."=".wp_json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
-              $ids=$call('creative_library_existing_campaign_ids',$ih);
-              $cs=[];
-              foreach((array)$ids as $cid){$cs[]=$call('campaign_from_post',get_post((int)$cid));}
-              echo "CAMPAIGNS_".$ih."=".wp_json_encode($cs,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
-          }
-          $ok(is_array($pd) && (int)($pd['active']??0)>=1,'desktop_banner_materialized');
-          $ok(is_array($pm) && (int)($pm['active']??0)>=1,'mobile_banner_materialized');
-
-          $matrix=$call('output_slot_matrix',$portal);
-          $match=function($slot,$w,$h)use($call,$matrix){return $call('output_row_matches_slot_rule',['width'=>$w,'height'=>$h],$matrix[$slot],'banner');};
-          $ok($match('glossary_single_desktop_banner',310,310)===true,'glossary_desktop_format_positive');
-          $ok($match('glossary_single_desktop_banner',320,200)===false,'glossary_desktop_format_negative');
-          $ok($match('glossary_single_mobile_banner',600,100)===true,'glossary_mobile_format_positive');
-          $ok($match('glossary_single_mobile_banner',300,130)===false,'glossary_mobile_format_negative');
-          $ok($match('breed_single_desktop_banner',310,310)===true,'breed_desktop_format_positive');
-          $ok($match('breed_single_mobile_banner',600,100)===true,'breed_mobile_format_positive');
-
-          $gloss=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Sattelpflege','post_name'=>'sattelpflege','post_content'=>'Pflege von Sattel und Leder.']);
-          $gloss2=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Hufrehe','post_name'=>'hufrehe','post_content'=>'Erkrankung des Pferdehufs.']);
-          $breed=wp_insert_post(['post_type'=>'pa_breed','post_status'=>'publish','post_title'=>'Haflinger','post_name'=>'haflinger','post_content'=>'Rasseportrait Haflinger.']);
-          $ok($gloss>0,'glossary_post_created');
-          $ok($gloss2>0,'glossary_second_post_created');
-          $ok($breed>0,'breed_post_created');
-
-          // Exakte Nutzerregel 6.72.207:
-          // Glossar = Themenmatch zuerst, sonst freie Wahl.
-          // Rasse = grundsaetzlich freie Wahl, kein Themenvorteil.
-          $ctxG1=$call('get_content_context',$gloss); $ctxG1['slot_type']='glossary_single_desktop_banner';
-          $ctxG2=$call('get_content_context',$gloss2); $ctxG2['slot_type']='glossary_single_desktop_banner';
-          $ctxB=$call('get_content_context',$breed); $ctxB['slot_type']='breed_single_desktop_banner';
-          $campaign=function($title,$targets=[]){
-              return [
-                  'id'=>sanitize_key($title),'name'=>$title,'title'=>$title,'description'=>'','partner'=>'Test Partner',
-                  'creative_type'=>'banner','source'=>'output_object_v4','assignment_mode'=>'page_tree',
-                  'automation_target_keys'=>$targets,'match_keywords'=>[],'match_slugs'=>[],'match_term_ids'=>[],
-                  'page_id'=>0,'match_descendants'=>false
-              ];
-          };
-          $thematic=$campaign('Sattelpflege Leder Sattel');
-          $unrelated=$campaign('Solartechnik Photovoltaik',['page:solartechnik']);
-          $breedThematic=$campaign('Haflinger Pferderasse',['page:pferderassen-und-pferdetypen']);
-
-          $rt=$call('campaign_match_rank',$thematic,$ctxG1);
-          $ru1=$call('campaign_match_rank',$unrelated,$ctxG1);
-          $ru2=$call('campaign_match_rank',$unrelated,$ctxG2);
-          $rb1=$call('campaign_match_rank',$unrelated,$ctxB);
-          $rb2=$call('campaign_match_rank',$breedThematic,$ctxB);
-
-          $ok(is_array($rt) && (int)($rt['specificity']??0)>5,'glossary_thematic_match_first');
-          $ok(is_array($ru1) && (int)($ru1['specificity']??-1)===5,'glossary_unrelated_mapped_free_fallback_article1');
-          $ok(is_array($ru2) && (int)($ru2['specificity']??-1)===5,'glossary_unrelated_mapped_free_fallback_article2');
-          $ok((int)$rt['specificity']>(int)$ru1['specificity'],'glossary_topic_outweighs_free');
-          $ok(is_array($rb1) && (int)($rb1['specificity']??-1)===5,'breed_unrelated_is_free');
-          $ok(is_array($rb2) && (int)($rb2['specificity']??-1)===5,'breed_thematic_is_same_free_rank');
-          $ok((int)$rb1['specificity']===(int)$rb2['specificity'],'breed_has_no_topic_preference');
-
-          $run=function($post_id,$post_type,$method,$content)use($o){
-              global $wp_query,$wp_the_query,$post;
-              $q=new WP_Query(['post_type'=>$post_type,'p'=>$post_id]);
-              $wp_query=$q;$wp_the_query=$q;
-              if(!$q->have_posts()) return '';
-              $q->the_post();
-              $out=$o->$method($content);
-              wp_reset_postdata();
-              return $out;
-          };
-
-          // POSITIV LIVE-FALL: kein historischer Designmarker / kein alter Anker.
-          $gPlain='<article class="current-glossary-design"><p>Sattelpflege Inhalt</p></article>';
-          $gOut=$run($gloss,'uge_term','inject_glossary_single_banner',$gPlain);
-          $ok(strpos($gOut,'data-ppar-glossary-banner="desktop"')!==false,'glossary_without_old_anchor_desktop_visible');
-          $ok(strpos($gOut,'data-ppar-glossary-banner="mobile"')!==false,'glossary_without_old_anchor_mobile_visible');
-          $ok(strlen($gOut)>strlen($gPlain),'glossary_without_old_anchor_appended');
-          $g2Plain='<article class="current-glossary-design"><p>Hufrehe Inhalt</p></article>';
-          $g2Out=$run($gloss2,'uge_term','inject_glossary_single_banner',$g2Plain);
-          $ok(strpos($g2Out,'data-ppar-glossary-banner="desktop"')!==false,'glossary_second_unrelated_topic_desktop_visible');
-          $ok(strpos($g2Out,'data-ppar-glossary-banner="mobile"')!==false,'glossary_second_unrelated_topic_mobile_visible');
-
-          $bPlain='<article class="current-breed-design"><p>Rassen Inhalt</p></article>';
-          $bOut=$run($breed,'pa_breed','inject_breed_single_banner',$bPlain);
-          $ok(strpos($bOut,'data-ppar-breed-banner="desktop"')!==false,'breed_without_old_anchor_desktop_visible');
-          $ok(strpos($bOut,'data-ppar-breed-banner="mobile"')!==false,'breed_without_old_anchor_mobile_visible');
-          $ok(strlen($bOut)>strlen($bPlain),'breed_without_old_anchor_appended');
-
-          // POSITIV ALTANKER: bestehende Position bleibt erhalten.
-          $gAnchor='<main><aside class="pftk-gsingle-aside-v999999">ASIDE</aside></main>';
-          $gAnchOut=$run($gloss,'uge_term','inject_glossary_single_banner',$gAnchor);
-          $ok(strpos($gAnchOut,'data-ppar-glossary-banner="mobile"') < strpos($gAnchOut,'ASIDE'),'glossary_old_anchor_mobile_before');
-          $ok(strpos($gAnchOut,'data-ppar-glossary-banner="desktop"') > strpos($gAnchOut,'ASIDE'),'glossary_old_anchor_desktop_after');
-
-          $bAnchor='<main><section class="pftk-breed-facts-box-v999999">FACTS</section></main>';
-          $bAnchOut=$run($breed,'pa_breed','inject_breed_single_banner',$bAnchor);
-          $ok(strpos($bAnchOut,'FACTS') < strpos($bAnchOut,'data-ppar-breed-banner="desktop"'),'breed_old_anchor_after_facts');
-
-          // NEGATIV: zweiter Filterdurchlauf erzeugt kein Duplikat.
-          $gDup=$run($gloss,'uge_term','inject_glossary_single_banner',$gOut);
-          $ok(substr_count($gDup,'data-ppar-glossary-banner="desktop"')===1,'glossary_no_duplicate');
-          $bDup=$run($breed,'pa_breed','inject_breed_single_banner',$bOut);
-          $ok(substr_count($bDup,'data-ppar-breed-banner="desktop"')===1,'breed_no_duplicate');
-
-          // Rechner bleibt exakt wie live bestaetigt: Inline aus, Bottom nicht an Suppression gebunden.
-          $main=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/pferdeportal-affiliate-router.php');
-          $trait=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/includes/trait-ppar-article-plans.php');
-          $ok(strpos($main,'affiliate_rechner')!==false && strpos($main,'suppress_inline_banner')!==false,'calculator_live_pass_guard_preserved');
-          $ok(strpos($trait,'if (!$suppress_inline_banner && !$main_banner_rendered_at_bottom')===false,'calculator_bottom_not_suppressed');
+          update_option('ppar_aff039_dual_layer_recovery_v1',['x'=>1],false);
+          update_option('ppar_aff043_historical_product_state_restore_v1',['x'=>1],false);
+          update_option('ppar_aff044_clean_114_115_restore_v1',['x'=>1],false);
+          $ret=$call('housekeeping_retire_obsolete_recovery_state');
+          $ok(get_option('ppar_aff039_dual_layer_recovery_v1',null)===null,'old_recovery_039_removed');
+          $ok(get_option('ppar_aff043_historical_product_state_restore_v1',null)===null,'old_recovery_043_removed');
+          $ok(get_option('ppar_aff044_clean_114_115_restore_v1',null)===null,'old_recovery_044_removed');
+          $ok((int)($ret['options_deleted']??0)===3,'old_recovery_cleanup_count');
 
           echo "SUMMARY PASS=$pass FAIL=$fail\n";
-          if($fail){exit(1);}
-          echo "GLOSSARY_BREED_REAL_INJECTION_672207_PASS\n";
+          if($fail) exit(1);
+          echo "KISS_CLEANUP_672208_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672207.php --path=/tmp/wp-site | tee /tmp/672207.log
-          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672207_PASS' /tmp/672207.log
+          /tmp/wp eval-file /tmp/wp-site/cleanup208.php --path=/tmp/wp-site | tee /tmp/cleanup208.log
+          grep -F 'KISS_CLEANUP_672208_PASS' /tmp/cleanup208.log
 
-      - name: Package exact tested 6.72.207
+      - name: Package exact tested 6.72.208
         shell: bash
         run: |
           set -euo pipefail
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.207.zip affiliate-portal-router)
-          rm -rf /tmp/final207 && mkdir -p /tmp/final207
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.207.zip -d /tmp/final207
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.208.zip affiliate-portal-router)
+          rm -rf /tmp/final208 && mkdir -p /tmp/final208
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.208.zip -d /tmp/final208
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
-          expected={line.split('  ',1)[1]:line.split('  ',1)[0] for line in m.read_text().splitlines() if line.strip()}
-          root=Path('/tmp/final207')
+          expected={l.split('  ',1)[1]:l.split('  ',1)[0] for l in m.read_text().splitlines() if l.strip()}
+          root=Path('/tmp/final208')
           got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
           assert got==expected
           print('PASS ZIP_BYTE_IDENTITY_28_OF_28')
           PY
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.207
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
+          name: AFFILIATE_ZENTRALE_6.72.208
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
           if-no-files-found: error
           retention-days: 30
