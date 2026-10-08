@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / 16ER-SCHLEIFE BEENDET / FINALER V1.13.1-ZIELBAUM LOKAL HARD PASS / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 PHYSISCHE ZIELOBJEKTE / EIN REALER LIVE-DRYRUN OFFEN / KEIN LIVE-WRITE
+STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / V1.13.1 REALER LIVE-DRYRUN PLAN PASS / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 ZIELOBJEKTE / ALTER V1.12-SYNC NOCH ROLLBACK_PENDING / FINALER SYNC GESPERRT
 
 ## Ziel
 
@@ -395,26 +395,66 @@ Simulierter voll ausgerollter V1.12-Bestand → V1.13.1:
 Autoritativer Endaudit:
 `HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT_20261008.json`
 
+## REALER V1.13.1 LIVE-DRYRUN
+
+Quelle:
+`hobby-depot-final-target-readback-20261008-082217-utc.json`
+
+SHA-256:
+`3e1c00ea5c2d174c2ce6afcacadcf3ea9c6153b63467f1b420fa7ebc175c7a96`
+
+Dry-Run selbst:
+- plugin_version 1.13.1;
+- PASS / valid=true;
+- 841 Inventar;
+- 340 CORE;
+- 501 Finder/Editorial;
+- 440 Logikknoten;
+- 431 physische Zielobjekte;
+- 8 Welten korrekt CORE-Level-1;
+- CREATE 12;
+- UPDATE 419;
+- ARCHIVE 1 = alte Brettspiele;
+- 0 Provider-Calls;
+- 0 Kosten;
+- 0 Strukturwrites.
+
+Die 12 CREATEs sind exakt die kalibrierten Promotionen.
+
+### Wichtiger realer Restzustand
+
+Der JSON-Readback zeigt gleichzeitig noch einen alten V1.12-Zielbaumlauf:
+
+- sync_state = `ROLLBACK_PENDING`;
+- revision = `HD-TARGET-3P-V1-20261007+313e8ac433c0b154`;
+- 620 Rollback-Aktionen stehen noch aus;
+- alter Fehler: `directory:events-reisen [name]`;
+- runner = RUNNING / EXISTING_TARGET_TREE_RESUME;
+- Frontend-Readback = NO_ACTIVE_FINAL_SNAPSHOT.
+
+Damit ist der V1.13.1-ZielPLAN zwar korrekt, aber der finale Sync darf noch NICHT gestartet werden.
+
+V1.13.1 ist dafür bereits abgesichert:
+- auf der Seite `Finaler Zielbaum` wird ein bestehender ROLLBACK_PENDING-Zustand automatisch weitergetaktet;
+- währenddessen wird der Sync-Button nicht angeboten;
+- nach beendetem Rollback muss wegen verändertem Live-Fingerprint zwingend ein NEUER Dry-Run erfolgen;
+- selbst ein veralteter gespeicherter Plan würde beim Apply durch den Fingerprint-Recheck blockiert.
+
+Evidence:
+`HD001_V1.13.1_REAL_LIVE_DRYRUN_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
-
-Das ist jetzt der einzige offene technische Nachweis.
+`HD001_OLD_TARGET_TREE_ROLLBACK_MUST_FINISH_BEFORE_FINAL_SYNC`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.13.1 einmal in Hobby Depot installieren.
+`WordPress → Kategorien → Finaler Zielbaum` öffnen und die Seite offen lassen, bis der alte Rollback nicht mehr `ROLLBACK_PENDING` ist.
 
-Dann:
-`WordPress → Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`.
+Danach sofort auf derselben Seite:
+`Finalen Delta-Dry-Run ausführen`.
 
-Dieser Schritt:
-- kostet nichts;
-- ruft DataForSEO nicht auf;
-- schreibt keine Kategorien/Seiten;
-- liest nur den tatsächlichen Live-Bestand und berechnet das Delta.
-
-Danach den JSON-Readback herunterladen und prüfen.
+Dann neuen JSON-Readback herunterladen.
 
 Noch NICHT synchronisieren.
-Keine weitere Pluginversion vorbereiten, solange der reale Dry-Run keinen echten Fehler zeigt.
+Keine neue Plugin-Version nötig.
