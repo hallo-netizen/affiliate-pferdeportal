@@ -1,0 +1,63 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_002_PREPARED",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "READY_FOR_REAL_DATAFORSEO_OVERVIEW",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical identities in stable master order not already closed by a final batch assessment.",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "selected": [
+    "hobby:amateurfunk",
+    "hobby:cb-funk",
+    "hobby:software-defined-radio",
+    "hobby:satellitenfunk",
+    "hobby:satellitenempfang",
+    "hobby:wettersonden-tracking",
+    "hobby:funkpeilung",
+    "hobby:morsefunk",
+    "hobby:elektronikbasteln",
+    "hobby:mikrocontroller-projekte",
+    "hobby:arduino",
+    "hobby:raspberry-pi-projekte",
+    "hobby:robotik",
+    "hobby:heimrobotik",
+    "hobby:roboterbau",
+    "hobby:battlebots-modellbau"
+  ],
+  "counts": {
+    "candidates": 16,
+    "proposed_leafs": 51,
+    "proposed_article_intents": 304,
+    "dataforseo_keywords": 304,
+    "planned_paid_calls": 1
+  },
+  "plugin_preflight": {
+    "version": "1.12.6",
+    "valid": true,
+    "input_sha256": "0218632918d3a1d30da988edf07234f5639a4127ab308cb23badac578921be04",
+    "structure_write_capability": false
+  },
+  "files": {
+    "assessment_input_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_002_ASSESSMENT_INPUT_20261008.json",
+    "subject_preflight_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_20261008.json",
+    "assessment_input_file_sha256": "3e05658d2223c376b06866b6a8b2d51a80e3626e0c74002ca5f8184ba0d321d2",
+    "subject_preflight_file_sha256": "dfc38931fc0a106d0d6a6d4620e07948eb9566ef2104f895d25b1457a1ccdf88"
+  },
+  "local_shape_test": {
+    "note": "Technical shape test only, not real SEO evidence.",
+    "summary": {
+      "hub_candidates": 4,
+      "macro_reviews": 4,
+      "aggregation_reviews": 1,
+      "evidence_required": 7,
+      "ideal_leafs": 51
+    },
+    "provider_calls": 1,
+    "structure_writes": 0
+  },
+  "next_action": "Upload the prepared Batch-002 assessment input in HD-001 V1.12.6, run free preflight, verify 16/51/304/304/1, then execute exactly one read-only DataForSEO keyword_overview call."
+}
