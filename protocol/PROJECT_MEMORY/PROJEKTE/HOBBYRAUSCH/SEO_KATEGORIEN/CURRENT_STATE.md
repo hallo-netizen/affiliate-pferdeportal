@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / V1.13.4 FULL LOCAL POS+NEG HARD PASS / FRISCHER V1.13.4 LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 PROVIDER / 0 WRITES / V1.13.3 FEHLSYNC TERMINAL ROLLED_BACK / GENAU EIN FINAL-SYNC FREIGEGEBEN
+STATUS: V1.13.4 TECHNISCHER SYNC-PFAD LOKAL PASS, ABER FRONTEND-/KONZEPTAUDIT FAIL / LIVE-STRUKTUR NICHT ABGENOMMEN / HEADER MISCHT LEGACY-SEITEN / MAGAZIN-NAV UNVOLLSTÄNDIG / TREIBHOLZ-ALIAS LEAKT DOPPELT IN CORE / 11 KONZEPTUELLE ZWISCHENTRENNUNGEN IM V1.13.4-PROFIL ZUSAMMENGEZOGEN / KEIN WEITERER LIVE-SYNC
 
 ## Ziel
 
@@ -762,16 +762,38 @@ Bestätigt:
 
 Dieser Live-Dry-Run entspricht exakt dem zuvor vollständig lokal positiv/negativ getesteten V1.13.4-Workflow.
 
+## FRONTEND-/KONZEPTAUDIT NACH SICHTPRÜFUNG – FAIL
+
+Autoritativer Audit:
+`HD001_V1_13_4_FULL_RULE_CONCEPT_AUDIT_20261008.md`
+
+Harte Befunde:
+- der Zielbaum selbst besitzt die dritte Seitenebene für alle 340 CORE-Hobbys;
+- die aktive Header-/Theme-Navigation zeigt aber Legacy-Seiten zusätzlich zum Zielbaum;
+- dadurch ist die sichtbare Navigation zu breit und Ebenen werden vermischt;
+- Betonmöbel und Dorodango sind im aktuellen Zielprofil Editorial, erscheinen aber sichtbar unter Fertigen;
+- Treibholz sammeln + Alias Treibholz sind im Zielprofil eine Editorial-Identität; sichtbare CORE-Dubletten unter Sammeln sind Legacy-Leakage;
+- Magazin besitzt im Zielprofil 15 journal_cat-Terme und die feste Gruppenstruktur, diese wird aber nicht in die aktive Header-Navigation projiziert;
+- V1.13.4 besitzt 52 fachliche Zwischenbereiche; die Konzept-Arbeitsstruktur nennt 63. 11 Trennungen wurden zusammengezogen/entfallen;
+- klar überbreite aktuelle Bereiche: RC & Drohnen 16, Leder & Textil 13, Genuss 12, Elektronik & Funk 11, Holz & Naturmaterial 10, Metall & Schmuck 9;
+- nur Buchbinden besitzt aktuell die WordPress-Content-Kategorieebene. Das ist nach Zielvertrag 2.5 erlaubt und daher KEIN aktueller Regelverstoß; eine verpflichtende Kategorieebene für weitere Hobbys wäre eine bewusste Regeländerung.
+
 ## ERSTER OFFENER BLOCKER
 
-KEIN PRE-SYNC-BLOCKER MEHR.
+`HD001_FRONTEND_TARGET_NAV_AND_STRUCTURE_CORRECTION_REQUIRED`
 
 ## EXAKT EINE NEXT ACTION
 
-Jetzt genau einmal:
-`Kategorien → Finaler Zielbaum → geprüften Zielbaum einmal synchronisieren`
+KEINEN weiteren Live-Sync ausführen.
 
-Danach sofort finalen Readback als JSON exportieren.
+Zuerst lokal:
+1. Header-/Frontend-Navigation ausschließlich aus dem aktiven Target-Snapshot erzeugen;
+2. ungebundene Legacy-Seiten aus der sichtbaren Hauptnavigation ausschließen;
+3. Treibholz-/Alias-Leakage schließen;
+4. feste Magazin-Navigation vollständig projizieren;
+5. zusammengezogene Zwischenbereiche fachlich korrigieren, ohne leere Ebenen zu erzeugen.
 
-Kein weiterer Dry-Run vorher.
+Die allgemeine unterste WordPress-Kategorieebene wird DANACH separat festgelegt.
+
+Erst nach vollständigem lokalem POS/NEG-E2E dieses Gesamtstands neuer Live-Kandidat.
 
