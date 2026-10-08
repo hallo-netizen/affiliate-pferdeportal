@@ -33,18 +33,27 @@ Keine Bitte um `weiter`.
 
 ## Technischer Start — HARDLOCK
 
-Der bestehende GitHub-Dateistart ist zwingend auszuführen.
+Der bestehende GitHub-Dateistart ist zwingend auszuführen. Die Anzahl der Artikel im gültigen aktuellen Upload darf den Startweg nicht verändern.
 
-1. Für den aktuellen Upload einen frischen Run unter `real_runs/k0/<fresh-run>/` anlegen.
-2. Dort `WORDPRESS_INTAKE.json` für genau den aktuellen Upload schreiben.
-3. Dort `AUTHORING_CONTEXT.json` für genau diesen Run schreiben.
-4. Der Commit von `AUTHORING_CONTEXT.json` startet `.github/workflows/k0-authoring-context.yml` automatisch.
-5. Danach den bestehenden K0-Produktionsweg unverändert weiterführen.
+Für einen Upload mit **N >= 1** Artikeln gilt:
+
+1. Den aktuellen Upload als unveränderte Batch-Auftragsidentität binden.
+2. Vor dem Writer jeden Batch-Eintrag in **genau einen frischen K0-Einzelrun** unter `real_runs/k0/<fresh-run>/` überführen.
+3. Jeder Einzelrun erhält eine eigene `WORDPRESS_INTAKE.json` mit **item_count = 1** und exakt dem einen unveränderten Fünf-Felder-Eintrag aus dem aktuellen Upload.
+4. Für genau diesen Einzelrun Recherche und `AUTHORING_CONTEXT.json` erzeugen.
+5. Der Commit jeder `AUTHORING_CONTEXT.json` startet den bestehenden Workflow `.github/workflows/k0-authoring-context.yml` automatisch.
+6. Jeden Einzelrun unverändert durch Writer, vollständige Regeln, LanguageTool 6.8, finale Regeln und WordPress-Handoff führen.
+7. Erst wenn alle N Einzelruns verifiziert sind, ihre N WordPress-Singles mit dem bestehenden `engine/wordpress_batch_export.py` wieder in der **ursprünglichen Upload-Reihenfolge** zu genau einer WordPress-Batchdatei zusammenführen.
+8. Die erste sichtbare Ausgabe bleibt die fertige verifizierte WordPress-Batchdatei oder ein echter terminaler Blocker aus einem konkreten aktuellen Einzelrun.
+
+**Verboten:** einen Mehrfach-Upload direkt als einen Mehrfach-Writer-Run an `k0_writer_station` oder `k0-authoring-context.yml` zu übergeben.
+
+Der bestehende Writer-Kern bleibt bewusst Einzelartikel-basiert und wird nicht umgebaut.
 
 Es gibt keinen separaten Workflow-Startknopf als Voraussetzung.
 `workflow_dispatch` ist für `K0:start` nicht erforderlich.
-Vor dem ersten GitHub-Schreibversuch für den aktuellen Upload ist ein technischer Startblocker unzulässig.
-Ein terminaler Startblocker ist nur zulässig, wenn der Schreibversuch für genau diesen frischen Run tatsächlich mit einem konkreten Fehler scheitert.
+Vor dem ersten GitHub-Schreibversuch für den ersten aktuellen Einzelrun ist ein technischer Startblocker unzulässig.
+Ein terminaler Startblocker ist nur zulässig, wenn ein konkreter Schreib- oder Produktionsschritt für einen Einzelrun aus genau dem aktuellen Upload tatsächlich scheitert.
 
 ## Produktionsweg
 
