@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 DETERMINISTISCH VORBEREITET / 325 KEYWORDS / EXAKT 1 DATAFORSEO-OVERVIEW OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / BATCH 001–003 NUR KALIBRIERUNG / 48 IDENTITÄTEN DETAILGEPRÜFT / 16ER-SCHLEIFE BEENDET / PRAKTISCHES BASELINE-DELTA PASS / FINALER ZIELBAUM-DELTA ALS NÄCHSTER SCHRITT / KEIN LIVE-WRITE
 
 ## Ziel
 
@@ -295,85 +295,78 @@ Maschinenlesbarer Plan:
 Plugin-V1.12.6-Preflight lokal:
 PASS / 16 / 51 / 304 / 304 / 1.
 
-## BATCH 002 – REALER ABSCHLUSS
 
-Realer DataForSEO-Lauf:
+## BATCH 003 – REALER ABSCHLUSS
+
+Realer Lauf:
 - Plugin 1.12.6;
-- Batch 002;
+- Batch 003;
 - 16 Kandidaten;
-- 51 ideale Leafs;
-- 304 fachlich definierte Artikelintents;
-- 304 Keywords;
-- exakt 1 DataForSEO-Aufruf;
-- 98 exakte Provider-Zeilen;
-- Kosten 0.02376 USD;
+- 59 ideale Leafs;
+- 325 fachlich definierte Artikelintents;
+- 1 DataForSEO-Aufruf;
+- 102 zurückgegebene Provider-Zeilen;
+- Kosten 0.02424 USD;
 - 0 Strukturwrites.
 
-Autoritative Abschlussdatei:
-`HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
-
-Finale Rollen:
-- 11 HOBBY_HUB;
-- 4 ORIENTATION_UNIVERSE;
-- 1 EDITORIAL_TOPIC;
+Fachlich final:
+- 13 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
 - 0 unresolved.
 
-Kumuliert:
-- 32 von 841 Master-Identitäten final bewertet;
-- 809 offen.
+Damit wurden insgesamt 48 Master-Identitäten detailliert als Kalibrierung geprüft.
 
-## BATCH 003 – VORBEREITET
+## PRAKTISCHE KORREKTUR
 
-Deterministische nächste 16:
-Drohnenbau, FPV-Drohnen, FPV-Racing, Drohnenfotografie, Drone Soccer, RC-Crawling, Scale-Crawling, RC-Baumaschinen, RC-LKW, RC-Panzer, RC-Boote, RC-Segelboote, RC-U-Boote, RC-Flugzeuge, RC-Segelflug, RC-Helikopter.
+Die bisherige 16er-Batchlogik wird NICHT fortgesetzt.
 
-Vorbereitung:
-- 16 Kandidaten;
-- 59 vorgeschlagene Leafs;
-- 325 fachlich unterschiedliche Artikelintents;
-- 325 DataForSEO-Keywords;
-- exakt 1 geplanter `keyword_overview`-Aufruf;
-- automatische Depth-Recherche AUS;
-- 0 Strukturwrites.
+Entscheidender Befund:
+Der 841er Master ist Inventar, nicht 841 Pflichtkategorien.
 
-Plan:
-`HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
+Die vorhandene Zielbasis besitzt bereits:
+- 95 feste Strukturknoten;
+- 329 explizite CORE-Hobby-Overrides;
+- für alle übrigen Einträge die Regel `retain_editorial`.
 
-Plugin-V1.12.6-Preflight:
-PASS / 16 / 59 / 325 / 325 / 1.
+Daher reicht für die Fertigstellung:
+- bestehende Struktur als Baseline;
+- kalibrierte Promotions/Demotions als Delta;
+- unbekannte/nicht freigegebene Hobbys bleiben Finder/Editorial;
+- Hobbyseiten dürfen Beiträge direkt tragen;
+- Unterkategorien werden erst später bei echtem Contentwachstum erzeugt.
 
-## BATCH 004 – VORBEREITET IM VORAUS
+Globalaudit:
+- 841 Identitäten vollständig aufgelöst;
+- 340 CORE-Identitäten;
+- 501 Editorial/Finder-Fallback;
+- 432 aufgelöste Zielbaumknoten;
+- 400 physische CORE-Seiten;
+- 0 unmatched;
+- 0 mehrdeutige Overrides;
+- 0 unbekannte Parents;
+- 0 doppelte Slugs;
+- 0 doppelte Intent-Owner.
 
-Nur Vorarbeit; **noch nicht ausführen**, solange Batch 003 nicht final ist.
+Praktisches Zielprofil:
+`/hobby rausch/HD001_V1.13_PRACTICAL_TARGET_PROFILE_20261008.json`
+SHA-256:
+`320165bde7e45b0adbb9b796f717bb5dcb2a5d5ae54db2fb9dcd5bb5011ff88d`
 
-Nächste 16:
-RC-Drift, RC-Offroad, RC-Trial, RC-Rennsport, Modell-Dampfmaschinen, Stirlingmotoren, Modellmotorenbau, Modellmaschinenbau, Mini-CNC, CNC-Fräsen, Lasercutting, Lasergravieren, Resin-3D-Druck, 3D-Scanning, CAD als Hobby, Heimautomatisierung.
-
-Vorbereitet:
-- 16 Kandidaten;
-- 54 Leafs;
-- 310 fachlich unterschiedliche Artikelintents;
-- 310 SEO-Seeds;
-- exakt 1 späterer Overview;
-- keine Depth-Recherche;
-- 0 Strukturwrites.
-
-Plan:
-`HOBBY_MASTER_V2_BATCH_004_PREPARED_20261008.json`
+Audit:
+`/hobby rausch/HOBBY_MASTER_V2_PRACTICAL_BASELINE_DELTA_AUDIT_20261008.json`
 
 ## ERSTER OFFENER BLOCKER
 
-`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
+`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
+
+Batch 004 und alle weiteren 16er-Runden sind gestrichen.
 
 ## EXAKT EINE NEXT ACTION
 
-Batch-003-Input in HD-001 V1.12.6 hochladen.
+Aus dem praktischen Zielprofil einen finalen Sync-Kandidaten bauen und gegen den tatsächlichen WordPress-Bestand als Dry-Run vergleichen.
 
-Kostenlose Vorprüfung muss exakt zeigen:
-**16 Hobbys / 59 Leafs / 325 Einzelbeiträge / 325 Keywords / 1 bezahlter Aufruf.**
+Noch KEIN Live-Sync.
+Noch KEINE Kategorien schreiben.
 
-Nur dann genau EINEN read-only DataForSEO-Overview starten.
-
-Keine Tiefenprüfung.
-Kein Zielbaum-Delta.
-Kein Kategorien-Sync.
+Wenn der Delta-Dry-Run sauber ist:
+genau EIN kontrollierter Target-Tree-Sync → Frontend-Readback → Plugin deaktivieren/deinstallieren.
