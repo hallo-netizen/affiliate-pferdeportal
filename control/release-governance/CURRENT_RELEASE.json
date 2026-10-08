@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 276,
+  "generation": 277,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1039,10 +1039,15 @@
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
       "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-      "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md"
+      "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
+      ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
     "pass_reuse_policy": "OLD_PASS_NOT_REUSABLE_AFTER_SOURCE_CHANGE; REUSE_UNCHANGED PERFORMANCE EVIDENCE; RUN ONLY EXISTING BOUND CURRENT DELTA/GOVERNANCE/WORDPRESS_MARIADB GATES; NO NEW TEST OR WORKFLOW ARCHITECTURE",
-    "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests."
+    "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
+    "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
+    "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
+    "gate_runner_scope": "CURRENT_VERSION_CURRENT_MANIFEST_GOVERNANCE_SOURCE_WORDPRESS_MARIADB_AFF_ERR_059_062",
+    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence."
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1059,7 +1064,8 @@
       "release/affiliate-zentrale/",
       "affiliate-portal-router/",
       "CI_V663",
-      "STAGING_V663"
+      "STAGING_V663",
+      ".github/workflows/"
     ],
     "allowed_active_branch_prefixes": [
       "release/affiliate-zentrale/current/",
@@ -1069,10 +1075,10 @@
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_",
       "AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php",
-      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php"
+      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php",
+      ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
     "forbidden_prefixes": [
-      ".github/workflows/",
       "affiliate-portal-router/",
       "control/cloud-entry-gate/",
       "control/deterministic-entrance-gate/",
