@@ -1,0 +1,113 @@
+{
+  "contract": "HD001_V1_13_4_FULL_LOCAL_POSNEG_HARDPASS",
+  "date": "2026-10-08",
+  "status": "PASS_READY_FOR_ONE_LIVE_DRYRUN_ONLY",
+  "live_v1_13_3_failure": {
+    "readback": "hobby-depot-final-target-readback-20261008-110911-utc.json",
+    "sync_status": "ROLLED_BACK",
+    "error": "Target-Tree-Readback fehlgeschlagen: directory:events-reisen [name]",
+    "summary": {
+      "node_count": 430,
+      "created": 355,
+      "adopted": 75,
+      "updated": 0,
+      "unchanged": 0,
+      "archived": 0,
+      "readback_checked": 63
+    },
+    "frontend_readback": "NO_ACTIVE_FINAL_SNAPSHOT"
+  },
+  "local_reproduction": {
+    "exact_v1_13_3_artifact": true,
+    "target_plan_objects": 430,
+    "initial_delta": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    },
+    "term_read_representation": "HTML entity encoded, e.g. & -> &amp;",
+    "result": "Exact failure reproduced at directory:events-reisen [name] after 63 successful readbacks"
+  },
+  "root_cause": "Target-tree dry-run/sync compared taxonomy term names raw, while WordPress/HivePress may return entity-encoded visible term names. Frontend already decoded term names.",
+  "fix": {
+    "version": "1.13.4",
+    "target_profile_changed": false,
+    "profile_sha256": "2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95",
+    "materialkunst_occurrences": 0,
+    "changed_code": [
+      "includes/class-apkw-target-tree-dry-run.php",
+      "includes/class-apkw-target-tree-sync.php"
+    ],
+    "behavior": "Decode taxonomy term visible names before comparison; page-name comparison remains strict."
+  },
+  "fresh_package_positive": {
+    "initial_dryrun": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0,
+      "provider_calls": 0,
+      "structure_writes": 0
+    },
+    "fresh_presync_fingerprint_parity": "PASS",
+    "first_sync": {
+      "created": 355,
+      "adopted": 75,
+      "updated": 0,
+      "unchanged": 0,
+      "archived": 0,
+      "readback_checked": 430,
+      "status": "COMPLETE"
+    },
+    "active_mapping": 430,
+    "frontend": {
+      "page_readbacks": "403/403 PASS",
+      "hobbywelten_core_hub": "PASS",
+      "magazine_hub_and_groups": "PASS",
+      "directory_hivepress_hub": "PASS",
+      "front_hub_links": "PASS",
+      "footer_links": "PASS",
+      "final_admin_frontend_readback": "PASS"
+    },
+    "second_dryrun": {
+      "CREATE": 0,
+      "ADOPT": 0,
+      "UPDATE": 0,
+      "UNCHANGED": 430,
+      "ARCHIVE": 0
+    },
+    "second_sync": {
+      "created": 0,
+      "adopted": 0,
+      "updated": 0,
+      "unchanged": 430,
+      "archived": 0,
+      "readback_checked": 430,
+      "status": "COMPLETE"
+    }
+  },
+  "negative_suite": {
+    "readback_corruption": "BLOCKED + exact rollback restore PASS",
+    "page_insert_failure": "BLOCKED + exact rollback restore PASS",
+    "term_insert_failure": "BLOCKED + exact rollback restore PASS",
+    "ambiguous_concept_binding": "Dry-run BLOCKED + sync fail-closed PASS",
+    "foreign_hp_slug_collision": "Dry-run BLOCKED PASS",
+    "invalid_profile_missing_parent": "BLOCKED before writes PASS",
+    "missing_hp_taxonomy": "Dry-run BLOCKED + sync blocked before writes PASS"
+  },
+  "package": {
+    "name": "HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS.zip",
+    "sha256": "4ca1fb163f2ca5082d5b264a3d1b1862ee4b94039eeadd0c9b9f98e7270eb251",
+    "php_lint": "33/33 PASS",
+    "zip_integrity": "PASS",
+    "fresh_unpack_full_suite": "PASS",
+    "library_path": "/hobby rausch/HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS.zip",
+    "report_name": "HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS_REPORT.txt",
+    "report_sha256": "653b76c0f923a97181f5848ec3560579194b7c020fd5b06500134180d1564d30"
+  },
+  "boundary": "This is local full-workflow positive/negative acceptance, not live acceptance.",
+  "next_action": "Install exactly V1.13.4 and run one fresh final Delta-Dry-Run only. Export JSON. Do not synchronize until that V1.13.4 live dry-run is accepted."
+}
