@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Epoxidharzkunst",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Harz & Mischen",
+      "intents": [
+        "Harzsystem wählen",
+        "Mischverhältnis",
+        "Mischmenge",
+        "Topfzeit",
+        "Temperatur"
+      ]
+    },
+    {
+      "label": "Farben & Einschlüsse",
+      "intents": [
+        "Pigmente",
+        "Farbschichten",
+        "Glitter",
+        "Naturmaterial",
+        "Einbettungen"
+      ]
+    },
+    {
+      "label": "Formen & Oberflächen",
+      "intents": [
+        "Formwahl",
+        "Trennmittel",
+        "Untergrund",
+        "Gießhöhe",
+        "Randgestaltung"
+      ]
+    },
+    {
+      "label": "Blasen & Aushärten",
+      "intents": [
+        "Blasen vermeiden",
+        "Blasen entfernen",
+        "Aushärtezeit",
+        "Staubschutz",
+        "Aushärtefehler"
+      ]
+    },
+    {
+      "label": "Schleifen & Finish",
+      "intents": [
+        "Entformen",
+        "Schleifen",
+        "Polieren",
+        "Kantenfinish",
+        "Versiegelung"
+      ]
+    }
+  ],
+  "validation": true
+}
