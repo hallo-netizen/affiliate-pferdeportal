@@ -51,9 +51,9 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "leaf_plan": [
         [
           "Einstieg & System",
@@ -76,7 +76,7 @@
           6
         ]
       ],
-      "ownership": "Owns general FPV-drone setup and flying. Competitive racing belongs to FPV-Racing; generic drone construction belongs to Drohnenbau."
+      "ownership": "Owns general FPV-drone setup and flying. Competitive racing belongs to FPV-Racing; generic drone construction belongs to Drohnenbau. Corrected 2026-10-08 from HOBBY_HUB to ORIENTATION_UNIVERSE: real assessment evidence has macro_review=true, leaf_results=[], v2_role_decision=MACRO_REVIEW."
     },
     {
       "hobby_id": "hobby:fpv-racing",
@@ -359,9 +359,9 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "leaf_plan": [
         [
           "Einstieg & Flugzeugwahl",
@@ -384,7 +384,7 @@
           7
         ]
       ],
-      "ownership": "Owns generic powered RC-airplane basics and operation. Glider-specific intents stay with RC-Segelflug."
+      "ownership": "Owns generic powered RC-airplane basics and operation. Glider-specific intents stay with RC-Segelflug. Corrected 2026-10-08 from HOBBY_HUB to ORIENTATION_UNIVERSE: real assessment evidence has macro_review=true, leaf_results=[], v2_role_decision=MACRO_REVIEW."
     },
     {
       "hobby_id": "hobby:rc-segelflug",
@@ -451,8 +451,8 @@
   ],
   "final_summary": {
     "assessed": 16,
-    "hobby_hub": 13,
-    "orientation_universe": 1,
+    "hobby_hub": 11,
+    "orientation_universe": 3,
     "editorial_topic": 2,
     "article_only": 0,
     "finder_only": 0,
