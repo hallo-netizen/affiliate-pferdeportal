@@ -249,6 +249,8 @@ Fachlicher Vollabgleich:
 
 `HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
 
+Ursache bestätigt: historischer leerer statischer V1.12-Basisprofilknoten; kein aktuelles Hobby-/Entity-Placement rechtfertigt ihn.
+
 Der aktuelle Zielplan will
 `core:gestalten:materialkunst`
 neu als Page anlegen, obwohl der Knoten:
