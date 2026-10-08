@@ -25,6 +25,25 @@ Die erste sichtbare Antwort ist ausschließlich:
 1. die **fertige verifizierte WordPress-Datei**, oder
 2. ein **echter terminaler Blocker**, der intern nicht lösbar ist.
 
+
+## Technischer Start — HARDLOCK
+
+Bei gültigem aktuellem Upload + `K0:start` ist der bestehende GitHub-Dateistart zwingend auszuführen. Es gibt keinen separaten Workflow-Startknopf und es darf nicht nach `workflow_dispatch` als Voraussetzung gesucht werden.
+
+Der Startweg ist der bereits bestehende:
+1. aus dem aktuellen Upload einen **frischen** Run unter `real_runs/k0/<fresh-run>/` anlegen;
+2. dort `WORDPRESS_INTAKE.json` für genau den aktuellen Upload schreiben;
+3. dort anschließend `AUTHORING_CONTEXT.json` für genau diesen Run schreiben;
+4. der Commit von `AUTHORING_CONTEXT.json` startet den bestehenden Workflow `.github/workflows/k0-authoring-context.yml` automatisch;
+5. danach den bestehenden K0-Weg unverändert weiterführen.
+
+Für den Chat gilt zwingend:
+- vorhandene GitHub-Dateischreibfunktionen (`create_file` / bei bestehender Datei nur `update_file`) sind der technische Startmechanismus;
+- fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
+- vor dem ersten GitHub-Schreibversuch für den aktuellen Upload darf **kein** technischer Startblocker gemeldet werden;
+- ein terminaler Startblocker ist nur zulässig, wenn der GitHub-Schreibversuch für genau diesen aktuellen Run tatsächlich mit einem konkreten Fehler scheitert;
+- bei erfolgreichem Schreibversuch wird ohne sichtbare Zwischenmeldung weiterproduziert.
+
 ## Produktionsweg
 
 `Upload -> K0:start -> Recherche -> Writer -> vollständige Regeln -> LanguageTool 6.8 -> finale Regeln -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> Verifikation -> Datei`
