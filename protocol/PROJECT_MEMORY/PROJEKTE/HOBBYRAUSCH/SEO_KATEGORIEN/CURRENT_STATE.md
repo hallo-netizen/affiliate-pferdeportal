@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 272 VON 359 CURRENT-CORE ENTSCHIEDEN / 87 OFFEN / 767 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / FACH-SOLLPROFIL PASS / 359 VON 359 CURRENT-CORE ENTSCHIEDEN / 279 HOBBY_HUB / 53 ORIENTATION / 22 EDITORIAL / 5 ALIAS / 1.292 CONTENT-KATEGORIEN / TECHNISCHER OBJEKTPLAN PENDING / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1137,13 +1137,49 @@ Gesamter Rule-1.6-Recheck-Evidence-Stand:
 - 0 Capacity-Verstöße;
 - 0 WordPress-Writes.
 
+## GLOBALER CORE-RECHECK – ABGESCHLOSSEN
+
+Autoritative Abschluss-Evidence:
+- `HD001_GLOBAL_CORE_359_RULE16_FINAL_AUDIT_20261008.json`;
+- `HD001_FINAL_VISIBLE_FACH_SOLLPROFIL_20261008.json`;
+- `HD001_REMAINING_41_HUBS_RULE16_VISIBLE_LEAF_MATERIALIZATION_20261008.json`.
+
+Endstand:
+- 359/359 aktuelle CORE-Identitäten entschieden;
+- 279 HOBBY_HUB;
+- 53 ORIENTATION_UNIVERSE;
+- 22 EDITORIAL_TOPIC → aus CORE zu demoten, redaktionell erhalten;
+- 5 ALIAS_ONLY → kein zweiter SEO-Owner;
+- 332 endgültige CORE-Identitätsseiten;
+- 65 aktive Zwischenbereiche in 8 Welten;
+- 279/279 HOBBY_HUBs besitzen eine sichtbare Content-Kategorieebene;
+- 1.292 sichtbare Content-Kategorien;
+- jeder Hub 3–6 Leafs;
+- jede materialisierte Leaf 5–12 eigenständige Intents;
+- 0 Capacity-Verstöße.
+
+Korrigierte späte Evidence:
+- Batch 002: Mikrocontroller-Projekte = ORIENTATION/MACRO, CB-Funk und SDR je 5 Leafs;
+- Batch 003 spätere Final-Evidence: Drone Soccer und Scale-Crawling = HOBBY_HUB; RC-Baumaschinen/RC-LKW/RC-Panzer je 5 Leafs.
+
+Keine Pluginänderung und kein WordPress-Write wurden für diese fachliche Neuberechnung ausgeführt.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_87_PENDING`
+`HD001_TECHNICAL_OBJECT_PLAN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die verbleibenden 87 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck abschließen, beginnend mit Bewegen.
+Das eingefrorene fachliche Sollprofil einmal gegen das bestehende V1.14.1-Profil technisch auflösen:
+- exakte physische Zielobjekte;
+- Parent-/Tiefenprüfung;
+- Slug-/ID-Kollisionen;
+- 22 Demotionen;
+- 5 Alias-Zusammenführungen;
+- 279 Hub-Seiten mit 1.292 Content-Kategorien;
+- unveränderte Editorial-/Directory-/View-Struktur.
+
+Erst wenn dieser Objektplan vollständig PASS ist, wird über die Umsetzung entschieden.
 
 Bis dahin:
 - kein Plugin-Fix;
