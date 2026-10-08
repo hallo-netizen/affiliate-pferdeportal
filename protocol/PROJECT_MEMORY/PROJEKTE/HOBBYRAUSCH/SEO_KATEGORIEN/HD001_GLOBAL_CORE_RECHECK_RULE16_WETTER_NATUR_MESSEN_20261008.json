@@ -1,0 +1,116 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN",
+  "date": "2026-10-08",
+  "status": "PASS__18_IDENTITIES__14_HOBBY_HUB__2_ORIENTATION_UNIVERSE__2_EDITORIAL_TOPIC",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "decisions": [
+    [
+      "Planktonbeobachtung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Wetterbeobachtung",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "private Wetterstation",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Storm Spotting",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Blitzfotografie",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Gewittertracking",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Luftqualitätsmessung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Birding",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Nachtvogel-Beobachtung",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Fledermausbeobachtung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Schmetterlingsbeobachtung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Libellenbeobachtung",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Wildkameras",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Bioakustik",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Wasseranalyse",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Bodenanalyse",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Spektroskopie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Elektrochemie als Hobby",
+      "HOBBY_HUB",
+      4
+    ]
+  ],
+  "validation": {
+    "identities": 18,
+    "hobby_hubs": 14,
+    "orientation_universe": 2,
+    "editorial_topic": 2,
+    "visible_content_categories": 58,
+    "capacity_violations": 0
+  },
+  "full_local_detail": {
+    "artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json",
+    "sha256": "e1afa72a6b4668c8bb71d223b664b7a348565879c94f87119ad747510cc8ad51",
+    "contains": "Full subject-defined leaf names and all distinct article intents."
+  },
+  "provider_calls": 0,
+  "wordpress_writes": 0
+}
