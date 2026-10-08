@@ -1,0 +1,1440 @@
+{
+  "contract": "HD001_RULE16_PENDING_TIERE_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__28_OF_28_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Artemia-Zucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Zucht & Futtertiere",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Ansatz & Eier",
+          "intent_count": 5,
+          "article_intents": [
+            "Artemia-Eier auswählen",
+            "Artemia-Schlupfgefäß einrichten",
+            "Salzgehalt für Artemia einstellen",
+            "Wassertemperatur für Artemia-Schlupf",
+            "Artemia-Eier richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schlupf & Aufzucht",
+          "intent_count": 5,
+          "article_intents": [
+            "Artemia zum Schlüpfen bringen",
+            "Belüftung beim Artemia-Schlupf einstellen",
+            "Nauplien von Eierschalen trennen",
+            "Artemia-Nauplien weiter aufziehen",
+            "Artemia-Becken sauber halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Ernte",
+          "intent_count": 5,
+          "article_intents": [
+            "Artemia füttern",
+            "Futtermenge für Artemia dosieren",
+            "Artemia ernten",
+            "Artemia vor Verfütterung anreichern",
+            "Artemia-Kultur dauerhaft weiterführen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Artemia-specific hatchery, salinity, feeding and harvest; generic feeder-culture orientation remains with Futtertierzucht.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Asselhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Wirbellose",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Asseln für Anfänger auswählen",
+            "Asselarten für Terrarien unterscheiden",
+            "Gesunde Startkolonie erkennen",
+            "Koloniegröße für den Einstieg",
+            "Asseln sicher transportieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Behälter & Substrat",
+          "intent_count": 5,
+          "article_intents": [
+            "Asselbox einrichten",
+            "Substrat für Asseln mischen",
+            "Feuchtigkeitsgradient schaffen",
+            "Laub und Totholz vorbereiten",
+            "Belüftung der Asselbox einstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Asseln richtig füttern",
+            "Calciumquelle anbieten",
+            "Feuchtigkeit kontrollieren",
+            "Schimmel in Asselkultur vermeiden",
+            "Kolonie regelmäßig kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vermehrung & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Asselvermehrung beobachten",
+            "Jungtiere in der Kolonie erkennen",
+            "Kolonie teilen",
+            "Milben in Asselkultur beurteilen",
+            "Kulturabsturz bei Asseln vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns general isopod keeping, enclosure, species, feeding and colony care; focused breeding-selection content remains editorial under this owner.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bioactive Terrariums",
+      "natural_world": "tiere",
+      "parent_intermediate": "Gehegegestaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Bodenaufbau & Drainage",
+          "intent_count": 5,
+          "article_intents": [
+            "Bioaktives Terrarium planen",
+            "Drainageschicht einbauen",
+            "Substrat für bioaktives Terrarium mischen",
+            "Laubschicht aufbauen",
+            "Bodenfeuchte langfristig steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pflanzen & Hardscape",
+          "intent_count": 5,
+          "article_intents": [
+            "Pflanzen für bioaktives Terrarium auswählen",
+            "Äste und Kork sicher einbauen",
+            "Pflanzen im Terrarium einsetzen",
+            "Wurzeln vor Tieren schützen",
+            "Licht für Terrarienpflanzen planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bodenpolizei",
+          "intent_count": 5,
+          "article_intents": [
+            "Springschwänze einsetzen",
+            "Asseln als Bodenpolizei einsetzen",
+            "Startpopulation richtig dosieren",
+            "Bodenpolizei füttern",
+            "Population der Bodenpolizei beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Einlaufen & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Bioaktives Terrarium einfahren",
+            "Schimmel in der Einlaufphase beurteilen",
+            "Staunässe im Terrarium beheben",
+            "Trauermücken reduzieren",
+            "System nach Tierbesatz stabil halten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns bioactive terrarium substrate, cleanup crew, planting and system balance; animal-specific husbandry remains with the respective keeper hobby.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Biotop-Aquarien",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Biotop & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Biotop-Aquarium auswählen",
+            "Herkunftsgewässer recherchieren",
+            "Aquariengröße passend zum Biotop",
+            "Artenliste für Biotopbecken planen",
+            "Biotoptreue sinnvoll definieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasser & Bodengrund",
+          "intent_count": 5,
+          "article_intents": [
+            "Wasserwerte eines Biotops nachbilden",
+            "Bodengrund passend auswählen",
+            "Strömung des Herkunftsgewässers simulieren",
+            "Temperaturbereich einstellen",
+            "Wasseraufbereitung dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Hardscape & Pflanzen",
+          "intent_count": 5,
+          "article_intents": [
+            "Holz für Biotop-Aquarium wählen",
+            "Steine passend zum Lebensraum",
+            "Laub und Botanicals einsetzen",
+            "Pflanzen biotopgerecht auswählen",
+            "Verstecke natürlich gestalten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Besatz & Langzeitpflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Fische biotopgerecht kombinieren",
+            "Besatzdichte planen",
+            "Fütterung an natürlichen Lebensraum anpassen",
+            "Biotopbecken pflegen ohne Charakter zu verlieren",
+            "Veränderungen im Becken dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns habitat-faithful freshwater aquarium planning, water, hardscape and stocking; generic aquarium maintenance remains broader.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Daphnien-Zucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Zucht & Futtertiere",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Ansatz & Gefäße",
+          "intent_count": 5,
+          "article_intents": [
+            "Daphnien-Kultur starten",
+            "Gefäßgröße für Daphnien wählen",
+            "Wasser für Daphnien vorbereiten",
+            "Startdichte richtig wählen",
+            "Innen- oder Außenkultur vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Wasser",
+          "intent_count": 5,
+          "article_intents": [
+            "Daphnien mit Grünwasser füttern",
+            "Hefe für Daphnien dosieren",
+            "Überfütterung vermeiden",
+            "Wasserqualität kontrollieren",
+            "Temperatur für Daphnienkultur"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ernte & Kulturstabilität",
+          "intent_count": 5,
+          "article_intents": [
+            "Daphnien schonend ernten",
+            "Kultur teilen",
+            "Dauereier erkennen",
+            "Kulturcrash vorbeugen",
+            "Daphnien-Kultur neu starten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Daphnia culture setup, food, water and harvest.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Formicarienbau",
+      "natural_world": "tiere",
+      "parent_intermediate": "Gehegegestaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Nesttyp & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Formicarium für Ameisenart planen",
+            "Ytong- oder Gipsnest vergleichen",
+            "Acrylformicarium einordnen",
+            "Nestgröße passend zur Kolonie",
+            "Modulares Formicarium planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bau & Materialien",
+          "intent_count": 5,
+          "article_intents": [
+            "Ytongnest bearbeiten",
+            "Gipsnest gießen",
+            "Acrylteile sicher verbinden",
+            "Arena bauen",
+            "Ungiftige Materialien auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Befeuchtung & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Befeuchtungssystem einbauen",
+            "Feuchtigkeitsgradient schaffen",
+            "Nesttemperatur messen",
+            "Kondenswasser vermeiden",
+            "Wassertank sicher abdichten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausbruchschutz & Erweiterung",
+          "intent_count": 5,
+          "article_intents": [
+            "Ausbruchschutz auswählen",
+            "Deckel und Lüftung planen",
+            "Schläuche dicht verbinden",
+            "Formicarium erweitern",
+            "Undichte Stellen finden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns ant-enclosure construction, materials, hydration, escape prevention and modular expansion; ant care remains with Ameisenhaltung.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Futtertierzucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Zucht & Futtertiere",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic feeder-animal culture orientation, hygiene, nutritional enrichment and culture comparison. Artemia, Daphnien and other specific cultures retain their own owners.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Garnelenhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Garnelen für Anfänger auswählen",
+            "Neocaridina und Caridina unterscheiden",
+            "Gesunde Garnelen erkennen",
+            "Gruppengröße für Garnelen",
+            "Garnelen eingewöhnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Becken & Wasser",
+          "intent_count": 5,
+          "article_intents": [
+            "Garnelenbecken einrichten",
+            "Bodengrund für Garnelen wählen",
+            "Wasserwerte für Neocaridina",
+            "Wasserwerte für Caridina",
+            "Filter garnelensicher machen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Garnelen richtig füttern",
+            "Laub im Garnelenbecken einsetzen",
+            "Wasserwechsel im Garnelenbecken",
+            "Häutungsprobleme vermeiden",
+            "Mineralversorgung beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Zucht & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Garnelenzucht starten",
+            "Tragende Garnelen erkennen",
+            "Junggarnelen durchbringen",
+            "Planarien im Garnelenbecken",
+            "Garnelensterben systematisch untersuchen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns freshwater shrimp aquarium setup, species, water, feeding and breeding.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Gottesanbeterinnen",
+      "natural_world": "tiere",
+      "parent_intermediate": "Ameisen & Insekten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Gottesanbeterin für Anfänger auswählen",
+            "Geschlecht bei Mantiden unterscheiden",
+            "Gesundes Tier erkennen",
+            "Einzeln- oder Gruppenhaltung einordnen",
+            "Mantide sicher transportieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Terrarium & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Terrarium für Gottesanbeterin einrichten",
+            "Belüftung richtig planen",
+            "Temperatur einstellen",
+            "Luftfeuchtigkeit steuern",
+            "Klettermöglichkeiten anbieten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Häutung",
+          "intent_count": 5,
+          "article_intents": [
+            "Mantiden richtig füttern",
+            "Futtertiergröße auswählen",
+            "Fütterungsrhythmus planen",
+            "Häutung vorbereiten",
+            "Häutungsprobleme erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Zucht & Ootheken",
+          "intent_count": 5,
+          "article_intents": [
+            "Mantiden verpaaren",
+            "Oothek erkennen und pflegen",
+            "Oothek inkubieren",
+            "Nymphen nach Schlupf versorgen",
+            "Kannibalismus bei Nachzucht reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns mantis husbandry, enclosure, feeding, moulting and reproduction.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Hummelkästen",
+      "natural_world": "tiere",
+      "parent_intermediate": "Gehegegestaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kasten & Bauart",
+          "intent_count": 5,
+          "article_intents": [
+            "Hummelkasten auswählen",
+            "Oberirdischen oder unterirdischen Kasten vergleichen",
+            "Hummelkasten selbst bauen",
+            "Nistmaterial vorbereiten",
+            "Belüftung und Feuchteschutz planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Standort & Aufstellung",
+          "intent_count": 5,
+          "article_intents": [
+            "Hummelkasten richtig aufstellen",
+            "Einflugrichtung wählen",
+            "Kasten vor Überhitzung schützen",
+            "Ameisenschutz einrichten",
+            "Standort während Saison kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Besiedlung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Natürliche Besiedlung abwarten",
+            "Einflug beobachten ohne zu stören",
+            "Wachsmotten vorbeugen",
+            "Hummelkasten nach Saison reinigen",
+            "Kasten für nächstes Jahr vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns bumblebee nest-box selection, placement, occupancy and maintenance; general bumblebee ecology remains editorial/nature observation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Imkerei",
+      "natural_world": "tiere",
+      "parent_intermediate": "Imkerei & Bestäuber",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Bienenstand",
+          "intent_count": 5,
+          "article_intents": [
+            "Imkerei für Anfänger",
+            "Standort für Bienenstand wählen",
+            "Erstes Bienenvolk beschaffen",
+            "Beutensystem auswählen",
+            "Grundausstattung für Imkerei"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Völkerführung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bienenvolk im Frühjahr kontrollieren",
+            "Brutraum führen",
+            "Honigraum aufsetzen",
+            "Schwarmstimmung erkennen",
+            "Ableger bilden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gesundheit & Varroa",
+          "intent_count": 5,
+          "article_intents": [
+            "Varroa-Befall kontrollieren",
+            "Varroa-Behandlung einordnen",
+            "Drohnbrut als Maßnahme bewerten",
+            "Futtervorrat kontrollieren",
+            "Krankheitszeichen im Volk erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Honig & Ernte",
+          "intent_count": 5,
+          "article_intents": [
+            "Honigreife bestimmen",
+            "Honigwaben entnehmen",
+            "Honig schleudern",
+            "Honig sieben und abschäumen",
+            "Honig richtig lagern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Winter & Jahreslauf",
+          "intent_count": 5,
+          "article_intents": [
+            "Bienen einwintern",
+            "Futtermenge fürs Überwintern",
+            "Winterruhe am Bienenstand",
+            "Totenfall beurteilen",
+            "Imker-Jahresplan führen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns honeybee keeping from colony management through equipment, swarm control, honey and overwintering.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Isopoden-Zucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Wirbellose",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Breeding/selection of isopods is a focused content path under the canonical Asselhaltung hub; separate hub would duplicate enclosure, feeding and colony care.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Käferzucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Ameisen & Insekten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Käferart für Zucht auswählen",
+            "Gesunde Zuchttiere erkennen",
+            "Geschlechter bei Käfern unterscheiden",
+            "Zuchtgruppe zusammenstellen",
+            "Lebenszyklus der Käferart verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Behälter & Substrat",
+          "intent_count": 5,
+          "article_intents": [
+            "Käferterrarium einrichten",
+            "Larvensubstrat vorbereiten",
+            "Substrattiefe richtig wählen",
+            "Feuchtigkeit im Substrat steuern",
+            "Belüftung sicherstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Larven & Puppen",
+          "intent_count": 5,
+          "article_intents": [
+            "Käferlarven richtig füttern",
+            "Larvenwachstum kontrollieren",
+            "Puppenwiege vorbereiten",
+            "Puppenruhe nicht stören",
+            "Schlupf adulter Käfer begleiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Verpaarung & Generationen",
+          "intent_count": 5,
+          "article_intents": [
+            "Käfer verpaaren",
+            "Eiablage fördern",
+            "Eier und junge Larven finden",
+            "Generationen getrennt dokumentieren",
+            "Inzucht bei langfristiger Zucht vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns beetle keeping/breeding, larval substrate, pupation and generation management.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Meerwasseraquaristik",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic saltwater-aquarium orientation, equipment, water chemistry and system comparison. Riffaquaristik and Quallen-Aquarium retain specialist ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Nano-Aquaristik",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Becken & Technik",
+          "intent_count": 5,
+          "article_intents": [
+            "Nano-Aquarium auswählen",
+            "Filter für Nano-Aquarium",
+            "Heizer im Nano-Becken einsetzen",
+            "Beleuchtung dimensionieren",
+            "Abdeckung und Verdunstung planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Einrichtung & Besatz",
+          "intent_count": 5,
+          "article_intents": [
+            "Bodengrund für Nano-Aquarium",
+            "Hardscape im kleinen Becken",
+            "Pflanzen für Nano-Aquarium",
+            "Besatz für Nano-Becken planen",
+            "Überbesatz vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasser & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Nano-Aquarium einfahren",
+            "Wasserwechsel im Nano-Becken",
+            "Verdunstungswasser nachfüllen",
+            "Nährstoffe im kleinen Volumen kontrollieren",
+            "Temperaturschwankungen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Stabilität & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Algen im Nano-Aquarium",
+            "Filterausfall im kleinen Becken",
+            "Sauerstoffmangel erkennen",
+            "Wasserwerte nach Fütterung beobachten",
+            "Pflege im Urlaub planen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns small-volume aquarium planning, stocking, stability and maintenance; species-specific content stays with respective animal owners.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Quallen-Aquarium",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Becken & Strömung",
+          "intent_count": 5,
+          "article_intents": [
+            "Quallen-Aquarium auswählen",
+            "Kreiselströmung verstehen",
+            "Pumpenleistung einstellen",
+            "Ansaugschutz für Quallen",
+            "Becken ohne scharfe Kanten gestalten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasser & Einfahren",
+          "intent_count": 5,
+          "article_intents": [
+            "Salzwasser für Quallen ansetzen",
+            "Quallenbecken einfahren",
+            "Temperatur stabil halten",
+            "Salinität kontrollieren",
+            "Wasserwechsel bei Quallen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Quallen richtig füttern",
+            "Futtermenge dosieren",
+            "Futterreste entfernen",
+            "Quallen schonend umsetzen",
+            "Beleuchtung für Quallenbecken"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gesundheit & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Quallen ziehen sich zusammen: Ursachen",
+            "Beschädigte Tentakel beurteilen",
+            "Luftblasen an Quallen vermeiden",
+            "Strömungsprobleme erkennen",
+            "Wasserqualitätsprobleme diagnostizieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns jellyfish-specific circular-flow tank, water quality, feeding and animal handling.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Regenwurmzucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Zucht & Futtertiere",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Art & Behälter",
+          "intent_count": 5,
+          "article_intents": [
+            "Regenwurm-Art für Zucht auswählen",
+            "Wurmbox einrichten",
+            "Belüftung der Wurmbox",
+            "Bettmaterial vorbereiten",
+            "Startpopulation einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Feuchte",
+          "intent_count": 5,
+          "article_intents": [
+            "Regenwürmer richtig füttern",
+            "Geeignete Küchenreste auswählen",
+            "Feuchtigkeit in Wurmbox prüfen",
+            "pH in Wurmbox einordnen",
+            "Überfütterung vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vermehrung & Ernte",
+          "intent_count": 5,
+          "article_intents": [
+            "Kokons in Wurmkultur erkennen",
+            "Wurmvermehrung fördern",
+            "Würmer aus Substrat ernten",
+            "Population teilen",
+            "Kultur bei Geruch oder Fliegen stabilisieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns worm culture setup, bedding, feeding, moisture and harvest.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Reptilienhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Terraristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic reptile-keeping orientation, ethical scope and system comparison. Species-specific reptile husbandry should own detailed animal needs.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Riffaquaristik",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Becken & Riffaufbau",
+          "intent_count": 5,
+          "article_intents": [
+            "Riffaquarium planen",
+            "Lebendgestein oder Riffkeramik wählen",
+            "Riffaufbau standsicher gestalten",
+            "Technikbecken einplanen",
+            "Strömung im Riffbecken planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Licht & Strömung",
+          "intent_count": 5,
+          "article_intents": [
+            "Riffbeleuchtung auswählen",
+            "PAR im Riffaquarium einordnen",
+            "Strömungspumpen positionieren",
+            "Totzonen im Riff vermeiden",
+            "Beleuchtungsdauer einstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasserchemie",
+          "intent_count": 5,
+          "article_intents": [
+            "KH im Riffaquarium kontrollieren",
+            "Calcium und Magnesium messen",
+            "Nährstoffe im Riffbecken steuern",
+            "Salinität präzise messen",
+            "Dosierung regelmäßig kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Korallen & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Korallen für Anfänger auswählen",
+            "Korallen richtig platzieren",
+            "Korallen füttern",
+            "Korallenableger einsetzen",
+            "Gewebeverlust bei Korallen beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Algen & Stabilität",
+          "intent_count": 5,
+          "article_intents": [
+            "Cyanobakterien im Riffbecken einordnen",
+            "Dinoflagellaten erkennen",
+            "Fadenalgen reduzieren",
+            "Nährstofflimitierung vermeiden",
+            "Riffaquarium langfristig stabilisieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns reef aquarium coral system, light, flow, chemistry and coral husbandry; generic marine setup remains with Meerwasseraquaristik.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Schmetterlingsgärten",
+      "natural_world": "tiere",
+      "parent_intermediate": "Imkerei & Bestäuber",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Pflanzen & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Schmetterlingsgarten planen",
+            "Nektarpflanzen auswählen",
+            "Raupenfutterpflanzen integrieren",
+            "Blühfolge über Saison planen",
+            "Heimische Pflanzen priorisieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Struktur & Lebensraum",
+          "intent_count": 5,
+          "article_intents": [
+            "Sonnige Plätze für Schmetterlinge schaffen",
+            "Windschutz im Schmetterlingsgarten",
+            "Überwinterungsstrukturen erhalten",
+            "Wasser- und Mineralstellen einrichten",
+            "Pestizidfreie Pflege organisieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Beobachtung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Schmetterlinge im Garten dokumentieren",
+            "Raupen an Futterpflanzen beobachten",
+            "Mahdzeitpunkte anpassen",
+            "Blühpflanzen nachpflegen",
+            "Garten über Jahre vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns garden design specifically for butterflies/moths, host plants, nectar sequence and observation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Schmetterlingszucht",
+      "natural_world": "tiere",
+      "parent_intermediate": "Ameisen & Insekten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Zuchtstart",
+          "intent_count": 5,
+          "article_intents": [
+            "Schmetterlingsart für Zucht auswählen",
+            "Eier oder Raupen seriös beziehen",
+            "Lebenszyklus der Art dokumentieren",
+            "Zuchtbehälter vorbereiten",
+            "Rechtliche Schutzregeln prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Raupen & Futterpflanzen",
+          "intent_count": 5,
+          "article_intents": [
+            "Futterpflanze richtig bestimmen",
+            "Raupen hygienisch füttern",
+            "Futterpflanzen frisch halten",
+            "Raupenstadien erkennen",
+            "Krankheitszeichen bei Raupen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Verpuppung & Schlupf",
+          "intent_count": 5,
+          "article_intents": [
+            "Verpuppungsplatz anbieten",
+            "Puppen richtig lagern",
+            "Schlupfbedingungen einstellen",
+            "Frisch geschlüpfte Falter ausreifen lassen",
+            "Fehlbildungen nach Schlupf beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Paarung & nächste Generation",
+          "intent_count": 5,
+          "article_intents": [
+            "Falter verpaaren",
+            "Eiablagepflanzen anbieten",
+            "Eier sammeln und dokumentieren",
+            "Generationen getrennt führen",
+            "Zuchtlinie gesund halten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns captive butterfly/moth life-cycle breeding, host plants, pupation and release/containment rules.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Schwarzwasser-Aquarien",
+      "natural_world": "tiere",
+      "parent_intermediate": "Aquaristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Wasser & Chemie",
+          "intent_count": 5,
+          "article_intents": [
+            "Schwarzwasser-Aquarium planen",
+            "Weiches Wasser für Schwarzwasserbecken",
+            "pH im Schwarzwasser einordnen",
+            "Leitfähigkeit kontrollieren",
+            "Huminstoffe verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Botanicals & Einrichtung",
+          "intent_count": 5,
+          "article_intents": [
+            "Laub fürs Schwarzwasserbecken auswählen",
+            "Erlenzapfen einsetzen",
+            "Holz für Schwarzwasser-Aquarium",
+            "Botanicals richtig dosieren",
+            "Dunklen Bodengrund wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Besatz & Licht",
+          "intent_count": 5,
+          "article_intents": [
+            "Fische für Schwarzwasserbecken auswählen",
+            "Licht gedämpft einstellen",
+            "Schwimmpflanzen einsetzen",
+            "Struktur für scheue Fische schaffen",
+            "Besatzdichte planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pflege & Stabilität",
+          "intent_count": 5,
+          "article_intents": [
+            "Wasserwechsel im Schwarzwasserbecken",
+            "Botanicals nachlegen",
+            "Braunfärbung gezielt steuern",
+            "Mulm richtig beurteilen",
+            "Wasserwerte langfristig dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns blackwater aquarium water chemistry, botanicals, habitat design and maintenance.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Skorpionhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Terraristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Arten & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Skorpionart für Anfänger einordnen",
+            "Gefährdung einer Art vor Haltung prüfen",
+            "Skorpion sicher umsetzen",
+            "Fluchtsicheres Terrarium wählen",
+            "Umgang ohne direkte Handhabung"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Terrarium & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Skorpionterrarium einrichten",
+            "Substrattiefe wählen",
+            "Verstecke anbieten",
+            "Temperatur einstellen",
+            "Luftfeuchtigkeit steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Häutung",
+          "intent_count": 5,
+          "article_intents": [
+            "Skorpione richtig füttern",
+            "Futtertiergröße wählen",
+            "Fütterungsrhythmus planen",
+            "Häutung erkennen",
+            "Nach Häutung Fütterpause einhalten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns scorpion-specific enclosure, climate, feeding, safety and moulting.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Spinnenterrarien",
+      "natural_world": "tiere",
+      "parent_intermediate": "Terraristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Generic spider-enclosure content is better owned by specific spider-keeping hubs such as Vogelspinnenhaltung plus Gehegegestaltung; a separate SEO hub would duplicate enclosure setup.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Stabschreckenhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Ameisen & Insekten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Stabschreckenart für Anfänger auswählen",
+            "Gesunde Tiere erkennen",
+            "Gruppengröße planen",
+            "Entwicklungsstadien unterscheiden",
+            "Art sicher bestimmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Terrarium & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Terrarium für Stabschrecken",
+            "Höhe für Häutung einplanen",
+            "Belüftung einstellen",
+            "Temperatur kontrollieren",
+            "Luftfeuchtigkeit passend halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Futterpflanzen & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Futterpflanzen für Stabschrecken",
+            "Brombeerzweige frisch halten",
+            "Futterpflanzen sicher bestimmen",
+            "Terrarium hygienisch reinigen",
+            "Wassergefäße absichern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Eier & Nachzucht",
+          "intent_count": 5,
+          "article_intents": [
+            "Eier von Stabschrecken sammeln",
+            "Eier inkubieren",
+            "Schlupfbedingungen einstellen",
+            "Nymphen separat aufziehen",
+            "Parthenogenese bei Arten einordnen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns phasmid keeping, enclosure, host plants, moulting and reproduction.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Triops",
+      "natural_world": "tiere",
+      "parent_intermediate": "Zucht & Futtertiere",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Eier & Schlupf",
+          "intent_count": 5,
+          "article_intents": [
+            "Triops-Eier auswählen",
+            "Schlupfgefäß einrichten",
+            "Wasser für Triops-Schlupf",
+            "Temperatur für Triops",
+            "Licht beim Schlupf einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufzucht & Fütterung",
+          "intent_count": 5,
+          "article_intents": [
+            "Triops-Larven füttern",
+            "Futtermenge steigern",
+            "Triops in größeres Becken umsetzen",
+            "Wasserwechsel vorsichtig durchführen",
+            "Wachstum dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bodengrund & Eierzyklus",
+          "intent_count": 5,
+          "article_intents": [
+            "Sand für Triops wählen",
+            "Eiablage ermöglichen",
+            "Triops-Eier aus Sand gewinnen",
+            "Eiersand trocknen",
+            "Neue Generation ansetzen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Triops hatching, water, feeding, growth and egg-cycle culture.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Vogelspinnenhaltung",
+      "natural_world": "tiere",
+      "parent_intermediate": "Terraristik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Vogelspinne für Anfänger auswählen",
+            "Boden- und Baumbewohner unterscheiden",
+            "Gesundes Tier erkennen",
+            "Geschlecht bei Vogelspinnen einordnen",
+            "Sicheren Umgang planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Terrarium & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Vogelspinnenterrarium einrichten",
+            "Substrattiefe für Bodenbewohner",
+            "Versteck anbieten",
+            "Belüftung richtig dimensionieren",
+            "Feuchtigkeit artspezifisch steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fütterung & Häutung",
+          "intent_count": 5,
+          "article_intents": [
+            "Vogelspinne richtig füttern",
+            "Futtertiergröße wählen",
+            "Futterreste entfernen",
+            "Häutung erkennen",
+            "Nach Häutung Fütterpause einhalten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Sicherheit & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Brennhaare sicher handhaben",
+            "Ausbruch verhindern",
+            "Sturzrisiko im Terrarium reduzieren",
+            "Futterverweigerung beurteilen",
+            "Verletzungen nach Häutung erkennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns tarantula-specific species selection, enclosure, feeding, moulting and safety.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Wildbienenhotels",
+      "natural_world": "tiere",
+      "parent_intermediate": "Gehegegestaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Material & Bau",
+          "intent_count": 5,
+          "article_intents": [
+            "Wildbienenhotel sinnvoll bauen",
+            "Geeignetes Hartholz auswählen",
+            "Bohrlöcher richtig dimensionieren",
+            "Schilf und Bambus vorbereiten",
+            "Rissige Bohrgänge vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Standort & Montage",
+          "intent_count": 5,
+          "article_intents": [
+            "Wildbienenhotel richtig ausrichten",
+            "Sonnigen Standort wählen",
+            "Regenschutz einplanen",
+            "Hotel stabil befestigen",
+            "Abstand zum Boden wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Besiedlung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Verschlossene Brutröhren beobachten",
+            "Parasiten erkennen",
+            "Nisthilfen nicht im Herbst leeren",
+            "Alte Nisthülsen ersetzen",
+            "Belegung über Jahre dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns nesting-aid design, materials, placement, maintenance and occupancy observation for solitary bees.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 28,
+    "hobby_hub": 23,
+    "orientation_universe": 3,
+    "editorial_topic": 2,
+    "visible_content_categories": 86,
+    "article_intents": 430
+  },
+  "next_action": "Continue with pending current CORE identities in Bewegen."
+}
