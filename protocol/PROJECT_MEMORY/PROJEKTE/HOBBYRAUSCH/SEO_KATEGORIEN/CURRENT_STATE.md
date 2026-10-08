@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / KORRIGIERTER V1.13.1 LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 PROVIDER / 0 WRITES / ALTER ROLLBACK TERMINAL ROLLED_BACK / FINAL-SYNC FREIGEGEBEN
+STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / FINAL-SYNC V1.13.1 ABGEBROCHEN / READBACK-FEHLER BUCH & PAPIER [slug] / 60 VON 75 GEPLANTEN ADOPTS FÄLSCHLICH NEU ANGELEGT / ROLLBACK_PENDING MIT 231 AKTIONEN / V1.13.2 ADOPT-CHILD-SLUG-FIX LOKAL PASS / KEIN NEUER SYNC BIS ROLLBACK TERMINAL
 
 ## Ziel
 
@@ -581,16 +581,54 @@ Bestätigt:
 - `rollback_actions = []`;
 - kein aktiver finaler Snapshot, weil der Final-Sync noch nicht ausgeführt wurde.
 
+## FEHLGESCHLAGENER FINAL-SYNC – URSACHE GEKLÄRT
+
+Readback:
+`hobby-depot-final-target-readback-20261008-101334-utc.json`
+
+Befund:
+- Sync-Status `ROLLBACK_PENDING`;
+- Fehler: `core:fertigen:buch-papier [slug]`;
+- 430 Zielknoten geschrieben;
+- 415 als created;
+- nur 15 als adopted;
+- Dry-Run hatte 355 CREATE + 75 ADOPT geplant;
+- damit wurden 60 vorhandene Unterseiten beim Sync nicht wiedergefunden und fälschlich neu angelegt;
+- 231 Rollback-Aktionen sind offen.
+
+Ursache:
+Der Sync suchte Seiten per `get_page_by_path($slug)`.
+Bei hierarchischen Unterseiten benötigt WordPress dort den vollständigen Pfad.
+Der Dry-Run suchte dagegen global nach dem Blatt-Slug und fand die vorhandenen Seiten korrekt.
+
+Fix:
+V1.13.2 verwendet auch im Sync die begrenzte globale Slug-Suche und bleibt bei Mehrdeutigkeit fail-closed.
+
+Artefakt:
+`HD001_V1.13.2_ADOPT_CHILD_SLUG_FIX_HARDPASS.zip`
+SHA-256:
+`d9cb80d8e5635fd94ac390dc0be75757d1a7a964b0ce0cb1cf893934eed35cc7`
+
+Prüfung:
+- 33/33 PHP-Lint PASS;
+- Unterseiten-Slug-Adoption PASS;
+- Mehrdeutigkeit BLOCKED/PASS;
+- Missing-Slug NULL/PASS;
+- Zielprofil unverändert;
+- Materialkunst bleibt entfernt.
+
+Beleg:
+`HD001_V1_13_2_ADOPT_CHILD_SLUG_FIX_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-KEIN KONZEPT-/DRYRUN-BLOCKER MEHR.
+`HD001_V1_13_1_FAILED_SYNC_ROLLBACK_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Jetzt genau einmal:
-`Kategorien → Finaler Zielbaum → geprüften Zielbaum synchronisieren`
+Zuerst den bereits laufenden Rollback bis terminal `ROLLED_BACK` fertiglaufen lassen.
 
-Danach sofort frischen finalen JSON-/Frontend-Readback exportieren.
+Noch KEINEN neuen Sync starten.
 
-Keine weiteren Dry-Runs vor diesem einen Sync.
+Danach V1.13.2 installieren → frischen finalen Dry-Run → bei PASS genau einen Final-Sync.
 
