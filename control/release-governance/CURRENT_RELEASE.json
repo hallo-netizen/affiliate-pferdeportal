@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 286,
+  "generation": 287,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,19 +36,19 @@
   },
   "active_candidate": {
     "version": "6.72.208",
-    "status": "WORKING_6_72_208_KISS_CLEANUP_BOUND",
+    "status": "WORKING_6_72_208_KISS_CLEANUP_GATE_PASS_INSTALLER_READY",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "b2e88dc663a6f14b00071aa1a4c709afc73a113a49d631c9a5f6dcf38d6c9ad4",
+    "candidate_reference_artifact_sha256": "a3023fb4c0afd4a8210321fb59f9784eeab166e09665490d2dc10795620300d8",
     "candidate_reference_scope": "Authoritative section 9 rule order restored: specific mapped banner stays in its stored target/path; nonmatching specific banner stays out; if no specific banner is available for the target, explicitly general active banners may enter the existing technically/format-valid stable fallback pool. Manual topic assignment still writes the same topic_targets truth. No frontend reclassification, new DB query, provider HTTP or new table.",
     "final_artifact_ref": "",
     "final_artifact_sha256": "",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.207.zip",
-    "handoff_artifact_bytes": 821428,
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.208.zip",
+    "handoff_artifact_bytes": 821581,
     "source_binding_status": "MANIFEST_28_FILES_6_72_208_KISS_CLEANUP_BOUND",
     "last_tested_artifact": {
       "version": "6.72.198",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "KISS_CLEANUP_NO_FUNCTION_CHANGE",
-    "current_focus_reason": "User requested cleanup only: remove backend/navigation legacy presentation, verify automation/health/DB/performance, preserve all working import/ranking/output/calculator/banner behavior."
+    "current_focus": "KISS_CLEANUP_COMPLETE_NO_FUNCTION_CHANGE",
+    "current_focus_reason": "6.72.208 cleanup gate passed 37/37 on fresh WordPress+MariaDB. Functional import/ranking/output/calculator/provider paths were not changed."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_208_KISS_CLEANUP_BOUND",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Test only cleanup invariants: legacy menu entries pruned from visible navigation while direct pages remain registered; automation/reconcile/health/housekeeping unchanged; no new tables or frontend runtime behavior; DB housekeeping bounded and preserves active/current rows.",
-    "completion_condition": "KISS_CLEANUP_6_72_208_GATES_PASS",
-    "after_completion_action": "FINALIZE_RELEASE",
+    "state": "WORKING_6_72_208_KISS_CLEANUP_GATE_PASS_INSTALLER_READY",
+    "authorized_next_action": "FINALIZE_RELEASE",
+    "bound_user_scope_action": "No more functional changes. Exact tested 6.72.208 cleanup installer is ready.",
+    "completion_condition": "FINAL_RELEASE_BINDING_ONLY",
+    "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 128,
+    "sequence": 129,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672207_glossary_standard_breed_free_20261008.md",
-    "evidence_sha256": "",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672208_kiss_cleanup_db_performance_20261008.md",
+    "evidence_sha256": "ce1dd62de0dbfae7c5d1d45592044906656da4aadf2eaa826f2b3b11d3c14032",
     "current_source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_208_KISS_CLEANUP_BOUND",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_208_KISS_CLEANUP_GATE_PASS",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,12 +1041,20 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "Reuse all 6.72.207 functional banner/rechner evidence. 6.72.208 may test only admin cleanup, DB housekeeping, scheduling/health invariants and no-function-change source diff.",
+    "pass_reuse_policy": "RUN_37770855906 PASS_37_OF_37. REUSE 6.72.207 FUNCTIONAL EVIDENCE; 6.72.208 CHANGES ADMIN CLEANUP ONLY.",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
     "gate_runner_scope": "6_72_208_KISS_CLEANUP_ONLY",
-    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence."
+    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence.",
+    "final_installer": {
+      "filename": "AFFILIATE_ZENTRALE_6.72.208.zip",
+      "sha256": "a3023fb4c0afd4a8210321fb59f9784eeab166e09665490d2dc10795620300d8",
+      "bytes": 821581,
+      "workflow_run": 37770855906,
+      "workflow_artifact_id": 11547371311,
+      "status": "EXACT_TESTED_INSTALLER_READY"
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -2630,6 +2638,21 @@
       "BREED_SINGLE_ALWAYS_FREE",
       "FORMAT_GATES_UNCHANGED",
       "OTHER_PATHS_UNCHANGED"
+    ]
+  },
+  "current_bound_release_gate_672208": {
+    "status": "PASS_KISS_CLEANUP",
+    "wordpress_mariadb_run": 37770855906,
+    "assertions": "PASS_37_OF_37",
+    "source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
+    "installer_sha256": "a3023fb4c0afd4a8210321fb59f9784eeab166e09665490d2dc10795620300d8",
+    "installer_bytes": 821581,
+    "scope": [
+      "ADMIN_NAVIGATION_CLEANUP_ONLY",
+      "TECHNICAL_UI_NOISE_REMOVED",
+      "AUTOMATION_RECONCILE_HEALTH_UNCHANGED",
+      "DB_HOUSEKEEPING_POSNEG_PASS",
+      "FRONTEND_RUNTIME_UNCHANGED"
     ]
   }
 }
