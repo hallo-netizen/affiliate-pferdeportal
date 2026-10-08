@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / MATERIALKUNST-KONZEPTFEHLER KORRIGIERT / KORRIGIERTES V1.13.1-ZIP LOKAL PATCH-PASS / 430 ZIELOBJEKTE ERWARTET / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / 0 LIVE-WRITES / FRISCHER LIVE-DRYRUN OFFEN
+STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / KORRIGIERTER V1.13.1 LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 PROVIDER / 0 WRITES / ALTER ROLLBACK TERMINAL ROLLED_BACK / FINAL-SYNC FREIGEGEBEN
 
 ## Ziel
 
@@ -548,19 +548,49 @@ Erwarteter Zielstand ohne weiteren Live-Drift:
 Beleg:
 `HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD_20261008.json`
 
+## KORRIGIERTER LIVE-DRYRUN – PASS
+
+Frischer Export:
+`hobby-depot-final-target-readback-20261008-100800-utc.json`
+
+Bestätigt:
+- plugin_version 1.13.1;
+- status PASS / valid=true;
+- 841 Identitäten;
+- 340 CORE / 501 Finder-Editorial;
+- 439 Logikknoten;
+- 430 physische Zielobjekte;
+- 403 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 355 CREATE;
+- 75 ADOPT;
+- 0 UPDATE;
+- 0 ARCHIVE;
+- errors = [];
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 WordPress-Strukturwrites;
+- `Materialkunst` nicht mehr im Zielplan;
+- 0 fehlende Parents;
+- 0 Zyklen;
+- 0 doppelte Node-IDs/Slugs;
+- 0 Kategorie-unter-Kategorie;
+- alter V1.12-Sync terminal `ROLLED_BACK`;
+- `rollback_actions = []`;
+- kein aktiver finaler Snapshot, weil der Final-Sync noch nicht ausgeführt wurde.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FRESH_LIVE_DRYRUN_AFTER_MATERIALKUNST_FIX_PENDING`
+KEIN KONZEPT-/DRYRUN-BLOCKER MEHR.
 
 ## EXAKT EINE NEXT ACTION
 
-Korrigiertes ZIP in Hobby Depot installieren/ersetzen.
+Jetzt genau einmal:
+`Kategorien → Finaler Zielbaum → geprüften Zielbaum synchronisieren`
 
-Dann genau einmal:
-`Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`
+Danach sofort frischen finalen JSON-/Frontend-Readback exportieren.
 
-Danach sofort:
-`Finalen Readback als JSON herunterladen`.
-
-Noch KEINEN Final-Sync starten.
+Keine weiteren Dry-Runs vor diesem einen Sync.
 
