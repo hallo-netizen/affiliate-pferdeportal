@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGIN-UPDATEPROTOKOLL
 
-STAND: 2026-09-30
+STAND: 2026-10-08
 STATUS: APPEND-ONLY-CHRONIK
 
 ## ROLLE
@@ -447,3 +447,33 @@ REGRESSION:
 
 LIVE:
 Noch nicht installiert/readback-bestätigt. **Keine PU-ID.**
+
+## RELEASE-VORBEREITUNG 2026-10-08 – PSTE 0.57.58 / KEIN PU-EREIGNIS
+
+Kandidat: `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip`  
+SHA-256: `1ea1f3fd8223395a1424e990a7cc418853c3ab301939c794a2580304b9ce66a5`.
+
+Basis: PSTE 0.57.57 / `c3a001cd06d20fb71d75a21d7aca3cde4436920f855e999a3c166f035de01107`.
+
+WARUM: Nachweislich alte separate Admin-/Diagnoseoberflächen beseitigen, ohne Sandbox-/Review-/Bestands-/DB-/Performancefunktion zu verlieren.
+
+FIX: sichtbare Bedienung bleibt exakt Produktion / Themenprüfung / Datenquellen / Einstellungen; Sandbox-/Review-Funktion lazy in Themenprüfung, strategische Gewichtung in Einstellungen; alte Einzeloberflächen nicht mehr routbar.
+
+REGRESSION: exakt 3 Dateien geändert, 113/116 byteidentisch; DB-/Performance-Kern byteidentisch; PHP 79/79, JSON 36/36, Fresh-Unpack 116/116, Static 40/40, Automatik 9/9, Kurzer Dienstweg 10/10 PASS.
+
+LIVE: noch nicht installiert/readback-bestätigt. **Keine PU-ID.**
+
+## RELEASE-VORBEREITUNG 2026-10-08 – PSERC 0.28.33 / KEIN PU-EREIGNIS
+
+Kandidat: `PSERC-0.28.33-EVIDENCE-CONTRACT-SYNC-HARDPASS.zip`  
+SHA-256: `dc197e4af35605660b9187c051cf1b0b535bc1aeb6677cd9d69ea0f1e784e36e`.
+
+Basis: PSERC 0.28.32 / `be09a8bee9246b5fe7047242e97111ec16e11e4d4a063da806c4c7dd6d49b25d`.
+
+WARUM: veraltete Evidence-Vertragsmetadaten exakt an die bereits funktionierende Runtime-Gateklasse angleichen.
+
+FIX: Vertrags- und Runtimequellen exakt synchron; Package Binding neu berechnet (`331dfa4b384e15f08c2be0f3fd498b57a58e4c20ed854adfb7b36b0f465b0a28`).
+
+REGRESSION: exakt 3 Dateien geändert, 60/63 byteidentisch; PHP 43/43, JSON 17/17, Fresh-Unpack 63/63, Package Integrity + Tamper-Negativtest + Evidence-/Exact-Five-Matrix PASS.
+
+LIVE: noch nicht als 0.28.33 installiert/readback-bestätigt. **Keine PU-ID.**
