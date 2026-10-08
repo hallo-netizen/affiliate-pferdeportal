@@ -563,8 +563,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
       "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "leaf_plan": [
         [
           "Einstieg & System",
@@ -883,8 +883,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
       "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "leaf_plan": [
         [
           "Einstieg & Flugzeugwahl",
