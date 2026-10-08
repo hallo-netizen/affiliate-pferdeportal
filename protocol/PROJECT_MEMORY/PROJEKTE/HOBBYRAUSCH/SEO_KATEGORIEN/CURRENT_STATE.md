@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / V1.13.1 FEHLSYNC VOLLSTÄNDIG ROLLED_BACK / V1.13.2 DRYRUN PASS 355 CREATE + 75 ADOPT / LOKALER VOLL-SYNC-VERGLEICH DECKT ZWEITE DRYRUN-SYNC-DIVERGENZ AUF / V1.13.3 FULL-SYNC-PARITY LOKAL PASS / KEIN LIVE-SYNC VOR FRISCHEM V1.13.3-DRYRUN
+STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / V1.13.3 LIVE-SYNC BEI DIRECTORY EVENTS & REISEN [name] FEHLGESCHLAGEN UND VOLLSTÄNDIG ROLLED_BACK / FEHLER LOKAL 1:1 REPRODUZIERT / V1.13.4 KOMPLETTER LOKALER POSITIV+NEGATIV-WORKFLOW FRESH-ZIP HARD PASS / KEIN LIVE-SYNC / GENAU EIN V1.13.4-LIVE-DRYRUN OFFEN
 
 ## Ziel
 
@@ -668,13 +668,82 @@ SHA-256:
 Beleg:
 `HD001_V1_13_3_FULL_SYNC_PARITY_LOCAL_20261008.json`
 
+## V1.13.3 LIVE-FEHLER – TERMINAL ROLLED_BACK
+
+Readback:
+`hobby-depot-final-target-readback-20261008-110911-utc.json`
+
+Bestätigt:
+- Plugin 1.13.3;
+- Sync terminal `ROLLED_BACK`;
+- 355 created + 75 adopted;
+- Fehler nach 63 Readbacks:
+  `directory:events-reisen [name]`;
+- kein aktiver finaler Snapshot.
+
+## V1.13.4 – KOMPLETTER LOKALER WORKFLOW POSITIV + NEGATIV HARD PASS
+
+Der reale V1.13.3-Fehler wurde mit dem exakten V1.13.3-ZIP lokal 1:1 reproduziert:
+355 CREATE + 75 ADOPT → Readback 63 → `Events & Reisen [name]` → ROLLED_BACK.
+
+Root Cause:
+Taxonomie-Namen wurden im Dry-Run/Sync roh verglichen.
+WordPress/HivePress kann sichtbare Termnamen entity-kodiert liefern, z. B.
+`Events &amp; Reisen`.
+Frontend dekodierte bereits korrekt; Dry-Run/Sync noch nicht.
+
+V1.13.4:
+nur Term-Namenslesen vor Vergleich dekodiert.
+Zielprofil unverändert.
+Materialkunst bleibt entfernt.
+
+Fresh-ZIP-Volltest:
+- initialer Dry-Run 355 CREATE + 75 ADOPT / 0 Provider / 0 Writes;
+- unmittelbar frischer Pre-Sync-Fingerprint identisch;
+- erster Sync 355 created + 75 adopted;
+- 430/430 Struktur-Readback PASS;
+- Status COMPLETE;
+- 430 aktives Mapping;
+- 403/403 Page-Frontend-Readbacks PASS;
+- Hobbywelten/Core-Hub PASS;
+- Magazin-Hub + Menügruppen PASS;
+- Anbieter/HivePress-Hub PASS;
+- Front-Hub-Links PASS;
+- Footer PASS;
+- FinalTargetAdmin Frontend-Readback PASS;
+- nächster Dry-Run 430 UNCHANGED;
+- zweiter Sync 430 UNCHANGED + 430/430 Readback PASS.
+
+Negativ:
+- absichtlicher Readbackfehler → BLOCKED + exakter Rollback;
+- Page-Insert-Fehler → exakter Rollback;
+- Term-Insert-Fehler → exakter Rollback;
+- mehrdeutige Binding → Dry-Run BLOCKED + Sync fail-closed;
+- fremder HivePress-Slug → BLOCKED;
+- kaputtes Profil → vor Write BLOCKED;
+- fehlende hp_listing_category → Dry-Run + Sync vor Write BLOCKED.
+
+Paket:
+`HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS.zip`
+SHA-256:
+`4ca1fb163f2ca5082d5b264a3d1b1862ee4b94039eeadd0c9b9f98e7270eb251`
+
+Profil SHA-256 unverändert:
+`2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95`
+
+Fresh PHP-Lint:
+33/33 PASS.
+
+Beleg:
+`HD001_V1_13_4_FULL_LOCAL_POSNEG_HARDPASS_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_3_FRESH_LIVE_DRYRUN_PENDING`
+`HD001_V1_13_4_FRESH_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.13.3 installieren/ersetzen.
+Exakt V1.13.4 installieren.
 Dann genau einmal den finalen Delta-Dry-Run ausführen und JSON exportieren.
 
 Noch NICHT synchronisieren.
