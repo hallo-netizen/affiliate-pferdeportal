@@ -504,6 +504,9 @@ Neuer Konzeptaudit:
 
 `HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
 
+Ursache bestätigt:
+historischer leerer statischer V1.12-Basisprofilknoten; kein aktuelles Hobby-/Entity-Placement rechtfertigt ihn.
+
 Exakt:
 - `core:gestalten:materialkunst` steht im frischen Zielplan als `CREATE`;
 - 0 Kindknoten;
