@@ -3,13 +3,32 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "READY_FOR_K0_START",
+  "status": "READY_FOR_FRESH_K0_START",
   "first_open_blocker": null,
-  "next_action": "K0:start",
+  "next_action": "ON_VALID_CURRENT_UPLOAD_AND_K0_START_FAN_OUT_ALL_ITEMS_TO_EXISTING_SINGLE_ITEM_RUNS",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
     "goal_ref": "K0_GOAL_CONTRACT.json",
+    "current_request_authority": "CURRENT_VALID_UPLOAD_ONLY",
+    "fresh_run_required": true,
+    "start_mechanism": {
+      "type": "EXISTING_GITHUB_FILE_TRIGGER_WITH_N_ITEM_FANOUT",
+      "accepted_upload_item_count": "N>=1",
+      "batch_assignment_authority": "CURRENT_VALID_UPLOAD_ONLY",
+      "per_item_run_required": true,
+      "per_item_intake_item_count": 1,
+      "per_item_write_order": [
+        "WORDPRESS_INTAKE.json",
+        "AUTHORING_CONTEXT.json"
+      ],
+      "trigger_workflow": ".github/workflows/k0-authoring-context.yml",
+      "writer_core_mode": "UNCHANGED_SINGLE_ITEM",
+      "final_reassembly": "engine/wordpress_batch_export.py",
+      "final_order": "ORIGINAL_UPLOAD_ORDER",
+      "workflow_dispatch_required": false,
+      "write_attempt_required_before_start_blocker": true
+    },
     "canonical_route": [
       "PSERC_TEXTMACHINE_METADATA_BATCH_V2_EXACT_FIVE_FIELDS",
       "K0_AUTHORING_CONTEXT_V1_TEXT_FREE_WITH_COMPLETE_RULE_CONTEXT",
@@ -28,6 +47,14 @@
     "performance_regression_allowed": false,
     "publish_allowed": false
   },
-  "old_chat_or_archive_authority": false,
+  "active_read_scope": {
+    "before_fresh_run": [
+      "CURRENT_VALID_UPLOAD",
+      "K0_START_HERE.md",
+      "K0_CURRENT_STATE.json",
+      "K0_GOAL_CONTRACT.json"
+    ],
+    "any_other_repository_state_as_assignment_authority": false
+  },
   "publish_allowed": false
 }
