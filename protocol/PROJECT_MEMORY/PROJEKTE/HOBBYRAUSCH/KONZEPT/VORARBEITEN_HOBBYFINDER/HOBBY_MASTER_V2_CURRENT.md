@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-08
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 DETERMINISTISCH VORBEREITET / 1 OVERVIEW OFFEN
+STATUS: AKTIVES 841ER INVENTAR / REGELN 1.5 PRAKTISCH / BATCH 001–003 NUR KALIBRIERUNG / BATCH 004+ GESTRICHEN / 340 CORE + 501 FINDER-EDITORIAL / V1.13.1 FINALZIEL LOKAL PASS / LIVE-DRYRUN OFFEN
 
 ## Datenartefakt
 
@@ -87,78 +87,46 @@ Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
 Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 0 Zielbaum-Writes sind aus dem Batch aktuell zulässig.
 
-## Batch 001 – final
+## Produktionsstatus
 
-16/16 Kandidaten fachlich geschlossen:
-- 7 HOBBY_HUB;
-- 3 ORIENTATION_UNIVERSE;
-- 6 EDITORIAL_TOPIC;
-- 0 unresolved;
-- 0 Zielbaum-Writes.
+Die 841 kanonischen Identitäten bleiben vollständig erhalten.
 
-Keine weitere DataForSEO-Tiefenrecherche.
+Sie werden nicht mehr einzeln durch weitere 16er-Batches geschickt.
 
-## Batch 002 – final
+Batch 001–003:
+- 48 Identitäten detailliert geprüft;
+- dienen nur als Kalibrierung;
+- keine weitere Batchserie.
 
-Autoritative Datei:
-`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
+Finale praktische Zuordnung:
+- 340 CORE;
+- 501 Finder/Editorial;
+- 12 kalibrierte CORE-Promotionen;
+- 1 kalibrierte CORE-Demotion.
 
-Final:
-- 16/16;
-- 11 HOBBY_HUB;
-- 4 ORIENTATION_UNIVERSE;
-- 1 EDITORIAL_TOPIC;
-- 0 unresolved;
-- 0 Strukturwrites.
+Finales Zielprofil:
+`/hobby rausch/HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
 
-Kumuliert:
-32 von 841 bewertet.
+Profil SHA-256:
+`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
 
-## Batch 003 – vorbereitet
+Finaler Audit:
+`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT_20261008.json`
 
-Auswahlregel:
-erste 16 nach Batch 001 + 002 noch nicht final bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
-
-Ausgewählt:
-Drohnenbau, FPV-Drohnen, FPV-Racing, Drohnenfotografie, Drone Soccer, RC-Crawling, Scale-Crawling, RC-Baumaschinen, RC-LKW, RC-Panzer, RC-Boote, RC-Segelboote, RC-U-Boote, RC-Flugzeuge, RC-Segelflug, RC-Helikopter.
-
-Plan:
-`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
-
-Library-Artefakte:
-- `/hobby rausch/HOBBY_MASTER_V2_BATCH_003_ASSESSMENT_INPUT_20261008.json`
-- `/hobby rausch/HOBBY_MASTER_V2_BATCH_003_SUBJECT_PREFLIGHT_20261008.json`
-
-Lokaler V1.12.6-Preflight:
-- 16 Kandidaten;
-- 59 Leafs;
-- 325 Artikelintents;
-- 325 Keywords;
-- exakt 1 geplanter Paid Call;
-- 0 Strukturwrites.
-
-## BATCH 004 – VORBEREITET IM VORAUS
-
-Nur Vorarbeit; **noch nicht ausführen**, solange Batch 003 nicht final ist.
-
-Nächste 16:
-RC-Drift, RC-Offroad, RC-Trial, RC-Rennsport, Modell-Dampfmaschinen, Stirlingmotoren, Modellmotorenbau, Modellmaschinenbau, Mini-CNC, CNC-Fräsen, Lasercutting, Lasergravieren, Resin-3D-Druck, 3D-Scanning, CAD als Hobby, Heimautomatisierung.
-
-Vorbereitet:
-- 16 Kandidaten;
-- 54 Leafs;
-- 310 fachlich unterschiedliche Artikelintents;
-- 310 SEO-Seeds;
-- exakt 1 späterer Overview;
-- keine Depth-Recherche;
-- 0 Strukturwrites.
-
-Plan:
-`HOBBY_MASTER_V2_BATCH_004_PREPARED_20261008.json`
+Zielbaum:
+- 103 Basis-Logikknoten;
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- 8 Welten sind CORE-Roots;
+- Hobbywelten ist View, kein Parent.
 
 ## Nächster Schritt
 
-Realen Batch-003-Overview genau einmal ausführen.
-Danach Batch 003 fachlich finalisieren.
+Kein Batch 004.
 
-Noch kein Zielbaum-Delta und kein WordPress-Kategoriesync.
+Einziger offener Schritt:
+V1.13.1 real installieren und unter Kategorien den Finalen Zielbaum öffnen und den finalen Delta-Dry-Run ausführen.
+
+0 DataForSEO.
+0 Strukturwrites im Dry-Run.
+Erst den Live-Dry-Run prüfen, dann genau einen Sync.
