@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.13.4 TECHNISCHER SYNC-PFAD LOKAL PASS, ABER FRONTEND-/KONZEPTAUDIT FAIL / LIVE-STRUKTUR NICHT ABGENOMMEN / HEADER MISCHT LEGACY-SEITEN / MAGAZIN-NAV UNVOLLSTÄNDIG / TREIBHOLZ-ALIAS LEAKT DOPPELT IN CORE / 11 KONZEPTUELLE ZWISCHENTRENNUNGEN IM V1.13.4-PROFIL ZUSAMMENGEZOGEN / KEIN WEITERER LIVE-SYNC
+STATUS: V1.14.0 STRUKTUR+TARGET-NAV+MAGAZIN LOKAL FULL POS/NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 59 AKTIVE ZWISCHENBEREICHE / 437 PHYSISCHE ZIELOBJEKTE / LEGACY-NAV-LEAK GESCHLOSSEN / TREIBHOLZ CORE-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 ERWEITERUNGS-ANKER NOCH NICHT FINAL BEWERTET / KEIN LIVE-SYNC
 
 ## Ziel
 
@@ -778,22 +778,87 @@ Harte Befunde:
 - klar überbreite aktuelle Bereiche: RC & Drohnen 16, Leder & Textil 13, Genuss 12, Elektronik & Funk 11, Holz & Naturmaterial 10, Metall & Schmuck 9;
 - nur Buchbinden besitzt aktuell die WordPress-Content-Kategorieebene. Das ist nach Zielvertrag 2.5 erlaubt und daher KEIN aktueller Regelverstoß; eine verpflichtende Kategorieebene für weitere Hobbys wäre eine bewusste Regeländerung.
 
+## V1.14.0 – STRUKTUR / NAVIGATION / MAGAZIN LOKAL HARD PASS
+
+Beleg:
+`HD001_V1_14_0_STRUCTURE_NAV_MAGAZIN_FULL_LOCAL_HARDPASS_20261008.json`
+
+Korrigiert:
+- sichtbare Header-Navigation ausschließlich aus aktivem Target-Snapshot;
+- ungebundene Legacy-Seiten leaken nicht mehr in die kanonische Navigation;
+- Betonmöbel / Dorodango bleiben Editorial und erscheinen nicht unter Fertigen;
+- Treibholz sammeln + Treibholz bleiben genau eine bestätigte Editorial-Identität und erscheinen nicht in CORE;
+- feste Magazin-Navigation vollständig projiziert;
+- zusammengezogene Zwischenbereiche fachlich getrennt;
+- keine leeren Symmetrie-Kategorien erzeugt;
+- Robotik- und Bonsai-Hobbyseiten bleiben physisch erhalten;
+- keine unbelegten Alias-Merges / keine unbelegte BattleBots-Umbenennung.
+
+Aktueller lokaler Zielstand:
+- 841 kanonische Identitäten;
+- 340 CORE / 501 Finder-Editorial;
+- 59 aktive Zwischenbereiche;
+- 446 Logikknoten;
+- 437 physische Zielobjekte;
+- 410 Page-Frontend-Readbacks;
+- 96 Header-Navigationseinträge.
+
+Zwischenbereiche je Welt:
+- Gestalten 6;
+- Fertigen 9;
+- Technik 9;
+- Forschen 5;
+- Pflanzen 8;
+- Tiere 6;
+- Bewegen 8;
+- Sammeln 8.
+
+Nicht angelegte Konzeptäste, weil derzeit unbelegt und leere Ebenen verboten sind:
+- Oberfläche & Deko;
+- Citizen Science;
+- Essbare Pflanzen;
+- Gehegegestaltung.
+
+Fresh-ZIP Full Positive:
+- Dry-Run 362 CREATE + 75 ADOPT;
+- Sync 437/437 Readback PASS / COMPLETE;
+- Header-Navigation PASS;
+- Magazin-Navigation PASS;
+- 410/410 Seiten-Frontend PASS;
+- zweiter Dry-Run 437 UNCHANGED;
+- zweiter Sync 437 UNCHANGED.
+
+Migration aus vollständig ausgerolltem V1.13.4:
+- 12 CREATE;
+- 425 UPDATE;
+- 5 ARCHIVE;
+- archiviert werden nur die fünf ersetzten kombinierten Strukturknoten;
+- keine Hobbyseite wird dabei archiviert;
+- danach 437 UNCHANGED.
+
+Negativ:
+Readback-/Page-/Term-Fehlerrollback, Ambiguity, Foreign-Slug, kaputtes Profil und fehlende HivePress-Taxonomie = PASS/fail-closed.
+
+Artefakt:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_FRONTEND_TARGET_NAV_AND_STRUCTURE_CORRECTION_REQUIRED`
+`HD001_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_PENDING`
+
+Das Erweiterungskonzept enthält 19 bekannte/große Ankerkandidaten (u. a. Fotografie, Malen, Nähen, Wandern, Radfahren, Camping, Gärtnern, Briefmarken sammeln).
+Sie sind in der autoritativen Masterquelle ausdrücklich nur als `expansion_research_queue` geführt und besitzen noch keine finale Freigabe.
+Daher wurden sie NICHT geraten oder blind in CORE promoviert.
 
 ## EXAKT EINE NEXT ACTION
 
-KEINEN weiteren Live-Sync ausführen.
+Die 19 Erweiterungs-/Ankerkandidaten gegen Regeln 1.5 final bewerten.
 
-Zuerst lokal:
-1. Header-/Frontend-Navigation ausschließlich aus dem aktiven Target-Snapshot erzeugen;
-2. ungebundene Legacy-Seiten aus der sichtbaren Hauptnavigation ausschließen;
-3. Treibholz-/Alias-Leakage schließen;
-4. feste Magazin-Navigation vollständig projizieren;
-5. zusammengezogene Zwischenbereiche fachlich korrigieren, ohne leere Ebenen zu erzeugen.
+Erst danach:
+- entweder begründetes Delta in V1.14 integrieren;
+- oder Kandidaten bewusst als Editorial/Finder/Out-of-scope schließen.
 
-Die allgemeine unterste WordPress-Kategorieebene wird DANACH separat festgelegt.
-
-Erst nach vollständigem lokalem POS/NEG-E2E dieses Gesamtstands neuer Live-Kandidat.
+Bis dahin KEIN Live-Sync.
 
