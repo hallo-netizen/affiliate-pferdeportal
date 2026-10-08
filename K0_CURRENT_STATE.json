@@ -10,25 +10,6 @@
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
     "goal_ref": "K0_GOAL_CONTRACT.json",
-    "current_request_authority": "CURRENT_VALID_UPLOAD_ONLY",
-    "fresh_run_required": true,
-    "start_mechanism": {
-      "type": "EXISTING_GITHUB_FILE_TRIGGER",
-      "work_scope": "ALL_ITEMS_FROM_CURRENT_VALID_UPLOAD",
-      "per_item_run_required": true,
-      "per_item_identity": "EXACT_CURRENT_UPLOAD_FIVE_FIELDS_UNCHANGED",
-      "per_item_write_order": [
-        "WORDPRESS_INTAKE.json",
-        "AUTHORING_CONTEXT.json"
-      ],
-      "trigger_workflow": ".github/workflows/k0-authoring-context.yml",
-      "writer_core_mode": "UNCHANGED_SINGLE_ITEM",
-      "direct_multi_item_writer_run_allowed": false,
-      "final_reassembly": "engine/wordpress_batch_export.py",
-      "final_order": "ORIGINAL_UPLOAD_ORDER",
-      "workflow_dispatch_required": false,
-      "write_attempt_required_before_start_blocker": true
-    },
     "canonical_route": [
       "PSERC_TEXTMACHINE_METADATA_BATCH_V2_EXACT_FIVE_FIELDS",
       "K0_AUTHORING_CONTEXT_V1_TEXT_FREE_WITH_COMPLETE_RULE_CONTEXT",
@@ -42,12 +23,18 @@
       "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
       "SYSTEM4_WORDPRESS_HANDOFF_V1_CANONICAL_STRUCTURE"
     ],
+    "direct_article_package_start_allowed": false,
+    "writer_self_stamping_allowed": false,
     "alternate_route_allowed": false,
     "quality_reduction_allowed": false,
     "performance_regression_allowed": false,
     "publish_allowed": false,
-    "direct_article_package_start_allowed": false,
-    "writer_self_stamping_allowed": false,
+    "public_start_router_ref": "main:K0_START_HERE.md",
+    "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
+    "scope_lock": [
+      "ONLY_SINGLE_POST_H2_RENDERING_SPACING",
+      "EXISTING_INTERNAL_LINK_DISTRIBUTION_LOCK"
+    ],
     "do_not_touch": [
       "WRITER_CONTENT_RULES_EXCEPT_EXISTING_LINK_DISTRIBUTION_LOCK",
       "TABLE_LOGIC",
@@ -59,40 +46,6 @@
       "PUBLISH_SAFETY",
       "OTHER_PLUGINS_OR_DESIGN_AREAS"
     ]
-  },
-  "active_read_scope": {
-    "before_fresh_run": [
-      "CURRENT_VALID_UPLOAD",
-      "K0_START_HERE.md",
-      "K0_CURRENT_STATE.json",
-      "K0_GOAL_CONTRACT.json"
-    ],
-    "broad_repository_or_campus_search_before_binding_allowed": false,
-    "any_other_repository_state_as_assignment_authority": false
-  },
-  "old_chat_or_archive_authority": false,
-  "publish_allowed": false,
-  "full_rule_chain": {
-    "rule_sources": [
-      "RULE_CATALOG.json",
-      "RULE_VALUES.json",
-      "FIELD_POLICY.json",
-      "TEXTMACHINE_SCOPE_REFERENCE.json"
-    ],
-    "article_hard_rule_count": 85,
-    "pre_lt68_hard_rule_count": 84,
-    "final_hard_rule_count": 85,
-    "complete_rules_bound_before_writer": true,
-    "writer_job_contains_complete_rule_bundle": true,
-    "writer_job_contains_complete_article_rule_context": true,
-    "final_wordpress_export_requires_full_rule_pass": true,
-    "ppm679_parity_is_not_article_quality_pass": true,
-    "required_regression_proofs": {
-      "missing_internal_links": "BLOCK",
-      "missing_required_list": "BLOCK",
-      "missing_post_table_summary": "BLOCK",
-      "valid_complete_article": "PASS"
-    }
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -118,7 +71,31 @@
     "article_id_equals_plan_slot_forbidden": true,
     "publish_allowed": false
   },
+  "full_rule_chain": {
+    "rule_sources": [
+      "RULE_CATALOG.json",
+      "RULE_VALUES.json",
+      "FIELD_POLICY.json",
+      "TEXTMACHINE_SCOPE_REFERENCE.json"
+    ],
+    "article_hard_rule_count": 85,
+    "pre_lt68_hard_rule_count": 84,
+    "final_hard_rule_count": 85,
+    "complete_rules_bound_before_writer": true,
+    "writer_job_contains_complete_rule_bundle": true,
+    "writer_job_contains_complete_article_rule_context": true,
+    "final_wordpress_export_requires_full_rule_pass": true,
+    "ppm679_parity_is_not_article_quality_pass": true,
+    "required_regression_proofs": {
+      "missing_internal_links": "BLOCK",
+      "missing_required_list": "BLOCK",
+      "missing_post_table_summary": "BLOCK",
+      "valid_complete_article": "PASS"
+    }
+  },
   "link_distribution": {
     "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in two distinct main-text blocks; further_information only in further_information; intro/conclusion/table are not main-text blocks"
-  }
+  },
+  "old_chat_or_archive_authority": false,
+  "publish_allowed": false
 }
