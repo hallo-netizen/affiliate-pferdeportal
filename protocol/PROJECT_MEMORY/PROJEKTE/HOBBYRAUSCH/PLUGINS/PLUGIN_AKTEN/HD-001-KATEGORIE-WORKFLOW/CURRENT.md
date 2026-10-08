@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / KEIN TECHNISCHER BLOCKER / BATCH 002 REAL PASS / BATCH 003 INPUT ÜBER ALLGEMEINEN UPLOADWEG VORBEREITET / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.6 READ-ONLY KALIBRIERUNG REAL PASS / BATCH 001–003 ABGESCHLOSSEN / WEITERE BATCHES GESTRICHEN / NÄCHSTER PLUGIN-EINSATZ NUR FINALER DELTA-DRYRUN + EIN SYNC / KEIN AKTUELLER LIVE-WRITE
 
 ## Plugin
 
@@ -160,36 +160,30 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-Kein technischer Plugin-Blocker.
+Kein technischer Bewertungsblocker.
 
-Batch 002:
-- realer Overview PASS;
-- 1 Provider-Aufruf;
-- 0.02376 USD;
-- 0 Strukturwrites;
-- fachlich final geschlossen.
+V1.12.6 hat seine Aufgabe als read-only Kalibrierungswerkzeug erfüllt.
+Es werden keine weiteren 16er-Batches mehr gestartet.
 
-Batch 003:
-- 16 Kandidaten;
-- 59 Leafs;
-- 325 Artikelintents;
-- 325 Keywords;
-- exakt 1 geplanter Overview;
-- lokaler V1.12.6-Preflight PASS;
-- simulierter Shape-Run PASS;
-- 0 Strukturwrites.
+Neues Produktionsmodell:
+- Zielbasis 95 Strukturknoten;
+- 340 explizite CORE-Hobby-Zuordnungen;
+- 501 Finder/Editorial-Fallbacks;
+- Leafs erst bei realem späterem Contentbedarf.
 
 Offen:
-`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
+`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Vorbereiteten Batch-003-Input über `Kategorien → V2-Hobbybewertung` hochladen.
-Kostenlose Vorprüfung muss 16 / 59 / 325 / 325 / 1 zeigen.
-Danach genau einen read-only Overview ausführen.
+Keine weitere V2-Bewertung und keine neue DataForSEO-Serie.
 
-Keine Plugin-Änderung.
-Keine Tiefenprüfung.
+Einen finalen Sync-Kandidaten vorbereiten, der:
+1. das praktische Zielprofil lädt;
+2. gegen Live-WordPress nur Delta/Readback simuliert;
+3. erst nach PASS einmal synchronisiert.
+
+V1.12.6 selbst NICHT für weitere Batches verwenden.
 
 ## Release-/Artefaktgrenze
 
