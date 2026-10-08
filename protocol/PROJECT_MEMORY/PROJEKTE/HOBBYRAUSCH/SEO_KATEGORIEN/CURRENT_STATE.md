@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.14.1 EXPANSION19 LOCAL FULL POS/NEG HARD PASS + LIVE DRY-RUN PASS / 860 IDENTITÄTEN / 359 CORE / 457 ZIELE / LIVE-SYNC PENDING
+STATUS: V1.14.1 LIVE-DRY-RUN PASS / UI-GATE-FEHLER IM FINALER-ZIELBAUM-SCREEN IDENTIFIZIERT / V1.14.2 UI-GATE-FIX LOKAL PASS / LIVE-SYNC NOCH NICHT AUSGEFÜHRT
 
 ## Ziel
 
@@ -945,15 +945,54 @@ Live-Plan:
 
 Die Live-Seite steht vor dem Sync noch auf dem alten V1.13.4-Zielstand. Deshalb ist der Frontend-Readback vor dem Sync erwartbar noch nicht kanonisch.
 
+## LIVE-DRY-RUN – PASS / UI-GATE-BEFUND
+
+Der hochgeladene Live-Readback bestätigt:
+- Plugin 1.14.1;
+- Dry-Run PASS / valid=true;
+- 860 Identitäten / 359 CORE / 501 Finder-Editorial;
+- 457 physische Ziele;
+- 32 CREATE + 425 UPDATE + 5 ARCHIVE;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes;
+- die 5 Archive sind nur die bekannten ersetzten Kombi-Zwischenknoten.
+
+Screenshot + Codeprüfung zeigen einen realen UI-Fehler in V1.14.1:
+Die Finaler-Zielbaum-Seite setzt `$complete` allein aus dem alten gespeicherten Sync-State `status=COMPLETE`.
+Der alte COMPLETE-State gehört aber zur alten Revision V1.13.1/V1.13.4.
+Dadurch wird der Apply-Button für den neuen V1.14.1-Dry-Run fälschlich ausgeblendet.
+
+V1.14.2 korrigiert ausschließlich dieses Gate:
+- COMPLETE zählt in der Finalansicht nur, wenn `state.revision === plan.profile_revision`;
+- ein alter COMPLETE-State wird als veraltet erkannt;
+- bei gültigem neuem Dry-Run erscheint der Apply-Button wieder;
+- Target-Profil und Hobby-Master sind byteidentisch zu V1.14.1.
+
+Lokale Prüfung V1.14.2:
+- PHP 33/33 PASS;
+- ZIP-Integrität PASS;
+- altes COMPLETE + neuer Plan => Apply sichtbar PASS;
+- gleiches COMPLETE + gleicher Plan => Apply verborgen PASS;
+- laufender Sync => Apply verborgen PASS;
+- Profil-SHA unverändert: cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0;
+- Master-SHA unverändert: adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f.
+
+Artefakt:
+`HD001_V1.14.2_STALE_COMPLETE_UI_GATE_FIX.zip`
+
+SHA-256:
+`b5bf0f6201a8158dc968530009d22195e8cc4a27b5421d84010840dafd282dbe`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_1_LIVE_SYNC_PENDING`
+`HD001_V1_14_2_UI_GATE_FIX_INSTALL_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den bereits geprüften Live-Plan **genau einmal synchronisieren**.
+V1.14.2 installieren, Finaler Zielbaum öffnen und den kostenlosen Delta-Dry-Run einmal neu ausführen.
 
-Danach:
-- post-sync JSON-Readback herunterladen;
-- 457/457 Zielobjekte, Frontend/Header und zweiter UNCHANGED-Lauf prüfen;
-- erst dann Live-PASS setzen.
+Erwartung:
+32 CREATE / 425 UPDATE / 5 ARCHIVE.
+Danach muss Abschnitt 2 mit `Geprüften Zielbaum einmal synchronisieren` sichtbar sein.
+
+Kein Sync, falls die Zahlen abweichen oder Abschnitt 2 nicht erscheint.
