@@ -2685,8 +2685,7 @@ JS;
                             $out .= $disclosure;
                             if (!empty($editorial_parts[1])) { $out .= '<div class="ppar-glossary-cta-wrap-v67251">' . (string)$editorial_parts[1] . '</div>'; }
                         } elseif ($is_overview_wide_banner_slot) {
-                            // V6.72.80 DESIGN ONLY: kein redundantes "Anzeige". Reihenfolge fest:
-                            // Banner -> kurzer Werbelink-Hinweis -> CTA rechts darunter.
+                            $out .= '<div class="ppar-affiliate-label">Anzeige</div>';
                             $overview_parts = explode('<!--ppar-overview-cta-v67280-->', (string)$html, 2);
                             $out .= '<div class="ppar-affiliate-content">' . (string)($overview_parts[0] ?? '') . '</div>';
                             $out .= $disclosure;
