@@ -1601,3 +1601,16 @@ Erster bewiesener Live-FAIL: zentraler Datensatz `kredit` erfüllt die Gültigke
 Evidence: `release/affiliate-zentrale/evidence/affiliate_err_057_calculator_live_root_cause_20261007.md`.
 
 NEXT ACTION: authentifizierter Readback von `ppar_tariff_tools_v1['kredit']`; genau den fehlenden Zustand korrigieren; danach denselben Live-Artikel erneut rendern. Kein Source-Fix.
+
+
+## AFF-ERR-058 — 08.10.2026: Banner hatte zwei Zielwahrheiten
+
+**Root Cause:** Automatische Banner-Ziele wurden in `topic_targets` gespeichert. Eine manuelle feste Themen-/Portalziel-Zuordnung wurde dagegen primär als separate Portalentscheidung mit eigenem `target_key` geführt. Dadurch konnten Automatik, manuelle Zuordnung und Runtime unterschiedliche Zielquellen benutzen.
+
+**KISS-Fix:** Für Banner ist `topic_targets` die einzige fachliche Zielwahrheit. Automatische und manuelle Themenzuordnung schreiben in dieselbe Struktur. Der Runtime-Bannerpfad liest ausschließlich diese gespeicherte Zuordnung. Ein nicht als `mapped` gespeicherter Zustand ist keine automatische Bannerfreigabe.
+
+**Bedienregel:** Jeder Banner kann im Backend direkt über „Thema / Portalziel fest zuordnen“ einem realen Portalziel zugeordnet werden. Eine Begründung ist dafür nicht Pflicht.
+
+**Hardlock:** Keine zweite Banner-Zielquelle, keine Frontend-Neuklassifikation und kein fachfremder General-Fallback.
+
+**Status:** SOURCE_FIXED / MANIFEST_BOUND / RELEASE_GATES_OPEN / NO_RELEASE_PASS.
