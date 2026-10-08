@@ -1808,3 +1808,14 @@ Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange So
 **Installer:** `AFFILIATE_ZENTRALE_6.72.207.zip`, SHA256 `b2e88dc663a6f14b00071aa1a4c709afc73a113a49d631c9a5f6dcf38d6c9ad4`, 821428 Bytes.
 
 **Status:** HARD_WORDPRESS_MARIADB_PASS / LIVE_READBACK_OPEN.
+
+
+### AFF-ERR-063 final geschlossen — Nutzer-LIVE-PASS 08.10.2026
+
+- Rechnerartikel: Nutzer-LIVE-PASS — zweiter automatischer Banner mitten im Text entfernt; unterer Banner bleibt.
+- Glossar-Einzelbeiträge: Nutzer-LIVE-PASS mit 6.72.207-Regel „thematisch passend zuerst, sonst freie technisch/formatlich gültige Wahl“.
+- Pferderassen-Einzelbeiträge: Nutzer-LIVE-PASS mit 6.72.207-Regel „grundsätzlich freie Wahl; kein Themenzwang/-vorrang“.
+- Der anschließende 6.72.208-KISS-Cleanup änderte diese Fachpfade nicht.
+- 6.72.208 Cleanup-Gate: Fresh WordPress + MariaDB Run 37770855906, 37/37 PASS; geschützte Runtime-Traits unverändert.
+
+Status: **CLOSED_USER_LIVE_PASS_AND_672208_CLEANUP_REGRESSION_PASS**.
