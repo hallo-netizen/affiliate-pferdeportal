@@ -2,7 +2,7 @@
   "contract": "HOBBY_MASTER_V2_BATCH_003_PREPARED",
   "version": "1.0",
   "date": "2026-10-08",
-  "status": "READY_FOR_REAL_DATAFORSEO_OVERVIEW",
+  "status": "HISTORICAL_PREPARED_AND_EXECUTED__SUPERSEDED_BY_PRACTICAL_BASELINE_DELTA",
   "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
   "selection_rule": "First 16 canonical identities in stable master order not already closed by final Batch 001 and Batch 002 assessments.",
   "source_master": {
@@ -59,5 +59,7 @@
     "provider_calls": 1,
     "structure_writes": 0
   },
-  "next_action": "Upload the prepared Batch-003 assessment input in HD-001 V1.12.6, run free preflight, verify 16/59/325/325/1, then execute exactly one read-only DataForSEO keyword_overview call."
+  "next_action": "No further 16-item batch loop. Use practical baseline-delta finalization under rules 1.5.",
+  "real_result": "hobby-master-v2-assessment-20261008-072726-utc.json",
+  "final_assessment": "HOBBY_MASTER_V2_BATCH_003_FINAL_ASSESSMENT_20261008.json"
 }
