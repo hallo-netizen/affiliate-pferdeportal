@@ -1,0 +1,1349 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_006_007_009_RULE16_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__8_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "batches": [
+    "006",
+    "007",
+    "009"
+  ],
+  "hard_rules": [
+    "Historical ownership boundaries remain binding.",
+    "Leaf taxonomy is subject-matter derived, not DataForSEO-created.",
+    "Each visible leaf has 5-12 distinct article intents.",
+    "No WordPress write."
+  ],
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Plattenspieler restaurieren",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:plattenspieler-restaurieren:1",
+          "label": "Diagnose & Antrieb",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Plattenspieler ohne Funktion systematisch diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Riemenantrieb eines Plattenspielers prüfen und erneuern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Reibradantrieb eines Plattenspielers warten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Plattentellerlager reinigen und schmieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Gleichlaufschwankungen und falsche Drehzahl eingrenzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:plattenspieler-restaurieren:2",
+          "label": "Elektronik & Stromversorgung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Netzteil eines Plattenspielers prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Kondensatoren in alten Plattenspielern ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Brummen und Masseschleifen am Plattenspieler beheben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Schalter und Potentiometer reinigen oder ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Audioverkabelung und Cinch-Leitungen erneuern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:plattenspieler-restaurieren:3",
+          "label": "Tonarm & Tonabnehmer",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Tonarm-Lager auf Spiel und Leichtgängigkeit prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Tonabnehmer korrekt ausrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Auflagekraft eines Tonarms einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Antiskating korrekt einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Nadel oder Tonabnehmer passend ersetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:plattenspieler-restaurieren:4",
+          "label": "Gehäuse & Abschluss",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Holzzarge eines Plattenspielers aufarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Haube eines Plattenspielers polieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Bedienelemente und Metallteile materialschonend reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Plattenspieler nach Restaurierung korrekt montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Drehzahl, Rumpeln und Abtastung abschließend prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Uhren reparieren",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:uhren-reparieren:1",
+          "label": "Diagnose & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Uhrwerk vor der Reparatur eindeutig bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Fehlerbild einer mechanischen Uhr systematisch aufnehmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Grundwerkzeuge für Uhrenreparatur auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Bauteile beim Zerlegen nachvollziehbar dokumentieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Magnetismus und äußere Störungen als Fehlerquelle prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:uhren-reparieren:2",
+          "label": "Zerlegen & Reinigen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Uhrgehäuse sicher öffnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Uhrwerk aus dem Gehäuse entnehmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Mechanisches Uhrwerk in sinnvoller Reihenfolge zerlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Uhrenteile fachgerecht reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Korrosion und alte Schmierstoffe entfernen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:uhren-reparieren:3",
+          "label": "Werk & Schmierung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Lagersteine und Zapfen auf Verschleiß prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Federhaus und Zugfeder warten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Räderwerk auf freien Lauf prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Mechanisches Uhrwerk korrekt schmieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Werk nach Reinigung wieder zusammensetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:uhren-reparieren:4",
+          "label": "Regulierung & Gang",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Abfallfehler einer Uhr prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Gangabweichung messen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Amplitude einer mechanischen Uhr beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Reglage an Unruh oder Pendel vornehmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Hemmung auf sauberen Eingriff prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:uhren-reparieren:5",
+          "label": "Gehäuse & Abschluss",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Krone und Aufzugswelle reparieren oder ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Uhrglas fachgerecht ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Dichtungen und Gehäusesitz prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Gehäuse materialschonend reinigen und aufarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Reparierte Uhr über längere Laufzeit abschließend testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "mechanische Uhren bauen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:mechanische-uhren-bauen:1",
+          "label": "Planung & Uhrwerk",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Passendes mechanisches Uhrwerk für ein Bauprojekt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Handaufzug und Automatik für einen Eigenbau vergleichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Gehäusemaße auf das Uhrwerk abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Teileliste für eine mechanische Uhr erstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Werkhaltering und Befestigung planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:mechanische-uhren-bauen:2",
+          "label": "Werkmontage & Funktionen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Uhrwerk für den Einbau vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Aufzug und Zeigerstellung prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Datumsschaltung bei einem Uhrwerk kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Rotor und Automatikaufzug prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Werkfunktionen vor dem Einschalen vollständig testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:mechanische-uhren-bauen:3",
+          "label": "Zifferblatt & Zeiger",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Zifferblatt passend zum Uhrwerk auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Zifferblattfüße korrekt befestigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Zeigerlängen passend bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Stunden-, Minuten- und Sekundenzeiger montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Zeigerfreiheit und Datumsfenster prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:mechanische-uhren-bauen:4",
+          "label": "Gehäuse & Ausstattung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Gehäuse für ein mechanisches Uhrenprojekt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Krone und Aufzugswelle auf Länge anpassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Uhrglas passend montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Boden und Dichtungen korrekt einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Armband und Bandanstöße passend wählen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:mechanische-uhren-bauen:5",
+          "label": "Reglage & Endprüfung",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Gang einer selbst gebauten mechanischen Uhr messen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Abfallfehler kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Gangabweichung regulieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Automatikaufzug und Gangreserve testen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Uhr auf Zeigerfreiheit, Dichtigkeit und Alltagstauglichkeit prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Miniaturen bemalen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:miniaturen-bemalen:1",
+          "label": "Vorbereitung & Grundierung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Miniaturen vor dem Bemalen entgraten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Miniaturen reinigen und entfetten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Bauteile vor dem Bemalen sinnvoll montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Passende Grundierungsfarbe auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Grundierung dünn und gleichmäßig auftragen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:miniaturen-bemalen:2",
+          "label": "Farben & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Pinselgrößen für Miniaturen auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Miniaturenfarben richtig verdünnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Nasspalette beim Miniaturenmalen einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Airbrush und Pinsel sinnvoll kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Farbpalette für ein Miniaturenprojekt planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:miniaturen-bemalen:3",
+          "label": "Grundfarben & Schichten",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Grundfarben deckend ohne Detailsverlust auftragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Mehrere dünne Farbschichten sauber aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Kanten zwischen Farbflächen präzise malen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Stoff, Metall und Leder farblich unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Hauttöne auf Miniaturen schichtweise aufbauen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:miniaturen-bemalen:4",
+          "label": "Schatten, Highlights & Details",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Wash gezielt für Schatten einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Layering für weiche Übergänge nutzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Kantenhighlights sauber setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Drybrushing kontrolliert einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Augen, Symbole und feine Details malen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:miniaturen-bemalen:5",
+          "label": "Base & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Miniaturenbase passend gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Pigmente und Strukturmaterialien einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Bemalung mit Matt- oder Glanzlack schützen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Fehler nach dem Lackieren korrigieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Miniatur fotografisch und optisch kontrollieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Schmieden",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 6,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:schmieden:1",
+          "label": "Esse & Sicherheit",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Schmiedeesse für Hobbyarbeiten auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Arbeitsplatz rund um die Esse sicher einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Brennstoff für eine Schmiedeesse wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Werkstücke sicher erhitzen und handhaben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Persönliche Schutzausrüstung beim Schmieden richtig nutzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:schmieden:2",
+          "label": "Hammer, Amboss & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Amboss für eine Hobby-Schmiede auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Schmiedehämmer nach Arbeitsschritt wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Schmiedezangen passend zum Werkstück einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Meißel und Durchschläge beim Schmieden verwenden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Schmiedewerkzeuge pflegen und sicher lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:schmieden:3",
+          "label": "Stahl & Schmiedetemperatur",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Geeigneten Stahl zum Schmieden auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Schmiedetemperatur nach Stahlart erkennen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Überhitzung und Verbrennen von Stahl vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Werkstück zwischen den Schmiedegängen richtig erwärmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Materialverlust und Zunder beim Schmieden reduzieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:schmieden:4",
+          "label": "Grundformen schmieden",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Stahl beim Schmieden strecken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Werkstück beim Schmieden stauchen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Schultern und Absätze schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Löcher und Durchbrüche schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Biegungen und Radien kontrolliert herstellen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:schmieden:5",
+          "label": "Verbindungen & Bauteile",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Nietverbindungen beim Schmieden herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Schmiedeteile lochen und vernieten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Einfache geschmiedete Haken herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Zangen und kleine Werkzeuge schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Passungen an geschmiedeten Bauteilen nacharbeiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:schmieden:6",
+          "label": "Wärmebehandlung & Finish",
+          "article_intents": [
+            {
+              "intent_id": "6:1",
+              "working_title": "Geschmiedeten Stahl normalisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:2",
+              "working_title": "Werkstücke härten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:3",
+              "working_title": "Stahl passend anlassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:4",
+              "working_title": "Zunder nach dem Schmieden entfernen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:5",
+              "working_title": "Geschmiedete Oberflächen schützen und finishen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Kunstschmieden",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:kunstschmieden:1",
+          "label": "Entwurf & Proportion",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Kunstschmiede-Arbeit als Zeichnung planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Proportionen dekorativer Schmiedeteile festlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Wiederholende Ornamente sauber aufteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Schablonen für Kunstschmiedearbeiten erstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Materialquerschnitte passend zum Entwurf wählen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:kunstschmieden:2",
+          "label": "Voluten & Zierelemente",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Voluten gleichmäßig schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Blätter aus Stahl schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Spitzen und Enden dekorativ ausformen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Ringe und Spiralen für Ziergitter herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrteilige Zierelemente symmetrisch anlegen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:kunstschmieden:3",
+          "label": "Texturen & dekorative Verbindungen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Oberflächen beim Kunstschmieden strukturieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Dekorative Nietverbindungen einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Kragen und Bänder als Verbindung schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Übergänge zwischen Zierelementen sauber gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Mehrere geschmiedete Elemente zu einer Komposition verbinden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:kunstschmieden:4",
+          "label": "Objekte & Oberfläche",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Geschmiedetes Ziergitter planen und montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Dekorativen Kerzenhalter schmieden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Beschläge und Griffe kunstschmiedisch gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Kunstschmiedearbeiten bürsten und patinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Korrosionsschutz für dekorative Schmiedestücke aufbringen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Sandguss",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:sandguss:1",
+          "label": "Modell, Formkasten & Sand",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Gussmodell für Sandguss vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Formkasten passend dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Formsand für Hobby-Sandguss mischen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Trennmittel beim Sandformen einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Schwindmaß bereits am Modell berücksichtigen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:sandguss:2",
+          "label": "Form & Kerne",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Ober- und Unterkasten sauber abformen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Hinterschneidungen beim Sandguss vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Kerne für Hohlräume herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Form nach dem Ziehen des Modells reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Formhälften exakt ausrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:sandguss:3",
+          "label": "Anschnitt, Speiser & Guss",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Anschnittsystem für Sandguss planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Speiser sinnvoll platzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Entlüftung der Sandform vorsehen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Metall sicher auf Gießtemperatur bringen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Sandform kontrolliert und ohne Unterbrechung füllen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:sandguss:4",
+          "label": "Entformen & Nacharbeit",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Sandguss nach dem Erstarren sicher ausschlagen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Anschnitte und Speiser abtrennen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Gussgrat entfernen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Gussfehler wie Lunker oder Kaltlauf beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Gussteil schleifen und für die weitere Bearbeitung vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Silberschmieden",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "r16:silberschmieden:1",
+          "label": "Silber & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Silberlegierung für ein Schmiedeprojekt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Blech- und Drahtstärken passend bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Grundwerkzeuge fürs Silberschmieden auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Silber vor dem Umformen richtig glühen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Werkstück beim Silberschmieden sauber anreißen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:silberschmieden:2",
+          "label": "Sägen, Feilen & Formen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Silberblech präzise sägen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Kanten nach dem Sägen feilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Silberblech treiben und wölben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Silberdraht biegen und formen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Werkstücke auf Dorn und Punze passend ausrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:silberschmieden:3",
+          "label": "Löten & Verbindungen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Silberlot nach Schmelzbereich auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Lötfuge sauber vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Flussmittel beim Silberlöten einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Mehrere Lötungen in richtiger Reihenfolge planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Lötstellen nach dem Löten beizen und reinigen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:silberschmieden:4",
+          "label": "Fassungen & Konstruktion",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Einfache Zargenfassung aus Silber herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Ösen und Verbindungsringe anfertigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Scharnier an einem kleinen Silberobjekt bauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Stein in einer einfachen Fassung sichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Mehrteilige Silberkonstruktion maßhaltig zusammenbauen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "r16:silberschmieden:5",
+          "label": "Oberfläche & Politur",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Feilspuren auf Silber beseitigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Silber schrittweise schleifen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Silber hochglanzpolieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Matte und strukturierte Silberoberflächen herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertiges Silberstück reinigen und anlaufsicher lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
