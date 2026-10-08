@@ -45,7 +45,20 @@
     "alternate_route_allowed": false,
     "quality_reduction_allowed": false,
     "performance_regression_allowed": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "direct_article_package_start_allowed": false,
+    "writer_self_stamping_allowed": false,
+    "do_not_touch": [
+      "WRITER_CONTENT_RULES_EXCEPT_EXISTING_LINK_DISTRIBUTION_LOCK",
+      "TABLE_LOGIC",
+      "ARTICLE_TYPES",
+      "LANGUAGETOOL_6_8",
+      "PPM_6_7_9",
+      "WORDPRESS_HANDOFF_CONTRACT",
+      "CANONICAL_ID_BINDING",
+      "PUBLISH_SAFETY",
+      "OTHER_PLUGINS_OR_DESIGN_AREAS"
+    ]
   },
   "active_read_scope": {
     "before_fresh_run": [
@@ -58,5 +71,54 @@
     "any_other_repository_state_as_assignment_authority": false
   },
   "old_chat_or_archive_authority": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "full_rule_chain": {
+    "rule_sources": [
+      "RULE_CATALOG.json",
+      "RULE_VALUES.json",
+      "FIELD_POLICY.json",
+      "TEXTMACHINE_SCOPE_REFERENCE.json"
+    ],
+    "article_hard_rule_count": 85,
+    "pre_lt68_hard_rule_count": 84,
+    "final_hard_rule_count": 85,
+    "complete_rules_bound_before_writer": true,
+    "writer_job_contains_complete_rule_bundle": true,
+    "writer_job_contains_complete_article_rule_context": true,
+    "final_wordpress_export_requires_full_rule_pass": true,
+    "ppm679_parity_is_not_article_quality_pass": true,
+    "required_regression_proofs": {
+      "missing_internal_links": "BLOCK",
+      "missing_required_list": "BLOCK",
+      "missing_post_table_summary": "BLOCK",
+      "valid_complete_article": "PASS"
+    }
+  },
+  "wordpress_export": {
+    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "plugin_version": "0.28.30",
+    "plugin_build": "0.28.30-pste-v5-binding-safe",
+    "article_id_rule": "canonical article:[0-9a-f]{24} from PPM 6.7.9 registry",
+    "plan_slot_rule": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
+    "production_context_fields": [
+      "fact_pack",
+      "production_plan_item"
+    ],
+    "production_plan_item_requires": [
+      "canonical_article_id",
+      "article_type",
+      "target_keyword",
+      "topic",
+      "canonical_article",
+      "quality_binding",
+      "runtime_order"
+    ],
+    "live_wordpress_category_binding_required": true,
+    "compact_pferde_import_contract_forbidden": true,
+    "article_id_equals_plan_slot_forbidden": true,
+    "publish_allowed": false
+  },
+  "link_distribution": {
+    "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in two distinct main-text blocks; further_information only in further_information; intro/conclusion/table are not main-text blocks"
+  }
 }
