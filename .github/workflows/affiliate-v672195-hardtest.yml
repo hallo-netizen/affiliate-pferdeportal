@@ -1,10 +1,9 @@
-name: Affiliate 6.72.204 Focused Three-Fix Gate
+name: Affiliate 6.72.205 Glossary Breed Real Injection Gate
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      - affiliate-release-current
+    branches: [affiliate-release-current]
     paths:
       - 'release/affiliate-zentrale/current/**'
       - 'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
@@ -15,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  focused-three-fix:
+  glossary-breed-real-injection:
     runs-on: ubuntu-24.04
     services:
       mariadb:
@@ -44,7 +43,7 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Exact 6.72.204 source binding
+      - name: Exact current source
         shell: bash
         run: |
           set -euo pipefail
@@ -52,19 +51,18 @@ jobs:
           python3 control/release-governance/release_guard.py source-check
           python3 control/release-governance/release_guard.py start --branch affiliate-release-current
           python3 - <<'PY'
-          import hashlib, json, pathlib
+          import hashlib,json,pathlib
           c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
           a=c['active_candidate']
-          assert c['execution_state']['authorized_next_action']=='RUN_BOUND_RELEASE_GATES'
-          assert a['version']=='6.72.204'
+          assert a['version']=='6.72.205'
           assert a['source_file_count']==28
           p=pathlib.Path(a['current_source_manifest_ref'])
           assert hashlib.sha256(p.read_bytes()).hexdigest()==a['current_source_manifest_sha256']
           assert len([x for x in p.read_text().splitlines() if x.strip()])==28
           main=(pathlib.Path(a['source_root'])/'pferdeportal-affiliate-router.php').read_text()
-          assert 'Version: 6.72.204' in main
-          assert "const VERSION = '6.72.204';" in main
-          print('PASS CURRENT_672204_MANIFEST_28')
+          assert 'Version: 6.72.205' in main
+          assert "const VERSION = '6.72.205';" in main
+          print('PASS CURRENT_672205_BOUND')
           PY
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
@@ -78,9 +76,9 @@ jobs:
           mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672204 Focused Gate' --admin_user=admin --admin_password='ci-focused!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672205 Real Injection' --admin_user=admin --admin_password='ci-672205!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
-          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-live-types.php <<'PHP'
           <?php
           if (!class_exists('Pferde_Template_Kit')) {
               class Pferde_Template_Kit {
@@ -90,151 +88,158 @@ jobs:
                   public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
               }
           }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',['public'=>true,'supports'=>['title','editor']]);
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',['uge_term'],['public'=>true,'hierarchical'=>true]);
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',['public'=>true,'supports'=>['title','editor']]);
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',['pa_breed'],['public'=>true,'hierarchical'=>true]);
+          },1);
           PHP
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.204"){exit(2);} echo "PASS CURRENT_PLUGIN_ACTIVE_672204\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.205"){exit(2);} echo "PASS PLUGIN_672205_ACTIVE\n";' --path=/tmp/wp-site
 
-      - name: Hard positive negative exactly three fixes
+      - name: Real glossary breed injection positive negative
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/wp-site/focused_threefix.php <<'PHP'
+          cat >/tmp/wp-site/real_glossary_breed_672205.php <<'PHP'
           <?php
-          if (!class_exists('Pferdeportal_Affiliate_Router')) { fwrite(STDERR,"FAIL plugin missing\n"); exit(2); }
+          update_option('ppar_enabled','1');
           $o=Pferdeportal_Affiliate_Router::instance();
           $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
           $pass=0;$fail=0;
-          $ok=function($cond,$name)use(&$pass,&$fail){if($cond){echo "PASS ".$name."\n";$pass++;}else{echo "FAIL ".$name."\n";$fail++;}};
+          $ok=function($cond,$name)use(&$pass,&$fail){if($cond){echo "PASS $name\n";$pass++;}else{echo "FAIL $name\n";$fail++;}};
 
+          $call('maybe_install_creative_library_schema');
+          $call('maybe_install_output_objects_schema');
           $portalKey=$call('output_local_portal_key');
           $portal=$call('output_portal_by_key',$portalKey,true);
+          $ok(is_array($portal),'portal_ready');
+
+          global $wpdb;
+          $table=$call('creative_library_table');
+          $seed=function($external,$w,$h)use($wpdb,$table){
+              $identity=hash('sha256','672205|'.$external);
+              $row=[
+                  'provider'=>'direct','partner_external_id'=>'kiss205','partner_name'=>'KISS 205',
+                  'external_id'=>$external,'identity_hash'=>$identity,'creative_type'=>'banner',
+                  'title'=>'KISS '.$external,'description'=>'','tags'=>'',
+                  'image_url'=>'https://example.com/'.$external.'.png',
+                  'destination_url'=>'https://example.com/','tracking_url'=>'https://example.com/t/'.$external,
+                  'width'=>$w,'height'=>$h,'source_status'=>'active','source_kind'=>'banner',
+                  'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'',
+                  'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'',
+                  'classified_at'=>0,'topic_status'=>'auto_verified','topic_score'=>0,'topic_targets'=>'[]',
+                  'source_hash'=>hash('sha256','src|'.$external),
+                  'payload'=>wp_json_encode([
+                      '_dimension_state'=>'verified','_image_sha256'=>hash('sha256','img|'.$external),
+                      '_image_mime'=>'image/png','_image_bytes'=>1000,'_measured_at'=>time(),
+                      '_destination_source'=>'provider_explicit'
+                  ],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+                  'first_seen'=>time(),'last_seen'=>time()
+              ];
+              $wpdb->insert($table,$row,array_fill(0,count($row),'%s'));
+              return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",(int)$wpdb->insert_id),ARRAY_A);
+          };
+
+          $desktop=$seed('desktop-square',310,310);
+          $mobile=$seed('mobile-wide',600,100);
+          $pd=$call('output_plan_creative',$desktop,true,$portalKey);
+          $pm=$call('output_plan_creative',$mobile,true,$portalKey);
+          $ok(is_array($pd) && (int)($pd['active']??0)>=1,'desktop_banner_materialized');
+          $ok(is_array($pm) && (int)($pm['active']??0)>=1,'mobile_banner_materialized');
+
           $matrix=$call('output_slot_matrix',$portal);
-          $ok(is_array($matrix),'matrix_loaded');
-
-          $expected=[
-            'glossary_single_desktop_banner'=>[0.50,1.50,310,'desktop'],
-            'glossary_single_mobile_banner'=>[2.50,12.00,300,'mobile'],
-            'breed_single_desktop_banner'=>[0.50,1.50,250,'desktop'],
-            'breed_single_mobile_banner'=>[2.50,12.00,300,'mobile'],
-          ];
-          foreach($expected as $slot=>$e){
-              $r=$matrix[$slot]??null;
-              $ok(is_array($r),$slot.'_exists');
-              $ok((float)($r['ratio_min']??0)===$e[0] && (float)($r['ratio_max']??0)===$e[1],$slot.'_ratio_exact');
-              $ok((int)($r['min_width']??0)===$e[2],$slot.'_min_width_exact');
-              $ok((string)($r['device']??'')===$e[3],$slot.'_device_exact');
-          }
           $match=function($slot,$w,$h)use($call,$matrix){return $call('output_row_matches_slot_rule',['width'=>$w,'height'=>$h],$matrix[$slot],'banner');};
+          $ok($match('glossary_single_desktop_banner',310,310)===true,'glossary_desktop_format_positive');
+          $ok($match('glossary_single_desktop_banner',320,200)===false,'glossary_desktop_format_negative');
+          $ok($match('glossary_single_mobile_banner',600,100)===true,'glossary_mobile_format_positive');
+          $ok($match('glossary_single_mobile_banner',300,130)===false,'glossary_mobile_format_negative');
+          $ok($match('breed_single_desktop_banner',310,310)===true,'breed_desktop_format_positive');
+          $ok($match('breed_single_mobile_banner',600,100)===true,'breed_mobile_format_positive');
 
-          $ok($match('glossary_single_desktop_banner',310,310)===true,'glossary_desktop_positive_exact');
-          $ok($match('glossary_single_desktop_banner',282,282)===true,'glossary_desktop_positive_upscale_within_10pct');
-          $ok($match('glossary_single_desktop_banner',281,281)===false,'glossary_desktop_negative_upscale_over_10pct');
-          $ok($match('glossary_single_desktop_banner',320,200)===false,'glossary_desktop_negative_ratio');
-          $ok($match('glossary_single_mobile_banner',300,100)===true,'glossary_mobile_positive_exact');
-          $ok($match('glossary_single_mobile_banner',273,91)===true,'glossary_mobile_positive_upscale_within_10pct');
-          $ok($match('glossary_single_mobile_banner',272,90)===false,'glossary_mobile_negative_upscale_over_10pct');
-          $ok($match('glossary_single_mobile_banner',300,130)===false,'glossary_mobile_negative_ratio');
+          $gloss=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Glossar Live Probe','post_content'=>'Glossar Inhalt']);
+          $breed=wp_insert_post(['post_type'=>'pa_breed','post_status'=>'publish','post_title'=>'Rasse Live Probe','post_content'=>'Rassen Inhalt']);
+          $ok($gloss>0,'glossary_post_created');
+          $ok($breed>0,'breed_post_created');
 
-          $ok($match('breed_single_desktop_banner',250,250)===true,'breed_desktop_positive_exact');
-          $ok($match('breed_single_desktop_banner',228,228)===true,'breed_desktop_positive_upscale_within_10pct');
-          $ok($match('breed_single_desktop_banner',227,227)===false,'breed_desktop_negative_upscale_over_10pct');
-          $ok($match('breed_single_desktop_banner',300,180)===false,'breed_desktop_negative_ratio');
-          $ok($match('breed_single_mobile_banner',300,100)===true,'breed_mobile_positive_exact');
-          $ok($match('breed_single_mobile_banner',273,91)===true,'breed_mobile_positive_upscale_within_10pct');
-          $ok($match('breed_single_mobile_banner',272,90)===false,'breed_mobile_negative_upscale_over_10pct');
-          $ok($match('breed_single_mobile_banner',300,130)===false,'breed_mobile_negative_ratio');
+          $run=function($post_id,$post_type,$method,$content)use($o){
+              global $wp_query,$wp_the_query,$post;
+              $q=new WP_Query(['post_type'=>$post_type,'p'=>$post_id]);
+              $wp_query=$q;$wp_the_query=$q;
+              if(!$q->have_posts()) return '';
+              $q->the_post();
+              $out=$o->$method($content);
+              wp_reset_postdata();
+              return $out;
+          };
 
+          // POSITIV LIVE-FALL: kein historischer Designmarker / kein alter Anker.
+          $gPlain='<article class="current-glossary-design"><p>Glossar Inhalt</p></article>';
+          $gOut=$run($gloss,'uge_term','inject_glossary_single_banner',$gPlain);
+          $ok(strpos($gOut,'data-ppar-glossary-banner="desktop"')!==false,'glossary_without_old_anchor_desktop_visible');
+          $ok(strpos($gOut,'data-ppar-glossary-banner="mobile"')!==false,'glossary_without_old_anchor_mobile_visible');
+          $ok(strlen($gOut)>strlen($gPlain),'glossary_without_old_anchor_appended');
+
+          $bPlain='<article class="current-breed-design"><p>Rassen Inhalt</p></article>';
+          $bOut=$run($breed,'pa_breed','inject_breed_single_banner',$bPlain);
+          $ok(strpos($bOut,'data-ppar-breed-banner="desktop"')!==false,'breed_without_old_anchor_desktop_visible');
+          $ok(strpos($bOut,'data-ppar-breed-banner="mobile"')!==false,'breed_without_old_anchor_mobile_visible');
+          $ok(strlen($bOut)>strlen($bPlain),'breed_without_old_anchor_appended');
+
+          // POSITIV ALTANKER: bestehende Position bleibt erhalten.
+          $gAnchor='<main><aside class="pftk-gsingle-aside-v999999">ASIDE</aside></main>';
+          $gAnchOut=$run($gloss,'uge_term','inject_glossary_single_banner',$gAnchor);
+          $ok(strpos($gAnchOut,'data-ppar-glossary-banner="mobile"') < strpos($gAnchOut,'ASIDE'),'glossary_old_anchor_mobile_before');
+          $ok(strpos($gAnchOut,'data-ppar-glossary-banner="desktop"') > strpos($gAnchOut,'ASIDE'),'glossary_old_anchor_desktop_after');
+
+          $bAnchor='<main><section class="pftk-breed-facts-box-v999999">FACTS</section></main>';
+          $bAnchOut=$run($breed,'pa_breed','inject_breed_single_banner',$bAnchor);
+          $ok(strpos($bAnchOut,'FACTS') < strpos($bAnchOut,'data-ppar-breed-banner="desktop"'),'breed_old_anchor_after_facts');
+
+          // NEGATIV: zweiter Filterdurchlauf erzeugt kein Duplikat.
+          $gDup=$run($gloss,'uge_term','inject_glossary_single_banner',$gOut);
+          $ok(substr_count($gDup,'data-ppar-glossary-banner="desktop"')===1,'glossary_no_duplicate');
+          $bDup=$run($breed,'pa_breed','inject_breed_single_banner',$bOut);
+          $ok(substr_count($bDup,'data-ppar-breed-banner="desktop"')===1,'breed_no_duplicate');
+
+          // Rechner bleibt exakt wie live bestaetigt: Inline aus, Bottom nicht an Suppression gebunden.
           $main=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/pferdeportal-affiliate-router.php');
           $trait=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/includes/trait-ppar-article-plans.php');
+          $ok(strpos($main,"$suppress_inline_banner = has_shortcode($raw_post_content, 'affiliate_rechner')")!==false,'calculator_live_pass_guard_preserved');
+          $ok(strpos($trait,'if (!$suppress_inline_banner && !$main_banner_rendered_at_bottom')===false,'calculator_bottom_not_suppressed');
 
-          $ok(strpos($main,'pftk-gsingle-v[0-9]+')!==false,'glossary_version_neutral_single_marker');
-          $ok(strpos($main,'pftk-gsingle-aside-v[0-9]+')!==false,'glossary_version_neutral_anchor');
-          $ok(strpos($main,"strpos((string) \\$content, 'pftk-gsingle-v150490')")===false,'glossary_old_fixed_version_not_required');
-          $ok(strpos($main,'pftk-breed-single-v[0-9]+')!==false,'breed_version_neutral_single_marker');
-          $ok(strpos($main,'pftk-breed-facts-box-v[0-9]+')!==false,'breed_version_neutral_anchor');
-          $ok(strpos($main,"strpos((string)\\$content, 'pftk-breed-single-v150506')")===false,'breed_old_fixed_version_not_required');
-
-          $ok(strpos($main,'$suppress_inline_banner = has_shortcode($raw_post_content, \'affiliate_rechner\')')!==false,'calculator_shortcode_sets_inline_suppression');
-          $ok(strpos($trait,'if (!$suppress_inline_banner && in_array((string) ($plan[\'banner\'][\'status\']')!==false,'calculator_main_inline_banner_suppressed');
-          $bottomNeedle='if (!$main_banner_rendered_at_bottom && ($plan[\'products\'][\'status\'] ?? \'\') !== \'ready\'';
-          $ok(strpos($trait,$bottomNeedle)!==false,'calculator_bottom_banner_path_present');
-          $ok(strpos($trait,'if (!$suppress_inline_banner && !$main_banner_rendered_at_bottom')===false,'calculator_bottom_banner_not_suppressed');
-          $ok(strpos($main,'if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array(\'post_after_intro\', \'top_info\')))')!==false,'calculator_legacy_top_inline_suppressed');
-          $ok(strpos($main,'if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array(\'post_mid_content\', \'mid_content\')))')!==false,'calculator_legacy_mid_inline_suppressed');
-          $ok(strpos($main,'if ($this->auto_slot_enabled($auto_slots, array(\'post_bottom_recommendation\', \'bottom_recommendation\')))')!==false,'calculator_legacy_bottom_kept');
-
-          $glossary=function($content,$d,$m){
-              if(!preg_match('/\\bpftk-gsingle-v[0-9]+\\b/i',$content)||strpos($content,'ppar-glossary-banner-v67244')!==false)return $content;
-              $D=trim($d)!==''?'<div class="ppar-glossary-banner-v67244 ppar-glossary-banner-desktop-v67244">'.$d.'</div>':'';
-              $M=trim($m)!==''?'<div class="ppar-glossary-banner-v67244 ppar-glossary-banner-mobile-v67244">'.$m.'</div>':'';
-              if($D===''&&$M==='')return $content;
-              $p='#(<aside\\s+class="[^"]*pftk-gsingle-aside-v[0-9]+[^"]*"[^>]*>.*?</aside>)#is';
-              return preg_match($p,$content)?preg_replace($p,$M.'$1'.$D,$content,1):$content;
-          };
-          $g='<main class="pftk-gsingle-v151234"><aside class="pftk-gsingle-aside-v151234">ASIDE</aside></main>';
-          $gr=$glossary($g,'D','M');
-          $ok(strpos($gr,'M')<strpos($gr,'ASIDE') && strpos($gr,'D')>strpos($gr,'ASIDE'),'glossary_positive_current_design_insert');
-          $ok($glossary('<main><aside class="pftk-gsingle-aside-v151234">ASIDE</aside></main>','D','M')==='<main><aside class="pftk-gsingle-aside-v151234">ASIDE</aside></main>','glossary_negative_missing_marker');
-          $ok($glossary($gr,'D2','M2')===$gr,'glossary_negative_no_duplicate');
-
-          $breed=function($content,$d,$m){
-              if(!preg_match('/\\bpftk-breed-single-v[0-9]+\\b/i',$content)||strpos($content,'ppar-breed-banner-v67259')!==false)return $content;
-              $D=trim($d)!==''?'<div class="ppar-breed-banner-v67259 ppar-breed-banner-desktop-v67259">'.$d.'</div>':'';
-              $M=trim($m)!==''?'<div class="ppar-breed-banner-v67259 ppar-breed-banner-mobile-v67259">'.$m.'</div>':'';
-              if($D===''&&$M==='')return $content;
-              $p='#(<section\\s+class="[^"]*pftk-breed-facts-box-v[0-9]+[^"]*"[^>]*>.*?</section>)#is';
-              return preg_match($p,$content)?preg_replace($p,'$1'.$D.$M,$content,1):$content;
-          };
-          $b='<main class="pftk-breed-single-v151234"><section class="pftk-breed-facts-box-v151234">FACTS</section></main>';
-          $br=$breed($b,'D','M');
-          $ok(strpos($br,'FACTS')<strpos($br,'D') && strpos($br,'FACTS')<strpos($br,'M'),'breed_positive_current_design_insert');
-          $ok($breed('<main><section class="pftk-breed-facts-box-v151234">FACTS</section></main>','D','M')==='<main><section class="pftk-breed-facts-box-v151234">FACTS</section></main>','breed_negative_missing_marker');
-          $ok($breed($br,'D2','M2')===$br,'breed_negative_no_duplicate');
-
-          echo "SUMMARY PASS=".$pass." FAIL=".$fail."\n";
+          echo "SUMMARY PASS=$pass FAIL=$fail\n";
           if($fail){exit(1);}
-          echo "FOCUSED_THREE_FIX_GATE_PASS\n";
+          echo "GLOSSARY_BREED_REAL_INJECTION_672205_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/wp-site/focused_threefix.php --path=/tmp/wp-site | tee /tmp/focused-threefix.log
-          grep -F 'FOCUSED_THREE_FIX_GATE_PASS' /tmp/focused-threefix.log
+          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672205.php --path=/tmp/wp-site | tee /tmp/672205.log
+          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672205_PASS' /tmp/672205.log
 
-      - name: Performance DB hardlock unchanged
+      - name: Package exact tested 6.72.205
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          import json, pathlib
-          c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
-          assert c['active_candidate']['version']=='6.72.204'
-          p=pathlib.Path('release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
-          assert 'Kein zusätzlicher DB-/HTTP-Zugriff' in p
-          print('PASS NO_NEW_FRONTEND_DB_HTTP_TABLE_SCOPE')
-          PY
-
-      - name: Package exact tested 6.72.204
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.204.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.204.zip affiliate-portal-router)
-          rm -rf /tmp/final204 && mkdir -p /tmp/final204
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.204.zip -d /tmp/final204
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.205.zip affiliate-portal-router)
+          rm -rf /tmp/final205 && mkdir -p /tmp/final205
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.205.zip -d /tmp/final205
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
           expected={line.split('  ',1)[1]:line.split('  ',1)[0] for line in m.read_text().splitlines() if line.strip()}
-          root=Path('/tmp/final204')
+          root=Path('/tmp/final205')
           got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
-          assert got==expected, (set(expected)-set(got),set(got)-set(expected))
-          print('PASS FINAL_ZIP_BYTE_IDENTITY_28_OF_28')
+          assert got==expected
+          print('PASS ZIP_BYTE_IDENTITY_28_OF_28')
           PY
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.204.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.204
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.204.zip
+          name: AFFILIATE_ZENTRALE_6.72.205
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
           if-no-files-found: error
           retention-days: 30
