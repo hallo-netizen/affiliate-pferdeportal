@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
-STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / V1.12.6 REALER READBACK PASS / BATCH 001 FACHLICH GESCHLOSSEN / 16 VON 841 BEWERTET / BATCH 002 VORBEREITUNG NÄCHSTER SCHRITT
+STAND: 2026-10-08
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / BATCH 001 FINAL 16 VON 841 / BATCH 002 DETERMINISTISCH VORBEREITET / 1 OVERVIEW OFFEN
 
 ## Datenartefakt
 
@@ -98,11 +98,32 @@ Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 
 Keine weitere DataForSEO-Tiefenrecherche.
 
-## Nächster Schritt
-
-Batch 002 deterministisch aus dem 841er Master ziehen und mit derselben KISS-Logik vorbereiten.
+## Batch 002 – vorbereitet
 
 Auswahlregel:
 erste 16 noch nicht durch einen finalen Batch bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
+
+Ausgewählt:
+Amateurfunk, CB-Funk, Software Defined Radio, Satellitenfunk, Satellitenempfang, Wettersonden-Tracking, Funkpeilung, Morsefunk, Elektronikbasteln, Mikrocontroller-Projekte, Arduino, Raspberry-Pi-Projekte, Robotik, Heimrobotik, Roboterbau, BattleBots-Modellbau.
+
+Plan:
+`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
+
+Library-Artefakte:
+- `/hobby rausch/HOBBY_MASTER_V2_BATCH_002_ASSESSMENT_INPUT_20261008.json`
+- `/hobby rausch/HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_20261008.json`
+
+Lokaler V1.12.6-Preflight:
+- 16 Kandidaten;
+- 51 Leafs;
+- 304 Artikelintents;
+- 304 Keywords;
+- exakt 1 geplanter Paid Call;
+- 0 Strukturwrites.
+
+## Nächster Schritt
+
+Realen Batch-002-Overview genau einmal ausführen.
+Danach Batch 002 fachlich finalisieren.
 
 Noch kein Zielbaum-Delta und kein WordPress-Kategoriesync.
