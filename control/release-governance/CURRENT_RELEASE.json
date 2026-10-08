@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 295,
+  "generation": 296,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RUN_FORMAL_RELEASE_CHECK_6_72_210",
-    "current_focus_reason": "Exact tested installer from run 37787914399 / artifact 11554788092 is repository-bound by commit 2ab296790ab39d6c94180faf6b37a6b803ce37f0. Run immutable formal release-check; no source changes."
+    "current_focus": "RELEASE_COMPLETE_6_72_210",
+    "current_focus_reason": "Formal release-check PASS on run 37788785260. Exact tested installer remains repository-bound; no plugin source change after the 59/59 gate."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,13 +887,13 @@
     }
   },
   "execution_state": {
-    "state": "RELEASED_6_72_210_FORMAL_CHECK_PENDING",
+    "state": "RELEASED_6_72_210_COMPLETE",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Run exactly: python3 control/release-governance/release_guard.py release-check. Do not change plugin source.",
-    "completion_condition": "FORMAL_RELEASE_CHECK_PASS_6_72_210",
-    "after_completion_action": "Record PASS only; no plugin source changes.",
+    "bound_user_scope_action": "Release complete. Do not change plugin source unless a new explicit user scope is opened.",
+    "completion_condition": "SATISFIED_FORMAL_RELEASE_CHECK_PASS_RUN_37788785260",
+    "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 138,
+    "sequence": 139,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672210_textlink_partner_html_20261008.md",
@@ -1057,7 +1057,7 @@
       "repository_bind_commit": "2ab296790ab39d6c94180faf6b37a6b803ce37f0",
       "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
     },
-    "formal_release_check_run": 37783979652,
+    "formal_release_check_run": 37788785260,
     "formal_release_check_result": "PASS"
   },
   "branch_policy": {
@@ -2380,11 +2380,11 @@
     ]
   },
   "handoff": {
-    "status": "RELEASED_FORMAL_CHECK_PENDING",
+    "status": "RELEASED",
     "entrypoint": "release/affiliate-zentrale/AGENTS.md",
     "current_authority": "control/release-governance/CURRENT_RELEASE.json",
-    "freshness_reference": "branch affiliate-release-current + generation 295 + manifest 8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf + final artifact commit 2ab296790ab39d6c94180faf6b37a6b803ce37f0",
-    "next_action": "RUN_FORMAL_RELEASE_CHECK",
+    "freshness_reference": "branch affiliate-release-current + generation 296 + formal release-check PASS run 37788785260 + manifest 8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf + final artifact commit 2ab296790ab39d6c94180faf6b37a6b803ce37f0",
+    "next_action": "NONE",
     "do_not_touch": [
       "unrelated import/ranking/banner/product/provider paths",
       "automation/reconcile/health process",
@@ -2772,8 +2772,17 @@
     ]
   },
   "formal_release_check_672210": {
-    "status": "PENDING",
-    "source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf"
+    "status": "PASS",
+    "run": 37788785260,
+    "head": "48d65614b344ef4e74158b3e3cf57d9521bc9e4e",
+    "result": "AFFILIATE_RELEASE_FINAL_GATE_PASS",
+    "candidate_gate_run": 37787914399,
+    "candidate_gate_result": "PASS_59_OF_59",
+    "source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.210.zip",
+    "final_artifact_sha256": "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1",
+    "final_artifact_bytes": 811373,
+    "release_complete": true
   },
   "final_artifact_binding_672210": {
     "status": "PASS_EXACT_TESTED_ARTIFACT_REPOSITORY_BOUND",
