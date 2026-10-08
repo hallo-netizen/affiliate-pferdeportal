@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 287,
+  "generation": 288,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.208",
-    "status": "WORKING_6_72_208_KISS_CLEANUP_GATE_PASS_INSTALLER_READY",
+    "status": "WORKING_6_72_208_KISS_CLEANUP_PASS_FINALIZE_ONLY",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "KISS_CLEANUP_COMPLETE_NO_FUNCTION_CHANGE",
-    "current_focus_reason": "6.72.208 cleanup gate passed 37/37 on fresh WordPress+MariaDB. Functional import/ranking/output/calculator/provider paths were not changed."
+    "current_focus": "FINALIZE_6_72_208_ONLY",
+    "current_focus_reason": "User live-confirmed calculator, glossary and breed fixes. 6.72.208 cleanup gate PASS 37/37; cleanup contract is now bound. No more functional or cleanup changes. Only final release binding/release-check remains."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,15 +887,15 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_208_KISS_CLEANUP_GATE_PASS_INSTALLER_READY",
+    "state": "WORKING_6_72_208_KISS_CLEANUP_PASS_FINALIZE_ONLY",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "No more functional changes. Exact tested 6.72.208 cleanup installer is ready.",
-    "completion_condition": "FINAL_RELEASE_BINDING_ONLY",
+    "bound_user_scope_action": "Do not change functionality or perform further cleanup. Bind exact tested AFFILIATE_ZENTRALE_6.72.208.zip to the final release artifact path and run release-check.",
+    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_RELEASE_CHECK_PASS",
     "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 129,
+    "sequence": 130,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672208_kiss_cleanup_db_performance_20261008.md",
     "evidence_sha256": "ce1dd62de0dbfae7c5d1d45592044906656da4aadf2eaa826f2b3b11d3c14032",
     "current_source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
@@ -1041,7 +1041,7 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "RUN_37770855906 PASS_37_OF_37. REUSE 6.72.207 FUNCTIONAL EVIDENCE; 6.72.208 CHANGES ADMIN CLEANUP ONLY.",
+    "pass_reuse_policy": "USER_LIVE_PASS_CALCULATOR_GLOSSARY_BREED + RUN_37770855906 CLEANUP_PASS_37_OF_37. SOURCE MANIFEST 988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed UNCHANGED. DO NOT RERUN FUNCTIONAL/CLEANUP GATES.",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
@@ -2654,5 +2654,18 @@
       "DB_HOUSEKEEPING_POSNEG_PASS",
       "FRONTEND_RUNTIME_UNCHANGED"
     ]
+  },
+  "handoff": {
+    "status": "READY",
+    "entrypoint": "release/affiliate-zentrale/AGENTS.md",
+    "current_authority": "control/release-governance/CURRENT_RELEASE.json",
+    "freshness_reference": "branch affiliate-release-current + run 37770855906 + manifest 988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
+    "next_action": "FINALIZE_RELEASE",
+    "do_not_touch": [
+      "functional import/ranking/output/calculator/provider paths",
+      "glossary/breed live-passed rules",
+      "automation/reconcile/health process"
+    ],
+    "plugin_office_artifact_sync": "BLOCKED_NO_GITHUB_PLUGIN_OFFICE_PATH_AND_LIBRARY_EXPLICITLY_DISALLOWED"
   }
 }
