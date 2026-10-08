@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 FEST / FACH-SOLLPROFIL PASS / 359 CURRENT-CORE VOLLSTÄNDIG REVALIDIERT / 279 HOBBY_HUB / 1.292 CONTENT-KATEGORIEN / TECHNISCHE AUFLÖSUNG PENDING
+STATUS: REGELN 2.6/1.6 FEST / FACH-SOLLPROFIL FROZEN PASS / 359/359 REVALIDIERT / 279 HOBBY_HUB / 1.292 CONTENT-KATEGORIEN / KONZEPT FACHLICH ABGESCHLOSSEN
 
 ## Rolle
 
@@ -339,9 +339,15 @@ Autoritativ:
 
 ## Erster offener Blocker
 
-`HD001_TECHNICAL_OBJECT_PLAN_PENDING`
+KEIN OFFENER KONZEPT-BLOCKER.
+
+Die technische/operative Fortsetzung gehört ausschließlich zur zuständigen Fach-Current:
+`../SEO_KATEGORIEN/CURRENT_STATE.md`
 
 ## EXAKT EINE NEXT ACTION
 
-Fach-Sollprofil technisch gegen den bestehenden V1.14.1-Bestand auflösen und den vollständigen Objektplan prüfen.
-Keine Plugin-/WordPress-Änderung vorher.
+Für jede weitere Kategorie-/WordPress-Arbeit zu
+`../SEO_KATEGORIEN/CURRENT_STATE.md`
+wechseln, dort Frischecheck durchführen und ausschließlich deren NEXT ACTION ausführen.
+
+Keine neue Konzept- oder Kategorieregel erfinden.
