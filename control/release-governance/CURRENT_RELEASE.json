@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 272,
+  "generation": 273,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "d0ef777d0a27dd6dd4b3eff19f5c27222b58bb1bf2e573771e8c80c78406d799",
+    "manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.203",
-    "status": "WORKING_6_72_203_LIVE_CENTRAL_CALCULATOR_RECORD_INVALID_PROVEN",
+    "status": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_GATES_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "d0ef777d0a27dd6dd4b3eff19f5c27222b58bb1bf2e573771e8c80c78406d799",
+    "current_source_manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "6.72.203 source remains unchanged. Focused WordPress/MariaDB proves the calculator shortcode and full the_content render path pass. Live public readback proves 16 published financing posts contain exact [affiliate_rechner id=\"kredit\"] while final live HTML contains no calculator. Live serves 6.72.202; its tariff-tools trait, shortcode registration and content filter are identical to 6.72.203. First proven live failure is the central tariff-tool record validity for kredit; exact substate missing/inactive/empty HTML requires authenticated live option readback.",
+    "candidate_reference_scope": "KISS banner rootfix: automatic and manual banner topic assignment now write the same Creative-Library topic_targets map. For portal_banner runtime, that stored mapped target is the only semantic target source. Legacy general target state is not accepted as automatic banner eligibility. Backend exposes direct Thema / Portalziel assignment without requiring a justification. No new table, frontend HTTP, frontend DB query, ranking layer or provider architecture.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_BASE_COMPARISON_CALCULATOR_FAILURE_OPEN",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_OPEN",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "COMPARISON_CALCULATOR_LIVE_RECORD_REPAIR",
-    "current_focus_reason": "Do not change source. Read only the live central tariff-tool record kredit, correct the single invalid state (missing, inactive, or empty trusted HTML), then rerender one affected article."
+    "current_focus": "KISS_BANNER_SINGLE_TARGET_TRUTH",
+    "current_focus_reason": "Every banner must have one stored topic/portal target truth. Automatic and manual assignment share topic_targets; runtime reads only that stored mapping."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -68,9 +68,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "COMPARISON_CALCULATOR_ARTICLE_RENDERING_KISS",
+    "current_focus": "KISS_BANNER_SINGLE_TARGET_TRUTH",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "current_focus_reason": "A valid comparison-calculator placeholder with the correct stable ID must render the centrally stored active calculator inside a classic article. Do not substitute banner/category work for this issue; prove the first failing render stage only.",
+    "current_focus_reason": "Complete the affiliate banner system on the existing rules: one stored topic/portal target truth per banner mapping, directly manually assignable, no parallel semantic target source and no fachfremder fallback.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_203_KISS_BANNER_SOURCE_BOUND_CALCULATOR_RENDERING_SEPARATE_BLOCKER",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_203_LIVE_CENTRAL_CALCULATOR_RECORD_INVALID_PROVEN",
-    "authorized_next_action": "READ_AND_REPAIR_LIVE_TARIFF_TOOL_RECORD_ONLY",
-    "bound_user_scope_action": "Authenticate to the live WordPress state and read ppar_tariff_tools_v1['kredit']. Change only the invalid property required by the existing contract: record must exist, be active, and contain the intended trusted non-empty widget HTML. Then rerender one of the 16 affected financing posts and require the calculator in final HTML. No banner, ranking, category or source changes.",
-    "completion_condition": "LIVE_KREDIT_RECORD_VALID_AND_ARTICLE_RENDERS_CALCULATOR",
-    "after_completion_action": "If live readback passes after the data repair, close AFF-ERR-057 and only then resume the normal release gates. If the live record is already valid, stop and prove the next failing live stage before any code change.",
+    "state": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_GATES_OPEN",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Verify the exact current 6.72.203 source only: automatic banner mapping and manual Thema/Portalziel assignment must both persist into topic_targets; portal_banner runtime must use only that mapped record; unmapped/general/foreign-topic banners must fail closed; matching mapped banners must render through existing format/slot/distribution paths. Reuse existing tests where hash-valid and add no new architecture.",
+    "completion_condition": "KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_PASS",
+    "after_completion_action": "If the bound gates pass, continue the remaining existing affiliate release gates from Current. If one gate fails, fix only the first concrete failure without adding a second target/ranking architecture.",
     "no_optional_detours": true,
-    "sequence": 116,
+    "sequence": 117,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-057",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_err_057_calculator_live_root_cause_20261007.md",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-058",
+    "evidence_ref": null,
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "d0ef777d0a27dd6dd4b3eff19f5c27222b58bb1bf2e573771e8c80c78406d799",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_BASE_COMPARISON_CALCULATOR_FAILURE_OPEN",
+    "current_source_manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_OPEN",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -1014,7 +1014,10 @@
       "comparison_calculator_current_source_wordpress_mariadb_672203": "PASS_RUN_37677771944_ALL_4_STAGES",
       "comparison_calculator_live_articles": "16_PUBLISHED_EXACT_KREDIT_SHORTCODE_16_WRONG_CONTROL_0_FINAL_RENDER_EMPTY",
       "comparison_calculator_live_plugin_version": "6.72.202_PUBLIC_ASSET_READBACK",
-      "comparison_calculator_renderer_672202_vs_672203": "TARIFF_TRAIT_BYTE_IDENTICAL_REGISTER_SHORTCODES_IDENTICAL_FILTER_THE_CONTENT_IDENTICAL"
+      "comparison_calculator_renderer_672202_vs_672203": "TARIFF_TRAIT_BYTE_IDENTICAL_REGISTER_SHORTCODES_IDENTICAL_FILTER_THE_CONTENT_IDENTICAL",
+      "banner_single_target_truth_672203": "SOURCE_COMMITTED_MANUAL_AND_AUTOMATIC_ASSIGNMENT_SHARE_TOPIC_TARGETS_RUNTIME_PORTAL_BANNER_READS_STORED_MAPPED_ONLY",
+      "banner_manual_topic_assignment_672203": "BACKEND_DIRECT_THEMA_PORTALZIEL_ASSIGNMENT_WRITES_CANONICAL_TOPIC_TARGETS_NO_REASON_REQUIRED",
+      "banner_general_fallback_672203": "LEGACY_GENERAL_STATE_NOT_ACCEPTED_AS_AUTOMATIC_RUNTIME_TARGET_TRUTH"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
@@ -1402,7 +1405,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "COMPARISON_CALCULATOR_LIVE_RECORD_REPAIR",
+    "current_milestone": "KISS_BANNER_SINGLE_TARGET_TRUTH_RELEASE_PROOF",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
