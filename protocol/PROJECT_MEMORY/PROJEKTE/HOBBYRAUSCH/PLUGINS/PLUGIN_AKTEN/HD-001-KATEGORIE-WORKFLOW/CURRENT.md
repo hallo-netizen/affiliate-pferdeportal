@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 MATERIALKUNST-FIX LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 WRITES / ALTER ROLLBACK TERMINAL / FINAL-SYNC FREIGEGEBEN
+STATUS: V1.13.1 FINAL-SYNC READBACK FEHLGESCHLAGEN / ROLLBACK_PENDING 231 / ROOT CAUSE = CHILD-PAGE ADOPT-SLUG LOOKUP / V1.13.2 FIX LOKAL PASS / ZIELPROFIL UNVERÄNDERT / KEIN NEUER SYNC VOR ROLLED_BACK
 
 ## Plugin
 
@@ -293,15 +293,43 @@ PASS:
 - alter V1.12-Sync = ROLLED_BACK;
 - kein aktiver Final-Snapshot, da Final-Sync noch offen.
 
+## V1.13.1 FINAL-SYNC – FEHLER UND FIX
+
+Fehler:
+`Target-Tree-Readback fehlgeschlagen: core:fertigen:buch-papier [slug]`
+
+Dry-Run:
+355 CREATE + 75 ADOPT.
+
+Tatsächlicher Sync vor Readback-Stopp:
+415 created + 15 adopted.
+
+Damit wurden exakt 60 geplante ADOPT-Seiten neu angelegt.
+
+Root Cause:
+`find_by_slug()` nutzte für Seiten `get_page_by_path($slug)`; bei hierarchischen Unterseiten reicht der Blatt-Slug dort nicht.
+
+V1.13.2:
+- bounded `get_posts(... post_name__in => [$slug])`;
+- >1 Treffer bleibt fail-closed;
+- Zielprofil unverändert;
+- Materialkunst bleibt entfernt.
+
+Artefakt:
+`HD001_V1.13.2_ADOPT_CHILD_SLUG_FIX_HARDPASS.zip`
+SHA-256 `d9cb80d8e5635fd94ac390dc0be75757d1a7a964b0ce0cb1cf893934eed35cc7`
+
+Tests:
+33/33 PHP-Lint PASS + gezielter Child-Slug-/Ambiguity-/Missing-Test PASS.
+
 ## ERSTER OFFENER BLOCKER
 
-KEIN PRE-SYNC-BLOCKER MEHR.
+`HD001_V1_13_1_FAILED_SYNC_ROLLBACK_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Genau einen Final-Sync mit dem geprüften Zielplan ausführen.
-
-Danach sofort Struktur-/Frontend-Readback exportieren.
+Den vorhandenen Rollback zuerst bis `ROLLED_BACK` abschließen lassen.
+Danach V1.13.2 installieren und einen frischen finalen Dry-Run erzeugen.
 
 ## Release-/Artefaktgrenze
 
