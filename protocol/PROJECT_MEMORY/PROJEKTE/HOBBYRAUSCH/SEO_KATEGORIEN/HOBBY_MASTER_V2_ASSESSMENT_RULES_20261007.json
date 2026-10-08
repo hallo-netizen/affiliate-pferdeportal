@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.4",
+  "version": "1.5",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_KISS_SUBJECT_CAPACITY_DFS_CROSSCHECK",
+  "status": "ACTIVE_V2_RULESET_PRACTICAL_BASELINE_DELTA_KISS",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -559,14 +559,25 @@
     "depth_research_rule": "Disabled in the normal V2 assessment path. Use keyword_ideas/keyword_suggestions only for a later explicit targeted review when a specific unresolved semantic question actually requires it."
   },
   "assessment_sequence_v2": [
-    "A_SCOPE",
-    "B_IDENTITY",
-    "C_PROPOSE_AND_COUNT_DISTINCT_ARTICLE_INTENTS",
-    "C1_DATAFORSEO_OVERVIEW_CROSSCHECK_AND_DEDUP",
-    "C2_RECOUNT_EACH_LOWEST_LEVEL_CATEGORY",
-    "C3_AGGREGATION_REVIEW_FOR_THIN_VALID_TOPICS",
-    "D_PORTAL_ROLE",
-    "E_ECONOMICS",
-    "F_OWNERSHIP"
-  ]
+    "A_GLOBAL_IDENTITY_AND_ALIAS_AUDIT",
+    "B_BASELINE_CORE_OVERRIDE_AUDIT",
+    "C_CALIBRATED_PROMOTION_DEMOTION_DELTA",
+    "D_SINGLE_FINAL_TARGET_TREE_DELTA",
+    "E_ONE_CONTROLLED_WORDPRESS_SYNC",
+    "F_FRONTEND_READBACK_AND_PLUGIN_REMOVAL"
+  ],
+  "practical_finalization_contract": {
+    "master_is_inventory_not_taxonomy": true,
+    "baseline_target_profile": {
+      "structural_nodes": 95,
+      "explicit_core_overrides": 329,
+      "unknown_inventory_policy": "retain_editorial"
+    },
+    "core_hobby_rule": "A CORE hobby node may contain articles directly. Child/leaf categories are not a prerequisite for launch.",
+    "leaf_creation_rule": "Create a child category only when real content growth later forms a durable cluster of roughly 5–12 distinct articles and the split improves navigation/ownership.",
+    "unapproved_master_identity_rule": "Preserve the canonical identity in Finder/editorial inventory; do not create a CORE page by default.",
+    "dataforseo_rule": "Use DataForSEO only for real promotion/demotion/ownership ambiguity. No blanket per-hobby assessment of the remaining master.",
+    "batch_rule": "The 16-item Batch 001–003 sequence was calibration only. Batch 004+ manual loop is cancelled.",
+    "sync_rule": "Build one final baseline delta, dry-run against live WordPress inventory, then perform one controlled sync and frontend readback."
+  }
 }
