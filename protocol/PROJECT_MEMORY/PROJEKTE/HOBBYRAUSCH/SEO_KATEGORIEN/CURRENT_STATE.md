@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.14.1 LIVE-DRY-RUN PASS / UI-GATE-FEHLER IM FINALER-ZIELBAUM-SCREEN IDENTIFIZIERT / V1.14.2 UI-GATE-FIX LOKAL PASS / LIVE-SYNC NOCH NICHT AUSGEFÜHRT
+STATUS: REGELKORREKTUR AKTIV / ZIELVERTRAG 2.6 + ASSESSMENT 1.6 / ALLE KANONISCHEN EBENEN SICHTBAR / AUSGEWOGENER ZIELBAUM NEU ZU BAUEN / V1.14.2 NICHT MEHR SYNC-FREIGEGEBEN
 
 ## Ziel
 
@@ -983,16 +983,43 @@ Artefakt:
 SHA-256:
 `b5bf0f6201a8158dc968530009d22195e8cc4a27b5421d84010840dafd282dbe`
 
+## REGELKORREKTUR 2026-10-08
+
+Autoritativ:
+- Zielvertrag 2.6;
+- Assessment Rules 1.6;
+- 3-Säulen-Konzept mit Sichtbarkeits-/Hub-Regel;
+- Audit: `HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json`.
+
+Verbindlich:
+- jede vorhandene kanonische Ebene ist im Drill-down sichtbar;
+- Welt → Zwischenbereich → Hobby → Content-Kategorie → Beiträge;
+- globale Headernavigation darf klein bleiben, darf aber keine vorhandene Kindebene auf den Landingpages verstecken;
+- bis etwa 10–11 fachlich klare Zwischenbereiche pro Welt sind zulässig;
+- keine künstliche Verdichtung nur für eine dünne Navigation;
+- keine leeren Symmetrieäste;
+- HOBBY_HUB benötigt 3–6 tragfähige sichtbare Content-Kategorien;
+- jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen;
+- reguläre HOBBY_HUB-Beiträge nicht direkt unter dem Hobby.
+
+Aktueller V1.14.1/1.14.2-Zielbaum erfüllt diese neue verbindliche Regel NICHT vollständig:
+- aktive Zwischenbereiche: 6 / 9 / 9 / 5 / 9 / 6 / 8 / 8;
+- nur Buchbinden besitzt derzeit die Content-Kategorieebene;
+- deshalb ist V1.14.2 nicht mehr als Sync-Ziel freigegeben.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_2_UI_GATE_FIX_INSTALL_PENDING`
+`HD001_BALANCED_TARGET_TREE_REBUILD_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.14.2 installieren, Finaler Zielbaum öffnen und den kostenlosen Delta-Dry-Run einmal neu ausführen.
+Den vollständigen Zielbaum fachlich gegen Regeln 2.6/1.6 neu aufbauen:
+1. acht Welten und Zwischenbereiche ausgewogen aus dem realen CORE-Bestand prüfen;
+2. keine vorhandene Ebene verstecken;
+3. für jeden HOBBY_HUB die tragfähige Content-Kategorieebene bestimmen;
+4. erst danach ein neues Sollprofil erzeugen.
 
-Erwartung:
-32 CREATE / 425 UPDATE / 5 ARCHIVE.
-Danach muss Abschnitt 2 mit `Geprüften Zielbaum einmal synchronisieren` sichtbar sein.
-
-Kein Sync, falls die Zahlen abweichen oder Abschnitt 2 nicht erscheint.
+Bis dahin:
+- V1.14.2 NICHT synchronisieren;
+- kein weiterer Plugin-Fix;
+- kein WordPress-Write.
