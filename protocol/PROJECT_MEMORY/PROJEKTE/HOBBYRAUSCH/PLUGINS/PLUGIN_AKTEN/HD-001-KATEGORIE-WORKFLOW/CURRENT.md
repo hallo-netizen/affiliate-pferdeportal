@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.14.1 LIVE-DRY-RUN PASS / V1.14.2 STALE-COMPLETE UI-GATE FIX LOKAL PASS / INSTALL PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.3 RULE16 VISIBLE FULL LOCAL HARD PASS / 1723 TARGETS / IDEMPOTENCE 0 WRITES / LIVE-DRY-RUN PENDING
 
 ## Plugin
 
@@ -544,11 +544,47 @@ Artefakt:
 SHA-256:
 `b5bf0f6201a8158dc968530009d22195e8cc4a27b5421d84010840dafd282dbe`
 
+## V1.14.3 – RULE16 VISIBLE FINAL HARD PASS
+
+V1.14.3 enthält:
+- V1.14.2 Stale-COMPLETE UI-Gate-Fix;
+- eingefrorenes Rule-1.6-Zielprofil;
+- 28 legacy_ids für identitätserhaltende Hobbyseiten-Migrationen;
+- Dry-Run-Fix gegen doppelt gezählte Legacy-Archive;
+- Idempotenz-Fix: bereits archivierte Target-Objekte werden im Folgelauf nicht erneut beschrieben.
+
+Finale lokale Prüfung:
+- PHP 33/33 PASS;
+- Zielprofil valid;
+- 1.723 physische Zielobjekte;
+- Migration gegen V1.14.1: 1.293 CREATE + 430 UPDATE + 27 ARCHIVE;
+- Sync COMPLETE / Readback 1.723;
+- zweiter Dry-Run 1.723 UNCHANGED;
+- zweiter Sync 1.723 UNCHANGED / 0 ARCHIVE / 0 Writes;
+- Frontend PASS;
+- Negativsuite PASS/fail-closed.
+
+Artefakt:
+`HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip`
+
+SHA-256:
+`deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`
+
+Profil:
+`profiles/hobby-depot-v1.json`
+
+Profil SHA-256:
+`6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6`
+
+Evidence:
+`SEO_KATEGORIEN/HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_2_UI_GATE_FIX_INSTALL_PENDING`
+`HD001_V1_14_3_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.14.2 installieren → Finaler Zielbaum → Delta-Dry-Run einmal neu ausführen.
-Nur bei exakt 32 CREATE / 425 UPDATE / 5 ARCHIVE und sichtbarem Abschnitt 2 weiter zum einmaligen Sync.
+V1.14.3 installieren und genau einen read-only Live-Dry-Run im Finalen Zielbaum ausführen.
+JSON-Readback prüfen.
+Kein Sync vorher.
