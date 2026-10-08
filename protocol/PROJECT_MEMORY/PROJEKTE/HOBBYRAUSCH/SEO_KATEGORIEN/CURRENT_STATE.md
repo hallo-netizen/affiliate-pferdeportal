@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / BATCH 001–003 NUR KALIBRIERUNG / 48 IDENTITÄTEN DETAILGEPRÜFT / 16ER-SCHLEIFE BEENDET / PRAKTISCHES BASELINE-DELTA PASS / FINALER ZIELBAUM-DELTA ALS NÄCHSTER SCHRITT / KEIN LIVE-WRITE
+STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / 16ER-SCHLEIFE BEENDET / FINALER V1.13.1-ZIELBAUM LOKAL HARD PASS / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 PHYSISCHE ZIELOBJEKTE / EIN REALER LIVE-DRYRUN OFFEN / KEIN LIVE-WRITE
 
 ## Ziel
 
@@ -316,57 +316,105 @@ Fachlich final:
 
 Damit wurden insgesamt 48 Master-Identitäten detailliert als Kalibrierung geprüft.
 
-## PRAKTISCHE KORREKTUR
+## PRAKTISCHE FINALISIERUNG – V1.13.1
 
-Die bisherige 16er-Batchlogik wird NICHT fortgesetzt.
+Die 16er-Batchlogik wird nicht fortgesetzt.
 
-Entscheidender Befund:
-Der 841er Master ist Inventar, nicht 841 Pflichtkategorien.
-
-Die vorhandene Zielbasis besitzt bereits:
-- 95 feste Strukturknoten;
-- 329 explizite CORE-Hobby-Overrides;
-- für alle übrigen Einträge die Regel `retain_editorial`.
-
-Daher reicht für die Fertigstellung:
-- bestehende Struktur als Baseline;
-- kalibrierte Promotions/Demotions als Delta;
-- unbekannte/nicht freigegebene Hobbys bleiben Finder/Editorial;
-- Hobbyseiten dürfen Beiträge direkt tragen;
-- Unterkategorien werden erst später bei echtem Contentwachstum erzeugt.
-
-Globalaudit:
-- 841 Identitäten vollständig aufgelöst;
+Der 841er Master bleibt vollständiges Inventar.
+Der finale CORE ist selektiv:
 - 340 CORE-Identitäten;
-- 501 Editorial/Finder-Fallback;
-- 432 aufgelöste Zielbaumknoten;
-- 400 physische CORE-Seiten;
-- 0 unmatched;
-- 0 mehrdeutige Overrides;
-- 0 unbekannte Parents;
-- 0 doppelte Slugs;
-- 0 doppelte Intent-Owner.
+- 501 Finder/Editorial-Identitäten.
 
-Praktisches Zielprofil:
-`/hobby rausch/HD001_V1.13_PRACTICAL_TARGET_PROFILE_20261008.json`
+### Harte Strukturkorrektur
+
+Der erste praktische Profilentwurf war noch falsch, weil die acht Welten weiterhin unter `Hobbywelten` hingen.
+
+V1.13.1 korrigiert das endgültig:
+- die 8 Hauptwelten sind physisch CORE-Ebene 1 / Root;
+- `Hobbywelten` ist nur View/Übersicht;
+- 8 Relation-Knoten verlinken von Hobbywelten auf die 8 Welten;
+- `Hobbywelten` ist kein Parent.
+
+Finales Zielprofil:
+`/hobby rausch/HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
+
+Profil SHA-256:
+`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
+
+Final aufgelöst:
+- 103 Basis-Logikknoten;
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- 404 Pages;
+- 4 WordPress-Kategorien;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 Relations;
+- 841 Master-Identitäten vollständig aufgelöst;
+- 0 Strukturkonflikte im lokalen Endtest.
+
+### HD-001 V1.13.1
+
+Artefakt:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
+
 SHA-256:
-`320165bde7e45b0adbb9b796f717bb5dcb2a5d5ae54db2fb9dcd5bb5011ff88d`
+`508c3d520fc765223d9f643d06ca75ef07e8702612d5fecab416d771bfab5dc6`
 
-Audit:
-`/hobby rausch/HOBBY_MASTER_V2_PRACTICAL_BASELINE_DELTA_AUDIT_20261008.json`
+Prüfbericht:
+`HD001_V1.13.1_FINAL_LOCAL_POSNEG_REPORT.txt`
+
+Prüfbericht SHA-256:
+`b24bf83bc28a9e768ff89e8598338a22208e0256c2ed485847cf553e525ab345`
+
+Sicherheitsmodus:
+- MANUAL ONLY;
+- kein Auto-Sync bei Installation/Update/Admin-Aufruf;
+- finaler Dry-Run = 0 DataForSEO-Aufrufe;
+- finaler Dry-Run = 0 WordPress-Strukturwrites;
+- Apply nur nach exakt demselben gespeicherten Live-Dry-Run-Fingerprint;
+- veränderter Live-Stand blockiert Apply;
+- automatisches Retirement nur für echte `_apkw_target_node_id`-Bindings;
+- alte Artikel-/Kategoriestrukturen ohne Target-Binding bleiben erhalten;
+- Foreign-Slug-Kollision blockiert fail-closed;
+- Sync läuft bounded per AJAX mit Cron-Fallback.
+
+Lokale Abnahme:
+- Regression 270/270 PASS;
+- Final-Target-Suite 24/24 PASS;
+- V1.12→V1.13.1-Migration 11/11 PASS;
+- Release-PHP-Lint 33/33 PASS.
+
+Simulierter voll ausgerollter V1.12-Bestand → V1.13.1:
+- 12 CREATE;
+- 419 UPDATE;
+- 1 ARCHIVE;
+- nach genau einem Sync: 431 UNCHANGED;
+- keine Term-CREATE/UPDATE/DELETE-Strukturwrites.
+
+Autoritativer Endaudit:
+`HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT_20261008.json`
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
+`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
 
-Batch 004 und alle weiteren 16er-Runden sind gestrichen.
+Das ist jetzt der einzige offene technische Nachweis.
 
 ## EXAKT EINE NEXT ACTION
 
-Aus dem praktischen Zielprofil einen finalen Sync-Kandidaten bauen und gegen den tatsächlichen WordPress-Bestand als Dry-Run vergleichen.
+V1.13.1 einmal in Hobby Depot installieren.
 
-Noch KEIN Live-Sync.
-Noch KEINE Kategorien schreiben.
+Dann:
+`WordPress → Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`.
 
-Wenn der Delta-Dry-Run sauber ist:
-genau EIN kontrollierter Target-Tree-Sync → Frontend-Readback → Plugin deaktivieren/deinstallieren.
+Dieser Schritt:
+- kostet nichts;
+- ruft DataForSEO nicht auf;
+- schreibt keine Kategorien/Seiten;
+- liest nur den tatsächlichen Live-Bestand und berechnet das Delta.
+
+Danach den JSON-Readback herunterladen und prüfen.
+
+Noch NICHT synchronisieren.
+Keine weitere Pluginversion vorbereiten, solange der reale Dry-Run keinen echten Fehler zeigt.
