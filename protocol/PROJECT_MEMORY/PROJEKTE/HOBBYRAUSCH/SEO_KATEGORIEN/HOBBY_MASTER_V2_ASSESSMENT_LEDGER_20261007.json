@@ -562,7 +562,7 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
+      "size_class": "MACRO",
       "publication_role": "ORIENTATION_UNIVERSE",
       "viable_leaf_categories": null,
       "leaf_plan": [
@@ -661,8 +661,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "bewegen",
       "size_class": "MICRO",
-      "publication_role": "EDITORIAL_TOPIC",
-      "viable_leaf_categories": 0,
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
       "topic_capacity": 8,
       "ownership": "Owns the niche team sport using protected competition drones. Generic drone construction and FPV operation remain separate.",
       "batch_id": "003"
@@ -708,8 +708,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
       "size_class": "MICRO",
-      "publication_role": "EDITORIAL_TOPIC",
-      "viable_leaf_categories": 0,
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
       "topic_capacity": 8,
       "ownership": "Owns scale realism, scale accessories and realistic trail presentation within crawling. Performance-oriented generic crawling stays with RC-Crawling.",
       "batch_id": "003"
@@ -722,7 +722,7 @@
       "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
+      "viable_leaf_categories": 5,
       "leaf_plan": [
         [
           "Modelle & Einstieg",
@@ -752,7 +752,7 @@
       "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
+      "viable_leaf_categories": 5,
       "leaf_plan": [
         [
           "Einstieg & Chassis",
@@ -782,7 +782,7 @@
       "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
+      "viable_leaf_categories": 5,
       "leaf_plan": [
         [
           "Modelle & Maßstäbe",
@@ -882,7 +882,7 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
+      "size_class": "MACRO",
       "publication_role": "ORIENTATION_UNIVERSE",
       "viable_leaf_categories": null,
       "leaf_plan": [
