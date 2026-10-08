@@ -531,4 +531,20 @@ Keine Ersatzkategorie erfinden.
 Keine Hobbys umhängen.
 Keine DataForSEO-Recherche.
 
-Danach Zielprofil erneut hart prüfen → frischer finaler Live-Dry-Run → JSON-Readback.
+Plan-Graph-Simulation des Ein-Knoten-Fixes:
+`HD001_V1_13_1_MATERIALKUNST_PATCH_SIMULATION_20261008.json` = PASS.
+
+Nach simuliertem Entfernen:
+- 430 physische Zielobjekte;
+- 403 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 355 CREATE + 75 ADOPT;
+- 0 fehlende Parents;
+- 0 Zyklen;
+- 0 doppelte IDs/Slugs;
+- 0 Kategorie-unter-Kategorie;
+- Materialkunst war der einzige leere statische CORE-Zwischenknoten.
+
+Danach echtes V1.13.1-Zielprofil/Artefakt korrigieren → lokal hart prüfen → frischer finaler Live-Dry-Run → JSON-Readback.
