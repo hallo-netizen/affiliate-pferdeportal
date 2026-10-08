@@ -1,0 +1,87 @@
+{
+  "contract": "HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS_READY_FOR_ONE_LIVE_DRYRUN",
+  "rules_version": "1.5",
+  "target_contract_version": "2.5",
+  "problem_closed": "The 16-item assessment loop is calibration only and is not continued. The 841-entry master is inventory, not 841 mandatory CORE taxonomy nodes.",
+  "baseline": {
+    "profile_revision": "HD-TARGET-3P-V1-20261007",
+    "base_logical_nodes": 95,
+    "resolved_logical_nodes": 421,
+    "resolved_physical_objects": 420,
+    "core_entities": 329,
+    "master_entities": 841
+  },
+  "final_target": {
+    "profile_revision": "HD-TARGET-3P-V1.13.1-PRACTICAL-20261008",
+    "profile_sha256": "f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014",
+    "base_logical_nodes": 103,
+    "resolved_logical_nodes": 440,
+    "resolved_physical_objects": 431,
+    "resolved_object_types": {
+      "page": 404,
+      "category": 4,
+      "journal_cat": 15,
+      "hp_listing_category": 8,
+      "relation": 9
+    },
+    "master_entities": 841,
+    "core_entities": 340,
+    "editorial_finder_entities": 501,
+    "worlds_core_level_1": 8,
+    "hobbywelten_world_view_relations": 8
+  },
+  "calibrated_delta": {
+    "promote_to_core": [
+      "Wabikusa",
+      "Wettersonden-Tracking",
+      "Funkpeilung",
+      "Morsefunk",
+      "BattleBots-Modellbau",
+      "Drohnenfotografie",
+      "Drone Soccer",
+      "Scale-Crawling",
+      "RC-Panzer",
+      "RC-Segelboote",
+      "RC-U-Boote",
+      "RC-Segelflug"
+    ],
+    "demote_from_core": [
+      "alte Brettspiele"
+    ],
+    "net_core_change": 11,
+    "world_parent_moves_to_root": 8,
+    "hobbywelten_view_relations_added": 8
+  },
+  "hard_structure_correction": {
+    "old_wrong_shape": "core:hub -> core:world:*",
+    "final_shape": "core:world:* are physical root-level CORE pages; core:hub/Hobbywelten is a view page that links to the eight worlds through relation nodes.",
+    "world_parent_ids_are_empty": true
+  },
+  "plugin_candidate": {
+    "version": "1.13.1",
+    "artifact": "HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip",
+    "artifact_sha256": "508c3d520fc765223d9f643d06ca75ef07e8702612d5fecab416d771bfab5dc6",
+    "mode": "MANUAL_ONLY_FINAL_DRYRUN_AND_ONE_SYNC",
+    "automatic_target_sync": false,
+    "provider_calls_during_finalization": 0,
+    "dry_run_structure_writes": 0,
+    "retirement_scope": "Only objects already carrying _apkw_target_node_id may be auto-retired; legacy article/category structures are preserved.",
+    "frozen_inventory_entries": 841
+  },
+  "local_acceptance": {
+    "current_regression_suite": "270/270 PASS",
+    "final_target_suite": "24/24 PASS",
+    "baseline_to_final_migration_suite": "11/11 PASS",
+    "release_php_lint": "33/33 PASS",
+    "empty_live_dryrun": "431 CREATE / 0 writes / PASS",
+    "fully_deployed_v1_12_baseline_dryrun": "12 CREATE / 419 UPDATE / 1 ARCHIVE / PASS",
+    "fully_deployed_v1_12_baseline_final_state": "431 UNCHANGED after one sync",
+    "foreign_slug_collision": "BLOCKED fail-closed",
+    "legacy_non_target_category_retirement": "NOT ARCHIVED",
+    "manual_only_bootstrap": "NO AUTO START"
+  },
+  "next_action": "Install V1.13.1 once. Open Kategorien -> Finaler Zielbaum. Run the free final delta dry-run. Do not sync until the live dry-run result is read back and accepted."
+}
