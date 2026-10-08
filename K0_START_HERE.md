@@ -5,6 +5,8 @@ Bei `K0:start`:
 1. auf `konzept0-portal-neutral-20261002:K0_START_HERE.md` wechseln;
 2. dort ausschließlich die K0-Startdatei und `K0_CURRENT_STATE.json` als K0-Einstieg verwenden;
 3. **NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.**
+4. **Keinen separaten GitHub-Workflow-Startknopf suchen.** Der technische K0-Start ist der bestehende Dateistart auf dem K0-Branch: frischen Run anlegen, `WORDPRESS_INTAKE.json` schreiben, danach `AUTHORING_CONTEXT.json` schreiben; dessen Commit triggert `.github/workflows/k0-authoring-context.yml` automatisch.
+5. **Vor einem tatsächlichen GitHub-Schreibversuch für den aktuellen Upload ist ein technischer Startblocker unzulässig.** Fehlender `workflow_dispatch`-/Run-Button ist kein Blocker.
 
 Für `K0:start` ausdrücklich verboten:
 - `concept_agent/START_HERE.md`;
