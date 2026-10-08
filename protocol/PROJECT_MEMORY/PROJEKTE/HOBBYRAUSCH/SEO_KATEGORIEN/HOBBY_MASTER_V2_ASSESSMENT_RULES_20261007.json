@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.5",
-  "effective_date": "2026-10-07",
-  "status": "ACTIVE_V2_RULESET_PRACTICAL_BASELINE_DELTA_KISS",
+  "version": "1.6",
+  "effective_date": "2026-10-08",
+  "status": "ACTIVE_V2_RULESET_BALANCED_VISIBLE_LEVELS",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -573,11 +573,14 @@
       "explicit_core_overrides": 329,
       "unknown_inventory_policy": "retain_editorial"
     },
-    "core_hobby_rule": "A CORE hobby node may contain articles directly. Child/leaf categories are not a prerequisite for launch.",
-    "leaf_creation_rule": "Create a child category only when real content growth later forms a durable cluster of roughly 5–12 distinct articles and the split improves navigation/ownership.",
+    "core_hobby_rule": "A HOBBY_HUB must expose a visible child content-category level before regular article production. Direct-to-hobby articles are not the normal HOBBY_HUB model.",
+    "leaf_creation_rule": "For HOBBY_HUB, create 3–6 capacity-validated visible content categories before regular article production. Each leaf must satisfy the per-leaf capacity thresholds; no empty/symmetry leaves.",
     "unapproved_master_identity_rule": "Preserve the canonical identity in Finder/editorial inventory; do not create a CORE page by default.",
     "dataforseo_rule": "Use DataForSEO only for real promotion/demotion/ownership ambiguity. No blanket per-hobby assessment of the remaining master.",
     "batch_rule": "The 16-item Batch 001–003 sequence was calibration only. Batch 004+ manual loop is cancelled.",
-    "sync_rule": "Build one final baseline delta, dry-run against live WordPress inventory, then perform one controlled sync and frontend readback."
+    "sync_rule": "Build one final baseline delta, dry-run against live WordPress inventory, then perform one controlled sync and frontend readback.",
+    "frontend_visibility_rule": "Every canonical level that exists in the target tree must be visible in normal drill-down navigation: world -> intermediate area -> hobby -> content category -> articles. Global header may remain selective.",
+    "world_intermediate_balance_rule": "No artificial hard maximum. About 10–11 clear direct intermediate areas under a world are allowed when supported by the real inventory. Do not merge solely to keep navigation thin and do not create empty symmetry nodes.",
+    "article_ownership_rule": "Every HOBBY_HUB article has exactly one content-category owner. No duplicate placement or duplicate primary intent."
   }
 }
