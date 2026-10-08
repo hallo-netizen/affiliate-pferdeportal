@@ -3259,14 +3259,22 @@ JS;
         if (!post_type_exists(self::CAMPAIGN_POST_TYPE)) {
             $this->register_campaign_post_type();
         }
-        $posts = get_posts(array(
-            'post_type' => self::CAMPAIGN_POST_TYPE,
-            'post_status' => array('publish', 'draft', 'private'),
-            'numberposts' => -1,
-            'orderby' => array('menu_order' => 'ASC', 'title' => 'ASC'),
-            'order' => 'ASC',
-            'suppress_filters' => true,
-        ));
+        // Frontend ranking already owns an identical ordered ap_campaign post
+        // snapshot. Reuse it instead of issuing the same get_posts() query again
+        // when another renderer asks for the normalized campaign list later in
+        // the same request. Admin/Cron/REST/CLI/AJAX keep the historical path.
+        if ($this->ranked_campaigns_request_cache_allowed()) {
+            $posts = $this->ranked_campaign_posts_snapshot();
+        } else {
+            $posts = get_posts(array(
+                'post_type' => self::CAMPAIGN_POST_TYPE,
+                'post_status' => array('publish', 'draft', 'private'),
+                'numberposts' => -1,
+                'orderby' => array('menu_order' => 'ASC', 'title' => 'ASC'),
+                'order' => 'ASC',
+                'suppress_filters' => true,
+            ));
+        }
         $campaigns = array();
         foreach ((array) $posts as $post) {
             $campaign = $this->campaign_from_post($post);
