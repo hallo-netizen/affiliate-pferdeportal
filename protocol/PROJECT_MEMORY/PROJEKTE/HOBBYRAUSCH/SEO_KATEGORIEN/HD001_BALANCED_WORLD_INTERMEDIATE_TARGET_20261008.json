@@ -1,0 +1,268 @@
+{
+  "contract": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "SUBJECT_STRUCTURE_PASS__CONTENT_HUB_ASSESSMENT_INCOMPLETE__NO_WORDPRESS_WRITE",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6",
+    "concept": "KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md",
+    "source_audit": "HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json"
+  },
+  "rules": {
+    "all_existing_levels_visible": true,
+    "global_header_may_remain_selective": true,
+    "world_intermediate_hard_max": null,
+    "10_11_allowed": true,
+    "no_empty_symmetry_nodes": true,
+    "no_merge_only_to_make_navigation_thin": true
+  },
+  "worlds": {
+    "gestalten": {
+      "target_count": 7,
+      "intermediates": [
+        "Malen & Zeichnen",
+        "Druck & Fotografie",
+        "Schrift & Lettering",
+        "Papierkunst",
+        "Textilgestaltung",
+        "Oberfläche & Deko",
+        "Miniaturen & Szenen"
+      ],
+      "changes": [
+        {
+          "op": "ADD_EXISTING_CONCEPT_BRANCH",
+          "name": "Oberfläche & Deko",
+          "verified_current_hobbies": [
+            "Pinstriping",
+            "Schildermalerei",
+            "Glasmalerei"
+          ],
+          "from": "Malen & Zeichnen"
+        }
+      ]
+    },
+    "fertigen": {
+      "target_count": 10,
+      "intermediates": [
+        "Holz",
+        "Naturmaterial",
+        "Metall",
+        "Textil",
+        "Leder",
+        "Buch & Papier",
+        "Keramik & Glas",
+        "Guss & Formen",
+        "Schmuck",
+        "Genuss"
+      ],
+      "changes": [
+        {
+          "op": "SPLIT_OVERBROAD_EXISTING_BRANCH",
+          "from": "Holz & Naturmaterial",
+          "to": [
+            {
+              "name": "Holz",
+              "verified_current_hobbies": [
+                "Schnitzen",
+                "Löffelschnitzen",
+                "Grünholzschnitzen",
+                "Drechseln",
+                "Möbelrestaurierung",
+                "Brandmalerei",
+                "Holzwerken"
+              ]
+            },
+            {
+              "name": "Naturmaterial",
+              "verified_current_hobbies": [
+                "Korbflechten",
+                "Weidenflechten",
+                "Besenbinden"
+              ]
+            }
+          ],
+          "note": "Pyrographie is not counted as a separate canonical hobby because existing assessment marks it ALIAS_ONLY for Brandmalerei."
+        }
+      ],
+      "direct_hobby_exception": [
+        "Heimwerken"
+      ]
+    },
+    "technik": {
+      "target_count": 11,
+      "intermediates": [
+        "Elektronik",
+        "Funk",
+        "Robotik & Automation",
+        "Computer & Retro",
+        "Digitale Fertigung",
+        "RC-Fahrzeuge",
+        "RC-Boote",
+        "RC-Flug & Drohnen",
+        "Audio & HiFi",
+        "Mechanik & Uhren",
+        "Smart Home"
+      ],
+      "changes": [
+        {
+          "op": "SPLIT_OVERBROAD_EXISTING_BRANCH",
+          "from": "RC & Drohnen",
+          "to": [
+            {
+              "name": "RC-Fahrzeuge",
+              "verified_current_hobbies": [
+                "RC-Crawling",
+                "Scale-Crawling",
+                "RC-Baumaschinen",
+                "RC-LKW",
+                "RC-Drift",
+                "RC-Offroad",
+                "RC-Panzer"
+              ]
+            },
+            {
+              "name": "RC-Boote",
+              "verified_current_hobbies": [
+                "RC-Boote",
+                "RC-Segelboote",
+                "RC-U-Boote"
+              ]
+            },
+            {
+              "name": "RC-Flug & Drohnen",
+              "verified_current_hobbies": [
+                "Drohnenbau",
+                "FPV-Drohnen",
+                "FPV-Racing",
+                "RC-Flugzeuge",
+                "RC-Segelflug",
+                "RC-Helikopter"
+              ]
+            }
+          ],
+          "reason": "Current RC & Drohnen branch contains 16 current CORE hobby pages; the three-way medium split keeps the world at 11 visible intermediate points."
+        }
+      ]
+    },
+    "forschen": {
+      "target_count": 5,
+      "intermediates": [
+        "Astronomie",
+        "Mikroskopie",
+        "Wetter & Umwelt",
+        "Naturbeobachtung",
+        "Messen & Analysieren"
+      ],
+      "changes": [],
+      "note": "Citizen Science remains NOT created: no distinct current CORE hobby owner was verified; empty/symmetry branch forbidden."
+    },
+    "pflanzen": {
+      "target_count": 9,
+      "intermediates": [
+        "Bonsai & Miniatur",
+        "Zimmerpflanzen",
+        "Kakteen & Sukkulenten",
+        "Orchideen & Exoten",
+        "Hydroponik & Indoor",
+        "Pilze & Kulturen",
+        "Saatgut & Zucht",
+        "Moos & Miniaturgärten",
+        "Essbare Pflanzen"
+      ],
+      "changes": [],
+      "direct_orientation_exception": [
+        "Gärtnern"
+      ]
+    },
+    "tiere": {
+      "target_count": 7,
+      "intermediates": [
+        "Aquaristik",
+        "Terraristik",
+        "Ameisen & Insekten",
+        "Wirbellose",
+        "Imkerei & Bestäuber",
+        "Gehegegestaltung",
+        "Zucht & Futtertiere"
+      ],
+      "changes": [
+        {
+          "op": "ADD_EXISTING_CONCEPT_BRANCH",
+          "name": "Gehegegestaltung",
+          "verified_current_hobbies": [
+            "Formicarienbau",
+            "Wildbienenhotels",
+            "Hummelkästen",
+            "Bioactive Terrariums"
+          ],
+          "from": [
+            "Ameisen & Insekten",
+            "Imkerei & Bestäuber",
+            "Terraristik"
+          ]
+        }
+      ]
+    },
+    "bewegen": {
+      "target_count": 8,
+      "intermediates": [
+        "Outdoor",
+        "Rollen & Balance",
+        "Wurf & Ziel",
+        "Wasser",
+        "Klettern & Seil",
+        "Wind & Drachen",
+        "Team & Wettkampf",
+        "Geschick & Tricks"
+      ],
+      "changes": []
+    },
+    "sammeln": {
+      "target_count": 8,
+      "intermediates": [
+        "Münzen & Geld",
+        "Papier & Dokumente",
+        "Technik & Medien",
+        "Spielzeug & Spiele",
+        "Naturfunde",
+        "Werbung & Design",
+        "Werkzeuge & Geräte",
+        "Alltagsobjekte"
+      ],
+      "changes": []
+    }
+  },
+  "summary": {
+    "current_active_intermediate_nodes": 60,
+    "proposed_active_intermediate_nodes": 65,
+    "proposed_counts_by_world": [
+      7,
+      10,
+      11,
+      5,
+      9,
+      7,
+      8,
+      8
+    ],
+    "max_visible_world_children": 11,
+    "min_visible_world_children": 5,
+    "empty_nodes_added": 0
+  },
+  "known_role_cleanup_before_final_target": {
+    "current_core_to_remove_or_alias_from_existing_closed_assessments": [
+      "Mini-CNC -> EDITORIAL_TOPIC",
+      "Smart-Home-Basteln -> EDITORIAL_TOPIC",
+      "Custom Keyboards -> ALIAS_ONLY",
+      "Case-Modding -> EDITORIAL_TOPIC",
+      "Chainmail -> ALIAS_ONLY",
+      "Lederprägen -> EDITORIAL_TOPIC",
+      "Papierschöpfen -> EDITORIAL_TOPIC",
+      "Pyrographie -> ALIAS_ONLY",
+      "Dioramenmalerei -> EDITORIAL_TOPIC"
+    ]
+  },
+  "boundary": "This is the world/intermediate target only. The complete target remains blocked until all current CORE candidates have current 1.6 role/capacity decisions and HOBBY_HUB content categories.",
+  "next_action": "Reconcile current CORE assessment coverage using latest finals, then complete the remaining 198 unassessed current CORE identities under rules 1.6. No WordPress write."
+}
