@@ -5,7 +5,7 @@
   "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
   "source_result": "hobby-master-v2-assessment-20261007-193716-utc.json",
   "source_plugin_version": "1.12.6",
-  "status": "BATCH_001_FACHLICH_ASSESSED__NO_TARGET_TREE_WRITE",
+  "status": "SUPERSEDED_BY_HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007_JSON",
   "invariants": {
     "stable_identity": true,
     "dataforseo_role": "SEO_EVIDENCE_AND_DEDUPE_ONLY",
@@ -210,9 +210,9 @@
     }
   ],
   "summary": {
-    "hobby_hubs": 6,
+    "hobby_hubs": 7,
     "orientation_universes": 3,
-    "editorial_topics": 7,
+    "editorial_topics": 6,
     "article_only": 0,
     "finder_only": 0,
     "out_of_scope": 0,
@@ -220,5 +220,6 @@
     "unresolved_roles": 0,
     "target_tree_write_allowed": false
   },
-  "next": "Propagate these assessed roles into the master assessment layer, then start Batch 002. Do not sync WordPress yet."
+  "next": "Use HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json as the single authoritative Batch-001 final assessment. Batch 002 is next.",
+  "authoritative_pointer": "HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json"
 }
