@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 277,
+  "generation": 278,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,19 +36,19 @@
   },
   "active_candidate": {
     "version": "6.72.203",
-    "status": "WORKING_6_72_203_AFF_ERR_059_062_SOURCE_FIXED_GATE_PENDING",
+    "status": "WORKING_6_72_203_BOUND_GATES_PASS_INSTALLER_READY_FINAL_BIND_PENDING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": null,
+    "candidate_reference_artifact_sha256": "0ed348ec03ad6018cdd387535fce89df161557ff41fcce66161f83f0c08cfaea",
     "candidate_reference_scope": "Authoritative section 9 rule order restored: specific mapped banner stays in its stored target/path; nonmatching specific banner stays out; if no specific banner is available for the target, explicitly general active banners may enter the existing technically/format-valid stable fallback pool. Manual topic assignment still writes the same topic_targets truth. No frontend reclassification, new DB query, provider HTTP or new table.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
-    "handoff_artifact_filename": null,
-    "handoff_artifact_bytes": null,
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.203.zip",
+    "handoff_artifact_bytes": 820012,
     "source_binding_status": "MANIFEST_28_FILES_6_72_203_AFF_ERR_059_062_BOUND",
     "last_tested_artifact": {
       "version": "6.72.198",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "BOUND_CURRENT_RELEASE_GATES_ONLY",
-    "current_focus_reason": "AFF-ERR-059..062 source fixes are committed and rebound to the 28-file manifest. No further concept work; run only current bound gates."
+    "current_focus": "FINAL_RELEASE_ARTIFACT_BINDING_ONLY",
+    "current_focus_reason": "Current 6.72.203 bound gate passed in run 37754151488. No more functional testing. Bind the exact tested installer artifact to the final release path and run release-check."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,20 +887,27 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_203_AFF_ERR_059_062_SOURCE_FIXED_GATE_PENDING",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run only the current 6.72.203 bound gates on the newly rebound 28-file manifest. Ignore historical version-pinned workflows. Fix only the first real current-gate failure.",
-    "completion_condition": "CURRENT_6_72_203_BOUND_GATES_PASS",
-    "after_completion_action": "If current bound gates pass, continue release-check. If one current gate fails, fix only that first failure.",
+    "state": "WORKING_6_72_203_BOUND_GATES_PASS_INSTALLER_READY_FINAL_BIND_PENDING",
+    "authorized_next_action": "FINALIZE_RELEASE",
+    "bound_user_scope_action": "Do not rerun functional gates. Persist the exact tested AFFILIATE_ZENTRALE_6.72.203.zip (SHA256 0ed348ec03ad6018cdd387535fce89df161557ff41fcce66161f83f0c08cfaea, 820012 bytes) to the final repository artifact path, bind Current, then run release-check.",
+    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_RELEASE_CHECK_PASS",
+    "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 120,
+    "sequence": 121,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_err_058_kiss_banner_single_target_local_sim_20261008.md",
-    "evidence_sha256": null,
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672203_current_bound_release_gate_20261008.md",
+    "evidence_sha256": "1c8e4bcabe69725760da2650560e046915d794f3dad9b67faf8efe4273af3921",
     "current_source_manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_203_AFF_ERR_059_062_BOUND",
-    "final_installer": null,
+    "current_source_binding": "MANIFEST_28_FILES_6_72_203_BOUND_GATE_PASS",
+    "final_installer": {
+      "filename": "AFFILIATE_ZENTRALE_6.72.203.zip",
+      "sha256": "0ed348ec03ad6018cdd387535fce89df161557ff41fcce66161f83f0c08cfaea",
+      "bytes": 820012,
+      "workflow_run": 37754151488,
+      "workflow_artifact_id": 11539042747,
+      "status": "TESTED_READY_FINAL_REPO_BINDING_PENDING"
+    },
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1042,7 +1049,7 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "OLD_PASS_NOT_REUSABLE_AFTER_SOURCE_CHANGE; REUSE_UNCHANGED PERFORMANCE EVIDENCE; RUN ONLY EXISTING BOUND CURRENT DELTA/GOVERNANCE/WORDPRESS_MARIADB GATES; NO NEW TEST OR WORKFLOW ARCHITECTURE",
+    "pass_reuse_policy": "CURRENT_BOUND_GATE_RUN_37754151488_PASS; DO_NOT_RERUN FUNCTIONAL GATES; FINALIZE EXACT TESTED INSTALLER ONLY",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
@@ -2577,5 +2584,15 @@
     "pste_candidate_sha256": "d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31",
     "pste_admin_bounded_read_probe": "PASS_4200_ROWS_ALL_10_BACKEND_PAGES",
     "pste_internal_clarification_retention": "PASS_INCLUDED"
+  },
+  "current_bound_release_gate_672203": {
+    "status": "PASS",
+    "workflow_run": 37754151488,
+    "tested_commit": "5b3b68b5e78c5c0fd598302b8107c743931a4f25",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672203_current_bound_release_gate_20261008.md",
+    "evidence_sha256": "1c8e4bcabe69725760da2650560e046915d794f3dad9b67faf8efe4273af3921",
+    "source_manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
+    "installer_sha256": "0ed348ec03ad6018cdd387535fce89df161557ff41fcce66161f83f0c08cfaea",
+    "installer_bytes": 820012
   }
 }
