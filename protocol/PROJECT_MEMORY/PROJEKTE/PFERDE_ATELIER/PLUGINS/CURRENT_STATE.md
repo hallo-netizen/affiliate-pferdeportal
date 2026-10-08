@@ -1,3 +1,23 @@
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-08 – 0.57.59 LIVE FEHLER / 0.57.61 + 0.28.34 FINALER LOKALER E2E-KANDIDAT
+
+Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
+
+- PSTE **0.57.59 live** durch Nutzer-Screenshot belegt.
+- 0.57.59: stale-Erstklick behoben, aber reale Restfehler: unnötiger erneuter Bestandslauf/Endloop-Verhalten, READY-Titel nicht sichtbar, Ausschlussgründe 4488 → ca. 32/33 nicht transparent.
+- finaler lokaler Kandidat **PSTE 0.57.61**: `PSTE-0.57.61-ENDLOOP-READY-VISIBILITY-EVIDENCE-REENTRY-HARDPASS.zip`.
+- SHA-256 `81fbbf808f0ccfd5bb2f8aa29dea37c676f9324adbd054598a5901dffaa2e407`.
+- 117 Dateien / PHP 79/79 / JSON 37/37 / Fresh-Unpack 117/117.
+- READY-Liste sichtbar, Ursachenaggregation sichtbar, normaler Seitenaufruf passiv, READY idempotent, Reload ohne Neustart, targeted 110-Reentry ohne Provider/Vollscan.
+- Zwischenpaket PSTE 0.57.60 **DO NOT INSTALL**; finaler Bootstrap wurde erst danach live-drift-tolerant fertiggestellt.
+
+- finaler Companion-Kandidat **PSERC 0.28.34**, Build `0.28.34-stable-pste-capability-fingerprint`.
+- Installer `PSERC-0.28.34-STABLE-PSTE-CAPABILITY-FINGERPRINT-HARDPASS.zip` / SHA-256 `df4fd8fb640e05455f5f0f64edb5e508c011551326ff9da5061ad91ac6f5efd0`.
+- Plan-Fingerprint hängt nicht mehr an roher PSTE-Version; reine PSTE-UI/Orchestratorupdates invalidieren PSERC nicht mehr künstlich.
+- 0.28.34 noch nicht live readback-bestätigt; keine PU-ID.
+
+- finaler Testreport `PFERDE_ATELIER_PSTE_05761_PSERC_02834_END_TO_END_HARDPASS_TESTREPORT.json`, SHA-256 `82c377475dc7f2a99d9cbdd5dc50f06da3b35bd2c8215aef0ccf8cf0b04983ea`.
+- NEXT ausschließlich `../TEXT/CURRENT_STATE.md`.
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-08 – 0.57.58 LIVE FAIL / 0.57.59 ROOTFIX
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
