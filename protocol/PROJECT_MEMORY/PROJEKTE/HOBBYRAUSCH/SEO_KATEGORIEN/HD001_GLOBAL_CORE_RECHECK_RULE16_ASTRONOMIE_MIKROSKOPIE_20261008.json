@@ -1,0 +1,95 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE",
+  "date": "2026-10-08",
+  "status": "PASS__13_IDENTITIES__10_HOBBY_HUB__3_ORIENTATION_UNIVERSE",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "identities": [
+    [
+      "Teleskop-Astronomie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Astrofotografie",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Sonnenbeobachtung",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Mondfotografie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Planetenfotografie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Deep-Sky-Fotografie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Radioastronomie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Hobby-Mikroskopie",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Teichwasser-Mikroskopie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kristallmikroskopie",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Polarisationsmikroskopie",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Mikrofotografie",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Gewässermikroskopie",
+      "ORIENTATION_UNIVERSE",
+      0
+    ]
+  ],
+  "validation": {
+    "identities": 13,
+    "hobby_hubs": 10,
+    "orientation_universe": 3,
+    "visible_content_categories": 48,
+    "capacity_violations": 0
+  },
+  "full_local_detail": {
+    "artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json",
+    "sha256": "503cdc9e063cc72b2a9e2d7e406d9ab06bbad8ed864d8f18a8189b306e487525",
+    "contains": "Full subject-defined leaf names and all distinct article intents."
+  },
+  "ownership_notes": {
+    "Astrofotografie": "Generic orientation; Mondfotografie, Planetenfotografie and Deep-Sky-Fotografie keep specific imaging ownership.",
+    "Hobby-Mikroskopie": "Generic microscopy orientation; specific specimen/practice identities keep ownership.",
+    "Gewässermikroskopie": "Generic aquatic microscopy orientation; Teichwasser-Mikroskopie and Planktonbeobachtung keep specific ownership."
+  },
+  "provider_calls": 0,
+  "wordpress_writes": 0
+}
