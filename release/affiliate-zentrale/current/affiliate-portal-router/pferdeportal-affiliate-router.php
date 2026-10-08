@@ -360,9 +360,14 @@ final class Pferdeportal_Affiliate_Router {
         add_action(self::ARTICLE_REBUILD_HOOK, array($this, 'run_article_plan_rebuild_worker'));
         if (!$is_ajax_request) { add_action('init', array($this, 'maybe_apply_automation_safety_upgrade'), 7); }
         if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_background_schedule_v67264'), 7); }
-        add_action('init', array($this, 'maybe_install_control_contract_schema'), 8);
-        add_action('init', array($this, 'maybe_install_output_objects_schema'), 9);
-        add_action('init', array($this, 'maybe_install_ebay_schema'), 10);
+        $is_affiliate_ajax_request = $is_ajax_request
+            && isset($_REQUEST['action'])
+            && sanitize_key((string) wp_unslash($_REQUEST['action'])) === 'ppar_ebay_canonical_tick';
+        if (!$is_ajax_request || $is_affiliate_ajax_request) {
+            add_action('init', array($this, 'maybe_install_control_contract_schema'), 8);
+            add_action('init', array($this, 'maybe_install_output_objects_schema'), 9);
+            add_action('init', array($this, 'maybe_install_ebay_schema'), 10);
+        }
         // Checkpoint contract: an open run from another runtime build is never
         // version-by-version recovered. It is closed fail-safe and the next run
         // starts with a new UUID from the last confirmed public checkpoint.
