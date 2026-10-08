@@ -1204,7 +1204,6 @@
     opacity: .76 !important;
     background: transparent !important;
 }
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label,
 .ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-text,
 .ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-button {
     display: none !important;
@@ -1714,8 +1713,7 @@ body.single-post .ppar-slot-post_inline_banner .ppar-banner-image{
 body.single-post .ppar-slot-post_inline_banner .ppar-banner-title,
 body.single-post .ppar-slot-post_inline_banner .ppar-banner-description,
 body.single-post .ppar-slot-post_inline_banner .ppar-banner-meta,
-body.single-post .ppar-slot-post_inline_banner .ppar-banner-seller,
-body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-label{
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-seller{
   display:none!important;
 }
 body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251{
