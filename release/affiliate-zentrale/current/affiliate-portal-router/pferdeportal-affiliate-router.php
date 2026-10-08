@@ -4054,27 +4054,22 @@ JS;
             }
         }
 
-        // Kein exakter Rassentreffer: bestehende neutrale Verteilung bleibt als
-        // letzte Rassenregel erhalten. Keine zweite Verteilungsmaschine.
-        if ($required_creative_type === 'banner' && in_array($slot_type, array(
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
-        ), true)) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen ohne exakte Zielkante: themenneutrale stabile Bannerverteilung.');
-        }
-
-        // KISS: Automatisch aus der Creative-Library materialisierte Banner
-        // besitzen bereits ihre gespeicherte Zielkante. Im Frontend wird diese
-        // nicht noch einmal aus URL/Titel/Partnertext erraten.
+        // KISS-Hardlock: Creative-Library-Banner besitzen genau eine
+        // fachliche Wahrheit: ihre gespeicherten automation_target_keys.
+        // Passt diese Zielkante nicht zum aktuellen Kontext, ist der Banner hier
+        // beendet. Kein Rassen-, General- oder Technik-Fallback darf sie umgehen.
         $library_banner = $required_creative_type === 'banner'
             && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
         if ($library_banner) {
-            if (is_array($automation_rank)) { return $automation_rank; }
-            if ($mode === 'fallback') {
-                return array('specificity'=>5,'matches'=>0,'reason'=>'Kein spezifischer Treffer: formatgeeigneter allgemeiner Verteilungspool.');
-            }
-            // Spezifisch zugeordnete Banner bleiben strikt in ihrem gespeicherten
-            // Zielstrang. Kein technischer Rueckfall in fachfremde Kategorien.
-            return null;
+            return is_array($automation_rank) ? $automation_rank : null;
+        }
+
+        // Historische neutrale Rassenverteilung bleibt nur fuer nicht automatisch
+        // materialisierte Sonder-/Festzuordnungen erhalten.
+        if ($required_creative_type === 'banner' && in_array($slot_type, array(
+            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
+        ), true)) {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Sonderpfad ohne Creative-Library-Zielvertrag.');
         }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
