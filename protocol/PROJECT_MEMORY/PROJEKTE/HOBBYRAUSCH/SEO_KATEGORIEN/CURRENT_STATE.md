@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / FINAL-SYNC V1.13.1 ABGEBROCHEN / READBACK-FEHLER BUCH & PAPIER [slug] / 60 VON 75 GEPLANTEN ADOPTS FÄLSCHLICH NEU ANGELEGT / ROLLBACK_PENDING MIT 231 AKTIONEN / V1.13.2 ADOPT-CHILD-SLUG-FIX LOKAL PASS / KEIN NEUER SYNC BIS ROLLBACK TERMINAL
+STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / V1.13.1 FEHLSYNC VOLLSTÄNDIG ROLLED_BACK / V1.13.2 DRYRUN PASS 355 CREATE + 75 ADOPT / LOKALER VOLL-SYNC-VERGLEICH DECKT ZWEITE DRYRUN-SYNC-DIVERGENZ AUF / V1.13.3 FULL-SYNC-PARITY LOKAL PASS / KEIN LIVE-SYNC VOR FRISCHEM V1.13.3-DRYRUN
 
 ## Ziel
 
@@ -620,15 +620,62 @@ Prüfung:
 Beleg:
 `HD001_V1_13_2_ADOPT_CHILD_SLUG_FIX_20261008.json`
 
+## V1.13.2 NACH ROLLBACK – LIVE PASS, ABER LOKALE PARITÄTSPRÜFUNG FINDET ZWEITEN SYNC-FEHLER
+
+Frischer V1.13.2-Readback:
+`hobby-depot-final-target-readback-20261008-105008-utc.json`
+
+Live bestätigt:
+- Dry-Run PASS;
+- 355 CREATE + 75 ADOPT;
+- 430 Zielobjekte;
+- alter V1.13.1-Fehlsync vollständig `ROLLED_BACK`;
+- `rollback_actions = []`.
+
+Lokaler Vollvergleich Dry-Run vs Sync:
+V1.13.2 hatte noch eine zweite Abweichung.
+Der Dry-Run sucht vorhandene Legacy-Objekte über
+`_apkw_concept_id = current node_id`
+plus Legacy-IDs.
+Der Sync suchte dort nur Legacy-IDs und fiel sonst auf Slug zurück.
+
+Folge:
+11 umbenannte ADOPT-Altseiten hätten trotz PASS-Dry-Run beim Sync kollidieren können.
+
+## V1.13.3 – FULL-SYNC-PARITY LOKAL PASS
+
+Fix:
+Sync verwendet jetzt exakt dieselbe concept_id-Suchlogik wie der Dry-Run:
+current node_id + legacy_ids → erst danach Slug-Fallback.
+
+Lokaler Volltest mit dem echten 430-Knoten-Plan:
+- erster Lauf: 355 CREATE + 75 ADOPT;
+- 430/430 Readback PASS;
+- Status COMPLETE;
+- zweiter identischer Lauf: 430 UNCHANGED;
+- Rollback: ROLLED_BACK und semantisch vollständig wiederhergestellt;
+- 11 umbenannte Legacy-ADOPTs ausdrücklich geprüft;
+- Mehrdeutigkeit bleibt fail-closed;
+- PHP-Lint 33/33 PASS;
+- ZIP-Integrität PASS;
+- Zielprofil unverändert.
+
+Artefakt:
+`HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip`
+SHA-256:
+`f255b06fb38c7b903de2c7741dea4e02fb9620ad3a6651fbf5963f402c33820b`
+
+Beleg:
+`HD001_V1_13_3_FULL_SYNC_PARITY_LOCAL_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FAILED_SYNC_ROLLBACK_PENDING`
+`HD001_V1_13_3_FRESH_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Zuerst den bereits laufenden Rollback bis terminal `ROLLED_BACK` fertiglaufen lassen.
+V1.13.3 installieren/ersetzen.
+Dann genau einmal den finalen Delta-Dry-Run ausführen und JSON exportieren.
 
-Noch KEINEN neuen Sync starten.
-
-Danach V1.13.2 installieren → frischen finalen Dry-Run → bei PASS genau einen Final-Sync.
+Noch NICHT synchronisieren.
 
