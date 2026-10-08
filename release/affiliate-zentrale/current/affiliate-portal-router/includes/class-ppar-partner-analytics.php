@@ -19,7 +19,9 @@ final class PPAR_Partner_Analytics_Admin {
     public static function bootstrap() {
         if (self::$booted) { return; }
         self::$booted = true;
-        add_action('admin_menu', array(__CLASS__, 'register_menu'), 999);
+        if (!((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) {
+            add_action('admin_menu', array(__CLASS__, 'register_menu'), 999);
+        }
         add_action('ppar_partner_analytics_ingest', array(__CLASS__, 'ingest_report'), 10, 2);
     }
 
