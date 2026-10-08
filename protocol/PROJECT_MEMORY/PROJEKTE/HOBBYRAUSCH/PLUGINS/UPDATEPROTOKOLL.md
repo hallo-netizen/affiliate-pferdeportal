@@ -859,3 +859,37 @@ EVIDENCE:
 NEXT:
 Exaktes V1.14.1-Artefakt → ein read-only Live-Dry-Run → JSON-Readback prüfen.
 Kein Sync vorher.
+
+
+---
+
+## PU-20261008-017 – HD-001 V1.14.1 Live-Dry-Run PASS
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ERGEBNIS:
+- PASS / valid=true;
+- 860 Identitäten;
+- 359 CORE / 501 Finder-Editorial;
+- 457 physische Zielobjekte;
+- Live-Delta: 32 CREATE + 425 UPDATE + 5 ARCHIVE;
+- 0 ADOPT;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes im Dry-Run.
+
+ARCHIVE:
+Nur die fünf bekannten ersetzten Kombi-Zwischenknoten:
+- Elektronik & Funk;
+- Insekten & Wirbellose;
+- Leder & Textil;
+- Metall & Schmuck;
+- Schrift & Papier.
+
+Keine Hobbyseite wird archiviert.
+
+INTERPRETATION:
+Der produktive Bestand steht vor dem Sync noch auf dem alten V1.13.4-Zielstand. Daher enthält der Dry-Run zugleich die bekannte V1.14.0-Strukturmigration und das V1.14.1-Expansion19-Delta.
+
+NEXT:
+Geprüften Zielbaum genau einmal synchronisieren → post-sync JSON-Readback prüfen → erst danach Live-PASS.
