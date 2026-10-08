@@ -1,0 +1,2859 @@
+{
+  "contract": "HD001_VISIBLE_CONTENT_LEVEL_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "REVIEW_REQUIRED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "scope": {
+    "hubs": 42,
+    "visible_content_categories": 187,
+    "subject_defined_article_intents": 1107
+  },
+  "validation": {
+    "leaf_count_mismatches": [
+      {
+        "hobby": "Buchbinden",
+        "expected": 4,
+        "actual": 0
+      },
+      {
+        "hobby": "CB-Funk",
+        "expected": 4,
+        "actual": 5
+      },
+      {
+        "hobby": "Software Defined Radio",
+        "expected": 4,
+        "actual": 5
+      },
+      {
+        "hobby": "Mikrocontroller-Projekte",
+        "expected": 5,
+        "actual": 0
+      },
+      {
+        "hobby": "FPV-Drohnen",
+        "expected": 5,
+        "actual": 0
+      },
+      {
+        "hobby": "RC-Baumaschinen",
+        "expected": 4,
+        "actual": 5
+      },
+      {
+        "hobby": "RC-LKW",
+        "expected": 4,
+        "actual": 5
+      },
+      {
+        "hobby": "RC-Panzer",
+        "expected": 4,
+        "actual": 5
+      },
+      {
+        "hobby": "RC-Flugzeuge",
+        "expected": 5,
+        "actual": 0
+      }
+    ],
+    "leafs_below_5_intents": [],
+    "current_legacy_hubs_source": "verified 30 current CORE HOBBY_HUBs from Batches 001-003; Satellitenempfang excluded because it is not in current CORE",
+    "no_invented_categories": true
+  },
+  "hubs": [
+    {
+      "canonical_name": "Airbrush",
+      "batch": "001",
+      "natural_world": "gestalten",
+      "ownership": "Airbrush owns generic technique, equipment, colors, maintenance and practice. Model-specific application intents belong to Airbrush-Modellbau; the Airbrush hub links to them instead of duplicating them.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Grundlagen",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Airbrush für Anfänger",
+            "erste Airbrush-Übungen",
+            "Luftdruck richtig einstellen",
+            "Spritzabstand und Farbmenge",
+            "Airbrush-Arbeitsplatz einrichten",
+            "Sicher arbeiten und Sprühnebel vermeiden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ausrüstung",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Airbrush-Pistole auswählen",
+            "Double Action vs Single Action",
+            "Düsengröße und Nadel wählen",
+            "Kompressor auswählen",
+            "Drucktank und Wasserabscheider",
+            "Absauganlage/Sprühkabine",
+            "Schläuche Adapter und Anschlüsse"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Farben & Medien",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Airbrush-Farben auswählen",
+            "Acrylfarbe verdünnen",
+            "Primer mit Airbrush",
+            "Klarlack mit Airbrush",
+            "Farbe für verschiedene Untergründe",
+            "Farbmischung und Konsistenz"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Techniken & Gestaltung",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Linien sprühen",
+            "Punkte sprühen",
+            "weiche Verläufe",
+            "Schablonen einsetzen",
+            "Maskieren",
+            "Freehand-Airbrush",
+            "Flächen gleichmäßig lackieren",
+            "Texturen und Effekte"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Reinigung & Fehler",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Airbrush richtig reinigen",
+            "Düse reinigen",
+            "Nadel reinigen und wechseln",
+            "Airbrush spuckt Farbe",
+            "Airbrush verstopft",
+            "unregelmäßiges Spritzbild",
+            "Undichtigkeit beheben",
+            "Pistole lagern und warten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Bean-to-Bar-Schokolade",
+      "batch": "001",
+      "natural_world": "fertigen",
+      "ownership": "Owns the end-to-end bean-to-bar process from cocoa raw material through roasting, refining, recipe development and finished bars. Generic chocolate/praline intents remain separate owners; bean-to-bar pages must keep explicit process context.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Kakao & Rohware",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kakaobohnen auswählen",
+            "Kakao-Herkunft und Sorten",
+            "fermentierte Bohnen beurteilen",
+            "Rohkakao lagern",
+            "Kakaonibs verwenden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Rösten & Schälen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kakaobohnen rösten",
+            "Röstprofile vergleichen",
+            "Bohnen nach dem Rösten brechen",
+            "Kakaobohnen schälen",
+            "Winnowing zuhause"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Mahlen & Melangieren",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Kakaonibs mahlen",
+            "Melangeur auswählen",
+            "Melangierdauer",
+            "Partikelgröße und Mundgefühl",
+            "Conchieren zuhause",
+            "Temperatur beim Melangieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Rezeptur & Zutaten",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Kakaoanteil berechnen",
+            "Zuckeranteil bestimmen",
+            "Kakaobutter ergänzen",
+            "Milchschokolade bean to bar",
+            "Gewürze und Zutaten",
+            "Single-Origin-Rezept entwickeln"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Temperieren & Formen",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schokolade temperieren",
+            "Temperierkurve verstehen",
+            "Schokolade in Formen gießen",
+            "Luftblasen vermeiden",
+            "Tafeln ausformen",
+            "Glanz und Snap verbessern"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Fehler & Qualität",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schokolade wird grau",
+            "Schokolade wird körnig",
+            "Schokolade ist zu dick",
+            "Schokolade schmilzt zu weich",
+            "Bean-to-Bar-Schokolade lagern",
+            "Schokolade sensorisch verkosten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Aeroponik",
+      "batch": "001",
+      "natural_world": "pflanzen",
+      "ownership": "Owns aeroponics-specific systems, misting/nozzles, root chamber, aeroponic nutrient/water management and aeroponic plant operation. Generic hydroponics, hydroculture and indoor-growing intents stay with those identities.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & System",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Aeroponik Funktionsprinzip",
+            "Aeroponik-System planen",
+            "Low Pressure vs High Pressure Aeroponik",
+            "Wurzelkammer bauen",
+            "Behälter und Leitungen dimensionieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Düsen, Pumpe & Bewässerung",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Aeroponik-Düsen auswählen",
+            "Pumpe dimensionieren",
+            "Sprühintervalle einstellen",
+            "Düsenverstopfung vermeiden",
+            "Filterung im Aeroponik-System",
+            "Bewässerungsfehler erkennen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Nährlösung & Wasser",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Nährlösung für Aeroponik",
+            "pH in Aeroponik",
+            "EC in Aeroponik",
+            "Wassertemperatur kontrollieren",
+            "Nährlösung wechseln",
+            "Nährstoffmangel erkennen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Pflanzen & Betrieb",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Pflanzen für Aeroponik",
+            "Stecklinge aeroponisch bewurzeln",
+            "Wurzelgesundheit",
+            "Licht für Aeroponik",
+            "System reinigen und desinfizieren",
+            "Stromausfall und Pumpenausfall absichern"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Ameisenhaltung",
+      "batch": "001",
+      "natural_world": "tiere",
+      "ownership": "Owns ant husbandry, species, colony care, feeding, winter rest, climate and operational formicarium use. Construction-focused DIY intents belong to Formicarienbau; generic terrarium intents remain outside.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Arten",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Ameisenhaltung für Anfänger",
+            "geeignete Einsteigerarten",
+            "einheimische vs exotische Arten",
+            "Ameisenkönigin gründen lassen",
+            "Koloniegröße planen",
+            "Ameisen kaufen oder finden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Formicarium & Nest",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Formicarium auswählen",
+            "Nestarten vergleichen",
+            "Arena einrichten",
+            "Feuchtigkeit im Nest",
+            "Temperatur im Formicarium",
+            "Formicariengröße anpassen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Futter & Wasser",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Ameisen füttern",
+            "Proteinfütterung",
+            "Kohlenhydrate/Zuckerwasser",
+            "Trinkwasser anbieten",
+            "Futtertiere sicher verwenden",
+            "Futterreste entfernen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Winterruhe & Klima",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Winterruhe bei Ameisen",
+            "Ameisen überwintern",
+            "Temperatur absenken",
+            "Feuchtigkeit im Winter",
+            "exotische Arten ohne Winterruhe"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Kolonie & Pflege",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Kolonieentwicklung beobachten",
+            "Brutstadien erkennen",
+            "Umzug ins größere Nest",
+            "Stress vermeiden",
+            "Hygiene im Formicarium",
+            "Schimmel im Nest"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ausbruchsschutz & Probleme",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Ausbruchsschutz anwenden",
+            "PTFE vs Öl als Ausbruchsschutz",
+            "Ameisen brechen aus",
+            "Milben bei Ameisen",
+            "Königin stirbt",
+            "Arbeiterinnen sterben"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "3D-Bogenschießen",
+      "batch": "001",
+      "natural_world": "bewegen",
+      "ownership": "Owns 3D-parcours, 3D targets/scoring, terrain shooting, unknown-distance practice and equipment choices explicitly in 3D context. Generic archery basics/equipment belong to Bogenschießen; traditional-style intents belong to traditionelles Bogenschießen.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Parcours",
+          "article_intent_count": 6,
+          "article_intents": [
+            "3D-Bogenschießen für Anfänger",
+            "3D-Parcours Ablauf",
+            "3D-Ziele und Killzonen",
+            "Parcours-Etikette",
+            "Entfernungen auf dem 3D-Parcours",
+            "erster 3D-Parcours"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Bogen & Ausrüstung",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Bogen für 3D auswählen",
+            "Recurve fürs 3D",
+            "Langbogen fürs 3D",
+            "Compound fürs 3D",
+            "Armschutz und Fingerschutz",
+            "Köcher fürs Gelände",
+            "Outdoor-Kleidung fürs 3D"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Pfeile & Abstimmung",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Pfeile fürs 3D auswählen",
+            "Spine bestimmen",
+            "Pfeillänge bestimmen",
+            "Feldspitzen wählen",
+            "Pfeile tunen",
+            "verlorene Pfeile finden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Technik & Training",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schussablauf trainieren",
+            "Entfernung schätzen",
+            "bergauf und bergab schießen",
+            "unbekannte Distanzen trainieren",
+            "Stand im Gelände",
+            "Trefferbilder verbessern"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Regeln & Wertung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "3D-Wertung verstehen",
+            "Pflöcke und Bogenklassen",
+            "Turnierregeln vergleichen",
+            "Scorecard führen",
+            "Turnier vorbereiten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Wabikusa",
+      "batch": "001",
+      "natural_world": "pflanzen",
+      "ownership": "Owns Wabi-Kusa balls/containers, substrate, emersed aquatic-plant arrangements and their humidity/light/care. Aquascaping owns submerged aquarium layouts; Kokedama and Kusamono remain distinct plant practices.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Aufbau",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Wabi Kusa selber machen",
+            "Wabi-Kusa-Ball herstellen",
+            "Wabi Kusa in Schale anlegen",
+            "Wabi Kusa im Glas anlegen",
+            "Wabi Kusa für Anfänger"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Substrat & Gefäß",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Soil für Wabi Kusa",
+            "Substratball formen",
+            "Gefäß für Wabi Kusa",
+            "Wasserstand einstellen",
+            "Hardscape im Wabi Kusa"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Pflanzen & Gestaltung",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Pflanzen für Wabi Kusa",
+            "emers gezogene Pflanzen",
+            "Aquarienpflanzen umstellen",
+            "Moose für Wabi Kusa",
+            "Wabi Kusa gestalten",
+            "Pflanzen kombinieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Licht & Pflege",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Wabi Kusa beleuchten",
+            "Luftfeuchtigkeit einstellen",
+            "Wabi Kusa besprühen",
+            "Wabi Kusa düngen",
+            "Wabi Kusa schneiden",
+            "Schimmel vermeiden",
+            "Pflanzen trocknen aus"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Buchbinden",
+      "batch": "001",
+      "natural_world": "fertigen",
+      "ownership": "Owns bookbinding craft, materials, tools and binding techniques. Course/provider/service intents belong to DIRECTORY and do not count as CORE article ownership.",
+      "expected_leaf_count": 4,
+      "leafs": []
+    },
+    {
+      "canonical_name": "CB-Funk",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns license-free CB-radio equipment, setup, antennas, operating practice and CB-specific communication. Amateur-radio licensing/modes remain with Amateurfunk.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "cb:einstieg",
+          "leaf_name": "Einstieg & Regeln",
+          "article_intent_count": 5,
+          "article_intents": [
+            "CB-Funk für Anfänger",
+            "CB-Funk Kanäle Deutschland",
+            "CB-Funk Reichweite",
+            "CB-Funk Rufnamen und Funkpraxis",
+            "CB-Funk Regeln Deutschland"
+          ]
+        },
+        {
+          "leaf_key": "cb:geraete",
+          "leaf_name": "Funkgeräte & Stromversorgung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "CB-Funkgerät auswählen",
+            "CB-Funk Mobilgerät einbauen",
+            "CB-Handfunkgerät auswählen",
+            "CB-Funk Stromversorgung",
+            "CB-Funk Mikrofon auswählen"
+          ]
+        },
+        {
+          "leaf_key": "cb:antennen",
+          "leaf_name": "Antennen & Abstimmung",
+          "article_intent_count": 6,
+          "article_intents": [
+            "CB-Funk Antenne auswählen",
+            "CB-Mobilantenne montieren",
+            "CB-Stationsantenne aufbauen",
+            "SWR beim CB-Funk einstellen",
+            "CB-Antenne erden",
+            "CB-Funk Koaxkabel auswählen"
+          ]
+        },
+        {
+          "leaf_key": "cb:praxis",
+          "leaf_name": "Funkpraxis & Reichweite",
+          "article_intent_count": 5,
+          "article_intents": [
+            "CB-Funk Gespräch beginnen",
+            "CB-Funk Skip und Überreichweiten",
+            "CB-Funk im Auto",
+            "CB-Funk unterwegs",
+            "CB-Funk Notfunk Möglichkeiten"
+          ]
+        },
+        {
+          "leaf_key": "cb:stoerung",
+          "leaf_name": "Störungen & Fehler",
+          "article_intent_count": 5,
+          "article_intents": [
+            "CB-Funk Störungen finden",
+            "CB-Funk Rauschen reduzieren",
+            "CB-Funk schlechte Reichweite beheben",
+            "CB-Funk Antennenproblem erkennen",
+            "CB-Funk Masseproblem im Auto"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Software Defined Radio",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns SDR hardware/software, receivers, decoding and SDR-specific projects. Specific radio services/communities keep their own operating intents.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "sdr:einstieg",
+          "leaf_name": "Einstieg & Hardware",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Software Defined Radio für Anfänger",
+            "RTL-SDR auswählen",
+            "SDR Dongle einrichten",
+            "SDR Frequenzbereiche verstehen",
+            "SDR Sample Rate einstellen"
+          ]
+        },
+        {
+          "leaf_key": "sdr:software",
+          "leaf_name": "Software & Bedienung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "SDR++ einrichten",
+            "SDRSharp einrichten",
+            "GQRX einrichten",
+            "SDR Wasserfall verstehen",
+            "SDR Gain richtig einstellen"
+          ]
+        },
+        {
+          "leaf_key": "sdr:antennen",
+          "leaf_name": "Antennen & Empfang",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Antenne für RTL-SDR",
+            "Discone Antenne für SDR",
+            "Dipol für SDR bauen",
+            "LNA für SDR einsetzen",
+            "SDR Störungen reduzieren"
+          ]
+        },
+        {
+          "leaf_key": "sdr:signale",
+          "leaf_name": "Signale & Dekodierung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "FM mit SDR empfangen",
+            "ADS-B mit RTL-SDR",
+            "AIS mit SDR empfangen",
+            "Wetterfunk mit SDR empfangen",
+            "Digitale Signale mit SDR dekodieren"
+          ]
+        },
+        {
+          "leaf_key": "sdr:projekte",
+          "leaf_name": "Projekte & Aufzeichnung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "SDR Empfang aufzeichnen",
+            "SDR Spektrum überwachen",
+            "SDR Remote Station einrichten",
+            "WebSDR selber betreiben",
+            "SDR Empfang automatisieren"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Satellitenfunk",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns active radio communication via satellites, especially amateur-satellite operating practice. Receive-only satellite reception stays with Satellitenempfang; orbital tracking stays with Satellitentracking.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "satfunk:einstieg",
+          "leaf_name": "Einstieg & Satellitenpässe",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Satellitenfunk für Anfänger",
+            "Amateurfunksatelliten finden",
+            "Satellitenpass berechnen",
+            "Elevation und Azimut beim Satellitenfunk",
+            "Dopplereffekt beim Satellitenfunk"
+          ]
+        },
+        {
+          "leaf_key": "satfunk:station",
+          "leaf_name": "Station & Geräte",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Funkgerät für Satellitenfunk",
+            "Vollduplex beim Satellitenfunk",
+            "Duobandgerät für Satellitenfunk",
+            "Satellitenfunk mit Handfunkgerät",
+            "Satellitenfunk Station einrichten"
+          ]
+        },
+        {
+          "leaf_key": "satfunk:antennen",
+          "leaf_name": "Antennen & Nachführung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Yagi für Satellitenfunk",
+            "Handantenne für Satellitenfunk",
+            "Satellitenantenne nachführen",
+            "Antennenrotor für Satellitenfunk",
+            "Polarisation beim Satellitenfunk"
+          ]
+        },
+        {
+          "leaf_key": "satfunk:betrieb",
+          "leaf_name": "Betrieb & QSOs",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Erstes Satelliten-QSO",
+            "Satellitenfrequenzen richtig einstellen",
+            "FM-Satelliten arbeiten",
+            "Lineartransponder nutzen",
+            "Satelliten-QSO loggen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Wettersonden-Tracking",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns receiving, tracking, predicting and recovering radiosondes/weather balloons. Generic SDR remains an enabling tool, not the primary owner.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "sonde:einstieg",
+          "leaf_name": "Einstieg & Sonden",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Wettersonden-Tracking für Anfänger",
+            "Wettersonden Starts finden",
+            "Radiosonden Typen erkennen",
+            "Wettersonden Frequenzen",
+            "Wettersonden Flugbahn verstehen"
+          ]
+        },
+        {
+          "leaf_key": "sonde:empfang",
+          "leaf_name": "Empfang & Antennen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Radiosonde mit SDR empfangen",
+            "Antenne für Wettersonden",
+            "Wettersonden Empfang verbessern",
+            "Radiosonde Signal dekodieren",
+            "Wettersonden mobil empfangen"
+          ]
+        },
+        {
+          "leaf_key": "sonde:tracking",
+          "leaf_name": "Tracking & Vorhersage",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Wettersonde live verfolgen",
+            "Radiosonden Karte nutzen",
+            "Landepunkt Wettersonde vorhersagen",
+            "Wettersonden Tracking Software",
+            "Wettersonden GPS-Daten auswerten"
+          ]
+        },
+        {
+          "leaf_key": "sonde:bergung",
+          "leaf_name": "Bergung & Praxis",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Wettersonde bergen",
+            "Wettersonde finden im Gelände",
+            "Wettersonde sicher zurückholen",
+            "Wettersonden Fund melden",
+            "Wettersonden Tracking rechtliche Hinweise"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Funkpeilung",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns general radio-direction-finding equipment, bearings, triangulation and practical fox-hunt style exercises. Amateur Radio Direction Finding keeps the formal competitive-sport intent.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "peil:einstieg",
+          "leaf_name": "Einstieg & Grundlagen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Funkpeilung für Anfänger",
+            "Funkpeilung Funktionsprinzip",
+            "Peilwinkel bestimmen",
+            "Kreuzpeilung durchführen",
+            "Funkfuchs suchen"
+          ]
+        },
+        {
+          "leaf_key": "peil:geraete",
+          "leaf_name": "Empfänger & Peilgeräte",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Peilempfänger auswählen",
+            "Handfunkgerät zur Funkpeilung",
+            "SDR zur Funkpeilung",
+            "Dämpfungsglied für Funkpeilung",
+            "Peilgerät kalibrieren"
+          ]
+        },
+        {
+          "leaf_key": "peil:antennen",
+          "leaf_name": "Peilantennen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Yagi zur Funkpeilung",
+            "Loop-Antenne zur Funkpeilung",
+            "HB9CV Peilantenne bauen",
+            "Peilantenne selber bauen",
+            "Peilantenne ausrichten"
+          ]
+        },
+        {
+          "leaf_key": "peil:praxis",
+          "leaf_name": "Praxis & Wettbewerbe",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Amateurfunkpeilen Wettbewerb",
+            "Peilroute planen",
+            "Funkquelle im Gelände finden",
+            "Funkpeilung im Fahrzeug",
+            "Peilfehler vermeiden"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Mikrocontroller-Projekte",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns platform-neutral microcontroller fundamentals, sensors/actuators, power, buses and embedded projects. Arduino-specific platform content stays with Arduino.",
+      "expected_leaf_count": 5,
+      "leafs": []
+    },
+    {
+      "canonical_name": "Arduino",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns Arduino boards, IDE/toolchain, libraries, shields and Arduino-specific projects. Generic embedded concepts remain with Mikrocontroller-Projekte.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "arduino:einstieg",
+          "leaf_name": "Einstieg & Boards",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Arduino für Anfänger",
+            "Arduino IDE installieren",
+            "Arduino Uno vs Nano",
+            "Arduino Board auswählen",
+            "Erster Arduino Sketch"
+          ]
+        },
+        {
+          "leaf_key": "arduino:grundlagen",
+          "leaf_name": "Pins, Strom & Schaltungen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Arduino Pins verstehen",
+            "Arduino Stromversorgung",
+            "Arduino Breadboard anschließen",
+            "Arduino Pullup Widerstand",
+            "Arduino PWM verstehen"
+          ]
+        },
+        {
+          "leaf_key": "arduino:sensoren",
+          "leaf_name": "Sensoren & Eingaben",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Temperatursensor Arduino",
+            "Ultraschallsensor Arduino",
+            "Lichtsensor Arduino",
+            "Taster am Arduino",
+            "Potentiometer Arduino"
+          ]
+        },
+        {
+          "leaf_key": "arduino:aktoren",
+          "leaf_name": "Motoren, LEDs & Ausgaben",
+          "article_intent_count": 5,
+          "article_intents": [
+            "LED mit Arduino steuern",
+            "Servo mit Arduino steuern",
+            "Schrittmotor mit Arduino",
+            "Relais mit Arduino",
+            "Display am Arduino"
+          ]
+        },
+        {
+          "leaf_key": "arduino:projekte",
+          "leaf_name": "Projekte & Fehler",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Arduino Projekte für Anfänger",
+            "Arduino Datenlogger bauen",
+            "Arduino Automatisierung Projekt",
+            "Arduino Sketch Fehler finden",
+            "Arduino serielle Ausgabe debuggen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Raspberry-Pi-Projekte",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns Raspberry-Pi-specific setup, Linux/GPIO, networking and maker projects. Generic microcontroller content stays separate.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "rpi:einstieg",
+          "leaf_name": "Einstieg & System",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Raspberry Pi für Anfänger",
+            "Raspberry Pi OS installieren",
+            "Raspberry Pi Modell auswählen",
+            "Raspberry Pi SD-Karte einrichten",
+            "Raspberry Pi per SSH einrichten"
+          ]
+        },
+        {
+          "leaf_key": "rpi:hardware",
+          "leaf_name": "GPIO & Hardware",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Raspberry Pi GPIO verstehen",
+            "Sensor am Raspberry Pi",
+            "LED am Raspberry Pi",
+            "Relais am Raspberry Pi",
+            "Raspberry Pi Stromversorgung"
+          ]
+        },
+        {
+          "leaf_key": "rpi:server",
+          "leaf_name": "Server & Netzwerk",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Raspberry Pi als Heimserver",
+            "Raspberry Pi Webserver",
+            "Raspberry Pi NAS",
+            "Raspberry Pi Pi-hole",
+            "Raspberry Pi VPN"
+          ]
+        },
+        {
+          "leaf_key": "rpi:automation",
+          "leaf_name": "Automation & Smart Home",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Raspberry Pi Home Assistant",
+            "Raspberry Pi MQTT",
+            "Raspberry Pi Sensorstation",
+            "Raspberry Pi Kamera überwachen",
+            "Raspberry Pi Automatisierung Python"
+          ]
+        },
+        {
+          "leaf_key": "rpi:projekte",
+          "leaf_name": "Projekte & Betrieb",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Raspberry Pi Projekte für Anfänger",
+            "Raspberry Pi Retro Gaming",
+            "Raspberry Pi Media Center",
+            "Raspberry Pi Backup erstellen",
+            "Raspberry Pi Fehler beheben"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Roboterbau",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns designing/building hobby robots, chassis, drives, sensors, controllers and integration. Application niches keep their own specific intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "roboterbau:planung",
+          "leaf_name": "Planung & Chassis",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Roboter selber bauen für Anfänger",
+            "Roboter Chassis auswählen",
+            "Roboter Fahrwerk bauen",
+            "Roboter Größe und Gewicht planen",
+            "Roboter Projekt planen"
+          ]
+        },
+        {
+          "leaf_key": "roboterbau:antrieb",
+          "leaf_name": "Motoren & Antrieb",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Motor für Roboter auswählen",
+            "Getriebemotor Roboter",
+            "Motorcontroller Roboter",
+            "Differentialantrieb Roboter",
+            "Roboter Räder auswählen"
+          ]
+        },
+        {
+          "leaf_key": "roboterbau:elektronik",
+          "leaf_name": "Elektronik & Strom",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Roboter Stromversorgung",
+            "Akku für Roboter auswählen",
+            "Roboter Verkabelung",
+            "Sicherung im Roboter",
+            "Spannungsregler im Roboter"
+          ]
+        },
+        {
+          "leaf_key": "roboterbau:sensorik",
+          "leaf_name": "Sensoren & Steuerung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Abstandssensor Roboter",
+            "Liniensensor Roboter",
+            "Encoder am Roboter",
+            "IMU am Roboter",
+            "Robotersteuerung Mikrocontroller"
+          ]
+        },
+        {
+          "leaf_key": "roboterbau:test",
+          "leaf_name": "Programmierung & Test",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Roboter programmieren für Anfänger",
+            "Roboter Fahrregelung",
+            "Roboter Kalibrierung",
+            "Roboter Fehler suchen",
+            "Roboter sicher testen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "BattleBots-Modellbau",
+      "batch": "002",
+      "natural_world": "technik",
+      "ownership": "Owns generic hobby combat-robot building, drive/weapon systems, armor, safety and non-brand-specific competition preparation. The BattleBots name is reserved for official BattleBots events/shows/products and is not used as generic SEO owner.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "combat:einstieg",
+          "leaf_name": "Einstieg, Regeln & Sicherheit",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kampfroboter bauen für Anfänger",
+            "Combat Robotics Regeln",
+            "Kampfroboter Gewichtsklassen",
+            "Kampfroboter Sicherheitsregeln",
+            "Kampfroboter Wettbewerb Einstieg"
+          ]
+        },
+        {
+          "leaf_key": "combat:chassis",
+          "leaf_name": "Chassis & Schutz",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kampfroboter Chassis bauen",
+            "Kampfroboter Panzerung",
+            "Kampfroboter Material auswählen",
+            "Kampfroboter Schwerpunkt planen",
+            "Kampfroboter Räder schützen"
+          ]
+        },
+        {
+          "leaf_key": "combat:antrieb",
+          "leaf_name": "Antrieb & Elektronik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kampfroboter Motor auswählen",
+            "Kampfroboter ESC auswählen",
+            "Kampfroboter Akku auswählen",
+            "Kampfroboter Funksteuerung",
+            "Kampfroboter Verkabelung"
+          ]
+        },
+        {
+          "leaf_key": "combat:waffe",
+          "leaf_name": "Waffensysteme & Mechanik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Spinner Kampfroboter bauen",
+            "Lifter Kampfroboter bauen",
+            "Flipper Kampfroboter bauen",
+            "Kampfroboter Waffe auswuchten",
+            "Kampfroboter Waffenantrieb"
+          ]
+        },
+        {
+          "leaf_key": "combat:test",
+          "leaf_name": "Test, Reparatur & Wettbewerb",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Kampfroboter sicher testen",
+            "Kampfroboter reparieren",
+            "Kampfroboter vor Wettbewerb prüfen",
+            "Kampfroboter Ersatzteile planen",
+            "Kampfroboter Fahrtraining"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Drohnenbau",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns building/configuring drones as a maker practice. FPV-specific flying systems, racing and photography keep their own intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "drbau:einstieg",
+          "leaf_name": "Einstieg & Komponenten",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Drohne selber bauen für Anfänger",
+            "Drohnenrahmen auswählen",
+            "Drohnen Komponentenliste erstellen",
+            "Drohnengewicht richtig planen",
+            "Kosten für eine selbstgebaute Drohne"
+          ]
+        },
+        {
+          "leaf_key": "drbau:antrieb",
+          "leaf_name": "Motoren, Propeller & Akku",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Motoren für Eigenbau-Drohnen auswählen",
+            "Propeller für Drohnen auswählen",
+            "ESC für Drohnen auswählen",
+            "LiPo-Akku für Drohnen auswählen",
+            "Drohnen Stromversorgung richtig auslegen"
+          ]
+        },
+        {
+          "leaf_key": "drbau:elektronik",
+          "leaf_name": "Flight Controller & Elektronik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Flight Controller für Drohnen auswählen",
+            "Flight Controller richtig verkabeln",
+            "Empfänger an Drohne anschließen",
+            "GPS-Modul an Drohne einbauen",
+            "Drohnen Elektronik sauber verkabeln"
+          ]
+        },
+        {
+          "leaf_key": "drbau:setup",
+          "leaf_name": "Firmware & Setup",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Betaflight für Eigenbau-Drohnen einrichten",
+            "Drohnen ESC kalibrieren",
+            "Failsafe bei Drohnen einstellen",
+            "PID-Tuning bei Drohnen",
+            "Flight-Controller-Firmware aktualisieren"
+          ]
+        },
+        {
+          "leaf_key": "drbau:test",
+          "leaf_name": "Test, Fehler & Sicherheit",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Eigenbau-Drohne für den Erstflug prüfen",
+            "Preflight-Check für Drohnen",
+            "Vibrationen bei Drohnen beheben",
+            "Eigenbau-Drohne Fehler systematisch finden",
+            "Eigenbau-Drohne in Deutschland rechtssicher betreiben"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "FPV-Drohnen",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns general FPV-drone setup and flying. Competitive racing belongs to FPV-Racing; generic drone construction belongs to Drohnenbau.",
+      "expected_leaf_count": 5,
+      "leafs": []
+    },
+    {
+      "canonical_name": "FPV-Racing",
+      "batch": "003",
+      "natural_world": "bewegen",
+      "ownership": "Owns competitive FPV racing, race setup, track practice and race-specific tuning. Generic FPV operation stays with FPV-Drohnen.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "fpvr:einstieg",
+          "leaf_name": "Einstieg & Klassen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "FPV-Racing für Anfänger",
+            "FPV-Racing Klassen verstehen",
+            "FPV-Racing Regeln Überblick",
+            "Racing-Drohne Größe auswählen",
+            "FPV-Racing Kosten für Einsteiger"
+          ]
+        },
+        {
+          "leaf_key": "fpvr:build",
+          "leaf_name": "Racing-Drohne bauen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "FPV-Racing-Drohne selber bauen",
+            "Frame für Racing-Drohnen auswählen",
+            "Motoren für Racing-Drohnen auswählen",
+            "ESC für Racing-Drohnen auswählen",
+            "Racing-Drohne leicht und robust bauen"
+          ]
+        },
+        {
+          "leaf_key": "fpvr:tuning",
+          "leaf_name": "Setup & Tuning",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Betaflight für FPV-Racing einstellen",
+            "Rates für FPV-Racing einstellen",
+            "PID-Tuning für Racing-Drohnen",
+            "Motor Output Limit beim FPV-Racing",
+            "Racing-Drohne für Strecke abstimmen"
+          ]
+        },
+        {
+          "leaf_key": "fpvr:flug",
+          "leaf_name": "Flugtechnik & Training",
+          "article_intent_count": 5,
+          "article_intents": [
+            "FPV-Racing Kurven schneller fliegen",
+            "FPV-Racing Gates sauber treffen",
+            "FPV-Racing Lines trainieren",
+            "FPV-Racing Simulator nutzen",
+            "FPV-Racing Reaktionszeit trainieren"
+          ]
+        },
+        {
+          "leaf_key": "fpvr:wettkampf",
+          "leaf_name": "Strecken & Wettkampf",
+          "article_intent_count": 5,
+          "article_intents": [
+            "FPV-Racing Strecke aufbauen",
+            "FPV-Racing Gates selber bauen",
+            "FPV-Racing Zeitmessung einrichten",
+            "FPV-Racing Wettbewerb vorbereiten",
+            "Racing-Drohne zwischen Läufen reparieren"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Drohnenfotografie",
+      "batch": "003",
+      "natural_world": "gestalten",
+      "ownership": "Owns photographic image-making with drones. Generic drone operation/building stays with the drone identities; generic photography stays with Fotografie.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "drfoto:einstieg",
+          "leaf_name": "Einstieg & Kamera",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Drohnenfotografie für Anfänger",
+            "Kameradrohne für Fotografie auswählen",
+            "Drohnenkamera richtig einstellen",
+            "RAW bei Drohnenfotos nutzen",
+            "Drohnenfoto Auflösung und Format wählen"
+          ]
+        },
+        {
+          "leaf_key": "drfoto:aufnahme",
+          "leaf_name": "Aufnahme & Bildgestaltung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Drohnenfotos richtig komponieren",
+            "Top-Down-Fotos mit Drohne",
+            "Panorama mit Drohne fotografieren",
+            "AEB und HDR bei Drohnenfotos",
+            "Bewegungsunschärfe bei Drohnenfotos vermeiden"
+          ]
+        },
+        {
+          "leaf_key": "drfoto:planung",
+          "leaf_name": "Flugplanung & Licht",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Drohnenfotografie zur goldenen Stunde",
+            "Drohnenfoto Standort planen",
+            "Wind für Drohnenfotografie einschätzen",
+            "ND-Filter bei Drohnenfotografie",
+            "Drohnenfotografie Flugroute planen"
+          ]
+        },
+        {
+          "leaf_key": "drfoto:workflow",
+          "leaf_name": "Bearbeitung & Workflow",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Drohnenfotos bearbeiten",
+            "Drohnenfoto Farben korrigieren",
+            "Drohnenpanorama zusammensetzen",
+            "Drohnenfotos archivieren",
+            "Drohnenfoto Metadaten verwalten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Crawling",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns technical crawling and off-road obstacle driving. Scale-focused realism stays with Scale-Crawling.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "crawl:einstieg",
+          "leaf_name": "Einstieg & Fahrzeuge",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Crawling für Anfänger",
+            "RC-Crawler auswählen",
+            "Crawler Maßstab auswählen",
+            "RTR oder Kit beim RC-Crawler",
+            "RC-Crawler Grundsetup"
+          ]
+        },
+        {
+          "leaf_key": "crawl:fahrwerk",
+          "leaf_name": "Fahrwerk & Achsen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Crawler Fahrwerk abstimmen",
+            "RC-Crawler Achsen auswählen",
+            "RC-Crawler Dämpfer einstellen",
+            "RC-Crawler Bodenfreiheit",
+            "RC-Crawler Übersetzung wählen"
+          ]
+        },
+        {
+          "leaf_key": "crawl:reifen",
+          "leaf_name": "Reifen, Felgen & Gewichte",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Crawler Reifen auswählen",
+            "RC-Crawler Felgen auswählen",
+            "Foams für RC-Crawler",
+            "RC-Crawler Gewichte richtig verteilen",
+            "Beadlock-Felgen beim Crawler"
+          ]
+        },
+        {
+          "leaf_key": "crawl:elektronik",
+          "leaf_name": "Motor, Regler & Servo",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Motor für RC-Crawler auswählen",
+            "Regler für RC-Crawler auswählen",
+            "Servo für RC-Crawler auswählen",
+            "BEC beim RC-Crawler",
+            "Akku für RC-Crawler"
+          ]
+        },
+        {
+          "leaf_key": "crawl:praxis",
+          "leaf_name": "Gelände & Fahrtechnik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Crawling Fahrtechnik",
+            "RC-Crawler Steigungen fahren",
+            "RC-Crawler Seitenhang fahren",
+            "Crawler-Parcours bauen",
+            "RC-Crawler im Gelände bergen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Baumaschinen",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns radio-controlled construction machinery and functional model operation.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rcbau:einstieg",
+          "leaf_name": "Einstieg & Maßstäbe",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Baumaschinen für Anfänger",
+            "RC-Baumaschinen Maßstab auswählen",
+            "RC-Baumaschine RTR oder Bausatz",
+            "RC-Baumaschinen gebraucht kaufen",
+            "RC-Baumaschinen Grundausstattung"
+          ]
+        },
+        {
+          "leaf_key": "rcbau:bagger",
+          "leaf_name": "RC-Bagger",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Bagger auswählen",
+            "RC-Bagger Hydraulik einstellen",
+            "RC-Bagger Schaufel wechseln",
+            "RC-Bagger feinfühlig steuern",
+            "RC-Bagger warten"
+          ]
+        },
+        {
+          "leaf_key": "rcbau:lader",
+          "leaf_name": "Radlader, Raupen & Kipper",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Radlader auswählen",
+            "RC-Planierraupe auswählen",
+            "RC-Dumper auswählen",
+            "RC-Baumaschinen Anbaugeräte",
+            "RC-Baumaschinen Lasten bewegen"
+          ]
+        },
+        {
+          "leaf_key": "rcbau:technik",
+          "leaf_name": "Hydraulik & Elektronik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Hydraulik Grundlagen",
+            "Pumpe für RC-Baumaschinen einstellen",
+            "Ventilblock bei RC-Baumaschinen",
+            "Akku für RC-Baumaschinen",
+            "Fernsteuerung für RC-Baumaschinen"
+          ]
+        },
+        {
+          "leaf_key": "rcbau:praxis",
+          "leaf_name": "Parcours & Betrieb",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Baustelle aufbauen",
+            "Material für RC-Baustelle",
+            "RC-Baumaschinen realistisch bedienen",
+            "RC-Baumaschinen transportieren",
+            "RC-Baumaschinen Treffen vorbereiten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-LKW",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns radio-controlled truck building, scale outfitting and operation.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rclkw:einstieg",
+          "leaf_name": "Einstieg & Chassis",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-LKW für Anfänger",
+            "RC-LKW Bausatz auswählen",
+            "RC-LKW Maßstab auswählen",
+            "RC-LKW Chassis aufbauen",
+            "RC-LKW RTR oder Bausatz"
+          ]
+        },
+        {
+          "leaf_key": "rclkw:antrieb",
+          "leaf_name": "Antrieb & Lenkung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Motor für RC-LKW auswählen",
+            "Getriebe für RC-LKW",
+            "Servo für RC-LKW Lenkung",
+            "RC-LKW Geschwindigkeit abstimmen",
+            "Akku für RC-LKW"
+          ]
+        },
+        {
+          "leaf_key": "rclkw:aufbau",
+          "leaf_name": "Aufbauten & Auflieger",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-LKW Auflieger auswählen",
+            "RC-LKW Kipper bauen",
+            "RC-LKW Containerauflieger",
+            "RC-LKW Kupplung einstellen",
+            "RC-LKW Aufbau selber bauen"
+          ]
+        },
+        {
+          "leaf_key": "rclkw:licht",
+          "leaf_name": "Licht, Sound & Funktionen",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-LKW Beleuchtung einbauen",
+            "Soundmodul für RC-LKW",
+            "RC-LKW Rundumleuchten",
+            "RC-LKW Zusatzfunktionen schalten",
+            "RC-LKW Kabel sauber verlegen"
+          ]
+        },
+        {
+          "leaf_key": "rclkw:praxis",
+          "leaf_name": "Parcours & Scale-Fahren",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-LKW Parcours fahren",
+            "RC-LKW rückwärts mit Auflieger",
+            "RC-LKW Rangieren lernen",
+            "RC-LKW Scale-Details",
+            "RC-LKW Treffen vorbereiten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Panzer",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns radio-controlled tank models as functional model-building practice; historical subject matter is context, not a separate owner.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rcpan:einstieg",
+          "leaf_name": "Einstieg & Modelle",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Panzer für Anfänger",
+            "RC-Panzer Maßstab auswählen",
+            "RC-Panzer RTR oder Bausatz",
+            "RC-Panzer Modell auswählen",
+            "RC-Panzer gebraucht kaufen"
+          ]
+        },
+        {
+          "leaf_key": "rcpan:fahrwerk",
+          "leaf_name": "Fahrwerk & Ketten",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Panzer Ketten einstellen",
+            "RC-Panzer Laufwerk warten",
+            "RC-Panzer Getriebe auswählen",
+            "RC-Panzer Kettenspannung",
+            "RC-Panzer Antrieb reparieren"
+          ]
+        },
+        {
+          "leaf_key": "rcpan:turm",
+          "leaf_name": "Turm & Steuerung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Panzer Turm drehen einstellen",
+            "RC-Panzer Kanonenrohr heben senken",
+            "RC-Panzer Fernsteuerung einstellen",
+            "RC-Panzer Empfänger einbauen",
+            "RC-Panzer Steuerung fein abstimmen"
+          ]
+        },
+        {
+          "leaf_key": "rcpan:effekte",
+          "leaf_name": "Sound, Licht & Scale-Effekte",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Soundmodul für RC-Panzer",
+            "RC-Panzer Beleuchtung",
+            "RC-Panzer Rauchgenerator warten",
+            "RC-Panzer Weathering",
+            "RC-Panzer Scale-Details"
+          ]
+        },
+        {
+          "leaf_key": "rcpan:praxis",
+          "leaf_name": "Gelände & Wartung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Panzer im Gelände fahren",
+            "RC-Panzer Hindernisparcours",
+            "RC-Panzer reinigen",
+            "RC-Panzer regelmäßig warten",
+            "RC-Panzer transportieren"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Segelboote",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns sail-powered RC boats and sailing-specific setup/operation.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rcseg:einstieg",
+          "leaf_name": "Einstieg & Boot",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segelboot für Anfänger",
+            "RC-Segelboot auswählen",
+            "RC-Segelboot Klasse auswählen",
+            "RC-Segelboot Bausatz",
+            "RC-Segelboot aufbauen"
+          ]
+        },
+        {
+          "leaf_key": "rcseg:rigg",
+          "leaf_name": "Segel & Rigg",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segelboot Segel einstellen",
+            "RC-Segelboot Mast trimmen",
+            "RC-Segelboot Rigg aufbauen",
+            "RC-Segelboot Segel wechseln",
+            "RC-Segelboot Schoten einstellen"
+          ]
+        },
+        {
+          "leaf_key": "rcseg:technik",
+          "leaf_name": "Servo, Funk & Technik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Segelwinde für RC-Segelboot",
+            "Ruderservo für RC-Segelboot",
+            "Fernsteuerung für RC-Segelboot",
+            "Akku für RC-Segelboot",
+            "RC-Segelboot wasserdicht machen"
+          ]
+        },
+        {
+          "leaf_key": "rcseg:praxis",
+          "leaf_name": "Segeln, Trimm & Regatta",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segelboot segeln lernen",
+            "RC-Segelboot trimmen",
+            "RC-Segelboot wenden und halsen",
+            "RC-Segelboot bei wenig Wind",
+            "RC-Segelboot Regatta Einstieg"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-U-Boote",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns radio-controlled submarines and their diving/sealing/control technology.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rcsub:einstieg",
+          "leaf_name": "Einstieg & Rumpf",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-U-Boot für Anfänger",
+            "RC-U-Boot Bausatz auswählen",
+            "RC-U-Boot Rumpf bauen",
+            "RC-U-Boot Maßstab auswählen",
+            "RC-U-Boot Druckkörper verstehen"
+          ]
+        },
+        {
+          "leaf_key": "rcsub:tauch",
+          "leaf_name": "Tauchtechnik & Ballast",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-U-Boot statisch oder dynamisch tauchen",
+            "Ballasttank bei RC-U-Booten",
+            "RC-U-Boot Tauchzelle einstellen",
+            "RC-U-Boot Auftrieb trimmen",
+            "RC-U-Boot Tauchtiefe kontrollieren"
+          ]
+        },
+        {
+          "leaf_key": "rcsub:technik",
+          "leaf_name": "Antrieb & Elektronik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Motor für RC-U-Boot",
+            "Regler für RC-U-Boot",
+            "Empfänger im RC-U-Boot",
+            "Akku für RC-U-Boot",
+            "RC-U-Boot Antenne verlegen"
+          ]
+        },
+        {
+          "leaf_key": "rcsub:praxis",
+          "leaf_name": "Dichtigkeit, Trimm & Betrieb",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-U-Boot abdichten",
+            "RC-U-Boot auf Lecks prüfen",
+            "RC-U-Boot trimmen",
+            "RC-U-Boot sicher bergen",
+            "RC-U-Boot nach der Fahrt warten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Flugzeuge",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns generic powered RC-airplane basics and operation. Glider-specific intents stay with RC-Segelflug.",
+      "expected_leaf_count": 5,
+      "leafs": []
+    },
+    {
+      "canonical_name": "RC-Segelflug",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns sailplane-specific RC flight, thermals, slope soaring and glider setup.",
+      "expected_leaf_count": 4,
+      "leafs": [
+        {
+          "leaf_key": "rcgl:einstieg",
+          "leaf_name": "Einstieg & Modelle",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segelflug für Anfänger",
+            "RC-Segelflugzeug auswählen",
+            "Elektrosegler oder reiner Segler",
+            "RC-Segler Spannweite auswählen",
+            "RC-Segelflug Bausatz"
+          ]
+        },
+        {
+          "leaf_key": "rcgl:setup",
+          "leaf_name": "Setup & Trimm",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segler Schwerpunkt einstellen",
+            "RC-Segler EWD einstellen",
+            "RC-Segler Ruderausschläge",
+            "RC-Segler Butterfly einstellen",
+            "RC-Segler trimmen"
+          ]
+        },
+        {
+          "leaf_key": "rcgl:start",
+          "leaf_name": "Startarten & Landung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Segler Handstart",
+            "RC-Segler Hochstart",
+            "RC-Segler Schleppstart",
+            "Elektrosegler starten",
+            "RC-Segler landen"
+          ]
+        },
+        {
+          "leaf_key": "rcgl:flug",
+          "leaf_name": "Thermik & Hangflug",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Thermik mit RC-Segler finden",
+            "RC-Segler kreisen in Thermik",
+            "RC-Hangflug für Anfänger",
+            "RC-Segler bei Wind fliegen",
+            "RC-Segelflug Flugzeit verbessern"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "RC-Helikopter",
+      "batch": "003",
+      "natural_world": "technik",
+      "ownership": "Owns radio-controlled helicopters, helicopter-specific mechanics, setup and flight training.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": "rcheli:einstieg",
+          "leaf_name": "Einstieg & Modelle",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Helikopter für Anfänger",
+            "RC-Helikopter Größe auswählen",
+            "Fixed Pitch oder Collective Pitch",
+            "RC-Helikopter BNF oder RTF",
+            "RC-Helikopter gebraucht kaufen"
+          ]
+        },
+        {
+          "leaf_key": "rcheli:mechanik",
+          "leaf_name": "Rotor & Mechanik",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Helikopter Hauptrotor einstellen",
+            "RC-Helikopter Heckrotor einstellen",
+            "RC-Helikopter Blattspurlauf einstellen",
+            "RC-Helikopter Pitch einstellen",
+            "RC-Helikopter Riemen oder Torque Tube"
+          ]
+        },
+        {
+          "leaf_key": "rcheli:elektronik",
+          "leaf_name": "Elektronik & Flybarless",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Flybarless-System einstellen",
+            "Servo für RC-Helikopter",
+            "Regler für RC-Helikopter",
+            "Motor für RC-Helikopter",
+            "Akku für RC-Helikopter"
+          ]
+        },
+        {
+          "leaf_key": "rcheli:setup",
+          "leaf_name": "Setup & Trimm",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Helikopter Taumelscheibe einstellen",
+            "RC-Helikopter Gas- und Pitchkurve",
+            "RC-Helikopter Governor einstellen",
+            "RC-Helikopter Gyro einstellen",
+            "RC-Helikopter Vibrationen beheben"
+          ]
+        },
+        {
+          "leaf_key": "rcheli:flug",
+          "leaf_name": "Flugtraining & Wartung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "RC-Helikopter schweben lernen",
+            "RC-Helikopter Rundflug lernen",
+            "RC-Helikopter Autorotation üben",
+            "RC-Helikopter nach Crash prüfen",
+            "RC-Helikopter regelmäßig warten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Malen",
+      "batch": "EXPANSION19",
+      "natural_world": "gestalten",
+      "ownership": "Owns general painting learning, materials, colour handling, generic painting technique and composition. Context-specific identities such as Seidenmalerei, Glasmalerei, Miniaturen bemalen, Brandmalerei and Schildermalerei keep their specific intents.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Grundlagen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "malen anfangen",
+            "Arbeitsplatz einrichten",
+            "Malgrund wählen",
+            "erste Farbmischungen",
+            "Grundlagen Farbenlehre",
+            "erste Pinselübungen",
+            "typische Anfängerfehler"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Farben & Materialien",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Acrylfarben verstehen",
+            "Aquarellfarben verstehen",
+            "Ölfarben verstehen",
+            "Gouache verstehen",
+            "Malgründe vergleichen",
+            "Malmittel verwenden",
+            "Farben lagern",
+            "Palette auswählen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Werkzeuge & Setup",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Pinselarten wählen",
+            "Staffelei auswählen",
+            "Paletten nutzen",
+            "Beleuchtung fürs Malen",
+            "Pinsel reinigen",
+            "Material transportieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Maltechniken",
+          "article_intent_count": 10,
+          "article_intents": [
+            "Lasieren",
+            "Nass-in-Nass",
+            "deckend malen",
+            "Trockenpinsel",
+            "Spachteltechnik",
+            "Strukturpaste",
+            "Farbverläufe",
+            "Kanten gestalten",
+            "Schichten aufbauen",
+            "Texturen erzeugen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Bildaufbau & Motive",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Komposition",
+            "Perspektive im Bild",
+            "Licht und Schatten",
+            "Tonwerte",
+            "Landschaft malen",
+            "Stillleben malen",
+            "Porträt malen",
+            "abstrakt malen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Praxis & Fehler",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Farben werden matschig",
+            "Trocknungszeiten",
+            "Fehler korrigieren",
+            "Risse vermeiden",
+            "Firnis und Schutz",
+            "Bilder lagern"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Zeichnen",
+      "batch": "EXPANSION19",
+      "natural_world": "gestalten",
+      "ownership": "Owns generic drawing basics, materials, line/form, perspective, value and general motif practice. Karten zeichnen and other context-specific identities keep their specific intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Grundformen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "zeichnen anfangen",
+            "Handhaltung",
+            "Linien üben",
+            "Kreise und Ellipsen",
+            "Grundkörper konstruieren",
+            "Proportionen prüfen",
+            "Skizzen aufbauen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Material & Werkzeuge",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Bleistifthärten",
+            "Papier wählen",
+            "Radierer nutzen",
+            "Spitzer wählen",
+            "Buntstifte einsetzen",
+            "Kohle einsetzen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Linie, Form & Perspektive",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Konturen zeichnen",
+            "Form vereinfachen",
+            "Einpunktperspektive",
+            "Zweipunktperspektive",
+            "Verkürzungen",
+            "räumliche Tiefe",
+            "Maßverhältnisse",
+            "Konstruktion aus Grundformen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Licht, Schatten & Tonwerte",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schraffur",
+            "Kreuzschraffur",
+            "Tonwertskala",
+            "Lichtquelle verstehen",
+            "Kernschatten",
+            "Schlagschatten"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Motive & Praxis",
+          "article_intent_count": 9,
+          "article_intents": [
+            "Stillleben",
+            "Porträt",
+            "Architektur",
+            "Naturmotive",
+            "Tiere",
+            "Hände",
+            "Falten",
+            "Oberflächen",
+            "regelmäßig üben"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Nähen",
+      "batch": "EXPANSION19",
+      "natural_world": "fertigen",
+      "ownership": "Owns generic sewing with machine/hand, fabrics, patterns, seams, fit and everyday projects. Historical clothing sewing, costume construction and other specialist identities keep their context-specific intents.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Nähmaschine",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Nähen anfangen",
+            "Nähmaschine auswählen",
+            "Nähmaschine einfädeln",
+            "Unterfaden einsetzen",
+            "Geradstich",
+            "Zickzackstich",
+            "Fadenspannung",
+            "erste Nähübung"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Stoffe, Nadeln & Garn",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Webware",
+            "Jersey",
+            "Stoff vorwaschen",
+            "Nadeltypen",
+            "Garn wählen",
+            "Vlieseline",
+            "Stoffrichtung",
+            "Materialbedarf"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Schnittmuster & Zuschnitt",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Schnittmuster lesen",
+            "Größe wählen",
+            "Nahtzugabe",
+            "Fadenlauf",
+            "Schnitt übertragen",
+            "Stoff zuschneiden",
+            "Markierungen übertragen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Nähte & Verarbeitung",
+          "article_intent_count": 10,
+          "article_intents": [
+            "Naht versäubern",
+            "Saum nähen",
+            "Reißverschluss",
+            "Knopfloch",
+            "Abnäher",
+            "Beleg",
+            "Bündchen",
+            "Taschen",
+            "Ecken und Rundungen",
+            "Naht auftrennen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Passform & Änderungen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Schnitt verlängern",
+            "Schnitt kürzen",
+            "Weite anpassen",
+            "Brustabnäher anpassen",
+            "Hosenbund anpassen",
+            "Ärmel anpassen",
+            "Probemodell"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Projekte, Reparatur & Pflege",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Kissen nähen",
+            "Tasche nähen",
+            "Rock nähen",
+            "Hose nähen",
+            "Kleidung reparieren",
+            "Loch ausbessern",
+            "Naht reparieren",
+            "Nähprojekt pflegen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Stricken",
+      "batch": "EXPANSION19",
+      "natural_world": "fertigen",
+      "ownership": "Owns generic knitting basics, yarn/needles, stitch patterns, shaping and ordinary knitting projects. Specialist textile identities retain their own techniques.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Grundmaschen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Maschen anschlagen",
+            "rechte Maschen",
+            "linke Maschen",
+            "Randmaschen",
+            "abketten",
+            "Maschen zählen",
+            "Strickschrift lesen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Wolle, Nadeln & Maschenprobe",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Garnstärken",
+            "Nadelstärken",
+            "Materialfasern",
+            "Maschenprobe",
+            "Lauflänge",
+            "Garnmenge berechnen",
+            "Nadelmaterial"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Muster & Techniken",
+          "article_intent_count": 9,
+          "article_intents": [
+            "Bündchenmuster",
+            "Perlmuster",
+            "Zopfmuster",
+            "Lochmuster",
+            "Farbwechsel",
+            "mehrfarbig stricken",
+            "Rundstricken",
+            "verkürzte Reihen",
+            "Maschen aufnehmen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Formen & Passform",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Zunahmen",
+            "Abnahmen",
+            "Ärmel formen",
+            "Halsausschnitt",
+            "Schultern",
+            "Größe anpassen",
+            "Strickstück spannen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Projekte, Fehler & Pflege",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Schal",
+            "Mütze",
+            "Socken",
+            "Pullover",
+            "fallengelassene Masche",
+            "Fehler zurückstricken",
+            "Fäden vernähen",
+            "Strickstücke waschen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Häkeln",
+      "batch": "EXPANSION19",
+      "natural_world": "fertigen",
+      "ownership": "Owns generic crochet basics, yarn/hooks, stitch patterns, shaping and ordinary crochet projects. Specialist textile identities retain their specific intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Grundmaschen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Luftmaschen",
+            "feste Maschen",
+            "halbe Stäbchen",
+            "Stäbchen",
+            "Kettmaschen",
+            "Wendeluftmaschen",
+            "Häkelschrift lesen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Garn, Nadeln & Maschenprobe",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Garnstärken",
+            "Häkelnadel wählen",
+            "Fasern wählen",
+            "Maschenprobe",
+            "Garnmenge berechnen",
+            "Nadelmaterial"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Muster & Techniken",
+          "article_intent_count": 9,
+          "article_intents": [
+            "in Runden häkeln",
+            "in Reihen häkeln",
+            "Farbwechsel",
+            "Granny Squares",
+            "Reliefmaschen",
+            "Muschelmuster",
+            "Netzmuster",
+            "Zu- und Abnahmen",
+            "Teile verbinden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Formen & Konstruktion",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Kreis häkeln",
+            "Oval häkeln",
+            "rechteckig häkeln",
+            "Ärmel formen",
+            "Halsausschnitt",
+            "Größe anpassen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Projekte, Fehler & Pflege",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Topflappen",
+            "Schal",
+            "Mütze",
+            "Tasche",
+            "Pullover",
+            "Maschenfehler korrigieren",
+            "Fäden vernähen",
+            "Häkelstücke waschen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Heimwerken",
+      "batch": "EXPANSION19",
+      "natural_world": "fertigen",
+      "ownership": "Owns generic household DIY, mounting, repair and renovation practice. Specialist woodworking, metalwork, electrical/electronics, Smart Home and craft identities keep their technical/specialist intents.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg, Werkzeug & Sicherheit",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Grundausstattung",
+            "Werkzeugkoffer",
+            "Akkuschrauber",
+            "Bohrmaschine",
+            "Messwerkzeuge",
+            "Schutzausrüstung",
+            "Arbeitsplatz sichern",
+            "Werkzeug pflegen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Messen, Bohren & Befestigen",
+          "article_intent_count": 8,
+          "article_intents": [
+            "richtig messen",
+            "Dübel wählen",
+            "in Mauerwerk bohren",
+            "in Fliesen bohren",
+            "Schrauben wählen",
+            "Lasten befestigen",
+            "Regale montieren",
+            "Bilder aufhängen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Wände, Böden & Oberflächen",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Wände streichen",
+            "Tapezieren",
+            "Löcher spachteln",
+            "Laminat verlegen",
+            "Sockelleisten montieren",
+            "Silikonfugen erneuern",
+            "Oberflächen schleifen",
+            "Lackieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Montieren & Reparieren",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Möbel montieren",
+            "Scharnier einstellen",
+            "Schublade reparieren",
+            "Tür einstellen",
+            "lockere Verbindung reparieren",
+            "Dichtung wechseln",
+            "kleine Beschläge ersetzen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Kleine Bauprojekte",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Werkbank bauen",
+            "einfaches Regal bauen",
+            "Pflanzkasten bauen",
+            "Raumteiler bauen",
+            "Wandverkleidung montieren",
+            "Stauraumlösung bauen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Werkstatt & Projektpraxis",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Werkstatt einrichten",
+            "Werkzeuge lagern",
+            "Material lagern",
+            "Projekt planen",
+            "Materialbedarf berechnen",
+            "Staub absaugen",
+            "Arbeitsplatz beleuchten"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Wandern",
+      "batch": "EXPANSION19",
+      "natural_world": "bewegen",
+      "ownership": "Owns generic day/long-distance hiking basics, planning, equipment, walking technique and hiking safety. Specialist trekking/ultralight and other named outdoor identities keep their specific intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Tourwahl",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Wandern anfangen",
+            "Schwierigkeitsgrad wählen",
+            "Streckenlänge wählen",
+            "Höhenmeter einschätzen",
+            "Rundtour planen",
+            "Tageswanderung planen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ausrüstung & Schuhe",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Wanderschuhe wählen",
+            "Rucksack wählen",
+            "Bekleidung schichten",
+            "Wanderstöcke",
+            "Trinksystem",
+            "Erste-Hilfe-Set",
+            "Regenschutz",
+            "Packliste"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Planung & Navigation",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Wanderkarte lesen",
+            "GPX nutzen",
+            "Kompass nutzen",
+            "Wegmarkierungen",
+            "Anreise planen",
+            "Pausen planen",
+            "Umkehrpunkt festlegen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Technik & Kondition",
+          "article_intent_count": 6,
+          "article_intents": [
+            "bergauf gehen",
+            "bergab gehen",
+            "Trittsicherheit",
+            "Tempo finden",
+            "Ausdauer aufbauen",
+            "Blasen vermeiden"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Sicherheit, Wetter & Natur",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Wetter prüfen",
+            "Gewitter",
+            "Hitze",
+            "Kälte",
+            "Notfall unterwegs",
+            "Verhalten im Wald",
+            "Naturschutz",
+            "Zecken"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Schwimmen",
+      "batch": "EXPANSION19",
+      "natural_world": "bewegen",
+      "ownership": "Owns generic recreational swimming, core techniques, training and general swim equipment. Specialist identities such as Freediving, Mermaid Swimming and Fin Swimming keep their specific intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Wassergefühl",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Wassergewöhnung",
+            "Atmung ins Wasser",
+            "Wasserlage",
+            "Gleiten",
+            "Beinschlag Grundlagen",
+            "Armzug Grundlagen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Schwimmarten & Technik",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Kraultechnik",
+            "Brusttechnik",
+            "Rückenschwimmen",
+            "Delfin Grundlagen",
+            "Wenden",
+            "Startsprung",
+            "Technikfehler",
+            "Koordination"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Training & Ausdauer",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Trainingsplan Anfänger",
+            "Intervalle",
+            "Grundlagenausdauer",
+            "Technikdrills",
+            "Tempo verbessern",
+            "Distanz steigern"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ausrüstung",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schwimmbrille",
+            "Badebekleidung",
+            "Pullbuoy",
+            "Kickboard",
+            "Paddles",
+            "Badekappe"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Sicherheit & Praxis",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Schwimmbadregeln",
+            "Freiwasser Grundlagen",
+            "Wassertemperatur",
+            "Krämpfe",
+            "Pausen",
+            "Hygiene"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Bouldern",
+      "batch": "EXPANSION19",
+      "natural_world": "bewegen",
+      "ownership": "Owns bouldering in hall and outdoors, movement technique, bouldering training and bouldering-specific equipment/safety. Generic climbing orientation remains with Klettern.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Hallenpraxis",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Bouldern anfangen",
+            "Schwierigkeitsgrade",
+            "Hallenregeln",
+            "Aufwärmen",
+            "Abspringen",
+            "erste Boulder lesen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ausrüstung",
+          "article_intent_count": 5,
+          "article_intents": [
+            "Boulderschuhe",
+            "Chalk",
+            "Chalkbag",
+            "Bürste",
+            "Crashpad"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Technik & Bewegung",
+          "article_intent_count": 9,
+          "article_intents": [
+            "Antreten",
+            "Körperschwerpunkt",
+            "Eindrehen",
+            "Heel Hook",
+            "Toe Hook",
+            "Mantle",
+            "Dynamische Züge",
+            "Flaggen",
+            "Tritttechnik"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Training",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Fingerkraft",
+            "Zugkraft",
+            "Rumpfkraft",
+            "Beweglichkeit",
+            "Ausdauer",
+            "Regeneration",
+            "Trainingsplan",
+            "Verletzungen vorbeugen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Outdoor & Sicherheit",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Crashpad platzieren",
+            "Spotten",
+            "Absprungbereich",
+            "Felsregeln",
+            "Naturschutz",
+            "Wetter",
+            "Haut und Finger pflegen"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Gemüseanbau",
+      "batch": "EXPANSION19",
+      "natural_world": "pflanzen",
+      "ownership": "Owns generic home vegetable growing from planning and sowing through care and harvest. Crop-specific identities such as Chili-Zucht, Tomatensorten-Zucht and Saatguterhaltung keep their specific intents.",
+      "expected_leaf_count": 6,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Planung, Standort & Beet",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Gemüsegarten planen",
+            "Sonne und Schatten",
+            "Beetgröße",
+            "Hochbeet",
+            "Mischkultur",
+            "Fruchtfolge planen",
+            "Balkonanbau"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Aussaat & Anzucht",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Aussaatkalender",
+            "Vorkultur",
+            "Direktsaat",
+            "Keimtemperatur",
+            "Pikieren",
+            "Abhärten",
+            "Jungpflanzen setzen",
+            "Saattiefe"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Boden, Düngung & Kompost",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Bodenart bestimmen",
+            "Boden verbessern",
+            "Kompost",
+            "organisch düngen",
+            "Nährstoffbedarf",
+            "pH Grundlagen",
+            "Mulchen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Bewässerung & Pflege",
+          "article_intent_count": 6,
+          "article_intents": [
+            "richtig gießen",
+            "Tropfbewässerung",
+            "Mulch gegen Trockenheit",
+            "Ausgeizen",
+            "Stützen",
+            "Unkraut regulieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Krankheiten & Schädlinge",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Blattläuse",
+            "Schnecken",
+            "Pilzkrankheiten",
+            "Nützlinge",
+            "Kulturschutznetz",
+            "Vorbeugung",
+            "befallene Pflanzen behandeln",
+            "Pflanzenschutz ohne Chemie"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Ernte, Saatgut & Saison",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Erntezeitpunkt",
+            "richtig lagern",
+            "Samen gewinnen",
+            "Saatgut trocknen",
+            "Nachkultur",
+            "Gründüngung",
+            "Beet winterfest",
+            "Saison verlängern"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Briefmarken sammeln",
+      "batch": "EXPANSION19",
+      "natural_world": "sammeln",
+      "ownership": "Owns generic philately/briefmark collection building, identification, cataloguing, condition, storage and exchange. Specialized postal-history or other paper-collecting identities keep their own intents.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg & Sammelgebiete",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Briefmarken sammeln anfangen",
+            "Ländersammlung",
+            "Motivsammlung",
+            "Zeitraum wählen",
+            "gestempelt oder postfrisch",
+            "Sammlungsziel definieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Bestimmen & Katalogisieren",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Briefmarke bestimmen",
+            "Katalog nutzen",
+            "Wasserzeichen",
+            "Zähnung",
+            "Druckvarianten",
+            "Ausgabejahr",
+            "Sammlung inventarisieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Zustand, Echtheit & Wert",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Erhaltung beurteilen",
+            "Gummierung",
+            "Stempel beurteilen",
+            "Beschädigungen",
+            "Fälschungen erkennen",
+            "Prüfzeichen",
+            "Wert grob einschätzen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Aufbewahrung & Pflege",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Album wählen",
+            "Einsteckbuch",
+            "Klemmtaschen",
+            "Pinzette",
+            "Feuchtigkeit vermeiden",
+            "Lichtschutz"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Tauschen, Kaufen & Ausstellen",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Tauschpartner finden",
+            "Tauschtag",
+            "Börse",
+            "online kaufen",
+            "Auktion Grundlagen",
+            "Ausstellungssammlung",
+            "Sammlerschutz"
+          ]
+        }
+      ]
+    },
+    {
+      "canonical_name": "Plane Spotting",
+      "batch": "EXPANSION19",
+      "natural_world": "forschen",
+      "ownership": "Owns aircraft observation, identification, registrations, spotting locations, flight-tracking preparation and aircraft-specific photographic documentation. Generic camera/photography technique remains with Fotografie.",
+      "expected_leaf_count": 5,
+      "leafs": [
+        {
+          "leaf_key": null,
+          "leaf_name": "Einstieg, Orte & Regeln",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Planespotting anfangen",
+            "Spotterpunkt finden",
+            "Flughafenregeln",
+            "öffentliche Standorte",
+            "Sicherheitsabstand",
+            "Wetter und Windrichtung"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Flugzeuge erkennen",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Flugzeugtypen unterscheiden",
+            "Airline-Lackierungen",
+            "Registrierungen lesen",
+            "Frachter erkennen",
+            "Sonderlackierungen",
+            "Flugzeugfamilien",
+            "Triebwerke unterscheiden",
+            "Typenlisten führen"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Tracking & Planung",
+          "article_intent_count": 7,
+          "article_intents": [
+            "Flugtracker nutzen",
+            "Ankunft planen",
+            "Abflug planen",
+            "Startbahn abschätzen",
+            "seltene Maschine finden",
+            "Flugnummern verstehen",
+            "Tagesplanung"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Fotografie & Dokumentation",
+          "article_intent_count": 8,
+          "article_intents": [
+            "Flugzeuge scharf fotografieren",
+            "Mitzieher",
+            "Brennweite am Flughafen",
+            "Hitzeflimmern",
+            "Gegenlicht",
+            "Standortwinkel",
+            "Serienaufnahme",
+            "Bilddaten dokumentieren"
+          ]
+        },
+        {
+          "leaf_key": null,
+          "leaf_name": "Archiv, Sammlung & Community",
+          "article_intent_count": 6,
+          "article_intents": [
+            "Bilder archivieren",
+            "Registrierungslog führen",
+            "Dublettenkontrolle",
+            "Sammlungsziele",
+            "Spotter-Community",
+            "Bilder tauschen"
+          ]
+        }
+      ]
+    }
+  ]
+}
