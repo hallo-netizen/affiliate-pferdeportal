@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.203
+ * Version: 6.72.204
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.203';
+    const VERSION = '6.72.204';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -1997,7 +1997,12 @@ JS;
         if (has_shortcode($raw_post_content, 'pp_affiliate_slot') || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
             return $content;
         }
-        return $this->article_plan_apply_to_content((string) $content, (int) $post_id);
+        // KISS 6.72.204: Ein ausdrücklich im Beitrag gesetzter Tarifrechner
+        // ersetzt nur die automatische Bannerwerbung im Artikel. Rechner und
+        // Produktboxen bleiben unverändert. Kein zusätzlicher DB-/HTTP-Zugriff:
+        // der rohe Beitragsinhalt ist an dieser Stelle bereits geladen.
+        $suppress_article_banners = has_shortcode($raw_post_content, 'affiliate_rechner');
+        return $this->article_plan_apply_to_content((string) $content, (int) $post_id, $suppress_article_banners);
     }
 
     public function auto_inject_affiliate_slots($content) {
@@ -2021,9 +2026,12 @@ JS;
             return $content;
         }
 
-        // Wenn der Beitrag bereits bewusst Slots enthält, keine Auto-Dopplung erzwingen.
+        // Wenn der Beitrag bereits bewusst einen Rechner oder Slot enthält,
+        // keine automatische Banner-Ausgabe darüberlegen.
         $raw_post_content = (string) get_post_field('post_content', $post_id);
-        if (has_shortcode($raw_post_content, 'pp_affiliate_slot') || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
+        if (has_shortcode($raw_post_content, 'affiliate_rechner')
+            || has_shortcode($raw_post_content, 'pp_affiliate_slot')
+            || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
             return $content;
         }
 
