@@ -147,6 +147,8 @@ jobs:
           $mobile=$seed('mobile-wide',600,100);
           $pd=$call('output_plan_creative',$desktop,true,$portalKey);
           $pm=$call('output_plan_creative',$mobile,true,$portalKey);
+          echo "DESKTOP_PLAN=".wp_json_encode($pd,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+          echo "MOBILE_PLAN=".wp_json_encode($pm,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
           $ok(is_array($pd) && (int)($pd['active']??0)>=1,'desktop_banner_materialized');
           $ok(is_array($pm) && (int)($pm['active']??0)>=1,'mobile_banner_materialized');
 
