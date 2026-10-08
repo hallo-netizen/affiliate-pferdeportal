@@ -1847,3 +1847,14 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 
 **Status:** OPEN / ROOT_CAUSE_FOR_WARNING_PROVEN / FIX_NOT_STARTED / NO_INSTALLER.
 
+
+
+### 08.10.2026 – 6.72.211 LOCAL
+
+- Rootfix: normale Bannerkennzeichnung nutzt den bereits ausgewählten `creative_type`; kein Zugriff mehr auf die nicht initialisierte Variable.
+- Gebündelter Performanceblock: auf `admin-ajax.php` werden reine Admin-/Lifecycle-/Migration-/Scheduling-Hooks nicht registriert; der echte eBay-AJAX-Endpunkt bleibt erhalten.
+- Lokal positiv/negativ/regressiv PASS; Frontend- und normaler Admin-Hookbestand funktional identisch.
+- Source-Manifest: `a3b5be638796ded1070e53c7386f5ecc819e9ec7a08d650c4d217c6406da5bb6`.
+- WordPress/MariaDB-Gate: OPEN. Kein Release, keine Installation.
+
+**Status:** LOCAL_ROOTFIX_AND_PERFORMANCE_PASS / WORDPRESS_MARIADB_GATE_OPEN.
