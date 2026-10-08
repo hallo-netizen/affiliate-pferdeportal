@@ -1,0 +1,48 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_004_PREPARED",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PREPARED_AHEAD__DO_NOT_RUN_BEFORE_BATCH_003_FINAL",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical identities in stable master order after the 48 identities covered by final Batch 001+002 and reserved Batch 003; skip 3D-Druck because it is already final in Batch 001.",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "selected": [
+    "hobby:rc-drift",
+    "hobby:rc-offroad",
+    "hobby:rc-trial",
+    "hobby:rc-rennsport",
+    "hobby:modell-dampfmaschinen",
+    "hobby:stirlingmotoren",
+    "hobby:modellmotorenbau",
+    "hobby:modellmaschinenbau",
+    "hobby:mini-cnc",
+    "hobby:cnc-frasen",
+    "hobby:lasercutting",
+    "hobby:lasergravieren",
+    "hobby:resin-3d-druck",
+    "hobby:3d-scanning",
+    "hobby:cad-als-hobby",
+    "hobby:heimautomatisierung"
+  ],
+  "counts": {
+    "candidates": 16,
+    "proposed_leafs": 54,
+    "proposed_article_intents": 310,
+    "dataforseo_keywords": 310,
+    "planned_paid_calls": 1
+  },
+  "files": {
+    "assessment_input_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_004_ASSESSMENT_INPUT_20261008.json",
+    "subject_preflight_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_004_SUBJECT_PREFLIGHT_20261008.json",
+    "assessment_input_sha256": "d7ed42d9e6928954e60297266a4160a5fd132b4c9ca47188fd6327d0874858d5",
+    "subject_preflight_sha256": "14b3daa491c0a586ff427164685c0a0b0a1d45800fd7bb2a9f359b847e3ee8ee"
+  },
+  "automatic_depth_research": false,
+  "structure_write_capability": false,
+  "wordpress_structure_writes_allowed": 0,
+  "gating_note": "Batch 004 is only pre-staged to avoid idle time. Do not execute its DataForSEO call until Batch 003 is final, so cross-batch ownership and the authoritative closed-ID set stay sequential."
+}
