@@ -174,3 +174,28 @@ Dieser Punkt ist fachlich getrennt von der Banner-Zuordnung.
 Kurzform:
 `zentraler Rechner -> stabile ID -> Platzhalter im Beitrag -> Shortcode rendert zentralen Code`.
 
+
+
+## 11. Verbindlicher KISS-Pflegevertrag – Aufräumen und Vereinfachen ohne Funktionsumbau
+
+Nutzerentscheidung 08.10.2026:
+
+Das funktionierende Affiliate-System wird **nicht neu gebaut und nicht fachlich umstrukturiert**. Aufräumen bedeutet ausschließlich: Altlasten entfernen, Bedienung vereinfachen und unnötige Dauerlast reduzieren, soweit dabei kein funktionierender Prozess verändert wird.
+
+Verbindlich:
+
+- Neue Banner bleiben im bestehenden automatischen Provider-/Importweg. Standard-Automation bleibt der bestehende 2-Wochen-Zyklus; ein manueller Start ist nur für sofortige Synchronisation nötig.
+- Bestehende technische Prüfung, Zielzuordnung, Materialisierung, Ranking, Verteilung und Renderer bleiben erhalten.
+- Bestands-Rückversicherung bleibt zweistufig: erster vollständiger Fehlzyklus = `quarantine_missing`; zweiter vollständiger Fehlzyklus = `inactive_missing` und nur die automatische Kampagne wird deaktiviert. Manuelle FIXED-Entscheidungen bleiben erhalten.
+- Der separate Health-Check bleibt als zusätzliche technische Rückversicherung erhalten.
+- Backend: normale Bedienoberfläche so klein wie möglich; historische/Spezialseiten dürfen aus der sichtbaren Navigation verschwinden, solange notwendige Direkt-/Interneinstiege erhalten bleiben.
+- Technische Routing-/Aktivierungsdetails müssen nicht in der normalen KISS-Oberfläche erscheinen, wenn sie intern weiterhin vollständig erhalten sind.
+- Alte Recovery-Optionen/-Cronzustände dürfen durch das bestehende bounded Housekeeping entfernt werden, sobald sie obsolet sind.
+- Dateien, Recoverydaten oder Kompatibilitätspfade dürfen **nicht** gelöscht werden, solange ein aktueller Runtime-/Incident-Fallback sie noch referenziert.
+- Keine neue Tabelle, keine neue Frontend-DB-Abfrage, kein Frontend-HTTP und keine zweite Automations-/Health-/Verteilungsarchitektur für reine Aufräumarbeit.
+- Ein bestehender möglicher Performance-Hotspot darf nicht im Rahmen „Aufräumen“ durch einen neuen Prozess ersetzt werden. Prozessänderungen brauchen einen eigenen belegten Auftrag.
+- Datenbankpflege bleibt bounded und darf aktive/offene Jobs, aktive Providerdaten, veröffentlichte Ausgaben oder manuelle Freigaben nicht löschen.
+
+Kurzform:
+
+`Funktionierenden Prozess einfrieren -> nur sichtbare/tote Altlasten entfernen -> vorhandenes Housekeeping/Health nutzen -> Performance messen -> keine Architekturänderung`.
