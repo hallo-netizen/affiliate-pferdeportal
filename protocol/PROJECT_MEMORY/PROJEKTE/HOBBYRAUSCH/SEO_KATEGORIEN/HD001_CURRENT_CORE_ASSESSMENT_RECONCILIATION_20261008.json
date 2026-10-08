@@ -1,0 +1,102 @@
+{
+  "contract": "HD001_CURRENT_CORE_ASSESSMENT_RECONCILIATION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__161_CURRENT_CORE_IDENTITIES_RECONCILED__198_PENDING",
+  "current_live_target": {
+    "canonical_entities": 860,
+    "core_entities": 359,
+    "editorial_finder_entities": 501,
+    "source": "V1.14.1 live dry-run"
+  },
+  "authority_order": [
+    "Batch 001 final assessment 2026-10-07",
+    "Batch 002 final assessment 2026-10-08 (supersedes older 2026-10-07 result)",
+    "Batch 003 final assessment 2026-10-08 (supersedes older 2026-10-07 result)",
+    "Batch 004-019 closed structural decisions from assessment ledger 1.1; reuse as subject evidence under unchanged leaf thresholds, no automatic target write",
+    "Expansion19 final assessment 2026-10-08"
+  ],
+  "reconciled_current_core": {
+    "assessed": 161,
+    "pending": 198,
+    "roles": {
+      "HOBBY_HUB": 129,
+      "ORIENTATION_UNIVERSE": 23,
+      "EDITORIAL_TOPIC": 6,
+      "ALIAS_ONLY": 3
+    }
+  },
+  "components": {
+    "batches_001_003_latest": {
+      "current_assessed": 41,
+      "HOBBY_HUB": 31,
+      "ORIENTATION_UNIVERSE": 10,
+      "EDITORIAL_TOPIC": 0,
+      "ALIAS_ONLY": 0
+    },
+    "batches_004_019": {
+      "current_assessed": 101,
+      "HOBBY_HUB": 86,
+      "ORIENTATION_UNIVERSE": 6,
+      "EDITORIAL_TOPIC": 6,
+      "ALIAS_ONLY": 3
+    },
+    "expansion19": {
+      "current_assessed": 19,
+      "HOBBY_HUB": 12,
+      "ORIENTATION_UNIVERSE": 7,
+      "EDITORIAL_TOPIC": 0,
+      "ALIAS_ONLY": 0
+    }
+  },
+  "known_current_core_cleanup": [
+    {
+      "name": "Mini-CNC",
+      "role": "EDITORIAL_TOPIC"
+    },
+    {
+      "name": "Smart-Home-Basteln",
+      "role": "EDITORIAL_TOPIC"
+    },
+    {
+      "name": "Custom Keyboards",
+      "role": "ALIAS_ONLY"
+    },
+    {
+      "name": "Case-Modding",
+      "role": "EDITORIAL_TOPIC"
+    },
+    {
+      "name": "Chainmail",
+      "role": "ALIAS_ONLY"
+    },
+    {
+      "name": "Lederprägen",
+      "role": "EDITORIAL_TOPIC"
+    },
+    {
+      "name": "Papierschöpfen",
+      "role": "EDITORIAL_TOPIC"
+    },
+    {
+      "name": "Pyrographie",
+      "role": "ALIAS_ONLY"
+    },
+    {
+      "name": "Dioramenmalerei",
+      "role": "EDITORIAL_TOPIC"
+    }
+  ],
+  "detailed_leaf_evidence": {
+    "latest_batches_001_003_current_hobby_hubs": 31,
+    "expansion19_hobby_hubs": 12,
+    "total_current_hubs_with_stored_detailed_leaf_prework": 43,
+    "note": "Batch 001-003 and Expansion19 have stored subject preflight/capacity detail. Batch 004-019 final decisions preserve role/leaf counts, but detailed leaf names must be reconstructed/revalidated where the preflight source is not available."
+  },
+  "provisional_effect": {
+    "current_core_known_not_to_remain_core": 9,
+    "provisional_core_after_known_cleanup": 350,
+    "warning": "350 is NOT a final CORE count because 198 current CORE identities remain unassessed."
+  },
+  "next_action": "Complete rule-1.6 assessment for the 198 pending current CORE identities and reconstruct/revalidate visible content categories for all HOBBY_HUBs before any WordPress write."
+}
