@@ -1575,49 +1575,6 @@ trait PPAR_Creative_Library_Trait {
                         'slot_id'=>$fixed_slot_id,
                     );
 
-                    // KISS: Fuer Banner gibt es nur eine fachliche Zielwahrheit:
-                    // Creative-Library topic_targets. Die manuelle Auswahl schreibt
-                    // exakt in dieselbe Struktur wie die automatische Zuordnung.
-                    if (sanitize_key((string)($row['creative_type'] ?? '')) === 'banner') {
-                        $records = method_exists($this, 'output_banner_library_records')
-                            ? $this->output_banner_library_records($row)
-                            : array();
-                        $records = array_values(array_filter((array)$records, static function($record) use ($portal_key) {
-                            return !is_array($record) || sanitize_key((string)($record['portal_key'] ?? '')) !== $portal_key;
-                        }));
-                        $path_keys = method_exists($this, 'output_banner_target_path_keys')
-                            ? $this->output_banner_target_path_keys($fixed_target, $targets, $portal_key)
-                            : array(sanitize_text_field((string)($fixed_target['key'] ?? '')));
-                        $manual_record = array(
-                            'portal_key'=>$portal_key,
-                            'state'=>'mapped',
-                            'level'=>'manual',
-                            'target_key'=>sanitize_text_field((string)($fixed_target['key'] ?? '')),
-                            'target_label'=>sanitize_text_field((string)($fixed_target['label'] ?? '')),
-                            'path_target_keys'=>array_values(array_unique(array_filter(array_map('sanitize_text_field',(array)$path_keys)))),
-                            'confidence'=>100,
-                            'source'=>'manual_topic_assignment',
-                            'destination_source'=>method_exists($this,'output_banner_destination_source') ? $this->output_banner_destination_source($row) : '',
-                            'destination_url'=>esc_url_raw((string)($row['destination_url'] ?? '')),
-                            'updated_at'=>time(),
-                        );
-                        $records[] = $manual_record;
-                        $encoded_records = wp_json_encode($records, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                        $wpdb->update($table, array(
-                            'topic_status'=>'manual_mapped',
-                            'topic_score'=>100,
-                            'topic_targets'=>$encoded_records,
-                            'classified_at'=>time(),
-                        ), array('id'=>$id));
-                        $row['topic_status']='manual_mapped';
-                        $row['topic_score']=100;
-                        $row['topic_targets']=$encoded_records;
-                        $row['classified_at']=time();
-
-                        // Fuer Banner ist die Portalentscheidung nur noch Steuerung
-                        // (z. B. optionaler Slot), nicht mehr eine zweite Zielquelle.
-                        unset($decision_payload['target_type'], $decision_payload['target_key'], $decision_payload['target_label'], $decision_payload['target_context']);
-                    }
                 }
                 if ($decision === 'veto') {
                     $this->output_block_creative((string) ($row['identity_hash'] ?? ''), $decision_reason, $portal_key);
