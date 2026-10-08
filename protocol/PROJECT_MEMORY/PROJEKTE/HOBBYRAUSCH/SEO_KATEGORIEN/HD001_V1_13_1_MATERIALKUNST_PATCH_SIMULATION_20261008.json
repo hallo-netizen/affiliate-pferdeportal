@@ -1,0 +1,50 @@
+{
+  "contract": "HD001_V1_13_1_MATERIALKUNST_PATCH_SIMULATION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "source_live_readback": "hobby-depot-final-target-readback-20261008-083850-utc.json",
+  "removed_node": "core:gestalten:materialkunst",
+  "before": {
+    "physical_target_objects": 431,
+    "pages": 404,
+    "categories": 4,
+    "journal_categories": 15,
+    "directory_categories": 8,
+    "actions": {
+      "CREATE": 356,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    }
+  },
+  "after_simulation": {
+    "physical_target_objects": 430,
+    "pages": 403,
+    "categories": 4,
+    "journal_categories": 15,
+    "directory_categories": 8,
+    "actions": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    }
+  },
+  "structural_checks": {
+    "duplicate_node_ids": 0,
+    "missing_parents": 0,
+    "parent_cycles": 0,
+    "duplicate_slugs_by_object_type": 0,
+    "category_under_category": 0,
+    "max_physical_depth": 4,
+    "empty_static_core_intermediate_nodes": 0,
+    "eight_worlds_unchanged": true,
+    "hobbywelten_view_unchanged": true
+  },
+  "finding": "Materialkunst was the only static CORE intermediate node with zero children in the 431-object live target plan.",
+  "decision": "PATCH_SAFE_AT_PLAN_GRAPH_LEVEL",
+  "boundary": "This proves the one-node target-plan graph correction. The actual V1.13.1 plugin artifact/source is still required to build the corrected installable ZIP and run its local hard tests."
+}
