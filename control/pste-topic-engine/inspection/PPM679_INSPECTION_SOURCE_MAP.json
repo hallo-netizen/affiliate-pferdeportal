@@ -1,8 +1,0 @@
-{
-  "PPM679_CANONICAL_PLAN_INSPECTION.json": "portal-production-machine/contracts/canonical-complete-editorial-plan-v1.json",
-  "PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json": "portal-production-machine/contracts/normal-draft-release-v1.json",
-  "PPM679_PRODUCTION_PLAN_V4_INSPECTION.json": "portal-production-machine/contracts/production-plan-v4.json",
-  "PPM679_PRODUCTION_PLAN_V5_INSPECTION.json": "portal-production-machine/contracts/production-plan-v5.json",
-  "PPM679_EDITORIAL_PLAN_REGISTRY_INSPECTION.php": "portal-production-machine/includes/editorial-plan-registry.php",
-  "PPM679_EDITORIAL_PLAN_RUNTIME_GATE_CLASS_INSPECTION.php": "portal-production-machine/includes/editorial-plan-runtime-gate.php"
-}
