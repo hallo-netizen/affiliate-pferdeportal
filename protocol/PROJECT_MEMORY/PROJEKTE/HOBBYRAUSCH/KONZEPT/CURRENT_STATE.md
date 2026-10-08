@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.5 PRAKTISCH / 841 MASTER-INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 8 WELTEN ECHTE CORE-ROOTS / HOBBYWELTEN NUR VIEW / V1.13.1 FINALZIEL LOKAL PASS / LIVE-DRYRUN OFFEN
+STATUS: 3-SÄULEN-KONZEPT FEST / REGELN 2.6 + 1.6 / 860 MASTER-IDENTITÄTEN / 359 CORE / ALLE KANONISCHEN EBENEN SICHTBAR / HOBBY_HUB MIT CONTENT-KATEGORIEEBENE / ZIELBAUM-REBUILD PENDING
 
 ## Rolle
 
@@ -273,16 +273,33 @@ Kalibriertes CORE-Delta:
 Batch 001–003 waren Kalibrierung.
 Batch 004+ ist gestrichen.
 
+## Sichtbarkeits- und Kategorienregel – verbindlich ab 2026-10-08
+
+- Acht Welten bleiben die oberste fachliche CORE-Ebene.
+- Alle tatsächlich vorhandenen kanonischen Ebenen werden im normalen Drill-down angezeigt.
+- Globaler Header klein; lokale Kindnavigation vollständig.
+- Zwischenbereiche nicht künstlich zusammenziehen, nur um die Navigation dünn zu halten.
+- Bis etwa 10–11 fachlich klare Zwischenbereiche unter einer Welt sind zulässig.
+- HOBBY_HUB: 3–6 tragfähige Content-Kategorien als sichtbare Ebene.
+- Leaf: ideal 5–12 eigenständige Beitragsintentionen.
+- Keine leeren Symmetrie-Kategorien.
+- FAQ bleibt Prüfbereich; keine pauschale Pflichtkategorie ohne ausreichende eigenständige Intents.
+- Ein Beitrag besitzt genau einen Intent-/Kategorie-Owner.
+
+Aktueller Master:
+- 860 kanonische Identitäten;
+- 359 CORE;
+- 501 Finder/Editorial.
+
+Audit:
+`../SEO_KATEGORIEN/HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json`
+
 ## Erster offener Blocker
 
-`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
+`HD001_BALANCED_TARGET_TREE_REBUILD_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Einmaliger read-only Live-Dry-Run des finalen V1.13.1-Zielbaums gegen den tatsächlichen WordPress-Bestand.
+Kompletten fachlichen Zielbaum nach Regeln 2.6/1.6 neu ausbalancieren, einschließlich sichtbarer Content-Kategorieebene der HOBBY_HUBs.
 
-Erst nach dessen PASS:
-ein kontrollierter Sync → Frontend-/Struktur-Readback → Backup → HD-001 deaktivieren/deinstallieren.
-
-Keine weitere DataForSEO-Serie.
-Keine weitere Batchbewertung.
+Keine technische Umsetzung vor fachlicher Abnahme des Zielbaums.
