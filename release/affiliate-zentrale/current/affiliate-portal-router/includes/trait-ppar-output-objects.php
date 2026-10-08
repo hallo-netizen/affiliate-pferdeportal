@@ -3059,9 +3059,55 @@ trait PPAR_Output_Objects_Trait {
                 $slot = array('slot_id'=>''); $status = sanitize_key((string) ($classification['status'] ?? 'review'));
                 if ($status === 'blocked' && sanitize_key((string) ($classification['source'] ?? '')) === 'source_state') { $status = 'blocked_source'; }
 
+                // Bestehender KISS-Fallback: kein spezifisches Ziel -> allgemeiner
+                // technisch gueltiger Pool, ohne erfundene Themenkante.
+                if ($output_type === 'portal_banner'
+                    && $status === 'review'
+                    && sanitize_key((string)($classification['source'] ?? '')) === 'banner_target_map_missing'
+                    && $compatible_banner_slots
+                    && !(method_exists($this,'output_comparison_banner_partner')
+                        && $this->output_comparison_banner_partner($row) !== ''
+                        && method_exists($this,'output_tarifcheck_banner_family')
+                        && $this->output_tarifcheck_banner_family($row) === 'blocked')) {
+                    $targets = $this->output_portal_targets($portal);
+                    $matrix = $this->output_slot_matrix($portal);
+                    if (!is_wp_error($targets) && !is_wp_error($matrix)) {
+                        foreach ($compatible_banner_slots as $fallback_slot_id) {
+                            $fallback_rule = is_array($matrix[$fallback_slot_id] ?? null) ? $matrix[$fallback_slot_id] : array();
+                            if (!$fallback_rule) { continue; }
+                            $fallback_types = array_map('sanitize_key',(array)($fallback_rule['target_types'] ?? array()));
+                            $fallback_contexts = array_map('sanitize_key',(array)($fallback_rule['target_contexts'] ?? array()));
+                            foreach ((array)$targets as $fallback_target) {
+                                if (!is_array($fallback_target) || absint($fallback_target['id'] ?? 0) <= 0) { continue; }
+                                if ($fallback_types && !in_array(sanitize_key((string)($fallback_target['type'] ?? '')),$fallback_types,true)) { continue; }
+                                if ($fallback_contexts && !in_array(sanitize_key((string)($fallback_target['context'] ?? '')),$fallback_contexts,true)) { continue; }
+                                if (method_exists($this,'control_target_gate')
+                                    && is_wp_error($this->control_target_gate((string)($portal['key'] ?? ''),(string)($fallback_target['key'] ?? '')))) { continue; }
+                                $fallback_target['_ppar_general_fallback_anchor'] = 1;
+                                $target = $fallback_target;
+                                $classification = array(
+                                    'status'=>'ready','confidence'=>1,
+                                    'reason'=>'Kein eindeutiges Zielthema: allgemeiner technisch gültiger Banner-Fallback.',
+                                    'target'=>$target,'alternatives'=>array(),
+                                    'source'=>'banner_general_fallback',
+                                    '_ppar_destination_level'=>'general',
+                                );
+                                $slot = array('slot_id'=>$fallback_slot_id,'rule'=>$fallback_rule);
+                                $status = 'ready';
+                                break 2;
+                            }
+                        }
+                    }
+                }
+
                 if (in_array($output_type, array('portal_banner','product_campaign'), true) && $status === 'ready' && empty($slot['slot_id'])) {
                     $slot = $this->output_format_slot($row, $portal, $target, $output_type === 'product_campaign' ? 'product' : 'banner');
                     if (is_wp_error($slot)) { $status='blocked_format'; $classification['reason']=$slot->get_error_message(); $slot=array('slot_id'=>''); }
+                }
+
+                if ($output_type === 'portal_banner' && $status === 'ready') {
+                    $classification['_ppar_banner_compatible_slots']=$compatible_banner_slots;
+                    $this->output_store_banner_library_assignment($row,$portal,$classification,$compatible_banner_slots);
                 }
 
                 if (in_array($output_type, array('hivepress_listing','portal_listing'), true) && $status === 'ready') {
