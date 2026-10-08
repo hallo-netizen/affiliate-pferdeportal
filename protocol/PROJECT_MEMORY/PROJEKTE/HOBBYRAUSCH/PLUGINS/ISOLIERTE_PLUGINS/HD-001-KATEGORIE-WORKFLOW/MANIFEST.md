@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.13.1 PRACTICAL FINAL TARGET LOKAL HARD PASS / LIVE-DRYRUN OFFEN / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
+STATUS: V1.13.1 LIVE-DRYRUN POST-ROLLBACK PASS / ZIELPROFIL-KORREKTUR MATERIALKUNST ERFORDERLICH / BINARY-ARTEFAKT NOCH NICHT NEU GEBAUT / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -59,7 +59,7 @@ GRUND:
 Der aktive GitHub-Connector kann Textstände aktualisieren, aber das lokal verifizierte ZIP nicht byteidentisch in das isolierte GitHub-`CURRENT.zip` übertragen. Deshalb wird kein Binary-Artefakt erfunden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-Real einmal installieren → finalen read-only Live-Dry-Run → JSON-Readback prüfen.
+Maschinenlesbaren Ein-Knoten-Patch `SEO_KATEGORIEN/HD001_V1_13_1_TARGET_PROFILE_PATCH_001_20261008.json` auf das V1.13.1-Zielprofil anwenden → Artefakt neu bauen und lokal hart prüfen → frischen read-only Live-Dry-Run → JSON-Readback prüfen. Noch kein Final-Sync.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
