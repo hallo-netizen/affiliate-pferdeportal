@@ -2,7 +2,7 @@
   "contract": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET",
   "version": "1.0",
   "date": "2026-10-08",
-  "status": "SUBJECT_STRUCTURE_PASS__CONTENT_HUB_ASSESSMENT_INCOMPLETE__NO_WORDPRESS_WRITE",
+  "status": "WORLD_INTERMEDIATE_STRUCTURE_PASS__GLOBAL_CORE_ROLE_RECHECK_PENDING__NO_WORDPRESS_WRITE",
   "authority": {
     "target_contract": "2.6",
     "assessment_rules": "1.6",
@@ -263,6 +263,18 @@
       "Dioramenmalerei -> EDITORIAL_TOPIC"
     ]
   },
-  "boundary": "This is the world/intermediate target only. The complete target remains blocked until all current CORE candidates have current 1.6 role/capacity decisions and HOBBY_HUB content categories.",
-  "next_action": "Reconcile current CORE assessment coverage using latest finals, then complete the remaining 198 unassessed current CORE identities under rules 1.6. No WordPress write."
+  "boundary": "World/intermediate structure is a fachlich verified draft. Complete target remains blocked because 299 of the 359 current CORE identities lack a current production-valid role/capacity decision under rules 1.6. Historical Batch 004-019 decisions are evidence only, not production authority.",
+  "next_action": "Run one global recheck of the 299 currently unassessed CORE identities under rules 1.6, reusing historical Batch 004-019 evidence where still valid but without a new batch loop. Then classify HOBBY_HUB vs ORIENTATION/other roles and materialize visible content categories only for validated HOBBY_HUBs.",
+  "assessment_coverage": {
+    "current_core_identities": 359,
+    "current_production_valid_assessed_core": 60,
+    "current_production_valid_unassessed_core": 299,
+    "valid_sources": [
+      "Batch 001",
+      "Batch 002",
+      "Batch 003 corrected",
+      "Expansion19"
+    ],
+    "historical_batches_004_019": "EVIDENCE_ONLY__DO_NOT_COUNT_AS_CURRENT_DECISION"
+  }
 }
