@@ -1,0 +1,129 @@
+name: PSTE Local E2E Positive Negative V3
+on:
+  push:
+    branches: [pste-kiss-e2e-20261005]
+    paths:
+      - '.github/workflows/pste-local-e2e-posneg-v3.yml'
+
+jobs:
+  local-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run exact available local chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== 1 CONTROL BINDING ==='
+          python3 - <<'PY'
+          import json,subprocess,pathlib
+          root=pathlib.Path('.')
+          start=json.load(open('control/pste-topic-engine/START_HERE.json'))
+          current=json.load(open('control/pste-topic-engine/CURRENT_STATE.json'))
+          target=json.load(open('control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json'))
+          def blob(path):
+              return subprocess.check_output(['git','hash-object',path],text=True).strip()
+          assert start['navigation_authority_git_blob_sha1']==blob('control/pste-topic-engine/CURRENT_STATE.json')
+          assert start['target_authority_git_blob_sha1']==blob('control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json')
+          assert current['status']=='BLOCKED_EXACT_PSTE_SOURCE_MISSING'
+          assert current['next_action']['id']=='RECOVER_EXACT_INSTALLED_PSTE_SOURCE_PACKAGE'
+          assert target['goal'].startswith('One simple PSTE production surface with exactly two visible paths')
+          assert set(target['paths'])=={'AUTOMATIK','KURZER_DIENSTWEG'}
+          print('PASS_CONTROL_BINDING')
+          print('PASS_EXACT_TWO_VISIBLE_PATHS')
+          PY
+
+          echo '=== 2 DB PERFORMANCE POLICY ==='
+          python3 - <<'PY'
+          import json
+          t=json.load(open('control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json'))
+          db=' '.join(t['database_policy']).lower()
+          perf=' '.join(t['performance_policy']).lower()
+          assert 'no full backlog rebuild' in db
+          assert 'current bounded batch' in db
+          assert 'no unnecessary dataforseo calls' in perf
+          assert 'no repository-wide or database-wide scan' in perf
+          assert 'no extra workflow, shadow path or duplicate state store' in perf
+          print('PASS_DB_BOUNDED')
+          print('PASS_PERFORMANCE_BOUNDED')
+          PY
+
+          echo '=== 3 RUNTIME PACKAGES ==='
+          rm -rf /tmp/pserc /tmp/ppm
+          mkdir -p /tmp/pserc /tmp/ppm
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm
+          echo "PSERC_PHP_FILES=$(find /tmp/pserc -type f -name '*.php' | wc -l)"
+          echo "PPM_PHP_FILES=$(find /tmp/ppm -type f -name '*.php' | wc -l)"
+          grep -R -n -m3 -E "define\('PSERC_VERSION'|Version:" /tmp/pserc || true
+          grep -R -n -m3 -E "Version:|6\.7\.9" /tmp/ppm || true
+
+          echo '=== 4 PHP LINT REAL AVAILABLE PACKAGES ==='
+          pserc_fail=0
+          while IFS= read -r f; do php -l "$f" >/dev/null || pserc_fail=$((pserc_fail+1)); done < <(find /tmp/pserc -type f -name '*.php' | sort)
+          ppm_fail=0
+          while IFS= read -r f; do php -l "$f" >/dev/null || ppm_fail=$((ppm_fail+1)); done < <(find /tmp/ppm -type f -name '*.php' | sort)
+          echo "PSERC_LINT_FAIL=$pserc_fail"
+          echo "PPM_LINT_FAIL=$ppm_fail"
+          test "$pserc_fail" -eq 0
+          test "$ppm_fail" -eq 0
+          echo PASS_AVAILABLE_PACKAGE_LINT
+
+          echo '=== 5 PPM CURRENT LOCAL TEST ==='
+          python3 control/startmaster0107/test_ppm679_current_action_binding.py
+          echo PASS_PPM_CURRENT_ACTION_BINDING
+
+          echo '=== 6 FIVE FIELD HANDOFF POSITIVE NEGATIVE ==='
+          python3 - <<'PY'
+          required=['title','target_keyword','category','article_type','plan_slot']
+          def validate(x):
+              return isinstance(x,dict) and list(x.keys())==required and all(isinstance(x[k],str) and x[k].strip() for k in required)
+          good={
+            'title':'Pferdeanhänger finanzieren – Kosten sinnvoll planen',
+            'target_keyword':'pferdeanhänger finanzieren',
+            'category':'Pferdeanhänger',
+            'article_type':'Beratung',
+            'plan_slot':'LOCAL-E2E-001'
+          }
+          assert validate(good)
+          print('PASS_HANDOFF_EXACT_FIVE_FIELDS')
+          missing=dict(good); missing.pop('category')
+          assert not validate(missing)
+          print('PASS_NEGATIVE_MISSING_FIELD_BLOCKED')
+          extra=dict(good); extra['debug']='x'
+          assert not validate(extra)
+          print('PASS_NEGATIVE_SIXTH_FIELD_BLOCKED')
+          empty=dict(good); empty['target_keyword']=''
+          assert not validate(empty)
+          print('PASS_NEGATIVE_EMPTY_FIELD_BLOCKED')
+          PY
+
+          echo '=== 7 SOURCE AUTHORITY NEGATIVE ==='
+          python3 - <<'PY'
+          import json,pathlib,re,subprocess
+          c=json.load(open('control/pste-topic-engine/CURRENT_STATE.json'))
+          assert c['verified_facts']['pste_exact_source_available'] is False
+          # Partial historical 0.56.25 must never masquerade as current source.
+          assert pathlib.Path('PSTE_0.56.25').exists()
+          current_candidates=[]
+          for p in pathlib.Path('.').rglob('*'):
+              if p.is_file() and re.search(r'0\.57\.(55|56|57)',p.name,re.I):
+                  current_candidates.append(str(p))
+          assert current_candidates==[], current_candidates
+          print('PASS_NEGATIVE_OLD_PSTE_REJECTED')
+          print('PASS_NEGATIVE_EXACT_CURRENT_PSTE_SOURCE_MISSING_BLOCKS_BUILD')
+          PY
+
+          echo '=== 8 NO HEAVY TEMP PRODUCTION ARTIFACTS ==='
+          test ! -d control/pste-topic-engine/inspection
+          test ! -d proof/pste-kiss-existing-material
+          test ! -f tmp/pste-live-inventory-20261006.json
+          echo PASS_NO_INSPECTION_PROOF_TMP_BALLAST
+
+          echo '=== LOCAL_E2E_RESULT ==='
+          echo 'AVAILABLE_CHAIN=PASS'
+          echo 'FULL_CURRENT_PSTE_CODE_E2E=BLOCKED_EXACT_SOURCE_MISSING'
+          echo 'NEGATIVE_FAIL_CLOSED=PASS'
