@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / ZIELVERTRAG 2.5 / V1.13.1 REALER LIVE-DRYRUN PLAN PASS / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 ZIELOBJEKTE / ALTER V1.12-SYNC NOCH ROLLBACK_PENDING / FINALER SYNC GESPERRT
+STATUS: REGELN 1.5 / V1.13.1 REALER FINAL-DRYRUN PASS / DELTA EXAKT 12 CREATE + 419 UPDATE + 1 ARCHIVE / 0 DATAFORSEO / 0 WRITES / ALTER V1.12-ROLLBACK WAR IM EXPORT NOCH PENDING / FRISCHER POST-ROLLBACK-READBACK OFFEN
 
 ## Ziel
 
@@ -443,18 +443,51 @@ V1.13.1 ist dafür bereits abgesichert:
 Evidence:
 `HD001_V1.13.1_REAL_LIVE_DRYRUN_20261008.json`
 
+## REALER LIVE-DRY-RUN – PASS
+
+Beleg:
+`HD001_V1_13_1_REAL_LIVE_DRYRUN_20261008.md`
+
+Realer Zielplan:
+- Plugin 1.13.1;
+- 841 / 340 CORE / 501 Finder-Editorial;
+- 440 Logikknoten;
+- 431 physische Zielobjekte;
+- acht Welten Root;
+- 8 Hobbywelten-Relations;
+- CREATE 12;
+- UPDATE 419;
+- ARCHIVE 1;
+- errors = [];
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 Strukturwrites.
+
+CREATE-Liste und ARCHIVE exakt wie lokal erwartet.
+ARCHIVE = alte Brettspiele.
+
+Im Export war gleichzeitig noch der alte V1.12-Sync in `ROLLBACK_PENDING`.
+V1.13.1 resumiert diesen Rollback automatisch.
+Der neue finale Sync wurde noch nicht gestartet.
+
+Der spätere Screenshot zeigt den automatischen Sync-Hinweis nicht mehr; ein frischer Export muss den terminalen Altzustand aber noch bestätigen.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_OLD_TARGET_TREE_ROLLBACK_MUST_FINISH_BEFORE_FINAL_SYNC`
+`HD001_V1_13_1_POST_ROLLBACK_FRESH_READBACK_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-`WordPress → Kategorien → Finaler Zielbaum` öffnen und die Seite offen lassen, bis der alte Rollback nicht mehr `ROLLBACK_PENDING` ist.
+Auf derselben Seite erneut:
+`Finalen Delta-Dry-Run ausführen`
 
-Danach sofort auf derselben Seite:
-`Finalen Delta-Dry-Run ausführen`.
+danach:
+`Finalen Readback als JSON herunterladen`.
 
-Dann neuen JSON-Readback herunterladen.
+Noch NICHT den Sync bestätigen/starten.
 
-Noch NICHT synchronisieren.
-Keine neue Plugin-Version nötig.
+Wenn der frische JSON-Readback:
+- Dry-Run weiter PASS;
+- alter Sync-State terminal (ROLLED_BACK oder kein laufender Alt-Sync);
+- 0 neue Writes;
+zeigt, dann folgt exakt ein finaler Sync.
