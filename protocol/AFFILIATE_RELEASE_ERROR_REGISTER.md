@@ -1819,3 +1819,31 @@ Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange So
 - 6.72.208 Cleanup-Gate: Fresh WordPress + MariaDB Run 37770855906, 37/37 PASS; geschützte Runtime-Traits unverändert.
 
 Status: **CLOSED_USER_LIVE_PASS_AND_672208_CLEANUP_REGRESSION_PASS**.
+
+## AFF-ERR-064 — 08.10.2026: PHP-Warning im aktuellen Affiliate-Renderer `$required_creative_type` nicht initialisiert
+
+**Scope:** neu geöffneter Performance-/Aufräumauftrag nach abgeschlossenem Release 6.72.210. Keine Funktionsrücknahme erlaubt.
+
+**Reale Evidence:** Der aktuelle Nutzerexport `performance-diagnose-safe-20261008-142120.json` meldet auf mehreren öffentlichen Seiten denselben PHP-Warning:
+`Undefined variable $required_creative_type` in `wp-content/plugins/affiliate-portal-router/pferdeportal-affiliate-router.php:2538`.
+
+**Frischer Source-Beweis:** Auf `affiliate-release-current`, HEAD `1ad547739f207e1beb9d677921bb7a6401567cd7`, ist 6.72.210 RELEASED. In der kanonischen Datei
+`release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php`
+liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required_creative_type`, ohne diese Variable zuvor in derselben Funktion zu initialisieren. Andere Rankingfunktionen initialisieren ihren benötigten Typ separat; das behebt den Rendererfehler nicht.
+
+**Abgrenzung:** Dieser belegte PHP-Warning erklärt nicht automatisch die komplette beobachtete Query-/AJAX-Langsamkeit. Die Ursache der Header-Suche und des allgemeinen Query-Anstiegs bleibt separat zu messen; keine Kausalbehauptung auf Verdacht.
+
+**Nicht wiederholen:** Kein Mikrofix/Installer nur wegen des Warnings. Der Fix muss als Teil des gebündelten Performanceblocks auf dem aktuellen 6.72.210-Sourcebaum erfolgen und die vorhandenen Performance-/Ranking-/Provider-/Slot-/Veto-/Publishpfade unverändert lassen.
+
+**Pflichttests vor irgendeinem Installer:**
+- POSITIV Banner-Slot: Kennzeichnung/HTML unverändert und kein Undefined-Variable-Warning;
+- POSITIV Produkt-Slot: keine künstliche Bannerkennzeichnung;
+- POSITIV Glossar-/Rassen-/Overview-Sonderchrome unverändert;
+- NEGATIV unbekannter/leer bleibender Slot bleibt fail-closed wie bisher;
+- Assignment/Placeholder-/Fixed-/Automatic-Pfade unverändert;
+- keine neue Frontend-DB-Abfrage, kein Frontend-HTTP, keine neue Tabelle;
+- bestehende 6.72.210-Fach-/Textlink-/Bannerregressionen weiter PASS;
+- Fresh WordPress + MariaDB, PHP-Lint, Fresh-Unpack/Byteidentität.
+
+**Status:** OPEN / ROOT_CAUSE_FOR_WARNING_PROVEN / FIX_NOT_STARTED / NO_INSTALLER.
+
