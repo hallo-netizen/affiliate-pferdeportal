@@ -1,0 +1,1137 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_011_RULE16_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__7_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "hard_rules": [
+    "Historical ownership boundaries remain binding.",
+    "Leaf taxonomy is subject-matter derived, not DataForSEO-created.",
+    "Each visible leaf has 5-12 distinct article intents.",
+    "No WordPress write."
+  ],
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Siebdruck",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:siebdruck:1",
+          "label": "Sieb, Rahmen & Gewebe",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Siebdruckrahmen passend zum Motiv auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Gewebefeinheit für Siebdruck bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Sieb gleichmäßig spannen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Sieb vor Beschichtung entfetten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Beschädigtes Siebgewebe beurteilen und ersetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:siebdruck:2",
+          "label": "Schablone & Belichtung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Fotoemulsion gleichmäßig auf ein Sieb auftragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Beschichtetes Sieb lichtgeschützt trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Motiv als geeigneten Filmpositiv vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Belichtungszeit für Siebdruckschablonen bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Belichtete Schablone sauber auswaschen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:siebdruck:3",
+          "label": "Farben & Bedruckstoffe",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Siebdruckfarbe passend zu Papier oder Textil auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Farbviskosität vor dem Drucken einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Textil vor dem Siebdruck vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Papier für Siebdruck nach Saugfähigkeit auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Sonderfarben und deckende Weißtöne richtig einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:siebdruck:4",
+          "label": "Druck & Registrierung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Rakelhärte und Rakelwinkel passend einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Farbflut und Druckzug kontrolliert ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Einfarbigen Siebdruck gleichmäßig drucken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Mehrfarbdruck exakt registrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Zwischentrocknung zwischen Farbschichten planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:siebdruck:5",
+          "label": "Reinigung, Fixierung & Fehler",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Siebdruckfarbe nach dem Druck aus dem Sieb entfernen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Schablone sicher entschichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Textildruck korrekt hitzefixieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Unterlaufene Farbe im Siebdruck vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Verstopfte Siebflächen während einer Auflage beheben",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Cyanotypie",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:cyanotypie:1",
+          "label": "Chemie & Trägermaterial",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Cyanotypie-Lösung korrekt ansetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Chemikalien lichtgeschützt lagern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Papier für Cyanotypie auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Textil für Cyanotypie vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Arbeitsplatz für Cyanotypie sauber und sicher einrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:cyanotypie:2",
+          "label": "Beschichten & Trocknen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Cyanotypie-Lösung gleichmäßig auf Papier auftragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Beschichtete Flächen sauber begrenzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Beschichtetes Papier lichtgeschützt trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Streifen und Pfützen beim Beschichten vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrere Bögen mit gleicher Beschichtungsdichte vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:cyanotypie:3",
+          "label": "Motive & Belichtung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Fotogramm für Cyanotypie arrangieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Digitales Negativ für Cyanotypie vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Belichtungszeit in der Sonne bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "UV-Lampe für reproduzierbare Belichtung einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Kontakt zwischen Negativ und Papier verbessern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:cyanotypie:4",
+          "label": "Wässern, Tonen & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Cyanotypie gründlich auswaschen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Oxidation des Bildes kontrolliert abschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Cyanotypie mit Tee oder Tannin tonen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Zu blasse oder zu dunkle Prints beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertige Cyanotypien plan trocknen und archivieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Dunkelkammerfotografie",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:dunkelkammerfotografie:1",
+          "label": "Dunkelkammer & Ausrüstung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Dunkelkammer lichtdicht einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Geeignetes Sicherheitslicht auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Vergrößerer korrekt aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Objektiv für den Vergrößerer auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Schalen, Zangen und Timer sinnvoll anordnen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:dunkelkammerfotografie:2",
+          "label": "Filmentwicklung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Schwarzweißfilm korrekt in die Dose einspulen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Entwickler für einen Film auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Entwicklungszeit und Temperatur kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Stoppbad und Fixierer richtig einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Negativfilm nach der Entwicklung fleckenfrei trocknen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:dunkelkammerfotografie:3",
+          "label": "Vergrößern & Belichten",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Negativ im Vergrößerer ausrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Bild auf dem Vergrößerungsbrett scharfstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Probestreifen für eine Papierbelichtung anfertigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Belichtungszeit für einen Abzug bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Abwedeln und Nachbelichten gezielt einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:dunkelkammerfotografie:4",
+          "label": "Papier & Kontrast",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Fotopapier nach Oberfläche und Gradation auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Multigrade-Filter richtig einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Papierentwickler auf Temperatur halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Abzüge gleichmäßig stoppen und fixieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Kontrast und Tonwertumfang eines Abzugs beurteilen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:dunkelkammerfotografie:5",
+          "label": "Workflow, Fehler & Archivierung",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Staub auf Negativen vor dem Vergrößern entfernen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Flecken und Kratzer im Dunkelkammerabzug vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Chemie während einer Session sinnvoll überwachen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Abzüge archivfest wässern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Negative und fertige Prints dauerhaft lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Nassplattenfotografie",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:nassplattenfotografie:1",
+          "label": "Chemie & Sicherheit",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Kollodium für Nassplattenfotografie vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Silbernitratbad sicher ansetzen und pflegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Entwickler für Nassplatten mischen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Fixierer passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Chemikalien und Silberabfälle sicher handhaben",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:nassplattenfotografie:2",
+          "label": "Platte vorbereiten & beschichten",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Glasplatte für Nassplatten gründlich reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Metallplatte für Tintype vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Kollodium gleichmäßig auf eine Platte gießen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Beschichtungsfehler am Rand vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Platte ohne Staubeinschlüsse vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:nassplattenfotografie:3",
+          "label": "Sensibilisieren & Belichten",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Platte im Silberbad korrekt sensibilisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Nasse Platte lichtdicht in den Halter einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Belichtungszeit bei Nassplatte abschätzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Objektiv und Blende für Nassplattenporträts einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Platte rechtzeitig vor dem Antrocknen belichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:nassplattenfotografie:4",
+          "label": "Entwickeln & Fixieren",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Nassplatte gleichmäßig entwickeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Entwicklung rechtzeitig stoppen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Platte ohne Schleier fixieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Unter- und Überbelichtung an Nassplatten erkennen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Platte nach Fixierung gründlich waschen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:nassplattenfotografie:5",
+          "label": "Varnish, Finish & Fehler",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Nassplatte vollständig trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Schutzlack für Kollodiumplatten vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Platte gleichmäßig varnishen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Kratzer und Ablösungen der Schicht vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Nassplatten materialgerecht lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Lochkamerafotografie",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:lochkamerafotografie:1",
+          "label": "Kamera & Lochblende",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Lochkamera aus lichtdichtem Material bauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Lochdurchmesser passend zur Brennweite bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Lochblende sauber herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Abstand zwischen Loch und Bildebene festlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Lichtlecks an einer Lochkamera finden und abdichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:lochkamerafotografie:2",
+          "label": "Aufnahmematerial",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Fotopapier direkt in der Lochkamera verwenden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Planfilm für Lochkamerafotografie einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Empfindlichkeit des Aufnahmematerials berücksichtigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Bildebene plan und sicher befestigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Materialwechsel ohne Fremdlicht vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:lochkamerafotografie:3",
+          "label": "Belichtung & Berechnung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Effektive Blende einer Lochkamera berechnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Belichtungszeit für Lochkamera abschätzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Schwarzschildeffekt bei langen Belichtungen berücksichtigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Belichtung mit ND-Filter oder Lichtmessung planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Mehrere Testbelichtungen systematisch vergleichen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:lochkamerafotografie:4",
+          "label": "Bildgestaltung & Entwicklung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Perspektive einer Lochkamera gezielt nutzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Bewegung in langen Lochkamera-Belichtungen gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Kamera während der Belichtung stabil fixieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Papiernegative entwickeln und beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Lochkamera-Aufnahmen digitalisieren oder kontaktkopieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Löffelschnitzen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:löffelschnitzen:1",
+          "label": "Holz & Rohling",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Holzart für einen geschnitzten Löffel auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Frisches Holz nach Faserverlauf beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Löffelrohling aus einem Aststück aufteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Rissfreie Rohlinge vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Löffelform passend in den Rohling einzeichnen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:löffelschnitzen:2",
+          "label": "Axt & Grobform",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Löffelrohling sicher mit der Axt behauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Schale und Griff grob proportionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Faserverlauf beim Axtschnitt beachten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Übergang zwischen Griff und Laffe vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Rohling ohne Ausbrüche auf Endnähe bringen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:löffelschnitzen:3",
+          "label": "Messer & Höhlung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Schnitzmesser beim Löffelschnitzen sicher führen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Laffe mit Hakenmesser aushöhlen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Innenfläche der Laffe gleichmäßig ausarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Griff ergonomisch schnitzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Feine Messerfacetten kontrolliert stehen lassen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:löffelschnitzen:4",
+          "label": "Trocknen & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Geschnitzten Löffel langsam trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Verzug und Risse beim Trocknen vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Trockenen Löffel fein nacharbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Lebensmittelechtes Öl als Finish auftragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertigen Holzlöffel pflegen und nachölen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Grünholzschnitzen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b011:grünholzschnitzen:1",
+          "label": "Holz auswählen",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Geeignete Baumarten für Grünholzschnitzen wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Frisches Holz auf Risse und Äste prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Faserverlauf im Stammstück erkennen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Holz kurzzeitig frisch halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Rohmaterial sicher und materialschonend lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:grünholzschnitzen:2",
+          "label": "Spalten & Rohlinge",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Grünholz entlang der Faser spalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Spaltkeile und Axt sicher einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Markröhre beim Aufteilen berücksichtigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Rohlinge für Schnitzprojekte grob zurichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Spannungen im Holz vor dem Feinschnitt reduzieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:grünholzschnitzen:3",
+          "label": "Messer- & Axttechniken",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Ziehende Schnitte mit Schnitzmesser ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Daumendruckschnitt kontrolliert einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Stoppschnitt im Grünholz sauber setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Axt für kontrolliertes Anfasen verwenden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Werkstück beim Schnitzen sicher halten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:grünholzschnitzen:4",
+          "label": "Trocknung & Risskontrolle",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Grünholzschnitzerei langsam trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Stirnholz gegen zu schnelles Austrocknen schützen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Verzug während der Trocknung beobachten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Risse früh erkennen und Arbeitsfolge anpassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Halbfertige Werkstücke zwischen Arbeitsphasen lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b011:grünholzschnitzen:5",
+          "label": "Finish & Werkzeugpflege",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Getrocknete Grünholzarbeiten fein nachschnitzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Oberfläche mit geeigneten Ölen behandeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Messerfacetten als Finish bewusst gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Schnitzmesser schärfen und abziehen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Axtschneide für Grünholzbearbeitung pflegen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
