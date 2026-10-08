@@ -3,7 +3,7 @@
   "version": "1.0",
   "date": "2026-10-08",
   "rules": "1.6",
-  "status": "PARTIAL_PASS",
+  "status": "PASS__6_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
   "hubs": [
     {
       "canonical_name": "Handspinnen",
@@ -67,6 +67,326 @@
         }
       ],
       "validation": "5_LEAVES__ALL_5_INTENTS__PASS"
+    },
+    {
+      "canonical_name": "Brettchenweben",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "leaves": [
+        {
+          "label": "Brettchen, Garn & Schärung",
+          "intent_keys": [
+            "brettchenwahl",
+            "garnwahl",
+            "kettlaenge",
+            "s_z_schaerung",
+            "kettspannung"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Drehen & Grundtechnik",
+          "intent_keys": [
+            "vorwaertsdrehen",
+            "rueckwaertsdrehen",
+            "streifenmuster",
+            "drehrichtungswechsel",
+            "schussfaden"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Musterplanung",
+          "intent_keys": [
+            "diagramm_lesen",
+            "farbfolge",
+            "drehsequenz",
+            "musterrepeat",
+            "fehler_rueckarbeiten"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Kanten & Finish",
+          "intent_keys": [
+            "bandkanten",
+            "spannung_korrigieren",
+            "randfaeden",
+            "bandende",
+            "waschen_glaetten"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "4_LEAVES__ALL_5_INTENTS__PASS"
+    },
+    {
+      "canonical_name": "Quilten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 6,
+      "leaves": [
+        {
+          "label": "Planung & Stoffwahl",
+          "intent_keys": [
+            "quiltgroesse",
+            "blockraster",
+            "stoffkombination",
+            "farbverteilung",
+            "stoffbedarf"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Zuschnitt & Piecing",
+          "intent_keys": [
+            "zuschnitt",
+            "nahtzugabe",
+            "blocknaehen",
+            "kettennaehen",
+            "naehte_buegeln"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Blöcke & Top",
+          "intent_keys": [
+            "half_square_triangle",
+            "flying_geese",
+            "log_cabin",
+            "bloecke_verbinden",
+            "top_rand"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Vlies & Rückseite",
+          "intent_keys": [
+            "vlieswahl",
+            "rueckseite",
+            "sandwich",
+            "heften",
+            "lagen_fixieren"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Quilten",
+          "intent_keys": [
+            "geradlinig",
+            "free_motion",
+            "musterplanung",
+            "fadenspannung",
+            "falten_vermeiden"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Binding & Finish",
+          "intent_keys": [
+            "binding_breite",
+            "streifen_verbinden",
+            "binding_annaehen",
+            "ecken",
+            "abschlusswaesche"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "6_LEAVES__ALL_5_INTENTS__PASS"
+    },
+    {
+      "canonical_name": "Tufting",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "leaves": [
+        {
+          "label": "Rahmen & Trägerstoff",
+          "intent_keys": [
+            "rahmenbau",
+            "stoffwahl",
+            "stoff_spannen",
+            "arbeitsgroesse",
+            "vorbereitung"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Garn & Material",
+          "intent_keys": [
+            "garnwahl",
+            "garnstaerke",
+            "farbplanung",
+            "garnzufuhr",
+            "materialbedarf"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Design & Übertragung",
+          "intent_keys": [
+            "motivplanung",
+            "skalierung",
+            "uebertragung",
+            "flaechenaufteilung",
+            "farbgrenzen"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Tuften & Flor",
+          "intent_keys": [
+            "cut_pile",
+            "loop_pile",
+            "linienfuehrung",
+            "flordichte",
+            "fehler_korrigieren"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Rückseite & Finish",
+          "intent_keys": [
+            "primaerkleber",
+            "rueckseitenstoff",
+            "randabschluss",
+            "flor_schneiden",
+            "endkontrolle"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "5_LEAVES__ALL_5_INTENTS__PASS"
+    },
+    {
+      "canonical_name": "Nadelfilzen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "leaves": [
+        {
+          "label": "Wolle & Nadeln",
+          "intent_keys": [
+            "wollwahl",
+            "nadelstaerke",
+            "nadeltypen",
+            "unterlage",
+            "materialmenge"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Grundformen",
+          "intent_keys": [
+            "kugel",
+            "zylinder",
+            "koerperform",
+            "teile_verbinden",
+            "form_festigen"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Details & Oberfläche",
+          "intent_keys": [
+            "feine_details",
+            "farbuebergaenge",
+            "augen_gesicht",
+            "fellstruktur",
+            "oberflaeche_glaetten"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Flachfilz & Applikation",
+          "intent_keys": [
+            "flaeche",
+            "motiv",
+            "schablone",
+            "stoff_applikation",
+            "mehrfarbig"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Stabilität & Finish",
+          "intent_keys": [
+            "drahtkern",
+            "lose_fasern",
+            "formkorrektur",
+            "finish",
+            "lagerung"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "5_LEAVES__ALL_5_INTENTS__PASS"
+    },
+    {
+      "canonical_name": "Nassfilzen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "leaves": [
+        {
+          "label": "Wolle & Material",
+          "intent_keys": [
+            "wollwahl",
+            "fasermenge",
+            "seifenwahl",
+            "unterlage",
+            "zubehoer"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Auslegen & Befeuchten",
+          "intent_keys": [
+            "fasern_auslegen",
+            "schichten",
+            "farbplanung",
+            "befeuchten",
+            "seifenloesung"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Reiben, Rollen & Walken",
+          "intent_keys": [
+            "anfilzen",
+            "reiben",
+            "rollen",
+            "walken",
+            "schrumpfung"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Formen & Hohlformen",
+          "intent_keys": [
+            "schablone",
+            "hohlform",
+            "kante",
+            "dreidimensional",
+            "groesse_korrigieren"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Spülen, Trocknen & Finish",
+          "intent_keys": [
+            "seife_ausspuelen",
+            "formen",
+            "trocknen",
+            "oberflaeche_nacharbeiten",
+            "pflege"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "5_LEAVES__ALL_5_INTENTS__PASS"
     }
-  ]
+  ],
+  "validation": {
+    "hub_count": 6,
+    "leaf_count": 30,
+    "all_leaf_counts_5_12": true
+  }
 }
