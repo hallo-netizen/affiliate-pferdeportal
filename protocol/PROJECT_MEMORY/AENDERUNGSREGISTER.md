@@ -926,3 +926,48 @@ BELEG:
 
 NEXT:
 Profilkorrektur → Hardtest → frischer Live-Dry-Run → JSON-Readback.
+
+
+## HOBBYRAUSCH-HD001-20261008-U – Materialkunst im echten V1.13.1-Artefakt entfernt
+
+WAS:
+Der zuvor bestätigte leere CORE-Zwischenknoten
+`core:gestalten:materialkunst`
+wurde jetzt im echten installierbaren V1.13.1-Artefakt entfernt.
+
+ORIGINAL:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
+SHA-256:
+`94dca6cfc6c792cf2b866fc76fef1bff12551f9b375b38a1a511a91876b1a7b5`
+
+KORRIGIERT:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS_MATERIALKUNST_FIX.zip`
+SHA-256:
+`ea5aa8316b2537695f2f805d0b9cc4b0d9f973fb609c231ab7c3067de419c263`
+
+PROFIL:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008_MATERIALKUNST_FIX.json`
+SHA-256:
+`2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95`
+
+EXAKTER DIFF:
+- eine Paketdatei geändert: `profiles/hobby-depot-v1.json`;
+- genau 1 Node entfernt: `core:gestalten:materialkunst`;
+- 0 Nodes hinzugefügt;
+- 0 Hobbys umgehängt;
+- keine Ersatzkategorie.
+
+PRÜFUNG:
+- Original-Hash gegen Manifest PASS;
+- ZIP-Integrität PASS;
+- Fresh PHP-Lint 33/33 PASS;
+- exakter semantischer Ein-Knoten-Diff PASS;
+- Plan-Graph-Simulation PASS;
+- erwartet 430 physische Zielobjekte / 403 Pages / 355 CREATE + 75 ADOPT beim aktuellen Live-Ist.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD_20261008.json`
+
+NEXT:
+Korrigiertes ZIP installieren → genau einen finalen read-only Delta-Dry-Run → JSON-Readback.
+Noch kein Final-Sync.
