@@ -149,6 +149,15 @@ jobs:
           $pm=$call('output_plan_creative',$mobile,true,$portalKey);
           echo "DESKTOP_PLAN=".wp_json_encode($pd,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
           echo "MOBILE_PLAN=".wp_json_encode($pm,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+          $ot=$call('output_objects_table');
+          foreach([$desktop['identity_hash'],$mobile['identity_hash']] as $ih){
+              $rows=$wpdb->get_results($wpdb->prepare("SELECT creative_identity_hash,output_type,target_type,target_key,slot_id,status,decision_source,decision_reason,image_width,image_height FROM {$ot} WHERE creative_identity_hash=%s ORDER BY id",$ih),ARRAY_A);
+              echo "OUTPUT_ROWS_".$ih."=".wp_json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+              $ids=$call('creative_library_existing_campaign_ids',$ih);
+              $cs=[];
+              foreach((array)$ids as $cid){$cs[]=$call('campaign_from_post',get_post((int)$cid));}
+              echo "CAMPAIGNS_".$ih."=".wp_json_encode($cs,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+          }
           $ok(is_array($pd) && (int)($pd['active']??0)>=1,'desktop_banner_materialized');
           $ok(is_array($pm) && (int)($pm['active']??0)>=1,'mobile_banner_materialized');
 
