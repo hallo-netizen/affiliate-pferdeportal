@@ -265,6 +265,8 @@ Das verletzt Zielvertrag 2.5: keine inhaltsleeren Ebenen.
 Noch keinen Sync starten.
 
 Nur `core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
+Maschinenlesbare Patch-Spezifikation:
+`SEO_KATEGORIEN/HD001_V1_13_1_TARGET_PROFILE_PATCH_001_20261008.json`.
 Keine Ersatzstruktur erfinden und keine Hobbys umhängen.
 
 Danach:
