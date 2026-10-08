@@ -874,3 +874,19 @@ Erst danach wird ein neuer finaler Dry-Run erstellt und anschließend – nur be
 
 BELEG:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD001_V1.13.1_REAL_LIVE_DRYRUN_20261008.json`.
+
+## HOBBYRAUSCH-PLUGINS-20261008-S – doppelte Plugin-Statuswahrheit entfernt
+
+WAS:
+`PROJEKTE/HOBBYRAUSCH/PLUGINS/CURRENT_STATE.md` enthielt noch veraltete kopierte Versions-/Liveangaben zu HD-001.
+
+WARUM:
+Für ein einzelnes Plugin ist ausschließlich
+`PLUGINS/PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`
+die technische Current-Wahrheit. Das Plugin-Büro darf diese dynamischen Angaben nicht duplizieren.
+
+ÄNDERUNG:
+Der Plugin-Büro-Current ist jetzt nur noch Inventar-/Routing-Current und verweist für HD-001 auf die Plugin-Akte sowie für die aktive Facharbeit auf `SEO_KATEGORIEN/CURRENT_STATE.md`.
+
+KEINE Plugin-Codeänderung.
+KEINE Live-Strukturänderung.
