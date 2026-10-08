@@ -1773,3 +1773,18 @@ Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange So
 **Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672204_threefix_hard_positive_negative_20261008.md`.
 
 **Status:** SOURCE_LOCAL_WORDPRESS_MARIADB_EXACT_ZIP_PASS / LIVE_INSTALL_READBACK_OPEN. Nicht erneut funktional ändern oder testen, solange dieser Source-Manifest-Stand unverändert bleibt.
+
+
+### AFF-ERR-063 Nachtrag — echter Rootfix 6.72.206
+
+**6.72.204 Live:** Rechner PASS; Glossar/Rassen FAIL. Die damalige Aussage „funktioniert“ war falsch, weil der Test den realen Materialisierungspfad nicht reproduzierte.
+
+**6.72.205 Real-WordPress-Negativbeweis:** Desktop-Creative 310x310 war technisch gültig und hatte die richtigen Placements `hub_grid_card`, `glossary_single_desktop_banner`, `breed_single_desktop_banner`. Der allgemeine Fallback wählte aber `hub_grid_card` zuerst als Aktivierungsanker. Da `hub_grid_card` kein Auto-Publish-Slot ist, blieb die gesamte Kampagne `active=false`. Mobil wählte direkt den Glossar-Mobilslot und war `active=true`.
+
+**6.72.206 KISS-Rootfix:** Nur im allgemeinen Banner-Fallback werden technisch kompatible Glossar-/Rassen-Single-Slots vor `hub_grid_card` als Aktivierungsanker geprüft. Keine neue Runtime-Schicht, keine neue DB-Abfrage, kein Frontend-HTTP, keine neue Tabelle. Der 6.72.205-DOM-Anker-Fallback bleibt bestehen.
+
+**Harter Nachweis:** Fresh WordPress + MariaDB Run `37765412152` = SUCCESS, 24/24 PASS. Desktop `active=1`, Mobil `active=1`; Glossar und Rassen jeweils Desktop/Mobil ohne historischen Designanker sichtbar; alte Ankerpositionen und Duplicate-Guards PASS; Rechner-Regressionsschutz PASS; ZIP 28/28 byteidentisch.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.206.zip`, SHA256 `7bcfab7f15913d4d80c3c0ba9959f3f63ca19f6db593e1924035f3dc3a6db4e1`, 821045 Bytes.
+
+**Status:** REAL_WORDPRESS_MARIADB_PASS / LIVE_INSTALL_READBACK_OPEN. Live-PASS für Glossar/Rassen erst nach Nutzerbestätigung.
