@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6 + 1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 198 OFFEN
+STATUS: REGELN 2.6/1.6 FEST / FACH-SOLLPROFIL PASS / 359 CURRENT-CORE VOLLSTÄNDIG REVALIDIERT / 279 HOBBY_HUB / 1.292 CONTENT-KATEGORIEN / TECHNISCHE AUFLÖSUNG PENDING
 
 ## Rolle
 
@@ -320,11 +320,28 @@ Aktuelle CORE-Rollenabdeckung:
 - 75 historische aktuelle HOBBY_HUBs mit 355 sichtbaren Content-Kategorien nachgezogen;
 - 198 aktuelle CORE-Identitäten noch offen.
 
+## Fachlicher Endstand Kategorienstruktur
+
+Abschluss:
+- 359/359 aktuelle CORE-Identitäten nach Regeln 1.6 entschieden;
+- 279 HOBBY_HUB;
+- 53 ORIENTATION_UNIVERSE;
+- 22 EDITORIAL_TOPIC;
+- 5 ALIAS_ONLY;
+- 65 fachlich geprüfte Zwischenbereiche;
+- 1.292 sichtbare Content-Kategorien;
+- alle HOBBY_HUBs besitzen ihre sichtbare Content-Ebene;
+- keine künstlichen Symmetrieäste;
+- kein Capacity-Verstoß.
+
+Autoritativ:
+`../SEO_KATEGORIEN/HD001_FINAL_VISIBLE_FACH_SOLLPROFIL_20261008.json`
+
 ## Erster offener Blocker
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_198_PENDING`
+`HD001_TECHNICAL_OBJECT_PLAN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die verbleibenden 198 aktuellen CORE-Identitäten einmal global nach Regel 1.6 abschließen.
-Keine neue Batchschleife. Keine technische Umsetzung vorher.
+Fach-Sollprofil technisch gegen den bestehenden V1.14.1-Bestand auflösen und den vollständigen Objektplan prüfen.
+Keine Plugin-/WordPress-Änderung vorher.
