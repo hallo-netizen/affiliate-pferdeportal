@@ -650,3 +650,37 @@ Die exakten Nutzerartefakte lagen im Pferdeatelier-Bestand. Eine zwischenzeitlic
 3. PSTE 0.57.57 ist lokal exakt geprüft; unabhängiger WordPress-Readback exakt dieser Version bleibt offen. PSERC 0.28.32 ist live als Package-Binding-Identität belegt.
 
 Autoritative Status-/NEXT-ACTION-Quelle bleibt ausschließlich `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
+
+## DELTA 2026-10-08 – REST-CLEANUP ABGESCHLOSSEN / PSTE 0.57.58 + PSERC 0.28.33
+
+### Bereinigung 1 – PSERC Metadaten-/Runtime-Drift
+- neuer Kandidat: `PSERC-0.28.33-EVIDENCE-CONTRACT-SYNC-HARDPASS.zip`.
+- SHA-256: `dc197e4af35605660b9187c051cf1b0b535bc1aeb6677cd9d69ea0f1e784e36e`.
+- Vertrag `portal-topic-evidence-gate-v1.json` und PHP-Runtime-Gate akzeptieren jetzt exakt dieselben sieben Quellen: `KEYWORD_SUGGESTION`, `RELATED_SEARCH`, `KEYWORD_IDEA`, `PAA`, `PAA_RELATED`, `GSC`, `INTERNAL_SEARCH`.
+- Paketbindung vollständig neu berechnet: `331dfa4b384e15f08c2be0f3fd498b57a58e4c20ed854adfb7b36b0f465b0a28`.
+- exakt 3 Dateien geändert; 60/63 Dateien gegenüber 0.28.32 byteidentisch.
+
+### Bereinigung 2 – PSTE alte versteckte Adminoberflächen
+- neuer Kandidat: `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip`.
+- SHA-256: `1ea1f3fd8223395a1424e990a7cc418853c3ab301939c794a2580304b9ce66a5`.
+- als separate Oberflächen entfernt: Themenkarte, Keywords & Longtails, Abdeckung, Prioritäten, Konflikte, Semantic Sandbox.
+- notwendige Fachfunktion bleibt erhalten: Sandbox-/Review-Funktion ist lazy in `Themenprüfung` konsolidiert; strategische Gewichtung in `Einstellungen`.
+- sichtbare Navigation exakt vier Punkte: Produktion, Themenprüfung, Datenquellen, Einstellungen.
+- exakt 3 Dateien geändert; 113/116 Dateien gegenüber 0.57.57 byteidentisch.
+- DB-/Performance-/Storage-/Research-/Sandbox-Kern gegenüber 0.57.57 byteidentisch.
+
+### Wiederholter vollständiger Positiv-/Negativlauf
+- PSTE PHP 79/79 PASS; JSON 36/36 PASS; Fresh-Unpack 116/116.
+- PSERC PHP 43/43 PASS; JSON 17/17 PASS; Fresh-Unpack 63/63.
+- Static Hard Matrix 40/40 PASS.
+- Automatik 9/9 Szenarien PASS.
+- Kurzer Dienstweg 10/10 Szenarien PASS.
+- PSERC 7/7 zugelassene Evidenzquellen PASS.
+- Paketmanipulation, fehlende Evidenz, falscher Evidenzhash, Hard-Reason, sechstes Feld, falscher Batchhash, Publish- oder Contentpayload blockieren wie vorgesehen.
+- PSTE K0: positiver Exact-Five-Handoff PASS; sechstes Feld, falscher Batchhash, NO_READY und falsche K0-Identität blockieren.
+
+Finaler Testreport:
+`PFERDE_ATELIER_PSTE_05758_PSERC_02833_FINAL_HARD_TESTREPORT.json`
+SHA-256 `517b4bf85ddd8b26caecefc7f8c5619f035260b82aaa150fc134d28e3f18a5d0`.
+
+**Ergebnis: lokaler technischer Blocker geschlossen.** Offen ist ausschließlich die reale WordPress-Installation/Readback-Abnahme der exakt geprüften Versionen. Autoritative NEXT ACTION ausschließlich in `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
