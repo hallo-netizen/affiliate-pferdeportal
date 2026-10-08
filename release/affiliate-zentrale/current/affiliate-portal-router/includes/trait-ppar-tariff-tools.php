@@ -12,7 +12,7 @@ trait PPAR_Tariff_Tools_Trait {
     public function tariff_tools_register_hooks() {
         add_filter('ppar_affiliate_tariff_placeholder_registry', array($this, 'tariff_tools_writer_registry'), 10, 1);
         add_filter('ppar_affiliate_textlink_placeholder_registry', array($this, 'text_links_writer_registry'), 10, 1);
-        if (is_admin()) {
+        if (is_admin() && !((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) {
             add_action('admin_post_ppar_tariff_tool_save', array($this, 'handle_tariff_tool_save'));
             add_action('admin_post_ppar_tariff_tool_delete', array($this, 'handle_tariff_tool_delete'));
             add_action('admin_post_ppar_text_link_save', array($this, 'handle_text_link_save'));
