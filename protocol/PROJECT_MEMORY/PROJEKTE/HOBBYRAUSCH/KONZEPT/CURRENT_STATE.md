@@ -242,12 +242,18 @@ Plan:
 
 Der 841er Master ist Inventar, nicht 841 Pflichtseiten.
 
-Finales Produktionsmodell:
+Historischer Produktionsstand vor Regelkorrektur 2.6/1.6:
 - 340 CORE-Hobbyidentitäten;
-- 501 Finder/Editorial-Identitäten;
-- CORE-Hobbyseiten dürfen Beiträge direkt tragen;
-- keine künstliche Vorab-Erzeugung von Leafs;
-- Leafs erst bei realem späterem Contentcluster von ungefähr 5–12 eigenständigen Beiträgen.
+- 501 Finder/Editorial-Identitäten.
+
+Dieser frühere Stand ist für die Ebenenlogik ÜBERHOLT.
+
+Aktuell verbindlich:
+- HOBBY_HUB besitzt eine sichtbare Content-Kategorieebene;
+- typischer Zielbereich 3–6 tragfähige Content-Kategorien;
+- jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen;
+- reguläre HOBBY_HUB-Beiträge liegen nicht direkt unter der Hobbyseite;
+- keine künstlichen oder leeren Leafs.
 
 ### Endgültige Weltenstruktur
 
