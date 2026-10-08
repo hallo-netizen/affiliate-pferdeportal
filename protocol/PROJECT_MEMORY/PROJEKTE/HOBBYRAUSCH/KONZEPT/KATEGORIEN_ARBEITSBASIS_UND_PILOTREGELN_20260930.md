@@ -121,8 +121,8 @@ Anleitungen, Methoden, Arbeitsschritte, Techniken und Anwendungen.
 ### Fragen & Probleme – Pflichtprüfung
 Fehler, typische Probleme und konkrete Problemlösungen.
 
-### FAQ – Pflichtkategorie
-Für Hobby Depot soll **FAQ** grundsätzlich als eigene unterste Kategorie vorgesehen werden, weil echte Nutzerfragen eigenständiges SEO- und Informationspotenzial besitzen.
+### FAQ – Prüfbereich
+FAQ wird bei jedem HOBBY_HUB geprüft, ist aber **keine pauschale Pflichtkategorie**. Eine eigene FAQ-Leaf entsteht nur, wenn sie die aktuelle Leaf-Kapazitätsregel erfüllt und eigenständige, nicht kannibalisierende Nutzerintents besitzt.
 
 HARD RULE:
 FAQ darf keine Suchintention übernehmen, die bereits in Einstieg, Ausrüstung, Material, Technik/Praxis oder einer anderen Kategorie eindeutig belegt ist.
