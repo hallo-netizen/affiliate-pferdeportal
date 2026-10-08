@@ -4054,18 +4054,21 @@ JS;
             }
         }
 
-        // KISS-Hardlock: Creative-Library-Banner besitzen genau eine
-        // fachliche Wahrheit: ihre gespeicherten automation_target_keys.
-        // Passt diese Zielkante nicht zum aktuellen Kontext, ist der Banner hier
-        // beendet. Kein Rassen-, General- oder Technik-Fallback darf sie umgehen.
+        // KISS: Ein spezifisch zugeordneter Creative-Library-Banner bleibt
+        // strikt in seiner gespeicherten Ziel-/Pfadkarte. Der ausdrücklich
+        // allgemeine Bestand ist dagegen der vertragliche Fallback-Pool.
         $library_banner = $required_creative_type === 'banner'
             && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
         if ($library_banner) {
-            return is_array($automation_rank) ? $automation_rank : null;
+            if (is_array($automation_rank)) { return $automation_rank; }
+            if ($mode === 'fallback') {
+                return array('specificity'=>5,'matches'=>0,'reason'=>'Allgemeiner aktiver Bannerbestand nach fehlendem spezifischem Treffer.');
+            }
+            return null;
         }
 
-        // Historische neutrale Rassenverteilung bleibt nur fuer nicht automatisch
-        // materialisierte Sonder-/Festzuordnungen erhalten.
+        // Historische neutrale Rassenverteilung bleibt fuer nicht automatisch
+        // materialisierte Sonder-/Festzuordnungen unveraendert erhalten.
         if ($required_creative_type === 'banner' && in_array($slot_type, array(
             'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
         ), true)) {
