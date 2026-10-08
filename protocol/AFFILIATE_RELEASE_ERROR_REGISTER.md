@@ -1693,3 +1693,25 @@ Evidence:
 **Fixziel:** Breite Übersichts-Banner erhalten wieder sichtbar `Anzeige`. Keine Änderung an Bannerwahl, Ranking, Zielkarte, Format, Tracking oder Verteilung.
 
 **Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
+
+
+### Autoritative Korrektur zu AFF-ERR-056 — 08.10.2026
+
+Der ältere Hardlock `NO_STORED_FIXED_TARGET_NO_BANNER` darf nicht als Verbot des allgemeinen Banner-Fallbacks gelesen werden. Der spätere autoritative Zielvertrag `AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md`, Abschnitt 9.4, bindet ausdrücklich:
+
+- ein spezifisch zugeordneter Banner darf bei Nichttreffer nicht fachfremd ausweichen;
+- gibt es für das aktuelle Ziel keinen spezifisch passenden Banner, darf ein **separat als allgemein geführter, aktiver, technisch und formatlich gültiger Bannerbestand** greifen;
+- spezifisch -> allgemein -> stabile bestehende Verteilung;
+- kein Frontend-Reclassify.
+
+Damit ist der ältere pauschale „kein Ziel = kein Banner“-Teil von AFF-ERR-056 insoweit superseded.
+
+### Autoritative Korrektur zu AFF-ERR-058 — 08.10.2026
+
+Die frühere Formulierung „manuelle und automatische Themenzuordnung teilen ausschließlich dieselbe `topic_targets`-Wahrheit“ war zu weitgehend und widersprach dem Zielvertrag. Korrekt ist:
+
+- automatische Banner-Ziel-/Pfadkarte: `topic_targets`;
+- manuelle FIXED-Entscheidung: separat gespeichert und vorrangig;
+- Runtime-Reihenfolge: Safety -> Veto/Review -> FIXED -> automatische Zielkarte -> Format -> spezifische Auswahl -> allgemeiner Fallback -> stabile Verteilung.
+
+AFF-ERR-059 ist für diese Präzisierung die jüngere Root-Cause-Korrektur.
