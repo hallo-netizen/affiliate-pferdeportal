@@ -42,6 +42,13 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 - historische Texte oder Research-Artefakte dürfen nicht als Inhaltsquelle übernommen werden;
 - historische Informationen sind **keine Ausschlussliste**: unabhängig neu gefundene gleiche Fakten oder Quellen bleiben zulässig.
 
+## GitHub-Dateistart — HARDLOCK
+
+Es gibt keinen separaten Workflow-Startknopf als Voraussetzung.
+`workflow_dispatch` ist für `K0:start` nicht erforderlich.
+Vor dem ersten tatsächlichen GitHub-Schreibversuch ist ein technischer Startblocker unzulässig.
+Ein terminaler Startblocker ist nur zulässig, wenn ein konkreter Schreib- oder Produktionsschritt aus genau dem aktuellen Upload tatsächlich scheitert.
+
 Repository: `hallo-netizen/affiliate-pferdeportal`
 
 Branch: `konzept0-portal-neutral-20261002`
