@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 437 TARGETS / LEGACY-HEADER-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 EXPANSION-ANKER FINAL BEWERTET / MASTER+TARGET-DELTA AUSSTEHEND / KEIN LIVE-SYNC
+STATUS: V1.14.1 EXPANSION19 FINAL LOCAL POS+NEG HARD PASS / 860 IDENTITÄTEN / 359 CORE / 457 TARGETS / 430 PAGES / 97 HEADER / KEIN LIVE-DRY-RUN / KEIN LIVE-SYNC
 
 ## Plugin
 
@@ -462,38 +462,56 @@ Ergebnis:
 - Monetarisierung bei allen 19 weiterhin UNKNOWN bis zu echtem Provider-Match;
 - kein Plugin-/Target-Write aus der Bewertung selbst.
 
+## V1.14.1 EXPANSION19 – FULL LOCAL HARD PASS
+
+Fachbeleg:
+`SEO_KATEGORIEN/HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`
+
+Delta:
+`SEO_KATEGORIEN/HD001_V1_14_1_EXPANSION19_TARGET_DELTA_20261008.json`
+
+Abnahme:
+`SEO_KATEGORIEN/HD001_V1_14_1_EXPANSION19_FULL_LOCAL_HARDPASS_20261008.json`
+
+Ergebnis:
+- 860 Identitäten;
+- 359 CORE / 501 Finder-Editorial;
+- 60 aktive Zwischenbereiche;
+- 466 aktive Logikknoten;
+- 457 physische Ziele;
+- 430 Pages;
+- 97 Header-Einträge;
+- keine künstliche globale Content-Kategorieebene;
+- Essbare Pflanzen jetzt real belegt;
+- Heimwerken/Gärtnern ohne künstlichen Zwischenbereich;
+- UNKNOWN-Monetarisierung verhindert keine fachlich begründete CORE-Rolle, verlangt aber Editorial-Erhalt;
+- Full Positive + Full Negative + V1.14.0-Migration + Frontend-Readback PASS;
+- PHP 33/33 vor und nach Fresh-Unpack;
+- ZIP-Integrität PASS.
+
+Artefakt:
+`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`64735c31f474a782cc324c68218aade99ccfca4b54ab08091d5f28cfcecae95e`
+
+Profil SHA-256:
+`cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0`
+
+Master SHA-256:
+`adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_EXPANSION_ANCHORS_19_TARGET_DELTA_PENDING`
-
-Die 19 Entscheidungen sind fachlich abgeschlossen, aber noch nicht in Quellmaster/Zielprofil gebunden.
-V1.14.0 bleibt deshalb unverändert der letzte lokal vollständig geprüfte technische Kandidat.
+`HD001_V1_14_1_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-19er Master-/Target-Delta materialisieren und daraus genau einen neuen finalen V1.14-Kandidaten bauen.
-Danach vollständiger lokaler POS/NEG-E2E; erst bei PASS Live-Dry-Run.
-Kein Live-Sync vorher.
+Exaktes V1.14.1-Artefakt → ein read-only Live-Dry-Run → JSON-Readback prüfen.
+Kein Sync vorher.
 
 ## Release-/Artefaktgrenze
 
-V1.14.0 ist der aktuelle lokal vollständig positiv/negativ geprüfte Struktur-/Navigations-/Magazin-Kandidat.
-
-Artefakt:
-`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
-
-SHA-256:
-`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
-
-Isolierte Artefaktpflicht:
-`PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
-
+V1.14.1 ist der aktuelle lokal vollständig positiv/negativ geprüfte Kandidat.
 Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert; kein Ersatzartefakt erfinden.
-
-V1.14.0 ist NOCH KEIN Live-Kandidat:
-die 19 Expansion-/Ankerkandidaten sind fachlich final bewertet, aber ihr Master-/Target-Delta ist noch nicht gebunden.
-
-Erst danach:
-neuer finaler Kandidat → kompletter lokaler POS/NEG-E2E → Live-Dry-Run → einmaliger Sync → Struktur-/Frontend-Readback.
-
-Kein Live-PASS vorher behaupten.
+Kein Live-PASS vor echtem Live-Dry-Run und anschließendem produktivem Readback.
