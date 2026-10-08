@@ -1,7 +1,7 @@
 # HOBBY DEPOT – GRÖSSEN-, ROLLEN- UND PORTALGRENZENMODELL
 
 STAND: 2026-10-07
-STATUS: KONZEPTFORTSCHREIBUNG / VERBINDLICHE ARBEITSGRUNDLAGE
+STATUS: KONZEPTFORTSCHREIBUNG / VERBINDLICHE ARBEITSGRUNDLAGE / AB 2026-10-08 GEMÄSS ZIELVERTRAG 2.6 + ASSESSMENT 1.6
 
 ## 1. Was unverändert bleibt
 
@@ -191,11 +191,14 @@ Sie beeinflusst:
 
 Grundregel:
 
-DIRECT / ASSISTED + ausreichende Contenttiefe
-→ starker Kandidat für HOBBY_HUB im Hauptportal.
+Die fachliche Rolle wird zuerst aus Scope, Identität, Größe, Content Capacity und Ownership bestimmt.
 
-NONE / UNKNOWN + guter SEO-/Inspirationswert
-→ Magazin / ARTICLE_ONLY / FINDER_ONLY.
+DIRECT / ASSISTED + ausreichende Contenttiefe
+→ stärkt Priorität und kommerziellen Ausbau eines fachlich geeigneten HOBBY_HUBs.
+
+NONE / UNKNOWN
+→ ist allein weder automatische Demotion noch automatischer CORE-Ausschluss.
+Es beeinflusst Priorität und kommerzielle Tiefe; die strukturelle Rolle bleibt fachlich bestimmt.
 
 Ein wirtschaftlich starkes, aber riesiges Thema
 → NICHT automatisch gigantischer Hub;
@@ -227,14 +230,21 @@ Für Nutzer, die ihr Hobby bereits kennen.
 
 Hier erscheinen nur Themen, die die Rolle HOBBY_HUB oder ORIENTATION_UNIVERSE mit sauberer Unterteilung verdienen.
 
-Ein Hobby-Hub beantwortet insbesondere:
+Ein HOBBY_HUB besitzt eine sichtbare Content-Kategorieebene.
+Typischer Zielbereich: 3–6 tragfähige Content-Kategorien; jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen.
+
+Prüfbereiche sind insbesondere:
 - Einstieg;
 - Kosten;
 - Ausrüstung;
 - Material;
 - Techniken/Praxis;
 - Vertiefung;
+- Fragen/Probleme;
+- FAQ nur bei eigener tragfähiger Intentgruppe;
 - ggf. Anbieter-/Kursverweise.
+
+Reguläre HOBBY_HUB-Beiträge liegen nicht direkt unter dem Hobby.
 
 ### Magazin / EDITORIAL
 Für Inspiration, Longtails und kleinere Themen.
@@ -254,7 +264,8 @@ Kurse, Anbieter, Vereine, Werkstätten, Shops und Services werden über stabile 
 
 ## 9. Mehrere Einstiegspunkte – aber nur eine Wahrheit
 
-Frontend darf klein bleiben, auch wenn der zentrale Bestand groß ist.
+Der globale Header darf klein bleiben, auch wenn der zentrale Bestand groß ist.
+Alle tatsächlich vorhandenen kanonischen Kindebenen auf Welt-, Zwischenbereich- und Hobbyseiten bleiben jedoch vollständig sichtbar.
 
 Einstiege:
 - acht Hobbywelten;
