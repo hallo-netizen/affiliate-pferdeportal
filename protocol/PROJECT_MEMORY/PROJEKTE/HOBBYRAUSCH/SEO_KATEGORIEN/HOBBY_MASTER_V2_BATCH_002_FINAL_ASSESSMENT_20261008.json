@@ -1,0 +1,227 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-08",
+  "status": "BATCH_002_FACHLICH_CLOSED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "real_readback": {
+    "plugin_version": "1.12.6",
+    "result_version": "1.3",
+    "result_file": "hobby-master-v2-assessment-20261008-070044-utc.json",
+    "result_sha256": "64611d5f96ac91282470bc58bf31bdd179ca4454fbc09f5e61b8748d520ee8d9",
+    "candidate_count": 16,
+    "ideal_leaf_count": 51,
+    "dataforseo_paid_calls": 1,
+    "dataforseo_cost_usd": 0.02376,
+    "dataforseo_keyword_count": 304,
+    "dataforseo_returned_count": 98,
+    "wordpress_structure_writes": 0
+  },
+  "hard_decision_rules": [
+    "Canonical identities are preserved unless a real alias/duplicate is proven.",
+    "One primary SEO owner per intent.",
+    "Application/subdiscipline hubs may exist without duplicating their umbrella owner's generic intents.",
+    "Provider raw rows do not create article intents and missing exact rows do not erase subject-defined distinct article intents.",
+    "No target-tree write before the full 841-entry assessment is complete."
+  ],
+  "decisions": [
+    {
+      "hobby_id": "hobby:amateurfunk",
+      "canonical_name": "Amateurfunk",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic amateur-radio orientation, licensing, station basics, bands and operating overview. Satellitenfunk, Morsefunk and Funkpeilung keep their specific practice intents. CB-Funk remains legally and structurally separate; SDR remains a separate receiving/experimentation identity."
+    },
+    {
+      "hobby_id": "hobby:cb-funk",
+      "canonical_name": "CB-Funk",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns CB-specific rules, equipment, antennas, operating practice, range and troubleshooting. Amateurfunk generic/licensing intents do not move here."
+    },
+    {
+      "hobby_id": "hobby:software-defined-radio",
+      "canonical_name": "Software Defined Radio",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns generic SDR hardware, software operation, antennas for SDR, signal decoding and SDR projects. Specific satellite, radiosonde and amateur-radio operating intents stay with their dedicated identities."
+    },
+    {
+      "hobby_id": "hobby:satellitenfunk",
+      "canonical_name": "Satellitenfunk",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns amateur-radio satellite passes, station/equipment, satellite antennas/tracking and satellite QSOs. Amateurfunk remains the generic orientation owner; non-amateur satellite reception stays outside this hub."
+    },
+    {
+      "hobby_id": "hobby:satellitenempfang",
+      "canonical_name": "Satellitenempfang",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Satelliten- und Funksignalempfang",
+      "ownership": "Owns broad receive-only satellite orientation and setup where no stronger specialist owner exists. Amateur-radio satellite operation belongs to Satellitenfunk; generic SDR operation belongs to Software Defined Radio; radiosonde tracking remains separate."
+    },
+    {
+      "hobby_id": "hobby:wettersonden-tracking",
+      "canonical_name": "Wettersonden-Tracking",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns radiosonde identification, reception, tracking/prediction, recovery and field practice. Generic SDR hardware/software stays with SDR; generic radio direction finding stays with Funkpeilung."
+    },
+    {
+      "hobby_id": "hobby:funkpeilung",
+      "canonical_name": "Funkpeilung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns direction-finding principles, receivers/peilers, direction-finding antennas and ARDF/field practice. Generic amateur-radio orientation stays with Amateurfunk."
+    },
+    {
+      "hobby_id": "hobby:morsefunk",
+      "canonical_name": "Morsefunk",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns learning Morse/CW, keys/keyers, sending technique, CW QSO practice and reception training. Amateurfunk remains the generic radio owner."
+    },
+    {
+      "hobby_id": "hobby:elektronikbasteln",
+      "canonical_name": "Elektronikbasteln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic electronics-hobby orientation, components, soldering, measurement, breadboards and basic circuits. Arduino, Raspberry-Pi-Projekte and Mikrocontroller-Projekte keep platform/project-specific ownership."
+    },
+    {
+      "hobby_id": "hobby:mikrocontroller-projekte",
+      "canonical_name": "Mikrocontroller-Projekte",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic microcontroller project orientation independent of a specific platform. Arduino and later platform-specific identities own their platform setup, libraries and concrete platform project intents."
+    },
+    {
+      "hobby_id": "hobby:arduino",
+      "canonical_name": "Arduino",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns Arduino boards/IDE, Arduino-specific pins/power, sensors, actuators and Arduino projects/debugging. Generic microcontroller theory belongs to Mikrocontroller-Projekte."
+    },
+    {
+      "hobby_id": "hobby:raspberry-pi-projekte",
+      "canonical_name": "Raspberry-Pi-Projekte",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns Raspberry-Pi setup, GPIO/hardware, servers/network, automation and Raspberry-Pi projects/operation. Generic electronics and generic microcontroller intents stay with their umbrella owners."
+    },
+    {
+      "hobby_id": "hobby:robotik",
+      "canonical_name": "Robotik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic robotics orientation, concepts, sensors, actuators, navigation, control and overview. Roboterbau owns hands-on construction; Heimrobotik owns domestic-robot projects; BattleBots-Modellbau owns combat-robot practice."
+    },
+    {
+      "hobby_id": "hobby:heimrobotik",
+      "canonical_name": "Heimrobotik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns home-oriented robot platform projects, domestic sensor/navigation use, mechanics and home autonomy/integration. Generic robot construction stays with Roboterbau; generic robotics concepts stay with Robotik."
+    },
+    {
+      "hobby_id": "hobby:roboterbau",
+      "canonical_name": "Roboterbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hands-on robot planning/chassis, drive, electronics/power, sensors/control and programming/test for generic self-built robots. Heimrobotik and BattleBots keep their application-specific intents; Robotik remains the umbrella orientation owner."
+    },
+    {
+      "hobby_id": "hobby:battlebots-modellbau",
+      "canonical_name": "BattleBots-Modellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns combat-robot-specific rules/safety, chassis/protection, drive/electronics, weapon systems, testing/repair and competition preparation. Generic robot construction remains with Roboterbau."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 11,
+    "orientation_universe": 4,
+    "editorial_topic": 1,
+    "article_only": 0,
+    "finder_only": 0,
+    "out_of_scope": 0,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "cumulative_after_batch_002": {
+    "assessed": 32,
+    "remaining_of_841": 809
+  },
+  "next_action": "Prepare Batch 003 deterministically from the next 16 unassessed canonical identities; no target-tree delta until the complete master assessment is finished."
+}
