@@ -256,6 +256,8 @@ final class Pferdeportal_Affiliate_Router {
     private static $instance = null;
     private $disclosure_printed = array();
     private $campaigns_request_cache = null;
+    private $content_context_request_cache = array();
+    private $category_context_request_cache = array();
     private $ebay_canonical_worker_active = false;
     private $ebay_worker_dispatch_registered = false;
     private $ebay_worker_dispatch_at = 0;
@@ -2864,6 +2866,11 @@ JS;
     }
 
     private function get_content_context($post_id) {
+        $context_cache_allowed = $this->ranked_campaigns_request_cache_allowed();
+        $context_cache_key = (int) $post_id;
+        if ($context_cache_allowed && array_key_exists($context_cache_key, $this->content_context_request_cache)) {
+            return $this->content_context_request_cache[$context_cache_key];
+        }
         $post_type = get_post_type($post_id);
         $slugs = array();
         $names = array();
@@ -3031,7 +3038,7 @@ JS;
         $content = get_post_field('post_content', $post_id);
         $haystack = strtolower(wp_strip_all_tags($title . ' ' . implode(' ', $slugs) . ' ' . implode(' ', $names) . ' ' . $content));
 
-        return array(
+        $result = array(
             'slugs' => array_values(array_unique(array_map('sanitize_key', $slugs))),
             'names' => array_values(array_unique($names)),
             'primary_slug' => sanitize_key($primary_slug),
@@ -3045,6 +3052,10 @@ JS;
             'semantic_primary_target_key' => sanitize_text_field($semantic_primary_target_key),
             'semantic_ancestor_target_keys' => array_values(array_unique(array_filter(array_map('sanitize_text_field', $semantic_ancestor_target_keys)))),
         );
+        if ($context_cache_allowed) {
+            $this->content_context_request_cache[$context_cache_key] = $result;
+        }
+        return $result;
     }
 
     private function portal_structure_product_family_for_category($category_slug) {
@@ -3072,6 +3083,11 @@ JS;
     }
 
     private function get_category_archive_context($term) {
+        $context_cache_allowed = $this->ranked_campaigns_request_cache_allowed();
+        $context_cache_key = is_object($term) ? (int) ($term->term_id ?? 0) : 0;
+        if ($context_cache_allowed && $context_cache_key > 0 && array_key_exists($context_cache_key, $this->category_context_request_cache)) {
+            return $this->category_context_request_cache[$context_cache_key];
+        }
         $slugs = array((string) $term->slug);
         $names = array((string) $term->name);
 
@@ -3089,7 +3105,7 @@ JS;
         if ($product_family_slug !== '') { $slugs[] = $product_family_slug; }
         $haystack = strtolower(wp_strip_all_tags((string) $term->name . ' ' . (string) $term->slug . ' ' . implode(' ', $slugs) . ' ' . implode(' ', $names) . ' ' . $description));
 
-        return array(
+        $result = array(
             'slugs' => array_values(array_unique(array_map('sanitize_key', $slugs))),
             'names' => array_values(array_unique($names)),
             'primary_slug' => sanitize_key((string) $term->slug),
@@ -3102,6 +3118,10 @@ JS;
             'direct_term_slugs' => array(sanitize_key((string) $term->slug)),
             'product_family_slug' => $product_family_slug,
         );
+        if ($context_cache_allowed && $context_cache_key > 0) {
+            $this->category_context_request_cache[$context_cache_key] = $result;
+        }
+        return $result;
     }
 
     private function find_matching_group($groups, $context) {
