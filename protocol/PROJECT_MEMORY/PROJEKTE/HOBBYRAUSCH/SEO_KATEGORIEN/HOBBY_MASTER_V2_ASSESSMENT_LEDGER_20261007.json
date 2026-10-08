@@ -2,8 +2,8 @@
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_LEDGER",
   "version": "1.1",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_STRUCTURAL_ASSESSMENT__304_OF_841_CLOSED",
-  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "status": "HISTORICAL_CALIBRATION_LEDGER__PRODUCTION_BATCH_LOOP_CANCELLED_AFTER_BATCH_003",
+  "rules_version": "HISTORICAL_RULES_1.4__CURRENT_PRODUCTION_RULES_1.6",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -4066,5 +4066,14 @@
     "provider_calls_planned_now": 0
   },
   "target_tree_write_allowed": false,
-  "next_batch_rule": "Take the first 16 canonical master identities in stable source order whose hobby_id is not present in this ledger."
+  "next_batch_rule": "CANCELLED. Batch 004+ decisions remain historical calibration evidence only and must not drive the current production target tree. Current production uses rules 1.6, the protected baseline, authoritative Batch 001-003 decisions where still compatible, and explicitly assessed expansion decisions.",
+  "production_scope": {
+    "current_rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+    "authoritative_calibration_batches": [
+      "001",
+      "002",
+      "003"
+    ],
+    "batches_004_019": "HISTORICAL_ONLY__NOT_PRODUCTION_TARGET_AUTHORITY"
+  }
 }
