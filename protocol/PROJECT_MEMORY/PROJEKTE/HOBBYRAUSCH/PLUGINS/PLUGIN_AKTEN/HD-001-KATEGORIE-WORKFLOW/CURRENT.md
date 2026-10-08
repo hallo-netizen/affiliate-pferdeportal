@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 REALER FINAL-DRYRUN PASS / FINALDELTA EXAKT BESTÄTIGT / ALTER V1.12-ROLLBACK IM ERSTEXPORT NOCH PENDING / POST-ROLLBACK-READBACK OFFEN / NOCH KEIN FINAL-SYNC
+STATUS: V1.13.1 POST-ROLLBACK-DRYRUN PASS / 356 CREATE + 75 ADOPT / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / 0 WRITES / FINAL-SYNC GESPERRT DURCH LEEREN CORE-KNOTEN MATERIALKUNST
 
 ## Plugin
 
@@ -181,7 +181,7 @@ Die acht Welten sind CORE-Ebene 1.
 
 Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, sondern im späteren V2-Zielbaum-Delta.
 
-## REALER LIVE-BEFUND V1.13.1
+## ERSTER REALER LIVE-BEFUND V1.13.1 – HISTORISCHER ROLLBACK-ZUSTAND
 
 Dry-Run:
 PASS / 12 CREATE / 419 UPDATE / 1 ARCHIVE / 0 Writes / 0 Provider-Calls.
@@ -223,16 +223,52 @@ Im selben Export steckt noch ein alter Sync-State aus V1.12:
 Der V1.13.1 Runner übernimmt diesen alten Rollback automatisch.
 Kein neuer Final-Sync wurde gestartet.
 
+## POST-ROLLBACK-FRISCHCHECK – CURRENT
+
+Frischer Live-Dry-Run mit demselben V1.13.1-Kandidaten:
+- PASS / valid=true;
+- 841 Identitäten;
+- 340 CORE;
+- 501 Finder/Editorial;
+- 440 Logikknoten;
+- 431 physische Zielobjekte;
+- 356 CREATE;
+- 75 ADOPT;
+- 0 UPDATE;
+- 0 ARCHIVE;
+- 0 Provider-Calls;
+- 0 Strukturwrites;
+- alter V1.12-Runner terminal `ROLLED_BACK`;
+- kein aktiver finaler Snapshot;
+- kein Final-Sync gestartet.
+
+Fachlicher Vollabgleich:
+`SEO_KATEGORIEN/HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_POST_ROLLBACK_FRESH_READBACK_PENDING`
+`HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
+
+Der aktuelle Zielplan will
+`core:gestalten:materialkunst`
+neu als Page anlegen, obwohl der Knoten:
+- 0 Kinder;
+- 0 kanonische Hobby-Identität;
+- 0 Entity-Placements;
+- keine belegte Relation
+hat.
+
+Das verletzt Zielvertrag 2.5: keine inhaltsleeren Ebenen.
 
 ## EXAKT EINE NEXT ACTION
 
 Noch keinen Sync starten.
 
-Erneut den kostenlosen finalen Delta-Dry-Run ausführen und direkt danach den JSON-Readback exportieren.
-Dieser frische Export muss bestätigen, dass der alte Rollback terminal ist.
+Nur `core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
+Keine Ersatzstruktur erfinden und keine Hobbys umhängen.
+
+Danach:
+lokaler Hardtest → frischer Live-Dry-Run → JSON-Readback → erst bei PASS genau ein Final-Sync.
 
 ## Release-/Artefaktgrenze
 
