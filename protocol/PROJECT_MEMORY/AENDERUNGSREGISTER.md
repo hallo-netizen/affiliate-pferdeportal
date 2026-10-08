@@ -1005,3 +1005,42 @@ NEXT:
 Genau einen Final-Sync ausführen.
 Danach sofort finalen Struktur-/Frontend-Readback exportieren.
 
+
+
+## HOBBYRAUSCH-HD001-20261008-W – Final-Sync deckt Child-Page-Adopt-Bug auf, V1.13.2 gebaut
+
+LIVE-BEFUND:
+Der freigegebene V1.13.1-Final-Sync stoppte im Readback bei
+`core:fertigen:buch-papier [slug]`
+und wechselte auf `ROLLBACK_PENDING`.
+
+Dry-Run vorher:
+355 CREATE + 75 ADOPT.
+
+Sync tatsächlich:
+415 created + 15 adopted.
+
+Damit wurden 60 vorhandene hierarchische Seiten nicht adoptiert, sondern fälschlich neu angelegt.
+
+ROOT CAUSE:
+Sync-`find_by_slug()` nutzte `get_page_by_path($slug)`.
+Für hierarchische Pages benötigt diese Funktion den vollständigen Pfad; der Dry-Run hatte dieselben Seiten global per Blatt-Slug korrekt gefunden.
+
+FIX V1.13.2:
+Sync-Seitensuche auf bounded globalen `post_name__in`-Lookup umgestellt.
+Mehrdeutigkeit bleibt fail-closed.
+Zielprofil unverändert.
+Materialkunst bleibt entfernt.
+
+ARTEFAKT:
+`HD001_V1.13.2_ADOPT_CHILD_SLUG_FIX_HARDPASS.zip`
+SHA-256:
+`d9cb80d8e5635fd94ac390dc0be75757d1a7a964b0ce0cb1cf893934eed35cc7`
+
+TEST:
+33/33 PHP-Lint PASS.
+Child-Slug-Adoption / Mehrdeutigkeit / Missing PASS.
+
+NEXT:
+Zuerst 231 Rollback-Aktionen bis terminal ROLLED_BACK.
+Dann V1.13.2 → frischer Dry-Run → bei PASS genau ein neuer Final-Sync.
