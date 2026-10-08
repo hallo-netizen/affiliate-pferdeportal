@@ -1,7 +1,12 @@
 # HOBBY DEPOT – KATEGORIEN-ARBEITSBASIS UND PILOTREGELN
 
 STAND: 2026-09-30
-STATUS: VERBINDLICHE ARBEITSBASIS / TAXONOMIE NOCH NICHT FINAL FREIGEGEBEN
+STATUS: HISTORISCHE PILOT-ARBEITSBASIS / DURCH ZIELVERTRAG 2.6 + ASSESSMENT 1.6 ÜBERHOLT, SOWEIT WIDERSPRÜCHLICH
+
+## HINWEIS ZUM AKTUELLEN REGELSTAND
+
+Aktuell autoritativ sind Zielvertrag 2.6, Assessment Rules 1.6 und das 3-Säulen-Konzept.
+Insbesondere ist die frühere Formulierung "FAQ = Pflichtkategorie" überholt: FAQ ist ein Pflicht-**Prüfbereich**, wird aber nur als eigene Content-Kategorie angelegt, wenn genügend eigenständige, nicht kannibalisierende Intents vorhanden sind.
 
 ## 1. Zweck
 
