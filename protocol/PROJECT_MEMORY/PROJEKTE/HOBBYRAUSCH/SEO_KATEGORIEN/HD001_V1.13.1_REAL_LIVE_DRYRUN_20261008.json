@@ -1,0 +1,66 @@
+{
+  "contract": "HD001_V1_13_1_REAL_LIVE_DRYRUN",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "source_file": "hobby-depot-final-target-readback-20261008-082217-utc.json",
+  "source_sha256": "3e1c00ea5c2d174c2ce6afcacadcf3ea9c6153b63467f1b420fa7ebc175c7a96",
+  "dry_run": {
+    "plugin_version": "1.13.1",
+    "status": "PASS",
+    "valid": true,
+    "profile_revision": "HD-TARGET-3P-V1.13.1-PRACTICAL-20261008+da240c90a8725c4a",
+    "profile_sha256": "855bb49ca2eb8d3ae60f0442b585b091bcdfde01ed4c5acd3510849d48f2f464",
+    "inventory": {
+      "canonical_entities": 841,
+      "core_entities": 340,
+      "editorial_finder_entities": 501
+    },
+    "structure": {
+      "logical_nodes": 440,
+      "physical_target_objects": 431,
+      "hobbywelten_view_relations": 8,
+      "worlds_core_level_1": true
+    },
+    "summary": {
+      "CREATE": 12,
+      "ADOPT": 0,
+      "UPDATE": 419,
+      "UNCHANGED": 0,
+      "ARCHIVE": 1
+    },
+    "action_count": 432,
+    "create_names": [
+      "Scale-Crawling",
+      "Drohnenfotografie",
+      "BattleBots-Modellbau",
+      "Morsefunk",
+      "Drone Soccer",
+      "RC-U-Boote",
+      "RC-Segelflug",
+      "Funkpeilung",
+      "Wabikusa",
+      "RC-Segelboote",
+      "Wettersonden-Tracking",
+      "RC-Panzer"
+    ],
+    "archive_name": "alte Brettspiele",
+    "errors": [],
+    "provider_calls": 0,
+    "provider_cost_usd": 0,
+    "wordpress_structure_writes": 0
+  },
+  "blocking_existing_state": {
+    "status": "ROLLBACK_PENDING",
+    "revision": "HD-TARGET-3P-V1-20261007+313e8ac433c0b154",
+    "rollback_actions_remaining": 620,
+    "write_index": 420,
+    "readback_index": 11,
+    "error": "Target-Tree-Readback fehlgeschlagen: directory:events-reisen [name]",
+    "runner_status": "RUNNING",
+    "runner_reason": "EXISTING_TARGET_TREE_RESUME",
+    "frontend_readback": "NO_ACTIVE_FINAL_SNAPSHOT"
+  },
+  "decision": "DRYRUN_PLAN_VALID_BUT_FINAL_APPLY_NOT_YET_ALLOWED",
+  "rationale": "A previous target-tree run is still rollback-pending. V1.13.1 auto-resumes this rollback on the Finaler Zielbaum admin page. After rollback reaches a terminal state, a NEW dry-run is mandatory because the live fingerprint will have changed. The apply handler independently rechecks the fingerprint and would block a stale plan.",
+  "next_action": "Open Kategorien -> Finaler Zielbaum and keep the page open until the old rollback is terminal. Then run a fresh final delta dry-run and export the new JSON. Do not click sync before that new dry-run is accepted."
+}
