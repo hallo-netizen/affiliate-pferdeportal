@@ -719,3 +719,69 @@ Apply besitzt zusätzlich einen frischen Fingerprint-Recheck.
 NEXT:
 Finaler-Zielbaum-Seite offen lassen bis Rollback terminal → neuer Dry-Run → neuer JSON-Readback.
 Noch kein Sync.
+
+
+---
+
+## PU-20261008-015 – HD-001 V1.14.0 Struktur / Target-Navigation / Magazin
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+V1.13.4 fachlich nicht final → V1.14.0 lokal vollständig geprüfter Struktur-/Navigations-/Magazin-Kandidat.
+
+WARUM:
+Die Frontend-Sichtprüfung von V1.13.4 zeigte trotz technischem Sync-PASS fachliche Portalfehler:
+- Header mischte Legacy-Seiten mit dem kanonischen Target;
+- Editorial-Themen konnten sichtbar in CORE leaken;
+- Treibholz/Treibholz sammeln erschien als Legacy-Dublette;
+- Magazin-Navigation wurde nicht vollständig projiziert;
+- mehrere fachlich getrennte Zwischenbereiche waren zusammengezogen.
+
+KORREKTUR:
+- Header ausschließlich aus aktivem Target-Snapshot;
+- ungebundene Legacy-Seiten aus kanonischer Navigation ausgeschlossen;
+- Treibholz/Treibholz sammeln bleibt eine bestätigte Editorial-Identität;
+- feste Magazin-Navigation vollständig;
+- fachliche Splits u. a. Schrift/Lettering vs Papierkunst, Metall vs Schmuck, Leder vs Textil, Elektronik vs Funk, Smart Home, Moos/Miniaturgärten, Ameisen/Insekten vs Wirbellose;
+- keine leeren Symmetrieäste;
+- 841 Identitäten / 340 CORE / 501 Finder-Editorial erhalten.
+
+ARTEFAKT:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
+
+ZIELPROFIL SHA-256:
+`6dda22c63fb23593b2eee8d8fbc067e9f732430cad70d5c0576bca40b95a474c`
+
+LOKALER ZIELSTAND:
+- 59 aktive Zwischenbereiche;
+- 446 Logikknoten;
+- 437 physische Zielobjekte;
+- 410 Pages;
+- 96 Header-Navigationseinträge.
+
+POSITIV:
+- Fresh-ZIP 362 CREATE + 75 ADOPT;
+- 437/437 Readback COMPLETE;
+- 410/410 Page-Frontend PASS;
+- Header-Navigation PASS;
+- Magazin-Navigation PASS;
+- zweiter Lauf 437 UNCHANGED.
+
+MIGRATION V1.13.4:
+12 CREATE + 425 UPDATE + 5 ARCHIVE → COMPLETE → 437 UNCHANGED.
+Archiviert werden nur fünf ersetzte kombinierte Strukturknoten; keine Hobbyseite.
+
+NEGATIV:
+Readback-/Page-/Term-Fehlerrollback, Ambiguity, Foreign-Slug, Invalid-Profile, Missing-Taxonomy = PASS/fail-closed.
+
+OFFEN:
+19 bekannte/große Expansion-/Ankerkandidaten sind weiterhin nur Research Queue und nicht final nach Regeln 1.5 bewertet.
+Keine Blind-Promotion und kein Live-Sync.
+
+NEXT:
+19 Expansion-Anker final bewerten → begründetes Delta binden oder bewusst Editorial/Finder/Out-of-scope schließen → vollständigen lokalen POS/NEG-E2E des daraus finalen Kandidaten → erst dann Live-Dry-Run.
