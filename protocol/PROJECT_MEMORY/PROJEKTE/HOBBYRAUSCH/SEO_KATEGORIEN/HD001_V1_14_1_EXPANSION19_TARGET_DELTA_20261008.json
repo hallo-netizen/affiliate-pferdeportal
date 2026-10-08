@@ -1,0 +1,27 @@
+{
+  "contract": "HD001_V1_14_1_EXPANSION19_TARGET_DELTA",
+  "date": "2026-10-08",
+  "status": "MATERIALIZED_IN_V1_14_1_LOCAL_ARTIFACT",
+  "base": "V1.14.0 / 841 / 340 / 59 / 446 / 437 / 410 / 96",
+  "result": "V1.14.1 / 860 / 359 / 60 / 466 / 457 / 430 / 97",
+  "additions": {
+    "canonical_identities": 19,
+    "core_entities": 19,
+    "intermediate_nodes": [
+      "Essbare Pflanzen"
+    ],
+    "target_objects": 20
+  },
+  "direct_world_entities": [
+    "Heimwerken",
+    "Gärtnern"
+  ],
+  "no_content_category_layer": true,
+  "economics": "All 19 remain UNKNOWN_PENDING_PROVIDER_MATCH; no structural role derived from monetization.",
+  "migration_from_v1_14_0": {
+    "CREATE": 20,
+    "UPDATE": 437,
+    "ARCHIVE": 0
+  },
+  "next_action": "One read-only live dry-run with the exact V1.14.1 artifact."
+}
