@@ -346,7 +346,7 @@
       "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
+      "viable_leaf_categories": 5,
       "ownership": "Owns license-free CB-radio equipment, setup, antennas, operating practice and CB-specific communication. Amateur-radio licensing/modes remain with Amateurfunk.",
       "batch_id": "002"
     },
@@ -358,7 +358,7 @@
       "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
+      "viable_leaf_categories": 5,
       "ownership": "Owns SDR hardware/software, receivers, decoding and SDR-specific projects. Specific radio services/communities keep their own operating intents.",
       "batch_id": "002"
     },
@@ -441,9 +441,9 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "ownership": "Owns platform-neutral microcontroller fundamentals, sensors/actuators, power, buses and embedded projects. Arduino-specific platform content stays with Arduino.",
       "batch_id": "002"
     },
