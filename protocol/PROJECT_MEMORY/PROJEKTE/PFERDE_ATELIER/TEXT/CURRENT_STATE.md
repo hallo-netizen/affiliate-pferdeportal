@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-08
-STATUS: PSTE 0.57.57 + PSERC 0.28.32 EXAKTES ARTEFAKTPAAR LOKAL POSITIV-NEGATIV HARD PASS / KISS-DB-PERFORMANCE PASS / PSTE-LIVE-READBACK OFFEN
+STATUS: PSTE 0.57.58 + PSERC 0.28.33 REST-CLEANUP ABGESCHLOSSEN / VOLLSTÄNDIGER LOKALER POSITIV-NEGATIV-HARD-PASS / LIVE-INSTALLATION + READBACK OFFEN
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -9,6 +9,47 @@ STATUS: PSTE 0.57.57 + PSERC 0.28.32 EXAKTES ARTEFAKTPAAR LOKAL POSITIV-NEGATIV 
 - **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
 - **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 - **Aktiver Themenverwertungs-Zielvertrag:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+## FINAL-CLEANUP 2026-10-08 – PSTE 0.57.58 + PSERC 0.28.33
+
+Die zwei nach 0.57.57/0.28.32 verbliebenen Restaltlasten sind lokal vollständig bereinigt und das komplette Positiv-/Negativ-E2E wurde erneut ausgeführt.
+
+### PSTE 0.57.58
+- Installer: `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip`
+- SHA-256: `1ea1f3fd8223395a1424e990a7cc418853c3ab301939c794a2580304b9ce66a5`
+- Basis: 0.57.57 / SHA-256 `c3a001cd06d20fb71d75a21d7aca3cde4436920f855e999a3c166f035de01107`.
+- Exakt drei Dateien geändert: `contracts/admin-navigation-v1.json`, `includes/class-pste-admin.php`, `portal-seo-topic-engine.php`; **113/116 Dateien byteidentisch**.
+- Separate Altoberflächen entfernt: Themenkarte, Keywords & Longtails, Abdeckung als eigene Seite, Prioritäten, Konflikte, Semantic Sandbox als eigene Seite.
+- Keine Funktionslöschung: Sandbox-/Review-Engine bleibt erhalten und ist lazy in **Themenprüfung** konsolidiert; strategische Gewichtung bleibt in **Einstellungen** erhalten.
+- Sichtbare Navigation exakt: **Produktion / Themenprüfung / Datenquellen / Einstellungen**.
+- DB-/Performance-/Bestandskern gegenüber 0.57.57 byteidentisch.
+
+### PSERC 0.28.33
+- Installer: `PSERC-0.28.33-EVIDENCE-CONTRACT-SYNC-HARDPASS.zip`
+- SHA-256: `dc197e4af35605660b9187c051cf1b0b535bc1aeb6677cd9d69ea0f1e784e36e`
+- Build: `0.28.33-evidence-contract-sync`
+- Basis: 0.28.32 / SHA-256 `be09a8bee9246b5fe7047242e97111ec16e11e4d4a063da806c4c7dd6d49b25d`.
+- Exakt drei Dateien geändert: `contracts/compiler-package-binding-v1.json`, `contracts/portal-topic-evidence-gate-v1.json`, `portal-seo-editorial-plan-compiler.php`; **60/63 Dateien byteidentisch**.
+- Vertrags-JSON und Runtime-Gate akzeptieren jetzt exakt dieselben sieben Evidenzquellen: `KEYWORD_SUGGESTION`, `RELATED_SEARCH`, `KEYWORD_IDEA`, `PAA`, `PAA_RELATED`, `GSC`, `INTERNAL_SEARCH`.
+- Paketbindung neu berechnet: `331dfa4b384e15f08c2be0f3fd498b57a58e4c20ed854adfb7b36b0f465b0a28`.
+
+### Frischer vollständiger Hard-Test
+- PSTE PHP **79/79 PASS**, JSON **36/36 PASS**, Fresh-Unpack **116/116 byteidentisch**.
+- PSERC PHP **43/43 PASS**, JSON **17/17 PASS**, Fresh-Unpack **63/63 byteidentisch**.
+- Static Hard Matrix **40/40 PASS**.
+- Automatik **9/9 Szenarien PASS**, inklusive fehlendem PSERC, Fremdrecherche und Speicherpflege als harte Blockaden.
+- Kurzer Dienstweg **10/10 Szenarien PASS**, inklusive K0, Finanzierung, Versicherung und sämtlicher Negativgrenzen.
+- PSERC Evidenzquellen **7/7 PASS**; fehlende Evidenz, falscher Hash, Hard-Reason blockieren.
+- PSERC Package Integrity PASS; manipuliertes Vertragspaket blockiert mit `PSERC_COMPILER_PACKAGE_DRIFT`.
+- Exact-Five-Handoff PSERC → PSTE PASS; sechstes Feld, falscher Batch-Hash, NO_READY und falsche K0-Identität blockieren.
+- Publish- und Content-Payload-Grenzen bleiben fail-closed.
+
+Testreport:
+`PFERDE_ATELIER_PSTE_05758_PSERC_02833_FINAL_HARD_TESTREPORT.json`
+SHA-256: `517b4bf85ddd8b26caecefc7f8c5619f035260b82aaa150fc134d28e3f18a5d0`.
+
+**Lokaler technischer Blocker: keiner.**
+
 
 ## CURRENT-DELTA 2026-10-08 – EXAKTES PSTE-/PSERC-PAAR GEFUNDEN UND FRISCH GEPRÜFT
 
@@ -822,18 +863,19 @@ Einordnung:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05757_PSERC_02832_RESTCLEANUP_BEFORE_FINAL_LIVE_ACCEPTANCE`
+`PSTE_05758_PSERC_02833_LIVE_INSTALL_AND_READBACK_OPEN`
 
-Der echte lokale Workflow ist nicht mehr wegen fehlender Dateien blockiert. Offen sind nur noch der sichere Rest-Cleanup der belegten Altlasten/Metadatendrift und danach die echte WordPress-Abnahme des exakten bereinigten Paars.
+Die lokale technische Arbeit ist abgeschlossen. Offen ist ausschließlich die reale WordPress-Installation/Abnahme des exakt geprüften Paars 0.57.58 + 0.28.33. Aus lokalem PASS wird kein LIVE-PASS erfunden.
 
 ## GENAU EINE NEXT ACTION
 
-`SAFE_RESTCLEANUP_THEN_REPEAT_EXACT_LOCAL_E2E`
+`INSTALL_EXACT_05758_AND_02833_THEN_SINGLE_LIVE_E2E_READBACK`
 
-1. PSERC-Vertragsmetadaten an die tatsächlich getestete Runtime-Evidenzliste angleichen und Paketintegrität neu binden.
-2. PSTE nur um **nachweislich tote** versteckte Admin-/Diagnoseoberfläche bereinigen; keine Sandbox-/Review-/Bestandsfunktion entfernen, solange deren Ersatzpfad nicht bewiesen ist.
-3. Danach dasselbe exakte Positiv-/Negativ-E2E erneut gegen das konsolidierte Paar laufen lassen.
-4. Erst bei PASS: WordPress-Live-Abnahme/Readback; kein automatisches Publish.
+1. Exakt `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip` und `PSERC-0.28.33-EVIDENCE-CONTRACT-SYNC-HARDPASS.zip` installieren.
+2. Versions-/Build-Readback durchführen.
+3. Einmal Automatik mit vorhandenem Bestand bis READY/NO_READY laufen lassen; Fortschritt/Hang/Resume und Produktionsdatei prüfen.
+4. Einmal Kurzer Dienstweg mit einem normalen K0-Thema sowie den gebundenen Spezialprofilen prüfen.
+5. Keine neue Providerrecherche, kein Publish und keine weitere Pluginänderung vor diesem Readback.
 
 ## NICHT ANFASSEN
 
