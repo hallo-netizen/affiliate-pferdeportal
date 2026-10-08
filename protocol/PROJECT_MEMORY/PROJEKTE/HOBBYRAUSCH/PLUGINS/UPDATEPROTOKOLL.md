@@ -785,3 +785,77 @@ Keine Blind-Promotion und kein Live-Sync.
 
 NEXT:
 19 Expansion-Anker final bewerten → begründetes Delta binden oder bewusst Editorial/Finder/Out-of-scope schließen → vollständigen lokalen POS/NEG-E2E des daraus finalen Kandidaten → erst dann Live-Dry-Run.
+
+
+---
+
+## PU-20261008-016 – HD-001 V1.14.1 Expansion19 finaler Zielstand
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+V1.14.0 / 841 Identitäten / 340 CORE → V1.14.1 / 860 Identitäten / 359 CORE.
+
+WARUM:
+Die 19 bekannten/großen Expansion-Anker wurden nach Regeln 1.5 final bewertet und mussten ohne Blind-Promotion in Master und Zielprofil gebunden werden.
+
+FACHLICH:
+- 19/19 IN_SCOPE;
+- 12 HOBBY_HUB;
+- 7 ORIENTATION_UNIVERSE;
+- Monetarisierung aller 19 bleibt UNKNOWN bis zu echtem Provider-Match;
+- keine Rolle aus Monetarisierung abgeleitet;
+- keine globale Content-Kategorieebene erzeugt.
+
+STRUKTUR:
+- 60 aktive Zwischenbereiche;
+- `Essbare Pflanzen` wird durch `Gemüseanbau` real belegt und deshalb aktiviert;
+- `Heimwerken` und `Gärtnern` bleiben direkte Welt-Kinder ohne künstlichen Zwischenbereich;
+- direkte Hobbyseiten werden nicht als Zwischenbereich im Header gezeigt.
+
+TECHNISCHE KORREKTUR:
+- Research-/Expansion-Kandidaten können deterministisch zusätzlich zum Rohinventar gebunden werden;
+- UNKNOWN-Monetarisierung darf eine fachlich begründete CORE-Rolle nicht blockieren, solange Editorial-Erhalt vorhanden ist;
+- falsche DIRECT/ASSISTED-Behauptung ohne Monetarisierungspfad bleibt fail-closed;
+- starre 841-Zählannahmen aus Dry-Run/Admin entfernt.
+
+LOKALER ZIELSTAND:
+- 860 Identitäten;
+- 359 CORE / 501 Finder-Editorial;
+- 60 aktive Zwischenbereiche;
+- 466 aktive Logikknoten;
+- 457 physische Ziele;
+- 430 Pages;
+- 97 Header-Einträge.
+
+POSITIV:
+- Fresh Dry-Run 457 CREATE / 0 Provider / 0 Writes;
+- Fresh Sync 457/457 COMPLETE;
+- zweiter identischer Sync 457 UNCHANGED;
+- Migration V1.14.0 → V1.14.1: 20 CREATE + 437 UPDATE + 0 ARCHIVE / COMPLETE;
+- danach 457 UNCHANGED;
+- 430/430 Page-Frontend PASS;
+- Header 97/97, Hubs, Front, Footer, Final-Readback PASS.
+
+NEGATIV:
+Readback-/Page-/Term-Rollback, Ambiguity, Foreign-Slug, Missing-Taxonomy, Duplicate-Slug, Monetarisierungs-Falschbehauptung, fehlende Editorial-Sicherung und Blind-Promotion = PASS/fail-closed.
+
+ARTEFAKT:
+`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`64735c31f474a782cc324c68218aade99ccfca4b54ab08091d5f28cfcecae95e`
+
+PROFIL SHA-256:
+`cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0`
+
+MASTER SHA-256:
+`adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
+
+EVIDENCE:
+`SEO_KATEGORIEN/HD001_V1_14_1_EXPANSION19_FULL_LOCAL_HARDPASS_20261008.json`
+
+NEXT:
+Exaktes V1.14.1-Artefakt → ein read-only Live-Dry-Run → JSON-Readback prüfen.
+Kein Sync vorher.
