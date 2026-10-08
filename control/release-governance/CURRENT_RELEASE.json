@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 285,
+  "generation": 286,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "53c3c06f436efd222b2c412cb2c7fb19c5d20352e85052595217bd450b720720",
+    "manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,13 +35,13 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.207",
-    "status": "WORKING_6_72_207_GLOSSARY_STANDARD_BREED_FREE_GATE_PASS",
+    "version": "6.72.208",
+    "status": "WORKING_6_72_208_KISS_CLEANUP_BOUND",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "53c3c06f436efd222b2c412cb2c7fb19c5d20352e85052595217bd450b720720",
+    "current_source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": "b2e88dc663a6f14b00071aa1a4c709afc73a113a49d631c9a5f6dcf38d6c9ad4",
     "candidate_reference_scope": "Authoritative section 9 rule order restored: specific mapped banner stays in its stored target/path; nonmatching specific banner stays out; if no specific banner is available for the target, explicitly general active banners may enter the existing technically/format-valid stable fallback pool. Manual topic assignment still writes the same topic_targets truth. No frontend reclassification, new DB query, provider HTTP or new table.",
@@ -49,7 +49,7 @@
     "final_artifact_sha256": "",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.207.zip",
     "handoff_artifact_bytes": 821428,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_207_GLOSSARY_STANDARD_BREED_FREE_RULE_BOUND",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_208_KISS_CLEANUP_BOUND",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "LIVE_READBACK_GLOSSARY_AND_BREED_ONLY",
-    "current_focus_reason": "6.72.207 hard gate PASS 34/34. Glossary now topic-first then free fallback; breed singles always free after technical/format gates. Only live readback remains."
+    "current_focus": "KISS_CLEANUP_NO_FUNCTION_CHANGE",
+    "current_focus_reason": "User requested cleanup only: remove backend/navigation legacy presentation, verify automation/health/DB/performance, preserve all working import/ranking/output/calculator/banner behavior."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_207_GLOSSARY_STANDARD_BREED_FREE_GATE_PASS",
-    "authorized_next_action": "LIVE_INSTALL_READBACK",
-    "bound_user_scope_action": "Install exact tested 6.72.207 and check only: multiple glossary articles with different topics all show a banner; thematic glossary match outranks free choice; breed singles show freely selected technically/format-valid banners. Do not touch calculator or other paths.",
-    "completion_condition": "USER_LIVE_CONFIRMS_GLOSSARY_ALL_AND_BREED_VISIBLE",
+    "state": "WORKING_6_72_208_KISS_CLEANUP_BOUND",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Test only cleanup invariants: legacy menu entries pruned from visible navigation while direct pages remain registered; automation/reconcile/health/housekeeping unchanged; no new tables or frontend runtime behavior; DB housekeeping bounded and preserves active/current rows.",
+    "completion_condition": "KISS_CLEANUP_6_72_208_GATES_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
-    "sequence": 127,
+    "sequence": 128,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672207_glossary_standard_breed_free_20261008.md",
     "evidence_sha256": "",
-    "current_source_manifest_sha256": "53c3c06f436efd222b2c412cb2c7fb19c5d20352e85052595217bd450b720720",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_207_GLOSSARY_STANDARD_BREED_FREE_RULE_BOUND",
+    "current_source_manifest_sha256": "988906e236ba949fb8990bd85622c8ed35e108a24042999dcf8bb9c918533bed",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_208_KISS_CLEANUP_BOUND",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,20 +1041,12 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "RUN_37768292261 PASS_34_OF_34. DO NOT RERUN FUNCTIONAL GATES WHILE MANIFEST 53c3c06f436efd222b2c412cb2c7fb19c5d20352e85052595217bd450b720720 IS UNCHANGED.",
+    "pass_reuse_policy": "Reuse all 6.72.207 functional banner/rechner evidence. 6.72.208 may test only admin cleanup, DB housekeeping, scheduling/health invariants and no-function-change source diff.",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
-    "gate_runner_scope": "6_72_207_GLOSSARY_STANDARD_BREED_FREE_ONLY",
-    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence.",
-    "final_installer": {
-      "filename": "AFFILIATE_ZENTRALE_6.72.207.zip",
-      "sha256": "b2e88dc663a6f14b00071aa1a4c709afc73a113a49d631c9a5f6dcf38d6c9ad4",
-      "bytes": 821428,
-      "workflow_run": 37768292261,
-      "workflow_artifact_id": 11545587566,
-      "status": "EXACT_TESTED_INSTALLER_READY_LIVE_READBACK_OPEN"
-    }
+    "gate_runner_scope": "6_72_208_KISS_CLEANUP_ONLY",
+    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence."
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
