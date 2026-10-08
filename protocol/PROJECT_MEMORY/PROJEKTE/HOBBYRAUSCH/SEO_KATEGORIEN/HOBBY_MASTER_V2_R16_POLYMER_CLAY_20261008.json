@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Polymer Clay",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Material & Konditionieren",
+      "intents": [
+        "Materialwahl",
+        "Konditionieren",
+        "Mischen",
+        "Weichheit",
+        "Lagerung"
+      ]
+    },
+    {
+      "label": "Formen & Modellieren",
+      "intents": [
+        "Grundformen",
+        "Aufbau",
+        "Verbindungen",
+        "Details",
+        "Struktur"
+      ]
+    },
+    {
+      "label": "Muster & Canes",
+      "intents": [
+        "Cane-Grundlagen",
+        "Farbmuster",
+        "Reduktion",
+        "Scheiben",
+        "Musterkombination"
+      ]
+    },
+    {
+      "label": "Backen & Härten",
+      "intents": [
+        "Backtemperatur",
+        "Backzeit",
+        "Unterlage",
+        "Verfärbung",
+        "Nachhärten"
+      ]
+    },
+    {
+      "label": "Schleifen & Finish",
+      "intents": [
+        "Schleifen",
+        "Polieren",
+        "Bohren",
+        "Versiegelung",
+        "Pflege"
+      ]
+    }
+  ],
+  "validation": true
+}
