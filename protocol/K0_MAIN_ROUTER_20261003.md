@@ -1,22 +1,23 @@
-# K0 MAIN ROUTER
+# K0 main router evidence — 2026-10-03
 
-Purpose: deterministic fresh entry for `K0:start`.
+Purpose: make `K0:start` deterministic in fresh chats.
 
-Public router:
-`main:K0_START_HERE.md`
+Main-level router:
+`K0_START_HERE.md`
 
 Pinned K0 branch:
 `konzept0-portal-neutral-20261002`
 
-Active K0 entry on that branch:
-- `K0_START_HERE.md`
-- `K0_CURRENT_STATE.json`
-- `K0_GOAL_CONTRACT.json`
+Pinned K0 current:
+`konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json`
 
-For every valid current upload:
-- current upload is the only assignment identity;
-- no historical run, prior output, prior blocker or alternate current may select or block the request;
-- the existing GitHub file-trigger start is mandatory;
-- a technical start blocker is valid only after a real write attempt for the current fresh run fails;
-- no alternate route;
-- `publish_allowed=false`.
+Forbidden fallback for K0:
+- `concept_agent/START_HERE.md`
+- `control/startmaster0107/CURRENT_STATE.json` on main
+- K8/K9/K10 current files
+- archive/chat history
+
+This protocol file also causes the existing deterministic entrance `hardlock` PR check to execute for the router change.
+
+Restore evidence 2026-10-04: `K0_START_HERE.md` restored byte-for-byte from `b45791dc575027253db3d8d85f803ed12dc68e42`; no K0 production, rule, design, Current, or STARTMASTER change.
+Reapply evidence 2026-10-05: restore only the proven K0 wrong-entry block/return behavior in `main:K0_START_HERE.md`; no Current, workflow, engine, rule, plugin, WordPress, LT, PPM, design or architecture change.
