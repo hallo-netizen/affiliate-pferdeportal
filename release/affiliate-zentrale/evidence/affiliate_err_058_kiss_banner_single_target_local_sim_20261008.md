@@ -45,3 +45,22 @@ During the simulation, the first failure was found in the later campaign ranking
 
 Status:
 LOCAL_POSITIVE_NEGATIVE_SIM_PASS / PERFORMANCE_DB_HARDLOCK_PASS / WORDPRESS_MARIADB_RELEASE_GATES_STILL_REQUIRED / NO_RELEASE_PASS
+
+
+## Correction after authoritative contract re-check
+
+The prior hard statement "no matching stored topic = no banner" was too broad and contradicted section 9.4 of the authoritative banner contract.
+
+Correct fixed order:
+1. specific stored mapped banner for the current target/path wins;
+2. a specific banner that does not match stays out;
+3. if no specific banner is available for the target, an explicitly general active banner may be selected from the existing technically/format-valid fallback pool;
+4. existing stable deterministic distribution remains;
+5. no frontend reclassification, provider HTTP, new frontend DB query or new table.
+
+The too-hard source change was corrected:
+- restore stored state `general` as an explicit fallback state;
+- for `output_object_v4` banners: matching `automation_target_keys` win; otherwise only `assignment_mode=fallback` may enter the general pool; a nonmatching specific banner remains blocked;
+- horse-breed special handling cannot turn a nonmatching specific Creative-Library banner into a fallback candidate.
+
+Corrected local rule matrix: 13/13 PASS.
