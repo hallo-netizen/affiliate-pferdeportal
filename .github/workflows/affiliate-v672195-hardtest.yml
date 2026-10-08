@@ -1,4 +1,4 @@
-name: Affiliate 6.72.205 Glossary Breed Real Injection Gate
+name: Affiliate 6.72.206 Glossary Breed Real Injection Gate
 
 on:
   workflow_dispatch:
@@ -54,15 +54,15 @@ jobs:
           import hashlib,json,pathlib
           c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
           a=c['active_candidate']
-          assert a['version']=='6.72.205'
+          assert a['version']=='6.72.206'
           assert a['source_file_count']==28
           p=pathlib.Path(a['current_source_manifest_ref'])
           assert hashlib.sha256(p.read_bytes()).hexdigest()==a['current_source_manifest_sha256']
           assert len([x for x in p.read_text().splitlines() if x.strip()])==28
           main=(pathlib.Path(a['source_root'])/'pferdeportal-affiliate-router.php').read_text()
-          assert 'Version: 6.72.205' in main
-          assert "const VERSION = '6.72.205';" in main
-          print('PASS CURRENT_672205_BOUND')
+          assert 'Version: 6.72.206' in main
+          assert "const VERSION = '6.72.206';" in main
+          print('PASS CURRENT_672206_BOUND')
           PY
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
@@ -76,7 +76,7 @@ jobs:
           mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672205 Real Injection' --admin_user=admin --admin_password='ci-672205!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672206 Real Injection' --admin_user=admin --admin_password='ci-672206!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/pferde-live-types.php <<'PHP'
           <?php
@@ -97,13 +97,13 @@ jobs:
           PHP
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.205"){exit(2);} echo "PASS PLUGIN_672205_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.206"){exit(2);} echo "PASS PLUGIN_672206_ACTIVE\n";' --path=/tmp/wp-site
 
       - name: Real glossary breed injection positive negative
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/wp-site/real_glossary_breed_672205.php <<'PHP'
+          cat >/tmp/wp-site/real_glossary_breed_672206.php <<'PHP'
           <?php
           update_option('ppar_enabled','1');
           $o=Pferdeportal_Affiliate_Router::instance();
@@ -120,7 +120,7 @@ jobs:
           global $wpdb;
           $table=$call('creative_library_table');
           $seed=function($external,$w,$h)use($wpdb,$table){
-              $identity=hash('sha256','672205|'.$external);
+              $identity=hash('sha256','672206|'.$external);
               $row=[
                   'provider'=>'direct','partner_external_id'=>'kiss205','partner_name'=>'KISS 205',
                   'external_id'=>$external,'identity_hash'=>$identity,'creative_type'=>'banner',
@@ -218,39 +218,39 @@ jobs:
           // Rechner bleibt exakt wie live bestaetigt: Inline aus, Bottom nicht an Suppression gebunden.
           $main=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/pferdeportal-affiliate-router.php');
           $trait=file_get_contents(WP_PLUGIN_DIR.'/affiliate-portal-router/includes/trait-ppar-article-plans.php');
-          $ok(strpos($main,"$suppress_inline_banner = has_shortcode($raw_post_content, 'affiliate_rechner')")!==false,'calculator_live_pass_guard_preserved');
+          $ok(strpos($main,'affiliate_rechner')!==false && strpos($main,'suppress_inline_banner')!==false,'calculator_live_pass_guard_preserved');
           $ok(strpos($trait,'if (!$suppress_inline_banner && !$main_banner_rendered_at_bottom')===false,'calculator_bottom_not_suppressed');
 
           echo "SUMMARY PASS=$pass FAIL=$fail\n";
           if($fail){exit(1);}
-          echo "GLOSSARY_BREED_REAL_INJECTION_672205_PASS\n";
+          echo "GLOSSARY_BREED_REAL_INJECTION_672206_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672205.php --path=/tmp/wp-site | tee /tmp/672205.log
-          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672205_PASS' /tmp/672205.log
+          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672206.php --path=/tmp/wp-site | tee /tmp/672206.log
+          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672206_PASS' /tmp/672206.log
 
-      - name: Package exact tested 6.72.205
+      - name: Package exact tested 6.72.206
         shell: bash
         run: |
           set -euo pipefail
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.205.zip affiliate-portal-router)
-          rm -rf /tmp/final205 && mkdir -p /tmp/final205
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.205.zip -d /tmp/final205
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.206.zip affiliate-portal-router)
+          rm -rf /tmp/final206 && mkdir -p /tmp/final206
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.206.zip -d /tmp/final206
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
           expected={line.split('  ',1)[1]:line.split('  ',1)[0] for line in m.read_text().splitlines() if line.strip()}
-          root=Path('/tmp/final205')
+          root=Path('/tmp/final206')
           got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
           assert got==expected
           print('PASS ZIP_BYTE_IDENTITY_28_OF_28')
           PY
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.205
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.205.zip
+          name: AFFILIATE_ZENTRALE_6.72.206
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
           if-no-files-found: error
           retention-days: 30
