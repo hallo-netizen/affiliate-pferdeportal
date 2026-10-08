@@ -980,3 +980,35 @@ EVIDENCE:
 NEXT:
 V1.14.3 installieren → genau einen read-only Live-Dry-Run → JSON-Readback prüfen.
 Kein Sync vorher.
+
+
+---
+
+## PU-20261008-020 – HD-001 Abschluss-/Frischecheck V1.14.3
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Dokumentations-/Autoritätsabgleich nach Abschlussprüfung. Keine Plugin-Codeänderung, keine neue Version, keine WordPress-Änderung.
+
+ANLASS:
+Der Abschluss-/Nachholcheck zeigte vier veraltete oder missverständliche Dokumentationsstellen, obwohl die SEO-Kategorien-Current bereits korrekt auf V1.14.3 / Live-Dry-Run pending stand.
+
+NACHGEHOLT:
+- Konzept-Current: veraltetes `TECHNICAL_OBJECT_PLAN_PENDING` beendet; operative Fortsetzung eindeutig an `SEO_KATEGORIEN/CURRENT_STATE.md` geroutet;
+- zentrales Fehlerregister: HD-001-Wegweiser von V1.14.1 auf V1.14.3 / Live-Dry-Run pending aktualisiert;
+- Plugin-Current: alte V1.12.0-/V1.13.1-Blöcke ausdrücklich als historisch markiert;
+- isoliertes Manifest: V1.14.3-Artefakt, V1.14.3-Zielprofil, 1.723 Zielobjekte, 1.292 Content-Kategorien und lokale Hard-Pass-Evidence korrekt nachgezogen.
+
+UNVERÄNDERT:
+- Zielvertrag 2.6;
+- Assessment Rules 1.6;
+- Fach-Sollprofil;
+- Plugin-Binary V1.14.3;
+- SHA-256 des ZIP: `deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`;
+- erster offener Blocker: `HD001_V1_14_3_LIVE_DRYRUN_PENDING`;
+- exakt eine NEXT ACTION: V1.14.3 installieren und genau einen read-only Live-Dry-Run ausführen; kein Sync vorher.
+
+ERGEBNIS:
+Dokumentations-/Autoritätsabgleich PASS. Keine zweite aktuelle Statuswahrheit für den operativen SEO-/Kategoriepfad.
