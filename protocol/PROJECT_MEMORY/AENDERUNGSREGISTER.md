@@ -971,3 +971,37 @@ BELEG:
 NEXT:
 Korrigiertes ZIP installieren → genau einen finalen read-only Delta-Dry-Run → JSON-Readback.
 Noch kein Final-Sync.
+
+
+## HOBBYRAUSCH-HD001-20261008-V – Korrigierter Live-Dry-Run PASS, Final-Sync freigegeben
+
+WAS:
+Der frische Live-Dry-Run mit dem Materialkunst-korrigierten V1.13.1-Artefakt wurde ausgewertet.
+
+ERGEBNIS:
+- PASS / valid=true;
+- 841 Identitäten;
+- 340 CORE / 501 Finder-Editorial;
+- 439 Logikknoten;
+- 430 physische Zielobjekte;
+- 403 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 355 CREATE / 75 ADOPT;
+- 0 UPDATE / 0 ARCHIVE;
+- errors = [];
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 WordPress-Strukturwrites;
+- Materialkunst nicht mehr enthalten;
+- alter V1.12-Sync terminal ROLLED_BACK;
+- kein aktiver Final-Snapshot vor dem Final-Sync.
+
+ENTSCHEIDUNG:
+Alle definierten Pre-Sync-Gates sind erfüllt.
+
+NEXT:
+Genau einen Final-Sync ausführen.
+Danach sofort finalen Struktur-/Frontend-Readback exportieren.
+
