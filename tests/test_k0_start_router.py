@@ -19,6 +19,16 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("nicht erforderlich", text)
         self.assertIn("Vor dem ersten tatsächlichen GitHub-Schreibversuch", text)
 
+    def test_explicit_github_file_write_is_bound_as_start_mechanism(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("create_file", text)
+        self.assertIn("update_file", text)
+        self.assertIn("im selben K0-Auftrag unmittelbar die Recherche auszuführen", text)
+        self.assertIn("AUTHORING_CONTEXT.json", text)
+        self.assertIn("ein erfolgreiches `WORDPRESS_INTAKE.json` beendet den Start **nicht**", text)
+        self.assertIn("fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**", text)
+        self.assertIn("tatsächlich mit einem Fehler scheitert", text)
+
     def test_start_processes_every_upload_item_through_existing_single_run_contract(self):
         text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
         self.assertIn("Alle Einträge des aktuellen Uploads werden bearbeitet", text)
