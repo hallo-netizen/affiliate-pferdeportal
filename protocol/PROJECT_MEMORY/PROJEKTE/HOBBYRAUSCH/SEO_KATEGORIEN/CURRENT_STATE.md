@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / FACH-SOLLPROFIL PASS / 359 VON 359 CURRENT-CORE ENTSCHIEDEN / 279 HOBBY_HUB / 53 ORIENTATION / 22 EDITORIAL / 5 ALIAS / 1.292 CONTENT-KATEGORIEN / TECHNISCHER OBJEKTPLAN PENDING / KEIN WORDPRESS-WRITE
+STATUS: FACH-SOLLPROFIL FROZEN / TECHNISCHER OBJEKTPLAN + V1.14.3 FULL LOCAL HARD PASS / 1723 ZIELOBJEKTE / 1292 CONTENT-KATEGORIEN / LIVE-DRY-RUN PENDING / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1164,24 +1164,77 @@ Korrigierte späte Evidence:
 
 Keine Pluginänderung und kein WordPress-Write wurden für diese fachliche Neuberechnung ausgeführt.
 
+## TECHNISCHER OBJEKTPLAN + V1.14.3 – FULL LOCAL HARD PASS
+
+Beleg:
+`HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS_20261008.json`
+
+Finaler technischer Zielstand:
+- 855 kanonische Identitäten nach 5 Alias-Zusammenführungen;
+- 332 finale CORE-Identitäten;
+- 523 Editorial/Finder;
+- 1.737 Logikknoten;
+- 1.723 physische Zielobjekte;
+- 408 Pages;
+- 1.292 WordPress-Content-Kategorien;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 Relations;
+- 65 aktive Zwischenbereiche;
+- 279/279 HOBBY_HUBs mit sichtbarer Content-Kategorieebene.
+
+Migration gegen V1.14.1-Profil:
+- 1.293 CREATE;
+- 430 UPDATE;
+- 27 ARCHIVE;
+- 0 ADOPT;
+- 28 bestehende Hobbyseiten werden per legacy_ids identitätserhaltend migriert statt neu angelegt;
+- Readback 1.723/1.723 COMPLETE.
+
+Idempotenz:
+- zweiter Dry-Run: 1.723 UNCHANGED / 0 ARCHIVE;
+- zweiter Sync: 1.723 UNCHANGED / 0 ARCHIVE / **0 Writes**;
+- dritter Dry-Run: 1.723 UNCHANGED / 0 ARCHIVE.
+
+Frontend:
+- PASS;
+- Header 102;
+- lokale Welt-Kinder 7 / 11 / 11 / 5 / 10 / 7 / 8 / 8;
+- 65 Zwischenbereiche;
+- 0 leere Zwischenbereiche;
+- 279/279 Hubseiten korrekt.
+
+Negative Tests:
+- Duplicate Slug BLOCKED;
+- Missing Parent BLOCKED;
+- Depth Exceeded BLOCKED;
+- Name Too Long BLOCKED;
+- Duplicate Node ID BLOCKED.
+
+PHP:
+- 33/33 PASS.
+
+Artefakt:
+`HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip`
+
+SHA-256:
+`deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`
+
+Profil SHA-256:
+`6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6`
+
+0 Provider-Aufrufe.
+0 WordPress-Writes in der lokalen Prüfung.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_TECHNICAL_OBJECT_PLAN_PENDING`
+`HD001_V1_14_3_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Das eingefrorene fachliche Sollprofil einmal gegen das bestehende V1.14.1-Profil technisch auflösen:
-- exakte physische Zielobjekte;
-- Parent-/Tiefenprüfung;
-- Slug-/ID-Kollisionen;
-- 22 Demotionen;
-- 5 Alias-Zusammenführungen;
-- 279 Hub-Seiten mit 1.292 Content-Kategorien;
-- unveränderte Editorial-/Directory-/View-Struktur.
+V1.14.3 installieren → Kategorien → Finaler Zielbaum → **genau einen read-only Live-Dry-Run** ausführen → JSON herunterladen und gegen den tatsächlichen Live-Bestand prüfen.
 
-Erst wenn dieser Objektplan vollständig PASS ist, wird über die Umsetzung entschieden.
-
-Bis dahin:
-- kein Plugin-Fix;
-- kein WordPress-Write;
-- kein Sync.
+Vor dieser Prüfung:
+- kein Sync;
+- kein weiterer Plugin-Fix;
+- kein WordPress-Write.
