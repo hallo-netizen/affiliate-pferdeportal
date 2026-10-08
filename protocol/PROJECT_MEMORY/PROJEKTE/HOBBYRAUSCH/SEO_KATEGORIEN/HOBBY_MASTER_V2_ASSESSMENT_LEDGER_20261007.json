@@ -993,8 +993,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
       "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "ownership": "Owns off-road RC vehicles, suspension, tires, terrain setup and off-road driving. Crawling/trial and formal racing keep their specific intents.",
       "batch_id": "004"
     },
@@ -1163,8 +1163,8 @@
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
       "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 6,
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
       "ownership": "Owns automation logic, sensors/actuators, protocols, controllers, energy and automation scenarios in the home. Device-hacking/DIY build emphasis may be owned by Smart-Home-Basteln.",
       "batch_id": "004"
     },
