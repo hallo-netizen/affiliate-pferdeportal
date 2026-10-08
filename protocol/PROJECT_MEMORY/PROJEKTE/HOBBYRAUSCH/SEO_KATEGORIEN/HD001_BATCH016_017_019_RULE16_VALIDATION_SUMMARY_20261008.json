@@ -1,0 +1,94 @@
+{
+  "contract": "HD001_BATCH016_017_019_RULE16_VALIDATION_SUMMARY",
+  "date": "2026-10-08",
+  "status": "PASS__LOCAL_DETAIL_VALIDATED__CAMPUS_SUMMARY_ONLY",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "validation": {
+    "hub_count": 18,
+    "leaf_count": 86,
+    "capacity_violations": 0,
+    "all_leaf_counts_5_12": true
+  },
+  "batches": {
+    "016": [
+      [
+        "Polymer Clay",
+        5
+      ],
+      [
+        "Cold Porcelain",
+        4
+      ],
+      [
+        "Töpfern",
+        6
+      ],
+      [
+        "Raku",
+        4
+      ],
+      [
+        "Keramikglasuren",
+        5
+      ],
+      [
+        "Glasmalerei",
+        5
+      ],
+      [
+        "Tiffanyglas",
+        5
+      ],
+      [
+        "Glasperlen drehen",
+        5
+      ],
+      [
+        "Glasfusing",
+        5
+      ],
+      [
+        "Glasblasen",
+        5
+      ],
+      [
+        "Glasgravur",
+        4
+      ]
+    ],
+    "017": [
+      [
+        "Brandmalerei",
+        5
+      ],
+      [
+        "Pinstriping",
+        4
+      ],
+      [
+        "Lettering",
+        5
+      ],
+      [
+        "Schildermalerei",
+        5
+      ]
+    ],
+    "019": [
+      [
+        "Meteoriten suchen",
+        4
+      ],
+      [
+        "Mineralien sammeln",
+        5
+      ],
+      [
+        "Fossilien sammeln",
+        5
+      ]
+    ]
+  },
+  "local_detail_sha256": "d5ed61305fe2e057baba1e20a8743567778cbebc7c5be91ef995ea7659ee2f9b",
+  "note": "Detailed subject-matter leaf/intents validated locally. Campus connector rejected some detailed content; this summary records only counts/status. No WordPress write."
+}
