@@ -1,0 +1,210 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN",
+  "date": "2026-10-08",
+  "status": "PASS__33_IDENTITIES__19_HOBBY_HUB__7_ORIENTATION__5_EDITORIAL__2_ALIAS_ONLY",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "sources": {
+    "master": "HOBBY_DEPOT_HOBBY_MASTER_V2_20261007.json",
+    "current_core": "HD001_CURRENT_CORE_359_NAMES_20261008.json"
+  },
+  "identity_corrections": [
+    {
+      "alias": "Karnivoren",
+      "owner": "fleischfressende Pflanzen",
+      "basis": "verified terminology duplicate"
+    },
+    {
+      "alias": "Mikrogrün",
+      "owner": "Microgreens",
+      "basis": "verified terminology duplicate"
+    }
+  ],
+  "decisions": [
+    [
+      "Bonsai",
+      "HOBBY_HUB",
+      6
+    ],
+    [
+      "Bonsai aus Samen",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Kusamono",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Kokedama",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "seltene Zimmerpflanzen",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Pflanzenvermehrung",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Stecklingszucht",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Kakteen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Sukkulenten",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Lithops",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Orchideenzucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Bromelien",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Tillandsien",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Karnivoren",
+      "ALIAS_ONLY",
+      0
+    ],
+    [
+      "fleischfressende Pflanzen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Hydrokultur",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Semi-Hydro",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Hydroponik",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Indoor-Growing",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Mikrogrün",
+      "ALIAS_ONLY",
+      0
+    ],
+    [
+      "Microgreens",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Pilzzucht",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Speisepilzzucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Pilzklonen",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Pilzsubstrate herstellen",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Mooskultur",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Riesenkürbis-Zucht",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Chili-Zucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Tomatensorten-Zucht",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Saatguterhaltung",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Saatgut-Tausch",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Pflanzenkreuzungen",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Orchideenbestäubung",
+      "EDITORIAL_TOPIC",
+      0
+    ]
+  ],
+  "validation": {
+    "identities": 33,
+    "hobby_hubs": 19,
+    "orientation_universe": 7,
+    "editorial_topic": 5,
+    "alias_only": 2,
+    "visible_content_categories": 85,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0,
+    "provider_calls": 0,
+    "wordpress_writes": 0
+  },
+  "full_detail": {
+    "local_artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json",
+    "sha256": "8c6254d789a1896a9b1b0a8a83f65ee336bb443ed315894b4b654e2e336e7a55",
+    "note": "Contains all leaf labels and distinct subject-defined article intents."
+  }
+}
