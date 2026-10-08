@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Resin Casting",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Formenbau & Vorbereitung",
+      "intents": [
+        "Formmaterial",
+        "Formtrennung",
+        "Anguss",
+        "Entlüftung",
+        "Formprüfung"
+      ]
+    },
+    {
+      "label": "Harzsystem & Dosierung",
+      "intents": [
+        "Harztyp",
+        "Mischung",
+        "Menge",
+        "Topfzeit",
+        "Temperatur"
+      ]
+    },
+    {
+      "label": "Gießen & Einschlüsse",
+      "intents": [
+        "Gießtechnik",
+        "Mehrschichtguss",
+        "Einbettung",
+        "Pigmentierung",
+        "Positionierung"
+      ]
+    },
+    {
+      "label": "Druck & Vakuum",
+      "intents": [
+        "Vakuumieren",
+        "Drucktopf",
+        "Blasenreduktion",
+        "Leckprüfung",
+        "Prozesswahl"
+      ]
+    },
+    {
+      "label": "Entformen & Nacharbeit",
+      "intents": [
+        "Entformzeit",
+        "Formschonung",
+        "Gussgrat",
+        "Schleifen",
+        "Polieren"
+      ]
+    }
+  ],
+  "validation": true
+}
