@@ -51,6 +51,15 @@ Der aktuell angehängte gültige Upload ist die einzige Auftragsidentität für 
 
 ## GitHub-Dateistart — HARDLOCK
 
+Für den Chat gilt zwingend:
+
+- vorhandene GitHub-Dateischreibfunktionen (`create_file`; bei bereits bestehender Datei nur `update_file`) sind der technische Startmechanismus;
+- nach erfolgreichem Schreiben von `WORDPRESS_INTAKE.json` ist **im selben K0-Auftrag unmittelbar die Recherche auszuführen und anschließend `AUTHORING_CONTEXT.json` mit `create_file` zu schreiben**;
+- ein erfolgreiches `WORDPRESS_INTAKE.json` beendet den Start **nicht**;
+- fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
+- ein terminaler Blocker zwischen Intake und Authoring Context ist nur zulässig, wenn die konkrete Recherche oder der konkrete `create_file`-/`update_file`-Versuch für `AUTHORING_CONTEXT.json` tatsächlich mit einem Fehler scheitert;
+- bei erfolgreichem Schreibversuch wird ohne sichtbare Zwischenmeldung weiterproduziert.
+
 Der bestehende GitHub-Dateistart wird für **jeden Eintrag des aktuellen Uploads** vollständig ausgeführt.
 
 Für jeden Eintrag gilt ohne sichtbaren Zwischenstopp:
