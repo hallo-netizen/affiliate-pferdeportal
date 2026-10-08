@@ -940,7 +940,7 @@ trait PPAR_Output_Objects_Trait {
         $record=$portal_records[0];
         $state=sanitize_key((string)($record['state']??''));
         $target_key=sanitize_text_field((string)($record['target_key']??''));
-        if(!in_array($state,array('mapped','general'),true)||$target_key===''){return null;}
+        if($state!=='mapped'||$target_key===''){return null;}
         $targets=$this->output_portal_targets($portal);
         if(is_wp_error($targets)){return $targets;}
         $target=$this->output_resolve_target_key($targets,$target_key);
@@ -1625,6 +1625,12 @@ trait PPAR_Output_Objects_Trait {
         if ($manual_status === 'review') {
             return array('status'=>'review','confidence'=>0,'reason'=>(string) ($manual['reason'] ?? 'Creative wurde für dieses Portal zur Prüfung markiert.'),'target'=>null,'source'=>'manual_review');
         }
+        // Banner: topic_targets ist die einzige fachliche Zielwahrheit.
+        // Manuelle Zuordnung schreibt ebenfalls dort hinein.
+        if ($output_type === 'portal_banner' && sanitize_key((string)($row['creative_type']??'')) === 'banner') {
+            return $this->output_banner_destination_classification($row,$portal);
+        }
+
         $fixed_target_key = sanitize_text_field((string) ($manual_payload['target_key'] ?? ''));
         if ($manual_status === 'approved' && $fixed_target_key !== '') {
             $targets = $this->output_portal_targets($portal);
@@ -1683,14 +1689,6 @@ trait PPAR_Output_Objects_Trait {
                 'reason'=>'eBay-BUSINESS besitzt keinen aktuell verifizierten Produktvertrag; generische Portalzuordnung ist gesperrt.',
                 'target'=>null,'alternatives'=>array(),'source'=>'ebay_business_contract_missing',
             );
-        }
-
-        // KISS: Banner werden ausschließlich einmal aus ihrer echten Ziel-URL
-        // klassifiziert und danach aus der Creative-Library wiederverwendet.
-        // Die große generische Text-/Partnerklassifikation bleibt Produkten und
-        // anderen Ausgabetypen vorbehalten.
-        if ($output_type === 'portal_banner' && sanitize_key((string)($row['creative_type']??'')) === 'banner') {
-            return $this->output_banner_destination_classification($row,$portal);
         }
 
         $specific_evidence = $this->output_creative_evidence_text($row, $portal, $output_type);
