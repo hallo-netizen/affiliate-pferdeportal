@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 294,
+  "generation": 295,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,8 +36,8 @@
   },
   "active_candidate": {
     "version": "6.72.210",
-    "status": "WORKING_6_72_210_PARTNER_HTML_PASS_FINALIZE_ONLY",
-    "release_allowed": false,
+    "status": "RELEASED",
+    "release_allowed": true,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -45,8 +45,8 @@
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1",
     "candidate_reference_scope": "Explicit user rootfix: generic affiliate textlinks accept either complete trusted partner HTML/code (including tracking pixel) or legacy link_text + tracking_url. Same stable [affiliate_textlink id=\"...\"] placeholder, same non-autoload option/request cache. No new table, cron, provider adapter or server-side frontend HTTP.",
-    "final_artifact_ref": "",
-    "final_artifact_sha256": "",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.210.zip",
+    "final_artifact_sha256": "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.210.zip",
     "handoff_artifact_bytes": 811373,
     "source_binding_status": "MANIFEST_28_FILES_6_72_210_PARTNER_HTML_GATE_PASS",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "BIND_EXACT_TESTED_6_72_210_INSTALLER",
-    "current_focus_reason": "Run 37787914399 passed 59/59 plus ZIP identity 28/28. Bind exact artifact 11554788092 without changing source."
+    "current_focus": "RUN_FORMAL_RELEASE_CHECK_6_72_210",
+    "current_focus_reason": "Exact tested installer from run 37787914399 / artifact 11554788092 is repository-bound by commit 2ab296790ab39d6c94180faf6b37a6b803ce37f0. Run immutable formal release-check; no source changes."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,13 +887,13 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_210_PARTNER_HTML_PASS_FINALIZE_ONLY",
+    "state": "RELEASED_6_72_210_FORMAL_CHECK_PENDING",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Bind exact tested AFFILIATE_ZENTRALE_6.72.210.zip from run 37787914399 / artifact 11554788092, SHA256 43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1, bytes 811373, then run formal release-check.",
-    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_FORMAL_RELEASE_CHECK_PASS",
-    "after_completion_action": "NONE",
+    "bound_user_scope_action": "Run exactly: python3 control/release-governance/release_guard.py release-check. Do not change plugin source.",
+    "completion_condition": "FORMAL_RELEASE_CHECK_PASS_6_72_210",
+    "after_completion_action": "Record PASS only; no plugin source changes.",
     "no_optional_detours": true,
-    "sequence": 137,
+    "sequence": 138,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672210_textlink_partner_html_20261008.md",
@@ -1049,11 +1049,13 @@
     "gate_runner_reason": "Existing current workflow passed exact current source; no new workflow architecture.",
     "final_installer": {
       "filename": "AFFILIATE_ZENTRALE_6.72.210.zip",
+      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.210.zip",
       "sha256": "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1",
       "bytes": 811373,
       "workflow_run": 37787914399,
       "workflow_artifact_id": 11554788092,
-      "status": "EXACT_TESTED_INSTALLER_READY"
+      "repository_bind_commit": "2ab296790ab39d6c94180faf6b37a6b803ce37f0",
+      "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
     },
     "formal_release_check_run": 37783979652,
     "formal_release_check_result": "PASS"
@@ -2378,11 +2380,11 @@
     ]
   },
   "handoff": {
-    "status": "READY_TO_BIND",
+    "status": "RELEASED_FORMAL_CHECK_PENDING",
     "entrypoint": "release/affiliate-zentrale/AGENTS.md",
     "current_authority": "control/release-governance/CURRENT_RELEASE.json",
-    "freshness_reference": "branch affiliate-release-current + generation 294 + run 37787914399 + manifest 8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
-    "next_action": "BIND_EXACT_6_72_210_ARTIFACT",
+    "freshness_reference": "branch affiliate-release-current + generation 295 + manifest 8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf + final artifact commit 2ab296790ab39d6c94180faf6b37a6b803ce37f0",
+    "next_action": "RUN_FORMAL_RELEASE_CHECK",
     "do_not_touch": [
       "unrelated import/ranking/banner/product/provider paths",
       "automation/reconcile/health process",
@@ -2770,6 +2772,18 @@
     ]
   },
   "formal_release_check_672210": {
-    "status": "NOT_YET_ALLOWED_GATE_PENDING"
+    "status": "PENDING",
+    "source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf"
+  },
+  "final_artifact_binding_672210": {
+    "status": "PASS_EXACT_TESTED_ARTIFACT_REPOSITORY_BOUND",
+    "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.210.zip",
+    "sha256": "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1",
+    "bytes": 811373,
+    "source_run": 37787914399,
+    "source_artifact_id": 11554788092,
+    "bind_workflow_run": 37788533144,
+    "bind_commit": "2ab296790ab39d6c94180faf6b37a6b803ce37f0",
+    "binding_method": "EXACT_PREVIOUSLY_TESTED_ARTIFACT_DOWNLOADED_BY_STANDARD_GITHUB_ACTION_AND_HASH_SIZE_VERIFIED_BEFORE_COMMIT"
   }
 }
