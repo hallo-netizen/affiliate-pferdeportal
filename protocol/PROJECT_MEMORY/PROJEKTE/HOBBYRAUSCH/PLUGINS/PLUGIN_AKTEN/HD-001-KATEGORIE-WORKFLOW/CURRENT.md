@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 PRAKTISCHES FINALZIEL LOKAL HARD PASS / MANUAL-ONLY / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 PHYSISCHE ZIELOBJEKTE / EIN LIVE-DRYRUN OFFEN / NOCH KEIN LIVE-SYNC
+STATUS: V1.13.1 REALER LIVE-DRYRUN PLAN PASS / FINALPROFIL KORREKT / ALTER TARGET-TREE-LAUF ROLLBACK_PENDING MIT 620 RESTAKTIONEN / APPLY GESPERRT BIS ROLLBACK TERMINAL + NEUER DRYRUN
 
 ## Plugin
 
@@ -181,27 +181,39 @@ Die acht Welten sind CORE-Ebene 1.
 
 Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, sondern im späteren V2-Zielbaum-Delta.
 
+## REALER LIVE-BEFUND V1.13.1
+
+Dry-Run:
+PASS / 12 CREATE / 419 UPDATE / 1 ARCHIVE / 0 Writes / 0 Provider-Calls.
+
+Aber:
+ein historischer Zielbaum-Sync ist noch `ROLLBACK_PENDING`.
+
+Real:
+- alte Revision `HD-TARGET-3P-V1-20261007+313e8ac433c0b154`;
+- 620 Rollback-Aktionen offen;
+- alter Readbackfehler `directory:events-reisen [name]`;
+- Runner `RUNNING / EXISTING_TARGET_TREE_RESUME`;
+- kein aktiver finaler Snapshot.
+
+Sicherheitswirkung:
+- Finaler Apply wird aktuell nicht angeboten;
+- die Finaler-Zielbaum-Seite setzt den alten Rollback bounded automatisch fort;
+- nach terminalem Rollback muss ein neuer Dry-Run erzeugt werden;
+- Apply prüft den Live-Fingerprint erneut und blockiert stale Pläne.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
-
-Kein weiterer Forschungs-, Batch- oder Plugin-Codeblocker ist offen.
-
-Es fehlt nur der read-only Vergleich des finalen Zielprofils mit dem tatsächlichen Live-WordPress-Bestand.
+`HD001_OLD_TARGET_TREE_ROLLBACK_MUST_FINISH_BEFORE_FINAL_SYNC`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.13.1 einmal installieren.
+`Kategorien → Finaler Zielbaum` offen lassen, bis der alte Rollback terminal ist.
 
-Dann:
-`Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`.
+Danach neuen Dry-Run ausführen und JSON exportieren.
 
-Noch NICHT:
-- synchronisieren;
-- DataForSEO starten;
-- Kategorien manuell ändern.
-
-Nach dem Dry-Run den finalen Readback als JSON herunterladen und gegen den erwarteten Zielstand prüfen.
+Noch kein Sync.
+Keine Codeänderung.
 
 ## Release-/Artefaktgrenze
 
