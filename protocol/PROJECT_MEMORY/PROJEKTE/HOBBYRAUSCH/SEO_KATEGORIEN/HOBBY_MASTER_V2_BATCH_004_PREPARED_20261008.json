@@ -2,7 +2,7 @@
   "contract": "HOBBY_MASTER_V2_BATCH_004_PREPARED",
   "version": "1.0",
   "date": "2026-10-08",
-  "status": "PREPARED_AHEAD__DO_NOT_RUN_BEFORE_BATCH_003_FINAL",
+  "status": "CANCELLED_SUPERSEDED_BY_RULES_1_5_PRACTICAL_BASELINE_DELTA",
   "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
   "selection_rule": "First 16 canonical identities in stable master order after the 48 identities covered by final Batch 001+002 and reserved Batch 003; skip 3D-Druck because it is already final in Batch 001.",
   "source_master": {
@@ -44,5 +44,7 @@
   "automatic_depth_research": false,
   "structure_write_capability": false,
   "wordpress_structure_writes_allowed": 0,
-  "gating_note": "Batch 004 is only pre-staged to avoid idle time. Do not execute its DataForSEO call until Batch 003 is final, so cross-batch ownership and the authoritative closed-ID set stay sequential."
+  "gating_note": "Batch 004 is only pre-staged to avoid idle time. Do not execute its DataForSEO call until Batch 003 is final, so cross-batch ownership and the authoritative closed-ID set stay sequential.",
+  "next_action": "DO_NOT_RUN. Batch 004 and later 16-item loops are cancelled.",
+  "cancellation_reason": "The 841-entry master is inventory, not 841 mandatory CORE taxonomy nodes. Existing baseline already routes unknown identities to editorial/finder."
 }
