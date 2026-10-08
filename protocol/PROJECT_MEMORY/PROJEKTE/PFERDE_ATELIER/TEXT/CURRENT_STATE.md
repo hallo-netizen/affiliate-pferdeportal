@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-08
-STATUS: PSTE 0.57.58 LIVE FIRST-CLICK FAIL `PSTE_SITE_STRUCTURE_STALE` / PSTE 0.57.59 KOMPAKTER ROOTFIX LOKAL HARD PASS / PSERC 0.28.33 UNVERÄNDERT
+STATUS: PSTE 0.57.59 LIVE: STALE-FIX GREIFT, ABER ENDLOOP/READY-SICHTBARKEIT/UNNÖTIGER REAUDIT FEHLERHAFT / PSTE 0.57.61 + PSERC 0.28.34 FINALER LOKALER E2E-HARDPASS / LIVE-RETEST OFFEN
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -9,6 +9,63 @@ STATUS: PSTE 0.57.58 LIVE FIRST-CLICK FAIL `PSTE_SITE_STRUCTURE_STALE` / PSTE 0.
 - **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
 - **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 - **Aktiver Themenverwertungs-Zielvertrag:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+## FINALER E2E-ROOTFIX 2026-10-08 – PSTE 0.57.61 + PSERC 0.28.34
+
+### Reale Livebefunde aus PSTE 0.57.59
+- 0.57.59 ist durch Nutzer-Screenshot live belegt.
+- der frühere `PSTE_SITE_STRUCTURE_STALE`-Erstklickfehler ist beseitigt.
+- danach lief der vorhandene Bestand erneut durch; nach Redaktionsplan `COMPLETE` mit 32/32 geprüft, 19 vorbereitet, 16 freigegeben startete der Bestandsweg beim weiteren Seitenzustand erneut.
+- die 16 freigegebenen READY-Artikel waren in der normalen Produktionsansicht nicht einzeln sichtbar.
+- 4488 gespeicherte Themen gegenüber ca. 32/33 planbaren Kandidaten waren ohne verständliche Ursachenverteilung dargestellt.
+
+### Rootcause
+- der Bestands-Audit war an einen zu breiten Plugin-/Versionsfingerprint gebunden; reine PSTE-UI/Orchestratoränderungen konnten einen vollständigen bestehenden Audit künstlich ungültig machen.
+- PSERC band im Plan-Fingerprint die rohe PSTE-Version statt ausschließlich die relevante Compiler-Read-Capability.
+- die Produktionsseite zeigte nur Summen, nicht die exakten READY-Fünffelder.
+- bekannte Existing-Evidence-Reentry-Entscheidungen waren vorhanden, wurden aber nicht automatisch targeted in den Normalpfad zurückgeführt.
+
+### PSTE 0.57.61 – finaler lokaler Kandidat
+- Installer: `PSTE-0.57.61-ENDLOOP-READY-VISIBILITY-EVIDENCE-REENTRY-HARDPASS.zip`.
+- SHA-256: `81fbbf808f0ccfd5bb2f8aa29dea37c676f9324adbd054598a5901dffaa2e407`.
+- 117 Dateien / 79 PHP / 37 JSON; Fresh-Unpack 117/117 byteidentisch.
+- gegenüber live 0.57.59: eine Fixture neu, vier Dateien geändert, **112 Dateien byteidentisch**.
+- READY-Artikel werden in Produktion als Tabelle sichtbar: Titel / Zielkeyword / Kategorie / Artikeltyp / Planplatz.
+- `Warum nicht mehr planbar?` zeigt eine DB-schonende Aggregation der Ausschlussgründe; kein `payload_json`-Masseladen.
+- doppelte Navigation im Bereich Systemstatus/Wartung ist entfernt.
+- normaler Seitenaufruf ist passiv; Autostart nur beim expliziten Shortpath-Redirect.
+- READY wird vor Bootstrap/Bestandsstart erkannt. Weitere Step-Aufrufe und Seitenreload starten weder Bestand noch PSERC neu.
+- bei READY automatische Produktionsdatei-Ausgabe; zusätzlicher manueller Download-Fallback.
+- Bestands-Audit bindet nur semantische Abhängigkeiten; reine UI-/Versionsänderung erzwingt keinen 4488er Reaudit.
+- gültiger 0.57.59-Legacy-Audit wird einmalig auf den selektiven Fingerprint migriert.
+- 110 bereits fachlich geprüfte Existing-Evidence-Fälle werden targeted, providerfrei und ohne Fullscan reanalysiert. Einzelne inzwischen stale/missing IDs werden sicher übersprungen statt den ganzen Satz zu blockieren.
+
+### Warum nicht 4488 Artikel?
+- 4488 sind Topic-Pool-Zeilen, keine 4488 fertigen Artikel.
+- aus dem gespeicherten 695er Titelsatz: 694 unique; 0 direkt planbar, **110 mit vorhandener Evidenz sicher reparierbar**, **389 Struktur-/Redaktionsentscheidung nötig**, **195 parken/nicht produzieren**.
+- die 110 sicheren Fälle bestehen aus 92 bestätigbaren Familien-Reentries, 9 Familienbindungen und 9 Artikeltypbindungen.
+- 0.57.61 automatisiert ausschließlich diese belegten 110 sicheren Fälle; keine erfundene Freigabe der 389/195.
+
+### PSERC 0.28.34
+- Installer: `PSERC-0.28.34-STABLE-PSTE-CAPABILITY-FINGERPRINT-HARDPASS.zip`.
+- SHA-256: `df4fd8fb640e05455f5f0f64edb5e508c011551326ff9da5061ad91ac6f5efd0`.
+- Build: `0.28.34-stable-pste-capability-fingerprint`.
+- Plan-Fingerprint bindet PSTE Compiler-Read-Capability-SHA statt roher PSTE-Version.
+- bei identischer Capability liefern PSTE 0.57.59, 0.57.60 und 0.57.61 denselben Plan-Fingerprint; echte Capability-Änderung invalidiert weiterhin.
+- Paketintegrität positiv PASS; manipuliertes Capability-Binding blockiert fail-closed.
+
+### Vollständige 1:1-Simulation
+- exakter persistenter Upgrade-Zustand → Existing-Evidence-Bootstrap → **0 Fullscan / 0 Provider** → PSERC genau einmal → READY 16 → READY-Tabelle → Produktionsdatei → STOP → weiterer Step kein Neustart → Seitenreload kein Neustart: PASS.
+- zusätzlicher Live-Drift-Negativfall: 1 von 110 Kandidaten stale/missing → 109 gezielt weiterverarbeitet, 1 sicher übersprungen, kein Fullscan, kein Gesamtabbruch: PASS.
+- K0 6/6 PASS; Kurzer Dienstweg 10/10 PASS; Menü PASS; PSERC Evidence-/Boundary-Matrix PASS; Tamper-Negativtest PASS.
+
+### Verworfen
+- `PSTE-0.57.60-ENDLOOP-READY-VISIBILITY-REENTRY-HARDPASS.zip` ist **DO NOT INSTALL**. Nach dessen Paketbau wurde der Admin-Bootstrap noch um Live-Drift-Toleranz korrigiert. Finaler Paketstand ist ausschließlich 0.57.61.
+
+Finaler Testreport:
+`PFERDE_ATELIER_PSTE_05761_PSERC_02834_END_TO_END_HARDPASS_TESTREPORT.json`
+SHA-256: `82c377475dc7f2a99d9cbdd5dc50f06da3b35bd2c8215aef0ccf8cf0b04983ea`.
+
 
 ## LIVE-REGRESSION + ROOTFIX 2026-10-08 – 0.57.58 → 0.57.59
 
@@ -908,19 +965,22 @@ Einordnung:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05759_LIVE_RETEST_OPEN`
+`PSTE_05761_PSERC_02834_LIVE_E2E_RETEST_OPEN`
 
-0.57.58 ist live am ersten Automatik-Klick mit `PSTE_SITE_STRUCTURE_STALE` gescheitert. Der exakt darauf gebaute 0.57.59-Kandidat ist lokal inklusive dieses persistenten Livezustands positiv/negativ geprüft. Offen ist ausschließlich die reale WordPress-Abnahme von 0.57.59.
+Lokaler technischer Blocker: keiner. Offen ist nur die reale WordPress-Abnahme des exakt geprüften Paars 0.57.61 + 0.28.34 gegen den vorhandenen persistenten Livezustand.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_PSTE_05759_ONLY_THEN_RETRY_SAME_AUTOMATIK_CLICK`
+`INSTALL_EXACT_05761_AND_02834_THEN_RUN_ONE_COMPLETE_LIVE_CYCLE`
 
-1. **Nur PSTE 0.57.59 installieren.** PSERC 0.28.33 nicht erneut ändern.
-2. WordPress → **SEO Themenengine → Produktion**.
-3. Exakt denselben Button **Automatik starten / fortsetzen** einmal klicken.
-4. Vorher **keine Wartung**, **keinen manuellen Portalabgleich**, **keinen neuen Gesamtbestand**, **keine Providerrecherche** starten.
-5. Ergebnis/Status direkt readbacken. Erst danach weitere Aktion.
+1. Exakt PSTE 0.57.61 und PSERC 0.28.34 installieren.
+2. SEO Themenengine → Produktion öffnen.
+3. Prüfen: Seite bleibt passiv; kein Lauf startet nur durch Seitenaufruf.
+4. Einmal `Automatik starten / fortsetzen` klicken.
+5. Prüfen: kein unnötiger 4488er Vollscan bei gültigem Legacy-Audit; targeted Existing-Evidence-Reentry/PSERC läuft.
+6. READY-Tabelle kontrollieren; genau eine Produktionsdatei ausgeben lassen.
+7. Seite neu laden: Zustand bleibt READY/STOP; kein Neustart.
+8. Erst nach diesem Live-PASS Artikelproduktion/K0 fortsetzen.
 
 ## NICHT ANFASSEN
 
