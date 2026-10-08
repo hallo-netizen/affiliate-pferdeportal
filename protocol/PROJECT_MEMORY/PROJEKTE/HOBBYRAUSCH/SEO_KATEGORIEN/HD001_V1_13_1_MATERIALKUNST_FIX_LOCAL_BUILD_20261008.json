@@ -1,0 +1,59 @@
+{
+  "contract": "HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD",
+  "date": "2026-10-08",
+  "status": "PASS_READY_FOR_LIVE_DRYRUN",
+  "source_artifact": {
+    "name": "HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip",
+    "sha256": "94dca6cfc6c792cf2b866fc76fef1bff12551f9b375b38a1a511a91876b1a7b5"
+  },
+  "source_profile": {
+    "name": "HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json",
+    "sha256": "f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014"
+  },
+  "change": {
+    "file": "profiles/hobby-depot-v1.json",
+    "removed_node": "core:gestalten:materialkunst",
+    "removed_nodes": 1,
+    "added_nodes": 0,
+    "other_profile_fields_changed": 0,
+    "replacement_category": false,
+    "hobby_moves": 0
+  },
+  "corrected_artifact": {
+    "name": "HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS_MATERIALKUNST_FIX.zip",
+    "sha256": "ea5aa8316b2537695f2f805d0b9cc4b0d9f973fb609c231ab7c3067de419c263",
+    "library_path": "/hobby rausch/HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS_MATERIALKUNST_FIX.zip"
+  },
+  "corrected_profile": {
+    "name": "HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008_MATERIALKUNST_FIX.json",
+    "sha256": "2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95",
+    "library_path": "/hobby rausch/HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008_MATERIALKUNST_FIX.json",
+    "base_logical_nodes": 102
+  },
+  "patch_checks": {
+    "original_artifact_sha_matches_manifest": true,
+    "exact_one_file_package_diff": true,
+    "exact_one_node_semantic_diff": true,
+    "zip_integrity": "PASS",
+    "fresh_php_lint": "33/33 PASS",
+    "duplicate_base_node_ids": 0,
+    "missing_base_parent_refs": 0,
+    "materialkunst_occurrences": 0,
+    "plan_graph_simulation": "PASS",
+    "expected_resolved_logical_nodes": 439,
+    "expected_physical_target_objects": 430,
+    "expected_pages": 403,
+    "expected_categories": 4,
+    "expected_journal_categories": 15,
+    "expected_directory_categories": 8,
+    "expected_live_delta_if_no_other_drift": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    }
+  },
+  "test_boundary": "The historical 270/270 regression, 24/24 final-target and 11/11 migration harnesses are not included in the production ZIP and were not falsely claimed as rerun. Fresh package lint, exact semantic/package diff and target-plan graph simulation passed. The next authoritative validation is the live read-only final Delta-Dry-Run.",
+  "next_action": "Install/replace with corrected ZIP, run one final read-only Delta-Dry-Run, export JSON, and do not start final sync before that readback is accepted."
+}
