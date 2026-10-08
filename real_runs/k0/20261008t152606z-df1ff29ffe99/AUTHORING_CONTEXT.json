@@ -1,0 +1,130 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "source_batch_sha256": "df1ff29ffe9965eb1ff30d8109c345ed906b7e3197b17c5357dd72a93b911944",
+  "identity_batch": [
+    {
+      "article_type": "FAQ",
+      "category": "mash-faq",
+      "plan_slot": "bfd49efbadb449459ae03542cbee492ed93220ab0217317421454af7030740e3",
+      "target_keyword": "Warum nicht jeden Tag Mash füttern",
+      "title": "Warum nicht jeden Tag Mash füttern?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schermaschinen-faq",
+      "plan_slot": "6a33d6be8dd6f083f194e623e0fccb230e9fea2509db393d76de5ea077ac63ad",
+      "target_keyword": "Warum schert meine Schermaschine plötzlich nicht mehr",
+      "title": "Warum schert meine Schermaschine plötzlich nicht mehr?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "ee73fa8fb7df7fed17b16e6d442aad897e1bac9c3fcb30f20a75c3cf69a141fb",
+      "target_keyword": "Welche Schabracke passt zu meinem Pferd",
+      "title": "Welche Schabracke passt zu meinem Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "bf320b3f775e1003999ec3423f18aedf4602997f21706da3a2322b923210f675",
+      "target_keyword": "Welcher Sattelgurt ist besser breiter oder schmaler",
+      "title": "Welcher Sattelgurt ist besser breiter oder schmaler?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "a1ed8c8e2193ec507e93e66b89d6d176c4ccd8ec98930f956df4ec912b9d44ce",
+      "target_keyword": "Wie finde ich den richtigen Sattelgurt für mein Pferd",
+      "title": "Wie finde ich den richtigen Sattelgurt für mein Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "65a4efadee5e95ed80cf30ccd52e9c800b068074c218f8e85a1aa30750ea4f8c",
+      "target_keyword": "Wie groß ist eine normale Schubkarre",
+      "title": "Wie groß ist eine normale Schubkarre?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "2766b793883717cc3c0346d347286a2e4015ec98777654cd259f4d758a4c508b",
+      "target_keyword": "Wie groß muss eine Schabracke sein",
+      "title": "Wie groß muss eine Schabracke sein?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "mueslis-fuer-pferde-faq",
+      "plan_slot": "5987322004a87ca16cb940584f428cd636c6f7479b6d4cc20401c19c66761235",
+      "target_keyword": "Wie kann ich Müsli für mein Pferd selbst machen",
+      "title": "Wie kann ich Müsli für mein Pferd selbst machen?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "reitplatzboden-faq",
+      "plan_slot": "da5943c5cd97eccf6ce1877cd60e558b087ed319721a99cbc44fd4b100a149a3",
+      "target_keyword": "Wie kann ich den Reitplatzboden verbessern",
+      "title": "Wie kann ich den Reitplatzboden verbessern?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "traenken-und-wasser-frostsichere-pferdetraenken-faq",
+      "plan_slot": "b5422c047be6bf98b95cffbedb4a088a6f2b7b2a210b0c91709d968bfca40e35",
+      "target_keyword": "Wie kann ich selbst eine frostsichere Pferdetränke bauen",
+      "title": "Wie kann ich selbst eine frostsichere Pferdetränke bauen?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "longierpeitschen-faq",
+      "plan_slot": "258445baf8f4eab233375ca46f60ba50b66a83f0dba490a3f697b851360a1705",
+      "target_keyword": "Wie lang muss eine Longierpeitsche sein",
+      "title": "Wie lang muss eine Longierpeitsche sein?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schermaschinen-faq",
+      "plan_slot": "4c764e7455f9ba9f57055b64461295b990cb3b569544c3bbfb6044f280749147",
+      "target_keyword": "Wie oft muss man eine Schermaschine ölen",
+      "title": "Wie oft muss man eine Schermaschine ölen?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "d30758554c69030f98539dca2e2aba245693d6dd1861edf074e8cbd08296fd0a",
+      "target_keyword": "Wie schwer ist eine volle Schubkarre",
+      "title": "Wie schwer ist eine volle Schubkarre?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "striegel-faq",
+      "plan_slot": "7887fe7b53d772813061ad27e8aa70095779d88ea559a9e40e62e6e60927a325",
+      "target_keyword": "Wie striegelt man Pferde am besten",
+      "title": "Wie striegelt man Pferde am besten?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "aeef95e20061f670489f820d19fca63b6e1675283f54c80f4dace30b72073973",
+      "target_keyword": "Wie viel Schubkarren sind 1 m3 Holz",
+      "title": "Wie viel Schubkarren sind 1 m3 Holz?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "0e1c8f2005ed3afe0e804483c67100717d478d0fc66d3fdfeab95d6e2861c46b",
+      "target_keyword": "Wie viele Schubkarren sind 1 Kubikmeter Erde",
+      "title": "Wie viele Schubkarren sind 1 Kubikmeter Erde?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "438b16d9761d2558717d3da74a9586a0b0bef245856708d1de1aaa8907e3aa41",
+      "target_keyword": "Wie wäscht man eine Schabracke für ein Pferd",
+      "title": "Wie wäscht man eine Schabracke für ein Pferd?"
+    }
+  ],
+  "item_count": 17,
+  "content_profile": null,
+  "production_context": null,
+  "rule_context": null,
+  "publish_allowed": false
+}
