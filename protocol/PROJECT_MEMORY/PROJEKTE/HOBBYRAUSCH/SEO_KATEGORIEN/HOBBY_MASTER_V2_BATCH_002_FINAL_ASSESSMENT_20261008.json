@@ -139,7 +139,7 @@
       "size_class": "MACRO",
       "publication_role": "ORIENTATION_UNIVERSE",
       "viable_leaf_categories": null,
-      "ownership": "Owns generic microcontroller project orientation independent of a specific platform. Arduino and later platform-specific identities own their platform setup, libraries and concrete platform project intents."
+      "ownership": "Owns generic microcontroller project orientation independent of a specific platform. Arduino and later platform-specific identities own their platform setup, libraries and concrete platform project intents. Corrected 2026-10-08 under rules 1.6: real Batch-002 readback has macro_review=true, leaf_results=[], ideal_leaf_count=0, v2_role_decision=MACRO_REVIEW."
     },
     {
       "hobby_id": "hobby:arduino",
