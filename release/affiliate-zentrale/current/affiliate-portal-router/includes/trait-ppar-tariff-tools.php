@@ -190,6 +190,7 @@ trait PPAR_Tariff_Tools_Trait {
             $link_text = sanitize_text_field((string)($link['link_text'] ?? ''));
             $tracking_url = esc_url_raw((string)($link['tracking_url'] ?? ''));
             $destination_url = esc_url_raw((string)($link['destination_url'] ?? ''));
+            $partner_html = isset($link['partner_html']) && is_string($link['partner_html']) ? $link['partner_html'] : '';
             $out[$id] = array(
                 'id' => $id,
                 'partner' => $partner,
@@ -197,6 +198,7 @@ trait PPAR_Tariff_Tools_Trait {
                 'link_text' => $link_text,
                 'tracking_url' => $tracking_url,
                 'destination_url' => $destination_url,
+                'partner_html' => $partner_html,
                 'active' => !empty($link['active']) ? 1 : 0,
                 'created_at' => absint($link['created_at'] ?? 0),
                 'updated_at' => absint($link['updated_at'] ?? 0),
@@ -252,7 +254,9 @@ trait PPAR_Tariff_Tools_Trait {
     public function text_links_writer_registry($registry = array()) {
         $registry = is_array($registry) ? $registry : array();
         foreach ($this->text_links_all() as $id => $link) {
-            if (empty($link['active']) || trim((string)$link['link_text']) === '' || trim((string)$link['tracking_url']) === '') { continue; }
+            $has_partner_html = trim((string)($link['partner_html'] ?? '')) !== '';
+            $has_simple_link = trim((string)($link['link_text'] ?? '')) !== '' && trim((string)($link['tracking_url'] ?? '')) !== '';
+            if (empty($link['active']) || (!$has_partner_html && !$has_simple_link)) { continue; }
             $registry[$id] = array(
                 'id' => $id,
                 'partner' => (string)$link['partner'],
@@ -272,6 +276,15 @@ trait PPAR_Tariff_Tools_Trait {
         $links = $this->text_links_all();
         if (empty($links[$id]) || empty($links[$id]['active'])) { return ''; }
         $link = $links[$id];
+
+        // Vollständiger Partnercode hat Vorrang. Er stammt ausschließlich aus
+        // der manage_options-geschützten zentralen Pflege und wird wie der
+        // bestehende Tarifrechner-Code bewusst unverändert ausgegeben.
+        $partner_html = (string)($link['partner_html'] ?? '');
+        if (trim($partner_html) !== '') {
+            return $partner_html;
+        }
+
         $tracking_url = esc_url_raw((string)($link['tracking_url'] ?? ''));
         $link_text = sanitize_text_field((string)($link['link_text'] ?? ''));
         if ($tracking_url === '' || $link_text === '' || !wp_http_validate_url($tracking_url)) { return ''; }
@@ -290,13 +303,17 @@ trait PPAR_Tariff_Tools_Trait {
         $link_text = sanitize_text_field((string)wp_unslash($_POST['textlink_text'] ?? ''));
         $tracking_url = esc_url_raw((string)wp_unslash($_POST['textlink_tracking_url'] ?? ''));
         $destination_url = esc_url_raw((string)wp_unslash($_POST['textlink_destination_url'] ?? ''));
+        $partner_html = trim((string)wp_unslash($_POST['textlink_partner_html'] ?? ''));
         $active = !empty($_POST['textlink_active']) ? 1 : 0;
 
-        if ($partner === '' || $name === '' || $link_text === '') {
-            $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Partner, Bezeichnung und sichtbarer Linktext sind erforderlich.')));
+        if ($partner === '' || $name === '') {
+            $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Partner und Bezeichnung sind erforderlich.')));
         }
-        if ($tracking_url === '' || !wp_http_validate_url($tracking_url)) {
-            $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Ein gültiger Affiliate-/Tracking-Link ist erforderlich.')));
+        if ($partner_html === '' && ($link_text === '' || $tracking_url === '' || !wp_http_validate_url($tracking_url))) {
+            $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Entweder vollständigen Partnercode oder sichtbaren Linktext plus gültigen Affiliate-/Tracking-Link eintragen.')));
+        }
+        if (strlen($partner_html) > 500000) {
+            $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Der Partnercode ist zu groß.')));
         }
         if ($destination_url !== '' && !wp_http_validate_url($destination_url)) {
             $this->tariff_tool_redirect(array('ppar_textlink_error' => rawurlencode('Die optionale Ziel-URL ist ungültig.')));
@@ -317,6 +334,7 @@ trait PPAR_Tariff_Tools_Trait {
             'link_text' => $link_text,
             'tracking_url' => $tracking_url,
             'destination_url' => $destination_url,
+            'partner_html' => $partner_html,
             'active' => $active,
             'created_at' => $created_at,
             'updated_at' => time(),
@@ -455,7 +473,7 @@ trait PPAR_Tariff_Tools_Trait {
 
             <hr style="margin:32px 0">
             <h2>Affiliate-Textlinks</h2>
-            <p><strong>KISS:</strong> Textlinks werden zentral gepflegt. Artikel enthalten nur den stabilen Platzhalter. Kein Banner, keine Bildprüfung und keine automatische Textsuche.</p>
+            <p><strong>KISS:</strong> Textlinks werden zentral gepflegt. Artikel enthalten nur den stabilen Platzhalter. Möglich sind ein kompletter Partnercode oder ein einfacher Link aus Linktext + Tracking-URL. Kein Banner, keine Bildprüfung und keine automatische Textsuche.</p>
 
             <h3><?php echo $text_edit ? 'Textlink bearbeiten' : 'Textlink anlegen'; ?></h3>
             <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
@@ -468,8 +486,9 @@ trait PPAR_Tariff_Tools_Trait {
                 <table class="form-table" role="presentation">
                     <tr><th scope="row"><label for="ppar-textlink-partner">Partner / Programm</label></th><td><input id="ppar-textlink-partner" name="textlink_partner" class="regular-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['partner'] : ''); ?>" placeholder="z. B. LeadAlliance"></td></tr>
                     <tr><th scope="row"><label for="ppar-textlink-name">Bezeichnung</label></th><td><input id="ppar-textlink-name" name="textlink_name" class="regular-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['name'] : ''); ?>" placeholder="z. B. Pferdeversicherung"></td></tr>
-                    <tr><th scope="row"><label for="ppar-textlink-text">Sichtbarer Linktext</label></th><td><input id="ppar-textlink-text" name="textlink_text" class="large-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['link_text'] : ''); ?>" placeholder="z. B. Pferdeversicherung vergleichen"></td></tr>
-                    <tr><th scope="row"><label for="ppar-textlink-url">Affiliate-/Tracking-Link</label></th><td><input id="ppar-textlink-url" type="url" name="textlink_tracking_url" class="large-text code" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['tracking_url'] : ''); ?>" placeholder="https://…"><p class="description">Dieser Link wird im Frontend ausgegeben. Er wird nicht automatisch verändert oder aufgerufen.</p></td></tr>
+                    <tr><th scope="row"><label for="ppar-textlink-code">Kompletter Partnercode (optional)</label></th><td><textarea id="ppar-textlink-code" name="textlink_partner_html" rows="8" class="large-text code" placeholder="&lt;a href=&quot;https://…&quot;&gt;…&lt;img …&gt;&lt;/a&gt;"><?php echo esc_textarea($text_edit ? (string)($text_edit['partner_html'] ?? '') : ''); ?></textarea><p class="description"><strong>Empfohlen, wenn der Partner fertigen Code liefert:</strong> vollständigen Code unverändert einfügen, einschließlich Tracking-Pixel/Bild. Dieser Code hat Vorrang vor den beiden Feldern darunter. Nur vertrauenswürdigen Originalcode des Affiliate-Partners verwenden.</p></td></tr>
+                    <tr><th scope="row"><label for="ppar-textlink-text">Sichtbarer Linktext (bei einfachem Link)</label></th><td><input id="ppar-textlink-text" name="textlink_text" class="large-text" value="<?php echo esc_attr($text_edit ? (string)$text_edit['link_text'] : ''); ?>" placeholder="z. B. Pferdeversicherung vergleichen"><p class="description">Nur nötig, wenn kein kompletter Partnercode verwendet wird.</p></td></tr>
+                    <tr><th scope="row"><label for="ppar-textlink-url">Affiliate-/Tracking-Link (bei einfachem Link)</label></th><td><input id="ppar-textlink-url" type="url" name="textlink_tracking_url" class="large-text code" value="<?php echo esc_attr($text_edit ? (string)$text_edit['tracking_url'] : ''); ?>" placeholder="https://…"><p class="description">Nur nötig, wenn kein kompletter Partnercode verwendet wird. Der Link wird nicht automatisch verändert oder serverseitig aufgerufen.</p></td></tr>
                     <tr><th scope="row"><label for="ppar-textlink-destination">Reale Ziel-URL (optional)</label></th><td><input id="ppar-textlink-destination" type="url" name="textlink_destination_url" class="large-text code" value="<?php echo esc_attr($text_edit ? (string)$text_edit['destination_url'] : ''); ?>" placeholder="https://…"><p class="description">Nur zur Dokumentation. Keine Frontend-Auflösung und kein zusätzlicher HTTP-Aufruf.</p></td></tr>
                     <tr><th scope="row">Status</th><td><label><input type="checkbox" name="textlink_active" value="1" <?php checked($text_edit ? !empty($text_edit['active']) : true); ?>> aktiv</label></td></tr>
                 </table>
@@ -490,7 +509,7 @@ trait PPAR_Tariff_Tools_Trait {
                 <?php else: foreach ($text_links as $id => $link): ?>
                     <tr>
                         <td><?php echo esc_html((string)$link['partner']); ?></td>
-                        <td><strong><?php echo esc_html((string)$link['name']); ?></strong><br><span class="description"><?php echo esc_html((string)$link['link_text']); ?></span></td>
+                        <td><strong><?php echo esc_html((string)$link['name']); ?></strong><br><span class="description"><?php echo trim((string)($link['partner_html'] ?? '')) !== '' ? 'Kompletter Partnercode' : esc_html((string)$link['link_text']); ?></span></td>
                         <td><?php echo !empty($link['active']) ? 'aktiv' : 'inaktiv'; ?></td>
                         <td><input class="regular-text code" readonly onclick="this.select();" value="<?php echo esc_attr($this->text_link_placeholder($id)); ?>"></td>
                         <td>

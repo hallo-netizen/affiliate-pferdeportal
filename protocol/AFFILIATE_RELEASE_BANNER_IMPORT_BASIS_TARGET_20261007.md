@@ -210,17 +210,17 @@ Textlinks sind **kein Banner-Sonderfall und keine LeadAlliance-Sonderarchitektur
 Verbindlich:
 
 - Textlinks werden zentral im bestehenden Rechner-/Platzhalterbereich verwaltet.
-- Pro Textlink werden mindestens Partner/Programm, interne Bezeichnung, sichtbarer Linktext, Affiliate-/Tracking-Link und aktiv/inaktiv gespeichert; eine reale Ziel-URL darf optional nur zur Dokumentation gespeichert werden.
+- Pro Textlink werden mindestens Partner/Programm, interne Bezeichnung und aktiv/inaktiv gespeichert. Für die Ausgabe gilt genau eine von zwei Eingabeformen: **(A)** vollständiger vertrauenswürdiger Original-Partnercode oder **(B)** sichtbarer Linktext plus Affiliate-/Tracking-Link. Eine reale Ziel-URL darf optional nur zur Dokumentation gespeichert werden.
 - Der Beitrag enthält ausschließlich den stabilen Platzhalter `[affiliate_textlink id="<id>"]`.
 - Der Schreibchat darf nur vorhandene aktive Platzhalter verwenden und niemals Affiliate-URLs oder Textlink-IDs erfinden.
 - Ein aktiver Platzhalter rendert ausschließlich den zentral gespeicherten sichtbaren Linktext mit dem zentral gespeicherten Tracking-Link.
 - Inaktiv, gelöscht, unbekannt, leer oder ungültig bleibt fail-closed mit leerer Ausgabe.
 - Ausgabe erfolgt als normaler Affiliate-Link mit `rel="sponsored nofollow noopener"`; keine automatische Keyword-Verlinkung.
 - Keine Bildprüfung, Bannerformatprüfung, Banner-Slots oder Banner-Ranking für Textlinks.
-- Keine neue Tabelle, kein neuer Cron, kein Frontend-HTTP, kein neuer Provideradapter und keine zweite Textlink-Automationsarchitektur.
+- Keine neue Tabelle, kein neuer Cron, kein serverseitiger Frontend-HTTP-Aufruf, kein neuer Provideradapter und keine zweite Textlink-Automationsarchitektur. Bei vollständigem Partnercode dürfen vom Partner bewusst gelieferte Browser-Ressourcen wie Tracking-Pixel Bestandteil der Ausgabe sein.
 - Speicherung erfolgt in einer kleinen nicht-autoloadenden zentralen Option mit Request-Cache; normale Seiten ohne Textlink-Platzhalter laden diese Daten nicht.
 - LeadAlliance ist lediglich ein möglicher erster Partner dieses allgemeinen Textlink-Systems und wird nicht fest in die Architektur codiert.
 
 Kurzform:
 
-`zentralen Textlink anlegen -> stabile ID -> Platzhalter im Beitrag -> Shortcode rendert aktuellen aktiven Affiliate-Link`.
+`zentralen Textlink anlegen -> vollständigen Partnercode ODER Linktext+Tracking-URL speichern -> stabile ID -> Platzhalter im Beitrag -> Shortcode rendert die aktuelle aktive Partnerausgabe`.

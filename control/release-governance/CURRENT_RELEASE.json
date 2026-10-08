@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 292,
+  "generation": 293,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,21 +35,21 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.209",
-    "status": "RELEASED",
-    "release_allowed": true,
+    "version": "6.72.210",
+    "status": "WORKING_6_72_210_PARTNER_HTML_TEXTLINK_GATE_PENDING",
+    "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
+    "current_source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
-    "candidate_reference_scope": "KISS cleanup of proven internally unused private helpers and direct hidden specialist-page registration; generic centrally managed affiliate textlinks use stable [affiliate_textlink id=\"...\"] placeholders. No new table, no new cron, no frontend HTTP, no automatic keyword linking, no new provider adapter.",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.209.zip",
-    "final_artifact_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.209.zip",
-    "handoff_artifact_bytes": 810707,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_GATE_PASS",
+    "candidate_reference_artifact_sha256": "",
+    "candidate_reference_scope": "Explicit user rootfix: generic affiliate textlinks accept either complete trusted partner HTML/code (including tracking pixel) or legacy link_text + tracking_url. Same stable [affiliate_textlink id=\"...\"] placeholder, same non-autoload option/request cache. No new table, cron, provider adapter or server-side frontend HTTP.",
+    "final_artifact_ref": "",
+    "final_artifact_sha256": "",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.210.zip",
+    "handoff_artifact_bytes": 0,
+    "source_binding_status": "MANIFEST_28_FILES_6_72_210_PARTNER_HTML_CANDIDATE",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RELEASE_COMPLETE_6_72_209",
-    "current_focus_reason": "Formal release-check PASS on run 37783979652. Exact tested installer remains repository-bound; no plugin source changes after PASS."
+    "current_focus": "RUN_6_72_210_PARTNER_HTML_TEXTLINK_GATE",
+    "current_focus_reason": "User supplied a real affiliate textlink code containing anchor plus zero-size tracking image. 6.72.209 URL-only backend rejects it. Fix is general, not provider-specific."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -68,9 +68,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "KISS_CLEANUP_AND_GENERIC_TEXTLINK_PLACEHOLDERS",
+    "current_focus": "GENERIC_TEXTLINK_COMPLETE_PARTNER_CODE",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md#12-verbindlicher-kiss-vertrag--allgemeine-affiliate-textlinks-mit-platzhaltern",
-    "current_focus_reason": "No architecture rebuild. Remove only proven dead/internal leftovers, simplify backend registration, and add general central textlink placeholders for any affiliate partner.",
+    "current_focus_reason": "Explicit user requirement after real partner code could not be entered in URL-only 6.72.209 backend.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_203_KISS_BANNER_SOURCE_BOUND_CALCULATOR_RENDERING_SEPARATE_BLOCKER",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "RELEASED_6_72_209_COMPLETE",
-    "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Release complete. Do not change plugin source unless a new explicit user scope is opened.",
-    "completion_condition": "SATISFIED_FORMAL_RELEASE_CHECK_PASS_RUN_37783979652",
-    "after_completion_action": "NONE",
+    "state": "WORKING_6_72_210_PARTNER_HTML_TEXTLINK_GATE_PENDING",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Run exact 6.72.210 WordPress/MariaDB gate for both legacy URL textlinks and complete partner-code textlinks. Do not change unrelated plugin paths.",
+    "completion_condition": "CURRENT_6_72_210_GATE_PASS_AND_EXACT_INSTALLER_BUILT",
+    "after_completion_action": "Bind exact tested installer, then formal release-check.",
     "no_optional_detours": true,
-    "sequence": 135,
+    "sequence": 136,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672209_kiss_cleanup_textlinks_20261008.md",
     "evidence_sha256": "b13cfb263b2560d22fc82276964b0ddb12ab7e1cbc3397d86f2a97dea9def535",
-    "current_source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_GATE_PASS",
+    "current_source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_210_PARTNER_HTML_CANDIDATE",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,11 +1041,11 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "RUN_37779421162 exact 6.72.209 source + WordPress/MariaDB + textlink positive/negative + DB cleanup + ZIP identity PASS. Reuse while source manifest remains e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f.",
+    "pass_reuse_policy": "No pass reuse from 6.72.209 because textlink source changed. Run current bound gate once; reuse only while manifest remains hash-identical.",
     "release_gate_matrix_policy": "required_release_gates contains only current manifest-bound mandatory gates; historical_release_gate_matrix preserves older OPEN/STALE evidence truth and is not current release authority.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
-    "gate_runner_scope": "6_72_209_KISS_CLEANUP_PLUS_GENERIC_TEXTLINKS",
+    "gate_runner_scope": "6_72_210_GENERIC_TEXTLINK_PARTNER_HTML_ROOTFIX",
     "gate_runner_reason": "Existing current workflow passed exact current source; no new workflow architecture.",
     "final_installer": {
       "filename": "AFFILIATE_ZENTRALE_6.72.209.zip",
@@ -1107,25 +1107,18 @@
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
-    "current_6_72_209": {
-      "status": "PASS",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672209_kiss_cleanup_textlinks_20261008.md",
-      "evidence_sha256": "b13cfb263b2560d22fc82276964b0ddb12ab7e1cbc3397d86f2a97dea9def535",
-      "source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
-      "assertions": "PASS_54_OF_54",
-      "wordpress_mariadb_run": 37779421162,
-      "installer_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
-      "installer_bytes": 810707,
-      "package_identity": "PASS_28_OF_28",
+    "current_6_72_210": {
+      "status": "PENDING",
+      "evidence_ref": null,
+      "evidence_sha256": null,
+      "source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
       "scope": [
-        "PROVEN_DEAD_INTERNAL_HELPERS_REMOVED",
-        "DIRECT_HIDDEN_SPECIALIST_PAGE_REGISTRATION",
-        "GENERIC_TEXTLINK_PLACEHOLDERS",
-        "TEXTLINK_ACTIVE_INACTIVE_UNKNOWN_UPDATE_NEGATIVE_PASS",
+        "LEGACY_URL_TEXTLINK_COMPATIBILITY",
+        "COMPLETE_TRUSTED_PARTNER_HTML_INPUT",
+        "TRACKING_PIXEL_PRESERVED",
+        "STABLE_PLACEHOLDER_UNCHANGED",
         "TEXTLINK_OPTION_NOT_AUTOLOAD_NO_NEW_TABLE",
-        "TARIFF_SHORTCODE_UNCHANGED",
-        "AUTOMATION_RECONCILE_HEALTH_INVARIANTS_PASS",
-        "DB_HOUSEKEEPING_POSNEG_PASS"
+        "TARIFF_SHORTCODE_UNCHANGED"
       ]
     }
   },
@@ -2380,18 +2373,16 @@
     ]
   },
   "handoff": {
-    "status": "RELEASED",
+    "status": "WORKING",
     "entrypoint": "release/affiliate-zentrale/AGENTS.md",
     "current_authority": "control/release-governance/CURRENT_RELEASE.json",
-    "freshness_reference": "branch affiliate-release-current + generation 292 + formal release-check PASS run 37783979652 + manifest e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f + final artifact commit 7f2ffc6cff3a91ace8edfadf59ecddaa3b950493",
-    "next_action": "NONE",
+    "freshness_reference": "branch affiliate-release-current + generation 293 + manifest 8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
+    "next_action": "RUN_6_72_210_GATE",
     "do_not_touch": [
-      "plugin source",
-      "functional import/ranking/banner/product/calculator/provider paths",
-      "glossary/breed live-passed rules",
+      "unrelated import/ranking/banner/product/provider paths",
       "automation/reconcile/health process",
-      "generic textlink behavior after 54/54 PASS",
-      "historical gate statuses without evidence"
+      "tariff calculator behavior",
+      "historical gate truth"
     ],
     "plugin_office_artifact_sync": "BLOCKED_NO_GITHUB_PLUGIN_OFFICE_PATH_AND_LIBRARY_EXPLICITLY_DISALLOWED"
   },
@@ -2749,5 +2740,13 @@
     "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.209.zip",
     "final_artifact_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
     "release_complete": true
+  },
+  "current_bound_release_gate_672210": {
+    "status": "PENDING",
+    "source_manifest_sha256": "8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf",
+    "scope": "GENERIC_TEXTLINK_COMPLETE_PARTNER_CODE_ROOTFIX"
+  },
+  "formal_release_check_672210": {
+    "status": "NOT_YET_ALLOWED_GATE_PENDING"
   }
 }
