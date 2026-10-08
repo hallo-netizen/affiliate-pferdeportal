@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / KEIN TECHNISCHER BLOCKER / BATCH 002 INPUT ÜBER ALLGEMEINEN UPLOADWEG VORBEREITET / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / KEIN TECHNISCHER BLOCKER / BATCH 002 REAL PASS / BATCH 003 INPUT ÜBER ALLGEMEINEN UPLOADWEG VORBEREITET / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -162,24 +162,30 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 Kein technischer Plugin-Blocker.
 
-Batch 001 ist fachlich final geschlossen.
-V1.12.6 kann spätere Batches über die vorhandene allgemeine JSON-Uploadstruktur bewerten; dafür ist keine neue Plugin-Version nötig.
+Batch 002:
+- realer Overview PASS;
+- 1 Provider-Aufruf;
+- 0.02376 USD;
+- 0 Strukturwrites;
+- fachlich final geschlossen.
 
-Batch 002 ist extern vorbereitet:
+Batch 003:
 - 16 Kandidaten;
-- 51 Leafs;
-- 304 Artikelintents;
-- 304 Keywords;
-- exakt 1 geplanter DataForSEO-Overview;
+- 59 Leafs;
+- 325 Artikelintents;
+- 325 Keywords;
+- exakt 1 geplanter Overview;
+- lokaler V1.12.6-Preflight PASS;
+- simulierter Shape-Run PASS;
 - 0 Strukturwrites.
 
 Offen:
-`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
+`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den vorbereiteten Batch-002-Input über `Kategorien → V2-Hobbybewertung` hochladen.
-Kostenlose Vorprüfung muss exakt 16 / 51 / 304 / 304 / 1 zeigen.
+Vorbereiteten Batch-003-Input über `Kategorien → V2-Hobbybewertung` hochladen.
+Kostenlose Vorprüfung muss 16 / 59 / 325 / 325 / 1 zeigen.
 Danach genau einen read-only Overview ausführen.
 
 Keine Plugin-Änderung.
