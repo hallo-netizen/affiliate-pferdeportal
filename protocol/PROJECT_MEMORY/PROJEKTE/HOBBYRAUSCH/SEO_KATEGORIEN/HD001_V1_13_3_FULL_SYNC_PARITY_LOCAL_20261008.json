@@ -1,0 +1,65 @@
+{
+  "contract": "HD001_V1_13_3_FULL_SYNC_PARITY_LOCAL",
+  "date": "2026-10-08",
+  "status": "PASS_READY_FOR_ONE_FRESH_DRYRUN",
+  "basis_readback": "hobby-depot-final-target-readback-20261008-105008-utc.json",
+  "live_state_before_new_plugin": {
+    "plugin_version": "1.13.2",
+    "dry_run_status": "PASS",
+    "summary": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    },
+    "physical_target_objects": 430,
+    "prior_failed_sync_rollback": "ROLLED_BACK"
+  },
+  "discovered_v1_13_2_gap": "Dry-run find_existing checks _apkw_concept_id using current node_id plus legacy_ids. Sync only checked legacy_ids before slug fallback. Therefore renamed legacy ADOPT objects could still collide in sync despite dry-run PASS.",
+  "fix": {
+    "version": "1.13.3",
+    "file": "includes/class-apkw-target-tree-sync.php",
+    "change": "Sync concept-id lookup now mirrors dry-run exactly: current node_id plus legacy_ids before slug fallback.",
+    "target_profile_changed": false,
+    "profile_sha256": "2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95"
+  },
+  "full_local_mock": {
+    "real_plan_nodes": 430,
+    "first_sync": {
+      "created": 355,
+      "adopted": 75,
+      "updated": 0,
+      "readback_checked": 430,
+      "status": "COMPLETE"
+    },
+    "second_sync": {
+      "unchanged": 430,
+      "created": 0,
+      "adopted": 0,
+      "updated": 0,
+      "status": "COMPLETE"
+    },
+    "rollback": {
+      "status": "ROLLED_BACK",
+      "semantic_restore": true
+    },
+    "renamed_legacy_adopts": 11,
+    "ambiguity_fail_closed": true
+  },
+  "package_checks": {
+    "php_lint": "33/33 PASS",
+    "zip_integrity": "PASS",
+    "changed_files_vs_1_13_2": [
+      "README.txt",
+      "affiliate-portal-kategorie-workflow.php",
+      "includes/class-apkw-target-tree-sync.php"
+    ]
+  },
+  "artifact": {
+    "name": "HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip",
+    "sha256": "f255b06fb38c7b903de2c7741dea4e02fb9620ad3a6651fbf5963f402c33820b",
+    "library_path": "/hobby rausch/HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip"
+  },
+  "next_action": "Install V1.13.3, run exactly one fresh final Delta-Dry-Run, export JSON. Do not sync until that V1.13.3 readback is accepted."
+}
