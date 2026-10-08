@@ -1654,3 +1654,20 @@ Evidence:
 **Performance:** keine neue Tabelle, kein Frontend-HTTP, keine neue Frontend-DB-Abfrage.
 
 **Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
+
+
+## AFF-ERR-060 — 08.10.2026: Allgemeiner Banner-Fallback war im aktuellen Import/Reconcile nicht mehr erreichbar
+
+**Symptom:** Der Source besitzt weiterhin Runtime-/Materialisierungsunterstützung für explizite allgemeine Banner (`state=general`, `assignment_mode=fallback`, `creative_library_general_fallback`). Der aktuelle automatische Zuordnungsweg `output_assign_banner_targets_from_destination_once()` erzeugt bei fehlendem eindeutigen Fachziel jedoch nur `topic_targets=[]`. `output_store_banner_library_assignment()`, das `state=general` schreiben könnte, hat im aktuellen Source keinen Aufrufer. Der 6.72.203-Reconcile deaktiviert Banner mit `mapped=0` anschließend aus der Automatik.
+
+**Belegte Vertragsverletzung:** Zielvertrag Abschnitt 9.4 verlangt: Gibt es für ein Ziel keinen spezifisch passenden Banner, wird aus dem technisch und formatlich zulässigen allgemeinen aktiven Bannerbestand verteilt. AFF-ERR-045 bindet zusätzlich den KISS-Vertrag: Ohne eindeutiges Ziel entsteht ein allgemeiner technisch gültiger Fallback ohne Fake-Thema.
+
+**Root Cause:** Beim Umbau auf die gespeicherte Ziel-/Pfadkarte wurde der spezifische Zuordnungsweg vollständig gemacht, der bereits definierte allgemeine Fallback-Erzeugungsweg aber nicht mehr an Import/Reconcile angebunden.
+
+**Fixziel:** Nach bestandener Assetprüfung und nur wenn keine eindeutige spezifische Zuordnung existiert, darf ein fachlich nicht widersprüchlicher Banner als explizit `general` gespeichert werden. Kein erfundenes Thema, keine Frontend-Klassifikation. Der allgemeine Datensatz muss die vorhandene Slot-/Formatprüfung nutzen und danach über den bestehenden stabilen Fallback-Verteiler laufen.
+
+**NEGATIV:** Mehrdeutige/widersprüchliche oder fachfremde Evidenz darf nicht automatisch zu `general` werden. Tarifcheck/CHECK24 mit unklarer Familie bleibt fail-closed. Unverifizierte Assets bleiben gesperrt.
+**POSITIV:** Verifizierter themenneutraler Banner ohne spezifischen Zieltreffer wird als `general` gespeichert, technisch/formatlich geprüft und nur nach fehlendem spezifischen Treffer verwendet.
+**Performance:** keine neue Tabelle, kein Frontend-HTTP, keine neue Frontend-DB-Abfrage; Erzeugung ausschließlich Import/Reconcile.
+
+**Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
