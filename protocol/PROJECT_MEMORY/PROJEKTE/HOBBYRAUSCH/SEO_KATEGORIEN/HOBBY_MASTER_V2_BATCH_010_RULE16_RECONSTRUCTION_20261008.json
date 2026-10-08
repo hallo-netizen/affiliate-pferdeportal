@@ -1,0 +1,1485 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_010_RULE16_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__9_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "hard_rules": [
+    "Historical ownership boundaries remain binding.",
+    "Leaf taxonomy is subject-matter derived, not DataForSEO-created.",
+    "Each visible leaf has 5-12 distinct article intents.",
+    "No WordPress write."
+  ],
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Drahtschmuck",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:drahtschmuck:1",
+          "label": "Draht & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Drahtmaterial für Schmuck nach Härte und Farbe auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Drahtstärke passend zum Schmuckstück bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Rundzange, Flachzange und Seitenschneider passend einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Draht vor der Verarbeitung richten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Arbeitsenden von Schmuckdraht sauber entgraten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:drahtschmuck:2",
+          "label": "Formen & Wickeln",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Saubere Ösen aus Schmuckdraht formen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Spiralen gleichmäßig wickeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Wire-Wrapping um Perlen ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Rahmenformen aus Draht symmetrisch biegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrere Drahtlagen kontrolliert miteinander verweben",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:drahtschmuck:3",
+          "label": "Verbindungen & Verschlüsse",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Biegeringe aus Draht herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Drahtverbindungen ohne Löten sichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Hakenverschluss aus Draht biegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Kettenelemente stabil miteinander verbinden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Drahtenden unsichtbar und hautfreundlich abschließen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:drahtschmuck:4",
+          "label": "Oberfläche & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Drahtschmuck gezielt hämmern und strukturieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Kupferdraht kontrolliert patinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Drahtschmuck polieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Verfärbungen auf Metalloberflächen entfernen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertigen Drahtschmuck materialgerecht schützen und lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Kettenhemdflechten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:kettenhemdflechten:1",
+          "label": "Ringe & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Ringdurchmesser und Drahtstärke für Maille auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Aspect Ratio bei Flechtringen bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Gesägte und gestanzte Ringe unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Zwei Zangen beim Kettenhemdflechten richtig führen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Ringe sauber öffnen und schließen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kettenhemdflechten:2",
+          "label": "Grundmuster",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "European 4-in-1 flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Byzantine-Muster flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Box Chain aus Ringen aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Japanese-Maille-Muster herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Spiral-Maille gleichmäßig flechten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kettenhemdflechten:3",
+          "label": "Formen & Übergänge",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Maille-Gewebe verbreitern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Maille-Gewebe verjüngen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Flaches Geflecht in eine Rundform überführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Musterwechsel in einem Maille-Stück sauber planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Passform eines Kettenhemdstücks durch Zu- und Abnahmen anpassen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kettenhemdflechten:4",
+          "label": "Projekte & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Maille-Armband passend schließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Kleine Tasche aus Maille flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Kettenhemd-Teil maßhaltig zusammensetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Scharfe Ringkanten vor dem Tragen kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertiges Maille-Gewebe reinigen und materialgerecht lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Lederarbeiten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 6,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:lederarbeiten:1",
+          "label": "Leder & Materialwahl",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Lederarten nach Projekt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Lederstärke passend bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Vegetabil und chromgegerbtes Leder unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Lederfehler und nutzbare Flächen beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Futterleder und Verstärkungsmaterial passend kombinieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:lederarbeiten:2",
+          "label": "Schneiden & Kanten",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Leder präzise mit Messer oder Cutter schneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Rundungen im Leder sauber ausschneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Kanten mit Kantenhobel brechen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Lederkanten schleifen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Lederkanten burnishen und glätten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:lederarbeiten:3",
+          "label": "Nähen & Verbindungen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Nahtlinie im Leder anzeichnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Löcher mit Prickeisen vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Sattlerstich von Hand ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Nahtenden im Leder sicher vernähen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Lederteile ohne sichtbare Naht sinnvoll verkleben",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:lederarbeiten:4",
+          "label": "Beschläge & Verschlüsse",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Druckknöpfe in Leder einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Nieten passend setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Schnallen und D-Ringe einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Ösen in Leder sauber montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Magnet- und Steckverschlüsse passend befestigen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:lederarbeiten:5",
+          "label": "Formen & Konstruktion",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Leder nass formen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Falten und Biegelinien kontrolliert anlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Einfache Ledertasche konstruieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Lederteile auf Maß und Reihenfolge montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Verstärkungen an belasteten Stellen einarbeiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:lederarbeiten:6",
+          "label": "Farbe & Finish",
+          "article_intents": [
+            {
+              "intent_id": "6:1",
+              "working_title": "Leder gleichmäßig färben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:2",
+              "working_title": "Antikpaste gezielt einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:3",
+              "working_title": "Leder nach dem Färben versiegeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:4",
+              "working_title": "Lederoberfläche polieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:5",
+              "working_title": "Fertiges Lederprojekt pflegen und vor Austrocknung schützen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Sattlerarbeiten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:sattlerarbeiten:1",
+          "label": "Sattlerleder & Werkzeug",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Schweres Sattlerleder passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Riemen aus dickem Leder sauber schneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Sattlermesser und Halbmondmesser sicher einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Kanten an stark belasteten Lederteilen vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Naht- und Beschlagpositionen exakt anreißen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:sattlerarbeiten:2",
+          "label": "Riemen, Gurte & Nähte",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Breite Lederriemen auf Maß herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Sattlerstich für dickes Leder ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Mehrlagige Lederteile vernähen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Gurtenden belastbar verstärken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Nahtabstände bei Zugbelastung passend planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:sattlerarbeiten:3",
+          "label": "Beschläge & Konstruktion",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Schnallen in schwere Lederriemen einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "D-Ringe und Beschläge belastbar befestigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Riemenenden für Schnallen ausformen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Verstelllöcher sauber und gleichmäßig stanzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Beschlagstellen gegen Ausreißen konstruktiv sichern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:sattlerarbeiten:4",
+          "label": "Reparatur & Pflege",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Gerissene Naht an Sattlerware reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Ausgeleierte Löcher fachgerecht instand setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Beschläge an altem Leder ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Trockenes Sattlerleder schonend pflegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Repariertes Lederteil auf Belastbarkeit kontrollieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Papierherstellung",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:papierherstellung:1",
+          "label": "Fasern & Zellstoff",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Baumwoll- und Pflanzenfasern für handgeschöpftes Papier auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Altpapier für neue Pulpe vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Fasern ausreichend einweichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Faserstoff im Holländer oder Mixer aufschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Faserlänge und Mahlgrad auf gewünschte Papierart abstimmen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:papierherstellung:2",
+          "label": "Pulpe & Schöpfen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Pulpe für gleichmäßige Blattbildung verdünnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Schöpfrahmen passend vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Papierbogen gleichmäßig schöpfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Couching ohne Falten ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrere Bögen mit gleichbleibender Stärke herstellen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:papierherstellung:3",
+          "label": "Pressen & Trocknen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Frisch geschöpfte Papierbögen zwischenlagen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Papier gleichmäßig pressen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Papier ohne starke Wellen trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Bögen nach dem Trocknen planlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Trocknungsfehler und ungleichmäßige Blattstärke vermeiden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:papierherstellung:4",
+          "label": "Zusätze & Oberfläche",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Leimung für handgeschöpftes Papier einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Pigmente in die Pulpe einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Pflanzenfasern und Einschlüsse kontrolliert zugeben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Papieroberfläche glätten und satinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertiges handgeschöpftes Papier passend zuschneiden und lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Marmorpapier",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 4,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:marmorpapier:1",
+          "label": "Marmorierbad & Vorbereitung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Marmorierbad mit Verdickungsmittel ansetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Wasserhärte für Marmorieren beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Bad auf passende Viskosität einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Marmorierwanne sauber vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Marmorierbad zwischen Drucken pflegen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:marmorpapier:2",
+          "label": "Farben & Papier",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Geeignete Farben für Marmorpapier auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Farben für gute Spreitung vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Papier für das Marmorieren vorbehandeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Farbdichte und Tropfengröße kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrere Farben harmonisch auf dem Bad aufbauen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:marmorpapier:3",
+          "label": "Muster & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Steinmuster im Marmorpapier erzeugen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Kamm-Muster herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Feder- und Pfauenmuster aufziehen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Stifte und Kämme gleichmäßig durch das Bad führen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Muster wiederholbar dokumentieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:marmorpapier:4",
+          "label": "Abheben & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Papier ohne Luftblasen auf das Marmorierbad legen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Marmorpapier sauber vom Bad abheben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Überschüssiges Bad vom Papier abspülen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Marmorpapier plan trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertige Bögen glätten und für Buch-/Papierprojekte lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Kalligrafie",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 6,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:kalligrafie:1",
+          "label": "Federn, Tinte & Papier",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Breitfeder und Spitzfeder passend zur Schrift auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Federhalter ergonomisch einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Kalligrafietinte auf Fluss und Deckkraft abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Papier auf Ausbluten und Federverhalten prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Feder vor dem ersten Schreiben richtig vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kalligrafie:2",
+          "label": "Grundstriche & Federführung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Grundstriche mit gleichbleibendem Winkel üben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Druckwechsel mit Spitzfeder kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Strichstärke mit Breitfeder gleichmäßig halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Schreibtempo und Rhythmus stabilisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Saubere Ein- und Ausstriche ausführen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kalligrafie:3",
+          "label": "Schriftstile",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Italic-Schrift systematisch aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Copperplate-Grundformen schreiben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Gotische Textura mit Breitfeder schreiben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Unziale Buchstaben konstruieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Moderne Kalligrafieformen kontrolliert variieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kalligrafie:4",
+          "label": "Buchstaben & Abstände",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Proportionen einzelner Buchstaben prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Buchstabenverbindungen sauber gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Wortabstände gleichmäßig setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Zeilenabstand passend zur Schrift wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Optischen Ausgleich bei schwierigen Buchstabenpaaren anwenden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kalligrafie:5",
+          "label": "Layout & Komposition",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Kalligrafietext auf einer Seite planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Hilfslinien und Grundraster anlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Schriftgrößen hierarchisch kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Textblock optisch zentrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Ornamente nur ohne Konkurrenz zur Schrift einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:kalligrafie:6",
+          "label": "Übung & Projekte",
+          "article_intents": [
+            {
+              "intent_id": "6:1",
+              "working_title": "Kalligrafie-Übungsplan erstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:2",
+              "working_title": "Fehler in wiederkehrenden Buchstabenformen analysieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:3",
+              "working_title": "Grußkarte kalligrafisch gestalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:4",
+              "working_title": "Kurzes Zitat als fertiges Schriftstück umsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "6:5",
+              "working_title": "Fertige Kalligrafie vor Verwischen und Licht schützen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Linolschnitt",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:linolschnitt:1",
+          "label": "Motiv & Übertragung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Motiv für Linolschnitt auf klare Schwarz-Weiß-Flächen reduzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Motiv spiegelverkehrt auf Linoleum übertragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Negativ- und Positivflächen vor dem Schneiden planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Mehrteilige Motive für Druckformat anlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Probeskizze für einen Linolschnitt vereinfachen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:linolschnitt:2",
+          "label": "Werkzeuge & Schneiden",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Linolschnittmesser nach Schnittart auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Linoleum vor dem Schneiden sicher fixieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Linien mit V-Eisen sauber schneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Flächen mit U-Eisen ausheben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Ausbrüche und zu tiefe Schnitte vermeiden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:linolschnitt:3",
+          "label": "Farbe & Einwalzen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Linoldruckfarbe passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Farbe auf der Platte richtig ausrollen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Farbmenge für gleichmäßige Deckung dosieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Trockene oder fleckige Farbflächen korrigieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Mehrere Farbtöne für einen Druck vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:linolschnitt:4",
+          "label": "Drucken & Registrierung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Papier für Linoldruck auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Linolschnitt ohne Presse von Hand drucken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Linolschnitt mit Presse drucken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Druckpapier exakt registrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Mehrere Abzüge mit gleichbleibendem Druck herstellen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:linolschnitt:5",
+          "label": "Mehrfarbig & Edition",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Mehrplatten-Linolschnitt planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Reduktionslinolschnitt schrittweise aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Farbreihenfolge bei Mehrfarbdruck festlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Drucke sauber trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Edition nummerieren, signieren und plan lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Holzschnitt",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b010:holzschnitt:1",
+          "label": "Holz & Blockvorbereitung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Holzart für einen Holzschnitt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Faserverlauf des Druckstocks beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Holzblock plan schleifen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Motiv spiegelverkehrt auf Holz übertragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Druckstock vor dem Schneiden sicher fixieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:holzschnitt:2",
+          "label": "Messer, Geißfuß & Schneiden",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Holzschnittmesser passend einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Feine Linien mit Geißfuß schneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Große Weißflächen sauber ausheben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Mit der Holzfaser kontrolliert arbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Ausbrüche und Splittern im Druckstock vermeiden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:holzschnitt:3",
+          "label": "Farbe & Einwalzen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Druckfarbe für Holzschnitt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Farbwalze gleichmäßig einfärben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Holzstruktur bewusst im Farbauftrag nutzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Zu viel Druckfarbe auf dem Block korrigieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Farbauftrag für eine Serie konstant halten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:holzschnitt:4",
+          "label": "Druck & Registrierung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Papier für Holzschnitt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Holzschnitt von Hand abreiben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Holzschnitt mit Presse drucken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Druckbogen exakt auf dem Block registrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Probeabzüge zur Korrektur des Druckstocks nutzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b010:holzschnitt:5",
+          "label": "Mehrblock & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Mehrblock-Holzschnitt planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Farbauszüge auf getrennte Blöcke übertragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Passmarken für Mehrfarbdruck einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Drucke zwischen Farbgängen trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Holzschnitt-Edition signieren und lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
