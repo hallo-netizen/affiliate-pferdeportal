@@ -1858,3 +1858,13 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 - WordPress/MariaDB-Gate: OPEN. Kein Release, keine Installation.
 
 **Status:** LOCAL_ROOTFIX_AND_PERFORMANCE_PASS / WORDPRESS_MARIADB_GATE_OPEN.
+
+### 08.10.2026 – AJAX-Lifecycle-Block erweitert
+
+- admin-ajax Affiliate-Hooks jetzt **207 → 114**.
+- `init`: **31 → 5**; `admin_init`: **13 → 0**; `shutdown`: **2 → 1**.
+- Zusätzlich nur idealo Upgrade/Schedule/Recovery, Deal-Radar-Schedule und Digistore24-Shutdown-Finalisierung aus fremdem AJAX entfernt.
+- Normaler Frontend- und Admin-Hookbestand unverändert; eBay-AJAX-Endpunkt bleibt erhalten.
+- Manifest: `13a63a5a6f3bbe968bbd5eed6d3310305c68f417d03e0b3741ab1d725b8514d8`.
+- WordPress/MariaDB weiterhin OPEN; kein Release, keine Installation.
+
