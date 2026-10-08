@@ -628,18 +628,6 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
-     * Liest nur die vom Designplugin persistierte aktuelle Layoutbreite.
-     * Keine eigene zweite Designwahrheit: fehlt die Option, gilt derselbe
-     * Default und dieselbe Sanitizing-Grenze wie im Designplugin.
-     */
-    private function output_pferde_design_layout_width($key, $default, $min, $max) {
-        $settings = get_option('pftk_global_layout_settings', array());
-        $settings = is_array($settings) ? $settings : array();
-        $value = isset($settings[$key]) ? intval($settings[$key]) : intval($default);
-        return max(intval($min), min(intval($max), $value));
-    }
-
-    /**
      * Festgeschriebene aktive Slotmatrix aus dem getrennten Design–Affiliate-
      * Schnittstellenvertrag Pferde Atelier V1.50.387 / Affiliate-Vertrag 1.0.
      * Das Design wird nicht gelesen oder verändert; Vertragsabweichungen bleiben

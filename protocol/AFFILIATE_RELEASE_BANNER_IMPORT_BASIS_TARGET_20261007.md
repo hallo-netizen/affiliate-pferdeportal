@@ -199,3 +199,28 @@ Verbindlich:
 Kurzform:
 
 `Funktionierenden Prozess einfrieren -> nur sichtbare/tote Altlasten entfernen -> vorhandenes Housekeeping/Health nutzen -> Performance messen -> keine Architekturänderung`.
+
+
+## 12. Verbindlicher KISS-Vertrag – allgemeine Affiliate-Textlinks mit Platzhaltern
+
+Nutzerentscheidung 08.10.2026:
+
+Textlinks sind **kein Banner-Sonderfall und keine LeadAlliance-Sonderarchitektur**. Sie werden allgemein für beliebige Affiliate-Partner nach demselben zentralen Platzhalterprinzip wie Tarifrechner verwaltet.
+
+Verbindlich:
+
+- Textlinks werden zentral im bestehenden Rechner-/Platzhalterbereich verwaltet.
+- Pro Textlink werden mindestens Partner/Programm, interne Bezeichnung, sichtbarer Linktext, Affiliate-/Tracking-Link und aktiv/inaktiv gespeichert; eine reale Ziel-URL darf optional nur zur Dokumentation gespeichert werden.
+- Der Beitrag enthält ausschließlich den stabilen Platzhalter `[affiliate_textlink id="<id>"]`.
+- Der Schreibchat darf nur vorhandene aktive Platzhalter verwenden und niemals Affiliate-URLs oder Textlink-IDs erfinden.
+- Ein aktiver Platzhalter rendert ausschließlich den zentral gespeicherten sichtbaren Linktext mit dem zentral gespeicherten Tracking-Link.
+- Inaktiv, gelöscht, unbekannt, leer oder ungültig bleibt fail-closed mit leerer Ausgabe.
+- Ausgabe erfolgt als normaler Affiliate-Link mit `rel="sponsored nofollow noopener"`; keine automatische Keyword-Verlinkung.
+- Keine Bildprüfung, Bannerformatprüfung, Banner-Slots oder Banner-Ranking für Textlinks.
+- Keine neue Tabelle, kein neuer Cron, kein Frontend-HTTP, kein neuer Provideradapter und keine zweite Textlink-Automationsarchitektur.
+- Speicherung erfolgt in einer kleinen nicht-autoloadenden zentralen Option mit Request-Cache; normale Seiten ohne Textlink-Platzhalter laden diese Daten nicht.
+- LeadAlliance ist lediglich ein möglicher erster Partner dieses allgemeinen Textlink-Systems und wird nicht fest in die Architektur codiert.
+
+Kurzform:
+
+`zentralen Textlink anlegen -> stabile ID -> Platzhalter im Beitrag -> Shortcode rendert aktuellen aktiven Affiliate-Link`.

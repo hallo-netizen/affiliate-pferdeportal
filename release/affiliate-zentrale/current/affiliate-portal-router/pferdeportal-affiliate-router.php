@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.208
+ * Version: 6.72.209
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.208';
+    const VERSION = '6.72.209';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -234,7 +234,6 @@ final class Pferdeportal_Affiliate_Router {
     const EBAY_WORKER_HOOK = 'ppar_ebay_sync_worker';
     const OPTION_EBAY_WORKER_HEARTBEAT = 'ppar_ebay_worker_heartbeat_v1';
     const OPTION_EBAY_WORKER_TRANSPORT_MIGRATION = 'ppar_ebay_worker_transport_migration_v6412';
-    const OPTION_EBAY_EXTERNAL_TICK_KEY = 'ppar_ebay_external_tick_key_v1'; // legacy, no longer used for V6.55 heartbeat
     const OPTION_EBAY_EXTERNAL_TICK_RATE_LOCK = 'ppar_ebay_external_tick_rate_lock_v1';
     const EBAY_SELF_DRIVE_ACTION = 'ppar_ebay_canonical_self_drive';
     const EBAY_SELF_DRIVE_TOKEN_TTL = 180;
@@ -1062,6 +1061,7 @@ JS;
         add_shortcode('pp_portal_overview', array($this, 'shortcode_portal_overview'));
         add_shortcode('affiliate_portal_overview', array($this, 'shortcode_portal_overview'));
         add_shortcode('affiliate_rechner', array($this, 'shortcode_tariff_tool'));
+        add_shortcode('affiliate_textlink', array($this, 'shortcode_text_link'));
     }
 
     public function filter_the_content($content) {
@@ -1654,23 +1654,6 @@ JS;
     }
 
     /**
-     * Unicode-feste Wortzählung für deutschsprachige Beiträge.
-     */
-    private function article_word_count($content) {
-        $text = strip_shortcodes((string) $content);
-        $text = html_entity_decode(wp_strip_all_tags($text), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        if (!preg_match_all('/[\p{L}\p{N}]+(?:[\'’\-][\p{L}\p{N}]+)*/u', $text, $matches)) {
-            return 0;
-        }
-        return count($matches[0]);
-    }
-
-    /** V6.72.67 – Einzelbeitrag: 1 Banner; ab 1.800 Woertern max. 2. */
-    private function article_banner_limit_for_words($word_count) {
-        return ((int) $word_count >= 1800) ? 2 : 1;
-    }
-
-    /**
      * Prüft den abgeschlossenen redaktionellen Inhalt unmittelbar vor einer
      * neuen Zwischenüberschrift. Generierte Artikel umschließen jeden Block
      * mit <section>. Diese strukturellen Schluss-Tags werden für die Prüfung
@@ -1788,22 +1771,6 @@ JS;
     }
 
     /**
-     * Höchstens ein Banner liegt an einer sicheren Abschnittsgrenze ungefähr
-     * in der Artikelmitte.
-     */
-    private function select_article_insertion_positions($content, $limit) {
-        if ((int) $limit <= 0) {
-            return array();
-        }
-        $candidates = $this->article_h2_insertion_candidates($content);
-        if (empty($candidates)) {
-            return array();
-        }
-        $one = $this->nearest_article_candidate($candidates, 0.50, 0.0, 1.0);
-        return $one ? array($one) : array();
-    }
-
-    /**
      * Hilfsfunktionen für die einzige zulässige Inline-Bannerposition.
      */
     private function article_banner_dimensions($banner) {
@@ -1859,116 +1826,6 @@ JS;
         $out .= ' data-ppar-banner-height="' . (int)$height . '"';
         $out .= ' data-ppar-dimension-source="' . esc_attr($dimension_source) . '"';
         $out .= '></div></div>';
-        return $out;
-    }
-
-    private function render_article_banner_at_position($post_id, $position, $forced_campaign_post_id = 0) {
-        $position = 1;
-        $slot_type = 'post_inline_banner';
-        $context = $this->get_content_context($post_id);
-        $forced_campaign_post_id = absint($forced_campaign_post_id);
-        $is_admin_test = $forced_campaign_post_id > 0 && current_user_can('manage_options');
-        if ($is_admin_test) {
-            $campaign = $this->campaign_from_post(get_post($forced_campaign_post_id));
-            if (!$campaign || sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== 'banner' || !$this->campaign_is_complete($campaign)) {
-                return '';
-            }
-        } else {
-            $assigned = $this->assignment_selection_for_slot($context, $slot_type);
-            if (!empty($assigned['handled'])) {
-                if (!empty($assigned['disabled'])) {
-                    return '';
-                }
-                $selection = $assigned['selection'] ?? null;
-            } else {
-                $selection = $this->select_campaign_for_slot_position($context, $slot_type, $position);
-            }
-            if (!$selection || empty($selection['campaign'])) {
-                return '';
-            }
-            $campaign = $selection['campaign'];
-        }
-        list($group, $banner) = $this->campaign_to_group_banner($campaign);
-        if (!$group || !$banner) {
-            return '';
-        }
-        if ($is_admin_test) {
-            return $this->render_article_banner_test_surface($banner, $position);
-        }
-        $campaign_post_id = (int) ($campaign['post_id'] ?? 0);
-        if ($campaign_post_id > 0) {
-            $banner['url'] = $this->build_click_tracking_url($campaign_post_id, (int) $post_id, $slot_type);
-        }
-        $html = $this->render_banner($banner, $post_id, $context, $group, $slot_type);
-        if (trim((string) $html) === '') {
-            return '';
-        }
-        $classes = array(
-            'ppar-affiliate-slot',
-            'ppar-slot-post_inline_banner',
-            'ppar-article-inline-banner',
-            'ppar-article-inline-banner-' . $position,
-        );
-        if (!empty($group['id'])) {
-            $classes[] = 'ppar-group-' . sanitize_html_class($group['id']);
-        }
-        $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="post_inline_banner" data-ppar-banner-position="' . $position . '">';
-        $out .= '<div class="ppar-affiliate-label">Anzeige</div>';
-        $out .= $this->get_disclosure_html($post_id);
-        $out .= '<div class="ppar-affiliate-content">' . $html . '</div></div>';
-        return $out . $this->debug_comment('affiliate_rendered', $post_id, $slot_type, $group['id'] ?? '', $banner['id'] ?? '');
-    }
-
-    private function render_article_product_block($post_id, $forced_campaign_post_ids = array(), $preview_count = 0) {
-        $context = $this->get_content_context($post_id);
-        $forced_campaign_post_ids = array_slice(array_values(array_filter(array_map('absint', (array)$forced_campaign_post_ids))), 0, 3);
-        $preview_count = max(0, min(3, (int)$preview_count));
-        $is_admin_test = current_user_can('manage_options') && $preview_count > 0;
-        $campaigns = array();
-        if (!empty($forced_campaign_post_ids) && current_user_can('manage_options')) {
-            foreach ($forced_campaign_post_ids as $campaign_post_id) {
-                $campaign = $this->campaign_from_post(get_post($campaign_post_id));
-                if ($campaign && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) === 'product' && $this->campaign_is_complete($campaign)) {
-                    $campaigns[] = $campaign;
-                }
-            }
-        } else {
-            foreach (array_slice($this->ranked_campaigns_for_slot($context, 'post_bottom_products'), 0, 3) as $candidate) {
-                if (!empty($candidate['campaign'])) {
-                    $campaigns[] = $candidate['campaign'];
-                }
-            }
-        }
-        $cards = array();
-        foreach ($campaigns as $campaign) {
-            list($group, $banner) = $this->campaign_to_group_banner($campaign);
-            if (!$group || !$banner) {
-                continue;
-            }
-            $campaign_post_id = (int) ($campaign['post_id'] ?? 0);
-            if ($campaign_post_id > 0) {
-                $banner['url'] = $this->build_click_tracking_url($campaign_post_id, (int) $post_id, 'post_bottom_products');
-            }
-            $html = $this->article_plan_render_product_card_markup($banner, $post_id, $context, $group, 'post_bottom_products');
-            if ($html !== '') {
-                $cards[] = '<div class="ppar-article-product-card">' . $html . '</div>';
-            }
-        }
-        if ($is_admin_test && count($cards) < $preview_count) {
-            while (count($cards) < $preview_count) {
-                $cards[] = '<div class="ppar-article-product-card ppar-article-product-test-surface" aria-hidden="true"></div>';
-            }
-        }
-        if (empty($cards)) {
-            return '';
-        }
-        $count = count($cards);
-        $out = '<section class="ppar-article-product-block" data-ppar-product-count="' . $count . '">';
-        if (!$is_admin_test) {
-            $out .= $this->get_disclosure_html($post_id);
-        }
-        $out .= '<div class="ppar-article-section-label">Produktvorschläge</div>';
-        $out .= '<div class="ppar-article-product-grid ppar-article-product-count-' . $count . '">' . implode('', $cards) . '</div></section>';
         return $out;
     }
 
@@ -2374,31 +2231,6 @@ JS;
             absint($rule['min_height']) / $height
         );
         return $scale <= ((float)$rule['upscale_max'] + 0.00001);
-    }
-
-    private function category_large_banner_rotate_candidates($candidates, $context, $slot_type) {
-        $candidates = array_values((array) $candidates);
-        if (!$this->category_large_banner_slot($slot_type) || count($candidates) < 2) { return $candidates; }
-
-        $top = $candidates[0];
-        $top_band = $this->banner_distribution_relevance_band((int) ($top['specificity'] ?? 0));
-        $equal = array(); $rest = array();
-        foreach ($candidates as $candidate) {
-            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) === $top_band) {
-                $equal[] = $candidate;
-            } else { $rest[] = $candidate; }
-        }
-        if (count($equal) < 2) { return $candidates; }
-
-        $seed = implode('|', array(
-            'category-banner-v2',
-            (string) absint($context['post_id'] ?? 0),
-            sanitize_key((string) $slot_type),
-            sanitize_key((string) ($context['primary_slug'] ?? '')),
-        ));
-        $offset = (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % count($equal));
-        $equal = array_merge(array_slice($equal, $offset), array_slice($equal, 0, $offset));
-        return array_values(array_merge($equal, $rest));
     }
 
     /**
@@ -3284,15 +3116,6 @@ JS;
         return true;
     }
 
-    private function find_group_by_id($groups, $id) {
-        foreach ($groups as $group) {
-            if (!empty($group['active']) && isset($group['id']) && sanitize_key($group['id']) === sanitize_key($id)) {
-                return $group;
-            }
-        }
-        return null;
-    }
-
     private function score_match($rule, $context) {
         $mode = isset($rule['match_mode']) ? sanitize_key((string) $rule['match_mode']) : 'auto';
         if (!in_array($mode, $this->allowed_match_modes(), true)) {
@@ -3893,22 +3716,6 @@ JS;
         return null;
     }
 
-    private function breed_campaign_runtime_semantic_rank($campaign,$context) {
-        if(!is_array($campaign)||sanitize_key((string)($context['post_type']??''))!=='pa_breed'){return null;}
-        $slot=sanitize_key((string)($context['slot_type']??''));
-        if(!in_array($slot,array('breed_single_desktop_banner','breed_single_mobile_banner'),true)){return null;}
-        $evidence=implode(' ',array_filter(array((string)($campaign['name']??''),(string)($campaign['title']??''),(string)($campaign['description']??''),(string)($campaign['partner']??''),(string)($campaign['programme_name']??''),implode(' ',(array)($campaign['match_keywords']??array())))));
-        $tokens=array_values(array_diff($this->output_tokens($evidence),array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
-        if(!$tokens){return null;}
-        $primary=$this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug']??'')));
-        if($primary!==''&&$this->output_term_present($evidence,$primary)){return array('specificity'=>520,'matches'=>1,'reason'=>'Pferderasse: exakter Rassenbezug im Werbemittel.');}
-        $context_text=implode(' ',array_filter(array((string)($context['primary_name']??''),implode(' ',(array)($context['names']??array())),implode(' ',array_map(static function($v){return str_replace(array('-','_'),' ',(string)$v);},(array)($context['direct_term_slugs']??array()))),(string)($context['haystack']??''))));
-        $ct=array_values(array_diff($this->output_tokens($context_text),array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
-        $hits=array();$strong=0;foreach($tokens as $et){foreach($ct as $c){if($et===$c){$hits[$c]=true;$strong+=2;}elseif(strlen($et)>=5&&strlen($c)>=5&&(strpos($et,$c)!==false||strpos($c,$et)!==false)){$hits[$c]=true;$strong++;}}}
-        if(count($hits)>=2||$strong>=3){return array('specificity'=>320,'matches'=>count($hits),'reason'=>'Pferderasse: passender Rassen-/Nutzungsbereich.');}
-        return null;
-    }
-
     /**
      * V6.72.85 – Ziel-URL ist fachliche Evidenz. Ein Banner, dessen echte
      * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z.B. /reithelme/),
@@ -4293,73 +4100,6 @@ JS;
         if (strpos($mime, ';') !== false) { $mime = trim(strtok($mime, ';')); }
         $map = array('image/jpeg'=>'jpg','image/jpg'=>'jpg','image/png'=>'png','image/webp'=>'webp','image/gif'=>'gif');
         return $map[$mime] ?? '';
-    }
-
-    /**
-     * V6.61.4: eBay public cards use a locally cached copy of the CURRENT remote
-     * image. Historical dimension/hash metadata is intentionally not a public
-     * blocker because V6.18 permits fresh BUSINESS rows to start as pending.
-     * A candidate is public only after the current response is a decodable image.
-     */
-    private function ebay_product_cached_image_url($campaign, $allow_fetch = true) {
-        $row = $this->ebay_product_public_source_row($campaign);
-        if (!is_array($row)) { return ''; }
-        $identity = strtolower(sanitize_text_field((string)get_post_meta(absint($campaign['post_id'] ?? 0), '_ppar_creative_identity_hash', true)));
-        $remote_url = esc_url_raw((string)($row['image_url'] ?? ''));
-        if (!preg_match('/^[a-f0-9]{64}$/', $identity) || $remote_url === '') { return ''; }
-        if (!function_exists('wp_upload_dir')) { return ''; }
-        $uploads = wp_upload_dir(null, false);
-        if (!is_array($uploads) || !empty($uploads['error']) || empty($uploads['basedir']) || empty($uploads['baseurl'])) { return ''; }
-        $dir = rtrim((string)$uploads['basedir'], '/\\') . '/ppar-affiliate-product-images';
-        $baseurl = rtrim((string)$uploads['baseurl'], '/') . '/ppar-affiliate-product-images';
-        $url_hash = hash('sha256', $remote_url);
-        $stem = 'ebay-' . substr($identity, 0, 20) . '-' . substr($url_hash, 0, 32);
-        foreach (array('jpg','png','webp','gif') as $ext) {
-            $candidate = $dir . '/' . $stem . '.' . $ext;
-            if (is_file($candidate) && filesize($candidate) > 0) {
-                return esc_url_raw($baseurl . '/' . basename($candidate));
-            }
-        }
-        if (!$allow_fetch || !function_exists('wp_safe_remote_get')) { return ''; }
-
-        $failure_key = 'ppar_ebay_img_fail_' . substr($url_hash, 0, 32);
-        if (function_exists('get_transient') && get_transient($failure_key)) { return ''; }
-        $response = wp_safe_remote_get($remote_url, array(
-            'timeout'=>5,
-            'redirection'=>3,
-            'headers'=>array('Accept'=>'image/avif,image/webp,image/apng,image/*,*/*;q=0.8'),
-            'limit_response_size'=>4194304,
-        ));
-        if (function_exists('is_wp_error') && is_wp_error($response)) {
-            if (function_exists('set_transient')) { set_transient($failure_key, 1, HOUR_IN_SECONDS); }
-            return '';
-        }
-        $code = function_exists('wp_remote_retrieve_response_code') ? absint(wp_remote_retrieve_response_code($response)) : 0;
-        $body = function_exists('wp_remote_retrieve_body') ? (string)wp_remote_retrieve_body($response) : '';
-        if ($code < 200 || $code >= 300 || $body === '' || strlen($body) > 4194304) {
-            if (function_exists('set_transient')) { set_transient($failure_key, 1, HOUR_IN_SECONDS); }
-            return '';
-        }
-        $size = function_exists('getimagesizefromstring') ? @getimagesizefromstring($body) : false;
-        if (!is_array($size) || absint($size[0] ?? 0) <= 0 || absint($size[1] ?? 0) <= 0) {
-            if (function_exists('set_transient')) { set_transient($failure_key, 1, HOUR_IN_SECONDS); }
-            return '';
-        }
-        $actual_mime = strtolower((string)($size['mime'] ?? ''));
-        if ($actual_mime === '' && function_exists('wp_remote_retrieve_header')) { $actual_mime = strtolower((string)wp_remote_retrieve_header($response, 'content-type')); }
-        $ext = $this->provider_product_image_extension($actual_mime);
-        if ($ext === '') {
-            if (function_exists('set_transient')) { set_transient($failure_key, 1, HOUR_IN_SECONDS); }
-            return '';
-        }
-        if (!is_dir($dir) && (!function_exists('wp_mkdir_p') || !wp_mkdir_p($dir))) { return ''; }
-        $file = $dir . '/' . $stem . '.' . $ext;
-        $tmp = $file . '.tmp-' . substr(hash('sha256', uniqid('', true)), 0, 12);
-        $written = @file_put_contents($tmp, $body, LOCK_EX);
-        if ($written !== strlen($body) || !@rename($tmp, $file)) { @unlink($tmp); return ''; }
-        @chmod($file, 0644);
-        if (function_exists('delete_transient')) { delete_transient($failure_key); }
-        return esc_url_raw($baseurl . '/' . basename($file));
     }
 
     private function product_campaign_public_image_ready($campaign) {
@@ -6551,43 +6291,6 @@ JS;
         return count($exact) === 1 ? $exact[0] : null;
     }
 
-    private function ebay_business_diag_resolve_public_target($target_key) {
-        $target_key = $this->automation_normalize_target_key($target_key);
-        if ($target_key === '') { return null; }
-        list($kind, $slug) = array_pad(explode(':', $target_key, 2), 2, '');
-        $kind = sanitize_key((string) $kind);
-        $slug = sanitize_key((string) $slug);
-        if ($kind === 'page') {
-            $post = $this->ebay_business_diag_page_by_slug($slug);
-            if (!$post) { return null; }
-            $page_id = absint($post->ID ?? 0);
-            if ($page_id <= 0) { return null; }
-            $page_type = '';
-            if (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit','affiliate_page_type'))) {
-                $page_type = sanitize_key((string) call_user_func(array('Pferde_Template_Kit','affiliate_page_type'), $page_id));
-            }
-            $slots = $page_type === 'hub1'
-                ? array('hub_product_1','hub_product_2','hub_product_3')
-                : array('category_product_1','category_product_2','category_product_3');
-            return array('kind'=>'page','id'=>$page_id,'label'=>get_the_title($page_id),'url'=>get_permalink($page_id),'context'=>$this->get_content_context($page_id),'slots'=>$slots);
-        }
-        if ($kind === 'journal') {
-            $post = $this->ebay_business_diag_page_by_slug($slug);
-            if (!$post && $slug === 'journal') { $post = $this->ebay_business_diag_page_by_slug('journal'); }
-            if (!$post) { return null; }
-            $page_id = absint($post->ID ?? 0);
-            if ($page_id <= 0) { return null; }
-            return array('kind'=>'journal','id'=>$page_id,'label'=>get_the_title($page_id),'url'=>get_permalink($page_id),'context'=>$this->get_content_context($page_id),'slots'=>array('journal_product_1','journal_product_2','journal_product_3'));
-        }
-        if ($kind === 'category') {
-            $term = get_term_by('slug', $slug, 'category');
-            if (!$term || is_wp_error($term)) { return null; }
-            $url = get_term_link($term, 'category');
-            if (is_wp_error($url)) { return null; }
-            return array('kind'=>'category','id'=>absint($term->term_id),'label'=>(string) $term->name,'url'=>$url,'context'=>$this->get_category_archive_context($term),'slots'=>array('category_product_1','category_product_2','category_product_3'));
-        }
-        return null;
-    }
     /**
      * Bounded materialized references for the current 100-row overview page.
      * This replaces the old global router simulation which called
@@ -7104,23 +6807,23 @@ JS;
         add_menu_page('Affiliate-Zentrale','Affiliate-Zentrale','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'),'dashicons-megaphone',59);
         add_submenu_page('affiliate-portal-zentrale','Übersicht','Übersicht','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'));
         add_submenu_page('affiliate-portal-zentrale','Banner & Werbemittel','Banner & Werbemittel','manage_options','affiliate-portal-creative-library',array($this,'render_creative_library_page'));
-        add_submenu_page('affiliate-portal-zentrale','Tarifrechner','Tarifrechner','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));
-        add_submenu_page('affiliate-portal-zentrale','Ausgaben & Freigabe','Ausgaben & Freigabe','manage_options','affiliate-portal-outputs',array($this,'render_output_objects_page'));
-        add_submenu_page('affiliate-portal-zentrale','Steuerung & Veto','Steuerung & Veto','manage_options','affiliate-portal-control',array($this,'render_control_page'));
-        add_submenu_page('affiliate-portal-zentrale','Werbemittel','Werbemittel','manage_options','affiliate-portal-creatives',array($this,'render_creatives_page'));
-        add_submenu_page('affiliate-portal-zentrale','Zuordnungen','Zuordnungen','manage_options','affiliate-portal-assignments',array($this,'render_assignments_page'));
-        add_submenu_page('affiliate-portal-zentrale','Vorschau','Vorschau','manage_options','affiliate-portal-preview',array($this,'render_preview_page'));
-        add_submenu_page('affiliate-portal-zentrale','eBay Produktzuordnung','eBay Produktzuordnung','manage_options','affiliate-portal-ebay-business',array($this,'render_ebay_business_assignments_page'));
-        add_submenu_page('affiliate-portal-zentrale','Portalabdeckung','Portalabdeckung','manage_options','affiliate-portal-coverage',array($this,'render_portal_coverage_page'));
-        add_submenu_page('affiliate-portal-zentrale','Einzelbeiträge','Einzelbeiträge','manage_options','affiliate-portal-article-hybrid',array($this,'render_article_hybrid_page'));
-        add_submenu_page('affiliate-portal-zentrale','Netzwerke & API','Netzwerke & API','manage_options','affiliate-portal-networks',array($this,'render_networks_page'));
-        $this->provider_register_admin_menus('affiliate-portal-zentrale');
-        add_submenu_page('affiliate-portal-zentrale','Partner','Partner','manage_options','affiliate-portal-partners',array($this,'render_partner_directory_page'));
-        add_submenu_page('affiliate-portal-zentrale','Synchronisierung','Synchronisierung','manage_options','affiliate-portal-sync',array($this,'render_network_sync_page'));
+        add_submenu_page('affiliate-portal-zentrale','Rechner & Textlinks','Rechner & Textlinks','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));
+        add_submenu_page(null,'Ausgaben & Freigabe','Ausgaben & Freigabe','manage_options','affiliate-portal-outputs',array($this,'render_output_objects_page'));
+        add_submenu_page(null,'Steuerung & Veto','Steuerung & Veto','manage_options','affiliate-portal-control',array($this,'render_control_page'));
+        add_submenu_page(null,'Werbemittel','Werbemittel','manage_options','affiliate-portal-creatives',array($this,'render_creatives_page'));
+        add_submenu_page(null,'Zuordnungen','Zuordnungen','manage_options','affiliate-portal-assignments',array($this,'render_assignments_page'));
+        add_submenu_page(null,'Vorschau','Vorschau','manage_options','affiliate-portal-preview',array($this,'render_preview_page'));
+        add_submenu_page(null,'eBay Produktzuordnung','eBay Produktzuordnung','manage_options','affiliate-portal-ebay-business',array($this,'render_ebay_business_assignments_page'));
+        add_submenu_page(null,'Portalabdeckung','Portalabdeckung','manage_options','affiliate-portal-coverage',array($this,'render_portal_coverage_page'));
+        add_submenu_page(null,'Einzelbeiträge','Einzelbeiträge','manage_options','affiliate-portal-article-hybrid',array($this,'render_article_hybrid_page'));
+        add_submenu_page(null,'Netzwerke & API','Netzwerke & API','manage_options','affiliate-portal-networks',array($this,'render_networks_page'));
+        $this->provider_register_admin_menus(null);
+        add_submenu_page(null,'Partner','Partner','manage_options','affiliate-portal-partners',array($this,'render_partner_directory_page'));
+        add_submenu_page(null,'Synchronisierung','Synchronisierung','manage_options','affiliate-portal-sync',array($this,'render_network_sync_page'));
         add_submenu_page(null,'Awin-Partneraufnahme','Awin-Partneraufnahme','manage_options','affiliate-portal-partner-intake',array($this,'render_partner_intake_page'));
-        add_submenu_page('affiliate-portal-zentrale','Automatisierung','Automatisierung','manage_options','affiliate-portal-automation',array($this,'render_automation_page'));
-        add_submenu_page('affiliate-portal-zentrale','Statistik','Statistik','manage_options','affiliate-portal-stats',array($this,'render_statistics_page'));
-        add_submenu_page('affiliate-portal-zentrale','Prüfzentrum','Prüfzentrum','manage_options','affiliate-portal-health',array($this,'render_health_center_page'));
+        add_submenu_page(null,'Automatisierung','Automatisierung','manage_options','affiliate-portal-automation',array($this,'render_automation_page'));
+
+        add_submenu_page(null,'Prüfzentrum','Prüfzentrum','manage_options','affiliate-portal-health',array($this,'render_health_center_page'));
         add_submenu_page(null,'Affiliate-Werbemittel bearbeiten','Affiliate-Werbemittel bearbeiten','manage_options','affiliate-portal-campaign-edit',array($this,'render_campaign_edit_page'));
         add_submenu_page(null,'Affiliate-Kampagnen Altansicht','Affiliate-Kampagnen Altansicht','manage_options','affiliate-portal-campaigns-legacy',array($this,'render_central_page'));
         add_submenu_page(null,'Affiliate Portal Router - Erweitert','Affiliate Portal Router - Erweitert','manage_options','pferde-affiliate-router',array($this,'render_admin_page'));
@@ -8429,42 +8132,6 @@ JS;
         return isset($map[$key]) ? $map[$key] : '';
     }
 
-    /**
-     * V2.2.7: Einheitliche Auswahl für das eine wirksame Ebene-3-Bild.
-     * Unterstützt zugleich alte Formulare, die noch category_image_id senden.
-     */
-    private function resolve_category_placeholder_image_id($raw, $old_settings) {
-        $raw = is_array($raw) ? $raw : array();
-        $old_settings = is_array($old_settings) ? $old_settings : array();
-        $raw_grid = isset($raw['category_grid_image_id']) ? absint($raw['category_grid_image_id']) : 0;
-        $raw_legacy = isset($raw['category_image_id']) ? absint($raw['category_image_id']) : 0;
-        $old_grid = absint($old_settings['category_grid_image_id'] ?? 0);
-        $old_legacy = absint($old_settings['category_image_id'] ?? 0);
-        if (array_key_exists('category_grid_image_id', $raw) && $raw_grid !== $old_grid) {
-            return $raw_grid;
-        }
-        if (array_key_exists('category_image_id', $raw) && $raw_legacy !== $old_legacy) {
-            return $raw_legacy;
-        }
-        if ($raw_grid > 0) { return $raw_grid; }
-        if ($raw_legacy > 0) { return $raw_legacy; }
-        return $old_grid;
-    }
-
-    private function resolve_category_placeholder_image_url($raw, $old_settings, $resolved_id) {
-        $raw = is_array($raw) ? $raw : array();
-        $old_settings = is_array($old_settings) ? $old_settings : array();
-        $grid_url = isset($raw['category_grid_image_url']) ? esc_url_raw(trim((string)wp_unslash($raw['category_grid_image_url']))) : '';
-        $legacy_url = isset($raw['category_image_url']) ? esc_url_raw(trim((string)wp_unslash($raw['category_image_url']))) : '';
-        if ($grid_url !== '') { return $grid_url; }
-        if ($legacy_url !== '') { return $legacy_url; }
-        if ($resolved_id > 0 && function_exists('wp_get_attachment_image_url')) {
-            $resolved = wp_get_attachment_image_url($resolved_id, 'full');
-            if (is_string($resolved) && trim($resolved) !== '') { return esc_url_raw($resolved); }
-        }
-        return esc_url_raw((string)($old_settings['category_grid_image_url'] ?? $old_settings['category_image_url'] ?? ''));
-    }
-
     private function placeholder_attachment_url($settings, $key) {
         if (!in_array((string) $key, self::placeholder_image_keys(), true)) { return ''; }
         $attachment_id = !empty($settings[$key]) ? absint($settings[$key]) : 0;
@@ -9077,94 +8744,6 @@ JS;
             return $saved_id;
         }
         return array('post_id' => (int) $saved_id, 'active' => !empty($rows[0]['active']), 'blocked' => $blocked > 0);
-    }
-
-    private function render_campaign_editor($campaign, $index, $is_new = false) {
-        $campaign = wp_parse_args(is_array($campaign) ? $campaign : array(), $this->central_blank_campaign());
-        $complete = $this->campaign_is_complete($campaign);
-        $open = $is_new || !empty($_GET['ppar_open_campaign']) && sanitize_key((string) $_GET['ppar_open_campaign']) === sanitize_key((string) $campaign['id']);
-        $title = $is_new ? 'Neue Kampagne anlegen' : (string) $campaign['name'];
-        $status = !empty($campaign['active']) && $complete ? 'Aktiv' : ($complete ? 'Bereit, aber inaktiv' : 'Unvollständig');
-        $status_class = !empty($campaign['active']) && $complete ? 'ppar-ok' : ($complete ? 'ppar-neutral' : 'ppar-warn');
-        $prefix = 'ppar_campaigns[' . (int) $index . ']';
-        ?>
-        <details class="ppar-campaign" <?php echo $open ? 'open' : ''; ?>>
-            <summary><strong><?php echo esc_html($title); ?></strong><span class="ppar-status <?php echo esc_attr($status_class); ?>"><?php echo esc_html($status); ?></span></summary>
-            <div class="ppar-campaign-body">
-                <input type="hidden" name="<?php echo esc_attr($prefix); ?>[id]" value="<?php echo esc_attr((string) $campaign['id']); ?>">
-                <input type="hidden" name="<?php echo esc_attr($prefix); ?>[source]" value="<?php echo esc_attr((string) $campaign['source']); ?>">
-
-                <h3>1. Angebot</h3>
-                <div class="ppar-grid">
-                    <label><span>Interner Name</span><input type="text" name="<?php echo esc_attr($prefix); ?>[name]" value="<?php echo esc_attr((string) $campaign['name']); ?>" placeholder="z. B. Regendecken Sommeraktion"></label>
-                    <label><span>Kennzeichnung</span><input type="text" name="<?php echo esc_attr($prefix); ?>[label]" value="<?php echo esc_attr((string) $campaign['label']); ?>" placeholder="Anzeige"></label>
-                    <label class="ppar-wide"><span>Titel der Werbekachel</span><input type="text" name="<?php echo esc_attr($prefix); ?>[title]" value="<?php echo esc_attr((string) $campaign['title']); ?>" placeholder="Passende Produkte entdecken"></label>
-                    <label class="ppar-wide"><span>Kurztext (optional)</span><textarea name="<?php echo esc_attr($prefix); ?>[description]" rows="2"><?php echo esc_textarea((string) $campaign['description']); ?></textarea></label>
-                    <label class="ppar-wide"><span>Affiliate-/Ziel-URL</span><input type="url" name="<?php echo esc_attr($prefix); ?>[url]" value="<?php echo esc_attr((string) $campaign['url']); ?>" placeholder="https://..."></label>
-                    <label><span>Bild (optional)</span><input class="ppar-image-url" type="url" name="<?php echo esc_attr($prefix); ?>[image_url]" value="<?php echo esc_attr((string) $campaign['image_url']); ?>" placeholder="https://..."><button type="button" class="button ppar-select-image">Aus Mediathek wählen</button></label>
-                    <label><span>Linktext</span><input type="text" name="<?php echo esc_attr($prefix); ?>[button_text]" value="<?php echo esc_attr((string) $campaign['button_text']); ?>"></label>
-                </div>
-
-                <h3>2. Automatische Zuordnung</h3>
-                <div class="ppar-grid">
-                    <label><span>Zuordnung</span><select name="<?php echo esc_attr($prefix); ?>[assignment_mode]">
-                        <option value="page_tree" <?php selected($campaign['assignment_mode'], 'page_tree'); ?>>Bereich/Hub und alle Unterseiten</option>
-                        <option value="keywords" <?php selected($campaign['assignment_mode'], 'keywords'); ?>>Automatisch nach Themenbegriffen</option>
-                        <option value="fallback" <?php selected($campaign['assignment_mode'], 'fallback'); ?>>Allgemeiner Fallback</option>
-                    </select></label>
-                    <label><span>Bereich oder Hub</span><?php
-                        wp_dropdown_pages(array(
-                            'name' => $prefix . '[page_id]',
-                            'id' => 'ppar-page-' . (int) $index,
-                            'selected' => (int) $campaign['page_id'],
-                            'show_option_none' => 'Bereich/Hub auswählen',
-                            'option_none_value' => '0',
-                            'sort_column' => 'menu_order,post_title',
-                        ));
-                    ?></label>
-                    <label class="ppar-wide"><span>Themenbegriffe (optional; einer pro Zeile)</span><textarea name="<?php echo esc_attr($prefix); ?>[match_keywords]" rows="3" placeholder="regendecke&#10;pferdedecke"><?php echo esc_textarea($this->array_to_admin_list($campaign['match_keywords'])); ?></textarea></label>
-                </div>
-                <input type="hidden" name="<?php echo esc_attr($prefix); ?>[match_descendants]" value="1">
-                <p class="description">Beim Modus „Bereich/Hub und alle Unterseiten“ wird die gewählte Seite einmal zugeordnet; alle darunterliegenden Seiten werden automatisch mit erfasst.</p>
-
-                <h3>3. Veröffentlichung</h3>
-                <div class="ppar-grid">
-                    <label><span>Priorität</span><input type="number" min="0" max="1000" name="<?php echo esc_attr($prefix); ?>[priority]" value="<?php echo esc_attr((string) $campaign['priority']); ?>"><small>Höher gewinnt, wenn mehrere Kampagnen passen.</small></label>
-                    <label><span>Linkziel</span><select name="<?php echo esc_attr($prefix); ?>[target]"><option value="_blank" <?php selected($campaign['target'], '_blank'); ?>>Neuer Tab</option><option value="_self" <?php selected($campaign['target'], '_self'); ?>>Gleiches Fenster</option></select></label>
-                    <label><span>Startdatum (optional)</span><input type="date" name="<?php echo esc_attr($prefix); ?>[start_date]" value="<?php echo esc_attr((string) $campaign['start_date']); ?>"></label>
-                    <label><span>Enddatum (optional)</span><input type="date" name="<?php echo esc_attr($prefix); ?>[end_date]" value="<?php echo esc_attr((string) $campaign['end_date']); ?>"></label>
-                </div>
-                <?php $placement_options = $this->central_placement_options(); ?>
-                <fieldset class="ppar-placement"><legend>Ausgabeposition</legend>
-                    <label><input type="checkbox" name="<?php echo esc_attr($prefix); ?>[placements][]" value="hub_grid_card" <?php checked(in_array('hub_grid_card', (array) $campaign['placements'], true)); ?>> <strong><?php echo esc_html($placement_options['hub_grid_card']); ?></strong></label>
-                </fieldset>
-                <details class="ppar-advanced"><summary>Weitere Ausgabepositionen</summary>
-                    <div class="ppar-placement">
-                    <?php foreach ($placement_options as $slot => $label) : if ($slot === 'hub_grid_card') { continue; } ?>
-                        <label><input type="checkbox" name="<?php echo esc_attr($prefix); ?>[placements][]" value="<?php echo esc_attr($slot); ?>" <?php checked(in_array($slot, (array) $campaign['placements'], true)); ?>> <?php echo esc_html($label); ?></label>
-                    <?php endforeach; ?>
-                    </div>
-                </details>
-
-                <div class="ppar-activate">
-                    <label><input type="checkbox" name="<?php echo esc_attr($prefix); ?>[active]" value="1" <?php checked(!empty($campaign['active'])); ?>> <strong>Kampagne aktivieren</strong></label>
-                    <span>Aktivierung wird nur übernommen, wenn Link, Titel oder Bild, Zuordnung und Ausgabeposition vollständig sind.</span>
-                </div>
-
-                <details class="ppar-advanced"><summary>Erweiterte Import-/Kompatibilitätsfelder</summary>
-                    <div class="ppar-grid">
-                        <label class="ppar-wide"><span>Zusätzliche Seiten-Slugs</span><textarea name="<?php echo esc_attr($prefix); ?>[match_slugs]" rows="3"><?php echo esc_textarea($this->array_to_admin_list($campaign['match_slugs'])); ?></textarea></label>
-                        <label><span>Externe ID</span><input type="text" name="<?php echo esc_attr($prefix); ?>[external_id]" value="<?php echo esc_attr((string) $campaign['external_id']); ?>"></label>
-                        <label><span>SubID-Parameter</span><input type="text" name="<?php echo esc_attr($prefix); ?>[subid_param]" value="<?php echo esc_attr((string) $campaign['subid_param']); ?>"></label>
-                    </div>
-                </details>
-
-                <?php if (!$is_new) : ?>
-                    <label class="ppar-delete"><input type="checkbox" name="<?php echo esc_attr($prefix); ?>[delete]" value="1"> Kampagne beim Speichern löschen</label>
-                <?php endif; ?>
-            </div>
-        </details>
-        <?php
     }
 
     private function campaign_match_reason($group, $context) {

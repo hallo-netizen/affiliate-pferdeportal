@@ -24,10 +24,9 @@ final class PPAR_Partner_Analytics_Admin {
     }
 
     public static function register_menu() {
-        if (!function_exists('remove_submenu_page') || !function_exists('add_submenu_page')) { return; }
-        remove_submenu_page('affiliate-portal-zentrale', 'affiliate-portal-stats');
+        if (!function_exists('add_submenu_page')) { return; }
         add_submenu_page(
-            'affiliate-portal-zentrale',
+            null,
             'Partner & Einnahmen',
             'Partner & Einnahmen',
             'manage_options',
@@ -79,14 +78,6 @@ final class PPAR_Partner_Analytics_Admin {
     private static function campaign_data($post_id) {
         $data = get_post_meta(absint($post_id), 'ppar_campaign_data', true);
         return is_array($data) ? $data : array();
-    }
-
-    private static function text_contains($haystack, $needle) {
-        $haystack = (string)$haystack;
-        $needle = (string)$needle;
-        if ($haystack === '' || $needle === '') { return false; }
-        if (function_exists('mb_stripos')) { return mb_stripos($haystack, $needle, 0, 'UTF-8') !== false; }
-        return stripos($haystack, $needle) !== false;
     }
 
     private static function campaign_provider_key($campaign) {
@@ -214,17 +205,6 @@ final class PPAR_Partner_Analytics_Admin {
             return esc_html(number_format_i18n((float)$value, 2) . ' ' . $currency);
         }
         return esc_html(number_format_i18n((float)$value, 0));
-    }
-
-    private static function money_summary($totals) {
-        if (!is_array($totals) || !$totals) { return '<span class="description">nicht verfügbar</span>'; }
-        $parts = array();
-        foreach ($totals as $currency => $value) {
-            $currency = strtoupper((string)$currency);
-            if (!preg_match('/^[A-Z]{3}$/', $currency)) { continue; }
-            $parts[] = esc_html(number_format_i18n((float)$value, 2) . ' ' . $currency);
-        }
-        return $parts ? implode('<br>', $parts) : '<span class="description">nicht verfügbar</span>';
     }
 
     public static function render_page() {

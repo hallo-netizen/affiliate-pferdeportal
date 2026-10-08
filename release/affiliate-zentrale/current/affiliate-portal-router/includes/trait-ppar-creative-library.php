@@ -420,14 +420,6 @@ trait PPAR_Creative_Library_Trait {
         return $evidence;
     }
 
-    private function creative_library_remote_image_dimensions($image_url) {
-        $evidence = $this->creative_library_remote_image_evidence($image_url);
-        if (is_wp_error($evidence)) {
-            return $evidence;
-        }
-        return array(absint($evidence['width']), absint($evidence['height']));
-    }
-
     /**
      * 6.72.199 Basisvertrag: Jede Banner-Zielkarte entsteht erst NACH
      * erfolgreicher technischer Assetprüfung. Provider-/Direkt-/Manuellwege
@@ -577,12 +569,6 @@ trait PPAR_Creative_Library_Trait {
             return array(0, 0);
         }
         return array($width, $height);
-    }
-
-    private function creative_library_parse_dimensions($width, $height, $dimensions, $html = '', $image_url = '') {
-        // Import bleibt skalierbar: deklarierte Maße werden nur dokumentiert.
-        // Verifizierte Maße kommen ausschließlich aus der separaten Assetprüfung.
-        return array(0, 0);
     }
 
     private function creative_library_normalize_type($value) {
@@ -1311,25 +1297,6 @@ trait PPAR_Creative_Library_Trait {
             }
         }
         return array_values($ids);
-    }
-
-    private function creative_library_deactivate_existing_campaigns($identity_hash) {
-        $count = 0;
-        foreach ($this->creative_library_existing_campaign_ids($identity_hash) as $post_id) {
-            if (!method_exists($this, 'campaign_from_post') || !method_exists($this, 'save_campaign_record') || !function_exists('get_post')) {
-                continue;
-            }
-            $post = get_post($post_id);
-            $campaign = $this->campaign_from_post($post);
-            if (!is_array($campaign)) {
-                continue;
-            }
-            $campaign['active'] = false;
-            if ($this->save_campaign_record($campaign, $post_id)) {
-                $count++;
-            }
-        }
-        return $count;
     }
 
     private function creative_library_deactivate_automatic_output_campaigns($identity_hash) {

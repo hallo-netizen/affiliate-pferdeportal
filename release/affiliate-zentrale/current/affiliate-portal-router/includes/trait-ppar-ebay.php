@@ -3766,25 +3766,6 @@ trait PPAR_Ebay_Trait {
         return $kept;
     }
 
-    /**
-     * Pure complete BUSINESS planner used by diagnostics/gap analysis. Unlike
-     * the historical global 5,000-row scan it is identity-fair and hard-bounded
-     * per concept. The live selection worker does NOT call this monolith; it uses
-     * the incremental prepare path below.
-     */
-    private function ebay_business_selection_plan($settings = null) {
-        $settings = is_array($settings) ? $this->ebay_normalize_settings($settings, true) : $this->ebay_settings();
-        $plan = array('active'=>array(),'reserve'=>array(),'concepts'=>0,'pool'=>0,'scanned'=>0,'blocked'=>0);
-        foreach($this->ebay_business_required_product_concept_ids() as $concept_id){
-            $part=$this->ebay_business_selection_plan_concept($concept_id,$settings);
-            $plan['active']=array_replace($plan['active'],(array)($part['active']??array()));
-            $plan['reserve']=array_replace($plan['reserve'],(array)($part['reserve']??array()));
-            foreach(array('concepts','pool','scanned','blocked') as $k){$plan[$k]=absint($plan[$k]??0)+absint($part[$k]??0);}
-        }
-        $plan['active']=$this->ebay_business_selection_apply_global_cap($plan['active'],$settings);
-        return $plan;
-    }
-
     /** Authoritative BUSINESS supply manifest. The required set is data, not
      * a runtime 316-minus-N inference, so catalog changes cannot silently alter
      * the recovery contract. Unknown/malformed identities fail closed. */
@@ -3886,49 +3867,6 @@ trait PPAR_Ebay_Trait {
         // An intentional/manual draft is valid content, but it is not a visible
         // slot and therefore must never reduce the number of public alternatives.
         return false;
-    }
-
-    /**
-     * Pure PRIVATE planner; no HivePress post status is touched.
-     *
-     * V6.39 bounded-candidate invariant:
-     * A portal cap of 250 must never trigger an unbounded walk through 10k/20k
-     * historical source rows. We evaluate a deterministic recent candidate pool
-     * of at most 4x the public cap (hard ceiling 1000). If that pool cannot supply
-     * the public target, the existing targeted PRIVATE discovery/enrichment path
-     * is responsible for adding fresh candidates; historical rows are not scanned
-     * forever. The selected source row ids are retained so the apply phase touches
-     * only actual winners. Non-winners are reconciled through the real published
-     * HivePress-post sweep, which is the authoritative public-cap enforcement.
-     */
-    private function ebay_private_selection_plan($settings = null) {
-        $settings=is_array($settings)?$this->ebay_normalize_settings($settings,true):$this->ebay_settings();
-        global $wpdb;
-        $plan=array('active'=>array(),'active_row_ids'=>array(),'keep_posts'=>array(),'eligible'=>0,'scanned'=>0,'candidate_limit'=>0);
-        if(!is_object($wpdb)||!method_exists($wpdb,'get_results')){return $plan;}
-        $table=$this->ebay_items_table();$now=time();
-        $cap=min(250,max(1,absint($settings['private_active_cap']??250)));
-        $candidate_limit=min(1000,max($cap,($cap*4)));
-        $plan['candidate_limit']=$candidate_limit;
-        $sql="SELECT * FROM {$table} WHERE seller_account_type='INDIVIDUAL' AND source_state='available' AND policy_state='allowed' AND route_state='ready' AND target_term_id>0 ORDER BY last_seen DESC,id DESC LIMIT ".absint($candidate_limit);
-        $rows=(array)$wpdb->get_results($sql,ARRAY_A);
-        $eligible=array();
-        foreach($rows as $row){
-            $plan['scanned']++;
-            if(!$this->ebay_private_source_row_is_public_fresh($row,$now)){continue;}
-            if(!$this->ebay_private_capacity_row_publishable($row,$settings)){continue;}
-            $eligible[]=$row;
-        }
-        $plan['eligible']=count($eligible);
-        $selected=$this->ebay_private_select_rows_for_capacity($eligible,$settings);
-        foreach($selected as $item_id=>$row){
-            $plan['active'][(string)$item_id]=1;
-            $row_id=absint($row['id']??0);
-            if($row_id>0){$plan['active_row_ids'][(string)$item_id]=$row_id;}
-            $listing_id=absint($row['listing_post_id']??0);
-            if($listing_id>0){$plan['keep_posts'][(string)$item_id]=$listing_id;}
-        }
-        return $plan;
     }
 
     /** Exact BUSINESS concept scope owned by this selection state. Normal
@@ -5573,11 +5511,6 @@ trait PPAR_Ebay_Trait {
         return $post;
     }
 
-    /** Backward-compatible internal alias for the previous public gate name. */
-    private function ebay_previewable_listing_post($post_id) {
-        return $this->ebay_public_listing_post($post_id);
-    }
-
     /**
      * Render a private eBay draft with HivePress' own listing_view_page template.
      * This endpoint never changes post_status and never makes the draft public.
@@ -6167,51 +6100,6 @@ trait PPAR_Ebay_Trait {
     }
 
 
-    private function ebay_business_deactivate_existing_output($row, $reason) {
-        $row = is_array($row) ? $row : array();
-        $reason = sanitize_text_field((string) $reason);
-        if ($reason === '') { $reason = 'BUSINESS-Produktmatch ist nicht eindeutig; Ausgabe bleibt auf Review.'; }
-        global $wpdb;
-        $hash = strtolower(sanitize_text_field((string) ($row['creative_identity_hash'] ?? '')));
-        $creative_table = method_exists($this, 'creative_library_table') ? $this->creative_library_table() : '';
-        if (!preg_match('/^[a-f0-9]{64}$/', $hash) && $creative_table !== '') {
-            $found = $wpdb->get_var($wpdb->prepare("SELECT identity_hash FROM {$creative_table} WHERE provider='ebay' AND source_kind='ebay_business_item' AND external_id=%s ORDER BY id DESC LIMIT 1", (string) ($row['item_id'] ?? '')));
-            $candidate = strtolower(sanitize_text_field((string) $found));
-            if (preg_match('/^[a-f0-9]{64}$/', $candidate)) { $hash = $candidate; }
-        }
-        if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { return false; }
-        if ($creative_table !== '') {
-            $creative = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$creative_table} WHERE identity_hash=%s", $hash), ARRAY_A);
-            if (is_array($creative)) {
-                $payload = json_decode((string) ($creative['payload'] ?? ''), true);
-                $payload = is_array($payload) ? $payload : array();
-                foreach (array('ebay_verified_product_slug','ebay_verified_path','ebay_evidence_hash','ebay_business_match_contract','ebay_verified_product_concept') as $key) { $payload[$key] = ''; }
-                $payload['ebay_verified_product_targets'] = array();
-                $payload['ebay_verified_score'] = 0;
-                $payload['_business_match_state'] = 'review';
-                $payload['_business_match_reason'] = $reason;
-                $payload['_business_match_at'] = time();
-                $wpdb->update($creative_table, array(
-                    'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'ebay_business_strict_match',
-                    'topic_status'=>'review','topic_score'=>0,'topic_targets'=>'[]',
-                    'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                ), array('id'=>absint($creative['id'] ?? 0)));
-            }
-        }
-        if (method_exists($this, 'output_objects_table')) {
-            $output_table = $this->output_objects_table();
-            $objects = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$output_table} WHERE creative_identity_hash=%s AND output_type='product_campaign'", $hash), ARRAY_A);
-            foreach ((array) $objects as $object) {
-                if (method_exists($this, 'output_deactivate_materialized_object')) { $this->output_deactivate_materialized_object($object, $reason); }
-            }
-            $wpdb->update($output_table, array(
-                'target_type'=>'','target_key'=>'','target_label'=>'','slot_id'=>'',
-                'status'=>'review','decision_source'=>'ebay_business_strict_match','decision_reason'=>$reason,'last_verified'=>time(),'updated_at'=>time(),
-            ), array('creative_identity_hash'=>$hash,'output_type'=>'product_campaign'));
-        }
-        return true;
-    }
-
     /** BUSINESS-Review ersetzt eine eventuell alte Auto-Ausgabe sofort fail-closed. */
     private function ebay_business_hold_for_review($row, $item, $rule, $error, $settings = null) {
         $settings = is_array($settings) ? $settings : $this->ebay_settings();
@@ -6238,17 +6126,6 @@ trait PPAR_Ebay_Trait {
             }
         }
         return $stored;
-    }
-
-    private function ebay_business_restore_local_reclass_freshness($row) {
-        $row = is_array($row) ? $row : array();
-        $id = absint($row['id'] ?? 0);
-        if ($id <= 0) { return; }
-        global $wpdb;
-        $wpdb->update($this->ebay_items_table(), array(
-            'last_seen'=>absint($row['last_seen'] ?? 0),
-            'fresh_until'=>absint($row['fresh_until'] ?? 0),
-        ), array('id'=>$id), array('%d','%d'), array('%d'));
     }
 
     /**
@@ -6371,14 +6248,6 @@ trait PPAR_Ebay_Trait {
         $wpdb->update($this->ebay_items_table(), $route_update, array('id'=>absint($stored['id'])), $this->ebay_db_formats($route_update), array('%d'));
         if (method_exists($this, 'creative_library_schedule_asset_verification')) { $this->creative_library_schedule_asset_verification(10); }
         return array('creative_identity_hash'=>$creative['identity_hash'],'state'=>$state,'plan'=>$plan);
-    }
-
-    private function ebay_mark_route_error($stored, $error) {
-        if (!is_array($stored) || empty($stored['id'])) { return; }
-        global $wpdb;
-        $message = is_wp_error($error) ? $error->get_error_message() : sanitize_text_field((string) $error);
-        $route_update = array('status'=>'review','route_state'=>'review','output_state'=>'none','rejection_reason'=>$message,'updated_at'=>time());
-        $wpdb->update($this->ebay_items_table(), $route_update, array('id'=>absint($stored['id'])), $this->ebay_db_formats($route_update), array('%d'));
     }
 
     /** Fach-/Zielunsicherheit ist gemäß Chef-Veto-Vertrag übersteuerbar. */
@@ -8154,13 +8023,6 @@ trait PPAR_Ebay_Trait {
         return absint($id) > 0;
     }
 
-    private function ebay_refresh_reuse_classification($row, &$item) {
-        $payload = json_decode((string) ($row['source_payload'] ?? ''), true);
-        $classification = is_array($payload) && is_array($payload['portal_classification'] ?? null) ? $payload['portal_classification'] : array();
-        if ($classification) { $item['portal_classification'] = $classification; }
-        return $classification;
-    }
-
     /** Promote one already-qualified BUSINESS reserve after a public winner ends. */
     private function ebay_business_promote_ended_replacement($ended_row, $settings = null) {
         $ended_row=is_array($ended_row)?$ended_row:array();
@@ -9918,109 +9780,6 @@ trait PPAR_Ebay_Trait {
             && in_array(sanitize_key((string) ($state['status'] ?? '')), array('running','complete','failed'), true);
     }
 
-    /** Reclassify only stored BUSINESS rows; PRIVATE is never queried or mutated. */
-    private function ebay_business_local_reconcile_tick($settings = null, $limit = 25) {
-        $settings = is_array($settings) ? $this->ebay_normalize_settings($settings, true) : $this->ebay_settings();
-        $state = $this->ebay_business_local_recovery_state_load();
-        if (!$this->ebay_business_local_recovery_state_current($state)) {
-            $state = array(
-                'build'=>(string) self::EBAY_RUNTIME_BUILD,
-                'status'=>'running','phase'=>'reclassify','cursor'=>0,
-                'scanned'=>0,'ready'=>0,'review'=>0,'blocked'=>0,'errors'=>0,
-                'concepts'=>array(),'started_at'=>time(),'completed_at'=>0,
-            );
-            $this->ebay_business_local_recovery_state_save($state);
-        }
-        if (sanitize_key((string)($state['status'] ?? '')) !== 'running') { return $state; }
-        global $wpdb;
-        if (!is_object($wpdb) || !method_exists($wpdb,'get_results') || !method_exists($wpdb,'prepare')) {
-            $state['status']='failed'; $state['phase']='failed'; $state['errors']=absint($state['errors']??0)+1;
-            $state['failure_reason']='storage_unavailable';
-            return $this->ebay_business_local_recovery_state_save($state);
-        }
-        $limit=max(1,min(50,absint($limit))); $cursor=absint($state['cursor']??0); $table=$this->ebay_items_table();
-        $rows=(array)$wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM {$table} WHERE id>%d AND seller_account_type='BUSINESS' AND COALESCE(source_state,'available')<>'ended' ORDER BY id ASC LIMIT %d",
-            $cursor,$limit
-        ),ARRAY_A);
-        foreach($rows as $row){
-            $id=absint($row['id']??0); if($id<=0){continue;} $state['cursor']=max(absint($state['cursor']??0),$id); $state['scanned']=absint($state['scanned']??0)+1;
-            $payload=json_decode((string)($row['source_payload']??''),true); $payload=is_array($payload)?$payload:array();
-            $raw=is_array($payload['raw']??null)?$payload['raw']:array();
-            if(!$raw){$this->ebay_maintenance_set_review_state($row,'BUSINESS',new WP_Error('ebay_business_recovery_source_missing','Gespeicherter BUSINESS-Originalpayload fehlt.'));$state['review']=absint($state['review']??0)+1;continue;}
-            $policy_reason=$this->ebay_content_policy_reason(array('raw'=>$raw,'title'=>(string)($row['title']??'')));
-            if($policy_reason!==''){$this->ebay_quarantine_filtered_row($row,$policy_reason);$state['blocked']=absint($state['blocked']??0)+1;continue;}
-            $item=$this->ebay_accept_item($raw,'BUSINESS',$settings);
-            if(is_wp_error($item)){$this->ebay_maintenance_set_review_state($row,'BUSINESS',$item);$state['review']=absint($state['review']??0)+1;continue;}
-            $rule=$this->ebay_rule_by_id((string)($row['rule_id']??''),$settings);
-            $classification=$this->ebay_business_classify_portal_item_strict($item,$rule);
-            if(is_wp_error($classification)){
-                if($this->ebay_business_preserve_last_good_on_soft_review($row,$classification)){$state['review']=absint($state['review']??0)+1;continue;}
-                $this->ebay_maintenance_set_review_state($row,'BUSINESS',$classification);$state['review']=absint($state['review']??0)+1;continue;
-            }
-            $quality=$this->ebay_business_quality_assess($item,(array)$classification,$rule,$settings,0.0);
-            if(is_wp_error($quality)){$this->ebay_business_pause_output_for_capacity($row,'quality_blocked',$quality->get_error_message());$state['review']=absint($state['review']??0)+1;continue;}
-            $payload['portal_classification']=$classification; $payload['business_quality']=$quality;
-            $payload['business_selection']=array('role'=>'candidate','rank'=>0,'updated_at'=>time());
-            // Recovery must never tear down a currently valid public product before
-            // a replacement plan has been fully materialized. Preserve a proven
-            // public state here; selection performs any later displacement only
-            // after all selected replacements have materialized successfully.
-            $current_output=sanitize_key((string)($row['output_state']??''));
-            $next_output=in_array($current_output,array('creative_ready','active_selected','review_last_good'),true)
-                ? $current_output : 'candidate';
-            $updates=array(
-                'policy_state'=>'allowed','route_state'=>'ready','policy_version'=>self::EBAY_CONTENT_POLICY_VERSION,
-                'classifier_version'=>self::EBAY_BUSINESS_CLASSIFIER_VERSION,'output_state'=>$next_output,
-                'source_payload'=>wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
-                'rejection_reason'=>'','updated_at'=>time(),
-            );
-            $wpdb->update($table,$updates,array('id'=>$id),$this->ebay_db_formats($updates),array('%d'));
-            $concept=sanitize_key((string)($classification['product_concept_id']??'')); if($concept!==''){$state['concepts'][$concept]=1;}
-            $state['ready']=absint($state['ready']??0)+1;
-        }
-        if(count($rows)<$limit){$state['status']='complete';$state['phase']='selection_needed';$state['completed_at']=time();}
-        return $this->ebay_business_local_recovery_state_save($state);
-    }
-
-
-    /** Hard no-progress guard for the provider-page recovery transport. */
-    private function ebay_admin_progress_fingerprint($job,$refresh,$selection,$local_business,$article_rebuild=array()) {
-        $payload=array(
-            'job'=>array('status'=>$job['status']??'','phase'=>$job['worker_phase']??'','profile_cursor'=>absint($job['profile_cursor']??0),'requests'=>absint($job['summary']['requests']??0),'pages'=>absint($job['summary']['pages']??0),'progress'=>absint($job['progress_seq']??0)),
-            'refresh'=>array('status'=>$refresh['status']??'','progress'=>absint($refresh['progress_seq']??0),'checked'=>absint($refresh['summary']['checked']??0)),
-            'selection'=>array(
-                'status'=>$selection['status']??'','phase'=>$selection['phase']??'',
-                'bc'=>absint($selection['business_cursor']??0),'bp'=>absint($selection['business_prune_cursor']??0),'pc'=>absint($selection['private_cursor']??0),
-                'bs'=>absint($selection['stats']['business']['scanned']??0),'bm'=>absint($selection['stats']['business']['materialized']??0),
-                'bd'=>absint($selection['stats']['business']['deactivated']??0),'br'=>absint($selection['stats']['business']['reserve']??0),'bcan'=>absint($selection['stats']['business']['candidate']??0),
-                'ps'=>absint($selection['stats']['private']['scanned']??0),'pa'=>absint($selection['stats']['private']['active']??0)
-            ),
-            'business_local'=>array('status'=>$local_business['status']??'','phase'=>$local_business['phase']??'','cursor'=>absint($local_business['cursor']??0),'scanned'=>absint($local_business['scanned']??0),'ready'=>absint($local_business['ready']??0)),
-            'article_rebuild'=>array('status'=>$article_rebuild['status']??'','revision'=>absint($article_rebuild['revision']??0),'cursor'=>absint($article_rebuild['cursor']??0),'scanned'=>absint($article_rebuild['scanned']??0),'built'=>absint($article_rebuild['built']??0),'ready'=>absint($article_rebuild['ready']??0)),
-        );
-        return hash('sha256',wp_json_encode($payload));
-    }
-
-    private function ebay_admin_stall_guard($before_fingerprint,$after_fingerprint,$open_after,$kind) {
-        $state=get_option('ppar_ebay_admin_stall_guard_v1',array());$state=is_array($state)?$state:array();
-        if(!$open_after || $before_fingerprint!==$after_fingerprint){
-            $state=array('build'=>(string)self::EBAY_RUNTIME_BUILD,'fingerprint'=>$after_fingerprint,'count'=>0,'kind'=>sanitize_key((string)$kind),'updated_at'=>time());
-            update_option('ppar_ebay_admin_stall_guard_v1',$state,false);return array('stalled'=>false,'count'=>0);
-        }
-        $same=hash_equals((string)($state['build']??''),(string)self::EBAY_RUNTIME_BUILD) && hash_equals((string)($state['fingerprint']??''),$after_fingerprint);
-        $count=$same?absint($state['count']??0)+1:1;
-        $state=array('build'=>(string)self::EBAY_RUNTIME_BUILD,'fingerprint'=>$after_fingerprint,'count'=>$count,'kind'=>sanitize_key((string)$kind),'updated_at'=>time());
-        update_option('ppar_ebay_admin_stall_guard_v1',$state,false);
-        if($count<3){return array('stalled'=>false,'count'=>$count);}
-        // Fail closed instead of reloading forever while doing zero work.
-        $job=$this->ebay_sync_job_load();$refresh=$this->ebay_refresh_job_load();$selection=$this->ebay_selection_state_load();
-        if($this->ebay_sync_job_is_open($job)){$job['status']='failed';$job['worker_phase']='failed_no_progress';$job['failure_reason']='admin_page_no_progress';$job['finished_at']=time();$this->ebay_sync_job_save($job);}
-        elseif($this->ebay_refresh_job_is_open($refresh)){$refresh['status']='failed';$refresh['failure_reason']='admin_page_no_progress';$refresh['finished_at']=time();$this->ebay_refresh_job_save($refresh);}
-        elseif($this->ebay_selection_state_is_open($selection)){$selection['status']='failed';$selection['phase']='failed';$selection['failure_reason']='admin_page_no_progress';$selection['failed_at']=time();$this->ebay_selection_state_save($selection);}
-        else{$local=$this->ebay_business_local_recovery_state_load();if(sanitize_key((string)($local['status']??''))==='running'){$local['status']='failed';$local['phase']='failed';$local['failure_reason']='admin_page_no_progress';$this->ebay_business_local_recovery_state_save($local);}}
-        return array('stalled'=>true,'count'=>$count);
-    }
 
     /** V6.27 one-time BUSINESS restoration after the V6.26 scope leak. */
 /**
@@ -10065,32 +9824,6 @@ trait PPAR_Ebay_Trait {
 
     private function ebay_private_reitstiefel_supply_target() { return 3; }
 
-    private function ebay_private_reitstiefel_repair_needed($settings = null) {
-        $settings = is_array($settings) ? $settings : $this->ebay_settings();
-        if (empty($settings['enabled']) || empty($settings['private_enabled']) || empty($settings['private_auto_publish'])) { return false; }
-        $failure = get_option('ppar_ebay_private_boot_supply_failure_v1', array());
-        if (is_array($failure) && !empty($failure['build']) && hash_equals((string)self::EBAY_RUNTIME_BUILD,(string)$failure['build'])) { return false; }
-        $snap = $this->ebay_private_reitstiefel_supply_snapshot($settings);
-        return absint($snap['published'] ?? 0) < $this->ebay_private_reitstiefel_supply_target();
-    }
-
-    private function ebay_start_reitstiefel_supply_repair_if_needed() {
-        // Deprecated symptom-repair path. Reitstiefel use the same unified
-        // discovery/classification/selection model as every other product family.
-        return false;
-    }
-
-    /** V6.26 one-time PRIVATE-only discovery after upgrade recovery. */
-    private function ebay_private_enrichment_needed($settings = null, $selection = null) {
-        return false;
-    }
-
-    private function ebay_start_private_enrichment_if_needed() {
-        // Deprecated symptom-repair path. PRIVATE supply is changed only by the
-        // regular 3h discovery lifecycle and explicit admin discovery.
-        return false;
-    }
-
     /** V6.31: supersede incompatible open recovery jobs from older builds.
      * A plugin update must never remain blocked behind a queued/running state
      * whose worker code and lock namespace belong to a previous runtime.
@@ -10111,56 +9844,6 @@ trait PPAR_Ebay_Trait {
      * workflow step in the current PHP request. This is the primary transport
      * for upgrade/recovery work and does not depend on AJAX, WP-Cron or self-HTTP.
      */
-/**
-     * V5.20 – Fallback-Nudge für offene Hintergrundjobs außerhalb des Browser-Pumps. Die Seite darf
-     * einen offenen Job nur dann sanft erneut anstoßen, wenn seit dem letzten
-     * Worker deutlich länger als ein normales Paket vergangen ist. Der
-     * Transient verhindert Anstoß-Spam durch den 8s-Reload.
-     */
-    private function ebay_admin_nudge_open_jobs(&$job, &$refresh_job) {
-        $now = time();
-        $nudge_key = 'ppar_ebay_admin_nudge_v519';
-        if (function_exists('get_transient') && get_transient($nudge_key)) { return; }
-        $did_nudge = false;
-        if ($this->ebay_sync_job_is_open($job)) {
-            $last = absint($job['last_worker_at'] ?? 0);
-            $updated = absint($job['updated_at'] ?? 0);
-            $age = $now - max($last, $updated);
-            if ($age >= 20) {
-                $this->ebay_dispatch_worker($job);
-                $did_nudge = true;
-            }
-        } elseif ($this->ebay_refresh_job_is_open($refresh_job)) {
-            $last = absint($refresh_job['last_worker_at'] ?? 0);
-            $updated = absint($refresh_job['updated_at'] ?? 0);
-            $age = $now - max($last, $updated);
-            if ($age >= 20) {
-                $this->ebay_refresh_dispatch_worker($refresh_job);
-                $did_nudge = true;
-            }
-        }
-        if ($did_nudge && function_exists('set_transient')) { set_transient($nudge_key, 1, 15); }
-    }
-
-    /**
-     * V5.21 – Live-Recovery fuer bereits offene V5.18–V5.20-Jobs.
-     * Ein alter offener Zustand wird beim Aufruf der eBay-Adminseite terminal
-     * als PARTIAL geschlossen. Bereits gespeicherte Items/Listings/Creatives
-     * bleiben erhalten; es wird nichts geloescht und kein neuer Abruf gestartet.
-     */
-    private function ebay_admin_bound_stale_jobs(&$job, &$refresh_job, $settings) {
-        if ($this->ebay_sync_job_is_open($job) && $this->ebay_sync_segment_expired($job)) {
-            $this->ebay_sync_finalize($job, $settings, 'partial', 'segment_time_budget');
-            $job = $this->ebay_sync_job_load();
-        }
-        if ($this->ebay_refresh_job_is_open($refresh_job) && $this->ebay_refresh_segment_expired($refresh_job)) {
-            if (!isset($refresh_job['summary']) || !is_array($refresh_job['summary'])) { $refresh_job['summary'] = array(); }
-            $refresh_job['summary']['stopped_reason'] = 'segment_time_budget';
-            $this->ebay_refresh_finalize($refresh_job, $settings, 'partial');
-            $refresh_job = $this->ebay_refresh_job_load();
-        }
-    }
-
     public function render_ebay_page() {
         if (!current_user_can('manage_options')) { return; }
         $settings = $this->ebay_settings();

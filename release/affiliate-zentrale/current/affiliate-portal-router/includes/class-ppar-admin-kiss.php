@@ -24,7 +24,6 @@ final class PPAR_Affiliate_Admin_KISS {
         if (self::$booted) { return; }
         self::$booted = true;
         add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
-        add_action('admin_menu', array(__CLASS__, 'prune_legacy_navigation'), 10060);
         add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
         add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
         add_action('admin_post_' . self::HOUSEKEEPING_ACTION, array(__CLASS__, 'handle_housekeeping_run'));
@@ -32,18 +31,6 @@ final class PPAR_Affiliate_Admin_KISS {
     }
 
     private static function parent_slug() { return 'affiliate-portal-zentrale'; }
-
-    private static function hidden_legacy_slugs() {
-        return array(
-            'affiliate-portal-outputs','affiliate-portal-control',
-            'affiliate-portal-creatives','affiliate-portal-assignments','affiliate-portal-preview',
-            'affiliate-portal-ebay-business','affiliate-portal-coverage','affiliate-portal-article-hybrid',
-            'affiliate-portal-networks','affiliate-portal-provider-awin','affiliate-portal-provider-adcell',
-            'affiliate-portal-ebay','affiliate-portal-provider-idealo','affiliate-portal-provider-digistore24',
-            'affiliate-portal-partners','affiliate-portal-sync','affiliate-portal-automation',
-            'affiliate-portal-stats','affiliate-portal-health','affiliate-portal-deals'
-        );
-    }
 
     public static function register_visible_navigation() {
         if (!function_exists('add_submenu_page')) { return; }
@@ -53,16 +40,6 @@ final class PPAR_Affiliate_Admin_KISS {
         add_submenu_page($parent,'Ausspielung','Ausspielung','manage_options','affiliate-portal-kiss-delivery',array(__CLASS__,'render_delivery'));
         add_submenu_page($parent,'Anbieter & APIs','Anbieter & APIs','manage_options','affiliate-portal-kiss-providers',array(__CLASS__,'render_providers'));
         add_submenu_page($parent,'Steuerung & System','Steuerung & System','manage_options','affiliate-portal-kiss-system',array(__CLASS__,'render_system'));
-    }
-
-    public static function prune_legacy_navigation() {
-        if (!current_user_can('manage_options') || !function_exists('remove_submenu_page')) { return; }
-        $parent = self::parent_slug();
-        foreach (self::hidden_legacy_slugs() as $slug) {
-            // Nur aus der sichtbaren Navigation entfernen. Die registrierte
-            // Fachseite und direkte Links aus den KISS-Seiten bleiben erhalten.
-            remove_submenu_page($parent, $slug);
-        }
     }
 
     private static function button($label, $slug, $primary = false) {

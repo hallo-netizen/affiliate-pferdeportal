@@ -1193,40 +1193,6 @@ trait PPAR_Idealo_Trait {
         return '';
     }
 
-    private function idealo_cached_image_url($url,$campaign_post_id=0,$allow_fetch=true) {
-        $direct=$this->idealo_direct_image_url($url);
-        if ($direct==='' || !function_exists('wp_upload_dir')) { return ''; }
-        $uploads=wp_upload_dir(null,false);
-        if (!is_array($uploads) || !empty($uploads['error']) || empty($uploads['basedir']) || empty($uploads['baseurl'])) { return ''; }
-        $dir=rtrim((string)$uploads['basedir'],'/\\').'/ppar-affiliate-product-images';
-        $baseurl=rtrim((string)$uploads['baseurl'],'/').'/ppar-affiliate-product-images';
-        $url_hash=hash('sha256',$direct);
-        $stem='idealo-'.absint($campaign_post_id).'-'.substr($url_hash,0,32);
-        foreach (array('jpg','png','webp','gif') as $ext) {
-            $file=$dir.'/'.$stem.'.'.$ext;
-            if (is_file($file) && filesize($file)>0) { return esc_url_raw($baseurl.'/'.basename($file)); }
-        }
-        if (!$allow_fetch || !function_exists('wp_safe_remote_get')) { return ''; }
-        $failure_key='ppar_idealo_img_fail_'.substr($url_hash,0,32);
-        if (function_exists('get_transient') && get_transient($failure_key)) { return ''; }
-        $response=wp_safe_remote_get($direct,array('timeout'=>5,'redirection'=>2,'headers'=>array('Accept'=>'image/avif,image/webp,image/apng,image/*,*/*;q=0.8'),'limit_response_size'=>4194304));
-        if (function_exists('is_wp_error') && is_wp_error($response)) { if (function_exists('set_transient')) { set_transient($failure_key,1,HOUR_IN_SECONDS); } return ''; }
-        $code=function_exists('wp_remote_retrieve_response_code')?absint(wp_remote_retrieve_response_code($response)):0;
-        $body=function_exists('wp_remote_retrieve_body')?(string)wp_remote_retrieve_body($response):'';
-        if ($code<200 || $code>=300 || $body==='' || strlen($body)>4194304) { if (function_exists('set_transient')) { set_transient($failure_key,1,HOUR_IN_SECONDS); } return ''; }
-        $size=function_exists('getimagesizefromstring')?@getimagesizefromstring($body):false;
-        if (!is_array($size) || absint($size[0]??0)<=0 || absint($size[1]??0)<=0) { if (function_exists('set_transient')) { set_transient($failure_key,1,HOUR_IN_SECONDS); } return ''; }
-        $mime=strtolower((string)($size['mime']??''));
-        $map=array('image/jpeg'=>'jpg','image/jpg'=>'jpg','image/png'=>'png','image/webp'=>'webp','image/gif'=>'gif');
-        $ext=$map[$mime]??''; if ($ext==='') { if (function_exists('set_transient')) { set_transient($failure_key,1,HOUR_IN_SECONDS); } return ''; }
-        if (!is_dir($dir) && (!function_exists('wp_mkdir_p') || !wp_mkdir_p($dir))) { return ''; }
-        $file=$dir.'/'.$stem.'.'.$ext; $tmp=$file.'.tmp-'.substr(hash('sha256',uniqid('',true)),0,12);
-        $written=@file_put_contents($tmp,$body,LOCK_EX);
-        if ($written!==strlen($body) || !@rename($tmp,$file)) { @unlink($tmp); return ''; }
-        @chmod($file,0644); if (function_exists('delete_transient')) { delete_transient($failure_key); }
-        return esc_url_raw($baseurl.'/'.basename($file));
-    }
-
     private function idealo_runtime_timestamp_url($url) {
         $url=(string)$url;
         if ($url==='') { return ''; }

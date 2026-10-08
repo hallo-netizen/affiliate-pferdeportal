@@ -1,4 +1,4 @@
-name: Affiliate 6.72.208 KISS Cleanup Gate
+name: Affiliate 6.72.209 KISS Cleanup + Textlinks Gate
 
 on:
   workflow_dispatch:
@@ -40,7 +40,7 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Exact source and no-function-change diff
+      - name: Exact source and bounded KISS delta
         shell: bash
         run: |
           set -euo pipefail
@@ -50,35 +50,52 @@ jobs:
           import hashlib,json,pathlib,subprocess
           c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
           a=c['active_candidate']
-          assert a['version']=='6.72.208'
+          assert a['version']=='6.72.209'
           assert a['source_file_count']==28
           p=pathlib.Path(a['current_source_manifest_ref'])
           assert hashlib.sha256(p.read_bytes()).hexdigest()==a['current_source_manifest_sha256']
           assert len([x for x in p.read_text().splitlines() if x.strip()])==28
           root='release/affiliate-zentrale/current/affiliate-portal-router'
-          changed=subprocess.check_output(['git','diff','--name-only','62f6febaf11c1e46e50663aa436e3845c0da1e27','HEAD','--',root],text=True).splitlines()
+          base='d9eb69f5dd6ce70e76fa3e4836496b42bf6d5cbd'
+          changed=subprocess.check_output(['git','diff','--name-only',base,'HEAD','--',root],text=True).splitlines()
           allowed={
             root+'/pferdeportal-affiliate-router.php',
             root+'/includes/class-ppar-admin-kiss.php',
+            root+'/includes/class-ppar-deal-radar.php',
+            root+'/includes/class-ppar-partner-analytics.php',
+            root+'/includes/trait-ppar-automation-suite.php',
+            root+'/includes/trait-ppar-creative-library.php',
+            root+'/includes/trait-ppar-ebay-run.php',
+            root+'/includes/trait-ppar-ebay.php',
+            root+'/includes/trait-ppar-idealo.php',
+            root+'/includes/trait-ppar-output-objects.php',
+            root+'/includes/trait-ppar-tariff-tools.php',
             root+'/readme.txt',
           }
           assert set(changed)==allowed, changed
-          protected=[
-            root+'/includes/trait-ppar-automation-suite.php',
-            root+'/includes/trait-ppar-creative-library.php',
-            root+'/includes/trait-ppar-output-objects.php',
-            root+'/includes/trait-ppar-article-plans.php',
-            root+'/includes/trait-ppar-tariff-tools.php',
-          ]
-          for f in protected:
-            assert subprocess.check_output(['git','diff','62f6febaf11c1e46e50663aa436e3845c0da1e27','HEAD','--',f],text=True)==''
           main=pathlib.Path(root+'/pferdeportal-affiliate-router.php').read_text()
-          assert 'Version: 6.72.208' in main and "const VERSION = '6.72.208';" in main
+          assert 'Version: 6.72.209' in main and "const VERSION = '6.72.209';" in main
+          assert "add_shortcode('affiliate_textlink'" in main
+          assert "Rechner & Textlinks" in main
           admin=pathlib.Path(root+'/includes/class-ppar-admin-kiss.php').read_text()
-          assert 'remove_submenu_page' in admin
+          assert 'remove_submenu_page' not in admin
+          assert 'prune_legacy_navigation' not in admin
           assert 'ppar-kiss-legacy-nav-hide' not in admin
-          assert 'Technischer Weg:' not in admin
-          print('PASS CLEANUP_SOURCE_DIFF_ONLY')
+          tariff=(pathlib.Path(root+'/includes/trait-ppar-tariff-tools.php')).read_text()
+          assert "ppar_text_links_v1" in tariff
+          assert "[affiliate_textlink id=" in tariff
+          assert 'CREATE TABLE' not in tariff.upper()
+          assert 'wp_remote_' not in tariff
+          dead=[
+            'OPTION_EBAY_EXTERNAL_TICK_KEY','article_word_count','article_banner_limit_for_words',
+            'select_article_insertion_positions','render_article_banner_at_position','render_article_product_block',
+            'category_large_banner_rotate_candidates','find_group_by_id','breed_campaign_runtime_semantic_rank',
+            'ebay_product_cached_image_url','ebay_business_diag_resolve_public_target',
+            'resolve_category_placeholder_image_id','resolve_category_placeholder_image_url','render_campaign_editor'
+          ]
+          for name in dead:
+            assert name not in main, name
+          print('PASS CLEANUP_AND_TEXTLINK_SOURCE_DELTA')
           PY
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
@@ -109,28 +126,25 @@ jobs:
           rm -rf /tmp/wp-site && mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='672208 Cleanup' --admin_user=admin --admin_password='ci-672208!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='672209 Cleanup' --admin_user=admin --admin_password='ci-672209!' --admin_email=ci@example.test --skip-email
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.208") exit(2); echo "PASS PLUGIN_672208_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.209") exit(2); echo "PASS PLUGIN_672209_ACTIVE\n";' --path=/tmp/wp-site
 
-      - name: KISS backend and DB hard positive negative
+      - name: KISS backend textlinks and DB hard positive negative
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/wp-site/cleanup208.php <<'PHP'
+          cat >/tmp/wp-site/cleanup209.php <<'PHP'
           <?php
           wp_set_current_user(1);
           $pass=0;$fail=0;
           $ok=function($v,$n)use(&$pass,&$fail){if($v){echo "PASS $n\n";$pass++;}else{echo "FAIL $n\n";$fail++;}};
 
           global $submenu,$_registered_pages,$wpdb;
-          // WP-CLI ist kein is_admin()-Request. Deshalb die echten Admin-Menues
-          // explizit genauso registrieren und danach den KISS-Pruner anwenden.
           $o=Pferdeportal_Affiliate_Router::instance();
           $o->admin_menu();
           PPAR_Affiliate_Admin_KISS::register_visible_navigation();
-          PPAR_Affiliate_Admin_KISS::prune_legacy_navigation();
           $rows=(array)($submenu['affiliate-portal-zentrale']??[]);
           $visible=array_map(static function($r){return (string)($r[2]??'');},$rows);
           $hidden=[
@@ -142,15 +156,63 @@ jobs:
             'affiliate-portal-partners','affiliate-portal-sync','affiliate-portal-automation',
             'affiliate-portal-stats','affiliate-portal-health','affiliate-portal-deals'
           ];
-          foreach($hidden as $slug){$ok(!in_array($slug,$visible,true),'menu_pruned_'.$slug);}
+          foreach($hidden as $slug){$ok(!in_array($slug,$visible,true),'menu_hidden_'.$slug);}
           foreach(['affiliate-portal-zentrale','affiliate-portal-creative-library','affiliate-portal-tariff-tools','affiliate-portal-kiss-products','affiliate-portal-kiss-partners','affiliate-portal-kiss-delivery','affiliate-portal-kiss-providers','affiliate-portal-kiss-system'] as $slug){
               $ok(in_array($slug,$visible,true),'menu_kept_'.$slug);
           }
-          $hook=get_plugin_page_hookname('affiliate-portal-automation','affiliate-portal-zentrale');
+          $hook=get_plugin_page_hookname('affiliate-portal-automation','');
           $ok($hook!=='' && isset($_registered_pages[$hook]),'hidden_specialist_page_still_registered');
+          $ok(!method_exists('PPAR_Affiliate_Admin_KISS','prune_legacy_navigation'),'old_nav_pruner_removed');
           $ok(!method_exists('PPAR_Affiliate_Admin_KISS','hide_legacy_navigation_css'),'old_css_hide_method_removed');
 
           $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
+
+          // Generische Textlinks: eine kleine nicht-autoloadende Option, kein neuer DB-Tisch.
+          $tablesBefore=$wpdb->get_col('SHOW TABLES');
+          $links=[
+            'leadalliance-pferdeversicherung'=>[
+              'id'=>'leadalliance-pferdeversicherung','partner'=>'LeadAlliance','name'=>'Pferdeversicherung',
+              'link_text'=>'Pferdeversicherung vergleichen','tracking_url'=>'https://tracking.example.test/click?id=4711',
+              'destination_url'=>'https://ziel.example.test/pferdeversicherung','active'=>1,'created_at'=>time(),'updated_at'=>time()
+            ],
+            'inaktiv-test'=>[
+              'id'=>'inaktiv-test','partner'=>'Testpartner','name'=>'Inaktiv','link_text'=>'Nicht zeigen',
+              'tracking_url'=>'https://tracking.example.test/inaktiv','destination_url'=>'','active'=>0,'created_at'=>time(),'updated_at'=>time()
+            ]
+          ];
+          $stored=$call('text_links_store_all',$links);
+          $ok(isset($stored['leadalliance-pferdeversicherung']),'textlink_stored');
+          $ok(!array_key_exists('ppar_text_links_v1',wp_load_alloptions(true)),'textlink_option_not_autoloaded');
+          $registry=$o->text_links_writer_registry([]);
+          $ok(isset($registry['leadalliance-pferdeversicherung']),'textlink_writer_registry_active');
+          $ok(!isset($registry['inaktiv-test']),'textlink_writer_registry_inactive_hidden');
+          $ok(($registry['leadalliance-pferdeversicherung']['placeholder']??'')==='[affiliate_textlink id="leadalliance-pferdeversicherung"]','textlink_placeholder_stable');
+          $html=$o->shortcode_text_link(['id'=>'leadalliance-pferdeversicherung']);
+          $ok(strpos($html,'Pferdeversicherung vergleichen')!==false,'textlink_visible_text');
+          $ok(strpos($html,'https://tracking.example.test/click?id=4711')!==false,'textlink_tracking_output');
+          $ok(strpos($html,'sponsored nofollow noopener')!==false,'textlink_rel_sponsored');
+          $ok(strpos($html,'ziel.example.test')===false,'textlink_destination_not_runtime_output');
+          $ok($o->shortcode_text_link(['id'=>'inaktiv-test'])==='','textlink_inactive_empty');
+          $ok($o->shortcode_text_link(['id'=>'unbekannt'])==='','textlink_unknown_empty');
+          $rendered=do_shortcode('Vor [affiliate_textlink id="leadalliance-pferdeversicherung"] Nach');
+          $ok(strpos($rendered,'Pferdeversicherung vergleichen')!==false,'textlink_real_shortcode_render');
+          $links['leadalliance-pferdeversicherung']['tracking_url']='https://tracking.example.test/click?id=9999';
+          $call('text_links_store_all',$links);
+          $ok(strpos($o->shortcode_text_link(['id'=>'leadalliance-pferdeversicherung']),'id=9999')!==false,'textlink_central_update_applies');
+          $links['leadalliance-pferdeversicherung']['active']=0;
+          $call('text_links_store_all',$links);
+          $ok($o->shortcode_text_link(['id'=>'leadalliance-pferdeversicherung'])==='','textlink_deactivate_everywhere');
+          $tablesAfter=$wpdb->get_col('SHOW TABLES');
+          sort($tablesBefore);sort($tablesAfter);
+          $ok($tablesBefore===$tablesAfter,'textlink_no_new_table');
+
+          // Tarifrechnerpfad bleibt unverändert funktionsfähig.
+          $call('tariff_tools_store_all',[
+            'kredit'=>['id'=>'kredit','name'=>'Kredit','html'=>'<div id="calc-pass">OK</div>','active'=>1,'created_at'=>time(),'updated_at'=>time()]
+          ]);
+          $ok(strpos($o->shortcode_tariff_tool(['id'=>'kredit']),'calc-pass')!==false,'tariff_shortcode_unchanged');
+
+          // Bestehende bounded DB-Pflege positiv/negativ.
           $o->maybe_install_automation_schema();
           $jobs=$call('automation_jobs_table');
           $old=time()-100*DAY_IN_SECONDS;
@@ -180,34 +242,34 @@ jobs:
 
           echo "SUMMARY PASS=$pass FAIL=$fail\n";
           if($fail) exit(1);
-          echo "KISS_CLEANUP_672208_PASS\n";
+          echo "KISS_CLEANUP_TEXTLINK_672209_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/wp-site/cleanup208.php --path=/tmp/wp-site | tee /tmp/cleanup208.log
-          grep -F 'KISS_CLEANUP_672208_PASS' /tmp/cleanup208.log
+          /tmp/wp eval-file /tmp/wp-site/cleanup209.php --path=/tmp/wp-site | tee /tmp/cleanup209.log
+          grep -F 'KISS_CLEANUP_TEXTLINK_672209_PASS' /tmp/cleanup209.log
 
-      - name: Package exact tested 6.72.208
+      - name: Package exact tested 6.72.209
         shell: bash
         run: |
           set -euo pipefail
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.208.zip affiliate-portal-router)
-          rm -rf /tmp/final208 && mkdir -p /tmp/final208
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.208.zip -d /tmp/final208
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.209.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.209.zip affiliate-portal-router)
+          rm -rf /tmp/final209 && mkdir -p /tmp/final209
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.209.zip -d /tmp/final209
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
           expected={l.split('  ',1)[1]:l.split('  ',1)[0] for l in m.read_text().splitlines() if l.strip()}
-          root=Path('/tmp/final208')
+          root=Path('/tmp/final209')
           got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
           assert got==expected
           print('PASS ZIP_BYTE_IDENTITY_28_OF_28')
           PY
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.209.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.208
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.208.zip
+          name: AFFILIATE_ZENTRALE_6.72.209
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.209.zip
           if-no-files-found: error
           retention-days: 30

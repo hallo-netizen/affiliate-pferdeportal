@@ -436,25 +436,6 @@ trait PPAR_Automation_Suite_Trait {
         exit;
     }
 
-    private function automation_scheduled_partner_batch($snapshots, $cursor, $limit = 1) {
-        $valid = array_values(array_filter((array) $snapshots, function ($snapshot) {
-            return is_array($snapshot)
-                && sanitize_key((string) ($snapshot['provider'] ?? '')) === 'awin'
-                && absint($snapshot['external_id'] ?? 0) > 0
-                && $this->awin_programme_gate_is_allowed(absint($snapshot['external_id'] ?? 0));
-        }));
-        usort($valid, static function ($a, $b) {
-            return absint($a['external_id'] ?? 0) <=> absint($b['external_id'] ?? 0);
-        });
-        if (!$valid) {
-            return array('ids'=>array(), 'next_cursor'=>0, 'total'=>0);
-        }
-        $total = count($valid);
-        $cursor = absint($cursor) % $total;
-        $id = absint($valid[$cursor]['external_id'] ?? 0);
-        return array('ids'=>$id > 0 ? array($id) : array(), 'next_cursor'=>($cursor + 1) % $total, 'total'=>$total);
-    }
-
     private function automation_scheduled_sources() {
         $sources = array();
         $awin = $this->network_settings('awin');
@@ -781,16 +762,6 @@ trait PPAR_Automation_Suite_Trait {
             $this->automation_schedule_adcell_retry_fallback();
         }
         delete_transient($lock_key);
-    }
-
-    private function automation_has_due_adcell_promotions() {
-        global $wpdb;
-        $table = $this->automation_jobs_table();
-        $now = time();
-        return (bool) $wpdb->get_var($wpdb->prepare(
-            "SELECT id FROM {$table} WHERE provider='adcell' AND stage='promotions' AND ((status IN ('queued','retry') AND not_before<=%d AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d)) LIMIT 1",
-            $now, $now, $now
-        ));
     }
 
     private function automation_cycle_state() {

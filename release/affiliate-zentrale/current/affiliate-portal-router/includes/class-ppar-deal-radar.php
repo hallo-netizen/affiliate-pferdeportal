@@ -52,7 +52,7 @@ final class PPAR_Deal_Radar {
 
     public static function register_menu() {
         add_submenu_page(
-            'affiliate-portal-zentrale',
+            null,
             'Produktquellen & Deals',
             'Produktquellen & Deals',
             'manage_options',

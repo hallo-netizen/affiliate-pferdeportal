@@ -490,15 +490,6 @@ trait PPAR_Ebay_Run_Trait {
         return true;
     }
 
-    private function ebay_run_context_active() {
-        return !empty($this->ebay_canonical_worker_active) && $this->ebay_run_is_open();
-    }
-
-    private function ebay_run_worker_transport_migration_key() {
-        $constant = static::class . '::OPTION_EBAY_WORKER_TRANSPORT_MIGRATION';
-        return defined($constant) ? (string)constant($constant) : 'ppar_ebay_worker_transport_migration_v6412';
-    }
-
     /** V6.63.8 canonical driver.
      *
      * The fach worker remains single-owner and bounded. Continuation no longer
@@ -512,12 +503,6 @@ trait PPAR_Ebay_Run_Trait {
         return $this->ebay_run_dispatch_self_drive((string)($run['run_uuid'] ?? ''), 'schedule');
     }
 
-    /** Compatibility no-ops retained so older state/tests cannot accidentally
-     * revive the retired WP-Cron/background-dispatch transports. */
-    private function ebay_run_register_background_dispatch($when) { return false; }
-    private function ebay_run_spawn_core_cron_handoff() { return false; }
-    private function ebay_run_wait_for_cron_lock_resolution($initial_lock, $max_wait_seconds = 5) { return false; }
-    private function ebay_run_fail_background_dispatch($code, $details = array()) { return false; }
     public function run_ebay_worker_background_dispatch() { return false; }
 
     /** Stateless signed continuation contract.
@@ -799,21 +784,6 @@ trait PPAR_Ebay_Run_Trait {
         return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
     }
 
-    private function ebay_run_pause_for_budget($run, $reason = 'work_block_budget') {
-        $run = is_array($run) ? $run : $this->ebay_run_load();
-        if (!$this->ebay_run_is_open($run)) { return $run; }
-        $pause_seconds = defined(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS') ? absint(constant(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS')) : 1;
-        $pause_seconds = max(1, $pause_seconds);
-        $run['status'] = 'paused';
-        $run['resume_reason'] = sanitize_key((string)$reason);
-        $run['resume_at'] = time() + $pause_seconds;
-        $run['owner'] = '';
-        $run['lease_expires_at'] = 0;
-        $run['work_block_started_at'] = 0;
-        $run['work_block_tick_count'] = 0;
-        return $this->ebay_run_save($run);
-    }
-
     private function ebay_run_resume_paused_if_due($run) {
         $run = is_array($run) ? $run : $this->ebay_run_load();
         if (sanitize_key((string)($run['status'] ?? '')) !== 'paused') { return $run; }
@@ -840,53 +810,8 @@ trait PPAR_Ebay_Run_Trait {
         return defined($constant) ? (string)constant($constant) : '2.0';
     }
 
-    /** Return the last matching persistent failure entry without mutating state. */
-    private function ebay_run_last_failure_entry($run, $code = '') {
-        $errors = is_array($run['errors'] ?? null) ? $run['errors'] : array();
-        $code = sanitize_key((string)$code);
-        for ($i = count($errors) - 1; $i >= 0; $i--) {
-            $entry = is_array($errors[$i] ?? null) ? $errors[$i] : array();
-            if ($code !== '' && sanitize_key((string)($entry['code'] ?? '')) !== $code) { continue; }
-            return $entry;
-        }
-        return array();
-    }
 
 
-
-
-    /**
-     * V6.44.0 state-only recovery for the proven BUSINESS materialisation
-     * dead-end. The old selector treated one candidate-local soft output-plan
-     * failure as a terminal failure of the whole 311-family run, so the
-     * canonical coverage/gap-fill phases could never do the job they own.
-     *
-     * Recovery is deliberately fail-closed: the same run UUID is reopened only
-     * when every persisted materialisation error is independently proven soft.
-     * Storage/source/commit/unknown errors remain terminal.
-     */
-    private function ebay_run_business_materialization_error_is_proven_soft_v6440($entry) {
-        $entry=is_array($entry)?$entry:array();
-        $code=sanitize_key((string)($entry['code']??''));
-        if($code==='ebay_business_materialization_not_active'){return true;}
-        if($code!=='business_selection_commit_failed'){return false;}
-        // One historical edge case: route_business already preserved a verified
-        // Last-Known-Good output, then the generic active-selected commit rejected
-        // that intentional review_last_good state. Prove that exact row state
-        // before treating the old commit failure as candidate-local.
-        $item_id=sanitize_text_field((string)($entry['item_id']??''));
-        if($item_id==='' || !method_exists($this,'ebay_items_table')){return false;}
-        global $wpdb;
-        if(!is_object($wpdb)||!method_exists($wpdb,'get_row')||!method_exists($wpdb,'prepare')){return false;}
-        $row=$wpdb->get_row($wpdb->prepare(
-            "SELECT * FROM {$this->ebay_items_table()} WHERE item_id=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
-            $item_id
-        ),ARRAY_A);
-        if(!is_array($row)){return false;}
-        $route=sanitize_key((string)($row['route_state']??''));
-        $reason=sanitize_text_field((string)($row['rejection_reason']??''));
-        return $route==='review_last_good' && strpos($reason,'[ebay_business_materialization_not_active]')!==false;
-    }
 
 
 
