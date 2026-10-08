@@ -1725,3 +1725,18 @@ AFF-ERR-059 ist für diese Präzisierung die jüngere Root-Cause-Korrektur.
 - AFF-ERR-062: sichtbare Überschrift Anzeige wiederhergestellt.
 
 Status: SOURCE_FIXED_AND_BOUND / CURRENT_GATES_PENDING.
+
+
+## AFF-ERR-059–062 final geschlossen — 08.10.2026
+
+- Current bound release gate: PASS, Run 37754151488.
+- Fresh WordPress + MariaDB: PASS.
+- AFF-ERR-059 FIXED-Vorrang: PASS.
+- AFF-ERR-060 allgemeiner Banner-Fallback: PASS.
+- AFF-ERR-061 Dedupe nur identische Creative-Identität: PASS.
+- AFF-ERR-062 sichtbare Kennzeichnung „Anzeige“: PASS.
+- Performance/DB-Hardlock: PASS, keine neue Frontend-DB-Abfrage, kein Frontend-HTTP, keine neue Tabelle.
+- Getesteter Installer: AFFILIATE_ZENTRALE_6.72.203.zip, SHA256 `0ed348ec03ad6018cdd387535fce89df161557ff41fcce66161f83f0c08cfaea`, 820012 Bytes.
+- Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672203_current_bound_release_gate_20261008.md`.
+
+Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange Source-Manifest `ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190` unverändert ist.
