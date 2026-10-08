@@ -23,10 +23,13 @@ final class PPAR_Affiliate_Admin_KISS {
     public static function bootstrap() {
         if (self::$booted) { return; }
         self::$booted = true;
-        add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
-        add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
-        add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
-        add_action('admin_post_' . self::HOUSEKEEPING_ACTION, array(__CLASS__, 'handle_housekeeping_run'));
+        $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
+        if (!$is_ajax_request) {
+            add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
+            add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
+            add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
+            add_action('admin_post_' . self::HOUSEKEEPING_ACTION, array(__CLASS__, 'handle_housekeeping_run'));
+        }
         add_filter('pre_update_option_' . self::DS24_MARKETPLACE_OPTION, array(__CLASS__, 'preserve_manual_ds24_inventory'), 20, 3);
     }
 

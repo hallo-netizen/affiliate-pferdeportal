@@ -42,14 +42,16 @@ trait PPAR_Idealo_Trait {
         add_action('ppar_affiliate_render_provider_access_card_idealo', array($this, 'idealo_render_access_card'), 10, 3);
         add_action('ppar_affiliate_render_provider_specialist_idealo', array($this, 'idealo_render_specialist_content'), 10, 3);
         add_action('ppar_affiliate_render_provider_sync_idealo', array($this, 'idealo_render_sync_card'), 10, 3);
-        add_action('admin_post_ppar_idealo_import_file', array($this, 'handle_idealo_import_file'));
+        if (!$is_ajax_request) { add_action('admin_post_ppar_idealo_import_file', array($this, 'handle_idealo_import_file')); }
         add_filter('cron_schedules', array($this, 'idealo_cron_schedules'));
         if (!$is_ajax_request) { add_action('init', array($this, 'idealo_maybe_upgrade_materialization'), 12); }
         if (!$is_ajax_request) { add_action('init', array($this, 'idealo_ensure_refresh_schedule'), 25); }
         add_action(self::IDEALO_REFRESH_HOOK, array($this, 'idealo_run_scheduled_refresh'));
         add_action(self::IDEALO_MANUAL_REFRESH_HOOK, array($this, 'idealo_run_manual_refresh'));
-        add_action('admin_post_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
-        add_action('admin_post_nopriv_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
+        if (!$is_ajax_request) {
+            add_action('admin_post_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
+            add_action('admin_post_nopriv_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
+        }
         if (!$is_ajax_request) { add_action('init', array($this, 'idealo_maybe_recover_refresh_dispatch'), 26); }
     }
 
