@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 FINAL-SYNC READBACK FEHLGESCHLAGEN / ROLLBACK_PENDING 231 / ROOT CAUSE = CHILD-PAGE ADOPT-SLUG LOOKUP / V1.13.2 FIX LOKAL PASS / ZIELPROFIL UNVERÄNDERT / KEIN NEUER SYNC VOR ROLLED_BACK
+STATUS: V1.13.1 FEHLSYNC ROLLED_BACK / V1.13.2 DRYRUN PASS / ZWEITE DRYRUN-SYNC-PARITÄTSLÜCKE LOKAL GEFUNDEN / V1.13.3 FULL-SYNC-PARITY LOKAL PASS / 355 CREATE + 75 ADOPT + 430 READBACK + 430 UNCHANGED GETESTET / KEIN LIVE-SYNC VOR V1.13.3-DRYRUN
 
 ## Plugin
 
@@ -322,14 +322,41 @@ SHA-256 `d9cb80d8e5635fd94ac390dc0be75757d1a7a964b0ce0cb1cf893934eed35cc7`
 Tests:
 33/33 PHP-Lint PASS + gezielter Child-Slug-/Ambiguity-/Missing-Test PASS.
 
+## V1.13.3 FULL-SYNC-PARITY
+
+V1.13.2 war noch nicht ausreichend:
+Dry-Run und Sync unterschieden sich bei der Legacy-concept_id-Suche.
+
+V1.13.3 gleicht die Sync-Suche vollständig an den Dry-Run an:
+`_apkw_target_node_id`
+→ `_apkw_concept_id` mit current node_id + legacy_ids
+→ Slug-Fallback.
+
+Lokaler Volltest mit echtem 430-Knoten-Plan:
+- 355 CREATE;
+- 75 ADOPT;
+- 0 UPDATE;
+- 430/430 Readback PASS;
+- COMPLETE;
+- zweiter Lauf 430 UNCHANGED;
+- Rollback ROLLED_BACK;
+- 11 umbenannte Legacy-ADOPTs PASS;
+- Ambiguity fail-closed PASS;
+- 33/33 PHP-Lint PASS;
+- Zielprofil unverändert.
+
+Artefakt:
+`HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip`
+SHA-256 `f255b06fb38c7b903de2c7741dea4e02fb9620ad3a6651fbf5963f402c33820b`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FAILED_SYNC_ROLLBACK_PENDING`
+`HD001_V1_13_3_FRESH_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den vorhandenen Rollback zuerst bis `ROLLED_BACK` abschließen lassen.
-Danach V1.13.2 installieren und einen frischen finalen Dry-Run erzeugen.
+V1.13.3 installieren und genau einen frischen finalen Delta-Dry-Run exportieren.
+Noch keinen Live-Sync starten.
 
 ## Release-/Artefaktgrenze
 
