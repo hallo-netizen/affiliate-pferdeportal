@@ -1,0 +1,51 @@
+{
+  "contract": "HD001_V1_13_2_ADOPT_CHILD_SLUG_FIX",
+  "date": "2026-10-08",
+  "status": "PASS_READY_AFTER_ROLLBACK",
+  "failed_sync_readback": "hobby-depot-final-target-readback-20261008-101334-utc.json",
+  "failure": {
+    "sync_status": "ROLLBACK_PENDING",
+    "error": "Target-Tree-Readback fehlgeschlagen: core:fertigen:buch-papier [slug]",
+    "node_count": 430,
+    "created": 415,
+    "adopted": 15,
+    "expected_from_dry_run": {
+      "CREATE": 355,
+      "ADOPT": 75
+    },
+    "adoption_mismatch": {
+      "planned_adopt": 75,
+      "actually_adopted": 15,
+      "incorrectly_created_from_adopt": 60
+    },
+    "rollback_actions_pending": 231
+  },
+  "root_cause": "Sync used get_page_by_path($slug) for page adoption. For hierarchical child pages this expects the full hierarchical path, so existing child pages found by the dry-run's slug lookup were missed during sync and recreated. WordPress then changed colliding slugs, causing readback failure.",
+  "fix": {
+    "version": "1.13.2",
+    "file": "includes/class-apkw-target-tree-sync.php",
+    "change": "Page slug lookup now uses bounded get_posts with post_name__in=[slug], mirroring the dry-run's global leaf-slug lookup; >1 match remains fail-closed.",
+    "target_profile_changed": false,
+    "materialkunst_remains_removed": true
+  },
+  "artifact": {
+    "name": "HD001_V1.13.2_ADOPT_CHILD_SLUG_FIX_HARDPASS.zip",
+    "sha256": "d9cb80d8e5635fd94ac390dc0be75757d1a7a964b0ce0cb1cf893934eed35cc7",
+    "library_path": "/hobby rausch/HD001_V1.13.2_ADOPT_CHILD_SLUG_FIX_HARDPASS.zip"
+  },
+  "checks": {
+    "fresh_php_lint": "33/33 PASS",
+    "child_slug_adoption_lookup": "PASS",
+    "ambiguity_fail_closed": "PASS",
+    "missing_slug_returns_null": "PASS",
+    "corrected_profile_sha256": "2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95",
+    "materialkunst_occurrences": 0,
+    "changed_files_vs_1_13_1_materialkunst_fix": 3,
+    "changed_files": [
+      "README.txt",
+      "affiliate-portal-kategorie-workflow.php",
+      "includes/class-apkw-target-tree-sync.php"
+    ]
+  },
+  "next_action": "Let the current rollback reach terminal ROLLED_BACK first. Then install V1.13.2, run one fresh read-only final Delta-Dry-Run, verify 355 CREATE + 75 ADOPT (or equivalent if live state changed), then run exactly one final sync."
+}
