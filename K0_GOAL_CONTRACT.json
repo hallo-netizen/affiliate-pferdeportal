@@ -24,6 +24,11 @@
     "topic_specific_start_logic_forbidden": true,
     "existing_github_file_trigger_required": true,
     "workflow_dispatch_required": false,
-    "start_blocker_requires_failed_current_run_write_attempt": true
+    "start_blocker_requires_failed_current_run_write_attempt": true,
+    "batch_item_count_independent": true,
+    "batch_fanout_to_single_item_writer_runs_required": true,
+    "writer_single_item_contract_must_remain_unchanged": true,
+    "final_batch_reassembly_required": true,
+    "final_batch_order_must_match_input": true
   }
 }
