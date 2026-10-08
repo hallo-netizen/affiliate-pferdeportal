@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 REALER LIVE-DRYRUN PLAN PASS / FINALPROFIL KORREKT / ALTER TARGET-TREE-LAUF ROLLBACK_PENDING MIT 620 RESTAKTIONEN / APPLY GESPERRT BIS ROLLBACK TERMINAL + NEUER DRYRUN
+STATUS: V1.13.1 REALER FINAL-DRYRUN PASS / FINALDELTA EXAKT BESTÄTIGT / ALTER V1.12-ROLLBACK IM ERSTEXPORT NOCH PENDING / POST-ROLLBACK-READBACK OFFEN / NOCH KEIN FINAL-SYNC
 
 ## Plugin
 
@@ -202,18 +202,37 @@ Sicherheitswirkung:
 - nach terminalem Rollback muss ein neuer Dry-Run erzeugt werden;
 - Apply prüft den Live-Fingerprint erneut und blockiert stale Pläne.
 
+## REALER LIVE-BEFUND
+
+V1.13.1 realer Final-Dry-Run:
+PASS.
+
+Delta:
+- 12 CREATE;
+- 419 UPDATE;
+- 1 ARCHIVE;
+- 431 physische Zielobjekte;
+- 0 Provider-Calls;
+- 0 Strukturwrites.
+
+Damit ist der eigentliche finale Plan real bestätigt.
+
+Im selben Export steckt noch ein alter Sync-State aus V1.12:
+`ROLLBACK_PENDING` wegen `directory:events-reisen [name]`.
+
+Der V1.13.1 Runner übernimmt diesen alten Rollback automatisch.
+Kein neuer Final-Sync wurde gestartet.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_OLD_TARGET_TREE_ROLLBACK_MUST_FINISH_BEFORE_FINAL_SYNC`
+`HD001_V1_13_1_POST_ROLLBACK_FRESH_READBACK_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-`Kategorien → Finaler Zielbaum` offen lassen, bis der alte Rollback terminal ist.
+Noch keinen Sync starten.
 
-Danach neuen Dry-Run ausführen und JSON exportieren.
-
-Noch kein Sync.
-Keine Codeänderung.
+Erneut den kostenlosen finalen Delta-Dry-Run ausführen und direkt danach den JSON-Readback exportieren.
+Dieser frische Export muss bestätigen, dass der alte Rollback terminal ist.
 
 ## Release-/Artefaktgrenze
 
