@@ -1,0 +1,360 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_012_RULE16_RECONSTRUCTION_B2",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Makramee",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012b2:1:1",
+          "label": "Garn, Schnur & Werkzeuge",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Makramee-Garn nach Material auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Schnurstärke passend zum Projekt bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Arbeitslänge der Schnüre berechnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Aufhängung und Arbeitsbrett einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Schnurenden vor dem Arbeiten vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:1:2",
+          "label": "Grundknoten",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Ankerknoten sauber setzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Kreuzknoten gleichmäßig knüpfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Wickelknoten ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Rippenknoten in gerader Linie knüpfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Spiralknoten kontrolliert aufbauen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:1:3",
+          "label": "Muster & Planung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Makramee-Muster vor dem Knüpfen lesen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Knotenabstände gleichmäßig planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Symmetrisches Makramee-Muster aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Schnurverbrauch im Muster abschätzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Musterwechsel ohne sichtbaren Sprung ausführen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:1:4",
+          "label": "Projekte & Konstruktion",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Makramee-Wandbehang stabil aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Pflanzenampel aus Makramee knüpfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Makramee-Tasche konstruieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Holzstab oder Ring sauber einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Belastete Aufhängungspunkte verstärken",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:1:5",
+          "label": "Spannung & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Knotenspannung über ein Projekt konstant halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Verdrehte Schnüre während der Arbeit korrigieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Fransen gleichmäßig auskämmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Abschlussknoten dauerhaft sichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertiges Makramee sauber formen und aufhängen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Klöppeln",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012b2:2:1",
+          "label": "Klöppelkissen, Klöppel & Garn",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Klöppelkissen passend zur Technik auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Klöppel gleichmäßig bewickeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Garnstärke zur Vorlage auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Klöppelpaare geordnet vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Nadeln und Zubehör sicher am Kissen einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:2:2",
+          "label": "Klöppelbrief & Aufstecken",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Klöppelbrief richtig lesen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Klöppelbrief auf dem Kissen befestigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Anfangspunkte korrekt aufstecken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Klöppelpaare einer Vorlage zuordnen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Arbeitsrichtung vor dem Start nachvollziehen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:2:3",
+          "label": "Grundtechniken",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Leinenstruktur gleichmäßig klöppeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Halbstruktur gleichmäßig ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Vollstruktur korrekt kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Techniken mit gleichmäßiger Spannung arbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Nadeln im richtigen Moment setzen und entfernen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:2:4",
+          "label": "Formen & Muster",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Gerade Bänder maßhaltig klöppeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Kurven ohne Falten klöppeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Ecken in einer Spitze ausarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Musterflächen und Grund sauber verbinden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Klöppelpaare bei Zu- und Abnahmen korrekt führen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012b2:2:5",
+          "label": "Abschluss & Fehler",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Klöppelarbeit sicher beenden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Fäden unsichtbar vernähen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Ungleichmäßige Spannung im Muster erkennen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Fehlstellen kontrolliert zurückarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Spitze abnehmen, formen und lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
