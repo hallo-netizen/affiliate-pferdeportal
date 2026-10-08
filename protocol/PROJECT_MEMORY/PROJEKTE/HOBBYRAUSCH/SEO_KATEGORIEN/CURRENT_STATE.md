@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR+TARGET-NAV+MAGAZIN LOKAL FULL POS/NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 59 AKTIVE ZWISCHENBEREICHE / 437 PHYSISCHE ZIELOBJEKTE / LEGACY-NAV-LEAK GESCHLOSSEN / TREIBHOLZ CORE-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 ERWEITERUNGS-ANKER NOCH NICHT FINAL BEWERTET / KEIN LIVE-SYNC
+STATUS: V1.14.0 STRUKTUR+TARGET-NAV+MAGAZIN LOKAL FULL POS/NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 59 AKTIVE ZWISCHENBEREICHE / 437 PHYSISCHE ZIELOBJEKTE / LEGACY-NAV-LEAK GESCHLOSSEN / TREIBHOLZ CORE-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 ERWEITERUNGS-ANKER FINAL BEWERTET: 12 HOBBY_HUB + 7 ORIENTATION_UNIVERSE / TARGET-DELTA AUSSTEHEND / KEIN LIVE-SYNC
 
 ## Ziel
 
@@ -844,21 +844,48 @@ Artefakt:
 SHA-256:
 `87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
 
+## 19 ERWEITERUNGS-ANKER – FINAL BEWERTET
+
+Beleg:
+`HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`
+
+Ergebnis nach Regeln 1.5:
+- 19/19 IN_SCOPE;
+- 0 exakte/current-Alias-Kollisionen;
+- 12 HOBBY_HUB;
+- 7 ORIENTATION_UNIVERSE;
+- 19 strukturell CORE-fähig;
+- Monetarisierung aller 19 bleibt `UNKNOWN_PENDING_PROVIDER_MATCH`; daraus wurde KEINE Promotion abgeleitet;
+- Content-Capacity der 12 HOBBY_HUBs fachlich als 3–6 tragfähige Cluster mit je 5–12 unterschiedlichen Intents belegt;
+- diese Capacity-Cluster erzeugen jetzt ausdrücklich KEINE WordPress-Content-Kategorien;
+- die separate Entscheidung zur untersten WordPress-Kategorieebene bleibt später offen;
+- kein Live-Sync.
+
+Finale Rollen:
+- ORIENTATION_UNIVERSE: Fotografie, Holzwerken, Radfahren, Camping, Klettern, Gärtnern, Angeln;
+- HOBBY_HUB: Malen, Zeichnen, Nähen, Stricken, Häkeln, Heimwerken, Wandern, Schwimmen, Bouldern, Gemüseanbau, Briefmarken sammeln, Plane Spotting.
+
+Besondere Routingentscheidungen:
+- Angeln: Bewegen → Outdoor; primäre Praxis ist die wiederholbare Outdoor-Freizeitaktivität, nicht Tierhaltung.
+- Plane Spotting: Forschen; Beobachten/Tracking/Bestimmen/Dokumentieren, mit Ownership-Grenze zu generischer Fotografie.
+- Gemüseanbau belegt erstmals den bisher leer gelassenen Konzeptast `Essbare Pflanzen`; Aktivierung wird erst im Target-Delta entschieden.
+- Heimwerken und Gärtnern erhalten in dieser Bewertungsstufe KEINEN künstlich erfundenen Zwischenbereich.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_PENDING`
+`HD001_EXPANSION_ANCHORS_19_TARGET_DELTA_PENDING`
 
-Das Erweiterungskonzept enthält 19 bekannte/große Ankerkandidaten (u. a. Fotografie, Malen, Nähen, Wandern, Radfahren, Camping, Gärtnern, Briefmarken sammeln).
-Sie sind in der autoritativen Masterquelle ausdrücklich nur als `expansion_research_queue` geführt und besitzen noch keine finale Freigabe.
-Daher wurden sie NICHT geraten oder blind in CORE promoviert.
+Die Bewertung ist abgeschlossen, aber die 19 neuen Identitäten sind noch nicht in den 841er Quellmaster bzw. in das V1.14-Zielprofil materialisiert.
+Der bestehende V1.14.0-Artefaktstand 841 / 340 / 437 bleibt deshalb unverändert der letzte lokal getestete Stand.
 
 ## EXAKT EINE NEXT ACTION
 
-Die 19 Erweiterungs-/Ankerkandidaten gegen Regeln 1.5 final bewerten.
+Die final bewerteten 19 Entscheidungen als begründetes Master-/Target-Delta materialisieren und daraus genau einen neuen V1.14-Finalkandidaten bauen.
 
-Erst danach:
-- entweder begründetes Delta in V1.14 integrieren;
-- oder Kandidaten bewusst als Editorial/Finder/Out-of-scope schließen.
+Danach:
+- kompletter lokaler POSITIV + NEGATIV E2E;
+- nur bei vollständigem PASS Live-Dry-Run;
+- erst danach kontrollierter Live-Sync.
 
 Bis dahin KEIN Live-Sync.
 
