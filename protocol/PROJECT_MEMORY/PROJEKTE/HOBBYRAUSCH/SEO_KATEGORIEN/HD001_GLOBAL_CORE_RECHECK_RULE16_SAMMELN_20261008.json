@@ -1,0 +1,223 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN",
+  "date": "2026-10-08",
+  "status": "PASS__39_IDENTITIES__31_HOBBY_HUB__5_ORIENTATION__3_EDITORIAL",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "decisions": [
+    [
+      "Münzen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Banknoten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Notgeld",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Medaillen",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Tokens",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Numismatik",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Exlibris sammeln",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "historische Postkarten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Landkarten sammeln",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "historische Karten",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Ephemera sammeln",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Füllfederhalter sammeln",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "alte Computer",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Taschenrechner",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Radios",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kameras",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Schallplatten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kassetten",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "MiniDiscs",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Spielfiguren",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Würfel",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Spielkarten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Tarotdecks",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Modellautos",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "historische Reklame",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Filmplakate",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "B-Movie-Poster",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Blechschilder",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Emailschilder",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "historische Werkzeuge sammeln",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "alte Werkzeuge",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Hobel",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Schraubstöcke",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Messinstrumente",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "alte Schlüssel",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Schlösser",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Vorhängeschlösser",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Knöpfe",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Parfümflakons",
+      "HOBBY_HUB",
+      4
+    ]
+  ],
+  "validation": {
+    "identities": 39,
+    "hobby_hubs": 31,
+    "orientation_universe": 5,
+    "editorial_topic": 3,
+    "visible_content_categories": 138,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0,
+    "provider_calls": 0,
+    "wordpress_writes": 0
+  },
+  "full_detail": {
+    "local_artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json",
+    "sha256": "8360007f3ba5e8136635cfbe7059c3f5b85da725c6359136a63057ab6ed2d85d",
+    "note": "Contains all leaf labels and distinct subject-defined article intents."
+  }
+}
