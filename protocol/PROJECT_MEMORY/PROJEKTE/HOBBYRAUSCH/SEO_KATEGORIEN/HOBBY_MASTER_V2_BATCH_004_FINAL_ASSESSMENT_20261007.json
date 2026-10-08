@@ -24,10 +24,10 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
-      "ownership": "Owns off-road RC vehicles, suspension, tires, terrain setup and off-road driving. Crawling/trial and formal racing keep their specific intents."
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns off-road RC vehicles, suspension, tires, terrain setup and off-road driving. Crawling/trial and formal racing keep their specific intents. Corrected 2026-10-08 under rules 1.6: subject preflight has macro_review=true and no proposed leaf categories; therefore not a valid HOBBY_HUB."
     },
     {
       "hobby_id": "hobby:rc-trial",
@@ -180,16 +180,16 @@
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "technik",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 6,
-      "ownership": "Owns automation logic, sensors/actuators, protocols, controllers, energy and automation scenarios in the home. Device-hacking/DIY build emphasis may be owned by Smart-Home-Basteln."
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns automation logic, sensors/actuators, protocols, controllers, energy and automation scenarios in the home. Device-hacking/DIY build emphasis may be owned by Smart-Home-Basteln. Corrected 2026-10-08 under rules 1.6: subject preflight has macro_review=true and no proposed leaf categories; therefore not a valid HOBBY_HUB."
     }
   ],
   "final_summary": {
     "assessed": 16,
-    "hobby_hub": 12,
-    "orientation_universe": 2,
+    "hobby_hub": 10,
+    "orientation_universe": 4,
     "editorial_topic": 2,
     "article_only": 0,
     "finder_only": 0,
