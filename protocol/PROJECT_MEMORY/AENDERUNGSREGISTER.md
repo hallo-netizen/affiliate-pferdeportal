@@ -890,3 +890,39 @@ Der Plugin-Büro-Current ist jetzt nur noch Inventar-/Routing-Current und verwei
 
 KEINE Plugin-Codeänderung.
 KEINE Live-Strukturänderung.
+
+## HOBBYRAUSCH-HD001-20261008-T – Post-Rollback-Readback geschlossen, Materialkunst-Blocker entdeckt
+
+WAS:
+Der frische V1.13.1-Readback nach Abschluss des alten Rollbacks wurde vollständig gegen Zielvertrag 2.5 und Regeln 1.5 geprüft.
+
+LIVE:
+- PASS / valid=true;
+- 841 Identitäten;
+- 340 CORE / 501 Finder-Editorial;
+- 440 Logikknoten;
+- 431 physische Zielobjekte;
+- 356 CREATE / 75 ADOPT;
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 WordPress-Strukturwrites;
+- alter V1.12-Runner terminal ROLLED_BACK.
+
+KONZEPTAUDIT:
+Ebenen, Root-Welten, Hobbywelten-View, Parents, Säulentrennung, Tiefe, Slugs/IDs, Buchbinden-Leafs und Directory-Struktur PASS.
+
+NEUER BLOCKER:
+`core:gestalten:materialkunst` soll neu erzeugt werden, hat aber 0 Kindknoten, ist keine kanonische Hobby-Identität, besitzt 0 gebundene Entity-Placements und keine belegte Relation.
+
+Das widerspricht Zielvertrag 2.5:
+`Keine inhaltsleeren Ebenen.`
+
+ENTSCHEIDUNG:
+Kein Final-Sync.
+KISS: ausschließlich den unbenutzten Zielknoten `core:gestalten:materialkunst` aus dem V1.13.1-Zielprofil entfernen; keine Ersatzkategorie und keine Umhängung erfinden.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md`
+
+NEXT:
+Profilkorrektur → Hardtest → frischer Live-Dry-Run → JSON-Readback.
