@@ -1740,3 +1740,36 @@ Status: SOURCE_FIXED_AND_BOUND / CURRENT_GATES_PENDING.
 - Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672203_current_bound_release_gate_20261008.md`.
 
 Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange Source-Manifest `ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190` unverändert ist.
+
+
+## AFF-ERR-063 — 08.10.2026: Glossar-/Rassenbanner verschwunden; Rechnerartikel zeigte zweiten Inline-Banner
+
+**Nutzerauftrag:** Ausschließlich drei Dinge korrigieren, alles andere unberührt lassen:
+1. Glossar-Einzelbeiträge: Banner wieder anzeigen, Format beachten.
+2. Pferderassen-Einzelbeiträge: Banner wieder anzeigen, Format beachten.
+3. Artikel mit `[affiliate_rechner]`: kein zusätzlicher automatischer Banner mitten im Text; unterer Banner bleibt.
+
+**Root Cause Glossar/Pferderassen:** Die Einfügepfade waren an historische feste Designklassen `pftk-gsingle-v150490` / `pftk-gsingle-aside-v150490` sowie `pftk-breed-single-v150506` / `pftk-breed-facts-box-v150506` gebunden. Bei neuerer Designversionsklasse wurde deshalb korrektes Banner-Ranking nie bis zur DOM-Einfügung sichtbar.
+
+**KISS-Fix 6.72.204:** Nur die Versionszahl in diesen bestehenden Designklassen wird versionsneutral als numerischer Suffix erkannt. Position, Slotnamen, Ranking und Renderer bleiben unverändert. Die bestehenden Formatverträge bleiben exakt erhalten:
+- Glossar Desktop: Ratio 0,50–1,50, min. 310 px, max. 10 % Upscale.
+- Glossar Mobil: Ratio 2,50–12,00, min. 300 px, max. 10 % Upscale.
+- Pferderassen Desktop: Ratio 0,50–1,50, min. 250 px, max. 10 % Upscale.
+- Pferderassen Mobil: Ratio 2,50–12,00, min. 300 px, max. 10 % Upscale.
+
+**Rechner-KISS-Fix:** `[affiliate_rechner]` setzt ausschließlich die Unterdrückung für automatische Inline-/Mid-Banner. Der untere Bannerpfad und Produktboxen bleiben aktiv. Dasselbe gilt für Hybrid- und Legacy-Artikelpfad.
+
+**Performance/DB:** Keine neue Tabelle, keine neue Frontend-DB-Abfrage, kein Frontend-HTTP.
+
+**Harte Positiv-/Negativprüfung:**
+- lokale isolierte Simulation: 43/43 PASS;
+- frisches WordPress + MariaDB: Run `37762816137` SUCCESS, 52/52 PASS;
+- PHP-Syntax: PASS;
+- exakter realer Format-Matcher `output_row_matches_slot_rule()`: positive und negative Grenzfälle PASS;
+- Final-ZIP-Byteidentität: 28/28 PASS.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.204.zip`, SHA256 `aea45135ced0606c3aa63aa2b2489213d1a2b4b2b5c03cfdb494e3c163d6de92`, 820403 Bytes.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672204_threefix_hard_positive_negative_20261008.md`.
+
+**Status:** SOURCE_LOCAL_WORDPRESS_MARIADB_EXACT_ZIP_PASS / LIVE_INSTALL_READBACK_OPEN. Nicht erneut funktional ändern oder testen, solange dieser Source-Manifest-Stand unverändert bleibt.
