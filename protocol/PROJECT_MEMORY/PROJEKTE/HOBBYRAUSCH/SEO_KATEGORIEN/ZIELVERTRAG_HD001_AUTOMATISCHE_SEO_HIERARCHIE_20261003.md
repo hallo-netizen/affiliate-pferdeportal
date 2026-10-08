@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.5
-ERSETZT: Fassung 2.4 vom 2026-10-07; davor Fassung 2.3 / 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.6
+ERSETZT: Fassung 2.5 vom 2026-10-07; davor Fassung 2.4 / 2.3 / 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -58,7 +58,7 @@ Portfolioziel:
 - ungewöhnliche/Nischenhobbys = SEO-Longtail + Differenzierung.
 
 Großer interner Bestand ist erlaubt.
-Die sichtbare Navigation bleibt bewusst klein.
+Die globale Header-/Hauptnavigation bleibt bewusst klein. Die vollständigen aktiven Kindebenen innerhalb von Welt-, Zwischenbereich- und Hobbyseiten bleiben davon unberührt und müssen sichtbar sein.
 
 Das Ziel ist NICHT „mehr Kategorien“, sondern für jedes Thema die richtige Ebene und Rolle.
 
@@ -188,22 +188,47 @@ Der 841er Hobby-Master ist **Inventar**, nicht eine Liste von 841 zwingend anzul
 Verbindliche Produktionsregel:
 - bestehende V1.12-Zielbasis bleibt Ausgangspunkt: 95 Strukturknoten + 329 explizite CORE-Hobby-Zuordnungen;
 - nicht explizit freigegebene Master-Identitäten bleiben durch `retain_editorial` im Finder/Editorial erhalten;
-- ein CORE-Hobby darf Beiträge direkt enthalten;
-- 3–6 Unterkategorien sind **kein Startzwang** mehr;
-- Unterkategorien entstehen erst später, wenn echte Inhalte einen stabilen Cluster von ungefähr 5–12 eigenständigen Beiträgen bilden;
+- ein **HOBBY_HUB** besitzt vor regulärer Artikelproduktion eine sichtbare Content-Kategorieebene;
+- Zielbereich eines HOBBY_HUBs sind **3–6 tragfähige Content-Kategorien**; 7–9 = Review, ab etwa 10 = Macro-/Split-Review;
+- jede Content-Kategorie muss selbst den Leaf-Vertrag erfüllen: ideal **5–12 eigenständige Beitragsintentionen**; 0–3 = keine eigene Kategorie, 4 = Grenzfall, 13–14 = Review, ab etwa 15 = Split-Prüfung;
+- Beiträge eines HOBBY_HUBs werden regulär **nicht direkt unter dem Hobby** abgelegt, sondern genau einer sichtbaren Content-Kategorie zugeordnet;
+- direkte Beiträge ohne Content-Kategorie sind nur für ausdrücklich dafür vorgesehene Rollen/Einzelfälle zulässig, insbesondere ARTICLE_ONLY/EDITORIAL, nicht als Normalmodell eines HOBBY_HUBs;
 - DataForSEO wird nur noch bei echten Promotions-/Demotions-/Ownership-Grenzfällen eingesetzt;
 - die 16er-Batchschleife endet mit Batch 003 und ist kein Produktionsmodell;
 - Abschlussweg: globaler Baseline-/Alias-/Override-Audit → genau ein Zielbaum-Delta → ein kontrollierter WordPress-Sync → Frontend-Readback → Plugin kann entfernt werden.
 
-Damit bleibt die Qualitätsregel für unterste Kategorien erhalten, wird aber erst dann angewendet, wenn eine solche Unterkategorie tatsächlich benötigt wird.
+Damit gilt die Qualitätsregel für unterste Kategorien wieder als Bestandteil eines HOBBY_HUBs. Die frühere KISS-Ausnahme "CORE-Hobby darf regulär Beiträge direkt enthalten" ist für HOBBY_HUBs aufgehoben.
 
 ## Strukturprinzip
 
-Grundform des Hauptportals bleibt variabel:
-`SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`.
+Maximale Grundform des Hauptportals:
+`WELT-SEITE → ZWISCHENBEREICH-SEITE → HOBBY-SEITE → CONTENT-KATEGORIE → BEITRÄGE`.
 
-Nicht jeder Ast benötigt jede Ebene.
-Keine inhaltsleeren Ebenen.
+### Sichtbarkeitsregel – alle vorhandenen Ebenen sichtbar
+
+Jede **tatsächlich vorhandene kanonische Ebene** muss beim normalen Durchklicken sichtbar und erreichbar sein:
+- Weltseite zeigt ihre aktiven Zwischenbereiche vollständig;
+- Zwischenbereich zeigt seine aktiven Hobby-Knoten vollständig;
+- HOBBY_HUB zeigt seine aktiven Content-Kategorien vollständig;
+- Content-Kategorie zeigt die zugeordneten Beiträge.
+
+Es ist unzulässig, eine vorhandene Ebene im Frontend zu überspringen oder unsichtbar zu machen.
+
+Die globale Header-/Hauptnavigation darf weiterhin klein und selektiv bleiben. "Kleine sichtbare Navigation" bedeutet **nicht**, dass untergeordnete Ebenen auf Welt-/Zwischenbereich-/Hobbyseiten verborgen werden dürfen.
+
+### Breite und Ausgewogenheit
+
+Für direkte Zwischenbereiche unter einer Welt gibt es **keine starre künstliche Maximalzahl**.
+Bis zu etwa **10–11 fachlich klare Punkte** auf dieser Ebene sind ausdrücklich zulässig, wenn der reale Bestand sie trägt.
+
+Verbindlich:
+- nicht künstlich zusammenziehen, nur um die Navigation dünn zu halten;
+- nicht künstlich auffüllen, nur um Symmetrie zu erzeugen;
+- deutlich dünne oder deutlich überbreite Welten werden fachlich auf Ausgewogenheit geprüft;
+- echte fachliche Trennlinien haben Vorrang vor einer möglichst kleinen Anzahl von Menüpunkten;
+- leere Zwischenbereiche bleiben verboten.
+
+Nicht jeder Ast benötigt jede **maximale** Ebene; aber wenn ein Knoten als HOBBY_HUB geführt wird, gehört seine tragfähige Content-Kategorieebene zum sichtbaren Hub-Modell.
 Keine Kategorie unter Kategorie.
 
 Die V2-Rollenlogik liegt VOR dem Zielbaum:
