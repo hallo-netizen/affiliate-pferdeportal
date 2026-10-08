@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 437 TARGETS / LEGACY-HEADER-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 EXPANSION-ANKER UNBEWERTET / KEIN LIVE-SYNC
+STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 437 TARGETS / LEGACY-HEADER-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 EXPANSION-ANKER FINAL BEWERTET / MASTER+TARGET-DELTA AUSSTEHEND / KEIN LIVE-SYNC
 
 ## Plugin
 
@@ -449,16 +449,30 @@ SHA-256:
 Beleg:
 `SEO_KATEGORIEN/HD001_V1_14_0_STRUCTURE_NAV_MAGAZIN_FULL_LOCAL_HARDPASS_20261008.json`
 
+## 19 EXPANSION-ANKER – FACHLICH GESCHLOSSEN
+
+Beleg:
+`SEO_KATEGORIEN/HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`
+
+Ergebnis:
+- 19/19 IN_SCOPE;
+- 12 HOBBY_HUB;
+- 7 ORIENTATION_UNIVERSE;
+- 0 exakte/current-Alias-Kollisionen;
+- Monetarisierung bei allen 19 weiterhin UNKNOWN bis zu echtem Provider-Match;
+- kein Plugin-/Target-Write aus der Bewertung selbst.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_PENDING`
+`HD001_EXPANSION_ANCHORS_19_TARGET_DELTA_PENDING`
 
-Die 19 bekannten/großen Erweiterungskandidaten sind nur Research Queue und nicht final bewertet.
-Keine Blind-Promotion.
+Die 19 Entscheidungen sind fachlich abgeschlossen, aber noch nicht in Quellmaster/Zielprofil gebunden.
+V1.14.0 bleibt deshalb unverändert der letzte lokal vollständig geprüfte technische Kandidat.
 
 ## EXAKT EINE NEXT ACTION
 
-19 Expansion-Anker final gegen Regeln 1.5 bewerten.
+19er Master-/Target-Delta materialisieren und daraus genau einen neuen finalen V1.14-Kandidaten bauen.
+Danach vollständiger lokaler POS/NEG-E2E; erst bei PASS Live-Dry-Run.
 Kein Live-Sync vorher.
 
 ## Release-/Artefaktgrenze
@@ -477,9 +491,9 @@ Isolierte Artefaktpflicht:
 Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert; kein Ersatzartefakt erfinden.
 
 V1.14.0 ist NOCH KEIN Live-Kandidat:
-zuerst die 19 Expansion-/Ankerkandidaten final gegen Regeln 1.5 bewerten und ein begründetes Delta binden oder sie bewusst schließen.
+die 19 Expansion-/Ankerkandidaten sind fachlich final bewertet, aber ihr Master-/Target-Delta ist noch nicht gebunden.
 
 Erst danach:
-frisches Artefakt → kompletter lokaler POS/NEG-E2E → Live-Dry-Run → einmaliger Sync → Struktur-/Frontend-Readback.
+neuer finaler Kandidat → kompletter lokaler POS/NEG-E2E → Live-Dry-Run → einmaliger Sync → Struktur-/Frontend-Readback.
 
 Kein Live-PASS vorher behaupten.
