@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / V1.13.1 REALER FINAL-DRYRUN PASS / DELTA EXAKT 12 CREATE + 419 UPDATE + 1 ARCHIVE / 0 DATAFORSEO / 0 WRITES / ALTER V1.12-ROLLBACK WAR IM EXPORT NOCH PENDING / FRISCHER POST-ROLLBACK-READBACK OFFEN
+STATUS: REGELN 1.5 / V1.13.1 FRISCHER POST-ROLLBACK-DRYRUN PASS / 356 CREATE + 75 ADOPT / 0 DATAFORSEO / 0 WRITES / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / FINAL-SYNC DURCH MATERIALKUNST-KONZEPTBLOCKER GESPERRT
 
 ## Ziel
 
@@ -421,7 +421,7 @@ Dry-Run selbst:
 
 Die 12 CREATEs sind exakt die kalibrierten Promotionen.
 
-### Wichtiger realer Restzustand
+### ERSTER LIVE-EXPORT – HISTORISCHER RESTZUSTAND (GESCHLOSSEN)
 
 Der JSON-Readback zeigt gleichzeitig noch einen alten V1.12-Zielbaumlauf:
 
@@ -472,22 +472,57 @@ Der neue finale Sync wurde noch nicht gestartet.
 
 Der spätere Screenshot zeigt den automatischen Sync-Hinweis nicht mehr; ein frischer Export muss den terminalen Altzustand aber noch bestätigen.
 
+## POST-ROLLBACK-FRISCHCHECK – CURRENT
+
+Frischer Live-Export:
+`hobby-depot-final-target-readback-20261008-083850-utc.json`
+
+Bestätigt:
+- Dry-Run PASS / valid=true;
+- 841 / 340 CORE / 501 Finder-Editorial;
+- 440 Logikknoten;
+- 431 physische Zielobjekte;
+- 356 CREATE;
+- 75 ADOPT;
+- 0 UPDATE;
+- 0 ARCHIVE;
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 WordPress-Strukturwrites;
+- alter V1.12-Runner terminal `ROLLED_BACK`;
+- `rollback_actions = []`;
+- noch kein aktiver finaler Snapshot;
+- noch kein neuer Final-Sync.
+
+Vollständiger Strukturabgleich gegen Zielvertrag 2.5 / Regeln 1.5:
+PASS für Ebenen, acht Root-Welten, Hobbywelten-View, Parent-Konsistenz, Säulentrennung, Tiefe, 4 Buchbinden-Content-Kategorien, 8 Directory-Kategorien sowie eindeutige Node-IDs/Slugs.
+
+Neuer Konzeptaudit:
+`HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_POST_ROLLBACK_FRESH_READBACK_PENDING`
+`HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
+
+Exakt:
+- `core:gestalten:materialkunst` steht im frischen Zielplan als `CREATE`;
+- 0 Kindknoten;
+- keine kanonische Hobby-Identität;
+- 0 gebundene Entity-Placements;
+- keine belegte Relation.
+
+Damit wäre `Materialkunst` ein neu angelegter strukturell leerer Zwischenknoten und widerspricht Zielvertrag 2.5:
+**Keine inhaltsleeren Ebenen.**
 
 ## EXAKT EINE NEXT ACTION
 
-Auf derselben Seite erneut:
-`Finalen Delta-Dry-Run ausführen`
+Finalen Sync NICHT starten.
 
-danach:
-`Finalen Readback als JSON herunterladen`.
+KISS:
+`core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
 
-Noch NICHT den Sync bestätigen/starten.
+Keine Ersatzkategorie erfinden.
+Keine Hobbys umhängen.
+Keine DataForSEO-Recherche.
 
-Wenn der frische JSON-Readback:
-- Dry-Run weiter PASS;
-- alter Sync-State terminal (ROLLED_BACK oder kein laufender Alt-Sync);
-- 0 neue Writes;
-zeigt, dann folgt exakt ein finaler Sync.
+Danach Zielprofil erneut hart prüfen → frischer finaler Live-Dry-Run → JSON-Readback.
