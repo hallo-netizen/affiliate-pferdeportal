@@ -15,6 +15,7 @@ if (!defined('ABSPATH')) {
  */
 trait PPAR_Digistore24_Trait {
     private function digistore24_register_hooks() {
+        $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
         add_filter('ppar_affiliate_provider_registry', array($this, 'digistore24_provider_registry'), 10, 2);
         add_filter('ppar_affiliate_provider_access_snapshot', array($this, 'digistore24_provider_access_snapshot'), 10, 4);
         add_filter('ppar_affiliate_provider_access_save', array($this, 'digistore24_provider_access_save'), 10, 4);
@@ -23,10 +24,12 @@ trait PPAR_Digistore24_Trait {
         add_filter('ppar_affiliate_automation_dispatch', array($this, 'digistore24_automation_dispatch'), 10, 5);
         add_action('ppar_affiliate_render_provider_access_card_digistore24', array($this, 'digistore24_render_access_card'), 10, 3);
         add_action('ppar_affiliate_render_provider_specialist_digistore24', array($this, 'digistore24_render_specialist'), 10, 3);
-        add_action('admin_post_ppar_digistore24_marketplace_refresh', array($this, 'digistore24_handle_marketplace_refresh'));
-        add_action('admin_post_ppar_digistore24_partnership', array($this, 'digistore24_handle_partnership'));
-        add_action('admin_post_ppar_digistore24_import_banners', array($this, 'digistore24_handle_import_banners'));
-        if (!((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) { add_action('shutdown', array($this, 'digistore24_final_publication_guard'), 999); }
+        if (!$is_ajax_request) {
+            add_action('admin_post_ppar_digistore24_marketplace_refresh', array($this, 'digistore24_handle_marketplace_refresh'));
+            add_action('admin_post_ppar_digistore24_partnership', array($this, 'digistore24_handle_partnership'));
+            add_action('admin_post_ppar_digistore24_import_banners', array($this, 'digistore24_handle_import_banners'));
+            add_action('shutdown', array($this, 'digistore24_final_publication_guard'), 999);
+        }
     }
 
     public function digistore24_provider_registry($registry, $contract_version = '') {
