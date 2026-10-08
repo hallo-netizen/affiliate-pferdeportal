@@ -1,0 +1,224 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "source_result": "hobby-master-v2-assessment-20261007-193716-utc.json",
+  "source_plugin_version": "1.12.6",
+  "status": "BATCH_001_FACHLICH_ASSESSED__NO_TARGET_TREE_WRITE",
+  "invariants": {
+    "stable_identity": true,
+    "dataforseo_role": "SEO_EVIDENCE_AND_DEDUPE_ONLY",
+    "new_dataforseo_calls": 0,
+    "wordpress_structure_writes": 0,
+    "target_tree_write_allowed": false
+  },
+  "decisions": [
+    {
+      "hobby_id": "hobby:airbrush",
+      "canonical_name": "Airbrush",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership": "Owns general Airbrush practice, equipment, colors, technique and maintenance. Airbrush-Modellbau remains a separate identity but is an application/editorial topic; model-building-specific intents are not duplicated in the general hub."
+    },
+    {
+      "hobby_id": "hobby:bean-to-bar-schokolade",
+      "canonical_name": "Bean-to-Bar-Schokolade",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 6,
+      "ownership": "Owns the complete bean-to-bar process from raw cocoa through roasting, melanging, recipe, tempering and quality. Pralinenherstellung stays separate. 'Schokolade temperieren' may remain a stable master identity but is not a competing standalone hub owner for generic tempering within bean-to-bar."
+    },
+    {
+      "hobby_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "role": "ORIENTATION_UNIVERSE",
+      "ownership": "Umbrella/orientation owner for generic 3D-printing entry and navigation. Resin-3D-Druck remains separate; CAD and 3D-Scanning remain separate identities. Do not absorb their specialist intents."
+    },
+    {
+      "hobby_id": "hobby:amateurastronomie",
+      "canonical_name": "Amateurastronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "role": "ORIENTATION_UNIVERSE",
+      "ownership": "Umbrella/orientation owner for amateur astronomy. Teleskop-Astronomie, Astrofotografie, Sonnenbeobachtung, Radioastronomie, Meteorbeobachtung and other specialist identities remain separate owners."
+    },
+    {
+      "hobby_id": "hobby:aeroponik",
+      "canonical_name": "Aeroponik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership": "Owns aeroponic system design, misting/nozzles, aeroponic nutrient/water operation and aeroponic plant operation. Hydroponik, Hydrokultur, Semi-Hydro and Indoor-Growing remain separate identities; generic hydroponic intents are not duplicated."
+    },
+    {
+      "hobby_id": "hobby:ameisenhaltung",
+      "canonical_name": "Ameisenhaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "tiere",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 6,
+      "ownership": "Owns keeping ants as a recurring hobby: species/entry, formicarium operation, feeding, winter rest, colony care and escape/problem handling. Formicarienbau and Ameisenfarmen remain separate master identities but do not compete for the generic husbandry owner."
+    },
+    {
+      "hobby_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "bewegen",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership": "Owns 3D-specific parcours, targets/kill zones, field-distance practice, 3D equipment application and 3D rules/scoring. Generic Bogenschießen and traditionelles Bogenschießen remain separate identities and own generic bow/technique intents."
+    },
+    {
+      "hobby_id": "hobby:alte-brettspiele",
+      "canonical_name": "alte Brettspiele",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Spiele sammeln / Brettspiel-Sammlungen",
+        "identity_merged": false
+      },
+      "ownership": "Owns old-board-game collecting, identification, completeness, value, storage and restoration as an editorial collection topic."
+    },
+    {
+      "hobby_id": "hobby:wabikusa",
+      "canonical_name": "Wabikusa",
+      "aliases": [
+        "Wabi-Kusa"
+      ],
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership": "Owns Wabi-Kusa-specific setup, substrate/vessel, emersed plant composition and Wabi-Kusa care. Aquascaping and Nano-Aquascaping remain separate identities; generic aquarium-plant intents are not duplicated."
+    },
+    {
+      "hobby_id": "hobby:buchbinden",
+      "canonical_name": "Buchbinden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership": "Confirmed existing hub candidate; four ideal leaves."
+    },
+    {
+      "hobby_id": "hobby:filzen",
+      "canonical_name": "Filzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "role": "ORIENTATION_UNIVERSE",
+      "ownership": "Generic Filzen is an orientation/summary owner. Nadelfilzen and Nassfilzen remain separate concrete hobby identities; generic material/tool guidance can be shared without duplicate ownership."
+    },
+    {
+      "hobby_id": "hobby:treibholz-sammeln",
+      "canonical_name": "Treibholz sammeln",
+      "aliases": [
+        "Treibholz"
+      ],
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Naturfunde / Strandfunde",
+        "identity_merged": false
+      },
+      "ownership": "Owns Treibholz-specific finding, cleaning, drying, storing, selection and collecting rules; presentation may be grouped with other Naturfunde identities."
+    },
+    {
+      "hobby_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Modellieren mit lufttrocknenden Massen",
+        "identity_merged": false,
+        "related": [
+          "Polymer Clay",
+          "Cold Porcelain"
+        ]
+      },
+      "ownership": "Material-specific modelling topic; identity retained, not a separate hub."
+    },
+    {
+      "hobby_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Airbrush-Anwendungen / Modellbau-Lackierung",
+        "identity_merged": false,
+        "primary_owner": "Airbrush"
+      },
+      "ownership": "Application topic at the intersection of Airbrush and Modellbau. Publish under one primary owner; do not create a duplicate hub."
+    },
+    {
+      "hobby_id": "hobby:alabasterschnitzen",
+      "canonical_name": "Alabasterschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Steinschnitzen",
+        "identity_merged": false,
+        "related": [
+          "Specksteinschnitzen",
+          "Schnitzen"
+        ]
+      },
+      "ownership": "Material-specific carving topic; identity retained, not a separate hub."
+    },
+    {
+      "hobby_id": "hobby:algenkultur",
+      "canonical_name": "Algenkultur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "role": "EDITORIAL_TOPIC",
+      "aggregation": {
+        "family": "Mikrokulturen / aquatische Kulturen",
+        "identity_merged": false,
+        "related": [
+          "Planktonbeobachtung",
+          "Gewässermikroskopie"
+        ]
+      },
+      "ownership": "Owns active microalgae cultivation practice. Microscopy/observation intents remain with Forschen identities."
+    }
+  ],
+  "summary": {
+    "hobby_hubs": 6,
+    "orientation_universes": 3,
+    "editorial_topics": 7,
+    "article_only": 0,
+    "finder_only": 0,
+    "out_of_scope": 0,
+    "batch_candidates": 16,
+    "unresolved_roles": 0,
+    "target_tree_write_allowed": false
+  },
+  "next": "Propagate these assessed roles into the master assessment layer, then start Batch 002. Do not sync WordPress yet."
+}
