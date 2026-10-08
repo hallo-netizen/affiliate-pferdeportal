@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-07
-STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 FACHLICH ABGESCHLOSSEN / 16 VON 16 ROLLEN GEKLÄRT / BATCH 002 VORBEREITUNG NÄCHSTER SCHRITT / KEIN ZIELBAUM-WRITE
+STAND: 2026-10-08
+STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 FINAL 16 VON 16 / BATCH 002 DETERMINISTISCH VORBEREITET / 304 KEYWORDS / EXAKT 1 DATAFORSEO-OVERVIEW OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -84,16 +84,14 @@ Research-Queue-Intake:
 Vorbereitetes Master-Intake-Delta:
 `HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
 
-Batch 001 – aktueller V1.12.5-Replay:
-- 16 reproduzierbar ausgewählte Master-Identitäten;
-- 34 ideale Leafs;
-- Buchbinden = HOBBY_HUB_CANDIDATE mit 4 idealen Leafs und 5 / 6 / 6 / 6 fachlich eigenständigen Artikelintents;
-- Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen und Wabikusa = kapazitätsseitig typischer Hubbereich, aber Scope/Identität noch offen;
-- 3D-Druck, Amateurastronomie und Filzen = MACRO_REVIEW;
-- Treibholz sammeln = EDITORIAL_TOPIC_CANDIDATE;
-- fünf kleine/spezielle Themen = AGGREGATION_REVIEW;
-- keine automatische Promotion aus DIRECT/ASSISTED;
-- 0 Zielbaum-Writes zulässig.
+Batch 001 – autoritativ final:
+- Quelle: `HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`;
+- 16/16 fachlich geschlossen;
+- 7 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 6 EDITORIAL_TOPIC;
+- 0 unresolved;
+- 0 Zielbaum-Writes.
 
 ## V2-Korrektur: jede unterste Kategorie einzeln prüfen
 
@@ -259,40 +257,54 @@ Beleg:
 
 ## BATCH 001 – FACHLICHER ABSCHLUSS
 
-Autoritativer Abschluss:
-`HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG_20261008.json`
+Autoritative einzige Abschlussdatei:
+`HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`
 
 Ergebnis:
-- 6 HOBBY_HUB;
+- 7 HOBBY_HUB;
 - 3 ORIENTATION_UNIVERSE;
-- 7 EDITORIAL_TOPIC;
+- 6 EDITORIAL_TOPIC;
 - 0 ARTICLE_ONLY;
 - 0 FINDER_ONLY;
 - 0 OUT_OF_SCOPE;
 - 0 ungeklärte Rollen;
 - 0 Zielbaum-Writes.
 
-HOBBY_HUB:
-Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa.
+Die spätere Datei `HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG_20261008.json` ist nur historische Arbeitskopie und verweist jetzt auf diese autoritative Abschlussdatei.
 
-ORIENTATION_UNIVERSE:
-3D-Druck, Amateurastronomie, Filzen.
+## BATCH 002 – VORBEREITET
 
-EDITORIAL_TOPIC:
-alte Brettspiele, Treibholz sammeln, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur.
+Deterministische Auswahlregel:
+erste 16 noch nicht final bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
 
-Buchbinden bleibt zusätzlich der bereits bestätigte HOBBY_HUB; damit enthält Batch 001 insgesamt 6 Hub-Rollen einschließlich Buchbinden.
+Auswahl:
+Amateurfunk, CB-Funk, Software Defined Radio, Satellitenfunk, Satellitenempfang, Wettersonden-Tracking, Funkpeilung, Morsefunk, Elektronikbasteln, Mikrocontroller-Projekte, Arduino, Raspberry-Pi-Projekte, Robotik, Heimrobotik, Roboterbau, BattleBots-Modellbau.
+
+Vorbereitet:
+- 16 Kandidaten;
+- 51 vorgeschlagene Leafs;
+- 304 fachlich unterschiedliche Artikelintents;
+- 304 deduplizierte DataForSEO-Keywords;
+- exakt 1 geplanter `keyword_overview`-Aufruf;
+- automatische Depth-Recherche = AUS;
+- Strukturwrites = 0.
+
+Maschinenlesbarer Plan:
+`HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
+
+Plugin-V1.12.6-Preflight lokal:
+PASS / 16 / 51 / 304 / 304 / 1.
 
 ## ERSTER OFFENER BLOCKER
 
-`HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_PENDING`
-
-Kein technischer Plugin-Blocker.
-Kein offener Batch-001-Blocker.
+`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Batch 002 aus dem 841er Master fachlich vorprüfen und mit derselben Regeln-1.4-Logik vorbereiten.
+Den vorbereiteten Batch-002-Input in HD-001 V1.12.6 hochladen, kostenlose Vorprüfung ausführen und nur wenn exakt
+**16 Hobbys / 51 Leafs / 304 Einzelbeiträge / 304 Keywords / 1 bezahlter Aufruf**
+angezeigt werden, genau diesen EINEN read-only DataForSEO-Overview starten.
 
-Noch kein Zielbaum-Delta.
-Noch kein Kategorien-Sync.
+Keine Tiefenprüfung.
+Kein Zielbaum-Delta.
+Kein Kategorien-Sync.
