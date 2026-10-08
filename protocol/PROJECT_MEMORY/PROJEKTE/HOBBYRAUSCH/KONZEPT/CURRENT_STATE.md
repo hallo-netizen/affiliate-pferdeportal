@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.4 KISS / BATCH 001 FINAL 7 HUB 3 ORIENTATION 6 EDITORIAL / BATCH 002 VORBEREITET / 1 DATAFORSEO-OVERVIEW OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.4 KISS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 VORBEREITET / 1 DATAFORSEO-OVERVIEW OFFEN
 
 ## Rolle
 
@@ -237,13 +237,49 @@ Fachvorbereitung:
 Plan:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
 
+## Batch 002 – fachlicher Abschluss
+
+Autoritative Datei:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
+
+Ergebnis:
+- 11 HOBBY_HUB;
+- 4 ORIENTATION_UNIVERSE;
+- 1 EDITORIAL_TOPIC;
+- 0 unresolved.
+
+Ownership-Grundlinien:
+- Amateurfunk = Orientierung; Satellitenfunk, Morsefunk und Funkpeilung besitzen ihre Spezialintents;
+- CB-Funk bleibt separat;
+- Software Defined Radio besitzt generische SDR-Hardware/Software/Decoding-Intents;
+- Elektronikbasteln und Mikrocontroller-Projekte sind Orientierungswelten;
+- Arduino und Raspberry-Pi-Projekte sind eigene Hubs;
+- Robotik = Orientierung; Roboterbau, Heimrobotik und BattleBots-Modellbau besitzen ihre spezifischen Praxisintents.
+
+Kumuliert:
+32/841 final bewertet.
+
+## Batch 003 – vorbereitet
+
+Nächste 16 liegen im Drohnen-/RC-Block.
+
+Vorbereitung:
+- 59 Leafs;
+- 325 eigenständige Artikelintents;
+- 325 SEO-Seeds;
+- ein einziger Overview-Abgleich;
+- keine automatische Tiefenrecherche.
+
+Plan:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
+
 ## Erster offener Blocker
 
-`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
+`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Batch 002 mit genau einem read-only DataForSEO-Overview abgleichen.
+Batch 003 mit genau einem read-only DataForSEO-Overview abgleichen.
 Danach Rollen/Ownership fachlich finalisieren.
 
 Noch keine Strukturänderung.
