@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 BEREINIGT / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ROLLENENTSCHIEDEN / 75 HISTORISCHE HOBBY_HUBS MIT 355 LEAFS NACHGEZOGEN / 198 CORE-RECHECK PENDING / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 198 OFFEN / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1058,20 +1058,23 @@ Damit ist die frühere 299er-Blackbox reduziert:
 - **161 entschieden**;
 - **198 aktuelle CORE-Identitäten noch offen**.
 
+## CORE-RECHECK – AKTUELL
+
+- feste Prüfmenge: 359 aktuelle CORE-Identitäten;
+- 161 nach Regel 1.6 entschieden;
+- 75 historische aktuelle HOBBY_HUBs nachgeprüft;
+- daraus 355 sichtbare Content-Kategorien;
+- alle geprüften Leafs im Bereich 5–12;
+- verbleibend: 198 aktuelle CORE-Identitäten.
+
 ## ERSTER OFFENER BLOCKER
 
 `HD001_GLOBAL_CORE_ROLE_RECHECK_198_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die exakt verbleibenden 198 aktuellen CORE-Identitäten global nach Regeln 1.6 prüfen:
-- HOBBY_HUB nur mit 3–6 tragfähigen Leafs;
-- ORIENTATION_UNIVERSE bei Macro-Themen;
-- Demotion/Alias nur bei belegtem Rollen-/Identitätsgrund;
-- keine neue Batchschleife;
-- keine Struktur aus DataForSEO erfinden.
-
-Danach vollständigen Zielbaum mit allen sichtbaren Ebenen einfrieren.
+Die verbleibenden 198 aktuellen CORE-Identitäten einmal global nach Regel 1.6 abschließen.
+Danach den vollständigen sichtbaren Zielbaum einfrieren.
 
 Bis dahin:
 - kein Plugin-Fix;
