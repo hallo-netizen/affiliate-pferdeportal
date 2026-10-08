@@ -1,0 +1,268 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN",
+  "date": "2026-10-08",
+  "status": "PASS__48_IDENTITIES__42_HOBBY_HUB__5_ORIENTATION__1_EDITORIAL",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "decisions": [
+    [
+      "Bushcraft",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Bikepacking",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Packrafting",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Wintercamping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Hammock Camping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Tarp Camping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Mikroabenteuer",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Orientierungslauf",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Geocaching",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Einradfahren",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Mountain Unicycling",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Slacklining",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Highlining",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Balance Board",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Longboard Dancing",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Pumptrack",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Mountainboarding",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Bogenschießen",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "traditionelles Bogenschießen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Discgolf",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Boomerangwerfen",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Blasrohrsport",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Freediving",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Stand-up-Paddling-Touren",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Kanutouren",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Baumklettern",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Seiltechnik",
+      "EDITORIAL_TOPIC",
+      0
+    ],
+    [
+      "Sportdrachen",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Trick-Kiting",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Drachenbau",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Landkiten",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Powerkiting",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Kite Buggy",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Ultimate Frisbee",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Jugger",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "HEMA",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "historisches Fechten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Footgolf",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Speedminton",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Teqball",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Yo-Yo-Tricks",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kendama",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Diabolo",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Poi",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Contact Juggling",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Cardistry",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Speedcubing",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Pen Spinning",
+      "HOBBY_HUB",
+      4
+    ]
+  ],
+  "validation": {
+    "identities": 48,
+    "hobby_hubs": 42,
+    "orientation_universe": 5,
+    "editorial_topic": 1,
+    "visible_content_categories": 188,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0,
+    "provider_calls": 0,
+    "wordpress_writes": 0
+  },
+  "full_detail": {
+    "local_artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json",
+    "sha256": "c0946fe39b4c15cee28d91afb9eeeee80581019641b533572635f181845d86a1",
+    "note": "Contains all leaf labels and distinct subject-defined article intents."
+  }
+}
