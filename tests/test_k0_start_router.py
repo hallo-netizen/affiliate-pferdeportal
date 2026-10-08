@@ -100,6 +100,29 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertTrue(h["final_batch_order_must_match_input"])
         self.assertTrue(h["content_sources_must_be_current_run_only"])
 
+    def test_current_restores_authoring_rule_source_bindings(self):
+        cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
+        chain=cur["full_rule_chain"]
+        self.assertEqual(chain["rule_sources"], [
+            "RULE_CATALOG.json",
+            "RULE_VALUES.json",
+            "FIELD_POLICY.json",
+            "TEXTMACHINE_SCOPE_REFERENCE.json",
+        ])
+        self.assertEqual(chain["article_hard_rule_count"], 85)
+        self.assertEqual(chain["pre_lt68_hard_rule_count"], 84)
+        self.assertEqual(chain["final_hard_rule_count"], 85)
+        self.assertTrue(chain["complete_rules_bound_before_writer"])
+        self.assertTrue(chain["writer_job_contains_complete_rule_bundle"])
+        self.assertTrue(chain["writer_job_contains_complete_article_rule_context"])
+        self.assertTrue(chain["final_wordpress_export_requires_full_rule_pass"])
+        self.assertEqual(
+            cur["link_distribution"]["rule"],
+            "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in two distinct main-text blocks; further_information only in further_information; intro/conclusion/table are not main-text blocks"
+        )
+        self.assertEqual(cur["wordpress_export"]["contract"], "SYSTEM4_WORDPRESS_HANDOFF_V1")
+        self.assertFalse(cur["wordpress_export"]["publish_allowed"])
+
     def test_active_control_files_have_no_run_or_test_history(self):
         corpus="\n".join([
             Path("K0_START_HERE.md").read_text(encoding="utf-8"),
