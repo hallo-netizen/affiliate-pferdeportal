@@ -29,6 +29,18 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("engine/wordpress_batch_export.py", text)
         self.assertIn("ursprünglichen Upload-Reihenfolge", text)
 
+    def test_intake_to_authoring_context_is_mandatory_no_stop_transition(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("Intake → Authoring Context — NO-STOP-HARDLOCK", text)
+        self.assertIn("niemals** ein Abschluss, Statuspunkt, Wartepunkt oder Blocker", text)
+        self.assertIn("ohne Rückgabe an den Nutzer", text)
+        self.assertIn("erwartete Zwischenzustand", text)
+        self.assertIn("muss den fehlenden Kontext selbst erzeugen", text)
+        self.assertIn("Recherche- und Regelkontext fehlt", text)
+        self.assertIn("nächster Schritt: Kontext erstellen", text)
+        self.assertIn("Beenden des Chats nach dem Intake-Commit", text)
+        self.assertIn("tatsächlich versucht wurde und gescheitert ist", text)
+
     def test_start_has_no_total_quantity_cap_logic(self):
         corpus="\n".join([
             Path("K0_START_HERE.md").read_text(encoding="utf-8"),

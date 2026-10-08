@@ -62,9 +62,25 @@ Für jeden Eintrag gilt ohne sichtbaren Zwischenstopp:
 5. den Einzelrun unverändert durch Writer, vollständige Regeln, LanguageTool 6.8, finale Regeln und WordPress-Handoff bis zum verifizierten WordPress-Single fortsetzen;
 6. danach mit dem nächsten Eintrag des aktuellen Uploads fortfahren, ohne Rückfrage und ohne Zwischenmeldung.
 
-**Verboten:** einen Mehrfach-Upload direkt als Mehrfach-Writer-Run an `k0_writer_station` oder `k0-authoring-context.yml` zu übergeben.
+### Intake → Authoring Context — NO-STOP-HARDLOCK
 
-Das Fehlen von `AUTHORING_CONTEXT.json` direkt nach dem Anlegen von `WORDPRESS_INTAKE.json` ist **kein Blocker**. Seine Erstellung ist der unmittelbar nächste verpflichtende Startschritt.
+Ein erfolgreich geschriebener `WORDPRESS_INTAKE.json` ist **niemals** ein Abschluss, Statuspunkt, Wartepunkt oder Blocker.
+
+Nach erfolgreichem Intake-Schreibvorgang muss im **selben laufenden K0-Auftrag und ohne Rückgabe an den Nutzer** unmittelbar weitergearbeitet werden:
+
+`WORDPRESS_INTAKE.json -> frische Recherche -> vollständiger Regel- und Recherchekontext -> AUTHORING_CONTEXT.json -> vorhandener Dateistart`
+
+Das Fehlen von `AUTHORING_CONTEXT.json` nach dem Intake ist der **erwartete Zwischenzustand**, kein Problem. Der K0-Start muss den fehlenden Kontext selbst erzeugen.
+
+Verboten sind an dieser Stelle insbesondere:
+- „Recherche- und Regelkontext fehlt“ als Abbruchgrund;
+- „nächster Schritt: Kontext erstellen“ als sichtbare Antwort;
+- Rückfrage oder Warten auf `weiter`;
+- Beenden des Chats nach dem Intake-Commit.
+
+Ein terminaler Blocker an dieser Stelle ist erst zulässig, wenn die **konkrete aktuelle Recherche oder das konkrete Schreiben von `AUTHORING_CONTEXT.json` tatsächlich versucht wurde und gescheitert ist**.
+
+**Verboten:** einen Mehrfach-Upload direkt als Mehrfach-Writer-Run an `k0_writer_station` oder `k0-authoring-context.yml` zu übergeben.
 
 Wenn alle Einträge verifiziert sind, werden die vorhandenen WordPress-Singles mit `engine/wordpress_batch_export.py` in der **ursprünglichen Upload-Reihenfolge** zu genau einer WordPress-Batchdatei zusammengeführt.
 
