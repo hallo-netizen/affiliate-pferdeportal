@@ -3802,27 +3802,34 @@ trait PPAR_Automation_Suite_Trait {
 
                 $mapped=$this->output_assign_banner_targets_from_destination_once($row);
                 $mapped_n=absint(is_array($mapped)?($mapped['mapped']??0):0);
-                if($mapped_n<=0){
+                if($mapped_n>0){
+                    $mapped_count+=$mapped_n;
+                    $targets=is_array($mapped['targets']??null)?$mapped['targets']:array();
+                    $row['topic_targets']=wp_json_encode($targets,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                    $row['topic_score']=100;
+                    $row['topic_status']='auto_verified';
+                    $row['classified_at']=time();
+                } else {
+                    // Kein spezifisches Thema: nicht vorschnell deaktivieren.
+                    // Der bestehende Planer prueft jetzt den vertraglichen
+                    // technisch/formatlich gueltigen allgemeinen Fallback.
                     $no_map++;
-                    if(method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
-                        $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
-                        if(preg_match('/^[a-f0-9]{64}$/',$identity)){
-                            $this->creative_library_deactivate_automatic_output_campaigns($identity);
-                        }
-                    }
-                    continue;
+                    $row['topic_targets']='[]';
+                    $row['topic_score']=0;
+                    $row['topic_status']='no_match';
                 }
 
-                $mapped_count+=$mapped_n;
-                $targets=is_array($mapped['targets']??null)?$mapped['targets']:array();
-                $row['topic_targets']=wp_json_encode($targets,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-                $row['topic_score']=100;
-                $row['topic_status']='auto_verified';
-                $row['classified_at']=time();
-
                 $plan=$this->output_plan_creative($row,true);
-                if(is_array($plan) && (absint($plan['active']??0)>0 || absint($plan['drafts']??0)>0)){
+                $planned_ok=is_array($plan) && (absint($plan['active']??0)>0 || absint($plan['drafts']??0)>0);
+                if($planned_ok){
                     $replanned++;
+                } elseif($mapped_n<=0 && method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
+                    // Weder spezifische Zuordnung noch zulaessiger General-Pool:
+                    // nur dann alte automatische Ausgabe entfernen. FIXED bleibt.
+                    $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
+                    if(preg_match('/^[a-f0-9]{64}$/',$identity)){
+                        $this->creative_library_deactivate_automatic_output_campaigns($identity);
+                    }
                 }
             }
 
