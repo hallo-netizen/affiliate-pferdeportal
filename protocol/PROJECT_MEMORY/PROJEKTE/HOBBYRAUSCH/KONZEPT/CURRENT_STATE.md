@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.4 KISS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 VORBEREITET / 1 DATAFORSEO-OVERVIEW OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.5 PRAKTISCH / 841ER MASTER = INVENTAR / 95-KNOTEN-BASELINE + 340 CORE-IDENTITÄTEN / 501 FINDER-EDITORIAL / 16ER-BATCHSCHLEIFE BEENDET / FINALER DELTA-DRYRUN OFFEN
 
 ## Rolle
 
@@ -237,68 +237,42 @@ Fachvorbereitung:
 Plan:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
 
-## Batch 002 – fachlicher Abschluss
 
-Autoritative Datei:
-`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
+## Praktische Produktionsentscheidung
 
-Ergebnis:
-- 11 HOBBY_HUB;
-- 4 ORIENTATION_UNIVERSE;
-- 1 EDITORIAL_TOPIC;
-- 0 unresolved.
+Der Fehler des bisherigen Arbeitswegs war, den 841er Master wie 841 einzeln zu beweisende Kategorien zu behandeln.
 
-Ownership-Grundlinien:
-- Amateurfunk = Orientierung; Satellitenfunk, Morsefunk und Funkpeilung besitzen ihre Spezialintents;
-- CB-Funk bleibt separat;
-- Software Defined Radio besitzt generische SDR-Hardware/Software/Decoding-Intents;
-- Elektronikbasteln und Mikrocontroller-Projekte sind Orientierungswelten;
-- Arduino und Raspberry-Pi-Projekte sind eigene Hubs;
-- Robotik = Orientierung; Roboterbau, Heimrobotik und BattleBots-Modellbau besitzen ihre spezifischen Praxisintents.
+Das wird beendet.
 
-Kumuliert:
-32/841 final bewertet.
+Verbindlich:
+- der Master bleibt vollständiges Hobby-Inventar;
+- CORE bleibt bewusst kleiner;
+- bestehende V1.12-Struktur ist die Baseline;
+- CORE-Hobbyseiten dürfen Artikel direkt aufnehmen;
+- Leafs/Subkategorien werden nicht vorab erzwungen;
+- eine Leaf-Kategorie entsteht erst bei realem Inhalt, wenn ungefähr 5–12 eigenständige Beiträge einen stabilen Cluster bilden;
+- Nischen ohne CORE-Freigabe bleiben Finder/Editorial und gehen nicht verloren.
 
-## Batch 003 – vorbereitet
+Batch 001–003 dienten nur als Kalibrierung.
 
-Nächste 16 liegen im Drohnen-/RC-Block.
+Kalibriertes Delta:
+- 12 zusätzliche CORE-Promotionen;
+- 1 Demotion aus CORE;
+- resultierend 340 CORE-Identitäten;
+- 501 Editorial/Finder-Identitäten.
 
-Vorbereitung:
-- 59 Leafs;
-- 325 eigenständige Artikelintents;
-- 325 SEO-Seeds;
-- ein einziger Overview-Abgleich;
-- keine automatische Tiefenrecherche.
-
-Plan:
-`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
-
-## BATCH 004 – VORBEREITET IM VORAUS
-
-Nur Vorarbeit; **noch nicht ausführen**, solange Batch 003 nicht final ist.
-
-Nächste 16:
-RC-Drift, RC-Offroad, RC-Trial, RC-Rennsport, Modell-Dampfmaschinen, Stirlingmotoren, Modellmotorenbau, Modellmaschinenbau, Mini-CNC, CNC-Fräsen, Lasercutting, Lasergravieren, Resin-3D-Druck, 3D-Scanning, CAD als Hobby, Heimautomatisierung.
-
-Vorbereitet:
-- 16 Kandidaten;
-- 54 Leafs;
-- 310 fachlich unterschiedliche Artikelintents;
-- 310 SEO-Seeds;
-- exakt 1 späterer Overview;
-- keine Depth-Recherche;
-- 0 Strukturwrites.
-
-Plan:
-`HOBBY_MASTER_V2_BATCH_004_PREPARED_20261008.json`
+Globaler Strukturcheck:
+PASS ohne Alias-/Parent-/Slug-/Intent-Konflikte.
 
 ## Erster offener Blocker
 
-`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
+`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Batch 003 mit genau einem read-only DataForSEO-Overview abgleichen.
-Danach Rollen/Ownership fachlich finalisieren.
+Finales Zielprofil gegen den realen WordPress-Bestand trocken vergleichen.
 
-Noch keine Strukturänderung.
+Danach nur noch:
+ein Sync → Frontend prüfen → Plugin entfernen.
+
+Keine weitere DataForSEO-Batchserie.
