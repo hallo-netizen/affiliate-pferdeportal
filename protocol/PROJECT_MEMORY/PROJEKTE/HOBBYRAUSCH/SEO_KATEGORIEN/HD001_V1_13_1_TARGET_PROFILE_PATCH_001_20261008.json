@@ -1,0 +1,86 @@
+{
+  "contract": "HD001_V1_13_1_TARGET_PROFILE_PATCH",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "READY_FOR_ARTIFACT_APPLICATION",
+  "authority_basis": {
+    "target_contract": "ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md@2.5",
+    "assessment_rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.5",
+    "concept_audit": "HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md"
+  },
+  "source_live_plan": {
+    "plugin_version": "1.13.1",
+    "profile_revision": "HD-TARGET-3P-V1.13.1-PRACTICAL-20261008+da240c90a8725c4a",
+    "profile_sha256": "855bb49ca2eb8d3ae60f0442b585b091bcdfde01ed4c5acd3510849d48f2f464",
+    "logical_nodes": 440,
+    "physical_target_objects": 431,
+    "pages": 404,
+    "categories": 4,
+    "journal_categories": 15,
+    "directory_categories": 8,
+    "core_entities": 340,
+    "editorial_finder_entities": 501,
+    "live_actions": {
+      "CREATE": 356,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    },
+    "wordpress_structure_writes": 0
+  },
+  "operations": [
+    {
+      "op": "REMOVE_TARGET_NODE",
+      "node_id": "core:gestalten:materialkunst",
+      "object_type": "page",
+      "display_name": "Materialkunst",
+      "reason": "Structurally empty intermediate node violates target contract rule 'Keine inhaltsleeren Ebenen'.",
+      "preconditions": {
+        "current_action": "CREATE",
+        "current_object_id": 0,
+        "child_target_nodes": 0,
+        "canonical_identity_matches": 0,
+        "bound_entity_placements": 0,
+        "relation_bindings": 0
+      }
+    }
+  ],
+  "forbidden_changes": [
+    "Do not add a replacement category.",
+    "Do not move any hobby identity.",
+    "Do not change the eight CORE worlds.",
+    "Do not change Hobbywelten view relations.",
+    "Do not change editorial or directory structure.",
+    "Do not call DataForSEO.",
+    "Do not perform WordPress structure writes while applying this profile patch."
+  ],
+  "expected_shape_if_no_other_live_drift": {
+    "logical_nodes": 439,
+    "physical_target_objects": 430,
+    "pages": 403,
+    "categories": 4,
+    "journal_categories": 15,
+    "directory_categories": 8,
+    "core_entities": 340,
+    "editorial_finder_entities": 501,
+    "expected_action_delta_from_current_plan": {
+      "CREATE": 355,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "ARCHIVE": 0
+    },
+    "note": "These are deterministic plan-shape expectations from removing exactly one current CREATE node. The next live dry-run remains authoritative for the actual action set."
+  },
+  "acceptance": [
+    "Local final-target positive/negative suite PASS.",
+    "No missing parent introduced.",
+    "No new duplicate node id or slug.",
+    "Eight worlds remain CORE level 1.",
+    "Hobbywelten remains view-only.",
+    "Fresh live dry-run PASS.",
+    "0 provider calls.",
+    "0 WordPress structure writes.",
+    "Fresh JSON readback accepted before final sync."
+  ]
+}
