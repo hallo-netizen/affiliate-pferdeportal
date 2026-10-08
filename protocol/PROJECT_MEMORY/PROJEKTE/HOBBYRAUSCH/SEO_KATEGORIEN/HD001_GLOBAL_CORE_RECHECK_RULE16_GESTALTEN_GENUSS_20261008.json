@@ -1,0 +1,118 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS",
+  "date": "2026-10-08",
+  "status": "PASS__17_IDENTITIES__16_HOBBY_HUB__1_ORIENTATION_UNIVERSE",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "identities": [
+    [
+      "Scrapbooking",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Origami",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Paper Quilling",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Collage",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Stempel schnitzen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Zines herstellen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kaffee selbst rösten",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Fermentation",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Kimchi",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Koji",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Kombucha",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Sauerteig",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Käse herstellen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Räuchern",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Pralinenherstellung",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Bier brauen",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Cider herstellen",
+      "HOBBY_HUB",
+      5
+    ]
+  ],
+  "validation": {
+    "identities": 17,
+    "hobby_hubs": 16,
+    "orientation_universe": 1,
+    "visible_content_categories": 80,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0
+  },
+  "full_local_detail": {
+    "artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json",
+    "sha256": "246625a63074c7c88cf702087e6becb63169ca8518e9e88c81b155d82a9fc5fe",
+    "contains": "Full subject-defined leaf names and all distinct article intents."
+  },
+  "ownership_notes": {
+    "Fermentation": "Orientation only; concrete Kimchi/Koji/Kombucha/Sauerteig/Bier/Cider owners remain separate.",
+    "Pralinenherstellung": "Filled-confection craft; Bean-to-Bar remains chocolate-from-bean owner.",
+    "Stempel schnitzen": "Carved stamp blocks; Linolschnitt remains printmaking owner.",
+    "Zines herstellen": "Self-published booklet practice; Buchbinden remains general binding owner."
+  },
+  "wordpress_writes": 0,
+  "provider_calls": 0
+}
