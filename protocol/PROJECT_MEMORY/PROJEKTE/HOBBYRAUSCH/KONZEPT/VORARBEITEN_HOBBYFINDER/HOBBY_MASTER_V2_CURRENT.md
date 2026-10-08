@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-08
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / BATCH 001 FINAL 16 VON 841 / BATCH 002 DETERMINISTISCH VORBEREITET / 1 OVERVIEW OFFEN
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 DETERMINISTISCH VORBEREITET / 1 OVERVIEW OFFEN
 
 ## Datenartefakt
 
@@ -98,32 +98,48 @@ Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 
 Keine weitere DataForSEO-Tiefenrecherche.
 
-## Batch 002 – vorbereitet
+## Batch 002 – final
+
+Autoritative Datei:
+`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
+
+Final:
+- 16/16;
+- 11 HOBBY_HUB;
+- 4 ORIENTATION_UNIVERSE;
+- 1 EDITORIAL_TOPIC;
+- 0 unresolved;
+- 0 Strukturwrites.
+
+Kumuliert:
+32 von 841 bewertet.
+
+## Batch 003 – vorbereitet
 
 Auswahlregel:
-erste 16 noch nicht durch einen finalen Batch bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
+erste 16 nach Batch 001 + 002 noch nicht final bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
 
 Ausgewählt:
-Amateurfunk, CB-Funk, Software Defined Radio, Satellitenfunk, Satellitenempfang, Wettersonden-Tracking, Funkpeilung, Morsefunk, Elektronikbasteln, Mikrocontroller-Projekte, Arduino, Raspberry-Pi-Projekte, Robotik, Heimrobotik, Roboterbau, BattleBots-Modellbau.
+Drohnenbau, FPV-Drohnen, FPV-Racing, Drohnenfotografie, Drone Soccer, RC-Crawling, Scale-Crawling, RC-Baumaschinen, RC-LKW, RC-Panzer, RC-Boote, RC-Segelboote, RC-U-Boote, RC-Flugzeuge, RC-Segelflug, RC-Helikopter.
 
 Plan:
-`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
+`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
 
 Library-Artefakte:
-- `/hobby rausch/HOBBY_MASTER_V2_BATCH_002_ASSESSMENT_INPUT_20261008.json`
-- `/hobby rausch/HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_20261008.json`
+- `/hobby rausch/HOBBY_MASTER_V2_BATCH_003_ASSESSMENT_INPUT_20261008.json`
+- `/hobby rausch/HOBBY_MASTER_V2_BATCH_003_SUBJECT_PREFLIGHT_20261008.json`
 
 Lokaler V1.12.6-Preflight:
 - 16 Kandidaten;
-- 51 Leafs;
-- 304 Artikelintents;
-- 304 Keywords;
+- 59 Leafs;
+- 325 Artikelintents;
+- 325 Keywords;
 - exakt 1 geplanter Paid Call;
 - 0 Strukturwrites.
 
 ## Nächster Schritt
 
-Realen Batch-002-Overview genau einmal ausführen.
-Danach Batch 002 fachlich finalisieren.
+Realen Batch-003-Overview genau einmal ausführen.
+Danach Batch 003 fachlich finalisieren.
 
 Noch kein Zielbaum-Delta und kein WordPress-Kategoriesync.
