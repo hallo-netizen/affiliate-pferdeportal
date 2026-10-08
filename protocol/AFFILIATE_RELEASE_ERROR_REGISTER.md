@@ -1614,3 +1614,23 @@ NEXT ACTION: authentifizierter Readback von `ppar_tariff_tools_v1['kredit']`; ge
 **Hardlock:** Keine zweite Banner-Zielquelle, keine Frontend-Neuklassifikation und kein fachfremder General-Fallback.
 
 **Status:** SOURCE_FIXED / MANIFEST_BOUND / RELEASE_GATES_OPEN / NO_RELEASE_PASS.
+
+
+### AFF-ERR-058 Nachtrag 08.10.2026 – lokale Positiv-/Negativsimulation
+
+Bei der vollständigen lokalen KISS-Simulation wurde ein weiterer Umgehungspfad im späteren Campaign-Ranking gefunden: automatische Creative-Library-Banner (`source=output_object_v4`) konnten bei fehlendem Target-Match noch über `assignment_mode=fallback` sowie über den neutralen Pferderassen-Fallback ausgabefähig bleiben.
+
+Rootfix: Commit `02799c180da3b95ad34341fbfa939db599891eb2`.
+Für automatische Creative-Library-Banner gilt jetzt im Ranking ausschließlich:
+`gespeicherte automation_target_keys passen -> Kandidat; sonst -> null`.
+
+Danach:
+- Source-/Logiksimulation: 14/14 PASS.
+- unabhängiger lokaler PHP-Harness: 10/10 PASS.
+- falsches Thema, fehlendes Thema, ungültiges Ziel, anderes Portal, alter `general`-Zustand, `fallback` und Rassen-Sonderfallback: jeweils fail-closed.
+- Performance/DB: 0 neue Frontend-DB-Zugriffe, 0 neue Frontend-HTTP-Aufrufe, 0 neue Tabelle.
+
+Evidence:
+`release/affiliate-zentrale/evidence/affiliate_err_058_kiss_banner_single_target_local_sim_20261008.md`
+
+**Status:** LOCAL_POSITIVE_NEGATIVE_SIM_PASS / PERFORMANCE_DB_HARDLOCK_PASS / WORDPRESS_MARIADB_RELEASE_GATES_OPEN / NO_RELEASE.
