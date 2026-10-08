@@ -1,0 +1,1647 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_005_RULE16_RECONSTRUCTION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__10_CURRENT_CORE_HUBS_CAPACITY_MATERIALIZED",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "scope": {
+    "current_core_hubs": 10,
+    "excluded_noncurrent_hub": "Modular-Synthesizer",
+    "nonhub_current_core_handled_elsewhere": [
+      "Smart-Home-Basteln",
+      "Custom Keyboards",
+      "Case-Modding"
+    ]
+  },
+  "hard_rules": [
+    "Leaf labels and intents are subject-matter reconstruction; they are not DataForSEO-created taxonomy.",
+    "Historical ownership boundaries remain binding.",
+    "Each visible leaf contains 5-12 distinct subject-defined article intents.",
+    "No article intent is intentionally duplicated across two leaves in the same hub.",
+    "No WordPress write."
+  ],
+  "validation": {
+    "violations": [],
+    "all_leaf_counts_match_historical_hub_count": true
+  },
+  "hubs": [
+    {
+      "canonical_name": "Retrocomputer",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:retrocomputer:1",
+          "label": "Einstieg & Systeme",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Retrocomputer-Plattform für den Einstieg auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Retrocomputer nach Generation und Architektur unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Arbeitsplatz für einen Retrocomputer einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Zeitgenössische Peripherie sicher anschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Retrocomputer für die erste Nutzung konfigurieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer:2",
+          "label": "Datenträger & Software",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Disketten an Retrocomputern nutzen und erhalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Kassettenlaufwerke an Retrocomputern einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "CF-/SD-Lösungen als Retro-Datenträger einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Betriebssysteme und Originalsoftware installieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Disk-Images zwischen modernem PC und Retrocomputer übertragen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer:3",
+          "label": "Peripherie & Erweiterungen",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Passenden Monitor und Videosignal für Retrocomputer wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Maus und Joystick an Retrocomputern anschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Serielle und parallele Schnittstellen nutzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Speichererweiterungen für Retrocomputer auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Netzwerkadapter an Retrocomputern einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer:4",
+          "label": "Nutzung & Konfiguration",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Boot-Konfiguration eines Retrocomputers anpassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Speicherbelegung bei Retrocomputern optimieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Dateien zwischen unterschiedlichen Retro-Plattformen austauschen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Sound- und Videoeinstellungen historischer Systeme konfigurieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Retrocomputer für Spiele und Anwendungen passend einrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer:5",
+          "label": "Erhaltung & Archivierung",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Retrocomputer trocken und materialschonend lagern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Originaldatenträger digital sichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "ROMs und Firmware eigener Geräte archivieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Handbücher und Systemdokumentation erfassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Kompatible Ersatzperipherie eindeutig dokumentieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Retrocomputer restaurieren",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:retrocomputer-restaurieren:1",
+          "label": "Diagnose & Befund",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Retrocomputer ohne Stromversorgung systematisch diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Fehlendes oder fehlerhaftes Videosignal prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Tastaturfehler an Retrocomputern eingrenzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Massenspeicherfehler diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Korrosion und ausgelaufene Batterien erkennen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer-restaurieren:2",
+          "label": "Reinigung & Elektronikreparatur",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Retrocomputer-Platinen fachgerecht reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Elektrolytkondensatoren an Retrocomputern ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Netzteile historischer Computer prüfen und reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Steckverbinder und IC-Sockel reinigen oder ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Batterieschäden auf Retrocomputer-Platinen sanieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer-restaurieren:3",
+          "label": "Gehäuse & Optik",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Vergilbte Retrocomputer-Gehäuse materialschonend aufarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Kunststoffgehäuse historischer Computer reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Tastenkappen und Tastaturmechanik reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Originalaufkleber und Beschriftungen erhalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Gehäuseteile nach der Restaurierung passend aufbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:retrocomputer-restaurieren:4",
+          "label": "Zusammenbau & Abschlussprüfung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Restaurierten Retrocomputer korrekt zusammenbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Spannungen nach einer Reparatur prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Speicher und Schnittstellen nach Restaurierung testen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Stabilität unter längerer Laufzeit prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Restaurierungsarbeiten nachvollziehbar dokumentieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "alte Spielekonsolen restaurieren",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:alte-spielekonsolen-restaurieren:1",
+          "label": "Diagnose, Strom & Bild",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Alte Spielekonsole ohne Strom diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Netzteil einer Retro-Konsole prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Kein Bild an alter Spielekonsole systematisch eingrenzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Videoausgänge historischer Konsolen testen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Start- und Bootfehler alter Konsolen diagnostizieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:alte-spielekonsolen-restaurieren:2",
+          "label": "Mainboard & Laufwerke",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Kondensatoren auf Konsolen-Mainboards prüfen und ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Cartridge-Slots alter Konsolen reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Optische Laufwerke alter Konsolen warten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Batteriegepufferte Speicher in Konsolen erneuern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Korrosion auf Konsolenplatinen beseitigen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:alte-spielekonsolen-restaurieren:3",
+          "label": "Controller & Anschlüsse",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Alte Konsolencontroller zerlegen und reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Tastenmatten und Kontakte von Retro-Controllern erneuern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Controllerkabel und Stecker reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Controllerports an alten Konsolen prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Zubehöranschlüsse historischer Konsolen testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:alte-spielekonsolen-restaurieren:4",
+          "label": "Gehäuse & Abschluss",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Vergilbte Konsolengehäuse materialschonend aufarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Risse und Halterungen an Konsolengehäusen reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Originalbeschriftungen und Typenschilder erhalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Konsole nach Restaurierung korrekt montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Restaurierte Konsole mit Spielen und Zubehör vollständig testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "mechanische Tastaturen bauen",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:mechanische-tastaturen-bauen:1",
+          "label": "Layout, Gehäuse & Plate",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Tastaturlayout für einen Eigenbau auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Gehäusematerial für mechanische Tastaturen wählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Plate-Materialien vergleichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Mounting-Style einer Custom-Tastatur auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Abmessungen und Komponenten vor dem Bau auf Kompatibilität prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:mechanische-tastaturen-bauen:2",
+          "label": "Switches & Stabilizer",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Switch-Typ für eine mechanische Tastatur auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Switches schmieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Switch-Federn auswählen und tauschen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Stabilizer abstimmen und schmieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Plate-Mount- und PCB-Mount-Stabilizer unterscheiden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:mechanische-tastaturen-bauen:3",
+          "label": "PCB & Montage",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Hot-Swap- oder Löt-PCB auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Switches auf ein Tastatur-PCB löten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Dioden und Bauteile auf Keyboard-PCBs prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "PCB, Plate und Gehäuse spannungsfrei montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Tastenmatrix nach der Montage testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:mechanische-tastaturen-bauen:4",
+          "label": "Firmware & Belegung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "QMK-Firmware für eine Tastatur einrichten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "VIA für eine Custom-Tastatur konfigurieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Layer und Sondertasten planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Rotary Encoder und Zusatzfunktionen konfigurieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "RGB- und Beleuchtungsfunktionen in der Firmware einrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:mechanische-tastaturen-bauen:5",
+          "label": "Tuning & Endabstimmung",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Dämpfungsmaterial in mechanischen Tastaturen einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Tape- und Foam-Mods sinnvoll beurteilen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Akustik einer Custom-Tastatur abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Keycaps passend zu Layout und Switches auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertige Tastatur auf Chatter, Stabilität und gleichmäßiges Tippgefühl testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "PC-Modding",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:pc-modding:1",
+          "label": "Planung & Komponenten",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "PC-Modding-Projekt vor dem Umbau planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Komponenten auf Platz und Kompatibilität prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Vertikale GPU-Montage sinnvoll planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Zusatzdisplays und Sensoranzeigen integrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Modding-Schritte so planen, dass Wartbarkeit erhalten bleibt",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:pc-modding:2",
+          "label": "Kühlung & Airflow",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Airflow für einen gemoddeten PC planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Lüfterpositionen und Luftdruck abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "AIO-Kühlung sinnvoll integrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Custom-Wasserkühlung im Modding-PC planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Temperatursensoren und Durchflussmessung einbinden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:pc-modding:3",
+          "label": "Beleuchtung & Steuerung",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "ARGB-Beleuchtung im PC planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "LED-Controller auswählen und verkabeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Beleuchtungszonen im Gehäuse abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "ARGB-Kompatibilität zwischen Komponenten prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Lichtprofile ohne unnötige Softwarekonflikte einrichten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:pc-modding:4",
+          "label": "Kabel & Innenraum",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Kabelwege für sauberes PC-Modding planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Gesleevte Kabel passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Kabeldurchführungen und Halter sinnvoll nutzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Stromkabel ohne starke Biegeradien verlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Innenraum so gestalten, dass Komponenten sichtbar und wartbar bleiben",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:pc-modding:5",
+          "label": "Hardware-Präsentation & Betrieb",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "GPU-Riser sicher betreiben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Hardware-Displays und Monitoring sauber anbinden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Lüfterkurven für ein Modding-System abstimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Stromversorgung zusätzlicher Modding-Komponenten absichern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Umbauten unter Last auf Temperatur und Stabilität testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Synthesizer bauen",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:synthesizer-bauen:1",
+          "label": "Einstieg & Architektur",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Signalweg eines analogen Synthesizers planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Monophonen Synthesizer als erstes Projekt auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Modularen oder fest verdrahteten Eigenbau unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Blockschaltbild für einen DIY-Synthesizer erstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Versorgungsspannungen für Synthesizer-Schaltungen planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:synthesizer-bauen:2",
+          "label": "Oszillatoren & Stimmung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "VCO-Schaltung für einen Synthesizer aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Oszillator auf 1V/Oktave kalibrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Temperaturdrift eines VCO reduzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Wellenformen eines Oszillators prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Mehrere Oszillatoren sauber gegeneinander stimmen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:synthesizer-bauen:3",
+          "label": "Filter & Verstärker",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "VCF-Schaltung für einen Synthesizer auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Filter-Cutoff und Resonanz kalibrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "VCA-Schaltung aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Verzerrungen in Filter- und VCA-Stufen diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Pegel zwischen Oszillator, Filter und VCA richtig abstimmen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:synthesizer-bauen:4",
+          "label": "Hüllkurven & Modulation",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "ADSR-Hüllkurve aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "LFO für einen DIY-Synthesizer dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Modulationswege sinnvoll verschalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "CV-Eingänge skalieren und schützen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Gate- und Trigger-Signale zuverlässig verarbeiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:synthesizer-bauen:5",
+          "label": "Aufbau, Netzteil & Kalibrierung",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Netzteil für einen DIY-Synthesizer sicher aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Platinen und Bedienelemente sauber verdrahten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Brummen und Masseschleifen vermeiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Synthesizer nach dem Aufbau systematisch kalibrieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fehler in einem DIY-Synthesizer schrittweise eingrenzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Eurorack",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:eurorack:1",
+          "label": "Case & Stromversorgung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Eurorack-Case passend zur Modulzahl auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "HP-Bedarf eines Eurorack-Systems planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Eurorack-Netzteil dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Busboards richtig anschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Stromaufnahme neuer Module vor dem Einbau prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:eurorack:2",
+          "label": "Module & Systemplanung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Erste Eurorack-Module sinnvoll zusammenstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Voice aus Oszillator, Filter und VCA im Eurorack planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Utility-Module im Eurorack berücksichtigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Mischer und Attenuverter passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Systemlücken vor dem Modulkauf erkennen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:eurorack:3",
+          "label": "Patchen & Signalpegel",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Audio- und CV-Signale im Eurorack unterscheiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Eurorack-Module ohne gefährliche Fehlpatches verbinden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Trigger, Gate und CV korrekt patchen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Signalpegel zwischen Eurorack und externem Audio anpassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Feedback-Patches kontrolliert einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:eurorack:4",
+          "label": "Clock, Sequencing & Modulation",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Clock-Verteilung im Eurorack aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Sequencer mit mehreren Modulen synchronisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "LFOs und Hüllkurven als Modulationsquellen kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Sample-and-Hold im Eurorack einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Reset- und Startsignale für synchronisierte Patches planen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:eurorack:5",
+          "label": "Ausbau & Praxis",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Eurorack-System schrittweise erweitern",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Patchkabel sinnvoll organisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Module sicher ein- und ausbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Firmware-Updates bei Eurorack-Modulen durchführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Live-Patches reproduzierbar dokumentieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Effektpedale bauen",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:effektpedale-bauen:1",
+          "label": "Schaltungen & Bauteile",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Overdrive-Schaltung für ein DIY-Pedal verstehen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Fuzz-Schaltung für ein DIY-Pedal aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Operationsverstärker für Effektpedale auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Widerstände und Kondensatoren in Pedalschaltungen dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Dioden-Clipping in Effektpedalen vergleichen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:effektpedale-bauen:2",
+          "label": "Prototyp & Platine",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Effektpedal auf Breadboard testen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Lochrasterplatine für ein Effektpedal aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "PCB eines Effektpedals bestücken",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Bauteilwerte vor dem Löten prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Lötfehler auf Effektpedal-Platinen vermeiden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:effektpedale-bauen:3",
+          "label": "Gehäuse, Schalter & Anschlüsse",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Pedalgehäuse für Potis und Buchsen bohren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "True-Bypass-Fußschalter verdrahten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Ein- und Ausgangsbuchsen korrekt anschließen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "DC-Stromversorgung im Pedal verdrahten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "LED-Anzeige eines Effektpedals integrieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:effektpedale-bauen:4",
+          "label": "Fehlersuche & Modifikation",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Effektpedal ohne Ausgangssignal diagnostizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Brummen und Nebengeräusche in DIY-Pedalen beheben",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Signalweg mit Audioprobe verfolgen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Bestehende Pedalschaltung gezielt modifizieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertiges Effektpedal auf Pegel, Bypass und Stromaufnahme testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Röhrenverstärker bauen",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:röhrenverstärker-bauen:1",
+          "label": "Konzept & Schaltung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Single-Ended- und Push-Pull-Verstärker vergleichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Leistungsklasse eines Röhrenverstärkers planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Vorstufenröhren passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Schaltplan eines Röhrenverstärkers lesen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Massekonzept vor dem Aufbau festlegen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:röhrenverstärker-bauen:2",
+          "label": "Netzteil, Trafos & Hochspannung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Netztransformator für einen Röhrenverstärker dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Ausgangsübertrager passend zur Endstufe auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Hochspannungsnetzteil sicher aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Siebung und Brummunterdrückung dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Entladewiderstände und sichere Messpunkte vorsehen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:röhrenverstärker-bauen:3",
+          "label": "Vorstufe, Endstufe & Bias",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Vorstufe eines Röhrenverstärkers aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Phasenumkehrstufe prüfen und einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Endröhren korrekt beschalten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Bias eines Röhrenverstärkers einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Gegenkopplung einer Endstufe beurteilen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:röhrenverstärker-bauen:4",
+          "label": "Aufbau, Prüfung & Sicherheit",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Chassis eines Röhrenverstärkers sicher verdrahten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Heizleitungen brummarm verlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Erstinbetriebnahme mit Strombegrenzung durchführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Hochspannungen sicher messen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Fertigen Verstärker auf Brumm, Oszillation und thermische Stabilität prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Lautsprecherbau",
+      "publication_role": "HOBBY_HUB",
+      "source_historical_batch": "005",
+      "ownership_source": "HOBBY_MASTER_V2_BATCH_005_FINAL_ASSESSMENT_20261007.json",
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_UNDER_RULE_1_6_WITH_HISTORICAL_OWNERSHIP_BOUNDARY",
+      "leafs": [
+        {
+          "leaf_id": "b005:lautsprecherbau:1",
+          "label": "Treiber & Konzept",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Tieftöner, Mitteltöner und Hochtöner passend kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Zweiweg- oder Dreiweg-Lautsprecher planen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Wirkungsgrad und Impedanz bei der Treiberwahl berücksichtigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Thiele-Small-Parameter richtig lesen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Belastbarkeit eines Lautsprechersystems realistisch dimensionieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:lautsprecherbau:2",
+          "label": "Gehäuse & Abstimmung",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Geschlossenes oder Bassreflex-Gehäuse auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Gehäusevolumen für einen Tieftöner bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Bassreflexrohr dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Gehäuseresonanzen durch Versteifungen reduzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Dämmmaterial im Lautsprechergehäuse richtig einsetzen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:lautsprecherbau:3",
+          "label": "Frequenzweiche",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Trennfrequenzen einer Lautsprecherweiche festlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Bauteile für passive Frequenzweichen dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Impedanzkorrektur sinnvoll einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Pegel eines Hochtöners anpassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Frequenzweiche prototypisch testen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:lautsprecherbau:4",
+          "label": "Messung & Abstimmung",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Frequenzgang eines DIY-Lautsprechers messen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Nahfeld- und Fernfeldmessungen sinnvoll kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Impedanzverlauf messen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Phase und Übergangsbereich prüfen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Messdaten für die Weichenabstimmung auswerten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b005:lautsprecherbau:5",
+          "label": "Bau & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Lautsprechergehäuse präzise zuschneiden und verleimen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Treiber bündig einlassen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Anschlussterminals sauber montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Gehäuseoberfläche furnieren oder lackieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertigen Lautsprecher auf Dichtigkeit und Nebengeräusche prüfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
