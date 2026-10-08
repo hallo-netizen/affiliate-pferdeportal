@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / BATCH 001 FACHLICH ABGESCHLOSSEN / 16 VON 16 ROLLEN GEKLÄRT / BATCH 002 NÄCHSTER ARBEITSBLOCK
+STAND: 2026-10-08
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.4 KISS / BATCH 001 FINAL 7 HUB 3 ORIENTATION 6 EDITORIAL / BATCH 002 VORBEREITET / 1 DATAFORSEO-OVERVIEW OFFEN
 
 ## Rolle
 
@@ -122,15 +122,14 @@ Damit ist die frühere Lücke zwischen Konzeptregel und tatsächlicher maschinen
 Wichtig:
 Fehlende Evidenz führt zu `EVIDENCE_REQUIRED`, nicht zu einer geratenen Rollen- oder Weltzuordnung.
 
-Batch 001 bestätigt nach dem V1.12.5-KISS-Replay:
-- ID-Eindeutigkeit funktioniert;
-- aktuelle Alias-/Kanonikbindungen bleiben stabil;
-- Monetarisierung erzeugt keine automatische CORE-Promotion;
-- Content Capacity kann fachlich stabil pro unterster Kategorie berechnet werden;
-- DataForSEO ist Abgleich/Dedupe, nicht Content-Erzeuger;
-- sechs kapazitätsseitig tragfähige Hubfälle brauchen noch Scope-/Identitätsprüfung;
-- Buchbinden ist im Testbatch vollständiger HOBBY_HUB_CANDIDATE;
-- der nächste fachliche Engpass ist Scope/Identität/Ownership, nicht weitere DataForSEO-Tiefenrecherche.
+Batch 001 ist autoritativ final:
+- `../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`;
+- 16/16 geschlossen;
+- 7 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 6 EDITORIAL_TOPIC;
+- 0 unresolved;
+- 0 Strukturwrites.
 
 ## Nachprüfung gegen das vollständige Konzept
 
@@ -196,13 +195,10 @@ Der vollständige reale Batch wurde mit V1.12.5 lokal neu gerechnet:
 - fünf Aggregation-Reviews;
 - 0 Strukturwrites.
 
-## Pilotbefund
+## Pilotbefund – historisch eingeordnet
 
-- Buchbinden → bestehender Live-/Technikpilot bleibt stabil; endgültiger V2-HOBBY_HUB-PASS ist wegen der strengeren 5–12-pro-Leaf-Regel wieder offen;
-- Fotografie → Macro-/Orientation-Prüfung statt Riesenhub;
-- Garten → kein einzelner Vollhub;
-- Treibholz sammeln → EDITORIAL erhalten, kein unbelegter CORE-Hub;
-- Musizieren → Scope-Review statt erzwungener Weltzuordnung.
+Frühere Pilot-/Zwischenbefunde sind durch die finale Batch-001-Datei ersetzt, soweit sie Batch-001-Rollen betreffen.
+Fotografie/Garten/Musizieren bleiben nur als separate frühere Konzeptbeispiele bestehen und sind nicht Teil von Batch 001.
 
 ## Autoritative Konzeptdateien
 
@@ -218,27 +214,36 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Batch 001 – fachlicher Abschluss
 
-Abschlussdatei:
-`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG_20261008.json`
+Einzige autoritative Abschlussdatei:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`
 
-Rollen:
-- HOBBY_HUB: Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa, Buchbinden;
-- ORIENTATION_UNIVERSE: 3D-Druck, Amateurastronomie, Filzen;
-- EDITORIAL_TOPIC: alte Brettspiele, Treibholz sammeln, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur.
+Ergebnis:
+- 7 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 6 EDITORIAL_TOPIC;
+- 0 unresolved.
 
-Wichtige Ownership-Grenzen:
-- Airbrush-Modellbau ist Anwendungsthema, kein zweiter Airbrush-Hub;
-- Aeroponik bleibt getrennt von Hydroponik/Hydrokultur/Indoor-Growing;
-- 3D-Bogenschießen bleibt getrennt von allgemeinem/traditionellem Bogenschießen;
-- Wabikusa bleibt getrennt von Aquascaping;
-- generisches Filzen und Amateurastronomie/3D-Druck sind Orientierungswelten über vorhandenen Spezialidentitäten.
+## Batch 002 – vorbereitet
+
+Deterministische erste 16 noch nicht final bewerteten Master-Identitäten sind gebunden.
+
+Fachvorbereitung:
+- 51 Leafs;
+- 304 eigenständige Artikelintents;
+- 304 DataForSEO-Seeds;
+- ein einziger Overview-Abgleich;
+- keine automatische Tiefenrecherche.
+
+Plan:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
 
 ## Erster offener Blocker
 
-`HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_PENDING`
+`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Batch 002 aus dem Master mit derselben stabilen KISS-Logik vorbereiten.
+Batch 002 mit genau einem read-only DataForSEO-Overview abgleichen.
+Danach Rollen/Ownership fachlich finalisieren.
 
 Noch keine Strukturänderung.
