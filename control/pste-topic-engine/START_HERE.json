@@ -3,7 +3,7 @@
   "authority_scope": "PFERDE_ATELIER_PSTE_PSERC_CLEANUP_ONLY",
   "authority_branch": "pste-kiss-e2e-20261005",
   "navigation_authority": "control/pste-topic-engine/CURRENT_STATE.json",
-  "navigation_authority_git_blob_sha1": "ec261d6d0e0de1abf13b38141d08f3aa34492d99",
+  "navigation_authority_git_blob_sha1": "6c316e1df3542ec1111c5536a1a6a0578995038f",
   "target_authority": "control/pste-topic-engine/ZIELVERTRAG_KISS_AUTOMATIK_KURZWEG.json",
   "target_authority_git_blob_sha1": "6c7e3c32b801405b0bb0bbb8fc085ce2545f8a3b",
   "rule": "For this PSTE/PSERC cleanup workstream, status, blocker and exactly one NEXT ACTION come only from CURRENT_STATE.json. This START_HERE is navigation only. Handoffs, chats, workflow logs and proof files are evidence only.",
