@@ -833,3 +833,27 @@ BELEG:
 
 NEXT:
 Einmal real mit V1.12.6 exportieren und JSON readback-prüfen.
+
+## HOBBYRAUSCH-HD001-20261008-Q – Produktionsweg auf einen praktischen Final-Sync reduziert
+
+WAS:
+Die manuelle 16er-Batchschleife endet nach Batch 003. HD-001 V1.13.1 führt den finalen Zielbaum als einen manual-only Dry-Run-/Sync-Weg zusammen.
+
+URSACHE:
+Der 841er Master wurde im Zwischenweg fälschlich wie 841 einzeln zu beweisende CORE-Strukturobjekte behandelt. Gleichzeitig enthielt der erste praktische Zielentwurf noch die alte falsche Parent-Beziehung Hobbywelten → acht Welten.
+
+KORREKTUR:
+- Master = Inventar;
+- 340 CORE / 501 Finder-Editorial;
+- acht Welten physisch Root;
+- Hobbywelten nur View;
+- 431 physische Zielobjekte;
+- keine weitere DataForSEO-Batchserie;
+- genau ein realer Delta-Dry-Run;
+- danach bei PASS ein kontrollierter Sync.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT_20261008.json`
+
+NÄCHSTER SCHRITT:
+V1.13.1 real installieren und nur den read-only finalen Delta-Dry-Run ausführen.
