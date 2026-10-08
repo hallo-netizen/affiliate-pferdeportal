@@ -1044,3 +1044,43 @@ Child-Slug-Adoption / Mehrdeutigkeit / Missing PASS.
 NEXT:
 Zuerst 231 Rollback-Aktionen bis terminal ROLLED_BACK.
 Dann V1.13.2 → frischer Dry-Run → bei PASS genau ein neuer Final-Sync.
+
+
+## HOBBYRAUSCH-HD001-20261008-X – V1.13.3 Full-Sync-Parität lokal hart geprüft
+
+AUSGANG:
+V1.13.2-Live-Dry-Run nach abgeschlossenem Rollback PASS:
+355 CREATE + 75 ADOPT / 430 Zielobjekte.
+
+LOKALE VOLLPRÜFUNG:
+Dry-Run und Sync hatten noch eine zweite Suchabweichung:
+Dry-Run prüft `_apkw_concept_id` mit current node_id + legacy_ids;
+V1.13.2-Sync prüfte nur legacy_ids.
+
+BETROFFEN:
+11 umbenannte Legacy-ADOPT-Seiten konnten deshalb beim Sync noch kollidieren.
+
+FIX V1.13.3:
+Sync-Suchreihenfolge an Dry-Run angeglichen.
+
+VOLLTEST MIT ECHTEM 430-KNOTEN-PLAN:
+- 355 CREATE;
+- 75 ADOPT;
+- 430/430 Readback PASS;
+- COMPLETE;
+- zweiter Lauf: 430 UNCHANGED;
+- Rollback: ROLLED_BACK / semantische Wiederherstellung PASS;
+- 11 umbenannte Legacy-ADOPTs PASS;
+- Ambiguity fail-closed PASS;
+- PHP-Lint 33/33 PASS;
+- ZIP-Integrität PASS;
+- Zielprofil unverändert.
+
+ARTEFAKT:
+`HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip`
+SHA-256:
+`f255b06fb38c7b903de2c7741dea4e02fb9620ad3a6651fbf5963f402c33820b`
+
+NEXT:
+V1.13.3 installieren → genau ein frischer Live-Dry-Run → JSON-Readback.
+Noch kein Sync.
