@@ -82,5 +82,14 @@
     "0 provider calls.",
     "0 WordPress structure writes.",
     "Fresh JSON readback accepted before final sync."
-  ]
+  ],
+  "root_cause": {
+    "status": "CONFIRMED",
+    "finding": "Materialkunst is a static carry-over node from the rolled-back V1.12 base profile, not a node derived from the 841 canonical hobby inventory.",
+    "old_profile_entity_placements": 0,
+    "current_profile_child_nodes": 0,
+    "current_profile_entity_placements": 0,
+    "concept_definition_present": false,
+    "decision": "REMOVE_WITHOUT_REPLACEMENT"
+  }
 }
