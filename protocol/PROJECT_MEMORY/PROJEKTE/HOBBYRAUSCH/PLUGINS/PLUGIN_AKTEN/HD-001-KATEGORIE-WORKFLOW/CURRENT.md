@@ -463,13 +463,23 @@ Kein Live-Sync vorher.
 
 ## Release-/Artefaktgrenze
 
-V1.13.1 ist der aktuelle lokal hart geprüfte Finalisierungskandidat.
+V1.14.0 ist der aktuelle lokal vollständig positiv/negativ geprüfte Struktur-/Navigations-/Magazin-Kandidat.
+
+Artefakt:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
 
 Isolierte Artefaktpflicht:
 `PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
 
-Das installierbare geprüfte ZIP liegt als Gesprächs-/Library-Artefakt vor.
-Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert, weil der aktive GitHub-Connector keinen direkten Binärupload aus dem Container anbietet. Kein Ersatzartefakt erfinden.
+Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert; kein Ersatzartefakt erfinden.
 
-Kein Live-PASS behaupten, bevor:
-Dry-Run → akzeptierter Delta-Readback → einmaliger Sync → Struktur-/Frontend-Readback abgeschlossen sind.
+V1.14.0 ist NOCH KEIN Live-Kandidat:
+zuerst die 19 Expansion-/Ankerkandidaten final gegen Regeln 1.5 bewerten und ein begründetes Delta binden oder sie bewusst schließen.
+
+Erst danach:
+frisches Artefakt → kompletter lokaler POS/NEG-E2E → Live-Dry-Run → einmaliger Sync → Struktur-/Frontend-Readback.
+
+Kein Live-PASS vorher behaupten.
