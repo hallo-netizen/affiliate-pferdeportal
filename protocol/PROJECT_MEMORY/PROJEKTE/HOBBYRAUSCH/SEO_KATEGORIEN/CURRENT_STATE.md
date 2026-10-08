@@ -521,6 +521,9 @@ Finalen Sync NICHT starten.
 KISS:
 `core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
 
+Maschinenlesbarer Ein-Knoten-Patch:
+`HD001_V1_13_1_TARGET_PROFILE_PATCH_001_20261008.json`.
+
 Keine Ersatzkategorie erfinden.
 Keine Hobbys umhängen.
 Keine DataForSEO-Recherche.
