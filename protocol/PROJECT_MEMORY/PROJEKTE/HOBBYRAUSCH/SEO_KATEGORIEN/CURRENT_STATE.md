@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 FINAL 16 VON 16 / BATCH 002 DETERMINISTISCH VORBEREITET / 304 KEYWORDS / EXAKT 1 DATAFORSEO-OVERVIEW OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 + 002 FINAL = 32 VON 841 / BATCH 003 DETERMINISTISCH VORBEREITET / 325 KEYWORDS / EXAKT 1 DATAFORSEO-OVERVIEW OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -295,15 +295,65 @@ Maschinenlesbarer Plan:
 Plugin-V1.12.6-Preflight lokal:
 PASS / 16 / 51 / 304 / 304 / 1.
 
+## BATCH 002 – REALER ABSCHLUSS
+
+Realer DataForSEO-Lauf:
+- Plugin 1.12.6;
+- Batch 002;
+- 16 Kandidaten;
+- 51 ideale Leafs;
+- 304 fachlich definierte Artikelintents;
+- 304 Keywords;
+- exakt 1 DataForSEO-Aufruf;
+- 98 exakte Provider-Zeilen;
+- Kosten 0.02376 USD;
+- 0 Strukturwrites.
+
+Autoritative Abschlussdatei:
+`HOBBY_MASTER_V2_BATCH_002_FINAL_ASSESSMENT_20261008.json`
+
+Finale Rollen:
+- 11 HOBBY_HUB;
+- 4 ORIENTATION_UNIVERSE;
+- 1 EDITORIAL_TOPIC;
+- 0 unresolved.
+
+Kumuliert:
+- 32 von 841 Master-Identitäten final bewertet;
+- 809 offen.
+
+## BATCH 003 – VORBEREITET
+
+Deterministische nächste 16:
+Drohnenbau, FPV-Drohnen, FPV-Racing, Drohnenfotografie, Drone Soccer, RC-Crawling, Scale-Crawling, RC-Baumaschinen, RC-LKW, RC-Panzer, RC-Boote, RC-Segelboote, RC-U-Boote, RC-Flugzeuge, RC-Segelflug, RC-Helikopter.
+
+Vorbereitung:
+- 16 Kandidaten;
+- 59 vorgeschlagene Leafs;
+- 325 fachlich unterschiedliche Artikelintents;
+- 325 DataForSEO-Keywords;
+- exakt 1 geplanter `keyword_overview`-Aufruf;
+- automatische Depth-Recherche AUS;
+- 0 Strukturwrites.
+
+Plan:
+`HOBBY_MASTER_V2_BATCH_003_PREPARED_20261008.json`
+
+Plugin-V1.12.6-Preflight:
+PASS / 16 / 59 / 325 / 325 / 1.
+
 ## ERSTER OFFENER BLOCKER
 
-`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
+`HOBBY_MASTER_V2_BATCH_003_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den vorbereiteten Batch-002-Input in HD-001 V1.12.6 hochladen, kostenlose Vorprüfung ausführen und nur wenn exakt
-**16 Hobbys / 51 Leafs / 304 Einzelbeiträge / 304 Keywords / 1 bezahlter Aufruf**
-angezeigt werden, genau diesen EINEN read-only DataForSEO-Overview starten.
+Batch-003-Input in HD-001 V1.12.6 hochladen.
+
+Kostenlose Vorprüfung muss exakt zeigen:
+**16 Hobbys / 59 Leafs / 325 Einzelbeiträge / 325 Keywords / 1 bezahlter Aufruf.**
+
+Nur dann genau EINEN read-only DataForSEO-Overview starten.
 
 Keine Tiefenprüfung.
 Kein Zielbaum-Delta.
