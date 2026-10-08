@@ -1634,3 +1634,23 @@ Evidence:
 `release/affiliate-zentrale/evidence/affiliate_err_058_kiss_banner_single_target_local_sim_20261008.md`
 
 **Status:** LOCAL_POSITIVE_NEGATIVE_SIM_PASS / PERFORMANCE_DB_HARDLOCK_PASS / WORDPRESS_MARIADB_RELEASE_GATES_OPEN / NO_RELEASE.
+
+
+## AFF-ERR-059 — 08.10.2026: Manuelle FIXED-Bannerzuordnung durch Single-Truth-Umbau entwertet
+
+**Symptom:** Die am 08.10.2026 eingeführte Banner-Single-Truth-Änderung schrieb eine manuelle feste Banner-Zuordnung zusätzlich in `topic_targets`, entfernte anschließend aber `target_key` / Zielkontext aus der separaten Portalentscheidung. Gleichzeitig wurde `portal_banner` in `output_classify_for_portal()` vor der bestehenden FIXED-Auswertung direkt auf die gespeicherte Banner-Zielkarte geroutet.
+
+**Belegte Vertragsverletzung:** Der autoritative Zielvertrag verlangt ausdrücklich, dass manuelle FIXED-Entscheidungen getrennt erhalten bleiben. Die historische Fehlerregel AFF-ERR-047 bestätigt denselben Vertrag: automatische Kanten dürfen bei Re-Evaluation gelöscht werden, manuelle Control-/FIXED-Entscheidungen liegen separat und bleiben erhalten.
+
+**Root Cause:** Die Regel „eine zentrale automatische Zielkarte“ wurde fälschlich auf manuelle FIXED-Entscheidungen ausgedehnt. Dabei wurde „eine Runtime-Reihenfolge“ mit „nur ein Speicherort“ verwechselt.
+
+**Korrekte KISS-Reihenfolge:** technische/rechtliche Safety -> manuelles Veto/Review -> manuelles FIXED-Ziel (separat, Vorrang) -> automatische gespeicherte `topic_targets`-Ziel-/Pfadkarte -> Format -> spezifische Auswahl -> falls kein spezifischer Banner: ausdrücklich allgemeiner aktiver Fallbackbestand -> stabile bestehende Verteilung.
+
+**Fixziel:** Für `portal_approve_fixed` Zielinformationen ausschließlich als separate Portalentscheidung erhalten; keine automatische Zielkarte überschreiben. In `output_classify_for_portal()` FIXED wieder vor der automatischen Banner-Zielkarte auswerten. UI „Thema / Portalziel fest zuordnen“ darf bleiben.
+
+**POSITIV:** FIXED-Ziel gewinnt auch dann, wenn automatische `topic_targets` ein anderes Ziel enthalten.
+**NEGATIV:** Rücknahme der manuellen Entscheidung gibt wieder die unveränderte automatische Zielkarte frei; Reconcile darf FIXED nicht löschen.
+**Regression:** Automatische Bannerzuordnung, allgemeiner Fallback, Produktpfade, eBay/Idealo, Rechner und Performance unverändert.
+**Performance:** keine neue Tabelle, kein Frontend-HTTP, keine neue Frontend-DB-Abfrage.
+
+**Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
