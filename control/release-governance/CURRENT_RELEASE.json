@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 303,
+  "generation": 304,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "3ac981ddd070120b687a6d8f33e3c3375630a4dd953c31ecd6385c270a4ede68",
+    "manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,15 +41,15 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "3ac981ddd070120b687a6d8f33e3c3375630a4dd953c31ecd6385c270a4ede68",
+    "current_source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": "",
-    "candidate_reference_scope": "Performance block: AJAX cleanup + AFF-ERR-064 + shared frontend campaign post snapshot + shared request-local campaign normalization. No ranking/provider/slot/veto/publish/category/design/tracking change.",
+    "candidate_reference_scope": "Performance block: AJAX cleanup + AFF-ERR-064 + shared frontend campaign query/normalization + request-local content/category context reuse. No ranking/provider/slot/veto/publish/category/design/tracking change.",
     "final_artifact_ref": "",
     "final_artifact_sha256": "",
     "handoff_artifact_filename": "",
     "handoff_artifact_bytes": 0,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_211_BLOCK7_LOCAL_PASS_GATE_OPEN",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_211_BLOCK8_LOCAL_PASS_GATE_OPEN",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RUN_WORDPRESS_MARIADB_GATE_6_72_211_BLOCK7",
-    "current_focus_reason": "Local hardtest PASS. After block6 one campaign post query remains; block7 removes duplicate frontend campaign meta normalization: 4->2 post-meta reads for two campaigns, both call orders, identical output."
+    "current_focus": "RUN_WORDPRESS_MARIADB_GATE_6_72_211_BLOCK8",
+    "current_focus_reason": "Local hardtest PASS. Repeated public frontend content/category context construction is request-cached with identical result; fixture halves title/slug/term/ancestor/content context work. Admin/worker paths unchanged."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -890,16 +890,16 @@
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
     "bound_user_scope_action": "Run exact current 6.72.211 WordPress/MariaDB positive-negative-regression gate. No workflow architecture change.",
-    "completion_condition": "CURRENT_6_72_211_BLOCK7_WORDPRESS_MARIADB_GATE_PASS_THEN_BUILD_EXACT_FINAL_INSTALLER",
+    "completion_condition": "CURRENT_6_72_211_BLOCK8_WORDPRESS_MARIADB_GATE_PASS_THEN_BUILD_EXACT_FINAL_INSTALLER",
     "after_completion_action": "PACKAGE_EXACT_TESTED_6_72_211_THEN_FORMAL_RELEASE_CHECK",
     "no_optional_detours": true,
-    "sequence": 145,
+    "sequence": 146,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-064",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_normalization_reuse_block7_20261008.md",
-    "evidence_sha256": "e05da15a23a053d5767f3358195ec0dc8e241292af41b504b517727293590179",
-    "current_source_manifest_sha256": "3ac981ddd070120b687a6d8f33e3c3375630a4dd953c31ecd6385c270a4ede68",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_211_BLOCK7_LOCAL_PASS_GATE_OPEN",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md",
+    "evidence_sha256": "0c30dccd597b2164db71e4db66fc6fa9065e1d894c4209bebefcfe3913603d79",
+    "current_source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_211_BLOCK8_LOCAL_PASS_GATE_OPEN",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,11 +1041,11 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "Block-7 local hardtest may be reused only while manifest remains 3ac981ddd070120b687a6d8f33e3c3375630a4dd953c31ecd6385c270a4ede68.",
+    "pass_reuse_policy": "Block-8 local hardtest may be reused only while manifest remains 9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f.",
     "release_gate_matrix_policy": "required_release_gates contains only current manifest-bound mandatory gates; historical_release_gate_matrix preserves older OPEN/STALE evidence truth and is not current release authority.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "USE_EXISTING_TEST_ARCHITECTURE_ONLY_NO_WORKFLOW_CHANGE",
-    "gate_runner_scope": "6_72_211_AJAX_AND_FRONTEND_REUSE_BLOCK7",
+    "gate_runner_scope": "6_72_211_AJAX_AND_FRONTEND_CONTEXT_REUSE_BLOCK8",
     "gate_runner_reason": "No workflow change. Historical version-locked jobs are not valid current gates.",
     "final_installer": {
       "filename": "AFFILIATE_ZENTRALE_6.72.210.zip",
@@ -1109,9 +1109,9 @@
   "required_release_gates": {
     "current_6_72_211": {
       "status": "OPEN",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_normalization_reuse_block7_20261008.md",
-      "evidence_sha256": "e05da15a23a053d5767f3358195ec0dc8e241292af41b504b517727293590179",
-      "source_manifest_sha256": "3ac981ddd070120b687a6d8f33e3c3375630a4dd953c31ecd6385c270a4ede68",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md",
+      "evidence_sha256": "0c30dccd597b2164db71e4db66fc6fa9065e1d894c4209bebefcfe3913603d79",
+      "source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
       "assertions": "LOCAL_POSITIVE_NEGATIVE_REGRESSION_PASS_WORDPRESS_MARIADB_OPEN",
       "wordpress_mariadb_run": null,
       "installer_sha256": "",
@@ -1121,8 +1121,9 @@
         "AFF_ERR_064_NO_UNDEFINED_VARIABLE_WARNING",
         "FOREIGN_AJAX_AFFILIATE_HOOKS_207_TO_75",
         "DUPLICATE_FRONTEND_AP_CAMPAIGN_QUERY_2_TO_1",
-        "DUPLICATE_FRONTEND_CAMPAIGN_META_NORMALIZATION_4_TO_2_FOR_TWO_RECORDS",
-        "FUNCTIONAL_EQUALITY_PASS",
+        "DUPLICATE_FRONTEND_CAMPAIGN_META_NORMALIZATION_HALVED",
+        "CONTENT_CONTEXT_REQUEST_CACHE_FUNCTIONAL_EQUALITY_PASS",
+        "CATEGORY_CONTEXT_REQUEST_CACHE_FUNCTIONAL_EQUALITY_PASS",
         "ADMIN_PATH_UNCHANGED",
         "PHP_LINT_22_OF_22",
         "NO_INSTALLER_YET"
