@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 280,
+  "generation": 281,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "7e9b510c6021cd44ccbd0630d712a48a5a2997f968382494b2912bf21b34a660",
+    "manifest_sha256": "5e8925bfa09e7fe04c7a093d3d1d889eb1e76a0e446f9521ee62f1127f5b8068",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,21 +35,21 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.204",
-    "status": "WORKING_6_72_204_THREE_FIXES_GATE_PASS_INSTALLER_READY_FINAL_BIND_PENDING",
+    "version": "6.72.205",
+    "status": "WORKING_6_72_205_GLOSSARY_BREED_LIVE_ANCHOR_FIX_BOUND",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "7e9b510c6021cd44ccbd0630d712a48a5a2997f968382494b2912bf21b34a660",
+    "current_source_manifest_sha256": "5e8925bfa09e7fe04c7a093d3d1d889eb1e76a0e446f9521ee62f1127f5b8068",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "aea45135ced0606c3aa63aa2b2489213d1a2b4b2b5c03cfdb494e3c163d6de92",
+    "candidate_reference_artifact_sha256": "",
     "candidate_reference_scope": "Authoritative section 9 rule order restored: specific mapped banner stays in its stored target/path; nonmatching specific banner stays out; if no specific banner is available for the target, explicitly general active banners may enter the existing technically/format-valid stable fallback pool. Manual topic assignment still writes the same topic_targets truth. No frontend reclassification, new DB query, provider HTTP or new table.",
     "final_artifact_ref": "",
     "final_artifact_sha256": "",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.204.zip",
-    "handoff_artifact_bytes": 820403,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_204_THREE_FIXES_GATE_PASS",
+    "handoff_artifact_filename": "",
+    "handoff_artifact_bytes": 0,
+    "source_binding_status": "MANIFEST_28_FILES_6_72_205_GLOSSARY_BREED_ANCHOR_FIX_BOUND",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "FINAL_BIND_EXACT_TESTED_6_72_204_ONLY",
-    "current_focus_reason": "The three requested behaviors passed local 43/43 and fresh WordPress+MariaDB 52/52. No more functional changes or tests; bind only the exact tested installer."
+    "current_focus": "GLOSSARY_AND_BREED_SINGLE_BANNERS_ONLY",
+    "current_focus_reason": "Live 6.72.204: calculator PASS, glossary and breed single banners still absent. 6.72.205 removes only the design-DOM-anchor dependency for these two injectors; existing slot selection and format contracts remain authoritative."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_204_THREE_FIXES_GATE_PASS_INSTALLER_READY_FINAL_BIND_PENDING",
-    "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Do not change functionality. Bind only the exact tested AFFILIATE_ZENTRALE_6.72.204.zip (SHA256 aea45135ced0606c3aa63aa2b2489213d1a2b4b2b5c03cfdb494e3c163d6de92, 820403 bytes) to the final artifact path and run release-check.",
-    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_RELEASE_CHECK_PASS",
-    "after_completion_action": "NONE",
+    "state": "WORKING_6_72_205_GLOSSARY_BREED_LIVE_ANCHOR_FIX_BOUND",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Test only glossary single and breed single public injection with and without historical design anchors, exact existing format rules, duplicate guard, and calculator regression unchanged.",
+    "completion_condition": "GLOSSARY_BREED_6_72_205_REAL_WORDPRESS_INJECTION_GATES_PASS",
+    "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
-    "sequence": 122,
+    "sequence": 123,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672204_threefix_hard_positive_negative_20261008.md",
     "evidence_sha256": "b85b72df3c9c2c5ba17c6bf604969db6119052e42691c13790c793e33767391f",
-    "current_source_manifest_sha256": "7e9b510c6021cd44ccbd0630d712a48a5a2997f968382494b2912bf21b34a660",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_204_THREE_FIXES_GATE_PASS",
+    "current_source_manifest_sha256": "5e8925bfa09e7fe04c7a093d3d1d889eb1e76a0e446f9521ee62f1127f5b8068",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_205_GLOSSARY_BREED_ANCHOR_FIX_BOUND",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,20 +1041,12 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "LOCAL_43_OF_43_PASS + WORDPRESS_MARIADB_52_OF_52_PASS_RUN_37762816137. DO NOT RERUN FUNCTIONAL TESTS. FINALIZE EXACT TESTED INSTALLER ONLY.",
+    "pass_reuse_policy": "Reuse calculator 6.72.204 live PASS and all unaffected evidence. Test only glossary/breed real WordPress injection plus static calculator no-change regression.",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
-    "gate_runner_scope": "6_72_204_THREE_USER_REQUESTED_FIXES_ONLY",
-    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence.",
-    "final_installer": {
-      "filename": "AFFILIATE_ZENTRALE_6.72.204.zip",
-      "sha256": "aea45135ced0606c3aa63aa2b2489213d1a2b4b2b5c03cfdb494e3c163d6de92",
-      "bytes": 820403,
-      "workflow_run": 37762816137,
-      "workflow_artifact_id": 11542523698,
-      "status": "TESTED_READY_FINAL_REPO_BINDING_PENDING"
-    }
+    "gate_runner_scope": "6_72_205_GLOSSARY_BREED_ONLY_CALCULATOR_REGRESSION_NO_CHANGE",
+    "gate_runner_reason": "The authorized RUN_BOUND_RELEASE_GATES action had no current 6.72.203 execution route; historical version-pinned workflows are not current evidence."
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -2602,5 +2594,10 @@
       "BREED_SINGLE_BANNER_RESTORED_FORMAT_UNCHANGED",
       "CALCULATOR_INLINE_BANNER_SUPPRESSED_BOTTOM_BANNER_KEPT"
     ]
+  },
+  "live_readback_672204": {
+    "calculator_second_inline_banner": "PASS_USER_CONFIRMED",
+    "glossary_single_banner": "FAIL_USER_CONFIRMED_NO_BANNER",
+    "breed_single_banner": "FAIL_USER_CONFIRMED_NO_BANNER"
   }
 }
