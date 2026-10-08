@@ -1057,11 +1057,11 @@ trait PPAR_Article_Plans_Trait {
         return $out;
     }
 
-    private function article_plan_apply_to_content($content, $post_id, $suppress_banners = false) {
+    private function article_plan_apply_to_content($content, $post_id, $suppress_inline_banner = false) {
         $preview = $this->article_preview_for_post($post_id);
         if ($preview) {
             $anchor = $this->article_plan_find_anchor((string) $content);
-            $banner_id = $suppress_banners ? 0 : absint($preview['banner_campaign_ids'][0] ?? 0);
+            $banner_id = $suppress_inline_banner ? 0 : absint($preview['banner_campaign_ids'][0] ?? 0);
             if ($banner_id > 0 && !empty($anchor)) {
                 $offset = $this->article_plan_find_render_offset($content, $anchor);
                 $banner_html = $this->article_plan_render_banner_campaign($post_id, $banner_id, true);
@@ -1091,7 +1091,7 @@ trait PPAR_Article_Plans_Trait {
             $plan=$rebuilt;
         }
         $main_banner_rendered_at_bottom = false;
-        if (!$suppress_banners && in_array((string) ($plan['banner']['status'] ?? ''), array('ready', 'pending_anchor'), true)) {
+        if (!$suppress_inline_banner && in_array((string) ($plan['banner']['status'] ?? ''), array('ready', 'pending_anchor'), true)) {
             $anchor = (array) ($plan['banner']['anchor'] ?? array());
             $offset = !empty($anchor) ? $this->article_plan_find_render_offset($content, $anchor) : 0;
             if ($offset <= 0) {
@@ -1120,7 +1120,7 @@ trait PPAR_Article_Plans_Trait {
                 $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => false));
             }
         }
-        if (!$suppress_banners && !$main_banner_rendered_at_bottom && ($plan['products']['status'] ?? '') !== 'ready' && in_array((string)($plan['banner_2']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+        if (!$main_banner_rendered_at_bottom && ($plan['products']['status'] ?? '') !== 'ready' && in_array((string)($plan['banner_2']['status'] ?? ''),array('ready','pending_anchor'),true)) {
             $first_banner_id=absint($plan['banner']['campaign_post_id'] ?? 0);
             $second_banner_id=absint($plan['banner_2']['campaign_post_id'] ?? 0);
             if ($second_banner_id > 0 && $second_banner_id !== $first_banner_id) {
