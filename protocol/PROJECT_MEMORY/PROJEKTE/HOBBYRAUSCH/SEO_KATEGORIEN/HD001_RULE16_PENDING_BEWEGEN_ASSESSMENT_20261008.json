@@ -1,0 +1,2162 @@
+{
+  "contract": "HD001_RULE16_PENDING_BEWEGEN_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__48_OF_48_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Balance Board",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Board & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Balance Board für Anfänger auswählen",
+            "Rolle und Boardbreite abstimmen",
+            "Rutschfeste Unterlage nutzen",
+            "Schutzabstand fürs Training planen",
+            "Board vor dem Training prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Balance & Technik",
+          "intent_count": 5,
+          "article_intents": [
+            "Grundposition auf Balance Board",
+            "Aufsteigen ohne Festhalten lernen",
+            "Gewicht kontrolliert verlagern",
+            "Seitliche Balance halten",
+            "Kontrolliert vom Board absteigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Training & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Kurze Balance-Trainingseinheit planen",
+            "Fortschritt beim Balance Board messen",
+            "Übungen für Beine und Rumpf",
+            "Stürze beim Üben vermeiden",
+            "Schwierigkeitsgrad sicher steigern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns balance-board setup, fundamental balance skills and progressive training.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Baumklettern",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Klettern & Seil",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Ausrüstung & Schutz",
+          "intent_count": 5,
+          "article_intents": [
+            "Gurt fürs Baumklettern auswählen",
+            "Kletterseil fürs Baumklettern",
+            "Helm und Handschutz wählen",
+            "Wurfleine einsetzen",
+            "Ausrüstung vor Nutzung prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufstieg & Bewegung",
+          "intent_count": 5,
+          "article_intents": [
+            "Seil im Baum einbauen",
+            "Am Seil effizient aufsteigen",
+            "Positionierungsseil einsetzen",
+            "Im Kronenraum bewegen",
+            "Kontrolliert abseilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Baum & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Tragfähige Ankerpunkte beurteilen",
+            "Totholz vor Klettern erkennen",
+            "Baum schonend beklettern",
+            "Bodenbereich absichern",
+            "Rettungsplan vor Klettern festlegen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns recreational tree-climbing equipment, rope movement and tree-specific safety; generic rope-technique ownership remains with Seiltechnik.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bikepacking",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Rad & Gepäck",
+          "intent_count": 5,
+          "article_intents": [
+            "Bikepacking-Rad auswählen",
+            "Rahmentasche richtig packen",
+            "Lenkertasche befestigen",
+            "Gewicht am Rad verteilen",
+            "Werkzeug fürs Bikepacking zusammenstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Route & Navigation",
+          "intent_count": 5,
+          "article_intents": [
+            "Bikepacking-Route planen",
+            "GPX-Track vorbereiten",
+            "Versorgungspunkte einplanen",
+            "Höhenmeter realistisch einschätzen",
+            "Navigation bei leerem Akku absichern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Übernachtung & Praxis",
+          "intent_count": 5,
+          "article_intents": [
+            "Schlafsystem fürs Bikepacking wählen",
+            "Wasser unterwegs planen",
+            "Essen für Mehrtagestouren",
+            "Panne unterwegs reparieren",
+            "Bikepacking-Ausrüstung bei Regen schützen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns bicycle travel with lightweight luggage, route planning, overnight systems and field repair; generic cycling remains with Radfahren.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Blasrohrsport",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wurf & Ziel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Blasrohr & Pfeile",
+          "intent_count": 5,
+          "article_intents": [
+            "Blasrohr für Sport auswählen",
+            "Blasrohrlänge vergleichen",
+            "Darts passend auswählen",
+            "Mundstück richtig nutzen",
+            "Blasrohr sicher transportieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schusstechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Stand beim Blasrohrschießen",
+            "Atmung vor dem Schuss",
+            "Zielen mit dem Blasrohr",
+            "Konstant ausblasen",
+            "Trefferbild kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Training & Ziel",
+          "intent_count": 5,
+          "article_intents": [
+            "Blasrohr auf Scheibe trainieren",
+            "Entfernung schrittweise erhöhen",
+            "Schussgruppen dokumentieren",
+            "Konzentration im Training",
+            "Sicheren Schießbereich einrichten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns sporting blowgun equipment, shooting technique and target practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bogenschießen",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wurf & Ziel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic archery orientation and comparison. Traditionelles Bogenschießen and 3D-Bogenschießen retain their specialist technique and course intents.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Boomerangwerfen",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wurf & Ziel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Boomerang & Bedingungen",
+          "intent_count": 5,
+          "article_intents": [
+            "Boomerang für Anfänger auswählen",
+            "Rechts- und Linkshänder-Boomerang unterscheiden",
+            "Wind fürs Werfen beurteilen",
+            "Freie Wurffläche auswählen",
+            "Boomerang vor Wurf prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wurftechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Boomerang richtig greifen",
+            "Wurfwinkel einstellen",
+            "Gegen den Wind versetzt werfen",
+            "Wurfkraft dosieren",
+            "Rückkehrbahn beobachten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tuning & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Boomerang-Flügel fein tunen",
+            "Zu hohe Flugbahn korrigieren",
+            "Zu kurze Rückkehr korrigieren",
+            "Fangen sicher üben",
+            "Wurfserien dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns returning-boomerang selection, throwing, tuning and safe practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bushcraft",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns broad bushcraft orientation, skill families and ethical outdoor-practice overview. Specific shelter/camping identities retain their detailed ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Cardistry",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Karten & Grip",
+          "intent_count": 5,
+          "article_intents": [
+            "Kartendeck für Cardistry auswählen",
+            "Deck einspielen",
+            "Mechanic's Grip lernen",
+            "Biddle Grip lernen",
+            "Karten bei Training pflegen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundmoves",
+          "intent_count": 5,
+          "article_intents": [
+            "Charlier Cut lernen",
+            "Swing Cut lernen",
+            "Revolution Cut lernen",
+            "Thumb Fan üben",
+            "Spring mit Karten lernen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Combos & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Cardistry-Moves verbinden",
+            "Flüssige Übergänge üben",
+            "Beidhändig trainieren",
+            "Geschwindigkeit kontrolliert steigern",
+            "Training auf Video analysieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns flourish-based card manipulation, deck setup and sequence practice; magic tricks are outside this owner.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Contact Juggling",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Ball & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Contact-Juggling-Ball auswählen",
+            "Ballgröße passend wählen",
+            "Acryl- und Stageball vergleichen",
+            "Sicheren Übungsplatz einrichten",
+            "Ball vor Kratzern schützen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Isolation & Grundlagen",
+          "intent_count": 5,
+          "article_intents": [
+            "Palm Isolation lernen",
+            "Finger Isolation üben",
+            "Butterfly-Grundbewegung",
+            "Handwechsel kontrollieren",
+            "Rollpunkte auf Händen verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Body Rolls & Sequenzen",
+          "intent_count": 5,
+          "article_intents": [
+            "Arm Roll lernen",
+            "Chest Roll vorbereiten",
+            "Mehrere Isolations verbinden",
+            "Tempo in Sequenzen variieren",
+            "Drops im Training reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns contact-juggling ball choice, isolation, body rolls and sequence training.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Diabolo",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Diabolo & Schnur",
+          "intent_count": 5,
+          "article_intents": [
+            "Diabolo für Anfänger auswählen",
+            "Stäbe und Schnur abstimmen",
+            "Schnurlänge einstellen",
+            "Diabolo-Achse prüfen",
+            "Schnur rechtzeitig wechseln"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundtechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Diabolo beschleunigen",
+            "Diabolo stabil ausrichten",
+            "Hochwurf lernen",
+            "Diabolo sicher fangen",
+            "Korrekturbewegungen üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tricks & Combos",
+          "intent_count": 5,
+          "article_intents": [
+            "Trapez mit Diabolo",
+            "Around the Leg lernen",
+            "Sun-Trick üben",
+            "Tricks flüssig verbinden",
+            "Zwei Diabolos vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns diabolo equipment, acceleration, string tricks and combinations.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Discgolf",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wurf & Ziel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Scheiben & Bag",
+          "intent_count": 5,
+          "article_intents": [
+            "Discgolf-Scheiben für Anfänger",
+            "Putter Midrange Driver unterscheiden",
+            "Stabilität von Discs verstehen",
+            "Scheibengewicht auswählen",
+            "Kleines Discgolf-Bag zusammenstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wurftechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Backhand-Griff lernen",
+            "Forehand-Griff lernen",
+            "Anlauf beim Discgolf",
+            "Release-Winkel kontrollieren",
+            "Putting-Technik üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Course & Strategie",
+          "intent_count": 5,
+          "article_intents": [
+            "Discgolf-Bahn lesen",
+            "Sichere Wurflinie wählen",
+            "Wind bei Scheibenwahl berücksichtigen",
+            "Score korrekt führen",
+            "Layup oder Angriff entscheiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns disc selection, throwing form and course play.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Drachenbau",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Plan & Material",
+          "intent_count": 5,
+          "article_intents": [
+            "Drachenplan für Anfänger auswählen",
+            "Gestänge für Drachen wählen",
+            "Segeltuch oder Folie auswählen",
+            "Verbinder und Beschläge planen",
+            "Materialgewicht abschätzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bau & Bespannung",
+          "intent_count": 5,
+          "article_intents": [
+            "Drachengestänge zuschneiden",
+            "Segel sauber ausschneiden",
+            "Segel am Rahmen befestigen",
+            "Nähte bei Drachensegeln ausführen",
+            "Waagepunkte am Drachen anbringen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Trimm & Testflug",
+          "intent_count": 5,
+          "article_intents": [
+            "Drachenwaage einstellen",
+            "Schwerpunkt prüfen",
+            "Ersten Testflug durchführen",
+            "Ziehen nach einer Seite korrigieren",
+            "Drachen nach Bruch reparieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kite construction, materials, bridle and flight testing; flying/trick ownership remains with sport-kite identities.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Einradfahren",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic unicycling orientation, basic riding and discipline comparison. Mountain Unicycling retains off-road specialist ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Footgolf",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Regeln & Ausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Footgolf für Anfänger",
+            "Footgolf-Regeln verstehen",
+            "Geeignete Schuhe wählen",
+            "Ball fürs Footgolf auswählen",
+            "Scorekarte richtig führen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schusstechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Geraden Footgolf-Schuss",
+            "Distanzschuss kontrollieren",
+            "Kurze Annäherung spielen",
+            "Putten mit Fußball",
+            "Schusskraft dosieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Course & Strategie",
+          "intent_count": 5,
+          "article_intents": [
+            "Footgolf-Bahn lesen",
+            "Hindernisse sicher umspielen",
+            "Balllage beurteilen",
+            "Risiko auf langen Bahnen steuern",
+            "Turnierrunde vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns footgolf rules, kicking technique and course strategy.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Freediving",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wasser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Sicherheit & Buddy",
+          "intent_count": 5,
+          "article_intents": [
+            "Freediving nur mit Buddy planen",
+            "Blackout-Risiko verstehen",
+            "Sicherungsposition im Wasser",
+            "Oberflächenprotokoll nach Tauchgang",
+            "Trainingsgrenzen festlegen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Atmung & Entspannung",
+          "intent_count": 5,
+          "article_intents": [
+            "Entspannungsroutine vor Freedive",
+            "Atemreflex verstehen",
+            "CO2-Toleranz sicher trainieren",
+            "Keine Hyperventilation vor Tauchgang",
+            "Recovery Breathing üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Technik & Tiefe",
+          "intent_count": 5,
+          "article_intents": [
+            "Druckausgleich beim Freediving",
+            "Duck Dive lernen",
+            "Flossentechnik effizient machen",
+            "Körperposition unter Wasser",
+            "Tauchgänge schrittweise vertiefen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns recreational breath-hold diving safety, equalization, technique and structured training; scuba is separate.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Geocaching",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "GPS, App & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Geocaching-App einrichten",
+            "Koordinaten richtig lesen",
+            "Offline-Karten vorbereiten",
+            "Cachebeschreibung auswerten",
+            "Tour mit mehreren Caches planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Suchen & Loggen",
+          "intent_count": 5,
+          "article_intents": [
+            "Typische Verstecke erkennen",
+            "Cache unauffällig suchen",
+            "Fund korrekt loggen",
+            "Trackables richtig behandeln",
+            "DNF sinnvoll dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Cache legen & pflegen",
+          "intent_count": 5,
+          "article_intents": [
+            "Eigenen Geocache planen",
+            "Geeigneten Standort auswählen",
+            "Dose wetterfest vorbereiten",
+            "Listing verständlich schreiben",
+            "Cache regelmäßig warten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns GPS/app-based cache finding, field navigation, cache types and cache maintenance.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Hammock Camping",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Hängematte & Aufhängung",
+          "intent_count": 5,
+          "article_intents": [
+            "Camping-Hängematte auswählen",
+            "Baumschonende Gurte verwenden",
+            "Hängematte richtig aufhängen",
+            "Abstand zwischen Bäumen beurteilen",
+            "Ridgeline einstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tarp & Isolation",
+          "intent_count": 5,
+          "article_intents": [
+            "Tarp über Hängematte spannen",
+            "Underquilt auswählen",
+            "Topquilt richtig nutzen",
+            "Windschutz verbessern",
+            "Kondensfeuchte reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Camp & Wetter",
+          "intent_count": 5,
+          "article_intents": [
+            "Hängemattenplatz auswählen",
+            "Regenablauf an Gurten stoppen",
+            "Ausrüstung trocken lagern",
+            "Bei Kälte in Hängematte schlafen",
+            "Camp morgens rückstandsfrei abbauen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hammock-specific suspension, tarp, insulation and camp setup; generic Camping stays orientation owner.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "HEMA",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns broad Historical European Martial Arts orientation across weapon systems, sources and training formats. Historisches Fechten retains fencing-specific practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Highlining",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Rigging & Redundanz",
+          "intent_count": 5,
+          "article_intents": [
+            "Highline-System redundant planen",
+            "Webbing für Highline auswählen",
+            "Backup-Line richtig führen",
+            "Ankerpunkte redundant verbinden",
+            "Rigging vor Nutzung kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Leash & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Leash-System verstehen",
+            "Leash Ring korrekt einsetzen",
+            "Highline-Gurt auswählen",
+            "Partnercheck vor Einstieg",
+            "Rettungsplan vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufstehen & Gehen",
+          "intent_count": 5,
+          "article_intents": [
+            "Auf Highline aufstehen",
+            "Blickführung bei Höhe",
+            "Erste Schritte auf Highline",
+            "Leash Fall kontrolliert üben",
+            "Mentale Ruhe bei Exposition trainieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns highline-specific rigging, leash systems, exposure management and walking technique; generic slackline remains with Slacklining.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "historisches Fechten",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Waffe & Schutz",
+          "intent_count": 5,
+          "article_intents": [
+            "Trainingsschwert auswählen",
+            "Fechtmaske für historisches Fechten",
+            "Handschutz richtig wählen",
+            "Jacke und Protektoren abstimmen",
+            "Ausrüstung vor Sparring prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundtechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Grundstellung beim historischen Fechten",
+            "Schrittarbeit üben",
+            "Hiebe kontrolliert ausführen",
+            "Paraden lernen",
+            "Distanzgefühl trainieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Drills & Sparring",
+          "intent_count": 5,
+          "article_intents": [
+            "Partnerdrills sicher durchführen",
+            "Tempo im Sparring steigern",
+            "Trefferkontrolle üben",
+            "Regeln für freies Fechten festlegen",
+            "Sparring nachbesprechen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns historical fencing weapon handling, protective equipment and sparring practice within the broader HEMA universe.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Jugger",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Regeln & Ausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Jugger für Anfänger",
+            "Pompfenarten unterscheiden",
+            "Pompfe sicher bauen oder auswählen",
+            "Jugg und Spielfeld verstehen",
+            "Schutzausrüstung einordnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pompfen-Technik",
+          "intent_count": 5,
+          "article_intents": [
+            "Reichweite kontrollieren",
+            "Sichere Treffertechnik",
+            "Blocken mit Pompfe",
+            "Duellbewegung trainieren",
+            "Pin-Regel praktisch anwenden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Team & Taktik",
+          "intent_count": 5,
+          "article_intents": [
+            "Läuferrolle trainieren",
+            "Kettenposition einordnen",
+            "Teamaufstellung planen",
+            "Überzahlsituationen nutzen",
+            "Spielzüge nach Runde analysieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Jugger rules, pompfen equipment, movement and team tactics.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kanutouren",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wasser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Boot & Ausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Kanu für Tour auswählen",
+            "Paddel passend einstellen",
+            "Schwimmweste auswählen",
+            "Gepäck wasserdicht packen",
+            "Boot richtig beladen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Paddeltechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Grundschlag im Kanu",
+            "Steuerschlag lernen",
+            "Bogenschlag einsetzen",
+            "Kanu zu zweit koordinieren",
+            "Bei Wind Kurs halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tour & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Kanutour planen",
+            "Ein- und Ausstiegsstellen wählen",
+            "Pegel und Strömung prüfen",
+            "Kenterung vorbereiten",
+            "Umtragen an Hindernissen planen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns touring-canoe/kayak trip planning, paddling, loading and water safety.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kendama",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kendama & Grip",
+          "intent_count": 5,
+          "article_intents": [
+            "Kendama für Anfänger auswählen",
+            "Ken Grip lernen",
+            "Sara Grip lernen",
+            "Schnurlänge einstellen",
+            "Kendama vor Training prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundtricks",
+          "intent_count": 5,
+          "article_intents": [
+            "Big Cup lernen",
+            "Small Cup lernen",
+            "Base Cup lernen",
+            "Spike sicher treffen",
+            "Around Japan üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tricks & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Lighthouse lernen",
+            "Earth Turn üben",
+            "Trick-Combos verbinden",
+            "Trefferquote dokumentieren",
+            "Beidhändiges Training einbauen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kendama setup, basic catches and trick sequences.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kite Buggy",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Buggy & Kite",
+          "intent_count": 5,
+          "article_intents": [
+            "Kite Buggy auswählen",
+            "Sitzposition einstellen",
+            "Depower- oder Handle-Kite wählen",
+            "Leinenlänge abstimmen",
+            "Helm und Schutz wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kite & Fahrtechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Kite im Windfenster kontrollieren",
+            "Anfahren mit Kite Buggy",
+            "Geschwindigkeit dosieren",
+            "Wenden mit Buggy",
+            "Anhalten und Kite depowern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Spot & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Kite-Buggy-Spot beurteilen",
+            "Windstärke vor Fahrt prüfen",
+            "Sicherheitsabstand halten",
+            "Notauslösung trainieren",
+            "Bodenbedingungen einschätzen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kite-buggy equipment, traction-kite control and buggy driving safety.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Landkiten",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kite & Leinen",
+          "intent_count": 5,
+          "article_intents": [
+            "Landkite für Anfänger auswählen",
+            "Handle- und Depower-Kite vergleichen",
+            "Leinen korrekt auslegen",
+            "Safety-System prüfen",
+            "Windbereich des Kites verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Steuerung & Power",
+          "intent_count": 5,
+          "article_intents": [
+            "Windfenster beim Landkiten",
+            "Kite im Zenit stabil halten",
+            "Powerzone kontrollieren",
+            "Loops sicher üben",
+            "Zugkraft dosieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Spot & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Geeigneten Landkite-Spot wählen",
+            "Windböen beurteilen",
+            "Starthelfer koordinieren",
+            "Notauslösung einsetzen",
+            "Sicher landen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns traction-kite flying on land without buggy, power control and safe spot use.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Longboard Dancing",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Board & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Dancing-Longboard auswählen",
+            "Decklänge für Dancing",
+            "Achsen einstellen",
+            "Rollen passend wählen",
+            "Gripfläche fürs Footwork"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundschritte",
+          "intent_count": 5,
+          "article_intents": [
+            "Cross Step lernen",
+            "Peter Pan Schritt",
+            "180 Step üben",
+            "Board Walk trainieren",
+            "Footwork im Rollen stabilisieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Combos & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Dancing-Schritte verbinden",
+            "Tempo zur Musik variieren",
+            "Carving in Combos integrieren",
+            "Sicheren Übungsplatz wählen",
+            "Stürze kontrolliert vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns dancing-specific longboard setup, footwork and combinations.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mikroabenteuer",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Cross-hobby inspiration/lifestyle topic spanning hiking, cycling, camping and short outdoor trips; it is not one stable skill/practice hub and belongs editorially.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mountain Unicycling",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Einrad & Schutz",
+          "intent_count": 5,
+          "article_intents": [
+            "Muni-Einrad auswählen",
+            "Reifengröße fürs Gelände",
+            "Pedale mit Grip wählen",
+            "Knie- und Schienbeinschutz",
+            "Sattel und Kurbeln abstimmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Trailtechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Bergauf mit Einrad fahren",
+            "Steile Abfahrt kontrollieren",
+            "Hindernisse überrollen",
+            "Wurzeln und Steine meistern",
+            "Kurven auf losem Boden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tour & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Muni-Trail auswählen",
+            "Kondition fürs Gelände trainieren",
+            "Absteigen am Hang üben",
+            "Werkzeug auf Tour mitnehmen",
+            "Sturzrisiko im Gelände reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns off-road unicycling setup, climbing/descending technique and trail safety; generic unicycling remains with Einradfahren.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mountainboarding",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Board & Schutz",
+          "intent_count": 5,
+          "article_intents": [
+            "Mountainboard auswählen",
+            "Bindings einstellen",
+            "Reifendruck abstimmen",
+            "Helm und Protektoren wählen",
+            "Board vor Fahrt prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fahren & Bremsen",
+          "intent_count": 5,
+          "article_intents": [
+            "Grundposition auf Mountainboard",
+            "Carven lernen",
+            "Geschwindigkeit kontrollieren",
+            "Fußbremse oder Bremssystem nutzen",
+            "Sicher abspringen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gelände & Tricks",
+          "intent_count": 5,
+          "article_intents": [
+            "Geeigneten Hang auswählen",
+            "Unebenheiten überfahren",
+            "Kleine Sprünge vorbereiten",
+            "Landung stabilisieren",
+            "Nassen oder losen Untergrund beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns all-terrain board setup, braking, turning and trail/jump technique.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Orientierungslauf",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Karte & Kompass",
+          "intent_count": 5,
+          "article_intents": [
+            "OL-Karte lesen",
+            "Kartensymbole verstehen",
+            "Kompass richtig halten",
+            "Karte einnorden",
+            "Maßstab und Höhenlinien nutzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Navigation & Route",
+          "intent_count": 5,
+          "article_intents": [
+            "Angriffspunkt wählen",
+            "Leitlinien im Gelände nutzen",
+            "Route zwischen Posten planen",
+            "Distanz im Gelände schätzen",
+            "Fehler schnell korrigieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Training & Wettkampf",
+          "intent_count": 5,
+          "article_intents": [
+            "Orientierungslauf für Anfänger",
+            "Postenarbeit im Tempo",
+            "Routen nach Lauf analysieren",
+            "Laufgeschwindigkeit an Navigation anpassen",
+            "Wettkampfmaterial vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns map-and-compass racing/navigation practice, route choice and training.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Packrafting",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wasser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Packraft & Ausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Packraft für Tour auswählen",
+            "Paddel für Packraft",
+            "Schwimmweste auswählen",
+            "Gepäck im Packraft befestigen",
+            "Reparaturset mitnehmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Paddeln & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Packraft richtig besteigen",
+            "Grundschläge im Packraft",
+            "Kehrwasser einordnen",
+            "Kenterung und Wiedereinstieg",
+            "Wetter und Wasserstand prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tour & Portage",
+          "intent_count": 5,
+          "article_intents": [
+            "Packraft-Tour planen",
+            "Boot im Rucksack transportieren",
+            "Einsetzstellen auswählen",
+            "Land- und Wasserabschnitte kombinieren",
+            "Ausrüstung nach Tour trocknen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns packraft equipment, paddling, mixed land-water touring and safety.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pen Spinning",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Pen & Grip",
+          "intent_count": 5,
+          "article_intents": [
+            "Pen für Pen Spinning auswählen",
+            "Pen Mod einordnen",
+            "Gewicht und Balance verstehen",
+            "Fingerhaltung vorbereiten",
+            "Sicheren Übungsplatz wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundtricks",
+          "intent_count": 5,
+          "article_intents": [
+            "ThumbAround lernen",
+            "FingerPass lernen",
+            "Charge lernen",
+            "Sonic lernen",
+            "Tricks in beide Richtungen üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Combos & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Pen-Spinning-Combos bauen",
+            "Übergänge zwischen Tricks",
+            "Tempo kontrolliert steigern",
+            "Schwache Finger gezielt trainieren",
+            "Training filmen und analysieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns pen-mod setup, finger tricks and combo practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Poi",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Poi & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Poi für Anfänger auswählen",
+            "Poi-Länge einstellen",
+            "Übungs-Poi selber vorbereiten",
+            "Grip richtig halten",
+            "Sicheren Trainingsraum wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundmuster",
+          "intent_count": 5,
+          "article_intents": [
+            "Two-Beat-Weave lernen",
+            "Three-Beat-Weave lernen",
+            "Butterfly mit Poi",
+            "Reels üben",
+            "Planes sauber halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Transitions & Flow",
+          "intent_count": 5,
+          "article_intents": [
+            "Poi-Muster verbinden",
+            "Drehrichtung wechseln",
+            "Turns integrieren",
+            "Tempo zur Musik variieren",
+            "Flow-Sequenz aufbauen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns poi equipment, timing, planes and movement patterns.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Powerkiting",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kite & Safety",
+          "intent_count": 5,
+          "article_intents": [
+            "Powerkite auswählen",
+            "Handle oder Bar wählen",
+            "Leinen korrekt anknüpfen",
+            "Safety-Leash prüfen",
+            "Windbereich verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Steuerung & Zugkraft",
+          "intent_count": 5,
+          "article_intents": [
+            "Powerkite starten",
+            "Windfenster aktiv nutzen",
+            "Zugkraft dosieren",
+            "Loops kontrolliert fliegen",
+            "Kite sicher landen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Training & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Wind vor Session messen",
+            "Spot mit Sicherheitsraum wählen",
+            "Böen richtig einschätzen",
+            "Notauslösung trainieren",
+            "Power schrittweise steigern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns traction-kite power handling, setup and safety; buggy/land disciplines retain specific riding ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pumptrack",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Bike & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Bike für Pumptrack auswählen",
+            "Reifendruck einstellen",
+            "Sattelhöhe anpassen",
+            "Schutzausrüstung wählen",
+            "Bike vor Session prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pumpen & Kurven",
+          "intent_count": 5,
+          "article_intents": [
+            "Pumpbewegung lernen",
+            "Roller ohne Pedaltritt fahren",
+            "Anlieger sauber fahren",
+            "Blickführung in Kurven",
+            "Geschwindigkeit durch Pumpen aufbauen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Linien & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Pumptrack-Linie lesen",
+            "Sprünge rollen statt springen",
+            "Manual über Roller vorbereiten",
+            "Rundenzeit kontrolliert verbessern",
+            "Sicher mit anderen fahren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns pumptrack riding technique, line choice and bike setup across appropriate cycles.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Seiltechnik",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Klettern & Seil",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Seil & Hardware",
+          "intent_count": 5,
+          "article_intents": [
+            "Seil für Seiltechnik auswählen",
+            "Karabiner richtig auswählen",
+            "Abseilgerät einordnen",
+            "Klemmgerät verwenden",
+            "Material vor Einsatz prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Knoten & Anker",
+          "intent_count": 5,
+          "article_intents": [
+            "Achterknoten sicher binden",
+            "Mastwurf anwenden",
+            "Prusikknoten einsetzen",
+            "Redundanten Anker aufbauen",
+            "Knoten nach Belastung kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufstieg, Abstieg & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Am Seil aufsteigen",
+            "Kontrolliert abseilen",
+            "Umsteigen zwischen Systemen",
+            "Partnercheck durchführen",
+            "Rettungsplan vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns general recreational rope systems, knots, ascent/descent and anchors; specific tree/climbing contexts retain their specialized ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Slacklining",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Rollen & Balance",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic slackline orientation, basic lowline setup and discipline comparison. Highlining retains specialist highline ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Speedcubing",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Cube & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Speedcube für Anfänger auswählen",
+            "Magnetstärke einstellen",
+            "Speedcube schmieren",
+            "Spannung einstellen",
+            "Cube regelmäßig reinigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Methoden & Algorithmen",
+          "intent_count": 5,
+          "article_intents": [
+            "CFOP Überblick lernen",
+            "F2L verbessern",
+            "OLL lernen",
+            "PLL lernen",
+            "Fingertricks für Algorithmen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Timing & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Ao5 und Ao12 verstehen",
+            "Solve-Zeiten dokumentieren",
+            "Lookahead trainieren",
+            "Cross-Planung verbessern",
+            "Turn Speed kontrolliert steigern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns timed cube solving, hardware setup, methods and deliberate practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Speedminton",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Schläger & Speeder",
+          "intent_count": 5,
+          "article_intents": [
+            "Crossminton-Schläger auswählen",
+            "Speeder-Arten unterscheiden",
+            "Griffstärke wählen",
+            "Spielfeld markieren",
+            "Windbedingungen einschätzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schlagtechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Grundschlag im Crossminton",
+            "Aufschlag lernen",
+            "Überkopf-Schlag kontrollieren",
+            "Defensivschlag üben",
+            "Treffpunkt verbessern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Spiel & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Crossminton-Regeln verstehen",
+            "Positionierung im Feld",
+            "Lange Ballwechsel trainieren",
+            "Wind taktisch nutzen",
+            "Matchtraining planen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns crossminton/speed-badminton equipment, strokes, court play and training.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Sportdrachen",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic sport-kite orientation and discipline comparison. Trick-Kiting, Powerkiting, Landkiten and Kite Buggy retain specialist ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Stand-up-Paddling-Touren",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wasser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Board & Tourenausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Touring-SUP auswählen",
+            "Paddellänge einstellen",
+            "Leash passend zur Gewässerart",
+            "Schwimmhilfe fürs SUP",
+            "Gepäck auf SUP befestigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Paddeltechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Effizienten SUP-Vorwärtsschlag",
+            "Geradeauslauf verbessern",
+            "Board mit Sweep Turn wenden",
+            "Kniend bei Wind paddeln",
+            "Paddelseite effizient wechseln"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tour & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "SUP-Tour planen",
+            "Windrichtung vor Tour prüfen",
+            "Ein- und Ausstieg wählen",
+            "Wasser und Verpflegung mitnehmen",
+            "Notfallplan auf Gewässer"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns SUP touring equipment, paddling efficiency, route planning and water safety.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Tarp Camping",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Tarp & Leinen",
+          "intent_count": 5,
+          "article_intents": [
+            "Tarp fürs Camping auswählen",
+            "Tarp-Material vergleichen",
+            "Abspannleinen vorbereiten",
+            "Heringe passend wählen",
+            "Ridgeline aufbauen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufbauvarianten",
+          "intent_count": 5,
+          "article_intents": [
+            "A-Frame Tarp aufbauen",
+            "Lean-To mit Tarp",
+            "Tarp bodennah bei Sturm",
+            "Tarp ohne Bäume aufstellen",
+            "Tarp über Hängematte spannen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wetter & Camp",
+          "intent_count": 5,
+          "article_intents": [
+            "Regenablauf am Tarp verbessern",
+            "Windrichtung beim Aufbau beachten",
+            "Kondensfeuchte reduzieren",
+            "Schlafplatz unter Tarp wählen",
+            "Tarp trocken einpacken"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns tarp-specific shelter selection, pitching, weather protection and camp practice under Camping orientation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Teqball",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Tisch, Ball & Regeln",
+          "intent_count": 5,
+          "article_intents": [
+            "Teqball für Anfänger",
+            "Teqball-Tisch verstehen",
+            "Geeigneten Fußball wählen",
+            "Aufschlagregeln lernen",
+            "Punktezählung verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Technik",
+          "intent_count": 5,
+          "article_intents": [
+            "Ballannahme beim Teqball",
+            "Kopfball kontrollieren",
+            "Fußpass auf Tisch",
+            "Körperdrehung am Tisch",
+            "Aufschlag präzisieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Spiel & Taktik",
+          "intent_count": 5,
+          "article_intents": [
+            "Einzelpositionierung im Teqball",
+            "Doppel-Absprachen trainieren",
+            "Gegner unter Druck setzen",
+            "Ballwinkel taktisch nutzen",
+            "Match nachträglich analysieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns teqball equipment, football-touch technique, rules and match tactics.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "traditionelles Bogenschießen",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wurf & Ziel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Bogen & Pfeile",
+          "intent_count": 5,
+          "article_intents": [
+            "Traditionellen Bogen auswählen",
+            "Recurve und Langbogen vergleichen",
+            "Pfeillänge bestimmen",
+            "Pfeilspine passend wählen",
+            "Tab oder Handschuh auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schusstechnik",
+          "intent_count": 5,
+          "article_intents": [
+            "Stand beim traditionellen Bogenschießen",
+            "Ankerpunkt finden",
+            "Instinktiv zielen",
+            "Sauberen Release üben",
+            "Nachhalten lernen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tuning & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Standhöhe einstellen",
+            "Nockpunkt setzen",
+            "Pfeilflug beurteilen",
+            "Blankbogentraining strukturieren",
+            "Treffergruppen dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns traditional bow styles, instinctive shooting, tuning and practice; generic archery orientation stays with Bogenschießen.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Trick-Kiting",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Wind & Drachen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Drachen & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Trickdrachen auswählen",
+            "Leinenlänge einstellen",
+            "Waage am Trickdrachen prüfen",
+            "Griffe und Schlaufen wählen",
+            "Windbereich des Drachens beachten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundsteuerung",
+          "intent_count": 5,
+          "article_intents": [
+            "Trickdrachen starten",
+            "Gerade Linien fliegen",
+            "Saubere Ecken steuern",
+            "Landung kontrollieren",
+            "Ground Pass üben"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tricks & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "Axel lernen",
+            "Fade lernen",
+            "Stall kontrollieren",
+            "Tricks verbinden",
+            "Slack in Leinen gezielt erzeugen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns stunt-kite setup, precise two-line control and named tricks.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Ultimate Frisbee",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Team & Wettkampf",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Disc & Regeln",
+          "intent_count": 5,
+          "article_intents": [
+            "Ultimate Frisbee für Anfänger",
+            "Spirit of the Game verstehen",
+            "Pivot-Regel lernen",
+            "Turnover-Regeln verstehen",
+            "Spielfeld und Endzone kennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Werfen & Fangen",
+          "intent_count": 5,
+          "article_intents": [
+            "Backhand im Ultimate",
+            "Forehand flick lernen",
+            "Scheibe gegen Wind werfen",
+            "Sicher fangen",
+            "Leading Pass spielen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Team & Taktik",
+          "intent_count": 5,
+          "article_intents": [
+            "Stack-Offense verstehen",
+            "Cuts richtig timen",
+            "Marking in Defense",
+            "Zone Defense einordnen",
+            "Teamspielzüge trainieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns ultimate rules, disc throwing/catching and team offense/defense.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Wintercamping",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Outdoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Zelt & Schlafsystem",
+          "intent_count": 5,
+          "article_intents": [
+            "Zelt fürs Wintercamping auswählen",
+            "Winterschlafsack passend wählen",
+            "Isomatten-R-Wert verstehen",
+            "Schlafplatz im Schnee vorbereiten",
+            "Schlafsystem trocken halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kochen & Wasser",
+          "intent_count": 5,
+          "article_intents": [
+            "Kocher bei Kälte auswählen",
+            "Brennstoff im Winter planen",
+            "Schnee sicher zu Wasser schmelzen",
+            "Trinkwasser vor Einfrieren schützen",
+            "Essen für Wintercamping planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kälte & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Kälteschichten fürs Camp",
+            "Kondensation im Winterzelt reduzieren",
+            "Nasse Kleidung trocknen",
+            "Erfrierungsrisiko erkennen",
+            "Wetterabbruchkriterien festlegen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns camping-specific cold-weather shelter, sleep, water and condensation practice under Camping orientation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Yo-Yo-Tricks",
+      "natural_world": "bewegen",
+      "parent_intermediate": "Geschick & Tricks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Yo-Yo & Setup",
+          "intent_count": 5,
+          "article_intents": [
+            "Yo-Yo für Tricks auswählen",
+            "Responsive und unresponsive unterscheiden",
+            "Yo-Yo-Schnur auswählen",
+            "Schnurlänge einstellen",
+            "Lager reinigen und pflegen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundtricks",
+          "intent_count": 5,
+          "article_intents": [
+            "Sleeper lernen",
+            "Forward Pass lernen",
+            "Breakaway lernen",
+            "Trapeze lernen",
+            "Bind bei unresponsive Yo-Yo"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Combos & Training",
+          "intent_count": 5,
+          "article_intents": [
+            "String-Tricks verbinden",
+            "Mount-Wechsel trainieren",
+            "Slack-Tricks vorbereiten",
+            "Combo flüssig spielen",
+            "Fehler per Video analysieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns modern yo-yo setup, string tricks and combo practice.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 48,
+    "hobby_hub": 41,
+    "orientation_universe": 6,
+    "editorial_topic": 1,
+    "visible_content_categories": 123,
+    "article_intents": 615
+  },
+  "next_action": "Continue with pending current CORE identities in Sammeln."
+}
