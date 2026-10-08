@@ -1,0 +1,72 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_013_RULE16_RECHECK",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "rules": "1.6",
+  "status": "PARTIAL_PASS",
+  "hubs": [
+    {
+      "canonical_name": "Handspinnen",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "leaves": [
+        {
+          "label": "Fasern & Vorbereitung",
+          "intent_keys": [
+            "faserauswahl",
+            "rohfasern_sortieren",
+            "kardieren",
+            "kammzug",
+            "fasertypen"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Spindel & Spinnrad",
+          "intent_keys": [
+            "spindelwahl",
+            "spinnrad_einstellen",
+            "uebersetzung",
+            "einzug",
+            "faser_setup"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Ausziehen & Drall",
+          "intent_keys": [
+            "kurzer_auszug",
+            "langer_auszug",
+            "drallmenge",
+            "garnstaerke",
+            "drallfehler"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Zwirnen & Garnaufbau",
+          "intent_keys": [
+            "zweifachzwirn",
+            "dreifachzwirn",
+            "kettenzwirn",
+            "zwirnrichtung",
+            "effektgarn"
+          ],
+          "count": 5
+        },
+        {
+          "label": "Waschen & Finish",
+          "intent_keys": [
+            "haspeln",
+            "drall_setzen",
+            "strang_waschen",
+            "trocknen",
+            "lagern"
+          ],
+          "count": 5
+        }
+      ],
+      "validation": "5_LEAVES__ALL_5_INTENTS__PASS"
+    }
+  ]
+}
