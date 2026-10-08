@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.4 FULL LOCAL POS+NEG HARD PASS / LIVE-DRYRUN PASS 355 CREATE + 75 ADOPT / 430 TARGETS / 0 FEHLER / 0 WRITES / V1.13.3 FEHLSYNC TERMINAL ROLLED_BACK / GENAU EIN FINAL-SYNC FREIGEGEBEN
+STATUS: V1.13.4 TECHNISCHER FULL-LOCAL-PASS, ABER SICHTBARE PORTALSTRUKTUR NACH REGEL-/KONZEPTAUDIT FAIL / HEADER-NAV = LEGACY+TARGET-MIX / MAGAZIN-NAV NICHT IN HEADER PROJIZIERT / TREIBHOLZ-ALIAS CORE-LEAKAGE / STRUKTURKORREKTUR ERFORDERLICH / KEIN WEITERER LIVE-SYNC
 
 ## Plugin
 
@@ -405,14 +405,35 @@ SHA-256 `653b76c0f923a97181f5848ec3560579194b7c020fd5b06500134180d1564d30`
 - alter V1.13.3-Fehlsync = ROLLED_BACK;
 - rollback_actions = [].
 
+## REGEL-/KONZEPTAUDIT – V1.13.4 NICHT FINAL
+
+Beleg:
+`SEO_KATEGORIEN/HD001_V1_13_4_FULL_RULE_CONCEPT_AUDIT_20261008.md`
+
+Technisch getestet heißt nicht fachlich final.
+Die Sichtprüfung deckt auf:
+- Header-/Theme-Navigation folgt nicht exklusiv dem Target-Snapshot;
+- ungebundene Legacy-Seiten bleiben sichtbar;
+- Magazine-Taxonomien werden nicht in die Header-Navigation projiziert;
+- Treibholz/Treibholz sammeln leakt als Legacy-Dublette in CORE;
+- mehrere konzeptionell getrennte Zwischenbereiche wurden im V1.13.4-Zielprofil zusammengezogen.
+
+Wichtig:
+Die dritte Seitenebene der 340 CORE-Hobbys existiert im Zielprofil.
+Nur die darunterliegende WordPress-Kategorieebene ist aktuell fast nur beim Buchbinden-Pilot vorhanden; dies entspricht Zielvertrag 2.5 und wird nicht ohne neue Regel global vervielfacht.
+
 ## ERSTER OFFENER BLOCKER
 
-KEIN PRE-SYNC-BLOCKER MEHR.
+`HD001_FRONTEND_TARGET_NAV_AND_STRUCTURE_CORRECTION_REQUIRED`
 
 ## EXAKT EINE NEXT ACTION
 
-Genau einen Final-Sync mit V1.13.4 ausführen.
-Danach sofort finalen JSON-/Frontend-Readback exportieren.
+Kein weiterer Live-Sync.
+
+Lokal einen korrigierten Gesamtstand bauen:
+Target-Snapshot-Navigation + Legacy-Ausblendung + Magazin-Navigation + Alias/Dubletten-Schutz + korrigierte Zwischenstruktur.
+Danach kompletter POS/NEG-E2E.
+Erst dann neuer Live-Kandidat.
 
 ## Release-/Artefaktgrenze
 
