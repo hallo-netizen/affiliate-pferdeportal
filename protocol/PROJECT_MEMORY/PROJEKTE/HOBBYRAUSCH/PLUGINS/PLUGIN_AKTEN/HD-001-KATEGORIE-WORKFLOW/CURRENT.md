@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 POST-ROLLBACK-DRYRUN PASS / 356 CREATE + 75 ADOPT / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / 0 WRITES / FINAL-SYNC GESPERRT DURCH LEEREN CORE-KNOTEN MATERIALKUNST
+STATUS: V1.13.1 POST-ROLLBACK-DRYRUN PASS / MATERIALKUNST-ENTFERNUNG PLAN-GRAPH-SIMULATION PASS / 430 ZIELOBJEKTE ERWARTET / ECHTES V1.13.1-ARTEFAKT ZUR NEUERSTELLUNG NICHT IM CAMPUS/CHAT VERFÜGBAR / NOCH KEIN FINAL-SYNC
 
 ## Plugin
 
@@ -247,29 +247,32 @@ Fachlicher Vollabgleich:
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
+`HD001_V1_13_1_CORRECTED_ARTIFACT_SOURCE_REQUIRED`
 
-Ursache bestätigt: historischer leerer statischer V1.12-Basisprofilknoten; kein aktuelles Hobby-/Entity-Placement rechtfertigt ihn.
+Materialkunst-Ursache und Korrektur sind fachlich geschlossen.
 
-Der aktuelle Zielplan will
-`core:gestalten:materialkunst`
-neu als Page anlegen, obwohl der Knoten:
-- 0 Kinder;
-- 0 kanonische Hobby-Identität;
-- 0 Entity-Placements;
-- keine belegte Relation
-hat.
+Plan-Graph-Simulation:
+`SEO_KATEGORIEN/HD001_V1_13_1_MATERIALKUNST_PATCH_SIMULATION_20261008.json` = PASS.
 
-Das verletzt Zielvertrag 2.5: keine inhaltsleeren Ebenen.
+Simulierter korrigierter Zielstand:
+- 430 physische Zielobjekte;
+- 403 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 355 CREATE + 75 ADOPT beim aktuellen Live-Ist;
+- keine fehlenden Parents / Zyklen / doppelten IDs oder Slugs.
+
+Offen ist nur die physische Umsetzung im echten installierbaren V1.13.1-Artefakt.
+Dieses ZIP/Zielprofil liegt weder im Campus noch als aktuelle Gesprächsdatei vor.
 
 ## EXAKT EINE NEXT ACTION
 
 Noch keinen Sync starten.
 
-Nur `core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
-Maschinenlesbare Patch-Spezifikation:
-`SEO_KATEGORIEN/HD001_V1_13_1_TARGET_PROFILE_PATCH_001_20261008.json`.
-Keine Ersatzstruktur erfinden und keine Hobbys umhängen.
+Das echte `HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip` bzw. dessen exaktes V1.13.1-Zielprofil bereitstellen.
+Dann ausschließlich den bereits definierten Ein-Knoten-Patch anwenden:
+`core:gestalten:materialkunst` entfernen.
 
 Danach:
 lokaler Hardtest → frischer Live-Dry-Run → JSON-Readback → erst bei PASS genau ein Final-Sync.
