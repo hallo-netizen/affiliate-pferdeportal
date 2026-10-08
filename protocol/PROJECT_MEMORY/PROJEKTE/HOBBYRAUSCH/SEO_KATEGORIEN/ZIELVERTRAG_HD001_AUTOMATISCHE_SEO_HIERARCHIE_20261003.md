@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.4
-ERSETZT: Fassung 2.3 vom 2026-10-07; davor Fassung 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.5
+ERSETZT: Fassung 2.4 vom 2026-10-07; davor Fassung 2.3 / 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -180,6 +180,22 @@ Verbindlich:
 
 Kurz:
 **Fachlogik zählt den möglichen Content; DataForSEO prüft und dedupliziert SEO-seitig.**
+
+### PRAKTISCHE FINALISIERUNG – Baseline statt 841 Einzelprüfungen
+
+Der 841er Hobby-Master ist **Inventar**, nicht eine Liste von 841 zwingend anzulegenden CORE-Kategorien.
+
+Verbindliche Produktionsregel:
+- bestehende V1.12-Zielbasis bleibt Ausgangspunkt: 95 Strukturknoten + 329 explizite CORE-Hobby-Zuordnungen;
+- nicht explizit freigegebene Master-Identitäten bleiben durch `retain_editorial` im Finder/Editorial erhalten;
+- ein CORE-Hobby darf Beiträge direkt enthalten;
+- 3–6 Unterkategorien sind **kein Startzwang** mehr;
+- Unterkategorien entstehen erst später, wenn echte Inhalte einen stabilen Cluster von ungefähr 5–12 eigenständigen Beiträgen bilden;
+- DataForSEO wird nur noch bei echten Promotions-/Demotions-/Ownership-Grenzfällen eingesetzt;
+- die 16er-Batchschleife endet mit Batch 003 und ist kein Produktionsmodell;
+- Abschlussweg: globaler Baseline-/Alias-/Override-Audit → genau ein Zielbaum-Delta → ein kontrollierter WordPress-Sync → Frontend-Readback → Plugin kann entfernt werden.
+
+Damit bleibt die Qualitätsregel für unterste Kategorien erhalten, wird aber erst dann angewendet, wenn eine solche Unterkategorie tatsächlich benötigt wird.
 
 ## Strukturprinzip
 
