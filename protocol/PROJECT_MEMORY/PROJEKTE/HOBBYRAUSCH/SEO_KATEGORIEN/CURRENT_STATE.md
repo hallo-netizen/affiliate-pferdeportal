@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / MATERIALKUNST ENTFERNT / V1.13.3 LIVE-SYNC BEI DIRECTORY EVENTS & REISEN [name] FEHLGESCHLAGEN UND VOLLSTÄNDIG ROLLED_BACK / FEHLER LOKAL 1:1 REPRODUZIERT / V1.13.4 KOMPLETTER LOKALER POSITIV+NEGATIV-WORKFLOW FRESH-ZIP HARD PASS / KEIN LIVE-SYNC / GENAU EIN V1.13.4-LIVE-DRYRUN OFFEN
+STATUS: REGELN 1.5 / V1.13.4 FULL LOCAL POS+NEG HARD PASS / FRISCHER V1.13.4 LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 PROVIDER / 0 WRITES / V1.13.3 FEHLSYNC TERMINAL ROLLED_BACK / GENAU EIN FINAL-SYNC FREIGEGEBEN
 
 ## Ziel
 
@@ -737,14 +737,41 @@ Fresh PHP-Lint:
 Beleg:
 `HD001_V1_13_4_FULL_LOCAL_POSNEG_HARDPASS_20261008.json`
 
+## V1.13.4 LIVE-DRYRUN – PASS
+
+Readback:
+`hobby-depot-final-target-readback-20261008-113205-utc.json`
+
+Bestätigt:
+- Plugin 1.13.4;
+- status PASS / valid=true;
+- 841 Identitäten;
+- 340 CORE / 501 Finder-Editorial;
+- 439 Logikknoten;
+- 430 physische Zielobjekte;
+- 355 CREATE;
+- 75 ADOPT;
+- 0 UPDATE / UNCHANGED / ARCHIVE;
+- errors = [];
+- 0 Provider-Aufrufe;
+- 0 Kosten;
+- 0 WordPress-Strukturwrites;
+- V1.13.3-Fehlsync terminal ROLLED_BACK;
+- rollback_actions = [];
+- noch kein aktiver Final-Snapshot.
+
+Dieser Live-Dry-Run entspricht exakt dem zuvor vollständig lokal positiv/negativ getesteten V1.13.4-Workflow.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_4_FRESH_LIVE_DRYRUN_PENDING`
+KEIN PRE-SYNC-BLOCKER MEHR.
 
 ## EXAKT EINE NEXT ACTION
 
-Exakt V1.13.4 installieren.
-Dann genau einmal den finalen Delta-Dry-Run ausführen und JSON exportieren.
+Jetzt genau einmal:
+`Kategorien → Finaler Zielbaum → geprüften Zielbaum einmal synchronisieren`
 
-Noch NICHT synchronisieren.
+Danach sofort finalen Readback als JSON exportieren.
+
+Kein weiterer Dry-Run vorher.
 
