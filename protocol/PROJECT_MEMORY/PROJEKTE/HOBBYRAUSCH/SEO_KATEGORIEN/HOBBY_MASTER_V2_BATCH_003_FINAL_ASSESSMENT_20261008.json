@@ -1,0 +1,192 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_003_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-08",
+  "status": "BATCH_003_FACHLICH_CLOSED__NO_TARGET_TREE_WRITE",
+  "source_result": "hobby-master-v2-assessment-20261008-072726-utc.json",
+  "source_result_sha256": "0b078ecb0434fc9c1686b6b00c364906f9a6a38ad15cd49bcccbdca5d04d9dc3",
+  "plugin_version": "1.12.6",
+  "ruleset": "HOBBY_MASTER_V2_20261007_CONCEPT_EXACT",
+  "dataforseo": {
+    "paid_calls": 1,
+    "total_cost_usd": 0.02424,
+    "keyword_count": 325,
+    "returned_count": 102
+  },
+  "wordpress_structure_writes": 0,
+  "decisions": [
+    {
+      "hobby_id": "hobby:drohnenbau",
+      "canonical_name": "Drohnenbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns self-build drone hardware/setup; FPV/Racing/Photography keep specialist application intents."
+    },
+    {
+      "hobby_id": "hobby:fpv-drohnen",
+      "canonical_name": "FPV-Drohnen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "ideal_leaf_count": 0,
+      "ownership_note": "Orientation owner for generic FPV equipment and setup; FPV-Racing keeps racing-specific build/tuning/training."
+    },
+    {
+      "hobby_id": "hobby:fpv-racing",
+      "canonical_name": "FPV-Racing",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns racing-specific classes/build/tuning/training/competition."
+    },
+    {
+      "hobby_id": "hobby:drohnenfotografie",
+      "canonical_name": "Drohnenfotografie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns photography-specific camera, composition, flight-planning and image workflow; generic drone technology stays elsewhere."
+    },
+    {
+      "hobby_id": "hobby:drone-soccer",
+      "canonical_name": "Drone Soccer",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "bewegen",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns sport-specific rules, protected drones, training, tactics and competition."
+    },
+    {
+      "hobby_id": "hobby:rc-crawling",
+      "canonical_name": "RC-Crawling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns generic crawling vehicle/setup/terrain intents."
+    },
+    {
+      "hobby_id": "hobby:scale-crawling",
+      "canonical_name": "Scale-Crawling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns scale-realism, bodies/details, proportion and scale-trail practice; generic crawling stays with RC-Crawling."
+    },
+    {
+      "hobby_id": "hobby:rc-baumaschinen",
+      "canonical_name": "RC-Baumaschinen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns RC construction machinery and hydraulic/site operation."
+    },
+    {
+      "hobby_id": "hobby:rc-lkw",
+      "canonical_name": "RC-LKW",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns RC truck chassis, drive, trailers, functions and scale driving."
+    },
+    {
+      "hobby_id": "hobby:rc-panzer",
+      "canonical_name": "RC-Panzer",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns tank-specific tracks/turret/effects/terrain operation."
+    },
+    {
+      "hobby_id": "hobby:rc-boote",
+      "canonical_name": "RC-Boote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "ideal_leaf_count": 0,
+      "ownership_note": "Orientation owner for generic RC boats; sailboats/submarines retain specialist ownership."
+    },
+    {
+      "hobby_id": "hobby:rc-segelboote",
+      "canonical_name": "RC-Segelboote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns sailboat rig, trim, sailing and regatta intents."
+    },
+    {
+      "hobby_id": "hobby:rc-u-boote",
+      "canonical_name": "RC-U-Boote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns submarine hull, diving system, electronics and underwater operation."
+    },
+    {
+      "hobby_id": "hobby:rc-flugzeuge",
+      "canonical_name": "RC-Flugzeuge",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "ideal_leaf_count": 0,
+      "ownership_note": "Orientation owner for generic fixed-wing RC aircraft; glider retains specialist ownership."
+    },
+    {
+      "hobby_id": "hobby:rc-segelflug",
+      "canonical_name": "RC-Segelflug",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 4,
+      "ownership_note": "Owns glider-specific launch, thermals, setup and soaring practice."
+    },
+    {
+      "hobby_id": "hobby:rc-helikopter",
+      "canonical_name": "RC-Helikopter",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "publication_role": "HOBBY_HUB",
+      "ideal_leaf_count": 5,
+      "ownership_note": "Owns RC helicopter setup, mechanics, flight training and tuning."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 13,
+    "orientation_universe": 3,
+    "editorial_topic": 0,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "cumulative_after_batch_003": {
+    "assessed": 48,
+    "remaining_of_841": 793
+  },
+  "next_action": "Do not continue 16-item batches. Switch to practical baseline-delta finalization."
+}
