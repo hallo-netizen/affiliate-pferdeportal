@@ -3072,7 +3072,20 @@ trait PPAR_Output_Objects_Trait {
                     $targets = $this->output_portal_targets($portal);
                     $matrix = $this->output_slot_matrix($portal);
                     if (!is_wp_error($targets) && !is_wp_error($matrix)) {
-                        foreach ($compatible_banner_slots as $fallback_slot_id) {
+                        // KISS 6.72.206: Editorial-Single-Slots muessen bei
+                        // allgemeinen Bannern vor hub_grid_card als Aktivierungsanker
+                        // gewinnen. hub_grid_card ist bewusst kein Auto-Publish-Slot;
+                        // sonst bleibt ein technisch gueltiger Glossar-/Rassenbanner
+                        // als ganze Kampagne inaktiv, obwohl seine Placements stimmen.
+                        $editorial_single_priority = array(
+                            'glossary_single_desktop_banner','breed_single_desktop_banner',
+                            'glossary_single_mobile_banner','breed_single_mobile_banner'
+                        );
+                        $fallback_slot_ids = array_values(array_unique(array_merge(
+                            array_values(array_intersect($editorial_single_priority, $compatible_banner_slots)),
+                            array_values(array_diff($compatible_banner_slots, $editorial_single_priority))
+                        )));
+                        foreach ($fallback_slot_ids as $fallback_slot_id) {
                             $fallback_rule = is_array($matrix[$fallback_slot_id] ?? null) ? $matrix[$fallback_slot_id] : array();
                             if (!$fallback_rule) { continue; }
                             $fallback_types = array_map('sanitize_key',(array)($fallback_rule['target_types'] ?? array()));
