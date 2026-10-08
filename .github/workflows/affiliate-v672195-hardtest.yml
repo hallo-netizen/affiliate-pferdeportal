@@ -273,3 +273,10 @@ jobs:
           path: /tmp/AFFILIATE_ZENTRALE_6.72.209.zip
           if-no-files-found: error
           retention-days: 30
+
+
+      - name: Formal release-check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py release-check
