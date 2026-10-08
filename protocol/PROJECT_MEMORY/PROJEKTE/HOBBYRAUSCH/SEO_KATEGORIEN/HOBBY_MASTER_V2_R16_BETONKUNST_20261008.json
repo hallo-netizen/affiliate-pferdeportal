@@ -1,0 +1,51 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Betonkunst",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 4,
+  "leaves": [
+    {
+      "label": "Mischung & Material",
+      "intents": [
+        "Betonmischung",
+        "Wasseranteil",
+        "Zuschlag",
+        "Pigment",
+        "Konsistenz"
+      ]
+    },
+    {
+      "label": "Formen & Gießen",
+      "intents": [
+        "Formwahl",
+        "Trennmittel",
+        "Gießtechnik",
+        "Verdichten",
+        "Entlüften"
+      ]
+    },
+    {
+      "label": "Gestaltung & Oberfläche",
+      "intents": [
+        "Struktur",
+        "Einlagen",
+        "Farbwirkung",
+        "Kanten",
+        "Relief"
+      ]
+    },
+    {
+      "label": "Aushärten & Finish",
+      "intents": [
+        "Aushärtung",
+        "Entformen",
+        "Schleifen",
+        "Versiegelung",
+        "Pflege"
+      ]
+    }
+  ],
+  "validation": true
+}
