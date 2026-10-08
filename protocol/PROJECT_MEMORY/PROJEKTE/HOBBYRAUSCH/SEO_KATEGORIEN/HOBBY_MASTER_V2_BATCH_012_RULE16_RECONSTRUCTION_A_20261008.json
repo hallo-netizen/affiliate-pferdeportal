@@ -1,0 +1,534 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_012_RULE16_RECONSTRUCTION_A",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.6",
+  "validation": {
+    "violations": []
+  },
+  "hubs": [
+    {
+      "canonical_name": "Drechseln",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012a:1",
+          "label": "Drechselbank & Einrichten",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Drechselbank für Hobbyarbeiten auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Werkstück zwischen Spitzen sicher einspannen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Planscheibe und Spannfutter passend einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Werkzeugauflage korrekt einstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Drehzahl nach Werkstückgröße und Holzart wählen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:2",
+          "label": "Werkzeuge & Schärfen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Schruppröhre richtig einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Formröhre für Drechselarbeiten auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Abstechstahl sicher führen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Meißel beim Drechseln kontrolliert verwenden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Drechselwerkzeuge am Schleifsystem schärfen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:3",
+          "label": "Langholz drechseln",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Rundholz zwischen Spitzen zylindrisch drehen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Zapfen und Absätze maßhaltig drechseln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Perlen und Kehlen sauber ausarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Schwingungen bei langen Werkstücken reduzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Spindelwerkstück auf Endmaß bringen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:4",
+          "label": "Schalen & Querholz",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Schalenrohling sicher vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Außenseite einer Schale formen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Rezess oder Zapfen für Spannfutter herstellen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Schaleninneres kontrolliert aushöhlen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Wandstärke einer gedrechselten Schale gleichmäßig halten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:5",
+          "label": "Schleifen & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Drechselwerkstück ohne Schleifspuren glätten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Schleifpapier bei rotierendem Werkstück sicher einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Ölfinish auf der Drechselbank auftragen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Wachsfinish gleichmäßig auspolieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Fertiges Werkstück nach Trocknung und Bewegung kontrollieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Möbelrestaurierung",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012a:1",
+          "label": "Bestandsaufnahme & Demontage",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Möbelstück vor Restaurierung dokumentieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Alter und Konstruktion eines Möbelstücks grob bestimmen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Beschläge vor der Demontage markieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Verbindungen vorsichtig lösen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Erhaltenswerte Originaloberflächen identifizieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:2",
+          "label": "Konstruktion & Holzverbindungen",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Lose Zapfenverbindung an Möbeln reparieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Stuhlverbindungen neu verleimen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Gerissene Holzbauteile stabilisieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Fehlstellen mit passendem Holz ergänzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Verzogene Bauteile vor einer Reparatur beurteilen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:3",
+          "label": "Furnier & Holzoberfläche",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Gelöstes Furnier wieder anleimen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Fehlstellen im Furnier ergänzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Furnierblasen fachgerecht behandeln",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Kratzer in Holzoberflächen retuschieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Holzoberfläche vor neuer Behandlung schonend vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:4",
+          "label": "Alte Beschichtungen & Finish",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Schellackoberfläche erkennen und reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Alten Lack materialschonend reduzieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Schellackpolitur aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Öl- oder Wachsfinish passend auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Farbunterschiede nach Reparaturen angleichen",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:5",
+          "label": "Beschläge & Abschluss",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Alte Möbelbeschläge reinigen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Fehlende Schrauben und Beschläge passend ersetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Schubladenführungen gangbar machen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Restauriertes Möbel korrekt montieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Stabilität und Oberflächenzustand nach Abschluss kontrollieren",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    },
+    {
+      "canonical_name": "Korbflechten",
+      "publication_role": "HOBBY_HUB",
+      "historical_leaf_target": 5,
+      "reconstruction_basis": "SUBJECT_MATTER_LOGIC_RULE_1_6_WITH_HISTORICAL_OWNERSHIP",
+      "leafs": [
+        {
+          "leaf_id": "b012a:1",
+          "label": "Material & Vorbereitung",
+          "article_intents": [
+            {
+              "intent_id": "1:1",
+              "working_title": "Flechtmaterial für einen Korb auswählen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:2",
+              "working_title": "Peddigrohr vor dem Flechten richtig einweichen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:3",
+              "working_title": "Materialstärken für Boden und Wand kombinieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:4",
+              "working_title": "Flechtmaterial auf passende Länge vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "1:5",
+              "working_title": "Feuchtes Material während der Arbeit geschmeidig halten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:2",
+          "label": "Boden & Anfang",
+          "article_intents": [
+            {
+              "intent_id": "2:1",
+              "working_title": "Korbkreuz für einen runden Boden anlegen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:2",
+              "working_title": "Boden gleichmäßig ausflechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:3",
+              "working_title": "Bodenform während des Flechtens kontrollieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:4",
+              "working_title": "Staken sauber einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "2:5",
+              "working_title": "Übergang vom Boden zur Korbwand vorbereiten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:3",
+          "label": "Wände & Flechtmuster",
+          "article_intents": [
+            {
+              "intent_id": "3:1",
+              "working_title": "Korbwand im einfachen Zäunergeflecht aufbauen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:2",
+              "working_title": "Kimning als stabiles Flechtmuster einsetzen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:3",
+              "working_title": "Wandweite und Form gleichmäßig halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:4",
+              "working_title": "Musterwechsel ohne sichtbaren Sprung ausführen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "3:5",
+              "working_title": "Materialenden sauber in der Wand verbinden",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:4",
+          "label": "Rand & Henkel",
+          "article_intents": [
+            {
+              "intent_id": "4:1",
+              "working_title": "Korbabschluss als einfachen Rand flechten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:2",
+              "working_title": "Staken für einen stabilen Rand vorbereiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:3",
+              "working_title": "Henkelkern passend dimensionieren",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:4",
+              "working_title": "Henkel fest in den Korb einarbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "4:5",
+              "working_title": "Griffbereich belastbar umflechten",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        },
+        {
+          "leaf_id": "b012a:5",
+          "label": "Form & Finish",
+          "article_intents": [
+            {
+              "intent_id": "5:1",
+              "working_title": "Korb während des Flechtens symmetrisch halten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:2",
+              "working_title": "Überstehende Enden sauber abschneiden",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:3",
+              "working_title": "Fertigen Korb langsam trocknen",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:4",
+              "working_title": "Flechtfehler nacharbeiten",
+              "validated_subject_distinct": true
+            },
+            {
+              "intent_id": "5:5",
+              "working_title": "Korb materialgerecht pflegen und lagern",
+              "validated_subject_distinct": true
+            }
+          ],
+          "validated_distinct_article_count": 5,
+          "capacity_status": "LEAF_FIT"
+        }
+      ],
+      "hub_capacity_status": "HOBBY_HUB_FIT"
+    }
+  ]
+}
