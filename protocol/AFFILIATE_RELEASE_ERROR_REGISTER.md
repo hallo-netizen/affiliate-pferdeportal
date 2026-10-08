@@ -1671,3 +1671,16 @@ Evidence:
 **Performance:** keine neue Tabelle, kein Frontend-HTTP, keine neue Frontend-DB-Abfrage; Erzeugung ausschließlich Import/Reconcile.
 
 **Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
+
+
+## AFF-ERR-061 — 08.10.2026: Banner-Deduplizierung war nicht eindeutig identitätsgebunden
+
+**Belegter Vertragsbruch:** Der Lifecycle-Zielvertrag erlaubt automatisches Zusammenfassen nur bei eindeutig identischen Creative-Varianten; unterschiedliche Motive, CTA, Rabatt oder Angebot müssen getrennt bleiben. Die aktuelle Runtime-Signatur verwendete jedoch nur Provider, Partner, Ziel, Titel und grobe Ratio-Familie. Zwei unterschiedliche Creatives mit denselben Metadaten konnten dadurch fälschlich als Auflösungsvariante zusammenfallen.
+
+**Root Cause:** Die vorhandene kanonische Creative-Identität wurde nicht in die materialisierte Kampagne übernommen und deshalb im Dedupe-Hotpath nicht verwendet.
+
+**KISS-Fixziel:** `creative_identity_hash` aus der Creative Library in die Kampagnendaten übernehmen. Runtime-Dedupe nur bei gültiger identischer 64-stelliger Creative-Identität plus Formatfamilie. Fehlt die Identität bei historischem Altbestand, nicht deduplizieren. Keine Bildanalyse, keine neue Tabelle, keine DB-/HTTP-Abfrage im Ranking.
+
+**POSITIV:** dieselbe Creative-Identität in mehreren Auflösungen derselben Formatfamilie -> größte belegte Version bleibt.
+**NEGATIV:** unterschiedliche Creative-Identitäten bei gleichem Partner/Ziel/Titel/Ratio -> beide bleiben Kandidaten.
+**Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
