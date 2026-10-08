@@ -34,6 +34,7 @@ trait PPAR_Idealo_Trait {
     const IDEALO_SCHEMA_OPTION = 'ppar_idealo_adapter_schema_v4';
 
     public function idealo_register_hooks() {
+        $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
         add_filter('ppar_affiliate_provider_access_snapshot', array($this, 'idealo_provider_access_snapshot'), 10, 4);
         add_filter('ppar_affiliate_provider_access_save', array($this, 'idealo_provider_access_save'), 10, 4);
         add_filter('ppar_affiliate_provider_access_test', array($this, 'idealo_provider_access_test'), 10, 3);
@@ -43,13 +44,13 @@ trait PPAR_Idealo_Trait {
         add_action('ppar_affiliate_render_provider_sync_idealo', array($this, 'idealo_render_sync_card'), 10, 3);
         add_action('admin_post_ppar_idealo_import_file', array($this, 'handle_idealo_import_file'));
         add_filter('cron_schedules', array($this, 'idealo_cron_schedules'));
-        add_action('init', array($this, 'idealo_maybe_upgrade_materialization'), 12);
-        add_action('init', array($this, 'idealo_ensure_refresh_schedule'), 25);
+        if (!$is_ajax_request) { add_action('init', array($this, 'idealo_maybe_upgrade_materialization'), 12); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'idealo_ensure_refresh_schedule'), 25); }
         add_action(self::IDEALO_REFRESH_HOOK, array($this, 'idealo_run_scheduled_refresh'));
         add_action(self::IDEALO_MANUAL_REFRESH_HOOK, array($this, 'idealo_run_manual_refresh'));
         add_action('admin_post_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
         add_action('admin_post_nopriv_' . self::IDEALO_MANUAL_WORKER_ACTION, array($this, 'handle_idealo_manual_refresh_worker'));
-        add_action('init', array($this, 'idealo_maybe_recover_refresh_dispatch'), 26);
+        if (!$is_ajax_request) { add_action('init', array($this, 'idealo_maybe_recover_refresh_dispatch'), 26); }
     }
 
     private function idealo_settings_defaults() {
