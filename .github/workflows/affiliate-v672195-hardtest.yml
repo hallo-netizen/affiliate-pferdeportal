@@ -155,14 +155,14 @@ jobs:
           $ok(strpos($main,'pftk-breed-facts-box-v[0-9]+')!==false,'breed_version_neutral_anchor');
           $ok(strpos($main,"strpos((string)\\$content, 'pftk-breed-single-v150506')")===false,'breed_old_fixed_version_not_required');
 
-          $ok(strpos($main,"\\$suppress_inline_banner = has_shortcode(\\$raw_post_content, 'affiliate_rechner')")!==false,'calculator_shortcode_sets_inline_suppression');
-          $ok(strpos($trait,"if (!\\$suppress_inline_banner && in_array((string) (\\$plan['banner']['status']")!==false,'calculator_main_inline_banner_suppressed');
-          $bottomNeedle="if (!\\$main_banner_rendered_at_bottom && (\\$plan['products']['status'] ?? '') !== 'ready'";
+          $ok(strpos($main,'$suppress_inline_banner = has_shortcode($raw_post_content, \'affiliate_rechner\')')!==false,'calculator_shortcode_sets_inline_suppression');
+          $ok(strpos($trait,'if (!$suppress_inline_banner && in_array((string) ($plan[\'banner\'][\'status\']')!==false,'calculator_main_inline_banner_suppressed');
+          $bottomNeedle='if (!$main_banner_rendered_at_bottom && ($plan[\'products\'][\'status\'] ?? \'\') !== \'ready\'';
           $ok(strpos($trait,$bottomNeedle)!==false,'calculator_bottom_banner_path_present');
-          $ok(strpos($trait,"if (!\\$suppress_inline_banner && !\\$main_banner_rendered_at_bottom")===false,'calculator_bottom_banner_not_suppressed');
-          $ok(strpos($main,"if (!\\$suppress_inline_banner && \\$this->auto_slot_enabled(\\$auto_slots, array('post_after_intro', 'top_info')))")!==false,'calculator_legacy_top_inline_suppressed');
-          $ok(strpos($main,"if (!\\$suppress_inline_banner && \\$this->auto_slot_enabled(\\$auto_slots, array('post_mid_content', 'mid_content')))")!==false,'calculator_legacy_mid_inline_suppressed');
-          $ok(strpos($main,"if (\\$this->auto_slot_enabled(\\$auto_slots, array('post_bottom_recommendation', 'bottom_recommendation')))")!==false,'calculator_legacy_bottom_kept');
+          $ok(strpos($trait,'if (!$suppress_inline_banner && !$main_banner_rendered_at_bottom')===false,'calculator_bottom_banner_not_suppressed');
+          $ok(strpos($main,'if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array(\'post_after_intro\', \'top_info\')))')!==false,'calculator_legacy_top_inline_suppressed');
+          $ok(strpos($main,'if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array(\'post_mid_content\', \'mid_content\')))')!==false,'calculator_legacy_mid_inline_suppressed');
+          $ok(strpos($main,'if ($this->auto_slot_enabled($auto_slots, array(\'post_bottom_recommendation\', \'bottom_recommendation\')))')!==false,'calculator_legacy_bottom_kept');
 
           $glossary=function($content,$d,$m){
               if(!preg_match('/\\bpftk-gsingle-v[0-9]+\\b/i',$content)||strpos($content,'ppar-glossary-banner-v67244')!==false)return $content;
