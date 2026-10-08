@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 209 VON 359 CURRENT-CORE ENTSCHIEDEN / 150 OFFEN / 583 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 272 VON 359 CURRENT-CORE ENTSCHIEDEN / 87 OFFEN / 767 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1114,13 +1114,36 @@ Neue Evidence:
 
 Zusammen mit den bereits rekonstruierten historischen Hubs sind derzeit **583 sichtbare Content-Kategorien** in Rule-1.6-Recheck-Evidence dokumentiert.
 
+## GLOBALER CORE-RECHECK – FORTSCHRITT
+
+Feste Prüfmenge:
+359 aktuelle CORE-Identitäten.
+
+Aktuell entschieden:
+- **272 von 359**;
+- **87 offen**.
+
+Zusätzlich abgeschlossen:
+- Pflanzen: 33 Identitäten / 19 HOBBY_HUB / 85 Content-Kategorien / 2 belegte Alias-Dubletten;
+- Tiere: 30 Identitäten / 22 HOBBY_HUB / 99 Content-Kategorien.
+
+Evidence:
+- `HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json`;
+- `HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json`.
+
+Gesamter Rule-1.6-Recheck-Evidence-Stand:
+- **767 sichtbare Content-Kategorien**;
+- alle materialisierten Leafs 5–12 Intents;
+- 0 Capacity-Verstöße;
+- 0 WordPress-Writes.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_150_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_87_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die verbleibenden 150 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck abschließen.
+Die verbleibenden 87 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck abschließen, beginnend mit Bewegen.
 
 Bis dahin:
 - kein Plugin-Fix;
