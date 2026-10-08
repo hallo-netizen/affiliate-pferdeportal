@@ -44,6 +44,17 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 
 ## GitHub-Dateistart — HARDLOCK
 
+Der bestehende GitHub-Dateistart wird für **alle Einträge des aktuellen Uploads** vollständig ausgeführt.
+
+Für jeden Eintrag gilt ohne sichtbaren Zwischenstopp:
+
+1. den Eintrag als frischen K0-Produktionsauftrag in `WORDPRESS_INTAKE.json` anlegen;
+2. die erforderliche Recherche durchführen und den vollständigen Regel- und Recherchekontext in `AUTHORING_CONTEXT.json` erzeugen;
+3. `AUTHORING_CONTEXT.json` schreiben; dieser bestehende Dateischritt stößt den vorhandenen Produktionslauf an;
+4. danach den bestehenden Produktionsweg ohne Rückfrage oder Zwischenmeldung bis zum verifizierten WordPress-Ergebnis fortsetzen.
+
+Das Fehlen von `AUTHORING_CONTEXT.json` direkt nach dem Anlegen von `WORDPRESS_INTAKE.json` ist **kein Blocker**. Seine Erstellung ist der unmittelbar nächste verpflichtende Startschritt.
+
 Es gibt keinen separaten Workflow-Startknopf als Voraussetzung.
 `workflow_dispatch` ist für `K0:start` nicht erforderlich.
 Vor dem ersten tatsächlichen GitHub-Schreibversuch ist ein technischer Startblocker unzulässig.
