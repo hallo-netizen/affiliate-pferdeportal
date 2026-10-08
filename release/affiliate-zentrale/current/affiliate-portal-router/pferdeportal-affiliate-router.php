@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.204
+ * Version: 6.72.205
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.204';
+    const VERSION = '6.72.205';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -2069,7 +2069,7 @@ JS;
     public function inject_glossary_single_banner($content) {
         if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
         if (!function_exists('is_singular') || !is_singular('uge_term') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (!preg_match('/\bpftk-gsingle-v[0-9]+\b/i', (string) $content) || strpos((string) $content, 'ppar-glossary-banner-v67244') !== false) { return $content; }
+        if (strpos((string) $content, 'ppar-glossary-banner-v67244') !== false) { return $content; }
         $post_id = absint(get_the_ID());
         if ($post_id <= 0 || get_post_type($post_id) !== 'uge_term' || post_password_required($post_id)) { return $content; }
 
@@ -2087,18 +2087,21 @@ JS;
             : '';
 
         $pattern = '#(<aside\s+class="[^"]*pftk-gsingle-aside-v[0-9]+[^"]*"[^>]*>.*?</aside>)#is';
-        if (!preg_match($pattern, (string) $content)) { return $content; }
-        // V6.72.100 RESTORE: exakt der belegte LIVE-PASS-Pfad aus 6.72.60/57.
-        // Mobil steht vor dem Aside. Desktop ist bewusst ein Geschwisterblock NACH
-        // dem Aside und wird ausserhalb der Grid-Hoehenberechnung positioniert.
-        $replaced = preg_replace($pattern, $mobile_banner . '$1' . $desktop_banner, (string) $content, 1);
-        return is_string($replaced) && $replaced !== '' ? $replaced : $content;
+        if (preg_match($pattern, (string) $content)) {
+            $replaced = preg_replace($pattern, $mobile_banner . '$1' . $desktop_banner, (string) $content, 1);
+            if (is_string($replaced) && $replaced !== '') { return $replaced; }
+        }
+        // KISS 6.72.205: neuere Designfassungen duerfen den Werbeplatz nicht
+        // durch einen geaenderten DOM-Anker verschwinden lassen. Auswahl und
+        // Formatpruefung sind bereits abgeschlossen; nur die Position faellt
+        // auf das Ende des Glossarinhalts zurueck.
+        return (string) $content . "\n" . $mobile_banner . $desktop_banner;
     }
 
     public function inject_breed_single_banner($content) {
         if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
         if (!function_exists('is_singular') || !is_singular('pa_breed') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (!preg_match('/\bpftk-breed-single-v[0-9]+\b/i', (string)$content) || strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
+        if (strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
         $post_id=absint(get_the_ID());
         if ($post_id<=0 || get_post_type($post_id)!=='pa_breed' || post_password_required($post_id)) { return $content; }
         $desktop_slot=$this->render_affiliate_slot($post_id,'breed_single_desktop_banner','portal_context','');
@@ -2110,9 +2113,13 @@ JS;
         // Rail; mobil wird derselbe DOM-Punkt ueber die bestehende Grid-Reihenfolge
         // nach dem Lesetext und vor dem mobilen Tail angeordnet.
         $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v[0-9]+[^"]*"[^>]*>.*?</section>)#is';
-        if (!preg_match($pattern,(string)$content)) { return $content; }
-        $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
-        return is_string($replaced)&&$replaced!=='' ? $replaced : $content;
+        if (preg_match($pattern,(string)$content)) {
+            $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
+            if (is_string($replaced)&&$replaced!=='') { return $replaced; }
+        }
+        // KISS 6.72.205: bei geaendertem Designanker bleibt derselbe bereits
+        // formatgepruefte Rassenbanner sichtbar und faellt nur auf Inhaltsende.
+        return (string)$content . "\n" . $desktop . $mobile;
     }
 
     /** V6.72.67 – Query-Kontext fuer bereits definierte Uebersichts-Werbeplaetze. */
