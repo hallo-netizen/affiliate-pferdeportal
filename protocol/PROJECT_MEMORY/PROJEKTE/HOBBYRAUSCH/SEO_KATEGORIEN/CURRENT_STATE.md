@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 198 OFFEN / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 84 HISTORISCHE CURRENT-HUBS REKONSTRUIERT / 397 CONTENT-KATEGORIEN / 198 OFFEN / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1039,12 +1039,13 @@ Neu geprüft:
 - 359 aktuelle CORE-Identitäten als feste Prüfmenge gebunden;
 - 161 besitzen jetzt eine aktuelle Rollenentscheidung nach 1.6;
 - davon wurden die 75 historischen aktuellen HOBBY_HUBs aus Batch 005–019 vollständig auf die fehlende Content-Ebene nachgezogen;
-- Ergebnis dieser 75 Hubs: **355 sichtbare Content-Kategorien**, Capacity jeweils 5–12 Intents;
+- Ergebnis dieser 84 Hubs: **397 sichtbare Content-Kategorien**, Capacity jeweils 5–12 Intents;
 - 0 Capacity-Verstöße in den Nachprüfungen;
 - bekannte alte Demotion-/Aliasfälle werden nicht blind als CORE-HUB weitergeführt;
 - historische Batch-Summaries werden nicht als Wahrheit verwendet; Einzelentscheidungen und vorhandene Evidence haben Vorrang.
 
 Detail-Evidence:
+- Batch 004: `HOBBY_MASTER_V2_BATCH_004_RULE16_RECONSTRUCTION_20261008.json`;
 - Batch 005: `HOBBY_MASTER_V2_BATCH_005_RULE16_RECONSTRUCTION_20261008.json`;
 - Batch 006/007/009: `HOBBY_MASTER_V2_BATCH_006_007_009_RULE16_RECONSTRUCTION_20261008.json`;
 - Batch 010: `HOBBY_MASTER_V2_BATCH_010_RULE16_RECONSTRUCTION_20261008.json`;
@@ -1062,8 +1063,8 @@ Damit ist die frühere 299er-Blackbox reduziert:
 
 - feste Prüfmenge: 359 aktuelle CORE-Identitäten;
 - 161 nach Regel 1.6 entschieden;
-- 75 historische aktuelle HOBBY_HUBs nachgeprüft;
-- daraus 355 sichtbare Content-Kategorien;
+- 84 historische aktuelle HOBBY_HUBs nachgeprüft;
+- daraus 397 sichtbare Content-Kategorien;
 - alle geprüften Leafs im Bereich 5–12;
 - verbleibend: 198 aktuelle CORE-Identitäten.
 
