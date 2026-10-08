@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.14.1 EXPANSION19 FINAL LOCAL POS+NEG HARD PASS / 860 IDENTITÄTEN / 359 CORE / 457 TARGETS / 430 PAGES / 97 HEADER / KEIN LIVE-DRY-RUN / KEIN LIVE-SYNC
+STATUS: V1.14.1 EXPANSION19 LOCAL FULL POS+NEG HARD PASS + LIVE DRY-RUN PASS / 860 IDENTITÄTEN / 359 CORE / 457 TARGETS / LIVE-SYNC PENDING
 
 ## Plugin
 
@@ -501,17 +501,27 @@ Profil SHA-256:
 Master SHA-256:
 `adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
 
+## LIVE-DRY-RUN – PASS
+
+Beleg:
+`SEO_KATEGORIEN/HD001_V1_14_1_LIVE_DRYRUN_PASS_20261008.json`
+
+Plan:
+- 32 CREATE;
+- 425 UPDATE;
+- 5 ARCHIVE;
+- 0 ADOPT;
+- 0 Provider;
+- 0 Writes.
+
+Die fünf Archive sind nur die fünf bekannten ersetzten Kombi-Zwischenknoten. Keine Hobbyseite wird archiviert.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_1_LIVE_DRYRUN_PENDING`
+`HD001_V1_14_1_LIVE_SYNC_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Exaktes V1.14.1-Artefakt → ein read-only Live-Dry-Run → JSON-Readback prüfen.
-Kein Sync vorher.
+Geprüften Zielbaum **einmal synchronisieren** und anschließend den post-sync JSON-Readback exportieren.
 
-## Release-/Artefaktgrenze
-
-V1.14.1 ist der aktuelle lokal vollständig positiv/negativ geprüfte Kandidat.
-Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert; kein Ersatzartefakt erfinden.
-Kein Live-PASS vor echtem Live-Dry-Run und anschließendem produktivem Readback.
+Kein zweiter Sync ohne Readback-Prüfung.
