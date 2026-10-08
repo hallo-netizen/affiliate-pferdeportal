@@ -1912,12 +1912,9 @@ JS;
         if (!empty($group['id'])) {
             $classes[] = 'ppar-group-' . sanitize_html_class($group['id']);
         }
-        $label = !empty($banner['label']) ? sanitize_text_field($banner['label']) : '';
         $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="post_inline_banner" data-ppar-banner-position="' . $position . '">';
+        $out .= '<div class="ppar-affiliate-label">Anzeige</div>';
         $out .= $this->get_disclosure_html($post_id);
-        if ($label !== '') {
-            $out .= '<div class="ppar-affiliate-label">' . esc_html($label) . '</div>';
-        }
         $out .= '<div class="ppar-affiliate-content">' . $html . '</div></div>';
         return $out . $this->debug_comment('affiliate_rendered', $post_id, $slot_type, $group['id'] ?? '', $banner['id'] ?? '');
     }
@@ -2691,8 +2688,8 @@ JS;
                             $out .= $disclosure;
                             if (!empty($overview_parts[1])) { $out .= (string)$overview_parts[1]; }
                         } else {
+                            if ($required_creative_type === 'banner') { $out .= '<div class="ppar-affiliate-label">Anzeige</div>'; }
                             $out .= $disclosure;
-                            if ($label !== '') { $out .= '<div class="ppar-affiliate-label">' . esc_html($label) . '</div>'; }
                             $out .= '<div class="ppar-affiliate-content">' . $html . '</div>';
                         }
                         $out .= '</div>';
