@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG FRESH-ZIP HARD PASS / 19 EXPANSION-ANKER FINAL ASSESSMENT PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG FRESH-ZIP HARD PASS / 19 EXPANSION-ANKER FINAL ASSESSED / MASTER+TARGET-DELTA PENDING / KEIN LIVE-SYNC
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -70,8 +70,8 @@ Der aktive GitHub-Connector kann Textstände aktualisieren, aber das lokal verif
 
 NÄCHSTER ARTEFAKTSCHRITT:
 Noch NICHT installieren/synchronisieren.
-Zuerst die 19 Expansion-/Ankerkandidaten final gegen Regeln 1.5 bewerten.
-Danach begründetes Zielbaum-Delta in V1.14 binden oder Kandidaten bewusst schließen → neues/final bestätigtes Artefakt vollständig lokal POS/NEG prüfen → erst dann Live-Dry-Run.
+Die 19 Expansion-/Ankerkandidaten sind fachlich final bewertet: 12 HOBBY_HUB + 7 ORIENTATION_UNIVERSE, Beleg `../../../SEO_KATEGORIEN/HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`.
+Jetzt das begründete Master-/Target-Delta in einen neuen finalen V1.14-Kandidaten binden → neues Artefakt vollständig lokal POS/NEG prüfen → erst dann Live-Dry-Run.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
