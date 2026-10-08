@@ -1,3 +1,19 @@
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-08 – 0.57.58 LIVE FAIL / 0.57.59 ROOTFIX
+
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
+
+- **PSTE 0.57.58 live belegt** durch Nutzer-Screenshot.
+- erster Automatik-Klick live: **GESTOPPT / `PSTE_SITE_STRUCTURE_STALE`**.
+- 0.57.58 deshalb **nicht final**, sondern live fehlgeschlagen.
+- neuer lokaler Kandidat **PSTE 0.57.59**.
+- Installer `PSTE-0.57.59-AUTOMATIK-STALE-BASELINE-COMPACT-REBIND-HARDPASS.zip`.
+- SHA-256 `a3808c0834b2d60a332a6dc3178403988fb1a80b0c62943173c1b9e5c050c2e8`.
+- exakt 4 Dateien geändert / 112 von 116 byteidentisch zu 0.57.58.
+- stale-first-click explizit in neuer Positiv-/Negativmatrix: PASS; kompakter Rebind selbst 0 Topic-Pool-Zeilen / 0 Provider.
+- vollständiger Report `PFERDE_ATELIER_PSTE_05759_LIVE_STALE_FIRST_CLICK_ROOTFIX_HARDPASS_TESTREPORT.json` / SHA-256 `a7093902217d0905c97fdfba1bc2e15a8764063d32ef1e4cf5cc12abb903cc7f`.
+- PSTE 0.57.59 **noch nicht live**; keine PU-ID dafür.
+- PSERC 0.28.33 wurde für diesen PSTE-Fehler **nicht geändert**. Sein aktueller Live-Installationsstatus ist aus diesem Screenshot nicht unabhängig ablesbar.
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-08 – FINALER LOKALER CLEANUP-HARDPASS
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
