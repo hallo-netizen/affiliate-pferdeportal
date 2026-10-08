@@ -691,3 +691,31 @@ TEST:
 LIVE-GRENZE:
 Noch kein Live-Sync.
 NEXT = genau ein realer read-only Live-Dry-Run.
+
+## PU-20261008-014 – V1.13.1 echter Live-Dry-Run zeigt alten Rollback-Restzustand
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+REALER DRY-RUN:
+PASS / 841 Inventar / 340 CORE / 501 Finder-Editorial / 431 Zielobjekte / 12 CREATE / 419 UPDATE / 1 ARCHIVE / 0 Provider-Calls / 0 Writes.
+
+WICHTIGER RESTBEFUND:
+Im selben Readback ist ein historischer V1.12-Zielbaumlauf noch `ROLLBACK_PENDING`.
+
+DETAIL:
+- Revision `HD-TARGET-3P-V1-20261007+313e8ac433c0b154`;
+- 620 Rollback-Aktionen offen;
+- alter Readbackfehler `directory:events-reisen [name]`;
+- Runner RUNNING / EXISTING_TARGET_TREE_RESUME;
+- kein aktiver finaler Snapshot.
+
+SICHERHEIT:
+V1.13.1 bietet während des laufenden Rollbacks keinen Final-Apply an.
+Die Finaler-Zielbaum-Seite setzt den Rollback automatisch bounded fort.
+Nach terminalem Rollback ist ein neuer Dry-Run zwingend, da sich der Live-Fingerprint geändert hat.
+Apply besitzt zusätzlich einen frischen Fingerprint-Recheck.
+
+NEXT:
+Finaler-Zielbaum-Seite offen lassen bis Rollback terminal → neuer Dry-Run → neuer JSON-Readback.
+Noch kein Sync.
