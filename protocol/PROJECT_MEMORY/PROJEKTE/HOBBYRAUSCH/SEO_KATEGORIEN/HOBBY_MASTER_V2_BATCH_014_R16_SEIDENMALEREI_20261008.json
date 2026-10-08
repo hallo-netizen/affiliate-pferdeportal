@@ -1,0 +1,61 @@
+{
+  "contract": "HD01314_R16",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Seidenmalerei",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Seide & Vorbereitung",
+      "intents": [
+        "Seidenart wählen",
+        "Seide vorbereiten",
+        "Seide spannen",
+        "Motiv übertragen",
+        "Arbeitsplatz einrichten"
+      ]
+    },
+    {
+      "label": "Kontur & Reservierung",
+      "intents": [
+        "Konturmittel wählen",
+        "Konturlinien führen",
+        "Farbbereiche trennen",
+        "Reservierung einsetzen",
+        "Konturfehler korrigieren"
+      ]
+    },
+    {
+      "label": "Farben & Verläufe",
+      "intents": [
+        "Farben wählen",
+        "Farben mischen",
+        "Nass-in-Nass arbeiten",
+        "Verläufe erzeugen",
+        "Struktureffekte erzeugen"
+      ]
+    },
+    {
+      "label": "Techniken & Motive",
+      "intents": [
+        "Flächen gestalten",
+        "Linien gestalten",
+        "Farbschichten aufbauen",
+        "Details ausarbeiten",
+        "Hintergründe gestalten"
+      ]
+    },
+    {
+      "label": "Fixieren & Finish",
+      "intents": [
+        "Fixiermethode wählen",
+        "Dampffixieren",
+        "Bügelfixieren",
+        "Nachbehandlung",
+        "Seidenbild pflegen"
+      ]
+    }
+  ],
+  "validation": true
+}
