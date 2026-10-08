@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.3 LIVE-SYNC EVENTS-REISEN [name] TERMINAL ROLLED_BACK / FEHLER LOKAL 1:1 REPRODUZIERT / V1.13.4 FULL LOCAL POSITIVE+NEGATIVE WORKFLOW FRESH-ZIP HARD PASS / ZIELPROFIL UNVERÄNDERT / KEIN LIVE-SYNC / FRISCHER V1.13.4-DRYRUN OFFEN
+STATUS: V1.13.4 FULL LOCAL POS+NEG HARD PASS / LIVE-DRYRUN PASS 355 CREATE + 75 ADOPT / 430 TARGETS / 0 FEHLER / 0 WRITES / V1.13.3 FEHLSYNC TERMINAL ROLLED_BACK / GENAU EIN FINAL-SYNC FREIGEGEBEN
 
 ## Plugin
 
@@ -392,14 +392,27 @@ Prüfbericht:
 `HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS_REPORT.txt`
 SHA-256 `653b76c0f923a97181f5848ec3560579194b7c020fd5b06500134180d1564d30`
 
+## V1.13.4 LIVE-DRYRUN – PASS
+
+`hobby-depot-final-target-readback-20261008-113205-utc.json`
+
+- PASS / valid=true;
+- 355 CREATE + 75 ADOPT;
+- 430 Zielobjekte;
+- errors = [];
+- 0 Provider;
+- 0 Strukturwrites;
+- alter V1.13.3-Fehlsync = ROLLED_BACK;
+- rollback_actions = [].
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_4_FRESH_LIVE_DRYRUN_PENDING`
+KEIN PRE-SYNC-BLOCKER MEHR.
 
 ## EXAKT EINE NEXT ACTION
 
-Exakt V1.13.4 installieren → genau einen frischen finalen Delta-Dry-Run → JSON exportieren.
-Noch keinen Live-Sync starten.
+Genau einen Final-Sync mit V1.13.4 ausführen.
+Danach sofort finalen JSON-/Frontend-Readback exportieren.
 
 ## Release-/Artefaktgrenze
 
