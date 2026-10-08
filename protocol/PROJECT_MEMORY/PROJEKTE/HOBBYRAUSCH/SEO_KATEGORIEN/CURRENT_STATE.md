@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: V1.14.1 EXPANSION19 FINAL LOKAL FULL POS/NEG HARD PASS / 860 IDENTITÄTEN / 359 CORE / 501 FINDER-EDITORIAL / 60 AKTIVE ZWISCHENBEREICHE / 466 AKTIVE LOGIKKNOTEN / 457 PHYSISCHE ZIELOBJEKTE / 430 PAGES / 97 HEADER-EINTRÄGE / KEIN LIVE-DRY-RUN / KEIN LIVE-SYNC
+STATUS: V1.14.1 EXPANSION19 LOCAL FULL POS/NEG HARD PASS + LIVE DRY-RUN PASS / 860 IDENTITÄTEN / 359 CORE / 457 ZIELE / LIVE-SYNC PENDING
 
 ## Ziel
 
@@ -928,16 +928,32 @@ Profil SHA-256:
 Master SHA-256:
 `adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
 
+## LIVE-DRY-RUN – PASS
+
+Beleg:
+`HD001_V1_14_1_LIVE_DRYRUN_PASS_20261008.json`
+
+Live-Plan:
+- PASS / valid=true;
+- 860 Identitäten / 359 CORE / 501 Finder-Editorial;
+- 457 physische Zielobjekte;
+- 32 CREATE + 425 UPDATE + 5 ARCHIVE;
+- die 5 ARCHIVE sind ausschließlich die bekannten alten Sammelknoten: Elektronik & Funk, Insekten & Wirbellose, Leder & Textil, Metall & Schmuck, Schrift & Papier;
+- 0 Hobby-Archive;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes im Dry-Run.
+
+Die Live-Seite steht vor dem Sync noch auf dem alten V1.13.4-Zielstand. Deshalb ist der Frontend-Readback vor dem Sync erwartbar noch nicht kanonisch.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_1_LIVE_DRYRUN_PENDING`
-
-V1.14.1 ist lokal vollständig positiv/negativ geprüft, aber noch nicht gegen den realen Hobby-Depot-WordPress-Bestand dry-run-gelesen.
+`HD001_V1_14_1_LIVE_SYNC_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Das exakte V1.14.1-Artefakt installieren/verwenden und **genau einen read-only Live-Dry-Run** ausführen und als JSON zurücklesen.
+Den bereits geprüften Live-Plan **genau einmal synchronisieren**.
 
-Bis zur Abnahme dieses Live-Dry-Runs:
-- KEIN Sync;
-- KEIN Live-PASS behaupten.
+Danach:
+- post-sync JSON-Readback herunterladen;
+- 457/457 Zielobjekte, Frontend/Header und zweiter UNCHANGED-Lauf prüfen;
+- erst dann Live-PASS setzen.
