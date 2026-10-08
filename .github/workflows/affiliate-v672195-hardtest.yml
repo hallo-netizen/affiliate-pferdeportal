@@ -124,8 +124,13 @@ jobs:
           $pass=0;$fail=0;
           $ok=function($v,$n)use(&$pass,&$fail){if($v){echo "PASS $n\n";$pass++;}else{echo "FAIL $n\n";$fail++;}};
 
-          do_action('admin_menu');
           global $submenu,$_registered_pages,$wpdb;
+          // WP-CLI ist kein is_admin()-Request. Deshalb die echten Admin-Menues
+          // explizit genauso registrieren und danach den KISS-Pruner anwenden.
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $o->admin_menu();
+          PPAR_Affiliate_Admin_KISS::register_visible_navigation();
+          PPAR_Affiliate_Admin_KISS::prune_legacy_navigation();
           $rows=(array)($submenu['affiliate-portal-zentrale']??[]);
           $visible=array_map(static function($r){return (string)($r[2]??'');},$rows);
           $hidden=[
@@ -145,7 +150,6 @@ jobs:
           $ok($hook!=='' && isset($_registered_pages[$hook]),'hidden_specialist_page_still_registered');
           $ok(!method_exists('PPAR_Affiliate_Admin_KISS','hide_legacy_navigation_css'),'old_css_hide_method_removed');
 
-          $o=Pferdeportal_Affiliate_Router::instance();
           $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
           $o->maybe_install_automation_schema();
           $jobs=$call('automation_jobs_table');
