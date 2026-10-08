@@ -684,3 +684,36 @@ Finaler Testreport:
 SHA-256 `517b4bf85ddd8b26caecefc7f8c5619f035260b82aaa150fc134d28e3f18a5d0`.
 
 **Ergebnis: lokaler technischer Blocker geschlossen.** Offen ist ausschließlich die reale WordPress-Installation/Readback-Abnahme der exakt geprüften Versionen. Autoritative NEXT ACTION ausschließlich in `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
+
+## DELTA 2026-10-08 – 0.57.58 LIVE FIRST-CLICK FAIL / 0.57.59 COMPACT REBIND
+
+### Livebefund
+- Nutzer-Screenshot: PSTE **0.57.58** aktiv.
+- Produktion zeigt **4488 Themen / 32 aktuell planbar**.
+- erster Klick `Automatik starten / fortsetzen` → **GESTOPPT / `PSTE_SITE_STRUCTURE_STALE`**.
+- Die frühere 0.57.58-Matrix hatte frischen lokalen Zustand getestet, aber den persistenten stale-Live-Baseline-Zustand vor dem **ersten** Automatik-Klick nicht enthalten.
+
+### Rootcause
+`PSTE_Breadth_Research_Queue::startExistingOnly()` rebased die gespeicherte Site-Baseline. Bei echter Strukturänderung blockiert `PSTE_Snapshot::rebaseResearchBaselineIfSafe()` fail-closed. Der Automatik-Orchestrator hatte vor diesem Start keinen kompakten Production-Rebind, obwohl der COMPLETE-Kontextindex bereits current-snapshot-basiert rehydriert werden kann.
+
+### KISS-Fix 0.57.59
+- Paket `PSTE-0.57.59-AUTOMATIK-STALE-BASELINE-COMPACT-REBIND-HARDPASS.zip`.
+- SHA-256 `a3808c0834b2d60a332a6dc3178403988fb1a80b0c62943173c1b9e5c050c2e8`.
+- exakt 4 Dateien gegenüber 0.57.58 geändert; 112/116 byteidentisch.
+- bei gültiger Strukturänderung + vorhandenem COMPLETE-Kontext: aktuelle Baseline erfassen und nur den kompakten Context-Index aus aktuellem Inventory/Structure/Editorial-Plan neu binden.
+- kompakter Rebind selbst: **0 Topic-Pool-Zeilen / 0 Provideraufrufe**.
+- danach genau der bestehende Existing-Only-Scan in **40er Batches**; kein zusätzlicher 4488er Kontext-Vollscan.
+- laufende Existing-Only-Queue wird bei mid-run Strukturänderung auf denselben neuen Compact-Binding-Zustand gesetzt und nur ihr providerfreier lokaler Scan auf Cursor 0 zurückgesetzt.
+- fremde Recherche und Speicherpflege blockieren vor Mutation.
+- ohne COMPLETE-Kontext bleibt der bestehende bounded Vollrefresh ausschließlich Fallback; es wird keine Scheinsicherheit erzeugt.
+
+### Neue Pflichtregression
+- stale first click → PASS ohne `PSTE_SITE_STRUCTURE_STALE`.
+- nächster Poll → startet Existing-Only genau einmal.
+- mid-run stale → kompakter Rebind derselben Queue.
+- foreign research → blockiert vor Baseline-Mutation.
+- Fresh-Unpack 116/116; PHP 79/79; JSON 36/36; Static 53/53; Compact-Preflight 5/5; Admin-Preflightmatrix 5/5; bestehende Automatik 8/8; Kurzer Dienstweg 10/10; K0 6/6.
+
+Testreport: `PFERDE_ATELIER_PSTE_05759_LIVE_STALE_FIRST_CLICK_ROOTFIX_HARDPASS_TESTREPORT.json` / SHA-256 `a7093902217d0905c97fdfba1bc2e15a8764063d32ef1e4cf5cc12abb903cc7f`.
+
+Live 0.57.59: noch nicht installiert/readback-bestätigt. NEXT ausschließlich aus TEXT/CURRENT_STATE.
