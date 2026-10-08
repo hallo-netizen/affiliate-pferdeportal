@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.206
+ * Version: 6.72.207
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.206';
+    const VERSION = '6.72.207';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -4043,6 +4043,22 @@ JS;
         $page_id = isset($campaign['page_id']) ? (int) $campaign['page_id'] : 0;
         $slot_type = sanitize_key((string) ($context['slot_type'] ?? ''));
         $required_creative_type = $this->slot_required_creative_type($slot_type);
+        $context_post_type = isset($context['_ppar_norm_post_type'])
+            ? (string) $context['_ppar_norm_post_type']
+            : sanitize_key((string) ($context['post_type'] ?? ''));
+        $glossary_single_banner = $required_creative_type === 'banner'
+            && $context_post_type === 'uge_term'
+            && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+        $breed_single_banner = $required_creative_type === 'banner'
+            && $context_post_type === 'pa_breed'
+            && in_array($slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
+
+        // KISS 6.72.207: Pferderassen-Singles sind grundsaetzlich freie
+        // Bannerplaetze. Format/Technik/Active/Placement wurden bereits vorher
+        // geprueft; Themenzuordnung darf hier nicht sperren oder bevorzugen.
+        if ($breed_single_banner) {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Single: freie Wahl aus technisch und formatlich gueltigem Bannerbestand.');
+        }
 
         // V6.72.186: Eine gespeicherte exakte Zielkante ist auf jeder Ebene
         // bindend, auch bei Pferderassen. Erst wenn KEIN exakter Treffer existiert,
@@ -4066,7 +4082,14 @@ JS;
             if ($mode === 'fallback') {
                 return array('specificity'=>5,'matches'=>0,'reason'=>'Allgemeiner aktiver Bannerbestand nach fehlendem spezifischem Treffer.');
             }
-            return null;
+            // KISS 6.72.207 Glossar: dieselbe Bannerregel wie ueberall.
+            // Kein exakter gespeicherter Treffer bedeutet NICHT "kein Banner".
+            // Glossar darf weiter durch die normale Themenrangfolge laufen und
+            // endet ohne Themenbezug im bereits vorhandenen globalen freien
+            // technischen Banner-Fallback (specificity 5).
+            if (!$glossary_single_banner) {
+                return null;
+            }
         }
 
         // Historische neutrale Rassenverteilung bleibt fuer nicht automatisch
