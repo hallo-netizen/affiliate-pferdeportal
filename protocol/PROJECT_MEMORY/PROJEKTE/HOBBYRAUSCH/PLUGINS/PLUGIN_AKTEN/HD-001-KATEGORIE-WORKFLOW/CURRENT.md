@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.12.6 READ-ONLY KALIBRIERUNG REAL PASS / BATCH 001–003 ABGESCHLOSSEN / WEITERE BATCHES GESTRICHEN / NÄCHSTER PLUGIN-EINSATZ NUR FINALER DELTA-DRYRUN + EIN SYNC / KEIN AKTUELLER LIVE-WRITE
+STATUS: V1.13.1 PRAKTISCHES FINALZIEL LOKAL HARD PASS / MANUAL-ONLY / 841 INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 431 PHYSISCHE ZIELOBJEKTE / EIN LIVE-DRYRUN OFFEN / NOCH KEIN LIVE-SYNC
 
 ## Plugin
 
@@ -71,61 +71,84 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 - Buchbinden-Renderer/4 Leafs/stabile IDs PASS;
 - Fresh-Unpack/ZIP-Integrität PASS.
 
-## Aktueller V2-Bewertungskandidat
+## Aktueller Finalisierungskandidat
 
 Plugin-Version:
-`1.12.6`
+`1.13.1`
 
 Artefakt:
-`HD001_V1.12.6_STALE_EXPORT_FAILCLOSED_HARDPASS.zip`
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
 
 SHA-256:
-`788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
+`508c3d520fc765223d9f643d06ca75ef07e8702612d5fecab416d771bfab5dc6`
 
 Prüfbericht:
-`HD001_V1.12.6_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.13.1_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`c9442f08b722e93a24fee697cec09d77e67f1ad9cd23cda9067a5185e90b042e`
+`b24bf83bc28a9e768ff89e8598338a22208e0256c2ed485847cf553e525ab345`
+
+Zielprofil:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
+
+Profil SHA-256:
+`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
 
 Zweck:
-stale gespeicherte V1.12.3-Ergebnisse beim Export selbst fail-closed auf die KISS-Regel 1.4 neu berechnen.
+ein letzter realer Soll/Ist-Dry-Run gegen Hobby Depot und danach mit demselben geprüften Plugin genau ein kontrollierter Sync.
 
-Realer Readback vor Fix:
-- hochgeladene Datei trägt weiterhin plugin_version 1.12.3;
-- SHA-256 = `086456f70d8896c51a97a27f7dcdc29906ad90534f9322aa6f1f5a7b519d69ae`;
-- damit kein V1.12.5-Recalc-Result, sondern der alte gespeicherte Stand.
+### Finaler Zielstand
 
-Root Cause:
-V1.12.5 recalculierte nur beim Rendern der Adminseite; der Download-Handler exportierte ungeprüft `last_result()`.
+- eingefrorener Master: 841 Identitäten;
+- 340 CORE;
+- 501 Finder/Editorial;
+- 103 Basis-Logikknoten;
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- 404 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 relations.
 
-V1.12.6:
-- Download-Gate recalculiert bei altem Ergebnis selbst;
-- speichert das korrigierte Ergebnis;
-- exportiert erst danach;
-- bei Recalc-Fehler BLOCKED statt stale JSON;
-- 0 Provider-Aufrufe;
-- 0 neue Kosten;
-- 0 Strukturwrites.
+Harte Weltenkorrektur:
+- alle acht `core:world:*` = physische Rootseiten / CORE-Ebene 1;
+- `Hobbywelten` = reine View-/Übersichtsseite;
+- 8 Relations von Hobbywelten zu den acht Welten;
+- kein `core:hub → core:world:*`-Parent mehr.
 
-Lokaler direkter Download-Replay mit exakt der realen stale Datei:
-- plugin_version 1.12.6;
-- 34 ideale Leafs;
-- 1 HOBBY_HUB_CANDIDATE;
-- 1 EDITORIAL_TOPIC_CANDIDATE;
-- 5 AGGREGATION_REVIEW;
-- 3 MACRO_REVIEW;
-- 6 EVIDENCE_REQUIRED;
-- 0 Zielbaum-Writes.
+### Sicherheitsgrenzen
 
-Tests:
-- PHP 31/31 PASS;
-- ZIP-Integrität PASS;
-- realer stale-Result-Download-Replay PASS;
-- idempotenter zweiter Download PASS;
-- kein Ergebnis → BLOCKED PASS.
+- `APKW_TARGET_TREE_MANUAL_ONLY = true`;
+- Installation/Update/Admin-Aufruf startet keinen Sync;
+- Dry-Run hat 0 DataForSEO-/Provider-Aufrufe;
+- Dry-Run hat 0 Strukturwrites;
+- Apply benötigt gespeicherten Dry-Run-Fingerprint;
+- Live-State wird direkt vor Apply erneut geprüft;
+- Drift → Apply BLOCKED und neuer Dry-Run nötig;
+- Sync bounded per AJAX + Cron-Fallback;
+- automatische Archivierung nur für Objekte mit echtem `_apkw_target_node_id`;
+- Legacy-Artikel-/Kategoriestrukturen ohne Target-Binding werden nicht automatisch archiviert;
+- Foreign Slug/Name collision = BLOCKED;
+- unveränderte Meta-Werte werden nicht neu geschrieben.
 
-V1.12.6 bleibt read-only Bewertungskandidat, kein Zielbaum-Deployment.
+### Lokale harte Abnahme
+
+- aktuelle Regression 270/270 PASS;
+- V1.13.1 Final-Target-Suite 24/24 PASS;
+- V1.12-Baseline→V1.13.1 Migration 11/11 PASS;
+- Fresh ZIP PHP 33/33 PASS.
+
+Baseline-Migration simuliert:
+- V1.12: 420 physische Zielobjekte;
+- V1.13.1 Dry-Run: 12 CREATE / 419 UPDATE / 1 ARCHIVE;
+- einmaliger Sync COMPLETE;
+- danach: 431 UNCHANGED;
+- echte Post-Strukturwrites: 12 Inserts / 9 Updates / 0 Deletes;
+- Term-Strukturwrites: 0 / 0 / 0.
+
+V1.12.6 bleibt nur historische read-only Kalibrierung.
+Keine weiteren V2-Batches.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -160,39 +183,35 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-Kein technischer Bewertungsblocker.
+`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
 
-V1.12.6 hat seine Aufgabe als read-only Kalibrierungswerkzeug erfüllt.
-Es werden keine weiteren 16er-Batches mehr gestartet.
+Kein weiterer Forschungs-, Batch- oder Plugin-Codeblocker ist offen.
 
-Neues Produktionsmodell:
-- Zielbasis 95 Strukturknoten;
-- 340 explizite CORE-Hobby-Zuordnungen;
-- 501 Finder/Editorial-Fallbacks;
-- Leafs erst bei realem späterem Contentbedarf.
-
-Offen:
-`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
+Es fehlt nur der read-only Vergleich des finalen Zielprofils mit dem tatsächlichen Live-WordPress-Bestand.
 
 ## EXAKT EINE NEXT ACTION
 
-Keine weitere V2-Bewertung und keine neue DataForSEO-Serie.
+V1.13.1 einmal installieren.
 
-Einen finalen Sync-Kandidaten vorbereiten, der:
-1. das praktische Zielprofil lädt;
-2. gegen Live-WordPress nur Delta/Readback simuliert;
-3. erst nach PASS einmal synchronisiert.
+Dann:
+`Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`.
 
-V1.12.6 selbst NICHT für weitere Batches verwenden.
+Noch NICHT:
+- synchronisieren;
+- DataForSEO starten;
+- Kategorien manuell ändern.
+
+Nach dem Dry-Run den finalen Readback als JSON herunterladen und gegen den erwarteten Zielstand prüfen.
 
 ## Release-/Artefaktgrenze
 
-V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.6 ist der aktuelle read-only Bewertungskandidat für genau einen realen Export-Readback. Er ist kein Zielbaum-Deploymentkandidat.
+V1.13.1 ist der aktuelle lokal hart geprüfte Finalisierungskandidat.
 
 Isolierte Artefaktpflicht:
 `PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
 
-Der exakte V1.12-ZIP-Hash ist verifiziert, aber `CURRENT.zip` wurde in diesem Abschlusslauf NICHT ersetzt, weil der aktive GitHub-Toolpfad keinen direkten Binärtransfer aus dem lokalen Container bereitstellt. Kein Ersatzartefakt erfinden.
+Das installierbare geprüfte ZIP liegt als Gesprächs-/Library-Artefakt vor.
+Das GitHub-`CURRENT.zip` ist weiterhin nicht bytegenau synchronisiert, weil der aktive GitHub-Connector keinen direkten Binärupload aus dem Container anbietet. Kein Ersatzartefakt erfinden.
 
-Kein Live-PASS behaupten.
-Kein altes V1.12-Profil installieren, bevor das V2-Zielbaum-Delta freigegeben und erneut vollständig getestet ist.
+Kein Live-PASS behaupten, bevor:
+Dry-Run → akzeptierter Delta-Readback → einmaliger Sync → Struktur-/Frontend-Readback abgeschlossen sind.
