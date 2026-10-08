@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 84 HISTORISCHE CURRENT-HUBS REKONSTRUIERT / 397 CONTENT-KATEGORIEN / 198 OFFEN / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 178 VON 359 CURRENT-CORE ENTSCHIEDEN / 181 OFFEN / 477 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1068,16 +1068,41 @@ Damit ist die frühere 299er-Blackbox reduziert:
 - alle geprüften Leafs im Bereich 5–12;
 - verbleibend: 198 aktuelle CORE-Identitäten.
 
+## GLOBALER CORE-RECHECK – FORTSCHRITT
+
+Feste Prüfmenge:
+359 aktuelle CORE-Identitäten.
+
+Bereits entschieden:
+- vorher 161;
+- neuer Block Gestalten + Genuss: 17;
+- aktuell **178 entschieden**;
+- **181 offen**.
+
+Neuer Beleg:
+`HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json`
+
+Ergebnis neuer Block:
+- 16 HOBBY_HUB;
+- 1 ORIENTATION_UNIVERSE (Fermentation);
+- 80 sichtbare Content-Kategorien;
+- jede Leaf-Kategorie 5 eigenständige Intents;
+- 0 Capacity-Verstöße;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes.
+
+Zusammen mit den bereits rekonstruierten historischen Hubs sind aktuell **477 sichtbare Content-Kategorien** in Rule-1.6-Recheck-Evidence dokumentiert.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_198_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_181_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die verbleibenden 198 aktuellen CORE-Identitäten einmal global nach Regel 1.6 abschließen.
-Danach den vollständigen sichtbaren Zielbaum einfrieren.
+Die verbleibenden 181 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck weiter abschließen.
+Keine neue Batchschleife.
 
-Bis dahin:
+Bis zum vollständigen fachlichen Abschluss:
 - kein Plugin-Fix;
 - kein WordPress-Write;
 - kein Sync.
