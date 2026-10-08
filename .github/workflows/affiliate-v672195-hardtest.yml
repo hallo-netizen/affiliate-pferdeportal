@@ -1,4 +1,4 @@
-name: Affiliate 6.72.206 Glossary Breed Real Injection Gate
+name: Affiliate 6.72.207 Glossary Breed Real Injection Gate
 
 on:
   workflow_dispatch:
@@ -54,15 +54,15 @@ jobs:
           import hashlib,json,pathlib
           c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
           a=c['active_candidate']
-          assert a['version']=='6.72.206'
+          assert a['version']=='6.72.207'
           assert a['source_file_count']==28
           p=pathlib.Path(a['current_source_manifest_ref'])
           assert hashlib.sha256(p.read_bytes()).hexdigest()==a['current_source_manifest_sha256']
           assert len([x for x in p.read_text().splitlines() if x.strip()])==28
           main=(pathlib.Path(a['source_root'])/'pferdeportal-affiliate-router.php').read_text()
-          assert 'Version: 6.72.206' in main
-          assert "const VERSION = '6.72.206';" in main
-          print('PASS CURRENT_672206_BOUND')
+          assert 'Version: 6.72.207' in main
+          assert "const VERSION = '6.72.207';" in main
+          print('PASS CURRENT_672207_BOUND')
           PY
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
@@ -76,7 +76,7 @@ jobs:
           mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672206 Real Injection' --admin_user=admin --admin_password='ci-672206!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672207 Real Injection' --admin_user=admin --admin_password='ci-672207!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/pferde-live-types.php <<'PHP'
           <?php
@@ -97,13 +97,13 @@ jobs:
           PHP
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.206"){exit(2);} echo "PASS PLUGIN_672206_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.207"){exit(2);} echo "PASS PLUGIN_672207_ACTIVE\n";' --path=/tmp/wp-site
 
       - name: Real glossary breed injection positive negative
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/wp-site/real_glossary_breed_672206.php <<'PHP'
+          cat >/tmp/wp-site/real_glossary_breed_672207.php <<'PHP'
           <?php
           update_option('ppar_enabled','1');
           $o=Pferdeportal_Affiliate_Router::instance();
@@ -120,9 +120,9 @@ jobs:
           global $wpdb;
           $table=$call('creative_library_table');
           $seed=function($external,$w,$h)use($wpdb,$table){
-              $identity=hash('sha256','672206|'.$external);
+              $identity=hash('sha256','672207|'.$external);
               $row=[
-                  'provider'=>'direct','partner_external_id'=>'kiss205','partner_name'=>'KISS 205',
+                  'provider'=>'direct','partner_external_id'=>'kiss207','partner_name'=>'KISS 207',
                   'external_id'=>$external,'identity_hash'=>$identity,'creative_type'=>'banner',
                   'title'=>'KISS '.$external,'description'=>'','tags'=>'',
                   'image_url'=>'https://example.com/'.$external.'.png',
@@ -170,10 +170,44 @@ jobs:
           $ok($match('breed_single_desktop_banner',310,310)===true,'breed_desktop_format_positive');
           $ok($match('breed_single_mobile_banner',600,100)===true,'breed_mobile_format_positive');
 
-          $gloss=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Glossar Live Probe','post_content'=>'Glossar Inhalt']);
-          $breed=wp_insert_post(['post_type'=>'pa_breed','post_status'=>'publish','post_title'=>'Rasse Live Probe','post_content'=>'Rassen Inhalt']);
+          $gloss=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Sattelpflege','post_name'=>'sattelpflege','post_content'=>'Pflege von Sattel und Leder.']);
+          $gloss2=wp_insert_post(['post_type'=>'uge_term','post_status'=>'publish','post_title'=>'Hufrehe','post_name'=>'hufrehe','post_content'=>'Erkrankung des Pferdehufs.']);
+          $breed=wp_insert_post(['post_type'=>'pa_breed','post_status'=>'publish','post_title'=>'Haflinger','post_name'=>'haflinger','post_content'=>'Rasseportrait Haflinger.']);
           $ok($gloss>0,'glossary_post_created');
+          $ok($gloss2>0,'glossary_second_post_created');
           $ok($breed>0,'breed_post_created');
+
+          // Exakte Nutzerregel 6.72.207:
+          // Glossar = Themenmatch zuerst, sonst freie Wahl.
+          // Rasse = grundsaetzlich freie Wahl, kein Themenvorteil.
+          $ctxG1=$call('get_content_context',$gloss); $ctxG1['slot_type']='glossary_single_desktop_banner';
+          $ctxG2=$call('get_content_context',$gloss2); $ctxG2['slot_type']='glossary_single_desktop_banner';
+          $ctxB=$call('get_content_context',$breed); $ctxB['slot_type']='breed_single_desktop_banner';
+          $campaign=function($title,$targets=[]){
+              return [
+                  'id'=>sanitize_key($title),'name'=>$title,'title'=>$title,'description'=>'','partner'=>'Test Partner',
+                  'creative_type'=>'banner','source'=>'output_object_v4','assignment_mode'=>'page_tree',
+                  'automation_target_keys'=>$targets,'match_keywords'=>[],'match_slugs'=>[],'match_term_ids'=>[],
+                  'page_id'=>0,'match_descendants'=>false
+              ];
+          };
+          $thematic=$campaign('Sattelpflege Leder Sattel');
+          $unrelated=$campaign('Solartechnik Photovoltaik',['page:solartechnik']);
+          $breedThematic=$campaign('Haflinger Pferderasse',['page:pferderassen-und-pferdetypen']);
+
+          $rt=$call('campaign_match_rank',$thematic,$ctxG1);
+          $ru1=$call('campaign_match_rank',$unrelated,$ctxG1);
+          $ru2=$call('campaign_match_rank',$unrelated,$ctxG2);
+          $rb1=$call('campaign_match_rank',$unrelated,$ctxB);
+          $rb2=$call('campaign_match_rank',$breedThematic,$ctxB);
+
+          $ok(is_array($rt) && (int)($rt['specificity']??0)>5,'glossary_thematic_match_first');
+          $ok(is_array($ru1) && (int)($ru1['specificity']??-1)===5,'glossary_unrelated_mapped_free_fallback_article1');
+          $ok(is_array($ru2) && (int)($ru2['specificity']??-1)===5,'glossary_unrelated_mapped_free_fallback_article2');
+          $ok((int)$rt['specificity']>(int)$ru1['specificity'],'glossary_topic_outweighs_free');
+          $ok(is_array($rb1) && (int)($rb1['specificity']??-1)===5,'breed_unrelated_is_free');
+          $ok(is_array($rb2) && (int)($rb2['specificity']??-1)===5,'breed_thematic_is_same_free_rank');
+          $ok((int)$rb1['specificity']===(int)$rb2['specificity'],'breed_has_no_topic_preference');
 
           $run=function($post_id,$post_type,$method,$content)use($o){
               global $wp_query,$wp_the_query,$post;
@@ -187,11 +221,15 @@ jobs:
           };
 
           // POSITIV LIVE-FALL: kein historischer Designmarker / kein alter Anker.
-          $gPlain='<article class="current-glossary-design"><p>Glossar Inhalt</p></article>';
+          $gPlain='<article class="current-glossary-design"><p>Sattelpflege Inhalt</p></article>';
           $gOut=$run($gloss,'uge_term','inject_glossary_single_banner',$gPlain);
           $ok(strpos($gOut,'data-ppar-glossary-banner="desktop"')!==false,'glossary_without_old_anchor_desktop_visible');
           $ok(strpos($gOut,'data-ppar-glossary-banner="mobile"')!==false,'glossary_without_old_anchor_mobile_visible');
           $ok(strlen($gOut)>strlen($gPlain),'glossary_without_old_anchor_appended');
+          $g2Plain='<article class="current-glossary-design"><p>Hufrehe Inhalt</p></article>';
+          $g2Out=$run($gloss2,'uge_term','inject_glossary_single_banner',$g2Plain);
+          $ok(strpos($g2Out,'data-ppar-glossary-banner="desktop"')!==false,'glossary_second_unrelated_topic_desktop_visible');
+          $ok(strpos($g2Out,'data-ppar-glossary-banner="mobile"')!==false,'glossary_second_unrelated_topic_mobile_visible');
 
           $bPlain='<article class="current-breed-design"><p>Rassen Inhalt</p></article>';
           $bOut=$run($breed,'pa_breed','inject_breed_single_banner',$bPlain);
@@ -223,34 +261,34 @@ jobs:
 
           echo "SUMMARY PASS=$pass FAIL=$fail\n";
           if($fail){exit(1);}
-          echo "GLOSSARY_BREED_REAL_INJECTION_672206_PASS\n";
+          echo "GLOSSARY_BREED_REAL_INJECTION_672207_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672206.php --path=/tmp/wp-site | tee /tmp/672206.log
-          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672206_PASS' /tmp/672206.log
+          /tmp/wp eval-file /tmp/wp-site/real_glossary_breed_672207.php --path=/tmp/wp-site | tee /tmp/672207.log
+          grep -F 'GLOSSARY_BREED_REAL_INJECTION_672207_PASS' /tmp/672207.log
 
-      - name: Package exact tested 6.72.206
+      - name: Package exact tested 6.72.207
         shell: bash
         run: |
           set -euo pipefail
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.206.zip affiliate-portal-router)
-          rm -rf /tmp/final206 && mkdir -p /tmp/final206
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.206.zip -d /tmp/final206
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.207.zip affiliate-portal-router)
+          rm -rf /tmp/final207 && mkdir -p /tmp/final207
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.207.zip -d /tmp/final207
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
           m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
           expected={line.split('  ',1)[1]:line.split('  ',1)[0] for line in m.read_text().splitlines() if line.strip()}
-          root=Path('/tmp/final206')
+          root=Path('/tmp/final207')
           got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
           assert got==expected
           print('PASS ZIP_BYTE_IDENTITY_28_OF_28')
           PY
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.206
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.206.zip
+          name: AFFILIATE_ZENTRALE_6.72.207
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.207.zip
           if-no-files-found: error
           retention-days: 30
