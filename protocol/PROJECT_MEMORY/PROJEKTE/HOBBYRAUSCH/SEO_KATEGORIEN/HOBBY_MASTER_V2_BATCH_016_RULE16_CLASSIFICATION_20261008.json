@@ -1,0 +1,51 @@
+{
+  "contract": "HD001_BATCH016_RULE16_CLASSIFICATION",
+  "date": "2026-10-08",
+  "status": "LEAF_DETAIL_ARTIFACT_PENDING",
+  "hubs": [
+    {
+      "name": "Polymer Clay",
+      "leaf_count": 5
+    },
+    {
+      "name": "Cold Porcelain",
+      "leaf_count": 4
+    },
+    {
+      "name": "Töpfern",
+      "leaf_count": 6
+    },
+    {
+      "name": "Raku",
+      "leaf_count": 4
+    },
+    {
+      "name": "Keramikglasuren",
+      "leaf_count": 5
+    },
+    {
+      "name": "Glasmalerei",
+      "leaf_count": 5
+    },
+    {
+      "name": "Tiffanyglas",
+      "leaf_count": 5
+    },
+    {
+      "name": "Glasperlen drehen",
+      "leaf_count": 5
+    },
+    {
+      "name": "Glasfusing",
+      "leaf_count": 5
+    },
+    {
+      "name": "Glasblasen",
+      "leaf_count": 5
+    },
+    {
+      "name": "Glasgravur",
+      "leaf_count": 4
+    }
+  ]
+}
