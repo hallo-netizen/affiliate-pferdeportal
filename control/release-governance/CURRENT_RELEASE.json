@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 275,
+  "generation": 276,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "0e1f4d02df9a8015fb585ddeb69628457c7916c7e62c8d3089d054081c8faef8",
+    "manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,12 +36,12 @@
   },
   "active_candidate": {
     "version": "6.72.203",
-    "status": "WORKING_6_72_203_KISS_BANNER_RULE_ORDER_LOCAL_SIM_PASS",
+    "status": "WORKING_6_72_203_AFF_ERR_059_062_SOURCE_FIXED_GATE_PENDING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "0e1f4d02df9a8015fb585ddeb69628457c7916c7e62c8d3089d054081c8faef8",
+    "current_source_manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
     "candidate_reference_scope": "Authoritative section 9 rule order restored: specific mapped banner stays in its stored target/path; nonmatching specific banner stays out; if no specific banner is available for the target, explicitly general active banners may enter the existing technically/format-valid stable fallback pool. Manual topic assignment still writes the same topic_targets truth. No frontend reclassification, new DB query, provider HTTP or new table.",
@@ -49,7 +49,7 @@
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_RULE_ORDER_BOUND",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_203_AFF_ERR_059_062_BOUND",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "KISS_BANNER_RULE_ORDER_WORDPRESS_MARIADB_PROOF",
-    "current_focus_reason": "Correct authoritative order is now source-bound and locally simulated: specific -> general fallback -> stable distribution, with specific foreign banners excluded."
+    "current_focus": "BOUND_CURRENT_RELEASE_GATES_ONLY",
+    "current_focus_reason": "AFF-ERR-059..062 source fixes are committed and rebound to the 28-file manifest. No further concept work; run only current bound gates."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_203_KISS_BANNER_RULE_ORDER_LOCAL_SIM_PASS",
+    "state": "WORKING_6_72_203_AFF_ERR_059_062_SOURCE_FIXED_GATE_PENDING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run existing bound WordPress/MariaDB gates on the authoritative section 9 order: specific mapped target/path first; nonmatching specific banner excluded; if none specific for the target, explicitly general active technically/format-valid banners may be stably distributed. Preserve manual topic assignment in topic_targets and zero new frontend DB/HTTP.",
-    "completion_condition": "KISS_BANNER_RULE_ORDER_WORDPRESS_MARIADB_GATES_PASS",
-    "after_completion_action": "If the bound gates pass, continue existing release-check sequence. If one gate fails, fix only the first concrete failure.",
+    "bound_user_scope_action": "Run only the current 6.72.203 bound gates on the newly rebound 28-file manifest. Ignore historical version-pinned workflows. Fix only the first real current-gate failure.",
+    "completion_condition": "CURRENT_6_72_203_BOUND_GATES_PASS",
+    "after_completion_action": "If current bound gates pass, continue release-check. If one current gate fails, fix only that first failure.",
     "no_optional_detours": true,
-    "sequence": 119,
+    "sequence": 120,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-058",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-059",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_err_058_kiss_banner_single_target_local_sim_20261008.md",
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "0e1f4d02df9a8015fb585ddeb69628457c7916c7e62c8d3089d054081c8faef8",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_RULE_ORDER_BOUND",
+    "current_source_manifest_sha256": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_203_AFF_ERR_059_062_BOUND",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -1024,7 +1024,12 @@
       "banner_single_target_performance_672203": "PASS_ZERO_NEW_FRONTEND_DB_ZERO_FRONTEND_HTTP_NO_NEW_TABLE",
       "banner_rule_order_local_sim_672203": "PASS_13_OF_13",
       "banner_specific_then_general_fallback_672203": "PASS_SPECIFIC_NONMATCH_BLOCKED_EXPLICIT_GENERAL_FALLBACK_ALLOWED",
-      "banner_performance_db_672203": "PASS_ZERO_NEW_FRONTEND_DB_ZERO_NEW_FRONTEND_HTTP_NO_NEW_TABLE"
+      "banner_performance_db_672203": "PASS_ZERO_NEW_FRONTEND_DB_ZERO_NEW_FRONTEND_HTTP_NO_NEW_TABLE",
+      "aff_err_059": "FIXED_MANUAL_FIXED_SEPARATE_AND_PRECEDENCE_RESTORED",
+      "aff_err_060": "FIXED_GENERAL_FALLBACK_RESTORED_WITHOUT_FAKE_TOPIC",
+      "aff_err_061": "FIXED_DEDUPE_EXACT_CREATIVE_IDENTITY_ONLY",
+      "aff_err_062": "FIXED_VISIBLE_ANZEIGE_HEADING",
+      "manifest_rebound_28": "ff62003ec22062f5c1637ce5824c82353ecfe1a9aabf77f5f374726a94e14190"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
