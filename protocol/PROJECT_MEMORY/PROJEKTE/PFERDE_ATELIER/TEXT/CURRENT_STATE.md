@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-10-05
-STATUS: PSTE 0.57.39 KONSOLIDIERT / PSERC-PLANABDECKUNG + JOURNAL-INVENTARMAPPING LOKAL 1:1 POSITIV-NEGATIV HARD PASS / LIVE-READBACK OFFEN
+STAND: 2026-10-08
+STATUS: PSTE 0.57.57 + PSERC 0.28.32 EXAKTES ARTEFAKTPAAR LOKAL POSITIV-NEGATIV HARD PASS / KISS-DB-PERFORMANCE PASS / PSTE-LIVE-READBACK OFFEN
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -9,6 +9,53 @@ STATUS: PSTE 0.57.39 KONSOLIDIERT / PSERC-PLANABDECKUNG + JOURNAL-INVENTARMAPPIN
 - **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
 - **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 - **Aktiver Themenverwertungs-Zielvertrag:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+## CURRENT-DELTA 2026-10-08 – EXAKTES PSTE-/PSERC-PAAR GEFUNDEN UND FRISCH GEPRÜFT
+
+Die zuvor im Arbeitschat behauptete fehlende PSTE-/PSERC-Quelle war falsch. Die exakten Benutzerartefakte liegen im Pferdeatelier-Bestand und wurden frisch aus den Original-ZIPs geprüft.
+
+**PSTE**
+- `PSTE-0.57.57-KISS-SLIM-AUTOMATIK-KURZWEG.zip`
+- SHA-256: `c3a001cd06d20fb71d75a21d7aca3cde4436920f855e999a3c166f035de01107`
+- Version im Plugin: **0.57.57**
+- ZIP: **116 Dateien / 79 PHP**
+- ZIP-Integrität PASS; PHP-Lint **79/79 PASS**; JSON parse **36/36 PASS**.
+
+**PSERC**
+- `PSERC-0.28.32-PAA-RELATED-INTEGRITY-ROOTFIX.zip`
+- SHA-256: `be09a8bee9246b5fe7047242e97111ec16e11e4d4a063da806c4c7dd6d49b25d`
+- Version: **0.28.32**
+- Build: `0.28.32-paa-related-integrity-rootfix`
+- ZIP: **63 Dateien / 43 PHP**
+- ZIP-Integrität PASS; PHP-Lint **43/43 PASS**; JSON parse **17/17 PASS**.
+- Paketintegrität gegen Originaldateien PASS; manipuliertes Paket blockiert fail-closed.
+
+**Frische lokale 1:1-Kernkette**
+- `PAA_RELATED` mit gültiger Evidenz → PSERC PASS.
+- fehlende Evidenz / falscher Evidenzhash / Hard-Reason → BLOCK.
+- PSERC Exact-Five-Metadatenboundary → PASS.
+- PSTE-K0-Handoff derselben fünf Felder → PASS.
+- sechstes Feld / falscher Batch-Hash / NO_READY / falsche K0-Identität → BLOCK.
+- positiver Batch-SHA: `6a4c69ea64d7518361d5a8aa5c9795e8cab4468485c34e7c38dd1771a253a644`.
+
+**Automatik / Kurzer Dienstweg**
+- Automatik frisch in neun Zuständen positiv/negativ simuliert: Start Bestandslauf, Resume, Recovery, PSERC-Start, PSERC-Advance, READY-Ausgabe sowie Blockaden bei Fremdrecherche, fehlendem PSERC und laufender Speicherpflege → PASS.
+- Kurzer Dienstweg positiv/negativ simuliert: normaler K0-Weg, Finanzierungsprofil, Versicherungsprofil sowie Blockaden bei Provideraufruf, Vollscan-Anforderung, fehlender Readiness, falschem Kontext, Mischroute und PSERC-Block → PASS.
+
+**KISS / Datenbank / Performance**
+- sichtbare PSTE-Bedienung: **Produktion / Themenprüfung / Datenquellen / Einstellungen**.
+- alte sichtbare Produktionsbuttons/-wege sind im Paket nicht mehr vorhanden.
+- Dashboard-Statistik: exakt eine Aggregate-Query; kein Laden von `payload_json`.
+- Existing-only: lokale bounded Verarbeitung in **25er/40er** Paketen; Provideraufrufe = 0.
+- Kurzer Dienstweg: kein globaler Retained-Backlog-Audit und keine neue Providerrecherche.
+- keine zweite Themen-Datenbank und keine neue Produktionsarchitektur.
+
+**Noch kein Final-Closeout:**
+- PSTE 0.57.57 ist lokal exakt belegt, aber ein unabhängiger WordPress-Versions-/Byte-Readback von exakt 0.57.57 liegt noch nicht vor.
+- PSERC 0.28.32 ist am 08.10.2026 über die live öffentlich ausgelieferte Package-Binding-Datei als installierte Paketidentität belegt.
+- in PSERC 0.28.32 ist `contracts/portal-topic-evidence-gate-v1.json` gegenüber der tatsächlichen PHP-Gateklasse veraltet: PHP akzeptiert u. a. `PAA_RELATED`, die JSON-Liste nennt es nicht. Die JSON ist nicht Laufzeitautorität, aber ein echter Metadaten-/Altlastendrift.
+- PSTE enthält weiterhin interne, nicht im Menü sichtbare Diagnose-/Review-Adminoberflächen. Diese dürfen nur entfernt werden, wenn ihre Review-/Fallback-Funktion nachweislich anderweitig erhalten bleibt; Sandbox-/Bestandsengine selbst ist Teil des Automatikpfads und **nicht** pauschal löschbar.
+
 
 ## LIVE-READBACK 2026-10-04
 
@@ -775,22 +822,18 @@ Einordnung:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05739_LOCAL_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_05757_PSERC_02832_RESTCLEANUP_BEFORE_FINAL_LIVE_ACCEPTANCE`
 
-Der Journal-/Magazin-Inventarfehler ist auf Basis 0.57.38 lokal repariert und gegen die realen WordPress-/Exportfälle positiv/negativ bewiesen. Offen ist nur der reale WordPress-Readback von exakt 0.57.39.
+Der echte lokale Workflow ist nicht mehr wegen fehlender Dateien blockiert. Offen sind nur noch der sichere Rest-Cleanup der belegten Altlasten/Metadatendrift und danach die echte WordPress-Abnahme des exakten bereinigten Paars.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05739_THEN_SINGLE_LIVE_READBACK`
+`SAFE_RESTCLEANUP_THEN_REPEAT_EXACT_LOCAL_E2E`
 
-1. Exakt `PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip` installieren.
-2. **Keinen** manuellen `Gesamtbestand neu abgleichen` und keine neue Produktionswelle starten.
-3. Themenkarte neu laden und live prüfen:
-   - `Wie alt werden Pferde?` → Kategorie `Pferdegesundheit verstehen`, Typ `Journal`;
-   - `Können Pferde schwimmen?` → Kategorie `Pferdewissen & Grundlagen`, Typ `Journal`.
-4. Danach `Gesamte Themenkarte exportieren`.
-5. Export gegen 0.57.39 read-only prüfen: Journal-Inventar korrekt, 16/16 PSERC-Planartikel weiterhin abgedeckt, keine neuen Cross-Topic-Treffer.
-6. Bei PASS: aktuellen Redaktionsplan/Metadaten-Snapshot erzeugen und unmittelbar in die Artikelproduktion wechseln.
+1. PSERC-Vertragsmetadaten an die tatsächlich getestete Runtime-Evidenzliste angleichen und Paketintegrität neu binden.
+2. PSTE nur um **nachweislich tote** versteckte Admin-/Diagnoseoberfläche bereinigen; keine Sandbox-/Review-/Bestandsfunktion entfernen, solange deren Ersatzpfad nicht bewiesen ist.
+3. Danach dasselbe exakte Positiv-/Negativ-E2E erneut gegen das konsolidierte Paar laufen lassen.
+4. Erst bei PASS: WordPress-Live-Abnahme/Readback; kein automatisches Publish.
 
 ## NICHT ANFASSEN
 
