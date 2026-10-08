@@ -300,12 +300,27 @@ Aktueller Master:
 Audit:
 `../SEO_KATEGORIEN/HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json`
 
+## Aktueller Strukturstand nach Gesamtprüfung
+
+Regeln 2.6/1.6 sind bereinigt und widerspruchsfrei.
+
+Welt-/Zwischenstruktur:
+`../SEO_KATEGORIEN/HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json`
+
+Aktuelle CORE-Rollenabdeckung:
+- 359 CORE;
+- 60 aktuell produktionsgültig bewertet durch Batch 001–003 + Expansion19;
+- 299 benötigen globalen Recheck nach 1.6;
+- Batch 004–019 bleiben historische Evidence, nicht Produktionsautorität.
+
 ## Erster offener Blocker
 
-`HD001_BALANCED_TARGET_TREE_REBUILD_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_299_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Kompletten fachlichen Zielbaum nach Regeln 2.6/1.6 neu ausbalancieren, einschließlich sichtbarer Content-Kategorieebene der HOBBY_HUBs.
+Ein globaler Recheck der 299 aktuellen CORE-Identitäten nach Regeln 1.6.
+Keine neue Batchschleife.
 
-Keine technische Umsetzung vor fachlicher Abnahme des Zielbaums.
+Erst danach die vollständige sichtbare HOBBY_HUB-Content-Kategorieebene materialisieren.
+Keine technische Umsetzung vorher.
