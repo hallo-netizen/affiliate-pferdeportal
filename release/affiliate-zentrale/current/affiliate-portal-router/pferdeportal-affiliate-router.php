@@ -2411,21 +2411,12 @@ JS;
         if (!is_array($campaign)) { return ''; }
         $g=$this->banner_candidate_geometry($candidate);
         if ($g['ratio']<=0) { return ''; }
-        $provider=sanitize_key((string)($campaign['network'] ?? ''));
-        $partner=strtolower(trim(sanitize_text_field((string)($campaign['advertiser_id'] ?? $campaign['partner'] ?? ''))));
-        $destination=esc_url_raw((string)($campaign['destination_url'] ?? ''));
-        if ($destination==='') { $destination=esc_url_raw((string)($campaign['url'] ?? '')); }
-        $parts=wp_parse_url($destination);
-        $destination_key='';
-        if (is_array($parts)) {
-            $destination_key=strtolower((string)($parts['host'] ?? '') . (string)($parts['path'] ?? ''));
-            $destination_key=rtrim($destination_key,'/');
-        }
-        $title=strtolower(trim(preg_replace('/\s+/', ' ', sanitize_text_field((string)($campaign['title'] ?? $campaign['name'] ?? '')))));
-        // Formfamilien bleiben getrennt; innerhalb einer Familie gewinnt die
-        // groesste Pixelversion desselben Motiv-/Ziel-/Partnerverbunds.
+        $identity=strtolower(sanitize_text_field((string)($campaign['creative_identity_hash'] ?? '')));
+        if(!preg_match('/^[a-f0-9]{64}$/',$identity)){return '';}
+        // Nur dieselbe kanonische Creative-Identitaet darf als Aufloesungsvariante
+        // zusammenfallen. Fehlt sie bei Altbestand, bleibt der Kandidat getrennt.
         $ratio_family=number_format(round($g['ratio']*2)/2,1,'.','');
-        return hash('sha256',implode('|',array($provider,$partner,$destination_key,$title,$ratio_family)));
+        return hash('sha256',$identity.'|'.$ratio_family);
     }
 
     private function banner_dedupe_resolution_variants($candidates) {
