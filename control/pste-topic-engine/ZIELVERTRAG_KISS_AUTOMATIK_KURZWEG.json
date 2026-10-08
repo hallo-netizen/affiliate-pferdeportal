@@ -23,5 +23,14 @@
   ],
   "output_policy": "Exactly one normal production handoff per run.",
   "architecture_rule": "KISS: existing components stay internal; do not create a new parallel production architecture.",
-  "source_rule": "Never build a new PSTE version from an unproven or reconstructed source."
+  "source_rule": "Never build a new PSTE version from an unproven or reconstructed source.",
+  "special_manual_profiles": {
+    "TARIFRECHNER_VERSICHERUNG": {
+      "rule": "500-800 words; explain protection/benefits before calculator and result/exclusions after it."
+    },
+    "TARIFRECHNER_KOSTEN": {
+      "rule": "500-800 words; explain budget/own funds/term/rate/total cost before calculator and financing result after it."
+    },
+    "common": "No DataForSEO, no invented figures, no provider/calculator name in title, central placeholder only, no repeated series template."
+  }
 }
