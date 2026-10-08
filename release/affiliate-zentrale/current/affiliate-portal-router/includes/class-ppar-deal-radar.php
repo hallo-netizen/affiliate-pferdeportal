@@ -22,7 +22,7 @@ final class PPAR_Deal_Radar {
         self::$booted = true;
         add_action('admin_menu', array(__CLASS__, 'register_menu'), 998);
         add_action('admin_post_ppar_deal_radar_save', array(__CLASS__, 'handle_save'));
-        add_action('init', array(__CLASS__, 'ensure_schedule'), 28);
+        if (!((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) { add_action('init', array(__CLASS__, 'ensure_schedule'), 28); }
         add_action(self::CRON_HOOK, array(__CLASS__, 'refresh'));
         add_filter('the_content', array(__CLASS__, 'filter_content'), 45);
         add_action('template_redirect', array(__CLASS__, 'handle_click'), -20);
