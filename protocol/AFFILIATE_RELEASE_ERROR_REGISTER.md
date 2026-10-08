@@ -1715,3 +1715,13 @@ Die frühere Formulierung „manuelle und automatische Themenzuordnung teilen au
 - Runtime-Reihenfolge: Safety -> Veto/Review -> FIXED -> automatische Zielkarte -> Format -> spezifische Auswahl -> allgemeiner Fallback -> stabile Verteilung.
 
 AFF-ERR-059 ist für diese Präzisierung die jüngere Root-Cause-Korrektur.
+
+
+## AFF-ERR-059–062 Abschluss — 08.10.2026
+
+- AFF-ERR-059: FIXED separat und vorrangig wiederhergestellt.
+- AFF-ERR-060: allgemeiner Banner-Fallback ohne Fake-Thema wiederhergestellt.
+- AFF-ERR-061: Dedupe nur bei identischer creative_identity_hash.
+- AFF-ERR-062: sichtbare Überschrift Anzeige wiederhergestellt.
+
+Status: SOURCE_FIXED_AND_BOUND / CURRENT_GATES_PENDING.
