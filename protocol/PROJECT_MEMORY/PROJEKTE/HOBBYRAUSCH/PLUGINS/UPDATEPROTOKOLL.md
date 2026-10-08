@@ -931,3 +931,52 @@ SHA-256:
 
 NEXT:
 V1.14.2 installieren → Delta-Dry-Run einmal neu → nur bei 32 CREATE / 425 UPDATE / 5 ARCHIVE und sichtbarem Abschnitt 2 einmal synchronisieren.
+
+
+---
+
+## PU-20261008-019 – HD-001 V1.14.3 Rule16 Visible Full Local Hard Pass
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+GRUND:
+Nach Abschluss des fachlichen Rule-1.6-Zielbaums wurden im technischen Hard-Test vier konkrete Abweichungen gefunden und ursächlich korrigiert:
+- Profil-Endzählungen mussten nach 5 Alias-Zusammenführungen / 22 Demotionen auf 855 kanonische Identitäten und 332 finale CORE-Identitäten gebunden werden;
+- 28 bestehende Hobbyseiten benötigten legacy_ids für identitätserhaltende Migration statt CREATE+ARCHIVE;
+- Dry-Run durfte diese physisch bereits beanspruchten Legacy-Objekte nicht zusätzlich als ARCHIVE zählen;
+- bereits archivierte Target-Objekte durften im Folgelauf nicht erneut beschrieben werden.
+
+ERGEBNIS:
+- 1.723 physische Zielobjekte;
+- 408 Pages;
+- 1.292 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 Relations;
+- 279/279 HOBBY_HUBs mit sichtbarer Content-Kategorieebene;
+- Migration gegen V1.14.1-Profil: 1.293 CREATE + 430 UPDATE + 27 ARCHIVE;
+- Sync COMPLETE / Readback 1.723/1.723;
+- zweiter Dry-Run 1.723 UNCHANGED / 0 ARCHIVE;
+- zweiter Sync 1.723 UNCHANGED / 0 ARCHIVE / 0 Writes;
+- Frontend PASS;
+- Negativsuite PASS;
+- PHP 33/33 PASS;
+- 0 Provider;
+- 0 WordPress-Writes in der lokalen Prüfung.
+
+ARTEFAKT:
+`HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip`
+
+SHA-256:
+`deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`
+
+PROFIL SHA-256:
+`6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6`
+
+EVIDENCE:
+`SEO_KATEGORIEN/HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS_20261008.json`
+
+NEXT:
+V1.14.3 installieren → genau einen read-only Live-Dry-Run → JSON-Readback prüfen.
+Kein Sync vorher.
