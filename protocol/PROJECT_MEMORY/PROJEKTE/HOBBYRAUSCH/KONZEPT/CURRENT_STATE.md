@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: 3-SÄULEN-KONZEPT FEST / REGELN 2.6 + 1.6 / 860 MASTER-IDENTITÄTEN / 359 CORE / ALLE KANONISCHEN EBENEN SICHTBAR / HOBBY_HUB MIT CONTENT-KATEGORIEEBENE / ZIELBAUM-REBUILD PENDING
+STATUS: REGELN 2.6 + 1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ENTSCHIEDEN / 198 OFFEN
 
 ## Rolle
 
@@ -313,14 +313,18 @@ Aktuelle CORE-Rollenabdeckung:
 - 299 benötigen globalen Recheck nach 1.6;
 - Batch 004–019 bleiben historische Evidence, nicht Produktionsautorität.
 
+## Aktueller Recheck-Stand
+
+- 359 aktuelle CORE-Identitäten;
+- 161 nach Regel 1.6 entschieden;
+- 75 historische aktuelle HOBBY_HUBs mit 355 sichtbaren Content-Kategorien nachgezogen;
+- 198 aktuelle CORE-Identitäten noch offen.
+
 ## Erster offener Blocker
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_299_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_198_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Ein globaler Recheck der 299 aktuellen CORE-Identitäten nach Regeln 1.6.
-Keine neue Batchschleife.
-
-Erst danach die vollständige sichtbare HOBBY_HUB-Content-Kategorieebene materialisieren.
-Keine technische Umsetzung vorher.
+Die verbleibenden 198 aktuellen CORE-Identitäten einmal global nach Regel 1.6 abschließen.
+Keine neue Batchschleife. Keine technische Umsetzung vorher.
