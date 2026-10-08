@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 178 VON 359 CURRENT-CORE ENTSCHIEDEN / 181 OFFEN / 477 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
+STATUS: REGELN 2.6/1.6 / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 209 VON 359 CURRENT-CORE ENTSCHIEDEN / 150 OFFEN / 583 CONTENT-KATEGORIEN IN RECHECK-EVIDENCE / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1093,16 +1093,36 @@ Ergebnis neuer Block:
 
 Zusammen mit den bereits rekonstruierten historischen Hubs sind aktuell **477 sichtbare Content-Kategorien** in Rule-1.6-Recheck-Evidence dokumentiert.
 
+## GLOBALER CORE-RECHECK – FORTSCHRITT
+
+Feste Prüfmenge:
+359 aktuelle CORE-Identitäten.
+
+Aktuell entschieden:
+- **209 von 359**;
+- **150 offen**.
+
+Neu abgeschlossen:
+- Gestalten + Genuss: 17 Identitäten / 16 HOBBY_HUB / 80 Content-Kategorien;
+- Astronomie + Mikroskopie: 13 Identitäten / 10 HOBBY_HUB / 48 Content-Kategorien;
+- Wetter + Naturbeobachtung + Messen: 18 Identitäten / 14 HOBBY_HUB / 58 Content-Kategorien.
+
+Neue Evidence:
+- `HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json`;
+- `HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json`;
+- `HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json`.
+
+Zusammen mit den bereits rekonstruierten historischen Hubs sind derzeit **583 sichtbare Content-Kategorien** in Rule-1.6-Recheck-Evidence dokumentiert.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_181_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_150_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die verbleibenden 181 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck weiter abschließen.
-Keine neue Batchschleife.
+Die verbleibenden 150 aktuellen CORE-Identitäten im selben globalen Rule-1.6-Recheck abschließen.
 
-Bis zum vollständigen fachlichen Abschluss:
+Bis dahin:
 - kein Plugin-Fix;
 - kein WordPress-Write;
 - kein Sync.
