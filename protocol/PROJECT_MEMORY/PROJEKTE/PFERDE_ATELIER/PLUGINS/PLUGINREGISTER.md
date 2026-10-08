@@ -1,3 +1,10 @@
+## INVENTARDELTA 2026-10-08 – PSTE LIVE-REGRESSION
+
+- PA-E-019 Portal SEO Themenengine: **0.57.58 live beobachtet**, erster Automatik-Klick `PSTE_SITE_STRUCTURE_STALE` → Live-Abnahme FAIL.
+- PA-E-019 nächster lokaler Kandidat: **0.57.59**, SHA-256 `a3808c0834b2d60a332a6dc3178403988fb1a80b0c62943173c1b9e5c050c2e8`; stale-live-first-click lokal explizit PASS.
+- PA-E-017 PSERC 0.28.33: für diesen Fehler keine Codeänderung; Liveversion in aktuellem Screenshot nicht sichtbar, daher nicht neu behaupten.
+- Fachstatus/NEXT ACTION ausschließlich `../TEXT/CURRENT_STATE.md`.
+
 ## INVENTARDELTA 2026-10-08 – TEXT/SEO FINALER LOKALER KANDIDAT
 
 - PA-E-019 Portal SEO Themenengine: **0.57.58 lokaler Finalkandidat**, SHA-256 `1ea1f3fd8223395a1424e990a7cc418853c3ab301939c794a2580304b9ce66a5`; vollständiger lokaler Hard-Pass. Noch kein unabhängiger 0.57.58-Live-Readback.
