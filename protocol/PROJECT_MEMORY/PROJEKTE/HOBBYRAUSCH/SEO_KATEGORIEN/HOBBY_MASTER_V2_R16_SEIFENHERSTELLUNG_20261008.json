@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Seifenherstellung",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Verfahren & Sicherheit",
+      "intents": [
+        "Verfahrenswahl",
+        "Arbeitsplanung",
+        "Schutzmaßnahmen",
+        "Rezeptmenge",
+        "Dokumentation"
+      ]
+    },
+    {
+      "label": "Öle & Rezeptur",
+      "intents": [
+        "Ölauswahl",
+        "Fettprofil",
+        "Rezeptberechnung",
+        "Wasseranteil",
+        "Überfettung"
+      ]
+    },
+    {
+      "label": "Duft, Farbe & Zusätze",
+      "intents": [
+        "Duftwahl",
+        "Farbstoff",
+        "Kräuterzusatz",
+        "Tonerde",
+        "Zusatzmenge"
+      ]
+    },
+    {
+      "label": "Form & Verarbeitung",
+      "intents": [
+        "Formwahl",
+        "Einfüllen",
+        "Marmorierung",
+        "Gelphase",
+        "Ausformen"
+      ]
+    },
+    {
+      "label": "Reife & Fehler",
+      "intents": [
+        "Reifezeit",
+        "Lagerung",
+        "Sodaasche",
+        "Ranzigkeit",
+        "Konsistenzfehler"
+      ]
+    }
+  ],
+  "validation": true
+}
