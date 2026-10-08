@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / V1.12.6 REALER EXPORT PASS / CONTENT-CAPACITY TECHNISCH BESTÄTIGT / SCOPE-IDENTITÄT-OWNERSHIP OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / BATCH 001 FACHLICH ABGESCHLOSSEN / 16 VON 16 ROLLEN GEKLÄRT / BATCH 002 NÄCHSTER ARBEITSBLOCK
 
 ## Rolle
 
@@ -216,22 +216,29 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 - `PLUGINS/PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`;
 - `SEO_KATEGORIEN/CURRENT_STATE.md`.
 
+## Batch 001 – fachlicher Abschluss
+
+Abschlussdatei:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG_20261008.json`
+
+Rollen:
+- HOBBY_HUB: Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa, Buchbinden;
+- ORIENTATION_UNIVERSE: 3D-Druck, Amateurastronomie, Filzen;
+- EDITORIAL_TOPIC: alte Brettspiele, Treibholz sammeln, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur.
+
+Wichtige Ownership-Grenzen:
+- Airbrush-Modellbau ist Anwendungsthema, kein zweiter Airbrush-Hub;
+- Aeroponik bleibt getrennt von Hydroponik/Hydrokultur/Indoor-Growing;
+- 3D-Bogenschießen bleibt getrennt von allgemeinem/traditionellem Bogenschießen;
+- Wabikusa bleibt getrennt von Aquascaping;
+- generisches Filzen und Amateurastronomie/3D-Druck sind Orientierungswelten über vorhandenen Spezialidentitäten.
+
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`
-
-Der technische Bewertungsweg ist jetzt real bestätigt.
-
-Aktuelles Batch-001-Bild:
-- Buchbinden = HOBBY_HUB_CANDIDATE;
-- Treibholz sammeln = EDITORIAL_TOPIC_CANDIDATE;
-- Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa = kapazitätsseitig TYPICAL_FIT, aber Scope/Identität noch nicht final;
-- 3D-Druck, Amateurastronomie, Filzen = MACRO_REVIEW;
-- alte Brettspiele, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur = AGGREGATION_REVIEW.
+`HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Zuerst die sechs kapazitätsseitig tragfähigen Hubfälle fachlich gegen bestehende Master-Identitäten und SEO-Ownership abgrenzen.
+Batch 002 aus dem Master mit derselben stabilen KISS-Logik vorbereiten.
 
-Keine weitere automatische DataForSEO-Tiefenrecherche.
 Noch keine Strukturänderung.
