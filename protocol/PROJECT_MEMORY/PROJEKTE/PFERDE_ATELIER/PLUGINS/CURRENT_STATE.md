@@ -1,3 +1,92 @@
+## PLUGIN-/PERFORMANCE-CURRENT 2026-10-08 – FRISCHECHECK / NEUER GEBÜNDELTER OPTIMIERUNGSSCOPE
+
+### Geltende Autoritäten
+
+- Zielvertrag für Aufräumen/DB/Performance: `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`.
+- ergänzender Performance-Zielvertrag: `affiliate-release-current:protocol/AFFILIATE_RELEASE_PERFORMANCE_OPTIMIZATION_TARGET_20260924.md`.
+- Affiliate-Fach-/Releasewahrheit bleibt ausschließlich:
+  `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+- Affiliate-Fehlerwahrheit:
+  `affiliate-release-current:protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md`.
+- Performance-WAS/WARUM-/Arbeitsprotokoll:
+  `affiliate-release-current:protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md`.
+- TEXT-/PSTE-/PSERC-Status bleibt ausschließlich im zuständigen TEXT-Current; dieser Block erzeugt dafür keine zweite Wahrheit.
+
+### Frischer belastbarer Stand
+
+Affiliate-Current frisch gelesen:
+- Generation **296**;
+- Affiliate-Zentrale **6.72.210 RELEASED**, `release_allowed=true`;
+- finaler Installer SHA-256 `43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1`;
+- Source-Manifest `8b3552ff93d482525e41bd0d279a609d8dd538bf672313ba29574a07f33992bf`;
+- formaler Release-Check Run `37788785260` PASS.
+Die technische Affiliate-Releasewahrheit wird hier **nicht kopiert oder ersetzt**; für jede spätere Änderung muss die technische Current erneut frisch gelesen werden.
+
+Letzter expliziter Template-Kit-WordPress-Readback in diesem Büro:
+- Affiliate Portal Template Kit **1.50.578 aktiv**.
+
+Aktueller Performance-Readback 08.10.2026:
+- `/ausruestung/`: 420 Queries / 1,557568 s;
+- `/stall/`: 419 / 1,660128 s;
+- `/weide/`: 419 / 1,586224 s;
+- `.../pferdesaettel/`: 654 / 2,948636 s.
+Gegen 01.10. sind die Queryzahlen deutlich höher (302/299/302/320), die Laufzeit aber nicht überall schlechter; Pferdesättel ist schneller. Deshalb kein Queryzahl-Fix auf Verdacht.
+Der Diagnosemodus besitzt keine owner-genaue SQL-Aufschlüsselung (`db_query_timing.available=false`) und meldet keinen persistenten Object Cache.
+
+Header-/AJAX-Suche:
+- reale Verlangsamung vom Nutzer bestätigt;
+- Relevanssi Live Ajax Search war aktiv;
+- Haupt-Relevanssi wurde testweise wieder installiert/aktiviert;
+- **keine erkennbare Geschwindigkeitsverbesserung**;
+- fehlendes Relevanssi ist damit nicht als Hauptursache belegt;
+- Suchursache weiter offen, keine Kausalbehauptung.
+
+Affiliate:
+- neuer realer Fehler `AFF-ERR-064`: `Undefined variable $required_creative_type` in aktuellem Renderer;
+- Current-6.72.210-Source bestätigt fehlende lokale Initialisierung in `render_affiliate_slot_for_context()`;
+- noch **kein Fix**, kein Installer, kein PASS.
+
+### Nutzer-Hardlock für den neuen Scope
+
+Komplettes praktisch sinnvolles Optimierungspotential umsetzen, einschließlich möglicher Template-Änderungen/-Löschungen, aber:
+- **keine Rücknahme irgendeiner Funktion**;
+- keine Rücknahme vorhandener Performancefixes;
+- große zusammengehörige Blöcke statt Microfix-/Plugin-Serie;
+- keine neue Architektur;
+- vor Installation lokal POSITIV + NEGATIV + Regression/Funktionsgleichheit;
+- Löschen nur bei Beweis, dass keine Funktion/Abhängigkeit verloren geht.
+
+Große Blöcke:
+1. Runtime / Query Ownership;
+2. Header-Suche / AJAX;
+3. Template / Frontend / DOM;
+4. Affiliate-Zentrale inkl. AFF-ERR-064;
+5. Plugin-/Asset-/Storage-Konsolidierung und Abschlussmessung.
+
+### Erster offener Blocker
+
+Der **exakt aktuelle vollständige Template-Kit-1.50.578-Sourcebestand** ist im für diesen Abschluss frisch geprüften autoritativen GitHub-Weg nicht als technische Current-Quelle gebunden. Historische Extracts reichen nicht für sichere Änderungen/Löschungen.
+
+### GENAU EINE NEXT ACTION
+
+`BIND_EXACT_TEMPLATE_KIT_1_50_578_SOURCE_THEN_RUN_LOCAL_POS_NEG_PERFORMANCE_BASELINE`
+
+Bedeutung:
+- exakten aktuellen 1.50.578-Vollstand binden;
+- aktuelle Affiliate-6.72.210-Source erneut frisch lesen;
+- **vor jedem Sourcewrite** einen gemeinsamen lokalen Baseline-Harness aufbauen, der normale Seiten + Header-AJAX reproduziert;
+- Query-/Hook-Arbeit einem Besitzer/Callpath zuordnen;
+- bestehende Suchwelten, Ranking, Provider, Slots, Veto, Publish, Design und Navigation als Positiv-/Negativ-Funktionsvertrag festhalten;
+- danach erst den ersten gebündelten Performanceblock ändern.
+
+### Abschlussregel für diesen Stand
+
+In diesem Chat wurde **kein Plugin-Code geändert, kein Installer gebaut und nichts live installiert**.
+Es wurden nur Readbacks/Root-Cause-Grenzen geprüft und die fehlende Dokumentation nachgezogen.
+Die alten dynamischen NEXT-ACTION-Aussagen weiter unten (z. B. 6.72.172 installieren) sind historisch/supersediert und dürfen nicht mehr als aktuelle Arbeitsanweisung verwendet werden.
+
+---
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-08 – 0.57.59 LIVE FEHLER / 0.57.61 + 0.28.34 FINALER LOKALER E2E-KANDIDAT
 
 Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
