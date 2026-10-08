@@ -1,0 +1,112 @@
+{
+  "contract": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_OUTDOOR_BALANCE",
+  "date": "2026-10-08",
+  "status": "PASS__17_IDENTITIES__16_HOBBY_HUB__1_ORIENTATION",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "decisions": [
+    [
+      "Bushcraft",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Bikepacking",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Packrafting",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Wintercamping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Hammock Camping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Tarp Camping",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Mikroabenteuer",
+      "ORIENTATION_UNIVERSE",
+      0
+    ],
+    [
+      "Orientierungslauf",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Geocaching",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Einradfahren",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Mountain Unicycling",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Slacklining",
+      "HOBBY_HUB",
+      5
+    ],
+    [
+      "Highlining",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Balance Board",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Longboard Dancing",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Pumptrack",
+      "HOBBY_HUB",
+      4
+    ],
+    [
+      "Mountainboarding",
+      "HOBBY_HUB",
+      4
+    ]
+  ],
+  "validation": {
+    "identities": 17,
+    "hobby_hubs": 16,
+    "orientation_universe": 1,
+    "visible_content_categories": 71,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 5,
+    "capacity_violations": 0,
+    "provider_calls": 0,
+    "wordpress_writes": 0
+  },
+  "full_detail": {
+    "local_artifact": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_OUTDOOR_BALANCE_20261008.json",
+    "sha256": "69ff06563d574d1477c58f84ddd26399f31f7aa678b40ebe9edc0c6d009f0f20",
+    "note": "Contains all leaf labels and distinct subject-defined article intents."
+  }
+}
