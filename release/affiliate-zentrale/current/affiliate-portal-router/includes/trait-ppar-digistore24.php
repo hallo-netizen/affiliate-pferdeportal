@@ -26,7 +26,7 @@ trait PPAR_Digistore24_Trait {
         add_action('admin_post_ppar_digistore24_marketplace_refresh', array($this, 'digistore24_handle_marketplace_refresh'));
         add_action('admin_post_ppar_digistore24_partnership', array($this, 'digistore24_handle_partnership'));
         add_action('admin_post_ppar_digistore24_import_banners', array($this, 'digistore24_handle_import_banners'));
-        add_action('shutdown', array($this, 'digistore24_final_publication_guard'), 999);
+        if (!((function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX))) { add_action('shutdown', array($this, 'digistore24_final_publication_guard'), 999); }
     }
 
     public function digistore24_provider_registry($registry, $contract_version = '') {
