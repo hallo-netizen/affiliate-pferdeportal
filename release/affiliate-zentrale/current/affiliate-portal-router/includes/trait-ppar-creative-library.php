@@ -1533,9 +1533,9 @@ trait PPAR_Creative_Library_Trait {
                             }
                         }
                     }
-                } elseif ($decision_reason === '') {
+                } elseif ($mode !== 'portal_approve_fixed' && $decision_reason === '') {
                     $blocked++;
-                    $errors['manual_reason_required'] = 'Für jede manuelle Chefentscheidung ist eine Begründung erforderlich.';
+                    $errors['manual_reason_required'] = 'Für diese manuelle Entscheidung ist eine Begründung erforderlich.';
                     continue;
                 }
                 if ($mode === 'portal_approve_fixed') {
@@ -1564,6 +1564,9 @@ trait PPAR_Creative_Library_Trait {
                         $errors['fixed_target_invalid'] = 'Gewähltes Portalziel existiert nicht mehr.';
                         continue;
                     }
+                    if ($decision_reason === '') {
+                        $decision_reason = 'Manuelle Themenzuordnung.';
+                    }
                     $decision_payload = array(
                         'target_type'=>(string) ($fixed_target['type'] ?? ''),
                         'target_key'=>(string) ($fixed_target['key'] ?? ''),
@@ -1571,6 +1574,50 @@ trait PPAR_Creative_Library_Trait {
                         'target_context'=>(string) ($fixed_target['context'] ?? ''),
                         'slot_id'=>$fixed_slot_id,
                     );
+
+                    // KISS: Fuer Banner gibt es nur eine fachliche Zielwahrheit:
+                    // Creative-Library topic_targets. Die manuelle Auswahl schreibt
+                    // exakt in dieselbe Struktur wie die automatische Zuordnung.
+                    if (sanitize_key((string)($row['creative_type'] ?? '')) === 'banner') {
+                        $records = method_exists($this, 'output_banner_library_records')
+                            ? $this->output_banner_library_records($row)
+                            : array();
+                        $records = array_values(array_filter((array)$records, static function($record) use ($portal_key) {
+                            return !is_array($record) || sanitize_key((string)($record['portal_key'] ?? '')) !== $portal_key;
+                        }));
+                        $path_keys = method_exists($this, 'output_banner_target_path_keys')
+                            ? $this->output_banner_target_path_keys($fixed_target, $targets, $portal_key)
+                            : array(sanitize_text_field((string)($fixed_target['key'] ?? '')));
+                        $manual_record = array(
+                            'portal_key'=>$portal_key,
+                            'state'=>'mapped',
+                            'level'=>'manual',
+                            'target_key'=>sanitize_text_field((string)($fixed_target['key'] ?? '')),
+                            'target_label'=>sanitize_text_field((string)($fixed_target['label'] ?? '')),
+                            'path_target_keys'=>array_values(array_unique(array_filter(array_map('sanitize_text_field',(array)$path_keys)))),
+                            'confidence'=>100,
+                            'source'=>'manual_topic_assignment',
+                            'destination_source'=>method_exists($this,'output_banner_destination_source') ? $this->output_banner_destination_source($row) : '',
+                            'destination_url'=>esc_url_raw((string)($row['destination_url'] ?? '')),
+                            'updated_at'=>time(),
+                        );
+                        $records[] = $manual_record;
+                        $encoded_records = wp_json_encode($records, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                        $wpdb->update($table, array(
+                            'topic_status'=>'manual_mapped',
+                            'topic_score'=>100,
+                            'topic_targets'=>$encoded_records,
+                            'classified_at'=>time(),
+                        ), array('id'=>$id));
+                        $row['topic_status']='manual_mapped';
+                        $row['topic_score']=100;
+                        $row['topic_targets']=$encoded_records;
+                        $row['classified_at']=time();
+
+                        // Fuer Banner ist die Portalentscheidung nur noch Steuerung
+                        // (z. B. optionaler Slot), nicht mehr eine zweite Zielquelle.
+                        unset($decision_payload['target_type'], $decision_payload['target_key'], $decision_payload['target_label'], $decision_payload['target_context']);
+                    }
                 }
                 if ($decision === 'veto') {
                     $this->output_block_creative((string) ($row['identity_hash'] ?? ''), $decision_reason, $portal_key);
@@ -1976,7 +2023,7 @@ trait PPAR_Creative_Library_Trait {
                         <option value="prepare_all">Nur prüfen und sichere Entwürfe vorbereiten</option>
                         <option value="plan_all">Nur prüfen, noch nichts erzeugen</option>
                         <option value="portal_approve">Fachlich freigeben, Ziel und Slot automatisch</option>
-                        <option value="portal_approve_fixed">Fachlich freigeben, Ziel/Slot fest vorgeben</option>
+                        <option value="portal_approve_fixed">Thema / Portalziel fest zuordnen</option>
                         <option value="portal_review">Zur Prüfung zurückstellen</option>
                         <option value="portal_automatic">Manuelle Entscheidung zurücknehmen</option>
                         <option value="selected">Nur markieren</option>
@@ -1984,8 +2031,8 @@ trait PPAR_Creative_Library_Trait {
                     </optgroup>
                 </select></label></p>
                 <div class="ppar-chief-fields">
-                    <label><strong>Begründung der Chefentscheidung</strong><input type="text" name="decision_reason" placeholder="z. B. Zielgruppe Pferdehalter besitzt häufig weitere Hoftiere"></label>
-                    <label class="ppar-fixed-field"><strong>Festes Portalziel</strong><select id="ppar-fixed-target" name="fixed_target_key"><option value="">Portalziel auswählen</option><?php foreach ($fixed_targets as $target_option) : ?><option data-portal="<?php echo esc_attr($target_option['portal_key']); ?>" value="<?php echo esc_attr($target_option['key']); ?>"><?php echo esc_html($target_option['label'] . ' · ' . $target_option['type']); ?></option><?php endforeach; ?></select></label>
+                    <label><strong>Begründung (optional bei Themenzuordnung)</strong><input type="text" name="decision_reason" placeholder="z. B. Zielgruppe Pferdehalter besitzt häufig weitere Hoftiere"></label>
+                    <label class="ppar-fixed-field"><strong>Thema / Portalziel</strong><select id="ppar-fixed-target" name="fixed_target_key"><option value="">Portalziel auswählen</option><?php foreach ($fixed_targets as $target_option) : ?><option data-portal="<?php echo esc_attr($target_option['portal_key']); ?>" value="<?php echo esc_attr($target_option['key']); ?>"><?php echo esc_html($target_option['label'] . ' · ' . $target_option['type']); ?></option><?php endforeach; ?></select></label>
                     <label class="ppar-fixed-field"><strong>Fester Designslot (optional)</strong><select id="ppar-fixed-slot" name="fixed_slot_id"><option value="">Slot automatisch bestimmen</option><?php foreach ($fixed_slots as $slot_option) : ?><option data-portal="<?php echo esc_attr($slot_option['portal_key']); ?>" value="<?php echo esc_attr($slot_option['key']); ?>"><?php echo esc_html($slot_option['label']); ?></option><?php endforeach; ?></select></label>
                 </div>
                 <p><button class="button">Auf angehakte Werbemittel anwenden</button></p>
