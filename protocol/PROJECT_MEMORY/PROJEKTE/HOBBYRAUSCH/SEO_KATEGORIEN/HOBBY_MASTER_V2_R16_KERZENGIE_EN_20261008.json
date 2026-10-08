@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Kerzengießen",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Wachs & Material",
+      "intents": [
+        "Wachsart",
+        "Wachsmenge",
+        "Schmelzbereich",
+        "Zusätze",
+        "Materialverträglichkeit"
+      ]
+    },
+    {
+      "label": "Docht & Gefäß",
+      "intents": [
+        "Dochtwahl",
+        "Dochtstärke",
+        "Dochtposition",
+        "Gefäßwahl",
+        "Gefäßvorbereitung"
+      ]
+    },
+    {
+      "label": "Farbe & Duft",
+      "intents": [
+        "Farbdosierung",
+        "Duftdosierung",
+        "Mischtemperatur",
+        "Farbkombination",
+        "Duftkombination"
+      ]
+    },
+    {
+      "label": "Gießen & Abkühlen",
+      "intents": [
+        "Gießtemperatur",
+        "Gießtechnik",
+        "Abkühlung",
+        "Nachgießen",
+        "Oberfläche"
+      ]
+    },
+    {
+      "label": "Brenntest & Fehler",
+      "intents": [
+        "Brenntest",
+        "Flammenhöhe",
+        "Tunnelbildung",
+        "Ruß",
+        "Dochtkorrektur"
+      ]
+    }
+  ],
+  "validation": true
+}
