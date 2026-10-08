@@ -1788,3 +1788,23 @@ Status: **CLOSED_CURRENT_BOUND_GATE_PASS**. Nicht erneut untersuchen, solange So
 **Installer:** `AFFILIATE_ZENTRALE_6.72.206.zip`, SHA256 `7bcfab7f15913d4d80c3c0ba9959f3f63ca19f6db593e1924035f3dc3a6db4e1`, 821045 Bytes.
 
 **Status:** REAL_WORDPRESS_MARIADB_PASS / LIVE_INSTALL_READBACK_OPEN. Live-PASS für Glossar/Rassen erst nach Nutzerbestätigung.
+
+
+### AFF-ERR-063 Nachtrag — Regelkorrektur 6.72.207
+
+**Live-Befund 6.72.206:** Manche Glossarbeiträge zeigen Banner, manche nicht; Pferderassen zeigen weiterhin keine Banner.
+
+**Root Cause:**
+- Glossar: moderne Creative-Library-Banner wurden bei fehlendem exaktem gespeicherten Zieltreffer im `library_banner`-Zweig zu früh mit `return null` verworfen. Deshalb hing die Sichtbarkeit vom jeweiligen Glossarkontext/Zieltreffer ab.
+- Pferderassen: der historische freie Rassenpfad lag hinter demselben Library-Abbruch und griff für heutige `output_object_v4`-Banner nicht.
+
+**Verbindliche Nutzerregel ab 6.72.207:**
+- Glossar-Singles: normale Bannerhierarchie wie überall – thematisch/exakt passend zuerst; fehlt ein Treffer, freie technisch/formatlich gültige Wahl über den bestehenden globalen Banner-Fallback.
+- Pferderassen-Singles: grundsätzlich freie Wahl; kein Themenzwang, kein Themenrangvorteil. Nur Active/Technik/Format/Placement bleiben zwingend.
+- Rechner und alle anderen Pfade bleiben unverändert.
+
+**Harter Nachweis:** Fresh WordPress + MariaDB Run `37768292261` SUCCESS, 34/34 PASS. Zwei Glossarbeiträge mit verschiedenen Themen erhalten Banner; ein thematisch passender Glossarbanner rangiert höher; ein unpassender spezifisch gemappter Library-Banner bleibt als freier Fallback zulässig; bei Pferderassen sind thematisch passend und unpassend gleichrangig frei; falsches Format bleibt blockiert; Duplicate-Guard und Rechner-Regressionsschutz PASS.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.207.zip`, SHA256 `b2e88dc663a6f14b00071aa1a4c709afc73a113a49d631c9a5f6dcf38d6c9ad4`, 821428 Bytes.
+
+**Status:** HARD_WORDPRESS_MARIADB_PASS / LIVE_READBACK_OPEN.
