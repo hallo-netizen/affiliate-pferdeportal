@@ -1,0 +1,1172 @@
+{
+  "contract": "HD001_REMAINING_HUBS_RULE16_VISIBLE_LEAF_MATERIALIZATION",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__ALL_REMAINING_HUBS_HAVE_VISIBLE_CAPACITY_VALIDATED_LEAF_LAYER",
+  "rules": [
+    "Zielvertrag 2.6",
+    "Assessment Rules 1.6"
+  ],
+  "sources": {
+    "batch001_real": "hobby-master-v2-assessment-20261007-193716-utc.json",
+    "batch002_real": "hobby-master-v2-assessment-20261008-070044-utc.json",
+    "batch003_real": "hobby-master-v2-assessment-20261008-072726-utc.json",
+    "batch003_later_final": "HOBBY_MASTER_V2_BATCH_003_FINAL_ASSESSMENT_20261008.json",
+    "expansion19": "HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json"
+  },
+  "validation": {
+    "remaining_hobby_hubs": 41,
+    "visible_content_categories": 199,
+    "leaf_capacity_min": 5,
+    "leaf_capacity_max": 12,
+    "violations": []
+  },
+  "hubs": {
+    "batch001": {
+      "Airbrush": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundlagen",
+            "intent_count": 6,
+            "source_leaf_key": "airbrush:einstieg"
+          },
+          {
+            "label": "Ausrüstung",
+            "intent_count": 6,
+            "source_leaf_key": "airbrush:ausruestung"
+          },
+          {
+            "label": "Farben & Medien",
+            "intent_count": 6,
+            "source_leaf_key": "airbrush:farben"
+          },
+          {
+            "label": "Techniken & Gestaltung",
+            "intent_count": 7,
+            "source_leaf_key": "airbrush:technik"
+          },
+          {
+            "label": "Reinigung & Fehler",
+            "intent_count": 6,
+            "source_leaf_key": "airbrush:pflege"
+          }
+        ]
+      },
+      "Bean-to-Bar-Schokolade": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Kakao & Rohware",
+            "intent_count": 5,
+            "source_leaf_key": "b2b:rohware"
+          },
+          {
+            "label": "Rösten & Schälen",
+            "intent_count": 5,
+            "source_leaf_key": "b2b:roesten"
+          },
+          {
+            "label": "Mahlen & Melangieren",
+            "intent_count": 5,
+            "source_leaf_key": "b2b:mahlen"
+          },
+          {
+            "label": "Rezeptur & Zutaten",
+            "intent_count": 6,
+            "source_leaf_key": "b2b:rezeptur"
+          },
+          {
+            "label": "Temperieren & Formen",
+            "intent_count": 6,
+            "source_leaf_key": "b2b:temperieren"
+          },
+          {
+            "label": "Fehler & Qualität",
+            "intent_count": 6,
+            "source_leaf_key": "b2b:fehler"
+          }
+        ]
+      },
+      "Aeroponik": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & System",
+            "intent_count": 5,
+            "source_leaf_key": "aero:einstieg"
+          },
+          {
+            "label": "Düsen, Pumpe & Bewässerung",
+            "intent_count": 5,
+            "source_leaf_key": "aero:technik"
+          },
+          {
+            "label": "Nährlösung & Wasser",
+            "intent_count": 5,
+            "source_leaf_key": "aero:naehrung"
+          },
+          {
+            "label": "Pflanzen & Betrieb",
+            "intent_count": 5,
+            "source_leaf_key": "aero:pflanzen"
+          }
+        ]
+      },
+      "Ameisenhaltung": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Einstieg & Arten",
+            "intent_count": 6,
+            "source_leaf_key": "ants:einstieg"
+          },
+          {
+            "label": "Formicarium & Nest",
+            "intent_count": 6,
+            "source_leaf_key": "ants:nest"
+          },
+          {
+            "label": "Futter & Wasser",
+            "intent_count": 6,
+            "source_leaf_key": "ants:futter"
+          },
+          {
+            "label": "Winterruhe & Klima",
+            "intent_count": 5,
+            "source_leaf_key": "ants:winter"
+          },
+          {
+            "label": "Kolonie & Pflege",
+            "intent_count": 6,
+            "source_leaf_key": "ants:pflege"
+          },
+          {
+            "label": "Ausbruchsschutz & Probleme",
+            "intent_count": 6,
+            "source_leaf_key": "ants:probleme"
+          }
+        ]
+      },
+      "3D-Bogenschießen": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Parcours",
+            "intent_count": 6,
+            "source_leaf_key": "3dbogen:einstieg"
+          },
+          {
+            "label": "Bogen & Ausrüstung",
+            "intent_count": 6,
+            "source_leaf_key": "3dbogen:ausruestung"
+          },
+          {
+            "label": "Pfeile & Abstimmung",
+            "intent_count": 6,
+            "source_leaf_key": "3dbogen:pfeile"
+          },
+          {
+            "label": "Technik & Training",
+            "intent_count": 6,
+            "source_leaf_key": "3dbogen:technik"
+          },
+          {
+            "label": "Regeln & Wertung",
+            "intent_count": 5,
+            "source_leaf_key": "3dbogen:regeln"
+          }
+        ]
+      },
+      "Wabikusa": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Aufbau",
+            "intent_count": 5,
+            "source_leaf_key": "wabi:einstieg"
+          },
+          {
+            "label": "Substrat & Gefäß",
+            "intent_count": 5,
+            "source_leaf_key": "wabi:substrat"
+          },
+          {
+            "label": "Pflanzen & Gestaltung",
+            "intent_count": 6,
+            "source_leaf_key": "wabi:pflanzen"
+          },
+          {
+            "label": "Licht & Pflege",
+            "intent_count": 6,
+            "source_leaf_key": "wabi:pflege"
+          }
+        ]
+      },
+      "Buchbinden": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg",
+            "intent_count": 5,
+            "source_leaf_key": "buch:einstieg"
+          },
+          {
+            "label": "Ausrüstung",
+            "intent_count": 6,
+            "source_leaf_key": "buch:ausruestung"
+          },
+          {
+            "label": "Material",
+            "intent_count": 6,
+            "source_leaf_key": "buch:material"
+          },
+          {
+            "label": "Techniken & Praxis",
+            "intent_count": 6,
+            "source_leaf_key": "buch:technik"
+          }
+        ]
+      }
+    },
+    "batch002": {
+      "CB-Funk": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Regeln",
+            "intent_count": 5,
+            "source_leaf_key": "cb:einstieg"
+          },
+          {
+            "label": "Funkgeräte & Stromversorgung",
+            "intent_count": 5,
+            "source_leaf_key": "cb:geraete"
+          },
+          {
+            "label": "Antennen & Abstimmung",
+            "intent_count": 6,
+            "source_leaf_key": "cb:antennen"
+          },
+          {
+            "label": "Funkpraxis & Reichweite",
+            "intent_count": 5,
+            "source_leaf_key": "cb:praxis"
+          },
+          {
+            "label": "Störungen & Fehler",
+            "intent_count": 5,
+            "source_leaf_key": "cb:stoerung"
+          }
+        ]
+      },
+      "Software Defined Radio": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Hardware",
+            "intent_count": 5,
+            "source_leaf_key": "sdr:einstieg"
+          },
+          {
+            "label": "Software & Bedienung",
+            "intent_count": 5,
+            "source_leaf_key": "sdr:software"
+          },
+          {
+            "label": "Antennen & Empfang",
+            "intent_count": 5,
+            "source_leaf_key": "sdr:antennen"
+          },
+          {
+            "label": "Signale & Dekodierung",
+            "intent_count": 5,
+            "source_leaf_key": "sdr:signale"
+          },
+          {
+            "label": "Projekte & Aufzeichnung",
+            "intent_count": 5,
+            "source_leaf_key": "sdr:projekte"
+          }
+        ]
+      },
+      "Satellitenfunk": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Satellitenpässe",
+            "intent_count": 5,
+            "source_leaf_key": "satfunk:einstieg"
+          },
+          {
+            "label": "Station & Geräte",
+            "intent_count": 5,
+            "source_leaf_key": "satfunk:station"
+          },
+          {
+            "label": "Antennen & Nachführung",
+            "intent_count": 5,
+            "source_leaf_key": "satfunk:antennen"
+          },
+          {
+            "label": "Betrieb & QSOs",
+            "intent_count": 5,
+            "source_leaf_key": "satfunk:betrieb"
+          }
+        ]
+      },
+      "Wettersonden-Tracking": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Sonden",
+            "intent_count": 5,
+            "source_leaf_key": "sonde:einstieg"
+          },
+          {
+            "label": "Empfang & Antennen",
+            "intent_count": 5,
+            "source_leaf_key": "sonde:empfang"
+          },
+          {
+            "label": "Tracking & Vorhersage",
+            "intent_count": 5,
+            "source_leaf_key": "sonde:tracking"
+          },
+          {
+            "label": "Bergung & Praxis",
+            "intent_count": 5,
+            "source_leaf_key": "sonde:bergung"
+          }
+        ]
+      },
+      "Funkpeilung": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundlagen",
+            "intent_count": 5,
+            "source_leaf_key": "peil:einstieg"
+          },
+          {
+            "label": "Empfänger & Peilgeräte",
+            "intent_count": 5,
+            "source_leaf_key": "peil:geraete"
+          },
+          {
+            "label": "Peilantennen",
+            "intent_count": 5,
+            "source_leaf_key": "peil:antennen"
+          },
+          {
+            "label": "Praxis & Wettbewerbe",
+            "intent_count": 5,
+            "source_leaf_key": "peil:praxis"
+          }
+        ]
+      },
+      "Arduino": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Boards",
+            "intent_count": 5,
+            "source_leaf_key": "arduino:einstieg"
+          },
+          {
+            "label": "Pins, Strom & Schaltungen",
+            "intent_count": 5,
+            "source_leaf_key": "arduino:grundlagen"
+          },
+          {
+            "label": "Sensoren & Eingaben",
+            "intent_count": 5,
+            "source_leaf_key": "arduino:sensoren"
+          },
+          {
+            "label": "Motoren, LEDs & Ausgaben",
+            "intent_count": 5,
+            "source_leaf_key": "arduino:aktoren"
+          },
+          {
+            "label": "Projekte & Fehler",
+            "intent_count": 5,
+            "source_leaf_key": "arduino:projekte"
+          }
+        ]
+      },
+      "Raspberry-Pi-Projekte": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & System",
+            "intent_count": 5,
+            "source_leaf_key": "rpi:einstieg"
+          },
+          {
+            "label": "GPIO & Hardware",
+            "intent_count": 5,
+            "source_leaf_key": "rpi:hardware"
+          },
+          {
+            "label": "Server & Netzwerk",
+            "intent_count": 5,
+            "source_leaf_key": "rpi:server"
+          },
+          {
+            "label": "Automation & Smart Home",
+            "intent_count": 5,
+            "source_leaf_key": "rpi:automation"
+          },
+          {
+            "label": "Projekte & Betrieb",
+            "intent_count": 5,
+            "source_leaf_key": "rpi:projekte"
+          }
+        ]
+      },
+      "Roboterbau": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Planung & Chassis",
+            "intent_count": 5,
+            "source_leaf_key": "roboterbau:planung"
+          },
+          {
+            "label": "Motoren & Antrieb",
+            "intent_count": 5,
+            "source_leaf_key": "roboterbau:antrieb"
+          },
+          {
+            "label": "Elektronik & Strom",
+            "intent_count": 5,
+            "source_leaf_key": "roboterbau:elektronik"
+          },
+          {
+            "label": "Sensoren & Steuerung",
+            "intent_count": 5,
+            "source_leaf_key": "roboterbau:sensorik"
+          },
+          {
+            "label": "Programmierung & Test",
+            "intent_count": 5,
+            "source_leaf_key": "roboterbau:test"
+          }
+        ]
+      },
+      "BattleBots-Modellbau": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg, Regeln & Sicherheit",
+            "intent_count": 5,
+            "source_leaf_key": "combat:einstieg"
+          },
+          {
+            "label": "Chassis & Schutz",
+            "intent_count": 5,
+            "source_leaf_key": "combat:chassis"
+          },
+          {
+            "label": "Antrieb & Elektronik",
+            "intent_count": 5,
+            "source_leaf_key": "combat:antrieb"
+          },
+          {
+            "label": "Waffensysteme & Mechanik",
+            "intent_count": 5,
+            "source_leaf_key": "combat:waffe"
+          },
+          {
+            "label": "Test, Reparatur & Wettbewerb",
+            "intent_count": 5,
+            "source_leaf_key": "combat:test"
+          }
+        ]
+      }
+    },
+    "batch003": {
+      "Drohnenbau": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Komponenten",
+            "intent_count": 5,
+            "source_leaf_key": "drbau:einstieg"
+          },
+          {
+            "label": "Motoren, Propeller & Akku",
+            "intent_count": 5,
+            "source_leaf_key": "drbau:antrieb"
+          },
+          {
+            "label": "Flight Controller & Elektronik",
+            "intent_count": 5,
+            "source_leaf_key": "drbau:elektronik"
+          },
+          {
+            "label": "Firmware & Setup",
+            "intent_count": 5,
+            "source_leaf_key": "drbau:setup"
+          },
+          {
+            "label": "Test, Fehler & Sicherheit",
+            "intent_count": 5,
+            "source_leaf_key": "drbau:test"
+          }
+        ]
+      },
+      "FPV-Racing": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Klassen",
+            "intent_count": 5,
+            "source_leaf_key": "fpvr:einstieg"
+          },
+          {
+            "label": "Racing-Drohne bauen",
+            "intent_count": 5,
+            "source_leaf_key": "fpvr:build"
+          },
+          {
+            "label": "Setup & Tuning",
+            "intent_count": 5,
+            "source_leaf_key": "fpvr:tuning"
+          },
+          {
+            "label": "Flugtechnik & Training",
+            "intent_count": 5,
+            "source_leaf_key": "fpvr:flug"
+          },
+          {
+            "label": "Strecken & Wettkampf",
+            "intent_count": 5,
+            "source_leaf_key": "fpvr:wettkampf"
+          }
+        ]
+      },
+      "Drohnenfotografie": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Kamera",
+            "intent_count": 5,
+            "source_leaf_key": "drfoto:einstieg"
+          },
+          {
+            "label": "Aufnahme & Bildgestaltung",
+            "intent_count": 5,
+            "source_leaf_key": "drfoto:aufnahme"
+          },
+          {
+            "label": "Flugplanung & Licht",
+            "intent_count": 5,
+            "source_leaf_key": "drfoto:planung"
+          },
+          {
+            "label": "Bearbeitung & Workflow",
+            "intent_count": 5,
+            "source_leaf_key": "drfoto:workflow"
+          }
+        ]
+      },
+      "Drone Soccer": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Regeln",
+            "intent_count": 5,
+            "source_leaf_key": "dsoc:einstieg"
+          },
+          {
+            "label": "Drohne & Schutzkäfig",
+            "intent_count": 5,
+            "source_leaf_key": "dsoc:drohne"
+          },
+          {
+            "label": "Steuerung & Training",
+            "intent_count": 5,
+            "source_leaf_key": "dsoc:training"
+          },
+          {
+            "label": "Taktik & Wettbewerb",
+            "intent_count": 5,
+            "source_leaf_key": "dsoc:wettkampf"
+          }
+        ]
+      },
+      "RC-Crawling": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Fahrzeuge",
+            "intent_count": 5,
+            "source_leaf_key": "crawl:einstieg"
+          },
+          {
+            "label": "Fahrwerk & Achsen",
+            "intent_count": 5,
+            "source_leaf_key": "crawl:fahrwerk"
+          },
+          {
+            "label": "Reifen, Felgen & Gewichte",
+            "intent_count": 5,
+            "source_leaf_key": "crawl:reifen"
+          },
+          {
+            "label": "Motor, Regler & Servo",
+            "intent_count": 5,
+            "source_leaf_key": "crawl:elektronik"
+          },
+          {
+            "label": "Gelände & Fahrtechnik",
+            "intent_count": 5,
+            "source_leaf_key": "crawl:praxis"
+          }
+        ]
+      },
+      "Scale-Crawling": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Scale-Konzept & Vorbild",
+            "intent_count": 5,
+            "source_leaf_key": "scale:konzept"
+          },
+          {
+            "label": "Karosserie & Details",
+            "intent_count": 5,
+            "source_leaf_key": "scale:karosserie"
+          },
+          {
+            "label": "Fahrwerk & Proportionen",
+            "intent_count": 5,
+            "source_leaf_key": "scale:fahrwerk"
+          },
+          {
+            "label": "Scale-Trails & Fahrpraxis",
+            "intent_count": 5,
+            "source_leaf_key": "scale:praxis"
+          }
+        ]
+      },
+      "RC-Baumaschinen": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Maßstäbe",
+            "intent_count": 5,
+            "source_leaf_key": "rcbau:einstieg"
+          },
+          {
+            "label": "RC-Bagger",
+            "intent_count": 5,
+            "source_leaf_key": "rcbau:bagger"
+          },
+          {
+            "label": "Radlader, Raupen & Kipper",
+            "intent_count": 5,
+            "source_leaf_key": "rcbau:lader"
+          },
+          {
+            "label": "Hydraulik & Elektronik",
+            "intent_count": 5,
+            "source_leaf_key": "rcbau:technik"
+          },
+          {
+            "label": "Parcours & Betrieb",
+            "intent_count": 5,
+            "source_leaf_key": "rcbau:praxis"
+          }
+        ]
+      },
+      "RC-LKW": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Chassis",
+            "intent_count": 5,
+            "source_leaf_key": "rclkw:einstieg"
+          },
+          {
+            "label": "Antrieb & Lenkung",
+            "intent_count": 5,
+            "source_leaf_key": "rclkw:antrieb"
+          },
+          {
+            "label": "Aufbauten & Auflieger",
+            "intent_count": 5,
+            "source_leaf_key": "rclkw:aufbau"
+          },
+          {
+            "label": "Licht, Sound & Funktionen",
+            "intent_count": 5,
+            "source_leaf_key": "rclkw:licht"
+          },
+          {
+            "label": "Parcours & Scale-Fahren",
+            "intent_count": 5,
+            "source_leaf_key": "rclkw:praxis"
+          }
+        ]
+      },
+      "RC-Panzer": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Modelle",
+            "intent_count": 5,
+            "source_leaf_key": "rcpan:einstieg"
+          },
+          {
+            "label": "Fahrwerk & Ketten",
+            "intent_count": 5,
+            "source_leaf_key": "rcpan:fahrwerk"
+          },
+          {
+            "label": "Turm & Steuerung",
+            "intent_count": 5,
+            "source_leaf_key": "rcpan:turm"
+          },
+          {
+            "label": "Sound, Licht & Scale-Effekte",
+            "intent_count": 5,
+            "source_leaf_key": "rcpan:effekte"
+          },
+          {
+            "label": "Gelände & Wartung",
+            "intent_count": 5,
+            "source_leaf_key": "rcpan:praxis"
+          }
+        ]
+      },
+      "RC-Segelboote": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Boot",
+            "intent_count": 5,
+            "source_leaf_key": "rcseg:einstieg"
+          },
+          {
+            "label": "Segel & Rigg",
+            "intent_count": 5,
+            "source_leaf_key": "rcseg:rigg"
+          },
+          {
+            "label": "Servo, Funk & Technik",
+            "intent_count": 5,
+            "source_leaf_key": "rcseg:technik"
+          },
+          {
+            "label": "Segeln, Trimm & Regatta",
+            "intent_count": 5,
+            "source_leaf_key": "rcseg:praxis"
+          }
+        ]
+      },
+      "RC-U-Boote": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Rumpf",
+            "intent_count": 5,
+            "source_leaf_key": "rcsub:einstieg"
+          },
+          {
+            "label": "Tauchtechnik & Ballast",
+            "intent_count": 5,
+            "source_leaf_key": "rcsub:tauch"
+          },
+          {
+            "label": "Antrieb & Elektronik",
+            "intent_count": 5,
+            "source_leaf_key": "rcsub:technik"
+          },
+          {
+            "label": "Dichtigkeit, Trimm & Betrieb",
+            "intent_count": 5,
+            "source_leaf_key": "rcsub:praxis"
+          }
+        ]
+      },
+      "RC-Segelflug": {
+        "leaf_count": 4,
+        "leaves": [
+          {
+            "label": "Einstieg & Modelle",
+            "intent_count": 5,
+            "source_leaf_key": "rcgl:einstieg"
+          },
+          {
+            "label": "Setup & Trimm",
+            "intent_count": 5,
+            "source_leaf_key": "rcgl:setup"
+          },
+          {
+            "label": "Startarten & Landung",
+            "intent_count": 5,
+            "source_leaf_key": "rcgl:start"
+          },
+          {
+            "label": "Thermik & Hangflug",
+            "intent_count": 5,
+            "source_leaf_key": "rcgl:flug"
+          }
+        ]
+      },
+      "RC-Helikopter": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Modelle",
+            "intent_count": 5,
+            "source_leaf_key": "rcheli:einstieg"
+          },
+          {
+            "label": "Rotor & Mechanik",
+            "intent_count": 5,
+            "source_leaf_key": "rcheli:mechanik"
+          },
+          {
+            "label": "Elektronik & Flybarless",
+            "intent_count": 5,
+            "source_leaf_key": "rcheli:elektronik"
+          },
+          {
+            "label": "Setup & Trimm",
+            "intent_count": 5,
+            "source_leaf_key": "rcheli:setup"
+          },
+          {
+            "label": "Flugtraining & Wartung",
+            "intent_count": 5,
+            "source_leaf_key": "rcheli:flug"
+          }
+        ]
+      }
+    },
+    "expansion19": {
+      "Malen": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundlagen",
+            "intent_count": 7
+          },
+          {
+            "label": "Farben & Materialien",
+            "intent_count": 8
+          },
+          {
+            "label": "Werkzeuge & Setup",
+            "intent_count": 6
+          },
+          {
+            "label": "Maltechniken",
+            "intent_count": 10
+          },
+          {
+            "label": "Bildaufbau & Motive",
+            "intent_count": 8
+          },
+          {
+            "label": "Praxis & Fehler",
+            "intent_count": 6
+          }
+        ]
+      },
+      "Zeichnen": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundformen",
+            "intent_count": 7
+          },
+          {
+            "label": "Material & Werkzeuge",
+            "intent_count": 6
+          },
+          {
+            "label": "Linie, Form & Perspektive",
+            "intent_count": 8
+          },
+          {
+            "label": "Licht, Schatten & Tonwerte",
+            "intent_count": 6
+          },
+          {
+            "label": "Motive & Praxis",
+            "intent_count": 9
+          }
+        ]
+      },
+      "Nähen": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Einstieg & Nähmaschine",
+            "intent_count": 8
+          },
+          {
+            "label": "Stoffe, Nadeln & Garn",
+            "intent_count": 8
+          },
+          {
+            "label": "Schnittmuster & Zuschnitt",
+            "intent_count": 7
+          },
+          {
+            "label": "Nähte & Verarbeitung",
+            "intent_count": 10
+          },
+          {
+            "label": "Passform & Änderungen",
+            "intent_count": 7
+          },
+          {
+            "label": "Projekte, Reparatur & Pflege",
+            "intent_count": 8
+          }
+        ]
+      },
+      "Stricken": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundmaschen",
+            "intent_count": 7
+          },
+          {
+            "label": "Wolle, Nadeln & Maschenprobe",
+            "intent_count": 7
+          },
+          {
+            "label": "Muster & Techniken",
+            "intent_count": 9
+          },
+          {
+            "label": "Formen & Passform",
+            "intent_count": 7
+          },
+          {
+            "label": "Projekte, Fehler & Pflege",
+            "intent_count": 8
+          }
+        ]
+      },
+      "Häkeln": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Grundmaschen",
+            "intent_count": 7
+          },
+          {
+            "label": "Garn, Nadeln & Maschenprobe",
+            "intent_count": 6
+          },
+          {
+            "label": "Muster & Techniken",
+            "intent_count": 9
+          },
+          {
+            "label": "Formen & Konstruktion",
+            "intent_count": 6
+          },
+          {
+            "label": "Projekte, Fehler & Pflege",
+            "intent_count": 8
+          }
+        ]
+      },
+      "Heimwerken": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Einstieg, Werkzeug & Sicherheit",
+            "intent_count": 8
+          },
+          {
+            "label": "Messen, Bohren & Befestigen",
+            "intent_count": 8
+          },
+          {
+            "label": "Wände, Böden & Oberflächen",
+            "intent_count": 8
+          },
+          {
+            "label": "Montieren & Reparieren",
+            "intent_count": 7
+          },
+          {
+            "label": "Kleine Bauprojekte",
+            "intent_count": 6
+          },
+          {
+            "label": "Werkstatt & Projektpraxis",
+            "intent_count": 7
+          }
+        ]
+      },
+      "Wandern": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Tourwahl",
+            "intent_count": 6
+          },
+          {
+            "label": "Ausrüstung & Schuhe",
+            "intent_count": 8
+          },
+          {
+            "label": "Planung & Navigation",
+            "intent_count": 7
+          },
+          {
+            "label": "Technik & Kondition",
+            "intent_count": 6
+          },
+          {
+            "label": "Sicherheit, Wetter & Natur",
+            "intent_count": 8
+          }
+        ]
+      },
+      "Schwimmen": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Wassergefühl",
+            "intent_count": 6
+          },
+          {
+            "label": "Schwimmarten & Technik",
+            "intent_count": 8
+          },
+          {
+            "label": "Training & Ausdauer",
+            "intent_count": 6
+          },
+          {
+            "label": "Ausrüstung",
+            "intent_count": 6
+          },
+          {
+            "label": "Sicherheit & Praxis",
+            "intent_count": 6
+          }
+        ]
+      },
+      "Bouldern": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Hallenpraxis",
+            "intent_count": 6
+          },
+          {
+            "label": "Ausrüstung",
+            "intent_count": 5
+          },
+          {
+            "label": "Technik & Bewegung",
+            "intent_count": 9
+          },
+          {
+            "label": "Training",
+            "intent_count": 8
+          },
+          {
+            "label": "Outdoor & Sicherheit",
+            "intent_count": 7
+          }
+        ]
+      },
+      "Gemüseanbau": {
+        "leaf_count": 6,
+        "leaves": [
+          {
+            "label": "Planung, Standort & Beet",
+            "intent_count": 7
+          },
+          {
+            "label": "Aussaat & Anzucht",
+            "intent_count": 8
+          },
+          {
+            "label": "Boden, Düngung & Kompost",
+            "intent_count": 7
+          },
+          {
+            "label": "Bewässerung & Pflege",
+            "intent_count": 6
+          },
+          {
+            "label": "Krankheiten & Schädlinge",
+            "intent_count": 8
+          },
+          {
+            "label": "Ernte, Saatgut & Saison",
+            "intent_count": 8
+          }
+        ]
+      },
+      "Briefmarken sammeln": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg & Sammelgebiete",
+            "intent_count": 6
+          },
+          {
+            "label": "Bestimmen & Katalogisieren",
+            "intent_count": 7
+          },
+          {
+            "label": "Zustand, Echtheit & Wert",
+            "intent_count": 7
+          },
+          {
+            "label": "Aufbewahrung & Pflege",
+            "intent_count": 6
+          },
+          {
+            "label": "Tauschen, Kaufen & Ausstellen",
+            "intent_count": 7
+          }
+        ]
+      },
+      "Plane Spotting": {
+        "leaf_count": 5,
+        "leaves": [
+          {
+            "label": "Einstieg, Orte & Regeln",
+            "intent_count": 6
+          },
+          {
+            "label": "Flugzeuge erkennen",
+            "intent_count": 8
+          },
+          {
+            "label": "Tracking & Planung",
+            "intent_count": 7
+          },
+          {
+            "label": "Fotografie & Dokumentation",
+            "intent_count": 8
+          },
+          {
+            "label": "Archiv, Sammlung & Community",
+            "intent_count": 6
+          }
+        ]
+      }
+    }
+  },
+  "provider_calls_added": 0,
+  "wordpress_writes": 0
+}
