@@ -33,6 +33,18 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("nach Bindung des aktuellen Uploads",text)
         self.assertIn("historische Informationen sind **keine Ausschlussliste**",text)
 
+
+    def test_start_hardlock_requires_existing_git_file_trigger_before_blocking(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("Es gibt keinen separaten Workflow-Startknopf",text)
+        self.assertIn("WORDPRESS_INTAKE.json",text)
+        self.assertIn("AUTHORING_CONTEXT.json",text)
+        self.assertIn(".github/workflows/k0-authoring-context.yml",text)
+        self.assertIn("create_file",text)
+        self.assertIn("fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**",text)
+        self.assertIn("vor dem ersten GitHub-Schreibversuch",text)
+        self.assertIn("tatsächlich mit einem konkreten Fehler scheitert",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
