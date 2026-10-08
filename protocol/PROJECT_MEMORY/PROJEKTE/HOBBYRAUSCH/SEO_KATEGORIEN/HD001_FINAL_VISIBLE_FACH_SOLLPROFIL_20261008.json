@@ -1,0 +1,2379 @@
+{
+  "contract": "HD001_FINAL_VISIBLE_FACH_SOLLPROFIL",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__FACH_SOLLPROFIL_FROZEN__TECHNICAL_OBJECT_PLAN_PENDING",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6",
+    "final_core_audit": "HD001_GLOBAL_CORE_359_RULE16_FINAL_AUDIT_20261008.json",
+    "world_intermediate_target": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json",
+    "remaining_hub_leaf_materialization": "HD001_REMAINING_41_HUBS_RULE16_VISIBLE_LEAF_MATERIALIZATION_20261008.json"
+  },
+  "structure": {
+    "worlds": 8,
+    "intermediate_nodes": 65,
+    "intermediate_counts_by_world": [
+      7,
+      10,
+      11,
+      5,
+      9,
+      7,
+      8,
+      8
+    ],
+    "world_tree": {
+      "gestalten": {
+        "target_count": 7,
+        "intermediates": [
+          "Malen & Zeichnen",
+          "Druck & Fotografie",
+          "Schrift & Lettering",
+          "Papierkunst",
+          "Textilgestaltung",
+          "Oberfläche & Deko",
+          "Miniaturen & Szenen"
+        ]
+      },
+      "fertigen": {
+        "target_count": 10,
+        "intermediates": [
+          "Holz",
+          "Naturmaterial",
+          "Metall",
+          "Textil",
+          "Leder",
+          "Buch & Papier",
+          "Keramik & Glas",
+          "Guss & Formen",
+          "Schmuck",
+          "Genuss"
+        ]
+      },
+      "technik": {
+        "target_count": 11,
+        "intermediates": [
+          "Elektronik",
+          "Funk",
+          "Robotik & Automation",
+          "Computer & Retro",
+          "Digitale Fertigung",
+          "RC-Fahrzeuge",
+          "RC-Boote",
+          "RC-Flug & Drohnen",
+          "Audio & HiFi",
+          "Mechanik & Uhren",
+          "Smart Home"
+        ]
+      },
+      "forschen": {
+        "target_count": 5,
+        "intermediates": [
+          "Astronomie",
+          "Mikroskopie",
+          "Wetter & Umwelt",
+          "Naturbeobachtung",
+          "Messen & Analysieren"
+        ]
+      },
+      "pflanzen": {
+        "target_count": 9,
+        "intermediates": [
+          "Bonsai & Miniatur",
+          "Zimmerpflanzen",
+          "Kakteen & Sukkulenten",
+          "Orchideen & Exoten",
+          "Hydroponik & Indoor",
+          "Pilze & Kulturen",
+          "Saatgut & Zucht",
+          "Moos & Miniaturgärten",
+          "Essbare Pflanzen"
+        ]
+      },
+      "tiere": {
+        "target_count": 7,
+        "intermediates": [
+          "Aquaristik",
+          "Terraristik",
+          "Ameisen & Insekten",
+          "Wirbellose",
+          "Imkerei & Bestäuber",
+          "Gehegegestaltung",
+          "Zucht & Futtertiere"
+        ]
+      },
+      "bewegen": {
+        "target_count": 8,
+        "intermediates": [
+          "Outdoor",
+          "Rollen & Balance",
+          "Wurf & Ziel",
+          "Wasser",
+          "Klettern & Seil",
+          "Wind & Drachen",
+          "Team & Wettkampf",
+          "Geschick & Tricks"
+        ]
+      },
+      "sammeln": {
+        "target_count": 8,
+        "intermediates": [
+          "Münzen & Geld",
+          "Papier & Dokumente",
+          "Technik & Medien",
+          "Spielzeug & Spiele",
+          "Naturfunde",
+          "Werbung & Design",
+          "Werkzeuge & Geräte",
+          "Alltagsobjekte"
+        ]
+      }
+    },
+    "required_visibility": "Every canonical child level that exists is visible in normal drill-down.",
+    "header_rule": "Global header may remain selective; local world/intermediate/hobby child navigation is complete.",
+    "max_shape": "WELT → ZWISCHENBEREICH (wenn fachlich vorhanden) → HOBBY_HUB → CONTENT-KATEGORIE → BEITRAG"
+  },
+  "roles": {
+    "input_current_core": 359,
+    "final_core_identity_pages": 332,
+    "hobby_hub": 279,
+    "orientation_universe": 53,
+    "demote_to_editorial": 22,
+    "alias_only": 5,
+    "role_map": [
+      {
+        "name": "Airbrush",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Pinstriping",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-017"
+      },
+      {
+        "name": "Lettering",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-017"
+      },
+      {
+        "name": "Schildermalerei",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-017"
+      },
+      {
+        "name": "Glasmalerei",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Seidenmalerei",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-014"
+      },
+      {
+        "name": "Batik",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-014"
+      },
+      {
+        "name": "Shibori",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-014"
+      },
+      {
+        "name": "Textildruck",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-014"
+      },
+      {
+        "name": "Linolschnitt",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Holzschnitt",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Siebdruck",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Cyanotypie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Dunkelkammerfotografie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Nassplattenfotografie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Lochkamerafotografie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Kalligrafie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Scrapbooking",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Origami",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Paper Quilling",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Collage",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Miniaturen bemalen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-007"
+      },
+      {
+        "name": "Dioramenmalerei",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-018"
+      },
+      {
+        "name": "Schnitzen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Löffelschnitzen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Grünholzschnitzen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-011"
+      },
+      {
+        "name": "Drechseln",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Möbelrestaurierung",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Korbflechten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Weidenflechten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Besenbinden",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Brandmalerei",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-017"
+      },
+      {
+        "name": "Schmieden",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-009"
+      },
+      {
+        "name": "Kunstschmieden",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-009"
+      },
+      {
+        "name": "Metallgießen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-009"
+      },
+      {
+        "name": "Sandguss",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-009"
+      },
+      {
+        "name": "Silberschmieden",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-009"
+      },
+      {
+        "name": "Schmuckherstellung",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Drahtschmuck",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Kettenhemdflechten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Lederarbeiten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Lederprägen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Sattlerarbeiten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Weben",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Brettchenweben",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Handspinnen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Filzen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Nadelfilzen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Nassfilzen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Tufting",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Quilten",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-013"
+      },
+      {
+        "name": "Makramee",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Klöppeln",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-012"
+      },
+      {
+        "name": "Buchbinden",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Papierherstellung",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Marmorpapier",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Papierschöpfen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Stempel schnitzen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Zines herstellen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Töpfern",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Raku",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Keramikglasuren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Tiffanyglas",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Glasperlen drehen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Glasfusing",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Glasblasen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Glasgravur",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Epoxidharzkunst",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Resin Casting",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Jesmonite",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Betonkunst",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Kerzengießen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Seifenherstellung",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-015"
+      },
+      {
+        "name": "Polymer Clay",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Cold Porcelain",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-016"
+      },
+      {
+        "name": "Kaffee selbst rösten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Fermentation",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Kimchi",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Koji",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Kombucha",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Sauerteig",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Käse herstellen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Räuchern",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Pralinenherstellung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Bean-to-Bar-Schokolade",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Bier brauen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Cider herstellen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json"
+      },
+      {
+        "name": "Amateurfunk",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "CB-Funk",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Software Defined Radio",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Satellitenfunk",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Elektronikbasteln",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Mikrocontroller-Projekte",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Arduino",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Raspberry-Pi-Projekte",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Robotik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Heimrobotik",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Roboterbau",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Heimautomatisierung",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Smart-Home-Basteln",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Retrocomputer",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Retrocomputer restaurieren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "alte Spielekonsolen restaurieren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "mechanische Tastaturen bauen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "PC-Modding",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Case-Modding",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Mini-CNC",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "CNC-Fräsen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Lasercutting",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Lasergravieren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "3D-Druck",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Resin-3D-Druck",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "3D-Scanning",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "CAD als Hobby",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Drohnenbau",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "FPV-Drohnen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "FPV-Racing",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Crawling",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Baumaschinen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-LKW",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Boote",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Flugzeuge",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Helikopter",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Drift",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "RC-Offroad",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Synthesizer bauen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Eurorack",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Effektpedale bauen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Röhrenverstärker bauen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Lautsprecherbau",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "HiFi-Selbstbau",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-006"
+      },
+      {
+        "name": "Plattenspieler restaurieren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-006"
+      },
+      {
+        "name": "Uhren reparieren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-006"
+      },
+      {
+        "name": "mechanische Uhren bauen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-006"
+      },
+      {
+        "name": "Modell-Dampfmaschinen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Stirlingmotoren",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Modellmaschinenbau",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-004"
+      },
+      {
+        "name": "Amateurastronomie",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Teleskop-Astronomie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Astrofotografie",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Sonnenbeobachtung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Mondfotografie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Planetenfotografie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Deep-Sky-Fotografie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Radioastronomie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Hobby-Mikroskopie",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Teichwasser-Mikroskopie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Kristallmikroskopie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Polarisationsmikroskopie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Mikrofotografie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Gewässermikroskopie",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json"
+      },
+      {
+        "name": "Planktonbeobachtung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Wetterbeobachtung",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "private Wetterstation",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Storm Spotting",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Blitzfotografie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Gewittertracking",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Luftqualitätsmessung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Birding",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Nachtvogel-Beobachtung",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Fledermausbeobachtung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Schmetterlingsbeobachtung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Libellenbeobachtung",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Wildkameras",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Bioakustik",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Wasseranalyse",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Bodenanalyse",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Spektroskopie",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Elektrochemie als Hobby",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json"
+      },
+      {
+        "name": "Bonsai",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Bonsai aus Samen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Kusamono",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Kokedama",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "seltene Zimmerpflanzen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Pflanzenvermehrung",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Stecklingszucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Kakteen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Sukkulenten",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Lithops",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Orchideenzucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Bromelien",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Tillandsien",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Karnivoren",
+        "role": "ALIAS_ONLY",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "fleischfressende Pflanzen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Hydrokultur",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Semi-Hydro",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Hydroponik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Aeroponik",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Indoor-Growing",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Mikrogrün",
+        "role": "ALIAS_ONLY",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Microgreens",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Pilzzucht",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Speisepilzzucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Pilzklonen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Pilzsubstrate herstellen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Mooskultur",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Riesenkürbis-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Chili-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Tomatensorten-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Saatguterhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Saatgut-Tausch",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Pflanzenkreuzungen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Orchideenbestäubung",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json"
+      },
+      {
+        "name": "Aquaristik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Nano-Aquaristik",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Garnelenhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Biotop-Aquarien",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Schwarzwasser-Aquarien",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Meerwasseraquaristik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Riffaquaristik",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Quallen-Aquarium",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Terraristik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Spinnenterrarien",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Vogelspinnenhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Skorpionhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Reptilienhaltung",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Bioactive Terrariums",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Ameisenhaltung",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Formicarienbau",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Asselhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Isopoden-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Stabschreckenhaltung",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Gottesanbeterinnen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Käferzucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Schmetterlingszucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Imkerei",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Wildbienenhotels",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Hummelkästen",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Schmetterlingsgärten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Futtertierzucht",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Artemia-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Daphnien-Zucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Triops",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Regenwurmzucht",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json"
+      },
+      {
+        "name": "Bushcraft",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Bikepacking",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Packrafting",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Wintercamping",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Hammock Camping",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Tarp Camping",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Mikroabenteuer",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Orientierungslauf",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Geocaching",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Einradfahren",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Mountain Unicycling",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Slacklining",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Highlining",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Balance Board",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Longboard Dancing",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Pumptrack",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Mountainboarding",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Bogenschießen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "traditionelles Bogenschießen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "3D-Bogenschießen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Discgolf",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Boomerangwerfen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Blasrohrsport",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Freediving",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Stand-up-Paddling-Touren",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Kanutouren",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Baumklettern",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Seiltechnik",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Sportdrachen",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Trick-Kiting",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Drachenbau",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Landkiten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Powerkiting",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Kite Buggy",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Ultimate Frisbee",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Jugger",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "HEMA",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "historisches Fechten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Footgolf",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Speedminton",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Teqball",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Yo-Yo-Tricks",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Kendama",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Diabolo",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Poi",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Contact Juggling",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Cardistry",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Speedcubing",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Pen Spinning",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json"
+      },
+      {
+        "name": "Münzen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Banknoten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Notgeld",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Medaillen",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Tokens",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Numismatik",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Exlibris sammeln",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "historische Postkarten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Landkarten sammeln",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "historische Karten",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Ephemera sammeln",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Füllfederhalter sammeln",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "alte Computer",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Taschenrechner",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Radios",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Kameras",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Schallplatten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Kassetten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "MiniDiscs",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Spielfiguren",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Würfel",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Spielkarten",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Tarotdecks",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Modellautos",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Mineralien sammeln",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-019"
+      },
+      {
+        "name": "Fossilien sammeln",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-019"
+      },
+      {
+        "name": "Meteoriten suchen",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-019"
+      },
+      {
+        "name": "historische Reklame",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Filmplakate",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "B-Movie-Poster",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Blechschilder",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Emailschilder",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "historische Werkzeuge sammeln",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "alte Werkzeuge",
+        "role": "EDITORIAL_TOPIC",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Hobel",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Schraubstöcke",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Messinstrumente",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "alte Schlüssel",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Schlösser",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Vorhängeschlösser",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Knöpfe",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Parfümflakons",
+        "role": "HOBBY_HUB",
+        "source": "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      },
+      {
+        "name": "Wabikusa",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-001"
+      },
+      {
+        "name": "Wettersonden-Tracking",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Funkpeilung",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Morsefunk",
+        "role": "EDITORIAL_TOPIC",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Drohnenfotografie",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "Drone Soccer",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "Scale-Crawling",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Panzer",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Segelboote",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-U-Boote",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "RC-Segelflug",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-003"
+      },
+      {
+        "name": "Custom Keyboards",
+        "role": "ALIAS_ONLY",
+        "source": "historical-ledger-batch-005"
+      },
+      {
+        "name": "Chainmail",
+        "role": "ALIAS_ONLY",
+        "source": "historical-ledger-batch-010"
+      },
+      {
+        "name": "Pyrographie",
+        "role": "ALIAS_ONLY",
+        "source": "historical-ledger-batch-017"
+      },
+      {
+        "name": "BattleBots-Modellbau",
+        "role": "HOBBY_HUB",
+        "source": "historical-ledger-batch-002"
+      },
+      {
+        "name": "Fotografie",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Malen",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Zeichnen",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Nähen",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Stricken",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Häkeln",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Holzwerken",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Heimwerken",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Wandern",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Radfahren",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Camping",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Schwimmen",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Klettern",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Bouldern",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Gärtnern",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Gemüseanbau",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Briefmarken sammeln",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Angeln",
+        "role": "ORIENTATION_UNIVERSE",
+        "source": "expansion19-final"
+      },
+      {
+        "name": "Plane Spotting",
+        "role": "HOBBY_HUB",
+        "source": "expansion19-final"
+      }
+    ],
+    "names_by_role": {
+      "HOBBY_HUB": [
+        "3D-Bogenschießen",
+        "3D-Scanning",
+        "Aeroponik",
+        "Airbrush",
+        "alte Computer",
+        "alte Schlüssel",
+        "alte Spielekonsolen restaurieren",
+        "Ameisenhaltung",
+        "Arduino",
+        "Artemia-Zucht",
+        "Asselhaltung",
+        "Balance Board",
+        "Banknoten",
+        "Batik",
+        "BattleBots-Modellbau",
+        "Baumklettern",
+        "Bean-to-Bar-Schokolade",
+        "Besenbinden",
+        "Betonkunst",
+        "Bier brauen",
+        "Bikepacking",
+        "Bioactive Terrariums",
+        "Bioakustik",
+        "Biotop-Aquarien",
+        "Blasrohrsport",
+        "Blechschilder",
+        "Blitzfotografie",
+        "Bodenanalyse",
+        "Bonsai",
+        "Boomerangwerfen",
+        "Bouldern",
+        "Brandmalerei",
+        "Brettchenweben",
+        "Briefmarken sammeln",
+        "Bromelien",
+        "Buchbinden",
+        "Bushcraft",
+        "CAD als Hobby",
+        "Cardistry",
+        "CB-Funk",
+        "Chili-Zucht",
+        "Cider herstellen",
+        "CNC-Fräsen",
+        "Cold Porcelain",
+        "Collage",
+        "Contact Juggling",
+        "Cyanotypie",
+        "Daphnien-Zucht",
+        "Deep-Sky-Fotografie",
+        "Diabolo",
+        "Discgolf",
+        "Drachenbau",
+        "Drahtschmuck",
+        "Drechseln",
+        "Drohnenbau",
+        "Drohnenfotografie",
+        "Drone Soccer",
+        "Dunkelkammerfotografie",
+        "Effektpedale bauen",
+        "Einradfahren",
+        "Elektrochemie als Hobby",
+        "Emailschilder",
+        "Epoxidharzkunst",
+        "Eurorack",
+        "Exlibris sammeln",
+        "Filmplakate",
+        "Fledermausbeobachtung",
+        "fleischfressende Pflanzen",
+        "Footgolf",
+        "Formicarienbau",
+        "Fossilien sammeln",
+        "FPV-Racing",
+        "Freediving",
+        "Füllfederhalter sammeln",
+        "Funkpeilung",
+        "Garnelenhaltung",
+        "Gemüseanbau",
+        "Geocaching",
+        "Gewittertracking",
+        "Glasblasen",
+        "Glasfusing",
+        "Glasgravur",
+        "Glasmalerei",
+        "Glasperlen drehen",
+        "Gottesanbeterinnen",
+        "Grünholzschnitzen",
+        "Häkeln",
+        "Hammock Camping",
+        "Handspinnen",
+        "Heimwerken",
+        "Highlining",
+        "historische Postkarten",
+        "historisches Fechten",
+        "Hobel",
+        "Holzschnitt",
+        "Hydrokultur",
+        "Imkerei",
+        "Isopoden-Zucht",
+        "Jesmonite",
+        "Jugger",
+        "Käferzucht",
+        "Kaffee selbst rösten",
+        "Kakteen",
+        "Kalligrafie",
+        "Kameras",
+        "Kanutouren",
+        "Käse herstellen",
+        "Kassetten",
+        "Kendama",
+        "Keramikglasuren",
+        "Kerzengießen",
+        "Kettenhemdflechten",
+        "Kimchi",
+        "Kite Buggy",
+        "Klöppeln",
+        "Knöpfe",
+        "Koji",
+        "Kokedama",
+        "Kombucha",
+        "Korbflechten",
+        "Kristallmikroskopie",
+        "Kunstschmieden",
+        "Kusamono",
+        "Landkarten sammeln",
+        "Landkiten",
+        "Lasercutting",
+        "Lasergravieren",
+        "Lautsprecherbau",
+        "Lederarbeiten",
+        "Lettering",
+        "Linolschnitt",
+        "Lithops",
+        "Lochkamerafotografie",
+        "Löffelschnitzen",
+        "Longboard Dancing",
+        "Luftqualitätsmessung",
+        "Makramee",
+        "Malen",
+        "Marmorpapier",
+        "mechanische Tastaturen bauen",
+        "mechanische Uhren bauen",
+        "Medaillen",
+        "Messinstrumente",
+        "Meteoriten suchen",
+        "Microgreens",
+        "Mikrofotografie",
+        "Mineralien sammeln",
+        "Miniaturen bemalen",
+        "MiniDiscs",
+        "Möbelrestaurierung",
+        "Modell-Dampfmaschinen",
+        "Modellautos",
+        "Mondfotografie",
+        "Mooskultur",
+        "Mountain Unicycling",
+        "Mountainboarding",
+        "Münzen",
+        "Nadelfilzen",
+        "Nähen",
+        "Nano-Aquaristik",
+        "Nassfilzen",
+        "Nassplattenfotografie",
+        "Notgeld",
+        "Orchideenzucht",
+        "Orientierungslauf",
+        "Origami",
+        "Packrafting",
+        "Paper Quilling",
+        "Papierherstellung",
+        "Parfümflakons",
+        "PC-Modding",
+        "Pen Spinning",
+        "Pinstriping",
+        "Plane Spotting",
+        "Planetenfotografie",
+        "Planktonbeobachtung",
+        "Plattenspieler restaurieren",
+        "Poi",
+        "Polarisationsmikroskopie",
+        "Polymer Clay",
+        "Pralinenherstellung",
+        "private Wetterstation",
+        "Pumptrack",
+        "Quallen-Aquarium",
+        "Quilten",
+        "Radioastronomie",
+        "Radios",
+        "Raku",
+        "Raspberry-Pi-Projekte",
+        "Räuchern",
+        "RC-Baumaschinen",
+        "RC-Crawling",
+        "RC-Drift",
+        "RC-Helikopter",
+        "RC-LKW",
+        "RC-Panzer",
+        "RC-Segelboote",
+        "RC-Segelflug",
+        "RC-U-Boote",
+        "Regenwurmzucht",
+        "Resin Casting",
+        "Resin-3D-Druck",
+        "Retrocomputer",
+        "Retrocomputer restaurieren",
+        "Riesenkürbis-Zucht",
+        "Riffaquaristik",
+        "Roboterbau",
+        "Röhrenverstärker bauen",
+        "Saatguterhaltung",
+        "Sandguss",
+        "Satellitenfunk",
+        "Sattlerarbeiten",
+        "Sauerteig",
+        "Scale-Crawling",
+        "Schallplatten",
+        "Schildermalerei",
+        "Schmetterlingsbeobachtung",
+        "Schmetterlingsgärten",
+        "Schmetterlingszucht",
+        "Schmieden",
+        "Schraubstöcke",
+        "Schwarzwasser-Aquarien",
+        "Schwimmen",
+        "Scrapbooking",
+        "Seidenmalerei",
+        "Seifenherstellung",
+        "Semi-Hydro",
+        "Shibori",
+        "Siebdruck",
+        "Silberschmieden",
+        "Skorpionhaltung",
+        "Slacklining",
+        "Software Defined Radio",
+        "Sonnenbeobachtung",
+        "Speedcubing",
+        "Speedminton",
+        "Speisepilzzucht",
+        "Spektroskopie",
+        "Spielfiguren",
+        "Spielkarten",
+        "Stabschreckenhaltung",
+        "Stand-up-Paddling-Touren",
+        "Stecklingszucht",
+        "Stempel schnitzen",
+        "Stirlingmotoren",
+        "Storm Spotting",
+        "Stricken",
+        "Synthesizer bauen",
+        "Tarotdecks",
+        "Tarp Camping",
+        "Taschenrechner",
+        "Teichwasser-Mikroskopie",
+        "Teleskop-Astronomie",
+        "Teqball",
+        "Textildruck",
+        "Tiffanyglas",
+        "Tillandsien",
+        "Tokens",
+        "Tomatensorten-Zucht",
+        "Töpfern",
+        "traditionelles Bogenschießen",
+        "Trick-Kiting",
+        "Triops",
+        "Tufting",
+        "Uhren reparieren",
+        "Ultimate Frisbee",
+        "Vogelspinnenhaltung",
+        "Vorhängeschlösser",
+        "Wabikusa",
+        "Wandern",
+        "Wasseranalyse",
+        "Weidenflechten",
+        "Wettersonden-Tracking",
+        "Wildkameras",
+        "Wintercamping",
+        "Würfel",
+        "Yo-Yo-Tricks",
+        "Zeichnen",
+        "Zines herstellen"
+      ],
+      "EDITORIAL_TOPIC": [
+        "alte Werkzeuge",
+        "B-Movie-Poster",
+        "Bonsai aus Samen",
+        "Case-Modding",
+        "Dioramenmalerei",
+        "Heimrobotik",
+        "historische Karten",
+        "Hummelkästen",
+        "Lederprägen",
+        "Libellenbeobachtung",
+        "Mini-CNC",
+        "Morsefunk",
+        "Nachtvogel-Beobachtung",
+        "Orchideenbestäubung",
+        "Papierschöpfen",
+        "Pilzklonen",
+        "Pilzsubstrate herstellen",
+        "Saatgut-Tausch",
+        "Seiltechnik",
+        "Smart-Home-Basteln",
+        "Spinnenterrarien",
+        "Wildbienenhotels"
+      ],
+      "ORIENTATION_UNIVERSE": [
+        "3D-Druck",
+        "Amateurastronomie",
+        "Amateurfunk",
+        "Angeln",
+        "Aquaristik",
+        "Astrofotografie",
+        "Birding",
+        "Bogenschießen",
+        "Camping",
+        "Elektronikbasteln",
+        "Ephemera sammeln",
+        "Fermentation",
+        "Filzen",
+        "Fotografie",
+        "FPV-Drohnen",
+        "Futtertierzucht",
+        "Gärtnern",
+        "Gewässermikroskopie",
+        "Heimautomatisierung",
+        "HEMA",
+        "HiFi-Selbstbau",
+        "historische Reklame",
+        "historische Werkzeuge sammeln",
+        "Hobby-Mikroskopie",
+        "Holzwerken",
+        "Hydroponik",
+        "Indoor-Growing",
+        "Klettern",
+        "Meerwasseraquaristik",
+        "Metallgießen",
+        "Mikroabenteuer",
+        "Mikrocontroller-Projekte",
+        "Modellmaschinenbau",
+        "Numismatik",
+        "Pflanzenkreuzungen",
+        "Pflanzenvermehrung",
+        "Pilzzucht",
+        "Powerkiting",
+        "Radfahren",
+        "RC-Boote",
+        "RC-Flugzeuge",
+        "RC-Offroad",
+        "Reptilienhaltung",
+        "Robotik",
+        "Schlösser",
+        "Schmuckherstellung",
+        "Schnitzen",
+        "seltene Zimmerpflanzen",
+        "Sportdrachen",
+        "Sukkulenten",
+        "Terraristik",
+        "Weben",
+        "Wetterbeobachtung"
+      ],
+      "ALIAS_ONLY": [
+        "Chainmail",
+        "Custom Keyboards",
+        "Karnivoren",
+        "Mikrogrün",
+        "Pyrographie"
+      ]
+    }
+  },
+  "aliases": {
+    "canonical_merges": [
+      {
+        "alias": "Custom Keyboards",
+        "owner": "mechanische Tastaturen bauen",
+        "alias_role": "ALIAS_ONLY",
+        "owner_in_current_core": true,
+        "owner_role": "HOBBY_HUB"
+      },
+      {
+        "alias": "Chainmail",
+        "owner": "Kettenhemdflechten",
+        "alias_role": "ALIAS_ONLY",
+        "owner_in_current_core": true,
+        "owner_role": "HOBBY_HUB"
+      },
+      {
+        "alias": "Pyrographie",
+        "owner": "Brandmalerei",
+        "alias_role": "ALIAS_ONLY",
+        "owner_in_current_core": true,
+        "owner_role": "HOBBY_HUB"
+      },
+      {
+        "alias": "Karnivoren",
+        "owner": "fleischfressende Pflanzen",
+        "alias_role": "ALIAS_ONLY",
+        "owner_in_current_core": true,
+        "owner_role": "HOBBY_HUB"
+      },
+      {
+        "alias": "Mikrogrün",
+        "owner": "Microgreens",
+        "alias_role": "ALIAS_ONLY",
+        "owner_in_current_core": true,
+        "owner_role": "HOBBY_HUB"
+      }
+    ]
+  },
+  "content_layer": {
+    "hobby_hubs": 279,
+    "hubs_with_visible_content_layer": 279,
+    "visible_content_categories": 1292,
+    "hub_leaf_count_rule": "3-6",
+    "leaf_capacity_rule": "5-12 distinct article intents",
+    "capacity_violations": 0
+  },
+  "retained_noncore_inventory": {
+    "rule": "All non-promoted master identities remain Finder/Editorial; no silent deletion.",
+    "note": "This Sollprofil changes only the 359 current CORE identities revalidated under rules 1.6. It does not auto-promote the retained non-CORE inventory."
+  },
+  "technical_boundary": {
+    "plugin_change": false,
+    "wordpress_write": false,
+    "sync_released": false,
+    "physical_object_count": "PENDING_TECHNICAL_RESOLUTION",
+    "slug_collision_check": "PENDING_TECHNICAL_RESOLUTION",
+    "parent_orphan_check": "PENDING_TECHNICAL_RESOLUTION"
+  },
+  "next_action": "Resolve this frozen fachliches Sollprofil into one technical object plan against the existing V1.14.1 profile, preserving unchanged Editorial/Directory/View structures. Then hard-check parentage, depth, slugs, aliases, demotions, exact object counts and frontend drill-down. No plugin or WordPress write.",
+  "validation": {
+    "roles_complete": true,
+    "role_counts_match": true,
+    "all_hubs_have_leaf_layer": true,
+    "content_capacity_clean": true,
+    "alias_errors": [],
+    "intermediate_count_sum": 65
+  }
+}
