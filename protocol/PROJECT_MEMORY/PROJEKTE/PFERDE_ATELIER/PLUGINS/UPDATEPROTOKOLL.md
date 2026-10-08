@@ -477,3 +477,39 @@ FIX: Vertrags- und Runtimequellen exakt synchron; Package Binding neu berechnet 
 REGRESSION: exakt 3 Dateien geändert, 60/63 byteidentisch; PHP 43/43, JSON 17/17, Fresh-Unpack 63/63, Package Integrity + Tamper-Negativtest + Evidence-/Exact-Five-Matrix PASS.
 
 LIVE: noch nicht als 0.28.33 installiert/readback-bestätigt. **Keine PU-ID.**
+
+## PU-20261008-001 – Portal SEO Themenengine
+DATUM: 2026-10-08
+PLUGIN_ID: PA-E-019
+ART: UPDATE
+HERKUNFT: EIGEN
+FACHBÜRO: TEXT
+VON_VERSION: PRÜFEN / im aktuellen Screenshot nicht sichtbar
+AUF_VERSION: 0.57.58
+UPDATEQUELLE: `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip`; SHA-256 `1ea1f3fd8223395a1424e990a7cc418853c3ab301939c794a2580304b9ce66a5`
+WARUM: KISS-Restcleanup der sichtbaren/verborgenen Adminoberfläche bei unverändertem Produktions-/DB-/Performancekern.
+ABHÄNGIGKEITEN: PSERC; bestehender PSTE-Bestand/Baseline/Context-Index; PPM 6.7.9 nachgelagert.
+BACKUP_ROLLBACK_REF: vorheriger Live-Bytebestand PRÜFEN; geprüfter 0.57.57-Installer bleibt technischer Kandidatenbezug.
+FEHLERQUELLEN_GEPRÜFT: lokale Clean-State-Matrix war PASS, enthielt aber nicht den später live sichtbaren persistenten stale-Baseline-Erstklick.
+POSITIVTEST: lokale 0.57.58-Matrix vor Installation PASS.
+NEGATIVTEST: Live-Erstklick belegt fehlende Regression: `PSTE_SITE_STRUCTURE_STALE`.
+FACH_REGRESSION: kein Publish; keine Providerrecherche ausgelöst.
+WORDPRESS_LIVEKONTROLLE: Nutzer-Screenshot zeigt `Portal SEO Themenengine 0.57.58`; Produktion → `Automatik starten / fortsetzen` stoppt sofort mit `PSTE_SITE_STRUCTURE_STALE`; 4488 Themen / 32 aktuell planbar sichtbar.
+ERGEBNIS: FAIL
+FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`
+NOTIZ: 0.57.58 nicht weiter verwenden; Nachfolger 0.57.59 schließt exakt diese Live-Testlücke.
+
+## RELEASE-VORBEREITUNG 2026-10-08 – PSTE 0.57.59 / KEIN PU-EREIGNIS
+
+Kandidat: `PSTE-0.57.59-AUTOMATIK-STALE-BASELINE-COMPACT-REBIND-HARDPASS.zip`  
+SHA-256: `a3808c0834b2d60a332a6dc3178403988fb1a80b0c62943173c1b9e5c050c2e8`.
+
+Basis: exakt PSTE 0.57.58.
+
+WARUM: live bewiesenen Erstklick-Fehler `PSTE_SITE_STRUCTURE_STALE` beseitigen, ohne manuellen Wartungsweg und ohne unnötigen zweiten 4488er Kontext-Vollscan.
+
+FIX: Automatik führt vor Existing-Only einen sicheren kompakten Baseline-/Context-Index-Rebind aus, wenn ein COMPLETE-Kontext vorhanden ist. Rebind selbst 0 Topic-Pool-Zeilen / 0 Provider; danach normaler 40er Existing-Only-Bestandslauf. Voller Kontextrefresh nur Fallback ohne COMPLETE-Kontext.
+
+REGRESSION: 4 Dateien geändert / 112 von 116 byteidentisch; Fresh-Unpack 116/116; PHP 79/79; JSON 36/36; Static 53/53; Compact-Preflight 5/5; stale-first-click Adminmatrix 5/5; bestehende Automatik 8/8; Kurzer Dienstweg 10/10; K0 6/6; PSERC 0.28.33 Regression PASS.
+
+LIVE: noch nicht installiert/readback-bestätigt. **Keine PU-ID.**
