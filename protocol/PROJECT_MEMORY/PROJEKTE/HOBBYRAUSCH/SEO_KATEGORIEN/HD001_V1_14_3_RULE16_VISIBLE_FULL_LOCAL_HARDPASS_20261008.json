@@ -1,0 +1,91 @@
+{
+  "contract": "HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS",
+  "date": "2026-10-08",
+  "status": "PASS__FULL_LOCAL_DRYRUN_SYNC_READBACK_IDEMPOTENCE_FRONTEND_NEGATIVE",
+  "artifact": {
+    "name": "HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip",
+    "sha256": "deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de"
+  },
+  "profile": {
+    "sha256": "6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6",
+    "canonical_entities": 855,
+    "core_entities": 332,
+    "editorial_finder_entities": 523,
+    "logical_nodes": 1737,
+    "physical_target_objects": 1723,
+    "pages": 408,
+    "categories": 1292,
+    "journal_cat": 15,
+    "hp_listing_category": 8,
+    "relations": 9
+  },
+  "migration": {
+    "baseline": "V1.14.1 target profile",
+    "create": 1293,
+    "update": 430,
+    "archive": 27,
+    "adopt": 0,
+    "readback_checked": 1723,
+    "legacy_rebindings": 28,
+    "note": "28 existing hobby pages are rebound through legacy_ids instead of create+archive."
+  },
+  "idempotence": {
+    "second_dry_run": {
+      "unchanged": 1723,
+      "archive": 0
+    },
+    "second_sync": {
+      "unchanged": 1723,
+      "archive": 0,
+      "write_operations": 0,
+      "readback_checked": 1723
+    },
+    "third_dry_run": {
+      "unchanged": 1723,
+      "archive": 0
+    }
+  },
+  "frontend": {
+    "pass": true,
+    "header_expected_count": 102,
+    "world_child_counts": {
+      "gestalten": 7,
+      "fertigen": 11,
+      "technik": 11,
+      "forschen": 5,
+      "pflanzen": 10,
+      "tiere": 7,
+      "bewegen": 8,
+      "sammeln": 8
+    },
+    "intermediate_count": 65,
+    "hobby_hubs_seen": 279,
+    "errors": []
+  },
+  "negative_tests": {
+    "pass": true,
+    "cases": [
+      "duplicate_category_slug",
+      "missing_parent",
+      "depth_exceeded",
+      "name_too_long",
+      "duplicate_node_id"
+    ]
+  },
+  "fixes_since_1_14_2": [
+    "Profile final expected counts corrected to 855 canonical entities / 332 final CORE entities.",
+    "28 existing hobby pages receive legacy_ids so identity-preserving slug migrations update rather than recreate.",
+    "Dry-run excludes physically claimed legacy-rebound objects from retirement counting.",
+    "Sync does not rewrite _apkw_portal_root=0 on already retired objects."
+  ],
+  "php_lint": "33/33 PASS",
+  "provider_calls": 0,
+  "wordpress_writes": 0,
+  "local_evidence_sha256": {
+    "sync_sim": "3e50499757c5df71dbf6c4c4a2037a992da3da1a4ecb16c21fd7b7ecc5be1dd1",
+    "frontend": "fb2ee452b5f0904359fd2830a2b26e99358308bc1ed9cfe0a13cdc8ea51c8496",
+    "negative": "b8d186323053fef272eb29d6afa217a94ac092c9625e46bef72cb5d6e36c2099"
+  },
+  "blocker": "HD001_V1_14_3_LIVE_DRYRUN_PENDING",
+  "next_action": "Install V1.14.3, run exactly one read-only Finaler Zielbaum dry-run on live WordPress, download the JSON readback, and verify actual live delta before any sync."
+}
