@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.4 TECHNISCHER FULL-LOCAL-PASS, ABER SICHTBARE PORTALSTRUKTUR NACH REGEL-/KONZEPTAUDIT FAIL / HEADER-NAV = LEGACY+TARGET-MIX / MAGAZIN-NAV NICHT IN HEADER PROJIZIERT / TREIBHOLZ-ALIAS CORE-LEAKAGE / STRUKTURKORREKTUR ERFORDERLICH / KEIN WEITERER LIVE-SYNC
+STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG HARD PASS / 841 IDENTITÄTEN / 340 CORE / 437 TARGETS / LEGACY-HEADER-LEAK GESCHLOSSEN / MAGAZIN-NAV VOLLSTÄNDIG / 19 EXPANSION-ANKER UNBEWERTET / KEIN LIVE-SYNC
 
 ## Plugin
 
@@ -422,18 +422,44 @@ Wichtig:
 Die dritte Seitenebene der 340 CORE-Hobbys existiert im Zielprofil.
 Nur die darunterliegende WordPress-Kategorieebene ist aktuell fast nur beim Buchbinden-Pilot vorhanden; dies entspricht Zielvertrag 2.5 und wird nicht ohne neue Regel global vervielfacht.
 
+## V1.14.0 – FULL LOCAL HARD PASS
+
+Ziel:
+sichtbare Navigation, Magazin und fachliche Zwischenstruktur gegen Zielvertrag 2.5 / Regeln 1.5 / 3-Säulen-Konzept korrigieren.
+
+Ergebnis:
+- Target-Snapshot-only Header;
+- Legacy-/Editorial-Leaks geschlossen;
+- Treibholz-Dublette aus CORE-Navigation entfernt;
+- feste Magazin-Navigation komplett;
+- 59 aktive Zwischenbereiche;
+- keine leeren Konzeptäste;
+- 841 Identitäten / 340 CORE erhalten;
+- keine unbelegten Alias-Merges;
+- 437 physische Ziele;
+- Full Positive + Full Negative + V1.13.4-Migration PASS;
+- 33/33 PHP-Lint vor und nach frischem Unzip;
+- ZIP-Integrität PASS.
+
+Artefakt:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
+
+Beleg:
+`SEO_KATEGORIEN/HD001_V1_14_0_STRUCTURE_NAV_MAGAZIN_FULL_LOCAL_HARDPASS_20261008.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_FRONTEND_TARGET_NAV_AND_STRUCTURE_CORRECTION_REQUIRED`
+`HD001_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_PENDING`
+
+Die 19 bekannten/großen Erweiterungskandidaten sind nur Research Queue und nicht final bewertet.
+Keine Blind-Promotion.
 
 ## EXAKT EINE NEXT ACTION
 
-Kein weiterer Live-Sync.
-
-Lokal einen korrigierten Gesamtstand bauen:
-Target-Snapshot-Navigation + Legacy-Ausblendung + Magazin-Navigation + Alias/Dubletten-Schutz + korrigierte Zwischenstruktur.
-Danach kompletter POS/NEG-E2E.
-Erst dann neuer Live-Kandidat.
+19 Expansion-Anker final gegen Regeln 1.5 bewerten.
+Kein Live-Sync vorher.
 
 ## Release-/Artefaktgrenze
 
