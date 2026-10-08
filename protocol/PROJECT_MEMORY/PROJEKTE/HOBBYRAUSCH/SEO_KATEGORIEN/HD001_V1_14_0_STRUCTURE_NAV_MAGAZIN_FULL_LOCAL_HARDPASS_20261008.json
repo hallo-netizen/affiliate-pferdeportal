@@ -1,0 +1,227 @@
+{
+  "contract": "HD001_V1_14_0_STRUCTURE_NAV_MAGAZIN_FULL_LOCAL_HARDPASS",
+  "date": "2026-10-08",
+  "status": "PASS_LOCAL_ONLY__NO_LIVE_SYNC",
+  "authorities": [
+    "ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md#2.5",
+    "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json#1.5",
+    "KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md",
+    "HD001_V1_13_4_FULL_RULE_CONCEPT_AUDIT_20261008.md",
+    "HOBBY_DEPOT_HOBBY_MASTER_V2_20261007.json"
+  ],
+  "no_guess_corrections": {
+    "authoritative_canonical_entities": 841,
+    "approved_core": 340,
+    "finder_editorial": 501,
+    "authoritative_alias_groups": [
+      [
+        "Treibholz sammeln",
+        "Treibholz"
+      ],
+      [
+        "Buchbinden",
+        "historische Buchbinderei"
+      ],
+      [
+        "Wabikusa",
+        "Wabi-Kusa"
+      ],
+      [
+        "Filzen",
+        "Tierhaarfilzen"
+      ]
+    ],
+    "removed_unproven_alias_merges": 7,
+    "removed_unproven_rename": "BattleBots-Modellbau -> Kampfroboterbau",
+    "expansion_research_queue": {
+      "count": 19,
+      "status": "PENDING_ASSESSMENT_NO_BLIND_CORE_PROMOTION",
+      "examples": [
+        "Fotografie",
+        "Malen",
+        "Nähen",
+        "Wandern",
+        "Radfahren",
+        "Camping",
+        "Gärtnern",
+        "Briefmarken sammeln"
+      ]
+    }
+  },
+  "structure": {
+    "active_intermediate_total": 59,
+    "by_world": {
+      "Gestalten": 6,
+      "Fertigen": 9,
+      "Technik": 9,
+      "Forschen": 5,
+      "Pflanzen": 8,
+      "Tiere": 6,
+      "Bewegen": 8,
+      "Sammeln": 8
+    },
+    "implemented_splits": [
+      "Schrift & Lettering / Papierkunst",
+      "Metall / Schmuck",
+      "Leder / Textil",
+      "Elektronik / Funk",
+      "Smart Home separated from Robotik & Automation",
+      "Moos & Miniaturgärten separated",
+      "Ameisen & Insekten / Wirbellose"
+    ],
+    "not_created_due_no_empty_level_rule": [
+      "Oberfläche & Deko",
+      "Citizen Science",
+      "Essbare Pflanzen",
+      "Gehegegestaltung"
+    ],
+    "stable_hobby_pages_preserved": [
+      "Robotik",
+      "Bonsai"
+    ]
+  },
+  "magazine": {
+    "status": "FIXED_CONCEPT_NAVIGATION",
+    "roots": [
+      "Hobby finden",
+      "Nach Situation",
+      "Nach Jahreszeit",
+      "Entdecken"
+    ],
+    "hobby_finden": [
+      "Hobbyfinder",
+      "Hobbywelten"
+    ],
+    "situation": [
+      "Zuhause",
+      "Draußen",
+      "Alleine",
+      "Zu zweit",
+      "Wenig Platz",
+      "Wenig Zeit"
+    ],
+    "season": [
+      "Winter",
+      "Sommer"
+    ],
+    "entdecken": [
+      "Ungewöhnliche Hobbys",
+      "Verrückte Hobbys",
+      "Neue Hobbys",
+      "Trends"
+    ]
+  },
+  "frontend_navigation": {
+    "mode": "ACTIVE_TARGET_SNAPSHOT_ONLY",
+    "legacy_unmanaged_pages_excluded": true,
+    "world_header_depth": "intermediate_only",
+    "forbidden_core_leaks_tested": [
+      "Betonmöbel",
+      "Dorodango",
+      "Treibholz sammeln",
+      "Treibholz"
+    ],
+    "header_items": 96
+  },
+  "content_category_level": {
+    "unchanged": true,
+    "current_pilot": "Buchbinden -> Einstieg / Ausrüstung / Material / Techniken & Praxis",
+    "rule": "No global artificial category layer; create only when real 5-12-intent clusters exist.",
+    "further_generalization": "SEPARATE_CONCEPT_DECISION"
+  },
+  "resolved_local_target": {
+    "logical_nodes": 446,
+    "physical_target_objects": 437,
+    "page_frontend_readbacks": 410,
+    "relations": 9
+  },
+  "fresh_zip_positive": {
+    "initial_dryrun": {
+      "CREATE": 362,
+      "ADOPT": 75,
+      "UPDATE": 0,
+      "UNCHANGED": 0,
+      "ARCHIVE": 0
+    },
+    "first_sync": {
+      "created": 362,
+      "adopted": 75,
+      "updated": 0,
+      "unchanged": 0,
+      "archived": 0,
+      "readback_checked": 437,
+      "status": "COMPLETE"
+    },
+    "frontend_pages": "410/410 PASS",
+    "header_navigation": "PASS",
+    "magazine_navigation": "PASS",
+    "second_dryrun": {
+      "CREATE": 0,
+      "ADOPT": 0,
+      "UPDATE": 0,
+      "UNCHANGED": 437,
+      "ARCHIVE": 0
+    },
+    "second_sync": {
+      "created": 0,
+      "adopted": 0,
+      "updated": 0,
+      "unchanged": 437,
+      "archived": 0,
+      "readback_checked": 437,
+      "status": "COMPLETE"
+    }
+  },
+  "migration_from_deployed_v1_13_4": {
+    "old_target_objects": 430,
+    "dryrun": {
+      "CREATE": 12,
+      "ADOPT": 0,
+      "UPDATE": 425,
+      "UNCHANGED": 0,
+      "ARCHIVE": 5
+    },
+    "archived_structural_nodes": [
+      "Leder & Textil",
+      "Metall & Schmuck",
+      "Schrift & Papier",
+      "Elektronik & Funk",
+      "Insekten & Wirbellose"
+    ],
+    "hobby_pages_archived": [],
+    "sync": {
+      "created": 12,
+      "updated": 425,
+      "adopted": 0,
+      "unchanged": 0,
+      "archived": 5,
+      "readback_checked": 437,
+      "status": "COMPLETE"
+    },
+    "post_migration": {
+      "UNCHANGED": 437
+    }
+  },
+  "negative_suite": {
+    "readback_corruption": "ROLLED_BACK_EXACT_RESTORE_PASS",
+    "page_insert_failure": "ROLLED_BACK_EXACT_RESTORE_PASS",
+    "term_insert_failure": "ROLLED_BACK_EXACT_RESTORE_PASS",
+    "ambiguous_binding": "BLOCKED_FAIL_CLOSED_PASS",
+    "foreign_hp_slug": "BLOCKED_PASS",
+    "invalid_profile": "BLOCKED_BEFORE_WRITES_PASS",
+    "missing_hp_taxonomy": "BLOCKED_BEFORE_WRITES_PASS"
+  },
+  "package": {
+    "name": "HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip",
+    "sha256": "87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3",
+    "profile_sha256": "6dda22c63fb23593b2eee8d8fbc067e9f732430cad70d5c0576bca40b95a474c",
+    "php_lint_before_package": "33/33 PASS",
+    "php_lint_after_fresh_unpack": "33/33 PASS",
+    "zip_integrity": "PASS",
+    "library_path": "/hobby rausch/HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip",
+    "report_name": "HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_REPORT.txt",
+    "report_sha256": "1687f74207171534d7a83f07cbda55559f3189d2b073ec27aff78625e826fd7b"
+  },
+  "boundary": "Local hard pass only. The 19 expansion/anchor candidates remain unassessed and are not silently promoted.",
+  "next_action": "Keep live sync blocked. Decide/assess the 19 expansion anchor candidates separately, then either bind resulting target delta into V1.14 or explicitly close them as non-CORE before one fresh live dry-run."
+}
