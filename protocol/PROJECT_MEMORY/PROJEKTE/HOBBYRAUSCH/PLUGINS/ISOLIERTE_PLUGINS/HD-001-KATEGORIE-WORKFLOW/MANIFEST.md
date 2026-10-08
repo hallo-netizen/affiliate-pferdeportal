@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.14.1 EXPANSION19 FULL LOCAL POS+NEG FRESH-ZIP HARD PASS / LIVE-DRY-RUN PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.1 LOCAL FULL POS+NEG HARD PASS + LIVE DRY-RUN PASS / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -69,7 +69,7 @@ GRUND:
 Kein byteidentisches GitHub-Binary erfinden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-Exaktes V1.14.1-Artefakt für einen read-only Live-Dry-Run verwenden → JSON-Readback prüfen → erst nach Abnahme Sync.
+Live-Dry-Run PASS. Den geprüften Plan genau einmal synchronisieren und anschließend den post-sync JSON-Readback prüfen.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
