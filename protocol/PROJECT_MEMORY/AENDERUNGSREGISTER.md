@@ -2303,3 +2303,19 @@ WARUM:
 
 GRENZE:
 Keine Gate-Absenkung und keine neue Evidenzlogik. Der bestehende Runtimeumfang wird nur im Vertrag korrekt gespiegelt; Package Binding wird danach neu berechnet. Positiv-/Negativ- und Tampertests PASS.
+
+## PSTE-REUSE-006 – Automatik besitzt den stale Baseline-Rebind
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+Wenn beim Start der Automatik eine gültige aktuelle Portalstruktur vom gespeicherten PSTE-Baseline-Hash abweicht, darf der Benutzer nicht in einen separaten Wartungs-/Portalabgleichweg gezwungen werden. Bei vorhandenem COMPLETE-Kontext bindet die Automatik Baseline und kompakten Context-Index selbst an die aktuellen read-only Snapshots neu und startet danach den normalen Existing-Only-Bestandslauf.
+
+WARUM:
+PSTE 0.57.58 scheiterte live beim allerersten Automatik-Klick mit `PSTE_SITE_STRUCTURE_STALE`, obwohl 4488 gespeicherte Themen und 32 planbare Kandidaten vorhanden waren. Die lokale Clean-State-Matrix hatte diesen persistenten Livezustand nicht abgebildet.
+
+KISS / PERFORMANCE:
+Der kompakte Rebind traversiert keinen Topic-Pool und ruft keinen Provider auf. Er baut nur die vorhandenen kompakten Kontextartefakte aus aktuellem Inventory, Structure und Editorial Plan neu. Danach bleibt genau ein Existing-Only-Bestandslauf in 40er Batches. Ein kompletter Portal-Kontextlauf ist nur Fallback, wenn keine COMPLETE-Kontextbasis existiert.
+
+REGEL:
+Jede künftige Automatik-Regression muss ausdrücklich den Zustand `persisted stale site baseline + first production click` enthalten. Clean-State-only ist für diesen Pfad kein ausreichender Hard-Pass mehr.
