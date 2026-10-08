@@ -1,0 +1,61 @@
+{
+  "contract": "HD001_RULE16_HUB",
+  "date": "2026-10-08",
+  "status": "PASS",
+  "hub": "Textildruck",
+  "role": "HOBBY_HUB",
+  "historical_leaf_target": 5,
+  "leaves": [
+    {
+      "label": "Stoff & Farbe",
+      "intents": [
+        "Stoffwahl",
+        "Vorbereitung",
+        "Farbwahl",
+        "Farbtest",
+        "Materialverträglichkeit"
+      ]
+    },
+    {
+      "label": "Stempel & Blockdruck",
+      "intents": [
+        "Stempelwahl",
+        "Druckblock",
+        "Farbauftrag",
+        "Rapport",
+        "Mehrfarbdruck"
+      ]
+    },
+    {
+      "label": "Schablone & Sieb",
+      "intents": [
+        "Schablone",
+        "Siebdruck",
+        "Motivtransfer",
+        "Farbauftrag",
+        "Registrierung"
+      ]
+    },
+    {
+      "label": "Muster & Serien",
+      "intents": [
+        "Rapportplanung",
+        "Farbfolge",
+        "Wiederholung",
+        "Platzierung",
+        "Serienkonstanz"
+      ]
+    },
+    {
+      "label": "Fixierung & Pflege",
+      "intents": [
+        "Fixierung",
+        "Trocknung",
+        "Waschtest",
+        "Beständigkeit",
+        "Pflege"
+      ]
+    }
+  ],
+  "validation": true
+}
