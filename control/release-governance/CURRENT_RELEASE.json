@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 291,
+  "generation": 292,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "FORMAL_RELEASE_CHECK_VERIFY_RELEASED_6_72_209",
-    "current_focus_reason": "Immutable release_guard requires RELEASED/release_allowed=true before verification. Historical OPEN/STALE gate truth is preserved separately; only the manifest-bound 6.72.209 PASS gate is current-required."
+    "current_focus": "RELEASE_COMPLETE_6_72_209",
+    "current_focus_reason": "Formal release-check PASS on run 37783979652. Exact tested installer remains repository-bound; no plugin source changes after PASS."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,13 +887,13 @@
     }
   },
   "execution_state": {
-    "state": "RELEASED_6_72_209_FORMAL_CHECK_PENDING",
+    "state": "RELEASED_6_72_209_COMPLETE",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Run exactly: python3 control/release-governance/release_guard.py release-check. Do not change plugin source.",
-    "completion_condition": "FORMAL_RELEASE_CHECK_PASS",
-    "after_completion_action": "Record formal PASS only; no plugin/source changes.",
+    "bound_user_scope_action": "Release complete. Do not change plugin source unless a new explicit user scope is opened.",
+    "completion_condition": "SATISFIED_FORMAL_RELEASE_CHECK_PASS_RUN_37783979652",
+    "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 134,
+    "sequence": 135,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672209_kiss_cleanup_textlinks_20261008.md",
@@ -1056,7 +1056,9 @@
       "workflow_artifact_id": 11551770130,
       "repository_bind_commit": "7f2ffc6cff3a91ace8edfadf59ecddaa3b950493",
       "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
-    }
+    },
+    "formal_release_check_run": 37783979652,
+    "formal_release_check_result": "PASS"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -2378,11 +2380,11 @@
     ]
   },
   "handoff": {
-    "status": "READY",
+    "status": "RELEASED",
     "entrypoint": "release/affiliate-zentrale/AGENTS.md",
     "current_authority": "control/release-governance/CURRENT_RELEASE.json",
-    "freshness_reference": "branch affiliate-release-current + generation 291 + manifest e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f + final artifact commit 7f2ffc6cff3a91ace8edfadf59ecddaa3b950493",
-    "next_action": "RUN_FORMAL_RELEASE_CHECK",
+    "freshness_reference": "branch affiliate-release-current + generation 292 + formal release-check PASS run 37783979652 + manifest e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f + final artifact commit 7f2ffc6cff3a91ace8edfadf59ecddaa3b950493",
+    "next_action": "NONE",
     "do_not_touch": [
       "plugin source",
       "functional import/ranking/banner/product/calculator/provider paths",
@@ -2736,12 +2738,16 @@
     }
   },
   "formal_release_check_672209": {
-    "status": "PENDING_RERUN_AFTER_CURRENT_MATRIX_FIX",
-    "first_run": 37781538587,
-    "first_result": "FAIL_FORMAL_GOVERNANCE_ONLY",
-    "first_blocker": "IMMUTABLE_GUARD_INTERPRETED_HISTORICAL_REQUIRED_RELEASE_GATES_AS_CURRENT_AND_REQUIRES_RELEASED_STATE_PRECHECK",
-    "plugin_source_changed": false,
+    "status": "PASS",
+    "run": 37783979652,
+    "head": "4a5fea5d11570761b2bb676e5c801034e19e9e3d",
+    "result": "AFFILIATE_RELEASE_FINAL_GATE_PASS",
+    "prior_failed_run": 37781538587,
+    "prior_failure_class": "FORMAL_GOVERNANCE_MATRIX_BINDING_ONLY",
+    "plugin_source_changed_between_runs": false,
     "current_manifest": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
-    "remediation": "PRESERVE_HISTORICAL_MATRIX_UNCHANGED; BIND_ONLY_CURRENT_6_72_209_PASS_GATE_AS_REQUIRED; VERIFY_RELEASED_STATE_WITH_IMMUTABLE_GUARD"
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.209.zip",
+    "final_artifact_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
+    "release_complete": true
   }
 }
