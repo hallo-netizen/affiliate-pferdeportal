@@ -277,19 +277,21 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'register_shortcodes'));
         if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_health_checker'), 6); }
         if (!$is_ajax_request) { add_action('init', array($this, 'ensure_health_cron_schedule'), 20); }
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
+        if (!$is_ajax_request) { add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets')); }
         // V6.72.104: Breadcrumb-Geometrie gehoert wieder ausschliesslich dem
         // Designplugin. Affiliate reserviert keinen Layoutplatz mehr. Der bestehende
         // Journal-Hero-Preload bleibt als reiner Bildhinweis erhalten.
-        add_action('wp_head', array($this, 'print_journal_hero_preload_v672104'), 1);
+        if (!$is_ajax_request) { add_action('wp_head', array($this, 'print_journal_hero_preload_v672104'), 1); }
         // Muss auch ausserhalb des Adminbereichs erreichbar sein: eBay validiert
         // diesen HTTPS-Endpunkt per GET-Challenge und sendet danach signierte POSTs.
-        add_action('rest_api_init', array($this, 'register_ebay_account_deletion_routes'));
-        add_action('rest_api_init', array($this, 'register_ebay_external_tick_route'));
-        add_action('admin_post_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
-        add_action('admin_post_nopriv_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
-        add_action('admin_post_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
-        add_action('admin_post_nopriv_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
+        if (!$is_ajax_request) {
+            add_action('rest_api_init', array($this, 'register_ebay_account_deletion_routes'));
+            add_action('rest_api_init', array($this, 'register_ebay_external_tick_route'));
+            add_action('admin_post_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
+            add_action('admin_post_nopriv_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
+            add_action('admin_post_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
+            add_action('admin_post_nopriv_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
+        }
         add_filter('the_content', array($this, 'filter_the_content'), 20);
         // V6.72.42: Glossar-Einzelbanner wird nach dem Designrenderer in die
         // reale Glossar-Single-Struktur eingesetzt. Design/Text bleiben unveraendert.
@@ -297,7 +299,7 @@ final class Pferdeportal_Affiliate_Router {
         // V6.72.60: Pferderassenartikel erhalten denselben echten Automatikpfad.
         add_filter('the_content', array($this, 'inject_breed_single_banner'), 41);
         // V6.72.87 KISS: Uebersichts-Banner werden serverseitig direkt vor dem Hauptloop ausgegeben.
-        add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20);
+        if (!$is_ajax_request) { add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20); }
         // V6.72.90 KISS: Journal am final gerenderten Seiteninhalt einsortieren.
         // Die reale /journal/-Seite enthaelt [pferde_journal]; bei Prioritaet 99
         // ist der Shortcode bereits gerendert. Kein JavaScript/Observer/Timer.
@@ -309,11 +311,13 @@ final class Pferdeportal_Affiliate_Router {
         // V2.2.7: Der Bildendpunkt streamt die aktuelle Mediendatei selbst.
         // Dadurch kann weder ein alter Redirect noch ein Browser-/CDN-Cache auf
         // dem vorherigen Attachment haengen bleiben.
-        add_action('admin_post_ppar_placeholder_image', array($this, 'handle_placeholder_image'));
-        add_action('admin_post_nopriv_ppar_placeholder_image', array($this, 'handle_placeholder_image'));
+        if (!$is_ajax_request) {
+            add_action('admin_post_ppar_placeholder_image', array($this, 'handle_placeholder_image'));
+            add_action('admin_post_nopriv_ppar_placeholder_image', array($this, 'handle_placeholder_image'));
+        }
         add_filter('affiliate_portal_integration_status', array($this, 'provide_integration_status'), 10, 2);
         add_action('loop_end', array($this, 'auto_inject_category_archive_slots'));
-        add_action('template_redirect', array($this, 'handle_click_redirect'), 0);
+        if (!$is_ajax_request) { add_action('template_redirect', array($this, 'handle_click_redirect'), 0); }
         add_action(self::HEALTH_CRON_HOOK, array($this, 'run_scheduled_health_check'));
         add_action(self::AUTOMATION_CRON_HOOK, array($this, 'run_scheduled_partner_sync'));
         add_action(self::AUTOMATION_WORKER_HOOK, array($this, 'run_automation_worker'));
@@ -345,7 +349,7 @@ final class Pferdeportal_Affiliate_Router {
         if (!$is_ajax_request) { add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33); }
         add_action(self::BANNER_LIBRARY_MIGRATION_HOOK, array($this, 'run_banner_library_migration_v672185'));
         add_action(self::PARTNER_ANALYTICS_CRON_HOOK, array($this, 'run_partner_analytics_refresh'));
-        add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now'));
+        if (!$is_ajax_request) { add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now')); }
         // AFF-ERR-039: recovery work is isolated to its dedicated worker.
         // Never bind state repair to normal init/frontend/REST requests.
         // AFF-ERR-043: exact historical product-state restore is explicit/bounded only.
@@ -405,13 +409,17 @@ final class Pferdeportal_Affiliate_Router {
         // Native WordPress-Preview-Queries can already be a 404 before template_redirect.
         // Run the same eBay-only preview gate once after the main query and again at
         // template_redirect; a successful render exits, so there is no double output.
-        add_action('wp', array($this, 'ebay_handle_secure_listing_preview'), -100);
-        add_action('template_redirect', array($this, 'ebay_handle_secure_listing_preview'), -100);
+        if (!$is_ajax_request) {
+            add_action('wp', array($this, 'ebay_handle_secure_listing_preview'), -100);
+            add_action('template_redirect', array($this, 'ebay_handle_secure_listing_preview'), -100);
+        }
         // Published eBay singles are rendered from their exact canonical path only.
         // This eBay-only route does not depend on the current rewrite cache or on
         // HivePress recognising the single query first; ordinary listings are untouched.
-        add_action('template_redirect', array($this, 'ebay_rescue_published_listing_route'), -90);
-        add_action('template_redirect', array($this, 'ebay_redirect_legacy_private_category'), -85);
+        if (!$is_ajax_request) {
+            add_action('template_redirect', array($this, 'ebay_rescue_published_listing_route'), -90);
+            add_action('template_redirect', array($this, 'ebay_redirect_legacy_private_category'), -85);
+        }
         add_filter('the_posts', array($this, 'ebay_filter_stale_posts'), 999, 2);
         // HivePress baut Listing-Kategorieabfragen selbst. Private Anzeigen muss alle
         // direkten fachlichen Unterkategorien mitaggregieren; Provider-Ebenen bleiben unsichtbar.
