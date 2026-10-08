@@ -1,0 +1,78 @@
+{
+  "contract": "HD001_V1_14_1_EXPANSION19_FULL_LOCAL_HARDPASS",
+  "date": "2026-10-08",
+  "status": "PASS_LOCAL_ONLY__NO_LIVE_SYNC",
+  "authorities": [
+    "ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md#2.5",
+    "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json#1.5",
+    "KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md",
+    "HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json"
+  ],
+  "final_target": {
+    "canonical_identities": 860,
+    "core": 359,
+    "finder_editorial": 501,
+    "active_intermediate_nodes": 60,
+    "active_logical_nodes": 466,
+    "physical_target_objects": 457,
+    "pages": 430,
+    "category": 4,
+    "journal_cat": 15,
+    "hp_listing_category": 8,
+    "relations": 9,
+    "header_items": 97
+  },
+  "expansion19": {
+    "assessed": 19,
+    "in_scope": 19,
+    "hobby_hub": 12,
+    "orientation_universe": 7,
+    "monetization": "UNKNOWN_PENDING_PROVIDER_MATCH",
+    "blind_core_promotion": false,
+    "content_category_layer_created": false,
+    "essbare_pflanzen_activated": true,
+    "direct_world_entities": ["Heimwerken", "Gärtnern"]
+  },
+  "positive": {
+    "fresh_dryrun": {"CREATE": 457, "ADOPT": 0, "UPDATE": 0, "UNCHANGED": 0, "ARCHIVE": 0, "provider_calls": 0, "wordpress_structure_writes": 0},
+    "fresh_sync": {"created": 457, "readback_checked": 457, "status": "COMPLETE"},
+    "second_sync": {"unchanged": 457, "readback_checked": 457, "status": "COMPLETE"},
+    "migration_from_v1_14_0": {"CREATE": 20, "UPDATE": 437, "ARCHIVE": 0, "readback_checked": 457, "status": "COMPLETE"},
+    "post_migration": {"UNCHANGED": 457},
+    "frontend_pages": "430/430 PASS",
+    "header_navigation": "97/97 PASS",
+    "portal_hubs": "PASS",
+    "front_hub_links": "PASS",
+    "footer": "PASS",
+    "final_frontend_readback": "PASS"
+  },
+  "negative": {
+    "unknown_core_without_editorial": "BLOCKED_PASS",
+    "claimed_monetization_without_path": "BLOCKED_PASS",
+    "duplicate_slug": "BLOCKED_PASS",
+    "duplicate_additional_candidate": "DEDUP_PASS",
+    "unassessed_additional_candidate": "EDITORIAL_ONLY_NO_BLIND_CORE_PASS",
+    "ambiguous_binding": "BLOCKED_FAIL_CLOSED_PASS",
+    "foreign_slug": "BLOCKED_PASS",
+    "missing_hp_taxonomy": "BLOCKED_BEFORE_WRITES_PASS",
+    "page_insert_failure": "ROLLED_BACK_EXACT_SEMANTIC_RESTORE_PASS",
+    "term_insert_failure": "ROLLED_BACK_EXACT_SEMANTIC_RESTORE_PASS",
+    "readback_corruption": "ROLLED_BACK_EXACT_SEMANTIC_RESTORE_PASS",
+    "v1_14_0_profile_regression": "841_340_437_PASS"
+  },
+  "package": {
+    "name": "HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_HARDPASS.zip",
+    "sha256": "64735c31f474a782cc324c68218aade99ccfca4b54ab08091d5f28cfcecae95e",
+    "profile_name": "HD001_V1.14.1_EXPANSION19_TARGET_PROFILE_20261008.json",
+    "profile_sha256": "cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0",
+    "master_name": "HOBBY_DEPOT_HOBBY_MASTER_V2_20261008_EXPANSION19.json",
+    "master_sha256": "adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f",
+    "report_name": "HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_REPORT.txt",
+    "report_sha256": "5298211f6a86d33813cce5184b8cc2ab94303955968ff17970c7cbec35a5755e",
+    "php_lint_before_package": "33/33 PASS",
+    "php_lint_after_fresh_unpack": "33/33 PASS",
+    "zip_integrity": "PASS"
+  },
+  "boundary": "Local hard pass only. No live dry-run and no live sync.",
+  "next_action": "Use the exact V1.14.1 artifact for one read-only live dry-run, export/read back the result, and do not sync before acceptance."
+}
