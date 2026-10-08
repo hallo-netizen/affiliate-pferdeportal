@@ -1,0 +1,88 @@
+{
+  "contract": "HD001_BALANCED_VISIBLE_LEVELS_AUDIT",
+  "date": "2026-10-08",
+  "status": "RULE_AUDIT_COMPLETE__TARGET_REBUILD_REQUIRED__NO_SYNC",
+  "authoritative_rules": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6",
+    "concept": "KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md"
+  },
+  "required_frontend_drilldown": [
+    "WELT",
+    "ZWISCHENBEREICH",
+    "HOBBY",
+    "CONTENT_KATEGORIE",
+    "BEITRAG"
+  ],
+  "header_rule": "Global header may remain selective; this does not permit hiding canonical child levels on world/intermediate/hobby landing pages.",
+  "current_v1_14_1_active_intermediate_counts": {
+    "gestalten": 6,
+    "fertigen": 9,
+    "technik": 9,
+    "forschen": 5,
+    "pflanzen": 9,
+    "tiere": 6,
+    "bewegen": 8,
+    "sammeln": 8
+  },
+  "current_total_active_intermediate_nodes": 60,
+  "concept_working_structure_counts": {
+    "gestalten": 7,
+    "fertigen": 9,
+    "technik": 9,
+    "forschen": 6,
+    "pflanzen": 9,
+    "tiere": 7,
+    "bewegen": 8,
+    "sammeln": 8
+  },
+  "concept_working_structure_total": 63,
+  "missing_concept_nodes_in_current_target": [
+    "Gestalten -> Oberfläche & Deko",
+    "Forschen -> Citizen Science",
+    "Tiere -> Gehegegestaltung"
+  ],
+  "current_overwide_intermediate_groups_by_core_hobby_count": {
+    "Technik -> RC & Drohnen": 16,
+    "Fertigen -> Textil": 13,
+    "Bewegen -> Outdoor": 13,
+    "Fertigen -> Genuss": 12,
+    "Fertigen -> Holz & Naturmaterial": 11
+  },
+  "direct_world_hobbies_without_intermediate_area": [
+    "Fertigen -> Heimwerken",
+    "Pflanzen -> Gärtnern"
+  ],
+  "verified_inventory_support_for_reopening_existing_concept_nodes": {
+    "Gestalten -> Oberfläche & Deko": {
+      "candidates": [
+        "Pinstriping",
+        "Schildermalerei",
+        "Glasmalerei"
+      ],
+      "note": "Existing CORE identities currently grouped under Malen & Zeichnen; concept already contains Oberfläche & Deko. Requires ownership/fit review before move."
+    },
+    "Tiere -> Gehegegestaltung": {
+      "candidates": [
+        "Formicarienbau",
+        "Wildbienenhotels",
+        "Hummelkästen",
+        "Bioactive Terrariums"
+      ],
+      "note": "Existing CORE identities provide real inventory for the already-defined concept branch. Requires ownership/fit review before move."
+    },
+    "Forschen -> Citizen Science": {
+      "candidates": [],
+      "note": "No distinct current CORE hobby identity was verified as a clean primary owner for this branch. Do not create an empty node."
+    }
+  },
+  "hobby_hub_rule": {
+    "visible_content_categories_required": true,
+    "target_leaf_count": "3-6",
+    "leaf_capacity": "5-12 distinct article intents ideal",
+    "direct_articles_normal_model": false,
+    "no_empty_symmetry_categories": true
+  },
+  "blocker": "HD001_BALANCED_TARGET_TREE_REBUILD_PENDING",
+  "next_action": "Rebuild the complete balanced target tree against rules 2.6/1.6, starting with world/intermediate distribution and then HOBBY_HUB content categories; no WordPress sync or plugin install before this target is accepted."
+}
