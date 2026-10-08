@@ -1886,8 +1886,7 @@ body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)>header{
     box-shadow:none!important;
 }
 /* Redundantes \"Anzeige\" ist komplett entfernt/unterdrueckt. */
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel,
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label{
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel{
     display:none!important;
 }
 /* Pflichttext direkt unter dem Bild, damit keine unnoetige Hoehe entsteht. */
