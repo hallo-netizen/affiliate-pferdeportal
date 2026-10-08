@@ -635,3 +635,59 @@ TEST:
 
 NEXT:
 Ein realer Export-Readback mit V1.12.6.
+
+## PU-20261008-013 – HD-001 V1.13.1 praktischer Finalzielbaum / ein Sync
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+V1.12.6 read-only Kalibrierung → V1.13.1 manual-only Finalisierung.
+
+WARUM:
+Die 16er-Batchserie war als Produktionsweg unpraktikabel. Zusätzlich zeigte die Abschlussprüfung, dass der erste praktische Zielprofilentwurf die acht Hauptwelten noch fälschlich unter `Hobbywelten` führte.
+
+VERBINDLICHE KORREKTUR:
+- 841er Master = Inventar, nicht 841 Pflichtkategorien;
+- 340 CORE / 501 Finder-Editorial;
+- acht Hauptwelten = physische CORE-Rootseiten;
+- Hobbywelten = View/Übersicht, kein Parent;
+- Leafs nicht vorab erzwingen;
+- Batch 004+ gestrichen;
+- DataForSEO nicht mehr als flächendeckende Bewertungsserie.
+
+ARTEFAKT:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
+
+SHA-256:
+`508c3d520fc765223d9f643d06ca75ef07e8702612d5fecab416d771bfab5dc6`
+
+ZIELPROFIL:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
+SHA-256:
+`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
+
+FINAL:
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- 404 Pages;
+- 8 Welt-Roots;
+- 8 Hobbywelten-Relations.
+
+SICHERHEIT:
+- manual-only;
+- Dry-Run 0 Provider-Calls / 0 Writes;
+- Apply nur mit unverändertem Dry-Run-Fingerprint;
+- Live-Drift blockiert;
+- Retirement nur für echte Target-Bindings;
+- Legacy-Content bleibt erhalten.
+
+TEST:
+270/270 Regression PASS;
+24/24 Final-Target PASS;
+11/11 Baseline-Migration PASS;
+33/33 Release-PHP PASS.
+
+LIVE-GRENZE:
+Noch kein Live-Sync.
+NEXT = genau ein realer read-only Live-Dry-Run.
