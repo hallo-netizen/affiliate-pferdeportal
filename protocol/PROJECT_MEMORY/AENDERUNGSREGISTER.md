@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-09
+STAND: 2026-10-08
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -2277,3 +2277,29 @@ Der reale Fall `Wie alt werden Pferde?` zeigt: Kandidatenrouting kennt Kategorie
 
 KISS:
 Keine neue Kategoriearchitektur, kein neuer Runner, keine zweite Themenquelle. Nur denselben bereits registrierten Extension-Vertrag auch beim Lesen bestehender WordPress-Artikel verwenden. Reguläre Produktionskategorien, Multi-Category-Hardblock, Trash-Semantik, Provider-/Publish-Grenzen bleiben unverändert.
+
+## PSTE-REUSE-005 – Bedienoberfläche auf vier reale Arbeitsbereiche konsolidiert
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+PSTE 0.57.58 entfernt die verbliebenen separaten Alt-/Diagnoseoberflächen Themenkarte, Keywords & Longtails, Abdeckung, Prioritäten, Konflikte und Semantic Sandbox als eigene Adminseiten. Notwendige Funktion wird nicht gelöscht: Sandbox-/Review bleibt lazy unter `Themenprüfung`, strategische Gewichtung unter `Einstellungen`. Sichtbar bleiben exakt Produktion, Themenprüfung, Datenquellen, Einstellungen.
+
+WARUM:
+0.57.57 hatte den Produktionsweg bereits auf Automatik + Kurzer Dienstweg reduziert, schleppte intern aber weitere separat routbare Diagnoseoberflächen mit. Das widersprach dem KISS-Ziel und erhöhte Bedien-/Wartungsfläche ohne zusätzlichen Produktionsnutzen.
+
+GRENZE:
+Keine Entfernung der Sandbox-/Review-/Bestandsengine, keine Änderung des DB-/Performancekerns, keine zweite Architektur. 113/116 Dateien bleiben gegenüber 0.57.57 byteidentisch; vollständige Positiv-/Negativmatrix PASS.
+
+## PSERC-EVIDENCE-001 – Evidence-Vertrag und Runtime-Gate müssen identisch sein
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+PSERC 0.28.33 synchronisiert `portal-topic-evidence-gate-v1.json` exakt mit der bereits getesteten Runtime-Gateklasse. Akzeptiert werden identisch: `KEYWORD_SUGGESTION`, `RELATED_SEARCH`, `KEYWORD_IDEA`, `PAA`, `PAA_RELATED`, `GSC`, `INTERNAL_SEARCH`.
+
+WARUM:
+0.28.32 funktionierte für `PAA_RELATED`, aber die mitgelieferte Vertrags-JSON war enger als die Runtime. Auch wenn die JSON nicht die Laufzeitentscheidung traf, war dies ein vermeidbarer Metadaten-/Integritätsdrift.
+
+GRENZE:
+Keine Gate-Absenkung und keine neue Evidenzlogik. Der bestehende Runtimeumfang wird nur im Vertrag korrekt gespiegelt; Package Binding wird danach neu berechnet. Positiv-/Negativ- und Tampertests PASS.
