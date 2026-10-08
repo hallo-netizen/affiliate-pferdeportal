@@ -172,12 +172,12 @@ jobs:
           $links=[
             'leadalliance-pferdeversicherung'=>[
               'id'=>'leadalliance-pferdeversicherung','partner'=>'LeadAlliance','name'=>'Pferdeversicherung',
-              'link_text'=>'Pferdeversicherung vergleichen','tracking_url'=>'https://tracking.example.test/click?id=4711',
-              'destination_url'=>'https://ziel.example.test/pferdeversicherung','active'=>1,'created_at'=>time(),'updated_at'=>time()
+              'link_text'=>'Pferdeversicherung vergleichen','tracking_url'=>'https://example.com/click?id=4711',
+              'destination_url'=>'https://example.org/pferdeversicherung','active'=>1,'created_at'=>time(),'updated_at'=>time()
             ],
             'inaktiv-test'=>[
               'id'=>'inaktiv-test','partner'=>'Testpartner','name'=>'Inaktiv','link_text'=>'Nicht zeigen',
-              'tracking_url'=>'https://tracking.example.test/inaktiv','destination_url'=>'','active'=>0,'created_at'=>time(),'updated_at'=>time()
+              'tracking_url'=>'https://example.com/inaktiv','destination_url'=>'','active'=>0,'created_at'=>time(),'updated_at'=>time()
             ]
           ];
           $stored=$call('text_links_store_all',$links);
@@ -189,14 +189,14 @@ jobs:
           $ok(($registry['leadalliance-pferdeversicherung']['placeholder']??'')==='[affiliate_textlink id="leadalliance-pferdeversicherung"]','textlink_placeholder_stable');
           $html=$o->shortcode_text_link(['id'=>'leadalliance-pferdeversicherung']);
           $ok(strpos($html,'Pferdeversicherung vergleichen')!==false,'textlink_visible_text');
-          $ok(strpos($html,'https://tracking.example.test/click?id=4711')!==false,'textlink_tracking_output');
+          $ok(strpos($html,'https://example.com/click?id=4711')!==false,'textlink_tracking_output');
           $ok(strpos($html,'sponsored nofollow noopener')!==false,'textlink_rel_sponsored');
-          $ok(strpos($html,'ziel.example.test')===false,'textlink_destination_not_runtime_output');
+          $ok(strpos($html,'example.org')===false,'textlink_destination_not_runtime_output');
           $ok($o->shortcode_text_link(['id'=>'inaktiv-test'])==='','textlink_inactive_empty');
           $ok($o->shortcode_text_link(['id'=>'unbekannt'])==='','textlink_unknown_empty');
           $rendered=do_shortcode('Vor [affiliate_textlink id="leadalliance-pferdeversicherung"] Nach');
           $ok(strpos($rendered,'Pferdeversicherung vergleichen')!==false,'textlink_real_shortcode_render');
-          $links['leadalliance-pferdeversicherung']['tracking_url']='https://tracking.example.test/click?id=9999';
+          $links['leadalliance-pferdeversicherung']['tracking_url']='https://example.com/click?id=9999';
           $call('text_links_store_all',$links);
           $ok(strpos($o->shortcode_text_link(['id'=>'leadalliance-pferdeversicherung']),'id=9999')!==false,'textlink_central_update_applies');
           $links['leadalliance-pferdeversicherung']['active']=0;
