@@ -2,7 +2,7 @@
   "contract": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET",
   "version": "1.0",
   "date": "2026-10-08",
-  "status": "WORLD_INTERMEDIATE_STRUCTURE_PASS__GLOBAL_CORE_ROLE_RECHECK_PENDING__NO_WORDPRESS_WRITE",
+  "status": "WORLD_INTERMEDIATE_STRUCTURE_PASS__CORE359_RECHECK_COMPLETE__FACH_SOLLPROFIL_FROZEN__TECHNICAL_OBJECT_PLAN_PENDING",
   "authority": {
     "target_contract": "2.6",
     "assessment_rules": "1.6",
@@ -263,18 +263,15 @@
       "Dioramenmalerei -> EDITORIAL_TOPIC"
     ]
   },
-  "boundary": "World/intermediate structure is a fachlich verified draft. Complete target remains blocked because 299 of the 359 current CORE identities lack a current production-valid role/capacity decision under rules 1.6. Historical Batch 004-019 decisions are evidence only, not production authority.",
-  "next_action": "Run one global recheck of the 299 currently unassessed CORE identities under rules 1.6, reusing historical Batch 004-019 evidence where still valid but without a new batch loop. Then classify HOBBY_HUB vs ORIENTATION/other roles and materialize visible content categories only for validated HOBBY_HUBs.",
+  "boundary": "World/intermediate structure and the complete 359-role recheck are closed. All 279 HOBBY_HUBs have a validated visible content-category layer (1,292 categories total). No WordPress write or plugin change is released.",
+  "next_action": "Resolve the frozen fachliches Sollprofil into one exact technical object plan against the V1.14.1 baseline; hard-check IDs, slugs, parents, depth, demotions, aliases and object counts before any implementation.",
   "assessment_coverage": {
     "current_core_identities": 359,
-    "current_production_valid_assessed_core": 60,
-    "current_production_valid_unassessed_core": 299,
-    "valid_sources": [
-      "Batch 001",
-      "Batch 002",
-      "Batch 003 corrected",
-      "Expansion19"
-    ],
-    "historical_batches_004_019": "EVIDENCE_ONLY__DO_NOT_COUNT_AS_CURRENT_DECISION"
+    "decided_current_core": 359,
+    "hobby_hub": 279,
+    "orientation_universe": 53,
+    "editorial_topic": 22,
+    "alias_only": 5,
+    "final_core_identity_pages": 332
   }
 }
