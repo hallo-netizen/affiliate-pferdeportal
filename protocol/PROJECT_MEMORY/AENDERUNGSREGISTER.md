@@ -857,3 +857,20 @@ BELEG:
 
 NÄCHSTER SCHRITT:
 V1.13.1 real installieren und nur den read-only finalen Delta-Dry-Run ausführen.
+
+## HOBBYRAUSCH-HD001-20261008-R – Echter V1.13.1-Dry-Run validiert Zielplan, entdeckt alten Rollback
+
+WAS:
+Der erste reale V1.13.1-Dry-Run wurde ausgewertet.
+
+ERGEBNIS:
+Der neue Zielplan ist real PASS und entspricht dem erwarteten praktischen Profil.
+Gleichzeitig ist ein älterer Target-Tree-Sync noch nicht vollständig zurückgerollt.
+
+FOLGE:
+Kein neuer Codepfad nötig.
+Der vorhandene bounded Rollback wird zuerst abgeschlossen.
+Erst danach wird ein neuer finaler Dry-Run erstellt und anschließend – nur bei PASS – einmal synchronisiert.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD001_V1.13.1_REAL_LIVE_DRYRUN_20261008.json`.
