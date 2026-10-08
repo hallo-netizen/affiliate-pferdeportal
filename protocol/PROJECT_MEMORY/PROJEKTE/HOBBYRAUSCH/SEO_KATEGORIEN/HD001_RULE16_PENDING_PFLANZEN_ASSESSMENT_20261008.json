@@ -1,0 +1,1425 @@
+{
+  "contract": "HD001_RULE16_PENDING_PFLANZEN_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__33_OF_33_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Bonsai",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Bonsai & Miniatur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Baumwahl",
+          "intent_count": 5,
+          "article_intents": [
+            "Bonsai für Anfänger auswählen",
+            "Geeignete Baumarten für Bonsai",
+            "Indoor- oder Outdoor-Bonsai unterscheiden",
+            "Gesunden Bonsai beim Kauf erkennen",
+            "Ersten Bonsai-Standort wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat, Schale & Umtopfen",
+          "intent_count": 5,
+          "article_intents": [
+            "Bonsai-Substrat mischen",
+            "Bonsaischale passend auswählen",
+            "Bonsai richtig umtopfen",
+            "Wurzeln beim Umtopfen schneiden",
+            "Drainage im Bonsaitopf verbessern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gießen, Düngen & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Bonsai richtig gießen",
+            "Bonsai düngen nach Jahreszeit",
+            "Lichtbedarf von Bonsai beurteilen",
+            "Bonsai im Sommer schützen",
+            "Bonsai überwintern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schnitt & Gestaltung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bonsai Formschnitt planen",
+            "Bonsai Triebe zurückschneiden",
+            "Bonsai drahten",
+            "Draht rechtzeitig entfernen",
+            "Bonsai-Grundformen verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gesundheit & Langzeitpflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Bonsai verliert Blätter: Ursachen",
+            "Schädlinge am Bonsai erkennen",
+            "Wurzelfäule beim Bonsai vermeiden",
+            "Bonsai nach starkem Rückschnitt pflegen",
+            "Pflegekalender für Bonsai führen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns generic bonsai cultivation, styling and long-term care. Seed-starting stays a focused editorial path; Kusamono and Kokedama retain their own practices.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bonsai aus Samen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Bonsai & Miniatur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns the specific seed-to-young-bonsai pathway. Generic mature-bonsai care and styling belongs to Bonsai.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bromelien",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Orchideen & Exoten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Bromelien für Anfänger auswählen",
+            "Trichterbromelien unterscheiden",
+            "Epiphytische Bromelien einordnen",
+            "Geeigneten Standort für Bromelien",
+            "Gesunde Bromelie beim Kauf erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat, Wasser & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Substrat für Bromelien mischen",
+            "Bromelien richtig gießen",
+            "Wasser im Trichter richtig handhaben",
+            "Luftfeuchtigkeit für Bromelien",
+            "Bromelien düngen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Blüte, Kindel & Vermehrung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bromelien zur Blüte pflegen",
+            "Kindel an Bromelien erkennen",
+            "Bromelien-Kindel abtrennen",
+            "Kindel erfolgreich bewurzeln",
+            "Mutterpflanze nach der Blüte pflegen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns bromeliad selection, substrate, watering and propagation; Tillandsien retain their specialist air-plant ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Chili-Zucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Sorten & Zuchtziele",
+          "intent_count": 5,
+          "article_intents": [
+            "Chilisorten für Zucht auswählen",
+            "Schärfe als Zuchtziel planen",
+            "Farbe und Fruchtform selektieren",
+            "Frühreife Chilis selektieren",
+            "Zuchtziele über Generationen dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestäubung & Kreuzung",
+          "intent_count": 5,
+          "article_intents": [
+            "Chiliblüten kontrolliert bestäuben",
+            "Chilisorten gezielt kreuzen",
+            "Blüten vor Fremdbestäubung schützen",
+            "Kreuzungen eindeutig markieren",
+            "Saatgut aus Kreuzungen gewinnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Selektion & Stabilisierung",
+          "intent_count": 5,
+          "article_intents": [
+            "F1-Chilipflanzen beurteilen",
+            "F2-Generation selektieren",
+            "Merkmale über Generationen stabilisieren",
+            "Unerwünschte Pflanzen aussortieren",
+            "Zuchtlinien sauber dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Saatgut & Aufzucht",
+          "intent_count": 5,
+          "article_intents": [
+            "Chilisamen richtig trocknen",
+            "Saatgut keimfähig lagern",
+            "Chilis für Zucht früh anziehen",
+            "Keimlinge eindeutig beschriften",
+            "Saatgut verschiedener Generationen trennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns chili breeding, seed selection and line stabilization; general vegetable cultivation belongs to Gemüseanbau.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "fleischfressende Pflanzen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Orchideen & Exoten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_CONFIRMED",
+      "size_class": "ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Alias of Karnivoren. Semantic duplicate of the same carnivorous-plant practice; keep one SEO owner.",
+      "canonical_owner": "Karnivoren",
+      "live_object_preservation": "preserve older canonical live object Karnivoren #902325; alias object #902329 is newer",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Hydrokultur",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Hydroponik & Indoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Gefäße & Substrate",
+          "intent_count": 5,
+          "article_intents": [
+            "Hydrokultur-Gefäß auswählen",
+            "Blähton für Hydrokultur vorbereiten",
+            "Wasserstandsanzeiger verwenden",
+            "Inneneinsatz richtig wählen",
+            "Wurzeln von Erde auf Hydrokultur umstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Nährlösung & Wasser",
+          "intent_count": 5,
+          "article_intents": [
+            "Nährlösung für Hydrokultur ansetzen",
+            "Dünger für Hydrokultur dosieren",
+            "Wasserstand richtig halten",
+            "Nährlösung regelmäßig erneuern",
+            "Salzablagerungen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pflege & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Hydrokultur-Pflanzen richtig gießen",
+            "Wurzeln in Hydrokultur kontrollieren",
+            "Wurzelfäule erkennen",
+            "Algen im Gefäß vermeiden",
+            "Hydrokultur nach Urlaub wieder stabilisieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns classic hydroculture with inert substrate and reservoir systems; generic hydroponic system orientation stays with Hydroponik.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Hydroponik",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Hydroponik & Indoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic soilless nutrient-solution system orientation and comparison. Hydrokultur and Semi-Hydro retain their specific methods.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Indoor-Growing",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Hydroponik & Indoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic controlled indoor-plant cultivation orientation across light, climate and space. Specific hydroponic and crop practices retain their own owners.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kakteen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Kakteen & Sukkulenten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Kakteen für Anfänger auswählen",
+            "Wüsten- und Waldkakteen unterscheiden",
+            "Lichtbedarf von Kakteen",
+            "Kakteen im Sommer draußen stellen",
+            "Kakteen überwintern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat & Gießen",
+          "intent_count": 5,
+          "article_intents": [
+            "Kakteensubstrat mischen",
+            "Mineralisches Substrat für Kakteen",
+            "Kakteen richtig gießen",
+            "Staunässe bei Kakteen vermeiden",
+            "Kakteen nach Winterruhe angießen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Umtopfen & Vermehrung",
+          "intent_count": 5,
+          "article_intents": [
+            "Kakteen richtig umtopfen",
+            "Kakteen-Ableger bewurzeln",
+            "Kakteen aus Samen ziehen",
+            "Stecklinge von Kakteen trocknen lassen",
+            "Wurzelzustand beim Umtopfen prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Blüte, Dünger & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Kakteen zum Blühen bringen",
+            "Kakteendünger dosieren",
+            "Wollläuse an Kakteen erkennen",
+            "Fäulnis bei Kakteen behandeln",
+            "Sonnenbrand an Kakteen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns cactus-specific cultivation, substrate, seasonal care and propagation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Karnivoren",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Orchideen & Exoten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Karnivoren für Anfänger auswählen",
+            "Venusfliegenfalle richtig einordnen",
+            "Sonnentau-Arten unterscheiden",
+            "Schlauchpflanzen für Einsteiger",
+            "Kannenpflanzen als Zimmerkarnivoren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasser, Substrat & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Karnivoren mit geeignetem Wasser gießen",
+            "Substrat für Karnivoren mischen",
+            "Anstauverfahren richtig nutzen",
+            "Lichtbedarf von Karnivoren",
+            "Karnivoren ohne Dünger pflegen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ruhezeit & Jahrespflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Venusfliegenfalle überwintern",
+            "Sarracenia Winterruhe gestalten",
+            "Tropische Karnivoren im Winter pflegen",
+            "Karnivoren im Frühjahr umtopfen",
+            "Sommerstandort für Karnivoren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vermehrung & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Karnivoren aus Samen ziehen",
+            "Teilung von Karnivoren",
+            "Blattstecklinge bei Sonnentau",
+            "Schimmel im Karnivorentopf vermeiden",
+            "Braune Fallen richtig beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns the canonical carnivorous-plant hobby including species groups, water, substrate and dormancy; 'fleischfressende Pflanzen' is alias-only.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kokedama",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Moos & Miniaturgärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Pflanzen & Material",
+          "intent_count": 5,
+          "article_intents": [
+            "Pflanzen für Kokedama auswählen",
+            "Erde für Kokedama mischen",
+            "Moos für Kokedama vorbereiten",
+            "Garn für Kokedama auswählen",
+            "Kokedama-Größe planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufbau & Bindung",
+          "intent_count": 5,
+          "article_intents": [
+            "Kokedama-Ball formen",
+            "Wurzeln für Kokedama vorbereiten",
+            "Moos gleichmäßig auflegen",
+            "Kokedama stabil umwickeln",
+            "Kokedama aufhängen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Gießen & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Kokedama richtig tauchen",
+            "Gießbedarf am Gewicht erkennen",
+            "Kokedama düngen",
+            "Moos am Kokedama feucht halten",
+            "Kokedama umtopfen oder erneuern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns moss-ball construction, plant choice, watering and display; broader bonsai and moss cultivation remain separate.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kusamono",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Moos & Miniaturgärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Pflanzen & Komposition",
+          "intent_count": 5,
+          "article_intents": [
+            "Pflanzen für Kusamono auswählen",
+            "Gräser und Stauden kombinieren",
+            "Saisonwirkung im Kusamono planen",
+            "Proportionen einer Kusamono-Gruppe",
+            "Kusamono als Einzelpräsentation gestalten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schalen & Substrat",
+          "intent_count": 5,
+          "article_intents": [
+            "Schale für Kusamono auswählen",
+            "Substrat für Kusamono mischen",
+            "Drainage in flachen Schalen",
+            "Moosoberfläche gestalten",
+            "Pflanzen in der Schale positionieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pflege & Präsentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Kusamono richtig gießen",
+            "Kusamono zurückschneiden",
+            "Kusamono überwintern",
+            "Kusamono für Ausstellung vorbereiten",
+            "Verblühte Pflanzen im Arrangement ersetzen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns kusamono accent-plant composition, containers, seasonal presentation and care.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Lithops",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Kakteen & Sukkulenten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Lithops für Anfänger auswählen",
+            "Lithops-Arten grob unterscheiden",
+            "Gesunde Lithops beim Kauf erkennen",
+            "Jahreszyklus von Lithops verstehen",
+            "Geeigneten Standort für Lithops wählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat & Gießen",
+          "intent_count": 5,
+          "article_intents": [
+            "Mineralisches Substrat für Lithops",
+            "Lithops richtig gießen",
+            "Gießpause während Blattwechsel",
+            "Lithops im Sommer handhaben",
+            "Staunässe bei Lithops vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Blüte, Samen & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Lithops zur Blüte pflegen",
+            "Lithops bestäuben",
+            "Lithops aus Samen ziehen",
+            "Lithops werden weich: Ursachen",
+            "Zu lang gewachsene Lithops korrigieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Lithops-specific seasonal cycle, watering, substrate and seed propagation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Microgreens",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Essbare Pflanzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Saatgut & Arten",
+          "intent_count": 5,
+          "article_intents": [
+            "Microgreens für Anfänger auswählen",
+            "Radieschen als Microgreen ziehen",
+            "Brokkoli-Microgreens anbauen",
+            "Erbsen-Microgreens anbauen",
+            "Geeignetes Saatgut für Microgreens erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Schalen, Substrat & Aussaat",
+          "intent_count": 5,
+          "article_intents": [
+            "Microgreen-Schale auswählen",
+            "Substrat für Microgreens",
+            "Microgreens dicht richtig aussäen",
+            "Saatgut vorquellen oder nicht",
+            "Keimphase mit Abdeckung steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Licht, Wasser & Klima",
+          "intent_count": 5,
+          "article_intents": [
+            "Microgreens richtig beleuchten",
+            "Microgreens von unten gießen",
+            "Luftzirkulation verbessern",
+            "Temperatur für Microgreens",
+            "Schimmel bei Microgreens vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ernte & Folgeaussaat",
+          "intent_count": 5,
+          "article_intents": [
+            "Microgreens richtig ernten",
+            "Erntezeitpunkt bestimmen",
+            "Microgreens nach Ernte lagern",
+            "Schalen zwischen Aussaaten reinigen",
+            "Gestaffelte Microgreen-Aussaat planen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns canonical microgreen cultivation from seed selection through trays, light and harvest. Mikrogrün is alias-only.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mikrogrün",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Essbare Pflanzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_CONFIRMED",
+      "size_class": "ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Alias of Microgreens. German synonym for the same microgreen cultivation practice; keep one SEO owner.",
+      "canonical_owner": "Microgreens",
+      "live_object_preservation": "preserve older canonical live object Microgreens #900182; alias object Mikrogrün #902438 is newer",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mooskultur",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Moos & Miniaturgärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Moosarten & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Moos für Kultur auswählen",
+            "Schattenmoose und Lichtbedarf",
+            "Geeigneten Untergrund für Moos",
+            "Feuchtigkeit am Standort beurteilen",
+            "Moos naturverträglich beschaffen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ansetzen & Vermehren",
+          "intent_count": 5,
+          "article_intents": [
+            "Moosstücke auf Substrat ansetzen",
+            "Moos auf Stein etablieren",
+            "Moos auf Holz kultivieren",
+            "Moosflächen durch Teilung vergrößern",
+            "Mooskultur gleichmäßig feucht starten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Pflege & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Moos richtig besprühen",
+            "Algen in Mooskultur vermeiden",
+            "Schimmel auf Moos beurteilen",
+            "Moos wird braun: Ursachen",
+            "Moosfläche von Fremdkräutern reinigen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns deliberate moss cultivation and maintenance; Kokedama/Kusamono remain separate compositions.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Orchideenbestäubung",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Specific pollination technique owned by Orchideenzucht; it does not need a separate hobby hub.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Orchideenzucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Orchideen & Exoten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Elternpflanzen & Zuchtziele",
+          "intent_count": 5,
+          "article_intents": [
+            "Orchideen für Kreuzung auswählen",
+            "Zuchtziel bei Orchideen definieren",
+            "Blühmerkmale dokumentieren",
+            "Gesunde Elternpflanzen vorbereiten",
+            "Kreuzungen eindeutig beschriften"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestäubung & Samenkapseln",
+          "intent_count": 5,
+          "article_intents": [
+            "Orchideenblüten kontrolliert bestäuben",
+            "Pollinien richtig übertragen",
+            "Bestäubte Blüte markieren",
+            "Samenskapselreife beurteilen",
+            "Orchideensamen gewinnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aussaat & Jungpflanzen",
+          "intent_count": 5,
+          "article_intents": [
+            "Orchideensamen steril aussäen",
+            "Nährmedium für Orchideenaussaat verstehen",
+            "Protokorme erkennen",
+            "Jungpflanzen aus dem Gefäß nehmen",
+            "Orchideen-Sämlinge akklimatisieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Selektion & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Orchideen-Sämlinge selektieren",
+            "Blühbeginn von Sämlingen dokumentieren",
+            "Merkmale zwischen Geschwistern vergleichen",
+            "Zuchtlinien langfristig dokumentieren",
+            "Ergebnisse einer Kreuzung bewerten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns orchid breeding and propagation from pollination through seed/seedling selection; generic orchid care remains broader plant content.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pflanzenkreuzungen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic plant-crossing orientation, genetics basics and method comparison. Crop-specific breeding such as Chili- or Tomatensorten-Zucht retains specific ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pflanzenvermehrung",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic propagation orientation across seed, cuttings, division and layering. Stecklingszucht and species-specific propagation retain specialist ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pilzklonen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Pilze & Kulturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Specific tissue-cloning technique belongs under the broader Pilzzucht/Speisepilzzucht workflow, not a separate hub.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pilzsubstrate herstellen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Pilze & Kulturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Specific substrate-preparation workflow belongs under Pilzzucht/Speisepilzzucht; a separate hub would duplicate sterilization, inoculation and crop ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Pilzzucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Pilze & Kulturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic mushroom-cultivation orientation and comparison. Speisepilzzucht owns edible species-specific cultivation and production workflows.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Riesenkürbis-Zucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Saatgut & Genetik",
+          "intent_count": 5,
+          "article_intents": [
+            "Riesenkürbis-Saatgut auswählen",
+            "Abstammung von Giant-Pumpkin-Saatgut verstehen",
+            "Saatgut keimen lassen",
+            "Zuchtziele für Riesenkürbis planen",
+            "Samenlinien dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestäubung & Fruchtwahl",
+          "intent_count": 5,
+          "article_intents": [
+            "Riesenkürbis kontrolliert bestäuben",
+            "Blüten für Kreuzung schützen",
+            "Fruchtansätze beurteilen",
+            "Eine Hauptfrucht auswählen",
+            "Kreuzungen eindeutig beschriften"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wachstum & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Riesenkürbis richtig bewässern",
+            "Nährstoffversorgung planen",
+            "Ranken führen und bewurzeln",
+            "Frucht vor Sonne schützen",
+            "Riesenkürbis-Wachstum messen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ernte & Saatgut",
+          "intent_count": 5,
+          "article_intents": [
+            "Riesenkürbis sicher ernten",
+            "Große Früchte transportieren",
+            "Kürbis wiegen und dokumentieren",
+            "Saatgut aus Riesenkürbis gewinnen",
+            "Saatgut trocken lagern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns giant-pumpkin breeding, pollination, fruit selection and season management.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Saatgut-Tausch",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Bestand & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Saatgutbestand für Tausch erfassen",
+            "Sortennamen eindeutig dokumentieren",
+            "Erntejahr beim Saatgut vermerken",
+            "Herkunft von Saatgut notieren",
+            "Tauschlisten übersichtlich führen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Qualität & Verpackung",
+          "intent_count": 5,
+          "article_intents": [
+            "Tausch-Saatgut richtig trocknen",
+            "Keimfähigkeit vor Tausch prüfen",
+            "Saatgut portionieren",
+            "Saatgutbeutel beschriften",
+            "Saatgut trocken versenden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tauschpraxis & Netzwerk",
+          "intent_count": 5,
+          "article_intents": [
+            "Saatgut-Tauschpartner finden",
+            "Tauschregeln vorab klären",
+            "Saatgutbörsen vorbereiten",
+            "Tauschpakete organisieren",
+            "Erhaltenes Saatgut in Bestand übernehmen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hobby seed exchange, documentation, packaging and network practice; conservation breeding remains with Saatguterhaltung.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Saatguterhaltung",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Sorten & Vermehrungsplanung",
+          "intent_count": 5,
+          "article_intents": [
+            "Erhaltenswerte Sorte auswählen",
+            "Mindestzahl an Pflanzen planen",
+            "Selbst- und Fremdbefruchter unterscheiden",
+            "Vermehrungsfläche planen",
+            "Generation einer Saatgutlinie dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Isolation & Bestäubung",
+          "intent_count": 5,
+          "article_intents": [
+            "Sorten vor Verkreuzung schützen",
+            "Isolationsabstände einordnen",
+            "Blüten abdecken",
+            "Handbestäubung zur Sortenerhaltung",
+            "Fremdbestäubung erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Selektion & Saatguternte",
+          "intent_count": 5,
+          "article_intents": [
+            "Sortentypische Pflanzen selektieren",
+            "Off-Type-Pflanzen aussortieren",
+            "Saatgutreife erkennen",
+            "Saatgut sauber ernten",
+            "Saatgut nach Pflanzen getrennt dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Trocknung, Lagerung & Keimtest",
+          "intent_count": 5,
+          "article_intents": [
+            "Saatgut richtig trocknen",
+            "Saatgut luftdicht lagern",
+            "Kühle Lagerung organisieren",
+            "Keimtest durchführen",
+            "Altes Saatgut nachtesten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns maintaining reproducible seed lines, isolation, selection and storage.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "seltene Zimmerpflanzen",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Zimmerpflanzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Auswahl & Herkunft",
+          "intent_count": 5,
+          "article_intents": [
+            "Seltene Zimmerpflanzen für Einsteiger auswählen",
+            "Importpflanzen richtig beurteilen",
+            "Gesunde seltene Pflanze beim Kauf erkennen",
+            "Art und Sorte dokumentieren",
+            "Quellen für seltene Pflanzen bewerten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Akklimatisierung & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Importpflanzen akklimatisieren",
+            "Licht für seltene Zimmerpflanzen",
+            "Luftfeuchtigkeit anpassen",
+            "Temperaturstress vermeiden",
+            "Quarantäne neuer Pflanzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Substrat an seltene Arten anpassen",
+            "Gießrhythmus beobachten",
+            "Düngung vorsichtig einstellen",
+            "Wurzelzustand kontrollieren",
+            "Seltene Pflanzen umtopfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vermehrung & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Seltene Zimmerpflanzen über Stecklinge vermehren",
+            "Teilung bei geeigneten Arten",
+            "Schädlinge früh erkennen",
+            "Wurzelfäule behandeln",
+            "Wachstumsprobleme systematisch dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns collecting/cultivating uncommon indoor plants, acclimation and specialist sourcing; generic houseplant care stays at broader plant level.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Semi-Hydro",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Hydroponik & Indoor",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Gefäße & Substrate",
+          "intent_count": 5,
+          "article_intents": [
+            "Semi-Hydro für Anfänger",
+            "LECA für Semi-Hydro vorbereiten",
+            "Pon für Semi-Hydro einordnen",
+            "Gefäß mit Reservoir wählen",
+            "Wasserstandsanzeige einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Umstellung & Wurzeln",
+          "intent_count": 5,
+          "article_intents": [
+            "Pflanze von Erde auf Semi-Hydro umstellen",
+            "Alte Erde von Wurzeln entfernen",
+            "Übergangswurzeln beobachten",
+            "Wurzelfäule nach Umstellung erkennen",
+            "Pflanzen für Semi-Hydro auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Nährlösung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Semi-Hydro-Nährlösung dosieren",
+            "Reservoir auffüllen",
+            "System regelmäßig spülen",
+            "Salzablagerungen reduzieren",
+            "pH und Leitfähigkeit bei Semi-Hydro einordnen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns semi-hydro container/substrate practice, reservoirs and transition from soil.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Speisepilzzucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Pilze & Kulturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Speisepilze für Anfänger auswählen",
+            "Austernseitling zuhause züchten",
+            "Shiitake-Zucht einordnen",
+            "Fertigkultur oder eigener Ansatz",
+            "Zuchtzyklus von Speisepilzen verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Brut & Substrat",
+          "intent_count": 5,
+          "article_intents": [
+            "Pilzbrut auswählen",
+            "Strohsubstrat vorbereiten",
+            "Holzsubstrat für Pilze",
+            "Substrat pasteurisieren",
+            "Substrat gleichmäßig beimpfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Durchwachsen & Fruchtung",
+          "intent_count": 5,
+          "article_intents": [
+            "Myzel-Durchwachsen beurteilen",
+            "Temperatur für Inkubation steuern",
+            "Fruchtung auslösen",
+            "Luftfeuchtigkeit im Fruchtungsraum",
+            "Frischluft für Pilzfruchtung"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ernte, Folgeflush & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Speisepilze richtig ernten",
+            "Zweiten Flush vorbereiten",
+            "Kontamination erkennen",
+            "Zu lange Stiele diagnostizieren",
+            "Verbrauchtes Substrat weiterverwenden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns edible mushroom cultivation from culture/spawn and substrate through fruiting and harvest.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Stecklingszucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Stecklinge auswählen",
+          "intent_count": 5,
+          "article_intents": [
+            "Geeignete Triebe für Stecklinge wählen",
+            "Kopf- und Teilstecklinge unterscheiden",
+            "Mutterpflanze vorbereiten",
+            "Stecklinge sauber schneiden",
+            "Blattfläche bei Stecklingen reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bewurzelung & Substrat",
+          "intent_count": 5,
+          "article_intents": [
+            "Substrat für Stecklinge wählen",
+            "Stecklinge in Wasser bewurzeln",
+            "Stecklinge in Substrat bewurzeln",
+            "Bewurzelungshormon einordnen",
+            "Feuchtigkeit während Bewurzelung steuern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Klima, Pflege & Selektion",
+          "intent_count": 5,
+          "article_intents": [
+            "Licht für Stecklinge einstellen",
+            "Luftfeuchtigkeit für Stecklinge",
+            "Fäulnis bei Stecklingen vermeiden",
+            "Bewurzelte Stecklinge eintopfen",
+            "Starke Jungpflanzen selektieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns systematic propagation and selection through cuttings; generic propagation comparison remains with Pflanzenvermehrung.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Sukkulenten",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Kakteen & Sukkulenten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Arten & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Sukkulenten für Anfänger auswählen",
+            "Rosetten- und Stammsukkulenten unterscheiden",
+            "Lichtbedarf von Sukkulenten",
+            "Sukkulenten im Sommer draußen",
+            "Sukkulenten überwintern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Substrat & Gießen",
+          "intent_count": 5,
+          "article_intents": [
+            "Substrat für Sukkulenten mischen",
+            "Mineralischen Anteil wählen",
+            "Sukkulenten richtig gießen",
+            "Trockenphase richtig einschätzen",
+            "Staunässe vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Vermehrung & Umtopfen",
+          "intent_count": 5,
+          "article_intents": [
+            "Sukkulenten über Blatt vermehren",
+            "Sukkulenten-Stecklinge bewurzeln",
+            "Ableger abtrennen",
+            "Sukkulenten umtopfen",
+            "Wurzeln beim Umtopfen prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Probleme & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Sukkulenten vergeilen: Ursachen",
+            "Sonnenbrand erkennen",
+            "Wollläuse bekämpfen",
+            "Fäulnis früh erkennen",
+            "Sukkulenten kompakt weiterkultivieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns non-cactus succulent cultivation, substrate, watering and propagation; Kakteen remain a separate owner.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Tillandsien",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Orchideen & Exoten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Arten & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Tillandsien für Anfänger auswählen",
+            "Grüne und graue Tillandsien unterscheiden",
+            "Lichtbedarf von Tillandsien",
+            "Luftzirkulation sicherstellen",
+            "Tillandsien richtig befestigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wasser & Nährstoffe",
+          "intent_count": 5,
+          "article_intents": [
+            "Tillandsien richtig wässern",
+            "Tauchen oder Sprühen vergleichen",
+            "Tillandsien nach dem Wässern trocknen",
+            "Dünger für Tillandsien dosieren",
+            "Wasserqualität für Tillandsien"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Blüte, Kindel & Probleme",
+          "intent_count": 5,
+          "article_intents": [
+            "Tillandsien zur Blüte pflegen",
+            "Kindel an Tillandsien abtrennen",
+            "Tillandsien vermehren",
+            "Fäulnis bei Tillandsien erkennen",
+            "Vertrocknete Blattspitzen beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns Tillandsia-specific mounting, watering, air circulation and propagation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Tomatensorten-Zucht",
+      "natural_world": "pflanzen",
+      "parent_intermediate": "Saatgut & Zucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Sorten & Zuchtziele",
+          "intent_count": 5,
+          "article_intents": [
+            "Tomatensorten für Kreuzung auswählen",
+            "Geschmack als Zuchtziel definieren",
+            "Farbe und Form selektieren",
+            "Krankheitsrobustheit als Zuchtziel",
+            "Frühreife Tomaten selektieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestäubung & Kreuzung",
+          "intent_count": 5,
+          "article_intents": [
+            "Tomatenblüte für Kreuzung vorbereiten",
+            "Tomaten kontrolliert bestäuben",
+            "Blüten vor Fremdpollen schützen",
+            "Kreuzung eindeutig markieren",
+            "F1-Saatgut gewinnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Selektion & Stabilisierung",
+          "intent_count": 5,
+          "article_intents": [
+            "F1-Tomaten beurteilen",
+            "F2-Population selektieren",
+            "Merkmale über Generationen stabilisieren",
+            "Pflanzen einzeln dokumentieren",
+            "Unerwünschte Linien aussortieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Saatgut & Archiv",
+          "intent_count": 5,
+          "article_intents": [
+            "Tomatensaatgut fermentieren",
+            "Saatgut gründlich trocknen",
+            "Generationen getrennt lagern",
+            "Keimtest durchführen",
+            "Zuchtlinien langfristig archivieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns tomato breeding, controlled crosses, selection and line stabilization.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 33,
+    "hobby_hub": 22,
+    "orientation_universe": 5,
+    "editorial_topic": 4,
+    "alias_only": 2,
+    "visible_content_categories": 79,
+    "article_intents": 395
+  },
+  "next_action": "Continue with pending current CORE identities in Tiere."
+}
