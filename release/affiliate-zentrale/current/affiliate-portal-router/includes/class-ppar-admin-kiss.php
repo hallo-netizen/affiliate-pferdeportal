@@ -24,7 +24,7 @@ final class PPAR_Affiliate_Admin_KISS {
         if (self::$booted) { return; }
         self::$booted = true;
         add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
-        add_action('admin_head', array(__CLASS__, 'hide_legacy_navigation_css'), 10050);
+        add_action('admin_menu', array(__CLASS__, 'prune_legacy_navigation'), 10060);
         add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
         add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
         add_action('admin_post_' . self::HOUSEKEEPING_ACTION, array(__CLASS__, 'handle_housekeeping_run'));
@@ -55,15 +55,14 @@ final class PPAR_Affiliate_Admin_KISS {
         add_submenu_page($parent,'Steuerung & System','Steuerung & System','manage_options','affiliate-portal-kiss-system',array(__CLASS__,'render_system'));
     }
 
-    public static function hide_legacy_navigation_css() {
-        if (!current_user_can('manage_options')) { return; }
-        $selectors = array();
+    public static function prune_legacy_navigation() {
+        if (!current_user_can('manage_options') || !function_exists('remove_submenu_page')) { return; }
+        $parent = self::parent_slug();
         foreach (self::hidden_legacy_slugs() as $slug) {
-            $selectors[] = '#toplevel_page_' . self::parent_slug() . ' .wp-submenu a[href="admin.php?page=' . $slug . '"]';
-            $selectors[] = '#toplevel_page_' . self::parent_slug() . ' .wp-submenu a[href$="page=' . $slug . '"]';
+            // Nur aus der sichtbaren Navigation entfernen. Die registrierte
+            // Fachseite und direkte Links aus den KISS-Seiten bleiben erhalten.
+            remove_submenu_page($parent, $slug);
         }
-        if (!$selectors) { return; }
-        echo '<style id="ppar-kiss-legacy-nav-hide">' . implode(',', $selectors) . '{display:none!important}</style>';
     }
 
     private static function button($label, $slug, $primary = false) {
@@ -87,8 +86,8 @@ final class PPAR_Affiliate_Admin_KISS {
             echo '<section class="postbox" style="padding:16px;margin:0"><h2 style="margin-top:0">'.esc_html($label).'</h2>';
             echo '<p><strong>'.esc_html($state === 'active' ? 'Aktiv' : 'Vorbereitet').'</strong></p>';
             if (!empty($source['purpose'])) { echo '<p>'.esc_html((string)$source['purpose']).'</p>'; }
-            if (!empty($source['route'])) { echo '<p class="description">Technischer Weg: '.esc_html((string)$source['route']).'</p>'; }
-            if (!empty($source['activation'])) { echo '<p class="description">Aktivierung: '.esc_html((string)$source['activation']).'</p>'; }
+            // Technische Route/Aktivierungsdetails bleiben in der Source-Plan-
+            // Autoritaet erhalten, gehoeren aber nicht in die normale KISS-Oberflaeche.
             if (!empty($source['note'])) { echo '<p><strong>'.esc_html((string)$source['note']).'</strong></p>'; }
             echo '</section>';
         }
