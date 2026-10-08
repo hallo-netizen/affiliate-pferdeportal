@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.210
+ * Version: 6.72.211
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.210';
+    const VERSION = '6.72.211';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -269,13 +269,14 @@ final class Pferdeportal_Affiliate_Router {
     }
 
     private function __construct() {
+        $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
         $this->idealo_register_hooks();
         $this->digistore24_register_hooks();
         $this->tariff_tools_register_hooks();
         add_action('init', array($this, 'register_campaign_post_type'), 5);
         add_action('init', array($this, 'register_shortcodes'));
-        add_action('init', array($this, 'maybe_upgrade_health_checker'), 6);
-        add_action('init', array($this, 'ensure_health_cron_schedule'), 20);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_health_checker'), 6); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_health_cron_schedule'), 20); }
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         // V6.72.104: Breadcrumb-Geometrie gehoert wieder ausschliesslich dem
         // Designplugin. Affiliate reserviert keinen Layoutplatz mehr. Der bestehende
@@ -317,31 +318,31 @@ final class Pferdeportal_Affiliate_Router {
         add_action(self::AUTOMATION_CRON_HOOK, array($this, 'run_scheduled_partner_sync'));
         add_action(self::AUTOMATION_WORKER_HOOK, array($this, 'run_automation_worker'));
         add_action(self::ADCELL_BATCH_WORKER_HOOK, array($this, 'run_adcell_batch_worker'));
-        add_action('init', array($this, 'maybe_resume_adcell_batch_worker'), 28);
-        add_action('init', array($this, 'maybe_restore_v67294_banner_state'), 26);
-        add_action('init', array($this, 'maybe_restore_published_banner_campaign_consistency_v672100'), 27);
-        add_action('init', array($this, 'ensure_full_pool_automation'), 29);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_resume_adcell_batch_worker'), 28); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_restore_v67294_banner_state'), 26); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_restore_published_banner_campaign_consistency_v672100'), 27); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_full_pool_automation'), 29); }
         // V6.72.179: Repair stale page-banner bindings through the canonical
         // target-identity resolver. Admin-only and one-time: no frontend cost.
-        add_action('admin_init', array($this, 'maybe_repair_v672179_page_banner_target_identity_mismatch'), 32);
-        add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
-        add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'maybe_repair_v672179_page_banner_target_identity_mismatch'), 32); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31); }
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
-        add_action('init', array($this, 'maybe_upgrade_adcell_destination_url_v672189'), 32);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_adcell_destination_url_v672189'), 32); }
         add_action('ppar_v672189_adcell_destination_url_resync', array($this, 'run_v672189_adcell_destination_url_resync'));
-        add_action('init', array($this, 'maybe_upgrade_banner_target_map_v672190'), 33);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_banner_target_map_v672190'), 33); }
         add_action('ppar_v672190_banner_target_map_resync', array($this, 'run_v672190_banner_target_map_resync'));
-        add_action('admin_init', array($this, 'maybe_rebuild_banner_target_map_v672194'), 34);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'maybe_rebuild_banner_target_map_v672194'), 34); }
         add_action('ppar_v672194_banner_target_rebuild', array($this, 'run_v672194_banner_target_rebuild'));
-        add_action('admin_init', array($this, 'maybe_reconcile_banner_state_v672195'), 35);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'maybe_reconcile_banner_state_v672195'), 35); }
         add_action('ppar_v672195_banner_reconcile', array($this, 'run_v672195_banner_reconcile'));
-        add_action('admin_init', array($this, 'maybe_upgrade_adcell_banner_import_basis_v672199'), 36);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'maybe_upgrade_adcell_banner_import_basis_v672199'), 36); }
         add_action('ppar_v672199_adcell_banner_basis_resync', array($this, 'run_v672199_adcell_banner_basis_resync'));
-        add_action('admin_init', array($this, 'maybe_rebuild_banner_kiss_v672201'), 37);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'maybe_rebuild_banner_kiss_v672201'), 37); }
         add_action('ppar_v672203_banner_kiss_reconcile', array($this, 'run_v672201_banner_kiss_reconcile'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
-        add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
+        if (!$is_ajax_request) { add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33); }
         add_action(self::BANNER_LIBRARY_MIGRATION_HOOK, array($this, 'run_banner_library_migration_v672185'));
         add_action(self::PARTNER_ANALYTICS_CRON_HOOK, array($this, 'run_partner_analytics_refresh'));
         add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now'));
@@ -350,33 +351,33 @@ final class Pferdeportal_Affiliate_Router {
         // AFF-ERR-043: exact historical product-state restore is explicit/bounded only.
         // Never run it on init/frontend/REST.
         add_action(self::AWIN_PROGRAMME_REFRESH_CRON_HOOK, array($this, 'run_awin_programme_inventory_refresh'));
-        add_action('init', array($this, 'ensure_awin_programme_inventory_schedule'), 23);
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_awin_programme_inventory_schedule'), 23); }
         add_action(self::HOUSEKEEPING_CRON_HOOK, array($this, 'run_housekeeping'));
-        add_action('init', array($this, 'ensure_housekeeping_schedule'), 27);
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_housekeeping_schedule'), 27); }
         add_filter('cron_schedules', array($this, 'automation_cron_schedules'));
-        add_action('init', array($this, 'maybe_apply_article_plan_schema_v13_upgrade'), 12);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_apply_article_plan_schema_v13_upgrade'), 12); }
         add_action('save_post_post', array($this, 'handle_article_plan_post_save'), 40, 3);
         add_action(self::ARTICLE_REBUILD_HOOK, array($this, 'run_article_plan_rebuild_worker'));
-        add_action('init', array($this, 'maybe_apply_automation_safety_upgrade'), 7);
-        add_action('init', array($this, 'maybe_upgrade_background_schedule_v67264'), 7);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_apply_automation_safety_upgrade'), 7); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_background_schedule_v67264'), 7); }
         add_action('init', array($this, 'maybe_install_control_contract_schema'), 8);
         add_action('init', array($this, 'maybe_install_output_objects_schema'), 9);
         add_action('init', array($this, 'maybe_install_ebay_schema'), 10);
         // Checkpoint contract: an open run from another runtime build is never
         // version-by-version recovered. It is closed fail-safe and the next run
         // starts with a new UUID from the last confirmed public checkpoint.
-        add_action('init', array($this, 'maybe_retire_legacy_terminal_ebay_run_v672167'), 3);
-        add_action('init', array($this, 'maybe_close_incompatible_ebay_run_for_checkpoint_restart'), 4);
-        add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
-        add_action('init', array($this, 'ensure_automation_schedule'), 21);
-        add_action('init', array($this, 'retire_ebay_legacy_cron_transport'), 22);
-        add_action('init', array($this, 'ensure_ebay_maintenance_schedule'), 24);
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_retire_legacy_terminal_ebay_run_v672167'), 3); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_close_incompatible_ebay_run_for_checkpoint_restart'), 4); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_automation_schedule'), 21); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'retire_ebay_legacy_cron_transport'), 22); }
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_ebay_maintenance_schedule'), 24); }
         // Controlled rebuild: normal page requests must never migrate inventory or
         // start/continue PRIVATE/BUSINESS recovery. Legacy worker-state adoption is
         // state-only and occurs inside the canonical worker/start path, never here.
         // Taxonomy migration is explicit via the setup button. Legacy media cleanup
         // only schedules bounded background work.
-        add_action('init', array($this, 'ensure_ebay_media_cleanup_schedule'), 26);
+        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_ebay_media_cleanup_schedule'), 26); }
         // V6.54 KISS transport: no eBay fach work is owned by WP-Cron.
         // A provider-neutral authenticated REST heartbeat advances exactly one
         // canonical package per request. Legacy cron hooks are cleared on init.
@@ -419,7 +420,11 @@ final class Pferdeportal_Affiliate_Router {
         // Frische wird weiterhin fail-closed gefiltert; Statusmutationen erfolgen nur
         // in Sync/Admin-Lifecycle-Pfaden, niemals beim bloßen Seitenaufruf.
 
-        if (is_admin()) {
+        // Search/live-AJAX is not an admin lifecycle request. Keep the one real
+        // Affiliate AJAX endpoint registered, but do not attach admin migrations,
+        // schema checks, menus or notices to unrelated admin-ajax requests.
+        if (is_admin()) { add_action('wp_ajax_ppar_ebay_canonical_tick', array($this, 'handle_ebay_canonical_tick')); }
+        if (is_admin() && !$is_ajax_request) {
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_init', array($this, 'maybe_migrate_campaigns'));
             add_action('admin_init', array($this, 'maybe_apply_article_products_upgrade'));
@@ -465,7 +470,6 @@ final class Pferdeportal_Affiliate_Router {
             add_action('admin_post_ppar_ebay_run_sync', array($this, 'handle_ebay_run_sync'));
             add_action('admin_post_ppar_ebay_run_refresh', array($this, 'handle_ebay_run_refresh'));
             add_action('admin_post_ppar_ebay_run_restart', array($this, 'handle_ebay_run_restart'));
-            add_action('wp_ajax_ppar_ebay_canonical_tick', array($this, 'handle_ebay_canonical_tick'));
             add_action('admin_post_ppar_ebay_review_decision', array($this, 'handle_ebay_review_decision'));
             add_action('admin_post_ppar_ebay_business_curation', array($this, 'handle_ebay_business_curation'));
             add_action('admin_init', array($this, 'maybe_install_network_sync_schema'));
@@ -2490,10 +2494,11 @@ JS;
                         if (!empty($group['id'])) { $classes[] = 'ppar-group-' . sanitize_html_class($group['id']); }
                         if (!empty($context['post_type'])) { $classes[] = 'ppar-context-' . sanitize_html_class($context['post_type']); }
                         $label = !empty($banner['label']) ? sanitize_text_field($banner['label']) : '';
-                        $is_category_large_banner_slot = $this->category_large_banner_slot($slot_type);
+                        $normalized_slot_type = sanitize_key((string)$slot_type);
+                        $creative_type = sanitize_key((string)($banner['creative_type'] ?? ''));
                         $is_overview_wide_banner_slot = $this->overview_wide_banner_slot($slot_type);
-                        $is_glossary_single_slot = in_array(sanitize_key((string)$slot_type), array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-                        $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
+                        $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+                        $is_breed_single_slot = in_array($normalized_slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
                         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot;
                         if ($is_overview_wide_banner_slot) {
                             $disclosure = $this->get_disclosure_html($content_id);
@@ -2507,7 +2512,7 @@ JS;
                         } else {
                             $disclosure = $this->get_disclosure_html($content_id);
                         }
-                        $is_category_product_slot = preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+                        $is_category_product_slot = preg_match('/^category_product_[123]$/', $normalized_slot_type);
                         // V6.61.8: Provider labels must never change category-product card geometry.
                         // The provider remains represented by its offer button/link; the external
                         // label row is suppressed for these three fixed product slots only.
@@ -2535,7 +2540,7 @@ JS;
                             $out .= $disclosure;
                             if (!empty($overview_parts[1])) { $out .= (string)$overview_parts[1]; }
                         } else {
-                            if ($required_creative_type === 'banner') { $out .= '<div class="ppar-affiliate-label">Anzeige</div>'; }
+                            if ($creative_type === 'banner') { $out .= '<div class="ppar-affiliate-label">Anzeige</div>'; }
                             $out .= $disclosure;
                             $out .= '<div class="ppar-affiliate-content">' . $html . '</div>';
                         }
