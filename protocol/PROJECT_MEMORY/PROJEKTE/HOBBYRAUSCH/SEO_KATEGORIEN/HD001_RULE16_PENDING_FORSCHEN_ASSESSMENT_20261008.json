@@ -1,0 +1,1518 @@
+{
+  "contract": "HD001_RULE16_PENDING_FORSCHEN_ASSESSMENT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__31_OF_31_CLOSED",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6"
+  },
+  "decisions": [
+    {
+      "canonical_name": "Astrofotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic astronomy-imaging orientation, camera/telescope workflow and overview. Deep-Sky-, Mond- and Planetenfotografie own their specific target workflows.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Deep-Sky-Fotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Ausrüstung & Optik",
+          "intent_count": 5,
+          "article_intents": [
+            "Teleskop für Deep-Sky-Fotografie auswählen",
+            "Kamera für Deep-Sky-Fotografie auswählen",
+            "Montierung für lange Belichtungen wählen",
+            "Reducer und Flattener richtig einsetzen",
+            "Filter für Deep-Sky-Fotografie auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufnahme & Nachführung",
+          "intent_count": 5,
+          "article_intents": [
+            "Deep-Sky-Belichtungszeit planen",
+            "Autoguiding einrichten",
+            "Dithering bei Deep-Sky-Aufnahmen",
+            "Fokussieren bei langen Astroaufnahmen",
+            "Serienaufnahmen für Deep-Sky planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalibrierung & Stacking",
+          "intent_count": 5,
+          "article_intents": [
+            "Darkframes richtig aufnehmen",
+            "Flatframes erstellen",
+            "Bias- oder Darkflat-Aufnahmen einordnen",
+            "Deep-Sky-Bilder stacken",
+            "Kalibrierungsfehler im Stack erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bildbearbeitung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Hintergrundgradienten entfernen",
+            "Sterne in Deep-Sky-Bildern kontrollieren",
+            "Rauschen in Astroaufnahmen reduzieren",
+            "Farbbalance in Nebelbildern einstellen",
+            "Walking Noise und Banding beheben"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns deep-sky objects, long-exposure acquisition, guiding, calibration and deep-sky processing; generic astro-imaging remains with Astrofotografie.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mondfotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Planung & Mondphasen",
+          "intent_count": 5,
+          "article_intents": [
+            "Mondphasen für Fotografie planen",
+            "Mondaufgang und Monduntergang vorhersagen",
+            "Libration für Mondmotive nutzen",
+            "Mondfinsternis fotografisch planen",
+            "Mondhöhe und Seeing einschätzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufnahme & Einstellungen",
+          "intent_count": 5,
+          "article_intents": [
+            "Mond mit Teleobjektiv fotografieren",
+            "Mond am Teleskop fotografieren",
+            "Belichtungszeit für Mondoberfläche wählen",
+            "Mondvideos für Lucky Imaging aufnehmen",
+            "Scharfstellen bei Mondfotografie"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Stacking & Bearbeitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Mondvideos stacken",
+            "Mondbilder schärfen ohne Halos",
+            "Mosaik des Mondes erstellen",
+            "Farbmond bearbeiten",
+            "Überstrahlte Mondbereiche vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns moon-specific planning, imaging and processing. Generic astrophoto equipment overview stays with Astrofotografie.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Planetenfotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kamera & Optik",
+          "intent_count": 5,
+          "article_intents": [
+            "Planetenkamera auswählen",
+            "Barlowlinse für Planetenfotografie wählen",
+            "Brennweite für Jupiter und Saturn planen",
+            "ADC für Planetenaufnahmen einsetzen",
+            "Filter für Planetenfotografie auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufnahme & Seeing",
+          "intent_count": 5,
+          "article_intents": [
+            "Seeing für Planetenfotografie beurteilen",
+            "Jupiter als Video aufnehmen",
+            "Saturn als Video aufnehmen",
+            "Belichtungszeit und Gain einstellen",
+            "Fokus bei Planetenaufnahmen kontrollieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Stacking & Details",
+          "intent_count": 5,
+          "article_intents": [
+            "Planetenframes selektieren und stacken",
+            "Wavelet-Schärfung bei Planeten",
+            "Derotation von Jupiter-Aufnahmen",
+            "Farbbalance bei Planetenbildern",
+            "Überschärfung und Artefakte vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns planetary high-frame-rate imaging, capture settings, stacking and planet-specific processing.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Teleskop-Astronomie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Teleskopwahl & Einstieg",
+          "intent_count": 5,
+          "article_intents": [
+            "Teleskop für Einsteiger auswählen",
+            "Dobson oder parallaktische Montierung vergleichen",
+            "Öffnung und Brennweite verstehen",
+            "Teleskop sinnvoll aufstellen",
+            "Erste Beobachtungsnacht planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Okulare & Zubehör",
+          "intent_count": 5,
+          "article_intents": [
+            "Okulare für verschiedene Vergrößerungen wählen",
+            "Sucher richtig einstellen",
+            "Barlowlinse visuell einsetzen",
+            "Nebelfilter für visuelle Beobachtung",
+            "Tauheizung und Taukappe verwenden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausrichten & Nachführen",
+          "intent_count": 5,
+          "article_intents": [
+            "Parallaktische Montierung einnorden",
+            "GoTo-Montierung ausrichten",
+            "Objekte mit Starhopping finden",
+            "Teleskop manuell nachführen",
+            "Backlash und Spiel der Montierung erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Beobachtung & Pflege",
+          "intent_count": 5,
+          "article_intents": [
+            "Mond visuell beobachten",
+            "Planeten visuell beobachten",
+            "Deep-Sky-Objekte visuell finden",
+            "Dunkeladaption verbessern",
+            "Teleskopoptik reinigen und lagern"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns telescope-based visual observing and telescope operation; generic astronomy orientation remains with Amateurastronomie.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Sonnenbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Sicherheit & Filter",
+          "intent_count": 5,
+          "article_intents": [
+            "Sonne sicher beobachten",
+            "Objektiv-Sonnenfilter auswählen",
+            "Baader-Folie korrekt montieren",
+            "Gefährliche Okularfilter vermeiden",
+            "Sonnenfilter vor jeder Nutzung prüfen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausrüstung & Beobachtung",
+          "intent_count": 5,
+          "article_intents": [
+            "Teleskop für Weißlicht-Sonnenbeobachtung",
+            "H-Alpha-Sonnenteleskop verstehen",
+            "Sonnenflecken beobachten",
+            "Granulation sichtbar machen",
+            "Protuberanzen beobachten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Dokumentation & Fotografie",
+          "intent_count": 5,
+          "article_intents": [
+            "Sonnenflecken zeichnen und dokumentieren",
+            "Sonnenrotation verfolgen",
+            "Sonne mit Kamera aufnehmen",
+            "Sonnenbilder stacken und schärfen",
+            "Sonnenbeobachtungen langfristig vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns safe solar observing and solar-specific optics, features and documentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Radioastronomie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Astronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Ziele",
+          "intent_count": 5,
+          "article_intents": [
+            "Radioastronomie für Anfänger",
+            "Geeignete Radioquellen für Amateure",
+            "Sonnenradio-Beobachtung planen",
+            "Jupiter-Radioemissionen beobachten",
+            "Meteor-Scatter als Radioastronomie einordnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Antennen & Empfänger",
+          "intent_count": 5,
+          "article_intents": [
+            "Antenne für Radioastronomie auswählen",
+            "SDR-Empfänger für Radioastronomie",
+            "LNA und Filter einsetzen",
+            "Koaxkabelverluste reduzieren",
+            "Radioastronomie-Setup kalibrieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufnahme & Signalverarbeitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Spektrum einer Radioquelle aufnehmen",
+            "RFI-Störungen erkennen",
+            "Signal-Rausch-Verhältnis verbessern",
+            "Langzeitmessung automatisieren",
+            "Radioastronomie-Daten mitteln"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Projekte & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Solar-Radioteleskop als Hobbyprojekt",
+            "Wasserstofflinie bei 1420 MHz empfangen",
+            "Radio-Jupiter-Projekt aufbauen",
+            "Zeitstempel und Beobachtungslog führen",
+            "Lokale Störquellen systematisch finden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns amateur radio-astronomy receiving, antennas, signal acquisition and analysis; amateur radio communication remains with Amateurfunk.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Birding",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic birdwatching orientation, fieldcraft and overview. Nachtvogel-Beobachtung and other specialist observation identities own their specific intents.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bioakustik",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Aufnahmeausrüstung",
+          "intent_count": 5,
+          "article_intents": [
+            "Recorder für Bioakustik auswählen",
+            "Richtmikrofon für Tierstimmen wählen",
+            "Parabolmikrofon einsetzen",
+            "Windschutz für Feldaufnahmen",
+            "Aufnahmepegel im Feld einstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Feldpraxis & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Bioakustische Aufnahmeorte wählen",
+            "Aufnahmen bei Nacht planen",
+            "Störgeräusche im Feld reduzieren",
+            "Metadaten zu Tierstimmen erfassen",
+            "Akustische Transekten durchführen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Analyse & Visualisierung",
+          "intent_count": 5,
+          "article_intents": [
+            "Spektrogramme von Tierstimmen lesen",
+            "Frequenzbereiche vergleichen",
+            "Rufe segmentieren und markieren",
+            "Aufnahmen normalisieren ohne Signale zu verfälschen",
+            "Akustische Muster zwischen Arten unterscheiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Archiv & Bestimmung",
+          "intent_count": 5,
+          "article_intents": [
+            "Tierstimmen systematisch archivieren",
+            "Aufnahmen mit Referenzrufen vergleichen",
+            "Unbekannte Rufe dokumentieren",
+            "Audio-Dateien für Langzeitprojekte benennen",
+            "Belegaufnahmen für Beobachtungsdaten pflegen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns field sound recording, acoustic analysis and species-sound documentation across taxa.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Fledermausbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Beobachtungsorte",
+          "intent_count": 5,
+          "article_intents": [
+            "Fledermäuse beobachten für Anfänger",
+            "Geeignete Beobachtungszeiten wählen",
+            "Fledermausquartiere aus Distanz beobachten",
+            "Jagdhabitate erkennen",
+            "Beobachtungen naturverträglich durchführen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bat-Detector & Technik",
+          "intent_count": 5,
+          "article_intents": [
+            "Bat-Detector auswählen",
+            "Heterodyn-Detektor einstellen",
+            "Zeitdehnungsaufnahmen verstehen",
+            "Ultraschallrekorder einsetzen",
+            "Detektoraufnahmen korrekt speichern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Arten & Rufe",
+          "intent_count": 5,
+          "article_intents": [
+            "Fledermausrufe grob unterscheiden",
+            "Pipistrellus-Rufe erkennen",
+            "Rufsequenzen dokumentieren",
+            "Flugverhalten zur Bestimmung nutzen",
+            "Fehlbestimmungen bei Fledermausrufen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns bat-specific field observation and detector practice; generic bioacoustic analysis remains with Bioakustik.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Nachtvogel-Beobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Planung & Orte",
+          "intent_count": 5,
+          "article_intents": [
+            "Nachtvögel beobachten für Anfänger",
+            "Geeignete Habitate nachts finden",
+            "Beobachtungszeiten für Eulen planen",
+            "Lichtverschmutzung bei Nachtbeobachtung berücksichtigen",
+            "Störungen an Brutplätzen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Hören & Bestimmen",
+          "intent_count": 5,
+          "article_intents": [
+            "Eulenrufe unterscheiden",
+            "Nachtvogelstimmen aufnehmen",
+            "Richtung eines Rufes bestimmen",
+            "Rufserien protokollieren",
+            "Akustische Fehlbestimmungen vermeiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Ausrüstung & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Fernglas für Dämmerung auswählen",
+            "Wärmebildtechnik bei Nachtbeobachtung einordnen",
+            "Rotlicht naturverträglich einsetzen",
+            "Nachtbeobachtungen protokollieren",
+            "Fundorte und Zeiten systematisch dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns nocturnal-bird field observation, listening and documentation; generic Birding orientation stays with Birding.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Libellenbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Lebensräume",
+          "intent_count": 5,
+          "article_intents": [
+            "Libellen beobachten für Anfänger",
+            "Geeignete Gewässer für Libellen finden",
+            "Beste Tageszeit für Libellenbeobachtung",
+            "Libellen naturverträglich beobachten",
+            "Flugzeiten im Jahresverlauf nutzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestimmung",
+          "intent_count": 5,
+          "article_intents": [
+            "Großlibellen und Kleinlibellen unterscheiden",
+            "Libellen nach Flügelmerkmalen bestimmen",
+            "Männchen und Weibchen unterscheiden",
+            "Exuvien zur Bestimmung nutzen",
+            "Ähnliche Libellenarten auseinanderhalten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fotografie & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Libellen im Sitzen fotografieren",
+            "Libellen im Flug fotografieren",
+            "Beobachtungsdaten erfassen",
+            "Exuvien dokumentieren",
+            "Fundorte über mehrere Jahre vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns dragonfly/damselfly observation, identification, habitat and photographic documentation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Schmetterlingsbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Einstieg & Habitate",
+          "intent_count": 5,
+          "article_intents": [
+            "Schmetterlinge beobachten für Anfänger",
+            "Blütenreiche Beobachtungsorte finden",
+            "Flugzeiten nach Jahreszeit nutzen",
+            "Tagfalter naturverträglich beobachten",
+            "Nachtfalter-Beobachtung vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestimmung",
+          "intent_count": 5,
+          "article_intents": [
+            "Tagfalter nach Flügelmerkmalen bestimmen",
+            "Ähnliche Weißlinge unterscheiden",
+            "Augenfalter bestimmen",
+            "Nachtfalter grob einordnen",
+            "Raupen als Bestimmungshinweis nutzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Fotografie & Monitoring",
+          "intent_count": 5,
+          "article_intents": [
+            "Schmetterlinge im Feld fotografieren",
+            "Beobachtungen standardisiert notieren",
+            "Transekten für Schmetterlinge gehen",
+            "Fundorte über Jahre vergleichen",
+            "Beobachtungsfotos zur Bestimmung nutzen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns butterfly/moth observation and identification; breeding remains separate.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Wildkameras",
+      "natural_world": "forschen",
+      "parent_intermediate": "Naturbeobachtung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Kamera & Auswahl",
+          "intent_count": 5,
+          "article_intents": [
+            "Wildkamera auswählen",
+            "No-Glow oder Low-Glow vergleichen",
+            "Auslösezeit und Reichweite bewerten",
+            "Wildkamera für Video oder Foto wählen",
+            "Stromversorgung für Wildkameras planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Standort & Montage",
+          "intent_count": 5,
+          "article_intents": [
+            "Wildkamera richtig ausrichten",
+            "Montagehöhe nach Tierart wählen",
+            "Fehlauslösungen durch Vegetation vermeiden",
+            "Wildkamera wettergeschützt montieren",
+            "Standorte naturverträglich auswählen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Einstellungen & Betrieb",
+          "intent_count": 5,
+          "article_intents": [
+            "PIR-Empfindlichkeit einstellen",
+            "Auslöseintervall wählen",
+            "Zeitstempel korrekt setzen",
+            "Speicherkarte für Wildkameras auswählen",
+            "Batterielaufzeit optimieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Auswertung & Datenschutz",
+          "intent_count": 5,
+          "article_intents": [
+            "Wildkamera-Bilder systematisch sortieren",
+            "Tierarten auf Aufnahmen bestimmen",
+            "Beobachtungsserien vergleichen",
+            "Menschenaufnahmen datenschutzgerecht behandeln",
+            "Langzeitmonitoring mit Wildkameras planen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns camera-trap selection, placement, settings and wildlife-data workflow.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Hobby-Mikroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic microscopy orientation, microscope basics and overview. Specialized sample domains and techniques retain specific ownership.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Gewässermikroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Probenahme & Vorbereitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Wasserprobe für Mikroskopie nehmen",
+            "Sedimentprobe aus Gewässern entnehmen",
+            "Probe ohne Organismen zu schädigen transportieren",
+            "Nasspräparat aus Wasserprobe herstellen",
+            "Deckglas bei beweglichen Organismen einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Mikroskop & Kontrast",
+          "intent_count": 5,
+          "article_intents": [
+            "Vergrößerung für Gewässerproben wählen",
+            "Hellfeld für Wasserorganismen einstellen",
+            "Phasenkontrast bei Gewässerproben nutzen",
+            "Beleuchtung für transparente Organismen",
+            "Bewegliche Organismen verfolgen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestimmung",
+          "intent_count": 5,
+          "article_intents": [
+            "Algen im Mikroskop grob bestimmen",
+            "Protozoen erkennen",
+            "Rädertierchen beobachten",
+            "Kleinkrebse im Präparat erkennen",
+            "Fadenalgen und Cyanobakterien unterscheiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Dokumentation & Projekte",
+          "intent_count": 5,
+          "article_intents": [
+            "Gewässermikroskopie fotografisch dokumentieren",
+            "Artenliste einer Wasserprobe erstellen",
+            "Proben verschiedener Gewässer vergleichen",
+            "Jahreszeitliche Veränderungen beobachten",
+            "Mikroskopie-Beobachtungslog führen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns microscopy of freshwater/aquatic samples broadly; Teichwasser-specific article coverage is editorial within this owner.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Teichwasser-Mikroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "SMALL",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Specific teich-water coverage is a focused editorial topic under Gewässermikroskopie; a separate hub would duplicate sample preparation, organisms and microscopy workflow.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Kristallmikroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Kristalle vorbereiten",
+          "intent_count": 5,
+          "article_intents": [
+            "Kristallprobe fürs Mikroskop vorbereiten",
+            "Salzkristalle auf Objektträger züchten",
+            "Zuckerkristalle mikroskopieren",
+            "Kristallisationslösung dosieren",
+            "Trocknungsmuster reproduzierbar erzeugen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Beleuchtung & Optik",
+          "intent_count": 5,
+          "article_intents": [
+            "Kristalle im Hellfeld beobachten",
+            "Schräglicht für Kristallstrukturen",
+            "Polarisation bei Kristallen einsetzen",
+            "Vergrößerung für Kristallmuster wählen",
+            "Reflexe bei Kristallaufnahmen reduzieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Dokumentation & Vergleich",
+          "intent_count": 5,
+          "article_intents": [
+            "Kristallmuster fotografieren",
+            "Kristallwachstum als Zeitreihe dokumentieren",
+            "Temperatur-Einfluss vergleichen",
+            "Konzentrationen experimentell vergleichen",
+            "Kristallformen systematisch beschreiben"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns preparation and microscopic observation of crystals and crystallization patterns.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Polarisationsmikroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Polarisator & Analysator",
+          "intent_count": 5,
+          "article_intents": [
+            "Polarisationsmikroskopie für Anfänger",
+            "Polarisator richtig einsetzen",
+            "Analysator ausrichten",
+            "Kreuzstellung prüfen",
+            "Drehbaren Objekttisch nutzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Proben & Präparate",
+          "intent_count": 5,
+          "article_intents": [
+            "Geeignete Proben für Polarisation auswählen",
+            "Fasern polarisationsmikroskopisch untersuchen",
+            "Kunststoffe unter Polarisation beobachten",
+            "Kristalle als Polarisationspräparat",
+            "Dünne transparente Proben vorbereiten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Farben & Interpretation",
+          "intent_count": 5,
+          "article_intents": [
+            "Interferenzfarben verstehen",
+            "Doppelbrechung erkennen",
+            "Auslöschung beobachten",
+            "Orientierung von Strukturen beurteilen",
+            "Artefakte durch Spannung im Präparat erkennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns polarized-light microscope setup, sample preparation and interpretation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Mikrofotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Kamera & Adapter",
+          "intent_count": 5,
+          "article_intents": [
+            "Kamera am Mikroskop auswählen",
+            "Smartphone am Mikroskop adaptieren",
+            "Kameraadapter korrekt einstellen",
+            "Okularprojektion einordnen",
+            "Sensorgröße und Bildfeld verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Belichtung & Fokus",
+          "intent_count": 5,
+          "article_intents": [
+            "Belichtung bei Mikrofotografie einstellen",
+            "Weißabgleich am Mikroskop",
+            "Manuell fokussieren für Mikrofotos",
+            "Verwacklung vermeiden",
+            "Beleuchtungshelligkeit reproduzierbar halten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Stacking & Schärfe",
+          "intent_count": 5,
+          "article_intents": [
+            "Focus Stacking am Mikroskop",
+            "Stack-Schrittweite planen",
+            "Bewegte Proben beim Stacking vermeiden",
+            "Stacking-Artefakte korrigieren",
+            "Schärfentiefe bei Mikrofotos beurteilen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalibrierung & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Maßstab in Mikrofotos kalibrieren",
+            "Skalenbalken korrekt einfügen",
+            "Aufnahmeparameter dokumentieren",
+            "Farbtreue kontrollieren",
+            "Mikrofotos systematisch archivieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns image capture through microscopes; sample-domain ownership remains with the respective microscopy hobbies.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Planktonbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Mikroskopie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Probenahme",
+          "intent_count": 5,
+          "article_intents": [
+            "Planktonprobe nehmen",
+            "Planktonnetz richtig verwenden",
+            "Proben aus verschiedenen Tiefen vergleichen",
+            "Planktonprobe transportieren",
+            "Probe für kurze Beobachtung lagern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Mikroskopische Beobachtung",
+          "intent_count": 5,
+          "article_intents": [
+            "Plankton-Nasspräparat herstellen",
+            "Vergrößerung für Plankton wählen",
+            "Bewegliches Plankton verfolgen",
+            "Beleuchtung für transparentes Plankton",
+            "Plankton fotografieren"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bestimmung & Monitoring",
+          "intent_count": 5,
+          "article_intents": [
+            "Phytoplankton grob bestimmen",
+            "Zooplankton grob bestimmen",
+            "Daphnien und Copepoden unterscheiden",
+            "Planktondichte qualitativ vergleichen",
+            "Saisonale Planktonveränderungen dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns plankton sampling, observation, identification and temporal comparison.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Wetterbeobachtung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "content_capacity": [],
+      "ownership": "Owns generic amateur weather-observation orientation and overview. Private station, storm spotting and specialist measurement hobbies retain their specific intents.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "private Wetterstation",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Station & Sensoren",
+          "intent_count": 5,
+          "article_intents": [
+            "Private Wetterstation auswählen",
+            "Temperatursensor richtig platzieren",
+            "Regenmesser auswählen",
+            "Windmesser montieren",
+            "Luftdrucksensor verstehen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufstellung & Standort",
+          "intent_count": 5,
+          "article_intents": [
+            "Wetterstation normnah aufstellen",
+            "Strahlungsschutz für Temperatursensor",
+            "Windmessung über Hindernissen planen",
+            "Regenmesser frei positionieren",
+            "Funkreichweite der Sensoren sicherstellen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Daten & Logging",
+          "intent_count": 5,
+          "article_intents": [
+            "Wetterdaten automatisch speichern",
+            "Wetterstationsdaten exportieren",
+            "Tages- und Monatswerte auswerten",
+            "Datenlücken erkennen",
+            "Zeitreihen verschiedener Sensoren vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalibrierung & Fehler",
+          "intent_count": 5,
+          "article_intents": [
+            "Temperatursensor vergleichen und prüfen",
+            "Regenmesser kalibrieren",
+            "Windmessfehler durch Standort erkennen",
+            "Luftdruck auf Meereshöhe reduzieren",
+            "Unplausible Wetterwerte diagnostizieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns private weather-station hardware, siting, sensors, logging and quality control.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Storm Spotting",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Sicherheit & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Storm Spotting sicher planen",
+            "Gewitterabstand richtig einschätzen",
+            "Fluchtwege vor Gewitterbeobachtung wählen",
+            "Blitzschutzregeln im Feld",
+            "Straßen- und Sichtbedingungen berücksichtigen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Wolken & Strukturen",
+          "intent_count": 5,
+          "article_intents": [
+            "Shelf Cloud erkennen",
+            "Wall Cloud erkennen",
+            "Rotation visuell beurteilen",
+            "Hagelkerne und Niederschlagsvorhänge erkennen",
+            "Gefährliche Wolkenstrukturen von harmlosen unterscheiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Beobachtung & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Storm-Spotting-Standort auswählen",
+            "Wetterentwicklung vor Ort protokollieren",
+            "Gewitterstrukturen fotografisch dokumentieren",
+            "Zeit und Ort exakt erfassen",
+            "Beobachtungen sachlich melden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Radar & Nowcasting",
+          "intent_count": 5,
+          "article_intents": [
+            "Radarbilder vor Ort lesen",
+            "Blitzdaten mit Beobachtung abgleichen",
+            "Zellzugrichtung einschätzen",
+            "Warnungen in die Tourplanung einbeziehen",
+            "Nowcasting während der Beobachtung aktualisieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns field-based severe-weather spotting, safety, visual features and reporting; digital-only tracking remains with Gewittertracking.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Gewittertracking",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Radar & Satellit",
+          "intent_count": 5,
+          "article_intents": [
+            "Gewitterzellen im Radar erkennen",
+            "Radar-Echos zeitlich verfolgen",
+            "Satellitenbilder für Gewitterentwicklung nutzen",
+            "Zugrichtung einer Zelle abschätzen",
+            "Radarartefakte von Wetterecho unterscheiden"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Blitzdaten & Karten",
+          "intent_count": 5,
+          "article_intents": [
+            "Blitzortungsdaten lesen",
+            "Blitzrate einer Zelle beurteilen",
+            "Blitzcluster verfolgen",
+            "Kartenlayer sinnvoll kombinieren",
+            "Zeitverzug verschiedener Datenquellen einordnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Tracking & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Gewitterverlauf protokollieren",
+            "Track einer Zelle dokumentieren",
+            "Warnungen mit eigenen Beobachtungen vergleichen",
+            "Sturmereignisse nachträglich analysieren",
+            "Fehlprognosen und Abweichungen dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns digital tracking/nowcasting of thunderstorms and lightning; field spotting remains with Storm Spotting.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Luftqualitätsmessung",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Sensoren & Messgrößen",
+          "intent_count": 5,
+          "article_intents": [
+            "PM2.5-Sensor auswählen",
+            "PM10 und PM2.5 unterscheiden",
+            "CO2-Sensor für Innenräume auswählen",
+            "VOC-Sensoren einordnen",
+            "Temperatur und Feuchte mitmessen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufstellung & Betrieb",
+          "intent_count": 5,
+          "article_intents": [
+            "Luftsensor im Freien aufstellen",
+            "Innenraumsensor richtig platzieren",
+            "Wettereinfluss auf Feinstaubsensoren",
+            "Messintervall wählen",
+            "Sensor dauerhaft mit Strom versorgen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalibrierung & Daten",
+          "intent_count": 5,
+          "article_intents": [
+            "Luftsensor mit Referenzwerten vergleichen",
+            "Ausreißer in Luftqualitätsdaten erkennen",
+            "Feuchte-Effekt auf Partikelsensoren beurteilen",
+            "Zeitreihen der Luftqualität auswerten",
+            "Messdaten sinnvoll visualisieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns hobby particulate/gas measurement, sensor operation, calibration and data interpretation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Blitzfotografie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Wetter & Umwelt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Sicherheit & Planung",
+          "intent_count": 5,
+          "article_intents": [
+            "Blitze sicher fotografieren",
+            "Gewitterentfernung vor Aufnahme einschätzen",
+            "Standort für Blitzfotografie wählen",
+            "Regen- und Windschutz für Kamera",
+            "Fluchtmöglichkeit beim Fotografieren planen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kamera & Aufnahme",
+          "intent_count": 5,
+          "article_intents": [
+            "Kameraeinstellungen für Blitzfotografie",
+            "Blitze bei Nacht fotografieren",
+            "Blitze am Tag fotografieren",
+            "Intervallaufnahme für Gewitter",
+            "Blitzauslöser sinnvoll einsetzen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Bildaufbau & Bearbeitung",
+          "intent_count": 5,
+          "article_intents": [
+            "Blitze mit Landschaft komponieren",
+            "Mehrere Blitze in einem Bild kombinieren",
+            "Überstrahlte Blitzkanäle vermeiden",
+            "Rauschen in Blitzfotos reduzieren",
+            "Blitzfotos farblich natürlich bearbeiten"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns lightning-specific camera planning, safe capture and processing; generic storm observation belongs to Storm Spotting.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Bodenanalyse",
+      "natural_world": "forschen",
+      "parent_intermediate": "Messen & Analysieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Probenahme",
+          "intent_count": 5,
+          "article_intents": [
+            "Bodenprobe richtig nehmen",
+            "Mischprobe aus mehreren Stellen erstellen",
+            "Probentiefe festlegen",
+            "Bodenprobe trocknen und sieben",
+            "Proben eindeutig beschriften"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "pH & einfache Tests",
+          "intent_count": 5,
+          "article_intents": [
+            "Boden-pH zuhause messen",
+            "pH-Teststreifen richtig verwenden",
+            "Elektronisches pH-Messgerät prüfen",
+            "Bodenart per Fingerprobe bestimmen",
+            "Carbonat im Boden grob testen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Nährstoffe & Auswertung",
+          "intent_count": 5,
+          "article_intents": [
+            "Boden-Nitrat testen",
+            "Phosphat-Test für Boden einordnen",
+            "Kalium-Testkits verwenden",
+            "Mehrere Messstellen vergleichen",
+            "Bodenwerte über Jahre dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns repeatable amateur soil sampling, pH/nutrient tests and comparison; gardening recommendations remain with plant/garden owners.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Wasseranalyse",
+      "natural_world": "forschen",
+      "parent_intermediate": "Messen & Analysieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 3,
+      "content_capacity": [
+        {
+          "name": "Proben & Messplanung",
+          "intent_count": 5,
+          "article_intents": [
+            "Wasserprobe richtig nehmen",
+            "Messgefäße sauber vorbereiten",
+            "Probenzeitpunkt dokumentieren",
+            "Mehrere Entnahmestellen vergleichen",
+            "Wasserprobe kurzfristig lagern"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Grundparameter",
+          "intent_count": 5,
+          "article_intents": [
+            "pH von Wasser messen",
+            "Leitfähigkeit messen",
+            "Wasserhärte bestimmen",
+            "Temperatur korrekt messen",
+            "Alkalinität einordnen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Testkits & Auswertung",
+          "intent_count": 5,
+          "article_intents": [
+            "Nitrat im Wasser testen",
+            "Phosphat messen",
+            "Tröpfchentests richtig ablesen",
+            "Messreihen dokumentieren",
+            "Messfehler und Ausreißer erkennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns repeatable hobby water testing and measurement methodology; aquarium-specific target values remain with Aquaristik.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Elektrochemie als Hobby",
+      "natural_world": "forschen",
+      "parent_intermediate": "Messen & Analysieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Grundlagen & Sicherheit",
+          "intent_count": 5,
+          "article_intents": [
+            "Elektrochemie als Hobby sicher starten",
+            "Anode und Kathode unterscheiden",
+            "Elektrolyt auswählen",
+            "Spannung und Strom begrenzen",
+            "Geeignete Schutzmaßnahmen im Kleinversuch"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Galvanische Zellen",
+          "intent_count": 5,
+          "article_intents": [
+            "Einfache galvanische Zelle aufbauen",
+            "Metallpaare vergleichen",
+            "Zellspannung messen",
+            "Salzbrücke herstellen",
+            "Innenwiderstand einer Zelle untersuchen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Elektrolyse",
+          "intent_count": 5,
+          "article_intents": [
+            "Wasserelektrolyse im Kleinversuch",
+            "Elektrolyse-Strom einstellen",
+            "Elektrodenmaterial vergleichen",
+            "Gasentwicklung beobachten und dokumentieren",
+            "Elektrolyse-Ausbeute qualitativ vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Messen & Dokumentieren",
+          "intent_count": 5,
+          "article_intents": [
+            "Elektrochemische Spannungskurven aufzeichnen",
+            "Strom über Zeit messen",
+            "Versuchsparameter protokollieren",
+            "Wiederholungsmessungen vergleichen",
+            "Elektrochemische Fehlerquellen erkennen"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns safe small-scale electrochemical experiments, cells, electrolysis and measurement; hazardous procedures remain excluded.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    },
+    {
+      "canonical_name": "Spektroskopie",
+      "natural_world": "forschen",
+      "parent_intermediate": "Messen & Analysieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "content_capacity": [
+        {
+          "name": "Spektroskop & Aufbau",
+          "intent_count": 5,
+          "article_intents": [
+            "Spektroskop für Hobbyzwecke auswählen",
+            "Beugungsgitter richtig einsetzen",
+            "Spaltbreite einstellen",
+            "Kamera an Spektroskop koppeln",
+            "Spektroskop mechanisch ausrichten"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Kalibrierung",
+          "intent_count": 5,
+          "article_intents": [
+            "Spektrum mit Referenzlampe kalibrieren",
+            "Wellenlängenachse bestimmen",
+            "Instrumentenprofil verstehen",
+            "Kalibrierung regelmäßig kontrollieren",
+            "Drift zwischen Messungen erkennen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Aufnahme & Auswertung",
+          "intent_count": 5,
+          "article_intents": [
+            "Emissionsspektrum aufnehmen",
+            "Absorptionsspektrum aufnehmen",
+            "Spektrallinien identifizieren",
+            "Signal-Rausch-Verhältnis verbessern",
+            "Spektren verschiedener Quellen vergleichen"
+          ],
+          "status": "LEAF_FIT"
+        },
+        {
+          "name": "Projekte & Dokumentation",
+          "intent_count": 5,
+          "article_intents": [
+            "Sonnenspektrum aufnehmen",
+            "Lampenspektren vergleichen",
+            "LED-Spektren untersuchen",
+            "Spektren archivieren und beschriften",
+            "Messaufbau reproduzierbar dokumentieren"
+          ],
+          "status": "LEAF_FIT"
+        }
+      ],
+      "ownership": "Owns amateur optical spectroscopy equipment, calibration, acquisition and spectral interpretation.",
+      "assessment_status": "ASSESSED_RULES_1_6"
+    }
+  ],
+  "summary": {
+    "assessed": 31,
+    "hobby_hub": 26,
+    "orientation_universe": 4,
+    "editorial_topic": 1,
+    "visible_content_categories": 89,
+    "article_intents": 445
+  },
+  "next_action": "Continue with pending current CORE identities in Pflanzen."
+}
