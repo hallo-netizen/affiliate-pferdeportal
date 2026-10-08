@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-08
-STATUS: PSTE 0.57.58 + PSERC 0.28.33 REST-CLEANUP ABGESCHLOSSEN / VOLLSTÄNDIGER LOKALER POSITIV-NEGATIV-HARD-PASS / LIVE-INSTALLATION + READBACK OFFEN
+STATUS: PSTE 0.57.58 LIVE FIRST-CLICK FAIL `PSTE_SITE_STRUCTURE_STALE` / PSTE 0.57.59 KOMPAKTER ROOTFIX LOKAL HARD PASS / PSERC 0.28.33 UNVERÄNDERT
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -9,6 +9,51 @@ STATUS: PSTE 0.57.58 + PSERC 0.28.33 REST-CLEANUP ABGESCHLOSSEN / VOLLSTÄNDIGER
 - **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
 - **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 - **Aktiver Themenverwertungs-Zielvertrag:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+## LIVE-REGRESSION + ROOTFIX 2026-10-08 – 0.57.58 → 0.57.59
+
+### Echter Livefehler 0.57.58
+- Nutzer-Screenshot zeigt Portal SEO Themenengine **0.57.58** aktiv.
+- Erster Klick auf **Produktion → Automatik starten / fortsetzen** stoppt sofort.
+- sichtbarer Status: **GESTOPPT**.
+- exakter Fehler: `PSTE_SITE_STRUCTURE_STALE`.
+- sichtbarer Bestand: **4488 Themen / 32 aktuell planbar**.
+- Damit ist der frühere lokale 0.57.58-Hard-Pass für den echten gespeicherten Livezustand ausdrücklich **nicht ausreichend** gewesen.
+
+### Exakte Ursache
+- 0.57.58 prüft beim Existing-Only-Start den gespeicherten Site-Baseline-Stand.
+- Bei echter Strukturänderung blockiert `PSTE_Snapshot::rebaseResearchBaselineIfSafe()` korrekt mit `PSTE_SITE_STRUCTURE_STALE`.
+- Der Automatik-Orchestrator besaß aber keinen vorgeschalteten kompakten Rebind für diesen persistenten Livezustand.
+- Die frühere Testmatrix startete mit frischem/sauberem Zustand und enthielt diesen **ersten Klick mit gespeichertem stale Baseline-Zustand** nicht.
+
+### PSTE 0.57.59 – KISS-Fix
+- Installer: `PSTE-0.57.59-AUTOMATIK-STALE-BASELINE-COMPACT-REBIND-HARDPASS.zip`.
+- SHA-256: `a3808c0834b2d60a332a6dc3178403988fb1a80b0c62943173c1b9e5c050c2e8`.
+- Basis: exakt PSTE 0.57.58.
+- geändert: exakt **4 Dateien**: Admin-Orchestrator, Breadth-Queue, Runner, Versionsdatei.
+- **112/116 Dateien byteidentisch** zu 0.57.58.
+- Automatik bindet bei gültiger Strukturänderung einen vorhandenen COMPLETE-Kontext kompakt an die aktuellen Snapshots neu.
+- dieser kompakte Rebind scannt **0 Topic-Pool-Zeilen** und macht **0 Provideraufrufe**.
+- danach läuft nur der ohnehin notwendige Existing-Only-Bestandsweg in bestehenden **40er Batches**.
+- kein zweiter 4488er Portal-Kontext-Vollscan, solange ein COMPLETE-Kontext als sichere Rebind-Basis vorhanden ist.
+- voller Portal-Kontext-Refresh bleibt ausschließlich fail-closed Fallback, wenn keine COMPLETE-Kontextbasis existiert.
+
+### Frischer Regressionstest 0.57.59
+- Fresh-Unpack **116/116 byteidentisch**.
+- PHP **79/79 PASS**, JSON **36/36 PASS**.
+- Static Matrix **53/53 PASS**.
+- Compact-Preflight **5/5 PASS**.
+- exakter Automatik-Preflight inklusive **stale first click** / current next poll / mid-run stale / foreign research / fallback **5/5 PASS**.
+- bestehende Automatikregression **8/8 PASS**.
+- Kurzer Dienstweg **10/10 PASS**.
+- K0 **6/6 PASS**.
+- Menüregression PASS.
+- PSERC 0.28.33 Gate-/Integritätsregression unverändert PASS.
+
+Testreport:
+`PFERDE_ATELIER_PSTE_05759_LIVE_STALE_FIRST_CLICK_ROOTFIX_HARDPASS_TESTREPORT.json`
+SHA-256: `a7093902217d0905c97fdfba1bc2e15a8764063d32ef1e4cf5cc12abb903cc7f`.
+
 
 ## FINAL-CLEANUP 2026-10-08 – PSTE 0.57.58 + PSERC 0.28.33
 
@@ -863,19 +908,19 @@ Einordnung:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05758_PSERC_02833_LIVE_INSTALL_AND_READBACK_OPEN`
+`PSTE_05759_LIVE_RETEST_OPEN`
 
-Die lokale technische Arbeit ist abgeschlossen. Offen ist ausschließlich die reale WordPress-Installation/Abnahme des exakt geprüften Paars 0.57.58 + 0.28.33. Aus lokalem PASS wird kein LIVE-PASS erfunden.
+0.57.58 ist live am ersten Automatik-Klick mit `PSTE_SITE_STRUCTURE_STALE` gescheitert. Der exakt darauf gebaute 0.57.59-Kandidat ist lokal inklusive dieses persistenten Livezustands positiv/negativ geprüft. Offen ist ausschließlich die reale WordPress-Abnahme von 0.57.59.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05758_AND_02833_THEN_SINGLE_LIVE_E2E_READBACK`
+`INSTALL_PSTE_05759_ONLY_THEN_RETRY_SAME_AUTOMATIK_CLICK`
 
-1. Exakt `PSTE-0.57.58-KISS-FINAL-CLEANUP-HARDPASS.zip` und `PSERC-0.28.33-EVIDENCE-CONTRACT-SYNC-HARDPASS.zip` installieren.
-2. Versions-/Build-Readback durchführen.
-3. Einmal Automatik mit vorhandenem Bestand bis READY/NO_READY laufen lassen; Fortschritt/Hang/Resume und Produktionsdatei prüfen.
-4. Einmal Kurzer Dienstweg mit einem normalen K0-Thema sowie den gebundenen Spezialprofilen prüfen.
-5. Keine neue Providerrecherche, kein Publish und keine weitere Pluginänderung vor diesem Readback.
+1. **Nur PSTE 0.57.59 installieren.** PSERC 0.28.33 nicht erneut ändern.
+2. WordPress → **SEO Themenengine → Produktion**.
+3. Exakt denselben Button **Automatik starten / fortsetzen** einmal klicken.
+4. Vorher **keine Wartung**, **keinen manuellen Portalabgleich**, **keinen neuen Gesamtbestand**, **keine Providerrecherche** starten.
+5. Ergebnis/Status direkt readbacken. Erst danach weitere Aktion.
 
 ## NICHT ANFASSEN
 
