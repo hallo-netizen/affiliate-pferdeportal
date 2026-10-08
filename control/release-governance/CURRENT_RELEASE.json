@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.209",
-    "status": "WORKING_6_72_209_KISS_CLEANUP_TEXTLINK_TEST_REQUIRED",
+    "status": "WORKING_6_72_209_KISS_CLEANUP_TEXTLINK_PASS_FINALIZE_ONLY",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "",
+    "candidate_reference_artifact_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
     "candidate_reference_scope": "KISS cleanup of proven internally unused private helpers and direct hidden specialist-page registration; generic centrally managed affiliate textlinks use stable [affiliate_textlink id=\"...\"] placeholders. No new table, no new cron, no frontend HTTP, no automatic keyword linking, no new provider adapter.",
     "final_artifact_ref": "",
     "final_artifact_sha256": "",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.209.zip",
-    "handoff_artifact_bytes": 0,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_BOUND_TEST_REQUIRED",
+    "handoff_artifact_bytes": 810707,
+    "source_binding_status": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_GATE_PASS",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RUN_6_72_209_KISS_CLEANUP_TEXTLINK_HARDTEST",
-    "current_focus_reason": "User explicitly requested another complete KISS cleanup review and a general placeholder-based affiliate textlink backend analogous to tariff tools. Source changed; prior 6.72.208 PASS is stale for this candidate."
+    "current_focus": "FINALIZE_6_72_209_ONLY",
+    "current_focus_reason": "6.72.209 exact source passed current hard gate 54/54 and exact ZIP byte identity 28/28. No more source cleanup or textlink changes. Only bind the exact tested ZIP to the final repository artifact path and run release-check."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_209_KISS_CLEANUP_TEXTLINK_TEST_REQUIRED",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the existing current hard gate for exact 6.72.209. Verify direct-hidden backend pages, generic textlink placeholder storage/rendering positive and negative, existing tariff shortcode, bounded DB housekeeping, automation/reconcile/health invariants, PHP syntax and exact ZIP byte identity.",
-    "completion_condition": "6_72_209_CURRENT_WORKFLOW_PASS_EXACT_SOURCE_AND_ZIP",
-    "after_completion_action": "BIND_PASS_EVIDENCE_THEN_FINALIZE_RELEASE",
+    "state": "WORKING_6_72_209_KISS_CLEANUP_TEXTLINK_PASS_FINALIZE_ONLY",
+    "authorized_next_action": "FINALIZE_RELEASE",
+    "bound_user_scope_action": "Do not change functionality or perform further cleanup. Bind exact tested AFFILIATE_ZENTRALE_6.72.209.zip SHA256 0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7 to the final release artifact path and run release-check.",
+    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_RELEASE_CHECK_PASS",
+    "after_completion_action": "NONE",
     "no_optional_detours": true,
-    "sequence": 131,
+    "sequence": 132,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-063-final-geschlossen--nutzer-live-pass-08102026",
-    "evidence_ref": null,
-    "evidence_sha256": null,
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672209_kiss_cleanup_textlinks_20261008.md",
+    "evidence_sha256": "b13cfb263b2560d22fc82276964b0ddb12ab7e1cbc3397d86f2a97dea9def535",
     "current_source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_TEST_REQUIRED",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_209_KISS_CLEANUP_TEXTLINK_GATE_PASS",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,19 +1041,19 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "6.72.208 functional live PASS remains historical evidence for unchanged fach paths, but source changed for cleanup/textlinks, therefore exact 6.72.209 hardtest and installer identity are required.",
+    "pass_reuse_policy": "RUN_37779421162 exact 6.72.209 source + WordPress/MariaDB + textlink positive/negative + DB cleanup + ZIP identity PASS. Reuse while source manifest remains e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f.",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
     "gate_runner_scope": "6_72_209_KISS_CLEANUP_PLUS_GENERIC_TEXTLINKS",
-    "gate_runner_reason": "Reuse the existing current workflow; no new test architecture.",
+    "gate_runner_reason": "Existing current workflow passed exact current source; no new workflow architecture.",
     "final_installer": {
       "filename": "AFFILIATE_ZENTRALE_6.72.209.zip",
-      "sha256": "",
-      "bytes": 0,
-      "workflow_run": null,
-      "workflow_artifact_id": null,
-      "status": "TEST_REQUIRED"
+      "sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
+      "bytes": 810707,
+      "workflow_run": 37779421162,
+      "workflow_artifact_id": 11551770130,
+      "status": "EXACT_TESTED_INSTALLER_READY"
     }
   },
   "branch_policy": {
@@ -2656,16 +2656,45 @@
     ]
   },
   "handoff": {
-    "status": "WORKING",
+    "status": "READY",
     "entrypoint": "release/affiliate-zentrale/AGENTS.md",
     "current_authority": "control/release-governance/CURRENT_RELEASE.json",
-    "freshness_reference": "branch affiliate-release-current + generation 289 + manifest e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
-    "next_action": "RUN_BOUND_RELEASE_GATES",
+    "freshness_reference": "branch affiliate-release-current + run 37779421162 + manifest e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
+    "next_action": "FINALIZE_RELEASE",
     "do_not_touch": [
       "functional import/ranking/banner/product/calculator/provider paths",
       "glossary/breed live-passed rules",
-      "automation/reconcile/health architecture"
+      "automation/reconcile/health process",
+      "generic textlink behavior after 54/54 PASS"
     ],
     "plugin_office_artifact_sync": "BLOCKED_NO_GITHUB_PLUGIN_OFFICE_PATH_AND_LIBRARY_EXPLICITLY_DISALLOWED"
+  },
+  "current_bound_release_gate_672209": {
+    "status": "PASS_KISS_CLEANUP_GENERIC_TEXTLINKS",
+    "wordpress_mariadb_run": 37779421162,
+    "assertions": "PASS_54_OF_54",
+    "tested_head": "818f26becf39d96315d3f4d68b25728b39d41535",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672209_kiss_cleanup_textlinks_20261008.md",
+    "evidence_sha256": "b13cfb263b2560d22fc82276964b0ddb12ab7e1cbc3397d86f2a97dea9def535",
+    "source_manifest_sha256": "e88439cdc9a6fa1cfd4c1a21b156317cae178d99c9d1082e627c803f78721a5f",
+    "installer_sha256": "0d312d16afeb91c8886e513d85327c828a622b4c16dea1fbb071665561a012b7",
+    "installer_bytes": 810707,
+    "workflow_artifact_id": 11551770130,
+    "package_identity": "PASS_28_OF_28",
+    "scope": [
+      "PROVEN_DEAD_INTERNAL_HELPERS_REMOVED",
+      "DIRECT_HIDDEN_SPECIALIST_PAGE_REGISTRATION",
+      "GENERIC_TEXTLINK_PLACEHOLDERS",
+      "TEXTLINK_ACTIVE_INACTIVE_UNKNOWN_UPDATE_NEGATIVE_PASS",
+      "TEXTLINK_OPTION_NOT_AUTOLOAD_NO_NEW_TABLE",
+      "TARIFF_SHORTCODE_UNCHANGED",
+      "AUTOMATION_RECONCILE_HEALTH_INVARIANTS_PASS",
+      "DB_HOUSEKEEPING_POSNEG_PASS"
+    ],
+    "first_failed_run": {
+      "run": 37779116971,
+      "reason": "TEST_FIXTURE_USED_WORDPRESS_REJECTED_DOT_TEST_URL",
+      "source_changed_after_failure": false
+    }
   }
 }
