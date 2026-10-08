@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.14.0 STRUKTUR/NAV/MAGAZIN FULL LOCAL POS+NEG FRESH-ZIP HARD PASS / 19 EXPANSION-ANKER FINAL ASSESSED / MASTER+TARGET-DELTA PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.1 EXPANSION19 FULL LOCAL POS+NEG FRESH-ZIP HARD PASS / LIVE-DRY-RUN PENDING / KEIN LIVE-SYNC
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -10,68 +10,66 @@ NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
 NEUESTE LOKAL VERIFIZIERTE BASIS:
-`1.14.0`
+`1.14.1`
 
 GEPRÜFTES ARTEFAKT:
-`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_HARDPASS.zip`
 
 SHA-256:
-`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
+`64735c31f474a782cc324c68218aade99ccfca4b54ab08091d5f28cfcecae95e`
 
 PRÜFBERICHT:
-`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_REPORT.txt`
+`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_REPORT.txt`
 
 PRÜFBERICHT SHA-256:
-`1687f74207171534d7a83f07cbda55559f3189d2b073ec27aff78625e826fd7b`
+`5298211f6a86d33813cce5184b8cc2ab94303955968ff17970c7cbec35a5755e`
 
 ZIELPROFIL:
-`profiles/hobby-depot-v1.json` im V1.14.0-Artefakt
+`profiles/hobby-depot-v1.json` im V1.14.1-Artefakt
 
 ZIELPROFIL SHA-256:
-`6dda22c63fb23593b2eee8d8fbc067e9f732430cad70d5c0576bca40b95a474c`
+`cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0`
 
-AKTUELLER LOKALER V1.14.0-SOLLSTAND:
-- 841 eingefrorene Hobby-Identitäten;
-- 340 CORE;
+HOBBY MASTER:
+`profiles/hobby-master-v2-20261007.json` im V1.14.1-Artefakt
+
+MASTER SHA-256:
+`adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
+
+AKTUELLER LOKALER V1.14.1-SOLLSTAND:
+- 860 Hobby-Identitäten;
+- 359 CORE;
 - 501 Finder/Editorial;
-- 59 aktive Zwischenbereiche;
-- 446 aufgelöste Logikknoten;
-- 437 physische Zielobjekte;
-- 410 Pages;
+- 60 aktive Zwischenbereiche;
+- 466 aktive Logikknoten;
+- 457 physische Zielobjekte;
+- 430 Pages;
 - 4 WordPress-category;
 - 15 journal_cat;
 - 8 hp_listing_category;
 - 9 Relations;
-- 8 Hauptwelten als physische CORE-Roots;
-- Hobbywelten nur View;
-- Materialkunst entfernt;
-- Legacy-/Editorial-Leaks aus kanonischer Header-Navigation ausgeschlossen;
-- Treibholz/Treibholz sammeln nur als eine bestätigte Editorial-Identität;
-- Magazin-Navigation vollständig projiziert.
+- 97 Header-Navigationseinträge.
 
-V1.14.0-ABNAHME – LOKAL:
+ABNAHME:
 - Fresh-ZIP PHP 33/33 PASS;
 - ZIP-Integrität PASS;
-- initialer Dry-Run 362 CREATE + 75 ADOPT;
-- erster Sync 437/437 Readback COMPLETE;
-- 410/410 Page-Frontend PASS;
-- Header-Navigation PASS;
-- Magazin-Navigation PASS;
-- zweiter Dry-Run 437 UNCHANGED;
-- zweiter Sync 437 UNCHANGED;
-- V1.13.4→V1.14.0 Migration 12 CREATE + 425 UPDATE + 5 ARCHIVE PASS;
-- Negativsuite Readback/Page/Term-Rollback, Ambiguity, Foreign-Slug, Invalid-Profile und Missing-Taxonomy PASS/fail-closed.
+- Fresh Dry-Run 457 CREATE / 0 Provider / 0 Writes;
+- Fresh Sync 457/457 COMPLETE;
+- zweiter Sync 457 UNCHANGED;
+- V1.14.0→V1.14.1 Migration 20 CREATE + 437 UPDATE + 0 ARCHIVE / COMPLETE;
+- 430/430 Page-Frontend PASS;
+- Header 97/97 PASS;
+- Magazin/Anbieter/Hobbywelten/Front/Footer PASS;
+- Negativ- und Rollbacksuite PASS/fail-closed.
 
 CURRENT.zip:
 NICHT synchronisiert.
 
 GRUND:
-Der aktive GitHub-Connector kann Textstände aktualisieren, aber das lokal verifizierte ZIP nicht byteidentisch in das isolierte GitHub-`CURRENT.zip` übertragen. Deshalb wird kein Binary-Artefakt erfunden.
+Kein byteidentisches GitHub-Binary erfinden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-Noch NICHT installieren/synchronisieren.
-Die 19 Expansion-/Ankerkandidaten sind fachlich final bewertet: 12 HOBBY_HUB + 7 ORIENTATION_UNIVERSE, Beleg `../../../SEO_KATEGORIEN/HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`.
-Jetzt das begründete Master-/Target-Delta in einen neuen finalen V1.14-Kandidaten binden → neues Artefakt vollständig lokal POS/NEG prüfen → erst dann Live-Dry-Run.
+Exaktes V1.14.1-Artefakt für einen read-only Live-Dry-Run verwenden → JSON-Readback prüfen → erst nach Abnahme Sync.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
