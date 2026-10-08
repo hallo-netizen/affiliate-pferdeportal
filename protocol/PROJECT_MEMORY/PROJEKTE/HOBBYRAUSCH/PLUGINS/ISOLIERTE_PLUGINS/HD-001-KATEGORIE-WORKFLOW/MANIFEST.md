@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
-STAND: 2026-10-07
-STATUS: V1.12.6 STALE-EXPORT-FAILCLOSED LOKAL VERIFIZIERT / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
+STAND: 2026-10-08
+STATUS: V1.13.1 PRACTICAL FINAL TARGET LOKAL HARD PASS / LIVE-DRYRUN OFFEN / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -9,59 +9,57 @@ PLUGIN-ID:
 NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
-NEUESTE LOKAL VERIFIZIERTE TECHNISCHE BASIS:
-`1.12.6` (read-only V2-KISS-Bewertung; V1.12.0 bleibt Zielbaum-Baseline)
+NEUESTE LOKAL VERIFIZIERTE BASIS:
+`1.13.1`
 
 GEPRÜFTES ARTEFAKT:
-`HD001_V1.12.6_STALE_EXPORT_FAILCLOSED_HARDPASS.zip`
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
 
 SHA-256:
-`788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
+`508c3d520fc765223d9f643d06ca75ef07e8702612d5fecab416d771bfab5dc6`
 
 PRÜFBERICHT:
-`HD001_V1.12.6_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.13.1_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 PRÜFBERICHT SHA-256:
-`c9442f08b722e93a24fee697cec09d77e67f1ad9cd23cda9067a5185e90b042e`
+`b24bf83bc28a9e768ff89e8598338a22208e0256c2ed485847cf553e525ab345`
 
-REALER AUSGANGSBEFUND:
-Der nach V1.12.5 hochgeladene Download war bytegleich mit dem alten V1.12.3-Ergebnis.
-SHA-256:
-`086456f70d8896c51a97a27f7dcdc29906ad90534f9322aa6f1f5a7b519d69ae`
+ZIELPROFIL:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
 
-ROOT CAUSE:
-V1.12.5 recalculierte nur beim Rendern der Bewertungsseite. Der Download-Handler exportierte den gespeicherten Altstand ungeprüft.
+ZIELPROFIL SHA-256:
+`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
 
-V1.12.6:
-- Download selbst recalculiert Altstand;
-- fail-closed bei Recalc-Fehler;
-- 0 Provider-Aufrufe;
-- 0 neue Kosten;
-- 0 Strukturwrites.
+FINALER ZIELSTAND:
+- 841 eingefrorene Hobby-Identitäten;
+- 340 CORE;
+- 501 Finder/Editorial;
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- 404 Pages;
+- 8 Hauptwelten als physische CORE-Roots;
+- Hobbywelten nur View über 8 Relations.
 
-LOKALER TEST MIT EXAKTER REALDATEI:
-- plugin_version 1.12.6;
-- 34 ideale Leafs;
-- 1 Hub-Kandidat;
-- 1 Editorial-Kandidat;
-- 5 Aggregation-Reviews;
-- 3 Macro-Reviews;
-- 6 Evidence-Required;
-- 0 Zielbaum-Writes;
-- idempotenter zweiter Export PASS;
-- fehlendes Ergebnis BLOCKED PASS;
-- PHP 31/31 PASS;
-- ZIP-Integrität PASS.
+LOKALE ABNAHME:
+- Regression 270/270 PASS;
+- Final Target 24/24 PASS;
+- Baseline-Migration 11/11 PASS;
+- Fresh ZIP PHP 33/33 PASS;
+- Dry-Run 0 Provider-Calls / 0 Writes;
+- Fingerprint-Recheck vor Apply;
+- Live-Drift BLOCKED;
+- Legacy-Nichttarget-Kategorie wird NICHT archiviert;
+- echte obsolete Target-Bindings werden archiviert;
+- foreign collision BLOCKED.
 
 CURRENT.zip:
-In diesem Abschlusslauf NICHT synchronisiert.
+NICHT synchronisiert.
 
 GRUND:
-Der aktive GitHub-Connector kann Textdateien aktualisieren, aber das lokal verifizierte ZIP nicht als byteidentisches Binärartefakt in das isolierte GitHub-`CURRENT.zip` schreiben. Deshalb wird kein Ersatzartefakt erfunden.
+Der aktive GitHub-Connector kann Textstände aktualisieren, aber das lokal verifizierte ZIP nicht byteidentisch in das isolierte GitHub-`CURRENT.zip` übertragen. Deshalb wird kein Binary-Artefakt erfunden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-Das installierbare V1.12.6-ZIP liegt als geprüftes Gesprächs-/Library-Artefakt vor.
-Das isolierte GitHub-`CURRENT.zip` erst bei verfügbarem zulässigem Binär-Uploadweg bytegenau synchronisieren und SHA/Version erneut readback-prüfen.
+Real einmal installieren → finalen read-only Live-Dry-Run → JSON-Readback prüfen.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
