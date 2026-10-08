@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / EXPORT-GATE GESCHLOSSEN / KEIN ZIELBAUM-DEPLOYMENT
+STAND: 2026-10-08
+STATUS: V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / KEIN TECHNISCHER BLOCKER / BATCH 002 INPUT ÜBER ALLGEMEINEN UPLOADWEG VORBEREITET / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -160,23 +160,30 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-Kein technischer Plugin-Blocker für Batch 001.
+Kein technischer Plugin-Blocker.
 
-V1.12.6 ist real bestätigt:
-- Recalc COMPLETE;
-- 0 neue Provider-Aufrufe;
-- 0 neue Kosten;
-- 0 Strukturwrites;
-- Export liefert den korrigierten Stand.
+Batch 001 ist fachlich final geschlossen.
+V1.12.6 kann spätere Batches über die vorhandene allgemeine JSON-Uploadstruktur bewerten; dafür ist keine neue Plugin-Version nötig.
 
-Der offene Punkt liegt jetzt fachlich außerhalb des Plugin-Gates:
-`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`.
+Batch 002 ist extern vorbereitet:
+- 16 Kandidaten;
+- 51 Leafs;
+- 304 Artikelintents;
+- 304 Keywords;
+- exakt 1 geplanter DataForSEO-Overview;
+- 0 Strukturwrites.
+
+Offen:
+`HOBBY_MASTER_V2_BATCH_002_REAL_OVERVIEW_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Keine weitere Plugin-Änderung.
+Den vorbereiteten Batch-002-Input über `Kategorien → V2-Hobbybewertung` hochladen.
+Kostenlose Vorprüfung muss exakt 16 / 51 / 304 / 304 / 1 zeigen.
+Danach genau einen read-only Overview ausführen.
 
-Fachprüfung der sechs EVIDENCE_REQUIRED-Hubfälle fortsetzen.
+Keine Plugin-Änderung.
+Keine Tiefenprüfung.
 
 ## Release-/Artefaktgrenze
 
