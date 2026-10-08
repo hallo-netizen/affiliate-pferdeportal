@@ -11,7 +11,8 @@ on:
       - '.github/workflows/affiliate-v672195-hardtest.yml'
 
 permissions:
-  contents: read
+  contents: write
+  actions: read
 
 jobs:
   kiss-cleanup:
@@ -295,6 +296,37 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+
+      - name: Download exact tested 6.72.210 artifact for final bind
+        uses: actions/download-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.210
+          path: /tmp/exact-tested-672210
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: 37787914399
+
+      - name: Bind exact tested 6.72.210 installer to repository final path
+        shell: bash
+        run: |
+          set -euo pipefail
+          exact="/tmp/exact-tested-672210/AFFILIATE_ZENTRALE_6.72.210.zip"
+          test -f "$exact"
+          test "$(sha256sum "$exact" | awk '{print $1}')" = "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1"
+          test "$(stat -c%s "$exact")" = "811373"
+          target="release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.210.zip"
+          mkdir -p "$(dirname "$target")"
+          cp "$exact" "$target"
+          test "$(sha256sum "$target" | awk '{print $1}')" = "43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1"
+          test "$(stat -c%s "$target")" = "811373"
+          git fetch origin affiliate-release-current
+          test "$(git rev-parse origin/affiliate-release-current)" = "$GITHUB_SHA"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$target"
+          git diff --cached --quiet && { echo "Exact final artifact already bound."; exit 0; }
+          git commit -m "Publish exact tested Affiliate-Zentrale 6.72.210 installer [skip ci]"
+          git push origin HEAD:affiliate-release-current
 
       - name: Formal release-check
         shell: bash
