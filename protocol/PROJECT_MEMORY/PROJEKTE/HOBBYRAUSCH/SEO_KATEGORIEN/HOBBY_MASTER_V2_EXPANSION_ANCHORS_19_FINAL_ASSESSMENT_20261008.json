@@ -1,0 +1,1498 @@
+{
+  "contract": "HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-08",
+  "status": "PASS__19_OF_19_FINAL_ASSESSED__TARGET_DELTA_NOT_YET_MATERIALIZED",
+  "authority_context": {
+    "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/CURRENT_STATE.md",
+    "target_contract": "ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md@2.5",
+    "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.5",
+    "concept": "KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md",
+    "research_queue": "HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json",
+    "source_master_pointer": "KONZEPT/VORARBEITEN_HOBBYFINDER/HOBBY_MASTER_V2_CURRENT.md",
+    "verified_branch_head_before_assessment": "a55db91da93661e610ffbe39dc6c5a147eda7cb9"
+  },
+  "hard_rules_applied": [
+    "A_SCOPE -> B_IDENTITY -> C_CONTENT_CAPACITY -> D_PORTAL_ROLE -> E_ECONOMICS -> F_OWNERSHIP",
+    "No ninth world.",
+    "No DataForSEO-created structure.",
+    "No monetization-driven promotion.",
+    "No WordPress leaf categories are created by this assessment.",
+    "No live sync."
+  ],
+  "identity_collision_basis": {
+    "research_intake_checked_candidates": 19,
+    "exact_or_current_alias_collisions": 0,
+    "pass": true
+  },
+  "economics_policy": {
+    "result_for_new_19": "UNKNOWN_PENDING_PROVIDER_MATCH",
+    "reason": "The 19 candidates sit outside the current 841 source master and therefore do not inherit verified V1.12 monetization rules. Public product availability is not substituted for a verified provider binding.",
+    "consequence": "Structural validity may still be CORE, but no candidate receives automatic commercial prominence until provider/affiliate evidence exists."
+  },
+  "summary": {
+    "assessed": 19,
+    "in_scope": 19,
+    "out_of_scope": 0,
+    "hobby_hub": 12,
+    "orientation_universe": 7,
+    "editorial_topic": 0,
+    "article_only": 0,
+    "finder_only": 0,
+    "core_roles": 19,
+    "exact_alias_collisions": 0,
+    "live_sync_allowed": false,
+    "target_delta_allowed": true
+  },
+  "candidates": [
+    {
+      "name": "Fotografie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "gestalten",
+      "target_parent_hint": "Druck & Fotografie",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Drohnenfotografie",
+        "Astrofotografie",
+        "Mikrofotografie",
+        "Dunkelkammerfotografie",
+        "Nassplattenfotografie",
+        "Lochkamerafotografie"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic photography orientation: camera choice, exposure, lenses, composition and general image-making. Drone, astro, darkroom, wet-plate, pinhole, micro and other specific photography identities keep their specific intents.",
+      "external_evidence": [
+        "https://www.dvf-fotografie.de/seiten/mitgliedschaft.html"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Malen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "gestalten",
+      "target_parent_hint": "Malen & Zeichnen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 6,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Grundlagen",
+            "intent_count": 7,
+            "intents": [
+              "malen anfangen",
+              "Arbeitsplatz einrichten",
+              "Malgrund wählen",
+              "erste Farbmischungen",
+              "Grundlagen Farbenlehre",
+              "erste Pinselübungen",
+              "typische Anfängerfehler"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Farben & Materialien",
+            "intent_count": 8,
+            "intents": [
+              "Acrylfarben verstehen",
+              "Aquarellfarben verstehen",
+              "Ölfarben verstehen",
+              "Gouache verstehen",
+              "Malgründe vergleichen",
+              "Malmittel verwenden",
+              "Farben lagern",
+              "Palette auswählen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Werkzeuge & Setup",
+            "intent_count": 6,
+            "intents": [
+              "Pinselarten wählen",
+              "Staffelei auswählen",
+              "Paletten nutzen",
+              "Beleuchtung fürs Malen",
+              "Pinsel reinigen",
+              "Material transportieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Maltechniken",
+            "intent_count": 10,
+            "intents": [
+              "Lasieren",
+              "Nass-in-Nass",
+              "deckend malen",
+              "Trockenpinsel",
+              "Spachteltechnik",
+              "Strukturpaste",
+              "Farbverläufe",
+              "Kanten gestalten",
+              "Schichten aufbauen",
+              "Texturen erzeugen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Bildaufbau & Motive",
+            "intent_count": 8,
+            "intents": [
+              "Komposition",
+              "Perspektive im Bild",
+              "Licht und Schatten",
+              "Tonwerte",
+              "Landschaft malen",
+              "Stillleben malen",
+              "Porträt malen",
+              "abstrakt malen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Praxis & Fehler",
+            "intent_count": 6,
+            "intents": [
+              "Farben werden matschig",
+              "Trocknungszeiten",
+              "Fehler korrigieren",
+              "Risse vermeiden",
+              "Firnis und Schutz",
+              "Bilder lagern"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns general painting learning, materials, colour handling, generic painting technique and composition. Context-specific identities such as Seidenmalerei, Glasmalerei, Miniaturen bemalen, Brandmalerei and Schildermalerei keep their specific intents.",
+      "external_evidence": [
+        "https://www.gerstaecker.de/meisterschule-malen-mit-aquarell-acryl-oelfarben-den-eigenen-stil-finden.html"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Zeichnen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "gestalten",
+      "target_parent_hint": "Malen & Zeichnen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Grundformen",
+            "intent_count": 7,
+            "intents": [
+              "zeichnen anfangen",
+              "Handhaltung",
+              "Linien üben",
+              "Kreise und Ellipsen",
+              "Grundkörper konstruieren",
+              "Proportionen prüfen",
+              "Skizzen aufbauen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Material & Werkzeuge",
+            "intent_count": 6,
+            "intents": [
+              "Bleistifthärten",
+              "Papier wählen",
+              "Radierer nutzen",
+              "Spitzer wählen",
+              "Buntstifte einsetzen",
+              "Kohle einsetzen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Linie, Form & Perspektive",
+            "intent_count": 8,
+            "intents": [
+              "Konturen zeichnen",
+              "Form vereinfachen",
+              "Einpunktperspektive",
+              "Zweipunktperspektive",
+              "Verkürzungen",
+              "räumliche Tiefe",
+              "Maßverhältnisse",
+              "Konstruktion aus Grundformen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Licht, Schatten & Tonwerte",
+            "intent_count": 6,
+            "intents": [
+              "Schraffur",
+              "Kreuzschraffur",
+              "Tonwertskala",
+              "Lichtquelle verstehen",
+              "Kernschatten",
+              "Schlagschatten"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Motive & Praxis",
+            "intent_count": 9,
+            "intents": [
+              "Stillleben",
+              "Porträt",
+              "Architektur",
+              "Naturmotive",
+              "Tiere",
+              "Hände",
+              "Falten",
+              "Oberflächen",
+              "regelmäßig üben"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic drawing basics, materials, line/form, perspective, value and general motif practice. Karten zeichnen and other context-specific identities keep their specific intents.",
+      "external_evidence": [
+        "https://www.faber-castell.de/inspiration/alle-tutorials?activity-techniques=drawing&difficulty=advanced"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Nähen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "fertigen",
+      "target_parent_hint": "Textil",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 6,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Nähmaschine",
+            "intent_count": 8,
+            "intents": [
+              "Nähen anfangen",
+              "Nähmaschine auswählen",
+              "Nähmaschine einfädeln",
+              "Unterfaden einsetzen",
+              "Geradstich",
+              "Zickzackstich",
+              "Fadenspannung",
+              "erste Nähübung"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Stoffe, Nadeln & Garn",
+            "intent_count": 8,
+            "intents": [
+              "Webware",
+              "Jersey",
+              "Stoff vorwaschen",
+              "Nadeltypen",
+              "Garn wählen",
+              "Vlieseline",
+              "Stoffrichtung",
+              "Materialbedarf"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Schnittmuster & Zuschnitt",
+            "intent_count": 7,
+            "intents": [
+              "Schnittmuster lesen",
+              "Größe wählen",
+              "Nahtzugabe",
+              "Fadenlauf",
+              "Schnitt übertragen",
+              "Stoff zuschneiden",
+              "Markierungen übertragen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Nähte & Verarbeitung",
+            "intent_count": 10,
+            "intents": [
+              "Naht versäubern",
+              "Saum nähen",
+              "Reißverschluss",
+              "Knopfloch",
+              "Abnäher",
+              "Beleg",
+              "Bündchen",
+              "Taschen",
+              "Ecken und Rundungen",
+              "Naht auftrennen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Passform & Änderungen",
+            "intent_count": 7,
+            "intents": [
+              "Schnitt verlängern",
+              "Schnitt kürzen",
+              "Weite anpassen",
+              "Brustabnäher anpassen",
+              "Hosenbund anpassen",
+              "Ärmel anpassen",
+              "Probemodell"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Projekte, Reparatur & Pflege",
+            "intent_count": 8,
+            "intents": [
+              "Kissen nähen",
+              "Tasche nähen",
+              "Rock nähen",
+              "Hose nähen",
+              "Kleidung reparieren",
+              "Loch ausbessern",
+              "Naht reparieren",
+              "Nähprojekt pflegen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic sewing with machine/hand, fabrics, patterns, seams, fit and everyday projects. Historical clothing sewing, costume construction and other specialist identities keep their context-specific intents.",
+      "external_evidence": [
+        "https://initiative-handarbeit.de/themen/naehen"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Stricken",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "fertigen",
+      "target_parent_hint": "Textil",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Grundmaschen",
+            "intent_count": 7,
+            "intents": [
+              "Maschen anschlagen",
+              "rechte Maschen",
+              "linke Maschen",
+              "Randmaschen",
+              "abketten",
+              "Maschen zählen",
+              "Strickschrift lesen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Wolle, Nadeln & Maschenprobe",
+            "intent_count": 7,
+            "intents": [
+              "Garnstärken",
+              "Nadelstärken",
+              "Materialfasern",
+              "Maschenprobe",
+              "Lauflänge",
+              "Garnmenge berechnen",
+              "Nadelmaterial"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Muster & Techniken",
+            "intent_count": 9,
+            "intents": [
+              "Bündchenmuster",
+              "Perlmuster",
+              "Zopfmuster",
+              "Lochmuster",
+              "Farbwechsel",
+              "mehrfarbig stricken",
+              "Rundstricken",
+              "verkürzte Reihen",
+              "Maschen aufnehmen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Formen & Passform",
+            "intent_count": 7,
+            "intents": [
+              "Zunahmen",
+              "Abnahmen",
+              "Ärmel formen",
+              "Halsausschnitt",
+              "Schultern",
+              "Größe anpassen",
+              "Strickstück spannen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Projekte, Fehler & Pflege",
+            "intent_count": 8,
+            "intents": [
+              "Schal",
+              "Mütze",
+              "Socken",
+              "Pullover",
+              "fallengelassene Masche",
+              "Fehler zurückstricken",
+              "Fäden vernähen",
+              "Strickstücke waschen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic knitting basics, yarn/needles, stitch patterns, shaping and ordinary knitting projects. Specialist textile identities retain their own techniques.",
+      "external_evidence": [
+        "https://initiative-handarbeit.de/themen/stricken"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Häkeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "fertigen",
+      "target_parent_hint": "Textil",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Grundmaschen",
+            "intent_count": 7,
+            "intents": [
+              "Luftmaschen",
+              "feste Maschen",
+              "halbe Stäbchen",
+              "Stäbchen",
+              "Kettmaschen",
+              "Wendeluftmaschen",
+              "Häkelschrift lesen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Garn, Nadeln & Maschenprobe",
+            "intent_count": 6,
+            "intents": [
+              "Garnstärken",
+              "Häkelnadel wählen",
+              "Fasern wählen",
+              "Maschenprobe",
+              "Garnmenge berechnen",
+              "Nadelmaterial"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Muster & Techniken",
+            "intent_count": 9,
+            "intents": [
+              "in Runden häkeln",
+              "in Reihen häkeln",
+              "Farbwechsel",
+              "Granny Squares",
+              "Reliefmaschen",
+              "Muschelmuster",
+              "Netzmuster",
+              "Zu- und Abnahmen",
+              "Teile verbinden"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Formen & Konstruktion",
+            "intent_count": 6,
+            "intents": [
+              "Kreis häkeln",
+              "Oval häkeln",
+              "rechteckig häkeln",
+              "Ärmel formen",
+              "Halsausschnitt",
+              "Größe anpassen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Projekte, Fehler & Pflege",
+            "intent_count": 8,
+            "intents": [
+              "Topflappen",
+              "Schal",
+              "Mütze",
+              "Tasche",
+              "Pullover",
+              "Maschenfehler korrigieren",
+              "Fäden vernähen",
+              "Häkelstücke waschen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic crochet basics, yarn/hooks, stitch patterns, shaping and ordinary crochet projects. Specialist textile identities retain their specific intents.",
+      "external_evidence": [
+        "https://initiative-handarbeit.de/themen/haekeln"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Holzwerken",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "fertigen",
+      "target_parent_hint": "Holz",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Schnitzen",
+        "Drechseln",
+        "Holzverbindungen",
+        "Holzmodellbau",
+        "Möbelrestaurierung",
+        "Möbel-Upcycling"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic woodworking orientation, workshop/safety, wood selection and the map of woodworking practices. Schnitzen, Drechseln, Holzverbindungen, Holzmodellbau, Möbelrestaurierung and other concrete practices keep their specific intents.",
+      "external_evidence": [
+        "https://www.holzwerken.net/",
+        "https://www.holzwerken.net/produkt/einfach-holzwerken/"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Heimwerken",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "fertigen",
+      "target_parent_hint": null,
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 6,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg, Werkzeug & Sicherheit",
+            "intent_count": 8,
+            "intents": [
+              "Grundausstattung",
+              "Werkzeugkoffer",
+              "Akkuschrauber",
+              "Bohrmaschine",
+              "Messwerkzeuge",
+              "Schutzausrüstung",
+              "Arbeitsplatz sichern",
+              "Werkzeug pflegen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Messen, Bohren & Befestigen",
+            "intent_count": 8,
+            "intents": [
+              "richtig messen",
+              "Dübel wählen",
+              "in Mauerwerk bohren",
+              "in Fliesen bohren",
+              "Schrauben wählen",
+              "Lasten befestigen",
+              "Regale montieren",
+              "Bilder aufhängen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Wände, Böden & Oberflächen",
+            "intent_count": 8,
+            "intents": [
+              "Wände streichen",
+              "Tapezieren",
+              "Löcher spachteln",
+              "Laminat verlegen",
+              "Sockelleisten montieren",
+              "Silikonfugen erneuern",
+              "Oberflächen schleifen",
+              "Lackieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Montieren & Reparieren",
+            "intent_count": 7,
+            "intents": [
+              "Möbel montieren",
+              "Scharnier einstellen",
+              "Schublade reparieren",
+              "Tür einstellen",
+              "lockere Verbindung reparieren",
+              "Dichtung wechseln",
+              "kleine Beschläge ersetzen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Kleine Bauprojekte",
+            "intent_count": 6,
+            "intents": [
+              "Werkbank bauen",
+              "einfaches Regal bauen",
+              "Pflanzkasten bauen",
+              "Raumteiler bauen",
+              "Wandverkleidung montieren",
+              "Stauraumlösung bauen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Werkstatt & Projektpraxis",
+            "intent_count": 7,
+            "intents": [
+              "Werkstatt einrichten",
+              "Werkzeuge lagern",
+              "Material lagern",
+              "Projekt planen",
+              "Materialbedarf berechnen",
+              "Staub absaugen",
+              "Arbeitsplatz beleuchten"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic household DIY, mounting, repair and renovation practice. Specialist woodworking, metalwork, electrical/electronics, Smart Home and craft identities keep their technical/specialist intents.",
+      "external_evidence": [
+        "https://www.heimwerker.de/",
+        "https://www.heimwerker.de/werkstatt-einrichten/"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Wandern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Outdoor",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Tourwahl",
+            "intent_count": 6,
+            "intents": [
+              "Wandern anfangen",
+              "Schwierigkeitsgrad wählen",
+              "Streckenlänge wählen",
+              "Höhenmeter einschätzen",
+              "Rundtour planen",
+              "Tageswanderung planen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Ausrüstung & Schuhe",
+            "intent_count": 8,
+            "intents": [
+              "Wanderschuhe wählen",
+              "Rucksack wählen",
+              "Bekleidung schichten",
+              "Wanderstöcke",
+              "Trinksystem",
+              "Erste-Hilfe-Set",
+              "Regenschutz",
+              "Packliste"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Planung & Navigation",
+            "intent_count": 7,
+            "intents": [
+              "Wanderkarte lesen",
+              "GPX nutzen",
+              "Kompass nutzen",
+              "Wegmarkierungen",
+              "Anreise planen",
+              "Pausen planen",
+              "Umkehrpunkt festlegen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Technik & Kondition",
+            "intent_count": 6,
+            "intents": [
+              "bergauf gehen",
+              "bergab gehen",
+              "Trittsicherheit",
+              "Tempo finden",
+              "Ausdauer aufbauen",
+              "Blasen vermeiden"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Sicherheit, Wetter & Natur",
+            "intent_count": 8,
+            "intents": [
+              "Wetter prüfen",
+              "Gewitter",
+              "Hitze",
+              "Kälte",
+              "Notfall unterwegs",
+              "Verhalten im Wald",
+              "Naturschutz",
+              "Zecken"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic day/long-distance hiking basics, planning, equipment, walking technique and hiking safety. Specialist trekking/ultralight and other named outdoor identities keep their specific intents.",
+      "external_evidence": [
+        "https://www.wanderverband.de/",
+        "https://ausbildung.alpenverein.de/coursedetails.aspx?cnmd=S00832&courseno=2026-B413&id=10001013"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Radfahren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Outdoor",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Tourenradfahren",
+        "Rennrad",
+        "Mountainbike",
+        "Gravel",
+        "Bikepacking",
+        "Pumptrack"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic cycling orientation, bike choice, cross-discipline basics and routing into concrete cycling practices. Bikepacking, pumptrack and discipline-specific cycling intents remain separate.",
+      "external_evidence": [
+        "https://www.adfc.de/artikel/adfc-radreiseanalyse-2025-ergebnisse"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Camping",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Outdoor",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Zeltcamping",
+        "Wohnwagencamping",
+        "Wohnmobilcamping",
+        "Wintercamping",
+        "Hammock Camping",
+        "Tarp Camping",
+        "Hot Tenting"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic camping orientation, choosing camping form, campsite basics and cross-form preparation. Wintercamping, Hammock Camping, Tarp Camping, Hot Tenting and other concrete forms keep their specific intents.",
+      "external_evidence": [
+        "https://www.camping.info/de/magazin/a/camping-info-nutzeranalyse"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Schwimmen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Wasser",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Wassergefühl",
+            "intent_count": 6,
+            "intents": [
+              "Wassergewöhnung",
+              "Atmung ins Wasser",
+              "Wasserlage",
+              "Gleiten",
+              "Beinschlag Grundlagen",
+              "Armzug Grundlagen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Schwimmarten & Technik",
+            "intent_count": 8,
+            "intents": [
+              "Kraultechnik",
+              "Brusttechnik",
+              "Rückenschwimmen",
+              "Delfin Grundlagen",
+              "Wenden",
+              "Startsprung",
+              "Technikfehler",
+              "Koordination"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Training & Ausdauer",
+            "intent_count": 6,
+            "intents": [
+              "Trainingsplan Anfänger",
+              "Intervalle",
+              "Grundlagenausdauer",
+              "Technikdrills",
+              "Tempo verbessern",
+              "Distanz steigern"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Ausrüstung",
+            "intent_count": 6,
+            "intents": [
+              "Schwimmbrille",
+              "Badebekleidung",
+              "Pullbuoy",
+              "Kickboard",
+              "Paddles",
+              "Badekappe"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Sicherheit & Praxis",
+            "intent_count": 6,
+            "intents": [
+              "Schwimmbadregeln",
+              "Freiwasser Grundlagen",
+              "Wassertemperatur",
+              "Krämpfe",
+              "Pausen",
+              "Hygiene"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic recreational swimming, core techniques, training and general swim equipment. Specialist identities such as Freediving, Mermaid Swimming and Fin Swimming keep their specific intents.",
+      "external_evidence": [
+        "https://www.dsv.de/de/schwimmen-lernen/"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Klettern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Klettern & Seil",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Sportklettern indoor",
+        "Sportklettern am Fels",
+        "Alpinklettern",
+        "Bouldern",
+        "Baumklettern",
+        "Seiltechnik"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic climbing orientation, comparison of disciplines and cross-discipline safety/learning paths. Bouldern and specific climbing disciplines keep their own specific intents.",
+      "external_evidence": [
+        "https://www.alpenverein.de/artikel/klettern_881a42fa-c032-4677-bd76-f9ceb330fa9f",
+        "https://www.alpenverein.de/artikel/alpinklettern-so-gehts_09c3ef79-9cbe-48c7-9812-d6eba18fc6ba"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Bouldern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Klettern & Seil",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Hallenpraxis",
+            "intent_count": 6,
+            "intents": [
+              "Bouldern anfangen",
+              "Schwierigkeitsgrade",
+              "Hallenregeln",
+              "Aufwärmen",
+              "Abspringen",
+              "erste Boulder lesen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Ausrüstung",
+            "intent_count": 5,
+            "intents": [
+              "Boulderschuhe",
+              "Chalk",
+              "Chalkbag",
+              "Bürste",
+              "Crashpad"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Technik & Bewegung",
+            "intent_count": 9,
+            "intents": [
+              "Antreten",
+              "Körperschwerpunkt",
+              "Eindrehen",
+              "Heel Hook",
+              "Toe Hook",
+              "Mantle",
+              "Dynamische Züge",
+              "Flaggen",
+              "Tritttechnik"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Training",
+            "intent_count": 8,
+            "intents": [
+              "Fingerkraft",
+              "Zugkraft",
+              "Rumpfkraft",
+              "Beweglichkeit",
+              "Ausdauer",
+              "Regeneration",
+              "Trainingsplan",
+              "Verletzungen vorbeugen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Outdoor & Sicherheit",
+            "intent_count": 7,
+            "intents": [
+              "Crashpad platzieren",
+              "Spotten",
+              "Absprungbereich",
+              "Felsregeln",
+              "Naturschutz",
+              "Wetter",
+              "Haut und Finger pflegen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns bouldering in hall and outdoors, movement technique, bouldering training and bouldering-specific equipment/safety. Generic climbing orientation remains with Klettern.",
+      "external_evidence": [
+        "https://www.alpenverein.de/artikel/was-ist-bouldern_133a0047-bb6c-498b-9004-742a32c2d065",
+        "https://www.alpenverein.de/artikel/sicher-bouldern-outdoor_da00f78f-e1db-45d0-84e7-3a20ed556797"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Gärtnern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "pflanzen",
+      "target_parent_hint": null,
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Gemüseanbau",
+        "Ziergarten",
+        "Kräuteranbau",
+        "Obstgarten",
+        "Saatgut & Zucht",
+        "ökologisches Gärtnern"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic garden-practice orientation for soil-based outdoor gardening, garden planning/care and routing to concrete plant/crop practices. Gemüseanbau and specialist plant identities keep their specific intents. It does not replace the main world Pflanzen.",
+      "external_evidence": [
+        "https://www.landwirtschaft.de/garten/selbst-anbauen/umweltfreundlich-gaertnern/klimafreundlich-gaertnern-wie-geht-das",
+        "https://www.landwirtschaft.de/garten/selbst-anbauen/welchen-boden-habe-ich-in-meinem-garten"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Gemüseanbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "pflanzen",
+      "target_parent_hint": "Essbare Pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 6,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Planung, Standort & Beet",
+            "intent_count": 7,
+            "intents": [
+              "Gemüsegarten planen",
+              "Sonne und Schatten",
+              "Beetgröße",
+              "Hochbeet",
+              "Mischkultur",
+              "Fruchtfolge planen",
+              "Balkonanbau"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Aussaat & Anzucht",
+            "intent_count": 8,
+            "intents": [
+              "Aussaatkalender",
+              "Vorkultur",
+              "Direktsaat",
+              "Keimtemperatur",
+              "Pikieren",
+              "Abhärten",
+              "Jungpflanzen setzen",
+              "Saattiefe"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Boden, Düngung & Kompost",
+            "intent_count": 7,
+            "intents": [
+              "Bodenart bestimmen",
+              "Boden verbessern",
+              "Kompost",
+              "organisch düngen",
+              "Nährstoffbedarf",
+              "pH Grundlagen",
+              "Mulchen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Bewässerung & Pflege",
+            "intent_count": 6,
+            "intents": [
+              "richtig gießen",
+              "Tropfbewässerung",
+              "Mulch gegen Trockenheit",
+              "Ausgeizen",
+              "Stützen",
+              "Unkraut regulieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Krankheiten & Schädlinge",
+            "intent_count": 8,
+            "intents": [
+              "Blattläuse",
+              "Schnecken",
+              "Pilzkrankheiten",
+              "Nützlinge",
+              "Kulturschutznetz",
+              "Vorbeugung",
+              "befallene Pflanzen behandeln",
+              "Pflanzenschutz ohne Chemie"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Ernte, Saatgut & Saison",
+            "intent_count": 8,
+            "intents": [
+              "Erntezeitpunkt",
+              "richtig lagern",
+              "Samen gewinnen",
+              "Saatgut trocknen",
+              "Nachkultur",
+              "Gründüngung",
+              "Beet winterfest",
+              "Saison verlängern"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic home vegetable growing from planning and sowing through care and harvest. Crop-specific identities such as Chili-Zucht, Tomatensorten-Zucht and Saatguterhaltung keep their specific intents.",
+      "external_evidence": [
+        "https://www.landwirtschaft.de/landwirtschaftliche-produkte/wie-werden-unsere-lebensmittel-erzeugt/obst-und-gemuese",
+        "https://www.landwirtschaft.de/garten/selbst-anbauen/obst-und-gemuese/samen-und-ableger-ernten-gemuese-und-obst-selbst-vermehren"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Briefmarken sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "sammeln",
+      "target_parent_hint": "Papier & Dokumente",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg & Sammelgebiete",
+            "intent_count": 6,
+            "intents": [
+              "Briefmarken sammeln anfangen",
+              "Ländersammlung",
+              "Motivsammlung",
+              "Zeitraum wählen",
+              "gestempelt oder postfrisch",
+              "Sammlungsziel definieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Bestimmen & Katalogisieren",
+            "intent_count": 7,
+            "intents": [
+              "Briefmarke bestimmen",
+              "Katalog nutzen",
+              "Wasserzeichen",
+              "Zähnung",
+              "Druckvarianten",
+              "Ausgabejahr",
+              "Sammlung inventarisieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Zustand, Echtheit & Wert",
+            "intent_count": 7,
+            "intents": [
+              "Erhaltung beurteilen",
+              "Gummierung",
+              "Stempel beurteilen",
+              "Beschädigungen",
+              "Fälschungen erkennen",
+              "Prüfzeichen",
+              "Wert grob einschätzen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Aufbewahrung & Pflege",
+            "intent_count": 6,
+            "intents": [
+              "Album wählen",
+              "Einsteckbuch",
+              "Klemmtaschen",
+              "Pinzette",
+              "Feuchtigkeit vermeiden",
+              "Lichtschutz"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Tauschen, Kaufen & Ausstellen",
+            "intent_count": 7,
+            "intents": [
+              "Tauschpartner finden",
+              "Tauschtag",
+              "Börse",
+              "online kaufen",
+              "Auktion Grundlagen",
+              "Ausstellungssammlung",
+              "Sammlerschutz"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic philately/briefmark collection building, identification, cataloguing, condition, storage and exchange. Specialized postal-history or other paper-collecting identities keep their own intents.",
+      "external_evidence": [
+        "https://www.bdph.de/",
+        "https://www.bdph.de/gemeinschaft/ortsvereine"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Angeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "bewegen",
+      "target_parent_hint": "Outdoor",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "pillar": "CORE",
+      "decomposition_evidence": [
+        "Süßwasserangeln",
+        "Meeresangeln",
+        "Fliegenfischen",
+        "Raubfischangeln",
+        "Karpfenangeln",
+        "Ansitzangeln"
+      ],
+      "orientation_rule": "Generic orientation only; specific subpractice intents remain with their own owners.",
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns generic recreational angling orientation, licensing/start, cross-method equipment and routing into angling methods. Magnetfischen is not angling and remains separate; method-specific fishing pages own their specific intents.",
+      "external_evidence": [
+        "https://www.dafv.de/service/zahlen-und-fakten-rund-um-das-angeln",
+        "https://www.dafv.de/themen/angeln-und-fischen",
+        "https://www.dafv.de/service/wie-werde-ich-angler?catid=2&id=1153%3Adafv-jugendtreff&view=article"
+      ],
+      "assessment_status": "ASSESSED"
+    },
+    {
+      "name": "Plane Spotting",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED_NEW__NO_EXACT_OR_CURRENT_ALIAS_COLLISION",
+      "identity_action": "NEW_PROVISIONAL_ID_ALLOWED",
+      "natural_world": "forschen",
+      "target_parent_hint": "Messen & Analysieren",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "pillar": "CORE",
+      "content_capacity": {
+        "fit_leaf_count": 5,
+        "hub_result": "HOBBY_HUB_FIT",
+        "capacity_clusters": [
+          {
+            "name": "Einstieg, Orte & Regeln",
+            "intent_count": 6,
+            "intents": [
+              "Planespotting anfangen",
+              "Spotterpunkt finden",
+              "Flughafenregeln",
+              "öffentliche Standorte",
+              "Sicherheitsabstand",
+              "Wetter und Windrichtung"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Flugzeuge erkennen",
+            "intent_count": 8,
+            "intents": [
+              "Flugzeugtypen unterscheiden",
+              "Airline-Lackierungen",
+              "Registrierungen lesen",
+              "Frachter erkennen",
+              "Sonderlackierungen",
+              "Flugzeugfamilien",
+              "Triebwerke unterscheiden",
+              "Typenlisten führen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Tracking & Planung",
+            "intent_count": 7,
+            "intents": [
+              "Flugtracker nutzen",
+              "Ankunft planen",
+              "Abflug planen",
+              "Startbahn abschätzen",
+              "seltene Maschine finden",
+              "Flugnummern verstehen",
+              "Tagesplanung"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Fotografie & Dokumentation",
+            "intent_count": 8,
+            "intents": [
+              "Flugzeuge scharf fotografieren",
+              "Mitzieher",
+              "Brennweite am Flughafen",
+              "Hitzeflimmern",
+              "Gegenlicht",
+              "Standortwinkel",
+              "Serienaufnahme",
+              "Bilddaten dokumentieren"
+            ],
+            "threshold_result": "LEAF_FIT"
+          },
+          {
+            "name": "Archiv, Sammlung & Community",
+            "intent_count": 6,
+            "intents": [
+              "Bilder archivieren",
+              "Registrierungslog führen",
+              "Dublettenkontrolle",
+              "Sammlungsziele",
+              "Spotter-Community",
+              "Bilder tauschen"
+            ],
+            "threshold_result": "LEAF_FIT"
+          }
+        ],
+        "materialize_leaf_categories_now": false,
+        "note": "These clusters prove subject-defined capacity only. They do not create WordPress categories; the separate lowest-category decision remains later."
+      },
+      "economics": "UNKNOWN_PENDING_PROVIDER_MATCH",
+      "economics_effect": "NO_AUTOMATIC_COMMERCIAL_PROMINENCE",
+      "ownership": "Owns aircraft observation, identification, registrations, spotting locations, flight-tracking preparation and aircraft-specific photographic documentation. Generic camera/photography technique remains with Fotografie.",
+      "external_evidence": [
+        "https://www.fraport.com/de/konzern/ueber-uns/100jahrewieimflug/planespotting--fra.html"
+      ],
+      "assessment_status": "ASSESSED"
+    }
+  ],
+  "target_delta_guidance": {
+    "existing_intermediate_hints": {
+      "Fotografie": "Gestalten -> Druck & Fotografie",
+      "Malen": "Gestalten -> Malen & Zeichnen",
+      "Zeichnen": "Gestalten -> Malen & Zeichnen",
+      "Nähen": "Fertigen -> Textil",
+      "Stricken": "Fertigen -> Textil",
+      "Häkeln": "Fertigen -> Textil",
+      "Holzwerken": "Fertigen -> Holz",
+      "Wandern": "Bewegen -> Outdoor",
+      "Radfahren": "Bewegen -> Outdoor",
+      "Camping": "Bewegen -> Outdoor",
+      "Schwimmen": "Bewegen -> Wasser",
+      "Klettern": "Bewegen -> Klettern & Seil",
+      "Bouldern": "Bewegen -> Klettern & Seil",
+      "Gemüseanbau": "Pflanzen -> Essbare Pflanzen",
+      "Briefmarken sammeln": "Sammeln -> Papier & Dokumente",
+      "Angeln": "Bewegen -> Outdoor",
+      "Plane Spotting": "Forschen -> Messen & Analysieren"
+    },
+    "direct_or_delta_parent_review": {
+      "Heimwerken": "Fertigen; do not invent a one-child intermediate merely for symmetry.",
+      "Gärtnern": "Pflanzen; do not replace or duplicate the Pflanzen world. Exact parent is a target-delta decision."
+    },
+    "branch_activation": "Essbare Pflanzen was previously omitted because empty. Gemüseanbau now supplies a real occupant, so activation may be evaluated in the target delta; it is not created by this assessment.",
+    "no_leaf_materialization": "Capacity clusters prove role fit only. The general lowest WordPress content-category design remains a separate later concept decision."
+  },
+  "next_action": "Build one reasoned V1.14 target-profile delta from these 19 assessed decisions; then build the resulting final candidate and rerun the complete local POSITIVE + NEGATIVE E2E. Only after a full PASS may a live dry-run occur."
+}
