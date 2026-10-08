@@ -1140,3 +1140,43 @@ SHA-256:
 NEXT:
 Exakt V1.13.4 installieren → ein frischer Live-Dry-Run → JSON.
 Noch kein Sync.
+
+
+## HOBBYRAUSCH-HD001-20261008-Z – V1.14.0 Struktur, Target-Navigation und Magazin lokal vollständig korrigiert
+
+REGELBASIS:
+Zielvertrag 2.5 + Regeln 1.5 + 3-Säulen-Zielbaum + Frontend-/Konzeptaudit V1.13.4.
+
+BEREINIGUNG:
+- Header ausschließlich aus aktivem Target-Snapshot;
+- Legacy-Seiten aus kanonischer Navigation ausgeschlossen;
+- Treibholz/Treibholz sammeln nur eine bestätigte Editorial-Identität;
+- Magazin-Navigation vollständig projiziert;
+- Schrift/Papier, Metall/Schmuck, Leder/Textil, Elektronik/Funk, Smart Home, Moos/Miniaturgärten, Ameisen/Insekten/Wirbellose fachlich getrennt;
+- keine leeren Symmetrieäste;
+- Robotik- und Bonsai-Hobbyseiten bleiben erhalten;
+- sieben unbelegte Alias-Merges aus Arbeitsstand verworfen;
+- unbelegte BattleBots-Umbenennung verworfen;
+- 841 Identitäten / 340 CORE bleiben autoritativ.
+
+LOKALER ZIELSTAND:
+446 Logikknoten / 437 physische Ziele / 59 Zwischenbereiche / 96 Headeritems.
+
+FRESH-ZIP POSITIV:
+362 CREATE + 75 ADOPT → 437/437 Readback COMPLETE → 410/410 Page-Frontend PASS → 437 UNCHANGED.
+
+MIGRATION V1.13.4:
+12 CREATE + 425 UPDATE + 5 ARCHIVE → 437/437 COMPLETE → 437 UNCHANGED.
+Archive nur ersetzte kombinierte Strukturknoten.
+
+NEGATIV:
+Readback-/Page-/Term-Fehlerrollback, Ambiguity, Foreign-Slug, Invalid-Profile, Missing-Taxonomy = PASS/fail-closed.
+
+ARTEFAKT:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
+SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
+
+OFFEN:
+19 bekannte/große Erweiterungs-Ankerkandidaten sind laut Master nur Research Queue und noch nicht final bewertet.
+Keine Blind-Promotion; kein Live-Sync vor dieser Entscheidung.
