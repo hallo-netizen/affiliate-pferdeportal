@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 BEREINIGT / WELT-ZWISCHENSTRUKTUR FACHLICH GEPRÜFT / 299 CURRENT-CORE-ROLLENRECHECK PENDING / KEIN WORDPRESS-WRITE / KEIN PLUGIN-FIX
+STATUS: REGELN 2.6/1.6 BEREINIGT / 65ER WELT-ZWISCHENSTRUKTUR GEPRÜFT / 161 VON 359 CURRENT-CORE ROLLENENTSCHIEDEN / 75 HISTORISCHE HOBBY_HUBS MIT 355 LEAFS NACHGEZOGEN / 198 CORE-RECHECK PENDING / KEIN WORDPRESS-WRITE
 
 ## Ziel
 
@@ -1030,19 +1030,48 @@ Aktuelle CORE-Abdeckung:
 - 60 davon besitzen eine aktuelle produktionsgültige Rollenentscheidung aus diesen Quellen;
 - **299 sind noch nach Regeln 1.6 global zu revalidieren**.
 
+## GLOBALER CORE-RECHECK – ZWISCHENSTAND
+
+Aktuelle feste Prüfmenge:
+`HD001_CURRENT_CORE_359_NAMES_20261008.json`
+
+Neu geprüft:
+- 359 aktuelle CORE-Identitäten als feste Prüfmenge gebunden;
+- 161 besitzen jetzt eine aktuelle Rollenentscheidung nach 1.6;
+- davon wurden die 75 historischen aktuellen HOBBY_HUBs aus Batch 005–019 vollständig auf die fehlende Content-Ebene nachgezogen;
+- Ergebnis dieser 75 Hubs: **355 sichtbare Content-Kategorien**, Capacity jeweils 5–12 Intents;
+- 0 Capacity-Verstöße in den Nachprüfungen;
+- bekannte alte Demotion-/Aliasfälle werden nicht blind als CORE-HUB weitergeführt;
+- historische Batch-Summaries werden nicht als Wahrheit verwendet; Einzelentscheidungen und vorhandene Evidence haben Vorrang.
+
+Detail-Evidence:
+- Batch 005: `HOBBY_MASTER_V2_BATCH_005_RULE16_RECONSTRUCTION_20261008.json`;
+- Batch 006/007/009: `HOBBY_MASTER_V2_BATCH_006_007_009_RULE16_RECONSTRUCTION_20261008.json`;
+- Batch 010: `HOBBY_MASTER_V2_BATCH_010_RULE16_RECONSTRUCTION_20261008.json`;
+- Batch 011: `HOBBY_MASTER_V2_BATCH_011_RULE16_RECONSTRUCTION_20261008.json`;
+- Batch 012: A/B1/B2;
+- Batch 013: `HOBBY_MASTER_V2_BATCH_013_RULE16_RECHECK_20261008.json`;
+- Batch 014/015: Einzel-Hub-Rechecks;
+- Batch 016/017/019: `HD001_BATCH016_017_019_RULE16_VALIDATION_SUMMARY_20261008.json` + lokal validierte Detail-Evidence SHA-256 `d5ed61305fe2e057baba1e20a8743567778cbebc7c5be91ef995ea7659ee2f9b`.
+
+Damit ist die frühere 299er-Blackbox reduziert:
+- **161 entschieden**;
+- **198 aktuelle CORE-Identitäten noch offen**.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_GLOBAL_CORE_ROLE_RECHECK_299_PENDING`
+`HD001_GLOBAL_CORE_ROLE_RECHECK_198_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Die 299 aktuellen CORE-Identitäten in **einem globalen Recheck** nach Regeln 1.6 prüfen.
-Historische Batch-004–019-Evidence darf dabei wiederverwendet werden, aber nicht blind als Entscheidung gelten.
+Die exakt verbleibenden 198 aktuellen CORE-Identitäten global nach Regeln 1.6 prüfen:
+- HOBBY_HUB nur mit 3–6 tragfähigen Leafs;
+- ORIENTATION_UNIVERSE bei Macro-Themen;
+- Demotion/Alias nur bei belegtem Rollen-/Identitätsgrund;
+- keine neue Batchschleife;
+- keine Struktur aus DataForSEO erfinden.
 
-Danach:
-- HOBBY_HUBs verbindlich festlegen;
-- deren sichtbare Content-Kategorieebene materialisieren;
-- erst danach neues Sollprofil.
+Danach vollständigen Zielbaum mit allen sichtbaren Ebenen einfrieren.
 
 Bis dahin:
 - kein Plugin-Fix;
