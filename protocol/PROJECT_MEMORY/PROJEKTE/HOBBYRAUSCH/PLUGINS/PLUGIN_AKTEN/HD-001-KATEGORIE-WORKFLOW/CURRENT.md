@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 FEHLSYNC ROLLED_BACK / V1.13.2 DRYRUN PASS / ZWEITE DRYRUN-SYNC-PARITÄTSLÜCKE LOKAL GEFUNDEN / V1.13.3 FULL-SYNC-PARITY LOKAL PASS / 355 CREATE + 75 ADOPT + 430 READBACK + 430 UNCHANGED GETESTET / KEIN LIVE-SYNC VOR V1.13.3-DRYRUN
+STATUS: V1.13.3 LIVE-SYNC EVENTS-REISEN [name] TERMINAL ROLLED_BACK / FEHLER LOKAL 1:1 REPRODUZIERT / V1.13.4 FULL LOCAL POSITIVE+NEGATIVE WORKFLOW FRESH-ZIP HARD PASS / ZIELPROFIL UNVERÄNDERT / KEIN LIVE-SYNC / FRISCHER V1.13.4-DRYRUN OFFEN
 
 ## Plugin
 
@@ -349,13 +349,56 @@ Artefakt:
 `HD001_V1.13.3_FULL_SYNC_PARITY_HARDPASS.zip`
 SHA-256 `f255b06fb38c7b903de2c7741dea4e02fb9620ad3a6651fbf5963f402c33820b`
 
+## V1.13.3 LIVE – FEHLER
+
+Realer Sync:
+355 created + 75 adopted.
+Readback stoppte nach 63 Knoten bei
+`directory:events-reisen [name]`.
+Danach vollständig `ROLLED_BACK`.
+
+## V1.13.4 FULL LOCAL POS/NEG
+
+Root Cause:
+entity-kodierte Taxonomie-Namen wurden im Target-Readback roh verglichen.
+
+Fix:
+Termnamen im Dry-Run und Sync vor Vergleich dekodieren.
+Page-Namen bleiben strikt.
+Zielprofil unverändert.
+
+Fresh-ZIP-Volltest:
+- 355 CREATE + 75 ADOPT Dry-Run;
+- Fresh-Fingerprint-Parität PASS;
+- Sync 355/75;
+- 430/430 Readback PASS;
+- COMPLETE;
+- 403/403 Page-Frontend PASS;
+- alle drei Portal-Hubs PASS;
+- Front-/Footer PASS;
+- Admin-Frontend-Readback PASS;
+- zweiter Dry-Run 430 UNCHANGED;
+- zweiter Sync 430 UNCHANGED;
+- Readback-/Page-/Term-Fehlerrollback PASS;
+- Ambiguity/Foreign-Slug/Invalid-Profile/Missing-Taxonomy fail-closed PASS;
+- 33/33 PHP-Lint;
+- ZIP-Integrität PASS.
+
+Artefakt:
+`HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS.zip`
+SHA-256 `4ca1fb163f2ca5082d5b264a3d1b1862ee4b94039eeadd0c9b9f98e7270eb251`
+
+Prüfbericht:
+`HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS_REPORT.txt`
+SHA-256 `653b76c0f923a97181f5848ec3560579194b7c020fd5b06500134180d1564d30`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_3_FRESH_LIVE_DRYRUN_PENDING`
+`HD001_V1_13_4_FRESH_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.13.3 installieren und genau einen frischen finalen Delta-Dry-Run exportieren.
+Exakt V1.13.4 installieren → genau einen frischen finalen Delta-Dry-Run → JSON exportieren.
 Noch keinen Live-Sync starten.
 
 ## Release-/Artefaktgrenze
