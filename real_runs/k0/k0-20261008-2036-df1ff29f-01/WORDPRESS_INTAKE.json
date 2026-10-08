@@ -1,0 +1,19 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "maximum_articles": 0,
+  "maximum_articles_per_type": 0,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "mash-faq",
+      "plan_slot": "bfd49efbadb449459ae03542cbee492ed93220ab0217317421454af7030740e3",
+      "target_keyword": "Warum nicht jeden Tag Mash füttern",
+      "title": "Warum nicht jeden Tag Mash füttern?"
+    }
+  ],
+  "batch_sha256": "d41f1adc51b2fb634533215e1ad745821b13318d5c4d01cf913613c6202330a3"
+}
