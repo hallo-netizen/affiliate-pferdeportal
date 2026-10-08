@@ -202,3 +202,30 @@ jobs:
           print('PASS PERFORMANCE_DB_HARDLOCK')
           PY
           echo "CURRENT_BOUND_RELEASE_GATES_PASS"
+
+      - name: Package exact tested source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.203.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.203.zip affiliate-portal-router)
+          rm -rf /tmp/final203 && mkdir -p /tmp/final203
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.203.zip -d /tmp/final203
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          m=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
+          expected={line.split('  ',1)[1]:line.split('  ',1)[0] for line in m.read_text().splitlines() if line.strip()}
+          root=Path('/tmp/final203')
+          got={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          assert got==expected
+          print('PASS FINAL_ZIP_BYTE_IDENTITY_28_OF_28')
+          PY
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.203.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.203
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.203.zip
+          if-no-files-found: error
+          retention-days: 30
