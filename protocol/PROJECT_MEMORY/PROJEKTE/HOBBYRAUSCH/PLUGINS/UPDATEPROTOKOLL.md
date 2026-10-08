@@ -893,3 +893,41 @@ Der produktive Bestand steht vor dem Sync noch auf dem alten V1.13.4-Zielstand. 
 
 NEXT:
 Geprüften Zielbaum genau einmal synchronisieren → post-sync JSON-Readback prüfen → erst danach Live-PASS.
+
+
+---
+
+## PU-20261008-018 – HD-001 V1.14.2 Stale-COMPLETE UI-Gate Fix
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+BEFUND:
+Der reale Live-Dry-Run von V1.14.1 war PASS, aber die Finaler-Zielbaum-Seite zeigte keinen Apply-Button.
+
+URSACHE:
+Die UI behandelte jeden gespeicherten Target-Sync mit `status=COMPLETE` als Abschluss des aktuellen Zielstands.
+Der gespeicherte COMPLETE-State gehörte tatsächlich zur alten Revision V1.13.1/V1.13.4.
+Dadurch wurde Abschnitt 2 trotz gültigem neuem V1.14.1-Dry-Run ausgeblendet.
+
+FIX:
+V1.14.2 vergleicht zusätzlich die Revision:
+`state.revision === plan.profile_revision`.
+Nur dann gilt der aktuelle Zielstand als COMPLETE.
+
+SICHERHEIT:
+- Target-Profil byteidentisch zu V1.14.1;
+- Hobby-Master byteidentisch zu V1.14.1;
+- Apply führt vor Writes weiterhin frischen Dry-Run + Fingerprint-Recheck aus;
+- PHP 33/33 PASS;
+- ZIP-Integrität PASS;
+- Gate-Simulation: stale COMPLETE => Apply sichtbar; current COMPLETE => Apply verborgen; RUNNING => Apply verborgen.
+
+ARTEFAKT:
+`HD001_V1.14.2_STALE_COMPLETE_UI_GATE_FIX.zip`
+
+SHA-256:
+`b5bf0f6201a8158dc968530009d22195e8cc4a27b5421d84010840dafd282dbe`
+
+NEXT:
+V1.14.2 installieren → Delta-Dry-Run einmal neu → nur bei 32 CREATE / 425 UPDATE / 5 ARCHIVE und sichtbarem Abschnitt 2 einmal synchronisieren.
