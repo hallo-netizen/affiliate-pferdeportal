@@ -3276,8 +3276,14 @@ JS;
             ));
         }
         $campaigns = array();
+        $use_ranked_request_cache = $this->ranked_campaigns_request_cache_allowed();
         foreach ((array) $posts as $post) {
-            $campaign = $this->campaign_from_post($post);
+            // Public ranking may already have normalized this exact post. Reuse
+            // that immutable request-local result instead of reading and
+            // normalizing the same campaign meta a second time.
+            $campaign = $use_ranked_request_cache
+                ? $this->ranked_campaign_from_post_cached($post)
+                : $this->campaign_from_post($post);
             if ($campaign) {
                 $campaigns[] = $campaign;
             }
