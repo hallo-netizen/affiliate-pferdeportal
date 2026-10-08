@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.5 PRAKTISCH / 841ER MASTER = INVENTAR / 95-KNOTEN-BASELINE + 340 CORE-IDENTITÄTEN / 501 FINDER-EDITORIAL / 16ER-BATCHSCHLEIFE BEENDET / FINALER DELTA-DRYRUN OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / REGELN 1.5 PRAKTISCH / 841 MASTER-INVENTAR / 340 CORE / 501 FINDER-EDITORIAL / 8 WELTEN ECHTE CORE-ROOTS / HOBBYWELTEN NUR VIEW / V1.13.1 FINALZIEL LOKAL PASS / LIVE-DRYRUN OFFEN
 
 ## Rolle
 
@@ -238,41 +238,51 @@ Plan:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_002_PREPARED_20261008.json`
 
 
-## Praktische Produktionsentscheidung
+## Praktische Produktionsentscheidung – finalisiert
 
-Der Fehler des bisherigen Arbeitswegs war, den 841er Master wie 841 einzeln zu beweisende Kategorien zu behandeln.
+Der 841er Master ist Inventar, nicht 841 Pflichtseiten.
 
-Das wird beendet.
+Finales Produktionsmodell:
+- 340 CORE-Hobbyidentitäten;
+- 501 Finder/Editorial-Identitäten;
+- CORE-Hobbyseiten dürfen Beiträge direkt tragen;
+- keine künstliche Vorab-Erzeugung von Leafs;
+- Leafs erst bei realem späterem Contentcluster von ungefähr 5–12 eigenständigen Beiträgen.
 
-Verbindlich:
-- der Master bleibt vollständiges Hobby-Inventar;
-- CORE bleibt bewusst kleiner;
-- bestehende V1.12-Struktur ist die Baseline;
-- CORE-Hobbyseiten dürfen Artikel direkt aufnehmen;
-- Leafs/Subkategorien werden nicht vorab erzwungen;
-- eine Leaf-Kategorie entsteht erst bei realem Inhalt, wenn ungefähr 5–12 eigenständige Beiträge einen stabilen Cluster bilden;
-- Nischen ohne CORE-Freigabe bleiben Finder/Editorial und gehen nicht verloren.
+### Endgültige Weltenstruktur
 
-Batch 001–003 dienten nur als Kalibrierung.
+Die acht Welten:
+Gestalten / Fertigen / Technik / Forschen / Pflanzen / Tiere / Bewegen / Sammeln
 
-Kalibriertes Delta:
-- 12 zusätzliche CORE-Promotionen;
-- 1 Demotion aus CORE;
-- resultierend 340 CORE-Identitäten;
-- 501 Editorial/Finder-Identitäten.
+sind echte physische CORE-Rootseiten.
 
-Globaler Strukturcheck:
-PASS ohne Alias-/Parent-/Slug-/Intent-Konflikte.
+`Hobbywelten` bleibt eine Übersichts-/View-Seite und besitzt 8 Relation-Verweise auf diese Welten.
+Es ist ausdrücklich kein struktureller Parent.
+
+Finaler Zielbaum:
+- 103 Basis-Logikknoten;
+- 440 aufgelöste Logikknoten;
+- 431 physische Zielobjekte;
+- davon 404 Pages.
+
+Kalibriertes CORE-Delta:
+- 12 Promotionen;
+- 1 Demotion;
+- netto +11 CORE-Identitäten.
+
+Batch 001–003 waren Kalibrierung.
+Batch 004+ ist gestrichen.
 
 ## Erster offener Blocker
 
-`HD001_FINAL_TARGET_DELTA_DRYRUN_PENDING`
+`HD001_V1_13_1_FINAL_LIVE_DRYRUN_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Finales Zielprofil gegen den realen WordPress-Bestand trocken vergleichen.
+Einmaliger read-only Live-Dry-Run des finalen V1.13.1-Zielbaums gegen den tatsächlichen WordPress-Bestand.
 
-Danach nur noch:
-ein Sync → Frontend prüfen → Plugin entfernen.
+Erst nach dessen PASS:
+ein kontrollierter Sync → Frontend-/Struktur-Readback → Backup → HD-001 deaktivieren/deinstallieren.
 
-Keine weitere DataForSEO-Batchserie.
+Keine weitere DataForSEO-Serie.
+Keine weitere Batchbewertung.
