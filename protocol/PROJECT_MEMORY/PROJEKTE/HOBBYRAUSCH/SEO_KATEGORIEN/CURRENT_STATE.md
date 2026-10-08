@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: REGELN 1.4 KISS / V1.12.6 REALER EXPORT-READBACK PASS / BATCH 001 TECHNISCH GESCHLOSSEN / FACHLICHE SCOPE-IDENTITÄTS-OWNERSHIP-PRÜFUNG OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: REGELN 1.4 KISS / V1.12.6 REAL PASS / BATCH 001 FACHLICH ABGESCHLOSSEN / 16 VON 16 ROLLEN GEKLÄRT / BATCH 002 VORBEREITUNG NÄCHSTER SCHRITT / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -257,30 +257,42 @@ Zusätzlich:
 Beleg:
 `HOBBY_MASTER_V2_BATCH_001_V126_STALE_EXPORT_READBACK_20261007.md`
 
+## BATCH 001 – FACHLICHER ABSCHLUSS
+
+Autoritativer Abschluss:
+`HOBBY_MASTER_V2_BATCH_001_FINAL_FACHBEWERTUNG_20261008.json`
+
+Ergebnis:
+- 6 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 7 EDITORIAL_TOPIC;
+- 0 ARTICLE_ONLY;
+- 0 FINDER_ONLY;
+- 0 OUT_OF_SCOPE;
+- 0 ungeklärte Rollen;
+- 0 Zielbaum-Writes.
+
+HOBBY_HUB:
+Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa.
+
+ORIENTATION_UNIVERSE:
+3D-Druck, Amateurastronomie, Filzen.
+
+EDITORIAL_TOPIC:
+alte Brettspiele, Treibholz sammeln, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur.
+
+Buchbinden bleibt zusätzlich der bereits bestätigte HOBBY_HUB; damit enthält Batch 001 insgesamt 6 Hub-Rollen einschließlich Buchbinden.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`
+`HOBBY_MASTER_V2_BATCH_002_SUBJECT_PREFLIGHT_PENDING`
 
-Der V1.12.6-Exportweg ist real bestätigt:
-- Plugin-Version 1.12.6;
-- 34 ideale Leafs;
-- 1 Hub-Kandidat;
-- 0 neue Provider-Aufrufe;
-- 0 neue Kosten;
-- 0 Strukturwrites.
-
-Beleg:
-`HOBBY_MASTER_V2_BATCH_001_V126_REAL_READBACK_20261007.md`
-
-Offen ist jetzt nur noch die fachliche Bewertung:
-- sechs kapazitätsseitig tragfähige Hubfälle: Scope/Identität/Ownership;
-- danach 3 Macro-Reviews und 5 Aggregation-Reviews.
+Kein technischer Plugin-Blocker.
+Kein offener Batch-001-Blocker.
 
 ## EXAKT EINE NEXT ACTION
 
-Die sechs EVIDENCE_REQUIRED-Hubfälle fachlich gegen Master, bestehende Nachbaridentitäten und Ownership prüfen:
-Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa.
+Batch 002 aus dem 841er Master fachlich vorprüfen und mit derselben Regeln-1.4-Logik vorbereiten.
 
-Keine neue DataForSEO-Tiefenrecherche.
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
