@@ -63,6 +63,20 @@ PASS:
 - Demotion `alte Brettspiele` ist im finalen CORE nicht mehr enthalten;
 - die 12 kalibrierten Promotionen sind im finalen CORE enthalten.
 
+## URSACHE MATERIALKUNST – BESTÄTIGT
+
+`Materialkunst` stammt aus dem alten statischen V1.12-Basisprofil:
+- der Knoten existiert bereits im zurückgerollten V1.12-`sync_state.profile`;
+- dort ist er ebenfalls nur als statischer CORE-Zwischenknoten definiert;
+- im gesamten alten Profil gibt es kein Entity-Placement auf diesen Knoten;
+- im aktuellen V1.13.1-Zielbaum gibt es ebenfalls kein Kind und kein Entity-Placement auf diesen Knoten;
+- die autoritative Konzeptstruktur `KONZEPT_3_SAEULEN_ZIELBAUM_20261007.md` definiert unter Gestalten keinen Bereich `Materialkunst`;
+- materialbezogene reale CORE-Hobbys sind bereits fachlich anderen Bereichen zugeordnet, z. B. Epoxidharzkunst / Resin Casting / Betonkunst / Polymer Clay → `Fertigen > Guss & Form`, Tiffanyglas → `Fertigen > Keramik & Glas`, Glasmalerei → `Gestalten > Bild & Farbe`;
+- kleine bzw. nicht freigegebene Kandidaten wie Mosaik, Mikromosaik, Gipskunst oder Air-Dry Clay bleiben Editorial und rechtfertigen keinen leeren CORE-Zwischenknoten.
+
+Ergebnis:
+`Materialkunst` ist ein historischer leerer Strukturrest des Basisprofils, kein durch den aktuellen Hobbybestand belegter Bereich.
+
 ## EINZIGER GEFUNDENER STRUKTURBLOCKER
 
 Knoten:
