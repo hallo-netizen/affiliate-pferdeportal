@@ -940,7 +940,7 @@ trait PPAR_Output_Objects_Trait {
         $record=$portal_records[0];
         $state=sanitize_key((string)($record['state']??''));
         $target_key=sanitize_text_field((string)($record['target_key']??''));
-        if($state!=='mapped'||$target_key===''){return null;}
+        if(!in_array($state,array('mapped','general'),true)||$target_key===''){return null;}
         $targets=$this->output_portal_targets($portal);
         if(is_wp_error($targets)){return $targets;}
         $target=$this->output_resolve_target_key($targets,$target_key);
