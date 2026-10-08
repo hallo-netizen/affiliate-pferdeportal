@@ -1084,3 +1084,59 @@ SHA-256:
 NEXT:
 V1.13.3 installieren → genau ein frischer Live-Dry-Run → JSON-Readback.
 Noch kein Sync.
+
+
+## HOBBYRAUSCH-HD001-20261008-Y – V1.13.3 Livefehler 1:1 reproduziert, V1.13.4 kompletter lokaler Positiv/Negativ-Workflow PASS
+
+LIVE V1.13.3:
+- 355 created + 75 adopted;
+- Readback stoppt nach 63 Knoten;
+- Fehler: `directory:events-reisen [name]`;
+- danach terminal ROLLED_BACK;
+- kein aktiver Final-Snapshot.
+
+LOKALE REPRODUKTION:
+Exaktes V1.13.3-ZIP + echter 430-Knoten-Plan + realer 355/75-Ausgangszustand.
+WordPress/HivePress-Entitydarstellung für Termnamen simuliert.
+Ergebnis exakt wie live:
+Readback 63 → Events & Reisen [name] → ROLLED_BACK.
+
+ROOT CAUSE:
+Dry-Run/Sync verglichen Taxonomie-Namen roh.
+Entity-kodierte sichtbare Namen wie `Events &amp; Reisen` wurden fälschlich als anderer Name behandelt.
+
+V1.13.4:
+Nur Term-Namensvergleich dekodiert.
+Zielprofil unverändert.
+Materialkunst bleibt entfernt.
+
+FRESH-ZIP FULL POSITIVE:
+- Dry-Run 355 CREATE + 75 ADOPT;
+- Fresh-Fingerprint identisch;
+- Sync 355 created + 75 adopted;
+- 430/430 Readback PASS;
+- COMPLETE;
+- 403/403 Page-Frontend PASS;
+- Core/Magazin/Directory-Hubs PASS;
+- Front-/Footer PASS;
+- FinalTargetAdmin-Frontend PASS;
+- danach 430 UNCHANGED;
+- zweiter Sync 430 UNCHANGED.
+
+NEGATIV:
+- Readbackkorruption → exakter Rollback;
+- Page-Writefehler → exakter Rollback;
+- Term-Writefehler → exakter Rollback;
+- mehrdeutige Binding → fail-closed;
+- fremder HivePress-Slug → BLOCKED;
+- kaputtes Profil → vor Write BLOCKED;
+- fehlende HivePress-Taxonomie → vor Write BLOCKED.
+
+ARTEFAKT:
+`HD001_V1.13.4_FULL_LOCAL_POSNEG_HARDPASS.zip`
+SHA-256:
+`4ca1fb163f2ca5082d5b264a3d1b1862ee4b94039eeadd0c9b9f98e7270eb251`
+
+NEXT:
+Exakt V1.13.4 installieren → ein frischer Live-Dry-Run → JSON.
+Noch kein Sync.
