@@ -1,0 +1,53 @@
+{
+  "contract": "HD001_V1_14_1_LIVE_DRYRUN_READBACK",
+  "date": "2026-10-08",
+  "status": "PASS__SYNC_PENDING",
+  "source_file": "hobby-depot-final-target-readback-20261008-150023-utc.json",
+  "plugin_version": "1.14.1",
+  "plan_status": "PASS",
+  "valid": true,
+  "inventory": {
+    "canonical_entities": 860,
+    "core_entities": 359,
+    "editorial_finder_entities": 501
+  },
+  "structure": {
+    "logical_nodes": 471,
+    "physical_target_objects": 457,
+    "hobbywelten_view_relations": 8,
+    "worlds_core_level_1": true
+  },
+  "live_delta": {
+    "CREATE": 32,
+    "ADOPT": 0,
+    "UPDATE": 425,
+    "UNCHANGED": 0,
+    "ARCHIVE": 5
+  },
+  "interpretation": {
+    "live_base": "Current productive tree is still V1.13.4 / 430 nodes.",
+    "creates": "32 = 12 known V1.13.4→V1.14.0 structural creates + 20 V1.14.0→V1.14.1 expansion creates.",
+    "archives": [
+      "Elektronik & Funk",
+      "Insekten & Wirbellose",
+      "Leder & Textil",
+      "Metall & Schmuck",
+      "Schrift & Papier"
+    ],
+    "hobby_archives": 0,
+    "writes_during_dryrun": 0,
+    "provider_calls": 0
+  },
+  "fingerprints": {
+    "profile_fingerprint": "06a68728ef240f0db7f703ce6f2abbd625cb134d4655137541b1c69b112b0dd7",
+    "live_fingerprint": "d06cbfea9ec04c208252ca8291a8443e859c697f5f200601ac138a8abd33b60a",
+    "action_fingerprint": "c0845eebf77da3c63657f871c240068aa62982a6143c31a724e390ae30589c40",
+    "plan_fingerprint": "41a16672d43af008f198db411c81f1ac400bc7eb9e6da9e6524214e4199b4ea0"
+  },
+  "frontend_readback_before_sync": {
+    "valid": false,
+    "revision": "HD-TARGET-3P-V1.13.1-PRACTICAL-20261008+1543683b3898f96c",
+    "reason": "Existing live V1.13.4 tree still exposes the previously known header/navigation defects. This is pre-sync evidence, not a V1.14.1 post-sync failure."
+  },
+  "next_action": "Run exactly one controlled final target sync from this accepted dry-run, then export/read back the post-sync JSON. No second dry-run unless live fingerprint changes."
+}
