@@ -1,0 +1,63 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_003_PREPARED",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "READY_FOR_REAL_DATAFORSEO_OVERVIEW",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical identities in stable master order not already closed by final Batch 001 and Batch 002 assessments.",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "closed_before_batch_003": 32,
+  "selected": [
+    "hobby:drohnenbau",
+    "hobby:fpv-drohnen",
+    "hobby:fpv-racing",
+    "hobby:drohnenfotografie",
+    "hobby:drone-soccer",
+    "hobby:rc-crawling",
+    "hobby:scale-crawling",
+    "hobby:rc-baumaschinen",
+    "hobby:rc-lkw",
+    "hobby:rc-panzer",
+    "hobby:rc-boote",
+    "hobby:rc-segelboote",
+    "hobby:rc-u-boote",
+    "hobby:rc-flugzeuge",
+    "hobby:rc-segelflug",
+    "hobby:rc-helikopter"
+  ],
+  "counts": {
+    "candidates": 16,
+    "proposed_leafs": 59,
+    "proposed_article_intents": 325,
+    "dataforseo_keywords": 325,
+    "planned_paid_calls": 1
+  },
+  "plugin_preflight": {
+    "version": "1.12.6",
+    "valid": true,
+    "input_sha256": "6ee3975700736104b0913aacb0d51bf0e721288a8dfb0edd6fa017b203fad6b0",
+    "structure_write_capability": false
+  },
+  "files": {
+    "assessment_input_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_003_ASSESSMENT_INPUT_20261008.json",
+    "subject_preflight_library": "/hobby rausch/HOBBY_MASTER_V2_BATCH_003_SUBJECT_PREFLIGHT_20261008.json",
+    "assessment_input_file_sha256": "a13754f01c52aa4ae73c23563911544291947142ff3c28bf92d083cf8cfc528a",
+    "subject_preflight_file_sha256": "8c22260bbddfd0185f5dc3eeffe0a30a381a1d2001c331f6a3f5c36a2c201241"
+  },
+  "local_shape_test": {
+    "note": "Technical shape test only, not real SEO evidence.",
+    "summary": {
+      "hub_candidates": 5,
+      "macro_reviews": 3,
+      "evidence_required": 8,
+      "ideal_leafs": 59
+    },
+    "provider_calls": 1,
+    "structure_writes": 0
+  },
+  "next_action": "Upload the prepared Batch-003 assessment input in HD-001 V1.12.6, run free preflight, verify 16/59/325/325/1, then execute exactly one read-only DataForSEO keyword_overview call."
+}
