@@ -18,49 +18,49 @@ GEPRÜFTES ARTEFAKT:
 SHA-256:
 `deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`
 
-PRÜFBERICHT:
-`HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_REPORT.txt`
-
-PRÜFBERICHT SHA-256:
-`5298211f6a86d33813cce5184b8cc2ab94303955968ff17970c7cbec35a5755e`
+PRÜFEVIDENCE:
+`SEO_KATEGORIEN/HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS_20261008.json`
 
 ZIELPROFIL:
-`profiles/hobby-depot-v1.json` im V1.14.1-Artefakt
+`profiles/hobby-depot-v1.json` im V1.14.3-Artefakt
 
 ZIELPROFIL SHA-256:
 `6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6`
 
 HOBBY MASTER:
-`profiles/hobby-master-v2-20261007.json` im V1.14.1-Artefakt
+`profiles/hobby-master-v2-20261007.json` im V1.14.3-Artefakt
 
 MASTER SHA-256:
 `adf01a7ac9ae8a30813e9d27391d0732583671dd6c39b5cca19d33576dd8308f`
 
-AKTUELLER LOKALER V1.14.1-SOLLSTAND:
-- 860 Hobby-Identitäten;
-- 359 CORE;
-- 501 Finder/Editorial;
-- 60 aktive Zwischenbereiche;
-- 466 aktive Logikknoten;
-- 457 physische Zielobjekte;
-- 430 Pages;
-- 4 WordPress-category;
+AKTUELLER LOKALER V1.14.3-SOLLSTAND:
+- 855 kanonische Identitäten nach 5 Alias-Zusammenführungen;
+- 332 finale CORE-Identitäten;
+- 523 Editorial/Finder;
+- 65 aktive Zwischenbereiche;
+- 1.737 Logikknoten;
+- 1.723 physische Zielobjekte;
+- 408 Pages;
+- 1.292 WordPress-category;
 - 15 journal_cat;
 - 8 hp_listing_category;
 - 9 Relations;
-- 97 Header-Navigationseinträge.
+- 102 Header-Navigationseinträge;
+- 279/279 HOBBY_HUBs mit sichtbarer Content-Kategorieebene.
 
 ABNAHME:
-- Fresh-ZIP PHP 33/33 PASS;
+- PHP 33/33 PASS;
 - ZIP-Integrität PASS;
-- Fresh Dry-Run 457 CREATE / 0 Provider / 0 Writes;
-- Fresh Sync 457/457 COMPLETE;
-- zweiter Sync 457 UNCHANGED;
-- V1.14.0→V1.14.1 Migration 20 CREATE + 437 UPDATE + 0 ARCHIVE / COMPLETE;
-- 430/430 Page-Frontend PASS;
-- Header 97/97 PASS;
-- Magazin/Anbieter/Hobbywelten/Front/Footer PASS;
-- Negativ- und Rollbacksuite PASS/fail-closed.
+- Migration gegen V1.14.1: 1.293 CREATE + 430 UPDATE + 27 ARCHIVE;
+- 28 Legacy-Hobbyseiten identitätserhaltend migriert;
+- Readback 1.723/1.723 COMPLETE;
+- zweiter Dry-Run 1.723 UNCHANGED / 0 ARCHIVE;
+- zweiter Sync 1.723 UNCHANGED / 0 ARCHIVE / 0 Writes;
+- Frontend PASS;
+- Header 102;
+- lokale Welt-Kinder 7 / 11 / 11 / 5 / 10 / 7 / 8 / 8;
+- 279/279 HOBBY_HUBs PASS;
+- Negativsuite PASS/fail-closed.
 
 CURRENT.zip:
 NICHT synchronisiert.
