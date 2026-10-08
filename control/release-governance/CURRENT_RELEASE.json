@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 273,
+  "generation": 274,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
+    "manifest_sha256": "4e215f50ac0bb4482dc296768d2f53bb154cdf4880945ff21bce0747053e69a0",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.203",
-    "status": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_GATES_OPEN",
+    "status": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_LOCAL_SIM_PASS",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
+    "current_source_manifest_sha256": "4e215f50ac0bb4482dc296768d2f53bb154cdf4880945ff21bce0747053e69a0",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "KISS banner rootfix: automatic and manual banner topic assignment now write the same Creative-Library topic_targets map. For portal_banner runtime, that stored mapped target is the only semantic target source. Legacy general target state is not accepted as automatic banner eligibility. Backend exposes direct Thema / Portalziel assignment without requiring a justification. No new table, frontend HTTP, frontend DB query, ranking layer or provider architecture.",
+    "candidate_reference_scope": "KISS banner single-target truth is source-bound and locally simulated. Automatic and manual topic assignment share topic_targets. Runtime accepts mapped stored targets only. Later campaign ranking now fail-closes output_object_v4 banners when stored automation_target_keys do not match; general fallback and breed-neutral fallback can no longer bypass the stored topic. No new frontend DB/HTTP path or table.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_OPEN",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_LOCAL_SIM_PASS",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "KISS_BANNER_SINGLE_TARGET_TRUTH",
-    "current_focus_reason": "Every banner must have one stored topic/portal target truth. Automatic and manual assignment share topic_targets; runtime reads only that stored mapping."
+    "current_focus": "KISS_BANNER_SINGLE_TARGET_WORDPRESS_MARIADB_RELEASE_PROOF",
+    "current_focus_reason": "Local positive/negative simulation is green. Next prove the same stored-target-only behavior in the existing bound WordPress/MariaDB release gates; no new architecture."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_GATES_OPEN",
+    "state": "WORKING_6_72_203_KISS_BANNER_SINGLE_TARGET_LOCAL_SIM_PASS",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Verify the exact current 6.72.203 source only: automatic banner mapping and manual Thema/Portalziel assignment must both persist into topic_targets; portal_banner runtime must use only that mapped record; unmapped/general/foreign-topic banners must fail closed; matching mapped banners must render through existing format/slot/distribution paths. Reuse existing tests where hash-valid and add no new architecture.",
-    "completion_condition": "KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_PASS",
-    "after_completion_action": "If the bound gates pass, continue the remaining existing affiliate release gates from Current. If one gate fails, fix only the first concrete failure without adding a second target/ranking architecture.",
+    "bound_user_scope_action": "Run the existing bound WordPress/MariaDB release gates on the current source only. Require: automatic and manual banner topic assignment persist to topic_targets; matching mapped target renders through existing format/slot/distribution; wrong/missing/invalid/other-portal/general target does not render; assignment_mode=fallback and horse-breed neutral fallback cannot bypass a missing mapped target for output_object_v4 banners. Preserve zero new frontend DB/HTTP and no new table.",
+    "completion_condition": "KISS_BANNER_SINGLE_TARGET_WORDPRESS_MARIADB_GATES_PASS",
+    "after_completion_action": "If the bound gates pass, continue existing release-check sequence. If one gate fails, fix only the first concrete failure.",
     "no_optional_detours": true,
-    "sequence": 117,
+    "sequence": 118,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-058",
-    "evidence_ref": null,
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_err_058_kiss_banner_single_target_local_sim_20261008.md",
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "01009131e4d9f29cab1b31ce4cf165a6195be7aba937d38e771f5b4ab7b99ad7",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_TRUTH_BOUND_GATES_OPEN",
+    "current_source_manifest_sha256": "4e215f50ac0bb4482dc296768d2f53bb154cdf4880945ff21bce0747053e69a0",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_203_KISS_BANNER_SINGLE_TARGET_LOCAL_SIM_PASS",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -1017,7 +1017,11 @@
       "comparison_calculator_renderer_672202_vs_672203": "TARIFF_TRAIT_BYTE_IDENTICAL_REGISTER_SHORTCODES_IDENTICAL_FILTER_THE_CONTENT_IDENTICAL",
       "banner_single_target_truth_672203": "SOURCE_COMMITTED_MANUAL_AND_AUTOMATIC_ASSIGNMENT_SHARE_TOPIC_TARGETS_RUNTIME_PORTAL_BANNER_READS_STORED_MAPPED_ONLY",
       "banner_manual_topic_assignment_672203": "BACKEND_DIRECT_THEMA_PORTALZIEL_ASSIGNMENT_WRITES_CANONICAL_TOPIC_TARGETS_NO_REASON_REQUIRED",
-      "banner_general_fallback_672203": "LEGACY_GENERAL_STATE_NOT_ACCEPTED_AS_AUTOMATIC_RUNTIME_TARGET_TRUTH"
+      "banner_general_fallback_672203": "LEGACY_GENERAL_STATE_NOT_ACCEPTED_AS_AUTOMATIC_RUNTIME_TARGET_TRUTH",
+      "banner_single_target_local_source_sim_672203": "PASS_14_OF_14",
+      "banner_single_target_local_php_sim_672203": "PASS_10_OF_10_ZERO_FAILURES",
+      "banner_single_target_campaign_fallback_bypass_672203": "ROOT_CAUSE_PROVEN_AND_FIXED_COMMIT_02799C180DA3B95AD34341FBFA939DB599891EB2",
+      "banner_single_target_performance_672203": "PASS_ZERO_NEW_FRONTEND_DB_ZERO_FRONTEND_HTTP_NO_NEW_TABLE"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
@@ -1405,7 +1409,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "KISS_BANNER_SINGLE_TARGET_TRUTH_RELEASE_PROOF",
+    "current_milestone": "KISS_BANNER_SINGLE_TARGET_WORDPRESS_MARIADB_RELEASE_PROOF",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
