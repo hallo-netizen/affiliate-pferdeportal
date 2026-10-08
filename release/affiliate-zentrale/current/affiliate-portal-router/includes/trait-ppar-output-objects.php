@@ -3105,7 +3105,9 @@ trait PPAR_Output_Objects_Trait {
                     if (is_wp_error($slot)) { $status='blocked_format'; $classification['reason']=$slot->get_error_message(); $slot=array('slot_id'=>''); }
                 }
 
-                if ($output_type === 'portal_banner' && $status === 'ready') {
+                if ($output_type === 'portal_banner'
+                    && $status === 'ready'
+                    && sanitize_key((string)($classification['source'] ?? '')) !== 'manual_fixed_target') {
                     $classification['_ppar_banner_compatible_slots']=$compatible_banner_slots;
                     $this->output_store_banner_library_assignment($row,$portal,$classification,$compatible_banner_slots);
                 }
