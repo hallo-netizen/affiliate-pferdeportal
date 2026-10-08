@@ -30,26 +30,37 @@ ZIELPROFIL:
 ZIELPROFIL SHA-256:
 `6dda22c63fb23593b2eee8d8fbc067e9f732430cad70d5c0576bca40b95a474c`
 
-FINALER KORRIGIERTER SOLLSTAND:
+AKTUELLER LOKALER V1.14.0-SOLLSTAND:
 - 841 eingefrorene Hobby-Identitäten;
 - 340 CORE;
 - 501 Finder/Editorial;
-- erwartet 439 aufgelöste Logikknoten;
-- erwartet 430 physische Zielobjekte;
-- erwartet 403 Pages;
+- 59 aktive Zwischenbereiche;
+- 446 aufgelöste Logikknoten;
+- 437 physische Zielobjekte;
+- 410 Pages;
+- 4 WordPress-category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 9 Relations;
 - 8 Hauptwelten als physische CORE-Roots;
-- Hobbywelten nur View über 8 Relations;
-- Materialkunst entfernt.
+- Hobbywelten nur View;
+- Materialkunst entfernt;
+- Legacy-/Editorial-Leaks aus kanonischer Header-Navigation ausgeschlossen;
+- Treibholz/Treibholz sammeln nur als eine bestätigte Editorial-Identität;
+- Magazin-Navigation vollständig projiziert.
 
-PATCH-ABNAHME:
-- Originalartefakt-Hash gegen bisherigen Manifeststand PASS;
-- exakt eine Paketdatei geändert;
-- exakt ein Zielknoten entfernt;
-- keine weiteren Profilfelder geändert;
-- Fresh ZIP PHP 33/33 PASS;
+V1.14.0-ABNAHME – LOKAL:
+- Fresh-ZIP PHP 33/33 PASS;
 - ZIP-Integrität PASS;
-- Plan-Graph-Simulation PASS;
-- historische 270/270-, 24/24- und 11/11-Suiten nicht als neu ausgeführt behauptet.
+- initialer Dry-Run 362 CREATE + 75 ADOPT;
+- erster Sync 437/437 Readback COMPLETE;
+- 410/410 Page-Frontend PASS;
+- Header-Navigation PASS;
+- Magazin-Navigation PASS;
+- zweiter Dry-Run 437 UNCHANGED;
+- zweiter Sync 437 UNCHANGED;
+- V1.13.4→V1.14.0 Migration 12 CREATE + 425 UPDATE + 5 ARCHIVE PASS;
+- Negativsuite Readback/Page/Term-Rollback, Ambiguity, Foreign-Slug, Invalid-Profile und Missing-Taxonomy PASS/fail-closed.
 
 CURRENT.zip:
 NICHT synchronisiert.
@@ -58,7 +69,9 @@ GRUND:
 Der aktive GitHub-Connector kann Textstände aktualisieren, aber das lokal verifizierte ZIP nicht byteidentisch in das isolierte GitHub-`CURRENT.zip` übertragen. Deshalb wird kein Binary-Artefakt erfunden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-Korrigiertes ZIP in Hobby Depot installieren/ersetzen → genau einen read-only finalen Delta-Dry-Run → JSON-Readback prüfen. Noch kein Final-Sync.
+Noch NICHT installieren/synchronisieren.
+Zuerst die 19 Expansion-/Ankerkandidaten final gegen Regeln 1.5 bewerten.
+Danach begründetes Zielbaum-Delta in V1.14 binden oder Kandidaten bewusst schließen → neues/final bestätigtes Artefakt vollständig lokal POS/NEG prüfen → erst dann Live-Dry-Run.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
