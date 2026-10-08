@@ -1,3 +1,52 @@
+## PLUGIN-/PERFORMANCE-CURRENT 2026-10-08 – IMPLEMENTIERUNGSUPDATE 6.72.211
+
+**Dieser Block supersediert den unmittelbar folgenden älteren 2026-10-08-Block, soweit er Affiliate-Status, AFF-ERR-064 und NEXT ACTION betrifft.**
+
+### Aktueller belastbarer Stand
+
+Affiliate-Fach-/Release-Current frisch gebunden:
+- Generation **298**;
+- Affiliate-Zentrale **6.72.211 CANDIDATE_LOCAL_HARDTEST_PASS**;
+- `release_allowed=false`;
+- Source-Manifest **13a63a5a6f3bbe968bbd5eed6d3310305c68f417d03e0b3741ab1d725b8514d8**;
+- technische Current bleibt `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
+Gebündelter Affiliate-Performanceblock umgesetzt:
+- AFF-ERR-064 lokal behoben;
+- fremdes `admin-ajax.php`: Affiliate-Hooks **207 → 114**;
+- `init` auf AJAX **31 → 5**;
+- `admin_init` auf AJAX **13 → 0**;
+- `shutdown` auf AJAX **2 → 1**;
+- echter `wp_ajax_ppar_ebay_canonical_tick` bleibt erhalten;
+- normaler Frontend-Hookbestand **142 → 142 identisch**;
+- normaler Admin-Hookbestand **207 → 207 identisch**;
+- PHP-Lint **22/22 PASS**;
+- Fresh-Unpack **22/22 PASS**;
+- Source/ZIP **28/28 byteidentisch**;
+- lokaler Kandidaten-ZIP SHA-256 **b2d4673db08572b8f5ca5705b5e29b5e8e05d2180784f32619fffc5d1b67addd**.
+
+Unverändert:
+- keine Architekturänderung;
+- keine Workflowänderung;
+- keine Änderung an Ranking, Provider-Auswahl, Slots, Veto, Publish, Kategorie, Design oder Tracking;
+- nichts live installiert.
+
+Der aktuelle WordPress/MariaDB-Gate ist **OPEN**. Die vorhandenen alten Actions-Runner 6.72.170/171/210 wurden real gestartet, brechen aber vor WordPress ausschließlich an ihren fest verdrahteten Altversionsprüfungen ab. Sie werden nicht umgebaut.
+
+Template-Kit **1.50.578** bleibt als aktiver WordPress-Readback belegt, der vollständige aktuelle Source ist weiterhin nicht autoritativ gebunden. Template-Dateien bleiben deshalb unangetastet.
+
+### GENAU EINE NEXT ACTION
+
+`RUN_EXACT_6_72_211_WORDPRESS_MARIADB_POS_NEG_REGRESSION_WITHOUT_WORKFLOW_CHANGE`
+
+Bis dieser Gate PASS ist:
+- kein Release;
+- keine Installation;
+- keine weitere Affiliate-Version;
+- keine Vermischung mit Template-Änderungen.
+
+---
+
 ## PLUGIN-/PERFORMANCE-CURRENT 2026-10-08 – FRISCHECHECK / NEUER GEBÜNDELTER OPTIMIERUNGSSCOPE
 
 ### Geltende Autoritäten
