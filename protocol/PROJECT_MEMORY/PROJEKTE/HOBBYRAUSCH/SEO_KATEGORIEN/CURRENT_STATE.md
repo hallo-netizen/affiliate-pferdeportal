@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 1.5 / V1.13.1 FRISCHER POST-ROLLBACK-DRYRUN PASS / 356 CREATE + 75 ADOPT / 0 DATAFORSEO / 0 WRITES / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / FINAL-SYNC DURCH MATERIALKUNST-KONZEPTBLOCKER GESPERRT
+STATUS: REGELN 1.5 / MATERIALKUNST-KONZEPTFEHLER KORRIGIERT / KORRIGIERTES V1.13.1-ZIP LOKAL PATCH-PASS / 430 ZIELOBJEKTE ERWARTET / ALTER V1.12-ROLLBACK TERMINAL ROLLED_BACK / 0 LIVE-WRITES / FRISCHER LIVE-DRYRUN OFFEN
 
 ## Ziel
 
@@ -500,51 +500,67 @@ PASS für Ebenen, acht Root-Welten, Hobbywelten-View, Parent-Konsistenz, Säulen
 Neuer Konzeptaudit:
 `HD001_V1_13_1_POST_ROLLBACK_CONCEPT_AUDIT_20261008.md`
 
-## ERSTER OFFENER BLOCKER
+## MATERIALKUNST-KORREKTUR – UMGESETZT
 
-`HD001_V1_13_1_EMPTY_CORE_NODE_MATERIALKUNST`
+Echtes Originalartefakt gebunden und Hash gegen Manifest bestätigt:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS.zip`
+SHA-256:
+`94dca6cfc6c792cf2b866fc76fef1bff12551f9b375b38a1a511a91876b1a7b5`
 
-Ursache bestätigt:
-historischer leerer statischer V1.12-Basisprofilknoten; kein aktuelles Hobby-/Entity-Placement rechtfertigt ihn.
+Im echten Plugin wurde ausschließlich
+`core:gestalten:materialkunst`
+aus
+`profiles/hobby-depot-v1.json`
+entfernt.
 
-Exakt:
-- `core:gestalten:materialkunst` steht im frischen Zielplan als `CREATE`;
-- 0 Kindknoten;
-- keine kanonische Hobby-Identität;
-- 0 gebundene Entity-Placements;
-- keine belegte Relation.
+Korrigiertes Artefakt:
+`HD001_V1.13.1_PRACTICAL_FINAL_TARGET_ONE_SYNC_HARDPASS_MATERIALKUNST_FIX.zip`
+SHA-256:
+`ea5aa8316b2537695f2f805d0b9cc4b0d9f973fb609c231ab7c3067de419c263`
 
-Damit wäre `Materialkunst` ein neu angelegter strukturell leerer Zwischenknoten und widerspricht Zielvertrag 2.5:
-**Keine inhaltsleeren Ebenen.**
+Korrigiertes Profil:
+`HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008_MATERIALKUNST_FIX.json`
+SHA-256:
+`2fe534e0d25af038c49c3eaa2b9e9c38c71daac051a217ef65a92f8b077a9b95`
 
-## EXAKT EINE NEXT ACTION
+Patch-Abnahme:
+- exakt 1 Paketdatei geändert;
+- exakt 1 Zielknoten entfernt;
+- 0 Zielknoten hinzugefügt;
+- 0 Hobby-Umhängungen;
+- 33/33 PHP-Lint PASS nach frischem Unzip;
+- ZIP-Integrität PASS;
+- 0 doppelte Basis-Node-IDs;
+- 0 fehlende Basis-Parents;
+- Materialkunst 0-mal im korrigierten Profil;
+- Plan-Graph-Simulation PASS.
 
-Finalen Sync NICHT starten.
-
-KISS:
-`core:gestalten:materialkunst` aus dem finalen V1.13.1-Zielprofil entfernen.
-
-Maschinenlesbarer Ein-Knoten-Patch:
-`HD001_V1_13_1_TARGET_PROFILE_PATCH_001_20261008.json`.
-
-Keine Ersatzkategorie erfinden.
-Keine Hobbys umhängen.
-Keine DataForSEO-Recherche.
-
-Plan-Graph-Simulation des Ein-Knoten-Fixes:
-`HD001_V1_13_1_MATERIALKUNST_PATCH_SIMULATION_20261008.json` = PASS.
-
-Nach simuliertem Entfernen:
+Erwarteter Zielstand ohne weiteren Live-Drift:
+- 102 Basis-Logikknoten;
+- 439 aufgelöste Logikknoten;
 - 430 physische Zielobjekte;
 - 403 Pages;
 - 4 category;
 - 15 journal_cat;
 - 8 hp_listing_category;
-- 355 CREATE + 75 ADOPT;
-- 0 fehlende Parents;
-- 0 Zyklen;
-- 0 doppelte IDs/Slugs;
-- 0 Kategorie-unter-Kategorie;
-- Materialkunst war der einzige leere statische CORE-Zwischenknoten.
+- 355 CREATE + 75 ADOPT.
 
-Danach echtes V1.13.1-Zielprofil/Artefakt korrigieren → lokal hart prüfen → frischer finaler Live-Dry-Run → JSON-Readback.
+Beleg:
+`HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD_20261008.json`
+
+## ERSTER OFFENER BLOCKER
+
+`HD001_V1_13_1_FRESH_LIVE_DRYRUN_AFTER_MATERIALKUNST_FIX_PENDING`
+
+## EXAKT EINE NEXT ACTION
+
+Korrigiertes ZIP in Hobby Depot installieren/ersetzen.
+
+Dann genau einmal:
+`Kategorien → Finaler Zielbaum → Finalen Delta-Dry-Run ausführen`
+
+Danach sofort:
+`Finalen Readback als JSON herunterladen`.
+
+Noch KEINEN Final-Sync starten.
+
