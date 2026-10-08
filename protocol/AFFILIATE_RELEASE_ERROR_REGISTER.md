@@ -1684,3 +1684,12 @@ Evidence:
 **POSITIV:** dieselbe Creative-Identität in mehreren Auflösungen derselben Formatfamilie -> größte belegte Version bleibt.
 **NEGATIV:** unterschiedliche Creative-Identitäten bei gleichem Partner/Ziel/Titel/Ratio -> beide bleiben Kandidaten.
 **Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
+
+
+## AFF-ERR-062 — 08.10.2026: Sichtbare Blocküberschrift „Anzeige“ auf breiten Übersichts-Bannern unterdrückt
+
+**Belegter Vertragsbruch:** Der Lifecycle-Zielvertrag verlangt ausdrücklich, dass die sichtbare Blocküberschrift `Anzeige` erhalten bleibt. Glossar- und Rassen-Einzelbanner rendern diese Überschrift bereits sichtbar. Für breite Übersichts-Banner wurde sie in der aktuellen Ausgabe dagegen absichtlich entfernt: der Renderer leert das Label und die CSS-Regel blendet `.ppar-affiliate-label` im Overview-Slot aus.
+
+**Fixziel:** Breite Übersichts-Banner erhalten wieder sichtbar `Anzeige`. Keine Änderung an Bannerwahl, Ranking, Zielkarte, Format, Tracking oder Verteilung.
+
+**Status:** OPEN / ROOT_CAUSE_PROVEN / SOURCE_FIX_NEXT.
