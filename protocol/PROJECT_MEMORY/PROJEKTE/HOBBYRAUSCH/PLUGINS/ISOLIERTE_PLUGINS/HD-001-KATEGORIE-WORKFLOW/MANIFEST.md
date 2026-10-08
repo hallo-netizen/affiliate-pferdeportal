@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.14.2 STALE-COMPLETE UI-GATE FIX LOKAL PASS / TARGET-PROFIL+MASTER IDENTISCH ZU V1.14.1 / INSTALL PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.3 RULE16 VISIBLE FULL LOCAL HARD PASS / LIVE-DRY-RUN PENDING / KEIN LIVE-SYNC
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -10,13 +10,13 @@ NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
 NEUESTE LOKAL VERIFIZIERTE BASIS:
-`1.14.2`
+`1.14.3`
 
 GEPRÜFTES ARTEFAKT:
-`HD001_V1.14.2_STALE_COMPLETE_UI_GATE_FIX.zip`
+`HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip`
 
 SHA-256:
-`b5bf0f6201a8158dc968530009d22195e8cc4a27b5421d84010840dafd282dbe`
+`deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de`
 
 PRÜFBERICHT:
 `HD001_V1.14.1_EXPANSION19_FINAL_POSNEG_REPORT.txt`
@@ -28,7 +28,7 @@ ZIELPROFIL:
 `profiles/hobby-depot-v1.json` im V1.14.1-Artefakt
 
 ZIELPROFIL SHA-256:
-`cd40cee8f1bceffae7c41b8bf2124965d49046caa2e27242af2122168a8412d0`
+`6578a1aa4dccf554bb685a36e564c32af897c85bb1aac06d0401c5fc683622b6`
 
 HOBBY MASTER:
 `profiles/hobby-master-v2-20261007.json` im V1.14.1-Artefakt
@@ -69,8 +69,17 @@ GRUND:
 Kein byteidentisches GitHub-Binary erfinden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-V1.14.2 installieren → Finaler Zielbaum → Delta-Dry-Run einmal neu ausführen.
-Nur bei exakt 32 CREATE / 425 UPDATE / 5 ARCHIVE und sichtbarem Abschnitt 2 zum einmaligen Sync weitergehen.
+V1.14.3 installieren → Finaler Zielbaum → genau einen read-only Live-Dry-Run → JSON prüfen.
+Kein Sync vor Live-Dry-Run-Abnahme.
+
+LOKALE V1.14.3-ABNAHME:
+- 1.723 Zielobjekte;
+- 1.293 CREATE + 430 UPDATE + 27 ARCHIVE gegen V1.14.1-Profil;
+- Readback 1.723/1.723;
+- zweiter Sync 1.723 UNCHANGED / 0 Writes;
+- Frontend PASS;
+- Negativsuite PASS;
+- PHP 33/33 PASS.
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
