@@ -2026,18 +2026,18 @@ JS;
             return $content;
         }
 
-        // Wenn der Beitrag bereits bewusst einen Rechner oder Slot enthält,
-        // keine automatische Banner-Ausgabe darüberlegen.
+        // Bewusste Affiliate-Slots bleiben autoritativ. Ein Tarifrechner
+        // unterdrueckt dagegen nur automatische Banner IM Artikel; der untere
+        // Banner bleibt unveraendert erlaubt.
         $raw_post_content = (string) get_post_field('post_content', $post_id);
-        if (has_shortcode($raw_post_content, 'affiliate_rechner')
-            || has_shortcode($raw_post_content, 'pp_affiliate_slot')
-            || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
+        if (has_shortcode($raw_post_content, 'pp_affiliate_slot') || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
             return $content;
         }
+        $suppress_inline_banner = has_shortcode($raw_post_content, 'affiliate_rechner');
 
         $result = $content;
 
-        if ($this->auto_slot_enabled($auto_slots, array('post_after_intro', 'top_info'))) {
+        if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array('post_after_intro', 'top_info'))) {
             $slot_type = in_array('post_after_intro', $auto_slots, true) ? 'post_after_intro' : 'top_info';
             $slot = $this->render_affiliate_slot($post_id, $slot_type, 'soft_hint', '');
             if ($slot !== '') {
@@ -2045,7 +2045,7 @@ JS;
             }
         }
 
-        if ($this->auto_slot_enabled($auto_slots, array('post_mid_content', 'mid_content'))) {
+        if (!$suppress_inline_banner && $this->auto_slot_enabled($auto_slots, array('post_mid_content', 'mid_content'))) {
             $slot_type = in_array('post_mid_content', $auto_slots, true) ? 'post_mid_content' : 'mid_content';
             $slot = $this->render_affiliate_slot($post_id, $slot_type, 'primary_product', '');
             if ($slot !== '') {
