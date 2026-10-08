@@ -1,0 +1,40 @@
+{
+  "contract": "PSTE_KISS_AUTOMATIK_KURZWEG_TARGET_V1",
+  "authority_scope": "PFERDE_ATELIER_PSTE_PSERC_CLEANUP_ONLY",
+  "status": "ACTIVE_TARGET",
+  "goal": "ONE_SIMPLE_PSTE_PRODUCTION_UI_WITH_TWO_VISIBLE_PATHS_WITHOUT_GATE_OR_QUALITY_WEAKENING",
+  "visible_production_paths": [
+    {
+      "id": "AUTOMATIK",
+      "target": "Vorhandenes gespeichertes Potenzial in kleinen fortsetzbaren Batches durch Bestands-, Dubletten-, Kategorie- und notwendige Planungs-/PSERC-Pruefungen bis zu genau einer Produktionsdatei fuehren.",
+      "new_dataforseo_required_for_existing_potential": false
+    },
+    {
+      "id": "KURZER_DIENSTWEG",
+      "target": "Manuell eingegebene Themen ohne neue DataForSEO-Recherche durch dieselben notwendigen Bestands-, Dubletten-, Kategorie- und Planungspruefungen bis zu genau einer Produktionsdatei fuehren.",
+      "new_dataforseo_required": false
+    }
+  ],
+  "internal_components_not_visible_as_separate_user_paths": [
+    "K0",
+    "PSERC",
+    "Finanzierungsprofile",
+    "Versicherungsprofile",
+    "Affiliate-Bindungen"
+  ],
+  "hard_constraints": [
+    "KEIN_FUNKTIONSVERLUST_DER_NOTWENDIGEN_FACHPRUEFUNGEN",
+    "KEINE_ABSCHWAECHUNG_VON_PPM_6_7_9",
+    "KEINE_ABSCHWAECHUNG_VON_PSERC",
+    "KEINE_ABSCHWAECHUNG_VON_DUPLETTEN_UND_KATEGORIEPRUEFUNGEN",
+    "KEIN_UNNOETIGER_GLOBALER_BACKLOG_VOLLSCAN",
+    "KEINE_UNNOETIGEN_DATAFORSEO_CALLS",
+    "DATENBANK_SCHONEND",
+    "PERFORMANCE_SCHONEND",
+    "KLEINE_BEGRenzTE_RESUMIERBARE_BATCHES",
+    "KEINE_NEUE_UNNOETIGE_ARCHITEKTUR",
+    "NUR_EINE_PRODUKTIONSDATEI_PRO_LAUF"
+  ],
+  "source_integrity_rule": "Ein neuer PSTE-Build darf nur aus einer exakt belegten Ausgangsquelle gebaut werden. Chatbehauptungen, Uebergaben oder Versionsnummern ohne Artefakt-/Source-Beleg duerfen nicht zur Build-Basis werden.",
+  "live_acceptance_rule": "Erst nach lokalem positiven/negativen Test und echtem WordPress-Readback darf ein PSTE-/PSERC-Paar als fertig gelten."
+}
