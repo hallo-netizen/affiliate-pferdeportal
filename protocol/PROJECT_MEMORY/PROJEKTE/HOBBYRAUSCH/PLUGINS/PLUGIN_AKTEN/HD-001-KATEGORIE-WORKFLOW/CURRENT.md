@@ -24,9 +24,9 @@ Buchbinden + vier Content-Kategorien + zugeordneter Testartikel real im Frontend
 
 Für V1.12.0 existiert KEIN realer Hobby-Depot-Live-PASS.
 
-## Aktuelle technische Basis
+## Historische technische Basis V1.12.0
 
-Plugin-Version:
+Historische Plugin-Version:
 `1.12.0`
 
 Lokales Release-Artefakt:
@@ -71,9 +71,9 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 - Buchbinden-Renderer/4 Leafs/stabile IDs PASS;
 - Fresh-Unpack/ZIP-Integrität PASS.
 
-## Aktueller Finalisierungskandidat
+## Historischer Finalisierungskandidat V1.13.1
 
-Plugin-Version:
+Historische Plugin-Version:
 `1.13.1`
 
 Artefakt:
