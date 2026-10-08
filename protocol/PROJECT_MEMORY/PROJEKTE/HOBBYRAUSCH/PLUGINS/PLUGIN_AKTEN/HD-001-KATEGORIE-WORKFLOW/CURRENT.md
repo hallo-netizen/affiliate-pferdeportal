@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.13.1 MATERIALKUNST-FIX IM ECHTEN ARTEFAKT UMGESETZT / LOKAL PATCH-PASS / 430 ZIELOBJEKTE ERWARTET / ALTER V1.12-ROLLBACK TERMINAL / NOCH KEIN FINAL-SYNC / FRISCHER LIVE-DRYRUN OFFEN
+STATUS: V1.13.1 MATERIALKUNST-FIX LIVE-DRYRUN PASS / 439 LOGIKKNOTEN / 430 ZIELOBJEKTE / 355 CREATE + 75 ADOPT / 0 FEHLER / 0 WRITES / ALTER ROLLBACK TERMINAL / FINAL-SYNC FREIGEGEBEN
 
 ## Plugin
 
@@ -274,16 +274,34 @@ Die historischen 270/270-, 24/24- und 11/11-Entwicklungstests werden für diesen
 Beleg:
 `SEO_KATEGORIEN/HD001_V1_13_1_MATERIALKUNST_FIX_LOCAL_BUILD_20261008.json`
 
+## KORRIGIERTER LIVE-DRYRUN – PASS
+
+`hobby-depot-final-target-readback-20261008-100800-utc.json`
+
+PASS:
+- 439 Logikknoten;
+- 430 physische Zielobjekte;
+- 403 Pages;
+- 4 category;
+- 15 journal_cat;
+- 8 hp_listing_category;
+- 355 CREATE + 75 ADOPT;
+- errors = [];
+- 0 Provider;
+- 0 Strukturwrites;
+- Materialkunst nicht mehr enthalten;
+- alter V1.12-Sync = ROLLED_BACK;
+- kein aktiver Final-Snapshot, da Final-Sync noch offen.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_13_1_FRESH_LIVE_DRYRUN_AFTER_MATERIALKUNST_FIX_PENDING`
+KEIN PRE-SYNC-BLOCKER MEHR.
 
 ## EXAKT EINE NEXT ACTION
 
-Korrigiertes ZIP installieren/ersetzen.
-Dann genau einen finalen read-only Delta-Dry-Run ausführen und JSON-Readback exportieren.
+Genau einen Final-Sync mit dem geprüften Zielplan ausführen.
 
-Noch keinen Final-Sync starten.
+Danach sofort Struktur-/Frontend-Readback exportieren.
 
 ## Release-/Artefaktgrenze
 
