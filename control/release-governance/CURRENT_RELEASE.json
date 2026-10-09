@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 306,
+  "generation": 307,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RUN_FORMAL_RELEASE_CHECK_6_72_211",
-    "current_focus_reason": "Exact tested installer from run 37897835885 is repository-bound. Run immutable formal release-check; no plugin source changes."
+    "current_focus": "RELEASE_COMPLETE_6_72_211",
+    "current_focus_reason": "Formal release-check PASS on run 37898011197. Exact tested installer remains repository-bound; no plugin source change."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,13 +887,13 @@
     }
   },
   "execution_state": {
-    "state": "RELEASED_6_72_211_FORMAL_CHECK_PENDING",
+    "state": "RELEASED_6_72_211_COMPLETE",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Run formal release-check for repository-bound exact tested 6.72.211 installer.",
-    "completion_condition": "FORMAL_RELEASE_CHECK_PASS",
+    "bound_user_scope_action": "Install exact released 6.72.211, verify live version/readback, then perform final physical DB/storage/performance closeout.",
+    "completion_condition": "RELEASE_CHECK_PASS",
     "after_completion_action": "INSTALL_READBACK_THEN_FINAL_DB_STORAGE_PERFORMANCE_MEASUREMENT",
     "no_optional_detours": true,
-    "sequence": 148,
+    "sequence": 149,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-064",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_full_release_gate_20261009.md",
@@ -1056,8 +1056,8 @@
       "repository_bind_commit": "52cb30b6cdda8765b46e13a49a050e70d5e56204",
       "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
     },
-    "formal_release_check_run": null,
-    "formal_release_check_result": "PENDING"
+    "formal_release_check_run": 37898011197,
+    "formal_release_check_result": "PASS"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
