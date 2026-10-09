@@ -46,9 +46,8 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 - erst wenn diese Werkzeug-Suche **keine** GitHub-Dateischreibaktion liefert oder deren tatsächlicher Aufruf fehlschlägt, darf `GITHUB_WRITE_UNAVAILABLE` als technischer Blocker gelten;
 - solange die GitHub-Dateischreibfunktion verfügbar ist, ist der Produktionsstart **ausführbar** und muss ausgeführt werden; ein Chat darf nicht mit `0 von N produziert` abbrechen, ohne mindestens den konkreten Schreibversuch des aktuellen Uploads ausgeführt zu haben;
 - der aktuelle Upload benötigt **keine zusätzliche Bereitstellung, Freigabe oder Übernahme als „aktueller Batch“** vor diesem Bindungsschritt;
-- für den K0-Fresh-Start existiert **keine separate historische Produktionsfreigabe**, an die der aktuelle Upload gebunden werden muss; der gültige aktuelle Upload ist selbst die Auftragsautorität für den neuen Run;
-- frühere 1er-/3er-/7er-/sonstige Test- oder Produktionsfreigaben sind **keine Freigabeinstanz für einen neuen K0-Upload** und dürfen ihn weder begrenzen noch blockieren;
-- bewiesener Referenzablauf: `WORDPRESS_INTAKE.json` schreiben -> `AUTHORING_CONTEXT.json` schreiben -> vorhandener GitHub-Workflow erzeugt `WRITER_JOB.json`; dafür ist keine zusätzliche Batch-Freigabe vorgesehen;
+- der gültige aktuelle Upload startet den neuen Run direkt; **keine zusätzliche Batch-Freigabe wird gelesen oder benötigt**;
+- Ablauf: `WORDPRESS_INTAKE.json` schreiben -> `AUTHORING_CONTEXT.json` schreiben -> vorhandener GitHub-Workflow erzeugt `WRITER_JOB.json`;
 - vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
 - `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
 - ein terminaler Blocker ist nur gültig, wenn er **nach Bindung des aktuellen Uploads** aus genau diesem aktuellen Lauf/Gate stammt;
