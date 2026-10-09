@@ -1389,14 +1389,15 @@ Kern:
 Kein weiterer Plugin-Patch.
 
 Zuerst fachlich:
-1. Fertigen und Technik auf max. 10 direkte Mega-Menü-Kinder ordnen;
-2. 10 repräsentative HOBBY_HUBs auswählen;
-3. Bestands-Leafs erhalten;
-4. universelle Lücken nach Regel 2.7 ergänzen;
-5. zusätzliche hobbiespezifische Leafs mit mindestens 3 echten Beitragsintentionen bestimmen;
-6. DataForSEO für konkrete Fragen/Keywords/Leaf-Kandidaten verwenden;
-7. echten Browser-/Theme-Pilot prüfen;
-8. erst danach neues Sollprofil und technische Umsetzung.
+1. Fertigen: Metall + Schmuck als gemeinsame zweite Ebene Metall & Schmuck prüfen/simulieren → 10 direkte Mega-Menü-Kinder;
+2. Technik: RC-Boote + RC-Flug & Drohnen + RC-Fahrzeuge als gemeinsame zweite Ebene RC & Modelltechnik prüfen/simulieren → 9 direkte Mega-Menü-Kinder;
+3. verbindlicher Pilot: Buchbinden, Balance Board, Glasmalerei, Lasergravieren, Fledermausbeobachtung, Hydrokultur, Riffaquaristik, Briefmarken sammeln, Geocaching, Imkerei;
+4. Bestands-Leafs erhalten;
+5. universelle Lücken nach Regel 2.7 ergänzen;
+6. zusätzliche hobbiespezifische Leafs mit mindestens 3 echten Beitragsintentionen bestimmen;
+7. DataForSEO für konkrete Fragen/Keywords/Leaf-Kandidaten verwenden;
+8. echten Browser-/Theme-Pilot prüfen;
+9. erst danach neues Sollprofil und technische Umsetzung.
 
 ## VERBINDLICHE LERNREGEL FÜR FOLGEPROJEKTE
 
