@@ -81,8 +81,8 @@ class K0StartRouterTests(unittest.TestCase):
     def test_k0_runtime_packages_are_exact_bound_bytes(self):
         import hashlib
         bound={
-            "runtime/k0/canonical/PPM_6.7.9.zip":"acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
-            "runtime/k0/canonical/PSERC_BINDING.zip":"77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+            "k0_canonical_assets/PPM_6.7.9.zip":"acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "k0_canonical_assets/PSERC_BINDING.zip":"77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
         }
         for path,expected in bound.items():
             p=Path(path)
