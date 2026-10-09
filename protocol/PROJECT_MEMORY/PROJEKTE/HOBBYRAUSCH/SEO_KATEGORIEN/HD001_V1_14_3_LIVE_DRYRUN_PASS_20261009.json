@@ -1,0 +1,60 @@
+{
+  "contract": "HD001_V1_14_3_LIVE_DRYRUN_PASS",
+  "date": "2026-10-09",
+  "status": "PASS__LIVE_READONLY_DELTA_MATCHES_LOCAL_HARDPASS__LIVE_SYNC_RELEASED",
+  "source_upload": {
+    "filename": "hobby-depot-final-target-readback-20261009-064920-utc.json",
+    "sha256": "6579a06e4ccf3043759bb3e2f4e245f15afa9a715925f962e987801629c42a44",
+    "generated_at_utc": "2026-10-09T06:49:16+00:00"
+  },
+  "live_dry_run": {
+    "contract": "APKW_FINAL_TARGET_DRY_RUN_V1",
+    "plugin_version": "1.14.3",
+    "valid": true,
+    "profile_revision": "HD-TARGET-3P-RULE16-VISIBLE-20261008+3c2a0913ec67a319",
+    "normalized_profile_sha256": "016e3a95281e7df91680963cbb155545834d4d3f5b3be81bf168bbcdce8ee2d9",
+    "canonical_entities": 855,
+    "core_entities": 332,
+    "editorial_finder_entities": 523,
+    "logical_nodes": 1737,
+    "physical_target_objects": 1723,
+    "create": 1293,
+    "update": 430,
+    "archive": 27,
+    "adopt": 0,
+    "unchanged": 0,
+    "action_count": 1750,
+    "errors": [],
+    "provider_calls": 0,
+    "provider_cost_usd": 0,
+    "wordpress_structure_writes": 0,
+    "live_fingerprint": "f1138a0c0594d90bc9bd975036be7419c9dc3971b0e97f2c4bf830d577303e59",
+    "action_fingerprint": "85253eda51828bd6308e07d9819dc4655255c25582b137b9dd125680853a5c59",
+    "plan_fingerprint": "7d432b2f6e0f8f589fdd638c4fb330a8e44423f8e7312c27941c4440a2aae894"
+  },
+  "acceptance": {
+    "matches_local_expected_migration": true,
+    "local_expected": "1293 CREATE + 430 UPDATE + 27 ARCHIVE + 0 ADOPT",
+    "archive_roles": {
+      "editorial_topic": 22,
+      "alias_only": 5,
+      "unexpected_hobby_hub_archives": 0
+    },
+    "new_intermediate_pages_created": 5,
+    "new_content_categories_created": 1288
+  },
+  "pre_sync_state": {
+    "sync_revision": "HD-TARGET-3P-V1.14.1-EXPANSION19-20261008+6bbea14b52435318",
+    "node_count": 457,
+    "readback_checked": 457,
+    "note": "Stored sync/frontend state is the old V1.14.1 live state. The read-only V1.14.3 dry-run did not write it."
+  },
+  "pre_sync_frontend": {
+    "valid": false,
+    "revision": "HD-TARGET-3P-V1.14.1-EXPANSION19-20261008+6bbea14b52435318",
+    "error": "HEADER_NAV_READBACK_FAILED:HEADER_BLOCK_FILTER_NOT_CANONICAL,HEADER_LEGACY_LEAK",
+    "interpretation": "Pre-sync old-state readback; not a post-sync V1.14.3 frontend result. V1.14.3 frontend acceptance remains mandatory after the one released sync."
+  },
+  "blocker": "HD001_V1_14_3_LIVE_SYNC_PENDING",
+  "next_action": "Run the accepted V1.14.3 target-tree sync exactly once, then download the post-sync JSON and verify 1723/1723 readback plus frontend/header before any further run."
+}
