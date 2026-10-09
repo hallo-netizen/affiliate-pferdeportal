@@ -1,0 +1,207 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schermaschinen-faq",
+    "plan_slot": "4c764e7455f9ba9f57055b64461295b990cb3b569544c3bbfb6044f280749147",
+    "target_keyword": "Wie oft muss man eine Schermaschine ölen",
+    "title": "Wie oft muss man eine Schermaschine ölen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Aesculap – Schermaschinen FAQ",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen"
+        },
+        {
+          "source_title": "Heiniger – Xplorer/A Schmierung",
+          "source_url": "https://www.manualslib.de/manual/1133765/Heiniger-Xplorer-A.html?page=17"
+        },
+        {
+          "source_title": "Aesculap – Scherkopf Favorita",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/scherkopf-favorita"
+        }
+      ],
+      "claims": [
+        "Aesculap empfiehlt, die Schermesser während des Scherens alle fünf bis zehn Minuten mit geeignetem Schermaschinenöl zu schmieren.",
+        "Heiniger verlangt für das Modell Xplorer/A, die Schermesser beim Scheren mindestens alle 15 Minuten zu ölen, damit sie nicht trocken laufen.",
+        "Ohne ausreichendes Öl kann der Scherkopf heiß werden und die Schermaschine stärker belasten, weil die beweglichen Messer mehr Reibung verursachen.",
+        "Aesculap empfiehlt spezielles Schermaschinenöl; Küchenöl soll nicht als Ersatz verwendet werden. Ein Kühlspray ersetzt die regelmäßige Schmierung nicht.",
+        "Bei Aesculap Favorita Scherköpfen werden die Messer vor jeder Benutzung geölt; nach der Reinigung ist erneutes Ölen vorgesehen.",
+        "Nach dem Ölen kann die Schermaschine kurz im Leerlauf laufen, damit sich das Öl im Scherkopf verteilt und nicht unmittelbar auf das Pferdefell gelangt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie oft muss man eine Schermaschine ölen",
+      "topic": "Wie oft muss man eine Schermaschine ölen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schermaschinen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie oft muss man eine Schermaschine ölen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Aesculap – Schermaschinen FAQ",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "statement": "Aesculap empfiehlt, die Schermesser während des Scherens alle fünf bis zehn Minuten mit geeignetem Schermaschinenöl zu schmieren.",
+        "evidence_text": "Aesculap empfiehlt, die Schermesser während des Scherens alle fünf bis zehn Minuten mit geeignetem Schermaschinenöl zu schmieren.",
+        "evidence_text_sha256": "7f644f2fe7b62e014e9c5ec43d2ccfa6628f04830054bfaf881107bade5cb153",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Heiniger – Xplorer/A Schmierung",
+        "source_url": "https://www.manualslib.de/manual/1133765/Heiniger-Xplorer-A.html?page=17",
+        "statement": "Heiniger verlangt für das Modell Xplorer/A, die Schermesser beim Scheren mindestens alle 15 Minuten zu ölen, damit sie nicht trocken laufen.",
+        "evidence_text": "Heiniger verlangt für das Modell Xplorer/A, die Schermesser beim Scheren mindestens alle 15 Minuten zu ölen, damit sie nicht trocken laufen.",
+        "evidence_text_sha256": "360ec9355d071aed66cf1805f6d390ea4073755d02b447f49596053dff69d36b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Aesculap – Schermaschinen FAQ",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "statement": "Ohne ausreichendes Öl kann der Scherkopf heiß werden und die Schermaschine stärker belasten, weil die beweglichen Messer mehr Reibung verursachen.",
+        "evidence_text": "Ohne ausreichendes Öl kann der Scherkopf heiß werden und die Schermaschine stärker belasten, weil die beweglichen Messer mehr Reibung verursachen.",
+        "evidence_text_sha256": "f074a15d344e375b4577532c12da7a8cd7365a099a484ccd22d91b235afb26e9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Aesculap – Schermaschinen FAQ",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "statement": "Aesculap empfiehlt spezielles Schermaschinenöl; Küchenöl soll nicht als Ersatz verwendet werden. Ein Kühlspray ersetzt die regelmäßige Schmierung nicht.",
+        "evidence_text": "Aesculap empfiehlt spezielles Schermaschinenöl; Küchenöl soll nicht als Ersatz verwendet werden. Ein Kühlspray ersetzt die regelmäßige Schmierung nicht.",
+        "evidence_text_sha256": "22204aa162e4f407d630c0ebf46208c1272f59c73b93411ef24cbd5458982285",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Aesculap – Scherkopf Favorita",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/scherkopf-favorita",
+        "statement": "Bei Aesculap Favorita Scherköpfen werden die Messer vor jeder Benutzung geölt; nach der Reinigung ist erneutes Ölen vorgesehen.",
+        "evidence_text": "Bei Aesculap Favorita Scherköpfen werden die Messer vor jeder Benutzung geölt; nach der Reinigung ist erneutes Ölen vorgesehen.",
+        "evidence_text_sha256": "ebcea8aef9dc705a80b11a7f1cea7ec8e3a278f5ddca281512da6f8166e77c79",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Aesculap – Schermaschinen FAQ",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "statement": "Nach dem Ölen kann die Schermaschine kurz im Leerlauf laufen, damit sich das Öl im Scherkopf verteilt und nicht unmittelbar auf das Pferdefell gelangt.",
+        "evidence_text": "Nach dem Ölen kann die Schermaschine kurz im Leerlauf laufen, damit sich das Öl im Scherkopf verteilt und nicht unmittelbar auf das Pferdefell gelangt.",
+        "evidence_text_sha256": "3fe5781678d5c946a89f849b05024f85c2bbf53c95fca69deb63ee1ee2335034",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+        "anchor": "Schermaschinen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schermaschinen-pflege/",
+        "anchor": "Pflege von Schermaschinen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schermaschinen-faq/",
+        "anchor": "FAQ zu Schermaschinen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-pflege/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schermaschinen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schermaschine",
+      "Schermesser",
+      "Ölen",
+      "Öl",
+      "Pflege",
+      "Intervall",
+      "Scheren",
+      "Scherkopf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine einfache Intervallangabe mit ergänzender Prüfliste zu Öl, Reinigung und Erwärmung vermittelt die Handgriffe klarer als eine zusätzliche Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
