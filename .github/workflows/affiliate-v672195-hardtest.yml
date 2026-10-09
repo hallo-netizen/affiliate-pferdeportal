@@ -11,7 +11,7 @@ on:
       - '.github/workflows/affiliate-v672195-hardtest.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   kiss-cleanup:
