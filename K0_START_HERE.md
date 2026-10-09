@@ -37,6 +37,10 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 
 - der aktuell angehängte gültige Upload ist die einzige Auftragsidentität für den neu gestarteten Lauf;
 - **erste interne Startaktion:** exakt diesen Upload in einem frischen K0-Run als `WORDPRESS_INTAKE.json` binden; erst danach dürfen Recherche, Authoring oder Prüfungen des neuen Laufs beginnen;
+- technischer Startmechanismus ist der **bestehende GitHub-Dateistart**: `WORDPRESS_INTAKE.json` mit `create_file` schreiben; nur wenn genau diese Datei bereits existiert, `update_file` verwenden;
+- nach erfolgreichem Schreiben von `WORDPRESS_INTAKE.json` **im selben K0-Auftrag sofort Recherche ausführen und anschließend `AUTHORING_CONTEXT.json` mit `create_file` schreiben**;
+- ein erfolgreich geschriebenes `WORDPRESS_INTAKE.json` ist **kein Abschluss und kein Blocker**; fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
+- erst ein tatsächlich fehlgeschlagener Recherche- oder GitHub-Schreibversuch im aktuellen frischen Run darf als technischer Startblocker gelten;
 - der aktuelle Upload benötigt **keine zusätzliche Bereitstellung, Freigabe oder Übernahme als „aktueller Batch“** vor diesem Bindungsschritt;
 - vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
 - `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
