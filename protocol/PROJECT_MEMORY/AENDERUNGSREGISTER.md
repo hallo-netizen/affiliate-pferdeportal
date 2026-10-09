@@ -1180,3 +1180,24 @@ SHA-256:
 OFFEN:
 19 bekannte/große Erweiterungs-Ankerkandidaten sind laut Master nur Research Queue und noch nicht final bewertet.
 Keine Blind-Promotion; kein Live-Sync vor dieser Entscheidung.
+
+
+## 2026-10-09 – HOBBYRAUSCH / SEO_KATEGORIEN – Abschlussrouting bereinigt
+
+WAS:
+- `PROJEKTE/HOBBYRAUSCH/KONZEPT/CURRENT_STATE.md` von veraltetem `TECHNICAL_OBJECT_PLAN_PENDING` bereinigt.
+- Konzept-Current führt nun nur noch auf die operative SEO-Kategorien-Current und erzeugt keine zweite technische Status-/NEXT-ACTION-Wahrheit.
+
+WARUM:
+- V1.14.3 ist technisch lokal FULL HARD PASS und der reale read-only Live-Dry-Run ist PASS.
+- Der alte Konzept-Blocker war dadurch überholt und widersprach der Single-Truth-Regel.
+
+UNVERÄNDERT:
+- Zielvertrag 2.6;
+- Assessment Rules 1.6;
+- Fach-Sollprofil;
+- Plugin-Code;
+- WordPress-Livebestand.
+
+OPERATIVE CURRENT-AUTORITÄT:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/CURRENT_STATE.md`
