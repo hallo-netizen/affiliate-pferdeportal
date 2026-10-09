@@ -1168,3 +1168,62 @@ Fail-closed ZIP installieren und genau einen neuen read-only Live-Dry-Run ausfü
 
 ARTEFAKTPFLICHT:
 `CURRENT.zip` im Campus bleibt NICHT synchronisiert; kein lokaler Binärdatei-Uploadweg im verfügbaren GitHub-Connector. Manifest wurde nachgezogen, Binary nicht erfunden.
+
+
+---
+
+## PU-20261009-025 – HD-001 finaler Rule-2.7-Live-PASS + optimierter Wiederverwendungsworkflow
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Finale lokale Gesamtprüfung, produktiver One-Sync-Readback und Ableitung eines optimierten Workflows für neue Themen.
+
+AUSGANGSPROBLEM:
+Der Arbeitsstrang hatte zu viele Zwischenprofile/Pluginuploads erzeugt, weil fachliche Modellierung, lokale Abnahme und Live-Ausrollung zu früh vermischt wurden.
+
+LETZTE FACHLICHE NACHHOLFEHLER:
+- 279/279-HOBBY_HUB-Gate war zu eng; 51 weitere terminale CORE-Seiten blieben ohne Leafs;
+- 46 generische Ausrüstung-&-Kosten-Leafs waren nicht mit >=3 hobbyindividuellen Intents belegt;
+- PENDING/UNASSESSED-Rollen wurden zu lange mitgeschleppt;
+- Hobbyfinder war nicht direkt Hauptkategorie; Alleine/Zu zweit lagen falsch, Gruppe fehlte;
+- 22 stale Editorial-Verweise auf `editorial:group:entdecken`;
+- altes 3–6-Leaf-Gate;
+- AJAX-HTML-Fehler führte zu `Unexpected token '<'`;
+- injizierter Metadaten-Write-Fehler zeigte einen unvollständigen Rollback.
+
+FINALER LOKALER HARD-PASS:
+- Kategorienbaum 43/43 PASS;
+- 1920 CORE-Content-Kategorien;
+- 330/330 terminale CORE-Seiten mit Content-Ebene;
+- 255 neue Leafs jeweils >=3 Supporting Intents;
+- positive + negative E2E 14/14 PASS;
+- Resume, Readback, Idempotenz, Drift und exakter Rollback PASS;
+- PHP 33/33 PASS;
+- ZIP PASS.
+
+ARTEFAKT:
+`HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
+
+SHA-256:
+`709134631895a901bcb4fc5f5d71889d317954d9928c0ed20700883990a5a52c`
+
+LIVE:
+- Dry-Run PASS / 2357 Ziele / 256 CREATE / 2101 UPDATE / 1 ARCHIVE;
+- Sync COMPLETE / TARGET_TREE_SYNC_AND_READBACK_PASS;
+- 256 created / 2100 updated / 1 unchanged / 1 archived;
+- 2357/2357 Readback;
+- Frontend PASS;
+- 330/330 Kategorie-Gate;
+- 0 failures;
+- 0 unbound CORE pages.
+
+OPTIMIERUNG FÜR NEUE THEMEN:
+Erst vollständiger Zielvertrag + komplette fachliche Datenstruktur + vollständiger lokaler POS/NEG-E2E-Hard-Pass. Erst danach genau ein Release-ZIP, ein Live-Dry-Run, ein Sync und ein Readback. Keine Zwischen-ZIPs und keine Blindfix-Schleife.
+
+WIEDERVERWENDBARE ÜBERGABE:
+`../PROJEKTLEITUNG/HOBBYRAUSCH_UEBERGABE_OPTIMIERTER_WORKFLOW_NEUES_THEMA_20261009.md`
+
+ERGEBNIS:
+HD-001 LIVE-PASS / Kategorienlauf abgeschlossen.
