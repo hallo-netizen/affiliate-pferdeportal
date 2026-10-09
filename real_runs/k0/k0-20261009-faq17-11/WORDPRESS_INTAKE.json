@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "longierpeitschen-faq",
+      "plan_slot": "258445baf8f4eab233375ca46f60ba50b66a83f0dba490a3f697b851360a1705",
+      "target_keyword": "Wie lang muss eine Longierpeitsche sein",
+      "title": "Wie lang muss eine Longierpeitsche sein?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "b13bbc7034e458797dde11329d08abd83d0e9e9cad1e6910be3b70c00c7d2fa7"
+}
