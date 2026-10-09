@@ -59,7 +59,10 @@
       "writer_core_mode": "UNCHANGED_SINGLE_ITEM",
       "final_reassembly": "engine/wordpress_batch_export.py",
       "final_order": "ORIGINAL_UPLOAD_ORDER",
-      "workflow_dispatch_required": false
+      "workflow_dispatch_required": false,
+      "after_each_intake": "RESEARCH_THEN_WRITE_AUTHORING_CONTEXT_IN_SAME_RUN",
+      "legacy_release_lookup_allowed": false,
+      "resume_identical_current_intake_at_first_missing_artifact": true
     }
   },
   "wordpress_export": {
