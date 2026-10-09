@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-08
-STATUS: FACH-SOLLPROFIL FROZEN / V1.14.3 FULL LOCAL HARD PASS + LIVE DRY-RUN PASS / 1723 ZIELOBJEKTE / 1292 CONTENT-KATEGORIEN / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
+STAND: 2026-10-09
+STATUS: V1.14.3 LIVE SYNC ROLLED BACK / V1.14.4 RULES + MAGAZIN FULL LOCAL HARD PASS / LIVE INSTALL + DRY-RUN + ONE CONTROLLED SYNC PENDING
 
 ## Ziel
 
@@ -1250,20 +1250,79 @@ Der im Export enthaltene `sync_state` und `frontend_readback` gehören noch zur 
 Der Frontend-Fehler `HEADER_BLOCK_FILTER_NOT_CANONICAL,HEADER_LEGACY_LEAK` ist damit ein PRE-SYNC-Befund des alten Stands, kein V1.14.3-Post-Sync-Ergebnis.
 Nach dem freigegebenen Sync ist der V1.14.3-Frontend-/Header-Readback zwingend erneut zu prüfen.
 
+## POST-SYNC V1.14.3 / V1.14.4 – CURRENT
+
+Realer Post-Sync-Readback:
+`hobby-depot-final-target-readback-20261009-074655-utc.json`
+
+V1.14.3 real:
+- Dry-Run PASS;
+- Sync schrieb den Zielbaum, Readback stoppte nach 39 Knoten;
+- Fehler: `core:gestalten:oberflaeche-deko [name]`;
+- Sync danach vollständig `ROLLED_BACK`;
+- damit blieben die 1.288 neu vorgesehenen Content-Kategorien nicht live bestehen.
+
+Regelprüfung gegen Zielvertrag 2.6 + Assessment Rules 1.6:
+- 279/279 HOBBY_HUBs besitzen im Soll eine sichtbare Content-Kategorieebene;
+- 1.292 Content-Kategorien;
+- Verteilung 117×4 / 148×5 / 14×6;
+- Rule16-Endaudit: 0 Capacity-Verstöße bei 5–12 Intentions als Idealbereich;
+- maximale Tiefe 4;
+- `Keine Kategorie unter Kategorie` ist hart verbindlich;
+- Views/Filter wie zuhause/ungewöhnlich erzeugen keine zweite Hobbytaxonomie;
+- fehlende Evidenz bleibt `EVIDENCE_REQUIRED`, keine Schätzung.
+
+Zusätzlicher realer Konzeptfehler in V1.14.3:
+Der Magazinbaum modellierte 12 `journal_cat → journal_cat`-Kanten und verletzte damit `Keine Kategorie unter Kategorie`.
+
+V1.14.4 lokal korrigiert:
+- Page-/Term-Namen werden vor strengem sichtbarem Namensvergleich HTML-entity-normalisiert;
+- echte Namensänderungen bleiben Readbackfehler und lösen Rollback aus;
+- Readbackfehler nennen künftig `expected_name` + `actual_name`;
+- Kategorie-unter-Kategorie wird generisch vom Validator geblockt;
+- Magazin-Gruppen sind Seiten/Views, darunter die echten Magazin-Kategorien;
+- neutraler Editorial-Fallback = Hobbyfinder;
+- keine automatische Zuordnung zu spezifischen Magazin-Leafs ohne Evidenz;
+- keine zusätzliche Saison/Kategorie erfunden.
+
+Fester Magazinbaum:
+- Hobby finden → Hobbyfinder / Hobbywelten;
+- Nach Situation → Zuhause / Draußen / Alleine / Zu zweit / Wenig Platz / Wenig Zeit;
+- Nach Jahreszeit → Winter / Sommer;
+- Entdecken → Ungewöhnliche Hobbys / Verrückte Hobbys / Neue Hobbys / Trends.
+
+Lokaler V1.14.4-Hardpass:
+- Dry-Run PASS: 1.296 CREATE / 427 UPDATE / 30 ARCHIVE;
+- Sync COMPLETE: 1.723/1.723 Readbacks;
+- Header 102/102 PASS;
+- Magazin 4/4 PASS;
+- Hobby finden 2/2 PASS;
+- Situation 6/6, Jahreszeit 2/2, Entdecken 4/4 PASS;
+- Buchbinden 4/4 PASS;
+- zweiter Sync 1.723 UNCHANGED / 0 Writes;
+- Negativfälle Kategorie-unter-Kategorie, fehlender Parent, doppelter Slug, Name zu lang, doppelte ID, Tiefe >4, Cross-Pillar-Parent, unbekanntes Relationsziel: alle fail-closed;
+- echte Namensänderung `Oberfläche und Deko` → Readbackfehler + ROLLED_BACK;
+- PHP 33/33 vor und nach Fresh-Unpack.
+
+Artefakt:
+`HD001_V1.14.4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS.zip`
+
+SHA-256:
+`9ec9b0d7b2776c59262aebbed9d3e9a88a533ce11084c4e66cd011a9126da06d`
+
+Profil SHA-256:
+`08c1da1bb43add667b73ea02bbaab6d3ad3c3228de88673254d8d5ebbdb8996c`
+
+Evidence:
+`SEO_KATEGORIEN/HD001_V1_14_4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS_20261009.json`
+
+Wichtig:
+Der exportierte Live-Readback speichert den tatsächlich zurückgelesenen Titel des alten Page-Name-Fehlers nicht. Deshalb wird kein exakter Live-Rückgabestring behauptet. Lokal wurde jedoch derselbe Fehlerknoten nach exakt denselben 39 Readbacks mit dem fehlenden Page-Entity-Normalisierungspfad reproduziert.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_3_LIVE_SYNC_PENDING`
+`HD001_V1_14_4_LIVE_INSTALL_AND_SYNC_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-Den bereits akzeptierten V1.14.3-Zielbaum **genau einmal synchronisieren**.
-Danach sofort den neuen Post-Sync-JSON-Readback herunterladen und prüfen.
-
-Erwartung nach Sync:
-- 1.723/1.723 Readback COMPLETE;
-- aktuelle V1.14.3-Revision;
-- Frontend valid=true;
-- Header 102;
-- lokale Welt-Kinder 7 / 11 / 11 / 5 / 10 / 7 / 8 / 8.
-
-Kein zweiter Lauf vor Prüfung des Post-Sync-JSON.
+V1.14.4 installieren → Live-Dry-Run prüfen → genau EINEN kontrollierten Sync ausführen → vollständigen Post-Sync-Readback herunterladen und gegen Zielvertrag 2.6 / Rules 1.6 prüfen. Kein zweiter Sync vor dieser Prüfung.
