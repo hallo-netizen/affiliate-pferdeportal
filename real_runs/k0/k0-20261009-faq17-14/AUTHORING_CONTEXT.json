@@ -1,0 +1,207 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "striegel-faq",
+    "plan_slot": "7887fe7b53d772813061ad27e8aa70095779d88ea559a9e40e62e6e60927a325",
+    "target_keyword": "Wie striegelt man Pferde am besten",
+    "title": "Wie striegelt man Pferde am besten?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "PM-Forum Digital – Gut geputzt",
+          "source_url": "https://www.pm-forum-digital.de/project/young-pm-gut-geputzt-05-2016/"
+        },
+        {
+          "source_title": "Allianz – Pferde richtig pflegen",
+          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/pferdepflege/"
+        },
+        {
+          "source_title": "Pferdeflüsterer NRW – Gesundes Pferd pflegen",
+          "source_url": "https://www.pferdefluesterer-nrw.de/index.php/de-de/pferdepflege/pferdepflege/pflege-gesundes-pferd"
+        }
+      ],
+      "claims": [
+        "Beim Putzen wird zuerst grober Schmutz gelöst. Danach arbeitet man mit dem Striegel in kreisenden Bewegungen und streicht mit der Kardätsche in natürlicher Fellwuchsrichtung glatt.",
+        "Der Striegel wird nicht auf Kopf und Beinen eingesetzt, weil dort Knochen dicht unter dem Fell liegen. An Bauch und Flanken ist wegen empfindlicher Stellen ebenfalls besondere Vorsicht nötig.",
+        "Gummi-, Kunststoff- oder Metallstriegel lösen Schmutz am muskulösen Pferdekörper. Eine feine Kardätsche entfernt anschließend gelösten Staub und wird zwischendurch am Striegel abgestrichen.",
+        "Für Kopf, Augen und Nüstern verwendet man weiche Bürsten beziehungsweise saubere getrennte Schwämme. Kräftige Striegel gehören nicht an die empfindlichen Bereiche.",
+        "Beim Putzen nähert man sich dem Pferd seitlich, arbeitet kontrolliert von vorne nach hinten und bleibt beim Positionswechsel mit einer Hand am Pferd, damit es einen wahrnimmt.",
+        "Zum Putzzeug gehören Striegel, Kardätsche, Wurzelbürste und Hufkratzer. Der Hufkratzer entfernt Fremdkörper aus den Hufen; die Wurzelbürste hilft gegen groben Schmutz."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie striegelt man Pferde am besten",
+      "topic": "Wie striegelt man Pferde am besten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "striegel-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie striegelt man Pferde am besten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "PM-Forum Digital – Gut geputzt",
+        "source_url": "https://www.pm-forum-digital.de/project/young-pm-gut-geputzt-05-2016/",
+        "statement": "Beim Putzen wird zuerst grober Schmutz gelöst. Danach arbeitet man mit dem Striegel in kreisenden Bewegungen und streicht mit der Kardätsche in natürlicher Fellwuchsrichtung glatt.",
+        "evidence_text": "Beim Putzen wird zuerst grober Schmutz gelöst. Danach arbeitet man mit dem Striegel in kreisenden Bewegungen und streicht mit der Kardätsche in natürlicher Fellwuchsrichtung glatt.",
+        "evidence_text_sha256": "cd9b9ebf0e4ff0e85220415679b517afe4d5c0069fe754309a980d096188748a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "PM-Forum Digital – Gut geputzt",
+        "source_url": "https://www.pm-forum-digital.de/project/young-pm-gut-geputzt-05-2016/",
+        "statement": "Der Striegel wird nicht auf Kopf und Beinen eingesetzt, weil dort Knochen dicht unter dem Fell liegen. An Bauch und Flanken ist wegen empfindlicher Stellen ebenfalls besondere Vorsicht nötig.",
+        "evidence_text": "Der Striegel wird nicht auf Kopf und Beinen eingesetzt, weil dort Knochen dicht unter dem Fell liegen. An Bauch und Flanken ist wegen empfindlicher Stellen ebenfalls besondere Vorsicht nötig.",
+        "evidence_text_sha256": "fb25301d574a17861f48872490235a9a8de791ad90b797ee1d9e4c98611bfbdb",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Allianz – Pferde richtig pflegen",
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/pferdepflege/",
+        "statement": "Gummi-, Kunststoff- oder Metallstriegel lösen Schmutz am muskulösen Pferdekörper. Eine feine Kardätsche entfernt anschließend gelösten Staub und wird zwischendurch am Striegel abgestrichen.",
+        "evidence_text": "Gummi-, Kunststoff- oder Metallstriegel lösen Schmutz am muskulösen Pferdekörper. Eine feine Kardätsche entfernt anschließend gelösten Staub und wird zwischendurch am Striegel abgestrichen.",
+        "evidence_text_sha256": "bac2c58f9ba8a51a9fec013b77e2b85374fa06a5644708b874b07f3349997b6d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Allianz – Pferde richtig pflegen",
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/pferdepflege/",
+        "statement": "Für Kopf, Augen und Nüstern verwendet man weiche Bürsten beziehungsweise saubere getrennte Schwämme. Kräftige Striegel gehören nicht an die empfindlichen Bereiche.",
+        "evidence_text": "Für Kopf, Augen und Nüstern verwendet man weiche Bürsten beziehungsweise saubere getrennte Schwämme. Kräftige Striegel gehören nicht an die empfindlichen Bereiche.",
+        "evidence_text_sha256": "0373d513c3cf7af31a860f9bb683908a15cc3fbfccce3a6e5d1b31699557ede0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "PM-Forum Digital – Gut geputzt",
+        "source_url": "https://www.pm-forum-digital.de/project/young-pm-gut-geputzt-05-2016/",
+        "statement": "Beim Putzen nähert man sich dem Pferd seitlich, arbeitet kontrolliert von vorne nach hinten und bleibt beim Positionswechsel mit einer Hand am Pferd, damit es einen wahrnimmt.",
+        "evidence_text": "Beim Putzen nähert man sich dem Pferd seitlich, arbeitet kontrolliert von vorne nach hinten und bleibt beim Positionswechsel mit einer Hand am Pferd, damit es einen wahrnimmt.",
+        "evidence_text_sha256": "beac4efe469cc3404e34f696d810da84520c9672d4e76c1962f012edad22f785",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferdeflüsterer NRW – Gesundes Pferd pflegen",
+        "source_url": "https://www.pferdefluesterer-nrw.de/index.php/de-de/pferdepflege/pferdepflege/pflege-gesundes-pferd",
+        "statement": "Zum Putzzeug gehören Striegel, Kardätsche, Wurzelbürste und Hufkratzer. Der Hufkratzer entfernt Fremdkörper aus den Hufen; die Wurzelbürste hilft gegen groben Schmutz.",
+        "evidence_text": "Zum Putzzeug gehören Striegel, Kardätsche, Wurzelbürste und Hufkratzer. Der Hufkratzer entfernt Fremdkörper aus den Hufen; die Wurzelbürste hilft gegen groben Schmutz.",
+        "evidence_text_sha256": "3ab9ed9332fb29c10680cb16a51bd4a0fb23d98260df2abb357736955018295e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-pflegezubehoer/striegel/",
+        "anchor": "Striegel",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/striegel-pflege/",
+        "anchor": "Pflege mit dem Striegel",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ zu Striegeln",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-pflegezubehoer/striegel/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-pflege/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "striegel-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Striegel",
+      "Pferde",
+      "Kardätsche",
+      "Fell",
+      "Bürste",
+      "Pferd",
+      "Körper",
+      "Pflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die richtige Putzfolge aus grober Reinigung, vorsichtigem Striegeln, Kardätsche und separater Kopfpflege lässt sich als Ablauf besser erklären als in einer Vergleichstabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
