@@ -1,0 +1,168 @@
+{
+  "contract": "HD001_V1_14_4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS",
+  "date": "2026-10-09",
+  "status": "PASS_LOCAL_ONLY__LIVE_INSTALL_SYNC_PENDING",
+  "source": {
+    "live_readback": "hobby-depot-final-target-readback-20261009-074655-utc.json",
+    "base_artifact": "HD001_V1.14.3_RULE16_VISIBLE_FINAL_HARDPASS.zip",
+    "base_sha256": "deaee48b4f7310d94a5975b3dd471b0374d369745b1b7dd48c512ae514d7c7de"
+  },
+  "authorities": {
+    "zielvertrag_2_6_sha": "1ebd34b337af6dd271d8327f7e5cf854875b9aab",
+    "assessment_rules_1_6_sha": "4c6c6f0d40143f4b0aeeba1fad82cea25f0a2969",
+    "core_rule16_audit_sha": "6b0b82ac80a4f9f28f9565b6840e2ee599b8be03",
+    "three_pillar_concept_sha": "7d6678779b720eaa6b6c65e8b7d991ea62739bf0"
+  },
+  "live_failure": {
+    "plugin_version": "1.14.3",
+    "status": "ROLLED_BACK",
+    "error": "Target-Tree-Readback fehlgeschlagen: core:gestalten:oberflaeche-deko [name]",
+    "readback_checked": 39,
+    "note": "The exported live readback does not contain the actual returned post_title. No exact live returned title string is asserted."
+  },
+  "local_reproduction_v1_14_3": {
+    "exact_base_artifact": true,
+    "status": "ROLLED_BACK",
+    "error": "Target-Tree-Readback fehlgeschlagen: core:gestalten:oberflaeche-deko [name]",
+    "readback_checked": 39,
+    "reproduction_class": "page title returned in HTML-entity-equivalent form",
+    "conclusion": "Same failure node and same readback index reproduced. This proves the missing page-name normalization gap can produce the observed failure class; it does not prove the unavailable exact live return string."
+  },
+  "rules_checked": {
+    "max_depth": 4,
+    "category_under_category": "FORBIDDEN",
+    "hobby_hub_visible_leaf_target": "3-6",
+    "leaf_intent_capacity": "5-12 ideal",
+    "no_empty_symmetry_leafs": true,
+    "all_canonical_drilldown_levels_visible": true,
+    "header_may_remain_small": true,
+    "views_filters_no_second_taxonomy": true,
+    "editorial_no_copy_of_core_tree": true,
+    "one_primary_intent_owner_across_pillars": true,
+    "missing_evidence": "EVIDENCE_REQUIRED"
+  },
+  "core_structure": {
+    "hobby_hubs": 279,
+    "visible_content_categories": 1292,
+    "category_distribution": {
+      "4": 117,
+      "5": 148,
+      "6": 14
+    },
+    "max_logical_depth": 4,
+    "authoritative_capacity_violations": 0
+  },
+  "magazine_before": {
+    "violation": "12 journal_cat children had journal_cat parents although 'Keine Kategorie unter Kategorie' is binding.",
+    "fallback_problem": "editorial fallback pointed to editorial:entdecken:ungewoehnlich"
+  },
+  "v1_14_4_changes": [
+    "Decode HTML entity representation for page and term names before strict visible-name comparison.",
+    "True name mismatch diagnostics include expected_name and actual_name.",
+    "Generic target validator blocks taxonomy-category under taxonomy-category.",
+    "Magazine navigation groups are page/view nodes, not journal_cat parent terms.",
+    "Fixed four-group magazine concept remains unchanged: Hobby finden / Nach Situation / Nach Jahreszeit / Entdecken.",
+    "Editorial fallback is neutral Hobbyfinder; no automatic specific magazine-leaf assignment without evidence.",
+    "No extra season/category was invented."
+  ],
+  "magazine_target": {
+    "Hobby finden": [
+      "Hobbyfinder",
+      "Hobbywelten"
+    ],
+    "Nach Situation": [
+      "Zuhause",
+      "Draußen",
+      "Alleine",
+      "Zu zweit",
+      "Wenig Platz",
+      "Wenig Zeit"
+    ],
+    "Nach Jahreszeit": [
+      "Winter",
+      "Sommer"
+    ],
+    "Entdecken": [
+      "Ungewöhnliche Hobbys",
+      "Verrückte Hobbys",
+      "Neue Hobbys",
+      "Trends"
+    ]
+  },
+  "positive_local": {
+    "dry_run": {
+      "status": "PASS",
+      "create": 1296,
+      "update": 427,
+      "archive": 30,
+      "adopt": 0
+    },
+    "sync": {
+      "status": "COMPLETE",
+      "readback_checked": 1723
+    },
+    "header": {
+      "valid": true,
+      "expected_count": 102
+    },
+    "magazine": {
+      "valid": true,
+      "groups": 4
+    },
+    "hobby_finden": {
+      "valid": true,
+      "children": 2
+    },
+    "situation": {
+      "valid": true,
+      "children": 6
+    },
+    "jahreszeit": {
+      "valid": true,
+      "children": 2
+    },
+    "entdecken": {
+      "valid": true,
+      "children": 4
+    },
+    "buchbinden": {
+      "valid": true,
+      "children": 4
+    },
+    "idempotence": {
+      "status": "COMPLETE",
+      "unchanged": 1723,
+      "created": 0,
+      "updated": 0,
+      "archived": 0
+    }
+  },
+  "negative_local": {
+    "old_magazine_category_under_category_violations": 12,
+    "nested_category": "BLOCKED",
+    "missing_parent": "BLOCKED",
+    "duplicate_slug": "BLOCKED",
+    "name_too_long": "BLOCKED",
+    "duplicate_node_id": "BLOCKED",
+    "depth_exceeded": "BLOCKED",
+    "cross_pillar_parent": "BLOCKED",
+    "relation_target_unknown": "BLOCKED",
+    "true_name_change": {
+      "status": "ROLLED_BACK",
+      "readback_checked": 39,
+      "error": "expected_name=\"Oberfläche & Deko\" actual_name=\"Oberfläche und Deko\""
+    }
+  },
+  "php_lint": {
+    "source": "33/33 PASS",
+    "fresh_unpack": "33/33 PASS"
+  },
+  "artifact": {
+    "name": "HD001_V1.14.4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS.zip",
+    "sha256": "9ec9b0d7b2776c59262aebbed9d3e9a88a533ce11084c4e66cd011a9126da06d",
+    "profile_sha256": "08c1da1bb43add667b73ea02bbaab6d3ad3c3228de88673254d8d5ebbdb8996c"
+  },
+  "live_writes_this_session": 0,
+  "blocker": "V1.14.4 LIVE INSTALL + LIVE DRY-RUN + EXACTLY ONE CONTROLLED SYNC + FULL POST-SYNC READBACK",
+  "next_action": "Install V1.14.4, run live dry-run, verify delta, run exactly one controlled sync, then verify the downloaded full live readback before release."
+}
