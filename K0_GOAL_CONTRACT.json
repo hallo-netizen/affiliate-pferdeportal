@@ -26,6 +26,12 @@
     "historical_text_or_research_artifact_as_content_source_forbidden": true,
     "historical_information_blacklist_forbidden": true,
     "independently_rediscovered_same_facts_or_sources_allowed": true,
-    "topic_specific_start_logic_forbidden": true
+    "topic_specific_start_logic_forbidden": true,
+    "batch_item_count_independent": true,
+    "batch_fanout_to_existing_single_item_runs_required": true,
+    "writer_single_item_contract_must_remain_unchanged": true,
+    "final_batch_reassembly_required": true,
+    "final_batch_order_must_match_input": true,
+    "startmaster0107_as_k0_assignment_authority_forbidden": true
   }
 }
