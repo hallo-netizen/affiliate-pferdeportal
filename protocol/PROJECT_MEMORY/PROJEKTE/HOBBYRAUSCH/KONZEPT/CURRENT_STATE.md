@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: REGELN 2.6/1.6 FEST / FACH-SOLLPROFIL PASS / 359 CURRENT-CORE VOLLSTÄNDIG REVALIDIERT / 279 HOBBY_HUB / 1.292 CONTENT-KATEGORIEN / KEIN OFFENER KONZEPT-BLOCKER / OPERATIVE FORTSETZUNG ÜBER SEO_KATEGORIEN-CURRENT
+STATUS: FACHKONZEPT + KATEGORIEREGELN 2.6/1.6 FEST / FACH-SOLLPROFIL ABGESCHLOSSEN / OPERATIVE FORTSETZUNG AUSSCHLIESSLICH ÜBER SEO_KATEGORIEN/CURRENT_STATE.md
 
 ## Rolle
 
@@ -337,17 +337,35 @@ Abschluss:
 Autoritativ:
 `../SEO_KATEGORIEN/HD001_FINAL_VISIBLE_FACH_SOLLPROFIL_20261008.json`
 
+## Abschlussstatus Konzept
+
+Das Fachkonzept und die Kategorieregeln sind abgeschlossen:
+- Zielvertrag 2.6;
+- Assessment Rules 1.6;
+- 8 geschützte Hauptwelten;
+- alle vorhandenen kanonischen Ebenen sichtbar;
+- HOBBY_HUB mit sichtbarer Content-Kategorieebene;
+- 3–6 Content-Kategorien je HOBBY_HUB;
+- jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen;
+- keine künstliche Maximalzahl der Welt-Zwischenebene; etwa 10–11 fachlich klare Punkte zulässig;
+- keine leeren Symmetrieäste;
+- fachliches Sollprofil ist eingefroren.
+
+Die technische Auflösung ist NICHT mehr offen. Sie wurde in SEO_KATEGORIEN / HD-001 bis V1.14.3 lokal vollständig geprüft und live read-only bestätigt.
+
 ## Erster offener Blocker
 
-KEIN OFFENER KONZEPT-BLOCKER.
+Kein eigener Konzept-Blocker.
 
-Die technische/operative Fortsetzung gehört ausschließlich zur zuständigen Fach-Current:
+Operativer Blocker ausschließlich aus:
 `../SEO_KATEGORIEN/CURRENT_STATE.md`
 
 ## EXAKT EINE NEXT ACTION
 
-Für jede weitere Kategorie-/WordPress-Arbeit zu
+Keine weitere Konzeptänderung.
+Für jede operative Fortsetzung zu Kategorien/HD-001 ausschließlich:
 `../SEO_KATEGORIEN/CURRENT_STATE.md`
-wechseln, dort Frischecheck durchführen und ausschließlich deren NEXT ACTION ausführen.
+→ Frischecheck
+→ dortige NEXT ACTION ausführen.
 
-Keine neue Konzept- oder Kategorieregel erfinden.
+Keine Status-/NEXT-ACTION-Kopie aus diesem Konzept-Current ableiten.
