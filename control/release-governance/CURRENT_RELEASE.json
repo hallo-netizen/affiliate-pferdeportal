@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 305,
+  "generation": 306,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.211",
-    "status": "CANDIDATE_WORDPRESS_MARIADB_PASS_FINALIZE_ONLY",
-    "release_allowed": false,
+    "status": "RELEASED",
+    "release_allowed": true,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "6776600d7627bf767d81bc1a295ea2273f650fb6f291fe2b399131b628c44b00",
+    "candidate_reference_artifact_sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
     "candidate_reference_scope": "Performance block: AJAX cleanup + AFF-ERR-064 + shared frontend campaign query/normalization + request-local content/category context reuse. No ranking/provider/slot/veto/publish/category/design/tracking change.",
-    "final_artifact_ref": "",
-    "final_artifact_sha256": "",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.211.zip",
+    "final_artifact_sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.211.zip",
     "handoff_artifact_bytes": 812444,
-    "source_binding_status": "MANIFEST_28_FILES_6_72_211_BLOCK8_WORDPRESS_MARIADB_PASS",
+    "source_binding_status": "MANIFEST_28_FILES_6_72_211_RELEASED",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "BIND_EXACT_TESTED_6_72_211_INSTALLER",
-    "current_focus_reason": "Run 37897225202 passed WordPress 7.1.2 + MariaDB 10.11, 59/59 positive-negative regression and ZIP identity 28/28. Bind exact artifact 11600791937 without changing plugin source."
+    "current_focus": "RUN_FORMAL_RELEASE_CHECK_6_72_211",
+    "current_focus_reason": "Exact tested installer from run 37897835885 is repository-bound. Run immutable formal release-check; no plugin source changes."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -887,19 +887,19 @@
     }
   },
   "execution_state": {
-    "state": "CANDIDATE_6_72_211_WORDPRESS_MARIADB_PASS_FINALIZE_ONLY",
+    "state": "RELEASED_6_72_211_FORMAL_CHECK_PENDING",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Bind exact tested AFFILIATE_ZENTRALE_6.72.211.zip from run 37897225202 / artifact 11600791937, SHA256 6776600d7627bf767d81bc1a295ea2273f650fb6f291fe2b399131b628c44b00, bytes 812444, then run formal release-check.",
-    "completion_condition": "FINAL_ARTIFACT_REPO_BOUND_AND_FORMAL_RELEASE_CHECK_PASS",
-    "after_completion_action": "NONE",
+    "bound_user_scope_action": "Run formal release-check for repository-bound exact tested 6.72.211 installer.",
+    "completion_condition": "FORMAL_RELEASE_CHECK_PASS",
+    "after_completion_action": "INSTALL_READBACK_THEN_FINAL_DB_STORAGE_PERFORMANCE_MEASUREMENT",
     "no_optional_detours": true,
-    "sequence": 147,
+    "sequence": 148,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-064",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md",
-    "evidence_sha256": "5083a3234bf60bd89c2f87ee24745c8b130c1537ba737fa01b04b465646dfd70",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_full_release_gate_20261009.md",
+    "evidence_sha256": "9bc551998d116cb1b8bc31fac87b9ad172c3afb57614f9584476b4dedc2b1ba1",
     "current_source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
-    "current_source_binding": "MANIFEST_28_FILES_6_72_211_BLOCK8_WORDPRESS_MARIADB_PASS",
+    "current_source_binding": "MANIFEST_28_FILES_6_72_211_RELEASED",
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
       "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
@@ -1041,7 +1041,7 @@
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
       ".github/workflows/affiliate-v672195-hardtest.yml"
     ],
-    "pass_reuse_policy": "RUN_37897225202 exact 6.72.211 source + WordPress 7.1.2/MariaDB 10.11 + positive/negative regression + ZIP identity PASS. Reuse while manifest remains 9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f.",
+    "pass_reuse_policy": "RUN_37897835885 exact 6.72.211 source + WordPress 7.1.2/MariaDB 10.11 + 59/59 positive-negative regression + ZIP identity 28/28 PASS. Reuse while manifest remains 9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f.",
     "release_gate_matrix_policy": "required_release_gates contains only current manifest-bound mandatory gates; historical_release_gate_matrix preserves older OPEN/STALE evidence truth and is not current release authority.",
     "gate_runner_ref": ".github/workflows/affiliate-v672195-hardtest.yml",
     "gate_runner_policy": "REUSE_EXISTING_WORKFLOW_CURRENT_DRIVEN_NO_NEW_WORKFLOW_ARCHITECTURE",
@@ -1049,14 +1049,15 @@
     "gate_runner_reason": "Existing workflow rebound to current version/scope only; exact current source passed WordPress/MariaDB.",
     "final_installer": {
       "filename": "AFFILIATE_ZENTRALE_6.72.211.zip",
-      "sha256": "6776600d7627bf767d81bc1a295ea2273f650fb6f291fe2b399131b628c44b00",
+      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.211.zip",
+      "sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
       "bytes": 812444,
-      "workflow_run": 37897225202,
-      "workflow_artifact_id": 11600791937,
-      "status": "EXACT_TESTED_INSTALLER_READY"
+      "workflow_run": 37897835885,
+      "repository_bind_commit": "52cb30b6cdda8765b46e13a49a050e70d5e56204",
+      "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
     },
     "formal_release_check_run": null,
-    "formal_release_check_result": "PENDING_FINAL_ARTIFACT_BIND"
+    "formal_release_check_result": "PENDING"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1107,12 +1108,12 @@
   "required_release_gates": {
     "current_6_72_211": {
       "status": "PASS",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md",
-      "evidence_sha256": "5083a3234bf60bd89c2f87ee24745c8b130c1537ba737fa01b04b465646dfd70",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_full_release_gate_20261009.md",
+      "evidence_sha256": "9bc551998d116cb1b8bc31fac87b9ad172c3afb57614f9584476b4dedc2b1ba1",
       "source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
-      "assertions": "PASS_59_OF_59_WORDPRESS_MARIADB_AND_BLOCK8_LOCAL_REGRESSION",
-      "wordpress_mariadb_run": 37897225202,
-      "installer_sha256": "6776600d7627bf767d81bc1a295ea2273f650fb6f291fe2b399131b628c44b00",
+      "assertions": "PASS_59_OF_59_WORDPRESS_MARIADB_PLUS_BLOCK8_LOCAL_REGRESSION",
+      "wordpress_mariadb_run": 37897835885,
+      "installer_sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
       "installer_bytes": 812444,
       "package_identity": "PASS_28_OF_28",
       "scope": [
