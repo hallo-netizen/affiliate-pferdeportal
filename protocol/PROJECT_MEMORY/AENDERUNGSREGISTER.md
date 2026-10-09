@@ -1226,3 +1226,6 @@ Der aktuell sichtbare 2148er Dry-Run ist damit überholt und darf nicht synchron
 
 NEXT:
 Fail-closed ZIP installieren → genau einen neuen read-only Live-Dry-Run → nur bei exakt 2102 / 373 / 0 / 1729 / 6 weiterprüfen; noch kein Sync.
+
+NACHHOLCHECK DOKUMENTATION:
+Das zentrale Zielregister stand noch auf Fassung 2.5 und enthielt alte Capacity-Regeln. Es wurde als reiner Wegweiser auf Fassung 2.7 / Hauptquelle nachgezogen; keine zweite Zielwahrheit wurde angelegt.
