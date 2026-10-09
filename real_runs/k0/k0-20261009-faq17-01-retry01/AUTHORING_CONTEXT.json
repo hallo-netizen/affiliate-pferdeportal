@@ -1,0 +1,182 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mash-faq",
+    "plan_slot": "bfd49efbadb449459ae03542cbee492ed93220ab0217317421454af7030740e3",
+    "target_keyword": "Warum nicht jeden Tag Mash füttern",
+    "title": "Warum nicht jeden Tag Mash füttern?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Kraftfutter & Raufutter",
+          "source_url": "https://www.kraemer.de/ratgeber/kraftfutter-raufutter"
+        },
+        {
+          "source_title": "DERBY – Mash",
+          "source_url": "https://www.derby.de/sortiment/pferdefutter/mash/"
+        },
+        {
+          "source_title": "marstall – Mash",
+          "source_url": "https://www.marstall.de/mash/12.5kg"
+        },
+        {
+          "source_title": "Go4Vet – Fütterungsempfehlung Pferd",
+          "source_url": "https://www.go4vet.com/pferd/ernaehrung/fuetterungsempfehlung-pferd/"
+        }
+      ],
+      "claims": [
+        "Klassisches Mash mit Weizenkleie enthält viel Phosphor. Bei regelmäßiger Gabe ist das Calcium-Phosphor-Verhältnis der Gesamtration zu beachten.",
+        "Für gesunde Pferde werden oft zwei bis drei Mash-Mahlzeiten pro Woche empfohlen. In besonderen Fällen kann Mash auch täglich eingesetzt werden.",
+        "Mash muss mit Wasser nach Produktvorgabe eingeweicht, handwarm und frisch verfüttert werden. Feuchte Futterreste sind aus hygienischen Gründen zu entfernen.",
+        "Raufutter wie Heu bleibt die Grundlage der Pferdefütterung; die zusätzliche Mash-Portion ist in die gesamte Futterration einzurechnen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum nicht jeden Tag Mash füttern",
+      "topic": "Warum nicht jeden Tag Mash füttern?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mash-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum nicht jeden Tag Mash füttern?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Kraftfutter & Raufutter",
+        "source_url": "https://www.kraemer.de/ratgeber/kraftfutter-raufutter",
+        "evidence_text_sha256": "90b08d94a777136efce6c79eaf3e54922fac50ae7420e8e32f26617c70bbe832",
+        "statement": "Klassisches Mash mit Weizenkleie enthält viel Phosphor. Bei regelmäßiger Gabe ist das Calcium-Phosphor-Verhältnis der Gesamtration zu beachten.",
+        "evidence_text": "Klassisches Mash mit Weizenkleie enthält viel Phosphor. Bei regelmäßiger Gabe ist das Calcium-Phosphor-Verhältnis der Gesamtration zu beachten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "DERBY – Mash",
+        "source_url": "https://www.derby.de/sortiment/pferdefutter/mash/",
+        "evidence_text_sha256": "b65907cd8797530779069ed175ba93a8cdbea6361da92582118dc45cb68ad1ab",
+        "statement": "Für gesunde Pferde werden oft zwei bis drei Mash-Mahlzeiten pro Woche empfohlen. In besonderen Fällen kann Mash auch täglich eingesetzt werden.",
+        "evidence_text": "Für gesunde Pferde werden oft zwei bis drei Mash-Mahlzeiten pro Woche empfohlen. In besonderen Fällen kann Mash auch täglich eingesetzt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "marstall – Mash",
+        "source_url": "https://www.marstall.de/mash/12.5kg",
+        "evidence_text_sha256": "313b85ff793c7e8b6d0ee547d6154a088fd52accbe5a11d4b1627dc71b71b993",
+        "statement": "Mash muss mit Wasser nach Produktvorgabe eingeweicht, handwarm und frisch verfüttert werden. Feuchte Futterreste sind aus hygienischen Gründen zu entfernen.",
+        "evidence_text": "Mash muss mit Wasser nach Produktvorgabe eingeweicht, handwarm und frisch verfüttert werden. Feuchte Futterreste sind aus hygienischen Gründen zu entfernen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Go4Vet – Fütterungsempfehlung Pferd",
+        "source_url": "https://www.go4vet.com/pferd/ernaehrung/fuetterungsempfehlung-pferd/",
+        "evidence_text_sha256": "4895f046b99196ac5f65895300bf21e40122b8004f09fa0bca5ce87528561a81",
+        "statement": "Raufutter wie Heu bleibt die Grundlage der Pferdefütterung; die zusätzliche Mash-Portion ist in die gesamte Futterration einzurechnen.",
+        "evidence_text": "Raufutter wie Heu bleibt die Grundlage der Pferdefütterung; die zusätzliche Mash-Portion ist in die gesamte Futterration einzurechnen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/fuetterung/fuetterung-spezialfutter/mash/",
+        "anchor": "Mash",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mash-beratung/",
+        "anchor": "Beratung zu Mash",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-spezialfutter/",
+        "anchor": "Spezialfutter",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/fuetterung/fuetterung-spezialfutter/mash/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-beratung/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-spezialfutter/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mash-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mash",
+      "täglich",
+      "Weizenkleie",
+      "Kalzium",
+      "Phosphor",
+      "Raufutter",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine kompakte Fütterungs-Checkliste vermittelt die Bedingungen für die tägliche Gabe verständlicher als eine zusätzliche Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
