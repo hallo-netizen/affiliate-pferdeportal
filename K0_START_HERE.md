@@ -49,6 +49,8 @@ Portalzuordnung automatisch.
 - Die `WORDPRESS_INTAKE.json` dieses Runs enthält ausschließlich den unveränderten Fünf-Felder-Eintrag des aktuellen Uploads: `article_type`, `category`, `plan_slot`, `target_keyword`, `title`.
 - Titel, Keyword, Kategorie, Artikeltyp und `plan_slot` werden nicht verändert.
 - Der technische Start bleibt der bestehende GitHub-Dateistart: `WORDPRESS_INTAKE.json` schreiben.
+- Ist `mcp__GitHub__create_file` nicht direkt sichtbar, wird die vorhandene GitHub-Schreibaktion über Tool-Router/Code-Mode in `ALL_TOOLS` entdeckt; fehlende direkte Sichtbarkeit ist kein Blocker.
+- Für einen neuen Einzelrun ist `mcp__GitHub__create_file` die verbindliche erste GitHub-Schreibaktion. Das bloße Erkennen oder Prüfen des Auftrags ist kein Abschluss.
 - Nach dem vorhandenen oder erfolgreich geschriebenen Intake folgt im selben Run unmittelbar die Recherche für genau diesen Upload-Eintrag und danach `AUTHORING_CONTEXT.json`.
 - Der Commit von `AUTHORING_CONTEXT.json` startet unverändert `.github/workflows/k0-authoring-context.yml`; dieser Workflow erzeugt `WRITER_JOB.json` für genau diesen Einzelartikel.
 - Danach läuft unverändert die bestehende Writer- und Qualitätsstrecke.

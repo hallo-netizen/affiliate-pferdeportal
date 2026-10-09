@@ -63,5 +63,31 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertFalse(self.goal["hard_rules"]["publish_allowed"])
         self.assertFalse(self.current["publish_allowed"])
 
+    def test_start_binds_real_github_write_action_before_completion(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("mcp__GitHub__create_file",text)
+        self.assertIn("ALL_TOOLS",text)
+        self.assertIn("kein Abschluss",text)
+
+    def test_active_k0_workflows_do_not_depend_on_legacy_runtime_paths(self):
+        for path in (
+            ".github/workflows/k0-writer-accept.yml",
+            ".github/workflows/k0-rewrite16-bind.yml",
+        ):
+            text=Path(path).read_text(encoding="utf-8")
+            self.assertNotIn("startmaster0107",text)
+            self.assertNotIn("runtime_packages",text)
+
+    def test_k0_runtime_packages_are_exact_bound_bytes(self):
+        import hashlib
+        bound={
+            "runtime/k0/canonical/PPM_6.7.9.zip":"acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "runtime/k0/canonical/PSERC_BINDING.zip":"77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+        }
+        for path,expected in bound.items():
+            p=Path(path)
+            self.assertTrue(p.is_file(),path)
+            self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),expected,path)
+
 if __name__=="__main__":
     unittest.main()

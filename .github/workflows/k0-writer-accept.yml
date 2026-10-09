@@ -165,16 +165,16 @@ jobs:
           print('K0_ALL_RULES_FINAL_PASS')
           PY
 
-      - name: Resolve canonical article id from exact PPM registry
+      - name: Resolve canonical article id from exact K0 runtime registry
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p /tmp/k0-binding
-          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"             -o /tmp/k0-binding/ppm679.zip
-          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PSERC-FIX.zip"             -o /tmp/k0-binding/pserc-fix.zip
+          cp runtime/k0/canonical/PPM_6.7.9.zip /tmp/k0-binding/ppm679.zip
+          cp runtime/k0/canonical/PSERC_BINDING.zip /tmp/k0-binding/pserc-binding.zip
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/k0-binding/ppm679.zip' | sha256sum -c -
-          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k0-binding/pserc-fix.zip' | sha256sum -c -
-          python3 -m engine.canonical_binding "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-binding/ppm679.zip /tmp/k0-binding/pserc-fix.zip /tmp/k0-binding/CANONICAL_BINDINGS.json
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k0-binding/pserc-binding.zip' | sha256sum -c -
+          python3 -m engine.canonical_binding "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-binding/ppm679.zip /tmp/k0-binding/pserc-binding.zip /tmp/k0-binding/CANONICAL_BINDINGS.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-binding/CANONICAL_BINDINGS.json'))
@@ -182,7 +182,7 @@ jobs:
           print('K0_CANONICAL_ARTICLE_ID_PASS')
           PY
 
-      - name: Build and reverify WordPress 0.28.30 direct import
+      - name: Build and reverify canonical WordPress handoff
         shell: bash
         run: |
           set -euo pipefail
