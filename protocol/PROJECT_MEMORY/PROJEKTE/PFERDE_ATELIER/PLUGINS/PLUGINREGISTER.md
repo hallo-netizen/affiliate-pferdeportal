@@ -1,3 +1,23 @@
+# CURRENT LIVE INVENTORY – 2026-10-09
+
+**Aktueller beobachteter WordPress-Pluginbestand: 47 Plugins / 45 aktiv / 2 inaktiv.**
+
+Vollständige aktuelle Liste:
+`LIVE_PLUGIN_INVENTORY_20261009.md`
+
+Diese Live-Inventur supersediert alle älteren **beobachteten Installationsversionen** in den historischen Abschnitten dieses Registers. Fach-/Release-/Source-Autorität bleibt beim jeweiligen Fachbüro.
+
+Aktuelle kritische Eigenplugins:
+- PA-E-001 Template Kit: **1.50.581 aktiv**
+- PA-E-003 Affiliate-Zentrale: **6.72.211 aktiv**
+- PA-E-016 Portal Production Machine: **6.7.9 aktiv**
+- PA-E-017 PSERC: **0.28.34 aktiv**
+- PA-E-019 PSTE: **0.57.63 aktiv**
+
+Nicht in der aktuellen Live-Inventur aufgeführte historische Pluginzeilen gelten nicht als aktuell installiert, solange kein neuerer Readback vorliegt.
+
+---
+
 ## INVENTARDELTA 2026-10-08 – PSTE LIVE-REGRESSION
 
 - PA-E-019 Portal SEO Themenengine: **0.57.58 live beobachtet**, erster Automatik-Klick `PSTE_SITE_STRUCTURE_STALE` → Live-Abnahme FAIL.
