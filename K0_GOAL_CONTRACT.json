@@ -16,7 +16,6 @@
     "writer_draft_is_only_text_ingress": true,
     "writer_self_stamping_forbidden": true,
     "canonical_article_id_required_for_wordpress": true,
-    "wordpress_plugin_binding": "0.28.30-pste-v5-binding-safe",
     "eigenschaftssieger_research_before_writer_required": true,
     "product_property_store_required": true,
     "affiliate_must_not_determine_property_winner": true,
