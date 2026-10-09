@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-09
+STAND: 2026-10-08
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -2161,3 +2161,161 @@ DAUERHAFTE REGEL:
 
 UNVERÄNDERT:
 SEO-5-Felder-Handoff, Textmaschine/Fachregeln, PPM/PSERC/PSTE, Tabellen-/Link-/LanguageTool-/Designregeln, Single Door und Publish-Sperre.
+
+
+## PLUGINS-001 – Gebündelte Datenbank-/Performance-Bereinigung
+
+WAS:
+Datenbankwachstum, Retention und Performance werden Plugin für Plugin geprüft. Zusammengehörige Ursachen werden je betroffenem Plugin gebündelt gelöst. Vorhandene Performanceoptimierungen bleiben regressionsgeschützt.
+
+WARUM:
+Viele kleine Einzelupdates erschweren Ursache/Wirkung und können bestehende Optimierungen gegenseitig zurückbauen.
+
+REGEL:
+Quellursache zuerst; danach Altbestand kontrolliert bereinigen; anschließend gleiche Speicher- und Performance-Messung wiederholen.
+
+ZIELVERTRAG:
+`ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`.
+
+## PLUGINS-002 – Kategorieprodukt-Ranking nur einmal pro öffentlicher Seite
+
+STAND: 2026-10-01 / VERBINDLICH.
+
+WAS:
+Bei Affiliate-Seiten mit den drei öffentlichen `category_product_1..3`-Plätzen wird das slot-unabhängige Kontext-Ranking pro Seitenaufruf genau einmal gebildet und request-lokal wiederverwendet. Reine identische Target-/Control-/Health-/Image-/eBay-Prüfungen dürfen ebenfalls nur request-lokal memoisiert werden.
+
+UNVERÄNDERT PRO SLOT:
+Placement, Slot-Veto, Provider-Mix, finale Auswahl, PRIVATE/BUSINESS, Coverage, Quality, Health, Tracking und Design.
+
+WARUM:
+Reale Messungen zeigten schnelle Oberkategorien, aber 8–9 Sekunden auf tieferen Kategorieprodukt-Seiten. Der 1:1-A-B-Test mit der vorhandenen 2012er Produkttopologie bewies, dass die wiederholte dreifache Bearbeitung desselben großen Kandidatenbestands die maßgebliche vermeidbare Last war. 6.72.171 behält die Ausgabe 1:1 bei und reduziert im Snapshot-A-B den Leaf-Renderer um 89,87 %.
+
+REGRESSIONSREGEL:
+Ein Performancefix an diesem Pfad darf nicht nur isoliert getestet werden. Pflicht ist ein exakter Vorher/Nachher-A-B-Lauf auf WordPress/MariaDB mit allen drei Produkt-Slots, Positiv-/Negativfällen, identischer fachlicher Ausgabe und gemessener Verbesserung.
+
+## PSTE-REUSE-001 – vorhandene automatische Editorialisierung bleibt Primärweg
+
+STAND:
+2026-10-01.
+
+WAS:
+Für die Verwertung gespeicherter PSTE-Begriffe wird **kein neuer Keyword→Titel-/Kategorie-Mechanismus** gebaut.
+Der bereits vorhandene Normal-Metadata-Pfad bleibt zuständig für Portalrelevanz, Familie/Gruppe, Intent, Artikeltyp, Titel, Zielkeyword und Zielkategorie.
+Retained Backlog und Normal Reentry müssen diesen vorhandenen Weg erneut nutzen.
+
+WARUM:
+Die Funktion ist im bestehenden PSTE bereits vorhanden; das aktuelle Problem ist die geringe Ausbeute bis AUTO_RESOLVED / planning-ready / READY.
+Ein zweiter Mechanismus würde KISS verletzen und könnte abweichende Titel-/Kategorieentscheidungen erzeugen.
+
+DELTA 0.57.18:
+Der lokal geprüfte Kandidat priorisiert lediglich sichere AUTO_REENTRY_ELIGIBLE-Sandbox-Kandidaten vor Retained Backlog und Provider-Recherche.
+Er ist ausdrücklich nur Teilfix und keine belegte Gesamtlösung der niedrigen Topic-Pool-Verwertbarkeit.
+
+NACHWEIS:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
+
+
+
+## PSTE-REUSE-002 – gespeichertes Recherchematerial darf vor Produktionsfreigabe als Titelkandidat nutzbar werden
+
+STAND:
+2026-10-02.
+
+WAS:
+PSTE 0.57.26 nutzt vorhandene Fragen, gespeicherte redaktionelle Formulierungen und den bestehenden Titelpfad, um nicht-autorisierende Titelkandidaten aus dem vorhandenen Fundus zu erzeugen. Zusätzlich fällt die Kontextquery bei leerem `editorial_title` auf vorhandene Query-Felder zurück.
+
+WARUM:
+Der Fundus war vorhanden, wurde aber wegen eines falschen Leerwert-Fallbacks und zu enger Kopplung an spätere Aufbereitungsstufen nicht ausreichend als Titeloberfläche nutzbar. Live wurden danach 695 Titelkandidaten erzeugt.
+
+GRENZE:
+Titelkandidat ist keine Produktionsfreigabe. Kategorie-, Dubletten-, Artikeltyp-, Planning-, PSERC- und Publish-Gates bleiben unverändert. Keine neue externe Recherche im Bestandslauf.
+
+## ARCH-053 – CURRENT_STATE ist alleinige NEXT-ACTION-Autorität
+WAS:
+Projekt-/Büro-Wegweiser wurden auf die bereits geltende Ein-Wahrheit-Regel nachgezogen: `START_HERE → genau eine CURRENT_STATE → Frischecheck → genau deren NEXT ACTION`. Der Hobbyraum bleibt ausschließlich temporäre Ausführungsfläche.
+
+WARUM:
+TEXT-Hobbyraum erklärte bereits selbst, keine Current-/NEXT-ACTION-Autorität zu sein, während ältere START_HERE-Texte ihn noch als NEXT-ACTION-Quelle auswiesen. Das erzeugte eine reale Routing-Widersprüchlichkeit.
+
+REGEL:
+START_HERE navigiert. CURRENT_STATE trägt aktuellen Stand, ersten Blocker und genau eine NEXT ACTION. HOBBYRAUM nur bei ausdrücklich aktiver temporärer Arbeitsbindung; keine zweite dynamische Wahrheit.
+
+
+
+## PSTE-REUSE-003 – Familien-No-Match wird nachhaltig als Review oder Strukturentscheidung getrennt
+
+STAND:
+2026-10-03.
+
+WAS:
+Der bestehende PSTE-Normalpfad erhält keine zweite Zuordnungsmaschine, sondern eine eng begrenzte Reparatur seiner Familien-/Strukturgrenze:
+- sichere deutsche Flexionsvarianten dürfen dieselbe vorhandene Familie treffen;
+- echte Family-V2-NO_MATCH-Fälle ohne sinnvolle bestehende Nachbarfamilie werden nach bewiesener Portalrelevanz als `STRUCTURE_GAP` markiert;
+- vorhandene Nähe/Mehrdeutigkeit bleibt REVIEW;
+- keine Familie/Kategorie wird automatisch erzeugt.
+
+WARUM:
+Der reale 694er Replay zeigte, dass ein großer Teil vorhandener Evidenz nicht wegen fehlender Titel, sondern an der Familiengrenze in einem generischen Sandbox-Zustand hängenblieb. Eine manuelle Einmalliste für 364 aktuelle Fälle hätte zukünftige Begriffe nicht gelöst und den Zielvertrag nicht nachhaltig erfüllt.
+
+REGEL:
+Neue oder zukünftige Begriffe benutzen denselben bestehenden Normalpfad. `STRUCTURE_GAP` ist niemals Produktions-PASS; nach einer echten Strukturentscheidung ist normaler Reentry verpflichtend. Dubletten-/Kannibalisierungs-/Typ-/Kategorie-/Plan-/PSERC-/Publish-Gates bleiben unverändert.
+
+KANDIDAT:
+PSTE 0.57.28 / SHA-256 `a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`.
+
+
+
+## PSTE-REUSE-004 – Journal-Bestandsartikel müssen über denselben Extension-Vertrag inventarisiert werden
+
+STAND: 2026-10-05 / VERBINDLICH.
+
+WAS:
+Bestehende WordPress-Artikel aus registrierten Artikeltyp-Erweiterungen (aktuell Journal/Magazin) dürfen im PSTE-Inventar nicht kategorielos werden, nur weil ihre Kategorie nicht zur normalen Portal-/Produktfamilienstruktur gehört. Der bestehende Read-only-Inventarpfad muss registrierte Extension-Kategorien über die vorhandene Extension-Registry/-Routing-Autorität erkennen.
+
+WARUM:
+Der reale Fall `Wie alt werden Pferde?` zeigt: Kandidatenrouting kennt Kategorie 1486 `Pferdegesundheit verstehen` / Journal korrekt, während derselbe veröffentlichte WordPress-Artikel im allgemeinen Inventar mit leerer Kategorie erscheint. Das trennt Kandidaten- und Bestandswahrheit und kann Abdeckungs-/Dublettenentscheidungen schwächen.
+
+KISS:
+Keine neue Kategoriearchitektur, kein neuer Runner, keine zweite Themenquelle. Nur denselben bereits registrierten Extension-Vertrag auch beim Lesen bestehender WordPress-Artikel verwenden. Reguläre Produktionskategorien, Multi-Category-Hardblock, Trash-Semantik, Provider-/Publish-Grenzen bleiben unverändert.
+
+## PSTE-REUSE-005 – Bedienoberfläche auf vier reale Arbeitsbereiche konsolidiert
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+PSTE 0.57.58 entfernt die verbliebenen separaten Alt-/Diagnoseoberflächen Themenkarte, Keywords & Longtails, Abdeckung, Prioritäten, Konflikte und Semantic Sandbox als eigene Adminseiten. Notwendige Funktion wird nicht gelöscht: Sandbox-/Review bleibt lazy unter `Themenprüfung`, strategische Gewichtung unter `Einstellungen`. Sichtbar bleiben exakt Produktion, Themenprüfung, Datenquellen, Einstellungen.
+
+WARUM:
+0.57.57 hatte den Produktionsweg bereits auf Automatik + Kurzer Dienstweg reduziert, schleppte intern aber weitere separat routbare Diagnoseoberflächen mit. Das widersprach dem KISS-Ziel und erhöhte Bedien-/Wartungsfläche ohne zusätzlichen Produktionsnutzen.
+
+GRENZE:
+Keine Entfernung der Sandbox-/Review-/Bestandsengine, keine Änderung des DB-/Performancekerns, keine zweite Architektur. 113/116 Dateien bleiben gegenüber 0.57.57 byteidentisch; vollständige Positiv-/Negativmatrix PASS.
+
+## PSERC-EVIDENCE-001 – Evidence-Vertrag und Runtime-Gate müssen identisch sein
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+PSERC 0.28.33 synchronisiert `portal-topic-evidence-gate-v1.json` exakt mit der bereits getesteten Runtime-Gateklasse. Akzeptiert werden identisch: `KEYWORD_SUGGESTION`, `RELATED_SEARCH`, `KEYWORD_IDEA`, `PAA`, `PAA_RELATED`, `GSC`, `INTERNAL_SEARCH`.
+
+WARUM:
+0.28.32 funktionierte für `PAA_RELATED`, aber die mitgelieferte Vertrags-JSON war enger als die Runtime. Auch wenn die JSON nicht die Laufzeitentscheidung traf, war dies ein vermeidbarer Metadaten-/Integritätsdrift.
+
+GRENZE:
+Keine Gate-Absenkung und keine neue Evidenzlogik. Der bestehende Runtimeumfang wird nur im Vertrag korrekt gespiegelt; Package Binding wird danach neu berechnet. Positiv-/Negativ- und Tampertests PASS.
+
+## PSTE-REUSE-006 – Automatik besitzt den stale Baseline-Rebind
+
+STAND: 2026-10-08 / VERBINDLICH.
+
+WAS:
+Wenn beim Start der Automatik eine gültige aktuelle Portalstruktur vom gespeicherten PSTE-Baseline-Hash abweicht, darf der Benutzer nicht in einen separaten Wartungs-/Portalabgleichweg gezwungen werden. Bei vorhandenem COMPLETE-Kontext bindet die Automatik Baseline und kompakten Context-Index selbst an die aktuellen read-only Snapshots neu und startet danach den normalen Existing-Only-Bestandslauf.
+
+WARUM:
+PSTE 0.57.58 scheiterte live beim allerersten Automatik-Klick mit `PSTE_SITE_STRUCTURE_STALE`, obwohl 4488 gespeicherte Themen und 32 planbare Kandidaten vorhanden waren. Die lokale Clean-State-Matrix hatte diesen persistenten Livezustand nicht abgebildet.
+
+KISS / PERFORMANCE:
+Der kompakte Rebind traversiert keinen Topic-Pool und ruft keinen Provider auf. Er baut nur die vorhandenen kompakten Kontextartefakte aus aktuellem Inventory, Structure und Editorial Plan neu. Danach bleibt genau ein Existing-Only-Bestandslauf in 40er Batches. Ein kompletter Portal-Kontextlauf ist nur Fallback, wenn keine COMPLETE-Kontextbasis existiert.
+
+REGEL:
+Jede künftige Automatik-Regression muss ausdrücklich den Zustand `persisted stale site baseline + first production click` enthalten. Clean-State-only ist für diesen Pfad kein ausreichender Hard-Pass mehr.

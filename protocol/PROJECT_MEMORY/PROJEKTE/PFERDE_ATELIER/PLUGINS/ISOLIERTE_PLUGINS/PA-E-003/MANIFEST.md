@@ -1,0 +1,32 @@
+# PA-E-003 – Affiliate-Zentrale – aktueller Artefaktstatus
+
+PLUGIN_ID: PA-E-003
+NAME: Affiliate-Zentrale (Portal-kompatibel)
+FACHBÜRO: AFFILIATE
+
+REAL_BEOBACHTETE_LIVE_VERSION: 6.72.211
+LIVE_STATUS: AKTIV
+LIVE_READBACK: aktueller WordPress-Pluginlisten-Readback 2026-10-09.
+
+TECHNISCHE_AUTORITÄT: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`
+TECHNISCHE_GENERATION: 307
+TECHNISCHER_STATUS: RELEASED
+RELEASE_ALLOWED: true
+SOURCE_MANIFEST_SHA256: 9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f
+FINAL_INSTALLER_REF: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.211.zip
+FINAL_INSTALLER_SHA256: f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751
+FINAL_INSTALLER_BYTES: 812444
+FORMAL_RELEASE_CHECK_RUN: 37898011197
+FORMAL_RELEASE_CHECK_RESULT: PASS
+WORDPRESS_MARIADB_GATE_RUN: 37897835885
+WORDPRESS_MARIADB_GATE_RESULT: PASS
+PERFORMANCE_HARDLOCK: bestehende Performanceblöcke Bestandteil des 6.72.211-Releases; keine Kategorieänderung in diesem Inventarsync.
+
+PROJECT_ARTEFAKT_WRAPPER_SHA256: d3e7ed739c9c205b017b5fb561440ca5e6339d1104910e417c4e8f5f5321f8a3
+PROJECT_ARTEFAKT_ENTHÄLT_EXAKTEN_INSTALLER: PASS
+INTERNE_PLUGIN_VERSION: 6.72.211
+
+CURRENT_ZIP_STATUS: exakter finaler Installer repository-bound; keine Rekonstruktion erforderlich.
+ROLLBACK: ausschließlich über autoritativ gebundene Release-/Fallbackquelle des AFFILIATE-Büros.
+
+ROLLE: Inventar-/Artefaktstatus; technische Releasewahrheit bleibt in CURRENT_RELEASE.json.
