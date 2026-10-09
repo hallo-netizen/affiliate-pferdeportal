@@ -1,0 +1,221 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schubkarren-faq",
+    "plan_slot": "0e1c8f2005ed3afe0e804483c67100717d478d0fc66d3fdfeab95d6e2861c46b",
+    "target_keyword": "Wie viele Schubkarren sind 1 Kubikmeter Erde",
+    "title": "Wie viele Schubkarren sind 1 Kubikmeter Erde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landesforsten Rheinland-Pfalz – Brennholz",
+          "source_url": "https://www.wald.rlp.de/index?id=10477"
+        },
+        {
+          "source_title": "hagebau – Gartenschubkarre 80 Liter",
+          "source_url": "https://www.hagebau.de/p/schubkarre-anP06751877/"
+        },
+        {
+          "source_title": "HORNBACH – CAPITO Schubkarre 100 Liter",
+          "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/"
+        },
+        {
+          "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+          "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295"
+        },
+        {
+          "source_title": "Wurzelwerk – Mutterboden Gewicht",
+          "source_url": "https://wurzelwerk-design.com/products/mutterboden-kaufen"
+        },
+        {
+          "source_title": "AuGaLa – Ladungssicherung im GaLaBau",
+          "source_url": "https://www.augala.de/ladungssicherung.aspx"
+        }
+      ],
+      "claims": [
+        "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "Ein Kubikmeter Mutterboden wiegt als grober Richtwert etwa 1,3 bis 1,5 Tonnen; die Masse hängt unter anderem von der Feuchte ab.",
+        "Ein Kubikmeter Mutterboden wird im Garten- und Landschaftsbau auch mit 1.700 Kilogramm als konservativem Richtwert angesetzt. Nasser Boden muss gegebenenfalls gewogen werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viele Schubkarren sind 1 Kubikmeter Erde",
+      "topic": "Wie viele Schubkarren sind 1 Kubikmeter Erde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schubkarren-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viele Schubkarren sind 1 Kubikmeter Erde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Landesforsten Rheinland-Pfalz – Brennholz",
+        "source_url": "https://www.wald.rlp.de/index?id=10477",
+        "statement": "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "evidence_text": "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "evidence_text_sha256": "d7437079c3d6816138b4d2efe143a3bfdf88ef7849ed4db16f033c80ad6715d4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "hagebau – Gartenschubkarre 80 Liter",
+        "source_url": "https://www.hagebau.de/p/schubkarre-anP06751877/",
+        "statement": "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "evidence_text": "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "evidence_text_sha256": "c1facb14bb9b9bb2418d0c4235e4244910eb35f661fe5819c32b9fc415399c9d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "HORNBACH – CAPITO Schubkarre 100 Liter",
+        "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/",
+        "statement": "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "evidence_text": "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "evidence_text_sha256": "5bc581dc19f620f9d0157057d1b2a9d1f1eef4ee046ec3618061de2161286810",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+        "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295",
+        "evidence_text_sha256": "a15d5a97830777238c155ecfae19b42be9b841560bf64165072a5995f5de077a",
+        "statement": "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "evidence_text": "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Wurzelwerk – Mutterboden Gewicht",
+        "source_url": "https://wurzelwerk-design.com/products/mutterboden-kaufen",
+        "statement": "Ein Kubikmeter Mutterboden wiegt als grober Richtwert etwa 1,3 bis 1,5 Tonnen; die Masse hängt unter anderem von der Feuchte ab.",
+        "evidence_text": "Ein Kubikmeter Mutterboden wiegt als grober Richtwert etwa 1,3 bis 1,5 Tonnen; die Masse hängt unter anderem von der Feuchte ab.",
+        "evidence_text_sha256": "cb96419b27dc32b0fd691785d472a2f49be9e8eb9cbaef3b8b1cb1a32ea1c0a4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "AuGaLa – Ladungssicherung im GaLaBau",
+        "source_url": "https://www.augala.de/ladungssicherung.aspx",
+        "statement": "Ein Kubikmeter Mutterboden wird im Garten- und Landschaftsbau auch mit 1.700 Kilogramm als konservativem Richtwert angesetzt. Nasser Boden muss gegebenenfalls gewogen werden.",
+        "evidence_text": "Ein Kubikmeter Mutterboden wird im Garten- und Landschaftsbau auch mit 1.700 Kilogramm als konservativem Richtwert angesetzt. Nasser Boden muss gegebenenfalls gewogen werden.",
+        "evidence_text_sha256": "3a3641bfe9ee91032c63024138cd4199a03703e311572990ffe392e3d306f984",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "anchor": "Schubkarren im Stall",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schubkarren-beratung/",
+        "anchor": "Beratung zu Schubkarren",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schubkarren-faq/",
+        "anchor": "FAQ zu Schubkarren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schubkarren-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Kubikmeter",
+      "Erde",
+      "Schubkarre",
+      "Schubkarren",
+      "Liter",
+      "Volumen",
+      "Traglast",
+      "Gewicht",
+      "Berechnung",
+      "Mutterboden"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+      "rationale": "Die Menge ergibt sich aus einer direkten Volumenrechnung; Unterschiede bei der Traglast werden separat erklärt. Eine Vier-mal-drei-Tabelle würde zusätzliche unbelegte Varianten verlangen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
