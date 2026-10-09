@@ -1,0 +1,229 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schubkarren-faq",
+    "plan_slot": "aeef95e20061f670489f820d19fca63b6e1675283f54c80f4dace30b72073973",
+    "target_keyword": "Wie viel Schubkarren sind 1 m3 Holz",
+    "title": "Wie viel Schubkarren sind 1 m3 Holz?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landesforsten Rheinland-Pfalz – Brennholz",
+          "source_url": "https://www.wald.rlp.de/index?id=10477"
+        },
+        {
+          "source_title": "Landesanstalt für Wald und Forstwirtschaft Bayern – Scheitholz",
+          "source_url": "https://www.lwf.bayern.de/forsttechnik-holz/holzverwendung/051664/index.php"
+        },
+        {
+          "source_title": "Waldbauernvereinigung Coburger Land – Brennholz",
+          "source_url": "https://www.wbv-col.de/holzmarkt/brennholz/"
+        },
+        {
+          "source_title": "hagebau – Gartenschubkarre 80 Liter",
+          "source_url": "https://www.hagebau.de/p/schubkarre-anP06751877/"
+        },
+        {
+          "source_title": "HORNBACH – CAPITO Schubkarre 100 Liter",
+          "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/"
+        }
+      ],
+      "claims": [
+        "Ein Schüttraummeter ist ein Kubikmeter lose geschüttetes Brennholz mit Hohlräumen. Ein Raummeter bezeichnet geschichtetes Holz und ein Festmeter einen Kubikmeter feste Holzmasse.",
+        "Ein Raummeter geschichtetes Brennholz entspricht je nach Scheitlänge und Holzart ungefähr 1,4 bis 1,6 Schüttraummetern. Die Umrechnung ist nur ein Näherungswert.",
+        "Die von der LWF übernommenen Richtwerte nennen für einen Festmeter ungefähr 2,2 Schüttraummeter und für einen Raummeter ungefähr 1,4 bis 1,6 Schüttraummeter.",
+        "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "Ein Raummeter geschichtetes Holz benötigt ungefähr 18 bis 20 Fahrten mit einer 80-Liter-Mulde, wenn das Holz beim Transport locker liegt. Das ergibt sich aus dem Richtwert 1,4 bis 1,6 Schüttraummeter."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Schubkarren sind 1 m3 Holz",
+      "topic": "Wie viel Schubkarren sind 1 m3 Holz?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schubkarren-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viel Schubkarren sind 1 m3 Holz?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Landesforsten Rheinland-Pfalz – Brennholz",
+        "source_url": "https://www.wald.rlp.de/index?id=10477",
+        "statement": "Ein Schüttraummeter ist ein Kubikmeter lose geschüttetes Brennholz mit Hohlräumen. Ein Raummeter bezeichnet geschichtetes Holz und ein Festmeter einen Kubikmeter feste Holzmasse.",
+        "evidence_text": "Ein Schüttraummeter ist ein Kubikmeter lose geschüttetes Brennholz mit Hohlräumen. Ein Raummeter bezeichnet geschichtetes Holz und ein Festmeter einen Kubikmeter feste Holzmasse.",
+        "evidence_text_sha256": "793bc28ce7f8cf5b5f2daa08a42b340d9ae962b02d3cd08e5c09269f4351ee1f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Landesanstalt für Wald und Forstwirtschaft Bayern – Scheitholz",
+        "source_url": "https://www.lwf.bayern.de/forsttechnik-holz/holzverwendung/051664/index.php",
+        "statement": "Ein Raummeter geschichtetes Brennholz entspricht je nach Scheitlänge und Holzart ungefähr 1,4 bis 1,6 Schüttraummetern. Die Umrechnung ist nur ein Näherungswert.",
+        "evidence_text": "Ein Raummeter geschichtetes Brennholz entspricht je nach Scheitlänge und Holzart ungefähr 1,4 bis 1,6 Schüttraummetern. Die Umrechnung ist nur ein Näherungswert.",
+        "evidence_text_sha256": "200209daa1dad531d9ad99b3f0ac87dcd87b80377676f1562066bfcb44638c51",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Waldbauernvereinigung Coburger Land – Brennholz",
+        "source_url": "https://www.wbv-col.de/holzmarkt/brennholz/",
+        "statement": "Die von der LWF übernommenen Richtwerte nennen für einen Festmeter ungefähr 2,2 Schüttraummeter und für einen Raummeter ungefähr 1,4 bis 1,6 Schüttraummeter.",
+        "evidence_text": "Die von der LWF übernommenen Richtwerte nennen für einen Festmeter ungefähr 2,2 Schüttraummeter und für einen Raummeter ungefähr 1,4 bis 1,6 Schüttraummeter.",
+        "evidence_text_sha256": "ab49ed5b5f31fad2ee450cf404aa5bf973dac7ffa4df29f6ed8a9a762d2619e2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "hagebau – Gartenschubkarre 80 Liter",
+        "source_url": "https://www.hagebau.de/p/schubkarre-anP06751877/",
+        "statement": "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "evidence_text": "Eine typische Gartenschubkarre kann eine Mulde mit 80 Litern Fassungsvermögen haben; das sind rechnerisch 0,08 Kubikmeter Volumen.",
+        "evidence_text_sha256": "c1facb14bb9b9bb2418d0c4235e4244910eb35f661fe5819c32b9fc415399c9d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Landesforsten Rheinland-Pfalz – Brennholz",
+        "source_url": "https://www.wald.rlp.de/index?id=10477",
+        "statement": "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "evidence_text": "Ein Schüttraummeter entspricht 1000 Litern lose geschüttetem Holz. Bei einer 80-Liter-Wanne sind das rechnerisch 12,5 volle Mulden, also etwa 13 Fahrten.",
+        "evidence_text_sha256": "d7437079c3d6816138b4d2efe143a3bfdf88ef7849ed4db16f033c80ad6715d4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "HORNBACH – CAPITO Schubkarre 100 Liter",
+        "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/",
+        "statement": "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "evidence_text": "Eine Schubkarre mit 100 Litern Wannenvolumen fasst ein Zehntel Kubikmeter. Für einen Schüttraummeter sind rechnerisch zehn vollständig gefüllte Mulden nötig.",
+        "evidence_text_sha256": "5bc581dc19f620f9d0157057d1b2a9d1f1eef4ee046ec3618061de2161286810",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
+        "source_title": "Landesanstalt für Wald und Forstwirtschaft Bayern – Scheitholz",
+        "source_url": "https://www.lwf.bayern.de/forsttechnik-holz/holzverwendung/051664/index.php",
+        "statement": "Ein Raummeter geschichtetes Holz benötigt ungefähr 18 bis 20 Fahrten mit einer 80-Liter-Mulde, wenn das Holz beim Transport locker liegt. Das ergibt sich aus dem Richtwert 1,4 bis 1,6 Schüttraummeter.",
+        "evidence_text": "Ein Raummeter geschichtetes Holz benötigt ungefähr 18 bis 20 Fahrten mit einer 80-Liter-Mulde, wenn das Holz beim Transport locker liegt. Das ergibt sich aus dem Richtwert 1,4 bis 1,6 Schüttraummeter.",
+        "evidence_text_sha256": "270caa2ea21e153aa37cf24e091821765cfd811bc4073172f50252b9e2fc0038",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "anchor": "Schubkarren im Stall",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schubkarren-beratung/",
+        "anchor": "Beratung zu Schubkarren",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schubkarren-faq/",
+        "anchor": "FAQ zu Schubkarren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schubkarren-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schubkarren",
+      "Schubkarre",
+      "Holz",
+      "Raummeter",
+      "Schüttraummeter",
+      "Volumen",
+      "Brennholz",
+      "Menge"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Eine pauschale Tabelle würde lose, geschichtete und feste Holzvolumina irreführend gleichsetzen. Die Mengen brauchen zunächst eine klare Definition und anschließend die passende Rechnung."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
