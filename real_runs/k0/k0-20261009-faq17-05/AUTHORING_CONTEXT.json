@@ -1,0 +1,208 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sattelgurte-faq",
+    "plan_slot": "a1ed8c8e2193ec507e93e66b89d6d176c4ccd8ec98930f956df4ec912b9d44ce",
+    "target_keyword": "Wie finde ich den richtigen Sattelgurt für mein Pferd",
+    "title": "Wie finde ich den richtigen Sattelgurt für mein Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Sattelgurte",
+          "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Saettel-Sattel-Zubehoer/Sattelgurte"
+        },
+        {
+          "source_title": "MATTES – Sattelgurte: Formen und richtig messen",
+          "source_url": "https://shop.mattes-reitsport.com/ueber-sattelgurte-formen-und-richtig-messen"
+        },
+        {
+          "source_title": "Krämer – Das richtige Zubehör für den Reitsattel",
+          "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer"
+        }
+      ],
+      "claims": [
+        "Bei Kurzgurten wird die Länge am vollständig gesattelten und angegurteten Pferd von einer Sattelblattunterkante zur anderen gemessen; Krämer empfiehlt, davon 30 Zentimeter abzuziehen und auf die nächste verfügbare Größe aufzurunden.",
+        "Bei Langgurten wird nach Krämer zwischen den zweiten Löchern von unten an den gegenüberliegenden Gurtstrippen gemessen. Der gemessene Abstand ergibt die Gurtlänge.",
+        "Die Gurtschnallen sollen nicht im Bewegungsbereich des Ellbogens liegen. Für die Passform ist das Messen am Pferd mit Sattel und gewohnter Unterlage aussagekräftiger als eine pauschale Größentabelle.",
+        "Anatomische, asymmetrische und mondförmige Sattelgurte passen zu unterschiedlichen Brustkorbformen und natürlichen Gurtlagen. Die Form muss am konkreten Pferd beurteilt werden.",
+        "Ein Sattelgurt soll den Sattel stabil halten und gleichmäßig anliegen, ohne an Ellbogen oder Haut zu drücken. Bei Scheuerstellen oder Abwehr sind Sattel und Gurt gemeinsam zu kontrollieren.",
+        "Gurt, Schnallen, Nähte und Elastikeinsätze sollten regelmäßig auf Schmutz, Verschleiß und Veränderungen geprüft werden, damit der passende Sitz erhalten bleibt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie finde ich den richtigen Sattelgurt für mein Pferd",
+      "topic": "Wie finde ich den richtigen Sattelgurt für mein Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sattelgurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie finde ich den richtigen Sattelgurt für mein Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Sattelgurte",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Saettel-Sattel-Zubehoer/Sattelgurte",
+        "evidence_text_sha256": "474fdda121d7652330e8087effe01ee8d541065c1faf3e88b275a378aedce777",
+        "statement": "Bei Kurzgurten wird die Länge am vollständig gesattelten und angegurteten Pferd von einer Sattelblattunterkante zur anderen gemessen; Krämer empfiehlt, davon 30 Zentimeter abzuziehen und auf die nächste verfügbare Größe aufzurunden.",
+        "evidence_text": "Bei Kurzgurten wird die Länge am vollständig gesattelten und angegurteten Pferd von einer Sattelblattunterkante zur anderen gemessen; Krämer empfiehlt, davon 30 Zentimeter abzuziehen und auf die nächste verfügbare Größe aufzurunden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Sattelgurte",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Saettel-Sattel-Zubehoer/Sattelgurte",
+        "evidence_text_sha256": "1fb247ef82e7a9ab2e192ef781a551a06b563af57f166da0740ad423ec690d07",
+        "statement": "Bei Langgurten wird nach Krämer zwischen den zweiten Löchern von unten an den gegenüberliegenden Gurtstrippen gemessen. Der gemessene Abstand ergibt die Gurtlänge.",
+        "evidence_text": "Bei Langgurten wird nach Krämer zwischen den zweiten Löchern von unten an den gegenüberliegenden Gurtstrippen gemessen. Der gemessene Abstand ergibt die Gurtlänge.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Sattelgurte",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Saettel-Sattel-Zubehoer/Sattelgurte",
+        "evidence_text_sha256": "9dc3d8a770a88e07c743c25ed7b9a0ab1e15727a8ba518b4bb8fccfa95301acb",
+        "statement": "Die Gurtschnallen sollen nicht im Bewegungsbereich des Ellbogens liegen. Für die Passform ist das Messen am Pferd mit Sattel und gewohnter Unterlage aussagekräftiger als eine pauschale Größentabelle.",
+        "evidence_text": "Die Gurtschnallen sollen nicht im Bewegungsbereich des Ellbogens liegen. Für die Passform ist das Messen am Pferd mit Sattel und gewohnter Unterlage aussagekräftiger als eine pauschale Größentabelle.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "MATTES – Sattelgurte: Formen und richtig messen",
+        "source_url": "https://shop.mattes-reitsport.com/ueber-sattelgurte-formen-und-richtig-messen",
+        "evidence_text_sha256": "3f1cc69ad0b5199db7a29cf84665eb1b1ef994c3add9ca344ee1c79109e46931",
+        "statement": "Anatomische, asymmetrische und mondförmige Sattelgurte passen zu unterschiedlichen Brustkorbformen und natürlichen Gurtlagen. Die Form muss am konkreten Pferd beurteilt werden.",
+        "evidence_text": "Anatomische, asymmetrische und mondförmige Sattelgurte passen zu unterschiedlichen Brustkorbformen und natürlichen Gurtlagen. Die Form muss am konkreten Pferd beurteilt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Krämer – Das richtige Zubehör für den Reitsattel",
+        "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer",
+        "evidence_text_sha256": "35dfc16c2a8f5ee01893c61d86f2bb0bc3a218349cd2ec47d3025214e826c06f",
+        "statement": "Ein Sattelgurt soll den Sattel stabil halten und gleichmäßig anliegen, ohne an Ellbogen oder Haut zu drücken. Bei Scheuerstellen oder Abwehr sind Sattel und Gurt gemeinsam zu kontrollieren.",
+        "evidence_text": "Ein Sattelgurt soll den Sattel stabil halten und gleichmäßig anliegen, ohne an Ellbogen oder Haut zu drücken. Bei Scheuerstellen oder Abwehr sind Sattel und Gurt gemeinsam zu kontrollieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Krämer – Das richtige Zubehör für den Reitsattel",
+        "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer",
+        "evidence_text_sha256": "ad1b3e361fa8c464f9cc4ab8530d05a4b601435f0e9e68813e7a1a57ad711670",
+        "statement": "Gurt, Schnallen, Nähte und Elastikeinsätze sollten regelmäßig auf Schmutz, Verschleiß und Veränderungen geprüft werden, damit der passende Sitz erhalten bleibt.",
+        "evidence_text": "Gurt, Schnallen, Nähte und Elastikeinsätze sollten regelmäßig auf Schmutz, Verschleiß und Veränderungen geprüft werden, damit der passende Sitz erhalten bleibt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "anchor": "Sattelgurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sattelgurte-beratung/",
+        "anchor": "Beratung zu Sattelgurten",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "FAQ zu Sattelgurten",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sattelgurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Sattelgurt",
+      "Kurzgurt",
+      "Langgurt",
+      "Schnallen",
+      "Gurtlage",
+      "Gurtlänge",
+      "Ellbogen",
+      "Messen",
+      "Brustkorb"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Für die konkrete Messanleitung und anschließende Sitzkontrolle ist eine Schrittfolge nützlicher als eine starre Vergleichstabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
