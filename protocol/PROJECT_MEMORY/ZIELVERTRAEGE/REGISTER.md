@@ -322,7 +322,7 @@ STATUS:
 AKTIV
 
 FASSUNG:
-2.5 / 2026-10-08
+2.7 / 2026-10-09
 
 HAUPTQUELLE:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
@@ -331,8 +331,10 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Maßgeblich sind insbesondere HOBBY_MASTER-V2-Bewertung vor dem Zielbaum, acht Hauptwelten als oberste CORE-Ebene, Drei-Säulen-Integration, unter 4 zusammenlegen, ideal etwa 5–12 distinct Beitragsintentionen pro unterster Kategorie, 13–14 ohne automatische Teilung, ab etwa 15 Teilung fachlich prüfen, Erhalt kleiner Hobby-Identitäten bei möglicher gemeinsamer Darstellung, 841er Master als Inventar statt 841 Pflichtkategorien; V1.12-Baseline 95 Strukturknoten + explizite CORE-Overrides; CORE-Hobbys dürfen Beiträge direkt tragen; Leafs erst bei realem Contentbedarf; DataForSEO nur für echte Grenzfälle; ein finaler Delta-Sync
+Nicht hier dupliziert. Vollständig und ausschließlich aus der Hauptquelle Fassung 2.7 lesen. Aktuellen Arbeits-/LIVE-Status ausschließlich aus der zuständigen `SEO_KATEGORIEN/CURRENT_STATE.md` lesen.
 
 NACHFOLGER:
 keiner belegt.
+
+
 
