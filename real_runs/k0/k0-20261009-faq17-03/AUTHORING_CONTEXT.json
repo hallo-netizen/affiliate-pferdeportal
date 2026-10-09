@@ -1,0 +1,211 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "ee73fa8fb7df7fed17b16e6d442aad897e1bac9c3fcb30f20a75c3cf69a141fb",
+    "target_keyword": "Welche Schabracke passt zu meinem Pferd",
+    "title": "Welche Schabracke passt zu meinem Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Schabracken und Satteldecken",
+          "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken"
+        },
+        {
+          "source_title": "Krämer – Schabrackenpflege FAQ",
+          "source_url": "https://www.kraemer.de/ratgeber/schabrackenpflege-faq"
+        },
+        {
+          "source_title": "Krämer – Zubehör für Reitsättel",
+          "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer"
+        },
+        {
+          "source_title": "Loesdau – Schabracken für jeden Reitstil",
+          "source_url": "https://www.loesdau.de/pferd/saettel-zubehoer/schabracken/"
+        }
+      ],
+      "claims": [
+        "Dressur-, Spring- und Vielseitigkeitssättel haben unterschiedlich geformte Sattelblätter. Die Schabracke muss zum Satteltyp passen, damit Sattelblätter nicht auf Randnähte drücken.",
+        "Die Auflagefläche des Sattels kann gemessen werden; Krämer empfiehlt, für die Mindestlänge der Schabracke mindestens sechs Zentimeter zur gemessenen Auflagelänge zu addieren.",
+        "Eine Schabracke muss mittig und faltenfrei liegen, darf beim Reiten nicht rutschen und soll in die Sattelkammer eingezogen werden, damit Widerrist und Wirbelsäule frei bleiben.",
+        "Zu dicke oder falsch dimensionierte Unterlagen können die Passform eines Sattels beeinträchtigen. Eine Schabracke ist kein Ersatz für einen passend eingestellten Sattel.",
+        "Größenbezeichnungen wie Pony und Warmblut sowie Kürzel wie D, S und VS unterscheiden Form und Größe; Maße und Größentabellen des jeweiligen Herstellers sind entscheidend.",
+        "Atmungsaktive Materialien und regelmäßige Reinigung können für Komfort und Hygiene wichtig sein; bei empfindlichen Pferden sollten Oberfläche und mögliche Scheuerstellen beachtet werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Schabracke passt zu meinem Pferd",
+      "topic": "Welche Schabracke passt zu meinem Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schabracken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Schabracke passt zu meinem Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Schabracken und Satteldecken",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken",
+        "evidence_text_sha256": "32071ed28a01c1cf586ed9a649252aa5631bc9cf4b4edc43b0b184671da42f64",
+        "statement": "Dressur-, Spring- und Vielseitigkeitssättel haben unterschiedlich geformte Sattelblätter. Die Schabracke muss zum Satteltyp passen, damit Sattelblätter nicht auf Randnähte drücken.",
+        "evidence_text": "Dressur-, Spring- und Vielseitigkeitssättel haben unterschiedlich geformte Sattelblätter. Die Schabracke muss zum Satteltyp passen, damit Sattelblätter nicht auf Randnähte drücken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Schabrackenpflege FAQ",
+        "source_url": "https://www.kraemer.de/ratgeber/schabrackenpflege-faq",
+        "evidence_text_sha256": "5f66da483e544383ef182b52a3238bd8c180a6117f186a95c6d6bdcacdaa31cb",
+        "statement": "Die Auflagefläche des Sattels kann gemessen werden; Krämer empfiehlt, für die Mindestlänge der Schabracke mindestens sechs Zentimeter zur gemessenen Auflagelänge zu addieren.",
+        "evidence_text": "Die Auflagefläche des Sattels kann gemessen werden; Krämer empfiehlt, für die Mindestlänge der Schabracke mindestens sechs Zentimeter zur gemessenen Auflagelänge zu addieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Schabracken und Satteldecken",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken",
+        "evidence_text_sha256": "bd39402d13771aceda4be82312cf69b1d1ee871a9555c6727ef843b142f11231",
+        "statement": "Eine Schabracke muss mittig und faltenfrei liegen, darf beim Reiten nicht rutschen und soll in die Sattelkammer eingezogen werden, damit Widerrist und Wirbelsäule frei bleiben.",
+        "evidence_text": "Eine Schabracke muss mittig und faltenfrei liegen, darf beim Reiten nicht rutschen und soll in die Sattelkammer eingezogen werden, damit Widerrist und Wirbelsäule frei bleiben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Krämer – Zubehör für Reitsättel",
+        "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer",
+        "evidence_text_sha256": "ec1a635df0a612d8698c6a5f8bed42f73d0bbdb6d526a826685e9ad4be1ea254",
+        "statement": "Zu dicke oder falsch dimensionierte Unterlagen können die Passform eines Sattels beeinträchtigen. Eine Schabracke ist kein Ersatz für einen passend eingestellten Sattel.",
+        "evidence_text": "Zu dicke oder falsch dimensionierte Unterlagen können die Passform eines Sattels beeinträchtigen. Eine Schabracke ist kein Ersatz für einen passend eingestellten Sattel.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Krämer – Schabrackenpflege FAQ",
+        "source_url": "https://www.kraemer.de/ratgeber/schabrackenpflege-faq",
+        "evidence_text_sha256": "7482c495d30f7fdcf565dd884f61bdbbbcc62d062fb20989e229f5cbbe5d7bdc",
+        "statement": "Größenbezeichnungen wie Pony und Warmblut sowie Kürzel wie D, S und VS unterscheiden Form und Größe; Maße und Größentabellen des jeweiligen Herstellers sind entscheidend.",
+        "evidence_text": "Größenbezeichnungen wie Pony und Warmblut sowie Kürzel wie D, S und VS unterscheiden Form und Größe; Maße und Größentabellen des jeweiligen Herstellers sind entscheidend.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Loesdau – Schabracken für jeden Reitstil",
+        "source_url": "https://www.loesdau.de/pferd/saettel-zubehoer/schabracken/",
+        "evidence_text_sha256": "29bd1aa31b4997ff23384a1ed952c54e0708d05a8ecb0bd03e376c8ee21c9fb6",
+        "statement": "Atmungsaktive Materialien und regelmäßige Reinigung können für Komfort und Hygiene wichtig sein; bei empfindlichen Pferden sollten Oberfläche und mögliche Scheuerstellen beachtet werden.",
+        "evidence_text": "Atmungsaktive Materialien und regelmäßige Reinigung können für Komfort und Hygiene wichtig sein; bei empfindlichen Pferden sollten Oberfläche und mögliche Scheuerstellen beachtet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/",
+        "anchor": "Sattel und Zubehör",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schabracken-beratung/",
+        "anchor": "Beratung zu Schabracken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schabracken-faq/",
+        "anchor": "FAQ zu Schabracken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schabracken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schabracke",
+      "Sattelform",
+      "Sattel",
+      "Größe",
+      "Dressur",
+      "Vielseitigkeit",
+      "Widerrist",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+      "rationale": "Drei grundlegende Sattelformen lassen sich ohne vierte künstliche Vergleichskategorie nicht in eine sinnvolle Tabelle mit mindestens vier Zeilen und drei Spalten übertragen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
