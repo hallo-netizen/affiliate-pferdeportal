@@ -1,0 +1,210 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzboden-faq",
+    "plan_slot": "da5943c5cd97eccf6ce1877cd60e558b087ed319721a99cbc44fd4b100a149a3",
+    "target_keyword": "Wie kann ich den Reitplatzboden verbessern",
+    "title": "Wie kann ich den Reitplatzboden verbessern?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftsverwaltung Bayern – Anforderungen an Reitplätze",
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354973/index.php"
+        },
+        {
+          "source_title": "Reitplatzsand Treiser Sand – FAQ",
+          "source_url": "https://reitplatzsand.de/faq-reitplatzsand-reitboden-aufbau-tretschicht-pflege-sanierung-rysse/"
+        },
+        {
+          "source_title": "Reitplatzsand Treiser Sand – Beratung",
+          "source_url": "https://reitplatzsand.de/reitplatzberatung-tretschichtanalyse-walter-rysse/"
+        },
+        {
+          "source_title": "Reitplatzsand Treiser Sand – Außenreitplätze",
+          "source_url": "https://reitplatzsand.de/reitplatzsand-fuer-aussenplaetze-tretschichten-von-rysse/"
+        }
+      ],
+      "claims": [
+        "Regelmäßiges Abmisten, bedarfsgerechtes Bewässern und Abziehen mit geeigneten Geräten unterstützen die Haltbarkeit des Reitbodens.",
+        "Ein zu tiefer Reitplatz kann an zu dicker Tretschicht, Trockenheit, ungünstiger Körnung, tiefem Lockern oder ungleich verteilten Zusätzen liegen.",
+        "Gleichmäßige Bewässerung kann einen trockenen, lockeren Sand stabilisieren. Zu starkes Lockern und falsche Arbeitstiefe können den Platz verschlechtern.",
+        "Die Tretschicht soll gepflegt werden, ohne die darunterliegende Trennschicht mit zu tiefen Arbeiten zu beschädigen.",
+        "Wenn auf einem Reitplatz dauerhaft Pfützen entstehen oder einzelne Stellen zu hart und andere zu weich bleiben, müssen auch Unterbau und Entwässerung geprüft werden.",
+        "Das vorschnelle Auffüllen mit neuem Sand ist nicht immer sinnvoll; zuerst sollten Schichtdicke, vorhandenes Material, Wasserführung und Pflege geprüft werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie kann ich den Reitplatzboden verbessern",
+      "topic": "Wie kann ich den Reitplatzboden verbessern?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzboden-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie kann ich den Reitplatzboden verbessern?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Landwirtschaftsverwaltung Bayern – Anforderungen an Reitplätze",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354973/index.php",
+        "statement": "Regelmäßiges Abmisten, bedarfsgerechtes Bewässern und Abziehen mit geeigneten Geräten unterstützen die Haltbarkeit des Reitbodens.",
+        "evidence_text": "Regelmäßiges Abmisten, bedarfsgerechtes Bewässern und Abziehen mit geeigneten Geräten unterstützen die Haltbarkeit des Reitbodens.",
+        "evidence_text_sha256": "d1a7404296fb110d0ff63c13057062a6faa291c98e865c1ef8c837f65d3c73b9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Reitplatzsand Treiser Sand – FAQ",
+        "source_url": "https://reitplatzsand.de/faq-reitplatzsand-reitboden-aufbau-tretschicht-pflege-sanierung-rysse/",
+        "statement": "Ein zu tiefer Reitplatz kann an zu dicker Tretschicht, Trockenheit, ungünstiger Körnung, tiefem Lockern oder ungleich verteilten Zusätzen liegen.",
+        "evidence_text": "Ein zu tiefer Reitplatz kann an zu dicker Tretschicht, Trockenheit, ungünstiger Körnung, tiefem Lockern oder ungleich verteilten Zusätzen liegen.",
+        "evidence_text_sha256": "f5a4038821fb838e3fea0f6403f8cb2156021ace49ecf3e55a6aeac9144687a7",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Reitplatzsand Treiser Sand – FAQ",
+        "source_url": "https://reitplatzsand.de/faq-reitplatzsand-reitboden-aufbau-tretschicht-pflege-sanierung-rysse/",
+        "statement": "Gleichmäßige Bewässerung kann einen trockenen, lockeren Sand stabilisieren. Zu starkes Lockern und falsche Arbeitstiefe können den Platz verschlechtern.",
+        "evidence_text": "Gleichmäßige Bewässerung kann einen trockenen, lockeren Sand stabilisieren. Zu starkes Lockern und falsche Arbeitstiefe können den Platz verschlechtern.",
+        "evidence_text_sha256": "a9de9b1f1be1b91c28d3095fefa9c003e3fde74454fc9781aa2b08b114ff4d0b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Landwirtschaftsverwaltung Bayern – Anforderungen an Reitplätze",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354973/index.php",
+        "statement": "Die Tretschicht soll gepflegt werden, ohne die darunterliegende Trennschicht mit zu tiefen Arbeiten zu beschädigen.",
+        "evidence_text": "Die Tretschicht soll gepflegt werden, ohne die darunterliegende Trennschicht mit zu tiefen Arbeiten zu beschädigen.",
+        "evidence_text_sha256": "01aa872a84cde111a6b74a3d49d2d26b609df3715879cde52c4694e4e0246ec1",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Reitplatzsand Treiser Sand – Beratung",
+        "source_url": "https://reitplatzsand.de/reitplatzberatung-tretschichtanalyse-walter-rysse/",
+        "statement": "Wenn auf einem Reitplatz dauerhaft Pfützen entstehen oder einzelne Stellen zu hart und andere zu weich bleiben, müssen auch Unterbau und Entwässerung geprüft werden.",
+        "evidence_text": "Wenn auf einem Reitplatz dauerhaft Pfützen entstehen oder einzelne Stellen zu hart und andere zu weich bleiben, müssen auch Unterbau und Entwässerung geprüft werden.",
+        "evidence_text_sha256": "3efca3a9e0c76f502f240f6e97952660ec88f374ee8db94f6314fd9e6b412509",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Reitplatzsand Treiser Sand – Außenreitplätze",
+        "source_url": "https://reitplatzsand.de/reitplatzsand-fuer-aussenplaetze-tretschichten-von-rysse/",
+        "statement": "Das vorschnelle Auffüllen mit neuem Sand ist nicht immer sinnvoll; zuerst sollten Schichtdicke, vorhandenes Material, Wasserführung und Pflege geprüft werden.",
+        "evidence_text": "Das vorschnelle Auffüllen mit neuem Sand ist nicht immer sinnvoll; zuerst sollten Schichtdicke, vorhandenes Material, Wasserführung und Pflege geprüft werden.",
+        "evidence_text_sha256": "b1735237a261b80f21db22fbb6588adf5c2c67365d4cc2f449a8d5e7393d9886",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/weide/weide-reitplatz/reitplatzboden/",
+        "anchor": "Reitplatzboden",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/reitplatzboden-beratung/",
+        "anchor": "Beratung zum Reitplatzboden",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/reitplatzboden-faq/",
+        "anchor": "FAQ zum Reitplatzboden",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/weide/weide-reitplatz/reitplatzboden/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzboden-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzboden-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzboden-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reitplatz",
+      "Reitplatzboden",
+      "Tretschicht",
+      "Feuchtigkeit",
+      "Boden",
+      "Drainage",
+      "Pflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Zuerst die Ursache ermitteln, dann Pflege und Bewässerung anpassen und erst danach Material korrigieren; eine Schrittfolge ist verständlicher als eine pauschale Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
