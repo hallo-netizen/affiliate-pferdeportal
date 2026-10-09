@@ -1057,3 +1057,35 @@ BLOCKER:
 
 NEXT:
 Den bereits akzeptierten V1.14.3-Zielbaum genau einmal live synchronisieren. Danach sofort Post-Sync-JSON herunterladen und 1.723/1.723 + Frontend/Header prüfen. Kein zweiter Lauf vor dieser Prüfung.
+
+
+---
+
+## PU-20261009-022 – HD-001 Übergabe-/Single-Truth-Nachholcheck
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Dokumentations-/Routingkorrektur vor Übergabe. Keine Plugin-Codeänderung, keine Versionserhöhung, keine WordPress-Schreibaktion.
+
+BEFUND:
+Die zuständige operative SEO-Kategorien-Current stand bereits korrekt auf V1.14.3 Live-Dry-Run PASS / ONE LIVE SYNC RELEASED / Post-Sync-Readback pending.
+Die separate Konzept-Current enthielt jedoch noch den veralteten operativen Blocker `HD001_TECHNICAL_OBJECT_PLAN_PENDING`.
+
+KORREKTUR:
+- Konzept-Current auf abgeschlossenen Fach-/Regelstand 2.6/1.6 begrenzt;
+- dynamische HD-001-Live-/Sync-Fortsetzung ausschließlich an `SEO_KATEGORIEN/CURRENT_STATE.md` geroutet;
+- keine zweite operative Status-/Blocker-/NEXT-ACTION-Wahrheit mehr.
+
+UNVERÄNDERT:
+- Zielvertrag 2.6;
+- Assessment Rules 1.6;
+- Fach-Sollprofil;
+- V1.14.3-Binary und SHA-256;
+- Live-Dry-Run PASS;
+- aktueller Blocker `HD001_V1_14_3_LIVE_SYNC_PENDING`;
+- NEXT: akzeptierten V1.14.3-Zielbaum genau einmal live synchronisieren, dann Post-Sync-JSON prüfen.
+
+ERGEBNIS:
+Single-Truth-Nachholcheck PASS.
