@@ -1,0 +1,216 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mueslis-fuer-pferde-faq",
+    "plan_slot": "5987322004a87ca16cb940584f428cd636c6f7479b6d4cc20401c19c66761235",
+    "target_keyword": "Wie kann ich Müsli für mein Pferd selbst machen",
+    "title": "Wie kann ich Müsli für mein Pferd selbst machen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Müslis für Sport- und Freizeitpferde",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/pferdehaltung/fuetterung/vft-2018-062.htm"
+        },
+        {
+          "source_title": "Arbeitskreis Pferd – Rationsgestaltung",
+          "source_url": "https://www.ak-pferd.de/lessons/rationsgestaltung-2/"
+        },
+        {
+          "source_title": "Reiter mit Kopf – Pferdefutter selbst mischen",
+          "source_url": "https://reiter-mit-kopf.com/pferdefutter-selber-mischen/"
+        },
+        {
+          "source_title": "Go4Vet – Pferdemüsli",
+          "source_url": "https://www.go4vet.com/pferd/ernaehrung/muesli-pferd/"
+        },
+        {
+          "source_title": "Pferde Atelier – Lagerung Müslis für Pferde",
+          "source_url": "https://pferde-atelier.de/category/mueslis-fuer-pferde-lagerung/"
+        }
+      ],
+      "claims": [
+        "Die Landwirtschaftskammer NRW erläutert, dass Pferdemüsli ein Ergänzungsfutter ist und nur zusammen mit Grund- beziehungsweise Raufutter wie Heu oder Heulage gefüttert wird.",
+        "Die Landwirtschaftskammer NRW weist auf die vergleichsweise geringere Lagerfähigkeit locker strukturierter Müslimischungen gegenüber Pellets hin.",
+        "Bei der Rationsplanung sind Energieversorgung, Eiweiß, Mineralstoffe und Vitamine unter Berücksichtigung des Grundfutters zu prüfen.",
+        "Ein selbst gemischtes Müsli kann Hafer und andere passende Komponenten enthalten; deren Menge muss an Körpergewicht, Arbeitspensum und übrige Ration angepasst werden.",
+        "Ein zusätzliches Mineralfutter ist nicht pauschal, sondern nach dem Gesamtangebot an Mineralstoffen und Vitaminen zu wählen; Doppelversorgungen sind zu vermeiden.",
+        "Bei einem selbst zubereiteten Pferdemüsli sind saubere, trockene Lagerung und eine allmähliche Futterumstellung wichtig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie kann ich Müsli für mein Pferd selbst machen",
+      "topic": "Wie kann ich Müsli für mein Pferd selbst machen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mueslis-fuer-pferde-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie kann ich Müsli für mein Pferd selbst machen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Landwirtschaftskammer NRW – Müslis für Sport- und Freizeitpferde",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/pferdehaltung/fuetterung/vft-2018-062.htm",
+        "statement": "Die Landwirtschaftskammer NRW erläutert, dass Pferdemüsli ein Ergänzungsfutter ist und nur zusammen mit Grund- beziehungsweise Raufutter wie Heu oder Heulage gefüttert wird.",
+        "evidence_text": "Die Landwirtschaftskammer NRW erläutert, dass Pferdemüsli ein Ergänzungsfutter ist und nur zusammen mit Grund- beziehungsweise Raufutter wie Heu oder Heulage gefüttert wird.",
+        "evidence_text_sha256": "531a432c1ac96e779ff91c648e1c9eda028fcfb860f193551c244ea0741ceece",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Landwirtschaftskammer NRW – Müslis für Sport- und Freizeitpferde",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/pferdehaltung/fuetterung/vft-2018-062.htm",
+        "statement": "Die Landwirtschaftskammer NRW weist auf die vergleichsweise geringere Lagerfähigkeit locker strukturierter Müslimischungen gegenüber Pellets hin.",
+        "evidence_text": "Die Landwirtschaftskammer NRW weist auf die vergleichsweise geringere Lagerfähigkeit locker strukturierter Müslimischungen gegenüber Pellets hin.",
+        "evidence_text_sha256": "84b5c346819a1b1403d551263963bd67f99ae51fac6a860261f2e530942d4b26",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Arbeitskreis Pferd – Rationsgestaltung",
+        "source_url": "https://www.ak-pferd.de/lessons/rationsgestaltung-2/",
+        "statement": "Bei der Rationsplanung sind Energieversorgung, Eiweiß, Mineralstoffe und Vitamine unter Berücksichtigung des Grundfutters zu prüfen.",
+        "evidence_text": "Bei der Rationsplanung sind Energieversorgung, Eiweiß, Mineralstoffe und Vitamine unter Berücksichtigung des Grundfutters zu prüfen.",
+        "evidence_text_sha256": "b0e032434c0d7d087f2075dd6ea8e2b2c2f7d4f99fe1606b57fe1c3b3c95bd5a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Reiter mit Kopf – Pferdefutter selbst mischen",
+        "source_url": "https://reiter-mit-kopf.com/pferdefutter-selber-mischen/",
+        "statement": "Ein selbst gemischtes Müsli kann Hafer und andere passende Komponenten enthalten; deren Menge muss an Körpergewicht, Arbeitspensum und übrige Ration angepasst werden.",
+        "evidence_text": "Ein selbst gemischtes Müsli kann Hafer und andere passende Komponenten enthalten; deren Menge muss an Körpergewicht, Arbeitspensum und übrige Ration angepasst werden.",
+        "evidence_text_sha256": "c8030e250216e9db90471681f584201b78a3d5428c82f4fdd8a1d140bccf436e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Go4Vet – Pferdemüsli",
+        "source_url": "https://www.go4vet.com/pferd/ernaehrung/muesli-pferd/",
+        "statement": "Ein zusätzliches Mineralfutter ist nicht pauschal, sondern nach dem Gesamtangebot an Mineralstoffen und Vitaminen zu wählen; Doppelversorgungen sind zu vermeiden.",
+        "evidence_text": "Ein zusätzliches Mineralfutter ist nicht pauschal, sondern nach dem Gesamtangebot an Mineralstoffen und Vitaminen zu wählen; Doppelversorgungen sind zu vermeiden.",
+        "evidence_text_sha256": "7cff4ac5341f9c0c5401bb59ad4cb794783b959ea48e605c3c179842ed0913c3",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferde Atelier – Lagerung Müslis für Pferde",
+        "source_url": "https://pferde-atelier.de/category/mueslis-fuer-pferde-lagerung/",
+        "statement": "Bei einem selbst zubereiteten Pferdemüsli sind saubere, trockene Lagerung und eine allmähliche Futterumstellung wichtig.",
+        "evidence_text": "Bei einem selbst zubereiteten Pferdemüsli sind saubere, trockene Lagerung und eine allmähliche Futterumstellung wichtig.",
+        "evidence_text_sha256": "bcdcd075a90c869a8e7f8a1abad3875ebf2168e5ce30b275bbb274370204e388",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/fuetterung/fuetterung-kraftfutter/mueslis-fuer-pferde/",
+        "anchor": "Müslis für Pferde",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mueslis-fuer-pferde-beratung/",
+        "anchor": "Beratung zu Müslis",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mueslis-fuer-pferde-faq/",
+        "anchor": "FAQ zu Pferdemüsli",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/fuetterung/fuetterung-kraftfutter/mueslis-fuer-pferde/",
+        "active": true
+      },
+      {
+        "href": "/category/mueslis-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mueslis-fuer-pferde-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mueslis-fuer-pferde-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Müsli",
+      "Pferd",
+      "Hafer",
+      "Futter",
+      "Ration",
+      "Raufutter",
+      "Mineralstoffe",
+      "Mischen",
+      "Lagerung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Eine Mischung wird in klarer Abfolge zusammengestellt, dosiert und eingewöhnt; eine tabellarische Gegenüberstellung würde die sichere Reihenfolge nicht besser erläutern."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
