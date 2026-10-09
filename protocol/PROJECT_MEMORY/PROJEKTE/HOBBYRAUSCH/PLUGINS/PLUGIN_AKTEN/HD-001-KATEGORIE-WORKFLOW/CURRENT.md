@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-09
-STATUS: V1.14.3 LIVE ROLLED BACK / V1.14.4 FULL LOCAL POSITIVE+NEGATIVE HARD PASS / LIVE RECHECK PENDING
+STATUS: V1.14.8 LIVE TECHNISCH COMPLETE / PLUGIN-ENTWICKLUNG EINGEFROREN BIS FACH-SOLL 2.7 PILOT ABGENOMMEN
 
 ## Plugin
 
@@ -648,3 +648,34 @@ V1.14.4 wurde in diesem Lauf NICHT ins echte WordPress geschrieben.
 
 NEXT ACTION:
 V1.14.4 installieren → Live-Dry-Run → exakt ein kontrollierter Sync → vollständiger Post-Sync-Readback.
+
+
+## FREEZE NACH V1.14.8 – KEIN WEITERER TECHNISCHER BLINDFIX
+
+Realer Live-Readback:
+`hobby-depot-final-target-readback-20261009-114254-utc.json`
+
+Technischer Endstand des aktuellen Laufs:
+- plugin_version 1.14.8;
+- Runner COMPLETE;
+- 1.723/1.723 Zielobjekte gelesen;
+- 1.723 UNCHANGED;
+- 52 EDITORIAL-DEMOTION;
+- 0 unbound Core pages;
+- interner Frontend-Gate 279/279.
+
+Dieser technische COMPLETE-Status ist **kein fachlicher Gesamt-PASS**.
+
+Offen:
+- unterste Kategorieebene ist real sichtbar nicht auf allen Hobbyseiten zuverlässig vorhanden;
+- bestehender Content-Zielbaum deckt die universelle Nutzerreise nicht systematisch ab;
+- Zielvertrag wurde deshalb auf 2.7 fortgeschrieben.
+
+Verbot bis zur Fachabnahme:
+- keine V1.14.9 nur wegen einzelner Anzeige-/Kategoriebeobachtungen;
+- kein weiterer Struktur-Sync;
+- keine neue Massenkategorie-Generierung;
+- keine Änderung der Bestands-Leafs.
+
+Nächster technischer Auftrag entsteht erst aus dem fachlich abgenommenen 10-Hobby-Pilot nach Zielvertrag 2.7.
+
