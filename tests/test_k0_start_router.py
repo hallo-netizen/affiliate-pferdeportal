@@ -47,6 +47,14 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("tatsächlichen Aufruf der vorhandenen GitHub-Dateischreibfunktion",text)
         self.assertIn("ein Chat darf nicht mit `0 von N produziert` abbrechen",text)
 
+    def test_hidden_github_tools_must_be_discovered_before_unavailable(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("kein Nichtverfügbarkeitsnachweis",text)
+        self.assertIn("Tool-Router/Code-Mode",text)
+        self.assertIn("mcp__GitHub__create_file",text)
+        self.assertIn("mcp__GitHub__update_file",text)
+        self.assertIn("GITHUB_WRITE_UNAVAILABLE",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
