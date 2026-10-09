@@ -300,26 +300,6 @@ Aktueller Master:
 Audit:
 `../SEO_KATEGORIEN/HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json`
 
-## Aktueller Strukturstand nach Gesamtprüfung
-
-Regeln 2.6/1.6 sind bereinigt und widerspruchsfrei.
-
-Welt-/Zwischenstruktur:
-`../SEO_KATEGORIEN/HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json`
-
-Aktuelle CORE-Rollenabdeckung:
-- 359 CORE;
-- 60 aktuell produktionsgültig bewertet durch Batch 001–003 + Expansion19;
-- 299 benötigen globalen Recheck nach 1.6;
-- Batch 004–019 bleiben historische Evidence, nicht Produktionsautorität.
-
-## Aktueller Recheck-Stand
-
-- 359 aktuelle CORE-Identitäten;
-- 161 nach Regel 1.6 entschieden;
-- 75 historische aktuelle HOBBY_HUBs mit 355 sichtbaren Content-Kategorien nachgezogen;
-- 198 aktuelle CORE-Identitäten noch offen.
-
 ## Fachlicher Endstand Kategorienstruktur
 
 Abschluss:
