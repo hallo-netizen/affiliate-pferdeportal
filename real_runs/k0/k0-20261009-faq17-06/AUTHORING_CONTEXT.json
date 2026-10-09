@@ -1,0 +1,210 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schubkarren-faq",
+    "plan_slot": "65a4efadee5e95ed80cf30ccd52e9c800b068074c218f8e85a1aa30750ea4f8c",
+    "target_keyword": "Wie groß ist eine normale Schubkarre",
+    "title": "Wie groß ist eine normale Schubkarre?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "mefro – Schubkarren",
+          "source_url": "https://www.mefro-transportgeraete.de/produkte/schubkarren/"
+        },
+        {
+          "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+          "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295"
+        },
+        {
+          "source_title": "HORNBACH – CAPITO Standard 100 l",
+          "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/"
+        }
+      ],
+      "claims": [
+        "Eine übliche einrädrige Schubkarre für Garten oder Stall bietet ungefähr 80 bis 100 Liter Wannenvolumen; beispielsweise führt Mefro Modelle mit 80, 85 und 90 Litern.",
+        "Mefro gibt für das Modell Standard 85 eine Wanne mit 860 mal 600 mal 325 Millimetern, 85 Litern Fassungsvermögen und 250 Kilogramm Traglast an.",
+        "Die bei BAUHAUS angebotene Gartenschubkarre fasst 80 Liter, misst außen 121 mal 71 mal 60 Zentimeter und hat eine maximale Traglast von 100 Kilogramm.",
+        "Hornbach führt eine CAPITO-Standardschubkarre mit 100 Litern Wannenvolumen und 200 Kilogramm maximaler Traglast.",
+        "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "Die Größe einer Schubkarre lässt sich nicht allein am Wannenvolumen ablesen: Gesamtbreite, Gesamtlänge und Höhe entscheiden, ob sie durch Tore, Wege und Stallgassen passt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie groß ist eine normale Schubkarre",
+      "topic": "Wie groß ist eine normale Schubkarre?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schubkarren-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie groß ist eine normale Schubkarre?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "mefro – Schubkarren",
+        "source_url": "https://www.mefro-transportgeraete.de/produkte/schubkarren/",
+        "evidence_text_sha256": "813e3286ecd6fe3e5e5fe6e9a2c7fcdf46836e5c28cced4023b6b1ec174d0636",
+        "statement": "Eine übliche einrädrige Schubkarre für Garten oder Stall bietet ungefähr 80 bis 100 Liter Wannenvolumen; beispielsweise führt Mefro Modelle mit 80, 85 und 90 Litern.",
+        "evidence_text": "Eine übliche einrädrige Schubkarre für Garten oder Stall bietet ungefähr 80 bis 100 Liter Wannenvolumen; beispielsweise führt Mefro Modelle mit 80, 85 und 90 Litern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "mefro – Schubkarren",
+        "source_url": "https://www.mefro-transportgeraete.de/produkte/schubkarren/",
+        "evidence_text_sha256": "712bd14e8e0adc60520904700abfc0d883ad18037b351fd4abf043778fc73a0f",
+        "statement": "Mefro gibt für das Modell Standard 85 eine Wanne mit 860 mal 600 mal 325 Millimetern, 85 Litern Fassungsvermögen und 250 Kilogramm Traglast an.",
+        "evidence_text": "Mefro gibt für das Modell Standard 85 eine Wanne mit 860 mal 600 mal 325 Millimetern, 85 Litern Fassungsvermögen und 250 Kilogramm Traglast an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+        "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295",
+        "evidence_text_sha256": "047619412cfaa01f9090b0572af82be411e64b4fdf753dc4da508f89f328315c",
+        "statement": "Die bei BAUHAUS angebotene Gartenschubkarre fasst 80 Liter, misst außen 121 mal 71 mal 60 Zentimeter und hat eine maximale Traglast von 100 Kilogramm.",
+        "evidence_text": "Die bei BAUHAUS angebotene Gartenschubkarre fasst 80 Liter, misst außen 121 mal 71 mal 60 Zentimeter und hat eine maximale Traglast von 100 Kilogramm.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "HORNBACH – CAPITO Standard 100 l",
+        "source_url": "https://www.hornbach.de/p/capito-standard-schubkarre-allcar-100-liter-tiefmulde-gummiraeder-mit-blockprofil-und-stahlfelge-inkl-kunststoffgriffe/5691675/",
+        "evidence_text_sha256": "46ee0e01e3c9856fb5de8b9549ecde718e0ed4d1395d831ea1bd41a67701e338",
+        "statement": "Hornbach führt eine CAPITO-Standardschubkarre mit 100 Litern Wannenvolumen und 200 Kilogramm maximaler Traglast.",
+        "evidence_text": "Hornbach führt eine CAPITO-Standardschubkarre mit 100 Litern Wannenvolumen und 200 Kilogramm maximaler Traglast.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+        "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295",
+        "evidence_text_sha256": "a15d5a97830777238c155ecfae19b42be9b841560bf64165072a5995f5de077a",
+        "statement": "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "evidence_text": "Volumen und zulässiges Gewicht sind verschiedene Kennzahlen: Eine große Wanne darf nur so schwer befüllt werden, wie die angegebene Traglast erlaubt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "BAUHAUS – Gartenschubkarre 80 l",
+        "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295",
+        "evidence_text_sha256": "93b7913d30d00ee4f6f29438c241354fa84522121e4b679766cfa05304133974",
+        "statement": "Die Größe einer Schubkarre lässt sich nicht allein am Wannenvolumen ablesen: Gesamtbreite, Gesamtlänge und Höhe entscheiden, ob sie durch Tore, Wege und Stallgassen passt.",
+        "evidence_text": "Die Größe einer Schubkarre lässt sich nicht allein am Wannenvolumen ablesen: Gesamtbreite, Gesamtlänge und Höhe entscheiden, ob sie durch Tore, Wege und Stallgassen passt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "anchor": "Schubkarren im Stall",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schubkarren-beratung/",
+        "anchor": "Beratung zu Schubkarren",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schubkarren-faq/",
+        "anchor": "FAQ zu Schubkarren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schubkarren-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schubkarre",
+      "Schubkarren",
+      "Wanne",
+      "Volumen",
+      "Traglast",
+      "Größe",
+      "Stall",
+      "Länge",
+      "Breite",
+      "Liter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Vier konkrete Schubkarren unterscheiden sich bei Fassungsvermögen und maximaler Traglast; eine kompakte Gegenüberstellung erleichtert die Orientierung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
