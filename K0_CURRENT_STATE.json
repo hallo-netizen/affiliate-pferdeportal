@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "READY_FOR_FRESH_K0_START",
+  "status": "CURRENT_17_ITEM_BATCH_INTAKES_BOUND_AWAITING_AUTHORING_CONTEXT",
   "first_open_blocker": null,
-  "next_action": "K0:start",
+  "next_action": "RESUME_ITEM_01_RESEARCH_THEN_WRITE_AUTHORING_CONTEXT",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -63,6 +63,15 @@
       "after_each_intake": "RESEARCH_THEN_WRITE_AUTHORING_CONTEXT_IN_SAME_RUN",
       "legacy_release_lookup_allowed": false,
       "resume_identical_current_intake_at_first_missing_artifact": true
+    },
+    "active_batch": {
+      "run_prefix": "real_runs/k0/k0-20261009-faq17-",
+      "expected_item_count": 17,
+      "bound_intakes": 17,
+      "authoring_contexts": 0,
+      "writer_jobs": 0,
+      "first_missing_artifact": "real_runs/k0/k0-20261009-faq17-01/AUTHORING_CONTEXT.json",
+      "resume_rule": "RESEARCH_ITEM_01_THEN_WRITE_AUTHORING_CONTEXT_IN_SAME_RUN"
     }
   },
   "wordpress_export": {
