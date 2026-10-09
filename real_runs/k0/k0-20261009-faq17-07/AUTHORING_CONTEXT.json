@@ -1,0 +1,206 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "2766b793883717cc3c0346d347286a2e4015ec98777654cd259f4d758a4c508b",
+    "target_keyword": "Wie groß muss eine Schabracke sein",
+    "title": "Wie groß muss eine Schabracke sein?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Schabracken und Satteldecken",
+          "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken"
+        },
+        {
+          "source_title": "Krämer – Pony-Schabracken",
+          "source_url": "https://www.kraemer.at/Themen/Zubehoer-Pony-Fohlen/Pony-Schabracken"
+        },
+        {
+          "source_title": "HKM – Schabracke Samantha Größentabelle",
+          "source_url": "https://www.hkm-sports.com/de/15004.html"
+        }
+      ],
+      "claims": [
+        "Schabracken müssen zur Form und Länge des Sattels passen. Der Sattel darf nicht über den Rand hinausragen oder auf dicke Nähte drücken.",
+        "Beim Auflegen muss die Schabracke mittig liegen und im Bereich des Widerrists in die Sattelkammer eingekammert werden; sie darf keine Falten werfen.",
+        "Pony-, Vielseitigkeits- und Dressurgrößen sind je nach Satteltyp und Hersteller unterschiedlich; deshalb sollte man den vorhandenen Sattel ausmessen.",
+        "Bei Ponysätteln mit etwa 15 bis 16 Zoll nennt Krämer Pony-Schabracken als Orientierung und empfiehlt, zur Sattellänge rund sechs Zentimeter hinzuzurechnen.",
+        "Die HKM-Größentabelle zeigt zum Beispiel unterschiedliche Maße für Pony-Vielseitigkeit, Pony-Dressur sowie Dressur- und Springvarianten.",
+        "Eine zu große Schabracke kann Falten werfen und zu Reibung führen; eine zu kleine kann unter dem Sattelrand enden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie groß muss eine Schabracke sein",
+      "topic": "Wie groß muss eine Schabracke sein?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schabracken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie groß muss eine Schabracke sein?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Schabracken und Satteldecken",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken",
+        "evidence_text_sha256": "08c0a29421d0fbc52efa4eb7e6341f0fa6ea0e1e49203156b4794e36c04b2179",
+        "statement": "Schabracken müssen zur Form und Länge des Sattels passen. Der Sattel darf nicht über den Rand hinausragen oder auf dicke Nähte drücken.",
+        "evidence_text": "Schabracken müssen zur Form und Länge des Sattels passen. Der Sattel darf nicht über den Rand hinausragen oder auf dicke Nähte drücken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Schabracken und Satteldecken",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken",
+        "evidence_text_sha256": "f037213252f7cfb0b4ff7b2c37e8539d3d76abdd9fd309e30de4b7288ef3a66d",
+        "statement": "Beim Auflegen muss die Schabracke mittig liegen und im Bereich des Widerrists in die Sattelkammer eingekammert werden; sie darf keine Falten werfen.",
+        "evidence_text": "Beim Auflegen muss die Schabracke mittig liegen und im Bereich des Widerrists in die Sattelkammer eingekammert werden; sie darf keine Falten werfen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Pony-Schabracken",
+        "source_url": "https://www.kraemer.at/Themen/Zubehoer-Pony-Fohlen/Pony-Schabracken",
+        "evidence_text_sha256": "d1c4e2faec6190f88b4013c594946798d317632e8011d07d68d11d01bde65b94",
+        "statement": "Pony-, Vielseitigkeits- und Dressurgrößen sind je nach Satteltyp und Hersteller unterschiedlich; deshalb sollte man den vorhandenen Sattel ausmessen.",
+        "evidence_text": "Pony-, Vielseitigkeits- und Dressurgrößen sind je nach Satteltyp und Hersteller unterschiedlich; deshalb sollte man den vorhandenen Sattel ausmessen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Krämer – Pony-Schabracken",
+        "source_url": "https://www.kraemer.at/Themen/Zubehoer-Pony-Fohlen/Pony-Schabracken",
+        "evidence_text_sha256": "7105316d5162428c642a3bd7f65a8d1b225f07102ac9532d312dbfe2fa5e7a59",
+        "statement": "Bei Ponysätteln mit etwa 15 bis 16 Zoll nennt Krämer Pony-Schabracken als Orientierung und empfiehlt, zur Sattellänge rund sechs Zentimeter hinzuzurechnen.",
+        "evidence_text": "Bei Ponysätteln mit etwa 15 bis 16 Zoll nennt Krämer Pony-Schabracken als Orientierung und empfiehlt, zur Sattellänge rund sechs Zentimeter hinzuzurechnen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "HKM – Schabracke Samantha Größentabelle",
+        "source_url": "https://www.hkm-sports.com/de/15004.html",
+        "evidence_text_sha256": "dec05769f87cd080e0761e53dd915f70edb3f0481e930e09b8dfcd18dfa3729a",
+        "statement": "Die HKM-Größentabelle zeigt zum Beispiel unterschiedliche Maße für Pony-Vielseitigkeit, Pony-Dressur sowie Dressur- und Springvarianten.",
+        "evidence_text": "Die HKM-Größentabelle zeigt zum Beispiel unterschiedliche Maße für Pony-Vielseitigkeit, Pony-Dressur sowie Dressur- und Springvarianten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Krämer – Pony-Schabracken",
+        "source_url": "https://www.kraemer.at/Themen/Zubehoer-Pony-Fohlen/Pony-Schabracken",
+        "evidence_text_sha256": "09c5c67395974c2ad9410cb05b3baa0266e2641cf12dbf1dfb246ff9fb5eb839",
+        "statement": "Eine zu große Schabracke kann Falten werfen und zu Reibung führen; eine zu kleine kann unter dem Sattelrand enden.",
+        "evidence_text": "Eine zu große Schabracke kann Falten werfen und zu Reibung führen; eine zu kleine kann unter dem Sattelrand enden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/",
+        "anchor": "Sattel und Zubehör",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schabracken-beratung/",
+        "anchor": "Beratung zu Schabracken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schabracken-faq/",
+        "anchor": "FAQ zu Schabracken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schabracken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schabracke",
+      "Sattel",
+      "Größe",
+      "Pony",
+      "Dressur",
+      "Vielseitigkeit",
+      "Widerrist"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Eine scheinbar feste Größentabelle würde unterschiedliche Herstellermaße und Sattelformen irreführend gleichsetzen; die Maßkontrolle am konkreten Sattel ist zuverlässiger."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
