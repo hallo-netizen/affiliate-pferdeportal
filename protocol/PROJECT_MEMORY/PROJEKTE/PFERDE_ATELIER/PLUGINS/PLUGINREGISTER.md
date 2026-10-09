@@ -33,7 +33,7 @@ Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobach
 | Plugin | Real beobachtet 30.09.2026 | Aktivstatus | Zuständigkeit / Hinweis |
 |---|---:|---|---|
 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.578** | aktiv | DESIGN; aktuellen Fachstand dort prüfen |
-| Affiliate-Zentrale (Portal-kompatibel) | **6.72.170** | aktiv | AFFILIATE; WordPress-Uploadvergleich 01.10.2026 zeigt `Aktuell 6.72.170`. Ein hochgeladenes 6.72.169-Paket war veraltet und wurde verworfen. Technisch freigegeben ist **6.72.171**; Installation/Versions-Readback noch offen. |
+| Affiliate-Zentrale (Portal-kompatibel) | **6.72.170 letzter expliziter Live-Versionsreadback** | aktiv | AFFILIATE; kein neuerer Live-Versionsreadback wird erfunden. Technisch zuletzt vollständig RELEASED: **6.72.210**. Aktueller technischer Kandidat: **6.72.211**, lokal hart PASS, `release_allowed=false`, exakter WordPress/MariaDB-Gate offen. |
 | Performance Diagnose Safe | **2.3.0** | aktiv | GEMEINSAM / Performance; passive No-Filter-Diagnose |
 | Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
 | Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
@@ -85,7 +85,7 @@ Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorie
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.170 letzter expliziter Versions-Readback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.171**, Installation/Readback offen; Performance-A-B + Full Gate PASS | `../AFFILIATE/START_HERE.md` |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.170 letzter expliziter Live-Versionsreadback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.210**; aktueller Kandidat **6.72.211** lokal PASS / WordPress-MariaDB OPEN / nicht freigegeben | `../AFFILIATE/START_HERE.md` |
 
 ## BILD
 
