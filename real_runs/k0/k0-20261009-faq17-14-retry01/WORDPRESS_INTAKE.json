@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "striegel-faq",
+      "plan_slot": "7887fe7b53d772813061ad27e8aa70095779d88ea559a9e40e62e6e60927a325",
+      "target_keyword": "Wie striegelt man Pferde am besten",
+      "title": "Wie striegelt man Pferde am besten?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "4d526292978825e584824322bb8edcd965412e071aff06575a77826f2f1c7fdc"
+}
