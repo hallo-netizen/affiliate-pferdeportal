@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-08
-STATUS: V1.14.3 RULE16 VISIBLE FULL LOCAL HARD PASS / 1723 TARGETS / IDEMPOTENCE 0 WRITES / LIVE-DRY-RUN PENDING
+STATUS: V1.14.3 FULL LOCAL HARD PASS + LIVE DRY-RUN PASS / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
 
 ## Plugin
 
@@ -579,12 +579,28 @@ Profil SHA-256:
 Evidence:
 `SEO_KATEGORIEN/HD001_V1_14_3_RULE16_VISIBLE_FULL_LOCAL_HARDPASS_20261008.json`
 
+## V1.14.3 LIVE-DRY-RUN – PASS
+
+Live read-only result:
+- 1.293 CREATE;
+- 430 UPDATE;
+- 27 ARCHIVE;
+- 0 ADOPT;
+- 1.723 target objects;
+- 0 Provider;
+- 0 Writes;
+- exact local migration match.
+
+The embedded frontend readback is still bound to the old V1.14.1 live revision and is therefore PRE-SYNC evidence only.
+
+Evidence:
+`SEO_KATEGORIEN/HD001_V1_14_3_LIVE_DRYRUN_PASS_20261009.json`
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_3_LIVE_DRYRUN_PENDING`
+`HD001_V1_14_3_LIVE_SYNC_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.14.3 installieren und genau einen read-only Live-Dry-Run im Finalen Zielbaum ausführen.
-JSON-Readback prüfen.
-Kein Sync vorher.
+Synchronize the accepted V1.14.3 target exactly once, then download and verify the post-sync JSON.
+No second run before post-sync verification.
