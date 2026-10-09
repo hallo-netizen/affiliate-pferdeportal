@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-08
-STATUS: FACH-SOLLPROFIL FROZEN / TECHNISCHER OBJEKTPLAN + V1.14.3 FULL LOCAL HARD PASS / 1723 ZIELOBJEKTE / 1292 CONTENT-KATEGORIEN / LIVE-DRY-RUN PENDING / KEIN WORDPRESS-WRITE
+STATUS: FACH-SOLLPROFIL FROZEN / V1.14.3 FULL LOCAL HARD PASS + LIVE DRY-RUN PASS / 1723 ZIELOBJEKTE / 1292 CONTENT-KATEGORIEN / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
 
 ## Ziel
 
@@ -1226,15 +1226,44 @@ Profil SHA-256:
 0 Provider-Aufrufe.
 0 WordPress-Writes in der lokalen Prüfung.
 
+## V1.14.3 LIVE-DRY-RUN – PASS
+
+Beleg:
+`HD001_V1_14_3_LIVE_DRYRUN_PASS_20261009.json`
+
+Live read-only:
+- Plugin 1.14.3;
+- valid=true / errors=[];
+- 855 Identitäten / 332 CORE / 523 Editorial-Finder;
+- 1.737 Logikknoten / 1.723 physische Zielobjekte;
+- **1.293 CREATE + 430 UPDATE + 27 ARCHIVE + 0 ADOPT**;
+- exakt identisch zum lokal erwarteten V1.14.3-Migrationsdelta;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes.
+
+Archive:
+- 22 EDITORIAL_TOPIC;
+- 5 ALIAS_ONLY;
+- **0 HOBBY_HUB-Archive**.
+
+Der im Export enthaltene `sync_state` und `frontend_readback` gehören noch zur alten live synchronisierten V1.14.1-Revision mit 457 Zielobjekten.
+Der Frontend-Fehler `HEADER_BLOCK_FILTER_NOT_CANONICAL,HEADER_LEGACY_LEAK` ist damit ein PRE-SYNC-Befund des alten Stands, kein V1.14.3-Post-Sync-Ergebnis.
+Nach dem freigegebenen Sync ist der V1.14.3-Frontend-/Header-Readback zwingend erneut zu prüfen.
+
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1_14_3_LIVE_DRYRUN_PENDING`
+`HD001_V1_14_3_LIVE_SYNC_PENDING`
 
 ## EXAKT EINE NEXT ACTION
 
-V1.14.3 installieren → Kategorien → Finaler Zielbaum → **genau einen read-only Live-Dry-Run** ausführen → JSON herunterladen und gegen den tatsächlichen Live-Bestand prüfen.
+Den bereits akzeptierten V1.14.3-Zielbaum **genau einmal synchronisieren**.
+Danach sofort den neuen Post-Sync-JSON-Readback herunterladen und prüfen.
 
-Vor dieser Prüfung:
-- kein Sync;
-- kein weiterer Plugin-Fix;
-- kein WordPress-Write.
+Erwartung nach Sync:
+- 1.723/1.723 Readback COMPLETE;
+- aktuelle V1.14.3-Revision;
+- Frontend valid=true;
+- Header 102;
+- lokale Welt-Kinder 7 / 11 / 11 / 5 / 10 / 7 / 8 / 8.
+
+Kein zweiter Lauf vor Prüfung des Post-Sync-JSON.
