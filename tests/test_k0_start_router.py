@@ -74,6 +74,15 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("control/startmaster0107/**",text)
         self.assertIn("keine K0-Auftrags- oder Batch-Autorität",text)
 
+    def test_after_intake_continues_same_run_without_legacy_lookup(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("unmittelbar nächste Schritt",text)
+        self.assertIn("AUTHORING_CONTEXT.json",text)
+        self.assertIn("keine** alten Aufträge".replace("keine**","keine"),text.replace("**",""))
+        self.assertIn("Testanbindungen",text)
+        self.assertIn("control/startmaster0107/**",text)
+        self.assertIn("nicht überschrieben",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
@@ -99,6 +108,9 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertTrue(goal["hard_rules"]["final_batch_reassembly_required"])
         self.assertTrue(goal["hard_rules"]["final_batch_order_must_match_input"])
         self.assertTrue(goal["hard_rules"]["startmaster0107_as_k0_assignment_authority_forbidden"])
+        self.assertEqual(cur["work_binding"]["start_mechanism"]["after_each_intake"],"RESEARCH_THEN_WRITE_AUTHORING_CONTEXT_IN_SAME_RUN")
+        self.assertFalse(cur["work_binding"]["start_mechanism"]["legacy_release_lookup_allowed"])
+        self.assertTrue(cur["work_binding"]["start_mechanism"]["resume_identical_current_intake_at_first_missing_artifact"])
 
 if __name__=="__main__":
     unittest.main()
