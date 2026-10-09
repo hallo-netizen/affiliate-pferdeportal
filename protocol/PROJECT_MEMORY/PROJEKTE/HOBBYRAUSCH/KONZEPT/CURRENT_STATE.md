@@ -528,3 +528,122 @@ Zuerst:
 6. Magazin-Kachelstruktur parallel als Startbestand ausarbeiten;
 7. erst danach neues Sollprofil und technische Umsetzung.
 
+
+## KONKRETER STARTPILOT 2.7 – 10 HOBBY_HUBS
+
+Der Pilot deckt unterschiedliche Hobbytypen/Welten ab und verwendet den realen aktuellen Bestandsbaum:
+
+1. Buchbinden
+2. Balance Board
+3. Glasmalerei
+4. Lasergravieren
+5. Fledermausbeobachtung
+6. Hydrokultur
+7. Riffaquaristik
+8. Briefmarken sammeln
+9. Geocaching
+10. Imkerei
+
+### Pilotregel
+
+Für jeden der 10:
+- vorhandene Content-Kategorien unverändert als Ausgangspunkt übernehmen;
+- semantisch prüfen, welche universellen Nutzerbedürfnisse bereits erfüllt sind;
+- niemals einen vorhandenen guten Leaf nur für ein Standardschema ersetzen;
+- fehlendes Einstieg & Grundlagen ergänzen;
+- fehlendes FAQ ergänzen;
+- Ausrüstung & Kosten ergänzen, wenn nach Abzug bestehender Leafs mindestens 3 eigenständige Beiträge übrig bleiben;
+- erfahrene Nutzer müssen über bestehende Fach-Leafs oder einen zusätzlichen Vertiefungs-Leaf bedient werden;
+- weitere hobbyspezifische Leafs nur ab mindestens 3 eigenständigen Beitragsintentionen;
+- DataForSEO liefert konkrete Fragen, Keywords, Clustering und mögliche zusätzliche Leaf-Kandidaten;
+- abschließend echter Browser-/Theme-Check, nicht nur interner Renderer.
+
+### Erwartete Lücken im Pilot – vor DataForSEO
+
+Buchbinden:
+- Bestand deckt Einstieg, Ausrüstung, Material, Techniken/Praxis bereits ab;
+- sicher fehlend: FAQ;
+- Kosten innerhalb Ausrüstung prüfen;
+- Vertiefung durch Techniken & Praxis bereits grundsätzlich abgedeckt.
+
+Balance Board:
+- Bestand: Board & Rolle, Grundbalance, Training & Sicherheit, Tricks & Übungen;
+- ergänzen: Einstieg & Grundlagen, FAQ;
+- Ausrüstung & Kosten separat prüfen;
+- Vertiefung bereits durch Training/Tricks abgedeckt.
+
+Glasmalerei:
+- Bestand ist stark fachtechnisch;
+- ergänzen: Einstieg & Grundlagen, FAQ;
+- Ausrüstung & Kosten separat prüfen;
+- Vertiefung durch Farben/Finish/Fixieren/Vorbereitung/Linien & Flächen abgedeckt.
+
+Lasergravieren:
+- Einstieg & Geräte ist vorhanden;
+- ergänzen: FAQ;
+- Kosten/Betrieb als separaten Bereich prüfen;
+- Vertiefung durch Leistungs-/Qualitäts-/Material-Leafs vorhanden.
+
+Fledermausbeobachtung:
+- Einstieg & Arten vorhanden;
+- ergänzen: FAQ;
+- Ausrüstung & Kosten gegen Bat-Detector/Dokumentation abgrenzen;
+- Orte & Saison bleibt eigener Fachbereich.
+
+Hydrokultur:
+- Einstieg & Systeme vorhanden;
+- ergänzen: FAQ;
+- Ausrüstung & Kosten gegen Blähton/Gefäße/Systeme abgrenzen;
+- Vertiefung über Nährlösung, Pflege, Probleme vorhanden.
+
+Riffaquaristik:
+- Einstieg & System vorhanden;
+- ergänzen: FAQ;
+- Ausrüstung & Kosten als starker separater Kandidat;
+- Vertiefung über Korallen, Licht/Strömung, Nährstoffe, Wasserwerte vorhanden.
+
+Briefmarken sammeln:
+- Einstieg & Sammelgebiete vorhanden;
+- ergänzen: FAQ;
+- Ausrüstung & Kosten gegen Aufbewahrung/Kaufen/Katalogisieren abgrenzen;
+- Vertiefung über Bestimmen, Zustand, Echtheit, Wert vorhanden.
+
+Geocaching:
+- Einstieg & Cachetypen vorhanden;
+- ergänzen: FAQ;
+- Ausrüstung & Kosten gegen GPS & Apps abgrenzen;
+- Vertiefung über Rätsel, Multis, eigene Caches/Regeln vorhanden.
+
+Imkerei:
+- Einstieg & Standort sowie Ausrüstung & Beute vorhanden;
+- ergänzen: FAQ;
+- Kosten/laufender Aufwand innerhalb oder neben Ausrüstung prüfen;
+- Vertiefung über Völkerführung, Schwarm/Königin, Gesundheit/Winter, Ernte vorhanden.
+
+## ZWEITE CORE-EBENE – KONKRETE 10ER-LÖSUNG ALS NÄCHSTES SOLL
+
+### Fertigen
+
+Aktuell 11 direkte Zielkinder.
+
+Bevorzugte Korrektur:
+- Metall + Schmuck wieder zu **Metall & Schmuck** als gemeinsame zweite Ebene bündeln;
+- die heutigen Hobby-Hubs aus beiden Ästen bleiben als eigene Hobbys darunter erhalten;
+- Begründung: aktuelle Bestände bilden zusammen einen überschaubaren, fachlich verwandten Werkstoff-/Schmuckbereich; dadurch sinkt Fertigen exakt von 11 auf 10, ohne Heimwerken unter einen falschen Materialast zu zwingen.
+
+Nicht bevorzugt:
+- Heimwerken künstlich unter Holz hängen;
+- Leder mit Textil nur aus Zahlenzwang zusammenwerfen;
+- fachlich unpassende Restkategorie erzeugen.
+
+### Technik
+
+Aktuell 11 direkte Zielkinder.
+
+Bevorzugte Korrektur:
+- RC-Boote, RC-Flug & Drohnen, RC-Fahrzeuge zu **RC & Modelltechnik** als gemeinsame zweite Ebene bündeln;
+- die heutigen RC-Hobby-Hubs direkt unter diesem gemeinsamen Ast behalten;
+- keine zusätzliche Zwischenebene nur für die drei alten Gruppen;
+- Ergebnis: Technik fällt von 11 auf 9 und besitzt noch einen freien Slot für spätere fachlich sinnvolle Erweiterung.
+
+Diese beiden Änderungen sind das fachliche Soll für die nächste Simulation, noch kein Live-Write.
