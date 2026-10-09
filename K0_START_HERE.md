@@ -36,6 +36,9 @@ Portalzuordnung automatisch.
 Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von Thema, Artikeltyp oder Kategorie:
 
 - der aktuell angehängte gültige Upload ist die einzige Auftragsidentität für den neu gestarteten Lauf;
+- **erste interne Startaktion:** exakt diesen Upload in einem frischen K0-Run als `WORDPRESS_INTAKE.json` binden; erst danach dürfen Recherche, Authoring oder Prüfungen des neuen Laufs beginnen;
+- der aktuelle Upload benötigt **keine zusätzliche Bereitstellung, Freigabe oder Übernahme als „aktueller Batch“** vor diesem Bindungsschritt;
+- vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
 - `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
 - ein terminaler Blocker ist nur gültig, wenn er **nach Bindung des aktuellen Uploads** aus genau diesem aktuellen Lauf/Gate stammt;
 - jeder neue Upload wird fachlich neu bewertet und neu recherchiert;
