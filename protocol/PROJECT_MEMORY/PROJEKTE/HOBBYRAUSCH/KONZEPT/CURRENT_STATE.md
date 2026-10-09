@@ -353,18 +353,20 @@ Neue Grundentscheidung:
 Direkte sichtbare Kinder einer Hauptwelt im Mega-Menü:
 **maximal 10**.
 
-Aktueller struktureller Prüfstand des zuletzt materialisierten Zielbaums:
+Aktueller sichtbarer Mega-Menü-Prüfstand des Live-Readbacks:
 - Gestalten 7;
-- Fertigen 11;
+- Fertigen 10;
 - Technik 11;
 - Forschen 5;
-- Pflanzen 10;
+- Pflanzen 9;
 - Tiere 7;
 - Bewegen 8;
 - Sammeln 8.
 
+Strukturelle Direktknoten wie Heimwerken oder Gärtnern können zusätzlich auf der Welt-Landingpage existieren; sie zählen nicht als zusätzliche Mega-Menü-Zwischenkategorie.
+
 Folge:
-Fertigen und Technik müssen vor dem nächsten Zielbaum fachlich auf höchstens 10 direkte Mega-Menü-Kinder gebracht werden.
+Nur Technik muss vor dem nächsten Zielbaum fachlich von 11 auf höchstens 10 sichtbare Mega-Menü-Kinder gebracht werden.
 
 Keine Zusammenlegung nur aus Symmetriegründen. Aber die optische 10er-Grenze ist verbindlich.
 
@@ -520,7 +522,7 @@ Skurriles, Alter/Lebensphasen, Geschichten, Glossar, neue Trends, Vergleiche, Si
 Kein weiterer HD-001-Code-Fix.
 
 Zuerst:
-1. Fertigen und Technik auf maximal 10 direkte Mega-Menü-Kinder neu ordnen;
+1. Technik von 11 auf maximal 10 sichtbare Mega-Menü-Zwischenkategorien neu ordnen;
 2. 10 repräsentative Hobby-Hubs für den neuen Leaf-Standard auswählen;
 3. bestehende Leafs unverändert übernehmen;
 4. fehlende universelle Leafs ergänzen;
@@ -624,17 +626,11 @@ Imkerei:
 
 ### Fertigen
 
-Aktuell 11 direkte Zielkinder.
+Aktuell bereits **10 sichtbare Mega-Menü-Zwischenkategorien**. Kein Merge nötig.
 
-Bevorzugte Korrektur:
-- Metall + Schmuck wieder zu **Metall & Schmuck** als gemeinsame zweite Ebene bündeln;
-- die heutigen Hobby-Hubs aus beiden Ästen bleiben als eigene Hobbys darunter erhalten;
-- Begründung: aktuelle Bestände bilden zusammen einen überschaubaren, fachlich verwandten Werkstoff-/Schmuckbereich; dadurch sinkt Fertigen exakt von 11 auf 10, ohne Heimwerken unter einen falschen Materialast zu zwingen.
+Der strukturelle Direktknoten Heimwerken bleibt als eigener World-Landingpage-/Hobbyknoten erhalten und ist kein zusätzlicher Mega-Menü-Zwischenbereich.
 
-Nicht bevorzugt:
-- Heimwerken künstlich unter Holz hängen;
-- Leder mit Textil nur aus Zahlenzwang zusammenwerfen;
-- fachlich unpassende Restkategorie erzeugen.
+Die zuvor erwogene Zusammenlegung Metall + Schmuck wird deshalb **nicht** als Soll verfolgt.
 
 ### Technik
 
