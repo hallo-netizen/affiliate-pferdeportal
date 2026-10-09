@@ -115,7 +115,7 @@ DataForSEO-Auftrag:
 Konzeptaudit:
 `HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
 
-## Rollen- und Größenlogik
+## Rollen- und Größenlogik – CURRENT 2.7
 
 Publikationsrollen:
 - ORIENTATION_UNIVERSE;
@@ -125,17 +125,23 @@ Publikationsrollen:
 - FINDER_ONLY;
 - OUT_OF_SCOPE.
 
-Leaf:
-- unter 4 zusammenlegen / keine eigene Leaf-Kategorie;
-- 4 Grenzfall;
-- 5–12 Idealbereich;
-- 13–14 oberhalb des Idealbereichs / prüfen;
-- ab etwa 15 Teilung prüfen.
+Unterste Content-Kategorie:
+- mindestens 3 eigenständige sinnvolle Beitragsintentionen = startfähig;
+- 4+ = klar tragfähig;
+- Synonyme/Formulierungsvarianten zählen nicht mehrfach;
+- keine künstliche Gesamtobergrenze je HOBBY_HUB;
+- bestehende sinnvolle Leafs bleiben erhalten.
 
-Hobby-Hub:
-- 3–6 Zielbereich;
-- 7–9 oberhalb des typischen Bereichs / prüfen;
-- ab etwa 10 Macro-/Split-Prüfung.
+HOBBY_HUB:
+- Pflichtabdeckung Einstieg & Grundlagen;
+- Pflichtabdeckung FAQ;
+- Ausrüstung & Kosten als eigener Leaf, sobald 3 eigenständige Beiträge möglich sind;
+- Vertiefung/Fachwissen muss sichtbar abgedeckt sein, aber vorhandene Fach-Leafs dürfen dies bereits erfüllen;
+- zusätzliche hobbiespezifische Leafs ab 3 eigenständigen Beitragsintentionen.
+
+Zweite CORE-/Mega-Menü-Ebene:
+- maximal 10 direkte sichtbare Kinder pro Welt;
+- Fertigen und Technik liegen im aktuellen Zielbaum bei 11 und müssen vor dem nächsten Sollprofil neu geordnet werden.
 
 ## DataForSEO-Vertrag
 
@@ -144,7 +150,10 @@ DataForSEO darf:
 - Primärkeyword;
 - Synonyme;
 - Longtail-Tiefe;
-- Keyword-/Intent-Überschneidung
+- Keyword-/Intent-Überschneidung;
+- konkrete FAQ-/Frageintents;
+- zusätzliche Leaf-Kandidaten unter einem bereits feststehenden HOBBY_HUB;
+- Clustering und Deduplizierung dieser Leaf-/Artikelkandidaten
 
 belegen bzw. innerhalb definierter Kandidaten optimieren.
 
@@ -991,33 +1000,28 @@ Autoritativ:
 - 3-Säulen-Konzept mit Sichtbarkeits-/Hub-Regel;
 - Audit: `HD001_BALANCED_VISIBLE_LEVELS_AUDIT_20261008.json`.
 
-Verbindlich:
-- jede vorhandene kanonische Ebene ist im Drill-down sichtbar;
+Historischer Stand der Rule-1.6-Phase, durch Zielvertrag 2.7 für die Produktionspraxis ersetzt:
+- jede vorhandene kanonische Ebene war im Drill-down sichtbar;
 - Welt → Zwischenbereich → Hobby → Content-Kategorie → Beiträge;
-- globale Headernavigation darf klein bleiben, darf aber keine vorhandene Kindebene auf den Landingpages verstecken;
-- bis etwa 10–11 fachlich klare Zwischenbereiche pro Welt sind zulässig;
-- keine künstliche Verdichtung nur für eine dünne Navigation;
-- keine leeren Symmetrieäste;
-- HOBBY_HUB benötigt 3–6 tragfähige sichtbare Content-Kategorien;
-- jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen;
-- reguläre HOBBY_HUB-Beiträge nicht direkt unter dem Hobby.
+- damalige Prüfgröße 10–11 Zwischenbereiche pro Welt;
+- damalige Prüfgröße 3–6 Content-Kategorien je HOBBY_HUB;
+- damalige Idealgröße 5–12 Beitragsintentionen je Leaf.
+Diese Zahlen bleiben historische Evidence und sind keine aktuelle Produktionsgrenze mehr.
 
 Aktueller V1.14.1/1.14.2-Zielbaum erfüllt diese neue verbindliche Regel NICHT vollständig:
 - aktive Zwischenbereiche: 6 / 9 / 9 / 5 / 9 / 6 / 8 / 8;
 - nur Buchbinden besitzt derzeit die Content-Kategorieebene;
 - deshalb ist V1.14.2 nicht mehr als Sync-Ziel freigegeben.
 
-## AUSGEWOGENE WELT-/ZWISCHENSTRUKTUR – FACHLICH GEPRÜFT
+## HISTORISCH: AUSGEWOGENE WELT-/ZWISCHENSTRUKTUR – RULE-1.6-PHASE
 
 Beleg:
 `HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json`
 
-Wichtig:
-- alle vorhandenen Ebenen bleiben im Drill-down sichtbar;
-- keine künstliche Maximalzahl; bis etwa 10–11 Zwischenbereiche zulässig;
-- keine leeren Symmetrieäste;
-- Welt-/Zwischenstruktur ist fachlich als Arbeitsziel geprüft;
-- HOBBY_HUB benötigt weiterhin 3–6 sichtbare Content-Kategorien mit je ideal 5–12 eigenständigen Beitragsintentionen.
+Historische Rule-1.6-Evidence:
+- alle vorhandenen Ebenen sollten im Drill-down sichtbar sein;
+- damals galten bis etwa 10–11 Zwischenbereiche und 3–6 Leafs/5–12 Intents als Prüfgrößen.
+Diese Größen sind durch Zielvertrag 2.7 ersetzt. Aktuell gilt max. 10 auf der zweiten Mega-Menü-Ebene und mindestens 3 eigenständige Beiträge pro Content-Leaf ohne künstliche Leaf-Gesamtobergrenze.
 
 Korrigierte Rollenbasis:
 - Batch 003 enthielt einen Zähl-/Rollenfehler;
@@ -1137,7 +1141,7 @@ Gesamter Rule-1.6-Recheck-Evidence-Stand:
 - 0 Capacity-Verstöße;
 - 0 WordPress-Writes.
 
-## GLOBALER CORE-RECHECK – ABGESCHLOSSEN
+## HISTORISCHER GLOBALER CORE-RECHECK – RULE 1.6 ABGESCHLOSSEN
 
 Autoritative Abschluss-Evidence:
 - `HD001_GLOBAL_CORE_359_RULE16_FINAL_AUDIT_20261008.json`;
@@ -1154,9 +1158,10 @@ Endstand:
 - 65 aktive Zwischenbereiche in 8 Welten;
 - 279/279 HOBBY_HUBs besitzen eine sichtbare Content-Kategorieebene;
 - 1.292 sichtbare Content-Kategorien;
-- jeder Hub 3–6 Leafs;
-- jede materialisierte Leaf 5–12 eigenständige Intents;
-- 0 Capacity-Verstöße.
+- damaliger Rule-1.6-Stand: jeder Hub 3–6 Leafs;
+- damaliger Rule-1.6-Stand: jede materialisierte Leaf 5–12 eigenständige Intents;
+- damaliger Rule-1.6-Stand: 0 Capacity-Verstöße.
+Diese Capacity-Regel ist historische Evidence und seit Zielvertrag 2.7 keine aktuelle Produktionsgrenze.
 
 Korrigierte späte Evidence:
 - Batch 002: Mikrocontroller-Projekte = ORIENTATION/MACRO, CB-Funk und SDR je 5 Leafs;
@@ -1319,13 +1324,13 @@ Evidence:
 Wichtig:
 Der exportierte Live-Readback speichert den tatsächlich zurückgelesenen Titel des alten Page-Name-Fehlers nicht. Deshalb wird kein exakter Live-Rückgabestring behauptet. Lokal wurde jedoch derselbe Fehlerknoten nach exakt denselben 39 Readbacks mit dem fehlenden Page-Entity-Normalisierungspfad reproduziert.
 
-## ERSTER OFFENER BLOCKER
+## HISTORISCHER BLOCKER – GESCHLOSSEN
 
 `HD001_V1_14_4_LIVE_INSTALL_AND_SYNC_PENDING`
 
-## EXAKT EINE NEXT ACTION
+## HISTORISCHE NEXT ACTION – ERLEDIGT
 
-V1.14.4 installieren → Live-Dry-Run prüfen → genau EINEN kontrollierten Sync ausführen → vollständigen Post-Sync-Readback herunterladen und gegen Zielvertrag 2.6 / Rules 1.6 prüfen. Kein zweiter Sync vor dieser Prüfung.
+Der damalige V1.14.4-Live-Schritt ist durch den späteren V1.14.8-Live-Lauf überholt. Nicht mehr als aktuelle Handlungsanweisung verwenden.
 
 
 ## V1.14.8 LIVE – TECHNISCH COMPLETE, FACHLICH NICHT ABGENOMMEN
