@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-09
-STATUS: FACHKONZEPT + KATEGORIEREGELN 2.6/1.6 ABGESCHLOSSEN / FACH-SOLLPROFIL FROZEN / OPERATIVE HD-001-FORTSETZUNG AUSSCHLIESSLICH ÜBER SEO_KATEGORIEN-CURRENT
+STATUS: FACHKONZEPT 2.7 AKTIV / STARTFÄHIGE CONTENT-EBENE + FLEXIBLES MAGAZIN / HD-001-TECHNIK BIS ZUM NEUEN FACH-SOLL EINGEFROREN
 
 ## Rolle
 
@@ -330,4 +330,201 @@ Dort stehen aktueller Live-Status, erster Blocker und exakt eine NEXT ACTION.
 
 Keine weitere Konzeptänderung.
 Für HD-001 direkt der zuständigen SEO-Kategorien-Current folgen.
+
+
+
+## NEUAUSRICHTUNG 2026-10-09 – STARTFÄHIGE CONTENT-EBENE
+
+### Ausgangspunkt
+
+Die technische Zielbaum-Arbeit hat bewiesen, dass sich ein großer WordPress-Zielbaum deterministisch schreiben, lesen, zurückrollen und idempotent halten lässt.
+
+Die sichtbare Fachstruktur war trotzdem nicht ausreichend nutzerorientiert:
+- viele Hobby-Hubs hatten nur individuell abgeleitete Fach-Leafs;
+- universelle Nutzerbedürfnisse wie Einstieg, FAQ und Ausrüstung/Kosten waren nicht systematisch abgedeckt;
+- ein interner Frontend-Readback konnte PASS melden, obwohl der sichtbare reale Seitenpfad teilweise nicht das erwartete Ergebnis zeigte;
+- die bisherige 3–6-Leaf-Zielgröße förderte unnötiges Zusammenfassen.
+
+Neue Grundentscheidung:
+**Nicht die perfekte Endtaxonomie vorab bauen. Einen fachlich sauberen Startzustand bauen, sichtbar prüfen und später normal weiterentwickeln.**
+
+### Harte Designregel – zweite CORE-Ebene
+
+Direkte sichtbare Kinder einer Hauptwelt im Mega-Menü:
+**maximal 10**.
+
+Aktueller struktureller Prüfstand des zuletzt materialisierten Zielbaums:
+- Gestalten 7;
+- Fertigen 11;
+- Technik 11;
+- Forschen 5;
+- Pflanzen 10;
+- Tiere 7;
+- Bewegen 8;
+- Sammeln 8.
+
+Folge:
+Fertigen und Technik müssen vor dem nächsten Zielbaum fachlich auf höchstens 10 direkte Mega-Menü-Kinder gebracht werden.
+
+Keine Zusammenlegung nur aus Symmetriegründen. Aber die optische 10er-Grenze ist verbindlich.
+
+### Unterste Content-Ebene – neue Startlogik
+
+Bestehende fachlich sinnvolle Leafs bleiben bestehen.
+
+Zusätzlich wird jeder HOBBY_HUB auf vier universelle Nutzerbedürfnisse geprüft:
+
+1. **Einstieg & Grundlagen – Pflicht als eigene sichtbare Kategorie.**
+2. **FAQ / Häufige Fragen – Pflicht als eigene sichtbare Kategorie.**
+3. **Ausrüstung & Kosten – Standardkategorie, sobald mindestens 3 eigenständige Beiträge möglich sind; sonst sinnvoll mit Einstieg zusammenführen.**
+4. **Praxis & Vertiefung – Pflicht als Nutzerabdeckung.** Keine künstliche Doppelung, wenn vorhandene Fach-Leafs wie Training, Tricks, Techniken, Projekte oder Spezialmethoden erfahrene Nutzer bereits bedienen.
+
+Danach kommen hobbiespezifische Leafs hinzu, z. B.:
+Training, Übungen, Tricks, Techniken, Sicherheit/Gefahren, Regeln, Herausforderungen, Pflege, Fehler/Lösungen, Projekte, Materialien, Orte/Touren, Wettbewerbe, Bestimmen/Echtheit/Wert.
+
+Neue Mindestschwelle:
+**3 eigenständige sinnvolle Beitragsintentionen reichen für einen startfähigen Leaf.**
+4+ = klar tragfähig.
+Keine Synonymzählung.
+
+Es gibt auf dieser letzten Ebene keine künstliche Gesamtobergrenze mehr. 7, 8, 9 oder mehr sinnvolle Leafs sind zulässig.
+
+### Abgrenzung Einstieg vs. FAQ
+
+Einstieg & Grundlagen:
+- zusammenhängende Erklärartikel;
+- Voraussetzungen;
+- erste Schritte;
+- Grundbegriffe;
+- Einstiegshürden;
+- typische Anfängerfehler.
+
+FAQ:
+- konkrete Frageintents;
+- bevorzugt aus DataForSEO/PAA/Longtails;
+- jede Frage nur dann eigener Artikel, wenn sie einen eigenständigen Such-/Nutzerintent besitzt;
+- kein Doppelowner: eine große Grundlagenfrage lebt als Hauptartikel in Einstieg und wird aus FAQ verlinkt.
+
+### Rolle von DataForSEO
+
+DataForSEO wird vereinfacht genutzt.
+
+Es darf auf der letzten Ebene:
+- echte Frageintents sammeln;
+- Leaf-Kandidaten unter einem feststehenden Hobby vorschlagen;
+- Keywords/Longtails clustern;
+- Bezeichnungen und Nachfrage prüfen;
+- Überschneidungen/Dubletten sichtbar machen.
+
+Es darf weiterhin nicht:
+- Hauptwelt oder oberen Parent bestimmen;
+- ein Hobby eigenmächtig in CORE promoten;
+- eine zweite konkurrierende Taxonomie erzeugen.
+
+### Start statt Endlosmodell
+
+Vor Massenausrollung werden 10 repräsentative HOBBY_HUBs vollständig nach der neuen Regel aufgebaut und **im echten Browser/Theme** geprüft.
+
+Erst wenn dort:
+- alle Leaf-Kacheln sichtbar sind;
+- Einstieg/FAQ/Ausrüstung/Vertiefung logisch getrennt sind;
+- bestehende Fachkategorien erhalten sind;
+- keine Doppelungen entstehen,
+
+wird auf die restlichen Hubs skaliert.
+
+## MAGAZIN – NEUES PARALLELKONZEPT
+
+Das Magazin ist frei von der Mega-Menü-10er-Grenze. Es wird über Kacheln, organische Suche und interne Einstiege erschlossen.
+
+Startfähige Kachelstruktur:
+1. Hobby finden
+2. Hobby-Ideen & Inspiration
+3. Ungewöhnliche & skurrile Hobbys
+4. Neue Hobbys & Trends
+5. Hobby-Porträts
+6. Menschen & Geschichten
+7. Geschichte & Herkunft
+8. Wissen & Glossar
+9. Vergleiche & Alternativen
+10. Zeit, Budget & Platz
+11. Alter & Lebensphasen
+12. Saison, drinnen & draußen
+
+Die Anzahl darf später wachsen.
+
+Valide schräge/Nischenthemen wie Treibholz sammeln werden nicht gelöscht:
+- kanonische Identität bleibt erhalten;
+- kein erzwungener CORE-Platz;
+- redaktionelle Nutzung im Magazin/Hobbyfinder;
+- ein primärer SEO-Owner, zusätzliche Einstiege nur als View/Relation.
+
+Das Magazin darf sowohl Inspiration als auch echte Informationssuche bedienen:
+Skurriles, Alter/Lebensphasen, Geschichten, Glossar, neue Trends, Vergleiche, Situationen, Saison, Budget, Platz, Finder-Inhalte und Hobby-Porträts.
+
+## RETROSPEKTIVE HD-001 – FEHLER, IRRWEGE UND VERBINDLICHE LEHREN
+
+### Was funktioniert hat
+- stabile Hobby-/Node-Identitäten;
+- Dry-Run vor Writes;
+- Rollback;
+- Idempotenz;
+- Schutz vor Fremdobjekten;
+- Alias-/Legacy-Migration;
+- Trennung CORE / EDITORIAL / DIRECTORY;
+- vollständiger Soll/Ist-Readback als technische Kontrolle.
+
+### Was unnötig Zeit gekostet hat
+
+1. **Technik vor sichtbarem Nutzerziel.**
+   Der Zielbaum wurde technisch immer genauer, bevor die Frage abschließend beantwortet war: Was soll ein Mensch auf einer Hobbyseite tatsächlich sehen?
+
+2. **Zu abstrakte Content-Capacity-Regeln.**
+   5–12 Intents und 3–6 Leafs wurden zu stark als Strukturziel verwendet. Dadurch wurden offensichtliche universelle Bereiche nicht konsequent angelegt.
+
+3. **DataForSEO als zu strenges Gate.**
+   Provider-Evidence wurde zeitweise mit fachlicher Content-Existenz verwechselt. Künftig dient DataForSEO auf der Leaf-Ebene als Recherche-/Clustering-/Validierungswerkzeug, nicht als alleinige Existenzberechtigung.
+
+4. **Interner Renderer mit realem Frontend verwechselt.**
+   Ein interner 279/279-PASS beweist nicht automatisch die tatsächliche sichtbare Ausgabe durch Theme/Template. Künftig gehört ein echter Browser-/Theme-Pilot vor jeder Massenausrollung zur Fachabnahme.
+
+5. **Zu viele Versionsschritte vor einem visuellen Pilot.**
+   Mehrere technische Korrekturen wurden nacheinander gebaut, obwohl 10 vollständig fertig geprüfte reale Hobbyseiten früher gezeigt hätten, ob das Fachmodell überhaupt überzeugt.
+
+6. **Migration und Fachkonzept gleichzeitig verändert.**
+   Legacy-/Alias-/Rollback-Probleme und die eigentliche Kategorienlogik wurden zu eng miteinander gekoppelt. Künftig: erst Fach-Soll festlegen, dann Migration exakt darauf anwenden.
+
+7. **Die Mega-Menü-Grenze war nicht früh genug harte Anforderung.**
+   Für die zweite CORE-Ebene gilt künftig von Anfang an max. 10 sichtbare Kinder.
+
+8. **Magazin zu stark als Restablage gedacht.**
+   EDITORIAL ist eine eigenständige organische Informations-/Inspirationssäule und wird künftig parallel konzipiert, nicht erst nach CORE als Auffangbecken.
+
+### Verbindliche Vorgehensweise für kommende Portale
+
+1. sichtbares Nutzerziel zuerst;
+2. feste Designgrenzen sofort dokumentieren;
+3. vorhandenen Bestand erhalten;
+4. universelle Nutzerbedürfnisse definieren;
+5. fachliche individuelle Kategorien ergänzen;
+6. Mindestbestand 3 echte Beiträge pro Leaf;
+7. DataForSEO zur Recherche/Validierung;
+8. 10 reale Seiten komplett als Pilot;
+9. echter Browser-/Theme-Check;
+10. erst danach Automatisierung und Massensync;
+11. keine neue Plugin-Version für jeden Einzelfehler, sondern gebündelte Ursachenbehebung;
+12. Technik gilt erst dann als fertig, wenn das sichtbare Ergebnis fachlich stimmt.
+
+## NÄCHSTE FACHLICHE AKTION
+
+Kein weiterer HD-001-Code-Fix.
+
+Zuerst:
+1. Fertigen und Technik auf maximal 10 direkte Mega-Menü-Kinder neu ordnen;
+2. 10 repräsentative Hobby-Hubs für den neuen Leaf-Standard auswählen;
+3. bestehende Leafs unverändert übernehmen;
+4. fehlende universelle Leafs ergänzen;
+5. DataForSEO-Fragen und zusätzliche hobbiespezifische Leaf-Kandidaten prüfen;
+6. Magazin-Kachelstruktur parallel als Startbestand ausarbeiten;
+7. erst danach neues Sollprofil und technische Umsetzung.
 
