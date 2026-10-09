@@ -1370,8 +1370,9 @@ Autoritativ:
 Fassung 2.7.
 
 Kern:
-- zweite CORE-/Mega-Menü-Ebene max. 10 direkte sichtbare Kinder;
-- aktueller Zielbaum: Fertigen 11 und Technik 11 → vor nächstem Zielbaum neu ordnen;
+- sichtbare Mega-Menü-Zwischenebene max. 10 Kinder je Welt;
+- aktueller Live-Header: Fertigen 10, Technik 11; nur Technik muss vor dem nächsten Zielbaum reduziert werden;
+- strukturelle Direktknoten wie Heimwerken/Gärtnern können auf Landingpages zusätzlich existieren und zählen nicht als Mega-Menü-Zwischenkategorie;
 - unterste Content-Ebene ohne künstliche Gesamtobergrenze;
 - bestehende sinnvolle Leafs bleiben;
 - 3 eigenständige Beiträge reichen als startfähige Mindestkapazität;
@@ -1389,8 +1390,8 @@ Kern:
 Kein weiterer Plugin-Patch.
 
 Zuerst fachlich:
-1. Fertigen: Metall + Schmuck als gemeinsame zweite Ebene Metall & Schmuck prüfen/simulieren → 10 direkte Mega-Menü-Kinder;
-2. Technik: RC-Boote + RC-Flug & Drohnen + RC-Fahrzeuge als gemeinsame zweite Ebene RC & Modelltechnik prüfen/simulieren → 9 direkte Mega-Menü-Kinder;
+1. Fertigen bleibt mit 10 sichtbaren Mega-Menü-Zwischenkategorien unverändert;
+2. Technik: RC-Boote + RC-Flug & Drohnen + RC-Fahrzeuge als gemeinsame zweite Ebene RC & Modelltechnik prüfen/simulieren → 9 sichtbare Mega-Menü-Kinder;
 3. verbindlicher Pilot: Buchbinden, Balance Board, Glasmalerei, Lasergravieren, Fledermausbeobachtung, Hydrokultur, Riffaquaristik, Briefmarken sammeln, Geocaching, Imkerei;
 4. Bestands-Leafs erhalten;
 5. universelle Lücken nach Regel 2.7 ergänzen;
