@@ -679,3 +679,63 @@ Verbot bis zur Fachabnahme:
 
 Nächster technischer Auftrag entsteht erst aus dem fachlich abgenommenen 10-Hobby-Pilot nach Zielvertrag 2.7.
 
+
+
+## V1.14.9 – PILOT 2.7 DATAFORSEO BACKEND / LOCAL HARD PASS
+
+Zweck:
+- kein neuer Zielbaum;
+- kein Kategorienwrite;
+- ausschließlich read-only DataForSEO-Research für den festgelegten 10-Hobby-Pilot;
+- DataForSEO nur über den bestehenden WordPress-Backend-Client `APKW_DataForSEO`.
+
+Backend:
+`Kategorien → Pilot 2.7`
+
+Pilot:
+Buchbinden / Balance Board / Glasmalerei / Lasergravieren / Fledermausbeobachtung / Hydrokultur / Riffaquaristik / Briefmarken sammeln / Geocaching / Imkerei.
+
+Ablauf:
+- kostenlose Vorprüfung;
+- exakt 10 geplante Paid-Calls;
+- 1 `keyword_ideas`-Call je Hobby;
+- 5 Seeds je Hobby: Hobby / Anfänger / Ausrüstung / Kosten / Fragen;
+- max. 100 Provider-Ideen je Hobby;
+- bounded: 1 Paid-Call je AJAX-Schritt;
+- Export enthält normalisierte Keywords + Fragekandidaten;
+- 0 WordPress-/HivePress-Strukturwrites.
+
+Sicherheitsfreeze:
+`APKW_TARGET_TREE_MANUAL_ONLY = true`.
+Damit löst das Research-Plugin-Update bei aktuellem COMPLETE-Stand keinen neuen Target-Tree-Code-Upgrade-Sync aus.
+
+Artefakt:
+`HD001_V1.14.9_PILOT27_DATAFORSEO_READONLY_LOCAL_HARDPASS.zip`
+
+SHA-256:
+`09a8d4b5f8c213ff98b5ea3023ca8c9a6d8560ffa1a2db96f437896ff11eed26`
+
+Pilotprofil SHA-256:
+`9c1927ec4b1c98514c51a3bb1fa332d56d714185cd13a007999971c4e11bccc2`
+
+Lokale Abnahme:
+- Fresh-Unpack 34/34 PHP-Lint;
+- ZIP-Integrität PASS;
+- 10 Hobbys / 10 Calls PASS;
+- bounded 10-Schritt-Lauf PASS;
+- Idempotenz nach COMPLETE PASS;
+- Drift BLOCKED;
+- Providerfehler ohne Indexfortschritt PASS;
+- 9-Hobby-Profil BLOCKED;
+- 0 Strukturwrite-Funktionen im Pilotmodul;
+- Target-Revalidation bei Code-Update durch MANUAL_ONLY blockiert.
+
+Beleg:
+`HD001_PILOT27_DATAFORSEO_BACKEND_PLAN_20261009.md`
+
+LIVE:
+V1.14.9 noch nicht installiert; DataForSEO-Pilot noch nicht ausgeführt.
+
+NEXT ACTION:
+V1.14.9 installieren → Kategorien → Pilot 2.7 → kostenlose Vorprüfung → exakt 10 Calls bestätigen → COMPLETE → Pilot-Research-JSON herunterladen.
+Kein Zielbaum-/Kategorien-Sync vor Auswertung dieses JSON.
