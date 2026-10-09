@@ -96,15 +96,18 @@ Verbindlich:
 - die Begrenzung betrifft die Mega-Menü-/zweite CORE-Ebene, NICHT die unterste Content-Kategorieebene eines HOBBY_HUBs;
 - vorhandene fachlich gute Hobby- und Content-Knoten dürfen nicht nur wegen dieser Grenze gelöscht werden.
 
-Aktueller Prüfstand vor dem nächsten Zielbaum:
+Aktueller sichtbarer Mega-Menü-Prüfstand:
 - Gestalten 7;
-- Fertigen 11 → MUSS auf höchstens 10 neu geordnet werden;
+- Fertigen 10;
 - Technik 11 → MUSS auf höchstens 10 neu geordnet werden;
 - Forschen 5;
-- Pflanzen 10;
+- Pflanzen 9;
 - Tiere 7;
 - Bewegen 8;
 - Sammeln 8.
+
+Wichtig:
+Strukturelle Direktknoten wie Heimwerken oder Gärtnern können zusätzlich auf der jeweiligen Welt-Landingpage existieren, ohne als zusätzliche Mega-Menü-Zwischenkategorie zu zählen. Die 10er-Grenze ist eine Darstellungsgrenze des Mega-Menüs.
 
 ### Unterste Content-Kategorieebene
 
@@ -421,7 +424,7 @@ Situations-, Saison-, Alters-, Budget- oder Platzmerkmale dürfen zusätzlich al
 Nicht mehr auf Vollkommenheit warten.
 
 Reihenfolge:
-1. zweite CORE-Ebene auf maximal 10 direkte Kinder je Welt bringen;
+1. sichtbare Mega-Menü-Zwischenkategorien auf maximal 10 je Welt bringen; aktuell muss nur Technik von 11 reduziert werden;
 2. vorhandene Hobby-Leafs einfrieren, nicht ersetzen;
 3. 10 repräsentative Hobbys nach der neuen universell+individuell-Regel ergänzen;
 4. DataForSEO für konkrete Fragen, Keywords und zusätzliche Leaf-Kandidaten verwenden;
