@@ -1012,3 +1012,48 @@ UNVERÄNDERT:
 
 ERGEBNIS:
 Dokumentations-/Autoritätsabgleich PASS. Keine zweite aktuelle Statuswahrheit für den operativen SEO-/Kategoriepfad.
+
+
+---
+
+## PU-20261009-021 – HD-001 V1.14.3 Live-Dry-Run PASS / One Live Sync Released
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Live-read-only Abgleich + Abschluss-/Frischecheck. Keine Plugin-Codeänderung, keine neue Version, keine WordPress-Schreibaktion.
+
+LIVE-EVIDENCE:
+`SEO_KATEGORIEN/HD001_V1_14_3_LIVE_DRYRUN_PASS_20261009.json`
+
+ERGEBNIS:
+- Plugin 1.14.3;
+- Live-Dry-Run PASS / valid=true;
+- 855 kanonische Identitäten;
+- 332 CORE;
+- 523 Editorial/Finder;
+- 1.737 Logikknoten;
+- 1.723 physische Zielobjekte;
+- exakt 1.293 CREATE + 430 UPDATE + 27 ARCHIVE + 0 ADOPT;
+- 22 Archive = EDITORIAL_TOPIC;
+- 5 Archive = ALIAS_ONLY;
+- 0 unerwartete HOBBY_HUB-Archive;
+- 0 Provider-Aufrufe;
+- 0 WordPress-Writes;
+- Live-Delta entspricht exakt dem lokalen V1.14.3-Hard-Pass.
+
+PRE-SYNC-HINWEIS:
+Der im Export enthaltene Frontend-/Sync-Readback gehört noch zum alten V1.14.1-Livezustand mit 457 Zielobjekten. Der Headerfehler ist deshalb PRE-SYNC-Evidence und kein V1.14.3-Post-Sync-Fehler.
+
+NACHHOLCHECK:
+- Fehlerregister auf LIVE-SYNC PENDING aktualisiert;
+- Konzept-Current von veraltetem TECHNICAL_OBJECT_PLAN_PENDING bereinigt;
+- Zielvertrag 2.6 und Assessment Rules 1.6 unverändert;
+- keine Architektur-/Workflowänderung.
+
+BLOCKER:
+`HD001_V1_14_3_LIVE_SYNC_PENDING`
+
+NEXT:
+Den bereits akzeptierten V1.14.3-Zielbaum genau einmal live synchronisieren. Danach sofort Post-Sync-JSON herunterladen und 1.723/1.723 + Frontend/Header prüfen. Kein zweiter Lauf vor dieser Prüfung.
