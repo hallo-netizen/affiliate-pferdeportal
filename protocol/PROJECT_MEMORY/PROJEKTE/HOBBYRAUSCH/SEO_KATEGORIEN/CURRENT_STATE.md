@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-09
-STATUS: RULE 2.7 FAIL-CLOSED KANDIDAT LOKAL PASS / LIVE 2148-PLAN VERWORFEN / FINALER LIVE-DRY-RUN AUSSTEHEND
+STATUS: RULE 2.7 / 2357 ZIELOBJEKTE / LIVE-PASS / ABGESCHLOSSEN
 
 ## Autoritative Bindung
 
@@ -13,102 +13,97 @@ Zielvertrag:
 Technische Plugin-Wahrheit:
 `../PLUGINS/PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
 
-Aktuelle Evidence:
-`HD001_RULE27_FAILCLOSED_FINAL_LOCAL_ACCEPTANCE_20261009.md`.
+Finale Live-Evidence:
+`HD001_FINAL_LIVE_ACCEPTANCE_20261009.md`.
 
-## Aktueller Live-Stand
+Wiederverwendbarer Workflow für neue Themen:
+`../PROJEKTLEITUNG/HOBBYRAUSCH_UEBERGABE_OPTIMIERTER_WORKFLOW_NEUES_THEMA_20261009.md`.
 
-WordPress läuft wieder auf der 1.14.8-Codebasis.
+## Produktiver Endstand
 
-Der aktuell sichtbare Screen `Kategorien → Finaler Zielbaum` zeigt einen PASS-Dry-Run des inzwischen verworfenen 2148er Rule-2.7-Profils:
-- Zielobjekte 2148;
-- CREATE 419;
-- ADOPT 0;
-- UPDATE 1729;
-- UNCHANGED 0;
-- ARCHIVE 6;
-- EDITORIAL-DEMOTION 0;
-- Provider 0;
-- Strukturwrites 0.
+WordPress / Hobby Depot:
+- Plugin-Codebasis 1.14.8;
+- Runner COMPLETE;
+- reason `TARGET_TREE_SYNC_AND_READBACK_PASS`;
+- Live-Profilrevision `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`;
+- 2371 logische Knoten;
+- 2357 physische Zielobjekte;
+- 2357/2357 Readback;
+- 256 created;
+- 2100 updated;
+- 1 unchanged;
+- 1 archived;
+- 0 adopted;
+- 0 editorial demotions;
+- error leer.
 
-Dieser Plan ist noch NICHT synchronisiert und darf NICHT synchronisiert werden.
+Frontend:
+- PASS;
+- 8 Welten;
+- 330/330 terminale CORE-Seiten im Kategorie-Gate;
+- Verteilung 129×5 / 139×6 / 55×7 / 7×8;
+- 0 Kategorie-Gate-Fehler;
+- 0 ungebundene CORE-Seiten.
 
-## Warum der aktuelle 2148er Plan verworfen ist
+Magazin:
+- Hobbyfinder ist direkte Hauptkategorie;
+- darunter Hobbywelten / Alleine / Zu zweit / Gruppe;
+- altes `Hobby finden` archiviert.
 
-Der Nachholcheck fand 46 optionale `Ausrüstung & Kosten`-Leafs, die nur aus generischen Template-Intents erzeugt worden waren.
+## Regel-2.7-Endstand
 
-Das ist für Zielvertrag 2.7 nicht ausreichend belegt.
+Lokaler Kategorienbeweis vor Live:
+- 1920 aktive CORE-Content-Kategorien;
+- 1665 vorhandene Bestands-Leafs vollständig erhalten;
+- 255 neue Leafs mit jeweils >=3 unterschiedlichen Supporting Intents;
+- keine generisch erzwungenen `Ausrüstung & Kosten`-Leafs;
+- keine Kategorie unter Kategorie;
+- keine doppelten Slugs;
+- keine fehlenden Parents;
+- keine Zyklen;
+- 8 Welten ROOT;
+- Hobbywelten nur View;
+- sichtbare Direktkinder: Gestalten 7 / Fertigen 10 / Technik 9 / Forschen 5 / Pflanzen 9 / Tiere 7 / Bewegen 8 / Sammeln 8.
 
-Fail-closed wurden diese 46 Leafs aus dem neuen Kandidaten entfernt. Bestands-Leafs bleiben erhalten.
+## Lokale technische Abnahme
 
-## Aktueller lokal freigegebener Kandidat
-
-`HD001_V1.14.8_RULE27_FAILCLOSED_COMPLETE_ONE_SYNC_HARDPASS.zip`
+Finales geprüftes Release:
+`HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
 
 SHA-256:
-`0ae09fa5d75656416a0e4e7c1bb4fab74e01e776c2e36b13b8b6734a9efc5c0c`
+`709134631895a901bcb4fc5f5d71889d317954d9928c0ed20700883990a5a52c`
 
-Revision:
-`HD-TARGET-3P-RULE27-FAILCLOSED-COMPLETE-20261009+bacb614f00854923`
-
-Wesentliche Fachziele:
-- 8 Hauptwelten bleiben Root;
-- Mega-Menü max. 10 Kinder je Welt;
-- Technik = 9 sichtbare Kinder über `RC & Modelltechnik`;
-- Fertigen bleibt 10;
-- 279 HOBBY_HUBs;
-- bestehende sinnvolle Leafs bleiben;
-- FAQ sichtbar an allen 279 Hubs;
-- fehlende Einstiegsabdeckung ergänzt;
-- keine künstliche Gesamtobergrenze auf der Content-Ebene;
-- 12 Magazin-Kacheln nach 2.7;
-- keine Kategorie unter Kategorie;
-- keine Hard-Deletes;
-- DataForSEO ist keine Strukturautorität.
-
-Fail-closed Zielstand:
-- 2102 aktive physische Zielobjekte;
-- 1665 aktive CORE-Content-Kategorien;
-- Hub-Verteilung 78×5 / 139×6 / 55×7 / 7×8.
-
-## Frische lokale Abnahme
-
-Gegen den realen 1.14.8-Live-Baseline-Stand frisch wiederholt:
-- Dry-Run PASS: 373 CREATE / 0 ADOPT / 1729 UPDATE / 6 ARCHIVE / 0 DEMOTE;
-- Full Sync COMPLETE: 2102/2102 Readback;
-- Frontend-Readback PASS;
-- 279/279 HOBBY_HUB-Gate PASS;
-- Header PASS;
-- zweiter Dry-Run: 2102 UNCHANGED / 0 Writes;
-- PHP-Lint 33/33 PASS;
+Beweis:
+- statischer Kategorienbaum 43/43 PASS;
+- positive + negative E2E 14/14 PASS;
+- Full Sync / Resume / Readback PASS;
+- Idempotenz 0 Delta;
+- Drift-Erkennung PASS;
+- injizierter Write-Fehler -> exakter Rollback PASS;
+- AJAX/Nonce positiv + negativ PASS;
+- PHP 33/33 PASS;
 - ZIP-Integrität PASS.
-
-Lokaler PASS ist ausdrücklich KEIN Live-PASS.
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_RULE27_FAILCLOSED_LIVE_DRYRUN_PENDING`
-
-Der aktuelle 2148er Live-Plan ist veraltet. Der 2102er fail-closed Kandidat ist noch nicht live geprüft.
+KEINER für den abgeschlossenen HD-001-Kategorienlauf.
 
 ## EXAKT EINE NEXT ACTION
 
-Den aktuellen 2148er Plan NICHT synchronisieren.
+Für den bestehenden Kategorienbaum:
+**keine weitere Aktion. Nicht erneut synchronisieren.**
 
-Stattdessen exakt
-`HD001_V1.14.8_RULE27_FAILCLOSED_COMPLETE_ONE_SYNC_HARDPASS.zip`
-installieren/ersetzen und genau EINEN neuen read-only `Finalen Delta-Dry-Run` ausführen.
-
-Erwartung ohne Drift:
-`PASS / Zielobjekte 2102 / CREATE 373 / ADOPT 0 / UPDATE 1729 / UNCHANGED 0 / ARCHIVE 6 / DEMOTE 0 / Provider 0 / Writes 0`.
-
-Danach JSON exportieren und prüfen. Vor dieser Prüfung KEIN Sync.
+Für ein neues Thema:
+den wiederverwendbaren Workflow
+`../PROJEKTLEITUNG/HOBBYRAUSCH_UEBERGABE_OPTIMIERTER_WORKFLOW_NEUES_THEMA_20261009.md`
+lesen und ausschließlich als Delta gegen diese 2357er Live-Baseline arbeiten.
 
 ## NICHT ANFASSEN
 
-- keine 1.14.9/1.14.10-Wiederbelebung;
-- keine Keyword-Ideas-Tiefenrecherche;
-- keine neue Architektur;
-- keine Bestands-Leaf-Löschung;
-- kein Sync des aktuell sichtbaren 2148er Plans;
-- keine weitere 10er-/16er-Pilotdatei.
+- keine Vollrekonstruktion des bestehenden Portals;
+- keine Wiederbelebung 1.14.9/1.14.10;
+- keine neue Architektur ohne bewiesenen Enginefehler;
+- keine Rücknahme von Performanceoptimierungen;
+- keine generischen Pflicht-Leafs ohne >=3 echte Intents;
+- keine Zwischen-ZIPs;
+- kein Sync ohne kompletten lokalen POS+NEG-E2E-Hard-Pass und anschließenden Live-Dry-Run.
