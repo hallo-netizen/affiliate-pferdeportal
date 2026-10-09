@@ -55,6 +55,13 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("mcp__GitHub__update_file",text)
         self.assertIn("GITHUB_WRITE_UNAVAILABLE",text)
 
+    def test_fresh_start_is_not_blocked_by_stale_batch_release(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("keine separate historische Produktionsfreigabe",text)
+        self.assertIn("1er-/3er-/7er-/sonstige Test- oder Produktionsfreigaben",text)
+        self.assertIn("gültige aktuelle Upload ist selbst die Auftragsautorität",text)
+        self.assertIn("WRITER_JOB.json",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
