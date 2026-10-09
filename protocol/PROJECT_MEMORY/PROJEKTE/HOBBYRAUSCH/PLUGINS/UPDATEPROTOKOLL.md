@@ -1110,3 +1110,61 @@ Das Konzeptbüro hält nur noch den abgeschlossenen Fach-/Regelstand und routet 
 
 ERGEBNIS:
 Keine konkurrierende operative Current-/Blocker-/NEXT-ACTION-Wahrheit mehr.
+
+
+---
+
+## PU-20261009-024 – HD-001 Rule 2.7 Fail-Closed Final Candidate
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Profil-/Zielbaumkorrektur auf unveränderter 1.14.8-Codebasis. Keine neue Pluginarchitektur.
+
+VON / AUF:
+1.14.8 + Rule-2.7-Komplettprofil 2148 Zielobjekte → 1.14.8 + Rule-2.7-Fail-Closed-Profil 2102 Zielobjekte.
+
+WARUM:
+Im Nachholcheck wurden 46 neu erzeugte `Ausrüstung & Kosten`-Leafs gefunden, deren Supporting Intents nur generische Templates waren. Nach Zielvertrag 2.7 darf ein optionaler Leaf nur bei >=3 eigenständigen sinnvollen Beitragsintentionen nach Ownership-Dedupe bestehen.
+
+ÄNDERUNG:
+- exakt `profiles/hobby-depot-v1.json` geändert;
+- 46 unbelegte optionale `Ausrüstung & Kosten`-Leafs entfernt;
+- bestehende sinnvolle Leafs unverändert;
+- FAQ-/Einstiegsabdeckung erhalten;
+- Technik 9 über `RC & Modelltechnik`;
+- 12 Magazin-Kacheln erhalten;
+- PHP-Code unverändert.
+
+ARTEFAKT:
+`HD001_V1.14.8_RULE27_FAILCLOSED_COMPLETE_ONE_SYNC_HARDPASS.zip`
+
+SHA-256:
+`0ae09fa5d75656416a0e4e7c1bb4fab74e01e776c2e36b13b8b6734a9efc5c0c`
+
+POSITIV – FRISCH WIEDERHOLT:
+- ZIP-Integrität PASS;
+- PHP 33/33 PASS;
+- Live-Baseline-Dry-Run PASS: 373 CREATE / 0 ADOPT / 1729 UPDATE / 6 ARCHIVE;
+- Full Sync COMPLETE;
+- 2102/2102 Readback;
+- Frontend PASS;
+- 279/279 HOBBY_HUBs PASS;
+- Header PASS;
+- zweiter Dry-Run 2102 UNCHANGED / 0 Delta.
+
+NEGATIV / REUSE:
+Der PHP-Code ist byteidentisch zum zuvor voll geprüften 1.14.8-/Rule-2.7-Kandidaten; Paketdiff zeigt ausschließlich das Zielprofil. Die bestehenden fail-closed Code-Negativtests werden deshalb wiederverwendet. Der neue Profile-Dry-Run selbst validiert Parent/Slug/Depth/Category-Unter-Category vor Writes.
+
+LIVE:
+Der derzeit sichtbare 2148er Dry-Run ist überholt und darf NICHT synchronisiert werden.
+
+ROLLBACK:
+Vor Live-Sync weiterhin Dry-Run + Fingerprint-Recheck + bounded Readback/Rollback.
+
+NEXT:
+Fail-closed ZIP installieren und genau einen neuen read-only Live-Dry-Run ausführen. Noch kein Sync.
+
+ARTEFAKTPFLICHT:
+`CURRENT.zip` im Campus bleibt NICHT synchronisiert; kein lokaler Binärdatei-Uploadweg im verfügbaren GitHub-Connector. Manifest wurde nachgezogen, Binary nicht erfunden.
