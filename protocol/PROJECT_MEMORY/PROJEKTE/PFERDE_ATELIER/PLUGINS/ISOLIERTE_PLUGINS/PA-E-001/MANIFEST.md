@@ -1,31 +1,23 @@
-# PA-E-001 – gesicherter Upload
+# PA-E-001 – Affiliate Portal Template Kit – aktueller Artefaktstatus
 
-Plugin: Affiliate Portal Template Kit (Pferde-kompatibel)
-Beobachteter Installationsstand: 1.50.559
-Fachbüro: DESIGN
+PLUGIN_ID: PA-E-001
+NAME: Affiliate Portal Template Kit (Pferde-kompatibel)
+FACHBÜRO: DESIGN
 
-## Exakt gesicherte hochgeladene Datei
-Datei: PFERDE_ATELIER_PPA013_1.50.558_TO_1.50.559_TEXT30_FINAL_CORRECTIVE_1.0.3_HARDTEST.zip
-SHA-256: 3600de85fc1a577d8c80ba06c306270c92eafac1144b41b1277b330323778f85
-Größe: 39601 Bytes
-Quelle: Nutzerupload 2026-09-25
+REAL_BEOBACHTETE_LIVE_VERSION: 1.50.581
+LIVE_STATUS: AKTIV
+LIVE_READBACK: aktueller WordPress-Pluginlisten-Readback 2026-10-09.
 
-## Inhalt
-- pferde-atelier-ppa013-category-completion-corrective/README.txt
-  SHA-256: 0b400d495cf782af8d3cb074865862d41720b2473b7157870693d198157cd969
-- pferde-atelier-ppa013-category-completion-corrective/HARDTEST_EVIDENCE.txt
-  SHA-256: b0c05f0ff5dddd1eab3b2ae48a401d001668c887e7bdd613c573996cb5869d55
-- pferde-atelier-ppa013-category-completion-corrective/pferde-atelier-ppa013-category-completion-corrective.php
-  SHA-256: 428840f989328d9a7bc92b2929498b7a7bff49fca0ba1c000f9ed44f0c7a0878
+EXAKTES_AKTUELLES_ARTEFAKT: AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.581_AJAX_KISS_HARD_LOCAL_PASS.zip
+ARTEFAKT_SHA256: b60f2a1553635648d3ce5c64a4fc68721652aaa53a817f79857f430f60e0ae80
+ARTEFAKT_BYTES: 7089395
+ZIP_ENTRIES: 513
+INTERNE_PLUGIN_VERSION: 1.50.581
+INTERNE_VERSION_PRUEFUNG: PASS
+HARD_LOCAL_EVIDENCE: TEMPLATE_KIT_1.50.581_AJAX_KISS_HARD_LOCAL_EVIDENCE.txt
+REGRESSION_BELEG: gegenüber 1.50.580 nur `affiliate-portal-template-kit/pferde-template-kit.php` geändert; 504 reale Dateien erhalten; PHP/Randomized/Positiv/Negativ PASS laut Evidence.
 
-## Harte Einordnung
-Dieses ZIP ist der belegte Korrektiv-Patcher 1.0.3 für den Übergang PPA-013 1.50.558 -> 1.50.559.
-Er bindet:
-- EXPECTED_VERSION = 1.50.558
-- TARGET_VERSION = 1.50.559
-- TARGET_PLUGIN = affiliate-portal-template-kit/pferde-template-kit.php
-- EXPECTED_MAIN_SHA256 = 840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1
+CURRENT_ZIP_STATUS: EXAKTES ARTEFAKT IM PROJEKTBESTAND VORHANDEN; in diesem Inventarsync nicht als GitHub-Binärdatei dupliziert.
+HISTORIE: früherer 1.50.559-Korrektiv-Patcher bleibt Historie und ist kein aktueller Pluginstand.
 
-Es wird hier exakt als gesicherter Original-Upload abgelegt. Es wird NICHT fälschlich als vollständiger 1.50.559-Pluginbaum bezeichnet.
-
-GitHub-Büro: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/
+ROLLE: Inventar-/Artefaktstatus. Fach-/Designwahrheit bleibt im DESIGN-Büro.
