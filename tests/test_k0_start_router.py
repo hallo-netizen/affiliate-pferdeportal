@@ -33,6 +33,14 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("nach Bindung des aktuellen Uploads",text)
         self.assertIn("historische Informationen sind **keine Ausschlussliste**",text)
 
+    def test_existing_github_file_start_mechanism_is_bound(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("bestehende GitHub-Dateistart",text)
+        self.assertIn("`WORDPRESS_INTAKE.json` mit `create_file` schreiben",text)
+        self.assertIn("`AUTHORING_CONTEXT.json` mit `create_file` schreiben",text)
+        self.assertIn("fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**",text)
+        self.assertIn("GitHub-Schreibversuch",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
