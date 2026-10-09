@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "438b16d9761d2558717d3da74a9586a0b0bef245856708d1de1aaa8907e3aa41",
+      "target_keyword": "Wie wäscht man eine Schabracke für ein Pferd",
+      "title": "Wie wäscht man eine Schabracke für ein Pferd?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "00ee658ced6692613cb6c843761e2e873c162fac87671b70007f20e8d4e2284e"
+}
