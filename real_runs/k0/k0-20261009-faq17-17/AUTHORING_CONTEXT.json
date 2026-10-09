@@ -1,0 +1,223 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "438b16d9761d2558717d3da74a9586a0b0bef245856708d1de1aaa8907e3aa41",
+    "target_keyword": "Wie wäscht man eine Schabracke für ein Pferd",
+    "title": "Wie wäscht man eine Schabracke für ein Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Schabracken-Pflegeanleitung",
+          "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung"
+        },
+        {
+          "source_title": "Krämer – Schabrackenpflege FAQ",
+          "source_url": "https://www.kraemer.de/ratgeber/schabrackenpflege-faq"
+        },
+        {
+          "source_title": "FUNDIS Reitsport – Waldhausen Schabracke Classic",
+          "source_url": "https://www.fundis-reitsport.de/pferd/schabracken-pads/schabracken/dressur-schabracken/24626/waldhausen-schabracke-classic-dressurschabracke"
+        }
+      ],
+      "claims": [
+        "Vor dem Waschen einer Schabracke müssen lose Pferdehaare ausgebürstet und die Klettverschlüsse geschlossen werden.",
+        "Eine waschmaschinengeeignete Schabracke aus üblichen Mischgeweben kann nach Herstellerangabe häufig bei 30 Grad im Schonwaschgang gewaschen werden.",
+        "Ein mildes, möglichst pH-neutrales Feinwaschmittel ist für viele Schabracken geeignet. Auf Weichspüler sollte verzichtet werden.",
+        "Nach der Wäsche sollte eine normale Schabracke in Form gezogen und luftig im Schatten getrocknet werden. Direkte Heizungshitze und Trockner sollen vermieden werden.",
+        "Schabracken mit echtem Lammfell benötigen ein rückfettendes Spezialwaschmittel und besondere Pflege nach dem Materialetikett.",
+        "Für verzierte Schabracken oder empfindliche Einzelteile kann Handwäsche sinnvoll sein: einweichen, mit Schwamm säubern, gründlich ausspülen und vorsichtig ausdrücken.",
+        "Die Waldhausen Schabracke Classic soll bei 30 Grad im Schonwaschgang mit geschlossenen Klettverschlüssen und ohne Weichspüler gewaschen werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie wäscht man eine Schabracke für ein Pferd",
+      "topic": "Wie wäscht man eine Schabracke für ein Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schabracken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie wäscht man eine Schabracke für ein Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Schabracken-Pflegeanleitung",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung",
+        "statement": "Vor dem Waschen einer Schabracke müssen lose Pferdehaare ausgebürstet und die Klettverschlüsse geschlossen werden.",
+        "evidence_text": "Vor dem Waschen einer Schabracke müssen lose Pferdehaare ausgebürstet und die Klettverschlüsse geschlossen werden.",
+        "evidence_text_sha256": "9b46f8d51868f2c2121c66f318adc3808dea78572c463ac1b6ba45e5790a87c2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Schabracken-Pflegeanleitung",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung",
+        "statement": "Eine waschmaschinengeeignete Schabracke aus üblichen Mischgeweben kann nach Herstellerangabe häufig bei 30 Grad im Schonwaschgang gewaschen werden.",
+        "evidence_text": "Eine waschmaschinengeeignete Schabracke aus üblichen Mischgeweben kann nach Herstellerangabe häufig bei 30 Grad im Schonwaschgang gewaschen werden.",
+        "evidence_text_sha256": "5e416ea60d22bf4e13292c1233dc66aed2f77f3c67e7bfa6f367677b036ddd50",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Schabracken-Pflegeanleitung",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung",
+        "statement": "Ein mildes, möglichst pH-neutrales Feinwaschmittel ist für viele Schabracken geeignet. Auf Weichspüler sollte verzichtet werden.",
+        "evidence_text": "Ein mildes, möglichst pH-neutrales Feinwaschmittel ist für viele Schabracken geeignet. Auf Weichspüler sollte verzichtet werden.",
+        "evidence_text_sha256": "bc96ec12ecb749702de1c80461eaffd3c5c8634f4c70484bebf337cf01e21241",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Krämer – Schabracken-Pflegeanleitung",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung",
+        "statement": "Nach der Wäsche sollte eine normale Schabracke in Form gezogen und luftig im Schatten getrocknet werden. Direkte Heizungshitze und Trockner sollen vermieden werden.",
+        "evidence_text": "Nach der Wäsche sollte eine normale Schabracke in Form gezogen und luftig im Schatten getrocknet werden. Direkte Heizungshitze und Trockner sollen vermieden werden.",
+        "evidence_text_sha256": "b9ec60869b3e78bb51131e12e9cfa2cb80751f8b59c3232050d64da0c2e2c729",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Krämer – Schabrackenpflege FAQ",
+        "source_url": "https://www.kraemer.de/ratgeber/schabrackenpflege-faq",
+        "statement": "Schabracken mit echtem Lammfell benötigen ein rückfettendes Spezialwaschmittel und besondere Pflege nach dem Materialetikett.",
+        "evidence_text": "Schabracken mit echtem Lammfell benötigen ein rückfettendes Spezialwaschmittel und besondere Pflege nach dem Materialetikett.",
+        "evidence_text_sha256": "f9fec3bd60843b6385432eb17c11c618d707eb591eae2c7daed421ab1b9c30d0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Krämer – Schabracken-Pflegeanleitung",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-pflegeanleitung",
+        "statement": "Für verzierte Schabracken oder empfindliche Einzelteile kann Handwäsche sinnvoll sein: einweichen, mit Schwamm säubern, gründlich ausspülen und vorsichtig ausdrücken.",
+        "evidence_text": "Für verzierte Schabracken oder empfindliche Einzelteile kann Handwäsche sinnvoll sein: einweichen, mit Schwamm säubern, gründlich ausspülen und vorsichtig ausdrücken.",
+        "evidence_text_sha256": "e6b9bbc97b7967435a3ecc8cd105a250aa2d375d0aa9632b3e7b6a0112ecf17b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
+        "source_title": "FUNDIS Reitsport – Waldhausen Schabracke Classic",
+        "source_url": "https://www.fundis-reitsport.de/pferd/schabracken-pads/schabracken/dressur-schabracken/24626/waldhausen-schabracke-classic-dressurschabracke",
+        "statement": "Die Waldhausen Schabracke Classic soll bei 30 Grad im Schonwaschgang mit geschlossenen Klettverschlüssen und ohne Weichspüler gewaschen werden.",
+        "evidence_text": "Die Waldhausen Schabracke Classic soll bei 30 Grad im Schonwaschgang mit geschlossenen Klettverschlüssen und ohne Weichspüler gewaschen werden.",
+        "evidence_text_sha256": "bf9b98f35631138a7917c6476cf79a9baedbefbdf612f1a47bd70e98fbc7159d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/",
+        "anchor": "Sattel und Zubehör",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schabracken-beratung/",
+        "anchor": "Beratung zu Schabracken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schabracken-faq/",
+        "anchor": "FAQ zu Schabracken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schabracken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schabracke",
+      "Schabracken",
+      "Waschen",
+      "Waschmaschine",
+      "Wäsche",
+      "Reinigung",
+      "Trocknen",
+      "Waschmittel",
+      "Klettverschlüsse",
+      "Lammfell"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Der Waschablauf folgt einer klaren Reihenfolge von Vorreinigung, Wäsche und Trocknung. Die Checkliste deckt die entscheidenden Prüfpunkte ab."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
