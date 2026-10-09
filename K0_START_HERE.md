@@ -42,6 +42,8 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 - ein erfolgreich geschriebenes `WORDPRESS_INTAKE.json` ist **kein Abschluss und kein Blocker**; fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
 - erst ein tatsächlich fehlgeschlagener Recherche- oder GitHub-Schreibversuch im aktuellen frischen Run darf als technischer Startblocker gelten;
 - die GitHub-Produktionsanbindung darf **niemals aus Vermutung als nicht verfügbar erklärt werden**; Verfügbarkeit wird ausschließlich durch einen tatsächlichen Aufruf der vorhandenen GitHub-Dateischreibfunktion festgestellt;
+- sind GitHub-Aktionen im Chat nicht direkt als eigene Werkzeuge sichtbar, ist das **kein Nichtverfügbarkeitsnachweis**: über den vorhandenen Tool-Router/Code-Mode zuerst die GitHub-Aktionen entdecken und `mcp__GitHub__create_file` bzw. `mcp__GitHub__update_file` verwenden;
+- erst wenn diese Werkzeug-Suche **keine** GitHub-Dateischreibaktion liefert oder deren tatsächlicher Aufruf fehlschlägt, darf `GITHUB_WRITE_UNAVAILABLE` als technischer Blocker gelten;
 - solange die GitHub-Dateischreibfunktion verfügbar ist, ist der Produktionsstart **ausführbar** und muss ausgeführt werden; ein Chat darf nicht mit `0 von N produziert` abbrechen, ohne mindestens den konkreten Schreibversuch des aktuellen Uploads ausgeführt zu haben;
 - der aktuelle Upload benötigt **keine zusätzliche Bereitstellung, Freigabe oder Übernahme als „aktueller Batch“** vor diesem Bindungsschritt;
 - vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
