@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "mueslis-fuer-pferde-faq",
+      "plan_slot": "5987322004a87ca16cb940584f428cd636c6f7479b6d4cc20401c19c66761235",
+      "target_keyword": "Wie kann ich Müsli für mein Pferd selbst machen",
+      "title": "Wie kann ich Müsli für mein Pferd selbst machen?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "1d36541343d9a7a3e23f0733dc89f2c2b8f9a947d75ac459091b4ce8235ec1de"
+}
