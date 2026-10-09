@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-09
-STATUS: V1.14.3 LIVE SYNC ROLLED BACK / V1.14.4 RULES + MAGAZIN FULL LOCAL HARD PASS / LIVE INSTALL + DRY-RUN + ONE CONTROLLED SYNC PENDING
+STATUS: V1.14.8 LIVE TECHNISCH COMPLETE / FACHLICHE CONTENT-EBENE NICHT ABGENOMMEN / ZIELVERTRAG 2.7 AKTIV / KEIN WEITERER PLUGIN-FIX VOR NEUEM FACH-SOLL
 
 ## Ziel
 
@@ -1326,3 +1326,87 @@ Der exportierte Live-Readback speichert den tatsächlich zurückgelesenen Titel 
 ## EXAKT EINE NEXT ACTION
 
 V1.14.4 installieren → Live-Dry-Run prüfen → genau EINEN kontrollierten Sync ausführen → vollständigen Post-Sync-Readback herunterladen und gegen Zielvertrag 2.6 / Rules 1.6 prüfen. Kein zweiter Sync vor dieser Prüfung.
+
+
+## V1.14.8 LIVE – TECHNISCH COMPLETE, FACHLICH NICHT ABGENOMMEN
+
+Realer Post-Sync-Readback:
+`hobby-depot-final-target-readback-20261009-114254-utc.json`
+
+Bewiesen:
+- plugin_version 1.14.8;
+- Dry-Run PASS;
+- 1.723 Zielobjekte;
+- CREATE 0;
+- UPDATE 0;
+- UNCHANGED 1.723;
+- ARCHIVE 0;
+- DEMOTE_EDITORIAL 52;
+- Runner COMPLETE;
+- Readback 1.723/1.723;
+- interner Frontend-Readback valid=true;
+- interner Hobby-Hub-Gate 279/279;
+- 0 unbound Core pages nach Demotion.
+
+Damit ist die 52er-Legacy-Demotion technisch abgeschlossen.
+
+ABER:
+Der reale sichtbare Seitenbefund zeigt, dass die untersten Kategorien nicht auf allen Hobbyseiten zuverlässig sichtbar sind.
+Zusätzlich zeigt die fachliche Sichtprüfung, dass die 1.292 vorhandenen Content-Kategorien zwar fachliche Cluster bilden, aber universelle Nutzerbedürfnisse wie Einstieg, FAQ und Ausrüstung/Kosten nicht systematisch abdecken.
+
+Daher:
+**kein fachlicher Portal-PASS.**
+Ein interner Renderer-PASS ist nicht länger ausreichend für sichtbare Frontend-Abnahme.
+
+## NEUE CURRENT-REGEL – ZIELVERTRAG 2.7
+
+Autoritativ:
+`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
+Fassung 2.7.
+
+Kern:
+- zweite CORE-/Mega-Menü-Ebene max. 10 direkte sichtbare Kinder;
+- aktueller Zielbaum: Fertigen 11 und Technik 11 → vor nächstem Zielbaum neu ordnen;
+- unterste Content-Ebene ohne künstliche Gesamtobergrenze;
+- bestehende sinnvolle Leafs bleiben;
+- 3 eigenständige Beiträge reichen als startfähige Mindestkapazität;
+- universelle Prüffelder: Einstieg & Grundlagen, FAQ, Ausrüstung & Kosten, Praxis/Vertiefung;
+- Vertiefung nicht duplizieren, wenn bestehende Fach-Leafs erfahrene Nutzer bereits bedienen;
+- DataForSEO darf Leaf-/FAQ-Kandidaten unter festem Hobby vorschlagen und clustern;
+- Magazin wird als eigenständige flexible Kachel-/SEO-Säule ausgebaut.
+
+## ERSTER OFFENER BLOCKER
+
+`HD001_FACH_SOLL_27_PILOT_10_PENDING`
+
+## EXAKT EINE NEXT ACTION
+
+Kein weiterer Plugin-Patch.
+
+Zuerst fachlich:
+1. Fertigen und Technik auf max. 10 direkte Mega-Menü-Kinder ordnen;
+2. 10 repräsentative HOBBY_HUBs auswählen;
+3. Bestands-Leafs erhalten;
+4. universelle Lücken nach Regel 2.7 ergänzen;
+5. zusätzliche hobbiespezifische Leafs mit mindestens 3 echten Beitragsintentionen bestimmen;
+6. DataForSEO für konkrete Fragen/Keywords/Leaf-Kandidaten verwenden;
+7. echten Browser-/Theme-Pilot prüfen;
+8. erst danach neues Sollprofil und technische Umsetzung.
+
+## VERBINDLICHE LERNREGEL FÜR FOLGEPROJEKTE
+
+Technische Vollautomatisierung kommt erst NACH einem sichtbaren manuellen/halbautomatischen Pilot mit mindestens 10 realen Seiten.
+
+Keine Architektur-/Plugin-Komplexität mehr aufbauen, bevor:
+- Nutzerpfad;
+- sichtbare Ebenen;
+- Designgrenzen;
+- Standardkategorien;
+- individuelle Kategorien;
+- echte Browserdarstellung
+
+fachlich bestätigt sind.
+
+Die ausführliche Retrospektive und das Magazin-/Leaf-Konzept liegen in:
+`../KONZEPT/CURRENT_STATE.md`.
+
