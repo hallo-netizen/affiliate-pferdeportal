@@ -1868,3 +1868,18 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 - Manifest: `13a63a5a6f3bbe968bbd5eed6d3310305c68f417d03e0b3741ab1d725b8514d8`.
 - WordPress/MariaDB weiterhin OPEN; kein Release, keine Installation.
 
+
+
+### 08.10.2026 – Block 8 / aktueller Kandidatenstand
+
+- Affiliate-Zentrale **6.72.211**, technische Current Generation **304**.
+- Current-Head: `164cb789abcbfcffe70975fd463182041c5c923a`.
+- Source-Manifest: `9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f`.
+- AFF-ERR-064 bleibt im Kandidaten lokal behoben; kein Zugriff mehr auf die nicht initialisierte Variable.
+- Gebündelte Performancearbeit bis Block 8: fremde AJAX-Requests **207 -> 75 Affiliate-Hooks**; doppelte Frontend-Campaign-Abfrage **2 -> 1**; wiederholte Campaign-Meta-Normalisierung halbiert; Content-/Kategorie-Kontext request-lokal wiederverwendet.
+- Admin-/Workerpfade bleiben unverändert; keine Änderung an Ranking, Provider, Slots, Veto, Publish, Kategorie, Design oder Tracking.
+- Lokale Positiv-/Negativ-/Regressionsevidence: `release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md` = PASS.
+- WordPress/MariaDB für exakt diesen Manifeststand weiterhin **OPEN**; historische versionsharte 6.72.170/171/210-Runner sind dafür kein gültiger Gate.
+- Kein Release, keine Installation.
+
+**Status:** LOCAL_ROOTFIX_AND_PERFORMANCE_BLOCK8_PASS / EXACT_WORDPRESS_MARIADB_GATE_OPEN.
