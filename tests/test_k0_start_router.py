@@ -62,6 +62,18 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("WRITER_JOB.json",text)
         self.assertNotIn("1er-/3er-/7er-",text)
 
+    def test_current_upload_fans_out_only_to_existing_single_item_k0_runs(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("N >= 1",text)
+        self.assertIn("genau N-mal",text)
+        self.assertIn("item_count = 1",text)
+        self.assertIn("unveränderten Fünf-Felder-Eintrag",text)
+        self.assertIn(".github/workflows/k0-authoring-context.yml",text)
+        self.assertIn("engine/wordpress_batch_export.py",text)
+        self.assertIn("ursprünglicher Upload-Reihenfolge",text)
+        self.assertIn("control/startmaster0107/**",text)
+        self.assertIn("keine K0-Auftrags- oder Batch-Autorität",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
@@ -75,6 +87,18 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertNotIn("plugin_build",cur["wordpress_export"])
         goal=json.loads(Path("K0_GOAL_CONTRACT.json").read_text(encoding="utf-8"))
         self.assertNotIn("wordpress_plugin_binding",goal["hard_rules"])
+        self.assertEqual(cur["work_binding"]["start_mechanism"]["accepted_upload_item_count"],"N>=1")
+        self.assertTrue(cur["work_binding"]["start_mechanism"]["per_item_run_required"])
+        self.assertEqual(cur["work_binding"]["start_mechanism"]["per_item_intake_item_count"],1)
+        self.assertEqual(cur["work_binding"]["start_mechanism"]["writer_core_mode"],"UNCHANGED_SINGLE_ITEM")
+        self.assertEqual(cur["work_binding"]["start_mechanism"]["final_reassembly"],"engine/wordpress_batch_export.py")
+        self.assertIn("control/startmaster0107",cur["work_binding"]["start_mechanism"]["forbidden_assignment_roots"])
+        self.assertTrue(goal["hard_rules"]["batch_item_count_independent"])
+        self.assertTrue(goal["hard_rules"]["batch_fanout_to_existing_single_item_runs_required"])
+        self.assertTrue(goal["hard_rules"]["writer_single_item_contract_must_remain_unchanged"])
+        self.assertTrue(goal["hard_rules"]["final_batch_reassembly_required"])
+        self.assertTrue(goal["hard_rules"]["final_batch_order_must_match_input"])
+        self.assertTrue(goal["hard_rules"]["startmaster0107_as_k0_assignment_authority_forbidden"])
 
 if __name__=="__main__":
     unittest.main()
