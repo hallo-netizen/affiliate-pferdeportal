@@ -41,6 +41,8 @@ Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von T
 - nach erfolgreichem Schreiben von `WORDPRESS_INTAKE.json` **im selben K0-Auftrag sofort Recherche ausführen und anschließend `AUTHORING_CONTEXT.json` mit `create_file` schreiben**;
 - ein erfolgreich geschriebenes `WORDPRESS_INTAKE.json` ist **kein Abschluss und kein Blocker**; fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
 - erst ein tatsächlich fehlgeschlagener Recherche- oder GitHub-Schreibversuch im aktuellen frischen Run darf als technischer Startblocker gelten;
+- die GitHub-Produktionsanbindung darf **niemals aus Vermutung als nicht verfügbar erklärt werden**; Verfügbarkeit wird ausschließlich durch einen tatsächlichen Aufruf der vorhandenen GitHub-Dateischreibfunktion festgestellt;
+- solange die GitHub-Dateischreibfunktion verfügbar ist, ist der Produktionsstart **ausführbar** und muss ausgeführt werden; ein Chat darf nicht mit `0 von N produziert` abbrechen, ohne mindestens den konkreten Schreibversuch des aktuellen Uploads ausgeführt zu haben;
 - der aktuelle Upload benötigt **keine zusätzliche Bereitstellung, Freigabe oder Übernahme als „aktueller Batch“** vor diesem Bindungsschritt;
 - vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
 - `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
