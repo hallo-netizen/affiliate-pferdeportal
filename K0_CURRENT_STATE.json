@@ -41,7 +41,26 @@
       "CANONICAL_ID_BINDING",
       "PUBLISH_SAFETY",
       "OTHER_PLUGINS_OR_DESIGN_AREAS"
-    ]
+    ],
+    "start_mechanism": {
+      "type": "EXISTING_GITHUB_FILE_TRIGGER_WITH_N_ITEM_FANOUT",
+      "accepted_upload_item_count": "N>=1",
+      "assignment_authority": "CURRENT_VALID_UPLOAD_ONLY",
+      "forbidden_assignment_roots": [
+        "control/startmaster0107",
+        "runtime_inbox",
+        "protocol",
+        "history",
+        "prior real_runs"
+      ],
+      "per_item_run_required": true,
+      "per_item_intake_item_count": 1,
+      "trigger_workflow": ".github/workflows/k0-authoring-context.yml",
+      "writer_core_mode": "UNCHANGED_SINGLE_ITEM",
+      "final_reassembly": "engine/wordpress_batch_export.py",
+      "final_order": "ORIGINAL_UPLOAD_ORDER",
+      "workflow_dispatch_required": false
+    }
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
