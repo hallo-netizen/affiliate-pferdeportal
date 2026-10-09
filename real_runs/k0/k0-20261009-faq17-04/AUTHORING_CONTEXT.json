@@ -1,0 +1,210 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sattelgurte-faq",
+    "plan_slot": "bf320b3f775e1003999ec3423f18aedf4602997f21706da3a2322b923210f675",
+    "target_keyword": "Welcher Sattelgurt ist besser breiter oder schmaler",
+    "title": "Welcher Sattelgurt ist besser breiter oder schmaler?"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Wittelsbuerger – So sitzt der Sattelgurt richtig",
+          "source_url": "https://www.wittelsbuerger.de/wissen/2014/so-sitzt-der-sattelgurt-richtig-pflegetips.htm"
+        },
+        {
+          "source_title": "RidersDeal – Sattelgurt Auswahl",
+          "source_url": "https://www.ridersdeal.com/ratgeber/sattelgurt"
+        },
+        {
+          "source_title": "Barnboox – Anatomischer Sattelgurt",
+          "source_url": "https://www.barnboox.de/welcher-anatomische-sattelgurt-fuer-welches-pferd/"
+        },
+        {
+          "source_title": "Pferde Atelier – Pflege Sattelgurte",
+          "source_url": "https://pferde-atelier.de/category/sattelgurte-pflege/"
+        }
+      ],
+      "claims": [
+        "Ein breiterer Sattelgurt kann den Druck auf das Brustbein über eine größere Fläche verteilen. Ein schmaler Gurt belastet eine kleinere Kontaktfläche und kann damit örtlich stärker drücken.",
+        "Ein breiter Sattelgurt ist nicht automatisch besser: Bei kurzen Pferden oder wenig Platz hinter dem Ellbogen kann eine breite Form scheuern oder Bewegungsfreiheit einengen.",
+        "Anatomisch geformte oder asymmetrische Sattelgurte können manchen Pferden hinter dem Ellbogen Platz schaffen. Entscheidend ist die tatsächliche natürliche Gurtlage und Brustkorbform.",
+        "Die richtige Länge und beidseitig möglichst gleich hoch liegende Schnallen sind wichtig für eine gleichmäßige Gurtung. Der Sattel und Gurt müssen als zusammenpassendes System betrachtet werden.",
+        "Wiederkehrende Scheuerstellen oder Abwehr beim Gurten sollten dazu führen, Passform, Haut und Sattellage zu überprüfen; die Gurtbreite allein erklärt Probleme nicht sicher.",
+        "Schmutz und Schweiß auf Sattelgurten können Reibung begünstigen. Der Gurt sollte sauber gehalten und regelmäßig auf Schnallen, Nähte und veränderte Elastik überprüft werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welcher Sattelgurt ist besser breiter oder schmaler",
+      "topic": "Welcher Sattelgurt ist besser breiter oder schmaler?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sattelgurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welcher Sattelgurt ist besser breiter oder schmaler?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Wittelsbuerger – So sitzt der Sattelgurt richtig",
+        "source_url": "https://www.wittelsbuerger.de/wissen/2014/so-sitzt-der-sattelgurt-richtig-pflegetips.htm",
+        "evidence_text_sha256": "2d3d18638eeb4b45af4f1f5f5e93bd1b5765cb27ae318bf0fa946c3b08f148d8",
+        "statement": "Ein breiterer Sattelgurt kann den Druck auf das Brustbein über eine größere Fläche verteilen. Ein schmaler Gurt belastet eine kleinere Kontaktfläche und kann damit örtlich stärker drücken.",
+        "evidence_text": "Ein breiterer Sattelgurt kann den Druck auf das Brustbein über eine größere Fläche verteilen. Ein schmaler Gurt belastet eine kleinere Kontaktfläche und kann damit örtlich stärker drücken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "RidersDeal – Sattelgurt Auswahl",
+        "source_url": "https://www.ridersdeal.com/ratgeber/sattelgurt",
+        "evidence_text_sha256": "671f795e2a843bb7f3894dfc133bb481fea2e59d5e7c3062a29e1fde2d53b84e",
+        "statement": "Ein breiter Sattelgurt ist nicht automatisch besser: Bei kurzen Pferden oder wenig Platz hinter dem Ellbogen kann eine breite Form scheuern oder Bewegungsfreiheit einengen.",
+        "evidence_text": "Ein breiter Sattelgurt ist nicht automatisch besser: Bei kurzen Pferden oder wenig Platz hinter dem Ellbogen kann eine breite Form scheuern oder Bewegungsfreiheit einengen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Barnboox – Anatomischer Sattelgurt",
+        "source_url": "https://www.barnboox.de/welcher-anatomische-sattelgurt-fuer-welches-pferd/",
+        "evidence_text_sha256": "ba0deafd06632278a0e68151b753cdbe415821cc6d7a1928ecb9b71d7a7860e3",
+        "statement": "Anatomisch geformte oder asymmetrische Sattelgurte können manchen Pferden hinter dem Ellbogen Platz schaffen. Entscheidend ist die tatsächliche natürliche Gurtlage und Brustkorbform.",
+        "evidence_text": "Anatomisch geformte oder asymmetrische Sattelgurte können manchen Pferden hinter dem Ellbogen Platz schaffen. Entscheidend ist die tatsächliche natürliche Gurtlage und Brustkorbform.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Wittelsbuerger – So sitzt der Sattelgurt richtig",
+        "source_url": "https://www.wittelsbuerger.de/wissen/2014/so-sitzt-der-sattelgurt-richtig-pflegetips.htm",
+        "evidence_text_sha256": "a33b9e342e075e7534a50e61b5043f7a694faf5cc22cfe044d0ab977193d2d6f",
+        "statement": "Die richtige Länge und beidseitig möglichst gleich hoch liegende Schnallen sind wichtig für eine gleichmäßige Gurtung. Der Sattel und Gurt müssen als zusammenpassendes System betrachtet werden.",
+        "evidence_text": "Die richtige Länge und beidseitig möglichst gleich hoch liegende Schnallen sind wichtig für eine gleichmäßige Gurtung. Der Sattel und Gurt müssen als zusammenpassendes System betrachtet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Barnboox – Anatomischer Sattelgurt",
+        "source_url": "https://www.barnboox.de/welcher-anatomische-sattelgurt-fuer-welches-pferd/",
+        "evidence_text_sha256": "dca8a5898cc00a9d16739af6ea8aac0389d031e577516132c6dc6b37d6ee608a",
+        "statement": "Wiederkehrende Scheuerstellen oder Abwehr beim Gurten sollten dazu führen, Passform, Haut und Sattellage zu überprüfen; die Gurtbreite allein erklärt Probleme nicht sicher.",
+        "evidence_text": "Wiederkehrende Scheuerstellen oder Abwehr beim Gurten sollten dazu führen, Passform, Haut und Sattellage zu überprüfen; die Gurtbreite allein erklärt Probleme nicht sicher.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferde Atelier – Pflege Sattelgurte",
+        "source_url": "https://pferde-atelier.de/category/sattelgurte-pflege/",
+        "evidence_text_sha256": "46ed9b5ef8ff14656bbed6f5aae09a5824c03ee889d06ebc560b6ec51f55c910",
+        "statement": "Schmutz und Schweiß auf Sattelgurten können Reibung begünstigen. Der Gurt sollte sauber gehalten und regelmäßig auf Schnallen, Nähte und veränderte Elastik überprüft werden.",
+        "evidence_text": "Schmutz und Schweiß auf Sattelgurten können Reibung begünstigen. Der Gurt sollte sauber gehalten und regelmäßig auf Schnallen, Nähte und veränderte Elastik überprüft werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "anchor": "Sattelgurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sattelgurte-beratung/",
+        "anchor": "Beratung zu Sattelgurten",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "FAQ zu Sattelgurten",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sattelgurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Sattelgurt",
+      "breiter",
+      "schmaler",
+      "Druck",
+      "Ellbogen",
+      "Gurtlage",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+      "rationale": "Breit und schmal lassen sich als zwei Grundformen ohne künstliche Zusatzkategorien nicht in einer Vier-mal-drei-Matrix gegenüberstellen. Die Checkliste klärt die tatsächliche Gurtlage."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
