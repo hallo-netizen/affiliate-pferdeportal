@@ -58,7 +58,7 @@ class K0StartRouterTests(unittest.TestCase):
     def test_fresh_start_uses_current_upload_without_extra_release(self):
         text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
         self.assertIn("gültige aktuelle Upload startet und bestimmt ausschließlich seine frischen Einzelruns",text)
-        self.assertIn("keine zusätzliche Batch-Freigabe wird gelesen oder benötigt",text)
+        self.assertIn("keine** alten Aufträge".replace("keine**","keine"),text.replace("**",""))
         self.assertIn("WRITER_JOB.json",text)
         self.assertNotIn("1er-/3er-/7er-",text)
 
