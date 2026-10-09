@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-09
-STATUS: V1.14.8 LIVE TECHNISCH COMPLETE / PLUGIN-ENTWICKLUNG EINGEFROREN BIS FACH-SOLL 2.7 PILOT ABGENOMMEN
+STATUS: V1.14.8 LIVE TECHNISCH COMPLETE / V1.14.9 PILOT TIMEOUT URSACHE GESCHLOSSEN / V1.14.10 ASYNC DATAFORSEO PILOT LOCAL HARD PASS / LIVE PILOT PENDING
 
 ## Plugin
 
@@ -739,3 +739,59 @@ V1.14.9 noch nicht installiert; DataForSEO-Pilot noch nicht ausgeführt.
 NEXT ACTION:
 V1.14.9 installieren → Kategorien → Pilot 2.7 → kostenlose Vorprüfung → exakt 10 Calls bestätigen → COMPLETE → Pilot-Research-JSON herunterladen.
 Kein Zielbaum-/Kategorien-Sync vor Auswertung dieses JSON.
+
+
+## V1.14.10 – PILOT 2.7 DATAFORSEO ASYNC TIMEOUT ROOT FIX
+
+Auslöser:
+V1.14.9 lief trotz AJAX-Slicing weiterhin pro Hobby synchron über
+`dataforseo_labs/google/keyword_ideas/live`.
+Der WordPress-HTTP-Request durfte dabei 60 Sekunden auf die komplette Providerberechnung warten.
+Damit blieb der bekannte Server-/Proxy-Timeout ursächlich bestehen.
+
+Root Fix:
+- Pilot 2.7 nutzt nicht mehr den Labs-Live-Endpunkt;
+- stattdessen DataForSEO Keywords Data / Google Ads Standard:
+  - `keywords_for_keywords/task_post` stellt die bezahlte Aufgabe kurz ein;
+  - `task_get/{id}` holt das Ergebnis später ab;
+- kein WordPress-Request wartet auf die eigentliche Keywordberechnung;
+- Remote-HTTP-Limit für Submit/Poll = 15 Sekunden;
+- Phase SUBMIT: exakt 10 bezahlte Tasks, 1 pro Hobby;
+- Phase COLLECT: nur kostenlose Polls, niemals erneutes Task-POST für bereits gespeicherte Task-ID;
+- Queue-Status 20100 / 40601 / 40602 = WAITING, kein Fehler;
+- Provider-Hardfehler = BLOCKED;
+- 0 WordPress-/HivePress-Strukturwrites;
+- `APKW_TARGET_TREE_MANUAL_ONLY = true` bleibt aktiv.
+
+Alte V1.14.9-State-Option wird nicht weiterverwendet; V1.14.10 verwendet einen neuen V2-Pilot-State.
+
+Artefakt:
+`HD001_V1.14.10_PILOT27_DATAFORSEO_ASYNC_TIMEOUTSAFE_HARDPASS.zip`
+
+SHA-256:
+`4dd8786662a75fbb4a390741a6a5b6dc8297c71843034ffd1253db51d5b8252e`
+
+Fresh-Unpack-Abnahme:
+- ZIP-Integrität PASS;
+- PHP-Lint 34/34 PASS;
+- Pilot-Preflight exakt 10 Hobbys PASS;
+- exakt 10 bezahlte Task-POSTs PASS;
+- kein Task-GET während Submit-Phase PASS;
+- WAITING-Poll verändert Paid-Task-Zahl nicht PASS;
+- COMPLETE nach Sammlung aller 10 PASS;
+- Folgelauf nach COMPLETE = 0 Provider-Requests PASS;
+- Profil-Drift vor Provider BLOCKED;
+- Task-POST-Fehler ohne State-Fortschritt PASS;
+- Task-GET-Fehler ohne Paid-Repost PASS;
+- 9-Hobby-Profil BLOCKED;
+- Task-POST/Task-GET je max. 15 Sekunden HTTP-Limit PASS;
+- 40602 Task In Queue = WAITING PASS;
+- Ergebnis auf max. 100 gespeicherte Keywords/Hobby begrenzt;
+- 0 Strukturwrites.
+
+LIVE:
+V1.14.10 noch nicht installiert.
+
+NEXT ACTION:
+V1.14.10 installieren → Kategorien → Pilot 2.7 → Vorprüfung → 10 Tasks bestätigen → bis COMPLETE laufen lassen → Research-JSON herunterladen.
+Kein Finaler-Zielbaum-Sync.
