@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-09
-STATUS: V1.14.8 LIVE TECHNISCH COMPLETE / V1.14.9 PILOT TIMEOUT URSACHE GESCHLOSSEN / V1.14.10 ASYNC DATAFORSEO PILOT LOCAL HARD PASS / LIVE PILOT PENDING
+STATUS: V1.14.8 = EINZIGE FREIGEGEBENE TECHNISCHE BASIS / V1.14.9+1.14.10 VERWORFEN / PILOT 2.7 NUR ÜBER BESTEHENDEN V2-OVERVIEW-BACKENDPFAD
 
 ## Plugin
 
@@ -795,3 +795,54 @@ V1.14.10 noch nicht installiert.
 NEXT ACTION:
 V1.14.10 installieren → Kategorien → Pilot 2.7 → Vorprüfung → 10 Tasks bestätigen → bis COMPLETE laufen lassen → Research-JSON herunterladen.
 Kein Finaler-Zielbaum-Sync.
+
+
+## ROOT CAUSE 1.14.9 / SICHERER RÜCKWEG ÜBER BESTEHENDEN BACKENDPFAD
+
+Befund:
+- DataForSEO selbst war nicht neu problematisch.
+- V1.14.8 besitzt bereits den bewährten DataForSEO-Client und den read-only V2-Hobbybewertungsweg.
+- Der aktuelle KISS-V2-Weg verwendet für fachlich definierte Intents gebündelt `keyword_overview`.
+- V1.14.9 führte dagegen neu einen eigenen Pilot-2.7-Backendpfad ein und reaktivierte `dataforseo_labs/google/keyword_ideas/live`.
+- Genau diese Keyword-Ideas-Tiefenlogik war historisch bereits timeoutanfällig und wurde in V1.12.5/V1.12.6 aus dem normalen KISS-Weg entfernt.
+- Der 1.14.9-Lokaltest mockte den Provider und prüfte deshalb den echten HTTP-/Hostingpfad nicht. Das war ein Abnahmefehler.
+- V1.14.9 und V1.14.10 laden lokal ohne Bootstrap-/admin_menu-Fatal. Die Störung war daher kein nachgewiesener allgemeiner PHP-Boot-Fatal des Plugins.
+- Der neue Pilotpfad war fachlich und technisch unnötig: derselbe Research-Zweck kann über den bereits vorhandenen read-only V2-Uploadpfad erfolgen.
+
+Verbindliche Korrektur:
+- V1.14.9 und V1.14.10 NICHT weiterverwenden.
+- Keine neue Pluginversion für Pilot 2.7.
+- Exakten bekannten V1.14.8-Stand als technische Basis verwenden.
+- Pilotdaten als V2-Bewertungsinput hochladen.
+- Backendpfad: Kategorien → V2-Hobbybewertung.
+- Providerweg: exakt der bestehende `keyword_overview`-Pfad.
+- Keine Keyword-Ideas-Tiefenrecherche.
+- Keine Strukturwrites.
+
+Vorbereiteter Pilotinput:
+`HD001_PILOT27_10_OVERVIEW_INPUT_20261009.json`
+- 10 Hobbys;
+- 22 reine Ergänzungs-/Prüf-Leafs;
+- 98 konkrete Artikel-/Frage-/Kostenintents;
+- 98 deduplizierte DataForSEO-Keywords;
+- Preflight im unveränderten V1.14.8-Code: valid=true;
+- exakt 1 geplanter `keyword_overview`-Call;
+- structure_write_capability=false;
+- lokaler Mock-Lauf: exakt 1 Provider-Call / 0 Strukturwrites.
+
+Wichtig:
+Die alte V2-Auswertung enthält noch historische 1.6-Kapazitätslabels. Diese werden für den Pilot NICHT als aktuelle Strukturentscheidung übernommen.
+Nach dem Export wird ausschließlich nach Zielvertrag 2.7 ausgewertet:
+- bestehende Leafs bleiben;
+- ab 3 eigenständigen sinnvollen Intents startfähig;
+- keine künstliche 3–6-Gesamtgrenze.
+
+Nächster Server-Schritt erst nach Wiederherstellung:
+1. V1.14.9 deaktiviert lassen;
+2. bekannten V1.14.8-Stand wiederherstellen;
+3. V2-Hobbybewertung öffnen;
+4. vorbereiteten Pilotinput kostenlos vorprüfen;
+5. erwartete Anzeige: 10 Hobbys / 22 vorgeschlagene Prüfleafs / 98 Einzelintents / 98 Keywords / 1 DataForSEO-Aufruf;
+6. erst dann diesen einen read-only Overview-Aufruf bestätigen;
+7. Ergebnis-JSON herunterladen;
+8. kein Zielbaum-Sync.
