@@ -1,4 +1,5 @@
 import copy, hashlib, json, unittest
+from pathlib import Path
 from engine.k0_portal_resolver import resolve, Blocked
 
 def stable(x):
@@ -35,6 +36,34 @@ class K0PortalResolverTest(unittest.TestCase):
         self.assertEqual(r['status'],'PASS')
         self.assertEqual(r['items'][0]['portal_id'],'hobby')
         self.assertEqual(r['items'][0]['status'],'AUTO_DETECTED')
+
+    def test_current_17_item_categories_resolve_without_legacy_binding(self):
+        categories=[
+          'mash-faq','schermaschinen-faq','schabracken-faq','sattelgurte-faq',
+          'sattelgurte-faq','schubkarren-faq','schabracken-faq','mueslis-fuer-pferde-faq',
+          'reitplatzboden-faq','traenken-und-wasser-frostsichere-pferdetraenken-faq',
+          'longierpeitschen-faq','schermaschinen-faq','schubkarren-faq','striegel-faq',
+          'schubkarren-faq','schubkarren-faq','schabracken-faq'
+        ]
+        rows=[]
+        for i,category in enumerate(categories):
+            rows.append({
+              'article_type':'FAQ','category':category,
+              'plan_slot':hashlib.sha256(f'k0-current-{i}'.encode()).hexdigest(),
+              'target_keyword':f'Keyword {i}','title':f'Titel {i}?'
+            })
+        x={
+          'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2',
+          'status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE',
+          'content_or_format_payload_present':False,
+          'item_count':17,'items':rows,'publish_allowed':False
+        }
+        x['batch_sha256']=hashlib.sha256(stable(x).encode()).hexdigest()
+        reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
+        r=resolve(x,reg)
+        self.assertEqual(r['status'],'PASS')
+        self.assertEqual(r['item_count'],17)
+        self.assertTrue(all(v['portal_id']=='pferdeatelier' for v in r['items']))
 
     def test_unknown_category_blocks(self):
         with self.assertRaises(Blocked):
