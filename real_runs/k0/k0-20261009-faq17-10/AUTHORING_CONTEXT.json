@@ -1,0 +1,208 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "traenken-und-wasser-frostsichere-pferdetraenken-faq",
+    "plan_slot": "b5422c047be6bf98b95cffbedb4a088a6f2b7b2a210b0c91709d968bfca40e35",
+    "target_keyword": "Wie kann ich selbst eine frostsichere Pferdetränke bauen",
+    "title": "Wie kann ich selbst eine frostsichere Pferdetränke bauen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Hofmeister Pferdesport – Frostsichere Tränken",
+          "source_url": "https://www.hofmeister-pferdesport.de/stallbedarf/traenketechnik/frostsichere-traenken/"
+        },
+        {
+          "source_title": "Lister – Beheizbare Pferdetränke mit Pendelventil",
+          "source_url": "https://www.lister247.com/beheizbare-pferdetraenke-mit-pendelventil/"
+        },
+        {
+          "source_title": "Pferderevue – Frostsichere Pferdetränken für Stall und Weide",
+          "source_url": "https://www.pferderevue.at/magazin/haltung_fuetterung/2011/12/frostsichere_pferdetraenkenfuerstallundweide.html"
+        }
+      ],
+      "claims": [
+        "Pferde benötigen auch im Winter zuverlässig Wasser; eine frostsichere Tränke muss Wasserbehälter und Zuleitung vor dem Einfrieren schützen.",
+        "Bei beheizten Tränken werden Tränkebecken und freiliegende Stichleitung je nach Anlage durch passende Heizkomponenten frostfrei gehalten.",
+        "Wasser- und Stromanschluss einer beheizten Pferdetränke müssen fachgerecht erfolgen; Kabel sind gegen Verbiss und mechanische Schäden zu schützen.",
+        "Ein beheiztes Tränkebecken kann eisfrei sein, während eine ungeschützte Wasserzuleitung in der Wand dennoch zufriert.",
+        "Neben elektrisch beheizten Systemen gibt es auch frostsichere Tränkelösungen ohne vorhandenen Stromanschluss, deren Eignung von Standort und Nutzung abhängt.",
+        "Bei starken Minusgraden reicht die Wärme im Stall nicht immer aus, um Ventile und Tränkebecken zuverlässig eisfrei zu halten; geeignete Frostschutzsysteme müssen beides berücksichtigen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie kann ich selbst eine frostsichere Pferdetränke bauen",
+      "topic": "Wie kann ich selbst eine frostsichere Pferdetränke bauen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "traenken-und-wasser-frostsichere-pferdetraenken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie kann ich selbst eine frostsichere Pferdetränke bauen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Hofmeister Pferdesport – Frostsichere Tränken",
+        "source_url": "https://www.hofmeister-pferdesport.de/stallbedarf/traenketechnik/frostsichere-traenken/",
+        "statement": "Pferde benötigen auch im Winter zuverlässig Wasser; eine frostsichere Tränke muss Wasserbehälter und Zuleitung vor dem Einfrieren schützen.",
+        "evidence_text": "Pferde benötigen auch im Winter zuverlässig Wasser; eine frostsichere Tränke muss Wasserbehälter und Zuleitung vor dem Einfrieren schützen.",
+        "evidence_text_sha256": "607776cc4a0b6cfcd3a9f076d32acd35ab548bcd120925fbfa7ea081f6a20086",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Hofmeister Pferdesport – Frostsichere Tränken",
+        "source_url": "https://www.hofmeister-pferdesport.de/stallbedarf/traenketechnik/frostsichere-traenken/",
+        "statement": "Bei beheizten Tränken werden Tränkebecken und freiliegende Stichleitung je nach Anlage durch passende Heizkomponenten frostfrei gehalten.",
+        "evidence_text": "Bei beheizten Tränken werden Tränkebecken und freiliegende Stichleitung je nach Anlage durch passende Heizkomponenten frostfrei gehalten.",
+        "evidence_text_sha256": "08dc6bdccb7808ba4b7f9e1ded4aeaf5d6a0786e4df065819255f03a861d2572",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Hofmeister Pferdesport – Frostsichere Tränken",
+        "source_url": "https://www.hofmeister-pferdesport.de/stallbedarf/traenketechnik/frostsichere-traenken/",
+        "statement": "Wasser- und Stromanschluss einer beheizten Pferdetränke müssen fachgerecht erfolgen; Kabel sind gegen Verbiss und mechanische Schäden zu schützen.",
+        "evidence_text": "Wasser- und Stromanschluss einer beheizten Pferdetränke müssen fachgerecht erfolgen; Kabel sind gegen Verbiss und mechanische Schäden zu schützen.",
+        "evidence_text_sha256": "6421395e955af994f656b2075c4f82b1bbe7e40b78cf9a6f7c319a4de3eab6d5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Lister – Beheizbare Pferdetränke mit Pendelventil",
+        "source_url": "https://www.lister247.com/beheizbare-pferdetraenke-mit-pendelventil/",
+        "statement": "Ein beheiztes Tränkebecken kann eisfrei sein, während eine ungeschützte Wasserzuleitung in der Wand dennoch zufriert.",
+        "evidence_text": "Ein beheiztes Tränkebecken kann eisfrei sein, während eine ungeschützte Wasserzuleitung in der Wand dennoch zufriert.",
+        "evidence_text_sha256": "e660278ce49a85eda8fbd82373420cd7b3db4fd41a548565672c3c81784c5565",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Hofmeister Pferdesport – Frostsichere Tränken",
+        "source_url": "https://www.hofmeister-pferdesport.de/stallbedarf/traenketechnik/frostsichere-traenken/",
+        "statement": "Neben elektrisch beheizten Systemen gibt es auch frostsichere Tränkelösungen ohne vorhandenen Stromanschluss, deren Eignung von Standort und Nutzung abhängt.",
+        "evidence_text": "Neben elektrisch beheizten Systemen gibt es auch frostsichere Tränkelösungen ohne vorhandenen Stromanschluss, deren Eignung von Standort und Nutzung abhängt.",
+        "evidence_text_sha256": "9a4fae043573164707eac10b9595a81e7713eced1977de711e86afd218e4ff20",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferderevue – Frostsichere Pferdetränken für Stall und Weide",
+        "source_url": "https://www.pferderevue.at/magazin/haltung_fuetterung/2011/12/frostsichere_pferdetraenkenfuerstallundweide.html",
+        "statement": "Bei starken Minusgraden reicht die Wärme im Stall nicht immer aus, um Ventile und Tränkebecken zuverlässig eisfrei zu halten; geeignete Frostschutzsysteme müssen beides berücksichtigen.",
+        "evidence_text": "Bei starken Minusgraden reicht die Wärme im Stall nicht immer aus, um Ventile und Tränkebecken zuverlässig eisfrei zu halten; geeignete Frostschutzsysteme müssen beides berücksichtigen.",
+        "evidence_text_sha256": "80472b6b2c80a0f4de2d3b6d95febac38ded2a8e0163f36abdcc3abce70290e2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/fuetterung/fuetterung-frostschutz/traenken-und-wasser-frostsichere-pferdetraenken/",
+        "anchor": "frostsichere Pferdetränken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-beratung/",
+        "anchor": "Beratung zu frostsicheren Tränken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-faq/",
+        "anchor": "FAQ zu frostsicheren Pferdetränken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/fuetterung/fuetterung-frostschutz/traenken-und-wasser-frostsichere-pferdetraenken/",
+        "active": true
+      },
+      {
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "traenken-und-wasser-frostsichere-pferdetraenken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Tränke",
+      "Pferdetränke",
+      "Tränkebecken",
+      "Frost",
+      "Leitung",
+      "Frostschutz",
+      "Wasser",
+      "Elektrik",
+      "Installation"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Zuerst Versorgung und Standort planen, danach passende Tränke und Frostschutz auswählen und Anschlüsse fachgerecht installieren lassen; die sichere Reihenfolge ist wichtiger als eine Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
