@@ -1,0 +1,206 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schermaschinen-faq",
+    "plan_slot": "6a33d6be8dd6f083f194e623e0fccb230e9fea2509db393d76de5ea077ac63ad",
+    "target_keyword": "Warum schert meine Schermaschine plötzlich nicht mehr",
+    "title": "Warum schert meine Schermaschine plötzlich nicht mehr?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Aesculap – FAQ Schermaschinen",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen"
+        },
+        {
+          "source_title": "Heiniger – PROGRESS Originalbetriebsanleitung",
+          "source_url": "https://www.manualslib.de/manual/855518/Heiniger-Progress.html?page=15"
+        },
+        {
+          "source_title": "Heiniger – Xplorer Fehlerbehebung",
+          "source_url": "https://www.manualslib.de/manual/191780/Heiniger-Xplorer.html?page=10"
+        }
+      ],
+      "claims": [
+        "Haare und Schmutz zwischen den Schermessern können die Schneidleistung stoppen. Vor dem Reinigen Maschine ausschalten, Messer ausbauen und nach Anleitung korrekt einsetzen.",
+        "Zu wenig Öl erhöht Reibung und Wärme. Heiniger empfiehlt bei Pferdeschermaschinen, die Messer während der Schur mindestens alle 15 Minuten zu ölen.",
+        "Stumpfe, beschädigte oder falsch geschliffene Schermesser schneiden schlecht. Stumpfe Messer gehören zum fachgerechten Schleifservice oder werden ersetzt.",
+        "Zu geringer Scherdruck kann dazu führen, dass die Messer nicht schneiden. Zu hoher Druck fördert Wärme und Verschleiß; der Scherdruck muss nach Anleitung eingestellt werden.",
+        "Nasses Fell oder falsch ausgerichtete Schermesser können die Schur stören. Vor dem Scheren sollte das Fell sauber und trocken sein und der Messerstand kontrolliert werden.",
+        "Bei mechanischen Defekten, beschädigten Teilen oder einem auffälligen Motor ist die zuständige Servicestelle nötig; Sicherheitsmängel dürfen nicht durch mehr Druck übergangen werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum schert meine Schermaschine plötzlich nicht mehr",
+      "topic": "Warum schert meine Schermaschine plötzlich nicht mehr?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schermaschinen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum schert meine Schermaschine plötzlich nicht mehr?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Aesculap – FAQ Schermaschinen",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "evidence_text_sha256": "697abffd265fe6d35d611fea166e6c55ffeb3f16d53c527587f741a7d4eeb3d3",
+        "statement": "Haare und Schmutz zwischen den Schermessern können die Schneidleistung stoppen. Vor dem Reinigen Maschine ausschalten, Messer ausbauen und nach Anleitung korrekt einsetzen.",
+        "evidence_text": "Haare und Schmutz zwischen den Schermessern können die Schneidleistung stoppen. Vor dem Reinigen Maschine ausschalten, Messer ausbauen und nach Anleitung korrekt einsetzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Heiniger – PROGRESS Originalbetriebsanleitung",
+        "source_url": "https://www.manualslib.de/manual/855518/Heiniger-Progress.html?page=15",
+        "evidence_text_sha256": "acc122ca12f30ef676a35cd8299e2f4ef379efe91f0a929f656a16554b957321",
+        "statement": "Zu wenig Öl erhöht Reibung und Wärme. Heiniger empfiehlt bei Pferdeschermaschinen, die Messer während der Schur mindestens alle 15 Minuten zu ölen.",
+        "evidence_text": "Zu wenig Öl erhöht Reibung und Wärme. Heiniger empfiehlt bei Pferdeschermaschinen, die Messer während der Schur mindestens alle 15 Minuten zu ölen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Heiniger – PROGRESS Originalbetriebsanleitung",
+        "source_url": "https://www.manualslib.de/manual/855518/Heiniger-Progress.html?page=15",
+        "evidence_text_sha256": "b010dae582289d6a2121dc214244bad2314247cfbcbd835b3a506f158c91809e",
+        "statement": "Stumpfe, beschädigte oder falsch geschliffene Schermesser schneiden schlecht. Stumpfe Messer gehören zum fachgerechten Schleifservice oder werden ersetzt.",
+        "evidence_text": "Stumpfe, beschädigte oder falsch geschliffene Schermesser schneiden schlecht. Stumpfe Messer gehören zum fachgerechten Schleifservice oder werden ersetzt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Heiniger – Xplorer Fehlerbehebung",
+        "source_url": "https://www.manualslib.de/manual/191780/Heiniger-Xplorer.html?page=10",
+        "evidence_text_sha256": "0d0cf1df3c6b49a8e02b2c6f4f43a591bf86a85aca778632cf3b8d6afa209da5",
+        "statement": "Zu geringer Scherdruck kann dazu führen, dass die Messer nicht schneiden. Zu hoher Druck fördert Wärme und Verschleiß; der Scherdruck muss nach Anleitung eingestellt werden.",
+        "evidence_text": "Zu geringer Scherdruck kann dazu führen, dass die Messer nicht schneiden. Zu hoher Druck fördert Wärme und Verschleiß; der Scherdruck muss nach Anleitung eingestellt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Heiniger – Xplorer Fehlerbehebung",
+        "source_url": "https://www.manualslib.de/manual/191780/Heiniger-Xplorer.html?page=10",
+        "evidence_text_sha256": "7746d9f405289bf7e93105b9cdffe92d5a8dcb62c395a206da60807f0f0de331",
+        "statement": "Nasses Fell oder falsch ausgerichtete Schermesser können die Schur stören. Vor dem Scheren sollte das Fell sauber und trocken sein und der Messerstand kontrolliert werden.",
+        "evidence_text": "Nasses Fell oder falsch ausgerichtete Schermesser können die Schur stören. Vor dem Scheren sollte das Fell sauber und trocken sein und der Messerstand kontrolliert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Aesculap – FAQ Schermaschinen",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/faq/schermaschinen",
+        "evidence_text_sha256": "b03c3435154bb96608e052567e2b897fe157ffc9cc7ce5dfd8723f05b9e8bc1d",
+        "statement": "Bei mechanischen Defekten, beschädigten Teilen oder einem auffälligen Motor ist die zuständige Servicestelle nötig; Sicherheitsmängel dürfen nicht durch mehr Druck übergangen werden.",
+        "evidence_text": "Bei mechanischen Defekten, beschädigten Teilen oder einem auffälligen Motor ist die zuständige Servicestelle nötig; Sicherheitsmängel dürfen nicht durch mehr Druck übergangen werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/gesundheit/gesundheit-fell-und-haut/gesundheit-fellpflege-und-saison-schermaschinen/",
+        "anchor": "Scheren und Fellgesundheit",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schermaschinen-pflege/",
+        "anchor": "Pflege von Schermaschinen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schermaschinen-faq/",
+        "anchor": "häufige Fragen zu Schermaschinen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/gesundheit/gesundheit-fell-und-haut/gesundheit-fellpflege-und-saison-schermaschinen/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-pflege/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schermaschinen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schermaschine",
+      "Schermesser",
+      "Öl",
+      "Scherdruck",
+      "Scheren",
+      "Kontrolle",
+      "Wartung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die symptomorientierte Prüfliste führt bereits durch die Fehlerbehebung. Eine Tabelle würde dieselben Prüfschritte lediglich wiederholen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
