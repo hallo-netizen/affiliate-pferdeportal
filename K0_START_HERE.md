@@ -6,71 +6,60 @@
 
 ## Eingangsautorität — HARDLOCK
 
-Vor dem ersten frischen K0-Schreibversuch dürfen **nur** diese Quellen Auftragsidentität oder Startstatus bestimmen:
+Für einen frischen K0-Start gilt:
 
-- der aktuell angehängte gültige Upload;
-- `K0_START_HERE.md`;
-- `K0_CURRENT_STATE.json`;
-- `K0_GOAL_CONTRACT.json`.
-
-`control/startmaster0107/**`, `runtime_inbox/**`, Protocol/History, frühere `real_runs/**` und frühere Produktionspakete sind **keine K0-Auftrags- oder Batch-Autorität** und dürfen für den neuen Upload nicht gelesen, ausgewählt oder als Blocker verwendet werden.
+- Der aktuell angehängte gültige Upload ist die einzige Auftragsidentität.
+- `K0_START_HERE.md` bestimmt den Startweg.
+- `K0_CURRENT_STATE.json` bestimmt nur den aktuellen K0-Status und darf keinen früheren Auftrag auswählen.
+- `K0_GOAL_CONTRACT.json` bestimmt den Zielvertrag.
+- Frühere Zustände, frühere Läufe, Historie oder frühere Produktionsartefakte dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren.
 
 ## Sichtbares Chatverhalten — HARDLOCK
 
-Bei gültigem angehängtem K0-Handoff + `K0:start`:
+Bei gültigem Upload + `K0:start`:
 
 **NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.**
 
-Verboten:
-- Vorrede;
-- Statusmeldung;
-- Prüfankündigung;
-- Prozessbeschreibung;
-- Routing-Erklärung;
-- Verweis auf andere Wege oder Konzepte;
-- Bitte um `weiter`;
-- Zwischenmeldung irgendeiner Art.
+Keine Vorrede.
+Keine Statusmeldung.
+Keine Prüfankündigung.
+Keine Prozessbeschreibung.
+Keine Routing-Erklärung.
+Keine Zwischenmeldung.
+Keine Bitte um `weiter`.
 
 Die erste sichtbare Antwort ist ausschließlich:
 
-1. die **fertige verifizierte WordPress-Datei**, oder
-2. ein **echter terminaler Blocker**, der intern nicht lösbar ist.
+1. die fertige verifizierte WordPress-Datei; oder
+2. ein echter terminaler Blocker aus genau dem aktuellen Lauf, der intern nicht lösbar ist.
 
 ## Produktionsweg
 
-`Upload -> K0:start -> Recherche -> Writer -> vollständige Regeln -> LanguageTool 6.8 -> finale Regeln -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> Verifikation -> Datei`
+`aktueller Upload -> K0:start -> Recherche -> Writer -> vollständige Regeln -> LanguageTool 6.8 -> finale Regeln -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> Verifikation -> Datei`
 
 Portalzuordnung automatisch.
 
 ## Auftragsautorität — HARDLOCK
 
-Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von Thema, Artikeltyp oder Kategorie:
-
-- der aktuell angehängte gültige Upload ist die einzige Auftragsidentität für den neu gestarteten Lauf;
-- bei **N >= 1** Upload-Einträgen wird der bestehende K0-Einzelartikelweg **genau N-mal** ausgeführt; der Writer selbst bleibt unverändert Einzelartikel-basiert;
-- jeder Upload-Eintrag wird in ursprünglicher Reihenfolge in genau einen frischen Ordner `real_runs/k0/<fresh-run>/` übernommen;
-- jeder Einzelrun erhält eine eigene `WORDPRESS_INTAKE.json` mit `item_count = 1`, exakt dem unveränderten Fünf-Felder-Eintrag des Uploads und neu berechnetem `batch_sha256`; Titel, Keyword, Kategorie, Artikeltyp und `plan_slot` dürfen dabei nicht verändert werden;
-- technischer Startmechanismus ist der **bestehende GitHub-Dateistart**: diese Einzelrun-`WORDPRESS_INTAKE.json` mit `create_file` schreiben;
-- existiert für genau dieses aktuelle Upload-Item bereits ein hashgültiger, identischer Einzelrun-Intake, wird er **nicht überschrieben**; der Lauf wird unmittelbar beim ersten fehlenden Artefakt fortgesetzt;
-- nach vorhandenem oder erfolgreich geschriebenem Einzelrun-Intake ist der **unmittelbar nächste Schritt**: Recherche für genau dieses Item und danach `AUTHORING_CONTEXT.json` im selben Run schreiben;
-- zwischen `WORDPRESS_INTAKE.json` und `AUTHORING_CONTEXT.json` werden **keine** alten Aufträge, Testanbindungen, Produktionsfreigaben, `control/startmaster0107/**`, `runtime_inbox/**`, frühere Runs oder Produktionspakete geprüft;
-- der Commit jedes `AUTHORING_CONTEXT.json` startet unverändert `.github/workflows/k0-authoring-context.yml`; dieser Workflow erzeugt `WRITER_JOB.json` für genau einen Artikel;
-- ein erfolgreich geschriebenes `WORDPRESS_INTAKE.json` ist **kein Abschluss und kein Blocker**; fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**;
-- erst ein tatsächlich fehlgeschlagener Recherche- oder GitHub-Schreibversuch im aktuellen frischen Run darf als technischer Startblocker gelten;
-- die GitHub-Produktionsanbindung darf **niemals aus Vermutung als nicht verfügbar erklärt werden**; Verfügbarkeit wird ausschließlich durch einen tatsächlichen Aufruf der vorhandenen GitHub-Dateischreibfunktion festgestellt;
-- sind GitHub-Aktionen im Chat nicht direkt als eigene Werkzeuge sichtbar, ist das **kein Nichtverfügbarkeitsnachweis**: über den vorhandenen Tool-Router/Code-Mode zuerst die GitHub-Aktionen entdecken und `mcp__GitHub__create_file` bzw. `mcp__GitHub__update_file` verwenden;
-- erst wenn diese Werkzeug-Suche **keine** GitHub-Dateischreibaktion liefert oder deren tatsächlicher Aufruf fehlschlägt, darf `GITHUB_WRITE_UNAVAILABLE` als technischer Blocker gelten;
-- solange die GitHub-Dateischreibfunktion verfügbar ist, ist der Produktionsstart **ausführbar** und muss ausgeführt werden; ein Chat darf nicht mit `0 von N produziert` abbrechen, ohne mindestens den konkreten Schreibversuch des aktuellen Uploads ausgeführt zu haben;
-- der gültige aktuelle Upload startet und bestimmt ausschließlich seine frischen Einzelruns;
-- Ablauf je Artikel: `WORDPRESS_INTAKE.json` -> Recherche -> `AUTHORING_CONTEXT.json` -> vorhandener GitHub-Workflow -> `WRITER_JOB.json` -> bestehende Qualitätsstrecke;
-- erst wenn alle N Einzelruns verifiziert sind, werden die N WordPress-Singles mit dem bestehenden `engine/wordpress_batch_export.py` in **ursprünglicher Upload-Reihenfolge** zu genau einer WordPress-Batchdatei zusammengeführt;
-- ein Mehrfach-Upload darf **nicht** als Mehrfach-Writer-Run an `k0_writer_station` oder `k0-authoring-context.yml` übergeben werden;
-- vor dieser Bindung dürfen frühere Runs oder Produktionsstände nicht als Startzustand gelesen oder bewertet werden;
-- `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
-- ein terminaler Blocker ist nur gültig, wenn er **nach Bindung des aktuellen Uploads** aus genau diesem aktuellen Lauf/Gate stammt;
-- jeder neue Upload wird fachlich neu bewertet und neu recherchiert;
-- historische Texte oder Research-Artefakte dürfen nicht als Inhaltsquelle übernommen werden;
-- historische Informationen sind **keine Ausschlussliste**: unabhängig neu gefundene gleiche Fakten oder Quellen bleiben zulässig.
+- Jeder Eintrag des aktuell angehängten gültigen Uploads wird verarbeitet.
+- Es gibt keine fest vorgegebene Batchgröße, Obergrenze oder mengenabhängige Startlogik.
+- Die ursprüngliche Upload-Reihenfolge bleibt erhalten.
+- Jeder Upload-Eintrag wird über den bestehenden unveränderten K0-Einzelartikelweg verarbeitet.
+- Für jeden Upload-Eintrag wird ein eigener frischer K0-Run verwendet.
+- Die `WORDPRESS_INTAKE.json` dieses Runs enthält ausschließlich den unveränderten Fünf-Felder-Eintrag des aktuellen Uploads: `article_type`, `category`, `plan_slot`, `target_keyword`, `title`.
+- Titel, Keyword, Kategorie, Artikeltyp und `plan_slot` werden nicht verändert.
+- Der technische Start bleibt der bestehende GitHub-Dateistart: `WORDPRESS_INTAKE.json` schreiben.
+- Nach dem vorhandenen oder erfolgreich geschriebenen Intake folgt im selben Run unmittelbar die Recherche für genau diesen Upload-Eintrag und danach `AUTHORING_CONTEXT.json`.
+- Der Commit von `AUTHORING_CONTEXT.json` startet unverändert `.github/workflows/k0-authoring-context.yml`; dieser Workflow erzeugt `WRITER_JOB.json` für genau diesen Einzelartikel.
+- Danach läuft unverändert die bestehende Writer- und Qualitätsstrecke.
+- Nach Verifikation aller zum aktuellen Upload gehörenden Einzelartikel werden die WordPress-Singles mit `engine/wordpress_batch_export.py` in ursprünglicher Upload-Reihenfolge zu einer WordPress-Datei zusammengeführt.
+- Ein vorhandener Run darf nur dann fortgesetzt werden, wenn seine Auftragsidentität hashgültig und exakt identisch zu einem Eintrag des aktuell angehängten Uploads ist. Andernfalls wird er ignoriert.
+- Ein erfolgreich geschriebener Intake ist kein Abschluss und kein Blocker.
+- Fehlender `workflow_dispatch` oder ein fehlender Run-Button ist kein Blocker.
+- Die GitHub-Dateischreibfunktion darf nicht aus Vermutung als nicht verfügbar erklärt werden. Erst ein tatsächlicher Tool-Discovery- und Schreibversuch für den aktuellen Upload darf `GITHUB_WRITE_UNAVAILABLE` begründen.
+- Ein terminaler Blocker ist nur gültig, wenn er aus genau dem aktuellen Upload und dem aktuellen Lauf stammt.
+- Jeder neue Upload wird fachlich neu recherchiert.
+- Historische Texte oder Research-Artefakte werden nicht als Inhaltsquelle übernommen.
 
 Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
 
