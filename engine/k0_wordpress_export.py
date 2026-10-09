@@ -6,8 +6,6 @@ from .k0_portal_resolver import validate_intake
 from .writer_contract_guard import verify_package as verify_writer_contract
 
 CONTRACT='SYSTEM4_WORDPRESS_HANDOFF_V1'
-PLUGIN_VERSION='0.28.30'
-PLUGIN_BUILD='0.28.30-pste-v5-binding-safe'
 PPM_VERSION='6.7.9'
 FIVE_FIELDS=('article_type','category','plan_slot','target_keyword','title')
 ARTICLE_FIELDS=('index','article_id','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679')
@@ -172,8 +170,6 @@ def build(intake, package, portal, gate, lt, full_rules, bindings, category_payl
         'mime_type':'application/json',
         'intended_next_step':'WORDPRESS_DIRECT_IMPORT',
         'plugin_name':'Portal SEO Editorial Plan Compiler',
-        'plugin_version_verified_against':PLUGIN_VERSION,
-        'plugin_build_verified_against':PLUGIN_BUILD,
         'ppm_version_verified_against':PPM_VERSION,
         'direct_wordpress_upload_ready':True,
         'direct_upload_block_reason':None,
