@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-08
-STATUS: FACHKONZEPT + KATEGORIEREGELN 2.6/1.6 FEST / FACH-SOLLPROFIL ABGESCHLOSSEN / OPERATIVE FORTSETZUNG AUSSCHLIESSLICH ÜBER SEO_KATEGORIEN/CURRENT_STATE.md
+STAND: 2026-10-09
+STATUS: FACHKONZEPT + KATEGORIEREGELN 2.6/1.6 ABGESCHLOSSEN / FACH-SOLLPROFIL FROZEN / OPERATIVE HD-001-FORTSETZUNG AUSSCHLIESSLICH ÜBER SEO_KATEGORIEN-CURRENT
 
 ## Rolle
 
@@ -323,7 +323,7 @@ Aktuelle CORE-Rollenabdeckung:
 ## Fachlicher Endstand Kategorienstruktur
 
 Abschluss:
-- 359/359 aktuelle CORE-Identitäten nach Regeln 1.6 entschieden;
+- 359/359 damalige Current-CORE-Identitäten nach Regeln 1.6 entschieden;
 - 279 HOBBY_HUB;
 - 53 ORIENTATION_UNIVERSE;
 - 22 EDITORIAL_TOPIC;
@@ -337,35 +337,17 @@ Abschluss:
 Autoritativ:
 `../SEO_KATEGORIEN/HD001_FINAL_VISIBLE_FACH_SOLLPROFIL_20261008.json`
 
-## Abschlussstatus Konzept
+## Operative Abgrenzung
 
-Das Fachkonzept und die Kategorieregeln sind abgeschlossen:
-- Zielvertrag 2.6;
-- Assessment Rules 1.6;
-- 8 geschützte Hauptwelten;
-- alle vorhandenen kanonischen Ebenen sichtbar;
-- HOBBY_HUB mit sichtbarer Content-Kategorieebene;
-- 3–6 Content-Kategorien je HOBBY_HUB;
-- jede Leaf-Kategorie ideal 5–12 eigenständige Beitragsintentionen;
-- keine künstliche Maximalzahl der Welt-Zwischenebene; etwa 10–11 fachlich klare Punkte zulässig;
-- keine leeren Symmetrieäste;
-- fachliches Sollprofil ist eingefroren.
+Das Konzeptbüro enthält keine eigene dynamische HD-001-Live-/Plugin-/Sync-Wahrheit.
 
-Die technische Auflösung ist NICHT mehr offen. Sie wurde in SEO_KATEGORIEN / HD-001 bis V1.14.3 lokal vollständig geprüft und live read-only bestätigt.
-
-## Erster offener Blocker
-
-Kein eigener Konzept-Blocker.
-
-Operativer Blocker ausschließlich aus:
+Für die operative Fortsetzung gilt ausschließlich:
 `../SEO_KATEGORIEN/CURRENT_STATE.md`
+
+Dort stehen aktueller Live-Status, erster Blocker und exakt eine NEXT ACTION.
 
 ## EXAKT EINE NEXT ACTION
 
 Keine weitere Konzeptänderung.
-Für jede operative Fortsetzung zu Kategorien/HD-001 ausschließlich:
-`../SEO_KATEGORIEN/CURRENT_STATE.md`
-→ Frischecheck
-→ dortige NEXT ACTION ausführen.
+Für HD-001 direkt der zuständigen SEO-Kategorien-Current folgen.
 
-Keine Status-/NEXT-ACTION-Kopie aus diesem Konzept-Current ableiten.
