@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-08
-STATUS: V1.14.3 RULE16 VISIBLE FULL LOCAL HARD PASS / LIVE-DRY-RUN PENDING / KEIN LIVE-SYNC
+STATUS: V1.14.3 FULL LOCAL HARD PASS + LIVE-DRY-RUN PASS / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -69,8 +69,15 @@ GRUND:
 Kein byteidentisches GitHub-Binary erfinden.
 
 NÄCHSTER ARTEFAKTSCHRITT:
-V1.14.3 installieren → Finaler Zielbaum → genau einen read-only Live-Dry-Run → JSON prüfen.
-Kein Sync vor Live-Dry-Run-Abnahme.
+V1.14.3-Zielbaum genau einmal live synchronisieren → Post-Sync-JSON herunterladen → 1.723/1.723 + Frontend/Header prüfen.
+Kein zweiter Lauf vor dieser Prüfung.
+
+LIVE-DRY-RUN 2026-10-09:
+- PASS / valid=true;
+- 1.293 CREATE + 430 UPDATE + 27 ARCHIVE;
+- 0 Provider;
+- 0 Writes;
+- exakt lokales Migrationsdelta.
 
 LOKALE V1.14.3-ABNAHME:
 - 1.723 Zielobjekte;
