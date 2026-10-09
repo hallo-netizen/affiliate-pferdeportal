@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "0e1c8f2005ed3afe0e804483c67100717d478d0fc66d3fdfeab95d6e2861c46b",
+      "target_keyword": "Wie viele Schubkarren sind 1 Kubikmeter Erde",
+      "title": "Wie viele Schubkarren sind 1 Kubikmeter Erde?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "0f29e58143ea9323afa30845f2159407d4fcaf233e6278397b452e30e912c9a7"
+}
