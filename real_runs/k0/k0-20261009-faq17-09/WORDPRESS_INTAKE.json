@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "reitplatzboden-faq",
+      "plan_slot": "da5943c5cd97eccf6ce1877cd60e558b087ed319721a99cbc44fd4b100a149a3",
+      "target_keyword": "Wie kann ich den Reitplatzboden verbessern",
+      "title": "Wie kann ich den Reitplatzboden verbessern?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "ade909ef5f3a34dcf39d983506cbf5c79149b039faa01de7d9eb0bcf83d1b5e5"
+}
