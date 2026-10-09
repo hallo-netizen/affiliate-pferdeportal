@@ -1,3 +1,24 @@
+## PLUGINBÜRO LIVE-INVENTUR 2026-10-09 – FRISCHER WORDPRESS-READBACK
+
+Dieser Block supersediert ausschließlich ältere **Inventar-/Liveversions-Aussagen** in dieser Datei. Er ersetzt keine Fach-/Release-/NEXT-ACTION-Autorität.
+
+Aktueller beobachteter WordPress-Bestand:
+- vollständige Liste: `LIVE_PLUGIN_INVENTORY_20261009.md`
+- **47 Plugins / 45 aktiv / 2 inaktiv**
+- Affiliate Portal Template Kit **1.50.581 aktiv**
+- Affiliate-Zentrale **6.72.211 aktiv**
+- Portal Production Machine **6.7.9 aktiv**
+- Portal SEO Redaktionsplan Compiler **0.28.34 aktiv**
+- Portal SEO Themenengine **0.57.63 aktiv**
+- Allgemeine Bildzentrale **2.7.6 aktiv**
+- Performance Diagnose Safe **2.3.0 aktiv**
+
+Für die vier aktuell vorhandenen exakten Eigenplugin-ZIPs (Template, Affiliate, PSTE, PSERC) wurden zusätzlich Version und SHA-256 geprüft und in der Live-Inventur dokumentiert.
+
+Keine PU-ID: Dies ist Inventar-/Artefaktsynchronisierung, kein in diesem Vorgang ausgeführtes WordPress-Update.
+
+---
+
 ## PLUGIN-/PERFORMANCE-CURRENT 2026-10-09 – FRISCH GEBUNDEN 6.72.211 BLOCK 8
 
 **Dieser Block supersediert alle später in dieser Datei verbliebenen historischen Affiliate-/Performance-NEXT-ACTION-Blöcke.**
