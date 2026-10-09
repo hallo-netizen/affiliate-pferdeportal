@@ -37,7 +37,7 @@ class K0StartRouterTests(unittest.TestCase):
         text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
         self.assertIn("bestehende GitHub-Dateistart",text)
         self.assertIn("`WORDPRESS_INTAKE.json` mit `create_file` schreiben",text)
-        self.assertIn("`AUTHORING_CONTEXT.json` mit `create_file` schreiben",text)
+        self.assertIn("danach `AUTHORING_CONTEXT.json` im selben Run schreiben",text)
         self.assertIn("fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**",text)
         self.assertIn("GitHub-Schreibversuch",text)
 
@@ -57,7 +57,7 @@ class K0StartRouterTests(unittest.TestCase):
 
     def test_fresh_start_uses_current_upload_without_extra_release(self):
         text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
-        self.assertIn("gültige aktuelle Upload startet die frischen Einzelruns direkt",text)
+        self.assertIn("gültige aktuelle Upload startet und bestimmt ausschließlich seine frischen Einzelruns",text)
         self.assertIn("keine zusätzliche Batch-Freigabe wird gelesen oder benötigt",text)
         self.assertIn("WRITER_JOB.json",text)
         self.assertNotIn("1er-/3er-/7er-",text)
