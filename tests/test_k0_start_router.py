@@ -45,16 +45,18 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertEqual(sm["final_order"],"ORIGINAL_UPLOAD_ORDER")
         self.assertFalse(sm["workflow_dispatch_required"])
 
-    def test_start_finds_research_and_production_path(self):
+    def test_start_uses_proven_simple_production_route(self):
         for token in (
-            "WORDPRESS_INTAKE.json",
-            "Recherche",
-            "AUTHORING_CONTEXT.json",
-            ".github/workflows/k0-authoring-context.yml",
-            "WRITER_JOB.json",
-            "engine/wordpress_batch_export.py",
+            "Upload -> K0:start -> Recherche -> Writer",
+            "vollständige Regeln",
+            "LanguageTool 6.8",
+            "SYSTEM4_WORDPRESS_HANDOFF_V1",
+            "Verifikation -> Datei",
         ):
             self.assertIn(token,self.start)
+        self.assertNotIn("ALL_TOOLS",self.start)
+        self.assertNotIn("mcp__GitHub__create_file",self.start)
+        self.assertNotIn("GITHUB_WRITE_UNAVAILABLE",self.start)
 
     def test_quality_and_publish_locks_unchanged(self):
         self.assertFalse(self.goal["hard_rules"]["quality_reduction_allowed"])
@@ -62,12 +64,6 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertTrue(self.goal["hard_rules"]["ppm_6_7_9_parity_required"])
         self.assertFalse(self.goal["hard_rules"]["publish_allowed"])
         self.assertFalse(self.current["publish_allowed"])
-
-    def test_start_binds_real_github_write_action_before_completion(self):
-        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
-        self.assertIn("mcp__GitHub__create_file",text)
-        self.assertIn("ALL_TOOLS",text)
-        self.assertIn("kein Abschluss",text)
 
     def test_active_k0_workflows_do_not_depend_on_legacy_runtime_paths(self):
         for path in (
