@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "2766b793883717cc3c0346d347286a2e4015ec98777654cd259f4d758a4c508b",
+      "target_keyword": "Wie groß muss eine Schabracke sein",
+      "title": "Wie groß muss eine Schabracke sein?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "1284158159b96e9aea7016fcffe9043e60e3c8916e88465ab6ee2710706eb0d9"
+}
