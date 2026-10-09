@@ -1201,3 +1201,28 @@ UNVERÄNDERT:
 
 OPERATIVE CURRENT-AUTORITÄT:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/CURRENT_STATE.md`
+
+
+## HOBBYRAUSCH-HD001-20261009-R27 – Rule 2.7 globaler Zielbaum fail-closed korrigiert
+
+WAS:
+Nach dem 10-Hobby-Pilot wurde der Rule-2.7-Zielbaum global auf 279 HOBBY_HUBs erweitert: Technik auf 9 sichtbare Mega-Menü-Kinder über `RC & Modelltechnik`, FAQ-/Einstiegsabdeckung, flexible 12er-Magazin-Kachelstruktur und Erhalt aller sinnvollen Bestands-Leafs.
+
+NACHHOLBEFUND:
+Der erste komplette 2148er Kandidat enthielt 46 neue `Ausrüstung & Kosten`-Leafs, deren drei angebliche Supporting Intents nur generische Templates waren. Das erfüllt die Zielvertrag-2.7-Regel für optionale Leafs nicht belastbar.
+
+KORREKTUR:
+Fail-closed wurden exakt diese 46 nicht belegten optionalen Leafs entfernt. Keine Bestands-Leafs wurden gelöscht. Codebasis bleibt 1.14.8; nur das Zielprofil wurde geändert.
+
+AKTUELLER LOKALER KANDIDAT:
+`HD001_V1.14.8_RULE27_FAILCLOSED_COMPLETE_ONE_SYNC_HARDPASS.zip`
+SHA-256 `0ae09fa5d75656416a0e4e7c1bb4fab74e01e776c2e36b13b8b6734a9efc5c0c`.
+
+LOKAL:
+373 CREATE / 0 ADOPT / 1729 UPDATE / 6 ARCHIVE → COMPLETE → 2102/2102 Readback → Frontend/279 Hubs/Header PASS → zweiter Dry-Run 2102 UNCHANGED; PHP 33/33; ZIP PASS.
+
+LIVE:
+Der aktuell sichtbare 2148er Dry-Run ist damit überholt und darf nicht synchronisiert werden.
+
+NEXT:
+Fail-closed ZIP installieren → genau einen neuen read-only Live-Dry-Run → nur bei exakt 2102 / 373 / 0 / 1729 / 6 weiterprüfen; noch kein Sync.
