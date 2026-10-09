@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-10-08
-STATUS: V1.14.3 FULL LOCAL HARD PASS + LIVE DRY-RUN PASS / ONE LIVE SYNC RELEASED / POST-SYNC READBACK PENDING
+STAND: 2026-10-09
+STATUS: V1.14.3 LIVE ROLLED BACK / V1.14.4 FULL LOCAL POSITIVE+NEGATIVE HARD PASS / LIVE RECHECK PENDING
 
 ## Plugin
 
@@ -604,3 +604,47 @@ Evidence:
 
 Synchronize the accepted V1.14.3 target exactly once, then download and verify the post-sync JSON.
 No second run before post-sync verification.
+
+## V1.14.4 – CURRENT RELEASE CANDIDATE (2026-10-09)
+
+Auslöser:
+- realer V1.14.3-Sync endet bei `core:gestalten:oberflaeche-deko [name]` nach 39 Readbacks und rollt vollständig zurück;
+- Zielvertrag 2.6 verbietet Kategorie unter Kategorie;
+- V1.14.3-Magazinmodell enthält 12 solche Kanten.
+
+Änderungen:
+- HTML-Entity-Normalisierung für Page- UND Term-Namen im Dry-Run/Readback;
+- echte Abweichungen bleiben strikt;
+- Readbackdiagnose mit expected/actual;
+- generisches Kategorie-unter-Kategorie-Gate;
+- Magazin-Gruppen als Page/View statt Taxonomie-Parent;
+- neutraler Editorial-Fallback Hobbyfinder;
+- vier beschlossene Magazin-Gruppen unverändert.
+
+Lokale Abnahme:
+- V1.14.3-Fehler lokal am selben Knoten nach denselben 39 Readbacks reproduziert;
+- V1.14.4 Dry-Run PASS;
+- V1.14.4 Sync 1.723/1.723 COMPLETE;
+- zweiter Sync 1.723 UNCHANGED / 0 Writes;
+- Header 102/102;
+- Magazin 4/4;
+- Negativsuite fail-closed inkl. echter Namensänderung mit ROLLBACK;
+- PHP 33/33 vor und nach Fresh-Unpack.
+
+Artefakt:
+`HD001_V1.14.4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS.zip`
+
+SHA-256:
+`9ec9b0d7b2776c59262aebbed9d3e9a88a533ce11084c4e66cd011a9126da06d`
+
+Profil SHA-256:
+`08c1da1bb43add667b73ea02bbaab6d3ad3c3228de88673254d8d5ebbdb8996c`
+
+Evidence:
+`../../../SEO_KATEGORIEN/HD001_V1_14_4_RULES_MAGAZIN_FULL_LOCAL_HARDPASS_20261009.json`
+
+LIVE-STATUS:
+V1.14.4 wurde in diesem Lauf NICHT ins echte WordPress geschrieben.
+
+NEXT ACTION:
+V1.14.4 installieren → Live-Dry-Run → exakt ein kontrollierter Sync → vollständiger Post-Sync-Readback.
