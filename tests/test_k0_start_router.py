@@ -55,12 +55,12 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("mcp__GitHub__update_file",text)
         self.assertIn("GITHUB_WRITE_UNAVAILABLE",text)
 
-    def test_fresh_start_is_not_blocked_by_stale_batch_release(self):
+    def test_fresh_start_uses_current_upload_without_extra_release(self):
         text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
-        self.assertIn("keine separate historische Produktionsfreigabe",text)
-        self.assertIn("1er-/3er-/7er-/sonstige Test- oder Produktionsfreigaben",text)
-        self.assertIn("gültige aktuelle Upload ist selbst die Auftragsautorität",text)
+        self.assertIn("gültige aktuelle Upload startet den neuen Run direkt",text)
+        self.assertIn("keine zusätzliche Batch-Freigabe wird gelesen oder benötigt",text)
         self.assertIn("WRITER_JOB.json",text)
+        self.assertNotIn("1er-/3er-/7er-",text)
 
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
@@ -70,6 +70,11 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertEqual(cur["work_binding"]["start_ref"],"K0_START_HERE.md")
         self.assertFalse(cur["work_binding"]["alternate_route_allowed"])
         self.assertFalse(cur["old_chat_or_archive_authority"])
+        self.assertNotIn("scope_lock",cur["work_binding"])
+        self.assertNotIn("plugin_version",cur["wordpress_export"])
+        self.assertNotIn("plugin_build",cur["wordpress_export"])
+        goal=json.loads(Path("K0_GOAL_CONTRACT.json").read_text(encoding="utf-8"))
+        self.assertNotIn("wordpress_plugin_binding",goal["hard_rules"])
 
 if __name__=="__main__":
     unittest.main()
