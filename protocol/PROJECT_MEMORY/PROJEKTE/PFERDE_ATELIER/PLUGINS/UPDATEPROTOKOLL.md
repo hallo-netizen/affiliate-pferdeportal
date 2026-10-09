@@ -513,3 +513,26 @@ FIX: Automatik führt vor Existing-Only einen sicheren kompakten Baseline-/Conte
 REGRESSION: 4 Dateien geändert / 112 von 116 byteidentisch; Fresh-Unpack 116/116; PHP 79/79; JSON 36/36; Static 53/53; Compact-Preflight 5/5; stale-first-click Adminmatrix 5/5; bestehende Automatik 8/8; Kurzer Dienstweg 10/10; K0 6/6; PSERC 0.28.33 Regression PASS.
 
 LIVE: noch nicht installiert/readback-bestätigt. **Keine PU-ID.**
+
+
+## RELEASE-VORBEREITUNG 2026-10-09 – PA-E-003 / AFFILIATE-ZENTRALE 6.72.211 / KEIN PU-EREIGNIS
+
+PLUGIN_ID: PA-E-003  
+ART: GEBÜNDELTER PERFORMANCE-/RENDERER-KANDIDAT  
+HERKUNFT: EIGEN  
+FACHBÜRO: AFFILIATE  
+VON_VERSION: 6.72.210 RELEASED  
+AUF_VERSION: 6.72.211 CANDIDATE_LOCAL_HARDTEST_PASS  
+TECHNISCHE_AUTORITÄT: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`, Generation 304  
+SOURCE_MANIFEST: `9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f`  
+SOURCE_IMPLEMENTIERUNGSSTAND: `164cb789abcbfcffe70975fd463182041c5c923a`  
+WARUM: AFF-ERR-064 beseitigen und belegte wiederholte Affiliate-Arbeit auf fremden AJAX-/öffentlichen Frontend-Requests reduzieren, ohne Funktionsrücknahme und ohne Workflow-/Architekturänderung.  
+ABHÄNGIGKEITEN: 6.72.210-Fach-/Textlink-/Bannerverhalten; bestehende Ranking-/Provider-/Slot-/Veto-/Trackingpfade; WordPress 7.1.2 / MariaDB 10.11 für finalen Pflichtgate.  
+BACKUP_ROLLBACK_REF: letzter vollständig freigegebener technischer Release 6.72.210, Installer SHA-256 `43ca6033a0f8dc929f777fc6580f2b41dfd711c6f561db99658f402cc5af88a1`.  
+POSITIVTEST: lokaler Block-8-Hardtest PASS; AFF-ERR-064 behoben; fremde AJAX-Hooks 207→75; doppelte öffentliche Campaign-Abfrage 2→1; Content-/Kategorie-Kontext request-lokal wiederverwendet.  
+NEGATIVTEST: Admin-/Workerpfade unverändert; keine Änderung an Ranking, Provider, Slots, Veto, Publish, Kategorie, Design oder Tracking.  
+FACH_REGRESSION: PHP 22/22 PASS; Evidence `release/affiliate-zentrale/evidence/affiliate_router_v672211_frontend_context_cache_block8_20261008.md`; lokale Positiv-/Negativ-/Regression PASS.  
+WORDPRESS_MARIADB: **OPEN für exakt Manifest 9f15bf…**; alte versionsharte 6.72.170/171/210-Runner sind kein gültiger aktueller Gate.  
+INSTALLER/LIVE: kein finaler Installer, kein Release, keine Installation.  
+ERGEBNIS: TECHNISCHER KANDIDAT LOKAL PASS / RELEASE BLOCKED BIS EXAKTER WORDPRESS-MARIADB-GATE PASS.  
+NOTIZ: Bewusst **keine PU-ID**, weil kein ausgeführtes WordPress-Update stattgefunden hat; nach Release+Installation wird erst dann ein echtes PU-Ereignis angelegt.
