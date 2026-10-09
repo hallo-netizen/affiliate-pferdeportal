@@ -41,6 +41,12 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("fehlender `workflow_dispatch`-/Run-Button ist **kein Blocker**",text)
         self.assertIn("GitHub-Schreibversuch",text)
 
+    def test_start_blocker_requires_real_github_write_attempt(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("niemals aus Vermutung als nicht verfügbar erklärt werden",text)
+        self.assertIn("tatsächlichen Aufruf der vorhandenen GitHub-Dateischreibfunktion",text)
+        self.assertIn("ein Chat darf nicht mit `0 von N produziert` abbrechen",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
