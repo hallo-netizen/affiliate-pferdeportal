@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "a1ed8c8e2193ec507e93e66b89d6d176c4ccd8ec98930f956df4ec912b9d44ce",
+      "target_keyword": "Wie finde ich den richtigen Sattelgurt für mein Pferd",
+      "title": "Wie finde ich den richtigen Sattelgurt für mein Pferd?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "b7c398eddfbe64a37e52147a7d65cc7f52bddf3f3b6541786fe67cca6cf116c3"
+}
