@@ -1089,3 +1089,24 @@ UNVERÄNDERT:
 
 ERGEBNIS:
 Single-Truth-Nachholcheck PASS.
+
+
+---
+
+## PU-20261009-023 – HD-001 Konzept-Current Altstände entfernt
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Single-Truth-Nachholkorrektur vor Übergabe. Keine Plugin-Codeänderung, keine WordPress-Schreibaktion.
+
+BEFUND:
+In `KONZEPT/CURRENT_STATE.md` standen trotz korrekter finaler Fachsektion noch ältere Zwischenstandsblöcke mit `299 offen` bzw. `198 offen`.
+
+KORREKTUR:
+Diese überholten Zwischenstandsblöcke wurden entfernt.
+Das Konzeptbüro hält nur noch den abgeschlossenen Fach-/Regelstand und routet operative HD-001-Livearbeit ausschließlich an `SEO_KATEGORIEN/CURRENT_STATE.md`.
+
+ERGEBNIS:
+Keine konkurrierende operative Current-/Blocker-/NEXT-ACTION-Wahrheit mehr.
