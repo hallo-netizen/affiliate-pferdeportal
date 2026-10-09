@@ -31,10 +31,6 @@
     "publish_allowed": false,
     "public_start_router_ref": "main:K0_START_HERE.md",
     "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
-    "scope_lock": [
-      "ONLY_SINGLE_POST_H2_RENDERING_SPACING",
-      "EXISTING_INTERNAL_LINK_DISTRIBUTION_LOCK"
-    ],
     "do_not_touch": [
       "WRITER_CONTENT_RULES_EXCEPT_EXISTING_LINK_DISTRIBUTION_LOCK",
       "TABLE_LOGIC",
@@ -49,8 +45,6 @@
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
-    "plugin_version": "0.28.30",
-    "plugin_build": "0.28.30-pste-v5-binding-safe",
     "article_id_rule": "canonical article:[0-9a-f]{24} from PPM 6.7.9 registry",
     "plan_slot_rule": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
     "production_context_fields": [
