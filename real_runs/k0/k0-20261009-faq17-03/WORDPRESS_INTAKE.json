@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "ee73fa8fb7df7fed17b16e6d442aad897e1bac9c3fcb30f20a75c3cf69a141fb",
+      "target_keyword": "Welche Schabracke passt zu meinem Pferd",
+      "title": "Welche Schabracke passt zu meinem Pferd?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "03a7c6f9c9aeea8234efe2ea8bf1403ac076153b3e864915ecb9385869f9ca8d"
+}
