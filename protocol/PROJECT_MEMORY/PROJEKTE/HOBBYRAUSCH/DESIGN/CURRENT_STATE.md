@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-10
-STATUS: DESIGN-SPEZIFIKATION 1.0 GEBUNDEN / BASISPLUGIN ALS ORIGINAL GESICHERT / VISUELLER PROTOTYP NÄCHSTES
+STATUS: STARTSEITEN-DESIGN ALS BASIS FREIGEGEBEN / LOGO OFFEN / CLAIM-SLOT GEBUNDEN / PLUGIN-UMSETZUNG NÄCHSTES
 
 ## Aktueller belastbarer Stand
 
@@ -52,7 +52,14 @@ Die Hobbyrausch-spezifische Pluginbereinigung ist noch nicht durchgeführt; vor 
 
 ## EXAKT EINE NEXT ACTION
 
-Startseite + globaler Rahmen visuell spezifizieren/prototypisieren:
-Header, Mega-Menü, Suche, Farben, Typografie, Karten, Bildsprache, Affiliate-Slots und Footer.
+Plugin-Umsetzung der freigegebenen Startseiten-/Globalstruktur vorbereiten:
+- Logo nur als zentral austauschbarer Platzhalter;
+- Claim-Slot im Header vorsehen;
+- keine erfundene Community;
+- drei Monetarisierungsarten getrennt;
+- leere Slots vollständig unsichtbar;
+- mobile Struktur von Anfang an mitführen.
 
-Danach Hub Ebene 1 aus demselben System ableiten.
+Dabei ausschließlich auf dem **tatsächlich aktuellen Designplugin-Stand** aufsetzen; keinen älteren 1.50.421/1.50.541-Stand als Arbeitsbasis verwenden.
+
+Danach Hub Ebene 1 aus demselben Designsystem ableiten.
