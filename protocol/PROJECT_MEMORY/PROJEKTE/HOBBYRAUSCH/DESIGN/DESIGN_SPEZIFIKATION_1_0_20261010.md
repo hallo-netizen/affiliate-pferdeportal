@@ -538,3 +538,32 @@ SHA-256:
 `3b5ef12e367ca0616278f92686cc5efccb71d45778056d289410c7d44bac3edd`
 
 WordPress-Live-Abnahme ist noch offen. Hub 1 wird erst nach dem Live-PASS aus demselben Designsystem abgeleitet.
+
+
+## 22. WELTENKARTEN / ICON-SYSTEM – FREIGABE 2026-10-10
+
+Für die Startseite gilt ab 1.50.597:
+
+- die acht CORE-Welten werden zunächst vollständig gezeigt;
+- Desktop: 4 × 2 statt acht schmaler Karten nebeneinander;
+- größere Bildflächen;
+- keine kleinen Untertitel in den Weltkarten;
+- Welttitel deutlich stärker;
+- weniger Rundung an Boxen/Karten;
+- Buttons dürfen weiterhin stärker gerundet bleiben.
+
+### Icon-System
+
+Jede CORE-Welt besitzt ein festes, wiederverwendbares Icon und eine feste Akzentfarbe.
+Dieses System wird nicht nur dekorativ auf der Startseite eingesetzt, sondern dient als visueller roter Faden für:
+- Hauptnavigation;
+- Startseiten-Weltkarten;
+- spätere Hubseiten;
+- Kategorieebenen;
+- Beitragsebene, wenn die jeweilige Weltzuordnung eindeutig ist.
+
+Die Icons dürfen die echten Kategorienamen niemals ersetzen; sie ergänzen sie ausschließlich visuell.
+
+### Offene Darstellungsentscheidung
+
+Ob langfristig alle acht Welten oder nur vier prominente Welten auf der Startseite gezeigt werden, bleibt offen. Die technische Struktur muss beides ohne Redesign ermöglichen. Aktueller Stand: alle acht sichtbar.
