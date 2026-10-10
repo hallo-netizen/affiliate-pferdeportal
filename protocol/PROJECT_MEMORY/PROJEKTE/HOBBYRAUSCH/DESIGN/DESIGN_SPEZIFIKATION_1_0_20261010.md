@@ -381,3 +381,50 @@ Dabei werden zugleich festgelegt:
 - erste unsichtbar-schaltbare Affiliate-Slots.
 
 Erst nach PASS wird Hub Ebene 1 daraus abgeleitet.
+
+
+## 17. Freigabestand Startseite / Header-Nachtrag 2026-10-10
+
+Der zuletzt visualisierte Startseitenentwurf ist als **gestalterische Startbasis freigegeben**.
+
+### Logo
+- das gezeigte Logo ist **nicht freigegeben**;
+- bis zur gesonderten Logoentscheidung wird ausschließlich ein neutraler Logo-/Wordmark-Platzhalter verwendet;
+- keine technische oder gestalterische Abhängigkeit an das provisorische Signet bauen;
+- Logo muss später zentral austauschbar sein, ohne Header-/Layoutumbau.
+
+### Claim
+Im Kopfbereich wird ein eigener zentral steuerbarer Claim-Platz vorgesehen.
+
+Desktop:
+- kompakte einzeilige Claim-Zone im oberen Marken-/Headerbereich;
+- sichtbar, aber deutlich kleiner als Suche und Hauptnavigation;
+- Claim darf die Headerhöhe nur minimal erhöhen;
+- Claimtext zentral austauschbar.
+
+Mobile:
+- Claim darf nicht zu einer dritten dominanten Headerzeile führen;
+- entweder kurze einzeilige Fassung oder responsive Ausblendung zugunsten des Hero-Claims;
+- keine Verdopplung desselben Claims direkt hintereinander.
+
+### Freigegebene Startseitenstruktur
+1. Header inkl. Claim-Platz, Suche und Navigation
+2. kompakter Hero ohne Werbung
+3. 8 reale Hobby-Welten
+4. Hobbyfinder
+5. Magazin/Ratgeber
+6. Affiliate-Produkte – nur bei realer Belegung
+7. Affiliate-Banner – nur bei realer Belegung
+8. weiterführende redaktionelle Inhalte
+9. direkt vermietete Werbefläche – nur bei realer Belegung
+10. Footer
+
+Erfundene Portalbereiche wie eine allgemeine "Community" sind nicht Bestandteil des freigegebenen Hobbyrausch-Bestands und dürfen nicht als Navigations-/Startseitenbereich eingebaut werden.
+
+### Monetarisierungs-Trennung
+Die drei Monetarisierungsarten bleiben in Layout und Technik klar getrennt:
+- konkrete Affiliate-Produkte;
+- Affiliate-Banner/Creatives;
+- direkt vermietete Werbeflächen.
+
+Alle drei folgen der harten Leerregel: **unbelegt = vollständig unsichtbar, ohne Restabstand**.
