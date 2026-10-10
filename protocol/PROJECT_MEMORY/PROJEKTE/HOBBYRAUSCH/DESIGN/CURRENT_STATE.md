@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-10
-STATUS: **GLOBALER RAHMEN + STARTSEITE 1.50.593 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.593 VERWORFEN / 1.50.594 DESIGN-PARITÄT LOKAL GEPRÜFT / WORDPRESS-LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
@@ -49,7 +49,7 @@ Arbeitsbasis:
 **Affiliate Portal Template Kit 1.50.592** – aktueller bereitgestellter Pferdeatelier-Stand vom 10.10.2026.
 
 Hobby-Kandidat:
-**1.50.593**.
+**1.50.594**.
 
 Umgesetzt:
 - getrenntes Designprofil `hobby_depot`;
@@ -69,26 +69,36 @@ Umgesetzt:
 
 Keine Kategorie-/SEO-Struktur wird geschrieben oder synchronisiert.
 
-## Lokale Abnahme
+## Korrektur 1.50.594
 
-**PASS**
-- PHP-Lint 8/8;
-- Hobby-Profil-Bootstrap PASS;
-- Pferde-Profil-Negativtest PASS;
-- Render-POS/NEG PASS;
-- echte Weltnamen PASS;
-- Shop-/Community-/Newsletter-UI negativ PASS;
-- leere Affiliateplätze unsichtbar PASS;
-- belegte Produktplätze 3/3 PASS;
-- belegter Startbanner PASS;
-- Paket-Fresh-Unpack + PHP-Lint 8/8 PASS;
-- keine entfernte Basisdatei; gegenüber 1.50.592 nur Hauptdatei geändert + Hobby-Profil/Assets ergänzt.
+**1.50.593 ist verworfen.** Die reale WordPress-Ausgabe wich sichtbar vom freigegebenen Startseitenentwurf ab. Ursache: die erste Hobby-Profilumsetzung übernahm nur grobe Strukturmerkmale, nicht die tatsächlichen Proportionen und Dichten des freigegebenen Mockups.
+
+1.50.594 setzt deshalb den freigegebenen Entwurf ohne Konzeptwechsel enger nach:
+- Contentbreite 1440 px;
+- kompakter Hero;
+- 8 Welten in einer Desktop-Zeile;
+- 4 × 2 Welten mobil;
+- drei kompakte redaktionelle Teaser;
+- drei horizontale Affiliate-Produktplätze;
+- flacher Affiliate-Banner;
+- separate Mietwerbefläche;
+- Headerproportionen/Logo/Suche/Navi wie im freigegebenen Entwurf;
+- Theme-Container der Startseite neutralisiert, damit Astra das Layout nicht wieder einengt.
+
+Lokale Prüfungen:
+- PHP-Lint komplett PASS;
+- alte Hobby-Profilklasse entfernt;
+- echte 8 Weltnamen PASS;
+- Shop-/Community-/Newsletter-Begriffe im Hobby-Renderer 0;
+- Leerregel Affiliate PASS;
+- ZIP-Integrität PASS;
+- lokaler statischer Rendervergleich gegen den freigegebenen Entwurf durchgeführt.
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.593_HOBBY_DEPOT_STAGE1_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.594_HOBBY_DEPOT_DESIGN_PARITY_LOCALPASS.zip`
 
 SHA-256:
-`3b5ef12e367ca0616278f92686cc5efccb71d45778056d289410c7d44bac3edd`
+`f3e6773c0cb2dcbb9a9a4e7ce386524d31c80e88d65101c80f13104c84503c7b`
 
 ## Erster offener Blocker
 
@@ -98,6 +108,6 @@ Kein LIVE-PASS wird vor dieser Abnahme behauptet.
 
 ## EXAKT EINE NEXT ACTION
 
-Den vollständigen 1.50.593-Kandidaten in der Hobby-Depot-WordPress-Instanz installieren/aktualisieren und **Header + Startseite Desktop/Mobile** live prüfen.
+Den vollständigen **1.50.594**-Kandidaten in der Hobby-Depot-WordPress-Instanz installieren/aktualisieren und **Header + Startseite Desktop/Mobile** gegen den freigegebenen Entwurf prüfen.
 
 Erst nach diesem PASS wird Hub Ebene 1 aus demselben unveränderten Designsystem abgeleitet.
