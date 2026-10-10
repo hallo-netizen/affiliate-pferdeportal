@@ -188,3 +188,43 @@ SHA-256:
 
 EXAKT EINE NEXT ACTION:
 1.50.596 installieren und Header + Startseite live prüfen. Keine weitere Designänderung vor diesem Readback.
+
+
+## HOMEPAGE-REFINEMENT 1.50.597 – 2026-10-10
+
+Kein Konzeptwechsel. Umsetzung der zuletzt freigegebenen Detailrichtung:
+
+- **8 CORE-Welten bleiben vorerst vollständig sichtbar**, jetzt als **4 × 2** auf Desktop statt 8 Mini-Karten in einer Reihe.
+- Startseiten-Weltkarten deutlich größer; Bilder größer.
+- Untertitel in den Weltkarten entfernt; **Welttitel deutlich stärker und lesbarer**.
+- Für jede CORE-Welt existiert jetzt eine **stabile eigene Icon-Identität**.
+- Dieselben Icons erscheinen in Hauptnavigation und Weltkarten und sind technisch als wiederverwendbare API angelegt, damit sie auf Hub-/Kategorie-/Beitragsebene denselben roten Faden bilden können.
+- Box-Radien reduziert; Buttons dürfen weiterhin pillenförmig bleiben.
+- Mobile Weltkarten: 2 Spalten, ohne Untertitel.
+- Affiliate-/Werbelogik unverändert: leer = vollständig unsichtbar; belegt = sichtbar.
+
+CORE-Welten unverändert:
+**Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.597_HOBBY_DEPOT_ICONS_GRID_LOCALPASS.zip`
+
+SHA-256:
+`8f4b1e6da2a5569529584cc1af70bdd92cececbc3f3091519a4ec9f440994a3d`
+
+Lokaler Hardtest:
+- PHP 9/9 PASS;
+- 8/8 Weltkarten PASS;
+- 8/8 Header-Icons PASS;
+- 8/8 Weltkarten-Icons PASS;
+- Untertitel der Weltkarten entfernt PASS;
+- Desktop 4×2 PASS;
+- Mobile 2-spaltig PASS;
+- reduzierte Box-Radien PASS;
+- Affiliate leer NEGATIV PASS;
+- Affiliate belegt POSITIV PASS;
+- keine Shop-/Community-/Newsletter-UI PASS;
+- ZIP-CRC PASS.
+
+NEXT ACTION:
+1.50.597 installieren und Startseite Desktop/Mobile live prüfen. Entscheidung, ob später nur 4 statt 8 Weltkarten auf der Startseite gezeigt werden, bleibt bewusst offen und erfordert keinen Systemumbau.
