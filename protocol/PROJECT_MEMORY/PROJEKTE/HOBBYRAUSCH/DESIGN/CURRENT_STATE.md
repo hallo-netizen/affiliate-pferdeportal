@@ -153,3 +153,38 @@ SHA-256:
 
 NEXT ACTION:
 Nur 1.50.595 installieren und den Root-Aufruf `https://hobby-depot.de/` prüfen. Erwartung: kein „Blog“, kein Theme-Postwrapper, kein Twenty-Twenty-Five-Footer; Hobby-Header und Startseite bilden den Seitenrahmen.
+
+
+## DETAILFIX 1.50.596 – 2026-10-10
+
+**1.50.595 bleibt Rootfix-Basis; 1.50.596 ändert ausschließlich die vom Nutzer benannten Detailpunkte. Kein Konzeptumbau.**
+
+Umgesetzt:
+- Hauptnavigation = reale erste CORE-Ebene exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+- **Hobbyfinder, Magazin, Anbieter** aus Hauptnavigation entfernt und im Footer geführt.
+- Startseiten-Mittelteil wieder vollständig strukturell gebunden: 3 redaktionelle Teaser + Affiliate-Produkte + Affiliate-Banner + Beliebte Themen + Mietwerbefläche.
+- Monetarisierungsregel unverändert: unbelegt = vollständig unsichtbar; belegt = sichtbar.
+- falsche dekorative Pinselstriche an Hero/Abschnittsüberschriften entfernt.
+- Variante-3-Logo unverändert in Form; Petrol des Halbkreises aufgehellt/freundlicher.
+- Mobile bleibt derselbe zentrale Renderer; 8 Welten = 4×2.
+
+Lokaler Hardtest:
+- PHP-Lint 9/9 PASS.
+- synthetischer WordPress-Render POSITIV/NEGATIV PASS.
+- Header 8/8 reale Welten PASS.
+- Footer Hobbyfinder/Magazin/Anbieter PASS.
+- Header ohne Hobbyfinder/Magazin/Anbieter/Community/Newsletter/Warenkorb PASS.
+- leere Affiliate-Slots unsichtbar PASS.
+- belegte Affiliate-Slots 3 Produkte + Banner + Mietfläche PASS.
+- Brush-Deko entfernt/deaktiviert PASS.
+- Fronttemplate ohne Theme-get_header/get_footer PASS.
+- frischer ZIP-Unpack + CRC + PHP-Lint PASS.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.596_HOBBY_DEPOT_DETAILFIX_LOCALPASS.zip`
+
+SHA-256:
+`eb4bd734d358cf5240ec92dfd7cffd43027b7c64c275b383357524221b510d94`
+
+EXAKT EINE NEXT ACTION:
+1.50.596 installieren und Header + Startseite live prüfen. Keine weitere Designänderung vor diesem Readback.
