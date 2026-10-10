@@ -1600,7 +1600,7 @@
     "current_category_status": "BLOCKED_OP_20261010_NO_RELEASE",
     "current_category_next_action": "Read-only verify/export current live WordPress taxonomy, page hierarchy, real category term IDs and installed source versions; reconcile that evidence against the sole canonical KATEGORIEN.tsv before any further plugin build or apply.",
     "op_scope_authority": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md#28-op-versicherung--neuer-ausdruecklicher-auftrag-vom-10102026",
-    "op_scope_master_blob_sha": "1e2130168fcbb7b29cf639a9e8fb8783d76f9896",
+    "op_scope_master_blob_sha": "a79aac8ab67cdb03abea423f3e54f7a4f8c7294d",
     "op_current_canonical_tsv_blob_sha": "44684b554110560ffccab9ccf50b910a97259a06",
     "op_scope_override": "For only the five OP categories expressly requested 2026-10-10, category tile teasers and 150-200-word category texts are included; older category-only scope and prior 2026-09-24 closeout remain historical.",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
