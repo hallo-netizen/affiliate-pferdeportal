@@ -97,38 +97,43 @@ Alle Seitentypen teilen:
 
 ### Header
 Desktop:
-- Logo links
-- große Suche zentral
-- Nutzer-/Merkliste-Funktionen rechts
-- Hauptnavigation darunter bzw. integriert
+- Logo/Wordmark links;
+- Claim direkt beim Markenbereich;
+- große Portalsuche zentral;
+- keine Shop-Icons, kein Warenkorb, keine Shop-Merkliste, kein allgemeiner Shop-Login;
+- Hauptnavigation darunter bzw. integriert.
 
-### Hauptnavigation
-- Hobbys entdecken
-- Ausstattung
-- Inspiration
-- Ratgeber
-- Community
-- Angebote
+### Hauptnavigation – nur reale Portalbereiche
+Die Navigationsbezeichnungen werden ausschließlich aus der bestehenden Hobbyrausch-Struktur abgeleitet. Keine erfundenen Shop- oder Sammelbegriffe.
 
-Die Navigation ist eine kuratierte Portalnavigation, keine zweite Taxonomie.
-
-### Mega-Menü „Hobbys entdecken“
-- 8 Hauptwelten
-- jeweilige sichtbare direkte Kinder
-- zusätzlicher visueller Einstieg Hobbyfinder
-- Link „Alle Kategorien / Hobbywelten“
-
-### Mega-Menü „Inspiration“
+Kernzugänge:
+- Hobbywelten
 - Hobbyfinder
-- Alleine
-- Zu zweit
-- Gruppe
-- neue/ungewöhnliche Hobbys
-- saisonale und räumliche Einstiege
+- Magazin
+- Anbieter
+
+Zusätzliche statische Informationsseiten wie „Über uns“ dürfen separat geführt werden, sind aber keine Kategorieersatzstruktur.
+
+### Mega-Menü „Hobbywelten“
+Die acht geschützten CORE-Welten heißen exakt:
+- Gestalten
+- Fertigen
+- Technik
+- Forschen
+- Pflanzen
+- Tiere
+- Bewegen
+- Sammeln
+
+Die direkten Kinder werden nicht im Designplugin umbenannt oder doppelt gepflegt, sondern serverseitig aus der aktuellen WordPress-/HD-001-Struktur gelesen. Gleiches gilt für spätere Änderungen innerhalb der autoritativen Kategorienstruktur.
+
+Hobbywelten ist die Übersichts-/View-Seite und nicht Parent dieser acht ROOT-Welten.
+
+### Hobbyfinder / Magazin
+Hobbyfinder und Magazin verwenden ebenfalls ausschließlich die realen Bezeichnungen aus der bestehenden Struktur. Insbesondere werden keine Visualisierungs-Platzhalter wie „Kreativ“, „Modellbau“, „Fotografie“, „Natur“ oder vergleichbare Fantasiekategorien in die Produktivdarstellung übernommen.
 
 ### Performance
-Mega-Menü serverseitig aus zentralem Ziel-/Navigationsbestand; keine individuellen Menükopien je Seite.
-
+Mega-Menü und Kategorie-/Weltenkacheln werden serverseitig aus dem zentralen Ziel-/Navigationsbestand erzeugt; keine individuellen Menükopien und keine hart codierte zweite Taxonomie je Seite.
 ## 8. Affiliate-/Werbesystem
 
 Es gibt drei Monetarisierungstypen:
@@ -478,3 +483,28 @@ Regeln:
 - klein, ruhig und markenhaft;
 - zentral austauschbar;
 - auf Mobile kompakt darstellen, ohne den Header unnötig zu erhöhen.
+
+## 20. PORTALIDENTITÄT IM HEADER – KEIN SHOP-EINDRUCK
+
+Weil der Markenname „Hobby Depot“ allein auch als Handels-/Shopname gelesen werden kann, wird der Portalcharakter aktiv im Header kommuniziert – jedoch ohne defensiven Hinweis „kein Shop“.
+
+### Desktop
+Zusätzliche sehr schmale Portalzeile oberhalb oder unmittelbar am Hauptheader, ca. 28–30 px:
+**Inspiration, Wissen & Empfehlungen rund ums Hobby.**
+
+Sie ist deutlich kleiner als Markenclaim, Suche und Navigation und darf den Header nicht optisch aufblasen.
+
+Der Markenclaim unter dem Logo bleibt:
+**Hobbys. Ideen. Möglichkeiten.**
+
+### Mobile
+Keine zusätzliche eigenständige dritte Headerzeile. Die Portalzeile wird responsiv ausgeblendet oder in eine kurze Microcopy innerhalb des Menüs/Headers überführt.
+
+### Affiliate-Sprache
+Damit der Portalcharakter auch in Monetarisierungsflächen erhalten bleibt:
+- CTA „Zum Anbieter“, „Mehr erfahren“, „Empfehlung ansehen“ statt „Kaufen“;
+- Affiliateprodukt als redaktionelle Empfehlung darstellen;
+- bezahlte Fläche klar „Anzeige“/„Partner“ kennzeichnen;
+- kein Warenkorb-, Bestand-, Checkout- oder Shop-Wording.
+
+So wird der Unterschied zum Shop über Sprache, Navigation und Seitenstruktur vermittelt, nicht über einen störenden Warnhinweis.
