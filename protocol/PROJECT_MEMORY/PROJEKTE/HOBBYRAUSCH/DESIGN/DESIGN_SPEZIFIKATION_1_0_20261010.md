@@ -1,7 +1,7 @@
 # HOBBYRAUSCH – DESIGN-SPEZIFIKATION 1.0
 
 STAND: 2026-10-10
-STATUS: VERBINDLICHER DESIGNRAHMEN / UMSETZUNG NOCH NICHT FREIGEGEBEN
+STATUS: VERBINDLICHER DESIGNRAHMEN / GLOBALER RAHMEN + STARTSEITE 1.50.593 LOCAL HARD PASS / LIVE OFFEN
 
 ## 1. Zielbild
 
@@ -393,10 +393,13 @@ Erst nach PASS wird Hub Ebene 1 daraus abgeleitet.
 Der zuletzt visualisierte Startseitenentwurf ist als **gestalterische Startbasis freigegeben**.
 
 ### Logo
-- das gezeigte Logo ist **nicht freigegeben**;
-- bis zur gesonderten Logoentscheidung wird ausschließlich ein neutraler Logo-/Wordmark-Platzhalter verwendet;
-- keine technische oder gestalterische Abhängigkeit an das provisorische Signet bauen;
-- Logo muss später zentral austauschbar sein, ohne Header-/Layoutumbau.
+Freigegeben ist **Variante 3 in der verfeinerten Header-Fassung**:
+- offener gemalter Halbkreis/Bogen über der Wortmarke;
+- handschriftliches `dein` optisch mittig;
+- `HOBBY DEPOT` einzeilig;
+- bewusst mehr Luft zwischen Bogen, `dein`, Wortmarke und Claim;
+- Wortmarke warmes Dunkelgrau statt Schwarz;
+- Claim darunter: **Hobbys. Ideen. Möglichkeiten.**
 
 ### Claim
 Im Kopfbereich wird ein eigener zentral steuerbarer Claim-Platz vorgesehen.
@@ -508,3 +511,30 @@ Damit der Portalcharakter auch in Monetarisierungsflächen erhalten bleibt:
 - kein Warenkorb-, Bestand-, Checkout- oder Shop-Wording.
 
 So wird der Unterschied zum Shop über Sprache, Navigation und Seitenstruktur vermittelt, nicht über einen störenden Warnhinweis.
+
+
+## 21. UMSETZUNGSSTAND 1.50.593
+
+Der freigegebene globale Rahmen und die Startseite sind als eigenes `hobby_depot`-Designprofil auf Basis des aktuellen Template-Kit 1.50.592 umgesetzt.
+
+Lokaler Stand:
+**HARD PASS**.
+
+Enthalten:
+- finales Variante-3-Logo;
+- Portal-Topbar Desktop, mobil ausgeblendet;
+- reale dynamische Navigation/Mega-Menüs;
+- kompakter Hero;
+- acht echte Hobbywelten;
+- responsive Startseite;
+- drei getrennte Monetarisierungsarten: Affiliate-Produkte, Affiliate-Banner, direkt vermietete Werbeflächen;
+- harte Leerregel;
+- kein Shop-/Community-/Newsletter-UI.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.593_HOBBY_DEPOT_STAGE1_LOCALPASS.zip`
+
+SHA-256:
+`3b5ef12e367ca0616278f92686cc5efccb71d45778056d289410c7d44bac3edd`
+
+WordPress-Live-Abnahme ist noch offen. Hub 1 wird erst nach dem Live-PASS aus demselben Designsystem abgeleitet.
