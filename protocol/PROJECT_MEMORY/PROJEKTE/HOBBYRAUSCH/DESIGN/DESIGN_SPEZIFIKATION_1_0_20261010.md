@@ -428,3 +428,39 @@ Die drei Monetarisierungsarten bleiben in Layout und Technik klar getrennt:
 - direkt vermietete Werbeflächen.
 
 Alle drei folgen der harten Leerregel: **unbelegt = vollständig unsichtbar, ohne Restabstand**.
+
+
+## 18. HARD RULE – AFFILIATE-PORTAL, KEIN SHOP
+
+Hobbyrausch/Hobby Depot ist **kein eigener Shop**. Das Frontend darf deshalb keine Shop-UX vortäuschen.
+
+Verboten im globalen Header und in der allgemeinen Portalnavigation:
+- Warenkorb;
+- Checkout;
+- Merkliste/Wishlist als Shopfunktion;
+- Kundenkonto/Shop-Login;
+- Bestellstatus;
+- Produktbestand;
+- Shop-Kategoriesprache, sofern sie nicht rein redaktionell gemeint ist.
+
+Affiliate-Produkte sind redaktionell kuratierte externe Empfehlungen. Ein Klick führt zum jeweiligen Partner/Anbieter; es gibt keinen eigenen Kaufprozess.
+
+HivePress-/Anbieterfunktionen sind eine eigene Portal-Säule und dürfen nicht als allgemeine Shop-Konto-UX in den Hauptheader gezogen werden. Falls später ein Anbieter-Login gebraucht wird, wird er separat und bewusst gestaltet.
+
+### Header-Grundstruktur
+- Logo / Wordmark
+- Claim direkt beim Markenbereich
+- prominente Portalsuche
+- echte Portalnavigation aus dem freigegebenen Hobbyrausch-Bestand
+- keine Shop-Icons
+
+### Navigationssprache
+Die Navigation wird aus dem realen Portalbestand abgeleitet, nicht aus Shopmustern.
+Kernzugänge:
+- Hobbywelten
+- Hobbyfinder
+- Magazin / Inspiration
+- Anbieter / HivePress, wenn im jeweiligen Stand sichtbar vorgesehen
+- weitere echte Portalbereiche laut Strukturautorität
+
+Keine erfundenen Bereiche wie Community, Shop, Warenkorb oder Merkliste.
