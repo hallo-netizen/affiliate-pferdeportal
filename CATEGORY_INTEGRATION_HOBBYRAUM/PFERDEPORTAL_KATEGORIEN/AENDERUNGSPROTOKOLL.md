@@ -136,3 +136,25 @@ Wenn der Nutzer die Umsetzung ausdrücklich wieder aufnimmt:
 
 STATUS:
 **VORGEMERKT / BESCHLOSSEN / NICHT UMGESETZT.**
+
+## 2026-10-10 – OP-Versicherung: fünf Artikelschienen (Nutzerauftrag, technische Übernahme ausstehend)
+
+**Fachlicher Beschluss:** Bestehenden Hub `Wissen > Versicherungen & Recht > Pferde-OP-Versicherung` nicht verschieben. Unter dem Hub genau fünf eigenständige Artikelkategorien vorsehen, inklusive FAQ; Vergleich und Kosten werden wegen Überschneidung zusammengelegt. Pferdekrankenversicherung und alle sieben bestehenden Geschwisterkacheln unverändert lassen.
+
+| Kachel | Vorgesehener Artikelkategorie-Slug | Thema |
+| --- | --- | --- |
+| Tarife & Kosten | `pferde-op-versicherung-tarife-und-kosten` | Preise, Tarifvergleich, Selbstbeteiligung |
+| Leistungen & Bedingungen | `pferde-op-versicherung-leistungen` | Erstattung, Wartezeiten, Ausschlüsse, Nachbehandlung |
+| OP-Arten & Kostenübernahme | `pferde-op-versicherung-op-arten` | Kolik-, Chip-, Zahn-, Kastrations- und Fraktur-OP; nur Versicherungsfragen |
+| Beratung | `pferde-op-versicherung-beratung` | individuelle Wahl, Alter, Vorerkrankung, Wechsel, OP- vs. Krankenversicherung |
+| FAQ | `pferde-op-versicherung-faq` | Schadenmeldung, Rechnungen, Unterlagen, Genehmigung und Meldefristen |
+
+**Pflicht vor dem technischen Kategorie-Apply:**
+1. Frischen WordPress-Kategorieexport/Readback vom aktuellen Bestand verwenden und `KATEGORIEN.tsv` als einzige zentrale Quelle fortschreiben. Im hier verfügbaren Branch hat die TSV weiterhin Blob-SHA `44684b554110560ffccab9ccf50b910a97259a06` und 1160 Zeilen mit Daten; sie enthält noch keine Krankenversicherung, OP-Versicherung oder Reithalle. Keine gesonderte kategorieführende Quelle anlegen.
+2. Der Nutzer hat am 10.10.2026 installierte Versionen belegt: Template Kit **1.50.589**, Affiliate-Zentrale **6.72.212**, PSTE **0.57.68**, PSERC **0.28.34**, PPM **6.7.9**, Production Center **1.1.1**. Die installierten Originalquellen der neueren Versionen und deren aktuellen SHA sind in der technischen GitHub-Release-Current-Quelle nicht nachgewiesen. Niemals aus einer älteren Basis überschreiben.
+3. Alle nachweislich betroffenen **bestehenden** Verbraucher einheitlich berücksichtigen: Affiliate Portalstruktur/Katalog, Template-Kit-Kacheln/Icons/Texte, PSTE-Kategorienbindung, PSERC-Dynamikrefresh, PPM-Kategorie-/Slotbindung und Production Center. Bei dynamischem Verbraucher ausschließlich Refresh/Readback, wenn keine statische Änderung nachgewiesen ist.
+4. Kategorietexte in den bestehenden 150–200-Wörter-Regeln prüfen; Kurztexte maximal 18 Wörter. Keine neue Kachel-/Icon-Architektur. Bestehendes Exact-7-Raster der sieben Schwesterkacheln unverändert.
+5. Vor Änderungen an Live: vollständiger Quellversions- und SHA-Abgleich, Altbestandserhalt, lokale positive/negative Regression, echter WordPress-Dry-Run `writes_performed=false`, dann genau ein autorisierter Apply und neuer Request mit Readback. Ohne diese Nachweise **kein Installer-Release, kein Live-Apply, kein PASS**.
+
+**Aktueller Status:** FACHLICH BESCHLOSSEN / IN ZENTRALER ÄNDERUNGSAKTE ERFASST / TECHNISCHER APPLY GESPERRT, BIS AKTUELLER WORDPRESS-BESTAND UND INSTALLIERTE QUELLPAKETE EXAKT GEBUNDEN SIND.
+
