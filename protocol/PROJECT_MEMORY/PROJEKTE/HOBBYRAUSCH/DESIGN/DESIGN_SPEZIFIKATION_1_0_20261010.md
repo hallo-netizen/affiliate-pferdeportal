@@ -464,3 +464,17 @@ Kernzugänge:
 - weitere echte Portalbereiche laut Strukturautorität
 
 Keine erfundenen Bereiche wie Community, Shop, Warenkorb oder Merkliste.
+
+
+## 19. VERBINDLICHER HEADER-CLAIM
+
+Freigegebener Claim unter dem Logo:
+
+**Hobbys. Ideen. Möglichkeiten.**
+
+Regeln:
+- auf allen Seitentypen im Marken-/Headerbereich;
+- nicht identisch mit der Hero-Headline der Startseite;
+- klein, ruhig und markenhaft;
+- zentral austauschbar;
+- auf Mobile kompakt darstellen, ohne den Header unnötig zu erhöhen.
