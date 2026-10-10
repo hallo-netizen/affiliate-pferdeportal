@@ -63,3 +63,8 @@ Plugin-Umsetzung der freigegebenen Startseiten-/Globalstruktur vorbereiten:
 Dabei ausschließlich auf dem **tatsächlich aktuellen Designplugin-Stand** aufsetzen; keinen älteren 1.50.421/1.50.541-Stand als Arbeitsbasis verwenden.
 
 Danach Hub Ebene 1 aus demselben Designsystem ableiten.
+
+
+## HARD RULE – AFFILIATE-PORTAL, KEIN SHOP
+
+Kein Warenkorb, keine Shop-Merkliste, kein allgemeiner Shop-Login, kein Checkout und keine Shop-Navigationslogik. Affiliateprodukte sind externe, redaktionell eingebettete Empfehlungen. Header = Logo/Claim + Suche + echte Portalnavigation. HivePress-Anbieterfunktionen bleiben separat.
