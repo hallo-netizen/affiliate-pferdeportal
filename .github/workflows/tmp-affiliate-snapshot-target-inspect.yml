@@ -71,3 +71,44 @@ if rows:
         print('REST_PARENT',json.dumps(p,ensure_ascii=False))
         parent=int(p.get('parent') or 0); depth+=1
 PY
+
+      - name: OP_CATEGORY_READBACK_20261010 readonly
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re,urllib.request,json,html
+          base='https://pferde-atelier.de'
+          pages=[
+            '/wissen/wissen-versicherungen-und-recht/pferde-op-versicherung/',
+            '/wissen/wissen-versicherungen-und-recht/pferdekrankenversicherung/',
+            '/stall/stall-reithalle/',
+          ]
+          for p in pages:
+            for mode,extra in [('normal',{}),('fresh',{'Cache-Control':'no-cache','Pragma':'no-cache'})]:
+              try:
+                req=urllib.request.Request(base+p+(('?opreadback=20261010' if mode=='fresh' else '')),headers={'User-Agent':'PferdeAtelier-OP-Readonly/1.0',**extra})
+                with urllib.request.urlopen(req,timeout=20) as resp:
+                  raw=resp.read().decode('utf-8','replace')
+                  print('PAGE',p,mode,'HTTP',resp.status,'LEN',len(raw))
+                  print('CACHE', {k:v for k,v in resp.headers.items() if k.lower() in ('x-litespeed-cache','cf-cache-status','age','cache-control','server')})
+                  for needle in ('noch keine Beitragsarten','Tarife & Kosten','Leistungen & Bedingungen Pferde-OP','Pferdekrankenversicherung vergleichen','Reithallenbau','pftk-v1.50.'):
+                    print('MARKER',needle,needle.lower() in raw.lower())
+                  for prefix in ('pftk','affiliate-portal-template-kit'):
+                    print('ASSETS',prefix,re.findall(r'[^"< ]*'+re.escape(prefix)+r'[^"< ]*[?&]ver=[0-9.]+',raw)[:5])
+                  print('OP_CATEGORY_URLS', re.findall(r'href=["\x27]([^"\x27]*pferde-op-versicherung-(?:tarife|leistungen|op-arten|beratung|faq)[^"\x27]*)',raw)[:15])
+              except Exception as ex:
+                print('PAGE_ERROR',p,mode,type(ex).__name__,str(ex)[:240])
+          for slug in ['pferde-op-versicherung','pferdekrankenversicherung','wissen-versicherungen-und-recht']:
+            u=base+'/wp-json/wp/v2/pages?slug='+slug+'&_fields=id,parent,slug,link,status,title'
+            try:
+              with urllib.request.urlopen(u,timeout=18) as resp:
+                print('REST_PAGE',slug,resp.status,resp.read(4096).decode('utf-8','replace'))
+            except Exception as ex: print('REST_PAGE_ERROR',slug,type(ex).__name__,str(ex)[:240])
+          for slug in ['pferde-op-versicherung-faq','pferde-op-versicherung-leistungen','pferdekrankenversicherung-faq']:
+            u=base+'/wp-json/wp/v2/categories?slug='+slug+'&_fields=id,parent,slug,name'
+            try:
+              with urllib.request.urlopen(u,timeout=18) as resp:
+                print('REST_TERM',slug,resp.status,resp.read(4096).decode('utf-8','replace'))
+            except Exception as ex: print('REST_TERM_ERROR',slug,type(ex).__name__,str(ex)[:240])
+          PY
