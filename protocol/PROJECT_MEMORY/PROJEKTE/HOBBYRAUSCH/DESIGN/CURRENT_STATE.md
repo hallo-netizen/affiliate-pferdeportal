@@ -68,3 +68,9 @@ Danach Hub Ebene 1 aus demselben Designsystem ableiten.
 ## HARD RULE – AFFILIATE-PORTAL, KEIN SHOP
 
 Kein Warenkorb, keine Shop-Merkliste, kein allgemeiner Shop-Login, kein Checkout und keine Shop-Navigationslogik. Affiliateprodukte sind externe, redaktionell eingebettete Empfehlungen. Header = Logo/Claim + Suche + echte Portalnavigation. HivePress-Anbieterfunktionen bleiben separat.
+
+
+## MARKENCLAIM
+
+Freigegeben für den Header unter dem Logo: **Hobbys. Ideen. Möglichkeiten.**
+Die Startseiten-Hero-Headline bleibt davon getrennt.
