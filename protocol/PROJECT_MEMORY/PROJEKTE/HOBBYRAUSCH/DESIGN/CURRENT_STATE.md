@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-10
-STATUS: **1.50.593 VERWORFEN / 1.50.594 DESIGN-PARITÄT LOKAL GEPRÜFT / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.593 + 1.50.594 VERWORFEN / 1.50.595 ROOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
@@ -111,3 +111,45 @@ Kein LIVE-PASS wird vor dieser Abnahme behauptet.
 Den vollständigen **1.50.594**-Kandidaten in der Hobby-Depot-WordPress-Instanz installieren/aktualisieren und **Header + Startseite Desktop/Mobile** gegen den freigegebenen Entwurf prüfen.
 
 Erst nach diesem PASS wird Hub Ebene 1 aus demselben unveränderten Designsystem abgeleitet.
+
+
+## ROOTCAUSE 1.50.594 – 2026-10-10
+
+Der Live-Screenshot belegt den Fehler eindeutig:
+- WordPress/Twenty Twenty-Five rendert weiterhin **Blog**;
+- der Beitrag **TEST** bleibt der eigentliche Loop-Inhalt;
+- die Hobby-Depot-Startseite wird nur innerhalb dieses Beitragsinhalts ausgegeben;
+- der Twenty-Twenty-Five-Footer bleibt aktiv.
+
+Ursache im Quellcode 1.50.594:
+Die Startseite wurde über `the_content` in den bestehenden WordPress-Front-/Blogloop eingeschoben. CSS konnte deshalb die Theme-/Loop-Architektur nicht zuverlässig ersetzen.
+
+**1.50.594 ist verworfen.**
+
+## 1.50.595 – ROOTFIX
+
+Kein Redesign. Ausschließlich Ursachenbehebung:
+- kein Homepage-`the_content`-Einschub mehr;
+- Root-/Frontpage wird über `template_include` als vollständiges Plugin-Fronttemplate übernommen;
+- eigener Hobby-Header + Startseitenrenderer + eigener Hobby-Footer;
+- Twenty-Twenty-Five Header/Footer-Templateparts im Hobby-Profil werden unterdrückt;
+- Nicht-Frontseiten bleiben vom Fronttemplate unberührt.
+
+Lokaler Nachweis:
+- PHP-Lint 9/9 PASS;
+- Fronttemplate POSITIV PASS;
+- Nicht-Frontseite NEGATIV PASS;
+- kein alter `front_page_content`-Hook PASS;
+- kein Blog-/TEST-Loop im Fronttemplate PASS;
+- Blocktheme Header/Footer-Unterdrückung PASS;
+- vollständiger Render Header + Main + Footer PASS;
+- frischer ZIP-Unpack + CRC PASS.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.595_HOBBY_DEPOT_FRONT_TEMPLATE_ROOTFIX_LOCALPASS.zip`
+
+SHA-256:
+`721eacf41b85a7eaa96114443564ce3bd264d580f148ae56674dbecbe536ef92`
+
+NEXT ACTION:
+Nur 1.50.595 installieren und den Root-Aufruf `https://hobby-depot.de/` prüfen. Erwartung: kein „Blog“, kein Theme-Postwrapper, kein Twenty-Twenty-Five-Footer; Hobby-Header und Startseite bilden den Seitenrahmen.
