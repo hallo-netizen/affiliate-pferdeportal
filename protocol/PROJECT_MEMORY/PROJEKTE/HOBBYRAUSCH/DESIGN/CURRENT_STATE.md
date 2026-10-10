@@ -3,90 +3,101 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-10
-STATUS: STARTSEITEN-DESIGN ALS BASIS FREIGEGEBEN / LOGO OFFEN / CLAIM-SLOT GEBUNDEN / PLUGIN-UMSETZUNG NÄCHSTES
+STATUS: **GLOBALER RAHMEN + STARTSEITE 1.50.593 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
 Verbindliches Designkonzept:
 `DESIGN_SPEZIFIKATION_1_0_20261010.md`.
 
-Designbasis:
-die zwei vom Nutzer freigegebenen Hobby-Depot-Entwürfe vom 01.10.2026.
+Freigegebene visuelle Basis:
+der vom Nutzer bevorzugte Hobby-Depot-Startseitenentwurf inklusive Affiliate-Produktbereich, Affiliate-Banner und direkt vermietbarer Werbefläche. Das Grundkonzept wird nicht erneut umgebaut.
 
-Harte Nutzerbindungen:
-- hochwertiges Informationsportal mit Affiliateflächen, ohne Werbeportalwirkung;
-- zentrale Steuerung / gleiche Ebene = gleicher Seitenbauplan;
-- starker roter Faden über alle Ebenen;
-- helle, freundliche Bildsprache;
-- auf jedem redaktionellen Hauptbild Mensch, mindestens Hände;
-- erste Kategorien-/Weltenebene erhält eigene Bilder;
-- jede Kategorie/Hubseite erhält oben Einleitungstext;
-- Produkt-, Banner- und vermietete Werbeflächen integrieren;
-- unbelegte Affiliate-/Werbeslots vollständig unsichtbar;
-- Mega-Menü;
-- Seitentypen: Startseite, Hub 1, Hub 2, Hub 3, Kategorie, Beitrag.
+## Freigegebene Marke
 
-## Technische Basis
+Logo:
+- **Variante 3 / verfeinerte Header-Fassung**;
+- offener gemalter Halbkreis/Bogen oberhalb der Wortmarke;
+- handschriftliches `dein` optisch mittig;
+- `HOBBY DEPOT` einzeilig;
+- mehr Luft zwischen Bogen, `dein`, Wortmarke und Claim;
+- Schriftfarbe warmes Dunkelgrau statt Schwarz.
 
-Allgemeines/Pferdeatelier-Designplugin:
-`pferde-template-kit_V1.50.421.php`.
+Claim:
+**Hobbys. Ideen. Möglichkeiten.**
 
-Unveränderte Originalkopie im Designbüro:
-`PLUGIN/ORIGINAL/pferde-template-kit_V1.50.421.php`.
+Desktop-Portalzeile:
+**Inspiration, Wissen & Empfehlungen rund ums Hobby.**
 
-Diese Datei ist nur Referenz/Evidence und NICHT die Hobbyrausch-Laufversion.
+Mobile:
+keine zusätzliche Topbar-Zeile.
 
-## Architekturgrenze
+## Harte Portalregeln
 
-- HD-001 = Strukturautorität
-- Affiliate-Zentrale = Monetarisierungs-/Providerautorität
-- Designplugin = zentrale Darstellung / Templates / Slotpositionen
-- keine zweite Taxonomie
-- keine individuellen Pagebuilder-Seiten
+- Affiliate-/Informationsportal, kein Shop.
+- Kein Warenkorb, Checkout, Shop-Merkliste, allgemeiner Shop-Login, Newsletter- oder Community-Bereich im Header.
+- Hauptnavigation nur aus realen Portalbereichen: **Hobbywelten, Hobbyfinder, Magazin, Anbieter**.
+- CORE-Welten exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+- Namen und direkte Kinder werden aus WordPress/HD-001 gelesen; keine zweite Taxonomie.
+- helle, freundliche Bilder; bei redaktionellen Hauptmotiven Mensch oder mindestens tätige Hände.
+- gleiche Ebene = zentraler Bauplan.
+- unbelegte Produkt-, Banner- und Mietwerbeplätze vollständig unsichtbar.
+
+## Technischer Umsetzungsstand
+
+Arbeitsbasis:
+**Affiliate Portal Template Kit 1.50.592** – aktueller bereitgestellter Pferdeatelier-Stand vom 10.10.2026.
+
+Hobby-Kandidat:
+**1.50.593**.
+
+Umgesetzt:
+- getrenntes Designprofil `hobby_depot`;
+- Pferde-spezifische Init-/Globalhooks werden im Hobby-Profil nicht registriert;
+- freigegebenes Variante-3-Logo als Asset;
+- Desktop-Topbar / Mobile-Ausblendung;
+- Suche;
+- dynamische reale Navigation und Mega-Menüs;
+- kompakter Startseiten-Hero;
+- acht reale Welten;
+- Hobbyfinder/Magazin/realer Wissens-/Ratgeberzugang;
+- Affiliate-Produkte;
+- Affiliate-Banner;
+- direkt vermietete Werbefläche;
+- leere Monetarisierungsslots ohne Wrapper/Leerraum;
+- responsive 4×2 → 2×4 Weltendarstellung.
+
+Keine Kategorie-/SEO-Struktur wird geschrieben oder synchronisiert.
+
+## Lokale Abnahme
+
+**PASS**
+- PHP-Lint 8/8;
+- Hobby-Profil-Bootstrap PASS;
+- Pferde-Profil-Negativtest PASS;
+- Render-POS/NEG PASS;
+- echte Weltnamen PASS;
+- Shop-/Community-/Newsletter-UI negativ PASS;
+- leere Affiliateplätze unsichtbar PASS;
+- belegte Produktplätze 3/3 PASS;
+- belegter Startbanner PASS;
+- Paket-Fresh-Unpack + PHP-Lint 8/8 PASS;
+- keine entfernte Basisdatei; gegenüber 1.50.592 nur Hauptdatei geändert + Hobby-Profil/Assets ergänzt.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.593_HOBBY_DEPOT_STAGE1_LOCALPASS.zip`
+
+SHA-256:
+`3b5ef12e367ca0616278f92686cc5efccb71d45778056d289410c7d44bac3edd`
 
 ## Erster offener Blocker
 
-Kein fachlicher Blocker.
+**WordPress-Live-Abnahme des globalen Rahmens und der Startseite.**
 
-Die Hobbyrausch-spezifische Pluginbereinigung ist noch nicht durchgeführt; vor Codeumbau wird zuerst der visuelle Startseiten-/Globalrahmen verbindlich abgenommen.
+Kein LIVE-PASS wird vor dieser Abnahme behauptet.
 
 ## EXAKT EINE NEXT ACTION
 
-Plugin-Umsetzung der freigegebenen Startseiten-/Globalstruktur vorbereiten:
-- Logo nur als zentral austauschbarer Platzhalter;
-- Claim-Slot im Header vorsehen;
-- keine erfundene Community;
-- drei Monetarisierungsarten getrennt;
-- leere Slots vollständig unsichtbar;
-- mobile Struktur von Anfang an mitführen.
+Den vollständigen 1.50.593-Kandidaten in der Hobby-Depot-WordPress-Instanz installieren/aktualisieren und **Header + Startseite Desktop/Mobile** live prüfen.
 
-Dabei ausschließlich auf dem **tatsächlich aktuellen Designplugin-Stand** aufsetzen; keinen älteren 1.50.421/1.50.541-Stand als Arbeitsbasis verwenden.
-
-Danach Hub Ebene 1 aus demselben Designsystem ableiten.
-
-
-## HARD RULE – AFFILIATE-PORTAL, KEIN SHOP
-
-Kein Warenkorb, keine Shop-Merkliste, kein allgemeiner Shop-Login, kein Checkout und keine Shop-Navigationslogik. Affiliateprodukte sind externe, redaktionell eingebettete Empfehlungen. Header = Logo/Claim + Suche + echte Portalnavigation. HivePress-Anbieterfunktionen bleiben separat.
-
-
-## MARKENCLAIM
-
-Freigegeben für den Header unter dem Logo: **Hobbys. Ideen. Möglichkeiten.**
-Die Startseiten-Hero-Headline bleibt davon getrennt.
-
-## ORIGINALBEZEICHNUNGEN / DYNAMISCHE STRUKTUR
-
-Harte Regel:
-- Design erfindet oder übersetzt keine Kategorienamen.
-- Die acht CORE-Welten heißen exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
-- Direkte Kinder und weitere Kategorien werden serverseitig aus der aktuellen WordPress-/HD-001-Struktur gelesen.
-- Visualisierungs-Platzhalter wie „Kreativ“, „Modellbau“, „Fotografie“ oder „Natur“ sind nicht produktiv zu verwenden.
-- Hauptnavigation basiert auf realen Portalbereichen: **Hobbywelten, Hobbyfinder, Magazin, Anbieter**.
-
-## PORTALCHARAKTER IM HEADER
-
-Desktop zusätzlich eine sehr schmale Portalzeile:
-**Inspiration, Wissen & Empfehlungen rund ums Hobby.**
-
-Keine separate dritte Mobile-Zeile; mobil responsiv reduzieren/ausblenden.
+Erst nach diesem PASS wird Hub Ebene 1 aus demselben unveränderten Designsystem abgeleitet.
