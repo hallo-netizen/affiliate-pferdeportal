@@ -1280,3 +1280,43 @@ Evidence:
 
 **Freeze:**
 Kategorie-/Strukturscope ist geschlossen. Kein weiterer Kategorie- oder Strukturumbau ohne neue harte Evidenz eines echten Defekts.
+
+---
+
+## 28. OP-Versicherung – neuer ausdrücklicher Auftrag vom 10.10.2026
+
+**Rolle dieser Akte:** autoritative Ziel-/Fehler-/Arbeitsprotokollquelle, nicht operative CURRENT-/NEXT-ACTION-Quelle. Für operative Frische, ersten Blocker und genau eine NEXT ACTION ausschließlich `control/release-governance/CURRENT_RELEASE.json` (Bereich `category_change_master`) lesen.
+
+### 28.1 Scope-Entscheidung und Warum
+
+Neuer ausdrücklicher Nutzerauftrag: den bestehenden Hub `Wissen > Versicherungen & Recht > Pferde-OP-Versicherung` durch **genau fünf Artikelkategorien** ergänzen, **FAQ ausdrücklich einschließen**, Vergleich und Kosten wegen Überschneidung zusammenfassen. Für diese fünf Kategorien sind **Kachel-/Teasertexte und vollständige Kategorietexte** Bestandteil des neuen Auftrags. Damit ist ausschließlich für dieses neue OP-Delta die ältere KATEGORIE/STRUKTUR-ONLY-Grenze aus Abschnitt 0A Nr. 4 fachlich erweitert. Die am 24.09.2026 abgeschlossene frühere Kategorieintegration (Kapitel 27) bleibt historische abgeschlossene Arbeit und wird dadurch nicht wieder geöffnet.
+
+Neue beabsichtigte Slugs (noch **keine echten WordPress-Term-IDs**):
+- `pferde-op-versicherung-tarife-und-kosten` → Vergleich
+- `pferde-op-versicherung-leistungen` → Beratung
+- `pferde-op-versicherung-op-arten` → Beratung
+- `pferde-op-versicherung-beratung` → Beratung
+- `pferde-op-versicherung-faq` → FAQ
+
+Die bestehende Pferdekrankenversicherung, Reithalle, alle sieben Geschwisterkacheln unter Versicherungen & Recht, WordPress-Core, Alt-Slugs, Provider-/Banner-/Performance- und Produktionsworkflow bleiben unangetastet. WordPress-Artikelkategorien bleiben taxonomisch **flach**; die sichtbare Hierarchie kommt weiterhin aus der vorhandenen Portalstruktur.
+
+**Ausführlicher Fach-/Wortlautbeschluss und Verfahrensbedingungen:** `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/AENDERUNGSPROTOKOLL.md`, Abschnitt 10.10.2026.
+
+### 28.2 Fehlernachtrag zu diesem Delta (kein Freigabenachweis)
+
+- **OP-ERR-001 / OFFEN:** Einzige zentrale `KATEGORIEN.tsv` ist auf dem überprüften Branch noch SHA `44684b554110560ffccab9ccf50b910a97259a06`, 1160 WP-Kategorien / 1149 Produktionskategorien, ohne Reithalle, Pferdekrankenversicherung und die neuen fünf OP-Kategorien. Die technische Plugin-Ableitung aus dem 09.10. enthält dagegen bereits 1154 Produktionskategorien.
+- **OP-ERR-002 / OFFEN:** Zwei vorhandene vollständige Affiliate-6.72.212-ZIPs haben trotz gleicher Version verschiedene Portal-/Katalogstände: Kategoriepaket 09.10. = 1154, danach archiviertes Banner-Fallback = 1149 Produktionskategorien. Der am 10.10. lokal erstellte 6.72.213-Kandidat führt auf 1159 zusammen, ist aber **nicht freigegeben**.
+- **OP-ERR-003 / OFFEN:** Template 1.50.590 und PSTE 0.57.69 liegen als lokale Kandidaten vor. Ihre fokussierten Prüfberichte belegen Syntax-, Quell-/Hash-, PSTE-Positive/Negative und Altbestandserhalt, **nicht** den vollständigen WordPress/MariaDB-Live-/E2E-PASS.
+- **OP-ERR-004 / OFFEN:** Für das neue Delta fehlt die hash-/signaturgebundene PPM-6.7.9-Kategorien-/Slotaktualisierung und die exakt daran gebundene Production-Center-1.1.1-Aktualisierung. Bestehende alte signierte PASSs dürfen nicht für diese fünf neuen Kategorien umgedeutet werden.
+- **OP-ERR-005 / OFFEN:** Frischer WordPress-Export/Term-ID-/Frontend-/Menü-Readback, PSERC-Strukturrefresh und abschließender WP-Dry-Run/Apply/Readback fehlen. **Keine Installation/Veröffentlichung freigeben.**
+- **OP-ERR-006 / KORRIGIERT IN DER ÜBERGABE:** Früher wurden isolierte technische Kandidaten zum Download angeboten, obwohl der Nutzer ausschließlich vollständige, installierbare Updates verlangt. Diese Pakete bleiben eindeutig `NICHT_INSTALLIEREN`.
+
+### 28.3 Belegte lokale Kandidaten, nur Evidence
+
+- Affiliate-Zentrale `6.72.212 → 6.72.213`, SHA-256 des ZIP: `5a39e3e235fed8441973f3cea4b2ddd62704ea2a86b50b60bf01104129db2140`
+- Template Kit `1.50.589 → 1.50.590`, ZIP-SHA-256: `b12a73b3967af77fd0049edf1e3cb389f5e97e57133d7f3841bef0151118fe3c`
+- PSTE `0.57.68 → 0.57.69`, ZIP-SHA-256: `312b98eec29e4c244867fbc348b055a5a9446ea03913df1289f3666a4348d5bd`
+- PSERC `0.28.34`: kein Codepatch belegt, dynamischer Refresh/Readback offen
+- PPM `6.7.9` und Production Center `1.1.1`: neues Delta nicht vollständig umgesetzt
+
+**Stoppgrenze:** Kein Ersatz von Plugin-CURRENT.zip, kein neues Plugin, keine Freigabe, kein WordPress-Apply ohne aktuelles WordPress-Readback und übereinstimmende Quell-/SHA-/Slot-Bindungen. Fokussierte lokale PASSs sind **kein** Release-PASS.
