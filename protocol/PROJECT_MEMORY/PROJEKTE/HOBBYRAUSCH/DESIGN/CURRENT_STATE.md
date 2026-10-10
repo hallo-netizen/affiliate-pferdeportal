@@ -74,3 +74,19 @@ Kein Warenkorb, keine Shop-Merkliste, kein allgemeiner Shop-Login, kein Checkout
 
 Freigegeben für den Header unter dem Logo: **Hobbys. Ideen. Möglichkeiten.**
 Die Startseiten-Hero-Headline bleibt davon getrennt.
+
+## ORIGINALBEZEICHNUNGEN / DYNAMISCHE STRUKTUR
+
+Harte Regel:
+- Design erfindet oder übersetzt keine Kategorienamen.
+- Die acht CORE-Welten heißen exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+- Direkte Kinder und weitere Kategorien werden serverseitig aus der aktuellen WordPress-/HD-001-Struktur gelesen.
+- Visualisierungs-Platzhalter wie „Kreativ“, „Modellbau“, „Fotografie“ oder „Natur“ sind nicht produktiv zu verwenden.
+- Hauptnavigation basiert auf realen Portalbereichen: **Hobbywelten, Hobbyfinder, Magazin, Anbieter**.
+
+## PORTALCHARAKTER IM HEADER
+
+Desktop zusätzlich eine sehr schmale Portalzeile:
+**Inspiration, Wissen & Empfehlungen rund ums Hobby.**
+
+Keine separate dritte Mobile-Zeile; mobil responsiv reduzieren/ausblenden.
