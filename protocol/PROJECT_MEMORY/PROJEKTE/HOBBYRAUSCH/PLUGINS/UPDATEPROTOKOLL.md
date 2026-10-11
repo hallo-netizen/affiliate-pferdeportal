@@ -1680,3 +1680,32 @@ OFFEN.
 
 NEXT:
 1.50.616 installieren und Gestalten bei Desktop / Side-by-Side / Mobile prüfen.
+
+
+---
+
+## PU-20261011-034 – HD-003 1.50.617
+
+LIVE-BEFUND 1.50.616:
+Navigation auf Mid faktisch weg, Logo zu klein, Hub-Fold ohne saubere Absätze/mit Kastenwirkung, Druck & Fotografie ohne Bild, Bildformate uneinheitlich, 7er-Raster unruhig, Affiliate wieder als externe Blöcke, Rental zu dunkel.
+
+FIX:
+- Mid-Navigation sichtbar 4×2;
+- Logo groß;
+- Full-width neutraler Fold mit Absätzen;
+- 7 unique 600×320 Gestalten-Bilder;
+- 7er-Raster 3+2+2;
+- Affiliate in Nächste-Ebene-Bereich;
+- Rental ein Foto + Brush + weißer CTA.
+
+TEST:
+PHP 10/10; ZIP PASS; Chromium 1600/1024/390 PASS; 0 horizontal overflow.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.617_HOBBY_DEPOT_HUB_GRID_NAV_AFFILIATE_INTEGRATED_LOCALPASS.zip`
+
+SHA:
+`5f6e5ddf30662a10ecdfc37b35aaca82ad0ba578d59cde20b463d11314624764`
+
+NEXT:
+1.50.617 installieren und Gestalten live prüfen.
