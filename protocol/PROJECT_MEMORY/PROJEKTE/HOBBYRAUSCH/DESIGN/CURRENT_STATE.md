@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.615 LOCAL HARD PASS / HUBFOTOS + RESPONSIVE NAVIGATION + BESTEHENDE HUBLOGIK IMPLEMENTIERT / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.616 LOCAL HARD PASS / HUB-DOPPELTEXT ENTFERNT / 7 UNIQUE GESTALTEN-BILDER / EINZELBILD-WERBUNG / NAV KORRIGIERT / WORDPRESS-LIVE OFFEN**
 
 ## Autoritative Bindungen
 
@@ -19,146 +19,88 @@ Technische Plugin-Current:
 Theme-Unterbau:
 **ListingHive**.
 
-## 1.50.615 – sichtbarer Designstand
+## 1.50.616 – Änderungen
 
-### Header / Navigation
-- Logo unverändert;
-- Vollnavigation nur noch oberhalb 1320 px;
-- 761–1320 px: rechtzeitiger Hamburger-/Dropdownmodus statt abgeschnittener 8-Welten-Zeile;
-- Dropdown 4-spaltig, unter 980 px 2-spaltig;
-- Mobile unter 761 px unverändert kompakt;
-- kein horizontaler Navigationsbeschnitt bei mittleren Breiten;
-- Topbar-Inhalt unverändert;
-- Topbar jetzt dunkel im Footer-Farbton `#29383f`;
-- Hauptheader bleibt creme;
-- Desktopnavigation auf der unteren Logo-/Claimachse weiter abgesenkt;
-- Mobile erhält keine künstliche Absenkung.
+### Navigation
+- Desktop-Offset von 22 px auf **8 px** reduziert;
+- dadurch keine Berührung mit der unteren Trennlinie;
+- Vollnavigation nur oberhalb **1560 px**;
+- 761–1560 px Menü/Dropdown;
+- unter 980 px zweispaltiges Dropdown;
+- Mobile separat.
 
-### Kategorietexte
-Übernommenes Pferdeatelier-Prinzip:
-- vorhandene manuelle Introtexte zuerst;
-- sonst deterministische Erzeugung aus Titel, Ebene, realen Kindern und Themenprofil;
-- keine Strukturänderung;
-- Texte ab ca. 130 Wörtern:
-  - sichtbarer Lead ca. 55 Wörter;
-  - `Mehr erfahren`;
-  - sichtbarer Abschlussblock `Was du hier findest`;
-- vollständiger Text bereits im initialen HTML;
-- kurze Texte bleiben offen.
+### Typografie
+Geprüft gegen 1.50.614:
+- Desktopnavigation 14 px unverändert;
+- Hubintro 16 px unverändert;
+- Kategorietext 15 px unverändert;
+- Unterkategorie-Titel 15 px unverändert;
+- Unterkategorie-Kurztext 11 px unverändert;
+- Hub-H1 unverändert.
 
-Hub1 verwendet das System ebenfalls.
+Es wurde **keine globale Schriftverkleinerung** vorgenommen.
 
-**Beispieltext Gestalten** ist im Kandidaten fest als Referenz enthalten und nennt die realen direkten Kinder:
-Malen & Zeichnen, Druck & Fotografie, Schrift & Lettering, Papierkunst, Textilgestaltung, Oberfläche & Deko, Miniaturen & Szenen.
+### Erste Hubebene
+- Hero bleibt Titel + sichtbarer Kurztext.
+- zweiter sichtbarer Lead darunter entfernt.
+- Zusatztext jetzt standardmäßig geschlossen:
+  **„Mehr über <Welt> erfahren“**.
+- voller Text bleibt im initialen HTML.
+- `Was du hier findest` liegt innerhalb des Aufklappbereichs.
 
-### Fotos auf den oberen Hubebenen
+### Unterkategorie-Bilder
+Gestalten:
+- 7/7 eigene unterschiedliche Fallbackbilder;
+- jeweils 600×320 WEBP;
+- passend zu den 7 direkten Unterkategorien.
 
-- `hub1` und `hub2` erhalten kompakte Bildkanten in den Unterkategorie-Karten.
-- echtes Child-Featured-Image gewinnt;
-- fehlt es, nutzt die Karte einen unterschiedlichen Crop des kontrollierten Weltmotivs;
-- dieselbe Weltdatei wird dabei browserseitig gecacht, also keine unnötigen Zusatzdownloads;
-- tiefere `category`-/Leafebenen bleiben ohne Bildzwang.
+Priorität:
+1. echtes Child-Featured-Image;
+2. bei Gestalten passendes eigenes Fallbackasset;
+3. sonst keine Fotokante.
 
-### Unterkategorien – ungerade Zahlen
-Desktop:
-- 6-Spalten-Basis;
-- normale Karte spannt 2 Spalten = 3 pro Reihe;
-- Rest 2 → letzte zwei je 3 Spalten = 50/50;
-- Rest 1 → letzte Karte volle Reihe;
-- keine leeren Rasterlöcher.
+Der alte generische Parent-Weltbild-Fallback wurde entfernt. Damit kann nicht mehr siebenmal dieselbe Person/dasselbe Weltbild erscheinen.
 
-Tablet:
-2 Spalten.
-
-Mobile:
-1 Spalte.
-
-### Monetarisierung
-Reihenfolge auf Hub-/Kategoriepfad:
-1. Breadcrumb;
-2. Titel/Hero;
-3. Kategorietext;
-4. nächste Ebene;
-5. Direktwerbung;
-6. Beitragsvorschau;
-7. Affiliate-Banner;
-8. Affiliate-Produkte.
-
-Direktwerbung:
-- maximal ein Modul;
-- bewusst hoch direkt nach den Unterkategorien;
-- öffentlich auch unverkauft sichtbar;
-- Headline: **„Hier könnte Ihre Werbung stehen.“**;
-- CTA: **„Werbemöglichkeiten & Preise“**;
-- rechte Bildcollage aus kontrollierten Hobby-Depot-Weltmotiven;
-- kein technisch wirkender Leerplatz.
-
-Affiliate:
-- Banner nativ integriert, nur kleine Kennzeichnung `Anzeige · Partner`;
-- Produktbereich als native Kartenfläche, ebenfalls klar gekennzeichnet;
-- öffentlich leer unsichtbar;
-- eingeloggt leer sichtbar.
-
-### Welt-/Hubbilder
-Unverändert:
-- 8 kontrollierte 1400×620-Motive;
-- Startkarte und Welt-Hub identische Quelle;
-- Personen/Hände gemischt;
-- Tiere rahmenlos und fachlich passend.
+### Verkaufbare Werbung
+- exakt **1 Foto**;
+- eigenes Ad-Asset 1400×420;
+- Text liegt über dem Foto;
+- Headline `Hier könnte Ihre Werbung stehen.`;
+- hinter der Headline auffälliger heller CSS-Pinselstrich;
+- CTA `Werbemöglichkeiten & Preise`;
+- Position weiter direkt nach den Unterkategorien.
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.616_HOBBY_DEPOT_HUB_CLEANUP_AD_BRUSH_NAV_FIX_LOCALPASS.zip`
 
 SHA-256:
-`17d03f5704d8f140a86f4bbbdc4109cf564522a663660d0bd333be456dc3fda6`
+`6ae738653de1dd1677bc4e6a5e58540cc7efddc6ccd5ddf8f28a2b5bbda5e0cd`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.616_HOBBY_DEPOT_HUB_CLEANUP_AD_BRUSH_NAV_FIX_LOCALPASS.zip`
 
 ## Lokaler Hardtest
 
 PASS:
 - ZIP-Integrität;
-- Fresh PHP **10/10**;
-- keine 1.50.613-Renderer-/Assetreferenz im Hobby-Depot-Releasepfad;
-- 8/8 Weltbilder 1400×620;
-- Logo bytes identisch zum freigegebenen Vorgängerstand;
-- Pferdeatelier-Introregel mit langem Testtext:
-  - Lead vorhanden;
-  - `Mehr erfahren` vorhanden;
-  - `Was du hier findest` vorhanden;
-  - Textanfang und Textende vollständig erhalten;
-- Gestalten-Beispieltext im Code vorhanden;
-- 6-Spalten-Restklassen für 1/2 vorhanden;
-- Direktwerbung vor Beitragsvorschau;
-- Affiliate-Banner nach Beitragsvorschau;
-- Affiliate-Produkte danach;
-- CTA `Werbemöglichkeiten & Preise`;
-- dunkle Topbar;
-- Desktopnavigation real tiefer;
-- Startseite nutzt dasselbe neue Direktwerbemodul.
+- PHP **10/10**;
+- 7/7 Gestalten-Bilder vorhanden;
+- 7/7 unterschiedliche SHA-256;
+- 7/7 exakt 600×320;
+- Direktwerbebild exakt 1400×420;
+- Direktwerbung genau 1 `<img>`;
+- generischer Parent-Weltbild-Fallback entfernt;
+- Hub1-Zusatztext geschlossen statt doppelt offen;
+- Brushstroke-CSS vorhanden;
+- Breakpoint 1560 vorhanden;
+- Nav-Offset 8 px;
+- relevante Schriftgrößen gegen 1.50.614 unverändert.
 
 ## Erster offener Blocker
 
-**WordPress-Live-Abnahme von 1.50.615.**
-
-Prüfen:
-1. Navigation bei ca. 900–1250 px schaltet vollständig ins Menü und wird nicht rechts abgeschnitten;
-2. Gestalten-Unterkategorien zeigen kompakte Fotos;
-3. eigenes Child-Bild gewinnt vor Welt-Crop;
-4. tiefe Kategorieebenen bleiben ruhiger ohne Bildzwang;
-5. Topbar dunkel und ruhig;
-6. Navigation auf großer Desktopbreite auf unterster Claim-/Logoachse;
-7. Gestalten: Textaufteilung Lead / Mehr erfahren / Was du hier findest;
-8. Gestalten mit 7 Unterkategorien: letzte Karte füllt sauber die letzte Reihe;
-9. Direktwerbemodul direkt nach Unterkategorien sichtbar;
-10. Affiliate-Banner und Produkte optisch integriert;
-11. Startseiten-Direktwerbung sichtbar;
-12. Tablet/Mobile.
+**WordPress-Live-Abnahme von 1.50.616.**
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.615 installieren und Startseite + Gestalten bei Desktop, mittlerer Breite und Mobile live prüfen.**
-
-Erst nach diesem Live-Readback werden Text-/Raster-/Monetarisierungsregeln als endgültig für die tieferen Ebenen abgenommen.
+**1.50.616 installieren und Gestalten bei voller Desktopbreite, Side-by-Side-Breite und Mobile live prüfen.**
