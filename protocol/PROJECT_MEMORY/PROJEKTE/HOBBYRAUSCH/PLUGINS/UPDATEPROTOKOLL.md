@@ -1475,3 +1475,60 @@ OFFEN.
 
 NEXT:
 1.50.612 installieren und Startseite live prüfen.
+
+
+---
+
+## PU-20261011-030 – HD-003 Hobby Depot Design / Template Kit 1.50.613
+
+VON / AUF:
+1.50.612 → 1.50.613.
+
+WARUM:
+Der Live-Readback war insgesamt deutlich verbessert, zeigte aber noch vier konkrete Punkte:
+- Hauptnavigation weiterhin zu hoch;
+- Hobbyfinder/Magazin/Wissen farblich nicht vollkommen einheitlich;
+- direkt verkaufbarer Werbeplatz auf der Startseite nicht klar genug sichtbar;
+- nächste Arbeitsebene soll direkt mit verbindlichem Breadcrumb-/Hub-/Monetarisierungstemplate beginnen.
+
+ÄNDERUNG STARTSEITE:
+- Desktopnavigation real weitere 14 px nach unten;
+- Hobbyfinder, Magazin und Wissen & Glossar einheitlich `#f5f1e9`;
+- genau ein öffentlich sichtbarer Direktwerbeplatz unmittelbar nach dieser Dreiergruppe;
+- unverkauft mit „Hier könnte Ihre Werbung stehen.“ / „Werbeplatz verfügbar“;
+- Affiliate-Banner/Produkte öffentlich leer weiterhin unsichtbar, eingeloggt als Arbeitsplätze sichtbar.
+
+ÄNDERUNG HUB-/KATEGORIEPFAD:
+- neues eigenes Contenttemplate;
+- Breadcrumb auf jeder unterstützten Seite/Kategorie außer Startseite, immer auf derselben Achse;
+- Titel-/Introbereich oben analog zum Portalprinzip;
+- erste Welt-Hubs nutzen exakt dasselbe kontrollierte 1400×620-Weltasset wie die jeweilige Startseitenkarte;
+- vorhandene direkte nächste Ebene vollständig als Kacheln;
+- Affiliate-Banner;
+- Beitragsvorschau;
+- Affiliate-Produkte;
+- maximal ein direkt verkaufbarer Werbeplatz.
+
+UNTERSTÜTZTE CORE-TYPEN:
+`hub1`, `hub2`, `category`, `leaf`; zusätzlich WordPress-Kategoriearchive und `journal_cat`.
+
+FRESH TEST:
+- PHP 10/10 PASS;
+- ZIP-Integrität PASS;
+- Homepage POS/NEG PASS;
+- eingeloggt/öffentlich Affiliate PASS;
+- Direktwerbeplatz count=1 PASS;
+- Hub1 Breadcrumb/Hero/Kindebene/Banner/Beiträge/Produkte/Direktwerbung PASS;
+- Kategorie Breadcrumb/Banner/Beiträge/Produkte/Direktwerbung PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.613_HOBBY_DEPOT_HUB1_BREADCRUMB_MONETIZATION_LOCALPASS.zip`
+
+SHA-256:
+`56aa6f55542570d2383bd6fff92aaddcf155cf103cf14faccf80994636250d34`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.613 installieren und Startseite plus eine erste Welt-Hubseite live prüfen.
