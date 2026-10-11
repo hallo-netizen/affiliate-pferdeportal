@@ -3,52 +3,34 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.619 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.620 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.620_HOBBY_DEPOT_NAV_LABEL_TYPE_FIX_LOCALPASS.zip`
 
 SHA-256:
-`dada31464533e143d875e0d7568ee6fc8bba2d79d7b8aaa2f6bac6df806d1179`
+`e27fcdda636a3764603420f1ac791ff157fc1faa9c784f576f31ca8d12d2c8f8`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.620_HOBBY_DEPOT_NAV_LABEL_TYPE_FIX_LOCALPASS.zip`
 
-## Delta 1.50.619
+## Delta 1.50.620
+- Navigation nochmals tiefer an die untere Headerlinie gesetzt.
+- Header dafür nicht gequetscht, sondern vertikal erweitert.
+- `Nächste Ebene` vollständig entfernt.
+- `Weiter in <Welt>` bleibt als natürliche Überschrift.
+- Kartentitel 14 → **15 px**.
+- Kartenuntertitel 10,5 → **12 px**.
+- Taxonomie-Untertitel auf maximal 7 Wörter begrenzt.
+- keine Änderung an akzeptierten Bildern, Flyouts, Affiliate-Integration, Direktwerbung, Hero oder Logoasset.
 
-Header:
-- Logo unverändert;
-- Headerbereiche vertikal weiter auseinander;
-- Navigation sichtbar tiefer;
-- >1000 px 8 Welten in einer Reihe;
-- 761–1000 px 4×2;
-- Flyout Hover/Fokus/Klick wieder explizit aktiv;
-- Flyouts links/mittig/rechts passend zum Weltpunkt verankert.
-
-Unterkategorien:
-- Bildfläche füllt jetzt den kompletten Querformat-Rahmen;
-- Desktop 168×90 statt 132×70 mit Innenrand;
-- kein Bild-Inset mehr;
-- Gestalten 7 eindeutige Bilder weiterhin gebunden.
-
-Kurztexte:
-- generische wiederholte Fallback-Sätze entfernt;
-- Gestalten 7 kurze individuelle Zeilen;
-- ohne echte Kurzinfo wird kein Fülltext gezeigt.
-
-## Lokale Prüfung
-PASS:
-- PHP 10/10;
-- ZIP-Integrität;
-- aktive Klasse/Templates ausschließlich 1.50.619;
-- alte 1.50.618-Hobby-PHP-Dateien aus Paket entfernt;
-- Flyout-Hover-Regel überschreibt alte Mid-Breakpoint-Unterdrückung;
-- Header/Nav-Absenkung vorhanden;
-- 7/7 Gestalten-Motive 600×320 und unterschiedliche Hashes;
-- 7/7 individuelle Kurztexte;
-- Preview mit geöffnetem Flyout + gefüllten Querformat-Bildrahmen visuell geprüft.
-
-Kein WordPress-Live-PASS behauptet.
+## Lokal
+- PHP 10/10 PASS;
+- ZIP PASS;
+- aktive Klasse/Templates ausschließlich 1.50.620;
+- technischer Eyebrow nicht mehr im Renderer;
+- neue Typowerte statisch geprüft;
+- Nav-Zeilen-/Padding-Korrektur geprüft.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.619 installieren und Gestalten live prüfen.**
+**1.50.620 installieren und Gestalten live prüfen.**
