@@ -1,120 +1,109 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV  
-FASSUNG: 1.1 / 2026-10-11  
+FASSUNG: 1.2 / 2026-10-11  
 GELTUNGSBEREICH: HOBBYRAUSCH / DESIGN / WORDPRESS-DARSTELLUNG
 
 ## Ziel
 
 Hobby Depot wird als hochwertiges, helles Informations- und Inspirationsportal mit integrierter Affiliate-Monetarisierung umgesetzt – ausdrücklich **nicht als Shop**.
 
-Technische Theme-Basis der gesamten WordPress-Seite ist **ListingHive**. Das Hobby-Depot-Designplugin ist für Markenrahmen, Header, Footer, Startseite und die nachfolgenden Hub-/Contenttemplates visuell autoritativ.
+Technische Theme-Basis ist **ListingHive**. Das Hobby-Depot-Designplugin ist für Markenrahmen, Header, Footer, Startseite und die Hub-/Contenttemplates visuell autoritativ.
 
-## Verbindliche Endbedingungen
+## Marke / Header
 
-### Marke / Header
-- Logo bleibt die freigegebene Variante 3 mit offenem Pinsel-Halbkreis; keine Neugestaltung.
-- `dein` sitzt höher im Halbkreis.
-- `HOBBY DEPOT` Anthrazit/Dunkelgrau.
-- Claim: **Hobbys. Ideen. Möglichkeiten.**
-- Claim typografisch und farblich klar von `HOBBY DEPOT` getrennt.
-- Body der Seite weiß.
-- Header warm-hell/off-white und dadurch klar vom weißen Body abgesetzt; nicht dunkel.
-- Suche bleibt weiß.
-- Topbar-Inhalt bleibt: **Inspiration, Wissen & Empfehlungen rund ums Hobby.**
-- Topbar mittig und deutlich lesbar.
-- **Keine Anzeige/Werbefläche im Header.**
-- Keine Shop-Icons, kein Warenkorb, kein Checkout, kein allgemeiner Shop-Login, keine Community-/Newsletter-Navigation.
+- Logo bleibt unverändert die freigegebene Variante 3.
+- Topbar-Inhalt bleibt unverändert: **Inspiration, Wissen & Empfehlungen rund ums Hobby.**
+- Body weiß.
+- Header warmes Creme/Off-White.
+- Suche weiß.
+- keine Anzeige im Header.
+- Desktopnavigation zeigt exakt: Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln.
+- Navigation sitzt optisch auf der **untersten Claim-/Logo-Textachse**, nicht zu hoch.
+- Hobbyfinder, Magazin und Anbieter gehören in den Footer.
+- Mega-Menü pro CORE-Welt, nur direkte Kinder, ohne Hover-Lücke.
 
-### Navigation
-Desktop-Hauptnavigation zeigt exakt die reale erste CORE-Ebene:
-- Gestalten
-- Fertigen
-- Technik
-- Forschen
-- Pflanzen
-- Tiere
-- Bewegen
-- Sammeln
+## Startseite
 
-Hobbyfinder, Magazin und Anbieter gehören in den Footer.
+- Hero-Headline: **„Entdecke dein nächstes Hobby.“**
+- Bildschriftzug bleibt: **„Mehr Zeit für das, was dich begeistert.“**
+- Hero links weiß, feiner 1-px-Rahmen, sichtbarer Abstand nach oben.
+- alle 8 Hauptwelten zusätzlich zur Navigation als Weltkarten.
+- Desktop 4×2; Mobile 2×4.
+- Hobbyfinder / Magazin / Wissen & Glossar bilden eine gemeinsame Dreiergruppe und benutzen **denselben Creme-Hintergrund**; keine unterschiedliche Schattierungsfarbe.
+- Affiliate-Banner nur real öffentlich sichtbar; leer nur eingeloggt als Arbeitsplatz.
+- Affiliate-Produkte nur real öffentlich sichtbar; leer nur eingeloggt als Arbeitsplätze.
+- genau **ein** direkt verkaufbarer Werbeplatz; öffentlich auch unverkauft sichtbar mit **„Hier könnte Ihre Werbung stehen.“ / „Werbeplatz verfügbar“**.
+- keine Werbefläche im Header.
 
-Mega-Menü:
-- ja, pro CORE-Welt;
-- nur direkte Kinder;
-- keine vertikale Hover-Lücke;
-- Unterpunkte müssen mit der Maus stabil erreichbar sein;
-- Desktop-Unterpunkte deutlich lesbar/stärker;
-- Tablet/Mobile ohne Hover-Zwang.
+## Bilder
 
-### Icon-System
-- je CORE-Welt ein stabiles Icon;
-- einheitliche Petrol-Farbwelt;
-- Wiederverwendung bis Hub-, Kategorie- und Beitragsebene;
-- Icon ersetzt nie den Original-Kategorienamen.
+- 8 Weltmotive als kontrollierte hochauflösende 1400×620-Assets.
+- dieselbe kontrollierte Bildquelle wird auf der Startseiten-Weltkarte und als Hero der jeweiligen ersten Welt-/Hubebene benutzt.
+- keine doppelten Motive auf derselben Seite.
+- mindestens Person oder aktive Hände sichtbar.
+- Männer/Frauen/Hände sichtbar gemischt; keine Wiederholung derselben Person als Serienmotiv.
+- Tiere fachlich: Aquaristik, Terraristik, Insekten/Futtertiere, Imkerei/Bestäuber; kein Hund-/Haustierclaim, kein dekorativer Rahmen.
 
-### Startseite
-Die Startseite wird vollständig abgeschlossen, bevor Hub Ebene 1 beginnt.
+## Universelle Seiten-/Kategorie-Regeln
 
-Verbindliche Reihenfolge:
-1. Header + Suche + 8 CORE-Welten
-2. Hero mit responsiven CTAs und beibehaltenem Bildschriftzug **„Mehr Zeit für das, was dich begeistert.“**
-3. 8 Weltkarten – Desktop 4×2, Mobile 2×4
-4. Hobbyfinder / Magazin / Wissen & Glossar
-5. Affiliate-Banner – nur real belegt; eingeloggt darf leerer Arbeitsplatz sichtbar sein
-6. Beliebte Themen aus realen Magazin-Seiten
-7. Affiliate-Produkte – nur real belegt; eingeloggt dürfen leere Arbeitsplätze sichtbar sein
-8. genau ein direkt verkaufbarer Werbeplatz
-9. Footer
+Diese Regeln gelten für die gesamte fachliche Portalhierarchie, nicht nur für die Startseite.
 
-### Bilder
-- keine doppelten Bilder auf derselben Startseite;
-- alle 8 Weltmotive echte hochauflösende Quellen, je **1400×620**;
-- Weltmotive müssen inhaltlich zur jeweiligen echten Welt passen;
-- dieselben Weltmotive sind als gemeinsame Bildquelle für Startseitenkarte und späteren Welt-/Kategorie-Hero vorgesehen;
-- `Tiere` muss Aquaristik, Terraristik, Insekten/Futtertiere und Imkerei/Bestäuber fachlich tragen; kein Hund-/allgemeines Haustiermotiv und kein dekorativer Rahmen;
-- redaktionelle Hauptbilder hell, freundlich, Mensch oder mindestens tätige Hände;
-- keine sichtbar hochskalierten kleinen Thumbnails;
-- Bildquelle/Rendering darf keine Schärfe durch unnötig kleine WordPress-Derivate verlieren.
+### Breadcrumb
+- jede Seite/Kategorie außer der Startseite besitzt einen Breadcrumb;
+- immer dieselbe horizontale Achse und Position;
+- reale Parent-/Child-Hierarchie verwenden;
+- aktuelle Seite nicht anklicken.
 
-### Affiliate / Werbung
-Drei getrennte Monetarisierungsarten:
-1. konkrete Affiliate-Produkte;
-2. Affiliate-Banner/Creatives;
-3. direkt vermietete Werbeflächen.
+### Oberer Textbereich
+- jede Seite/Kategorie besitzt oben einen klaren Titel-/Introbereich analog zum bewährten Pferdeatelier-Prinzip;
+- vorhandene autoritative Introtexte/Metafelder verwenden;
+- keine zweite Inhaltsautorität erzeugen.
 
-Regeln:
-- **Affiliate-Produkte:** öffentlich leer vollständig unsichtbar; eingeloggt dürfen leere, klar gekennzeichnete Arbeitsplätze sichtbar sein.
-- **Affiliate-Banner:** öffentlich leer vollständig unsichtbar; eingeloggt darf der leere, klar gekennzeichnete Arbeitsplatz sichtbar sein.
-- **Direkt verkaufbare Werbefläche:** maximal **ein Platz pro Seite/Kategorie/Beitrag**. Unverkauft öffentlich sichtbar als dezentes **„Werbeplatz verfügbar / Hier werben“**. Verkauft klar als **Anzeige/Werbung** kennzeichnen.
-- keine direkt verkaufbare Werbefläche im Header.
-- breite Banner-/Werbeformate dürfen den Inhaltsbereich über die gesamte Breite nutzen, müssen auf Mobile responsiv bleiben.
+### Erste CORE-Ebene / Welt-Hubs
+- Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln erhalten einen Hero;
+- Hero verwendet exakt das jeweils freigegebene Weltmotiv der Startseite;
+- darunter vollständiger Verweis auf die tatsächlich vorhandene nächste Kategorie-/Seitenebene.
 
-### SEO-Meta
-Für Meta-Titel und Meta-Description ist kein zusätzliches SEO-Plugin erforderlich:
-- Schablonen je Seitentyp;
+### Jede fachliche Hub-/Kategorieebene
+Strukturell vorgesehen:
+1. Breadcrumb;
+2. Titel/Intro;
+3. Verweis auf vorhandene nächste Ebene;
+4. Affiliate-Bannerplatz;
+5. Beitragsvorschau;
+6. Affiliate-Produkte;
+7. maximal ein direkt verkaufbarer Werbeplatz.
+
+Öffentlich leere Affiliate-Banner/Produkte bleiben unsichtbar. Eingeloggt sind leere Arbeitsplätze sichtbar. Der direkt verkaufbare Werbeplatz bleibt öffentlich auch unverkauft sichtbar.
+
+## SEO-Meta
+
+Kein zusätzliches SEO-Plugin erforderlich:
+- Meta-Titel/Description per Seitentyp-Schablone;
 - sinnvoller automatischer Fallback;
-- individuelle Überschreibung je Seite/Beitrag möglich;
-- keine zweite Inhalts-/Taxonomieautorität.
+- individuelle Overrides;
+- keine zweite Taxonomie-/Inhaltsautorität.
 
 ## Architekturgrenzen
+
 - HD-001 bleibt Struktur-/Kategorieautorität.
 - Affiliate-Zentrale bleibt Monetarisierungs-/Providerautorität.
 - Designplugin rendert Darstellung und Slotpositionen.
-- Keine zweite Taxonomie.
-- Keine individuelle Pagebuilder-Seite pro Kategorie.
-- ListingHive ist technische Grundhaut, nicht zweite Designautorität.
+- keine zweite Taxonomie.
+- keine individuelle Pagebuilder-Seite pro Kategorie.
+- ListingHive bleibt technische Grundhaut, nicht zweite Designautorität.
 
 ## PASS-Bedingung
+
 PASS erst wenn:
-- aktueller Kandidat lokal positiv **und negativ** geprüft ist;
-- Fresh-Unpack/ZIP/PHP-Prüfung bestanden ist;
-- Desktop/Tablet/Mobile relevant geprüft sind;
-- Affiliate leer/belegt und eingeloggt/öffentlich geprüft ist;
-- genau-ein-Werbeplatz-Regel geprüft ist;
-- Mega-Menü-Interaktion geprüft ist;
-- reale WordPress-Live-Ausgabe sichtbar dem Ziel entspricht;
-- Bildschärfe auf realem Display akzeptiert ist;
-- erst danach Startseite LIVE-PASS und Freigabe für Hub Ebene 1.
+- Fresh-Unpack/ZIP/PHP positiv;
+- öffentlicher/eingeloggter Affiliatezustand positiv und negativ;
+- genau-ein-Werbeplatz-Regel;
+- Desktop/Tablet/Mobile;
+- Breadcrumb-/Parentkette;
+- erste Welt-Hubs verwenden exakt ihre Startseitenbilder;
+- reale nächste Ebene vollständig sichtbar;
+- Live-Readback in WordPress.
 
 Lokaler PASS ist niemals Live-PASS.
