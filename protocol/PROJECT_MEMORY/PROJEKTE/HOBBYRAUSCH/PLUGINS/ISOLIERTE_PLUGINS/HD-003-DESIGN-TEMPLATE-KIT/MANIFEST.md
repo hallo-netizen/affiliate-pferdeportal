@@ -4,26 +4,25 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.618`
+`1.50.619`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
 
 SHA-256:
-`0498a836102540f02a890ac02e415a0bf60d33418d51a2385e15efb4543ee203`
+`dada31464533e143d875e0d7568ee6fc8bba2d79d7b8aaa2f6bac6df806d1179`
 
 PRÜFSTATUS:
-LOCAL STRUCTURAL HARD PASS / LIVE-PASS OFFEN.
+LOCAL HARD PASS / LIVE-PASS OFFEN.
 
 PASS:
 - ZIP;
-- PHP 10/10 + Fresh 10/10;
-- Hero/Fold-Dedupe;
-- kompakte Querformatkarten;
-- Affiliate direkt im Grid;
-- Rental Einzelfoto + Brush + heller CTA;
-- Logo Ratio;
-- Flyout-Anker.
+- PHP 10/10;
+- Flyout-Regeln;
+- Navigation-Absenkung;
+- 7 unique Querformatbilder;
+- Bildfläche ohne Inset;
+- 7 individuelle Kurztexte.
 
 LIVE:
 offen.
