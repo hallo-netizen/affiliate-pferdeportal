@@ -4,13 +4,13 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.621`
+`1.50.622`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.621_HOBBY_DEPOT_HEADER_ALIGNMENT_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.622_HOBBY_DEPOT_TWO_COLUMN_HEADER_LOCALPASS.zip`
 
 SHA-256:
-`a51f986d945ca87e85de4ff367c73ed3e09772e48b25bd5308ad53bcc72be226`
+`0de280b67edb7dbfd4d3ee86415038f281885f881bafba41f8799a073d23b1bd`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
@@ -18,10 +18,10 @@ LOCAL HARD PASS / LIVE-PASS OFFEN.
 PASS:
 - PHP 10/10;
 - ZIP;
-- Browser-Simulation 1600/1024/960/800;
-- Nav-Baselines;
-- Sammeln;
-- Flyouts;
+- lokale Browser-Simulation 1600/1200/1024/900/760;
+- 0 horizontaler Overflow;
+- Logo links / Search rechts / Nav rechts unten;
+- Navicons entfernt;
 - Logoasset unverändert.
 
 LIVE:
