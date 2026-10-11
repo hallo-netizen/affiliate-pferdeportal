@@ -1307,3 +1307,20 @@ Der nächste Designschritt soll nicht aus einzelnen Sonderseiten bestehen, sonde
 
 KISS:
 Keine neue Taxonomie, keine neue Kategoriearchitektur, keine Pagebuilder-Einzelseiten. Das Designplugin liest die vorhandene Struktur und rendert sie einheitlich.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-E – Pferdeatelier-Textregel + natives Monetarisierungsdesign
+
+WAS:
+- Kategorietexte übernehmen das bewährte Pferdeatelier-Prinzip mit sichtbarem Lead, „Mehr erfahren“ und „Was du hier findest“.
+- Manuelle Texte bleiben geschützt; Auto-Fallback liest nur bestehende Titel-/Hierarchieinformationen und erzeugt keine neue Struktur.
+- Ungerade Unterkategorie-Anzahlen werden ohne leere Restflächen dargestellt.
+- Direktwerbung steht prominent nach der nächsten Kategorieebene und erhält Bildcollage + CTA.
+- Affiliate-Banner und Produkte werden optisch in den redaktionellen Seitenfluss integriert, bleiben aber klar als Werbung/Partner gekennzeichnet.
+- Topbar dunkel; Navigation weiter abgesenkt.
+
+WARUM:
+Hubseiten sollen nicht wie technische Kategorie-Listen wirken, sondern wie vollständige redaktionelle Portalseiten. Monetarisierung muss sichtbar und verkaufsfähig sein, ohne den redaktionellen Charakter zu zerstören.
+
+KISS:
+Keine Änderung an HD-001-Struktur, keine zweite Taxonomie, kein Pagebuilder. Nur bestehende Hierarchie lesen und konsistent darstellen.
