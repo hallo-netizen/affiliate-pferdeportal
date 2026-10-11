@@ -1275,3 +1275,15 @@ Die Live-Abnahme 1.50.601 zeigte klare visuelle und operative Lücken: fehlendes
 
 KISS:
 Keine neue Taxonomie, kein neuer Workflow, keine neue Monetarisierungsarchitektur. Nur bestehende Design-/Slotlogik präzisiert und vervollständigt.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-C – Cache-/Featured-Image-Ursache für scheinbar wirkungslose Designupdates geschlossen
+
+WAS:
+Die Startseite verwendet ab 1.50.612 für die acht Weltkarten ausschließlich die kontrollierten Weltassets. Der Hobby-Depot-Renderer, das Fronttemplate und alle Hobby-Assets besitzen neue versionsgebundene Pfade/Namen. Alte Featured Images dürfen den Startseitenentwurf nicht mehr überstimmen.
+
+WARUM:
+1.50.611 enthielt zwar Designänderungen, aber die reale Ausgabe konnte durch wiederverwendete Renderer-/Assetpfade sowie die bisherige Featured-Image-Priorität sichtbar beim alten Stand bleiben.
+
+KISS:
+Keine neue Architektur. Nur die bestehende Designautorität technisch so gebunden, dass der freigegebene Stand tatsächlich gerendert wird.
