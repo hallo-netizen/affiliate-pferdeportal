@@ -7,13 +7,13 @@ NAME:
 `Affiliate Portal Template Kit – Hobby Depot Profil`
 
 VERSION:
-`1.50.601`
+`1.50.610`
 
 ARTEFAKTNAME:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.601_HOBBY_DEPOT_HOMEPAGE_COMPLETION_VISUAL_POLISH_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`
+`c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`
 
 AUTORITATIVE TECHNISCHE CURRENT:
 `../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
@@ -35,11 +35,15 @@ LOKALER NACHWEIS:
 - ZIP-Integrität PASS;
 - Fresh-Unpack PHP 9/9 PASS;
 - Positiv-/Negativ-Render PASS;
-- 16 Responsive-Breiten PASS;
-- Mega-Menü-Interaktion PASS;
-- Affiliate leer/belegt PASS.
+- öffentlich/eingeloggt Affiliatezustand PASS;
+- genau-ein-Werbeplatz-Regel PASS;
+- Logo/Topbar/Headerregeln PASS;
+- Hero Desktop/Mobile-Safe-Crop PASS;
+- 8/8 Weltmotive 1400×620, alle Hashes unterschiedlich;
+- Tiere rahmenlos und fachlich neu gebunden;
+- Startseitenreihenfolge PASS.
 
 CURRENT.zip STATUS:
 **NICHT SYNCHRONISIERT / BLOCKED DURCH BINÄRTRANSFERGRENZE DES VERFÜGBAREN GITHUB-CONNECTORS.**
 
-Es wurde kein Binärartefakt erfunden oder als vorhanden behauptet. Der geprüfte ZIP-Kandidat ist im aktuellen Chat als Artefakt vorhanden.
+Es wurde kein Binärartefakt erfunden oder als vorhanden behauptet. Der geprüfte ZIP-Kandidat ist im aktuellen Projekt-/Library-Artefaktbestand vorhanden.
