@@ -1,116 +1,87 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV  
-FASSUNG: 1.6 / 2026-10-11  
-GELTUNGSBEREICH: HOBBYRAUSCH / DESIGN / WORDPRESS-DARSTELLUNG
-
-## Ziel
-Hobby Depot bleibt ein hochwertiges, helles Informations- und Inspirationsportal mit integrierter Monetarisierung – kein Shop.
-
-ListingHive bleibt technische Theme-Basis. Das Hobby-Depot-Designplugin ist visuell autoritativ.
+FASSUNG: 1.7 / 2026-10-11
 
 ## Header / Navigation
-- Logo bleibt unverändert, aber **lesbar groß**.
-- Desktop/Tablet-Logo darf nicht auf Miniaturgröße schrumpfen.
-- Topbar-Inhalt unverändert; dunkler Footer-Farbton.
-- Hauptheader creme/off-white.
-- Desktopnavigation zeigt immer die 8 Welten.
+- Logo unverändert.
+- Logo in jeder Ansicht linksbündig.
+- Logo niemals durch feste Max-Höhe verzerren; natürliches Seitenverhältnis bleibt erhalten.
+- Logo liegt oberhalb der Weltnavigation.
+- Navigation sitzt sichtbar tiefer in einer eigenen unteren Headerzeile, aber ohne Berührung mit der Trennlinie.
 - >1180 px: 8 Welten in einer Reihe.
-- 761–1180 px: 8 Welten sichtbar in 4×2, **kein Hamburger**, kein Abschneiden.
+- 761–1180 px: 8 Welten sichtbar 4×2.
 - <761 px: Hamburger/Mobilmenü.
-- Navigation hat Luft zur unteren Trennlinie; keine Überlappung.
+- Mega-/Flyout-Menüs sind am jeweils ausgelösten Weltpunkt verankert; kein links versetztes Flyout.
+- Topbar-Inhalt unverändert.
 - keine Anzeige im Header.
-
-## Typografie
-Keine globale Verkleinerung:
-- Navigation 14 px;
-- Hub-Intro 16 px;
-- Kategorietext 15 px;
-- Unterkategorie-Titel 15 px;
-- Unterkategorie-Kurztext 11 px;
-- Hub-H1 unverändert.
 
 ## Erste Welt-/Hubebene
 - Hero: Weltbild + Titel + kurzer Lead.
-- darunter **kein zweiter offener Fließtext**.
-- Zusatzwissen vollständig im HTML, standardmäßig unter `Mehr über <Welt> erfahren` geschlossen.
-- Aufklappbereich über die volle Inhaltsbreite, **weißer/neutraler Hintergrund**, keine wechselnden Farbboxen.
-- Text mit echten Absätzen.
-- `Was du hier findest` innerhalb des Aufklappbereichs, ebenfalls ohne separate Farbbox.
+- Aufklapptext darf **keine bereits im Hero sichtbaren Sätze wiederholen**.
+- `Mehr über <Welt> erfahren` bleibt standardmäßig geschlossen.
+- Aufklappbereich volle Inhaltsbreite, neutral/weiß.
+- echte Absätze.
+- `Was du hier findest` ohne separate Farbbox.
 
 ## Unterkategorie-Karten
-- obere Hubs dürfen Fotos verwenden.
-- jedes Foto einheitliches Querformat **600×320 / 1,875:1**.
-- echtes Child-Featured-Image hat Vorrang.
-- Gestalten besitzt 7 eindeutige passende Fallbackmotive.
-- niemals dasselbe Parent-/Weltbild mehrfach als Ersatz in derselben Reihe.
-- fehlendes Bild = lieber ohne Bild als falsche Wiederholung.
+- obere Hubs mit Bildern.
+- alle Bilder Querformat.
+- Bildfläche **kompakt als Thumbnail in der Karte**, nicht als großflächige halbe Seitenhöhe.
+- einheitliche Bildfläche je Raster.
+- Gestalten 7 unterschiedliche passende Motive.
+- echtes Child-Featured-Image gewinnt.
+- kein mehrfacher Parentbild-Fallback.
 
-### Rasterregel
-Desktop nutzt 6 Spalten und vollständige Reihen:
-- 1 → 1
-- 2 → 2
-- 3 → 3
-- 4 → 2+2
-- 5 → 3+2
-- 6 → 3+3
-- 7 → **3+2+2**
-- 8 → 3+3+2
-- 10 → 3+3+2+2
-usw.
+### Ungerade Zahlen
+Desktop:
+- Grundraster 3 Karten pro Reihe.
+- ohne Monetarisierung wird Rest 2 als 2+2 bzw. Rest 1 als volle letzte Karte behandelt.
+- wenn Affiliate-Produkte vorhanden sind, dürfen diese **im selben Raster** fehlende Plätze einer ungeraden letzten Reihe füllen.
+- Kategoriehierarchie und Werbung bleiben durch `Anzeige · Partner` eindeutig unterscheidbar.
 
-Tablet: 2 Spalten, bei ungerader Zahl letzte Karte volle Breite.  
+Tablet: 2 Spalten.  
 Mobile: 1 Spalte.
 
 ## Monetarisierung
 
 ### Affiliate
-Affiliate-Banner und Produkte gehören **in den normalen Kategorie-/Hubfluss**, nicht als isolierte Blöcke ganz unten.
-- direkt innerhalb des Bereichs `Nächste Ebene` integriert;
-- Banner als native Partnerzeile;
-- Produkte als native Partnerkarten im gleichen Rhythmus;
-- Kennzeichnung `Anzeige · Partner`;
-- öffentlich leer unsichtbar;
+Affiliate ist nicht als eigener Block unter die Seite zu hängen.
+- Banner liegt als native, volle Partnerzeile **innerhalb des Bereichs Nächste Ebene**, nach der ersten Kategorienreihe.
+- Produktwerbung erscheint als native Karten **im selben Kartenraster** und kann freie Plätze der letzten Reihe auffüllen.
+- klar `Anzeige · Partner` kennzeichnen.
+- öffentlich leer unsichtbar.
 - eingeloggt leer sichtbar.
+- keine zusätzliche Standalone-Banner-/Produktsektion danach.
 
 ### Direkt verkaufbarer Werbeplatz
-- maximal einer;
-- direkt nach dem Kategorie-/Partnerbereich;
-- **ein einziges Foto**;
-- Text über dem Foto;
-- Headline `Hier könnte Ihre Werbung stehen.` auf hellem Pinselstrich;
-- CTA `Werbemöglichkeiten & Preise`;
-- CTA hell und kontrastreich, nie dunkel auf dunklem Foto.
+- maximal einer.
+- direkt nach Kategorie-/Partnerbereich.
+- ein Foto.
+- neuer, auffälliger visueller Aufbau:
+  - dunkler lesbarer Bildverlauf,
+  - Headline direkt auf echtem farbigen Brushstroke,
+  - heller kontrastreicher CTA.
+- `Hier könnte Ihre Werbung stehen.`
+- `Werbemöglichkeiten & Preise`
+- kein dunkler Button auf dunklem Foto.
 
 ## Startseite
-Bestehender freigegebener Stand bleibt gebunden:
+Bestehende gebundene Regeln bleiben unverändert:
 - Logo unverändert;
-- Topbar-Inhalt unverändert;
+- Topbar unverändert;
 - Hero-Headline `Entdecke dein nächstes Hobby.`;
 - Bildspruch bleibt;
 - 8 Hauptwelten;
 - max. ein verkaufbarer Werbeplatz;
 - Affiliate leer öffentlich unsichtbar.
 
-## Architekturgrenzen
-- HD-001 bleibt Struktur-/Kategorieautorität.
+## Architektur
+- HD-001/HD-004 bleiben Kategorie-/Runtime-Autorität außerhalb dieses Designplugins.
 - Affiliate-Zentrale bleibt Provider-/Monetarisierungsautorität.
-- Designplugin rendert Darstellung/Slotposition.
-- keine neue Taxonomie.
+- Designplugin rendert nur Darstellung/Slotposition.
+- keine zweite Taxonomie.
 - kein Pagebuilder-Sonderweg.
 
-## PASS-Bedingung
-PASS erst wenn:
-- Fresh ZIP/PHP;
-- Desktop 1600 / mittlere Breite 1024 / Mobile 390 ohne horizontalen Overflow;
-- Navigation sichtbar bei 1024;
-- Logo bei 1024 klar lesbar;
-- Header/Breadcrumb ohne Überlappung;
-- Gestalten 7/7 unterschiedliche Querformatbilder;
-- Desktop-Raster 7 = 3+2+2;
-- Hub-Aufklapptext mit echten Absätzen und ohne Farbbox-Wechsel;
-- Affiliate innerhalb `Nächste Ebene`;
-- Direktwerbung ein Foto + Brush + heller CTA;
-- Live-Readback.
-
-Lokaler PASS ist niemals Live-PASS.
+## PASS
+Kein Live-PASS ohne echten WordPress-Readback.
