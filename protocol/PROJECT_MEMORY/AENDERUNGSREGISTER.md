@@ -1249,3 +1249,29 @@ Astra/Theme-Eigenlayout hatte in Referenzprojekten wiederholt Container-/Layoutk
 
 ARCHITEKTUR:
 Keine neue Parallelarchitektur. HD-001 bleibt Strukturautorität, Affiliate-Zentrale Monetarisierungsautorität, Designplugin Renderer.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-B – finale Startseiten-/Monetarisierungsregeln
+
+WAS:
+- Body weiß; Header bleibt warm-off-white und klar abgesetzt.
+- Logo wird nicht verändert.
+- Topbar-Inhalt wird nicht verändert und bleibt mittig.
+- Keine Anzeige im Header.
+- Hero-Bildschriftzug „Mehr Zeit für das, was dich begeistert.“ bleibt Bestandteil des Motivs und muss responsiv vollständig sichtbar bleiben.
+- Alle 8 Hauptwelten bleiben zusätzlich zur Navigation als 8 Startseitenkarten sichtbar.
+- Die 8 Weltmotive sind hochauflösende 1400×620-Quellen und zugleich Bildbasis für spätere Welt-/Kategorie-Heroes.
+- Affiliate-Monetarisierung bleibt drei Säulen:
+  1. Produkte;
+  2. Banner;
+  3. direkt verkaufbare Werbeplätze.
+- Produkte/Banner: öffentlich leer unsichtbar; eingeloggt leere Arbeitsplätze sichtbar.
+- Direkt verkaufbarer Werbeplatz: maximal einer pro Seite/Kategorie/Beitrag; unverkauft öffentlich sichtbar; verkauft als Anzeige/Werbung.
+- Breite Banner-/Werbeflächen im Inhaltsbereich sind erlaubt.
+- Meta-Titel/Description werden KISS über Schablonen + Override gelöst; kein zusätzliches SEO-Plugin erforderlich.
+
+WARUM:
+Die Live-Abnahme 1.50.601 zeigte klare visuelle und operative Lücken: fehlendes Logo, nicht responsiver Bildschriftzug, zu geringe Header-/Body-Trennung, unscharfe Weltbilder, unbrauchbares Tiere-Motiv und eine für Betrieb/Verkauf zu starre Leerregel der Monetarisierungsplätze.
+
+KISS:
+Keine neue Taxonomie, kein neuer Workflow, keine neue Monetarisierungsarchitektur. Nur bestehende Design-/Slotlogik präzisiert und vervollständigt.
