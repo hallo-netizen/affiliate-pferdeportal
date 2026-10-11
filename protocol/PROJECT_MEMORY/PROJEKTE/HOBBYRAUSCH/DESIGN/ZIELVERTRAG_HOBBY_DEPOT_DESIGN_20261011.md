@@ -1,13 +1,13 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.0 / 2026-10-11
+FASSUNG: 2.1 / 2026-10-11
 
 ## Header / Navigation
-- Logo unverändert und linksbündig. Die Bilddatei bleibt byteidentisch; für die Darstellung dürfen Halbkreis/dein, HOBBY DEPOT und Claim aus demselben Asset getrennt geclippt und mit etwas mehr vertikalem Abstand gesetzt werden.
-- Header insgesamt kompakter als 1.50.620; Logo/Search/Navigation nutzen die Höhe besser.
-- Navigation sitzt **so tief wie möglich direkt über der unteren Header-Trennlinie**, ohne sie zu überlappen; alle 8 Welten besitzen dieselbe Grundlinie, einschließlich Sammeln.
-- >1000 px: 8 Welten in einer Reihe. Das Suchfeld liegt vertikal auf der HOBBY-DEPOT-Wortmarkenlinie.
+- Logo unverändert und linksbündig. Die Bilddatei bleibt byteidentisch; Halbkreis/dein, HOBBY DEPOT und Claim werden aus demselben Asset getrennt dargestellt und vertikal deutlich entzerrt.
+- Header als echtes 2-Spalten-System: links der Logo-Block über beide Zeilen; rechts oben das Suchfeld, rechts unten die Navigation.
+- Navigation sitzt nur im rechten Bereich unter dem Suchfeld; sie läuft nicht unter dem Logo. Alle 8 Welten besitzen dieselbe Grundlinie.
+- >1000 px: 8 Welten in einer Reihe. Das Suchfeld liegt vertikal exakt auf der HOBBY-DEPOT-Wortmarkenlinie. Navigationsicons entfallen; Text + Pfeil bleiben.
 - 761–1000 px: 8 Welten in 4×2.
 - <761 px: Mobilmenü.
 - Flyouts per Hover/Fokus/Klick.
