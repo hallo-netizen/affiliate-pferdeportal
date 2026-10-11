@@ -12,91 +12,87 @@ STATUS: CLOSED FÜR CODEPFAD / LIVE-REGRESSIONSSCHUTZ AKTIV
 ## HRD-003 – Hero-CTAs/Bildschriftzug bei Zwischenbreiten abgeschnitten
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
 
-Korrektur:
-responsiver Hero, Desktop-/Mobile-Safe-Crop, Bildschriftzug bleibt.
-
 ## HRD-004 – Mega-Menü verschwindet beim Mausweg
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
-
-Korrektur:
-0-px-Hoverweg / Hoverbrücke.
 
 ## HRD-005 – Weltbilder unscharf / fachlich unpassend
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
 
-Korrektur:
-8 kontrollierte native Weltassets, je 1400×620; fachlich abgeglichen; Tiere rahmenlos und ohne Hund-/Haustierclaim.
-
 ## HRD-006 – Startseite unvollständig / TEST-Fallback
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
-
-Korrektur:
-vollständige reale Editorial-/Magazinstruktur, kein TEST-Fallback.
 
 ## HRD-007 – Affiliate-Leerzustand / Direktwerbung
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
 
-Korrektur:
-Affiliate-Banner/Produkte öffentlich leer unsichtbar, eingeloggt leer sichtbar; Direktwerbung maximal einmal und öffentlich auch unverkauft sichtbar.
-
 ## HRD-008 – Header/Body zu einheitlich / Logo-Readback
 STATUS: LOCAL CLOSED / LIVE REGRESSIONSSCHUTZ
-
-Korrektur:
-weißer Body, warm-off-white Header, unverändertes Logo mit cache-sicherem Pfad.
 
 ## HRD-009 – 1.50.611 sichtbar wirkungslos
 STATUS: CLOSED DURCH 1.50.612 / LIVE REGRESSIONSSCHUTZ
 
-Ursache:
-wiederverwendete Renderer-/Assetpfade plus Featured-Image-Priorität.
-
-Korrektur:
-neue Renderer-/Assetpfade, kontrollierte Weltbilder bindend.
-
 ## HRD-010 – Navigation weiterhin zu hoch
-
-STATUS: LOCAL CLOSED IN 1.50.613 / LIVE OFFEN
-
-Befund:
-Live 1.50.612: Navigation noch nicht bündig mit der untersten Logo-/Claim-Textlinie.
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
 
 Korrektur:
-Desktopnavigation 1.50.613 real um 14 px nach unten verschoben; Tablet/Mobile nicht künstlich verschoben.
+Desktopnavigation gegenüber 1.50.613 nochmals abgesenkt; Mobile unverändert.
 
 ## HRD-011 – Hobbyfinder-Karte anderer Schatten/Farbton
+STATUS: LOCAL CLOSED IN 1.50.613 / LIVE REGRESSIONSSCHUTZ
 
-STATUS: LOCAL CLOSED IN 1.50.613 / LIVE OFFEN
-
-Befund:
-Hobbyfinder, Magazin und Wissen wirkten als zusammengehörige Dreiergruppe farblich uneinheitlich.
-
-Korrektur:
-alle drei Kartenflächen verwenden einheitlich `#f5f1e9`, keine unterschiedlichen Verlaufs-/Schattierungsfarben.
-
-## HRD-012 – Verkaufbarer Werbeplatz auf Startseite faktisch nicht sichtbar
-
-STATUS: LOCAL CLOSED IN 1.50.613 / LIVE OFFEN
+## HRD-012 – Verkaufbarer Werbeplatz nicht attraktiv/zu tief
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
 
 Befund:
-Der Direktwerbeplatz war im bisherigen Startseitenfluss nicht als klar sichtbares Verkaufsangebot wahrnehmbar.
+Ein technisch wirkender bzw. tief platzierter Werbeplatz verkauft sich schlecht.
 
 Korrektur:
-- öffentlich unverkauft immer sichtbar;
-- Text: **„Hier könnte Ihre Werbung stehen.“**;
-- maximal einmal;
-- im Startseitenfluss unmittelbar nach Hobbyfinder/Magazin/Wissen.
+- direkt nach der nächsten Kategorieebene;
+- prominentes, aber natives Vermarktungsmodul;
+- Bildcollage;
+- Headline `Hier könnte Ihre Werbung stehen.`;
+- CTA `Werbemöglichkeiten & Preise`;
+- weiterhin maximal einmal.
 
-## HRD-013 – Noch keine verbindliche Hub-/Breadcrumb-Darstellung
+## HRD-013 – Hub-/Breadcrumb-Darstellung
+STATUS: LOCAL CLOSED IN 1.50.613 / LIVE REGRESSIONSSCHUTZ
 
-STATUS: LOCAL CLOSED IN 1.50.613 / LIVE OFFEN
+## HRD-014 – Hubtext zu kurz / kein Pferdeatelier-Aufklappprinzip
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
 
 Korrektur:
-- eigenes Contenttemplate für CORE-Seiten/Kategorien;
-- Breadcrumb überall außer Start;
-- erste Welt-Hubs mit exakt dem Startseiten-Weltbild;
-- nächste Ebene, Banner, Beitragsvorschau, Produkte und genau ein Direktwerbeplatz.
+Pferdeatelier-Regel übernommen:
+- manuelle Texte geschützt;
+- automatische Ableitung aus Titel/Ebene/realen Kindern;
+- lange Texte Lead + `Mehr erfahren` + `Was du hier findest`;
+- Text vollständig im initialen HTML;
+- Gestalten als konkreter Referenztext.
+
+## HRD-015 – Ungerade Unterkategorieanzahl erzeugt Leerfläche
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
+
+Korrektur:
+6-Spalten-Desktopgrid:
+- regulär 3 Karten;
+- Rest 2 = 50/50;
+- Rest 1 = volle letzte Reihe;
+- Tablet 2 / Mobile 1.
+
+## HRD-016 – Affiliateflächen wirken wie technische Fremdkörper
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
+
+Korrektur:
+- Banner ohne große technische Zwischenüberschrift;
+- kleine Kennzeichnung `Anzeige · Partner`;
+- Produktmodule als native Contentkarten;
+- weiterhin klare Werbekennzeichnung;
+- Leerregeln unverändert.
+
+## HRD-017 – Topbar optisch nicht abgesetzt
+STATUS: LOCAL CLOSED IN 1.50.614 / LIVE OFFEN
+
+Korrektur:
+Topbar dunkel im Footer-Farbton; Inhalt unverändert.
 
 ## Aktuell erster Fehler-/Abnahmeblocker
 
-**Live-Abnahme 1.50.613 auf Startseite + einer ersten Welt-Hubseite.**
+**Live-Abnahme 1.50.614 auf Startseite + Gestalten.**
