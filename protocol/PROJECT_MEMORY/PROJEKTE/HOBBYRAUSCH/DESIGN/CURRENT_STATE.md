@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.601 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.610 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Autoritative Bindungen
 
@@ -37,13 +37,14 @@ Desktop-Hauptnavigation = reale erste CORE-Ebene:
 
 Hobbyfinder, Magazin und Anbieter stehen im Footer.
 
-Aktueller Headervertrag:
-- bewusst **hell**, nicht dunkel;
-- statt Reinweiß ein warmes, sehr helles Off-White;
-- feine Unterkante + sehr leichter Schatten zur Trennung vom Content;
-- Suche bleibt weiß;
-- Topbar-Text mittig, stärker, 13 px;
-- Topbar ohne Zusatzlinks;
+Aktueller Headervertrag 1.50.610:
+- Logo unverändert: freigegebenes Asset `logo-variant3-v150600.png`;
+- Topbar-Inhalt unverändert: **Inspiration, Wissen & Empfehlungen rund ums Hobby.**;
+- Topbar mittig;
+- Body weiß;
+- Header warmes Off-White `#f5f1e9` und dadurch sichtbar vom Body getrennt;
+- Suche weiß;
+- **keine Anzeige im Header**;
 - Hauptnavigation Hover = Petrol + feine Unterstreichung ohne Layoutsprung.
 
 ## Mega-Menü
@@ -56,7 +57,7 @@ Aktueller Headervertrag:
 - Abschlusslink „Alle <Welt>-Themen →“;
 - Desktop Hoverweg Trigger → Unterpunkt ohne vertikale Lücke;
 - Tablet/Mobile Accordion/Click;
-- Unterkategorien ab 1.50.601: **14 px / ca. 680 Gewicht**, mehr vertikale Luft;
+- Unterkategorien 14 px / stärker;
 - Weltüberschrift 16 px / stärker.
 
 ## Startseite – verbindliche Reihenfolge
@@ -65,85 +66,111 @@ Aktueller Headervertrag:
 2. Hero
 3. 8 Weltkarten
 4. Hobbyfinder / Magazin / Wissen & Glossar
-5. Affiliate-Produkte – nur real belegt
-6. Affiliate-Banner – nur real belegt
-7. Beliebte Themen aus realen Magazin-SEITEN
-8. Mietwerbung – nur real belegt
+5. Affiliate-Banner
+6. Beliebte Themen aus realen Magazin-SEITEN
+7. Affiliate-Produkte
+8. genau ein direkt verkaufbarer Werbeplatz
 9. Footer
 
-Keine Fake-Füller für unbelegte Affiliateplätze.
+Affiliate-Produkte/Banner:
+öffentlich leer vollständig unsichtbar; **eingeloggt** leere Arbeitsplätze sichtbar.
 
-## Bilder
+Direkt verkaufbarer Werbeplatz:
+**maximal einer pro Seite/Kategorie/Beitrag**, öffentlich auch unverkauft sichtbar als „Werbeplatz verfügbar / Hier werben“.
 
-Harte Regel:
-- auf derselben Startseite **kein Bild doppelt**;
-- Weltbilder müssen zum realen Themenumfang passen;
-- „Tiere“ darf nicht als allgemeine Hunde-/Haustierwelt dargestellt werden, da die echte Struktur Aquaristik, Terraristik, Insekten, Wirbellose, Imkerei, Zucht/Futtertiere und Gehegegestaltung umfasst;
-- das Tiere-Icon ist deshalb kein Pfoten-/Hundesymbol mehr, sondern Aquarium/Terrarium-orientiert.
+## Hero
 
-1.50.601 benutzt für die Startseiten-Welten kontrollierte, unterschiedliche lokale Assets statt beliebiger WordPress-Featured-Images, damit weder Duplikate noch kleine fremde Thumbnails in das Raster rutschen.
+Der freigegebene Bildschriftzug
+**„Mehr Zeit für das, was dich begeistert.“**
+bleibt erhalten.
 
-WICHTIG:
-Die bisherigen Fotoquellen stammen teilweise aus früheren Visualisierungsassets und besitzen trotz 1400×620 nicht überall echte native Detailauflösung. 1.50.601 schärft/optimiert diese Quellen, behauptet aber **keine künstlich erfundene echte Fotoauflösung**. Falls der Live-Readback noch sichtbar weich ist, werden vor Hub-1 die betroffenen Weltbilder als echte hochauflösende Originalmotive ersetzt.
+1.50.610 verwendet dafür zwei kontrollierte Safe-Crops:
+- Desktop 1370×620;
+- Tablet/Mobile 1240×620.
 
-Editorial-Karten verwenden keine wiederholten Weltfotos mehr, sondern eigene scharfe Vektor-Illustrationen/Icons.
+Unterhalb 1100 px wird der Hero gestapelt, damit Bildschriftzug und CTAs nicht abgeschnitten werden.
 
-## Startseiten-Vollständigkeit 1.50.601
+## Weltbilder
 
-Behoben:
-- dritte Karte **Wissen & Glossar** kommt aus der realen Seite `/magazin/wissen-glossar/`;
-- „Beliebte Themen“ liest reale Magazin-SEITEN statt WordPress-Kategorien;
-- kein TEST-Post-Fallback mehr;
-- reale Themen:
-  - Hobby-Ideen & Inspiration
-  - Ungewöhnliche & skurrile Hobbys
-  - Wissen & Glossar
-  - Zeit, Budget & Platz
-  - Vergleiche & Alternativen
+1.50.610 ersetzt die alten weichen/teilweise mockup-basierten Weltbilder vollständig.
+
+Neu:
+- 8/8 unterschiedliche native Ausgangsbilder;
+- alle 8 Ausgabemotive exakt **1400×620**;
+- gleiche Bildquelle für Startseitenkarte und späteren Welt-/Kategorie-Hero vorgesehen;
+- `Gestalten`: Kreativatelier / Malen, Druck, Papier, Textil, Miniaturen;
+- `Fertigen`: Werkstatt / Holz, Leder, Buch/Papier, Guss/Formen, Keramik;
+- `Technik`: Elektronik, Robotik, RC, 3D-Druck, Retro, Drohne, Audio;
+- `Forschen`: Mikroskopie, Naturproben, Messen, Teleskop, Wetter/Umwelt;
+- `Pflanzen`: Bonsai, Zimmerpflanzen, Orchideen, Sukkulenten, Hydroponik, Saatgut, essbare Pflanzen;
+- `Tiere`: Aquaristik, Terraristik, Insekten/Futtertiere, Imkerei/Bestäuber; **kein Rahmen**, kein Hund/Haustier;
+- `Bewegen`: Wandern, Wasser, Klettern/Seil, Bike, Wind/Kite;
+- `Sammeln`: Münzen, Papier/Briefmarken, Technik/Medien, Spielzeug, Naturfunde.
+
+Alle acht Hashes unterschiedlich.
+
+## Startseiten-Vollständigkeit 1.50.610
+
+- 8/8 Weltkarten;
+- 3/3 redaktionelle Mittelkarten;
+- 5 reale Magazin-Themenseiten;
+- kein TEST-Fallback;
+- breiter Affiliate-Bannerplatz;
+- drei Affiliate-Produktplätze;
+- Admin-/Login-Vorschau für leere Affiliateplätze;
+- genau ein verkaufbarer Werbeplatz;
+- Meta-Titel/Description-KISS-Schicht mit optionalem Override;
+- kein Shop-/Community-/Newsletter-Noise.
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.601_HOBBY_DEPOT_HOMEPAGE_COMPLETION_VISUAL_POLISH_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`
+`c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`
 
 ## Lokaler Hardtest
 
 PASS:
-- PHP 9/9;
-- leerer Affiliatezustand NEGATIV;
-- belegter Affiliatezustand POSITIV;
-- 8/8 reale Welten;
-- 3/3 redaktionelle Mittelkarten;
-- 5/5 reale Magazin-Themenseiten;
-- kein TEST-Fallback;
-- kein Community/Newsletter/Shop-Noise;
-- ListingHive-Shell-Unterdrückung;
-- Hero-CTAs 16 Breiten 320–1600 px;
-- kein horizontaler Overflow;
-- Mega-Menü Hover bis Unterpunkt;
-- vertikale Hover-Lücke 0 px;
-- Untermenü-Typografie 14 px/stärker;
-- Topbar mittig/stärker;
-- Header warm-hell abgesetzt;
-- 8 Weltbilddateien unterschiedlich und 1400×620;
-- ZIP-CRC;
-- frischer ZIP-Unpack + PHP-Lint.
+- ZIP-Integrität;
+- Fresh-Unpack PHP 9/9;
+- öffentlich leer: Produkte unsichtbar;
+- öffentlich leer: Affiliate-Banner unsichtbar;
+- eingeloggt leer: 3 Produktplätze sichtbar;
+- eingeloggt leer: 1 Bannerplatz sichtbar;
+- belegte Affiliate-Inhalte sichtbar;
+- unverkaufter Werbeplatz öffentlich sichtbar;
+- Werbeplatz pro Request maximal 1;
+- gebuchter Werbeplatz ersetzt Verfügbarkeitsplatz;
+- Logo unverändert;
+- Topbar-Inhalt unverändert + mittig;
+- keine Anzeige im Header;
+- Body weiß / Header warm-off-white;
+- Hero-Schriftzug Desktop/Mobile erhalten;
+- 8/8 Weltkarten;
+- 8/8 Weltbilder 1400×620, unterschiedlich;
+- Tiere ohne dekorativen Rahmen;
+- Reihenfolge Banner → Magazin/Themen → Produkte;
+- kein horizontaler Konzeptumbau;
+- ListingHive-Shell-Unterdrückung bleibt.
 
 ## Erster offener Blocker
 
-**WordPress-Live-Abnahme von 1.50.601.**
+**WordPress-Live-Abnahme von 1.50.610.**
 
-Besonders hart prüfen:
-1. tatsächliche Bildschärfe auf realem Display;
-2. Headerabsetzung;
-3. Topbar;
-4. Mega-Menü-Unterkategorien;
-5. vollständiger Mittel-/Magazinbereich.
+Besonders prüfen:
+1. Logo lädt real;
+2. Hero-Bildschriftzug Desktop/Tablet/Mobile vollständig sichtbar;
+3. echte Bildschärfe der 8 neuen Weltmotive;
+4. Headerabsetzung weißer Body / warmes Off-White;
+5. Adminsicht leere Affiliateplätze;
+6. öffentlicher unverkaufter Werbeplatz;
+7. breite Bannerfläche;
+8. vollständige Startseite Desktop/Tablet/Mobile;
+9. Mega-Menü-Unterpunkte.
 
 ## EXAKT EINE NEXT ACTION
 
-1.50.601 installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.
+**1.50.610 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Startseiten-LIVE-PASS beginnt Hub Ebene 1.
