@@ -1324,3 +1324,18 @@ Hubseiten sollen nicht wie technische Kategorie-Listen wirken, sondern wie volls
 
 KISS:
 Keine Änderung an HD-001-Struktur, keine zweite Taxonomie, kein Pagebuilder. Nur bestehende Hierarchie lesen und konsistent darstellen.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-F – Hubfotos oben, ruhige Tiefe, responsive Navigation
+
+WAS:
+- Hub1/Hub2 dürfen kompakte Fotos in Unterkategorie-Karten zeigen.
+- Eigene Seitenbilder haben Vorrang; sonst kontrollierter Crop des Weltmotivs.
+- Tiefe Kategorien/Leafs bleiben bewusst ruhiger.
+- Die offene 8-Welten-Navigation existiert nur noch bei ausreichend breiten Viewports; mittlere Breiten schalten rechtzeitig in das Dropdown-Menü.
+
+WARUM:
+Hobby Depot ist stärker inspirations- und bildgetrieben als Pferdeatelier. Gleichzeitig darf die Bilddichte nicht bis in jede tiefe Ebene durchgereicht werden. Die Navigation darf bei Side-by-Side-/Tabletbreiten niemals abgeschnitten sein.
+
+KISS:
+Keine neue Taxonomie, kein neuer Bildworkflow, kein zweites Menüsystem. Bestehende Weltassets und vorhandene Featured Images werden nur anders dargestellt.
