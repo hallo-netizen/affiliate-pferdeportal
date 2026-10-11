@@ -666,3 +666,45 @@ Verbindlich:
 - Footer.
 
 Keine Community-, Newsletter- oder Shop-Erfindungen.
+
+
+## 26. LIVE-FEEDBACK 1.50.601
+
+### Header
+Der Header bleibt **hell**, wird aber nicht reinweiß gegen die Seite verloren:
+- warmes Off-White;
+- Suche weiß;
+- feine Unterkante;
+- sehr leichter Schatten;
+- keine dunkle, shopartig-technische Kopfleiste.
+
+Topbar:
+- Text mittig;
+- 13 px;
+- sichtbar stärker;
+- keine Zusatzlinks.
+
+### Mega-Menü
+Unterkategorien:
+- 14 px;
+- Gewicht ca. 680;
+- größere vertikale Klick-/Hoverfläche;
+- Weltüberschrift 16 px stärker.
+
+### Keine Doppelbilder
+Auf der Startseite darf kein Foto als Hero-, Welt- oder Editorialbild erneut verwendet werden.
+Editorial-Karten können deshalb bewusst mit eigenständigen Vektor-/Iconmotiven arbeiten.
+
+### Tiere
+„Tiere“ ist keine Hunde-/allgemeine Haustierwelt.
+Bild- und Iconrichtung:
+Aquaristik / Terraristik / Insekten / Wirbellose / Imkerei / Zucht / Gehegegestaltung.
+
+### Bildqualität
+Pixelmaße allein sind kein Qualitätsbeweis.
+Kein erneutes Hochskalieren kleiner Mockup-Crops als angebliche Qualitätslösung.
+Wenn ein Startseitenbild im Live-Readback weiterhin weich wirkt, muss das Quellmotiv durch ein echtes hochauflösendes Original ersetzt werden.
+
+### Startseite vor Hubs
+Die Startseite wird vollständig abgenommen, bevor Hub Ebene 1 begonnen wird.
+Reale Magazinbereiche sind Seiten und müssen als Seiten geroutet werden; kein Kategorie- oder TEST-Fallback.
