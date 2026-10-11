@@ -26,6 +26,14 @@ Einzige technische Plugin-Wahrheit:
 
 Nicht Teil der aktuellen Kategoriearbeit.
 
+## HD-003
+
+Einzige technische Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+Fachliche Current der Designarbeit:
+`../DESIGN/CURRENT_STATE.md`
+
 ## EXAKT EINE NEXT ACTION
 
 Für die aktuell laufende HD-001-Kategoriearbeit:
