@@ -3,81 +3,67 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.617 LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.618 LOCAL STRUCTURAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
-## Aktueller Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.617_HOBBY_DEPOT_HUB_GRID_NAV_AFFILIATE_INTEGRATED_LOCALPASS.zip`
+## Kandidat
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
 
 SHA-256:
-`5f6e5ddf30662a10ecdfc37b35aaca82ad0ba578d59cde20b463d11314624764`
+`0498a836102540f02a890ac02e415a0bf60d33418d51a2385e15efb4543ee203`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.617_HOBBY_DEPOT_HUB_GRID_NAV_AFFILIATE_INTEGRATED_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
 
-## 1.50.617
+## Korrekturen
 
 Header:
-- Logo Desktop 286 px / mittlere Breite 278 px / Mobile 230 px im lokalen Readback;
-- >1180 px Navigation 8×1;
-- 761–1180 px Navigation sichtbar 4×2;
-- <761 px Hamburger;
-- kein horizontaler Overflow;
-- 18 px Abstand Headerende → Breadcrumb bei Desktop/Mid.
+- Logo natürliches Seitenverhältnis; keine Max-Height-Verzerrung;
+- Logo linksbündig;
+- Desktop-Logo 248 px breit;
+- eigene 148-px-Logozeile + 48-px-Navigationszeile;
+- Navigation dadurch real tiefer;
+- Flyouts wieder am auslösenden Weltpunkt verankert statt links versetzt.
 
 Hub1:
-- Hero bleibt;
-- Zusatztext standardmäßig geschlossen;
-- Aufklappbereich volle Inhaltsbreite;
-- transparenter/weißer Hintergrund;
-- echte Absatzstruktur;
-- `Was du hier findest` ohne eigene Farbbox.
+- Hero und Aufklapptext werden jetzt aus demselben Text **geteilt**;
+- bereits im Hero sichtbarer Lead wird im Aufklapptext nicht erneut ausgegeben;
+- Fold weiter full-width/neutral mit Absätzen.
 
-Gestalten-Karten:
-- 7/7 unterschiedliche Bilder;
-- alle 600×320;
-- alle lokal als 1,88:1 gerendert;
-- Desktop-Raster bei 7 = **3 + 2 + 2**;
-- Druck & Fotografie besitzt wieder ein Bild;
-- echter Child-Featured-Image-Pfad bleibt vorrangig.
+Unterkategorien:
+- 7 Gestalten-Motive unverändert eindeutig;
+- Bildflächen jetzt kompakte einheitliche Querformat-Thumbnails 132×70 im Desktopkartenlayout;
+- keine großflächigen 50%-Kartenbilder mehr.
 
 Affiliate:
-- Banner + Produkte innerhalb `Nächste Ebene` integriert;
-- keine separaten Standalone-Produkt-/Bannerblöcke danach;
-- öffentlich leer unsichtbar / eingeloggt leer sichtbar unverändert.
+- Banner sitzt als volle Partnerzeile **im Kartenraster nach der ersten Kategoriezeile**;
+- Produkte sitzen als native Partnerkarten im selben Raster;
+- bei Gestalten (7 Kategorien) füllen im eingeloggten Leerzustand 2 Produktplätze die letzte Reihe zusammen mit Kategorie 7;
+- keine separaten Affiliate-Blöcke danach.
 
-Direktwerbung:
-- ein Foto als Hintergrund;
-- Brush-Headline;
-- heller CTA;
-- direkt nach dem Kategorie-/Partnerbereich.
+Verkaufbare Werbung:
+- neues Einzelfoto;
+- dunkler Lesbarkeitsverlauf;
+- türkisfarbener echter Brushstroke hinter der Headline;
+- heller CTA.
 
-Typografie:
-- Navigation 14 px;
-- Hub-Intro 16 px;
-- Unterkategorie-Titel 15 px;
-- Unterkategorie-Text 11 px;
-- keine globale Verkleinerung.
+## Lokale Prüfung
+PASS:
+- PHP 10/10;
+- Fresh-Unpack PHP 10/10;
+- ZIP-Integrität;
+- Plugin-/Klassenbindung 1.50.618;
+- Hero-Text kommt im Fold nicht erneut vor;
+- 7 Kategorie-Karten;
+- Affiliate-Banner und 2 Produktplätze direkte Kinder desselben Next-Level-Grids;
+- keine Standalone-Affiliate-Sektionen;
+- Rental genau ein Hintergrundbild;
+- Logo-CSS ohne verzerrende Max-Höhe;
+- Flyout-CSS relativ zum Weltpunkt.
 
-## Lokaler Hardtest
-- PHP **10/10 PASS**
-- ZIP PASS
-- Desktop 1600 PASS
-- Mid 1024 PASS
-- Mobile 390 PASS
-- horizontal overflow = 0 PASS
-- Nav sichtbar Mid PASS
-- Logo lesbar Mid PASS
-- Header/Breadcrumb Abstand PASS
-- 7 unique Fotos PASS
-- 7 Querformate PASS
-- 3/2/2-Raster PASS
-- Intro-Absätze PASS
-- Intro-Hintergrund transparent PASS
-- Affiliate integriert PASS
-- Direktwerbung Einzelbild/Brush/heller Button PASS
+Lokaler Browser-Screenshot konnte in dieser Laufzeitumgebung nicht zuverlässig gestartet werden; deshalb wird **kein Browser-PASS erfunden**.
 
 ## Erster offener Blocker
-**WordPress-Live-Abnahme von 1.50.617.**
+WordPress-Live-Abnahme 1.50.618.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.617 installieren und Gestalten bei normaler Breite, Side-by-Side und Mobile live prüfen.**
+**1.50.618 installieren und Gestalten live prüfen.**
