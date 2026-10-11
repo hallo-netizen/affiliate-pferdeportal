@@ -7,13 +7,13 @@ NAME:
 `Affiliate Portal Template Kit – Hobby Depot Profil`
 
 VERSION:
-`1.50.615`
+`1.50.616`
 
 ARTEFAKTNAME:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.616_HOBBY_DEPOT_HUB_CLEANUP_AD_BRUSH_NAV_FIX_LOCALPASS.zip`
 
 SHA-256:
-`17d03f5704d8f140a86f4bbbdc4109cf564522a663660d0bd333be456dc3fda6`
+`6ae738653de1dd1677bc4e6a5e58540cc7efddc6ccd5ddf8f28a2b5bbda5e0cd`
 
 AUTORITATIVE TECHNISCHE CURRENT:
 `../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
@@ -21,26 +21,18 @@ AUTORITATIVE TECHNISCHE CURRENT:
 FACHCURRENT:
 `../../../DESIGN/CURRENT_STATE.md`
 
-ERSTELL-/PRÜFSTAND:
-2026-10-11.
-
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
 
-LOKALER NACHWEIS:
-- ZIP-Integrität PASS;
-- Fresh PHP 10/10 PASS;
-- Pferdeatelier-Introregel PASS;
-- Gestalten-Beispieltext PASS;
-- Rest-1/Rest-2-Rasterregeln PASS;
-- Topbar/Navigation PASS;
-- Direktwerbeplatz Position/CTA PASS;
-- native Affiliate-Banner-/Produktintegration PASS;
-- 8 Weltassets 1400×620 PASS.
-- Hub1/Hub2-Fotokarten Featured-Image/Fallback PASS.
-- Responsive-Navigation 1320/980-Breakpoints PASS.
+LOKAL:
+- ZIP PASS;
+- PHP 10/10 PASS;
+- Typography-Diff PASS;
+- Nav-Korrektur PASS;
+- Hub1-Fold PASS;
+- 7 unique Gestalten-Fallbackbilder PASS;
+- Parent-Weltbild-Fallback entfernt PASS;
+- Direktwerbung 1 Foto + Brushstroke PASS.
 
 CURRENT.zip STATUS:
 **NICHT SYNCHRONISIERT / BINÄRTRANSFERGRENZE.**
-
-Der geprüfte ZIP-Kandidat liegt im Projekt-/Library-Artefaktbestand.
