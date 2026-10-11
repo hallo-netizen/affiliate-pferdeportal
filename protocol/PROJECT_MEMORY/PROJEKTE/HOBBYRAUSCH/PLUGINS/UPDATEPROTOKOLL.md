@@ -1415,3 +1415,63 @@ OFFEN.
 
 NEXT:
 1.50.611 installieren und Startseite Desktop/Tablet/Mobile live prüfen.
+
+
+---
+
+## PU-20261011-029 – HD-003 Hobby Depot Design / Template Kit 1.50.612
+
+VON / AUF:
+1.50.611 → 1.50.612.
+
+WARUM:
+1.50.611 war live sichtbar wirkungslos bzw. teilweise alt, obwohl Quelltextänderungen im ZIP vorhanden waren.
+
+ROOT CAUSE:
+- alte Hobby-Depot-Renderklasse/-datei v150610 wurde weiterverwendet;
+- wesentliche Assetnamen/-pfade wurden wiederverwendet;
+- Startseiten-Weltkarten durften alte große WordPress-Featured-Images vor den kontrollierten neuen Weltassets verwenden.
+
+KORREKTUR:
+- neue Renderklasse/-datei v150612;
+- neues Fronttemplate v150612;
+- neues Assetverzeichnis `assets/hobby-depot-v150612/`;
+- neue Dateinamen plus `?ver=1.50.612`;
+- alte Hobby-Depot-Renderdatei und altes Hobby-Assetverzeichnis aus dem Release entfernt;
+- Startseiten-Weltkarten hart an die kontrollierten 1400×620-Assets gebunden;
+- einmalige verfügbare Cache-Purge-Wege beim erkannten Releasewechsel im Backend;
+- HTML-Releasemarker `data-hd-release="1.50.612"`.
+
+SICHTBARER DESIGNSTAND:
+- Headline: „Entdecke dein nächstes Hobby.“;
+- Bildspruch bleibt „Mehr Zeit für das, was dich begeistert.“;
+- Hero links weiß;
+- 1 px Hero-Rahmen;
+- 24 px Abstand oben Desktop / 14 px Mobile;
+- Navigation Desktop physisch 10 px tiefer;
+- Logo unveränderte Bildbytes, aber neuer cache-sicherer URL;
+- Topbar-Inhalt unverändert.
+
+BILDER:
+8 neue kontrollierte Motive, je 1400×620:
+Gestalten Frau, Fertigen Mann, Technik aktive Hände, Forschen Mann, Pflanzen Frau, Tiere andere Frau, Bewegen Mann, Sammeln aktive Hände.
+Kein Motiv ohne mindestens Hände.
+
+FRESH TEST:
+- PHP 9/9 PASS;
+- POS/NEG Render PASS;
+- alte große Featured Images können Weltkarten nicht mehr überschreiben;
+- 8/8 neue Assets gebunden;
+- ZIP-Integrität PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.612_HOBBY_DEPOT_REAL_FRONTEND_FIX_LOCALPASS.zip`
+
+SHA-256:
+`cb82af1fa9ab0aabb980fdcd903efe05e4bf75c10c036f108fb3450fec22fda3`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.612 installieren und Startseite live prüfen.
