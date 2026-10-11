@@ -1764,3 +1764,26 @@ PHP 10/10; Fresh PHP 10/10; ZIP PASS; DOM-/Strukturchecks PASS.
 
 LIVE:
 OFFEN.
+
+
+---
+
+## PU-20261011-036 – HD-003 1.50.619
+
+LIVE-FIX:
+- Navigation tiefer / Headerbereiche luftiger;
+- Flyouts wieder Hover/Fokus/Klick;
+- Unterkategorie-Bilder füllen ihren Querformatrahmen;
+- 7 individuelle Gestalten-Kurzzeilen statt generischem Wiederholungstext.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
+
+SHA:
+`dada31464533e143d875e0d7568ee6fc8bba2d79d7b8aaa2f6bac6df806d1179`
+
+LOCAL:
+PHP 10/10; ZIP PASS; 7/7 Bildhashes eindeutig; Preview mit geöffnetem Flyout geprüft.
+
+NEXT:
+1.50.619 live prüfen.
