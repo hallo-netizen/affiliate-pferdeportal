@@ -1227,3 +1227,72 @@ WIEDERVERWENDBARE ÜBERGABE:
 
 ERGEBNIS:
 HD-001 LIVE-PASS / Kategorienlauf abgeschlossen.
+
+
+---
+
+## PU-20261011-026 – HD-003 Hobby Depot Design / Template Kit 1.50.601
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+NAME:
+`Affiliate Portal Template Kit – Hobby Depot Profil`
+
+ART:
+Projektbezogene Design-/Renderer-Weiterentwicklung auf bestehender Template-Kit-Basis. Keine Änderung an HD-001-Strukturautorität oder Affiliate-Providerlogik.
+
+VON / AUF:
+Hobby-Depot-Designkandidaten 1.50.593–1.50.600 → 1.50.601.
+
+WARUM:
+Die realen WordPress-Readbacks zeigten nacheinander Blogloop-Einbettung, Abweichungen vom freigegebenen Entwurf, unvollständige Startseitenbereiche, Hero-Responsive-Probleme, Mega-Menü-Hover-Lücke, zu kleine/unscharfe Weltbilder und fachlich unpassende Bildmotive.
+
+THEME:
+ListingHive ist die technische Theme-Basis der gesamten Hobby-Depot-Seite. Das Designplugin unterdrückt im Hobby-Depot-Rahmen einen zweiten sichtbaren Themeheader/-footer.
+
+1.50.601 – SCOPE:
+- Header/Topbar visual polish;
+- 8 reale CORE-Welten;
+- Mega-Menü pro Welt;
+- stärkere Untermenü-Typografie;
+- vollständiger Mittel-/Magazinbereich;
+- kein TEST-Fallback;
+- drei redaktionelle Mittelkarten;
+- kontrollierte, unterschiedliche Weltassets;
+- `Tiere` nicht als Hund/Pfote;
+- Editorial-Karten ohne doppelte Weltfotos;
+- Affiliate-Produkte/Banner/Mietflächen unverändert conditional.
+
+POSITIV:
+- 8/8 Welten;
+- 3/3 Editorial-Karten;
+- 5/5 reale Magazin-Themenseiten;
+- Affiliate belegt sichtbar;
+- 16 Responsive-Breiten 320–1600 px;
+- Hero-CTAs sichtbar/innerhalb;
+- Mega-Menü Trigger → Unterpunkt stabil;
+- ListingHive-Shell-Unterdrückung;
+- kein horizontaler Overflow.
+
+NEGATIV:
+- Affiliate leer vollständig abwesend;
+- kein TEST-Fallback;
+- kein Shop-/Community-/Newsletter-Noise;
+- kein zweiter ListingHive-Header/Footer;
+- Mega-Menü-Gap = 0 px.
+
+FRESH:
+- ZIP-Integrität PASS;
+- PHP-Lint 9/9 PASS;
+- SHA-256:
+  `6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`.
+
+ROLLBACK:
+Kein Blindfix. Bei Liveabweichung erst realen Zustand reproduzieren und nur belegtes Delta reparieren; nötigenfalls auf zuletzt installierten funktionierenden Hobby-Depot-Template-Kit-Stand zurück.
+
+LIVE:
+OFFEN. Kein Live-PASS.
+
+NEXT:
+1.50.601 installieren und vollständige Startseite Desktop/Tablet/Mobile live prüfen. Erst danach Hub Ebene 1.
