@@ -115,7 +115,7 @@ Logo-Dateiladung muss live verifiziert werden.
 
 ## Aktuell erster Fehler-/Abnahmeblocker
 
-**Live-Abnahme 1.50.610.**
+**Live-Abnahme 1.50.612.**
 
 Prüffokus:
 1. Logo real sichtbar;
@@ -127,3 +127,28 @@ Prüffokus:
 7. breite Bannerfläche;
 8. vollständige Startseite Desktop/Tablet/Mobile;
 9. Mega-Menü.
+
+
+## HRD-009 – 1.50.611 scheinbar geändert, live aber alter Stand sichtbar
+
+STATUS: LOCAL CLOSED / LIVE OFFEN
+
+Befund:
+Nach Installation von 1.50.611 waren Headline, Heroabstand/-farbe, Navigation und Weltbilder live praktisch unverändert.
+
+Bewiesene Ursachen:
+1. der Release verwendete weiter die alte Renderklasse/-datei v150610;
+2. Assetnamen/-pfade blieben für wesentliche Bilder wiederverwendet und waren cacheanfällig;
+3. die Startseiten-Weltkarten bevorzugten bei ausreichend großen WordPress-Featured-Images diese alten Bilder vor den kontrollierten neuen Assets.
+
+Korrektur 1.50.612:
+- neue Renderklasse/-datei und neues Fronttemplate;
+- neues Assetverzeichnis, neue Dateinamen, Versionsparameter;
+- alter Hobby-Depot-Renderer und alter Assetordner aus Release entfernt;
+- Weltkarten immer auf kontrollierte 1400×620-Assets gebunden;
+- einmalige Cache-Purge beim erkannten Releasewechsel im Backend;
+- HTML-Releasemarker für direkten Readback;
+- neue Personenmischung Frau/Mann/Hände; kein Weltbild ohne mindestens Hände.
+
+Lokale Fresh-ZIP-Prüfung:
+PASS.
