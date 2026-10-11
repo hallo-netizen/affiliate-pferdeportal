@@ -1374,3 +1374,14 @@ KEINE:
 - Direktwerbung visuell neu aufgebaut.
 
 Keine Taxonomie-/Workflow-/Provideränderung.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-H – Flyout/Nav/Kartenkorrektur
+
+- Navigation sichtbar tiefer.
+- Header bekommt mehr vertikale Luft.
+- Flyouts wieder am Weltpunkt und per Hover/Fokus/Klick.
+- Kategorie-Bilder füllen den Querformatrahmen.
+- generische Kartenuntertitel entfernt; nur kurze echte Orientierung.
+
+Keine Kategorie-, Taxonomie- oder Provideränderung.
