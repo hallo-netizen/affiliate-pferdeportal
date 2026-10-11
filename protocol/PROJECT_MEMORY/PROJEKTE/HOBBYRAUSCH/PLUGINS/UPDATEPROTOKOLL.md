@@ -1787,3 +1787,29 @@ PHP 10/10; ZIP PASS; 7/7 Bildhashes eindeutig; Preview mit geöffnetem Flyout ge
 
 NEXT:
 1.50.619 live prüfen.
+
+
+---
+
+## PU-20261011-037 – HD-003 1.50.621
+
+Nur Header-Mikrofix:
+- Header kompakter;
+- Navigation an untere Linie;
+- alle 8 Nav-Baselines identisch;
+- Sammeln geprüft;
+- Suchfeld auf HOBBY-DEPOT-Wortmarkenlinie;
+- unverändertes Logoasset intern luftiger dargestellt;
+- Flyouts unverändert funktionsfähig.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.621_HOBBY_DEPOT_HEADER_ALIGNMENT_LOCALPASS.zip`
+
+SHA:
+`a51f986d945ca87e85de4ff367c73ed3e09772e48b25bd5308ad53bcc72be226`
+
+LOCAL:
+PHP 10/10; ZIP PASS; Playwright 1600/1024/960/800; overflow 0; Flyout-POS PASS.
+
+NEXT:
+nur Header live prüfen.
