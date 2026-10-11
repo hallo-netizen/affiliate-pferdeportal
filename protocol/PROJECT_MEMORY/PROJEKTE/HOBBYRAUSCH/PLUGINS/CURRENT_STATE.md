@@ -2,39 +2,48 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-08
+STAND: 2026-10-11
 STATUS: AKTIV / INVENTAR- UND ROUTING-CURRENT / KEINE KOPIE VON EINZELPLUGIN-STATUS
 
 ## Regel
 
 Für jedes einzelne Plugin gilt ausschließlich dessen Plugin-Akte als aktuelle technische Wahrheit.
 
-Keine Plugin-Version, kein Live-Status, kein Blocker und keine NEXT ACTION eines Einzelplugins werden hier dupliziert.
+## HD-001 – Kategorie-Workflow
 
-## HD-001
-
-Einzige technische Plugin-Wahrheit:
+Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
-Fachliche Current der laufenden Kategoriearbeit:
-`../SEO_KATEGORIEN/CURRENT_STATE.md`
+Rolle:
+schwerer Bearbeitungs-/Dry-Run-/Sync-/Rollback-Workflow; künftig nicht zwingend dauerhaft aktiv.
 
-## HD-002
+## HD-002 – Text/SEO
 
-Einzige technische Plugin-Wahrheit:
+Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
 
-Nicht Teil der aktuellen Kategoriearbeit.
+Vor späterem Liveeinsatz muss eine direkte HD-001-Runtime-Abhängigkeit auf den neutralen Kategorie-Registry-Vertrag geprüft/umgestellt werden.
 
-## HD-003
+## HD-003 – Design
 
-Einzige technische Plugin-Wahrheit:
+Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
-Fachliche Current der Designarbeit:
+Fach-Current:
 `../DESIGN/CURRENT_STATE.md`
+
+## HD-004 – Kategorie-Kern
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-004-KATEGORIE-KERN/CURRENT.md`
+
+Rolle:
+schlanker read-only Normalbetriebs-Kern für `journal_cat` + zentrales Kategorie-Snapshot-API.
+
+Fach-Current:
+`../SEO_KATEGORIEN/CURRENT_STATE.md`
 
 ## EXAKT EINE NEXT ACTION
 
-Für die aktuell laufende HD-001-Kategoriearbeit:
-`SEO_KATEGORIEN/START_HERE.md → AUTORITAETSPLAN.json → SEO_KATEGORIEN/CURRENT_STATE.md → dortige NEXT ACTION`.
+Für die Kategorie-Verschlankung:
+`../SEO_KATEGORIEN/CURRENT_STATE.md` → dortige NEXT ACTION.
