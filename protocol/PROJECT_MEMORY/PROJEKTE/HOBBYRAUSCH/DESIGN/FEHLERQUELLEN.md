@@ -2,47 +2,35 @@
 
 ROLLE: Fehlerhistorie. Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT_STATE.md`.
 
-## HRD-001 bis HRD-029
-Historie bleibt erhalten; frühere lokale Fixbehauptungen gelten nicht als Live-PASS.
+## HRD-001 bis HRD-035
+Historie bleibt bestehen; lokale Fixstände gelten erst nach Live-Readback als endgültig geschlossen.
 
-## HRD-030 – Logo verzerrt/gequetscht
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
+## HRD-036 – Navigation weiterhin zu hoch
+STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
+
+Fix:
+größere vertikale Trennung von Logo/Search/Navigation; eigene tiefere Nav-Zeile.
+
+## HRD-037 – Flyout nach 1.50.618 faktisch weg
+STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
 
 Ursache:
-Breite und zu kleine `max-height` wurden gleichzeitig erzwungen.
+eine ältere Mid-Breakpoint-Regel unterdrückte Hover-Flyouts weiterhin mit `!important`.
 
 Fix:
-natürliches Seitenverhältnis, `height:auto`, keine begrenzende Max-Höhe; linksbündig.
+späteste 1.50.619-Regel aktiviert Hover/Fokus/Klick explizit wieder und verankert Flyouts am jeweiligen Weltpunkt.
 
-## HRD-031 – Navigation zu hoch / Flyout versetzt
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
-
-Fix:
-eigene untere Navigationszeile; Flyout wieder relativ zum jeweiligen Weltpunkt statt statisch über der Gesamtzeile.
-
-## HRD-032 – Hero und Aufklapptext doppeln sich
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
+## HRD-038 – Kategorie-Vorschaubilder zu klein
+STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
 
 Fix:
-Hero erhält Lead; Fold ausschließlich den verbleibenden Text.
+Bild füllt die komplette vorgesehene Querformatfläche; kein Innenrand/Inset.
 
-## HRD-033 – Unterkategorie-Bilder viel zu groß
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
-
-Fix:
-einheitliche kompakte Querformat-Thumbnails 132×70 statt großflächiger Kartenbilder.
-
-## HRD-034 – Affiliate trotz Integration optisch unten angeklebt
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
+## HRD-039 – Untertitel generisch und wiederholend
+STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
 
 Fix:
-Banner und Produkte sind jetzt direkte Elemente des Next-Level-Kartenrasters; Banner nach erster Reihe, Produkte füllen ungerade letzte Reihen.
-
-## HRD-035 – Verkaufbarer Werbeplatz visuell unverändert/schwach
-STATUS: LOCAL CLOSED 1.50.618 / LIVE OFFEN
-
-Fix:
-neues Einzelfoto, dunkler Overlayverlauf, farbiger Brushstroke, heller CTA.
+Gestalten erhält 7 kurze individuelle Kurzzeilen. Ohne echte Kurzinfo kein generischer Füllsatz.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.618.**
+**Live-Abnahme 1.50.619.**
