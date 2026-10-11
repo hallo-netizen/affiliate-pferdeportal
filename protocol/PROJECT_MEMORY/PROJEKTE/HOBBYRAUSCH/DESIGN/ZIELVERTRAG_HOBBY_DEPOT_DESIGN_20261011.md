@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV  
-FASSUNG: 1.3 / 2026-10-11  
+FASSUNG: 1.4 / 2026-10-11  
 GELTUNGSBEREICH: HOBBYRAUSCH / DESIGN / WORDPRESS-DARSTELLUNG
 
 ## Ziel
@@ -23,6 +23,8 @@ Technische Theme-Basis ist **ListingHive**. Das Hobby-Depot-Designplugin ist fü
 - Navigation sitzt optisch auf der **untersten Claim-/Logo-Textachse**, nicht zu hoch.
 - Hobbyfinder, Magazin und Anbieter gehören in den Footer.
 - Mega-Menü pro CORE-Welt, nur direkte Kinder, ohne Hover-Lücke.
+- Die Desktop-Vollnavigation darf niemals horizontal abgeschnitten werden.
+- Bis einschließlich **1320 px** schaltet der Header frühzeitig auf die vorhandene Menü-/Dropdowndarstellung um; erst darüber bleibt die komplette 8-Welten-Zeile offen sichtbar.
 
 ## Startseite
 
@@ -80,6 +82,15 @@ Für Hobby Depot gilt diese Darstellung ausdrücklich auch auf den Welt-Hubs.
 - Hero selbst zeigt nur einen kompakten Lead;
 - der vollständige Kategorietext folgt direkt darunter nach obiger Regel;
 - darunter vollständiger Verweis auf die tatsächlich vorhandene nächste Kategorie-/Seitenebene.
+
+### Fotos auf oberen Hubebenen
+
+- Auf `hub1` und `hub2` dürfen Unterkategorie-Karten kompakte Fotos tragen.
+- Priorität: echtes gepflegtes Seiten-/Kategoriebild des jeweiligen Kindes.
+- Fehlt ein eigenes Bild, wird ausschließlich ein kontrollierter Ausschnitt des zugehörigen Weltmotivs verwendet.
+- Dadurch entsteht kein neuer Bildbestand und keine Bild-Plugin-Orgie.
+- Tiefe Kategorie-/Leafebenen bleiben bewusst text-/iconorientiert, damit das Portal nicht überladen wirkt.
+- Fotos sind reine Darstellung; sie verändern weder HD-001-Struktur noch SEO-Ownership.
 
 ### Unterkategorie-Raster
 Desktop-Grundsystem:
@@ -143,7 +154,7 @@ PASS erst wenn:
 - öffentlicher/eingeloggter Affiliatezustand positiv und negativ;
 - genau-ein-Werbeplatz-Regel;
 - Direktwerbemodul sichtbar und klickbar;
-- Desktop/Tablet/Mobile;
+- Desktop/Tablet/Mobile inklusive Navigation ohne horizontalen Beschnitt;
 - Breadcrumb-/Parentkette;
 - erste Welt-Hubs verwenden exakt ihre Startseitenbilder;
 - reale nächste Ebene vollständig sichtbar;
