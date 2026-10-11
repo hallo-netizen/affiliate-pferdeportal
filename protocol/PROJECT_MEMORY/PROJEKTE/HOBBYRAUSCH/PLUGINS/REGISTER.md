@@ -36,6 +36,17 @@ Akte:
 Aktuelle Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
 
+### HD-003 – Design / Template Kit
+
+Plugin:
+`Affiliate Portal Template Kit – Hobby Depot Profil`
+
+Akte:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/`
+
+Aktuelle Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
 ## Regel
 
 Release-Artefakte, Evidence, Historie, ORIGINAL-Ablage und Updateprotokoll sind Nachweis/Archiv und niemals zweite Current-Wahrheit.
