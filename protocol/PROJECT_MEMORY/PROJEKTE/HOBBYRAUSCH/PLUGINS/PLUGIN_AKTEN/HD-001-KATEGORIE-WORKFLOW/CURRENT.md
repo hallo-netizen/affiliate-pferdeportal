@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-09
-STATUS: 1.14.8 / RULE 2.7 / FINAL VERIFIED E2E / LIVE-PASS
+STAND: 2026-10-11
+STATUS: **1.14.8 / RULE 2.7 / FINAL VERIFIED E2E / LIVE-PASS / SCHWERER WORKFLOW KANN NACH HD-004-LIVEPASS DEAKTIVIERT WERDEN**
 
 ## Plugin
 
@@ -13,20 +13,15 @@ ID:
 Name:
 `Affiliate-Portal Kategorie-Workflow`
 
-Art:
-Eigenentwicklung / allgemeingültiger Kategorie-Workflow mit Hobby-Depot-Profil.
-
-Fachbüro:
-`SEO_KATEGORIEN`
+Rolle:
+Bearbeitungs-/Research-/Dry-Run-/Sync-/Resume-/Rollback-Werkzeug für Kategorieänderungen.
 
 ## Aktuelle technische Wahrheit
 
 Codebasis:
-`1.14.8`.
+`1.14.8`
 
-V1.14.9 und V1.14.10 bleiben verworfen und dürfen nicht wiederverwendet werden.
-
-Finales lokal geprüftes Release-Artefakt:
+Finales Release:
 `HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
 
 SHA-256:
@@ -35,74 +30,48 @@ SHA-256:
 Produktive Live-Profilrevision:
 `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
 
-## Lokale Abnahme
-
-- Kategorienbaum statisch/regelbasiert 43/43 PASS;
-- 1920 CORE-Content-Kategorien;
-- 330 terminale CORE-Identitätsseiten / 0 ohne Leafs;
-- 255 neue Leafs mit >=3 Supporting Intents;
-- positive + negative E2E 14/14 PASS;
-- Dry-Run gegen bekannte Live-Baseline: 256 CREATE / 2101 UPDATE / 1 ARCHIVE;
-- vollständiger lokaler Sync + Resume + 2357/2357 Readback PASS;
-- Frontend/Header PASS;
-- Idempotenz 0 Delta;
-- Live-Drift-Erkennung PASS;
-- injizierter Write-Fehler -> ROLLED_BACK mit identischem Vorher-/Nachher-Fingerprint;
-- AJAX/Nonce positiv und negativ PASS;
-- PHP-Lint 33/33 PASS;
-- ZIP-Integrität PASS.
-
-## Produktiver Live-PASS
-
-Finaler produktiver Runner:
-- COMPLETE;
-- `TARGET_TREE_SYNC_AND_READBACK_PASS`;
+Final:
 - 2357 Zielobjekte;
-- 256 created;
-- 2100 updated;
-- 1 unchanged;
-- 1 archived;
-- 0 adopted;
-- 2357 readback_checked;
-- error leer.
-
-Frontend:
-- valid=true;
+- 2357 Readback;
+- Frontend valid;
 - 8 Welten;
 - 330/330 Kategorie-Gate;
-- 0 failures;
-- 0 unbound CORE pages.
+- LIVE-PASS.
 
-Finale Evidence:
-`../../../SEO_KATEGORIEN/HD001_FINAL_LIVE_ACCEPTANCE_20261009.md`.
+## Hard-Audit Deaktivierung/Löschen
 
-## Technische Sicherheitsgrenzen
+Exakter 1.14.8-Quellstand:
+- kein `uninstall.php`;
+- kein `register_uninstall_hook`;
+- kein `register_deactivation_hook`;
+- Kategorien/Seiten/Terms/Metadaten/Target-Snapshot werden beim Deaktivieren nicht gelöscht;
+- WordPress-Löschen der Plugin-Dateien löst nach diesem Quellstand keinen plugin-eigenen Daten-Cleanup aus.
 
-- Dry-Run vor Writes;
-- Live-Fingerprint-Recheck vor Apply;
-- Drift = BLOCKED;
-- bounded Sync + Resume;
-- vollständiger Readback;
-- exakter Rollback bei Write-/Readbackfehler;
-- kein Hard-Delete als Normalweg;
-- DataForSEO erzeugt/verschiebt keine Struktur;
-- `journal_cat` wird intern registriert;
-- `hp_listing_category` muss für die DIRECTORY-Säule real existieren;
-- Header ausschließlich aus aktivem Target-Snapshot.
+Dauerhaft notwendige Runtimefunktion aus HD-001:
+- `journal_cat` registrieren;
+- aktiven Target-Snapshot für andere Komponenten lesbar halten.
+
+Diese Funktion wird schlank nach HD-004 ausgelagert.
+
+## Neuer Betriebsmodus
+
+Normal:
+- HD-004 aktiv;
+- HD-001 nach Live-Smoke-Test deaktiviert.
+
+Änderung:
+- HD-001 wieder aktivieren;
+- Delta/Dry-Run/Sync/Readback;
+- anschließend wieder deaktivieren.
+
+DataForSEO:
+nur SEO-Evidence innerhalb dieses Bearbeitungsworkflows; keine Strukturautorität und kein Dauerbetriebsgrund.
+
+## Wiederherstellung
+
+Exaktes ZIP zusätzlich zentral abgelegt:
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
 
 ## EXAKT EINE NEXT ACTION
 
-Für HD-001 aktuell:
-**keine. Live-PASS ist abgeschlossen.**
-
-Bei einem neuen Thema:
-keine Zwischenversion bauen. Erst Profildelta fachlich vollständig modellieren, komplette lokale POS+NEG-E2E-Suite bestehen, danach genau ein Release / ein Live-Dry-Run / ein Sync / ein Readback.
-
-Wiederverwendbarer Ablauf:
-`../../../PROJEKTLEITUNG/HOBBYRAUSCH_UEBERGABE_OPTIMIERTER_WORKFLOW_NEUES_THEMA_20261009.md`.
-
-## Artefaktstatus
-
-Das geprüfte ZIP wurde dem Nutzer als Chat-Artefakt bereitgestellt.
-
-Binärartefakte werden im GitHub-Campus nicht erfunden. Die Current dokumentiert Hash, Status und Evidence; der Campus-Pfad enthält weiterhin nur textuelle Wahrheit/Evidence.
+**HD-004 live installieren; danach HD-001 zunächst deaktivieren und Smoke-Test. Noch nicht vor diesem PASS löschen.**
