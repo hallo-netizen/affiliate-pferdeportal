@@ -1709,3 +1709,32 @@ SHA:
 
 NEXT:
 1.50.617 installieren und Gestalten live prüfen.
+
+
+---
+
+## PU-20261011-HD004 – Hobby Depot Kategorie-Kern 1.0.0
+
+PLUGIN-ID:
+`HD-004-KATEGORIE-KERN`
+
+ZWECK:
+Read-only Normalbetriebs-Kern für zentrales Kategorie-Register und journal_cat.
+
+ARTEFAKT:
+`HOBBY_DEPOT_KATEGORIE_KERN_HD004_V1.0.0_READONLY_LOCALPASS.zip`
+
+SHA-256:
+`f3be1e10b093a24f41981c9386ce8ca208294bb0583b6bcc4a1f5295fb5c0bfb`
+
+LOCAL:
+- PHP PASS;
+- ZIP PASS;
+- Runtime API PASS;
+- Snapshot/Mapping PASS;
+- journal_cat PASS;
+- keine Strukturwrites;
+- kein DataForSEO-/Providerpfad.
+
+NEXT:
+HD-004 installieren/aktivieren → HD-001 nur deaktivieren → Live-Smoke-Test. Löschen erst danach.
