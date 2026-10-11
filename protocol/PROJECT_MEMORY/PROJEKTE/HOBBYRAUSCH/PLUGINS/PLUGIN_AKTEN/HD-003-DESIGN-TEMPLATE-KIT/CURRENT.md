@@ -3,42 +3,35 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.618 LOCAL STRUCTURAL HARD PASS / LIVE-PASS OFFEN**
+STATUS: **1.50.619 LOCAL HARD PASS / LIVE-PASS OFFEN**
 
 Version:
-**1.50.618**
+**1.50.619**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
 
 SHA-256:
-`0498a836102540f02a890ac02e415a0bf60d33418d51a2385e15efb4543ee203`
+`dada31464533e143d875e0d7568ee6fc8bba2d79d7b8aaa2f6bac6df806d1179`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
 
 ## Scope
-- Logo linksbündig und unverzerrt;
-- Navigation tiefer;
-- Welt-Flyouts korrekt verankert;
-- Hero/Fold ohne Textdoppelung;
-- kompakte Querformat-Kategoriebilder;
-- Affiliate physisch im Next-Level-Raster;
-- neuer Direktwerbeauftritt.
+- Navigation weiter nach unten;
+- Headerbereiche luftiger;
+- Flyout Hover/Fokus/Klick wieder aktiv;
+- Kategorie-Fotos füllen ihren Querformatrahmen;
+- Gestalten 7 kurze individuelle Untertitel;
+- generische Untertitel-Fallbacks entfernt.
 
-## Lokale Abnahme
+## Lokal
 - PHP 10/10 PASS;
-- Fresh-Unpack PHP 10/10 PASS;
 - ZIP PASS;
-- Klassen-/Releasebindung PASS;
-- Hero/Fold-Dedupe PASS;
-- Affiliate-DOM-Integration PASS;
-- keine Standalone-Affiliate-Blöcke PASS;
-- Einzelfoto-Rental PASS;
-- Logo-Ratio-CSS PASS;
-- Flyout-Anker-CSS PASS.
-
-Kein erfundener Browser-PASS.
+- 7 Bildassets eindeutig PASS;
+- Flyout-Cascade PASS;
+- Header/Nav-CSS PASS;
+- Preview visuell geprüft.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.618 installieren und Gestalten live prüfen.**
+**1.50.619 installieren und Gestalten live prüfen.**
