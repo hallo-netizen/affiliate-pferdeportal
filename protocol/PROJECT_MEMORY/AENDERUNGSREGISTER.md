@@ -1287,3 +1287,23 @@ WARUM:
 
 KISS:
 Keine neue Architektur. Nur die bestehende Designautorität technisch so gebunden, dass der freigegebene Stand tatsächlich gerendert wird.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-D – Einheitlicher Seitenrahmen ab erster Hubebene
+
+WAS:
+- Startseite bleibt breadcrumbfrei.
+- Jede weitere unterstützte fachliche Seite/Kategorie erhält einen Breadcrumb an derselben festen Inhaltsachse.
+- Jede Seite/Kategorie erhält oben Titel + Intro.
+- Erste Welt-Hubs verwenden als Hero exakt das jeweilige Weltbild der Startseitenkarte.
+- Jede vorhandene nächste Hierarchieebene wird vollständig sichtbar verlinkt.
+- Banner, Beitragsvorschau, Affiliate-Produkte und maximal ein direkt verkaufbarer Werbeplatz sind als wiederverwendbare Inhaltsmodule vorgesehen.
+- Direktwerbung bleibt öffentlich auch unverkauft sichtbar; Affiliate-Banner/Produkte bleiben öffentlich leer unsichtbar und eingeloggt sichtbar.
+- Startseiten-Dreiergruppe Hobbyfinder/Magazin/Wissen verwendet einheitlich denselben Creme-Hintergrund.
+- Desktopnavigation wird weiter nach unten auf die unterste Logo-/Claim-Achse gesetzt.
+
+WARUM:
+Der nächste Designschritt soll nicht aus einzelnen Sonderseiten bestehen, sondern dieselbe feste, verständliche Seitenlogik durch die reale bestehende Hierarchie tragen. Die Struktur selbst bleibt vollständig bei HD-001.
+
+KISS:
+Keine neue Taxonomie, keine neue Kategoriearchitektur, keine Pagebuilder-Einzelseiten. Das Designplugin liest die vorhandene Struktur und rendert sie einheitlich.
