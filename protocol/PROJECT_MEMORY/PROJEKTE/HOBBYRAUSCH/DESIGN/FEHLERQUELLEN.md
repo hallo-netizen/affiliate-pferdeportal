@@ -1,65 +1,57 @@
 # HOBBYRAUSCH – DESIGN – FEHLERQUELLEN
 
-ROLLE: Autoritative Fehlerhistorie dieses Design-Scopes.  
-Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT_STATE.md`.
+ROLLE: Fehlerhistorie. Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT_STATE.md`.
 
-## HRD-001 bis HRD-017
-Bisherige abgeschlossene/unter Regression stehende Fehler bleiben unverändert in der Historie.
+## HRD-001 bis HRD-023
+Bisherige Fehlerhistorie bleibt geschlossen bzw. unter Regression.
 
-## HRD-018 – Hauptnavigation bei mittlerer Breite abgeschnitten
+## HRD-024 – Navigation verschwand bei mittlerer Breite
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-STATUS: LOCAL CLOSED IN 1.50.616 / LIVE OFFEN
+Ursache:
+1.50.616 ersetzte die abgeschnittene Vollnavigation bei mittleren Breiten durch ein verstecktes Menü. Dadurch war die Kategorie-Navigation ohne zusätzlichen Klick faktisch weg.
 
-Korrektur:
-- Vollnavigation erst >1560 px;
-- 761–1560 px Dropdown;
-- <980 px 2-spaltig;
-- kein rechter Cutoff.
+Fix:
+- >1180 px 8×1;
+- 761–1180 px sichtbar 4×2;
+- <761 px Hamburger.
 
-## HRD-019 – Unterkategorie-Bilder wiederholen dasselbe Weltmotiv
+## HRD-025 – Logo bei mittlerer Breite zu klein
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-STATUS: LOCAL CLOSED IN 1.50.616 / LIVE OFFEN
+Fix:
+Logo bleibt unverändertes Asset, wird aber wieder deutlich größer gerendert: lokal 278 px bei 1024 px Viewport.
 
-Befund:
-1.50.615 fiel ohne Child-Featured-Image auf das Parent-Weltbild zurück. Dadurch erschien in Gestalten mehrfach dieselbe Person/dasselbe Bild.
+## HRD-026 – Aufklapptext ohne Absatzrhythmus / wechselnde Farbboxen
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-Korrektur:
-- generischer Parent-Weltbild-Fallback entfernt;
-- echtes Child-Bild gewinnt;
-- Gestalten besitzt 7 unterschiedliche Fallbackmotive;
-- andere Hubs ohne echtes Bild bleiben vorerst bildfrei statt falsch/dupliziert.
+Fix:
+- volle Inhaltsbreite;
+- echter Absatzsplit;
+- neutraler Hintergrund;
+- `Was du hier findest` ohne eigene Farbbox.
 
-## HRD-020 – Navigation zu weit unten / Berührung mit Trennlinie
+## HRD-027 – Unterkategorie-Fotos uneinheitlich / Druck ohne Bild
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-STATUS: LOCAL CLOSED IN 1.50.616 / LIVE OFFEN
+Fix:
+- robuster Titel-/Slug-Match;
+- Druck & Fotografie wieder bebildert;
+- 7/7 unterschiedliche Motive;
+- alle 600×320 / Querformat;
+- 7er-Raster 3+2+2.
 
-Korrektur:
-Desktop-Transform von 22 px auf 8 px reduziert.
+## HRD-028 – Affiliate wieder als externe Unterblöcke
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-## HRD-021 – Verdacht auf verkleinerte Typografie
+Fix:
+Banner und Produktplätze werden innerhalb des Bereichs `Nächste Ebene` ausgegeben. Die späteren separaten Hub-Blöcke wurden entfernt.
 
-STATUS: GEPRÜFT / KEIN GLOBALER TYPO-FEHLER
+## HRD-029 – Direktwerbung zu dunkel / CTA unleserlich
+STATUS: LOCAL CLOSED IN 1.50.617 / LIVE OFFEN
 
-Vergleich 1.50.614 ↔ 1.50.616:
-relevante Schriftgrößen unverändert.
+Fix:
+ein Foto, heller Brush, aufgehellter Bildbereich und weißer CTA mit dunkler Schrift.
 
-## HRD-022 – Hub1 zeigt Text doppelt offen
-
-STATUS: LOCAL CLOSED IN 1.50.616 / LIVE OFFEN
-
-Korrektur:
-Hero behält sichtbaren Kurztext; Zusatztext darunter nur noch geschlossen unter `Mehr über <Welt> erfahren`. Volltext bleibt im HTML.
-
-## HRD-023 – Verkaufbarer Werbeplatz mit 4 Bildern statt einem starken Motiv
-
-STATUS: LOCAL CLOSED IN 1.50.616 / LIVE OFFEN
-
-Korrektur:
-- exakt 1 Foto;
-- Textoverlay auf dem Foto;
-- auffälliger heller Pinselstrich hinter der Headline;
-- CTA zu Werbemöglichkeiten & Preisen.
-
-## Aktuell erster Fehler-/Abnahmeblocker
-
-**Live-Abnahme 1.50.616 auf Gestalten bei Desktop / Side-by-Side / Mobile.**
+## Aktuell erster Blocker
+**Live-Abnahme 1.50.617.**
