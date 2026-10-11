@@ -95,4 +95,34 @@ Topbar dunkel im Footer-Farbton; Inhalt unverändert.
 
 ## Aktuell erster Fehler-/Abnahmeblocker
 
-**Live-Abnahme 1.50.614 auf Startseite + Gestalten.**
+**Live-Abnahme 1.50.615 auf Startseite + Gestalten bei mittleren Breiten.**
+
+
+## HRD-018 – Hauptnavigation bei mittlerer Breite rechts abgeschnitten
+
+STATUS: LOCAL CLOSED IN 1.50.615 / LIVE OFFEN
+
+Befund:
+Bei einem mittleren Browserfenster blieb die komplette 8-Welten-Desktopzeile zu lange aktiv. Rechts wurde mindestens `Sammeln` sichtbar angeschnitten.
+
+Korrektur:
+- Vollnavigation nur oberhalb 1320 px;
+- 761–1320 px Hamburger-/Dropdownmodus;
+- Dropdown 4 Spalten, unter 980 px 2 Spalten;
+- Mobilepfad bleibt separat;
+- kein horizontaler Text-Cutoff im Tabletmodus.
+
+## HRD-019 – Obere Hub-Unterkategorien noch zu textlastig
+
+STATUS: LOCAL CLOSED IN 1.50.615 / LIVE OFFEN
+
+Befund:
+Hobby Depot darf auf den inspirativen oberen Hubebenen visueller sein als Pferdeatelier, ohne die tieferen Ebenen erneut zu überladen.
+
+Korrektur:
+- Hub1/Hub2-Karten mit kompakter Fotokante;
+- echtes Child-Featured-Image hat Priorität;
+- sonst kontrollierter Crop des Weltmotivs;
+- tiefe Category-/Leafkarten bleiben ohne Bildzwang;
+- kein neuer Struktur- oder Medienworkflow.
+
