@@ -1339,3 +1339,25 @@ Hobby Depot ist stärker inspirations- und bildgetrieben als Pferdeatelier. Glei
 
 KISS:
 Keine neue Taxonomie, kein neuer Bildworkflow, kein zweites Menüsystem. Bestehende Weltassets und vorhandene Featured Images werden nur anders dargestellt.
+
+
+## HOBBYRAUSCH-KATEGORIE-ZENTRALE-20261011 – schlanker Kategorie-Normalbetrieb
+
+WAS:
+- bestehendes SEO_KATEGORIEN-Büro bleibt alleinige Current-Autorität;
+- Unterzentrale KATEGORIE_ZENTRALE eingerichtet;
+- finales Zielprofil, finaler Live-Readback und exaktes HD-001-Release zentral kopiert;
+- HD-004 Kategorie-Kern 1.0.0 als read-only Runtime-Adapter gebaut;
+- journal_cat und neutrales Snapshot-/Node-/Mapping-API aus dem Dauerbetrieb von HD-001 herausgelöst.
+
+WARUM:
+HD-001 enthält zusätzlich Research/DataForSEO, Admin, Sync, Resume und Rollback und muss für den normalen Seitenbetrieb nicht dauerhaft aktiv bleiben.
+
+SICHERHEIT:
+HD-001 1.14.8 hat keinen Uninstall-/Deactivation-Cleanup. Trotzdem wird zuerst nur deaktiviert; Löschen erst nach Live-Smoke-Test mit HD-004.
+
+KEINE:
+- Kategorieänderung;
+- Taxonomieänderung;
+- Parent-/Owner-Änderung;
+- WordPress-Strukturwrites.
