@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.610 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
+STATUS: **1.50.611 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -25,13 +25,13 @@ Theme-Basis:
 ## Aktuelle technische Wahrheit
 
 Version:
-**1.50.610**
+**1.50.611**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.611_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`
+`3f5c74845c1264823a5ca70c09d90fdc0d2ec4815858f6bd9eb84a29f73b2668`
 
 Isolierte Ausgabekopie im Campus:
 **PENDING / NICHT ERFUNDEN.**
@@ -99,6 +99,15 @@ Negativ:
 - kein zweiter ListingHive-Header/Footer;
 - keine vertikale Mega-Menü-Hover-Lücke.
 
+## Feinschliff 1.50.611
+
+- Hero links weiß;
+- 1-px-Hero-Rahmen;
+- 22 px Abstand Desktop / 14 px Mobile;
+- Navigation Desktop 10 px tiefer;
+- Headline „Entdecke dein nächstes Hobby.“;
+- eingebrannter Bildspruch unverändert.
+
 ## Offene Live-Abnahme
 
 Kein Live-PASS behauptet.
@@ -124,6 +133,6 @@ Falls 1.50.610 live fehlschlägt:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.610 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
+**1.50.611 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Live-PASS wird Hub Ebene 1 begonnen.
