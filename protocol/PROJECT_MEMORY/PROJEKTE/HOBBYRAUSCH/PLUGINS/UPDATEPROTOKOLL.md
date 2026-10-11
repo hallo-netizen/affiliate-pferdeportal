@@ -1532,3 +1532,59 @@ OFFEN.
 
 NEXT:
 1.50.613 installieren und Startseite plus eine erste Welt-Hubseite live prüfen.
+
+
+---
+
+## PU-20261011-031 – HD-003 Hobby Depot Design / Template Kit 1.50.614
+
+VON / AUF:
+1.50.613 → 1.50.614.
+
+WARUM:
+Live-Readback 1.50.613 zeigte:
+- Topbar noch nicht klar genug abgesetzt;
+- Navigation weiter zu hoch;
+- Hubtext sollte nach bewährtem Pferdeatelier-Prinzip integriert werden;
+- bei ungeraden Unterkategorie-Anzahlen blieb optisch zu viel Leerfläche;
+- Affiliateflächen wirkten zu technisch/getrennt;
+- verkaufbarer Werbeplatz musste prominenter und verkaufsfähiger werden.
+
+ÄNDERUNG:
+- Topbar dunkel im Footer-Farbton, Inhalt unverändert.
+- Navigation Desktop weiter nach unten.
+- Pferdeatelier-Kategorietextprinzip übernommen:
+  - manuelle Texte geschützt;
+  - automatische Fallbacktexte aus Titel, Ebene, Parent/Children und Themenprofil;
+  - ab ca. 130 Wörtern sichtbarer Lead ca. 55 Wörter;
+  - Vertiefung unter „Mehr erfahren“;
+  - „Was du hier findest“ bleibt sichtbar;
+  - vollständiger Text im initialen HTML.
+- Gestalten besitzt einen konkreten Referenz-/Beispieltext.
+- Unterkategorie-Raster intern 6 Spalten:
+  - normal 3 Karten;
+  - Rest 2 = 50/50;
+  - Rest 1 = volle letzte Reihe.
+- Direktwerbung direkt nach Unterkategorien, mit Bildcollage, „Hier könnte Ihre Werbung stehen.“ und CTA „Werbemöglichkeiten & Preise“.
+- Affiliate-Banner und Affiliate-Produkte optisch nativ in den Content integriert, weiterhin als Anzeige/Partner gekennzeichnet.
+
+FRESH TEST:
+- ZIP-Integrität PASS;
+- PHP 10/10 PASS;
+- Intro-Accordion/Integrität PASS;
+- Rasterregeln PASS;
+- Monetarisierungsreihenfolge PASS;
+- Weltassets 8/8 1400×620;
+- Logo byteidentisch zum Vorgänger.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.614_HOBBY_DEPOT_NATIVE_HUB_MONETIZATION_LOCALPASS.zip`
+
+SHA-256:
+`57c371a32a2cc4c84edbfef0819e017ca15fc5007f27a228180e44de8edbda58`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.614 installieren und Startseite + Gestalten live prüfen.
