@@ -5,6 +5,20 @@
 STAND: 2026-10-11
 STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.601 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
+## Autoritative Bindungen
+
+Zielvertrag:
+`ZIELVERTRAG_HOBBY_DEPOT_DESIGN_20261011.md`
+
+Fehlerquelle:
+`FEHLERQUELLEN.md`
+
+Technische Plugin-Current:
+`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+Aktiver Theme-Unterbau:
+**ListingHive**.
+
 ## Aktueller belastbarer Stand
 
 Theme-Basis:
