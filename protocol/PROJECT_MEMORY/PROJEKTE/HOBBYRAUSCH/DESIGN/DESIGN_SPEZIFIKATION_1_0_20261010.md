@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – DESIGN-SPEZIFIKATION 1.0
 
-STAND: 2026-10-10
+STAND: 2026-10-11
 STATUS: VERBINDLICHER DESIGNRAHMEN / GLOBALER RAHMEN + STARTSEITE 1.50.593 LOCAL HARD PASS / LIVE OFFEN
 
 ## 1. Zielbild
@@ -106,11 +106,17 @@ Desktop:
 ### Hauptnavigation – nur reale Portalbereiche
 Die Navigationsbezeichnungen werden ausschließlich aus der bestehenden Hobbyrausch-Struktur abgeleitet. Keine erfundenen Shop- oder Sammelbegriffe.
 
-Kernzugänge:
-- Hobbywelten
-- Hobbyfinder
-- Magazin
-- Anbieter
+Kernnavigation auf Desktop = reale erste CORE-Ebene:
+- Gestalten
+- Fertigen
+- Technik
+- Forschen
+- Pflanzen
+- Tiere
+- Bewegen
+- Sammeln
+
+Hobbyfinder, Magazin und Anbieter werden im Footer geführt und nicht als Hauptnavigation behandelt.
 
 Zusätzliche statische Informationsseiten wie „Über uns“ dürfen separat geführt werden, sind aber keine Kategorieersatzstruktur.
 
@@ -572,7 +578,7 @@ Ob langfristig alle acht Welten oder nur vier prominente Welten auf der Startsei
 ## 23. HIVEPRESS-THEME / LOGO / MEGA-MENÜ 1.50.598
 
 ### Theme
-Für den HivePress-Anbieterbereich ist **ListingHive** die bevorzugte Theme-Basis. Spezialthemes werden nur eingesetzt, wenn deren Spezialfunktion fachlich gebraucht wird. Das Designplugin bleibt für Hobby-Depot-Marke, Header, Startseite und spätere Hub-/Contenttemplates zuständig.
+**ListingHive ist die aktive Theme-Basis für die gesamte WordPress-Seite.** Spezialthemes werden nur eingesetzt, wenn deren Spezialfunktion fachlich gebraucht wird. Das Designplugin bleibt für Hobby-Depot-Marke, Header, Startseite und spätere Hub-/Contenttemplates zuständig.
 
 ### Logo
 - insgesamt höher / mehr vertikale Luft;
@@ -586,3 +592,26 @@ Alle CORE-Welticons werden einheitlich in einem Petrolton geführt. Die Weltzuor
 
 ### Mega-Menü
 Desktop darf zwischen Trigger und Dropdown **keine vertikale Hover-Lücke** haben. Dropdown beginnt bei `top:100%`; zusätzlich ist eine unsichtbare Hover-Brücke zulässig. Unterpunkte müssen mit der Maus ohne Menüabriss erreichbar sein.
+
+
+## 24. LISTINGHIVE + HERO-/BILD-ROOTFIX 1.50.599
+
+### Themevertrag
+ListingHive ist die technische WordPress-/HivePress-Grundhaut. Das Designplugin steuert Hobby-Depot-Marke, Header, Footer, Startseite und alle später übernommenen Portaltemplates. ListingHive darf keinen zweiten sichtbaren Header/Footer erzeugen.
+
+### Hero
+Der Hero darf niemals CTA-Elemente durch feste Höhen oder `overflow:hidden` verlieren.
+- Desktop: flexible Höhe;
+- Tablet bis 980 px: Bild und Copy als getrennte Zeilen;
+- Mobile bis 540 px: CTA-Buttons untereinander und volle Breite;
+- harte Browserprüfung über mehrere Zwischenbreiten ist Pflicht.
+
+### Bildschärfe
+Für Kachel-/Featured-Images darf kein zu kleines WordPress-Derivat hochskaliert werden.
+- Featured Image: Full-Original als Basis;
+- Browser erhält `srcset/sizes`;
+- Startseiten-Welt-Fallback: mindestens 1200×640;
+- Hero-Fallback: mindestens 1800×620.
+
+### Regressionsgrenze
+Logo, Iconsystem, Mega-Menü, Affiliate-Produkte, Affiliate-Banner, Mietflächen und Leerregel werden in diesem Rootfix nicht konzeptionell verändert.
