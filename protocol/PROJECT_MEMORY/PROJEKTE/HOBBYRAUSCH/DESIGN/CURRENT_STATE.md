@@ -3,319 +3,114 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **LISTINGHIVE AKTIV / 1.50.599 GEBÜNDELTER HERO-BILD-THEME-ROOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.600 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
 Verbindliches Designkonzept:
 `DESIGN_SPEZIFIKATION_1_0_20261010.md`.
 
-Freigegebene visuelle Basis:
-der vom Nutzer bevorzugte Hobby-Depot-Startseitenentwurf inklusive Affiliate-Produktbereich, Affiliate-Banner und direkt vermietbarer Werbefläche. Das Grundkonzept wird nicht erneut umgebaut.
+Theme-Basis für die gesamte WordPress-Seite:
+**ListingHive**.
 
-## Freigegebene Marke
+Das Hobby-Depot-Designplugin bleibt für Markenrahmen, Header, Footer, Startseite und die nachfolgenden Hub-/Contenttemplates visuell autoritativ.
 
-Logo:
-- **Variante 3 / verfeinerte Header-Fassung**;
-- offener gemalter Halbkreis/Bogen oberhalb der Wortmarke;
-- handschriftliches `dein` optisch mittig;
-- `HOBBY DEPOT` einzeilig;
-- mehr Luft zwischen Bogen, `dein`, Wortmarke und Claim;
-- Schriftfarbe warmes Dunkelgrau statt Schwarz.
+## Harte Bindungen
 
-Claim:
-**Hobbys. Ideen. Möglichkeiten.**
+- Affiliate-/Informationsportal, **kein Shop**.
+- Kein Warenkorb, Checkout, Shop-Merkliste, allgemeiner Shop-Login, Newsletter oder Community im globalen Header.
+- Hauptnavigation = reale erste CORE-Ebene:
+  **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+- **Hobbyfinder, Magazin, Anbieter** gehören in den Footer.
+- Kategorienamen/Unterpunkte werden aus WordPress/HD-001 gelesen; keine zweite Taxonomie.
+- Icons = einheitliches Petrol und pro Welt stabil wiederverwendbar bis Hub/Kategorie/Beitrag.
+- Affiliate-Produkte, Affiliate-Banner und Mietwerbung bleiben getrennte Slottypen.
+- Unbelegt = vollständig unsichtbar, ohne Wrapper/Leerraum.
+- Keine erneute Änderung des freigegebenen Startseiten-Grundkonzepts.
 
-Desktop-Portalzeile:
-**Inspiration, Wissen & Empfehlungen rund ums Hobby.**
+## Logo
 
-Mobile:
-keine zusätzliche Topbar-Zeile.
+Freigegebener Arbeitsstand:
+- Variante 3;
+- offener gemalter Halbkreis;
+- `dein` höher in den Halbkreis gezogen;
+- `HOBBY DEPOT` Anthrazit/Dunkelgrau;
+- Claim in eigenständiger leichterer Typowirkung und Petrol:
+  **Hobbys. Ideen. Möglichkeiten.**
 
-## Harte Portalregeln
+## Mega-Menü – Entscheidung
 
-- Affiliate-/Informationsportal, kein Shop.
-- Kein Warenkorb, Checkout, Shop-Merkliste, allgemeiner Shop-Login, Newsletter- oder Community-Bereich im Header.
-- Hauptnavigation = reale erste CORE-Ebene: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
-- **Hobbyfinder, Magazin, Anbieter** gehören in den Footer, nicht in die Hauptnavigation.
-- CORE-Welten exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
-- Namen und direkte Kinder werden aus WordPress/HD-001 gelesen; keine zweite Taxonomie.
-- helle, freundliche Bilder; bei redaktionellen Hauptmotiven Mensch oder mindestens tätige Hände.
-- gleiche Ebene = zentraler Bauplan.
-- unbelegte Produkt-, Banner- und Mietwerbeplätze vollständig unsichtbar.
+**JA**, aber ausschließlich als ruhiges **Mega-Menü pro CORE-Welt**:
+- Desktop: nur direkte Kinder der jeweiligen Welt;
+- bei vielen Kindern 2 Spalten;
+- kein riesiges Gesamtmenü über alle 8 Welten;
+- Abschlusslink `Alle <Welt>-Themen →`;
+- keine vertikale Hover-Lücke;
+- Mausweg Trigger → Unterpunkt muss stabil bleiben;
+- Navigationstext erhält Hover: Petrol + 2-px-Unterstreichung ohne Layoutbewegung;
+- Tablet/Mobile: kontrolliertes Menü/Accordion statt Hover.
 
-## Technischer Umsetzungsstand
+## Startseite – vollständig vor Hub-Arbeit
 
-Arbeitsbasis:
-**Affiliate Portal Template Kit 1.50.592** – aktueller bereitgestellter Pferdeatelier-Stand vom 10.10.2026.
+1. Header + Suche + 8 CORE-Welten
+2. Hero mit zwei responsiven CTAs
+3. 8 Weltkarten (4×2 Desktop / 2 Spalten Mobile)
+4. Hobbyfinder / Magazin / Wissen & Glossar
+5. Affiliate-Produkte, nur bei realer Belegung
+6. Affiliate-Banner, nur bei realer Belegung
+7. Beliebte Themen aus realen Magazin-Kategorien
+8. Mietwerbefläche, nur bei realer Belegung
+9. Footer mit Hobbyfinder / Magazin / Anbieter
 
-Hobby-Kandidat:
-**1.50.594**.
+## Bildschärfe – Rootcause und Vertrag
 
-Umgesetzt:
-- getrenntes Designprofil `hobby_depot`;
-- Pferde-spezifische Init-/Globalhooks werden im Hobby-Profil nicht registriert;
-- freigegebenes Variante-3-Logo als Asset;
-- Desktop-Topbar / Mobile-Ausblendung;
-- Suche;
-- dynamische reale Navigation und Mega-Menüs;
-- kompakter Startseiten-Hero;
-- acht reale Welten;
-- Hobbyfinder/Magazin/realer Wissens-/Ratgeberzugang;
-- Affiliate-Produkte;
-- Affiliate-Banner;
-- direkt vermietete Werbefläche;
-- leere Monetarisierungsslots ohne Wrapper/Leerraum;
-- responsive 4×2 → 2×4 Weltendarstellung.
+Die verbleibende Unschärfe kam **nicht mehr primär von CSS oder WordPress-`srcset`**, sondern von den bisherigen lokalen Fallback-Dateien selbst: sie waren aus kleinen Mockup-Ausschnitten hochskaliert.
 
-Keine Kategorie-/SEO-Struktur wird geschrieben oder synchronisiert.
+1.50.600:
+- WordPress Featured Images werden aus dem **Full-Original** mit nativem `srcset/sizes` ausgegeben;
+- kein `medium_large` im Hobby-Profil;
+- lokale Welt-Fallbacks wurden neu aufgebaut und liegen mit **1400×620** vor;
+- vorhandene bessere Quellen wurden ersetzt/geschärft;
+- die **kanonischen endgültigen Weltbilder** werden die echten hochauflösenden Hub-1-Featured-Images. Sobald diese gesetzt sind, verwendet die Startseite sie automatisch.
 
-## Korrektur 1.50.594
+Damit wird keine CSS-Schärfung als Ersatz für fehlende Quelldetails behauptet.
 
-**1.50.593 ist verworfen.** Die reale WordPress-Ausgabe wich sichtbar vom freigegebenen Startseitenentwurf ab. Ursache: die erste Hobby-Profilumsetzung übernahm nur grobe Strukturmerkmale, nicht die tatsächlichen Proportionen und Dichten des freigegebenen Mockups.
+## Kandidat 1.50.600
 
-1.50.594 setzt deshalb den freigegebenen Entwurf ohne Konzeptwechsel enger nach:
-- Contentbreite 1440 px;
-- kompakter Hero;
-- 8 Welten in einer Desktop-Zeile;
-- 4 × 2 Welten mobil;
-- drei kompakte redaktionelle Teaser;
-- drei horizontale Affiliate-Produktplätze;
-- flacher Affiliate-Banner;
-- separate Mietwerbefläche;
-- Headerproportionen/Logo/Suche/Navi wie im freigegebenen Entwurf;
-- Theme-Container der Startseite neutralisiert, damit Astra das Layout nicht wieder einengt.
-
-Lokale Prüfungen:
-- PHP-Lint komplett PASS;
-- alte Hobby-Profilklasse entfernt;
-- echte 8 Weltnamen PASS;
-- Shop-/Community-/Newsletter-Begriffe im Hobby-Renderer 0;
-- Leerregel Affiliate PASS;
-- ZIP-Integrität PASS;
-- lokaler statischer Rendervergleich gegen den freigegebenen Entwurf durchgeführt.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.594_HOBBY_DEPOT_DESIGN_PARITY_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.600_HOBBY_DEPOT_HOMEPAGE_COMPLETE_MEGA_HOVER_IMAGESOURCE_LOCALPASS.zip`
 
 SHA-256:
-`f3e6773c0cb2dcbb9a9a4e7ce386524d31c80e88d65101c80f13104c84503c7b`
+`c828edff9ef61232f2e6bf472de7cbf81b373c8d6bfc82279bf4bdefa70defdc`
+
+## Lokaler Hardtest
+
+**PASS**
+- PHP-Lint komplett 9/9;
+- Strukturtest PASS;
+- leerer Monetarisierungszustand NEGATIV PASS;
+- belegter Monetarisierungszustand POSITIV PASS;
+- vollständige Startseitenreihenfolge PASS;
+- 8 reale Welten PASS;
+- reale Magazin-Themen PASS;
+- Shop-/Community-/Newsletter-Noise NEGATIV PASS;
+- ListingHive-Shell-Unterdrückung PASS;
+- Hero-CTAs bei **16 Breiten 320–1600 px** sichtbar und innerhalb des Hero PASS;
+- kein horizontaler Overflow bei diesen 16 Breiten PASS;
+- Mega-Menü Trigger → Unterpunkt Hover PASS;
+- gemessene vertikale Hover-Lücke = **0 px**;
+- Schrift-Hover Petrol + Unterstreichung PASS;
+- Welt-Fallbackdateien mindestens 1400×620 PASS;
+- ZIP-CRC PASS;
+- frischer ZIP-Unpack + PHP-Lint PASS.
 
 ## Erster offener Blocker
 
-**WordPress-Live-Abnahme des globalen Rahmens und der Startseite.**
+**WordPress-Live-Abnahme von 1.50.600 auf ListingHive.**
 
-Kein LIVE-PASS wird vor dieser Abnahme behauptet.
+Kein LIVE-PASS wird vor dem realen Readback behauptet.
 
 ## EXAKT EINE NEXT ACTION
 
-Den vollständigen **1.50.594**-Kandidaten in der Hobby-Depot-WordPress-Instanz installieren/aktualisieren und **Header + Startseite Desktop/Mobile** gegen den freigegebenen Entwurf prüfen.
+1.50.600 installieren und die **komplette Startseite Desktop/Tablet/Mobile inklusive Mega-Menü** live prüfen.
 
-Erst nach diesem PASS wird Hub Ebene 1 aus demselben unveränderten Designsystem abgeleitet.
-
-
-## ROOTCAUSE 1.50.594 – 2026-10-10
-
-Der Live-Screenshot belegt den Fehler eindeutig:
-- WordPress/Twenty Twenty-Five rendert weiterhin **Blog**;
-- der Beitrag **TEST** bleibt der eigentliche Loop-Inhalt;
-- die Hobby-Depot-Startseite wird nur innerhalb dieses Beitragsinhalts ausgegeben;
-- der Twenty-Twenty-Five-Footer bleibt aktiv.
-
-Ursache im Quellcode 1.50.594:
-Die Startseite wurde über `the_content` in den bestehenden WordPress-Front-/Blogloop eingeschoben. CSS konnte deshalb die Theme-/Loop-Architektur nicht zuverlässig ersetzen.
-
-**1.50.594 ist verworfen.**
-
-## 1.50.595 – ROOTFIX
-
-Kein Redesign. Ausschließlich Ursachenbehebung:
-- kein Homepage-`the_content`-Einschub mehr;
-- Root-/Frontpage wird über `template_include` als vollständiges Plugin-Fronttemplate übernommen;
-- eigener Hobby-Header + Startseitenrenderer + eigener Hobby-Footer;
-- Twenty-Twenty-Five Header/Footer-Templateparts im Hobby-Profil werden unterdrückt;
-- Nicht-Frontseiten bleiben vom Fronttemplate unberührt.
-
-Lokaler Nachweis:
-- PHP-Lint 9/9 PASS;
-- Fronttemplate POSITIV PASS;
-- Nicht-Frontseite NEGATIV PASS;
-- kein alter `front_page_content`-Hook PASS;
-- kein Blog-/TEST-Loop im Fronttemplate PASS;
-- Blocktheme Header/Footer-Unterdrückung PASS;
-- vollständiger Render Header + Main + Footer PASS;
-- frischer ZIP-Unpack + CRC PASS.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.595_HOBBY_DEPOT_FRONT_TEMPLATE_ROOTFIX_LOCALPASS.zip`
-
-SHA-256:
-`721eacf41b85a7eaa96114443564ce3bd264d580f148ae56674dbecbe536ef92`
-
-NEXT ACTION:
-Nur 1.50.595 installieren und den Root-Aufruf `https://hobby-depot.de/` prüfen. Erwartung: kein „Blog“, kein Theme-Postwrapper, kein Twenty-Twenty-Five-Footer; Hobby-Header und Startseite bilden den Seitenrahmen.
-
-
-## DETAILFIX 1.50.596 – 2026-10-10
-
-**1.50.595 bleibt Rootfix-Basis; 1.50.596 ändert ausschließlich die vom Nutzer benannten Detailpunkte. Kein Konzeptumbau.**
-
-Umgesetzt:
-- Hauptnavigation = reale erste CORE-Ebene exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
-- **Hobbyfinder, Magazin, Anbieter** aus Hauptnavigation entfernt und im Footer geführt.
-- Startseiten-Mittelteil wieder vollständig strukturell gebunden: 3 redaktionelle Teaser + Affiliate-Produkte + Affiliate-Banner + Beliebte Themen + Mietwerbefläche.
-- Monetarisierungsregel unverändert: unbelegt = vollständig unsichtbar; belegt = sichtbar.
-- falsche dekorative Pinselstriche an Hero/Abschnittsüberschriften entfernt.
-- Variante-3-Logo unverändert in Form; Petrol des Halbkreises aufgehellt/freundlicher.
-- Mobile bleibt derselbe zentrale Renderer; 8 Welten = 4×2.
-
-Lokaler Hardtest:
-- PHP-Lint 9/9 PASS.
-- synthetischer WordPress-Render POSITIV/NEGATIV PASS.
-- Header 8/8 reale Welten PASS.
-- Footer Hobbyfinder/Magazin/Anbieter PASS.
-- Header ohne Hobbyfinder/Magazin/Anbieter/Community/Newsletter/Warenkorb PASS.
-- leere Affiliate-Slots unsichtbar PASS.
-- belegte Affiliate-Slots 3 Produkte + Banner + Mietfläche PASS.
-- Brush-Deko entfernt/deaktiviert PASS.
-- Fronttemplate ohne Theme-get_header/get_footer PASS.
-- frischer ZIP-Unpack + CRC + PHP-Lint PASS.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.596_HOBBY_DEPOT_DETAILFIX_LOCALPASS.zip`
-
-SHA-256:
-`eb4bd734d358cf5240ec92dfd7cffd43027b7c64c275b383357524221b510d94`
-
-EXAKT EINE NEXT ACTION:
-1.50.596 installieren und Header + Startseite live prüfen. Keine weitere Designänderung vor diesem Readback.
-
-
-## HOMEPAGE-REFINEMENT 1.50.597 – 2026-10-10
-
-Kein Konzeptwechsel. Umsetzung der zuletzt freigegebenen Detailrichtung:
-
-- **8 CORE-Welten bleiben vorerst vollständig sichtbar**, jetzt als **4 × 2** auf Desktop statt 8 Mini-Karten in einer Reihe.
-- Startseiten-Weltkarten deutlich größer; Bilder größer.
-- Untertitel in den Weltkarten entfernt; **Welttitel deutlich stärker und lesbarer**.
-- Für jede CORE-Welt existiert jetzt eine **stabile eigene Icon-Identität**.
-- Dieselben Icons erscheinen in Hauptnavigation und Weltkarten und sind technisch als wiederverwendbare API angelegt, damit sie auf Hub-/Kategorie-/Beitragsebene denselben roten Faden bilden können.
-- Box-Radien reduziert; Buttons dürfen weiterhin pillenförmig bleiben.
-- Mobile Weltkarten: 2 Spalten, ohne Untertitel.
-- Affiliate-/Werbelogik unverändert: leer = vollständig unsichtbar; belegt = sichtbar.
-
-CORE-Welten unverändert:
-**Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.597_HOBBY_DEPOT_ICONS_GRID_LOCALPASS.zip`
-
-SHA-256:
-`8f4b1e6da2a5569529584cc1af70bdd92cececbc3f3091519a4ec9f440994a3d`
-
-Lokaler Hardtest:
-- PHP 9/9 PASS;
-- 8/8 Weltkarten PASS;
-- 8/8 Header-Icons PASS;
-- 8/8 Weltkarten-Icons PASS;
-- Untertitel der Weltkarten entfernt PASS;
-- Desktop 4×2 PASS;
-- Mobile 2-spaltig PASS;
-- reduzierte Box-Radien PASS;
-- Affiliate leer NEGATIV PASS;
-- Affiliate belegt POSITIV PASS;
-- keine Shop-/Community-/Newsletter-UI PASS;
-- ZIP-CRC PASS.
-
-NEXT ACTION:
-1.50.597 installieren und Startseite Desktop/Mobile live prüfen. Entscheidung, ob später nur 4 statt 8 Weltkarten auf der Startseite gezeigt werden, bleibt bewusst offen und erfordert keinen Systemumbau.
-
-
-## THEME-ENTSCHEIDUNG / HIVEPRESS – 2026-10-11
-
-Empfohlene Basis für minimale HivePress-Kompatibilitätsprobleme:
-**ListingHive** (offizielles, kostenloses HivePress-Directory-Theme).
-
-Begründung:
-- offizielles HivePress-Theme;
-- generischer Directory-Fokus statt spezialisierter Marketplace-/Booking-Logik;
-- passt zum Hobby-Depot-Anbieterbereich besser als ExpertHive/RentalHive/MeetingHive/TaskHive/JobHive;
-- globale Hobby-Depot-Start-/Hubgestaltung bleibt Aufgabe des Designplugins.
-
-Kein künstliches add_theme_support('hivepress') im Plugin, um Warnungen nur zu verstecken.
-
-## DETAILFIX 1.50.598 – 2026-10-11
-
-Kein Konzeptwechsel.
-
-Umgesetzt:
-- Logo insgesamt höher und luftiger;
-- handschriftliches „dein“ höher und stärker in den Halbkreis integriert;
-- „HOBBY DEPOT“ Anthrazit/Dunkelgrau;
-- Claim typografisch klar abgesetzt und farblich Petrol;
-- alle 8 CORE-Icons einheitlich in einem Petrolton statt acht Akzentfarben;
-- Mega-Menü-Ursache behoben: vertikale 12-px-Totzone entfernt; Dropdown beginnt direkt an der Navigation;
-- zusätzliche transparente Hover-Brücke gegen Pointer-Abriss.
-
-Lokaler Hardtest:
-- PHP-Lint 9/9 PASS;
-- einheitliche Iconfarbe PASS;
-- alter 12-px-Menüspalt NEGATIV PASS;
-- neues top:100% PASS;
-- Hover-Brücke PASS;
-- Logoasset vorhanden PASS;
-- Shop-/Community-/Newsletter-Noise NEGATIV PASS;
-- ZIP-CRC PASS.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.598_HOBBY_DEPOT_LOGO_MENU_ROOTFIX_LOCALPASS.zip`
-
-SHA-256:
-`b7aa756105a6ab9eb9e8e7d8be4d530f7dc2eedf4668bdc153ef05baa65a2928`
-
-NEXT ACTION:
-ListingHive als Theme-Basis verwenden und 1.50.598 installieren; danach Header/Mega-Menü + HivePress-Anbieterseiten live prüfen.
-
-
-## GEBÜNDELTER ROOTFIX 1.50.599 – 2026-10-11
-
-Theme-Basis ist jetzt **ListingHive** für die gesamte WordPress-Seite. Das Hobby-Depot-Designplugin bleibt visuell autoritativ.
-
-In einem Arbeitsgang umgesetzt:
-- Astra-spezifische Laufzeitlogik aus dem Hobby-Profil entfernt;
-- ListingHive erkannt; dessen eigener Header/Footer im Hobby-Depot-Profil unterdrückt, damit kein zweiter Portalrahmen dazwischenfunkt;
-- Hero-Rootfix nach erneuter Prüfung des Pferdeatelier-Responsive-Problems:
-  - keine starre 310-px-Clippingbox mehr;
-  - Desktop wächst mit Inhalt;
-  - Tablet bis 980 px trennt Bild und Copy sauber;
-  - Mobile bis 540 px stapelt beide CTA-Buttons vollbreit;
-  - kein CTA darf abgeschnitten/aus dem Hero geschoben werden;
-- Kachelbild-Rootfix:
-  - kein `medium_large` mehr im Hobby-Profil;
-  - WordPress-Featured-Images werden aus dem **Full-Original** mit nativer `srcset/sizes`-Auswahl ausgegeben;
-  - Fallback-Weltbilder 1200×640;
-  - Hero-Fallback 1800×620;
-- Logo 1.50.598 bleibt;
-- einheitliche Petrol-Icons bleiben;
-- Mega-Menü-Rootfix ohne vertikale Hover-Lücke bleibt;
-- Affiliate-Erkennung, Produktbereich, Banner, Mietfläche und Leerregel unverändert.
-
-Lokaler Hardtest:
-- PHP-Lint 9/9 PASS;
-- Quell-/Strukturtest 14/14 PASS;
-- Browser-Hardtest auf **16 Breiten: 320, 360, 390, 430, 540, 720, 760, 820, 900, 980, 1024, 1100, 1180, 1280, 1440, 1600 px** PASS;
-- beide Hero-CTAs bei allen 16 Breiten sichtbar und innerhalb des Hero PASS;
-- kein horizontaler Overflow PASS;
-- simulierte ListingHive Header-/Footer-Unterdrückung PASS;
-- 8/8 Weltbild-Fallbacks mindestens 1200×640 PASS;
-- Affiliate-/Mietflächen-Code gegenüber 1.50.598 unverändert PASS;
-- frischer ZIP-Unpack + CRC + PHP-Lint PASS.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.599_HOBBY_DEPOT_LISTINGHIVE_HERO_IMAGE_ROOTFIX_LOCALPASS.zip`
-
-SHA-256:
-`4a7721c42774af710ed2d060a457f1d13d86bd61dfd17047ea7a4603c6be66c1`
-
-EXAKT EINE NEXT ACTION:
-**1.50.599 installieren und Startseite + Hero in mehreren Browserbreiten live prüfen.** Erst danach nächste Designstufe.
+Nach LIVE-PASS beginnt **Hub Ebene 1**. Kein weiterer Startseiten-Konzeptumbau.
