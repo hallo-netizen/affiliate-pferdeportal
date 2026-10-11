@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV  
-FASSUNG: 1.2 / 2026-10-11  
+FASSUNG: 1.3 / 2026-10-11  
 GELTUNGSBEREICH: HOBBYRAUSCH / DESIGN / WORDPRESS-DARSTELLUNG
 
 ## Ziel
@@ -14,8 +14,9 @@ Technische Theme-Basis ist **ListingHive**. Das Hobby-Depot-Designplugin ist fü
 
 - Logo bleibt unverändert die freigegebene Variante 3.
 - Topbar-Inhalt bleibt unverändert: **Inspiration, Wissen & Empfehlungen rund ums Hobby.**
+- Topbar wird als schmale **dunkle Serviceleiste im Footer-Farbton** abgesetzt.
 - Body weiß.
-- Header warmes Creme/Off-White.
+- Hauptheader warmes Creme/Off-White.
 - Suche weiß.
 - keine Anzeige im Header.
 - Desktopnavigation zeigt exakt: Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln.
@@ -30,10 +31,11 @@ Technische Theme-Basis ist **ListingHive**. Das Hobby-Depot-Designplugin ist fü
 - Hero links weiß, feiner 1-px-Rahmen, sichtbarer Abstand nach oben.
 - alle 8 Hauptwelten zusätzlich zur Navigation als Weltkarten.
 - Desktop 4×2; Mobile 2×4.
-- Hobbyfinder / Magazin / Wissen & Glossar bilden eine gemeinsame Dreiergruppe und benutzen **denselben Creme-Hintergrund**; keine unterschiedliche Schattierungsfarbe.
+- Hobbyfinder / Magazin / Wissen & Glossar bilden eine gemeinsame Dreiergruppe und benutzen denselben Creme-Hintergrund.
 - Affiliate-Banner nur real öffentlich sichtbar; leer nur eingeloggt als Arbeitsplatz.
 - Affiliate-Produkte nur real öffentlich sichtbar; leer nur eingeloggt als Arbeitsplätze.
-- genau **ein** direkt verkaufbarer Werbeplatz; öffentlich auch unverkauft sichtbar mit **„Hier könnte Ihre Werbung stehen.“ / „Werbeplatz verfügbar“**.
+- genau **ein** direkt verkaufbarer Werbeplatz; öffentlich auch unverkauft sichtbar.
+- unverkaufter Direktwerbeplatz ist ein **attraktives Vermarktungsmodul** mit Bildmotiv/Collage, Headline **„Hier könnte Ihre Werbung stehen.“** und CTA **„Werbemöglichkeiten & Preise“**.
 - keine Werbefläche im Header.
 
 ## Bilder
@@ -55,27 +57,65 @@ Diese Regeln gelten für die gesamte fachliche Portalhierarchie, nicht nur für 
 - reale Parent-/Child-Hierarchie verwenden;
 - aktuelle Seite nicht anklicken.
 
-### Oberer Textbereich
-- jede Seite/Kategorie besitzt oben einen klaren Titel-/Introbereich analog zum bewährten Pferdeatelier-Prinzip;
-- vorhandene autoritative Introtexte/Metafelder verwenden;
-- keine zweite Inhaltsautorität erzeugen.
+### Kategorietexte – Pferdeatelier-Regel
+
+Hobby Depot übernimmt das bewährte Regelprinzip der Pferdeatelier-Kategorietexte:
+
+- Quelle: Seitentitel/Kategorietitel, Ebene, reale Parent-/Child-Struktur und thematisches Profil;
+- vorhandene manuelle Introtexte haben Vorrang und werden nicht überschrieben;
+- automatische Texte erfinden keine neue Struktur;
+- lange Texte liegen vollständig im initialen HTML;
+- ab ca. **130 Wörtern**:
+  - sichtbarer Lead von ca. **55 Wörtern**;
+  - Vertiefung unter **„Mehr erfahren“**;
+  - Abschlussblock **„Was du hier findest“** bleibt sichtbar;
+- kurze Texte bleiben vollständig offen;
+- die reale nächste Ebene wird im Text genannt, wenn sie vorhanden ist.
+
+Für Hobby Depot gilt diese Darstellung ausdrücklich auch auf den Welt-Hubs.
 
 ### Erste CORE-Ebene / Welt-Hubs
 - Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln erhalten einen Hero;
 - Hero verwendet exakt das jeweils freigegebene Weltmotiv der Startseite;
+- Hero selbst zeigt nur einen kompakten Lead;
+- der vollständige Kategorietext folgt direkt darunter nach obiger Regel;
 - darunter vollständiger Verweis auf die tatsächlich vorhandene nächste Kategorie-/Seitenebene.
 
-### Jede fachliche Hub-/Kategorieebene
-Strukturell vorgesehen:
-1. Breadcrumb;
-2. Titel/Intro;
-3. Verweis auf vorhandene nächste Ebene;
-4. Affiliate-Bannerplatz;
-5. Beitragsvorschau;
-6. Affiliate-Produkte;
-7. maximal ein direkt verkaufbarer Werbeplatz.
+### Unterkategorie-Raster
+Desktop-Grundsystem:
+- intern 6 Spalten;
+- normale Karte = 2 Spalten → regulär 3 Karten pro Reihe;
+- Rest **2** → letzte zwei Karten jeweils 3 Spalten, also sauber 50/50;
+- Rest **1** → letzte Karte nutzt die gesamte Reihe;
+- dadurch keine unmotivierte leere Restfläche bei 1, 2, 4, 5, 7, 8 usw. Kindern;
+- Tablet/Mobile fällt kontrolliert auf 2 bzw. 1 Spalte zurück.
 
-Öffentlich leere Affiliate-Banner/Produkte bleiben unsichtbar. Eingeloggt sind leere Arbeitsplätze sichtbar. Der direkt verkaufbare Werbeplatz bleibt öffentlich auch unverkauft sichtbar.
+### Monetarisierung auf Hub-/Kategorieebenen
+
+Reihenfolge:
+1. Breadcrumb;
+2. Titel/Hero;
+3. Kategorietext;
+4. nächste Ebene;
+5. direkt verkaufbarer Werbeplatz;
+6. Beitragsvorschau;
+7. Affiliate-Banner;
+8. Affiliate-Produkte.
+
+Affiliate-Flächen werden **optisch nativ in den Content integriert**, nicht als technische Fremdkörper:
+- weiterhin klar mit **Anzeige / Partner** gekennzeichnet;
+- Affiliate-Banner ohne zusätzliche große technische Zwischenüberschrift;
+- Produktmodule als native Kartenreihe im gleichen visuellen Rhythmus wie redaktionelle Karten;
+- öffentlich leer unsichtbar;
+- eingeloggt leer als Arbeitsplätze sichtbar.
+
+Direktwerbung:
+- maximal ein Platz pro Seite/Kategorie/Beitrag;
+- unverkauft öffentlich sichtbar;
+- prominente Position direkt nach der nächsten Kategorieebene;
+- attraktives Bild-/Collage-Modul;
+- CTA zu Werbemöglichkeiten/Preisen;
+- verkauft klar als Anzeige/Werbung.
 
 ## SEO-Meta
 
@@ -98,8 +138,11 @@ Kein zusätzliches SEO-Plugin erforderlich:
 
 PASS erst wenn:
 - Fresh-Unpack/ZIP/PHP positiv;
+- Kategorietext-Regel Lead/Mehr erfahren/Was du hier findest positiv;
+- ungerade Kindzahlen 1/2-Rest ohne leere Rasterlöcher;
 - öffentlicher/eingeloggter Affiliatezustand positiv und negativ;
 - genau-ein-Werbeplatz-Regel;
+- Direktwerbemodul sichtbar und klickbar;
 - Desktop/Tablet/Mobile;
 - Breadcrumb-/Parentkette;
 - erste Welt-Hubs verwenden exakt ihre Startseitenbilder;
