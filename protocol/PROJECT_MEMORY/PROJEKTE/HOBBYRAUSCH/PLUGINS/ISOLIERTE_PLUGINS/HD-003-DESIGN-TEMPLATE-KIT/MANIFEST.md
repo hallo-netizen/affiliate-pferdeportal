@@ -1,0 +1,45 @@
+# HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+NAME:
+`Affiliate Portal Template Kit – Hobby Depot Profil`
+
+VERSION:
+`1.50.601`
+
+ARTEFAKTNAME:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.601_HOBBY_DEPOT_HOMEPAGE_COMPLETION_VISUAL_POLISH_LOCALPASS.zip`
+
+SHA-256:
+`6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`
+
+AUTORITATIVE TECHNISCHE CURRENT:
+`../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+FACHCURRENT:
+`../../../DESIGN/CURRENT_STATE.md`
+
+QUELL-REF:
+Campus-Branch `hobbyroom/project-memory-campus-v1-20260905`.
+
+ERSTELL-/PRÜFSTAND:
+2026-10-11.
+
+PRÜFSTATUS:
+LOCAL HARD PASS / LIVE-PASS OFFEN.
+
+LOKALER NACHWEIS:
+- SHA-256 verifiziert;
+- ZIP-Integrität PASS;
+- Fresh-Unpack PHP 9/9 PASS;
+- Positiv-/Negativ-Render PASS;
+- 16 Responsive-Breiten PASS;
+- Mega-Menü-Interaktion PASS;
+- Affiliate leer/belegt PASS.
+
+CURRENT.zip STATUS:
+**NICHT SYNCHRONISIERT / BLOCKED DURCH BINÄRTRANSFERGRENZE DES VERFÜGBAREN GITHUB-CONNECTORS.**
+
+Es wurde kein Binärartefakt erfunden oder als vorhanden behauptet. Der geprüfte ZIP-Kandidat ist im aktuellen Chat als Artefakt vorhanden.
