@@ -24,4 +24,23 @@ Fix:
 Kartentitel 15 px, Untertitel 12 px; Taxonomie-Kurztext maximal 7 Wörter.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.620.**
+**Live-Abnahme 1.50.621 – nur Header.**
+
+
+## HRD-043 – Sammeln nicht exakt auf derselben Navigationslinie
+STATUS: LOCAL CLOSED 1.50.621 / LIVE OFFEN
+
+Fix:
+alle acht Items erhalten identische feste Nav-Höhe/Baseline; Sammeln lokal gegen die übrigen sieben vermessen.
+
+## HRD-044 – Header zu hoch trotz zu hoher Navigation
+STATUS: LOCAL CLOSED 1.50.621 / LIVE OFFEN
+
+Fix:
+Header kompakter; Navigation trotzdem direkt an die untere Trennlinie.
+
+## HRD-045 – Logo intern zu gequetscht / Suche nicht auf Wortmarkenlinie
+STATUS: LOCAL CLOSED 1.50.621 / LIVE OFFEN
+
+Fix:
+unverändertes Logoasset wird nur für die Darstellung in drei Bereiche geclippt und mit mehr Abstand gesetzt; Suchfeld auf HOBBY-DEPOT-Linie verschoben.
