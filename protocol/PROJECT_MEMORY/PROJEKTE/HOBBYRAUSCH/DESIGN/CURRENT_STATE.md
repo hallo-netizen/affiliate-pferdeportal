@@ -3,67 +3,52 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.618 LOCAL STRUCTURAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.619 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
 
 SHA-256:
-`0498a836102540f02a890ac02e415a0bf60d33418d51a2385e15efb4543ee203`
+`dada31464533e143d875e0d7568ee6fc8bba2d79d7b8aaa2f6bac6df806d1179`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.619_HOBBY_DEPOT_NAV_FLYOUT_CARD_FIX_LOCALPASS.zip`
 
-## Korrekturen
+## Delta 1.50.619
 
 Header:
-- Logo natürliches Seitenverhältnis; keine Max-Height-Verzerrung;
-- Logo linksbündig;
-- Desktop-Logo 248 px breit;
-- eigene 148-px-Logozeile + 48-px-Navigationszeile;
-- Navigation dadurch real tiefer;
-- Flyouts wieder am auslösenden Weltpunkt verankert statt links versetzt.
-
-Hub1:
-- Hero und Aufklapptext werden jetzt aus demselben Text **geteilt**;
-- bereits im Hero sichtbarer Lead wird im Aufklapptext nicht erneut ausgegeben;
-- Fold weiter full-width/neutral mit Absätzen.
+- Logo unverändert;
+- Headerbereiche vertikal weiter auseinander;
+- Navigation sichtbar tiefer;
+- >1000 px 8 Welten in einer Reihe;
+- 761–1000 px 4×2;
+- Flyout Hover/Fokus/Klick wieder explizit aktiv;
+- Flyouts links/mittig/rechts passend zum Weltpunkt verankert.
 
 Unterkategorien:
-- 7 Gestalten-Motive unverändert eindeutig;
-- Bildflächen jetzt kompakte einheitliche Querformat-Thumbnails 132×70 im Desktopkartenlayout;
-- keine großflächigen 50%-Kartenbilder mehr.
+- Bildfläche füllt jetzt den kompletten Querformat-Rahmen;
+- Desktop 168×90 statt 132×70 mit Innenrand;
+- kein Bild-Inset mehr;
+- Gestalten 7 eindeutige Bilder weiterhin gebunden.
 
-Affiliate:
-- Banner sitzt als volle Partnerzeile **im Kartenraster nach der ersten Kategoriezeile**;
-- Produkte sitzen als native Partnerkarten im selben Raster;
-- bei Gestalten (7 Kategorien) füllen im eingeloggten Leerzustand 2 Produktplätze die letzte Reihe zusammen mit Kategorie 7;
-- keine separaten Affiliate-Blöcke danach.
-
-Verkaufbare Werbung:
-- neues Einzelfoto;
-- dunkler Lesbarkeitsverlauf;
-- türkisfarbener echter Brushstroke hinter der Headline;
-- heller CTA.
+Kurztexte:
+- generische wiederholte Fallback-Sätze entfernt;
+- Gestalten 7 kurze individuelle Zeilen;
+- ohne echte Kurzinfo wird kein Fülltext gezeigt.
 
 ## Lokale Prüfung
 PASS:
 - PHP 10/10;
-- Fresh-Unpack PHP 10/10;
 - ZIP-Integrität;
-- Plugin-/Klassenbindung 1.50.618;
-- Hero-Text kommt im Fold nicht erneut vor;
-- 7 Kategorie-Karten;
-- Affiliate-Banner und 2 Produktplätze direkte Kinder desselben Next-Level-Grids;
-- keine Standalone-Affiliate-Sektionen;
-- Rental genau ein Hintergrundbild;
-- Logo-CSS ohne verzerrende Max-Höhe;
-- Flyout-CSS relativ zum Weltpunkt.
+- aktive Klasse/Templates ausschließlich 1.50.619;
+- alte 1.50.618-Hobby-PHP-Dateien aus Paket entfernt;
+- Flyout-Hover-Regel überschreibt alte Mid-Breakpoint-Unterdrückung;
+- Header/Nav-Absenkung vorhanden;
+- 7/7 Gestalten-Motive 600×320 und unterschiedliche Hashes;
+- 7/7 individuelle Kurztexte;
+- Preview mit geöffnetem Flyout + gefüllten Querformat-Bildrahmen visuell geprüft.
 
-Lokaler Browser-Screenshot konnte in dieser Laufzeitumgebung nicht zuverlässig gestartet werden; deshalb wird **kein Browser-PASS erfunden**.
-
-## Erster offener Blocker
-WordPress-Live-Abnahme 1.50.618.
+Kein WordPress-Live-PASS behauptet.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.618 installieren und Gestalten live prüfen.**
+**1.50.619 installieren und Gestalten live prüfen.**
