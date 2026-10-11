@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.601 LOCAL HARD PASS / LIVE-PASS OFFEN**
+STATUS: **1.50.601 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -33,11 +33,18 @@ Kandidat:
 SHA-256:
 `6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`
 
-Isolierte Ausgabekopie:
+Isolierte Ausgabekopie im Campus:
+**PENDING / NICHT ERFUNDEN.**
+
+Sollpfad:
 `../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`
+
+Der in diesem Chat verfügbare GitHub-Connector kann Textdateien schreiben, aber den 8,9-MB-Binärstand aus dem lokalen Sandboxpfad nicht direkt als Repository-Datei übertragen. Deshalb wurde **kein falsches CURRENT.zip** erzeugt.
 
 Manifest:
 `../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
+
+Der geprüfte ZIP-Kandidat bleibt als Chat-Artefakt mit obigem SHA-256 verfügbar.
 
 ## Scope 1.50.601
 
