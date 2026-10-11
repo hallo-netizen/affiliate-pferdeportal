@@ -1311,3 +1311,71 @@ Folge:
 - SHA/Evidence vorhanden;
 - Chat-Artefakt vorhanden;
 - Plugin-Artefaktsynchronisierung bleibt formell BLOCKED bis ein belastbarer Binäruploadweg verfügbar ist.
+
+
+---
+
+## PU-20261011-027 – HD-003 Hobby Depot Design / Template Kit 1.50.610
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+VON / AUF:
+1.50.601 → 1.50.610.
+
+WARUM:
+Der reale Live-Readback 1.50.601 zeigte:
+- Logo als Alt-Text statt Grafik;
+- Hero-Bildschriftzug rechts abgeschnitten/nicht sauber responsiv;
+- Header und Body optisch zu einheitlich;
+- Startseite im Monetarisierungsbereich noch nicht vollständig;
+- leere Affiliateplätze im eingeloggten Arbeitszustand unsichtbar;
+- direkt verkaufbare Werbefläche brauchte eine eigene öffentliche Sichtbarkeitsregel;
+- kleine Weltbilder weiterhin weich;
+- Tiere-Motiv fachlich/gestalterisch unbrauchbar und mit dekorativem Rahmen.
+
+ÄNDERUNG:
+- Logo bleibt unverändert auf freigegebenem v150600-Asset.
+- Topbar-Inhalt bleibt unverändert und mittig.
+- Body weiß; Header warm-off-white; keine Anzeige im Header.
+- Hero-Schriftzug bleibt im Bild, mit separatem Desktop-/Mobile-Safe-Crop.
+- 8 Weltbilder komplett neu als native 1400×620-Quellen; Motive fachlich gegen die 8 realen Welten geprüft und hero-ready.
+- Tiere neu: Aquaristik/Terraristik/Insekten/Futtertiere/Imkerei-Bezug, ohne Rahmen.
+- Affiliate-Produkte/Banner öffentlich leer unsichtbar, eingeloggt leer als Arbeitsplatz sichtbar.
+- Direkt verkaufbarer Werbeplatz maximal einmal pro Seite/Kategorie/Beitrag; unverkauft öffentlich „Werbeplatz verfügbar“, verkauft als Anzeige/Werbung.
+- Breiter Affiliate-Banner im Content.
+- Startseitenreihenfolge final: Hero → 8 Welten → Editorial → Banner → Magazin/Themen → Produkte → verkaufbarer Werbeplatz → Footer.
+- KISS-Meta-Titel/Description-Schicht mit optionalem Override; kein zusätzliches SEO-Plugin nötig.
+
+POSITIV:
+- 8/8 Welten;
+- 8/8 neue Weltmotive 1400×620, unterschiedliche Hashes;
+- 3/3 Editorial-Karten;
+- 5/5 Magazin-Themenseiten;
+- eingeloggt 3 leere Produktplätze + 1 leerer Bannerplatz sichtbar;
+- belegte Affiliate-Inhalte sichtbar;
+- unverkaufter und gebuchter Direktwerbeplatz korrekt;
+- Hero-Schriftzug Desktop/Mobile vorhanden;
+- Logo/Topbar/Headerregeln PASS.
+
+NEGATIV:
+- öffentlich unbelegte Affiliate-Produkte/Banner abwesend;
+- Direktwerbeplatz nicht doppelt;
+- keine Anzeige im Header;
+- kein TEST-Fallback;
+- kein Shop-/Community-/Newsletter-Noise.
+
+FRESH:
+- ZIP-Integrität PASS;
+- PHP 9/9 PASS;
+- SHA-256:
+  `c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
+
+LIVE:
+OFFEN. Kein Live-PASS.
+
+NEXT:
+1.50.610 installieren und vollständige Startseite Desktop/Tablet/Mobile live prüfen. Erst danach Hub Ebene 1.
