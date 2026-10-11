@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.611 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
+STATUS: **1.50.612 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -25,13 +25,13 @@ Theme-Basis:
 ## Aktuelle technische Wahrheit
 
 Version:
-**1.50.611**
+**1.50.612**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.611_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.612_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`3f5c74845c1264823a5ca70c09d90fdc0d2ec4815858f6bd9eb84a29f73b2668`
+`cb82af1fa9ab0aabb980fdcd903efe05e4bf75c10c036f108fb3450fec22fda3`
 
 Isolierte Ausgabekopie im Campus:
 **PENDING / NICHT ERFUNDEN.**
@@ -99,7 +99,7 @@ Negativ:
 - kein zweiter ListingHive-Header/Footer;
 - keine vertikale Mega-Menü-Hover-Lücke.
 
-## Feinschliff 1.50.611
+## Feinschliff 1.50.612
 
 - Hero links weiß;
 - 1-px-Hero-Rahmen;
@@ -107,6 +107,25 @@ Negativ:
 - Navigation Desktop 10 px tiefer;
 - Headline „Entdecke dein nächstes Hobby.“;
 - eingebrannter Bildspruch unverändert.
+
+## Cache-/Renderer-Ursachenfix 1.50.612
+
+- neue PHP-Renderklasse/-datei statt Wiederverwendung von v150610;
+- neues Fronttemplate;
+- neue Assetpfade und Dateinamen mit Versionsparameter;
+- keine alten Hobby-Depot-Assets/Renderer im Release-ZIP;
+- Weltkarten ignorieren alte Featured Images und verwenden immer die kontrollierten 1400×620-Motive;
+- Releasemarker im HTML;
+- ein Releasewechsel löst im Backend einmalig verfügbare Cache-Purge-Wege aus.
+
+Fresh-ZIP-Nachweis:
+- PHP 9/9 PASS;
+- ZIP-Integrität PASS;
+- POS/NEG-Render PASS;
+- alte große Featured Images können kontrollierte Weltassets nicht mehr überschreiben;
+- 8/8 neue Weltassets exakt 1400×620 und unterschiedlich;
+- alle 8 Motive enthalten mindestens Person oder aktive Hände;
+- Headline/Herorahmen/Weißfläche/Abstand/Nav-Absenkung im tatsächlichen Render-CSS geprüft.
 
 ## Offene Live-Abnahme
 
@@ -133,6 +152,6 @@ Falls 1.50.610 live fehlschlägt:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.611 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
+**1.50.612 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Live-PASS wird Hub Ebene 1 begonnen.
