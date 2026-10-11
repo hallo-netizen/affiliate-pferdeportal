@@ -1,7 +1,19 @@
 # HOBBYRAUSCH – DESIGN-SPEZIFIKATION 1.0
 
 STAND: 2026-10-11
-STATUS: VERBINDLICHER DESIGNRAHMEN / GLOBALER RAHMEN + STARTSEITE 1.50.593 LOCAL HARD PASS / LIVE OFFEN
+STATUS: ARBEITS-/HISTORIEN-SPEZIFIKATION / KEINE CURRENT- ODER ZIELAUTORITÄT
+
+## AUTORITÄTSGRENZE 2026-10-11
+
+Diese Datei dokumentiert die entwickelte Designsprache und ältere Zwischenentscheidungen. Sie ist **keine** Current-, Status-, Fehler- oder NEXT-ACTION-Autorität.
+
+Aktueller verbindlicher Zielvertrag:
+`ZIELVERTRAG_HOBBY_DEPOT_DESIGN_20261011.md`
+
+Aktueller Status/NEXT ACTION:
+`CURRENT_STATE.md`
+
+Bei jedem Widerspruch zwischen älteren Abschnitten dieser Spezifikation und dem Zielvertrag/Current gelten ausschließlich Zielvertrag und Current. Alte Versions-/Navigationszwischenstände in dieser Datei dürfen nicht als aktueller Stand verwendet werden.
 
 ## 1. Zielbild
 
