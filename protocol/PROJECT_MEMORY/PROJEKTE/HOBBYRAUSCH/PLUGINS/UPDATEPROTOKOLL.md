@@ -1379,3 +1379,39 @@ OFFEN. Kein Live-PASS.
 
 NEXT:
 1.50.610 installieren und vollständige Startseite Desktop/Tablet/Mobile live prüfen. Erst danach Hub Ebene 1.
+
+
+---
+
+## PU-20261011-028 – HD-003 Hobby Depot Design / Template Kit 1.50.611
+
+VON / AUF:
+1.50.610 → 1.50.611.
+
+WARUM:
+Letzter visueller Startseiten-Feinschliff vor Hub Ebene 1.
+
+ÄNDERUNG:
+- linke Hero-Textfläche weiß;
+- 1-px-Hero-Rahmen;
+- 22 px Abstand zwischen Header und Hero auf Desktop, 14 px Mobile;
+- Hauptnavigation Desktop 10 px nach unten auf optische Claim-Achse;
+- Hero-Headline links: „Entdecke dein nächstes Hobby.“;
+- eingebrannter Bildspruch bleibt unverändert.
+
+TEST:
+- PHP 9/9 PASS;
+- ZIP-Integrität PASS;
+- exakte Regelchecks PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.611_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
+
+SHA-256:
+`3f5c74845c1264823a5ca70c09d90fdc0d2ec4815858f6bd9eb84a29f73b2668`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.611 installieren und Startseite Desktop/Tablet/Mobile live prüfen.
