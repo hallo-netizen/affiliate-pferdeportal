@@ -228,3 +228,49 @@ Lokaler Hardtest:
 
 NEXT ACTION:
 1.50.597 installieren und Startseite Desktop/Mobile live prüfen. Entscheidung, ob später nur 4 statt 8 Weltkarten auf der Startseite gezeigt werden, bleibt bewusst offen und erfordert keinen Systemumbau.
+
+
+## THEME-ENTSCHEIDUNG / HIVEPRESS – 2026-10-11
+
+Empfohlene Basis für minimale HivePress-Kompatibilitätsprobleme:
+**ListingHive** (offizielles, kostenloses HivePress-Directory-Theme).
+
+Begründung:
+- offizielles HivePress-Theme;
+- generischer Directory-Fokus statt spezialisierter Marketplace-/Booking-Logik;
+- passt zum Hobby-Depot-Anbieterbereich besser als ExpertHive/RentalHive/MeetingHive/TaskHive/JobHive;
+- globale Hobby-Depot-Start-/Hubgestaltung bleibt Aufgabe des Designplugins.
+
+Kein künstliches add_theme_support('hivepress') im Plugin, um Warnungen nur zu verstecken.
+
+## DETAILFIX 1.50.598 – 2026-10-11
+
+Kein Konzeptwechsel.
+
+Umgesetzt:
+- Logo insgesamt höher und luftiger;
+- handschriftliches „dein“ höher und stärker in den Halbkreis integriert;
+- „HOBBY DEPOT“ Anthrazit/Dunkelgrau;
+- Claim typografisch klar abgesetzt und farblich Petrol;
+- alle 8 CORE-Icons einheitlich in einem Petrolton statt acht Akzentfarben;
+- Mega-Menü-Ursache behoben: vertikale 12-px-Totzone entfernt; Dropdown beginnt direkt an der Navigation;
+- zusätzliche transparente Hover-Brücke gegen Pointer-Abriss.
+
+Lokaler Hardtest:
+- PHP-Lint 9/9 PASS;
+- einheitliche Iconfarbe PASS;
+- alter 12-px-Menüspalt NEGATIV PASS;
+- neues top:100% PASS;
+- Hover-Brücke PASS;
+- Logoasset vorhanden PASS;
+- Shop-/Community-/Newsletter-Noise NEGATIV PASS;
+- ZIP-CRC PASS.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.598_HOBBY_DEPOT_LOGO_MENU_ROOTFIX_LOCALPASS.zip`
+
+SHA-256:
+`b7aa756105a6ab9eb9e8e7d8be4d530f7dc2eedf4668bdc153ef05baa65a2928`
+
+NEXT ACTION:
+ListingHive als Theme-Basis verwenden und 1.50.598 installieren; danach Header/Mega-Menü + HivePress-Anbieterseiten live prüfen.
