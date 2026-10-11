@@ -1588,3 +1588,48 @@ OFFEN.
 
 NEXT:
 1.50.614 installieren und Startseite + Gestalten live prüfen.
+
+
+---
+
+## PU-20261011-032 – HD-003 Hobby Depot Design / Template Kit 1.50.615
+
+VON / AUF:
+1.50.614 → 1.50.615.
+
+WARUM:
+Live-Readback zeigte bei mittlerer Fensterbreite eine rechts abgeschnittene Hauptnavigation. Zusätzlich sollen obere Hobby-Depot-Hubs visueller arbeiten als Pferdeatelier, ohne die tieferen Ebenen wieder zu überladen.
+
+ÄNDERUNG NAVIGATION:
+- vollständige 8-Welten-Zeile nur noch oberhalb 1320 px;
+- 761–1320 px frühzeitiger Hamburger-/Dropdownmodus;
+- 4-spaltig, unter 980 px 2-spaltig;
+- Mobilepfad separat;
+- keine horizontale Desktopzeile mehr, die rechts abgeschnitten werden kann.
+
+ÄNDERUNG HUBKARTEN:
+- Hub1 und Hub2 erhalten kompakte Fotos;
+- echtes Child-Featured-Image gewinnt;
+- fehlt es, wird ein kontrollierter Crop des zugehörigen 1400×620-Weltmotivs verwendet;
+- tiefe Category-/Leafebenen bleiben ohne Bildzwang;
+- kein neuer Medien-/Strukturworkflow.
+
+FRESH TEST:
+- PHP 10/10 PASS;
+- ZIP-Integrität PASS;
+- Breakpoint-/Hamburger-/Dropdown-CSS PASS;
+- Featured-Image-Priorität PASS;
+- Weltasset-Fallback PASS;
+- tiefe Kategorie ohne Fotokarte PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
+
+SHA-256:
+`17d03f5704d8f140a86f4bbbdc4109cf564522a663660d0bd333be456dc3fda6`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.615 installieren und Startseite + Gestalten bei großer, mittlerer und mobiler Breite live prüfen.
