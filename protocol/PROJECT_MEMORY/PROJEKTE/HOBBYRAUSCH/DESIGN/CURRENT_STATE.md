@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **1.50.614 LOCAL HARD PASS / HUB-TEXTSYSTEM + BALANCIERTES RASTER + NATIVE MONETARISIERUNG IMPLEMENTIERT / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.615 LOCAL HARD PASS / HUBFOTOS + RESPONSIVE NAVIGATION + BESTEHENDE HUBLOGIK IMPLEMENTIERT / WORDPRESS-LIVE OFFEN**
 
 ## Autoritative Bindungen
 
@@ -19,10 +19,15 @@ Technische Plugin-Current:
 Theme-Unterbau:
 **ListingHive**.
 
-## 1.50.614 – sichtbarer Designstand
+## 1.50.615 – sichtbarer Designstand
 
 ### Header / Navigation
 - Logo unverändert;
+- Vollnavigation nur noch oberhalb 1320 px;
+- 761–1320 px: rechtzeitiger Hamburger-/Dropdownmodus statt abgeschnittener 8-Welten-Zeile;
+- Dropdown 4-spaltig, unter 980 px 2-spaltig;
+- Mobile unter 761 px unverändert kompakt;
+- kein horizontaler Navigationsbeschnitt bei mittleren Breiten;
 - Topbar-Inhalt unverändert;
 - Topbar jetzt dunkel im Footer-Farbton `#29383f`;
 - Hauptheader bleibt creme;
@@ -45,6 +50,14 @@ Hub1 verwendet das System ebenfalls.
 
 **Beispieltext Gestalten** ist im Kandidaten fest als Referenz enthalten und nennt die realen direkten Kinder:
 Malen & Zeichnen, Druck & Fotografie, Schrift & Lettering, Papierkunst, Textilgestaltung, Oberfläche & Deko, Miniaturen & Szenen.
+
+### Fotos auf den oberen Hubebenen
+
+- `hub1` und `hub2` erhalten kompakte Bildkanten in den Unterkategorie-Karten.
+- echtes Child-Featured-Image gewinnt;
+- fehlt es, nutzt die Karte einen unterschiedlichen Crop des kontrollierten Weltmotivs;
+- dieselbe Weltdatei wird dabei browserseitig gecacht, also keine unnötigen Zusatzdownloads;
+- tiefere `category`-/Leafebenen bleiben ohne Bildzwang.
 
 ### Unterkategorien – ungerade Zahlen
 Desktop:
@@ -95,13 +108,13 @@ Unverändert:
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.614_HOBBY_DEPOT_NATIVE_HUB_MONETIZATION_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
 
 SHA-256:
-`57c371a32a2cc4c84edbfef0819e017ca15fc5007f27a228180e44de8edbda58`
+`17d03f5704d8f140a86f4bbbdc4109cf564522a663660d0bd333be456dc3fda6`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.614_HOBBY_DEPOT_NATIVE_HUB_MONETIZATION_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
 
 ## Lokaler Hardtest
 
@@ -128,21 +141,24 @@ PASS:
 
 ## Erster offener Blocker
 
-**WordPress-Live-Abnahme von 1.50.614.**
+**WordPress-Live-Abnahme von 1.50.615.**
 
 Prüfen:
-1. Topbar dunkel und ruhig;
-2. Navigation tatsächlich auf unterster Claim-/Logoachse;
-3. Gestalten: Textaufteilung Lead / Mehr erfahren / Was du hier findest;
-4. Gestalten mit 7 Unterkategorien: letzte Karte füllt sauber die letzte Reihe;
-5. Direktwerbemodul direkt nach Unterkategorien sichtbar;
-6. Werbe-CTA führt zu Werbemöglichkeiten/Kontakt;
-7. Affiliate-Banner und Produkte optisch integriert;
-8. Startseiten-Direktwerbung sichtbar;
-9. Tablet/Mobile.
+1. Navigation bei ca. 900–1250 px schaltet vollständig ins Menü und wird nicht rechts abgeschnitten;
+2. Gestalten-Unterkategorien zeigen kompakte Fotos;
+3. eigenes Child-Bild gewinnt vor Welt-Crop;
+4. tiefe Kategorieebenen bleiben ruhiger ohne Bildzwang;
+5. Topbar dunkel und ruhig;
+6. Navigation auf großer Desktopbreite auf unterster Claim-/Logoachse;
+7. Gestalten: Textaufteilung Lead / Mehr erfahren / Was du hier findest;
+8. Gestalten mit 7 Unterkategorien: letzte Karte füllt sauber die letzte Reihe;
+9. Direktwerbemodul direkt nach Unterkategorien sichtbar;
+10. Affiliate-Banner und Produkte optisch integriert;
+11. Startseiten-Direktwerbung sichtbar;
+12. Tablet/Mobile.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.614 installieren und Startseite + Gestalten live prüfen.**
+**1.50.615 installieren und Startseite + Gestalten bei Desktop, mittlerer Breite und Mobile live prüfen.**
 
 Erst nach diesem Live-Readback werden Text-/Raster-/Monetarisierungsregeln als endgültig für die tieferen Ebenen abgenommen.
