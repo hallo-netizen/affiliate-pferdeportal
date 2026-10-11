@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.611 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.612 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Autoritative Bindungen
 
@@ -124,10 +124,10 @@ Alle acht Hashes unterschiedlich.
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.611_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.612_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`3f5c74845c1264823a5ca70c09d90fdc0d2ec4815858f6bd9eb84a29f73b2668`
+`cb82af1fa9ab0aabb980fdcd903efe05e4bf75c10c036f108fb3450fec22fda3`
 
 ## Lokaler Hardtest
 
@@ -154,7 +154,7 @@ PASS:
 - kein horizontaler Konzeptumbau;
 - ListingHive-Shell-Unterdrückung bleibt.
 
-## Feinschliff 1.50.611
+## Feinschliff 1.50.612
 
 - linke Hero-Textfläche weiß;
 - Hero 1 px fein gerahmt;
@@ -162,6 +162,30 @@ PASS:
 - Navigation Desktop 10 px nach unten auf die optische Claim-Achse;
 - Headline links: **„Entdecke dein nächstes Hobby.“**;
 - Bildspruch bleibt unverändert: **„Mehr Zeit für das, was dich begeistert.“**.
+
+## Root Cause 1.50.611-Livefehler
+
+1.50.611 änderte zwar Quelltext/CSS, verwendete aber weiterhin die alte Renderdatei/-klasse und bestehende Assetpfade. Zusätzlich durfte die Startseite große alte WordPress-Featured-Images vor den kontrollierten Weltmotiven bevorzugen. Dadurch konnten Cache/Featured-Image-Altstände die neuen Regeln sichtbar überstimmen.
+
+1.50.612 korrigiert ursächlich:
+- neue Renderklasse/-datei `v150612`;
+- neues Fronttemplate `v150612`;
+- neues Assetverzeichnis + neue Dateinamen + `?ver=1.50.612`;
+- alter Hobby-Depot-Renderer und altes Hobby-Assetverzeichnis nicht mehr im Paket;
+- Startseiten-Weltkarten verwenden immer die acht kontrollierten Assets; alte WordPress-Featured-Images dürfen sie nicht mehr ersetzen;
+- einmalige Cache-Purge bei erkanntem Releasewechsel im Backend;
+- Releasemarker `data-hd-release="1.50.612"` im Header und Startseiten-Main.
+
+Bildmix 1.50.612:
+- Gestalten: Frau + aktive Hände;
+- Fertigen: Mann + aktive Hände;
+- Technik: aktive Hände;
+- Forschen: Mann + aktive Hände;
+- Pflanzen: Frau + aktive Hände;
+- Tiere: andere Frau + aktive Hände;
+- Bewegen: Mann + aktive Hände;
+- Sammeln: aktive Hände.
+Kein Weltmotiv ohne mindestens Hände.
 
 ## Erster offener Blocker
 
@@ -180,6 +204,6 @@ Besonders prüfen:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.611 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
+**1.50.612 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Startseiten-LIVE-PASS beginnt Hub Ebene 1.
