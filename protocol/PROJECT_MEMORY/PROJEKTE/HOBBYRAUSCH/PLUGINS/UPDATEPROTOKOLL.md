@@ -1738,3 +1738,29 @@ LOCAL:
 
 NEXT:
 HD-004 installieren/aktivieren → HD-001 nur deaktivieren → Live-Smoke-Test. Löschen erst danach.
+
+
+---
+
+## PU-20261011-035 – HD-003 1.50.618
+
+LIVE-SCREENSHOT-FOLGEFIX:
+- Logo nicht mehr gequetscht, linksbündig;
+- Navigation tiefer;
+- Flyouts am Weltpunkt;
+- Hero/Fold ohne Wiederholung;
+- kompakte 132×70-Querformat-Thumbnails;
+- Affiliate-Banner/Produkte direkt im Next-Level-Raster;
+- neuer Direktwerbeauftritt.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.618_HOBBY_DEPOT_LIVE_LAYOUT_MONETIZATION_FIX_LOCALPASS.zip`
+
+SHA:
+`0498a836102540f02a890ac02e415a0bf60d33418d51a2385e15efb4543ee203`
+
+LOCAL:
+PHP 10/10; Fresh PHP 10/10; ZIP PASS; DOM-/Strukturchecks PASS.
+
+LIVE:
+OFFEN.
