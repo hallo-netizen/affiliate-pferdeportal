@@ -1229,3 +1229,23 @@ Fail-closed ZIP installieren → genau einen neuen read-only Live-Dry-Run → nu
 
 NACHHOLCHECK DOKUMENTATION:
 Das zentrale Zielregister stand noch auf Fassung 2.5 und enthielt alte Capacity-Regeln. Es wurde als reiner Wegweiser auf Fassung 2.7 / Hauptquelle nachgezogen; keine zweite Zielwahrheit wurde angelegt.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-A – ListingHive + verbindlicher Hobby-Depot-Designrahmen
+
+WAS:
+- ListingHive ist die technische Theme-Basis für die gesamte Hobby-Depot-WordPress-Seite.
+- Das Hobby-Depot-Designplugin bleibt visuell autoritativ.
+- Desktop-Hauptnavigation zeigt die 8 echten CORE-Welten.
+- Hobbyfinder, Magazin und Anbieter werden im Footer geführt.
+- Mega-Menü wird pro CORE-Welt geführt, nicht als ein riesiges Gesamtmenü.
+- Icons werden einheitlich Petrol und bis Hub/Kategorie/Beitrag wiederverwendet.
+- Startseite wird vor Hub Ebene 1 vollständig live abgenommen.
+- Affiliate-Produkte, Banner und Mietwerbung bleiben getrennte Slottypen; leer = vollständig unsichtbar.
+- Weltbilder dürfen nicht doppelt sein, müssen fachlich passen und echte ausreichende Originalauflösung besitzen.
+
+WARUM:
+Astra/Theme-Eigenlayout hatte in Referenzprojekten wiederholt Container-/Layoutkonflikte erzeugt; ListingHive reduziert zugleich die HivePress-Integrationsgrenze. Die acht Welten und stabilen Icons schaffen Orientierung ohne zweite Taxonomie. Die Bild-/Startseitenregeln verhindern erneute Mockup-/Blindfix-Schleifen.
+
+ARCHITEKTUR:
+Keine neue Parallelarchitektur. HD-001 bleibt Strukturautorität, Affiliate-Zentrale Monetarisierungsautorität, Designplugin Renderer.
