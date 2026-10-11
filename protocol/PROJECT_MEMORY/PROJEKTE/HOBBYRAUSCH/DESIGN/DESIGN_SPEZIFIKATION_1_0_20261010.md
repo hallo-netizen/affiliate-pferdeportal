@@ -567,3 +567,22 @@ Die Icons dürfen die echten Kategorienamen niemals ersetzen; sie ergänzen sie 
 ### Offene Darstellungsentscheidung
 
 Ob langfristig alle acht Welten oder nur vier prominente Welten auf der Startseite gezeigt werden, bleibt offen. Die technische Struktur muss beides ohne Redesign ermöglichen. Aktueller Stand: alle acht sichtbar.
+
+
+## 23. HIVEPRESS-THEME / LOGO / MEGA-MENÜ 1.50.598
+
+### Theme
+Für den HivePress-Anbieterbereich ist **ListingHive** die bevorzugte Theme-Basis. Spezialthemes werden nur eingesetzt, wenn deren Spezialfunktion fachlich gebraucht wird. Das Designplugin bleibt für Hobby-Depot-Marke, Header, Startseite und spätere Hub-/Contenttemplates zuständig.
+
+### Logo
+- insgesamt höher / mehr vertikale Luft;
+- „dein“ höher in den offenen Halbkreis;
+- HOBBY DEPOT in Anthrazit/Dunkelgrau;
+- Claim mit eigener, leichterer Typowirkung;
+- Claim farblich klarer Petrol-Akzent.
+
+### Icons
+Alle CORE-Welticons werden einheitlich in einem Petrolton geführt. Die Weltzuordnung bleibt über Form/Icon + Originalname erhalten; keine Regenbogen-Farbkodierung.
+
+### Mega-Menü
+Desktop darf zwischen Trigger und Dropdown **keine vertikale Hover-Lücke** haben. Dropdown beginnt bei `top:100%`; zusätzlich ist eine unsichtbare Hover-Brücke zulässig. Unterpunkte müssen mit der Maus ohne Menüabriss erreichbar sein.
