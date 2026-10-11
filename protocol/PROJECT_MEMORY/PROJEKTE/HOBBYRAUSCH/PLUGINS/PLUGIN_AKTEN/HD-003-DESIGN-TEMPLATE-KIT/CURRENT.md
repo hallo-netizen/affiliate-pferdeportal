@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.612 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
+STATUS: **1.50.613 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -13,145 +13,88 @@ ID:
 Name:
 `Affiliate Portal Template Kit – Hobby Depot Profil`
 
-Art:
-Eigenentwicklung / Projektprofil innerhalb des Template-Kit.
-
-Fachbüro:
-`DESIGN`
-
 Theme-Basis:
 `ListingHive`
 
 ## Aktuelle technische Wahrheit
 
 Version:
-**1.50.612**
+**1.50.613**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.612_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.613_HOBBY_DEPOT_HUB1_BREADCRUMB_MONETIZATION_LOCALPASS.zip`
 
 SHA-256:
-`cb82af1fa9ab0aabb980fdcd903efe05e4bf75c10c036f108fb3450fec22fda3`
+`56aa6f55542570d2383bd6fff92aaddcf155cf103cf14faccf80994636250d34`
 
-Isolierte Ausgabekopie im Campus:
-**PENDING / NICHT ERFUNDEN.**
+Library:
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.613_HOBBY_DEPOT_HUB1_BREADCRUMB_MONETIZATION_LOCALPASS.zip`
 
-Sollpfad:
-`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`
+Campus-CURRENT.zip:
+nicht synchronisiert; kein Binärartefakt erfunden.
 
-Der verfügbare GitHub-Connector kann Textdateien schreiben, aber den Binärstand nicht belastbar aus dem lokalen Container als Repository-Datei übertragen. Deshalb wurde **kein falsches CURRENT.zip** erzeugt.
+## Scope 1.50.613
 
-Manifest:
-`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
+Startseite:
+- Navigation Desktop real 14 px tiefer;
+- Hobbyfinder/Magazin/Wissen einheitlich creme;
+- öffentlicher Verkaufswerbeplatz mit „Hier könnte Ihre Werbung stehen.“;
+- genau ein Direktwerbeplatz;
+- Affiliate-Leerregeln unverändert.
 
-Der geprüfte ZIP-Kandidat liegt im Projekt-/Chat-Artefaktbestand und in der Hobbyrausch-Library.
+CORE-/Kategoriepfad:
+- neues eigenes Contenttemplate;
+- Breadcrumb außer Startseite;
+- Titel-/Introbereich;
+- Hub1-Welthero aus exakt demselben kontrollierten Weltasset wie die Startseitenkarte;
+- direkte nächste Ebene;
+- Affiliate-Banner;
+- Beitragsvorschau;
+- Affiliate-Produkte;
+- genau ein Direktwerbeplatz.
 
-## Scope 1.50.610
+Unterstützte CORE-Typen:
+`hub1`, `hub2`, `category`, `leaf`.
 
-- ListingHive als WordPress-/HivePress-Grundtheme;
-- Hobby-Depot eigener Header/Footer/Fronttemplate;
-- Logo unverändert aus freigegebenem v150600-Asset;
-- Topbar-Inhalt unverändert, mittig;
-- weißer Body + warm-off-white Header;
-- keine Anzeige im Header;
-- 8 reale CORE-Welten in Navigation;
-- Mega-Menü pro Welt;
-- Hero mit erhaltenem Bildschriftzug + Desktop/Mobile-Safe-Crops;
-- vollständige Startseitenstruktur;
-- 8 neue native Weltmotive je 1400×620, hero-ready;
-- Affiliate-Produkte/Banner: öffentlich leer unsichtbar, eingeloggt leer sichtbar;
-- genau ein direkt verkaufbarer Werbeplatz pro Seite/Kategorie/Beitrag, öffentlich auch unverkauft sichtbar;
-- breite Bannerfläche im Content;
-- reale Magazin-Seiten statt TEST-Fallback;
-- KISS-Meta-Titel/Description-Schicht mit Override.
+Zusätzlich:
+WordPress-Kategoriearchive und `journal_cat` erhalten denselben Breadcrumb-/Contentmodulpfad.
 
 ## Lokale Abnahme
 
-Fresh-ZIP:
-- SHA-256 verifiziert;
+Fresh:
+- PHP **10/10 PASS**;
 - ZIP-Integrität PASS;
-- PHP-Lint 9/9 PASS.
+- SHA-256 verifiziert.
 
-Positiv:
-- 8/8 reale Welten;
-- 8/8 neue Weltbilder 1400×620;
-- 8/8 Weltbild-Hashes unterschiedlich;
-- 3/3 Editorial-Karten;
-- 5/5 reale Magazin-Themenseiten;
-- belegte Affiliate-Produkte/Banner sichtbar;
-- eingeloggt 3 leere Produktplätze + 1 leerer Bannerplatz sichtbar;
-- unverkaufter direkt verkaufbarer Werbeplatz sichtbar;
-- gebuchter Werbeplatz ersetzt Verfügbarkeitsplatz;
-- Hero-Schriftzug erhalten;
-- Topbar-Inhalt unverändert und mittig;
-- Logo unverändert;
-- Body/Header klar getrennt;
-- keine Anzeige im Header;
-- Reihenfolge Banner → Magazin/Themen → Produkte;
-- ListingHive-Shell-Unterdrückung.
+Homepage:
+- Direktwerbeplatz öffentlich PASS;
+- Direktwerbeplatz count=1 PASS;
+- Affiliate leer öffentlich hidden PASS;
+- Affiliate leer eingeloggt visible PASS;
+- Editorialkarten einheitlich creme PASS;
+- Navigation-Absenkung PASS.
 
-Negativ:
-- öffentlich unbelegte Affiliate-Produkte vollständig abwesend;
-- öffentlich unbelegter Affiliate-Banner vollständig abwesend;
-- direkt verkaufbarer Werbeplatz nicht doppelt;
-- kein TEST-Fallback;
-- kein Shop-/Community-/Newsletter-Noise;
-- kein zweiter ListingHive-Header/Footer;
-- keine vertikale Mega-Menü-Hover-Lücke.
+Hub1:
+- Breadcrumb PASS;
+- identisches Weltasset Startkarte/Hubhero PASS;
+- nächste Ebene PASS;
+- Bannerplatz PASS;
+- Beitragsvorschau PASS;
+- Produktplätze PASS;
+- Direktwerbeplatz count=1 PASS.
 
-## Feinschliff 1.50.612
-
-- Hero links weiß;
-- 1-px-Hero-Rahmen;
-- 22 px Abstand Desktop / 14 px Mobile;
-- Navigation Desktop 10 px tiefer;
-- Headline „Entdecke dein nächstes Hobby.“;
-- eingebrannter Bildspruch unverändert.
-
-## Cache-/Renderer-Ursachenfix 1.50.612
-
-- neue PHP-Renderklasse/-datei statt Wiederverwendung von v150610;
-- neues Fronttemplate;
-- neue Assetpfade und Dateinamen mit Versionsparameter;
-- keine alten Hobby-Depot-Assets/Renderer im Release-ZIP;
-- Weltkarten ignorieren alte Featured Images und verwenden immer die kontrollierten 1400×620-Motive;
-- Releasemarker im HTML;
-- ein Releasewechsel löst im Backend einmalig verfügbare Cache-Purge-Wege aus.
-
-Fresh-ZIP-Nachweis:
-- PHP 9/9 PASS;
-- ZIP-Integrität PASS;
-- POS/NEG-Render PASS;
-- alte große Featured Images können kontrollierte Weltassets nicht mehr überschreiben;
-- 8/8 neue Weltassets exakt 1400×620 und unterschiedlich;
-- alle 8 Motive enthalten mindestens Person oder aktive Hände;
-- Headline/Herorahmen/Weißfläche/Abstand/Nav-Absenkung im tatsächlichen Render-CSS geprüft.
-
-## Offene Live-Abnahme
-
-Kein Live-PASS behauptet.
-
-Besonders zu prüfen:
-- Logo lädt real;
-- Hero-Bildschriftzug Desktop/Tablet/Mobile vollständig;
-- reale Bildschärfe aller 8 neuen Motive;
-- Header/Body-Absetzung;
-- Admin-/Public-Affiliatesicht;
-- breite Bannerfläche;
-- direkt verkaufbarer Werbeplatz;
-- Untermenü-Lesbarkeit;
-- vollständige Startseite Desktop/Tablet/Mobile.
+Kategorie:
+- Breadcrumb PASS;
+- Banner PASS;
+- Beiträge PASS;
+- Produkte PASS;
+- Direktwerbeplatz count=1 PASS.
 
 ## Rollback
 
-Falls 1.50.610 live fehlschlägt:
-- kein Blindfix;
-- Livefehler reproduzieren/diagnostisch eingrenzen;
-- nur belegtes Delta reparieren;
-- nötigenfalls auf den zuletzt installierten funktionierenden Hobby-Depot-Template-Kit-Stand zurückgehen.
+Bei Livefehler:
+kein Blindfix; realen Readback eingrenzen und nur belegtes Delta reparieren.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.612 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
-
-Erst nach Live-PASS wird Hub Ebene 1 begonnen.
+**1.50.613 installieren und Startseite + eine erste Welt-Hubseite live prüfen.**
