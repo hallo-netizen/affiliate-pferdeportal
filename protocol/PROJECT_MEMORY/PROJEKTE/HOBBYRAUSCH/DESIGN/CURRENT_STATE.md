@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-10
-STATUS: **1.50.593 + 1.50.594 VERWORFEN / 1.50.595 ROOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STAND: 2026-10-11
+STATUS: **LISTINGHIVE AKTIV / 1.50.599 GEBÜNDELTER HERO-BILD-THEME-ROOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
@@ -36,7 +36,8 @@ keine zusätzliche Topbar-Zeile.
 
 - Affiliate-/Informationsportal, kein Shop.
 - Kein Warenkorb, Checkout, Shop-Merkliste, allgemeiner Shop-Login, Newsletter- oder Community-Bereich im Header.
-- Hauptnavigation nur aus realen Portalbereichen: **Hobbywelten, Hobbyfinder, Magazin, Anbieter**.
+- Hauptnavigation = reale erste CORE-Ebene: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
+- **Hobbyfinder, Magazin, Anbieter** gehören in den Footer, nicht in die Hauptnavigation.
 - CORE-Welten exakt: **Gestalten, Fertigen, Technik, Forschen, Pflanzen, Tiere, Bewegen, Sammeln**.
 - Namen und direkte Kinder werden aus WordPress/HD-001 gelesen; keine zweite Taxonomie.
 - helle, freundliche Bilder; bei redaktionellen Hauptmotiven Mensch oder mindestens tätige Hände.
@@ -274,3 +275,47 @@ SHA-256:
 
 NEXT ACTION:
 ListingHive als Theme-Basis verwenden und 1.50.598 installieren; danach Header/Mega-Menü + HivePress-Anbieterseiten live prüfen.
+
+
+## GEBÜNDELTER ROOTFIX 1.50.599 – 2026-10-11
+
+Theme-Basis ist jetzt **ListingHive** für die gesamte WordPress-Seite. Das Hobby-Depot-Designplugin bleibt visuell autoritativ.
+
+In einem Arbeitsgang umgesetzt:
+- Astra-spezifische Laufzeitlogik aus dem Hobby-Profil entfernt;
+- ListingHive erkannt; dessen eigener Header/Footer im Hobby-Depot-Profil unterdrückt, damit kein zweiter Portalrahmen dazwischenfunkt;
+- Hero-Rootfix nach erneuter Prüfung des Pferdeatelier-Responsive-Problems:
+  - keine starre 310-px-Clippingbox mehr;
+  - Desktop wächst mit Inhalt;
+  - Tablet bis 980 px trennt Bild und Copy sauber;
+  - Mobile bis 540 px stapelt beide CTA-Buttons vollbreit;
+  - kein CTA darf abgeschnitten/aus dem Hero geschoben werden;
+- Kachelbild-Rootfix:
+  - kein `medium_large` mehr im Hobby-Profil;
+  - WordPress-Featured-Images werden aus dem **Full-Original** mit nativer `srcset/sizes`-Auswahl ausgegeben;
+  - Fallback-Weltbilder 1200×640;
+  - Hero-Fallback 1800×620;
+- Logo 1.50.598 bleibt;
+- einheitliche Petrol-Icons bleiben;
+- Mega-Menü-Rootfix ohne vertikale Hover-Lücke bleibt;
+- Affiliate-Erkennung, Produktbereich, Banner, Mietfläche und Leerregel unverändert.
+
+Lokaler Hardtest:
+- PHP-Lint 9/9 PASS;
+- Quell-/Strukturtest 14/14 PASS;
+- Browser-Hardtest auf **16 Breiten: 320, 360, 390, 430, 540, 720, 760, 820, 900, 980, 1024, 1100, 1180, 1280, 1440, 1600 px** PASS;
+- beide Hero-CTAs bei allen 16 Breiten sichtbar und innerhalb des Hero PASS;
+- kein horizontaler Overflow PASS;
+- simulierte ListingHive Header-/Footer-Unterdrückung PASS;
+- 8/8 Weltbild-Fallbacks mindestens 1200×640 PASS;
+- Affiliate-/Mietflächen-Code gegenüber 1.50.598 unverändert PASS;
+- frischer ZIP-Unpack + CRC + PHP-Lint PASS.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.599_HOBBY_DEPOT_LISTINGHIVE_HERO_IMAGE_ROOTFIX_LOCALPASS.zip`
+
+SHA-256:
+`4a7721c42774af710ed2d060a457f1d13d86bd61dfd17047ea7a4603c6be66c1`
+
+EXAKT EINE NEXT ACTION:
+**1.50.599 installieren und Startseite + Hero in mehreren Browserbreiten live prüfen.** Erst danach nächste Designstufe.
