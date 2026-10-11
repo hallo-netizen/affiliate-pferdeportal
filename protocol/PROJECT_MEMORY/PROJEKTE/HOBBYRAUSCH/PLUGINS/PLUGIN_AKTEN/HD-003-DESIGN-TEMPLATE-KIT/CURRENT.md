@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.601 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
+STATUS: **1.50.610 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -25,13 +25,13 @@ Theme-Basis:
 ## Aktuelle technische Wahrheit
 
 Version:
-**1.50.601**
+**1.50.610**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.601_HOBBY_DEPOT_HOMEPAGE_COMPLETION_VISUAL_POLISH_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`6b9fff2fa237d09d7cef2f31a2db7a50619d97cc6314a665265dbb08832dd952`
+`c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`
 
 Isolierte Ausgabekopie im Campus:
 **PENDING / NICHT ERFUNDEN.**
@@ -39,26 +39,31 @@ Isolierte Ausgabekopie im Campus:
 Sollpfad:
 `../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`
 
-Der in diesem Chat verfügbare GitHub-Connector kann Textdateien schreiben, aber den 8,9-MB-Binärstand aus dem lokalen Sandboxpfad nicht direkt als Repository-Datei übertragen. Deshalb wurde **kein falsches CURRENT.zip** erzeugt.
+Der verfügbare GitHub-Connector kann Textdateien schreiben, aber den Binärstand nicht belastbar aus dem lokalen Container als Repository-Datei übertragen. Deshalb wurde **kein falsches CURRENT.zip** erzeugt.
 
 Manifest:
 `../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
 
-Der geprüfte ZIP-Kandidat bleibt als Chat-Artefakt mit obigem SHA-256 verfügbar.
+Der geprüfte ZIP-Kandidat liegt im Projekt-/Chat-Artefaktbestand und in der Hobbyrausch-Library.
 
-## Scope 1.50.601
+## Scope 1.50.610
 
 - ListingHive als WordPress-/HivePress-Grundtheme;
 - Hobby-Depot eigener Header/Footer/Fronttemplate;
+- Logo unverändert aus freigegebenem v150600-Asset;
+- Topbar-Inhalt unverändert, mittig;
+- weißer Body + warm-off-white Header;
+- keine Anzeige im Header;
 - 8 reale CORE-Welten in Navigation;
 - Mega-Menü pro Welt;
-- Header-/Topbar-Polish;
-- responsiver Hero;
+- Hero mit erhaltenem Bildschriftzug + Desktop/Mobile-Safe-Crops;
 - vollständige Startseitenstruktur;
-- Weltkarten/Icons;
-- Affiliate-Produkte/Banner/Mietflächen mit harter Leerregel;
+- 8 neue native Weltmotive je 1400×620, hero-ready;
+- Affiliate-Produkte/Banner: öffentlich leer unsichtbar, eingeloggt leer sichtbar;
+- genau ein direkt verkaufbarer Werbeplatz pro Seite/Kategorie/Beitrag, öffentlich auch unverkauft sichtbar;
+- breite Bannerfläche im Content;
 - reale Magazin-Seiten statt TEST-Fallback;
-- kontrollierte Weltbildassets.
+- KISS-Meta-Titel/Description-Schicht mit Override.
 
 ## Lokale Abnahme
 
@@ -69,16 +74,26 @@ Fresh-ZIP:
 
 Positiv:
 - 8/8 reale Welten;
+- 8/8 neue Weltbilder 1400×620;
+- 8/8 Weltbild-Hashes unterschiedlich;
 - 3/3 Editorial-Karten;
 - 5/5 reale Magazin-Themenseiten;
-- belegte Affiliate-Produkte/Banner/Mietfläche sichtbar;
-- Hero-CTAs 16 Breiten 320–1600 px;
-- Mega-Menü Trigger → Unterpunkt stabil;
-- ListingHive-Shell-Unterdrückung;
-- kein horizontaler Overflow.
+- belegte Affiliate-Produkte/Banner sichtbar;
+- eingeloggt 3 leere Produktplätze + 1 leerer Bannerplatz sichtbar;
+- unverkaufter direkt verkaufbarer Werbeplatz sichtbar;
+- gebuchter Werbeplatz ersetzt Verfügbarkeitsplatz;
+- Hero-Schriftzug erhalten;
+- Topbar-Inhalt unverändert und mittig;
+- Logo unverändert;
+- Body/Header klar getrennt;
+- keine Anzeige im Header;
+- Reihenfolge Banner → Magazin/Themen → Produkte;
+- ListingHive-Shell-Unterdrückung.
 
 Negativ:
-- unbelegte Affiliate-Produkte/Banner/Mietfläche vollständig abwesend;
+- öffentlich unbelegte Affiliate-Produkte vollständig abwesend;
+- öffentlich unbelegter Affiliate-Banner vollständig abwesend;
+- direkt verkaufbarer Werbeplatz nicht doppelt;
 - kein TEST-Fallback;
 - kein Shop-/Community-/Newsletter-Noise;
 - kein zweiter ListingHive-Header/Footer;
@@ -89,22 +104,26 @@ Negativ:
 Kein Live-PASS behauptet.
 
 Besonders zu prüfen:
-- reale Bildschärfe;
-- vollständige Startseite;
-- Header/Topbar;
+- Logo lädt real;
+- Hero-Bildschriftzug Desktop/Tablet/Mobile vollständig;
+- reale Bildschärfe aller 8 neuen Motive;
+- Header/Body-Absetzung;
+- Admin-/Public-Affiliatesicht;
+- breite Bannerfläche;
+- direkt verkaufbarer Werbeplatz;
 - Untermenü-Lesbarkeit;
-- Desktop/Tablet/Mobile.
+- vollständige Startseite Desktop/Tablet/Mobile.
 
 ## Rollback
 
-Falls 1.50.601 live fehlschlägt:
-- kein weiterer Blindfix;
+Falls 1.50.610 live fehlschlägt:
+- kein Blindfix;
 - Livefehler reproduzieren/diagnostisch eingrenzen;
 - nur belegtes Delta reparieren;
-- bei notwendigem Rückbau auf den zuletzt installierten funktionierenden Hobby-Depot-Template-Kit-Stand zurückgehen.
+- nötigenfalls auf den zuletzt installierten funktionierenden Hobby-Depot-Template-Kit-Stand zurückgehen.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.601 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
+**1.50.610 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Live-PASS wird Hub Ebene 1 begonnen.
