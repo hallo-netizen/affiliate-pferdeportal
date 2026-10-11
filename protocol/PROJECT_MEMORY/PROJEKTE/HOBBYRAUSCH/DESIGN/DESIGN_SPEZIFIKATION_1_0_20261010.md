@@ -615,3 +615,54 @@ Für Kachel-/Featured-Images darf kein zu kleines WordPress-Derivat hochskaliert
 
 ### Regressionsgrenze
 Logo, Iconsystem, Mega-Menü, Affiliate-Produkte, Affiliate-Banner, Mietflächen und Leerregel werden in diesem Rootfix nicht konzeptionell verändert.
+
+
+## 25. STARTSEITE VOLLSTÄNDIG / MEGA-MENÜ / BILDQUELLE 1.50.600
+
+### Reihenfolge
+Die Startseite wird **vor Beginn der Hubseiten vollständig fertiggestellt**. Hub Ebene 1 beginnt erst nach Live-PASS des kompletten Startseitenrahmens.
+
+### Mega-Menü
+Verbindliche Entscheidung: **JA – pro CORE-Welt**.
+
+Desktop:
+- jede der 8 Hauptwelten ist direkt sichtbar;
+- Hover/Focus öffnet nur die direkten Kinder dieser Welt;
+- 5–6 Kinder einspaltig, größere Gruppen zweispaltig;
+- Link `Alle <Welt>-Themen →`;
+- keine dritte Ebene im Desktop-Panel;
+- kein Mega-Gesamtmenü über alle Welten;
+- keine vertikale Hover-Lücke.
+
+Tablet/Mobile:
+- kein Hover-Zwang;
+- kontrolliertes Menü/Accordion.
+
+Navigation-Hover:
+- Schrift Petrol;
+- 2-px-Unterstreichung wächst ohne Layoutverschiebung;
+- Icon bleibt Teil desselben visuellen roten Fadens.
+
+### Bildschärfe
+Kleine WordPress-Derivate dürfen nicht hochskaliert werden.
+- Featured Image = Full-Original als Quelle;
+- native `srcset/sizes`;
+- kein `medium_large` im Hobby-Profil;
+- lokale Weltfallbacks mindestens 1400×620.
+
+Wichtig:
+Ein technisch großes Bild ist nicht automatisch scharf. Alte Mockup-Crops waren bereits quellseitig detailarm. Die endgültigen kanonischen Weltbilder werden daher als echte hochauflösende Hub-1-Featured-Images geführt; die Startseite übernimmt sie automatisch.
+
+### Startseitenumfang
+Verbindlich:
+- Header/Suche/8 CORE-Welten;
+- Hero;
+- 8 Weltkarten;
+- Hobbyfinder/Magazin/Wissen & Glossar;
+- Affiliate-Produkte conditional;
+- Affiliate-Banner conditional;
+- reale Magazin-Themen;
+- Mietwerbung conditional;
+- Footer.
+
+Keine Community-, Newsletter- oder Shop-Erfindungen.
