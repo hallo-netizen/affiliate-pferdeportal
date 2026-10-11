@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11
-STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.610 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **LISTINGHIVE AKTIV / STARTSEITE 1.50.611 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Autoritative Bindungen
 
@@ -124,10 +124,10 @@ Alle acht Hashes unterschiedlich.
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.610_HOBBY_DEPOT_HOMEPAGE_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.611_HOBBY_DEPOT_HERO_HEADER_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`c26ff929fa02a451dd4b7e7b9e6b2aa4dd42c2752bd261f13c134401389512a3`
+`3f5c74845c1264823a5ca70c09d90fdc0d2ec4815858f6bd9eb84a29f73b2668`
 
 ## Lokaler Hardtest
 
@@ -154,6 +154,15 @@ PASS:
 - kein horizontaler Konzeptumbau;
 - ListingHive-Shell-Unterdrückung bleibt.
 
+## Feinschliff 1.50.611
+
+- linke Hero-Textfläche weiß;
+- Hero 1 px fein gerahmt;
+- Desktop 22 px Luft über dem Hero, Mobile 14 px;
+- Navigation Desktop 10 px nach unten auf die optische Claim-Achse;
+- Headline links: **„Entdecke dein nächstes Hobby.“**;
+- Bildspruch bleibt unverändert: **„Mehr Zeit für das, was dich begeistert.“**.
+
 ## Erster offener Blocker
 
 **WordPress-Live-Abnahme von 1.50.610.**
@@ -171,6 +180,6 @@ Besonders prüfen:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.610 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
+**1.50.611 in Hobby Depot installieren und die vollständige Startseite Desktop/Tablet/Mobile live prüfen.**
 
 Erst nach Startseiten-LIVE-PASS beginnt Hub Ebene 1.
