@@ -4,24 +4,25 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.620`
+`1.50.621`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.620_HOBBY_DEPOT_NAV_LABEL_TYPE_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.621_HOBBY_DEPOT_HEADER_ALIGNMENT_LOCALPASS.zip`
 
 SHA-256:
-`e27fcdda636a3764603420f1ac791ff157fc1faa9c784f576f31ca8d12d2c8f8`
+`a51f986d945ca87e85de4ff367c73ed3e09772e48b25bd5308ad53bcc72be226`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
 
 PASS:
-- ZIP;
 - PHP 10/10;
-- Navigation-Absenkung;
-- `Nächste Ebene` entfernt;
-- Kartentitel 15 px;
-- Untertitel 12 px.
+- ZIP;
+- Browser-Simulation 1600/1024/960/800;
+- Nav-Baselines;
+- Sammeln;
+- Flyouts;
+- Logoasset unverändert.
 
 LIVE:
 offen.
