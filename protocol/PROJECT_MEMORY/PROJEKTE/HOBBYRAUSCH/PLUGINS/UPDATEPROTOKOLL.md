@@ -1296,3 +1296,18 @@ OFFEN. Kein Live-PASS.
 
 NEXT:
 1.50.601 installieren und vollständige Startseite Desktop/Tablet/Mobile live prüfen. Erst danach Hub Ebene 1.
+
+
+### NACHHOLUNG ARTEFAKTPFLICHT HD-003
+
+Das geforderte `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` konnte in diesem Chat **nicht** in den GitHub-Campus geschrieben werden.
+
+Grund:
+Der verfügbare GitHub-Connector kann Repository-Text/Git-Objekte schreiben, besitzt aber keinen direkten Binärtransfer vom lokalen 8,9-MB-Sandbox-ZIP in einen GitHub-Blob. Eine manuelle Base64-Rekonstruktion über den Chat wird wegen Integritäts-/Größenrisiko nicht als belastbarer Weg verwendet.
+
+Folge:
+- kein falsches CURRENT.zip;
+- MANIFEST vorhanden;
+- SHA/Evidence vorhanden;
+- Chat-Artefakt vorhanden;
+- Plugin-Artefaktsynchronisierung bleibt formell BLOCKED bis ein belastbarer Binäruploadweg verfügbar ist.
