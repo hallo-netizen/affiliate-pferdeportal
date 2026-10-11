@@ -1,34 +1,29 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 1.8 / 2026-10-11
+FASSUNG: 1.9 / 2026-10-11
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
-- Logo/Search/Navigation bekommen mehr vertikale Luft; keine gequetschte Headerwirkung.
-- Navigation sitzt sichtbar tiefer.
+- Logo/Search/Navigation mit genügend vertikaler Luft.
+- Navigation sitzt **nahe an der unteren Header-Trennlinie**, ohne sie zu überlappen.
 - >1000 px: 8 Welten in einer Reihe.
 - 761–1000 px: 8 Welten in 4×2.
 - <761 px: Mobilmenü.
-- Flyouts müssen per Hover, Fokus und Klick funktionieren.
-- Flyouts bleiben am ausgelösten Weltpunkt verankert.
+- Flyouts per Hover/Fokus/Klick.
+- Flyouts am ausgelösten Weltpunkt verankert.
 
 ## Hub-/Unterkategorie-Karten
 - obere Hubebenen dürfen Fotos verwenden.
-- Bildbereich immer einheitliches Querformat.
-- Bild füllt seine komplette Bildfläche; keine kleine eingelassene Miniatur mit Rand.
+- Bildbereich einheitliches Querformat.
+- Bild füllt komplette Bildfläche.
 - Gestalten: 7 unterschiedliche passende Motive.
-- Untertitel nur, wenn sie Orientierung bringen.
-- keine generische Wiederholung wie `Finde passende Hobbys ...`.
-- Gestalten-Kurzzeilen:
-  - Druck & Fotografie: `Drucken, belichten, gestalten.`
-  - Malen & Zeichnen: `Farbe, Linie, Ausdruck.`
-  - Miniaturen & Szenen: `Kleine Welten selbst bauen.`
-  - Oberfläche & Deko: `Veredeln, gestalten, dekorieren.`
-  - Papierkunst: `Falten, schneiden, formen.`
-  - Schrift & Lettering: `Buchstaben kreativ gestalten.`
-  - Textilgestaltung: `Nähen, färben, verzieren.`
-- wenn keine echte kurze Zusatzinformation vorhanden ist: lieber keinen Untertitel als Fülltext.
+- **kein technischer Eyebrow „Nächste Ebene“**.
+- natürliche Überschrift bleibt: `Weiter in <Welt>` bzw. `Weitere Kategorien`.
+- Kartentitel 15 px.
+- Untertitel 12 px und nur bei echtem Orientierungswert.
+- keine generischen Fülltexte.
+- Taxonomie-Untertitel maximal 7 Wörter.
 
 ## Bestehende Bindungen
 - Hero/Fold ohne Textdoppelung.
