@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.50.614 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
+STATUS: **1.50.615 LOCAL HARD PASS / LIVE-PASS OFFEN / CAMPUS-CURRENT.ZIP-SYNC BLOCKED**
 
 ## Plugin
 
@@ -19,21 +19,21 @@ Theme-Basis:
 ## Aktuelle technische Wahrheit
 
 Version:
-**1.50.614**
+**1.50.615**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.614_HOBBY_DEPOT_NATIVE_HUB_MONETIZATION_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
 
 SHA-256:
-`57c371a32a2cc4c84edbfef0819e017ca15fc5007f27a228180e44de8edbda58`
+`17d03f5704d8f140a86f4bbbdc4109cf564522a663660d0bd333be456dc3fda6`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.614_HOBBY_DEPOT_NATIVE_HUB_MONETIZATION_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.615_HOBBY_DEPOT_PHOTO_HUB_RESPONSIVE_NAV_LOCALPASS.zip`
 
 Campus-CURRENT.zip:
 nicht synchronisiert; kein Binärartefakt erfunden.
 
-## Scope 1.50.614
+## Scope 1.50.615
 
 Header:
 - Topbar dunkel wie Footer;
@@ -62,9 +62,28 @@ Monetarisierung:
 - Affiliate-Produkte als native Kartenfläche;
 - öffentlich leer unsichtbar, eingeloggt leer sichtbar.
 
+## Scope 1.50.615 Zusatzdelta
+
+Responsive Navigation:
+- Vollnavigation >1320 px;
+- 761–1320 px Hamburger-/Dropdownmodus;
+- <980 px Dropdown 2-spaltig;
+- keine abgeschnittene letzte Welt.
+
+Hubfotos:
+- nur Hub1/Hub2;
+- echtes Featured Image zuerst;
+- sonst kontrollierter Crop des Weltmotivs;
+- tiefere Ebenen bleiben ohne Bildzwang.
+
 ## Lokale Abnahme
 
 - ZIP-Integrität PASS;
+- PHP 10/10 PASS;
+- statischer Responsive-Test: Breakpoint 1320 / Hamburger sichtbar / Nav aus Desktopreihe gelöst PASS;
+- Hubfoto-Test: Featured Image gewinnt PASS;
+- Hubfoto-Fallback: Weltasset PASS;
+- tiefe Category ohne Bildzwang PASS;
 - PHP 10/10 PASS;
 - Intro-Accordion-Test PASS;
 - Textintegrität Anfang/Ende PASS;
@@ -85,4 +104,4 @@ kein Blindfix; realen Readback eingrenzen und nur belegtes Delta reparieren.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.614 installieren und Startseite + Gestalten live prüfen.**
+**1.50.615 installieren und Startseite + Gestalten bei Desktop, mittlerer Breite und Mobile live prüfen.**
