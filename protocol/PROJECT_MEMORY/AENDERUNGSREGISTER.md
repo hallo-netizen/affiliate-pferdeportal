@@ -1361,3 +1361,16 @@ KEINE:
 - Taxonomieänderung;
 - Parent-/Owner-Änderung;
 - WordPress-Strukturwrites.
+
+
+## HOBBYRAUSCH-DESIGN-20261011-G – Live-Screenshot-Korrekturen 1.50.618
+
+- natürliches Logoformat / linksbündig;
+- eigene tiefere Navigationszeile;
+- Flyouts lokal am Weltpunkt;
+- Hero-Lead wird aus Fold entfernt;
+- kompakte Querformat-Unterkategoriebilder;
+- Affiliate physisch im Kategorienraster;
+- Direktwerbung visuell neu aufgebaut.
+
+Keine Taxonomie-/Workflow-/Provideränderung.
