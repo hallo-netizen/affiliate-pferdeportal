@@ -3,36 +3,29 @@
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-NAME:
-`Affiliate Portal Template Kit – Hobby Depot Profil`
-
 VERSION:
-`1.50.616`
+`1.50.617`
 
-ARTEFAKTNAME:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.616_HOBBY_DEPOT_HUB_CLEANUP_AD_BRUSH_NAV_FIX_LOCALPASS.zip`
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.617_HOBBY_DEPOT_HUB_GRID_NAV_AFFILIATE_INTEGRATED_LOCALPASS.zip`
 
 SHA-256:
-`6ae738653de1dd1677bc4e6a5e58540cc7efddc6ccd5ddf8f28a2b5bbda5e0cd`
-
-AUTORITATIVE TECHNISCHE CURRENT:
-`../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
-
-FACHCURRENT:
-`../../../DESIGN/CURRENT_STATE.md`
+`5f6e5ddf30662a10ecdfc37b35aaca82ad0ba578d59cde20b463d11314624764`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
 
-LOKAL:
-- ZIP PASS;
-- PHP 10/10 PASS;
-- Typography-Diff PASS;
-- Nav-Korrektur PASS;
-- Hub1-Fold PASS;
-- 7 unique Gestalten-Fallbackbilder PASS;
-- Parent-Weltbild-Fallback entfernt PASS;
-- Direktwerbung 1 Foto + Brushstroke PASS.
+NACHWEIS:
+- ZIP PASS
+- PHP 10/10
+- Browser 1600 / 1024 / 390 PASS
+- Navigation sichtbar Mid PASS
+- Logo Mid 278 px PASS
+- 7/7 unique Gestalten-Bilder 600×320 PASS
+- Raster 3+2+2 PASS
+- Intro Absatz-/Background-Regel PASS
+- Affiliate integriert PASS
+- Direktwerbung Einzelbild/Brush/heller CTA PASS
 
-CURRENT.zip STATUS:
-**NICHT SYNCHRONISIERT / BINÄRTRANSFERGRENZE.**
+CURRENT.zip:
+nicht synchronisiert / Binärtransfergrenze.
