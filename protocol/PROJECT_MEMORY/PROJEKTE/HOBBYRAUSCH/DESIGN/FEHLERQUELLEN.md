@@ -2,35 +2,26 @@
 
 ROLLE: Fehlerhistorie. Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT_STATE.md`.
 
-## HRD-001 bis HRD-035
+## HRD-001 bis HRD-039
 Historie bleibt bestehen; lokale Fixstände gelten erst nach Live-Readback als endgültig geschlossen.
 
-## HRD-036 – Navigation weiterhin zu hoch
-STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
+## HRD-040 – Navigation noch nicht tief genug
+STATUS: LOCAL CLOSED 1.50.620 / LIVE OFFEN
 
 Fix:
-größere vertikale Trennung von Logo/Search/Navigation; eigene tiefere Nav-Zeile.
+Headerzeile erweitert; Navigation mit nur 2 px Unterabstand nahe an die Trennlinie gesetzt.
 
-## HRD-037 – Flyout nach 1.50.618 faktisch weg
-STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
-
-Ursache:
-eine ältere Mid-Breakpoint-Regel unterdrückte Hover-Flyouts weiterhin mit `!important`.
+## HRD-041 – „Nächste Ebene“ zu technisch
+STATUS: LOCAL CLOSED 1.50.620 / LIVE OFFEN
 
 Fix:
-späteste 1.50.619-Regel aktiviert Hover/Fokus/Klick explizit wieder und verankert Flyouts am jeweiligen Weltpunkt.
+Eyebrow komplett entfernt. Nur natürliche Überschrift `Weiter in …` / `Weitere Kategorien`.
 
-## HRD-038 – Kategorie-Vorschaubilder zu klein
-STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
-
-Fix:
-Bild füllt die komplette vorgesehene Querformatfläche; kein Innenrand/Inset.
-
-## HRD-039 – Untertitel generisch und wiederholend
-STATUS: LOCAL CLOSED 1.50.619 / LIVE OFFEN
+## HRD-042 – Kartenuntertitel zu klein
+STATUS: LOCAL CLOSED 1.50.620 / LIVE OFFEN
 
 Fix:
-Gestalten erhält 7 kurze individuelle Kurzzeilen. Ohne echte Kurzinfo kein generischer Füllsatz.
+Kartentitel 15 px, Untertitel 12 px; Taxonomie-Kurztext maximal 7 Wörter.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.619.**
+**Live-Abnahme 1.50.620.**
