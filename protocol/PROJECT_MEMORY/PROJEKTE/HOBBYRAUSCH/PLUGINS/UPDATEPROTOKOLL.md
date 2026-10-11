@@ -1633,3 +1633,50 @@ OFFEN.
 
 NEXT:
 1.50.615 installieren und Startseite + Gestalten bei großer, mittlerer und mobiler Breite live prüfen.
+
+
+---
+
+## PU-20261011-033 – HD-003 Hobby Depot Design / Template Kit 1.50.616
+
+VON / AUF:
+1.50.615 → 1.50.616.
+
+LIVE-BEFUND:
+- Navigation zu tief und optisch an der Trennlinie;
+- Verdacht auf veränderte Schriftgröße;
+- Hub1 mit doppeltem sichtbarem Text;
+- Gestalten-Unterkategorien mehrfach mit demselben Bild;
+- Direktwerbung als 4er-Collage statt starkem Einzelmotiv.
+
+KORREKTUR:
+- Navigation Desktop 22 px → 8 px;
+- Vollnavigation erst >1560 px;
+- relevante Schriftgrößen gegen 1.50.614 geprüft: unverändert;
+- Hub1-Zusatztext nur noch geschlossen unter „Mehr über <Welt> erfahren“;
+- Gestalten 7 unterschiedliche Kategorie-Fallbackbilder;
+- Parent-Weltbild-Fallback entfernt;
+- Direktwerbung exakt 1 Foto;
+- Text über dem Foto;
+- Brushstroke hinter „Hier könnte Ihre Werbung stehen.“;
+- CTA „Werbemöglichkeiten & Preise“.
+
+TEST:
+- PHP 10/10 PASS;
+- ZIP PASS;
+- 7/7 Bildhashes unterschiedlich;
+- Parent-Fallback NEGATIV PASS;
+- Rental <img> count = 1 PASS;
+- Typography-Diff PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.616_HOBBY_DEPOT_HUB_CLEANUP_AD_BRUSH_NAV_FIX_LOCALPASS.zip`
+
+SHA-256:
+`6ae738653de1dd1677bc4e6a5e58540cc7efddc6ccd5ddf8f28a2b5bbda5e0cd`
+
+LIVE:
+OFFEN.
+
+NEXT:
+1.50.616 installieren und Gestalten bei Desktop / Side-by-Side / Mobile prüfen.
