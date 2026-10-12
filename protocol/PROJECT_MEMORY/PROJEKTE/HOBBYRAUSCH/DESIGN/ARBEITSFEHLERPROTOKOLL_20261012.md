@@ -1,0 +1,150 @@
+# HOBBYRAUSCH – DESIGN – ARBEITSFEHLERPROTOKOLL 2026-10-12
+
+ROLLE: Dauerhafte Fehler-/Lernakte für die Designarbeit am Hobby-Depot-Template-Kit.
+Autoritative aktuelle Fehlerlage bleibt `FEHLERQUELLEN.md`.
+Aktueller Stand/NEXT ACTION bleibt ausschließlich `CURRENT_STATE.md`.
+
+## Zweck
+Dieses Protokoll dokumentiert ausdrücklich die Arbeitsfehler, die im Designlauf 1.50.629–1.50.631 gemacht wurden. Es darf nicht als zweite Current-Wahrheit benutzt werden.
+
+## AF-001 – Falscher Repository-Kontext beim ersten Campus-Check
+FEHLER:
+Zu Beginn wurde ein GitHub-Pfad zunächst gegen den falschen Repository-Kontext geprüft. Dadurch entstand ein 404, der für die eigentliche Hobbyrausch-Designprüfung keine Aussagekraft hatte.
+
+URSACHE:
+Repo-Kontext nicht zuerst aus der realen Campus-Bindung bestätigt.
+
+KORREKTUR:
+Der richtige Bestand wurde danach im Repository `hallo-netizen/affiliate-pferdeportal`, Branch `hobbyroom/project-memory-campus-v1-20260905`, geprüft.
+
+VERMEIDUNGSREGEL:
+Vor jedem Status-/Pfadbefund zuerst Repository + Branch + Head aus der autoritativen Bindung bestätigen.
+
+## AF-002 – 1.50.629 als Bildkorrektur ausgegeben, obwohl die sichtbare Änderung nicht belastbar bewiesen war
+FEHLER:
+1.50.629 wurde als fertige Bildkorrektur ausgegeben. Der Nutzer stellte live fest, dass die Kategorie-Vorschaubilder praktisch unverändert wirkten.
+
+URSACHE:
+Die Prüfung konzentrierte sich auf Dateibindung, Version, SHA-Eindeutigkeit und Paketstruktur. Es wurde nicht ausreichend bewiesen, dass die sichtbare Bildwirkung tatsächlich dem gewünschten "weiter raus / weniger Detail / klareres Gesamtmotiv" entsprach.
+
+ZUSÄTZLICHER FEHLER:
+Die Aussage, die Bildkorrektur sei "umgesetzt", war zu stark. Lokal war nur technisch belegt, dass ein anderer/gebundener Bildbestand vorhanden war, nicht dass die visuelle Anforderung erfüllt war.
+
+VERMEIDUNGSREGEL:
+Bildänderung niemals nur per Dateihash/Versionspfad als PASS erklären. Vor Ausgabe zwingend visueller Gesamtvergleich des aktiven 65er-Satzes und Stichproben in realer Karten-Geometrie.
+
+## AF-003 – 1.50.629 ließ eine bereits akzeptierte Navigation sichtbar wieder absinken
+FEHLER:
+Obwohl die Navigation zuvor vom Nutzer als PASS bestätigt und "nicht mehr anfassen" markiert war, erschien sie nach dem folgenden Build wieder tiefer.
+
+URSACHE:
+Regression der Header-/Releasebindung wurde vor Ausgabe nicht gegen den letzten live akzeptierten Stand geometrisch gegengeprüft.
+
+VERMEIDUNGSREGEL:
+Jeder neue Build muss für alle bereits live akzeptierten Bereiche einen Negativ-Regressionscheck enthalten: keine Änderung an Navigation, Texten, Headergeometrie oder Monetarisierung, sofern nicht ausdrücklich beauftragt.
+
+## AF-004 – 1.50.630 aktivierte den falschen alten Bildsatz
+FEHLER:
+Um den Zoom-out schnell zu korrigieren, wurde in 1.50.630 der alte `v150623`-Bildsatz im aktiven Hub1-Pfad bevorzugt.
+
+FOLGE:
+Mehrere visuell gleiche bzw. sehr ähnliche Szenenfamilien wurden wieder aktiv. Der Nutzer sah erneut Doppelbilder.
+
+URSACHE:
+Die Annahme "älter = weiter gefasst = besser" wurde aus früherer Dokumentation abgeleitet, ohne den vollständigen 65er-Satz visuell auf Szenenwiederholungen zu prüfen.
+
+VERMEIDUNGSREGEL:
+Keinen alten Bildsatz blind reaktivieren. Vor Aktivierung kompletter Contact-Sheet-/visueller Duplikatcheck aller 65 Motive plus aktiver Pfadprüfung.
+
+## AF-005 – Byte-Eindeutigkeit mit visueller Eindeutigkeit verwechselt
+FEHLER:
+Mehrfach wurde "65/65 SHA-eindeutig" als starke Qualitätsaussage verwendet.
+
+PROBLEM:
+Unterschiedliche Dateien können trotzdem dieselbe oder nahezu dieselbe Szene zeigen. Genau das trat beim alten Satz auf.
+
+URSACHE:
+Technische Dateieindeutigkeit wurde zu stark als Ersatz für visuelle Eindeutigkeit gewertet.
+
+VERMEIDUNGSREGEL:
+Für Bildsätze sind mindestens drei getrennte Prüfungen nötig:
+1. Datei-/SHA-Eindeutigkeit,
+2. visueller/perzeptueller Duplikatcheck,
+3. menschlicher Gesamtcheck auf wiederkehrende Szenen, Motivfamilien und unklare Themenabbildung.
+
+## AF-006 – 1.50.630 als Fix ausgegeben, bevor Header und Bilder vollständig simuliert waren
+FEHLER:
+Das ZIP 1.50.630 wurde als korrigierter Stand ausgegeben, obwohl erst danach vollständig nachgewiesen wurde, dass der alte Bildsatz Doppelungen enthält und die Headergeometrie nicht stimmt.
+
+URSACHE:
+Zu frühe Freigabe nach Codeänderung statt nach vollständigem Positiv-/Negativtest.
+
+VERMEIDUNGSREGEL:
+Kein Downloadkandidat mehr vor abgeschlossener Simulation. Reihenfolge verbindlich:
+Änderung → aktive Pfade prüfen → visueller Bildcheck → Headergeometrie → Regression bereits abgenommener Bereiche → erst dann ZIP ausgeben.
+
+## AF-007 – Claim künstlich verbreitert und dadurch nicht mittig
+FEHLER:
+Im Header blieb die CSS-Regel `.hd-logo-claim-v150622{transform:scaleX(1.06)}` aktiv.
+
+FOLGE:
+"Hobbys. Ideen. Möglichkeiten." war gegenüber der HOBBY-DEPOT-Wortmarke nach rechts verbreitert und nicht sauber mittig/gleich breit.
+
+URSACHE:
+Vorhandene Altregel wurde beim Headerumbau nicht als Konflikt erkannt.
+
+VERMEIDUNGSREGEL:
+Bei Logo-/Claim-Ausrichtung keine optische Stretch-/Translate-Korrektur ohne geometrischen Nachweis. Wortmarke und Claim müssen über gemessene Breite/Mitte ausgerichtet werden.
+
+## AF-008 – Logo-Unterkante und Navigation wurden nicht vor Freigabe auf eine gemeinsame Linie gemessen
+FEHLER:
+Die Nutzeranforderung "Logo/Claim-Unterkante und Navigation eine Linie" wurde zunächst nur optisch/CSS-seitig umgesetzt.
+
+NACHWEIS DES FEHLERS:
+Vor 1.50.631 ergab die lokale Geometrie:
+- Desktop: 7 px Abweichung;
+- 761–1000 px: 38 px Abweichung.
+
+URSACHE:
+Kein verpflichtender Koordinatenvergleich der echten gerenderten Elemente vor Ausgabe.
+
+VERMEIDUNGSREGEL:
+Bei Headerausrichtung an allen Pflichtbreiten die tatsächlichen Bounding-Box-Koordinaten messen. PASS nur bei definierter Toleranz; für diese Anforderung: 0 px Zielabweichung.
+
+## AF-009 – Bereits akzeptierte Bereiche wurden bei Korrekturen nicht strikt genug eingefroren
+FEHLER:
+Navigation und andere Headerteile wurden in Folgekorrekturen erneut beeinflusst, obwohl sie zuvor live als PASS bestätigt waren.
+
+URSACHE:
+"Nicht anfassen" war dokumentiert, aber nicht als technische Regression-Sperre behandelt.
+
+VERMEIDUNGSREGEL:
+Live akzeptierte Teilbereiche erhalten ab sofort eine harte Freeze-Liste im jeweiligen Buildtest. Eine Änderung daran ist nur zulässig, wenn der Nutzer genau diesen Bereich erneut beauftragt.
+
+## AF-010 – Dokumentation war zeitweise stärker als der tatsächliche Beweis
+FEHLER:
+Campus-Texte beschrieben 1.50.629 bereits als belastbare Bildkorrektur, obwohl der reale Liveeffekt später als unzureichend/falsch bestätigt wurde.
+
+URSACHE:
+Lokaler Technik-PASS und visuelle Live-Abnahme wurden sprachlich nicht sauber genug getrennt.
+
+KORREKTUR:
+Die aktuelle Design-Current und `FEHLERQUELLEN.md` führen 1.50.629 als Live-Fail und 1.50.630 als verworfen.
+
+VERMEIDUNGSREGEL:
+Dokumentation muss immer unterscheiden:
+- technisch lokal vorhanden,
+- visuell lokal simuliert,
+- WordPress live bestätigt.
+Kein "behoben"/"PASS" ohne die jeweils erforderliche Stufe.
+
+## Verbindliche Schutzregeln ab diesem Fehlerlauf
+1. Keine Bildfreigabe nur auf Basis von SHA/Dateinamen.
+2. Vor Bildrelease kompletter 65er-Gesamtcheck auf Motivklarheit und Szenendoppelungen.
+3. Kein Rückgriff auf alte Bildserien ohne vollständige visuelle Prüfung.
+4. Keine Änderung an bereits live akzeptierten Bereichen ohne ausdrücklichen Auftrag.
+5. Headeränderungen müssen vor ZIP-Ausgabe bei 1600/1440/1200/1024/900/800/761 px geometrisch simuliert werden.
+6. Claim/Wortmarke nicht per Stretching "optisch passend" machen.
+7. Downloadkandidat erst nach Positiv-, Negativ- und Regressionstest ausgeben.
+8. Lokalen Technik-PASS niemals als Live-PASS formulieren.
+9. Bei Nutzerforderung "nicht raten" keine Annahme aus früheren Versionstexten als Ersatz für eine reale Prüfung verwenden.
