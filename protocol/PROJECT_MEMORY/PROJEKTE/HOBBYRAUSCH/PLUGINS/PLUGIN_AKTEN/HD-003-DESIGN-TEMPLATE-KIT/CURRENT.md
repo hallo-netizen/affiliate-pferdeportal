@@ -3,34 +3,35 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.623 LOCAL HARD PASS / LIVE-PASS OFFEN**
+STATUS: **1.50.624 LOCAL HARD PASS / LIVE-PASS OFFEN**
 
 Version:
-**1.50.623**
+**1.50.624**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
 
 SHA-256:
-`0b5021854f5bbb1a3ab35bcba0fc14bd522cb6679b4299276029a0f8a87b25f7`
+`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
 
 ## Scope
-- Header unverändert aus 1.50.622;
-- alle acht ersten Welt-Hubs mit Bildern in den direkten Unterkategorie-Karten;
-- 65 direkte Kinder insgesamt;
-- echtes Featured Image hat Vorrang;
-- dedizierte lokale 600×320-Fallbacks;
-- kein wiederholter Parent-Hero als Standardfallback.
+- Navigation final per bottom:0 an untere Headerkante;
+- keine Produkte mehr zwischen Unterkategorie-Reihen;
+- Banner füllt Restplätze;
+- Produkte außerhalb des Kategorie-Rasters;
+- 65/65 aktive Hub-Bilder eindeutig.
 
 ## Lokal
 - PHP 10/10 PASS;
 - ZIP PASS;
-- 65/65 Bildpfade PASS;
-- 65/65 Browser-Load PASS;
-- 1600/1200/1024/900/760 ohne horizontalen Overflow.
+- 65/65 Bildpfade;
+- 65/65 eindeutige aktive Bildhashes;
+- 65 Subcategory-Assets / 65 eindeutige Hashes;
+- Banner-Span 1/2/3 geprüft;
+- Produkt-Insertion im Next-Level-Raster = 0.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.623 installieren und mehrere Welt-Hubs live prüfen.**
+**1.50.624 installieren und live prüfen.**
