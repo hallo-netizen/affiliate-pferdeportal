@@ -4,28 +4,29 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.638`
+`1.50.639`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.638_HOBBY_DEPOT_BUCH_PAPIER_PILOT_PHOTO_PRODUCT_FIRST_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.639_HOBBY_DEPOT_BUCH_PAPIER_SPLIT_HERO_BRUSH_3COL_LOCALPASS.zip`
 
 SHA-256:
-`44f32edd6158b5b82452c837ffe1534008b6cbfb50e7c7da6fcd72da319e0f7a`
+`080b56efd53102de7fde5c01f75b0a9edb53c8a3f4123c1e204b2ded5b1955f2`
 
 LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.638_HOBBY_DEPOT_BUCH_PAPIER_PILOT_PHOTO_PRODUCT_FIRST_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.639_HOBBY_DEPOT_BUCH_PAPIER_SPLIT_HERO_BRUSH_3COL_LOCALPASS.zip`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE PILOT OFFEN.
 
 PASS:
-- PHP 28/28;
+- PHP 31/31;
 - ZIP;
-- 5 neue Pilotbilder, 600×320, gesamt 66.054 Bytes;
-- 1440/1024/760 Overflow 0;
-- Pilot-Reihenfolge PASS;
-- vorhandene Assets 0 Änderungen;
-- Header/Nav/Hero/Ebene1/andere Hub2 eingefroren.
+- 852/852 Assets byteidentisch zu 1.50.638;
+- kein neues Hero-Asset;
+- responsive Split-Hero;
+- Kachelraster 1440=3 / 1024=2 / 760=1;
+- Overflow 0 bei allen drei Viewports;
+- Header/Nav/Ebene1/andere Hub2 eingefroren.
 
 LIVE:
 Nur Buch & Papier offen.
