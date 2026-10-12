@@ -3,47 +3,73 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.624 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.625 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
 
 SHA-256:
-`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
+`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
 
-## Delta 1.50.624
+## Root Cause aus dem Live-Readback 1.50.624
 
-Navigation:
-- Desktop/Tablet rechts neben Logo jetzt technisch **absolute bottom:0** an die untere Headerkante gebunden.
-- keine weitere freie vertikale Interpretation.
+Die 65 lokalen Dateien waren zwar byte-eindeutig, wurden live aber teilweise gar nicht benutzt:
+`next_level_card_photo()` gab vorhandenen WordPress-Featured-Images Vorrang.
 
-Unterkategorie-Raster:
-- keine Affiliate-Produkte mehr zwischen Kategorie-Reihen;
-- Banner füllt nur die letzte unvollständige 3er-Reihe:
-  - Rest 1 → Banner = 2 Kartenbreiten;
-  - Rest 2 → Banner = 1 Kartenbreite;
-  - Rest 0 → Banner volle eigene Zeile.
-- Produkte werden außerhalb des Kategorie-Rasters als natives Empfehlungsmodul ausgegeben.
+Dadurch konnten mehrfach gepflegte alte Featured Images die kontrollierten Motive überstimmen.
+
+## Korrektur 1.50.625
+
+### Bilder
+- kontrollierte 600×320-Hubmotive werden für die 65 direkten Welt-Unterkategorien jetzt **vor** WordPress Featured Images aufgelöst;
+- 65/65 aktive Bildpfade;
+- 65/65 unterschiedliche SHA-256;
+- Perceptual-dHash Mindestabstand im Gesamtbestand: **96**;
+- Bildprinzip auf alle 65 angewendet: engere, ruhigere, klarere Einzelmotive; keine Hero-/Parent-Wiederholung als Universalersatz.
+
+### Navigation
+- ab 761 px Flex-Zeile statt 4×2;
+- alle 8 Welten exakt gleiche Item-/Labelhöhe;
+- Submenu-Pfeil absolut positioniert und kann `Sammeln` nicht mehr vertikal verschieben;
+- Navigation liegt bottom -1 px an der Headerkante.
+
+### Monetarisierung
+Unverändert aus 1.50.624:
+- keine Produkte zwischen Kategorie-Reihen;
+- Banner füllt nur freie Restbreite;
+- Produkte außerhalb des Kategorienrasters.
+
+## Lokaler Hardtest
+
+PHP:
+**10/10 PASS**
+
+ZIP:
+PASS
 
 Bilder:
-- 65/65 aktive erste Hub-Unterkategorien bebildert;
-- 65/65 **unterschiedliche SHA-256-Bildhashes**;
-- altes doppeltes Genuss/Essbare-Pflanzen-Motiv beseitigt;
-- ungenutzte Alias-/Duplikatbilder entfernt.
+- 65 Dateien;
+- 65× 600×320;
+- 65 eindeutige SHA-256;
+- dHash-Minimalabstand 96;
+- zentraler Kategoriebaum: 65/65 direkte Kinder besitzen passendes v150625-Asset.
 
-## Lokal
-- PHP 10/10 PASS;
-- ZIP-Integrität PASS;
-- 65/65 aktive Bildpfade;
-- 65/65 eindeutige aktive Bildhashes;
-- 65 vorhandene Subcategory-Assets / 65 eindeutige Hashes;
-- Produkte werden in render_next_level/render_term_next_level nicht mehr eingefügt;
-- Banner-Span-Regeln geprüft;
-- statischer Layout-Render für 7 Kategorien + 2-Kartenbreiten-Banner erfolgreich.
-- Chromium war in dieser Laufzeitumgebung nicht zuverlässig startbar; kein Browser-PASS erfunden.
+Featured-Image-Negativtest:
+- simuliertes identisches WordPress-Featured-Image vorhanden;
+- Renderer liefert trotzdem das kontrollierte `audio-hifi-v150625.webp`;
+- PASS.
+
+Navigation / Playwright:
+- 1600 / 1200 / 1024 / 900 / 800 / 761 px:
+  - horizontaler Overflow 0;
+  - alle acht Labels exakt gleiche Y-/Bottom-Koordinate;
+  - `Sammeln` exakt gleiche Baseline;
+- 760 px: Mobilepfad;
+- Sammeln-Flyout bei allen getesteten Desktop-/Tabletbreiten sichtbar und innerhalb des Viewports.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.624 installieren und Technik/Gestalten live prüfen – besonders Navigation unten und Bannerfüllung.**
+
+**1.50.625 installieren und Technik + Pflanzen live prüfen: Bildwiederholungen und Sammeln-Baseline.**
