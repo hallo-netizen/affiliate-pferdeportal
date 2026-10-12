@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.0 / 2026-10-12
+FASSUNG: 3.1 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -45,13 +45,16 @@ FASSUNG: 3.0 / 2026-10-12
 
 ## Kategorieebene 2 / Hub2
 - Breadcrumb oben.
-- H1 + natürlicher, gut lesbarer Orientierungstext direkt oben; auf Hub2 nicht nur ein kurzer Teaser, sondern mehrere vollständige Sätze nach dem bewährten Kategorie-Textprinzip.
+- über der H1 steht ein kurzer **individueller Claim pro Kategorie**, kein generisches `Themenbereich`;
+- H1 + natürlicher, gut lesbarer Orientierungstext direkt oben; auf Hub2 ca. 150–190 Wörter Gesamttext nach dem bewährten Kategorie-Textprinzip;
+- ein gut lesbarer Lead bleibt direkt sichtbar; die weitere Vertiefung wird im selben oberen Bereich über `Mehr zu <Kategorie> erfahren` aufklappbar;
 - **kein Hero-Foto auf Ebene 2**.
 - der lange Erklärungstext steht nicht oben, sondern am Seitenende.
 - direkte nächste Ebene vollständig sichtbar verlinken.
 - kleine Kartenfotos nur als Orientierung in den Verweisen; kein zweites großes Hero. Wo kein sinnvolles Kartenfoto vorhanden ist, thematisch passende unterschiedliche Icons statt eines identischen Welticons verwenden.
 - Affiliate-Banner als eigener Bereich **nach** der nächsten Ebene, nicht als Füller zwischen Kategorien.
-- danach passende Artikelvorschau; auf Hub2 bis zu vier Beiträge mit Beitragsbild.
+- danach passende Artikelvorschau; auf Hub2 bis zu vier Beiträge mit Beitragsbild;
+- für reine Designtests dürfen klar markierte private `[TEST]`-Beiträge eingeloggten Admins als Vorschau-Fallback angezeigt werden, wenn noch keine gleichnamige Beitragskategorie existiert; reale öffentliche Beitragslogik bleibt davon unberührt.
 - danach konkrete Affiliate-Produkte passend zum aktuellen Hub2-Kontext.
 - danach genau ein direkt verkaufbarer Werbeplatz.
 - danach längerer redaktioneller Erklärungstext.
