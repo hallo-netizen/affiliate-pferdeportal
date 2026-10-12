@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.2 / 2026-10-12
+FASSUNG: 3.3 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -48,7 +48,7 @@ FASSUNG: 3.2 / 2026-10-12
 - über der H1 steht ein kurzer **individueller Claim pro Kategorie**, kein generisches `Themenbereich`;
 - H1 + natürlicher, gut lesbarer Orientierungstext direkt oben; auf Hub2 ca. 150–190 Wörter Gesamttext nach dem bewährten Kategorie-Textprinzip;
 - ein gut lesbarer Lead bleibt direkt sichtbar; die weitere Vertiefung wird im selben oberen Bereich über `Mehr zu <Kategorie> erfahren` aufklappbar;
-- **kein Hero-Foto auf Ebene 2**.
+- Standard für Ebene 2 bleibt ohne großes Hero-Foto. Der Pilot `Buch & Papier` darf als geprüfte Ausnahme einen **kompakten Split-Hero mit bereits vorhandenem Kategorie-Vorschaubild** verwenden; kein separates neues Hero-Asset.
 - der lange Erklärungstext steht nicht oben, sondern am Seitenende.
 - direkte nächste Ebene vollständig sichtbar verlinken.
 - kleine Kartenfotos nur als Orientierung in den Verweisen; kein zweites großes Hero. Wo kein sinnvolles Kartenfoto vorhanden ist, thematisch passende unterschiedliche Icons statt eines identischen Welticons verwenden.
@@ -86,9 +86,9 @@ Kein Live-PASS ohne echten WordPress-Readback.
 ## Pilot Hub2 – Buch & Papier / 1.50.638
 Noch **keine portalweite Regel**, sondern Live-Pilot:
 - kurze klare Fotos für direkte Unterkategorien statt Icon-Wüste;
-- Desktop 2-spaltige Fotokarten, unter 1000 px 1-spaltig;
-- Claim `Papier kann mehr.`;
+- Desktop 3-spaltige Fotokarten, Tablet 2-spaltig, Mobil 1-spaltig;
+- Claim `Papier kann mehr.` mit wiederkehrendem CSS-Pinselstrich als möglichem Gestaltungsmotiv;
 - Reihenfolge: Unterkategorien → konkrete Produkte → 3 Beiträge → Affiliate-Banner → verkaufbarer Werbeplatz;
 - kein langer Seitenendtext auf diesem Hub2;
-- Performance: 5 Pilotfotos zusammen ca. 66 KB;
+- Performance: 5 Pilotfotos zusammen ca. 66 KB; Split-Hero verwendet zusätzlich ein bereits vorhandenes 45,9-KB-Kategorieasset, kein neues Hero-Bild;
 - andere Hub2-Seiten bleiben unverändert, bis der Pilot live abgenommen ist.
