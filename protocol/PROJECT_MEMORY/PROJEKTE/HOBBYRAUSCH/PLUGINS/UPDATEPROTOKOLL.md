@@ -2263,3 +2263,47 @@ SHA:
 LIVE:
 OFFEN. Nur Buch & Papier prüfen.
 
+---
+
+## PU-20261012-050 – HD-003 1.50.640 / Buch-&-Papier-Pilot Detailfix
+
+PILOT:
+Nur `Fertigen → Buch & Papier`.
+
+ÄNDERUNG:
+- Split-Hero wieder exakt in den normalen Body-Container gesetzt;
+- Text- und Bildachse stimmen mit den folgenden Inhaltsabschnitten überein;
+- Claim `Papier kann mehr.` mit Handschrift-Systemfontstack und dynamischerem Pinselstrich;
+- Hero verwendet weiterhin das vorhandene Kategorieasset;
+- Bild läuft links weich in Weiß aus;
+- Hero-Bild festes 600:320-Verhältnis und bleibt beim Öffnen des Aufklapptexts unverändert;
+- Kachelbildformat direkt aus Ebene 1 übernommen:
+  - Desktop 200×107;
+  - Tablet 165×88;
+  - Mobil 145×78;
+- 3/2/1-Kachelraster unverändert;
+- restliche Pilot-Reihenfolge unverändert.
+
+REGRESSION:
+- 852/852 Assets byteidentisch zu 1.50.639;
+- keine neuen Bilder;
+- Header/Nav/Ebene1/andere Hub2 unverändert;
+- Slot-/Taxonomie-/Architektur unverändert.
+
+TEST:
+- PHP 34/34 PASS;
+- ZIP PASS;
+- 1440: Hero-Left = Section-Left 120 px, 3+2 Kacheln, 200×107, Overflow 0;
+- 1024: Hero-Left = Section-Left 36 px, 2+2+1 Kacheln, 165×88, Overflow 0;
+- 760: Hero-Left = Section-Left 12 px, 1-spaltig, 145×78, Overflow 0;
+- Aufklapper geöffnet: Hero-Bild Delta Breite/Höhe jeweils 0.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.640_HOBBY_DEPOT_BUCH_PAPIER_BODY_ALIGN_FADE_BRUSH_LEVEL1_IMAGEFORMAT_LOCALPASS.zip`
+
+SHA:
+`588fa7fb961bc9cdf62a96f968a83034b072902c41eaddee5c92d09598ebe6bd`
+
+LIVE:
+OFFEN. Nur Buch & Papier prüfen.
+
