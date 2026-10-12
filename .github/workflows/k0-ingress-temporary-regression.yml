@@ -1,0 +1,101 @@
+name: K0 ingress temporary concurrency regression
+on:
+  push:
+    branches: [fix/k0-existing-ingress-persist-20261012]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Existing K0 contract and 17 concurrent event simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import concurrent.futures, json, os, pathlib, subprocess, tempfile, textwrap
+
+          def cmd(*args, cwd=None, ok=True, env=None):
+              p=subprocess.run(list(args),cwd=cwd,text=True,capture_output=True,env=env)
+              if ok and p.returncode:
+                  raise AssertionError(f"Command failed {args}: {p.stdout} {p.stderr}")
+              return p
+
+          wf=pathlib.Path('.github/workflows/k0-authoring-context.yml').read_text()
+          assert "group: k0-authoring-context-" in wf and "github.sha" in wf
+          assert "cancel-in-progress: false" in wf
+          assert "K0_WRITER_ALL_RULES_BOUND_BEFORE_WRITING" in wf
+          assert "K0_WRITER_JOB_PERSIST_CONFLICT_BLOCKED" in wf
+          assert "K0_WRITER_JOB_PERSISTED" in wf
+          assert wf.count('git commit -m "K0: prepare canonical writer job"') == 1
+          code=textwrap.dedent(wf.split('          for attempt in $(seq 1 24); do\n',1)[1])
+          code='for attempt in $(seq 1 24); do\n'+code
+          assert code.endswith('done\n')
+          assert "git push" in code and "git fetch origin" in code and "git -c rebase.autoStash=false rebase" in code
+          env=dict(os.environ,GITHUB_REF_NAME='main')
+
+          with tempfile.TemporaryDirectory() as tmp:
+              root=pathlib.Path(tmp)
+              remote=root/'remote.git'
+              seed=root/'seed'
+              cmd('git','init','--bare','-q','--initial-branch=main',str(remote))
+              cmd('git','init','-q','--initial-branch=main',str(seed))
+              cmd('git','config','user.name','K0 Test',cwd=seed)
+              cmd('git','config','user.email','k0test@example.invalid',cwd=seed)
+              (seed/'baseline.txt').write_text('canonical baseline\n')
+              cmd('git','add','.',cwd=seed)
+              cmd('git','commit','-qm','baseline',cwd=seed)
+              cmd('git','remote','add','origin',str(remote),cwd=seed)
+              cmd('git','push','-q','-u','origin','main',cwd=seed)
+
+              def clone(i):
+                  w=root/('worker-'+str(i))
+                  cmd('git','clone','-q',str(remote),str(w))
+                  cmd('git','config','user.name','K0 Test',cwd=w)
+                  cmd('git','config','user.email','k0test@example.invalid',cwd=w)
+                  d=w/'real_runs'/'k0'/('test-'+str(i))
+                  d.mkdir(parents=True)
+                  (d/'WRITER_JOB.json').write_text(json.dumps({'article_number':i}))
+                  cmd('git','add','.',cwd=w)
+                  cmd('git','commit','-qm','K0: prepare canonical writer job',cwd=w)
+                  return w
+
+              workers=[clone(i) for i in range(1,18)]
+              with concurrent.futures.ThreadPoolExecutor(max_workers=17) as pool:
+                  results=list(pool.map(lambda w:cmd('bash','-c',code,cwd=w,env=env,ok=False),workers))
+              bad=[(i+1,x.stdout[-1500:],x.stderr[-1500:]) for i,x in enumerate(results) if x.returncode]
+              assert not bad, f'Concurrent persistence failed: {bad}'
+              verify=root/'verify'
+              cmd('git','clone','-q',str(remote),str(verify))
+              for i in range(1,18):
+                  p=verify/'real_runs'/'k0'/('test-'+str(i))/'WRITER_JOB.json'
+                  assert json.loads(p.read_text()) == {'article_number':i},f'missing/changed {i}'
+              count=int(cmd('git','rev-list','--count','HEAD',cwd=verify).stdout.strip())
+              assert count==18,(count,18)
+              print('POSITIVE_17_CONCURRENT_EVENTS_ALL_PERSISTED')
+
+              # Negative test: differing data at the same immutable output path must block.
+              a=root/'conflict-a';b=root/'conflict-b'
+              for w in (a,b):
+                  cmd('git','clone','-q',str(remote),str(w))
+                  cmd('git','config','user.name','K0 Test',cwd=w)
+                  cmd('git','config','user.email','k0test@example.invalid',cwd=w)
+              artifact=pathlib.Path('real_runs/k0/duplicate/WRITER_JOB.json')
+              for w,contents in ((a,'{"job_id":"first"}'),(b,'{"job_id":"different"}')):
+                  p=w/artifact
+                  p.parent.mkdir(parents=True)
+                  p.write_text(contents)
+                  cmd('git','add','.',cwd=w)
+                  cmd('git','commit','-qm','K0: prepare canonical writer job',cwd=w)
+              cmd('git','push',cwd=a)
+              blocked=cmd('bash','-c',code,cwd=b,env=env,ok=False)
+              assert blocked.returncode!=0,blocked.stdout
+              assert "K0_WRITER_JOB_PERSIST_CONFLICT_BLOCKED" in blocked.stdout+blocked.stderr,(blocked.stdout,blocked.stderr)
+              after=root/'after'
+              cmd('git','clone','-q',str(remote),str(after))
+              assert (after/artifact).read_text()=='{"job_id":"first"}'
+              print('NEGATIVE_IMMUTABLE_DUPLICATE_BLOCKED_UNCHANGED')
+              print('K0_INGRESS_PERSISTENCE_REGRESSION_PASS')
+          PY
