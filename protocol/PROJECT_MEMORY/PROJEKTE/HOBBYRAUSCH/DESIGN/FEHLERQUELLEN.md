@@ -51,3 +51,23 @@ Fix:
 
 ## Aktuell erster Blocker
 **Live-Abnahme 1.50.631: Vorschaubilder + Logo/Claim/Navigationslinie.**
+
+## Arbeitsfehlerprotokoll 2026-10-12
+Die vollständige interne Fehler-/Lernakte dieses Designlaufs liegt dauerhaft hier:
+
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/ARBEITSFEHLERPROTOKOLL_20261012.md`
+
+Dort dokumentiert sind insbesondere:
+- falscher Repo-Kontext beim ersten Check;
+- 1.50.629 als Bildfix ausgegeben, obwohl die sichtbare Wirkung nicht ausreichend bewiesen war;
+- Regression einer bereits akzeptierten Navigation;
+- 1.50.630 mit fälschlich reaktiviertem v150623-Bildsatz und wiederkehrenden Szenen/Doppelbildern;
+- Verwechslung von SHA-Eindeutigkeit und visueller Eindeutigkeit;
+- zu frühe ZIP-Freigabe vor vollständiger Simulation;
+- nicht mittiger Claim durch `scaleX(1.06)`;
+- fehlender geometrischer Nachweis der gemeinsamen Logo-/Claim-/Navigationslinie;
+- unzureichendes Einfrieren bereits live akzeptierter Bereiche;
+- zeitweise zu starke Dokumentationsaussagen gegenüber dem tatsächlich bewiesenen Stand.
+
+Diese Akte ist Historie/Fehlerprävention. Aktueller Fehlerstatus bleibt ausschließlich in dieser `FEHLERQUELLEN.md`, aktueller Gesamtstatus/NEXT ACTION ausschließlich in `CURRENT_STATE.md`.
+
