@@ -2534,3 +2534,55 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-057 – HD-003 1.50.649 / reine Pferdeatelier-Textregeln + B&P-Layout + unterschiedliche Kindfotos
+
+LIVE-BEFUND 1.50.648:
+- zusätzlicher separater `Was du hier findest`-Block unter dem Fold;
+- mehrfach dasselbe Parent-/Hero-Motiv in Unterkategoriekarten;
+- kleine Kartenuntertitel nicht zuverlässig wie beim Buch-&-Papier-Stand.
+
+KORREKTUR:
+- Basis wieder 1.50.645;
+- Pferdeatelier **nur redaktionelle Textregeln** übernommen und separat im Designbüro gespeichert:
+  `DESIGN/TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`;
+- Texte 150–200 Wörter, natürlich, themenspezifisch, ohne Generator-/Padding-Sprache und ohne generische Schlussformel;
+- Darstellung bleibt B&P: sichtbarer Lead → `Mehr zu <Kategorie> erfahren` → Rest im Aufklapper;
+- kein zweiter Textblock;
+- jede vorhandene Hub2-Kindseite erhält Fotokarte + kleinen Untertitel;
+- Buch & Papier behält exakt seine fünf Motive/Unterzeilen;
+- alle anderen Hub2-Karten: eigenes Featured Image zuerst, sonst noch unbenutztes vorhandenes kontrolliertes Foto derselben Welt;
+- kein Parent-Hero als Universalbild;
+- Banner füllt nur freien Restplatz;
+- Produkte → 3 Beiträge → Werbeplatz → Ende.
+
+PERFORMANCE / REGRESSION:
+- 0 neue Bildassets;
+- 859/859 Assets byteidentisch zu 1.50.645;
+- Header/Nav/Ebene1 unverändert;
+- keine Taxonomie-/Architekturänderung;
+- Kartenbilder lazy.
+
+TEST:
+- reale Zielhierarchie: 65 Hub2-Seiten / 328 direkte Kindseiten;
+- 65/65 Claims und Heroassets;
+- generierte Texte 157–176 Wörter;
+- 328/328 Kindseiten mit Foto + Untertitel;
+- je Hub2-Seite keine doppelte Foto-URL;
+- PHP 52/52 PASS;
+- ZIP PASS;
+- Release-Chain vollständig V150649;
+- Browser 1440/1024/900/760 Overflow 0;
+- Bild/Slot Δ 0;
+- Aufklappen verändert Hero-Dimension nicht.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
+
+SHA:
+`a374a3003e5842f2517095e74e178765a31fdf42ae2c5a721027acd79d80975c`
+
+LIVE:
+OFFEN.
+
