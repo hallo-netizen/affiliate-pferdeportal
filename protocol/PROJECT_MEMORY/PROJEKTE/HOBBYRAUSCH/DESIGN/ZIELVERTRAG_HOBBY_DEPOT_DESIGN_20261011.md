@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.9 / 2026-10-12
+FASSUNG: 3.0 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -45,13 +45,13 @@ FASSUNG: 2.9 / 2026-10-12
 
 ## Kategorieebene 2 / Hub2
 - Breadcrumb oben.
-- H1 + kurzer Orientierungstext direkt oben.
+- H1 + natürlicher, gut lesbarer Orientierungstext direkt oben; auf Hub2 nicht nur ein kurzer Teaser, sondern mehrere vollständige Sätze nach dem bewährten Kategorie-Textprinzip.
 - **kein Hero-Foto auf Ebene 2**.
 - der lange Erklärungstext steht nicht oben, sondern am Seitenende.
 - direkte nächste Ebene vollständig sichtbar verlinken.
-- kleine Kartenfotos nur als Orientierung in den Verweisen; kein zweites großes Hero.
+- kleine Kartenfotos nur als Orientierung in den Verweisen; kein zweites großes Hero. Wo kein sinnvolles Kartenfoto vorhanden ist, thematisch passende unterschiedliche Icons statt eines identischen Welticons verwenden.
 - Affiliate-Banner als eigener Bereich **nach** der nächsten Ebene, nicht als Füller zwischen Kategorien.
-- danach passende Artikelvorschau.
+- danach passende Artikelvorschau; auf Hub2 bis zu vier Beiträge mit Beitragsbild.
 - danach konkrete Affiliate-Produkte passend zum aktuellen Hub2-Kontext.
 - danach genau ein direkt verkaufbarer Werbeplatz.
 - danach längerer redaktioneller Erklärungstext.
