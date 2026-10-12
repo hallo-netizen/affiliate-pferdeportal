@@ -148,3 +148,42 @@ Kein "behoben"/"PASS" ohne die jeweils erforderliche Stufe.
 7. Downloadkandidat erst nach Positiv-, Negativ- und Regressionstest ausgeben.
 8. Lokalen Technik-PASS niemals als Live-PASS formulieren.
 9. Bei Nutzerforderung "nicht raten" keine Annahme aus früheren Versionstexten als Ersatz für eine reale Prüfung verwenden.
+
+## AF-011 – 1.50.632 ohne echte Karten-CSS-Simulation freigegeben
+FEHLER:
+1.50.632 wurde mit der Aussage ausgegeben, der Rahmen sei entfernt. Im tatsächlich wirksamen CSS blieb jedoch die eingerückte Kategorie-Bildbox aktiv, unter anderem mit `margin:9px 0 9px 9px`, Hintergrund und Radius.
+
+FOLGE:
+Live blieb der sichtbare Rahmen/Passepartout-Effekt bestehen.
+
+URSACHE:
+Nur die Bildbindung wurde geprüft; die endgültig berechnete CSS-Kaskade der Kategoriekarte wurde vor Ausgabe nicht im Browser simuliert.
+
+VERMEIDUNGSREGEL:
+Kein Karten-/Layout-Fix ohne Render-Simulation der finalen CSS-Kaskade. Pflichtprüfung: Slot-Rechteck gegen Bild-Rechteck; Margin/Padding/Border müssen bei "kein Rahmen" tatsächlich 0 sein.
+
+## AF-012 – Trotz ausdrücklicher Forderung erneut einen zu schnell geprüften Build ausgegeben
+FEHLER:
+Nach der ausdrücklichen Vorgabe, keine ungetesteten Schnellschuss-ZIPs mehr auszugeben, wurde 1.50.632 dennoch vor vollständiger Karten-Simulation freigegeben.
+
+URSACHE:
+Die gewünschte sichtbare Wirkung wurde erneut aus Quelltextänderungen abgeleitet statt vollständig im gerenderten Ergebnis geprüft.
+
+VERMEIDUNGSREGEL:
+Bei Designänderungen gilt verbindlich:
+Änderung → echte Assets laden → finale CSS-Kaskade rendern → Pflicht-Viewports simulieren → bereits akzeptierte Bereiche regressionsprüfen → erst dann ZIP erzeugen/ausgeben.
+
+## AF-013 – Bildanforderung zu lange mit technischen Ersatzmaßnahmen statt echter Motivprüfung behandelt
+FEHLER:
+Die Anforderung "Szenerie weiter raus, Hauptmotiv klar, wenig Zeug drumherum" wurde zeitweise mit Crops, alten Bildserien oder künstlicher Bildumfelderweiterung beantwortet, statt jedes aktive Kategorie-Vorschaubild auf die eigentliche visuelle Anforderung zu prüfen.
+
+VERMEIDUNGSREGEL:
+Für Kategorie-Vorschaubilder ist der visuelle Zweck die Autorität:
+- klare Szene;
+- erkennbares Hauptmotiv;
+- weiter gefasst;
+- wenig konkurrierende Elemente;
+- keine künstliche Rahmung;
+- Hero-Bilder unberührt.
+Technische Dateieindeutigkeit allein ist kein Qualitäts-PASS.
+
