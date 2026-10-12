@@ -4,30 +4,27 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.635`
+`1.50.636`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.636_HOBBY_DEPOT_HUB2_REFINEMENT_TEST_POSTS_LOCALPASS.zip`
 
 SHA-256:
-`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
+`d8d45997b136cd7d95e0a790f88dfbb4b3207a29b5b644e415b1ac8e0a72007a`
 
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE-PASS HUB2 OFFEN.
+LOCAL HARD PASS / LIVE HUB2 OFFEN.
 
 PASS:
-- PHP 19/19;
+- PHP 22/22;
 - ZIP;
-- Hub2 Reihenfolge und responsive Simulation 1440/1024/760;
-- 0 horizontaler Overflow;
-- 847/847 Assets gegenüber 1.50.634 byteidentisch;
-- Hero/Header/Nav/Ebene1 eingefroren.
+- 847/847 Assets byteidentisch zu 1.50.635;
+- Header/Nav/Hero/Ebene1 unverändert;
+- Hub2 1440/1024/760 Overflow 0;
+- 4 Testbeiträge + Featured-Image-Seedcode lokal geprüft.
 
 LIVE:
-Hub2 offen.
+Hub2 + Testbeiträge offen.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
-
-Der exakte 1.50.635-Kandidat wurde lokal erzeugt und geprüft.
-Keine falsche CURRENT.zip angelegt.
