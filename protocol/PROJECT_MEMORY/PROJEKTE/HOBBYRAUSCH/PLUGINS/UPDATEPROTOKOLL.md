@@ -2037,3 +2037,47 @@ SHA:
 LIVE:
 Nur Kategorie-Vorschaubilder offen.
 
+---
+
+## PU-20261012-045 – HD-003 1.50.635 / Kategorieebene 2
+
+AUSGANG:
+Ebene 1 wird vorerst akzeptiert. Navigation/Header/Hero/Ebene1 sind eingefroren.
+
+ÄNDERUNG NUR HUB2:
+- kein Hero-Foto;
+- H1 + kurzer Orientierungstext oben;
+- reale nächste Ebene zuerst;
+- Affiliate-Banner danach als eigener Bereich;
+- Artikelvorschau;
+- konkrete `category_product_1..3`-Produkte;
+- genau ein direkt verkaufbarer Werbeplatz;
+- längerer Erklärungstext am Seitenende.
+
+PRODUKTLOGIK:
+Mit zunehmender Tiefe werden nicht einfach mehr Produkte eingeblendet, sondern konkretere Slotbelegungen für den aktuellen Seitenkontext verwendet.
+
+REGRESSION:
+- 847/847 Assets byteidentisch zu 1.50.634;
+- Hero-Dateien unverändert;
+- Header/Nav unverändert;
+- Ebene 1 unverändert;
+- keine Taxonomie-/Architekturänderung.
+
+TEST:
+- PHP 19/19 PASS;
+- ZIP-Integrität PASS;
+- Hub2-DOM-Simulation 1440/1024/760 PASS;
+- Reihenfolge: nächste Ebene → Banner → Beiträge → Produkte → Werbeplatz → Langtext;
+- kein horizontaler Overflow;
+- kein Hub2-Hero in der Simulation.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
+
+SHA:
+`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
+
+LIVE:
+OFFEN. Nach Installation echte Hub2-Seite prüfen.
+
