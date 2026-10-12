@@ -3,53 +3,61 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.634 LOCAL HARD PASS / WORDPRESS-LIVE BILDABNAHME OFFEN**
+STATUS: **1.50.635 LOCAL HARD PASS / WORDPRESS-LIVE HUB2 OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
 
 SHA-256:
-`b7347fd4925fb201165b8763ae8ae2f054811dfcb38a167cd6dee04b4f728b75`
-
-Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
+`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
 
 ## Live bestätigt / eingefroren
+- Ebene 1 wird vorerst akzeptiert; Kategorie-Vorschaubilder nicht perfekt, aber keine weitere Bildrunde jetzt;
 - Hauptnavigation: PASS;
-- Logo/Claim/Navigationsstand aus 1.50.631: PASS, nicht weiter verändern;
-- Hero-Bilder: nicht Teil dieser Korrektur, unverändert;
+- Logo/Claim/Navigationslinie: PASS;
+- Hero-Bilder Ebene 1: unverändert / nicht anfassen;
 - Hero-Texte Ebene 1: PASS;
 - Seitenendtexte Ebene 1 mit maximal drei internen Links: PASS.
 
-## Letzter Live-Fehler
-Kategorie-Vorschaubilder:
-- sichtbarer Rahmen/Passepartout durch eingerückte Bildbox;
-- Bildwirkung weiterhin teilweise zu nah und zu voll;
-- 1.50.632 war kein belastbarer Bildfix.
+## Delta 1.50.635 – nur Kategorieebene 2 / Hub2
+Oben:
+- Breadcrumb;
+- H1 + kurzer Orientierungstext;
+- **kein Hero-Foto**.
 
-## Delta 1.50.634
-Nur Kategorie-Vorschaubilder Ebene 1:
-- 65 kontrollierte aktive Vorschauassets;
-- weiter gefasste, visuell geprüfte Szenen;
-- klare Hauptmotive, weniger konkurrierende Randdetails;
-- kein künstliches Bild-im-Bild / kein Canvas-Rahmen;
-- finale CSS-Regel: Vorschau füllt ihren Bildslot ohne Margin/Padding/Border/Radius;
-- Desktop 200×107, Tablet 165×88, Mobile 145×78;
-- kein Hub1-Fallback auf alte WordPress Featured Images;
-- Hero-Assets byte-identisch zu 1.50.631;
-- Header-/Navigationsrendering gegenüber 1.50.631 unverändert bis auf Releasekennung.
+Danach feste Reihenfolge:
+1. Verweise auf die reale nächste Ebene;
+2. separater Affiliate-Banner;
+3. passende Artikelvorschau;
+4. konkrete Affiliate-Produkte für den aktuellen Hub2-Kontext;
+5. genau ein direkt verkaufbarer Werbeplatz;
+6. längerer redaktioneller Erklärungstext am Seitenende.
+
+Monetarisierung:
+- Hub2 verwendet die `category_product_1..3`-Slots statt der breiteren Hub1-Produkte;
+- dadurch wird die Produktbelegung mit zunehmender Tiefe konkreter;
+- Produkte stehen nicht im Unterkategorie-Raster;
+- Banner steht als eigener Bereich nach der nächsten Ebene;
+- öffentlich leere Affiliate-Slots bleiben unsichtbar, eingeloggte Vorschau bleibt möglich.
+
+## Unverändert
+- komplette Asset-Sammlung: **847/847 Dateien byteidentisch zu 1.50.634**;
+- alle Hero-Dateien byteidentisch;
+- Header-/Navigation-CSS unverändert;
+- Ebene 1 unverändert;
+- Taxonomie/Architektur/HD-001/HD-004 unverändert;
+- Affiliate-Zentrale bleibt Slot-/Monetarisierungsautorität.
 
 ## Lokal geprüft / simuliert
-- PHP 16/16 PASS;
+- PHP: **19/19 PASS**;
 - ZIP-Integrität PASS;
-- 65 aktive Kategorie-Vorschaubilder;
-- 65/65 SHA-eindeutig;
-- aktive Bildquellen: 48× v150629, 11× visuell geprüfte weitere v150623-Szenen, 6× v150616;
-- kompletter Kartenbereich mit echten Assets simuliert:
-  - 1440 px: 200×107, Rahmengeometrie 0;
-  - 930 px: 165×88, Rahmengeometrie 0;
-  - 760 px: 145×78, Rahmengeometrie 0;
-- keine Änderung an Hero-Dateien.
+- aktive V150635-Klasse/Templates PASS;
+- Hub2: 0 Hero-Fotos im simulierten Pfad;
+- DOM-Reihenfolge 1440 / 1024 / 760 PASS:
+  nächste Ebene → Banner → Beiträge → Produkte → Werbeplatz → Langtext;
+- horizontaler Overflow: 0 bei 1440 / 1024 / 760;
+- Asset-Regression: 847/847 byteidentisch;
+- neue CSS-Regeln enthalten keine Header-/Nav-/Logo-/Hero-Selektoren.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.634 installieren und live nur die Kategorie-Vorschaubilder prüfen. Bei PASS direkt nächste Kategorieebene.**
+**1.50.635 installieren und live eine reale Hub2-Seite prüfen. Bei PASS danach auf Kategorieebene 3 weitergehen.**
