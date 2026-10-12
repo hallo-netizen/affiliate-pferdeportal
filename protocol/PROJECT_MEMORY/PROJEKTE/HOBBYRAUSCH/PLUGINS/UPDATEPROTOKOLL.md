@@ -1963,3 +1963,10 @@ PHP 10/10; ZIP PASS; 65/65 Bildassets SHA-eindeutig; 8/8 Langtexte genau 3 Links
 
 LIVE:
 OFFEN.
+
+
+ABSCHLUSSCHECK 2026-10-12:
+- exaktes Artefakt lokal erneut SHA-/ZIP-/Versions-/PHP-geprüft;
+- SHA identisch zur Current: `2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`;
+- isolierte Campus-Ausgabekopie `CURRENT.zip` fehlt (GitHub 404);
+- mangels sicherem Binärschreibweg in diesem Abschlusslauf keine falsche Ersatzdatei erzeugt.
