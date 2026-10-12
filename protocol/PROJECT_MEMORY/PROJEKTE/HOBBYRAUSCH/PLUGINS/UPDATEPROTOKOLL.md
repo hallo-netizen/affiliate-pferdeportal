@@ -1813,3 +1813,32 @@ PHP 10/10; ZIP PASS; Playwright 1600/1024/960/800; overflow 0; Flyout-POS PASS.
 
 NEXT:
 nur Header live prüfen.
+
+
+---
+
+## PU-20261012-038 – HD-003 1.50.623
+
+VON / AUF:
+1.50.622 → 1.50.623.
+
+ÄNDERUNG:
+Header unverändert. Bildkarten auf allen acht ersten Welt-Hubs vervollständigt.
+
+ABDECKUNG:
+Gestalten 7, Fertigen 11, Technik 9, Forschen 5, Pflanzen 10, Tiere 7, Bewegen 8, Sammeln 8 = **65 direkte Unterkategorien**.
+
+REGEL:
+Featured Image zuerst; sonst dediziertes lokales 600×320-Motiv; kein mehrfaches Parent-Hero als Universalersatz.
+
+TEST:
+PHP 10/10 PASS; ZIP PASS; 65/65 Pfade; 65/65 Bilder geladen; 1600/1200/1024/900/760 ohne horizontalen Overflow.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+
+SHA:
+`0b5021854f5bbb1a3ab35bcba0fc14bd522cb6679b4299276029a0f8a87b25f7`
+
+LIVE:
+OFFEN.
