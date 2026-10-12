@@ -1999,3 +1999,41 @@ PHP 10/10; ZIP PASS; V150629 Binding PASS; 65/65 Bilder 600×320; 65/65 SHA-eind
 
 LIVE:
 Nur Kategorie-/Link-Bilder offen.
+
+---
+
+## PU-20261012-044 – HD-003 1.50.634
+
+LIVE-BEFUND:
+- Navigation/Header: PASS und eingefroren;
+- Hero-Bilder: nicht betroffen;
+- Kategorie-Vorschaubilder: Rahmen/Passepartout weiterhin sichtbar; Motive teilweise zu nah/zu voll;
+- 1.50.632 damit verworfen.
+
+KORREKTUR:
+- nur Kategorie-Vorschaubilder Ebene 1;
+- 65 aktive, visuell geprüfte Motive;
+- 48× v150629, 11× gezielt ausgewählte weitere v150623-Szenen, 6× v150616;
+- kein globaler Rückfall auf alte Bildserie;
+- kein Hub1-Fallback auf Featured Images;
+- finale Bildbox ohne Margin/Padding/Border/Radius;
+- Hero-Dateien unverändert;
+- Navigation/Header unverändert.
+
+SIMULATION:
+- 1440 px: 200×107, Rahmengeometrie 0;
+- 930 px: 165×88, Rahmengeometrie 0;
+- 760 px: 145×78, Rahmengeometrie 0;
+- PHP 16/16 PASS;
+- ZIP PASS;
+- 65/65 aktive Bilder SHA-eindeutig.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
+
+SHA:
+`b7347fd4925fb201165b8763ae8ae2f054811dfcb38a167cd6dee04b4f728b75`
+
+LIVE:
+Nur Kategorie-Vorschaubilder offen.
+
