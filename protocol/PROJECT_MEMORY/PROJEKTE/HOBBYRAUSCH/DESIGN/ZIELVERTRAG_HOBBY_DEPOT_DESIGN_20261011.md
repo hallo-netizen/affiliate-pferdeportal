@@ -1,56 +1,56 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.2 / 2026-10-12
+FASSUNG: 2.3 / 2026-10-12
 
 ## Header / Navigation
-- Logo unverändert und linksbündig. Die Bilddatei bleibt byteidentisch; Halbkreis/dein, HOBBY DEPOT und Claim werden aus demselben Asset getrennt dargestellt und vertikal deutlich entzerrt.
-- Header als echtes 2-Spalten-System: links der Logo-Block über beide Zeilen; rechts oben das Suchfeld, rechts unten die Navigation.
-- Navigation sitzt nur im rechten Bereich unter dem Suchfeld; sie läuft nicht unter dem Logo. Alle 8 Welten besitzen dieselbe Grundlinie.
-- >1000 px: 8 Welten in einer Reihe. Das Suchfeld liegt vertikal exakt auf der HOBBY-DEPOT-Wortmarkenlinie. Navigationsicons entfallen; Text + Pfeil bleiben.
-- 761–1000 px: 8 Welten in 4×2.
+- Logo unverändert und linksbündig. Die Bilddatei bleibt byteidentisch; Halbkreis/dein, HOBBY DEPOT und Claim werden aus demselben Asset getrennt dargestellt und vertikal entzerrt.
+- Header als 2-Spalten-System: links Logo; rechts Suchfeld + Navigation.
+- Suchfeld liegt auf der HOBBY-DEPOT-Wortmarkenlinie.
+- Navigation liegt rechts **direkt an der unteren Headerkante**.
+- Ab 761 px: alle 8 Welten **in exakt einer horizontalen Zeile und auf derselben Baseline**, einschließlich Sammeln.
 - <761 px: Mobilmenü.
-- Flyouts per Hover/Fokus/Klick.
-- Flyouts am ausgelösten Weltpunkt verankert.
+- Navigationsicons entfallen; Text + Pfeil bleiben.
+- Flyouts per Hover/Fokus/Klick und viewport-sicher.
 
 ## Hub-/Unterkategorie-Karten
-- obere Hubebenen dürfen Fotos verwenden.
-- Bildbereich einheitliches Querformat.
-- Bild füllt komplette Bildfläche.
-- Gestalten: 7 unterschiedliche passende Motive.
-- **kein technischer Eyebrow „Nächste Ebene“**.
-- natürliche Überschrift bleibt: `Weiter in <Welt>` bzw. `Weitere Kategorien`.
-- Kartentitel 15 px.
-- Untertitel 12 px und nur bei echtem Orientierungswert.
-- keine generischen Fülltexte.
-- Taxonomie-Untertitel maximal 7 Wörter.
+- alle bildtragenden Hub-Karten folgen demselben Bildprinzip:
+  - **ein klares Hauptmotiv / eine klare Tätigkeit**;
+  - ruhiger Ausschnitt;
+  - deutlich weniger Nebenmotive;
+  - einheitliches Querformat 600×320;
+  - keine visuell doppelten/nahezu identischen Bilder innerhalb des aktiven Hub-Bildbestands.
+- Für die acht ersten Welt-Hubs sind alle 65 direkten Unterkategorien mit kontrollierten Motiven belegt.
+- Bei diesen 65 Karten hat das kontrollierte Designasset **Vorrang vor WordPress Featured Images**, damit alte Live-Featured-Images keine Wiederholungen mehr erzwingen.
+- Bei tieferen Ebenen darf ein echtes eigenes Featured Image verwendet werden, sofern kein kontrolliertes Designasset existiert.
+- Kein Parent-/Hero-Bild als mehrfacher Universalersatz.
+- natürliche Überschrift: `Weiter in <Welt>` / `Weitere Kategorien`.
+- Kartentitel 15 px; Untertitel 12 px nur mit echtem Orientierungswert; kein Fülltext.
+
+## Monetarisierung im Kategorienraster
+- Affiliate-Produkte stehen **nicht** zwischen Unterkategorie-Reihen.
+- Nur ein Affiliate-Banner darf die letzte unvollständige 3er-Reihe ergänzen:
+  - Rest 1 Kategorie → Banner 2 Kartenbreiten;
+  - Rest 2 Kategorien → Banner 1 Kartenbreite;
+  - Rest 0 → Banner als volle eigene Zeile.
+- Produkte bleiben außerhalb des Kategorie-Rasters als natives Empfehlungsmodul.
+- öffentlich leer unsichtbar; eingeloggt leer sichtbar.
 
 ## Bestehende Bindungen
 - Hero/Fold ohne Textdoppelung.
-- Affiliate-Produkte stehen **nicht** zwischen Unterkategorie-Reihen. Nur ein Affiliate-Banner darf freie Restplätze der letzten unvollständigen 3er-Reihe füllen. Produkte bleiben als eigenes natives Empfehlungsmodul außerhalb des Unterkategorie-Rasters.
-- Direktwerbung bleibt ein Foto + Brush + heller CTA.
-- keine Taxonomie-/Workflowänderung durch Design.
+- Direktwerbung: maximal ein Platz, ein Foto, Brush-Headline, heller CTA.
+- keine Taxonomie-/Workflow-/Provideränderung durch Design.
+- HD-001/HD-004 bleiben Kategorie-/Runtime-Autorität; Affiliate-Zentrale bleibt Monetarisierungsautorität.
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
 
-
-## Hub-Bebilderung – Ergänzung 2026-10-12
-
-- Alle acht ersten Welt-Hubs zeigen Bilder in ihren direkten Unterkategorie-Karten.
-- echtes Child-Featured-Image hat Vorrang;
-- fehlt es, nutzt das Design ein dediziertes lokales 600×320-Motiv für genau diese Unterkategorie;
-- kein komplettes Parent-Weltbild darf mehrfach als Universalersatz erscheinen;
-- tiefe Ebenen bleiben weiterhin von der vorhandenen Featured-Image-/Designlogik abhängig; keine Bildpflicht ohne belastbares Motiv.
-
-
-## Banner-Füllregel – 2026-10-12
-
-- Unterkategorie-Raster bleibt redaktionell sauber.
-- Affiliate-Produkte dürfen keine Kategorieplätze ersetzen.
-- Wenn die letzte 3er-Reihe unvollständig ist, darf **ein Bannerplatz** die freie Restbreite füllen:
-  - Rest 1 Kategorie → Banner spannt 2 Kartenbreiten;
-  - Rest 2 Kategorien → Banner spannt 1 Kartenbreite.
-- Bei vollständig gefüllten 3er-Reihen darf der Banner als volle eigene Zeile folgen.
-- Produkte werden außerhalb des Kategorie-Rasters als natives Empfehlungsmodul gerendert.
-- Auf den 65 direkten ersten Hub-Unterkategorien dürfen keine identischen Bilddateien verwendet werden.
+Lokaler Pflichtcheck:
+- PHP/ZIP;
+- 65/65 Bildpfade;
+- 65/65 unterschiedliche Datei-Hashes;
+- zusätzlich Perceptual-Hash-Prüfung gegen visuelle Duplikate;
+- Featured-Image-Override-Test;
+- Navigation 1600/1200/1024/900/800/761: 8 Items eine Baseline, Sammeln eingeschlossen, kein horizontaler Overflow;
+- 760: Mobilepfad;
+- Flyout Sammeln viewport-sicher.
