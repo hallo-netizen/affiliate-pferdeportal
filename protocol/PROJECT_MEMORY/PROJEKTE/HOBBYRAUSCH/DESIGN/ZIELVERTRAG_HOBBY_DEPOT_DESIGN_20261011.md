@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.7 / 2026-10-12
+FASSUNG: 2.8 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -14,6 +14,7 @@ FASSUNG: 2.7 / 2026-10-12
 - <761 px: Mobilmenü.
 - Navigationsicons entfallen; Text + Pfeil bleiben.
 - Flyouts per Hover/Fokus/Klick und viewport-sicher.
+- Der aktuell live bestätigte Header-/Navigationsstand ist eingefroren und darf durch reine Bildkorrekturen nicht verändert werden.
 
 ## Acht Hauptwelten – Hero
 - Jede Hauptwelt besitzt einen eigenen, natürlichen Hero-Text.
@@ -22,6 +23,7 @@ FASSUNG: 2.7 / 2026-10-12
 - Text sagt in einfachen Worten, was der Nutzer dort findet.
 - alle acht Texte inhaltlich verschieden.
 - kein `Mehr über <Welt> erfahren`-Accordion auf Hauptwelten.
+- Hero-Bilder sind von der aktuellen Kategorie-Vorschaubildkorrektur ausdrücklich ausgenommen und bleiben unverändert.
 
 ## Acht Hauptwelten – Text am Seitenende
 - jede Hauptwelt endet mit einem längeren eigenständigen redaktionellen Text;
@@ -44,7 +46,9 @@ FASSUNG: 2.7 / 2026-10-12
 - keine identischen oder visuell nahezu identischen Motive;
 - kontrolliertes Designasset vor WordPress Featured Images;
 - auf Hub Ebene 1 kein Rückfall auf alte mehrfach verwendete Featured Images;
-- kein Parent-/Hero-Bild als Universalersatz.
+- kein Parent-/Hero-Bild als Universalersatz;
+- die Kategorie-Vorschau füllt ihren vorgesehenen Bildslot vollständig: **kein inset, kein Passepartout, kein künstlicher Rahmen, kein Bild-im-Bild**;
+- Bildslot selbst ohne zusätzlichen Innenabstand, sichtbaren Hintergrundsaum oder dekorativen Radius um das Foto;
 - Die sichtbare Bildfläche in den Karten muss groß genug sein, dass das Motiv sofort erkennbar ist; keine winzigen Thumbnails.
 
 ## Karten
