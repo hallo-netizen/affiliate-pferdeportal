@@ -4,13 +4,13 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.623`
+`1.50.624`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
 
 SHA-256:
-`0b5021854f5bbb1a3ab35bcba0fc14bd522cb6679b4299276029a0f8a87b25f7`
+`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
@@ -18,11 +18,11 @@ LOCAL HARD PASS / LIVE-PASS OFFEN.
 PASS:
 - PHP 10/10;
 - ZIP;
-- 65/65 direkte Hub-Kategorien bebildert;
-- 600×320;
-- Featured-Image-Priorität;
-- kein Parent-Hero-Universal-Fallback;
-- lokale Browser-Simulation 1600/1200/1024/900/760 ohne Overflow.
+- Nav bottom:0;
+- Produkte nicht im Unterkategorie-Raster;
+- Banner-Restfüllung;
+- 65/65 aktive Bilder eindeutig;
+- keine doppelten Subcategory-Asset-Hashes.
 
 LIVE:
 offen.
