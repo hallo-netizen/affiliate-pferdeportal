@@ -4,28 +4,23 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.625`
+`1.50.626`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
 
 SHA-256:
-`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
+`74cd55b87a608287ff4f4d7d3d7f3f80aa84dd478b8f675ab136e297064a54ea`
 
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE-PASS OFFEN.
+CRITICAL-HOTFIX LOCAL HARD PASS / LIVE-PASS OFFEN.
 
 PASS:
 - PHP 10/10;
 - ZIP;
-- neue aktive V150625-Klasse/Templates;
-- 65× 600×320;
-- 65 eindeutige SHA-256;
-- dHash-Minimalabstand 96;
-- kontrolliertes Asset gewinnt gegen WP Featured Image;
-- Navigation 761+ eine Baseline inkl. Sammeln;
-- 0 horizontaler Overflow bei 1600/1200/1024/900/800/761;
-- Sammeln-Flyout viewport-safe.
+- Main/Klasse/Router/Templates konsistent V150626;
+- fehlende Hobby-Klassenreferenzen 0;
+- alte V150624/V150625 aktive Klassenreferenzen 0.
 
 LIVE:
 offen.
