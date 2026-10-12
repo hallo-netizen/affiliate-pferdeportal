@@ -2170,3 +2170,50 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-048 – HD-003 1.50.638 / Buch-&-Papier-Hub2-Pilot
+
+PILOT:
+Nur `Fertigen → Buch & Papier`.
+
+ÄNDERUNG:
+- Claim `Papier kann mehr.`;
+- fünf neue kleine klare Fotomotive für Buchbinden, Marmorpapier, Papierherstellung, Stempel schnitzen und Zines;
+- 2-spaltige Fotokarten Desktop, 1-spaltig unter 1000 px;
+- kurze individuelle Unterzeilen;
+- Produkte direkt nach Unterkategorien;
+- danach 3 größere Beiträge;
+- danach Affiliate-Banner;
+- danach Werbeplatz;
+- kein Seitenendtext auf dem Pilot-Hub2.
+
+PERFORMANCE:
+- 5 neue WebP, jeweils 600×320;
+- zusammen 66.054 Bytes;
+- lazy loading im Kartenpfad.
+
+REGRESSION:
+- vorhandene Asset-Dateien aus 1.50.637 geändert: 0;
+- Header/Nav/Hero/Ebene1 unverändert;
+- alle anderen Hub2-Seiten unverändert;
+- keine Slot-/Taxonomie-/Architekturänderung.
+
+TEST:
+- PHP 28/28 PASS;
+- ZIP PASS;
+- Pilot-Gate ausschließlich `buch-papier`;
+- Simulation 1440/1024/760: Overflow 0;
+- Reihenfolge Kategorien → Produkte → Beiträge → Banner → Werbeplatz PASS;
+- kein Seitenendtext PASS;
+- alle simulierten Bilder geladen.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.638_HOBBY_DEPOT_BUCH_PAPIER_PILOT_PHOTO_PRODUCT_FIRST_LOCALPASS.zip`
+
+SHA:
+`44f32edd6158b5b82452c837ffe1534008b6cbfb50e7c7da6fcd72da319e0f7a`
+
+LIVE:
+OFFEN. Nur Buch & Papier prüfen.
+
