@@ -75,9 +75,6 @@ Simulation mit echten Assets:
 
 **Live-Abnahme 1.50.635 auf einer realen Kategorieebene-2-/Hub2-Seite.**
 
-## Aktuell erster Blocker
-**Live-Abnahme 1.50.637: individueller Claim, aufklappbarer oberer Text und 4 Testbeiträge auf derselben Hub2-Seite.**
-
 ## Arbeitsfehlerprotokoll
 Dauerhafte interne Fehler-/Lernakte:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/ARBEITSFEHLERPROTOKOLL_20261012.md`
@@ -100,6 +97,28 @@ FIX 1.50.637:
 TEST:
 PHP-Harness ohne gleichnamige Beitragskategorie → 4 Demo-Karten PASS.
 
+## HRD-065 – Hub2-Bildkarten 1.50.641–1.50.643 nicht 1:1 aus Ebene 1 übernommen
+STATUS: **LOCAL CLOSED 1.50.644 / LIVE OFFEN**
+
+LIVE-BEFUND:
+Trotz mehrfacher Teilfixes blieben Buch-&-Papier-Karten optisch falsch; 1.50.643 änderte zusätzlich die gewünschte 3er-Struktur in der realen Ansicht.
+
+ROOT CAUSE:
+Es wurde weiter ein eigener `hd-bp-card`-/`hd-bp-photo`-Sonderweg gepflegt, obwohl die bereits korrekte Ebene-1-Lösung vollständig vorhanden war. Dadurch kollidierten Pilotregeln mit der bestehenden Kartenkaskade.
+
+FIX 1.50.644:
+Der Pilot-Sonderweg für Karten/Bilder ist im aktiven Markup entfernt. Buch & Papier nutzt jetzt exakt `hd-next-grid`, `hd-next-card has-photo`, `hd-next-photo`, `hd-next-card-body`, `hd-next-copy` und `hd-row-size-*` wie Ebene 1.
+
+BEWEIS:
+Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
+- 1440: 3+2;
+- 900: 2+2+1;
+- 760: 1-spaltig;
+- Bildslot/Card-Border-Geometrie flush 0;
+- Bild/Slot Δ 0;
+- kein Overflow.
+
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.637: individueller Claim, aufklappbarer oberer Text und 4 Testbeiträge auf derselben Hub2-Seite.**
+**Live-Abnahme 1.50.644: Header-Claim-Dicke + Buch-&-Papier-Unterkategoriekarten.**
 
