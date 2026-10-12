@@ -1842,3 +1842,30 @@ SHA:
 
 LIVE:
 OFFEN.
+
+
+---
+
+## PU-20261012-039 – HD-003 1.50.624
+
+ÄNDERUNG:
+- Navigation final an untere Headerkante gebunden;
+- keine Affiliate-Produkte mehr zwischen Unterkategorie-Reihen;
+- Banner füllt freie Restplätze der letzten 3er-Reihe;
+- Produkte außerhalb des Kategorie-Rasters;
+- alle 65 aktiven direkten Hub-Bilder eindeutig.
+
+BILDER:
+65 aktive Bilder / 65 eindeutige SHA-256-Hashes. Doppelung Genuss ↔ Essbare Pflanzen beseitigt. Unbenutzte Alias-Duplikate entfernt.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
+
+SHA:
+`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
+
+LOCAL:
+PHP 10/10; ZIP PASS; Raster-/Hash-/Strukturchecks PASS.
+
+LIVE:
+OFFEN.
