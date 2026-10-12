@@ -2366,3 +2366,43 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-053 – HD-003 1.50.644 / Ebene-1-Kartenpfad übernommen
+
+LIVE-BEFUND 1.50.643:
+- Header-Claim weiterhin nicht sichtbar kräftiger;
+- Buch-&-Papier-Kategoriebilder/Karten weiterhin falsch;
+- reale Kartenanordnung verschlechtert.
+
+ROOT CAUSE:
+Pilot nutzte weiterhin eigene `hd-bp-card`-/`hd-bp-photo`-Regeln statt den bereits funktionierenden Ebene-1-Pfad.
+
+KORREKTUR:
+- Pilot verwendet jetzt 1:1 `hd-next-grid`, `hd-next-card has-photo`, `hd-next-photo`, `hd-next-card-body`, `hd-next-copy`, `hd-row-size-*`;
+- kein aktiver eigener Buch-&-Papier-Karten-/Bildwrapper mehr;
+- Unterstrich 5 px höher;
+- Header-Claim ohne Größenänderung durch zwei ±0,75-px-Sprite-Lagen sichtbar verdickt.
+
+TEST:
+- PHP 46/46 PASS;
+- ZIP PASS;
+- aktive Version/Class/Templates 1.50.644 konsistent;
+- echter Chromium-Render mit kompletter Plugin-CSS-Kaskade und echten Bildern;
+- 1440: 3+2 Karten;
+- 900: 2+2+1;
+- 760: 1-spaltig;
+- 1440/1024/900/760 Overflow 0;
+- Foto-Wrapper/Card-Border nach 1-px-Rahmen: Offset 0/0;
+- Foto/Wrapper: X/Y/W/H Delta 0;
+- Margin/Padding 0, Foto-Radius 0, object-fit cover.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
+
+SHA:
+`da5be83cfab375759448e0ae995734e3cddf739241fad4ca5841c44b203da9c0`
+
+LIVE:
+OFFEN. Nur Buch & Papier + Header-Claim prüfen.
+
