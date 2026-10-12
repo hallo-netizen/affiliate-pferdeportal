@@ -3,42 +3,35 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.629 LOCAL HARD PASS / LIVE-PASS BILDER OFFEN**
+STATUS: **1.50.631 LOCAL HARD PASS / LIVE-PASS OFFEN**
 
 Version:
-**1.50.629**
+**1.50.631**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
 
 SHA-256:
-`6efba12354975852d8253e6141b0bbbcaf1174f60244a0e982e4caac0659c5cb`
+`94b31dad40c8806fad72ab1a8c576cd6333832224c5fbd122820ce7859a184f0`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
 
-## Live 1.50.628
-PASS:
-- Navigation;
-- Hero-Texte Ebene 1;
-- Seitenendtexte mit maximal 3 internen Links.
-
-FAIL:
-- Kategorie-/Link-Bilder zu eng / zu detailreich.
-
-## Scope 1.50.629
-- nur aktiver 65er Kategorie-/Link-Bildsatz geändert;
-- v150629 = weiter gefasster, einfacher kontrollierter Motivsatz;
-- Navigation, Texte, Layoutgröße, Monetarisierung, Taxonomie und Architektur unverändert.
+## Scope
+- 1.50.630 verworfen;
+- echter neuer 65er v150631-Bildsatz aus eindeutigen v150629-Motiven, sichtbar herausgezoomt;
+- kein aktiver v150623-Hub1-Bildpfad;
+- kein Hub1-Fallback auf alte Featured Images;
+- Claim zentriert/gleich breit zur Wortmarke;
+- Logo so nach unten positioniert, dass Claim-Unterkante exakt auf Navigation liegt;
+- übrige Texte, Monetarisierung, Taxonomie und Architektur unverändert.
 
 ## Lokal
-- PHP 10/10 PASS;
+- PHP 13/13 PASS;
 - ZIP PASS;
-- V150629 Binding PASS;
-- stale aktive V150628-Klassen-/Templatebindungen 0;
-- 65 Bilder / 65 SHA-eindeutig / alle 600×320;
-- 65er Weltverteilung 7/11/9/5/10/7/8/8 PASS;
-- Diff gegen 1.50.628: außer Releasebindung und Bildsatz keine Designlogik geändert.
+- 65/65 v150631 Bilder 600×320;
+- 65/65 SHA-eindeutig;
+- Header-Simulation 1600/1440/1200/1024/900/800/761: Claim/Navi Delta 0 px.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.629 installieren und live nur die Kategorie-/Link-Bilder prüfen.**
+**1.50.631 installieren und live Vorschaubilder + Logo/Claim/Navigationslinie prüfen.**
