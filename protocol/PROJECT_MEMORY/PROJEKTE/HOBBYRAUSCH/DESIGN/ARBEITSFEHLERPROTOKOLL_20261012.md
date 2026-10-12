@@ -197,3 +197,27 @@ Die lokale Prüfung betrachtete Seed und Kartenrendering getrennt. Nicht vollst�
 VERMEIDUNGSREGEL:
 Bei Vorschau-/Fallbacklogik muss künftig der komplette reale Gate-Pfad simuliert werden, einschließlich des Negativfalls „keine gleichnamige Beitragskategorie vorhanden“. Seed-Erfolg allein ist kein Frontend-PASS.
 
+## AF-015 – Vorhandene korrekte Ebene-1-Lösung nicht kopiert, sondern erneut Sonderregeln gebaut
+FEHLER:
+Bei 1.50.641–1.50.643 wurden für Buch & Papier wiederholt eigene Karten-/Bildregeln ergänzt, obwohl die nächsthöhere Kategorieebene bereits die richtige Bildwrapper-, Cropping- und Rasterlogik enthielt.
+
+FOLGE:
+Mehrere Live-Runden mit weiterhin falscher Bildrahmung; 1.50.643 verschlechterte zusätzlich die reale Kartenanordnung.
+
+URSACHE:
+Die vorhandene Ebene-1-Implementierung wurde nicht als einzige technische Vorlage behandelt. Stattdessen wurden parallele Pilotselektoren weitergeführt und nur teilweise überschrieben.
+
+VERMEIDUNGSREGEL:
+Wenn der Nutzer ausdrücklich eine bestehende korrekte Darstellung als Vorlage nennt, wird künftig zuerst deren **Markup + Klassen + finale CSS-Kaskade vollständig wiederverwendet**. Keine nachgebaute Annäherung. Vor Freigabe Browser-Render mit echter Kaskade und Geometriemessung.
+
+
+## AF-016 – Header-Claim 1.50.642/1.50.643 als „kräftiger“ bezeichnet, obwohl die sichtbare Änderung live nicht nachgewiesen war
+FEHLER:
+Die Claim-Verstärkung wurde als erledigt ausgegeben, obwohl die lokale Regel nur eine sehr schwache optische Manipulation verwendete und kein belastbarer visueller Dicken-Nachweis vorlag.
+
+FIX 1.50.644:
+Gleicher Sprite-Ausschnitt wird ohne Größenänderung mit zwei zusätzlichen ±0,75-px-Lagen überlagert. Browser-Readback bestätigt beide Lagen als aktiv.
+
+VERMEIDUNGSREGEL:
+Bei sichtbarer Strichstärkenänderung nicht nur CSS-Vorhandensein, sondern gerenderte Wirkung bzw. eindeutig wirksame Mehrfachlage prüfen.
+
