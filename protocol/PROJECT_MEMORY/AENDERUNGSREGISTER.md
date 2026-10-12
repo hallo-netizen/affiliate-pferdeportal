@@ -1416,3 +1416,17 @@ Live-Readback zeigte weiterhin zu schablonenhafte Texte, zu kleinteilige Bilder 
 
 UNVERÄNDERT:
 Kategorie-/Taxonomie-/Providerarchitektur und Monetarisierungsregeln.
+
+
+## HOBBYRAUSCH-DESIGN-20261012-K – Navigation leicht höher, größere Bildfläche, weniger interne Links
+
+WAS:
+- 1.50.627-Navigationsgeometrie bleibt, komplette Zeile wird leicht angehoben;
+- Kartenbilder werden sichtbar größer, ohne neue Motivserie;
+- Seitenendtexte werden redaktionell beruhigt: maximal drei interne Links, höchstens einer pro Abschnitt.
+
+WARUM:
+Live-Readback zeigte: Baseline war endlich gleichmäßig, saß aber zu tief; Bildmotive waren in den Karten zu klein; Linkdichte wirkte künstlich.
+
+UNVERÄNDERT:
+Hero-Texte, acht Langtexte, Kategorie-/Taxonomie-/Providerarchitektur, Monetarisierungsregeln und 65 kontrollierte Bildmotive.
