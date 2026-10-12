@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "b4d6b63d56a5dfe8382a94002beb87ec388a2b635e2dd1f67e721ffbdd10945d",
+      "target_keyword": "Welche Nachteile hat ein elastischer Sattelgurt",
+      "title": "Welche Nachteile hat ein elastischer Sattelgurt?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "cf9e49535e3fdaa231ae7c1d7506749227a76902b01a7a10b89061963e4a7175"
+}
