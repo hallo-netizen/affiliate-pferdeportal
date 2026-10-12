@@ -119,6 +119,7 @@ Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
 - kein Overflow.
 
 
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.644: Header-Claim-Dicke + Buch-&-Papier-Unterkategoriekarten.**
+**Live-Abnahme 1.50.645: Buch-&-Papier-Bildkarten/Bannerzeile + Header-Claim.**
 
