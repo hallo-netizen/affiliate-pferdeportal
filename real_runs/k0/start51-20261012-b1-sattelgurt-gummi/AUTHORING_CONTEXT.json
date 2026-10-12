@@ -1,0 +1,218 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sattelgurte-faq",
+    "plan_slot": "8f74b532286030492660622cdc8bd29821af064507213d6a827f7c5e41e5f33a",
+    "target_keyword": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd",
+    "title": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Sattel verbunden",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/der-sattel-bestens-verbunden-04-2018/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Sattelgurte",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/"
+        },
+        {
+          "source_title": "Helle Kleven – Sattelgurt-Tipps",
+          "source_url": "https://www.helle-kleven.shop/blogs/news/sattelgurte-die-leistung-erbringen"
+        },
+        {
+          "source_title": "Pferderevue – Sattelgurt und Passform",
+          "source_url": "https://www.pferderevue.at/magazin/ausruestung/2021/sattelgurt--warum-der-individuell-richtige-so-wichtig-ist-wie-ei.html"
+        },
+        {
+          "source_title": "British Horse Society – Tack fit",
+          "source_url": "https://www.bhs.org.uk/go-riding-and-learn/stable-mates/tack-fit/"
+        }
+      ],
+      "claims": [
+        "Elastische Einsätze erleichtern das Nachgurten, sollen aber nicht zu weich sein; empfohlen wird, Elastik wenn überhaupt beidseitig einzusetzen.",
+        "Einseitige Elastikeinsätze können Druck ungleichmäßig verteilen; Gurte sollten beidseitig gleichmäßig nachgegurtet werden.",
+        "Bei Gummieinsätzen empfiehlt Helle Kleven entweder beidseitige Elastik oder gar keine und rät zu langsamem Gurten ohne störende Nahtkanten.",
+        "Mehrere befragte Sattelfachleute beurteilen Elastik kritisch, unter anderem wegen ausleiernder Einsätze und einer möglichen Kante zwischen Leder und Elastik.",
+        "Schlecht sitzende Sattelausrüstung kann Schmerzen, Druckstellen und Bewegungsprobleme verursachen; Sitz und Komfort müssen regelmäßig geprüft werden.",
+        "Bei der Gurtwahl zählen passende Länge, Schnallenlage und ausreichender Abstand zum Ellenbogen des Pferdes, nicht allein das Material."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd",
+      "topic": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sattelgurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Sattel verbunden",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/der-sattel-bestens-verbunden-04-2018/",
+        "evidence_text_sha256": "b18074031231ecc344bf1c5ee0d89b8e5520e165db2f7fb8a8d2d2f02712ace1",
+        "statement": "Elastische Einsätze erleichtern das Nachgurten, sollen aber nicht zu weich sein; empfohlen wird, Elastik wenn überhaupt beidseitig einzusetzen.",
+        "evidence_text": "Elastische Einsätze erleichtern das Nachgurten, sollen aber nicht zu weich sein; empfohlen wird, Elastik wenn überhaupt beidseitig einzusetzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "evidence_text_sha256": "95e85499b574bafb6444251bdc7f03444a4dd980f7a07a40c4df934426ac8d4f",
+        "statement": "Einseitige Elastikeinsätze können Druck ungleichmäßig verteilen; Gurte sollten beidseitig gleichmäßig nachgegurtet werden.",
+        "evidence_text": "Einseitige Elastikeinsätze können Druck ungleichmäßig verteilen; Gurte sollten beidseitig gleichmäßig nachgegurtet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Helle Kleven – Sattelgurt-Tipps",
+        "source_url": "https://www.helle-kleven.shop/blogs/news/sattelgurte-die-leistung-erbringen",
+        "evidence_text_sha256": "696838630419a8545a09689b40d177a3925a16574fa4af348db2d458ca190ab4",
+        "statement": "Bei Gummieinsätzen empfiehlt Helle Kleven entweder beidseitige Elastik oder gar keine und rät zu langsamem Gurten ohne störende Nahtkanten.",
+        "evidence_text": "Bei Gummieinsätzen empfiehlt Helle Kleven entweder beidseitige Elastik oder gar keine und rät zu langsamem Gurten ohne störende Nahtkanten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferderevue – Sattelgurt und Passform",
+        "source_url": "https://www.pferderevue.at/magazin/ausruestung/2021/sattelgurt--warum-der-individuell-richtige-so-wichtig-ist-wie-ei.html",
+        "evidence_text_sha256": "075d09cb7fef40864a220c9891736c1e0ca7924889652b28a35c36cb13c26edf",
+        "statement": "Mehrere befragte Sattelfachleute beurteilen Elastik kritisch, unter anderem wegen ausleiernder Einsätze und einer möglichen Kante zwischen Leder und Elastik.",
+        "evidence_text": "Mehrere befragte Sattelfachleute beurteilen Elastik kritisch, unter anderem wegen ausleiernder Einsätze und einer möglichen Kante zwischen Leder und Elastik.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "British Horse Society – Tack fit",
+        "source_url": "https://www.bhs.org.uk/go-riding-and-learn/stable-mates/tack-fit/",
+        "evidence_text_sha256": "c1b4ae23bce6c92b58c5a45d38be17f7cf72e06787c54e12a6557cc82f0edaea",
+        "statement": "Schlecht sitzende Sattelausrüstung kann Schmerzen, Druckstellen und Bewegungsprobleme verursachen; Sitz und Komfort müssen regelmäßig geprüft werden.",
+        "evidence_text": "Schlecht sitzende Sattelausrüstung kann Schmerzen, Druckstellen und Bewegungsprobleme verursachen; Sitz und Komfort müssen regelmäßig geprüft werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferdesport Deutschland – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "evidence_text_sha256": "c087ec1dc01b69ee9654b9f458a997935516076e69fa4f389c2996108ec4eab2",
+        "statement": "Bei der Gurtwahl zählen passende Länge, Schnallenlage und ausreichender Abstand zum Ellenbogen des Pferdes, nicht allein das Material.",
+        "evidence_text": "Bei der Gurtwahl zählen passende Länge, Schnallenlage und ausreichender Abstand zum Ellenbogen des Pferdes, nicht allein das Material.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "anchor": "Sattelgurte im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sattelgurte-beratung/",
+        "anchor": "Beratung zu Sattelgurten",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "FAQ zu Sattelgurten",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sattelgurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Sattelgurt",
+      "Elastik",
+      "Gummi",
+      "beidseitig",
+      "einseitig",
+      "Gurt",
+      "Pferd",
+      "Druck",
+      "Schnallen",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Elastik beidseitig, nur einseitig oder nicht vorhanden verursacht unterschiedliche Risiken bei Sitz und Gurtspannung; die Tabelle erleichtert die direkte Einordnung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
