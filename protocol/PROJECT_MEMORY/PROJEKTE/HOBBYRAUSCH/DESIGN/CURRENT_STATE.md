@@ -3,50 +3,52 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.647 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.648 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.647_HOBBY_DEPOT_HUB2_RELEASE_CHAIN_FATAL_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.648_HOBBY_DEPOT_ALL_HUB2_EXACT_645_LAYOUT_PFERDE_RULE_PERF_LOCALPASS.zip`
 
 SHA-256:
-`db5427357bd251f084ab9a8545dee33d760a7b38ace686a5146543ca07210833`
+`8ffc125dcbe95d2657c29ea43ebb69e9be609268ec4c40277a34a15c49502038`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.647_HOBBY_DEPOT_HUB2_RELEASE_CHAIN_FATAL_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.648_HOBBY_DEPOT_ALL_HUB2_EXACT_645_LAYOUT_PFERDE_RULE_PERF_LOCALPASS.zip`
 
-## Live-Befund 1.50.646
-**KRITISCHER WORDPRESS-FEHLER. 1.50.646 VERWORFEN.**
+## Ausgang
+**1.50.647 wird verworfen.**
+Der technische Fatal war dort zwar beseitigt, aber der Rollout hatte den akzeptierten 1.50.645-Aufbau von Buch & Papier wieder durch eine andere Hub2-Logik ersetzt.
 
-Exakte Ursache:
-- Hauptplugin lud korrekt `Hobby_Depot_Profile_V150646`;
-- diese Klasse routete aber weiter auf `hobby-depot-front-v150645.php` / `hobby-depot-content-v150645.php`;
-- diese Templates riefen `Hobby_Depot_Profile_V150645::...` auf;
-- die 1.50.645-Klasse war im aktiven 1.50.646-Pfad nicht geladen;
-- dadurch entstand ein Runtime-Fatal durch gemischte Release-Bindung.
+## 1.50.648
+Basis ist deshalb wieder **1.50.645**. Der akzeptierte sichtbare Aufbau wird auf alle 65 Hub2-/Ebene-2-Seiten ausgerollt, nicht neu erfunden.
 
-## Fix 1.50.647
-Die Release-Kette ist jetzt end-to-end konsistent:
-`pferde-template-kit.php → V150647 Profil → v150647 Templates → Hobby_Depot_Profile_V150647`.
+Verbindlich:
+- derselbe kompakte Split-Hero wie bei Buch & Papier;
+- rechts das bereits vorhandene Kategorie-Vorschaubild mit weichem Verlauf ins Weiß;
+- kurzer individueller Claim in derselben Schreibschrift-/Brush-Optik;
+- Pferdeatelier-Textregel 1:1: ca. 55 Wörter Lead → `Mehr erfahren` → `Was du hier findest` dauerhaft sichtbar;
+- Öffnen des Texts verändert die Hero-Bildgröße nicht;
+- Unterkategorien als Fotokarten, kein Icon-Rückfall;
+- vorhandenes Featured/Controlled Image zuerst; nur wenn keines existiert, wird performance-schonend das vorhandene Elternmotiv wiederverwendet;
+- 3er-Raster; Restkarten linksbündig; Affiliate-Banner füllt den freien Restplatz bzw. bei voller Reihe eine eigene Bannerzeile;
+- danach konkrete Produkte → 3 Beiträge → genau ein Werbeplatz;
+- kein zusätzlicher Textblock am Seitenende.
 
-Der beauftragte 1.50.646-Inhalt bleibt fachlich erhalten:
-- alle Hub2-/Ebene-2-Kategorien erhalten kompakten Hero mit vorhandenem Bild und weichem Verlauf;
-- individuelle kurze Brush-/Schreibschrift-Claims;
-- Aufklapptext nach der bestehenden Pferdeatelier-Regel;
-- vorhandene Assets werden wiederverwendet;
-- keine unnötigen neuen Bilder;
-- Hub2: Kategorien → Produkte → 3 Beiträge → Werbeplatz;
-- kein zusätzlicher unterer Editorial-Block.
-
-## Lokal geprüft
-- alle **53 PHP-Dateien** Syntax-PASS;
-- ZIP-Integrität PASS;
-- Main-Version 1.50.647 PASS;
-- aktiver Require-Pfad 1.50.647 PASS;
-- aktive Klasse 1.50.647 PASS;
-- Front-Template 1.50.647 PASS;
-- Content-Template 1.50.647 PASS;
-- beide Templates rufen ausschließlich `Hobby_Depot_Profile_V150647` auf;
-- aktiver Stale-Reference-Check gegen V150645/V150646: **0 Treffer**.
+## Performance / Regression
+- **keine neuen Bildassets**;
+- 859/859 Assets byteidentisch zu 1.50.645;
+- 65/65 Hub2-Hero-Motive aus vorhandenem Bestand gefunden;
+- 65/65 individuelle Claims vorhanden;
+- Header/Navigation/Ebene 1/Taxonomie unverändert;
+- PHP **52/52 PASS**;
+- ZIP PASS;
+- Release-Kette vollständig 1.50.648;
+- aktive Stale-V150645/V150646/V150647-Bindung im aktiven Pfad: 0;
+- Browser 1440 / 1024 / 900 / 760: Overflow 0;
+- Desktop 1440/1024: 3 + 2 + Banner;
+- Bild/Slot-Abweichung 0;
+- Foto-Radius 0;
+- Aufklappen: Hero-Bild Δ Breite/Höhe 0;
+- `Was du hier findest` bleibt sichtbar.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.647 installieren und echten WordPress-Readback durchführen.**
+**1.50.648 installieren und live zuerst Buch & Papier plus zwei weitere Hub2-Kategorien aus unterschiedlichen Welten prüfen.**
