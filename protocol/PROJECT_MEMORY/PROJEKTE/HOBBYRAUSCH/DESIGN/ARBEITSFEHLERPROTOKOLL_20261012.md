@@ -272,3 +272,21 @@ Ein ausdrücklich akzeptierter Pilot ist beim Rollout künftig eine **harte Vorl
 - Regression gegen den Pilot vor Freigabe visuell messen;
 - erst danach paketieren.
 
+## AF-020 – „Textregeln kopieren“ fälschlich als „Pferdeatelier-Darstellung kopieren“ umgesetzt
+FEHLER:
+Beim Hub2-Rollout 1.50.648 wurden neben den gewünschten redaktionellen Pferdeatelier-Regeln auch Teile der Pferdeatelier-Accordion-Darstellung übernommen. Gleichzeitig durfte ein Parentbild als Kartenfallback mehrfach verwendet werden.
+
+FOLGE:
+Der akzeptierte Buch-&-Papier-Aufbau wurde erneut sichtbar verändert: zusätzlicher Textblock, gleiche Bilder in mehreren Karten und verlorene Karten-Unterzeilen.
+
+VERMEIDUNGSREGEL:
+Anforderungen künftig strikt in **Inhalt/Textregel** und **Darstellung/UI-Regel** trennen.
+Wenn nur Textregeln kopiert werden sollen:
+- Wortzahl, Ton, Substanz, Tabus und redaktionelle Qualitätsregel übernehmen;
+- vorhandene Ziel-UI vollständig unangetastet lassen.
+Bei Fotokarten:
+- jede sichtbare Kindkarte braucht ein Foto;
+- innerhalb derselben Seite keine wiederholte Foto-URL;
+- Parent-/Hero-Bild niemals als Universalbild für alle Kinder;
+- Untertitel ist Bestandteil des akzeptierten Kartenlayouts und darf beim Rollout nicht verloren gehen.
+
