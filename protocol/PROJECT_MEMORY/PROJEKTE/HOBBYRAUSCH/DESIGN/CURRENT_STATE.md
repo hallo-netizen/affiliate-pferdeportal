@@ -3,61 +3,47 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.635 LOCAL HARD PASS / WORDPRESS-LIVE HUB2 OFFEN**
+STATUS: **1.50.636 LOCAL HARD PASS / WORDPRESS-LIVE HUB2 OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.636_HOBBY_DEPOT_HUB2_REFINEMENT_TEST_POSTS_LOCALPASS.zip`
 
 SHA-256:
-`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
+`d8d45997b136cd7d95e0a790f88dfbb4b3207a29b5b644e415b1ac8e0a72007a`
 
-## Live bestätigt / eingefroren
-- Ebene 1 wird vorerst akzeptiert; Kategorie-Vorschaubilder nicht perfekt, aber keine weitere Bildrunde jetzt;
-- Hauptnavigation: PASS;
-- Logo/Claim/Navigationslinie: PASS;
-- Hero-Bilder Ebene 1: unverändert / nicht anfassen;
-- Hero-Texte Ebene 1: PASS;
-- Seitenendtexte Ebene 1 mit maximal drei internen Links: PASS.
+## Live-Befund 1.50.635
+- Grundaufbau Hub2 funktioniert;
+- oberer Text zu kurz/technisch;
+- identisches Welticon auf zu vielen Unterkategorie-Karten wirkt monoton;
+- Beitragsvorschau ohne reale Testbeiträge nicht sinnvoll beurteilbar.
 
-## Delta 1.50.635 – nur Kategorieebene 2 / Hub2
-Oben:
-- Breadcrumb;
-- H1 + kurzer Orientierungstext;
-- **kein Hero-Foto**.
+## Delta 1.50.636 – nur Hub2
+- oberer Hub2-Einstieg deutlich länger, natürlicher und in vollständigen Sätzen/Absätzen;
+- kein Hero-Foto;
+- Hub2-Titel und Unterkategorie-Karten erhalten thematisch unterschiedliche Icons statt eines immer gleichen Welticons;
+- Beitragsvorschau zeigt auf Hub2 bis zu 4 Beiträge;
+- 4 klar markierte veröffentlichte Testbeiträge werden beim ersten Admin-Aufruf einmalig angelegt;
+- jeder Testbeitrag erhält ein Beitragsbild aus bereits vorhandenen Designassets;
+- Testbeiträge werden allen aktuell vorhandenen WordPress-Beitragskategorien zugeordnet; zusätzlich allen journal_cat-Terms, falls diese Taxonomie Posts unterstützt;
+- Testbeiträge tragen Meta `_hd_demo_post_v150636=1` und sind damit später eindeutig entfernbar.
 
-Danach feste Reihenfolge:
-1. Verweise auf die reale nächste Ebene;
-2. separater Affiliate-Banner;
-3. passende Artikelvorschau;
-4. konkrete Affiliate-Produkte für den aktuellen Hub2-Kontext;
-5. genau ein direkt verkaufbarer Werbeplatz;
-6. längerer redaktioneller Erklärungstext am Seitenende.
-
-Monetarisierung:
-- Hub2 verwendet die `category_product_1..3`-Slots statt der breiteren Hub1-Produkte;
-- dadurch wird die Produktbelegung mit zunehmender Tiefe konkreter;
-- Produkte stehen nicht im Unterkategorie-Raster;
-- Banner steht als eigener Bereich nach der nächsten Ebene;
-- öffentlich leere Affiliate-Slots bleiben unsichtbar, eingeloggte Vorschau bleibt möglich.
-
-## Unverändert
-- komplette Asset-Sammlung: **847/847 Dateien byteidentisch zu 1.50.634**;
-- alle Hero-Dateien byteidentisch;
-- Header-/Navigation-CSS unverändert;
+## Freeze / unverändert
+- 847/847 Assets byteidentisch zu 1.50.635;
+- Hero-Assets byteidentisch;
+- Header/Nav unverändert;
 - Ebene 1 unverändert;
-- Taxonomie/Architektur/HD-001/HD-004 unverändert;
-- Affiliate-Zentrale bleibt Slot-/Monetarisierungsautorität.
+- Taxonomie-/Kategoriearchitektur unverändert;
+- Affiliate-Slotlogik unverändert.
 
 ## Lokal geprüft / simuliert
-- PHP: **19/19 PASS**;
-- ZIP-Integrität PASS;
-- aktive V150635-Klasse/Templates PASS;
-- Hub2: 0 Hero-Fotos im simulierten Pfad;
-- DOM-Reihenfolge 1440 / 1024 / 760 PASS:
-  nächste Ebene → Banner → Beiträge → Produkte → Werbeplatz → Langtext;
-- horizontaler Overflow: 0 bei 1440 / 1024 / 760;
-- Asset-Regression: 847/847 byteidentisch;
-- neue CSS-Regeln enthalten keine Header-/Nav-/Logo-/Hero-Selektoren.
+- PHP **22/22 PASS**;
+- ZIP PASS;
+- Hub2-Simulation 1440 / 1024 / 760: horizontaler Overflow 0;
+- längerer Toptext in zwei lesbaren Absätzen;
+- 9 Beispiel-Unterkategorien mit thematisch unterschiedlichen Symbolen geprüft;
+- 4 Beitragskarten mit Bild bei Desktop, 2-spaltig auf Tablet, 1-spaltig mobil;
+- Seed-Code: einmalig, Admin-only, 4 Posts, alle Beitragskategorien, Featured Images;
+- keine Hero-Datei geändert.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.635 installieren und live eine reale Hub2-Seite prüfen. Bei PASS danach auf Kategorieebene 3 weitergehen.**
+**1.50.636 installieren; danach live Hub2 einschließlich automatisch angelegter 4 Testbeiträge prüfen.**
