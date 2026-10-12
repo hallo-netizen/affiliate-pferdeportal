@@ -17,7 +17,7 @@ Die sichtbare Bildfläche bleibt Desktop 200×107, Tablet 165×88, Mobile 145×7
 STATUS: **LIVE CLOSED 1.50.628**
 
 ## HRD-060 – Kategorie-/Link-Bilder zu eng / Lupeneindruck
-STATUS: **1.50.629 LIVE FAIL / 1.50.634 LOCAL KORRIGIERT / LIVE OFFEN**
+STATUS: **VORERST AKZEPTIERT 1.50.634 / KEINE WEITERE BILDRUNDE JETZT**
 
 Anforderung:
 - Szene weiter gefasst;
@@ -50,7 +50,7 @@ Der Nutzer hat den aktuellen Navigations-/Headerstand live als PASS bestätigt.
 Keine weitere Header-/Navigationsänderung in 1.50.634.
 
 ## HRD-063 – Kategorie-Vorschaubilder mit sichtbarem Rahmen/Passepartout
-STATUS: **1.50.631/1.50.632 LIVE FAIL / 1.50.634 LOCAL KORRIGIERT / LIVE OFFEN**
+STATUS: **VORERST AKZEPTIERT 1.50.634 / KEINE WEITERE BILDRUNDE JETZT**
 
 Root Cause:
 Die aktive Karten-CSS enthielt weiterhin eine eingerückte Bildbox, u. a. mit Margin, Hintergrund und Radius. Deshalb blieb trotz Bildwechsel ein sichtbarer Rahmen/Passepartout-Effekt.
@@ -73,7 +73,7 @@ Simulation mit echten Assets:
 - 760 px: 145×78, Rahmengeometrie 0.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.634 ausschließlich Kategorie-Vorschaubilder.**
+**Live-Abnahme 1.50.635 auf einer realen Kategorieebene-2-/Hub2-Seite.**
 
 ## Arbeitsfehlerprotokoll
 Dauerhafte interne Fehler-/Lernakte:
