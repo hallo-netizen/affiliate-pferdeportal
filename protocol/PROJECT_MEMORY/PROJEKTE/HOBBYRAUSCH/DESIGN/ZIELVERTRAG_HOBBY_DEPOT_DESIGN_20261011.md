@@ -1,13 +1,15 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.6 / 2026-10-12
+FASSUNG: 2.7 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
 - Header als 2-Spalten-System: links Logo; rechts Suchfeld + Navigation.
 - Suchfeld auf Höhe der HOBBY-DEPOT-Wortmarke.
-- Navigation rechts nahe an der unteren Headerkante, aber nicht auf die Linie gequetscht.
+- `Hobbys. Ideen. Möglichkeiten.` steht exakt mittig unter der HOBBY-DEPOT-Wortmarke bzw. exakt in deren Breite; kein seitlicher Versatz.
+- Die sichtbare Unterkante des Claims und die Unterkante/Baseline der Hauptnavigation bilden eine gemeinsame horizontale Linie.
+- Für diese Linie wird das Logo vertikal positioniert; die Navigation wird nicht erneut nach unten verschoben.
 - Ab 761 px: alle 8 Welten in exakt einer horizontalen Zeile und auf derselben Baseline, einschließlich Sammeln.
 - <761 px: Mobilmenü.
 - Navigationsicons entfallen; Text + Pfeil bleiben.
@@ -35,11 +37,13 @@ FASSUNG: 2.6 / 2026-10-12
 - ein klares Hauptmotiv / eine klare Tätigkeit;
 - Thema muss auf den ersten Blick verständlich sein;
 - kein Lupen-/Makroeindruck und kein unnötig enger Anschnitt;
+- Hauptmotiv sichtbar weiter gefasst als in 1.50.629;
 - wenn ein Gegenstand das Thema trägt, möglichst als verständliches Ganzes statt nur als Detail zeigen;
-- weiter gefasster natürlicher Bildausschnitt mit etwas Kontext, aber ruhigem Hintergrund;
-- nur wenige unterstützende Bildelemente; keine überladenen Szenen;
+- ruhiges Bildumfeld mit wenig konkurrierenden Elementen;
+- keine wiederverwendeten Szenenfamilien über mehrere Kategorien;
 - keine identischen oder visuell nahezu identischen Motive;
 - kontrolliertes Designasset vor WordPress Featured Images;
+- auf Hub Ebene 1 kein Rückfall auf alte mehrfach verwendete Featured Images;
 - kein Parent-/Hero-Bild als Universalersatz.
 - Die sichtbare Bildfläche in den Karten muss groß genug sein, dass das Motiv sofort erkennbar ist; keine winzigen Thumbnails.
 
