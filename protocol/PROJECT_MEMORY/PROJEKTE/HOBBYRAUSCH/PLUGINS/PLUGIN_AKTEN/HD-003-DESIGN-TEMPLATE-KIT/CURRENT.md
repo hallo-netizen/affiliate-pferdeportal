@@ -3,42 +3,43 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.635 LOCAL HARD PASS / LIVE-PASS HUB2 OFFEN**
+STATUS: **1.50.636 LOCAL HARD PASS / LIVE-PASS HUB2 OFFEN**
 
 Version:
-**1.50.635**
+**1.50.636**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.636_HOBBY_DEPOT_HUB2_REFINEMENT_TEST_POSTS_LOCALPASS.zip`
 
 SHA-256:
-`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
+`d8d45997b136cd7d95e0a790f88dfbb4b3207a29b5b644e415b1ac8e0a72007a`
 
 ## Scope
-Nur Hub2 / Kategorieebene 2:
+Nur Hub2-Verfeinerung:
+- längerer natürlicher Einstieg oben;
 - kein Hero-Foto;
-- kurzer Orientierungstext oben;
-- nächste Ebene;
-- separater Banner;
-- Artikelvorschau;
-- konkrete `category_product_1..3`-Produkte;
-- genau ein verkaufbarer Werbeplatz;
-- Langtext unten.
+- thematisch variierte Icons für Unterkategorien ohne Foto;
+- bis zu 4 Beitragskarten;
+- 4 einmalige Testbeiträge mit Beitragsbild, allen Beitragskategorien zugeordnet.
 
-## Freeze / Regression
-- 847/847 Assets byteidentisch zu 1.50.634;
-- Hero-Dateien unverändert;
-- Header/Nav unverändert;
-- Ebene 1 unverändert;
-- Architektur/Taxonomie unverändert.
+## Testposts
+- Titel klar mit `[TEST]` markiert;
+- Status publish, damit die echte Frontend-Vorschau funktioniert;
+- Meta `_hd_demo_post_v150636=1`;
+- alle vorhandenen WP-Kategorien;
+- journal_cat zusätzlich, sofern für Posts registriert;
+- Bilder aus vorhandenen Designassets, keine Hero-Datei verändert.
+
+## Regression
+- 847/847 Assets byteidentisch;
+- Header/Nav/Hero/Ebene1 unverändert;
+- Affiliate-Slotlogik unverändert.
 
 ## Lokal
-- PHP 19/19 PASS;
+- PHP 22/22 PASS;
 - ZIP PASS;
-- Hub2-DOM-Simulation 1440/1024/760 PASS;
-- kein horizontaler Overflow;
-- 0 Hero-Fotos im Hub2-Simulationspfad;
-- Reihenfolge PASS.
+- Simulation 1440/1024/760, Overflow 0;
+- 4/2/1 Artikelraster Desktop/Tablet/Mobil.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.635 installieren und live eine echte Hub2-Seite prüfen.**
+**1.50.636 installieren und live Hub2 + 4 Testbeiträge prüfen.**
