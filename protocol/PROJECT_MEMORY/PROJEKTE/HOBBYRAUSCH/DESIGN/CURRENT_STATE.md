@@ -3,48 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.629 LOCAL HARD PASS / WORDPRESS-LIVE BILDABNAHME OFFEN**
+STATUS: **1.50.631 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
 
 SHA-256:
-`6efba12354975852d8253e6141b0bbbcaf1174f60244a0e982e4caac0659c5cb`
+`94b31dad40c8806fad72ab1a8c576cd6333832224c5fbd122820ce7859a184f0`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
 
-## Live-Readback 1.50.628
-**PASS / nicht mehr anfassen:**
-- Hauptnavigation: alle acht Welten auf einer Ebene;
-- Hero-Texte oben auf Ebene 1;
-- Seitenendtexte auf Ebene 1 mit maximal drei internen Links.
+## Letzter echter Live-Befund
+PASS / nicht anfassen:
+- Hero-Texte Ebene 1;
+- Seitenendtexte Ebene 1 mit maximal drei internen Links;
+- acht Navigationspunkte bleiben auf gemeinsamer Baseline.
 
-**FAIL:**
-- Kategorie-/Link-Bilder weiterhin zu eng hineingezoomt;
-- teilweise nur Motivteile statt verständlichem Gesamtmotiv;
-- zu viele Details / zu viel Bildinhalt;
-- Thema nicht schnell genug erkennbar.
+FAIL:
+- 1.50.629 änderte die sichtbaren Kategorie-Vorschaubilder nicht belastbar;
+- 1.50.630 band fälschlich den alten v150623-Bildsatz vor und erzeugte dadurch wieder sichtbar wiederholte Szenen;
+- Claim war nicht sauber mittig unter HOBBY DEPOT;
+- Claim-Unterkante und Navigations-Unterkante lagen nicht auf einer Linie.
 
-## Delta 1.50.629
-Nur Kategorie-/Link-Bilder:
-- die überenge 1.50.627-Bildrichtung wird zurückgenommen;
-- 65 kontrollierte, ruhigere und weiter gefasste Motive werden als neue v150629-Assets gebunden;
-- Grundlage ist der bereits lokal geprüfte einfache/klare 1.50.625-Motivsatz;
-- Kartenfläche aus 1.50.628 bleibt unverändert;
-- Navigation, Hero-Texte, Seitenendtexte, Monetarisierung, Taxonomie und Architektur bleiben unverändert.
+## Root Cause 1.50.630
+- v150623 enthält zwar byte-eindeutige Dateien, aber mehrere wiederverwendete Szenenfamilien (u. a. Outdoor, Werkbank, Sammeln);
+- die 1.50.630-Bindung bevorzugte genau diesen Satz;
+- im Header verbreiterte `.hd-logo-claim-v150622{transform:scaleX(1.06)}` den Claim nach rechts;
+- lokale Geometriesimulation zeigte Claim/Navi-Abstand: Desktop 7 px, 761–1000 px 38 px.
+
+## Delta 1.50.631
+Bilder:
+- ausschließlich die 65 eindeutigen v150629-Quellmotive werden verwendet;
+- daraus wurden 65 tatsächlich neue v150631-Dateien erzeugt;
+- jedes Motiv wurde sichtbar auf 80 % verkleinert und mit ruhigem, weich erweitertem Bildumfeld auf 600×320 gesetzt;
+- kein v150623-Bild ist im aktiven Hub1-Bildpfad;
+- Hub1 fällt bei fehlendem kontrolliertem Asset nicht mehr auf alte WordPress-Featured-Images zurück.
+
+Header:
+- Claim-Skalierung nach rechts entfernt;
+- Claim exakt gleich breit/zentriert wie die HOBBY-DEPOT-Wortmarke;
+- Logo gezielt nach unten gesetzt;
+- lokale Geometriesimulation: Claim-Unterkante = Navigations-Unterkante bei 1600/1440/1200/1024/900/800/761 px, Delta jeweils 0 px.
 
 ## Lokal
-- PHP 10/10 PASS;
-- ZIP PASS;
-- V150629 Main/Klasse/Templates konsistent;
-- aktive V150628-Klassen-/Templatebindung 0;
-- 65 v150629-Bildassets;
-- alle 65 exakt 600×320;
-- 65/65 eindeutige SHA-256;
-- Weltabdeckung: Gestalten 7, Fertigen 11, Technik 9, Forschen 5, Pflanzen 10, Tiere 7, Bewegen 8, Sammeln 8;
-- neue 65 Assets byteidentisch zum lokal geprüften einfachen/weiteren 1.50.625-Motivsatz;
-- Diff gegen 1.50.628 bestätigt: Navigations-/Text-/Layoutlogik unverändert, nur Releasebindung + aktiver Bildsatz geändert.
+- PHP 13/13 PASS;
+- ZIP-Integrität PASS;
+- V150631 Main/Klasse/Templates konsistent;
+- 65 v150631-Bilder;
+- 65/65 exakt 600×320;
+- 65/65 SHA-256-eindeutig;
+- kein aktiver v150623-Bildpfad;
+- lokaler visueller 65er-Gesamtcheck ohne die in 1.50.630 sichtbaren wiederholten Szenenfamilien;
+- Header-Geometrie 7 Viewports: 0 px Claim/Navi-Delta.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.629 installieren und live nur die Kategorie-/Link-Bilder prüfen. Bei PASS danach direkt auf die nächste Kategorieebene gehen.**
+**1.50.631 installieren und live nur zwei Dinge prüfen: Kategorie-Vorschaubilder sowie Logo/Claim/Navigation. Bei PASS danach direkt nächste Kategorieebene.**
