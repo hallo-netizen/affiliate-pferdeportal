@@ -236,3 +236,24 @@ Bei sichtbaren Bildrändern immer getrennt prüfen:
 4. Karten-Clipping.
 Ein CSS-PASS reicht nicht, wenn das Artefakt im Bild selbst eingebrannt ist.
 
+## AF-018 – Wiederkehrender Release-Ketten-Fehler vor Ausgabe 1.50.646 nicht geprüft
+FEHLER:
+Beim Hochziehen der Profilklasse auf V150646 wurden die gerouteten Owned-Templates nicht ebenfalls auf dieselbe Release-Version umgestellt. Die Templates blieben v150645 und riefen V150645 auf.
+
+FOLGE:
+WordPress-Runtime-Fatal / kritischer Fehler unmittelbar nach Installation.
+
+URSACHE:
+Es wurde PHP-Syntax geprüft, aber nicht die komplette aktive Release-Kette Mainplugin → Profilklasse → geroutete Templates → Template-Klassenaufruf.
+
+VERMEIDUNGSREGEL:
+Vor jedem neuen Template-Kit-ZIP zwingender Release-Chain-Test:
+1. Plugin-Header/Plugin-VERSION;
+2. require_once aktive Profilklasse;
+3. class_exists-/Init-Bindung;
+4. Profil-RELEASE;
+5. route_template-Pfade;
+6. Klassenaufrufe innerhalb beider Owned-Templates;
+7. aktiver Stale-Reference-Scan auf die vorherigen Releaseklassen.
+Kein ZIP-PASS ohne diese sieben Punkte.
+
