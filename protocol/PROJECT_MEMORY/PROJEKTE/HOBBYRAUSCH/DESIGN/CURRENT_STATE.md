@@ -3,63 +3,66 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.639 LOCAL HARD PASS / WORDPRESS-LIVE PILOT BUCH & PAPIER OFFEN**
+STATUS: **1.50.640 LOCAL HARD PASS / WORDPRESS-LIVE PILOT BUCH & PAPIER OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.639_HOBBY_DEPOT_BUCH_PAPIER_SPLIT_HERO_BRUSH_3COL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.640_HOBBY_DEPOT_BUCH_PAPIER_BODY_ALIGN_FADE_BRUSH_LEVEL1_IMAGEFORMAT_LOCALPASS.zip`
 
 SHA-256:
-`080b56efd53102de7fde5c01f75b0a9edb53c8a3f4123c1e204b2ded5b1955f2`
+`588fa7fb961bc9cdf62a96f968a83034b072902c41eaddee5c92d09598ebe6bd`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.639_HOBBY_DEPOT_BUCH_PAPIER_SPLIT_HERO_BRUSH_3COL_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.640_HOBBY_DEPOT_BUCH_PAPIER_BODY_ALIGN_FADE_BRUSH_LEVEL1_IMAGEFORMAT_LOCALPASS.zip`
 
 ## Pilot-Scope
 **Ausschließlich Hub2 `Buch & Papier`.**
 
-Delta zu 1.50.638:
-- kompakter Split-Hero oben;
-- links Claim/H1/Lead/Aufklapper, rechts vorhandenes Kategorie-Vorschaubild;
-- **kein neues Hero-Bild erzeugt**: verwendet wird vorhandenes `buch-papier-v150629.webp`;
-- Claim `Papier kann mehr.` mit CSS-Pinselstrich;
-- Desktop: 3 Fotokacheln nebeneinander;
-- Tablet: 2;
-- Mobile: 1;
-- Reihenfolge bleibt: Kategorien → Produkte → 3 Beiträge → Banner → Werbeplatz;
-- weiterhin kein Seitenendtext.
-
-## Performance
-- Hero verwendet bestehendes 600×320-Asset, **45.934 Bytes**;
-- keine neuen Bilddateien gegenüber 1.50.638;
-- 5 Pilotkartenbilder bleiben zusammen ca. 66 KB und lazy geladen.
+Delta zu 1.50.639:
+- Hero wieder exakt im normalen Body-Container ausgerichtet;
+- Text- und Bildbereich teilen dieselbe linke/rechte Contentachse wie die folgenden Abschnitte;
+- Claim `Papier kann mehr.` mit Handschrift-Fontstack und dynamischerem CSS-Pinselstrich mit mehr Abstand;
+- Hero-Bild bleibt das bestehende Kategorieasset, kein neues Bild;
+- Hero-Bild läuft links weich in Weiß aus;
+- Hero-Bild hat festes 600:320-Verhältnis und wächst beim Öffnen des Aufklapptexts **nicht** mit;
+- Kachelbilder übernehmen exakt das Bildformat der Ebene darüber:
+  - Desktop 200×107;
+  - Tablet 165×88;
+  - Mobil 145×78;
+- 3/2/1-Kachelraster bleibt;
+- Produkte → 3 Beiträge → Banner → Werbeplatz bleibt;
+- kein Seitenendtext.
 
 ## Freeze / unverändert
-- komplette Asset-Sammlung: **852/852 Dateien byteidentisch zu 1.50.638**;
+- Asset-Sammlung **852/852 byteidentisch zu 1.50.639**;
+- keine neuen Bilder;
 - Header/Nav unverändert;
 - Ebene 1 unverändert;
-- alle anderen Hub2-Seiten unverändert;
+- andere Hub2 unverändert;
 - Produkt-/Banner-/Werbeplatzlogik unverändert;
 - keine Taxonomie-/Architekturänderung.
 
 ## Lokal geprüft / simuliert
-- PHP **31/31 PASS**;
+- PHP **34/34 PASS**;
 - ZIP-Integrität PASS;
-- aktive V150639-Klasse/Templates PASS;
-- Pilot-Gate ausschließlich `buch-papier`;
-- 1440 px:
-  - 3 Kacheln;
-  - Hero 2-spaltig;
-  - horizontaler Overflow 0;
-- 1024 px:
-  - 2 Kacheln;
-  - Hero 2-spaltig;
-  - horizontaler Overflow 0;
-- 760 px:
-  - 1 Kachel;
-  - Hero gestapelt;
-  - horizontaler Overflow 0;
-- Pinselstrich-Claim im Browser gerendert;
-- bestehende Asset-Dateien geändert: **0**.
+- 1440:
+  - Hero-Left = Section-Left 120 px;
+  - 3+2 Kacheln;
+  - Kartenbild 200×107;
+  - Overflow 0;
+  - Hero-Bild vor/nach Aufklappen Δ 0×0;
+- 1024:
+  - Hero-Left = Section-Left 36 px;
+  - 2+2+1 Kacheln;
+  - Kartenbild 165×88;
+  - Overflow 0;
+  - Hero-Bild vor/nach Aufklappen Δ 0×0;
+- 760:
+  - Hero-Left = Section-Left 12 px;
+  - 1-spaltig;
+  - Kartenbild 145×78;
+  - Overflow 0;
+  - Hero-Bild vor/nach Aufklappen Δ 0×0;
+- Assets geändert: **0**.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.639 installieren und live ausschließlich `Fertigen → Buch & Papier` prüfen.**
+**1.50.640 installieren und live ausschließlich `Fertigen → Buch & Papier` prüfen.**
