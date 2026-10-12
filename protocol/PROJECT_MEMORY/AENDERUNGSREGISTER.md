@@ -1400,3 +1400,19 @@ Der Live-Readback zeigte, dass reine Datei-Hash-Eindeutigkeit nicht genügt, wen
 
 UNVERÄNDERT:
 Kategorie-/Taxonomie-/Providerarchitektur; Banner-/Produktregel aus 1.50.624.
+
+
+## HOBBYRAUSCH-DESIGN-20261012-J – natürliche Hubtexte, klarere Bilder, harte Einzeilen-Navigation
+
+WAS:
+- acht Hauptwelt-Heros erhalten eigene direkte Texte;
+- `Mehr über … erfahren` entfällt auf Hauptwelten;
+- stattdessen je Hauptwelt ein längerer Text am Seitenende mit Zwischenüberschriften und passenden Links zu realen direkten Unterkategorien;
+- 65 Hubmotive werden enger/ruhiger dargestellt;
+- Navigation ab 761 px exakt eine gemeinsame Baseline inkl. Sammeln.
+
+WARUM:
+Live-Readback zeigte weiterhin zu schablonenhafte Texte, zu kleinteilige Bilder und eine optisch abfallende Sammeln-Navigation.
+
+UNVERÄNDERT:
+Kategorie-/Taxonomie-/Providerarchitektur und Monetarisierungsregeln.
