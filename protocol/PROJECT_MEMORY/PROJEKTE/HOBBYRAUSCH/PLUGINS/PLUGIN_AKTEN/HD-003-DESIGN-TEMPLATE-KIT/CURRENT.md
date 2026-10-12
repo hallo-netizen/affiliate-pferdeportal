@@ -3,35 +3,32 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.645 LOCAL HARD PASS / LIVE-PASS PILOT OFFEN**
+STATUS: **1.50.647 LOCAL HARD PASS / LIVE-PASS OFFEN**
 
 Version:
-**1.50.645**
+**1.50.647**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.645_HOBBY_DEPOT_BP_EXACT_LEVEL1_CARDS_BANNER_CLEAN_IMAGES_CLAIM_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.647_HOBBY_DEPOT_HUB2_RELEASE_CHAIN_FATAL_FIX_LOCALPASS.zip`
 
 SHA-256:
-`03cacb5faebec8cd579b0050ce64be100819ca6e0bc861ef9bfe477f1105306c`
+`db5427357bd251f084ab9a8545dee33d760a7b38ace686a5146543ca07210833`
 
-## Scope
-- Unterstrich zurück auf 1.50.643-Position;
-- Header-Claim wirklich verdickt über neues, ansonsten pixelidentisches Logoasset;
-- Pilotbilder ohne eingebrannte Rundung/weißen Saum;
-- Kartenpfad exakt Ebene 1;
-- 5 Karten = 3 oben + 2 links unten + Banner im freien dritten Slot;
-- kein doppelter Banner.
+Library:
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.647_HOBBY_DEPOT_HUB2_RELEASE_CHAIN_FATAL_FIX_LOCALPASS.zip`
+
+## Root Cause 1.50.646
+Aktives V150646-Profil zeigte noch auf v150645-Templates; diese riefen die nicht geladene V150645-Klasse auf. Runtime-Fatal.
+
+## Fix
+Komplette aktive Release-Kette auf V150647 vereinheitlicht.
 
 ## Lokal
-- PHP 49/49 PASS;
+- PHP 53/53 PASS;
 - ZIP PASS;
-- 1440/1024: 3+2+Banner;
-- 900: 2-spaltig responsive;
-- 760: 1-spaltig;
-- Overflow 0;
-- Bild/Slot Δ 0;
-- Quellbild-Ecken sauber;
-- Logoänderung nur im Claim-Band.
+- aktive Release-Bindung end-to-end PASS;
+- aktive V150645/V150646-Klassenreferenzen 0;
+- Hub2-Rollout aus 1.50.646 fachlich unverändert enthalten.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.645 installieren und live nur Buch & Papier + Header-Claim prüfen.**
+**1.50.647 installieren und live prüfen.**
