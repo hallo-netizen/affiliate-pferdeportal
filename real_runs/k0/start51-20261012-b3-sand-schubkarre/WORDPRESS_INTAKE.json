@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schubkarren-faq",
+      "plan_slot": "3bd57f390f833651501bbb90b10eda4f7157e9705ea1f871755c6012c43700dd",
+      "target_keyword": "Wie viel Kilo Sand passt in eine Schubkarre",
+      "title": "Wie viel Kilo Sand passt in eine Schubkarre?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "52f34a866e74446d267c427d8303b2997d24d1208b50088c8d6e936a47f38abf"
+}
