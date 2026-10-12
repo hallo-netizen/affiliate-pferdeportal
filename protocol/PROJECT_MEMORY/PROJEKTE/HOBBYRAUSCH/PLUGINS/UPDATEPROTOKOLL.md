@@ -2446,3 +2446,45 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-055 – HD-003 1.50.647 / Release-Ketten-Fatal aus 1.50.646 behoben
+
+LIVE-BEFUND 1.50.646:
+WordPress kritischer Fehler direkt nach Installation.
+
+EXAKTE URSACHE:
+- Mainplugin: V150646;
+- aktive Profilklasse: V150646;
+- route_template: v150645 Templates;
+- v150645 Templates: Aufrufe an Hobby_Depot_Profile_V150645;
+- damit Runtime-Class-Fatal.
+
+FIX 1.50.647:
+Komplette aktive Kette einheitlich:
+Main 1.50.647 → Profil V150647 → Front v150647 → Content v150647 → Templatecalls V150647.
+
+INHALT:
+Der beauftragte Hub2-Rollout aus 1.50.646 bleibt enthalten:
+- Hero mit vorhandenem Bild + Verlauf;
+- individueller Schreibschrift-/Brush-Claim;
+- Aufklapptext nach bestehender Pferdeatelier-Regel;
+- performance-schonende Asset-Wiederverwendung;
+- Kategorien → Produkte → 3 Beiträge → Werbeplatz;
+- kein unterer Hub2-Editorialblock.
+
+TEST:
+- PHP 53/53 PASS;
+- ZIP PASS;
+- aktive Release-Chain PASS;
+- aktive Stale-V150645/V150646-Refs 0.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.647_HOBBY_DEPOT_HUB2_RELEASE_CHAIN_FATAL_FIX_LOCALPASS.zip`
+
+SHA:
+`db5427357bd251f084ab9a8545dee33d760a7b38ace686a5146543ca07210833`
+
+LIVE:
+OFFEN.
+
