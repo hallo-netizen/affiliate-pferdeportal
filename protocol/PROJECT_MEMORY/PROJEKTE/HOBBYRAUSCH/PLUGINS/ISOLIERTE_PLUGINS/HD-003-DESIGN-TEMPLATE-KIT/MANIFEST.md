@@ -4,28 +4,28 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.644`
+`1.50.645`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.645_HOBBY_DEPOT_BP_EXACT_LEVEL1_CARDS_BANNER_CLEAN_IMAGES_CLAIM_FIX_LOCALPASS.zip`
 
 SHA-256:
-`da5be83cfab375759448e0ae995734e3cddf739241fad4ca5841c44b203da9c0`
+`03cacb5faebec8cd579b0050ce64be100819ca6e0bc861ef9bfe477f1105306c`
 
 LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.645_HOBBY_DEPOT_BP_EXACT_LEVEL1_CARDS_BANNER_CLEAN_IMAGES_CLAIM_FIX_LOCALPASS.zip`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE PILOT OFFEN.
 
 PASS:
-- PHP 46/46;
+- PHP 49/49;
 - ZIP;
-- interne Releasebindung 1.50.644 konsistent;
-- Ebene-1-Karten-/Bildklassen im Buch-&-Papier-Pilot 1:1 wiederverwendet;
-- 1440/1024/900/760 ohne Overflow;
-- Bildwrapper/Bild flush;
-- Header-Claim-Dickenlagen aktiv.
+- echte Browser-Simulation 1440/1024/900/760;
+- 3+2+Banner bei Desktop;
+- Bilder flush im Ebene-1-Wrapper;
+- keine eingebrannten runden/weißen Bildecken;
+- Claim-Asset nur im Claim-Band verändert.
 
 LIVE:
 Buch & Papier + Header-Claim offen.
