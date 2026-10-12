@@ -4,42 +4,39 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.628`
+`1.50.629`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.628_HOBBY_DEPOT_NAV_RAISE_LARGER_IMAGES_LINK_CLEANUP_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
 
 SHA-256:
-`2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`
+`6efba12354975852d8253e6141b0bbbcaf1174f60244a0e982e4caac0659c5cb`
+
+LIBRARY:
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
 
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE-PASS OFFEN.
+LOCAL HARD PASS / LIVE-PASS BILDER OFFEN.
 
 PASS:
 - PHP 10/10;
 - ZIP;
-- V150628 Binding;
-- Navigation leicht angehoben, 8 gleiche Baselines;
-- Sammeln gleiche Baseline;
-- größere Kartenbildfläche;
-- max. 3 interne Links je Hauptwelt-Endtext;
-- 65 Bildassets / 65 eindeutige SHA.
+- V150629 Binding;
+- 65 v150629 Kategorie-/Link-Bilder;
+- 65/65 600×320;
+- 65/65 eindeutige SHA;
+- Navigation/Text/Layout aus 1.50.628 unverändert;
+- 1.50.628-Live-PASS für Navigation, Hero-Texte und Seitenendtexte bleibt erhalten.
 
 LIVE:
-offen.
-
+Nur Kategorie-/Link-Bilder offen.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
 
-Abschlusscheck 2026-10-12:
-Der geforderte Pfad
+Der vorgeschriebene Campus-Pfad
 `PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`
-liefert 404.
+bleibt ohne sichere Binärschreibmöglichkeit unbefüllt.
 
-Der exakte 1.50.628-Kandidat wurde außerhalb der Bibliothek lokal erneut geprüft:
-SHA-256 `2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`,
-ZIP-Integrität PASS, Version 1.50.628, PHP 10/10 PASS.
-
-Die Binärkopie konnte mit den in diesem Abschlusslauf verfügbaren GitHub-Textwerkzeugen nicht sicher in den Campus geschrieben werden.
+Der exakte 1.50.629-Kandidat liegt in der Library am oben genannten Pfad und wurde lokal SHA-/ZIP-/Versions-/PHP-/Bildsatz-geprüft.
 Keine falsche CURRENT.zip angelegt.
