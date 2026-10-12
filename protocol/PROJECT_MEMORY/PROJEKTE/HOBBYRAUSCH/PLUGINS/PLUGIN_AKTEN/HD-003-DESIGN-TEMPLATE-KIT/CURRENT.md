@@ -3,30 +3,38 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.642 LOCAL HARD PASS / LIVE-PASS PILOT OFFEN**
+STATUS: **1.50.644 LOCAL HARD PASS / LIVE-PASS PILOT OFFEN**
 
 Version:
-**1.50.642**
+**1.50.644**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.642_HOBBY_DEPOT_BRUSH_SHORTER_SQUARE_PHOTOS_HEADER_CLAIM_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
 
 SHA-256:
-`3e8e4a2e9de867c5d0d55e4ef45a1156d60d382713f6f8333a3344f51ba554d7`
+`da5be83cfab375759448e0ae995734e3cddf739241fad4ca5841c44b203da9c0`
+
+Library:
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
 
 ## Scope
-Nur Mikrofix:
-- Brush kürzer/dünner/mehr Abstand;
-- Kategorie-Fotos Radius 0;
-- Kartenradius 1 px;
-- Header-Claim leicht kräftiger.
+Nur:
+- Unterstrich etwas höher;
+- Header-Claim sichtbar kräftiger, ohne Größenänderung;
+- Buch-&-Papier-Karten/Bilder exakt auf Ebene-1-Markup-/CSS-Pfad umgestellt.
 
 ## Lokal
-- PHP 40/40 PASS;
+- PHP 46/46 PASS;
 - ZIP PASS;
-- Hero rechts 2 px bleibt;
-- Bildslots unverändert 200×107 / 165×88 / 145×78;
-- keine Architektur-/Taxonomieänderung.
+- aktive Version/Class/Templates konsistent 1.50.644;
+- Browser-Simulation 1440/1024/900/760;
+- 1440: 3+2 Karten;
+- 900: 2+2+1;
+- 760: 1-spaltig;
+- Overflow 0;
+- Bildslot flush zum 1-px-Kartenrahmen;
+- Bild gegen Slot Δ 0;
+- Header-Claim-Doppellagen aktiv.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.642 installieren und live nur Buch & Papier prüfen.**
+**1.50.644 installieren und live nur Buch & Papier + Header-Claim prüfen.**
