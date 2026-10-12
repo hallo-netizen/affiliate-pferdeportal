@@ -3,38 +3,35 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.644 LOCAL HARD PASS / LIVE-PASS PILOT OFFEN**
+STATUS: **1.50.645 LOCAL HARD PASS / LIVE-PASS PILOT OFFEN**
 
 Version:
-**1.50.644**
+**1.50.645**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.645_HOBBY_DEPOT_BP_EXACT_LEVEL1_CARDS_BANNER_CLEAN_IMAGES_CLAIM_FIX_LOCALPASS.zip`
 
 SHA-256:
-`da5be83cfab375759448e0ae995734e3cddf739241fad4ca5841c44b203da9c0`
-
-Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.644_HOBBY_DEPOT_LEVEL1_CARD_COPY_HEADER_CLAIM_UNDERLINE_LOCALPASS.zip`
+`03cacb5faebec8cd579b0050ce64be100819ca6e0bc861ef9bfe477f1105306c`
 
 ## Scope
-Nur:
-- Unterstrich etwas höher;
-- Header-Claim sichtbar kräftiger, ohne Größenänderung;
-- Buch-&-Papier-Karten/Bilder exakt auf Ebene-1-Markup-/CSS-Pfad umgestellt.
+- Unterstrich zurück auf 1.50.643-Position;
+- Header-Claim wirklich verdickt über neues, ansonsten pixelidentisches Logoasset;
+- Pilotbilder ohne eingebrannte Rundung/weißen Saum;
+- Kartenpfad exakt Ebene 1;
+- 5 Karten = 3 oben + 2 links unten + Banner im freien dritten Slot;
+- kein doppelter Banner.
 
 ## Lokal
-- PHP 46/46 PASS;
+- PHP 49/49 PASS;
 - ZIP PASS;
-- aktive Version/Class/Templates konsistent 1.50.644;
-- Browser-Simulation 1440/1024/900/760;
-- 1440: 3+2 Karten;
-- 900: 2+2+1;
+- 1440/1024: 3+2+Banner;
+- 900: 2-spaltig responsive;
 - 760: 1-spaltig;
 - Overflow 0;
-- Bildslot flush zum 1-px-Kartenrahmen;
-- Bild gegen Slot Δ 0;
-- Header-Claim-Doppellagen aktiv.
+- Bild/Slot Δ 0;
+- Quellbild-Ecken sauber;
+- Logoänderung nur im Claim-Band.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.644 installieren und live nur Buch & Papier + Header-Claim prüfen.**
+**1.50.645 installieren und live nur Buch & Papier + Header-Claim prüfen.**
