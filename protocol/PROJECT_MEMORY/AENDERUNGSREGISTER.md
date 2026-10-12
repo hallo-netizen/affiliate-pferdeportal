@@ -1430,3 +1430,17 @@ Live-Readback zeigte: Baseline war endlich gleichmäßig, saß aber zu tief; Bil
 
 UNVERÄNDERT:
 Hero-Texte, acht Langtexte, Kategorie-/Taxonomie-/Providerarchitektur, Monetarisierungsregeln und 65 kontrollierte Bildmotive.
+
+## HOBBYRAUSCH-DESIGN-20261012-L – Kategorie-Bilder weiter und klarer
+
+WAS:
+- 1.50.628-Live-PASS für Navigation, Hero-Texte und Seitenendtexte bleibt unverändert;
+- nur die 65 Kategorie-/Link-Bilder werden korrigiert;
+- statt enger Detailanschnitte wieder verständlichere Gesamtmotive mit mehr ruhigem Kontext;
+- Grundlage ist der bereits geprüfte einfache/klare 1.50.625-Motivsatz, neu als v150629 gebunden.
+
+WARUM:
+Der Live-Readback 1.50.628 zeigte trotz größerer Kartenfläche einen Lupen-/Detail-Eindruck. Teilweise war nur ein Motivteil sichtbar; das Thema war nicht sofort erkennbar.
+
+UNVERÄNDERT:
+Navigation, Hero-Texte, Seitenendtexte, Kartenmaße, Kategorie-/Taxonomie-/Providerarchitektur und Monetarisierungsregeln.
