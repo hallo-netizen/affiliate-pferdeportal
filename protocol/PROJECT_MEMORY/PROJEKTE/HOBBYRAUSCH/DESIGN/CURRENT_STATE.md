@@ -3,51 +3,63 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.626 CRITICAL-HOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.627 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.627_HOBBY_DEPOT_HUB_COPY_IMAGES_NAV_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`74cd55b87a608287ff4f4d7d3d7f3f80aa84dd478b8f675ab136e297064a54ea`
+`bc6690acd847dac08b646243a07f133b189b5facc5abc6ba58526a79d383d158`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.627_HOBBY_DEPOT_HUB_COPY_IMAGES_NAV_FINAL_LOCALPASS.zip`
 
-## Exakte Ursache des kritischen Fehlers in 1.50.625
+## Delta 1.50.627
 
-Nicht geraten, im ZIP direkt gefunden:
+### Navigation
+- ab 761 px exakt eine horizontale 8er-Zeile;
+- alle acht Labels besitzen identische Y-/Bottom-Koordinate;
+- `Sammeln` ausdrücklich mitgemessen;
+- Pfeil sitzt in eigener Gridspalte und beeinflusst die Textbaseline nicht;
+- Navigation direkt an der unteren Headerkante.
 
-Die beiden aktiven v150625-Templates riefen weiterhin die **entfernte Klasse**
-`Hobby_Depot_Profile_V150624` auf.
+### Hub-Bilder
+- 65 kontrollierte direkte Welt-Unterkategorie-Motive;
+- alle 600×320;
+- optisch stärker herangezoomt: größere Hauptmotive, weniger Nebenmotive/Detailrauschen;
+- 65/65 unterschiedliche SHA-256;
+- zusätzlicher perceptual dHash: Mindestabstand 92;
+- kontrollierte Assets bleiben vor WordPress Featured Images.
 
-Betroffen:
-- `templates/hobby-depot-front-v150625.php`
-- `templates/hobby-depot-content-v150625.php`
+### Texte der acht Hauptwelten
+- Hero-Seitentexte komplett neu;
+- alle acht unterschiedlich;
+- direkte, natürliche Ansprache;
+- beschreiben konkret, was der Nutzer dort findet;
+- kein generischer Auto-Text.
 
-Die 1.50.625-Klasse hieß aber:
-`Hobby_Depot_Profile_V150625`
+### Hub1-Langtext
+- `Mehr über <Welt> erfahren` vollständig aus dem Hauptkategorie-Ausgabepfad entfernt;
+- stattdessen am Seitenende je Hauptwelt ein eigener längerer redaktioneller Text;
+- klare Zwischenüberschriften;
+- direkte Ansprache;
+- semantisch passende Textlinks ausschließlich zu real vorhandenen direkten Unterkategorien;
+- alle Link-Slugs gegen das zentrale Kategorieprofil validiert.
 
-Damit entstand beim Templateaufruf ein fataler Klassenfehler.
-
-## Fix 1.50.626
-
-- neue aktive Klasse `Hobby_Depot_Profile_V150626`;
-- main plugin require → v150626;
-- Router → v150626 Front-/Contenttemplate;
-- beide Templates → ausschließlich `Hobby_Depot_Profile_V150626`;
-- keine alten V150624/V150625-Klassenreferenzen mehr in aktivem PHP;
-- Design/Bilder/Navigation/Monetarisierung von 1.50.625 unverändert übernommen.
-
-## Fresh Hardtest
-
+## Lokal
 - PHP **10/10 PASS**;
-- ZIP-Integrität PASS;
-- deklarierte Hobby-Klasse: nur `Hobby_Depot_Profile_V150626`;
-- alle aktiven Template-/Main-Referenzen auf genau diese Klasse;
-- fehlende Klassenreferenzen: **0**;
-- Binding-Assertions PASS.
+- ZIP PASS;
+- Klassen-/Templatebindung V150627 PASS;
+- alte V150624/V150625/V150626-Klassenreferenzen 0;
+- 65/65 Bilder 600×320;
+- 65/65 SHA-eindeutig;
+- dHash-Minimum 92;
+- 8/8 Hero-Texte eindeutig;
+- 8/8 Langtexte vorhanden;
+- `Mehr über … erfahren` im aktiven Codepfad 0;
+- Navigation Playwright 1600/1200/1024/900/800/761: gleiche Baseline inkl. Sammeln, Overflow 0;
+- 760: Mobilepfad;
+- Sammeln-Flyout viewport-safe.
 
 ## EXAKT EINE NEXT ACTION
-
-**1.50.626 installieren. Erst prüfen, ob die Seite wieder ohne Critical Error lädt.**
+**1.50.627 installieren und Technik + Pflanzen + Sammeln live prüfen.**
