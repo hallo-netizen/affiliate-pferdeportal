@@ -2,41 +2,30 @@
 
 ROLLE: Fehlerhistorie. Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT_STATE.md`.
 
-## HRD-001 bis HRD-052
+## HRD-001 bis HRD-056
 Historie bleibt bestehen.
 
-## HRD-053 – Hauptnavigation: Sammeln fällt weiterhin aus der Linie
-STATUS: LOCAL CLOSED 1.50.627 / LIVE OFFEN
+## HRD-057 – Navigation 1.50.627 gleichmäßig, aber insgesamt zu tief
+STATUS: LOCAL CLOSED 1.50.628 / LIVE OFFEN
 
 FIX:
-Ab 761 px feste 8-spaltige Grid-Navigation mit exakt einer 26-px-Zeile.
-Linklabel und Pfeil besitzen getrennte Gridspalten; der Pfeil kann die Label-Baseline nicht mehr verschieben.
+Einzeilen-Baseline bleibt unverändert, komplette Navigationszeile wird 8 px angehoben. Finale Unterkante: 6 px vor der Header-Trennlinie.
 
-TEST:
-1600/1200/1024/900/800/761 px: alle 8 Labels exakt gleiche Y-/Bottom-Koordinate, Overflow 0.
-
-## HRD-054 – Hubmotive zu kleinteilig / zu voll
-STATUS: LOCAL CLOSED 1.50.627 / LIVE OFFEN
+## HRD-058 – Hub-Kartenbilder trotz besserer Motive zu klein lesbar
+STATUS: LOCAL CLOSED 1.50.628 / LIVE OFFEN
 
 FIX:
-Alle 65 kontrollierten Motive enger gezoomt und neu als 600×320 ausgegeben.
-Ziel: Hauptmotiv größer, weniger Umgebung, ruhiger lesbar.
+Keine neue Motivserie. Sichtbare Bildfläche vergrößert:
+Desktop 200×107, Tablet 165×88, Mobile 145×78.
 
-TEST:
-65/65 eindeutige SHA-256; perceptual dHash Mindestabstand 92.
+## HRD-059 – Zu viele interne Links in den Seitenendtexten
+STATUS: LOCAL CLOSED 1.50.628 / LIVE OFFEN
 
-## HRD-055 – Hero-Texte schablonenhaft und unnatürlich
-STATUS: LOCAL CLOSED 1.50.627 / LIVE OFFEN
-
-FIX:
-Für alle 8 Hauptwelten eigene, direkte, natürliche Kurztexte statt Auto-Schablone.
-
-## HRD-056 – `Mehr über … erfahren` auf Hauptwelten unerwünscht
-STATUS: LOCAL CLOSED 1.50.627 / LIVE OFFEN
+KRITISCHE ENTSCHEIDUNG:
+Die bisherige Dichte war unnötig und wirkte SEO-/Navigations-lastig.
 
 FIX:
-Accordion vollständig aus dem Hub1-Ausgabepfad und aus dem aktiven Code entfernt.
-Dafür pro Hauptwelt eigener Langtext am Seitenende mit Zwischenüberschriften und validierten semantischen Links.
+Maximal 3 interne Links pro Hauptwelt, maximal einer pro Zwischenabschnitt. Weitere sinnvolle Kategorienennungen bleiben unverlinkter Klartext.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.627: Technik, Pflanzen, Sammeln.**
+**Live-Abnahme 1.50.628: Navigation, Bildgröße, Linkdichte.**
