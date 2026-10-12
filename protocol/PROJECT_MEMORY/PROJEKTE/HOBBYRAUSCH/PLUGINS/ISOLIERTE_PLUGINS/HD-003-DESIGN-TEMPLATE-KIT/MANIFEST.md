@@ -4,23 +4,30 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.626`
+`1.50.627`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.627_HOBBY_DEPOT_HUB_COPY_IMAGES_NAV_FINAL_LOCALPASS.zip`
 
 SHA-256:
-`74cd55b87a608287ff4f4d7d3d7f3f80aa84dd478b8f675ab136e297064a54ea`
+`bc6690acd847dac08b646243a07f133b189b5facc5abc6ba58526a79d383d158`
 
 PRÜFSTATUS:
-CRITICAL-HOTFIX LOCAL HARD PASS / LIVE-PASS OFFEN.
+LOCAL HARD PASS / LIVE-PASS OFFEN.
 
 PASS:
 - PHP 10/10;
 - ZIP;
-- Main/Klasse/Router/Templates konsistent V150626;
-- fehlende Hobby-Klassenreferenzen 0;
-- alte V150624/V150625 aktive Klassenreferenzen 0.
+- V150627 Klassen-/Templatebinding;
+- 65× 600×320;
+- 65 eindeutige SHA-256;
+- dHash minimum 92;
+- 8 unique Hero-Texte;
+- 8 Seitenend-Langtexte;
+- `Mehr über … erfahren` entfernt;
+- Nav 761+ gleiche Baseline inkl. Sammeln;
+- Overflow 0 in geprüften Viewports;
+- Sammeln-Flyout viewport-safe.
 
 LIVE:
 offen.
