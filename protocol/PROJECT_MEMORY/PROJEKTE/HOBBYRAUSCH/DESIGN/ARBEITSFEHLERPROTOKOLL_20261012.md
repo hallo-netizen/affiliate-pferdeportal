@@ -221,3 +221,18 @@ Gleicher Sprite-Ausschnitt wird ohne Größenänderung mit zwei zusätzlichen ±
 VERMEIDUNGSREGEL:
 Bei sichtbarer Strichstärkenänderung nicht nur CSS-Vorhandensein, sondern gerenderte Wirkung bzw. eindeutig wirksame Mehrfachlage prüfen.
 
+## AF-017 – Bilddatei selbst nicht geprüft; CSS fälschlich als alleinige Ursache behandelt
+FEHLER:
+Bei mehreren Korrekturen wurde geprüft, ob Wrapper und IMG Radius/Margin/Padding 0 haben. Nicht geprüft wurde früh genug, ob die sichtbare Rundung bereits in den Pixeln der fünf Pilotbilder steckt.
+
+FOLGE:
+Mehrere lokal technisch korrekte CSS-Aussagen führten live weiterhin zu sichtbar gerundeten/weiß gerahmten Bildern.
+
+VERMEIDUNGSREGEL:
+Bei sichtbaren Bildrändern immer getrennt prüfen:
+1. Quelldatei/Pixelecken,
+2. IMG,
+3. Wrapper,
+4. Karten-Clipping.
+Ein CSS-PASS reicht nicht, wenn das Artefakt im Bild selbst eingebrannt ist.
+
