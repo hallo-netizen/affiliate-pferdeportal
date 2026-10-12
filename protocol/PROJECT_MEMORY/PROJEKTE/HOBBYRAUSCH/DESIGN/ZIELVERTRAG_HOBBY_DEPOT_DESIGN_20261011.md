@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.5 / 2026-10-12
+FASSUNG: 2.6 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -33,8 +33,11 @@ FASSUNG: 2.5 / 2026-10-12
 ## Hub-/Unterkategorie-Bilder
 - alle 65 direkten Unterkategorien der acht Hauptwelten besitzen kontrollierte 600×320-Motive;
 - ein klares Hauptmotiv / eine klare Tätigkeit;
-- ruhiger Hintergrund;
-- wenig Nebenmotive;
+- Thema muss auf den ersten Blick verständlich sein;
+- kein Lupen-/Makroeindruck und kein unnötig enger Anschnitt;
+- wenn ein Gegenstand das Thema trägt, möglichst als verständliches Ganzes statt nur als Detail zeigen;
+- weiter gefasster natürlicher Bildausschnitt mit etwas Kontext, aber ruhigem Hintergrund;
+- nur wenige unterstützende Bildelemente; keine überladenen Szenen;
 - keine identischen oder visuell nahezu identischen Motive;
 - kontrolliertes Designasset vor WordPress Featured Images;
 - kein Parent-/Hero-Bild als Universalersatz.
