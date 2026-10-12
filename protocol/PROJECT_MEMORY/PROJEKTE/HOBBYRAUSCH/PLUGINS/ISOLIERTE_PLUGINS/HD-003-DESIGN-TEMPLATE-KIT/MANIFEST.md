@@ -4,27 +4,32 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.636`
+`1.50.637`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.636_HOBBY_DEPOT_HUB2_REFINEMENT_TEST_POSTS_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.637_HOBBY_DEPOT_HUB2_CLAIM_EXPAND_TEST_POST_FIX_LOCALPASS.zip`
 
 SHA-256:
-`d8d45997b136cd7d95e0a790f88dfbb4b3207a29b5b644e415b1ac8e0a72007a`
+`84bcfad3f867356b34f19a2f61b790300f1496869b3e92a3597481e332116e65`
+
+LIBRARY:
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.637_HOBBY_DEPOT_HUB2_CLAIM_EXPAND_TEST_POST_FIX_LOCALPASS.zip`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE HUB2 OFFEN.
 
 PASS:
-- PHP 22/22;
+- PHP 25/25;
 - ZIP;
-- 847/847 Assets byteidentisch zu 1.50.635;
-- Header/Nav/Hero/Ebene1 unverändert;
-- Hub2 1440/1024/760 Overflow 0;
-- 4 Testbeiträge + Featured-Image-Seedcode lokal geprüft.
+- 847/847 Assets byteidentisch;
+- Hub2 1440/1024/760 ohne Overflow;
+- 4 Beitragskarten;
+- 4/4 Beitragsbilder;
+- Testpost-Fallback ohne gleichnamige Beitragskategorie PASS;
+- Header/Nav/Hero/Ebene1 eingefroren.
 
 LIVE:
-Hub2 + Testbeiträge offen.
+Hub2 offen.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
