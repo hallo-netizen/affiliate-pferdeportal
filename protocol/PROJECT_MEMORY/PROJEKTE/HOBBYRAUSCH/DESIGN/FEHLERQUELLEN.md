@@ -72,9 +72,34 @@ Simulation mit echten Assets:
 - 930 px: 165×88, Rahmengeometrie 0;
 - 760 px: 145×78, Rahmengeometrie 0.
 
-## Aktuell erster Blocker
+
 **Live-Abnahme 1.50.635 auf einer realen Kategorieebene-2-/Hub2-Seite.**
+
+## Aktuell erster Blocker
+**Live-Abnahme 1.50.637: individueller Claim, aufklappbarer oberer Text und 4 Testbeiträge auf derselben Hub2-Seite.**
 
 ## Arbeitsfehlerprotokoll
 Dauerhafte interne Fehler-/Lernakte:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/ARBEITSFEHLERPROTOKOLL_20261012.md`
+
+## HRD-064 – Testbeiträge in 1.50.636 angelegt, aber auf Hub2 nicht sichtbar
+STATUS: **LOCAL CLOSED 1.50.637 / LIVE OFFEN**
+
+LIVE-BEFUND:
+Auf `Druck & Fotografie` blieb die Beitragsvorschau leer und zeigte den Hinweis, dass keine gleichnamige Beitragskategorie gebunden sei.
+
+ROOT CAUSE:
+`render_post_previews()` brach bei Seiten ohne gleichnamige WordPress-Beitragskategorie ab, bevor die vier Testbeiträge überhaupt abgefragt wurden. Die Zuordnung der Testbeiträge zu allen vorhandenen Beitragskategorien konnte dieses Gate daher nicht überwinden.
+
+FIX 1.50.637:
+- Testposts werden robust bei erstem eingeloggten Admin-/Frontend-Aufruf angelegt bzw. wiederverwendet;
+- sie sind privat, klar mit `[TEST]` markiert und besitzen Beitragsbilder;
+- für eingeloggte Hub2-Designprüfung existiert ein gezielter Demo-Fallback über Meta `_hd_demo_post_v150637=1`;
+- reale öffentliche Beitragslogik bleibt unverändert.
+
+TEST:
+PHP-Harness ohne gleichnamige Beitragskategorie → 4 Demo-Karten PASS.
+
+## Aktuell erster Blocker
+**Live-Abnahme 1.50.637: individueller Claim, aufklappbarer oberer Text und 4 Testbeiträge auf derselben Hub2-Seite.**
+
