@@ -1385,3 +1385,18 @@ Keine Taxonomie-/Workflow-/Provideränderung.
 - generische Kartenuntertitel entfernt; nur kurze echte Orientierung.
 
 Keine Kategorie-, Taxonomie- oder Provideränderung.
+
+
+## HOBBYRAUSCH-DESIGN-20261012-I – kontrollierte Hubmotive vor WP-Featured + harte Nav-Baseline
+
+WAS:
+- die 65 direkten Unterkategorie-Karten der acht Welt-Hubs verwenden kontrollierte klare 600×320-Motive vor vorhandenen WordPress Featured Images;
+- visuelle Duplikate werden zusätzlich per Perceptual-Hash geprüft;
+- ab 761 px laufen alle acht Hauptnavigationseinträge in genau einer Zeile/Baseline;
+- der Submenu-Pfeil ist aus dem Textfluss genommen und darf Sammeln nicht verschieben.
+
+WARUM:
+Der Live-Readback zeigte, dass reine Datei-Hash-Eindeutigkeit nicht genügt, wenn alte Featured Images die kontrollierten Assets übersteuern. Ebenso genügt ein CSS-bottom-Wert nicht, wenn einzelne Navigationscontrols die Textbaseline beeinflussen.
+
+UNVERÄNDERT:
+Kategorie-/Taxonomie-/Providerarchitektur; Banner-/Produktregel aus 1.50.624.
