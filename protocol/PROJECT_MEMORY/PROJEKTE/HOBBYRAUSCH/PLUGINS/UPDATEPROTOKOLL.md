@@ -2343,3 +2343,26 @@ SHA:
 LIVE:
 OFFEN. Nur Buch & Papier prüfen.
 
+---
+
+## PU-20261012-052 – HD-003 1.50.642 / Mikrofix
+
+ÄNDERUNG:
+- Brush-Unterstrich ca. ein Drittel kürzer und dünner, mehr Abstand zur Schrift;
+- Kategorie-Fotos Radius 0;
+- Kartenrahmen Radius 1 px;
+- Header-Claim optisch leicht kräftiger;
+- Hero rechts bleibt 2 px.
+
+TEST:
+PHP 40/40 PASS; ZIP PASS; Bildslots 200×107 / 165×88 / 145×78 unverändert.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.642_HOBBY_DEPOT_BRUSH_SHORTER_SQUARE_PHOTOS_HEADER_CLAIM_LOCALPASS.zip`
+
+SHA:
+`3e8e4a2e9de867c5d0d55e4ef45a1156d60d382713f6f8333a3344f51ba554d7`
+
+LIVE:
+OFFEN.
+
