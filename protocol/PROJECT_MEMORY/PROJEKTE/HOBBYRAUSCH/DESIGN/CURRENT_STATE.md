@@ -3,73 +3,51 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.625 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.626 CRITICAL-HOTFIX LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
 
 SHA-256:
-`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
+`74cd55b87a608287ff4f4d7d3d7f3f80aa84dd478b8f675ab136e297064a54ea`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
 
-## Root Cause aus dem Live-Readback 1.50.624
+## Exakte Ursache des kritischen Fehlers in 1.50.625
 
-Die 65 lokalen Dateien waren zwar byte-eindeutig, wurden live aber teilweise gar nicht benutzt:
-`next_level_card_photo()` gab vorhandenen WordPress-Featured-Images Vorrang.
+Nicht geraten, im ZIP direkt gefunden:
 
-Dadurch konnten mehrfach gepflegte alte Featured Images die kontrollierten Motive überstimmen.
+Die beiden aktiven v150625-Templates riefen weiterhin die **entfernte Klasse**
+`Hobby_Depot_Profile_V150624` auf.
 
-## Korrektur 1.50.625
+Betroffen:
+- `templates/hobby-depot-front-v150625.php`
+- `templates/hobby-depot-content-v150625.php`
 
-### Bilder
-- kontrollierte 600×320-Hubmotive werden für die 65 direkten Welt-Unterkategorien jetzt **vor** WordPress Featured Images aufgelöst;
-- 65/65 aktive Bildpfade;
-- 65/65 unterschiedliche SHA-256;
-- Perceptual-dHash Mindestabstand im Gesamtbestand: **96**;
-- Bildprinzip auf alle 65 angewendet: engere, ruhigere, klarere Einzelmotive; keine Hero-/Parent-Wiederholung als Universalersatz.
+Die 1.50.625-Klasse hieß aber:
+`Hobby_Depot_Profile_V150625`
 
-### Navigation
-- ab 761 px Flex-Zeile statt 4×2;
-- alle 8 Welten exakt gleiche Item-/Labelhöhe;
-- Submenu-Pfeil absolut positioniert und kann `Sammeln` nicht mehr vertikal verschieben;
-- Navigation liegt bottom -1 px an der Headerkante.
+Damit entstand beim Templateaufruf ein fataler Klassenfehler.
 
-### Monetarisierung
-Unverändert aus 1.50.624:
-- keine Produkte zwischen Kategorie-Reihen;
-- Banner füllt nur freie Restbreite;
-- Produkte außerhalb des Kategorienrasters.
+## Fix 1.50.626
 
-## Lokaler Hardtest
+- neue aktive Klasse `Hobby_Depot_Profile_V150626`;
+- main plugin require → v150626;
+- Router → v150626 Front-/Contenttemplate;
+- beide Templates → ausschließlich `Hobby_Depot_Profile_V150626`;
+- keine alten V150624/V150625-Klassenreferenzen mehr in aktivem PHP;
+- Design/Bilder/Navigation/Monetarisierung von 1.50.625 unverändert übernommen.
 
-PHP:
-**10/10 PASS**
+## Fresh Hardtest
 
-ZIP:
-PASS
-
-Bilder:
-- 65 Dateien;
-- 65× 600×320;
-- 65 eindeutige SHA-256;
-- dHash-Minimalabstand 96;
-- zentraler Kategoriebaum: 65/65 direkte Kinder besitzen passendes v150625-Asset.
-
-Featured-Image-Negativtest:
-- simuliertes identisches WordPress-Featured-Image vorhanden;
-- Renderer liefert trotzdem das kontrollierte `audio-hifi-v150625.webp`;
-- PASS.
-
-Navigation / Playwright:
-- 1600 / 1200 / 1024 / 900 / 800 / 761 px:
-  - horizontaler Overflow 0;
-  - alle acht Labels exakt gleiche Y-/Bottom-Koordinate;
-  - `Sammeln` exakt gleiche Baseline;
-- 760 px: Mobilepfad;
-- Sammeln-Flyout bei allen getesteten Desktop-/Tabletbreiten sichtbar und innerhalb des Viewports.
+- PHP **10/10 PASS**;
+- ZIP-Integrität PASS;
+- deklarierte Hobby-Klasse: nur `Hobby_Depot_Profile_V150626`;
+- alle aktiven Template-/Main-Referenzen auf genau diese Klasse;
+- fehlende Klassenreferenzen: **0**;
+- Binding-Assertions PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.625 installieren und Technik + Pflanzen live prüfen: Bildwiederholungen und Sammeln-Baseline.**
+**1.50.626 installieren. Erst prüfen, ob die Seite wieder ohne Critical Error lädt.**
