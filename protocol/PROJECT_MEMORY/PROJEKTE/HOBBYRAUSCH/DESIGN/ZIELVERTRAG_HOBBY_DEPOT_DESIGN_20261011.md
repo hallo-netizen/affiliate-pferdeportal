@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.8 / 2026-10-12
+FASSUNG: 2.9 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -14,7 +14,7 @@ FASSUNG: 2.8 / 2026-10-12
 - <761 px: Mobilmenü.
 - Navigationsicons entfallen; Text + Pfeil bleiben.
 - Flyouts per Hover/Fokus/Klick und viewport-sicher.
-- Der aktuell live bestätigte Header-/Navigationsstand ist eingefroren und darf durch reine Bildkorrekturen nicht verändert werden.
+- Der live bestätigte Header-/Navigationsstand ist eingefroren.
 
 ## Acht Hauptwelten – Hero
 - Jede Hauptwelt besitzt einen eigenen, natürlichen Hero-Text.
@@ -23,7 +23,7 @@ FASSUNG: 2.8 / 2026-10-12
 - Text sagt in einfachen Worten, was der Nutzer dort findet.
 - alle acht Texte inhaltlich verschieden.
 - kein `Mehr über <Welt> erfahren`-Accordion auf Hauptwelten.
-- Hero-Bilder sind von der aktuellen Kategorie-Vorschaubildkorrektur ausdrücklich ausgenommen und bleiben unverändert.
+- Hero-Bilder Ebene 1 bleiben unverändert.
 
 ## Acht Hauptwelten – Text am Seitenende
 - jede Hauptwelt endet mit einem längeren eigenständigen redaktionellen Text;
@@ -31,46 +31,50 @@ FASSUNG: 2.8 / 2026-10-12
 - direkte Ansprache;
 - keine Keyword-/SEO-Textwüste;
 - interne Links sparsam: **maximal 3 pro Hauptwelt, maximal einer pro Abschnitt**;
-- nur semantisch passende reale Zielkategorien;
-- weitere Kategorienennungen ohne Link, wenn der Link keinen zusätzlichen Nutzwert bringt.
+- nur semantisch passende reale Zielkategorien.
 
-## Hub-/Unterkategorie-Bilder
-- alle 65 direkten Unterkategorien der acht Hauptwelten besitzen kontrollierte 600×320-Motive;
-- ein klares Hauptmotiv / eine klare Tätigkeit;
-- Thema muss auf den ersten Blick verständlich sein;
-- kein Lupen-/Makroeindruck und kein unnötig enger Anschnitt;
-- Hauptmotiv sichtbar weiter gefasst als in 1.50.629;
-- wenn ein Gegenstand das Thema trägt, möglichst als verständliches Ganzes statt nur als Detail zeigen;
-- ruhiges Bildumfeld mit wenig konkurrierenden Elementen;
-- keine wiederverwendeten Szenenfamilien über mehrere Kategorien;
-- keine identischen oder visuell nahezu identischen Motive;
-- kontrolliertes Designasset vor WordPress Featured Images;
-- auf Hub Ebene 1 kein Rückfall auf alte mehrfach verwendete Featured Images;
-- kein Parent-/Hero-Bild als Universalersatz;
-- die Kategorie-Vorschau füllt ihren vorgesehenen Bildslot vollständig: **kein inset, kein Passepartout, kein künstlicher Rahmen, kein Bild-im-Bild**;
-- Bildslot selbst ohne zusätzlichen Innenabstand, sichtbaren Hintergrundsaum oder dekorativen Radius um das Foto;
-- Die sichtbare Bildfläche in den Karten muss groß genug sein, dass das Motiv sofort erkennbar ist; keine winzigen Thumbnails.
+## Hub-/Unterkategorie-Bilder Ebene 1
+- alle 65 direkten Unterkategorien besitzen kontrollierte Motive;
+- Thema auf den ersten Blick verständlich;
+- kein unnötiger Lupen-/Makroeindruck;
+- ruhiges Bildumfeld;
+- keine wiederverwendeten Szenenfamilien;
+- kein Rückfall auf alte mehrfach verwendete Featured Images;
+- kein Passepartout/Bild-im-Bild.
+- Stand 1.50.634 wird vorerst akzeptiert und nicht weiter verändert.
+
+## Kategorieebene 2 / Hub2
+- Breadcrumb oben.
+- H1 + kurzer Orientierungstext direkt oben.
+- **kein Hero-Foto auf Ebene 2**.
+- der lange Erklärungstext steht nicht oben, sondern am Seitenende.
+- direkte nächste Ebene vollständig sichtbar verlinken.
+- kleine Kartenfotos nur als Orientierung in den Verweisen; kein zweites großes Hero.
+- Affiliate-Banner als eigener Bereich **nach** der nächsten Ebene, nicht als Füller zwischen Kategorien.
+- danach passende Artikelvorschau.
+- danach konkrete Affiliate-Produkte passend zum aktuellen Hub2-Kontext.
+- danach genau ein direkt verkaufbarer Werbeplatz.
+- danach längerer redaktioneller Erklärungstext.
+- je tiefer die Seite, desto konkreter die Produktbelegung; nicht einfach mehr Produkte, sondern stärker thematisch passende Produkte.
+- Hub2 verwendet dafür die konkreteren `category_product_1..3`-Slots.
+- öffentlich leere Affiliate-Banner/Produkte unsichtbar; eingeloggte Arbeitsvorschau erlaubt.
 
 ## Karten
-- natürliche Überschrift: `Weiter in <Welt>` / `Weitere Kategorien`.
+- natürliche Überschrift `Weiter in <Thema>` / `Weitere Kategorien`.
 - Kartentitel 15 px.
-- Untertitel 12 px nur mit echtem Orientierungswert.
+- Untertitel nur mit echtem Orientierungswert.
 - kein generischer Fülltext.
 
-## Monetarisierung im Kategorienraster
-- Affiliate-Produkte stehen nicht zwischen Unterkategorie-Reihen.
-- Nur ein Affiliate-Banner darf die letzte unvollständige 3er-Reihe ergänzen:
-  - Rest 1 Kategorie → Banner 2 Kartenbreiten;
-  - Rest 2 Kategorien → Banner 1 Kartenbreite;
-  - Rest 0 → Banner als volle eigene Zeile.
-- Produkte außerhalb des Kategorie-Rasters als natives Empfehlungsmodul.
-- öffentlich leer unsichtbar; eingeloggt leer sichtbar.
+## Monetarisierung
+- Affiliate-Produkte nie zwischen Unterkategorie-Reihen.
+- Banner und Affiliate-Produkte sind getrennte Slottypen.
+- Direktwerbung ist ebenfalls getrennt und maximal ein Platz pro Seite.
+- Affiliate-Zentrale bleibt Monetarisierungsautorität.
 
 ## Bestehende Bindungen
-- Direktwerbung: maximal ein Platz, ein Foto, Brush-Headline, heller CTA.
 - keine Taxonomie-/Workflow-/Provideränderung durch Design.
 - HD-001/HD-004 bleiben Kategorie-/Runtime-Autorität.
-- Affiliate-Zentrale bleibt Monetarisierungsautorität.
+- keine neue Architektur.
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
