@@ -2,47 +2,46 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-11
-STATUS: **1.50.622 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STAND: 2026-10-12
+STATUS: **1.50.623 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.622_HOBBY_DEPOT_TWO_COLUMN_HEADER_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
 
 SHA-256:
-`0de280b67edb7dbfd4d3ee86415038f281885f881bafba41f8799a073d23b1bd`
+`0b5021854f5bbb1a3ab35bcba0fc14bd522cb6679b4299276029a0f8a87b25f7`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.622_HOBBY_DEPOT_TWO_COLUMN_HEADER_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
 
-## Header 1.50.622
-Bestätigte Geometrie:
-- Logo links als eigener Block über Such- und Navigationszeile;
-- Navigation NICHT unter dem Logo;
-- Suchfeld rechts oben, vertikal auf HOBBY-DEPOT-Wortmarkenlinie;
-- Navigation rechts darunter;
-- Navigationsicons entfernt;
-- Logoasset unverändert, intern mit mehr Abstand Bogen/dein → HOBBY DEPOT → Claim;
-- Claim optisch leicht verbreitert.
+## Delta 1.50.623
+Header bleibt bewusst **unverändert aus 1.50.622**.
 
-## Lokale Simulation
-Playwright mit echtem Plugin-CSS/HTML:
-- 1600 px: 0 horizontaler Overflow; 1 Navzeile; alle 8 gleiche Baseline.
-- 1200 px: 0 Overflow; 1 Navzeile.
-- 1024 px: 0 Overflow; 1 Navzeile.
-- 900 px: 0 Overflow; Navigation 4×2 im rechten Bereich neben Logo.
-- 760 px: bestehender Mobilepfad.
+Bilder auf allen acht ersten Welt-Hubseiten:
+- Gestalten: 7/7 bebildert;
+- Fertigen: 11/11;
+- Technik: 9/9;
+- Forschen: 5/5;
+- Pflanzen: 10/10;
+- Tiere: 7/7;
+- Bewegen: 8/8;
+- Sammeln: 8/8.
 
-Desktop 1600:
-- Header 156 px;
-- Logo links 220×146;
-- Search 820×34;
-- Nav nur rechte Spalte.
+Gesamt:
+**65/65 direkte Hub-Unterkategorien besitzen lokal einen Bildpfad.**
 
-## Fresh
-- PHP 10/10 PASS.
-- ZIP-Integrität PASS.
-- Plugin-/Klassenbindung 1.50.622 PASS.
-- Logoasset unverändert.
+Regel:
+1. echtes Child-Featured-Image gewinnt;
+2. sonst dediziertes 600×320-Hubmotiv;
+3. kein wiederholtes komplettes Parent-Weltbild als Universalersatz.
+
+## Lokale Prüfung
+- PHP **10/10 PASS**;
+- ZIP-Integrität PASS;
+- 65/65 Kategoriepfade aus zentralem Zielprofil aufgelöst;
+- 65/65 Bilder in lokaler Browser-Simulation geladen;
+- natürliche Bildgröße 600×320;
+- Viewports 1600 / 1200 / 1024 / 900 / 760: horizontaler Overflow **0**.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.622 installieren und Header live ansehen.**
+**1.50.623 installieren und mindestens Technik, Fertigen, Pflanzen und Sammeln live prüfen.**
