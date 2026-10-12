@@ -121,6 +121,7 @@ Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
 
 
 
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.647 nach behobenem Release-Ketten-Fatal.**
+**Live-Abnahme 1.50.648: portalweiter Hub2-Rollout auf Basis des akzeptierten 1.50.645-Layouts.**
 
