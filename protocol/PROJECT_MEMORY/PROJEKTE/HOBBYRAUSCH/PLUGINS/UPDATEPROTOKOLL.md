@@ -2124,3 +2124,49 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-047 – HD-003 1.50.637 / Hub2 Claim + Aufklapptext + Testpost-Fix
+
+LIVE-BEFUND 1.50.636:
+- Testbeiträge auf Hub2 nicht sichtbar;
+- generisches `Themenbereich` unerwünscht;
+- oberer Text noch zu kurz.
+
+ROOT CAUSE BEITRÄGE:
+Hub2 verlangte weiterhin eine gleichnamige WordPress-Beitragskategorie. Fehlt diese, brach die Vorschau ab, bevor Testposts abgefragt wurden.
+
+ÄNDERUNG:
+- individueller kurzer Claim pro Hub2-Kategorie;
+- ca. 170 Wörter oberer Gesamttext;
+- sichtbarer Lead + aufklappbare Vertiefung direkt im Intro;
+- 4 private [TEST]-Beiträge robust beim ersten eingeloggten Admin-/Frontend-Aufruf;
+- alle vorhandenen Beitragskategorien + journal_cat, soweit für Posts verfügbar;
+- Beitragsbilder aus vorhandenen Assets;
+- eingeloggter Hub2-Demo-Fallback über `_hd_demo_post_v150637=1`, wenn keine gleichnamige Beitragskategorie existiert.
+
+REGRESSION:
+- 847/847 Assets byteidentisch zu 1.50.636;
+- Hero/Header/Nav/Ebene1 unverändert;
+- Affiliate-Slots unverändert;
+- keine Taxonomie-/Architekturänderung.
+
+TEST:
+- PHP 25/25 PASS;
+- ZIP PASS;
+- 1440/1024/760: Overflow 0;
+- 4 Beitragskarten;
+- 0 Hub2-Hero;
+- 1 aufklappbarer Intro-Bereich;
+- 4/4 Beitragsbilder geladen;
+- PHP-Harness: fehlende gleichnamige Beitragskategorie → 4 Demo-Karten PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.637_HOBBY_DEPOT_HUB2_CLAIM_EXPAND_TEST_POST_FIX_LOCALPASS.zip`
+
+SHA:
+`84bcfad3f867356b34f19a2f61b790300f1496869b3e92a3597481e332116e65`
+
+LIVE:
+OFFEN.
+
