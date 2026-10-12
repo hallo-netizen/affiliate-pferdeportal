@@ -1,13 +1,13 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 2.4 / 2026-10-12
+FASSUNG: 2.5 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
 - Header als 2-Spalten-System: links Logo; rechts Suchfeld + Navigation.
 - Suchfeld auf Höhe der HOBBY-DEPOT-Wortmarke.
-- Navigation rechts direkt an der unteren Headerkante.
+- Navigation rechts nahe an der unteren Headerkante, aber nicht auf die Linie gequetscht.
 - Ab 761 px: alle 8 Welten in exakt einer horizontalen Zeile und auf derselben Baseline, einschließlich Sammeln.
 - <761 px: Mobilmenü.
 - Navigationsicons entfallen; Text + Pfeil bleiben.
@@ -16,29 +16,29 @@ FASSUNG: 2.4 / 2026-10-12
 ## Acht Hauptwelten – Hero
 - Jede Hauptwelt besitzt einen eigenen, natürlichen Hero-Text.
 - direkte Ansprache mit `du`.
-- keine Schablonensätze wie `X bündelt die wichtigsten Themen …`.
-- Text sagt in einfachen Worten, was der Nutzer dort findet und wie er einsteigen kann.
+- keine Schablonensätze.
+- Text sagt in einfachen Worten, was der Nutzer dort findet.
 - alle acht Texte inhaltlich verschieden.
-- kein zusätzlicher `Mehr über <Welt> erfahren`-Accordion auf diesen Hauptwelten.
+- kein `Mehr über <Welt> erfahren`-Accordion auf Hauptwelten.
 
 ## Acht Hauptwelten – Text am Seitenende
 - jede Hauptwelt endet mit einem längeren eigenständigen redaktionellen Text;
 - klare, natürliche Zwischenüberschriften;
 - direkte Ansprache;
 - keine Keyword-/SEO-Textwüste;
-- der Text erklärt Auswahl, Einstieg und Unterschiede der Bereiche;
-- einzelne semantisch passende Textlinks verweisen ausschließlich auf tatsächlich vorhandene direkte Unterkategorien;
-- Linkziel und Linktext müssen inhaltlich übereinstimmen.
+- interne Links sparsam: **maximal 3 pro Hauptwelt, maximal einer pro Abschnitt**;
+- nur semantisch passende reale Zielkategorien;
+- weitere Kategorienennungen ohne Link, wenn der Link keinen zusätzlichen Nutzwert bringt.
 
 ## Hub-/Unterkategorie-Bilder
 - alle 65 direkten Unterkategorien der acht Hauptwelten besitzen kontrollierte 600×320-Motive;
-- ein klarer Hauptgegenstand oder eine klare Tätigkeit;
-- größere/engere Ausschnitte;
+- ein klares Hauptmotiv / eine klare Tätigkeit;
 - ruhiger Hintergrund;
-- deutlich weniger Nebenmotive und Detailrauschen;
-- keine identischen oder visuell nahezu identischen Motive im aktiven 65er-Bestand;
-- kontrolliertes Designasset hat bei diesen 65 Karten Vorrang vor WordPress Featured Images;
+- wenig Nebenmotive;
+- keine identischen oder visuell nahezu identischen Motive;
+- kontrolliertes Designasset vor WordPress Featured Images;
 - kein Parent-/Hero-Bild als Universalersatz.
+- Die sichtbare Bildfläche in den Karten muss groß genug sein, dass das Motiv sofort erkennbar ist; keine winzigen Thumbnails.
 
 ## Karten
 - natürliche Überschrift: `Weiter in <Welt>` / `Weitere Kategorien`.
@@ -63,16 +63,3 @@ FASSUNG: 2.4 / 2026-10-12
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
-
-Lokaler Pflichtcheck:
-- PHP/ZIP;
-- 65/65 Bildpfade, 600×320;
-- 65/65 unterschiedliche Datei-Hashes;
-- Perceptual-Hash gegen visuelle Duplikate;
-- Featured-Image-Override-Test;
-- 8 unterschiedliche Hero-Texte;
-- 8 Langtexte mit validierten Zielkategorie-Links;
-- kein `Mehr über … erfahren` auf Hauptwelten;
-- Navigation 1600/1200/1024/900/800/761: 8 Items eine Baseline, Sammeln eingeschlossen, kein horizontaler Overflow;
-- 760 Mobile;
-- Flyout Sammeln viewport-sicher.
