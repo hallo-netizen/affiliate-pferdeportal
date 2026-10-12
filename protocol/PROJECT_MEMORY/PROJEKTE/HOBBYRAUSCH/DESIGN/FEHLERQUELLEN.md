@@ -6,68 +6,75 @@ ROLLE: Fehlerhistorie. Aktueller Status/NEXT ACTION ausschließlich aus `CURRENT
 Historie bleibt bestehen.
 
 ## HRD-057 – Navigation 1.50.627 gleichmäßig, aber insgesamt zu tief
-STATUS: **GRUNDLINIE LIVE BESTÄTIGT / HEADERPOSITION IN HRD-062**
+STATUS: **LIVE CLOSED**
+Navigation wurde danach korrigiert und vom Nutzer live als PASS bestätigt. Ab jetzt eingefroren.
 
 ## HRD-058 – Hub-Kartenbilder zu klein
 STATUS: **LAYOUT LIVE CLOSED 1.50.628**
+Die sichtbare Bildfläche bleibt Desktop 200×107, Tablet 165×88, Mobile 145×78.
 
 ## HRD-059 – Zu viele interne Links in Seitenendtexten
 STATUS: **LIVE CLOSED 1.50.628**
 
 ## HRD-060 – Kategorie-/Link-Bilder zu eng / Lupeneindruck
-STATUS: **1.50.629 LIVE FAIL / 1.50.631 LOCAL CLOSED / LIVE OFFEN**
+STATUS: **1.50.629 LIVE FAIL / 1.50.634 LOCAL KORRIGIERT / LIVE OFFEN**
 
-Befund:
-- 1.50.629 brachte live keine ausreichende sichtbare Änderung.
-- gewünschte Richtung: Motiv weiter heraus, klarer Gesamtgegenstand, weniger Detaildruck.
+Anforderung:
+- Szene weiter gefasst;
+- klares Hauptmotiv;
+- wenig konkurrierendes Drumherum;
+- Thema sofort erkennbar;
+- keine Hero-Änderung.
 
-Fix 1.50.631:
-- 65 eindeutige v150629-Quellmotive;
-- daraus 65 neue v150631-Dateien mit echtem 80%-Zoom-out und ruhiger Bildumfelderweiterung;
-- alle 600×320 / SHA-eindeutig.
+Fix 1.50.634:
+- 65 aktive Kategorie-Vorschaubilder visuell geprüft;
+- 48× v150629, 11× gezielt ausgewählte weitere v150623-Szenen, 6× v150616;
+- keine globale Reaktivierung des alten v150623-Satzes;
+- Hub1 bleibt designkontrolliert und fällt nicht auf alte Featured Images zurück.
 
 ## HRD-061 – 1.50.630 brachte Doppelbilder zurück
-STATUS: **ROOT CAUSE CLOSED / 1.50.630 VERWORFEN**
+STATUS: **CLOSED / 1.50.630 VERWORFEN**
 
 Root Cause:
-- 1.50.630 bevorzugte den alten v150623-Satz;
-- dieser Satz enthält mehrfach dieselben Szenenfamilien für unterschiedliche Kategorien.
-
-Fix 1.50.631:
-- v150623 aus aktivem Hub1-Bildpfad entfernt;
-- Hub1 kein Fallback auf wiederholte WordPress Featured Images.
-
-## HRD-062 – Claim nicht mittig / Logo-Unterkante nicht auf Navigationslinie
-STATUS: **LOCAL CLOSED 1.50.631 / LIVE OFFEN**
-
-Root Cause:
-- Claim wurde per `scaleX(1.06)` nach rechts verbreitert;
-- Geometrieabweichung vor Fix: Desktop 7 px, 761–1000 px 38 px.
+- alter v150623-Satz wurde pauschal bevorzugt;
+- dadurch wiederholten sich ganze Szenenfamilien.
 
 Fix:
-- Claim-Skalierung entfernt;
-- Logo nach unten versetzt;
-- lokale Simulation 1600/1440/1200/1024/900/800/761: Claim-Unterkante = Navigations-Unterkante, Delta 0 px.
+- keine pauschale alte Bildserie mehr;
+- nur einzeln visuell geprüfte weitere Szenen werden verwendet.
+
+## HRD-062 – Claim/Logo/Navigationslinie
+STATUS: **LIVE CLOSED / EINGEFROREN**
+
+Der Nutzer hat den aktuellen Navigations-/Headerstand live als PASS bestätigt.
+Keine weitere Header-/Navigationsänderung in 1.50.634.
+
+## HRD-063 – Kategorie-Vorschaubilder mit sichtbarem Rahmen/Passepartout
+STATUS: **1.50.631/1.50.632 LIVE FAIL / 1.50.634 LOCAL KORRIGIERT / LIVE OFFEN**
+
+Root Cause:
+Die aktive Karten-CSS enthielt weiterhin eine eingerückte Bildbox, u. a. mit Margin, Hintergrund und Radius. Deshalb blieb trotz Bildwechsel ein sichtbarer Rahmen/Passepartout-Effekt.
+
+Fehler 1.50.632:
+Der Build wurde ausgegeben, ohne die endgültige berechnete Karten-CSS im gerenderten Zustand zu simulieren. Die Aussage "Rahmen weg" war damit unbelegt und falsch.
+
+Fix 1.50.634:
+- Kategorie-Vorschau füllt ihren Slot vollständig;
+- Margin 0;
+- Padding 0;
+- Border 0;
+- Border-Radius 0;
+- transparenter Slot-Hintergrund;
+- Bildgröße exakt gleich Slotgröße.
+
+Simulation mit echten Assets:
+- 1440 px: 200×107, Rahmengeometrie 0;
+- 930 px: 165×88, Rahmengeometrie 0;
+- 760 px: 145×78, Rahmengeometrie 0.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.631: Vorschaubilder + Logo/Claim/Navigationslinie.**
+**Live-Abnahme 1.50.634 ausschließlich Kategorie-Vorschaubilder.**
 
-## Arbeitsfehlerprotokoll 2026-10-12
-Die vollständige interne Fehler-/Lernakte dieses Designlaufs liegt dauerhaft hier:
-
+## Arbeitsfehlerprotokoll
+Dauerhafte interne Fehler-/Lernakte:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/ARBEITSFEHLERPROTOKOLL_20261012.md`
-
-Dort dokumentiert sind insbesondere:
-- falscher Repo-Kontext beim ersten Check;
-- 1.50.629 als Bildfix ausgegeben, obwohl die sichtbare Wirkung nicht ausreichend bewiesen war;
-- Regression einer bereits akzeptierten Navigation;
-- 1.50.630 mit fälschlich reaktiviertem v150623-Bildsatz und wiederkehrenden Szenen/Doppelbildern;
-- Verwechslung von SHA-Eindeutigkeit und visueller Eindeutigkeit;
-- zu frühe ZIP-Freigabe vor vollständiger Simulation;
-- nicht mittiger Claim durch `scaleX(1.06)`;
-- fehlender geometrischer Nachweis der gemeinsamen Logo-/Claim-/Navigationslinie;
-- unzureichendes Einfrieren bereits live akzeptierter Bereiche;
-- zeitweise zu starke Dokumentationsaussagen gegenüber dem tatsächlich bewiesenen Stand.
-
-Diese Akte ist Historie/Fehlerprävention. Aktueller Fehlerstatus bleibt ausschließlich in dieser `FEHLERQUELLEN.md`, aktueller Gesamtstatus/NEXT ACTION ausschließlich in `CURRENT_STATE.md`.
-
