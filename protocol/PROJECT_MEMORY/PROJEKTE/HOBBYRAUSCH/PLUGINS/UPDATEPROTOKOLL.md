@@ -2406,3 +2406,43 @@ SHA:
 LIVE:
 OFFEN. Nur Buch & Papier + Header-Claim prüfen.
 
+---
+
+## PU-20261012-054 – HD-003 1.50.645 / echter Bildquellen-Fix + Banner-Restplatz
+
+LIVE-BEFUND 1.50.644:
+- Unterstrich war gegenüber dem zuvor akzeptierten Stand unnötig höher;
+- Header-Claim weiterhin nicht überzeugend kräftiger;
+- Kategorie-Fotos wirkten trotz korrektem Wrapper weiter gerundet/nicht sauber im Rahmen;
+- bei fünf Unterkategorien fehlte der Banner im dritten Restplatz der zweiten Reihe.
+
+ROOT CAUSE:
+Die fünf Pilot-WebPs selbst enthielten weiße/gerundete Screenshot-Ränder. Das konnte CSS nicht beseitigen.
+
+KORREKTUR:
+- Unterstrich exakt auf 1.50.643-Position zurück;
+- fünf Pilotbilder rechteckig innerhalb des Motivbereichs neu ausgeschnitten, 600×320;
+- Ebene-1-Markup/CSS unverändert weiterverwendet;
+- 3 Karten oben, 2 links unten, Affiliate-Banner im freien dritten Slot;
+- späterer Doppelbanner entfernt;
+- Header-Claim über ein neues Logoasset verdickt; sichtbare Pixeländerungen ausschließlich im Claim-Band.
+
+TEST:
+- PHP 49/49 PASS;
+- ZIP PASS;
+- 1440/1024: 3+2+Banner;
+- 900 responsive 2-spaltig; 760 1-spaltig;
+- Overflow 0;
+- Bild/Wrapper X/Y/W/H Δ 0;
+- Quellbild-Ecken ohne weiße Rundungsmaske;
+- Logo-Pixeldiff oberhalb y=300: 0 sichtbare Pixel.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.645_HOBBY_DEPOT_BP_EXACT_LEVEL1_CARDS_BANNER_CLEAN_IMAGES_CLAIM_FIX_LOCALPASS.zip`
+
+SHA:
+`03cacb5faebec8cd579b0050ce64be100819ca6e0bc861ef9bfe477f1105306c`
+
+LIVE:
+OFFEN.
+
