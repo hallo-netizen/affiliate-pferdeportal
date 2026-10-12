@@ -4,29 +4,30 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.640`
+`1.50.641`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.640_HOBBY_DEPOT_BUCH_PAPIER_BODY_ALIGN_FADE_BRUSH_LEVEL1_IMAGEFORMAT_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.641_HOBBY_DEPOT_BRUSH_STROKE_2PX_FRAMES_LOCALPASS.zip`
 
 SHA-256:
-`588fa7fb961bc9cdf62a96f968a83034b072902c41eaddee5c92d09598ebe6bd`
+`b9acd0b3170782f5633d52d3200c58f9c798c48712d7bca36bcaed00c466b9b8`
 
 LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.640_HOBBY_DEPOT_BUCH_PAPIER_BODY_ALIGN_FADE_BRUSH_LEVEL1_IMAGEFORMAT_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.641_HOBBY_DEPOT_BRUSH_STROKE_2PX_FRAMES_LOCALPASS.zip`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE PILOT OFFEN.
 
 PASS:
-- PHP 34/34;
+- PHP 37/37;
 - ZIP;
-- 852/852 Assets byteidentisch;
+- 852/852 bestehende Assets unverändert;
+- 1 neues Brush-Asset;
+- Hero rechts 2 px;
+- Karten max. 2 px;
+- Kategorie-Bilder exakt im Bildslot;
 - 1440/1024/760 Overflow 0;
-- Hero/Body-Ausrichtung PASS;
-- Hero-Bild beim Aufklappen dimensionsstabil;
-- Kachelbilder übernehmen 200×107 / 165×88 / 145×78;
-- Header/Nav/Ebene1/andere Hub2 eingefroren.
+- Hero-Aufklapp-Delta 0×0.
 
 LIVE:
 Nur Buch & Papier offen.
