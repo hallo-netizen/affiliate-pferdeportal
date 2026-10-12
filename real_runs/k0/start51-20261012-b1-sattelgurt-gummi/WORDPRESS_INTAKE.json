@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "8f74b532286030492660622cdc8bd29821af064507213d6a827f7c5e41e5f33a",
+      "target_keyword": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd",
+      "title": "Ist ein Sattelgurt mit Gummi oder ohne Gummi besser für mein Pferd?"
+    }
+  ],
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "batch_sha256": "507c20691fb0a51ff8b2899f9fe09f477818170a66e037866153e860724aaf49"
+}
