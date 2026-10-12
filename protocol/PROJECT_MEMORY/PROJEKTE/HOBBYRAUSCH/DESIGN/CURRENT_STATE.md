@@ -3,45 +3,47 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.623 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.624 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
 
 SHA-256:
-`0b5021854f5bbb1a3ab35bcba0fc14bd522cb6679b4299276029a0f8a87b25f7`
+`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.623_HOBBY_DEPOT_ALL_HUB_IMAGES_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
 
-## Delta 1.50.623
-Header bleibt bewusst **unverändert aus 1.50.622**.
+## Delta 1.50.624
 
-Bilder auf allen acht ersten Welt-Hubseiten:
-- Gestalten: 7/7 bebildert;
-- Fertigen: 11/11;
-- Technik: 9/9;
-- Forschen: 5/5;
-- Pflanzen: 10/10;
-- Tiere: 7/7;
-- Bewegen: 8/8;
-- Sammeln: 8/8.
+Navigation:
+- Desktop/Tablet rechts neben Logo jetzt technisch **absolute bottom:0** an die untere Headerkante gebunden.
+- keine weitere freie vertikale Interpretation.
 
-Gesamt:
-**65/65 direkte Hub-Unterkategorien besitzen lokal einen Bildpfad.**
+Unterkategorie-Raster:
+- keine Affiliate-Produkte mehr zwischen Kategorie-Reihen;
+- Banner füllt nur die letzte unvollständige 3er-Reihe:
+  - Rest 1 → Banner = 2 Kartenbreiten;
+  - Rest 2 → Banner = 1 Kartenbreite;
+  - Rest 0 → Banner volle eigene Zeile.
+- Produkte werden außerhalb des Kategorie-Rasters als natives Empfehlungsmodul ausgegeben.
 
-Regel:
-1. echtes Child-Featured-Image gewinnt;
-2. sonst dediziertes 600×320-Hubmotiv;
-3. kein wiederholtes komplettes Parent-Weltbild als Universalersatz.
+Bilder:
+- 65/65 aktive erste Hub-Unterkategorien bebildert;
+- 65/65 **unterschiedliche SHA-256-Bildhashes**;
+- altes doppeltes Genuss/Essbare-Pflanzen-Motiv beseitigt;
+- ungenutzte Alias-/Duplikatbilder entfernt.
 
-## Lokale Prüfung
-- PHP **10/10 PASS**;
+## Lokal
+- PHP 10/10 PASS;
 - ZIP-Integrität PASS;
-- 65/65 Kategoriepfade aus zentralem Zielprofil aufgelöst;
-- 65/65 Bilder in lokaler Browser-Simulation geladen;
-- natürliche Bildgröße 600×320;
-- Viewports 1600 / 1200 / 1024 / 900 / 760: horizontaler Overflow **0**.
+- 65/65 aktive Bildpfade;
+- 65/65 eindeutige aktive Bildhashes;
+- 65 vorhandene Subcategory-Assets / 65 eindeutige Hashes;
+- Produkte werden in render_next_level/render_term_next_level nicht mehr eingefügt;
+- Banner-Span-Regeln geprüft;
+- statischer Layout-Render für 7 Kategorien + 2-Kartenbreiten-Banner erfolgreich.
+- Chromium war in dieser Laufzeitumgebung nicht zuverlässig startbar; kein Browser-PASS erfunden.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.623 installieren und mindestens Technik, Fertigen, Pflanzen und Sammeln live prüfen.**
+**1.50.624 installieren und Technik/Gestalten live prüfen – besonders Navigation unten und Bannerfüllung.**
