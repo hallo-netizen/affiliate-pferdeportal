@@ -1,0 +1,228 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schubkarren-faq",
+    "plan_slot": "3bd57f390f833651501bbb90b10eda4f7157e9705ea1f871755c6012c43700dd",
+    "target_keyword": "Wie viel Kilo Sand passt in eine Schubkarre",
+    "title": "Wie viel Kilo Sand passt in eine Schubkarre?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Caterpillar – Schüttdichten von Baustoffen",
+          "source_url": "https://www.cat.com/en_US/articles/ci-articles/earthwork-volumes-reference-tables.html"
+        },
+        {
+          "source_title": "BAUHAUS – Gartenschubkarre 80 Liter",
+          "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295"
+        },
+        {
+          "source_title": "BAUHAUS – Schubkarrenübersicht",
+          "source_url": "https://www.bauhaus.info/schubkarren/c/10000219"
+        },
+        {
+          "source_title": "HORNBACH – Ravendo BD 1002",
+          "source_url": "https://www.hornbach.de/p/profi-schubkarre-ravendo-bd-1002-100-l-metallmulde-150-kg-tragkraft-pannensicheres-pu-rad-mit-kugellager-gelb/12571229/"
+        }
+      ],
+      "claims": [
+        "Caterpillar nennt für locker gelagerten trockenen Sand ungefähr 1420 Kilogramm je Kubikmeter, für feuchten ungefähr 1690 und für nassen ungefähr 1840.",
+        "Aus der Caterpillar-Schüttdichte für trockenen lockeren Sand ergeben sich rechnerisch bei 80 Litern etwa 114 Kilogramm Ladungsgewicht.",
+        "Bei 80 Litern feuchtem Sand ergeben sich aus der Caterpillar-Angabe rund 135 Kilogramm; bei nassem Sand rund 147 Kilogramm.",
+        "Eine von BAUHAUS angebotene Schubkarre mit 80 Litern Volumen ist ausdrücklich nur für 100 Kilogramm Traglast angegeben.",
+        "BAUHAUS führt auch Bauschubkarren mit 100 Litern Fassungsvermögen und einer Traglast von 160 oder 200 Kilogramm.",
+        "HORNBACH beschreibt für die Ravendo BD 1002 ein Wannenvolumen von 100 Litern und eine maximale Traglast von 150 Kilogramm.",
+        "Für die Sandmasse sind die tatsächlich eingefüllten Liter und der Feuchtigkeitszustand ausschlaggebend; die Rechenformel lautet Kubikmeter mal Kilogramm pro Kubikmeter."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Kilo Sand passt in eine Schubkarre",
+      "topic": "Wie viel Kilo Sand passt in eine Schubkarre?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schubkarren-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viel Kilo Sand passt in eine Schubkarre?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Caterpillar – Schüttdichten von Baustoffen",
+        "source_url": "https://www.cat.com/en_US/articles/ci-articles/earthwork-volumes-reference-tables.html",
+        "evidence_text_sha256": "1c18c0683c0a568f32583f997a1c6d0190e0f510e6543948f760d63911da299c",
+        "statement": "Caterpillar nennt für locker gelagerten trockenen Sand ungefähr 1420 Kilogramm je Kubikmeter, für feuchten ungefähr 1690 und für nassen ungefähr 1840.",
+        "evidence_text": "Caterpillar nennt für locker gelagerten trockenen Sand ungefähr 1420 Kilogramm je Kubikmeter, für feuchten ungefähr 1690 und für nassen ungefähr 1840.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Caterpillar – Schüttdichten von Baustoffen",
+        "source_url": "https://www.cat.com/en_US/articles/ci-articles/earthwork-volumes-reference-tables.html",
+        "evidence_text_sha256": "c9c072d4ccb477bbf2397690e875dc9972806a6e1363258411938674648a3705",
+        "statement": "Aus der Caterpillar-Schüttdichte für trockenen lockeren Sand ergeben sich rechnerisch bei 80 Litern etwa 114 Kilogramm Ladungsgewicht.",
+        "evidence_text": "Aus der Caterpillar-Schüttdichte für trockenen lockeren Sand ergeben sich rechnerisch bei 80 Litern etwa 114 Kilogramm Ladungsgewicht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Caterpillar – Schüttdichten von Baustoffen",
+        "source_url": "https://www.cat.com/en_US/articles/ci-articles/earthwork-volumes-reference-tables.html",
+        "evidence_text_sha256": "13e06bc90c33481aa65bb7a43006ee656f95f00de991cd8a11dc0fd693a89fcb",
+        "statement": "Bei 80 Litern feuchtem Sand ergeben sich aus der Caterpillar-Angabe rund 135 Kilogramm; bei nassem Sand rund 147 Kilogramm.",
+        "evidence_text": "Bei 80 Litern feuchtem Sand ergeben sich aus der Caterpillar-Angabe rund 135 Kilogramm; bei nassem Sand rund 147 Kilogramm.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "BAUHAUS – Gartenschubkarre 80 Liter",
+        "source_url": "https://www.bauhaus.info/bauschubkarren-gartenschubkarren/gartenschubkarre/p/32148295",
+        "evidence_text_sha256": "44ad66dca0f78506bb329f747d2c95c2b576a5a71c1a49791c7d0336f8917314",
+        "statement": "Eine von BAUHAUS angebotene Schubkarre mit 80 Litern Volumen ist ausdrücklich nur für 100 Kilogramm Traglast angegeben.",
+        "evidence_text": "Eine von BAUHAUS angebotene Schubkarre mit 80 Litern Volumen ist ausdrücklich nur für 100 Kilogramm Traglast angegeben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "BAUHAUS – Schubkarrenübersicht",
+        "source_url": "https://www.bauhaus.info/schubkarren/c/10000219",
+        "evidence_text_sha256": "4d3b3803c4eee1c73d662bc1054c276458dfbd2a5d50856ab0f3dac7b75ee53c",
+        "statement": "BAUHAUS führt auch Bauschubkarren mit 100 Litern Fassungsvermögen und einer Traglast von 160 oder 200 Kilogramm.",
+        "evidence_text": "BAUHAUS führt auch Bauschubkarren mit 100 Litern Fassungsvermögen und einer Traglast von 160 oder 200 Kilogramm.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "HORNBACH – Ravendo BD 1002",
+        "source_url": "https://www.hornbach.de/p/profi-schubkarre-ravendo-bd-1002-100-l-metallmulde-150-kg-tragkraft-pannensicheres-pu-rad-mit-kugellager-gelb/12571229/",
+        "evidence_text_sha256": "de108ce1e3250c00a8b1a51016539644cc74f00ec806800b67bf3c76b659bd0b",
+        "statement": "HORNBACH beschreibt für die Ravendo BD 1002 ein Wannenvolumen von 100 Litern und eine maximale Traglast von 150 Kilogramm.",
+        "evidence_text": "HORNBACH beschreibt für die Ravendo BD 1002 ein Wannenvolumen von 100 Litern und eine maximale Traglast von 150 Kilogramm.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
+        "source_title": "Caterpillar – Schüttdichten von Baustoffen",
+        "source_url": "https://www.cat.com/en_US/articles/ci-articles/earthwork-volumes-reference-tables.html",
+        "evidence_text_sha256": "a6eec37df83a0322a6a37f8a21c5f2ede46c4588005ed070aecdbcbadb2e8933",
+        "statement": "Für die Sandmasse sind die tatsächlich eingefüllten Liter und der Feuchtigkeitszustand ausschlaggebend; die Rechenformel lautet Kubikmeter mal Kilogramm pro Kubikmeter.",
+        "evidence_text": "Für die Sandmasse sind die tatsächlich eingefüllten Liter und der Feuchtigkeitszustand ausschlaggebend; die Rechenformel lautet Kubikmeter mal Kilogramm pro Kubikmeter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "anchor": "Schubkarren im Stall",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schubkarren-beratung/",
+        "anchor": "Beratung zu Schubkarren",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schubkarren-faq/",
+        "anchor": "FAQ zu Schubkarren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/stall/stall-mist-und-entsorgung/schubkarren/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schubkarren-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schubkarren-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Sand",
+      "Schubkarre",
+      "Kilogramm",
+      "Liter",
+      "feucht",
+      "trocken",
+      "Traglast",
+      "Schüttdichte",
+      "Mulde",
+      "Last"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Nutzlast für 40, 60, 80 und 100 Liter lässt sich bei trockenem Sand aus derselben geprüften Dichte unmittelbar berechnen und vergleichen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
