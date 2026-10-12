@@ -1936,3 +1936,30 @@ SHA:
 
 LIVE:
 OFFEN.
+
+
+---
+
+## PU-20261012-042 – HD-003 1.50.628
+
+LIVE-BEFUND 1.50.627:
+- Navigation jetzt gleichmäßig, aber insgesamt zu tief;
+- Kartenbilder trotz besserer Motive noch zu klein lesbar;
+- Seitenendtexte mit zu hoher interner Linkdichte.
+
+KORREKTUR:
+- komplette Navzeile 8 px angehoben, Baseline-Logik inkl. Sammeln unverändert;
+- Bildfläche vergrößert: Desktop 200×107, Tablet 165×88, Mobile 145×78;
+- interne Links am Seitenende auf max. 3 pro Hauptwelt reduziert, max. einer pro Abschnitt.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.628_HOBBY_DEPOT_NAV_RAISE_LARGER_IMAGES_LINK_CLEANUP_LOCALPASS.zip`
+
+SHA:
+`2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`
+
+TEST:
+PHP 10/10; ZIP PASS; 65/65 Bildassets SHA-eindeutig; 8/8 Langtexte genau 3 Links; lokale DOM/CSS-Simulation 1600/1200/1024/900/800/761 gleiche Nav-Baseline inkl. Sammeln und Overflow 0.
+
+LIVE:
+OFFEN.
