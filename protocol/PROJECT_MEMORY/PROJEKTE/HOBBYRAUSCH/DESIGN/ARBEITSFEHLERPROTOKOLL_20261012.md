@@ -187,3 +187,13 @@ Für Kategorie-Vorschaubilder ist der visuelle Zweck die Autorität:
 - Hero-Bilder unberührt.
 Technische Dateieindeutigkeit allein ist kein Qualitäts-PASS.
 
+## AF-014 – Testbeiträge angelegt, aber Vorschau-Gate nicht gegen reale Seitenstruktur geprüft
+FEHLER:
+1.50.636 enthielt Seed-Code für vier Testbeiträge und die Aussage, damit könne die Hub2-Beitragsvorschau live beurteilt werden. Auf der realen Seite blieb die Vorschau trotzdem leer.
+
+URSACHE:
+Die lokale Prüfung betrachtete Seed und Kartenrendering getrennt. Nicht vollständig simuliert wurde der reale Hub2-Zugriffspfad: Seite ohne gleichnamige WordPress-Beitragskategorie → früher Abbruch in `render_post_previews()` → Testposts werden gar nicht abgefragt.
+
+VERMEIDUNGSREGEL:
+Bei Vorschau-/Fallbacklogik muss künftig der komplette reale Gate-Pfad simuliert werden, einschließlich des Negativfalls „keine gleichnamige Beitragskategorie vorhanden“. Seed-Erfolg allein ist kein Frontend-PASS.
+
