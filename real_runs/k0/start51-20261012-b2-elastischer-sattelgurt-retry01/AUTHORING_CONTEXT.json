@@ -1,0 +1,214 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sattelgurte-faq",
+    "plan_slot": "b4d6b63d56a5dfe8382a94002beb87ec388a2b635e2dd1f67e721ffbdd10945d",
+    "target_keyword": "Welche Nachteile hat ein elastischer Sattelgurt",
+    "title": "Welche Nachteile hat ein elastischer Sattelgurt?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Sattelgurte",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/"
+        },
+        {
+          "source_title": "Pferderevue – Sattelgurt und Passform",
+          "source_url": "https://www.pferderevue.at/magazin/ausruestung/2021/sattelgurt--warum-der-individuell-richtige-so-wichtig-ist-wie-ei.html"
+        },
+        {
+          "source_title": "Helle Kleven – Sattelgurt-Tipps",
+          "source_url": "https://www.helle-kleven.shop/blogs/news/sattelgurte-die-leistung-erbringen"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Passend ausgerüstet",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-passend-und-pferdegerecht-03-2021/"
+        }
+      ],
+      "claims": [
+        "Elastische Sattelgurte können dazu verleiten, beim Schließen zu stark zu ziehen, weil der Gummi nachgibt.",
+        "Einseitig eingearbeitete Elastik kann zu ungleicher Druckverteilung auf den beiden Pferdeseiten beitragen.",
+        "Fachleute nennen ausleiernde Elastikbereiche sowie drückende Nahtkanten am Übergang von Leder und Gummi als mögliche Nachteile.",
+        "Helle Kleven rät von einseitiger Elastik ab und fordert die Kontrolle von Gurtkanten, Ellenbogenfreiheit und beidseitigem Nachgurten.",
+        "Zu strammes Gurten kann die Atmung und Bewegung des Pferdes beeinträchtigen; maßgeblich ist so fest wie nötig und so locker wie möglich.",
+        "Mehrere Fachleute bevorzugen nichtelastische Sattelgurte; daraus lässt sich kein pauschaler Vorteil elastischer Gurte ableiten."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Nachteile hat ein elastischer Sattelgurt",
+      "topic": "Welche Nachteile hat ein elastischer Sattelgurt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sattelgurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Nachteile hat ein elastischer Sattelgurt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "evidence_text_sha256": "46ea1dbdbd16ac7fcf344a7333e8ca232e7bfb02b4e5f8440a0dd950132ebfb6",
+        "statement": "Elastische Sattelgurte können dazu verleiten, beim Schließen zu stark zu ziehen, weil der Gummi nachgibt.",
+        "evidence_text": "Elastische Sattelgurte können dazu verleiten, beim Schließen zu stark zu ziehen, weil der Gummi nachgibt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "evidence_text_sha256": "152c90b28833ed3bb9496f8530b3851da3373fef8f9180a64246d048aeed2543",
+        "statement": "Einseitig eingearbeitete Elastik kann zu ungleicher Druckverteilung auf den beiden Pferdeseiten beitragen.",
+        "evidence_text": "Einseitig eingearbeitete Elastik kann zu ungleicher Druckverteilung auf den beiden Pferdeseiten beitragen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferderevue – Sattelgurt und Passform",
+        "source_url": "https://www.pferderevue.at/magazin/ausruestung/2021/sattelgurt--warum-der-individuell-richtige-so-wichtig-ist-wie-ei.html",
+        "evidence_text_sha256": "4401c0dfff75efc88ba15a871bf558ee72e278cdf4363c05a4d7f81c71fc2b3b",
+        "statement": "Fachleute nennen ausleiernde Elastikbereiche sowie drückende Nahtkanten am Übergang von Leder und Gummi als mögliche Nachteile.",
+        "evidence_text": "Fachleute nennen ausleiernde Elastikbereiche sowie drückende Nahtkanten am Übergang von Leder und Gummi als mögliche Nachteile.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Helle Kleven – Sattelgurt-Tipps",
+        "source_url": "https://www.helle-kleven.shop/blogs/news/sattelgurte-die-leistung-erbringen",
+        "evidence_text_sha256": "2ab3ea53589e4a47a2a7fc85ec54db2c47db69f0bfe52ecab2a56b9b3185ff67",
+        "statement": "Helle Kleven rät von einseitiger Elastik ab und fordert die Kontrolle von Gurtkanten, Ellenbogenfreiheit und beidseitigem Nachgurten.",
+        "evidence_text": "Helle Kleven rät von einseitiger Elastik ab und fordert die Kontrolle von Gurtkanten, Ellenbogenfreiheit und beidseitigem Nachgurten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferdesport Deutschland – Passend ausgerüstet",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-passend-und-pferdegerecht-03-2021/",
+        "evidence_text_sha256": "086ebe9a646c638757eb199db7c045dc6bf8e49a56f873a970b9b4ab08b48b46",
+        "statement": "Zu strammes Gurten kann die Atmung und Bewegung des Pferdes beeinträchtigen; maßgeblich ist so fest wie nötig und so locker wie möglich.",
+        "evidence_text": "Zu strammes Gurten kann die Atmung und Bewegung des Pferdes beeinträchtigen; maßgeblich ist so fest wie nötig und so locker wie möglich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "Pferderevue – Sattelgurt und Passform",
+        "source_url": "https://www.pferderevue.at/magazin/ausruestung/2021/sattelgurt--warum-der-individuell-richtige-so-wichtig-ist-wie-ei.html",
+        "evidence_text_sha256": "d12949bc99511d79e2ad3c22c0479d28d085fc11c124791664bafeb03896e362",
+        "statement": "Mehrere Fachleute bevorzugen nichtelastische Sattelgurte; daraus lässt sich kein pauschaler Vorteil elastischer Gurte ableiten.",
+        "evidence_text": "Mehrere Fachleute bevorzugen nichtelastische Sattelgurte; daraus lässt sich kein pauschaler Vorteil elastischer Gurte ableiten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "anchor": "Sattelgurte im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sattelgurte-pflege/",
+        "anchor": "Pflege der Sattelgurte",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "FAQ zu Sattelgurten",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/sattelgurte/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-pflege/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sattelgurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "elastischer Sattelgurt",
+      "Gummizug",
+      "Druck",
+      "Schnallen",
+      "Schiefe",
+      "Elastik",
+      "Nahtkante",
+      "Verschleiß",
+      "Gurtlage",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die typischen Nachteile lassen sich nach Ursache, sichtbarem Warnzeichen und konkreter Gegenmaßnahme übersichtlich gegenüberstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
