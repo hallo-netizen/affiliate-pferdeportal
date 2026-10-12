@@ -33,3 +33,12 @@ FASSUNG: 2.1 / 2026-10-11
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
+
+
+## Hub-Bebilderung – Ergänzung 2026-10-12
+
+- Alle acht ersten Welt-Hubs zeigen Bilder in ihren direkten Unterkategorie-Karten.
+- echtes Child-Featured-Image hat Vorrang;
+- fehlt es, nutzt das Design ein dediziertes lokales 600×320-Motiv für genau diese Unterkategorie;
+- kein komplettes Parent-Weltbild darf mehrfach als Universalersatz erscheinen;
+- tiefe Ebenen bleiben weiterhin von der vorhandenen Featured-Image-/Designlogik abhängig; keine Bildpflicht ohne belastbares Motiv.
