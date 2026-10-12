@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.5 / 2026-10-12
+FASSUNG: 3.6 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -83,7 +83,7 @@ FASSUNG: 3.5 / 2026-10-12
 Kein Live-PASS ohne echten WordPress-Readback.
 
 
-## Pilot Hub2 – Buch & Papier / 1.50.641
+## Pilot Hub2 – Buch & Papier / 1.50.644
 Noch **keine portalweite Regel**, sondern Live-Pilot:
 - kurze klare Fotos für direkte Unterkategorien statt Icon-Wüste;
 - Desktop 3-spaltige Fotokarten, Tablet 2-spaltig, Mobil 1-spaltig;
@@ -101,3 +101,11 @@ Noch **keine portalweite Regel**, sondern Live-Pilot:
 - Hero-Bild: rechte Ecken 2 px.
 - Kategorie-Karten: maximal 2 px Rundung.
 - Kategorie-Bilder müssen exakt innerhalb des Kartenrahmens bleiben; kein Überstand, keine sichtbare Lücke, kein zusätzlicher Innenrahmen.
+
+
+### Verbindliche Kartenbindung Pilot 1.50.644
+- Buch-&-Papier-Unterkategoriekarten verwenden 1:1 die vorhandene Ebene-1-Karten-/Bildlogik und keinen eigenen Bild-/Wrapper-Sonderweg.
+- Raster wie Ebene 1: Desktop 3er-Reihe mit balanciertem Rest, mittlere Breite 2-spaltig, mobil 1-spaltig.
+- Bildwrapper: Margin 0, Padding 0, Overflow hidden.
+- Bild: Block, 100 % des Bildslots, Object-fit cover, kein eigener Radius.
+- Header-Claim darf nur in Strichstärke verändert werden; Größe, Lage und Wortlaut bleiben unverändert.
