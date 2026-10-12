@@ -4,13 +4,13 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.627`
+`1.50.628`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.627_HOBBY_DEPOT_HUB_COPY_IMAGES_NAV_FINAL_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.628_HOBBY_DEPOT_NAV_RAISE_LARGER_IMAGES_LINK_CLEANUP_LOCALPASS.zip`
 
 SHA-256:
-`bc6690acd847dac08b646243a07f133b189b5facc5abc6ba58526a79d383d158`
+`2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
@@ -18,16 +18,12 @@ LOCAL HARD PASS / LIVE-PASS OFFEN.
 PASS:
 - PHP 10/10;
 - ZIP;
-- V150627 Klassen-/Templatebinding;
-- 65× 600×320;
-- 65 eindeutige SHA-256;
-- dHash minimum 92;
-- 8 unique Hero-Texte;
-- 8 Seitenend-Langtexte;
-- `Mehr über … erfahren` entfernt;
-- Nav 761+ gleiche Baseline inkl. Sammeln;
-- Overflow 0 in geprüften Viewports;
-- Sammeln-Flyout viewport-safe.
+- V150628 Binding;
+- Navigation leicht angehoben, 8 gleiche Baselines;
+- Sammeln gleiche Baseline;
+- größere Kartenbildfläche;
+- max. 3 interne Links je Hauptwelt-Endtext;
+- 65 Bildassets / 65 eindeutige SHA.
 
 LIVE:
 offen.
