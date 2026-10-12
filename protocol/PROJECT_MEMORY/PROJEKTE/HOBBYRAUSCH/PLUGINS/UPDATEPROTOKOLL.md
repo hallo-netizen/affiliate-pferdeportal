@@ -2217,3 +2217,49 @@ SHA:
 LIVE:
 OFFEN. Nur Buch & Papier prüfen.
 
+---
+
+## PU-20261012-049 – HD-003 1.50.639 / Buch-&-Papier-Pilot nachgeschärft
+
+PILOT:
+Nur `Fertigen → Buch & Papier`.
+
+ÄNDERUNG:
+- kompakter Split-Hero;
+- links Claim/H1/Lead/Aufklapper, rechts vorhandenes Kategorie-Vorschaubild;
+- kein neues Hero-Asset;
+- Claim `Papier kann mehr.` mit CSS-Pinselstrich;
+- Fotokarten Desktop 3-spaltig, Tablet 2-spaltig, Mobil 1-spaltig;
+- Reihenfolge unverändert: Kategorien → Produkte → 3 Beiträge → Banner → Werbeplatz;
+- kein Seitenendtext.
+
+PERFORMANCE:
+- Split-Hero verwendet vorhandenes `buch-papier-v150629.webp`, 45.934 Bytes;
+- keine neuen Bilddateien gegenüber 1.50.638;
+- 5 Pilotkartenbilder bleiben ca. 66 KB und lazy geladen.
+
+REGRESSION:
+- 852/852 Assets byteidentisch zu 1.50.638;
+- Header/Nav/Ebene1 unverändert;
+- alle anderen Hub2 unverändert;
+- keine Slot-/Taxonomie-/Architekturänderung.
+
+TEST:
+- PHP 31/31 PASS;
+- ZIP PASS;
+- Browser-Simulation:
+  - 1440: 3 Kacheln, Hero 2-spaltig, Overflow 0;
+  - 1024: 2 Kacheln, Hero 2-spaltig, Overflow 0;
+  - 760: 1 Kachel, Hero gestapelt, Overflow 0;
+- Brush-Claim gerendert;
+- bestehende Assets geändert: 0.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.639_HOBBY_DEPOT_BUCH_PAPIER_SPLIT_HERO_BRUSH_3COL_LOCALPASS.zip`
+
+SHA:
+`080b56efd53102de7fde5c01f75b0a9edb53c8a3f4123c1e204b2ded5b1955f2`
+
+LIVE:
+OFFEN. Nur Buch & Papier prüfen.
+
