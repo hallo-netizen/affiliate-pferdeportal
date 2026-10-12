@@ -3,38 +3,37 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.625 LOCAL HARD PASS / LIVE-PASS OFFEN**
+STATUS: **1.50.626 CRITICAL-HOTFIX LOCAL HARD PASS / LIVE-PASS OFFEN**
 
 Version:
-**1.50.625**
+**1.50.626**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
 
 SHA-256:
-`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
+`74cd55b87a608287ff4f4d7d3d7f3f80aa84dd478b8f675ab136e297064a54ea`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.626_HOBBY_DEPOT_CRITICAL_CLASS_BINDING_HOTFIX_LOCALPASS.zip`
 
-## Scope
-- neue aktive Klasse `Hobby_Depot_Profile_V150625`;
-- neue v150625 Front-/Contenttemplates;
-- kontrollierte Hubassets vor WP Featured Images;
-- 65 klare/eindeutige 600×320-Motive;
-- Navigation ab 761 px eine Baseline inkl. Sammeln;
-- Banner-/Produktregel aus 1.50.624 unverändert.
+## Root Cause
+1.50.625 Front-/Contenttemplates riefen irrtümlich die entfernte Klasse `Hobby_Depot_Profile_V150624` auf.
+
+## Fix
+- Main require v150626;
+- Klasse V150626;
+- Fronttemplate v150626 → V150626;
+- Contenttemplate v150626 → V150626;
+- Router v150626;
+- kein Designrollback.
 
 ## Lokal
 - PHP 10/10 PASS;
 - ZIP PASS;
-- 65/65 Bildpfade;
-- 65/65 SHA-eindeutig;
-- dHash-Minimalabstand 96;
-- Featured-Image-Override NEGATIVTEST PASS;
-- Playwright 1600/1200/1024/900/800/761: Nav eine Baseline, Overflow 0;
-- 760 Mobile;
-- Sammeln-Flyout viewport-safe.
+- Klassenreferenzintegrität PASS;
+- Templatebinding PASS;
+- stale V150624/V150625 active PHP refs = 0.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.625 installieren und Technik + Pflanzen live prüfen.**
+**1.50.626 installieren und nur prüfen: lädt die Seite wieder ohne Critical Error?**
