@@ -101,6 +101,6 @@ Technische Plugin-Historie: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-001-KA
 
 ## HOBBYRAUSCH-DESIGN-LIVE
 Bereich: HOBBYRAUSCH / DESIGN / HD-003  
-Status: AKTIV / 1.50.601 LOCAL HARD PASS / LIVE-ABNAHME OFFEN  
+Status: AKTIV / aktueller Fehlerstatus ausschließlich aus der autoritativen Fehlerquelle; aktueller Gesamtstatus/NEXT ACTION ausschließlich aus Design-Current  
 Autoritative Fehlerquelle: `PROJEKTE/HOBBYRAUSCH/DESIGN/FEHLERQUELLEN.md`  
 Aktuellen Status/NEXT ACTION ausschließlich aus `PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md` lesen.
