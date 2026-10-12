@@ -4,13 +4,13 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.624`
+`1.50.625`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.624_HOBBY_DEPOT_NAV_BOTTOM_BANNER_FILL_NO_DUPLICATES_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
 
 SHA-256:
-`af8cb6a33c8da51d0153b9b22a7e6bb210e9cef4fe9e01545d9d31c33527b15c`
+`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
 
 PRÜFSTATUS:
 LOCAL HARD PASS / LIVE-PASS OFFEN.
@@ -18,11 +18,14 @@ LOCAL HARD PASS / LIVE-PASS OFFEN.
 PASS:
 - PHP 10/10;
 - ZIP;
-- Nav bottom:0;
-- Produkte nicht im Unterkategorie-Raster;
-- Banner-Restfüllung;
-- 65/65 aktive Bilder eindeutig;
-- keine doppelten Subcategory-Asset-Hashes.
+- neue aktive V150625-Klasse/Templates;
+- 65× 600×320;
+- 65 eindeutige SHA-256;
+- dHash-Minimalabstand 96;
+- kontrolliertes Asset gewinnt gegen WP Featured Image;
+- Navigation 761+ eine Baseline inkl. Sammeln;
+- 0 horizontaler Overflow bei 1600/1200/1024/900/800/761;
+- Sammeln-Flyout viewport-safe.
 
 LIVE:
 offen.
