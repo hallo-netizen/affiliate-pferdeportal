@@ -257,3 +257,18 @@ Vor jedem neuen Template-Kit-ZIP zwingender Release-Chain-Test:
 7. aktiver Stale-Reference-Scan auf die vorherigen Releaseklassen.
 Kein ZIP-PASS ohne diese sieben Punkte.
 
+## AF-019 – Beim Rollout 1.50.646/1.50.647 den akzeptierten Pilot neu implementiert statt unverändert zu vervielfältigen
+FEHLER:
+Nach akzeptiertem 1.50.645 wurde für den portalweiten Hub2-Rollout eine neue allgemeine Renderlogik gebaut. Dadurch gingen genau die zuvor abgenommenen Eigenschaften wieder verloren.
+
+FOLGE:
+1.50.647 war technisch lauffähig, aber visuell ein Rückschritt: Icons, andere Aufteilung und abweichender Hero-/Claim-/Textpfad.
+
+VERMEIDUNGSREGEL:
+Ein ausdrücklich akzeptierter Pilot ist beim Rollout künftig eine **harte Vorlage**:
+- Markup und CSS nicht neu entwerfen;
+- dieselben Klassen und dieselbe Reihenfolge wiederverwenden;
+- nur Daten/Assets pro Zielseite austauschen;
+- Regression gegen den Pilot vor Freigabe visuell messen;
+- erst danach paketieren.
+
