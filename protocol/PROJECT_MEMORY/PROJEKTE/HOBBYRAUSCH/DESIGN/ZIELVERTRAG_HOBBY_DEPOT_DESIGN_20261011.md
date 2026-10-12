@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.3 / 2026-10-12
+FASSUNG: 3.4 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -83,12 +83,16 @@ FASSUNG: 3.3 / 2026-10-12
 Kein Live-PASS ohne echten WordPress-Readback.
 
 
-## Pilot Hub2 – Buch & Papier / 1.50.638
+## Pilot Hub2 – Buch & Papier / 1.50.640
 Noch **keine portalweite Regel**, sondern Live-Pilot:
 - kurze klare Fotos für direkte Unterkategorien statt Icon-Wüste;
 - Desktop 3-spaltige Fotokarten, Tablet 2-spaltig, Mobil 1-spaltig;
-- Claim `Papier kann mehr.` mit wiederkehrendem CSS-Pinselstrich als möglichem Gestaltungsmotiv;
+- Kachelbilder verwenden dieselben sichtbaren Maße wie Ebene 1: Desktop 200×107, Tablet 165×88, Mobil 145×78;
+- Claim `Papier kann mehr.` mit schreibschriftartigem System-Fontstack und dynamischem CSS-Pinselstrich als wiederkehrendem Gestaltungsmotiv;
 - Reihenfolge: Unterkategorien → konkrete Produkte → 3 Beiträge → Affiliate-Banner → verkaufbarer Werbeplatz;
 - kein langer Seitenendtext auf diesem Hub2;
+- Split-Hero sitzt vollständig innerhalb derselben Body-Breite wie die folgenden Inhaltsabschnitte;
+- Hero-Foto nutzt das vorhandene 600×320-Kategorieasset und läuft weich in Weiß aus;
+- Aufklapptext darf die Bildhöhe/-breite nicht verändern;
 - Performance: 5 Pilotfotos zusammen ca. 66 KB; Split-Hero verwendet zusätzlich ein bereits vorhandenes 45,9-KB-Kategorieasset, kein neues Hero-Bild;
 - andere Hub2-Seiten bleiben unverändert, bis der Pilot live abgenommen ist.
