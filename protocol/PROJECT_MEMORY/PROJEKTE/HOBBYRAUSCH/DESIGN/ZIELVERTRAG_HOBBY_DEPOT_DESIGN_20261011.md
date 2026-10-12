@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.1 / 2026-10-12
+FASSUNG: 3.2 / 2026-10-12
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -81,3 +81,14 @@ FASSUNG: 3.1 / 2026-10-12
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
+
+
+## Pilot Hub2 – Buch & Papier / 1.50.638
+Noch **keine portalweite Regel**, sondern Live-Pilot:
+- kurze klare Fotos für direkte Unterkategorien statt Icon-Wüste;
+- Desktop 2-spaltige Fotokarten, unter 1000 px 1-spaltig;
+- Claim `Papier kann mehr.`;
+- Reihenfolge: Unterkategorien → konkrete Produkte → 3 Beiträge → Affiliate-Banner → verkaufbarer Werbeplatz;
+- kein langer Seitenendtext auf diesem Hub2;
+- Performance: 5 Pilotfotos zusammen ca. 66 KB;
+- andere Hub2-Seiten bleiben unverändert, bis der Pilot live abgenommen ist.
