@@ -2081,3 +2081,46 @@ SHA:
 LIVE:
 OFFEN. Nach Installation echte Hub2-Seite prüfen.
 
+---
+
+## PU-20261012-046 – HD-003 1.50.636 / Hub2 Verfeinerung + Testbeiträge
+
+LIVE-BEFUND 1.50.635:
+- Aufbau Hub2 grundsätzlich okay;
+- oberer Text zu kurz/technisch;
+- gleiche Welticons auf vielen Unterkategorien zu monoton;
+- Artikelvorschau ohne Beiträge nicht beurteilbar.
+
+ÄNDERUNG:
+- längerer natürlicher Hub2-Einstieg in vollständigen Sätzen/Absätzen;
+- weiterhin kein Hub2-Hero;
+- thematisch unterschiedliche Icons für Unterkategorien ohne Foto;
+- Hub2-Beitragsvorschau bis zu 4 Karten;
+- einmaliger Seed von 4 klar markierten [TEST]-Beiträgen;
+- jeder Testbeitrag mit Beitragsbild;
+- Zuordnung zu allen aktuell vorhandenen WordPress-Beitragskategorien und zusätzlich journal_cat, falls Posts unterstützt werden;
+- Testposts per Meta `_hd_demo_post_v150636=1` eindeutig markiert.
+
+REGRESSION:
+- 847/847 Assets byteidentisch;
+- Hero/Header/Nav/Ebene1 unverändert;
+- Affiliate-Slotlogik unverändert;
+- keine Architektur-/Taxonomiestrukturänderung.
+
+TEST:
+- PHP 22/22 PASS;
+- ZIP PASS;
+- Hub2-Simulation 1440/1024/760, Overflow 0;
+- 4/2/1 Artikelraster Desktop/Tablet/Mobil;
+- Testpost-Assetpfade vorhanden;
+- Seed einmalig/Admin-only.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.636_HOBBY_DEPOT_HUB2_REFINEMENT_TEST_POSTS_LOCALPASS.zip`
+
+SHA:
+`d8d45997b136cd7d95e0a790f88dfbb4b3207a29b5b644e415b1ac8e0a72007a`
+
+LIVE:
+OFFEN.
+
