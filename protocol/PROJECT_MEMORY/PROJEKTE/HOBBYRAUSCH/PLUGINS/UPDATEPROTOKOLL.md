@@ -1970,3 +1970,32 @@ ABSCHLUSSCHECK 2026-10-12:
 - SHA identisch zur Current: `2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`;
 - isolierte Campus-Ausgabekopie `CURRENT.zip` fehlt (GitHub 404);
 - mangels sicherem Binärschreibweg in diesem Abschlusslauf keine falsche Ersatzdatei erzeugt.
+
+---
+
+## PU-20261012-043 – HD-003 1.50.629
+
+LIVE-BEFUND 1.50.628:
+- Navigation: PASS;
+- Hero-Texte Ebene 1: PASS;
+- Seitenendtexte mit max. 3 internen Links: PASS;
+- Kategorie-/Link-Bilder: FAIL – zu eng hineingezoomt, zu detailreich, teilweise nur Motivteile, Thema nicht sofort erkennbar.
+
+KORREKTUR:
+- ausschließlich aktiven 65er Kategorie-/Link-Bildsatz geändert;
+- überenge v150627-Richtung zurückgenommen;
+- lokal geprüften einfachen/weiter gefassten v150625-Motivsatz als neue v150629-Assets gebunden;
+- Kartenfläche aus 1.50.628 unverändert;
+- Navigation, Texte, Monetarisierung, Taxonomie und Architektur unverändert.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.629_HOBBY_DEPOT_WIDER_CLEARER_CATEGORY_IMAGES_LOCALPASS.zip`
+
+SHA:
+`6efba12354975852d8253e6141b0bbbcaf1174f60244a0e982e4caac0659c5cb`
+
+TEST:
+PHP 10/10; ZIP PASS; V150629 Binding PASS; 65/65 Bilder 600×320; 65/65 SHA-eindeutig; Weltverteilung 7/11/9/5/10/7/8/8 PASS; Diff gegen 1.50.628 bestätigt keine Navigations-/Text-/Layoutänderung.
+
+LIVE:
+Nur Kategorie-/Link-Bilder offen.
