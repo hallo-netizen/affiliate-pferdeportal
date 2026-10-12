@@ -27,3 +27,19 @@ PASS:
 
 LIVE:
 offen.
+
+
+CURRENT.zip-STATUS:
+**NICHT IM CAMPUS VORHANDEN.**
+
+Abschlusscheck 2026-10-12:
+Der geforderte Pfad
+`PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`
+liefert 404.
+
+Der exakte 1.50.628-Kandidat wurde außerhalb der Bibliothek lokal erneut geprüft:
+SHA-256 `2e875f7f235e84c211143a71f19a8519314160a96d2b917e5ebd751d4a0df49b`,
+ZIP-Integrität PASS, Version 1.50.628, PHP 10/10 PASS.
+
+Die Binärkopie konnte mit den in diesem Abschlusslauf verfügbaren GitHub-Textwerkzeugen nicht sicher in den Campus geschrieben werden.
+Keine falsche CURRENT.zip angelegt.
