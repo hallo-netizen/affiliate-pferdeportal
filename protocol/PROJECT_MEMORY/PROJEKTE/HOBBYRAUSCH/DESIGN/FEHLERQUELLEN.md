@@ -120,6 +120,7 @@ Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
 
 
 
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.645: Buch-&-Papier-Bildkarten/Bannerzeile + Header-Claim.**
+**Live-Abnahme 1.50.647 nach behobenem Release-Ketten-Fatal.**
 
