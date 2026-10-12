@@ -24,7 +24,7 @@ Fix:
 Kartentitel 15 px, Untertitel 12 px; Taxonomie-Kurztext maximal 7 Wörter.
 
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.621 – nur Header.**
+**Live-Abnahme 1.50.624 – Navigation + Raster + Bildduplikate.**
 
 
 ## HRD-043 – Sammeln nicht exakt auf derselben Navigationslinie
@@ -44,3 +44,22 @@ STATUS: LOCAL CLOSED 1.50.621 / LIVE OFFEN
 
 Fix:
 unverändertes Logoasset wird nur für die Darstellung in drei Bereiche geclippt und mit mehr Abstand gesetzt; Suchfeld auf HOBBY-DEPOT-Linie verschoben.
+
+
+## HRD-046 – Navigation trotz mehrerer Fixes live noch zu hoch
+STATUS: LOCAL CLOSED 1.50.624 / LIVE OFFEN
+
+Fix:
+Nav im rechten Headerbereich nicht mehr über Padding/Rows angenähert, sondern final per `position:absolute; bottom:0` an die untere Headerkante gebunden.
+
+## HRD-047 – Produkte zwischen Unterkategorie-Reihen
+STATUS: LOCAL CLOSED 1.50.624 / LIVE OFFEN
+
+Fix:
+Produkte vollständig aus dem Unterkategorie-Raster entfernt. Nur Banner darf die letzte unvollständige 3er-Reihe füllen.
+
+## HRD-048 – Doppelte Hub-Bilder
+STATUS: LOCAL CLOSED 1.50.624 / LIVE OFFEN
+
+Fix:
+65 aktive direkte Hub-Bilder = 65 eindeutige SHA-256-Hashes. Genuss erhält eigenes Motiv; Alias-/Duplikatdateien bereinigt.
