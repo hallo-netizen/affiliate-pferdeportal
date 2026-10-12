@@ -2307,3 +2307,39 @@ SHA:
 LIVE:
 OFFEN. Nur Buch & Papier prüfen.
 
+---
+
+## PU-20261012-051 – HD-003 1.50.641 / Brush-Stroke + 2px-Rahmen
+
+PILOT:
+Nur `Fertigen → Buch & Papier`.
+
+ÄNDERUNG:
+- Claim-Schrift unverändert;
+- freigegebene Variante 1 als Basis für den Unterstrich;
+- Unterstrich beige/Sekundärfarbe, länger, geschwungener, natürlicher, mit mehr Abstand;
+- Hero-Bild rechts 2 px Rundung;
+- Kategorie-Karten max. 2 px Rundung;
+- Kategorie-Bilder exakt innerhalb des Rahmens, Bildslot Δ 0×0;
+- übriger Pilot unverändert.
+
+PERFORMANCE:
+- 1 neues Brush-WebP: 7.114 Bytes;
+- 852/852 vorhandene Assets unverändert.
+
+TEST:
+- PHP 37/37 PASS;
+- ZIP PASS;
+- 1440/1024/760 Overflow 0;
+- Hero-Aufklapp-Delta 0×0;
+- Kartenbilder innerhalb 1 px Kartenborder, kein Überstand.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.641_HOBBY_DEPOT_BRUSH_STROKE_2PX_FRAMES_LOCALPASS.zip`
+
+SHA:
+`b9acd0b3170782f5633d52d3200c58f9c798c48712d7bca36bcaed00c466b9b8`
+
+LIVE:
+OFFEN. Nur Buch & Papier prüfen.
+
