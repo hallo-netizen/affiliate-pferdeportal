@@ -1908,3 +1908,31 @@ PHP 10/10; ZIP PASS; Featured-Image-Negativtest PASS; 65/65 Assets; Playwright 1
 
 LIVE:
 OFFEN.
+
+
+---
+
+## PU-20261012-041 – HD-003 1.50.627
+
+VON / AUF:
+1.50.626 → 1.50.627.
+
+ÄNDERUNG:
+- Hauptnavigation ab 761 px als harte 8er-Einzeile; Sammeln exakt gleiche Baseline;
+- 65 Hubmotive enger/gezoomter und ruhiger;
+- 8 eigenständige natürliche Hero-Texte;
+- `Mehr über <Welt> erfahren` auf Hauptwelten entfernt;
+- 8 lange redaktionelle Seitenendtexte mit Zwischenüberschriften;
+- semantische Links nur auf reale direkte Unterkategorien.
+
+TEST:
+PHP 10/10; ZIP PASS; stale class refs 0; 65/65 Bild-SHA eindeutig; dHash-Minimum 92; 8/8 Hero-Texte; 8/8 Endtexte; Link-Slugs gegen zentrales Kategorieprofil PASS; Playwright 1600/1200/1024/900/800/761 eine Nav-Baseline inkl. Sammeln, Overflow 0; 760 Mobile.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.627_HOBBY_DEPOT_HUB_COPY_IMAGES_NAV_FINAL_LOCALPASS.zip`
+
+SHA:
+`bc6690acd847dac08b646243a07f133b189b5facc5abc6ba58526a79d383d158`
+
+LIVE:
+OFFEN.
