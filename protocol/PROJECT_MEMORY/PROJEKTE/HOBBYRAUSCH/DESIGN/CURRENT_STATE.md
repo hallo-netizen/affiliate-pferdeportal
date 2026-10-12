@@ -3,52 +3,77 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.648 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **1.50.649 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
 ## Kandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.648_HOBBY_DEPOT_ALL_HUB2_EXACT_645_LAYOUT_PFERDE_RULE_PERF_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
 
 SHA-256:
-`8ffc125dcbe95d2657c29ea43ebb69e9be609268ec4c40277a34a15c49502038`
+`a374a3003e5842f2517095e74e178765a31fdf42ae2c5a721027acd79d80975c`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.648_HOBBY_DEPOT_ALL_HUB2_EXACT_645_LAYOUT_PFERDE_RULE_PERF_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
 
 ## Ausgang
-**1.50.647 wird verworfen.**
-Der technische Fatal war dort zwar beseitigt, aber der Rollout hatte den akzeptierten 1.50.645-Aufbau von Buch & Papier wieder durch eine andere Hub2-Logik ersetzt.
+**1.50.648 ist verworfen.**
 
-## 1.50.648
-Basis ist deshalb wieder **1.50.645**. Der akzeptierte sichtbare Aufbau wird auf alle 65 Hub2-/Ebene-2-Seiten ausgerollt, nicht neu erfunden.
+Live-Befund:
+- Pferdeatelier-Darstellung wurde fälschlich mitkopiert, obwohl nur die Textregeln übernommen werden sollten;
+- dadurch stand ein zusätzlicher `Was du hier findest`-Block unter dem Aufklapper;
+- Unterkategoriekarten wiederholten teilweise dasselbe Elternmotiv;
+- kleine Untertitel der Karten fehlten bzw. waren nicht wie beim akzeptierten Buch-&-Papier-Stand gebunden.
 
-Verbindlich:
-- derselbe kompakte Split-Hero wie bei Buch & Papier;
-- rechts das bereits vorhandene Kategorie-Vorschaubild mit weichem Verlauf ins Weiß;
-- kurzer individueller Claim in derselben Schreibschrift-/Brush-Optik;
-- Pferdeatelier-Textregel 1:1: ca. 55 Wörter Lead → `Mehr erfahren` → `Was du hier findest` dauerhaft sichtbar;
-- Öffnen des Texts verändert die Hero-Bildgröße nicht;
-- Unterkategorien als Fotokarten, kein Icon-Rückfall;
-- vorhandenes Featured/Controlled Image zuerst; nur wenn keines existiert, wird performance-schonend das vorhandene Elternmotiv wiederverwendet;
-- 3er-Raster; Restkarten linksbündig; Affiliate-Banner füllt den freien Restplatz bzw. bei voller Reihe eine eigene Bannerzeile;
-- danach konkrete Produkte → 3 Beiträge → genau ein Werbeplatz;
-- kein zusätzlicher Textblock am Seitenende.
+## 1.50.649
+Basis ist wieder **1.50.645**. Der akzeptierte Buch-&-Papier-Aufbau bleibt die visuelle Vorlage.
 
-## Performance / Regression
-- **keine neuen Bildassets**;
+### Text
+Die **redaktionellen Textregeln** aus Pferdeatelier wurden separat und dauerhaft gebunden:
+`DESIGN/TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`
+
+Übernommen wird ausschließlich:
+- ca. 150–200 Wörter;
+- natürliches Deutsch;
+- themenspezifische Substanz;
+- keine Generator-/Padding-Sprache;
+- keine generische Schlussformel;
+- fachliche Orientierung statt Meta-Sätze.
+
+Die Darstellung bleibt Hobby Depot / Buch & Papier:
+**sichtbarer Lead → `Mehr zu <Kategorie> erfahren` → restlicher Text im Aufklapper.**
+Kein zusätzlicher zweiter Erklärungstext darunter.
+
+### Bilder / Karten
+- alle vorhandenen Unterkategorien auf Hub2 erhalten Fotokarten;
+- Buch & Papier behält exakt seine fünf akzeptierten Motive;
+- pro anderer Hub2-Seite werden unterschiedliche Fotos verwendet;
+- echtes Featured Image hat Vorrang;
+- danach kontrollierte vorhandene Assets derselben Hobbywelt;
+- kein wiederholtes Elternmotiv als Universalbild;
+- jede Fotokarte erhält einen kleinen Untertitel;
+- Bilder bleiben exakt im Kartenrahmen, Foto-Radius 0.
+
+### Performance / Struktur
+- **0 neue Bildassets**;
 - 859/859 Assets byteidentisch zu 1.50.645;
-- 65/65 Hub2-Hero-Motive aus vorhandenem Bestand gefunden;
-- 65/65 individuelle Claims vorhanden;
-- Header/Navigation/Ebene 1/Taxonomie unverändert;
+- keine neue Taxonomie/Architektur;
+- Header, Navigation und Ebene 1 unverändert;
+- Kartenbilder lazy;
+- Hero verwendet vorhandenes Kategorieasset.
+
+## Vollprüfung
+- reale Zielhierarchie: **65 Hub2-Seiten / 328 vorhandene direkte Kindseiten**;
+- 65/65 Heroassets gefunden;
+- 65/65 Claims vorhanden;
+- generierte Kategorietexte: **157–176 Wörter**;
+- 328/328 vorhandene Kindseiten erhalten Fotokarte;
+- innerhalb jeder Hub2-Seite: **keine doppelte Foto-URL**;
+- 328/328 Fotokarten mit Untertitel;
 - PHP **52/52 PASS**;
 - ZIP PASS;
-- Release-Kette vollständig 1.50.648;
-- aktive Stale-V150645/V150646/V150647-Bindung im aktiven Pfad: 0;
+- Release-Kette vollständig V150649, aktive alte Klassenreferenzen 0;
 - Browser 1440 / 1024 / 900 / 760: Overflow 0;
-- Desktop 1440/1024: 3 + 2 + Banner;
 - Bild/Slot-Abweichung 0;
-- Foto-Radius 0;
-- Aufklappen: Hero-Bild Δ Breite/Höhe 0;
-- `Was du hier findest` bleibt sichtbar.
+- Hero-Bild bleibt beim Aufklappen dimensionsstabil.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.648 installieren und live zuerst Buch & Papier plus zwei weitere Hub2-Kategorien aus unterschiedlichen Welten prüfen.**
+**1.50.649 installieren und live Buch & Papier, Guss & Formen sowie mindestens eine Hub2-Seite aus einer anderen Hauptwelt prüfen.**
