@@ -2488,3 +2488,49 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261012-056 – HD-003 1.50.648 / akzeptierten 1.50.645-Hub2-Pilot exakt portalweit ausgerollt
+
+AUSGANG:
+1.50.647 technisch lauffähig, aber visuell verworfen. Basis wieder 1.50.645.
+
+KORREKTUR:
+- akzeptierten Split-Hero/Brush/Kartenpfad 1:1 wiederverwendet;
+- Rollout auf alle 65 Hub2-Seiten;
+- vorhandenes kontrolliertes Kategorieasset als Hero mit Weiß-Verlauf;
+- 65 individuelle kurze Claims;
+- Text-Fold nach Pferdeatelier-Regel 1:1: ca. 55 Wörter Lead → Mehr erfahren → Was du hier findest dauerhaft sichtbar;
+- Unterkategorien immer als Fotokarten; Featured/Controlled Image zuerst, Parent-Motiv nur als Performance-Fallback;
+- 3er-Raster; Restkarten links, Banner füllt freien Restplatz;
+- danach Produkte → 3 Beiträge → Werbeplatz;
+- kein Hub2-Seitenendtext.
+
+PERFORMANCE / REGRESSION:
+- 0 neue Bildassets;
+- 859/859 Assets byteidentisch zu 1.50.645;
+- Header/Nav/Ebene1 unverändert;
+- keine Taxonomie-/Architekturänderung.
+
+TEST:
+- PHP 52/52 PASS;
+- ZIP PASS;
+- Release-Kette vollständig V150648;
+- 65/65 Claims;
+- 65/65 Heroassets;
+- Browser 1440/1024/900/760: Overflow 0;
+- 1440/1024: 3+2+Banner;
+- Bild/Slot Δ 0;
+- Foto-Radius 0;
+- Aufklappen: Hero-Bild Δ 0×0;
+- Was-du-hier-findest außerhalb des Details und sichtbar.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.648_HOBBY_DEPOT_ALL_HUB2_EXACT_645_LAYOUT_PFERDE_RULE_PERF_LOCALPASS.zip`
+
+SHA:
+`8ffc125dcbe95d2657c29ea43ebb69e9be609268ec4c40277a34a15c49502038`
+
+LIVE:
+OFFEN.
+
