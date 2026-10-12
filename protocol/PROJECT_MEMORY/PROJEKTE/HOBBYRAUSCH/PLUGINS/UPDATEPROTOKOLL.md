@@ -1869,3 +1869,42 @@ PHP 10/10; ZIP PASS; Raster-/Hash-/Strukturchecks PASS.
 
 LIVE:
 OFFEN.
+
+
+---
+
+## PU-20261012-040 – HD-003 1.50.625
+
+LIVE-BEFUND 1.50.624:
+Trotz 65 byte-eindeutiger lokaler Dateien erschienen live mehrfach gleiche Bilder. Zusätzlich lag Sammeln optisch nicht exakt auf derselben Navigationslinie.
+
+ROOT CAUSE BILDER:
+WordPress Featured Images wurden vor den kontrollierten lokalen Hubassets ausgewählt. Alte mehrfach gepflegte Featured Images überstimmten dadurch die neuen Motive.
+
+FIX:
+- kontrollierte v150625-Hubassets zuerst;
+- Featured Image nur noch Fallback;
+- 65 Motive auf klarere, ruhigere Einzelmotive zugeschnitten;
+- 65/65 SHA-eindeutig;
+- Perceptual-dHash Mindestabstand 96.
+
+ROOT CAUSE NAV:
+Pfeilbutton und alte Grid/Flex-Kaskaden beeinflussten Itemgeometrie.
+
+FIX:
+- ab 761 px eine einzige Flexzeile;
+- feste Labelhöhe/-line-height;
+- Pfeilbutton absolut aus dem Textfluss;
+- Sammeln exakt gleiche Baseline.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.625_HOBBY_DEPOT_SIMPLE_UNIQUE_HUB_IMAGES_NAV_BASELINE_LOCALPASS.zip`
+
+SHA:
+`6aab2195365375c30c4dfcc4558dd8aa62f912289df76544b6e0cb5529960e03`
+
+TEST:
+PHP 10/10; ZIP PASS; Featured-Image-Negativtest PASS; 65/65 Assets; Playwright 1600/1200/1024/900/800/761 Baseline + Overflow PASS; Sammeln-Flyout viewport-safe.
+
+LIVE:
+OFFEN.
