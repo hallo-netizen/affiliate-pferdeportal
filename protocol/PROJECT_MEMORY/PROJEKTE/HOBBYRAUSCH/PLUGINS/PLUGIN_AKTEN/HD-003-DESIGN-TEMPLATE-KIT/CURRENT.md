@@ -3,40 +3,42 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.634 LOCAL HARD PASS / LIVE-PASS BILDER OFFEN**
+STATUS: **1.50.635 LOCAL HARD PASS / LIVE-PASS HUB2 OFFEN**
 
 Version:
-**1.50.634**
+**1.50.635**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.635_HOBBY_DEPOT_HUB2_CONTENT_MONETIZATION_LOCALPASS.zip`
 
 SHA-256:
-`b7347fd4925fb201165b8763ae8ae2f054811dfcb38a167cd6dee04b4f728b75`
-
-Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
+`1cdeb892906e29505cf300125f051a68b7b7cd1ecc2099202e828a4276713615`
 
 ## Scope
-Nur Kategorie-Vorschaubilder Ebene 1:
-- 65 kontrollierte aktive Bilder;
-- weiter gefasste und visuell geprüfte Motive;
-- keine künstliche Rahmen-/Passepartout-Erweiterung;
-- Bild füllt seinen Slot ohne Margin/Padding/Border/Radius;
-- kein Hub1-Fallback auf alte Featured Images;
+Nur Hub2 / Kategorieebene 2:
+- kein Hero-Foto;
+- kurzer Orientierungstext oben;
+- nächste Ebene;
+- separater Banner;
+- Artikelvorschau;
+- konkrete `category_product_1..3`-Produkte;
+- genau ein verkaufbarer Werbeplatz;
+- Langtext unten.
+
+## Freeze / Regression
+- 847/847 Assets byteidentisch zu 1.50.634;
 - Hero-Dateien unverändert;
-- Navigation/Header gegenüber dem live akzeptierten Stand eingefroren.
+- Header/Nav unverändert;
+- Ebene 1 unverändert;
+- Architektur/Taxonomie unverändert.
 
 ## Lokal
-- PHP 16/16 PASS;
+- PHP 19/19 PASS;
 - ZIP PASS;
-- 65/65 aktive Bilder SHA-eindeutig;
-- Render-Simulation:
-  - 1440 px: 200×107, Rahmengeometrie 0;
-  - 930 px: 165×88, Rahmengeometrie 0;
-  - 760 px: 145×78, Rahmengeometrie 0;
-- Hero-Assets byte-identisch;
-- Header-/Navigationsrendering unverändert bis auf Releasekennung.
+- Hub2-DOM-Simulation 1440/1024/760 PASS;
+- kein horizontaler Overflow;
+- 0 Hero-Fotos im Hub2-Simulationspfad;
+- Reihenfolge PASS.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.634 installieren und live ausschließlich Kategorie-Vorschaubilder prüfen.**
+**1.50.635 installieren und live eine echte Hub2-Seite prüfen.**
