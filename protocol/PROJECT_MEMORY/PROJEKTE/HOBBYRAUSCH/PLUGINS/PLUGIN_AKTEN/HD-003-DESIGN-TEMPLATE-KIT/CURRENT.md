@@ -3,35 +3,40 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-12
-STATUS: **1.50.631 LOCAL HARD PASS / LIVE-PASS OFFEN**
+STATUS: **1.50.634 LOCAL HARD PASS / LIVE-PASS BILDER OFFEN**
 
 Version:
-**1.50.631**
+**1.50.634**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
 
 SHA-256:
-`94b31dad40c8806fad72ab1a8c576cd6333832224c5fbd122820ce7859a184f0`
+`b7347fd4925fb201165b8763ae8ae2f054811dfcb38a167cd6dee04b4f728b75`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
 
 ## Scope
-- 1.50.630 verworfen;
-- echter neuer 65er v150631-Bildsatz aus eindeutigen v150629-Motiven, sichtbar herausgezoomt;
-- kein aktiver v150623-Hub1-Bildpfad;
+Nur Kategorie-Vorschaubilder Ebene 1:
+- 65 kontrollierte aktive Bilder;
+- weiter gefasste und visuell geprüfte Motive;
+- keine künstliche Rahmen-/Passepartout-Erweiterung;
+- Bild füllt seinen Slot ohne Margin/Padding/Border/Radius;
 - kein Hub1-Fallback auf alte Featured Images;
-- Claim zentriert/gleich breit zur Wortmarke;
-- Logo so nach unten positioniert, dass Claim-Unterkante exakt auf Navigation liegt;
-- übrige Texte, Monetarisierung, Taxonomie und Architektur unverändert.
+- Hero-Dateien unverändert;
+- Navigation/Header gegenüber dem live akzeptierten Stand eingefroren.
 
 ## Lokal
-- PHP 13/13 PASS;
+- PHP 16/16 PASS;
 - ZIP PASS;
-- 65/65 v150631 Bilder 600×320;
-- 65/65 SHA-eindeutig;
-- Header-Simulation 1600/1440/1200/1024/900/800/761: Claim/Navi Delta 0 px.
+- 65/65 aktive Bilder SHA-eindeutig;
+- Render-Simulation:
+  - 1440 px: 200×107, Rahmengeometrie 0;
+  - 930 px: 165×88, Rahmengeometrie 0;
+  - 760 px: 145×78, Rahmengeometrie 0;
+- Hero-Assets byte-identisch;
+- Header-/Navigationsrendering unverändert bis auf Releasekennung.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.631 installieren und live Vorschaubilder + Logo/Claim/Navigationslinie prüfen.**
+**1.50.634 installieren und live ausschließlich Kategorie-Vorschaubilder prüfen.**
