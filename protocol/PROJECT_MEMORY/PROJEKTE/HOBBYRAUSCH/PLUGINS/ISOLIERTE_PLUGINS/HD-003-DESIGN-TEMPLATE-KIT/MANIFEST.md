@@ -4,35 +4,34 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.631`
+`1.50.634`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
 
 SHA-256:
-`94b31dad40c8806fad72ab1a8c576cd6333832224c5fbd122820ce7859a184f0`
+`b7347fd4925fb201165b8763ae8ae2f054811dfcb38a167cd6dee04b4f728b75`
 
 LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.631_HOBBY_DEPOT_REAL_ZOOMOUT_UNIQUE_IMAGES_HEADER_LINE_FIX_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.634_HOBBY_DEPOT_CATEGORY_PREVIEWS_WIDER_CLEAR_NO_FRAME_LOCALPASS.zip`
 
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE-PASS OFFEN.
+LOCAL HARD PASS / LIVE-PASS BILDER OFFEN.
 
 PASS:
-- PHP 13/13;
+- PHP 16/16;
 - ZIP;
-- V150631 Binding;
-- 65 neue v150631 Kategorie-/Link-Bilder;
-- 65/65 600×320;
-- 65/65 eindeutige SHA;
-- kein aktiver v150623-Hub1-Bildpfad;
-- Header-Geometriesimulation 7 Viewports mit 0 px Claim/Navi-Abweichung.
+- 65 aktive Kategorie-Vorschaubilder;
+- 65/65 SHA-eindeutig;
+- Rahmengeometrie 0 bei 1440/930/760;
+- Hero-Assets unverändert;
+- Navigation/Header eingefroren.
 
 LIVE:
-Vorschaubilder + Logo/Claim/Navigationslinie offen.
+Nur Kategorie-Vorschaubilder offen.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
 
-Der exakte 1.50.631-Kandidat liegt in der Library am oben genannten Pfad.
+Der exakte 1.50.634-Kandidat liegt in der Library am oben genannten Pfad.
 Keine falsche CURRENT.zip angelegt.
