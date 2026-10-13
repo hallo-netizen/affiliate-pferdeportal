@@ -1,5 +1,5 @@
 {
-  "contract": "HAB_R3_V8_DATAFORSEO_READONLY_RESEARCH_BRIDGE_V1",
+  "contract": "HAB_R3_V8_DATAFORSEO_READONLY_RESEARCH_BRIDGE_V2",
   "created": "2026-10-13",
   "authority": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md",
   "plan_source": "R3_V8_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md",
@@ -28,15 +28,17 @@
     "permission_required_before_any_paid_call": true,
     "no_blind_batch_execution": true,
     "not_importable": true,
-    "query_preflight_manual_rewrite_required_for_nonpriority": true
+    "query_preflight_manual_rewrite_required_for_nonpriority": true,
+    "search_terms_are_unverified_editorial_hypotheses": true
   },
   "counts": {
     "new_candidate_categories": 144,
     "article_ideas": 432,
-    "manually_defined_query_candidates": 15,
-    "unreviewed_query_candidates": 129,
+    "manually_defined_query_candidates": 144,
+    "unreviewed_query_candidates": 0,
     "existing_overview_exact_match_categories": 1,
-    "google_serp_fully_released_candidates": 0
+    "google_serp_fully_released_candidates": 0,
+    "queries_with_measured_new_R3_keyword_volume": 0
   },
   "old_serp_overlap_for_context": [
     {
@@ -215,8 +217,8 @@
       "subarea": "Carports & Außenlager",
       "new_category": "Carport-Fahrzeugschutz",
       "priority": "Normal",
-      "seo_query_for_preflight": "Offenen Carport bei längerer Abwesenheit gegen Fahrzeugdiebstahl absichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "carport gegen fahrzeugdiebstahl sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Offenen Carport bei längerer Abwesenheit gegen Fahrzeugdiebstahl absichern",
         "Parkbügel oder Wegfahrsperre am privaten Carport vergleichen",
@@ -226,7 +228,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -234,8 +238,8 @@
       "subarea": "Carports & Außenlager",
       "new_category": "Außenboxen & Lagerkisten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wetterfeste Garten-Aufbewahrungsbox gegen Aufbrechen sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenbox gegen aufbrechen sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wetterfeste Garten-Aufbewahrungsbox gegen Aufbrechen sichern",
         "Schlossarten für abschließbare Außenkisten vergleichen",
@@ -245,7 +249,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -253,8 +259,8 @@
       "subarea": "Carports & Außenlager",
       "new_category": "Mobile Aufbauten & Dachboxen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Abnehmbare Dachbox am abgestellten Auto gegen Diebstahl sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "dachbox am auto gegen diebstahl sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Abnehmbare Dachbox am abgestellten Auto gegen Diebstahl sichern",
         "Fahrradträger und mobile Heckbox sicher lagern",
@@ -264,7 +270,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -273,7 +281,7 @@
       "new_category": "Grenzüberwachung im Garten",
       "priority": "Erhöht",
       "seo_query_for_preflight": "grundstücksgrenze bewegungsmelder kamera datenschutz",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Grundstücksgrenze mit Außenbewegungsmeldern überwachen",
         "Sensoren für Gartenzugang ohne dauernde Fehlalarme positionieren",
@@ -283,7 +291,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "grundstücksgrenze bewegungsmelder kamera datenschutz",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -291,8 +302,8 @@
       "subarea": "Grundstücksgrenzen & Wege",
       "new_category": "Einsehbarkeit & Sichtachsen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Uneinsehbare Gartenecken als Einbruchsrisiko erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "garten sichtschutz einbruchschutz einsehbarkeit",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Uneinsehbare Gartenecken als Einbruchsrisiko erkennen",
         "Hecken und Sichtschutz für Sicherheit und Privatsphäre ausbalancieren",
@@ -302,7 +313,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -310,8 +323,8 @@
       "subarea": "Grundstücksgrenzen & Wege",
       "new_category": "Wegführung & Zugangsbereiche",
       "priority": "Normal",
-      "seo_query_for_preflight": "Unbefugte Zugänge über seitliche Gartenwege erschweren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "garten zugangswege gegen unbefugten zutritt sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Unbefugte Zugänge über seitliche Gartenwege erschweren",
         "Wege vom Gartentor zum Wohnhaus sicher gestalten",
@@ -321,7 +334,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -329,8 +344,8 @@
       "subarea": "Kontrollen & Anwesenheit",
       "new_category": "Private Objektkontrollen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Kontrollplan für leerstehendes Privathaus erstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "leerstehendes haus kontrollgänge organisieren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Kontrollplan für leerstehendes Privathaus erstellen",
         "Was muss ein privater Objektkontrolleur regelmäßig dokumentieren?",
@@ -340,7 +355,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -348,8 +365,8 @@
       "subarea": "Kontrollen & Anwesenheit",
       "new_category": "Post & Zustellung bei Leerstand",
       "priority": "Normal",
-      "seo_query_for_preflight": "Briefkastenüberlauf bei längerem Leerstand verhindern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "post bei leerstehendem haus organisieren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Briefkastenüberlauf bei längerem Leerstand verhindern",
         "Paketlieferungen am unbewohnten Haus sinnvoll umleiten",
@@ -359,7 +376,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -367,8 +386,8 @@
       "subarea": "Kontrollen & Anwesenheit",
       "new_category": "Anwesenheitssimulation",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lichtschaltungen im leerstehenden Haus glaubwürdig zeitlich steuern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "anwesenheitssimulation",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lichtschaltungen im leerstehenden Haus glaubwürdig zeitlich steuern",
         "Anwesenheitssimulation ohne permanente Internetverbindung planen",
@@ -387,7 +406,9 @@
       "keyword_volume_status": "EXACT_MATCH_ONLY_OTHER_QUERIES_UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -395,8 +416,8 @@
       "subarea": "Betriebszugang & Abläufe",
       "new_category": "Schlüsselmanagement im Kleingewerbe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Schlüsselverzeichnis für kleinen Familienbetrieb anlegen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schlüsselverwaltung für kleine betriebe",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Schlüsselverzeichnis für kleinen Familienbetrieb anlegen",
         "Ausgegebene Laden- und Werkstattschlüssel nachverfolgen",
@@ -406,7 +427,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -414,8 +437,8 @@
       "subarea": "Betriebszugang & Abläufe",
       "new_category": "Kassen & Bargeld nach Ladenschluss",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wechselgeld im kleinen Geschäft nach Ladenschluss sicher verwahren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "bargeld nach ladenschluss sicher aufbewahren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wechselgeld im kleinen Geschäft nach Ladenschluss sicher verwahren",
         "Kassenabschluss ohne sichtbare Bargeldroutine organisieren",
@@ -425,7 +448,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -433,8 +458,8 @@
       "subarea": "Betriebszugang & Abläufe",
       "new_category": "Liefer- & Fremdzutritte",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lieferantenzugang im inhabergeführten Laden begrenzen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fremdfirmen zugang zum kleinen betrieb kontrollieren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lieferantenzugang im inhabergeführten Laden begrenzen",
         "Externe Handwerker im Kleinbetrieb sicher einweisen",
@@ -444,7 +469,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -452,8 +479,8 @@
       "subarea": "Oberflächen & Fassadenbauteile",
       "new_category": "Fassadenputz & Oberflächenschäden",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mutwillige Kratzer und Abplatzungen an Putzfassaden erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fassadenputz vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mutwillige Kratzer und Abplatzungen an Putzfassaden erkennen",
         "Fassadenputz nach Sachbeschädigung fachgerecht ausbessern lassen",
@@ -463,7 +490,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -471,8 +500,8 @@
       "subarea": "Oberflächen & Fassadenbauteile",
       "new_category": "Verkleidungen & Außendämmung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gedämmte Hausfassade vor gezielter Beschädigung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fassadendämmung vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gedämmte Hausfassade vor gezielter Beschädigung schützen",
         "Beschädigte Außenverkleidung auf Feuchteeintritt prüfen",
@@ -482,7 +511,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -491,7 +522,7 @@
       "new_category": "Außenrollläden vor Vandalismus",
       "priority": "Erhöht",
       "seo_query_for_preflight": "außenrollladen vandalismus beschädigung manipulationsschutz",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Außenrollladen vor mutwilligem Hochschieben und Verbiegung schützen",
         "Jalousielamellen nach Sachbeschädigung beurteilen lassen",
@@ -501,7 +532,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "außenrollladen vandalismus beschädigung manipulationsschutz",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -509,8 +543,8 @@
       "subarea": "Gärten & Außenmöblierung",
       "new_category": "Mauern & Einfriedungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Grundstücksmauer vor wiederholter Beschädigung absichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenmauer vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Grundstücksmauer vor wiederholter Beschädigung absichern",
         "Zerstörte Zaunfelder am Privatgrund dokumentieren",
@@ -520,7 +554,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -528,8 +564,8 @@
       "subarea": "Gärten & Außenmöblierung",
       "new_category": "Bepflanzung & Grünflächen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mutwillige Zerstörung von Hecken und Gartenpflanzen dokumentieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenpflanzen vandalismus schadensersatz",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mutwillige Zerstörung von Hecken und Gartenpflanzen dokumentieren",
         "Empfindliche Beete am Gemeinschaftsgarten gegen Betreten schützen",
@@ -539,7 +575,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -547,8 +585,8 @@
       "subarea": "Gärten & Außenmöblierung",
       "new_category": "Garteninventar & Outdoor-Möbel",
       "priority": "Normal",
-      "seo_query_for_preflight": "Private Gartentische gegen mutwilliges Umwerfen sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenmöbel vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Private Gartentische gegen mutwilliges Umwerfen sichern",
         "Beschädigte Gartenmöbel materialgerecht instand setzen",
@@ -558,7 +596,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -566,8 +606,8 @@
       "subarea": "Innenräume & Hausgemeinschaft",
       "new_category": "Gemeinschaftsflure & Treppenhäuser",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wiederholte Sachbeschädigung im kleinen Hausflur eindämmen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "treppenhaus vandalismus verhindern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wiederholte Sachbeschädigung im kleinen Hausflur eindämmen",
         "Handläufe und Treppenhausverkleidungen widerstandsfähig auswählen",
@@ -577,7 +617,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -585,8 +627,8 @@
       "subarea": "Innenräume & Hausgemeinschaft",
       "new_category": "Innenbeleuchtung & Leitsysteme",
       "priority": "Normal",
-      "seo_query_for_preflight": "Innenleuchten im gemeinschaftlichen Hausflur manipulationsarm montieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "treppenhaus beleuchtung gegen vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Innenleuchten im gemeinschaftlichen Hausflur manipulationsarm montieren",
         "Beschädigte Fluchtwegbeleuchtung im Innenraum ersetzen lassen",
@@ -596,7 +638,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -604,8 +648,8 @@
       "subarea": "Innenräume & Hausgemeinschaft",
       "new_category": "Gemeinschaftskeller & Waschräume",
       "priority": "Normal",
-      "seo_query_for_preflight": "Waschraum in kleiner Hausgemeinschaft vor Sachbeschädigung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gemeinschaftskeller vandalismus schäden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Waschraum in kleiner Hausgemeinschaft vor Sachbeschädigung schützen",
         "Gemeinschaftskeller nach Vandalismus sicher nutzbar machen",
@@ -615,7 +659,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -623,8 +669,8 @@
       "subarea": "Sanitärräume & Nebenanlagen",
       "new_category": "Sanitäreinrichtungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Sanitärkeramik in kleinen Vereinsräumen vor mutwilligem Schaden schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sanitäreinrichtungen im vereinsheim vandalismus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Sanitärkeramik in kleinen Vereinsräumen vor mutwilligem Schaden schützen",
         "Verstopfung durch absichtliche Fremdkörper in Toilette erkennen",
@@ -634,7 +680,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -642,8 +690,8 @@
       "subarea": "Sanitärräume & Nebenanlagen",
       "new_category": "Schließfächer & Aufbewahrung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Private Schließfächer im Vereinsheim vandalismusarm aufstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schließfächer gegen vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Private Schließfächer im Vereinsheim vandalismusarm aufstellen",
         "Beschädigte Spindschlösser nach Manipulation ersetzen",
@@ -653,7 +701,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -661,8 +711,8 @@
       "subarea": "Sanitärräume & Nebenanlagen",
       "new_category": "Nebenraum-Inventar",
       "priority": "Normal",
-      "seo_query_for_preflight": "Inventar im kleinen Gemeinschaftsraum vor absichtlichem Schaden schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gemeinschaftsraum inventar sachbeschädigung",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Inventar im kleinen Gemeinschaftsraum vor absichtlichem Schaden schützen",
         "Sachschäden an gemeinsam genutztem Werkzeug nachweisen",
@@ -672,7 +722,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -680,8 +732,8 @@
       "subarea": "Zählerkästen & Anschlussleitungen",
       "new_category": "Außenzähler & Messstellen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Außenliegenden Stromzähler gegen unbefugten Zugriff schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "stromzähler außen vor manipulation schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Außenliegenden Stromzähler gegen unbefugten Zugriff schützen",
         "Manipulationsspuren an einer privaten Außenzähleranlage erkennen",
@@ -691,7 +743,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -699,8 +753,8 @@
       "subarea": "Zählerkästen & Anschlussleitungen",
       "new_category": "Stromkästen & Außenverteiler",
       "priority": "Normal",
-      "seo_query_for_preflight": "Stromverteiler im Außenschuppen gegen Sachbeschädigung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "stromverteiler außen vandalismusschutz",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Stromverteiler im Außenschuppen gegen Sachbeschädigung schützen",
         "Aufbruch am Außenverteiler erkennen und Gefahrenbereich sichern",
@@ -710,7 +764,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -718,8 +774,8 @@
       "subarea": "Zählerkästen & Anschlussleitungen",
       "new_category": "Freiliegende Hausanschlüsse",
       "priority": "Normal",
-      "seo_query_for_preflight": "Hausanschlusskabel im Außenbereich gegen Sabotage abschirmen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "hausanschlusskabel außen vor beschädigung schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Hausanschlusskabel im Außenbereich gegen Sabotage abschirmen",
         "Freiliegende Leitungen am Gebäude fachgerecht nachrüsten lassen",
@@ -729,7 +785,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -737,8 +795,8 @@
       "subarea": "Geparkte Privatfahrzeuge",
       "new_category": "Sachbeschädigung an Privatwagen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lackkratzer am vor dem Haus geparkten Auto beweissicher festhalten",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "auto vor sachbeschädigung schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lackkratzer am vor dem Haus geparkten Auto beweissicher festhalten",
         "Parkplatzüberwachung gegen wiederholte Fahrzeugbeschädigung rechtlich prüfen",
@@ -748,7 +806,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -756,8 +816,8 @@
       "subarea": "Geparkte Privatfahrzeuge",
       "new_category": "Motorräder & Roller vor Vandalismus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Motorrad im öffentlichen Sichtbereich vor mutwilligem Umwerfen schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "motorrad vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Motorrad im öffentlichen Sichtbereich vor mutwilligem Umwerfen schützen",
         "Beschädigungen an abgestelltem Roller systematisch dokumentieren",
@@ -767,7 +827,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -775,8 +837,8 @@
       "subarea": "Geparkte Privatfahrzeuge",
       "new_category": "Oldtimer & Sammlerfahrzeuge",
       "priority": "Normal",
-      "seo_query_for_preflight": "Oldtimer bei langer Standzeit vor vorsätzlichen Lackschäden schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "oldtimer vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Oldtimer bei langer Standzeit vor vorsätzlichen Lackschäden schützen",
         "Garagenkontrollen für empfindliche Sammlerfahrzeuge organisieren",
@@ -786,7 +848,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -795,7 +859,7 @@
       "new_category": "Spielgeräte vor Vandalismus",
       "priority": "Erhöht",
       "seo_query_for_preflight": "spielgeräte vandalismus schaukel beschädigung prüfung",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Schaukel und Spielturm gegen mutwilliges Lockern prüfen",
         "Beschädigte Spielplatz-Verbindungen vor erneuter Benutzung erkennen",
@@ -805,7 +869,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "spielgeräte vandalismus schaukel beschädigung prüfung",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -813,8 +880,8 @@
       "subarea": "Private Freizeit- & Spielanlagen",
       "new_category": "Private Grill- & Rastbereiche",
       "priority": "Normal",
-      "seo_query_for_preflight": "Grillplatz auf Privatgrund vor mutwilliger Zerstörung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "privater grillplatz vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Grillplatz auf Privatgrund vor mutwilliger Zerstörung schützen",
         "Gasgrill nach mutmaßlicher Manipulation der Anschlüsse vom Fachmann prüfen lassen",
@@ -824,7 +891,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -832,8 +901,8 @@
       "subarea": "Private Freizeit- & Spielanlagen",
       "new_category": "Kleingarten-Gemeinschaftsflächen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gemeinsame Wege im Schrebergarten gegen Beschädigung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kleingarten gemeinschaftsanlage vandalismus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gemeinsame Wege im Schrebergarten gegen Beschädigung schützen",
         "Sachschäden an gemeinschaftlichen Gartenanlagen dokumentieren",
@@ -843,7 +912,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -851,8 +922,8 @@
       "subarea": "Mobiles Geschäftsaußeninventar",
       "new_category": "Verkaufsautomaten im Außenraum",
       "priority": "Normal",
-      "seo_query_for_preflight": "Kleinen Warenautomaten vor mutwilliger Beschädigung schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "verkaufsautomat vandalismusschutz",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Kleinen Warenautomaten vor mutwilliger Beschädigung schützen",
         "Glas und Gehäuse eines Außenautomaten widerstandsfähig wählen",
@@ -862,7 +933,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -870,8 +943,8 @@
       "subarea": "Mobiles Geschäftsaußeninventar",
       "new_category": "Paket- & Lieferstationen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Paketabholfach eines kleinen Geschäfts vandalismusarm aufstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "paketstation gegen vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Paketabholfach eines kleinen Geschäfts vandalismusarm aufstellen",
         "Defekte Abholklappe einer Lieferstation sicher sperren",
@@ -881,7 +954,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -889,8 +964,8 @@
       "subarea": "Mobiles Geschäftsaußeninventar",
       "new_category": "Außenverkaufsstände",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mobiles Warendisplay vor dem kleinen Laden gegen Beschädigung sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "verkaufsstand gegen vandalismus sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mobiles Warendisplay vor dem kleinen Laden gegen Beschädigung sichern",
         "Marktstand nach Feierabend vandalismussicher verstauen",
@@ -900,7 +975,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -908,8 +985,8 @@
       "subarea": "Sport- & Vereinsinfrastruktur",
       "new_category": "Sporttore & Spielfeldinventar",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mutwillig gelockertes Fußballtor auf Vereinsplatz sicher erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fußballtor manipulation prüfen vandalismus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mutwillig gelockertes Fußballtor auf Vereinsplatz sicher erkennen",
         "Fest installierte Sportgeräte gegen Manipulation schützen",
@@ -919,7 +996,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -927,8 +1006,8 @@
       "subarea": "Sport- & Vereinsinfrastruktur",
       "new_category": "Vereinszäune & Absperrungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Beschädigte Umzäunung am kleinen Sportplatz zeitnah sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sportplatzzaun vor vandalismus schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Beschädigte Umzäunung am kleinen Sportplatz zeitnah sichern",
         "Ballfangzaun nach mutwilligem Eingriff prüfen lassen",
@@ -938,7 +1017,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -946,8 +1027,8 @@
       "subarea": "Sport- & Vereinsinfrastruktur",
       "new_category": "Flutlicht & Platztechnik",
       "priority": "Normal",
-      "seo_query_for_preflight": "Flutlichtanlage am Vereinsgelände gegen Vandalismus absichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "flutlichtanlage sportplatz vandalismus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Flutlichtanlage am Vereinsgelände gegen Vandalismus absichern",
         "Kabelzugänge an der Sportplatzbeleuchtung schützen",
@@ -957,7 +1038,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -965,8 +1048,8 @@
       "subarea": "Rohrnetz & vorbeugende Wartung",
       "new_category": "Leitungskorrosion im Haus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Korrosionszeichen an alten Wasserleitungen früh erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "korrosion wasserleitungen erkennen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Korrosionszeichen an alten Wasserleitungen früh erkennen",
         "Welche Wasserrohrmaterialien erfordern bei Lochfraß Fachprüfung?",
@@ -976,7 +1059,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -984,8 +1069,8 @@
       "subarea": "Rohrnetz & vorbeugende Wartung",
       "new_category": "Druckprobleme & Druckschläge",
       "priority": "Normal",
-      "seo_query_for_preflight": "Druckschläge in der häuslichen Trinkwasserleitung erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "druckschläge wasserleitung vermeiden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Druckschläge in der häuslichen Trinkwasserleitung erkennen",
         "Wasserhammer nach Schnellschlussarmatur fachlich untersuchen lassen",
@@ -995,7 +1080,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1003,8 +1090,8 @@
       "subarea": "Rohrnetz & vorbeugende Wartung",
       "new_category": "Rohrverbindungen & Dichtstellen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Undichte Verschraubung unter Spüle rechtzeitig bemerken",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "rohrverschraubung undicht erkennen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Undichte Verschraubung unter Spüle rechtzeitig bemerken",
         "Typische Leckstellen an flexiblen Wasseranschlüssen kontrollieren",
@@ -1014,7 +1101,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1022,8 +1111,8 @@
       "subarea": "Grundwasser & Kellerbauteile",
       "new_category": "Kellerwände bei Grundwasser",
       "priority": "Normal",
-      "seo_query_for_preflight": "Grundwasseranstieg als Ursache nasser Kellerwände prüfen lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "grundwasser drückt durch kellerwand",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Grundwasseranstieg als Ursache nasser Kellerwände prüfen lassen",
         "Kelleraußenwand gegen drückendes Wasser beurteilen lassen",
@@ -1033,7 +1122,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1041,8 +1132,8 @@
       "subarea": "Grundwasser & Kellerbauteile",
       "new_category": "Feuchte Bodenplatten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Feuchte Estrichrandfuge als Hinweis auf Bodenfeuchte richtig einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "feuchtigkeit durch kellerbodenplatte",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Feuchte Estrichrandfuge als Hinweis auf Bodenfeuchte richtig einordnen",
         "Messverfahren für feuchte Bodenaufbauten einordnen",
@@ -1052,7 +1143,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1060,8 +1153,8 @@
       "subarea": "Grundwasser & Kellerbauteile",
       "new_category": "Kellerfensterschächte & Nässe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lichtschacht bei hohem Grundwasser vor Wassereintritt prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kellerlichtschacht gegen wassereintritt abdichten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lichtschacht bei hohem Grundwasser vor Wassereintritt prüfen",
         "Drainage und Ablauf am Kellerfensterschacht kontrollieren",
@@ -1071,7 +1164,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1079,8 +1174,8 @@
       "subarea": "Außenleitungen & Entleerung",
       "new_category": "Außenwasserhähne & Frost",
       "priority": "Normal",
-      "seo_query_for_preflight": "Frostsicheren Außenwasserhahn sachgerecht auswählen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "außenwasserhahn frostsicher machen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Frostsicheren Außenwasserhahn sachgerecht auswählen",
         "Gartenschlauch und Entnahmestelle im Herbst entleeren",
@@ -1090,7 +1185,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1098,8 +1195,8 @@
       "subarea": "Außenleitungen & Entleerung",
       "new_category": "Gartenbewässerung winterfest machen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Automatische Gartenbewässerung vollständig entleeren lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenbewässerung winterfest machen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Automatische Gartenbewässerung vollständig entleeren lassen",
         "Magnetventile einer Bewässerungsanlage gegen Frost sichern",
@@ -1109,7 +1206,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1117,8 +1216,8 @@
       "subarea": "Außenleitungen & Entleerung",
       "new_category": "Frostschutz für Brunnenpumpen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gartenbrunnenpumpe frostsicher einlagern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "brunnenpumpe vor frost schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gartenbrunnenpumpe frostsicher einlagern",
         "Steigleitung am Brunnen vor dem Winter entwässern",
@@ -1128,7 +1227,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1136,8 +1237,8 @@
       "subarea": "Kontrolle ungenutzter Sanitärräume",
       "new_category": "Feuchtekontrolle bei Leerstand",
       "priority": "Normal",
-      "seo_query_for_preflight": "Raumfeuchte im länger unbewohnten Haus regelmäßig dokumentieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "leerstehendes haus luftfeuchtigkeit kontrollieren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Raumfeuchte im länger unbewohnten Haus regelmäßig dokumentieren",
         "Kontrollintervalle gegen unbemerkten Schimmel bei Leerstand festlegen",
@@ -1147,7 +1248,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1155,8 +1258,8 @@
       "subarea": "Kontrolle ungenutzter Sanitärräume",
       "new_category": "Abflüsse bei längerer Nichtnutzung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Geruchsverschluss in leerstehender Wohnung vor Austrocknen schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "abfluss bei leerstand austrocknung",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Geruchsverschluss in leerstehender Wohnung vor Austrocknen schützen",
         "Selten genutzte Bodenabläufe kontrollieren",
@@ -1166,7 +1269,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1174,8 +1279,8 @@
       "subarea": "Kontrolle ungenutzter Sanitärräume",
       "new_category": "Wasserzähler & Absperrkontrolle",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wasserzähler auf ungewöhnlichen Verbrauch bei Leerstand prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wasserzähler bei längerer abwesenheit prüfen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wasserzähler auf ungewöhnlichen Verbrauch bei Leerstand prüfen",
         "Hauptabsperrung vor längerer Abwesenheit kontrollieren lassen",
@@ -1185,7 +1290,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1193,8 +1300,8 @@
       "subarea": "Regenabdichtung am Freizeitfahrzeug",
       "new_category": "Wohnmobil-Dachnähte & Abdichtung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Dachnaht eines Wohnmobils auf Undichtigkeiten prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil dachnaht undicht abdichten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dachnaht eines Wohnmobils auf Undichtigkeiten prüfen",
         "Geeignete Reparaturgrenze bei undichtem Camperdach erkennen",
@@ -1204,7 +1311,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1212,8 +1321,8 @@
       "subarea": "Regenabdichtung am Freizeitfahrzeug",
       "new_category": "Staufächer & Außenklappen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Feuchtigkeit hinter Außenstauklappen früh entdecken",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil außenklappe undicht",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Feuchtigkeit hinter Außenstauklappen früh entdecken",
         "Dichtung eines Wohnmobil-Staufachs auf Sitz prüfen",
@@ -1223,7 +1332,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1231,8 +1342,8 @@
       "subarea": "Regenabdichtung am Freizeitfahrzeug",
       "new_category": "Dachluken & Feuchteeintritt",
       "priority": "Normal",
-      "seo_query_for_preflight": "Schlagregen an angehobener Wohnmobil-Dachluke vorbeugen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil dachluke wassereintritt",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Schlagregen an angehobener Wohnmobil-Dachluke vorbeugen",
         "Dachluken-Dichtung nach UV-Alterung kontrollieren",
@@ -1242,7 +1353,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1250,8 +1363,8 @@
       "subarea": "Tanks & Sanitärleitungen",
       "new_category": "Frischwassertank & Undichtigkeit",
       "priority": "Normal",
-      "seo_query_for_preflight": "Leckage am Frischwassertank eines Wohnmobils erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil frischwassertank undicht",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Leckage am Frischwassertank eines Wohnmobils erkennen",
         "Tankbefestigung nach Wasserschaden kontrollieren lassen",
@@ -1261,7 +1374,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1269,8 +1384,8 @@
       "subarea": "Tanks & Sanitärleitungen",
       "new_category": "Abwassertank & Leckage",
       "priority": "Normal",
-      "seo_query_for_preflight": "Undichten Grauwassertank am Wohnwagen feststellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil abwassertank undicht",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Undichten Grauwassertank am Wohnwagen feststellen",
         "Leckage an Ablaufventil eines Abwassertanks einordnen",
@@ -1280,7 +1395,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1288,8 +1405,8 @@
       "subarea": "Tanks & Sanitärleitungen",
       "new_category": "Wasserpumpen im Camper",
       "priority": "Normal",
-      "seo_query_for_preflight": "Undichte Druckwasserpumpe im Wohnmobil erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil wasserpumpe undicht",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Undichte Druckwasserpumpe im Wohnmobil erkennen",
         "Wasserpumpe nach langer Standzeit kontrollieren",
@@ -1299,7 +1416,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1307,8 +1426,8 @@
       "subarea": "Technikräume & Absperrstellen",
       "new_category": "Wassertechnikräume im Kleingewerbe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wasserverteiler im kleinen Betrieb auf Leckagerisiken prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kleiner gewerbebetrieb wassertechnikraum leckage",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wasserverteiler im kleinen Betrieb auf Leckagerisiken prüfen",
         "Hauptwasseranschluss im Nebenraum vor unbemerktem Ausfall überwachen",
@@ -1318,7 +1437,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1326,8 +1447,8 @@
       "subarea": "Technikräume & Absperrstellen",
       "new_category": "Wasserschutz an Praxisgeräten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Dentale Wassergeräte in kleiner Praxis gegen Leckagen überwachen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "medizinische praxisgeräte vor wasserschaden schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dentale Wassergeräte in kleiner Praxis gegen Leckagen überwachen",
         "Abschaltung wasserführender Praxisgeräte am Feierabend planen",
@@ -1337,7 +1458,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1345,8 +1468,8 @@
       "subarea": "Technikräume & Absperrstellen",
       "new_category": "Hauptabsperrung kleiner Betriebe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Absperrhahn im kleinen Salon schnell zugänglich kennzeichnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "hauptwasserabsperrung im kleinen betrieb",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Absperrhahn im kleinen Salon schnell zugänglich kennzeichnen",
         "Abschaltplan für Wasseranschlüsse im Kleingewerbe erstellen",
@@ -1356,7 +1479,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1364,8 +1489,8 @@
       "subarea": "Betriebsfolgen & Bestandsschutz",
       "new_category": "Warenbestände & Wasserschaden",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lagerware im kleinen Laden vor Bodenfeuchte schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "warenbestand wasserschaden schützen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lagerware im kleinen Laden vor Bodenfeuchte schützen",
         "Warenschaden nach Leitungswasserleck geordnet erfassen",
@@ -1375,7 +1500,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1384,7 +1511,7 @@
       "new_category": "Trocknung kleiner Ladenflächen",
       "priority": "Hoch",
       "seo_query_for_preflight": "wasserschaden ladenlokal trocknungsprotokoll vermieter",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Warenregale und Kundenlaufwege während der Bautrocknung im Laden sicher organisieren",
         "Wann ist die Wiedereröffnung nach durchnässtem Boden sinnvoll?",
@@ -1394,7 +1521,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "wasserschaden ladenlokal trocknungsprotokoll vermieter",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1402,8 +1532,8 @@
       "subarea": "Betriebsfolgen & Bestandsschutz",
       "new_category": "Schimmel in kleinen Vereinsräumen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Schimmelrisiko im selten genutzten Vereinsraum erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schimmel im kleinen vereinsheim entfernen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Schimmelrisiko im selten genutzten Vereinsraum erkennen",
         "Feuchtequelle in unregelmäßig beheiztem Clubhaus untersuchen lassen",
@@ -1413,7 +1543,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1421,8 +1553,8 @@
       "subarea": "Fluchtwege & Personenschutz",
       "new_category": "Fluchtwege im Privathaus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Rettungsweg im Einfamilienhaus für Bewohner festlegen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fluchtwege einfamilienhaus brand",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Rettungsweg im Einfamilienhaus für Bewohner festlegen",
         "Rauchfreie Fluchtroute aus Obergeschoss früh planen",
@@ -1432,7 +1564,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1440,8 +1574,8 @@
       "subarea": "Fluchtwege & Personenschutz",
       "new_category": "Brandschutztüren im Wohnbereich",
       "priority": "Normal",
-      "seo_query_for_preflight": "Brandschutztür im privaten Heizungskeller erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "brandschutztür wohnung haus richtig nutzen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Brandschutztür im privaten Heizungskeller erkennen",
         "Selbstschließfunktion einer Feuerschutztür regelmäßig prüfen",
@@ -1451,7 +1585,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1459,8 +1595,8 @@
       "subarea": "Fluchtwege & Personenschutz",
       "new_category": "Evakuierung mit Hilfebedarf",
       "priority": "Normal",
-      "seo_query_for_preflight": "Evakuierungsplan für mobilitätseingeschränkte Bewohner erstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "evakuierung pflegebedürftige bei hausbrand",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Evakuierungsplan für mobilitätseingeschränkte Bewohner erstellen",
         "Hilfsmittel bei Wohnungsbrand im Voraus bereithalten",
@@ -1470,7 +1606,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1478,8 +1616,8 @@
       "subarea": "Ofen, Kamin & offenes Feuer",
       "new_category": "Schornsteinbrand & Rußablagerung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Typische Warnzeichen eines Schornsteinbrands kennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schornsteinbrand ruß vermeiden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Typische Warnzeichen eines Schornsteinbrands kennen",
         "Schornsteinreinigung zur Brandvorbeugung verstehen",
@@ -1489,7 +1627,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1497,8 +1637,8 @@
       "subarea": "Ofen, Kamin & offenes Feuer",
       "new_category": "Kaminofen & Sicherheitsabstände",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mindestabstand eines Kaminofens zu brennbaren Möbeln verstehen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kaminofen sicherheitsabstand zu möbeln",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mindestabstand eines Kaminofens zu brennbaren Möbeln verstehen",
         "Bodenplatte vor Kaminofen sinnvoll auswählen",
@@ -1508,7 +1648,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1516,8 +1658,8 @@
       "subarea": "Ofen, Kamin & offenes Feuer",
       "new_category": "Offene Feuerstellen im Garten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Feuerschale auf Privatgrund brandsicher aufstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "feuerstelle im garten brandschutz",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Feuerschale auf Privatgrund brandsicher aufstellen",
         "Funkenflug am Gartenfeuer bei Wind vermeiden",
@@ -1527,7 +1669,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1535,8 +1679,8 @@
       "subarea": "Gasleitungen & Absperreinrichtungen",
       "new_category": "Gasanschlüsse im Wohnhaus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gasanschluss im Privathaus auf äußere Beschädigung kontrollieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gasanschluss haus sicherheit prüfen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gasanschluss im Privathaus auf äußere Beschädigung kontrollieren",
         "Welche Prüfungen gehören beim Gas-Hausanschluss in Fachhände?",
@@ -1546,7 +1690,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1554,8 +1700,8 @@
       "subarea": "Gasleitungen & Absperreinrichtungen",
       "new_category": "Gasleitungen in Nebenräumen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gasleitung in Garage oder Keller auf Schutz vor Stoßschäden prüfen lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gasleitung nebenraum sicherheit",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gasleitung in Garage oder Keller auf Schutz vor Stoßschäden prüfen lassen",
         "Gasleitung bei Renovierung im Nebenraum fachlich schützen lassen",
@@ -1565,7 +1711,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1573,8 +1721,8 @@
       "subarea": "Gasleitungen & Absperreinrichtungen",
       "new_category": "Gasabsperrung & Armaturen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gas-Absperrventil im Notfall sicher erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gas absperrhahn haus wo",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gas-Absperrventil im Notfall sicher erkennen",
         "Beschädigte Gasarmatur nur durch Fachbetrieb austauschen lassen",
@@ -1584,7 +1732,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1592,8 +1742,8 @@
       "subarea": "Verbrennungsluft & Raumlüftung",
       "new_category": "Verbrennungsluft bei Gasgeräten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Luftversorgung raumluftabhängiger Gasgeräte verstehen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gasgerät verbrennungsluft ausreichende lüftung",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Luftversorgung raumluftabhängiger Gasgeräte verstehen",
         "Verbrennungsluftöffnungen bei Renovierungen nicht versehentlich blockieren",
@@ -1603,7 +1753,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1611,8 +1763,8 @@
       "subarea": "Verbrennungsluft & Raumlüftung",
       "new_category": "Abluftanlagen & Unterdruck",
       "priority": "Normal",
-      "seo_query_for_preflight": "Dunstabzug und Kaminofen: gefährlichen Unterdruck vermeiden",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "dunstabzug kamin unterdruck gefährlich",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dunstabzug und Kaminofen: gefährlichen Unterdruck vermeiden",
         "Fensterkontaktschalter bei Abluftanlagen fachlich beurteilen lassen",
@@ -1622,7 +1774,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1630,8 +1784,8 @@
       "subarea": "Verbrennungsluft & Raumlüftung",
       "new_category": "Luftzufuhr bei Kaminbetrieb",
       "priority": "Normal",
-      "seo_query_for_preflight": "Frischluftzufuhr für Kaminofen bei saniertem Haus beurteilen lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kamin luftzufuhr richtig einstellen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Frischluftzufuhr für Kaminofen bei saniertem Haus beurteilen lassen",
         "Luftkanal einer Feuerstätte auf Blockaden überprüfen lassen",
@@ -1641,7 +1795,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1649,8 +1805,8 @@
       "subarea": "Elektroinstallation & Leitungen",
       "new_category": "Steckdosen & Mehrfachverteiler",
       "priority": "Normal",
-      "seo_query_for_preflight": "Überlastete Mehrfachsteckdose im Wohnzimmer erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "mehrfachsteckdose brandgefahr",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Überlastete Mehrfachsteckdose im Wohnzimmer erkennen",
         "Steckdosenleiste bei Heizgeräten sicher einsetzen",
@@ -1660,7 +1816,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1668,8 +1826,8 @@
       "subarea": "Elektroinstallation & Leitungen",
       "new_category": "Elektroleitungen & Schmorstellen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Schmorgeruch an privater Elektroinstallation sicher einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "stromleitung schmorschaden erkennen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Schmorgeruch an privater Elektroinstallation sicher einordnen",
         "Alte Elektroleitungen im Haus auf Brandrisiken prüfen lassen",
@@ -1679,7 +1837,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1687,8 +1847,8 @@
       "subarea": "Elektroinstallation & Leitungen",
       "new_category": "Kabelbrände im Wohnbereich",
       "priority": "Normal",
-      "seo_query_for_preflight": "Anzeichen für einen schwelenden Kabelbrand erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kabelbrand wohnung ursachen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Anzeichen für einen schwelenden Kabelbrand erkennen",
         "Defektes Verlängerungskabel sicher außer Betrieb nehmen",
@@ -1698,7 +1858,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1706,8 +1868,8 @@
       "subarea": "Ladeplätze & Akkuzustand",
       "new_category": "Ladeplätze für Werkzeugakkus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Ladehalterungen für Werkzeugakkus mit ausreichender Wärmeabfuhr anordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "werkzeugakku sicher laden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Ladehalterungen für Werkzeugakkus mit ausreichender Wärmeabfuhr anordnen",
         "Werkzeugakku-Ladegeräte von brennbaren Lagerwaren trennen",
@@ -1717,7 +1879,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1725,8 +1889,8 @@
       "subarea": "Ladeplätze & Akkuzustand",
       "new_category": "Akku-Ladegeräte & Defekte",
       "priority": "Normal",
-      "seo_query_for_preflight": "Defektes Lithium-Ladegerät anhand typischer Warnsignale erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "akku ladegerät defekt brandgefahr",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Defektes Lithium-Ladegerät anhand typischer Warnsignale erkennen",
         "Original- und Fremdladegeräte bei Akkugeräten vergleichen",
@@ -1736,7 +1900,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1744,8 +1910,8 @@
       "subarea": "Ladeplätze & Akkuzustand",
       "new_category": "Beschädigte Akkus & Entsorgung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Aufgeblähten Lithiumakku sicher erkennen und isolieren lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "beschädigten lithium akku sicher entsorgen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Aufgeblähten Lithiumakku sicher erkennen und isolieren lassen",
         "Wohin mit beschädigtem E-Bike-Akku zur Entsorgung?",
@@ -1755,7 +1921,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1763,8 +1931,8 @@
       "subarea": "Gasinstallation im Freizeitfahrzeug",
       "new_category": "Feste Gasinstallationen im Camper",
       "priority": "Normal",
-      "seo_query_for_preflight": "Absperrarmatur einer fest eingebauten Camper-Gasanlage fachgerecht zugänglich halten",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil gasanlage festinstallation sicherheit",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Absperrarmatur einer fest eingebauten Camper-Gasanlage fachgerecht zugänglich halten",
         "Unterschied mobile Gaskartusche und feste Gasinstallation erklären",
@@ -1774,7 +1942,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1782,8 +1952,8 @@
       "subarea": "Gasinstallation im Freizeitfahrzeug",
       "new_category": "Gasheizung & Abgasführung im Camper",
       "priority": "Normal",
-      "seo_query_for_preflight": "Abgasführung einer Camper-Gasheizung überprüfen lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnmobil gasheizung abgasführung",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Abgasführung einer Camper-Gasheizung überprüfen lassen",
         "Warmluftheizung im Wohnmobil bei Gasgeruch sicher stilllegen",
@@ -1793,7 +1963,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1801,8 +1973,8 @@
       "subarea": "Gasinstallation im Freizeitfahrzeug",
       "new_category": "Gasprüfungen im Freizeitfahrzeug",
       "priority": "Normal",
-      "seo_query_for_preflight": "Prüfintervalle einer Wohnmobil-Gasanlage aktuell überprüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gasprüfung wohnmobil vorschriften",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Prüfintervalle einer Wohnmobil-Gasanlage aktuell überprüfen",
         "Bescheinigung und Nachweise nach Camping-Gasprüfung aufbewahren",
@@ -1812,7 +1984,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1820,8 +1994,8 @@
       "subarea": "Fluchtwege & Verhalten im Brandfall",
       "new_category": "Notausstiege im Wohnwagen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Fluchtfenster im Wohnwagen auf Funktion prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "wohnwagen notausstieg fenster brand",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Fluchtfenster im Wohnwagen auf Funktion prüfen",
         "Zugang zu Notausstieg und Eingangstür im Camper freihalten",
@@ -1831,7 +2005,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1840,7 +2016,7 @@
       "new_category": "Löschmittel im Freizeitfahrzeug",
       "priority": "Hoch",
       "seo_query_for_preflight": "feuerlöscher wohnmobil befestigung vibrationsschaden",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Löschleistung und Gerätetyp für typische Wohnmobilbrände vergleichen",
         "Feuerlöscher im Wohnmobil auf Vibrationsschäden und Temperaturbelastung prüfen lassen",
@@ -1850,7 +2026,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "feuerlöscher wohnmobil befestigung vibrationsschaden",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1858,8 +2037,8 @@
       "subarea": "Fluchtwege & Verhalten im Brandfall",
       "new_category": "Brandnotfälle auf Campingplätzen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Bei Brand im Nachbarwohnwagen sicher evakuieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "brand auf campingplatz richtig verhalten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Bei Brand im Nachbarwohnwagen sicher evakuieren",
         "Feueralarm auf Campingplatz richtig melden",
@@ -1869,7 +2048,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1877,8 +2058,8 @@
       "subarea": "Betriebsorganisation & Fluchtwege",
       "new_category": "Fluchtwege in kleinen Läden",
       "priority": "Normal",
-      "seo_query_for_preflight": "Kunden- und Lieferwege im kleinen Laden so organisieren, dass der Fluchtweg frei bleibt",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fluchtweg einzelhandel laden freihalten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Kunden- und Lieferwege im kleinen Laden so organisieren, dass der Fluchtweg frei bleibt",
         "Zweit-Ausgang für kleines Geschäft fachlich beurteilen lassen",
@@ -1888,7 +2069,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1896,8 +2079,8 @@
       "subarea": "Betriebsorganisation & Fluchtwege",
       "new_category": "Brandschutzunterweisung im Verein",
       "priority": "Normal",
-      "seo_query_for_preflight": "Ehrenamtliche Helfer im Vereinsheim zum Brandschutz einweisen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "brandschutzunterweisung kleiner verein",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Ehrenamtliche Helfer im Vereinsheim zum Brandschutz einweisen",
         "Brandschutzverantwortung bei kleinem Sportverein klären",
@@ -1907,7 +2090,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1915,8 +2100,8 @@
       "subarea": "Betriebsorganisation & Fluchtwege",
       "new_category": "Notfallpläne für Kleingewerbe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Einfachen Brand-Notfallplan für Friseursalon erstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "notfallplan kleiner betrieb brand",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Einfachen Brand-Notfallplan für Friseursalon erstellen",
         "Kontaktkette nach Feuer im inhabergeführten Geschäft vorbereiten",
@@ -1926,7 +2111,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1934,8 +2121,8 @@
       "subarea": "Brandlasten & Betriebsstrom",
       "new_category": "Brennbare Waren & Dekoration",
       "priority": "Normal",
-      "seo_query_for_preflight": "Dekoration im kleinen Laden mit sicheren Wärmeabständen platzieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "brennbare dekoration laden brandschutz",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dekoration im kleinen Laden mit sicheren Wärmeabständen platzieren",
         "Brandlasten im Schaufenster fachlich einschätzen",
@@ -1945,7 +2132,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1953,8 +2142,8 @@
       "subarea": "Brandlasten & Betriebsstrom",
       "new_category": "Steckdosen im kleinen Gewerbe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mehrfachsteckdosen am Salonarbeitsplatz sicher einsetzen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "steckdosen sicherheit kleingewerbe",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mehrfachsteckdosen am Salonarbeitsplatz sicher einsetzen",
         "Elektrische Lasten kleiner Geschäftsräume fachlich bewerten lassen",
@@ -1964,7 +2153,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Feuer & Gase",
@@ -1972,8 +2163,8 @@
       "subarea": "Brandlasten & Betriebsstrom",
       "new_category": "Maschinenbrand in Kleinwerkstätten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Brandrisiken kleiner Holzbearbeitungsmaschinen erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "elektromotor maschinenbrand kleinwerkstatt",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Brandrisiken kleiner Holzbearbeitungsmaschinen erkennen",
         "Staubabsaugung in Hobby- und Kleinwerkstätten sicher warten lassen",
@@ -1983,7 +2174,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -1992,7 +2185,7 @@
       "new_category": "Warnsysteme bei Starkregen",
       "priority": "Erhöht",
       "seo_query_for_preflight": "starkregen warn app nina hochwasserwarnung",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Kommunale Starkregenwarnungen fürs eigene Grundstück nutzen",
         "Warn-App und Pegelhinweise bei lokalem Starkregen unterscheiden",
@@ -2002,7 +2195,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "starkregen warn app nina hochwasserwarnung",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2011,7 +2207,7 @@
       "new_category": "Hausrat vor Hochwasser",
       "priority": "Erhöht",
       "seo_query_for_preflight": "hausrat vor hochwasser schützen dokumente keller",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wertgegenstände vor angekündigter Kellerüberflutung verlagern",
         "Feuchtegefährdete Dokumente hochwassersicher verwahren",
@@ -2021,7 +2217,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "hausrat vor hochwasser schützen dokumente keller",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2029,8 +2228,8 @@
       "subarea": "Warnung & private Vorbereitung",
       "new_category": "Notfallunterlagen bei Hochwasser",
       "priority": "Normal",
-      "seo_query_for_preflight": "Notfallmappe für Hauseigentümer bei Hochwasser vorbereiten",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "dokumente bei hochwasser sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Notfallmappe für Hauseigentümer bei Hochwasser vorbereiten",
         "Hausversicherungsunterlagen vor Überflutung digital sichern",
@@ -2040,7 +2239,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2048,8 +2249,8 @@
       "subarea": "Unwetterwarnung & Vorbereitung",
       "new_category": "Sturmwarnungen verstehen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Amtliche Sturmwarnung für den Wohnort sinnvoll einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sturmwarnung wetterdienst verstehen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Amtliche Sturmwarnung für den Wohnort sinnvoll einordnen",
         "Welche Windwarnstufe erfordert Maßnahmen am Privatgrundstück?",
@@ -2059,7 +2260,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2067,8 +2270,8 @@
       "subarea": "Unwetterwarnung & Vorbereitung",
       "new_category": "Sicherung ausfahrbarer Markisen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Windwächter für motorisierte Markise auswählen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "markise bei sturm sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Windwächter für motorisierte Markise auswählen",
         "Manuelle Einfahrfunktion der Markise bei ausgefallenem Windwächter prüfen",
@@ -2078,7 +2281,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2086,8 +2291,8 @@
       "subarea": "Unwetterwarnung & Vorbereitung",
       "new_category": "Mobile Gegenstände vor Sturm",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lose Gegenstände auf Balkon vor Sturm sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenmöbel vor sturm sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lose Gegenstände auf Balkon vor Sturm sichern",
         "Garten-Trampolin gegen Wegwehen verankern",
@@ -2097,7 +2302,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2105,8 +2312,8 @@
       "subarea": "Winterwege & Verkehrssicherung",
       "new_category": "Räumpflichten auf Privatwegen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Räumpflicht am Gehweg vor privatem Wohnhaus einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schneeräumpflicht privater weg",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Räumpflicht am Gehweg vor privatem Wohnhaus einordnen",
         "Winterdienst in kleiner Eigentümergemeinschaft organisieren",
@@ -2116,7 +2323,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2124,8 +2333,8 @@
       "subarea": "Winterwege & Verkehrssicherung",
       "new_category": "Glatteis an Garagenzufahrten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Steile private Garagenzufahrt bei Glatteis absperren und absichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "garageneinfahrt glatteis vermeiden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Steile private Garagenzufahrt bei Glatteis absperren und absichern",
         "Eisbildung auf abschüssiger Garagenrampe durch Entwässerung vorbeugen",
@@ -2135,7 +2344,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2143,8 +2354,8 @@
       "subarea": "Winterwege & Verkehrssicherung",
       "new_category": "Rutschschutz an Hauseingängen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Rutschhemmende Matten für vereisten Hauseingang vergleichen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "hauseingang rutschfest winter",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Rutschhemmende Matten für vereisten Hauseingang vergleichen",
         "Stufen und Zugangsrampe winterfest beleuchten",
@@ -2154,7 +2365,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2162,8 +2375,8 @@
       "subarea": "Vereisung an Außenbauteilen",
       "new_category": "Rollläden & Jalousien im Frost",
       "priority": "Normal",
-      "seo_query_for_preflight": "Vereisten Außenrollladen ohne Motorschaden behandeln",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "rollladen bei frost festgefroren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Vereisten Außenrollladen ohne Motorschaden behandeln",
         "Jalousienantrieb bei festgefrorenen Lamellen schützen",
@@ -2173,7 +2386,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2181,8 +2396,8 @@
       "subarea": "Vereisung an Außenbauteilen",
       "new_category": "Vereiste Türschlösser",
       "priority": "Normal",
-      "seo_query_for_preflight": "Eingefrorenes Haustürschloss sicher auftauen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "türschloss eingefroren öffnen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Eingefrorenes Haustürschloss sicher auftauen",
         "Vorbeugung gegen Frost an Tor- und Garagenschlössern",
@@ -2192,7 +2407,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2200,8 +2417,8 @@
       "subarea": "Vereisung an Außenbauteilen",
       "new_category": "Gefrorene Außenentwässerung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Vereisten Hofablauf vor Tauwetter prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fallrohr abfluss eingefroren",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Vereisten Hofablauf vor Tauwetter prüfen",
         "Gefrorenes Fallrohr ohne Beschädigung behandeln lassen",
@@ -2211,7 +2428,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2219,8 +2438,8 @@
       "subarea": "Erdung & Hausinstallation",
       "new_category": "Potentialausgleich im Wohnhaus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wozu dient der Hauptpotentialausgleich im Eigenheim?",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "potentialausgleich einfamilienhaus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wozu dient der Hauptpotentialausgleich im Eigenheim?",
         "Nach Erweiterung der Hauselektrik Erdung fachlich prüfen lassen",
@@ -2230,7 +2449,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2239,7 +2460,7 @@
       "new_category": "Überspannung im Zählerschrank",
       "priority": "Hoch",
       "seo_query_for_preflight": "überspannungsschutz im zählerschrank haus",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Überspannungsableiter im privaten Zählerschrank verstehen",
         "Alter und Zustand von Schutzgeräten durch Elektriker prüfen lassen",
@@ -2249,7 +2470,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "überspannungsschutz im zählerschrank haus",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2258,7 +2482,7 @@
       "new_category": "Datenleitungen & Überspannung",
       "priority": "Hoch",
       "seo_query_for_preflight": "ethernet poe überspannungsschutz außenbereich",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Überspannungsrisiken an DSL- und Glasfaser-Hausanschlüssen einordnen",
         "Netzwerkkabel bei Blitznähe richtig in Schutzkonzept einbeziehen",
@@ -2268,7 +2492,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "ethernet poe überspannungsschutz außenbereich",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2277,7 +2504,7 @@
       "new_category": "Balkonkraftwerke bei Gewitter",
       "priority": "Hoch",
       "seo_query_for_preflight": "balkonkraftwerk überspannung gewitter",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Steckersolaranlage bei Gewitter sicher betreiben",
         "Überspannungsschutz für kleines Balkonkraftwerk einordnen",
@@ -2287,7 +2514,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "balkonkraftwerk überspannung gewitter",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2296,7 +2526,7 @@
       "new_category": "Antennen & Blitzschutz",
       "priority": "Hoch",
       "seo_query_for_preflight": "satellitenantenne blitzschutz erdung koax",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Erdung einer privaten Satellitenantenne fachlich beurteilen lassen",
         "Koaxkabel am Haus vor Blitzfolgen schützen",
@@ -2306,7 +2536,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "satellitenantenne blitzschutz erdung koax",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2315,7 +2548,7 @@
       "new_category": "Außenkabel & Blitzfolgen",
       "priority": "Hoch",
       "seo_query_for_preflight": "erdkabel garage blitz überspannungsschutz",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Erdverlegte Gartenkabel in Überspannungsschutz einbeziehen",
         "Außenleitungen an Garage vor indirekten Blitzfolgen schützen",
@@ -2325,7 +2558,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "erdkabel garage blitz überspannungsschutz",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2333,8 +2569,8 @@
       "subarea": "Fahrzeugaufbauten & Transporte",
       "new_category": "Anhänger bei Sturm",
       "priority": "Normal",
-      "seo_query_for_preflight": "Leichten Anhänger auf Privatgrund gegen Sturmrollen sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "anhänger bei sturm sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Leichten Anhänger auf Privatgrund gegen Sturmrollen sichern",
         "Plane am abgestellten Anhänger vor Unwetter entfernen",
@@ -2344,7 +2580,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2353,7 +2591,7 @@
       "new_category": "Dachboxen bei Unwetter",
       "priority": "Erhöht",
       "seo_query_for_preflight": "dachbox sturm wind befestigung",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dachbox vor angekündigtem Sturm vom Fahrzeug nehmen",
         "Dachbox-Befestigung nach Böen auf Beschädigung prüfen",
@@ -2363,7 +2601,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "dachbox sturm wind befestigung",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2371,8 +2612,8 @@
       "subarea": "Fahrzeugaufbauten & Transporte",
       "new_category": "Fahrradträger bei Starkwind",
       "priority": "Normal",
-      "seo_query_for_preflight": "Fahrradträger am geparkten Fahrzeug vor Sturm sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fahrradträger starkwind sicherheit",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Fahrradträger am geparkten Fahrzeug vor Sturm sichern",
         "Heckträger vor Gewitter auf Befestigung prüfen",
@@ -2382,7 +2623,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2390,8 +2633,8 @@
       "subarea": "Freizeitflächen & mobile Anlagen",
       "new_category": "Spielgeräte bei Sturm",
       "priority": "Normal",
-      "seo_query_for_preflight": "Trampolin und Schaukel bei Sturmwarnung sichern",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schaukel spielgerüst vor sturm sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Trampolin und Schaukel bei Sturmwarnung sichern",
         "Spielhaus auf Privatgrund auf Standsicherheit prüfen",
@@ -2401,7 +2644,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2409,8 +2654,8 @@
       "subarea": "Freizeitflächen & mobile Anlagen",
       "new_category": "Kleingartenlauben bei Hagel",
       "priority": "Normal",
-      "seo_query_for_preflight": "Dachdeckung einer Gartenlaube vor Hagelsaison kontrollieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "gartenlaube hagelschaden vorbeugen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Dachdeckung einer Gartenlaube vor Hagelsaison kontrollieren",
         "Hagelschaden an Laubendach dokumentieren",
@@ -2420,7 +2665,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2428,8 +2675,8 @@
       "subarea": "Freizeitflächen & mobile Anlagen",
       "new_category": "Mobile Zäune bei Starkwind",
       "priority": "Normal",
-      "seo_query_for_preflight": "Mobilen Bauzaun am Privatgrund vor Sturm sichern lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "mobilen bauzaun bei sturm sichern",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mobilen Bauzaun am Privatgrund vor Sturm sichern lassen",
         "Zaunblenden bei starkem Wind rechtzeitig entfernen",
@@ -2439,7 +2686,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2447,8 +2696,8 @@
       "subarea": "Stromfehler & Schutzschalter",
       "new_category": "FI-Schutzschalter & Auslösungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wiederholtes Auslösen des FI-Schalters sicher einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fi schutzschalter löst ständig aus",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wiederholtes Auslösen des FI-Schalters sicher einordnen",
         "FI-Schutzeinrichtung im privaten Haus prüfen lassen",
@@ -2458,7 +2707,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2466,8 +2717,8 @@
       "subarea": "Stromfehler & Schutzschalter",
       "new_category": "Phasenausfall im Wohnhaus",
       "priority": "Normal",
-      "seo_query_for_preflight": "Teilausfall der Stromversorgung im Einfamilienhaus erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "phasenausfall haus erkennen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Teilausfall der Stromversorgung im Einfamilienhaus erkennen",
         "Drehstromgeräte bei Verdacht auf Phasenausfall sicher abschalten",
@@ -2477,7 +2728,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2485,8 +2738,8 @@
       "subarea": "Stromfehler & Schutzschalter",
       "new_category": "Störungen im Sicherungskasten",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wärmeentwicklung im privaten Sicherungskasten früh bemerken",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sicherungskasten störung ursache",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wärmeentwicklung im privaten Sicherungskasten früh bemerken",
         "Welche Sicherungsstörungen erfordern sofort den Elektriker?",
@@ -2496,7 +2749,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2504,8 +2759,8 @@
       "subarea": "Wiederanlauf nach Stromausfall",
       "new_category": "Kühlgeräte nach Netzausfall",
       "priority": "Normal",
-      "seo_query_for_preflight": "Lebensmittel im Gefrierschrank nach Stromausfall beurteilen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "kühlschrank nach stromausfall lebensmittel",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Lebensmittel im Gefrierschrank nach Stromausfall beurteilen",
         "Kühlschrank nach längerer Stromunterbrechung sicher wieder starten",
@@ -2515,7 +2770,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2523,8 +2780,8 @@
       "subarea": "Wiederanlauf nach Stromausfall",
       "new_category": "Heizungsneustart nach Stromausfall",
       "priority": "Normal",
-      "seo_query_for_preflight": "Gasheizung nach Netzausfall sicher in Betrieb nehmen lassen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "heizung nach stromausfall neu starten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Gasheizung nach Netzausfall sicher in Betrieb nehmen lassen",
         "Wärmepumpe auf Störmeldung nach Stromunterbrechung prüfen",
@@ -2534,7 +2791,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2542,8 +2801,8 @@
       "subarea": "Wiederanlauf nach Stromausfall",
       "new_category": "Verbraucher beim Wiederanlauf",
       "priority": "Normal",
-      "seo_query_for_preflight": "Empfindliche Haushaltsgeräte vor Spannungsspitzen beim Wiederanlauf schützen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "stromausfall geräte beim wiederanlauf",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Empfindliche Haushaltsgeräte vor Spannungsspitzen beim Wiederanlauf schützen",
         "Welche Verbraucher sollten nach Stromausfall kontrolliert werden?",
@@ -2553,7 +2812,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2562,7 +2823,7 @@
       "new_category": "Heizungsalarme über Mobilfunk",
       "priority": "Hoch",
       "seo_query_for_preflight": "heizungsalarm gsm sms ohne wlan",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "SMS-Heizungsalarm ohne Router und Internetverbindung einrichten",
         "SIM-basierte Temperaturwarnung im Ferienhaus planen",
@@ -2572,7 +2833,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "heizungsalarm gsm sms ohne wlan",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2580,8 +2844,8 @@
       "subarea": "Fernmeldungen & Regeltechnik",
       "new_category": "Störungen an Heizungssteuerungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Häufige Fehleranzeigen an Heizungsregelung sinnvoll dokumentieren",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "heizungssteuerung störung fehler",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Häufige Fehleranzeigen an Heizungsregelung sinnvoll dokumentieren",
         "Heizungsfühler auf Plausibilität fachlich prüfen lassen",
@@ -2591,7 +2855,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2599,8 +2865,8 @@
       "subarea": "Fernmeldungen & Regeltechnik",
       "new_category": "Heizungs-Sicherheitsabschaltungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Störabschaltung einer Gastherme sicher einordnen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "heizung sicherheitsabschaltung ursachen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Störabschaltung einer Gastherme sicher einordnen",
         "Frostschutz nach einer Sicherheitsabschaltung der Heizung organisieren",
@@ -2610,7 +2876,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2619,7 +2887,7 @@
       "new_category": "Gewächshaus-Temperaturalarme",
       "priority": "Hoch",
       "seo_query_for_preflight": "gewächshaus frostalarm mehrere temperatursensoren",
-      "query_state": "EDITORIAL_CANDIDATE_MANUALLY_WRITTEN",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Mehrpunkt-Temperaturwarnung im Gewächshaus für Pflanzenzonen einstellen",
         "Frostalarm für Jungpflanzen bei unbeheiztem Gewächshaus planen",
@@ -2629,7 +2897,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "previous_prioritized_query": "gewächshaus frostalarm mehrere temperatursensoren",
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2637,8 +2908,8 @@
       "subarea": "Temperaturwarnung in Sonderräumen",
       "new_category": "Temperaturmelder im Technikraum",
       "priority": "Normal",
-      "seo_query_for_preflight": "Temperaturwächter für häuslichen Heiztechnikraum auswählen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "temperaturüberwachung heizraum",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Temperaturwächter für häuslichen Heiztechnikraum auswählen",
         "Überhitzungswarnung im privaten Server- oder Netzwerkraum planen",
@@ -2648,7 +2919,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2656,8 +2929,8 @@
       "subarea": "Temperaturwarnung in Sonderräumen",
       "new_category": "Überhitzung im Dachgeschoss",
       "priority": "Normal",
-      "seo_query_for_preflight": "Hitze im Dachgeschoss frühzeitig per Sensor überwachen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "dachgeschoss überhitzung vermeiden",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Hitze im Dachgeschoss frühzeitig per Sensor überwachen",
         "Sommerliche Überhitzung im ausgebauten Dachgeschoss begrenzen",
@@ -2667,7 +2940,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2675,8 +2950,8 @@
       "subarea": "Pumpenursachen & Sensorik",
       "new_category": "Blockierte Pumpenzuläufe",
       "priority": "Normal",
-      "seo_query_for_preflight": "Verstopften Zulauf einer Kellerpumpe rechtzeitig bemerken",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "pumpe saugkorb verstopft reinigen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Verstopften Zulauf einer Kellerpumpe rechtzeitig bemerken",
         "Verschlammten Pumpenzulauf von blockiertem Pumpenrad unterscheiden",
@@ -2686,7 +2961,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2694,8 +2971,8 @@
       "subarea": "Pumpenursachen & Sensorik",
       "new_category": "Störungen an Schwimmerschaltern",
       "priority": "Normal",
-      "seo_query_for_preflight": "Klemmenden Schwimmerschalter einer Sumpfpumpe erkennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "schwimmerschalter pumpe defekt",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Klemmenden Schwimmerschalter einer Sumpfpumpe erkennen",
         "Wasserstandsgeber bei Hebeanlage fachgerecht prüfen lassen",
@@ -2705,7 +2982,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2713,8 +2992,8 @@
       "subarea": "Pumpenursachen & Sensorik",
       "new_category": "Trockenlaufschutz für Pumpen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Trockenlaufschutz an Hauswasserpumpe sinnvoll auswählen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "trockenlaufschutz hauswasserpumpe",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Trockenlaufschutz an Hauswasserpumpe sinnvoll auswählen",
         "Sensortypen gegen Trockenlauf bei Brunnenpumpe vergleichen",
@@ -2724,7 +3003,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2732,8 +3013,8 @@
       "subarea": "Pumpenwartung & Verschleiß",
       "new_category": "Wartung von Sumpfpumpen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wartungsplan für eine private Sumpfpumpe erstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sumpfpumpe reinigen warten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wartungsplan für eine private Sumpfpumpe erstellen",
         "Verschleißintervall einer häuslichen Tauchpumpe festlegen",
@@ -2743,7 +3024,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2751,8 +3034,8 @@
       "subarea": "Pumpenwartung & Verschleiß",
       "new_category": "Rückschlagventile an Hauspumpen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Rückschlagventil einer Entwässerungspumpe auf Symptome prüfen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "rückschlagventil sumpfpumpe defekt",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Rückschlagventil einer Entwässerungspumpe auf Symptome prüfen",
         "Wasser-Rücklauf trotz intakter Pumpe fachlich untersuchen lassen",
@@ -2762,7 +3045,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2770,8 +3055,8 @@
       "subarea": "Pumpenwartung & Verschleiß",
       "new_category": "Ersatzpumpen für Hausentwässerung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Wann braucht eine private Hebeanlage eine zweite Pumpe?",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "ersatzpumpe kellerentwässerung auswählen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Wann braucht eine private Hebeanlage eine zweite Pumpe?",
         "Notfallplan bei ausgefallener Keller-Entwässerungspumpe erstellen",
@@ -2781,7 +3066,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2789,8 +3076,8 @@
       "subarea": "Alarmkommunikation & Übertragung",
       "new_category": "Alarmübertragungswege & Standards",
       "priority": "Normal",
-      "seo_query_for_preflight": "IP- und Mobilfunkübertragung einer Hausalarmanlage unterscheiden",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "alarmübertragung sicherheitsanlage standards",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "IP- und Mobilfunkübertragung einer Hausalarmanlage unterscheiden",
         "Zustellung und Quittierung einer Alarmmeldung über IP und Mobilfunk testen",
@@ -2800,7 +3087,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2808,8 +3097,8 @@
       "subarea": "Alarmkommunikation & Übertragung",
       "new_category": "SIM-Karten für Alarmmelder",
       "priority": "Normal",
-      "seo_query_for_preflight": "SIM-Tarif für gelegentliche Alarmmeldungen auswählen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "sim karte für alarmanlage",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "SIM-Tarif für gelegentliche Alarmmeldungen auswählen",
         "Daten- und SMS-Verbrauch eines Mobilfunkmelders abschätzen",
@@ -2819,7 +3108,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2827,8 +3118,8 @@
       "subarea": "Alarmkommunikation & Übertragung",
       "new_category": "Ausbleibende Push-Benachrichtigungen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Warum sendet meine Alarm-App keine Push-Meldung?",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "push nachricht alarmanlage kommt nicht",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Warum sendet meine Alarm-App keine Push-Meldung?",
         "Akku-Sparmodus des Handys als Alarmproblem erkennen",
@@ -2838,7 +3129,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2846,8 +3139,8 @@
       "subarea": "Lokaler Smart-Home-Notbetrieb",
       "new_category": "Offline-Szenen im Smart Home",
       "priority": "Normal",
-      "seo_query_for_preflight": "Sicherheitsbeleuchtung ohne Cloud automatisch schalten",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "smart home szenen ohne internet",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Sicherheitsbeleuchtung ohne Cloud automatisch schalten",
         "Wasserleck-Melder bei Cloud-Ausfall lokal mit einer Alarmsirene koppeln",
@@ -2857,7 +3150,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2865,8 +3160,8 @@
       "subarea": "Lokaler Smart-Home-Notbetrieb",
       "new_category": "Notbetrieb smarter Türschlösser",
       "priority": "Normal",
-      "seo_query_for_preflight": "Smart Lock bei leerem Akku mechanisch öffnen können",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "smart lock ohne strom oder internet öffnen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Smart Lock bei leerem Akku mechanisch öffnen können",
         "Elektronisches Türschloss bei App-Ausfall nutzen",
@@ -2876,7 +3171,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2884,8 +3181,8 @@
       "subarea": "Lokaler Smart-Home-Notbetrieb",
       "new_category": "Sicherheitsupdates von Alarmsystemen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Firmware-Update einer privaten Alarmanlage sicher planen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "alarmanlage sicherheitsupdate",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Firmware-Update einer privaten Alarmanlage sicher planen",
         "Nach Update Benachrichtigungsfunktionen überprüfen",
@@ -2895,7 +3192,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2903,8 +3202,8 @@
       "subarea": "Alarmreaktionen & Vertretung",
       "new_category": "Fernalarm an Vertrauenspersonen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Alarmempfänger für Ferienhaus bei längerer Abwesenheit benennen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "alarmmeldung an vertrauensperson weiterleiten",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Alarmempfänger für Ferienhaus bei längerer Abwesenheit benennen",
         "Wie dokumentiert man eine Benachrichtigungskette mit Nachbarn?",
@@ -2914,7 +3213,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2922,8 +3223,8 @@
       "subarea": "Alarmreaktionen & Vertretung",
       "new_category": "Fehlalarme aus der Ferne prüfen",
       "priority": "Normal",
-      "seo_query_for_preflight": "Kamera-Bild zur Bestätigung eines Einbruchalarms datenschutzgerecht nutzen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fernalarm fehlalarm überprüfen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Kamera-Bild zur Bestätigung eines Einbruchalarms datenschutzgerecht nutzen",
         "Fehlalarm eines Ferienhaussensors aus der Distanz eingrenzen",
@@ -2933,7 +3234,9 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     },
     {
       "world": "Technik & Ausfälle",
@@ -2941,8 +3244,8 @@
       "subarea": "Alarmreaktionen & Vertretung",
       "new_category": "Eskalationspläne bei Fernüberwachung",
       "priority": "Normal",
-      "seo_query_for_preflight": "Ablaufplan für Alarm im unbewohnten Haus erstellen",
-      "query_state": "UNEDITED_ARTICLE_TITLE_NOT_VALIDATED_FOR_SEARCH",
+      "seo_query_for_preflight": "fernalarm eskalationsplan erstellen",
+      "query_state": "REDAKTIONELL_FORMULIERTER_SUCHKANDIDAT_UNGEMESSEN",
       "other_article_ideas": [
         "Ablaufplan für Alarm im unbewohnten Haus erstellen",
         "Prioritäten bei Wasseralarm, Einbruchalarm und Stromausfall festlegen",
@@ -2952,7 +3255,10 @@
       "keyword_volume_status": "UNKNOWN",
       "organic_google_serp_owner_status": "UNKNOWN",
       "status": "CANDIDATE_READ_ONLY",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
+      "paid_query_executed": false
     }
-  ]
+  ],
+  "note": "144 redaktionell formulierte, unterschiedliche deutsche Suchformulierungen, nicht als echte Google-Suchintention/Marktnachfrage belegt. Vor Ausführung müssen bestehende R2-Owner und die tatsächlich beabsichtigten Artikelintents auf identische Keywords/Synonyme geprüft werden. Die 15 Prioritäts-Phrasen aus dem Fachquellen-Audit bleiben zusätzlich unter previous_prioritized_query sichtbar; Abweichungen sind Alternativen, keine zweite Kategorie."
 }
