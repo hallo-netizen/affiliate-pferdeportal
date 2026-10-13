@@ -1,0 +1,1478 @@
+{
+  "contract": "HAB_R3_V8_144_SEO_GATE_RESEARCH_QUEUE_V1",
+  "date": "2026-10-13",
+  "purpose": "Clear owner-risk order, not a plan to charge users; used existing WordPress DataForSEO data only",
+  "authority_r2": "HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json",
+  "primary_source": "R3_V8_DATAFORSEO_BESTANDSNUTZUNG_144_READONLY_20261013.json",
+  "source_sha": "c3648e97e0d2dfa0b952be3469b71ff10183a5a0",
+  "other_evidence_files": [
+    "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+    "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
+    "R3_V8_4_ARTIKEL_OWNER_RED_FESTLEGUNG_20261013.md"
+  ],
+  "seo_released": 0,
+  "wordpress_writes": 0,
+  "new_paid_provider_calls": 0,
+  "warnings": [
+    "Complete run != SEO release",
+    "NOT_RETURNED_UNKNOWN != volume 0",
+    "40101 is provider error, never auto-repeat",
+    "Lexical no-hit != Google no-overlap"
+  ],
+  "counts": {
+    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": 5,
+    "A2_PRIORITAET_SERP_BEIDSEITIG": 10,
+    "B1_NORMAL_LEXIK_RISIKO": 18,
+    "B2_NORMAL_OHNE_AUFFAELLIGKEIT": 111
+  },
+  "tiers": {
+    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": [
+      {
+        "new_category": "Antennen & Blitzschutz",
+        "world": "Wetter & Naturgefahren",
+        "query": "satellitenantenne blitzschutz erdung koax",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+      },
+      {
+        "new_category": "Außenrollläden vor Vandalismus",
+        "world": "Vandalismus & Zerstörung",
+        "query": "außenrollladen vandalismus beschädigung manipulationsschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+      },
+      {
+        "new_category": "Grenzüberwachung im Garten",
+        "world": "Einbruch & Diebstahl",
+        "query": "grundstücksgrenze bewegungsmelder kamera datenschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+      },
+      {
+        "new_category": "Löschmittel im Freizeitfahrzeug",
+        "world": "Feuer & Gase",
+        "query": "feuerlöscher wohnmobil befestigung vibrationsschaden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+      },
+      {
+        "new_category": "Überspannung im Zählerschrank",
+        "world": "Wetter & Naturgefahren",
+        "query": "überspannungsschutz im zählerschrank haus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+      }
+    ],
+    "A2_PRIORITAET_SERP_BEIDSEITIG": [
+      {
+        "new_category": "Außenkabel & Blitzfolgen",
+        "world": "Wetter & Naturgefahren",
+        "query": "erdkabel garage blitz überspannungsschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Balkonkraftwerke bei Gewitter",
+        "world": "Wetter & Naturgefahren",
+        "query": "balkonkraftwerk überspannung gewitter",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Dachboxen bei Unwetter",
+        "world": "Wetter & Naturgefahren",
+        "query": "dachbox sturm wind befestigung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Datenleitungen & Überspannung",
+        "world": "Wetter & Naturgefahren",
+        "query": "ethernet poe überspannungsschutz außenbereich",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Gewächshaus-Temperaturalarme",
+        "world": "Technik & Ausfälle",
+        "query": "gewächshaus frostalarm mehrere temperatursensoren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Hausrat vor Hochwasser",
+        "world": "Wetter & Naturgefahren",
+        "query": "hausrat vor hochwasser schützen dokumente keller",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Heizungsalarme über Mobilfunk",
+        "world": "Technik & Ausfälle",
+        "query": "heizungsalarm gsm sms ohne wlan",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Spielgeräte vor Vandalismus",
+        "world": "Vandalismus & Zerstörung",
+        "query": "spielgeräte vandalismus schaukel beschädigung prüfung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Trocknung kleiner Ladenflächen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wasserschaden ladenlokal trocknungsprotokoll vermieter",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Warnsysteme bei Starkregen",
+        "world": "Wetter & Naturgefahren",
+        "query": "starkregen warn app nina hochwasserwarnung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      }
+    ],
+    "B1_NORMAL_LEXIK_RISIKO": [
+      {
+        "new_category": "Heizungsneustart nach Stromausfall",
+        "world": "Technik & Ausfälle",
+        "query": "heizung nach stromausfall neu starten",
+        "volume": 90,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Abluftanlagen & Unterdruck",
+        "world": "Feuer & Gase",
+        "query": "dunstabzug kamin unterdruck gefährlich",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fernalarm an Vertrauenspersonen",
+        "world": "Technik & Ausfälle",
+        "query": "alarmmeldung an vertrauensperson weiterleiten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gefrorene Außenentwässerung",
+        "world": "Wetter & Naturgefahren",
+        "query": "fallrohr abfluss eingefroren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kabelbrände im Wohnbereich",
+        "world": "Feuer & Gase",
+        "query": "kabelbrand wohnung ursachen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kleingarten-Gemeinschaftsflächen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "kleingarten gemeinschaftsanlage vandalismus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kleingartenlauben bei Hagel",
+        "world": "Wetter & Naturgefahren",
+        "query": "gartenlaube hagelschaden vorbeugen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kühlgeräte nach Netzausfall",
+        "world": "Technik & Ausfälle",
+        "query": "kühlschrank nach stromausfall lebensmittel",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Paket- & Lieferstationen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "paketstation gegen vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Private Grill- & Rastbereiche",
+        "world": "Vandalismus & Zerstörung",
+        "query": "privater grillplatz vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Rutschschutz an Hauseingängen",
+        "world": "Wetter & Naturgefahren",
+        "query": "hauseingang rutschfest winter",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sanitäreinrichtungen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "sanitäreinrichtungen im vereinsheim vandalismus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Störungen an Schwimmerschaltern",
+        "world": "Technik & Ausfälle",
+        "query": "schwimmerschalter pumpe defekt",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Überhitzung im Dachgeschoss",
+        "world": "Technik & Ausfälle",
+        "query": "dachgeschoss überhitzung vermeiden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Verkaufsautomaten im Außenraum",
+        "world": "Vandalismus & Zerstörung",
+        "query": "verkaufsautomat vandalismusschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Verkleidungen & Außendämmung",
+        "world": "Vandalismus & Zerstörung",
+        "query": "fassadendämmung vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wartung von Sumpfpumpen",
+        "world": "Technik & Ausfälle",
+        "query": "sumpfpumpe reinigen warten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wasserzähler & Absperrkontrolle",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wasserzähler bei längerer abwesenheit prüfen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
+      }
+    ],
+    "B2_NORMAL_OHNE_AUFFAELLIGKEIT": [
+      {
+        "new_category": "SIM-Karten für Alarmmelder",
+        "world": "Technik & Ausfälle",
+        "query": "sim karte für alarmanlage",
+        "volume": 390,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Außenwasserhähne & Frost",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "außenwasserhahn frostsicher machen",
+        "volume": 170,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Anwesenheitssimulation",
+        "world": "Einbruch & Diebstahl",
+        "query": "anwesenheitssimulation",
+        "volume": 140,
+        "provider_keyword_state": "OLD_EXACT_CACHE_ONLY_20261010",
+        "old_cached_only": true,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gasprüfungen im Freizeitfahrzeug",
+        "world": "Feuer & Gase",
+        "query": "gasprüfung wohnmobil vorschriften",
+        "volume": 90,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Steckdosen & Mehrfachverteiler",
+        "world": "Feuer & Gase",
+        "query": "mehrfachsteckdose brandgefahr",
+        "volume": 70,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gartenbewässerung winterfest machen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "gartenbewässerung winterfest machen",
+        "volume": 30,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Potentialausgleich im Wohnhaus",
+        "world": "Wetter & Naturgefahren",
+        "query": "potentialausgleich einfamilienhaus",
+        "volume": 20,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Abwassertank & Leckage",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil abwassertank undicht",
+        "volume": 10,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kellerwände bei Grundwasser",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "grundwasser drückt durch kellerwand",
+        "volume": 10,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Mobile Gegenstände vor Sturm",
+        "world": "Wetter & Naturgefahren",
+        "query": "gartenmöbel vor sturm sichern",
+        "volume": 10,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wasserpumpen im Camper",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil wasserpumpe undicht",
+        "volume": 10,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Abflüsse bei längerer Nichtnutzung",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "abfluss bei leerstand austrocknung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Akku-Ladegeräte & Defekte",
+        "world": "Feuer & Gase",
+        "query": "akku ladegerät defekt brandgefahr",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Alarmübertragungswege & Standards",
+        "world": "Technik & Ausfälle",
+        "query": "alarmübertragung sicherheitsanlage standards",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Anhänger bei Sturm",
+        "world": "Wetter & Naturgefahren",
+        "query": "anhänger bei sturm sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Ausbleibende Push-Benachrichtigungen",
+        "world": "Technik & Ausfälle",
+        "query": "push nachricht alarmanlage kommt nicht",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Außenboxen & Lagerkisten",
+        "world": "Einbruch & Diebstahl",
+        "query": "gartenbox gegen aufbrechen sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Außenverkaufsstände",
+        "world": "Vandalismus & Zerstörung",
+        "query": "verkaufsstand gegen vandalismus sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Außenzähler & Messstellen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "stromzähler außen vor manipulation schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Bepflanzung & Grünflächen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "gartenpflanzen vandalismus schadensersatz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Beschädigte Akkus & Entsorgung",
+        "world": "Feuer & Gase",
+        "query": "beschädigten lithium akku sicher entsorgen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Blockierte Pumpenzuläufe",
+        "world": "Technik & Ausfälle",
+        "query": "pumpe saugkorb verstopft reinigen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Brandnotfälle auf Campingplätzen",
+        "world": "Feuer & Gase",
+        "query": "brand auf campingplatz richtig verhalten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Brandschutztüren im Wohnbereich",
+        "world": "Feuer & Gase",
+        "query": "brandschutztür wohnung haus richtig nutzen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Brandschutzunterweisung im Verein",
+        "world": "Feuer & Gase",
+        "query": "brandschutzunterweisung kleiner verein",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Brennbare Waren & Dekoration",
+        "world": "Feuer & Gase",
+        "query": "brennbare dekoration laden brandschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Carport-Fahrzeugschutz",
+        "world": "Einbruch & Diebstahl",
+        "query": "carport gegen fahrzeugdiebstahl sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Dachluken & Feuchteeintritt",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil dachluke wassereintritt",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Druckprobleme & Druckschläge",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "druckschläge wasserleitung vermeiden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Einsehbarkeit & Sichtachsen",
+        "world": "Einbruch & Diebstahl",
+        "query": "garten sichtschutz einbruchschutz einsehbarkeit",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Elektroleitungen & Schmorstellen",
+        "world": "Feuer & Gase",
+        "query": "stromleitung schmorschaden erkennen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Ersatzpumpen für Hausentwässerung",
+        "world": "Technik & Ausfälle",
+        "query": "ersatzpumpe kellerentwässerung auswählen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Eskalationspläne bei Fernüberwachung",
+        "world": "Technik & Ausfälle",
+        "query": "fernalarm eskalationsplan erstellen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Evakuierung mit Hilfebedarf",
+        "world": "Feuer & Gase",
+        "query": "evakuierung pflegebedürftige bei hausbrand",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fahrradträger bei Starkwind",
+        "world": "Wetter & Naturgefahren",
+        "query": "fahrradträger starkwind sicherheit",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fassadenputz & Oberflächenschäden",
+        "world": "Vandalismus & Zerstörung",
+        "query": "fassadenputz vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fehlalarme aus der Ferne prüfen",
+        "world": "Technik & Ausfälle",
+        "query": "fernalarm fehlalarm überprüfen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Feste Gasinstallationen im Camper",
+        "world": "Feuer & Gase",
+        "query": "wohnmobil gasanlage festinstallation sicherheit",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Feuchte Bodenplatten",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "feuchtigkeit durch kellerbodenplatte",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Feuchtekontrolle bei Leerstand",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "leerstehendes haus luftfeuchtigkeit kontrollieren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "FI-Schutzschalter & Auslösungen",
+        "world": "Technik & Ausfälle",
+        "query": "fi schutzschalter löst ständig aus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fluchtwege im Privathaus",
+        "world": "Feuer & Gase",
+        "query": "fluchtwege einfamilienhaus brand",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Fluchtwege in kleinen Läden",
+        "world": "Feuer & Gase",
+        "query": "fluchtweg einzelhandel laden freihalten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Flutlicht & Platztechnik",
+        "world": "Vandalismus & Zerstörung",
+        "query": "flutlichtanlage sportplatz vandalismus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Freiliegende Hausanschlüsse",
+        "world": "Vandalismus & Zerstörung",
+        "query": "hausanschlusskabel außen vor beschädigung schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Frischwassertank & Undichtigkeit",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil frischwassertank undicht",
+        "volume": null,
+        "provider_keyword_state": "RETURNED_VOLUME_NULL",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Frostschutz für Brunnenpumpen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "brunnenpumpe vor frost schützen",
+        "volume": null,
+        "provider_keyword_state": "RETURNED_VOLUME_NULL",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Garteninventar & Outdoor-Möbel",
+        "world": "Vandalismus & Zerstörung",
+        "query": "gartenmöbel vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gasabsperrung & Armaturen",
+        "world": "Feuer & Gase",
+        "query": "gas absperrhahn haus wo",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gasanschlüsse im Wohnhaus",
+        "world": "Feuer & Gase",
+        "query": "gasanschluss haus sicherheit prüfen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gasheizung & Abgasführung im Camper",
+        "world": "Feuer & Gase",
+        "query": "wohnmobil gasheizung abgasführung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gasleitungen in Nebenräumen",
+        "world": "Feuer & Gase",
+        "query": "gasleitung nebenraum sicherheit",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gemeinschaftsflure & Treppenhäuser",
+        "world": "Vandalismus & Zerstörung",
+        "query": "treppenhaus vandalismus verhindern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Gemeinschaftskeller & Waschräume",
+        "world": "Vandalismus & Zerstörung",
+        "query": "gemeinschaftskeller vandalismus schäden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Glatteis an Garagenzufahrten",
+        "world": "Wetter & Naturgefahren",
+        "query": "garageneinfahrt glatteis vermeiden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Hauptabsperrung kleiner Betriebe",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "hauptwasserabsperrung im kleinen betrieb",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Heizungs-Sicherheitsabschaltungen",
+        "world": "Technik & Ausfälle",
+        "query": "heizung sicherheitsabschaltung ursachen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Innenbeleuchtung & Leitsysteme",
+        "world": "Vandalismus & Zerstörung",
+        "query": "treppenhaus beleuchtung gegen vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kaminofen & Sicherheitsabstände",
+        "world": "Feuer & Gase",
+        "query": "kaminofen sicherheitsabstand zu möbeln",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kassen & Bargeld nach Ladenschluss",
+        "world": "Einbruch & Diebstahl",
+        "query": "bargeld nach ladenschluss sicher aufbewahren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Kellerfensterschächte & Nässe",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "kellerlichtschacht gegen wassereintritt abdichten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Ladeplätze für Werkzeugakkus",
+        "world": "Feuer & Gase",
+        "query": "werkzeugakku sicher laden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Leitungskorrosion im Haus",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "korrosion wasserleitungen erkennen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Liefer- & Fremdzutritte",
+        "world": "Einbruch & Diebstahl",
+        "query": "fremdfirmen zugang zum kleinen betrieb kontrollieren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Luftzufuhr bei Kaminbetrieb",
+        "world": "Feuer & Gase",
+        "query": "kamin luftzufuhr richtig einstellen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Maschinenbrand in Kleinwerkstätten",
+        "world": "Feuer & Gase",
+        "query": "elektromotor maschinenbrand kleinwerkstatt",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Mauern & Einfriedungen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "gartenmauer vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Mobile Aufbauten & Dachboxen",
+        "world": "Einbruch & Diebstahl",
+        "query": "dachbox am auto gegen diebstahl sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Mobile Zäune bei Starkwind",
+        "world": "Wetter & Naturgefahren",
+        "query": "mobilen bauzaun bei sturm sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Motorräder & Roller vor Vandalismus",
+        "world": "Vandalismus & Zerstörung",
+        "query": "motorrad vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Nebenraum-Inventar",
+        "world": "Vandalismus & Zerstörung",
+        "query": "gemeinschaftsraum inventar sachbeschädigung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Notausstiege im Wohnwagen",
+        "world": "Feuer & Gase",
+        "query": "wohnwagen notausstieg fenster brand",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Notbetrieb smarter Türschlösser",
+        "world": "Technik & Ausfälle",
+        "query": "smart lock ohne strom oder internet öffnen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Notfallpläne für Kleingewerbe",
+        "world": "Feuer & Gase",
+        "query": "notfallplan kleiner betrieb brand",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Notfallunterlagen bei Hochwasser",
+        "world": "Wetter & Naturgefahren",
+        "query": "dokumente bei hochwasser sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Offene Feuerstellen im Garten",
+        "world": "Feuer & Gase",
+        "query": "feuerstelle im garten brandschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Offline-Szenen im Smart Home",
+        "world": "Technik & Ausfälle",
+        "query": "smart home szenen ohne internet",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Oldtimer & Sammlerfahrzeuge",
+        "world": "Vandalismus & Zerstörung",
+        "query": "oldtimer vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Phasenausfall im Wohnhaus",
+        "world": "Technik & Ausfälle",
+        "query": "phasenausfall haus erkennen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Post & Zustellung bei Leerstand",
+        "world": "Einbruch & Diebstahl",
+        "query": "post bei leerstehendem haus organisieren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Private Objektkontrollen",
+        "world": "Einbruch & Diebstahl",
+        "query": "leerstehendes haus kontrollgänge organisieren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Räumpflichten auf Privatwegen",
+        "world": "Wetter & Naturgefahren",
+        "query": "schneeräumpflicht privater weg",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Rohrverbindungen & Dichtstellen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "rohrverschraubung undicht erkennen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Rollläden & Jalousien im Frost",
+        "world": "Wetter & Naturgefahren",
+        "query": "rollladen bei frost festgefroren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Rückschlagventile an Hauspumpen",
+        "world": "Technik & Ausfälle",
+        "query": "rückschlagventil sumpfpumpe defekt",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sachbeschädigung an Privatwagen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "auto vor sachbeschädigung schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Schimmel in kleinen Vereinsräumen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "schimmel im kleinen vereinsheim entfernen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Schließfächer & Aufbewahrung",
+        "world": "Vandalismus & Zerstörung",
+        "query": "schließfächer gegen vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Schlüsselmanagement im Kleingewerbe",
+        "world": "Einbruch & Diebstahl",
+        "query": "schlüsselverwaltung für kleine betriebe",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Schornsteinbrand & Rußablagerung",
+        "world": "Feuer & Gase",
+        "query": "schornsteinbrand ruß vermeiden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sicherheitsupdates von Alarmsystemen",
+        "world": "Technik & Ausfälle",
+        "query": "alarmanlage sicherheitsupdate",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sicherung ausfahrbarer Markisen",
+        "world": "Wetter & Naturgefahren",
+        "query": "markise bei sturm sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Spielgeräte bei Sturm",
+        "world": "Wetter & Naturgefahren",
+        "query": "schaukel spielgerüst vor sturm sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sporttore & Spielfeldinventar",
+        "world": "Vandalismus & Zerstörung",
+        "query": "fußballtor manipulation prüfen vandalismus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Staufächer & Außenklappen",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil außenklappe undicht",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Steckdosen im kleinen Gewerbe",
+        "world": "Feuer & Gase",
+        "query": "steckdosen sicherheit kleingewerbe",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Störungen an Heizungssteuerungen",
+        "world": "Technik & Ausfälle",
+        "query": "heizungssteuerung störung fehler",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Störungen im Sicherungskasten",
+        "world": "Technik & Ausfälle",
+        "query": "sicherungskasten störung ursache",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Stromkästen & Außenverteiler",
+        "world": "Vandalismus & Zerstörung",
+        "query": "stromverteiler außen vandalismusschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Sturmwarnungen verstehen",
+        "world": "Wetter & Naturgefahren",
+        "query": "sturmwarnung wetterdienst verstehen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Temperaturmelder im Technikraum",
+        "world": "Technik & Ausfälle",
+        "query": "temperaturüberwachung heizraum",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Trockenlaufschutz für Pumpen",
+        "world": "Technik & Ausfälle",
+        "query": "trockenlaufschutz hauswasserpumpe",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Verbraucher beim Wiederanlauf",
+        "world": "Technik & Ausfälle",
+        "query": "stromausfall geräte beim wiederanlauf",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Verbrennungsluft bei Gasgeräten",
+        "world": "Feuer & Gase",
+        "query": "gasgerät verbrennungsluft ausreichende lüftung",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Vereinszäune & Absperrungen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "sportplatzzaun vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Vereiste Türschlösser",
+        "world": "Wetter & Naturgefahren",
+        "query": "türschloss eingefroren öffnen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Warenbestände & Wasserschaden",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "warenbestand wasserschaden schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wasserschutz an Praxisgeräten",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "medizinische praxisgeräte vor wasserschaden schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wassertechnikräume im Kleingewerbe",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "kleiner gewerbebetrieb wassertechnikraum leckage",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wegführung & Zugangsbereiche",
+        "world": "Einbruch & Diebstahl",
+        "query": "garten zugangswege gegen unbefugten zutritt sichern",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      },
+      {
+        "new_category": "Wohnmobil-Dachnähte & Abdichtung",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wohnmobil dachnaht undicht abdichten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "NOT_MEASURED",
+        "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
+      }
+    ]
+  }
+}
