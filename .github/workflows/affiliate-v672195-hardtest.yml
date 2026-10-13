@@ -285,6 +285,54 @@ jobs:
           /tmp/wp eval-file /tmp/wp-site/cleanup211.php --path=/tmp/wp-site | tee /tmp/cleanup211.log
           grep -F 'KISS_CLEANUP_TEXTLINK_672211_PASS' /tmp/cleanup211.log
 
+      - name: AFF-ERR-065 existing article bottom output red/green gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/wp-site/aff065-bottom.php <<'PHP'
+          <?php
+          wp_set_current_user(1);
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
+          $post=wp_insert_post(['post_type'=>'post','post_status'=>'publish','post_title'=>'AFF 065 article','post_content'=>str_repeat('<p>Ein Pferdetext mit Absatz und Inhalt.</p>',10)],true);
+          if(is_wp_error($post)||!$post)throw new RuntimeException('fixture article missing');
+          $makeBanner=function($label)use($call){
+              $data=['id'=>'aff065-'.sanitize_key($label),'name'=>$label,'title'=>$label,'active'=>1,'creative_type'=>'banner',
+                  'network'=>'manual','source'=>'manual','assignment_mode'=>'fallback','render_mode'=>'image_link',
+                  'image_url'=>'https://example.org/banner.png','url'=>'https://example.org/partner',
+                  'dimensions'=>'728x90','placements'=>['post_inline_banner'],'programme_status'=>'active','priority'=>20,
+                  'health_check_enabled'=>false];
+              $id=$call('save_campaign_record',$data);
+              if(is_wp_error($id)||!$id)throw new RuntimeException('fixture banner missing');
+              return $id;
+          };
+          $banner1=$makeBanner('Banner erster');
+          $banner2=$makeBanner('Banner zweiter');
+          $direct=$call('article_plan_render_banner_campaign',$post,$banner2,false,2,[$banner1]);
+          if(strpos($direct,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF065_Fixture: valid second banner failed existing gates');
+          $plan=$call('article_plan_default');
+          $plan['schema']=(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_SCHEMA');
+          $plan['content_hash']=$call('article_plan_content_hash',$post);
+          $plan['campaign_revision']=$call('article_plan_campaign_revision');
+          $plan['status']='ready';
+          $plan['banner']=['status'=>'ready','campaign_post_id'=>$banner1,'anchor'=>[]];
+          $plan['banner_2']=['status'=>'ready','campaign_post_id'=>$banner2,'anchor'=>[]];
+          $plan['products']=['status'=>'none','campaign_post_ids'=>[]];
+          $meta=(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_META');
+          update_post_meta($post,$meta,$plan);
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$post),$post,true);
+          if(strpos($html,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF065_BASELINE_NO_PRODUCT_BANNER_FALLBACK');
+          echo "PASS AFF065_BASELINE_NO_PRODUCT_BANNER_FALLBACK\n";
+          $plan['products']=['status'=>'ready','campaign_post_ids'=>[99999999]];
+          update_post_meta($post,$meta,$plan);
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$post),$post,true);
+          if(strpos($html,'ppar-article-product-block')!==false)throw new RuntimeException('FAIL AFF065_INVALID_PRODUCT_LEAK');
+          if(strpos($html,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF_ERR_065_ARTICLE_BOTTOM_TEST: Ready plan loses every product and suppresses valid replacement banner');
+          echo "PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST\n";
+          PHP
+          /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
+          grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
+
       - name: Package exact tested 6.72.211
         if: ${{ steps.release_phase.outputs.release_allowed == 'true' }}
         shell: bash
