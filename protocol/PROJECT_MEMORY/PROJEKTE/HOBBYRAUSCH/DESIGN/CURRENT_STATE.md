@@ -95,5 +95,12 @@ Audit-Basis:
 - Buch & Papier 1.50.645 als visuelle Referenz;
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
+## Exakte offene Bildliste
+\`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/MISSING_IMAGE_WORKLIST_1.50.653.json\`
+
+- 6 fehlende Heroes;
+- 258 fehlende Karten;
+- keine Ersatz-/Fallback-Zuordnung ohne fachlich eindeutiges Motiv.
+
 ## EXAKT EINE NEXT ACTION
 **Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Parallel nur bereits vorhandene fachlich eindeutige Quellen für die 258 offenen Karten weiterverwenden; kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
