@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 63/328 KARTEN LOKAL EINGEBAUT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 67/328 KARTEN LOKAL EINGEBAUT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -31,8 +31,6 @@ Audit-Basis:
 
 ## Korrigierter realer WIP 1.50.653
 
-Die frühere Zwischenangabe „15/15 Hero-Ersatzquellen“ war falsch zugeordnet und wurde korrigiert. Gegen die tatsächliche MISSING-Liste des Hero-Audits geprüft:
-
 ### Hero
 - die 50 auditbestätigten Hero-Motive wurden aus der realen Arbeitsbasis übernommen und neu exakt auf **600×220** erzeugt;
 - **9/15** tatsächlich fehlende Hero-Motive wurden durch neue fachlich passende Quellen ersetzt:
@@ -54,32 +52,37 @@ Die frühere Zwischenangabe „15/15 Hero-Ersatzquellen“ war falsch zugeordnet
   - geschick-tricks
   - werbung-design
   - werkzeuge-geraete
-- sechs zusätzlich erzeugte, aber nicht zur tatsächlichen MISSING-Liste gehörende Quellen (Leder, Robotik & Automation, Audio & HiFi, Mechanik & Uhren, Essbare Pflanzen, Ameisen & Insekten) werden **nicht** in bestehende PASS-Zuordnungen eingebaut.
+- vorhandene lokale Altvarianten dieser sechs Kategorien wurden im echten 600×220-Crop geprüft und als fachlich ungeeignet verworfen;
+- sechs zusätzlich erzeugte, aber nicht zur tatsächlichen MISSING-Liste gehörende Quellen ersetzen keine bestehenden Hero-PASS-Zuordnungen.
 
 ### Kategorievorschauen
-- verbindliche neue Regel umgesetzt: **Kategorievorschau und Hub2-Hero stammen aus derselben Bildquelle**;
+- verbindliche Regel umgesetzt: **Kategorievorschau und Hub2-Hero stammen aus derselben Bildquelle**;
 - aus jedem vorhandenen Hero wird eine eigene Vorschau **200×107** abgeleitet;
-- aktuell daher **59/65 Kategorievorschauen** vorhanden;
-- dieselben sechs Kategorien wie bei Hero bleiben ohne falsches Ersatzbild.
+- aktuell **59/65 Kategorievorschauen** vorhanden;
+- dieselben sechs Kategorien wie bei Hero bleiben bewusst ohne falsches Ersatzbild.
 
 ### Karten
-- 46 auditbestätigte PASS-Karten unverändert fachlich übernommen;
-- 17 echte neue Ersatzkandidaten eingebaut;
-- drei zusätzlich erzeugte Motive Batik, Origami und Lettering wurden nicht verwendet, da diese bereits zu den 46 auditbestätigten PASS-Karten gehören;
-- aktuell **63/328 Karten** im WIP gemappt;
-- **265 Karten** bleiben bewusst ohne Bild, bis ein fachlich passendes Motiv vorliegt;
+- 46 auditbestätigte PASS-Karten fachlich übernommen;
+- 17 echte neue Karten-Ersatzkandidaten aus dem ersten neuen Kartenblock eingebaut;
+- drei redundant erzeugte Quellen Batik, Origami und Lettering werden nicht verwendet, weil die bestehenden Zuordnungen bereits auditbestätigt PASS sind;
+- zusätzlich vier vorhandene neue Quellen nach sichtbarer 200×107-Prüfung fachlich exakt als Karten genutzt:
+  - robotik-automation / robotik
+  - mechanik-uhren / uhren-reparieren
+  - essbare-pflanzen / gemueseanbau
+  - ameisen-insekten / ameisenhaltung
+- aktuell **67/328 Karten** im WIP gemappt;
+- **261 Karten** bleiben bewusst ohne Bild;
 - alle aktiven Kartenassets sind exakt **200×107**.
 
 ### Technische Prüfung des rekonstruierten WIP
 - **61/61 PHP-Dateien Syntax PASS**;
 - Hero-Dateien: **59**, alle exakt 600×220;
 - Kategorievorschauen: **59**, alle exakt 200×107;
-- Karten: **63**, alle exakt 200×107;
+- Karten: **67**, alle exakt 200×107;
 - JSON/Mapping: PASS;
-- kein semantischer Hero-Fallback;
-- kein Featured-Image-Fallback im Hub2-Kartenpfad;
-- kein Welt-Pool-Fallback im Hub2-Kartenpfad;
-- kein v150617-Fallback im aktiven Hub2-Bildpfad;
+- kein semantischer Hero-Fallback im aktiven Hub2-Hero-Pfad;
+- kein Featured-Image-Fallback im aktiven Hub2-Kartenpfad;
+- kein Welt-Pool-/Icon-/v150617-Fallback im aktiven Hub2-Kartenpfad;
 - fehlend bleibt fehlend;
 - noch kein neues Release-ZIP.
 
@@ -90,4 +93,4 @@ Die frühere Zwischenangabe „15/15 Hero-Ersatzquellen“ war falsch zugeordnet
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
 ## EXAKT EINE NEXT ACTION
-**Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Danach die 265 fehlenden Kartenmotive blockweise abarbeiten. Kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
+**Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Parallel nur bereits vorhandene fachlich eindeutige Quellen für die 261 offenen Karten weiterverwenden; kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
