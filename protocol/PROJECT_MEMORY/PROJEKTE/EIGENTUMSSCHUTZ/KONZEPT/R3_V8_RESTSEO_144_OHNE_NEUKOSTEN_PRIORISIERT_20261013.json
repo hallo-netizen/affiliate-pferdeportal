@@ -4,7 +4,7 @@
   "purpose": "Clear owner-risk order, not a plan to charge users; used existing WordPress DataForSEO data only",
   "authority_r2": "HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json",
   "primary_source": "R3_V8_DATAFORSEO_BESTANDSNUTZUNG_144_READONLY_20261013.json",
-  "source_sha": "964d6a380c1bc84deedc9cae5de4d4184762da19",
+  "source_sha": "b7b62c7c7dd4a9e18a82cb100121d25ca4966aa2",
   "other_evidence_files": [
     "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
     "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
@@ -24,8 +24,10 @@
   "counts": {
     "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": 0,
     "A2_PRIORITAET_SERP_BEIDSEITIG": 15,
-    "B1_NORMAL_LEXIK_RISIKO": 18,
-    "B2_NORMAL_OHNE_AUFFAELLIGKEIT": 111
+    "B1_NORMAL_LEXIK_RISIKO": 8,
+    "B2_NORMAL_OHNE_AUFFAELLIGKEIT": 111,
+    "B0_NORMAL_SERP_BEIDSEITIG": 7,
+    "B0b_NORMAL_SERP_UNVOLLSTAENDIG": 3
   },
   "tiers": {
     "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": [],
@@ -193,16 +195,6 @@
     ],
     "B1_NORMAL_LEXIK_RISIKO": [
       {
-        "new_category": "Heizungsneustart nach Stromausfall",
-        "world": "Technik & Ausfälle",
-        "query": "heizung nach stromausfall neu starten",
-        "volume": 90,
-        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
         "new_category": "Abluftanlagen & Unterdruck",
         "world": "Feuer & Gase",
         "query": "dunstabzug kamin unterdruck gefährlich",
@@ -213,59 +205,9 @@
         "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
       },
       {
-        "new_category": "Fernalarm an Vertrauenspersonen",
-        "world": "Technik & Ausfälle",
-        "query": "alarmmeldung an vertrauensperson weiterleiten",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Gefrorene Außenentwässerung",
-        "world": "Wetter & Naturgefahren",
-        "query": "fallrohr abfluss eingefroren",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Kabelbrände im Wohnbereich",
-        "world": "Feuer & Gase",
-        "query": "kabelbrand wohnung ursachen",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Kleingarten-Gemeinschaftsflächen",
-        "world": "Vandalismus & Zerstörung",
-        "query": "kleingarten gemeinschaftsanlage vandalismus",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
         "new_category": "Kleingartenlauben bei Hagel",
         "world": "Wetter & Naturgefahren",
         "query": "gartenlaube hagelschaden vorbeugen",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Kühlgeräte nach Netzausfall",
-        "world": "Technik & Ausfälle",
-        "query": "kühlschrank nach stromausfall lebensmittel",
         "volume": null,
         "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
         "old_cached_only": false,
@@ -286,16 +228,6 @@
         "new_category": "Private Grill- & Rastbereiche",
         "world": "Vandalismus & Zerstörung",
         "query": "privater grillplatz vor vandalismus schützen",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Rutschschutz an Hauseingängen",
-        "world": "Wetter & Naturgefahren",
-        "query": "hauseingang rutschfest winter",
         "volume": null,
         "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
         "old_cached_only": false,
@@ -336,36 +268,6 @@
         "new_category": "Verkaufsautomaten im Außenraum",
         "world": "Vandalismus & Zerstörung",
         "query": "verkaufsautomat vandalismusschutz",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Verkleidungen & Außendämmung",
-        "world": "Vandalismus & Zerstörung",
-        "query": "fassadendämmung vor vandalismus schützen",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Wartung von Sumpfpumpen",
-        "world": "Technik & Ausfälle",
-        "query": "sumpfpumpe reinigen warten",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "NOT_MEASURED",
-        "blocking_reason": "R2-Naehe redaktionell gesichtet, organische R3-SERP fehlt"
-      },
-      {
-        "new_category": "Wasserzähler & Absperrkontrolle",
-        "world": "Wasser & Feuchtigkeit",
-        "query": "wasserzähler bei längerer abwesenheit prüfen",
         "volume": null,
         "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
         "old_cached_only": false,
@@ -1484,11 +1386,139 @@
         "serp_state": "NOT_MEASURED",
         "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
       }
+    ],
+    "B0_NORMAL_SERP_BEIDSEITIG": [
+      {
+        "new_category": "Heizungsneustart nach Stromausfall",
+        "world": "Technik & Ausfälle",
+        "query": "heizung nach stromausfall neu starten",
+        "volume": 90,
+        "provider_keyword_state": "RETURNED_VOLUME_NUMERIC",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Gefrorene Außenentwässerung",
+        "world": "Wetter & Naturgefahren",
+        "query": "fallrohr abfluss eingefroren",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Kabelbrände im Wohnbereich",
+        "world": "Feuer & Gase",
+        "query": "kabelbrand wohnung ursachen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Kühlgeräte nach Netzausfall",
+        "world": "Technik & Ausfälle",
+        "query": "kühlschrank nach stromausfall lebensmittel",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Rutschschutz an Hauseingängen",
+        "world": "Wetter & Naturgefahren",
+        "query": "hauseingang rutschfest winter",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Verkleidungen & Außendämmung",
+        "world": "Vandalismus & Zerstörung",
+        "query": "fassadendämmung vor vandalismus schützen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Wartung von Sumpfpumpen",
+        "world": "Technik & Ausfälle",
+        "query": "sumpfpumpe reinigen warten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Both new SERPs returned 20000, but content quality and owner independence still require review",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      }
+    ],
+    "B0b_NORMAL_SERP_UNVOLLSTAENDIG": [
+      {
+        "new_category": "Fernalarm an Vertrauenspersonen",
+        "world": "Technik & Ausfälle",
+        "query": "alarmmeldung an vertrauensperson weiterleiten",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "New SERP on 2026-10-13 has one or two provider 40101 errors; no full pair owner evidence",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Kleingarten-Gemeinschaftsflächen",
+        "world": "Vandalismus & Zerstörung",
+        "query": "kleingarten gemeinschaftsanlage vandalismus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "New SERP on 2026-10-13 has one or two provider 40101 errors; no full pair owner evidence",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      },
+      {
+        "new_category": "Wasserzähler & Absperrkontrolle",
+        "world": "Wasser & Feuchtigkeit",
+        "query": "wasserzähler bei längerer abwesenheit prüfen",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
+        "blocking_reason": "New SERP on 2026-10-13 has one or two provider 40101 errors; no full pair owner evidence",
+        "third_serp_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "seo_release": false
+      }
     ]
   },
   "provider_follow_up": "hab-bewahr-r3-serp-20261013-142959-utc.json",
   "provider_follow_up_cost_usd": 0.012,
   "provider_follow_up_successful_new_tasks": 6,
   "provider_follow_up_reused_tasks": 4,
-  "additional_user_action_now": "No more paid calls justified for the 15 priority pairs. Remaining 129 R3 owners have no comparable direct organic SERP evidence. Any new charged research requires prior specific user consent."
+  "additional_user_action_now": "No blind repeat: 3 incomplete normal comparisons and 119 unattempted, but no new paid calls authorized by this audit. Prioritize semantic evidence and topic owner decisions first.",
+  "third_paid_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+  "third_paid_export_cost_usd": 0.04,
+  "total_actual_paid_R3_SERP_usd": 0.112,
+  "warning_20261013_third_run": "The third paid SERP run reports COMPLETE but four provider tasks 40101; seven normal pair comparisons have zero CORRECTED URL overlap; none is an organic SEO release."
 }
