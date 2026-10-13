@@ -4,33 +4,33 @@ PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 VERSION:
-`1.50.649`
+`1.50.650`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
 
 SHA-256:
-`a374a3003e5842f2517095e74e178765a31fdf42ae2c5a721027acd79d80975c`
+`b3bf267ccfef1ae5efbdc4efa1df40f586d5a9ae78ee7c865906b04f113ac2d6`
 
 LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
 
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE OFFEN.
+LOCAL HARD PASS / LIVE-BILDER OFFEN.
 
 PASS:
-- PHP 52/52;
+- PHP 55/55;
 - ZIP;
-- Release-Chain V150649 vollständig;
-- 65/65 Hub2-Heroassets und Claims;
-- 328/328 vorhandene Kindseiten Fotokarte + Untertitel;
-- keine doppelte Foto-URL innerhalb derselben Hub2-Seite;
-- 859/859 Assets gegen 1.50.645 byteidentisch;
-- Browser 1440/1024/900/760 ohne Overflow;
-- Hero-Bild beim Aufklappen dimensionsstabil.
+- Release-Chain V150650;
+- 65/65 Hero-Mappings;
+- 328/328 Karten-Mappings;
+- fehlende Assets 0;
+- v150631 aktiv 0;
+- keine doppelten Kartenpfade innerhalb Hub2;
+- 0 neue Bildassets.
 
 LIVE:
-OFFEN.
+Nur Bildqualität offen.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
