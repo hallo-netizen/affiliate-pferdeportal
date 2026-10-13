@@ -856,6 +856,30 @@ V6-Lokalaudit über 704 alte und 432 neue konkrete Artikeltitel: **155** automat
 
 **Kontrollgrenze:** Redaktionelle Trennung ist nicht der Nachweis getrennter *organischer Suchabsichten*. Die vollständige Prüfung mit echten SERP-/Keyword-Evidenzen fehlt weiterhin; R3/V6 bleibt **nicht importierbar**, live bleibt R2. Keine neuen Providerkosten.
 
+## Zusätzlich: alle zehn auffälligen Kategoriebezeichnungs-Paare einzeln eingeordnet
+
+Die bereits ermittelte R3-Zeichenähnlichkeitsliste (Kategorie gegen bestehende R2-Kategorie) hatte **10** auffällige Kandidaten. Die unterschiedlichen Zuständigkeiten wurden anhand des Schutzobjekts und des Handlungszwecks durchgesehen. **Reine Namensähnlichkeit ist kein SEO-Dublettennachweis.**
+
+| Neue Kategorie | Nächste vorhandene Kategorie | Redaktionelle Grenze / Handhabung |
+|---|---|---|
+| Datenleitungen & Überspannung | Überspannung im Haus | DSL/Glasfaser, hausinternes LAN und Switch/PoE; allgemeines Überspannungsprinzip bleibt bestehender Owner. |
+| Überspannung im Zählerschrank | Überspannung im Haus | Zählerplatz und Überspannungsableiter als **Spezialfall**; allgemeines SPD-Grundwissen nicht doppeln. |
+| Antennen & Blitzschutz | Blitzschutz am Wohnhaus | Antennenmast, Sat-/Koax und deren Erdung; Gebäude-Blitzschutz bleibt bestehender Owner. |
+| Dachboxen bei Unwetter | Gartenhaus bei Unwetter | Transportzubehör auf Fahrzeug vs. ortsfestes Freizeitgebäude. |
+| Außenrollläden vor Vandalismus | Außentechnik vor Vandalismus | Fassadenbauteil/Rollladen gegen absichtliche Beschädigung vs. Wärmepumpe/Wallbox/technische Geräte. |
+| Warnsysteme bei Starkregen | Keller vor Starkregen | Warnung/Früherkennung/Alarmorganisation vs. baulicher Wasser- und Rückstauschutz. |
+| Hausrat vor Hochwasser | Haustechnik im Hochwasser | Bewegliche private Sachen/Wertgegenstände vs. Heizung, Elektrik und feste Technik. |
+| Grenzüberwachung im Garten | Alarm & Überwachung | Grundstücksgrenze, Sichtachsen und Außenmelder vs. generelle Alarmanlagentechnik. |
+| Spielgeräte vor Vandalismus | Außentechnik vor Vandalismus | Private Spielgeräte/Sportobjekte vs. elektrische Außentechnik. |
+| Löschmittel im Freizeitfahrzeug | Feuerlöscher & Löschmittel | Fahrzeug-Sondersituation vs. Haushalt; redaktionell trennbar, **SERP-Owner weiterhin offen**. |
+
+**Beleg zur fachlichen Gerätetrennung:** VDE erläutert Antennenerdung und Antennen-Blitzschutz gesondert von Blitzschutz des Gebäudes, ebenso Telekommunikationsanschlüsse/Routerüberspannung als eigenen Teil der Schutztechnik:
+- https://www.vde.com/de/blitzschutz/infos/antennen
+- https://www.vde.com/de/blitzschutz/infos/blitzschutz-tk-anschluss
+- https://www.vde.com/de/blitzschutz/infos/ueberspannungsschutz
+
+**Nicht belegt:** Dass Google alle zehn Themen auch in getrennten organischen Suchergebnissen bevorzugt. Dafür bleibt der SEO-Release-Gate offen.
+
 ## Ergänzende externe Sachquellen – qualitative Stichprobe, **kein Google-SERP-Freigabenachweis**
 
 - **Löschmittel im Freizeitfahrzeug:** Der ADAC bespricht ausdrücklich Platz- und Löschleistungsanforderungen im Auto bzw. Wohnmobil; dies stützt die fachliche Trennung eines Camper-Einsatzkontexts vom Wohnhaus. https://www.adac.de/rund-ums-fahrzeug/ausstattung-technik-zubehoer/zubehoer/feuerloescher-auto-vergleich/
