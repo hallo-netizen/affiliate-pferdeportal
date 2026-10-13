@@ -1486,3 +1486,11 @@ Quelle muss direkt geprüft sein, bevor aus ihr eine Fachbehauptung wird. Nur fa
 
 NICHT GEÄNDERT:
 R3/V8-Kategorien- und Artikelplan, WordPress R2, Plugin, IDs, Slugs, URLs, Architekturen und bezahlte Providerabfragen. SEO-Freigabe bleibt 0/144 / BLOCKED.
+
+## HB-KONZEPT-20261013-003 – Bestehenden WordPress/DataForSEO-Workflow statt Web-Stichproben nutzen
+
+WAS: Vorliegende echte DataForSEO-Exporte (282 Keyword-Overview-Eingaben vom 10.10., jüngster 20-Paare-SERP-Export vom 12.10. mit 16 auswertbaren/4 offenen Paaren) ausgelesen und mit exakt 144 R3/V8-Kategorien und 432 aktuellen Artikelideen zu **einer** read-only Forschungsbrücke verbunden: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/R3_V8_DATAFORSEO_BESTANDSNUTZUNG_144_READONLY_20261013.json`. 15 vorrangige Suchformulierungen liegen vor, die übrigen 129 sind ausdrücklich unbestätigte Artikel-Titelvorschläge, nicht blind abrechnen. Exakter Altdatenmatch bei der Kategorie Anwesenheitssimulation.
+
+WARUM: Bereits bezahlte WordPress/DataForSEO-Ergebnisse müssen vor weiteren Abfragen verwertet werden. Bezahlter Provider-Call benötigt gesonderte Freigabe; Allgemein-Web-Snippets ersetzen die installierte Recherche-Evidenz nicht. Keine neue Architektur/Pluginversion.
+
+NICHT GEÄNDERT: R3-Fachplan, R2-WordPress, Plugin 1.14.8.17, IDs/Slugs/URLs, bestehende SEO-Owner, tatsächliche Providerrecherche. Ergebnis bleibt GOOGLE-SEO-BLOCKED bis Owner-Freigabe.
