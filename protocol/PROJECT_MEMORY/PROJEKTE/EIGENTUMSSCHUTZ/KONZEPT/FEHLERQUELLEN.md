@@ -37,3 +37,13 @@ Sperre: Vor tatsächlichem Umbau erst vollständige fachliche Abnahme, Kollision
 
 ## HB-CONCEPT-004 – 3–10-Auswahlregel im Live-Validator fehlt noch
 Status: **TECHNISCHE REGEL-LÜCKE BESTÄTIGT / NICHT MODIFIZIERT**. Prüfung der lokalen Original-ZIP `HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.17_SERP_FORTSETZUNG_34V40.zip` vom 13.10.2026: `class-apkw-target-tree.php` validiert bereits das Minimum an Artikeltiteln je Blattkategorie und `min_categories_per_third_page` (3); `class-apkw-target-tree-dry-run.php` begrenzt `max_megamenu_children` auf 10 und fordert bei Welten bisher nur **mindestens 1** direktes Kind. **Ein allgemeiner harter Mindestwert 3 für jeden anklickbaren Zwischenknoten wird im geprüften Plugin noch nicht erzwungen.** Die R2-Struktur mit 19/10 Ein-/Zwei-Kind-Bereichen konnte daher gültig sein. Vor R3-Release muss die verbindliche 3–10-Strukturprüfung im bestehenden Validator nachvollziehbar ergänzt und mit Negativfällen getestet werden; keine Architekturänderung und kein vorgezogenes Pluginupdate nötig.
+
+
+## HB-CONCEPT-005 – Übergaberouting und Zielvertragsablage lückenhaft
+Status: **LOCAL CLOSED – 2026-10-13; FRISCHE-READBACK NOCH NACHZUZIEHEN**.
+- Fehler 1: Die Eigentumsschutz-Bürotür enthielt den veralteten Satz, eine Konzept-Current sei nicht unabhängig verifiziert. Das widersprach dem vorhandenen `AUTORITAETSPLAN.json` mit dem eindeutigen `EIGENTUMSSCHUTZ_KONZEPT`-Routing und der real existierenden `KONZEPT/CURRENT_STATE.md`.
+- Fehler 2: Der `KONZEPT/HOBBYRAUM.md` referenzierte als Arbeitsbindungsquelle noch einen alten R3-Delta-Pfad, obwohl die Current inzwischen einen V8-Fachplan bindet.
+- Fehler 3: Das zentrale Zielvertragsregister enthielt bisher keinen eigenen Hab-und-Bewahr-Kategorienzielvertrag, obwohl die neue 3–10-Nutzerentscheidung im Current bindend war.
+- Korrektur: Tür auf die vorhandene Current geroutet, Hobbyraum auf ausschließlich aus Current abgeleitete Daten umgestellt, `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md` angelegt und in `ZIELVERTRAEGE/REGISTER.md` registriert. WAS/WARUM im `AENDERUNGSREGISTER.md`, Türänderung im `BAUCONTAINER/BAUPROTOKOLL.md`.
+- Testbedingung: Frischer Readback von Tür, Routing, Current, Hobbyraum und Zielvertrag; **genau eine Current und genau eine NEXT ACTION**. Keine WordPress-/Pluginänderung.
+
