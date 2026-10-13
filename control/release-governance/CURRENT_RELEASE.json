@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 312,
+  "generation": 313,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "AFF_ERR_065_ARTICLE_LOCAL_PASS_PROVIDER_LIVE_GATE_OPEN",
-    "current_focus_reason": "Existing WordPress/MariaDB targeted source red-green PASS 38382020308; actual eBay/idealo provider rows and deployed 6.72.226 state remain unverified. No ZIP."
+    "current_focus": "AFF_ERR_065_LIVE_NO_OUTPUT_DESPITE_MANDATORY_BANNER",
+    "current_focus_reason": "Two 2026-10-12 original read-only 6.72.224 diagnostics and five live eBay heartbeat runs show a directly eligible banner but no_output saved plan; do not assume current git PHP is identical to live 6.72.224."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -889,9 +889,9 @@
   "execution_state": {
     "state": "FIX_FIRST_FAILED_GATE",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "AFF-ERR-065: read-only bind actual Affiliate version/source after local 6.72.226, current eBay BUSINESS source/policy/route/checkpoint/expiry and real idealo feed freshness, article #972638/category saved plans plus final public HTML from same live/test runtime. No install or source changes before the next first proved failing gate.",
-    "completion_condition": "ACTUAL_PROVIDER_ROWS_AND_REAL_LIVE_TEST_HTML_GATE_PROVEN",
-    "after_completion_action": "IF_REAL_GATE_FAILS_FIX_ONLY_FIRST_PROVEN_FAIL_IN_EXISTING_SOURCE_THEN_FULL_RETEST",
+    "bound_user_scope_action": "First remaining error AFF-ERR-065: bind the actual running 6.72.224/6.72.226 source and current source rows; reconcile article #972638 live no_output saved plan with proven eligible mandatory banner 972835. Real eBay heartbeat reports disabled; verify separately from BUSINESS source/policy/route/checkpoint. Use original code and same live/test data; no toggles, no rebuild, no new plugin.",
+    "completion_condition": "REAL_LIVE_NO_OUTPUT_VERSUS_BANNER_972835_ROOT_CAUSE_REPRODUCED_AND_POS_NEG_CLOSED",
+    "after_completion_action": "EXACT_ONE_EXISTING_SOURCE_ROOTFIX_IF_PROVED_THEN_FULL_WP_MARIADB_E2E_AND_RELEASE_GATES",
     "no_optional_detours": true,
     "sequence": 150,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
@@ -1012,7 +1012,12 @@
       "provider_source_security": "PASS_FAKE_EBAY_BLOCK_STALE_IDEALO_NEG_FRESH_POS_38382020308",
       "category_regression": "PASS_FOREIGN_GERTE_BLOCK_EQUAL_PROVIDER_TIER_MIX_38382020308",
       "evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md",
-      "evidence_sha256": "d21549afb961e0f747d26676fe677724f899044fda0edb93581f356dee2c7c7a"
+      "evidence_sha256": "d21549afb961e0f747d26676fe677724f899044fda0edb93581f356dee2c7c7a",
+      "live_banner_inconsistency": "ACTUAL_LIVE_JSON_6_72_224_PLAN_NO_OUTPUT_WHILE_ELIGIBLE_MANDATORY_BANNER_972835",
+      "real_ebay_heartbeat": "LIVE_SERVER_DISABLED_20261012_AND_20261013_FIVE_GITHUB_RUNS_SOURCE_GATE_INDEPENDENT",
+      "actual_672224_672226_source_readback": "OPEN_ZIP_INDEXED_RAW_BYTES_UNAVAILABLE",
+      "original_live_data_evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_real_live_test_readback_provider_heartbeat.md",
+      "original_live_data_evidence_sha256": "0aaa922306dfebfb44cebf4dc94d9c5202085fd70b778929708f2ff14164943c"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -2748,7 +2753,9 @@
     "old_plan_standby_rootfix": "EXISTING_PLAN_META_ONE_TIME_ONLY",
     "article_generic_verified_fallback": "CODE_CANDIDATE_UNRELEASED",
     "local_gate": "SCOPED_GREEN_38382020308_BASE59_PLUS_AFF065_TARGETED",
-    "remaining_single_next_blocker": "ACTUAL_PROVIDER_ROWS_LIVE_TEST_SOURCE_RECONCILIATION",
-    "local_evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md"
+    "remaining_single_next_blocker": "LIVE_NO_OUTPUT_WITH_DIRECT_MANDATORY_BANNER_972835_ORIGINAL_6_72_224_SOURCE_AND_PROVIDER_READBACK",
+    "local_evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md",
+    "live_ebay_heartbeat": "DISABLED_AT_2026_10_13_08_27_UTC",
+    "first_failed_live_evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_real_live_test_readback_provider_heartbeat.md"
   }
 }
