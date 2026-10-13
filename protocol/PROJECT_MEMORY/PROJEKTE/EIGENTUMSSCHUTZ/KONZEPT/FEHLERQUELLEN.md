@@ -9,6 +9,9 @@ Status: **EDITORIAL-VORPRÜFUNG ERLEDIGT, SEO-SERP-FREIGABE OFFEN**. Für 144 R3
 
 V5-Arbeitsfassung: `R3_V5_144_KATEGORIEN_432_IDEEN_EDITORIAL_FACHPLAN_20261013.md`. Trotz 14 redaktionellen Titelpräzisierungen und 0 exakten Wiederholungen **bleibt echte organische Suchintent-/Google-SERP-Überschneidung offen**. Quelle für verbindlichen Status und NEXT ACTION: `CURRENT_STATE.md`.
 
+
+Aktuelle V6-Gegenprüfung vom 13.10.2026: 144 neue Kategorien mit 432 konkreten Artikeltiteln, 0 exakte Titelduplikate, 155 automatisch markierte lexikalische Paare (Schwelle 0,29), davon 3 ab Score 0,50. Koax-/Satellitenschutz war tatsächlich in Datenleitungen und Antennen doppelt vorgesehen, **in V6 auf nur Antennen-Owner korrigiert**. 14 konkrete fachliche Paargrenzen sowie alle 10 auffälligen neuen/bisherigen Kategoriebezeichnungs-Nähen wurden redaktionell eingeordnet. 19 Umhängungen: 9 Alt→Alt, 10 Alt→Neu, noch nicht ausgeführt. **V6 redaktionell verbessert, organische SEO-Kannibalisierungsfreiheit weiterhin NICHT NACHGEWIESEN.** Maßgeblich: `R3_V6_144_KATEGORIEN_432_IDEEN_OWNER_BEREINIGT_20261013.md`; nur `CURRENT_STATE.md` ist aktuelle Zustandsautorität.
+
 ## HB-CONCEPT-003 – Beleggrenze für Live
 Status: **OFFEN**. R3 weiterhin ausdrücklich nichtimportierbarer Konzeptentwurf, trotz Struktur- und Redaktionstiteltests. Keine neuen WordPress-Kategorien, keine neue veröffentlichte URL. R2 weiter maßgeblich für WordPress.
 
