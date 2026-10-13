@@ -505,7 +505,7 @@
 **Kleine Betriebe & Vereine**
 
 - **Betriebsorganisation & Fluchtwege → Fluchtwege in kleinen Läden**
-  - Fluchtweg in kleinem Ladenlokal freihalten
+  - Kunden- und Lieferwege im kleinen Laden so organisieren, dass der Fluchtweg frei bleibt
   - Zweit-Ausgang für kleines Geschäft fachlich beurteilen lassen
   - Fluchtwegkennzeichnung in inhabergeführtem Laden abstimmen
 
@@ -895,7 +895,7 @@ Die bereits ermittelte R3-Zeichenähnlichkeitsliste (Kategorie gegen bestehende 
 ## V8: Zusätzliche Vollvergleichsprüfung mit den tatsächlichen R2-Artikelideen
 Stand: 13.10.2026. **NICHT zur WordPress-Übernahme freigegeben.**
 
-Unter Nutzung des echten R2-Originalprofils (704 Artikelideen) und sämtlicher 432 V7-Kandidatenartikel wurden **304.128 Neu-Alt-Titelpaare** auf lexikalische Nähe geprüft. Vier neue Artikelvorschläge wurden danach auf eigenständige Aufgaben präzisiert:
+Unter Nutzung des echten R2-Originalprofils (704 Artikelideen) und sämtlicher 432 V7-Kandidatenartikel wurden **304.128 Neu-Alt-Titelpaare** auf lexikalische Nähe geprüft. Fünf neue Artikelvorschläge wurden danach auf eigenständige Aufgaben präzisiert:
 
 | Kategoriekandidat | Zurückgewiesene Formulierung | V8-Fassung – eindeutigerer Schwerpunkt |
 |---|---|---|
@@ -903,21 +903,23 @@ Unter Nutzung des echten R2-Originalprofils (704 Artikelideen) und sämtlicher 4
 | Alarmübertragungswege & Standards | Übertragungsweg bei Routerstörung absichern | Zustellung und Quittierung einer Alarmmeldung über IP und Mobilfunk testen |
 | Sicherung ausfahrbarer Markisen | Markise vor Sturmwarnung rechtzeitig einfahren | Manuelle Einfahrfunktion der Markise bei ausgefallenem Windwächter prüfen |
 | Ladeplätze für Werkzeugakkus | Ladeplatz für mehrere Werkzeugakkus brandsicher gestalten | Ladehalterungen für Werkzeugakkus mit ausreichender Wärmeabfuhr anordnen |
+| Fluchtwege in kleinen Läden | Fluchtweg in kleinem Ladenlokal freihalten | Kunden- und Lieferwege im kleinen Laden so organisieren, dass der Fluchtweg frei bleibt |
 
-**Nach erneuter V8-Lokalkontrolle:** sechs Welten, 31 Bereiche, 93 Unterbereiche, 285 Blätter (=141 bisherige unverändert +144 Kandidaten), 223/223 bestehende CORE-ID-/Name-/Elternpaare identisch, **704+432 Artikelideen, null exakte Titeldoppelungen**, 19 nicht ausgeführte Artikelumhängungen (Quellen behalten jeweils mindestens drei Artikelansätze). Rein textbasierte Risikosignale ab Ähnlichkeit 0,48: **18 Neu-Alt** (je neuer Titel nur sein ähnlichster alter Titel) und **2 Neu-Neu-Paare aus verschiedenen Kategorien**; nicht automatisch Dubletten. Der Test ist **kein** Google-SEO-/SERP-Freigabenachweis. Voller 432-Zeilen-Quervergleich in lokaler Datei `HAB_R3_V8_ALLE_432_NEU_GEGEN_704_ALT_20261013.csv`.
+**Nach erneuter V8-Lokalkontrolle:** sechs Welten, 31 Bereiche, 93 Unterbereiche, 285 Blätter (=141 bisherige unverändert +144 Kandidaten), 223/223 bestehende CORE-ID-/Name-/Elternpaare identisch, **704+432 Artikelideen, null exakte Titeldoppelungen**, 19 nicht ausgeführte Artikelumhängungen (Quellen behalten jeweils mindestens drei Artikelansätze). Rein textbasierte Risikosignale ab Ähnlichkeit 0,48: **17 Neu-Alt** (je neuer Titel nur sein ähnlichster alter Titel) und **2 Neu-Neu-Paare aus verschiedenen Kategorien**; nicht automatisch Dubletten. Der Test ist **kein** Google-SEO-/SERP-Freigabenachweis. Voller 432-Zeilen-Quervergleich in lokaler Datei `HAB_R3_V8_ALLE_432_NEU_GEGEN_704_ALT_20261013.csv`.
 
-**Vier redaktionelle Zuständigkeitsregeln:**
+**Fünf redaktionelle Zuständigkeitsregeln:**
 - Allgemeine Grenzen des Löschversuchs besitzt R2 `Feuerlöscher & Löschmittel`. R3-Fahrzeugthema betrifft besondere Vibrationen/Temperaturbedingungen für das tatsächlich verbaute Gerät.
 - Router-/Stromausfall und Ersatzweg besitzt R2 `Alarmanlage bei Stromausfall`; R3 behandelt technische Zustellung/Quittierung von Alarmmeldungen.
 - Allgemeines Markisensichern vor Sturm besitzt R2 `Außenanlagen bei Sturm`; R3 behandelt manuelle Bedienbarkeit nach Ausfall des Windsensors.
 - Allgemeine Werkzeugakku-Lagerung gehört R2 `Garage & private Werkstatt`; R3 behandelt Mehrfach-Ladehalterungen/thermische Anordnung.
+- Allgemeine Vereinsheim-Fluchtwege gehören R2 `Kleines Vereinsheim & Brandschutz`; R3 betrachtet die spezifische Kollision zwischen Warenanlieferung, Kundenverkehr und Fluchtwegen in kleinen Läden.
  
 **Fachliche Quellen (nur Plausibilität, keine organische SERP-Messung):**
 - promobil (2025), Fahrzeug-Feuerlöscher, Baugrößen/Temperaturbereiche: https://www.promobil.de/zubehoer/diese-feuerloescher-braucht-jedes-wohnmobil/
 - KomNet NRW (2024), temperaturabhängige Gerätegrenzen: https://www.komnet.nrw.de/_sitetools/dialog/44013
 - Alarmanlagen-/Router-Stromausfallkontext: https://accsicherheitstechnik.de/alarmanlage-stromausfall-sicherheit-im-fokus/
 
-**Zwei stärkste Neu-Neu-Ähnlichkeitssignale**: Werkstattmotor vs. Sicherungskasten (gleiche Erwärmungsphrase, *unterschiedliche elektrische Betriebsmittel*); beschädigte Gemeinschaftseinrichtungen vs. beschädigte Kleingarten-Sitzplätze (*andere Objekte und Zuständigkeiten*). Beide sind redaktionell unterscheidbar, bedürfen aber ggf. organischer Suchintentprüfung. **18 Neu-Alt-Signale bleiben explizit unter redaktioneller Beobachtung.**
+**Zwei stärkste Neu-Neu-Ähnlichkeitssignale**: Werkstattmotor vs. Sicherungskasten (gleiche Erwärmungsphrase, *unterschiedliche elektrische Betriebsmittel*); beschädigte Gemeinschaftseinrichtungen vs. beschädigte Kleingarten-Sitzplätze (*andere Objekte und Zuständigkeiten*). Beide sind redaktionell unterscheidbar, bedürfen aber ggf. organischer Suchintentprüfung. **17 Neu-Alt-Signale bleiben explizit unter redaktioneller Beobachtung.**
 
 **Unverändert:** 144 neue organische Keyword-/SERP-Owner sind nicht ausreichend nachgewiesen, daher keine Indexierung oder Kategorieanlage. Keine zusätzlichen bezahlten Providerabfragen, keine WordPress-Schreibvorgänge.
 
