@@ -1,5 +1,8 @@
 # R3/V8 – Öffentliche organische Webrecherche: Blitz/Überspannung (13.10.2026)
 
+> **NACHPRÜFUNG 13.10.2026 – BELEGKORREKTUR:** Die beiden hier genannten DEHN-Fach-URLs leiten auf die DEHN-Startseite um; sie belegen die jeweiligen Fachbehauptungen **nicht**. Dafür nun tatsächlich überprüfte VDE- und CITEL-Quellen im `R3_V8_PRIORITAET_15_QUELLENAUDIT_20261013.md` verzeichnet. Die drei V8-Außenkabel-Titel behandeln Garten-/Garagenleitungen, nicht Outdoor-Ethernet: der vermutete Duplikatartikel ist **nicht bestätigt**. **0 Google-SERP-Freigaben.**
+
+
 **Kein Google-SERP-PASS. Keine Suchvolumina. Nicht importieren.** Dokumentiert sind einzelne öffentlich gefundene Suchergebnisse, nicht reproduzierbare vollständige Google-Top-10-Reihen.
 
 | Exakte Suchformulierung (ohne site-Filter als Zielphrase) | V8-Kategorie | Beobachtete öffentliche Seite | Redaktionelle Owner-Grenze | SEO-SERPs |
