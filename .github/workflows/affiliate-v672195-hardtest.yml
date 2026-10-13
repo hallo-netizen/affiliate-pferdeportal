@@ -361,6 +361,22 @@ jobs:
           if(strpos($html,'ppar-article-product-block')===false)throw new RuntimeException('FAIL AFF065_VALID_PRODUCT_MISSING');
           if(strpos($html,'ppar-article-inline-banner-2')!==false)throw new RuntimeException('FAIL AFF065_SECOND_BANNER_WITH_VALID_PRODUCTS');
           echo "PASS AFF065_PRODUCT_FIRST_NO_SECOND_BANNER\n";
+          // Unit-level rank check: existing WordPress methods, no invented provider PASS.
+          $rankContext=['post_id'=>$post,'post_type'=>'post','slot_type'=>'post_bottom_products',
+              'primary_slug'=>'pferdewissen','slugs'=>['pferdewissen'],
+              'term_ids'=>[],'ancestor_ids'=>[],'haystack'=>'Eine Redensart ohne Produktempfehlung'];
+          $verifiedHorse=['id'=>'aff065-ranking-verified','creative_type'=>'product','network'=>'ebay',
+              'source'=>'output_object_v4','quality_manual_status'=>'auto_verified','active'=>1,
+              'assignment_mode'=>'page_tree','page_id'=>0,'automation_target_keys'=>['page:reithelme'],
+              'placements'=>['post_bottom_products'],'title'=>'Gepruefter Reithelm',
+              'image_url'=>'https://example.org/helm.png','url'=>'https://example.org/helm'];
+          $rank=$call('campaign_match_rank',$verifiedHorse,$rankContext);
+          if(!is_array($rank)||(int)($rank['specificity']??0)<200)throw new RuntimeException('FAIL AFF065_VERIFIED_HORSE_ARTICLE_LAST_TIER_MISSING');
+          $unverified=$verifiedHorse; $unverified['network']='manual'; $unverified['source']='manual';
+          if($call('campaign_match_rank',$unverified,$rankContext)!==null)throw new RuntimeException('FAIL AFF065_UNVERIFIED_HORSE_LAST_TIER_LEAK');
+          $categoryContext=$rankContext;$categoryContext['post_type']='page';$categoryContext['slot_type']='category_product_1';
+          if($call('campaign_match_rank',$verifiedHorse,$categoryContext)!==null)throw new RuntimeException('FAIL AFF065_UNRELATED_CATEGORY_FALLBACK_LEAK');
+          echo "PASS AFF065_VERIFIED_HORSE_LAST_TIER_WITH_NEGATIVES\n";
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
