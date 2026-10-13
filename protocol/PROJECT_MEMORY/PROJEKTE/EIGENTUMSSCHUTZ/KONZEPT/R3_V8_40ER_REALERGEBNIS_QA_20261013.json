@@ -1,0 +1,336 @@
+{
+  "contract": "HAB_R3_REAL_40_PAIRS_QA_20261013",
+  "source_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+  "source_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+  "provider_contract": "HB_R3_SERP_PAID_ONCE_RESULT_V1",
+  "plan_sha256": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+  "run_status": "COMPLETE",
+  "times": {
+    "created_utc": "2026-10-13T17:02:49+00:00",
+    "finished_utc": "2026-10-13T17:12:33+00:00"
+  },
+  "counts": {
+    "pairs": 40,
+    "keywords": 80,
+    "provider_20000": 69,
+    "provider_40101": 11,
+    "complete_pairs": 29,
+    "incomplete_pairs": 11,
+    "exact_kw_duplicates": 0,
+    "real_url_overlaps_gt_zero": 3,
+    "false_youtube_url_overlaps": 4
+  },
+  "cost_usd": 0.16,
+  "reported_wp_category_writes": 0,
+  "reported_wp_article_writes": 0,
+  "corrected_youtube_false_matches": [
+    "Private Objektkontrollen",
+    "Schlüsselmanagement im Kleingewerbe",
+    "Heizungs-Sicherheitsabschaltungen",
+    "Störungen an Heizungssteuerungen"
+  ],
+  "corrected_true_shared_url_counts": {
+    "Carport-Fahrzeugschutz": 3,
+    "Garteninventar & Outdoor-Möbel": 2,
+    "Potentialausgleich im Wohnhaus": 1
+  },
+  "pair_outcomes": [
+    {
+      "category": "Fernalarm an Vertrauenspersonen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Wasserzähler & Absperrkontrolle",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Kleingarten-Gemeinschaftsflächen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Abluftanlagen & Unterdruck",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Kleingartenlauben bei Hagel",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Paket- & Lieferstationen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Private Grill- & Rastbereiche",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Sanitäreinrichtungen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Störungen an Schwimmerschaltern",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Überhitzung im Dachgeschoss",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Verkaufsautomaten im Außenraum",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Carport-Fahrzeugschutz",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 3,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Außenboxen & Lagerkisten",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Mobile Aufbauten & Dachboxen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Einsehbarkeit & Sichtachsen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Private Objektkontrollen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": true,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Anwesenheitssimulation",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Schlüsselmanagement im Kleingewerbe",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": true,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Kassen & Bargeld nach Ladenschluss",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Fassadenputz & Oberflächenschäden",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Garteninventar & Outdoor-Möbel",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 2,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Gemeinschaftskeller & Waschräume",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Außenzähler & Messstellen",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Sachbeschädigung an Privatwagen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Sporttore & Spielfeldinventar",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Leitungskorrosion im Haus",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Kellerwände bei Grundwasser",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Außenwasserhähne & Frost",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Gartenbewässerung winterfest machen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Wohnmobil-Dachnähte & Abdichtung",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Wasserpumpen im Camper",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Gasprüfungen im Freizeitfahrzeug",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Steckdosen & Mehrfachverteiler",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Akku-Ladegeräte & Defekte",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Sturmwarnungen verstehen",
+      "provider_result": "ONE_PROVIDER_TASK_40101_PAIR_INCOMPLETE",
+      "real_shared_urls": null,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Potentialausgleich im Wohnhaus",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 1,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Heizungs-Sicherheitsabschaltungen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": true,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "SIM-Karten für Alarmmelder",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Störungen an Heizungssteuerungen",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": true,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    },
+    {
+      "category": "Alarmübertragungswege & Standards",
+      "provider_result": "TWO_PROVIDER_TASKS_20000",
+      "real_shared_urls": 0,
+      "plugin_overlap_false_positive_due_to_youtube_v_id": false,
+      "category_policy": "EDITORIAL_CONTENT_SCOPE_ONLY_NOT_SERP_GATE"
+    }
+  ],
+  "editorial_risk_notes": {
+    "Carport-Fahrzeugschutz": "Three shared generic auto-theft URLs; carport-specific physical safety scope needed",
+    "Garteninventar & Outdoor-Möbel": "Two shared mixed storm/theft protection URLs; keep vandalism distinct from theft",
+    "Kassen & Bargeld nach Ladenschluss": "SERP often household cash not small-business cash; avoid assuming query fit",
+    "Paket- & Lieferstationen": "SERP largely construction-site/retail security, not small pickup boxes",
+    "Sporttore & Spielfeldinventar": "Original R3 task 40101; R2 results have sports child-protection content irrelevant to equipment vandalism",
+    "Wasserzähler & Absperrkontrolle": "Abrechnungs-/Leerstand broad irrelevant SERPs, other task 40101",
+    "Sanitäreinrichtungen": "School/public WC vandalism results, candidate small club sanitation; editorial intent not disproven",
+    "Private Grill- & Rastbereiche": "Original R3 task failed; existing R2 small club bench article already belongs to R2"
+  },
+  "warnings": [
+    "COMPLETE means run terminated, not all provider tasks succeeded",
+    "Provider 40101 means unavailable result, NOT zero Google hits",
+    "Source PHP strips YouTube /watch?v= video IDs; four false cross-URL overlaps here",
+    "No keyword volume or presence is required for editorially sensible R3 categories per user's explicit decision, dated 2026-10-13",
+    "No additional DataForSEO calls; uploaded file proves 0 category/0 article writes according to export; no independent WordPress live readback"
+  ]
+}
