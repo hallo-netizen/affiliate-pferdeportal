@@ -365,3 +365,23 @@ Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Aktuellen Arbeits
 
 NACHFOLGER:
 keiner belegt.
+
+
+## ZV-HB-KONZEPT-R3-001 – Hab & Bewahr Kategorien 3–10
+
+TITEL: Hab & Bewahr – fachlich unterscheidbare Kategorieebenen
+
+GELTUNGSBEREICH: EIGENTUMSSCHUTZ / KONZEPT / CORE und angrenzende Portalsäulen
+
+STATUS: AKTIV
+
+FASSUNG: 1.0 / 2026-10-13
+
+HAUPTQUELLE: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md`
+
+VERANTWORTLICHER BEREICH: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/`
+
+PASS-BEDINGUNGEN: Nur aus der Hauptquelle lesen; insbesondere 3–10 direkte Kinder, keine SEO-Dopplung, Bestandsschutz, echte SEO-Freigabe, WordPress-Validator-/URL-/Regressionstest vor Release.
+
+AKTUELLER STATUS UND GENAU EINE NEXT ACTION: ausschließlich per `AUTORITAETSPLAN.json` aus `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`, **nicht** aus diesem Register.
+
