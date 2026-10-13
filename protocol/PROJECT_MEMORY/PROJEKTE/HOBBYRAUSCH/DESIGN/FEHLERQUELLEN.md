@@ -145,6 +145,30 @@ TEST:
 Browser-CSS-Render 1440/1200/1100/1024/900/760/600; überall Overflow 0; Stack-Grenze und Text-Reihenfolge geometrisch geprüft.
 
 
+
+## HRD-067 – 1.50.651 live verworfen: Hero und Bildmapping weiterhin fehlerhaft
+STATUS: **OPEN**
+
+LIVE-BEFUND:
+- Hero zu hoch;
+- Hero-Motive teils Detail-Crops statt klarer, weiter gefasster Szene;
+- teils unscharf / hochskaliert;
+- Claim-Unterstrich verrutscht und zu lang;
+- Unterkategoriebilder semantisch falsch und teils doppelt/ähnlich.
+
+Konkrete Live-Beispiele:
+- Genuss → Kakteen;
+- Essbare Pflanzen → Kakteen, teils identisches Motiv;
+- Ameisen & Insekten → Blumen;
+- Papier & Dokumente / Postkarten-Kontext → unpassende Münzen-/Globusmotive.
+
+ROOT CAUSE:
+Bisherige automatische/heuristische Bildzuordnung ist für die inhaltliche Genauigkeit nicht zuverlässig genug. URL-Eindeutigkeit und technische Existenz ersetzen keine echte semantische Motivprüfung.
+
+REGEL:
+Kein neues Bildrelease ohne manuelle semantische Zuordnung aller sichtbaren Hero-/Kindmotive und lokale visuelle Simulation der realen Ausschnitte.
+
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.651 nur für Hero/Responsive. Danach separater offener Block: Unterkategoriekartenbilder.**
+**Hero + komplettes Hub2-Bildmapping lokal neu prüfen und simulieren; danach erst neuer Kandidat.**
 
