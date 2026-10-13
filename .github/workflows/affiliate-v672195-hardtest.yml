@@ -522,11 +522,11 @@ jobs:
               throw new RuntimeException('FAIL AFF065_PUBLIC_QUERY_CONTEXT');
           $frontend=apply_filters('the_content',get_post_field('post_content',$pid));
           echo 'AFF065_PUBLIC_HOOK_DIAG count='.substr_count($frontend,'ppar-article-inline-banner')
-              .' len='.strlen($frontend).' enabled='.($o->is_enabled()?'1':'0')
+              .' len='.strlen($frontend).' enabled='.($call('is_enabled')?'1':'0')
               .' hybrid='.($call('article_hybrid_enabled')?'1':'0')
               .' hook='.did_filter('the_content')
               .' body='.substr(preg_replace('/\\s+/',' ',$frontend),0,900)."\\n";
-          if(substr_count($frontend,'ppar-article-inline-banner')!==1)
+          if(substr_count($frontend,'data-ppar-slot="post_inline_banner"')!==1)
               throw new RuntimeException('FAIL AFF065_PUBLIC_THE_CONTENT_MISSING_OR_DUPLICATE_BANNER');
           $actual=get_post_meta($pid,(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_META'),true);
           if((int)($actual['banner']['campaign_post_id']??0)!==$expected)
