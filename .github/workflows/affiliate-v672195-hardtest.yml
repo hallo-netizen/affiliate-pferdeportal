@@ -434,6 +434,48 @@ jobs:
           if(($mixed[1]['campaign']['network']??'')!=='ebay')
               throw new RuntimeException('FAIL AFF065_EQUAL_RANK_EBAY_IDEALO_MIX_LOST');
           echo "PASS AFF065_CATEGORY_FOREIGN_PRODUCT_BLOCK_AND_PROVIDER_TIE_MIX\n";
+          // REAL 2026-10-12 LIVE CONDITION: zero campaigns explicitly placed
+          // at post_inline_banner; procavallo #972835 had category-only placement.
+          // Original mandatory fallback must not silently require article placement.
+          $crossBanner=$call('save_campaign_record',[
+              'id'=>'aff065-real-live-cross-slot','name'=>'Kategorie-Shopbanner wie Live 972835',
+              'title'=>'Kategorie-Shopbanner wie Live 972835',
+              'active'=>1,'creative_type'=>'banner','network'=>'manual','source'=>'manual',
+              'assignment_mode'=>'fallback','render_mode'=>'image_link',
+              'image_url'=>'https://example.org/category-banner.png',
+              'url'=>'https://example.org/category-partner','dimensions'=>'728x90',
+              'placements'=>['product_after_category_tiles'],'programme_status'=>'active',
+              'priority'=>99,'health_check_enabled'=>false
+          ]);
+          if(is_wp_error($crossBanner)||!$crossBanner)throw new RuntimeException('FAIL AFF065_CROSS_SLOT_FIXTURE_SAVE');
+          $cross=$call('campaign_from_post',get_post($crossBanner));
+          if(!$call('article_plan_campaign_publicly_usable_mandatory_banner',$cross))
+              throw new RuntimeException('FAIL AFF065_LIVE_CROSS_SLOT_BANNER_MANDATORY_GATE');
+          foreach([$banner1,$banner2] as $stop){
+              $oldCampaign=$call('campaign_from_post',get_post($stop));
+              $oldCampaign['active']=false;
+              $saved=$call('save_campaign_record',$oldCampaign,$stop);
+              if(is_wp_error($saved))throw new RuntimeException('FAIL AFF065_CROSS_SLOT_SETUP');
+          }
+          $campaignCache=new ReflectionProperty($o,'campaigns_request_cache');
+          $campaignCache->setAccessible(true);
+          $campaignCache->setValue($o,null);
+          $picked=$call('article_plan_find_mandatory_banner',$post);
+          if((int)($picked['campaign']['post_id']??0)!==$crossBanner)
+              throw new RuntimeException('FAIL AFF065_CROSS_SLOT_NOT_SELECTED_AS_MANDATORY');
+          $stale=$call('article_plan_default');
+          $stale['schema']=(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_SCHEMA');
+          $stale['content_hash']='stale-6-72-224-no-output';
+          $stale['campaign_revision']=$call('article_plan_campaign_revision');
+          $stale['status']='no_output';
+          update_post_meta($post,$meta,$stale);
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$post),$post,false);
+          $rebuilt=get_post_meta($post,$meta,true);
+          if((int)($rebuilt['banner']['campaign_post_id']??0)!==$crossBanner
+              ||!in_array((string)($rebuilt['banner']['status']??''),['ready','pending_anchor'],true)
+              ||strpos($html,'ppar-article-inline-banner')===false)
+              throw new RuntimeException('FAIL AFF065_REAL_LIVE_CATEGORY_ONLY_MANDATORY_REBUILD');
+          echo "PASS AFF065_REAL_LIVE_CATEGORY_ONLY_MANDATORY_REBUILD\n";
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
