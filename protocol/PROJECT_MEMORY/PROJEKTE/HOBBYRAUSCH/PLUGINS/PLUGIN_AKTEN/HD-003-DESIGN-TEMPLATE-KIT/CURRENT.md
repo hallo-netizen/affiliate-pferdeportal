@@ -2,51 +2,45 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-12
-STATUS: **1.50.649 LOCAL HARD PASS / LIVE-PASS OFFEN**
+STAND: 2026-10-13
+STATUS: **1.50.650 LOCAL HARD PASS / LIVE-BILDER OFFEN**
 
 Version:
-**1.50.649**
+**1.50.650**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
 
 SHA-256:
-`a374a3003e5842f2517095e74e178765a31fdf42ae2c5a721027acd79d80975c`
+`b3bf267ccfef1ae5efbdc4efa1df40f586d5a9ae78ee7c865906b04f113ac2d6`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.649_HOBBY_DEPOT_ALL_HUB2_BP_LAYOUT_PFERDE_TEXT_RULES_UNIQUE_PHOTOS_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
 
 ## Scope
-Basis **1.50.645**.
+Nur Hub2-Bildauswahl gegenüber 1.50.649:
+- 65 feste Hero-Mappings auf weiter gefasste vorhandene Szenen;
+- 328 feste Karten-Mappings;
+- thematische statt zufälliger Welt-Pool-Zuordnung;
+- keine doppelten Bilddateien pro Hub2;
+- v150631-Vignetten/Frame-Motive aus aktiver Map ausgeschlossen;
+- B&P-Kartenbilder unverändert;
+- 0 neue Bildassets.
 
-- nur die **Textregeln** aus Pferdeatelier übernommen und separat im Designbüro gespeichert;
-- B&P-Textdarstellung beibehalten: Lead → `Mehr zu <Kategorie> erfahren` → Rest im Fold;
-- kein zweiter `Was du hier findest`-Block;
-- 65 Hub2-Seiten mit B&P-Split-Hero/Brush-Optik;
-- jede vorhandene direkte Unterkategorie mit Foto + kleinem Untertitel;
-- unterschiedliche Fotos pro Hub2-Seite;
-- kein Parent-Hero als Universalbild;
-- Banner im freien Rasterplatz;
-- Produkte → 3 Beiträge → Werbeplatz → Ende.
-
-## Performance / Regression
-- 0 neue Bildassets;
-- 859/859 Assets byteidentisch zu 1.50.645;
-- Header/Nav/Ebene1 unverändert;
-- keine neue Architektur/Taxonomie.
+Text und Aufteilung bleiben 1.50.649 und wurden vom Nutzer live als PASS bestätigt.
 
 ## Lokal
-- 65/65 Hub2-Seiten geprüft;
-- 328/328 vorhandene direkte Kindseiten mit Foto + Untertitel;
-- innerhalb jeder Hub2-Seite keine doppelte Foto-URL;
-- Texte 157–176 Wörter;
-- PHP 52/52 PASS;
+- PHP 55/55 PASS;
 - ZIP PASS;
-- Release-Chain vollständig V150649;
-- Browser 1440/1024/900/760 ohne Overflow;
-- Foto/Slot Δ 0;
-- Hero beim Aufklappen Δ 0×0.
+- Release-Chain V150650 PASS;
+- 65/65 Heroes + 328/328 Karten gemappt;
+- fehlende Assets 0;
+- v150631 aktiv 0;
+- Doppelpfade innerhalb Hub2 0;
+- 191 aktive unterschiedliche Bestandsassets;
+- 600×320 vollständig;
+- Außenkanten-/Frame-Heuristik 0 Verdachtsfälle;
+- Papier & Dokumente + Guss & Formen visuell mit echten Karten-Crops geprüft.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.649 installieren und live Buch & Papier + Guss & Formen + eine weitere Hub2-Seite prüfen.**
+**1.50.650 installieren und live nur die Bildqualität prüfen.**
