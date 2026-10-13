@@ -9,7 +9,7 @@ STATUS: **R3 STRUKTURPLAN 3–10 LOKAL GEPRÜFT / FACH- UND SEO-FREIGABE OFFEN /
 Ausdrückliche Nutzerentscheidung: Jede anklickbare Zwischenebene bietet **mindestens drei, maximal zehn** echte fachliche Alternativen. Keine bloßen Einzel-Klickstufen, keine künstlichen Dopplungen. 6 vorhandene Gefahrenwelten, 31 bestehende Hauptthemenbereiche und 3 Portalsäulen erhalten. Bestehende Keywords, IDs, Slugs und Artikelthemen nicht verlieren oder unbewiesen duplizieren. Möglichst fachlich sinnvoll ausbauen/umsortieren statt löschen. R2 nicht live verändern, bevor der komplette künftige Baum sowohl strukturell als auch inhaltlich/SEO geprüft ist.
 
 ## Aktuelle autoritative Basis
-R2-Profil `HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json`, SHA-256 `76d411aceca62cc39c18c3c7f8190485079eebc3499510affb524c13abe33e4a` [Achtung: das ist die gespeicherte Profil-Prüfsumme des WordPress-Readbacks; Datei-Bytehash im lokalen R3-Audit separat prüfen].
+R2-Profil `HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json`, Datei-Byte-SHA-256 `bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055` (WordPress-Profil-Prüfsumme im R2-Readback: `76d411aceca62cc39c18c3c7f8190485079eebc3499510affb524c13abe33e4a`).
 R2: 360 logische Nodes / 354 physische Zielobjekte, sechs Gefahrenwelten, 31 Themenbereiche, 45 Unterbereiche, 141 CORE-Beitragskategorien, 704 exakt unterschiedliche existierende redaktionelle Artikelideen. 19 Themenbereiche haben nur 1 Unterbereich; 10 haben 2; 2 haben 3. Quelle: frisches R2-Original und WordPress-Readback im Arbeitschat vom 13.10.2026.
 
 ## R3 Arbeitsplanung, **nicht importierbar**
