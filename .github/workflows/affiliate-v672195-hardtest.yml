@@ -377,6 +377,29 @@ jobs:
           $categoryContext=$rankContext;$categoryContext['post_type']='page';$categoryContext['slot_type']='category_product_1';
           if($call('campaign_match_rank',$verifiedHorse,$categoryContext)!==null)throw new RuntimeException('FAIL AFF065_UNRELATED_CATEGORY_FALLBACK_LEAK');
           echo "PASS AFF065_VERIFIED_HORSE_LAST_TIER_WITH_NEGATIVES\n";
+          // Public source gate: publication/auto_verified alone never makes an eBay product deliverable.
+          $fakeEbay=$verifiedHorse;
+          $fakeEbay['id']='aff065-unknown-ebay-source';
+          $fakeEbay['name']='eBay candidate without source';
+          $fakeEbay['programme_status']='active';
+          $fakeEbay['programme_status_source']='existing test fixture';
+          $fakeEbay['programme_status_checked_at']=time();
+          $fakePost=$call('save_campaign_record',$fakeEbay);
+          $fakeCampaign=$call('campaign_from_post',get_post($fakePost));
+          if($call('campaign_source_allows_delivery',$fakeCampaign))throw new RuntimeException('FAIL AFF065_EBAY_WITHOUT_SOURCE_PASSED_GATE');
+          if($call('article_plan_campaign_publicly_usable',$fakeCampaign,'post_bottom_products','product'))throw new RuntimeException('FAIL AFF065_EBAY_WITHOUT_SOURCE_PUBLIC_OUTPUT');
+          echo "PASS AFF065_EBAY_SOURCE_FAIL_CLOSED\n";
+          // idealo 48-hour original import-age rule: negative stale, positive fresh.
+          $idealoKey=(new ReflectionClass($o))->getConstant('OPTION_NETWORK_IDEALO');
+          $idealoProduct=['network'=>'idealo','source'=>'idealo_product_feed_v1',
+              'product_provider'=>'idealo','product_identity_source'=>'gtin',
+              'product_gtins'=>['4006381333931'],'automation_target_keys'=>['page:reithelme'],
+              'placements'=>['post_bottom_products']];
+          update_option($idealoKey,['enabled'=>true,'output_mode'=>'automatic','link_strategy'=>'products','last_import_at'=>time()-499*HOUR_IN_SECONDS],false);
+          if($o->idealo_campaign_publicly_allowed($idealoProduct))throw new RuntimeException('FAIL AFF065_STALE_IDEALO_FEED_PASSED');
+          update_option($idealoKey,['enabled'=>true,'output_mode'=>'automatic','link_strategy'=>'products','last_import_at'=>time()],false);
+          if(!$o->idealo_campaign_publicly_allowed($idealoProduct))throw new RuntimeException('FAIL AFF065_FRESH_IDEALO_FEED_BLOCKED');
+          echo "PASS AFF065_IDEALO_STALE_NEGATIVE_FRESH_POSITIVE\n";
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
