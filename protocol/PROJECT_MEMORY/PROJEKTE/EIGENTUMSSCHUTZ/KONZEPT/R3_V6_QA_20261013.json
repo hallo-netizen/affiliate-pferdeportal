@@ -31,5 +31,26 @@
   "organic_serp_ownership_for_144": "NOT_PROVEN",
   "new_keyword_demand_for_144": "NOT_PROVEN",
   "wordpress_import": "BLOCKED",
-  "notes": "Lexical signals plus editorial boundaries are not Google SERP ownership evidence. Source full 144x3 list: R3_V6_144_KATEGORIEN_432_IDEEN_OWNER_BEREINIGT_20261013.md"
+  "notes": "Lexical signals plus editorial boundaries are not Google SERP ownership evidence. Source full 144x3 list: R3_V6_144_KATEGORIEN_432_IDEEN_OWNER_BEREINIGT_20261013.md",
+  "slug_integrity": {
+    "new_slug_count": 144,
+    "unique_new_slugs": 144,
+    "missing_new_slugs": 0,
+    "collisions_with_original_R2_slugs": 0,
+    "new_labels_exceed_36_chars": 0
+  },
+  "legacy_core_integrity": {
+    "existing_worlds": 6,
+    "existing_areas": 31,
+    "existing_subareas": 45,
+    "existing_leaf_categories": 141,
+    "total_existing_core_nodes": 223,
+    "name_id_parent_mismatches": 0
+  },
+  "negative_suite": {
+    "positive_pass": true,
+    "deliberate_negative_cases": 15,
+    "correct_rejections": 15,
+    "source_file": "R3_V6_POSITIV_NEGATIV_20261013.json"
+  }
 }
