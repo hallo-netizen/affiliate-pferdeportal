@@ -1,0 +1,74 @@
+{
+  "contract": "HAB_R3_SERP_5_PAIRS_REAL_PLUGIN_SOURCE_PREFLIGHT_V1",
+  "date": "2026-10-13",
+  "old_export": "hab-bewahr-r3-serp-20261013-133041-utc.json",
+  "old_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+  "plugin": "HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.18_R3_SERP_20261013.zip",
+  "plugin_sha256": "1f8aa650f71430666daaaa488d1f8ee77d36ccfe9658c2481cdfc1a8f08d5f6b",
+  "plugin_class": "APKW_R3_SERP_Review",
+  "input_contract": "HB_R3_SERP_UPLOAD_V1",
+  "prepared_upload": "R3_SERP_5_PAARE_6_ABGEKUERZTE_SUCHFRAGEN_NICHT_STARTEN_20261013.json",
+  "prepared_local_sha256": "0c1b309856403463ec4d19cece3f7f6fe24ccc70d7342a796f3e72d216125750",
+  "real_validator": {
+    "status": "PASS",
+    "pairs": 5,
+    "keywords": 10,
+    "plan_sha256": "d4364d7bf8c1a5f6aace90e59363cc3433a8d686aa544880be4332b8bcd1f61e",
+    "invalid_variants_rejected": [
+      "wrong_market",
+      "duplicate_keyword",
+      "third_keyword_in_pair"
+    ]
+  },
+  "reuse_test": {
+    "status": "PASS",
+    "source": "private eligible_cache method executed through PHP reflection with prior saved WP run state simulated",
+    "reuse_successful_prior_result_count": 4,
+    "new_provider_keywords_without_valid_cache": 6,
+    "failed_40101_old_rows_never_reused": true,
+    "conditions": "Live WordPress must still contain the prior R3 saved run in its R3 index. No actual live-cache readback available."
+  },
+  "keywords": [
+    {
+      "category": "Grenzüberwachung im Garten",
+      "changed": "bewegungsmelder grundstücksgrenze datenschutz",
+      "reused": "überwachungskamera außen datenschutz"
+    },
+    {
+      "category": "Außenrollläden vor Vandalismus",
+      "changed_1": "rollladen vandalismus schützen",
+      "changed_2": "wärmepumpe vandalismus schutz"
+    },
+    {
+      "category": "Löschmittel im Freizeitfahrzeug",
+      "changed": "feuerlöscher wohnmobil befestigen",
+      "reused": "feuerlöscher wohnmobil brandschutz"
+    },
+    {
+      "category": "Überspannung im Zählerschrank",
+      "changed": "überspannungsschutz zählerschrank",
+      "reused": "blitzschutz haus überspannungsschutz"
+    },
+    {
+      "category": "Antennen & Blitzschutz",
+      "changed": "sat antenne erdung blitzschutz",
+      "reused": "blitzschutz am wohnhaus antenne"
+    }
+  ],
+  "cost": {
+    "paid_provider_calls_executed_by_this_plan": 0,
+    "previous_real_serp_charge_usd": 0.06,
+    "previous_per_task_observed_usd": 0.002,
+    "expected_max_new_tasks": 6,
+    "exact_future_charge_guaranteed": false,
+    "authorization_required": true
+  },
+  "warnings": [
+    "Reworded keywords are new editorial hypotheses, not measured demand or guaranteed DataForSEO results.",
+    "Paid call may again return provider 40101; no automatic retries.",
+    "Real version/remote WP state not directly inspected; only provided original plugin ZIP and user-uploaded run JSON.",
+    "Even all five repaired comparisons do not release all 144 SEO owners."
+  ],
+  "next_user_action": "Only if user explicitly approves further paid DataForSEO calls: upload prepared 5-pair JSON using existing Portal-Kategorien -> R3 SERP-Abgleich, run free R3-Prüfplan kostenlos prüfen first, then opt into paid R3-SERP-Prüfung einmal starten, export resulting JSON. Do not click without approval.",
+  "status": "READY_BUT_NOT_AUTHORIZED"
+}
