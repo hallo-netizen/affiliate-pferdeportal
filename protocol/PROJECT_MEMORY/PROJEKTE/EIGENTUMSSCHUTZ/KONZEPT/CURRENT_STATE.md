@@ -18,6 +18,7 @@ Detaillierte 48 neu vorgeschlagene Unterbereiche mit 144 neuen Kategorienkandida
 Lokal ausgeführte vollständige maschinelle Prüfung:
 6 Welten / 31 Bereiche / 93 Unterbereiche / 285 CORE-Beitragskategorien; **31/31 Bereiche 3–10 direkte Unterbereiche; 93/93 Unterbereiche mindestens 3 Kategorien**; alle Labels maximal 36 Zeichen; keine exakten Dubletten mit 141 bisherigen Kategoriebezeichnungen; keine kollidierenden Plan-Slugs. R2-Daten und alte 704 Artikelideen byteidentisch als Ausgangsbestand beibehalten.
 R3 theoretisch: 552 logische Nodes / 546 physische Zielobjekte, **keine WordPress-Schreibvorgänge und keine API-Kosten**.
+- Reproduzierbare Strukturprüfung: **Positivtest PASS + 8/8 gezielte Negativtests PASS** (Ein-/Zwei-Kind-Zweig, zwei Leaf-Kinder, exakte neue Dublette, Dublette gegen R2, zu langer Name, manipulierte alte ID, fehlender Bereich). Testbeleg im Arbeitschat vom 13.10.2026: `HAB_R3_KONZEPT_POSITIV_NEGATIVTEST_20261013.json`.
 
 ## Strikte Schranken / offene Prüfungen
 - Der rein strukturelle PASS ist **KEIN SEO- oder Publikations-PASS**. Für **144 neue** Kategorien sind mindestens drei unterschiedliche, semantisch abgegrenzte Artikelintents pro Kategorie erst nachzuweisen. Keine Füllartikel oder Scheinunterteilungen.
