@@ -15,9 +15,10 @@ Stand: 2026-10-13. **NICHT als WordPress- oder SEO-Freigabe verstehen.**
 - DIENSTLEISTER (DIRECTORY): 10 bestehende Zwischenknoten; direkte Kindzahl 3–9; **PASS ohne Änderung**.
 
 ## Redaktioneller Vorschlagstest
+- Vier inhaltliche Kategoriebezeichnungen präzisiert (Außenrollläden vor Vandalismus; Motorräder & Roller vor Vandalismus; Spielgeräte vor Vandalismus; Heizungs-Sicherheitsabschaltungen statt weitgehend gleicher Offline-Heizungsüberwachung). Struktur 31/93/285 unverändert; Vorschläge danach erneut geprüft.
 - 144 neue Kategoriekandidaten, je 3 ausgearbeitete redaktionelle Artikelvorschläge = 432 neue Titel.
 - Nach 9 Textkorrekturen: 432/432 exakt verschiedene neue Titel, 0 exakte Titelduplikate gegen 704 originale R2-Themen.
-- 17 lexikalisch ähnliche neue Titel einer konkreten fachlichen Erstprüfung zugeführt, 6 davon ausdrücklich SERP-Intent-Review offen. Ein Lexiktest ist **keine semantische Freigabe**.
+- 16 lexikalisch ähnliche neue Titel einer konkreten fachlichen Erstprüfung zugeführt, 5 davon ausdrücklich SERP-Intent-Review offen. Ein Lexiktest ist **keine semantische Freigabe**.
 - 21/21 alte R2-Owner-Reviews mit vorläufigem fachlichen Scope versehen; 17 konkrete alte Titel zur **Umhängung, nicht Kopie** vorgeschlagen; 1 Keyword-Duplikat nur als Alias vorgesehen.
 - Nach allen 17 theoretischen Umhängungen haben alle beteiligten bisherigen Quellkategorien noch mindestens 3 vorhandene Titel. Original-704 bleiben im R2-Datenbestand unverändert.
 
