@@ -1,0 +1,32 @@
+{
+  "contract": "HAB_R3_V5_EDITORIAL_AUDIT",
+  "status": "STRUCTURE_EDITORIAL_DISTINCTNESS_PREFLIGHT_PASS_SEO_SERP_STILL_NOT_PROVEN",
+  "date": "2026-10-13",
+  "local_candidate_sha256": "e77863a7c13080e316c89a5de8a01c8fd519eae78b717dc335b1dbd1bce34b08",
+  "worlds": 6,
+  "areas": 31,
+  "subareas": 93,
+  "leaf_categories": 285,
+  "new_leaf_candidates": 144,
+  "original_unchanged_leaves": 141,
+  "article_ideas_original": 704,
+  "new_article_ideas": 432,
+  "extra_title_corrections": {
+    "v3": 6,
+    "v4": 2,
+    "v5": 6
+  },
+  "proposed_transfers_noncopy": 19,
+  "all_worlds_three_to_ten": true,
+  "all_areas_three_to_ten": true,
+  "all_subareas_three_to_ten": true,
+  "exact_new_title_duplicates": 0,
+  "old_categories_minimum_articles_post_transfer": 3,
+  "existing_r2_node_ids_untouched": true,
+  "wordpress_writes": 0,
+  "paid_provider_calls": 0,
+  "seo_search_demand_for_new_144": "UNPROVEN",
+  "seo_organic_serp_intent_for_new_144": "UNPROVEN",
+  "release": "NOT_APPROVED",
+  "source_note": "Local checks validate arithmetic and exact-text identity; not semantic or Google SERP independence"
+}
