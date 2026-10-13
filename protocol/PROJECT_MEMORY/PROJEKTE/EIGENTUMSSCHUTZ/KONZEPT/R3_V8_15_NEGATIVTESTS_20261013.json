@@ -1,0 +1,87 @@
+{
+  "contract": "HAB_R3_V8_CONCEPT_REGRESSION_SUITE",
+  "date": "2026-10-13",
+  "positive_pass": true,
+  "negative_variants_tested": 15,
+  "expected_rejections": 15,
+  "cases": [
+    {
+      "scenario": "Area only one child",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "AREA_BRANCH_3_10"
+    },
+    {
+      "scenario": "Area only two children",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "AREA_BRANCH_3_10"
+    },
+    {
+      "scenario": "Subarea only two leaves",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "SUBAREA_BRANCH_3_10"
+    },
+    {
+      "scenario": "World only two areas",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "WORLD_BRANCH_3_10"
+    },
+    {
+      "scenario": "World more than ten areas",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "WORLD_BRANCH_3_10"
+    },
+    {
+      "scenario": "New category too few ideas",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "MIN_ARTICLE_IDEAS"
+    },
+    {
+      "scenario": "Duplicate candidate article",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "DUPLICATE_TITLE"
+    },
+    {
+      "scenario": "Copy original R2 article as new",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "DUPLICATE_TITLE"
+    },
+    {
+      "scenario": "Tampered existing world ID",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "LEGACY_BINDING"
+    },
+    {
+      "scenario": "Tampered existing area name",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "LEGACY_BINDING"
+    },
+    {
+      "scenario": "Tampered existing subarea parent",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "AREA_BRANCH_3_10"
+    },
+    {
+      "scenario": "Category new label >36",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "LABEL_LENGTH"
+    },
+    {
+      "scenario": "Duplicate new category ID",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "DUPLICATE_CANDIDATE_ID"
+    },
+    {
+      "scenario": "Importable format spoofed",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "IMPORT_FORMAT"
+    },
+    {
+      "scenario": "Wrong publication status",
+      "result": "REJECTED_EXPECTED",
+      "first_caught_gate": "UNAUTHORIZED_RELEASE"
+    }
+  ],
+  "scope": "Local Python concept-validator test on V8 candidate; not the unchanged live WordPress plugin and not Google SERP ownership proof.",
+  "local_verifiable_script": "hab_r3_v8_regression.py",
+  "source_v8_sha256": "3f9c377611e25d799907975c4f46d7dfc81fdbd45830640e33d4228e732b80af"
+}
