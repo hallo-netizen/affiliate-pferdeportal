@@ -4056,6 +4056,29 @@ JS;
         if ($this->slot_required_creative_type((string)($context['slot_type'] ?? '')) === 'banner') {
             return array('specificity'=>5,'matches'=>0,'reason'=>'Letzter globaler Banner-Fallback: technisch freigegeben, ohne Themenzwang.');
         }
+
+        // Bestehender Artikel-Produktweg: nur zuletzt, nach allen vorhandenen
+        // Themenstufen, automatisch verifizierte Pferde-Angebote als generische
+        // Produktvorschlaege zulassen. Provider-Quelle, Veto, Health, Frische und
+        // Produktqualitaet werden weiterhin in den bestehenden Gates geprueft.
+        // Niemals fuer Kategorieslots, Exact-Productwissen oder manuelle Quelle.
+        if ($required_creative_type === 'product'
+            && $slot_type === 'post_bottom_products'
+            && $context_post_type === 'post'
+            && !empty($campaign['automation_target_keys'])
+            && sanitize_key((string)($campaign['quality_manual_status'] ?? '')) === 'auto_verified') {
+            $provider = sanitize_key((string)($campaign['network'] ?? ''));
+            $source = sanitize_key((string)($campaign['source'] ?? ''));
+            $verified_ebay = $provider === 'ebay' && $source === 'output_object_v4';
+            $verified_idealo = $provider === 'idealo'
+                && $source === 'idealo_product_feed_v1'
+                && sanitize_key((string)($campaign['product_identity_source'] ?? '')) === 'gtin'
+                && !empty($campaign['product_gtins']);
+            if ($verified_ebay || $verified_idealo) {
+                return array('specificity'=>200,'matches'=>0,
+                    'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Pferdeprodukt; oeffentliche Freigabegates bleiben bindend.');
+            }
+        }
         return null;
     }
     private function slot_required_creative_type($slot_type) {
