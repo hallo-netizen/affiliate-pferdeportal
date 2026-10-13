@@ -39,7 +39,14 @@
     "r3_serp_second_followup_6_new_provider_tasks": 6,
     "r3_serp_second_followup_4_reused_successful_tasks": 4,
     "r3_serp_second_followup_new_paid_cost_usd": 0.012,
-    "r3_serp_two_runs_combined_cost_usd": 0.072
+    "r3_serp_two_runs_combined_cost_usd": 0.072,
+    "r3_serp_third_export": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+    "r3_serp_third_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+    "r3_serp_third_export_plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+    "r3_serp_third_export_paid_cost_usd": 0.04,
+    "r3_serp_third_export_provider_ok": 16,
+    "r3_serp_third_export_provider_40101": 4,
+    "all_three_R3_SERP_exports_paid_total_usd": 0.112
   },
   "policy": {
     "zero_paid_calls_issued": true,
@@ -55,7 +62,8 @@
     "note_20261013_serp": "The user authorized and performed one 30-keyword R3 SERP run in the plugin, not in this research process. COMPLETE means workflow finished. No automatic SEO owner released. Do not repeat 40101 tasks without renewed explicit cost consent.",
     "latest_edit_gate": "READ_ONLY_R2_INTENT_SCOPE_REVIEW_NOT_AN_ORGANIC_SEO_PASS",
     "r2_source_exact": "HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json, revision HB-SECURITY-CATEGORY-OWNER-CORRECTIONS-20261012-R2",
-    "note_serp_20261013_followup": "Second user-initiated paid 5-pair SERP follow-up succeeded: six new successful provider tasks USD 0.012 plus four free reuse; now 15/15 original priority candidate pairs have at least one completed alternative-query comparison. Reworded comparisons are not exact original failed query results. R3 SEO release remains 0/144. No further provider calls by audit."
+    "note_serp_20261013_followup": "Second user-initiated paid 5-pair SERP follow-up succeeded: six new successful provider tasks USD 0.012 plus four free reuse; now 15/15 original priority candidate pairs have at least one completed alternative-query comparison. Reworded comparisons are not exact original failed query results. R3 SEO release remains 0/144. No further provider calls by audit.",
+    "note_serp_20261013_third": "User executed a third, NEW distinct 10-pair R3 SERP run: 16/20 provider task successes, four paid 40101 provider errors; seven complete pairs, three incomplete. All seven true URL overlap counts zero; plugin incorrectly counted one heating match because distinct YouTube video IDs were dropped. SERP intent mismatches make zero overlap inconclusive; no SEO release or new provider queries by this audit."
   },
   "counts": {
     "new_candidate_categories": 144,
@@ -90,7 +98,17 @@
     "r3_r2_nonpriority_no_strong_lexical_signal": 111,
     "first_run_r3_serp_40101_tasks": 6,
     "first_run_r3_serp_incomplete_pairs": 5,
-    "first_run_r3_serp_successful_tasks": 24
+    "first_run_r3_serp_successful_tasks": 24,
+    "latest_r3_serp_nonpriority_pairs_attempted": 10,
+    "latest_r3_serp_nonpriority_both_sides_measured": 7,
+    "latest_r3_serp_nonpriority_incomplete_pairs": 3,
+    "latest_r3_serp_nonpriority_not_attempted": 119,
+    "all_R3_serp_both_sides_measured": 22,
+    "all_R3_serp_incomplete_pairs": 3,
+    "all_R3_serp_not_attempted": 119,
+    "third_R3_serp_40101_tasks": 4,
+    "third_R3_serp_successful_tasks": 16,
+    "third_R3_serp_corrected_real_overlaps": 0
   },
   "old_serp_overlap_for_context": [
     {
@@ -671,7 +689,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -681,7 +699,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "INTENT_MISMATCH_AND_R2_OWNER_RISK",
+        "editorial_note": "Primäre Google-Treffer meist WDVS-/Fassadendämmung ohne gezielte Sachbeschädigung; Gegenfrage Graffiti gehört R2",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1218,7 +1248,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1228,7 +1258,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/40101",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "quality_code": "PROVIDER_FAILED_ONE_SHARED_EDITORIAL_SCOPE",
+        "editorial_note": "Erste SERP Kleingarten-Vandalismus; zweites 40101; R2 besitzt Schrebergarten-Sachschaden-Dokumentation",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1732,7 +1774,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1742,7 +1784,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/40101",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "quality_code": "PROVIDER_FAILED_ONE_INTENT_MISMATCH",
+        "editorial_note": "Erste SERP überwiegend Abrechnung/Mietnebenkosten statt Leerstands-Leckage; zweite 40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -2500,7 +2554,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -2510,7 +2564,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "HIGH_SEMANTIC_CANNIBALIZATION_RISK",
+        "editorial_note": "Beide SERPs behandeln allgemein Kabel-/Elektrobrand; bestehende R2-Grundlagenidee nach R3 verschieben wie bereits im 19er-Plan vorgesehen",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -3207,7 +3273,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3217,7 +3283,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "QUALIFIED_EDITORIAL_DISTINCTION",
+        "editorial_note": "Kommerzielle Antirutschmatten R3 vs Eis-/Winterdienstvorsorge R2",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3288,7 +3366,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3298,7 +3376,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "PRIMARY_SERP_IRRELEVANT",
+        "editorial_note": "Primärkeyword Hofablauf auftauen liefert überwiegend Lebensmittelauftauen; 0 gemeinsame URL bedeutungslos",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3817,7 +3907,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3827,7 +3917,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "QUALIFIED_EDITORIAL_DISTINCTION",
+        "editorial_note": "Nach Stromausfall Lebensmittelsicherheit vs R2 Temperatur-/Stromausfall-Frühwarnung; teils generische SERP-Titel",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -3844,7 +3946,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3861,7 +3963,19 @@
       },
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "PARTIAL_SEMANTIC_OVERLAP",
+        "editorial_note": "Stromnetzwiederkehr R3 vs längere Heizungsstörung R2; zwei unterschiedliche YouTube-v-IDs fälschlich als gleiche URL gezählt",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4170,7 +4284,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4180,7 +4294,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "20000/20000",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "quality_code": "WEAK_R2_COMPARISON",
+        "editorial_note": "Mechanische Wartung R3 vs USV-/Notstromtest R2; zweite SERP vielfach sachfremd",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4420,7 +4546,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4430,7 +4556,19 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+        "task_status_pair": "40101/40101",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "quality_code": "PROVIDER_FAILED_BOTH",
+        "editorial_note": "Zwei 40101: keine Beleg-SERP, kein Null-Treffer, keine Wiederholung",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
