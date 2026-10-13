@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 FINALER BILDAUDIT KOMPLETT / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 FINALER BILDAUDIT KOMPLETT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -21,6 +21,9 @@ Hero-Audit:
 Karten-Audit:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CARD_AUDIT_20261013.md`
 
+Harte Freigabesperre:
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/RELEASE_GATE_20261013.md`
+
 ### Finaler visueller Befund
 - Hero: **65/65 geprüft; 50 PASS; 15 MISSING/ERSETZEN**;
 - Karten: **328/328 geprüft; 46 PASS; 282 MISSING/ERSETZEN**;
@@ -36,6 +39,7 @@ Karten-Audit:
 - fehlende Bilder bleiben im Arbeitsstand sichtbar fehlend;
 - 61/61 PHP-Dateien Syntax PASS;
 - aktive Assets vorhanden und ausreichend groß;
+- Release-Gate aktuell **FAIL** und blockiert absichtlich jedes neue ZIP;
 - noch kein ZIP / kein Release.
 
 ## Eingefroren
@@ -49,4 +53,4 @@ Karten-Audit:
 - 282 Kartenmotive.
 
 ## EXAKT EINE NEXT ACTION
-**Fehlende 15 Hero- und 282 Kartenmotive gezielt fachlich passend ersetzen. Jeden neuen realen Crop visuell prüfen. Danach Gesamtrender Desktop/Tablet/Mobil + Regression; erst dann neuen Kandidaten paketieren.**
+**Fehlende 15 Hero- und 282 Kartenmotive gezielt fachlich passend ersetzen. Jeden neuen realen Crop visuell prüfen. Danach Gesamtrender Desktop/Tablet/Mobil + Regression; erst bei Release-Gate PASS neuen Kandidaten paketieren.**
