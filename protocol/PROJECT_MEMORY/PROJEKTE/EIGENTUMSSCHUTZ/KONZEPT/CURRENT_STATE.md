@@ -12,12 +12,13 @@ STATUS: **LIVE R3/V8 PREFLIGHT PASS 6/31/93/285/1136 UND 19 MOVES – GEPRÜFTES
 - Die bisherigen Anzeigen `0/144 SEO-Owner organisch freigegeben` bleiben als **historischer Evidenzstatus**, gelten aber ausdrücklich **NICHT mehr** als Verbot der 144 fachlich sinnvollen neuen Kategorien. Bei schwachen Einzelartikeln ggf. Text/Zuordnung verbessern; nicht die gesamte Kategoriestruktur wegen Suchmaschinen-Messwerten zurückhalten. Leere/inhaltlich dürftige Seiten nicht ungeprüft indexieren; das ist eine spätere Veröffentlichungseinstellung, keine Pflicht zu 144 bezahlten Messungen.
 
 ## Verbindlicher Zielvertrag
+- **Maßgeblicher Zielvertrag:** `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md`, Fassung 1.1 (13.10.2026); PASS-Bedingung 4 auf ausdrückliche Nutzerentscheidung berichtigt: SEO-/SERP-Messung nicht obligatorisch.
 - Sechs bestehende Gefahrenwelten, 31 bestehende Themenbereiche und alle drei Portalsäulen CORE/Magazin/Dienstleister erhalten.
 - **Jede anklickbare Zwischenebene: mindestens 3 und maximal 10 fachlich unterschiedliche direkte Unterpunkte.** Keine Einzel- oder Doppel-Klickebene, kein künstliches Keyword-Füllmaterial.
-- Keine doppelten redaktionellen Suchfragen. Die originalen 704 Artikelideen/141 R2-Blätter und sämtliche IDs, Bezeichnungen, Eltern, Slugs und URLs erhalten. Geplante Veränderungen erst nach vollständiger Owner-/SERP-/URL-Prüfung; Artikel **verschieben, nicht kopieren**.
+- Keine doppelten redaktionellen Suchfragen. Die originalen 704 Artikelideen/141 R2-Blätter und sämtliche IDs, Bezeichnungen, Eltern, Slugs und URLs erhalten. Geplante Veränderungen erst nach fachlicher Owner-/Dubletten- und technischer URL-/Live-Schutzprüfung; eine vollständige SERP-/Keywordmessung ist **KEINE Aufnahmevoraussetzung**. Artikel **verschieben, nicht kopieren**.
 - Keine neuen bezahlten DataForSEO-Abfragen ohne Freigabe, keine WordPress-Schreibvorgänge vor R3-Release.
 
-## Live-Wahrheit: ausschließlich WordPress R2
+## Letzter vollständiger WordPress-R2-Readback (historischer Baselinebeleg, vor neuerem R3/V8-Preflight)
 Letzter bestätigter Real-Readback **12.10.2026**: Kategorie-Plugin 1.14.8.17; Revision `HB-SECURITY-CATEGORY-OWNER-CORRECTIONS-20261012-R2+655852190d183cc9`; 354/354 reale WP-Objekte, Status COMPLETE und 0 Fehler. 6 Welten, 31 Bereiche, 45 Unterbereiche und 141 CORE-Blattkategorien, 704 R2-Artikelideen. Maßgebliches Originalprofil `HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json`, SHA256 `bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055`. **R3/V8 wurde NICHT in WordPress übernommen.**
 
 ## EINZIGE aktuelle R3/V8-Fachplanfassung
@@ -154,8 +155,8 @@ Letzter bestätigter Real-Readback **12.10.2026**: Kategorie-Plugin 1.14.8.17; R
 
 ## Erster offener Fehler / Sperre
 **HB-CONCEPT-002 (OPTIONALES SEO-QUALITÄTSSIGNAL, KEINE RELEASE-SPERRE):** Bei 51/144 neuen Kategorien ist mindestens ein SERP-Paar beidseitig messbar, bei 11 unvollständig, 82 noch nicht direkt gemessen. Google-Intent und Volumen sind für fachlich sinnvolle Kategorieaufnahme **KEINE Pflicht** gemäß verbindlicher Nutzerentscheidung, 13.10.2026. Fachliche Doppelungen, zu breite Suchfragen und dünne/leere Artikel vor Sichtbarkeit redaktionell beachten; keine automatische Index-Pflicht und keine weitere bezahlte Recherche.
-**HB-CONCEPT-004:** Für das im aktuellen Nutzerlauf sichtbare Plugin mit R3-SERP-Abgleich (Entwicklungsstand 1.14.8.18) ist die 3–10-Regel **noch nicht als WordPress-Live-Gate** für alle neuen Zwischenebenen abgenommen; der statische Konzept-PASS ersetzt die spätere Plugin-Negativvalidierung nicht. Kein Architekturumbau, kein vorzeitiger R3-Import.
-**URL-/Live-Schutz:** Vor R3-Import echte URL-/Redirect-Folgen, R2-IDs und WordPress-Readback erneut prüfen.
+**HB-CONCEPT-004 (HISTORISCH):** Die bestätigte Regel-Lücke bezog sich auf den alten Plugin-Code 1.14.8.17. Das neuere 1.14.8.19-Paket ist vorhanden und wurde lokal 28/28 geprüft; der **WordPress-R3/V8-Preflight hat laut echtem Nutzer-PASS** alle 6/31/93/285/1136 und 19 Verschiebungen ohne WP-Writes bestätigt. **Kein weiterer 3–10-Prüflauf nötig.** Profilbereitstellung, schreibender Sync und Post-Sync-Readback sind noch nicht nachgewiesen.
+**URL-/Live-Schutz:** Vorbereitender WordPress-Preflight hat die bestehenden R2-Knoten, Live-IDs, Slugs und Eltern laut Nutzer-PASS bereits geprüft. **Noch offen:** Bereitstellung, späterer schreibender Sync und Post-Sync-Readback/Frontend-/Redirect-/Rollback-Nachweis. Diese Nachweise erst in ihrer tatsächlichen Ablaufstufe erheben, nicht die bestandene kostenfreie Vorprüfung wiederholen.
 
 ## EXAKT EINE NEXT ACTION
 **Im WordPress-Admin zurück zu `Portal-Kategorien → R3/V8 Zielprofil` gehen und die vom echten PASS-Bildschirm ausdrücklich vorgegebene Schaltfläche `Geprüftes R3-Profil bereitstellen` einmal anklicken.** Anschließend die tatsächliche Bereitstellungs-/Folgemeldung festhalten, bevor ein schreibender R3/V8-Sync gestartet wird. Live-Preflight-PASS bestätigt: 6 Welten, 31 Bereiche, 93 Unterbereiche, 285 Kategorien, 1.136 Artikelideen, 19 Verschiebungen genau einmal, R2-Knoten und Live-IDs/Slugs/Eltern geprüft, 0 WP-Writes. Erfolgreiche Bereitstellung oder Synchronisierung noch NICHT nachgewiesen. Keine SEO-/DataForSEO-Prüfungen, keine Neuinstallation und keine weitere Forschung.
