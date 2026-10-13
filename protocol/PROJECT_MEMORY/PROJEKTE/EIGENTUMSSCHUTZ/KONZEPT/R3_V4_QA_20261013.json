@@ -1,0 +1,46 @@
+{
+  "contract": "HAB_R3_V4_CONCEPT_STRUCTURAL_EDITORIAL_AUDIT",
+  "status": "STRUCTURE_AND_EXACT_TEXT_DEDUP_PASS_SEMANTIC_SEO_NOT_PROVEN",
+  "generated_date": "2026-10-13",
+  "source_profile_sha256": "bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055",
+  "candidate_v4_json_sha256": "9e96eb287c02452b427a70f71783b107a2fe7e83ec2d14d83819ab51d3a8c1b4",
+  "summary": {
+    "hazard_worlds": 6,
+    "existing_topic_areas": 31,
+    "subareas_total": 93,
+    "new_subareas": 48,
+    "leaf_categories_total": 285,
+    "existing_leaves": 141,
+    "new_leaves_not_seo_approved": 144,
+    "original_article_intents": 704,
+    "new_article_title_proposals": 432,
+    "proposed_noncopy_transfers": 17,
+    "editorial_title_rewordings_since_v2": 8
+  },
+  "local_checks": {
+    "min_direct_children": 3,
+    "max_direct_children": 10,
+    "all_intermediate_pass": true,
+    "exact_new_new_title_duplicates": 0,
+    "exact_new_old_title_duplicates": 0,
+    "original_ids_unchanged": true,
+    "source_categories_keep_min_three_titles_if_transfers": true
+  },
+  "external_evidence": {
+    "keyword_overview_requested": 282,
+    "provider_returned": 128,
+    "unreturned_unknown": 154,
+    "old_serp_pairs_total": 20,
+    "old_serp_pairs_measured": 16,
+    "old_serp_pairs_missing": 4,
+    "new_r3_serp_full_validation": false
+  },
+  "remaining_gates": {
+    "new_intents_serp_owner_proven": false,
+    "no_competing_canonical_content_owner_not_yet_proven": true,
+    "live_plugin_enforces_three_to_ten": false,
+    "wordpress_r3_import_allowed": false
+  },
+  "provider_calls_added": 0,
+  "wordpress_writes_added": 0
+}
