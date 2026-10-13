@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.8 / 2026-10-12
+FASSUNG: 3.9 / 2026-10-13
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -74,6 +74,11 @@ Kein zusätzlicher zweiter Erklärungstext unterhalb des Aufklappers.
 - kein Rückfall auf die frühere Icon-Wüste;
 - Buch & Papier behält seine fünf akzeptierten Motive;
 - bei allen anderen Hub2-Seiten müssen die Fotos innerhalb derselben Seite unterschiedlich sein;
+- Bilder müssen **inhaltlich zur konkreten Unterkategorie passen**; kein beliebiges Welt-Pool-Bild nur zum Füllen eines Slots;
+- Bildwirkung: **klare, einfache Szene, Hauptmotiv sofort erkennbar, keine überfüllte Detailansicht und kein unnötiger Lupen-/Makroeindruck**;
+- Hero-Motive sollen eine **weiter gefasste Szenerie** zeigen; nicht nur einen angeschnittenen Detailgegenstand;
+- eingebrannte weiße Rahmen, Passepartouts, Vignetten oder künstliche Bild-im-Bild-Ränder sind unzulässig;
+- zufälliger generischer Fallback über beliebige Motive derselben Welt ist für Hub2 nicht zulässig; die Bildbindung muss kontrolliert/deterministisch sein;
 - echtes Featured Image der Zielseite hat Vorrang;
 - wenn keines vorhanden ist, wird ein noch unbenutztes vorhandenes kontrolliertes Foto derselben Hobbywelt verwendet;
 - das Eltern-/Hero-Motiv darf nicht als Universalbild für alle Kindkarten wiederholt werden;
