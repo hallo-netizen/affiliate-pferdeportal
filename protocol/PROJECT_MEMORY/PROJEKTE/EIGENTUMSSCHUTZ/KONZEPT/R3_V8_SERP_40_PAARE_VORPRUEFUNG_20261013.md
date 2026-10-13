@@ -26,4 +26,4 @@
 
 - Neue Bezahlung nur durch aktiven Benutzer: in Portal-Kategorien → R3 SERP-Abgleich das 40er JSON kostenlos prüfen, ausdrücklich Kostenhäkchen setzen und einmaligen Start auslösen. Keine automatische Freigabe oder Providerabfrage durch diese Datei.
 
-- Nach einem technisch vollen Lauf blieben unter den 119 bisher ungemessenen Kandidaten weitere 79 ohne R3-SERP (zusätzlich mögliche Anbieterfehler). Die 141 vorhandenen R2-Blätter, 704 Ideen und 19 nur geplanten Umhängungen bleiben während der Evidenzsuche unangetastet.
+- Nach einem technisch vollen Lauf blieben von den aktuell 119 bisher gar nicht abgefragten Normal-Kandidaten **82 ohne direkte R3-SERP**: nur 37 der 40 neuen Paare stammen aus den 119 (weitere 3 waren schon partiell abgefragt und werden neu formuliert). Falls einzelne Tasks 40101 liefern, bleiben entsprechend mehr Kandidaten unvollständig. Die 141 vorhandenen R2-Blätter, 704 Ideen und 19 nur geplanten Umhängungen bleiben während der Evidenzsuche unangetastet.
