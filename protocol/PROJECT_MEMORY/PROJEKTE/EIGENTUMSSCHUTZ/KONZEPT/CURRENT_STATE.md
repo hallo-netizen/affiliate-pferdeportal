@@ -1,44 +1,38 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
-
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **R3/V6 STRUKTUR UND REDAKTIONELLE ABGRENZUNG GEPRÜFT / GOOGLE-SERP-NACHWEISE NOCH OFFEN / WORDPRESS R2 UNVERÄNDERT**
+STATUS: **R3/V7 STRUKTUR 3–10 UND REDAKTIONELLE VOLLSTÄNDIGKEIT LOKAL PASS / ORGANISCHE SUCHINTENT-FREIGABE OFFEN / WORDPRESS R2 UNVERÄNDERT**
 
-## Zielvertrag – verbindlich
-- Sechs bestehende Gefahrenwelten und **31 Hauptthemenbereiche** erhalten; drei Portalsäulen CORE, Magazin, Dienstleister bleiben bestehen.
-- **Jede anklickbare Zwischenebene muss 3 bis 10 fachlich sinnvolle unmittelbare Unterpunkte haben.** Keine Klick-Einzelkinder, keine überflüssigen Zwei-Kind-Ebenen.
-- Keine künstlichen Kategorien, keine doppelte redaktionelle Zuständigkeit und keine Artikelduplikate. Alle alten Keywords/Artikel-Intents erhalten und bei Umhängung genau einem Owner zuordnen.
-- Keine WordPress-Schreibvorgänge, ID-/Slug-/URL-Änderungen oder neue bezahlte DataForSEO-Abfragen ohne abgeschlossene Freigabe.
+## Verbindlicher Zielvertrag
+- Alle **6 bestehenden Gefahrenwelten und 31 Themenbereiche** erhalten. CORE, Magazin und Dienstleister unverändert als drei Portalsäulen.
+- Jede anklickbare Zwischenebene bietet **mindestens 3, maximal 10 echte, unterschiedliche direkte Alternativen**. Keine Ein-Kind-/Zwei-Kind-Ebenen, keine künstlichen Doppelungen.
+- Keyword-/Artikelzuständigkeiten eindeutig, 704 vorhandene R2-Artikelideen bewahren; bei nötiger Umsortierung **verschieben, nicht kopieren**.
+- Keine live WordPress-Mutation und keine kostenpflichtige Providerabfrage bis zur vollständigen fachlichen/SEO-/URL-Abnahme.
 
-## Einzige WordPress-Live-Wahrheit: R2
-Zuletzt bestätigter WordPress-Readback vom 12.10.2026: Kategorie-Plugin **1.14.8.17**, R2-Revision `HB-SECURITY-CATEGORY-OWNER-CORRECTIONS-20261012-R2+655852190d183cc9`, 354/354 physische Zielobjekte, Status COMPLETE, 0 Fehler. R2: sechs Welten, 31 Bereiche, 45 Unterbereiche, 141 CORE-Blattkategorien und 704 alte Artikelideen. Maßgebliche Ursprungsdatei `HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json`, SHA256 `bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055`.
-**R3/V6 ist NICHT live, wurde NICHT synchronisiert und ist KEIN Importprofil.**
+## Live-Autorität: unverändert R2
+Letzter bestätigter WordPress-Readback 12.10.2026: Plugin **1.14.8.17**, Revision `HB-SECURITY-CATEGORY-OWNER-CORRECTIONS-20261012-R2+655852190d183cc9`, **354/354 physische WP-Objekte**, `COMPLETE`, null Fehler. 6 Gefahrenwelten, 31 Bereiche, 45 Unterbereiche, 141 alte CORE-Blattkategorien, 704 alte Artikelideen. Ursprungsdatei `HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json` SHA256 `bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055`. R3/V7 wurde **NICHT** live synchronisiert.
 
-## Einziger aktueller V6-Fachentwurf
-- **Vollständiger redaktioneller Plan im GitHub-Büro:** `KONZEPT/R3_V6_144_KATEGORIEN_432_IDEEN_OWNER_BEREINIGT_20261013.md`, Commit `7bbb40b1c44b396490e61b7732ca3001bcf6f9df` (nach finaler Abgrenzung).
-- **Strukturdelta:** `KONZEPT/R3_48_UNTERBEREICHE_KANDIDATEN_20261013.md` (48 neue Unterbereiche, 144 Blattkandidaten).
-- **V6-QA-Datensatz:** `KONZEPT/R3_V6_QA_20261013.json`, lokal wiederholbare Prüfbedingungen und Grenzen. Lokale vollständige Maschinenkopie `HAB_R3_V6_FACHPLAN_NICHT_IMPORTIEREN_20261013.json` mit SHA256 `e7abdcfa9782940776740cf425d9f0db6f69329d33a6269340123189fc7a25bc`. **Diese JSON liegt nur im Chat-Arbeitscontainer, nicht im Campus.** Der Campus enthält die vollständigen 144×3 Artikelideen im obigen Markdown und das Strukturdelta.
-- Ältere V2/V3/V4/V5-Pläne sind **nur Historie**, keine aktuelle zweite Autorität.
+## EINZIGE aktuelle R3/V7-Fachplanfassung
+- **Vollständiger Plan (144 Kategorien, je 3 Artikelideen):** `KONZEPT/R3_V7_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md`, GitHub Commit `810c88deff886a3ed3ab7ef6c01671f35e7fb41f`.
+- **48 Unterbereichs-Kandidaten + 144 Blattzuordnungen:** `KONZEPT/R3_V7_48_UNTERBEREICHE_KANDIDATEN_20261013.md`.
+- **Evidenz-/Rechercheliste aller 144 Kandidaten:** `KONZEPT/R3_V7_SEO_EVIDENZMATRIX_144_20261013.md`.
+- **Lokaler Positiv-/Gegencheck:** `KONZEPT/R3_V7_QA_20261013.json`. Lokales maschinenlesbares NICHT-importierbares JSON `HAB_R3_V7_FACHPLAN_NICHT_IMPORTIEREN_20261013.json`, SHA256 `cf1551f9ced2f8492cdecd7aa656bd781c27350181f2bdc26e70a9ab3ce34bb7`, **nicht in GitHub**; Plan + Delta stehen im Büro. V2–V6 sind reine Historie, nicht aktuelle Planvorgabe.
 
-## V6 – real geprüft
-- 6/6 Welten, 31/31 Themenbereiche **mit 3–10 Unterbereichen**, 93/93 Unterbereiche **mit 3–10 Blattkategorien**, insgesamt 285 CORE-Blätter (= 141 alt und unverändert +144 neue Kandidaten). Auch bestehende Magazin-/Dienstleister-Zweige bleiben strukturell regelkonform.
-- 432 konkrete, genau einem neuen Kategorie-Owner zugeordnete Artikelvorschläge; 704 R2-Titel im Original unverändert; **0 exakt gleiche neue/alte/neue-neue Titel**. **Keine vollständige semantische Google-Doppelungsprüfung!**
-- **Geplanter URL-Slug-Schutz:** 144/144 vorgeschlagene neue Blatt-Slugs vorhanden, alle unterschiedlich, **0 Überschneidungen mit den Original-R2-Slugs**, alle 144 neuen Anzeigenamen innerhalb 36 Zeichen. Diese Prüfung ersetzt **nicht** eine spätere reale WordPress-URL-/Redirect-Probe.
-- 19 fachliche, noch nicht ausgeführte **Umhängungen statt Kopien:** **9 Alt→Alt**, **10 Alt→Neu**. Nach hypothetischer Umhängung behalten alle Quellkategorien >=3 eigene Themen.
-- Neu erkannte reale redaktionelle Doppelbelegung bei **Koax/Satellitenschutz**: Altentwurf behandelte sie in „Datenleitungen & Überspannung“ und „Antennen & Blitzschutz“. V6 korrigiert: **Koax/Sat nur Antennen**, Datenleitungen nur DSL/Glasfaser/LAN/Switch/PoE. 3–10-Regel und 432 eindeutige Titel nach Korrektur weiterhin PASS.
-- Automatisch alle alten/neuen Titel auf lexikalische Nähe geprüft: **155** Paarsignale Score >=0,29, darunter **3** >=0,50; kein automatischer SEO-Beweis. **14 fachliche Ownership-Kanten** sowie alle **10 auffälligen Kategoriebezeichnungs-Nähesituationen** redaktionell eingeordnet; Details im V6-Plan. Fachquellen VDE für Antennen/Telekommunikations-Überspannung, ADAC für Fahrzeugbrand-/Gas sowie Verbraucherzentrale für Steckersolar herangezogen – **keine Google-Top-10-SEO-Freigabe**.
-- Kein WordPress-Schreibvorgang, kein zusätzlicher bezahlter Provideraufruf.
+## V7 – nachweisbar lokaler Prüfstand
+- **31/31** Themenbereiche mit 3–10 direkten Unterbereichen, **93/93** Unterbereiche mit 3–10 direkten Blättern. 6 Welten /31 Bereiche /93 Unterbereiche /285 CORE-Blätter (=141 unveränderte alte +144 Kandidaten).
+- **223/223 alte CORE-Knoten** unveränderte ID, Bezeichnung und direkte Elternzuordnung; **704 alten Titel** im Original unverändert. **432 konkrete neue Titel**, nach aktueller Korrektur **0 exakte Titeldopplungen unter 1.136 Vorschlägen**.
+- **19 vorgeschlagene Umsortierungen bestehender Artikelideen** (9 Alt→Alt, 10 Alt→Neu), keine kopierten Artikel, Quellkategorien behalten jeweils >=3 Ideen. Nicht ausgeführt.
+- **V7-Kernkorrektur:** geplante Winterkategorie `Eiszapfen & Dachkanten` hatte gegenüber altem R2-Blatt `Schnee & Eis am Grundstück` keine ausreichend unterscheidbare eigenständige Rolle; noch **nicht veröffentlichter** neuer Blattkandidat wurde durch `Glatteis an Garagenzufahrten` mit drei eigenen Ideen ersetzt, unter identischer neuer Konzept-ID/Elternstruktur. Vorhandene Kategorien wurden nicht umbenannt.
+- **Fünf V7-Artikelkorrekturen**: Gasinstallationen im Camper (Bautechnik vs Gasprüfung), Laden-Wasserschadentrocknung (betrieblicher Ablauf statt allgemeines Verfahren), Wohnmobil-Löschmittel (beengter Fluchtweg statt allgemeiner Fettbrand), Offline-Smart-Home (konkrete Wasser-/Frost-Szenen statt nochmals allgemeine Cloud-Geräteliste).
+- Alle **144 geplanten Slugs** unterschiedlich und ohne exakte R2-Slug-Kollision; Labels <=36 Zeichen. Diese Planung ersetzt **keine Live-URL-/Redirect-Probe**.
+- **144-kategorienweite lexikalische Gegenprüfung**: je neues Blatt die nächsten alten Themencluster als **automatisches Ähnlichkeitsrisiko** ermittelt (lokale CSV `HAB_R3_V7_SEO_RISIKOMATRIX_144_20261013.csv`). Diese lexikalischen Rankings sind **keine Google-SERP-Daten** und entscheiden nicht allein über SEO-Owner. Bisherige 15 R3/V6-Negativtests bestanden; für V7 lokale Struktur- und Duplikat-PASS erneut separat ausgeführt, keine irreführende Behauptung eines neuen WordPress-Validator-PASS.
+- 0 WordPress-Schreibvorgänge, 0 neue bezahlte DataForSEO-Aufrufe.
 
-## V6-SEO- und Negativtest-Nachtrag (13.10.2026)
-- Vollständige **SEO-Evidenzmatrix aller 144 neuen Kategorien** im Konzeptbüro: `KONZEPT/R3_V6_SEO_EVIDENZMATRIX_144_20261013.md` (Commit `ec87b4dfffaf0785b162adcf586d404d344e37af`). **9 HOCH**, 6 ERHÖHT, 129 NORMAL; diese Einstufung ist Arbeitspriorität, keine Suchvolumen- oder Rankingbehauptung. Jede der 144 Zeilen bleibt SEO-Freigabe OFFEN.
-- **Eigene lokale V6-Regression:** `KONZEPT/R3_V6_POSITIV_NEGATIV_20261013.json` (Commit `14188a2cbb1455a179a57603e91b11fcbafea0c9`). Positivtest über alle 6/31/93/285 Knoten und 144×3 Artikeltitel PASS. **15/15 manipulierte Negativfälle korrekt REJECT**, explizit 1/2-Kinder, >10 Welt-Kinder bei erhaltener Knotenanzahl, 2 Blattkinder, weniger als 3 Artikel, doppelte Titel, alte IDs/Labels beschädigt, zu lange Labels, ID-Duplikat, unerlaubtes Importformat, Quellenkategorie fällt bei Transfer unter 3, sowie **3 Parent-Swap-Tests** (alte Blattkategorie, Unterbereich oder Themenbereich unter falschen Elternknoten verschoben). **223/223 bestehende CORE-Knoten behalten unverändert ihre ID, Bezeichnung und direkte Eltern-ID**.
-- **Begrenzung:** Dieser Regressionstest ist lokal gegen den R3/V6-Zielentwurf und einen separaten Prüfcode durchgeführt. Er ist **kein** Nachweis, dass das unveränderte WordPress-Plugin 1.14.8.17 die neue 3–10-Regel bereits durchsetzt, und kein organischer SEO-PASS. Plugin-Hard-Gate HB-CONCEPT-004 bleibt offen.
-
-## Erster offener Fehler / harte Release-Sperre
-**HB-CONCEPT-002:** Alle 144 neuen Kategorie-Owner benötigen noch organische SERP-/Nachfrage-/Kannibalisierungsprüfung; historische DataForSEO Keyword-Auswertung nur 128 von 282 geliefert, 154 fehlend/UNBEKANNT; historische SERP-Felder 16 von 20 vollständig, vier nicht. Redaktionelle Unterscheidung ist nicht gleich Google-SERP-Unterscheidung. Die 21 alten R2-Owner-Fälle sind nur fachlich vorgeprüft.
-**HB-CONCEPT-004:** Der vorhandene Kategorie-Plugin-Validator 1.14.8.17 erzwingt 3–10 noch nicht auf jeder Zwischenebene. Vor einem R3-Release minimal ergänzen und positiv/negativ nachtesten, keine Architekturänderung.
-**Weitere Sperre:** Bestehende URLs/Slugs dürfen ohne Folgenprüfung und Redirect-Plan nicht verändert werden.
+## Erster offener Fehler / Release-Sperre
+**HB-CONCEPT-002:** 144 neue Kategorie-Intents ohne vollständig nachgewiesenen organischen Keyword-/SERP-Owner. Alte DataForSEO-Keywordrunde: 282 angefragt, 128 Anbieter-Treffer, 154 unbekannt (nicht „Suchvolumen 0“). Altes SERP-Audit: 16 von 20 R2-Paaren vollständig, 4 unvollständig. Kein R3-Kategorien-SEO-PASS allein durch unterschiedliche Namen oder redaktionelle Beispiele.
+**HB-CONCEPT-004:** Kategorie-Plugin 1.14.8.17 erzwingt die neue 3–10-Regel noch nicht in allen anklickbaren Zwischenebenen. Für späteren Release minimalen Validator-Fix mit Negativtests vorbereiten, **nicht die Architektur ändern**.
+**URL-Schutz:** Bestehende IDs, Slugs und Eltern bewahren; vor Release Auswirkungen und WordPress-Readback testen. **R3/V7 NICHT importieren, nicht indexieren.**
 
 ## EXAKT EINE NEXT ACTION
-**R3/V6 Suchintent-/Owner-Abnahme fortsetzen:** alle 144 neuen Kategorie-Owner systematisch mit ihrer bisherigen R2-Zuständigkeit und echten organischen Suchergebnissen abgleichen, zuerst die fachlich besonders nahen Cluster aus V6 (Trocknungsprotokoll Kleinbetrieb, Camper-Löschmittel, Balkonkraftwerk/PV, Heizungs-SMS, Gewächshaus-Frostwarnung, Hausüberspannung/Datenleitungen). Bisherige SERP- und Keyword-Daten nur dort als Evidenz werten, wo die exakten Suchanfragen übereinstimmen; fehlende Daten ausdrücklich unbekannt lassen. Keine kostenpflichtigen Abrufe ohne Freigabe. Erst nach vollständiger sachlicher Abnahme importfähiges R3-Profil plus minimalen 3–10-Validator- und URL-Regressionstest vorbereiten; R2 bis dahin live unverändert.
+**Mit dem aktuellen V7-Plan und der 144-Zeilen-Evidenzmatrix die organischen Suchintent-Owner weiter belegen:** zuerst höchste lexikalische Risikopaare (insbesondere Wohnmobil-Löschmittel ↔ allgemeine Löschmittel, Heizungs-Mobilfunkalarm ↔ Router/Notfallkommunikation, Offline-Szenen ↔ Offline-Sicherheitssysteme, Trocknung kleiner Ladenflächen ↔ allgemeine Trocknung sowie Frost/Glätte). Redaktionelle Owner pro Frage eindeutig halten und Unbekanntes als UNBEKANNT markieren. Bezahlte Provideraufrufe nur nach Nutzerfreigabe, WordPress-R2 unverändert. Erst nach vollständiger SEO-Abnahme minimale Plugin-3–10-Validierung und URL-Folgencheck vor technischem Release durchführen.
