@@ -2668,3 +2668,39 @@ SHA:
 LIVE:
 OFFEN – nur Hero/Responsive. Kartenbilder folgen separat.
 
+---
+
+## PU-20261013-060 – HD-003 1.50.651 / Live-Fail nachgetragen
+
+LIVE-BEFUND:
+1.50.651 ist **verworfen**.
+
+Fehler:
+- Hero zu hoch;
+- Hero-Quellen teils Detail-Crops statt erkennbarer Szene;
+- teils unscharf/hochskaliert;
+- falsche semantische Hero-/Kartenmotive;
+- Claim-Unterstrich verrutscht und zu lang;
+- Kategoriekarten teils doppelt/ähnlich/überfüllt.
+
+Konkrete Beispiele aus dem Live-Readback:
+- Genuss → Kakteen;
+- Essbare Pflanzen → Kakteen / teilweise identisches Motiv;
+- Ameisen & Insekten → Blumen;
+- Papier-/Postkarten-Kontext → unpassende Münzen-/Globusmotive.
+
+ENTSCHEIDUNG:
+- kein neuer Kandidat;
+- Text + Grundaufteilung aus 1.50.650 bleiben eingefroren;
+- 1.50.651-Hero nicht weiter ausrollen;
+- vor neuem ZIP komplette lokale semantische und visuelle Hero-/Bildprüfung.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
+
+SHA:
+`ceed21dbc62fd207b891deb5272351c57f31079e22193804546e2dcf6d8f8427`
+
+STATUS:
+**LIVE FAIL / VERWORFEN.**
+
