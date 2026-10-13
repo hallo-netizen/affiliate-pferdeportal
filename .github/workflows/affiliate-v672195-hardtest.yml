@@ -340,6 +340,14 @@ jobs:
           if(strpos($html,'ppar-article-product-block')!==false)throw new RuntimeException('FAIL AFF065_INVALID_PRODUCT_LEAK');
           if(strpos($html,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF_ERR_065_ARTICLE_BOTTOM_TEST: Ready plan loses every product and suppresses valid replacement banner');
           echo "PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST\n";
+          // Existing saved plan from before this repair: no standby banner had been preplanned.
+          $plan['banner_2']=['status'=>'none','campaign_post_id'=>0,'anchor'=>[]];
+          update_post_meta($post,$meta,$plan);
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$post),$post,true);
+          if(strpos($html,'ppar-article-product-block')!==false)throw new RuntimeException('FAIL AFF065_OLD_PLAN_INVALID_PRODUCT_LEAK');
+          if(strpos($html,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF065_OLD_READY_PLAN_WITHOUT_STANDBY_BANNER');
+          echo "PASS AFF065_OLD_READY_PLAN_WITHOUT_STANDBY_BANNER\n";
+          $plan['banner_2']=['status'=>'ready','campaign_post_id'=>$banner2,'anchor'=>[]];
           $product=$call('save_campaign_record',[
               'id'=>'aff065-product-valid','name'=>'Verified horse product','title'=>'Verified horse product','active'=>1,
               'creative_type'=>'product','network'=>'manual','source'=>'manual','assignment_mode'=>'fallback',
