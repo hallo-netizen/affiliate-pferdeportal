@@ -1,0 +1,47 @@
+{
+  "contract": "HB_R3_SERP_UPLOAD_V1",
+  "location_name": "Germany",
+  "language_code": "de",
+  "pairs": [
+    {
+      "candidate_category": "Grenzüberwachung im Garten",
+      "comparison_label": "R2 Kameras & Datenschutz",
+      "keywords": [
+        "bewegungsmelder grundstücksgrenze datenschutz",
+        "überwachungskamera außen datenschutz"
+      ]
+    },
+    {
+      "candidate_category": "Außenrollläden vor Vandalismus",
+      "comparison_label": "R2 Außentechnik vor Vandalismus",
+      "keywords": [
+        "rollladen vandalismus schützen",
+        "wärmepumpe vandalismus schutz"
+      ]
+    },
+    {
+      "candidate_category": "Löschmittel im Freizeitfahrzeug",
+      "comparison_label": "R2 Rauch, CO & Gas beim Camping",
+      "keywords": [
+        "feuerlöscher wohnmobil befestigen",
+        "feuerlöscher wohnmobil brandschutz"
+      ]
+    },
+    {
+      "candidate_category": "Überspannung im Zählerschrank",
+      "comparison_label": "R2 Blitzschutz am Wohnhaus",
+      "keywords": [
+        "überspannungsschutz zählerschrank",
+        "blitzschutz haus überspannungsschutz"
+      ]
+    },
+    {
+      "candidate_category": "Antennen & Blitzschutz",
+      "comparison_label": "R2 Blitzschutz am Wohnhaus",
+      "keywords": [
+        "sat antenne erdung blitzschutz",
+        "blitzschutz am wohnhaus antenne"
+      ]
+    }
+  ]
+}
