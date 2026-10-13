@@ -15,4 +15,4 @@
 - [Design](DESIGN/START_HERE.md): erste optische Umsetzung, keine Kategorie-/SEO-Strukturänderungen.
 - [Konzept](KONZEPT/START_HERE.md): verbindliche Kategorien-/Keyword-Logik, R3-3-bis-10-Entwurf und fachliche Duplikatkontrolle.
 
-Die vorhandenen inhaltlichen Konzeptentscheidungen bleiben fachliche Vorgabe. Eine separate Konzept-Current im Campus wurde nicht unabhängig verifiziert und wird hier nicht erfunden.
+Die vorhandenen inhaltlichen Konzeptentscheidungen bleiben fachliche Vorgabe. Für den Arbeitsbereich KONZEPT gilt ausschließlich die per `AUTORITAETSPLAN.json` geroutete `KONZEPT/CURRENT_STATE.md` als zuständige aktuelle Fachwahrheit.
