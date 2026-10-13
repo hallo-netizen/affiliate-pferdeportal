@@ -1,0 +1,87 @@
+{
+  "contract": "HB_R3_SERP_UPLOAD_V1",
+  "location_name": "Germany",
+  "language_code": "de",
+  "pairs": [
+    {
+      "candidate_category": "Kühlgeräte nach Netzausfall",
+      "comparison_label": "R2 Kühl- & Gefrieralarm",
+      "keywords": [
+        "lebensmittel gefrierschrank nach stromausfall entsorgen",
+        "gefrierschrank bei stromausfall alarm überwachen"
+      ]
+    },
+    {
+      "candidate_category": "Heizungsneustart nach Stromausfall",
+      "comparison_label": "R2 Heizungsausfall",
+      "keywords": [
+        "heizung nach stromausfall wieder starten",
+        "heizung nach längerer störung in betrieb nehmen"
+      ]
+    },
+    {
+      "candidate_category": "Wartung von Sumpfpumpen",
+      "comparison_label": "R2 Notstrom für Pumpen",
+      "keywords": [
+        "sumpfpumpe wartung reinigen prüfen",
+        "hebeanlage wartungsplan notstromtest"
+      ]
+    },
+    {
+      "candidate_category": "Rutschschutz an Hauseingängen",
+      "comparison_label": "R2 Schnee & Eis am Grundstück",
+      "keywords": [
+        "rutschhemmende matten vereister hauseingang",
+        "eisbildung am hauseingang vorbeugen"
+      ]
+    },
+    {
+      "candidate_category": "Kabelbrände im Wohnbereich",
+      "comparison_label": "R2 Elektrische Küchenbrandgefahren",
+      "keywords": [
+        "kabelbrand wohnung anzeichen",
+        "kabelbrand haushaltsgerät was tun"
+      ]
+    },
+    {
+      "candidate_category": "Fernalarm an Vertrauenspersonen",
+      "comparison_label": "R2 Ferienhaus-Einbruchschutz",
+      "keywords": [
+        "alarm ferienhaus nachbarn benachrichtigen",
+        "ferienhaus alarm aus der ferne erhalten"
+      ]
+    },
+    {
+      "candidate_category": "Wasserzähler & Absperrkontrolle",
+      "comparison_label": "R2 Wasserstopp & Geräteschutz",
+      "keywords": [
+        "wasserzähler leerstand ungewöhnlicher verbrauch",
+        "automatische wasserabschaltung privathaus"
+      ]
+    },
+    {
+      "candidate_category": "Kleingarten-Gemeinschaftsflächen",
+      "comparison_label": "R2 Gartenhaus gegen Vandalismus",
+      "keywords": [
+        "kleingarten gemeinschaftsflächen vandalismus",
+        "schrebergarten vandalismus dokumentieren"
+      ]
+    },
+    {
+      "candidate_category": "Verkleidungen & Außendämmung",
+      "comparison_label": "R2 Graffiti entfernen",
+      "keywords": [
+        "fassadendämmung vor vandalismus schützen",
+        "hausfassade nach graffiti schäden schützen"
+      ]
+    },
+    {
+      "candidate_category": "Gefrorene Außenentwässerung",
+      "comparison_label": "R2 Garagenzufahrt & Hofabläufe",
+      "keywords": [
+        "hofablauf eingefroren auftauen",
+        "hofablauf vor starkregen freihalten"
+      ]
+    }
+  ]
+}
