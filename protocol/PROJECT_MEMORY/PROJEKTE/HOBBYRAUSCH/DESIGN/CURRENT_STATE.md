@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 67/328 KARTEN LOKAL EINGEBAUT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 68/328 KARTEN LOKAL EINGEBAUT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -65,20 +65,21 @@ Audit-Basis:
 - 46 auditbestätigte PASS-Karten fachlich übernommen;
 - 17 echte neue Karten-Ersatzkandidaten aus dem ersten neuen Kartenblock eingebaut;
 - drei redundant erzeugte Quellen Batik, Origami und Lettering werden nicht verwendet, weil die bestehenden Zuordnungen bereits auditbestätigt PASS sind;
-- zusätzlich vier vorhandene neue Quellen nach sichtbarer 200×107-Prüfung fachlich exakt als Karten genutzt:
+- zusätzlich fünf vorhandene neue Quellen nach sichtbarer 200×107-Prüfung fachlich exakt als Karten genutzt:
   - robotik-automation / robotik
   - mechanik-uhren / uhren-reparieren
   - essbare-pflanzen / gemueseanbau
   - ameisen-insekten / ameisenhaltung
-- aktuell **67/328 Karten** im WIP gemappt;
-- **261 Karten** bleiben bewusst ohne Bild;
+  - audio-hifi / plattenspieler-restaurieren
+- aktuell **68/328 Karten** im WIP gemappt;
+- **260 Karten** bleiben bewusst ohne Bild;
 - alle aktiven Kartenassets sind exakt **200×107**.
 
 ### Technische Prüfung des rekonstruierten WIP
 - **61/61 PHP-Dateien Syntax PASS**;
 - Hero-Dateien: **59**, alle exakt 600×220;
 - Kategorievorschauen: **59**, alle exakt 200×107;
-- Karten: **67**, alle exakt 200×107;
+- Karten: **68**, alle exakt 200×107;
 - JSON/Mapping: PASS;
 - kein semantischer Hero-Fallback im aktiven Hub2-Hero-Pfad;
 - kein Featured-Image-Fallback im aktiven Hub2-Kartenpfad;
@@ -93,4 +94,4 @@ Audit-Basis:
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
 ## EXAKT EINE NEXT ACTION
-**Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Parallel nur bereits vorhandene fachlich eindeutige Quellen für die 261 offenen Karten weiterverwenden; kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
+**Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Parallel nur bereits vorhandene fachlich eindeutige Quellen für die 260 offenen Karten weiterverwenden; kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
