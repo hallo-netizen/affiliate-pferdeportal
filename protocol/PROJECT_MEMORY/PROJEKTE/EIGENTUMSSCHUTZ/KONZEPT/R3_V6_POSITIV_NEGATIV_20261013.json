@@ -1,0 +1,81 @@
+{
+  "contract": "HAB_R3_V6_POSITIVE_AND_NEGATIVE_SUITE",
+  "date": "2026-10-13",
+  "input_sha256": "e7abdcfa9782940776740cf425d9f0db6f69329d33a6269340123189fc7a25bc",
+  "original_r2_sha256": "bd1594d7012ae36f787cf9ca2039e657d922e2954f3e097cc3f2b40482d42055",
+  "positive": {
+    "pass": true,
+    "worlds": 6,
+    "areas": 31,
+    "subareas": 93,
+    "core_leaves": 285,
+    "existing_leaves": 141,
+    "new_leaves": 144,
+    "new_article_titles": 432,
+    "noncopy_transfers": 19
+  },
+  "negative_count": 12,
+  "negatives": [
+    {
+      "scenario": "Ein-Kind-Hauptbereich",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "area has fewer than 3 or more than 10 subareas"
+    },
+    {
+      "scenario": "Zwei-Kind-Hauptbereich",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "area has fewer than 3 or more than 10 subareas"
+    },
+    {
+      "scenario": "Nur zwei Blattkategorien",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "subarea has fewer than 3 or more than 10 category leaves"
+    },
+    {
+      "scenario": "Welt mit mehr als zehn Bereichen",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "world has fewer than 3 or more than 10 areas"
+    },
+    {
+      "scenario": "Nur zwei Artikel in neuer Kategorie",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "candidate category has <3 article intents"
+    },
+    {
+      "scenario": "Doppelter neuer Artikel",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "repeated new article intent title"
+    },
+    {
+      "scenario": "Bestehende R2-Kategorie-ID verändert",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "original R2 IDs not fully preserved"
+    },
+    {
+      "scenario": "Bestehende R2-Kategorie umbenannt",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "original category label changed"
+    },
+    {
+      "scenario": "Kandidatenname länger als 36 Zeichen",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "new label over 36 characters"
+    },
+    {
+      "scenario": "Kandidaten-ID dupliziert",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "duplicated new category ID"
+    },
+    {
+      "scenario": "Importprofil ohne Freigabe",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "unexpectedly importable format"
+    },
+    {
+      "scenario": "Quelle mit unter drei Artikeln nach Transfer",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "a transfer leaves fewer than 3 original articles"
+    }
+  ],
+  "note": "Local structural/exact-text test. Not semantic SEO/SERP or live WordPress test. First four negative mutations preserve hierarchy totals to test 3-10 validator directly."
+}
