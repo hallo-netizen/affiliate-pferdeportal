@@ -18,13 +18,15 @@ SHA-256:
 - reale rekonstruierte Arbeitsbasis: verfügbares 1.50.651-ZIP + autoritative 1.50.652/1.50.653-Audits;
 - Hero: **59/65** aktiv/verfügbar, **6 fehlen**;
 - Kategorievorschauen: **59/65**, aus derselben Quelle wie der jeweilige Hero;
-- Karten: **67/328** aktiv/verfügbar, **261 fehlen**;
+- Karten: **71/328** aktiv/verfügbar, **257 fehlen**;
 - alle Heroassets exakt 600×220;
 - alle Vorschau-/Kartenassets exakt 200×107;
 - **61/61 PHP Syntax PASS**;
+- **71/71 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
+- aktiver WIP reproduzierbar auf **59 Heroes / 71 Karten** neu aufbaubar;
 - aktive Hub2-Hero-/Kartenpfade ohne semantische Bildfallbacks;
 - fehlend bleibt fehlend;
 - noch kein neues ZIP.
 
 ## NEXT ACTION
-**6 fehlende Hero-Motive sauber schließen; danach offene Karten blockweise weiterbearbeiten. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
+**6 fehlende Hero-Motive sauber schließen; offene Karten weiter nur blockweise mit fachlich eindeutigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
