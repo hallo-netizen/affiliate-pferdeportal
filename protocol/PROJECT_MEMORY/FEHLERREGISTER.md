@@ -104,3 +104,8 @@ Bereich: HOBBYRAUSCH / DESIGN / HD-003
 Status: AKTIV / aktueller Fehlerstatus ausschließlich aus der autoritativen Fehlerquelle; aktueller Gesamtstatus/NEXT ACTION ausschließlich aus Design-Current  
 Autoritative Fehlerquelle: `PROJEKTE/HOBBYRAUSCH/DESIGN/FEHLERQUELLEN.md`  
 Aktuellen Status/NEXT ACTION ausschließlich aus `PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md` lesen.
+
+## EIGENTUMSSCHUTZ-KONZEPT-R3
+Bereich: EIGENTUMSSCHUTZ / KONZEPT / KATEGORIEN 3–10  
+Status: R3 STRUKTURPLAN LOKAL GEPRÜFT / FACHLICHE UND SEO-DUPLIKATFREIGABE OFFEN  
+Autoritative Fehlerquelle: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md`
