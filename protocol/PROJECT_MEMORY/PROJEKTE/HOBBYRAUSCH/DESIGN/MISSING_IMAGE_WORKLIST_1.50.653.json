@@ -12,8 +12,8 @@
     "werkzeuge-geraete"
   ],
   "card_total": 328,
-  "card_active": 70,
-  "card_missing_count": 258,
+  "card_active": 71,
+  "card_missing_count": 257,
   "authority_note": "Die exakte vollständige Unterkategorienliste wird aus dem aktiven lokalen hub2-image-map.json gegen den vollständigen 1.50.651-Taxonomie-Map-Stand berechnet; keine Fallbacks und kein Auffüllen durch unpassende Motive.",
   "rules": [
     "kein Fallback",
