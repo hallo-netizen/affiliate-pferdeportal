@@ -12,6 +12,13 @@ V5-Arbeitsfassung: `R3_V5_144_KATEGORIEN_432_IDEEN_EDITORIAL_FACHPLAN_20261013.m
 
 Aktuelle V6-Gegenprüfung vom 13.10.2026: 144 neue Kategorien mit 432 konkreten Artikeltiteln, 0 exakte Titelduplikate, 155 automatisch markierte lexikalische Paare (Schwelle 0,29), davon 3 ab Score 0,50. Koax-/Satellitenschutz war tatsächlich in Datenleitungen und Antennen doppelt vorgesehen, **in V6 auf nur Antennen-Owner korrigiert**. 14 konkrete fachliche Paargrenzen sowie alle 10 auffälligen neuen/bisherigen Kategoriebezeichnungs-Nähen wurden redaktionell eingeordnet. 19 Umhängungen: 9 Alt→Alt, 10 Alt→Neu, noch nicht ausgeführt. **V6 redaktionell verbessert, organische SEO-Kannibalisierungsfreiheit weiterhin NICHT NACHGEWIESEN.** Maßgeblich: `R3_V6_144_KATEGORIEN_432_IDEEN_OWNER_BEREINIGT_20261013.md`; nur `CURRENT_STATE.md` ist aktuelle Zustandsautorität.
 
+## HB-CONCEPT-002a – Konkrete V7-Korrekturen wegen semantischer Wiederholung
+Status: **IM V7-KONZEPT KORRIGIERT / SEO-SERP-FREIGABE NOCH OFFEN**.
+- Neuen Blattkandidaten `Eiszapfen & Dachkanten` aufgrund der bestehenden Kategorie `Schnee & Eis am Grundstück` als zu nah erkannt und im Entwurf in `Glatteis an Garagenzufahrten` geändert; drei eigenständige Zufahrts-/Rampen-Artikelvorschläge.
+- Fünf weitere Artikelintents eindeutiger abgegrenzt: Camper-Gasinstallation vs Gasprüfungen; Ladentrocknung vs allgemeines Verfahren; Wohnmobil-Löschmittel vs Fettbrand-Grundregel; Offline-Smart-Home-Automation vs bereits vorhandene Offline-Alarmtechnik (zwei Artikel).
+- Alte 223 CORE-Objekte inklusive Elternzuordnung unverändert, alle 144 neuen Kandidaten weiterhin 3 Artikelentwürfe, Struktur 3–10 PASS, **keine Live-Umsetzung**.
+- **WICHTIG:** redaktionelle Doppelungsvorsorge ist kein gemessener Google-SERP-/Keyword-Nachweis. Status/next action ausschließlich im `CURRENT_STATE.md`; Volltext in `R3_V7_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md`.
+
 ## HB-CONCEPT-003 – Beleggrenze für Live
 Status: **OFFEN**. R3 weiterhin ausdrücklich nichtimportierbarer Konzeptentwurf, trotz Struktur- und Redaktionstiteltests. Keine neuen WordPress-Kategorien, keine neue veröffentlichte URL. R2 weiter maßgeblich für WordPress.
 
