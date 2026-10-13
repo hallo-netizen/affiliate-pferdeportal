@@ -292,6 +292,11 @@ jobs:
           cat >/tmp/wp-site/aff065-bottom.php <<'PHP'
           <?php
           wp_set_current_user(1);
+          // Exact, test-only slot rule from the existing output_slot_matrix; no Template Kit present in CI.
+          add_filter('ppar_affiliate_slot_matrix',static function($rules){
+              $rules['post_inline_banner']=['creative_type'=>'banner','ratio_min'=>5.0,'ratio_max'=>12.0,'min_width'=>600,'min_height'=>60,'upscale_max'=>1.10];
+              return $rules;
+          });
           $o=Pferdeportal_Affiliate_Router::instance();
           $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
           $post=wp_insert_post(['post_type'=>'post','post_status'=>'publish','post_title'=>'AFF 065 article','post_content'=>str_repeat('<p>Ein Pferdetext mit Absatz und Inhalt.</p>',10)],true);
