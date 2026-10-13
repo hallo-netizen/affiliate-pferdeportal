@@ -309,6 +309,9 @@ jobs:
           $banner1=$makeBanner('Banner erster');
           $banner2=$makeBanner('Banner zweiter');
           $direct=$call('article_plan_render_banner_campaign',$post,$banner2,false,2,[$banner1]);
+          echo 'AFF065 banner direct length '.strlen($direct)."\n";
+          echo 'AFF065 banner size '.json_encode($call('article_banner_dimensions',$call('campaign_from_post',get_post($banner2))))."\n";
+          echo 'AFF065 banner geometry '.($call('campaign_matches_contract_slot_rule',$call('campaign_from_post',get_post($banner2)),'post_inline_banner')?'yes':'no')."\n";
           if(strpos($direct,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF065_Fixture: valid second banner failed existing gates');
           $plan=$call('article_plan_default');
           $plan['schema']=(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_SCHEMA');
