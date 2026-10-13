@@ -307,3 +307,17 @@ Für jede Bildfreigabe sind getrennt zu prüfen:
 6. Duplikatfreiheit.
 Ein PASS in Punkt 1 oder 6 darf nie als Gesamt-Bild-PASS ausgegeben werden.
 
+## AF-022 – Hero und Langtext bei mittleren Breiten zu lange gekoppelt
+FEHLER:
+Die Hub2-Darstellung hielt den langen Kategorietext bis zu zu kleinen Bildschirmbreiten im selben zweispaltigen Hero wie das Bild. Dadurch wurde auf Tablet/kleineren Desktopbreiten weder Text noch Bild sauber präsentiert.
+
+FOLGE:
+Der Text wurde schmal und hoch, das Bild daneben wirkte gedrängt; die Gestaltung war abhängig von Textlänge und Bildschirmbreite.
+
+VERMEIDUNGSREGEL:
+Responsive Hero-Komponenten dürfen nur kurze, höhenstabile Inhalte neben einem Bild tragen.
+- Hero: Claim + H1 + kurzer Einstieger;
+- Langtext: eigener Block unterhalb;
+- klarer Breakpoint, bevor die Textspalte unruhig wird;
+- Pflichtsimulation mindestens 1440/1200/1100/1024/900/760/600.
+
