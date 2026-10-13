@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 3.9 / 2026-10-13
+FASSUNG: 4.0 / 2026-10-13
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -46,11 +46,15 @@ FASSUNG: 3.9 / 2026-10-13
 ## Kategorieebene 2 / Hub2
 - Der akzeptierte Buch-&-Papier-Stand **1.50.645** ist die verbindliche **visuelle Vorlage** für alle Hub2-Seiten.
 - Breadcrumb oben.
-- kompakter Split-Hero innerhalb der normalen Body-Breite;
-- links Claim + H1 + Text, rechts das bereits vorhandene Kategorie-Vorschaubild;
-- Hero-Bild läuft weich in Weiß aus und verändert beim Öffnen des Texts seine Größe nicht;
+- Hero-Bereich innerhalb der normalen Body-Breite;
+- **Desktop >1100 px:** links Schreibschrift-Claim + H1 + kurzer direkter Einsteigertext, rechts ein breites Hero-Bild;
+- **Tablet / mittlere Breiten <=1100 px:** Claim + H1 + kurzer Einsteigertext oben, Hero-Bild darunter über die volle Body-Breite;
+- **Mobil:** dieselbe gestapelte Logik, kompakter;
+- der längere Kategorietext steht unter dem Hero: ein echter Textanteil sofort sichtbar, Rest über `Mehr zu <Kategorie> erfahren`;
+- Hero-Bild läuft weich in Weiß aus und wird durch das Öffnen des Langtexts nicht verändert;
 - kein neues separates Hero-Asset erzeugen.
 - über der H1 steht ein kurzer individueller, natürlicher Claim in derselben Schreibschrift-/Brush-Optik.
+- **Hero-Einsteigertext:** kurz, direkt, du-Ansprache, locker/pfiffig, nicht förmlich und themenspezifisch; keine austauschbare Schablone.
 
 ### Textregel
 Verbindliche Quelle:
