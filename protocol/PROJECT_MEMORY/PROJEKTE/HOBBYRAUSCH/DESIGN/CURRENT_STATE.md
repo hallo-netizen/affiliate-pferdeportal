@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDAUDIT KOMPLETT / 15 HERO-ERSATZQUELLEN + 20 KARTEN-ERSATZQUELLEN DAUERHAFT GESICHERT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDAUDIT KOMPLETT / 15 HERO-ERSATZQUELLEN + 20 KARTENQUELLEN GESICHERT, DAVON 17 NETTO NEUE KARTENKANDIDATEN / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -33,11 +33,13 @@ Harte Freigabesperre:
 ### Ersatzfortschritt nach dem Audit
 - **15/15 fehlende Hero-Ersatzquellen neu erstellt und dauerhaft gesichert**;
 - gespeichert unter `/hobby rausch/WIP_1.50.653_WORKING/generated/heroes/`;
-- diese 15 sind noch **KANDIDATEN**, bis der echte 600×220-Crop geprüft und eingebaut ist;
-- **20 Karten-Ersatzquellen neu erstellt und dauerhaft gesichert**;
-- gespeichert unter `/hobby rausch/WIP_1.50.653_WORKING/generated/cards/`;
-- erster Kartenblock umfasst Druck & Fotografie vollständig, Textilgestaltung vollständig, Miniaturen bemalen, Kalligrafie, Lettering sowie Collage, Origami, Paper Quilling und Scrapbooking;
-- diese 20 sind noch **KANDIDATEN**, bis der echte 200×107-Crop geprüft und eingebaut ist.
+- **7 Hero-Quellen liegen bereits praktisch exakt im 600×220-Seitenverhältnis; 8 sind 16:9 und benötigen einen breiten Mittelausschnitt**;
+- alle 15 Hero-Dateien sind groß genug; sie bleiben **KANDIDATEN**, bis Crop und Einbau geprüft sind;
+- **20 Kartenquellen** wurden erstellt und dauerhaft unter `/hobby rausch/WIP_1.50.653_WORKING/generated/cards/` gesichert;
+- davon sind **17 echte neue Ersatzkandidaten**;
+- **Batik, Origami und Lettering waren bereits in den 46 bestätigten PASS-Karten**; diese drei bestehenden PASS-Zuordnungen bleiben unverändert und die zusätzlich erzeugten Quellen werden nicht als Fortschritt gezählt;
+- alle 20 neuen Kartenquellen liegen praktisch exakt im 200×107-Seitenverhältnis und sind groß genug;
+- netto gilt deshalb aktuell: **46 PASS + 17 neue Ersatzkandidaten = 63/328 abgedeckt; 265 Karten noch offen**.
 
 ### WIP-Sicherungen
 - nur bestätigte Bilder aktiv;
@@ -47,7 +49,6 @@ Harte Freigabesperre:
 - Icon-Fallback entfernt;
 - fehlende Bilder bleiben im Arbeitsstand sichtbar fehlend;
 - 61/61 PHP-Dateien Syntax PASS;
-- aktive Assets vorhanden und ausreichend groß;
 - Release-Gate aktuell **FAIL** und blockiert absichtlich jedes neue ZIP;
 - noch kein neues ZIP / kein Release.
 
@@ -58,8 +59,8 @@ Harte Freigabesperre:
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
 ## Fehlbestand / noch nicht freigegeben
-- Hero: **15 Ersatzquellen vorhanden, aber noch Crop-/Einbauprüfung offen**;
-- Karten: **20 Ersatzquellen vorhanden, Crop-/Einbauprüfung offen; 262 weitere Kartenmotive noch zu erstellen**.
+- Hero: **15 Ersatzquellen vorhanden, Crop-/Einbauprüfung offen**;
+- Karten: **17 echte neue Ersatzkandidaten vorhanden; 265 Kartenmotive weiterhin offen**.
 
 ## EXAKT EINE NEXT ACTION
-**Zuerst die 15 bereits gesicherten Hero-Ersatzquellen in den WIP einbauen und jeden echten 600×220-Crop prüfen. Danach die 20 bereits gesicherten Karten-Ersatzquellen als 200×107 prüfen/einbauen. Erst danach die verbleibenden 262 Kartenmotive blockweise erstellen. Kein neues ZIP, solange das Release-Gate FAIL ist.**
+**Zuerst die 15 gesicherten Hero-Ersatzquellen in den WIP einbauen und jeden echten 600×220-Crop prüfen. Danach die 17 echten neuen Kartenkandidaten als 200×107 prüfen/einbauen; die drei redundant erzeugten PASS-Themen Batik, Origami und Lettering nicht ersetzen. Anschließend die verbleibenden 265 Kartenmotive blockweise erstellen. Kein neues ZIP, solange das Release-Gate FAIL ist.**
