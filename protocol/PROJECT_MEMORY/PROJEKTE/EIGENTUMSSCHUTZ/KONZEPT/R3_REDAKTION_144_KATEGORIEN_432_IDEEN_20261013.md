@@ -5,8 +5,9 @@
 - 144 zusätzliche Blattkategorien aus dem unveränderten R3-Strukturentwurf gegen die 141 alten Kategorien und 704 realen R2-Artikelideen abgeglichen.
 - **432 einzeln formulierte Titelvorschläge**, exakt unique innerhalb R3 und gegenüber allen 704 alten Artikeltiteln (keine bloßen Keyword-Platzhalter).
 - 9 nahe/generische Titelformulierungen umgeschrieben und erneut vollständig maschinell geprüft.
-- 17 lexical nahe R3-Artikeltitel einzeln thematisch klassifiziert; 6 davon ausdrücklich für SERP-Intent-Nachweis offengehalten.
+- 16 lexical nahe R3-Artikeltitel einzeln thematisch klassifiziert; 5 davon ausdrücklich für SERP-Intent-Nachweis offengehalten.
 - 6 alte bestehende Artikelideen als **Verschiebe-Kandidaten, nicht Kopien** dokumentiert. Alle betroffenen alten Kategorien behalten nach dem Vorschlag mindestens drei bestehende Titel.
+- **Nachträgliche fachliche Bereinigung:** vier Kandidaten präzisiert, darunter Ersetzung der doppelungsgefährdeten Kategorie „Heizungsüberwachung ohne Internet“ durch „Heizungs-Sicherheitsabschaltungen“. Die vollständige Bestands-Owner-Akte erweitert die ursprünglichen sechs Umhängungen auf **17**; maßgeblich ist `R3_BESTANDSOWNER_21_FACHPRUEFUNG_20261013.md`.
 - Bereits zuvor offene 21 SEO-Owner-Fälle bleiben erhalten; die R2-Artikelideen und WordPress-Struktur wurden nicht verändert.
 
 ## Redaktionelle Schutzregel
@@ -34,7 +35,6 @@ Ein neuer Artikel ist nicht deshalb eigenständig, weil der Titel anders formuli
 - **Kühlgeräte nach Netzausfall** / „Lebensmittel im Gefrierschrank nach Stromausfall beurteilen“ – **DISTINCT_PHASE**; Schadensfolgen nach Netzausfall statt Alarmtechnik. Bisheriger Vergleich: „Gefrierschrank bei Stromausfall überwachen“ (Owner Kühl- & Gefrieralarm).
 - **Heizungsalarme über Mobilfunk** / „Heizungsstörung ohne WLAN aufs Handy melden lassen“ – **SERP_INTENT_OPEN**; Mobilfunkübertragung gegen allgemeine Heizungsstörung abgrenzen. Bisheriger Vergleich: „Heizungsstörung im Winter rechtzeitig melden lassen“ (Owner Heizungsausfall).
 - **Heizungsalarme über Mobilfunk** / „Mobilfunkempfang für Heizungsalarm im Keller überprüfen“ – **DISTINCT_TECHNOLOGY**; Heizungsalarmzustellung statt mobiler Router-Backup. Bisheriger Vergleich: „Mobilfunkempfang für abgelegenes Ferienhaus prüfen“ (Owner Router & Mobilfunk-Backup).
-- **Heizungsüberwachung ohne Internet** / „Lokale Temperatursensoren für netzunabhängigen Heizungsalarm wählen“ – **SERP_INTENT_OPEN**; Offline-Heizungsüberwachung gegen allgemeine Frostwächter abgrenzen. Bisheriger Vergleich: „Heizungsunabhängigen Temperaturalarm für Abwesenheit nutzen“ (Owner Frostwächter & Temperaturen).
 - **Gewächshaus-Temperaturalarme** / „Temperaturwarnung für privates Gewächshaus einrichten“ – **SERP_INTENT_OPEN**; Gewächshaus-Alarm gegen allgemeine Frostwächter abgrenzen. Bisheriger Vergleich: „Temperaturwarnung in privatem Nebengebäude einrichten“ (Owner Frostwächter & Temperaturen).
 - **Störungen an Schwimmerschaltern** / „Fehlalarm eines Schwimmerschalters systematisch dokumentieren“ – **DIFFERENT_SENSOR**; Pumpenschwimmer statt Rauchwarnmelder. Bisheriger Vergleich: „Rauchmelder nach Fehlalarm systematisch prüfen“ (Owner Rauchmelder / Vernetzung).
 - **Fernalarm an Vertrauenspersonen** / „Alarmempfänger für Ferienhaus bei längerer Abwesenheit benennen“ – **DISTINCT_PROCESS**; Alarmreaktionskette mit Menschen statt technische Ferienhausüberwachung. Bisheriger Vergleich: „Ferienhaus bei längerer Abwesenheit gegen Einbruch sichern“ (Owner Ferienhaus-Einbruchschutz).
@@ -125,7 +125,7 @@ Ein neuer Artikel ist nicht deshalb eigenständig, weil der Titel anders formuli
   - Beschädigte Außenverkleidung auf Feuchteeintritt prüfen
   - Ersatz einzelner Fassadenplatten nach Vandalismus organisieren
 
-- **Oberflächen & Fassadenbauteile → Außenrollläden & Jalousien**
+- **Oberflächen & Fassadenbauteile → Außenrollläden vor Vandalismus**
   - Außenrollladen vor mutwilligem Hochschieben und Verbiegung schützen
   - Jalousielamellen nach Sachbeschädigung beurteilen lassen
   - Antriebe außenliegender Sonnenschutzanlagen gegen Manipulation sichern
@@ -201,7 +201,7 @@ Ein neuer Artikel ist nicht deshalb eigenständig, weil der Titel anders formuli
   - Parkplatzüberwachung gegen wiederholte Fahrzeugbeschädigung rechtlich prüfen
   - Reifen- und Spiegelschäden nach mutwilligem Eingriff erkennen
 
-- **Geparkte Privatfahrzeuge → Motorräder & Roller**
+- **Geparkte Privatfahrzeuge → Motorräder & Roller vor Vandalismus**
   - Motorrad im öffentlichen Sichtbereich vor mutwilligem Umwerfen schützen
   - Beschädigungen an abgestelltem Roller systematisch dokumentieren
   - Schutzabdeckung für Motorrad gegen Eingriffe auswählen
@@ -211,7 +211,7 @@ Ein neuer Artikel ist nicht deshalb eigenständig, weil der Titel anders formuli
   - Garagenkontrollen für empfindliche Sammlerfahrzeuge organisieren
   - Sachschäden an historischem Fahrzeug wertgerecht dokumentieren
 
-- **Private Freizeit- & Spielanlagen → Spielgeräte auf Privatgrund**
+- **Private Freizeit- & Spielanlagen → Spielgeräte vor Vandalismus**
   - Schaukel und Spielturm gegen mutwilliges Lockern prüfen
   - Beschädigte Spielplatz-Verbindungen vor erneuter Benutzung erkennen
   - Zugang zu privaten Spielgeräten außerhalb der Nutzungszeit steuern
@@ -730,10 +730,10 @@ Ein neuer Artikel ist nicht deshalb eigenständig, weil der Titel anders formuli
   - Heizungsfühler auf Plausibilität fachlich prüfen lassen
   - Nach Ausfall der Steuerplatine einen sicheren Notbetrieb klären
 
-- **Fernmeldungen & Regeltechnik → Heizungsüberwachung ohne Internet**
-  - Lokale Temperatursensoren für netzunabhängigen Heizungsalarm wählen
-  - Heizung bei Routerausfall weiter überwachen
-  - Heizungsalarm mit SMS-Fallback konzipieren
+- **Fernmeldungen & Regeltechnik → Heizungs-Sicherheitsabschaltungen**
+  - Störabschaltung einer Gastherme sicher einordnen
+  - Frostschutz nach einer Sicherheitsabschaltung der Heizung organisieren
+  - Bei wiederholter Sicherheitsabschaltung den Fachbetrieb richtig informieren
 
 - **Temperaturwarnung in Sonderräumen → Gewächshaus-Temperaturalarme**
   - Temperaturwarnung für privates Gewächshaus einrichten
