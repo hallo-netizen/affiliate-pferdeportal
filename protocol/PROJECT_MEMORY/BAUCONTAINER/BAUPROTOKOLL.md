@@ -352,3 +352,17 @@ NEGATIVPRÜFUNG:
 
 BEZUG:
 ARCH-093.
+
+
+### 2026-10-13 – HAB UND BEWAHR Bürotür/Current-Routing berichtigt
+
+BEDARF: Die Projekt-Bürotür sagte noch, die KONZEPT-Current sei nicht unabhängig verifiziert; der zentrale Autoritätsplan routet seitdem jedoch belegbar genau eine existierende Konzept-Current. Der Hobbyraum zeigte einen älteren R3-Datenpfad. Das erzeugte unnötige Rekonstruktions- und Zwei-Wahrheiten-Risiken bei der nächsten Chatübergabe.
+
+KISS-KORREKTUR:
+- `PROJEKTE/EIGENTUMSSCHUTZ/START_HERE.md` verweist ohne widersprüchlichen Vorbehalt auf `AUTORITAETSPLAN.json` → `KONZEPT/CURRENT_STATE.md`.
+- `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/HOBBYRAUM.md` bindet künftig Arbeitsdaten ausschließlich über die gerade aktuelle Current; keine zweite aktuelle Version/Blocker/NEXT ACTION.
+- Existierendes Campus-Routing und Fach-/Plugin-/WordPressarchitektur bleiben unverändert.
+- Verbindliche 3–10-Regel in eigener Zielvertragsakte und Zielregister, dauerhaftes WAS/WARUM in `AENDERUNGSREGISTER.md` festgehalten.
+
+NEGATIVREGEL: Weder Bürotür noch Zielvertrag/Hobbyraum dürfen den dynamischen V8-Status, aktuellen SEO-Blocker oder die eine NEXT ACTION parallel zur Current führen. Keine R3-Synchronisierung, kein neues Plugin, keine WordPress-Schreibarbeit.
+
