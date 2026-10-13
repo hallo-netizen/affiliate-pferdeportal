@@ -19,6 +19,13 @@ Status: **IM V7-KONZEPT KORRIGIERT / SEO-SERP-FREIGABE NOCH OFFEN**.
 - Alte 223 CORE-Objekte inklusive Elternzuordnung unverändert, alle 144 neuen Kandidaten weiterhin 3 Artikelentwürfe, Struktur 3–10 PASS, **keine Live-Umsetzung**.
 - **WICHTIG:** redaktionelle Doppelungsvorsorge ist kein gemessener Google-SERP-/Keyword-Nachweis. Status/next action ausschließlich im `CURRENT_STATE.md`; Volltext in `R3_V7_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md`.
 
+## HB-CONCEPT-002b – V8: reale Alt-Neu-Artikelüberschneidungen
+Status: **REDAKTIONELLE PRÜFUNG FÜR DIESE FÄLLE ERLEDIGT / ORGANISCHE GOOGLE-SEO-FREIGABE UNERLEDIGT**.
+- 432 neue konkrete Titelformulierungen gegen 704 R2-Originale mit **304.128** realen Textpaaren gegengeprüft, statt nur Kategorienamen. Fünf bisher zu allgemeine R3-Titel fachlich präzisiert (Camper-Feuerlöscher, Alarmquittierung, manuelles Markisen-Einfahren bei Sensorsignalfehler, Akku-Ladehalterung, Kunden-/Lieferfluchtwege).
+- **17** verbliebene textähnliche Neu-Alt-Top-Paare bei Schwelle 0,48 sowie **zwei** textähnliche Neu-Neu-Paare einzeln im Konzeptbüro erörtert. Die **zwei besonders grenznahen fachlichen Owner** sind Heizungsalarm/Mobilfunkempfang ↔ Router-/Mobilfunk-Backup und Sumpfpumpen-Wartung ↔ USV-/Notstromwartung. Für alle bleibt echter organischer Google-SERP-Vergleich offen.
+- Positiver Konzept-Regressionsstatus: 6/31/93/285, keine <3/>10-Zwischenstufen, 223/223 Original-Core-ID/Name/Eltern identisch, **704+432** Titel, keine exakt wiederholten Titel, **19 geplante** Umsortierungen nur als TRANSFER, nicht COPY, Quellkategorien jeweils >=3. **0 WP-Writes**.
+- **Autoritativer Status:** `CURRENT_STATE.md` V8. **Vollständiger Plan:** `R3_V8_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md`. **Prüffälle:** `R3_V8_17_NEU_ALT_OWNER_PRUEFFELLE_20261013.md`. **Maschinen-QA:** `R3_V8_QA_20261013.json`. Die V7-Historie nicht zur Live- oder SEO-Freigabe heranziehen.
+
 ## HB-CONCEPT-003 – Beleggrenze für Live
 Status: **OFFEN**. R3 weiterhin ausdrücklich nichtimportierbarer Konzeptentwurf, trotz Struktur- und Redaktionstiteltests. Keine neuen WordPress-Kategorien, keine neue veröffentlichte URL. R2 weiter maßgeblich für WordPress.
 
