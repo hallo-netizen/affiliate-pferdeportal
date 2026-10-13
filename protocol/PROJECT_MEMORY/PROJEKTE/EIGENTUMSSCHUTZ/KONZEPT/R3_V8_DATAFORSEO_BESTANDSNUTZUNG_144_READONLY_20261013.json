@@ -27,7 +27,11 @@
     "latest_provider_cost_usd": 0.01356,
     "latest_requested": 143,
     "latest_returned": 13,
-    "latest_not_returned_UNKNOWN": 130
+    "latest_not_returned_UNKNOWN": 130,
+    "latest_r3_serp_export": "hab-bewahr-r3-serp-20261013-133041-utc.json",
+    "latest_r3_serp_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+    "latest_r3_serp_plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+    "latest_r3_serp_cost_usd": 0.06
   },
   "policy": {
     "zero_paid_calls_issued": true,
@@ -39,7 +43,8 @@
     "not_importable": true,
     "query_preflight_manual_rewrite_required_for_nonpriority": true,
     "search_terms_are_unverified_editorial_hypotheses": true,
-    "note_20261013": "One user-authorized real WordPress/DataForSEO Overview query already performed on 2026-10-13 for 143 keywords; this research reconciliation initiates no provider calls."
+    "note_20261013": "One user-authorized real WordPress/DataForSEO Overview query already performed on 2026-10-13 for 143 keywords; this research reconciliation initiates no provider calls.",
+    "note_20261013_serp": "The user authorized and performed one 30-keyword R3 SERP run in the plugin, not in this research process. COMPLETE means workflow finished. No automatic SEO owner released. Do not repeat 40101 tasks without renewed explicit cost consent."
   },
   "counts": {
     "new_candidate_categories": 144,
@@ -55,7 +60,14 @@
     "primary_query_numeric_volumes_now": 11,
     "primary_query_returned_null_volume_now": 2,
     "primary_query_not_returned_unknown_now": 130,
-    "primary_query_prioritized_15_returned": 0
+    "primary_query_prioritized_15_returned": 0,
+    "latest_r3_serp_pairs": 15,
+    "latest_r3_serp_queries": 30,
+    "latest_r3_serp_success": 24,
+    "latest_r3_serp_provider_40101": 6,
+    "latest_r3_serp_both_sides_measured": 10,
+    "latest_r3_serp_incomplete_pairs": 5,
+    "latest_r3_serp_corrected_overlap_pairs": 1
   },
   "old_serp_overlap_for_context": [
     {
@@ -323,7 +335,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "40101 / 20000",
+        "common_url_count_corrected": null,
+        "scope_note": "R3-Primärfrage nicht gemessen; R2-Kameradatenschutz-SERP allein unzureichend.",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -607,7 +629,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "40101 / 40101",
+        "common_url_count_corrected": null,
+        "scope_note": "Beide SERPs nicht gemessen; keine Freigabe.",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -992,7 +1024,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Erste SERP überwiegend Wartung/Verschleiß, zweite Vandalismus; kein belegter R2-Owner, nicht automatisch freigeben.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1786,7 +1828,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Sonderthema Nachweis/Gewerbemietverhältnis vs allgemeine technische Bautrocknung; keine doppelte Trocknungsanleitung.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -2377,7 +2429,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "40101 / 20000",
+        "common_url_count_corrected": null,
+        "scope_note": "Spezialphrase Befestigung/Vibration nicht gemessen; allgemeine Löschmittel-SERP reicht nicht.",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -2570,7 +2632,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Warn-App/NINA vs baulicher Keller-/Schadenfolgen-Schutz; nur unterschiedlichen Prozessschritt besetzen.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2595,7 +2667,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Viele SERP-Titel behandeln allgemeine Gebäudeschutzmaßnahmen; R3 allein Hausrat/Dokumente, nicht Bauvorsorge.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2898,7 +2980,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "40101 / 20000",
+        "common_url_count_corrected": null,
+        "scope_note": "R3-spezifische SERP nicht gemessen; keine Freigabe.",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2923,7 +3015,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Beide SERPs Ethernet/PoE-Ableiter; trotz null URL-Overlap starke fachliche Schnittmenge, Owner offen.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2948,7 +3050,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Minisolaranlage vs allgemeine Photovoltaik; genaue Grenzen offen halten.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2973,7 +3085,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "40101 / 20000",
+        "common_url_count_corrected": null,
+        "scope_note": "SAT-/Koax-Primärfrage nicht gemessen, kein Owner-PASS.",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2998,7 +3120,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "Garagen-/Garten-Außenleitung vs allgemeiner Gebäudeblitzschutz; keine allgemeinen Kapitel duplizieren.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3047,7 +3179,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 2,
+        "scope_note": "Zwei tatsächlich identische URLs. Die vom Plugin als drittes gezählte YouTube-/watch-Seite zeigt verschiedene v= Video-IDs. Allg. Sturmfahrhinweise nur R2; R3 Dachboxbefestigung.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3319,7 +3461,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "R3-GSM-SERP teils allgemeine Alarmtechnik; R2-Heizungsfernalarm-Vergleich viele themenfremde Treffer. Kein sicherer automatischer Owner.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -3392,7 +3544,17 @@
       "paid_query_executed": false,
       "exact_match_for_primary_query_in_282": null,
       "latest_provider_status": "NOT_RETURNED_VOLUME_UNKNOWN",
-      "latest_provider_data": null
+      "latest_provider_data": null,
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_SERP_15_REALERGEBNIS_QUELLENAUDIT_20261013.md",
+        "source_export_sha256": "f2f143fddafaf8c2b3deaab85bc192ae4f996993d0817570721738cb1e4368da",
+        "plan_hash": "17cd5721ba6d134bb7d4c0d234ff609b35a941e85dcbdb941bf6d4e8ba4a454b",
+        "task_status_pair": "20000 / 20000",
+        "common_url_count_corrected": 0,
+        "scope_note": "R3 teils Rollladenfrostalarm; R2-Vergleich zeigt eher Sensorik/Frostschutz als Sturm. R3 eng Temperaturmeldung.",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
