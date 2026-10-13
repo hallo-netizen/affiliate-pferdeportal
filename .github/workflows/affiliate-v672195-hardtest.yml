@@ -400,6 +400,19 @@ jobs:
           update_option($idealoKey,['enabled'=>true,'output_mode'=>'automatic','link_strategy'=>'products','last_import_at'=>time()],false);
           if(!$o->idealo_campaign_publicly_allowed($idealoProduct))throw new RuntimeException('FAIL AFF065_FRESH_IDEALO_FEED_BLOCKED');
           echo "PASS AFF065_IDEALO_STALE_NEGATIVE_FRESH_POSITIVE\n";
+          // Preserve original category relevance and equal-rank provider mixing.
+          $category=[['specificity'=>1000,'matches'=>3,'campaign'=>['id'=>'stiefel-a','network'=>'ebay']],
+              ['specificity'=>1000,'matches'=>3,'campaign'=>['id'=>'stiefel-b','network'=>'idealo']],
+              ['specificity'=>100,'matches'=>0,'campaign'=>['id'=>'unrelated-gerte','network'=>'ebay']]];
+          if(count($call('category_product_strict_relevance_tier_v672104',$category,'category_product_1'))!==2)
+              throw new RuntimeException('FAIL AFF065_CATEGORY_FOREIGN_GERTE_WAS_NOT_BLOCKED');
+          $equal=[['specificity'=>650,'matches'=>2,'campaign'=>['id'=>'idealo-a','network'=>'idealo']],
+              ['specificity'=>650,'matches'=>2,'campaign'=>['id'=>'idealo-b','network'=>'idealo']],
+              ['specificity'=>650,'matches'=>2,'campaign'=>['id'=>'ebay-a','network'=>'ebay']]];
+          $mixed=$call('category_product_provider_mix_v672133',$equal,'category_product_1');
+          if(($mixed[1]['campaign']['network']??'')!=='ebay')
+              throw new RuntimeException('FAIL AFF065_EQUAL_RANK_EBAY_IDEALO_MIX_LOST');
+          echo "PASS AFF065_CATEGORY_FOREIGN_PRODUCT_BLOCK_AND_PROVIDER_TIE_MIX\n";
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
