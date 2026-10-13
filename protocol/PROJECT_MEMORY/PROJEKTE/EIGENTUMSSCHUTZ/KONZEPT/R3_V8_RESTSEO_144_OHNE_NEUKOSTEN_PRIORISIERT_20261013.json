@@ -4,7 +4,7 @@
   "purpose": "Clear owner-risk order, not a plan to charge users; used existing WordPress DataForSEO data only",
   "authority_r2": "HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json",
   "primary_source": "R3_V8_DATAFORSEO_BESTANDSNUTZUNG_144_READONLY_20261013.json",
-  "source_sha": "c3648e97e0d2dfa0b952be3469b71ff10183a5a0",
+  "source_sha": "964d6a380c1bc84deedc9cae5de4d4184762da19",
   "other_evidence_files": [
     "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
     "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
@@ -17,16 +17,19 @@
     "Complete run != SEO release",
     "NOT_RETURNED_UNKNOWN != volume 0",
     "40101 is provider error, never auto-repeat",
-    "Lexical no-hit != Google no-overlap"
+    "Lexical no-hit != Google no-overlap",
+    "Some two-sided SERP comparisons have invalid or weak intent separation; 15 measured is not 15 SEO-approved.",
+    "Provider failures in the earlier run are preserved historically; short rewordings measured different phrases."
   ],
   "counts": {
-    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": 5,
-    "A2_PRIORITAET_SERP_BEIDSEITIG": 10,
+    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": 0,
+    "A2_PRIORITAET_SERP_BEIDSEITIG": 15,
     "B1_NORMAL_LEXIK_RISIKO": 18,
     "B2_NORMAL_OHNE_AUFFAELLIGKEIT": 111
   },
   "tiers": {
-    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": [
+    "A1_PRIORITAET_SERP_UNVOLLSTAENDIG": [],
+    "A2_PRIORITAET_SERP_BEIDSEITIG": [
       {
         "new_category": "Antennen & Blitzschutz",
         "world": "Wetter & Naturgefahren",
@@ -34,51 +37,11 @@
         "volume": null,
         "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
         "old_cached_only": false,
-        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
-        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Nachlauf-Paar vollständig gemessen, aber Suchfrage/organische Eigenständigkeit weiterhin fachlich bzw. qualitätsbedingt offen; kein SEO-Release",
+        "follow_up_overlap": 0,
+        "follow_up_export": "hab-bewahr-r3-serp-20261013-142959-utc.json"
       },
-      {
-        "new_category": "Außenrollläden vor Vandalismus",
-        "world": "Vandalismus & Zerstörung",
-        "query": "außenrollladen vandalismus beschädigung manipulationsschutz",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
-        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
-      },
-      {
-        "new_category": "Grenzüberwachung im Garten",
-        "world": "Einbruch & Diebstahl",
-        "query": "grundstücksgrenze bewegungsmelder kamera datenschutz",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
-        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
-      },
-      {
-        "new_category": "Löschmittel im Freizeitfahrzeug",
-        "world": "Feuer & Gase",
-        "query": "feuerlöscher wohnmobil befestigung vibrationsschaden",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
-        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
-      },
-      {
-        "new_category": "Überspannung im Zählerschrank",
-        "world": "Wetter & Naturgefahren",
-        "query": "überspannungsschutz im zählerschrank haus",
-        "volume": null,
-        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
-        "old_cached_only": false,
-        "serp_state": "PAIRED_SERP_INCOMPLETE_40101",
-        "blocking_reason": "DataForSEO-Task 40101: keine vollstaendige Paarmessung; KEINE Wiederholung ohne neue Kostenfreigabe"
-      }
-    ],
-    "A2_PRIORITAET_SERP_BEIDSEITIG": [
       {
         "new_category": "Außenkabel & Blitzfolgen",
         "world": "Wetter & Naturgefahren",
@@ -88,6 +51,18 @@
         "old_cached_only": false,
         "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
         "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Außenrollläden vor Vandalismus",
+        "world": "Vandalismus & Zerstörung",
+        "query": "außenrollladen vandalismus beschädigung manipulationsschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Nachlauf-Paar vollständig gemessen, aber Suchfrage/organische Eigenständigkeit weiterhin fachlich bzw. qualitätsbedingt offen; kein SEO-Release",
+        "follow_up_overlap": 0,
+        "follow_up_export": "hab-bewahr-r3-serp-20261013-142959-utc.json"
       },
       {
         "new_category": "Balkonkraftwerke bei Gewitter",
@@ -130,6 +105,18 @@
         "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
       },
       {
+        "new_category": "Grenzüberwachung im Garten",
+        "world": "Einbruch & Diebstahl",
+        "query": "grundstücksgrenze bewegungsmelder kamera datenschutz",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Nachlauf-Paar vollständig gemessen, aber Suchfrage/organische Eigenständigkeit weiterhin fachlich bzw. qualitätsbedingt offen; kein SEO-Release",
+        "follow_up_overlap": 0,
+        "follow_up_export": "hab-bewahr-r3-serp-20261013-142959-utc.json"
+      },
+      {
         "new_category": "Hausrat vor Hochwasser",
         "world": "Wetter & Naturgefahren",
         "query": "hausrat vor hochwasser schützen dokumente keller",
@@ -150,6 +137,18 @@
         "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
       },
       {
+        "new_category": "Löschmittel im Freizeitfahrzeug",
+        "world": "Feuer & Gase",
+        "query": "feuerlöscher wohnmobil befestigung vibrationsschaden",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Nachlauf-Paar vollständig gemessen, aber Suchfrage/organische Eigenständigkeit weiterhin fachlich bzw. qualitätsbedingt offen; kein SEO-Release",
+        "follow_up_overlap": 2,
+        "follow_up_export": "hab-bewahr-r3-serp-20261013-142959-utc.json"
+      },
+      {
         "new_category": "Spielgeräte vor Vandalismus",
         "world": "Vandalismus & Zerstörung",
         "query": "spielgeräte vandalismus schaukel beschädigung prüfung",
@@ -168,6 +167,18 @@
         "old_cached_only": false,
         "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
         "blocking_reason": "Paarmessung vorhanden, redaktioneller Intent als separater Google-Owner weiterhin nicht abgenommen"
+      },
+      {
+        "new_category": "Überspannung im Zählerschrank",
+        "world": "Wetter & Naturgefahren",
+        "query": "überspannungsschutz im zählerschrank haus",
+        "volume": null,
+        "provider_keyword_state": "NOT_RETURNED_VOLUME_UNKNOWN",
+        "old_cached_only": false,
+        "serp_state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "blocking_reason": "Nachlauf-Paar vollständig gemessen, aber Suchfrage/organische Eigenständigkeit weiterhin fachlich bzw. qualitätsbedingt offen; kein SEO-Release",
+        "follow_up_overlap": 0,
+        "follow_up_export": "hab-bewahr-r3-serp-20261013-142959-utc.json"
       },
       {
         "new_category": "Warnsysteme bei Starkregen",
@@ -1474,5 +1485,10 @@
         "blocking_reason": "Kein starker Lexikhinweis, organische R3-SERP fehlt"
       }
     ]
-  }
+  },
+  "provider_follow_up": "hab-bewahr-r3-serp-20261013-142959-utc.json",
+  "provider_follow_up_cost_usd": 0.012,
+  "provider_follow_up_successful_new_tasks": 6,
+  "provider_follow_up_reused_tasks": 4,
+  "additional_user_action_now": "No more paid calls justified for the 15 priority pairs. Remaining 129 R3 owners have no comparable direct organic SERP evidence. Any new charged research requires prior specific user consent."
 }
