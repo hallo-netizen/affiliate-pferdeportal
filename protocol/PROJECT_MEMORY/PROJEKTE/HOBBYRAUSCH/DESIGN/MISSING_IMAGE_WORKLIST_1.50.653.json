@@ -1,0 +1,27 @@
+{
+  "version": "WIP 1.50.653",
+  "hero_total": 65,
+  "hero_active": 59,
+  "hero_missing_count": 6,
+  "hero_missing": [
+    "rollen-balance",
+    "wurf-ziel",
+    "team-wettkampf",
+    "geschick-tricks",
+    "werbung-design",
+    "werkzeuge-geraete"
+  ],
+  "card_total": 328,
+  "card_active": 70,
+  "card_missing_count": 258,
+  "authority_note": "Die exakte vollständige Unterkategorienliste wird aus dem aktiven lokalen hub2-image-map.json gegen den vollständigen 1.50.651-Taxonomie-Map-Stand berechnet; keine Fallbacks und kein Auffüllen durch unpassende Motive.",
+  "rules": [
+    "kein Fallback",
+    "nur fachlich eindeutiges Motiv",
+    "Zoom raus / komplette Szene oder vollständiges Hauptmotiv",
+    "kein sichtbares Hochskalieren",
+    "keine Duplikate innerhalb derselben Seite",
+    "Hero 600x220; Parent-Vorschau aus derselben Quelle 200x107; Karte 200x107",
+    "fehlend bleibt fehlend, bis ein passendes Motiv existiert"
+  ]
+}
