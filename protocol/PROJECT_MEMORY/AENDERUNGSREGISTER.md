@@ -1494,3 +1494,8 @@ WAS: Vorliegende echte DataForSEO-Exporte (282 Keyword-Overview-Eingaben vom 10.
 WARUM: Bereits bezahlte WordPress/DataForSEO-Ergebnisse müssen vor weiteren Abfragen verwertet werden. Bezahlter Provider-Call benötigt gesonderte Freigabe; Allgemein-Web-Snippets ersetzen die installierte Recherche-Evidenz nicht. Keine neue Architektur/Pluginversion.
 
 NICHT GEÄNDERT: R3-Fachplan, R2-WordPress, Plugin 1.14.8.17, IDs/Slugs/URLs, bestehende SEO-Owner, tatsächliche Providerrecherche. Ergebnis bleibt GOOGLE-SEO-BLOCKED bis Owner-Freigabe.
+
+## HB-KONZEPT-20261013-004 – Realen WordPress/DataForSEO-R3-Lauf statt erneuter Prüfanfänge auswerten
+WAS: Realen durch Nutzer freigegebenen WordPress-HD-001-1.14.8.17-Keyword-Overview-Export vom 13.10.2026 in die gemeinsame R3/V8-Evidenzdatei integriert: 143 Abfragen, 13 Providerzeilen (11 Suchvolumen numerisch, 2 null), 130 ohne Providerzeile (UNBEKANNT); tatsächlicher Providerkostenwert 0,01356 USD, Task-ID 10131247-2339-0607-0000-6092c5fcca92. 1 älterer exakt passender Keywordwert bleibt erhalten. Original-PHP-SERP-Modul geprüft: fest an 20 historische R2-Suchpaare gebunden, kein Upload/Index zu 144 R3-Ownern. Current aktualisiert.
+WARUM: Ergebnisdatei ist echte aktuelle Suchdaten-Evidenz und soll nicht erneut teuer abgefragt werden; alter SERP-Menüpunkt kann die nächsten neuen R3-Suchpaare nicht bearbeiten. Kein falscher SEO-PASS, keine weiteren kostenpflichtigen Aufrufe oder WordPress-Writes.
+ARTEFAKT: PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/R3_V8_DATAFORSEO_BESTANDSNUTZUNG_144_READONLY_20261013.json (Mergestand) und PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md.
