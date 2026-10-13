@@ -40,6 +40,21 @@ jobs:
           extensions: mysqli
           coverage: none
 
+      - name: Read current release permission
+        id: release_phase
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          c=json.loads(pathlib.Path('control/release-governance/CURRENT_RELEASE.json').read_text())
+          a=c.get('active_candidate') or {}
+          allowed=(a.get('release_allowed') is True and a.get('status')=='RELEASED'
+                   and (c.get('execution_state') or {}).get('authorized_next_action')=='FINALIZE_RELEASE')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as output:
+              output.write('release_allowed=' + ('true' if allowed else 'false') + '\n')
+          print('PASS RELEASE_PHASE_READBACK: ' + ('RELEASED' if allowed else 'NO_INSTALLER_WHILE_INCIDENT_OPEN'))
+          PY
+
       - name: Exact source and bounded KISS delta
         shell: bash
         run: |
@@ -271,6 +286,7 @@ jobs:
           grep -F 'KISS_CLEANUP_TEXTLINK_672211_PASS' /tmp/cleanup211.log
 
       - name: Package exact tested 6.72.211
+        if: ${{ steps.release_phase.outputs.release_allowed == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -291,6 +307,7 @@ jobs:
           sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.211.zip
 
       - uses: actions/upload-artifact@v4
+        if: ${{ steps.release_phase.outputs.release_allowed == 'true' }}
         with:
           name: AFFILIATE_ZENTRALE_6.72.211
           path: /tmp/AFFILIATE_ZENTRALE_6.72.211.zip
