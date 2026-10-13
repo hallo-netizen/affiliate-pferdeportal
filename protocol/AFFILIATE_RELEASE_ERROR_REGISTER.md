@@ -1883,3 +1883,37 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 - Kein Release, keine Installation.
 
 **Status:** LOCAL_ROOTFIX_AND_PERFORMANCE_BLOCK8_PASS / EXACT_WORDPRESS_MARIADB_GATE_OPEN.
+
+
+## AFF-ERR-065 — 13.10.2026: Einzelbeitrags- und Kategorie-Produktregression nach lokalen Testpaketen 6.72.217–6.72.226 (OFFEN, keine Release-Freigabe)
+
+**Rolle:** Dokumentation eines seit 11.–12.10.2026 vom Nutzer an echten Test-/Live-Seiten gemeldeten Fehlers und der fehlgeschlagenen Chat-Reparaturen. Dieser Eintrag ist **kein Current-Status**, ersetzt **nicht** \`control/release-governance/CURRENT_RELEASE.json\`, autorisiert **keinen** Release und verschiebt **nicht** den offiziell released Sourcebaum 6.72.211. Kein Geheimnis oder Partnerzugang gespeichert.
+
+**Verbindliche Nutzeranforderungen:** Produktkarten auf Kategorien, Hubs, Journal und normalen Einzelbeiträgen: exakt passend -> fachlich erweiterter Themenkreis -> sonstige belegte, freigegebene Pferdeprodukte; bei gleicher Eignung Anbieter eBay/idealo mischen, später Amazon, ohne exakte Produktidentität zu verletzen oder eBay-Privatangebote ungeprüft durchzulassen. Banner im Artikel; am Ende Produktkarten zuerst, ansonsten ein anderer passender Banner. Kosten-/Versicherungsbanner ausschließlich im richtigen Fachbereich. KISS; keine Architektur-/Workflow-/Provider-Neubauten; Performance/DB-Hardlocks bewahren. Der aktuell veröffentlichte Zielvertrag der Banner-/Importbasis ist \`protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md\`; diese Nutzervorgaben sind noch mit zuständigen Fachquellen abzugleichen, nicht als zweite Zielwahrheit hier zu lesen.
+
+**Gesicherter Nutzer-/Datenbefund:**
+- Diagnose vom 12.10.2026, Beitrag #972638 „Warum sagt man eigentlich ‚alte Schabracke‘?“ auf zwei Umgebungen: **beide** Affiliate 6.72.224, Template 1.50.612; **beide** \`hybrid_active=true\`, idealo \`enabled=true\`, \`output_mode=automatic\`, \`link_strategy=products\`, \`import_age_hours=499.2\`, \`products_in_ranking=0\`, \`product_pass_by_provider.ebay=0\`, \`idealo=0\`; gespeicherte Pläne auf beiden \`current=false\`.
+- Test-Diagnose: 3211 Kampagnen, 161 aktive Banner, 34 mit aktiver Einzelbeitragsplatzierung, 43 für die Diagnose zulässige Banner, gespeicherter Plan \`ready\` mit Bannern #973719 und #973715, aber Produktblock \`none\`.
+- Live-Diagnose: 2349 Kampagnen, 43 aktive Banner, **0** mit aktiver Einzelbeitragsplatzierung, 13 für die Diagnose zulässige Banner; gespeicherter Plan \`no_output\`, Banner \`none\`, Produkt \`none\`. Trotzdem meldete die read-only Diagnose einen technisch wählbaren Ersatzbanner #972835. Kein Beweis, dass dieser in der echten Live-Ausgabe gerendert wird.
+- Nachfolgende Nutzer-Screenshots: Banner auf Live erschienen später wieder, Produktkarten am Beitragsende weiter fehlend; Kategorie „Satteldecken“ zeigt nur idealo statt eBay/idealo-Mix; eBay-Backend zeigt 795 veröffentlichte Produkte und weitere Seiten. Das ist **kein** Beweis, dass eBay-Produkte in der konkreten Kategorie den Provider-Source-/Health-/PASS-Gate erfüllen.
+- Aktuell installierte Versionen **nach** dem Testpaket 6.72.226 nicht unabhängig ausgelesen; keine neue Live-Diagnose für 6.72.226. Screenshot-/Nutzerbefund: Produkte weiterhin nicht zuverlässig sichtbar.
+
+**Nachgewiesene Eigenfehler / erfolglose Eingriffe:**
+1. 6.72.217 beschränkte die zuvor verwendete Auswahl auf maximal einen Artikel je Anbieter und ließ zuzüglich Produktkarten einen unteren Banner erscheinen; realer Nutzer-Fail.
+2. 6.72.218 stellte Auswahl/Endbanner teilweise zurück; Nachprüfung fand alte gespeicherte Pläne mit unzulässigem Ersatzprodukt und potenziell doppelte Banner; **zurückgewiesener Kandidat**.
+3. 6.72.219 lokale Tests wurden als Erfolg präsentiert, trotzdem realer Beitrags-/Anbietermix-Fail.
+4. 6.72.220 schränkte auf eBay/idealo ein; Nutzer-Fail idealo weiterhin nicht sichtbar.
+5. **6.72.221 und 6.72.222 haben echte Paket-Inkonsistenz**: Plugin-Kopf 6.72.221 bzw. 6.72.222, interne Konstante \`VERSION=6.72.220\`. Durch direktes Öffnen der beiden lokal vorliegenden Original-ZIPs am 13.10.2026 bestätigt. Zusätzlich verursachte ein nachträglicher Banner-Themenfilter \`no_output\`-Regressionsfälle; im Live-Screenshot nach manueller Neuplanung beobachtet.
+6. 6.72.223 und 6.72.224 wurden nach kleinen simulierten Positiv-/Negativtests ausgegeben, aber Nutzer meldete erneut fehlende Banner und Produktkarten auf Live. Einzelauswahl-Tests waren **kein** realer WordPress-/MariaDB-/Provider-End-to-End-Nachweis.
+7. 6.72.226 änderte Produkt-Füllregeln und idealo-Frischepfad; Nutzer meldete danach weiterhin nur idealo auf Kategorien und fehlende Produktkarten unter Beiträgen. ZIP in lokalem Bestand lesbar, Header/Const 6.72.226. **Keine Live-PASS-/Release-Evidence**.
+8. Template Kit 1.50.611 veränderte zu breite CSS-Titelselektoren und entfernte an der eigentlichen Beitragsüberschrift Hufeisen und Hinterlegung; 1.50.612 stellte Titelgestaltung wieder her und wurde **vom Nutzer mit „pass“ bestätigt**. Kein Anlass, dieses Template erneut anzufassen.
+9. Wiederholte unzureichend realistische Tests und voreilige „PASS“-Kommunikation; fehlende Reproduktion von **beiden** Umgebungskampagnen, echter eBay-Quellprüfung, Planpersistenz, Renderer und WP/MariaDB bis zur öffentlichen HTML-Ausgabe. Viele lokale Funktionstests trotz echtem Live-Fail, daher **nicht abnahmefähig**.
+10. Wiederholte unnötige Plugin-Installationsaufträge und Diagnoseschritte an den Nutzer statt einmaliger ursächlicher Analyse. Erklärung „nur eBay-Ranking“ nicht für Live belegt; bei gleich guten gültigen eBay-/idealo-Fakten zeigt Originalcode selbst Anbieter-Mix.
+
+**Abgrenzung:** Offiziell ist laut \`control/release-governance/CURRENT_RELEASE.json\` (Generation 307, am 13.10.2026 frisch per GitHub gelesen) weiterhin **6.72.211 RELEASED**, Source-Manifest \`9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f\`; der GitHub-Branch \`affiliate-release-current\` stand beim Frischecheck auf \`aa160fa132a39107910147018175c799fec83745\` vor diesem reinen Fehlerregister-Nachtrag. Die lokalen 6.72.217–6.72.226-Pakete sind **nicht autoritative Current-Releases**. Kein pauschaler Rückbau, keine Löschung fremder/älterer Versionen, keine Veränderung der Performance-Hardlocks.
+
+**Erster fachlicher Blocker:** Eine **echte, identische WordPress/MariaDB-Vollsimulation mit dem aktuellen eBay-Quell- und Kampagnenstatus der Test- und Live-Umgebung** ist noch nicht erfolgreich durchlaufen; damit ist der genaue Live-Ablehnungsgrund eBay/Artikelende nicht bewiesen. Bestehende read-only JSONs enthalten Zähler und Einzelkampagnen-Eignung, nicht alle aktuellen Original-Providerdaten bzw. Live-Runtime-Entscheidungen. Weder ein bloßes „795 veröffentlicht“ noch eine lokale Fixture-Simulation schließt den Gate.
+
+**Nicht tun:** keine neue Plugin-Version, keine Kategorien-/Banner-/Provider-/Template-Änderung, kein Clearing fremder Sicherheitsfreigaben, keine eBay-/idealo-Kunstprodukte, kein neuer Ranking-/Performancepfad. Aufräumen/eBay-Privatanzeigen erst nach Grundfunktion und Nachweis, ohne Funktionsverlust.
+
+**Status:** OPEN / REAL_USER_REGRESSION / SOURCE-AND-LIVE_RECONCILIATION_REQUIRED / NO_RELEASE. Bindung und einzige NEXT ACTION stets ausschließlich der zuständigen \`CURRENT_RELEASE.json\` entnehmen; vor Änderung/Release die dort vorgesehenen \`release_guard.py\`- und Gesamtgates ausführen.
