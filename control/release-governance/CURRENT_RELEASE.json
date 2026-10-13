@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 311,
+  "generation": 312,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "AFF_ERR_065_ARTICLE_VERIFIED_HORSE_LAST_TIER",
-    "current_focus_reason": "Existing article ranking has no final verified horse-product tier despite explicit user contract. Minimal scalar gate after all previous topic stages, exact/product/category protections retained."
+    "current_focus": "AFF_ERR_065_ARTICLE_LOCAL_PASS_PROVIDER_LIVE_GATE_OPEN",
+    "current_focus_reason": "Existing WordPress/MariaDB targeted source red-green PASS 38382020308; actual eBay/idealo provider rows and deployed 6.72.226 state remain unverified. No ZIP."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -889,18 +889,18 @@
   "execution_state": {
     "state": "FIX_FIRST_FAILED_GATE",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run red-green existing WP/MariaDB test with verified eBay/idealo-only article product last tier, exact/category/unverified negative cases; then verify real provider states before release.",
-    "completion_condition": "AFF065_ARTICLE_BOTTOM_POS_NEG_PASS_THEN_REMAINING_FIRST_REAL_GATE",
-    "after_completion_action": "CONTINUE_READ_ONLY_EBAY_IDEALO_LIVE_TEST_GATE_RECONCILIATION",
+    "bound_user_scope_action": "AFF-ERR-065: read-only bind actual Affiliate version/source after local 6.72.226, current eBay BUSINESS source/policy/route/checkpoint/expiry and real idealo feed freshness, article #972638/category saved plans plus final public HTML from same live/test runtime. No install or source changes before the next first proved failing gate.",
+    "completion_condition": "ACTUAL_PROVIDER_ROWS_AND_REAL_LIVE_TEST_HTML_GATE_PROVEN",
+    "after_completion_action": "IF_REAL_GATE_FAILS_FIX_ONLY_FIRST_PROVEN_FAIL_IN_EXISTING_SOURCE_THEN_FULL_RETEST",
     "no_optional_detours": true,
     "sequence": 150,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
-    "evidence_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
-    "evidence_sha256": "",
+    "evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md",
+    "evidence_sha256": "d21549afb961e0f747d26676fe677724f899044fda0edb93581f356dee2c7c7a",
     "current_source_manifest_sha256": "f11687daa1f11d8ff98a3c0d62a720dac170dd95edddf39eba04530e858c44cf",
     "current_source_binding": "MANIFEST_28_FILES_AFF065_UNRELEASED_CANDIDATE",
-    "pre_gate_proof": "REAL_WP_MARIADB_RED_RUN_38381357138_VERIFIED_HORSE_LAST_TIER",
+    "pre_gate_proof": "PARTIAL_LOCAL_WORDPRESS_MARIADB_GREEN_RUN_38382020308_NOT_REAL_PROVIDER_E2E",
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -1000,15 +1000,19 @@
       "source_manifest_sha256": "f11687daa1f11d8ff98a3c0d62a720dac170dd95edddf39eba04530e858c44cf",
       "scope": "CATEGORY_1_2_3_HUB_JOURNAL_ARTICLE_POST_BOTTOM_EBAY_IDEALO_FIRST_REPRODUCIBLE_FAILED_GATE",
       "live_source_readback": "OPEN_6_72_226_INSTALLATION_NOT_INDEPENDENTLY_VERIFIED",
-      "real_provider_rows": "OPEN_EBAY_SOURCE_POLICY_ROUTE_EXPIRY_AND_IDEALO_IMPORT",
+      "real_provider_rows": "OPEN_AFTER_LOCAL_CODE_PASS",
       "before_failure_reproduction": "OPEN_REAL_LIVE_TEST_AND_SAVED_PLAN",
       "negative_cases": "OPEN_FOREIGN_PRODUCT_INVALID_EXACT_ID_STALE_OR_BLOCKED_SOURCE_AND_PRIVATE_VETO",
-      "full_wordpress_mariadb": "OPEN_REAL_SOURCE_E2E",
+      "full_wordpress_mariadb": "LOCAL_SOURCE_FIXTURE_PASS_ACTUAL_PROVIDER_E2E_OPEN",
       "frontend_html": "OPEN_RENDERED_CATEGORY_AND_ARTICLE_END",
       "performance": "ZERO_NEW_FRONTEND_HTTP_OR_DB_QUERY_RECHECK_REQUIRED",
       "release_artifact": "FORBIDDEN_UNTIL_ALL_GATES_PASS",
-      "article_bottom_proof": "ARTICLE_BASIC_GREEN_RUN_38380374323_OLD_PLAN_RED_RUN_38380655622_GREEN_PENDING",
-      "article_generic_fallback": "RED_RUN_38381357138_NEW_SOURCE_GREEN_PENDING"
+      "article_bottom_proof": "PASS_REAL_WORDPRESS_MARIADB_RUN_38382020308",
+      "article_generic_fallback": "PASS_SCOPED_RANK_POS_NEG_38382020308",
+      "provider_source_security": "PASS_FAKE_EBAY_BLOCK_STALE_IDEALO_NEG_FRESH_POS_38382020308",
+      "category_regression": "PASS_FOREIGN_GERTE_BLOCK_EQUAL_PROVIDER_TIER_MIX_38382020308",
+      "evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md",
+      "evidence_sha256": "d21549afb961e0f747d26676fe677724f899044fda0edb93581f356dee2c7c7a"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -2742,6 +2746,9 @@
     "source_manifest_sha256": "f11687daa1f11d8ff98a3c0d62a720dac170dd95edddf39eba04530e858c44cf",
     "unreleased_source_changed": true,
     "old_plan_standby_rootfix": "EXISTING_PLAN_META_ONE_TIME_ONLY",
-    "article_generic_verified_fallback": "CODE_CANDIDATE_UNRELEASED"
+    "article_generic_verified_fallback": "CODE_CANDIDATE_UNRELEASED",
+    "local_gate": "SCOPED_GREEN_38382020308_BASE59_PLUS_AFF065_TARGETED",
+    "remaining_single_next_blocker": "ACTUAL_PROVIDER_ROWS_LIVE_TEST_SOURCE_RECONCILIATION",
+    "local_evidence_ref": "release/affiliate-zentrale/evidence/aff_err_065_20261013_article_source_red_green_wpmariadb.md"
   }
 }
