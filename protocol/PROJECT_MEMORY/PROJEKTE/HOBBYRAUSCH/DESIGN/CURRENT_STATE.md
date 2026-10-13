@@ -3,45 +3,39 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.651 LIVE FAIL / KEIN FREIGABEFÄHIGER NEUER KANDIDAT**
+STATUS: **1.50.652 LOCAL TECH PASS / VISUAL FAIL / KEIN LIVE-PASS**
 
-## Letzter installierter/prüfbarer Stand
-`1.50.651` wurde live verworfen.
+## Tatsächlich aktuellster lokaler Stand
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
 
-## Was live bestätigt ist
-Aus 1.50.650:
-- **Textinhalt PASS**;
-- **Grundaufteilung PASS**.
+SHA-256:
+`c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
-## Was live NICHT passt
+WICHTIG:
+Die frühere Current mit 1.50.651 war veraltet. 1.50.652 existiert lokal bereits und wurde jetzt frisch aus dem tatsächlichen Build geprüft.
 
-### Hero 1.50.651
-- Hero-Bilder viel zu hoch;
-- Motive teils zu nah / Detail-Crops statt klarer Szenerie;
-- teils unscharf / sichtbar hochskaliert;
-- thematisch teilweise falsche Hero-Motive;
-- Brush-Unterstrich beim Claim verrutscht und zu lang;
-- Textausrichtung/Proportionen im Hero nicht sauber.
+## Technischer Stand 1.50.652
+- PHP/Release-Kette lokal PASS;
+- ZIP-Integrität PASS;
+- 65/65 Hero-Dateien vorhanden;
+- Hero-Quellen 600×220;
+- 0 Near-Duplicate-Paare laut Buildtest;
+- Kartenrenderer identisch zu 1.50.650;
+- Langtextgenerator identisch zu 1.50.650;
+- kein generisches Upscaling im Hero-Pfad.
 
-### Unterkategoriebilder
-Der Bildblock ist weiterhin grundsätzlich fehlerhaft:
-- falsche semantische Zuordnungen;
-- doppelte/ähnliche Motive innerhalb derselben Seite;
-- zu volle/zu nahe Ausschnitte;
-- Beispiele aus Live-Readback:
-  - Genuss → Kakteenbild;
-  - Essbare Pflanzen → Kakteenbild, teils dasselbe Motiv;
-  - Ameisen & Insekten → Blumenmotiv;
-  - Papier & Dokumente / Postkarten / Unterkategorien mit unpassenden Münzen-/Globusmotiven.
+## Visueller Befund 1.50.652
+**NICHT FREIGABEFÄHIG.**
 
-## Belastbare Basis
-Für den nächsten Arbeitslauf gilt:
-- **Text und Grundaufteilung aus 1.50.650 einfrieren**;
-- 1.50.651 nicht als Basis für Hero-Optik übernehmen;
-- Hero neu und sauber aufbauen;
-- Unterkategoriebilder separat semantisch korrekt kuratieren;
-- kein generischer Fallback auf beliebige Weltbilder;
+Frisch visuell geprüft:
+- `Druck & Fotografie`: Hero weiterhin thematisch zu unsauber/überladen (Kamera + Modellauto + Briefmarken/Album), keine klare ruhige Fotografie-Szene;
+- `Genuss` und `Essbare Pflanzen`: sehr ähnliche/gleiche Gemüse-/Pflanzenszene, zu wenig eindeutige Differenzierung;
+- damit ist bewiesen, dass technische Dateieindeutigkeit weiterhin keine ausreichende semantische Bildqualität garantiert.
+
+## Bereits bestätigt / schützen
+- Textinhalt aus 1.50.650: PASS;
+- Grundaufteilung aus 1.50.650: PASS;
 - keine neue Architektur/Taxonomie.
 
 ## EXAKT EINE NEXT ACTION
-**Kein neues ZIP ausgeben. Zuerst Hero + Bildmapping lokal vollständig neu prüfen und simulieren: semantische Passung, Zoom/Szenerie, Schärfe, Duplikate, Rahmenfreiheit, Hero-Höhe/Responsive, Claim-Unterstrich. Erst danach neuer Kandidat.**
+**Kein neues ZIP freigeben. Bildquellen jetzt manuell semantisch Kategorie für Kategorie prüfen/ersetzen; zuerst Hero-Mapping, danach Kartenbilder.**
