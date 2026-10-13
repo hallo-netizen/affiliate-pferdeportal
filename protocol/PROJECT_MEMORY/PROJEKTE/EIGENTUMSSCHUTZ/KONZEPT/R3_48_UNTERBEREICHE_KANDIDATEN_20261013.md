@@ -9,6 +9,8 @@
 - Nur Strukturhypothesen: Jede der 144 neuen Kategorien ist noch mit drei eigenständigen Artikelsuchintents und einer eindeutigen SEO-Owner-Zuordnung zu belegen. 21 bereits im R2 dokumentierte offene Owner-Punkte bleiben bestehen. Kein Kandidat darf wegen bloßer Füllung publiziert werden.
 - Alle vorhandenen IDs, 704 Original-Artikelideen und bestehenden SEO-Owner bleiben während der Konzeptprüfung unangetastet. WordPress- und DataForSEO-Schreibvorgänge: 0.
 
+**Fachliche Präzisierung vom 13.10.2026:** Vier Blattkandidaten wurden umbenannt, um Doppelung und Gefahrenverwechslung zu vermeiden. Besonders die bisher zu „Heizungsalarme über Mobilfunk“ zu ähnliche Offline-Heizungsüberwachung wurde durch den eigenständigen Schutzfall „Heizungs-Sicherheitsabschaltungen“ ersetzt. Die 31/93/285-Struktur bleibt unverändert.
+
 ## Zusätzliche Unterbereiche und Blattkategorien
 
 ### Einbruch & Diebstahl
@@ -30,7 +32,7 @@
 
 **Fassade & Außenflächen**
 
-- **NEU: Oberflächen & Fassadenbauteile** – Fassadenputz & Oberflächenschäden · Verkleidungen & Außendämmung · Außenrollläden & Jalousien
+- **NEU: Oberflächen & Fassadenbauteile** – Fassadenputz & Oberflächenschäden · Verkleidungen & Außendämmung · Außenrollläden vor Vandalismus
 - **NEU: Gärten & Außenmöblierung** – Mauern & Einfriedungen · Bepflanzung & Grünflächen · Garteninventar & Outdoor-Möbel
 **Gebäude & Ausstattung**
 
@@ -41,8 +43,8 @@
 - **NEU: Zählerkästen & Anschlussleitungen** – Außenzähler & Messstellen · Stromkästen & Außenverteiler · Freiliegende Hausanschlüsse
 **Freizeit & Vandalismus**
 
-- **NEU: Geparkte Privatfahrzeuge** – Sachbeschädigung an Privatwagen · Motorräder & Roller · Oldtimer & Sammlerfahrzeuge
-- **NEU: Private Freizeit- & Spielanlagen** – Spielgeräte auf Privatgrund · Private Grill- & Rastbereiche · Kleingarten-Gemeinschaftsflächen
+- **NEU: Geparkte Privatfahrzeuge** – Sachbeschädigung an Privatwagen · Motorräder & Roller vor Vandalismus · Oldtimer & Sammlerfahrzeuge
+- **NEU: Private Freizeit- & Spielanlagen** – Spielgeräte vor Vandalismus · Private Grill- & Rastbereiche · Kleingarten-Gemeinschaftsflächen
 **Vereine & Kleingewerbe**
 
 - **NEU: Mobiles Geschäftsaußeninventar** – Verkaufsautomaten im Außenraum · Paket- & Lieferstationen · Außenverkaufsstände
@@ -121,7 +123,7 @@
 - **NEU: Wiederanlauf nach Stromausfall** – Kühlgeräte nach Netzausfall · Heizungsneustart nach Stromausfall · Verbraucher beim Wiederanlauf
 **Heizung & Temperatur**
 
-- **NEU: Fernmeldungen & Regeltechnik** – Heizungsalarme über Mobilfunk · Störungen an Heizungssteuerungen · Heizungsüberwachung ohne Internet
+- **NEU: Fernmeldungen & Regeltechnik** – Heizungsalarme über Mobilfunk · Störungen an Heizungssteuerungen · Heizungs-Sicherheitsabschaltungen
 - **NEU: Temperaturwarnung in Sonderräumen** – Gewächshaus-Temperaturalarme · Temperaturmelder im Technikraum · Überhitzung im Dachgeschoss
 **Pumpen & Haustechnik**
 
