@@ -2586,3 +2586,45 @@ SHA:
 LIVE:
 OFFEN.
 
+---
+
+## PU-20261013-058 – HD-003 1.50.650 / Hub2-Bildkuratierung
+
+LIVE-BEFUND 1.50.649:
+- Text PASS;
+- Aufteilung PASS;
+- Hero-/Kartenbilder teilweise zu nah, überfüllt, gerahmt wirkend oder thematisch falsch.
+
+KORREKTUR:
+- Text/Layout vollständig eingefroren;
+- 65/65 Hub2-Heroes deterministisch auf kontrollierte vorhandene Motive gebunden;
+- 328/328 direkte Kindkarten deterministisch gemappt;
+- semantische Eltern-/Kindbindung statt zufälligem Welt-Pool;
+- weiter gefasste Hero-Quellen bevorzugt;
+- v150631-Vignettenquellen aus Hub2 vollständig ausgeschlossen;
+- keine doppelte Bilddatei innerhalb derselben Hub2-Seite;
+- Buch-&-Papier-Kartenbilder unverändert;
+- 0 neue Bilddateien.
+
+TEST:
+- PHP 55/55 PASS;
+- ZIP PASS;
+- Release-Chain V150650, alte aktive V150649-Refs 0;
+- 65 Hero / 328 Karten;
+- Missing 0;
+- v150631 aktiv 0;
+- Duplikatpfade pro Hub 0;
+- 191 unterschiedliche Bestandsassets;
+- 600×320 vollständig;
+- Außenkanten-Frame-Heuristik 0;
+- Papier & Dokumente sowie Guss & Formen mit echten 200×107-Crops visuell geprüft.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
+
+SHA:
+`b3bf267ccfef1ae5efbdc4efa1df40f586d5a9ae78ee7c865906b04f113ac2d6`
+
+LIVE:
+OFFEN – nur Bildqualität.
+
