@@ -89,6 +89,9 @@ jobs:
             root+'/includes/trait-ppar-tariff-tools.php',
             root+'/readme.txt',
           }
+          # AFF-ERR-065: one existing article trait may now differ from the historical
+          # 6.72.211 baseline; every previous allowed file stays unchanged.
+          allowed.add(root+'/includes/trait-ppar-article-plans.php')
           assert set(changed)==allowed, changed
           main=pathlib.Path(root+'/pferdeportal-affiliate-router.php').read_text()
           assert 'Version: 6.72.211' in main and "const VERSION = '6.72.211';" in main
@@ -337,6 +340,19 @@ jobs:
           if(strpos($html,'ppar-article-product-block')!==false)throw new RuntimeException('FAIL AFF065_INVALID_PRODUCT_LEAK');
           if(strpos($html,'ppar-article-inline-banner-2')===false)throw new RuntimeException('FAIL AFF_ERR_065_ARTICLE_BOTTOM_TEST: Ready plan loses every product and suppresses valid replacement banner');
           echo "PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST\n";
+          $product=$call('save_campaign_record',[
+              'id'=>'aff065-product-valid','name'=>'Verified horse product','title'=>'Verified horse product','active'=>1,
+              'creative_type'=>'product','network'=>'manual','source'=>'manual','assignment_mode'=>'fallback',
+              'render_mode'=>'image_link','url'=>'https://example.org/product','image_url'=>'https://example.org/product.png',
+              'placements'=>['post_bottom_products'],'programme_status'=>'active','quality_manual_status'=>'approved',
+              'health_check_enabled'=>false
+          ]);
+          $plan['products']=['status'=>'ready','campaign_post_ids'=>[$product]];
+          update_post_meta($post,$meta,$plan);
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$post),$post,true);
+          if(strpos($html,'ppar-article-product-block')===false)throw new RuntimeException('FAIL AFF065_VALID_PRODUCT_MISSING');
+          if(strpos($html,'ppar-article-inline-banner-2')!==false)throw new RuntimeException('FAIL AFF065_SECOND_BANNER_WITH_VALID_PRODUCTS');
+          echo "PASS AFF065_PRODUCT_FIRST_NO_SECOND_BANNER\n";
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log

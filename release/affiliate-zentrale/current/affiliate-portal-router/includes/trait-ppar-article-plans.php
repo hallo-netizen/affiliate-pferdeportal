@@ -632,8 +632,10 @@ trait PPAR_Article_Plans_Trait {
         // Gibt es keine freigegebenen Produktboxen, wird ein ZWEITER, vom ersten
         // verschiedener Banner am Beitragsende geplant. Keine Wortzahl-Schwelle.
         // Identische Banner auf derselben Seite sind hart ausgeschlossen.
-        if ($plan['products']['status'] !== 'ready'
-            && empty($assigned_banner['disabled'])
+        // Auch bei vorerst bereiten Produkten den zweiten Banner nur VORPLANEN:
+        // er wird erst gezeigt, falls die Produkte beim oeffentlichen Rendern
+        // aufgrund aktueller Source-/Health-/Veto-Gates doch ausfallen.
+        if (empty($assigned_banner['disabled'])
             && in_array((string)($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
             $first_id=absint($plan['banner']['campaign_post_id'] ?? 0);
             $second_candidate=null;
@@ -1120,21 +1122,22 @@ trait PPAR_Article_Plans_Trait {
                 $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => false));
             }
         }
-        if (!$main_banner_rendered_at_bottom && ($plan['products']['status'] ?? '') !== 'ready' && in_array((string)($plan['banner_2']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+        // Die echte Ausgabe entscheidet. Ein gespeicherter "ready"-Plan ist kein
+        // Beweis, dass die Produktkampagnen heute noch lieferbar sind.
+        $product_html = ($plan['products']['status'] ?? '') === 'ready'
+            ? $this->article_plan_render_products($post_id, (array) ($plan['products']['campaign_post_ids'] ?? array()), false, 0)
+            : '';
+        if ($product_html !== '') {
+            $content .= "\n" . $product_html;
+        } elseif (!$main_banner_rendered_at_bottom
+            && in_array((string)($plan['banner_2']['status'] ?? ''),array('ready','pending_anchor'),true)) {
             $first_banner_id=absint($plan['banner']['campaign_post_id'] ?? 0);
             $second_banner_id=absint($plan['banner_2']['campaign_post_id'] ?? 0);
             if ($second_banner_id > 0 && $second_banner_id !== $first_banner_id) {
                 $banner2_html=$this->article_plan_render_banner_campaign($post_id,$second_banner_id,false,2,array($first_banner_id));
                 if ($banner2_html !== '') {
-                    // Der zweite Banner ersetzt fehlende Produktboxen am Beitragsende.
                     $content .= "\n" . $banner2_html;
                 }
-            }
-        }
-        if (($plan['products']['status'] ?? '') === 'ready') {
-            $product_html = $this->article_plan_render_products($post_id, (array) ($plan['products']['campaign_post_ids'] ?? array()), false, 0);
-            if ($product_html !== '') {
-                $content .= "\n" . $product_html;
             }
         }
         return $content;
