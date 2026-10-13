@@ -814,6 +814,16 @@
   - Notruf und private Alarmverfolgung in Eskalationskette abgrenzen
 
 
+## Ergänzende externe Sachquellen – qualitative Stichprobe, **kein Google-SERP-Freigabenachweis**
+
+- **Löschmittel im Freizeitfahrzeug:** Der ADAC bespricht ausdrücklich Platz- und Löschleistungsanforderungen im Auto bzw. Wohnmobil; dies stützt die fachliche Trennung eines Camper-Einsatzkontexts vom Wohnhaus. https://www.adac.de/rund-ums-fahrzeug/ausstattung-technik-zubehoer/zubehoer/feuerloescher-auto-vergleich/
+- **Balkonkraftwerke bei Gewitter:** Die Verbraucherzentrale beschreibt Steckersolar als eigene kleine Geräteklasse gegenüber großen PV-Anlagen; sachliche Gerätedifferenz vorhanden. https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien/faq-zu-steckersolargeraeten-das-sind-die-haeufigsten-fragen-86652
+- **Heizungsalarme über Mobilfunk:** Technischer Sachbeleg für 4G/5G-basierte Alarme ohne WLAN und für Heizungs-Störkontakte, keine unabhängige Kaufempfehlung: https://www.comotix.com/de/anwendungen/stoermeldungen-stoerausgaenge/
+- **Trocknung kleiner Ladenflächen:** Ein Trocknungsprotokoll wird sowohl bei Versicherungen als auch Hausverwaltungen benötigt; damit bleibt eine mögliche Suchintent-Überschneidung **ausdrücklich offen**, trotz neuer Titelabgrenzung. https://www.vattenfall.de/service/trocknung-wasserschaden
+- **Camping / Gasinstallation:** ADAC bestätigt eigenständige, fahrzeugbezogene Gasprüfungsregeln; stützt den Fahrzeugkontext, nicht automatisch einen zusätzlichen Google-SERP-Owner. https://www.adac.de/news/gaspruefung-camper-wohnwagen/
+
+Diese Belege **begründen nur fachliche Unterschiede**. Weder Suchvolumen noch Überschneidungsfreiheit der Google-Top-10 wurde für die 144 R3-Kategorien dadurch gemessen.
+
 ## Kontrolliertes Qualitätsergebnis
 - Struktur: 31/31 Bereiche mit mindestens 3 bis maximal 10 Unterbereichen; 93/93 Unterbereiche mit mindestens 3 bis maximal 10 Blattkategorien. Keine bestehenden Seitenobjekte gelöscht.
 - Redaktion: 144×3 = 432 neue Themenentwürfe, exakte Wiederholung mit 704 Bestandstiteln: 0; 17 mögliche Bestandsumhängungen belassen die Quellkategorien bei mindestens drei Titeln.
