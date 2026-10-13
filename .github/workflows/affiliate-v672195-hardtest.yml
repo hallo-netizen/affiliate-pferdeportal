@@ -476,9 +476,61 @@ jobs:
               ||strpos($html,'ppar-article-inline-banner')===false)
               throw new RuntimeException('FAIL AFF065_REAL_LIVE_CATEGORY_ONLY_MANDATORY_REBUILD');
           echo "PASS AFF065_REAL_LIVE_CATEGORY_ONLY_MANDATORY_REBUILD\n";
+          $stale['content_hash']='stale-for-next-independent-frontend-request';
+          $stale['status']='no_output';
+          update_post_meta($post,$meta,$stale);
+          update_option('aff065_frontend_probe_post_id',$post,false);
+          update_option('aff065_frontend_probe_banner_id',$crossBanner,false);
           PHP
           /tmp/wp eval-file /tmp/wp-site/aff065-bottom.php --path=/tmp/wp-site | tee /tmp/aff065-bottom.log
           grep -F 'PASS AFF_ERR_065_ARTICLE_BOTTOM_TEST' /tmp/aff065-bottom.log
+          # Same DB, fresh PUBLIC request bootstrap: no WP_CLI flag, frontend caches active.
+          cat >/tmp/wp-site/aff065-frontend.php <<'PHP'
+          <?php
+          require_once __DIR__ . '/wp-load.php';
+          if (defined('WP_CLI') && WP_CLI) throw new RuntimeException('FAIL AFF065_PUBLIC_IS_STILL_WPCLI');
+          add_filter('ppar_affiliate_slot_matrix',static function($rules){
+              $rules['post_inline_banner']=['creative_type'=>'banner','ratio_min'=>5.0,'ratio_max'=>12.0,'min_width'=>600,'min_height'=>60,'upscale_max'=>1.10];
+              return $rules;
+          });
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $call=function($name,...$args)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m->invokeArgs($o,$args);};
+          $pid=(int)get_option('aff065_frontend_probe_post_id',0);
+          $expected=(int)get_option('aff065_frontend_probe_banner_id',0);
+          if($pid<=0||$expected<=0)throw new RuntimeException('FAIL AFF065_PUBLIC_FIXTURE_NOT_PERSISTED');
+          $picked=$call('article_plan_find_mandatory_banner',$pid);
+          if((int)($picked['campaign']['post_id']??0)!==$expected)
+              throw new RuntimeException('FAIL AFF065_PUBLIC_RANKED_CACHED_MANDATORY_NOT_FOUND');
+          $html=$call('article_plan_apply_to_content',get_post_field('post_content',$pid),$pid,false);
+          $plan=get_post_meta($pid,(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_META'),true);
+          if((int)($plan['banner']['campaign_post_id']??0)!==$expected
+              ||strpos($html,'ppar-article-inline-banner')===false)
+              throw new RuntimeException('FAIL AFF065_PUBLIC_CACHED_RENDER_NO_OUTPUT');
+          echo "PASS AFF065_PUBLIC_CACHED_PATH_RECOVERS_LIVE_CATEGORY_BANNER\n";
+          // Main-loop the_content callback, not direct private method; duplicate render forbidden.
+          $plan['status']='no_output';$plan['banner']['status']='none';$plan['banner']['campaign_post_id']=0;
+          $plan['content_hash']='stale-main-query-full-hook';
+          update_post_meta($pid,(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_META'),$plan);
+          update_option((new ReflectionClass($o))->getConstant('OPTION_ENABLED'),'1',false);
+          update_option((new ReflectionClass($o))->getConstant('OPTION_ARTICLE_HYBRID'),['enabled'=>true],false);
+          $query=new WP_Query(['p'=>$pid,'post_type'=>'post','posts_per_page'=>1]);
+          $GLOBALS['wp_query']=$query;
+          $GLOBALS['wp_the_query']=$query;
+          if(!$query->have_posts())throw new RuntimeException('FAIL AFF065_PUBLIC_QUERY_NO_POST');
+          $query->the_post();
+          if(!is_singular('post')||!in_the_loop()||!is_main_query())
+              throw new RuntimeException('FAIL AFF065_PUBLIC_QUERY_CONTEXT');
+          $frontend=apply_filters('the_content',get_post_field('post_content',$pid));
+          if(substr_count($frontend,'ppar-article-inline-banner')!==1)
+              throw new RuntimeException('FAIL AFF065_PUBLIC_THE_CONTENT_MISSING_OR_DUPLICATE_BANNER');
+          $actual=get_post_meta($pid,(new ReflectionClass($o))->getConstant('ARTICLE_PLAN_META'),true);
+          if((int)($actual['banner']['campaign_post_id']??0)!==$expected)
+              throw new RuntimeException('FAIL AFF065_PUBLIC_THE_CONTENT_IGNORES_MANDATORY_BANNER');
+          echo "PASS AFF065_PUBLIC_REAL_THE_CONTENT_HOOK\n";
+          PHP
+          php -d display_errors=1 /tmp/wp-site/aff065-frontend.php | tee /tmp/aff065-frontend.log
+          grep -F 'PASS AFF065_PUBLIC_CACHED_PATH_RECOVERS_LIVE_CATEGORY_BANNER' /tmp/aff065-frontend.log
+          grep -F 'PASS AFF065_PUBLIC_REAL_THE_CONTENT_HOOK' /tmp/aff065-frontend.log
 
       - name: Package exact tested 6.72.211
         if: ${{ steps.release_phase.outputs.release_allowed == 'true' }}
