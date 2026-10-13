@@ -290,3 +290,20 @@ Bei Fotokarten:
 - Parent-/Hero-Bild niemals als Universalbild für alle Kinder;
 - Untertitel ist Bestandteil des akzeptierten Kartenlayouts und darf beim Rollout nicht verloren gehen.
 
+## AF-021 – Bild-URL-Eindeutigkeit erneut mit Bildqualität verwechselt
+FEHLER:
+1.50.649 wurde mit 328/328 Fotokarten und ohne doppelte URL lokal als Bild-Rollout freigegeben. Das bewies nur Belegung und Eindeutigkeit, nicht aber Motivpassung, Ruhe der Szene oder sinnvollen Bildausschnitt.
+
+FOLGE:
+Live waren mehrere Bilder zwar technisch verschieden, aber zu voll, zu nah, teilweise thematisch falsch oder durch ungeeignete Quellvarianten optisch gerahmt.
+
+VERMEIDUNGSREGEL:
+Für jede Bildfreigabe sind getrennt zu prüfen:
+1. Slot/Geometrie;
+2. Quelle ohne eingebrannten Rahmen;
+3. semantische Motivpassung;
+4. gewünschte Distanz/Zoom;
+5. visuelle Ruhe/Klarheit;
+6. Duplikatfreiheit.
+Ein PASS in Punkt 1 oder 6 darf nie als Gesamt-Bild-PASS ausgegeben werden.
+
