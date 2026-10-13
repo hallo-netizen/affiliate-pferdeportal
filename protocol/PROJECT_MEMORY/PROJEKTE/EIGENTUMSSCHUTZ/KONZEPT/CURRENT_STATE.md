@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **R3/V4 VOLLSTÄNDIGE 3–10-STRUKTUR UND 144×3 REDAKTION PASS / SEO-SUCHINTENT-NACHWEISE WEITER OFFEN / WORDPRESS R2 UNVERÄNDERT**
+STATUS: **R3/V5 3–10-KATEGORIENSTRUKTUR UND 144×3 ARTIKELENTWURF LOKAL PASS / SEMANTISCHE SEO-SERP-FREIGABE OFFEN / WORDPRESS R2 UNVERÄNDERT**
 
 ## Verbindlicher Zielvertrag
 Ausdrückliche Nutzerentscheidung: Jede anklickbare Zwischenebene bietet **mindestens drei, maximal zehn** echte fachliche Alternativen. Keine bloßen Einzel-Klickstufen, keine künstlichen Dopplungen. 6 vorhandene Gefahrenwelten, 31 bestehende Hauptthemenbereiche und 3 Portalsäulen erhalten. Bestehende Keywords, IDs, Slugs und Artikelthemen nicht verlieren oder unbewiesen duplizieren. Möglichst fachlich sinnvoll ausbauen/umsortieren statt löschen. R2 nicht live verändern, bevor der komplette künftige Baum sowohl strukturell als auch inhaltlich/SEO geprüft ist.
@@ -31,7 +31,7 @@ Autoritative Detailakten im selben Büro:
 - Kein neues DataForSEO-Abonnement oder API-Aufruf; historischer Keyword-Überblick (282 angefragt, 128 Anbieter-Treffer, fehlend nicht Null) und organische SERP-Stichprobe (20 Paare, davon 4 unvollständig) sind **kein** vollständiger SEO-Freigabenachweis für R3. Publikations- und SERP-Owner-Freigabe **weiterhin offen**.
 - Aktuelle nicht-importierbare redaktionelle JSON-Arbeitskopie im Gespräch: `HAB_R3_REDAKTION_ARBEITSSTAND_NICHT_IMPORTIEREN_20261013.json`; SHA256 `164d92d2d4f0f72e890d2ad5315d5f7c925816a592572863bdc032b678cc88c5`. Vollständige 144×3 Titelideen und alle 21 Besitzer-Fälle sind im Büro selbst abgelegt, nicht bloß im Chat.
 
-## R3/V4 – aktueller vollständiger redaktioneller Arbeitsstand (13.10.2026)
+## R3/V4 – dokumentierte Vorgängerfassung (13.10.2026)
 
 **Aktuelle maßgebliche Konzeptakte:** `KONZEPT/R3_V4_144_KATEGORIEN_432_IDEEN_FACHLICH_BEREINIGT_20261013.md` (GitHub Campus-Branch, zuletzt Commit `8257c46175df4dbd5117779426e2ec4c139b7642`). Sie enthält **alle 144 neuen Kategoriezuordnungen und alle 432 aktuelle Artikelideen**. Ältere R3-Redaktionsakten sind Vorgängerstufen, nicht aktueller Wortlaut.
 
@@ -40,6 +40,14 @@ Autoritative Detailakten im selben Büro:
 **Nachweis:** 6 Welten, 31 Bereiche, 93 Unterbereiche, 285 CORE-Blätter (141 alt, 144 neu), überall mindestens 3 und höchstens 10 direkte Kinder; 432 neue konkrete Vorschlagsartikel ohne exakte Wiederholung gegen 704 alte; 17 vorgeschlagene Artikelumhängungen, alle Altquellen danach weiterhin >=3 Ideen. Nach V2 wurden **acht** zu nahe/generische Artikelideen fachlich präzisiert (sechs Spezial-Owner, zwei Garteninventar/Grillbereich). Nach erneuter lexikalischer Querprüfung aller Titel: **3** Paarhinweise mit gewichteter Zeichen-/Wortähnlichkeit >=0,5; alle benötigen redaktionelle Einordnung, keiner beweist allein eine SEO-Doppelung. Positive/negative Strukturtests unverändert bestanden.
 
 **Öffentliche qualitative Sachquellen:** ADAC (fahrzeugspezifischer Feuerlöscher, Camper-Gasprüfung), Verbraucherzentrale (Steckersolar vs. große PV), technische Heizungs-Mobilfunkalarme und Trocknungsprotokoll/Versicherer/Hausverwaltung; Quell-URLs in V4-Akte. Diese Quellen stützen praktische Themenunterschiede, sind **keine** Google-Top-10-Overlap-Prüfung. Historische DataForSEO-Ergebnisse: 16 von 20 SERP-Paaren vollständig gemessen, 4 nicht; Keywordüberblick 128 von 282 geliefert. Alle 144 neuen R3-Kategorien bleiben hinsichtlich Suchvolumen und SERP-Owner **ungeprüft bzw. unvollständig belegt**. Keine neuen DataForSEO-Kosten, kein WordPress-Schreibvorgang.
+
+## R3/V5 – neuer einziger aktueller redaktioneller Fachplan
+- **Aktuelle vollständige Büroakte:** `KONZEPT/R3_V5_144_KATEGORIEN_432_IDEEN_EDITORIAL_FACHPLAN_20261013.md`, zuletzt Commit `fa3338f68b05384a1c913d93ea6357f9522cea71`. Enthält tatsächlich alle **144 × 3** aktuellen Ideen und die konzeptionellen Eigentümer, ohne Keyword-/Artikelkopien.
+- Lokale V5-Maschinenkopie im Arbeitschat: `HAB_R3_V5_FACHPLAN_NICHT_IMPORTIEREN_20261013.json`, SHA256 `e77863a7c13080e316c89a5de8a01c8fd519eae78b717dc335b1dbd1bce34b08`. **Noch nicht als GitHub-JSON gespeichert**; für spätere Arbeit ist die obige Büroakte samt R2-Original und R3-Kandidatenplan bindend. Office-QA: `KONZEPT/R3_V5_QA_20261013.json`.
+- Gegenüber V4: **6 weitere fachliche Titelpräzisierungen** gegen Wiederholung innerhalb derselben Blattkategorie, darunter zwei Feuerlöscherartikel mit ursprünglich fast identischer Befestigungsfrage. Insgesamt **14 Titelpräzisierungen seit V2** (6 V3 +2 V4 +6 V5). **19 statt 17 vorgeschlagene, eindeutig adressierte Themenverschiebungen**, nicht kopieren. Die zwei neuen Verschiebungen aus `core:leaf:162` (Überspannung im Haus) betreffen Zählerschrank sowie Router-/Datenleitungsschutz, beide künftige Spezialowner; alte Quellkategorie behält genau 3 Titel.
+- Erneuter V5-Gesamttest: 6 Welten, 31 Bereiche, 93 Unterbereiche, 285 CORE-Blätter (141 alte unverändert, 144 neue), **3–10 Regel überall**, 432 unterschiedliche Neutitelformulierungen, 704 alte unverändert, 0 exakte Alt-/Neu-/Neu-Neu-Titelwiederholungen, Altquellen nach 19 Transfers alle >=3, 0 WordPress-Schreibvorgänge, 0 neue Providerabrufe.
+- **Freigabesicherheitsgrenze unverändert:** Die bisherigen Google-SERP-Messungen beziehen sich auf 16/20 alte R2-Vergleichspaare; 4 fehlen. Für 144 neue R3-Kategorien gibt es weder hinreichende Keyword-Nachfragebelege noch eine nachgewiesen getrennte organische SERP-Suchabsicht. **Keine WordPress-Synchronisierung und kein Pluginupdate auf Grundlage des R3-Konzeptes.** Der vorhandene Kategorie-Validator 1.14.8.17 erzwingt 3–10 noch nicht an allen Zwischenebenen.
+- Die V4-Beschreibung oberhalb bleibt als dokumentierter Verlauf erhalten; **nur V5 ist aktueller Entwurf**.
 
 ## Strikte Schranken / offene Prüfungen
 - Der rein strukturelle PASS ist **KEIN SEO- oder Publikations-PASS**. Für **144 neue** Kategorien sind mindestens drei unterschiedliche, semantisch abgegrenzte Artikelintents pro Kategorie erst nachzuweisen. Keine Füllartikel oder Scheinunterteilungen.
@@ -50,4 +58,4 @@ Autoritative Detailakten im selben Büro:
 - R3 nicht als gültiges `apkw-target-tree-profile` ausgeben. Alle neuen Kategorien zunächst nur Vorschläge und bei späterer Anlage bis zur Freigabe noindex.
 
 ## EXAKT EINE NEXT ACTION
-**V4-Prioritätsprüfung ohne neue Providerkosten fortsetzen:** Die verbleibenden potenziell deckungsgleichen organischen Suchabsichten thematisch bündeln (zuerst Trocknungsprotokoll Kleinbetrieb vs. allgemeiner Schadensbericht; Löschmittel Camper vs. Haushalt; Steckersolar vs. große PV; Heizungs-SMS vs. allgemeiner Heizungsalarm; Gewächshausalarm vs. allgemeiner Frostmelder). Vorhandene SERP-/Keyword-Evidenz als R2-Bestandsbeleg einordnen, fehlende R3-Daten als unbekannt kennzeichnen. Kein Import, kein Pluginumbau oder kostenpflichtiger Providerabruf ohne Freigabe. Erst bei vollständiger fachlicher Suchintent-/Owner-Klärung importfähiges R3-Profil, Redirect-/URL-Folgen- und Live-Validator-Prüfung erstellen.
+**V5-Prioritätsprüfung ohne neue Providerkosten fortsetzen:** Die verbleibenden potenziell deckungsgleichen organischen Suchabsichten thematisch bündeln (zuerst Trocknungsprotokoll Kleinbetrieb vs. allgemeiner Schadensbericht; Löschmittel Camper vs. Haushalt; Steckersolar vs. große PV; Heizungs-SMS vs. allgemeiner Heizungsalarm; Gewächshausalarm vs. allgemeiner Frostmelder). Vorhandene SERP-/Keyword-Evidenz als R2-Bestandsbeleg einordnen, fehlende R3-Daten als unbekannt kennzeichnen. Kein Import, kein Pluginumbau oder kostenpflichtiger Providerabruf ohne Freigabe. Erst bei vollständiger fachlicher Suchintent-/Owner-Klärung importfähiges R3-Profil, Redirect-/URL-Folgen- und Live-Validator-Prüfung erstellen.
