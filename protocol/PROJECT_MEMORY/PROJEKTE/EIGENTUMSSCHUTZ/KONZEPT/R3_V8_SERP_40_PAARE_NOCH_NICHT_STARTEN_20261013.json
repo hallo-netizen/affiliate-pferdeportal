@@ -1,0 +1,327 @@
+{
+  "contract": "HB_R3_SERP_UPLOAD_V1",
+  "location_name": "Germany",
+  "language_code": "de",
+  "pairs": [
+    {
+      "candidate_category": "Fernalarm an Vertrauenspersonen",
+      "comparison_label": "R2 Ferienhaus-Einbruchschutz",
+      "keywords": [
+        "fernalarm ferienhaus nachbarn alarmkette",
+        "ferienhaus vor einbruch schützen alarm"
+      ]
+    },
+    {
+      "candidate_category": "Wasserzähler & Absperrkontrolle",
+      "comparison_label": "R2 Wasserstopp & Geräteschutz",
+      "keywords": [
+        "wasserverbrauch leerstand leckage feststellen",
+        "automatische wasserabschaltung aquastop haus"
+      ]
+    },
+    {
+      "candidate_category": "Kleingarten-Gemeinschaftsflächen",
+      "comparison_label": "R2 Gartenhaus gegen Vandalismus",
+      "keywords": [
+        "vandalismusschäden gemeinschaftsanlage kleingartenverein",
+        "gartenhaus vandalismusschaden dokumentieren"
+      ]
+    },
+    {
+      "candidate_category": "Abluftanlagen & Unterdruck",
+      "comparison_label": "R2 Kamin & Heizungsabgase",
+      "keywords": [
+        "dunstabzug kaminofen unterdruck fensterkontaktschalter",
+        "kamin abgasstau kohlenmonoxid erkennen"
+      ]
+    },
+    {
+      "candidate_category": "Kleingartenlauben bei Hagel",
+      "comparison_label": "R2 Gartenhaus bei Unwetter",
+      "keywords": [
+        "gartenlaube dach hagelschaden schützen",
+        "gartenhaus fenster vor hagel schützen"
+      ]
+    },
+    {
+      "candidate_category": "Paket- & Lieferstationen",
+      "comparison_label": "R2 Pakete & Briefkästen",
+      "keywords": [
+        "paketabholstation kleines geschäft vandalismusschutz",
+        "paketkasten diebstahlschutz privat"
+      ]
+    },
+    {
+      "candidate_category": "Private Grill- & Rastbereiche",
+      "comparison_label": "R2 Kleine Vereinsanlagen",
+      "keywords": [
+        "sitzgruppe privater grillplatz vandalismus",
+        "sitzbank vereinsgelände vandalismus schützen"
+      ]
+    },
+    {
+      "candidate_category": "Sanitäreinrichtungen",
+      "comparison_label": "R2 Kleine Vereinsanlagen",
+      "keywords": [
+        "vereinsheim toilette vandalismus sanitäranlagen",
+        "vereinsheim vor sachbeschädigung schützen"
+      ]
+    },
+    {
+      "candidate_category": "Störungen an Schwimmerschaltern",
+      "comparison_label": "R2 Hebeanlagen & Rückstau",
+      "keywords": [
+        "sumpfpumpe schwimmerschalter klemmt störung",
+        "hebeanlage störalarm rückstauwarnung unterscheiden"
+      ]
+    },
+    {
+      "candidate_category": "Überhitzung im Dachgeschoss",
+      "comparison_label": "R2 Frostwächter & Temperaturen",
+      "keywords": [
+        "sommerhitze dachgeschoss temperatur überwachen",
+        "frostwächter haus temperatur überwachen"
+      ]
+    },
+    {
+      "candidate_category": "Verkaufsautomaten im Außenraum",
+      "comparison_label": "R2 Werkstatt & Lager vor Sachschäden",
+      "keywords": [
+        "warenautomat privat vandalismus schutz",
+        "kleines lager vandalismusschäden verhindern"
+      ]
+    },
+    {
+      "candidate_category": "Carport-Fahrzeugschutz",
+      "comparison_label": "R2 Garage & Garagentor",
+      "keywords": [
+        "carport gegen fahrzeugdiebstahl sichern",
+        "garage auto vor diebstahl sichern"
+      ]
+    },
+    {
+      "candidate_category": "Außenboxen & Lagerkisten",
+      "comparison_label": "R2 Schuppen & Hobbyraum",
+      "keywords": [
+        "gartenbox gegen aufbrechen sichern",
+        "geräteschuppen gegen aufbruch sichern"
+      ]
+    },
+    {
+      "candidate_category": "Mobile Aufbauten & Dachboxen",
+      "comparison_label": "R2 Motorräder & Privat-Anhänger",
+      "keywords": [
+        "dachbox am auto gegen diebstahl sichern",
+        "privaten anhänger gegen diebstahl schützen"
+      ]
+    },
+    {
+      "candidate_category": "Einsehbarkeit & Sichtachsen",
+      "comparison_label": "R2 Gartentore & Zaunsicherung",
+      "keywords": [
+        "garten sichtschutz einbruchschutz einsehbarkeit",
+        "gartenzaun gegen einbruch sichern"
+      ]
+    },
+    {
+      "candidate_category": "Private Objektkontrollen",
+      "comparison_label": "R2 Leerstehendes Wohnhaus",
+      "keywords": [
+        "leerstehendes haus kontrollgänge organisieren",
+        "leerstehendes wohnhaus gegen einbruch sichern"
+      ]
+    },
+    {
+      "candidate_category": "Anwesenheitssimulation",
+      "comparison_label": "R2 Ferienhaus-Einbruchschutz",
+      "keywords": [
+        "anwesenheitssimulation",
+        "ferienhaus bei abwesenheit gegen einbruch sichern"
+      ]
+    },
+    {
+      "candidate_category": "Schlüsselmanagement im Kleingewerbe",
+      "comparison_label": "R2 Kleine Laden- & Praxisräume",
+      "keywords": [
+        "schlüsselverwaltung für kleine betriebe",
+        "schlüsselkontrolle kleine praxis organisieren"
+      ]
+    },
+    {
+      "candidate_category": "Kassen & Bargeld nach Ladenschluss",
+      "comparison_label": "R2 Kleine Laden- & Praxisräume",
+      "keywords": [
+        "bargeld nach ladenschluss sicher aufbewahren",
+        "kleinen laden nach ladenschluss sichern"
+      ]
+    },
+    {
+      "candidate_category": "Fassadenputz & Oberflächenschäden",
+      "comparison_label": "R2 Graffiti vorbeugen",
+      "keywords": [
+        "fassadenputz vor vandalismus schützen",
+        "graffiti schutz fassade vorbeugen"
+      ]
+    },
+    {
+      "candidate_category": "Garteninventar & Outdoor-Möbel",
+      "comparison_label": "R2 Gartenmöbel & Grillgeräte",
+      "keywords": [
+        "gartenmöbel vor vandalismus schützen",
+        "gartenmöbel gegen diebstahl sichern"
+      ]
+    },
+    {
+      "candidate_category": "Gemeinschaftskeller & Waschräume",
+      "comparison_label": "R2 Fahrradkeller & Kellerabteile",
+      "keywords": [
+        "gemeinschaftskeller vandalismus schäden",
+        "fahrradkeller gegen diebstahl absichern"
+      ]
+    },
+    {
+      "candidate_category": "Außenzähler & Messstellen",
+      "comparison_label": "R2 Außentechnik vor Vandalismus",
+      "keywords": [
+        "stromzähler außen vor manipulation schützen",
+        "wallbox gegen vandalismus schützen"
+      ]
+    },
+    {
+      "candidate_category": "Sachbeschädigung an Privatwagen",
+      "comparison_label": "R2 Oldtimer & Privatwagen",
+      "keywords": [
+        "auto vor sachbeschädigung schützen",
+        "privatauto gegen diebstahl sichern"
+      ]
+    },
+    {
+      "candidate_category": "Sporttore & Spielfeldinventar",
+      "comparison_label": "R2 Kleine Vereinsanlagen",
+      "keywords": [
+        "fußballtor manipulation prüfen vandalismus",
+        "sportgeräte kleiner verein vandalismus schützen"
+      ]
+    },
+    {
+      "candidate_category": "Leitungskorrosion im Haus",
+      "comparison_label": "R2 Rohrdruck & Lecksuche",
+      "keywords": [
+        "korrosion wasserleitungen erkennen",
+        "rohrleck wasserleitung erkennen"
+      ]
+    },
+    {
+      "candidate_category": "Kellerwände bei Grundwasser",
+      "comparison_label": "R2 Kellerabdichtung & Ursachen",
+      "keywords": [
+        "grundwasser drückt durch kellerwand",
+        "kellerwand feuchtigkeit abdichten"
+      ]
+    },
+    {
+      "candidate_category": "Außenwasserhähne & Frost",
+      "comparison_label": "R2 Wasserleitungen gegen Frost",
+      "keywords": [
+        "außenwasserhahn frostsicher machen",
+        "wasserleitung im haus vor frost schützen"
+      ]
+    },
+    {
+      "candidate_category": "Gartenbewässerung winterfest machen",
+      "comparison_label": "R2 Wasserleitungen gegen Frost",
+      "keywords": [
+        "gartenbewässerung winterfest machen",
+        "wasserleitung garten frostsicher machen"
+      ]
+    },
+    {
+      "candidate_category": "Wohnmobil-Dachnähte & Abdichtung",
+      "comparison_label": "R2 Vorzelt & Dichtheitsprobleme",
+      "keywords": [
+        "wohnmobil dachnaht undicht abdichten",
+        "vorzelt wohnmobil regen undicht abdichten"
+      ]
+    },
+    {
+      "candidate_category": "Wasserpumpen im Camper",
+      "comparison_label": "R2 Feuchtigkeit beim Camping",
+      "keywords": [
+        "wohnmobil wasserpumpe undicht",
+        "wohnmobil wasserschaden boden feuchtigkeit"
+      ]
+    },
+    {
+      "candidate_category": "Gasprüfungen im Freizeitfahrzeug",
+      "comparison_label": "R2 Rauch, CO & Gas beim Camping",
+      "keywords": [
+        "gasprüfung wohnmobil vorschriften",
+        "gasleck wohnmobil gaswarnmelder"
+      ]
+    },
+    {
+      "candidate_category": "Steckdosen & Mehrfachverteiler",
+      "comparison_label": "R2 Elektrische Küchenbrandgefahren",
+      "keywords": [
+        "mehrfachsteckdose brandgefahr",
+        "steckdosenleisten küche brandgefahr"
+      ]
+    },
+    {
+      "candidate_category": "Akku-Ladegeräte & Defekte",
+      "comparison_label": "R2 Lithium-Akkus & Powerstations",
+      "keywords": [
+        "akku ladegerät defekt brandgefahr",
+        "lithium akku brandgefahr bei lagerung"
+      ]
+    },
+    {
+      "candidate_category": "Sturmwarnungen verstehen",
+      "comparison_label": "R2 Außenanlagen bei Sturm",
+      "keywords": [
+        "sturmwarnung wetterdienst verstehen",
+        "gartenmöbel gegen sturm sichern"
+      ]
+    },
+    {
+      "candidate_category": "Potentialausgleich im Wohnhaus",
+      "comparison_label": "R2 Blitzschutz am Wohnhaus",
+      "keywords": [
+        "potentialausgleich einfamilienhaus",
+        "blitzschutz erdung haus unterschied"
+      ]
+    },
+    {
+      "candidate_category": "Heizungs-Sicherheitsabschaltungen",
+      "comparison_label": "R2 Heizungsausfall",
+      "keywords": [
+        "heizung sicherheitsabschaltung ursachen",
+        "heizungsstörung im winter sicherheitsabschaltung"
+      ]
+    },
+    {
+      "candidate_category": "SIM-Karten für Alarmmelder",
+      "comparison_label": "R2 Router & Mobilfunk-Backup",
+      "keywords": [
+        "sim karte für alarmanlage",
+        "mobilfunk backup router bei internetausfall"
+      ]
+    },
+    {
+      "candidate_category": "Störungen an Heizungssteuerungen",
+      "comparison_label": "R2 Heizungsausfall",
+      "keywords": [
+        "heizungssteuerung störung fehler",
+        "heizungsausfall störung fehler erkennen"
+      ]
+    },
+    {
+      "candidate_category": "Alarmübertragungswege & Standards",
+      "comparison_label": "R2 Offline-Sicherheitssysteme",
+      "keywords": [
+        "alarmübertragung sicherheitsanlage standards",
+        "alarmanlage ohne internet alarmübertragung"
+      ]
+    }
+  ]
+}
