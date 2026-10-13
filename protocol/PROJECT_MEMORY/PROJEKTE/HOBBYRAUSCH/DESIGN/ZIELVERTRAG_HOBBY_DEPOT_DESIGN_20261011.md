@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.0 / 2026-10-13
+FASSUNG: 4.1 / 2026-10-13
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -44,23 +44,41 @@ FASSUNG: 4.0 / 2026-10-13
 - Stand 1.50.634 wird vorerst akzeptiert und nicht weiter verändert.
 
 ## Kategorieebene 2 / Hub2
-- Der akzeptierte Buch-&-Papier-Stand **1.50.645** ist die verbindliche **visuelle Vorlage** für alle Hub2-Seiten.
+- Der akzeptierte Buch-&-Papier-Stand **1.50.645** bleibt die visuelle Referenz für Karten, Claim-Stil und Grundcharakter.
+- Der in 1.50.650 live bestätigte **Textinhalt** und die dort bestätigte **Grundaufteilung** sind eingefroren; Bild- und Hero-Fehler dürfen diese Bereiche nicht erneut verändern.
 - Breadcrumb oben.
-- Hero-Bereich innerhalb der normalen Body-Breite;
-- **Desktop >1100 px:** links Schreibschrift-Claim + H1 + kurzer direkter Einsteigertext, rechts ein breites Hero-Bild;
-- **Tablet / mittlere Breiten <=1100 px:** Claim + H1 + kurzer Einsteigertext oben, Hero-Bild darunter über die volle Body-Breite;
-- **Mobil:** dieselbe gestapelte Logik, kompakter;
-- der längere Kategorietext steht unter dem Hero: ein echter Textanteil sofort sichtbar, Rest über `Mehr zu <Kategorie> erfahren`;
-- Hero-Bild läuft weich in Weiß aus und wird durch das Öffnen des Langtexts nicht verändert;
-- kein neues separates Hero-Asset erzeugen.
-- über der H1 steht ein kurzer individueller, natürlicher Claim in derselben Schreibschrift-/Brush-Optik.
-- **Hero-Einsteigertext:** kurz, direkt, du-Ansprache, locker/pfiffig, nicht förmlich und themenspezifisch; keine austauschbare Schablone.
 
-### Textregel
-Verbindliche Quelle:
+### Hero – Aufbau
+- **Desktop >1100 px:** links Schreibschrift-Claim + H1 + kurzer direkter Einsteigertext; rechts ein breites, klar erkennbares Hero-Bild.
+- **Tablet / mittlere Breiten <=1100 px:** Claim + H1 + kurzer Einsteigertext oben; Hero-Bild darunter; längerer Kategorietext erst danach.
+- **Mobil:** dieselbe gestapelte Logik, kompakter.
+- Der Hero darf die Seite nicht dominieren. Ein vollbreites 600×320-Bild darf auf Tablet/Mobil **nicht ungeprüft hochskaliert** werden, wenn dadurch ein übergroßer Hero entsteht.
+- Hero-Bilder müssen als **breite Landschafts-/Stilleben-Szene** funktionieren: Thema sofort erkennbar, Hauptmotiv vollständig sichtbar, genügend Abstand, kein Makro-/Detailcrop.
+- Keine unscharfen oder sichtbar hochskalierten Quellen. Ein Bild darf nur verwendet werden, wenn seine reale Auflösung für die tatsächliche Ausgabefläche ausreicht.
+- Wenn kein geeignetes vorhandenes Motiv existiert: **kein falscher Fallback**. Dann bleibt der Bildslot für die Arbeitsfreigabe als fehlend markiert bzw. es wird gezielt ein neues, optimiertes Motiv erzeugt; niemals thematisch falsches Bild nur zum Füllen.
+- Der linke Weißverlauf darf das Motiv nicht zerstören und darf keine zusätzliche Unschärfe vortäuschen.
+- Hero-Rundung zurückhaltend, maximal wie im akzeptierten Buch-&-Papier-Stand.
+
+### Hero – Claim
+- Über der H1 steht pro Hub2 ein kurzer individueller, natürlicher, leicht frecher Claim.
+- Schreibschrift und beige Pinselkurve orientieren sich **exakt am akzeptierten Buch-&-Papier-Stand**.
+- Pinselstrich bleibt unter dem Claim, mit sauberem Abstand; nicht nach oben verrutschen.
+- Pinselstrich darf nicht deutlich über den sichtbaren Claim hinauslaufen; keine überlange Vollbreiten-Linie.
+- Claim-Größe und -Position nicht pro Kategorie willkürlich skalieren.
+
+### Hero – kurzer Einstieg
+- Pro Hub2 ein kurzer, eigener Einsteigertext.
+- direkte **du**-Ansprache;
+- locker, pfiffig, nicht förmlich;
+- themenspezifisch;
+- keine austauschbare Schablone;
+- kurz genug, damit der Hero unabhängig von Kategorie und Bildschirmbreite stabil bleibt.
+
+### Längerer Kategorietext
+Verbindliche Textregel:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`
 
-Es werden **nur die redaktionellen Textregeln** aus Pferdeatelier übernommen, nicht dessen UI:
+Es werden **nur die redaktionellen Textregeln** aus Pferdeatelier übernommen:
 - ca. 150–200 Wörter;
 - natürliches normales Deutsch;
 - themenspezifische Substanz;
@@ -69,24 +87,39 @@ Es werden **nur die redaktionellen Textregeln** aus Pferdeatelier übernommen, n
 - fachliche, praktische Orientierung;
 - nur reale vorhandene Unterthemen nennen.
 
-Hobby-Depot-Darstellung bleibt wie Buch & Papier:
+Hobby-Depot-Darstellung:
 **sichtbarer Lead → `Mehr zu <Kategorie> erfahren` → restlicher Text im Aufklapper.**
-Kein zusätzlicher zweiter Erklärungstext unterhalb des Aufklappers.
+- kein zusätzlicher zweiter Erklärungstext;
+- der Text steht unter dem Hero;
+- beim Öffnen darf sich die Hero-Bildgröße nicht verändern;
+- ausreichend echter Text bleibt bereits ohne Aufklappen sichtbar.
+
+### Hero-Bildregeln – semantisch
+Für jede der 65 Hub2-Seiten:
+- eigenes thematisch passendes Hero-Motiv;
+- Szene weiter herausgezoomt;
+- klare Szenerie / Stilleben statt angeschnittenem Detail;
+- Hauptthema auf den ersten Blick erkennbar;
+- wenige konkurrierende Objekte;
+- keine inhaltlich fremden Motive;
+- keine Duplikat-/Universalbilder für fachlich verschiedene Kategorien;
+- keine Kakteen bei Genuss oder Essbare Pflanzen, wenn das konkrete Thema nicht Kakteen ist;
+- keine Blumen als Hauptmotiv für Ameisen & Insekten;
+- keine Münzen-/Globusmotive für Papier-/Postkarten-Unterthemen ohne echten fachlichen Bezug.
 
 ### Unterkategoriekarten
 - jede tatsächlich vorhandene direkte Unterkategorie erhält eine **Fotokarte**;
-- kein Rückfall auf die frühere Icon-Wüste;
-- Buch & Papier behält seine fünf akzeptierten Motive;
-- bei allen anderen Hub2-Seiten müssen die Fotos innerhalb derselben Seite unterschiedlich sein;
-- Bilder müssen **inhaltlich zur konkreten Unterkategorie passen**; kein beliebiges Welt-Pool-Bild nur zum Füllen eines Slots;
-- Bildwirkung: **klare, einfache Szene, Hauptmotiv sofort erkennbar, keine überfüllte Detailansicht und kein unnötiger Lupen-/Makroeindruck**;
-- Hero-Motive sollen eine **weiter gefasste Szenerie** zeigen; nicht nur einen angeschnittenen Detailgegenstand;
-- eingebrannte weiße Rahmen, Passepartouts, Vignetten oder künstliche Bild-im-Bild-Ränder sind unzulässig;
-- zufälliger generischer Fallback über beliebige Motive derselben Welt ist für Hub2 nicht zulässig; die Bildbindung muss kontrolliert/deterministisch sein;
-- echtes Featured Image der Zielseite hat Vorrang;
-- wenn keines vorhanden ist, wird ein noch unbenutztes vorhandenes kontrolliertes Foto derselben Hobbywelt verwendet;
-- das Eltern-/Hero-Motiv darf nicht als Universalbild für alle Kindkarten wiederholt werden;
+- kein Icon-Rückfall;
 - jede Karte erhält unter dem Titel eine kurze sinnvolle Orientierungszeile wie bei Buch & Papier;
+- jedes Bild muss inhaltlich **zur konkreten Unterkategorie** passen;
+- kein generischer Welt-Pool-Fallback;
+- innerhalb derselben Hub2-Seite keine doppelten Bilddateien und keine offensichtlich identischen Motive;
+- klare, einfache Szene, Hauptmotiv sofort erkennbar;
+- **Zoom raus:** kein Makro-/Detailbild, wenn dadurch das Thema nicht mehr erkennbar ist;
+- möglichst wenig störender Hintergrund / keine überfüllte Szene;
+- keine eingebrannten weißen Rahmen, Passepartouts, Vignetten oder Bild-im-Bild-Ränder;
+- keine unscharfen/upgescalten Quellen;
+- wenn kein geeignetes vorhandenes Bild existiert: als fehlend behandeln und gezielt ersetzen, nicht semantisch falsch füllen;
 - Bilder exakt im vorhandenen Ebene-1-Kartenrahmen: Margin 0, Padding 0, Foto-Radius 0, Overflow hidden, Object-fit cover;
 - Desktop 3 Karten nebeneinander; unvollständige letzte Reihe linksbündig;
 - Affiliate-Banner darf den freien Restplatz der letzten 3er-Reihe füllen; bei voller Reihe eigene Bannerzeile.
@@ -98,6 +131,18 @@ Kein zusätzlicher zweiter Erklärungstext unterhalb des Aufklappers.
 - **kein** zusätzlicher redaktioneller Seitenendtext auf Hub2;
 - öffentlich leere Affiliate-Flächen unsichtbar; eingeloggte Arbeitsvorschau erlaubt;
 - je tiefer die Seite, desto konkreter die Produktbelegung; nicht einfach mehr Produkte.
+
+### Harte Abnahme für Bild-/Hero-Änderungen
+Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte:
+1. semantische Passung;
+2. Zoom/Szenerie;
+3. Schärfe / keine Hochskalierung;
+4. Duplikatfreiheit;
+5. keine eingebrannten Rahmen;
+6. Hero-Höhe und Proportionen;
+7. Responsive Desktop/Tablet/Mobil;
+8. Claim-Unterstrich;
+9. Regression der live bestätigten Text-/Grundaufteilung.
 
 ## Karten
 - natürliche Überschrift `Weiter in <Thema>` / `Weitere Kategorien`.
