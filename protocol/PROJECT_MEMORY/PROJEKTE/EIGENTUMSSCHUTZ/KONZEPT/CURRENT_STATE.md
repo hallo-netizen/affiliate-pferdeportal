@@ -2,7 +2,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **LIVE R3/V8-SYNC COMPLETE – WORDPRESS FRONTEND-/STRUKTUR-READBACK PASS – ABSCHLUSS-JSON NOCH ANFORDERN/PRÜFEN – KEINE SEO-RECHERCHE**
+STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
 
 ## VERBINDLICHE KONZEPTENTSCHEIDUNG DES NUTZERS – 13.10.2026: KEINE SERP-PFLICHT PRO KATEGORIE
 - **Fachlich sinnvolle Kategorien dürfen aufgenommen werden, auch wenn Google keine Treffer, keinen messbaren Suchvolumenwert oder kein direktes SERP-Vergleichspaar liefert.** Die zuvor vom Assistenten eingeführte 144/144-SERP-/SEO-Owner-PASS-Pflicht war eine unbegründete Blockade und ist **hiermit für die Umsetzung aufgehoben**. SEO-Evidenz bleibt optionale Priorisierung/Qualitätshilfe, kein zwingender Category-Release-Gate.
@@ -153,16 +153,18 @@ Letzter bestätigter Real-Readback **12.10.2026**: Kategorie-Plugin 1.14.8.17; R
 - **Vorbereitender Live-WordPress-Preflight PASSED.** Noch keine WP-Kategorien oder Artikel geändert, Bereitstellung des geprüften Profils noch **nicht** als erfolgt gemeldet, schreibender Sync noch **nicht** belegt.
 - Keine weiteren SEO-, DataForSEO- oder Keyword-Prüfungen erforderlich. Nächster Klick ist ausdrücklich vom WP-System selbst vorgegeben.
 
-## LIVE R3/V8-PROFILBINDUNG, DRY-RUN UND SYNC – Nutzerscreenshots 13.10.2026, 20:54–20:58
-- **Profil bereitgestellt:** Unter `Portal-Kategorien → Finaler Zielbaum` zeigt WordPress statt R2 eine gebundene Profilrevision mit Präfix `HB-R3-V8-20261013-`. Der Nutzer hat den Profilbereitstellungs-Button nach eigener Angabe dreimal betätigt; das ist **kein** Beleg für drei Synchronisierungen.
-- **Finaler kostenloser Live-Delta-Dry-Run: PASS**, Zielobjekte 546, `CREATE 192`, `ADOPT 0`, `UPDATE 354`, `UNCHANGED 0`, `ARCHIVE 0`. In dieser Prüfphase meldete WordPress `Provider-Aufrufe: 0` und `Strukturwrites: 0`. Der geprüfte Plan wurde danach manuell bestätigt und die bestehende Synchronisierung ausgelöst.
-- **Tatsächlich angezeigter Abschluss nach Sync:** WordPress-Meldung `Struktur-Sync COMPLETE für diesen Zielstand. Frontend-/Struktur-Readback: PASS.`; im Abschnitt `3. Abschluss`: `Sync: COMPLETE · Frontend-Readback: PASS`. Dies ist ein echter Live-UI-Nachweis des synchronisierten Zielstandes; **nicht** bloß der alte R2-Sync.
-- **Beweisgrenze:** Das ausführliche abschließende Readback-JSON wurde noch nicht vom Nutzer bereitgestellt und hier daher nicht einzeln gegen alle 285 Blattkategorien, 1.136 Artikelideen, 19 Moves, Alt-IDs/Slugs/URLs oder mögliche Redirects verifiziert. Kein eigenständiger Rollback-Nachweis. Keine erneute Synchronisierung, kein erneuter Preflight, keine neue SEO-Prüfung.
+## Vollständiger WordPress-Abschlussnachweis – 13.10.2026, 18:59 UTC
+- **Originaldatei vom Nutzer tatsächlich hochgeladen und vollständig lokal ausgelesen:** `portal-final-target-readback-20261013-185929-utc.json`, SHA-256 `e90d1e66c814f291e33c6dee3239924d760d493b8998b0bf5ea565f2080cbdae`; Pluginversion laut Export `1.14.8.19`, R3/V8-Profilrevision `HB-R3-V8-20261013-039c80c8c16d9b4f+b1998ec09edd98d0`. Der Bericht enthält **zwei getrennte Phasen**, nicht zwei Fehlschläge: vorher 192 CREATE + 354 UPDATE, nachher 546 UNCHANGED.
+- **Echter Struktur-Sync: `COMPLETE`**, 546/546 Zielobjekte verarbeitet und 546/546 live rückgelesen; 192 neu erstellt, 354 vorhandene aktualisiert, **0 gelöscht/archiviert**, Runner `COMPLETE` und `TARGET_TREE_SYNC_AND_READBACK_PASS`. Sync 18:56:06–18:56:38 UTC.
+- **Separater Post-Sync-Nachweis: `PASS`**, 546/546 `UNCHANGED`, `CREATE 0 / UPDATE 0 / ARCHIVE 0`, 0 Fehler, 0 weitere Strukturwrites und 0 Provider-Aufrufe. Für 354 vorhandene Objekte im Vorher-Nachher-Vergleich **alle WP-IDs, Namen, Slugs und direkte Eltern gleich**; alle 192 neuen besitzen anschließend eine echte positive WordPress-ID. Alle Node-Zuordnungen im Sync-Mapping stimmen mit dem Nach-Readback überein; **keine Doppel-Slugs innerhalb eines Objekttyps**.
+- **Tatsächliche Kernstruktur aus den 546 Objekten geprüft:** 6 Welten, 31 Bereiche, 93 Unterbereiche, 285 Blattkategorien. Alle 31 Bereiche besitzen je 3 direkte Unterbereiche; 87 Unterbereiche besitzen je 3, sechs besitzen je 4 Blätter. Kein fehlender Elternbezug. Frontend-Readback `valid=true`, Header/Content `valid=true`, 93/93 terminale Kernkategorien kontrolliert, 0 Fehler.
+- **Beweisgrenze wichtig:** Dieser `APKW_FINAL_TARGET_DRY_RUN_V1`-Export mit eingebettetem Post-Sync-Readback ist **ein Struktur-/Frontend-Nachweis**, kein eigener Datensatz mit allen 1.136 redaktionellen Artikelideen oder den 19 individuellen Ideenverschiebungen. Die 1.136 Ideen und 19 genau einmal behandelten Moves sind durch den **zuvor bestandenen WordPress-R3/V8-Preflight** bestätigt; **nicht als separat post-synchronisiert oder als reale veröffentlichte Artikel ausgeben**. Ebenso keine gesonderten HTTP-/Redirect-/Rollback-Proben behaupten.
+- **Entscheidung/WARUM:** Der bestehende WordPress-Ablauf hat die R3-Struktur nachweislich ohne Strukturfehler eingebracht. **Nicht** erneut synchronisieren, Preflight wiederholen, recherchieren oder Plugin umbauen.
 
 ## Erster offener Fehler / Sperre
-- **Kein gemeldeter Live-Sync-Blocker:** WordPress zeigt für R3/V8 `COMPLETE` und `Frontend-/Struktur-Readback: PASS`.
-- **Nächster offener Abschlussnachweis:** Das vom Plugin angebotene `Finalen Readback als JSON herunterladen` muss vom Nutzer heruntergeladen und hier als Datei bereitgestellt werden. Erst daraus lassen sich einzelne Zählungen, Altbestand, Moves und mögliche Fehlermeldungen detailliert gegen den Plan abgleichen. Keine zusätzlichen technischen Prüfungen ohne konkreten Anlass.
-- **HB-CONCEPT-002 bleibt ein optionales SEO-Qualitätssignal, keine Importsperre.** Google-/DataForSEO-Messungen nicht erneut anstoßen. **HB-CONCEPT-004 ist historisch**, die alte 3–10-Lücke ist nicht erneut zu prüfen.
+- **Kein offener Struktur-Sync-Blocker:** 546/546 Post-Sync-Readback PASS; 0 Fehler.
+- Nur als abweichende Nachweistypen offen: redaktionelle Einzelbelege der 19 Artikelideen-Umhängungen nach dem Struktur-Sync sowie gegebenenfalls direkte externe HTTP-/Redirect-/Rollback-Nachweise. Diese sind **keine rückwirkende Struktur-Sync-Sperre** und rechtfertigen keinen neuen Lauf.
+- HB-CONCEPT-002: optionales SEO-Qualitätssignal, **keine** Release-Sperre. Keine weiteren kostenpflichtigen SERP-/Keywordtests.
 
 ## EXAKT EINE NEXT ACTION
-**In WordPress unter `Portal-Kategorien → Finaler Zielbaum` einmal `Finalen Readback als JSON herunterladen` klicken und die heruntergeladene JSON-Datei hier hochladen.** Anschließend den tatsächlich gelieferten Abschlussnachweis gegen die bestehenden R3/V8-Schutzanforderungen auswerten. Der Live-Sync steht bereits auf `COMPLETE` und der UI-Readback auf `PASS`; **nicht erneut synchronisieren**.
+**Kein weiterer WordPress-Strukturklick. Für die spätere redaktionelle Umsetzung ausschließlich das jetzt eingebundene R3/V8-Profil mit 285 Blattkategorien als Grundlage nutzen und die 1.136 geplanten Ideen einschließlich 19 nur einmal vorgesehenen Umhängungen an die zuständige Inhaltsarbeit übergeben; ohne weitere Kategorien-Synchronisierung.** Ein realer Artikel-Import/Publikationsauftrag liegt für diesen Arbeitsschritt nicht vor.
