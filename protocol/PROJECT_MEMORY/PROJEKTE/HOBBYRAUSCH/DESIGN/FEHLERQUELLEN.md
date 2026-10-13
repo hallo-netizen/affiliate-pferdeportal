@@ -124,6 +124,27 @@ Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
 
 
 
+
+## HRD-066 – Hub2-Hero bei Tabletbreiten gequetscht / Hero-Bildwirkung nicht stabil
+STATUS: **LOCAL CLOSED 1.50.651 / LIVE OFFEN**
+
+LIVE-BEFUND 1.50.650:
+- Desktop-Grundaufteilung grundsätzlich brauchbar;
+- bei mittleren Breiten standen längerer Text und Hero weiter nebeneinander und wirkten gequetscht;
+- Hero-Motive waren teilweise weiterhin zu detailnah.
+
+FIX 1.50.651:
+- langer regelkonformer Text aus dem Split-Hero herausgezogen und unter den Hero gesetzt;
+- im Hero verbleiben Claim + H1 + kurzer individueller direkter Einsteigertext;
+- >1100 px: 38/62 Split;
+- <=1100 px: Hero vollständig gestapelt;
+- 65 Hero-Motive erneut auf vorhandene weiter gefasste Varianten gebunden;
+- 65 verschiedene Hero-Dateien, keine v150631-Vignetten.
+
+TEST:
+Browser-CSS-Render 1440/1200/1100/1024/900/760/600; überall Overflow 0; Stack-Grenze und Text-Reihenfolge geometrisch geprüft.
+
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.650 ausschließlich hinsichtlich Hero-/Kartenbildqualität.**
+**Live-Abnahme 1.50.651 nur für Hero/Responsive. Danach separater offener Block: Unterkategoriekartenbilder.**
 
