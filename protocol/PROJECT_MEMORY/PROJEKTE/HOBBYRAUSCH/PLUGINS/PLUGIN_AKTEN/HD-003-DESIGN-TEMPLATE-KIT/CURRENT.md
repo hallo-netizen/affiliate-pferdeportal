@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 HERO-AUDIT KOMPLETT / LIVE OFFEN**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDAUDIT KOMPLETT / LIVE OFFEN**
 
 Version letzter Build:
 **1.50.652**
@@ -14,16 +14,18 @@ Kandidat:
 SHA-256:
 `c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
-## Gesicherter Fortschritt nach 1.50.652
-- 65/65 Heroes manuell visuell geprüft;
-- 51 PASS;
-- 14 bewusst MISSING statt semantisch falschem Fallback;
-- WIP 1.50.653 lokal vorbereitet: 600×220, kein Upscaling, kein Hero-Fallback;
-- noch kein 1.50.653-ZIP;
-- Kartenmapping noch offen.
+## WIP 1.50.653
+- Hero 65/65 geprüft: 51 PASS, 14 MISSING;
+- Karten 328/328 geprüft: 82 PASS, 246 MISSING;
+- ausschließlich bestätigte Motive aktiv;
+- Hero-Fallback, Featured-Image-Fallback, Welt-Pool-Fallback und Icon-Fallback für Hub2-Bilder im WIP entfernt;
+- 61/61 PHP Syntax PASS;
+- aktive Hero-/Kartenassets technisch PASS;
+- noch kein ZIP.
 
-Audit:
-`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HERO_AUDIT_20261013.md`
+Audits:
+- `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HERO_AUDIT_20261013.md`
+- `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CARD_AUDIT_20261013.md`
 
 ## NEXT ACTION
-**Unterkategoriekarten vollständig manuell semantisch prüfen. Kein Release vor kompletter Bild- und Renderprüfung.**
+**14 fehlende Hero- und 246 fehlende Kartenmotive gezielt ersetzen; danach Render- und Regressionstest. Kein Release vorher.**
