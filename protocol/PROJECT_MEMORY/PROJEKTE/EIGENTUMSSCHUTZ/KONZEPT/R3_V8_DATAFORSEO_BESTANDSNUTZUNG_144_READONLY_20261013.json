@@ -38,7 +38,9 @@
     "unreviewed_query_candidates": 0,
     "existing_overview_exact_match_categories": 1,
     "google_serp_fully_released_candidates": 0,
-    "queries_with_measured_new_R3_keyword_volume": 0
+    "queries_with_measured_new_R3_keyword_volume": 0,
+    "primary_query_exact_reuse_from_old_282": 1,
+    "primary_query_new_or_unmeasured": 143
   },
   "old_serp_overlap_for_context": [
     {
@@ -230,7 +232,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -251,7 +254,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -272,7 +276,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -294,7 +299,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "grundstücksgrenze bewegungsmelder kamera datenschutz",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -315,7 +321,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -336,7 +343,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -357,7 +365,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -378,7 +387,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -408,7 +418,14 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": {
+        "input": "Anwesenheitssimulation",
+        "status": "RETURNED",
+        "matched_keyword": "anwesenheitssimulation",
+        "volume": 140,
+        "difficulty": 0
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -429,7 +446,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -450,7 +468,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -471,7 +490,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -492,7 +512,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -513,7 +534,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -535,7 +557,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "außenrollladen vandalismus beschädigung manipulationsschutz",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -556,7 +579,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -577,7 +601,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -598,7 +623,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -619,7 +645,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -640,7 +667,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -661,7 +689,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -682,7 +711,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -703,7 +733,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -724,7 +755,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -745,7 +777,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -766,7 +799,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -787,7 +821,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -808,7 +843,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -829,7 +865,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -850,7 +887,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -872,7 +910,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "spielgeräte vandalismus schaukel beschädigung prüfung",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -893,7 +932,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -914,7 +954,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -935,7 +976,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -956,7 +998,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -977,7 +1020,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -998,7 +1042,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1019,7 +1064,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1040,7 +1086,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1061,7 +1108,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1082,7 +1130,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1103,7 +1152,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1124,7 +1174,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1145,7 +1196,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1166,7 +1218,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1187,7 +1240,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1208,7 +1262,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1229,7 +1284,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1250,7 +1306,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1271,7 +1328,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1292,7 +1350,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1313,7 +1372,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1334,7 +1394,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1355,7 +1416,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1376,7 +1438,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1397,7 +1460,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1418,7 +1482,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1439,7 +1504,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1460,7 +1526,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1481,7 +1548,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1502,7 +1570,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1524,7 +1593,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "wasserschaden ladenlokal trocknungsprotokoll vermieter",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1545,7 +1615,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1566,7 +1637,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1587,7 +1659,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1608,7 +1681,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1629,7 +1703,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1650,7 +1725,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1671,7 +1747,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1692,7 +1769,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1713,7 +1791,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1734,7 +1813,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1755,7 +1835,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1776,7 +1857,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1797,7 +1879,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1818,7 +1901,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1839,7 +1923,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1860,7 +1945,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1881,7 +1967,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1902,7 +1989,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1923,7 +2011,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1944,7 +2033,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1965,7 +2055,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -1986,7 +2077,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2007,7 +2099,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2029,7 +2122,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "feuerlöscher wohnmobil befestigung vibrationsschaden",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2050,7 +2144,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2071,7 +2166,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2092,7 +2188,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2113,7 +2210,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2134,7 +2232,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2155,7 +2254,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Feuer & Gase",
@@ -2176,7 +2276,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2198,7 +2299,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "starkregen warn app nina hochwasserwarnung",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2220,7 +2322,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "hausrat vor hochwasser schützen dokumente keller",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2241,7 +2344,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2262,7 +2366,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2283,7 +2388,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2304,7 +2410,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2325,7 +2432,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2346,7 +2454,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2367,7 +2476,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2388,7 +2498,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2409,7 +2520,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2430,7 +2542,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2451,7 +2564,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2473,7 +2587,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "überspannungsschutz im zählerschrank haus",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2495,7 +2610,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "ethernet poe überspannungsschutz außenbereich",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2517,7 +2633,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "balkonkraftwerk überspannung gewitter",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2539,7 +2656,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "satellitenantenne blitzschutz erdung koax",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2561,7 +2679,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "erdkabel garage blitz überspannungsschutz",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2582,7 +2701,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2604,7 +2724,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "dachbox sturm wind befestigung",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2625,7 +2746,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2646,7 +2768,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2667,7 +2790,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -2688,7 +2812,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2709,7 +2834,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2730,7 +2856,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2751,7 +2878,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2772,7 +2900,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2793,7 +2922,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2814,7 +2944,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2836,7 +2967,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "heizungsalarm gsm sms ohne wlan",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2857,7 +2989,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2878,7 +3011,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2900,7 +3034,8 @@
       "publish_allowed": false,
       "previous_prioritized_query": "gewächshaus frostalarm mehrere temperatursensoren",
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2921,7 +3056,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2942,7 +3078,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2963,7 +3100,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -2984,7 +3122,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3005,7 +3144,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3026,7 +3166,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3047,7 +3188,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3068,7 +3210,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3089,7 +3232,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3110,7 +3254,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3131,7 +3276,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3152,7 +3298,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3173,7 +3320,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3194,7 +3342,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3215,7 +3364,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3236,7 +3386,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     },
     {
       "world": "Technik & Ausfälle",
@@ -3257,7 +3408,8 @@
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
-      "paid_query_executed": false
+      "paid_query_executed": false,
+      "exact_match_for_primary_query_in_282": null
     }
   ],
   "note": "144 redaktionell formulierte, unterschiedliche deutsche Suchformulierungen, nicht als echte Google-Suchintention/Marktnachfrage belegt. Vor Ausführung müssen bestehende R2-Owner und die tatsächlich beabsichtigten Artikelintents auf identische Keywords/Synonyme geprüft werden. Die 15 Prioritäts-Phrasen aus dem Fachquellen-Audit bleiben zusätzlich unter previous_prioritized_query sichtbar; Abweichungen sind Alternativen, keine zweite Kategorie."
