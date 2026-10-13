@@ -15,18 +15,21 @@ SHA-256:
 `c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
 ## WIP 1.50.653
-- reale rekonstruierte Arbeitsbasis: verfügbares 1.50.651-ZIP + autoritative 1.50.652/1.50.653-Audits;
-- Hero: **59/65** aktiv/verfügbar, **6 fehlen**;
-- Kategorievorschauen: **59/65**, aus derselben Quelle wie der jeweilige Hero;
-- Karten: **71/328** aktiv/verfügbar, **257 fehlen**;
+- reale rekonstruierte Arbeitsbasis vorhanden;
+- Hero: **59/65** aktiv, **6 fehlen**;
+- Kategorievorschauen: **59/65**, jeweils aus derselben Quelle wie der Hero;
+- Karten: **68/328 belastbar aktiv**, **260 fehlen**;
+- 13 Hero↔Karte-Gleichquellen gefunden; 11 sauber ersetzt, 2 bewusst entfernt;
+- 0 verbleibende exakte Karten-Doppelungen innerhalb derselben Seite;
+- 0 verbleibende Hero↔Karte-Gleichquellen;
+- 0 Nah-Duplikat-Treffer;
 - alle Heroassets exakt 600×220;
 - alle Vorschau-/Kartenassets exakt 200×107;
 - **61/61 PHP Syntax PASS**;
-- **71/71 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
-- aktiver WIP reproduzierbar auf **59 Heroes / 71 Karten** neu aufbaubar;
+- **68/68 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
+- WIP reproduzierbar exakt auf **59 Heroes / 68 Karten**;
 - aktive Hub2-Hero-/Kartenpfade ohne semantische Bildfallbacks;
-- fehlend bleibt fehlend;
 - noch kein neues ZIP.
 
 ## NEXT ACTION
-**6 fehlende Hero-Motive sauber schließen; offene Karten weiter nur blockweise mit fachlich eindeutigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
+**6 fehlende Hero-Motive sauber schließen; danach offene Karten blockweise nur mit fachlich eindeutigen, eigenständigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
