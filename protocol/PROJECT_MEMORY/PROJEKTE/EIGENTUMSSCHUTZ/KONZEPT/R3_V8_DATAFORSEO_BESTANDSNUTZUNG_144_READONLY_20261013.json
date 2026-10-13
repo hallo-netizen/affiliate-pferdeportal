@@ -46,7 +46,11 @@
     "r3_serp_third_export_paid_cost_usd": 0.04,
     "r3_serp_third_export_provider_ok": 16,
     "r3_serp_third_export_provider_40101": 4,
-    "all_three_R3_SERP_exports_paid_total_usd": 0.112
+    "all_three_R3_SERP_exports_paid_total_usd": 0.112,
+    "r3_serp_fourth_export": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+    "r3_serp_fourth_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+    "r3_serp_fourth_cost_usd": 0.16,
+    "r3_serp_four_runs_combined_cost_usd": 0.272
   },
   "policy": {
     "zero_paid_calls_issued": true,
@@ -63,7 +67,8 @@
     "latest_edit_gate": "READ_ONLY_R2_INTENT_SCOPE_REVIEW_NOT_AN_ORGANIC_SEO_PASS",
     "r2_source_exact": "HAB_UND_BEWAHR_KATEGORIENPROFIL_20261012_R2.json, revision HB-SECURITY-CATEGORY-OWNER-CORRECTIONS-20261012-R2",
     "note_serp_20261013_followup": "Second user-initiated paid 5-pair SERP follow-up succeeded: six new successful provider tasks USD 0.012 plus four free reuse; now 15/15 original priority candidate pairs have at least one completed alternative-query comparison. Reworded comparisons are not exact original failed query results. R3 SEO release remains 0/144. No further provider calls by audit.",
-    "note_serp_20261013_third": "User executed a third, NEW distinct 10-pair R3 SERP run: 16/20 provider task successes, four paid 40101 provider errors; seven complete pairs, three incomplete. All seven true URL overlap counts zero; plugin incorrectly counted one heating match because distinct YouTube video IDs were dropped. SERP intent mismatches make zero overlap inconclusive; no SEO release or new provider queries by this audit."
+    "note_serp_20261013_third": "User executed a third, NEW distinct 10-pair R3 SERP run: 16/20 provider task successes, four paid 40101 provider errors; seven complete pairs, three incomplete. All seven true URL overlap counts zero; plugin incorrectly counted one heating match because distinct YouTube video IDs were dropped. SERP intent mismatches make zero overlap inconclusive; no SEO release or new provider queries by this audit.",
+    "override_serp_mandatory_gate": "User explicitly approved editorially useful categories independent of Google volume or SERP hits on 2026-10-13. 0 SEO owner releases are only historical measurement status, NOT a category acceptance blocker; do NOT request more SERP."
   },
   "counts": {
     "new_candidate_categories": 144,
@@ -103,12 +108,17 @@
     "latest_r3_serp_nonpriority_both_sides_measured": 7,
     "latest_r3_serp_nonpriority_incomplete_pairs": 3,
     "latest_r3_serp_nonpriority_not_attempted": 119,
-    "all_R3_serp_both_sides_measured": 22,
-    "all_R3_serp_incomplete_pairs": 3,
-    "all_R3_serp_not_attempted": 119,
+    "all_R3_serp_both_sides_measured": 51,
+    "all_R3_serp_incomplete_pairs": 11,
+    "all_R3_serp_not_attempted": 82,
     "third_R3_serp_40101_tasks": 4,
     "third_R3_serp_successful_tasks": 16,
-    "third_R3_serp_corrected_real_overlaps": 0
+    "third_R3_serp_corrected_real_overlaps": 0,
+    "fourth_r3_serp_pair_count": 40,
+    "fourth_r3_serp_successful_tasks": 69,
+    "fourth_r3_serp_failed_40101_tasks": 11,
+    "fourth_r3_serp_complete_pairs": 29,
+    "fourth_r3_serp_incomplete_pairs": 11
   },
   "old_serp_overlap_for_context": [
     {
@@ -296,7 +306,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -306,7 +316,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 3,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -323,7 +344,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -333,7 +354,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -350,7 +382,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -360,7 +392,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -427,7 +470,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -437,7 +480,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -481,7 +535,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -491,7 +545,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": true,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -544,7 +609,7 @@
         }
       ],
       "keyword_volume_status": "EXACT_MATCH_ONLY_OTHER_QUERIES_UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -564,7 +629,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -581,7 +657,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -591,7 +667,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": true,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -608,7 +695,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -618,7 +705,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Einbruch & Diebstahl",
@@ -662,7 +760,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -672,7 +770,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -832,7 +941,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -842,7 +951,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 2,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -913,7 +1033,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -923,7 +1043,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -940,7 +1071,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -950,7 +1081,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1021,7 +1163,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1031,7 +1173,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1102,7 +1255,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1112,7 +1265,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1221,7 +1385,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1231,7 +1395,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1248,7 +1423,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1260,16 +1435,27 @@
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
       "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
       "latest_r3_serp_evidence": {
-        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
-        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
-        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
-        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
-        "task_status_pair": "20000/40101",
-        "state": "PAIRED_SERP_INCOMPLETE_40101",
-        "common_url_count_corrected": null,
-        "quality_code": "PROVIDER_FAILED_ONE_SHARED_EDITORIAL_SCOPE",
-        "editorial_note": "Erste SERP Kleingarten-Vandalismus; zweites 40101; R2 besitzt Schrebergarten-Sachschaden-Dokumentation",
-        "seo_owner_approved": false
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false,
+        "previous_evidence": {
+          "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+          "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+          "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+          "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+          "task_status_pair": "20000/40101",
+          "state": "PAIRED_SERP_INCOMPLETE_40101",
+          "common_url_count_corrected": null,
+          "quality_code": "PROVIDER_FAILED_ONE_SHARED_EDITORIAL_SCOPE",
+          "editorial_note": "Erste SERP Kleingarten-Vandalismus; zweites 40101; R2 besitzt Schrebergarten-Sachschaden-Dokumentation",
+          "seo_owner_approved": false
+        }
       }
     },
     {
@@ -1287,7 +1473,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1297,7 +1483,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1314,7 +1511,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1324,7 +1521,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1368,7 +1576,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1378,7 +1586,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Vandalismus & Zerstörung",
@@ -1449,7 +1668,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1459,7 +1678,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1530,7 +1760,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1547,7 +1777,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1618,7 +1859,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1635,7 +1876,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1652,7 +1904,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1669,7 +1921,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1774,7 +2037,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1786,16 +2049,27 @@
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
       "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
       "latest_r3_serp_evidence": {
-        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
-        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
-        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
-        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
-        "task_status_pair": "20000/40101",
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
         "state": "PAIRED_SERP_INCOMPLETE_40101",
         "common_url_count_corrected": null,
-        "quality_code": "PROVIDER_FAILED_ONE_INTENT_MISMATCH",
-        "editorial_note": "Erste SERP überwiegend Abrechnung/Mietnebenkosten statt Leerstands-Leckage; zweite 40101",
-        "seo_owner_approved": false
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false,
+        "previous_evidence": {
+          "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+          "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+          "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+          "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+          "task_status_pair": "20000/40101",
+          "state": "PAIRED_SERP_INCOMPLETE_40101",
+          "common_url_count_corrected": null,
+          "quality_code": "PROVIDER_FAILED_ONE_INTENT_MISMATCH",
+          "editorial_note": "Erste SERP überwiegend Abrechnung/Mietnebenkosten statt Leerstands-Leckage; zweite 40101",
+          "seo_owner_approved": false
+        }
       }
     },
     {
@@ -1813,7 +2087,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1823,7 +2097,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -1962,7 +2247,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -1979,7 +2264,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wasser & Feuchtigkeit",
@@ -2439,7 +2735,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -2449,7 +2745,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -2493,7 +2800,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -2510,7 +2817,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -2620,7 +2938,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -2630,7 +2948,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -2728,7 +3057,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -2745,7 +3074,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Feuer & Gase",
@@ -3131,7 +3471,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3141,7 +3481,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3405,7 +3756,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3422,7 +3773,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 1,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -3772,7 +4134,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -3782,7 +4144,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Wetter & Naturgefahren",
@@ -4057,7 +4430,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4067,7 +4440,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": true,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4084,7 +4468,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4094,7 +4478,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": true,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4176,7 +4571,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_INFO_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4186,7 +4581,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_INCOMPLETE_40101",
+        "common_url_count_corrected": null,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4230,7 +4636,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4240,7 +4646,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_LEXICAL_FLAG_REVIEWED_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4377,7 +4794,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4387,7 +4804,18 @@
       "latest_provider_data": null,
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4404,7 +4832,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "NO_DIRECT_R3_SERP_PAIR",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4421,7 +4849,18 @@
       },
       "editorial_r2_audit_status": "NORMAL_SCREENED_NO_STRONG_LEXICAL_SIGNAL_ORGANIC_SEO_OPEN",
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
-      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+      "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
+      "latest_r3_serp_evidence": {
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false
+      }
     },
     {
       "world": "Technik & Ausfälle",
@@ -4546,7 +4985,7 @@
       ],
       "exact_matches_in_paid_20261010_overview": [],
       "keyword_volume_status": "UNKNOWN",
-      "organic_google_serp_owner_status": "PAIRED_SERP_INCOMPLETE_PROVIDER_ERROR_NO_SEO_PASS",
+      "organic_google_serp_owner_status": "PAIRED_SERP_MEASURED_INFORMATION_ONLY",
       "status": "CANDIDATE_READ_ONLY",
       "publish_allowed": false,
       "query_source": "V8_CATEGORY_AND_ARTICLE_CONTEXT_MANUALLY_CHECKED",
@@ -4558,16 +4997,27 @@
       "editorial_r2_audit_source": "R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md",
       "all_704_old_articles_crosswalk_source": "R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json",
       "latest_r3_serp_evidence": {
-        "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
-        "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
-        "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
-        "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
-        "task_status_pair": "40101/40101",
-        "state": "PAIRED_SERP_INCOMPLETE_40101",
-        "common_url_count_corrected": null,
-        "quality_code": "PROVIDER_FAILED_BOTH",
-        "editorial_note": "Zwei 40101: keine Beleg-SERP, kein Null-Treffer, keine Wiederholung",
-        "seo_owner_approved": false
+        "source_file": "R3_V8_40ER_REALERGEBNIS_QA_20261013.json",
+        "source_export_file": "hab-bewahr-r3-serp-20261013-171301-utc.json",
+        "source_export_sha256": "c9e1ba46d95ef57677d23d0933bf677b42edc7082ec0a7917a4cc1fda8e98b56",
+        "source_run_plan_hash": "b86318a58c59eae37d82046f7d7571d0c2aebf11c8d082aa4c4218c19cb6f05f",
+        "state": "PAIRED_SERP_MEASURED_EDITORIAL_REVIEW",
+        "common_url_count_corrected": 0,
+        "false_plugin_youtube_overlap": false,
+        "editorial_categories_allowed_even_without_serp": true,
+        "seo_owner_approved": false,
+        "previous_evidence": {
+          "source_file": "R3_V8_SERP_10_ECHTER_LAUF_FACHQA_20261013.md",
+          "source_export_file": "hab-bewahr-r3-serp-20261013-162107-utc.json",
+          "source_export_sha256": "257cd6bcb09024c5bc0ecac83d77bb3760f96257e02cf7972ca60943776264c3",
+          "plan_hash": "579b5e29c8e93eb7ae8db28e5b8eea6f92c696c6d994789055737f72785a770c",
+          "task_status_pair": "40101/40101",
+          "state": "PAIRED_SERP_INCOMPLETE_40101",
+          "common_url_count_corrected": null,
+          "quality_code": "PROVIDER_FAILED_BOTH",
+          "editorial_note": "Zwei 40101: keine Beleg-SERP, kein Null-Treffer, keine Wiederholung",
+          "seo_owner_approved": false
+        }
       }
     },
     {
