@@ -1471,3 +1471,18 @@ BELEGE:
 STATUS:
 Lokaler Konzept-/Übergabe-Fachstand dokumentiert; **organische SEO-Owner und technischer R3-Release BLOCKED**.
 
+
+## HB-KONZEPT-20261013-002 – Fachquellenprüfung korrigieren und 15 SEO-Risikokategorien prüfen
+
+WAS:
+- Fachplan und aktuelle Matrix 144/144 und 432 Artikelideen nochmals gegen GitHub geprüft.
+- Für die 9 hoch und 6 erhöht priorisierten neuen Kategorien öffentlich auffindbare Fachquellen gesichtet; die tatsächliche Aussagekraft und die engen redaktionellen Eigentümergrenzen einzeln dokumentiert.
+- Frühere angeblich konkrete DEHN-Fachbeleg-URLs als nicht verwendbar erkannt (Weiterleitung auf Startseite); nicht belegte Merten-Pumpen-USV-Behauptung zurückgezogen.
+- Die unbelegte V8-Outdoor-Ethernet-„Doppelartikel“-Vermutung gegen alle drei originalen Außenkabel-Titel geprüft und als **nicht bestätigter R3-Artikeldublettenvorwurf** relativiert.
+- Korrekturhinweise in beiden älteren Web-Stichproben und Fehlerquelle HB-CONCEPT-006 ergänzt; ausführliche Quelle `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/R3_V8_PRIORITAET_15_QUELLENAUDIT_20261013.md`.
+
+WARUM:
+Quelle muss direkt geprüft sein, bevor aus ihr eine Fachbehauptung wird. Nur fachlich belegte Unterscheidung; kein erfundener Google-SERP-PASS, kein fingiertes Keywordvolumen und kein Strukturumbau aufgrund eines unbewiesenen Titelkonflikts.
+
+NICHT GEÄNDERT:
+R3/V8-Kategorien- und Artikelplan, WordPress R2, Plugin, IDs, Slugs, URLs, Architekturen und bezahlte Providerabfragen. SEO-Freigabe bleibt 0/144 / BLOCKED.
