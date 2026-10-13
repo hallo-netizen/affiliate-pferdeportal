@@ -1,5 +1,8 @@
 # Hab & Bewahr – R3/V8: organische Web-Stichprobe, 13.10.2026
 
+> **NACHPRÜFUNG 13.10.2026 – BELEGKORREKTUR:** Die unten genannte Merten-USV-Seite belegt in der aktuellen Kontrolle **keinen spezifischen Einsatz für Pumpen**. Entsprechende Pumpenaussage zurückgezogen. Es handelt sich ausschließlich um eine qualitative Vorstufe. Maßgeblicher ergänzender Fach- und Quellen-Audit: `R3_V8_PRIORITAET_15_QUELLENAUDIT_20261013.md`. **0 Google-SERP-Freigaben.**
+
+
 STATUS: **TEILBELEG / KEIN GOOGLE-SERP-PASS / KEINE KEYWORD-VOLUMEN-FREIGABE**.
 
 Quelle: öffentlich auffindbare Web-Suchergebnisse für deutsche Suchformulierungen am 13.10.2026. Die benutzte allgemeine Websuche ist **kein reproduzierbarer neutraler Google-SERP-Top-10-Datensatz**. Keine belastbaren Suchvolumina, keine vollständige URL-Schnittmengenmessung, keine bezahlten Provideraufrufe. Treffer sind keine Nachweise für Suchhäufigkeit.
