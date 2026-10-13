@@ -1968,3 +1968,14 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 **Erster konkreter Live-Widerspruch:** Trotz direkt ausgewähltem Pflichtfallback 972835 wurde im Live-Plan kein Banner gespeichert. Zustand zwischen tatsächlicher Fallback-Fähigkeit und gespeicherter/ausgegebener Planung nicht verifiziert. Kanonischer 6.72.211-Code ist nicht mit Original-PHP der live eingesetzten 6.72.224 gleichgesetzt. 6.72.226-ZIP liegt zwar als indexierter Projektbestand vor, Rohbytes wurden nicht freigegeben; deshalb keine vorgetäuschte 1:1-Analyse.
 
 **Erster offener Gesamt-Gate:** Original laufender Code + aktuelle Live/Test-Providerdaten + gespeicherter Plan und tatsächliches HTML müssen gemeinsam gebunden und dieser konkrete no_output-Widerspruch rot/grün reproduziert werden. Bestehende lokale 59/59+AFF065-Tests bleiben getrennt PASS; Release weiterhin BLOCKED. Details: release/affiliate-zentrale/evidence/aff_err_065_20261013_real_live_test_readback_provider_heartbeat.md.
+
+### AFF-ERR-065 – eBay-Heartbeat-Störungsverlauf 30.09.–13.10.2026 (Nachtrag)
+
+Read-only Nachprüfung vorhandener Original-GitHub-Actions-Läufe, KEIN neuer Live-Aufruf, KEIN Provider-Schreibzugriff:
+
+- 30.09.2026 08:51 UTC, Run 36692315861: eBay external_tick_v2 `status=failed` (terminal), GitHub-Lauf SUCCESS bedeutet nur korrekt beendetes Transportprogramm, nicht erfolgreichen eBay-Import.
+- 01.–09.10.2026: zahlreiche eBay-Heartbeat-GitHub-Läufe FAILED. Letzter Gegenbeleg 09.10.2026 20:12 UTC, Run 37985442758: fünf nacheinander eingehende HTTP 500 vom realen Website-REST-Endpunkt, nach fünf Fehlern abgebrochen.
+- Ab 10.10.2026 00:03 UTC, Run 38007325382: `status=disabled`, Github-Actions-Lauf SUCCESS (korrekt erkannter terminaler Deaktivierungszustand). Auch 12.10.2026 und 13.10.2026 einschließlich Run 38369322449 (08:27 UTC) unverändert `status=disabled`.
+- Kanonische `trait-ppar-ebay-run.php::handle_ebay_external_tick` gibt `disabled` bei `ebay_settings()['enabled']==false` zurück; `trait-ppar-ebay.php::ebay_settings` liest die bestehende WordPress-Option. **Kein automatisches Wiederanschalten, keine Änderung an Provider/DB/Zugangsdaten.** Auch bei abgeschaltetem Sync erfordern bereits vorhandene Produktkampagnen die eigenen Source-/Policy-/End-/Checkpoint-Prüfungen; aus diesem Log allein folgt KEIN pauschaler Frontend-Veto.
+
+**Präzise Abgrenzung:** Dieser Transportverlauf ist direkt belegter zusätzlicher Providerblocker. Der erste noch offene Artikel-Fehler bleibt die ebenfalls belegte Diskrepanz LIVE (Mandatory-Banner 972835 vorhanden, gespeicherter Plan `no_output`) versus TEST (Haupt-/Zweitbanner vorhanden). Reale Quell-/Kampagnenzeilen, konkrete Laufzeitversion und tatsächliches HTML müssen zusammen gebunden werden. Keine ZIP, kein Umbau, keine Live-Freigabe.
