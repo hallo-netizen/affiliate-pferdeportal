@@ -123,6 +123,7 @@ Browser-Simulation mit echter CSS-Kaskade und echten Bildern:
 
 
 
+
 ## Aktuell erster Blocker
-**Live-Abnahme 1.50.649: B&P-Darstellung + Textregeln + unterschiedliche Kindfotos/Untertitel auf mehreren Hub2-Seiten.**
+**Live-Abnahme 1.50.650 ausschließlich hinsichtlich Hero-/Kartenbildqualität.**
 
