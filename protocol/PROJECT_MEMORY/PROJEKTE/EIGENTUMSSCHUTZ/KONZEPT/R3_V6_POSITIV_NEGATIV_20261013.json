@@ -12,9 +12,11 @@
     "existing_leaves": 141,
     "new_leaves": 144,
     "new_article_titles": 432,
-    "noncopy_transfers": 19
+    "noncopy_transfers": 19,
+    "existing_core_ancestor_bindings_preserved": 223,
+    "existing_core_parent_reassignments": 0
   },
-  "negative_count": 12,
+  "negative_count": 15,
   "negatives": [
     {
       "scenario": "Ein-Kind-Hauptbereich",
@@ -67,6 +69,21 @@
       "reason": "duplicated new category ID"
     },
     {
+      "scenario": "Bestehende Blattkategorie zwischen Eltern getauscht",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "old CORE name/parent binding changed"
+    },
+    {
+      "scenario": "Bestehende Unterkategorie zwischen Hauptbereichen getauscht",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "old CORE name/parent binding changed"
+    },
+    {
+      "scenario": "Bestehende Hauptkategorie zwischen Welten getauscht",
+      "result": "REJECTED_AS_EXPECTED",
+      "reason": "old CORE name/parent binding changed"
+    },
+    {
       "scenario": "Importprofil ohne Freigabe",
       "result": "REJECTED_AS_EXPECTED",
       "reason": "unexpectedly importable format"
@@ -77,5 +94,5 @@
       "reason": "a transfer leaves fewer than 3 original articles"
     }
   ],
-  "note": "Local structural/exact-text test. Not semantic SEO/SERP or live WordPress test. First four negative mutations preserve hierarchy totals to test 3-10 validator directly."
+  "note": "Local checks include exact unchanged R2 parent/name/ID bindings for 223 old CORE nodes (6 worlds,31 areas,45 subareas,141 leaves); 15 negative mutations all rejected. Not a WordPress live or Google SERP test."
 }
