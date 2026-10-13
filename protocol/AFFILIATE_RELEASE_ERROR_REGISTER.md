@@ -1929,3 +1929,23 @@ liest `render_affiliate_slot_for_context()` im normalen Rendererzweig `$required
 5. **Live-Fakten weiter offen:** eBay-Source-/Policy-/Route-/Ablaufzustand, tatsächliche installierte Version nach 6.72.226, gespeicherte Pläne und öffentliche HTML-Ausgabe müssen auf demselben realen Datenstand zusammengeführt werden. Historische Anzahl veröffentlichter eBay-Angebote beweist kein einzelnes PASS-Angebot.
 
 **Folgerung:** Dieser Nachtrag ist ausschließlich Fehler-/Konflikt-Evidence; er ändert weder den Zielvertrag noch die offizielle Current-NEXT-ACTION und autorisiert keine Plugin-/Template-/DB-/Release-Änderung. **Status AFF-ERR-065 bleibt OPEN / NO RELEASE.** Vor Freigabe: realer Quellabgleich, rote alte Fälle, grüne Reparatur- und Sicherheitsgegenfälle und gebundener WordPress/MariaDB-Gesamtlauf.
+
+### AFF-ERR-065 – Quellregressionstest und Current-Nachzug (13.10.2026)
+
+**Autoritäts-/Arbeitsschrittabgleich:** `control/release-governance/CURRENT_RELEASE.json` Generation **308**, `execution_state.state=FIX_FIRST_FAILED_GATE`, genau eine `authorized_next_action=RUN_BOUND_RELEASE_GATES`, `error_ref=aff-err-065`, `active_candidate.release_allowed=false`. Die alte 6.72.211-WordPress/MariaDB-59/59-Evidence sowie Source-/ZIP-Hashes bleiben als **historisch gültiger Baseline-PASS** erhalten; für den neuen Vorfall ist ein gesondertes `aff_err_065_product_output_live_test=OPEN` gebunden. **Keine neue Releasefreigabe.**
+
+**Unveränderter Source-Stand 6.72.211 – gezielte lokale POS/NEG-Reproduktion (kein Live-E2E):**
+- Originalrumpf `category_product_strict_relevance_tier_v672104()` isoliert mit vorhandenen PHP-Bordmitteln ausgeführt, keine Produktionsänderung.
+- POS **PASS:** drei gleiche exakte Produkte ergeben drei Treffer.
+- NEG **PASS:** zwei exakte + ein fachfremder Kandidat (niedrigere Rangstufe) unterdrücken den fachfremden dritten.
+- POS **PASS:** drei Kandidaten aus der gemeinsamen fachlich verwandten Rangstufe 500–999 bleiben erhalten.
+- **RED / neuer Zielvertrag:** ein exakter + zwei passende verwandte Kandidaten ergeben nur **einen** statt der geforderten drei Kandidaten.
+- **RED / neuer Zielvertrag:** zwei exakte + ein hypothetisch zulässiges weiteres Pferdeprodukt ergeben nur **zwei** statt drei. Die isolierte Simulation beweist **nicht**, dass dieser hypothetische Kandidat alle echten Provider-/Source-/Health-/Content-Gates passiert; das ist ein eigenständiger Live-Pflichtgegenfall.
+- **RED / Artikelende-Quellkontrolle:** `article_plan_apply_to_content()` prüft Ersatzbanner nur, wenn der **gespeicherte** Produktstatus nicht `ready` ist. Ist der Plan `ready`, fällt aber der Produktblock erst in `article_plan_render_products()` durch erneute öffentliche Freigaben aus, wird kein zweiter Ersatzbanner versucht. Der isolierte Zustandsfall ist deterministisch; realer Live-Trigger in 6.72.226 noch **nicht** nachgewiesen.
+- NEG **PASS:** Der 48-Stunden-idealo-Frischevertrag sperrt auf 6.72.211 einen Import mit 499,2 Stunden Alter; diese Prüfung darf nicht pauschal deaktiviert werden.
+
+**Ergebnis isoliert:** 4 von 7 Sollfällen grün, drei Zielabweichungen rot. Die drei roten Fälle sind **Quell-/Vertragsregressionen der kanonischen 6.72.211**, nicht der bereits nachgewiesene erste Live-Fehler einer späteren lokalen 6.72.226. Keine Source- oder ZIP-Freigabe. Die Tests ersetzen ausdrücklich **nicht** das fehlende echte Live/Test-MariaDB-Gate.
+
+**Aktueller vorhandener GitHub-Gesamtlauf:** Run **38376632959** auf Generation 308 war **SUCCESS** für die bestehende 6.72.211-KISS/WordPress/MariaDB-Baseline. Die automatisch erzeugte ZIP-/Upload-Stufe wurde bei `release_allowed=false` **SKIPPED**, kein neuer Installer. Dieser grüne Baseline-Lauf darf die drei roten AFF-ERR-065-Fälle **nicht** überstimmen. Historische 6.72.170-/6.72.171-Workflows, die bei Current-Pushes scheitern, sind kein echter AFF-ERR-065-E2E-Test.
+
+**Vor der ersten Sourceänderung:** identische aktuelle Live-/Testkampagnen, eBay-Source- und Policy-Zeilen, idealo-Feedstatus, gespeicherte Pläne und tatsächlich laufende 6.72.226-Source eindeutig binden. Die neuen Kategorie-Auffüllregeln erst nach fachlicher Negativfreigabe so umsetzen, dass keine Gerten bei Reitstiefeln, keine falsche Exact-ID und keine gesperrten eBay-Privatangebote erscheinen. Dann den vorhandenen vollständigen WordPress/MariaDB-Gesamtlauf erneut fahren. Status **OPEN**.
