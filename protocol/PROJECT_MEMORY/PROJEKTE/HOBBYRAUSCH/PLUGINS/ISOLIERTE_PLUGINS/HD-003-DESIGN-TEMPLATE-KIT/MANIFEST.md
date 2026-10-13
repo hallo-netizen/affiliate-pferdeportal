@@ -12,24 +12,20 @@ ARTEFAKT:
 SHA-256:
 `ceed21dbc62fd207b891deb5272351c57f31079e22193804546e2dcf6d8f8427`
 
-LIBRARY:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
-
 PRÜFSTATUS:
-LOCAL HARD PASS / LIVE-HERO OFFEN.
+**LOCAL TESTS VORHANDEN / WORDPRESS-LIVE FAIL / VERWORFEN**
 
-PASS:
-- PHP 58/58;
-- ZIP;
-- Release-Chain V150651;
-- Hero 65/65, unique 65, Missing 0;
-- v150631-Heroes 0;
-- 65 individuelle Hero-Einstiege;
-- Karten-Map unverändert zu V150650;
-- 1440/1200/1100/1024/900/760/600 Overflow 0.
+LIVE-BEFUND:
+- Hero zu hoch;
+- Hero-Motive teils zu nah / zu detailig;
+- teils unscharf bzw. sichtbar hochskaliert;
+- semantisch falsche Bilder;
+- Claim-Unterstrich verrutscht/zu lang;
+- Unterkategoriebilder weiterhin teils falsch, doppelt/ähnlich oder überfüllt.
 
-LIVE:
-Hero-/responsive Textbereich offen.
+VERBINDLICH:
+Dieser Stand darf **nicht** als PASS, Deploymentempfehlung oder neue Basis ausgegeben werden.
 
 CURRENT.zip-STATUS:
 **NICHT IM CAMPUS VORHANDEN.**
+Da kein freigabefähiger aktueller Pluginstand existiert, darf keine neue CURRENT.zip erzeugt/ersetzt werden.
