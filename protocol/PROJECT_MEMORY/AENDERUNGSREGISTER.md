@@ -1444,3 +1444,30 @@ Der Live-Readback 1.50.628 zeigte trotz größerer Kartenfläche einen Lupen-/De
 
 UNVERÄNDERT:
 Navigation, Hero-Texte, Seitenendtexte, Kartenmaße, Kategorie-/Taxonomie-/Providerarchitektur und Monetarisierungsregeln.
+
+
+## HB-KONZEPT-20261013-001 – Benutzbarer Kategorienbaum und Übergabeschutz
+
+BEREICH: EIGENTUMSSCHUTZ / KONZEPT
+
+WAS:
+- Nutzerentscheidung: **mindestens 3, höchstens 10** echte Unterpunkte je anklickbarer Zwischenebene; sechs Gefahrenwelten und 31 bestehende Themenbereiche erhalten.
+- R3-Ausbau als **nichtimportierbarer** konzeptioneller Plan mit 48 zusätzlichen Unterbereichen, 144 neuen Blattkandidaten und 432 redaktionellen Vorschlägen; unter verschiedenen V2–V8-Vorständen kontrolliert auf Dopplungsgefahr geprüft.
+- Bestehende 223 CORE-Knoten, 141 Blattkategorien und 704 ursprüngliche Artikelideen als geschützter Ausgangsbestand; 19 Umhängungen nur als Vorschläge.
+- Dynamischen Fachstatus, erstes offenes Problem und NEXT ACTION **ausschließlich** in `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`. Ältere R3-Fassungen nur Historie.
+- Fehlende getrennte Zielvertragsakte `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md` angelegt und in `ZIELVERTRAEGE/REGISTER.md` eingetragen; Soll und Ist konsequent getrennt.
+- Veralteten Satz der Gebäudetür über angeblich nicht verifizierte Konzept-Current entfernt; korrekt über `AUTORITAETSPLAN.json` geroutet.
+- `KONZEPT/HOBBYRAUM.md` von altem R3-Pfad auf rein aus Current abgeleitete Quellverweise umgestellt, **keine zweite NEXT ACTION**.
+
+WARUM:
+Ein-/Zwei-Kind-Zwischenebenen verursachen sinnlose Klicks; die erweiterte Struktur darf zugleich weder SEO-Doppelungen noch Änderungen am bestätigten WordPress-R2-Bestand auslösen. Ziel-, Werkbank- und Navigationsverweise müssen einen neuen Chat eindeutig an die **eine** fachlich autoritative Current heranführen. Die vollumfängliche Google-SERP-Freigabe bleibt offen und darf niemals aus einem lokalen Struktur-/Titel-PASS abgeleitet werden.
+
+NICHT GEÄNDERT:
+Kein Plugin, kein WordPress, kein R2-Kategorienbaum, keine IDs/Slugs/URLs, kein bezahlter Providerlauf, keine Campusarchitektur oder Workflows.
+
+BELEGE:
+`PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`, deren aktuelle V8-Fachplan- und QA-Bindungen, `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md`, `ZIELVERTRAEGE/REGISTER.md`.
+
+STATUS:
+Lokaler Konzept-/Übergabe-Fachstand dokumentiert; **organische SEO-Owner und technischer R3-Release BLOCKED**.
+
