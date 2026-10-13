@@ -2628,3 +2628,43 @@ SHA:
 LIVE:
 OFFEN – nur Bildqualität.
 
+---
+
+## PU-20261013-059 – HD-003 1.50.651 / Hub2-Hero responsive + 65 Hero-Runde
+
+AUSGANG:
+1.50.650: Text/Grundaufteilung akzeptiert, aber Hero bei Tabletbreiten gequetscht; Hero-Motive teils noch zu detailnah. Kategoriekarten bleiben separater offener Block.
+
+KORREKTUR:
+- bestehender Langtext inhaltlich unverändert;
+- 65 individuelle kurze Hero-Einstiege ergänzt;
+- Hero enthält nur Claim + H1 + kurzen Einstieg;
+- Langtext darunter: sichtbarer Lead + `Mehr zu … erfahren`;
+- >1100 px Split 38/62;
+- <=1100 px gestapelt;
+- 65 Hero-Pfade erneut visuell gewählt;
+- 65 unique Hero-Dateien;
+- v150631 vollständig aus Hero-Map ausgeschlossen;
+- Papier & Dokumente ohne Münz-Hauptmotiv;
+- Karten-Map unverändert zu 1.50.650.
+
+TEST:
+- PHP 58/58 PASS;
+- ZIP PASS;
+- Release-Chain V150651, stale V150650 im aktiven Pfad 0;
+- Hero 65/65, Missing 0, unique 65;
+- Teaser 65/65;
+- Langtextgenerator unverändert;
+- Browser 1440/1200/1100/1024/900/760/600: Overflow 0;
+- <=1100 Stack PASS;
+- Langtext unter Hero PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
+
+SHA:
+`ceed21dbc62fd207b891deb5272351c57f31079e22193804546e2dcf6d8f8427`
+
+LIVE:
+OFFEN – nur Hero/Responsive. Kartenbilder folgen separat.
+
