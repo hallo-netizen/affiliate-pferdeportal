@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDAUDIT KOMPLETT / 15 HERO-ERSATZQUELLEN + 20 KARTENQUELLEN GESICHERT, DAVON 17 NETTO NEUE KARTENKANDIDATEN / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 63/328 KARTEN LOKAL EINGEBAUT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -11,9 +11,9 @@ STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDAUDIT KOMPLETT
 SHA-256:
 `c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
-1.50.652 bleibt der letzte paketierte Build und ist visuell nicht freigabefähig.
+1.50.652 bleibt laut autoritativem Altstand der letzte paketierte Build und ist visuell nicht freigabefähig. Im aktuell zugänglichen Library-Bestand wurde das 1.50.652-ZIP nicht gefunden; die reale rekonstruierbare Arbeitsbasis ist das vorhandene 1.50.651-ZIP plus die autoritativen 1.50.652/1.50.653-Audits.
 
-## Gesicherter WIP 1.50.653
+## Autoritative Audits
 
 Hero-Audit:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HERO_AUDIT_20261013.md`
@@ -24,33 +24,64 @@ Karten-Audit:
 Harte Freigabesperre:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/RELEASE_GATE_20261013.md`
 
-### Finaler visueller Befund des Audits
+Audit-Basis:
 - Hero: **65/65 geprüft; 50 PASS; 15 MISSING/ERSETZEN**;
 - Karten: **328/328 geprüft; 46 PASS; 282 MISSING/ERSETZEN**;
-- beide Prüfungen umfassen ausdrücklich den realen sichtbaren Crop: Hero 600×220, Karte 200×107;
-- ähnliche/doppelte oder nur allgemein passende Motive wurden wieder aus PASS entfernt.
+- reale Zielcrops: Hero 600×220, Karte 200×107.
 
-### Ersatzfortschritt nach dem Audit
-- **15/15 fehlende Hero-Ersatzquellen neu erstellt und dauerhaft gesichert**;
-- gespeichert unter `/hobby rausch/WIP_1.50.653_WORKING/generated/heroes/`;
-- **7 Hero-Quellen liegen bereits praktisch exakt im 600×220-Seitenverhältnis; 8 sind 16:9 und benötigen einen breiten Mittelausschnitt**;
-- alle 15 Hero-Dateien sind groß genug; sie bleiben **KANDIDATEN**, bis Crop und Einbau geprüft sind;
-- **20 Kartenquellen** wurden erstellt und dauerhaft unter `/hobby rausch/WIP_1.50.653_WORKING/generated/cards/` gesichert;
-- davon sind **17 echte neue Ersatzkandidaten**;
-- **Batik, Origami und Lettering waren bereits in den 46 bestätigten PASS-Karten**; diese drei bestehenden PASS-Zuordnungen bleiben unverändert und die zusätzlich erzeugten Quellen werden nicht als Fortschritt gezählt;
-- alle 20 neuen Kartenquellen liegen praktisch exakt im 200×107-Seitenverhältnis und sind groß genug;
-- netto gilt deshalb aktuell: **46 PASS + 17 neue Ersatzkandidaten = 63/328 abgedeckt; 265 Karten noch offen**.
+## Korrigierter realer WIP 1.50.653
 
-### WIP-Sicherungen
-- nur bestätigte Bilder aktiv;
-- Hero-Fallback entfernt;
-- Featured-Image-Fallback für Hub2-Karten entfernt;
-- Welt-Pool-Fallback entfernt;
-- Icon-Fallback entfernt;
-- fehlende Bilder bleiben im Arbeitsstand sichtbar fehlend;
-- 61/61 PHP-Dateien Syntax PASS;
-- Release-Gate aktuell **FAIL** und blockiert absichtlich jedes neue ZIP;
-- noch kein neues ZIP / kein Release.
+Die frühere Zwischenangabe „15/15 Hero-Ersatzquellen“ war falsch zugeordnet und wurde korrigiert. Gegen die tatsächliche MISSING-Liste des Hero-Audits geprüft:
+
+### Hero
+- die 50 auditbestätigten Hero-Motive wurden aus der realen Arbeitsbasis übernommen und neu exakt auf **600×220** erzeugt;
+- **9/15** tatsächlich fehlende Hero-Motive wurden durch neue fachlich passende Quellen ersetzt:
+  - druck-foto
+  - oberflaeche-deko
+  - genuss
+  - metall
+  - schmuck
+  - naturmaterial
+  - funk
+  - smart-home
+  - papier-dokumente
+- diese 9 neuen finalen 600×220-Crops wurden visuell geprüft;
+- damit aktuell **59/65 Hero-Motive aktiv/verfügbar**;
+- **6 Hero-Motive fehlen weiterhin bewusst**:
+  - rollen-balance
+  - wurf-ziel
+  - team-wettkampf
+  - geschick-tricks
+  - werbung-design
+  - werkzeuge-geraete
+- sechs zusätzlich erzeugte, aber nicht zur tatsächlichen MISSING-Liste gehörende Quellen (Leder, Robotik & Automation, Audio & HiFi, Mechanik & Uhren, Essbare Pflanzen, Ameisen & Insekten) werden **nicht** in bestehende PASS-Zuordnungen eingebaut.
+
+### Kategorievorschauen
+- verbindliche neue Regel umgesetzt: **Kategorievorschau und Hub2-Hero stammen aus derselben Bildquelle**;
+- aus jedem vorhandenen Hero wird eine eigene Vorschau **200×107** abgeleitet;
+- aktuell daher **59/65 Kategorievorschauen** vorhanden;
+- dieselben sechs Kategorien wie bei Hero bleiben ohne falsches Ersatzbild.
+
+### Karten
+- 46 auditbestätigte PASS-Karten unverändert fachlich übernommen;
+- 17 echte neue Ersatzkandidaten eingebaut;
+- drei zusätzlich erzeugte Motive Batik, Origami und Lettering wurden nicht verwendet, da diese bereits zu den 46 auditbestätigten PASS-Karten gehören;
+- aktuell **63/328 Karten** im WIP gemappt;
+- **265 Karten** bleiben bewusst ohne Bild, bis ein fachlich passendes Motiv vorliegt;
+- alle aktiven Kartenassets sind exakt **200×107**.
+
+### Technische Prüfung des rekonstruierten WIP
+- **61/61 PHP-Dateien Syntax PASS**;
+- Hero-Dateien: **59**, alle exakt 600×220;
+- Kategorievorschauen: **59**, alle exakt 200×107;
+- Karten: **63**, alle exakt 200×107;
+- JSON/Mapping: PASS;
+- kein semantischer Hero-Fallback;
+- kein Featured-Image-Fallback im Hub2-Kartenpfad;
+- kein Welt-Pool-Fallback im Hub2-Kartenpfad;
+- kein v150617-Fallback im aktiven Hub2-Bildpfad;
+- fehlend bleibt fehlend;
+- noch kein neues Release-ZIP.
 
 ## Eingefroren
 - Textinhalt aus 1.50.650;
@@ -58,9 +89,5 @@ Harte Freigabesperre:
 - Buch & Papier 1.50.645 als visuelle Referenz;
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
-## Fehlbestand / noch nicht freigegeben
-- Hero: **15 Ersatzquellen vorhanden, Crop-/Einbauprüfung offen**;
-- Karten: **17 echte neue Ersatzkandidaten vorhanden; 265 Kartenmotive weiterhin offen**.
-
 ## EXAKT EINE NEXT ACTION
-**Zuerst die 15 gesicherten Hero-Ersatzquellen in den WIP einbauen und jeden echten 600×220-Crop prüfen. Danach die 17 echten neuen Kartenkandidaten als 200×107 prüfen/einbauen; die drei redundant erzeugten PASS-Themen Batik, Origami und Lettering nicht ersetzen. Anschließend die verbleibenden 265 Kartenmotive blockweise erstellen. Kein neues ZIP, solange das Release-Gate FAIL ist.**
+**Die sechs noch fehlenden Hero-Motive fachlich passend beschaffen/erstellen und als 600×220 plus daraus abgeleitete 200×107-Kategorievorschau einbauen. Danach die 265 fehlenden Kartenmotive blockweise abarbeiten. Kein falsches Ersatzbild, kein Fallback und kein Release-ZIP, solange das Release-Gate FAIL ist.**
