@@ -39,8 +39,16 @@ Sperre: Vor tatsächlichem Umbau erst vollständige fachliche Abnahme, Kollision
 Status: **TECHNISCHE REGEL-LÜCKE BESTÄTIGT / NICHT MODIFIZIERT**. Prüfung der lokalen Original-ZIP `HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.17_SERP_FORTSETZUNG_34V40.zip` vom 13.10.2026: `class-apkw-target-tree.php` validiert bereits das Minimum an Artikeltiteln je Blattkategorie und `min_categories_per_third_page` (3); `class-apkw-target-tree-dry-run.php` begrenzt `max_megamenu_children` auf 10 und fordert bei Welten bisher nur **mindestens 1** direktes Kind. **Ein allgemeiner harter Mindestwert 3 für jeden anklickbaren Zwischenknoten wird im geprüften Plugin noch nicht erzwungen.** Die R2-Struktur mit 19/10 Ein-/Zwei-Kind-Bereichen konnte daher gültig sein. Vor R3-Release muss die verbindliche 3–10-Strukturprüfung im bestehenden Validator nachvollziehbar ergänzt und mit Negativfällen getestet werden; keine Architekturänderung und kein vorgezogenes Pluginupdate nötig.
 
 
+## HB-CONCEPT-006 – Organische Webbelege vor Fachbehauptung nicht belastbar geöffnet
+Status: **QUELLENFEHLER KORRIGIERT; SEO-BLOCKER 002 WEITER OFFEN (13.10.2026)**.
+- Zwei vormals angeführte DEHN-Unterseiten leiten auf die allgemeine Startseite und sind kein belastbarer, spezifischer Fachnachweis.
+- Ein zuvor behaupteter Pumpen-USV-Beleg auf einer Merten-Seite ist für Pumpenanwendungen nicht bestätigt; diese Aussage wurde ausdrücklich zurückgezogen.
+- Angeblicher neuer V8-Doppelartikel „Outdoor-Ethernet“ ist nach Lesen der drei tatsächlichen Außenkabel-V8-Titel **nicht vorhanden**. Allgemeine Keyword-/Leitungsüberschneidungen bleiben möglich und Google-SERP-UNBEKANNT.
+- Einzelfall-Nachprüfung und 15 priorisierte, unterschiedlich starke Fachbelege im `R3_V8_PRIORITAET_15_QUELLENAUDIT_20261013.md`; beide vorherigen Stichproben am Dokumentanfang mit klaren Warnungen ergänzt.
+- Gegenprobe: weiterhin 144/144 gelistete Kategorien, 432/432 V8-Ideen, keine SERP-/Suchvolumen-Freigabe; keine Änderungen am R2-WordPress oder Plugin.
+
 ## HB-CONCEPT-005 – Übergaberouting und Zielvertragsablage lückenhaft
-Status: **LOCAL CLOSED – 2026-10-13; FRISCHE-READBACK NOCH NACHZUZIEHEN**.
+Status: **LOCAL CLOSED – 2026-10-13; FRISCHE-READBACK BESTÄTIGT**.
 - Fehler 1: Die Eigentumsschutz-Bürotür enthielt den veralteten Satz, eine Konzept-Current sei nicht unabhängig verifiziert. Das widersprach dem vorhandenen `AUTORITAETSPLAN.json` mit dem eindeutigen `EIGENTUMSSCHUTZ_KONZEPT`-Routing und der real existierenden `KONZEPT/CURRENT_STATE.md`.
 - Fehler 2: Der `KONZEPT/HOBBYRAUM.md` referenzierte als Arbeitsbindungsquelle noch einen alten R3-Delta-Pfad, obwohl die Current inzwischen einen V8-Fachplan bindet.
 - Fehler 3: Das zentrale Zielvertragsregister enthielt bisher keinen eigenen Hab-und-Bewahr-Kategorienzielvertrag, obwohl die neue 3–10-Nutzerentscheidung im Current bindend war.
