@@ -1127,6 +1127,30 @@ trait PPAR_Article_Plans_Trait {
         $product_html = ($plan['products']['status'] ?? '') === 'ready'
             ? $this->article_plan_render_products($post_id, (array) ($plan['products']['campaign_post_ids'] ?? array()), false, 0)
             : '';
+        // Altplan aus der Zeit vor dem Standby-Banner: nicht global neu bauen.
+        // Nur wenn ein bisher "bereiter" Produktblock wirklich leer rendert,
+        // fehlenden zweiten Banner genau einmal ueber die bestehende Freigabe
+        // ermitteln und das Ergebnis im vorhandenen Plan merken.
+        if ($product_html === '' && ($plan['products']['status'] ?? '') === 'ready'
+            && empty($plan['banner_2']['campaign_post_id'])
+            && trim((string)($plan['banner_2']['reason'] ?? '')) === ''
+            && !$main_banner_rendered_at_bottom
+            && in_array((string)($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+            $first_banner_id=absint($plan['banner']['campaign_post_id'] ?? 0);
+            $standby=$this->article_plan_find_mandatory_banner($post_id,array($first_banner_id));
+            $standby_id=absint(is_array($standby) ? ($standby['campaign']['post_id'] ?? 0) : 0);
+            if ($standby_id > 0 && $standby_id !== $first_banner_id) {
+                $plan['banner_2']=array(
+                    'status'=>'ready',
+                    'campaign_post_id'=>$standby_id,
+                    'reason'=>'Bestehender Altplan: einmalig nachgeholter freigegebener Ersatzbanner.',
+                    'anchor'=>array(),
+                );
+            } else {
+                $plan['banner_2']['reason']='Bestehender Altplan: kein zulaessiger zweiter Banner; nicht bei jedem Abruf erneut suchen.';
+            }
+            update_post_meta($post_id,self::ARTICLE_PLAN_META,$plan);
+        }
         if ($product_html !== '') {
             $content .= "\n" . $product_html;
         } elseif (!$main_banner_rendered_at_bottom

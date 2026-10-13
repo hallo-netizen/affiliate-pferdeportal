@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 309,
+  "generation": 310,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "843e9e2b4d33719bb896ae51575c68104a97062933af430b3555c6ef5f3828f0",
+    "manifest_sha256": "ae15eeaa63e5415792f8a1479da75e6aa428a2f91b21695bc5b8ad8f35c301f0",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "843e9e2b4d33719bb896ae51575c68104a97062933af430b3555c6ef5f3828f0",
+    "current_source_manifest_sha256": "ae15eeaa63e5415792f8a1479da75e6aa428a2f91b21695bc5b8ad8f35c301f0",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
     "candidate_reference_scope": "Performance block: AJAX cleanup + AFF-ERR-064 + shared frontend campaign query/normalization + request-local content/category context reuse. No ranking/provider/slot/veto/publish/category/design/tracking change.",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "AFF_ERR_065_ARTICLE_BOTTOM_PREPLANNED_BANNER_ROOTFIX_UNRELEASED",
-    "current_focus_reason": "Exact real WP/MariaDB test FAIL at article product READY state with vanished products and valid second banner; only existing article trait logic touched."
+    "current_focus": "AFF_ERR_065_ARTICLE_BOTTOM_OLD_PLANS_STANDBY_ONCE",
+    "current_focus_reason": "Old saved READY article plans without previously preplanned standby banner are now recovered once, via existing mandatory banner gate and existing post-meta record. No global replan."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -889,7 +889,7 @@
   "execution_state": {
     "state": "FIX_FIRST_FAILED_GATE",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the existing WP/MariaDB AFF-ERR-065 red-green test on the single article-trait rootfix, preserving source/health/exact/VETO/performance guards. No package or release until full live/test provider readback and gates.",
+    "bound_user_scope_action": "Run existing WordPress/MariaDB product/standby red-green including old saved plan; then continue AFF-ERR-065 source gate diagnosis for eBay/idealo with real data.",
     "completion_condition": "AFF065_ARTICLE_BOTTOM_POS_NEG_PASS_THEN_REMAINING_FIRST_REAL_GATE",
     "after_completion_action": "CONTINUE_READ_ONLY_EBAY_IDEALO_LIVE_TEST_GATE_RECONCILIATION",
     "no_optional_detours": true,
@@ -898,9 +898,9 @@
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
     "evidence_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
     "evidence_sha256": "",
-    "current_source_manifest_sha256": "843e9e2b4d33719bb896ae51575c68104a97062933af430b3555c6ef5f3828f0",
+    "current_source_manifest_sha256": "ae15eeaa63e5415792f8a1479da75e6aa428a2f91b21695bc5b8ad8f35c301f0",
     "current_source_binding": "MANIFEST_28_FILES_AFF065_UNRELEASED_CANDIDATE",
-    "pre_gate_proof": "REAL_WORDPRESS_MARIADB_RED_RUN_38379811116_ARTICLE_BOTTOM_GATE",
+    "pre_gate_proof": "REAL_WP_MARIADB_RED_RUN_38380655622_OLD_PLAN_NO_STANDBY",
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -997,7 +997,7 @@
   "required_release_gates": {
     "aff_err_065_product_output_live_test": {
       "status": "OPEN",
-      "source_manifest_sha256": "843e9e2b4d33719bb896ae51575c68104a97062933af430b3555c6ef5f3828f0",
+      "source_manifest_sha256": "ae15eeaa63e5415792f8a1479da75e6aa428a2f91b21695bc5b8ad8f35c301f0",
       "scope": "CATEGORY_1_2_3_HUB_JOURNAL_ARTICLE_POST_BOTTOM_EBAY_IDEALO_FIRST_REPRODUCIBLE_FAILED_GATE",
       "live_source_readback": "OPEN_6_72_226_INSTALLATION_NOT_INDEPENDENTLY_VERIFIED",
       "real_provider_rows": "OPEN_EBAY_SOURCE_POLICY_ROUTE_EXPIRY_AND_IDEALO_IMPORT",
@@ -1007,7 +1007,7 @@
       "frontend_html": "OPEN_RENDERED_CATEGORY_AND_ARTICLE_END",
       "performance": "ZERO_NEW_FRONTEND_HTTP_OR_DB_QUERY_RECHECK_REQUIRED",
       "release_artifact": "FORBIDDEN_UNTIL_ALL_GATES_PASS",
-      "article_bottom_proof": "RED_REAL_WP_MARIADB_RUN_38379811116_GREEN_PENDING"
+      "article_bottom_proof": "ARTICLE_BASIC_GREEN_RUN_38380374323_OLD_PLAN_RED_RUN_38380655622_GREEN_PENDING"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -2738,7 +2738,8 @@
     ],
     "no_new_plugin_until_full_gate": true,
     "source_fix_scope": "SINGLE_EXISTING_TRAIT_PPAR_ARTICLE_PLANS_PHP",
-    "source_manifest_sha256": "843e9e2b4d33719bb896ae51575c68104a97062933af430b3555c6ef5f3828f0",
-    "unreleased_source_changed": true
+    "source_manifest_sha256": "ae15eeaa63e5415792f8a1479da75e6aa428a2f91b21695bc5b8ad8f35c301f0",
+    "unreleased_source_changed": true,
+    "old_plan_standby_rootfix": "EXISTING_PLAN_META_ONE_TIME_ONLY"
   }
 }
