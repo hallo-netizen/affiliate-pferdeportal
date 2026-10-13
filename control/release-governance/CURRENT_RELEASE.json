@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 307,
+  "generation": 308,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,8 +36,8 @@
   },
   "active_candidate": {
     "version": "6.72.211",
-    "status": "RELEASED",
-    "release_allowed": true,
+    "status": "FIX_FIRST_FAILED_GATE",
+    "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -58,8 +58,8 @@
       "local_result": "PASS",
       "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
     },
-    "current_focus": "RELEASE_COMPLETE_6_72_211",
-    "current_focus_reason": "Formal release-check PASS on run 37898011197. Exact tested installer remains repository-bound; no plugin source change."
+    "current_focus": "AFF_ERR_065_LIVE_TEST_FIRST_FAILED_PRODUCT_GATE",
+    "current_focus_reason": "New October 12 live/test failures supersede the prior installation/closeout instruction. The signed 6.72.211 baseline and its artifact remain historical evidence; no new release is authorized."
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -68,9 +68,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "GENERIC_TEXTLINK_COMPLETE_PARTNER_CODE",
-    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md#12-verbindlicher-kiss-vertrag--allgemeine-affiliate-textlinks-mit-platzhaltern",
-    "current_focus_reason": "Explicit user requirement after real partner code could not be entered in URL-only 6.72.209 backend.",
+    "current_focus": "AFF_ERR_065_PRODUCT_OUTPUT_RECOVERY",
+    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
+    "current_focus_reason": "Explicit user request October 13: reconcile category and article-end product regressions against real live/test source state, without redesign or mini-fix series.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_203_KISS_BANNER_SOURCE_BOUND_CALCULATOR_RENDERING_SEPARATE_BLOCKER",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -887,15 +887,15 @@
     }
   },
   "execution_state": {
-    "state": "RELEASED_6_72_211_COMPLETE",
-    "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "Install exact released 6.72.211, verify live version/readback, then perform final physical DB/storage/performance closeout.",
-    "completion_condition": "RELEASE_CHECK_PASS",
-    "after_completion_action": "INSTALL_READBACK_THEN_FINAL_DB_STORAGE_PERFORMANCE_MEASUREMENT",
+    "state": "FIX_FIRST_FAILED_GATE",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "AFF-ERR-065: read-only compare current installed affiliate version, both live/test original provider rows (eBay source/policy/route/expiry, idealo import timestamp and feed state), materialized campaigns/placements, category Satteldecken and article #972638 saved plan and final HTML; pinpoint the FIRST actually failing gate before any code fix.",
+    "completion_condition": "ONE_FIRST_REAL_FAILURE_BOUND_TO_ORIGINAL_LIVE_TEST_DATA_AND_EXISTING_WORDPRESS_MARIADB_WORKFLOW",
+    "after_completion_action": "SINGLE_TARGETED_ROOTFIX_IN_EXISTING_SOURCE_THEN_POSITIVE_NEGATIVE_FAIL_CLOSED_FULL_WORKFLOW_TEST",
     "no_optional_detours": true,
-    "sequence": 149,
+    "sequence": 150,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-064",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672211_full_release_gate_20261009.md",
     "evidence_sha256": "9bc551998d116cb1b8bc31fac87b9ad172c3afb57614f9584476b4dedc2b1ba1",
     "current_source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
@@ -1057,7 +1057,25 @@
       "status": "EXACT_TESTED_INSTALLER_REPOSITORY_BOUND"
     },
     "formal_release_check_run": 37898011197,
-    "formal_release_check_result": "PASS"
+    "formal_release_check_result": "PASS",
+    "incident_evidence_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-065",
+    "current_incident_status": "OPEN_NO_RELEASE_NO_INSTALL",
+    "next_state_binding": {
+      "sequence": 151,
+      "state": "FIX_FIRST_FAILED_GATE",
+      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+      "authorized_change_prefixes": [
+        "release/affiliate-zentrale/current/affiliate-portal-router/",
+        "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+        "release/affiliate-zentrale/evidence/",
+        "release/affiliate-zentrale/artifacts/final/",
+        "control/release-governance/CURRENT_RELEASE.json",
+        "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
+        "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
+        "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md",
+        ".github/workflows/affiliate-v672195-hardtest.yml"
+      ]
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1129,6 +1147,19 @@
         "BACKEND_DB_POSITIVE_NEGATIVE_59_OF_59",
         "ZIP_IDENTITY_28_OF_28"
       ]
+    },
+    "aff_err_065_product_output_live_test": {
+      "status": "OPEN",
+      "source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
+      "scope": "CATEGORY_1_2_3_HUB_JOURNAL_ARTICLE_POST_BOTTOM_EBAY_IDEALO_FIRST_REPRODUCIBLE_FAILED_GATE",
+      "live_source_readback": "OPEN_6_72_226_INSTALLATION_NOT_INDEPENDENTLY_VERIFIED",
+      "real_provider_rows": "OPEN_EBAY_SOURCE_POLICY_ROUTE_EXPIRY_AND_IDEALO_IMPORT",
+      "before_failure_reproduction": "OPEN_REAL_LIVE_TEST_AND_SAVED_PLAN",
+      "negative_cases": "OPEN_FOREIGN_PRODUCT_INVALID_EXACT_ID_STALE_OR_BLOCKED_SOURCE_AND_PRIVATE_VETO",
+      "full_wordpress_mariadb": "OPEN_REAL_SOURCE_E2E",
+      "frontend_html": "OPEN_RENDERED_CATEGORY_AND_ARTICLE_END",
+      "performance": "ZERO_NEW_FRONTEND_HTTP_OR_DB_QUERY_RECHECK_REQUIRED",
+      "release_artifact": "FORBIDDEN_UNTIL_ALL_GATES_PASS"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -1156,7 +1187,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "KISS_BANNER_RULE_ORDER_WORDPRESS_MARIADB_PROOF",
+    "current_milestone": "AFF_ERR_065_REAL_LIVE_TEST_READBACK_THEN_FIRST_FAILED_PRODUCT_GATE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
@@ -2802,5 +2833,35 @@
     "bind_workflow_run": 37788533144,
     "bind_commit": "2ab296790ab39d6c94180faf6b37a6b803ce37f0",
     "binding_method": "EXACT_PREVIOUSLY_TESTED_ARTIFACT_DOWNLOADED_BY_STANDARD_GITHUB_ACTION_AND_HASH_SIZE_VERIFIED_BEFORE_COMMIT"
+  },
+  "incident_20261013": {
+    "status": "OPEN_BLOCKED",
+    "first_error": "AFF-ERR-065",
+    "exclusive_current_authority": "control/release-governance/CURRENT_RELEASE.json",
+    "historical_released_672211": {
+      "source_manifest_sha256": "9f15bf679f44456c18c32aa6e04504e87248bc2748cfbca880532318915d311f",
+      "final_zip_sha256": "f968f99ba0ae753361d7a7d952f3b2cab5e5029c447a1691b163d4ca88455751",
+      "gate_evidence_sha256": "9bc551998d116cb1b8bc31fac87b9ad172c3afb57614f9584476b4dedc2b1ba1",
+      "still_historical_pass": true
+    },
+    "installed_version_after_672226": "UNVERIFIED",
+    "unreleased_test_candidates": "6.72.217-6.72.226",
+    "first_required_evidence": "SAME_ORIGINAL_LIVE_TEST_DB_SOURCE_AND_RENDER_TRACE",
+    "no_change": [
+      "PLUGIN_SOURCE",
+      "SOURCE_MANIFEST",
+      "FINAL_ZIP",
+      "TEMPLATE_1.50.612",
+      "DB",
+      "PROVIDER_APPROVALS",
+      "PERFORMANCE_ARCHITECTURE"
+    ],
+    "target_rules": [
+      "EXACT_THEN_RELATED_THEN_VERIFIED_HORSE_PRODUCT_WITHOUT_FOREIGN_FILL",
+      "EXACT_PRODUCT_IDENTIFIERS_NO_SUBSTITUTION",
+      "EBAY_AND_IDEALO_ONLY_WHEN_SOURCE_POLICY_HEALTH_PASS",
+      "ARTICLE_BOTTOM_PRODUCTS_ELSE_DISTINCT_SECOND_BANNER"
+    ],
+    "no_new_plugin_until_full_gate": true
   }
 }
