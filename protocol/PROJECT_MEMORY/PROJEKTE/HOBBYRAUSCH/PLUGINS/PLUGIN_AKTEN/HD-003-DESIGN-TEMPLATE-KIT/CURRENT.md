@@ -3,44 +3,42 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **1.50.650 LOCAL HARD PASS / LIVE-BILDER OFFEN**
+STATUS: **1.50.651 LOCAL HARD PASS / LIVE-HERO OFFEN**
 
 Version:
-**1.50.650**
+**1.50.651**
 
 Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
 
 SHA-256:
-`b3bf267ccfef1ae5efbdc4efa1df40f586d5a9ae78ee7c865906b04f113ac2d6`
+`ceed21dbc62fd207b891deb5272351c57f31079e22193804546e2dcf6d8f8427`
 
 Library:
-`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HUB2_IMAGE_CURATED_WIDER_CLEARER_NOFRAME_LOCALPASS.zip`
+`/hobby rausch/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
 
 ## Scope
-Nur Hub2-Bildauswahl gegenüber 1.50.649:
-- 65 feste Hero-Mappings auf weiter gefasste vorhandene Szenen;
-- 328 feste Karten-Mappings;
-- thematische statt zufälliger Welt-Pool-Zuordnung;
-- keine doppelten Bilddateien pro Hub2;
-- v150631-Vignetten/Frame-Motive aus aktiver Map ausgeschlossen;
-- B&P-Kartenbilder unverändert;
-- 0 neue Bildassets.
+**Nur Arbeitsschritt 1: Hub2-Heroes.**
 
-Text und Aufteilung bleiben 1.50.649 und wurden vom Nutzer live als PASS bestätigt.
+- 65 individuelle kurze Hero-Einstiege;
+- bestehende Langtexte unverändert;
+- Langtext unter Hero, sichtbarer Lead + Fold;
+- >1100 Split 38/62;
+- <=1100 gestapelt;
+- 65/65 Hero-Motive erneut kuratiert;
+- Hero-Quellverhältnis 600×320 ohne Extra-Crop;
+- Kategoriekarten / Banner / Produkte / Beiträge / Werbeplatz unverändert zu 1.50.650.
 
 ## Lokal
-- PHP 55/55 PASS;
+- PHP 58/58 PASS;
 - ZIP PASS;
-- Release-Chain V150650 PASS;
-- 65/65 Heroes + 328/328 Karten gemappt;
-- fehlende Assets 0;
-- v150631 aktiv 0;
-- Doppelpfade innerhalb Hub2 0;
-- 191 aktive unterschiedliche Bestandsassets;
-- 600×320 vollständig;
-- Außenkanten-/Frame-Heuristik 0 Verdachtsfälle;
-- Papier & Dokumente + Guss & Formen visuell mit echten Karten-Crops geprüft.
+- Release-Chain V150651;
+- 65/65 Hero-Pfade, 65 unique, Missing 0, v150631 0;
+- 65/65 Hero-Einstiege;
+- Karten-Map unverändert;
+- Browser-Simulation 1440/1200/1100/1024/900/760/600: Overflow 0;
+- <=1100 gestapelt;
+- langer Text immer unter Hero.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.650 installieren und live nur die Bildqualität prüfen.**
+**1.50.651 live Hero auf Desktop/Tablet/Mobil prüfen; danach Kartenbilder als separaten zweiten Schritt.**
