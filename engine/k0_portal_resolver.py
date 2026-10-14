@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, sys
+import csv, hashlib, io, json, subprocess, sys
 from pathlib import Path
 
 FIVE_FIELDS=('article_type','category','plan_slot','target_keyword','title')
@@ -39,6 +39,29 @@ def validate_intake(x):
         raise Blocked('INTAKE_BATCH_SHA256_MISMATCH')
     return rows
 
+def _central_category_slugs(source):
+    if source!='refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv':
+        raise Blocked('PORTAL_CATEGORY_SOURCE_UNAUTHORIZED')
+    try:
+        run=subprocess.run(['git','show',source],cwd=Path(__file__).resolve().parents[1],capture_output=True,text=True,timeout=15)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise Blocked('PORTAL_CATEGORY_SOURCE_UNAVAILABLE') from exc
+    if run.returncode!=0:
+        raise Blocked('PORTAL_CATEGORY_SOURCE_UNAVAILABLE')
+    reader=csv.DictReader(io.StringIO(run.stdout),delimiter='\t')
+    if reader.fieldnames!=['term_id','slug','name','parent_slug']:
+        raise Blocked('PORTAL_CATEGORY_SOURCE_SCHEMA_INVALID')
+    slugs=set()
+    for row in reader:
+        slug=str(row.get('slug') or '').strip()
+        term_id=str(row.get('term_id') or '').strip()
+        if not slug or slug in slugs or not term_id.isdecimal() or int(term_id)<1:
+            raise Blocked('PORTAL_CATEGORY_SOURCE_ROW_INVALID')
+        slugs.add(slug)
+    if not slugs:
+        raise Blocked('PORTAL_CATEGORY_SOURCE_EMPTY')
+    return slugs
+
 def match_profile(category,profiles):
     hits=[]
     for p in profiles:
@@ -54,7 +77,13 @@ def resolve(intake,registry):
     rows=validate_intake(intake)
     if registry.get('contract')!='K0_PORTAL_REGISTRY_V1':
         raise Blocked('PORTAL_REGISTRY_CONTRACT_INVALID')
-    profiles=registry.get('profiles') or []
+    profiles=[]
+    for profile in registry.get('profiles') or []:
+        p=dict(profile)
+        if p.get('category_git_source'):
+            p['category_exact']=sorted(_central_category_slugs(p['category_git_source']))
+            p['category_prefixes']=[]
+        profiles.append(p)
     out=[]
     for row in rows:
         p=match_profile(row['category'],profiles)
