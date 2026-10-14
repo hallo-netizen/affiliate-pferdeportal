@@ -56,6 +56,8 @@ SHA-256:
 - JSON/Mapping PASS;
 - keine semantischen Hero-/Kartenfallbacks;
 - aktiver WIP lokal als echter 1.50.653-Assetbaum + versionierte Profil-/Templatebindung rekonstruiert;
+- Arbeitscheckpoint erneut direkt geprüft: 75 verschachtelte Karten-Mappings, 75/75 `source=v150653`, 75/75 Dateien vorhanden und 200×107;
+- interne ZIP-Metadaten des Checkpoints wurden von 73 auf 75 korrigiert und der vollständige 7er-Neublock eingetragen; Assets und aktive Mappings blieben unverändert;
 - kein neues Release-ZIP.
 
 ## Eingefroren
@@ -77,5 +79,5 @@ SHA-256:
 ## Persistenter Zwischenstand
 - echtes Arbeits-ZIP: `WIP_1.50.653_WORKING_75CARDS_NOT_RELEASE.zip`;
 - dauerhaft unter `/hobby rausch/WIP_1.50.653_WORKING/` gesichert;
-- SHA-256: `339eae7e58923324e56ada05df452c69212a788f21ac0ccca45934a74c4de889`;
+- SHA-256: `bd1a6afa9b9c734514208d66514c89756e1f74ec36030aa66322f34cba912e2d`;
 - kein Release-Artefakt, nur Arbeitscheckpoint.
