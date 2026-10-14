@@ -441,3 +441,38 @@ Neuer Reparaturstand wird direkt aus dem originalen 1.50.650-Paket gebaut. Sämt
 
 VERMEIDUNGSREGEL:
 Bei einem bereits dokumentierten LIVE FAIL darf die betroffene Version niemals wieder als „funktionierende Basis“ bezeichnet oder als technische Ausgangsbasis verwendet werden. Basiswahl künftig ausschließlich aus dem letzten explizit live bestätigten PASS-Stand.
+
+
+## AF-029 – Normale Plugin-Überschreibung weiterverwendet, obwohl der Restore-PHP-Code bereits byte-identisch zu 1.50.650 war
+
+FEHLER:
+Nach 1.50.653–1.50.656 wurde noch ein weiterer normaler Replace-Build ausgegeben:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_RUNTIME_RESTORE_NEW_IMAGES.zip`.
+Dessen 55 PHP-Dateien waren byte-identisch zum originalen 1.50.650-Stand; geändert waren ausschließlich 130 WebP-Dateien. Trotzdem zeigte der reale Frontend-Aufruf erneut den WordPress-kritischen Fehler.
+
+BEDEUTUNG:
+Der konkrete Live-Fatal darf damit nicht weiter durch erfundene neue PHP-Codeursachen dieses Restore-ZIPs erklärt werden. Ohne Server-Fatal-Log ist die exakte Live-Zeile unbekannt.
+
+ARBEITSFEHLER:
+Trotz der Abweichung „lokal grün / live fatal“ wurde der gleiche normale Überschreibungsweg erneut verwendet, anstatt den realen Updatezustand selbst – alter Pluginordner, stale Dateien, PHP-/Object-/Page-Caches und Request-Grenze – als eigenen E2E-Fall zu simulieren.
+
+KORREKTUR 1.50.657:
+Kein weiterer normaler Replace-Build. Ein eigenständiger Repair Installer wurde gebaut, der:
+1. Payload vorab vollständig per SHA-256 prüft;
+2. das alte Template Kit deaktiviert;
+3. den kompletten alten Pluginordner rekursiv entfernt;
+4. den bekannten 1.50.650-Runtime-Payload sauber neu kopiert;
+5. alle 981 Ziel-Dateien erneut per SHA-256 prüft;
+6. Statcache, OPcache und verfügbare WP/Page-Caches leert;
+7. das Template Kit erst im nächsten Admin-Request aktiviert;
+8. sich nach erfolgreicher Zielaktivierung selbst deaktiviert.
+
+E2E-NACHWEIS:
+Der Repair-Ablauf wurde jeweils aus vier verschmutzten Ausgangsständen 1.50.653, 1.50.654, 1.50.655 und 1.50.656 über drei getrennte Request-Grenzen simuliert.
+Alle vier: Repair PASS → Aktivierung PASS → `/gestalten/druck-foto/` Routing/Render PASS → Negativroute bleibt Theme.
+Zusätzlich Negativtests:
+- beschädigter Payload stoppt vor Eingriff in den alten Pluginordner;
+- manipuliertes Ziel nach Kopie wird nicht aktiviert.
+
+VERMEIDUNGSREGEL:
+Wenn ein Restore-Paket codegleich zum letzten bestätigten Runtime-Stand lokal PASS ist, live aber weiter fatal läuft, darf nicht erneut nur ein weiteres normales Replace-ZIP gebaut werden. Dann muss zuerst der komplette Installations-/Cache-/Request-Zustand als E2E-Szenario reproduziert und bereinigt werden.
