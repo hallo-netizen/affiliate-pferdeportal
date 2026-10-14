@@ -1,20 +1,13 @@
 {
   "version": "WIP 1.50.653",
   "hero_total": 65,
-  "hero_active": 59,
-  "hero_missing_count": 6,
-  "hero_missing": [
-    "rollen-balance",
-    "wurf-ziel",
-    "team-wettkampf",
-    "geschick-tricks",
-    "werbung-design",
-    "werkzeuge-geraete"
-  ],
+  "hero_active": 65,
+  "hero_missing_count": 0,
+  "hero_missing": [],
   "card_total": 328,
   "card_active": 75,
   "card_missing_count": 253,
-  "authority_note": "Aktiver realer WIP WIP_1.50.653_WORKING_75CARDS_NOT_RELEASE.zip. Keine exakten Karten-Doppelungen innerhalb derselben Seite, keine Hero↔Karte-Gleichquelle; alle aktiven Mappings rendererkompatibel. Fehlend bleibt fehlend.",
+  "authority_note": "Aktiver realer WIP WIP_1.50.653_WORKING_65HEROES_75CARDS_NOT_RELEASE.zip. Hero-Block vollständig: 65/65 Heroes und 65/65 Kategorievorschauen. Kartenstand unverändert 75/328; fehlend bleibt fehlend.",
   "rules": [
     "kein Fallback",
     "nur fachlich eindeutiges Motiv",
