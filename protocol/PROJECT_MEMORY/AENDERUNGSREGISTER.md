@@ -1564,3 +1564,10 @@ WAS: Unter `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/` eigene Current-Autorität, Ein
 WARUM: Benutzerentscheidung vom 14.10.2026: Alle künftigen Plugins müssen zentral gespeicherte Kategorien lesen können; Add/Rename/Move/Merge/Archive/Remove sollen ohne Plugin-Neubau möglich sein. Die bereits erfolgreich synchronisierte WordPress-R3/V8-Struktur wird nicht dupliziert.
 BEWEISGRENZE: 546/546 Live-Struktur-Readback PASS aus dem Nutzer-Export. Neutrale pluginübergreifende Runtime-API und spätere Änderungsfälle noch nicht real freigegeben. Kein WordPress-/Plugin-Write in diesem Architekturauftrag.
 ENTFERNBAR: NEIN.
+
+
+## HB-DESIGN-SINGLE-PLUGIN-20261014 – nur ein Design-Plugin; Performance oberstes Gebot
+WAS: Designbüro Hab & Bewahr legt Zielname „Hab & Bewahr – Design“ für ein einziges Plugin fest. Bestehendes umfassendes Design-Vorschau-Plugin wird zum Update-Träger; das separate Startseitenplugin 0.1.0 war ein Fehler und soll erst nach sicherer Integration und Prüfung der Shortcode-Nutzung stillgelegt werden. Design-C-Lock und Performance-Regeln im DESIGN/CURRENT_STATE.md eingetragen; Fehler HBD-DESIGN-004 dokumentiert.
+WARUM: Nutzer meldet bereits zwei verschiedene Designplugins. Keine Vermehrung durch Drittplugin oder neue Installationsordner; alle Seitentypen aus einem technischen Designkern, schlanke Assets und Datenbankzugriffe.
+BEWEISGRENZE: GitHub/Campus-Dokumentation geändert, keine WordPress-Plugin-Datei oder Installation verändert; Original-ZIP/Plugin-Basename für In-Place-Update hier nicht verifiziert.
+ENTFERNBAR: NEIN.
