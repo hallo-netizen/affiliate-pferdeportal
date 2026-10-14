@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sperrriemen-faq",
+      "plan_slot": "26542a12b7980aca7ac6372e7d93ca9846f5a6109ea2d6d0b2104e7b89835da7",
+      "target_keyword": "Warum reitet man mit Sperrriemen",
+      "title": "Warum reitet man mit Sperrriemen?"
+    }
+  ],
+  "batch_sha256": "23aa9159d5be19852fb0c4701d97701de55c75c066fd1ce93876355d6e6ca2d6"
+}
