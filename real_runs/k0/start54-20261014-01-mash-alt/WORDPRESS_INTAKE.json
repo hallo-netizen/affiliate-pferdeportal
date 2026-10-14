@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "mash-faq",
+      "plan_slot": "32fcb7ff3acfb4b40f76f4a831653175eb92a72f5b7ba1990725c21244474147",
+      "target_keyword": "Ist Mash gut für alte Pferde",
+      "title": "Ist Mash gut für alte Pferde?"
+    }
+  ],
+  "batch_sha256": "fe5f86e934e323f925a4abec7abb73e09d8b0345d2ea80999205548535c0aa8a"
+}
