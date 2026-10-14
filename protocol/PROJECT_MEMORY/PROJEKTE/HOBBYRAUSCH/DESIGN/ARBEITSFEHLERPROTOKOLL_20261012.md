@@ -400,3 +400,26 @@ Zusätzlich zwingend:
 - Hauptplugin unter WordPress-Hook-Stubs laden;
 - beide aktiven Templates mit der tatsächlich geladenen Profilklasse ausführen;
 - bei irgendeiner alten Releaseklassen-Referenz: BUILD FAIL, kein ZIP, keine Freigabe.
+
+
+## AF-027 – 1.50.654 live zurück auf generisches Theme gefallen; Bildvorschauen waren trotz vorhandener Dateien nicht verdrahtet
+
+FEHLER:
+1.50.654 wurde nach lokalen Syntax-/Klassenprüfungen ausgegeben, obwohl zwei reale Funktionspfade nicht ausreichend geprüft waren:
+1. Der Live-Aufruf `/gestalten/druck-foto/` zeigte nach Installation nicht mehr das eigene Hobby-Depot-Template, sondern den generischen Theme-/Seitenstand.
+2. Die 65 neuen 200×107-Kategorievorschauen lagen im Assetbaum, aber `next_level_card_photo()` für Ebene 1 verwendete weiterhin den alten `v150617/subcategories/*-v150634.webp`-Pfad.
+
+ZUSÄTZLICHER SICHTFEHLER:
+Seit der 1.50.651-Hero-Architektur ist die Hero-Copy ein Flex-Container. Der Claim blieb ohne `align-self:flex-start` und wurde deshalb horizontal gestreckt; dadurch wurde auch der Pinselstrich viel zu lang.
+
+KORREKTUR:
+1.50.654 verworfen. 1.50.655 wird vom funktionierenden 1.50.651-Code abgeleitet, ohne neue Profilklasse und ohne neue aktive Templates. Routing und aktive Templates bleiben byte-identisch zu 1.50.651. Nur Bildbindung, Ebene-1-Vorschaubilder, Unterstrich-Stretch und Hero-Seitenverhältnis werden korrigiert.
+
+VERMEIDUNGSREGEL:
+Bei reinen Bild-/Designänderungen keine neue Profilklasse und keine neuen gerouteten Template-Dateien erzeugen, solange Routing/Architektur nicht beauftragt sind.
+Vor Ausgabe zwingend zusätzlich testen:
+- Ebene-1-Vorschaubild-Resolver zeigt real auf den neuen Preview-Assetbaum;
+- Hub2-Hero-Resolver zeigt real auf den neuen Hero-Assetbaum;
+- mindestens ein kompletter bekannter Seitenpfad wird als `hub2` erkannt und auf das aktive Owned-Template geroutet;
+- Flex-Claims werden auf tatsächliche Textbreite begrenzt;
+- Bilddateimaß und CSS-Anzeigeverhältnis müssen zusammenpassen.
