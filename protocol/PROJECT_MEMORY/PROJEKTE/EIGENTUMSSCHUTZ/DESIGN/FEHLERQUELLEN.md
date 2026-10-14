@@ -22,3 +22,11 @@ NACHHOLPRÜFUNG 14.10.2026: Exakte Original-ZIP `0.1.3` wirklich in der bestehen
 ## HBD-DESIGN-005 – Pluginversion 0.1.3 lud Navigations-JS auf allen Seiten
 STATUS: **LOCAL CLOSED in 0.1.4; WORDPRESS-LIVE-PERFORMANCE-OFFEN**.
 BEFUND: In der echt wiedergewonnenen 0.1.3-Hauptdatei war `wp_enqueue_script('hbdp-nav',...)` außerhalb der `hbdp_for_query() !== null`-Bedingung und lief site-wide. KISS-FIX: Assets nur auf vom Designplugin gerenderten Seiten und Shortcode laden; shared Header-C-CSS von home-only CSS getrennt. Vollständiges Kategorie-Menü revisions-/weltabhängig transient-gecached; keine neuen Cron-/SEO-/Kategorie-Writes. Lokal durch statische und PHP-Mock-Positiv-/Negativtests geprüft; reale WP-Benchmark ausstehend.
+
+
+## HBD-DESIGN-006 – Leere Navigations- und Themenkachel-Beschriftungen nach 0.1.4 (14.10.2026)
+STATUS: **LIVE 0.1.4 FAIL / LOKAL 0.1.5 FIX-PASS / WP-LIVE-RETEST OFFEN**.
+EVIDENZ: Screenshot Nutzer 14.10.2026 15:25: nur Magazin und Dienstleister als Nav-Text, Weltenmenü nur Pfeile, Hochkantkacheln ohne Titel.
+URSACHE: 0.1.4-Live-Snapshot-Normalisierung liest `$raw['name']`; die echte zentrale APKW-Workflow-Quelle `active_nodes` speichert `display_name`. Alle importierten Namen gingen dadurch in der Designprojektion verloren. Bestehende transient-gecachte HTML-Navigation war mit falschen Bezeichnungen bereits gespeichert. Zusätzlich verwendeten Fotokacheln fälschlich eine Welt-Schleifenvariable als eigene Bezeichnung.
+KISS-FIX: In demselben Plugin 0.1.5 auf `display_name` umstellen, den Titel jeder Fotokachel aus eigenem `$item[0]` rendern; Cacheversion in Navigations-Key aufnehmen. Korrektur isoliert nur 3 ausführbare Dateien plus README, kein Daten-/Kategorie-/Workflow-Eingriff.
+REGRESSIONSSCHUTZ: WordPress-Snapshot-Schema **aus dem tatsächlich installierten zentralen Kategorie-Workflow lesen**; 546-Knoten-Simulation mit den richtigen Feldnamen, Browser-Check für sechs Navigations-, sechs Welt- und sechs Fotokacheltitel plus Cache-Neufassung. Lokal 30/30 PASS, Desktop+Mobil 6/6+6/6+6/6. **Nicht als WordPress-live-PASS ausgeben.** Current und NEXT ACTION ausschließlich DESIGN/CURRENT_STATE.md.
