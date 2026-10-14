@@ -1,0 +1,178 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdedecken-unterdecken-faq",
+    "plan_slot": "c10e2fc730f66fdc0fd81cb8b8abfcf7073a2669a7dacceb73ab85f1d2780096",
+    "target_keyword": "Was ist eine Unterdecke",
+    "title": "Was ist eine Unterdecke?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferde Atelier – Unterdecken",
+          "source_url": "https://pferde-atelier.de/ausruestung/ausruestung-decken/pferdedecken-unterdecken/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Thermoregulation",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/thermoregulation-01-2025/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Haut und Decken",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/eine-haarige-angelegenheit-08-2018/"
+        }
+      ],
+      "claims": [
+        "Eine Unterdecke dient als zusätzliche Wärmeschicht unter einer passenden Außendecke.",
+        "Unterdecke und Außendecke müssen bei Größe, Befestigung und Material zueinander passen, damit nichts verrutscht oder drückt.",
+        "Eine zu warme Deckenversorgung kann die natürliche Thermoregulation des Pferdes beeinträchtigen.",
+        "Unter Pferdedecken muss das Hautklima regelmäßig kontrolliert werden, damit sich weder Feuchte noch Überhitzung entwickeln."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist eine Unterdecke",
+      "topic": "Was ist eine Unterdecke?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-unterdecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist eine Unterdecke?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferde Atelier – Unterdecken",
+        "source_url": "https://pferde-atelier.de/ausruestung/ausruestung-decken/pferdedecken-unterdecken/",
+        "statement": "Eine Unterdecke dient als zusätzliche Wärmeschicht unter einer passenden Außendecke.",
+        "evidence_text": "Eine Unterdecke dient als zusätzliche Wärmeschicht unter einer passenden Außendecke.",
+        "evidence_text_sha256": "7185d1168209f2dd5866085ef16aabdc857f044d212acef88bc91a8cb0268b0e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferde Atelier – Unterdecken",
+        "source_url": "https://pferde-atelier.de/ausruestung/ausruestung-decken/pferdedecken-unterdecken/",
+        "statement": "Unterdecke und Außendecke müssen bei Größe, Befestigung und Material zueinander passen, damit nichts verrutscht oder drückt.",
+        "evidence_text": "Unterdecke und Außendecke müssen bei Größe, Befestigung und Material zueinander passen, damit nichts verrutscht oder drückt.",
+        "evidence_text_sha256": "263998c22de0532aa5db709121817f8e505905e69bd5d4e74591356d0b2a9cca",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Thermoregulation",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/thermoregulation-01-2025/",
+        "statement": "Eine zu warme Deckenversorgung kann die natürliche Thermoregulation des Pferdes beeinträchtigen.",
+        "evidence_text": "Eine zu warme Deckenversorgung kann die natürliche Thermoregulation des Pferdes beeinträchtigen.",
+        "evidence_text_sha256": "1c74dfe5ac4918ce1188b322e18c1df06bcacc194b5252024ec0ace920a0bd05",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Haut und Decken",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/eine-haarige-angelegenheit-08-2018/",
+        "statement": "Unter Pferdedecken muss das Hautklima regelmäßig kontrolliert werden, damit sich weder Feuchte noch Überhitzung entwickeln.",
+        "evidence_text": "Unter Pferdedecken muss das Hautklima regelmäßig kontrolliert werden, damit sich weder Feuchte noch Überhitzung entwickeln.",
+        "evidence_text_sha256": "2497faa9e9eed413956ea97b3be6bec14210a590bc7154ff3794886a7c9922b8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-unterdecken-faq/",
+        "anchor": "Unterdecken im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-unterdecken-beratung/",
+        "anchor": "Beratung zu Unterdecken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-unterdecken-pflege/",
+        "anchor": "Unterdecken pflegen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-unterdecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-unterdecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-unterdecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-unterdecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Unterdecke",
+      "Liner",
+      "Pferd",
+      "Wärme",
+      "Passform",
+      "Decke"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Eine Gegenüberstellung von Liner, Außendecke und zusätzlichen Wärmeschichten erleichtert die Auswahl."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
