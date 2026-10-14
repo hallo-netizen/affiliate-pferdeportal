@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sperrriemen-faq",
+    "plan_slot": "26542a12b7980aca7ac6372e7d93ca9846f5a6109ea2d6d0b2104e7b89835da7",
+    "target_keyword": "Warum reitet man mit Sperrriemen",
+    "title": "Warum reitet man mit Sperrriemen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Sinn und Zweck des Kinnriemens",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Reithalfter",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-reithalfter-11-12-2017/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Nasenriemen",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/wohin-mit-dem-nasenriemen-04-2015/"
+        }
+      ],
+      "claims": [
+        "Der früher als Sperrriemen bezeichnete Kinnriemen am kombinierten Reithalfter dient nicht dazu, das Pferdemaul zuzusperren.",
+        "Ein Reithalfter soll Atmen, Kauen und Schlucken ermöglichen; enge Verschnallung ist deshalb problematisch.",
+        "Punktueller Druck durch Reithalfter kann empfindliche Nervenbahnen am Pferdekopf belasten.",
+        "Der Nasenriemen darf nicht zu eng sitzen; die Zwei-Finger-Regel dient als Kontrolle der Verschnallung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum reitet man mit Sperrriemen",
+      "topic": "Warum reitet man mit Sperrriemen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sperrriemen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum reitet man mit Sperrriemen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Sinn und Zweck des Kinnriemens",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/",
+        "statement": "Der früher als Sperrriemen bezeichnete Kinnriemen am kombinierten Reithalfter dient nicht dazu, das Pferdemaul zuzusperren.",
+        "evidence_text": "Der früher als Sperrriemen bezeichnete Kinnriemen am kombinierten Reithalfter dient nicht dazu, das Pferdemaul zuzusperren.",
+        "evidence_text_sha256": "0245ba716b92d7059183f0832e0191ab70be2934ba4950d89bb4663fadc99f10",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Sinn und Zweck des Kinnriemens",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/",
+        "statement": "Ein Reithalfter soll Atmen, Kauen und Schlucken ermöglichen; enge Verschnallung ist deshalb problematisch.",
+        "evidence_text": "Ein Reithalfter soll Atmen, Kauen und Schlucken ermöglichen; enge Verschnallung ist deshalb problematisch.",
+        "evidence_text_sha256": "5201416b29a0a12defa762edff5eda83ef33aea13e94aca963a3fbd2d91ae663",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Reithalfter",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-reithalfter-11-12-2017/",
+        "statement": "Punktueller Druck durch Reithalfter kann empfindliche Nervenbahnen am Pferdekopf belasten.",
+        "evidence_text": "Punktueller Druck durch Reithalfter kann empfindliche Nervenbahnen am Pferdekopf belasten.",
+        "evidence_text_sha256": "ef15fa7073156eb08f7f4cace7dc9bc3c12f35057ed43470740b02773ab678d9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Nasenriemen",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/wohin-mit-dem-nasenriemen-04-2015/",
+        "statement": "Der Nasenriemen darf nicht zu eng sitzen; die Zwei-Finger-Regel dient als Kontrolle der Verschnallung.",
+        "evidence_text": "Der Nasenriemen darf nicht zu eng sitzen; die Zwei-Finger-Regel dient als Kontrolle der Verschnallung.",
+        "evidence_text_sha256": "ec770c7ac4e39aaf8641d2d462be1c44db65fe6decabe897037e692d0573148f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/sperrriemen-faq/",
+        "anchor": "Sperrriemen im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sperrriemen-beratung/",
+        "anchor": "Beratung zu Sperrriemen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sperrriemen-pflege/",
+        "anchor": "Sperrriemen pflegen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/sperrriemen-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/sperrriemen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sperrriemen-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sperrriemen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Sperrriemen",
+      "Kinnriemen",
+      "Reithalfter",
+      "Pferd",
+      "Maul",
+      "Druck",
+      "Nasenriemen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Funktionen der Riemen und problematische Verschnallungen lassen sich sachlich gegenüberstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
