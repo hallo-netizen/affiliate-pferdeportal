@@ -77,16 +77,25 @@ def resolve(intake,registry):
     rows=validate_intake(intake)
     if registry.get('contract')!='K0_PORTAL_REGISTRY_V1':
         raise Blocked('PORTAL_REGISTRY_CONTRACT_INVALID')
-    profiles=[]
-    for profile in registry.get('profiles') or []:
-        p=dict(profile)
-        if p.get('category_git_source'):
-            p['category_exact']=sorted(_central_category_slugs(p['category_git_source']))
-            p['category_prefixes']=[]
-        profiles.append(p)
+    profiles=[dict(p) for p in registry.get('profiles') or []]
+    static_profiles=[p for p in profiles if not p.get('category_git_source')]
+    central_loaded=False
     out=[]
     for row in rows:
-        p=match_profile(row['category'],profiles)
+        category=row['category']
+        direct=any(category in (p.get('category_exact') or []) or
+                   (p.get('category_prefixes') and category.startswith(tuple(p['category_prefixes'])))
+                   for p in static_profiles)
+        if direct:
+            p=match_profile(category,static_profiles)
+        else:
+            if not central_loaded:
+                for p in profiles:
+                    if p.get('category_git_source'):
+                        p['category_exact']=sorted(_central_category_slugs(p['category_git_source']))
+                        p['category_prefixes']=[]
+                central_loaded=True
+            p=match_profile(category,profiles)
         out.append({
           'portal_id':p['portal_id'],
           'portal_name':p['display_name'],

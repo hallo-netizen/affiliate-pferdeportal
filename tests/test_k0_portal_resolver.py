@@ -101,11 +101,10 @@ class K0PortalResolverTest(unittest.TestCase):
             with self.assertRaisesRegex(Blocked,'PORTAL_CATEGORY_SOURCE_UNAVAILABLE'):
                 resolve(intake('mash-faq'),reg)
 
-    def test_central_office_conflicting_portals_block(self):
+    def test_hobby_does_not_depend_on_horse_category_source(self):
         reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
-        with patch('engine.k0_portal_resolver._central_category_slugs',return_value={'discgolf-beratung'}):
-            with self.assertRaisesRegex(Blocked,'PORTAL_ASSIGNMENT_NOT_UNIQUE'):
-                resolve(intake(),reg)
+        with patch('engine.k0_portal_resolver._central_category_slugs',side_effect=Blocked('PORTAL_CATEGORY_SOURCE_UNAVAILABLE')):
+            self.assertEqual(resolve(intake(),reg)['items'][0]['portal_id'],'hobby')
 
 if __name__=='__main__':
     unittest.main()
