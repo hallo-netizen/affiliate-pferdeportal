@@ -1,4 +1,5 @@
 import copy, hashlib, json, unittest
+from unittest.mock import patch
 from pathlib import Path
 from engine.k0_portal_resolver import resolve, Blocked
 
@@ -60,7 +61,8 @@ class K0PortalResolverTest(unittest.TestCase):
         }
         x['batch_sha256']=hashlib.sha256(stable(x).encode()).hexdigest()
         reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
-        r=resolve(x,reg)
+        with patch('engine.k0_portal_resolver._central_category_slugs',return_value=set(categories)):
+            r=resolve(x,reg)
         self.assertEqual(r['status'],'PASS')
         self.assertEqual(r['item_count'],17)
         self.assertTrue(all(v['portal_id']=='pferdeatelier' for v in r['items']))
@@ -81,6 +83,29 @@ class K0PortalResolverTest(unittest.TestCase):
         x['batch_sha256']=hashlib.sha256(stable(core).encode()).hexdigest()
         with self.assertRaises(Blocked):
             resolve(x,REG)
+
+    def test_central_office_added_category(self):
+        reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
+        with patch('engine.k0_portal_resolver._central_category_slugs',return_value={'steigbuegel-faq'}):
+            self.assertEqual(resolve(intake('steigbuegel-faq'),reg)['items'][0]['portal_id'],'pferdeatelier')
+
+    def test_central_office_removed_category_blocks(self):
+        reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
+        with patch('engine.k0_portal_resolver._central_category_slugs',return_value={'mash-faq'}):
+            with self.assertRaisesRegex(Blocked,'PORTAL_ASSIGNMENT_NOT_UNIQUE'):
+                resolve(intake('steigbuegel-faq'),reg)
+
+    def test_central_office_unavailable_blocks_without_fallback(self):
+        reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
+        with patch('engine.k0_portal_resolver._central_category_slugs',side_effect=Blocked('PORTAL_CATEGORY_SOURCE_UNAVAILABLE')):
+            with self.assertRaisesRegex(Blocked,'PORTAL_CATEGORY_SOURCE_UNAVAILABLE'):
+                resolve(intake('mash-faq'),reg)
+
+    def test_central_office_conflicting_portals_block(self):
+        reg=json.loads(Path('K0_PORTAL_REGISTRY.json').read_text(encoding='utf-8'))
+        with patch('engine.k0_portal_resolver._central_category_slugs',return_value={'discgolf-beratung'}):
+            with self.assertRaisesRegex(Blocked,'PORTAL_ASSIGNMENT_NOT_UNIQUE'):
+                resolve(intake(),reg)
 
 if __name__=='__main__':
     unittest.main()
