@@ -26,7 +26,7 @@ Paket:
 `HOBBY_DEPOT_RECOVERY_1.50.658.zip`
 
 SHA-256:
-`b5cda174d9162841ad983e7f69ace02111c25f81ae338ff0cdf237694e6296e1`
+`5100f9aa1b6ba61557b683104212df313b3d00c9193f14a335aa89cbf4b488a4`
 
 ### Prinzip
 Kein blindes Überschreiben mehr.
