@@ -476,3 +476,31 @@ Zusätzlich Negativtests:
 
 VERMEIDUNGSREGEL:
 Wenn ein Restore-Paket codegleich zum letzten bestätigten Runtime-Stand lokal PASS ist, live aber weiter fatal läuft, darf nicht erneut nur ein weiteres normales Replace-ZIP gebaut werden. Dann muss zuerst der komplette Installations-/Cache-/Request-Zustand als E2E-Szenario reproduziert und bereinigt werden.
+
+
+## AF-030 – Reparaturserie wirkte im realen Frontend nicht; lokale Teiltests wurden zu früh als ausreichende Freigabe behandelt
+
+FEHLER:
+Nach 1.50.653 wurden mehrere Reparaturpakete ausgegeben, obwohl der reale Nutzer-Screenshot weiterhin denselben kritischen Fehler zeigte.
+
+BELASTBARER NACHWEIS:
+Der zentrale Seitenbereich der Screenshots 17:21, 18:05 und 18:34 ist pixelidentisch. Damit ist belegt, dass die späteren Reparaturversuche den sichtbar gerenderten Frontendzustand nicht verändert haben.
+
+URSACHE DER ARBEITSWEISE:
+Lokale Syntax-, Routing-, Stub- und Dateibaumtests wurden wiederholt als ausreichende Grundlage für ein neues Installationspaket behandelt. Nach der ersten Abweichung „lokal PASS / live weiterhin kritisch“ hätte keine weitere normale Überschreibungsrunde stattfinden dürfen.
+
+KORREKTUR:
+1.50.658 ist kein weiterer blinder Template-Kit-Build. Der Recovery-Prozess prüft den realen WordPress-Server per Loopback vor und nach jeder Kandidatenaktivierung und behält einen Kandidaten nur bei echtem Frontend-PASS. Andernfalls wird der nächste Kandidat getestet bzw. automatisch auf den vorherigen exakten Plugin-Snapshot zurückgerollt.
+
+LOKALE SCHUTZPRÜFUNG:
+11/11 Positiv-/Negativ-/Rollback-Szenarien PASS, einschließlich:
+- vier reale kaputte Ausgangsbäume 1.50.653–1.50.656;
+- 1.50.652-Backup bevorzugt;
+- 1.50.652 Frontend-/Aktivierungs-Fail → 1.50.650-Fallback;
+- alle Kandidaten fail → exaktes Rollback;
+- korrupter Payload → exaktes Rollback;
+- doppelte aktive Kit-Kopie → Deaktivierung;
+- gesundes Frontend → keinerlei Ersetzung.
+
+VERMEIDUNGSREGEL:
+Sobald lokaler Test und reales Livebild auseinanderlaufen, ist jeder weitere normale Release-/Replace-Build gesperrt. Der nächste Schritt muss den realen Serverpfad selbst als Gate prüfen und bei Nicht-PASS automatisch rückrollen. Kein weiterer Kandidat darf allein wegen lokaler Stub-/Syntax-/Dateiprüfung empfohlen werden.
