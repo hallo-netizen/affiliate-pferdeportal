@@ -1,0 +1,2 @@
+# HAB & BEWAHR – GLOSSAR – DATEN
+Ein Begriff = `term-<slug>.json` mit Quellen, Prüfdatum, Related, eigener Erklärung und Status. Stand 14.10.2026: noch keine fachlich freigegebenen Einzelakten; 100 Kurzdefinitionen aus 0.1.7 sind **Kandidaten** und müssen recherchiert werden. Keine vorhandene Pferdeakte wird fachlich kopiert. Ausführungsregel: `../../RECHERCHE_STANDARD.md` und `../GLOSSAR_STRUKTUR.md`.

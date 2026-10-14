@@ -12,6 +12,7 @@
 **ALS NÄCHSTES …** `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` → der zuständige Scope → genau eine Current-Autorität → NEXT ACTION.
 
 ## Büros
+- [Wissensdatenbank / Glossarbüro](WISSENSDATENBANK/START_HERE.md): eigene quellengebundene Recherche und Begriffsakten, getrennt von Design und Kategorieverwaltung.
 - [Design](DESIGN/START_HERE.md): erste optische Umsetzung, keine Kategorie-/SEO-Strukturänderungen.
 - [Kategorien](KATEGORIEN/START_HERE.md): zentrale WordPress-Kategorienverwaltung, Live-Bindung, Änderungen und neutrale Lese-Schnittstelle für alle Plugins.
 - [Konzept](KONZEPT/START_HERE.md): verbindliche Kategorien-/Keyword-Logik, R3-3-bis-10-Entwurf und fachliche Duplikatkontrolle.
