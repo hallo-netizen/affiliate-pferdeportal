@@ -2704,3 +2704,61 @@ SHA:
 STATUS:
 **LIVE FAIL / VERWORFEN.**
 
+## PU-20261014-061 – HD-003 WIP 1.50.653 / semantische Bildsanierung ohne Release
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+PLUGIN:
+Hobby Depot Design / Template Kit.
+
+ART:
+Eigenentwicklung / WIP-Fortschreibung, **kein Release**.
+
+FACHBÜRO:
+`DESIGN`
+
+VON / AUF:
+1.50.652 letzter paketierter, visuell nicht freigegebener Build → WIP 1.50.653.
+
+WARUM:
+HRD-067: vorhandene automatische/heuristische Hero- und Kartenbildzuordnung war semantisch nicht zuverlässig genug. Technische Existenz und URL-Eindeutigkeit hatten fälschlich Bildqualität suggeriert.
+
+TATSÄCHLICHER WIP-STAND:
+- 59/65 Heroes aktiv, 6 fehlen;
+- 59/65 Kategorievorschauen, jeweils aus derselben Quelle wie das zugehörige Hero;
+- 75/328 Karten belastbar aktiv, 253 fehlen;
+- keine semantischen Fallbacks;
+- fehlend bleibt fehlend.
+
+ÄNDERUNGEN:
+- reale Hero-Crops auf 600×220;
+- Kategorievorschauen aus derselben Heroquelle auf 200×107;
+- Karten auf 200×107;
+- neue fachlich geprüfte Ersatzmotive blockweise ergänzt;
+- Doppel-/Nahduplikate und Hero↔Karte-Gleichquellen geprüft;
+- ungültige Renderer-Quellenkennung bei `3d-druck` und `wandern` korrigiert;
+- unklare Motive wieder verworfen statt aufzufüllen.
+
+LOKAL BELEGTER TECHNIKSTAND laut aktueller Design-/Plugin-Current:
+- 61/61 PHP Syntax PASS;
+- 59/59 Heroassets 600×220;
+- 59/59 Kategorievorschauen 200×107;
+- 75/75 aktive Karten 200×107;
+- 75/75 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden;
+- 0 exakte oder Nah-Doppelungen innerhalb derselben Seite.
+
+NEGATIV-/FAIL-CLOSED-VERHALTEN:
+- ungeeignete oder zu ähnliche Motive werden wieder entfernt;
+- kein Featured-Image-, Welt-Pool-, Icon- oder Hero-Weltfallback;
+- kein ZIP solange Release-Gate nicht vollständig erfüllt ist.
+
+LIVE:
+Kein Live-PASS. Kein neuer Kandidat.
+
+ARTEFAKT:
+Kein neues isoliertes `CURRENT.zip`. Die bestehende isolierte Ausgabe wird nicht ersetzt, solange kein freigabefähiger Kandidat vorliegt.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
