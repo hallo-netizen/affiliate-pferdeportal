@@ -423,3 +423,21 @@ Vor Ausgabe zwingend zusätzlich testen:
 - mindestens ein kompletter bekannter Seitenpfad wird als `hub2` erkannt und auf das aktive Owned-Template geroutet;
 - Flex-Claims werden auf tatsächliche Textbreite begrenzt;
 - Bilddateimaß und CSS-Anzeigeverhältnis müssen zusammenpassen.
+
+
+## AF-028 – Falsche Ausgangsbasis 1.50.651 trotz dokumentiertem LIVE FAIL weiterverwendet
+
+FEHLER:
+Nach den ersten 1.50.653-Fatals wurde mehrfach 1.50.651 als „funktionierender Runtime-Code“ behandelt und daraus 1.50.654–1.50.656 abgeleitet.
+
+DAS WAR FALSCH:
+Die autoritative Fehlerhistorie führt 1.50.651 ausdrücklich als **LIVE FAIL / verworfen**. Der letzte bestätigte Stand mit **Text PASS + Grundaufteilung PASS** war 1.50.650.
+
+FOLGE:
+Mehrere Reparaturpakete wurden auf einer bereits verworfenen Basis aufgebaut und verschlechterten den realen Zustand weiter.
+
+KORREKTUR:
+Neuer Reparaturstand wird direkt aus dem originalen 1.50.650-Paket gebaut. Sämtliche 55 PHP-Dateien und alle Nicht-Bild-Dateien bleiben byte-identisch. Ausschließlich 130 statische WebP-Dateien werden ersetzt: 65 Heroes 600×220 und 65 Kategorievorschauen 200×107.
+
+VERMEIDUNGSREGEL:
+Bei einem bereits dokumentierten LIVE FAIL darf die betroffene Version niemals wieder als „funktionierende Basis“ bezeichnet oder als technische Ausgangsbasis verwendet werden. Basiswahl künftig ausschließlich aus dem letzten explizit live bestätigten PASS-Stand.
