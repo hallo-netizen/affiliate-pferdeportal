@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-13
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 68/328 KARTEN BELASTBAR / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STAND: 2026-10-14
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 73/328 KARTEN BELASTBAR / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -16,9 +16,9 @@ SHA-256:
 ## Aktueller WIP 1.50.653
 
 ### Hero
-- 59/65 Hero-Motive aktiv und real vorhanden;
-- alle exakt 600×220;
-- 59 daraus abgeleitete Kategorievorschauen exakt 200×107;
+- **59/65** Hero-Motive aktiv;
+- alle exakt **600×220**;
+- **59/65** daraus abgeleitete Kategorievorschauen exakt **200×107**;
 - 6 Heroes fehlen bewusst:
   - rollen-balance
   - wurf-ziel
@@ -29,30 +29,31 @@ SHA-256:
 - keine falschen Fallbacks.
 
 ### Karten
-- ursprünglicher Karten-Audit: 46 PASS / 282 ersetzen;
-- nach zusätzlicher Seiten-Duplikatprüfung wurden 13 alte PASS-Karten erkannt, die dieselbe Ausgangsquelle wie ihr Hero verwendeten;
-- 11 davon wurden auf vorhandene, fachlich passende und eigenständige Bildquellen umgestellt;
-- 2 wurden mangels sauberer Alternative entfernt und bleiben bewusst offen:
-  - wetter-umwelt / gewittertracking
-  - messen-analysieren / bodenanalyse
-- `3d-druck` und `wandern` wurden technisch korrigiert: Quellenkennung und Assetpfad sind rendererkompatibel;
-- aktuell **68/328 Karten belastbar aktiv**;
-- **260 Karten offen**;
-- alle aktiven Karten exakt 200×107;
+- belastbare Vorbasis nach Duplikatkorrektur: **68/328**;
+- neuer geprüfter Block ergänzt:
+  - terraristik / reptilienhaltung
+  - ameisen-insekten / kaeferzucht
+  - wetter-umwelt / private-wetterstation
+  - keramik-glas / keramikglasuren
+  - schmuck / schmuckherstellung
+- `astronomie / teleskop-astronomie` wurde im selben Prüflauf wieder verworfen, weil der reale 200×107-Crop dem Astronomie-Hero zu ähnlich war;
+- aktuell **73/328 Karten belastbar aktiv**;
+- **255 Karten offen**;
+- alle aktiven Karten exakt **200×107**;
 - 0 exakte Karten-Doppelungen innerhalb derselben Seite;
 - 0 Hero↔Karte-Gleichquellen innerhalb derselben Seite;
-- zusätzlicher Nah-Duplikatcheck: 0 Treffer;
-- alle 68 aktiven Karten-Mappings verwenden `source=v150653`;
-- 68/68 gemappte Dateien real vorhanden.
+- Nah-Duplikatcheck: **0 Treffer**;
+- alle 73 aktiven Karten-Mappings verwenden `source=v150653`;
+- 73/73 gemappte Dateien real vorhanden.
 
 ### Technische Prüfung
 - **61/61 PHP-Dateien Syntax PASS**;
 - Hero-Dateien: 59/59 korrekt 600×220;
 - Kategorievorschauen: 59/59 korrekt 200×107;
-- Karten: 68/68 korrekt 200×107;
+- Karten: 73/73 korrekt 200×107;
 - JSON/Mapping PASS;
 - keine semantischen Hero-/Kartenfallbacks;
-- reproduzierbarer Neuaufbau ergibt exakt wieder denselben Stand: **59 Heroes / 68 Karten**;
+- aktiver WIP lokal als echter 1.50.653-Assetbaum + versionierte Profil-/Templatebindung rekonstruiert;
 - kein neues Release-ZIP.
 
 ## Eingefroren
@@ -65,8 +66,8 @@ SHA-256:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/MISSING_IMAGE_WORKLIST_1.50.653.json`
 
 - 6 fehlende Heroes;
-- 260 fehlende Karten;
+- 255 fehlende Karten;
 - fehlend bleibt fehlend, solange kein fachlich eindeutiges Motiv existiert.
 
 ## EXAKT EINE NEXT ACTION
-**Die 6 fehlenden Heroes nur mit fachlich eindeutigen neuen Motiven schließen. Parallel die 260 offenen Karten ausschließlich blockweise mit eindeutig passenden, eigenständigen Bildern ergänzen. Keine Fallbacks, kein falsches Auffüllen, kein Release-ZIP vor vollständigem Render-/Regressionstest und Release-Gate PASS.**
+**Die 6 fehlenden Heroes nur mit fachlich eindeutigen neuen Motiven schließen. Parallel die 255 offenen Karten ausschließlich blockweise mit eindeutig passenden, eigenständigen Bildern ergänzen. Keine Fallbacks, kein falsches Auffüllen, kein Release-ZIP vor vollständigem Render-/Regressionstest und Release-Gate PASS.**
