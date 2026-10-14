@@ -1,0 +1,183 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mash-faq",
+    "plan_slot": "7525570bee02752dd44744d7b741a43aecee6d16a0dad26ec9a4b579eb6e4837",
+    "target_keyword": "Wann sollte man Mash füttern",
+    "title": "Wann sollte man Mash füttern?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Pferdesenioren fit halten",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/so-bleiben-pferdesenioren-fit-und-vital-08-2023/"
+        }
+      ],
+      "claims": [
+        "Bei älteren Pferden mit Kauproblemen können eingeweichte Heucobs und Mash in einer angepassten Ration sinnvoll sein.",
+        "Raufutter bildet die Grundlage der Pferdeernährung; lange Fresspausen können den Verdauungstrakt belasten.",
+        "Quellfähige Futtermittel müssen ausreichend eingeweicht werden, damit keine Schlundverstopfung droht.",
+        "Verliert ein altes Pferd Gewicht oder Muskulatur, sollte sein Futterplan überprüft werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wann sollte man Mash füttern",
+      "topic": "Wann sollte man Mash füttern?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mash-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wann sollte man Mash füttern?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/",
+        "statement": "Bei älteren Pferden mit Kauproblemen können eingeweichte Heucobs und Mash in einer angepassten Ration sinnvoll sein.",
+        "evidence_text": "Bei älteren Pferden mit Kauproblemen können eingeweichte Heucobs und Mash in einer angepassten Ration sinnvoll sein.",
+        "evidence_text_sha256": "ca27ae9bf58cf7c10a7981beac28585f4d05399a0a2c6c5eabda7b845f7de8a5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Raufutter bildet die Grundlage der Pferdeernährung; lange Fresspausen können den Verdauungstrakt belasten.",
+        "evidence_text": "Raufutter bildet die Grundlage der Pferdeernährung; lange Fresspausen können den Verdauungstrakt belasten.",
+        "evidence_text_sha256": "d9474babb861b72e7cb7e5c1732f1012ae226ed60175f4cbe3c823afc70aa138",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung",
+        "statement": "Quellfähige Futtermittel müssen ausreichend eingeweicht werden, damit keine Schlundverstopfung droht.",
+        "evidence_text": "Quellfähige Futtermittel müssen ausreichend eingeweicht werden, damit keine Schlundverstopfung droht.",
+        "evidence_text_sha256": "38d5c0b9a818973bbaf1d025dce591b9d5fe887fe6de50e22d611e1cb2b9e092",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Pferdesenioren fit halten",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/so-bleiben-pferdesenioren-fit-und-vital-08-2023/",
+        "statement": "Verliert ein altes Pferd Gewicht oder Muskulatur, sollte sein Futterplan überprüft werden.",
+        "evidence_text": "Verliert ein altes Pferd Gewicht oder Muskulatur, sollte sein Futterplan überprüft werden.",
+        "evidence_text_sha256": "18803d942dab97533d52b1318cf7af8895643f985e601c90126ce1ea4580f941",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mash-faq/",
+        "anchor": "Mash im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mash-beratung/",
+        "anchor": "Beratung zu Mash",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mash-anwendung/",
+        "anchor": "Mash richtig zubereiten",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mash-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mash-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mash",
+      "Fütterung",
+      "Raufutter",
+      "Pferd",
+      "Portion",
+      "Heucobs",
+      "Verdauung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Unterschiedliche Fütterungssituationen lassen sich in einer Übersicht nach Nutzen, Voraussetzung und Risiko aufschlüsseln."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
