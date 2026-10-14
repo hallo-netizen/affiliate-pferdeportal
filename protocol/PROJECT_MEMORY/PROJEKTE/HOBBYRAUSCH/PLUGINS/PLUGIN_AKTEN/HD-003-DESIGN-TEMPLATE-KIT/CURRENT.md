@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-13
+STAND: 2026-10-14
 STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / RELEASE-GATE FAIL / LIVE OFFEN**
 
 Version letzter paketierter Build:
@@ -17,19 +17,17 @@ SHA-256:
 ## WIP 1.50.653
 - reale rekonstruierte Arbeitsbasis vorhanden;
 - Hero: **59/65** aktiv, **6 fehlen**;
-- Kategorievorschauen: **59/65**, jeweils aus derselben Quelle wie der Hero;
-- Karten: **68/328 belastbar aktiv**, **260 fehlen**;
-- 13 Hero↔Karte-Gleichquellen gefunden; 11 sauber ersetzt, 2 bewusst entfernt;
-- 0 verbleibende exakte Karten-Doppelungen innerhalb derselben Seite;
-- 0 verbleibende Hero↔Karte-Gleichquellen;
-- 0 Nah-Duplikat-Treffer;
+- Kategorievorschauen: **59/65**;
+- Karten: **73/328 belastbar aktiv**, **255 fehlen**;
+- neuer sauberer Kartenblock: Reptilienhaltung, Käferzucht, Private Wetterstation, Keramikglasuren, Schmuckherstellung;
+- Teleskop-Astronomie im Prüflauf wegen Nah-Doppelung zum Hero wieder verworfen;
 - alle Heroassets exakt 600×220;
 - alle Vorschau-/Kartenassets exakt 200×107;
 - **61/61 PHP Syntax PASS**;
-- **68/68 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
-- WIP reproduzierbar exakt auf **59 Heroes / 68 Karten**;
+- **73/73 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
+- 0 exakte oder Nah-Doppelungen innerhalb derselben Seite;
 - aktive Hub2-Hero-/Kartenpfade ohne semantische Bildfallbacks;
 - noch kein neues ZIP.
 
 ## NEXT ACTION
-**6 fehlende Hero-Motive sauber schließen; danach offene Karten blockweise nur mit fachlich eindeutigen, eigenständigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
+**6 fehlende Hero-Motive sauber schließen; offene Karten weiter blockweise nur mit fachlich eindeutigen, eigenständigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
