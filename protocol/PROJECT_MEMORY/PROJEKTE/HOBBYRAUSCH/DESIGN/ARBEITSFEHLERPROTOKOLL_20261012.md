@@ -355,3 +355,18 @@ Eine Karte zählt erst als aktiv, wenn gleichzeitig gilt:
 - Zielcrop korrekt;
 - semantischer Sichttest PASS.
 
+
+
+## AF-025 – Arbeitscheckpoint hatte veraltete interne Karten-Metadaten
+
+FEHLER:
+Der persistente Arbeitscheckpoint `WIP_1.50.653_WORKING_75CARDS_NOT_RELEASE.zip` enthielt real 75 verschachtelte Karten-Mappings und alle 75 Dateien, führte im internen `meta.card_count` aber noch 73 und im protokollierten Neublock nur 5 statt 7 Einträge.
+
+FOLGE:
+Der reale Asset-/Mappingstand war korrekt, aber die interne Checkpoint-Metadatenlage widersprach der Current-Autorität und hätte spätere Prüfungen oder Rekonstruktionen irreführen können.
+
+FIX:
+ZIP direkt geprüft; `meta.card_count` auf 75 gesetzt und `pilze-kulturen/speisepilzzucht` sowie `audio-hifi/lautsprecherbau` im vollständigen 7er-Neublock ergänzt. Keine Assets und keine aktiven Mappings verändert.
+
+VERMEIDUNGSREGEL:
+Ein Checkpoint zählt erst als konsistent, wenn neben Mapping, Quelle, Datei und Crop auch seine internen Zähl-/Blockmetadaten gegen den realen Inhalt geprüft wurden.
