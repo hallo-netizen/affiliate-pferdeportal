@@ -504,3 +504,25 @@ LOKALE SCHUTZPRÜFUNG:
 
 VERMEIDUNGSREGEL:
 Sobald lokaler Test und reales Livebild auseinanderlaufen, ist jeder weitere normale Release-/Replace-Build gesperrt. Der nächste Schritt muss den realen Serverpfad selbst als Gate prüfen und bei Nicht-PASS automatisch rückrollen. Kein weiterer Kandidat darf allein wegen lokaler Stub-/Syntax-/Dateiprüfung empfohlen werden.
+
+
+## AF-031 – Hero-Only 1.50.659 änderte entgegen der Vorgabe zusätzlich das Mapping
+
+FEHLER:
+1.50.659 wurde als „nur Heroes“ ausgegeben, änderte aber zusätzlich den `heroes`-Block in `assets/hobby-depot-v150650/hub2-image-map.json`.
+
+FOLGE:
+Die ausdrückliche Vorgabe „nur vorhandene Fotos austauschen, Finger weg von Architektur/System“ wurde erneut unnötig erweitert.
+
+KORREKTUR:
+1.50.659 verworfen.
+1.50.660 liest das bestehende aktive Mapping nur aus und überschreibt ausschließlich die 65 dort bereits referenzierten Hero-WebP-Dateien. Mapping, PHP, Templates, Routing, CSS, Karten und Architektur bleiben unverändert.
+
+LOKALER NACHWEIS:
+- pristine 1.50.650: exakt 65 Datei-Diffs, ausschließlich die 65 gemappten Hero-WebPs;
+- Mapping byte-identisch;
+- 0 PHP-Dateien geändert;
+- zusätzlich gegen einen bereits mit 1.50.659 veränderten Zustand simuliert: 65/65 aktuell gemappte Hero-Zieldateien korrekt ersetzt.
+
+VERMEIDUNGSREGEL:
+Bei Auftrag „nur Bilder austauschen“ dürfen keine Mapping-, PHP-, Template-, Routing-, CSS- oder Versionslogikänderungen vorgenommen werden. Es werden ausschließlich die bereits aktiven Bilddateien an ihren bestehenden Zielpfaden ersetzt.
