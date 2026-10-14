@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL / 65/65 HEROES + 65/65 KATEGORIEVORSCHAUEN + 75/328 KARTEN BELASTBAR / HERO-BLOCK ABGESCHLOSSEN / INSTALLPAKET KORRIGIERT / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 BILDBASIS REAL / 65/65 HEROES + 65/65 KATEGORIEVORSCHAUEN + 75/328 KARTEN / 1.50.653 INSTALLPAKET VERWORFEN / 1.50.654 FATAL-FIX LOKAL PASS / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -11,41 +11,40 @@ STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL / 65/65 HEROE
 SHA-256:
 `c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
-1.50.652 bleibt der letzte freigegebene Paketstand. Die reale WIP-Basis 1.50.653 ist der aktuelle Arbeitsstand.
+## Bildstand
+- **65/65** Hero-Motive vorhanden, exakt **600×220**;
+- **65/65** zugehörige Kategorievorschauen vorhanden, exakt **200×107**;
+- **75/328** Kartenbilder vorhanden;
+- **253** Karten offen;
+- Kartenstand beim Hero-Abschluss unverändert.
 
-## Aktueller WIP 1.50.653
+## Fehler 1.50.653 – exakt gefunden
+Das Paket `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.653_HOBBY_DEPOT_HERO_COMPLETE_FIXED_INSTALL.zip` ist **verworfen**.
 
-### Hero
-- **65/65** Hero-Motive aktiv;
-- alle exakt **600×220**;
-- **65/65** Kategorievorschauen exakt **200×107**;
-- die zuletzt offenen 6 Heroes sind geschlossen:
-  - rollen-balance
-  - wurf-ziel
-  - team-wettkampf
-  - geschick-tricks
-  - werbung-design
-  - werkzeuge-geraete
-- Kategorievorschauen wurden jeweils aus derselben Hero-Bildquelle abgeleitet;
-- keine falschen Fallbacks;
-- Hero-Block vollständig abgeschlossen.
+Ursache des Frontend-Fatals:
+- Main-Plugin lud nur `Hobby_Depot_Profile_V150653`;
+- die neu angelegten Templates `hobby-depot-front-v150653.php` und `hobby-depot-content-v150653.php` riefen aber weiterhin `Hobby_Depot_Profile_V150651::...` auf;
+- dadurch konnte auf den gerouteten Hobby-Depot-Seiten die nicht geladene Klasse `Hobby_Depot_Profile_V150651` aufgerufen werden → Fatal Error / kritischer Fehler.
 
-### Karten
-- aktuell **75/328 Karten belastbar aktiv**;
-- **253 Karten offen**;
-- alle aktiven Karten exakt **200×107**;
-- Kartenstand wurde beim Hero-Abschluss nicht verändert.
+## Korrigierter Installationsstand 1.50.654
+Paket:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.654_HOBBY_DEPOT_FATAL_FIX.zip`
 
-### Technische Prüfung
-- korrigiertes Installationspaket basiert auf dem vollständigen 1.50.651-Pluginbaum;
-- Plugin-Verzeichnis im ZIP wieder exakt `affiliate-portal-template-kit/`;
-- **61/61 PHP-Dateien Syntax PASS**;
-- Plugin-Version/Const auf **1.50.653**;
-- Hero-Dateien: **65/65 korrekt 600×220**;
-- Kategorievorschauen: **65/65 korrekt 200×107**;
-- Karten: **75/75 korrekt 200×107**;
+SHA-256:
+`65c21010a9f63a5742e2d16f4b1b8bfcafb80a9fa35df7d5c1ef3628384b3319`
+
+Lokale Prüfung:
+- vollständiger Pluginbaum mit Root `affiliate-portal-template-kit/`;
+- Plugin-Version/Const **1.50.654**;
+- Main-Plugin lädt `Hobby_Depot_Profile_V150654`;
+- Front- und Content-Template rufen ausschließlich `Hobby_Depot_Profile_V150654` auf;
+- alter fehlerhafter `V150651`-Klassenaufruf in den aktiven 1.50.654-Templates: **0**;
+- PHP-Syntaxprüfung aller Dateien PASS;
+- simuliertes Laden des Hauptplugins mit WordPress-Hook-Stubs: **ACTIVATION_INCLUDE_PASS**;
+- Front-Template Klassenbindung PASS;
+- Content-Template Klassenbindung PASS;
 - ZIP-Integrität PASS;
-- das zuvor ausgegebene `WIP_1.50.653_WORKING_65HEROES_75CARDS_NOT_RELEASE.zip` war als WordPress-Installationspaket falsch verpackt und darf nicht installiert werden.
+- Bildassets bleiben im geprüften `hobby-depot-v150653`-Assetbaum und werden von 1.50.654 verwendet.
 
 ## Eingefroren
 - Textinhalt aus 1.50.650;
@@ -53,17 +52,10 @@ SHA-256:
 - Buch & Papier 1.50.645 als visuelle Referenz;
 - Header, Navigation, Ebene 1, Taxonomie, Architektur und Monetarisierungsreihenfolge.
 
-## Exakte offene Bildliste
-`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/MISSING_IMAGE_WORKLIST_1.50.653.json`
-
-- **0 fehlende Heroes**;
-- **253 fehlende Karten**.
-
 ## EXAKT EINE NEXT ACTION
-**Das korrigierte 1.50.653-Installationspaket in WordPress als Ersatz des bestehenden Affiliate Portal Template Kit installieren und aktivieren; danach Frontend-Sichtprüfung der Heroes/Kategorievorschauen.**
+**1.50.653 nicht mehr verwenden. 1.50.654 als Ersatz des Affiliate Portal Template Kit installieren/aktivieren und danach genau eine Frontend-Seite prüfen. Erst nach realem Live-PASS weiterarbeiten.**
 
 ## Persistenter Zwischenstand
-- korrigiertes Installationspaket: `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.653_HOBBY_DEPOT_HERO_COMPLETE_FIXED_INSTALL.zip`;
+- `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.654_HOBBY_DEPOT_FATAL_FIX.zip`;
 - dauerhaft unter `/hobby rausch/WIP_1.50.653_WORKING/` gesichert;
-- SHA-256: `c8b0a88d953279647bb61ea8f3801857bdefe7322039f617bf33d660fc70ff54`;
-- kein finales Release-Artefakt; Installations-/Prüfstand.
+- kein finales Release-Artefakt; Reparatur-/Prüfstand.
