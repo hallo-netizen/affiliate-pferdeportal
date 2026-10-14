@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "steigbuegel-faq",
+    "plan_slot": "548d325fb5e4390857b2487695517ac7393ad1d1b948e455fabd5dedbc46818b",
+    "target_keyword": "Was ist ein Steigbügel",
+    "title": "Was ist ein Steigbügel?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Richtige Ausrüstung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausruestung-von-pferd-und-reiter"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Steigbügel richtig verschnallen",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/steigbuegel-kurz-oder-lang-02-2015/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Sicherheit beim Reiten",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten"
+        }
+      ],
+      "claims": [
+        "Steigbügel sind Teile der Reitausrüstung und müssen in ihrer Größe zum Fuß des Reiters passen.",
+        "Sicherheitssteigbügel sollen verhindern, dass der Fuß bei einem Sturz im Bügel hängen bleibt.",
+        "Die geeignete Steigbügellänge hängt unter anderem von Pferd, Reiterkörperbau und Sitzart ab.",
+        "Steigbügel und übrige Ausrüstung sollen vor jeder Reitstunde auf sichere und passende Nutzung kontrolliert werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist ein Steigbügel",
+      "topic": "Was ist ein Steigbügel?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "steigbuegel-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist ein Steigbügel?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Richtige Ausrüstung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausruestung-von-pferd-und-reiter",
+        "statement": "Steigbügel sind Teile der Reitausrüstung und müssen in ihrer Größe zum Fuß des Reiters passen.",
+        "evidence_text": "Steigbügel sind Teile der Reitausrüstung und müssen in ihrer Größe zum Fuß des Reiters passen.",
+        "evidence_text_sha256": "5c74e4da01054299b51997dcc36992f8fe98d36d2ff3eda27637d2c90a0b1dcf",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Richtige Ausrüstung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausruestung-von-pferd-und-reiter",
+        "statement": "Sicherheitssteigbügel sollen verhindern, dass der Fuß bei einem Sturz im Bügel hängen bleibt.",
+        "evidence_text": "Sicherheitssteigbügel sollen verhindern, dass der Fuß bei einem Sturz im Bügel hängen bleibt.",
+        "evidence_text_sha256": "363f9b3e2253f2d6ef4ed1173bf77cb68d8d66b7d5e1f211fd72827be951b55a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Steigbügel richtig verschnallen",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/steigbuegel-kurz-oder-lang-02-2015/",
+        "statement": "Die geeignete Steigbügellänge hängt unter anderem von Pferd, Reiterkörperbau und Sitzart ab.",
+        "evidence_text": "Die geeignete Steigbügellänge hängt unter anderem von Pferd, Reiterkörperbau und Sitzart ab.",
+        "evidence_text_sha256": "311298cfef639541b6b5d1d7de63fe746ff39c53c1a2929ff7564d3f5227ffa6",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Sicherheit beim Reiten",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten",
+        "statement": "Steigbügel und übrige Ausrüstung sollen vor jeder Reitstunde auf sichere und passende Nutzung kontrolliert werden.",
+        "evidence_text": "Steigbügel und übrige Ausrüstung sollen vor jeder Reitstunde auf sichere und passende Nutzung kontrolliert werden.",
+        "evidence_text_sha256": "6d1ba9459708b8ca6df1cdfc359f443688f4574e77dc37b1bbb410167f229c98",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/steigbuegel-faq/",
+        "anchor": "Kategorie steigbuegel",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/steigbuegel-beratung/",
+        "anchor": "Passende Beratung",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/steigbuegel-vergleich/",
+        "anchor": "Weitere Hintergründe",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/steigbuegel-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/steigbuegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/steigbuegel-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "steigbuegel-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Steigbügel",
+      "Fuß",
+      "Bügel",
+      "Reiter",
+      "Sattel",
+      "Sicherheit",
+      "Länge"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Bauweise, Passform und Sicherheitsfunktion eines Steigbügels lassen sich übersichtlich einordnen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
