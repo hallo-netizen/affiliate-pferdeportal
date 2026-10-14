@@ -12,8 +12,8 @@
     "werkzeuge-geraete"
   ],
   "card_total": 328,
-  "card_active": 73,
-  "card_missing_count": 255,
+  "card_active": 74,
+  "card_missing_count": 254,
   "authority_note": "Aktiver lokaler hub2-image-map.json gegen vollständigen 1.50.651-Taxonomie-Map-Stand. Zusätzlich geprüft: keine exakten Karten-Doppelungen innerhalb derselben Seite, keine Hero↔Karte-Gleichquelle und kein Nah-Duplikat im aktiven Kartenbestand. Fehlend bleibt fehlend.",
   "rules": [
     "kein Fallback",
