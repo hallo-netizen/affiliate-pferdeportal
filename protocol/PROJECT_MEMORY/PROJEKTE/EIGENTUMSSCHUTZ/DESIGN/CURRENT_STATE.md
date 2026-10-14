@@ -2,7 +2,18 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **DESIGN 0.1.11 SECHS LANGTEXTE MIT ALLEN 31 BEREICHEN / MOBILE SVG-LEERFLÄCHE UND BREADCRUMB-ABSTAND BEHOBEN / PHP 7/7 + CHROMIUM 60/60 PASS / WORDPRESS-LIVE OFFEN**
+STATUS: **DESIGN 0.1.12 BILDER ALS FLACHE, EIGENSTÄNDIGE ZWISCHENBANNER / MOBILLOGO OBERKANTE NICHT GECLIPPT / 7/7 PHP + 60/60 BROWSER PASS / WP-LIVE OFFEN**
+
+## AKTUELL – DESIGN 0.1.12 (14.10.2026, ca. 20:22)
+**Echte Nutzer-LIVE-Rückmeldung zu installiertem 0.1.11:** Breadcrumbs PASS. Mobile Wortmarke/Bogen noch nicht hoch genug; Fotos horizontal neben Text wirken schlechter als eigenständige, flache Zwischenbanner. Textlinks momentan akzeptiert, NICHT jetzt umgestalten.
+
+**Gezielte KISS-Änderung am vorhandenen Plugin:**
+- Die `hbdp_world_bottom_html()`-Ausgabe setzt exakt zwei Bilder als **selbständige Zwischenabschnitte NACH einem vollständigen thematischen Absatzblock**, nicht mehr in zweispaltige Textbereiche; Text darf über volle Breite laufen. HTML-Block `hbdp-editorial-banner` mit Foto links und dezenter echter Caption rechts (Desktop), auf Smartphones Foto oben, kurze Caption darunter. Bilder 138px Desktop / 114px Mobil, bei Bildquellen von 512px Breite nicht unnötig auf volle 850px hochskalieren. Kein blindes Crop in überhoher Spalte.
+- Bildbezug nun per **stabiler `after_area_id`** in `data/world-editorial.json` statt aus äußerer Listenposition, damit z. B. Haustür-Foto bei `Haus & Wohnung` und Garagen-Foto bei `Garagen & Nebenräume` erscheint (nicht bei `Freizeit & Fahrzeuge`). Pro sechs Welten jeweils zwei verschiedenen passenden Bereichs-IDs zugeordnet.
+- Mobiler Header nutzt nun **Bogen ab y=0 innerhalb des Header** mit flacherer Höhe 20px; vorherige negative obere SVG-Verschiebung (-9px) konnte die Grafik oben abschneiden. Wortmarkenblock kompakter und weiter nach oben, kein fremder Designumbau. Die Breadcrumb-Abstände aus 0.1.11 bleiben exakt unverändert.
+- Redaktionelle Fachtexte, 31 Bereichsabschnitte, zentraler R3-Baum, Glossar, Homepage, SEO-Texte und übrige Kategorievorgaben unverändert. Keine FAQ. Bilder für Feuer/Wetter/Technik aus 0.1.11 bleiben als Qualitätsprüfung OFFEN; neue Layoutprüfung ist keine Bildinhalt-Freigabe.
+- **Kanonisches WP-Installations-ZIP:** `HAB_UND_BEWAHR_DESIGN_0.1.12_MOBIL_LOGO_BILDBANNER.zip`, SHA256 `5160c3802ad27ed6dded95a4346978563aef7b58509b1d77ff7301c6b5d0fae3`, 1.640.342 Bytes, 50 Dateien, im Chat verlinkt und in persönlicher Library `/Eigentumsschutz/Design/` gesichert; weiterhin `hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php` – kein weiteres Plugin.
+- **Gates:** PHP 7/7 lint; 6 realistische Render-Mocks mit allen 31 Kategorie-Links, je 2 passenden ID-Anker-Bannern und keinen FAQs; Playwright Chromium **60/60** (6 Welten × 10 Viewports 320–1600px), Browser-Overflow 0, Bannerhöhe max 138px Foto, korrekte Abschnittsgrenze, Mobilbogen nicht über oberen Headerrand geschoben, ZIP-CRC PASS. **WordPress-LIVE 0.1.12 offen.**
 
 ## AKTUELL – DESIGN 0.1.11 / WELTTEXTE, FOTOS, MOBILLOGO, BREADCRUMBS (14.10.2026)
 **Grund:** Nutzer-LIVE-Screenshots 19:48 und 19:52: zu kurze Welt-Textsektion, semantisch passende Links nachträglich angehängt, Bilder zu hoch/unscharf/motivisch unpassend, letzte Textabschnitte versetzt; mobil Schutzbogen zu tief und zu viel Leerraum über Breadcrumb. 0.1.10 war lokal „PASS“, aber reale Ansicht noch nicht passend.
@@ -93,4 +104,4 @@ STATUS: **DESIGN 0.1.11 SECHS LANGTEXTE MIT ALLEN 31 BEREICHEN / MOBILE SVG-LEER
 **HBD-DESIGN-004 ist LOCAL CLOSED, WordPress-Live-Migration OFFEN.** Originalquelle und installierbarer identitätsgleicher Kandidat 0.1.4 liegen real vor. Die tatsächliche WordPress-Updateinstallation und der Vergleich nach der Deaktivierung von 0.1.0 sind noch nicht bestätigt. Außerdem **HBD-DESIGN-002**: Original-Masterlogo nicht separat verfügbar, bis zur separaten Grafikfreigabe bleibt die vereinbarte Vektor-Header-C-Wortmarke im Designplugin. Keine Blindlöschung des 0.1.0-Plugins.
 
 ## EXAKT EINE NEXT ACTION
-**Die einzige freigegebene Installations-ZIP `HAB_UND_BEWAHR_DESIGN_0.1.11_WELTEN_MOBIL_BREADCRUMBS.zip` in WordPress als Update des bestehenden EINEN Designplugins installieren („aktuelle Version ersetzen“), danach am echten Smartphone Logo unmittelbar oben, Breadcrumb direkt unter Navigation und die flachen Bilder der Welt-Langtexte prüfen; Desktop auf alle 31 Welt-Unterbereiche mit Links im Fließtext und korrekt bündigen Satzspiegel prüfen.** WP-Live-Readback und Quellen-/Bildredaktion bleiben OFFEN. Keine 409 anderen Kategorie-Layouts entscheiden oder WordPress-Kategorie-Sync starten.
+**Die bestehende WordPress-Designversion 0.1.11 mit EINER ZIP `HAB_UND_BEWAHR_DESIGN_0.1.12_MOBIL_LOGO_BILDBANNER.zip` aktualisieren („aktuelle Version ersetzen“), dann live Mobil-Logo-Oberkante, Breadcrumb unverändert, Einbruch-Banner ohne Textverengung, Bildbezug Haus/Garage, Weltseite auf Desktop und Mobil überprüfen.** Kein Kategorie-Sync, keine Änderungen an 409 unteren Kategorietextlayouts; keine redaktionellen Longtext-/Bild-Fach-PASS-Behauptungen vor Einzelprüfung.
