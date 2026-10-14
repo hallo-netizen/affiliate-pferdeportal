@@ -4,6 +4,12 @@
 STAND: 2026-10-14
 STATUS: **DESIGN 0.1.9 GLOSSAR-404-ROUTE UND KLICKBARER HAUPTNAV / KATEGORIENTEXTE AUS PA-REGELN NUR INHALT / 7/7 PHP + 30/30 CHROMIUM PASS / WP-LIVE OFFEN**
 
+## AKTUELLE SPERRE – TEXTDESIGN NOCH NICHT FREIGEGEBEN (14.10.2026, 19:31)
+- Nutzer beanstandet 0.1.9-Fachtexte, die **vor** Festlegung der Inhaltselemente geschrieben worden sind. Diese Texte sind **nicht freigegeben und erfüllen den neuen Fachvertrag nicht**. Keine vorzeitige Behauptung von textlicher Fertigstellung, kein neues Pluginupdate, solange Designvorschau nicht abgenommen ist.
+- Mindesttextregeln ab jetzt: mindestens 2 semantisch passend verlinkte existierende Kategorieziele je Eintrag, bevorzugt 3; Ankertext vollständig identisch mit dem aktuellen Zielkategorienamen; mindestens 1 sinnvolle Aufzählung; mindestens 1 fachlich geeignetes eingebettetes Bild auf untergeordneten Kategorien, mindestens 2 auf den sechs Hauptwelten. Nur echte Bilder mit Rechte-/Alt-/Caption-/Performanceprüfung. Exakte Norm/Technik/Schutzversprechen nur mit Quellen.
+- Darstellungsrichtung **zur Freigabe als Chat-Vorschau vorgelegt**: auf Hauptwelten großes hochwertiges Editorial-Layout NACH Kategorien/Karten; auf allen anderen Kategorien kompakter 2-Spalten-Text-/Bildblock UNTER H1; Tabellen nur bei tatsächlich nützlichem Vergleich, nicht schematisch. Pferde-Atelier nur für redaktionelle Textlogik, nicht für dessen Design.
+- Zuständiger Fachvertrag `../KONZEPT/KATEGORIENTEXT_REGELN.md` V2, dort Regeln verbindlich, visuelle Detailentscheidung OFFEN. NEXT ACTION von Design weiter: tatsächliche 0.1.9-WP-Liveprüfung, danach separat FREIGABE für Layout und Texte.
+
 ## AKTUELL – DESIGN 0.1.9 (14.10.2026)
 - **Echter Nutzerbeleg:** `hab-und-bewahr.de/magazin/magazin-glossar-a-z/` liefert sichtbare WordPress-Fehlerseite „Nichts gefunden“ im Fremdtheme (Screenshot 19:10). 0.1.8 hatte eine historische WP-Page-/Rewrite-Bindung, die real nicht funktioniert. Keine WordPress-Live-Heilung wird behauptet.
 - **Korrektur:** Einziger Kanon `/glossar/`. URL wird direkt anhand `REQUEST_URI` und beim `parse_request` erkannt (auch ohne Rewrite-Flush); 404-Queryflag wird entfernt, 200-Status gesetzt; die alte Route `/magazin/magazin-glossar-a-z/` erhält 301-Redirect dorthin. 0 freigegebene Begriffe = sichtbare redaktionelle Vorbereitungsseite mit noindex. Glossar-CPT, gespeicherte Inhalte und WordPress-Seite 184 nicht geändert.
