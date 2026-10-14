@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "minerallecksteine-beratung",
+      "plan_slot": "3fdd491da8ef2656492f8a1808d038da200e9a077b7c73599146ea733cffb044",
+      "target_keyword": "Minerallecksteine für Pferde",
+      "title": "So findest du die geeigneten Minerallecksteine für Pferde"
+    }
+  ],
+  "batch_sha256": "ab899dd778693f4554c28859016982f1f01a15ae7dfe95d4c3d3c191d9c7a1fa"
+}
