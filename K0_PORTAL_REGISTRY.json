@@ -14,40 +14,9 @@
     {
       "portal_id": "pferdeatelier",
       "display_name": "Pferdeatelier",
-      "category_exact": [
-        "reitplatzplaner-beratung",
-        "pferdedecken-regendecken-faq",
-        "reitplatzbewaesserung-faq",
-        "kappzaum-faq",
-        "longiergurte-beratung",
-        "gesundheit-regeneration-kuehlgamaschen-beratung",
-        "pferdehaftpflicht-beratung",
-        "kappzaum-beratung",
-        "schermaschinen-beratung",
-        "schabracken-faq",
-        "reitplatzplaner-faq",
-        "magnetfelddecken-faq",
-        "longiergurte-faq",
-        "tuev-beim-pferdeanhaenger-faq",
-        "pferdewissen-grundlagen",
-        "gesundheit-regeneration-kuehlgamaschen-faq",
-        "gesundheit-fellpflege-und-saison-schermaschinen-faq",
-        "longierpeitschen-faq",
-        "mash-faq",
-        "mueslis-fuer-pferde-faq",
-        "pferdebuersten-faq",
-        "pferdedecken-regendecken-beratung",
-        "reitplatzbau-kosten",
-        "reitplatzbeleuchtung-kosten",
-        "reitplatzboden-faq",
-        "sattelgurte-faq",
-        "schermaschinen-faq",
-        "schubkarren-faq",
-        "striegel-faq",
-        "traenken-und-wasser-frostsichere-pferdetraenken-faq",
-        "zuegel-faq"
-      ],
-      "category_prefixes": []
+      "category_exact": [],
+      "category_prefixes": [],
+      "category_git_source": "refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
     }
   ]
 }
