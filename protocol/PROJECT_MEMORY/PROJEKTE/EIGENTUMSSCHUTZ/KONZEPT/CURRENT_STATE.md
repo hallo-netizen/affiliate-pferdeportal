@@ -4,6 +4,11 @@
 STAND: 2026-10-13
 STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
 
+## Text-Designentscheidung des Nutzers vom 14.10.2026, nach 19:31 – VERBINDLICH
+**Nur die sechs Hauptschutzwelten werden zunächst umgesetzt.** Deren ausführliche Informationsabschnitte stehen unten; redaktioneller Editorial-Stil mit zwei lokal eingebundenen thematisch passenden Bildern, mindestens einer Liste und 2–3 dynamischen internen Links auf aktuelle Kategorieziele mit **exakt vollständigen WP-Kategorienamen**. **Keine FAQ-Module**, da spätere FAQ-Beiträge nicht geplant/fachlich entschieden sind. Das optische Grundkonzept wurde vom Nutzer positiv beurteilt.
+**Für 31 Bereiche + 93 Unterbereiche + 285 Endkategorien ist Textgestaltung/Platzierung ausdrücklich NOCH NICHT ENTSCHIEDEN.** Frühere V2-Ideen zur pauschalen oberen Inhaltsfläche sind Vorschläge, keine Freigabe. Bestehende Kategorien und kurze neutrale Einführungstexte nicht per Massenoperation verändern.
+Verbindlicher Fachvertrag: `KATEGORIENTEXT_REGELN.md` Fassung V2.1. Bestehende automatisch in 0.1.9 vorab geschriebenen und 0.1.10 rearrangierten sechs Welttexte sind **nicht fachlich abgenommene redaktionelle Erstfassungen**. Layout der sechs Seiten lokal geprüft, WordPress-LIVE bleibt offen.
+
 ## Aktueller Fachvertrag Kategorientexte (14.10.2026)
 `KATEGORIENTEXT_REGELN.md` enthält V2 nach ausdrücklicher Nutzerkorrektur: echte semantische 2–3 interne Kategorie-Links mit vollständigem Zielnamen, 1 passende Aufzählung, 1–2 fachlich integrierte Bilder, 6 Welt-Langformate unten versus 409 kompakte redaktionelle Formate oben, Quellen-/Rechteprüfung, Tabelleneinsatz nur bei fachlichem Nutzen. Die vor diesen Regeln erzeugten Design-0.1.9-Texte sind **nicht freigegeben** und erfüllen den Vertrag nicht. Optisches Editorial-Layout im Chat als Entwurf, NICHT als bereits installierter Patch. Kategorie-Live-Bindung unverändert; keine SEO-Produktion behaupten.
 
