@@ -3,58 +3,88 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **1.50.653–1.50.656 VERWORFEN / FALSCHE BASISWAHL ERKANNT / EXAKTER RUNTIME-RESTORE AUF LIVE-BESTÄTIGTEM 1.50.650 / 65 HEROES + 65 VORSCHAUEN STATISCH ERSETZT / LOKALER RENDER-PASS / KEIN LIVE-PASS**
+STATUS: **1.50.653–1.50.656 VERWORFEN / 1.50.650 IMAGE-ONLY-RESTORE LIVE FAIL / REPAIR-INSTALLER 1.50.657 LOKAL E2E PASS / KEIN LIVE-PASS**
 
-## Exakter Fehlerbefund
-Der entscheidende Basisfehler war, 1.50.651 als „funktionierenden“ Runtime-Stand zu behandeln.
+## Exakter aktueller Befund
+- 1.50.650 bleibt der letzte Stand, bei dem **Textinhalt + Grundaufteilung live bestätigt** wurden.
+- 1.50.651 ist ausdrücklich LIVE FAIL / verworfen.
+- 1.50.653–1.50.656 sind verworfen.
+- Auch der anschließend gebaute `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_RUNTIME_RESTORE_NEW_IMAGES.zip` ist **LIVE FAIL**: trotz 55/55 PHP-Dateien byte-identisch zu original 1.50.650 zeigte der reale Frontend-Aufruf weiter den WordPress-kritischen Fehler.
 
-Die Fehlerhistorie sagt eindeutig:
-- **1.50.650: Text PASS + Grundaufteilung PASS**;
-- **1.50.651: LIVE FAIL / verworfen** wegen Hero-/Bildmapping-/Unterstrich-/Zoomproblemen;
-- 1.50.652 war nur der letzte paketierte VISUAL-FAIL-Stand, nicht freigegeben.
+Damit ist belastbar:
+**Der Live-Fatal ist nicht durch einen PHP-Code-Unterschied dieses letzten Restore-ZIPs gegenüber 1.50.650 erklärbar.**
+Ohne Server-Fatal-Log wird keine einzelne PHP-Zeile als Ursache erfunden.
 
-Damit durfte 1.50.651 nicht als technische Ausgangsbasis für weitere Reparaturpakete benutzt werden.
+## Reparaturweg 1.50.657
+Normales „Plugin hochladen → vorhandenen Ordner überschreiben“ wird vorerst nicht mehr verwendet.
 
-## Verworfen
-- 1.50.653: Release-Ketten-Fatal;
-- 1.50.654: LIVE FAIL;
-- 1.50.655: LIVE FAIL;
-- 1.50.656: LIVE FAIL.
-
-## Neuer Reparaturstand
 Paket:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_RUNTIME_RESTORE_NEW_IMAGES.zip`
+`HOBBY_DEPOT_REPAIR_INSTALLER_1.50.657.zip`
 
 SHA-256:
-`c1717b196619a9decb1f5afe7946b56225d9d3f31889ccf7e8c07b3b5f0c928d`
+`8cc88b8bf6a013aaf09fc8f20f039d68fcaa1e0ef9138c2b043278027c20201e`
 
-### Harte Regel dieses Pakets
-Der komplette ausführbare Runtime-Code bleibt exakt der bestätigte 1.50.650-Stand.
+### Was der Repair Installer tut
+1. eingebauten Payload vollständig per SHA-256 prüfen;
+2. bestehendes `affiliate-portal-template-kit` deaktivieren;
+3. den gesamten alten Pluginordner rekursiv entfernen;
+4. den bekannten 1.50.650-Runtime-Stand sauber neu kopieren;
+5. alle 981 Payload-Dateien nach dem Kopieren erneut per SHA-256 prüfen;
+6. Statcache, PHP-OPcache sowie verfügbare WordPress/Page-Caches leeren;
+7. **erst im nächsten Admin-Request** das wiederhergestellte Template Kit aktivieren;
+8. danach den Repair Installer selbst deaktivieren.
 
-Geändert wurden ausschließlich statische Bilddateien:
-- **65 Hero-Dateien** → 600×220;
-- **65 Kategorievorschauen** → 200×107;
-- insgesamt exakt **130 statische WebP-Dateien**.
+Dadurch werden zwei bisher bei normalen Updates nicht sauber ausgeschlossene Zustände ausdrücklich beseitigt:
+- alte/stale Dateien im Pluginordner;
+- alter PHP-/Object-/Page-Cache-Zustand über eine Request-Grenze.
 
-Nicht geändert:
-- 55/55 PHP-Dateien byte-identisch zu original 1.50.650;
-- Plugin-Header und interne VERSION bleiben 1.50.650;
-- Profilklasse bleibt `Hobby_Depot_Profile_V150650`;
-- Routing unverändert;
-- Front-/Content-Templates unverändert;
-- CSS unverändert;
-- Text/Grundaufteilung unverändert;
-- keine Mapping-/Methodenänderung;
-- keine neue Releaseklasse.
+### Payload
+- Runtime-Code = originaler 1.50.650-Stand;
+- **55/55 PHP-Dateien unverändert**;
+- **0 Nicht-Bild-Dateien gegenüber original 1.50.650 geändert**;
+- exakt **130 WebP-Dateien geändert**:
+  - 65 Heroes, 600×220;
+  - 65 Kategorievorschauen, 200×107.
 
-### Lokale Prüfung
-- PHP-Dateien: **55/55 SHA-identisch zu original 1.50.650**;
-- Nicht-Bild-Dateien: **0 Unterschiede**;
-- PHP-Syntax: PASS;
-- kompletter Hub2-Render `Druck & Fotografie`: **RENDER_OK**;
-- Render-Fehlerausgabe: 0 Byte;
-- geänderte Bilder: exakt **65× 600×220 + 65× 200×107**;
+## Lokale E2E-Simulation 1.50.657
+Getestet wurden vier reale verschmutzte Ausgangsbäume:
+- 1.50.653
+- 1.50.654
+- 1.50.655
+- 1.50.656
+
+Je Ausgangsstand drei getrennte Request-Grenzen:
+1. Repair-Aktivierung;
+2. Zielplugin-Aktivierung / Repair-Selbstdeaktivierung;
+3. Frontend-Request `/gestalten/druck-foto/`.
+
+Für **alle vier**:
+- alter Stale-Testfile nach Repair entfernt;
+- Zielordner danach byte-/prüfsummengleich zum Payload;
+- Aktivierungs-Request stderr 0;
+- Finish-Request stderr 0;
+- Frontend-Request stderr 0;
+- positive Route: `hobby-depot-content-v150650.php`;
+- vollständiger Frontend-Render: 12.377 Byte;
+- Hero vorhanden;
+- kein kritischer Fehler;
+- negativer Routingtest auf nicht eigener Seite: Theme-Template bleibt erhalten.
+
+Negativtests:
+- absichtlich beschädigter eingebauter Payload → Repair stoppt **vor** Deaktivierung/Löschen des alten Plugins;
+- Zielordner nach Kopie absichtlich manipuliert → Zielplugin wird **nicht** aktiviert, Repair bleibt aktiv, Fehler wird festgehalten.
+
+Statische Tests:
+- Payload PHP: **55/55 Syntax PASS**;
+- Repair-Installer PHP: Syntax PASS;
+- Hero-Dimensionen: **65/65 PASS**;
+- Vorschau-Dimensionen: **65/65 PASS**;
+- Hero-Dubletten exakt: 0;
+- Vorschau-Dubletten exakt: 0;
 - ZIP-Integrität: PASS.
 
+Evidence:
+`HOBBY_DEPOT_REPAIR_1.50.657_LOCAL_TEST_EVIDENCE.json`
+
 ## EXAKT EINE NEXT ACTION
-**Alle 1.50.653–1.50.656-Pakete nicht mehr verwenden. Den exakten 1.50.650-Runtime-Restore mit den neuen 130 Bilddateien installieren und nur /gestalten/druck-foto/ live prüfen. Erst bei realem Live-PASS weiterarbeiten.**
+**Kein normales Template-Kit-ZIP mehr installieren. Ausschließlich den Repair Installer 1.50.657 einmal hochladen und aktivieren. Er ersetzt/deaktiviert/reaktiviert den Template-Kit automatisch über eine saubere Request-Grenze. Danach nur /gestalten/druck-foto/ live prüfen. Erst dann existiert ein Live-PASS oder ein belastbarer neuer Live-Fehler.**
