@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT / 59/65 HEROES + 59 KATEGORIEVORSCHAUEN + 75/328 KARTEN BELASTBAR / RELEASE-GATE FAIL / KEIN LIVE-PASS**
+STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL / 65/65 HEROES + 65/65 KATEGORIEVORSCHAUEN + 75/328 KARTEN BELASTBAR / HERO-BLOCK ABGESCHLOSSEN / RELEASE-GATE FAIL / KEIN LIVE-PASS**
 
 ## Letzter paketierter Stand
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
@@ -11,22 +11,24 @@ STATUS: **1.50.652 LETZTER BUILD / VISUAL FAIL / WIP 1.50.653 REAL REKONSTRUIERT
 SHA-256:
 `c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
 
-1.50.652 bleibt der letzte paketierte Build und ist visuell nicht freigabefähig. Die reale WIP-Basis 1.50.653 ist aus der vorhandenen 1.50.651-Arbeitskopie plus den autoritativen Bild-Audits rekonstruiert und reproduzierbar.
+1.50.652 bleibt der letzte paketierte Build und ist visuell nicht freigabefähig. Die reale WIP-Basis 1.50.653 ist der aktuelle Arbeitsstand.
 
 ## Aktueller WIP 1.50.653
 
 ### Hero
-- **59/65** Hero-Motive aktiv;
+- **65/65** Hero-Motive aktiv;
 - alle exakt **600×220**;
-- **59/65** daraus abgeleitete Kategorievorschauen exakt **200×107**;
-- 6 Heroes fehlen bewusst:
+- **65/65** Kategorievorschauen exakt **200×107**;
+- die zuletzt offenen 6 Heroes sind geschlossen:
   - rollen-balance
   - wurf-ziel
   - team-wettkampf
   - geschick-tricks
   - werbung-design
   - werkzeuge-geraete
-- keine falschen Fallbacks.
+- Kategorievorschauen wurden jeweils aus derselben Hero-Bildquelle abgeleitet;
+- keine falschen Fallbacks;
+- Hero-Block vollständig abgeschlossen.
 
 ### Karten
 - belastbare Vorbasis nach Duplikatkorrektur: **68/328**;
@@ -50,14 +52,16 @@ SHA-256:
 
 ### Technische Prüfung
 - **61/61 PHP-Dateien Syntax PASS**;
-- Hero-Dateien: 59/59 korrekt 600×220;
-- Kategorievorschauen: 59/59 korrekt 200×107;
-- Karten: 75/75 korrekt 200×107;
+- Hero-Dateien: **65/65 korrekt 600×220**;
+- Kategorievorschauen: **65/65 korrekt 200×107**;
+- Hero-Mapping: **65/65 vorhanden und auf reale Dateien gebunden**;
+- exakte Hero-Duplikate: **0**;
+- exakte Kategorievorschau-Duplikate: **0**;
+- Karten: 75/75 korrekt 200×107 und gegenüber dem vorigen 75-Karten-Checkpoint bytegleich;
+- Karten-Mapping gegenüber dem vorigen 75-Karten-Checkpoint unverändert;
 - JSON/Mapping PASS;
 - keine semantischen Hero-/Kartenfallbacks;
-- aktiver WIP lokal als echter 1.50.653-Assetbaum + versionierte Profil-/Templatebindung rekonstruiert;
-- Arbeitscheckpoint erneut direkt geprüft: 75 verschachtelte Karten-Mappings, 75/75 `source=v150653`, 75/75 Dateien vorhanden und 200×107;
-- interne ZIP-Metadaten des Checkpoints wurden von 73 auf 75 korrigiert und der vollständige 7er-Neublock eingetragen; Assets und aktive Mappings blieben unverändert;
+- neues WIP-Arbeits-ZIP erfolgreich getestet: ZIP-Struktur PASS;
 - kein neues Release-ZIP.
 
 ## Eingefroren
@@ -69,15 +73,15 @@ SHA-256:
 ## Exakte offene Bildliste
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/MISSING_IMAGE_WORKLIST_1.50.653.json`
 
-- 6 fehlende Heroes;
-- 253 fehlende Karten;
+- **0 fehlende Heroes**;
+- **253 fehlende Karten**;
 - fehlend bleibt fehlend, solange kein fachlich eindeutiges Motiv existiert.
 
 ## EXAKT EINE NEXT ACTION
-**Die 6 fehlenden Heroes nur mit fachlich eindeutigen neuen Motiven schließen. Parallel die 253 offenen Karten ausschließlich blockweise mit eindeutig passenden, eigenständigen Bildern ergänzen. Keine Fallbacks, kein falsches Auffüllen, kein Release-ZIP vor vollständigem Render-/Regressionstest und Release-Gate PASS.**
+**Hero-Arbeit beendet. Als nächster eigener Arbeitsblock bleiben ausschließlich die 253 offenen Karten; keine weitere Hero-Arbeit nötig. Kein Release-ZIP vor vollständigem Render-/Regressionstest und Release-Gate PASS.**
 
 ## Persistenter Zwischenstand
-- echtes Arbeits-ZIP: `WIP_1.50.653_WORKING_75CARDS_NOT_RELEASE.zip`;
+- aktuelles Arbeits-ZIP: `WIP_1.50.653_WORKING_65HEROES_75CARDS_NOT_RELEASE.zip`;
 - dauerhaft unter `/hobby rausch/WIP_1.50.653_WORKING/` gesichert;
-- SHA-256: `bd1a6afa9b9c734514208d66514c89756e1f74ec36030aa66322f34cba912e2d`;
+- SHA-256: `97469ea1156a0dce66fccf3b6036a5bea79e7709050f078d60f899b0cde864dd`;
 - kein Release-Artefakt, nur Arbeitscheckpoint.
