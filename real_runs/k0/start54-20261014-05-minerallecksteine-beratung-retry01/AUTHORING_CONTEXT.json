@@ -1,0 +1,186 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "minerallecksteine-beratung",
+    "plan_slot": "3fdd491da8ef2656492f8a1808d038da200e9a077b7c73599146ea733cffb044",
+    "target_keyword": "Minerallecksteine für Pferde",
+    "title": "So findest du die geeigneten Minerallecksteine für Pferde"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/"
+        }
+      ],
+      "claims": [
+        "Bei Weidehaltung kann ein Mineralleckstein Mineralstoffe und Spurenelemente ergänzen.",
+        "Weil die Leckmenge nicht genau kontrollierbar ist, lässt sich dosierbares Mineralfutter gezielter einsetzen.",
+        "Der Mineralbedarf hängt unter anderem von Alter, Haltung, Leistung und Fütterung ab.",
+        "Überhöhte Spurenelementgaben können ebenso gesundheitlich schaden wie eine unzureichende Versorgung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Minerallecksteine für Pferde",
+      "topic": "So findest du die geeigneten Minerallecksteine für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "minerallecksteine-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Passende Minerallecksteine nach Futterbedarf und kontrollierbarer Mineralzufuhr auswählen",
+      "decision_criteria": [
+        "Mineralstoffbedarf",
+        "Leckmenge",
+        "Zusammensetzung",
+        "Rationsabgleich"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Bei Weidehaltung kann ein Mineralleckstein Mineralstoffe und Spurenelemente ergänzen.",
+        "evidence_text": "Bei Weidehaltung kann ein Mineralleckstein Mineralstoffe und Spurenelemente ergänzen.",
+        "evidence_text_sha256": "ee4f0958522a2491213296b226efd0fc83c88470b9c9e774d6ac8551f99fe751",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Weil die Leckmenge nicht genau kontrollierbar ist, lässt sich dosierbares Mineralfutter gezielter einsetzen.",
+        "evidence_text": "Weil die Leckmenge nicht genau kontrollierbar ist, lässt sich dosierbares Mineralfutter gezielter einsetzen.",
+        "evidence_text_sha256": "2052ea9fbb0aa64891ab4f7ecadc59c0ba1d3cfda3d6a8018dda9aeabe3a1b7d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "statement": "Der Mineralbedarf hängt unter anderem von Alter, Haltung, Leistung und Fütterung ab.",
+        "evidence_text": "Der Mineralbedarf hängt unter anderem von Alter, Haltung, Leistung und Fütterung ab.",
+        "evidence_text_sha256": "0e5391088f56386c1372f2624b6b55b9dfc1990f2ab6d66308cb00b320a3043c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/",
+        "statement": "Überhöhte Spurenelementgaben können ebenso gesundheitlich schaden wie eine unzureichende Versorgung.",
+        "evidence_text": "Überhöhte Spurenelementgaben können ebenso gesundheitlich schaden wie eine unzureichende Versorgung.",
+        "evidence_text_sha256": "867ed6d47f545e65539fb9e89100fb02891cb5a5c61f1c9c7dbf4eed42c4f4a6",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/minerallecksteine-beratung/",
+        "anchor": "Thema minerallecksteine",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/minerallecksteine-faq/",
+        "anchor": "Beratung und Hintergründe",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/minerallecksteine-vergleich/",
+        "anchor": "Weitere Fragen und Anwendungen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/minerallecksteine-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/minerallecksteine-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/minerallecksteine-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "minerallecksteine-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralleckstein",
+      "Leckstein",
+      "Spurenelemente",
+      "Pferd",
+      "Dosierung",
+      "Weide",
+      "Mineralfutter",
+      "Auswahl"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die wichtigsten Auswahlkriterien wie Inhalt, kontrollierbare Aufnahme und Einsatzgebiet lassen sich übersichtlich gegenüberstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
