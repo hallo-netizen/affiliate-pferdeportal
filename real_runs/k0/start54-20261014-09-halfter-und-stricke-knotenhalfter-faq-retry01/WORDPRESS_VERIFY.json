@@ -1,0 +1,8 @@
+{
+  "contract": "K0_WORDPRESS_EXPORT_VERIFY_V3",
+  "status": "PASS",
+  "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "article_count": 1,
+  "canonical_binding": "PASS",
+  "publish_allowed": false
+}
