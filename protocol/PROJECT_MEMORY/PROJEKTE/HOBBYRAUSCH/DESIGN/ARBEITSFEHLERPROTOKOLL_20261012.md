@@ -321,3 +321,37 @@ Responsive Hero-Komponenten dürfen nur kurze, höhenstabile Inhalte neben einem
 - klarer Breakpoint, bevor die Textspalte unruhig wird;
 - Pflichtsimulation mindestens 1440/1200/1100/1024/900/760/600.
 
+## AF-023 – Karten-Duplikatprüfung zunächst nur Karte↔Karte statt zusätzlich Hero↔Karte
+
+FEHLER:
+Ein Teil der bereits als Karten-PASS behandelten Motive verwendete dieselbe Ausgangsquelle wie das Hero derselben Hub2-Seite. Die frühere Duplikatprüfung hatte diesen Hero↔Karte-Fall nicht vollständig als eigene Sperre behandelt.
+
+FOLGE:
+13 Hero↔Karte-Gleichquellen wurden nachträglich gefunden. 11 konnten mit vorhandenen eigenständigen Motiven ersetzt werden; 2 wurden mangels sauberem Ersatz wieder als fehlend markiert.
+
+VERMEIDUNGSREGEL:
+Vor jedem Karten-PASS pro Hub2-Seite gemeinsam prüfen:
+1. Karte↔Karte;
+2. Hero↔Karte;
+3. offensichtliche Motiv-Nahduplikate.
+Nur ein eigener, fachlich eindeutiger Karten-Crop darf PASS erhalten.
+
+## AF-024 – Karten als aktiv gezählt, obwohl Quellenkennung vom Renderer nicht akzeptiert wurde
+
+FEHLER:
+Zwei ergänzte Karten (`3d-druck`, `wandern`) waren als Dateien vorhanden und im Mapping gezählt, verwendeten aber zunächst eine Quellenkennung, die der aktive Renderer nicht akzeptierte.
+
+FOLGE:
+Die Karten hätten trotz vorhandener Datei im realen Pfad nicht zuverlässig gerendert.
+
+FIX:
+Quellenkennung auf den aktiven WIP-Vertrag `v150653` korrigiert und Assetpfade normalisiert.
+
+VERMEIDUNGSREGEL:
+Eine Karte zählt erst als aktiv, wenn gleichzeitig gilt:
+- Mapping vorhanden;
+- Quellenkennung vom aktiven Renderer akzeptiert;
+- Datei real vorhanden;
+- Zielcrop korrekt;
+- semantischer Sichttest PASS.
+
