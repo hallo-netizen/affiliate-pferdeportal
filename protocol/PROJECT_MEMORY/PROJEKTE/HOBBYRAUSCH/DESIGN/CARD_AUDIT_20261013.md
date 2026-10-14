@@ -51,13 +51,8 @@ Nur Motive, die auch im realen 200×107-Crop eindeutig passen, bleiben aktiv. Un
 
 Alle übrigen direkten Hub2-Unterthemen sind **MISSING/ERSETZEN**.
 
-## WIP 1.50.653
-- nur die 46 final bestätigten Kartenmotive aktiv;
-- kein Featured-Image-Fallback;
-- kein Welt-Pool-Fallback;
-- kein Icon-Fallback;
-- fehlende Karte zeigt im Arbeitsstand bewusst `Bild fehlt`;
-- noch kein ZIP / kein Release.
+## Rolle dieses Audits
+Dieser Stand dokumentiert ausschließlich den Audit-Snapshot vom 2026-10-13: **46 PASS / 282 MISSING/ERSETZEN**.
 
-## NEXT
-**282 fehlende Kartenmotive gezielt ersetzen und jeden neuen 200×107-Crop erneut visuell prüfen.**
+Aktueller Arbeitsstand, aktueller Blocker und genau eine NEXT ACTION stehen ausschließlich in:
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md`
