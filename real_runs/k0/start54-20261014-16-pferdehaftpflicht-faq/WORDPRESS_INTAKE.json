@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "pferdehaftpflicht-faq",
+      "plan_slot": "cd2939b6b76fba10e648f292632967e615c401439c2b020f6f1d1fb75212cf86",
+      "target_keyword": "Was kostet eine Pferdehaftpflicht im Monat",
+      "title": "Was kostet eine Pferdehaftpflicht im Monat?"
+    }
+  ],
+  "batch_sha256": "892f158afaac5ebd16e72d21ac24f5361d5102d6b8e88588cea57768534ae3be"
+}
