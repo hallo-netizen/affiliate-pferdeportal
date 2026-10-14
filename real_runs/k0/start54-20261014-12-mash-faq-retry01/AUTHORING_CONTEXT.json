@@ -1,0 +1,178 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mash-faq",
+    "plan_slot": "9a63034cf24da6405489fd4336fd8bb5765fefbd67b9b328be7ac9c9b76c8e81",
+    "target_keyword": "Was ist besser Heucobs oder Mash",
+    "title": "Was ist besser Heucobs oder Mash?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung"
+        }
+      ],
+      "claims": [
+        "Bei Zahnproblemen älterer Pferde können eingeweichte Heucobs einen Teil des Raufutters ersetzen; Mash kann die Energieversorgung ergänzen.",
+        "Raufutter ist die Grundlage der Pferdefütterung und sollte nicht unbemerkt durch Zusatzfutter verdrängt werden.",
+        "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden.",
+        "Alte Pferde benötigen ausreichend Zeit und Ruhe beim Fressen sowie eine bedarfsgerechte Mineralversorgung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist besser Heucobs oder Mash",
+      "topic": "Was ist besser Heucobs oder Mash?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mash-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist besser Heucobs oder Mash?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/",
+        "statement": "Bei Zahnproblemen älterer Pferde können eingeweichte Heucobs einen Teil des Raufutters ersetzen; Mash kann die Energieversorgung ergänzen.",
+        "evidence_text": "Bei Zahnproblemen älterer Pferde können eingeweichte Heucobs einen Teil des Raufutters ersetzen; Mash kann die Energieversorgung ergänzen.",
+        "evidence_text_sha256": "0b5d7c2375a2c11f5bcf24661f7fb6ff55f5880a61912391f4db6990b2cd9d69",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Raufutter ist die Grundlage der Pferdefütterung und sollte nicht unbemerkt durch Zusatzfutter verdrängt werden.",
+        "evidence_text": "Raufutter ist die Grundlage der Pferdefütterung und sollte nicht unbemerkt durch Zusatzfutter verdrängt werden.",
+        "evidence_text_sha256": "53d4e10a9c87a381b177600d309824b43ce57d9f401e5b110e4054a54bf3df28",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung",
+        "statement": "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden.",
+        "evidence_text": "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden.",
+        "evidence_text_sha256": "2b5a38e0e9955949a0e7eb32f537bd47a9795ff6d21eb76e1b0771a7c29e35b0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/",
+        "statement": "Alte Pferde benötigen ausreichend Zeit und Ruhe beim Fressen sowie eine bedarfsgerechte Mineralversorgung.",
+        "evidence_text": "Alte Pferde benötigen ausreichend Zeit und Ruhe beim Fressen sowie eine bedarfsgerechte Mineralversorgung.",
+        "evidence_text_sha256": "85f2fa63eb801a7a04c8362249af8534352fd58c8937d928652d561932075aaa",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mash-faq/",
+        "anchor": "Mash im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mash-beratung/",
+        "anchor": "Beratung zu Mash",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mash-vergleich/",
+        "anchor": "Heucobs und Mash vergleichen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mash-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mash-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Heucobs",
+      "Mash",
+      "Raufutter",
+      "Pferd",
+      "Fütterung",
+      "Zahnprobleme"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die unterschiedliche Rolle von Heucobs als Raufutterersatz und Mash als Ergänzung lässt sich klar gegenüberstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
