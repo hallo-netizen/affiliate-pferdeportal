@@ -28,12 +28,8 @@ MISSING:
 
 Die zuvor noch als PASS geführte Kategorie `schmuck` wurde nach Prüfung des echten 600×220-Crops wieder gesperrt: Motiv nicht eindeutig genug.
 
-## WIP 1.50.653
-- nur 50 bestätigte Hero-Motive aktiv;
-- alle aktiven Hero-Dateien exakt 600×220;
-- kein Upscaling;
-- kein semantischer Hero-Fallback;
-- fehlend bleibt fehlend.
+## Rolle dieses Audits
+Dieser Stand dokumentiert ausschließlich den Audit-Snapshot vom 2026-10-13: **50 PASS / 15 MISSING/ERSETZEN**.
 
-## NEXT
-**15 fehlende Hero-Motive gezielt ersetzen und danach den realen 600×220-Crop erneut visuell prüfen.**
+Aktueller Arbeitsstand, aktueller Blocker und genau eine NEXT ACTION stehen ausschließlich in:
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md`
