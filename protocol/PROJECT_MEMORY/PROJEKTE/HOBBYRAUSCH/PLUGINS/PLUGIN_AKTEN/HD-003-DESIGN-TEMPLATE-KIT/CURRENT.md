@@ -18,13 +18,13 @@ SHA-256:
 - reale rekonstruierte Arbeitsbasis vorhanden;
 - Hero: **59/65** aktiv, **6 fehlen**;
 - Kategorievorschauen: **59/65**;
-- Karten: **73/328 belastbar aktiv**, **255 fehlen**;
-- neuer sauberer Kartenblock: Reptilienhaltung, Käferzucht, Private Wetterstation, Keramikglasuren, Schmuckherstellung;
+- Karten: **74/328 belastbar aktiv**, **254 fehlen**;
+- neuer sauberer Kartenblock: Reptilienhaltung, Käferzucht, Private Wetterstation, Keramikglasuren, Schmuckherstellung, Speisepilzzucht;
 - Teleskop-Astronomie im Prüflauf wegen Nah-Doppelung zum Hero wieder verworfen;
 - alle Heroassets exakt 600×220;
 - alle Vorschau-/Kartenassets exakt 200×107;
 - **61/61 PHP Syntax PASS**;
-- **73/73 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
+- **74/74 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
 - 0 exakte oder Nah-Doppelungen innerhalb derselben Seite;
 - aktive Hub2-Hero-/Kartenpfade ohne semantische Bildfallbacks;
 - noch kein neues ZIP.
