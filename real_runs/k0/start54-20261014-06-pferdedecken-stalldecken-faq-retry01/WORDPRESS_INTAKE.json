@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "pferdedecken-stalldecken-faq",
+      "plan_slot": "ee4c83fefd3efb665718c6d31d9a02112dcbafb9c311324efcbe9f59c982f904",
+      "target_keyword": "Wann braucht ein Pferd eine Stalldecke",
+      "title": "Wann braucht ein Pferd eine Stalldecke?"
+    }
+  ],
+  "batch_sha256": "b3360db40f893fc8d0ae856d1dbaa9ec28b46e2e13b6fef0c574989e9e2d21ad"
+}
