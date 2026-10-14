@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "steigbuegel-faq",
+    "plan_slot": "eaa034f30d447658a1aa46af577ea69feba25f3f1eef937fc2f75991a4b69b89",
+    "target_keyword": "Ist es möglich ohne Steigbügel zu Reiten",
+    "title": "Ist es möglich ohne Steigbügel zu Reiten?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdewelten – Reitunterricht und Sitzschulung",
+          "source_url": "https://www.pferdewelten.net/post/reitunterricht-sitzschulung"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Richtige Ausrüstung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausruestung-von-pferd-und-reiter"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Sicheres Geländereiten",
+          "source_url": "https://app.pferdesport-deutschland.de/grundausbildung-gelaendereiten"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Sicherheit beim Reiten",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten"
+        }
+      ],
+      "claims": [
+        "Sitzübungen ohne Steigbügel und Zügel gehören zum angeleiteten Longenunterricht und schulen die Balance.",
+        "Steigbügel sollen zur Größe des Fußes passen und über rutschfeste Trittflächen verfügen.",
+        "Im Gelände braucht der Reiter ausbalancierten Sitz und passende Bügellänge; ein sicherer leichter Sitz wird gezielt an der Longe geübt.",
+        "Vor dem Reiten sollten Ausrüstung, Reithelm und Sicherheit des Reitplatzes kontrolliert werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist es möglich ohne Steigbügel zu Reiten",
+      "topic": "Ist es möglich ohne Steigbügel zu Reiten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "steigbuegel-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist es möglich ohne Steigbügel zu Reiten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdewelten – Reitunterricht und Sitzschulung",
+        "source_url": "https://www.pferdewelten.net/post/reitunterricht-sitzschulung",
+        "statement": "Sitzübungen ohne Steigbügel und Zügel gehören zum angeleiteten Longenunterricht und schulen die Balance.",
+        "evidence_text": "Sitzübungen ohne Steigbügel und Zügel gehören zum angeleiteten Longenunterricht und schulen die Balance.",
+        "evidence_text_sha256": "1109dbec9e822a058821de694c473f5f50f46a3e5bc3345c216105be3f0b9088",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Richtige Ausrüstung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausruestung-von-pferd-und-reiter",
+        "statement": "Steigbügel sollen zur Größe des Fußes passen und über rutschfeste Trittflächen verfügen.",
+        "evidence_text": "Steigbügel sollen zur Größe des Fußes passen und über rutschfeste Trittflächen verfügen.",
+        "evidence_text_sha256": "757e6ecc3f80fb5f212d12284898f17ededdbc07cc1b5bc91b7d7c6bb49ecbbc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Sicheres Geländereiten",
+        "source_url": "https://app.pferdesport-deutschland.de/grundausbildung-gelaendereiten",
+        "statement": "Im Gelände braucht der Reiter ausbalancierten Sitz und passende Bügellänge; ein sicherer leichter Sitz wird gezielt an der Longe geübt.",
+        "evidence_text": "Im Gelände braucht der Reiter ausbalancierten Sitz und passende Bügellänge; ein sicherer leichter Sitz wird gezielt an der Longe geübt.",
+        "evidence_text_sha256": "13d43ed1a7d78ce4220fa41d75b38cca7f195601f654d20c1d37c01e031581c7",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Sicherheit beim Reiten",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten",
+        "statement": "Vor dem Reiten sollten Ausrüstung, Reithelm und Sicherheit des Reitplatzes kontrolliert werden.",
+        "evidence_text": "Vor dem Reiten sollten Ausrüstung, Reithelm und Sicherheit des Reitplatzes kontrolliert werden.",
+        "evidence_text_sha256": "cc1f36b3941cb377dbea217e861da97cbd879284558c9eff68132880dac4a95d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/steigbuegel-faq/",
+        "anchor": "Thema steigbuegel",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/steigbuegel-beratung/",
+        "anchor": "Beratung und Hintergründe",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/steigbuegel-pflege/",
+        "anchor": "Weitere Fragen und Anwendungen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/steigbuegel-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/steigbuegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/steigbuegel-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "steigbuegel-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Steigbügel",
+      "ohne Bügel",
+      "Reitersitz",
+      "Longe",
+      "Sicherheit",
+      "Balance",
+      "Hilfe",
+      "Übung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Unterschiedliche Trainingssituationen erlauben eine sinnvolle Gegenüberstellung von Reiten mit und ohne Steigbügel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
