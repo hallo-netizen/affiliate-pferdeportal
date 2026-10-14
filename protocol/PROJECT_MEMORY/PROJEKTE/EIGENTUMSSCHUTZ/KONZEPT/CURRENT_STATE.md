@@ -4,6 +4,9 @@
 STAND: 2026-10-13
 STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
 
+## Zuständigkeitsabgrenzung – Kategorienbüro (14.10.2026)
+Dieses KONZEPT-Büro bleibt die aktuelle **fachliche** Autorität für Kategorieauswahl, thematische Abgrenzung, redaktionelle Owner und Ideen. Für **operative WordPress-Live-Kategorienbindung, Änderungen und pluginübergreifenden neutralen Lesezugriff** ist ab sofort ausschließlich das neue eigene Büro `../KATEGORIEN/START_HERE.md` → `EIGENTUMSSCHUTZ_KATEGORIEN` → `KATEGORIEN/CURRENT_STATE.md` verantwortlich. Es gibt keine zweite operative Kategorie-Current; das bestätigte R3/V8-WordPress-Release bleibt unverändert. Kein neuer Sync.
+
 ## VERBINDLICHE KONZEPTENTSCHEIDUNG DES NUTZERS – 13.10.2026: KEINE SERP-PFLICHT PRO KATEGORIE
 - **Fachlich sinnvolle Kategorien dürfen aufgenommen werden, auch wenn Google keine Treffer, keinen messbaren Suchvolumenwert oder kein direktes SERP-Vergleichspaar liefert.** Die zuvor vom Assistenten eingeführte 144/144-SERP-/SEO-Owner-PASS-Pflicht war eine unbegründete Blockade und ist **hiermit für die Umsetzung aufgehoben**. SEO-Evidenz bleibt optionale Priorisierung/Qualitätshilfe, kein zwingender Category-Release-Gate.
 - **Sofort alle zusätzlichen kostenpflichtigen DataForSEO-Suchabfragen stoppen.** Insbesondere den vorbereiteten `R3_V8_SERP_40_PAARE_NOCH_NICHT_STARTEN_20261013.json` **NICHT starten**; kein weiterer Nutzer-Kostenfreigabedialog hierfür. Bereits vorliegende reale SERP- und Keyworddaten als Zusatzinformation behalten; keinerlei Wiederholung notwendig.
