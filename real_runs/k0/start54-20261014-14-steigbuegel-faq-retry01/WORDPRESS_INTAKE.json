@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "steigbuegel-faq",
+      "plan_slot": "548d325fb5e4390857b2487695517ac7393ad1d1b948e455fabd5dedbc46818b",
+      "target_keyword": "Was ist ein Steigbügel",
+      "title": "Was ist ein Steigbügel?"
+    }
+  ],
+  "batch_sha256": "d7bbf84818e35af1e9c6ff348520cf1071af63feb6bcce98eb668e275d3c57ed"
+}
