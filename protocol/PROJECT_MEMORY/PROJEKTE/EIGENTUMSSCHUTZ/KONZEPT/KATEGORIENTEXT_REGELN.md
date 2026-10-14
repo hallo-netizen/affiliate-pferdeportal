@@ -4,6 +4,14 @@ Status: **NUR 6 HAUPTWELTEN: UNTERER EDITORIAL-BEREICH UND KEINE FAQ FREIGEGEBEN
 
 Dies ist der verbindliche FACHVERTRAG im Konzeptbüro, **keine weitere Current-Autorität**. Autoritativer Status weiterhin in `KONZEPT/CURRENT_STATE.md`, Designfortschritt in `DESIGN/CURRENT_STATE.md`.
 
+## Präzisierung nach Nutzerabnahme / Live-Screenshots vom 14.10.2026 (Version 0.1.11)
+- Sechs Welt-Langtexte unten sollen **jede ihrer 5–6 unmittelbar untergeordneten Hauptbereichskategorien behandeln**: insgesamt 31 eigenständige Themenabschnitte. Kein bloßer kurzer Dreipunktüberblick, kein erzwungener FAQ-Baustein.
+- **Sämtliche Links im erklärenden Fließtext**, keine am Schluss angehängte reine Linkliste. Der sichtbare Ankertext ist 1:1 der aktuelle vollständige Name der Zielkategorie aus dem zentralen Live-Kategoriebaum; Menü-Kurzlabel ist NICHT zulässig.
+- Redaktionelles Layout mit durchgehender linker Textkante, nicht plötzlich zentrierten Schlussblöcken. Bilder **flaches Panorama, max. ca. 148 px Ansichtshöhe**, nur scharfe und semantisch zutreffende Motive; dies ist Voraussetzung für Fach-/Design-Endfreigabe, nicht bloß CSS-Korrektur.
+- Screenshot 19:52: Mobil-Brandbogen möglichst hoch, durch korrekt beschnittenes SVG viewBox statt negativen Margin-Scheinficks; Breadcrumb **unmittelbar unter dem Schutzwelten-Menü**, nicht durch globalen Abschnittspadding nach unten gedrückt.
+- Diese Anforderungen gelten derzeit **nur für die sechs Welt-Langtexte**. Die übrigen 31+93+285 Kategorie-Textlayouts sind weiterhin NICHT beschlossen.
+- Version 0.1.11 setzt die Layout- und Inhaltsstruktur lokal um (562–746 Wörter, 31 Bereichsabschnitte, 12 flache Bilder, 31 echte Bereichslinks), bleibt aber vor echten Quellen-/Bildrechten-Prüfungen und WordPress-Liveprüfung **WIP**, keinesfalls ein SEO-Garantieversprechen.
+
 ## 0. Aktuelle verbindliche Nutzerentscheidung vom 14.10.2026 (nach Entwurfsansicht)
 - **ZUERST ausschließlich sechs Hauptkategorien / Schutzwelten.** Der ausführliche Text steht ausnahmslos **UNTEN** unter Kategorien und Artikeln. Die vorgeschlagene hochwertige Editorial-Anmutung, zweispaltige Text-Bild-Strecken, zwei Bilder, Liste und exakt beschriftete interne Kategorielinks sind als Gestaltungsrichtung angenommen.
 - **KEINE FAQ und keine „Häufige Fragen“-Module in diesen Texten.** Ob und wo später FAQ-Beiträge erscheinen, ist redaktionell ungeklärt; nicht mit automatischen FAQ-Texten vorweggreifen.
