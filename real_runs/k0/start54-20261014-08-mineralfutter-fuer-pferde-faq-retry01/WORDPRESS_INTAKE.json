@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "mineralfutter-fuer-pferde-faq",
+      "plan_slot": "24b6979442d0c0195a32feac0f788dc88c3cfcf7b7f99bd9b56bd181cb421bb9",
+      "target_keyword": "Warum frisst mein Pferd kein Mineralfutter",
+      "title": "Warum frisst mein Pferd kein Mineralfutter?"
+    }
+  ],
+  "batch_sha256": "bac4da2dd4d7a7cf7df04834d41fd056f6f463b6892931600db72da2f33c981f"
+}
