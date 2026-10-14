@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "steigbuegel-faq",
+      "plan_slot": "eaa034f30d447658a1aa46af577ea69feba25f3f1eef937fc2f75991a4b69b89",
+      "target_keyword": "Ist es möglich ohne Steigbügel zu Reiten",
+      "title": "Ist es möglich ohne Steigbügel zu Reiten?"
+    }
+  ],
+  "batch_sha256": "6ac77683065e1f61878eb3cf868caf94468eac127dc9644ff8dc1cd218a9bf05"
+}
