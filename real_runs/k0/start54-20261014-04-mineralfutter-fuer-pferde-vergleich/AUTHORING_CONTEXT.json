@@ -1,0 +1,221 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Vergleich",
+    "category": "mineralfutter-fuer-pferde-vergleich",
+    "plan_slot": "6555ccdadb9e88adfc4877519abee626d74e14e95a30a38c51dc488280e88ba6",
+    "target_keyword": "Mineralfutter für Pferde",
+    "title": "Mineralfutter für Pferde im Vergleich"
+  },
+  "content_profile": {
+    "search_intent": "COMPARATIVE_PRODUCT_DECISION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids"
+        }
+      ],
+      "claims": [
+        "Mineralstoffe müssen bedarfsbezogen über die Pferderation zugeführt werden; Raufutter ist die Grundlage der Fütterung.",
+        "Ein dosierbares Mineralfutter ermöglicht eine gezieltere Aufnahme als ein Mineralleckstein mit unkontrollierter Leckmenge.",
+        "Minerallecksteine können auf der Weide eine Ergänzung sein, erlauben aber keine präzise Kontrolle der Spurenelementzufuhr.",
+        "Zu hohe oder zu geringe Mengen einzelner Mineralstoffe können gesundheitliche Probleme verursachen.",
+        "Der Salzleckstein deckt normalerweise den Salzbedarf eines leicht arbeitenden Pferdes, aber nicht automatisch jeden Spurenelementbedarf."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "Mineralfutter für Pferde",
+      "topic": "Mineralfutter für Pferde im Vergleich",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-vergleich",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Dosierbares Mineralfutter",
+        "Mineralleckstein",
+        "Salzleckstein"
+      ],
+      "comparison_criteria": [
+        "Dosierung",
+        "Nährstoffspektrum",
+        "Einsatzgebiet"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Mineralstoffe müssen bedarfsbezogen über die Pferderation zugeführt werden; Raufutter ist die Grundlage der Fütterung.",
+        "evidence_text": "Mineralstoffe müssen bedarfsbezogen über die Pferderation zugeführt werden; Raufutter ist die Grundlage der Fütterung.",
+        "evidence_text_sha256": "95d9f7d3acfeacb969e64a3967369e2a8bc1b1de983e709a62af46841304f7c8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Ein dosierbares Mineralfutter ermöglicht eine gezieltere Aufnahme als ein Mineralleckstein mit unkontrollierter Leckmenge.",
+        "evidence_text": "Ein dosierbares Mineralfutter ermöglicht eine gezieltere Aufnahme als ein Mineralleckstein mit unkontrollierter Leckmenge.",
+        "evidence_text_sha256": "f40ec9bd37fefbfdb30f4de9dabc179693ea217df737a83af3e0abc3f50bdd33",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/",
+        "statement": "Minerallecksteine können auf der Weide eine Ergänzung sein, erlauben aber keine präzise Kontrolle der Spurenelementzufuhr.",
+        "evidence_text": "Minerallecksteine können auf der Weide eine Ergänzung sein, erlauben aber keine präzise Kontrolle der Spurenelementzufuhr.",
+        "evidence_text_sha256": "6ab0c15bc374383dfaf3868a1b1a575bde24ac3158ed44441cdefcffb1976c40",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "statement": "Zu hohe oder zu geringe Mengen einzelner Mineralstoffe können gesundheitliche Probleme verursachen.",
+        "evidence_text": "Zu hohe oder zu geringe Mengen einzelner Mineralstoffe können gesundheitliche Probleme verursachen.",
+        "evidence_text_sha256": "b8d9b305a0267177de269149141797f51568db1e5d8cea7658159caa14b8f3a8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Der Salzleckstein deckt normalerweise den Salzbedarf eines leicht arbeitenden Pferdes, aber nicht automatisch jeden Spurenelementbedarf.",
+        "evidence_text": "Der Salzleckstein deckt normalerweise den Salzbedarf eines leicht arbeitenden Pferdes, aber nicht automatisch jeden Spurenelementbedarf.",
+        "evidence_text_sha256": "3cb523ad1ffe9825454a936a36e4dd2dfd49fd83ad6f7b9ed45d0059ee6df74f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-vergleich/",
+        "anchor": "Thema mineralfutter",
+        "block": "options"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung und Hintergründe",
+        "block": "comparison"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "anchor": "Weitere Fragen und Anwendungen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-vergleich/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-vergleich",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Vergleich",
+      "Mineralstoffe",
+      "Leckstein",
+      "Dosierung",
+      "Raufutter",
+      "Bedarf"
+    ],
+    "comparison_source_bindings": [
+      {
+        "source_label": "Dosierbares Mineralfutter",
+        "nearest_option_heading": "Dosierbares Mineralfutter",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_fact_id": "F1"
+      },
+      {
+        "source_label": "Mineralleckstein",
+        "nearest_option_heading": "Mineralleckstein",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_fact_id": "F2"
+      },
+      {
+        "source_label": "Salzleckstein",
+        "nearest_option_heading": "Salzleckstein",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/",
+        "source_fact_id": "F3"
+      }
+    ],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Der Vergleich von Mineralfutter, Mineralleckstein und Salzleckstein benötigt eine klare Gegenüberstellung der Mengensteuerung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "advantages"
+  },
+  "publish_allowed": false
+}
