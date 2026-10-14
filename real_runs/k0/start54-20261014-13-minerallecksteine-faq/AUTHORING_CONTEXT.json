@@ -1,0 +1,178 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "minerallecksteine-faq",
+    "plan_slot": "e7d6a9657450732a6223ae4f83952da308ef0e7e4e364f1223eeb612a390b678",
+    "target_keyword": "Was ist der Unterschied zwischen Salz und Mineralleckstein",
+    "title": "Was ist der Unterschied zwischen Salz und Mineralleckstein?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids"
+        }
+      ],
+      "claims": [
+        "Ein Salzleckstein deckt bei normaler Arbeit in der Regel den Bedarf an Kochsalz.",
+        "Minerallecksteine können weitere Mineralstoffe und Spurenelemente liefern, nicht nur Salz.",
+        "Die tatsächlich aufgenommene Menge eines Minerallecksteins ist schwer kontrollierbar; dosierbares Mineralfutter erlaubt gezieltere Versorgung.",
+        "Sowohl Mineralstoffmangel als auch eine Überversorgung können gesundheitliche Schäden verursachen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist der Unterschied zwischen Salz und Mineralleckstein",
+      "topic": "Was ist der Unterschied zwischen Salz und Mineralleckstein?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "minerallecksteine-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist der Unterschied zwischen Salz und Mineralleckstein?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Ein Salzleckstein deckt bei normaler Arbeit in der Regel den Bedarf an Kochsalz.",
+        "evidence_text": "Ein Salzleckstein deckt bei normaler Arbeit in der Regel den Bedarf an Kochsalz.",
+        "evidence_text_sha256": "1c8a3b50307c7d61928093a90ff9608a0ddd5e3213d5f976f260f86853d31e3d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Minerallecksteine können weitere Mineralstoffe und Spurenelemente liefern, nicht nur Salz.",
+        "evidence_text": "Minerallecksteine können weitere Mineralstoffe und Spurenelemente liefern, nicht nur Salz.",
+        "evidence_text_sha256": "d59f17fec574dbfbfa53107177a69c170aae7735f46abcd4fedaaf0fa1b863e3",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/",
+        "statement": "Die tatsächlich aufgenommene Menge eines Minerallecksteins ist schwer kontrollierbar; dosierbares Mineralfutter erlaubt gezieltere Versorgung.",
+        "evidence_text": "Die tatsächlich aufgenommene Menge eines Minerallecksteins ist schwer kontrollierbar; dosierbares Mineralfutter erlaubt gezieltere Versorgung.",
+        "evidence_text_sha256": "540b3177c1c2161a4882cc62c453c9ef57c724c481912fe14e74270ce2eafe64",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "statement": "Sowohl Mineralstoffmangel als auch eine Überversorgung können gesundheitliche Schäden verursachen.",
+        "evidence_text": "Sowohl Mineralstoffmangel als auch eine Überversorgung können gesundheitliche Schäden verursachen.",
+        "evidence_text_sha256": "a126c14103059009d64b2f0b683f2685223bd273029586320ef87297366e1c62",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/minerallecksteine-faq/",
+        "anchor": "Kategorie minerallecksteine",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/minerallecksteine-beratung/",
+        "anchor": "Passende Beratung",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/salzlecksteine-faq/",
+        "anchor": "Weitere Hintergründe",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/minerallecksteine-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/minerallecksteine-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/salzlecksteine-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "minerallecksteine-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Salz",
+      "Mineralleckstein",
+      "Salzleckstein",
+      "Spurenelemente",
+      "Pferd",
+      "Mineralfutter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die verschiedenen Stoffgruppen und die steuerbare Aufnahmemenge sollten in einer Vergleichstabelle gegenübergestellt werden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
