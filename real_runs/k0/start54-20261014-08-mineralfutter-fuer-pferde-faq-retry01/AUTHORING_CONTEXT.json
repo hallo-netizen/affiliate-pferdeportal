@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mineralfutter-fuer-pferde-faq",
+    "plan_slot": "24b6979442d0c0195a32feac0f788dc88c3cfcf7b7f99bd9b56bd181cb421bb9",
+    "target_keyword": "Warum frisst mein Pferd kein Mineralfutter",
+    "title": "Warum frisst mein Pferd kein Mineralfutter?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "ATCOM – Neues Mineralfutter anfüttern",
+          "source_url": "https://www.atcomhorse.de/wissen/anfuettern-von-neuem-mineral-futter"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung"
+        }
+      ],
+      "claims": [
+        "Manche Pferde akzeptieren ein neues Mineralfutter wegen seines Geruchs oder Geschmacks zunächst nicht.",
+        "Bei neuem Mineralfutter empfiehlt sich die Gewöhnung mit sehr kleinen Mengen und langsamer Steigerung.",
+        "Eine gezielte Mineralfuttergabe sollte auf den Bedarf und die übrige Pferderation abgestimmt werden.",
+        "Fressunlust kann neben der Futtermischung auch mit gesundheitlichen Störungen zusammenhängen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum frisst mein Pferd kein Mineralfutter",
+      "topic": "Warum frisst mein Pferd kein Mineralfutter?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum frisst mein Pferd kein Mineralfutter?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "ATCOM – Neues Mineralfutter anfüttern",
+        "source_url": "https://www.atcomhorse.de/wissen/anfuettern-von-neuem-mineral-futter",
+        "statement": "Manche Pferde akzeptieren ein neues Mineralfutter wegen seines Geruchs oder Geschmacks zunächst nicht.",
+        "evidence_text": "Manche Pferde akzeptieren ein neues Mineralfutter wegen seines Geruchs oder Geschmacks zunächst nicht.",
+        "evidence_text_sha256": "45d29edbeec3168684480b95982d54c90185d1a63055be69f0cfbc2862f76647",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "ATCOM – Neues Mineralfutter anfüttern",
+        "source_url": "https://www.atcomhorse.de/wissen/anfuettern-von-neuem-mineral-futter",
+        "statement": "Bei neuem Mineralfutter empfiehlt sich die Gewöhnung mit sehr kleinen Mengen und langsamer Steigerung.",
+        "evidence_text": "Bei neuem Mineralfutter empfiehlt sich die Gewöhnung mit sehr kleinen Mengen und langsamer Steigerung.",
+        "evidence_text_sha256": "caa3da04373e7f8ee6bc498546ecbff8c45ef7b39fcb629f492980b41b0f8f43",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Eine gezielte Mineralfuttergabe sollte auf den Bedarf und die übrige Pferderation abgestimmt werden.",
+        "evidence_text": "Eine gezielte Mineralfuttergabe sollte auf den Bedarf und die übrige Pferderation abgestimmt werden.",
+        "evidence_text_sha256": "e978438f1e89bd4fc749910f3d276bf98915531c030a4c78ca51c1da88d13a1a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung",
+        "statement": "Fressunlust kann neben der Futtermischung auch mit gesundheitlichen Störungen zusammenhängen.",
+        "evidence_text": "Fressunlust kann neben der Futtermischung auch mit gesundheitlichen Störungen zusammenhängen.",
+        "evidence_text_sha256": "645e0ede0a82c7d80b4ffb3c8d86f6f829af604a5b9608d2ca7b8bdd5075800b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "anchor": "Mineralfutter im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung zu Mineralfutter",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mineralfutter-fuer-pferde-anwendung/",
+        "anchor": "Mineralfutter richtig anfüttern",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Pferd",
+      "Futter",
+      "Geschmack",
+      "Geruch",
+      "Ration",
+      "Fressen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Eine Tabelle grenzt Geschmacksablehnung von Rationsfehlern und gesundheitlichen Warnzeichen ab."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
