@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "salzlecksteine-faq",
+      "plan_slot": "d5b22f1db40d278a258431ddbee4b4347bc3de042f9219e25a0d4402b2e71efc",
+      "target_keyword": "Ist ein Salzleckstein schädlich für Pferde",
+      "title": "Ist ein Salzleckstein schädlich für Pferde?"
+    }
+  ],
+  "batch_sha256": "f02d6dfba0cd8c710ad47b3bd9ad4226f217d7a8e26e74a41e01343407fca955"
+}
