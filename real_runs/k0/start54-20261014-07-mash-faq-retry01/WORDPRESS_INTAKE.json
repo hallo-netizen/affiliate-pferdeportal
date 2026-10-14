@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "mash-faq",
+      "plan_slot": "7525570bee02752dd44744d7b741a43aecee6d16a0dad26ec9a4b579eb6e4837",
+      "target_keyword": "Wann sollte man Mash füttern",
+      "title": "Wann sollte man Mash füttern?"
+    }
+  ],
+  "batch_sha256": "12b0a580c354171e04c42e01a872c1c949564fbc8648ded29398f321970cad3e"
+}
