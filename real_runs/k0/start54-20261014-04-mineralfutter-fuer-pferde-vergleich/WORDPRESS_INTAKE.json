@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "Vergleich",
+      "category": "mineralfutter-fuer-pferde-vergleich",
+      "plan_slot": "6555ccdadb9e88adfc4877519abee626d74e14e95a30a38c51dc488280e88ba6",
+      "target_keyword": "Mineralfutter für Pferde",
+      "title": "Mineralfutter für Pferde im Vergleich"
+    }
+  ],
+  "batch_sha256": "a91c4a068f88385d7a1b84e0d73126941e64f4f096cbdbb62f062c7ebcab87e4"
+}
