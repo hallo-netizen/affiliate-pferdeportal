@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "weidezaungeraete-faq",
+    "plan_slot": "42815c24baf82537c4f4b4f56ccc627c6f173562f767df4dd423ff57ebb284fd",
+    "target_keyword": "Warum muss ein Weidezaungerät geerdet werden",
+    "title": "Warum muss ein Weidezaungerät geerdet werden?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Bayerische LfL – Wirkungsweise elektrischer Zäune",
+          "source_url": "https://www.lfl.bayern.de/itz/herdenschutz/028898/"
+        },
+        {
+          "source_title": "Bundeszentrum Weidetiere – Erdung",
+          "source_url": "https://www.praxis-agrar.de/bundeszentrum-weidetiere-wolf/wissen/fachartikel/erdung"
+        },
+        {
+          "source_title": "Weidezaun.info – Erdung Grundlagen",
+          "source_url": "https://www.weidezaun.info/info/ratgeber/erdung-grundlagen"
+        }
+      ],
+      "claims": [
+        "Ein Weidezaungerät gibt elektrische Impulse ab, deren Stromkreis bei Tierkontakt durch Boden und Erdungsstäbe geschlossen wird.",
+        "Unzureichende Erdung schwächt die Impulse am Weidezaun; ohne Erdung kann die Hütesicherheit ausfallen.",
+        "Der Strom muss nach der Berührung eines Elektrozauns über Erdreich und Erdungsstäbe zum Gerät zurückkehren.",
+        "Trockener oder steiniger Boden erschwert den Stromrückfluss; geeignete Erdstäbe und sichere Kontakte verbessern die Erdung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum muss ein Weidezaungerät geerdet werden",
+      "topic": "Warum muss ein Weidezaungerät geerdet werden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "weidezaungeraete-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum muss ein Weidezaungerät geerdet werden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Bayerische LfL – Wirkungsweise elektrischer Zäune",
+        "source_url": "https://www.lfl.bayern.de/itz/herdenschutz/028898/",
+        "statement": "Ein Weidezaungerät gibt elektrische Impulse ab, deren Stromkreis bei Tierkontakt durch Boden und Erdungsstäbe geschlossen wird.",
+        "evidence_text": "Ein Weidezaungerät gibt elektrische Impulse ab, deren Stromkreis bei Tierkontakt durch Boden und Erdungsstäbe geschlossen wird.",
+        "evidence_text_sha256": "48a7a8acf1a45d2ac807091089ad2d6746d69619cf5f724516597b91c1b90086",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Bayerische LfL – Wirkungsweise elektrischer Zäune",
+        "source_url": "https://www.lfl.bayern.de/itz/herdenschutz/028898/",
+        "statement": "Unzureichende Erdung schwächt die Impulse am Weidezaun; ohne Erdung kann die Hütesicherheit ausfallen.",
+        "evidence_text": "Unzureichende Erdung schwächt die Impulse am Weidezaun; ohne Erdung kann die Hütesicherheit ausfallen.",
+        "evidence_text_sha256": "ed5472c14e3482fef66f940df707c2921421c3dc5c7b23e589751044fca4610f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Bundeszentrum Weidetiere – Erdung",
+        "source_url": "https://www.praxis-agrar.de/bundeszentrum-weidetiere-wolf/wissen/fachartikel/erdung",
+        "statement": "Der Strom muss nach der Berührung eines Elektrozauns über Erdreich und Erdungsstäbe zum Gerät zurückkehren.",
+        "evidence_text": "Der Strom muss nach der Berührung eines Elektrozauns über Erdreich und Erdungsstäbe zum Gerät zurückkehren.",
+        "evidence_text_sha256": "979fb80087dc5bab86da929b1bac66f419431cc592200736fb3fdaeb050df1fc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Weidezaun.info – Erdung Grundlagen",
+        "source_url": "https://www.weidezaun.info/info/ratgeber/erdung-grundlagen",
+        "statement": "Trockener oder steiniger Boden erschwert den Stromrückfluss; geeignete Erdstäbe und sichere Kontakte verbessern die Erdung.",
+        "evidence_text": "Trockener oder steiniger Boden erschwert den Stromrückfluss; geeignete Erdstäbe und sichere Kontakte verbessern die Erdung.",
+        "evidence_text_sha256": "8ce59444e847dfd16bae46ca53598984bbae75d9d6fea598dc4bcedb9670ec42",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/weidezaungeraete-faq/",
+        "anchor": "Weidezaungeräte im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/weidezaungeraete-beratung/",
+        "anchor": "Beratung zu Weidezaungeräten",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/weidezaungeraete-installation/",
+        "anchor": "Weidezaungeräte installieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/weidezaungeraete-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/weidezaungeraete-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/weidezaungeraete-installation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "weidezaungeraete-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Weidezaungerät",
+      "Erdung",
+      "Stromkreis",
+      "Zaun",
+      "Erdungsstab",
+      "Boden",
+      "Prüfung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Typische Erdungsfehler und ihre Auswirkungen auf die Zaunfunktion lassen sich in einer Tabelle klar einordnen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
