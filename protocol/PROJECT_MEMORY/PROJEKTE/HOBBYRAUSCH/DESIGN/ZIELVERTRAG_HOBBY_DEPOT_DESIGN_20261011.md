@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.1 / 2026-10-13
+FASSUNG: 4.2 / 2026-10-14
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -42,6 +42,7 @@ FASSUNG: 4.1 / 2026-10-13
 - kein Rückfall auf alte mehrfach verwendete Featured Images;
 - kein Passepartout/Bild-im-Bild.
 - Stand 1.50.634 wird vorerst akzeptiert und nicht weiter verändert.
+- Für Hub2 gilt ab WIP 1.50.653 verbindlich: **Kategorievorschau und zugehöriges Hub2-Hero stammen aus derselben Bildquelle**; aus der Heroquelle wird zusätzlich die 200×107-Kategorievorschau abgeleitet. Keine zweite unabhängige Bildzuordnung für dieselbe Kategorie.
 
 ## Kategorieebene 2 / Hub2
 - Der akzeptierte Buch-&-Papier-Stand **1.50.645** bleibt die visuelle Referenz für Karten, Claim-Stil und Grundcharakter.
