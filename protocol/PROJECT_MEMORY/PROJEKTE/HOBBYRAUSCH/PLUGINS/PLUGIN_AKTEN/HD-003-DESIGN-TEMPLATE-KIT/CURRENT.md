@@ -3,46 +3,35 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **LIVE KRITISCHER FEHLER / NORMALE REPLACE-BUILDS GESPERRT / RECOVERY 1.50.658 LOKAL E2E PASS / KEIN LIVE-PASS**
+STATUS: **LIVE-SEITE WIEDER ERREICHBAR / TEMPLATE-KIT 1.50.650 AKTIV / 1.50.659 VERWORFEN / 1.50.660 REINER HERO-DATEIAUSTAUSCH LOKAL PASS**
 
-## Letzter dokumentierter Vor-Reparatur-Build
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.652_HOBBY_DEPOT_HUB2_HERO_COMPACT_EXACT_SCENES_NOUPSCALE_LOCALPASS.zip`
+## Aktiver Grundstand
+Affiliate Portal Template Kit **1.50.650** bleibt unangetastet.
 
-SHA-256 laut Akte:
-`c5c19f94b57c9dd95d88738f752e6e1ea5d880ea6d85ebc7bb31cfdd6b17234b`
+## Nicht verwenden
+- 1.50.651;
+- Recovery 1.50.658;
+- Repair Installer 1.50.657;
+- Hero Images ONLY 1.50.659.
 
-Das exakte ZIP ist in den aktuell verfügbaren Projekt-/Library-/Conversation-Dateien nicht vorhanden. Es wird deshalb nicht rekonstruiert oder erfunden.
-
-## Aktueller Reparaturstatus
-1.50.653–1.50.657 nicht erneut verwenden.
-
-Aktueller Recovery-Kandidat:
-`HOBBY_DEPOT_RECOVERY_1.50.658.zip`
+## Aktueller Hero-Patch
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip`
 
 SHA-256:
-`5100f9aa1b6ba61557b683104212df313b3d00c9193f14a335aa89cbf4b488a4`
+`bd1bbd485763cbf72b07d284c5ca81664401397704dc73e310d9c4807fc3c9af`
 
-Der Recovery-Kandidat:
-- prüft den echten Frontendzustand per WordPress-Loopback;
-- sichert den aktuellen Pluginbaum vollständig;
-- nutzt ein reales vorhandenes WordPress-Backup von 1.50.652 bevorzugt, falls vorhanden;
-- sonst exakt den originalen 1.50.650-Baum;
-- übernimmt einen Kandidaten nur nach realem Frontend-PASS;
-- testet Fallbacks automatisch;
-- rollt bei vollständigem Fehlschlag exakt auf den vorherigen Zustand zurück;
-- deaktiviert doppelte Template-Kit-Instanzen vor Kandidatenaktivierung.
+Der Patch:
+- ersetzt ausschließlich 65 bestehende, aktuell gemappte Hero-WebP-Dateien;
+- verändert das Mapping nicht;
+- verändert das Template-Kit-PHP nicht;
+- verändert Routing/Templates/CSS/Karten/Architektur nicht.
 
-## Lokale Abnahme
-- **11/11 E2E-Szenarien PASS**;
-- Embedded 1.50.650: **981/981 Dateien SHA-identisch** zum Original;
-- Payload PHP: **55/55 Syntax PASS**;
-- `Druck & Fotografie` Render: PASS;
-- Recovery-PHP: Syntax PASS;
-- ZIP: PASS;
-- Negativ-/Rollbackpfade: PASS.
-
-Evidence:
-`HOBBY_DEPOT_RECOVERY_1.50.658_LOCAL_TEST_EVIDENCE.json`
+Lokale Prüfung:
+- exakt 65 erwartete Bilddatei-Diffs;
+- Mapping unverändert;
+- 0 PHP-Diffs;
+- 65/65 Zielbilder korrekt;
+- funktioniert sowohl auf pristine 1.50.650 als auch nach bereits angewendetem 1.50.659-Zustand.
 
 ## NEXT ACTION
-**Keine normale Template-Kit-Version installieren. Nur Recovery 1.50.658 als separates Plugin aktivieren; die echte Serverprüfung entscheidet automatisch über Behalten, Fallback oder Rollback.**
+**Nur 1.50.660 aktivieren und eine Hub2-Seite visuell prüfen.**
