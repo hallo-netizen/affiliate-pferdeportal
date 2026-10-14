@@ -4,6 +4,9 @@
 STAND: 2026-10-13
 STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
 
+## Aktueller Fachvertrag Kategorientexte (14.10.2026)
+`KATEGORIENTEXT_REGELN.md` enthält V2 nach ausdrücklicher Nutzerkorrektur: echte semantische 2–3 interne Kategorie-Links mit vollständigem Zielnamen, 1 passende Aufzählung, 1–2 fachlich integrierte Bilder, 6 Welt-Langformate unten versus 409 kompakte redaktionelle Formate oben, Quellen-/Rechteprüfung, Tabelleneinsatz nur bei fachlichem Nutzen. Die vor diesen Regeln erzeugten Design-0.1.9-Texte sind **nicht freigegeben** und erfüllen den Vertrag nicht. Optisches Editorial-Layout im Chat als Entwurf, NICHT als bereits installierter Patch. Kategorie-Live-Bindung unverändert; keine SEO-Produktion behaupten.
+
 ## Zuständigkeitsabgrenzung – Kategorienbüro (14.10.2026)
 Dieses KONZEPT-Büro bleibt die aktuelle **fachliche** Autorität für Kategorieauswahl, thematische Abgrenzung, redaktionelle Owner und Ideen. Für **operative WordPress-Live-Kategorienbindung, Änderungen und pluginübergreifenden neutralen Lesezugriff** ist ab sofort ausschließlich das neue eigene Büro `../KATEGORIEN/START_HERE.md` → `EIGENTUMSSCHUTZ_KATEGORIEN` → `KATEGORIEN/CURRENT_STATE.md` verantwortlich. Es gibt keine zweite operative Kategorie-Current; das bestätigte R3/V8-WordPress-Release bleibt unverändert. Kein neuer Sync.
 
