@@ -1,0 +1,199 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "mash-faq",
+    "plan_slot": "32fcb7ff3acfb4b40f76f4a831653175eb92a72f5b7ba1990725c21244474147",
+    "target_keyword": "Ist Mash gut für alte Pferde",
+    "title": "Ist Mash gut für alte Pferde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – So bleiben Pferde-Senioren fit",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/so-bleiben-pferdesenioren-fit-und-vital-08-2023/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Fütterung: Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung"
+        }
+      ],
+      "claims": [
+        "Bei älteren Pferden mit Zahnproblemen können eingeweichte Heu- und Luzernecobs das Raufutter teilweise ersetzen; Mash kann die Ration ergänzen.",
+        "Bei alternden Pferden gehören Ruhe beim Fressen, ausreichendes Raufutter, bedarfsgerechte Mineralversorgung und frisches Wasser zu den Grundlagen.",
+        "Bei Schwierigkeiten beim Kauen können eingeweichte Heucobs eine Alternative sein; bei Gewichts- und Muskelverlust muss die Fütterung angepasst werden.",
+        "Raufutter bildet die Basis der Pferdefütterung, und lange Fresspausen belasten das Verdauungssystem.",
+        "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden, da sonst Schlundverstopfungen drohen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist Mash gut für alte Pferde",
+      "topic": "Ist Mash gut für alte Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mash-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist Mash gut für alte Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/",
+        "evidence_text_sha256": "e2f8421021aa28961737255974f9b5789c5c46092d287e972d83c75af6341bea",
+        "statement": "Bei älteren Pferden mit Zahnproblemen können eingeweichte Heu- und Luzernecobs das Raufutter teilweise ersetzen; Mash kann die Ration ergänzen.",
+        "evidence_text": "Bei älteren Pferden mit Zahnproblemen können eingeweichte Heu- und Luzernecobs das Raufutter teilweise ersetzen; Mash kann die Ration ergänzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Das gesunde Rentnerleben",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/das-gesunde-rentnerleben-08-2020/",
+        "evidence_text_sha256": "e2b06796fd334b9189c35db12811da8a74cd8342ea2a13cbd6bde08224369aba",
+        "statement": "Bei alternden Pferden gehören Ruhe beim Fressen, ausreichendes Raufutter, bedarfsgerechte Mineralversorgung und frisches Wasser zu den Grundlagen.",
+        "evidence_text": "Bei alternden Pferden gehören Ruhe beim Fressen, ausreichendes Raufutter, bedarfsgerechte Mineralversorgung und frisches Wasser zu den Grundlagen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – So bleiben Pferde-Senioren fit",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/so-bleiben-pferdesenioren-fit-und-vital-08-2023/",
+        "evidence_text_sha256": "e5950d34b70abeb7d910d5d9e577e30f5e860682e561334dfbbd35d19e6f0e1e",
+        "statement": "Bei Schwierigkeiten beim Kauen können eingeweichte Heucobs eine Alternative sein; bei Gewichts- und Muskelverlust muss die Fütterung angepasst werden.",
+        "evidence_text": "Bei Schwierigkeiten beim Kauen können eingeweichte Heucobs eine Alternative sein; bei Gewichts- und Muskelverlust muss die Fütterung angepasst werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Fütterung: Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "evidence_text_sha256": "e81c085d628efe6cf1d1387376d1b513a6f9508182d04144eba65f1cfc0e3cd2",
+        "statement": "Raufutter bildet die Basis der Pferdefütterung, und lange Fresspausen belasten das Verdauungssystem.",
+        "evidence_text": "Raufutter bildet die Basis der Pferdefütterung, und lange Fresspausen belasten das Verdauungssystem.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferdesport Deutschland – Verdauung und falsche Fütterung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/verdauungsapparat-und-folgen-falscher-fuetterung/verdauungsapparat-des-pferdes-und-folgen-falscher-fuetterung",
+        "evidence_text_sha256": "c670e7d18a553065ec39daf28bff3d79d5dec822b52a8dd17a583e904c533685",
+        "statement": "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden, da sonst Schlundverstopfungen drohen.",
+        "evidence_text": "Quellfähige Futtermittel müssen vor dem Verfüttern ausreichend eingeweicht werden, da sonst Schlundverstopfungen drohen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mash-faq/",
+        "anchor": "FAQ zu Mash",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/mash-beratung/",
+        "anchor": "Beratung zu Mash",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mash-anwendung/",
+        "anchor": "Mash richtig anwenden",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mash-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mash-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mash-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mash",
+      "alte Pferde",
+      "Fütterung",
+      "Senior",
+      "Heucobs",
+      "Raufutter",
+      "Zähne",
+      "Verdauung",
+      "einweichen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Unterschiedliche Futterformen und gesundheitliche Ausgangslagen lassen sich mit Nutzen und Grenzen sinnvoll gegenüberstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
