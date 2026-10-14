@@ -370,3 +370,33 @@ ZIP direkt geprüft; `meta.card_count` auf 75 gesetzt und `pilze-kulturen/speise
 
 VERMEIDUNGSREGEL:
 Ein Checkpoint zählt erst als konsistent, wenn neben Mapping, Quelle, Datei und Crop auch seine internen Zähl-/Blockmetadaten gegen den realen Inhalt geprüft wurden.
+
+
+## AF-026 – AF-018 trotz vorhandener Schutzregel bei 1.50.653 wiederholt
+
+FEHLER:
+Beim neuen Pluginstand 1.50.653 wurde derselbe Release-Ketten-Fehler wie bereits bei 1.50.646 erneut eingebaut. Das Main-Plugin lud die neue Profilklasse, während die aktiven gerouteten Templates noch die alte Releaseklasse aufriefen.
+
+FOLGE:
+WordPress-Fatal / kritischer Fehler unmittelbar nach Aktivierung bzw. beim Aufruf der gerouteten Hobby-Depot-Seiten.
+
+URSACHE:
+Die bereits seit AF-018 dokumentierte Release-Chain-Prüfung wurde vor Ausgabe des ZIPs nicht als harter automatischer Blocker durchgesetzt. Syntax-PASS und ZIP-Struktur wurden erneut fälschlich als ausreichend behandelt.
+
+KORREKTUR:
+1.50.653 ist als Installationspaket verworfen. 1.50.654 wurde so korrigiert, dass Main-Plugin, aktive Profilklasse, geroutete Templates und Klassenaufrufe dieselbe Releaseversion verwenden.
+
+VERMEIDUNGSREGEL – AB SOFORT HARTE SPERRE:
+Kein neues Hobby-Depot-Plugin-ZIP darf ausgegeben werden, solange nicht alle sieben AF-018-Punkte als ein gemeinsamer Release-Chain-Test PASS sind:
+1. Plugin-Header/Plugin-VERSION;
+2. require_once aktive Profilklasse;
+3. class_exists-/Init-Bindung;
+4. Profil-RELEASE;
+5. route_template-Pfade;
+6. Klassenaufrufe in beiden Owned-Templates;
+7. Stale-Reference-Scan auf vorherige Releaseklassen.
+
+Zusätzlich zwingend:
+- Hauptplugin unter WordPress-Hook-Stubs laden;
+- beide aktiven Templates mit der tatsächlich geladenen Profilklasse ausführen;
+- bei irgendeiner alten Releaseklassen-Referenz: BUILD FAIL, kein ZIP, keine Freigabe.
