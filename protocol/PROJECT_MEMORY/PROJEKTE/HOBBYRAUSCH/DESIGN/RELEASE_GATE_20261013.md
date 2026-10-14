@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – DESIGN RELEASE GATE 2026-10-13
 
-STATUS: AKTIV / MUSS VOR JEDEM NEUEN HD-003-KANDIDATEN PASS SEIN
+STATUS: AKTIV / REGELDEFINITION / KEINE CURRENT-WAHRHEIT
 
 ## Zweck
 Ein technisch vorhandenes Bild darf nicht mehr als visueller PASS gelten. Das Gate trennt technische Existenz von echter visueller Freigabe.
@@ -24,15 +24,10 @@ Ein neuer HD-003-Kandidat darf erst paketiert werden, wenn gleichzeitig gilt:
 - Regression gegen eingefrorenen Text/Grundaufteilung 1.50.650;
 - visuelle Referenz Buch & Papier 1.50.645 unverändert.
 
-## Aktueller Gate-Status WIP 1.50.653
-**FAIL – absichtlich gesperrt**
-
-Gründe:
-- Hero aktiv 50/65 → 15 fehlen;
-- Hero visuell noch 15 nicht freigegeben;
-- Karten aktiv 46/328 → 282 fehlen;
-- Karten visuell noch 282 nicht freigegeben;
-- Ersatzbild-Queue nicht leer.
+## Statusquelle
+Diese Datei definiert nur das Release-Gate. Den aktuellen PASS/FAIL-Stand, aktuellen Blocker und genau eine NEXT ACTION ausschließlich aus
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md`
+lesen.
 
 ## Regel
 **Solange das Gate FAIL ist: kein ZIP, kein Kandidat, kein Live-Test.**
