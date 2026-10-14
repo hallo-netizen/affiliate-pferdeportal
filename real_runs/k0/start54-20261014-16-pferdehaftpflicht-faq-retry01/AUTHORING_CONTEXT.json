@@ -1,0 +1,188 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdehaftpflicht-faq",
+    "plan_slot": "cd2939b6b76fba10e648f292632967e615c401439c2b020f6f1d1fb75212cf86",
+    "target_keyword": "Was kostet eine Pferdehaftpflicht im Monat",
+    "title": "Was kostet eine Pferdehaftpflicht im Monat?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+          "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/"
+        },
+        {
+          "source_title": "Finanztip – Tierhalterhaftpflicht 2026",
+          "source_url": "https://www.finanztip.de/haftpflichtversicherung/tierhalterhaftpflicht/"
+        }
+      ],
+      "claims": [
+        "Eine Pferdehalterhaftpflicht schützt vor berechtigten Schadensersatzansprüchen Dritter infolge von durch das Pferd verursachten Schäden.",
+        "Gute Pferdehaftpflichtverträge können laut Finanztip zwischen rund 35 und 280 Euro pro Jahr kosten.",
+        "Bei der Tarifwahl sind Versicherungssumme, Mietsachschäden, Reitbeteiligungen und Fremdreiter besonders wichtig.",
+        "Der Beitrag der Tierhalterhaftpflicht hängt unter anderem vom Tier, Tarif, Versicherungsschutz und Nutzungsprofil ab.",
+        "Die gewöhnliche Privathaftpflichtversicherung übernimmt Schäden durch privat gehaltene Pferde nicht."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kostet eine Pferdehaftpflicht im Monat",
+      "topic": "Was kostet eine Pferdehaftpflicht im Monat?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdehaftpflicht-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet eine Pferdehaftpflicht im Monat?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "statement": "Eine Pferdehalterhaftpflicht schützt vor berechtigten Schadensersatzansprüchen Dritter infolge von durch das Pferd verursachten Schäden.",
+        "evidence_text": "Eine Pferdehalterhaftpflicht schützt vor berechtigten Schadensersatzansprüchen Dritter infolge von durch das Pferd verursachten Schäden.",
+        "evidence_text_sha256": "1146e113e3b8d74222ac784566d9eb6283af032732f61d1cf76e499a53a3bbdb",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "statement": "Gute Pferdehaftpflichtverträge können laut Finanztip zwischen rund 35 und 280 Euro pro Jahr kosten.",
+        "evidence_text": "Gute Pferdehaftpflichtverträge können laut Finanztip zwischen rund 35 und 280 Euro pro Jahr kosten.",
+        "evidence_text_sha256": "c9734ad59975734f3dd3726f25f0c5aa57a0f470b99593ab43b1f250ce28142d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "statement": "Bei der Tarifwahl sind Versicherungssumme, Mietsachschäden, Reitbeteiligungen und Fremdreiter besonders wichtig.",
+        "evidence_text": "Bei der Tarifwahl sind Versicherungssumme, Mietsachschäden, Reitbeteiligungen und Fremdreiter besonders wichtig.",
+        "evidence_text_sha256": "a875cff17dd5a45bd9835c1738b759bdecf074277c6763f77bff992eb858ed2c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Finanztip – Tierhalterhaftpflicht 2026",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/tierhalterhaftpflicht/",
+        "statement": "Der Beitrag der Tierhalterhaftpflicht hängt unter anderem vom Tier, Tarif, Versicherungsschutz und Nutzungsprofil ab.",
+        "evidence_text": "Der Beitrag der Tierhalterhaftpflicht hängt unter anderem vom Tier, Tarif, Versicherungsschutz und Nutzungsprofil ab.",
+        "evidence_text_sha256": "0523aa01c25a910f3967bffc0122b2b2fa8fee0bc958ea23f96ef7bcbf2d917f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "statement": "Die gewöhnliche Privathaftpflichtversicherung übernimmt Schäden durch privat gehaltene Pferde nicht.",
+        "evidence_text": "Die gewöhnliche Privathaftpflichtversicherung übernimmt Schäden durch privat gehaltene Pferde nicht.",
+        "evidence_text_sha256": "41994a023cc4bf040a881b3b0ecfe141224052765592e9786c3a780c6cc0417e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/versicherung/pferdehaftpflicht/",
+        "anchor": "Pferdehaftpflicht im Überblick",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Beratung zur Pferdehaftpflicht",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdehaftpflicht-faq/",
+        "anchor": "Weitere Fragen zur Pferdehaftpflicht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/versicherung/pferdehaftpflicht/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdehaftpflicht-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaftpflicht",
+      "Monat",
+      "Kosten",
+      "Tarif",
+      "Versicherung",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Beitragsspannen und Leistungsunterschiede lassen sich als Entscheidungshilfe übersichtlich nebeneinander darstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
