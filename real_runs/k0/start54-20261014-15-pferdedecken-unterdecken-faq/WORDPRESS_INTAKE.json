@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "pferdedecken-unterdecken-faq",
+      "plan_slot": "c10e2fc730f66fdc0fd81cb8b8abfcf7073a2669a7dacceb73ab85f1d2780096",
+      "target_keyword": "Was ist eine Unterdecke",
+      "title": "Was ist eine Unterdecke?"
+    }
+  ],
+  "batch_sha256": "4a2219c9294d715174ccc271ced67c6eaab4de1cac7a2a15427bbb800a8fd698"
+}
