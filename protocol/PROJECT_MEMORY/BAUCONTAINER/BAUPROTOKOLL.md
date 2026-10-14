@@ -366,3 +366,10 @@ KISS-KORREKTUR:
 
 NEGATIVREGEL: Weder Bürotür noch Zielvertrag/Hobbyraum dürfen den dynamischen V8-Status, aktuellen SEO-Blocker oder die eine NEXT ACTION parallel zur Current führen. Keine R3-Synchronisierung, kein neues Plugin, keine WordPress-Schreibarbeit.
 
+
+
+## HAB-KAT-ZENTRAL-20261014 – Büro Kategorien (14.10.2026)
+Anlass: ausdrücklich verlangte zentrale Kategorienverwaltung für alle Plugins; Änderungen ohne Umbau.
+KISS-Eingriff: neues eigenständiges Kategorienbüro samt einer Current-Autorität, neutralem Anschlussvertrag und Register; Routing/Gebäudeeingang sowie fachlicher Verweis im Konzept angepasst. WordPress-Kategorien, Zielprofil, URLs, Plugins, Design und produktiver Sync unverändert.
+Negativgrenze: Dokumentierter Zielvertrag ist kein Beleg einer bereits vorhandenen/abgenommenen neutralen PHP-API oder CRUD-End-to-End-Tests. Sicherer Änderungsweg bleibt Delta → Dry-Run → genau ein Sync → Readback.
+Autorität: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md`.
