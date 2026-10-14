@@ -18,16 +18,18 @@ SHA-256:
 - reale rekonstruierte Arbeitsbasis vorhanden;
 - Hero: **59/65** aktiv, **6 fehlen**;
 - Kategorievorschauen: **59/65**;
-- Karten: **74/328 belastbar aktiv**, **254 fehlen**;
-- neuer sauberer Kartenblock: Reptilienhaltung, Käferzucht, Private Wetterstation, Keramikglasuren, Schmuckherstellung, Speisepilzzucht;
+- Karten: **75/328 belastbar aktiv**, **253 fehlen**;
+- neuer sauberer Kartenblock: Reptilienhaltung, Käferzucht, Private Wetterstation, Keramikglasuren, Schmuckherstellung, Speisepilzzucht, Lautsprecherbau;
 - Teleskop-Astronomie im Prüflauf wegen Nah-Doppelung zum Hero wieder verworfen;
 - alle Heroassets exakt 600×220;
 - alle Vorschau-/Kartenassets exakt 200×107;
 - **61/61 PHP Syntax PASS**;
-- **74/74 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
+- **75/75 aktive Karten-Mappings rendererkompatibel und Dateien vorhanden**;
 - 0 exakte oder Nah-Doppelungen innerhalb derselben Seite;
 - aktive Hub2-Hero-/Kartenpfade ohne semantische Bildfallbacks;
 - noch kein neues ZIP.
 
 ## NEXT ACTION
 **6 fehlende Hero-Motive sauber schließen; offene Karten weiter blockweise nur mit fachlich eindeutigen, eigenständigen Motiven ergänzen. Release erst nach vollständigem Render-/Regressionstest und Release-Gate PASS.**
+
+Arbeitscheckpoint: `WIP_1.50.653_WORKING_75CARDS_NOT_RELEASE.zip` ist persistent in der Hobby-Rausch-Ablage gesichert.
