@@ -2,7 +2,14 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-14
-STATUS: **DESIGN 0.1.7 MOBILNAVIGATION + 100-TERME-SICHERHEITSGLOSSAR / PHP-5/5, 12 CHROMIUM-TESTANSICHTEN + ZIP PASS / WORDPRESS-LIVE 0.1.7 OFFEN**
+STATUS: **DESIGN 0.1.8 EINZELNES IN-PLACE-PLUGIN MIT GLOSSAR-MANAGER / 17 VALIDATOREN, 4 IMPORTMOCKS, 20 BROWSERANSICHTEN + ZIP PASS / WORDPRESS-LIVE 0.1.8 OFFEN**
+
+## AKTUELL – DESIGN 0.1.8 VERWALTBARES GLOSSAR (14.10.2026)
+- Ein und dasselbe Plugin `hab-bewahr-design-vorschau/`, Version 0.1.8, ZIP `HAB_UND_BEWAHR_DESIGN_0.1.8_GLOSSAR_MANAGER.zip`, SHA256 `c4b3f89eb1e3bebecc1c7ac3f78510f6f3c37ddae41b6adc87ad17dbbd253769`. Quelle/Paket im Designordner der Library gesichert.
+- Für den Nutzerbefund „unter Glossar ist nichts“ die vorhandene zentral verwaltete WP-Seite `editorial:glossar` (R3 Seite 184) an den Glossar-Renderer gebunden; Alteingang `/glossar/` redirectet bei veröffentlichter WP-Seite zu deren echtem Permalink, sonst Fallback-Renderer. Den Live-HTTP-Befund noch nicht direkt verifiziert.
+- Keine zweite öffentliche Glossarseite, kein separates Designplugin. Dateninhalt wird künftig als native WordPress Glossar-CPT-Entwürfe geführt und über das neue eigenständige **Wissensdatenbank/Glossarbüro** im Campus recherchiert. 100 ungeprüfte Alt-Kurzdefinitionen aus dem Designpaket entfernt; Kandidatenarchiv im Glossarbüro, vier WP-Kategoriedubletten gesperrt. Bei 0 freigegebenen Begriffen zeigt die öffentliche Oberfläche den redaktionellen Aufbau und ist `noindex`.
+- Eingebaut: A–Z-Suche und Glossareinzelansicht mit rechter Spalte Schutzwelt / verwandte Begriffe / optionale Hauptseite; Admin: `Glossar → Geprüfte Batches` max25, Vorschau/Bestätigung, 150–200 Wörter, Quellen, Einzelwelt, Entwurfsanlage + Readback + Rollback; `Glossar → Prüfbedarf`; manuelle Freigabe vor Publish.
+- Lokal: 17/17 Validatorprüfungen PASS, 4/4 Import-Mocks (inkl. Fehler-Rollbacks) PASS, Chromium 20/20 Viewports PASS, alle PHP-Lints + ZIP PASS. Unveränderte Header-/Mega-/Mobilnavigation und Bildassets. **WP-Live-PASS offen.**
 
 ## AKTUELL – DESIGN 0.1.7 ECHTES MOBILMENÜ + GLOSSAR (14.10.2026)
 - **Realer Nutzerbefund:** 0.1.6-Design nach Nutzerangabe auf Desktop besser, aber Mobilmenü nicht wirklich umgesetzt. Quell-/Browsersichtung bestätigt: 0.1.6 bricht sechs Desktop-Navigationszellen zu 2×3 um, große Flyouts liegen weiterhin über der Seite; es fehlten eigener Menütaster und mobile Accordion-Navigation. Zusätzlich war Header-C-Suche auf Unterseiten neben dem Logo, weil responsive CSS nur auf der Startseite geladen wurde.
@@ -52,4 +59,4 @@ STATUS: **DESIGN 0.1.7 MOBILNAVIGATION + 100-TERME-SICHERHEITSGLOSSAR / PHP-5/5,
 **HBD-DESIGN-004 ist LOCAL CLOSED, WordPress-Live-Migration OFFEN.** Originalquelle und installierbarer identitätsgleicher Kandidat 0.1.4 liegen real vor. Die tatsächliche WordPress-Updateinstallation und der Vergleich nach der Deaktivierung von 0.1.0 sind noch nicht bestätigt. Außerdem **HBD-DESIGN-002**: Original-Masterlogo nicht separat verfügbar, bis zur separaten Grafikfreigabe bleibt die vereinbarte Vektor-Header-C-Wortmarke im Designplugin. Keine Blindlöschung des 0.1.0-Plugins.
 
 ## EXAKT EINE NEXT ACTION
-**WordPress im bestehenden Designplugin mit der EINEN ZIP `HAB_UND_BEWAHR_DESIGN_0.1.7_MOBIL_GLOSSAR.zip` aktualisieren („aktuelle Version ersetzen“), danach adminseitig einmal Plugins-Übersicht aufrufen und LIVE auf Smartphone (a) aufklappbares Sechs-Welten-Menü mit allen Themenlinks, (b) korrekten Header C mit Suche unter Logo, (c) `https://hab-und-bewahr.de/glossar/` mit 100 A-Z-Begriffen und Suchfunktion prüfen; außerdem Desktop-Flyouts auf regressionsfreies Verhalten kontrollieren.** Nicht als Live-PASS ausgeben, bevor diese Sichtung erfolgt. Kein weiteres Plugin, kein Kategorie-Sync, kein Architekturumbau.
+**Bestehendes WordPress-Designplugin mit `HAB_UND_BEWAHR_DESIGN_0.1.8_GLOSSAR_MANAGER.zip` aktualisieren (ersetzen, NICHT als drittes Plugin), dann LIVE native Glossarseite aus `editorial:glossar`, alte URL `/glossar/`, „Glossar“-Backend-Menüs und Startseite/Mobilnavigation überprüfen. Erst nach bestandenem Live-Readback die redaktionell freigegebenen 25er-Batches aus dem separaten Glossarbüro als DRAFT importieren.** Kategorien unverändert; 100 Alt-Kurztexte nicht automatisch veröffentlichen.

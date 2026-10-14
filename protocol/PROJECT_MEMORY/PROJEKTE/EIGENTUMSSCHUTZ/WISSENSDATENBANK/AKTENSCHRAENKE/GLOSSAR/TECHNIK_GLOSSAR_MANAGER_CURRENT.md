@@ -8,3 +8,9 @@
 **Inhaltliche Grenzen:** keine Änderung am Kategoriebaum, keine Demo-/Vorproduktions-Inhalte indexieren, kein automatisches Verlinken jedes Begriffvorkommens, keine Fremdartikel anfassen. Assets nur auf Glossaransicht, keine REST-API, kein Frontend-Staging-Write.
 
 **Implementierungsnachweis:** echte WordPress-DB-Simulation mit bestehender Page, Positiv-, Negativ- und Rollbacktest; Snapshot/Kanonische-URL-Test; nur bei PASSED neues Paket, noch kein LIVE-PASS ohne realen WordPress-Readback.
+
+## GEBAUTER KANDIDAT 0.1.8 (14.10.2026)
+Nicht die Pferde-Engine blind übertragen. Stattdessen fachlich analoger sicherer Manager als `includes/glossary-manager.php` im bereits bestehenden Hab-&-Bewahr-Designplugin gebaut; WP-Inhaltsobjekte bleiben unabhängig vom Plugin-ZIP. Staging/Doppelklick/Readback/Rollback für `HB_GLOSSARY_BATCH_V1` und 25er-Grenze, manuelle Fachfreigabe vor Publish, read-only „Prüfbedarf“, A–Z-Seite + Terminologie-Detailseite nach PPA-Reihenfolge. Kein zusätzliches Designplugin, keine WDB-Content-Daten im öffentlichen Assets-Ordner.
+- ZIP SHA256 `c4b3f89eb1e3bebecc1c7ac3f78510f6f3c37ddae41b6adc87ad17dbbd253769`, `HAB_UND_BEWAHR_DESIGN_0.1.8_GLOSSAR_MANAGER.zip`.
+- PHP-Lint und ZIP PASS; 17 Validatorchecks; 4 Adminimportpfade inkl. zwei echter Mock-Rollbacks; 20 Browseransichten lokal PASS. **ECHTER WP-LIVE-READBACK OFFEN**, kein Releasefreigabe-Märchen.
+- Gewollter Status: 0 published terms. Vor Freigabe ist die Übersicht serverseitig noindex, ihre späteren URLs entstehen erst durch manuelles Veröffentlichen geprüfter WP-Drafts.
