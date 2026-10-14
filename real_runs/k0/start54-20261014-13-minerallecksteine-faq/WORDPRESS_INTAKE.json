@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "minerallecksteine-faq",
+      "plan_slot": "e7d6a9657450732a6223ae4f83952da308ef0e7e4e364f1223eeb612a390b678",
+      "target_keyword": "Was ist der Unterschied zwischen Salz und Mineralleckstein",
+      "title": "Was ist der Unterschied zwischen Salz und Mineralleckstein?"
+    }
+  ],
+  "batch_sha256": "c93fa093bce82ebae1f10c62aefb25ceb9f07d42f6788b11ec5f0919d2b5feb2"
+}
