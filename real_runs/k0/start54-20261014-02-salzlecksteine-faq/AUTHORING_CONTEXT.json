@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "salzlecksteine-faq",
+    "plan_slot": "d5b22f1db40d278a258431ddbee4b4347bc3de042f9219e25a0d4402b2e71efc",
+    "target_keyword": "Ist ein Salzleckstein schädlich für Pferde",
+    "title": "Ist ein Salzleckstein schädlich für Pferde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids"
+        }
+      ],
+      "claims": [
+        "Ein Salzleckstein liefert einem normal arbeitenden Pferd in der Regel ausreichend Kochsalz.",
+        "Bei hoher Schweißbelastung gehen Elektrolyte verloren; ein Salzleckstein deckt diesen erhöhten Bedarf möglicherweise nicht.",
+        "Minerallecksteine geben auch Spurenelemente ab, aber die tatsächlich aufgenommene Menge lässt sich kaum genau messen.",
+        "Bei Pferden können sowohl Nährstoffmängel als auch Überversorgungen mit Mineralstoffen gesundheitlich problematisch sein."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist ein Salzleckstein schädlich für Pferde",
+      "topic": "Ist ein Salzleckstein schädlich für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "salzlecksteine-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist ein Salzleckstein schädlich für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Ein Salzleckstein liefert einem normal arbeitenden Pferd in der Regel ausreichend Kochsalz.",
+        "evidence_text": "Ein Salzleckstein liefert einem normal arbeitenden Pferd in der Regel ausreichend Kochsalz.",
+        "evidence_text_sha256": "e15e5a8db954bc20a48d93f08955f0fd2652bd13f5abfb4e1ef0110fae9103e5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Bei hoher Schweißbelastung gehen Elektrolyte verloren; ein Salzleckstein deckt diesen erhöhten Bedarf möglicherweise nicht.",
+        "evidence_text": "Bei hoher Schweißbelastung gehen Elektrolyte verloren; ein Salzleckstein deckt diesen erhöhten Bedarf möglicherweise nicht.",
+        "evidence_text_sha256": "f1591902930bcd15924b95c0381ce30f28dfe42e08b8b41710a827336f24ec14",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferdesport Deutschland – Die kleinen Helfer im Trog",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-kleinen-helfer-im-trog-02-2016/",
+        "statement": "Minerallecksteine geben auch Spurenelemente ab, aber die tatsächlich aufgenommene Menge lässt sich kaum genau messen.",
+        "evidence_text": "Minerallecksteine geben auch Spurenelemente ab, aber die tatsächlich aufgenommene Menge lässt sich kaum genau messen.",
+        "evidence_text_sha256": "905002c77dc1df25a95ec3787ffd6830cdeeb974a601f5a734279353ce2b359b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "MSD Veterinary Manual – Nutritional Diseases of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "statement": "Bei Pferden können sowohl Nährstoffmängel als auch Überversorgungen mit Mineralstoffen gesundheitlich problematisch sein.",
+        "evidence_text": "Bei Pferden können sowohl Nährstoffmängel als auch Überversorgungen mit Mineralstoffen gesundheitlich problematisch sein.",
+        "evidence_text_sha256": "ff4778602f947f1f627bbecf80e973c2b1973c5bf75ae4d0be7ccefe08013ad6",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/salzlecksteine-faq/",
+        "anchor": "Thema salzlecksteine",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/salzlecksteine-beratung/",
+        "anchor": "Beratung und Hintergründe",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/salzlecksteine-anwendung/",
+        "anchor": "Weitere Fragen und Anwendungen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/salzlecksteine-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/salzlecksteine-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/salzlecksteine-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "salzlecksteine-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Salzleckstein",
+      "Pferd",
+      "Natrium",
+      "Elektrolyte",
+      "Schweiß",
+      "Salz",
+      "Mineralleckstein",
+      "Aufnahme"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Eine Tabelle kann die normale Salzversorgung, Schweißverluste und die Grenzen verschiedener Lecksteine nachvollziehbar unterscheiden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
