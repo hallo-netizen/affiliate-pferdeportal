@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "halfter-und-stricke-knotenhalfter-faq",
+    "plan_slot": "d486379a6f5fd88b1c04b239d020504b09593ae8fdf53f53141882405efdfa36",
+    "target_keyword": "Warum kein Knotenhalfter",
+    "title": "Warum kein Knotenhalfter?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferde Atelier – Knotenhalfter für Bodenarbeit",
+          "source_url": "https://pferde-atelier.de/training/training-bodenarbeit/knotenhalfter-fuer-bodenarbeit/"
+        },
+        {
+          "source_title": "Pferdesport Deutschland – Ausrüstung und Unfallvermeidung",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-im-pferdesport-mit-sicherheit-mehr-spass-am-reiten-07-2022/"
+        }
+      ],
+      "claims": [
+        "Knotenhalfter übertragen wegen des dünnen Seils Druck auf kleinere Flächen als breite Stallhalfter.",
+        "Zum festen Anbinden oder unbeaufsichtigten Tragen auf der Weide eignet sich ein Knotenhalfter ohne Sollbruchstelle nicht.",
+        "Die Knoten eines Knotenhalfters sollen nicht auf Auge, Jochbein oder empfindlichen Nervenbereichen liegen.",
+        "Beim Freilauf kann ein Halfter zur Verletzungsgefahr werden, wenn sich ein Pferd an Gegenständen verfängt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum kein Knotenhalfter",
+      "topic": "Warum kein Knotenhalfter?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "halfter-und-stricke-knotenhalfter-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum kein Knotenhalfter?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferde Atelier – Knotenhalfter für Bodenarbeit",
+        "source_url": "https://pferde-atelier.de/training/training-bodenarbeit/knotenhalfter-fuer-bodenarbeit/",
+        "statement": "Knotenhalfter übertragen wegen des dünnen Seils Druck auf kleinere Flächen als breite Stallhalfter.",
+        "evidence_text": "Knotenhalfter übertragen wegen des dünnen Seils Druck auf kleinere Flächen als breite Stallhalfter.",
+        "evidence_text_sha256": "485ba793071fa9142b45d32582294e634cb000c571ead0d3a6a25e6a4ad515ec",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferde Atelier – Knotenhalfter für Bodenarbeit",
+        "source_url": "https://pferde-atelier.de/training/training-bodenarbeit/knotenhalfter-fuer-bodenarbeit/",
+        "statement": "Zum festen Anbinden oder unbeaufsichtigten Tragen auf der Weide eignet sich ein Knotenhalfter ohne Sollbruchstelle nicht.",
+        "evidence_text": "Zum festen Anbinden oder unbeaufsichtigten Tragen auf der Weide eignet sich ein Knotenhalfter ohne Sollbruchstelle nicht.",
+        "evidence_text_sha256": "e1c185cbbec8aea504674f1ee85855528dbad1e008198227584a66dee8a63e37",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferde Atelier – Knotenhalfter für Bodenarbeit",
+        "source_url": "https://pferde-atelier.de/training/training-bodenarbeit/knotenhalfter-fuer-bodenarbeit/",
+        "statement": "Die Knoten eines Knotenhalfters sollen nicht auf Auge, Jochbein oder empfindlichen Nervenbereichen liegen.",
+        "evidence_text": "Die Knoten eines Knotenhalfters sollen nicht auf Auge, Jochbein oder empfindlichen Nervenbereichen liegen.",
+        "evidence_text_sha256": "60e659eb3eaefca1e38c3f805df99523167647298c9b27cb74edce826c63201d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferdesport Deutschland – Ausrüstung und Unfallvermeidung",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-im-pferdesport-mit-sicherheit-mehr-spass-am-reiten-07-2022/",
+        "statement": "Beim Freilauf kann ein Halfter zur Verletzungsgefahr werden, wenn sich ein Pferd an Gegenständen verfängt.",
+        "evidence_text": "Beim Freilauf kann ein Halfter zur Verletzungsgefahr werden, wenn sich ein Pferd an Gegenständen verfängt.",
+        "evidence_text_sha256": "170e93cfb4cd4ee9195c3739e65aae98d4dec1d26bfa4e0739c1cc53ebe8d9b8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/halfter-und-stricke-knotenhalfter-faq/",
+        "anchor": "FAQ halfter",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/halfter-und-stricke-knotenhalfter-beratung/",
+        "anchor": "Beratung zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/halfter-und-stricke-knotenhalfter-pflege/",
+        "anchor": "Weitere Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/halfter-und-stricke-knotenhalfter-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/halfter-und-stricke-knotenhalfter-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/halfter-und-stricke-knotenhalfter-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "halfter-und-stricke-knotenhalfter-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Knotenhalfter",
+      "Druck",
+      "Sicherheit",
+      "Anbinden",
+      "Knoten",
+      "Pferd",
+      "Bodenarbeit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Druckwirkung, Passform und Anbindesituationen können in einer Sicherheitsübersicht verglichen werden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
