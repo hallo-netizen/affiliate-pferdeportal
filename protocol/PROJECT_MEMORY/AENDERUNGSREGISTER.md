@@ -1571,3 +1571,9 @@ WAS: Designbüro Hab & Bewahr legt Zielname „Hab & Bewahr – Design“ für e
 WARUM: Nutzer meldet bereits zwei verschiedene Designplugins. Keine Vermehrung durch Drittplugin oder neue Installationsordner; alle Seitentypen aus einem technischen Designkern, schlanke Assets und Datenbankzugriffe.
 BEWEISGRENZE: GitHub/Campus-Dokumentation geändert, keine WordPress-Plugin-Datei oder Installation verändert; Original-ZIP/Plugin-Basename für In-Place-Update hier nicht verifiziert.
 ENTFERNBAR: NEIN.
+
+
+## HB-DESIGN-INPLACE-014 – genau ein Designplugin 0.1.4, 14.10.2026
+WAS: Original-ZIP der bereits installierten Design-Vorschau 0.1.3 hashgleich aus vorhandener persönlicher Library wiederhergestellt; originalen Plugin-Basename `hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php` und gesamte Template-/DEMO-Funktion übernommen, einzigen Gesamt-Designplugin-Kandidaten 0.1.4 erzeugt und im Designordner abgelegt. Header C und ursprüngliche Kacheln integriert. WordPress aktiven R3/V8-Kategorie-Snapshot read-only angebunden, Offline-Fallback 546er-Readback; revisionsgebundene Navigation gecacht, globalen JS-Ladefehler behoben. Lokaler 57/57-PASS, 7 Mock-Views und ZIP-PASS, SHA-256 `044a745463fd22ec821ba5d99001264228bef3adbc3abed04b28dfdbddbc25b0`.
+WARUM: Nutzer verlangt keine parallelen Startseiten-/Designplugins, minimale Performancekosten und zentrale dynamische Kategorieanbindung. Vorherige Annahme, die 0.1.3-Quelle fehle, wurde durch vollständiges Library-Inventar widerlegt.
+GRENZE: KEIN behaupteter WordPress-Live-PASS; 0.1.0 darf erst nach realem erfolgreichem 0.1.4-Update deaktiviert werden; kein WordPress-Write in diesem Chat.
