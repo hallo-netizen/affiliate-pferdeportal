@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – HERO-QUELLENAUDIT 30 – WIP
 
-STAND: 2026-10-15 12:49 CEST
+STAND: 2026-10-15 13:09 CEST
 ROLLE: Arbeitsaudit der 30 vom Nutzer vollständig verworfenen Hub2-Heroes.
 KEIN Release-/Live-PASS. KEIN Plugin-Artefakt.
 
@@ -14,6 +14,9 @@ Nicht gezählt werden:
 - alte 1.50.663-Szenen;
 - bloß andere Crops derselben Quelle.
 
+## Nachprüfung Vorschau-Bestand
+Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müssen nicht erneut als Vorschauen erzeugt werden. Sie sind jedoch nur Sicht-/Konzeptmaterial und ersetzen keine eigenständige Ausgangsquelle pro Kategorie.
+
 ## Exakter 30/30-Stand
 
 | Kategorie | Status | belastbare neue Einzelquelle |
@@ -23,7 +26,7 @@ Nicht gezählt werden:
 | Textilgestaltung | KANDIDAT VORHANDEN | `a_wide_well_lit_craft_studio_sewing_workspace_sce.png` |
 | Malen & Zeichnen | KANDIDAT VORHANDEN | `a_wide_cozy_sunlit_artist_studio_interior_worksp.png` |
 | Schrift & Lettering | KANDIDAT VORHANDEN | `a_wide_cozy_sunlit_creative_studio_workspace_sce.png` |
-| Guss & Formen | FEHLEND | keine gültige neue Einzelquelle |
+| Guss & Formen | KANDIDAT VORHANDEN | `Detailreiche Gießwerkstatt am Arbeitstisch.png` – eigenständige Einzelquelle vorhanden |
 | Holz | FEHLEND | keine gültige neue Einzelquelle |
 | Leder | FEHLEND | keine gültige neue Einzelquelle |
 | Heimwerken | FEHLEND | keine gültige neue Einzelquelle |
@@ -50,10 +53,10 @@ Nicht gezählt werden:
 | Technik & Medien | FEHLEND | keine gültige neue Einzelquelle |
 
 ## Bilanz
-- 5 Kategorien: genau ein belastbarer neuer Einzelkandidat vorhanden.
+- 6 Kategorien: genau ein belastbarer neuer Einzelkandidat vorhanden.
 - 1 Kategorie: Miniaturen & Szenen – zwei belastbare Einzelkandidaten, Auswahl noch offen.
-- 24 Kategorien: FEHLEND.
-- 0 der später erzeugten Sammel-/Collagebilder zählt als eigener Hero.
+- 23 Kategorien: FEHLEND als eigenständige Einzelquelle.
+- Die vorhandenen Sammel-/Collage-Vorschauen bleiben Sicht-/Konzeptmaterial; 0 davon zählt als eigener Hero.
 
 ## Verifizierte lokale Einzeldateien
 - Astronomie SHA-256 `d643c9ee22ed19fe5512cf30b1e48c678f40778842b8afe89d482a46ec075d80`
@@ -64,6 +67,9 @@ Nicht gezählt werden:
 - Malen & Zeichnen SHA-256 `a67ac5f62a050d3065a1c3883d17bddff721b7b2eb5ee837a89f830844530207`
 - Schrift & Lettering SHA-256 `572bad5cd15319e64e4dddf31d58f120e5a5594c7d497e558067af16257f17e9`
 
+Zusätzlich im erzeugten Bildbestand verifiziert:
+- Guss & Formen: `Detailreiche Gießwerkstatt am Arbeitstisch.png` – eigenständiges Einzelbild; noch kein Release-/Live-PASS.
+
 ## Nächster Arbeitsschritt
-Nur die 24 FEHLEND-Kategorien als **echte Einzelmotive** neu erzeugen, blockweise visuell prüfen und danach Miniaturen A/B final auswählen.
+Die Vorschauphase nicht wiederholen. Nur die 23 noch FEHLENDEN eigenständigen Hero-Quellen als **echte Einzelmotive** aus den vorhandenen Vorschau-Richtungen fertigstellen, blockweise visuell prüfen und danach Miniaturen A/B final auswählen.
 Kein Plugin/ZIP vor vollständigem 30/30-Audit.
