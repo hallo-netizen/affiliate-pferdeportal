@@ -203,7 +203,7 @@
       "kind": "NEW_SUBAREA_CANDIDATE",
       "world": "Technik & Ausfälle",
       "area": "Alarm & Smart Home",
-      "parent": "core:area:unknown_Technik_Alarm_Smart_Home_verify",
+      "parent": "core:area:e6d091a0c088",
       "subareas": [
         {
           "name": "Tor- & Zutrittsantriebe",
@@ -258,7 +258,8 @@
                 "Fahrzeugabdeckungen bei drohendem Hagel auf Scheuerrisiko beurteilen",
                 "Provisorische Unterstellung des Autos bei Hagelwarnung planen"
               ],
-              "boundary": "Wetter & Naturgefahren / Freizeit & Unwetter / Fahrzeugaufbauten & Transporte; nicht Campingfahrzeug"
+              "boundary": "Wetter & Naturgefahren / Freizeit & Unwetter / Fahrzeugaufbauten & Transporte; nicht Campingfahrzeug",
+              "proposed_parent_id": "core:subarea:r3-a7e016776e3c7b25"
             },
             {
               "name": "Vegetationsbrand am Grundstück",
@@ -268,7 +269,9 @@
                 "Brennbares Garteninventar bei Vegetationsbrandwarnung sicher unterbringen",
                 "Grundstück und Nebengebäude nach äußerem Funkenflug auf Schäden prüfen lassen"
               ],
-              "boundary": "Feuer & Gase / Rauch & Brand; nicht eigener Gartenfeuer-Ratgeber"
+              "boundary": "Feuer & Gase / Rauch & Brand; nicht eigener Gartenfeuer-Ratgeber",
+              "proposed_parent_id": "core:subarea:d60c45cef20293fb",
+              "parent_status": "PROVISIONAL_FIRE_CONTEXT_NEEDS_EDITORIAL_PARENT_REVIEW"
             },
             {
               "name": "Hausschwamm & Holzbauteilschäden",
@@ -278,7 +281,9 @@
                 "Feuchtequellen im Gebäude bei Verdacht auf Echten Hausschwamm ermitteln lassen",
                 "Sanierungsnachweise und Folgeschäden an eingebautem Holz dokumentieren"
               ],
-              "boundary": "Wasser & Feuchtigkeit, Parent-Scope noch zu verifizieren; nicht Holzwurm"
+              "boundary": "Wasser & Feuchtigkeit, Parent-Scope noch zu verifizieren; nicht Holzwurm",
+              "proposed_parent_id": "core:subarea:b9e996f2919443cc",
+              "parent_status": "PROVISIONAL_KELLER_SCOPE_REVIEW"
             },
             {
               "name": "Leckagen an privaten Poolleitungen",
@@ -288,7 +293,8 @@
                 "Poolpumpe nach Wasseraustritt vor Wiederinbetriebnahme fachlich prüfen lassen",
                 "Feuchteschäden an angrenzenden Terrassen durch Poolleitungslöcher dokumentieren"
               ],
-              "boundary": "Wasser & Feuchtigkeit / Leckage & Rohrbruch / Rohrnetz & vorbeugende Wartung; nicht Pumpen-Notstrom"
+              "boundary": "Wasser & Feuchtigkeit / Leckage & Rohrbruch / Rohrnetz & vorbeugende Wartung; nicht Pumpen-Notstrom",
+              "proposed_parent_id": "core:subarea:r3-c9a85d5a61ec3c38"
             }
           ]
         }
@@ -331,5 +337,70 @@
     "Prove existing logical parent ID for new tech and moisture single leaves",
     "Standard non-destructive existing-category-workflow delta, dry-run, rollback, slugs, redirect, WP readback",
     "Do not provide any download unless actual installable plugin and both positive and negative tests pass"
+  ],
+  "primary_sources": [
+    {
+      "kind": "PROJECT_AUTHORITATIVE",
+      "description": "Hab & Bewahr V9.3 category proposal and V9 31/93/285 snapshot",
+      "path": "KONZEPT/V9_3_BRAND_AUTO_BOOTE_54_KATEGORIEN_242_IDEEN_NICHT_IMPORTIEREN_20261015.json"
+    },
+    {
+      "kind": "PROJECT_ARTICLE_AUDIT",
+      "description": "Historic 510 individually materialized R2 titles and 432 new R3 titles",
+      "path": "KONZEPT/R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json"
+    },
+    {
+      "kind": "PUBLIC_EVIDENCE",
+      "description": "252000 Marderschäden 2024 (GDV published March 2026)",
+      "url": "https://www.gdv.de/gdv/medien/medieninformationen/mardersaison-startet-mehr-als-250-000-fahrzeuge-pro-jahr-betroffen--197808"
+    },
+    {
+      "kind": "PUBLIC_EVIDENCE",
+      "description": "Hausschwamm (UBA)",
+      "url": "https://www.umweltbundesamt.de/echter-hausschwamm"
+    },
+    {
+      "kind": "PUBLIC_EVIDENCE",
+      "description": "Holzwurm and house beetles (UBA)",
+      "url": "https://www.umweltbundesamt.de/gemeiner-nagekaefer-holzwurm"
+    },
+    {
+      "kind": "PUBLIC_EVIDENCE",
+      "description": "Brand risk warning on woodland (BBK)",
+      "url": "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Sicherheit-durch-Vorsorge/Materialien-Zielgruppe-Erwachsene/materialien-zielgruppe-erwachsene.html"
+    }
+  ],
+  "hard_checks": {
+    "positive_valid": true,
+    "negative": [
+      {
+        "fault": "only 2 ideas in new leaf",
+        "rejected": true
+      },
+      {
+        "fault": "duplicate leaf name",
+        "rejected": true
+      },
+      {
+        "fault": "duplicate article idea",
+        "rejected": true
+      },
+      {
+        "fault": "only 2 fire successor leaves",
+        "rejected": true
+      },
+      {
+        "fault": "wrong technology parent ID",
+        "rejected": true
+      }
+    ],
+    "all_negative_rejected": true
+  },
+  "ownership_warnings": [
+    "19 proposed leaves are NOT APPROVED, 76 editorial article ideas only, no SEO-provider gate",
+    "Parents for Vegetationsbrand and Hausschwamm need individual scope review despite existing IDs",
+    "The old R2 source is not wholly materialized: matching 510 of 704 original titles, no 100% duplicate-free claim",
+    "No existing WordPress posts, article assignments, template, URLs, redirects or category API mutated",
+    "One technical branch category existing parent confirmed by 31/93 V9 snapshot; only schema tests, no live interface verification"
   ]
 }
