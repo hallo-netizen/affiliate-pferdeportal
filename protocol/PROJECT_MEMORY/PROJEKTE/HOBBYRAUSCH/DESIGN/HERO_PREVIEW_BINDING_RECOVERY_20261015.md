@@ -5,6 +5,17 @@ ROLLE: Rekonstruktion ausschließlich aus den **neu erzeugten Bildvorschauen nac
 KEIN Rückgriff auf WIP 1.50.653 oder andere alte Bildstände.
 KEINE neuen Vorschauen im Chat.
 
+## Vollständiger Datei-Nachweis des neuen Bildfensters
+Die persönliche Projekt-Library wurde für den neuen Nach-1.50.663-Bildlauf vollständig nach Erstellungszeit geprüft.
+
+Zwischen **2026-10-15 07:40 UTC und 08:20 UTC** liegen exakt:
+- **8** eigenständige neue Bilddateien für **7 Kategorien** (Miniaturen A/B doppelt als Kandidaten);
+- **11** neue Sammel-/Raster-/Collagebilder.
+
+Zwischen **08:20 UTC und 09:30 UTC** liegen **keine weiteren generierten Hobby-Depot-Bilddateien**; nur drei themenfremde WordPress-/Datenbank-Screenshots.
+
+Damit ist belegt: Es existiert in der zugänglichen neuen Dateimenge kein versteckter weiterer Einzelbildsatz für die noch offenen Kategorien. Fehlende Einzelquellen dürfen nicht aus alten Dateien ergänzt oder aus den Sammelbildern umgedeutet werden.
+
 ## Belastbar wiedergefunden
 
 ### Eigenständige neue Einzelbilder
