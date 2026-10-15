@@ -57,8 +57,18 @@ WICHTIG:
 - Diese späteren Sammelbilder dürfen nicht als fertige Heroes oder neue eindeutige Quellen gezählt werden.
 - Seit 1.50.663 wurde **kein weiteres Plugin** gebaut oder freigegeben.
 
+## 30/30-Quellenaudit nachgeholt
+Autoritative Arbeitsliste:
+`HERO_QUELLENAUDIT_30_WIP_20261015.md`
+
+Exakte Bilanz:
+- **5** Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
+- **1** Kategorie (Miniaturen & Szenen) mit zwei Einzelkandidaten, Auswahl offen;
+- **24** Kategorien aktuell **FEHLEND**;
+- Collagen/Montagen/Panels zählen **0**.
+
 ## Erster offener Blocker
-Der bereits erzeugte neue Bildbestand ist noch **nicht vollständig quellenweise bereinigt und eindeutig 1:1 den 30 Kategorien zugeordnet**.
+Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 5 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 24 Kategorien FEHLEND.
 
 ## EXAKT EINE NEXT ACTION
-**Zuerst den vorhandenen neuen Bildbestand vollständig auditieren: pro der 30 Kategorien genau eine eigenständige Einzelquelle festlegen oder als FEHLEND markieren; alle Collagen, Montagen, Dubletten und Mehrfachthemen verwerfen. Erst danach fehlende Einzelmotive neu erzeugen. Kein Plugin/ZIP bauen, bevor dieser 30/30-Quellenaudit abgeschlossen ist.**
+**Die 24 als FEHLEND markierten Kategorien als echte eigenständige Einzelmotive neu erzeugen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
