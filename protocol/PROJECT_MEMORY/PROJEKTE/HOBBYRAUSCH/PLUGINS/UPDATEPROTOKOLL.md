@@ -2790,7 +2790,7 @@ TATSÄCHLICHER VERLAUF:
 - 1.50.663: Ausführungspfad technisch korrigiert und positiv/negativ geprüft; **LIVE VISUAL FAIL**, weil Grundszenen recycelt, nur anders gecroppt, Bild-in-Bild/Collagen, falsche Motive und Mehrfachbelegungen verwendet wurden.
 
 ENDENTSCHEIDUNG:
-- 1.50.651 und 1.50.653–1.50.663 nicht verwenden;
+- 1.50.651–1.50.663 nicht verwenden;
 - Affiliate Portal Template Kit 1.50.650 bleibt aktiver Grundstand;
 - keine weitere Runtime-/Architekturänderung;
 - Bildquellen werden außerhalb eines Pluginreleases zuerst 30/30 semantisch und visuell geklärt;
