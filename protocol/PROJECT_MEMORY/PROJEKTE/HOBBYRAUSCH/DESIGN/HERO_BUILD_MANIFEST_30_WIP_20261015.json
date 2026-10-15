@@ -42,7 +42,8 @@
       "collision_peers": [
         "Moos & Miniaturgärten"
       ],
-      "source_file_id": "file_000000005774821099a58aee3f5d962b"
+      "source_file_id": "file_000000005774821099a58aee3f5d962b",
+      "stage_slug": "miniaturen-b"
     },
     {
       "category": "Papierkunst",
@@ -54,7 +55,8 @@
       "collision_peers": [
         "Schrift & Lettering"
       ],
-      "source_file_id": "file_0000000091dc82108382ac7605664d57"
+      "source_file_id": "file_0000000091dc82108382ac7605664d57",
+      "stage_slug": "papierkunst"
     },
     {
       "category": "Textilgestaltung",
@@ -66,7 +68,8 @@
       "collision_peers": [
         "Leder"
       ],
-      "source_file_id": "file_000000009898821192f8819d4397be07"
+      "source_file_id": "file_000000009898821192f8819d4397be07",
+      "stage_slug": "textilgestaltung"
     },
     {
       "category": "Malen & Zeichnen",
@@ -78,7 +81,8 @@
       "collision_peers": [
         "Schrift & Lettering"
       ],
-      "source_file_id": "file_00000000c30081f59f27c670593d4a56"
+      "source_file_id": "file_00000000c30081f59f27c670593d4a56",
+      "stage_slug": "malen-zeichnen"
     },
     {
       "category": "Schrift & Lettering",
@@ -91,7 +95,8 @@
         "Papierkunst",
         "Malen & Zeichnen"
       ],
-      "source_file_id": "file_000000005d0081f4b87341b9d7342cda"
+      "source_file_id": "file_000000005d0081f4b87341b9d7342cda",
+      "stage_slug": "schrift-lettering"
     },
     {
       "category": "Guss & Formen",
@@ -103,7 +108,8 @@
       "collision_peers": [
         "Keramik & Glas"
       ],
-      "source_file_id": "file_000000008b6c820a9287113b751bb241"
+      "source_file_id": "file_000000008b6c820a9287113b751bb241",
+      "stage_slug": "guss-formen"
     },
     {
       "category": "Holz",
@@ -117,7 +123,8 @@
       ],
       "reference_file_name": "Kreativwelten: Hobby und Handwerk.png",
       "reference_cell": "R2C3",
-      "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e"
+      "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e",
+      "stage_slug": "holz"
     },
     {
       "category": "Leder",
@@ -131,7 +138,8 @@
       ],
       "reference_file_name": "Kreativwelten: Hobby und Handwerk.png",
       "reference_cell": "R2C4",
-      "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e"
+      "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e",
+      "stage_slug": "leder"
     },
     {
       "category": "Heimwerken",
@@ -145,7 +153,8 @@
       ],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "heimwerken"
     },
     {
       "category": "Keramik & Glas",
@@ -159,7 +168,8 @@
       ],
       "reference_file_name": "Hobby- und Wissenschaftscollage in zwölf Bildern.png",
       "reference_cell": "R2C1",
-      "reference_file_id": "file_00000000bf9481f4a5b8b29d6b37d496"
+      "reference_file_id": "file_00000000bf9481f4a5b8b29d6b37d496",
+      "stage_slug": "keramik-und-glas"
     },
     {
       "category": "Mechanik & Uhren",
@@ -173,7 +183,8 @@
       ],
       "reference_file_name": "Achtfache Natur- und Handwerksvielfalt.png",
       "reference_cell": "R1C2",
-      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07"
+      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07",
+      "stage_slug": "mechanik-und-uhren"
     },
     {
       "category": "Robotik & Automation",
@@ -188,7 +199,8 @@
       ],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "robotik-und-automation"
     },
     {
       "category": "Astronomie",
@@ -200,7 +212,8 @@
       "collision_peers": [
         "Wetter & Umwelt"
       ],
-      "source_file_id": "file_00000000521881f49deb5721d6bba808"
+      "source_file_id": "file_00000000521881f49deb5721d6bba808",
+      "stage_slug": "astronomie"
     },
     {
       "category": "Messen & Analysieren",
@@ -215,7 +228,8 @@
       ],
       "reference_file_name": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
       "reference_cell": "R1C3",
-      "reference_file_id": "file_000000004ac481f48064881a32cdc08c"
+      "reference_file_id": "file_000000004ac481f48064881a32cdc08c",
+      "stage_slug": "messen-und-analysieren"
     },
     {
       "category": "Mikroskopie",
@@ -227,7 +241,8 @@
       "collision_peers": [],
       "reference_file_name": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
       "reference_cell": "R1C4",
-      "reference_file_id": "file_000000004ac481f48064881a32cdc08c"
+      "reference_file_id": "file_000000004ac481f48064881a32cdc08c",
+      "stage_slug": "mikroskopie"
     },
     {
       "category": "Wetter & Umwelt",
@@ -242,7 +257,8 @@
       ],
       "reference_file_name": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
       "reference_cell": "R2C1",
-      "reference_file_id": "file_000000004ac481f48064881a32cdc08c"
+      "reference_file_id": "file_000000004ac481f48064881a32cdc08c",
+      "stage_slug": "wetter-und-umwelt"
     },
     {
       "category": "Gärtnern",
@@ -256,7 +272,8 @@
       ],
       "reference_file_name": "Hobbywelten im liebevollen Detail.png",
       "reference_cell": "R2C4",
-      "reference_file_id": "file_0000000005f882108d73f6e9cad13f4b"
+      "reference_file_id": "file_0000000005f882108d73f6e9cad13f4b",
+      "stage_slug": "gartnern"
     },
     {
       "category": "Essbare Pflanzen",
@@ -270,7 +287,8 @@
       ],
       "reference_file_name": "Achtfache Natur- und Handwerksvielfalt.png",
       "reference_cell": "R2C2",
-      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07"
+      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07",
+      "stage_slug": "essbare-pflanzen"
     },
     {
       "category": "Moos & Miniaturgärten",
@@ -284,7 +302,8 @@
       ],
       "reference_file_name": "Hobbywelten zwischen Handwerk und Natur.png",
       "reference_cell": "R2C3",
-      "reference_file_id": "file_000000000a448230b1857dced79db8ec"
+      "reference_file_id": "file_000000000a448230b1857dced79db8ec",
+      "stage_slug": "moos-und-miniaturgarten"
     },
     {
       "category": "Pilze & Kulturen",
@@ -298,7 +317,8 @@
       ],
       "reference_file_name": "Achtfache Natur- und Handwerksvielfalt.png",
       "reference_cell": "R2C4",
-      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07"
+      "reference_file_id": "file_00000000cc50820c8d598e50ff0d1b07",
+      "stage_slug": "pilze-und-kulturen"
     },
     {
       "category": "Ameisen & Insekten",
@@ -312,7 +332,8 @@
       ],
       "reference_file_name": "Handwerk, Natur und Mikrowelten im Raster.png",
       "reference_cell": "R2C4",
-      "reference_file_id": "file_00000000fbc88246a147e4f41d943b02"
+      "reference_file_id": "file_00000000fbc88246a147e4f41d943b02",
+      "stage_slug": "ameisen-und-insekten"
     },
     {
       "category": "Wirbellose",
@@ -326,7 +347,8 @@
       ],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "wirbellose"
     },
     {
       "category": "Wind & Drachen",
@@ -340,7 +362,8 @@
       ],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "wind-und-drachen"
     },
     {
       "category": "Klettern & Seil",
@@ -352,7 +375,8 @@
       "collision_peers": [],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "klettern-und-seil"
     },
     {
       "category": "Wasser",
@@ -364,7 +388,8 @@
       "collision_peers": [],
       "reference_file_id": null,
       "reference_file_name": null,
-      "reference_cell": null
+      "reference_cell": null,
+      "stage_slug": "wasser"
     },
     {
       "category": "Alltagsobjekte",
@@ -373,7 +398,8 @@
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150634.webp",
-      "collision_peers": []
+      "collision_peers": [],
+      "stage_slug": "alltagsobjekte"
     },
     {
       "category": "Naturfunde",
@@ -384,7 +410,8 @@
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/naturfunde-v150634.webp",
       "collision_peers": [
         "Pilze & Kulturen"
-      ]
+      ],
+      "stage_slug": "naturfunde"
     },
     {
       "category": "Spielzeug & Spiele",
@@ -395,7 +422,8 @@
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/spielzeug-spiele-v150634.webp",
       "collision_peers": [
         "Miniaturen & Szenen"
-      ]
+      ],
+      "stage_slug": "spielzeug-und-spiele"
     },
     {
       "category": "Münzen & Geld",
@@ -404,7 +432,8 @@
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/munzen-geld-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/muenzen-geld-v150634.webp",
-      "collision_peers": []
+      "collision_peers": [],
+      "stage_slug": "munzen-und-geld"
     },
     {
       "category": "Technik & Medien",
@@ -418,7 +447,8 @@
       ],
       "reference_file_name": "Kreative Welten im Raster.png",
       "reference_cell": "R2C1",
-      "reference_file_id": "file_00000000775c81f48afca940c8de63f9"
+      "reference_file_id": "file_00000000775c81f48afca940c8de63f9",
+      "stage_slug": "technik-und-medien"
     }
   ],
   "validation": {
@@ -426,6 +456,8 @@
     "ready_sources_have_file_ids": true,
     "bound_references_have_file_ids": true,
     "release_allowed_is_false": true,
-    "confirmed_batch_has_no_fabricated_reference": true
+    "confirmed_batch_has_no_fabricated_reference": true,
+    "stage_slugs_unique": true,
+    "stage_slugs_complete": true
   }
 }
