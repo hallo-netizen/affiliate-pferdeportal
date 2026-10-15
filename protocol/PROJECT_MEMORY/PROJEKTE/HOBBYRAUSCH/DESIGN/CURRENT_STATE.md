@@ -75,15 +75,25 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
 - `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle/Hash fixiert; nur Referenz, keine Releasequelle.
-- `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×220 und Preview 200×107 abgeleitet und geprüft.
+- `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_TARGET_PATHS_30_150650_20261015.md` – exakte 30 Hero- und 30 Preview-Zielpfade der eingefrorenen 1.50.650-Basis; 60/60 vorhanden und eindeutig.
 - `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` – realer lokaler KISS-Nachweis: bei 7 vorhandenen Quellen exakt 14 Bilddateien ersetzt, sonst 0 Änderungen; Mapping byte-identisch; ZIP-Roundtrip PASS.
 
 Belastbare Wiederherstellung aus den neuen Vorschauen:
 - 7 Kategorien besitzen eigenständige neue Einzelbilder; für Miniaturen wurde im aktuellen WIP-Asset-Stage Kandidat B verwendet;
-- für diese 7 Kategorien sind Hero 600×220 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
+- für diese 7 Kategorien sind Hero 600×320 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
 - für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
 - für 10 Kategorien ist die neue Vorschau-Dateibindung aus den aktuell zugänglichen Dateien nicht rekonstruierbar; dafür darf kein alter Bildbestand als Ersatz benutzt werden.
+
+### Maßkorrektur vor Release
+Die zunächst intern verwendete Hero-Ableitung **600×220** war eine falsche Zwischenannahme. Die echte eingefrorene 1.50.650-Basis wurde danach direkt geprüft: der aktive Hub2-Hero läuft mit **600/320**. Deshalb wurde der WIP vollständig auf **Hero 600×320 + Preview 200×107** korrigiert und erneut gegen die echte 1.50.650-Basis simuliert.
+
+Ergebnis korrigierter V2-Test:
+- exakt 14 bestehende Bilddateien geändert;
+- 0 Code-/CSS-/Mapping-/JSON-Änderungen;
+- Mapping byte-identisch;
+- ZIP-Roundtrip 981/981 PASS;
+- kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
 **Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Jetzt ausschließlich die 13 bereits gebundenen neuen Vorschau-Richtungen in eigenständige Einzelquellen überführen; die 10 nicht rekonstruierbaren Kategorien weder mit alten WIP-Bildern füllen noch erfinden. Erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
