@@ -577,3 +577,27 @@ LOKALER NACHWEIS:
 
 VERMEIDUNGSREGEL:
 Ein Plugin-Update, das ausdrücklich „überinstalliert“ werden soll, muss vor Ausgabe denselben Top-Level-Pluginordner und dieselbe Main-Plugin-Datei wie die installierte Vorgängerversion besitzen. Zusätzlich muss der Updatepfad bei bereits aktivem Plugin ohne erneuten Activation Hook getestet werden.
+
+
+## AF-034 – 1.50.662 lief nach Überinstallation nur im Admin und konnte bei direkter Frontend-Prüfung wirkungslos bleiben
+
+FEHLER:
+Der 1.50.662-In-Place-Updatepfad setzte voraus, dass nach der Überinstallation ein weiterer Admin-Request mit `admin_init` stattfindet.
+
+FOLGE:
+Bei direktem Wechsel vom Upload/Replace-Vorgang zur Frontend-Prüfung wurde der 30er-Bildaustausch nicht ausgeführt. Die sichtbaren Heroes blieben daher unverändert. Die danach genannte Cache-Erklärung war nicht belastbar und ist verworfen.
+
+KORREKTUR:
+1.50.663 behält exakt denselben Pluginordner und dieselbe Hauptdatei, hängt den einmaligen Austausch aber an `plugins_loaded`. Dadurch läuft er auf dem ersten folgenden WordPress-Request – Admin oder Frontend.
+
+LOKALER NACHWEIS:
+In-Place-Overwrite eines aktiven Vorgängers simuliert; Activation Hook nicht aufgerufen; admin_init nicht aufgerufen; nur plugins_loaded ausgelöst:
+- PASS;
+- APPLIED=1;
+- exakt 30 Zielbilder geändert;
+- 35 unverändert;
+- Mapping byte-identisch;
+- 0 Template-Kit-PHP-Diffs.
+
+VERMEIDUNGSREGEL:
+Bei In-Place-Updates aktiver Helper-Plugins darf die eigentliche Migration nicht an einen Admin-only-Hook gebunden sein, wenn der Nutzer unmittelbar im Frontend prüft. Der reale nächste Requestpfad muss E2E simuliert werden.
