@@ -157,4 +157,8 @@ def main():
     return 0 if report['pass_technical'] else 2
 
 if __name__=='__main__':
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception as e:
+        print(json.dumps({'pass_technical':False,'fatal_error':str(e)},ensure_ascii=False))
+        sys.exit(2)
