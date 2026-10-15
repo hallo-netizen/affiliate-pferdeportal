@@ -77,9 +77,10 @@ Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**:
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
 
 Belastbare Wiederherstellung aus den neuen Vorschauen:
-- 7 Kategorien besitzen eigenständige neue Einzelbilder (Miniaturen mit 2 Kandidaten);
+- 7 Kategorien besitzen eigenständige neue Einzelbilder; für Miniaturen wurde im aktuellen WIP-Asset-Stage Kandidat B verwendet;
+- für diese 7 Kategorien sind Hero 600×220 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
 - für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
 - für 10 Kategorien ist die neue Vorschau-Dateibindung aus den aktuell zugänglichen Dateien nicht rekonstruierbar; dafür darf kein alter Bildbestand als Ersatz benutzt werden.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Für die 20 wiedergefundenen Kategorien ausschließlich an den in `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` gebundenen neuen Nach-1.50.663-Bildrichtungen weiterarbeiten. Für die 10 nicht rekonstruierbaren Kategorien weder alte WIP-Bilder einsetzen noch eine Quelle erfinden. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 bereits vorhandenen neuen Einzelquellen sind technisch vorbereitet und bleiben eingefroren. Jetzt nur die 13 gebundenen neuen Vorschau-Richtungen in echte eigenständige Einzelquellen überführen; die 10 nicht rekonstruierbaren Kategorien weder mit alten WIP-Bildern füllen noch erfinden. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
