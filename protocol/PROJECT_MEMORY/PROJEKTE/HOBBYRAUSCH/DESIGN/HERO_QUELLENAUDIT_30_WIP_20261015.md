@@ -71,7 +71,7 @@ Zusätzlich im erzeugten Bildbestand verifiziert:
 - Guss & Formen: `Detailreiche Gießwerkstatt am Arbeitstisch.png` – eigenständiges Einzelbild; noch kein Release-/Live-PASS.
 
 ## Technischer WIP-Asset-Stage
-`HERO_ASSET_STAGE_7_WIP_20261015.md` dokumentiert für 7 vorhandene neue Einzelquellen bereits abgeleitete und geprüfte Hero-/Preview-Dateien (600×220 / 200×107). Miniaturen nutzt dort Kandidat B. Kein Release-/Live-PASS.
+`HERO_ASSET_STAGE_7_WIP_20261015.md` dokumentiert für 7 vorhandene neue Einzelquellen bereits abgeleitete und geprüfte Hero-/Preview-Dateien (600×320 / 200×107). Miniaturen nutzt dort Kandidat B. Kein Release-/Live-PASS.
 
 ## Nächster Arbeitsschritt
 Die Vorschauphase nicht wiederholen. Die 13 bereits neu gebundenen Vorschau-Richtungen in echte eigenständige Einzelquellen überführen. Für die 10 aktuell nicht rekonstruierbaren Richtungen keine alten WIP-Bilder verwenden und nichts erfinden.
