@@ -53,6 +53,26 @@ PASS:
 - keine zusätzlichen Zielpfade
 - keine Datei außerhalb der 14 erwarteten Bildpfade geändert
 
+## Ausgabedatei-Hashes der korrigierten V2-Simulation
+
+Hero-WEBP:
+- Astronomie: `d87d38c380d8e719e5dbcf25a66147d4cd0f35df44b48f21d5b16b2abf5c5e9e`
+- Papierkunst: `b951daba285657aa23687006d7cc4c6f981c8e77b46786b150939bf70aeb450f`
+- Textilgestaltung: `5b6259c7f6fbf40a8733b26588fd89aa8de5261dbee007654d178546c92661f5`
+- Malen & Zeichnen: `4e9e584fb183318a0f515bf94578677825e395231584ce19f977dc8673701c8f`
+- Schrift & Lettering: `540a176c7896839633668966b50a372a1ebb4be53a85b3841053c15db60045c2`
+- Guss & Formen: `594fcec9b5b78a8dc81c31783b2251f5eaa99c826795e577b010898fcb91d6e2`
+- Miniaturen & Szenen B: `e3c602e65a138453cf2fa86192f3e8d378bafd34b958d2d33e32b42c5c017395`
+
+Preview-WEBP:
+- Astronomie: `7cf5cbb3de6092c6bbf03e1aef2e2e37a61ac883e39eef6a1751deaacba5db7b`
+- Papierkunst: `b8b1a89abeedc72a0290c996b3142f8fff9b568c3bd1ea0984ea8a2577061e50`
+- Textilgestaltung: `12c29f428ef7422f384816d05e20bc026ed66112f3af37e01f0be76be83ac8ab`
+- Malen & Zeichnen: `ecbce49de198b0a8621c8d7b6b2a6a06113f950125182a7c1dfd45542fca9932`
+- Schrift & Lettering: `22fd3c004479711ceb97df40d63273e0ae1fd1fd5072fe215fc4c2921239b405`
+- Guss & Formen: `827315a7ca6acbdac1416507520bcd757996a0a003471125995322c300eb72a2`
+- Miniaturen & Szenen B: `fb78dc4c66ccf69f8ddfb60e65d73de9a210360aefc2e8a7b9b681ed34e76073`
+
 ## Roundtrip
 Die lokale WIP-Struktur wurde gezippt und erneut entpackt.
 
