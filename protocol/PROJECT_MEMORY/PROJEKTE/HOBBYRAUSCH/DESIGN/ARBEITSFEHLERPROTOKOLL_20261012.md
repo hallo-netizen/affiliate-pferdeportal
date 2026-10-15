@@ -437,7 +437,7 @@ FOLGE:
 Mehrere Reparaturpakete wurden auf einer bereits verworfenen Basis aufgebaut und verschlechterten den realen Zustand weiter.
 
 KORREKTUR:
-Neuer Reparaturstand wird direkt aus dem originalen 1.50.650-Paket gebaut. Sämtliche 55 PHP-Dateien und alle Nicht-Bild-Dateien bleiben byte-identisch. Ausschließlich 130 statische WebP-Dateien werden ersetzt: 65 Heroes 600×220 und 65 Kategorievorschauen 200×107.
+Historischer damaliger Reparaturansatz: direkt aus dem originalen 1.50.650-Paket, 55 PHP-Dateien und alle Nicht-Bild-Dateien byte-identisch, ausschließlich Bilddateien ersetzt. **Der damals hier verwendete Hero-Wert 600×220 wurde später durch AF-038 als falsch nachgewiesen und ist nicht mehr gültig; aktuell gilt 600×320.**
 
 VERMEIDUNGSREGEL:
 Bei einem bereits dokumentierten LIVE FAIL darf die betroffene Version niemals wieder als „funktionierende Basis“ bezeichnet oder als technische Ausgangsbasis verwendet werden. Basiswahl künftig ausschließlich aus dem letzten explizit live bestätigten PASS-Stand.
@@ -540,7 +540,7 @@ KORREKTUR:
 1.50.660 ist für diese 30 Heroes verworfen. 1.50.661 ersetzt ausschließlich diese 30 aktuell gemappten Bilddateien. Mapping, Runtime, Templates, Routing, CSS, Karten und Architektur bleiben unangetastet.
 
 SCHUTZPRÜFUNG 1.50.661:
-- exakt 30 Payload-Dateien, 600×220;
+- historisch exakt 30 Payload-Dateien; **der damalige 600×220-Wert ist durch AF-038 verworfen, aktuell gilt 600×320**;
 - 30 SHA-eindeutig;
 - lokaler Schärfecheck;
 - perzeptueller Duplikatcheck;
