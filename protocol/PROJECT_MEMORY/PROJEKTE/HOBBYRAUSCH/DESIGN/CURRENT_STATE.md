@@ -78,6 +78,7 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
+- `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
 
 Arbeitslisten-Konsistenz: **PASS**
 - Worklist exakt 23/23 Zeilen;
@@ -106,4 +107,4 @@ Ergebnis korrigierter V2-Test:
 - kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Die 13 exakt gebundenen neuen Richtungen und die 6 im Nachbarchat belegten neuen Produktionsrichtungen sind jetzt vollständig in der einen gemeinsamen `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` festgelegt. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder einsetzen und nichts erfinden. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, gegen Semantik/Zoom/Schärfe/Dublette prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Die 13 exakt gebundenen neuen Richtungen und die 6 im Nachbarchat belegten neuen Produktionsrichtungen sind in der gemeinsamen 23er-Worklist festgelegt und zusätzlich gegen 12 harte Motivkollisionen abgesichert. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder einsetzen und nichts erfinden. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
