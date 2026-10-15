@@ -9,7 +9,7 @@ STATUS: **SEITE ERREICHBAR / TEMPLATE-KIT 1.50.650 EINGEFROREN / 1.50.651–1.50
 - Affiliate Portal Template Kit **1.50.650** bleibt der aktive Grundstand.
 - Aus 1.50.650 sind **Textinhalt und Grundaufteilung** live bestätigt und eingefroren.
 - Die Hero-/Bildqualität ist **nicht** abgenommen.
-- 1.50.651 sowie die Reparatur-/Recovery-/Hero-Helferstände 1.50.653–1.50.663 sind verworfen bzw. nicht freigabefähig.
+- 1.50.651–1.50.652 sowie die Reparatur-/Recovery-/Hero-Helferstände 1.50.653–1.50.663 sind verworfen bzw. nicht freigabefähig.
 - Kein Nachfolger und kein neues isoliertes Plugin-`CURRENT.zip` ist freigegeben.
 
 ## Harte Sperre
