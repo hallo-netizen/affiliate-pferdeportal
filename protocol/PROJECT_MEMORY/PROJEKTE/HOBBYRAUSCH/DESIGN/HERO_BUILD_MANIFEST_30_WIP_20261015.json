@@ -458,6 +458,7 @@
     "release_allowed_is_false": true,
     "confirmed_batch_has_no_fabricated_reference": true,
     "stage_slugs_unique": true,
-    "stage_slugs_complete": true
+    "stage_slugs_complete": true,
+    "all_30_targets_exist_on_150650_base": true
   }
 }
