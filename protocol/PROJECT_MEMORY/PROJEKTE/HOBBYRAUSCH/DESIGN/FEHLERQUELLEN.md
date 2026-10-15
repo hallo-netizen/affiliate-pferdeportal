@@ -190,23 +190,25 @@ Belastbarer Endzustand:
 Details der technischen Arbeitsfehler: `ARBEITSFEHLERPROTOKOLL_20261012.md`.
 
 ## HRD-069 – Neuer Hero-Bildquellenlauf nach 1.50.663 noch nicht vollständig
-STATUS: **OPEN / 30/30 QUELLENAUDIT ABGESCHLOSSEN / 24 FEHLEND**
+STATUS: **OPEN / 30/30 QUELLENAUDIT ABGESCHLOSSEN / VORSCHAUEN VORHANDEN / 23 EINZELQUELLEN FEHLEND**
 
 BEFUND:
 Nach Verwerfen des 1.50.663-Bildsatzes wurde auf neue eigenständige Bildquellen umgestellt.
 Der Nutzer bewertete den neuen Einzelmotiv-Ansatz für Astronomie, Papierkunst, Miniaturen & Szenen, Textilgestaltung, Malen & Zeichnen sowie Schrift & Lettering positiv.
 
-Danach erzeugte Sammel-/Collage-/Montagebilder führten erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren. Diese Sammelbilder zählen nicht als Hero-Quellen.
+Danach erzeugte Sammel-/Collage-/Montagebilder führten erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren. Diese Vorschau-/Sammelbilder sind vorhanden und müssen nicht erneut als Vorschauen gebaut werden; sie zählen aber nicht als eigenständige Hero-Quellen.
+
+Bei der Nachprüfung wurde zusätzlich eine eigenständige Einzelquelle für **Guss & Formen** wiedergefunden: `Detailreiche Gießwerkstatt am Arbeitstisch.png`. Sie ist Kandidat, noch kein Release-/Live-PASS.
 
 NACHGEHOLTER 30/30-QUELLENAUDIT:
 Autoritative Arbeitsliste:
 `HERO_QUELLENAUDIT_30_WIP_20261015.md`
 
 Bilanz:
-- 5 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
+- 6 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
 - Miniaturen & Szenen mit 2 Einzelkandidaten, Auswahl offen;
-- 24 Kategorien FEHLEND;
-- Collagen/Montagen/Panels zählen 0.
+- 23 Kategorien FEHLEND als eigenständige Einzelquelle;
+- vorhandene Collagen/Montagen/Panels bleiben Vorschau-/Konzeptmaterial und zählen als Hero-Quelle 0.
 
 REGEL:
 - ein Hero = eine eigenständige Ausgangsquelle;
@@ -216,4 +218,4 @@ REGEL:
 - nicht eindeutig zuordenbar = FEHLEND, nicht füllen.
 
 ERSTER BLOCKER:
-**24 FEHLEND-Kategorien brauchen echte eigenständige Einzelmotive; danach Miniaturen A/B final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Vorschauen nicht wiederholen. 23 Kategorien brauchen noch echte eigenständige Einzelmotive aus den vorhandenen Vorschau-Richtungen; danach Miniaturen A/B final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
