@@ -12,6 +12,9 @@ STATUS: **EIGENES ZENTRALES KATEGORIENBÜRO EINGERICHTET; R3/V8 WORDPRESS-STRUKT
 - **Ein Schreiber, viele Leser:** Alle verändernden Operationen über den bestehenden zentralen Kategorien-Workflow mit Delta/Preflight/Dry-Run/einmaligem Sync/Live-Readback. Alle übrigen Plugins **read-only** über einen neutralen, versionsfähigen Lesevertrag. Keine zusätzliche Kategoriehaltung.
 - **Keine bezahlten SEO-Provider-Anfragen als Pflicht**; keine neue Architektur und keine Plugin-Neuentwicklung allein zur Einrichtung des Büros.
 
+## Fachliche Neuregelung 15.10.2026 – KEIN WP-UPDATE
+Das KONZEPTBÜRO führt ab 15.10.2026 den aktualisierten Fachvertrag `../KONZEPT/ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`: mindestens 3 direkte Kinder je Zwischenebene, **keine maximale Kinderzahl**, jede Endkategorie mit Platz für mindestens drei bis fünf unterschiedliche Artikelthemen (auch mehr möglich). Die frühere 3–10-Regel gehört nur noch zur R3/V8-Historie. Der Kategorien-Workflow/aktive WordPress-Bestand bleibt bis zur fachlichen Neusichtung und einem eigenen geprüften Änderungsdelta **UNVERÄNDERT**. Das Megamenü darf unabhängig von der tatsächlichen Kinderzahl spaltenweise balancieren, nie fachlich abschneiden.
+
 ## Gesicherter WordPress-Stand
 Autoritativer Abschlussbeleg aus der Nutzerdatei `portal-final-target-readback-20261013-185929-utc.json`, SHA-256 `e90d1e66c814f291e33c6dee3239924d760d493b8998b0bf5ea565f2080cbdae`.
 - R3/V8 Profilrevision: `HB-R3-V8-20261013-039c80c8c16d9b4f+b1998ec09edd98d0`.
