@@ -51,7 +51,8 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 - Miniaturen & Szenen – zwei Einzelkandidaten vorhanden; **Kandidat B** ist im technischen WIP-Stage festgelegt, finale Live-Freigabe bleibt offen.
 
 ## Ausführung
-Reihenfolge strikt 1–23.
+Produktionsreihenfolge für belastbar gebundene Richtungen: **1–18, danach 23**.
+Die Positionen **19–22 werden übersprungen und bleiben BLOCKED**, solange keine echte neue Bildbindung vorliegt. Sie dürfen die Fertigstellung von Technik & Medien (23) nicht aufhalten.
 Nach jedem Einzelbild nur drei Prüfungen:
 1. Thema eindeutig?
 2. weit genug / scharf?
