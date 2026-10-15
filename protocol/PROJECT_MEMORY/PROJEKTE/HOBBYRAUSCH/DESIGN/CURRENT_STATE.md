@@ -78,6 +78,7 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
 - `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – historischer Zwischenstand, durch V2 ersetzt.
 - `HERO_REFERENCE_CROPS_13_V2_20261015.json` – aktive reproduzierbare Referenzbindung für 13/13 Richtungen: echtes Raster + Zelle + eigener Crop + eindeutiger SHA-256 + eigene Crop-Datei-ID; Uploadbytes 13/13 rematerialisiert und hash-verifiziert; nur Referenz, keine Releasequelle.
+- `HERO_GENERATED13_FORENSIC_20261015.md` – 13 namensgleiche generated-Dateien nachgeprüft: 11 sind pixelidentische Sammelbildzellen, 2 sind fehlerhafte Mehrzellen-Crops; **0/13 eigenständige Einzelquellen**.
 - `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen auf Hero 600×320 und Preview 200×107 abgeleitet.
