@@ -550,3 +550,30 @@ SCHUTZPRÜFUNG 1.50.661:
 
 VERMEIDUNGSREGEL:
 Bei Bildaufträgen ist die visuelle Prüfung vor dem Release gleichrangig mit der technischen Dateiprüfung. Kein Bildsatz wird wegen korrekter Maße/Hashes/Pfade als fertig bezeichnet. Distanz, Motiv, Schärfe und sichtbare Wiederholungen müssen separat geprüft werden; Live-Abnahme bleibt bis zur Sichtprüfung offen.
+
+
+## AF-033 – 1.50.661 hatte den falschen Pluginordner und war deshalb keine Überinstallation
+
+FEHLER:
+1.50.661 wurde als Nachfolger des bereits installierten Hero-Replace-Plugins ausgegeben, verwendete aber den neuen Ordner `hobby-depot-hero-replace-30-only-150661`.
+
+FOLGE:
+WordPress behandelte 1.50.661 als separates Plugin statt als Überinstallation/Ersetzung von 1.50.660.
+
+KORREKTUR:
+1.50.662 verwendet exakt den bestehenden 1.50.660-Pfad:
+- `hobby-depot-hero-replace-only-150660/`
+- `hobby-depot-hero-replace-only-150660.php`
+
+Zusätzlich wurde der reale In-Place-Overwrite-Fall lokal simuliert, bei dem das Plugin bereits aktiv ist und der Activation Hook deshalb nicht als Ausführungsgrundlage vorausgesetzt werden darf. 1.50.662 führt den Bildaustausch in diesem Fall einmalig beim nächsten Admin-Request aus.
+
+LOKALER NACHWEIS:
+- aktive Plugin-Dateireferenz vor/nach Overwrite identisch;
+- 1.50.660 zunächst real ausgeführt;
+- Pluginordner anschließend durch 1.50.662 ersetzt;
+- kein erneuter Activation Hook;
+- 1.50.662 trotzdem PASS über one-shot admin_init;
+- exakt 30 Hero-Diffs, 35 unverändert, Mapping unverändert, 0 Template-Kit-PHP-Diffs.
+
+VERMEIDUNGSREGEL:
+Ein Plugin-Update, das ausdrücklich „überinstalliert“ werden soll, muss vor Ausgabe denselben Top-Level-Pluginordner und dieselbe Main-Plugin-Datei wie die installierte Vorgängerversion besitzen. Zusätzlich muss der Updatepfad bei bereits aktivem Plugin ohne erneuten Activation Hook getestet werden.
