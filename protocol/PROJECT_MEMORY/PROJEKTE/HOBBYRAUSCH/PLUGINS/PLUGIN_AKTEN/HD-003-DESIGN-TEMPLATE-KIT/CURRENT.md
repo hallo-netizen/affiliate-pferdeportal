@@ -3,47 +3,42 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **1.50.650 BLEIBT AKTIVER GRUNDSTAND / 1.50.651–1.50.663 NICHT VERWENDEN / KEIN PLUGIN-NACHFOLGER FREIGEGEBEN**
+STATUS: **TEMPLATE KIT 1.50.650 BLEIBT GRUNDSTAND / HERO-REPLACE 1.50.660 WIEDERHERGESTELLT UND TECHNISCH PASS / 1.50.661–1.50.663 NICHT VERWENDEN**
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
 
-Live bestätigt und eingefroren:
-- Textinhalt;
-- Grundaufteilung.
+## Aktives Bildartefakt
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip`
 
-Nicht als Bild-PASS bestätigt:
-- Hero-/Hub2-Bildbestand.
+SHA-256:
+`bd1bbd485763cbf72b07d284c5ca81664401397704dc73e310d9c4807fc3c9af`
+
+Inhalt:
+- 65/65 aktuell gemappte Hub2-Hero-Bilder;
+- 65/65 exakt 600×220 WEBP;
+- ein Installer-PHP;
+- keine Template-, Routing-, CSS-, Mapping-, Karten- oder Architekturänderung.
+
+## Lokaler 1:1-Test
+Gegen die echte 1.50.650-Basis:
+- 65 Map-Einträge;
+- 65 Payload-Dateien;
+- Slug-Menge exakt identisch;
+- 65/65 Zielpfade vorhanden;
+- exakt 65 Bilddateien geändert;
+- 0 hinzugefügt;
+- 0 entfernt;
+- 0 unerwartete Änderungen;
+- Mapping byte-identisch.
+
+Nachweis:
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HERO_1.50.660_RECOVERY_VALIDATION_20261015.md`
 
 ## Nicht verwenden
-- 1.50.651–1.50.652;
-- 1.50.653–1.50.656;
-- Restore-/Repair-/Recovery-Versuche 1.50.650-Restore, 1.50.657, 1.50.658;
-- Hero-Helfer 1.50.659–1.50.663.
-
-## Aktuelle Pluginlage
-Seit 1.50.663 wurde **kein neues Plugin** gebaut oder freigegeben.
-Die aktuelle Arbeit ist ausschließlich **Bildquellen-WIP** im Designbereich und besitzt noch keine Pluginversion.
-Der Designbereich besitzt jetzt 7 aktive neue Einzelquellen-Auswahlen im WIP (inkl. Miniaturen Kandidat B als WIP-Auswahl); daraus sind Hero-/Preview-Assets abgeleitet und im realen 600×320-/200×107-Ausschnitt **7/7 + 7/7 visuell PASS** geprüft. Für weitere 13 Kategorien sind die bereits gesehenen neuen Vorschau-Richtungen exakt gebunden, aber noch keine eigenständigen Releasequellen. Für 6 weitere Kategorien ist nur die Zugehörigkeit zum vom Nutzer akzeptierten neuen 8er-Produktionsblock belegt; eine exakte Motivrichtung bzw. ein valides Ergebnis ist nicht rekonstruiert. Nur 4 neue Vorschau-/Dateibindungen sind aktuell nicht rekonstruierbar. Kein dieser WIP-Stände ist Plugin-/Live-PASS.
-
-Keine Änderung an:
-- Template-Kit-PHP;
-- Routing;
-- Templates;
-- CSS;
-- Mapping;
-- Kartenlogik;
-- Architektur.
-
-## Technisch bestätigter späterer Releasepfad
-Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelquellen lassen sich durch Austausch von exakt 14 bestehenden WEBP-Dateien einsetzen; Hero **600×320**, Preview **200×107**; 0 Code-/Mapping-/Strukturänderungen. Der vollständige Zielplan umfasst 30 Hero- plus 30 Preview-Dateien an bereits vorhandenen Pfaden. Die frühere interne 600×220-Zwischenableitung wurde vor Release verworfen. Siehe Design-Evidenz `HERO_ASSET_STAGE_7_VISUALPASS_20261015.md`, `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md`, `HERO_TARGET_PATHS_30_150650_20261015.md`, `IMAGE_OVERLAY_BUILDER_TEST7_20261015.md` und `IMAGE_OVERLAY_FULL30_SYNTHETIC_TEST_20261015.md`. Der komplette spätere 30er-Pfad ist technisch mit 60/60 echten Zielpfaden, 0 Code-/Mappingänderungen und ZIP-Roundtrip PASS bewiesen; der Build bleibt bis 30/30 echten Bildquellen gesperrt.
-
-Zusätzlich liegt mit `HERO_BUILD_MANIFEST_30_WIP_20261015.json` eine geprüfte maschinenlesbare 30er-Bindung vor: 30 eindeutige Kategorien, 30 eindeutige Hero-Zielpfade, 30 eindeutige Preview-Zielpfade, Status 7+13+6+4, Release weiterhin gesperrt. Für die 13 Kategorien mit exakt gebundener neuer Nach-1.50.663-Referenz existiert `HERO_GENERATION_QUEUE_13_WIP_20261015.json`; jede Position ist an einen verifizierten V2-Referenzcrop sowie eindeutige Hero-/Preview-Zielpfade gebunden. Die übrigen 10 Kategorien bleiben bewusst ohne erfundene Motivvorgabe.
-
-Vor jedem finalen Build läuft zusätzlich `tools/hobby_release_source_preflight.py`. Aktuell steht das Source-Gate korrekt auf **FAIL: 7/30 ready_source, 23/30 noch offen**. Siehe `RELEASE_SOURCE_PREFLIGHT_20261015.md`. Sobald 30/30 freigegeben sind, erzeugt `tools/hobby_final_image_plugin_build.py` den kompletten Image-only-Kandidaten in einem Lauf; Volltest 30/30 + 60 Dateien PASS, Negativgates PASS (`FINAL_IMAGE_PLUGIN_BUILDER_TEST30_20261015.md`).
-
-## Artefakt
-Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter 30/30-Kandidat existiert.
+- 1.50.661–1.50.663;
+- spätere 7/30-/13-Referenz-Rekonstruktion als Bildquelle für bereits vorhandene 1.50.660-Heroes;
+- neue Bildgenerierung ohne konkret sichtbaren Einzelmotivfehler.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Pluginaktion. Die 7 technisch vorbereiteten neuen Einzelquellen bleiben WIP. Zuerst die Design-Current-NEXT-ACTION ausführen und die noch fehlenden eigenständigen Quellen fertigstellen. Erst nach vollständiger 30/30-Motivfreigabe darf ein reiner Bilddatei-Kandidat gebaut und positiv/negativ/regressiv getestet werden.**
+**Hero-Replace 1.50.660 auf dem eingefrorenen 1.50.650-Grundstand verwenden und danach nur Live-Readback. Kein Architekturumbau, kein neues Mapping, keine neue Bildrunde.**
