@@ -79,6 +79,7 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
+- `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`.
 
 Arbeitslisten-Konsistenz: **PASS**
 - Worklist exakt 23/23 Zeilen;
@@ -86,6 +87,7 @@ Arbeitslisten-Konsistenz: **PASS**
 - exakt 6 im Nachbarchat belegte neue Produktionsrichtungen;
 - exakt 4 weiterhin nicht rekonstruierbare neue Bindungen;
 - 11/13 unveränderte Referenzcrops mit eindeutigen Hashes; 2/13 bewusst auf fachlich stärkere neue Quelle/Zelle umgebunden, deren alte Crop-Hashes ausdrücklich ungültig sind.
+- Build-Manifest: **PASS** – 30/30 Kategorien eindeutig, 30/30 Hero-Zielpfade eindeutig, 30/30 Preview-Zielpfade eindeutig, alle Kollisionsverweise gültig.
 - `HERO_TARGET_PATHS_30_150650_20261015.md` – exakte 30 Hero- und 30 Preview-Zielpfade der eingefrorenen 1.50.650-Basis; 60/60 vorhanden und eindeutig.
 - `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` – realer lokaler KISS-Nachweis: bei 7 vorhandenen Quellen exakt 14 Bilddateien ersetzt, sonst 0 Änderungen; Mapping byte-identisch; ZIP-Roundtrip PASS.
 
