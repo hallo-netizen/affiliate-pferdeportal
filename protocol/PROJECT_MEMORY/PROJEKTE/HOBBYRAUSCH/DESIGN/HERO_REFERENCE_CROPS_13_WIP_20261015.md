@@ -1,5 +1,9 @@
 # HOBBYRAUSCH – HERO REFERENCE CROPS 13 – WIP
 
+STATUS: **HISTORISCH / SUPERSEDED**
+
+Aktiv für neue Arbeit ist ausschließlich `HERO_REFERENCE_CROPS_13_V2_20261015.json`. Diese ältere Datei nicht mehr für Crop-Hashes oder Generierungsbindungen verwenden.
+
 STAND: 2026-10-15
 ROLLE: Exakte Referenzbindung aus den bereits gesehenen **neuen Nach-1.50.663-Vorschauen**.
 KEIN Release. KEINE Hero-Quelle. KEIN Plugin.
