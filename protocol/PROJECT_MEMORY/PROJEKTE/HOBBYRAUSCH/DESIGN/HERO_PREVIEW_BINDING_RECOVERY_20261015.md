@@ -71,7 +71,7 @@ Nur diese 4 Kategorien besitzen aktuell weder eine wiedergefundene neue Einzelqu
 - Keine neuen Vorschau-Runden im Chat.
 - Keine alten WIP-1.50.653-/1.50.663-Motive als Ersatz.
 - Für die 20 wiedergefundenen Kategorien exakt an den oben gebundenen **neuen** Bildrichtungen weiterarbeiten.
-- Für die 6 im Nachbarchat bestätigten, aber dateiseitig nicht erfolgreich erhaltenen Motive ausschließlich die dort festgelegte neue Produktionsrichtung verwenden; keine fehlerhaften Sammelbilder als Quelle deklarieren.
+- Für die 6 im Nachbarchat bestätigten Block-Kategorien **keine konkrete Motivrichtung erfinden**; ihre Zugehörigkeit zum neuen Block allein reicht nicht für eine Motivbindung. Keine fehlerhaften Sammelbilder als Quelle deklarieren.
 - Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alte Quelle einsetzen und nichts erfinden.
 
 
