@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## AKTUELLSTE SYSTEMATISCHE LÜCKENPRÜFUNG – V9.4 – 15.10.2026
+**Einzige fachliche Current-Autorität ist diese CURRENT_STATE.md.** Die V9.4-Prüfakte `V9_4_GESAMTLUECKENPRUEFUNG_6_WELTEN_31_93_NICHT_IMPORTIEREN_20261015.json` ist ein **separater nicht importierbarer Audit-Kandidatensatz**, kein Plugin und keine Freigabe.
+
+- **Alle 6 Gefahrenwelten, 31 bisherigen Bereiche, 93 bisherigen Unterbereiche und 285 CORE-Bestandsblätter** gegen den 54/242-V9.3-Kandidatenstand und die exakt zugänglichen Alt-Titel-Audits geprüft; nachgewiesener Arbeitsscope: **510 von 704 alten R2-Titeln als einzelne Matchtexte** und alle 432 R3/V8 plus 242 V9.3-Titel. Dadurch ausdrücklich **keine 100%-Altcontent-Prüfung**; sechs Titel aus vier ergänzten R2-Blättern weiterhin nicht wörtlich beschaffbar.
+- **V9.4 neue, ausdrücklich unbestätigte Nischen-Kandidaten: 19 zusätzliche Endblätter / 76 konkrete, nicht duplizierte Vorschlagstitel, getrennt von den 54 V9.3-Kandidaten**. Neue vollständige Fachbereichsidee `Tier- & Schädlingsschäden` in `Wetter & Naturgefahren` mit 3 Unterbereichen und 9 Blättern (Dachmarder, Nager an Technik, Holzschädlinge; Auto-/Camper-/Bootsschäden; Außenanlagen/Wildtiere/Vögel). Zwei fachliche Unterbereichskandidaten mit je 3 Blättern: `Brandschäden & Wiederherstellung` unter `Feuer & Gase → Rauch & Brand`; `Tor- & Zutrittsantriebe` unter `Technik & Ausfälle → Alarm & Smart Home`. Vier Einzelblattvorschläge: Hagel am Privatwagen, Vegetationsbrand am Privatgrundstück, Hausschwamm/Holzbauteile, Poolleitungsleckagen.
+- **Gegenprüfung:** 11/11 positive redaktionelle Strukturchecks in erster V9.4-Erstellung, 1/1 vollständiger erneuter Daten-Positivcheck und 5/5 gezielt beschädigte Negativfälle abgewiesen. Real bekannte Eltern-IDs für Technologie und vier Einzelvorschläge erneut aus den bestehenden 31/93-Auditdaten nachgetragen. Für Vegetationsbrand und Hausschwamm ist die Elternpassung noch als redaktionell **offen** markiert.
+- **Bewusst keine neuen Rubriken:** Für `Vandalismus & Zerstörung` keine hinreichend deutliche weitere Hauptlücke nachgewiesen; unter `Einbruch & Diebstahl` Katalysator-/Fahrzeugteildiebstahl ggf. als Artikelthema im bestehenden `Oldtimer & Privatwagen` aufgreifen, nicht als neue Endkategorie ohne Beleg. Erdbeben und Sturmflut nicht künstlich in neue Bereiche pressen. Wohnmobilbrand ist in R3/V8 bereits fachlich vorhanden; Auto- und Bootsbrand wurden in V9.3 nur vorgeschlagen.
+- **AKTIVER WP-STATUS UNVERÄNDERT:** letzter bestätigter WordPress-R3/V8-Readback **546/546 PASS (13.10.2026)**. Kein V9.3-/V9.4-WP-Import, keine Pluginänderung, kein Live-Readback, keine bezahlten SERP-Requests, kein installierbarer Download. Die bisherige verbindliche Kategorie-Workflow-Versionsangabe ist historisch `1.14.8.19`; ihr kompletter aktueller Quellstand nicht freigegeben.
+- **GENAU EINE NÄCHSTE FACHHANDLUNG:** Die **19 V9.4-Fachlückenkandidaten** gegen den vollständigen bisherigen Kategorie-Workflow-Originalartikelbestand (einschließlich sechs nicht belegter R2-Delta-Titel) und V9.3 54/242 auf echte Suchintent-/Owner-Überschneidung prüfen; nur danach ein einziges nichtdestruktives, gesamthaft geprüftes Kategorien-Delta zur gesonderten technischen Freigabe im vorhandenen Kategorienbüro vorbereiten. **Kein Plugin zum Download, solange es nicht wirklich installier- und freigabereif ist.**
+
+
 ## AKTUELLSTER FACHSTAND – V9.3 AUTO-/WOHNMOBIL-/BOOT-BRANDSCHUTZ – 15.10.2026
 **Einzige Current-Autorität bleibt genau diese Datei.** Geprüfter nicht importierbarer Konzeptdatensatz: `V9_3_BRAND_AUTO_BOOTE_54_KATEGORIEN_242_IDEEN_NICHT_IMPORTIEREN_20261015.json`.
 
@@ -35,7 +46,7 @@
 
 
 STAND: 2026-10-15
-STATUS: **V9.3 – BRAND AUTO/BOOT FACHLICH ERGÄNZT; 54 KATEGORIEN / 242 IDEEN NUR KONZEPT; WOHNMOBIL-BRAND BESTAND ERHALTEN; 9 KATEGORIEN GESPERRT; 6 R2-ORIGINALTITEL FEHLEN; WP UNVERÄNDERT; RELEASE BLOCKED**
+STATUS: **V9.4 FACHLÜCKENAUDIT – 6 WELTEN / 31 BEREICHE / 93 UNTERBEREICHE GEPRÜFT; V9.3 54 KANDIDATEN / 242 IDEEN; ZUSÄTZLICH V9.4 19 UNFREIGEGEBENE KANDIDATEN / 76 IDEEN; 9 ALT-KANDIDATEN GESPERRT; 6 R2-TITEL FEHLEN; WP UNVERÄNDERT; RELEASE BLOCKED**
 
 ## AKTUELL – V9-FACHENTWURF / ZWEITPRÜFUNG 15.10.2026, NACH WIEDERGEFUNDENEM ARBEITSSTAND
 **Operative Wahrheit:** Der lokale V9-Vorschlagsentwurf war bereits weiter als die vorige Current-Fassung. Die 546 tatsächlichen Live-Stand-IDs, Namen, Slugs, Eltern entsprechen 546/546 dem archivierten R3/V8-WordPress-Readback vom 13.10.2026. Im lokalen V9-Einzelaudit sind alle **31/31 Bereiche und 93/93 Unterbereiche mit echten Original-IDs/Namen/Kindern** aufgelistet; **285/285 CORE-Blätter** mit Elternbezug enthalten. Das ist **strukturierte Bestands- und redaktionelle ERSTSICHTUNG**, keine umfassende individuelle semantische SEO-Abnahme jedes der 285 bestehenden Blätter.
