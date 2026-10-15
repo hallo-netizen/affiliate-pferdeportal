@@ -59,6 +59,9 @@ WICHTIG:
 - Vorschau vorhanden bedeutet daher nicht automatisch gültige Hero-Quelle: Panels aus Sammelbildern dürfen nicht als fertige Heroes oder neue eindeutige Quellen gezählt werden.
 - Seit 1.50.663 wurde **kein weiteres Plugin** gebaut oder freigegeben.
 
+## Gate-Einordnung
+Der 30er-Quellenblock ist nur das aktuell offene Untergate innerhalb des globalen Design-Gates. Auch nach 30/30 Motiv-PASS bleibt die globale Prüfung gemäß `RELEASE_GATE_20261013.md` bestehen; 30/30 allein ist kein Live-PASS.
+
 ## 30/30-Quellenaudit nachgeholt
 Autoritative Arbeitsliste:
 `HERO_QUELLENAUDIT_30_WIP_20261015.md`
