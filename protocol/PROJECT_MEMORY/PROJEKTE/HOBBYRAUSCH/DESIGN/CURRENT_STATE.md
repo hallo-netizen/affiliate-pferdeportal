@@ -53,7 +53,7 @@ Vom Nutzer im neuen Einzelmotiv-Ansatz ausdrücklich positiv beurteilt wurden di
 WICHTIG:
 - Diese sechs sind **noch keine installierten/releasefähigen Assets** und kein Live-PASS.
 - Zusätzlich ist für **Guss & Formen** eine eigenständige Einzelquelle im erzeugten Bildbestand vorhanden: `Detailreiche Gießwerkstatt am Arbeitstisch.png`. Sie ist als Kandidat vorhanden, aber noch kein Live-PASS.
-- Bei `Miniaturen & Szenen` entstanden mehrere Kandidaten; **kein einzelner Kandidat ist autoritativ festgelegt**.
+- Bei `Miniaturen & Szenen` existieren zwei Kandidaten; **Kandidat B ist im technischen WIP-Stage festgelegt**, die finale Live-Freigabe bleibt offen.
 - Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind **vorhanden** und müssen nicht erneut als Vorschauen erzeugt werden.
 - Diese Sammel-/Collage-/Montagebilder sind **nicht freigegeben**. Sie wiederholten Themen und Motive; ausdrücklich auffällig war u. a. die erneute Mehrfachbelegung von **Mechanik & Uhren**.
 - Vorschau vorhanden bedeutet daher nicht automatisch gültige Hero-Quelle: Panels aus Sammelbildern dürfen nicht als fertige Heroes oder neue eindeutige Quellen gezählt werden.
@@ -72,14 +72,13 @@ Exakte Bilanz:
 Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kategorien besitzen eine aktive WIP-Einzelquellen-Auswahl, 23 Kategorien noch keine eigenständige finale Einzelquelle. Für 13 dieser 23 ist die bereits gesehene neue Vorschau-Richtung exakt wiederhergestellt; für weitere 6 ist der neue Nachbarchat-Produktionsblock belegt, aber die gespeicherten Sammelausgaben trafen diese Motive nicht; nur 4 besitzen aktuell keine rekonstruierbare neue Vorschau-/Dateibindung. Die Vorschauphase wird nicht wiederholt.
 
 ## Ausführungs-Arbeitslisten
-- `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
 - `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle fixiert; 11 unverändert PASS, Keramik & Glas sowie Moos & Miniaturgärten auf stärkere bereits vorhandene neue Vorschauen umgebunden; nur Referenz, keine Releasequelle.
 - `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
-- `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`.
+- `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`; zusätzlich 7/7 echte Quellen und 13/13 neue Referenzrichtungen an exakte Projektdatei-IDs gebunden.
 - `HERO_GENERATION_QUEUE_19_WIP_20261015.json` – exakte Generierungsqueue für die 19 Kategorien mit belastbarer neuer Richtung (13 gebundene Vorschau-Richtungen + 6 rekonstruierte neue Produktionsrichtungen); keine Vorschau-Runde, keine alten Quellen.
 
 Arbeitslisten-Konsistenz: **PASS**
