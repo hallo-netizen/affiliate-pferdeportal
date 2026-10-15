@@ -1,6 +1,8 @@
 # HOBBYRAUSCH – HUB2 HERO AUDIT 2026-10-13
 
-STATUS: ARBEITSNACHWEIS / KEIN RELEASE
+STATUS: ARBEITSNACHWEIS / KEIN RELEASE / HISTORISCHER SNAPSHOT
+
+**HISTORISCHER MAẞHINWEIS:** Dieser Audit dokumentiert den damaligen 600×220-Prüfstand. Für den aktuellen 1.50.650-KISS-Bildersatz gilt nach direkter Runtime-Prüfung **600×320**. Den 600×220-Wert aus dieser Datei nicht für neue Assets wiederverwenden.
 
 Prüfung zweistufig:
 1. Quellenmotiv semantisch geprüft;
