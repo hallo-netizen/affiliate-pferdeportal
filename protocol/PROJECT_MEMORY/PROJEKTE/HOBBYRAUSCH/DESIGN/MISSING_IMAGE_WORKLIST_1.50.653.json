@@ -7,7 +7,7 @@
   "card_total": 328,
   "card_active": 75,
   "card_missing_count": 253,
-  "authority_note": "Aktiver realer WIP WIP_1.50.653_WORKING_65HEROES_75CARDS_NOT_RELEASE.zip. Hero-Block vollständig: 65/65 Heroes und 65/65 Kategorievorschauen. Kartenstand unverändert 75/328; fehlend bleibt fehlend.",
+  "authority_note": "HISTORICAL SNAPSHOT ONLY. WIP 1.50.653 and its image state are not current and must not be reused.",
   "rules": [
     "kein Fallback",
     "nur fachlich eindeutiges Motiv",
@@ -16,5 +16,9 @@
     "keine Duplikate innerhalb derselben Seite",
     "Hero 600x220; Parent-Vorschau aus derselben Quelle 200x107; Karte 200x107",
     "fehlend bleibt fehlend, bis ein passendes Motiv existiert"
-  ]
+  ],
+  "status": "HISTORICAL_OBSOLETE_DO_NOT_USE",
+  "do_not_use_for_current": true,
+  "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md",
+  "obsolete_reason": "1.50.653 is discarded; current image-only path is based on frozen 1.50.650 and verified Hero 600x320 / Preview 200x107."
 }
