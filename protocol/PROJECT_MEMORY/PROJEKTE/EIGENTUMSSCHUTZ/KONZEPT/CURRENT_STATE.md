@@ -2,7 +2,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-13
-STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
+STATUS: **NEUER KATEGORIEN-ZIELVERTRAG 2.0 (MIN. 3, KEIN MAXIMUM, PRO BLATT 3–5+ EIGENSTÄNDIGE ARTIKEL) / ALTER R3/V8-WP-LIVEBESTAND 546/546 UNVERÄNDERT / FACHLICHE VOLLSTÄNDIGKEITSPRÜFUNG OFFEN / KEIN WP-ÄNDERUNGSLAUF**
+
+## VERBINDLICHE NEUE NUTZERENTSCHEIDUNG 15.10.2026 – KEINE OBERE KATEGORIEGRENZE
+**AKTIVER FACHLICHER ZIELVERTRAG:** `ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md` Fassung 2.0. Der alte `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md` ist HISTORISCH / ABGELÖST, ebenso alle dortigen 3–10-Sollprüfungen als zukünftiges Release-Gate.
+
+- **Mindestens 3 fachlich sinnvolle direkte Kinder pro Zwischenebene; MAXIMAL UNBEGRENZT**, wenn Themenlage das rechtfertigt. Reale Kinder im Menü gleichmäßig optisch darstellen; nicht Inhalt auf 3, 6 oder 10 beschränken.
+- **Blattkategorie trägt mindestens 3 eigenständige, substanzielle Artikelideen, bevorzugt 3–5+**; wenn nur 1–2 existieren, kein eigenes Blatt erfinden. Mehr als 5 ist ausdrücklich zulässig.
+- Gemessene R3/V8-Live-IST-Struktur bleibt 31 Bereiche mit **je genau 3** Unterbereichen, 93 Unterbereiche mit 87×3 und 6×4 Endkategorien. Historisch wurden exakt 48 Unterbereiche ergänzt, um ursprünglich 19×1, 10×2, 2×3 Bereichskinder auf 31×3 zu bringen. **Das beweist strukturelle Regelkonformität, keine fachliche Vollständigkeit.**
+- Der real bestätigte WP-Sync 546/546 und 0 Löschungen bleibt historisch ein TECHNISCHER PASS; es findet jetzt **KEIN** WP-Sync, kein Kategorien-/Artikelumbau und keine Designplugin-Patchkette statt. Fehlende Themen zunächst als fachlich eigenständige Kandidaten mit Elternzuordnung, Abgrenzung und je mindestens drei Artikelideen gegen die bereits geplanten 1.136 Themen validieren.
+- Fachliche Detailprüfung für alle 31 Bereiche und 93 Unterbereiche läuft, mit bewusst möglichem Ergebnis „keine Ergänzung nötig“. Echte WP-Umsetzung nur später über das zentrale Kategorienbüro.
 
 ## AKTUALISIERTE TEXTREGEL-ENTSCHEIDUNG 15.10.2026 – 409 UNTERGEORDNETE KATEGORIEN
 Nach neuer expliziter Nutzeranweisung ist die Textausgabe der untergeordneten 31 Bereiche, 93 Unterbereiche und 285 Blattkategorien **oben unter H1** entschieden. 409 eigene kategoriespezifische Texte wurden nach den tatsächlich geprüften Text-only-Regeln des PA-Templates 1.50.560 in das **einzige** Designplugin 0.1.18 als read-only Datensatz `data/category-intros.json` eingebunden, manueller WordPress-Kategorietext hat Vorrang. Die sechs Hauptwelten behalten ausschließlich ihre langen unteren Editorialtexte. `KATEGORIENTEXT_REGELN.md` V2.2 ist die zuständige FACHREGEL. Keine Kategorie-/WP-Strukturänderung, keine Copy/Paste von Pferde-Design, keine Fach-SEO-Endfreigabe; WP-Liveprüfung steht aus.
@@ -181,4 +190,4 @@ Letzter bestätigter Real-Readback **12.10.2026**: Kategorie-Plugin 1.14.8.17; R
 - HB-CONCEPT-002: optionales SEO-Qualitätssignal, **keine** Release-Sperre. Keine weiteren kostenpflichtigen SERP-/Keywordtests.
 
 ## EXAKT EINE NEXT ACTION
-**Kein weiterer WordPress-Strukturklick. Für die spätere redaktionelle Umsetzung ausschließlich das jetzt eingebundene R3/V8-Profil mit 285 Blattkategorien als Grundlage nutzen und die 1.136 geplanten Ideen einschließlich 19 nur einmal vorgesehenen Umhängungen an die zuständige Inhaltsarbeit übergeben; ohne weitere Kategorien-Synchronisierung.** Ein realer Artikel-Import/Publikationsauftrag liegt für diesen Arbeitsschritt nicht vor.
+**Alle 31 Bereiche und 93 Unterbereiche gegen ihre tatsächlich vorhandenen Blattkategorien sowie die dokumentierten 704 alten + 432 neuen Artikelideen fachlich auf Lücken und Dubletten prüfen; daraus einen begründeten Ergänzungskatalog mit je Eltern-ID, neuem Bereich/Unterbereich/Blatt, mindestens 3 konkreten Artikelintents je neuem Blatt, bestehendem Themen-Owner und Abgrenzung ableiten.** Keine pauschale Dreier-/Zehnergrenze, keine künstlichen Füllkategorien; unveränderte 546 aktiven WordPress-Objekte bis zu Einzel-Delta-Preflight und kontrollierter späterer Freigabe.
