@@ -1,0 +1,360 @@
+{
+  "schema": "HOBBY_DEPOT_HERO_BUILD_MANIFEST_V1",
+  "status": "WIP_NOT_RELEASED",
+  "base_version": "1.50.650",
+  "release_allowed": false,
+  "output": {
+    "hero": {
+      "width": 600,
+      "height": 320,
+      "format": "webp"
+    },
+    "preview": {
+      "width": 200,
+      "height": 107,
+      "format": "webp"
+    }
+  },
+  "immutable": [
+    "php",
+    "routing",
+    "templates",
+    "css",
+    "mapping",
+    "cards",
+    "architecture"
+  ],
+  "counts": {
+    "total": 30,
+    "ready_source": 7,
+    "bound_new_reference": 13,
+    "recovered_new_direction": 6,
+    "unrecovered_new_binding": 4
+  },
+  "categories": [
+    {
+      "category": "Miniaturen & Szenen",
+      "status": "ready_source",
+      "reference": "Gemütliches Miniaturenatelier mit Dioramen.png",
+      "source_sha256": "1e4f0cb67ce0f19db277204a48f09a3005cce4f2900c511a4941f43edbc4968f",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/gestalten/miniaturen-szenen-v150616.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/gestalten/miniaturen-szenen-v150634.webp",
+      "collision_peers": [
+        "Moos & Miniaturgärten"
+      ]
+    },
+    {
+      "category": "Papierkunst",
+      "status": "ready_source",
+      "reference": "Sonnenlicht im Papierkunst-Atelier.png",
+      "source_sha256": "3eaff291d38b369fc026ca2077087ea31a2ac56d59218a3f8c514793468534a1",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/gestalten/papierkunst-v150616.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/gestalten/papierkunst-v150634.webp",
+      "collision_peers": [
+        "Schrift & Lettering"
+      ]
+    },
+    {
+      "category": "Textilgestaltung",
+      "status": "ready_source",
+      "reference": "Sonniges Nähatelier voller Stoffe und Ideen.png",
+      "source_sha256": "3ebfc283063c1f3743a278cd141e6907ed12f1195cfb1ec5bfc080eeaf60f368",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/gestalten/textilgestaltung-v150616.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/gestalten/textilgestaltung-v150634.webp",
+      "collision_peers": [
+        "Leder"
+      ]
+    },
+    {
+      "category": "Malen & Zeichnen",
+      "status": "ready_source",
+      "reference": "Sonniges Atelier mit Farbpinseln und Skizzen.png",
+      "source_sha256": "a67ac5f62a050d3065a1c3883d17bddff721b7b2eb5ee837a89f830844530207",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150616.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150634.webp",
+      "collision_peers": [
+        "Schrift & Lettering"
+      ]
+    },
+    {
+      "category": "Schrift & Lettering",
+      "status": "ready_source",
+      "reference": "Sonniges Kalligrafie-Atelier am Schreibpult.png",
+      "source_sha256": "572bad5cd15319e64e4dddf31d58f120e5a5594c7d497e558067af16257f17e9",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/gestalten/schrift-lettering-v150616.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/gestalten/schrift-lettering-v150634.webp",
+      "collision_peers": [
+        "Papierkunst",
+        "Malen & Zeichnen"
+      ]
+    },
+    {
+      "category": "Guss & Formen",
+      "status": "ready_source",
+      "reference": "Detailreiche Gießwerkstatt am Arbeitstisch.png",
+      "source_sha256": "b7ff5d01f13919671986e873c8fa1648dc3c59abaa0329d860b565d8183da083",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/guss-form-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/guss-form-v150634.webp",
+      "collision_peers": [
+        "Keramik & Glas"
+      ]
+    },
+    {
+      "category": "Holz",
+      "status": "bound_new_reference",
+      "reference": "Kreativwelten: Hobby und Handwerk.png / R2C3",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/holz-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/holz-v150634.webp",
+      "collision_peers": [
+        "Heimwerken"
+      ]
+    },
+    {
+      "category": "Leder",
+      "status": "bound_new_reference",
+      "reference": "Kreativwelten: Hobby und Handwerk.png / R2C4",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/leder-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/leder-v150634.webp",
+      "collision_peers": [
+        "Textilgestaltung"
+      ]
+    },
+    {
+      "category": "Heimwerken",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150634.webp",
+      "collision_peers": [
+        "Holz"
+      ]
+    },
+    {
+      "category": "Keramik & Glas",
+      "status": "bound_new_reference",
+      "reference": "Hobby- und Wissenschaftscollage in zwölf Bildern.png / R2C1",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/keramik-glas-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/keramik-glas-v150634.webp",
+      "collision_peers": [
+        "Guss & Formen"
+      ]
+    },
+    {
+      "category": "Mechanik & Uhren",
+      "status": "bound_new_reference",
+      "reference": "Achtfache Natur- und Handwerksvielfalt.png / R1C2",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/technik/mechanik-uhren-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/technik/mechanik-uhren-v150634.webp",
+      "collision_peers": [
+        "Messen & Analysieren"
+      ]
+    },
+    {
+      "category": "Robotik & Automation",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/technik/robotik-automation-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/technik/robotik-automation-v150634.webp",
+      "collision_peers": [
+        "Messen & Analysieren",
+        "Technik & Medien"
+      ]
+    },
+    {
+      "category": "Astronomie",
+      "status": "ready_source",
+      "reference": "Teleskop unter der Milchstraße.png",
+      "source_sha256": "d643c9ee22ed19fe5512cf30b1e48c678f40778842b8afe89d482a46ec075d80",
+      "hero_target": "assets/hobby-depot-v150617/subcategories/forschen/astronomie-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/forschen/astronomie-v150634.webp",
+      "collision_peers": [
+        "Wetter & Umwelt"
+      ]
+    },
+    {
+      "category": "Messen & Analysieren",
+      "status": "bound_new_reference",
+      "reference": "Hobbywelten: Natur, Handwerk und Wissenschaft.png / R1C3",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/forschen/messen-analysieren-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/forschen/messen-analysieren-v150634.webp",
+      "collision_peers": [
+        "Mechanik & Uhren",
+        "Robotik & Automation"
+      ]
+    },
+    {
+      "category": "Mikroskopie",
+      "status": "bound_new_reference",
+      "reference": "Hobbywelten: Natur, Handwerk und Wissenschaft.png / R1C4",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/forschen/mikroskopie-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/forschen/mikroskopie-v150634.webp",
+      "collision_peers": []
+    },
+    {
+      "category": "Wetter & Umwelt",
+      "status": "bound_new_reference",
+      "reference": "Hobbywelten: Natur, Handwerk und Wissenschaft.png / R2C1",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/forschen/wetter-umwelt-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/forschen/wetter-umwelt-v150634.webp",
+      "collision_peers": [
+        "Astronomie",
+        "Wind & Drachen"
+      ]
+    },
+    {
+      "category": "Gärtnern",
+      "status": "bound_new_reference",
+      "reference": "Hobbywelten im liebevollen Detail.png / R2C4",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/pflanzen/gaertnern-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/pflanzen/gaertnern-v150634.webp",
+      "collision_peers": [
+        "Essbare Pflanzen"
+      ]
+    },
+    {
+      "category": "Essbare Pflanzen",
+      "status": "bound_new_reference",
+      "reference": "Achtfache Natur- und Handwerksvielfalt.png / R2C2",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/pflanzen/essbare-pflanzen-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/pflanzen/essbare-pflanzen-v150634.webp",
+      "collision_peers": [
+        "Gärtnern"
+      ]
+    },
+    {
+      "category": "Moos & Miniaturgärten",
+      "status": "bound_new_reference",
+      "reference": "Hobbywelten zwischen Handwerk und Natur.png / R2C3",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/pflanzen/moos-miniaturgaerten-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/pflanzen/moos-miniaturgaerten-v150634.webp",
+      "collision_peers": [
+        "Miniaturen & Szenen"
+      ]
+    },
+    {
+      "category": "Pilze & Kulturen",
+      "status": "bound_new_reference",
+      "reference": "Achtfache Natur- und Handwerksvielfalt.png / R2C4",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/pflanzen/pilze-kulturen-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/pflanzen/pilze-kulturen-v150634.webp",
+      "collision_peers": [
+        "Naturfunde"
+      ]
+    },
+    {
+      "category": "Ameisen & Insekten",
+      "status": "bound_new_reference",
+      "reference": "Handwerk, Natur und Mikrowelten im Raster.png / R2C4",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/tiere/ameisen-insekten-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/tiere/ameisen-insekten-v150634.webp",
+      "collision_peers": [
+        "Wirbellose"
+      ]
+    },
+    {
+      "category": "Wirbellose",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150634.webp",
+      "collision_peers": [
+        "Ameisen & Insekten"
+      ]
+    },
+    {
+      "category": "Wind & Drachen",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150634.webp",
+      "collision_peers": [
+        "Wetter & Umwelt"
+      ]
+    },
+    {
+      "category": "Klettern & Seil",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150634.webp",
+      "collision_peers": []
+    },
+    {
+      "category": "Wasser",
+      "status": "recovered_new_direction",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150634.webp",
+      "collision_peers": []
+    },
+    {
+      "category": "Alltagsobjekte",
+      "status": "unrecovered_new_binding",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150634.webp",
+      "collision_peers": []
+    },
+    {
+      "category": "Naturfunde",
+      "status": "unrecovered_new_binding",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/naturfunde-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/naturfunde-v150634.webp",
+      "collision_peers": [
+        "Pilze & Kulturen"
+      ]
+    },
+    {
+      "category": "Spielzeug & Spiele",
+      "status": "unrecovered_new_binding",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/spielzeug-spiele-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/spielzeug-spiele-v150634.webp",
+      "collision_peers": [
+        "Miniaturen & Szenen"
+      ]
+    },
+    {
+      "category": "Münzen & Geld",
+      "status": "unrecovered_new_binding",
+      "reference": null,
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/munzen-geld-v150623.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/muenzen-geld-v150634.webp",
+      "collision_peers": []
+    },
+    {
+      "category": "Technik & Medien",
+      "status": "bound_new_reference",
+      "reference": "Kreative Welten im Raster.png / R2C1",
+      "source_sha256": null,
+      "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/technik-medien-v150627.webp",
+      "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/technik-medien-v150634.webp",
+      "collision_peers": [
+        "Robotik & Automation"
+      ]
+    }
+  ]
+}
