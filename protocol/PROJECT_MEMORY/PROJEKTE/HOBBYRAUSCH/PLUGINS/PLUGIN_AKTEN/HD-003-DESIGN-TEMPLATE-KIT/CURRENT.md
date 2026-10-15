@@ -36,7 +36,7 @@ Keine Änderung an:
 - Architektur.
 
 ## Technisch bestätigter späterer Releasepfad
-Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelquellen lassen sich durch Austausch von exakt 14 bestehenden WEBP-Dateien einsetzen; 0 Code-/Mapping-/Strukturänderungen. Der vollständige Zielplan umfasst 30 Hero- plus 30 Preview-Dateien an bereits vorhandenen Pfaden. Siehe Design-Evidenz `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` und `HERO_TARGET_PATHS_30_150650_20261015.md`.
+Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelquellen lassen sich durch Austausch von exakt 14 bestehenden WEBP-Dateien einsetzen; Hero **600×320**, Preview **200×107**; 0 Code-/Mapping-/Strukturänderungen. Der vollständige Zielplan umfasst 30 Hero- plus 30 Preview-Dateien an bereits vorhandenen Pfaden. Die frühere interne 600×220-Zwischenableitung wurde vor Release verworfen. Siehe Design-Evidenz `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` und `HERO_TARGET_PATHS_30_150650_20261015.md`.
 
 ## Artefakt
 Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter 30/30-Kandidat existiert.
