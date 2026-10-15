@@ -35,8 +35,11 @@ Keine Änderung an:
 - Kartenlogik;
 - Architektur.
 
+## Technisch bestätigter späterer Releasepfad
+Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelquellen lassen sich durch Austausch von exakt 14 bestehenden WEBP-Dateien einsetzen; 0 Code-/Mapping-/Strukturänderungen. Der vollständige Zielplan umfasst 30 Hero- plus 30 Preview-Dateien an bereits vorhandenen Pfaden. Siehe Design-Evidenz `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` und `HERO_TARGET_PATHS_30_150650_20261015.md`.
+
 ## Artefakt
-Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter Kandidat existiert.
+Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter 30/30-Kandidat existiert.
 
 ## EXAKT EINE NEXT ACTION
 **Keine Pluginaktion. Die 7 technisch vorbereiteten neuen Einzelquellen bleiben WIP. Zuerst die Design-Current-NEXT-ACTION ausführen und die noch fehlenden eigenständigen Quellen fertigstellen. Erst nach vollständiger 30/30-Motivfreigabe darf ein reiner Bilddatei-Kandidat gebaut und positiv/negativ/regressiv getestet werden.**
