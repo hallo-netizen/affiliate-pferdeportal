@@ -189,14 +189,24 @@ Belastbarer Endzustand:
 
 Details der technischen Arbeitsfehler: `ARBEITSFEHLERPROTOKOLL_20261012.md`.
 
-## HRD-069 – Neuer Hero-Bildquellenlauf nach 1.50.663 noch nicht 30/30 eindeutig
-STATUS: **OPEN**
+## HRD-069 – Neuer Hero-Bildquellenlauf nach 1.50.663 noch nicht vollständig
+STATUS: **OPEN / 30/30 QUELLENAUDIT ABGESCHLOSSEN / 24 FEHLEND**
 
 BEFUND:
 Nach Verwerfen des 1.50.663-Bildsatzes wurde auf neue eigenständige Bildquellen umgestellt.
 Der Nutzer bewertete den neuen Einzelmotiv-Ansatz für Astronomie, Papierkunst, Miniaturen & Szenen, Textilgestaltung, Malen & Zeichnen sowie Schrift & Lettering positiv.
 
-Danach erzeugte Sammel-/Collage-/Montagebilder führten jedoch erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren.
+Danach erzeugte Sammel-/Collage-/Montagebilder führten erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren. Diese Sammelbilder zählen nicht als Hero-Quellen.
+
+NACHGEHOLTER 30/30-QUELLENAUDIT:
+Autoritative Arbeitsliste:
+`HERO_QUELLENAUDIT_30_WIP_20261015.md`
+
+Bilanz:
+- 5 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
+- Miniaturen & Szenen mit 2 Einzelkandidaten, Auswahl offen;
+- 24 Kategorien FEHLEND;
+- Collagen/Montagen/Panels zählen 0.
 
 REGEL:
 - ein Hero = eine eigenständige Ausgangsquelle;
@@ -206,4 +216,4 @@ REGEL:
 - nicht eindeutig zuordenbar = FEHLEND, nicht füllen.
 
 ERSTER BLOCKER:
-**Vor weiterer Generierung den vorhandenen neuen Bildbestand 30/30 auditieren und exakt eine Quelle pro Kategorie festlegen oder FEHLEND markieren.**
+**24 FEHLEND-Kategorien brauchen echte eigenständige Einzelmotive; danach Miniaturen A/B final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
