@@ -64,17 +64,18 @@ Autoritative Arbeitsliste:
 `HERO_QUELLENAUDIT_30_WIP_20261015.md`
 
 Exakte Bilanz:
-- **6** Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
-- **1** Kategorie (Miniaturen & Szenen) mit zwei Einzelkandidaten, Auswahl offen;
-- **23** Kategorien aktuell **FEHLEND** als eigenständige Einzelquelle;
+- **7** Kategorien besitzen jetzt eine aktive neue Einzelquellen-Auswahl im WIP (6 eindeutige Einzelkandidaten plus Miniaturen Kandidat B als WIP-Auswahl);
+- **23** Kategorien besitzen weiterhin noch keine eigenständige finale Einzelquelle;
 - die bereits vorhandenen Vorschau-/Sammelbilder bleiben reines Sicht-/Konzeptmaterial und zählen als Hero-Quelle **0**.
 
 ## Erster offener Blocker
-Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 6 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 23 Kategorien FEHLEND als eigenständige Quelle. Die Vorschauphase ist bereits vorhanden und wird nicht wiederholt.
+Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kategorien besitzen eine aktive WIP-Einzelquellen-Auswahl, 23 Kategorien noch keine eigenständige finale Einzelquelle. Für 13 dieser 23 ist die bereits gesehene neue Vorschau-Richtung exakt wiederhergestellt; 10 besitzen aktuell keine rekonstruierbare neue Dateibindung. Die Vorschauphase wird nicht wiederholt.
 
 ## Ausführungs-Arbeitslisten
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
+- `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle/Hash fixiert; nur Referenz, keine Releasequelle.
+- `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×220 und Preview 200×107 abgeleitet und geprüft.
 
 Belastbare Wiederherstellung aus den neuen Vorschauen:
 - 7 Kategorien besitzen eigenständige neue Einzelbilder; für Miniaturen wurde im aktuellen WIP-Asset-Stage Kandidat B verwendet;
