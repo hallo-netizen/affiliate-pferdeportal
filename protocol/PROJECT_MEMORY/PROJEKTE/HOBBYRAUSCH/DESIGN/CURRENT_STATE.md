@@ -75,6 +75,8 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
 - `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle/Hash fixiert; nur Referenz, keine Releasequelle.
+- `HERO_SINGLE_SOURCE_QUEUE_13_WIP_20261015.md` – exakte Einzelquellen-Ziele für diese 13 gebundenen neuen Richtungen.
+- `HERO_SINGLE_SOURCE_QUEUE_6_RECOVERED_20261015.md` – sechs zusätzliche neue Produktionsrichtungen aus dem im Nachbarchat belegten 8er-Block; gültige Einzeldateien fehlen noch.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_TARGET_PATHS_30_150650_20261015.md` – exakte 30 Hero- und 30 Preview-Zielpfade der eingefrorenen 1.50.650-Basis; 60/60 vorhanden und eindeutig.
 - `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` – realer lokaler KISS-Nachweis: bei 7 vorhandenen Quellen exakt 14 Bilddateien ersetzt, sonst 0 Änderungen; Mapping byte-identisch; ZIP-Roundtrip PASS.
@@ -97,4 +99,4 @@ Ergebnis korrigierter V2-Test:
 - kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Jetzt die 13 exakt gebundenen neuen Vorschau-Richtungen sowie die 6 im Nachbarchat belegten neuen Produktionsrichtungen in eigenständige Einzelquellen überführen; die 4 weiterhin nicht rekonstruierbaren Kategorien weder mit alten WIP-Bildern füllen noch erfinden. Erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Die 13 exakt gebundenen neuen Richtungen und die 6 im Nachbarchat belegten neuen Produktionsrichtungen sind jetzt vollständig als Einzelquellen-Queues festgelegt. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder einsetzen und nichts erfinden. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, gegen Semantik/Zoom/Schärfe/Dublette prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
