@@ -92,6 +92,8 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `tools/hobby_image_overlay_builder.py` – baut aus der eingefrorenen 1.50.650-Basis ausschließlich die im Manifest erlaubten Bildersetzungen; prüft Vollständigkeit, Maße, Zielpfade, Dateibaum, Mapping-Identität und ZIP-Roundtrip.
 - `IMAGE_OVERLAY_BUILDER_TEST7_20261015.md` – Realtest mit 7 vorhandenen Quellen: exakt 14 Bilddateien geändert, 0 sonstige Änderungen, Mapping identisch, Roundtrip PASS.
 - `IMAGE_OVERLAY_BUILDER_NEGATIVE_TESTS_20261015.md` – 2/2 Negativpfade PASS: unvollständiger Stage und falsches Hero-Maß werden sicher gestoppt.
+- `tools/hobby_release_source_preflight.py` – hartes 30/30-Quellengate vor jedem finalen Plugin-Build.
+- `RELEASE_SOURCE_PREFLIGHT_20261015.md` – aktueller Preflight erwartungsgemäß FAIL: 7 Kategorien `ready_source`, 23 noch nicht; dadurch kein versehentlicher unvollständiger Release möglich.
 - Arbeitsarchiv `HOBBY_DEPOT_IMAGE_WIP_HANDOFF_7PLUS13_20261015.zip` enthält ausschließlich 7 echte neue Einzelquellen + 13 V2-Referenzcrops + Manifeste; **kein Plugin / kein Release**. SHA-256: `294ff9b634081a4814c9d8c485b8aa5cd35e705990ce20708a35f6912a465368`.
 
 Arbeitslisten-Konsistenz: **PASS**
