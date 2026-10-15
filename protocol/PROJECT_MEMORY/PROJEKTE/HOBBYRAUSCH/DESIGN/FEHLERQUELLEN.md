@@ -172,3 +172,38 @@ Kein neues Bildrelease ohne manuelle semantische Zuordnung aller sichtbaren Hero
 ## Aktuell erster Blocker
 **Hero + komplettes Hub2-Bildmapping lokal neu prüfen und simulieren; danach erst neuer Kandidat.**
 
+
+
+## HRD-068 – 1.50.653 bis 1.50.663: Reparatur-/Recovery-/Hero-Helferserie nicht freigabefähig
+STATUS: **CONTAINED / KEIN NACHFOLGER / 1.50.650 BLEIBT GRUNDSTAND**
+
+BEFUND:
+Nach 1.50.651 folgten mehrere technische Reparatur- und Hero-Helferversuche. Darunter traten Release-Kettenfehler, wirkungslose Updatepfade und schließlich erneut visuell falsche Hero-Sätze auf.
+
+Belastbarer Endzustand:
+- Seite wieder erreichbar;
+- Template Kit 1.50.650 bleibt aktiver Grundstand;
+- 1.50.651 sowie 1.50.653–1.50.663 nicht verwenden;
+- kein neuer Pluginstand freigegeben;
+- keine Architektur-/Runtime-Weiterentwicklung aus dieser Serie übernehmen.
+
+Details der technischen Arbeitsfehler: `ARBEITSFEHLERPROTOKOLL_20261012.md`.
+
+## HRD-069 – Neuer Hero-Bildquellenlauf nach 1.50.663 noch nicht 30/30 eindeutig
+STATUS: **OPEN**
+
+BEFUND:
+Nach Verwerfen des 1.50.663-Bildsatzes wurde auf neue eigenständige Bildquellen umgestellt.
+Der Nutzer bewertete den neuen Einzelmotiv-Ansatz für Astronomie, Papierkunst, Miniaturen & Szenen, Textilgestaltung, Malen & Zeichnen sowie Schrift & Lettering positiv.
+
+Danach erzeugte Sammel-/Collage-/Montagebilder führten jedoch erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren.
+
+REGEL:
+- ein Hero = eine eigenständige Ausgangsquelle;
+- kein zweiter Crop derselben Quelle;
+- keine Collage/Montage/Bild-in-Bild;
+- keine Mehrfachbelegung eines Themas;
+- nicht eindeutig zuordenbar = FEHLEND, nicht füllen.
+
+ERSTER BLOCKER:
+**Vor weiterer Generierung den vorhandenen neuen Bildbestand 30/30 auditieren und exakt eine Quelle pro Kategorie festlegen oder FEHLEND markieren.**
