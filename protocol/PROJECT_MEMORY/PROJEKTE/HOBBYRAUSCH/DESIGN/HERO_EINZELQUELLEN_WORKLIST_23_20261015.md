@@ -1,7 +1,7 @@
 # HOBBYRAUSCH – HERO-EINZELQUELLEN WORKLIST 23
 
 STAND: 2026-10-15
-ROLLE: Ausführungs-Arbeitsliste für die noch nicht finalisierten eigenständigen Hero-Quellen. 13 besitzen eine eindeutig wiedergefundene neue Nach-1.50.663-Vorschau-Richtung; 6 weitere sind als neuer 8er-Produktionsblock im Nachbarchat belegt, dessen gespeicherte Sammelausgaben die Motive jedoch nicht korrekt lieferten; nur 4 besitzen aktuell keine rekonstruierbare neue Vorschau-/Dateibindung.
+ROLLE: Ausführungs-Arbeitsliste für die noch nicht finalisierten eigenständigen Hero-Quellen. 13 besitzen eine eindeutig wiedergefundene neue Nach-1.50.663-Vorschau-Richtung. 6 weitere Kategorien sind als Bestandteil eines vom Nutzer akzeptierten neuen 8er-Blocks belegt, aber **ohne rekonstruierbare exakte Motivrichtung oder valides Ergebnis**. 4 weitere besitzen gar keine rekonstruierbare neue Vorschau-/Dateibindung.
 AUTORITATIVER STATUS bleibt `CURRENT_STATE.md`.
 KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 
@@ -19,10 +19,10 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 |---:|---|---|---|
 | 1 | Holz | Weite helle Holzwerkstatt; Hobelbank, Handhobel, Holzspäne und ein klar erkennbares unfertiges Holzwerkstück; kein Leder, keine allgemeine DIY-Szene | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 2 | Leder | Weite Lederwerkstatt; Lederhaut, Nähkloben/Naht, Lochwerkzeug und ein halbfertiges Lederstück wie Gürtel oder Etui; kein Holzmotiv als Hauptthema | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 3 | Heimwerken | Heimwerkerraum/Garage; Werkbank, Akkuschrauber, Wasserwaage, Schrauben und ein sichtbar montiertes Regal-/Reparaturprojekt; nicht als reine Holzwerkstatt | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 3 | Heimwerken | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
 | 4 | Keramik & Glas | Neue gebundene Richtung: Töpferei/Keramikgefäß plus mehrere klar erkennbare Glasgefäße in einer zusammenhängenden Atelier-Szene; kein Collage-Look | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 5 | Mechanik & Uhren | Weite Uhrmacher-/Feinmechanikwerkstatt; geöffnete Uhr, Zahnräder, Pinzetten, Lupenlampe und Werkzeug; Uhr klarer Mittelpunkt | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 6 | Robotik & Automation | Hobby-Robotikwerkstatt; kleiner Roboterarm oder mobiler Roboter, Sensoren/Mikrocontroller und Arbeitsrechner; klare Automationsszene | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 6 | Robotik & Automation | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
 | 7 | Messen & Analysieren | Technischer Messtisch; Messschieber, Multimeter, Messuhr/Prüfkörper und Notizen; Fokus auf Messen und Prüfen, nicht Elektronikbastelei | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 8 | Mikroskopie | Heller Mikroskop-Arbeitsplatz; Mikroskop, vorbereitete Objektträger, Probengefäße und Dokumentation; Mikroskop eindeutig Hauptmotiv | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 9 | Wetter & Umwelt | Weite Außen-Szene mit kleiner Wetter-/Umweltmessstation, Windmesser, Sensoren und Landschaft; Messstation vollständig sichtbar | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
@@ -31,10 +31,10 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 | 12 | Moos & Miniaturgärten | Neue gebundene Richtung: echte Moos-Miniaturlandschaft mit kleinem Weg/Brücke und klarer Miniaturwirkung; kein normales Gartenbeet | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 13 | Pilze & Kulturen | Pilzzucht-Regal oder Hobbyzuchtbereich mit Substratblöcken und deutlich sichtbaren Speise-/Zuchtpilzen; keine Wald-Pilzsuche | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 14 | Ameisen & Insekten | Formicarium/Insektenbeobachtung; Ameisen in klar erkennbarem Nest-/Beobachtungssystem, Lupe und sachlicher Arbeitsplatz; keine Blumen als Hauptmotiv | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 15 | Wirbellose | Terrarium/Beobachtung mit Schnecke, Asseln oder anderen Nicht-Insekten-Wirbellosen; natürliche Habitat-Szene, eindeutig nicht Ameisenmotiv | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
-| 16 | Wind & Drachen | Weite Wiese/Strand mit großem Flugdrachen am Himmel und Spule/Leinen im Vordergrund; klare Wind-Szene | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
-| 17 | Klettern & Seil | Kletter-/Seiltechnik-Szene an Fels oder Trainingswand; Kletterseil, Knoten, Karabiner und Gurt gut erkennbar; nicht nur Landschaft | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
-| 18 | Wasser | Ruhiger See/Fluss mit eindeutigem Hobby-Wassermotiv wie Kajak oder SUP samt Paddel und Ausrüstung; kein allgemeines Landschaftsbild | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 15 | Wirbellose | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
+| 16 | Wind & Drachen | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
+| 17 | Klettern & Seil | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
+| 18 | Wasser | **KEINE EXAKTE MOTIVRICHTUNG REKONSTRUIERT** – Kategorie war im vom Nutzer akzeptierten neuen 8er-Block; konkretes Motiv/valides Ergebnis wurde danach nicht bestätigt | NEUER 8ER-BLOCK BELEGT / EXAKTE MOTIVBINDUNG FEHLT / EINZELQUELLE FEHLT |
 | 19 | Alltagsobjekte | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alten Bestand nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
 | 20 | Naturfunde | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alte verworfene Naturfunde-Motive nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
 | 21 | Spielzeug & Spiele | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alte verworfene Spielzeug-/Spiele-Motive nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
@@ -51,8 +51,8 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 - Miniaturen & Szenen – zwei Einzelkandidaten vorhanden; **Kandidat B** ist im technischen WIP-Stage festgelegt, finale Live-Freigabe bleibt offen.
 
 ## Ausführung
-Produktionsreihenfolge für belastbar gebundene Richtungen: **1–18, danach 23**.
-Die Positionen **19–22 werden übersprungen und bleiben BLOCKED**, solange keine echte neue Bildbindung vorliegt. Sie dürfen die Fertigstellung von Technik & Medien (23) nicht aufhalten.
+Produktionsreihenfolge für **exakt gebundene** Richtungen: **1, 2, 4, 5, 7–14, 23**.
+Die Positionen **3, 6, 15–22 bleiben BLOCKED**, solange keine exakte neue Motivbindung vorliegt. Für 3, 6, 15–18 ist nur die Zugehörigkeit zum akzeptierten neuen 8er-Block belegt; daraus wird keine Motivrichtung erfunden.
 Nach jedem Einzelbild nur drei Prüfungen:
 1. Thema eindeutig?
 2. weit genug / scharf?
