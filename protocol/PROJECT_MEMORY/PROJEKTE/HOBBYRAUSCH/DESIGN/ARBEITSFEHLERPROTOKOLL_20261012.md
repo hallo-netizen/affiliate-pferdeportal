@@ -738,3 +738,24 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Nach jeder Mehrfachgenerierung muss das tatsächliche Bildresultat gegen die angeforderten Kategorien geprüft werden. Ein angekündigter 8er-Block zählt nicht als produziert, wenn die Ausgabebilder andere oder wiederholte Themen enthalten.
+
+
+## AF-040 – Bildgenerator ignorierte Einzelmotiv-Auftrag und erzeugte Plugin-/Statusgrafiken
+
+FEHLER:
+Beim Versuch, aus der exakt gebundenen Holz-Referenz eine neue eigenständige Einzelquelle zu erzeugen, lieferte der Bildgenerator zweimal fachfremde Plugin-/Statusinfografiken statt eines Holzmotivs.
+
+Betroffene Ausgaben:
+- `file_00000000d654820aa38cee0e4660af0f`
+- `file_00000000d49481f69adc2b2223a606a2`
+
+FOLGE:
+Beide Ausgaben sind vollständig ungültig und zählen als Bildquelle **0**.
+
+KORREKTUR:
+- keine der beiden Dateien wird in Current, Manifest, Queue, Mapping oder Plugin übernommen;
+- Bildgenerierung über diesen fehlerhaften Pfad wurde abgebrochen;
+- bestehender Stand 7 echte Quellen + 13 exakt gebundene Richtungen + 10 BLOCKED bleibt unverändert.
+
+VERMEIDUNGSREGEL:
+Nach einer fachfremden Bildgenerator-Ausgabe nicht erneut blind denselben Pfad benutzen. Eine Ausgabe zählt nur, wenn das tatsächliche Bild die angeforderte Kategorie als einzelnes Motiv zeigt.
