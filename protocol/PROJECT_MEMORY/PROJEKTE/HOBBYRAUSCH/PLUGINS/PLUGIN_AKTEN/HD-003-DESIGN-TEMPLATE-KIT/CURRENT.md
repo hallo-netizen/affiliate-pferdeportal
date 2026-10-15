@@ -2,36 +2,46 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-14
-STATUS: **LIVE-SEITE WIEDER ERREICHBAR / TEMPLATE-KIT 1.50.650 AKTIV / 1.50.659 VERWORFEN / 1.50.660 REINER HERO-DATEIAUSTAUSCH LOKAL PASS**
+STAND: 2026-10-15
+STATUS: **LIVE-SEITE WIEDER ERREICHBAR / TEMPLATE-KIT 1.50.650 BLEIBT AKTIV UND UNANGETASTET / 1.50.661 NUR 30 HERO-DATEIEN LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
 
 ## Aktiver Grundstand
-Affiliate Portal Template Kit **1.50.650** bleibt unangetastet.
+Affiliate Portal Template Kit **1.50.650**.
 
 ## Nicht verwenden
 - 1.50.651;
-- Recovery 1.50.658;
 - Repair Installer 1.50.657;
-- Hero Images ONLY 1.50.659.
+- Recovery 1.50.658;
+- Hero Images ONLY 1.50.659;
+- Hero Replace ONLY 1.50.660 als Endstand für die 30 live verworfenen Heroes.
 
-## Aktueller Hero-Patch
-`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip`
+## Aktueller Bildpatch
+`HOBBY_DEPOT_HERO_REPLACE_30_ONLY_1.50.661.zip`
 
 SHA-256:
-`bd1bbd485763cbf72b07d284c5ca81664401397704dc73e310d9c4807fc3c9af`
+`befb9a73f67e3827b7ad5c7c03d940976a5362a2a732f779654499685f0f0b3e`
 
 Der Patch:
-- ersetzt ausschließlich 65 bestehende, aktuell gemappte Hero-WebP-Dateien;
-- verändert das Mapping nicht;
-- verändert das Template-Kit-PHP nicht;
-- verändert Routing/Templates/CSS/Karten/Architektur nicht.
+- enthält exakt 30 neue 600×220-Hero-Dateien;
+- ersetzt nur die 30 Nutzer-Hard-Reject-Kategorien;
+- nutzt ausschließlich die bereits aktiven Zielpfade des vorhandenen Mappings;
+- schreibt/ändert das Mapping nicht;
+- ändert keine Template-Kit-PHP-Datei;
+- ändert keine Templates, kein Routing, kein CSS, keine Karten und keine Architektur;
+- lässt die anderen 35 aktuell gemappten Hero-Dateien unverändert.
 
-Lokale Prüfung:
-- exakt 65 erwartete Bilddatei-Diffs;
+## Lokale E2E-Prüfung
+PASS auf:
+1. pristine 1.50.650;
+2. simuliertem Nach-1.50.659+1.50.660-Zustand.
+
+Jeweils:
+- exakt 30 erwartete Bilddatei-Diffs;
 - Mapping unverändert;
+- 35 nicht betroffene Hero-Zieldateien unverändert;
 - 0 PHP-Diffs;
-- 65/65 Zielbilder korrekt;
-- funktioniert sowohl auf pristine 1.50.650 als auch nach bereits angewendetem 1.50.659-Zustand.
+- 30/30 Zielbilder = Payload;
+- keine temporären/Backup-Reste.
 
 ## NEXT ACTION
-**Nur 1.50.660 aktivieren und eine Hub2-Seite visuell prüfen.**
+**Nur 1.50.661 installieren/aktivieren und die 30 betroffenen Heroes live visuell prüfen.**
