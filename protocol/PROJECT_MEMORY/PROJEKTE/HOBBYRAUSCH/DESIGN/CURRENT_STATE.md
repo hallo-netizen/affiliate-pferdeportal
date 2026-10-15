@@ -72,8 +72,14 @@ Exakte Bilanz:
 ## Erster offener Blocker
 Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 6 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 23 Kategorien FEHLEND als eigenständige Quelle. Die Vorschauphase ist bereits vorhanden und wird nicht wiederholt.
 
-## Ausführungs-Arbeitsliste
-`HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` enthält die eindeutige Motivvorgabe für alle 23 noch fehlenden Einzelquellen. Sie ist nur Arbeitsliste; Statusautorität bleibt diese Current.
+## Ausführungs-Arbeitslisten
+- `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
+- `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
+
+Belastbare Wiederherstellung aus den neuen Vorschauen:
+- 7 Kategorien besitzen eigenständige neue Einzelbilder (Miniaturen mit 2 Kandidaten);
+- für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
+- für 10 Kategorien ist die neue Vorschau-Dateibindung aus den aktuell zugänglichen Dateien nicht rekonstruierbar; dafür darf kein alter Bildbestand als Ersatz benutzt werden.
 
 ## EXAKT EINE NEXT ACTION
-**Nicht die Vorschauen neu erzeugen. Die 23 noch FEHLENDEN eigenständigen Hero-Quellen strikt nach `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` als echte Einzelmotive fertigstellen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Keine Vorschauen mehr im Chat erzeugen. Für die 20 wiedergefundenen Kategorien ausschließlich an den in `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` gebundenen neuen Nach-1.50.663-Bildrichtungen weiterarbeiten. Für die 10 nicht rekonstruierbaren Kategorien weder alte WIP-Bilder einsetzen noch eine Quelle erfinden. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
