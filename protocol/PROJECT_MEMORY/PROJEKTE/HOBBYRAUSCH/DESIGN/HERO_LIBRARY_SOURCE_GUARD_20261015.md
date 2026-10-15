@@ -33,3 +33,12 @@ Vor jeder Quellenübernahme muss gelten:
 
 ## Ergebnis
 Der alte WIP-Bestand kann die 10 aktuell BLOCKED-Kategorien nicht scheinbar „füllen“. Fehlend bleibt fehlend, bis eine echte neue Bindung bzw. Einzelquelle existiert.
+
+
+## Zusätzlich hart gesperrte Fehlgenerierungen 2026-10-15
+Diese zwei fachfremden Bildgenerator-Ausgaben liegen weiterhin als Projektdateien vor, können über die verfügbare Dateiverwaltung aber nicht aus dem Project-Surface gelöscht werden. Sie sind deshalb explizit **QUARANTÄNE / NICHT VERWENDEN**:
+
+- `file_00000000d654820aa38cee0e4660af0f` – WordPress-Plugin Release-Dashboard
+- `file_00000000d49481f69adc2b2223a606a2` – WP-Bildersammler 1.50.664: Finale Fertigstellung
+
+Sie dürfen niemals als Quelle, Referenz, Vorschau, Mapping oder Pluginbestand verwendet werden.
