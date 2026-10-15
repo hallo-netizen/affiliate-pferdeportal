@@ -1,3 +1,31 @@
+## NACHHOLPRÜFUNG V9 – AKTUELLE FEHLERKETTE, 15.10.2026 (kein eigener Current)
+**Einzig maßgeblicher STATUS und NEXT ACTION:** `KONZEPT/CURRENT_STATE.md`. **LIVE-R3/V8-Readback 546/546 PASS vom 13.10.2026.** Die unten historisch fortgeschriebenen Behauptungen „R3 nicht live“, „WP-Sync ausstehend“ und „maximal 10“ sind für den gegenwärtigen Fachauftrag **ÜBERHOLT**. Gültiger Zielvertrag: `ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`.
+
+### HB-CONCEPT-V9-001 – Künstlich auf drei gestoppter Ausbau
+- **Fehler:** 31/31 Bereiche besitzen exakt drei Unterbereiche, 87/93 Unterbereiche exakt drei Blätter, sechs je vier, obwohl allein fachliche Notwendigkeit die Zahl bestimmen sollte.
+- **Belegte Ursache:** R2 hatte 19×1, 10×2, 2×3 Unterbereiche; R3/V7 ergänzte rechnerisch genau 48 Unterbereiche mit je drei Endblättern. Der so erreichte 3–10-Struktur-PASS beweist **keine fachliche Vollständigkeit**. Es ist keine Menü-Anzeige-Abschneidung belegt.
+- **Korrektur:** Alter 3–10-Vertrag als HISTORISCH markiert; Zielvertrag V2 fordert mindestens 3, keine Obergrenze, pro CORE-Blatt ≥3 (vorzugsweise 5+) individuelle Artikelideen. 31/31 Bereiche und 93/93 Unterbereiche in V9-Daten erneut aufgenommen.
+- **Test:** Original-V9-JSON mit 31 Bereichen, 93 Unterbereichen, 285 bestehenden Blättern; 546/546 V8-Readback laut Current und V9-Fachprotokoll. **Status: FACHREGEL KORRIGIERT / WP-V9-ERWEITERUNG BLOCKED.**
+
+### HB-CONCEPT-V9-002 – Achtzehn nicht textgenau verfügbare R2-Originalideen
+- **Fehler/Blocker:** Für vier am 12.10. ergänzte Kategorien fehlen **18 exakte alte Titel**: `core:leaf:exp:c140`, `core:leaf:exp:c216`, `core:leaf:exp:gartenhaus-feuchte-20261012`, `core:leaf:exp:gartentor-20261012`.
+- **Ursache:** Im tatsächlich textgenau gelesenen alten Paket vom 10.10. nur 686 Ideen/137 Blätter; spätere R2-Stufe meldete 704/141, die 18 Titel sind aus den bisher zugänglichen Originaldateien nicht belegt. Sie **dürfen nicht rekonstruiert** werden.
+- **Gate:** 686 R2 + 432 R3/V8 = 1.118 von 1.136 Originaltiteln lexikalisch prüfbar. **Status: OPEN / ERSTER OPERATIVER BLOCKER.**
+
+### HB-CONCEPT-V9-003 – Fachliche Doppelungen / falsche Eltern
+- **Fehler:** V9 enthielt 57 Kandidatenblätter und 239 Ideen, davon 3 Kandidatengruppen mit **9 Blättern/27 Ideen** wegen möglicher Dublette oder falscher Elternzuordnung zurückgestellt.
+- **Gegenmaßnahme:** nicht still umbenennen/importieren; nur 48/57 Blätter mit 212 Ideen **weiter prüfen**, nicht freigeben. **Status: BLOCKED FÜR 9; WEITERE 48 IN REVIEW.**
+
+### HB-CONCEPT-V9-004 – Fehlende SEO-Owner-Abnahme
+- **Fehler:** 57 neue Blatttitel/239 neue Artikeltitel sind zwar textuell eindeutig; vollständige Alt-Themenabdeckung und eindeutige semantische SEO-Owner sind damit nicht bewiesen. Vier+ weitere auffällige lexikalische Nähen erfordern Prüfung.
+- **Nachweis:** Current nennt lokale 57/57-Gegenprüfung und 6/6 Negativfälle mit absichtlich falschen Daten, darunter 2-Ideen-Blatt, doppelte Titel und unberechtigtes WP-Write. Die im Arbeitsverzeichnis separat vorhandenen V9-Entwurfsdateien enthalten 31/93/285 Bestandsregister und 57/239 Vorschläge. Die V9-Zweitprüfung ist nicht gleich WP-/SEO-Release-PASS.
+- **Status: OWNER-FREIGABE OFFEN / RELEASE-GATE BLOCKED.** Keine kostenpflichtige SERP-Pflicht, keine automatischen neuen Provideraufrufe.
+
+### HB-CONCEPT-V9-005 – Fehlerquelle/Routinghistorie veraltet
+- **Fehler:** Ältere Teile dieser Fehlerakte, das zentrale Fehlerregister, der Konzept-Hobbyraum und die Projekt-Bürotür verwiesen noch auf R2/3–10 bzw. R3-live-offen.
+- **Korrektur:** V9-Nachholvermerk hier; zentraler Fehler-Wegweiser und rein navigierende Projekt-/Hobbyraumtexte auf Current-Routing und Vertragsautorität korrigiert. Nicht die historisch dokumentierten Tests umetikettieren.
+- **Status: NACHGEHOLT, Delta vom 15.10.2026.**
+
 # EIGENTUMSSCHUTZ – KONZEPT – FEHLERQUELLEN
 
 ## HB-CONCEPT-001 – Ein-Kind-/Zwei-Kind-Klickebenen
