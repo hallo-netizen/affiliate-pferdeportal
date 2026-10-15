@@ -1,6 +1,16 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## AKTUELLSTER FACHSTAND – V9.3 AUTO-/WOHNMOBIL-/BOOT-BRANDSCHUTZ – 15.10.2026
+**Einzige Current-Autorität bleibt genau diese Datei.** Geprüfter nicht importierbarer Konzeptdatensatz: `V9_3_BRAND_AUTO_BOOTE_54_KATEGORIEN_242_IDEEN_NICHT_IMPORTIEREN_20261015.json`.
+
+- **Nutzerfrage Brand Auto, Wohnmobil, Boot:** Im bestätigten R3/V8-Baum **Wohnmobilbrand bereits abgedeckt** unter `Feuer & Gase → Camping`: `Rauch, CO & Gas beim Camping`, `Camping-Akkus & Ladegeräte`, `Gasflaschen & Kocher im Camper`, `Löschmittel im Freizeitfahrzeug`, `Brandnotfälle auf Campingplätzen`, `Notausstiege im Wohnwagen`, `Gasinstallation im Freizeitfahrzeug` und weitere. Keine neue Camper-Kategorie anlegen. Dagegen **kein ausgewiesener eigenständiger Auto-/Oldtimerbrand- oder Bootsbrand-Owner** unter Feuer & Gase; R2 `Garage & private Werkstatt` ist kein vollständiger PKW-/Boot-Owner.
+- **V9.3 Ergänzung rein im Konzept:** Genau ein neuer Unterbereich unter dem **existierenden** `Feuer & Gase → Rauch & Brand` (Parent-ID `core:area:a61eee15af3b`): `Brände an Privatfahrzeugen & Freizeitbooten`. **Sechs** eindeutige Blätter: `PKW- & Oldtimerbrände`, `Elektroauto & Hochvoltbatteriebrand`, `Bootsmotor & Kraftstoffbrand`, `Bordgas & Bootsküche`, `Bordelektrik & Bootsakkus`, `Brandwarnung & Flucht auf Freizeitbooten`. Je **fünf** unterscheidbare redaktionelle Themen = **30 Ideen**. Die vormals zurückgestellte Gruppe `Brandschutz auf Freizeitbooten` unter falscher `Camping`-Elternkategorie bleibt zurückgestellt; keine doppelte Übernahme.
+- **Gesamter Konzeptstand V9.3:** 3 vorgeschlagene Fachbereiche, 14 vorgeschlagene Unterbereiche, 54 vorgeschlagene Endkategorien mit 242 Ideen; 9 weitere Blätter / 27 Ideen weiterhin zurückgestellt. **11/11 lokale Zusatzprüfungen PASS** (Kind-/Artikel-Mindestzahl, eindeutige Namen/Titel, Abgleich gegen aus R3/V8-Audit belegte Alt-Titel, richtige bestehende Parent-ID, bestehende Wohnmobil-Owner nicht erneut angelegt). Ein bloßer Titelnachweis belegt **keine** vollständige semantische SEO-Freigabe.
+- **Grenze:** Die bestehenden 6 Welten / 31 Bereiche / 93 Unterbereiche / 285 CORE-Blätter und 546/546 WordPress-Ziele sind **unverändert**, letzter nachgewiesener Live-Readback **13.10.2026**. V9.3 weder live geprüft noch importiert; fehlende sechs echte R2-Originaltitel, letzte Owner-Kollisionen, kontrollierter Delta-Preflight/URLs/Artikel/SEO/Redirect und WordPress-Readback offen. Aktuelles Plugin-Original `1.14.8.19` ist nicht als installierbarer, vollständig testbarer Quellstand verfügbar. **Kein Installations-Download.**
+- **EXAKT EINE NEXT ACTION:** Die sechs weiterhin fehlenden R2-Originaltitel read-only aus dem zentralen Kategorien-Workflow nachweisen und damit alle 54 V9.3-Kandidaten gegen vorhandene Artikel-Owner endgültig abgleichen; anschließend geprüftes, nichtdestruktives Delta im **bestehenden** Kategorien-Workflow testen. Nicht freigeben oder installieren, bevor Live-/Regressionsnachweise vorhanden sind.
+
+
 ## HÖCHSTER AKTUELLER FACHSTAND – V9.2 – 15.10.2026
 **Einzige aktuelle Fachautorität: diese CURRENT_STATE.md.** Der neue zentrale strukturierte Arbeitsnachweis ist `V9_2_48_KATEGORIEN_212_IDEEN_REDAKTIONELL_NICHT_IMPORTIEREN_20261015.json`. Diese JSON ist **kein WordPress-Import** und kein Plugin, sondern ein redaktioneller Datensatz.
 
@@ -25,7 +35,7 @@
 
 
 STAND: 2026-10-15
-STATUS: **V9.2 – 48 KATEGORIEN / 212 IDEEN NUR FACHENTWURF; 9 GESPERRT; 6 R2-ORIGINALTITEL FEHLEN; 19 TRANSFERS HISTORISCH NACHGEWIESEN; 16/16 DATENPRÜFUNGEN PASS; RELEASE BLOCKED; WORDPRESS UNVERÄNDERT**
+STATUS: **V9.3 – BRAND AUTO/BOOT FACHLICH ERGÄNZT; 54 KATEGORIEN / 242 IDEEN NUR KONZEPT; WOHNMOBIL-BRAND BESTAND ERHALTEN; 9 KATEGORIEN GESPERRT; 6 R2-ORIGINALTITEL FEHLEN; WP UNVERÄNDERT; RELEASE BLOCKED**
 
 ## AKTUELL – V9-FACHENTWURF / ZWEITPRÜFUNG 15.10.2026, NACH WIEDERGEFUNDENEM ARBEITSSTAND
 **Operative Wahrheit:** Der lokale V9-Vorschlagsentwurf war bereits weiter als die vorige Current-Fassung. Die 546 tatsächlichen Live-Stand-IDs, Namen, Slugs, Eltern entsprechen 546/546 dem archivierten R3/V8-WordPress-Readback vom 13.10.2026. Im lokalen V9-Einzelaudit sind alle **31/31 Bereiche und 93/93 Unterbereiche mit echten Original-IDs/Namen/Kindern** aufgelistet; **285/285 CORE-Blätter** mit Elternbezug enthalten. Das ist **strukturierte Bestands- und redaktionelle ERSTSICHTUNG**, keine umfassende individuelle semantische SEO-Abnahme jedes der 285 bestehenden Blätter.
