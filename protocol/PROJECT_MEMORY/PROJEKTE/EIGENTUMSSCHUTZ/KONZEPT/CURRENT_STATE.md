@@ -4,6 +4,9 @@
 STAND: 2026-10-13
 STATUS: **LIVE R3/V8-STRUKTUR-SYNC COMPLETE – VOLLSTÄNDIGES WORDPRESS-POST-SYNC-READBACK 546/546 PASS – KEIN WEITERER STRUKTUR-SYNC – KEINE SEO-RECHERCHE**
 
+## AKTUALISIERTE TEXTREGEL-ENTSCHEIDUNG 15.10.2026 – 409 UNTERGEORDNETE KATEGORIEN
+Nach neuer expliziter Nutzeranweisung ist die Textausgabe der untergeordneten 31 Bereiche, 93 Unterbereiche und 285 Blattkategorien **oben unter H1** entschieden. 409 eigene kategoriespezifische Texte wurden nach den tatsächlich geprüften Text-only-Regeln des PA-Templates 1.50.560 in das **einzige** Designplugin 0.1.18 als read-only Datensatz `data/category-intros.json` eingebunden, manueller WordPress-Kategorietext hat Vorrang. Die sechs Hauptwelten behalten ausschließlich ihre langen unteren Editorialtexte. `KATEGORIENTEXT_REGELN.md` V2.2 ist die zuständige FACHREGEL. Keine Kategorie-/WP-Strukturänderung, keine Copy/Paste von Pferde-Design, keine Fach-SEO-Endfreigabe; WP-Liveprüfung steht aus.
+
 ## Text-Designentscheidung des Nutzers vom 14.10.2026, nach 19:31 – VERBINDLICH
 **Nur die sechs Hauptschutzwelten werden zunächst umgesetzt.** Deren ausführliche Informationsabschnitte stehen unten; redaktioneller Editorial-Stil mit zwei lokal eingebundenen thematisch passenden Bildern, mindestens einer Liste und 2–3 dynamischen internen Links auf aktuelle Kategorieziele mit **exakt vollständigen WP-Kategorienamen**. **Keine FAQ-Module**, da spätere FAQ-Beiträge nicht geplant/fachlich entschieden sind. Das optische Grundkonzept wurde vom Nutzer positiv beurteilt.
 **Für 31 Bereiche + 93 Unterbereiche + 285 Endkategorien ist Textgestaltung/Platzierung ausdrücklich NOCH NICHT ENTSCHIEDEN.** Frühere V2-Ideen zur pauschalen oberen Inhaltsfläche sind Vorschläge, keine Freigabe. Bestehende Kategorien und kurze neutrale Einführungstexte nicht per Massenoperation verändern.
