@@ -1,0 +1,267 @@
+{
+  "schema": "HB-V9.8-SELECTIVE-NEW-NICHE-SUBAREAS-HARDLOCK",
+  "date": "2026-10-15",
+  "release_status": "CONCEPT_ONLY_NO_IMPORT_NO_WP_WRITE",
+  "hard_rule": "DO NOT rename, relabel, move, merge, re-slug, remove or rewrite any existing WordPress category, node_id, category owner or linked article. Only new conceptual leaf/category additions plus two reparented unpublished drafts.",
+  "baseline": {
+    "core_existing_unchanged": {
+      "worlds": 6,
+      "areas": 31,
+      "subareas": 93,
+      "leaves": 285
+    },
+    "wp_readback": "546/546 PASS from 2026-10-13, no new live access",
+    "plugin_current_version_historic": "1.14.8.19; no current source ZIP",
+    "prior_V9_6": {
+      "leaves": 67,
+      "ideas": 294,
+      "held": 6
+    },
+    "V9_7_pool_if_approved": {
+      "leaves": 3,
+      "ideas": 15,
+      "held_promotions": 1
+    }
+  },
+  "planned_if_all_previous_and_current_approved": {
+    "leaf_candidates": 81,
+    "article_ideas": 364,
+    "remaining_parent_conflicts": 3,
+    "existing_WP_leaves_renamed": 0
+  },
+  "delta": {
+    "groups": [
+      {
+        "world": "Einbruch & Diebstahl",
+        "area": "Freizeit & Fahrzeuge",
+        "parent_id": "core:area:19b467511ad1",
+        "subarea": "Fahrzeugteile & Zubehördiebstahl",
+        "decision": "ADD_NEW_SUBAREA_ONLY",
+        "leaves": [
+          {
+            "name": "Katalysator- & Abgasteilediebstahl",
+            "ideas": [
+              "Katalysatordiebstahl bei älteren Privatwagen: besonders gefährdete Einbaulagen erkennen",
+              "Parkplatzwahl gegen Katalysatordiebstahl: Garage, Beleuchtung und Sichtbarkeit abwägen",
+              "Neigungssensor zur Warnung beim Anheben des Privatwagens beurteilen",
+              "Fehlender Katalysator: Warnzeichen und sichere Schritte vor dem Werkstattbesuch",
+              "Katalysatordiebstahl der Kaskoversicherung melden: Nachweise und Reparaturkosten"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Theft of exhaust components only; general complete-car theft remains Oldtimer & Privatwagen"
+          },
+          {
+            "name": "Felgen & Kompletträder gegen Diebstahl",
+            "ideas": [
+              "Felgenschlösser für private Autos: Sicherungsschrauben und Radmuttern vergleichen",
+              "Montierte Kompletträder auf offenem Privatstellplatz gegen Diebstahl absichern",
+              "Gelagerte Sommer- und Winterräder in einer privaten Garage gegen Entwendung schützen",
+              "Manipulationsspuren an Radschrauben nach versuchtem Raddiebstahl fachlich prüfen lassen",
+              "Gestohlene Felgen oder Reifen nachweisen: Fotos, Belege und Versicherungsmeldung vorbereiten"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Car wheels/rims only; generic garage property and bicycle theft remain existing owners"
+          },
+          {
+            "name": "Kennzeichendiebstahl am Privatwagen",
+            "ideas": [
+              "Kennzeichendiebstahl am geparkten Auto erkennen und dokumentieren",
+              "Diebstahlhemmende Kennzeichenhalter und Befestigungen vergleichen",
+              "Kennzeichen verloren oder gestohlen: Meldung und Ersatz auseinanderhalten",
+              "Verdacht auf Missbrauch gestohlener Kennzeichen: Belege für die Behörden sichern",
+              "Kennzeichen an länger abgestellten Saisonfahrzeugen zusätzlich sichern"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Physical license-plate theft only, not full vehicle theft or legal vehicle registration general guides"
+          }
+        ]
+      },
+      {
+        "world": "Wetter & Naturgefahren",
+        "area": "Freizeit & Unwetter",
+        "parent_id": "core:area:c7f34e6a2260",
+        "subarea": "Geparkte Fahrzeuge bei Unwetter",
+        "decision": "ADD_NEW_SUBAREA_ONLY",
+        "leaves": [
+          {
+            "name": "Privatwagen & Oldtimer bei Hagel",
+            "ideas": [
+              "Hagelschutzhüllen für abgestellte Privatwagen vergleichen",
+              "Oldtimer bei Hagelwarnung: Garage, Carport und Parkhaus abwägen",
+              "Nach Hagelschlag Lack, Glas und Karosserie des Privatwagens fachlich prüfen lassen",
+              "Hagelschutzmatten am geparkten Auto sturmfest und materialschonend befestigen",
+              "Hagelschaden am abgestellten Auto für die Kaskoversicherung dokumentieren"
+            ],
+            "origin": "PROMOTE_EXISTING_V9_6_HOLD_REHOME",
+            "seo_owner_scope": "Parked cars only; camper hail and boxes/transport remain existing owners"
+          },
+          {
+            "name": "Überflutete Privatfahrzeuge",
+            "ideas": [
+              "Parkplatz am tief liegenden Straßenrand vor Starkregen auf Überflutungsrisiko prüfen",
+              "Überfluteter Privatwagen: Hinweise vor einer erneuten Inbetriebnahme beachten",
+              "Wassereintritt in Fußraum und Fahrzeugelektrik nach Hochwasser fachlich prüfen lassen",
+              "Elektroauto nach Überflutung nur nach qualifizierter Fachprüfung wieder nutzen",
+              "Starkregen- und Hochwasserschaden am abgestellten Pkw für die Kasko dokumentieren"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Flood impact on stationary private cars, not garage building drainage or flood-house protection"
+          },
+          {
+            "name": "Sturm & Astbruch am parkenden Auto",
+            "ideas": [
+              "Parkplätze unter alten Bäumen auf Sturm- und Astbruchrisiken beurteilen",
+              "Abgestelltes Auto nahe Bauzäunen oder Gerüsten vor Sturmgefahren schützen",
+              "Astbruchschaden an einem geparkten Fahrzeug sicher dokumentieren",
+              "Fahrzeugabdeckung bei Sturm: Materialschäden und lose Befestigungen vermeiden",
+              "Nach einem Sturm mögliche Schäden an Scheiben, Dach und Karosserie des Autos erfassen"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Vehicle damage while parked; existing tree safety and storm-garden general owner unchanged"
+          }
+        ]
+      },
+      {
+        "world": "Feuer & Gase",
+        "area": "Rauch & Brand",
+        "parent_id": "core:area:a61eee15af3b",
+        "subarea": "Äußere Brandeinwirkung auf Privatobjekte",
+        "decision": "ADD_NEW_SUBAREA_ONLY",
+        "leaves": [
+          {
+            "name": "Vegetationsbrand am Grundstück",
+            "ideas": [
+              "Vegetationsbrand am privaten Grundstück: gefährliche Bewuchs- und Lagerzonen erkennen",
+              "Trockene Hecken und Grasflächen nahe der Hauswand auf Brandlasten prüfen",
+              "Ferienhaus am Waldrand auf externe Brandwarnungen und Schutzmaßnahmen vorbereiten",
+              "Flucht- und Sachschutzplan für private Grundstücke in Waldnähe erstellen",
+              "Nach äußerem Funkenflug Grundstück und Nebengebäude nur nach sicherer Freigabe prüfen"
+            ],
+            "origin": "PROMOTE_EXISTING_V9_6_HOLD_REHOME",
+            "seo_owner_scope": "External wildland/grassland fires, not self-made grill or garden fire and not mere summer heat"
+          },
+          {
+            "name": "Brandüberschlag aus Nachbargebäuden",
+            "ideas": [
+              "Brandüberschlag vom Nachbarhaus auf private Fassaden und Dachvorsprünge beurteilen lassen",
+              "Brennbare Anbauten an privaten Grundstücksgrenzen bei Nachbarbrandrisiko überprüfen",
+              "Raucheindringen durch Fenster und Lüftungsöffnungen nach Nachbarbrand fachlich bewerten",
+              "Gemeinsame Grenzwände nach Brand im Nachbargebäude auf Folgeschäden untersuchen lassen",
+              "Brandschäden am eigenen Haus durch ein Feuer im Nachbarobjekt nachvollziehbar dokumentieren"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Adjacent-building fire exposure, not indoor cooking or private chimney fire"
+          },
+          {
+            "name": "Funkenflug an Carports & Gartenhäusern",
+            "ideas": [
+              "Funkenflug auf einen privaten Holzcarport: brennbare Dach- und Lagerteile prüfen lassen",
+              "Gartenhaus am Rand trockener Vegetation auf äußere Glutbelastung vorbereiten",
+              "Holzlager und Brennstoffvorräte neben privaten Nebengebäuden sicherer platzieren",
+              "Gartenhausfenster und Lüftungsöffnungen gegen äußeren Brandrauch fachlich bewerten",
+              "Nach Gluteintrag Schuppen oder Carport nur nach sicherer Freigabe kontrollieren"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Small outbuildings as a specific exposed property, not homeowner-created fire or general main-house wildfire guidance"
+          }
+        ]
+      },
+      {
+        "world": "Einbruch & Diebstahl",
+        "area": "Freizeit & Fahrzeuge",
+        "parent_id": "core:subarea:c84f412718dd7c5b",
+        "subarea": "Räder & Privatfahrzeuge",
+        "decision": "ADD_LEAF_TO_EXISTING_SUBAREA_NO_RENAME",
+        "leaves": [
+          {
+            "name": "E-Scooter gegen Diebstahl",
+            "ideas": [
+              "E-Scooter-Schlösser für kurze Standzeiten am privaten Stellplatz vergleichen",
+              "E-Scooter in Hausflur und Gemeinschaftsraum diebstahlhemmend unterbringen",
+              "GPS-Ortung für einen privaten E-Scooter auf Grenzen und Kosten prüfen",
+              "E-Scooter-Akku und abnehmbares Zubehör vor Diebstahl sichern",
+              "E-Scooter-Diebstahl dokumentieren: Seriennummer, Eigentumsnachweise und Versicherung"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Private motor scooter theft, not ordinary E-bike protection or battery fire"
+          },
+          {
+            "name": "Elektromobile & Seniorenscooter sichern",
+            "ideas": [
+              "Elektrisches Seniorenmobil auf einem privaten Stellplatz gegen Diebstahl sichern",
+              "Schlösser, Wegfahrsperren und Schlüsselkontrolle bei einem Seniorenscooter vergleichen",
+              "Abnehmbare Akkus und Bediengeräte eines Elektromobils sicher verwahren",
+              "Ortung oder Alarmierung für länger abgestellte private Elektromobile beurteilen",
+              "Diebstahlschaden am Seniorenmobil für Anbieter und Versicherung dokumentieren"
+            ],
+            "origin": "NEW",
+            "seo_owner_scope": "Small privately owned mobility scooter assets, not medical treatment and not motorcycles"
+          }
+        ]
+      }
+    ],
+    "leaf_count": 11,
+    "article_ideas_count": 55,
+    "origin_held_reparented": 2,
+    "entirely_new_leaf_count": 9,
+    "new_subareas": 3,
+    "leaves_under_existing_subarea": 2
+  },
+  "owner_boundaries": [
+    "Don't create duplicate 'Wallbox & Ladekabel' theft advice: old source Diebstahl an Außentechnik owns that question.",
+    "Vehicle theft protection in Oldtimer & Privatwagen remains existing; new parts-only owners do not take whole-car theft.",
+    "Sturm & Hagel beim Camping owns camper hail; new parked-car hail is ordinary private car/oldtimer only.",
+    "Schäden nach Unwetter owns general house and garden damage; new parked vehicle topics are vehicle-specific.",
+    "Feuer & Gase existing Offene Feuerstellen im Garten owns self-initiated garden fires; new external fire grouping only incoming flames/embers.",
+    "No prior user-defined or already-installed category renamed or moved, including the existing R2 node core:leaf:116."
+  ],
+  "research_sources": [
+    {
+      "topic": "Katalysator theft",
+      "url": "https://www.adac.de/news/katalysator-diebstahl/",
+      "source_date": "2025-02-26"
+    },
+    {
+      "topic": "Vehicle theft and wheel locks",
+      "url": "https://www.polizei-beratung.de/themen-und-tipps/diebstahl/sicherheit-rund-ums-fahrzeug/"
+    },
+    {
+      "topic": "2025 vehicle natural hazards",
+      "url": "https://www.gdv.de/gdv/medien/medieninformationen/kfz-versicherung-deutlich-weniger-schaeden-durch-naturgefahren-im-jahr-2025-198376",
+      "source_date": "2026-04-13"
+    },
+    {
+      "topic": "Extreme weather vehicle checklist",
+      "url": "https://www.adac.de/produkte/versicherungen/autoversicherung/extremwetter/"
+    },
+    {
+      "topic": "Wildfire ember impact",
+      "url": "https://www.zdfheute.de/panorama/waldbrand-eifel-brandexperte-pronto-100.html",
+      "source_date": "2026-08-14"
+    }
+  ],
+  "tests": {
+    "eleven_leaves": true,
+    "fiftyfive_article_ideas": true,
+    "groups_four": true,
+    "three_new_subareas": true,
+    "new_subareas_three_children": true,
+    "all_leaves_five_ideas": true,
+    "all_new_names_unique": true,
+    "all_new_titles_unique": true,
+    "all_new_names_not_existing_candidate": true,
+    "all_promotions_from_held": true,
+    "no_new_title_overlap_current_v6": true,
+    "no_new_title_overlap_v7": true,
+    "no_exact_original_R3_R2_crossmatch": true,
+    "no_extra_wallbox_cable_duplication": true,
+    "baseline_unchanged": true
+  },
+  "limits": [
+    "No full old 704 R2 exact source proof: six original titles still unknown",
+    "Title uniqueness and parent logic tests do not certify full Google intent or SEO ownership",
+    "Elektromobile and E-Scooter risk/affiliation is a topical candidate, not proven traffic demand",
+    "No technical plugin delta, dry-run, rollback or WP live readback from this concept"
+  ],
+  "next_action": "Compare new 11 leaves with original source text and 70 previous proposals, keep two promotions only within concept. Recover six missing original titles from actual category workflow and only central categories bureau to decide technical import."
+}
