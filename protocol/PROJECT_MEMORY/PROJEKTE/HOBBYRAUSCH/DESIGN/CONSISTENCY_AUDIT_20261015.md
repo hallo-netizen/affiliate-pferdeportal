@@ -101,3 +101,27 @@ Offen bleibt ausschließlich:
 3. danach 30/30 Motiv-PASS;
 4. erst dann einmaliger reiner 60-Dateien-Image-only-Kandidat;
 5. danach globales Release-Gate und Live-Readback.
+
+
+## Vollständiger 30er-Overlay-Volltest
+Zusätzlich wurde der komplette 30-Kategorien-/60-Bilddateien-Pfad gegen die echte 1.50.650-Basis mit synthetischen Testbildern durchlaufen.
+
+Erster Lauf:
+- exakt ein Zielpfadfehler gefunden: Münzen-&-Geld-Preview;
+- Ursache: Hero historisch `munzen-`, Preview-Renderer-Alias `muenzen-`;
+- als AF-041 dokumentiert und Manifest korrigiert.
+
+Zweiter Lauf:
+- 30/30 Kategorien;
+- 60/60 Zielpfade vorhanden;
+- exakt 60 Bilddateien geändert;
+- 0 Dateien hinzugefügt;
+- 0 Dateien entfernt;
+- 0 unerwartete Änderungen;
+- Mapping byte-identisch;
+- ZIP-Roundtrip PASS.
+
+Die synthetische Test-ZIP wurde nach dem technischen Nachweis lokal gelöscht und ist kein auslieferbares Artefakt.
+
+## Bildgenerator-Fehlpfad
+Zwei fachfremde Plugin-/Statusgrafiken wurden als AF-040 hart quarantänisiert und zählen als Quelle 0. Sie sind weder im Manifest noch im Buildpfad gebunden.
