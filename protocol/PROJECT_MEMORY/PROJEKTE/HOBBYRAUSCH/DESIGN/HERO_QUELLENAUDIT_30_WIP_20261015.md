@@ -60,7 +60,7 @@ Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müs
 
 ## Bilanz
 - 6 Kategorien: genau ein belastbarer neuer Einzelkandidat vorhanden.
-- 1 Kategorie: Miniaturen & Szenen – zwei belastbare Einzelkandidaten, Auswahl noch offen.
+- 1 Kategorie: Miniaturen & Szenen – zwei belastbare Einzelkandidaten; Kandidat B ist für den technischen WIP-Stage festgelegt, finale Live-Freigabe bleibt offen.
 - 23 Kategorien: FEHLEND als eigenständige Einzelquelle.
 - Die vorhandenen Sammel-/Collage-Vorschauen bleiben Sicht-/Konzeptmaterial; 0 davon zählt als eigener Hero.
 
