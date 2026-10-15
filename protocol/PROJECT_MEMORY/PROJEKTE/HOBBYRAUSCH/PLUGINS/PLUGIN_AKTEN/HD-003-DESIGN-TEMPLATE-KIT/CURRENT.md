@@ -3,26 +3,39 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **TEMPLATE-KIT 1.50.650 BLEIBT AKTIV UND UNANGETASTET / HERO-HELPER 1.50.663 LIVE VISUAL FAIL + VERWORFEN / KEIN NACHFOLGER FREIGEGEBEN**
+STATUS: **1.50.650 BLEIBT AKTIVER GRUNDSTAND / 1.50.651 UND 1.50.653–1.50.663 NICHT VERWENDEN / KEIN PLUGIN-NACHFOLGER FREIGEGEBEN**
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
 
+Live bestätigt und eingefroren:
+- Textinhalt;
+- Grundaufteilung.
+
+Nicht als Bild-PASS bestätigt:
+- Hero-/Hub2-Bildbestand.
+
 ## Nicht verwenden
-1.50.651, Repair Installer 1.50.657, Recovery 1.50.658 sowie Hero-Helper 1.50.659 bis einschließlich **1.50.663**.
+- 1.50.651;
+- 1.50.653–1.50.656;
+- Restore-/Repair-/Recovery-Versuche 1.50.650-Restore, 1.50.657, 1.50.658;
+- Hero-Helfer 1.50.659–1.50.663.
 
-## Warum 1.50.663 verworfen ist
-Der technische Dateiaustausch funktionierte, aber der Inhalt war visuell falsch:
-- wiederverwendete Grundszenen;
-- verschiedene Crops derselben Quelle;
-- Bild-in-Bild/Collagen;
-- falsche Kategorienmotive;
-- Doppel-/Dreifachmotive.
+## Aktuelle Pluginlage
+Seit 1.50.663 wurde **kein neues Plugin** gebaut oder freigegeben.
+Die aktuelle Arbeit ist ausschließlich **Bildquellen-WIP** im Designbereich und besitzt noch keine Pluginversion.
 
-Die technische 14/14-Prüfung von 1.50.663 ist daher **kein Bildqualitäts-PASS** und darf nicht mehr als Freigabegrund verwendet werden.
+Keine Änderung an:
+- Template-Kit-PHP;
+- Routing;
+- Templates;
+- CSS;
+- Mapping;
+- Kartenlogik;
+- Architektur.
 
-## Freeze
-Keine Änderungen an Template-Kit-PHP, Mapping, Routing, Templates, CSS, Karten oder Architektur.
+## Artefakt
+Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter Kandidat existiert.
 
-## NEXT ACTION
-**Neue eigenständige Bildquellen für den 30er-Hard-Reject-Satz auswählen und visuell einzeln prüfen. Kein neues ZIP vor vollständigem Quellen-/Motiv-/Duplikatcheck.**
+## EXAKT EINE NEXT ACTION
+**Auf die Design-Current warten: erst nach abgeschlossenem 30/30-Quellenaudit der Heroes darf ein reiner Bilddatei-Kandidat gebaut und vollständig positiv/negativ/regressiv getestet werden.**
