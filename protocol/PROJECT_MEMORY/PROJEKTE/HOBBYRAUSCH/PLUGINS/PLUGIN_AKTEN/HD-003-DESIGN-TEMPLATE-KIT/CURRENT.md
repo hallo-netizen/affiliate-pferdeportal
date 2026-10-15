@@ -38,3 +38,30 @@ Aktiven Vorgänger in-place überschrieben, Activation Hook nicht ausgelöst, ad
 
 ## NEXT ACTION
 **1.50.663 überinstallieren; anschließend direkt betroffene Frontend-Seite prüfen.**
+
+
+## Nachprüfung 2026-10-15 – 1.50.663 Positiv/Negativ
+Nach Nutzerforderung vollständig nachgeholt: **14/14 Tests PASS**.
+
+Positiv:
+- echter Frontend-In-Place-Pfad ohne Activation Hook und ohne admin_init: exakt 30 erwartete Hero-Dateien geändert;
+- 35 übrige Hero-Dateien unverändert;
+- Mapping unverändert;
+- 30/30 Zielbilder identisch zum Payload;
+- Wiederholungsaufruf erzeugt keine zusätzliche Änderung.
+
+Negativ – jeweils sauberer ABORT ohne weitere Template-Kit-Änderung:
+- Template-Kit-Hauptdatei fehlt;
+- falsche Template-Kit-Version;
+- Mapping nicht exakt 65;
+- benötigter Hero-Slug fehlt;
+- Pfad-Traversal im Mapping;
+- doppelte Hero-Zieldatei;
+- Payload nur 29 Dateien;
+- falsche Payload-Dimension;
+- gemappte Zieldatei fehlt.
+
+Zusätzlich PASS:
+- ZIP-Integrität;
+- PHP-Syntax;
+- Pluginordner + Main-Dateipfad identisch zu 1.50.660 für echte Überinstallation.
