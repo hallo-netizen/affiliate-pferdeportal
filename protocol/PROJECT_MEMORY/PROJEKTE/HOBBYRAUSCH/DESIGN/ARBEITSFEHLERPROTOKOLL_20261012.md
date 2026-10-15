@@ -643,3 +643,34 @@ Vor jedem nächsten Hero-Release muss für jede Kategorie eine Quellen-ID gefüh
 4. kein Bild-in-Bild/Compositing verwendet wird;
 5. Hero als breite Szene mit erkennbarem Hauptmotiv funktioniert;
 6. menschlicher Sichtcheck vor ZIP-Bau erfolgt.
+
+
+## AF-036 – Nach erfolgreichem Einzelmotiv-Start wieder in Sammel-/Collage-Generierung abgerutscht
+
+FEHLER:
+Nach dem vollständigen Verwerfen von 1.50.663 wurde korrekt mit neuen eigenständigen Einzelmotiven begonnen. Der Nutzer bewertete diesen Ansatz ausdrücklich positiv. Danach wurden jedoch wieder Sammelbilder/Collagen mit mehreren Themen erzeugt.
+
+FOLGE:
+- Themen wurden erneut mehrfach besetzt;
+- verschiedene Kategorien waren nicht mehr sauber 1:1 einer Quelle zuordenbar;
+- mindestens Mechanik & Uhren tauchte erneut mehrfach auf;
+- die bereits festgelegte Regel „eine Kategorie = eine eigenständige Quelle“ wurde dadurch wieder verletzt.
+
+BELASTBARER POSITIVER ZWISCHENSTAND:
+Die neuen Einzelmotiv-Richtungen für Astronomie, Papierkunst, Miniaturen & Szenen, Textilgestaltung, Malen & Zeichnen und Schrift & Lettering wurden vom Nutzer positiv beurteilt.
+Dies ist **kein Release-/Live-PASS**. Bei Miniaturen & Szenen existieren mehrere Kandidaten; kein einzelner ist final festgelegt.
+
+KORREKTUR:
+- Sammel-/Collage-/Montageausgaben werden nicht als fertige Heroes gewertet;
+- vor jeder weiteren Generierung wird der vorhandene Bestand auf 30 Kategorien auditierbar gemacht;
+- pro Kategorie exakt eine Quelle oder FEHLEND;
+- neue Generierung nur für tatsächlich fehlende Kategorien;
+- Pluginbau erst nach abgeschlossenem 30/30-Quellenaudit.
+
+VERMEIDUNGSREGEL:
+Bildproduktion und Pluginbau strikt trennen:
+1. Quellen auswählen/generieren;
+2. 1:1-Zuordnung;
+3. semantischer/visueller Audit;
+4. Duplikat-/Quellenidentitätscheck;
+5. erst danach Assets ableiten und einmalig paketieren.
