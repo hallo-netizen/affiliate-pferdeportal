@@ -40,6 +40,8 @@ Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelqu
 
 Zusätzlich liegt mit `HERO_BUILD_MANIFEST_30_WIP_20261015.json` eine geprüfte maschinenlesbare 30er-Bindung vor: 30 eindeutige Kategorien, 30 eindeutige Hero-Zielpfade, 30 eindeutige Preview-Zielpfade, Status 7+13+6+4, Release weiterhin gesperrt. Für die 13 Kategorien mit exakt gebundener neuer Nach-1.50.663-Referenz existiert `HERO_GENERATION_QUEUE_13_WIP_20261015.json`; jede Position ist an einen verifizierten V2-Referenzcrop sowie eindeutige Hero-/Preview-Zielpfade gebunden. Die übrigen 10 Kategorien bleiben bewusst ohne erfundene Motivvorgabe.
 
+Vor jedem finalen Build läuft zusätzlich `tools/hobby_release_source_preflight.py`. Aktuell steht das Source-Gate korrekt auf **FAIL: 7/30 ready_source, 23/30 noch offen**. Siehe `RELEASE_SOURCE_PREFLIGHT_20261015.md`.
+
 ## Artefakt
 Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter 30/30-Kandidat existiert.
 
