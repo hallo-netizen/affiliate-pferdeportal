@@ -21,7 +21,7 @@ Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müs
 
 | Kategorie | Status | belastbare neue Einzelquelle |
 |---|---|---|
-| Miniaturen & Szenen | AUSWAHL OFFEN | 2 eigenständige Einzelkandidaten vorhanden; keiner final festgelegt |
+| Miniaturen & Szenen | WIP-AUSWAHL B | 2 eigenständige Einzelkandidaten vorhanden; Kandidat B im technischen WIP-Asset-Stage verwendet, kein Live-PASS |
 | Papierkunst | KANDIDAT VORHANDEN | `a_cozy_sunlit_craft_studio_workspace_scene_wide.png` |
 | Textilgestaltung | KANDIDAT VORHANDEN | `a_wide_well_lit_craft_studio_sewing_workspace_sce.png` |
 | Malen & Zeichnen | KANDIDAT VORHANDEN | `a_wide_cozy_sunlit_artist_studio_interior_worksp.png` |
@@ -70,6 +70,9 @@ Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müs
 Zusätzlich im erzeugten Bildbestand verifiziert:
 - Guss & Formen: `Detailreiche Gießwerkstatt am Arbeitstisch.png` – eigenständiges Einzelbild; noch kein Release-/Live-PASS.
 
+## Technischer WIP-Asset-Stage
+`HERO_ASSET_STAGE_7_WIP_20261015.md` dokumentiert für 7 vorhandene neue Einzelquellen bereits abgeleitete und geprüfte Hero-/Preview-Dateien (600×220 / 200×107). Miniaturen nutzt dort Kandidat B. Kein Release-/Live-PASS.
+
 ## Nächster Arbeitsschritt
-Die Vorschauphase nicht wiederholen. Nur die 23 noch FEHLENDEN eigenständigen Hero-Quellen als **echte Einzelmotive** aus den vorhandenen Vorschau-Richtungen fertigstellen, blockweise visuell prüfen und danach Miniaturen A/B final auswählen.
+Die Vorschauphase nicht wiederholen. Die 13 bereits neu gebundenen Vorschau-Richtungen in echte eigenständige Einzelquellen überführen. Für die 10 aktuell nicht rekonstruierbaren Richtungen keine alten WIP-Bilder verwenden und nichts erfinden.
 Kein Plugin/ZIP vor vollständigem 30/30-Audit.
