@@ -206,7 +206,7 @@ Autoritative Arbeitsliste:
 
 Bilanz:
 - 6 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
-- Miniaturen & Szenen mit 2 Einzelkandidaten, Auswahl offen;
+- Miniaturen & Szenen mit 2 Einzelkandidaten; Kandidat B im technischen WIP-Stage festgelegt, finale Live-Freigabe offen;
 - 23 Kategorien FEHLEND als eigenständige Einzelquelle;
 - vorhandene Collagen/Montagen/Panels bleiben Vorschau-/Konzeptmaterial und zählen als Hero-Quelle 0.
 
