@@ -113,5 +113,13 @@
       "sha256": "de0724f0160f53022ea5575bdef34d84fee18507dbe50f600568cc4dea4f7c91",
       "crop_file_id": "file_00000000d30481f5a4572e5129282791"
     }
-  ]
+  ],
+  "validation": {
+    "count": 13,
+    "unique_categories": 13,
+    "unique_crop_file_ids": 13,
+    "unique_sha256": 13,
+    "uploaded_bytes_re_materialized_and_hash_verified": true,
+    "no_release_source": true
+  }
 }
