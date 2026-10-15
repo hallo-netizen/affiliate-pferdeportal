@@ -53,6 +53,9 @@
     "noNameCollision": true,
     "originalPoolHoldPresent": true,
     "allNewTitlesUnique": true,
-    "combined70": true
+    "combined70": true,
+    "total_formula": "67 existing accepted + 1 repurposed held pool-leak + 2 genuinely new leaves = 70",
+    "original_294_ideas_plus_new_15": true,
+    "remaining_5_held": true
   }
 }
