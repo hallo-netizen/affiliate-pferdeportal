@@ -263,5 +263,41 @@
     "Elektromobile and E-Scooter risk/affiliation is a topical candidate, not proven traffic demand",
     "No technical plugin delta, dry-run, rollback or WP live readback from this concept"
   ],
-  "next_action": "Compare new 11 leaves with original source text and 70 previous proposals, keep two promotions only within concept. Recover six missing original titles from actual category workflow and only central categories bureau to decide technical import."
+  "next_action": "Compare new 11 leaves with original source text and 70 previous proposals, keep two promotions only within concept. Recover six missing original titles from actual category workflow and only central categories bureau to decide technical import.",
+  "final_quality_checks": {
+    "positive": true,
+    "negatives": [
+      {
+        "mutation": "two articles only",
+        "blocked": true
+      },
+      {
+        "mutation": "duplicate leaf name",
+        "blocked": true
+      },
+      {
+        "mutation": "duplicate article",
+        "blocked": true
+      },
+      {
+        "mutation": "only 2 leaves in added subarea",
+        "blocked": true
+      },
+      {
+        "mutation": "wrong parent ID",
+        "blocked": true
+      },
+      {
+        "mutation": "rename of existing WP category",
+        "blocked": true
+      },
+      {
+        "mutation": "approved for live write without proof",
+        "blocked": true
+      }
+    ],
+    "all_negative_blocked": true,
+    "original_686_specific_keyword_audit": "13 key hazard/object terms checked locally in original historical category-profile; no matching old title for Kat-/Felgen-/Kennzeichendiebstahl, Funkenflug, Brandüberschlag, E-Scooter or Elektromobile; old text does contain general Hagel/Hochwasser articles about DIFFERENT objects",
+    "word_similarity_qualification": "Manual owner distinction; not full completed 1136-title semantic audit or live WordPress QA"
+  }
 }
