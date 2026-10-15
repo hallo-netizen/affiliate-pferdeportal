@@ -73,3 +73,16 @@ Nur diese 4 Kategorien besitzen aktuell weder eine wiedergefundene neue Einzelqu
 - Für die 20 wiedergefundenen Kategorien exakt an den oben gebundenen **neuen** Bildrichtungen weiterarbeiten.
 - Für die 6 im Nachbarchat bestätigten, aber dateiseitig nicht erfolgreich erhaltenen Motive ausschließlich die dort festgelegte neue Produktionsrichtung verwenden; keine fehlerhaften Sammelbilder als Quelle deklarieren.
 - Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alte Quelle einsetzen und nichts erfinden.
+
+
+## Nachbarchat-Recovery der vier offenen Sammeln-Kategorien
+Die frühere/nachbarliche Unterhaltung wurde gezielt erneut auf **Alltagsobjekte, Naturfunde, Spielzeug & Spiele und Münzen & Geld** durchsucht.
+
+Belastbarer Befund:
+- kein späterer neuer Bildblock mit konkreten Motiven für diese vier Kategorien wurde gefunden;
+- nach dem bestätigten 8er-Block ist keine weitere neue Generierung für diese vier Kategorien belegt;
+- für **Naturfunde** und **Spielzeug & Spiele** sind lediglich die alten 1.50.663-Motive ausdrücklich als falsch/verworfen belegt;
+- deshalb bleibt für alle vier die neue Bildbindung **NICHT REKONSTRUIERBAR**.
+
+Konsequenz:
+Keine positive Motivvorgabe erfinden. Keine alte Bilddatei als Ersatz verwenden. Die vier bleiben blockiert, bis eine echte neue Richtung oder neue Einzelquelle vorhanden ist.
