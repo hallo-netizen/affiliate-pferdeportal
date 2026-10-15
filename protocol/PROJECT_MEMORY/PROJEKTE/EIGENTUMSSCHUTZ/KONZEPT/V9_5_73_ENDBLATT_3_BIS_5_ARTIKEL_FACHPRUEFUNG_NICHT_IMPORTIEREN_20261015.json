@@ -1431,5 +1431,37 @@
     }
   ],
   "semantic_gap_warning": "510/704 R2 original titles individually exposed by old cross-match output, not all 704; six specifically missing. Exact title checks do not prove SEO ownership or full article substance.",
-  "next_action": "Retrieve the six remaining exact old R2 article titles from authorized category workflow and confirm full old article owner inventory, then compare all 67 concept candidates and 6 held parent conflicts against extant content. No WP write and no plugin ZIP until source/delta/rollback/live tests."
+  "next_action": "Retrieve the six remaining exact old R2 article titles from authorized category workflow and confirm full old article owner inventory, then compare all 67 concept candidates and 6 held parent conflicts against extant content. No WP write and no plugin ZIP until source/delta/rollback/live tests.",
+  "qa_positive_negative": {
+    "positive": true,
+    "negative": [
+      {
+        "case": "Only two independently named article topics",
+        "rejected": true
+      },
+      {
+        "case": "Duplicated article intent title",
+        "rejected": true
+      },
+      {
+        "case": "Duplicate leaf category",
+        "rejected": true
+      },
+      {
+        "case": "Misassigned gate or intercom article added despite wrong parent",
+        "rejected": true
+      },
+      {
+        "case": "Release status falsely marked importable",
+        "rejected": true
+      }
+    ],
+    "all_rejected": true
+  },
+  "evidence_notes": [
+    "Primary current V9.3 and V9.4 textual sources preserved unmodified; this is a concept decision copy.",
+    "Public verification (2026): German Environmental Agency UBA documents Holzwurm (bohrmehl evidence) vs Hausbock (may not shed visible bohrmehl), and separate dry rot in damp buildings.",
+    "ADAC 2026 supports modern vehicle and high-voltage marten bite distinction.",
+    "30-day recent web news not necessary for static category topology; live WP not accessed"
+  ]
 }
