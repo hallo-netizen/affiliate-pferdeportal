@@ -208,6 +208,9 @@ Bilanz:
 - 6 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
 - Miniaturen & Szenen mit 2 Einzelkandidaten; Kandidat B im technischen WIP-Stage festgelegt, finale Live-Freigabe offen;
 - 23 Kategorien FEHLEND als eigenständige Einzelquelle;
+- davon 13 mit exakt wiedergefundener neuer Vorschau-Richtung/Referenz;
+- davon 6 mit belegter neuer Produktionsrichtung aus dem Nachbarchat-8er-Block, aber ohne korrekt geliefertes Einzelmotiv;
+- davon 4 ohne rekonstruierbare neue Vorschau-/Dateibindung;
 - vorhandene Collagen/Montagen/Panels bleiben Vorschau-/Konzeptmaterial und zählen als Hero-Quelle 0.
 
 REGEL:
@@ -218,4 +221,4 @@ REGEL:
 - nicht eindeutig zuordenbar = FEHLEND, nicht füllen.
 
 ERSTER BLOCKER:
-**Vorschauen nicht wiederholen. 23 Kategorien brauchen noch echte eigenständige Einzelmotive aus den vorhandenen Vorschau-Richtungen; danach Miniaturen A/B final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Vorschauen nicht wiederholen. Für 13 exakt gebundene neue Richtungen und 6 im Nachbarchat belegte neue Produktionsrichtungen fehlen weiterhin echte eigenständige Einzelquellen. Die 4 Kategorien Alltagsobjekte, Naturfunde, Spielzeug & Spiele und Münzen & Geld besitzen aktuell keine rekonstruierbare neue Vorschau-/Dateibindung. Kandidat B für Miniaturen bleibt WIP-Auswahl. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
