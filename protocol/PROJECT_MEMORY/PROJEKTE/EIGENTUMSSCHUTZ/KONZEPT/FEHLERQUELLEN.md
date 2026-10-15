@@ -1,3 +1,10 @@
+## V9.5 Audit-Nachtrag (15.10.2026)
+- Nach verschärfter Drei-bis-fünf-Artikel-Regel sind 67 von 73 neuen Vorschlägen konzeptionell weiter tragfähig; 6 wegen unpassender Elternkategorie zurückgestellt.
+- In 12 Kategorien wurden Überschriften für unterscheidbare Sachfragen korrigiert.
+- Positivprüfung bestanden; fünf absichtlich fehlerhafte Eingaben wurden im lokalen Datencheck korrekt abgewiesen.
+- Ungeklärte Bestandsartikel und ein vollständiger WordPress-Test bleiben Blocker. Keine Installation.
+- Genaue Nachweise und einzelne nächste Aktion ausschließlich unter KONZEPT/CURRENT_STATE.md; Einzelakte V9_5_73_ENDBLATT_3_BIS_5_ARTIKEL_FACHPRUEFUNG_NICHT_IMPORTIEREN_20261015.json.
+
 ## NACHHOLBELEG V9.4 – 15.10.2026 (KEIN CURRENT)
 **Status-/NEXT-ACTION-Autorität ausschließlich `KONZEPT/CURRENT_STATE.md`.**
 
