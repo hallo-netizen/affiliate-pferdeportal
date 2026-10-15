@@ -1,0 +1,335 @@
+{
+  "schema": "HB-V9.4-FULL-SCOPE-GAP-SCREEN-REVIEW-ONLY",
+  "date": "2026-10-15",
+  "status": "AUDIT_ONLY_DO_NOT_IMPORT_NOT_APPROVED",
+  "base": {
+    "version": "V9.3",
+    "leaves_candidate": 54,
+    "ideas_candidate": 242,
+    "blocked_leaves": 9,
+    "wp_live_last_readback": "R3/V8 546/546 PASS on 2026-10-13"
+  },
+  "method": "All six world branches / 31 core areas / 93 subareas / 285 live leaves from V9 snapshot compared with 54 V9.3 candidates and 510 traceable R2 exact match titles + 432 R3 titles + 242 V9.3 title ideas. This is not the full 704 R2 original title export; incomplete 6 of 18 delta titles and 194 R2 unmatched titles leave final ownership unknown.",
+  "world_audit": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "verdict": "CORE_OVERALL_BROAD",
+      "details": "Haus, Garten, Garagen, Fahrzeuge, Abwesenheit, Kleinbetriebe abgedeckt; Katalysator-/Ersatzteildiebstahl explizit nicht unter den 1184 untersuchten Titeln; vorrangig Artikel im bestehenden Oldtimer-&-Privatwagen-Owner, keine neue Kategorie."
+    },
+    {
+      "world": "Feuer & Gase",
+      "verdict": "ADDITIONAL_GAPS",
+      "details": "Auto-/Bootbrand V9.3 entworfen, Wohnmobil durch Bestandskategorien abgedeckt. Brandschäden am Haus nach Löscheinsatz und Vegetationsbrand von außen sind zusätzliche eigenständige Schutz-/Folgeintents."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "verdict": "SPECIFIC_GAP",
+      "details": "Strom, Heizung, Pumpen, Offline-Alarm gut vertreten; separate motorisierte private Garagen-/Gartentor- und Sprechanlagen-Störfälle nicht explizit abgebildet. Gegen bestehende Smart-Lock-Kategorien abgrenzen."
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "verdict": "NO_HIGH_CONFIDENCE_NEW_BRANCH",
+      "details": "Graffiti, Außentechnik, Glas, Vereine, Fahrzeugvandalismus und Schäden vorhanden. Nicht für künstliche neue Unterbereiche erweitern; 9 V9-Altvorschläge wegen bestehender Owner weiterhin gesperrt."
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "verdict": "ADDITIONAL_MATERIAL_AND_POOL_GAPS",
+      "details": "V9.3 Dach/Fassade, Bootsfeuchte und Innenwasser schon Kandidaten; Hausschwamm/holzzerstörende Pilze und Poolleitungsleck nicht explizit im nachgewiesenen Kern."
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "verdict": "ADDITIONAL_ANIMAL_AND_CAR_HAIL_GAPS",
+      "details": "V9.3 Hitze/Trockenheit, Erosion im Starkregen und Fahrzeugaufbauten bei Sturm schon Kandidaten; Marder/Nager/Holzschädlinge als eigenes Naturgefahrenfeld und Hagel an normalen Privatwagen fehlen als explizite Owner."
+    }
+  ],
+  "groups": [
+    {
+      "kind": "NEW_AREA_CANDIDATE",
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "parent": "world=Wetter & Naturgefahren",
+      "subareas": [
+        {
+          "name": "Gebäude & Bauteile",
+          "leaves": [
+            {
+              "name": "Marder am Dach & an Dämmung",
+              "ideas": [
+                "Marderspuren am Dachboden von anderen Tierspuren unterscheiden",
+                "Marderschäden an Dämmung und Dachanschlüssen fachlich begutachten lassen",
+                "Zutrittsöffnungen im Dachbereich nach Marderbefall sichern lassen",
+                "Dachboden nach tierbedingtem Dämmungsschaden erneut kontrollieren"
+              ],
+              "boundary": "Nicht Einbruch durch Menschen; Artenschutz/Fachbetriebe beachten"
+            },
+            {
+              "name": "Nager an Leitungen & Haustechnik",
+              "ideas": [
+                "Fraßspuren an Kabeln im privaten Technikraum erkennen",
+                "Nach Nagetierkontakt beschädigte Elektroleitungen fachlich prüfen lassen",
+                "Rohr- und Leitungseinführungen gegen Nagereintritt fachgerecht abdichten",
+                "Folgeschäden durch Nagetiere an privaten Haustechnikgeräten dokumentieren"
+              ],
+              "boundary": "Kein allgemeiner Stromausfallratgeber"
+            },
+            {
+              "name": "Holzzerstörende Insekten am Haus",
+              "ideas": [
+                "Holzwurm und Hausbock anhand typischer Holzschäden unterscheiden lassen",
+                "Bohrmehl an alten Holzbalken als Warnsignal beurteilen",
+                "Aktiven Schädlingsbefall von historischen Ausfluglöchern abgrenzen lassen",
+                "Tragende Holzteile bei Verdacht auf Insektenbefall statisch prüfen lassen"
+              ],
+              "boundary": "Nicht Hausschwamm: Pilz und Feuchtigkeitsursache separat"
+            }
+          ]
+        },
+        {
+          "name": "Fahrzeuge & Freizeitobjekte",
+          "leaves": [
+            {
+              "name": "Marderbiss am Privatwagen",
+              "ideas": [
+                "Marderbisse an Kabeln und Kühlschläuchen im Auto erkennen",
+                "Schutzmaßnahmen gegen erneuten Marderbesuch im Motorraum vergleichen",
+                "Elektroauto nach mutmaßlichem Marderbiss an Hochvoltkomponenten fachlich prüfen lassen",
+                "Marder- und Folgeschäden am Auto für Versicherung und Werkstatt dokumentieren"
+              ],
+              "boundary": "Nur Tierfraß, kein Diebstahl, Brand oder Sabotage"
+            },
+            {
+              "name": "Nager im Wohnmobil & Winterlager",
+              "ideas": [
+                "Nagetier-Spuren im überwinternden Wohnmobil früh erkennen",
+                "Kabel und Schläuche im Camper nach Nagereintritt prüfen lassen",
+                "Eintrittsstellen im abgestellten Wohnwagen ohne Bauteilschäden verschließen lassen",
+                "Schäden an Polstern und Dämmung im Wohnmobil nach Winterlager dokumentieren"
+              ],
+              "boundary": "Nicht Sturm oder Campereinbruch"
+            },
+            {
+              "name": "Tierbedingte Schäden am Freizeitboot",
+              "ideas": [
+                "Tierspuren in Kajüte und Motorraum eines eingelagerten Boots unterscheiden",
+                "Bootspolster und Leitungen auf Nagetierschäden im Winterlager prüfen lassen",
+                "Tierzugänge unter Bootsabdeckungen bei langer Lagerung vermeiden",
+                "Tierbedingte Schäden am Privatboot für Werft und Versicherung dokumentieren"
+              ],
+              "boundary": "Nicht Bilgenwasser/Bootsbrand"
+            }
+          ]
+        },
+        {
+          "name": "Garten & Außentechnik",
+          "leaves": [
+            {
+              "name": "Wildtierschäden an Garten & Einfriedung",
+              "ideas": [
+                "Wildschwein- und Rehschäden an privatem Grundstück dokumentieren",
+                "Privaten Gartenzaun auf Wildtier-Durchgänge und Schäden prüfen",
+                "Junge Gartenbäume ohne tiergefährdende Maßnahmen vor Verbiss schützen",
+                "Beschädigte Zaunfundamente nach Wildtiereinwirkung beurteilen lassen"
+              ],
+              "boundary": "Nicht Vandalismus durch Menschen"
+            },
+            {
+              "name": "Wühlmäuse an Gartenanlagen",
+              "ideas": [
+                "Wühlmausschäden an Wurzeln und Rasen von anderen Schadbildern unterscheiden",
+                "Gartenbewässerungsleitungen auf Nagerschäden kontrollieren",
+                "Wühlmauszugänge an privaten Beeten und Anlagen erkennen",
+                "Garteneinfassungen gegen wiederkehrende Nagerschäden schützen"
+              ],
+              "boundary": "Nur Eigentumsschaden, keine Gartenbau-Ratgeberreihe"
+            },
+            {
+              "name": "Vogelschäden an Außentechnik",
+              "ideas": [
+                "Vogelnester unter Solarmodulen auf technische Folgerisiken prüfen lassen",
+                "Vogelkot an Außentechnik materialschonend entfernen lassen",
+                "Schäden an Dachanschlüssen durch Vogelansiedlung fachlich kontrollieren",
+                "Artenschutzgerechte Vorkehrungen gegen wiederkehrende Schäden an Solaranlagen planen"
+              ],
+              "boundary": "Artenschutz prüfen; nicht allgemeine PV-Fehler oder Reinigung doppeln"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "NEW_SUBAREA_CANDIDATE",
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "parent": "core:area:a61eee15af3b",
+      "subareas": [
+        {
+          "name": "Brandschäden & Wiederherstellung",
+          "leaves": [
+            {
+              "name": "Rauch- & Rußschäden am Gebäude",
+              "ideas": [
+                "Rußschäden nach Wohnungsbrand vor einer Reinigung fachlich beurteilen lassen",
+                "Rauchablagerungen in privaten Nebenräumen auf betroffene Materialien prüfen",
+                "Sichtbare und verdeckte Brandrauch-Folgeschäden dokumentieren",
+                "Private Möbel nach Rauchschaden auf Erhaltungs- und Reinigungsgrenzen beurteilen"
+              ],
+              "boundary": "Nach Brand am Haus, nicht Brandprävention"
+            },
+            {
+              "name": "Löschwasser & Brandfolgeschäden",
+              "ideas": [
+                "Löschwasser im Keller nach Gebäudebrand fachgerecht erfassen lassen",
+                "Trocknungs- und Schadstofffragen nach Löscheinsatz getrennt prüfen",
+                "Feuchte Bauteile nach einem Zimmerbrand dokumentieren",
+                "Elektrische Anlagen nach Kontakt mit Löschwasser nicht eigenständig wieder einschalten"
+              ],
+              "boundary": "Anders als allgemeiner Rohrbruch"
+            },
+            {
+              "name": "Gebäude sichern nach Brand",
+              "ideas": [
+                "Zerstörte Fenster und Türen nach einem Wohnungsbrand provisorisch sichern lassen",
+                "Gefährdete Gebäudebereiche nach Brandschaden nur nach Freigabe betreten",
+                "Schadensnachweise nach Brand für Gebäudeversicherer zusammenstellen",
+                "Weitere Feuchteschäden im leerstehenden Brandobjekt organisatorisch begrenzen"
+              ],
+              "boundary": "Nicht allgemeiner Einbruchschutz; Priorität Sicherheit/Fachbetrieb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "NEW_SUBAREA_CANDIDATE",
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "parent": "core:area:unknown_Technik_Alarm_Smart_Home_verify",
+      "subareas": [
+        {
+          "name": "Tor- & Zutrittsantriebe",
+          "leaves": [
+            {
+              "name": "Garagentorantrieb im Störfall",
+              "ideas": [
+                "Garagentorantrieb nach Stromausfall auf sicheren Wiederanlauf prüfen",
+                "Defekte Endlagenerkennung am privaten Garagentor fachlich untersuchen lassen",
+                "Notentriegelung am elektrischen Garagentor regelmäßig kontrollieren",
+                "Garagentorsteuerung bei Funkstörungen vor unbeabsichtigter Betätigung schützen"
+              ],
+              "boundary": "Nicht Einbruchhemmung am Garagentor"
+            },
+            {
+              "name": "Motorisierte Gartentore & Zufahrten",
+              "ideas": [
+                "Privates Schiebetor bei blockiertem Antrieb sicher außer Betrieb nehmen lassen",
+                "Lichtschranke und Hinderniserkennung am Gartentor prüfen lassen",
+                "Motorisiertes Zufahrtstor nach Netzausfall wieder in Betrieb prüfen lassen",
+                "Anzeichen eines defekten Torantriebs an privaten Stellplätzen dokumentieren"
+              ],
+              "boundary": "Nicht Zaunsicherung gegen Diebstahl"
+            },
+            {
+              "name": "Gegensprechanlage & Türöffner",
+              "ideas": [
+                "Defekte Türsprechanlage von Störungen des elektrischen Türöffners unterscheiden",
+                "Ausfall einer kleinen Video-Gegensprechanlage sinnvoll eingrenzen",
+                "Fehler der Türöffnersteuerung im Mehrparteienhaus dokumentieren",
+                "Klingel- und Gegensprechanlagen nach Stromstörung fachgerecht testen lassen"
+              ],
+              "boundary": "Nicht Smart-Lock-Notbetrieb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "EXISTING_SUBAREA_LEAF_CANDIDATES",
+      "world": "verschiedene",
+      "area": "bestehende fachliche Parents",
+      "subareas": [
+        {
+          "name": "bestehende Eltern, einzeln zu prüfen",
+          "leaves": [
+            {
+              "name": "Privatwagen & Oldtimer bei Hagel",
+              "ideas": [
+                "Hagelschutz für am Straßenrand geparkten Privatwagen vergleichen",
+                "Hagelschäden an privaten Oldtimern fotografisch dokumentieren",
+                "Fahrzeugabdeckungen bei drohendem Hagel auf Scheuerrisiko beurteilen",
+                "Provisorische Unterstellung des Autos bei Hagelwarnung planen"
+              ],
+              "boundary": "Wetter & Naturgefahren / Freizeit & Unwetter / Fahrzeugaufbauten & Transporte; nicht Campingfahrzeug"
+            },
+            {
+              "name": "Vegetationsbrand am Grundstück",
+              "ideas": [
+                "Bewuchs direkt an privaten Gebäuden als mögliche Brandlast bewerten lassen",
+                "Funkenflug von entfernten Flächenbränden beim privaten Grundstücksschutz berücksichtigen",
+                "Brennbares Garteninventar bei Vegetationsbrandwarnung sicher unterbringen",
+                "Grundstück und Nebengebäude nach äußerem Funkenflug auf Schäden prüfen lassen"
+              ],
+              "boundary": "Feuer & Gase / Rauch & Brand; nicht eigener Gartenfeuer-Ratgeber"
+            },
+            {
+              "name": "Hausschwamm & Holzbauteilschäden",
+              "ideas": [
+                "Feuchtebedingten Hausschwammbefall von gewöhnlichem Oberflächenschimmel unterscheiden lassen",
+                "Befall an tragenden privaten Holzbalken fachlich untersuchen lassen",
+                "Feuchtequellen im Gebäude bei Verdacht auf Echten Hausschwamm ermitteln lassen",
+                "Sanierungsnachweise und Folgeschäden an eingebautem Holz dokumentieren"
+              ],
+              "boundary": "Wasser & Feuchtigkeit, Parent-Scope noch zu verifizieren; nicht Holzwurm"
+            },
+            {
+              "name": "Leckagen an privaten Poolleitungen",
+              "ideas": [
+                "Druckverlust am privaten Poolkreislauf von Verdunstung unterscheiden",
+                "Verdeckte Leckage an Pool-Zulaufleitungen eingrenzen lassen",
+                "Poolpumpe nach Wasseraustritt vor Wiederinbetriebnahme fachlich prüfen lassen",
+                "Feuchteschäden an angrenzenden Terrassen durch Poolleitungslöcher dokumentieren"
+              ],
+              "boundary": "Wasser & Feuchtigkeit / Leckage & Rohrbruch / Rohrnetz & vorbeugende Wartung; nicht Pumpen-Notstrom"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "groups_four": true,
+    "proposals_nineteen": true,
+    "all_four_ideas": true,
+    "unique_names": true,
+    "unique_titles": true,
+    "no_existing_V9_3_name_collision": true,
+    "new_area_3_subareas": true,
+    "new_area_3_leaves_each": true,
+    "fire_subarea_3_leaves": true,
+    "tech_subarea_3_leaves": true,
+    "local_topics_not_as_group": true
+  },
+  "counts": {
+    "worlds_reviewed": 6,
+    "areas_reviewed": 31,
+    "subareas_reviewed": 93,
+    "existing_core_leaves_reviewed": 285,
+    "v9_3_proposed_leaves": 54,
+    "v9_3_ideas": 242,
+    "new_leaf_ideas_for_review": 19,
+    "new_article_ideas_for_review": 76,
+    "existing_live_wp_changes": 0
+  },
+  "deferred": [
+    "Erdbeben und Bodenerschütterungen: regional/spezifisch; kein neuer Bereich ohne weitere Fachbegründung",
+    "Katalysatordiebstahl: zuerst Ergänzung innerhalb bestehender Privatwagenkategorie",
+    "Sturmflut am privaten Boot: zunächst vorhandenen Unwetter-/Bootsowner erweitern, nicht parallel duplizieren",
+    "Neuer Tier-Gefahrenbereich ist nur Konzeptkandidat; sechs bestehende Hauptwelten unverändert"
+  ],
+  "release_gates": [
+    "All remaining 6 exact titles from R2 original; comprehensive 704 R2 title owner check",
+    "Semantic boundaries and duplicate parent/leaf content manual review, including existing V9.3 topics",
+    "Prove existing logical parent ID for new tech and moisture single leaves",
+    "Standard non-destructive existing-category-workflow delta, dry-run, rollback, slugs, redirect, WP readback",
+    "Do not provide any download unless actual installable plugin and both positive and negative tests pass"
+  ]
+}
