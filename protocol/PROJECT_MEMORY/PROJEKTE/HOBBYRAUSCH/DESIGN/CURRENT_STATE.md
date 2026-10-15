@@ -52,9 +52,11 @@ Vom Nutzer im neuen Einzelmotiv-Ansatz ausdrücklich positiv beurteilt wurden di
 
 WICHTIG:
 - Diese sechs sind **noch keine installierten/releasefähigen Assets** und kein Live-PASS.
+- Zusätzlich ist für **Guss & Formen** eine eigenständige Einzelquelle im erzeugten Bildbestand vorhanden: `Detailreiche Gießwerkstatt am Arbeitstisch.png`. Sie ist als Kandidat vorhanden, aber noch kein Live-PASS.
 - Bei `Miniaturen & Szenen` entstanden mehrere Kandidaten; **kein einzelner Kandidat ist autoritativ festgelegt**.
-- Danach erzeugte Sammel-/Collage-/Montagebilder sind **nicht freigegeben**. Sie wiederholten Themen und Motive; ausdrücklich auffällig war u. a. die erneute Mehrfachbelegung von **Mechanik & Uhren**.
-- Diese späteren Sammelbilder dürfen nicht als fertige Heroes oder neue eindeutige Quellen gezählt werden.
+- Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind **vorhanden** und müssen nicht erneut als Vorschauen erzeugt werden.
+- Diese Sammel-/Collage-/Montagebilder sind **nicht freigegeben**. Sie wiederholten Themen und Motive; ausdrücklich auffällig war u. a. die erneute Mehrfachbelegung von **Mechanik & Uhren**.
+- Vorschau vorhanden bedeutet daher nicht automatisch gültige Hero-Quelle: Panels aus Sammelbildern dürfen nicht als fertige Heroes oder neue eindeutige Quellen gezählt werden.
 - Seit 1.50.663 wurde **kein weiteres Plugin** gebaut oder freigegeben.
 
 ## 30/30-Quellenaudit nachgeholt
@@ -62,13 +64,13 @@ Autoritative Arbeitsliste:
 `HERO_QUELLENAUDIT_30_WIP_20261015.md`
 
 Exakte Bilanz:
-- **5** Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
+- **6** Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
 - **1** Kategorie (Miniaturen & Szenen) mit zwei Einzelkandidaten, Auswahl offen;
-- **24** Kategorien aktuell **FEHLEND**;
-- Collagen/Montagen/Panels zählen **0**.
+- **23** Kategorien aktuell **FEHLEND** als eigenständige Einzelquelle;
+- die bereits vorhandenen Vorschau-/Sammelbilder bleiben reines Sicht-/Konzeptmaterial und zählen als Hero-Quelle **0**.
 
 ## Erster offener Blocker
-Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 5 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 24 Kategorien FEHLEND.
+Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 6 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 23 Kategorien FEHLEND als eigenständige Quelle. Die Vorschauphase ist bereits vorhanden und wird nicht wiederholt.
 
 ## EXAKT EINE NEXT ACTION
-**Die 24 als FEHLEND markierten Kategorien als echte eigenständige Einzelmotive neu erzeugen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Nicht die Vorschauen neu erzeugen. Die 23 noch FEHLENDEN eigenständigen Hero-Quellen aus den bereits vorhandenen Vorschau-Richtungen als echte Einzelmotive fertigstellen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
