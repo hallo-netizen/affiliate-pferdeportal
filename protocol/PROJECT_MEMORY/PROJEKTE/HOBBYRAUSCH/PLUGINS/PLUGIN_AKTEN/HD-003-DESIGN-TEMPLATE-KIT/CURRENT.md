@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **1.50.650 BLEIBT AKTIVER GRUNDSTAND / 1.50.651 UND 1.50.653–1.50.663 NICHT VERWENDEN / KEIN PLUGIN-NACHFOLGER FREIGEGEBEN**
+STATUS: **1.50.650 BLEIBT AKTIVER GRUNDSTAND / 1.50.651–1.50.663 NICHT VERWENDEN / KEIN PLUGIN-NACHFOLGER FREIGEGEBEN**
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
@@ -16,7 +16,7 @@ Nicht als Bild-PASS bestätigt:
 - Hero-/Hub2-Bildbestand.
 
 ## Nicht verwenden
-- 1.50.651;
+- 1.50.651–1.50.652;
 - 1.50.653–1.50.656;
 - Restore-/Repair-/Recovery-Versuche 1.50.650-Restore, 1.50.657, 1.50.658;
 - Hero-Helfer 1.50.659–1.50.663.
