@@ -82,3 +82,16 @@ Kein neues Plugin wird ausgegeben, bevor die 18 besonders beanstandeten Motive u
 
 ## EXAKT EINE NEXT ACTION
 **Bildquellen für die verworfenen Kategorien neu auswählen; alte 1.50.663-Ausgangsszenen und deren Crops vollständig sperren. Erst nach vollständiger Einzelprüfung darf ein reiner Bilddatei-Ersatzkandidat entstehen.**
+
+
+## Interne Rückfallprüfung – alte lokale Bildvarianten ebenfalls nicht pauschal verwenden
+Nach dem Verwerfen von 1.50.663 wurden die vorhandenen älteren lokalen Varianten für die 18 besonders beanstandeten Kategorien erneut als mögliche Quellen gegengeprüft.
+
+Ergebnis:
+- **kein pauschaler Rückgriff auf v150616/v150623/v150627/v150629/v150631/v150634**;
+- mehrere alte Motive sind zwar semantisch näher, verletzen aber weiterhin die neue harte Distanzregel (zu dicht/Detail);
+- besonders auffällig: Papierkunst, Schrift & Lettering, Mechanik & Uhren, Astronomie, Mikroskopie, Wetter & Umwelt sowie Ameisen & Insekten;
+- für Messen & Analysieren, Pilze & Kulturen und Wirbellose ist im vorhandenen lokalen Altbestand aktuell **keine belastbar passende Quelle** festgestellt.
+
+Konsequenz:
+Alte Varianten sind nur Einzelquellenkandidaten, niemals automatischer Fallback. Kein alter Crop wird allein wegen besserer Semantik übernommen.
