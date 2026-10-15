@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **SEITE ERREICHBAR / TEMPLATE-KIT 1.50.650 EINGEFROREN / 1.50.661 VERWORFEN WEGEN FALSCHEM INSTALLATIONSWEG / 1.50.662 IN-PLACE-UPDATE VON 1.50.660 LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
+STATUS: **SEITE ERREICHBAR / TEMPLATE-KIT 1.50.650 EINGEFROREN / 1.50.662 VERWORFEN WEGEN ADMIN_INIT-GATE / 1.50.663 FRONTEND-IN-PLACE-UPDATE LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
 
 ## Harte Sperre
 Keine Änderungen an Template-Kit-PHP, Routing, Templates, CSS, Mapping, Karten, Seitenstruktur oder Architektur.
@@ -11,54 +11,55 @@ Keine Änderungen an Template-Kit-PHP, Routing, Templates, CSS, Mapping, Karten,
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650** bleibt unangetastet.
 
-## Verworfen
-- 1.50.651
-- Repair Installer 1.50.657
-- Recovery 1.50.658
-- Hero Images ONLY 1.50.659
-- Hero Replace ONLY 1.50.660 als finaler Bildstand für die 30 live verworfenen Heroes
-- Hero Replace 30 ONLY 1.50.661: funktionaler Bildpatch, aber **falscher Pluginordner**, daher separate Neuinstallation statt Überinstallation von 1.50.660
+## Fehler 1.50.662
+1.50.662 führte den 30er-Austausch nach In-Place-Overwrite nur über `admin_init` aus.
+Wenn nach der Überinstallation direkt eine Frontend-Seite geprüft wurde, lief der Austausch nicht.
+Die vorherige Cache-Erklärung war damit falsch und ist verworfen.
 
 ## Aktueller Kandidat
-`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.662.zip`
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.663.zip`
 
 SHA-256:
-`6bf59929a201f3a0731ff7ea52ff33c3a47186835ff694c8715bdc134238b904`
+`3009b23d0cae38cfb36d3f7c20507879df33139202c4789399d4b8987db948f1`
 
-## Installationsweg 1.50.662
-1.50.662 verwendet **exakt denselben Pluginordner und dieselbe Hauptdatei wie 1.50.660**:
+## Update-Identität
+Wie 1.50.660/1.50.662:
 - Ordner: `hobby-depot-hero-replace-only-150660`
 - Hauptdatei: `hobby-depot-hero-replace-only-150660.php`
 
-Damit erkennt WordPress den Upload als **Überinstallation/Ersetzung des vorhandenen 1.50.660-Plugins**, nicht als separates Plugin.
+Damit echtes In-Place-Update/Überinstallation.
+
+## Änderung gegenüber 1.50.662
+Nur der One-Shot-Ausführungshook des separaten Hero-Helper-Plugins:
+- vorher: `admin_init`
+- jetzt: `plugins_loaded`
+
+Damit läuft der Austausch beim **allerersten folgenden WordPress-Request**, auch bei direkter Frontend-Prüfung.
 
 ## Wirkung
 - exakt 30 neue 600×220-Hero-Dateien;
 - nur die 30 Nutzer-Hard-Reject-Kategorien;
-- vorhandenes 65er-Mapping wird nur gelesen, niemals geschrieben;
+- bestehendes 65er-Mapping wird nur gelesen;
 - übrige 35 Hero-Zieldateien unverändert;
-- Template-Kit: 0 PHP-Diffs;
+- Template-Kit-PHP 0 Änderungen;
 - Templates/Routing/CSS/Karten/Architektur unverändert.
 
-## Lokaler E2E-Nachweis – echter In-Place-Overwrite-Pfad
-Ausgangslage:
-- echtes 1.50.650 Template-Kit;
-- 1.50.660 als aktives Helper-Plugin simuliert;
-- dessen 65er-Austausch zunächst erfolgreich ausgeführt.
-
-Dann:
-- vorhandenen 1.50.660-Pluginordner durch 1.50.662 ersetzt;
-- **aktive Plugin-Dateireferenz blieb exakt gleich**;
-- Aktivierungs-Hook bewusst NICHT erneut ausgelöst;
-- 1.50.662 führte den 30er-Austausch einmalig über `admin_init` aus.
+## Lokaler Frontend-E2E-Nachweis
+Ausgang:
+- pristine Template-Kit 1.50.650;
+- 1.50.660-Bildzustand hergestellt;
+- aktiver Helperpfad in-place durch 1.50.663 ersetzt;
+- **kein Activation Hook**;
+- **kein admin_init**;
+- nur echter Frontend-Lebenszykluspunkt `plugins_loaded`.
 
 Ergebnis:
-- PASS;
-- exakt 30 Hero-Zieldateien geändert;
-- exakt 35 Hero-Zieldateien unverändert;
+- Status PASS;
+- APPLIED=1;
+- exakt 30 erwartete Hero-Dateien geändert;
+- 35 unverändert;
 - Mapping byte-identisch;
-- alle 55 Template-Kit-PHP-Dateien byte-identisch;
-- keine .tmp/.bak-Reste.
+- 0 Template-Kit-PHP-Diffs.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.662 über das vorhandene 1.50.660-Plugin installieren/ersetzen. Keine separate Installation von 1.50.661.**
+**1.50.663 über das vorhandene Hero-Replace-Plugin überinstallieren und danach direkt eine betroffene Frontend-Seite aufrufen.**
