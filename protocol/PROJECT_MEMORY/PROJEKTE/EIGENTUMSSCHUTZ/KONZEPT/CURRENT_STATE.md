@@ -1,6 +1,28 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## NEUE VERBINDLICHE NUTZERREGEL + V9.8-NISCHENPRÜFUNG – 15.10.2026
+**EINZIGE zuständige Konzept-Current-Autorität bleibt diese Datei. Technische Kategorie-Autorität/WordPress-Schreiber bleibt das zentrale `EIGENTUMSSCHUTZ/KATEGORIEN`-Büro.**
+
+**HARTE BESTANDSSPERRE DES NUTZERS: KEINE BESTEHENDE KATEGORIE UMBENENNEN.** Alle 6 bestehenden Welten, 31 Bereiche, 93 Unterbereiche und **285 bestehenden Endkategorien** samt `node_id`, Name, Slug, Elternzuordnung, bestehenden Artikeln/URLs **vollständig unverändert**. Insbesondere keine Umbenennung, um einen neuen Fachvorschlag leichter einzuordnen. Neues Thema ausschließlich als **zusätzlicher Kandidat** oder gezielte Ergänzung der bestehenden Struktur, nie stilles Rename/Move/Merge. Keine Live-Änderung ohne separate technische Freigabe im zentralen Kategorienbüro.
+
+**Neuer dokumentierter V9.8-Einzelbeleg:** `KONZEPT/V9_8_11_NISCHEN_55_ARTIKEL_BESTANDSFEST_NICHT_IMPORTIEREN_20261015.json`, GitHub gespeichert, ist **nur Konzept, KEIN Import und KEIN Plugin**. Gegen den echten 31/93/285-Baum, die nachgewiesenen 686 historischen Altideen (originaler Plugin-Archivreadback), 510 einzeln materialisierten R2-Matchtitel, 432 R3-Titel und V9.6/V9.7-Vorschläge fachlich geprüft, jedoch **keine vollständige 1136-Titel-Semantikfreigabe**.
+
+V9.8 fügt **11 Blatt-Kandidaten mit je 5 getrennten Artikelfragen = 55 Ideen** hinzu, in drei neuen Vorschlags-Unterbereichen unter **existierenden** Bereichen und zwei Einzelblättern unter der **unveränderten** vorhandenen Subarea `Räder & Privatfahrzeuge`. Im Einzelnen:
+- `Einbruch & Diebstahl → Freizeit & Fahrzeuge → Fahrzeugteile & Zubehördiebstahl`: `Katalysator- & Abgasteilediebstahl`; `Felgen & Kompletträder gegen Diebstahl`; `Kennzeichendiebstahl am Privatwagen`. Bestehender `Oldtimer & Privatwagen`-Owner bleibt für Fahrzeugdiebstahl. Kein neues `Ladekabeldiebstahl`-Blatt, da der alte Owner `Diebstahl an Außentechnik` bereits „Wallbox und Ladekabel vor Diebstahl absichern“ enthält.
+- `Wetter & Naturgefahren → Freizeit & Unwetter → Geparkte Fahrzeuge bei Unwetter`: `Privatwagen & Oldtimer bei Hagel` (bereits V9.6 unpublizierter, falsch angehängter Vorschlag, hier fachlich richtig nur umgehängt); `Überflutete Privatfahrzeuge`; `Sturm & Astbruch am parkenden Auto`. Keine Änderung an vorhandenem `Fahrzeugaufbauten & Transporte` oder `Sturm & Hagel beim Camping`.
+- `Feuer & Gase → Rauch & Brand → Äußere Brandeinwirkung auf Privatobjekte`: `Vegetationsbrand am Grundstück` (bereits V9.6 unpublizierter Vorschlag, hier nur im Konzept passend zugeordnet); `Brandüberschlag aus Nachbargebäuden`; `Funkenflug an Carports & Gartenhäusern`. Keine Änderung am vorhandenen `Offene Feuerstellen im Garten`-Owner.
+- Bestehende unveränderte Subarea `Einbruch & Diebstahl → Freizeit & Fahrzeuge → Räder & Privatfahrzeuge`: **nur zusätzliche** Endblattkandidaten `E-Scooter gegen Diebstahl` und `Elektromobile & Seniorenscooter sichern`. `Fahrräder & E-Bikes`, `Motorräder & Privat-Anhänger`, `Oldtimer & Privatwagen` unverändert.
+
+**Konzept-Zählung, nur im Fall aller noch ausstehenden fachlichen Freigaben:** V9.6: 67 Blätter / 294 Ideen; isoliertes V9.7: 3 Blätter / 15 Ideen (davon ein bislang gehaltener Blattvorschlag); V9.8: 11 Blätter / 55 Ideen (davon zwei bislang gehaltene Blattvorschläge). Somit **81 potenzielle neue Endkategorien / 364 konkrete Ideen**, fünf ursprüngliche V9.6-Parent-Konflikte minus zwei gelöste = **drei offen**, ältere neun V9.3-Ausschlüsse bleiben unberührt. Das sind **keine 81 aktiven neuen WP-Kategorien**.
+
+**QA:** V9.8 sämtliche 11 neuen Blätter je 5 Artikel; 55/55 neue Titel eindeutig, 0 exakt identische Titel zu V9.6/7 und im einzeln materialisierten R2/R3-Titel-Vergleich. In der historischen 686-Titelquelle keine alte, gleichlautende spezifische Fragestellung zu Katalysator/Felgen/Kennzeichen, E-Scooter, Elektromobile oder Brandüberschlag. **1/1 positives lokales Format-/Bestandssperre-Szenario PASS; 7/7 künstlich zerstörte negative Szenarien korrekt abgewiesen** (zu wenig Artikel, doppelte Blätter, doppelte Artikel, zu wenige Unterkinder, ungültiger Parent, versehentliche Bestandsumbenennung, unerlaubte Importfreigabe). Keine aktive WP-Prüfung.
+
+**LIVE GATE:** WP weiterhin letzter bestätigter Stand 546/546 vom 13.10.2026, kein heutiger Sync, keine Plugininstallation und kein Download. Historisches Archivplugin `1.14.8.9` NUR Altcontentquelle, aktuelle WordPress-Pluginversion historisch `1.14.8.19` ohne reproduzierten End-to-End-Quell-/Rückschreibnachweis.
+
+**EXAKT EINE NEXT ACTION:** Letzte sechs nicht wörtlich belegte historische R2-Originaltitel ausschließlich aus der zuständigen Originalquelle nachweisen und anschließend die **81/364 V9.8-Konzeptvorschläge** samt drei weiterhin falsch zugeordneten, gesperrten Tor-/Zutrittsantriebs-Vorschlägen fachlich gegen vorhandene Artikel-Owner prüfen; dann an das **zentrale Kategorienbüro** zur separat freizugebenden Delta-/WordPress-Positiv-/Negativprüfung übergeben. Vorher keine vorhandene Kategorie ändern und kein Plugin erzeugen.
+
+
 ## AKTUELLSTER FACHSTAND – V9.6 ORIGINALQUELLEN + V9.7 ISOLIERTE POOL-NISCHE – 15.10.2026
 **Diese Datei ist die EINZIGE zuständige Konzept-Current-Autorität.** Die zentrale operative Kategorieautorität bleibt unverändert `EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md`, nicht dieses Konzeptbüro. Nur das zentrale Kategorienbüro darf über den bestehenden Workflow WordPress-Struktur schreiben.
 
