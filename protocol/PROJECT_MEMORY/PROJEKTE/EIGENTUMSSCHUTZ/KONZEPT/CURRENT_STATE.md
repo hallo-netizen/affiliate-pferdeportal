@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## V9.9 – FACHENTWURF AN DAS ZENTRALE KATEGORIENBÜRO ÜBERGEBEN – 15.10.2026
+**Eine Konzept-Current-Autorität = diese Datei; eine operative WordPress-Kategorie-Autorität = `EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md`.**
+Verbindliche Nutzerregel **keine bestehende Kategorie umbenennen oder verschieben**. Bestehende Welten 6, Bereiche 31, Unterbereiche 93, Blattkategorien 285 und Gesamt-Zielobjekte 546 bleiben unverändert.
+
+**Neu fertiggestellt und im zentralen Kategorienbüro gespeichert:** `KATEGORIEN/V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json`: 4 neue Fachbereiche, 22 neue Unterbereiche, 81 zusätzliche Endkategorien mit 364 eigenständigen Themen, mindestens 3 pro Endkategorie und 3 pro neuem Zwischenknoten; **nur ADD**, keinerlei RENAME/MOVE/ARCHIVE/MERGE/REMOVE. 1 positive Datenprüfung und 8/8 negative Schutztests bestanden. Drei Tor-/Zutrittsantriebs-Fachfälle und neun Alt-Entwürfe weiterhin gesperrt. Das ist noch **keine WordPress- oder Plugin-Probe**.
+
+**Realer Importblocker:** Letzter 1.14.8.19-Readback vom 13.10.2026 mit 546/546 PASS ist authentisch, doch das genaue **1.14.8.19-Plugin-Quell-ZIP fehlt** im autorisierten Projektarchiv, in den verfügbaren Gesprächs-/Bibliotheksdateien sowie verbundenem GitHub. Das dort vorhandene **1.14.8.9** ist 10 Unterversionen älter und keine zulässige Installationsbasis. Sechs fehlende Originaltitel von späteren R2-Blättern und vollständige SEO-Owner-Entscheidung bleiben fachlich offen.
+
+**Genau eine aktuelle fachliche NEXT ACTION:** Nach Erhalt des echten 1.14.8.19-Quellstands die **81/364 vollständig gegen den Original-Kategorien-/Artikelbestand einschließlich sechs R2-Resttiteln endgültig auf Owner-Kollisionen prüfen** und nur dieses ADD-only-Delta im zentralen Kategorienbüro über bestehende Technik, Schutztests, Rollback und WordPress-Readback freigeben lassen. **Kein vorzeitiges Plugin zum Download.**
+
+
 ## NEUE VERBINDLICHE NUTZERREGEL + V9.8-NISCHENPRÜFUNG – 15.10.2026
 **EINZIGE zuständige Konzept-Current-Autorität bleibt diese Datei. Technische Kategorie-Autorität/WordPress-Schreiber bleibt das zentrale `EIGENTUMSSCHUTZ/KATEGORIEN`-Büro.**
 
