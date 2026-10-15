@@ -28,7 +28,7 @@
     "total": 30,
     "ready_source": 7,
     "bound_new_reference": 13,
-    "recovered_new_direction": 6,
+    "confirmed_new_batch_no_exact_motif": 6,
     "unrecovered_new_binding": 4
   },
   "categories": [
@@ -135,14 +135,17 @@
     },
     {
       "category": "Heimwerken",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150634.webp",
       "collision_peers": [
         "Holz"
-      ]
+      ],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Keramik & Glas",
@@ -174,7 +177,7 @@
     },
     {
       "category": "Robotik & Automation",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/technik/robotik-automation-v150623.webp",
@@ -182,7 +185,10 @@
       "collision_peers": [
         "Messen & Analysieren",
         "Technik & Medien"
-      ]
+      ],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Astronomie",
@@ -310,43 +316,55 @@
     },
     {
       "category": "Wirbellose",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150634.webp",
       "collision_peers": [
         "Ameisen & Insekten"
-      ]
+      ],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Wind & Drachen",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150634.webp",
       "collision_peers": [
         "Wetter & Umwelt"
-      ]
+      ],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Klettern & Seil",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150634.webp",
-      "collision_peers": []
+      "collision_peers": [],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Wasser",
-      "status": "recovered_new_direction",
+      "status": "confirmed_new_batch_no_exact_motif",
       "reference": null,
       "source_sha256": null,
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150634.webp",
-      "collision_peers": []
+      "collision_peers": [],
+      "reference_file_id": null,
+      "reference_file_name": null,
+      "reference_cell": null
     },
     {
       "category": "Alltagsobjekte",
@@ -407,6 +425,7 @@
     "total_categories": 30,
     "ready_sources_have_file_ids": true,
     "bound_references_have_file_ids": true,
-    "release_allowed_is_false": true
+    "release_allowed_is_false": true,
+    "confirmed_batch_has_no_fabricated_reference": true
   }
 }
