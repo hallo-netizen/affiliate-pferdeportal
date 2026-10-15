@@ -14,7 +14,7 @@
     "Zoom raus / komplette Szene oder vollständiges Hauptmotiv",
     "kein sichtbares Hochskalieren",
     "keine Duplikate innerhalb derselben Seite",
-    "Hero 600x220; Parent-Vorschau aus derselben Quelle 200x107; Karte 200x107",
+    "HISTORICAL ONLY: old 1.50.653 rule used Hero 600x220; current active image-only path uses Hero 600x320 and Preview 200x107.",
     "fehlend bleibt fehlend, bis ein passendes Motiv existiert"
   ],
   "status": "HISTORICAL_OBSOLETE_DO_NOT_USE",
