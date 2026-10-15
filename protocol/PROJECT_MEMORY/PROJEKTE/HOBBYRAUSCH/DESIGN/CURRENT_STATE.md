@@ -89,6 +89,9 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `tools/hobby_image_stage_builder.py` – KISS-Ableiter für echte neue Einzelquellen: erzeugt Hero 600×320 + Preview 200×107, verbietet Upscaling, prüft exakte Dubletten und protokolliert dHash-Abstände.
 - `IMAGE_STAGE_BUILDER_TEST7_20261015.md` – Realtest mit 7 vorhandenen neuen Quellen: 7/7 PASS.
 - `IMAGE_STAGE_BUILDER_NEGATIVE_TESTS_20261015.md` – 3/3 Negativpfade PASS: fehlende Quelle, zu kleine Quelle, exakte Dublette werden sicher gestoppt.
+- `tools/hobby_image_overlay_builder.py` – baut aus der eingefrorenen 1.50.650-Basis ausschließlich die im Manifest erlaubten Bildersetzungen; prüft Vollständigkeit, Maße, Zielpfade, Dateibaum, Mapping-Identität und ZIP-Roundtrip.
+- `IMAGE_OVERLAY_BUILDER_TEST7_20261015.md` – Realtest mit 7 vorhandenen Quellen: exakt 14 Bilddateien geändert, 0 sonstige Änderungen, Mapping identisch, Roundtrip PASS.
+- `IMAGE_OVERLAY_BUILDER_NEGATIVE_TESTS_20261015.md` – 2/2 Negativpfade PASS: unvollständiger Stage und falsches Hero-Maß werden sicher gestoppt.
 - Arbeitsarchiv `HOBBY_DEPOT_IMAGE_WIP_HANDOFF_7PLUS13_20261015.zip` enthält ausschließlich 7 echte neue Einzelquellen + 13 V2-Referenzcrops + Manifeste; **kein Plugin / kein Release**. SHA-256: `294ff9b634081a4814c9d8c485b8aa5cd35e705990ce20708a35f6912a465368`.
 
 Arbeitslisten-Konsistenz: **PASS**
@@ -119,4 +122,4 @@ Ergebnis korrigierter V2-Test:
 - kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen, der reine 1.50.650-Bildersatzweg und der automatische Bildableiter sind fertig vorbereitet und positiv/negativ getestet. Jetzt ausschließlich die 13 exakt gebundenen neuen Nach-1.50.663-Richtungen aus `HERO_GENERATION_QUEUE_13_WIP_20261015.json` in eigenständige Einzelquellen überführen. Die übrigen 10 Kategorien bleiben BLOCKED, weil dafür keine exakte neue Motivbindung rekonstruiert ist. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen, der automatische Bildableiter und der reine 1.50.650-Image-only-Overlay-Build sind fertig vorbereitet und positiv/negativ getestet. Jetzt ausschließlich die 13 exakt gebundenen neuen Nach-1.50.663-Richtungen aus `HERO_GENERATION_QUEUE_13_WIP_20261015.json` in eigenständige Einzelquellen überführen. Die übrigen 10 Kategorien bleiben BLOCKED, weil dafür keine exakte neue Motivbindung rekonstruiert ist. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
