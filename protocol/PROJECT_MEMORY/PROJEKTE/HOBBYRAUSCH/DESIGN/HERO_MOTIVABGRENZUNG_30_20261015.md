@@ -18,10 +18,10 @@ Vor jeder neuen Einzelquelle muss klar sein, wodurch sie sich sichtbar von den f
 | Guss & Formen | Formen/Modelle, Silikon/Gips/Gussarbeitsplatz | Keramik & Glas: keine Töpferscheibe als Hauptmotiv |
 | Holz | Hobelbank, Handhobel, Holzspäne, Holzwerkstück | Heimwerken: keine allgemeine Montage-/Bohrszene |
 | Leder | Lederhaut/-stück, Ledernaht, Lederwerkzeug | Textil/Holz: Leder klar dominierend |
-| Heimwerken | Akkuschrauber, Wasserwaage, Schrauben, Montage/Reparatur | Holz: kein Handhobel-/Schreinermotiv |
+| Heimwerken | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
 | Keramik & Glas | Keramikgefäß **und** sichtbare Glasobjekte im Atelier | Guss & Formen: keine Form-/Gusswerkstatt; nicht nur Keramik |
 | Mechanik & Uhren | geöffnetes Uhrwerk, Zahnräder, Präzisionswerkzeug | Messen/Robotik: Uhr muss klarer Mittelpunkt sein |
-| Robotik & Automation | Roboterarm/mobiler Roboter, Sensoren, Mikrocontroller | Messen: keine reine Messbank; Technik & Medien: keine Kamera-/Medienproduktion |
+| Robotik & Automation | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
 | Astronomie | Teleskop + Nachthimmel/Milchstraße | Wetter & Umwelt: keine Wetterstation |
 | Messen & Analysieren | Messschieber, Multimeter/Messgerät, Prüfkörper, technische Zeichnung | Mechanik: keine Uhr; Robotik: kein Roboter als Hauptmotiv |
 | Mikroskopie | Mikroskop, Objektträger/Probe | Messen: kein allgemeiner Messtisch |
@@ -31,15 +31,17 @@ Vor jeder neuen Einzelquelle muss klar sein, wodurch sie sich sichtbar von den f
 | Moos & Miniaturgärten | lebende Moos-Miniaturlandschaft/Terrarium, kleiner Weg/Brücke | Miniaturen & Szenen: kein Architektur-/Diorama-Modellbau als Hauptthema |
 | Pilze & Kulturen | Pilzzucht auf Substrat/Zuchtblock | Naturfunde: keine Waldsammlung; Gärtnern: keine normale Pflanzszene |
 | Ameisen & Insekten | Ameisen/Insekten im Beobachtungs-/Nestkontext | Wirbellose: keine Schnecken/Asseln als Hauptmotiv; keine Blumen |
-| Wirbellose | Schnecke/Asseln/andere Nicht-Insekten-Wirbellose im Terrarium | Ameisen & Insekten: keine Ameisen/Insekten als Hauptmotiv |
-| Wind & Drachen | großer Flugdrachen, Leinen/Spule, offene Windlandschaft | Wetter & Umwelt: keine Messstation als Hauptmotiv |
-| Klettern & Seil | Kletterseil, Knoten, Karabiner, Gurt, Fels/Wand | Wind/Wasser: Seiltechnik muss Hauptthema sein |
-| Wasser | Kajak oder SUP, Paddel, Wasserfläche | reine Landschaft: Hobbygerät muss klar sichtbar sein |
+| Wirbellose | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
+| Wind & Drachen | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
+| Klettern & Seil | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
+| Wasser | **BLOCKED – exakte neue Motivbindung nicht rekonstruiert** | Kategorie war im akzeptierten neuen 8er-Block; konkrete Motivrichtung nicht erfinden |
 | Alltagsobjekte | **noch keine rekonstruierbare neue Bildbindung** | keine Münzen als Ersatz; kein generisches Sammelbild |
 | Naturfunde | **noch keine rekonstruierbare neue Bildbindung** | keine Münzen/Globen; keine alten verworfenen Motive |
 | Spielzeug & Spiele | **noch keine rekonstruierbare neue Bildbindung** | kein Miniatur-Diorama als Ersatz |
 | Münzen & Geld | **noch keine rekonstruierbare neue Bildbindung** | kein Papier-/Dokumentenmotiv und kein generisches Sammelbild |
 | Technik & Medien | Kamera/Aufnahmegerät + Rechner/Medienproduktion | Robotik/Messen: keine Messbank oder Roboterwerkstatt |
+
+Zehn Kategorien bleiben dabei bewusst ohne konkrete neue Motivdefinition: die sechs nur als 8er-Block-Mitglieder belegten Kategorien sowie Alltagsobjekte, Naturfunde, Spielzeug & Spiele und Münzen & Geld. Eine spätere Kollisionsprüfung wird erst nach echter neuer Motivbindung fachlich konkretisiert.
 
 ## Harte Kollisionspaare
 Vor PASS zwingend paarweise nebeneinander prüfen:
