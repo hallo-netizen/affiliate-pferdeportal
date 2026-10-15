@@ -1,3 +1,11 @@
+## NACHHOLBELEG V9.4 – 15.10.2026 (KEIN CURRENT)
+**Status-/NEXT-ACTION-Autorität ausschließlich `KONZEPT/CURRENT_STATE.md`.**
+
+- **HB-CONCEPT-V9-012 – weiterer Sachschutz fehlt:** Nach Sichtung aller sechs Hauptgefahren und der 31/93/285-Bestandsstruktur zeigen sich vor allem Tier- und Schädlingsschäden an Haus/Fahrzeug/Außentechnik, Gebäudefolgeschäden nach Brand, Ausfälle motorisierter privater Tore, Hagelschaden an normalen Privatwagen sowie spezifische Feuchtefolgeschäden (Hausschwamm/Poolleitungen) ohne ausgewiesene eigenständige Endkategorie. Ein Katalysatordiebstahl-Thema gehört zunächst zum bestehenden Pkw-Owner. **Vandalismus und weitere Einbruch-Kategorieäste nicht künstlich aufblasen.**
+- **Fachgegenmaßnahme nur als Audit:** `V9_4_GESAMTLUECKENPRUEFUNG_6_WELTEN_31_93_NICHT_IMPORTIEREN_20261015.json` enthält **19 neue potenzielle** Einzelblätter / 76 Artikelideen (9 Tier/Schädlinge, 3 Brandfolgen, 3 Tor-/Zutrittsantriebe, 4 Einzelkandidaten), noch **NICHT** in den 54/242-V9.3-Kandidatenstand integriert. Drei vollständige neue Gruppen erfüllen lokal mindestens drei Kinder; 5/5 beschädigte Negativfälle wurden von der isolierten Datenprüfung erkannt. Dies ist kein echter Google-SERP- oder WordPress-/Plugin-PASS.
+- **Quellen-/Owner-Grenze:** Vergleich der aktuell textgenau erreichbaren Titel enthält nur 510 individuell ausgewiesene alte R2-Match-Titel von ursprünglich 704, dazu 432 R3/V8- und 242 V9.3-Titel. Die ursprünglichen sechs R2-Delta-Titel bleiben offen. 19 neue Vorschlagskategorien daher fachlich nicht releasefreigegeben; Vegetationsbrand und Hausschwamm benötigen besonders Eltern-/Owner-Prüfung. Wortgleichheit 0 beweist keine semantische Dublettenfreiheit.
+- **Installationsregel:** Nur ein wirklich zur Nutzung freigegebenes und reproduzierbar getestetes Plugin-ZIP an den Nutzer ausgeben; Konzept-/Prüfarchive nicht als Download anbieten. Kein V9.4-Plugin, kein WP-Write.
+
 ## NACHHOLPRÜFUNG V9.3 – Brand an Auto / Wohnmobil / Freizeitboot – 15.10.2026 (kein Current)
 **Fach-Status und NEXT ACTION:** nur `KONZEPT/CURRENT_STATE.md`.
 
