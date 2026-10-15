@@ -35,10 +35,10 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 | 16 | Wind & Drachen | Weite Wiese/Strand mit großem Flugdrachen am Himmel und Spule/Leinen im Vordergrund; klare Wind-Szene | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
 | 17 | Klettern & Seil | Kletter-/Seiltechnik-Szene an Fels oder Trainingswand; Kletterseil, Knoten, Karabiner und Gurt gut erkennbar; nicht nur Landschaft | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
 | 18 | Wasser | Ruhiger See/Fluss mit eindeutigem Hobby-Wassermotiv wie Kajak oder SUP samt Paddel und Ausrüstung; kein allgemeines Landschaftsbild | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
-| 19 | Alltagsobjekte | Sammler-/Ordnungstisch mit charakteristischen Alltagsobjekten wie alten Schlüsseln, Dosen, Schreibgeräten oder kleinen Gebrauchsgegenständen; keine Münzen | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
-| 20 | Naturfunde | Forschertisch mit Steinen, Muscheln, Federn, Zapfen und Bestimmungsbuch; natürliche Fundstücke klar erkennbar | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
-| 21 | Spielzeug & Spiele | Hobbytisch mit Brettspiel und klar sichtbaren Spielzeug-/Spielfiguren; spielerische Sammlung, keine reine Modellbau-Szene | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
-| 22 | Münzen & Geld | Münzsammler-Arbeitsplatz mit Münzalbum, einzelnen Münzen, Lupe und Messwerkzeug; Münzen klarer Mittelpunkt | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 19 | Alltagsobjekte | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alten Bestand nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 20 | Naturfunde | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alte verworfene Naturfunde-Motive nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 21 | Spielzeug & Spiele | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; alte verworfene Spielzeug-/Spiele-Motive nicht verwenden | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 22 | Münzen & Geld | **KEINE MOTIVVORGABE ABLEITEN** – neue Nach-1.50.663-Bildbindung nicht rekonstruierbar; keine erfundene Ersatzrichtung | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
 | 23 | Technik & Medien | Medien-/Technikarbeitsplatz mit Kamera oder Audioaufnahmegerät, Rechner und Medienbearbeitung; moderne Technik/Medien klar erkennbar, keine allgemeine Elektronikmessung | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 
 ## Bereits nicht mehr neu zu bauen
@@ -48,7 +48,7 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 - Malen & Zeichnen – Einzelkandidat vorhanden.
 - Schrift & Lettering – Einzelkandidat vorhanden.
 - Guss & Formen – Einzelkandidat `Detailreiche Gießwerkstatt am Arbeitstisch.png` vorhanden.
-- Miniaturen & Szenen – zwei Einzelkandidaten vorhanden; Auswahl später.
+- Miniaturen & Szenen – zwei Einzelkandidaten vorhanden; **Kandidat B** ist im technischen WIP-Stage festgelegt, finale Live-Freigabe bleibt offen.
 
 ## Ausführung
 Reihenfolge strikt 1–23.
