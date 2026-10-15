@@ -1,5 +1,9 @@
 # HOBBYRAUSCH – VISUELLER AUDIT DER 13 NEU GEBUNDENEN RICHTUNGEN
 
+STATUS: **HISTORISCHER REBIND-AUDIT / SUPERSEDED**
+
+Die aktive reproduzierbare Bindung steht in `HERO_REFERENCE_CROPS_13_V2_20261015.json`; dort sind 13/13 Referenzcrops als eigene Dateien mit eindeutigen Hashes verifiziert.
+
 STAND: 2026-10-15
 ROLLE: Sichtprüfung ausschließlich der **neu erzeugten Nach-1.50.663-Vorschauen**.
 KEIN Plugin. KEINE alte Bildquelle. KEINE neue Vorschau-Runde.
