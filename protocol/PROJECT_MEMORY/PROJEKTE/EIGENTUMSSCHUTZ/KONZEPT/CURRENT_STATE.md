@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## V9 NEUER FACHSTAND 15.10.2026 – 57 EINZELENTSCHEIDUNGEN, KEIN WORDPRESS-WRITE
+**Zuständige Fachautorität: ausschließlich diese CURRENT_STATE.** Verifizierte Prüfakte: `V9_EINZELPRUEFUNG_57_20261015.md` im KONZEPT-Büro, nicht selbst Current. Der aktuelle Fachstand wurde im Anschluss an den 31/93-Audit erneut vertieft.
+
+- **Bestandsintegrität lokal:** 31/31 Bereiche, 93/93 Unterbereiche, 285/285 CORE-Blätter, echte Parent- und Kindbeziehungen konsistent; 57/57 V9-Blattkandidaten mit 239/239 Artikelideen individuell eingeordnet.
+- **Fachentscheidungen** (nur Konzept, keine WP-Freigabe): 27 vorläufig belassen; 18 nur mit präziser Artikel-/Owner-Abgrenzung; 1 nur nach Kontrolle und möglichem Transfer eines bestehenden Artikels; 2 Artikelideen-Sets überarbeiten; 6 vorgeschlagene Kategorien als bestehende Themen nicht neu anlegen; 3 Boot-Brandkategorien wegen falscher Camping-Elternposition nicht neu anlegen. **48 bleiben potenzielle Fachkandidaten, 9 nicht neu anlegen**; keine der 48 als technisch importfreigegeben behandeln.
+- **Neu eindeutig nachgewiesen:** Inhaltlich fast gleiche Dachablauf-Herbstkontroll-Titel in zwei V9-Blättern, kanonischer Owner ist `Dachabläufe & Notentwässerung`. Bestands-R3/V8-Artikel „Sommerliche Überhitzung im ausgebauten Dachgeschoss begrenzen“ kollidiert thematisch mit V9 `Dachgeschoss vor Überhitzung`; nicht kopieren, alter Owner behält mindestens drei Artikel nach einem etwaigen Transfer. Wohnmobil-/Zelt-„hitzeempfindliche Campingausrüstung“ ebenso zu trennen. Allgemeine Terrasse-/Camping-Komfortthemen sind für Eigentumsschutz nicht ausreichend.
+- **Weitere QA-Fehler der Vorprüfung:** Die Fachbewertungen für `Feuer & Gase → Kleine Betriebe & Vereine` und `Wasser & Feuchtigkeit → Kleine Betriebe & Vereine` waren offenbar vom Diebstahlbereich kopiert und sachlich falsch. R3/V8-QA und Current zählen 19 historische geplante Umhängungen, die archivierte `R3_BESTANDSOWNER_21_FACHPRUEFUNG_20261013.md` nennt aber nur 17 einzeln. Nicht raten, die zwei fehlenden Einzelzuordnungen im zentralen Workflow prüfen.
+- **Erster Blocker weiterhin:** 18 exakte Originaltitel in vier R2-Blättern nicht aus zugänglicher aktueller Quelle verifiziert. Der 13.10. R3/V8-WordPress-Readback 546/546 PASS ist unverändert der letzte bestätigte WP-Nachweis. **V9 Release BLOCKED; 0 WP-Schreibvorgänge; kein neuer Sync, keine URL-/Artikel-/Affiliate-/Designänderung**.
+- **EXAKT EINE NEXT ACTION (Fachauftrag):** Die 18 konkreten Originaltitel UND die zwei derzeit nicht einzeln belegten historischen Transferpositionen aus dem zentralen Kategorien-Workflow **read-only** nachweisen; anschließend die 57 dokumentierten Einzelfachentscheidungen gegen die wieder vollständigen Original-Owner prüfen und einzig ein geprüftes Konzept-Delta vorbereiten. Kein Import, kein bezahlter SEO-Gate.
+
+
 STAND: 2026-10-15
 STATUS: **V9-VOLLSTÄNDIGE STRUKTUR- UND ZWEITPRÜFUNG 31/31 BEREICHE + 93/93 UNTERBEREICHE + 57 BLATTKANDIDATEN / 48 WEITER PRÜFBAR, 9 GESPERRT / 239 NEUE IDEEN / 18 EXAKTE R2-ALTIDEEN FEHLEN, SEO-OWNER NICHT ABGENOMMEN / RELEASE-GATE BLOCK, WP 546/546 UNVERÄNDERT**
 
