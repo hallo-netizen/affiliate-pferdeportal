@@ -674,3 +674,24 @@ Bildproduktion und Pluginbau strikt trennen:
 3. semantischer/visueller Audit;
 4. Duplikat-/Quellenidentitätscheck;
 5. erst danach Assets ableiten und einmalig paketieren.
+
+
+## AF-037 – Einzelbild-Fortsetzung erzeugte erneut generische 24er-Collagen
+
+FEHLER:
+Nach der Nachprüfung des Vorschau-/Quellenstands wurde die Fortsetzung ausdrücklich als einzelnes Holz-Hero bzw. als getrennte Einzelbilder ohne Collage angewiesen. Die Bildgenerierung lieferte trotzdem generische 24er-Hobby-Raster mit Beschriftungen und fachfremden Themen.
+
+FOLGE:
+- die Ausgaben verletzen die harte Regel `1 Kategorie = 1 eigenständige Ausgangsquelle`;
+- sie enthalten Beschriftungen, Raster und zahlreiche fachfremde Motive;
+- sie sind für den Hero-Bestand vollständig unbrauchbar;
+- sie zählen als Quelle/Kandidat **0** und dürfen nicht paketiert oder gemappt werden.
+
+KORREKTUR:
+- diese Fehlbilder nicht wiederverwenden;
+- keine weitere Sammel-/Mehrfachgenerierung aus diesem fehlerhaften Lauf;
+- die 23 offenen Kategorien sind jetzt einzeln mit eindeutigen Motivvorgaben in `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` gebunden;
+- bestehende Vorschau-Sammelbilder bleiben nur Richtungsreferenz, niemals Quelle.
+
+VERMEIDUNGSREGEL:
+Eine neue Quelle darf nur als PASS gelten, wenn das erzeugte Ergebnis tatsächlich **ein einziges unbeschriftetes Motiv für genau die angeforderte Kategorie** enthält. Jede Raster-/Poster-/Collage-Ausgabe wird sofort verworfen und nicht weiterverarbeitet.
