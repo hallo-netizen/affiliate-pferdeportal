@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-15",
+  "kind": "RETROSPECTIVE_CATEGORY_RULE_AND_SEO_EVIDENCE_AUDIT",
+  "status": "NOT_SEO_VERIFIED_DO_NOT_CLAIM_CATEGORY_NAME_PASS",
+  "rule": "At least three direct children for each intermediate level, no maximum. Each leaf at least three semantically distinct article topics, aim five or more where substantive.",
+  "sources": [
+    {
+      "file": "HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.20_ADD_ONLY_V99.zip / includes/class-apkw-r3-v8-finalizer.php",
+      "proof": "Original R3 source_invariants demands exactly 48 new subareas with exactly 3 leaves each; r3_v8_source.provider_calls=0; historical gate 3..10."
+    },
+    {
+      "file": "HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.20_ADD_ONLY_V99.zip / includes/class-apkw-target-tree.php",
+      "proof": "Old require_direct_child_3_to_10 validation has minimum 3, maximum 10, but applies only when historical flag true."
+    },
+    {
+      "file": "HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.20_ADD_ONLY_V99.zip / includes/class-apkw-v99-add-only.php",
+      "proof": "V99 sets require_direct_child_3_to_10=false, so old 10 cap is not active for proposed v99. But all new nodes are stamped seo_owner=true, seo_seed=display name, primary_keyword=display name without verifying DataForSEO results."
+    },
+    {
+      "file": "HB_KATEGORIEN_V9_ENTWURF_NICHT_IMPORTIEREN(1).json",
+      "proof": "Current R3/V8 baseline 31 areas each exactly 3 subareas; of 93 subareas 87 have 3 leaves and 6 have 4, none >4."
+    },
+    {
+      "file": "KATEGORIEN/V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json",
+      "proof": "22 proposed added subareas: 12 with 3 leaves, 9 with 4 and 1 with 6; two proposed leaves linked to existing subarea. Thus later candidates already can exceed 3."
+    }
+  ],
+  "baseline": {
+    "existing_areas_total": 31,
+    "areas_with_exactly_3_subareas": 31,
+    "subareas_total": 93,
+    "subareas_with_3_leaf_categories": 87,
+    "subareas_with_4_leaf_categories": 6,
+    "subareas_with_5_or_more": 0,
+    "existing_end_categories": 285,
+    "existing_subareas_with_four": [
+      "Einbruch & Diebstahl > Garten & Grundstück > Gartenhäuser, Tore & Geräte",
+      "Feuer & Gase > Rauch & Brand > Brandschutz & Löschmittel",
+      "Vandalismus & Zerstörung > Vereine & Kleingewerbe > Vereine, Läden & Schäden",
+      "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Feuchtigkeit & Winterlager",
+      "Wasser & Feuchtigkeit > Keller & Rückstau > Feuchtigkeit & Trocknung",
+      "Wetter & Naturgefahren > Sturm & Hagel > Außenanlagen & Schäden"
+    ]
+  },
+  "new_v99_proposal_subareas_distribution": {
+    "3": 12,
+    "4": 9,
+    "6": 1
+  },
+  "problem_names": [
+    {
+      "name": "Sanitärräume & Nebenanlagen",
+      "problem": "Existing children Sanitäreinrichtungen, Schließfächer & Aufbewahrung and Nebenraum-Inventar are different search-intent families; parent is not semantically consistent.",
+      "required": "Review ownership and category split from actual DataForSEO intent evidence; no blind live rename."
+    },
+    {
+      "name": "Nebenraum-Inventar",
+      "problem": "Unspecific coined umbrella term, not verified keyword.",
+      "required": "Compare 'Gemeinschaftsraum Ausstattung', 'Inventar in Gemeinschaftsräumen' and relevant synonyms, then select only supported category."
+    },
+    {
+      "name": "Innenbeleuchtung & Leitsysteme",
+      "problem": "Technical jargon not directly a proved German search-intent cluster.",
+      "required": "Review stairwell lights, emergency lighting and house signage separately; avoid overlapping generic electricity/failure owners."
+    },
+    {
+      "name": "Äußere Brandeinwirkung auf Privatobjekte",
+      "problem": "Artificial nonspecific category heading, source is new V9.8 editorial proposal not provider keyword measurement.",
+      "required": "Assess actual search terms for Waldbrand am Haus, Funkenflug and Nachbarhausbrand; select functional grouping with real evidence."
+    }
+  ],
+  "conclusion": "The 3..10 cap in old R3 archive remains a HISTORICAL generation/verification invariant; the V99 composer disables the old max10 flag. The current defect is that editorial coverage and DataForSEO naming evidence were never completed before candidate release. Do not conflate minimum3 with target-exactly3. Do not silently rewrite historical signed node data.",
+  "quality_gates": [
+    "WordPress existing categories, node IDs, slugs and URLs unchanged until explicitly authorized correction",
+    "All 31 existing areas and 93 subareas individually recheck expansion without max, include 3-5 distinct article intents per proposed leaf",
+    "Every new/renamed category name must carry verified DataForSEO result: Germany/de, keyword, search volume or no-volume context, SERP intent and candidate alternatives, provider task reference, cost, timestamp and evidence status",
+    "Only strong positive editor-signed findings may be published. Unknown provider data = NOT VERIFIED not PASS",
+    "DataForSEO cannot be queried from this code session without WordPress-held credentials; do not invent call results or fake search volumes",
+    "Exact current installed plugin source and actual WordPress readback required before creating next installable update"
+  ]
+}
