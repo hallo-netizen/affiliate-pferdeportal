@@ -1,3 +1,10 @@
+## NACHHOLPRÜFUNG V9.3 – Brand an Auto / Wohnmobil / Freizeitboot – 15.10.2026 (kein Current)
+**Fach-Status und NEXT ACTION:** nur `KONZEPT/CURRENT_STATE.md`.
+
+- **HB-CONCEPT-V9-011 – Echte thematische Brandlücke:** R3/V8 hat unter `Feuer & Gase` spezifischen Camper-/Wohnmobil-Brandschutz, aber weder eigenständige PKW-/Oldtimerbrand- noch Bootsbrand-Endkategorien. Die vorher vorgeschlagenen drei Bootskategorien unter `Camping` waren wegen falschem Elternbereich zu Recht nicht importierbar. **Korrektur ausschließlich im V9.3-Konzept**: neue Untergruppe `Brände an Privatfahrzeugen & Freizeitbooten` unter `Rauch & Brand`, sechs Blätter (inklusive Elektroauto/Bootsmotor/Bordgas/Bordstrom/Kajütenwarnung), fünf Artikelideen je Blatt. Vorhandenes Camping nicht kopieren.
+- **Beleg und QA:** `V9_3_BRAND_AUTO_BOOTE_54_KATEGORIEN_242_IDEEN_NICHT_IMPORTIEREN_20261015.json`: 54 V9.3-Kandidaten / 242 Titel, 9 Blätter gesperrt, **11/11 lokale Zusatzprüfungen PASS**. Keine vollständige semantische oder technisch/WordPress-live Freigabe.
+- **Noch offen:** sechs Originaltitel im 12.10. R2, abschließende SEO-Owner-Abgrenzung, Kategorie-Workflow-Delta mit Slug-/URL-/Artikel-/Link-Prüfung sowie vollständigem WordPress-Readback. Plugin-Quellpaket 1.14.8.19 nicht als prüfbarer Installationsstand bestätigt. **Release BLOCKED.** Keine neue Plugin-ZIP anbieten, bevor wirklich installationsfertig.
+
 ## NACHHOLPRÜFUNG V9.2 – 15.10.2026 – STATUS NUR IN CURRENT_STATE
 - **V9-008 – doppelter Frost-Artikel:** V9.1-Entwurf `Dachrinnen & Fallrohre` hatte „Frostschäden an Regenfallrohren frühzeitig erkennen“; bestehende R3/V8-Kategorie `Gefrorene Außenentwässerung` führt bereits „Frostschäden an Dachentwässerung erkennen“. **Korrigiert im V9.2-Entwurf:** loser Halt von Fallrohrschellen an der Hauswand statt zweiter Frost-Ratgeber. Kein WordPress-Write.
 - **V9-009 – keine aktuelle Pluginquelle:** Installation des bestehenden Kategorie-Workflow 1.14.8.19 im historischen WP-Readback bekannt; Original-Plugin-ZIP/kompletter aktueller Quellcode nicht in vorliegenden Dateien bestätigt. **Daher kein installierbares V9.2-Plugin freigeben und keinen Entwurf als Plugin ausgeben.**
