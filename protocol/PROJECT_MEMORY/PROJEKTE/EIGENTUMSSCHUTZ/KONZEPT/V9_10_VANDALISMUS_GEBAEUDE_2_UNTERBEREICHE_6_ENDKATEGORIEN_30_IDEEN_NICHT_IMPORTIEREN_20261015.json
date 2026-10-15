@@ -1,0 +1,151 @@
+{
+  "schema": "HB-V9.10-BUILDING-VANDALISM-AREA-DEEP-EXPANSION",
+  "date": "2026-10-15",
+  "status": "FACHENTWURF_NOT_INSTALLED",
+  "contract": "At least three direct children, unlimited above; each terminal category >=3 substantially different article intents, ideally 5; preserve all existing categories and slugs",
+  "source_evidence": {
+    "current": "R3/V8 baseline audit 31 areas / 93 subareas / 285 CORE leaves; present area Gebäude & Ausstattung 3 subareas / 9 leaves; R3 432-title editorial plan",
+    "target_area": "Vandalismus & Zerstörung → Gebäude & Ausstattung",
+    "parent_ref": "core:area:4611320db640",
+    "wordpress_area_object_id_historical": 113,
+    "existing_subareas": [
+      {
+        "name": "Eingänge, Glas & Klingeln",
+        "id": "core:subarea:115822da2ae9fc07",
+        "leaf_count": 3
+      },
+      {
+        "name": "Innenräume & Hausgemeinschaft",
+        "id": "core:subarea:r3-c35767a9141583bc",
+        "leaf_count": 3
+      },
+      {
+        "name": "Sanitärräume & Nebenanlagen",
+        "id": "core:subarea:r3-f8db3998237d9b30",
+        "leaf_count": 3
+      }
+    ]
+  },
+  "added_subareas": [
+    {
+      "name": "Private Wohnräume & Einbauten",
+      "parent_ref": "core:area:4611320db640",
+      "id_only_proposal": "hb-v910-building-vandalism-1",
+      "intent": "Mutwillige Beschädigungen innerhalb privat genutzter Wohnräume, nicht Gemeinschaftsflure und nicht normale Gebrauchsspuren",
+      "leaves": [
+        {
+          "name": "Innenwände & Decken beschädigt",
+          "id_only_proposal": "hb-v910-building-vandalism-1-1",
+          "article_ideas": [
+            "Mutwillige Beschädigungen an Tapeten von üblichen Gebrauchsspuren unterscheiden",
+            "Schlag- und Kratzspuren in Innenputz fachgerecht instand setzen lassen",
+            "Beschmierte Wände in einer vermieteten Wohnung materialschonend reinigen",
+            "Widerstandsfähige Wandbeläge für gefährdete privat genutzte Räume vergleichen",
+            "Beschädigte Deckenbekleidungen nach vorsätzlichen Eingriffen fachlich prüfen lassen"
+          ]
+        },
+        {
+          "name": "Bodenbeläge & Wohnraumtreppen",
+          "id_only_proposal": "hb-v910-building-vandalism-1-2",
+          "article_ideas": [
+            "Mutwillige Parkettkratzer von gewöhnlicher Abnutzung abgrenzen",
+            "Vorsätzlich beschädigtes Vinyl oder Laminat fachgerecht instand setzen lassen",
+            "Herausgebrochene Bodenfliesen nach Sachbeschädigung austauschen lassen",
+            "Beschädigte Treppenstufen in privaten Wohnbereichen vor weiterer Nutzung prüfen lassen",
+            "Robuste Bodenbeläge für oft beschädigte Ferienwohnungen vergleichen"
+          ]
+        },
+        {
+          "name": "Einbauküchen & festes Wohninventar",
+          "id_only_proposal": "hb-v910-building-vandalism-1-3",
+          "article_ideas": [
+            "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+            "Kratzer und Schlagstellen an Küchenarbeitsplatten materialgerecht behandeln",
+            "Herausgerissene Scharniere an Einbauschränken fachgerecht befestigen lassen",
+            "Einbaugeräte nach mutwilligen Stößen vor Wiederinbetriebnahme prüfen lassen",
+            "Kratzfeste Küchenfronten und robuste Beschläge für vermietete Wohnungen vergleichen"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Innenliegende Gebäudeversorgung",
+      "parent_ref": "core:area:4611320db640",
+      "id_only_proposal": "hb-v910-building-vandalism-2",
+      "intent": "Vorsätzliche Eingriffe an geschützter innenliegender Gebäudetechnik; keine spontanen technischen Ausfälle und keine Außentechnik",
+      "leaves": [
+        {
+          "name": "Heizräume & Heizkreisverteiler",
+          "id_only_proposal": "hb-v910-building-vandalism-2-1",
+          "article_ideas": [
+            "Unbefugten Zutritt zu Heizungsräumen im kleinen Wohnhaus erschweren",
+            "Manipulationsspuren am Heizkreisverteiler ohne Eingriff in die Anlage dokumentieren",
+            "Beschädigte Abdeckungen und Verschlüsse an Heizkreisverteilern ersetzen lassen",
+            "Heizungsregelung nach vermuteter Fremdverstellung fachlich überprüfen lassen",
+            "Zuständigkeiten und Schlüsselverwaltung für gemeinschaftliche Heizräume organisieren"
+          ]
+        },
+        {
+          "name": "Innenverteiler & Sicherungskästen",
+          "id_only_proposal": "hb-v910-building-vandalism-2-2",
+          "article_ideas": [
+            "Innenliegende Elektroverteiler im kleinen Mehrfamilienhaus vor unbefugtem Zugriff schützen",
+            "Äußere Manipulationsspuren an Sicherungskästen ohne Öffnen erkennen",
+            "Beschädigte Türen und Verschlüsse von Elektroverteilungen fachgerecht ersetzen lassen",
+            "Zugang zu Zählerschränken in Hausfluren sicher organisieren",
+            "Elektroanlage nach mutwilliger Beschädigung erst nach Fachprüfung wieder nutzen"
+          ]
+        },
+        {
+          "name": "Wasserabsperrungen & Technikschränke",
+          "id_only_proposal": "hb-v910-building-vandalism-2-3",
+          "article_ideas": [
+            "Zugängliche Wasserabsperrungen im Wohnhaus gegen unbefugte Bedienung schützen",
+            "Beschädigte Wasserzähler-Schränke im Innenraum sicher instand setzen lassen",
+            "Vorsätzliche Beschädigung von Wasserleitungen von natürlichem Verschleiß fachlich abgrenzen",
+            "Abschließbare Technikschränke für Wasserinstallationen vergleichen",
+            "Nach absichtlichem Wasseraustritt in Technikräumen weitere Gebäudeschäden begrenzen lassen"
+          ]
+        }
+      ]
+    }
+  ],
+  "count_after_hypothetical_approval": {
+    "subareas_at_building_area": 5,
+    "leafs_at_building_area": 15,
+    "net_added_subareas": 2,
+    "net_added_leaves": 6,
+    "net_new_article_ideas": 30,
+    "existing_core_categories_renamed": 0,
+    "existing_core_parents_moved": 0
+  },
+  "owner_boundaries": [
+    "Fassade & Außenflächen retains external wall/graffiti topics; new Wohnräume only interior privately used rooms.",
+    "Existing Innenräume & Hausgemeinschaft keeps shared corridors, hall lighting, shared cellars and washrooms; new private indoor categories do not copy those owners.",
+    "Existing Sanitärräume & Nebenanlagen keeps WC and lockers; new kitchen built-ins are not sanitary fixtures.",
+    "Existing Außentechnik keeps external heat pumps and outdoor boxes; new indoor utilities cover only deliberate tampering on the indoor side.",
+    "Existing Technik & Ausfälle keeps technical malfunction; indoor vandalism topics cover intentional damage/unauthorized use.",
+    "Previously excluded general Sabotagespuren & Beweissicherung stays excluded because broad proof/reporting articles overlap existing Vandalismusschäden dokumentieren."
+  ],
+  "qa": {
+    "existing_area_ID_real": "core:area:4611320db640",
+    "existing_WP_area_ID_113": true,
+    "current_subareas_exactly_three": true,
+    "current_end_leaves_exactly_nine": true,
+    "added_subareas": true,
+    "each_subarea_at_least_three_leafs": true,
+    "new_leafs_six": true,
+    "at_least_five_articles_each": true,
+    "ideas_30": true,
+    "all_article_titles_unique": true,
+    "all_leaf_names_unique": true,
+    "no_exact_vs_R3_and_V9_9": true,
+    "existing_nodes_unchanged": true
+  },
+  "qa_limits": [
+    "Title uniqueness is not equivalent to full semantic SEO audit across all 1136 old titles.",
+    "No onsite WP readback of V9.10; it is only a source-backed proposal.",
+    "No installation/activation or plugin source modification authorized by this concept document."
+  ],
+  "technical_owner": "Only EIGENTUMSSCHUTZ/KATEGORIEN central office may integrate after safety/ownership approval"
+}
