@@ -74,7 +74,8 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 ## Ausführungs-Arbeitslisten
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – Motivvorgaben für die noch nicht finalisierten Einzelquellen.
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
-- `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle/Hash fixiert; nur Referenz, keine Releasequelle.
+- `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle fixiert; 11 unverändert PASS, Keramik & Glas sowie Moos & Miniaturgärten auf stärkere bereits vorhandene neue Vorschauen umgebunden; nur Referenz, keine Releasequelle.
+- `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 
@@ -83,7 +84,7 @@ Arbeitslisten-Konsistenz: **PASS**
 - exakt 13 gebundene neue Vorschau-Richtungen;
 - exakt 6 im Nachbarchat belegte neue Produktionsrichtungen;
 - exakt 4 weiterhin nicht rekonstruierbare neue Bindungen;
-- 13/13 Referenzcrops mit 13/13 eindeutigen Hashes.
+- 11/13 unveränderte Referenzcrops mit eindeutigen Hashes; 2/13 bewusst auf fachlich stärkere neue Quelle/Zelle umgebunden, deren alte Crop-Hashes ausdrücklich ungültig sind.
 - `HERO_TARGET_PATHS_30_150650_20261015.md` – exakte 30 Hero- und 30 Preview-Zielpfade der eingefrorenen 1.50.650-Basis; 60/60 vorhanden und eindeutig.
 - `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` – realer lokaler KISS-Nachweis: bei 7 vorhandenen Quellen exakt 14 Bilddateien ersetzt, sonst 0 Änderungen; Mapping byte-identisch; ZIP-Roundtrip PASS.
 
