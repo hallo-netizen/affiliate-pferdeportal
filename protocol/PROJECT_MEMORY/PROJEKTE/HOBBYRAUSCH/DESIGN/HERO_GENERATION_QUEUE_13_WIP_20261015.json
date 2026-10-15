@@ -29,7 +29,11 @@
       "collision_peers": [
         "Heimwerken"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Holz“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreativwelten: Hobby und Handwerk.png, R2C3, Dateibindung file_00000000f3dc81f5a996ca4c06d6051e. Motivvorgabe: Weite helle Holzwerkstatt; Hobelbank, Handhobel, Holzspäne und ein klar erkennbares unfertiges Holzwerkstück; kein Leder, keine allgemeine DIY-Szene. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Heimwerken“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Holz“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreativwelten: Hobby und Handwerk.png, R2C3, Dateibindung file_00000000f3dc81f5a996ca4c06d6051e. Motivvorgabe: Weite helle Holzwerkstatt; Hobelbank, Handhobel, Holzspäne und ein klar erkennbares unfertiges Holzwerkstück; kein Leder, keine allgemeine DIY-Szene. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Heimwerken“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000c2708206b7b5448180c8b37e",
+      "reference_crop_sha256": "eb5d962abcf06012c4b89e14f7c1ee686dd4b51b396541564b93e7c9be43cf9e",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C3"
     },
     {
       "order": 2,
@@ -42,7 +46,11 @@
       "collision_peers": [
         "Textilgestaltung"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Leder“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreativwelten: Hobby und Handwerk.png, R2C4, Dateibindung file_00000000f3dc81f5a996ca4c06d6051e. Motivvorgabe: Weite Lederwerkstatt; Lederhaut, Nähkloben/Naht, Lochwerkzeug und ein halbfertiges Lederstück wie Gürtel oder Etui; kein Holzmotiv als Hauptthema. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Textilgestaltung“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Leder“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreativwelten: Hobby und Handwerk.png, R2C4, Dateibindung file_00000000f3dc81f5a996ca4c06d6051e. Motivvorgabe: Weite Lederwerkstatt; Lederhaut, Nähkloben/Naht, Lochwerkzeug und ein halbfertiges Lederstück wie Gürtel oder Etui; kein Holzmotiv als Hauptthema. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Textilgestaltung“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000e92082309176c0164e8f3336",
+      "reference_crop_sha256": "2100c816732f3698ae079172d0ed3e639911f2671af070c54e9cd8ed1dbf3913",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C4"
     },
     {
       "order": 3,
@@ -55,7 +63,11 @@
       "collision_peers": [
         "Guss & Formen"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Keramik & Glas“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobby- und Wissenschaftscollage in zwölf Bildern.png, R2C1, Dateibindung file_00000000bf9481f4a5b8b29d6b37d496. Motivvorgabe: Töpferei/Keramikgefäß plus mehrere klar erkennbare Glasgefäße in einer zusammenhängenden Atelier-Szene; kein Collage-Look. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Guss & Formen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Keramik & Glas“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobby- und Wissenschaftscollage in zwölf Bildern.png, R2C1, Dateibindung file_00000000bf9481f4a5b8b29d6b37d496. Motivvorgabe: Töpferei/Keramikgefäß plus mehrere klar erkennbare Glasgefäße in einer zusammenhängenden Atelier-Szene; kein Collage-Look. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Guss & Formen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_000000004a708211a8eb2531b80f259a",
+      "reference_crop_sha256": "81dbc6f68de0d090da4c2791aaac2705c3f660fdd38a2061ffc31ee0612eeafc",
+      "reference_crop_grid": "4x3",
+      "reference_crop_cell": "R2C1"
     },
     {
       "order": 4,
@@ -68,7 +80,11 @@
       "collision_peers": [
         "Messen & Analysieren"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Mechanik & Uhren“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R1C2, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Weite Uhrmacher-/Feinmechanikwerkstatt; geöffnete Uhr, Zahnräder, Pinzetten, Lupenlampe und Werkzeug; Uhr klarer Mittelpunkt. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Messen & Analysieren“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Mechanik & Uhren“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R1C2, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Weite Uhrmacher-/Feinmechanikwerkstatt; geöffnete Uhr, Zahnräder, Pinzetten, Lupenlampe und Werkzeug; Uhr klarer Mittelpunkt. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Messen & Analysieren“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_0000000008f4820eaf96b99bbfe827fe",
+      "reference_crop_sha256": "823b217a5933a01af4c29298ab963322538289f319028e81dacfba56edbf1b39",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R1C2"
     },
     {
       "order": 5,
@@ -82,7 +98,11 @@
         "Mechanik & Uhren",
         "Robotik & Automation"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Messen & Analysieren“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R1C3, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Technischer Messtisch; Messschieber, Multimeter, Messuhr/Prüfkörper und Notizen; Fokus auf Messen und Prüfen, nicht Elektronikbastelei. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Mechanik & Uhren“, „Robotik & Automation“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Messen & Analysieren“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R1C3, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Technischer Messtisch; Messschieber, Multimeter, Messuhr/Prüfkörper und Notizen; Fokus auf Messen und Prüfen, nicht Elektronikbastelei. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Mechanik & Uhren“, „Robotik & Automation“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_0000000091e481f58f90ac9afaae20b8",
+      "reference_crop_sha256": "c4f7148b975df7288ffb61357ad6dcf971c3aabb33ef84cc313d621fd97738f1",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R1C3"
     },
     {
       "order": 6,
@@ -93,7 +113,11 @@
       "reference_file_name": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
       "reference_cell": "R1C4",
       "collision_peers": [],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Mikroskopie“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R1C4, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Heller Mikroskop-Arbeitsplatz; Mikroskop, vorbereitete Objektträger, Probengefäße und Dokumentation; Mikroskop eindeutig Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Mikroskopie“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R1C4, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Heller Mikroskop-Arbeitsplatz; Mikroskop, vorbereitete Objektträger, Probengefäße und Dokumentation; Mikroskop eindeutig Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000fe6881f5820daf3e09c3bb2b",
+      "reference_crop_sha256": "3ae3f0339d914112471bf0f05425275b2757e7f5557ba6bf336c75d23bb92edb",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R1C4"
     },
     {
       "order": 7,
@@ -107,7 +131,11 @@
         "Astronomie",
         "Wind & Drachen"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Wetter & Umwelt“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R2C1, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Weite Außen-Szene mit kleiner Wetter-/Umweltmessstation, Windmesser, Sensoren und Landschaft; Messstation vollständig sichtbar. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Astronomie“, „Wind & Drachen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Wetter & Umwelt“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten: Natur, Handwerk und Wissenschaft.png, R2C1, Dateibindung file_000000004ac481f48064881a32cdc08c. Motivvorgabe: Weite Außen-Szene mit kleiner Wetter-/Umweltmessstation, Windmesser, Sensoren und Landschaft; Messstation vollständig sichtbar. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Astronomie“, „Wind & Drachen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000636481faa00fb696e5d9fd34",
+      "reference_crop_sha256": "27a85641b2993b0463440b792fd383b1f53d21172cbec26528c55e0fd7b9a477",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C1"
     },
     {
       "order": 8,
@@ -120,7 +148,11 @@
       "collision_peers": [
         "Essbare Pflanzen"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Gärtnern“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten im liebevollen Detail.png, R2C4, Dateibindung file_0000000005f882108d73f6e9cad13f4b. Motivvorgabe: Allgemeine Gartenarbeit mit Blumen-/Staudenbeet, Erde, Gießkanne und Handwerkzeug; keine essbaren Pflanzen als Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Essbare Pflanzen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Gärtnern“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten im liebevollen Detail.png, R2C4, Dateibindung file_0000000005f882108d73f6e9cad13f4b. Motivvorgabe: Allgemeine Gartenarbeit mit Blumen-/Staudenbeet, Erde, Gießkanne und Handwerkzeug; keine essbaren Pflanzen als Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Essbare Pflanzen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000c9d881f49197d8c4da09a13b",
+      "reference_crop_sha256": "e408066935da3ba539f139faf5dec81ca990b6d186bc087ffdc4efc401e5ef46",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C4"
     },
     {
       "order": 9,
@@ -133,7 +165,11 @@
       "collision_peers": [
         "Gärtnern"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Essbare Pflanzen“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R2C2, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Nutzgarten/Hochbeet mit Tomaten, Salat und Küchenkräutern, dazu Gießkanne und Gartenwerkzeug; eindeutig essbar. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Gärtnern“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Essbare Pflanzen“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R2C2, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Nutzgarten/Hochbeet mit Tomaten, Salat und Küchenkräutern, dazu Gießkanne und Gartenwerkzeug; eindeutig essbar. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Gärtnern“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000da0881f48af7d191efa15e81",
+      "reference_crop_sha256": "af524850c04a0fe0e24270f6586685d3eae80d8096dba5338b7c468e7761444e",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C2"
     },
     {
       "order": 10,
@@ -146,7 +182,11 @@
       "collision_peers": [
         "Miniaturen & Szenen"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Moos & Miniaturgärten“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten zwischen Handwerk und Natur.png, R2C3, Dateibindung file_000000000a448230b1857dced79db8ec. Motivvorgabe: Echte Moos-Miniaturlandschaft mit kleinem Weg/Brücke und klarer Miniaturwirkung; kein normales Gartenbeet. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Miniaturen & Szenen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Moos & Miniaturgärten“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Hobbywelten zwischen Handwerk und Natur.png, R2C3, Dateibindung file_000000000a448230b1857dced79db8ec. Motivvorgabe: Echte Moos-Miniaturlandschaft mit kleinem Weg/Brücke und klarer Miniaturwirkung; kein normales Gartenbeet. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Miniaturen & Szenen“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000f05081f6a704998bdc68cc4b",
+      "reference_crop_sha256": "e15ad0a0e273632bf4ff43fa62adaae3a582e03bfc36997ef2d913657ca80f10",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C3"
     },
     {
       "order": 11,
@@ -159,7 +199,11 @@
       "collision_peers": [
         "Naturfunde"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Pilze & Kulturen“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R2C4, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Pilzzucht-Regal oder Hobbyzuchtbereich mit Substratblöcken und deutlich sichtbaren Speise-/Zuchtpilzen; keine Wald-Pilzsuche. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Naturfunde“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Pilze & Kulturen“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Achtfache Natur- und Handwerksvielfalt.png, R2C4, Dateibindung file_00000000cc50820c8d598e50ff0d1b07. Motivvorgabe: Pilzzucht-Regal oder Hobbyzuchtbereich mit Substratblöcken und deutlich sichtbaren Speise-/Zuchtpilzen; keine Wald-Pilzsuche. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Naturfunde“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_000000006914820ea7ad42b63de1ff6e",
+      "reference_crop_sha256": "91d05e690d4bae26c0c72e120add95472cfb7d63d1ffe461c7ebed3da87f14ad",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C4"
     },
     {
       "order": 12,
@@ -172,7 +216,11 @@
       "collision_peers": [
         "Wirbellose"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Ameisen & Insekten“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Handwerk, Natur und Mikrowelten im Raster.png, R2C4, Dateibindung file_00000000fbc88246a147e4f41d943b02. Motivvorgabe: Formicarium/Insektenbeobachtung; Ameisen in klar erkennbarem Nest-/Beobachtungssystem, Lupe und sachlicher Arbeitsplatz; keine Blumen als Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Wirbellose“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Ameisen & Insekten“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Handwerk, Natur und Mikrowelten im Raster.png, R2C4, Dateibindung file_00000000fbc88246a147e4f41d943b02. Motivvorgabe: Formicarium/Insektenbeobachtung; Ameisen in klar erkennbarem Nest-/Beobachtungssystem, Lupe und sachlicher Arbeitsplatz; keine Blumen als Hauptmotiv. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Wirbellose“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_0000000065ec81f4b0b01a4596ae689f",
+      "reference_crop_sha256": "09b984a06416c59a916cf231b79a79368988133389579fc048aed51e973e757b",
+      "reference_crop_grid": "4x2",
+      "reference_crop_cell": "R2C4"
     },
     {
       "order": 13,
@@ -185,7 +233,11 @@
       "collision_peers": [
         "Robotik & Automation"
       ],
-      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Technik & Medien“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreative Welten im Raster.png, R2C1, Dateibindung file_00000000775c81f48afca940c8de63f9. Motivvorgabe: Medien-/Technikarbeitsplatz mit Kamera oder Audioaufnahmegerät, Rechner und Medienbearbeitung; moderne Technik/Medien klar erkennbar, keine allgemeine Elektronikmessung. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Robotik & Automation“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren."
+      "prompt": "Erzeuge genau EIN eigenständiges fotorealistisches breites Einzelbild für die Hobby-Depot-Kategorie „Technik & Medien“. Halte dich visuell an die bereits neu erzeugte Referenzrichtung Kreative Welten im Raster.png, R2C1, Dateibindung file_00000000775c81f48afca940c8de63f9. Motivvorgabe: Medien-/Technikarbeitsplatz mit Kamera oder Audioaufnahmegerät, Rechner und Medienbearbeitung; moderne Technik/Medien klar erkennbar, keine allgemeine Elektronikmessung. Komposition: weite ruhige Szene, Hauptmotiv vollständig und sofort verständlich, genügend Abstand für späteren 600×320-Hero-Crop und 200×107-Preview-Crop. Verboten: Collage, Raster, Bild-in-Bild, Poster, Beschriftungen, Logos, Rahmen, zweite Hobbykategorie, Wiederverwendung einer anderen Ausgangsszene. Sichtbare Abgrenzung: Das Motiv darf nicht wie „Robotik & Automation“ wirken. Das Bild muss scharf sein und als eigenständige neue Ausgangsquelle funktionieren.",
+      "reference_crop_file_id": "file_00000000d30481f5a4572e5129282791",
+      "reference_crop_sha256": "de0724f0160f53022ea5575bdef34d84fee18507dbe50f600568cc4dea4f7c91",
+      "reference_crop_grid": "5x2",
+      "reference_crop_cell": "R2C1"
     }
   ],
   "validation": {
@@ -193,6 +245,9 @@
     "unique_categories": 13,
     "exact_reference_ids": true,
     "no_guessed_motifs": true,
-    "no_preview_round": true
+    "no_preview_round": true,
+    "exact_reference_crop_ids": true,
+    "exact_reference_crop_hashes": true,
+    "reference_crop_v2_count": 13
   }
 }
