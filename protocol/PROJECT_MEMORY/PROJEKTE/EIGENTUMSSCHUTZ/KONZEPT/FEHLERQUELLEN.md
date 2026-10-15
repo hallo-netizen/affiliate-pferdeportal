@@ -1,3 +1,9 @@
+## NACHHOLPRÜFUNG V9.2 – 15.10.2026 – STATUS NUR IN CURRENT_STATE
+- **V9-008 – doppelter Frost-Artikel:** V9.1-Entwurf `Dachrinnen & Fallrohre` hatte „Frostschäden an Regenfallrohren frühzeitig erkennen“; bestehende R3/V8-Kategorie `Gefrorene Außenentwässerung` führt bereits „Frostschäden an Dachentwässerung erkennen“. **Korrigiert im V9.2-Entwurf:** loser Halt von Fallrohrschellen an der Hauswand statt zweiter Frost-Ratgeber. Kein WordPress-Write.
+- **V9-009 – keine aktuelle Pluginquelle:** Installation des bestehenden Kategorie-Workflow 1.14.8.19 im historischen WP-Readback bekannt; Original-Plugin-ZIP/kompletter aktueller Quellcode nicht in vorliegenden Dateien bestätigt. **Daher kein installierbares V9.2-Plugin freigeben und keinen Entwurf als Plugin ausgeben.**
+- **V9-010 – neue Einzelprüfung:** `V9_2_48_KATEGORIEN_212_IDEEN_REDAKTIONELL_NICHT_IMPORTIEREN_20261015.json` im Konzeptbüro; 48/212 weiterhin nur Kandidaten; 9/27 separat zurückgestellt; 4 konkrete redaktionelle Revisionen seit V9; 16/16 lokale Datenintegritätsprüfungen PASS. **Nicht** ein 1.136-Ideen-Semantik-/WordPress-Live-PASS. Zum individuellen Originalabgleich dieser Runde waren 510 R2-Titel als Matchtexte in der R3-V8-Originalprüfung und 432 R3-Titel benannt; sechs 12.10.-R2-Titel weiterhin nicht belegt.
+- **Erster offener Blocker:** sechs verbleibende Originaltitel + Fach-Owner-Abnahme; technische Preflight-/WordPress-/URL-/Rollback-Prüfung später im zentralen Kategorienbüro. Einzige aktive NEXT ACTION siehe KONZEPT/CURRENT_STATE.md.
+
 ## NACHHOLBELEG V9.1 – 15.10.2026 (kein eigener Current)
 **EINZIGE AKTUELLE STATUS-/NEXT-ACTION-QUELLE:** `KONZEPT/CURRENT_STATE.md`. Die historischen Formulierungen „18 fehlende Originaltitel“ und „zwei nicht belegte Moves“ in den weiter unten archivierten V9-Akten sind durch Originalquellenfund **teilweise bzw. vollständig überholt**.
 
