@@ -38,7 +38,7 @@ Keine Änderung an:
 ## Technisch bestätigter späterer Releasepfad
 Auf der echten 1.50.650-Basis wurde lokal bestätigt: 7 vorhandene neue Einzelquellen lassen sich durch Austausch von exakt 14 bestehenden WEBP-Dateien einsetzen; Hero **600×320**, Preview **200×107**; 0 Code-/Mapping-/Strukturänderungen. Der vollständige Zielplan umfasst 30 Hero- plus 30 Preview-Dateien an bereits vorhandenen Pfaden. Die frühere interne 600×220-Zwischenableitung wurde vor Release verworfen. Siehe Design-Evidenz `HERO_ASSET_STAGE_7_VISUALPASS_20261015.md`, `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` und `HERO_TARGET_PATHS_30_150650_20261015.md`.
 
-Zusätzlich liegt mit `HERO_BUILD_MANIFEST_30_WIP_20261015.json` eine geprüfte maschinenlesbare 30er-Bindung vor: 30 eindeutige Kategorien, 30 eindeutige Hero-Zielpfade, 30 eindeutige Preview-Zielpfade, Status 7+13+6+4, Release weiterhin gesperrt. Für die 13 Kategorien mit exakt gebundener neuer Nach-1.50.663-Referenz existiert `HERO_GENERATION_QUEUE_13_WIP_20261015.json`. Die übrigen 10 Kategorien bleiben bewusst ohne erfundene Motivvorgabe.
+Zusätzlich liegt mit `HERO_BUILD_MANIFEST_30_WIP_20261015.json` eine geprüfte maschinenlesbare 30er-Bindung vor: 30 eindeutige Kategorien, 30 eindeutige Hero-Zielpfade, 30 eindeutige Preview-Zielpfade, Status 7+13+6+4, Release weiterhin gesperrt. Für die 13 Kategorien mit exakt gebundener neuer Nach-1.50.663-Referenz existiert `HERO_GENERATION_QUEUE_13_WIP_20261015.json`; jede Position ist an einen verifizierten V2-Referenzcrop sowie eindeutige Hero-/Preview-Zielpfade gebunden. Die übrigen 10 Kategorien bleiben bewusst ohne erfundene Motivvorgabe.
 
 ## Artefakt
 Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter 30/30-Kandidat existiert.
