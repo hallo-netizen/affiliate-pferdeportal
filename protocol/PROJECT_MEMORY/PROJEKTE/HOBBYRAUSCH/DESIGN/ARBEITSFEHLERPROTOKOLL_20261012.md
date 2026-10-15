@@ -601,3 +601,45 @@ In-Place-Overwrite eines aktiven Vorgängers simuliert; Activation Hook nicht au
 
 VERMEIDUNGSREGEL:
 Bei In-Place-Updates aktiver Helper-Plugins darf die eigentliche Migration nicht an einen Admin-only-Hook gebunden sein, wenn der Nutzer unmittelbar im Frontend prüft. Der reale nächste Requestpfad muss E2E simuliert werden.
+
+
+## AF-035 – 1.50.663 recycelte Grundszenen und erzeugte Bild-in-Bild statt echter kategoriespezifischer Heroes
+
+FEHLER:
+Obwohl bereits verbindlich festgelegt war, pro Kategorie ein eigenständiges, semantisch klares, weit gefasstes Motiv zu verwenden, wurde für 1.50.663 ein kleiner Bestand an Grundszenen mehrfach wiederverwendet. Teilweise wurden nur andere Ausschnitte derselben Szene benutzt; zusätzlich entstanden sichtbare Bild-in-Bild-/Collage-Kompositionen.
+
+LIVE-BEFUND:
+Der Nutzer hat 1.50.663 visuell verworfen. Besonders bestätigt:
+- Papierkunst: Bild in Bild;
+- Schrift & Lettering: Bild in Bild;
+- Holz: falsches Motiv;
+- Leder: falsches Motiv;
+- Keramik & Glas: Bild in Bild;
+- Mechanik & Uhren: falsches Motiv + Bild in Bild;
+- Astronomie: falsches Motiv + Bild in Bild;
+- Messen & Analysieren: falsches Motiv;
+- Mikroskopie: falsches Motiv + Bild in Bild;
+- Wetter & Umwelt: falsches Motiv + Bild in Bild;
+- Gärtnern: doppelt;
+- Moos & Miniaturgärten: falsches Motiv + doppelt;
+- Pilze & Kulturen: falsches Motiv;
+- Ameisen & Insekten: falsches Motiv;
+- Wirbellose: falsches Motiv + dreifach;
+- Naturfunde: verworfen;
+- Spielzeug & Spiele: falsches Motiv;
+- Technik & Medien: falsches Motiv + Bild in Bild.
+
+URSACHE:
+Technische Positiv-/Negativtests prüften Dateiaustausch, Mapping, Hooks und Integrität, aber nicht ausreichend die semantische Einzigartigkeit der **Ausgangsquelle**. Unterschiedliche Dateien/Crops wurden erneut fälschlich als unterschiedliche Motive behandelt.
+
+KORREKTUR:
+1.50.663 ist vollständig verworfen. Seine Ausgangsszenen dürfen für die verworfenen Kategorien weder direkt noch als Crop/Teilbild/Collage erneut verwendet werden.
+
+VERMEIDUNGSREGEL:
+Vor jedem nächsten Hero-Release muss für jede Kategorie eine Quellen-ID geführt werden. PASS nur wenn:
+1. Quelle fachlich eindeutig passt;
+2. Quellen-ID innerhalb des freizugebenden Satzes einzigartig ist;
+3. kein Crop derselben Quelle als zweite Kategorie vorkommt;
+4. kein Bild-in-Bild/Compositing verwendet wird;
+5. Hero als breite Szene mit erkennbarem Hauptmotiv funktioniert;
+6. menschlicher Sichtcheck vor ZIP-Bau erfolgt.
