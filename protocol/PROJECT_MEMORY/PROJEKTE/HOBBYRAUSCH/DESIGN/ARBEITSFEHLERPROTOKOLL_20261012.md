@@ -717,3 +717,24 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Vor jeder Asset-Ableitung zuerst das aktive Render-Seitenverhältnis der eingefrorenen Basis prüfen. Ein Bildmaß darf nicht aus Erinnerung oder aus einem früheren Reparaturstand übernommen werden.
+
+
+## AF-039 – Geplanter neuer 8er-Fotoblock wurde von der Sammelgenerierung inhaltlich nicht geliefert
+
+FEHLER:
+Im Nachbarchat war am 2026-10-15 gegen 08:08–08:09 UTC ausdrücklich ein neuer 8er-Fotoblock festgelegt:
+Guss & Formen; Heimwerken; Robotik & Automation; Ameisen & Insekten; Wirbellose; Wind & Drachen; Klettern & Seil; Wasser.
+
+Die unmittelbar danach gespeicherten Sammelbilder lieferten jedoch nicht diesen 8er-Satz. Stattdessen wurden bereits vorher verwendete Themen wie Töpferei, Uhren, Mikroskopie, Wetter, Garten und Pilze erneut dargestellt.
+
+FOLGE:
+Für Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil und Wasser ist die neue Produktionsabsicht belegt, aber keine gültige neue Einzelquelle aus diesem Lauf vorhanden. Die fehlerhaften Sammelbilder dürfen für diese sechs Kategorien nicht als Quelle umgedeutet werden.
+
+KORREKTUR:
+- Guss & Formen bleibt durch die separat vorhandene neue Einzelquelle abgedeckt.
+- Ameisen & Insekten besitzt eine andere neu gebundene Vorschau-Richtung.
+- Die sechs übrigen Kategorien werden als **neue Produktionsrichtung belegt / Einzelquelle fehlt** geführt.
+- Keine alte 1.50.653-/1.50.663-Datei wird als Ersatz verwendet.
+
+VERMEIDUNGSREGEL:
+Nach jeder Mehrfachgenerierung muss das tatsächliche Bildresultat gegen die angeforderten Kategorien geprüft werden. Ein angekündigter 8er-Block zählt nicht als produziert, wenn die Ausgabebilder andere oder wiederholte Themen enthalten.
