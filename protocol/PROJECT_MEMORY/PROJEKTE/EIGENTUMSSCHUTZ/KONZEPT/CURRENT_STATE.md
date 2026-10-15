@@ -1,6 +1,10 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 15.10.2026 – MINDESTENS DREI, KEINE OBERGRENZE / SEO-OWNER NOCH OFFEN
+Die neue Regel wurde im lokalen Kategorieplugin 1.14.8.21 als eigener prüfbarer Validator umgesetzt: 13+ direkte Kinder lokal PASS, weniger als drei NEGATIV-PASS; die historische signierte R3-Struktur wird lediglich für Altbestandsidentität erhalten und **ist kein zukünftiges 3er-/10er-Limit**. Der alte V9.9-Ausbau mit künstlichen Dreiergruppen ist fachlich NICHT als vollständig abzunehmen. Das vollständige installierbare Plugin ist nur ein Werkzeugupdate; es verändert keine Live-Kategorien bei Installation. Das echte DataForSEO-Keyword-Overview für den aktuellen gesamten CORE-Baum und Alternativen ist im vorhandenen Workflow vorbereitet, aber **nicht gegen den echten Anbieter gelaufen**, keinerlei SEO-Volumen oder Intent-PASS behaupten. Künftig Hauptbaum-Namen kurz, prägnant und suchintentbezogen; Flyout-Namen können zusätzlich 1–2 Wörter als reine Anzeigealiasse tragen, ohne Kategorie-IDs/Slugs zu ändern. **Einzige nächste Aktion:** Anbieterbelege für die tatsächlichen Namen plus Alternativen aus zentralem Kategorienbüro auswerten, danach die ganze 31/93-Taxonomie ohne Zielkinderzahl und mit eindeutigen SEO-Ownern fachlich überarbeiten; ausdrücklich keine Bestandskategorien still umbenennen.
+
+
 ## AKTUELLSTER SACHSTAND – 15.10.2026 – V9.11 NACHPRÜFUNG / SEO-NAMENSPERRE
 **Einzige aktuelle fachliche Quelle ist diese Datei. Technische Kategorie-Änderungen ausschließlich über EIGENTUMSSCHUTZ/KATEGORIEN.**
 
