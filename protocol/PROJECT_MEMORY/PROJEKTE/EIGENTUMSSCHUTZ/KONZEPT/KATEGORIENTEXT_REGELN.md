@@ -4,6 +4,12 @@ Status: **NUR 6 HAUPTWELTEN: UNTERER EDITORIAL-BEREICH UND KEINE FAQ FREIGEGEBEN
 
 Dies ist der verbindliche FACHVERTRAG im Konzeptbüro, **keine weitere Current-Autorität**. Autoritativer Status weiterhin in `KONZEPT/CURRENT_STATE.md`, Designfortschritt in `DESIGN/CURRENT_STATE.md`.
 
+## Fachliche Präzisierung des Nutzers am 15.10.2026 – nur sechs Welt-Langtexte
+- **H2 und mindestens 1–2 kontextuell passende H3 pro Hauptwelt** müssen die echten thematischen Begriffe klar erkennbar enthalten, insbesondere **Feuer und Gase**, **Wetter und Naturgefahren**, **Technik und Ausfälle**. Keine Keyword-Aufzählung, kein Keyword-Stuffing, keine Umbenennung bestehender WP-Kategorien; volle Kategorie-Ankernamen bleiben dynamisch aus der zentralen WordPress-Struktur.
+- Die Bilder sollen **in der Gesamtkomposition scharf, weiter gefasst, rahmenlos und ohne erzwungenen starken Beschnitt** sein. Maximal zwei eingebettete Bilder pro Langtext nach bestehendem Inhaltsvertrag. Ein niedriges Fotobanner darf nicht durch Stretching oder 1:4-Mini-Crop die Detailwahrnehmung zerstören. Die bisherige 0.1.14-Verwendung von 512×138px-Crops und sichtbarer 1px-Card-Umrandung war Nutzer-FAIL; 0.1.15 stellt 12 Bilder neu zusammen, Bild-Endabnahme auf WP-LIVE offen.
+- **Breadcrumb-Abstand ist eine websiteweite, ZENTRAL gepflegte Designregel**, nicht Teil der individuellen SEO-Texte: eine Quelle für Hauptwelt-/Bereichsseiten, Artikel, Glossar A–Z und Glossar-Einzelseiten. Desktop 14px, Mobil 8px Abstand direkt nach Navigation; HTML- und ID-/Linkstruktur unverändert.
+- Logo/Mobilheader, bisherige Hauptwelt-Fließtexte und Glossar-Redaktionsinhalte sind Nutzer-PASS bzw. außerhalb des aktuellen Textauftrags und dürfen durch diesen Schritt nicht verändert werden. Für die 409 anderen Kategorien weiter keine neue Textplatzierungsentscheidung.
+
 ## Präzisierung nach Nutzerabnahme / Live-Screenshots vom 14.10.2026 (Version 0.1.11)
 - Sechs Welt-Langtexte unten sollen **jede ihrer 5–6 unmittelbar untergeordneten Hauptbereichskategorien behandeln**: insgesamt 31 eigenständige Themenabschnitte. Kein bloßer kurzer Dreipunktüberblick, kein erzwungener FAQ-Baustein.
 - **Sämtliche Links im erklärenden Fließtext**, keine am Schluss angehängte reine Linkliste. Der sichtbare Ankertext ist 1:1 der aktuelle vollständige Name der Zielkategorie aus dem zentralen Live-Kategoriebaum; Menü-Kurzlabel ist NICHT zulässig.
