@@ -174,51 +174,39 @@ Kein neues Bildrelease ohne manuelle semantische Zuordnung aller sichtbaren Hero
 
 
 
-## HRD-068 – 1.50.653 bis 1.50.663: Reparatur-/Recovery-/Hero-Helferserie nicht freigabefähig
-STATUS: **CONTAINED / KEIN NACHFOLGER / 1.50.650 BLEIBT GRUNDSTAND**
+## HRD-068 – Reparatur-/Recovery-Serie 1.50.653–1.50.663
+STATUS: **CONTAINED / KORRIGIERT**
 
-BEFUND:
-Nach 1.50.651 folgten mehrere technische Reparatur- und Hero-Helferversuche. Darunter traten Release-Kettenfehler, wirkungslose Updatepfade und schließlich erneut visuell falsche Hero-Sätze auf.
+Belastbarer Endstand:
+- Template Kit **1.50.650** bleibt Grundstand;
+- der bereits fertiggestellte reine Hero-Bildersatz **1.50.660** wurde wiederhergestellt und lokal technisch vollständig validiert;
+- **1.50.661–1.50.663 nicht verwenden**;
+- 1.50.660 ändert ausschließlich 65 gemappte Hero-Bilddateien und weder Mapping noch PHP/CSS/Templates/Routing/Karten/Architektur.
 
-Belastbarer Endzustand:
-- Seite wieder erreichbar;
-- Template Kit 1.50.650 bleibt aktiver Grundstand;
-- 1.50.651–1.50.663 nicht verwenden;
-- kein neuer Pluginstand freigegeben;
-- keine Architektur-/Runtime-Weiterentwicklung aus dieser Serie übernehmen.
+Nachweis:
+`HERO_1.50.660_RECOVERY_VALIDATION_20261015.md`.
 
-Details der technischen Arbeitsfehler: `ARBEITSFEHLERPROTOKOLL_20261012.md`.
+## HRD-069 – Falscher Rückfall auf 7/30-Rekonstruktion trotz bereits fertigem 65er-Bildsatz
+STATUS: **CLOSED / REGRESSION VERWORFEN**
 
-## HRD-069 – Neuer Hero-Bildquellenlauf nach 1.50.663 noch nicht vollständig
-STATUS: **OPEN / 30/30 QUELLENAUDIT ABGESCHLOSSEN / VORSCHAUEN VORHANDEN / 23 EINZELQUELLEN FEHLEND**
+FEHLER:
+Nach dem bereits fertiggestellten 1.50.660-Hero-Paket wurde fälschlich eine neue Rekonstruktionsschiene mit 7/30 Einzelquellen, 13 Referenzrichtungen und weiteren BLOCKED-Kategorien aufgebaut.
 
-BEFUND:
-Nach Verwerfen des 1.50.663-Bildsatzes wurde auf neue eigenständige Bildquellen umgestellt.
-Der Nutzer bewertete den neuen Einzelmotiv-Ansatz für Astronomie, Papierkunst, Miniaturen & Szenen, Textilgestaltung, Malen & Zeichnen sowie Schrift & Lettering positiv.
+URSACHE:
+Der vorhandene vollständige 1.50.660-Bildstand wurde nicht zuerst als Artefakt wiederhergestellt und geprüft.
 
-Danach erzeugte Sammel-/Collage-/Montagebilder führten erneut zu Themenwiederholungen und Mehrfachbelegungen, u. a. bei Mechanik & Uhren. Diese Vorschau-/Sammelbilder sind vorhanden und müssen nicht erneut als Vorschauen gebaut werden; sie zählen aber nicht als eigenständige Hero-Quellen.
-
-Bei der Nachprüfung wurde zusätzlich eine eigenständige Einzelquelle für **Guss & Formen** wiedergefunden: `Detailreiche Gießwerkstatt am Arbeitstisch.png`. Sie ist Kandidat, noch kein Release-/Live-PASS.
-
-NACHGEHOLTER 30/30-QUELLENAUDIT:
-Autoritative Arbeitsliste:
-`HERO_QUELLENAUDIT_30_WIP_20261015.md`
-
-Bilanz:
-- 6 Kategorien mit genau einem belastbaren neuen Einzelkandidaten;
-- Miniaturen & Szenen mit 2 Einzelkandidaten; Kandidat B im technischen WIP-Stage festgelegt, finale Live-Freigabe offen;
-- 23 Kategorien FEHLEND als eigenständige Einzelquelle;
-- davon 13 mit exakt wiedergefundener neuer Vorschau-Richtung/Referenz;
-- davon 6 nur als Kategorien des vom Nutzer akzeptierten neuen 8er-Blocks belegt; **keine exakte Motivrichtung und kein valides Einzelbildergebnis rekonstruiert**;
-- davon 4 ohne rekonstruierbare neue Vorschau-/Dateibindung;
-- vorhandene Collagen/Montagen/Panels bleiben Vorschau-/Konzeptmaterial und zählen als Hero-Quelle 0.
+KORREKTUR:
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip` wurde wiedergefunden und gegen die echte 1.50.650-Basis validiert:
+- 65/65 Payload-Heroes;
+- 65/65 Map-Slugs identisch;
+- 65/65 Zielpfade vorhanden;
+- alle Bilder 600×220;
+- keine exakten Payload-Dubletten;
+- exakt 65 Bilddateien geändert;
+- 0 sonstige Änderungen;
+- Mapping byte-identisch.
 
 REGEL:
-- ein Hero = eine eigenständige Ausgangsquelle;
-- kein zweiter Crop derselben Quelle;
-- keine Collage/Montage/Bild-in-Bild;
-- keine Mehrfachbelegung eines Themas;
-- nicht eindeutig zuordenbar = FEHLEND, nicht füllen.
+Vor jeder Bild-Neugenerierung zuerst den letzten bereits fertigen Bildartefaktstand wiederherstellen und prüfen. Keine Rekonstruktion eines Bildsatzes, wenn ein vollständiges, technisch validierbares Artefakt bereits existiert.
 
-ERSTER BLOCKER:
-**Vorschauen nicht wiederholen. Nur für 13 Kategorien ist eine exakte neue Nach-1.50.663-Motivrichtung gebunden; dort fehlen noch eigenständige Einzelquellen. Weitere 6 Kategorien sind nur als Teil des akzeptierten neuen 8er-Blocks belegt, ohne rekonstruierte exakte Motivrichtung; weitere 4 besitzen gar keine rekonstruierbare neue Bindung. Für diese 10 nichts erfinden. Kandidat B für Miniaturen bleibt WIP-Auswahl. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+---
