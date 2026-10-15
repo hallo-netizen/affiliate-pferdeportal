@@ -24,7 +24,7 @@ Nicht als Bild-PASS bestätigt:
 ## Aktuelle Pluginlage
 Seit 1.50.663 wurde **kein neues Plugin** gebaut oder freigegeben.
 Die aktuelle Arbeit ist ausschließlich **Bildquellen-WIP** im Designbereich und besitzt noch keine Pluginversion.
-Der Designbereich besitzt jetzt 7 aktive neue Einzelquellen-Auswahlen im WIP (inkl. Miniaturen Kandidat B als WIP-Auswahl); daraus sind Hero-/Preview-Assets technisch abgeleitet. Für weitere 13 Kategorien sind die bereits gesehenen neuen Vorschau-Richtungen exakt gebunden, aber noch keine eigenständigen Releasequellen. 10 weitere neue Vorschau-Dateibindungen sind aktuell nicht rekonstruierbar. Kein dieser WIP-Stände ist Plugin-/Live-PASS.
+Der Designbereich besitzt jetzt 7 aktive neue Einzelquellen-Auswahlen im WIP (inkl. Miniaturen Kandidat B als WIP-Auswahl); daraus sind Hero-/Preview-Assets technisch abgeleitet. Für weitere 13 Kategorien sind die bereits gesehenen neuen Vorschau-Richtungen exakt gebunden, aber noch keine eigenständigen Releasequellen. Für 6 weitere Kategorien ist der neue 8er-Produktionsblock aus dem Nachbarchat belegt, dessen gespeicherte Sammelausgaben diese Motive jedoch nicht korrekt lieferten. Nur 4 neue Vorschau-/Dateibindungen sind aktuell nicht rekonstruierbar. Kein dieser WIP-Stände ist Plugin-/Live-PASS.
 
 Keine Änderung an:
 - Template-Kit-PHP;
