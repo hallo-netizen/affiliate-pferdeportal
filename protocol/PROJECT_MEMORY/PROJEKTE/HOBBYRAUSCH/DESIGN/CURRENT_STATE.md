@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **SEITE ERREICHBAR / 1.50.650 EINGEFROREN / 1.50.651–1.50.663 NICHT VERWENDEN / 7/30 NEUE EINZELQUELLEN WIP / 13 RICHTUNGEN EXAKT GEBUNDEN / 6 NEUE PRODUKTIONSRICHTUNGEN BELEGT / 4 BINDUNGEN NICHT REKONSTRUIERBAR / KEIN RELEASE**
+STATUS: **SEITE ERREICHBAR / 1.50.650 EINGEFROREN / 1.50.651–1.50.663 NICHT VERWENDEN / 7/30 NEUE EINZELQUELLEN WIP / 13 RICHTUNGEN EXAKT GEBUNDEN / 6 KATEGORIEN NUR ALS NEUER BLOCK BELEGT – EXAKTES MOTIV NICHT REKONSTRUIERT / 4 BINDUNGEN NICHT REKONSTRUIERBAR / KEIN RELEASE**
 
 ## Aktueller belastbarer Stand
 - Affiliate Portal Template Kit **1.50.650** bleibt der aktive Grundstand.
@@ -82,12 +82,12 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
 - `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`; zusätzlich 7/7 echte Quellen und 13/13 neue Referenzrichtungen an exakte Projektdatei-IDs gebunden.
-- `HERO_GENERATION_QUEUE_19_WIP_20261015.json` – exakte Generierungsqueue für die 19 Kategorien mit belastbarer neuer Richtung (13 gebundene Vorschau-Richtungen + 6 rekonstruierte neue Produktionsrichtungen); keine Vorschau-Runde, keine alten Quellen.
+- `HERO_GENERATION_QUEUE_13_WIP_20261015.json` – exakte Generierungsqueue ausschließlich für die 13 Kategorien mit eindeutig gebundener neuer Nach-1.50.663-Referenz; keine geratenen Motive, keine Vorschau-Runde, keine alten Quellen.
 
 Arbeitslisten-Konsistenz: **PASS**
 - Worklist exakt 23/23 Zeilen;
 - exakt 13 gebundene neue Vorschau-Richtungen;
-- exakt 6 im Nachbarchat belegte neue Produktionsrichtungen;
+- exakt 6 im Nachbarchat belegte Kategorien eines neuen Produktionsblocks, aber **ohne** rekonstruierte exakte Motivrichtung;
 - exakt 4 weiterhin nicht rekonstruierbare neue Bindungen;
 - 11/13 unveränderte Referenzcrops mit eindeutigen Hashes; 2/13 bewusst auf fachlich stärkere neue Quelle/Zelle umgebunden, deren alte Crop-Hashes ausdrücklich ungültig sind.
 - Build-Manifest: **PASS** – 30/30 Kategorien eindeutig, 30/30 Hero-Zielpfade eindeutig, 30/30 Preview-Zielpfade eindeutig, alle Kollisionsverweise gültig.
@@ -98,7 +98,7 @@ Belastbare Wiederherstellung aus den neuen Vorschauen:
 - 7 Kategorien besitzen eigenständige neue Einzelbilder; für Miniaturen wurde im aktuellen WIP-Asset-Stage Kandidat B verwendet;
 - für diese 7 Kategorien sind Hero 600×320 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
 - für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
-- für 6 weitere Kategorien (Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser) ist der geplante neue 8er-Fotoblock aus dem Nachbarchat rekonstruiert; die unmittelbar erzeugten Sammelbilder trafen diese sechs Motive aber nicht belastbar und zählen dafür 0;
+- für 6 weitere Kategorien (Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser) ist **nur die Zugehörigkeit zum vom Nutzer akzeptierten neuen 8er-Fotoblock** belegt; eine exakte Motivrichtung oder ein valides Ergebnis ist nicht rekonstruiert und darf nicht erfunden werden;
 - nur 4 Kategorien (Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld) besitzen keine rekonstruierbare neue Vorschau-/Dateibindung; dies wurde zusätzlich durch gezielte Nachbarchat-Recovery bestätigt. Dafür darf kein alter Bildbestand als Ersatz benutzt und keine positive Motivvorgabe erfunden werden.
 
 ### Maßkorrektur vor Release
@@ -112,4 +112,4 @@ Ergebnis korrigierter V2-Test:
 - kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Für die 19 belastbar rekonstruierten neuen Richtungen liegt jetzt eine vollständige Einzelbild-Generierungsqueue vor; die 4 nicht rekonstruierbaren Kategorien bleiben absichtlich ohne erfundene Motivvorgabe. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Jetzt ausschließlich die 13 exakt gebundenen neuen Nach-1.50.663-Richtungen aus `HERO_GENERATION_QUEUE_13_WIP_20261015.json` in eigenständige Einzelquellen überführen. Die übrigen 10 Kategorien bleiben BLOCKED, weil dafür keine exakte neue Motivbindung rekonstruiert ist. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
