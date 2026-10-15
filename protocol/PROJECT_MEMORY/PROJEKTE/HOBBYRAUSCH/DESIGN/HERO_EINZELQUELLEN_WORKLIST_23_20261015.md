@@ -1,7 +1,7 @@
 # HOBBYRAUSCH – HERO-EINZELQUELLEN WORKLIST 23
 
 STAND: 2026-10-15
-ROLLE: Ausführungs-Arbeitsliste für die noch nicht finalisierten eigenständigen Hero-Quellen. 13 davon besitzen inzwischen eine eindeutig wiedergefundene neue Nach-1.50.663-Vorschau-Richtung; 10 besitzen aktuell keine rekonstruierbare neue Dateibindung.
+ROLLE: Ausführungs-Arbeitsliste für die noch nicht finalisierten eigenständigen Hero-Quellen. 13 besitzen eine eindeutig wiedergefundene neue Nach-1.50.663-Vorschau-Richtung; 6 weitere sind als neuer 8er-Produktionsblock im Nachbarchat belegt, dessen gespeicherte Sammelausgaben die Motive jedoch nicht korrekt lieferten; nur 4 besitzen aktuell keine rekonstruierbare neue Vorschau-/Dateibindung.
 AUTORITATIVER STATUS bleibt `CURRENT_STATE.md`.
 KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 
@@ -19,10 +19,10 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 |---:|---|---|---|
 | 1 | Holz | Weite helle Holzwerkstatt; Hobelbank, Handhobel, Holzspäne und ein klar erkennbares unfertiges Holzwerkstück; kein Leder, keine allgemeine DIY-Szene | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 2 | Leder | Weite Lederwerkstatt; Lederhaut, Nähkloben/Naht, Lochwerkzeug und ein halbfertiges Lederstück wie Gürtel oder Etui; kein Holzmotiv als Hauptthema | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 3 | Heimwerken | Heimwerkerraum/Garage; Werkbank, Akkuschrauber, Wasserwaage, Schrauben und ein sichtbar montiertes Regal-/Reparaturprojekt; nicht als reine Holzwerkstatt | FEHLEND |
+| 3 | Heimwerken | Heimwerkerraum/Garage; Werkbank, Akkuschrauber, Wasserwaage, Schrauben und ein sichtbar montiertes Regal-/Reparaturprojekt; nicht als reine Holzwerkstatt | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
 | 4 | Keramik & Glas | Helle Kunsthandwerkswerkstatt; Keramikgefäße und klar erkennbare Glasobjekte gemeinsam in einer zusammenhängenden Atelier-Szene; kein Collage-Look | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 5 | Mechanik & Uhren | Weite Uhrmacher-/Feinmechanikwerkstatt; geöffnete Uhr, Zahnräder, Pinzetten, Lupenlampe und Werkzeug; Uhr klarer Mittelpunkt | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 6 | Robotik & Automation | Hobby-Robotikwerkstatt; kleiner Roboterarm oder mobiler Roboter, Sensoren/Mikrocontroller und Arbeitsrechner; klare Automationsszene | FEHLEND |
+| 6 | Robotik & Automation | Hobby-Robotikwerkstatt; kleiner Roboterarm oder mobiler Roboter, Sensoren/Mikrocontroller und Arbeitsrechner; klare Automationsszene | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
 | 7 | Messen & Analysieren | Technischer Messtisch; Messschieber, Multimeter, Messuhr/Prüfkörper und Notizen; Fokus auf Messen und Prüfen, nicht Elektronikbastelei | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 8 | Mikroskopie | Heller Mikroskop-Arbeitsplatz; Mikroskop, vorbereitete Objektträger, Probengefäße und Dokumentation; Mikroskop eindeutig Hauptmotiv | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 9 | Wetter & Umwelt | Weite Außen-Szene mit kleiner Wetter-/Umweltmessstation, Windmesser, Sensoren und Landschaft; Messstation vollständig sichtbar | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
@@ -31,14 +31,14 @@ KEIN Plugin. KEIN Mapping. KEIN CSS. KEINE Architekturänderung.
 | 12 | Moos & Miniaturgärten | Weite Tischszene mit geschlossenem/offenem Moos-Terrarium oder Miniaturgarten, Mooslandschaft, kleinen Wegen/Steinen; kein normales Gartenbeet | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 13 | Pilze & Kulturen | Pilzzucht-Regal oder Hobbyzuchtbereich mit Substratblöcken und deutlich sichtbaren Speise-/Zuchtpilzen; keine Wald-Pilzsuche | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 | 14 | Ameisen & Insekten | Formicarium/Insektenbeobachtung; Ameisen in klar erkennbarem Nest-/Beobachtungssystem, Lupe und sachlicher Arbeitsplatz; keine Blumen als Hauptmotiv | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
-| 15 | Wirbellose | Terrarium/Beobachtung mit Schnecke, Asseln oder anderen Nicht-Insekten-Wirbellosen; natürliche Habitat-Szene, eindeutig nicht Ameisenmotiv | FEHLEND |
-| 16 | Wind & Drachen | Weite Wiese/Strand mit großem Flugdrachen am Himmel und Spule/Leinen im Vordergrund; klare Wind-Szene | FEHLEND |
-| 17 | Klettern & Seil | Kletter-/Seiltechnik-Szene an Fels oder Trainingswand; Kletterseil, Knoten, Karabiner und Gurt gut erkennbar; nicht nur Landschaft | FEHLEND |
-| 18 | Wasser | Ruhiger See/Fluss mit eindeutigem Hobby-Wassermotiv wie Kajak oder SUP samt Paddel und Ausrüstung; kein allgemeines Landschaftsbild | FEHLEND |
-| 19 | Alltagsobjekte | Sammler-/Ordnungstisch mit charakteristischen Alltagsobjekten wie alten Schlüsseln, Dosen, Schreibgeräten oder kleinen Gebrauchsgegenständen; keine Münzen | FEHLEND |
-| 20 | Naturfunde | Forschertisch mit Steinen, Muscheln, Federn, Zapfen und Bestimmungsbuch; natürliche Fundstücke klar erkennbar | FEHLEND |
-| 21 | Spielzeug & Spiele | Hobbytisch mit Brettspiel und klar sichtbaren Spielzeug-/Spielfiguren; spielerische Sammlung, keine reine Modellbau-Szene | FEHLEND |
-| 22 | Münzen & Geld | Münzsammler-Arbeitsplatz mit Münzalbum, einzelnen Münzen, Lupe und Messwerkzeug; Münzen klarer Mittelpunkt | FEHLEND |
+| 15 | Wirbellose | Terrarium/Beobachtung mit Schnecke, Asseln oder anderen Nicht-Insekten-Wirbellosen; natürliche Habitat-Szene, eindeutig nicht Ameisenmotiv | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 16 | Wind & Drachen | Weite Wiese/Strand mit großem Flugdrachen am Himmel und Spule/Leinen im Vordergrund; klare Wind-Szene | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 17 | Klettern & Seil | Kletter-/Seiltechnik-Szene an Fels oder Trainingswand; Kletterseil, Knoten, Karabiner und Gurt gut erkennbar; nicht nur Landschaft | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 18 | Wasser | Ruhiger See/Fluss mit eindeutigem Hobby-Wassermotiv wie Kajak oder SUP samt Paddel und Ausrüstung; kein allgemeines Landschaftsbild | NEUER 8ER-BLOCK IM NACHBARCHAT BELEGT / EINZELQUELLE FEHLT |
+| 19 | Alltagsobjekte | Sammler-/Ordnungstisch mit charakteristischen Alltagsobjekten wie alten Schlüsseln, Dosen, Schreibgeräten oder kleinen Gebrauchsgegenständen; keine Münzen | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 20 | Naturfunde | Forschertisch mit Steinen, Muscheln, Federn, Zapfen und Bestimmungsbuch; natürliche Fundstücke klar erkennbar | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 21 | Spielzeug & Spiele | Hobbytisch mit Brettspiel und klar sichtbaren Spielzeug-/Spielfiguren; spielerische Sammlung, keine reine Modellbau-Szene | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
+| 22 | Münzen & Geld | Münzsammler-Arbeitsplatz mit Münzalbum, einzelnen Münzen, Lupe und Messwerkzeug; Münzen klarer Mittelpunkt | NEUE QUELLENBINDUNG NICHT REKONSTRUIERBAR / EINZELQUELLE FEHLT |
 | 23 | Technik & Medien | Medien-/Technikarbeitsplatz mit Kamera oder Audioaufnahmegerät, Rechner und Medienbearbeitung; moderne Technik/Medien klar erkennbar, keine allgemeine Elektronikmessung | VORSCHAU-RICHTUNG NEU GEBUNDEN / EINZELQUELLE NOCH OFFEN |
 
 ## Bereits nicht mehr neu zu bauen
