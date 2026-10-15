@@ -784,3 +784,24 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Bei Hero und Preview nicht aus Dateinamenssymmetrie schließen. Preview-Pfade immer gegen die aktive Alias-Auflösung des eingefrorenen 1.50.650-Renderers plus reale Datei-Existenz prüfen.
+
+
+## AF-042 – Plugin angeboten, obwohl nur technische und keine vollständige visuelle Abnahme vorlag
+
+FEHLER:
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip` wurde als fertiges Plugin angeboten, nachdem lediglich Struktur/Dateimengen/Mapping technisch geprüft worden waren.
+
+Nach vollständiger Sichtprüfung der 65 Bilder zeigte sich der Bildsatz als VISUAL FAIL mit mehreren semantisch falschen Motiven und Wiederholungen.
+
+URSACHE:
+Technischer PASS wurde fälschlich wie Bild-/Release-PASS behandelt.
+
+KORREKTUR:
+- 1.50.660 nicht installieren / nicht verwenden;
+- temporär erneut erzeugter Downloadlink entfernt;
+- spätere Arbeitskopien von 1.50.660–1.50.663 aus `_working` wieder entfernt;
+- neuerer Bildarbeitsstand bleibt erhalten;
+- Current und Plugin-Current auf harte Vorab-Abnahmeregel korrigiert.
+
+VERMEIDUNGSREGEL:
+**Niemals ein Bild-Plugin anbieten, bevor jedes reale Bild visuell geprüft UND der vollständige Plugin-Einbau lokal simuliert wurde. Technische Dateiprüfung allein ist ausdrücklich unzureichend.**
