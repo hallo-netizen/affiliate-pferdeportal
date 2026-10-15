@@ -3,45 +3,38 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **LIVE-SEITE WIEDER ERREICHBAR / TEMPLATE-KIT 1.50.650 BLEIBT AKTIV UND UNANGETASTET / 1.50.661 NUR 30 HERO-DATEIEN LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
+STATUS: **TEMPLATE-KIT 1.50.650 BLEIBT AKTIV UND UNANGETASTET / HERO-HELPER 1.50.662 IST IN-PLACE-UPDATE VON 1.50.660 / LOKAL E2E PASS**
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
 
-## Nicht verwenden
-- 1.50.651;
-- Repair Installer 1.50.657;
-- Recovery 1.50.658;
-- Hero Images ONLY 1.50.659;
-- Hero Replace ONLY 1.50.660 als Endstand für die 30 live verworfenen Heroes.
-
-## Aktueller Bildpatch
-`HOBBY_DEPOT_HERO_REPLACE_30_ONLY_1.50.661.zip`
+## Aktueller Hero-Helper
+`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.662.zip`
 
 SHA-256:
-`befb9a73f67e3827b7ad5c7c03d940976a5362a2a732f779654499685f0f0b3e`
+`6bf59929a201f3a0731ff7ea52ff33c3a47186835ff694c8715bdc134238b904`
 
-Der Patch:
-- enthält exakt 30 neue 600×220-Hero-Dateien;
-- ersetzt nur die 30 Nutzer-Hard-Reject-Kategorien;
-- nutzt ausschließlich die bereits aktiven Zielpfade des vorhandenen Mappings;
-- schreibt/ändert das Mapping nicht;
-- ändert keine Template-Kit-PHP-Datei;
-- ändert keine Templates, kein Routing, kein CSS, keine Karten und keine Architektur;
-- lässt die anderen 35 aktuell gemappten Hero-Dateien unverändert.
+## Update-Identität
+Gleich wie 1.50.660:
+- Pluginordner: `hobby-depot-hero-replace-only-150660`
+- Hauptdatei: `hobby-depot-hero-replace-only-150660.php`
 
-## Lokale E2E-Prüfung
-PASS auf:
-1. pristine 1.50.650;
-2. simuliertem Nach-1.50.659+1.50.660-Zustand.
+Daher Überinstallation/Ersetzung statt zweitem Plugin.
 
-Jeweils:
-- exakt 30 erwartete Bilddatei-Diffs;
+## Wirkung
+- ersetzt exakt 30 live verworfene Hero-Dateien;
 - Mapping unverändert;
-- 35 nicht betroffene Hero-Zieldateien unverändert;
+- übrige 35 Heroes unverändert;
+- Template-Kit-PHP unverändert;
+- Routing/Templates/CSS/Karten/Architektur unverändert.
+
+## Lokaler Update-E2E
+Bereits aktives 1.50.660 simuliert → Ordner in-place mit 1.50.662 ersetzt → Activation Hook NICHT erneut aufgerufen → one-shot admin_init führt Austausch aus:
+- 30 geändert;
+- 35 unverändert;
+- Mapping unverändert;
 - 0 PHP-Diffs;
-- 30/30 Zielbilder = Payload;
-- keine temporären/Backup-Reste.
+- PASS.
 
 ## NEXT ACTION
-**Nur 1.50.661 installieren/aktivieren und die 30 betroffenen Heroes live visuell prüfen.**
+**1.50.662 über das vorhandene 1.50.660 installieren/ersetzen.**
