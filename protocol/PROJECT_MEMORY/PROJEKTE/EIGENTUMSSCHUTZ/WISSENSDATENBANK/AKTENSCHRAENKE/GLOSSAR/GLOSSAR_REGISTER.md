@@ -15,6 +15,11 @@ Die 100 unsourcierten Kurzdefinitionen aus dem Designplugin 0.1.7 bilden den **K
 
 Einzelakten erst nach tatsächlicher Quellenrecherche nach `DATEN/START_HERE.md` anlegen. Fachlicher Ausschluss: identischer WP-Kategoriename und Begriffsdublette; Synonyme nur Alias. Den Bestand nicht allein aufgrund seiner Zahl für SEO publizieren.
 
+## Kurzerklärungs-Produktionsstand 15.10.2026
+- **42/96 zulässigen Kandidaten** besitzen jetzt mindestens eine eigene formulierte, quellenbezogene **A–Z-Kurzdefinition**: Einbruch 9, Vandalismus 6, Wasser 7, Feuer 7, Wetter 6, Technik 7. Die restlichen 54 bleiben im Kandidatenpool für Nachrecherche; keine Phantom-Fertigstellung. Keine der 42 Kurzdefinitionen wird dadurch zur `GEPRUEFT`-Einzelakte.
+- Unabhängige WDB-Datendatei: `/Eigentumsschutz/Wissensdatenbank/Glossar/SICHERHEITSGLOSSAR_KURZREGISTER_42_QUELLENBEZOGEN_WIP.json` (keine Nutzer-Installationsdatei); in Designplugin 0.1.14 nur Auslieferungskopie für read-only A–Z. 42 öffentliche Kurztexte bleiben `noindex`, bis die entsprechenden aufwendig recherchierten WP-Einzelartikel redaktionell geprüft und ausdrücklich veröffentlicht werden.
+- **WIP-Audit:** Der tatsächliche Wort-/Quellenvertrag des PPA-Fachbüros verlangt je **Einzelartikel** 150–200 Wörter, fachliche Abgrenzung, Primärquelle, Beziehungen, Prüfdatum und manuelle Freigabe. 42 Kurzdefinitionen erfüllen diesen vollen Vertrag NOCH NICHT; sie sind eine benutzbare Nachschlageübersicht, kein SEO-Endrelease.
+
 ## BESTÄTIGTE KATEGORIE-DUBLETTEN (R3/V8 LIVE-READBACK 13.10.2026)
 | Begriff | Knoten | WP-ID |
 |---|---|---:|
