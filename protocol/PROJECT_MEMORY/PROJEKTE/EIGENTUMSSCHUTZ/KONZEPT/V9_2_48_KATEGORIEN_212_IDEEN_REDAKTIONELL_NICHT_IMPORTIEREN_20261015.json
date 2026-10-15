@@ -1,0 +1,784 @@
+{
+  "schema": "HB-V9.2-EDITORIAL-DELTA-NOT-IMPORTABLE",
+  "date": "2026-10-15",
+  "release_status": "BLOCKED_NOT_INSTALLABLE",
+  "source": "HB_KATEGORIEN_V9_ENTWURF_NICHT_IMPORTIEREN(1).json",
+  "wp_baseline": "R3/V8 546/546 PASS 2026-10-13 last historical readback; no fresh WP access or write",
+  "technical_changes": false,
+  "description": "Full structured set of 48 candidate leaves with 212 ideas, not a WordPress plugin or install profile",
+  "existing_preserved": {
+    "worlds": 6,
+    "areas": 31,
+    "subareas": 93,
+    "leaves": 285
+  },
+  "counts": {
+    "areas_new": 3,
+    "subareas_new": 13,
+    "leaves_new": 48,
+    "ideas_new": 212,
+    "excluded_leaves": 9,
+    "excluded_ideas": 27
+  },
+  "edits": [
+    {
+      "before": "Flachdach & Dachterrasse",
+      "from": "Flachdachabläufe vor Herbstregen kontrollieren lassen",
+      "to": "Beschädigte Flachdachabdichtung nach Frost- und Temperaturwechseln dokumentieren",
+      "type": "ARTICLE_TITLE_REPLACED_TO_PROTECT_EXISTING_OWNER"
+    },
+    {
+      "before": "Dachrinnen & Fallrohre",
+      "from": "Frostschäden an Regenfallrohren frühzeitig erkennen",
+      "to": "Lose Fallrohrschellen: Befestigungen an der Hauswand kontrollieren lassen",
+      "type": "ARTICLE_TITLE_REPLACED_TO_PROTECT_EXISTING_OWNER"
+    },
+    {
+      "before": "Terrassen & überhitzte Außenflächen",
+      "after": "Hitzeschäden an Terrassen & Außenbelägen",
+      "type": "LEAF_SCOPE_AND_FIVE_ARTICLES_REVISED"
+    },
+    {
+      "before": "Zelte & Campingstellplätze bei Hitze",
+      "after": "Zeltmaterial & Ausrüstung bei Hitzewellen",
+      "type": "LEAF_SCOPE_AND_FIVE_ARTICLES_REVISED"
+    }
+  ],
+  "evidence": {
+    "source_R2_matched_original_titles": 510,
+    "source_R3_original_titles": 432,
+    "source_R2_missing_from_the_full_704": 194,
+    "source_R2_12_recovered": 12,
+    "unresolved_in_four_R2_categories": 6
+  },
+  "tests": {
+    "source_57_239": true,
+    "kept_48_212": true,
+    "held_9_27": true,
+    "new_areas_3": true,
+    "new_subareas_13": true,
+    "all_new_area_min3": true,
+    "all_new_subarea_min3": true,
+    "every_leaf_min3": true,
+    "new_names_unique": true,
+    "new_titles_unique": true,
+    "no_existing_category_collision": true,
+    "no_exact_original_title_collision": true,
+    "dach_frost_duplicate_removed": true,
+    "dach_drainage_duplicate_removed": true,
+    "existing_dachgeschoss_owner_not_copied": true,
+    "exactly_4_revisions": true
+  },
+  "redaction_status": "ONLY_CONCEPT; no SEO owner / WP technical release",
+  "unresolved": [
+    "6 unknown exact titles from four 2026-10-12 R2 leaves",
+    "Full semantic editorial ownership check vs complete original 1136 planned articles",
+    "WordPress mapping, slugs, URLs, redirects, dry-run, rollback, dependent article references and live readback",
+    "Current plugin source 1.14.8.19 not available for local end-to-end reproduction"
+  ],
+  "proposed_expansions": [
+    {
+      "kind": "NEW_AREA",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "parent_id": "core:world:wasser-und-feuchtigkeit",
+      "subareas": [
+        {
+          "name": "Dachflächen & Dachaufbauten",
+          "leaves": [
+            {
+              "name": "Undichte Dacheindeckung",
+              "article_ideas": [
+                "Feuchte Stellen unter Dachziegeln: Ursache eingrenzen und dokumentieren",
+                "Dachziegel nach Starkregen auf verdeckte Wassereintritte prüfen lassen",
+                "Alte Unterspannbahnen: Warnzeichen für Feuchteschäden im Dach erkennen",
+                "Reparatur oder Neueindeckung: Wann ein Fachbetrieb welche Dachbereiche prüft",
+                "Regelmäßige Dachkontrolle: Fotoprotokoll für private Eigentümer anlegen"
+              ]
+            },
+            {
+              "name": "Dachfenster & Anschlüsse",
+              "article_ideas": [
+                "Eindringenden Regen am Dachfenster von Kondenswasser unterscheiden",
+                "Dachfenster-Anschlussbleche: typische Leckstellen fachlich untersuchen lassen",
+                "Feuchte Laibung nach Regen: Dämmung und Innenverkleidung beurteilen lassen",
+                "Dachfenster nach Dacharbeiten auf neue Undichtigkeiten kontrollieren",
+                "Wartungsplan für Dichtungen und Anschlüsse älterer Dachfenster erstellen"
+              ]
+            },
+            {
+              "name": "Flachdach & Dachterrasse",
+              "article_ideas": [
+                "Pfützen auf dem privaten Flachdach: Ablauf oder Abdichtung als Ursache klären",
+                "Flachdach-Durchdringungen nach Wassereintritt fachgerecht prüfen lassen",
+                "Dachterrassen-Belag und darunterliegende Abdichtung getrennt beurteilen",
+                "Wasserschäden am Flachdach nach Bauarbeiten dokumentieren",
+                "Beschädigte Flachdachabdichtung nach Frost- und Temperaturwechseln dokumentieren"
+              ]
+            },
+            {
+              "name": "Gauben & Kaminanschlüsse",
+              "article_ideas": [
+                "Wassereintritt an einer Dachgaube von einer Undichtigkeit in der Dachfläche abgrenzen",
+                "Anschlussbleche an Schornsteinen nach Starkregen fachlich prüfen lassen",
+                "Feuchte Schäden neben einer Gaubenwange zeitlich dokumentieren",
+                "Kamin-Dachdurchführung nach Sanierungsarbeiten auf Niederschlagseintritt kontrollieren lassen",
+                "Anschlussdetails älterer Dachgauben vor geplanten Dacharbeiten aufnehmen"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fassade, Fenster & Öffnungen",
+          "leaves": [
+            {
+              "name": "Schlagregen an Fensteranschlüssen",
+              "article_ideas": [
+                "Feuchter Fensterrahmen nach Schlagregen: Ursache systematisch eingrenzen",
+                "Fensterbank-Anschlüsse bei Wassereintritt fachlich prüfen lassen",
+                "Außenfugen an Fenstern: typische Alterungsanzeichen erkennen",
+                "Wasser unter dem Fensterbrett: innenliegende Folgeschäden dokumentieren",
+                "Wassereintritt bei nur einer Windrichtung: Beobachtungsprotokoll anlegen"
+              ]
+            },
+            {
+              "name": "Fassadenfugen & Anschlüsse",
+              "article_ideas": [
+                "Feuchter Innenputz nach Regen: Fassadenfuge als Ursache prüfen lassen",
+                "Anschluss zwischen Anbau und Bestandswand auf Wassereintritt untersuchen",
+                "Balkonbefestigungen in der Fassade auf Feuchtepfade kontrollieren lassen",
+                "Risse im Außenputz von Feuchteschäden an der Wand abgrenzen",
+                "Sanierte Fassadenanschlüsse nach wiederkehrenden Feuchteschäden dokumentieren"
+              ]
+            },
+            {
+              "name": "Balkone & Außentüren",
+              "article_ideas": [
+                "Wassereintritt an der Balkontür bei Starkregen beurteilen lassen",
+                "Abdichtung an Balkonschwellen im Bestand auf Schwachstellen prüfen",
+                "Feuchte unter dem Balkonbelag von Regen auf der Oberfläche unterscheiden",
+                "Türschwellen zu Terrasse und Garten vor Schlagregen schützen lassen",
+                "Wasserflecken unter dem Balkon: Schadenverlauf mit Fotos dokumentieren"
+              ]
+            },
+            {
+              "name": "Sockel & Außenwandfeuchte oberirdisch",
+              "article_ideas": [
+                "Feuchte Spritzwasserzone am Haussockel von aufsteigender Feuchte unterscheiden",
+                "Risse an oberirdischen Außenwänden auf Regenwassereintrag untersuchen lassen",
+                "Wasserflecken nach Fassadenarbeiten am Sockel dokumentieren",
+                "Spritzwasserschutz am privaten Hauszugang fachlich einschätzen lassen",
+                "Feuchtebelastung einer Putzfassade durch wiederkehrenden Schlagregen beobachten"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Regenwasserführung am Gebäude",
+          "leaves": [
+            {
+              "name": "Dachrinnen & Fallrohre",
+              "article_ideas": [
+                "Verstopfte Dachrinne: Warnzeichen an Fassade und Dachkante erkennen",
+                "Undichtes Regenfallrohr an der Hauswand fachlich untersuchen lassen",
+                "Laubschutz an privaten Dachrinnen: Nutzen und Wartungsgrenzen vergleichen",
+                "Wiederkehrenden Rinnenüberlauf bei Starkregen dokumentieren",
+                "Lose Fallrohrschellen: Befestigungen an der Hauswand kontrollieren lassen"
+              ]
+            },
+            {
+              "name": "Dachabläufe & Notentwässerung",
+              "article_ideas": [
+                "Verstopfte Flachdachabläufe vor Herbstregen fachlich kontrollieren lassen",
+                "Notentwässerung am Flachdach: wann ihre Funktion überprüft werden sollte",
+                "Wasseranstau auf Dachterrassen: Ablaufleistung einschätzen lassen",
+                "Laubeintrag an Dachabläufen mit einem Kontrollplan reduzieren",
+                "Nach einem Starkregen Schäden im Bereich von Dachgullys dokumentieren"
+              ]
+            },
+            {
+              "name": "Anbauten & Wintergärten bei Regen",
+              "article_ideas": [
+                "Undichten Anschluss zwischen Wintergarten und Hauswand erkennen",
+                "Wasser an Terrassenüberdachungen: Gefälle und Abfluss prüfen lassen",
+                "Feuchteschäden am Carport-Wandanschluss voneinander abgrenzen",
+                "Regenablauf eines Vordachs vor heftigen Niederschlägen kontrollieren",
+                "Wiederkehrenden Wassereintritt am Anbau für Fachbetriebe dokumentieren"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_HIGH_PRIORITY_NO_WP_WRITE"
+    },
+    {
+      "kind": "NEW_AREA",
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "parent_id": "core:world:wetter-und-naturgefahren",
+      "subareas": [
+        {
+          "name": "Sommerlicher Hitzeschutz am Gebäude",
+          "leaves": [
+            {
+              "name": "Dachgeschoss vor Überhitzung",
+              "article_ideas": [
+                "Außenverschattung für Dachfenster bei Hitze vergleichen",
+                "Nächtliche Kühlung im Dachgeschoss: Möglichkeiten und Grenzen einordnen",
+                "Sommerlichen Wärmeschutz bei einer Dachsanierung fachlich prüfen lassen",
+                "Hitzebelastung im Dachgeschoss über mehrere Tage dokumentieren",
+                "Dachfenster und Rollläden für Hitzeschutz sinnvoll kombinieren"
+              ],
+              "redaction_gate": {
+                "status": "EXISTING_R3_TITLE_OVERLAP_TRANSFER_NOT_EXECUTED",
+                "source_category": "Überhitzung im Dachgeschoss",
+                "existing_title": "Sommerliche Überhitzung im ausgebauten Dachgeschoss begrenzen",
+                "source_minimum_three_articles_after_any_transfer": true,
+                "publication_blocked": true
+              }
+            },
+            {
+              "name": "Fenster & Fassadenverschattung",
+              "article_ideas": [
+                "Außenjalousien und Rollläden für Hitzeschutz am Bestandsfenster vergleichen",
+                "Sonnenschutzfolie oder Außenmarkise: Einsatzgrenzen abgrenzen",
+                "Überhitzung bei Westfenstern mit passender Verschattung reduzieren",
+                "Bedienung von Verschattungen bei Abwesenheit sturmsicher planen",
+                "Verschattung an Mietwohnungen ohne dauerhafte Fassadenänderung beurteilen"
+              ]
+            },
+            {
+              "name": "Wintergarten & verglaste Anbauten",
+              "article_ideas": [
+                "Hitzestau im Wintergarten mit Messwerten erfassen",
+                "Außenliegende Dachverschattung für Wintergärten vergleichen",
+                "Lüftungskonzepte für verglaste Anbauten gegen sommerliche Hitze prüfen",
+                "Temperaturbelastung von Pflanzen und Einrichtung im Wintergarten bewerten",
+                "Sonnenschutz bei Glasdächern: Wirkung und bauliche Grenzen einordnen"
+              ]
+            },
+            {
+              "name": "Hitzeschäden an Terrassen & Außenbelägen",
+              "article_ideas": [
+                "Hitzerisse in privaten Terrassenbelägen von normalen Fugenbewegungen unterscheiden",
+                "UV- und Wärmeschäden an Kunststoff-Terrassendielen frühzeitig erkennen",
+                "Beschichtungen von Außentreppen bei starker Sonneneinstrahlung auf Schäden kontrollieren",
+                "Verformungen an Holz- und Verbundstoff-Terrassenbelägen fachlich beurteilen lassen",
+                "Terrassenmöbel und Outdoor-Ausstattung während langanhaltender Hitzewellen schützen"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Trockenschäden an Grundstück & Garten",
+          "leaves": [
+            {
+              "name": "Gartenbäume bei Trockenstress",
+              "article_ideas": [
+                "Trockenstress an privaten Gartenbäumen von Schädlingsbefall unterscheiden",
+                "Jungbäume in langen Trockenphasen sinnvoll kontrollieren",
+                "Baumstandorte nach Dürre auf Standsicherheitsrisiken prüfen lassen",
+                "Mulchen und Bewässern bei privaten Bäumen fachlich abwägen",
+                "Wassermangel an Hecken rechtzeitig erkennen"
+              ]
+            },
+            {
+              "name": "Bodenrisse & Setzungen",
+              "article_ideas": [
+                "Risse im Gartenboden während Dürre dokumentieren",
+                "Bodenbewegungen an Terrassenplatten nach Trockenperioden einschätzen lassen",
+                "Rissbildung nahe Hausfundamenten: wann Fachleute erforderlich sind",
+                "Schrumpfende Lehmböden als mögliche Ursache für Gartenschäden einordnen",
+                "Wiederkehrende Setzungen nach Trockenheit mit Fotopunkten beobachten"
+              ]
+            },
+            {
+              "name": "Bewässerung bei Wasserknappheit",
+              "article_ideas": [
+                "Private Gartenbewässerung bei Dürre auf Prioritäten prüfen",
+                "Regenwasserreserven für längere Trockenperioden überschlagen",
+                "Tröpfchenbewässerung und Gießkannen bei Wasserknappheit vergleichen",
+                "Bewässerung in kleinen Gemeinschaftsgärten organisieren",
+                "Gartenbewässerung bei kommunalen Wasserbeschränkungen anpassen"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Freizeitobjekte bei Hitzewellen",
+          "leaves": [
+            {
+              "name": "Wohnmobil im Hitzestau",
+              "article_ideas": [
+                "Innenraumtemperaturen im abgestellten Wohnmobil sicher erfassen",
+                "Außenverschattung für Wohnmobile auf Sommerstellplätzen vergleichen",
+                "Dachhauben und Lüftung während Abwesenheit sicher planen",
+                "Hitzeempfindliche Ausrüstung im abgestellten Camper schützen",
+                "Wohnmobil vor einer Hitzewelle kontrollieren und vorbereiten"
+              ]
+            },
+            {
+              "name": "Gartenhaus & Hobbyraum bei Hitze",
+              "article_ideas": [
+                "Überhitzung im privaten Gartenhaus mit einfachen Messungen feststellen",
+                "Sonnenbeschienene Gartenhausdächer: Verschattungsoptionen beurteilen",
+                "Lagergut im Gartenhaus vor sommerlichen Temperaturspitzen schützen",
+                "Sommerlüftung kleiner Hobbyräume ohne dauerhafte Stromversorgung planen",
+                "Hitzeprobleme in Gartenhäusern mit Fensterfläche und Ausrichtung vergleichen"
+              ]
+            },
+            {
+              "name": "Geparkte Privatfahrzeuge bei Hitze",
+              "article_ideas": [
+                "Lange abgestelltes Privatauto bei Hitzewellen auf sensible Inhalte prüfen",
+                "Abstellort und Sonnenschutz für private Anhänger vergleichen",
+                "Hitzeempfindliche Elektronik im Standfahrzeug richtig lagern",
+                "Innenraumtemperatur in einem Oldtimer während längerer Abstellung dokumentieren",
+                "Fahrzeugabdeckungen bei Hitze auf Luftzirkulation und Materialverträglichkeit prüfen"
+              ]
+            },
+            {
+              "name": "Zeltmaterial & Ausrüstung bei Hitzewellen",
+              "article_ideas": [
+                "UV-bedingte Schäden an Zeltgewebe und Nähten frühzeitig erkennen",
+                "Hitzeempfindliche Zeltbeschichtungen bei langem Stillstand schützen",
+                "Vorzeltmaterial auf Verformung und Materialermüdung durch Hitze kontrollieren",
+                "Zeltstangen und Verbindungselemente bei sommerlicher Überhitzung auf Schäden prüfen",
+                "Faltzelt und Pavillon bei hoher UV-Belastung werterhaltend lagern"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_HIGH_PRIORITY_NO_WP_WRITE"
+    },
+    {
+      "kind": "NEW_AREA",
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "parent_id": "core:world:technik-und-ausfalle",
+      "subareas": [
+        {
+          "name": "Photovoltaik & Wechselrichter",
+          "leaves": [
+            {
+              "name": "Wechselrichterstörungen",
+              "article_ideas": [
+                "Fehlermeldungen am PV-Wechselrichter systematisch für den Service sammeln",
+                "Wechselrichter offline: Datenverbindung von Erzeugungsfehler unterscheiden",
+                "Wiederkehrende Wechselrichterabschaltungen beim Netzbetreiber dokumentieren",
+                "PV-Anlage nach Netzausfall: kontrollierten Wiederanlauf fachlich prüfen",
+                "Garantie und Service bei defektem Wechselrichter richtig dokumentieren"
+              ]
+            },
+            {
+              "name": "Erzeugungsverlust & PV-Strings",
+              "article_ideas": [
+                "Auffällige PV-Ertragsverluste anhand historischer Daten erkennen",
+                "Stringstörung oder Verschattung: typische Hinweise unterscheiden",
+                "Leistungsabweichungen zwischen PV-Dachseiten dokumentieren",
+                "PV-Monitoring nach Modultausch auf Vergleichbarkeit prüfen",
+                "Bei dauerhaft niedriger PV-Leistung den Fachbetrieb gezielt beauftragen"
+              ]
+            },
+            {
+              "name": "PV-Monitoring & Datenverbindung",
+              "article_ideas": [
+                "Lücken in PV-Ertragsdaten von tatsächlichen Erzeugungslücken trennen",
+                "PV-Datenlogger verliert WLAN: lokale Prüfpunkte ohne Elektroarbeiten",
+                "Warnmeldungen aus zwei PV-Portalen auf Konsistenz prüfen",
+                "Historische PV-Messdaten vor Austausch eines Routers sichern",
+                "PV-Monitoring bei Internetstörung auf lokale Anzeige umstellen"
+              ]
+            },
+            {
+              "name": "Balkonkraftwerk: Betriebsstörungen",
+              "article_ideas": [
+                "Mikrowechselrichter am Balkonkraftwerk nach Ausfallmeldung einordnen",
+                "Balkonkraftwerk liefert keine Einspeisedaten: WLAN- und Gerätefehler unterscheiden",
+                "Wiederkehrende Abschaltung eines Steckersolargeräts dokumentieren",
+                "Fehleranzeigen von Mikrowechselrichtern für Supportanfragen sichern",
+                "Balkon-PV nach Wechsel des Heimrouters wieder überwachen"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Batteriespeicher & Ersatzstrom",
+          "leaves": [
+            {
+              "name": "Heimspeicher-Fehlermeldungen",
+              "article_ideas": [
+                "Fehlercodes eines Heimspeichers für Hersteller-Support dokumentieren",
+                "Verbindungsfehler des Speicher-BMS von Batteriefehler unterscheiden",
+                "Ungewöhnliche Speicherabschaltungen nach Firmware-Update protokollieren",
+                "Servicebedarf bei wiederkehrenden Speicherwarnungen priorisieren",
+                "Garantie- und Wartungsunterlagen des Heimspeichers geordnet vorhalten"
+              ]
+            },
+            {
+              "name": "Ersatzstrom aus PV & Speicher",
+              "article_ideas": [
+                "Notstromsteckdose und Haus-Ersatzstromversorgung fachlich unterscheiden",
+                "Leistungsgrenzen privater Batteriespeicher im Ersatzstrombetrieb einordnen",
+                "Umschaltverhalten eines PV-Speichers nach Netzausfall testen lassen",
+                "Kritische Verbraucher bei begrenzter Ersatzstromleistung priorisieren",
+                "Ersatzstromfähigkeit beim Speicherkauf verbindlich prüfen"
+              ]
+            },
+            {
+              "name": "Speicherladung & Leistungsabfall",
+              "article_ideas": [
+                "Ungewohnt geringe Speicherladung mit Ertragsdaten abgleichen",
+                "Speicher-Leistungsbegrenzung bei hoher Belastung erkennen",
+                "Alterung des Batteriespeichers anhand von Herstellerdaten beurteilen",
+                "Saisonale Unterschiede der Speichernutzung fachlich einordnen",
+                "Unplausible Ladezustandsanzeige beim Heimspeicher dokumentieren"
+              ]
+            },
+            {
+              "name": "Temperaturbedingte Speicher-Drosselung",
+              "article_ideas": [
+                "Verringerte Ladeleistung eines Heimspeichers bei Sommerhitze erkennen",
+                "Speicherwarnungen zu zu hohen oder zu niedrigen Betriebstemperaturen verstehen",
+                "Aufstellungsbedingungen eines Batteriespeichers fachlich prüfen lassen",
+                "Temperaturprotokolle bei wiederkehrender Drosselung für den Kundendienst sammeln",
+                "Wärmemanagement des Heimspeichers von brandschutzbezogenen Defekten abgrenzen"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wallbox & Heimladen",
+          "leaves": [
+            {
+              "name": "Wallbox-Ladeabbrüche",
+              "article_ideas": [
+                "Wiederkehrende Ladeabbrüche an der privaten Wallbox dokumentieren",
+                "Wallboxfehler von Fahrzeug- und Kabelmeldung unterscheiden",
+                "Ladevorgang bricht bei Regen ab: Fehlersymptome fachlich prüfen lassen",
+                "Firmwarefehler und Netzprobleme beim Heimladen abgrenzen",
+                "Ladeprotokolle für die Fehlersuche beim Installationsbetrieb sammeln"
+              ]
+            },
+            {
+              "name": "Lastmanagement & Hausanschluss",
+              "article_ideas": [
+                "Dynamisches Lastmanagement bei einer privaten Wallbox prüfen lassen",
+                "Ladeleistung sinkt bei gleichzeitigen Haushaltsverbrauchern: Ursachen klären",
+                "Hausanschlussgrenzen beim Einbau einer zweiten Wallbox beurteilen",
+                "Ladespitzen im kleinen persönlich geführten Betrieb dokumentieren",
+                "Lastmanagement nach Erweiterung der Solaranlage neu abstimmen lassen"
+              ]
+            },
+            {
+              "name": "Ladekabel & Kommunikation",
+              "article_ideas": [
+                "Kontaktfehler am privaten Ladekabel fachlich beurteilen lassen",
+                "Wallbox startet nicht nach Fahrzeugwechsel: Kompatibilitätsfragen prüfen",
+                "Fehler an RFID- und Freigabesystemen beim Heimladen unterscheiden",
+                "Smart-Charging-App offline: lokale Lademöglichkeiten prüfen",
+                "Steckerwarnungen der Wallbox ohne Eigenreparatur dokumentieren"
+              ]
+            },
+            {
+              "name": "PV-Überschussladen & Automationen",
+              "article_ideas": [
+                "PV-Überschussladen startet nicht: Steuerungsfreigaben systematisch abgleichen",
+                "Wallbox lädt trotz Sonne aus dem Netz: Messwerte und Zeitsteuerung prüfen",
+                "Smartes Laden bei Internetausfall: lokale Ersatzfunktionen vergleichen",
+                "Kommunikationsfehler zwischen PV-Energiemanager und Wallbox dokumentieren",
+                "Zeitpläne für PV-Überschussladung nach Tarif- oder App-Änderung überprüfen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_HIGH_PRIORITY_NO_WP_WRITE"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "parent_id": "core:area:7efc2329e1f6",
+      "subareas": [
+        {
+          "name": "Freizeitboote & Nässe",
+          "leaves": [
+            {
+              "name": "Bilgenwasser & Bootsrumpf",
+              "article_ideas": [
+                "Wiederkehrendes Bilgenwasser in kleinen Privatbooten systematisch protokollieren",
+                "Undichte Decksbeschläge beim Freizeitboot fachlich untersuchen lassen",
+                "Wassereintritt am Boot vor dem Winterlager erkennen"
+              ]
+            },
+            {
+              "name": "Feuchte in der Bootskajüte",
+              "article_ideas": [
+                "Schimmelbildung in Bootskajüten während der Abstellung vorbeugen",
+                "Kondensfeuchtigkeit und Leckwasser in einer Kajüte unterscheiden",
+                "Polster und Holzflächen im Boot vor wiederkehrender Feuchte schützen"
+              ]
+            },
+            {
+              "name": "Bootsleitungen bei Frost",
+              "article_ideas": [
+                "Frischwasserleitungen eines Privatboots vor dem Winterlager entleeren lassen",
+                "Frostschäden an Boots-Sanitärsystemen früh erkennen",
+                "Wasserpumpe und Schlauchverbindungen im Freizeitboot im Frühjahr prüfen lassen"
+              ]
+            },
+            {
+              "name": "Bootsabdeckungen & Regenwasser",
+              "article_ideas": [
+                "Regeneintrag unter Bootsplanen während langer Liegezeiten erkennen",
+                "Pfützen auf Cockpit-Abdeckungen an kleinen Privatbooten vermeiden",
+                "Persenning nach starkem Regen auf Schwachstellen fachlich prüfen lassen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_DETAILS_NEED_R2_R3_COLLISION_CHECK"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "parent_id": "core:area:a61eee15af3b",
+      "subareas": [
+        {
+          "name": "Baulicher Brandschutz im Wohnbestand",
+          "leaves": [
+            {
+              "name": "Durchführungen & Abschottungen",
+              "article_ideas": [
+                "Brandabschottung an nachträglich verlegten Hausleitungen prüfen lassen",
+                "Kabeldurchführungen zu privaten Technikräumen auf Brandschutz prüfen",
+                "Unsachgemäße Durchbrüche in Trennwänden vom Fachmann beurteilen lassen"
+              ]
+            },
+            {
+              "name": "Brandschutzbekleidungen im Haus",
+              "article_ideas": [
+                "Brandschutzbekleidung an Kellerdecken auf Schäden prüfen lassen",
+                "Bauliche Feuerwiderstandslösungen in einer Privatwerkstatt einordnen",
+                "Beschädigte Brandschutzverkleidung nach Bauarbeiten kontrollieren lassen"
+              ]
+            },
+            {
+              "name": "Brandlasten in Abstellräumen",
+              "article_ideas": [
+                "Brennbare Lagergegenstände in kleinen privaten Abstellräumen ordnen",
+                "Abstände zu haustechnischen Geräten bei Materiallagerung beachten",
+                "Brandschutzrisiko durch Kartons und Textilien im Technikraum beurteilen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_DETAILS_NEED_R2_R3_COLLISION_CHECK"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "parent_id": "core:area:75a0fdd055d2",
+      "subareas": [
+        {
+          "name": "Hanggrundstücke & Erosion",
+          "leaves": [
+            {
+              "name": "Hangrutschungen am Privatgrundstück",
+              "article_ideas": [
+                "Rissbildungen an privaten Hängen nach Dauerregen dokumentieren",
+                "Warnzeichen für Bodenbewegungen an Böschungen erkennen",
+                "Hangabsicherung nach Starkregen fachlich prüfen lassen"
+              ]
+            },
+            {
+              "name": "Erosion an Gartenböschungen",
+              "article_ideas": [
+                "Oberflächenabfluss und Bodenerosion am Gartenhang voneinander unterscheiden",
+                "Vegetation zur Stabilisierung kleiner Böschungen fachlich planen lassen",
+                "Ausgespülte Gartenwege nach Starkregen dokumentieren"
+              ]
+            },
+            {
+              "name": "Unterspülte Mauern & Wege",
+              "article_ideas": [
+                "Stützmauer nach Unterspülung auf Warnzeichen kontrollieren lassen",
+                "Schäden an privaten Zufahrten durch ausgespülte Fundamente einordnen",
+                "Veränderungen an Böschungsmauern mit festen Fotopunkten verfolgen"
+              ]
+            },
+            {
+              "name": "Ufergrundstücke & Auskolkung",
+              "article_ideas": [
+                "Ausgespülte Uferkanten am privaten Grundstück nach Starkregen dokumentieren",
+                "Warnzeichen für Auskolkungen an kleinen privaten Bachgrundstücken erkennen",
+                "Ufersicherungen am Privatgrundstück vor Fachplanung auf Zustandsänderungen prüfen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_DETAILS_NEED_R2_R3_COLLISION_CHECK"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "parent_id": "core:area:e6d091a0c088",
+      "subareas": [
+        {
+          "name": "Heimnetz & lokale Kommunikation",
+          "leaves": [
+            {
+              "name": "Router- & Heimnetzstörungen",
+              "article_ideas": [
+                "Internetausfall am Heimrouter von Ausfall des Hausanschlusses unterscheiden",
+                "Router-Neustarts und Abstürze über mehrere Wochen dokumentieren",
+                "Notwendige WLAN-Versorgung privater Sicherheitsgeräte planen"
+              ]
+            },
+            {
+              "name": "LAN, PoE & Netzwerktechnik",
+              "article_ideas": [
+                "PoE-Switch-Ausfall bei Privatkameras erkennen",
+                "Defekte Netzwerkverbindungen von Routerproblemen abgrenzen",
+                "Netzwerkstromversorgung für kleine Sicherheitssysteme prüfen"
+              ]
+            },
+            {
+              "name": "Smart-Home-Zentralen & Gateways",
+              "article_ideas": [
+                "Smart-Home-Gateway meldet offline: lokale Fehlerursachen eingrenzen",
+                "Lokale Geräteautomation bei Cloud-Störung weiterhin nutzbar halten",
+                "Firmwareprobleme von Funkstörungen im Smart Home unterscheiden"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "FACHKANDIDAT_DETAILS_NEED_R2_R3_COLLISION_CHECK"
+    }
+  ],
+  "excluded_groups": [
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "parent_id": "core:area:d71aef44a98c",
+      "subareas": [
+        {
+          "name": "Betriebliches Außenlager & mobile Werte",
+          "leaves": [
+            {
+              "name": "Kleinbetriebliche Materiallager",
+              "article_ideas": [
+                "Baumaterial eines Handwerkskleinbetriebs nach Feierabend sichern",
+                "Materialcontainer auf privatem Gewerbehof vor Diebstahl schützen",
+                "Schließprotokoll für ein kleines Außenlager organisieren"
+              ]
+            },
+            {
+              "name": "Werkzeuge auf privaten Kleinbaustellen",
+              "article_ideas": [
+                "Werkzeugdiebstahl an einem kleinen Renovierungsprojekt vorbeugen",
+                "Mobile Werkzeugkisten über Nacht sicher lagern",
+                "Baustellen-Werkzeugausgabe im Kleinbetrieb dokumentieren"
+              ]
+            },
+            {
+              "name": "Transportables Betriebsequipment",
+              "article_ideas": [
+                "Mobile Verkaufs- und Präsentationstechnik nach Ladenschluss sichern",
+                "Transportkisten für kleines Betriebsequipment gegen Entwendung schützen",
+                "Vorübergehende Außenaufstellung von Kleinbetriebsausrüstung planen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ZURUECKGESTELLT_WEGEN_OWNER_AUSSENLAGER_GARAGEN_ATELIER"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "parent_id": "core:area:4611320db640",
+      "subareas": [
+        {
+          "name": "Sabotagespuren & Beweissicherung",
+          "leaves": [
+            {
+              "name": "Manipulation an Schlössern & Beschlägen",
+              "article_ideas": [
+                "Mutwillige Manipulation am Türschloss von normalem Defekt unterscheiden",
+                "Beschädigte Schließzylinder vor der Reparatur dokumentieren",
+                "Wiederholte Manipulationsspuren am Gemeinschaftseingang erfassen"
+              ]
+            },
+            {
+              "name": "Kabel- & Leitungsbeschädigung",
+              "article_ideas": [
+                "Abgetrennte Außenkabel von Witterungsschäden unterscheiden",
+                "Sabotageverdacht an einer privaten Videoleitung dokumentieren",
+                "Unterbrochene Beleuchtungsleitungen vor Reparatur beweissicher fotografieren"
+              ]
+            },
+            {
+              "name": "Vandalismusnachweise am Gebäude",
+              "article_ideas": [
+                "Zeugen- und Bildnachweise nach Sachbeschädigung sinnvoll sichern",
+                "Wiederkehrende Schäden an Gemeinschaftseinrichtungen chronologisch erfassen",
+                "Schadenprotokoll für private Vermieter nach Vandalismus führen"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ZURUECKGESTELLT_KOLLISION_MIT_BESTAND_VANDALISMUSSCHAEDEN_DOKUMENTIEREN"
+    },
+    {
+      "kind": "NEW_SUBAREA",
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "parent_id": "core:area:236d4048ce84",
+      "subareas": [
+        {
+          "name": "Brandschutz auf Freizeitbooten",
+          "leaves": [
+            {
+              "name": "Brandwarnung in der Bootskajüte",
+              "article_ideas": [
+                "Rauchwarntechnik in Bootskajüten nach Einsatzbedingungen auswählen",
+                "Alarmierung bei längerer Bootabwesenheit fachlich einordnen",
+                "Brandwarnmelder auf kleinen Freizeitbooten regelmäßig prüfen"
+              ]
+            },
+            {
+              "name": "Bordgas & Kohlenmonoxid",
+              "article_ideas": [
+                "CO-Gefahren bei privaten Bootsheizungen erkennen",
+                "Gasanlage eines Freizeitboots vor Saisonbeginn fachlich kontrollieren lassen",
+                "CO-Warner für geschlossene Bootskajüten beurteilen"
+              ]
+            },
+            {
+              "name": "Bordelektrik & Akkus",
+              "article_ideas": [
+                "Elektrische Brandrisiken bei Nachrüstungen am Freizeitboot abklären",
+                "Batterie-Ladegeräte für Boote auf fachgerechte Montage prüfen lassen",
+                "Brandwarnzeichen an alter Bootselektrik dokumentieren"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ZURUECKGESTELLT_PARENT_CAMPING_FUER_BOOT_THEMATISCH_UNPASSEND"
+    }
+  ]
+}
