@@ -183,7 +183,7 @@ Nach 1.50.651 folgten mehrere technische Reparatur- und Hero-Helferversuche. Dar
 Belastbarer Endzustand:
 - Seite wieder erreichbar;
 - Template Kit 1.50.650 bleibt aktiver Grundstand;
-- 1.50.651 sowie 1.50.653–1.50.663 nicht verwenden;
+- 1.50.651–1.50.663 nicht verwenden;
 - kein neuer Pluginstand freigegeben;
 - keine Architektur-/Runtime-Weiterentwicklung aus dieser Serie übernehmen.
 
