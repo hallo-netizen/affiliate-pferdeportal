@@ -759,3 +759,28 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Nach einer fachfremden Bildgenerator-Ausgabe nicht erneut blind denselben Pfad benutzen. Eine Ausgabe zählt nur, wenn das tatsächliche Bild die angeforderte Kategorie als einzelnes Motiv zeigt.
+
+
+## AF-041 – Münzen-&-Geld-Preview-Zielpfad in 30er-Plan falsch geschrieben
+
+FEHLER:
+Der 30er-Zielplan führte für die Kategorie `Münzen & Geld` den Preview-Pfad
+`subcategories/sammeln/munzen-geld-v150634.webp`.
+Dieser Pfad existiert in der eingefrorenen 1.50.650-Basis nicht.
+
+URSACHE:
+Der Hero-Map-Pfad verwendet historisch `munzen-geld-v150623.webp`, während die Hub1-Preview-Auflösung im aktiven Renderer über den Alias
+`munzen-geld => muenzen-geld`
+auf `muenzen-geld-v150634.webp` zeigt.
+
+NACHWEIS:
+Der vollständige synthetische 30er-Overlay-Test fand exakt diesen einen fehlenden Zielpfad; alle übrigen 59 Zielpfade waren vorhanden.
+
+KORREKTUR:
+- Hero bleibt: `subcategories/sammeln/munzen-geld-v150623.webp`.
+- Preview korrigiert auf: `subcategories/sammeln/muenzen-geld-v150634.webp`.
+- Manifest und Zielpfad-Dokument korrigiert.
+- vollständiger 30er-Overlay-Test danach erneut ausführen.
+
+VERMEIDUNGSREGEL:
+Bei Hero und Preview nicht aus Dateinamenssymmetrie schließen. Preview-Pfade immer gegen die aktive Alias-Auflösung des eingefrorenen 1.50.650-Renderers plus reale Datei-Existenz prüfen.
