@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-14
-STATUS: **SEITE WIEDER ERREICHBAR / ARCHITEKTUR + RUNTIME EINGEFROREN / HERO-ONLY 1.50.659 VERWORFEN / HERO-REPLACE-ONLY 1.50.660 LOKAL PASS / LIVE-PRÜFUNG OFFEN**
+STAND: 2026-10-15
+STATUS: **SEITE WIEDER ERREICHBAR / RUNTIME+ARCHITEKTUR EINGEFROREN / 1.50.660 VISUELL FÜR 30 HEROES VERWORFEN / 1.50.661 30-BILD-ONLY LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
 
 ## Harte Sperre
 Keine Änderungen an:
@@ -16,93 +16,62 @@ Keine Änderungen an:
 - Seitenstruktur;
 - Architektur/System.
 
-## Fehler 1.50.659
-1.50.659 ist verworfen, weil es entgegen der Vorgabe zusätzlich den `heroes`-Block in `hub2-image-map.json` geändert hat.
-Das war keine reine Bilddatei-Ersetzung.
+## Aktiver Grundstand
+Affiliate Portal Template Kit **1.50.650** bleibt unangetastet.
+
+## Verworfen
+- 1.50.651;
+- Repair Installer 1.50.657;
+- Recovery 1.50.658;
+- Hero Images ONLY 1.50.659;
+- Hero Replace ONLY 1.50.660 für die unten genannten 30 Heroes wegen Live-Sichtbefund: unscharf/zu eng/teilweise falsches Motiv/teilweise Doppelungen.
+
+## Nutzer-Hard-Reject – 30 Heroes
+Miniaturen & Szenen; Papierkunst; Textilgestaltung; Malen & Zeichnen; Schrift & Lettering; Guss & Formen; Holz; Leder; Heimwerken; Keramik & Glas; Mechanik & Uhren; Robotik & Automation; Astronomie; Messen & Analysieren; Mikroskopie; Wetter & Umwelt; Gärtnern; Essbare Pflanzen; Moos & Miniaturgärten; Pilze & Kulturen; Ameisen & Insekten; Wirbellose; Wind & Drachen; Klettern & Seil; Wasser; Alltagsobjekte; Naturfunde; Spielzeug & Spiele; Münzen & Geld; Technik & Medien.
+
+## Verbindliche Bildregel
+- breite Szene statt Makro/Detailcrop;
+- Thema sofort erkennbar;
+- Hauptmotiv vollständig mit sichtbarer Umgebung;
+- scharf, kein sichtbares Upscaling;
+- kein falsches Ersatzmotiv;
+- keine offensichtliche Bildwiederholung;
+- Technik-PASS ist kein Live-Visual-PASS.
 
 ## Aktueller Kandidat
-`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip`
+`HOBBY_DEPOT_HERO_REPLACE_30_ONLY_1.50.661.zip`
 
 SHA-256:
-`bd1bbd485763cbf72b07d284c5ca81664401397704dc73e310d9c4807fc3c9af`
+`befb9a73f67e3827b7ad5c7c03d940976a5362a2a732f779654499685f0f0b3e`
 
-## Was 1.50.660 exakt macht
-- liest nur die 65 aktuell vorhandenen Hero-Zielpfade aus dem laufenden 1.50.650-Mapping;
-- überschreibt ausschließlich genau diese 65 bestehenden WebP-Dateien mit den neuen 600×220-Hero-Pixeln;
-- Mapping bleibt byte-identisch;
-- 0 Änderungen an Template-Kit-PHP;
-- 0 Änderungen an Templates;
-- 0 Änderungen an Routing;
-- 0 Änderungen an CSS;
-- 0 Änderungen an Karten;
-- 0 Änderungen an Architektur.
+## Was 1.50.661 exakt macht
+- Payload: exakt 30 WebP-Heroes, jeweils 600×220;
+- ersetzt nur die 30 vom Nutzer verworfenen Heroes;
+- liest deren **bereits aktive** Zielpfade aus dem vorhandenen 65er-Mapping;
+- schreibt das Mapping niemals;
+- lässt die übrigen 35 aktuell gemappten Heroes byte-identisch;
+- 0 Änderungen am Template-Kit-PHP;
+- 0 Änderungen an Templates/Routing/CSS/Karten/Architektur.
 
-## Lokale Prüfung
-Pristine 1.50.650:
-- DIFF_COUNT = 65;
-- EXPECTED_TARGETS = 65;
-- ONLY_EXPECTED = true;
-- MAP_UNCHANGED = true;
-- PHP_CHANGED = 0;
-- 65/65 Hero-Kopien SHA-identisch zum Payload;
-- Helper-PHP Syntax PASS;
-- ZIP PASS.
+## Lokaler Nachweis
+Payload:
+- 30/30 = 600×220;
+- 30/30 SHA-eindeutig;
+- niedrigster lokaler Schärfewert (Laplacian variance) > 1684;
+- nächstes perzeptuelles Paar im 30er-Satz: Hamming-Distanz 19.
 
-Zusätzlich mit bereits angewendetem 1.50.659-Zustand simuliert:
-- 1.50.659-Patch zuerst angewendet: PASS;
-- danach 1.50.660 angewendet: PASS;
-- aktuelles Mapping 65 eindeutige Zielpfade;
-- 65/65 aktuell gemappte Zielbilder danach SHA-identisch zum neuen Payload.
+E2E-Aktivierung mit dem echten Plugin-PHP:
+1. pristine 1.50.650: PASS;
+2. simuliertes reales Nach-1.50.659+1.50.660-Szenario: PASS.
+
+In beiden Szenarien:
+- exakt 30 Datei-Diffs;
+- exakt die 30 aktuell gemappten Zielbilder;
+- Mapping byte-identisch;
+- übrige 35 Hero-Zieldateien unverändert;
+- 0 PHP-Diffs;
+- 30/30 Zielbilder SHA-identisch zum Payload;
+- keine .tmp/.bak-Reste.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.659 nicht weiterverwenden. 1.50.660 installieren/aktivieren; es ersetzt nur die 65 aktuell gemappten Hero-Dateien. Danach eine Hub2-Seite hart neu laden und visuell prüfen.**
-
-
-## Nutzer-Hard-Reject 2026-10-15 – 30 Heroes komplett verwerfen
-Für alle folgenden Kategorien gilt unabhängig von früheren lokalen Prüfungen:
-**Hero unbrauchbar wegen Unschärfe und/oder zu geringer effektiver Motivgröße und/oder viel zu engem Ausschnitt.**
-Keines dieser Motive darf durch bloßen Crop, Mappingwechsel oder Recycling eines bisherigen Szenenmotivs erneut freigegeben werden.
-
-1. Miniaturen & Szenen
-2. Papierkunst
-3. Textilgestaltung
-4. Malen & Zeichnen
-5. Schrift & Lettering
-6. Guss & Formen
-7. Holz – zusätzlich falsches Motiv
-8. Leder – zusätzlich falsches Motiv
-9. Heimwerken
-10. Keramik & Glas – zusätzlich falsches Motiv
-11. Mechanik & Uhren – zusätzlich falsches Motiv
-12. Robotik & Automation – zusätzlich falsches Motiv
-13. Astronomie
-14. Messen & Analysieren – zusätzlich falsches Motiv
-15. Mikroskopie – zusätzlich falsches Motiv
-16. Wetter & Umwelt – zusätzlich Doppelung
-17. Gärtnern – zusätzlich Doppelung
-18. Essbare Pflanzen – zusätzlich falsches Motiv
-19. Moos & Miniaturgärten
-20. Pilze & Kulturen – zusätzlich falsches Motiv
-21. Ameisen & Insekten – zusätzlich falsches Motiv
-22. Wirbellose – zusätzlich falsches Motiv
-23. Wind & Drachen
-24. Klettern & Seil
-25. Wasser
-26. Alltagsobjekte
-27. Naturfunde
-28. Spielzeug & Spiele
-29. Münzen & Geld
-30. Technik & Medien
-
-### Verbindliche Ersatzregel
-- neues eigenständiges Motiv je Kategorie;
-- breite Szene, kein Makro/Detailcrop;
-- Hauptmotiv vollständig und sofort erkennbar;
-- sichtbare Umgebung, Motiv nicht bildfüllend;
-- keine sichtbare Unschärfe / kein Upscaling;
-- keine Wiederverwendung derselben Szene in mehreren Kategorien;
-- semantische Eindeutigkeit vor Dateieinbau;
-- kein Release nur wegen technischer Existenz/Hash/Mapping.
-
-### Konsequenz
-Der bisherige Hero-Satz 1.50.660 ist **nicht freigabefähig**. Für diese 30 Kategorien gilt kompletter Neuaufbau der Bildquelle bei unveränderter Runtime/Architektur.
+**1.50.661 installieren/aktivieren und die 30 betroffenen Hub2-Seiten live visuell prüfen. Keine andere Plugin-, Mapping- oder Architekturänderung.**
