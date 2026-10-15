@@ -14,3 +14,7 @@ Nicht die Pferde-Engine blind übertragen. Stattdessen fachlich analoger sichere
 - ZIP SHA256 `c4b3f89eb1e3bebecc1c7ac3f78510f6f3c37ddae41b6adc87ad17dbbd253769`, `HAB_UND_BEWAHR_DESIGN_0.1.8_GLOSSAR_MANAGER.zip`.
 - PHP-Lint und ZIP PASS; 17 Validatorchecks; 4 Adminimportpfade inkl. zwei echter Mock-Rollbacks; 20 Browseransichten lokal PASS. **ECHTER WP-LIVE-READBACK OFFEN**, kein Releasefreigabe-Märchen.
 - Gewollter Status: 0 published terms. Vor Freigabe ist die Übersicht serverseitig noindex, ihre späteren URLs entstehen erst durch manuelles Veröffentlichen geprüfter WP-Drafts.
+
+
+## TECHNIKERGÄNZUNG 0.1.17 – GET-PAGINATION UND LESBARE GLOSSAR-KURZANSICHTEN (15.10.2026)
+Aus der echten Pferde-Atelier-Architektur **nur Fachvertrag** übernommen; kein Übertragen der Pferde-Atelier-Design-Assets/Termtexte. Je Begriff `term-*`-WDB-Vertrag, Related, Quellen, Suchintent, optional starke Hauptseite. Bis Volltext-Readback: `/glossar/<slug>/` technische read-only Ansicht ohne CPT-Writes, always **noindex**, kein Fake-Publish; native veröffentlichte Validatortermseiten bleiben bevorzugt kanonisch. A–Z serverseitig auf 9 Karten paginiert mit kombiniertem GET-Filter/Suche/Letter; kein Frontend-Loopback, kein Cron, kein JSON-Upload aus Benutzerbrowser. Unveränderte Max25-Draft-Batchlogik. ZIP und Prüfungen in DESIGN/CURRENT_STATE.md. WordPress-Live-Gate OFFEN.
