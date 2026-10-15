@@ -20,7 +20,7 @@ Damit ist belegt: Es existiert in der zugänglichen neuen Dateimenge kein verste
 
 ### Eigenständige neue Einzelbilder
 - Astronomie → `Teleskop unter der Milchstraße.png`
-- Miniaturen & Szenen → `Detailreiches Miniaturbau-Atelier.png` / `Gemütliches Miniaturenatelier mit Dioramen.png` (Auswahl offen)
+- Miniaturen & Szenen → `Detailreiches Miniaturbau-Atelier.png` / `Gemütliches Miniaturenatelier mit Dioramen.png`; **Kandidat B** ist im technischen WIP-Stage festgelegt, finale Live-Freigabe offen
 - Malen & Zeichnen → `Sonniges Atelier mit Farbpinseln und Skizzen.png`
 - Schrift & Lettering → `Sonniges Kalligrafie-Atelier am Schreibpult.png`
 - Papierkunst → `Sonnenlicht im Papierkunst-Atelier.png`
