@@ -47,5 +47,17 @@ PASS:
 ## Vorschau-Richtungen 13
 Die 13 aus den neu erzeugten Sammelvorschauen wiedergefundenen Richtungen wurden zusätzlich **nur als Referenzbindung** isoliert. Sie bleiben ausdrücklich **keine Releasequelle** und ersetzen keine eigenständige Einzelquelle.
 
+## Gesicherter WIP-Stage V2
+Arbeitsarchiv: `HOBBY_DEPOT_NEW_IMAGE_STAGE_7_WIP_V2.zip`
+
+SHA-256:
+`bae7d84034b6d011d566927cd4193b4b74f223c6c9b1b87ef5cc6275f0bda9bb`
+
+Inhalt:
+- 7 Heroes 600×320;
+- 7 Previews 200×107;
+- 1 Manifest;
+- kein Plugin-/Runtime-Code.
+
 ## Status
 Dieser Stand ist ein technischer WIP-Asset-Stage und darf **nicht** in das Plugin übernommen werden, solange der vollständige 30/30-Satz nicht freigegeben ist.
