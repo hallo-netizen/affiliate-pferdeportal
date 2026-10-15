@@ -1,3 +1,7 @@
+# Hab & Bewahr – historischer Zielvertrag 3–10 (ABGELÖST 15.10.2026)
+**NICHT MEHR AKTIV.** Der Nutzer hat die frühere Höchstzahl 10 ausdrücklich aufgehoben. Gültig ist nur noch `ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`: **mindestens drei Unterkategorien, keine Obergrenze; jedes Blatt muss mindestens drei, idealerweise fünf oder mehr individuelle Artikelthemen tragen können.** Die nachstehenden Regeln bleiben lediglich revisionshistorischer Beleg.
+
+## Historische Fassung 1.1
 # Hab & Bewahr – Zielvertrag Kategorien (ZV-HB-KONZEPT-R3-001)
 Fassung 1.1 vom 13.10.2026 (inhaltlich ausschließlich PASS-Bedingung 4 gemäß expliziter Nutzerentscheidung präzisiert). STATUS: AKTIV. Kein Release-PASS behauptet.
 
