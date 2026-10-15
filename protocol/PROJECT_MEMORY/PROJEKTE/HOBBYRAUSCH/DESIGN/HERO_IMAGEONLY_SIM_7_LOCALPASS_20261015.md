@@ -16,9 +16,17 @@ Beweisen, dass die neuen Bilddateien später ohne Architektur-, Mapping- oder Co
 - Guss & Formen
 - Miniaturen & Szenen – WIP-Auswahl Kandidat B
 
+## Basisverifikation
+Die echte 1.50.650-Laufzeit wurde vor der korrigierten Simulation geprüft:
+- Hub2-Hero-Container: `aspect-ratio: 600/320`;
+- Hero-Bild: `width:100%; height:100%; aspect-ratio:600/320; object-fit:cover`;
+- Kategorie-Vorschau Desktop: 200×107.
+
+Damit ist **600×320** das korrekte Hero-Dateimaß für den reinen Bildersatz ohne CSS-Eingriff. Der frühere 600×220-Zwischenstand wurde verworfen und nie als Release freigegeben.
+
 ## Technische Ableitung
 Pro Kategorie:
-- Hero: exakt **600×220**, WEBP
+- Hero: exakt **600×320**, WEBP
 - Preview: exakt **200×107**, WEBP
 - gleicher bestehender 1.50.650-Zielpfad
 - keine Hochskalierung der Quelle
@@ -39,7 +47,7 @@ Mapping SHA-256 vor/nach:
 
 ## Zieldatei-Prüfung
 PASS:
-- 7/7 Hero-Dateien: 600×220 WEBP
+- 7/7 Hero-Dateien: 600×320 WEBP
 - 7/7 Preview-Dateien: 200×107 WEBP
 - 14/14 Ausgabedateien eindeutig
 - keine zusätzlichen Zielpfade
@@ -50,6 +58,7 @@ Die lokale WIP-Struktur wurde gezippt und erneut entpackt.
 
 PASS:
 - **981/981 Dateien** nach ZIP-Roundtrip byte-identisch zum simulierten WIP-Verzeichnis.
+- korrigierte V2-Simulation: exakt 14 Bild-Diffs, 0 Code-/Mapping-Diffs.
 
 ## Ergebnis
 Der KISS-Pfad ist technisch bestätigt:
