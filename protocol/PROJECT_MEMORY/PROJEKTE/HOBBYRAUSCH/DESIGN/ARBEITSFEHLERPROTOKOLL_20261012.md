@@ -526,3 +526,27 @@ LOKALER NACHWEIS:
 
 VERMEIDUNGSREGEL:
 Bei Auftrag „nur Bilder austauschen“ dürfen keine Mapping-, PHP-, Template-, Routing-, CSS- oder Versionslogikänderungen vorgenommen werden. Es werden ausschließlich die bereits aktiven Bilddateien an ihren bestehenden Zielpfaden ersetzt.
+
+
+## AF-032 – Technischer 65er-Dateiaustausch 1.50.660 ohne ausreichende visuelle Motivfreigabe
+
+FEHLER:
+1.50.660 erfüllte technisch die Vorgabe „nur bestehende Bilddateien ersetzen“, wurde aber ausgegeben, obwohl der 65er-Bildsatz visuell nicht ausreichend auf Distanz, Schärfe, Motivpassung und Wiederholungen freigegeben war.
+
+LIVE-BEFUND:
+Der Nutzer verwarf 30 Heroes ausdrücklich. Grundsätzlich: unscharf und/oder zu klein bzw. viel zu dicht rangezoomt. Zusätzlich wurden bei mehreren Kategorien falsche Motive und Doppelungen benannt.
+
+KORREKTUR:
+1.50.660 ist für diese 30 Heroes verworfen. 1.50.661 ersetzt ausschließlich diese 30 aktuell gemappten Bilddateien. Mapping, Runtime, Templates, Routing, CSS, Karten und Architektur bleiben unangetastet.
+
+SCHUTZPRÜFUNG 1.50.661:
+- exakt 30 Payload-Dateien, 600×220;
+- 30 SHA-eindeutig;
+- lokaler Schärfecheck;
+- perzeptueller Duplikatcheck;
+- echte PHP-Aktivierung E2E auf pristine 1.50.650;
+- echte PHP-Aktivierung E2E auf simuliertem Nach-1.50.659+1.50.660-Zustand;
+- in beiden Fällen exakt 30 Datei-Diffs, Mapping unverändert, übrige 35 Heroes unverändert, 0 PHP-Diffs.
+
+VERMEIDUNGSREGEL:
+Bei Bildaufträgen ist die visuelle Prüfung vor dem Release gleichrangig mit der technischen Dateiprüfung. Kein Bildsatz wird wegen korrekter Maße/Hashes/Pfade als fertig bezeichnet. Distanz, Motiv, Schärfe und sichtbare Wiederholungen müssen separat geprüft werden; Live-Abnahme bleibt bis zur Sichtprüfung offen.
