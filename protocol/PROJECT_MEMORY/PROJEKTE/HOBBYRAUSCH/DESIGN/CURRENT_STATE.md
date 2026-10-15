@@ -72,5 +72,8 @@ Exakte Bilanz:
 ## Erster offener Blocker
 Der vorhandene neue Bildbestand ist jetzt **30/30 quellenweise inventarisiert**: 6 Einzelkandidaten fest identifiziert, Miniaturen mit 2 Kandidaten offen, 23 Kategorien FEHLEND als eigenständige Quelle. Die Vorschauphase ist bereits vorhanden und wird nicht wiederholt.
 
+## Ausführungs-Arbeitsliste
+`HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` enthält die eindeutige Motivvorgabe für alle 23 noch fehlenden Einzelquellen. Sie ist nur Arbeitsliste; Statusautorität bleibt diese Current.
+
 ## EXAKT EINE NEXT ACTION
-**Nicht die Vorschauen neu erzeugen. Die 23 noch FEHLENDEN eigenständigen Hero-Quellen aus den bereits vorhandenen Vorschau-Richtungen als echte Einzelmotive fertigstellen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
+**Nicht die Vorschauen neu erzeugen. Die 23 noch FEHLENDEN eigenständigen Hero-Quellen strikt nach `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` als echte Einzelmotive fertigstellen und blockweise visuell prüfen; Miniaturen-Kandidat A/B danach final auswählen. Kein Plugin/ZIP vor vollständiger 30/30-Motivfreigabe.**
