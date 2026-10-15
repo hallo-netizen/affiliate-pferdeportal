@@ -76,7 +76,8 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 
 ## Ausführungs-Arbeitslisten
 - `HERO_PREVIEW_BINDING_RECOVERY_20261015.md` – bindet ausschließlich die nach 1.50.663 neu erzeugten und wiedergefundenen Vorschau-Richtungen; kein Rückgriff auf alte WIP-Bilder.
-- `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle fixiert; 11 unverändert PASS, Keramik & Glas sowie Moos & Miniaturgärten auf stärkere bereits vorhandene neue Vorschauen umgebunden; nur Referenz, keine Releasequelle.
+- `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – historischer Zwischenstand, durch V2 ersetzt.
+- `HERO_REFERENCE_CROPS_13_V2_20261015.json` – aktive reproduzierbare Referenzbindung für 13/13 Richtungen: echtes Raster + Zelle + eigener Crop + eindeutiger SHA-256 + eigene Crop-Datei-ID; Uploadbytes 13/13 rematerialisiert und hash-verifiziert; nur Referenz, keine Releasequelle.
 - `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen auf Hero 600×320 und Preview 200×107 abgeleitet.
@@ -90,7 +91,7 @@ Arbeitslisten-Konsistenz: **PASS**
 - exakt 13 gebundene neue Vorschau-Richtungen;
 - exakt 6 im Nachbarchat belegte Kategorien eines neuen Produktionsblocks, aber **ohne** rekonstruierte exakte Motivrichtung;
 - exakt 4 weiterhin nicht rekonstruierbare neue Bindungen;
-- 11/13 unveränderte Referenzcrops mit eindeutigen Hashes; 2/13 bewusst auf fachlich stärkere neue Quelle/Zelle umgebunden, deren alte Crop-Hashes ausdrücklich ungültig sind.
+- 13/13 aktive V2-Referenzcrops mit eindeutigen Hashes und eindeutigen Datei-IDs; Keramik & Glas korrekt aus 4×3/R2C1, Technik & Medien korrekt aus 5×2/R2C1, übrige aktive Referenzen aus 4×2-Rastern.
 - Build-Manifest: **PASS** – 30/30 Kategorien eindeutig, 30/30 Hero-Zielpfade eindeutig, 30/30 Preview-Zielpfade eindeutig, alle Kollisionsverweise gültig.
 - `HERO_TARGET_PATHS_30_150650_20261015.md` – exakte 30 Hero- und 30 Preview-Zielpfade der eingefrorenen 1.50.650-Basis; 60/60 vorhanden und eindeutig.
 - `HERO_IMAGEONLY_SIM_7_LOCALPASS_20261015.md` – realer lokaler KISS-Nachweis: bei 7 vorhandenen Quellen exakt 14 Bilddateien ersetzt, sonst 0 Änderungen; Mapping byte-identisch; ZIP-Roundtrip PASS.
