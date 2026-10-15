@@ -15,7 +15,7 @@ Jede Position separat erzeugen:
 - keine Collage, kein Bild-in-Bild, kein Poster;
 - keine zweite Kategorie im selben Bild;
 - keine Wiederverwendung einer anderen Ausgangsquelle;
-- ausreichend Auflösung für verlustfreie Ableitung auf 600×220 und 200×107.
+- ausreichend Auflösung für verlustfreie Ableitung auf 600×320 und 200×107.
 
 ## Queue
 
