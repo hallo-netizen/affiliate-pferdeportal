@@ -733,7 +733,7 @@ Für Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Se
 KORREKTUR:
 - Guss & Formen bleibt durch die separat vorhandene neue Einzelquelle abgedeckt.
 - Ameisen & Insekten besitzt eine andere neu gebundene Vorschau-Richtung.
-- Die sechs übrigen Kategorien werden als **neue Produktionsrichtung belegt / Einzelquelle fehlt** geführt.
+- Die sechs übrigen Kategorien werden nur als **Bestandteil des vom Nutzer akzeptierten neuen 8er-Blocks belegt** geführt. Eine konkrete Motivrichtung ist daraus nicht rekonstruierbar und darf nicht erfunden werden.
 - Keine alte 1.50.653-/1.50.663-Datei wird als Ersatz verwendet.
 
 VERMEIDUNGSREGEL:
