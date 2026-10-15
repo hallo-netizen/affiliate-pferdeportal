@@ -52,6 +52,12 @@ Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müs
 | Münzen & Geld | FEHLEND | keine gültige neue Einzelquelle |
 | Technik & Medien | FEHLEND | keine gültige neue Einzelquelle |
 
+## Richtungsstatus der 23 noch fehlenden Einzelquellen
+- **13**: neue Nach-1.50.663-Vorschau-Richtung samt konkreter Datei/Zelle wiedergefunden und per Hash gebunden.
+- **6**: Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser – als neuer 8er-Produktionsblock im Nachbarchat belegt; die unmittelbar gespeicherten Sammelbilder lieferten diese Motive jedoch nicht korrekt, deshalb weiterhin keine gültige Einzelquelle.
+- **4**: Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld – keine belastbar rekonstruierbare neue Vorschau-/Dateibindung.
+- Für alle 23 bleibt der Quellenstatus bis zur echten eigenständigen Einzeldatei **FEHLEND**.
+
 ## Bilanz
 - 6 Kategorien: genau ein belastbarer neuer Einzelkandidat vorhanden.
 - 1 Kategorie: Miniaturen & Szenen – zwei belastbare Einzelkandidaten, Auswahl noch offen.
@@ -74,5 +80,5 @@ Zusätzlich im erzeugten Bildbestand verifiziert:
 `HERO_ASSET_STAGE_7_WIP_20261015.md` dokumentiert für 7 vorhandene neue Einzelquellen bereits abgeleitete und geprüfte Hero-/Preview-Dateien (600×320 / 200×107). Miniaturen nutzt dort Kandidat B. Kein Release-/Live-PASS.
 
 ## Nächster Arbeitsschritt
-Die Vorschauphase nicht wiederholen. Die 13 bereits neu gebundenen Vorschau-Richtungen in echte eigenständige Einzelquellen überführen. Für die 10 aktuell nicht rekonstruierbaren Richtungen keine alten WIP-Bilder verwenden und nichts erfinden.
+Die Vorschauphase nicht wiederholen. Die 13 exakt gebundenen neuen Vorschau-Richtungen und die 6 im Nachbarchat bestätigten neuen Produktionsrichtungen in echte eigenständige Einzelquellen überführen. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder verwenden und nichts erfinden.
 Kein Plugin/ZIP vor vollständigem 30/30-Audit.
