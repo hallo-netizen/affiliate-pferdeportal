@@ -24,6 +24,7 @@ Nicht als Bild-PASS bestätigt:
 ## Aktuelle Pluginlage
 Seit 1.50.663 wurde **kein neues Plugin** gebaut oder freigegeben.
 Die aktuelle Arbeit ist ausschließlich **Bildquellen-WIP** im Designbereich und besitzt noch keine Pluginversion.
+Der 30/30-Quellenaudit ist im Designbereich abgeschlossen: 5 eindeutige Einzelkandidaten, Miniaturen mit 2 Kandidaten offen, 24 Kategorien FEHLEND.
 
 Keine Änderung an:
 - Template-Kit-PHP;
@@ -38,4 +39,4 @@ Keine Änderung an:
 Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter Kandidat existiert.
 
 ## EXAKT EINE NEXT ACTION
-**Auf die Design-Current warten: erst nach abgeschlossenem 30/30-Quellenaudit der Heroes darf ein reiner Bilddatei-Kandidat gebaut und vollständig positiv/negativ/regressiv getestet werden.**
+**Keine Pluginaktion. Zuerst die Design-Current-NEXT-ACTION ausführen: 24 FEHLEND-Heroes als eigenständige Einzelmotive fertigstellen und Miniaturen A/B auswählen. Erst nach vollständiger 30/30-Motivfreigabe darf ein reiner Bilddatei-Kandidat gebaut und positiv/negativ/regressiv getestet werden.**
