@@ -1,3 +1,11 @@
+## NACHHOLBELEG V9.1 – 15.10.2026 (kein eigener Current)
+**EINZIGE AKTUELLE STATUS-/NEXT-ACTION-QUELLE:** `KONZEPT/CURRENT_STATE.md`. Die historischen Formulierungen „18 fehlende Originaltitel“ und „zwei nicht belegte Moves“ in den weiter unten archivierten V9-Akten sind durch Originalquellenfund **teilweise bzw. vollständig überholt**.
+
+- **V9-002 Fortschritt:** In `R3_V8_R2_VOLLSTAENDIGER_INTENT_ABGLEICH_144_20261013.json` wurden 12 von 18 zuvor nicht ausgelesenen R2-Originaltiteln mit genauem Wortlaut und Original-Owner wiedergefunden und im `V9_R2_12_ORIGINALTITEL_19_TRANSFERS_QUELLENFUND_20261015.md` archiviert. Nur **6 exakte Titel bleiben offen**. Keine Ersatzformulierungen als angebliche Originale.
+- **V9-006 historische Transfer-Beleglücke GESCHLOSSEN:** Neben den 17 einzeln gelisteten Moves stehen zwei zusätzliche, vom alten `Überspannung im Haus` ausgehende Transfers wortgenau in `R3_V8_33_OWNER_GRENZEN_R2_ORIGINAL_20261013.md`. Das 19er-Original-QA bestätigt 19 geplante Vorgänge. **0 Moves jetzt durchgeführt**, kein Live-Transfer nachträglich behaupten.
+- **V9-007 Konzept-Draft lokal verbessert, WP unverändert:** 48 Kandidaten/212 Ideen und 9 Zurückstellungen getrennt gehalten, 3 Kandidaten/Ideenpakete redaktionell umformuliert, 1 bestehender Artikel-Owner als Transfer-Gate erkannt. 12/12 lokale Datenchecks, 5/5 absichtliche Beschädigungen erkannt. Noch KEINE semantische Vollfreigabe, kein tatsächlicher WordPress-Release.
+- **Release:** BLOCKED, bis sechs verbliebene Originaltitel und technische Kategorie-Workflow-Prüfung geklärt sind.
+
 ## NACHHOLPRÜFUNG V9 – AKTUELLE FEHLERKETTE, 15.10.2026 (kein eigener Current)
 **Einzig maßgeblicher STATUS und NEXT ACTION:** `KONZEPT/CURRENT_STATE.md`. **LIVE-R3/V8-Readback 546/546 PASS vom 13.10.2026.** Die unten historisch fortgeschriebenen Behauptungen „R3 nicht live“, „WP-Sync ausstehend“ und „maximal 10“ sind für den gegenwärtigen Fachauftrag **ÜBERHOLT**. Gültiger Zielvertrag: `ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`.
 
