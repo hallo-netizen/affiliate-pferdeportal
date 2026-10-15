@@ -1,6 +1,15 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 15.10.2026 – V9.11 NAMENS- UND REGEL-RELEASESPERRE (OPERATIV)
+**Konzept-Current bleibt getrennt in `../KONZEPT/CURRENT_STATE.md` und trägt V9.11.** Der **tatsächlich installierfähige 1.14.8.19-Original-ZIP** wurde später im persönlichen Plugin-Büro `/Eigentumsschutz/Plugins/HD-001-Kategorie-Workflow/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.19_R3_V8_FERTIG.zip` gefunden; frühere Aussage „nicht vorhanden“ ist überholt und falsch. Darauf wurde ein 1.14.8.20-V9.9-Update aufgebaut. Der aktuelle WordPress-Sync-Stand nach diesem Update ist **ohne frischen Plugin-/Live-Readback unbekannt**; die von Nutzer gemeldete Fehlermeldung `R3-Schreibschutz: WordPress-Live-Revision unbekannt: HB-V99-ADD...` ist ein realer Blocker, kein PASS.
+
+- **Nicht wieder anwenden:** historisches R3-Gate `48×3` und `require_direct_child_3_to_10` als neue Planungsregel. Historische Originalprüfung darf nicht blind gelöscht oder der Original-Fingerprint verletzt werden. Neuer fachlicher Prüfvertrag: **>=3, keine Obergrenze**. Im 1.14.8.20-V99-Profil ist die alte 3–10-Option zwar `false`, aber die vorangegangene R3-Planung blieb künstlich dreifach.
+- **SEO-BLOCK:** Das V99-Modul weist **ohne DataForSEO-Messung** jeden neuen `display_name` auch `primary_keyword`/`seo_seed` zu und setzt `seo_owner=true`. Dies belegt keine Suchintention und darf keine Kategorie freigeben. Vor weiterer Live-Synchronisierung **echte Germany/de DataForSEO-Kandidaten-/Keyword- und SERP-Prüfung**, dokumentierte Entscheidungen zu fachlichem Owner, keine fiktiven Zahlen und keine stillen Kostenaufrufe.
+- **Exakter Bestand laut V9-Fachmatrix:** 31/31 Bereiche genau drei Unterbereiche, 87/93 Unterbereiche je drei Blätter, 6/93 je vier. Die aktuelle V9.9-ADD-Datei enthält 12 vorgeschlagene Dreier-, 9 Vierer- und einen Sechser-Unterbereich. Qualität und Keyword-Eignung **nicht vollständig nachgewiesen**. Die neu gemeldeten schlechten Namen und der R3-Live-Revision-Blocker müssen im bestehenden Plugin getestet und korrigiert werden, bevor eine neue Installation empfohlen wird.
+- **GENAU EINE NEXT ACTION (Kategorie-Büro):** Die mit dem aktuell im WordPress laufenden Profil kompatible bestehende Pluginquelle und reale Readbacks auf den V99-Revisionskonflikt sowie das automatische ungeprüfte `seo_owner`-Flag prüfen; gleichzeitig die Konzept-Namensergebnisse von V9.11 abwarten, bevor das eine zentrale Nachfolgeplugin mit korrigierter Min-3-ohne-Obergrenze, Keyword-Gate und lokalen Positiv-/Negativtests freigegeben wird. Kein weiteres Release nur wegen formal bestandener Mengenprüfung.
+
+
 ## AKTUELLE OPERATIVE ANBINDUNG V9.9 – 15.10.2026 – KEIN WORDPRESS-WRITE
 Dieses Kategorienbüro ist und bleibt **alleiniger WordPress-Strukturschreiber**. Der neue fachliche Plan liegt jetzt im **eigenen zentralen Kategorienbüro**:
 `V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json`.
