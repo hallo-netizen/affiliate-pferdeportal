@@ -79,7 +79,8 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_REFERENCE_CROPS_13_WIP_20261015.md` – 13 bereits gesehene neue Vorschau-Richtungen exakt über Quelle/Zelle fixiert; 11 unverändert PASS, Keramik & Glas sowie Moos & Miniaturgärten auf stärkere bereits vorhandene neue Vorschauen umgebunden; nur Referenz, keine Releasequelle.
 - `HERO_REFERENCE_VISUAL_AUDIT_13_20261015.md` – Sichtaudit der 13 neuen Richtungen: 11 PASS, 2 REBIND, 0 alte Quellen.
 - `HERO_EINZELQUELLEN_WORKLIST_23_20261015.md` – eine gemeinsame Ausführungsarbeitsliste für alle 23 noch fehlenden eigenständigen Einzelquellen; enthält die 13 gebundenen Richtungen, die 6 belegten Nachbarchat-Richtungen und die 4 weiterhin nicht rekonstruierbaren Fälle.
-- `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
+- `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen auf Hero 600×320 und Preview 200×107 abgeleitet.
+- `HERO_ASSET_STAGE_7_VISUALPASS_20261015.md` – reale Sichtprüfung dieser 14 Ausschnitte: 7/7 Heroes PASS, 7/7 Previews PASS, 0 Upscaling, 0 technische Nah-Dubletten.
 - `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
 - `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`; zusätzlich 7/7 echte Quellen und 13/13 neue Referenzrichtungen an exakte Projektdatei-IDs gebunden.
 - `HERO_GENERATION_QUEUE_13_WIP_20261015.json` – exakte Generierungsqueue ausschließlich für die 13 Kategorien mit eindeutig gebundener neuer Nach-1.50.663-Referenz; keine geratenen Motive, keine Vorschau-Runde, keine alten Quellen.
@@ -96,7 +97,7 @@ Arbeitslisten-Konsistenz: **PASS**
 
 Belastbare Wiederherstellung aus den neuen Vorschauen:
 - 7 Kategorien besitzen eigenständige neue Einzelbilder; für Miniaturen wurde im aktuellen WIP-Asset-Stage Kandidat B verwendet;
-- für diese 7 Kategorien sind Hero 600×320 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
+- für diese 7 Kategorien sind Hero 600×320 und Preview 200×107 technisch **und visuell** geprüft: 7/7 Hero-Crops PASS, 7/7 Preview-Crops PASS, keine Hochskalierung, keine technische Nah-Dublette (`HERO_ASSET_STAGE_7_VISUALPASS_20261015.md`);
 - für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
 - für 6 weitere Kategorien (Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser) ist **nur die Zugehörigkeit zum vom Nutzer akzeptierten neuen 8er-Fotoblock** belegt; eine exakte Motivrichtung oder ein valides Ergebnis ist nicht rekonstruiert und darf nicht erfunden werden;
 - nur 4 Kategorien (Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld) besitzen keine rekonstruierbare neue Vorschau-/Dateibindung; dies wurde zusätzlich durch gezielte Nachbarchat-Recovery bestätigt. Dafür darf kein alter Bildbestand als Ersatz benutzt und keine positive Motivvorgabe erfunden werden.
