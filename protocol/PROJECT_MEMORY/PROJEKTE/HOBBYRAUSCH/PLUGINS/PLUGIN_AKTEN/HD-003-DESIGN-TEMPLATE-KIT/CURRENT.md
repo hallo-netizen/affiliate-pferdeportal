@@ -24,7 +24,7 @@ Nicht als Bild-PASS bestätigt:
 ## Aktuelle Pluginlage
 Seit 1.50.663 wurde **kein neues Plugin** gebaut oder freigegeben.
 Die aktuelle Arbeit ist ausschließlich **Bildquellen-WIP** im Designbereich und besitzt noch keine Pluginversion.
-Der 30/30-Quellenaudit ist im Designbereich abgeschlossen: 6 eindeutige Einzelkandidaten, Miniaturen mit 2 Kandidaten offen, 23 Kategorien FEHLEND als eigenständige Quelle. Die vorhandenen Vorschau-/Sammelbilder werden nicht erneut gebaut und gelten nicht als releasefähige Hero-Quellen.
+Der Designbereich besitzt jetzt 7 aktive neue Einzelquellen-Auswahlen im WIP (inkl. Miniaturen Kandidat B als WIP-Auswahl); daraus sind Hero-/Preview-Assets technisch abgeleitet. Für weitere 13 Kategorien sind die bereits gesehenen neuen Vorschau-Richtungen exakt gebunden, aber noch keine eigenständigen Releasequellen. 10 weitere neue Vorschau-Dateibindungen sind aktuell nicht rekonstruierbar. Kein dieser WIP-Stände ist Plugin-/Live-PASS.
 
 Keine Änderung an:
 - Template-Kit-PHP;
@@ -39,4 +39,4 @@ Keine Änderung an:
 Kein neues isoliertes `CURRENT.zip` erzeugen oder ersetzen, solange kein vollständig geprüfter Kandidat existiert.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Pluginaktion. Zuerst die Design-Current-NEXT-ACTION ausführen: die vorhandene Vorschauphase nicht wiederholen, sondern 23 FEHLENDE eigenständige Hero-Quellen fertigstellen und Miniaturen A/B auswählen. Erst nach vollständiger 30/30-Motivfreigabe darf ein reiner Bilddatei-Kandidat gebaut und positiv/negativ/regressiv getestet werden.**
+**Keine Pluginaktion. Die 7 technisch vorbereiteten neuen Einzelquellen bleiben WIP. Zuerst die Design-Current-NEXT-ACTION ausführen und die noch fehlenden eigenständigen Quellen fertigstellen. Erst nach vollständiger 30/30-Motivfreigabe darf ein reiner Bilddatei-Kandidat gebaut und positiv/negativ/regressiv getestet werden.**
