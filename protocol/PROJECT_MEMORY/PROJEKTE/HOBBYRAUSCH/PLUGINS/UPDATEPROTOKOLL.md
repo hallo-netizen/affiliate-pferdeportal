@@ -2762,3 +2762,53 @@ Kein neues isoliertes `CURRENT.zip`. Die bestehende isolierte Ausgabe wird nicht
 CURRENT:
 `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
+
+
+---
+
+## PU-20261015-062 – HD-003 / Reparatur- und Hero-Helferserie 1.50.653–1.50.663 vollständig verworfen
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+ART:
+Eigenentwicklung / Reparatur- und Bildupdateversuche; **kein freigegebener Release**.
+
+AUSGANG:
+1.50.650 bleibt der letzte Grundstand mit live bestätigtem Textinhalt und bestätigter Grundaufteilung. 1.50.651 war bereits LIVE FAIL.
+
+TATSÄCHLICHER VERLAUF:
+- 1.50.653: Release-Kettenfehler; aktive Templates referenzierten alte Profilklasse → Fatal.
+- 1.50.654–1.50.656: weitere Reparatur-/Ableitungsversuche nicht freigabefähig.
+- 1.50.650 Runtime Restore mit neuen Bildern: lokal codegleich zur 1.50.650-Runtime, live dennoch kritischer Fehler.
+- 1.50.657 Repair Installer: separater Reparaturweg; nicht verwenden.
+- 1.50.658 Recovery: Recovery-Versuch; danach Backendzugriff gestört; Recovery/Repair serverseitig entfernt, Seite wieder erreichbar.
+- 1.50.659: als Hero-only ausgegeben, änderte entgegen Auftrag zusätzlich Hero-Mapping → verworfen.
+- 1.50.660: reiner 65er-Dateiaustausch technisch lokal korrekt, aber 30 Heroes live visuell verworfen.
+- 1.50.661: falscher Pluginordner, deshalb keine echte Überinstallation.
+- 1.50.662: In-Place-Identität korrigiert, Ausführung aber an `admin_init` gebunden und bei direkter Frontendprüfung wirkungslos.
+- 1.50.663: Ausführungspfad technisch korrigiert und positiv/negativ geprüft; **LIVE VISUAL FAIL**, weil Grundszenen recycelt, nur anders gecroppt, Bild-in-Bild/Collagen, falsche Motive und Mehrfachbelegungen verwendet wurden.
+
+ENDENTSCHEIDUNG:
+- 1.50.651 und 1.50.653–1.50.663 nicht verwenden;
+- Affiliate Portal Template Kit 1.50.650 bleibt aktiver Grundstand;
+- keine weitere Runtime-/Architekturänderung;
+- Bildquellen werden außerhalb eines Pluginreleases zuerst 30/30 semantisch und visuell geklärt;
+- kein Plugin-Nachfolger vor vollständigem Bildquellen-Audit.
+
+TESTSTATUS:
+- technische lokale Positiv-/Negativtests einzelner Helfer sind als Evidence/Historie gültig;
+- sie stellen **keinen Bildqualitäts- oder Live-PASS** dar;
+- aktuell existiert **kein** freigabefähiger neuer Pluginstand.
+
+ARTEFAKT:
+Kein neues `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` erzeugt oder ersetzt.
+
+ROLLBACK / SICHERER STAND:
+1.50.650 Grundstand; Text und Grundaufteilung eingefroren.
+
+FACH-CURRENT:
+`../DESIGN/CURRENT_STATE.md`
+
+PLUGIN-CURRENT:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
