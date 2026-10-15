@@ -3,90 +3,82 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-15
-STATUS: **SEITE ERREICHBAR / TEMPLATE-KIT 1.50.650 EINGEFROREN / 1.50.662 VERWORFEN WEGEN ADMIN_INIT-GATE / 1.50.663 FRONTEND-IN-PLACE-UPDATE LOKAL E2E PASS / LIVE-VISUALPRÜFUNG OFFEN**
+STATUS: **SEITE ERREICHBAR / TEMPLATE-KIT 1.50.650 EINGEFROREN / HERO-HELPER 1.50.663 LIVE VISUAL FAIL + VERWORFEN / KEIN NEUES ZIP FREIGEGEBEN**
 
 ## Harte Sperre
-Keine Änderungen an Template-Kit-PHP, Routing, Templates, CSS, Mapping, Karten, Seitenstruktur oder Architektur.
+Keine Änderungen an:
+- Template-Kit-PHP;
+- Routing;
+- Templates;
+- CSS;
+- Mapping;
+- Karten;
+- Seitenstruktur;
+- Architektur/System.
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650** bleibt unangetastet.
+Textinhalt und Grundaufteilung aus 1.50.650 bleiben eingefroren.
 
-## Fehler 1.50.662
-1.50.662 führte den 30er-Austausch nach In-Place-Overwrite nur über `admin_init` aus.
-Wenn nach der Überinstallation direkt eine Frontend-Seite geprüft wurde, lief der Austausch nicht.
-Die vorherige Cache-Erklärung war damit falsch und ist verworfen.
+## Nicht verwenden
+- 1.50.651;
+- Repair Installer 1.50.657;
+- Recovery 1.50.658;
+- Hero Images ONLY 1.50.659;
+- Hero Replace 1.50.660;
+- Hero Replace 1.50.661;
+- Hero Replace 1.50.662;
+- Hero Replace 1.50.663.
 
-## Aktueller Kandidat
-`HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.663.zip`
+## LIVE VISUAL FAIL 1.50.663
+1.50.663 ist technisch nicht der Maßstab. Die Live-Sichtprüfung hat den Bildsatz verworfen.
 
-SHA-256:
-`3009b23d0cae38cfb36d3f7c20507879df33139202c4789399d4b8987db948f1`
+Belegte Grundfehler:
+- derselbe kleine Bestand an Ausgangsszenen wurde mehrfach für verschiedene Kategorien benutzt;
+- teilweise nur andere Ausschnitte/Crops derselben Grundszene;
+- sichtbare Bild-in-Bild-/Collage-Konstruktionen;
+- semantisch falsche Motive;
+- Doppel-/Mehrfachverwendung;
+- damit Verstoß gegen die bereits verbindliche Regel: **ein eigenes, fachlich passendes, weit gefasstes Motiv pro Kategorie**.
 
-## Update-Identität
-Wie 1.50.660/1.50.662:
-- Ordner: `hobby-depot-hero-replace-only-150660`
-- Hauptdatei: `hobby-depot-hero-replace-only-150660.php`
+## Nutzer-Hard-Reject 2026-10-15 – besonders fehlerhafte 18
+1. Papierkunst – BILD IN BILD
+2. Schrift & Lettering – BILD IN BILD
+3. Holz – falsches Motiv
+4. Leder – falsches Motiv / bereits live sichtbar unpassende Szene
+5. Keramik & Glas – BILD IN BILD
+6. Mechanik & Uhren – falsches Motiv + BILD IN BILD
+7. Astronomie – falsches Motiv + BILD IN BILD
+8. Messen & Analysieren – falsches Motiv
+9. Mikroskopie – falsches Motiv + BILD IN BILD
+10. Wetter & Umwelt – falsches Motiv + BILD IN BILD
+11. Gärtnern – doppelt
+12. Moos & Miniaturgärten – falsches Motiv + doppelt
+13. Pilze & Kulturen – falsches Motiv
+14. Ameisen & Insekten – falsches Motiv
+15. Wirbellose – falsches Motiv + dreifach
+16. Naturfunde – verworfen
+17. Spielzeug & Spiele – falsches Motiv
+18. Technik & Medien – falsches Motiv + BILD IN BILD
 
-Damit echtes In-Place-Update/Überinstallation.
+## Übergeordneter Hard-Reject
+Zusätzlich bleiben die bereits vom Nutzer verworfenen insgesamt 30 Heroes vollständig offen:
+Miniaturen & Szenen; Papierkunst; Textilgestaltung; Malen & Zeichnen; Schrift & Lettering; Guss & Formen; Holz; Leder; Heimwerken; Keramik & Glas; Mechanik & Uhren; Robotik & Automation; Astronomie; Messen & Analysieren; Mikroskopie; Wetter & Umwelt; Gärtnern; Essbare Pflanzen; Moos & Miniaturgärten; Pilze & Kulturen; Ameisen & Insekten; Wirbellose; Wind & Drachen; Klettern & Seil; Wasser; Alltagsobjekte; Naturfunde; Spielzeug & Spiele; Münzen & Geld; Technik & Medien.
 
-## Änderung gegenüber 1.50.662
-Nur der One-Shot-Ausführungshook des separaten Hero-Helper-Plugins:
-- vorher: `admin_init`
-- jetzt: `plugins_loaded`
+## Verbindliche Bildregel
+- **keine Wiederverwendung derselben Ausgangsszene** in mehreren Kategorien;
+- **kein anderer Crop derselben Szene** als angeblich neues Motiv;
+- **kein Bild in Bild / keine Collage / kein zusammengesetztes Ersatzmotiv**;
+- breiter Szenenausschnitt, kein Makro/Detailzoom;
+- Hauptmotiv vollständig und sofort erkennbar;
+- sichtbare Umgebung;
+- scharf, kein sichtbares Upscaling;
+- semantisch eindeutiges Motiv exakt zur Kategorie;
+- keine Doppel-/Dreifachverwendung;
+- technische Maße/Hashes/Pfade sind kein visueller PASS.
 
-Damit läuft der Austausch beim **allerersten folgenden WordPress-Request**, auch bei direkter Frontend-Prüfung.
-
-## Wirkung
-- exakt 30 neue 600×220-Hero-Dateien;
-- nur die 30 Nutzer-Hard-Reject-Kategorien;
-- bestehendes 65er-Mapping wird nur gelesen;
-- übrige 35 Hero-Zieldateien unverändert;
-- Template-Kit-PHP 0 Änderungen;
-- Templates/Routing/CSS/Karten/Architektur unverändert.
-
-## Lokaler Frontend-E2E-Nachweis
-Ausgang:
-- pristine Template-Kit 1.50.650;
-- 1.50.660-Bildzustand hergestellt;
-- aktiver Helperpfad in-place durch 1.50.663 ersetzt;
-- **kein Activation Hook**;
-- **kein admin_init**;
-- nur echter Frontend-Lebenszykluspunkt `plugins_loaded`.
-
-Ergebnis:
-- Status PASS;
-- APPLIED=1;
-- exakt 30 erwartete Hero-Dateien geändert;
-- 35 unverändert;
-- Mapping byte-identisch;
-- 0 Template-Kit-PHP-Diffs.
+## Aktuelle Arbeit
+Kein neues Plugin wird ausgegeben, bevor die 18 besonders beanstandeten Motive und anschließend der gesamte 30er-Hard-Reject-Satz **einzeln visuell** gegen Thema → Motiv → Abstand/Zoom → Schärfe → kein Bild-in-Bild → keine Ausgangsszenen-Wiederholung geprüft sind.
 
 ## EXAKT EINE NEXT ACTION
-**1.50.663 über das vorhandene Hero-Replace-Plugin überinstallieren und danach direkt eine betroffene Frontend-Seite aufrufen.**
-
-
-## Nachprüfung 2026-10-15 – 1.50.663 Positiv/Negativ
-Nach Nutzerforderung vollständig nachgeholt: **14/14 Tests PASS**.
-
-Positiv:
-- echter Frontend-In-Place-Pfad ohne Activation Hook und ohne admin_init: exakt 30 erwartete Hero-Dateien geändert;
-- 35 übrige Hero-Dateien unverändert;
-- Mapping unverändert;
-- 30/30 Zielbilder identisch zum Payload;
-- Wiederholungsaufruf erzeugt keine zusätzliche Änderung.
-
-Negativ – jeweils sauberer ABORT ohne weitere Template-Kit-Änderung:
-- Template-Kit-Hauptdatei fehlt;
-- falsche Template-Kit-Version;
-- Mapping nicht exakt 65;
-- benötigter Hero-Slug fehlt;
-- Pfad-Traversal im Mapping;
-- doppelte Hero-Zieldatei;
-- Payload nur 29 Dateien;
-- falsche Payload-Dimension;
-- gemappte Zieldatei fehlt.
-
-Zusätzlich PASS:
-- ZIP-Integrität;
-- PHP-Syntax;
-- Pluginordner + Main-Dateipfad identisch zu 1.50.660 für echte Überinstallation.
+**Bildquellen für die verworfenen Kategorien neu auswählen; alte 1.50.663-Ausgangsszenen und deren Crops vollständig sperren. Erst nach vollständiger Einzelprüfung darf ein reiner Bilddatei-Ersatzkandidat entstehen.**
