@@ -1,6 +1,10 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 15.10.2026 – DESIGN 0.1.20 MENU-FIX (LOKAL, NICHT LIVE)
+Vollständiges Designplugin 0.1.20 lokal gebaut als `/mnt/data/HAB_UND_BEWAHR_DESIGN_0.1.20_MEGAMENUE_3_PLUS_WEITERE.zip` (SHA256 `de90faaa83d869f524945acadb15902a418a180780c69cf8308e7f8e9afbc5fb`). Im Flyout bei jedem Bereich höchstens drei Kurzlinks, **nur bei real vorhandenen weiteren Kategorien** Link `Weitere Kategorien`; auf der Bereichsseite weiter alle Unterbereiche sichtbar. Neue reine Anzeigealiasse für V9.9-Umfeld, kein Rename von WP-Bezeichnungen, Slugs, Artikeln, URLs oder Kategorien. PHP-Lint aller Quelldateien PASS, Mock-Menü 2 Kinder = 2 Links / kein Mehr-Link, 5 Kinder = 3 Links / Mehr-Link PASS. **Kein Live-Readback oder Installation durch diese Arbeit.** Einzige nächste Aktion Designbüro: Auf echter Website nach Installation beide Menüfälle prüfen und die HTML-/Cache-Darstellung gegen tatsächliche Kategorien-Kinderzahl bestätigen. Keine Design-/Kategoriearchitektur neu bauen.
+
+
 STAND: 2026-10-14
 STATUS: **DESIGN 0.1.19 URSACHENFIX OBERER KATEGORIETEXT-RENDERER UND FALSCHES MEGAMENÜ-ZIEL / 409/409 VOLLSTÄNDIGE PHP-SEITENRENDER PASS + 6 WELTEN PASS + PHP-LINT + ZIP PASS / WP-LIVE OFFEN**
 
