@@ -80,6 +80,7 @@ Der vorhandene neue Bildbestand ist **30/30 quellenweise inventarisiert**: 7 Kat
 - `HERO_ASSET_STAGE_7_WIP_20261015.md` – 7 neue Einzelquellen technisch auf Hero 600×320 und Preview 200×107 abgeleitet und geprüft.
 - `HERO_MOTIVABGRENZUNG_30_20261015.md` – Kollisionsschutz für alle 30 Kategorien; 12 harte Verwechslungspaare sind vor jedem Motiv-PASS zwingend gegenzuprüfen.
 - `HERO_BUILD_MANIFEST_30_WIP_20261015.json` – maschinenlesbare 30er-Buildbindung: 30 eindeutige Kategorien, 30 eindeutige Hero-Ziele, 30 eindeutige Preview-Ziele, Status exakt 7+13+6+4, `release_allowed=false`.
+- `HERO_GENERATION_QUEUE_19_WIP_20261015.json` – exakte Generierungsqueue für die 19 Kategorien mit belastbarer neuer Richtung (13 gebundene Vorschau-Richtungen + 6 rekonstruierte neue Produktionsrichtungen); keine Vorschau-Runde, keine alten Quellen.
 
 Arbeitslisten-Konsistenz: **PASS**
 - Worklist exakt 23/23 Zeilen;
@@ -109,4 +110,4 @@ Ergebnis korrigierter V2-Test:
 - kein falscher 600×220-Stand wurde als Plugin oder Release freigegeben.
 
 ## EXAKT EINE NEXT ACTION
-**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Die 13 exakt gebundenen neuen Richtungen und die 6 im Nachbarchat belegten neuen Produktionsrichtungen sind in der gemeinsamen 23er-Worklist festgelegt und zusätzlich gegen 12 harte Motivkollisionen abgesichert. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder einsetzen und nichts erfinden. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
+**Keine Vorschauen mehr im Chat erzeugen. Die 7 vorhandenen neuen Einzelquellen und der reine 1.50.650-Bildersatzweg sind technisch fertig vorbereitet und eingefroren. Für die 19 belastbar rekonstruierten neuen Richtungen liegt jetzt eine vollständige Einzelbild-Generierungsqueue vor; die 4 nicht rekonstruierbaren Kategorien bleiben absichtlich ohne erfundene Motivvorgabe. Sobald echte Einzeldateien vorliegen: automatisch 600×320/200×107 ableiten, Semantik/Zoom/Schärfe/Dublette plus Kollisionspaare prüfen und erst bei 30/30 Motiv-PASS den einmaligen 60-Dateien-Image-only-Kandidaten bauen.**
