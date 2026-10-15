@@ -1,3 +1,10 @@
+## V9.6 / V9.7 Quellen- und Elternpruefung – 15.10.2026
+- Historisches Kategorie-Workflow-Plugin 1.14.8.9 im Eigentumsschutz-Archiv vorhanden. Originalprofil liefert 686 Alt-Titel aus 137 Bestandskategorien, alle 137 logischen IDs passen. Das Plugin ist NICHT die aktive 1.14.8.19 und darf nicht installiert werden.
+- Insgesamt 1130/1136 originale Titel lesbar; sechs R2-Titel bleiben offen. Der Vergleich 686 zu den urspruenglichen 212 V9-Ideen zeigt null exakte Duplikate, jedoch lexikalische Verdachtsfaelle und keine komplette semantische Freigabe.
+- V9.6: 67 Redaktionskandidaten, 294 Ideen, sechs Elternkonflikte; Dachgeschoss- und PV-Themen redaktionell schaerfer getrennt.
+- V9.7: Drei eigenstaendige Pool- und Teich-Endkategorien unter einem neuen Vorschlags-Unterbereich, je fuenf Themen. Bei spaeterer Freigabe 70 Kandidaten mit 309 Ideen und fuenf offenen Elternkonflikten.
+- Zustaendige aktuelle Arbeit und exakt eine NEXT ACTION: KONZEPT/CURRENT_STATE.md. Technischer WordPress-Schreiber: ausschliesslich zentrales KATEGORIEN-Buero. Kein Plugin-Download, kein Live-Write.
+
 ## V9.5 Audit-Nachtrag (15.10.2026)
 - Nach verschärfter Drei-bis-fünf-Artikel-Regel sind 67 von 73 neuen Vorschlägen konzeptionell weiter tragfähig; 6 wegen unpassender Elternkategorie zurückgestellt.
 - In 12 Kategorien wurden Überschriften für unterscheidbare Sachfragen korrigiert.
