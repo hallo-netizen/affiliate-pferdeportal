@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## HÖCHSTER AKTUELLER FACHSTAND – V9.2 – 15.10.2026
+**Einzige aktuelle Fachautorität: diese CURRENT_STATE.md.** Der neue zentrale strukturierte Arbeitsnachweis ist `V9_2_48_KATEGORIEN_212_IDEEN_REDAKTIONELL_NICHT_IMPORTIEREN_20261015.json`. Diese JSON ist **kein WordPress-Import** und kein Plugin, sondern ein redaktioneller Datensatz.
+
+- **48 mögliche Blattkategorien mit 212 konkreten Artikeltiteln**, verteilt auf **3 neue Fachbereiche, 13 neue Unterbereiche**. Weitere **9 Blätter / 27 Ideen** stehen getrennt zurück, keine automatische Übernahme. Aktive R3/V8-WP-Struktur 6 Welten / 31 Bereiche / 93 Unterbereiche / 285 CORE-Blätter, letzter bestätigter WP-Readback **546/546 PASS vom 13.10.2026**, keine neue Liveprüfung und keine WP-Schreibvorgänge in V9.2.
+- **Vier gezielte redaktionelle Revisionen im V9.2-Datensatz:** Flachdachablauf-Kollisionsartikel durch Dachabdichtungsthema ersetzt; **auch der Frostschaden-Artikel an Regenfallrohren** durch Fallrohr-Befestigungen ersetzt (bestehende R3-Blattkategorie `Gefrorene Außenentwässerung` hat bereits „Frostschäden an Dachentwässerung erkennen“); beide Hitze-Blätter zu echtem Sachschutz umbenannt und jeweils fünf Artikelideen fachbezogen überarbeitet. Alte Kategorien und Artikel-Owner unverändert.
+- **Neu tatsächlich ausgeführte lokale Prüfungen: 16/16 PASS** auf Quellstruktur 57/239, Zielstruktur 48/212, 9/27 Rückstellungen, Einmaligkeit von Titeln/Namen, mindestens drei Kinder je Zwischenebene und drei Ideen je Blatt, keine exakten Namens-/Titelkollisionen mit 510 im aktuellen R2-Originalvergleich namentlich sichtbaren Titeln und 432 im R3-V8-Originalaudit greifbaren Titeln. **Kein vollständiger 1.136-Titel- oder semantischer SEO-PASS** daraus ableiten, die Vergleichs-Auditdatei liefert von R2 nur 510 individuell als Paarmatch ausgegebene Titel.
+- **R2-Quellenstand:** 12 der 18 zuvor fehlenden Originaltitel wortgenau wiedergefunden und dokumentiert; **6 weiterhin offen**. Historische 19 Artikelumhängungen redaktionell durch 17 Hauptliste + 2 separate Überspannungs-Originalbelege aufgeklärt, aber **keinen live ausgeführten Transfer behaupten**.
+- **Pluginstand:** bisher installierter Kategorie-Workflow **1.14.8.19 nur über historischen WordPress-Abgleich bestätigt**; aktueller vollständiger 1.14.8.19-Pluginquellcode liegt hier nicht als lokal einsehbare Installationsbasis vor. Daher **kein neues Installationsplugin paketiert**, keine alternative Pluginarchitektur oder zusätzliche Minipatchserie. Gemäß Nutzerregel werden **nur wirklich zur Installation freigegebene Plugin-ZIPs zum Download angeboten**, nie Entwurfs-, Prüf- oder Nicht-Import-Archive.
+- **Release weiterhin BLOCKED:** sechs exakte R2-Quelltitel fehlen, einzelner redaktioneller SEO-Owner-/Transfer-Abgleich sowie WordPress-Preflight/URLs/Breadcrumbs/Link-, Artikel-, Affiliate-Verweise, Rollback und Live-Readback noch ausstehend. Keine Google-/DataForSEO-Kostenpflicht, keine Design-/Pluginänderung vor kontrolliertem Delta.
+
+**GENAU EINE AKTUELLE NEXT ACTION:** Fehlende sechs R2-Titel ausschließlich aus dem originalen 12.10.-Kategorie-Workflow-Profil oder einem gleichwertigen autoritativen Originalreadback lesen und die 48 Vorschläge/212 Ideen damit abschließend fachlich abgleichen; danach nur über das zentrale Kategorienbüro das technisch prüfbare, nichtdestruktive Delta vorbereiten. Bis dahin **nicht installieren und nicht importieren**.
+
+
 ## AKTUELLE V9.1-QUELLENNACHPRÜFUNG – 15.10.2026 – HÖCHSTE FACHPRIORITÄT
 **Fach-Autorität bleibt genau diese CURRENT_STATE.** Neues Originalfundprotokoll: `V9_R2_12_ORIGINALTITEL_19_TRANSFERS_QUELLENFUND_20261015.md`. Einzelaudit weiterhin `V9_EINZELPRUEFUNG_57_20261015.md`.
 
@@ -12,7 +25,7 @@
 
 
 STAND: 2026-10-15
-STATUS: **V9.1 – 48 POTENZIELLE KATEGORIEN / 212 IDEEN REDAKTIONELL BEREINIGT; 9 ZURÜCKGESTELLT; 12 VON 18 R2-TITELN WIEDERGEFUNDEN; 6 R2-ORIGINALTITEL FEHLEN; 19 HISTORISCHE TRANSFERS QUELLENGEKLÄRT; V9.1 RELEASE BLOCKED; WP 546/546 UNVERÄNDERT**
+STATUS: **V9.2 – 48 KATEGORIEN / 212 IDEEN NUR FACHENTWURF; 9 GESPERRT; 6 R2-ORIGINALTITEL FEHLEN; 19 TRANSFERS HISTORISCH NACHGEWIESEN; 16/16 DATENPRÜFUNGEN PASS; RELEASE BLOCKED; WORDPRESS UNVERÄNDERT**
 
 ## AKTUELL – V9-FACHENTWURF / ZWEITPRÜFUNG 15.10.2026, NACH WIEDERGEFUNDENEM ARBEITSSTAND
 **Operative Wahrheit:** Der lokale V9-Vorschlagsentwurf war bereits weiter als die vorige Current-Fassung. Die 546 tatsächlichen Live-Stand-IDs, Namen, Slugs, Eltern entsprechen 546/546 dem archivierten R3/V8-WordPress-Readback vom 13.10.2026. Im lokalen V9-Einzelaudit sind alle **31/31 Bereiche und 93/93 Unterbereiche mit echten Original-IDs/Namen/Kindern** aufgelistet; **285/285 CORE-Blätter** mit Elternbezug enthalten. Das ist **strukturierte Bestands- und redaktionelle ERSTSICHTUNG**, keine umfassende individuelle semantische SEO-Abnahme jedes der 285 bestehenden Blätter.
