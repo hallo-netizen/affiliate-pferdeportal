@@ -1,3 +1,10 @@
+## 15.10.2026 – V9.9 ADD-ONLY-VORPRÜFUNG (kein Import)
+- Zentraler Datennachweis: `V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json`.
+- **4 neue Bereiche + 22 neue Unterbereiche + 81 neue Blätter = 107 ausschließlich ADD-Kandidaten**; alle vorhandenen 546 WordPress-Objekte unverändert, keine Bestandsumbenennung. Vorschläge mit 364 eigenständigen Arbeitstiteln; Mindestregel erfüllt.
+- 1 positive reine Datenprüfung + 8/8 absichtlich ungültige Negativfälle korrekt abgefangen.
+- **Releasegate FAIL:** Aktuelles `1.14.8.19`-ZIP/Quellcode derzeit nicht verfügbar. Historisches `1.14.8.9`-Archiv darf kein Ersatz sein. Kein aktueller Plugin-Dry-Run, kein Benutzer-Installations-ZIP.
+- Status und genau eine Next Action: ausschließlich `CURRENT_STATE.md` dieses Büros. Konzeptzuständigkeit: `../KONZEPT/CURRENT_STATE.md`.
+
 # HAB & BEWAHR – ZENTRALES KATEGORIENREGISTER
 
 ROLLE: Nachweis und Wegweiser, **keine zweite Current-Autorität** und **keine zweite Kategorien-Datenhaltung**.
