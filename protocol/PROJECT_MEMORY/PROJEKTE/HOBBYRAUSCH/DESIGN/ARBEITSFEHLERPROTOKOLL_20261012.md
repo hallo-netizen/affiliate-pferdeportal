@@ -695,3 +695,25 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Eine neue Quelle darf nur als PASS gelten, wenn das erzeugte Ergebnis tatsächlich **ein einziges unbeschriftetes Motiv für genau die angeforderte Kategorie** enthält. Jede Raster-/Poster-/Collage-Ausgabe wird sofort verworfen und nicht weiterverarbeitet.
+
+
+## AF-038 – Hero-Zwischenmaß 600×220 ohne Prüfung der eingefrorenen 1.50.650-CSS übernommen
+
+FEHLER:
+Im technischen 7er-WIP wurde zunächst ein Hero-Dateimaß von 600×220 abgeleitet, ohne vorher das tatsächlich aktive Seitenverhältnis der eingefrorenen 1.50.650-Basis direkt zu prüfen.
+
+NACHPRÜFUNG:
+Die echte 1.50.650-Laufzeit verwendet für den Hub2-Hero `aspect-ratio:600/320` und `object-fit:cover`. Der Zielvertrag verlangt keinen 600×220-Dateistandard.
+
+KORREKTUR:
+- der 600×220-Zwischenstand ist verworfen;
+- Hero-Dateien neu als **600×320** abgeleitet;
+- Previews bleiben **200×107**;
+- reale 1.50.650-Basis erneut als reiner Bildersatz simuliert;
+- exakt 14 Bilddateien geändert, 0 Code-/CSS-/Mapping-/JSON-Änderungen;
+- Mapping byte-identisch;
+- ZIP-Roundtrip 981/981 PASS;
+- kein Plugin/Release wurde aus dem falschen Zwischenmaß freigegeben.
+
+VERMEIDUNGSREGEL:
+Vor jeder Asset-Ableitung zuerst das aktive Render-Seitenverhältnis der eingefrorenen Basis prüfen. Ein Bildmaß darf nicht aus Erinnerung oder aus einem früheren Reparaturstand übernommen werden.
