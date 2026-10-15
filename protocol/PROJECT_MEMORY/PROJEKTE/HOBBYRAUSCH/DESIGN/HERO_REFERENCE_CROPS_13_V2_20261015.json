@@ -1,0 +1,117 @@
+{
+  "schema": "HOBBY_DEPOT_REFERENCE_CROPS_V2",
+  "status": "WIP_REFERENCE_ONLY_NOT_RELEASE_SOURCE",
+  "created": "2026-10-15",
+  "crop_method": "normalized grid cell with 8px inner margin on each side",
+  "rules": {
+    "release_source": false,
+    "old_sources_allowed": false
+  },
+  "count": 13,
+  "items": [
+    {
+      "category": "Holz",
+      "source": "Kreativwelten: Hobby und Handwerk.png",
+      "grid": "4x2",
+      "cell": "R2C3",
+      "sha256": "eb5d962abcf06012c4b89e14f7c1ee686dd4b51b396541564b93e7c9be43cf9e",
+      "crop_file_id": "file_00000000c2708206b7b5448180c8b37e"
+    },
+    {
+      "category": "Leder",
+      "source": "Kreativwelten: Hobby und Handwerk.png",
+      "grid": "4x2",
+      "cell": "R2C4",
+      "sha256": "2100c816732f3698ae079172d0ed3e639911f2671af070c54e9cd8ed1dbf3913",
+      "crop_file_id": "file_00000000e92082309176c0164e8f3336"
+    },
+    {
+      "category": "Keramik & Glas",
+      "source": "Hobby- und Wissenschaftscollage in zwölf Bildern.png",
+      "grid": "4x3",
+      "cell": "R2C1",
+      "sha256": "81dbc6f68de0d090da4c2791aaac2705c3f660fdd38a2061ffc31ee0612eeafc",
+      "crop_file_id": "file_000000004a708211a8eb2531b80f259a"
+    },
+    {
+      "category": "Mechanik & Uhren",
+      "source": "Achtfache Natur- und Handwerksvielfalt.png",
+      "grid": "4x2",
+      "cell": "R1C2",
+      "sha256": "823b217a5933a01af4c29298ab963322538289f319028e81dacfba56edbf1b39",
+      "crop_file_id": "file_0000000008f4820eaf96b99bbfe827fe"
+    },
+    {
+      "category": "Messen & Analysieren",
+      "source": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
+      "grid": "4x2",
+      "cell": "R1C3",
+      "sha256": "c4f7148b975df7288ffb61357ad6dcf971c3aabb33ef84cc313d621fd97738f1",
+      "crop_file_id": "file_0000000091e481f58f90ac9afaae20b8"
+    },
+    {
+      "category": "Mikroskopie",
+      "source": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
+      "grid": "4x2",
+      "cell": "R1C4",
+      "sha256": "3ae3f0339d914112471bf0f05425275b2757e7f5557ba6bf336c75d23bb92edb",
+      "crop_file_id": "file_00000000fe6881f5820daf3e09c3bb2b"
+    },
+    {
+      "category": "Wetter & Umwelt",
+      "source": "Hobbywelten: Natur, Handwerk und Wissenschaft.png",
+      "grid": "4x2",
+      "cell": "R2C1",
+      "sha256": "27a85641b2993b0463440b792fd383b1f53d21172cbec26528c55e0fd7b9a477",
+      "crop_file_id": "file_00000000636481faa00fb696e5d9fd34"
+    },
+    {
+      "category": "Gärtnern",
+      "source": "Hobbywelten im liebevollen Detail.png",
+      "grid": "4x2",
+      "cell": "R2C4",
+      "sha256": "e408066935da3ba539f139faf5dec81ca990b6d186bc087ffdc4efc401e5ef46",
+      "crop_file_id": "file_00000000c9d881f49197d8c4da09a13b"
+    },
+    {
+      "category": "Essbare Pflanzen",
+      "source": "Achtfache Natur- und Handwerksvielfalt.png",
+      "grid": "4x2",
+      "cell": "R2C2",
+      "sha256": "af524850c04a0fe0e24270f6586685d3eae80d8096dba5338b7c468e7761444e",
+      "crop_file_id": "file_00000000da0881f48af7d191efa15e81"
+    },
+    {
+      "category": "Moos & Miniaturgärten",
+      "source": "Hobbywelten zwischen Handwerk und Natur.png",
+      "grid": "4x2",
+      "cell": "R2C3",
+      "sha256": "e15ad0a0e273632bf4ff43fa62adaae3a582e03bfc36997ef2d913657ca80f10",
+      "crop_file_id": "file_00000000f05081f6a704998bdc68cc4b"
+    },
+    {
+      "category": "Pilze & Kulturen",
+      "source": "Achtfache Natur- und Handwerksvielfalt.png",
+      "grid": "4x2",
+      "cell": "R2C4",
+      "sha256": "91d05e690d4bae26c0c72e120add95472cfb7d63d1ffe461c7ebed3da87f14ad",
+      "crop_file_id": "file_000000006914820ea7ad42b63de1ff6e"
+    },
+    {
+      "category": "Ameisen & Insekten",
+      "source": "Handwerk, Natur und Mikrowelten im Raster.png",
+      "grid": "4x2",
+      "cell": "R2C4",
+      "sha256": "09b984a06416c59a916cf231b79a79368988133389579fc048aed51e973e757b",
+      "crop_file_id": "file_0000000065ec81f4b0b01a4596ae689f"
+    },
+    {
+      "category": "Technik & Medien",
+      "source": "Kreative Welten im Raster.png",
+      "grid": "5x2",
+      "cell": "R2C1",
+      "sha256": "de0724f0160f53022ea5575bdef34d84fee18507dbe50f600568cc4dea4f7c91",
+      "crop_file_id": "file_00000000d30481f5a4572e5129282791"
+    }
+  ]
+}
