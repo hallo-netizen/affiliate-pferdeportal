@@ -54,7 +54,7 @@ Die im Nachbarlauf erzeugten Vorschau-/Sammelbildsätze sind vorhanden. Sie müs
 
 ## Richtungsstatus der 23 noch fehlenden Einzelquellen
 - **13**: neue Nach-1.50.663-Vorschau-Richtung samt konkreter Datei/Zelle wiedergefunden und per Hash gebunden.
-- **6**: Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser – als neuer 8er-Produktionsblock im Nachbarchat belegt; die unmittelbar gespeicherten Sammelbilder lieferten diese Motive jedoch nicht korrekt, deshalb weiterhin keine gültige Einzelquelle.
+- **6**: Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser – ihre Zugehörigkeit zum vom Nutzer akzeptierten neuen 8er-Produktionsblock ist belegt; **eine exakte Motivrichtung oder ein valides Ergebnis ist nicht rekonstruiert**. Deshalb keine Motivvorgabe ableiten oder erfinden.
 - **4**: Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld – keine belastbar rekonstruierbare neue Vorschau-/Dateibindung.
 - Für alle 23 bleibt der Quellenstatus bis zur echten eigenständigen Einzeldatei **FEHLEND**.
 
@@ -80,5 +80,5 @@ Zusätzlich im erzeugten Bildbestand verifiziert:
 `HERO_ASSET_STAGE_7_WIP_20261015.md` dokumentiert für 7 vorhandene neue Einzelquellen bereits abgeleitete und geprüfte Hero-/Preview-Dateien (600×320 / 200×107). Miniaturen nutzt dort Kandidat B. Kein Release-/Live-PASS.
 
 ## Nächster Arbeitsschritt
-Die Vorschauphase nicht wiederholen. Die 13 exakt gebundenen neuen Vorschau-Richtungen und die 6 im Nachbarchat bestätigten neuen Produktionsrichtungen in echte eigenständige Einzelquellen überführen. Für die 4 weiterhin nicht rekonstruierbaren Kategorien keine alten WIP-Bilder verwenden und nichts erfinden.
+Die Vorschauphase nicht wiederholen. Nur die 13 exakt gebundenen neuen Vorschau-Richtungen dürfen ohne weiteres Raten in eigenständige Einzelquellen überführt werden. Die übrigen 10 Kategorien bleiben BLOCKED, bis eine exakte neue Motivbindung vorliegt; keine alten WIP-Bilder verwenden und nichts erfinden.
 Kein Plugin/ZIP vor vollständigem 30/30-Audit.
