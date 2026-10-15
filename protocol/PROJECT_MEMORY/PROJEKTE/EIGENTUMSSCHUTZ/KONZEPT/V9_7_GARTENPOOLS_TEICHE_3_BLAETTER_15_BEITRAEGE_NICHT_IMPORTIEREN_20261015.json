@@ -1,0 +1,58 @@
+{
+  "status": "NOT_IMPORTABLE",
+  "previous": "V9_6_R2_686_QUELLENNACHWEIS_67_ARTIKEL_OWNER_NICHT_IMPORTIEREN_20261015.json",
+  "existing_world": "Wasser & Feuchtigkeit",
+  "existing_area": "Camping & Freizeitobjekte",
+  "existing_area_id": "core:area:7efc2329e1f6",
+  "new_subarea": "Gartenpools & Teichanlagen",
+  "subarea": [
+    {
+      "name": "Leckagen an privaten Poolleitungen",
+      "ideas": [
+        "Druckverlust an der Pool-Filterleitung: Rohrleck fachlich eingrenzen lassen",
+        "Verdeckte Leckage an Pool-Zulaufleitungen eingrenzen lassen",
+        "Poolpumpe nach Wasseraustritt vor Wiederinbetriebnahme fachlich prüfen lassen",
+        "Feuchteschäden an angrenzenden Terrassen durch Poolleitungslöcher dokumentieren",
+        "Poolleitungen vor dem Winter auf Restwasser und Frostschäden prüfen lassen"
+      ],
+      "origin": "V9.6 HOLD — repurpose without duplication"
+    },
+    {
+      "name": "Poolbecken & Einbauteile undicht",
+      "ideas": [
+        "Wasserverlust im Gartenpool: Verdunstung von einem Beckenleck unterscheiden",
+        "Undichte Foliennähte im privaten Gartenpool früh erkennen",
+        "Poolskimmer, Einlaufdüsen und Unterwasserscheinwerfer auf Leckstellen prüfen lassen",
+        "Verdeckte Feuchteschäden neben einer undichten Poolwand dokumentieren",
+        "Abdichtung des privaten Pools nach Reparatur auf Dauerhaftigkeit kontrollieren lassen"
+      ],
+      "origin": "V9.7 proposed"
+    },
+    {
+      "name": "Gartenteiche & Teichfolien undicht",
+      "ideas": [
+        "Wasserrückgang im Gartenteich: Wetterverlust oder Folienleck unterscheiden",
+        "Undichte Teichpumpen-Schläuche und Durchführungen fachlich kontrollieren",
+        "Teichfolie nach Wurzelschäden auf Leckstellen prüfen lassen",
+        "Gartenteich-Überlauf bei Starkregen von einem Leck der Teichabdichtung unterscheiden",
+        "Feuchteschäden an angrenzenden Gartenmauern durch Teichleck dokumentieren"
+      ],
+      "origin": "V9.7 proposed"
+    }
+  ],
+  "change": "Promote existing held pool-leak candidate only after parent review; add two new distinct leaf categories; do not create duplicates or touch WordPress.",
+  "totals_proposed_if_approved": {
+    "candidate_leaves": 70,
+    "idea_titles": 309,
+    "remaining_held": 5
+  },
+  "note": "67 current proposed leaves + 1 promoted pool held + 2 new leaves = 70. 294 current ideas + 5 pool ideas + 10 new = 309.",
+  "checks": {
+    "group3": true,
+    "everyGroupLeaf5": true,
+    "noNameCollision": true,
+    "originalPoolHoldPresent": true,
+    "allNewTitlesUnique": true,
+    "combined70": true
+  }
+}
