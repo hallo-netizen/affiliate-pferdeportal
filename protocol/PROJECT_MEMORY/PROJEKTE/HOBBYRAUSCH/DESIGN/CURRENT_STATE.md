@@ -97,7 +97,7 @@ Belastbare Wiederherstellung aus den neuen Vorschauen:
 - für diese 7 Kategorien sind Hero 600×320 und Preview 200×107 technisch abgeleitet und geprüft (`HERO_ASSET_STAGE_7_WIP_20261015.md`);
 - für weitere 13 Kategorien ist die neue Vorschau-Richtung eindeutig wiedergefunden und gebunden;
 - für 6 weitere Kategorien (Heimwerken, Robotik & Automation, Wirbellose, Wind & Drachen, Klettern & Seil, Wasser) ist der geplante neue 8er-Fotoblock aus dem Nachbarchat rekonstruiert; die unmittelbar erzeugten Sammelbilder trafen diese sechs Motive aber nicht belastbar und zählen dafür 0;
-- nur 4 Kategorien (Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld) besitzen aktuell keine rekonstruierbare neue Vorschau-/Dateibindung; dafür darf kein alter Bildbestand als Ersatz benutzt werden.
+- nur 4 Kategorien (Alltagsobjekte, Naturfunde, Spielzeug & Spiele, Münzen & Geld) besitzen keine rekonstruierbare neue Vorschau-/Dateibindung; dies wurde zusätzlich durch gezielte Nachbarchat-Recovery bestätigt. Dafür darf kein alter Bildbestand als Ersatz benutzt und keine positive Motivvorgabe erfunden werden.
 
 ### Maßkorrektur vor Release
 Die zunächst intern verwendete Hero-Ableitung **600×220** war eine falsche Zwischenannahme. Die echte eingefrorene 1.50.650-Basis wurde danach direkt geprüft: der aktive Hub2-Hero läuft mit **600/320**. Deshalb wurde der WIP vollständig auf **Hero 600×320 + Preview 200×107** korrigiert und erneut gegen die echte 1.50.650-Basis simuliert.
