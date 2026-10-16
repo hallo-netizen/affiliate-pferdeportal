@@ -1,6 +1,11 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 16.10.2026 – NAVIGATION 5/4 NEGATIVPRÜFUNG ERFOLGREICH ERWEITERT
+Das ursprüngliche 1.14.8.29 hatte zwei nachgewiesene durchgerutschte Negativfälle: physischer Themenlink verweist auf seine eigene Elternhub-ID und fehlender WordPress-Permalink wird im Menü ohne Prüffehler unterdrückt. Korrektur ausschließlich im existierenden Kategorie-Frontend-Modul **1.14.8.30**: unabhängiger Source/Physical-ID/Meta/Permalink-Readback für alle C2.2-Bereiche und -Themen, unabhängig von 5/4-Menü-Teasern; Originalmanifest-Abgleich aller 743 C2.2-Knoten, fehlende Terminal-Term-Archivlinks werden abgelehnt. **7/7 PHP-Testprogramme, 14 Negative Cases und alle 36 Bereich-Hubs inklusive Frost-Spezialfall PASS**, keine WP-Kategorien geändert. Exakte Dokumentation unter `../KATEGORIEN/CURRENT_STATE.md`. **WP-Theme-Live-Visualprüfung noch NICHT erbracht. NEXT ACTION:** 1.14.8.30 installieren, danach Live-Klickpfad und Theme-Navigationsblöcke prüfen; keinesfalls den 743-Kategorienimport wiederholen.
+
+
+
 ## 16.10.2026 – EINHEITLICHES MEGAMENÜ 5/4, KEINE LEGACY-SACKGASSE
 Fachseitige und technische Prüfung der heute tatsächlich gespeicherten Legacy-/C2.2-Navigation ergab redundante Vorwärtsstufe `Wasser & Feuchtigkeit → Frost & Abwesenheit → Frost & Leerstand`, danach nur alte terminale Termarchive. **Ab 1.14.8.29** werden auf Schutzbereichsseiten **konkrete neue C2.2-Themenseiten vorrangig als Vorwärtsnavigation** gezeigt; historische R3-Sammelthemen liegen hinter `Bisherige Sammelseiten (Archiv)` und behalten Links/SEO-URLs. Keine scheinbare weitere Kategorieebene nach dem WordPress-Termarchiv. Mega-Menü für CORE vereinheitlicht: Welt: **maximal 5** direkte Bereichslinks + `Alle Schutzbereiche`; Bereich: **maximal 4** konkrete Themen + `Alle Themen`; unsichtbare Lücken erhalten fixe Optik bei weniger realen Themen, keine künstlichen Kategorien. Schutzbereich-Hub selbst zeigt **ALLE** aktiven C2.2-Themen ohne 4er-Abschneidung. Tests 36/36 gegen echte 172/566 Schemadaten, Frost-Beispiel und Regression PASS; **WordPress-Live-Visual-QA noch ausstehend**, C2.2 Inhalt/IDs/WP Writer unverändert. Genaue Umsetzung: `../KATEGORIEN/CURRENT_STATE.md` Version 1.14.8.29. **NEXT ACTION:** 1.14.8.29 als Codeupdate installieren und den beobachteten Frost-Frontendpfad danach prüfen.
 
