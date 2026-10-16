@@ -1369,7 +1369,7 @@ Insbesondere wird mit dieser rein fachlichen Klarstellung **kein signierter Jour
 
 **Keine fachliche Änderung an 29.1–29.3. Technisches Prüfprotokoll, kein Release-PASS.** Die in 29.1 eingefrorene Entscheidung zur einheitlichen Kategorienauswahl ist noch nicht vollständig in den tatsächlich verfügbaren Quellpaketen umgesetzt.
 
-Echte Quellen geprüft: PSTE **0.57.98** und PSERC **0.28.37**, jeweils unveränderte vorhandene ZIPs. Beide enthalten byteidentisch das Journal-Erweiterungsmanifest `contracts/article-type-extension-manifest-v1.json`, SHA-256 `755b709ebfea6e6279cad1e064ae896a68246147fbf7e81e62c4`. Der SHA ist bei der Umsetzung frisch gegen die Originalbytes nachzuprüfen.
+Echte Quellen geprüft: PSTE **0.57.98** und PSERC **0.28.37**, jeweils unveränderte vorhandene ZIPs. Beide enthalten byteidentisch das Journal-Erweiterungsmanifest `contracts/article-type-extension-manifest-v1.json`, SHA-256 `755b709ebfea6e6279cad1e064ae896a68246147c09c523e1747fbf7e81e62c4`. Der SHA ist bei der Umsetzung frisch gegen die Originalbytes nachzuprüfen.
 
 - Der ursprüngliche Ed25519-Vertrag ist in beiden Plugins unverändert gültig; ein vorhandenes signiertes Magazinbeispiel besteht die Quellenprüfung.
 - Neue, thematisch plausible Magazinfragen werden ohne separate `ARTICLE_TYPE_EXTENSION_EVIDENCE_V1`-Freigabe zurückgehalten (`PSTE_EXTENSION_EXPLICIT_EVIDENCE_MISSING`). Der Compiler erwartet dieselbe Nachweiskette.
