@@ -373,3 +373,30 @@ Anlass: ausdrücklich verlangte zentrale Kategorienverwaltung für alle Plugins;
 KISS-Eingriff: neues eigenständiges Kategorienbüro samt einer Current-Autorität, neutralem Anschlussvertrag und Register; Routing/Gebäudeeingang sowie fachlicher Verweis im Konzept angepasst. WordPress-Kategorien, Zielprofil, URLs, Plugins, Design und produktiver Sync unverändert.
 Negativgrenze: Dokumentierter Zielvertrag ist kein Beleg einer bereits vorhandenen/abgenommenen neutralen PHP-API oder CRUD-End-to-End-Tests. Sicherer Änderungsweg bleibt Delta → Dry-Run → genau ein Sync → Readback.
 Autorität: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md`.
+
+
+### 2026-10-16 – Textsystem-Keller, K0-Aktivroute und Gebäudetrennung
+
+BEDARF:
+Historische Textsysteme und alte Querverweise erzeugten bei neuer Arbeit unnötige Fehlwege. Gleichzeitig müssen Pferdeatelier, Hobby Depot und Hab & Bewahr fachlich getrennt bleiben.
+
+KISS-FIX:
+- Pferdeatelier TEXT auf genau eine aktive Produktionsbasis K0 geroutet;
+- K1 bis K9 aus der aktiven Campus-Textfläche entfernt und ausschließlich als Archiv-/Recherchebestand gebunden;
+- TEXTSYSTEM_4A als aktive Bürotür entfernt;
+- Projektflur, Campus-Eingang und Hauptpförtner auf klare Gebäudetrennung nachgezogen;
+- Affiliate-Current explizit an Branch `affiliate-release-current` gebunden, damit keine veraltete Main-Kopie als Current gelesen wird;
+- keine Fachlogik, Pluginquelle oder WordPress-Installation geändert.
+
+SICHERUNG:
+Vor Umbau existieren GitHub-Snapshotbranches für Main, Campus, K0 und K9 sowie ein frisches vollständiges lokales GitHub-Backup des Nutzers.
+
+PRÜFUNG:
+- Pferdeatelier TEXT aktiv nur noch drei Navigationsdateien;
+- keine aktive TEXTSYSTEM_4A-Route;
+- zentrale Text-Current zeigt ausschließlich auf K0;
+- geprüfte aktive Routingdateien enthalten keinen STARTMASTER-/System4-/K7-/K8-Currentverweis;
+- andere Projektgebäude fachlich unverändert.
+
+BEZUG:
+ARCH-094 / HM-005.

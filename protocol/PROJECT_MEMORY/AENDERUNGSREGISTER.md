@@ -1643,3 +1643,27 @@ QA: 409/409 vollständige WordPress-Template-Render-Mocks mit echtem aktivem R3-
 ## HB-V9-ABSCHLUSS-20261015 – V9-Status und Fehlerkette gegen Current frisch abgeglichen
 WAS: Campus-Tür, Autoritätsplan und KONZEPT/CURRENT_STATE.md geprüft. Der V9-Fachentwurf ist 31/31 Bereiche, 93/93 Unterbereiche, 285 Bestandsblätter, 57 vorgeschlagene neue Blätter mit 239 Ideen, davon 48/212 nur weiter prüfbar und 9/27 zurückgestellt. R3/V8-WP-Readback 546/546 PASS bleibt unverändert. 18 exakte Altartikelideen der vier am 12.10. ergänzten R2-Blätter fehlen. Release BLOCKED, keine WordPress-Writes, keine neuen Plugins. Lokale V9-JSON auf 31/93/285 und 57/239 sowie 3er Mindestidee, eindeutige Kandidatentitel und 48/9 Aufteilung geprüft. Die 6/6 Mutationstests sind aus dem Current protokolliert, nicht hier neu ausgeführt.
 WARUM: Frühe Büro- und Fehlerverweise nannten noch R2/3-bis-10 oder R3-Live-offen. Der verbindliche Zielvertrag 2.0 verlangt mindestens drei Kinder ohne Obergrenze und mindestens drei eigenständige Ideen je Blatt. Zentraler Fehler-Wegweiser, Fach-Fehlerquelle und Büro-Navigation wurden als solche aktualisiert; einzige Current bleibt KONZEPT/CURRENT_STATE.md. Bibliothek für diese Nachholprüfung nicht gelesen. Erste NEXT ACTION: vollständige, exakt originale 18 R2-Titel finden; nicht erraten, kein V9-Import.
+
+
+## ARCH-094 – Strikte Projektgebäudetrennung + K0 als einzige aktive Pferde-TEXT-Basis
+
+WAS:
+Pferdeatelier, Hobby Depot (`HOBBYRAUSCH`) und Hab & Bewahr (`EIGENTUMSSCHUTZ`) werden als strikt getrennte Projektgebäude geroutet. Das Pferdeatelier-TEXT-Büro besitzt nur noch K0 als aktive Produktionsbasis. K1 bis K9 sind Archiv-/Recherchebestand.
+
+WARUM:
+Historische Produktionssysteme, alte Current-Pointer und projektübergreifende Querverweise erhöhen das Risiko, dass neue Chats eine abgelöste Route oder das falsche Gebäude als Arbeitsquelle verwenden.
+
+REGEL:
+- genau eine Current-Autorität je Scope;
+- keine Current-/Arbeits-/Fallback-Route über Projektgebäudegrenzen;
+- allgemeingültige Campusdienste dürfen zentral bleiben;
+- K1 bis K9 niemals als aktive Textquelle;
+- K0-Current ausschließlich auf Branch `konzept0-portal-neutral-20261002`;
+- Affiliate-Current ausschließlich branchqualifiziert auf `affiliate-release-current`;
+- Archiv/Backup niemals Werkbank.
+
+SICHERUNG:
+GitHub-Snapshotbranches plus lokales Komplettbackup vom 16.10.2026 vor der Bereinigung.
+
+ENTFERNBAR:
+NEIN – dauerhafte Campusregel.

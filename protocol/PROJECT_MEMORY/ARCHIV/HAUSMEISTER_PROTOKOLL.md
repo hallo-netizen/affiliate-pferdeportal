@@ -141,3 +141,30 @@ PRÜFUNG:
 
 ERGEBNIS:
 PASS / sicher archiviert / spätere Sammelprüfung vor endgültiger Entfernung weiterhin erforderlich.
+
+
+## HM-005 – Pferdeatelier Textsysteme K1 bis K9 aus aktiver Campusfläche entfernt
+
+DATUM:
+2026-10-16
+
+QUELLE:
+aktiver Campus-Branch `hobbyroom/project-memory-campus-v1-20260905`.
+
+GRUND FÜR HISTORISCH:
+Nutzerentscheidung: K0 ist Produktionsbasis; K1 bis K9 bleiben nur zur späteren Recherche erhalten und dürfen keine aktive Current-/Start-/Fallback-Autorität mehr besitzen.
+
+ARCHIVREFERENZEN:
+- `archive/pferdeatelier-textoffice-k1-k9-20261016`
+- `archive/pferdeatelier-textsysteme-k1-k8-20261016`
+- `archive/pferdeatelier-k9-gold-20261016`
+- lokales vollständiges GitHub-Backup vom 16.10.2026
+
+AKTIVE VERWEISE:
+TEXT-Routing, Autoritätsplan, Fehlerwegweiser, Handlungsverzeichnis und Zielregister auf K0 umgestellt. TEXTSYSTEM_4A als aktive Bürotür entfernt.
+
+PRÜFUNG:
+28 historische Pferde-TEXT-/4A-Dateien aus der aktiven Campusfläche entfernt; Archivkopien vorab gesichert; aktive Routingdateien auf fehlende Legacy-Currentverweise geprüft.
+
+ERGEBNIS:
+PASS / historischer Bestand erhalten / aktive Arbeitsfläche verkleinert / keine Plugin- oder WordPress-Fachänderung.
