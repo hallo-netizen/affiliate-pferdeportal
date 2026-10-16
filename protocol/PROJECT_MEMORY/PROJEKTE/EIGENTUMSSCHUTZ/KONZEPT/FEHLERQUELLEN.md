@@ -1,5 +1,10 @@
 ## 16.10.2026 – ABSCHLUSSPRÜFUNG C2.2: ZENTRALE REGISTER NOCH HISTORISCH
 
+## C2.2 Fehlerkorrektur 16.10.2026 – falsche neue Graffiti-Themenseite
+Im 174/573-Entwurf wurde der alte echte Intent-Term **Graffiti entfernen** (historische WP-Term-ID 202) fälschlich nochmals als neue konkrete Seite3 mit vier weiteren Artikelkategorien geplant. Die schon existierende Seite **Graffiti: Schutz & Hilfe** (historische WP-Page-ID 158) umfasst die drei vorhandenen passenden Artikelkategorien „Graffiti vorbeugen“, „Graffiti entfernen“, „Graffitischäden & Kosten“. Fachliche Korrektur: neue Doppel-Seite samt vier Vorschlagkategorien aus `C22_GESAMTBAUM_KORRIGIERT_173_THEMEN_569_ARTIKELKATEGORIEN_20261016.json` entfernt; kein WordPress-/Plugin-Write. Die alten 174/573-Akten sind historischer Datenbeleg, **nicht aktueller Sollbaum**. Vier weitere alte Kategorie-Namenskollisionen mit neu vorgeschlagenen Themenseiten sind getrennt unter `C22_285_ALTKATEGORIEN_TERM_ID_ROLLEN_OWNER_MIGRATIONS_MATRIK_20261016.json` gesperrt.
+Das bisherige Menü-„36 von 36 Bereiche brauchen Mehr“-Ergebnis galt nur für den falschen Vorentwurf. Korrekt ist **35 mit Mehr-Link, einer (Fassade & Außenflächen) ohne**. Aktueller Live-Readback fehlt weiterhin. Kein C2.2-Release.
+
+
 ## Nachtrag 16.10.2026 – C2.2-Kategorie-/Navigationsfehler und Registerbereinigung
 - **Alte künstliche Dreiergrenze:** In der ersten C2.2-Entwurfsausarbeitung wurden alle neuen konkreten Themenseiten zunächst wieder mit genau drei Contentkategorien versehen. Dies wurde nach fachlicher Prüfung korrigiert: jetziger Gesamtentwurf hat 3/4/5 Artikelkategorien je konkreter Themenseite, ohne Maximalregel. Das ist weiterhin ein redaktioneller Entwurf, kein PASS für 285 historische Kategorien.
 - **Widerspruch im zentralen Zielvertragsregister:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` wurde am 16.10.2026 auf den aktiven C2.2-Vertrag korrigiert; historischer 3–10-Eintrag trägt jetzt ABGELÖST. Dieser konkrete Registerfehler ist damit `CLOSED`. Alte V9-Fehler und nicht bestätigte WordPress-Live-Revision bleiben separat offen.
