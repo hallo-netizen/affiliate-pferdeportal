@@ -147,7 +147,7 @@ Browser-CSS-Render 1440/1200/1100/1024/900/760/600; überall Overflow 0; Stack-G
 
 
 ## HRD-067 – 1.50.651 live verworfen: Hero und Bildmapping weiterhin fehlerhaft
-STATUS: **OPEN**
+STATUS: **CONTAINED / DURCH 30ER-NEUBILDSTAND + HRD-SCOPE13 REPARATUR LOKAL ÜBERHOLT / LIVE-RESTPRÜFUNG OFFEN**
 
 LIVE-BEFUND:
 - Hero zu hoch;
@@ -170,7 +170,7 @@ Kein neues Bildrelease ohne manuelle semantische Zuordnung aller sichtbaren Hero
 
 
 ## Aktuell erster Blocker
-**Hero + komplettes Hub2-Bildmapping lokal neu prüfen und simulieren; danach erst neuer Kandidat.**
+**Kein lokaler Bild-/Mapping-Blocker mehr. Offen ist ausschließlich der Live-Readback des HRD-SCOPE13-Kandidaten für die 13 erlaubten Kategorien. Alle anderen Kategorien sind gesperrt.**
 
 
 
@@ -210,3 +210,40 @@ REGEL:
 Vor jeder Bild-Neugenerierung zuerst den letzten bereits fertigen Bildartefaktstand wiederherstellen und prüfen. Keine Rekonstruktion eines Bildsatzes, wenn ein vollständiges, technisch validierbares Artefakt bereits existiert.
 
 ---
+
+
+## HRD-070 – HRD-SCOPE13 gezielte Bildreparatur nach Nutzerbefund
+STATUS: **LOCAL CLOSED / LIVE READBACK OFFEN**
+
+HARTE SPERRE:
+Nur diese 13 Kategorien durften verändert werden:
+Druck & Fotografie; Oberfläche & Dekoration; Genuss; Metall; Schmuck; Funk; Smart Home; Zucht & Futtertiere; Gehegegestaltung; Geschick & Tricks; Team & Wettkampf; Rollen & Balance; Wurf & Ziel.
+
+KORREKTUR:
+- vor Neugenerierung alte Bildstände geprüft;
+- keine neue Bildgeneration erforderlich;
+- 7 frühere gute Vollquellen wiederverwendet;
+- 2 Kategorien gezielt auf bessere 1.50.625-Bilder zurückgesetzt;
+- 4 Kategorien gezielt auf bessere WIP-1.50.653-Bilder zurückgesetzt;
+- keine Collage als Releasequelle;
+- alle anderen Kategorien unverändert.
+
+KANDIDAT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
+SHA-256:
+`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
+
+LOCAL QA:
+- exakt 26 Bilddateien geändert = 13 Heroes + 13 Previews;
+- 0 Dateien hinzugefügt;
+- 0 Dateien entfernt;
+- Mapping byte-identisch;
+- 55/55 PHP byte-identisch;
+- 55/55 PHP-Syntax PASS;
+- ZIP-Roundtrip PASS.
+
+NACHWEIS:
+`HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
+
+OFFEN:
+Live-Readback ausschließlich der 13 Kategorien. Kein allgemeiner Bildumbau.
