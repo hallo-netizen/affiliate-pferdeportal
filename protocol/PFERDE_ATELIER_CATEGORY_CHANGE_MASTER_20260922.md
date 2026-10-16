@@ -1363,3 +1363,18 @@ Der einheitliche **Kategorie-Routingentscheid** ersetzt **keine** bestehenden Pr
 Insbesondere wird mit dieser rein fachlichen Klarstellung **kein signierter Journal-Produktionsvertrag geändert, keine Produktionsfreigabe erteilt und kein Plugin als getestet erklärt**. Ein eventuell nachgelagerter, ausschließlich redaktioneller Doppel-Eintritt ist innerhalb der **bestehenden** Kategorienentscheidung zu beseitigen; echte Sicherheits-/Qualitätsprüfungen bleiben unverändert. Die vorhandenen fünf Handoff-Felder bleiben exakt unverändert.
 
 **Freeze-Regel:** Fachliche Weiche **OBEN / UNTEN** und anschließend **bestehende Kategorie oder zentral kontrollierte Kategorieergänzung** – für beide Seiten identisch. Eine Änderung dieser redaktionellen Grundentscheidung erfordert einen neuen ausdrücklichen Nutzerentscheid. Umsetzung ausschließlich als nachgewiesene Korrektur des bestehenden PSTE/PSERC-Kategoriepfads mit vollständigen Positiv-, Negativ-, Reentry- und Workflowtests.
+
+
+### 29.4 Verifizierter Implementierungsblocker – 16.10.2026
+
+**Keine fachliche Änderung an 29.1–29.3. Technisches Prüfprotokoll, kein Release-PASS.** Die in 29.1 eingefrorene Entscheidung zur einheitlichen Kategorienauswahl ist noch nicht vollständig in den tatsächlich verfügbaren Quellpaketen umgesetzt.
+
+Echte Quellen geprüft: PSTE **0.57.98** und PSERC **0.28.37**, jeweils unveränderte vorhandene ZIPs. Beide enthalten byteidentisch das Journal-Erweiterungsmanifest `contracts/article-type-extension-manifest-v1.json`, SHA-256 `755b709ebfea6e6279cad1e064ae896a68246147fbf7e81e62c4`. Der SHA ist bei der Umsetzung frisch gegen die Originalbytes nachzuprüfen.
+
+- Der ursprüngliche Ed25519-Vertrag ist in beiden Plugins unverändert gültig; ein vorhandenes signiertes Magazinbeispiel besteht die Quellenprüfung.
+- Neue, thematisch plausible Magazinfragen werden ohne separate `ARTICLE_TYPE_EXTENSION_EVIDENCE_V1`-Freigabe zurückgehalten (`PSTE_EXTENSION_EXPLICIT_EVIDENCE_MISSING`). Der Compiler erwartet dieselbe Nachweiskette.
+- Eine direkte Änderung der schriftlich signierten Sonderregel **ohne autorisierte neue Signatur** wird von den vorhandenen Verifizierern zu Recht abgelehnt. Änderungen an der signierten JSON niemals als installierbares Plugin mit alter Signatur ausliefern.
+- Die vorhandene GitHub-Wächterstrecke blockiert Änderungen am gebundenen PPM-Runtimepaket (`control/startmaster0107/runtime_packages/`) per Pull Request; ein autorisierter Neusignierungsweg war in den geprüften Repository-Workflows nicht nachweisbar.
+- Zusätzlicher negativer Quelltest: Ein falscher, aber anderer gültiger Magazinkategorie-Slug wird von `PSERC_Article_Type_Extension_Registry::verifyTopicBinding()` allein noch nicht gegen die im Nachweis genannte Kategorie abgeglichen. Das spätere Routing-Gate kann zusätzliche Bindungen verlangen. Eine konkrete vollständige Compiler-Regression muss diese Negativprobe enthalten; keinen Gesamtpass allein aus dem frühen Gate behaupten.
+
+**Einzige sichere Umsetzung:** Die ausdrücklich beschlossene redaktionelle Gleichbehandlung im **zuständigen Original-Signierprozess** als neue, autorisierte Revision des bestehenden Journal-Vertrags binden; PSTE und PSERC gegen dieselbe gültige Revision und die echten PPM-Kategorien/Slots vollständig positiv/negativ/E2E prüfen. Keine neue inhaltliche Magazin-Hürde, keine zweite Kategoriequelle, keine Änderung an echten Qualitäts-/Publish-Schutzprüfungen. Bis Signatur + E2E belegt sind: **KEIN INSTALLIERBARER RELEASE**.
