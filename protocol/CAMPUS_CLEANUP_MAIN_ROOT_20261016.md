@@ -38,3 +38,5 @@ Sicherungsanker:
 - lokales Nutzerbackup vor Bereinigung;
 - `archive/campus-pre-cleanup-20261016`;
 - `archive/campus-main-pre-phase3-20261016`.
+
+Hardlock-Nachprüfung Phase 3: erforderlicher PROJECT_MEMORY-Protokollcheck ist im PR gebunden.
