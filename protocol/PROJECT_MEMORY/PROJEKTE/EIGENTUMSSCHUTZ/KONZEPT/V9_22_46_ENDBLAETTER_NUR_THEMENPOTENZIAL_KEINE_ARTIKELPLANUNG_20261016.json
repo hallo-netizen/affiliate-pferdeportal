@@ -1,0 +1,810 @@
+{
+  "schema": "HB-V9.22-LEAF-CATEGORY-FEASIBILITY-NO-ARTICLE-PLAN",
+  "date": "2026-10-16",
+  "status": "CATEGORICAL_POTENTIAL_ONLY_NOT_ARTICLE_PRODUCTION_NOT_WP_IMPORTABLE",
+  "authority": "KONZEPT category structure; operational WP category writes only KATEGORIEN office",
+  "source": "V9.18 proposed 46 leaves; Pferdeatelier START_HERE / TEXTSYSTEM_4A / WISSENSDATENBANK / TEXT/08_DO_NOT_TOUCH read-only confirms separate article/SEO pipelines",
+  "category_gate": "Only lowest leaf must have plausible subject matter for 3-5 or more materially different future articles. No requirement to draft or finalize topics, headlines, briefs, detailed keyword selection, article production or per-article R2 duplicate mapping at category stage.",
+  "intermediate_gate": "Three or more meaningful direct category children; NO MAXIMUM; no article quota for intermediary nodes.",
+  "seo_gate": "Real DataForSEO can inform concise search-intent names, never disqualify a sound leaf solely due missing/low volume.",
+  "scope_gate": "Avoid duplicate whole category meaning and clear parent ownership; individual article owners are handled later in independent SEO editorial module.",
+  "rows": [
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_leaf": "Innenwände & Decken beschädigt",
+      "independent_topic_fields": [
+        "Oberflächen und Materialien",
+        "mutwillige Schadensbilder",
+        "Schutz und Instandsetzung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_leaf": "Bodenbeläge & Wohnraumtreppen",
+      "independent_topic_fields": [
+        "Kratz- und Stoßschäden",
+        "unterschiedliche Bodenmaterialien",
+        "Sicherung und Reparatur"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_leaf": "Einbauküchen & festes Wohninventar",
+      "independent_topic_fields": [
+        "Möbelfronten und Beschläge",
+        "feste Einbauten und Geräte",
+        "Schadensbehebung und Schutz"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_leaf": "Heizräume & Heizkreisverteiler",
+      "independent_topic_fields": [
+        "Zugang und Schlüsselschutz",
+        "Manipulation an Heizverteilung",
+        "Prüfung nach Fremdeingriffen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_leaf": "Innenverteiler & Sicherungskästen",
+      "independent_topic_fields": [
+        "Zugriffssicherung",
+        "sichtbare Manipulationsspuren",
+        "sichere Fachprüfung nach Schaden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_leaf": "Wasserabsperrungen & Technikschränke",
+      "independent_topic_fields": [
+        "Absperrorgane und Zugang",
+        "mutwilliger Wasseraustritt",
+        "Schrank- und Leitungsschutz"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_leaf": "Dusche undicht",
+      "independent_topic_fields": [
+        "Duschablauf und Anschlüsse",
+        "Abdichtung der Duschzone",
+        "verdeckt entstehende Feuchteschäden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_leaf": "Badewanne undicht",
+      "independent_topic_fields": [
+        "Wannenablauf und Überlauf",
+        "Rand- und Bauwerksabdichtung",
+        "versteckter Wasserschaden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_leaf": "Spülkasten undicht",
+      "independent_topic_fields": [
+        "Füllventile und Mechanik",
+        "Unterputz-Spülkasten",
+        "Leckfolgen und Früherkennung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_leaf": "Siphon & Waschbecken",
+      "independent_topic_fields": [
+        "Siphon- und Ablaufverbindungen",
+        "Eckventile und Zuläufe",
+        "Feuchte im Unterschrank"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_leaf": "Küchenspüle & Armaturen",
+      "independent_topic_fields": [
+        "Armaturen und Anschlüsse",
+        "Spülenablauf und Geruchsverschluss",
+        "Wasserschäden an Küchenmöbeln"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_leaf": "PV-Kabel & Steckverbinder",
+      "independent_topic_fields": [
+        "PV-Gleichstromkabel",
+        "Solar-Steckverbinder",
+        "Überhitzung an Kontaktstellen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_leaf": "Wechselrichter: Brandschutz",
+      "independent_topic_fields": [
+        "Wärmeabfuhr und Standort",
+        "Warnzeichen für Schmorstellen",
+        "Brandprävention und Fachfreigabe"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_leaf": "Heimspeicher: Brandschutz",
+      "independent_topic_fields": [
+        "Aufstellort und Umgebung",
+        "Temperatur- und Rauchwarnung",
+        "Schutz nach Akku-/Wasserschaden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_leaf": "Wallbox: Brandrisiken",
+      "independent_topic_fields": [
+        "Ladeanschluss und Kontaktwärme",
+        "Elektroinstallation und Schutzorgane",
+        "Brandlasten am privaten Ladeplatz"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_leaf": "Durchlauferhitzer defekt",
+      "independent_topic_fields": [
+        "Versorgung und Abschaltung",
+        "Heizleistung und Temperatur",
+        "Armatur gegenüber Gerät abgrenzen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_leaf": "Warmwasserspeicher defekt",
+      "independent_topic_fields": [
+        "Heizleistung und Volumen",
+        "Regelung und Temperatur",
+        "Verschleiß und Kalk"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_leaf": "Zirkulationspumpe defekt",
+      "independent_topic_fields": [
+        "Pumpenbetrieb und Geräusche",
+        "Zeitsteuerung und Schaltung",
+        "Warmwasser-Verteilung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_leaf": "Warmwasserregelung & Fühler",
+      "independent_topic_fields": [
+        "Temperaturfühler",
+        "Warmwassermischer",
+        "Heizungs-/Speichersteuerung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_leaf": "Brunnenpumpe defekt",
+      "independent_topic_fields": [
+        "Wasserstand und Trockenlauf",
+        "Druck und Förderung",
+        "Antrieb und Stromversorgung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_leaf": "Gartenpumpe ohne Druck",
+      "independent_topic_fields": [
+        "Ansaug- und Förderseite",
+        "Drucksteuerung",
+        "Filter und Trockenlaufschutz"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_leaf": "Teichpumpe defekt",
+      "independent_topic_fields": [
+        "Durchfluss und Umwälzung",
+        "Filter und Blockaden",
+        "Stromversorgung und Verschleiß"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_leaf": "Poolfilterpumpe defekt",
+      "independent_topic_fields": [
+        "Motor und Überhitzung",
+        "Filter- und Pumpenkreislauf",
+        "Lufteintrag und Druckprobleme"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_leaf": "Obstbäume bei Spätfrost",
+      "independent_topic_fields": [
+        "Blüten und Knospen",
+        "geeigneter Frostschutz",
+        "Schadensbewertung nach Frost"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_leaf": "Hecken & Sträucher bei Frost",
+      "independent_topic_fields": [
+        "Frosttrocknis",
+        "Wurzel- und Winterschutz",
+        "Wintersonne und Folgeschäden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_leaf": "Kübelpflanzen überwintern",
+      "independent_topic_fields": [
+        "Überwinterungsstandort",
+        "Topf- und Wurzelschutz",
+        "Schäden nach der Winterruhe"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_leaf": "Gewächshaus bei Frost",
+      "independent_topic_fields": [
+        "Abdichtung und Isolation",
+        "Heizung und Frostwarnung",
+        "Pflanzen und Winterbetrieb"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_leaf": "Garagentorantrieb defekt",
+      "independent_topic_fields": [
+        "Stromversorgung und Steuerung",
+        "Antrieb und Mechanik",
+        "Fehlfahrten und Endlagen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_leaf": "Garagentor-Sensoren",
+      "independent_topic_fields": [
+        "Lichtschranken",
+        "Sicherheitskontaktleisten",
+        "Endlagen und Funktionstest"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_leaf": "Garagentor-Notentriegelung",
+      "independent_topic_fields": [
+        "mechanischer Entriegelungsmechanismus",
+        "Zugang ohne Nebentür",
+        "Benutzung bei Stromausfall"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_leaf": "Garagentor-Funksteuerung",
+      "independent_topic_fields": [
+        "Handsender und Batterie",
+        "Funkempfänger und Kopplung",
+        "Reichweite und Störquellen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_leaf": "Schiebetorantrieb defekt",
+      "independent_topic_fields": [
+        "Rollen und Laufschiene",
+        "Motor und Antriebsmechanik",
+        "Steuerung und Endlagen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_leaf": "Drehtorantrieb defekt",
+      "independent_topic_fields": [
+        "Antrieb der Torflügel",
+        "mechanische Blockaden und Windlast",
+        "Steuerung und Sicherheitsfunktion"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_leaf": "Zufahrtstor-Sensoren",
+      "independent_topic_fields": [
+        "Außen-Lichtschranken",
+        "Sicherheitskontaktleisten",
+        "Witterung und Endlagen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_leaf": "Hoftor-Funksteuerung",
+      "independent_topic_fields": [
+        "Außensender und Witterung",
+        "Empfänger und Paarung",
+        "Reichweite und Störquellen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_leaf": "Gegensprechanlage defekt",
+      "independent_topic_fields": [
+        "Klingeltaster und Außenstation",
+        "Sprechverbindung und Audio",
+        "Innenstationen und gemeinsame Leitungen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_leaf": "Elektrischer Türöffner defekt",
+      "independent_topic_fields": [
+        "Schließmechanik und Freigabe",
+        "Versorgung und Verkabelung",
+        "Ansteuerung und sporadische Defekte"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_leaf": "Video-Türsprechanlage defekt",
+      "independent_topic_fields": [
+        "Kamera und Bildausfall",
+        "Nachtsicht und Bildqualität",
+        "Außenstation und Verkabelung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_leaf": "Smarte Türsteuerung: Ausfall",
+      "independent_topic_fields": [
+        "lokaler Antrieb",
+        "Versorgung und Akku",
+        "Software- und Steuerfehler"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_leaf": "Hofladen vor Diebstahl",
+      "independent_topic_fields": [
+        "Warensicherung",
+        "Kassensicherung",
+        "Inventur und Kontrollen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_leaf": "SB-Verkaufsstände sichern",
+      "independent_topic_fields": [
+        "Warenentnahme und Standaufbau",
+        "Nachtabschluss und Sicherung",
+        "Selbstbedienung und Zahlung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_leaf": "Warenautomaten vor Diebstahl",
+      "independent_topic_fields": [
+        "Automatenaufbruch",
+        "Geldkassetten und Warenausgabe",
+        "Standort und mechanische Sicherung"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_leaf": "Abholboxen & Warenausgabe",
+      "independent_topic_fields": [
+        "Fachverriegelung",
+        "Zugangs- und Abholcodes",
+        "Warenübergabe und Fehlentnahmen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Brandlasten & Betriebsstrom",
+      "proposed_leaf": "Brandschutz im Friseursalon",
+      "independent_topic_fields": [
+        "Aerosole und Lagerung",
+        "heiße Stylinggeräte",
+        "Stromlast und Steckdosen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Hochwasserschutz & Folgen",
+      "proposed_leaf": "Läden & Salons bei Hochwasser",
+      "independent_topic_fields": [
+        "Eingänge und Wasserbarrieren",
+        "Warenbestand und Einrichtung",
+        "Elektrogeräte und Schadensfolgen"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Haus & Kellerschutz",
+      "proposed_leaf": "Tiefgarage bei Starkregen",
+      "independent_topic_fields": [
+        "Zufahrten und Wasserableitung",
+        "Bodenabläufe und Rückstau",
+        "Technik- und Gebäudefolgeschäden"
+      ],
+      "article_titles_required": false,
+      "article_creation_required": false,
+      "article_topic_decision_deferred_to": "separate SEO engine/editorial topic and text production module",
+      "category_potential": "PLAUSIBLE_3_PLUS_DISTINCT_TOPIC_FIELDS",
+      "keyword_evidence_for_leaf_name": "NOT_IMPLIED_BY_TOPIC_FEASIBILITY",
+      "existing_wp_unchanged": true
+    }
+  ],
+  "checks": {
+    "all_46_mapped": true,
+    "all_three_distinct_fields": true,
+    "no_article_titles_mandatory": true,
+    "no_text_creation": true,
+    "zero_searchvolume_automatic_reject": false,
+    "no_wp_modifications": true
+  },
+  "open_limits": [
+    "These 3 short subject fields establish only plausible content range, not validated SEO article intents or final article plan.",
+    "Existing 285 real leaves and prior V99 81 proposals were NOT independently re-examined for distinct subject fields in this particular V9.22 file.",
+    "SEO alias names are not endorsed as measured if they lack actual DataForSEO reference.",
+    "No WordPress changes, no new plugin created."
+  ],
+  "next_action": "Apply this compact feasibility-only check to remaining prior V99 leaf candidates and flag only truly too-narrow or overlapping category scopes; then finalize category names/tree for central categories office, leaving all concrete editorial/SEO article choice to separate modules."
+}
