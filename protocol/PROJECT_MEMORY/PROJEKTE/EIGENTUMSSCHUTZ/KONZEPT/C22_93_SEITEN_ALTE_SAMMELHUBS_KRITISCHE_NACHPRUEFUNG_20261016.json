@@ -1,0 +1,1709 @@
+{
+  "schema": "HB_C22_93_PAGE3_LEGACY_DEEPER_EDITORIAL_CHECK",
+  "date": "2026-10-16",
+  "status": "EDITORIAL_SOURCE_BASED_REFINEMENT_NOT_URL_MIGRATION",
+  "source": "C22_BESTAND_93_SEITEN_285_KATEGORIEN_SACHROLLEN_VORPRUEFUNG_20261016.json",
+  "facts": [
+    "18 specific previous 'might be coherent' page-3 nodes have mixed subject/device article-category labels and must not be treated as C2.2 pass.",
+    "Graffiti existing hub is one positive candidate for retaining current page3, but article count capacity is not proven.",
+    "Protected original IDs, names, slugs and term links remain unchanged."
+  ],
+  "qa": {
+    "all_93": true,
+    "mixed_found_on_readable_subject_names": 18,
+    "graffiti_existing_topic_candidate": 1,
+    "categories_still_needing_article_link_validation": 285,
+    "live_wp_revision_verified": false,
+    "post_term_links_available": false,
+    "counts": {
+      "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED": 18,
+      "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE": 57,
+      "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW": 5,
+      "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF": 12,
+      "POTENTIALLY_KEEP_COHERENT_TOPIC_AND_ARTICLE_INTENTS__CAPACITY_OPEN": 1
+    }
+  },
+  "rows": [
+    {
+      "legacy_page3_node_id": "core:subarea:r3-3b506ad506e3bb4d",
+      "legacy_page3_name": "Kontrollen & Anwesenheit",
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "wordPress_page_id_at_20261013": 257,
+      "legacy_category_names": [
+        "Anwesenheitssimulation",
+        "Post & Zustellung bei Leerstand",
+        "Private Objektkontrollen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Anwesenheitssimulation, Postzustellung und Objektkontrollen sind mehrere getrennte konkrete Schutzthemen, keine drei eindeutigen Intent-Aspekte desselben einen Objekts.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:c06472ac764f8bb6",
+      "legacy_page3_name": "Stellplätze & Renovierung",
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "wordPress_page_id_at_20261013": 168,
+      "legacy_category_names": [
+        "Private Stellflächen",
+        "Private Renovierungsbaustellen",
+        "Stellplatz-Zutritt"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:1155be4b7a718bc5",
+      "legacy_page3_name": "Unbewohnte Häuser",
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "wordPress_page_id_at_20261013": 138,
+      "legacy_category_names": [
+        "Ferienhaus-Einbruchschutz",
+        "Schlüsselübergabe im Ferienhaus",
+        "Leerstehendes Wohnhaus"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:7a5778250272c806",
+      "legacy_page3_name": "Boote, Trailer & Reitsport",
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "wordPress_page_id_at_20261013": 156,
+      "legacy_category_names": [
+        "Boot, Außenborder & Trailer",
+        "Reitsport & Pferdeanhänger",
+        "Liegeplatz & Steganlage"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:c84f412718dd7c5b",
+      "legacy_page3_name": "Räder & Privatfahrzeuge",
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "wordPress_page_id_at_20261013": 171,
+      "legacy_category_names": [
+        "Fahrräder & E-Bikes",
+        "Motorräder & Privat-Anhänger",
+        "Oldtimer & Privatwagen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:27d113e90d7a2456",
+      "legacy_page3_name": "Wohnmobil & Wohnwagen",
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "wordPress_page_id_at_20261013": 142,
+      "legacy_category_names": [
+        "Camping & Wohnmobil",
+        "Wohnwagen & Stellplätze",
+        "Camperfenster & Dachluken"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-cdaca9db6d34bcab",
+      "legacy_page3_name": "Carports & Außenlager",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garagen & Nebenräume",
+      "wordPress_page_id_at_20261013": 287,
+      "legacy_category_names": [
+        "Carport-Fahrzeugschutz",
+        "Außenboxen & Lagerkisten",
+        "Mobile Aufbauten & Dachboxen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:6c1e63ba0ebd7f68",
+      "legacy_page3_name": "Garagen & Keller",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garagen & Nebenräume",
+      "wordPress_page_id_at_20261013": 152,
+      "legacy_category_names": [
+        "Garage & Garagentor",
+        "Fahrradkeller & Kellerabteile",
+        "Kellertüren & Abstellräume"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:7538e35df7d5fd84",
+      "legacy_page3_name": "Private Hobbyräume",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garagen & Nebenräume",
+      "wordPress_page_id_at_20261013": 155,
+      "legacy_category_names": [
+        "Schuppen & Hobbyraum",
+        "Hobbywerkstatt & Geräteraum",
+        "Zugang zur Hobbywerkstatt"
+      ],
+      "old_pretriage": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "refined_role_precheck": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:b9b33c48d54febc4",
+      "legacy_page3_name": "Gartenhäuser, Tore & Geräte",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garten & Grundstück",
+      "wordPress_page_id_at_20261013": 165,
+      "legacy_category_names": [
+        "Gartenhaus / Schrebergarten",
+        "Mähroboter gegen Diebstahl",
+        "Gartenmaschinen & Werkzeug",
+        "Gartentore & Zaunsicherung"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-da5ffcf93a4c2818",
+      "legacy_page3_name": "Grundstücksgrenzen & Wege",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garten & Grundstück",
+      "wordPress_page_id_at_20261013": 289,
+      "legacy_category_names": [
+        "Einsehbarkeit & Sichtachsen",
+        "Wegführung & Zugangsbereiche",
+        "Grenzüberwachung im Garten"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:64c307d994a7cbb0",
+      "legacy_page3_name": "Pakete & Gartenwerte",
+      "world": "Einbruch & Diebstahl",
+      "area": "Garten & Grundstück",
+      "wordPress_page_id_at_20261013": 150,
+      "legacy_category_names": [
+        "Pakete & Briefkästen",
+        "Diebstahl an Außentechnik",
+        "Gartenmöbel & Grillgeräte"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:a2c3f772d07db51e",
+      "legacy_page3_name": "Alarm & Kamera",
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "wordPress_page_id_at_20261013": 160,
+      "legacy_category_names": [
+        "Alarm & Überwachung",
+        "Kameras & Datenschutz",
+        "Bewegungsmelder & Licht"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:88a6c8b04bc14f63",
+      "legacy_page3_name": "Mechanik & Zugang",
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "wordPress_page_id_at_20261013": 157,
+      "legacy_category_names": [
+        "Türen & Fenster",
+        "Schlüssel & Zutritt",
+        "Mietwohnung ohne Bohren"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:dbf473379fd87d95",
+      "legacy_page3_name": "Wertsachen & Schadenfall",
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "wordPress_page_id_at_20261013": 177,
+      "legacy_category_names": [
+        "Wertsachen & Tresore",
+        "Dokumente & Datenträger schützen",
+        "Nach dem Einbruch"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-4bddb6ca3c11ceaf",
+      "legacy_page3_name": "Betriebszugang & Abläufe",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 261,
+      "legacy_category_names": [
+        "Schlüsselmanagement im Kleingewerbe",
+        "Kassen & Bargeld nach Ladenschluss",
+        "Liefer- & Fremdzutritte"
+      ],
+      "old_pretriage": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "refined_role_precheck": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:daae6f0a62d28c07",
+      "legacy_page3_name": "Kleinbetriebe & Ateliers",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 176,
+      "legacy_category_names": [
+        "Kleine Laden- & Praxisräume",
+        "Werkstatt & Atelier gegen Diebstahl",
+        "Salon & Ladenlokal"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:ce03307f435cddb3",
+      "legacy_page3_name": "Kleine Vereine & Plätze",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 173,
+      "legacy_category_names": [
+        "Vereinsheim & Clubhaus",
+        "Kleine Vereinsplätze & Schuppen",
+        "Sportgerät & Platzinventar"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:a9a810d93cefa16c",
+      "legacy_page3_name": "Akkus & Werkstätten",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "wordPress_page_id_at_20261013": 161,
+      "legacy_category_names": [
+        "E-Bike-Akku-Brandschutz",
+        "Lithium-Akkus & Powerstations",
+        "Garage & private Werkstatt"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-12d26b40342dabb5",
+      "legacy_page3_name": "Elektroinstallation & Leitungen",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "wordPress_page_id_at_20261013": 252,
+      "legacy_category_names": [
+        "Elektroleitungen & Schmorstellen",
+        "Steckdosen & Mehrfachverteiler",
+        "Kabelbrände im Wohnbereich"
+      ],
+      "old_pretriage": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "refined_role_precheck": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-a2a446a27dc09c74",
+      "legacy_page3_name": "Ladeplätze & Akkuzustand",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "wordPress_page_id_at_20261013": 276,
+      "legacy_category_names": [
+        "Ladeplätze für Werkzeugakkus",
+        "Akku-Ladegeräte & Defekte",
+        "Beschädigte Akkus & Entsorgung"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-1d04bd715f0b3c23",
+      "legacy_page3_name": "Gasleitungen & Absperreinrichtungen",
+      "world": "Feuer & Gase",
+      "area": "CO & Gas",
+      "wordPress_page_id_at_20261013": 253,
+      "legacy_category_names": [
+        "Gasabsperrung & Armaturen",
+        "Gasleitungen in Nebenräumen",
+        "Gasanschlüsse im Wohnhaus"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Gasleitungen und Absperrarmaturen sind unterschiedliche Schutzobjekte; Standortfälle können nicht pauschal als drei Intentkategorien fungieren.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:609c5d8889eb07dd",
+      "legacy_page3_name": "Kohlenmonoxid & Gaswarnung",
+      "world": "Feuer & Gase",
+      "area": "CO & Gas",
+      "wordPress_page_id_at_20261013": 148,
+      "legacy_category_names": [
+        "Kohlenmonoxidwarnung",
+        "Gaswarnmelder",
+        "Kamin & Heizungsabgase"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-0c4c00d85dec246e",
+      "legacy_page3_name": "Verbrennungsluft & Raumlüftung",
+      "world": "Feuer & Gase",
+      "area": "CO & Gas",
+      "wordPress_page_id_at_20261013": 251,
+      "legacy_category_names": [
+        "Abluftanlagen & Unterdruck",
+        "Verbrennungsluft bei Gasgeräten",
+        "Luftzufuhr bei Kaminbetrieb"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:c794a085651f638b",
+      "legacy_page3_name": "Brandschutz im Camper",
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "wordPress_page_id_at_20261013": 170,
+      "legacy_category_names": [
+        "Rauch, CO & Gas beim Camping",
+        "Camping-Akkus & Ladegeräte",
+        "Gasflaschen & Kocher im Camper"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-ef3064f8b715d92e",
+      "legacy_page3_name": "Fluchtwege & Verhalten im Brandfall",
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "wordPress_page_id_at_20261013": 292,
+      "legacy_category_names": [
+        "Notausstiege im Wohnwagen",
+        "Brandnotfälle auf Campingplätzen",
+        "Löschmittel im Freizeitfahrzeug"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Notausstieg, Brandnotfall und Löschmittel sind jeweils andere Gegenstände/Handlungen statt eines vertieften Sachthemas.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-08d1c3f95ff33d00",
+      "legacy_page3_name": "Gasinstallation im Freizeitfahrzeug",
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "wordPress_page_id_at_20261013": 249,
+      "legacy_category_names": [
+        "Feste Gasinstallationen im Camper",
+        "Gasprüfungen im Freizeitfahrzeug",
+        "Gasheizung & Abgasführung im Camper"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-95599f104f34d60d",
+      "legacy_page3_name": "Betriebsorganisation & Fluchtwege",
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 274,
+      "legacy_category_names": [
+        "Notfallpläne für Kleingewerbe",
+        "Fluchtwege in kleinen Läden",
+        "Brandschutzunterweisung im Verein"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Notfallplan, Fluchtweg und Unterweisung bei verschiedenen Betriebsarten sind ein breiter Sammelhub.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-54c58b2291237b64",
+      "legacy_page3_name": "Brandlasten & Betriebsstrom",
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 262,
+      "legacy_category_names": [
+        "Brennbare Waren & Dekoration",
+        "Steckdosen im kleinen Gewerbe",
+        "Maschinenbrand in Kleinwerkstätten"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:6a3a7736b46a3483",
+      "legacy_page3_name": "Brandschutz: Kleinobjekte",
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 151,
+      "legacy_category_names": [
+        "Brandschutz kleiner Objekte",
+        "Kleines Vereinsheim & Brandschutz",
+        "Werkstatt & Akkulager"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:d60c45cef20293fb",
+      "legacy_page3_name": "Brandschutz & Löschmittel",
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "wordPress_page_id_at_20261013": 175,
+      "legacy_category_names": [
+        "Rauchmelder / Vernetzung",
+        "Feuerlöscher & Löschmittel",
+        "Küchen- & Fettbrand",
+        "Elektrische Küchenbrandgefahren"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-b48e03ab3db40249",
+      "legacy_page3_name": "Fluchtwege & Personenschutz",
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "wordPress_page_id_at_20261013": 280,
+      "legacy_category_names": [
+        "Brandschutztüren im Wohnbereich",
+        "Fluchtwege im Privathaus",
+        "Evakuierung mit Hilfebedarf"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Brandschutztür, privater Fluchtweg und Evakuierung mit Hilfebedarf sind unterschiedliche Schutzgegenstände.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-7dae3268faaeea1c",
+      "legacy_page3_name": "Ofen, Kamin & offenes Feuer",
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "wordPress_page_id_at_20261013": 270,
+      "legacy_category_names": [
+        "Kaminofen & Sicherheitsabstände",
+        "Schornsteinbrand & Rußablagerung",
+        "Offene Feuerstellen im Garten"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:bf71a9402f21d606",
+      "legacy_page3_name": "Alarm & Kamera ohne Netz",
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "wordPress_page_id_at_20261013": 167,
+      "legacy_category_names": [
+        "Alarmanlage bei Stromausfall",
+        "Offline-Sicherheitssysteme",
+        "Router & Mobilfunk-Backup"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-5c5afe8c38f94e25",
+      "legacy_page3_name": "Alarmkommunikation & Übertragung",
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "wordPress_page_id_at_20261013": 264,
+      "legacy_category_names": [
+        "SIM-Karten für Alarmmelder",
+        "Alarmübertragungswege & Standards",
+        "Ausbleibende Push-Benachrichtigungen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-d784b9ff8c308622",
+      "legacy_page3_name": "Lokaler Smart-Home-Notbetrieb",
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "wordPress_page_id_at_20261013": 288,
+      "legacy_category_names": [
+        "Notbetrieb smarter Türschlösser",
+        "Offline-Szenen im Smart Home",
+        "Sicherheitsupdates von Alarmsystemen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Smarte Türschlösser, Offline-Szenen und Systemupdates brauchen abgegrenzte Fachowner; kein pauschaler gleichartiger Intent.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-6ca418d3ad77c88a",
+      "legacy_page3_name": "Alarmreaktionen & Vertretung",
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "wordPress_page_id_at_20261013": 268,
+      "legacy_category_names": [
+        "Fehlalarme aus der Ferne prüfen",
+        "Eskalationspläne bei Fernüberwachung",
+        "Fernalarm an Vertrauenspersonen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:6169882265e80dd2",
+      "legacy_page3_name": "Mobile Objekte & Betriebe",
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "wordPress_page_id_at_20261013": 149,
+      "legacy_category_names": [
+        "Camper & Stellplatz fernüberwachen",
+        "Kleine Betriebe fernüberwachen",
+        "Boote fernüberwachen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:df9efed49e9ced9b",
+      "legacy_page3_name": "Wohnobjekte & Nebenräume",
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "wordPress_page_id_at_20261013": 178,
+      "legacy_category_names": [
+        "Ferienhaus fernüberwachen",
+        "Nebenobjekte fernüberwachen",
+        "Gartenhaus fernüberwachen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-c8c1c680287ebb1f",
+      "legacy_page3_name": "Fernmeldungen & Regeltechnik",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "wordPress_page_id_at_20261013": 285,
+      "legacy_category_names": [
+        "Heizungs-Sicherheitsabschaltungen",
+        "Heizungsalarme über Mobilfunk",
+        "Störungen an Heizungssteuerungen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Abschaltung, Mobilfunkalarm und Steuerungsstörung sind unterschiedliche Technikobjekt-/Funktionsbereiche.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:b98564156a5f5ebb",
+      "legacy_page3_name": "Heizungs- & Kühlungsalarme",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "wordPress_page_id_at_20261013": 164,
+      "legacy_category_names": [
+        "Heizungsausfall",
+        "Kühl- & Gefrieralarm",
+        "Frostwächter & Temperaturen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-f362477dc05633d6",
+      "legacy_page3_name": "Temperaturwarnung in Sonderräumen",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "wordPress_page_id_at_20261013": 293,
+      "legacy_category_names": [
+        "Gewächshaus-Temperaturalarme",
+        "Überhitzung im Dachgeschoss",
+        "Temperaturmelder im Technikraum"
+      ],
+      "old_pretriage": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "refined_role_precheck": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:e4277fda69ced0d4",
+      "legacy_page3_name": "Pumpen & Notbetrieb",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "wordPress_page_id_at_20261013": 179,
+      "legacy_category_names": [
+        "Pumpen-Störmeldungen",
+        "Sumpfpumpen-Ausfallalarme",
+        "Notstrom für Pumpen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Pumpen-Störmeldung, Sumpfpumpenalarm und Notstrom für Pumpen sind getrennte Systeme, keine klaren Intent-Facetten eines konkreten Produktes.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-718d153a810baa16",
+      "legacy_page3_name": "Pumpenursachen & Sensorik",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "wordPress_page_id_at_20261013": 269,
+      "legacy_category_names": [
+        "Störungen an Schwimmerschaltern",
+        "Blockierte Pumpenzuläufe",
+        "Trockenlaufschutz für Pumpen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Schwimmerschalter, Pumpenzulauf und Trockenlaufschutz sind verschiedene Produkte/Teilsysteme, nicht drei Intentkategorien.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-3eb2ee24f49daf59",
+      "legacy_page3_name": "Pumpenwartung & Verschleiß",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "wordPress_page_id_at_20261013": 258,
+      "legacy_category_names": [
+        "Rückschlagventile an Hauspumpen",
+        "Wartung von Sumpfpumpen",
+        "Ersatzpumpen für Hausentwässerung"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Rückschlagventil, Sumpfpumpe und Ersatzpumpe sind unterschiedliche Geräte, daher keine automatisch kohärente Intent-Trias.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:3e8dfec15ad57d77",
+      "legacy_page3_name": "Stromausfall & Notstrom",
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "wordPress_page_id_at_20261013": 144,
+      "legacy_category_names": [
+        "Stromausfallmelder",
+        "USV für Haus & Router",
+        "Notstrom für Privathäuser"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Stromausfallmelder, USV und Notstromversorgung sind verschiedene Geräte/Produktgruppen; alte Sammelseite nicht fachlich freigeben.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-e0a3a6b4fb701d21",
+      "legacy_page3_name": "Stromfehler & Schutzschalter",
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "wordPress_page_id_at_20261013": 290,
+      "legacy_category_names": [
+        "Störungen im Sicherungskasten",
+        "Phasenausfall im Wohnhaus",
+        "FI-Schutzschalter & Auslösungen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "FI-Schalter, Phasenausfall und Sicherungskasten haben verschiedene technische Owner.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-01caab8d89fc0742",
+      "legacy_page3_name": "Wiederanlauf nach Stromausfall",
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "wordPress_page_id_at_20261013": 247,
+      "legacy_category_names": [
+        "Kühlgeräte nach Netzausfall",
+        "Verbraucher beim Wiederanlauf",
+        "Heizungsneustart nach Stromausfall"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:260a0920e7b951f2",
+      "legacy_page3_name": "PV, Kamera & Beleuchtung",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Außentechnik",
+      "wordPress_page_id_at_20261013": 141,
+      "legacy_category_names": [
+        "Kameras & Licht vor Sabotage",
+        "PV-Technik & Kabel",
+        "Außenbeleuchtung schützen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:4dbf86eb169f98d2",
+      "legacy_page3_name": "Wärmepumpe & Ladepunkte",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Außentechnik",
+      "wordPress_page_id_at_20261013": 146,
+      "legacy_category_names": [
+        "Außentechnik vor Vandalismus",
+        "Wallbox & Ladekabel",
+        "Wärmepumpe vor Sabotage"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-c384fde6f5631a95",
+      "legacy_page3_name": "Zählerkästen & Anschlussleitungen",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Außentechnik",
+      "wordPress_page_id_at_20261013": 283,
+      "legacy_category_names": [
+        "Stromkästen & Außenverteiler",
+        "Außenzähler & Messstellen",
+        "Freiliegende Hausanschlüsse"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:90d80d706e8b027b",
+      "legacy_page3_name": "Graffiti: Schutz & Hilfe",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Fassade & Außenflächen",
+      "wordPress_page_id_at_20261013": 158,
+      "legacy_category_names": [
+        "Graffiti vorbeugen",
+        "Graffiti entfernen",
+        "Graffitischäden & Kosten"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "POTENTIALLY_KEEP_COHERENT_TOPIC_AND_ARTICLE_INTENTS__CAPACITY_OPEN",
+      "reason": "Alle drei alten Kategorien beziehen sich auf das eine Graffiti-Schutz-/Schadenthema und vertiefen unterschiedliche Intentionen. Mindestens-3-Beitragsfähigkeit und aktive Zuordnung noch zu prüfen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-c5e86b44508e3e51",
+      "legacy_page3_name": "Gärten & Außenmöblierung",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Fassade & Außenflächen",
+      "wordPress_page_id_at_20261013": 284,
+      "legacy_category_names": [
+        "Mauern & Einfriedungen",
+        "Bepflanzung & Grünflächen",
+        "Garteninventar & Outdoor-Möbel"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-8829d3339a14710f",
+      "legacy_page3_name": "Oberflächen & Fassadenbauteile",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Fassade & Außenflächen",
+      "wordPress_page_id_at_20261013": 272,
+      "legacy_category_names": [
+        "Fassadenputz & Oberflächenschäden",
+        "Außenrollläden vor Vandalismus",
+        "Verkleidungen & Außendämmung"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:4d7782e922837e68",
+      "legacy_page3_name": "Camping, Garten & Boote",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Freizeit & Vandalismus",
+      "wordPress_page_id_at_20261013": 145,
+      "legacy_category_names": [
+        "Vandalismus am Campingstellplatz",
+        "Gartenhaus gegen Vandalismus",
+        "Boot & Trailer vor Vandalismus"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-29710c165fdc4fa7",
+      "legacy_page3_name": "Geparkte Privatfahrzeuge",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Freizeit & Vandalismus",
+      "wordPress_page_id_at_20261013": 254,
+      "legacy_category_names": [
+        "Motorräder & Roller vor Vandalismus",
+        "Sachbeschädigung an Privatwagen",
+        "Oldtimer & Sammlerfahrzeuge"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-03280f09e1f4fd70",
+      "legacy_page3_name": "Private Freizeit- & Spielanlagen",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Freizeit & Vandalismus",
+      "wordPress_page_id_at_20261013": 248,
+      "legacy_category_names": [
+        "Kleingarten-Gemeinschaftsflächen",
+        "Private Grill- & Rastbereiche",
+        "Spielgeräte vor Vandalismus"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:115822da2ae9fc07",
+      "legacy_page3_name": "Eingänge, Glas & Klingeln",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "wordPress_page_id_at_20261013": 139,
+      "legacy_category_names": [
+        "Glas gegen Vandalismus",
+        "Briefkästen & Klingeln",
+        "Türen & Tore schützen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-c35767a9141583bc",
+      "legacy_page3_name": "Innenräume & Hausgemeinschaft",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "wordPress_page_id_at_20261013": 282,
+      "legacy_category_names": [
+        "Gemeinschaftsflure & Treppenhäuser",
+        "Gemeinschaftskeller & Waschräume",
+        "Innenbeleuchtung & Leitsysteme"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-f8db3998237d9b30",
+      "legacy_page3_name": "Sanitärräume & Nebenanlagen",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "wordPress_page_id_at_20261013": 294,
+      "legacy_category_names": [
+        "Schließfächer & Aufbewahrung",
+        "Sanitäreinrichtungen",
+        "Nebenraum-Inventar"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-bb7c04f0a46544eb",
+      "legacy_page3_name": "Mobiles Geschäftsaußeninventar",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Vereine & Kleingewerbe",
+      "wordPress_page_id_at_20261013": 281,
+      "legacy_category_names": [
+        "Verkaufsautomaten im Außenraum",
+        "Außenverkaufsstände",
+        "Paket- & Lieferstationen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-29ae9462c0d1f625",
+      "legacy_page3_name": "Sport- & Vereinsinfrastruktur",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Vereine & Kleingewerbe",
+      "wordPress_page_id_at_20261013": 255,
+      "legacy_category_names": [
+        "Sporttore & Spielfeldinventar",
+        "Vereinszäune & Absperrungen",
+        "Flutlicht & Platztechnik"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:1262f0d1a16b4a96",
+      "legacy_page3_name": "Vereine, Läden & Schäden",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Vereine & Kleingewerbe",
+      "wordPress_page_id_at_20261013": 140,
+      "legacy_category_names": [
+        "Kleine Vereinsanlagen",
+        "Schaufenster & Ladenfront",
+        "Vandalismusschäden dokumentieren",
+        "Werkstatt & Lager vor Sachschäden"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:f985af1ab7fb3533",
+      "legacy_page3_name": "Feuchtigkeit & Winterlager",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "wordPress_page_id_at_20261013": 181,
+      "legacy_category_names": [
+        "Feuchtigkeit beim Camping",
+        "Wasseranlage im Winterlager",
+        "Vorzelt & Dichtheitsprobleme",
+        "Feuchte im Gartenhaus"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-7de923d77f534081",
+      "legacy_page3_name": "Regenabdichtung am Freizeitfahrzeug",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "wordPress_page_id_at_20261013": 271,
+      "legacy_category_names": [
+        "Dachluken & Feuchteeintritt",
+        "Staufächer & Außenklappen",
+        "Wohnmobil-Dachnähte & Abdichtung"
+      ],
+      "old_pretriage": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "refined_role_precheck": "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-443a53088f3b389c",
+      "legacy_page3_name": "Tanks & Sanitärleitungen",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "wordPress_page_id_at_20261013": 259,
+      "legacy_category_names": [
+        "Abwassertank & Leckage",
+        "Wasserpumpen im Camper",
+        "Frischwassertank & Undichtigkeit"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-a33a954403335f12",
+      "legacy_page3_name": "Außenleitungen & Entleerung",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Frost & Abwesenheit",
+      "wordPress_page_id_at_20261013": 277,
+      "legacy_category_names": [
+        "Außenwasserhähne & Frost",
+        "Frostschutz für Brunnenpumpen",
+        "Gartenbewässerung winterfest machen"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:c8a6a3e042c29ffd",
+      "legacy_page3_name": "Frost & Leerstand",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Frost & Abwesenheit",
+      "wordPress_page_id_at_20261013": 172,
+      "legacy_category_names": [
+        "Wasserleitungen gegen Frost",
+        "Ferienhaus & Wasserschäden",
+        "Schimmel im Ferienhaus"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-099c5d1ead6cd926",
+      "legacy_page3_name": "Kontrolle ungenutzter Sanitärräume",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Frost & Abwesenheit",
+      "wordPress_page_id_at_20261013": 250,
+      "legacy_category_names": [
+        "Wasserzähler & Absperrkontrolle",
+        "Abflüsse bei längerer Nichtnutzung",
+        "Feuchtekontrolle bei Leerstand"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:b9e996f2919443cc",
+      "legacy_page3_name": "Feuchtigkeit & Trocknung",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "wordPress_page_id_at_20261013": 166,
+      "legacy_category_names": [
+        "Kellerfeuchte & Schimmel",
+        "Trocknung nach Wasserschaden",
+        "Kellerabdichtung & Ursachen",
+        "Keller-Luftentfeuchter"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Kellerfeuchte, Kellerabdichtung, Trocknung und Luftentfeuchter sind eigenständige Themen/Produkte.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-a6c3442a20ab2019",
+      "legacy_page3_name": "Grundwasser & Kellerbauteile",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "wordPress_page_id_at_20261013": 278,
+      "legacy_category_names": [
+        "Kellerwände bei Grundwasser",
+        "Kellerfensterschächte & Nässe",
+        "Feuchte Bodenplatten"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Bodenplatte, Kellerfensterschacht und Kellerwand sind verschiedene Bauteile; keine automatisch passende Artikelkategorientrias.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:ec729ccf048009bd",
+      "legacy_page3_name": "Rückstau & Pumptechnik",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "wordPress_page_id_at_20261013": 180,
+      "legacy_category_names": [
+        "Rückstauklappen",
+        "Hebeanlagen & Rückstau",
+        "Pumpensumpf & Kellerschutz"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-5bf9a9f7ac41fac4",
+      "legacy_page3_name": "Betriebsfolgen & Bestandsschutz",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 263,
+      "legacy_category_names": [
+        "Trocknung kleiner Ladenflächen",
+        "Warenbestände & Wasserschaden",
+        "Schimmel in kleinen Vereinsräumen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-90c643c921595b21",
+      "legacy_page3_name": "Technikräume & Absperrstellen",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 273,
+      "legacy_category_names": [
+        "Wassertechnikräume im Kleingewerbe",
+        "Wasserschutz an Praxisgeräten",
+        "Hauptabsperrung kleiner Betriebe"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:d3370baa6db0770a",
+      "legacy_page3_name": "Wasser in Kleinbetrieben",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "wordPress_page_id_at_20261013": 174,
+      "legacy_category_names": [
+        "Wasser in kleinen Betriebsräumen",
+        "Leckagen im kleinen Vereinsheim",
+        "Wasserschutz im Privatsalon"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:c3293597db93160c",
+      "legacy_page3_name": "Leckwarnung & Absperrung",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "wordPress_page_id_at_20261013": 169,
+      "legacy_category_names": [
+        "Wassermelder",
+        "Wasserstopp & Geräteschutz",
+        "Rohrdruck & Lecksuche"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-c9a85d5a61ec3c38",
+      "legacy_page3_name": "Rohrnetz & vorbeugende Wartung",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "wordPress_page_id_at_20261013": 286,
+      "legacy_category_names": [
+        "Leitungskorrosion im Haus",
+        "Rohrverbindungen & Dichtstellen",
+        "Druckprobleme & Druckschläge"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Korrosion, Rohrverbindungen und Druckschläge betreffen unterschiedliche Schadensmechanismen statt ein klar einzelnes Produkt.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:b8556bb0d206e66c",
+      "legacy_page3_name": "Wasserschäden & Folgen",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "wordPress_page_id_at_20261013": 163,
+      "legacy_category_names": [
+        "Wasserschaden nach Rohrbruch",
+        "Haushaltsgeräte & Wasserschutz",
+        "Schadenmeldung & Versicherung"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Haushaltsgeräteschutz, Schadenfall und Versicherung sind unterschiedliche Sachthemen/Intent, ein einheitlicher konkreter Owner fehlt.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-e221783434b176c2",
+      "legacy_page3_name": "Antennen & kleine Solaranlagen",
+      "world": "Wetter & Naturgefahren",
+      "area": "Blitz & Überspannung",
+      "wordPress_page_id_at_20261013": 291,
+      "legacy_category_names": [
+        "Balkonkraftwerke bei Gewitter",
+        "Außenkabel & Blitzfolgen",
+        "Antennen & Blitzschutz"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:731b72fa268b5b5a",
+      "legacy_page3_name": "Blitzschutz & Geräte",
+      "world": "Wetter & Naturgefahren",
+      "area": "Blitz & Überspannung",
+      "wordPress_page_id_at_20261013": 153,
+      "legacy_category_names": [
+        "Blitzschutz am Wohnhaus",
+        "PV & Wallbox Überspannung",
+        "Überspannung im Haus"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-9aa4363688876852",
+      "legacy_page3_name": "Erdung & Hausinstallation",
+      "world": "Wetter & Naturgefahren",
+      "area": "Blitz & Überspannung",
+      "wordPress_page_id_at_20261013": 275,
+      "legacy_category_names": [
+        "Datenleitungen & Überspannung",
+        "Potentialausgleich im Wohnhaus",
+        "Überspannung im Zählerschrank"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:b21e2895e32435e4",
+      "legacy_page3_name": "Camping, Boote & Garten",
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "wordPress_page_id_at_20261013": 162,
+      "legacy_category_names": [
+        "Sturm & Hagel beim Camping",
+        "Boote im Winterlager",
+        "Gartenhaus bei Unwetter"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-a7e016776e3c7b25",
+      "legacy_page3_name": "Fahrzeugaufbauten & Transporte",
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "wordPress_page_id_at_20261013": 279,
+      "legacy_category_names": [
+        "Fahrradträger bei Starkwind",
+        "Anhänger bei Sturm",
+        "Dachboxen bei Unwetter"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-63bb9f10fc776e70",
+      "legacy_page3_name": "Freizeitflächen & mobile Anlagen",
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "wordPress_page_id_at_20261013": 267,
+      "legacy_category_names": [
+        "Spielgeräte bei Sturm",
+        "Mobile Zäune bei Starkwind",
+        "Kleingartenlauben bei Hagel"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-46a6bfb4e6597c79",
+      "legacy_page3_name": "Vereisung an Außenbauteilen",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "wordPress_page_id_at_20261013": 260,
+      "legacy_category_names": [
+        "Gefrorene Außenentwässerung",
+        "Vereiste Türschlösser",
+        "Rollläden & Jalousien im Frost"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:74e7cdfc2b200d76",
+      "legacy_page3_name": "Winter & Schnee",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "wordPress_page_id_at_20261013": 154,
+      "legacy_category_names": [
+        "Schneelast auf Dächern",
+        "Schnee & Eis am Grundstück",
+        "Ferienhaus bei Frost & Schnee"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-5d0377daf4f162ce",
+      "legacy_page3_name": "Winterwege & Verkehrssicherung",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "wordPress_page_id_at_20261013": 265,
+      "legacy_category_names": [
+        "Räumpflichten auf Privatwegen",
+        "Glatteis an Garagenzufahrten",
+        "Rutschschutz an Hauseingängen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:28d8087df57279b8",
+      "legacy_page3_name": "Haus & Kellerschutz",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "wordPress_page_id_at_20261013": 143,
+      "legacy_category_names": [
+        "Türen & Lichtschächte",
+        "Keller vor Starkregen",
+        "Garagenzufahrt & Hofabläufe"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:927eb3aa17e7e630",
+      "legacy_page3_name": "Hochwasserschutz & Folgen",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "wordPress_page_id_at_20261013": 159,
+      "legacy_category_names": [
+        "Mobile Hochwassersperren",
+        "Grundstücksentwässerung",
+        "Haustechnik im Hochwasser"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-3305deb0d7ee3356",
+      "legacy_page3_name": "Warnung & private Vorbereitung",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "wordPress_page_id_at_20261013": 256,
+      "legacy_category_names": [
+        "Notfallunterlagen bei Hochwasser",
+        "Hausrat vor Hochwasser",
+        "Warnsysteme bei Starkregen"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Warnsysteme, Hausrat und Notfallunterlagen sind unterschiedliche Objekte/Handlungen und müssten ihre eigenen konkreten Owner erhalten.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:51d4e47d1437c0fb",
+      "legacy_page3_name": "Außenanlagen & Schäden",
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "wordPress_page_id_at_20261013": 147,
+      "legacy_category_names": [
+        "Außenanlagen bei Sturm",
+        "Schäden nach Unwetter",
+        "Bäume & Astbruch",
+        "Gewächshäuser bei Sturm"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:fad7c82a242f2c16",
+      "legacy_page3_name": "Dach, Fenster & PV",
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "wordPress_page_id_at_20261013": 182,
+      "legacy_category_names": [
+        "Dach & Fenster bei Sturm",
+        "PV-Anlagen bei Sturm",
+        "Wintergarten & Glasdach"
+      ],
+      "old_pretriage": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "refined_role_precheck": "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE",
+      "reason": "Die alte Seiten-/Term-Kombination ist nur aus Titel und Parent überprüft; Belege zu Inhaltszuordnung und min3 pro Intent fehlen.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    },
+    {
+      "legacy_page3_node_id": "core:subarea:r3-60f298fde2616ca0",
+      "legacy_page3_name": "Unwetterwarnung & Vorbereitung",
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "wordPress_page_id_at_20261013": 266,
+      "legacy_category_names": [
+        "Sicherung ausfahrbarer Markisen",
+        "Sturmwarnungen verstehen",
+        "Mobile Gegenstände vor Sturm"
+      ],
+      "old_pretriage": "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF",
+      "refined_role_precheck": "BROAD_LEGACY_AGGREGATOR_SEPARATE_TOPIC_OWNERS_RECOMMENDED",
+      "reason": "Markisen und lose Gegenstände als separate Produkte, Warnung als Intent; unter dieser Sammelseite keine C2.2-Freigabe.",
+      "wp_operation": "NONE",
+      "article_assignments": "NOT_VERIFIED",
+      "release": false
+    }
+  ],
+  "next_action": "Use real WP current post-term assignments to resolve remaining legacy Owner assignments; do not infer them from broad category names."
+}
