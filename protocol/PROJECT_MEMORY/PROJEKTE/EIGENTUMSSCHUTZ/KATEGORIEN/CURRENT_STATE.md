@@ -1,6 +1,12 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## AKTUELL – 16.10.2026 – V9.20 QUALITÄTSSPERRE BEI NEUEN 46 BLÄTTERN
+**Dies ist die einzige operative Kategorie-Current-Autorität. Keine neue Kategorieverwaltung.** Entwurf `V9_18_BESTANDSCHONENDE_ERWEITERUNG_46_BLAETTER_214_IDEEN_NICHT_IMPORTIEREN_20261016.json` ist **fachlich NICHT freigegeben**, obwohl 46 Namen/214 Ideen formal unterschiedlich sind. Der ursprüngliche R2-Alt-Owner `Garagenzufahrt & Hofabläufe` enthält bereits einen Beitrag zur Tiefgaragenzufahrt bei Starkregen; der konkurrierende Titel im V9.17- und V9.18-ADD-ENTWURF wurde ersetzt, **nicht in WordPress**. Zwei weitere zu ähnliche Artikelideen im Vorschlag wurden bei Boiler und Video-Türsprechanlage ebenfalls ersetzt.
+**Referenzen:** `../KONZEPT/V9_20_46_ENDBLAETTER_ARTIKELQUALITAET_R2_ABGRENZUNG_20261016.json` mit 46/46 redaktionellen Fällen, 12 markierten Risikofällen/Owner-Gates (darunter 3 echte Inhaltsdichte-Holds), und `../KONZEPT/V9_21_46_KURZE_MENUEALIASE_OHNE_WP_UMBENENNUNG_20261016.json` mit 46 nur zur Anzeige bestimmten kurzen Aliasvorschlägen. **DataForSEO Germany/de bisher 51/570 Messwerte; ungemessene Namen keine SEO-PASS.** Min3, keine Obergrenze; Suchvolumen ist kein Ausschlussgrund. **Bestehende Kategorien, IDs, Slugs, Eltern, URLs und Zuordnungen unverändert.**
+**GENAU EINE NEXT ACTION:** Eine redaktionell bestätigte, echte Keyword-/Owner-Liste für alle neuen 46 Blätter aus Konzept übernehmen, NUR geprüfte ADD-Daten in einer einzigen Vorschau gegen aktuellen WordPress-Profilstand positiv/negativ simulieren, bestehende 546 Altknoten erhalten. Bis dahin KEIN Kategorien-Sync und kein neues Plugin-Release aus V9.18.
+
+
 ## 16.10.2026 – ZENTRALES KATEGORIENBÜRO: NEUES NICHTDESTRUKTIVES REDAKTIONSDELTA V9.18
 **EINZIGE operative Kategorie-Current-Autorität = diese Datei. Fachliche Freigabe ausschließlich im `../KONZEPT/CURRENT_STATE.md`.**
 Der reale Germany/de-DataForSEO-Export (570 Namen/Alternativen, 51 Keywordantworten) ist dokumentiert in `SEO_20261016_DATENFORSEO_570_BEGRIFFE_KEIN_AUSSCHLUSS_NACH_SUCHVOLUMEN.json`. **0, null oder fehlende Suchvolumenwerte sind niemals Ablehnungs-, Lösch- oder Archivierungsgrund** für ein fachlich tragfähiges Thema. Neue Namen möglichst kurz, relevant und verständlich; UI-Kurzname / H1 dürfen voneinander abweichen. Alte Namen/URLs bleiben ohne gesonderte Freigabe unverändert.
