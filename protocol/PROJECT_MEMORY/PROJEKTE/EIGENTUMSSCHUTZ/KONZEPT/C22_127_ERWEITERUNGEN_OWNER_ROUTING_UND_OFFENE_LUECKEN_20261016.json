@@ -101,7 +101,7 @@
       "old_role": "DRAFT_WORDPRESS_ARTICLE_CATEGORY",
       "role_precheck": "POSSIBLE_INTENT_CONTENT_CATEGORY_ONLY_UNDER_SPECIFIC_TOPIC",
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
-      "suggested_page3_topic": "Fensteranschlüsse abdichten",
+      "suggested_page3_topic": "Fensteranschlüsse",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": false,
       "verified_proposed_topic_owner": null,
@@ -609,7 +609,7 @@
       "old_role": "DRAFT_WORDPRESS_ARTICLE_CATEGORY",
       "role_precheck": "POSSIBLE_INTENT_CONTENT_CATEGORY_ONLY_UNDER_SPECIFIC_TOPIC",
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
-      "suggested_page3_topic": "Bootskajüte vor Feuchtigkeit schützen",
+      "suggested_page3_topic": "Bootskajüte",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": false,
       "verified_proposed_topic_owner": null,
@@ -1117,8 +1117,8 @@
     {
       "source": "V9.9",
       "source_candidate_name": "Hausschwamm in Kellern & Bodenräumen",
-      "world": "verschiedene",
-      "area": "bestehende fachliche Parents",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
       "historical_page3_group": "bestehende Eltern, einzeln zu prüfen",
       "old_role": "DRAFT_WORDPRESS_ARTICLE_CATEGORY",
       "role_precheck": "SPECIFIC_TOPIC_PAGE3_CANDIDATE_NOT_AUTOMATIC",
@@ -1128,7 +1128,10 @@
       "is_fully_curated_topic_with_intent_categories": false,
       "verified_proposed_topic_owner": null,
       "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "wordpress_write": false,
+      "original_world_in_source": "verschiedene",
+      "original_area_in_source": "bestehende fachliche Parents",
+      "owner_route_correction": "Die V99-Quelle hat unspezifischen Platzhalter 'verschiedene'; konkretes Natur-/Feuchteschaden-Thema dem geschützten Wasserbereich zur Fachprüfung zugeordnet, keine WordPress-Änderung."
     },
     {
       "source": "V9.9",
