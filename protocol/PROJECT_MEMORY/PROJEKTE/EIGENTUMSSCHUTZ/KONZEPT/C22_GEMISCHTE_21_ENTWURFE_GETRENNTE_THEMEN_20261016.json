@@ -1,0 +1,1570 @@
+{
+  "schema": "HB_C22_MIXED_21_DRAFT_SCOPE_SPLIT_ADDITIONAL_PAGES",
+  "date": "2026-10-16",
+  "status": "CONCEPT_ONLY_SPLIT_OPTIONS_NOT_FINAL_OWNER_CLEARANCE",
+  "source": "21 mixed V9.9/V9.18 label-scope review cases",
+  "topic_count": 41,
+  "article_category_count": 123,
+  "capacity_signals_count": 369,
+  "risk": "21 old mixed candidate labels remain unapproved. Their named subjects were separated here into actual page3 candidates; the mapping must be reviewed before old draft rows are discarded or archived. Does not change any live page or term.",
+  "topics": [
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Gauben & Anschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wassereintritt erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Gaubenwange",
+            "Fenster",
+            "Dachkehle"
+          ]
+        },
+        {
+          "name": "Abdichtung und Blech",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Seitenteil",
+            "Anschluss",
+            "Überdeckung"
+          ]
+        },
+        {
+          "name": "Wartung und Reparatur",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kontrollpunkt",
+            "Sanierung",
+            "Fachbetrieb"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Kaminanschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schlagregenschutz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Verwahrung",
+            "Blechanschluss",
+            "Fuge"
+          ]
+        },
+        {
+          "name": "Schäden erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Feuchtefleck",
+            "Dachhaut",
+            "Schornsteinsockel"
+          ]
+        },
+        {
+          "name": "Reparatur & Wartung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Dichtung",
+            "Abdeckung",
+            "Dachdecker"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Balkonanschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Undichte Übergänge",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Balkontür",
+            "Schwelle",
+            "Wandanschluss"
+          ]
+        },
+        {
+          "name": "Entwässerung und Gefälle",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Abfluss",
+            "Randprofil",
+            "Stauwasser"
+          ]
+        },
+        {
+          "name": "Sanierung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Abdichtung",
+            "Belag",
+            "Anschluss"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Außentüren",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Dichtung gegen Regen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schwelle",
+            "Wandfuge",
+            "Türdichtung"
+          ]
+        },
+        {
+          "name": "Feuchtigkeit erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Innenputz",
+            "Bodenbelag",
+            "Zarge"
+          ]
+        },
+        {
+          "name": "Wartung & Nachrüstung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Beschlag",
+            "Türanschluss",
+            "Überdachung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Anbauabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Dachanschluss am Haus",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Wandaufkantung",
+            "Flachdach",
+            "Entwässerung"
+          ]
+        },
+        {
+          "name": "Feuchtezeichen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Decke",
+            "Anschlusskante",
+            "Fugen"
+          ]
+        },
+        {
+          "name": "Sanieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Abdichtungsbahn",
+            "Detailausbildung",
+            "Fachbetrieb"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Wintergartenabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Dach- und Glasfugen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Glasstoß",
+            "Randprofil",
+            "Dichtung"
+          ]
+        },
+        {
+          "name": "Wasserführung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Regenrinne",
+            "Neigung",
+            "Tropfkante"
+          ]
+        },
+        {
+          "name": "Fehlersuche & Reparatur",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Beschlag",
+            "Dichtmaterial",
+            "Anschluss"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Gartenhaus bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Innenraumtemperatur",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Sonneneinstrahlung",
+            "Material",
+            "Lüftung"
+          ]
+        },
+        {
+          "name": "Hitzeschutz nachrüsten",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Dachisolierung",
+            "Verschattung",
+            "Reflexion"
+          ]
+        },
+        {
+          "name": "Lagergut schützen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Farben",
+            "Akkus",
+            "Holz"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Hobbyraum bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wärmelast",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Werkzeuge",
+            "Elektrogeräte",
+            "Fenster"
+          ]
+        },
+        {
+          "name": "Raumklima verbessern",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Verschattung",
+            "Lüftung",
+            "Dämmung"
+          ]
+        },
+        {
+          "name": "Material und Sicherheit",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Akkulagerung",
+            "Lösungsmittel",
+            "Überhitzung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Zeltmaterial im Sommer",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Materialschäden durch UV",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Gewebe",
+            "Nähte",
+            "Beschichtung"
+          ]
+        },
+        {
+          "name": "Hitze am Zelt",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Belüftung",
+            "Aufbau",
+            "Abstand"
+          ]
+        },
+        {
+          "name": "Pflege und Ersatz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Trocknung",
+            "Imprägnierung",
+            "Reparatur"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Campingausrüstung bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Akkus und Elektronik",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Powerbank",
+            "Kühlung",
+            "Überladung"
+          ]
+        },
+        {
+          "name": "Wärmeempfindliches Zubehör",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kleber",
+            "Kartuschen",
+            "Kunststoff"
+          ]
+        },
+        {
+          "name": "Lagerung im Fahrzeug",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Belüftung",
+            "Schattierung",
+            "Kontrolle"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Gartenmauern bei Unterspülung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wasserwege",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Fundament",
+            "Hangdruck",
+            "Oberflächenwasser"
+          ]
+        },
+        {
+          "name": "Schäden beurteilen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Risse",
+            "Neigung",
+            "Ausspülung"
+          ]
+        },
+        {
+          "name": "Sicherung & Sanierung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Entwässerung",
+            "Unterfangung",
+            "Fachprüfung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Gartenwege bei Unterspülung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Unterbau und Gefälle",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schotter",
+            "Fugen",
+            "Böschung"
+          ]
+        },
+        {
+          "name": "Schadensspuren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Absackung",
+            "Hohlraum",
+            "Randbereich"
+          ]
+        },
+        {
+          "name": "Wege instand setzen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Drainage",
+            "Tragschicht",
+            "Aufbau"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "topic_page": "PoE-Installationen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Strom & Netzwerk",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Switch",
+            "Injektor",
+            "Leistungsbudget"
+          ]
+        },
+        {
+          "name": "Kamera und Sensorik",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Netzkabel",
+            "Stecker",
+            "Reichweite"
+          ]
+        },
+        {
+          "name": "Störfälle",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Spannungsabfall",
+            "Wasserschaden",
+            "Diagnose"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Bootsmotor-Brandschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Feuerquellen am Motor",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kraftstoff",
+            "Elektrik",
+            "Überhitzung"
+          ]
+        },
+        {
+          "name": "Motorraum absichern",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Lüftung",
+            "Brandsensor",
+            "Abstände"
+          ]
+        },
+        {
+          "name": "Wartung & Notfall",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schläuche",
+            "Leckage",
+            "Löschmittel"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Kraftstoffanlage im Freizeitboot",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Lecks erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schlauch",
+            "Tank",
+            "Anschluss"
+          ]
+        },
+        {
+          "name": "Brandschutz an Bord",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Belüftung",
+            "Funkenschutz",
+            "Absperrung"
+          ]
+        },
+        {
+          "name": "Prüfung & Instandhaltung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Filter",
+            "Dichtung",
+            "Fachservice"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Bootsgasanlage",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gasleitungen & Regler",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schlauch",
+            "Druck",
+            "Absperrung"
+          ]
+        },
+        {
+          "name": "Alarm & Belüftung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Gasmelder",
+            "Gasstau",
+            "Notfall"
+          ]
+        },
+        {
+          "name": "Prüfung und Betrieb",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Flasche",
+            "Kocher",
+            "Fachabnahme"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Bootsküche",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Kochgeräte und Feuer",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Gasbrenner",
+            "Spiritus",
+            "Elektrik"
+          ]
+        },
+        {
+          "name": "Sicherer Einbau",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schwenkhalter",
+            "Abstand",
+            "Lüftung"
+          ]
+        },
+        {
+          "name": "Brandvorsorge an Bord",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Löschdecke",
+            "Aufsicht",
+            "Abschalten"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Bordelektrik im Freizeitboot",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leitungen sichern",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kabelquerschnitt",
+            "Sicherung",
+            "Feuchte"
+          ]
+        },
+        {
+          "name": "Fehler & Hitze",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kurzschluss",
+            "Korrosion",
+            "Kontaktwiderstand"
+          ]
+        },
+        {
+          "name": "Nachrüstung & Prüfung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Batterietrenner",
+            "Verteiler",
+            "Kontrolle"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Bootsakkus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Laden und Temperatur",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ladegerät",
+            "Landstrom",
+            "Akkutyp"
+          ]
+        },
+        {
+          "name": "Brand- und Kurzschlussschutz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Polabdeckung",
+            "Sicherung",
+            "Einbauort"
+          ]
+        },
+        {
+          "name": "Wartung & Austausch",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Korrosion",
+            "Überwachung",
+            "Entsorgung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Wildtierschäden am Garten",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Fraß und Tritt",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Beete",
+            "Bäume",
+            "Rasen"
+          ]
+        },
+        {
+          "name": "Schutzmaßnahmen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Einzäunung",
+            "Duftbarriere",
+            "Pflanzenschutz"
+          ]
+        },
+        {
+          "name": "Schäden und Vorsorge",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Spuren",
+            "Zugang",
+            "Kontrollgänge"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Wildtierschäden an Zäunen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Beschädigungsarten",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Durchbruch",
+            "Verbiss",
+            "Untergrabung"
+          ]
+        },
+        {
+          "name": "Zäune verstärken",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Unterkante",
+            "Material",
+            "Tor"
+          ]
+        },
+        {
+          "name": "Reparatur & Kontrolle",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schwachstellen",
+            "Schutzrecht",
+            "Unterhalt"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Innenwandschäden nach Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Oberflächen und Löcher",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Putz",
+            "Gipskarton",
+            "Verkleidung"
+          ]
+        },
+        {
+          "name": "Schäden dokumentieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Spuren",
+            "Raumbezug",
+            "Versicherung"
+          ]
+        },
+        {
+          "name": "Sanierung und Kosten",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Teilreparatur",
+            "Anstrich",
+            "Fachleistung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Deckenschäden nach Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Beschädigung erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Abgehängte Decke",
+            "Putz",
+            "Dämmung"
+          ]
+        },
+        {
+          "name": "Sicherheit und Beweise",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Herabfallende Teile",
+            "Fotos",
+            "Anzeige"
+          ]
+        },
+        {
+          "name": "Wiederherstellung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Teilöffnung",
+            "Befestigung",
+            "Fachprüfung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Bodenbelagschäden durch Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schadbild",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Parkett",
+            "Vinyl",
+            "Fliesen"
+          ]
+        },
+        {
+          "name": "Belege und Kosten",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Fläche",
+            "Material",
+            "Reparaturwert"
+          ]
+        },
+        {
+          "name": "Instandsetzung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schleifen",
+            "Austausch",
+            "Untergrund"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Treppenschäden durch Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schäden an Stufen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Holz",
+            "Stein",
+            "Kanten"
+          ]
+        },
+        {
+          "name": "Verkehrssicherheit",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Rutschgefahr",
+            "Sperrung",
+            "Handlauf"
+          ]
+        },
+        {
+          "name": "Reparatur und Ersatz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Belag",
+            "Stufe",
+            "Befestigung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Einbauküchenschäden",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schadenstellen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Front",
+            "Arbeitsplatte",
+            "Scharniere"
+          ]
+        },
+        {
+          "name": "Schäden dokumentieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Inventar",
+            "Fotos",
+            "Wert"
+          ]
+        },
+        {
+          "name": "Reparatur und Versicherung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ersatzteil",
+            "Teilsanierung",
+            "Entschädigung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Einbauschränke vor Vandalismus schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sicherung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schloss",
+            "Beschlag",
+            "Standort"
+          ]
+        },
+        {
+          "name": "Beschädigungen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Tür",
+            "Schublade",
+            "Korpus"
+          ]
+        },
+        {
+          "name": "Reparatur & Ersatz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Material",
+            "Befestigung",
+            "Wert"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Heizraum vor Vandalismus schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Zugang zum Heizraum",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Tür",
+            "Schlüssel",
+            "Alarm"
+          ]
+        },
+        {
+          "name": "Manipulationsgefahr",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ventile",
+            "Steuerung",
+            "Strom"
+          ]
+        },
+        {
+          "name": "Schaden und Wiederbetrieb",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Dokumentation",
+            "Fachprüfung",
+            "Absperren"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Heizkreisverteiler schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gehäuse und Abdeckung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schloss",
+            "Kennzeichnung",
+            "Standort"
+          ]
+        },
+        {
+          "name": "Manipulation erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ventilstellung",
+            "Leckage",
+            "Regler"
+          ]
+        },
+        {
+          "name": "Reparatur und Kontrolle",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Fachbetrieb",
+            "Test",
+            "Überwachung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Wasserabsperrung vor Manipulation schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Zugänge kontrollieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schacht",
+            "Raum",
+            "Schlüssel"
+          ]
+        },
+        {
+          "name": "Manipulationsspuren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ventil",
+            "Plombe",
+            "Feuchtigkeit"
+          ]
+        },
+        {
+          "name": "Abhilfe und Dokumentation",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Absperrtest",
+            "Fachfirma",
+            "Beweissicherung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Technikschränke schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gehäusesicherheit",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Verschluss",
+            "Material",
+            "Verankerung"
+          ]
+        },
+        {
+          "name": "Einblick und Zugang",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Standort",
+            "Berechtigung",
+            "Kontrolle"
+          ]
+        },
+        {
+          "name": "Schäden & Wartung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Sabotage",
+            "Feuchtigkeit",
+            "Reparatur"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "topic_page": "Siphon undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leckursachen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Dichtung",
+            "Überwurfmutter",
+            "Riss"
+          ]
+        },
+        {
+          "name": "Abfluss und Reinigung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Verstopfung",
+            "Ablagerung",
+            "Geruch"
+          ]
+        },
+        {
+          "name": "Reparatur & Ersatz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Bauteile",
+            "Montage",
+            "Dichtprüfung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "topic_page": "Waschbecken undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wasserwege",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Armatur",
+            "Ablauf",
+            "Beckenrand"
+          ]
+        },
+        {
+          "name": "Feuchtigkeit unter dem Becken",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Unterschrank",
+            "Wand",
+            "Boden"
+          ]
+        },
+        {
+          "name": "Dichten & Reparieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Fugen",
+            "Ablaufgarnitur",
+            "Keramik"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "topic_page": "Küchenspüle undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leckstellen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Siphon",
+            "Spülbecken",
+            "Fugen"
+          ]
+        },
+        {
+          "name": "Unterschrank schützen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Wassermelder",
+            "Schrankboden",
+            "Absperren"
+          ]
+        },
+        {
+          "name": "Instandsetzung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Dichtung",
+            "Anschluss",
+            "Fachhilfe"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "topic_page": "Küchenarmaturen undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Ursachen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Kartusche",
+            "Flexschlauch",
+            "Dichtung"
+          ]
+        },
+        {
+          "name": "Anschlüsse kontrollieren",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Eckventil",
+            "Schlauch",
+            "Korrosion"
+          ]
+        },
+        {
+          "name": "Reparatur & Kauf",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Ersatzteile",
+            "Armaturenart",
+            "Montage"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "topic_page": "Hecken bei Frost",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Frostschäden erkennen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Blatt",
+            "Rinde",
+            "Trieb"
+          ]
+        },
+        {
+          "name": "Schutzmaßnahmen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Vlies",
+            "Windschutz",
+            "Standort"
+          ]
+        },
+        {
+          "name": "Pflege nach Frost",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Schnitt",
+            "Bewässerung",
+            "Regeneration"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "topic_page": "Sträucher bei Frost",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sorten und Empfindlichkeit",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Immergrüne",
+            "Blüte",
+            "Knospen"
+          ]
+        },
+        {
+          "name": "Winterschutz",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Wurzelschicht",
+            "Abdeckung",
+            "Standort"
+          ]
+        },
+        {
+          "name": "Schäden und Wiederaufbau",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Triebkontrolle",
+            "Schnitt",
+            "Pflege"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Elektrische Türöffner",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Ansteuerung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Klingel",
+            "Relais",
+            "Netzteil"
+          ]
+        },
+        {
+          "name": "Störungen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Türfalle",
+            "Kabel",
+            "Spannung"
+          ]
+        },
+        {
+          "name": "Sicherheit und Austausch",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Freigabe",
+            "Notbetrieb",
+            "Kompatibilität"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Elektronische Türschlösser",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Berechtigungen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Code",
+            "App",
+            "Transponder"
+          ]
+        },
+        {
+          "name": "Ausfall und Batterien",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Notöffnung",
+            "Stromversorgung",
+            "Offline"
+          ]
+        },
+        {
+          "name": "Schutz und Nachrüstung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Verriegelung",
+            "Updates",
+            "Montage"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Ladenlokal bei Hochwasser",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gebäudezugänge",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Türschwelle",
+            "Schaufenster",
+            "Schutzbarriere"
+          ]
+        },
+        {
+          "name": "Inventar und Strom",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Warenlager",
+            "Steckdosen",
+            "Maschinen"
+          ]
+        },
+        {
+          "name": "Räumung & Neustart",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Warnplan",
+            "Reinigung",
+            "Schadensmeldung"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Friseursalon bei Hochwasser",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wasser in Salonräumen",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Waschplätze",
+            "Boden",
+            "Leitungen"
+          ]
+        },
+        {
+          "name": "Betriebsmittel sichern",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Elektrogeräte",
+            "Chemikalien",
+            "Terminplanung"
+          ]
+        },
+        {
+          "name": "Wiedereröffnung",
+          "capacity_min": 3,
+          "capacity_signals": [
+            "Desinfektion",
+            "Trocknung",
+            "Dokumentation"
+          ]
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    }
+  ]
+}
