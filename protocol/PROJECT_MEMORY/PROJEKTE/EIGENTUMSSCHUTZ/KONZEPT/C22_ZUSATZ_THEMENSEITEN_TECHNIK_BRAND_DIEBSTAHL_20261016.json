@@ -1,0 +1,1456 @@
+{
+  "schema": "HB_C22_ADDITIONAL_CURATED_TOPIC_PAGES_BATCH_B",
+  "date": "2026-10-16",
+  "status": "CONCEPT_ONLY_NOT_IMPORTABLE",
+  "source": "V99/V918 routing gaps; existing 285 unchanged",
+  "topic_count": 38,
+  "article_category_count": 114,
+  "capacity_signals_count": 342,
+  "all_article_categories_topic_bound": true,
+  "topics": [
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "topic_page": "PV-Module & Strings",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leistung & Fehlersuche",
+          "capacity_signals": [
+            "Verschattung",
+            "Modulabweichung",
+            "Stringspannung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kabel & Steckverbinder",
+          "capacity_signals": [
+            "Kontakt",
+            "Witterung",
+            "Alterung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Service",
+          "capacity_signals": [
+            "Monitoring",
+            "Messung",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "topic_page": "PV-Monitoring",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Ertragsdaten verstehen",
+          "capacity_signals": [
+            "Tagesprofil",
+            "Abweichungen",
+            "Referenzwerte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Verbindung & Datenübertragung",
+          "capacity_signals": [
+            "Netzwerk",
+            "Datenlogger",
+            "Cloud"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Warnungen & Reaktion",
+          "capacity_signals": [
+            "Alarmgrenze",
+            "Ausfall",
+            "Fernzugriff"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "topic_page": "Balkonkraftwerk",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Betriebsstörungen",
+          "capacity_signals": [
+            "Wechselrichter",
+            "Netzanschluss",
+            "Statusanzeige"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Montage & Wetter",
+          "capacity_signals": [
+            "Modulbefestigung",
+            "Kabelweg",
+            "Schutzklasse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Überwachung & Prüfung",
+          "capacity_signals": [
+            "Ertragsanzeige",
+            "Sicherheitsprüfung",
+            "Fehlersuche"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "topic_page": "PV-Ersatzstromversorgung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Inselfunktion und Grenzen",
+          "capacity_signals": [
+            "Umschaltung",
+            "Netztrennung",
+            "Leistung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Speicher und Geräte",
+          "capacity_signals": [
+            "Kapazität",
+            "Prioritäten",
+            "Anlaufstrom"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Betrieb bei Ausfall",
+          "capacity_signals": [
+            "Vorbereitung",
+            "Sicherheit",
+            "Rückschaltung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "topic_page": "Heimnetzwerk und Router",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Netzstörungen",
+          "capacity_signals": [
+            "DNS",
+            "WLAN",
+            "Internetprovider"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Heimnetz-Geräte",
+          "capacity_signals": [
+            "Switch",
+            "Repeater",
+            "LAN"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diagnose & Wiederanlauf",
+          "capacity_signals": [
+            "Statusanzeigen",
+            "Neustart",
+            "Backup"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "topic_page": "Smart-Home-Zentrale",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gateway-Ausfälle",
+          "capacity_signals": [
+            "Strom",
+            "Software",
+            "Funkmodule"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Geräteverbindungen",
+          "capacity_signals": [
+            "Pairing",
+            "Protokolle",
+            "Reichweite"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ausfallsicherung",
+          "capacity_signals": [
+            "lokale Routinen",
+            "Backup",
+            "Updates"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "topic_page": "Durchlauferhitzer",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Warmwasser-Ausfall",
+          "capacity_signals": [
+            "Fehleranzeige",
+            "Durchfluss",
+            "Strom"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Lebensdauer",
+          "capacity_signals": [
+            "Verkalkung",
+            "Wasserfilter",
+            "Prüfung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ersatz & Auswahl",
+          "capacity_signals": [
+            "Leistung",
+            "Anschluss",
+            "Fachinstallation"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "topic_page": "Warmwasserspeicher",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Temperatur & Regelung",
+          "capacity_signals": [
+            "Fühler",
+            "Thermostat",
+            "Heizstab"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leckagen & Korrosion",
+          "capacity_signals": [
+            "Behälter",
+            "Anode",
+            "Anschlüsse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung und Austausch",
+          "capacity_signals": [
+            "Entkalkung",
+            "Energiebedarf",
+            "Installateur"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "topic_page": "Zirkulationspumpe",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Pumpenstörungen",
+          "capacity_signals": [
+            "Blockade",
+            "Strom",
+            "Motor"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Betrieb & Steuerung",
+          "capacity_signals": [
+            "Zeitschaltung",
+            "Temperatur",
+            "Verbrauch"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Tausch & Wartung",
+          "capacity_signals": [
+            "Entlüften",
+            "Ersatzteil",
+            "Fachmontage"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "topic_page": "Gartenpumpe",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Druckprobleme",
+          "capacity_signals": [
+            "Saughöhe",
+            "Luft",
+            "Rohrdurchmesser"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Betrieb",
+          "capacity_signals": [
+            "Trockenlaufschutz",
+            "Vorfilter",
+            "Abschaltung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Winterlager",
+          "capacity_signals": [
+            "Entleerung",
+            "Reinigung",
+            "Ersatz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "topic_page": "Teichpumpe",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Förderleistung",
+          "capacity_signals": [
+            "Teichgröße",
+            "Filter",
+            "Wasserspiel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fehler & Schutz",
+          "capacity_signals": [
+            "Blockade",
+            "Elektrik",
+            "Trockenlauf"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Winter",
+          "capacity_signals": [
+            "Reinigung",
+            "Einlagerung",
+            "Ersatz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Drehtorantrieb",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Antriebsmechanik",
+          "capacity_signals": [
+            "Armlänge",
+            "Scharnier",
+            "Anschlag"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Steuerung und Sensoren",
+          "capacity_signals": [
+            "Funk",
+            "Lichtschranke",
+            "Endlage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Defekte & Notbetrieb",
+          "capacity_signals": [
+            "Stromversorgung",
+            "Entriegelung",
+            "Wartung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Zufahrtstor-Antrieb",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sensorsicherheit",
+          "capacity_signals": [
+            "Lichtschranke",
+            "Kontaktleiste",
+            "Abschaltung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Antrieb & Mechanik",
+          "capacity_signals": [
+            "Torlast",
+            "Schiene",
+            "Getriebe"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Ausfall",
+          "capacity_signals": [
+            "Endschalter",
+            "Fernbedienung",
+            "Notentriegelung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Hoftor-Funksteuerung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sender & Reichweite",
+          "capacity_signals": [
+            "Handsender",
+            "Antenne",
+            "Funkstörung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Empfänger & Anlernen",
+          "capacity_signals": [
+            "Frequenz",
+            "Speicher",
+            "Pairing"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sicherheit & Ersatz",
+          "capacity_signals": [
+            "Missbrauch",
+            "Kompatibilität",
+            "Notbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Gegensprechanlage",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Tonprobleme",
+          "capacity_signals": [
+            "Mikrofon",
+            "Lautsprecher",
+            "Leitung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Türkommunikation",
+          "capacity_signals": [
+            "Taster",
+            "Rufeinheit",
+            "Wohnstation"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Störungen & Ersatz",
+          "capacity_signals": [
+            "Spannungsversorgung",
+            "Verkabelung",
+            "Nachrüstung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "topic_page": "Smarte Türsteuerung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Vernetzung & Fernzugriff",
+          "capacity_signals": [
+            "WLAN",
+            "App",
+            "Berechtigung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ausfälle & Notbetrieb",
+          "capacity_signals": [
+            "Batterie",
+            "Mechanik",
+            "Offline-Zugang"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sicherer Betrieb",
+          "capacity_signals": [
+            "Updates",
+            "Zugriffsprotokoll",
+            "Freigaben"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschutz an Leitungsdurchführungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Durchbrucharten",
+          "capacity_signals": [
+            "Decke",
+            "Wand",
+            "Rohr"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abschottung & Materialien",
+          "capacity_signals": [
+            "Kabelabschottung",
+            "Brandschutzmanschette",
+            "Montage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kontrolle & Nachrüstung",
+          "capacity_signals": [
+            "Dokumentation",
+            "Beschädigung",
+            "Fachprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschutzbekleidungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Bauteile & Systeme",
+          "capacity_signals": [
+            "Träger",
+            "Decke",
+            "Schacht"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Materialwahl",
+          "capacity_signals": [
+            "Platten",
+            "Putz",
+            "Bekleidung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung und Schäden",
+          "capacity_signals": [
+            "Risse",
+            "Öffnungen",
+            "Reparatur"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschutz in Abstellräumen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Brandlasten",
+          "capacity_signals": [
+            "Kartons",
+            "Chemikalien",
+            "Lagerdichte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Elektrische Gefahren",
+          "capacity_signals": [
+            "Mehrfachsteckdosen",
+            "Ladegeräte",
+            "Beleuchtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorbeugung und Kontrolle",
+          "capacity_signals": [
+            "Rauchwarnung",
+            "Abstände",
+            "Ordnung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Privatwagen-Brandrisiken",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Feuerquellen erkennen",
+          "capacity_signals": [
+            "Kraftstoff",
+            "Elektrik",
+            "Motorraum"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz beim Abstellen",
+          "capacity_signals": [
+            "Garage",
+            "Abstand",
+            "Leckkontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Verhalten nach Brand",
+          "capacity_signals": [
+            "Absicherung",
+            "Schadenbild",
+            "Meldung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Elektroauto-Brandschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Hochvoltrisiken",
+          "capacity_signals": [
+            "Beschädigung",
+            "Ladevorgang",
+            "Fehlermeldung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abstellplatz & Ladeumfeld",
+          "capacity_signals": [
+            "Brandschutzabstand",
+            "Wallbox",
+            "Garage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schaden und Notfall",
+          "capacity_signals": [
+            "Abschleppen",
+            "Abstand",
+            "Fachprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschutz im Freizeitboot",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Alarm und Flucht",
+          "capacity_signals": [
+            "Rauchmeldung",
+            "Ausgang",
+            "Rettungsweg"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Brandquellen an Bord",
+          "capacity_signals": [
+            "Motor",
+            "Gasanlage",
+            "Elektrik"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Löschausrüstung & Übung",
+          "capacity_signals": [
+            "Löschmittel",
+            "Einweisung",
+            "Notruf"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Rußschäden am Wohnhaus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Belastung einschätzen",
+          "capacity_signals": [
+            "Rußfilm",
+            "Geruch",
+            "Rauchweg"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reinigung & Sicherheit",
+          "capacity_signals": [
+            "Schutzkleidung",
+            "Fachfirma",
+            "Oberflächen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Folgeschäden und Nachweis",
+          "capacity_signals": [
+            "Elektrotechnik",
+            "Schimmel",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Löschwasserschäden am Haus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Feuchtefolgen",
+          "capacity_signals": [
+            "Decke",
+            "Boden",
+            "Dämmung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Trocknung & Kontrolle",
+          "capacity_signals": [
+            "Messung",
+            "Schadenbereich",
+            "Schimmelrisiko"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung und Versicherung",
+          "capacity_signals": [
+            "Entsorgung",
+            "Nachweis",
+            "Kosten"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschaden am Wohnhaus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gebäude sichern",
+          "capacity_signals": [
+            "Statik",
+            "Zutritt",
+            "Notabdeckung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden dokumentieren",
+          "capacity_signals": [
+            "Fotos",
+            "Inventar",
+            "Versicherer"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wiederherstellung",
+          "capacity_signals": [
+            "Sanierungsplanung",
+            "Fachgutachten",
+            "Trocknung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Vegetationsbrand am Grundstück",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Brandlast im Garten",
+          "capacity_signals": [
+            "Trockenholz",
+            "Laub",
+            "Bewuchs"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz der Gebäude",
+          "capacity_signals": [
+            "Abstände",
+            "Grenzbereich",
+            "Brandschneise"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorsorge & Verhalten",
+          "capacity_signals": [
+            "Wetterwarnung",
+            "Löschzugang",
+            "Feuerwehr"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Brandschutz gegen Brandüberschlag",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Nachbarbrand-Risiken",
+          "capacity_signals": [
+            "Grenzabstand",
+            "Fenster",
+            "Dachkante"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bauteilschutz",
+          "capacity_signals": [
+            "Fassade",
+            "Dach",
+            "Öffnungen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorbereitung und Folgen",
+          "capacity_signals": [
+            "Zugang",
+            "Sicherung",
+            "Schadenprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic_page": "Funkenflug an Nebengebäuden",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Brandgefährdete Bauteile",
+          "capacity_signals": [
+            "Dachhaut",
+            "Holzfassade",
+            "Laub"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Abstände",
+          "capacity_signals": [
+            "Carport",
+            "Gartenhaus",
+            "Brandlast"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kontrolle nach Vorfall",
+          "capacity_signals": [
+            "Glutnester",
+            "Dachkontrolle",
+            "Fachhilfe"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "topic_page": "PV-Kabel & Steckverbinder",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Brandrisiko an Verbindern",
+          "capacity_signals": [
+            "Kontaktproblem",
+            "Hitze",
+            "Feuchte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leitungsführung und Schutz",
+          "capacity_signals": [
+            "Kabelscheuerung",
+            "UV",
+            "Steckverbindung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Prüfung & Sanierung",
+          "capacity_signals": [
+            "Messung",
+            "Komponentenersatz",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "topic_page": "Wechselrichter-Brandschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Temperatur & Standort",
+          "capacity_signals": [
+            "Abstände",
+            "Belüftung",
+            "Wärme"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fehler erkennen",
+          "capacity_signals": [
+            "Schmorgeruch",
+            "Anzeige",
+            "Abschaltung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Maßnahmen",
+          "capacity_signals": [
+            "Staub",
+            "Prüfung",
+            "Ersatz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "topic_page": "Wallbox-Brandschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Ladegerät & Anschlüsse",
+          "capacity_signals": [
+            "Zuleitung",
+            "Stecker",
+            "Leistung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Warnzeichen erkennen",
+          "capacity_signals": [
+            "Erwärmung",
+            "Fehleranzeige",
+            "Gehäuse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kontrolle & Abhilfe",
+          "capacity_signals": [
+            "Lastmanagement",
+            "Prüfung",
+            "Fachhandwerk"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "topic_page": "Felgendiebstahl",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Radsicherung",
+          "capacity_signals": [
+            "Felgenschloss",
+            "Befestigung",
+            "Fahrzeugtyp"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Stellplatz & Kontrolle",
+          "capacity_signals": [
+            "Parkort",
+            "Beleuchtung",
+            "Kamera"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diebstahl und Ersatz",
+          "capacity_signals": [
+            "Spuren",
+            "Anzeige",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "topic_page": "Kennzeichendiebstahl",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Kennzeichen sichern",
+          "capacity_signals": [
+            "Verschraubung",
+            "Halterung",
+            "Parkplatz"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Missbrauch erkennen",
+          "capacity_signals": [
+            "Meldung",
+            "Dokumente",
+            "Behörden"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ersatz & Versicherung",
+          "capacity_signals": [
+            "Neuzulassung",
+            "Nachweis",
+            "Kosten"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "topic_page": "Elektromobil-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Abstellort & Schloss",
+          "capacity_signals": [
+            "Seniorenscooter",
+            "Gehhilfe",
+            "Außenlagerung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ortung & Kennzeichnung",
+          "capacity_signals": [
+            "Seriennummer",
+            "Tracker",
+            "Eigentumsnachweis"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diebstahlmeldung",
+          "capacity_signals": [
+            "Polizei",
+            "Versicherung",
+            "Ersatz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic_page": "SB-Verkaufsstand-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Kasse & Waren",
+          "capacity_signals": [
+            "Barfach",
+            "Bestandskontrolle",
+            "Bezahlsystem"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Standplatz absichern",
+          "capacity_signals": [
+            "Verschluss",
+            "Anbindung",
+            "Beleuchtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorfall und Dokumentation",
+          "capacity_signals": [
+            "Inventur",
+            "Kamera",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic_page": "Warenautomat-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Gehäuse & Schloss",
+          "capacity_signals": [
+            "Verriegelung",
+            "Aufstellung",
+            "Verankerung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bargeld und Zugriffe",
+          "capacity_signals": [
+            "Geldkassette",
+            "Service",
+            "Alarm"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Manipulation erkennen",
+          "capacity_signals": [
+            "Öffnungsspuren",
+            "Sabotage",
+            "Meldung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic_page": "Abholbox-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Zugang & Berechtigung",
+          "capacity_signals": [
+            "PIN",
+            "Schloss",
+            "Abholcode"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Standort und Überwachung",
+          "capacity_signals": [
+            "Beleuchtung",
+            "Kamera",
+            "Aufstellung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Manipulation & Service",
+          "capacity_signals": [
+            "Türkontakt",
+            "Vorfall",
+            "Schlüssel"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic_page": "Sicherungskasten vor Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Zugang & Gehäuse",
+          "capacity_signals": [
+            "Verschluss",
+            "Standort",
+            "Abdeckung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Manipulationsspuren",
+          "capacity_signals": [
+            "Siegel",
+            "Schalter",
+            "Kabel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Störung & Dokumentation",
+          "capacity_signals": [
+            "Stromausfall",
+            "Fotobeweis",
+            "Elektriker"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    }
+  ]
+}
