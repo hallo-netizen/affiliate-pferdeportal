@@ -3,137 +3,78 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.664 LOCALPASS / MEGA-MENÜ + HAUPTWELTKOPF + 65 HERO→PREVIEW / LIVE READBACK OFFEN**
+STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 LIVE VERWORFEN / 1.50.668 REGISTRY-FUNDAMENT LOCAL HARD PASS / STRUKTUR-LIVEPASS ZUERST**
 
-## Aktueller belastbarer Stand
-- Affiliate Portal Template Kit **1.50.650** bleibt der eingefrorene Grundstand.
-- Die 30 zuvor verworfenen Kategorien sind nach dem neuen Einzelquellen-Konzept jetzt **30/30 vollständig**.
-- Für jede der 30 Kategorien existiert genau eine eigenständige neue Quelle.
-- Alle 30 Quellen wurden als Vollbild sowie im realen Hero-Crop **600×320** und Preview-Crop **200×107** visuell geprüft.
-- Ergebnis: **30/30 VISUAL PASS**.
-- keine Collage-/Rasterquelle im Release;
-- keine exakten Bilddubletten;
-- Kollisionspaare fachlich getrennt;
-- kein Upscaling.
+## Belastbarer Grundstand
 
-## 30er-Neubild-Basis – erhalten, aber nicht mehr aktueller Installationskandidat
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
+Affiliate Portal Template Kit **1.50.650** bleibt die saubere technische Ausgangsbasis inklusive der bestätigten Bildreparaturen.
 
-SHA-256:
-`cbc9789925660ada90a32e1d9726c4b6086c9d8308a8d097009573afab66ddc8`
+Die Zwischenstände **1.50.664, 1.50.665, 1.50.666 und 1.50.667 sind nicht freigegeben**:
+- Mega-Menü live falsch;
+- Kategorietext live nicht korrekt;
+- Strukturquelle im Design grundlegend falsch;
+- deshalb nicht weiterverwenden.
 
-Persistiert:
-`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
+## Gefundene Systemursache
 
-Zusätzlich gesichert:
-`/hobby rausch/releases/HOBBY_DEPOT_NEW_IMAGES_30_STAGE_FINAL.zip`
-SHA-256:
-`12d50d3f9bfc7e62b4f7f04a140c3e07e8e5d7dfdd49e1974187535acd788545`
+1.50.650 las Hobby-Unterseiten mit rohem WordPress-`get_pages()`.
+Folgen:
+- alte/fremde WordPress-Seiten konnten in Karten/Navigation erscheinen;
+- echte `category`-Kinder terminaler Hobbyseiten waren unsichtbar;
+- die zentrale HD-001/HD-004-Struktur wurde umgangen.
 
-## Lokale 1:1-Simulation auf echter 1.50.650-Basis
-PASS:
-- Dateien vorher/nachher: **981 / 981**;
-- exakt **60** Bilddateien geändert;
-- **0** Dateien hinzugefügt;
-- **0** Dateien entfernt;
-- **0** unerwartete Änderungen;
-- 30 Heroes exakt **600×320**;
-- 30 Previews exakt **200×107**;
-- `hub2-image-map.json` byte-identisch;
-- **55/55 PHP-Dateien byte-identisch**;
-- **55/55 PHP-Syntax PASS**;
-- ZIP-Roundtrip PASS;
-- Negativsimulation fehlendes Ziel erkannt;
-- Negativsimulation Mappingänderung erkannt.
+Zusätzlich existierte ein Weltbild-Fallback, der bei fehlendem exaktem Kartenbild ein thematisch fremdes Bild liefern konnte.
 
-Nachweis:
-`NEW_CONCEPT_IMAGE_FINAL_QA_30OF30_20261016.md`
+## Registry-Fundament 1.50.668 – LOCAL HARD PASS
 
-## Harte Abgrenzung
-Nicht verwenden:
-- 1.50.660;
-- 1.50.661;
-- 1.50.662;
-- 1.50.663;
-- die verworfene Collage-/Raster-Generierung.
-
-Nicht geändert:
-- PHP;
-- Routing;
-- Templates;
-- CSS;
-- Mapping;
-- Kartenlogik;
-- Architektur/System.
-
-## Release-Einordnung
-Der oben genannte ZIP ist für den **30-Kategorien-Image-only-Austausch auf 1.50.650** visuell und technisch PASS.
-Das ist keine Aussage, dass sonstige unabhängige globale Karten-/Design-Backlogs abgeschlossen sind.
-
-## HRD-SCOPE13 Reparatur
-Verbindliche Sperre: ausschließlich 13 gemeldete Kategorien durften angefasst werden. Alle anderen Kategorien bleiben unverändert.
-
-Ergebnis:
-- 13/13 Kategorien repariert;
-- vor Neugenerierung alte Bilder geprüft;
-- **keine neue Bildgeneration notwendig**;
-- 7 gute frühere Vollquellen wiederhergestellt;
-- 2 gezielt auf bessere 1.50.625-Bilder zurückgesetzt;
-- 4 gezielt auf bessere WIP-1.50.653-Bilder zurückgesetzt;
-- keine Collage als Releasequelle;
-- exakt 26 Bilddateien geändert;
-- 0 sonstige Änderungen;
-- 30er-Neubildbestand vollständig byte-identisch erhalten;
-- Mapping byte-identisch;
-- 55/55 PHP byte-identisch + Syntax PASS;
-- ZIP-Roundtrip PASS.
-
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
-SHA-256:
-`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
-
-Nachweis:
-`HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
-
-## HRD-SCOPE13 – abgeschlossene alte Teilsperre
-Für die damalige HRD-SCOPE13-Reparatur galt ausschließlich die 13er-Sperre. Diese Reparatur bleibt unverändert enthalten.
-
-Der neue ausdrückliche Auftrag vom 2026-10-16 erweitert den zulässigen Scope **nur für die Kategorievorschauen**: alle 65 Preview-Dateien dürfen aus ihrem jeweils aktuellen Hero neu abgeleitet werden. Die 65 Hero-Dateien selbst bleiben unverändert.
-
-## Reparaturkandidat 1.50.664 – Menü / Hauptweltkopf / Hero→Preview
-Auf Basis des belastbaren 1.50.650-HRD-SCOPE13-Standes wurde ein eng begrenzter neuer Kandidat gebaut:
-
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
+Artefakt:
+`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_FOUNDATION_LOCALPASS.zip`
 
 SHA-256:
-`73dfdc40792b1d550aaff6343aab9e9a4ca713988e0aa0c1957825b42ed4e2f9`
+`0fb575aeddd19aac285188507d0753eaa554b558183d6686c2a900322c865a5a`
 
-Geändert:
-- Mega-Menü: gemeinsame sichtbare Zahl aus kleinstem Direktbestand; aktuell 5; größere Welten danach `Mehr Kategorien`; genau eine zusätzliche Orientierungsebene kompakt sichtbar;
-- Hauptwelt-Hero/Textkopf: Desktop Text/Bild nebeneinander; <=1100 px sauber gestapelt; Mobil kompakt;
-- 65/65 Kategorievorschauen neu direkt aus dem jeweils aktuellen Hub2-Hero abgeleitet.
+QA:
+`/hobby rausch/releases/HOBBY_DEPOT_REGISTRY_FOUNDATION_150668_QA_20261016.json`
 
-Nicht geändert:
-- Kategorienstruktur;
-- Hero-Bilder selbst;
-- Hub2-Bildmapping;
-- redaktionelle Texte;
-- Affiliate-/Routing-/Kartenlogik außerhalb dieses Darstellungsdeltas.
-
-Local QA:
-- Ausgang 981 Dateien → Kandidat 984 Dateien;
-- 65 Preview-WEBP geändert;
-- 0 Hero-WEBP geändert;
-- Hauptplugin-Datei geändert;
+Exaktes Delta zu 1.50.650:
+- 981 → 984 Dateien;
 - 3 neue versionsgebundene PHP-Dateien;
-- PHP-Syntax 58/58 PASS;
-- 65/65 Previews exakt 200×107;
-- Hero→Preview Bildkorrelation min. 0,988 / Ø 0,996;
-- Mega-Menü Desktop/Tablet: 8/8 gleiche Grundhöhe mit 5 sichtbaren Gruppen;
-- ZIP-Integrität und Roundtrip PASS.
+- Hauptplugin geändert;
+- 0 Dateien entfernt;
+- 0 Bilddateien verändert;
+- PHP 58/58 PASS;
+- ZIP-Roundtrip 984/984 byte-identisch.
 
-Kein Live-PASS.
+Technik:
+- HD-004 Registry ist einzige CORE-Strukturquelle;
+- keine rohen `get_pages()`-Kinder mehr für Hobby-Navigation/Karten;
+- Page- und Category-Kinder getrennt korrekt;
+- letzte Ebene unter terminalen Hobbyseiten wird sichtbar;
+- tiefe Hub2-Ebene = Icon/Text statt Fotoflut;
+- Weltbild-Zufallsfallback entfernt;
+- auch Term-Kinder lesen Registry;
+- fehlt Registry: fail-closed, **kein stiller Rückfall auf 1.50.650**.
+
+## Positiv-/Negativsimulation
+
+Synthetischer WordPress-Bestand enthält absichtlich falsches Trainspotting unter Messen & Analysieren.
+
+PASS:
+- rohes WordPress sieht Trainspotting;
+- Registry-Renderer blendet es dort aus;
+- Messen & Analysieren = Bodenanalyse / Elektrochemie als Hobby / Spektroskopie / Wasseranalyse;
+- Ameisenhaltung = 7 echte Inhaltskategorien;
+- Spotting & Verkehr = Car / Plane / Ship / Trainspotting;
+- 0 Fotokarten auf der tiefen Ebene;
+- fehlende Registry → 0 erratene Kinder.
+
+Browser mit echtem Plugin-CSS:
+1440 / 1024 / 768 / 390 px PASS, 0 horizontaler Overflow.
+
+## Wichtig
+
+1.50.668 repariert bewusst **noch nicht** das gescheiterte Mega-Menü oder den Kategorietext. Erst Struktur-Livepass, dann Design Ebene für Ebene.
 
 ## EXAKT EINE NEXT ACTION
-**Kandidaten 1.50.664 installieren und live genau diese drei Punkte prüfen: Mega-Menü, Hauptwelt-Hero/Textkopf über Desktop/Tablet/Mobil sowie Hero→Kategorievorschau. Danach nächste Designebene festlegen.**
+
+**Zuerst V3-Struktur über HD-001 echten WordPress-Dry-Run und anschließend kontrollierten Sync/Readback freigeben. Danach HD-004 + 1.50.668 live als Fundament prüfen. Erst danach Mega-Menü und Kategorietext neu aufbauen.**
