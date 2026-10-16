@@ -62,6 +62,9 @@ Wichtig: Bei allgemeingültigen Plugins bleibt die Hauptquelle unter `ALLGEMEING
 Routingautorität:
 `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`
 
+Zulässige aktive Branches / Branch-Quarantäne:
+`protocol/PROJECT_MEMORY/ACTIVE_BRANCHES.json`
+
 HARD RULE:
 `START_HERE` enthält keinen aktuellen Fachstatus, Branch/Head, Blocker oder NEXT ACTION.
 
