@@ -26,8 +26,8 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 7,
-    "bound_new_reference": 13,
+    "ready_source": 9,
+    "bound_new_reference": 11,
     "confirmed_new_batch_no_exact_motif": 6,
     "unrecovered_new_binding": 4
   },
@@ -113,9 +113,9 @@
     },
     {
       "category": "Holz",
-      "status": "bound_new_reference",
-      "reference": "Kreativwelten: Hobby und Handwerk.png / R2C3",
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Neue Einzelquelle Holz 2026-10-16",
+      "source_sha256": "a2e52ddf8656c291b7d50adaa57ae220c2809abc0fdcf2957fcea090a371716f",
       "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/holz-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/holz-v150634.webp",
       "collision_peers": [
@@ -124,13 +124,14 @@
       "reference_file_name": "Kreativwelten: Hobby und Handwerk.png",
       "reference_cell": "R2C3",
       "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e",
-      "stage_slug": "holz"
+      "stage_slug": "holz",
+      "source_file_id": "file_00000000004881f4a8a249cb6a2e128f"
     },
     {
       "category": "Leder",
-      "status": "bound_new_reference",
-      "reference": "Kreativwelten: Hobby und Handwerk.png / R2C4",
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Neue Einzelquelle Leder 2026-10-16",
+      "source_sha256": "a6c02784261a4c93ee6062fd41107f73685fffe502c2139b9990182204a9f8b0",
       "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/leder-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/leder-v150634.webp",
       "collision_peers": [
@@ -139,7 +140,8 @@
       "reference_file_name": "Kreativwelten: Hobby und Handwerk.png",
       "reference_cell": "R2C4",
       "reference_file_id": "file_00000000f3dc81f5a996ca4c06d6051e",
-      "stage_slug": "leder"
+      "stage_slug": "leder",
+      "source_file_id": "file_00000000f77c81f48bb12d69389001e1"
     },
     {
       "category": "Heimwerken",
@@ -459,6 +461,8 @@
     "confirmed_batch_has_no_fabricated_reference": true,
     "stage_slugs_unique": true,
     "stage_slugs_complete": true,
-    "all_30_targets_exist_on_150650_base": true
+    "all_30_targets_exist_on_150650_base": true,
+    "ready_source_count_is_9": true,
+    "status_sum_is_30": true
   }
 }
