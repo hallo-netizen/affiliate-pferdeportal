@@ -26,9 +26,9 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 20,
+    "ready_source": 21,
     "bound_new_reference": 1,
-    "confirmed_new_batch_no_exact_motif": 5,
+    "confirmed_new_batch_no_exact_motif": 4,
     "unrecovered_new_binding": 4
   },
   "categories": [
@@ -365,9 +365,9 @@
     },
     {
       "category": "Wind & Drachen",
-      "status": "confirmed_new_batch_no_exact_motif",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Neue Einzelquelle Wind & Drachen 2026-10-16",
+      "source_sha256": "855ae97564ddd1249ab67c230cd5a7d221df1171003dc9f77c35914ccfd0750c",
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150634.webp",
       "collision_peers": [
@@ -376,7 +376,8 @@
       "reference_file_id": null,
       "reference_file_name": null,
       "reference_cell": null,
-      "stage_slug": "wind-und-drachen"
+      "stage_slug": "wind-und-drachen",
+      "source_file_id": "file_000000004f7481f486d4aa1e00f5eb6b"
     },
     {
       "category": "Klettern & Seil",
@@ -476,6 +477,7 @@
     "ready_source_count_is_9": true,
     "status_sum_is_30": true,
     "ready_source_count_is_19": true,
-    "ready_source_count_is_20": true
+    "ready_source_count_is_20": true,
+    "ready_source_count_is_21": true
   }
 }
