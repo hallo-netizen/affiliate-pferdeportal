@@ -52,7 +52,7 @@ FASSUNG: 4.4 / 2026-10-16
 - keine wiederverwendeten Szenenfamilien;
 - kein Rückfall auf alte mehrfach verwendete Featured Images;
 - kein Passepartout/Bild-im-Bild.
-- Stand 1.50.634 wird vorerst akzeptiert und nicht weiter verändert.
+- Der Kartenrahmen und die Darstellungslogik des akzeptierten 1.50.634-Stands bleiben erhalten; die 200×107-Bilddatei darf und soll jedoch aus dem jeweils aktuellen Hero derselben Kategorie neu abgeleitet werden.
 - Für Hub2 gilt ab WIP 1.50.653 verbindlich: **Kategorievorschau und zugehöriges Hub2-Hero stammen aus derselben Bildquelle**; aus der Heroquelle wird zusätzlich die 200×107-Kategorievorschau abgeleitet. Keine zweite unabhängige Bildzuordnung für dieselbe Kategorie.
 
 ## Kategorieebene 2 / Hub2
