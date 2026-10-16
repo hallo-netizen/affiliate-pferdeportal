@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 30/30 NEUE EINZELQUELLEN VISUAL PASS / IMAGE-ONLY-KANDIDAT TECHNISCH PASS / 1.50.660–1.50.663 NICHT VERWENDEN**
+STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 30ER-BILDSTAND ERHALTEN / HRD-SCOPE13 REPARATUR 13/13 LOCALPASS / ALLE ANDEREN KATEGORIEN GESPERRT**
 
 ## Aktueller belastbarer Stand
 - Affiliate Portal Template Kit **1.50.650** bleibt der eingefrorene Grundstand.
@@ -72,3 +72,36 @@ Das ist keine Aussage, dass sonstige unabhängige globale Karten-/Design-Backlog
 
 ## EXAKT EINE NEXT ACTION
 **Image-only-Kandidat 1.50.650 mit den 30 neuen Bildpaaren installieren und danach Live-Readback der 30 betroffenen Kategorien gegen den lokal geprüften Stand durchführen.**
+
+
+## HRD-SCOPE13 Reparatur
+Verbindliche Sperre: ausschließlich 13 gemeldete Kategorien durften angefasst werden. Alle anderen Kategorien bleiben unverändert.
+
+Ergebnis:
+- 13/13 Kategorien repariert;
+- vor Neugenerierung alte Bilder geprüft;
+- **keine neue Bildgeneration notwendig**;
+- 7 gute frühere Vollquellen wiederhergestellt;
+- 2 gezielt auf bessere 1.50.625-Bilder zurückgesetzt;
+- 4 gezielt auf bessere WIP-1.50.653-Bilder zurückgesetzt;
+- keine Collage als Releasequelle;
+- exakt 26 Bilddateien geändert;
+- 0 sonstige Änderungen;
+- 30er-Neubildbestand vollständig byte-identisch erhalten;
+- Mapping byte-identisch;
+- 55/55 PHP byte-identisch + Syntax PASS;
+- ZIP-Roundtrip PASS.
+
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
+SHA-256:
+`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
+
+Nachweis:
+`HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
+
+## HRD HARD RULE
+**Nur die 13 Kategorien aus HRD_SCOPE13_IMAGE_REPAIR_20261016.md dürfen bei dieser Reparatur geändert werden. Alle anderen Kategorien FINGER WEG.**
+
+## EXAKT EINE NEXT ACTION – HRD
+**Live-Readback ausschließlich der 13 reparierten Kategorien. Nur bei einem konkret sichtbaren Restfehler genau diese eine betroffene Kategorie ändern; alle übrigen Kategorien bleiben gesperrt.**
