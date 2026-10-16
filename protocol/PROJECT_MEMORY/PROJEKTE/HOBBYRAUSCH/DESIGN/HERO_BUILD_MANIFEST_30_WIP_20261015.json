@@ -1,8 +1,8 @@
 {
   "schema": "HOBBY_DEPOT_HERO_BUILD_MANIFEST_V1",
-  "status": "WIP_NOT_RELEASED",
+  "status": "IMAGE_ONLY_CANDIDATE_VISUAL_TECH_PASS",
   "base_version": "1.50.650",
-  "release_allowed": false,
+  "release_allowed": true,
   "output": {
     "hero": {
       "width": 600,
@@ -478,7 +478,7 @@
     "total_categories": 30,
     "ready_sources_have_file_ids": true,
     "bound_references_have_file_ids": true,
-    "release_allowed_is_false": true,
+    "release_allowed_is_false": false,
     "confirmed_batch_has_no_fabricated_reference": true,
     "stage_slugs_unique": true,
     "stage_slugs_complete": true,
@@ -491,6 +491,29 @@
     "ready_source_count_is_22": true,
     "ready_source_count_is_23": true,
     "ready_source_count_is_26": true,
-    "ready_source_count_is_30": true
+    "ready_source_count_is_30": true,
+    "release_allowed_is_true": true,
+    "final_visual_qa_30_pass": true,
+    "final_technical_qa_pass": true
+  },
+  "release_scope": "30-category image-only candidate on frozen 1.50.650",
+  "global_design_release_allowed": false,
+  "final_artifact": {
+    "name": "AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip",
+    "sha256": "cbc9789925660ada90a32e1d9726c4b6086c9d8308a8d097009573afab66ddc8",
+    "library_path": "/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip"
+  },
+  "final_qa": {
+    "visual_sources_pass": 30,
+    "hero_crops_pass": 30,
+    "preview_crops_pass": 30,
+    "changed_files": 60,
+    "mapping_byte_identical": true,
+    "php_byte_identical": true,
+    "php_syntax_pass": 55,
+    "zip_roundtrip_pass": true,
+    "negative_missing_target_detected": true,
+    "negative_mapping_change_detected": true,
+    "evidence": "NEW_CONCEPT_IMAGE_FINAL_QA_30OF30_20261016.md"
   }
 }
