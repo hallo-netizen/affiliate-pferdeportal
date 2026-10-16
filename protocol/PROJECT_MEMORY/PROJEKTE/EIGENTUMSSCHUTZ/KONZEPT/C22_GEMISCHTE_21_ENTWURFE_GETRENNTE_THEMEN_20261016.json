@@ -15,7 +15,7 @@
       "proposal_role": "CONCRETE_PAGE3",
       "article_categories": [
         {
-          "name": "Wassereintritt erkennen",
+          "name": "Wassereintritt an Gauben",
           "capacity_min": 3,
           "capacity_signals": [
             "Gaubenwange",
@@ -62,7 +62,7 @@
           ]
         },
         {
-          "name": "Schäden erkennen",
+          "name": "Kaminanschluss-Schäden erkennen",
           "capacity_min": 3,
           "capacity_signals": [
             "Feuchtefleck",
@@ -147,7 +147,7 @@
           ]
         },
         {
-          "name": "Wartung & Nachrüstung",
+          "name": "Außentür abdichten & warten",
           "capacity_min": 3,
           "capacity_signals": [
             "Beschlag",
@@ -176,7 +176,7 @@
           ]
         },
         {
-          "name": "Feuchtezeichen",
+          "name": "Feuchtezeichen am Anbaudach",
           "capacity_min": 3,
           "capacity_signals": [
             "Decke",
@@ -395,7 +395,7 @@
       "proposal_role": "CONCRETE_PAGE3",
       "article_categories": [
         {
-          "name": "Wasserwege",
+          "name": "Wasserwege an Gartenmauern",
           "capacity_min": 3,
           "capacity_signals": [
             "Fundament",
@@ -717,7 +717,7 @@
           ]
         },
         {
-          "name": "Wartung & Austausch",
+          "name": "Bootsakkus warten & tauschen",
           "capacity_min": 3,
           "capacity_signals": [
             "Korrosion",
@@ -746,7 +746,7 @@
           ]
         },
         {
-          "name": "Schutzmaßnahmen",
+          "name": "Garten gegen Wildtiere schützen",
           "capacity_min": 3,
           "capacity_signals": [
             "Einzäunung",
@@ -822,7 +822,7 @@
           ]
         },
         {
-          "name": "Schäden dokumentieren",
+          "name": "Innenwandschäden dokumentieren",
           "capacity_min": 3,
           "capacity_signals": [
             "Spuren",
@@ -869,7 +869,7 @@
           ]
         },
         {
-          "name": "Wiederherstellung",
+          "name": "Deckenschäden reparieren",
           "capacity_min": 3,
           "capacity_signals": [
             "Teilöffnung",
@@ -889,7 +889,7 @@
       "proposal_role": "CONCRETE_PAGE3",
       "article_categories": [
         {
-          "name": "Schadbild",
+          "name": "Bodenbelagsschäden begutachten",
           "capacity_min": 3,
           "capacity_signals": [
             "Parkett",
@@ -907,7 +907,7 @@
           ]
         },
         {
-          "name": "Instandsetzung",
+          "name": "Bodenbeläge instand setzen",
           "capacity_min": 3,
           "capacity_signals": [
             "Schleifen",
@@ -974,7 +974,7 @@
           ]
         },
         {
-          "name": "Schäden dokumentieren",
+          "name": "Küchenschäden dokumentieren",
           "capacity_min": 3,
           "capacity_signals": [
             "Inventar",
@@ -1021,7 +1021,7 @@
           ]
         },
         {
-          "name": "Reparatur & Ersatz",
+          "name": "Einbauschränke reparieren",
           "capacity_min": 3,
           "capacity_signals": [
             "Material",
@@ -1088,7 +1088,7 @@
           ]
         },
         {
-          "name": "Manipulation erkennen",
+          "name": "Heizkreis-Manipulation erkennen",
           "capacity_min": 3,
           "capacity_signals": [
             "Ventilstellung",
@@ -1126,7 +1126,7 @@
           ]
         },
         {
-          "name": "Manipulationsspuren",
+          "name": "Wasserabsperrung: Eingriffe erkennen",
           "capacity_min": 3,
           "capacity_signals": [
             "Ventil",
@@ -1211,7 +1211,7 @@
           ]
         },
         {
-          "name": "Reparatur & Ersatz",
+          "name": "Siphon reparieren & tauschen",
           "capacity_min": 3,
           "capacity_signals": [
             "Bauteile",
@@ -1231,7 +1231,7 @@
       "proposal_role": "CONCRETE_PAGE3",
       "article_categories": [
         {
-          "name": "Wasserwege",
+          "name": "Wasserwege am Waschbecken",
           "capacity_min": 3,
           "capacity_signals": [
             "Armatur",
@@ -1287,7 +1287,7 @@
           ]
         },
         {
-          "name": "Instandsetzung",
+          "name": "Küchenspüle instand setzen",
           "capacity_min": 3,
           "capacity_signals": [
             "Dichtung",
@@ -1354,7 +1354,7 @@
           ]
         },
         {
-          "name": "Schutzmaßnahmen",
+          "name": "Hecken gegen Frost schützen",
           "capacity_min": 3,
           "capacity_signals": [
             "Vlies",
@@ -1566,5 +1566,9 @@
       "wp_status": "CONCEPT_ONLY",
       "release": false
     }
-  ]
+  ],
+  "qa": {
+    "flat_article_category_names_globally_unique": true,
+    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress."
+  }
 }
