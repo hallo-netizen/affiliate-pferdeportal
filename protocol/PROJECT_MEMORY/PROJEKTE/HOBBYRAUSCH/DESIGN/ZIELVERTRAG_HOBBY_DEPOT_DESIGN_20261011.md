@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.3 / 2026-10-16
+FASSUNG: 4.4 / 2026-10-16
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -18,9 +18,10 @@ FASSUNG: 4.3 / 2026-10-16
 
 ## Mega-Menü – verbindliche Darstellungsregel
 - Grundprinzip wie bei den bewährten Pferdeatelier-/H&Parfume-Referenzen: grafisch einheitliche, begrenzte Linkmenge statt beliebig langer Spalten.
-- Pro sichtbarer Mega-Menü-Gruppe gilt eine feste maximale Anzahl direkter Unterkategorien; dadurch bleiben Spaltenhöhe und Raster ruhig/einheitlich.
-- Existieren weitere Unterkategorien, folgt am Gruppenende ein klarer Link/Button `Alle Kategorien` bzw. `Mehr Kategorien`.
-- Beim ersten Hover/Fokus soll mehr sichtbar sein als im bisherigen Hobby-Depot-Menü: neben den direkten Unterkategorien darf genau eine weitere sinnvolle Ebene als kompakte Orientierung gezeigt werden.
+- Die Zahl der direkt sichtbaren Unterkategorien ist **keine starre 3er-/4er-/5er-Regel**. Sie richtet sich nach dem kleinsten sinnvollen Direktbestand der acht Hauptwelten und dem grafisch gleichmäßigen Gesamtbild.
+- Ziel ist: alle geöffneten Mega-Menüs wirken gleichmäßig, ohne unnötige Leerflächen oder einzelne überlange Menüs. Beim aktuellen Zielbaum ist die gemeinsame sichtbare Zahl **5**, weil die kleinste Hauptwelt 5 direkte Unterbereiche besitzt.
+- Existieren darüber hinaus weitere direkte Unterkategorien, folgt am Gruppenende ein klarer Link/Button `Mehr Kategorien`; wenn keine weiteren existieren, `Alle Kategorien`.
+- Beim ersten Hover/Fokus wird neben den direkt sichtbaren Unterkategorien **genau eine weitere sinnvolle Ebene** kompakt als Orientierung gezeigt. Keine weitere Verschachtelung.
 - Keine unbegrenzte Vollbaum-Ausgabe und keine vierte/weitere verschachtelte Ebene im Mega-Menü.
 - Die Begrenzung betrifft nur die Anzeige im Mega-Menü, niemals die reale Kategorienstruktur oder Erreichbarkeit tieferer Kategorien.
 - Pferdeatelier/H&Parfume dienen hier ausschließlich als Design-/Strukturreferenz, nicht als Hobby-Depot-Statusquelle.
@@ -44,6 +45,7 @@ FASSUNG: 4.3 / 2026-10-16
 
 ## Hub-/Unterkategorie-Bilder Ebene 1
 - alle 65 direkten Unterkategorien besitzen kontrollierte Motive;
+- die Kategorievorschau wird aus dem jeweils aktuellen Hub2-Hero derselben Kategorie abgeleitet; Hero und Vorschau dürfen nicht aus unterschiedlichen Bildständen stammen;
 - Thema auf den ersten Blick verständlich;
 - kein unnötiger Lupen-/Makroeindruck;
 - ruhiges Bildumfeld;
