@@ -1,0 +1,221 @@
+{
+  "schema": "HB-V9-13-ACCESS-TECH-HOFLADEN-DRAFT",
+  "date": "2026-10-16",
+  "status": "NO_IMPORT_KEYWORD_NAME_VALIDATION_PENDING",
+  "contract": "At least 3 child groups, no max. 3+ real separate article intents per leaf. Distinguish burglary property security from technical access-device failures.",
+  "groups": [
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "kind": "NEW_AREA",
+      "world_id": "core:world:technik-und-ausfalle",
+      "subareas": [
+        {
+          "name": "Garagentore & Antriebe",
+          "leaves": [
+            {
+              "name": "Garagentorantrieb defekt",
+              "article_ideas": [
+                "Garagentorantrieb reagiert nicht: Stromversorgung und Steuerung unterscheiden",
+                "Garagentorantrieb stoppt unterwegs: Hindernis oder Antriebsproblem",
+                "Ungewöhnliche Geräusche beim Garagentorantrieb fachlich einordnen lassen",
+                "Garagentorantrieb nach Netzausfall auf sichere Funktion prüfen lassen"
+              ],
+              "seo_boundary": "Antriebsstörung, kein Einbruchschutz und keine Garagenverriegelung."
+            },
+            {
+              "name": "Garagentor-Sensoren",
+              "article_ideas": [
+                "Garagentor-Lichtschranke meldet Hindernis ohne Ursache",
+                "Sicherheitskontaktleisten an Garagentoren prüfen lassen",
+                "Tor stoppt kurz vor dem Boden: Endlagen- und Sensoreinstellung fachlich prüfen",
+                "Garagentor-Sicherheitssensor nach Reparatur funktional abnehmen lassen"
+              ],
+              "seo_boundary": "Safety sensing/limits; general drive motor separate."
+            },
+            {
+              "name": "Garagentor-Notentriegelung",
+              "article_ideas": [
+                "Garagentor bei Stromausfall sicher entriegeln lassen",
+                "Defekte Garagentor-Notentriegelung vor dem Ernstfall prüfen",
+                "Manuelle Torbewegung nach Antriebsausfall gefahrlos vorbereiten",
+                "Notentriegelung bei Garage ohne zweiten Zugang fachlich planen"
+              ],
+              "seo_boundary": "Mechanical emergency override, not smart-lock network offline."
+            },
+            {
+              "name": "Garagentor-Funksteuerung",
+              "article_ideas": [
+                "Garagentor öffnet nicht per Handsender: Batterie oder Empfänger unterscheiden",
+                "Garagentor-Funkempfänger nach Funkstörungen überprüfen lassen",
+                "Angelerntes Garagentor-Funkgerät reagiert verzögert: Ursachen prüfen",
+                "Defekte Fernbedienung für Garagentor sicher ersetzen lassen"
+              ],
+              "seo_boundary": "Garage remote control troubleshooting, not radio access security audit."
+            }
+          ]
+        },
+        {
+          "name": "Einfahrtstore & Zufahrten",
+          "leaves": [
+            {
+              "name": "Schiebetorantrieb defekt",
+              "article_ideas": [
+                "Schiebetorantrieb fährt nur ruckweise: Rollen und Antrieb trennen",
+                "Schiebetorantrieb startet nicht: Versorgung und Steuerplatine prüfen lassen",
+                "Endlagenfehler am elektrischen Schiebetor fachlich einstellen lassen",
+                "Einfahrt-Schiebetor nach Frostblockade sicher prüfen lassen"
+              ],
+              "seo_boundary": "Sliding gate mechanism, not burglarproof gate locks."
+            },
+            {
+              "name": "Drehtorantrieb defekt",
+              "article_ideas": [
+                "Flügeltorantrieb öffnet nur eine Seite: mögliche Störursachen",
+                "Drehtorantrieb bei Gegenwind und mechanischer Blockade prüfen lassen",
+                "Elektrisches Hoftor stoppt beim Zufahren: Anschläge und Kräfte prüfen",
+                "Drehtorsteuerung nach Stromausfall vom Fachbetrieb prüfen lassen"
+              ],
+              "seo_boundary": "Swing gate systems only."
+            },
+            {
+              "name": "Zufahrtstor-Sensoren",
+              "article_ideas": [
+                "Lichtschranke am Hoftor meldet dauerhaft Hindernis",
+                "Sicherheitskanten an privaten Zufahrtstoren kontrollieren lassen",
+                "Zufahrtstor schließt nach Regen nicht: Sensorfeuchtigkeit fachlich prüfen",
+                "Endlagensensor am Gartentor zeigt falsche Position: Fehlerzeichen dokumentieren"
+              ],
+              "seo_boundary": "Gate obstacle safety sensing, not garage-mounted sensor."
+            },
+            {
+              "name": "Hoftor-Funksteuerung",
+              "article_ideas": [
+                "Funkfernbedienung für Grundstückstor reagiert unzuverlässig",
+                "Funkempfänger am Schiebetor vor Witterungsschäden prüfen",
+                "Hoftor lässt sich mit Taster, aber nicht per Funk öffnen: Ursache trennen",
+                "Funksteuerung nach Austausch des Torantriebs fachgerecht prüfen lassen"
+              ],
+              "seo_boundary": "Outdoor access gate control, not smart home cloud."
+            }
+          ]
+        },
+        {
+          "name": "Türsprechanlagen & Öffner",
+          "leaves": [
+            {
+              "name": "Gegensprechanlage defekt",
+              "article_ideas": [
+                "Türsprechanlage klingelt nicht mehr: Klingeltaster oder Innenstation unterscheiden",
+                "An der Gegensprechanlage kein Ton: Verbindung und Netzteil fachlich prüfen",
+                "Gegensprechanlage im Mehrfamilienhaus ausgefallen: gemeinsame Ursache eingrenzen",
+                "Nach Feuchtigkeitsschaden an Außenstation Funktion prüfen lassen"
+              ],
+              "seo_boundary": "Audio intercom operation, not door camera as burglary deterrence."
+            },
+            {
+              "name": "Elektrischer Türöffner defekt",
+              "article_ideas": [
+                "Elektrischer Türöffner summt, entriegelt aber nicht",
+                "Türöffner an gemeinsamer Haustür funktioniert nur sporadisch",
+                "Elektrische Türöffner nach Stromausfall auf sichere Funktion prüfen lassen",
+                "Defekter Türöffner: Schließmechanik und Ansteuerung fachlich unterscheiden"
+              ],
+              "seo_boundary": "Strike plate and solenoid, not physical door lock anti-burglary."
+            },
+            {
+              "name": "Video-Türsprechanlage defekt",
+              "article_ideas": [
+                "Videobild einer Türsprechanlage ausgefallen: Kamera oder Innenmonitor",
+                "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+                "Außenkamera der Türsprechanlage nach Starkregen prüfen lassen",
+                "Türvideostation hat Bildaussetzer: Leitungsverbindung fachlich untersuchen"
+              ],
+              "seo_boundary": "Intercom hardware failure, not CCTV GDPR / security monitoring."
+            },
+            {
+              "name": "Smarte Türsteuerung: Ausfall",
+              "article_ideas": [
+                "Smarte Türsteuerung reagiert lokal nicht: Batterie oder Motor trennen",
+                "Elektronisches Türschloss blockiert bei mechanischer Fehlstellung",
+                "Nach Firmwarewechsel klemmt elektronischer Türantrieb: Fachprüfung einplanen",
+                "Türsteuerung nach Motorschaden vor erneuter Nutzung kontrollieren lassen"
+              ],
+              "seo_boundary": "Hard-/firmware fault not existing R3 'Notbetrieb smarter Türschlösser' during offline network."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "area_id": "core:area:d71aef44a98c",
+      "kind": "NEW_SUBAREA",
+      "subareas": [
+        {
+          "name": "Hofläden & Selbstbedienung",
+          "leaves": [
+            {
+              "name": "Hofladen vor Diebstahl",
+              "article_ideas": [
+                "Warendiebstahl im unbesetzten Hofladen reduzieren",
+                "Kassen- und Geldboxen in privaten Hofläden sicherer platzieren",
+                "Zugang und Öffnungszeiten im kleinen Hofladen kontrollieren",
+                "Inventurprotokoll nach wiederholten Fehlbeständen im Hofladen aufbauen"
+              ],
+              "seo_boundary": "Hofladen Warenverlust, not cash after closing generic."
+            },
+            {
+              "name": "SB-Verkaufsstände sichern",
+              "article_ideas": [
+                "Verkaufsstand an privater Hofeinfahrt vor Warenentnahme schützen",
+                "Offene Selbstbedienungsstände bei Nacht sicher schließen",
+                "Hinweisschilder und Kamera am SB-Stand rechtlich einordnen",
+                "Bezahlen und Warenfreigabe beim unbesetzten Marktstand sicher gestalten"
+              ],
+              "seo_boundary": "Open stand product theft, not vandalism of structural kiosks."
+            },
+            {
+              "name": "Warenautomaten vor Diebstahl",
+              "article_ideas": [
+                "Selbstbedienungsautomat gegen Aufbruch am privaten Betrieb sichern",
+                "Warenklappen an einem Automaten auf Manipulation prüfen",
+                "Geldboxen von Hofautomaten gegen Entwendung absichern",
+                "Automatenstandort im Privatbetrieb auf Diebstahlrisiken bewerten"
+              ],
+              "seo_boundary": "Theft of stock/cash; vandalism to vending machine already separate Vandalismus category."
+            },
+            {
+              "name": "Abholboxen & Warenausgabe",
+              "article_ideas": [
+                "Abholbox am privaten Hofladen gegen Fremdzugriff sichern",
+                "Warenausgabe mit Code oder Abholnummer gegen Verwechslung schützen",
+                "Unbeaufsichtigte Bestellungen vor Abholung gegen Diebstahl schützen",
+                "Abholschränke im Kleinbetrieb nach wiederholten Entwendungen nachrüsten"
+              ],
+              "seo_boundary": "Small business product pickup, not generic consumer parcel mailboxes."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "qa": {
+    "two_groups": true,
+    "three_tor_equipment_families": true,
+    "four_distinct_leaves_per_family": true,
+    "four_hofladen_leaves": true,
+    "sixteen_leaves": true,
+    "sixtyfour_articles": true,
+    "no_identical_v99_name": true,
+    "no_identical_v99_or_r3_article": true,
+    "unique_leaf_names": true,
+    "unique_titles": true,
+    "every_leaf_four_real_ideas": true,
+    "existing_nodes_untouched": true
+  },
+  "old_hold_note": "Earlier 3 unpublished V9.4 candidates for Garagentorantrieb, motorized garden gates and intercom are included as hazard families here, not copied as duplicate categories. Their old unapproved entries stay held, not inserted again.",
+  "seo_evidence": "DataForSEO export checked 570 terms but no direct keyword verification for proposed longtail names. No search volume or SERP ranking claim.",
+  "risk_note": "Some subtopics may ultimately be joined under one article rather than independent leaf after detailed old R2 content comparisons. No technical release unless editorial signoff."
+}
