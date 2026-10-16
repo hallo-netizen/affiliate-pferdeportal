@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 30ER-BILDSTAND ERHALTEN / HRD-SCOPE13 REPARATUR 13/13 LOCALPASS / ALLE ANDEREN KATEGORIEN GESPERRT**
+STATUS: **1.50.664 LOCALPASS / MEGA-MENÜ + HAUPTWELTKOPF + 65 HERO→PREVIEW / LIVE READBACK OFFEN**
 
 ## Aktueller belastbarer Stand
 - Affiliate Portal Template Kit **1.50.650** bleibt der eingefrorene Grundstand.
@@ -96,8 +96,10 @@ SHA-256:
 Nachweis:
 `HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
 
-## HRD HARD RULE
-**Nur die 13 Kategorien aus HRD_SCOPE13_IMAGE_REPAIR_20261016.md dürfen bei dieser Reparatur geändert werden. Alle anderen Kategorien FINGER WEG.**
+## HRD-SCOPE13 – abgeschlossene alte Teilsperre
+Für die damalige HRD-SCOPE13-Reparatur galt ausschließlich die 13er-Sperre. Diese Reparatur bleibt unverändert enthalten.
+
+Der neue ausdrückliche Auftrag vom 2026-10-16 erweitert den zulässigen Scope **nur für die Kategorievorschauen**: alle 65 Preview-Dateien dürfen aus ihrem jeweils aktuellen Hero neu abgeleitet werden. Die 65 Hero-Dateien selbst bleiben unverändert.
 
 ## Reparaturkandidat 1.50.664 – Menü / Hauptweltkopf / Hero→Preview
 Auf Basis des belastbaren 1.50.650-HRD-SCOPE13-Standes wurde ein eng begrenzter neuer Kandidat gebaut:
