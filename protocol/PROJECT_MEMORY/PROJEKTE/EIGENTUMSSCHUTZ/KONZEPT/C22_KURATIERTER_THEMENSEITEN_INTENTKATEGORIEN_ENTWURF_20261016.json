@@ -57,7 +57,9 @@
     "all_127_candidate_release": false,
     "change_note": "Wallbox is the concrete topic page; Ladeabbrüche is only an intent/aspect, not its own subject page.",
     "flat_article_category_names_globally_unique": true,
-    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress."
+    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress.",
+    "existing_wordpress_term_name_collision_fixed": true,
+    "collision_fix_note": "Previously reused existing WP article category Schlüssel & Zutritt from Haus & Wohnung; narrowed to Ferienhaus."
   },
   "topics": [
     {
@@ -78,7 +80,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Schlüssel & Zutritt",
+          "name": "Schlüsselübergabe im Ferienhaus",
           "capacity_signals": [
             "Übergabe",
             "Notfallzugang",
