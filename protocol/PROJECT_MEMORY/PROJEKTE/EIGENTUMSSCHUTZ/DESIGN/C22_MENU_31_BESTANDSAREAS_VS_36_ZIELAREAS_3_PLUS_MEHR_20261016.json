@@ -1,0 +1,2936 @@
+{
+  "schema": "HAB_C22_NAVIGATION_13OKT_REAL_VS_FUTURE_173_PROPOSALS",
+  "status": "NAVIGATION_MODEL_ONLY_NO_PLUGIN_LIVE_PASS",
+  "date": "2026-10-16",
+  "sources": [
+    "KONZEPT/C22_GESAMTBAUM_KORRIGIERT_173_THEMEN_569_ARTIKELKATEGORIEN_20261016.json",
+    "KATEGORIEN/C22_13OKT_POSTSYNC_93_SEITEN_285_WP_IDS_SLUGS_GESCHUETZT_20261016.json"
+  ],
+  "rules": [
+    "Actual 13 Oct snapshot and conditional C2.2 projected future are separate. 13 October data is NOT today's live.",
+    "The three MegaMenu teaser links must resolve by the category workflow's current node-ID/object-ID mapping; display aliases must not point to false parent.",
+    "'Weitere Kategorien' only if the truly active number of children >3; link to matching AREA, not to nonexistent proposed pages.",
+    "Area hubs enumerate every ACTIVE child, rather than showing only 3; paginate visually without removing categories.",
+    "New proposed areas and proposed page3 have no current WP object ID/href. Never link until a valid release and readback.",
+    "The 'Sicherheitsdienste & Wachdienste' HivePress category already exists in the verified 13 October directory snapshot, don't duplicate it in CORE."
+  ],
+  "qa": {
+    "worlds": 6,
+    "old_areas": 31,
+    "proposed_new_areas": 5,
+    "old_page3_in_oct13": 93,
+    "proposed_page3": 173,
+    "baseline_megamenu_more_areas_at_20261013": 0,
+    "future_if_all_approved_with_more_areas": 35,
+    "future_without_more_areas": 1,
+    "mobile_html_php_live_test": "NOT_PERFORMED",
+    "old_category_post_url_readback": "NOT_PERFORMED"
+  },
+  "wachdienst_hivepress_existing_20261013": [
+    {
+      "node_id": "directory:category:1dfc65728cdd",
+      "name": "Sicherheitsdienste & Wachdienste",
+      "wp_term_id_at_20261013": 149,
+      "slug": "dienst-sicherheitsdienste-und-wachdienste"
+    }
+  ],
+  "rows": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:ae6cfd9f4fba",
+        "area_wp_page_id_oct13": 125,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Kontrollen & Anwesenheit",
+            "node_id": "core:subarea:r3-3b506ad506e3bb4d",
+            "wp_page_id_oct13": 257
+          },
+          {
+            "name": "Stellplätze & Renovierung",
+            "node_id": "core:subarea:c06472ac764f8bb6",
+            "wp_page_id_oct13": 168
+          },
+          {
+            "name": "Unbewohnte Häuser",
+            "node_id": "core:subarea:1155be4b7a718bc5",
+            "wp_page_id_oct13": 138
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 5,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Kontrollen & Anwesenheit",
+            "node_id": "core:subarea:r3-3b506ad506e3bb4d",
+            "wp_id_at_last_readback": 257,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Stellplätze & Renovierung",
+            "node_id": "core:subarea:c06472ac764f8bb6",
+            "wp_id_at_last_readback": 168,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Unbewohnte Häuser",
+            "node_id": "core:subarea:1155be4b7a718bc5",
+            "wp_id_at_last_readback": 138,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Ferienhaus-Kontrolle",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Private Objektbewachung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:19b467511ad1",
+        "area_wp_page_id_oct13": 107,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Boote, Trailer & Reitsport",
+            "node_id": "core:subarea:7a5778250272c806",
+            "wp_page_id_oct13": 156
+          },
+          {
+            "name": "Räder & Privatfahrzeuge",
+            "node_id": "core:subarea:c84f412718dd7c5b",
+            "wp_page_id_oct13": 171
+          },
+          {
+            "name": "Wohnmobil & Wohnwagen",
+            "node_id": "core:subarea:27d113e90d7a2456",
+            "wp_page_id_oct13": 142
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 9,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Boote, Trailer & Reitsport",
+            "node_id": "core:subarea:7a5778250272c806",
+            "wp_id_at_last_readback": 156,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Räder & Privatfahrzeuge",
+            "node_id": "core:subarea:c84f412718dd7c5b",
+            "wp_id_at_last_readback": 171,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wohnmobil & Wohnwagen",
+            "node_id": "core:subarea:27d113e90d7a2456",
+            "wp_id_at_last_readback": 142,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Katalysatordiebstahl",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "E-Scooter-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Felgendiebstahl",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kennzeichendiebstahl",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Elektromobil-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wohnmobil-Stellplatzschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Garagen & Nebenräume",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:dfec0af81251",
+        "area_wp_page_id_oct13": 133,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Carports & Außenlager",
+            "node_id": "core:subarea:r3-cdaca9db6d34bcab",
+            "wp_page_id_oct13": 287
+          },
+          {
+            "name": "Garagen & Keller",
+            "node_id": "core:subarea:6c1e63ba0ebd7f68",
+            "wp_page_id_oct13": 152
+          },
+          {
+            "name": "Private Hobbyräume",
+            "node_id": "core:subarea:7538e35df7d5fd84",
+            "wp_page_id_oct13": 155
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Carports & Außenlager",
+            "node_id": "core:subarea:r3-cdaca9db6d34bcab",
+            "wp_id_at_last_readback": 287,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Garagen & Keller",
+            "node_id": "core:subarea:6c1e63ba0ebd7f68",
+            "wp_id_at_last_readback": 152,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Private Hobbyräume",
+            "node_id": "core:subarea:7538e35df7d5fd84",
+            "wp_id_at_last_readback": 155,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Garagentor-Einbruchschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Garten & Grundstück",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:ba7182312835",
+        "area_wp_page_id_oct13": 126,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Gartenhäuser, Tore & Geräte",
+            "node_id": "core:subarea:b9b33c48d54febc4",
+            "wp_page_id_oct13": 165
+          },
+          {
+            "name": "Grundstücksgrenzen & Wege",
+            "node_id": "core:subarea:r3-da5ffcf93a4c2818",
+            "wp_page_id_oct13": 289
+          },
+          {
+            "name": "Pakete & Gartenwerte",
+            "node_id": "core:subarea:64c307d994a7cbb0",
+            "wp_page_id_oct13": 150
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Gartenhäuser, Tore & Geräte",
+            "node_id": "core:subarea:b9b33c48d54febc4",
+            "wp_id_at_last_readback": 165,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Grundstücksgrenzen & Wege",
+            "node_id": "core:subarea:r3-da5ffcf93a4c2818",
+            "wp_id_at_last_readback": 289,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Pakete & Gartenwerte",
+            "node_id": "core:subarea:64c307d994a7cbb0",
+            "wp_id_at_last_readback": 150,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenhaus-Einbruchschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:6f5aebe4e92b",
+        "area_wp_page_id_oct13": 117,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Alarm & Kamera",
+            "node_id": "core:subarea:a2c3f772d07db51e",
+            "wp_page_id_oct13": 160
+          },
+          {
+            "name": "Mechanik & Zugang",
+            "node_id": "core:subarea:88a6c8b04bc14f63",
+            "wp_page_id_oct13": 157
+          },
+          {
+            "name": "Wertsachen & Schadenfall",
+            "node_id": "core:subarea:dbf473379fd87d95",
+            "wp_page_id_oct13": 177
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Alarm & Kamera",
+            "node_id": "core:subarea:a2c3f772d07db51e",
+            "wp_id_at_last_readback": 160,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Mechanik & Zugang",
+            "node_id": "core:subarea:88a6c8b04bc14f63",
+            "wp_id_at_last_readback": 157,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wertsachen & Schadenfall",
+            "node_id": "core:subarea:dbf473379fd87d95",
+            "wp_id_at_last_readback": 177,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Haustürschlösser",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Tresore",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Selbstschutz bei Einbruch",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Selbstschutzmittel",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:d71aef44a98c",
+        "area_wp_page_id_oct13": 132,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Betriebszugang & Abläufe",
+            "node_id": "core:subarea:r3-4bddb6ca3c11ceaf",
+            "wp_page_id_oct13": 261
+          },
+          {
+            "name": "Kleinbetriebe & Ateliers",
+            "node_id": "core:subarea:daae6f0a62d28c07",
+            "wp_page_id_oct13": 176
+          },
+          {
+            "name": "Kleine Vereine & Plätze",
+            "node_id": "core:subarea:ce03307f435cddb3",
+            "wp_page_id_oct13": 173
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 9,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Betriebszugang & Abläufe",
+            "node_id": "core:subarea:r3-4bddb6ca3c11ceaf",
+            "wp_id_at_last_readback": 261,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Kleinbetriebe & Ateliers",
+            "node_id": "core:subarea:daae6f0a62d28c07",
+            "wp_id_at_last_readback": 176,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Kleine Vereine & Plätze",
+            "node_id": "core:subarea:ce03307f435cddb3",
+            "wp_id_at_last_readback": 173,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hofladen-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "SB-Verkaufsstand-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Warenautomat-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Abholbox-Diebstahlschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Vereins-Sporthalle",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kleine private Lagerhalle",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:e3d4d2f00002",
+        "area_wp_page_id_oct13": 134,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Akkus & Werkstätten",
+            "node_id": "core:subarea:a9a810d93cefa16c",
+            "wp_page_id_oct13": 161
+          },
+          {
+            "name": "Elektroinstallation & Leitungen",
+            "node_id": "core:subarea:r3-12d26b40342dabb5",
+            "wp_page_id_oct13": 252
+          },
+          {
+            "name": "Ladeplätze & Akkuzustand",
+            "node_id": "core:subarea:r3-a2a446a27dc09c74",
+            "wp_page_id_oct13": 276
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 8,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Akkus & Werkstätten",
+            "node_id": "core:subarea:a9a810d93cefa16c",
+            "wp_id_at_last_readback": 161,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Elektroinstallation & Leitungen",
+            "node_id": "core:subarea:r3-12d26b40342dabb5",
+            "wp_id_at_last_readback": 252,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Ladeplätze & Akkuzustand",
+            "node_id": "core:subarea:r3-a2a446a27dc09c74",
+            "wp_id_at_last_readback": 276,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "E-Bike-Akkus vor Brand schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heimspeicher-Brandschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PV-Kabel & Steckverbinder",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wechselrichter-Brandschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wallbox-Brandschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:236d4048ce84",
+        "area_wp_page_id_oct13": 110,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Brandschutz im Camper",
+            "node_id": "core:subarea:c794a085651f638b",
+            "wp_page_id_oct13": 170
+          },
+          {
+            "name": "Fluchtwege & Verhalten im Brandfall",
+            "node_id": "core:subarea:r3-ef3064f8b715d92e",
+            "wp_page_id_oct13": 292
+          },
+          {
+            "name": "Gasinstallation im Freizeitfahrzeug",
+            "node_id": "core:subarea:r3-08d1c3f95ff33d00",
+            "wp_page_id_oct13": 249
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Brandschutz im Camper",
+            "node_id": "core:subarea:c794a085651f638b",
+            "wp_id_at_last_readback": 170,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Fluchtwege & Verhalten im Brandfall",
+            "node_id": "core:subarea:r3-ef3064f8b715d92e",
+            "wp_id_at_last_readback": 292,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Gasinstallation im Freizeitfahrzeug",
+            "node_id": "core:subarea:r3-08d1c3f95ff33d00",
+            "wp_id_at_last_readback": 249,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gasversorgung im Wohnmobil",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "CO & Gas",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:cfb8431a47d0",
+        "area_wp_page_id_oct13": 129,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Gasleitungen & Absperreinrichtungen",
+            "node_id": "core:subarea:r3-1d04bd715f0b3c23",
+            "wp_page_id_oct13": 253
+          },
+          {
+            "name": "Kohlenmonoxid & Gaswarnung",
+            "node_id": "core:subarea:609c5d8889eb07dd",
+            "wp_page_id_oct13": 148
+          },
+          {
+            "name": "Verbrennungsluft & Raumlüftung",
+            "node_id": "core:subarea:r3-0c4c00d85dec246e",
+            "wp_page_id_oct13": 251
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Gasleitungen & Absperreinrichtungen",
+            "node_id": "core:subarea:r3-1d04bd715f0b3c23",
+            "wp_id_at_last_readback": 253,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Kohlenmonoxid & Gaswarnung",
+            "node_id": "core:subarea:609c5d8889eb07dd",
+            "wp_id_at_last_readback": 148,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Verbrennungsluft & Raumlüftung",
+            "node_id": "core:subarea:r3-0c4c00d85dec246e",
+            "wp_id_at_last_readback": 251,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kohlenmonoxidmelder",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:bcad8185d370",
+        "area_wp_page_id_oct13": 127,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Betriebsorganisation & Fluchtwege",
+            "node_id": "core:subarea:r3-95599f104f34d60d",
+            "wp_page_id_oct13": 274
+          },
+          {
+            "name": "Brandlasten & Betriebsstrom",
+            "node_id": "core:subarea:r3-54c58b2291237b64",
+            "wp_page_id_oct13": 262
+          },
+          {
+            "name": "Brandschutz: Kleinobjekte",
+            "node_id": "core:subarea:6a3a7736b46a3483",
+            "wp_page_id_oct13": 151
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Betriebsorganisation & Fluchtwege",
+            "node_id": "core:subarea:r3-95599f104f34d60d",
+            "wp_id_at_last_readback": 274,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Brandlasten & Betriebsstrom",
+            "node_id": "core:subarea:r3-54c58b2291237b64",
+            "wp_id_at_last_readback": 262,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Brandschutz: Kleinobjekte",
+            "node_id": "core:subarea:6a3a7736b46a3483",
+            "wp_id_at_last_readback": 151,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutz im Friseursalon",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:a61eee15af3b",
+        "area_wp_page_id_oct13": 124,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Brandschutz & Löschmittel",
+            "node_id": "core:subarea:d60c45cef20293fb",
+            "wp_page_id_oct13": 175
+          },
+          {
+            "name": "Fluchtwege & Personenschutz",
+            "node_id": "core:subarea:r3-b48e03ab3db40249",
+            "wp_page_id_oct13": 280
+          },
+          {
+            "name": "Ofen, Kamin & offenes Feuer",
+            "node_id": "core:subarea:r3-7dae3268faaeea1c",
+            "wp_page_id_oct13": 270
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 22,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Brandschutz & Löschmittel",
+            "node_id": "core:subarea:d60c45cef20293fb",
+            "wp_id_at_last_readback": 175,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Fluchtwege & Personenschutz",
+            "node_id": "core:subarea:r3-b48e03ab3db40249",
+            "wp_id_at_last_readback": 280,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Ofen, Kamin & offenes Feuer",
+            "node_id": "core:subarea:r3-7dae3268faaeea1c",
+            "wp_id_at_last_readback": 270,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Rauchmelder",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutz an Leitungsdurchführungen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutzbekleidungen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutz in Abstellräumen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Privatwagen-Brandrisiken",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Elektroauto-Brandschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutz im Freizeitboot",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Rußschäden am Wohnhaus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Löschwasserschäden am Haus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschaden am Wohnhaus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Vegetationsbrand am Grundstück",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brandschutz gegen Brandüberschlag",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Funkenflug an Nebengebäuden",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootsmotor-Brandschutz",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kraftstoffanlage im Freizeitboot",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootsgasanlage",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootsküche",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bordelektrik im Freizeitboot",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootsakkus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:e6d091a0c088",
+        "area_wp_page_id_oct13": 135,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Alarm & Kamera ohne Netz",
+            "node_id": "core:subarea:bf71a9402f21d606",
+            "wp_page_id_oct13": 167
+          },
+          {
+            "name": "Alarmkommunikation & Übertragung",
+            "node_id": "core:subarea:r3-5c5afe8c38f94e25",
+            "wp_page_id_oct13": 264
+          },
+          {
+            "name": "Lokaler Smart-Home-Notbetrieb",
+            "node_id": "core:subarea:r3-d784b9ff8c308622",
+            "wp_page_id_oct13": 288
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Alarm & Kamera ohne Netz",
+            "node_id": "core:subarea:bf71a9402f21d606",
+            "wp_id_at_last_readback": 167,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Alarmkommunikation & Übertragung",
+            "node_id": "core:subarea:r3-5c5afe8c38f94e25",
+            "wp_id_at_last_readback": 264,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Lokaler Smart-Home-Notbetrieb",
+            "node_id": "core:subarea:r3-d784b9ff8c308622",
+            "wp_id_at_last_readback": 288,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Router bei Stromausfall",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heimnetzwerk und Router",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Smart-Home-Zentrale",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PoE-Installationen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:1c0afd6fe7ca",
+        "area_wp_page_id_oct13": 108,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Alarmreaktionen & Vertretung",
+            "node_id": "core:subarea:r3-6ca418d3ad77c88a",
+            "wp_page_id_oct13": 268
+          },
+          {
+            "name": "Mobile Objekte & Betriebe",
+            "node_id": "core:subarea:6169882265e80dd2",
+            "wp_page_id_oct13": 149
+          },
+          {
+            "name": "Wohnobjekte & Nebenräume",
+            "node_id": "core:subarea:df9efed49e9ced9b",
+            "wp_page_id_oct13": 178
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Alarmreaktionen & Vertretung",
+            "node_id": "core:subarea:r3-6ca418d3ad77c88a",
+            "wp_id_at_last_readback": 268,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Mobile Objekte & Betriebe",
+            "node_id": "core:subarea:6169882265e80dd2",
+            "wp_id_at_last_readback": 149,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wohnobjekte & Nebenräume",
+            "node_id": "core:subarea:df9efed49e9ced9b",
+            "wp_id_at_last_readback": 178,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Ferienhaus-Fernüberwachung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:f03faeefbce4",
+        "area_wp_page_id_oct13": 137,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Fernmeldungen & Regeltechnik",
+            "node_id": "core:subarea:r3-c8c1c680287ebb1f",
+            "wp_page_id_oct13": 285
+          },
+          {
+            "name": "Heizungs- & Kühlungsalarme",
+            "node_id": "core:subarea:b98564156a5f5ebb",
+            "wp_page_id_oct13": 164
+          },
+          {
+            "name": "Temperaturwarnung in Sonderräumen",
+            "node_id": "core:subarea:r3-f362477dc05633d6",
+            "wp_page_id_oct13": 293
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Fernmeldungen & Regeltechnik",
+            "node_id": "core:subarea:r3-c8c1c680287ebb1f",
+            "wp_id_at_last_readback": 285,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Heizungs- & Kühlungsalarme",
+            "node_id": "core:subarea:b98564156a5f5ebb",
+            "wp_id_at_last_readback": 164,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Temperaturwarnung in Sonderräumen",
+            "node_id": "core:subarea:r3-f362477dc05633d6",
+            "wp_id_at_last_readback": 293,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heizungsausfall",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Durchlauferhitzer",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Warmwasserspeicher",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Zirkulationspumpe",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:2252b23b56f6",
+        "area_wp_page_id_oct13": 109,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Pumpen & Notbetrieb",
+            "node_id": "core:subarea:e4277fda69ced0d4",
+            "wp_page_id_oct13": 179
+          },
+          {
+            "name": "Pumpenursachen & Sensorik",
+            "node_id": "core:subarea:r3-718d153a810baa16",
+            "wp_page_id_oct13": 269
+          },
+          {
+            "name": "Pumpenwartung & Verschleiß",
+            "node_id": "core:subarea:r3-3eb2ee24f49daf59",
+            "wp_page_id_oct13": 258
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Pumpen & Notbetrieb",
+            "node_id": "core:subarea:e4277fda69ced0d4",
+            "wp_id_at_last_readback": 179,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Pumpenursachen & Sensorik",
+            "node_id": "core:subarea:r3-718d153a810baa16",
+            "wp_id_at_last_readback": 269,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Pumpenwartung & Verschleiß",
+            "node_id": "core:subarea:r3-3eb2ee24f49daf59",
+            "wp_id_at_last_readback": 258,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Brunnenpumpe",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Poolfilterpumpe",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenpumpe",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Teichpumpe",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "area_type": "NEW_AREA_C2.2_DRAFT",
+      "existing_20261013": null,
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wechselrichter-Ausfälle",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heimspeicher-Störungen",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wallbox-Ladetechnik",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PV-Module & Strings",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PV-Monitoring",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Balkonkraftwerk",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PV-Ersatzstromversorgung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:64303d0ddd32",
+        "area_wp_page_id_oct13": 116,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Stromausfall & Notstrom",
+            "node_id": "core:subarea:3e8dfec15ad57d77",
+            "wp_page_id_oct13": 144
+          },
+          {
+            "name": "Stromfehler & Schutzschalter",
+            "node_id": "core:subarea:r3-e0a3a6b4fb701d21",
+            "wp_page_id_oct13": 290
+          },
+          {
+            "name": "Wiederanlauf nach Stromausfall",
+            "node_id": "core:subarea:r3-01caab8d89fc0742",
+            "wp_page_id_oct13": 247
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Stromausfall & Notstrom",
+            "node_id": "core:subarea:3e8dfec15ad57d77",
+            "wp_id_at_last_readback": 144,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Stromfehler & Schutzschalter",
+            "node_id": "core:subarea:r3-e0a3a6b4fb701d21",
+            "wp_id_at_last_readback": 290,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wiederanlauf nach Stromausfall",
+            "node_id": "core:subarea:r3-01caab8d89fc0742",
+            "wp_id_at_last_readback": 247,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Notstromversorgung fürs Haus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "area_type": "NEW_AREA_C2.2_DRAFT",
+      "existing_20261013": null,
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 11,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Garagentor-Funksteuerung",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Garagentorantrieb",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Video-Türsprechanlage",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Schiebetorantrieb",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Drehtorantrieb",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Zufahrtstor-Antrieb",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hoftor-Funksteuerung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gegensprechanlage",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Smarte Türsteuerung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Elektrische Türöffner",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Elektronische Türschlösser",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Außentechnik",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:6110a347ffcf",
+        "area_wp_page_id_oct13": 115,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "PV, Kamera & Beleuchtung",
+            "node_id": "core:subarea:260a0920e7b951f2",
+            "wp_page_id_oct13": 141
+          },
+          {
+            "name": "Wärmepumpe & Ladepunkte",
+            "node_id": "core:subarea:4dbf86eb169f98d2",
+            "wp_page_id_oct13": 146
+          },
+          {
+            "name": "Zählerkästen & Anschlussleitungen",
+            "node_id": "core:subarea:r3-c384fde6f5631a95",
+            "wp_page_id_oct13": 283
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "PV, Kamera & Beleuchtung",
+            "node_id": "core:subarea:260a0920e7b951f2",
+            "wp_id_at_last_readback": 141,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wärmepumpe & Ladepunkte",
+            "node_id": "core:subarea:4dbf86eb169f98d2",
+            "wp_id_at_last_readback": 146,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Zählerkästen & Anschlussleitungen",
+            "node_id": "core:subarea:r3-c384fde6f5631a95",
+            "wp_id_at_last_readback": 283,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wallbox vor Sabotage",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Fassade & Außenflächen",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:5a96d921a2a1",
+        "area_wp_page_id_oct13": 114,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Graffiti: Schutz & Hilfe",
+            "node_id": "core:subarea:90d80d706e8b027b",
+            "wp_page_id_oct13": 158
+          },
+          {
+            "name": "Gärten & Außenmöblierung",
+            "node_id": "core:subarea:r3-c5e86b44508e3e51",
+            "wp_page_id_oct13": 284
+          },
+          {
+            "name": "Oberflächen & Fassadenbauteile",
+            "node_id": "core:subarea:r3-8829d3339a14710f",
+            "wp_page_id_oct13": 272
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 3,
+        "maximum_direct_links": 3,
+        "show_more": false,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Graffiti: Schutz & Hilfe",
+            "node_id": "core:subarea:90d80d706e8b027b",
+            "wp_id_at_last_readback": 158,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Gärten & Außenmöblierung",
+            "node_id": "core:subarea:r3-c5e86b44508e3e51",
+            "wp_id_at_last_readback": 284,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Oberflächen & Fassadenbauteile",
+            "node_id": "core:subarea:r3-8829d3339a14710f",
+            "wp_id_at_last_readback": 272,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": []
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Freizeit & Vandalismus",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:ee3952240d8b",
+        "area_wp_page_id_oct13": 136,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Camping, Garten & Boote",
+            "node_id": "core:subarea:4d7782e922837e68",
+            "wp_page_id_oct13": 145
+          },
+          {
+            "name": "Geparkte Privatfahrzeuge",
+            "node_id": "core:subarea:r3-29710c165fdc4fa7",
+            "wp_page_id_oct13": 254
+          },
+          {
+            "name": "Private Freizeit- & Spielanlagen",
+            "node_id": "core:subarea:r3-03280f09e1f4fd70",
+            "wp_page_id_oct13": 248
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Camping, Garten & Boote",
+            "node_id": "core:subarea:4d7782e922837e68",
+            "wp_id_at_last_readback": 145,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Geparkte Privatfahrzeuge",
+            "node_id": "core:subarea:r3-29710c165fdc4fa7",
+            "wp_id_at_last_readback": 254,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Private Freizeit- & Spielanlagen",
+            "node_id": "core:subarea:r3-03280f09e1f4fd70",
+            "wp_id_at_last_readback": 248,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Privatwagen vor Vandalismus schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:4611320db640",
+        "area_wp_page_id_oct13": 113,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Eingänge, Glas & Klingeln",
+            "node_id": "core:subarea:115822da2ae9fc07",
+            "wp_page_id_oct13": 139
+          },
+          {
+            "name": "Innenräume & Hausgemeinschaft",
+            "node_id": "core:subarea:r3-c35767a9141583bc",
+            "wp_page_id_oct13": 282
+          },
+          {
+            "name": "Sanitärräume & Nebenanlagen",
+            "node_id": "core:subarea:r3-f8db3998237d9b30",
+            "wp_page_id_oct13": 294
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 16,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Eingänge, Glas & Klingeln",
+            "node_id": "core:subarea:115822da2ae9fc07",
+            "wp_id_at_last_readback": 139,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Innenräume & Hausgemeinschaft",
+            "node_id": "core:subarea:r3-c35767a9141583bc",
+            "wp_id_at_last_readback": 282,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Sanitärräume & Nebenanlagen",
+            "node_id": "core:subarea:r3-f8db3998237d9b30",
+            "wp_id_at_last_readback": 294,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Schaufenster vor Sachbeschädigung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Tür- und Fensterglas bei Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Sicherungskasten vor Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Innenwandschäden nach Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Deckenschäden nach Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bodenbelagschäden durch Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Treppenschäden durch Vandalismus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Einbauküchenschäden",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Einbauschränke vor Vandalismus schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heizraum vor Vandalismus schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Heizkreisverteiler schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wasserabsperrung vor Manipulation schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Technikschränke schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Vereine & Kleingewerbe",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:9c3a4ea26d92",
+        "area_wp_page_id_oct13": 122,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Mobiles Geschäftsaußeninventar",
+            "node_id": "core:subarea:r3-bb7c04f0a46544eb",
+            "wp_page_id_oct13": 281
+          },
+          {
+            "name": "Sport- & Vereinsinfrastruktur",
+            "node_id": "core:subarea:r3-29ae9462c0d1f625",
+            "wp_page_id_oct13": 255
+          },
+          {
+            "name": "Vereine, Läden & Schäden",
+            "node_id": "core:subarea:1262f0d1a16b4a96",
+            "wp_page_id_oct13": 140
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Mobiles Geschäftsaußeninventar",
+            "node_id": "core:subarea:r3-bb7c04f0a46544eb",
+            "wp_id_at_last_readback": 281,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Sport- & Vereinsinfrastruktur",
+            "node_id": "core:subarea:r3-29ae9462c0d1f625",
+            "wp_id_at_last_readback": 255,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Vereine, Läden & Schäden",
+            "node_id": "core:subarea:1262f0d1a16b4a96",
+            "wp_id_at_last_readback": 140,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Sportplatz vor Vandalismus schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:7efc2329e1f6",
+        "area_wp_page_id_oct13": 120,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Feuchtigkeit & Winterlager",
+            "node_id": "core:subarea:f985af1ab7fb3533",
+            "wp_page_id_oct13": 181
+          },
+          {
+            "name": "Regenabdichtung am Freizeitfahrzeug",
+            "node_id": "core:subarea:r3-7de923d77f534081",
+            "wp_page_id_oct13": 271
+          },
+          {
+            "name": "Tanks & Sanitärleitungen",
+            "node_id": "core:subarea:r3-443a53088f3b389c",
+            "wp_page_id_oct13": 259
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 11,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Feuchtigkeit & Winterlager",
+            "node_id": "core:subarea:f985af1ab7fb3533",
+            "wp_id_at_last_readback": 181,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Regenabdichtung am Freizeitfahrzeug",
+            "node_id": "core:subarea:r3-7de923d77f534081",
+            "wp_id_at_last_readback": 271,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Tanks & Sanitärleitungen",
+            "node_id": "core:subarea:r3-443a53088f3b389c",
+            "wp_id_at_last_readback": 259,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wohnmobil-Dachabdichtung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bilgenwasser im Freizeitboot",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootskajüte",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Boot-Wassersystem",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bootsabdeckung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Poolleitungen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Poolbeckenabdichtung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Teichfolie",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "area_type": "NEW_AREA_C2.2_DRAFT",
+      "existing_20261013": null,
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 14,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dachfenster & Anschlüsse",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Flachdachabdichtung",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dachrinnen & Fallrohre",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dacheindeckung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Fensteranschlüsse",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Fassadenfugen & Anschlüsse",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Sockelabdichtung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dachentwässerung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gauben & Anschlüsse",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kaminanschlüsse",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Balkonanschlüsse",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Außentüren",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Anbauabdichtung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wintergartenabdichtung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Frost & Abwesenheit",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:d03822af4a84",
+        "area_wp_page_id_oct13": 130,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Außenleitungen & Entleerung",
+            "node_id": "core:subarea:r3-a33a954403335f12",
+            "wp_page_id_oct13": 277
+          },
+          {
+            "name": "Frost & Leerstand",
+            "node_id": "core:subarea:c8a6a3e042c29ffd",
+            "wp_page_id_oct13": 172
+          },
+          {
+            "name": "Kontrolle ungenutzter Sanitärräume",
+            "node_id": "core:subarea:r3-099c5d1ead6cd926",
+            "wp_page_id_oct13": 250
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Außenleitungen & Entleerung",
+            "node_id": "core:subarea:r3-a33a954403335f12",
+            "wp_id_at_last_readback": 277,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Frost & Leerstand",
+            "node_id": "core:subarea:c8a6a3e042c29ffd",
+            "wp_id_at_last_readback": 172,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Kontrolle ungenutzter Sanitärräume",
+            "node_id": "core:subarea:r3-099c5d1ead6cd926",
+            "wp_id_at_last_readback": 250,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wasserleitungen im Ferienhaus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:72f261fdd6ff",
+        "area_wp_page_id_oct13": 118,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Feuchtigkeit & Trocknung",
+            "node_id": "core:subarea:b9e996f2919443cc",
+            "wp_page_id_oct13": 166
+          },
+          {
+            "name": "Grundwasser & Kellerbauteile",
+            "node_id": "core:subarea:r3-a6c3442a20ab2019",
+            "wp_page_id_oct13": 278
+          },
+          {
+            "name": "Rückstau & Pumptechnik",
+            "node_id": "core:subarea:ec729ccf048009bd",
+            "wp_page_id_oct13": 180
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 5,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Feuchtigkeit & Trocknung",
+            "node_id": "core:subarea:b9e996f2919443cc",
+            "wp_id_at_last_readback": 166,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Grundwasser & Kellerbauteile",
+            "node_id": "core:subarea:r3-a6c3442a20ab2019",
+            "wp_id_at_last_readback": 278,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Rückstau & Pumptechnik",
+            "node_id": "core:subarea:ec729ccf048009bd",
+            "wp_id_at_last_readback": 180,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Rückstauklappen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hausschwamm im Gebäude",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:25271bd55031",
+        "area_wp_page_id_oct13": 111,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Betriebsfolgen & Bestandsschutz",
+            "node_id": "core:subarea:r3-5bf9a9f7ac41fac4",
+            "wp_page_id_oct13": 263
+          },
+          {
+            "name": "Technikräume & Absperrstellen",
+            "node_id": "core:subarea:r3-90c643c921595b21",
+            "wp_page_id_oct13": 273
+          },
+          {
+            "name": "Wasser in Kleinbetrieben",
+            "node_id": "core:subarea:d3370baa6db0770a",
+            "wp_page_id_oct13": 174
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Betriebsfolgen & Bestandsschutz",
+            "node_id": "core:subarea:r3-5bf9a9f7ac41fac4",
+            "wp_id_at_last_readback": 263,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Technikräume & Absperrstellen",
+            "node_id": "core:subarea:r3-90c643c921595b21",
+            "wp_id_at_last_readback": 273,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wasser in Kleinbetrieben",
+            "node_id": "core:subarea:d3370baa6db0770a",
+            "wp_id_at_last_readback": 174,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wasserschutz im Friseursalon",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:d0e7877ce32c",
+        "area_wp_page_id_oct13": 131,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Leckwarnung & Absperrung",
+            "node_id": "core:subarea:c3293597db93160c",
+            "wp_page_id_oct13": 169
+          },
+          {
+            "name": "Rohrnetz & vorbeugende Wartung",
+            "node_id": "core:subarea:r3-c9a85d5a61ec3c38",
+            "wp_page_id_oct13": 286
+          },
+          {
+            "name": "Wasserschäden & Folgen",
+            "node_id": "core:subarea:b8556bb0d206e66c",
+            "wp_page_id_oct13": 163
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 11,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Leckwarnung & Absperrung",
+            "node_id": "core:subarea:c3293597db93160c",
+            "wp_id_at_last_readback": 169,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Rohrnetz & vorbeugende Wartung",
+            "node_id": "core:subarea:r3-c9a85d5a61ec3c38",
+            "wp_id_at_last_readback": 286,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Wasserschäden & Folgen",
+            "node_id": "core:subarea:b8556bb0d206e66c",
+            "wp_id_at_last_readback": 163,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wassermelder",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dusche undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Spülkasten undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Badewanne abdichten",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Siphon undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Waschbecken undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Küchenspüle undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Küchenarmaturen undicht",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Blitz & Überspannung",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:a07232a95f20",
+        "area_wp_page_id_oct13": 123,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Antennen & kleine Solaranlagen",
+            "node_id": "core:subarea:r3-e221783434b176c2",
+            "wp_page_id_oct13": 291
+          },
+          {
+            "name": "Blitzschutz & Geräte",
+            "node_id": "core:subarea:731b72fa268b5b5a",
+            "wp_page_id_oct13": 153
+          },
+          {
+            "name": "Erdung & Hausinstallation",
+            "node_id": "core:subarea:r3-9aa4363688876852",
+            "wp_page_id_oct13": 275
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Antennen & kleine Solaranlagen",
+            "node_id": "core:subarea:r3-e221783434b176c2",
+            "wp_id_at_last_readback": 291,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Blitzschutz & Geräte",
+            "node_id": "core:subarea:731b72fa268b5b5a",
+            "wp_id_at_last_readback": 153,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Erdung & Hausinstallation",
+            "node_id": "core:subarea:r3-9aa4363688876852",
+            "wp_id_at_last_readback": 275,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Überspannungsschutz im Wohnhaus",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:c7f34e6a2260",
+        "area_wp_page_id_oct13": 128,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Camping, Boote & Garten",
+            "node_id": "core:subarea:b21e2895e32435e4",
+            "wp_page_id_oct13": 162
+          },
+          {
+            "name": "Fahrzeugaufbauten & Transporte",
+            "node_id": "core:subarea:r3-a7e016776e3c7b25",
+            "wp_page_id_oct13": 279
+          },
+          {
+            "name": "Freizeitflächen & mobile Anlagen",
+            "node_id": "core:subarea:r3-63bb9f10fc776e70",
+            "wp_page_id_oct13": 267
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 7,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Camping, Boote & Garten",
+            "node_id": "core:subarea:b21e2895e32435e4",
+            "wp_id_at_last_readback": 162,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Fahrzeugaufbauten & Transporte",
+            "node_id": "core:subarea:r3-a7e016776e3c7b25",
+            "wp_id_at_last_readback": 279,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Freizeitflächen & mobile Anlagen",
+            "node_id": "core:subarea:r3-63bb9f10fc776e70",
+            "wp_id_at_last_readback": 267,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wohnmobil bei Sturm",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hagelschutz für Privatwagen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hochwasser am Privatwagen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Privatwagen bei Sturm",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:341ee911ae13",
+        "area_wp_page_id_oct13": 112,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Vereisung an Außenbauteilen",
+            "node_id": "core:subarea:r3-46a6bfb4e6597c79",
+            "wp_page_id_oct13": 260
+          },
+          {
+            "name": "Winter & Schnee",
+            "node_id": "core:subarea:74e7cdfc2b200d76",
+            "wp_page_id_oct13": 154
+          },
+          {
+            "name": "Winterwege & Verkehrssicherung",
+            "node_id": "core:subarea:r3-5d0377daf4f162ce",
+            "wp_page_id_oct13": 265
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 9,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Vereisung an Außenbauteilen",
+            "node_id": "core:subarea:r3-46a6bfb4e6597c79",
+            "wp_id_at_last_readback": 260,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Winter & Schnee",
+            "node_id": "core:subarea:74e7cdfc2b200d76",
+            "wp_id_at_last_readback": 154,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Winterwege & Verkehrssicherung",
+            "node_id": "core:subarea:r3-5d0377daf4f162ce",
+            "wp_id_at_last_readback": 265,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Winterdienst auf Privatwegen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gewächshaus bei Frost",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Obstbäume bei Frost",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Kübelpflanzen bei Frost",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hecken bei Frost",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Sträucher bei Frost",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "area_type": "NEW_AREA_C2.2_DRAFT",
+      "existing_20261013": null,
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 13,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Dachgeschoss vor Hitze schützen",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wintergarten im Sommer",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenbewässerung bei Trockenheit",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Fassadenverschattung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Terrassenbeläge bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenbäume bei Trockenheit",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Bodenrisse am Grundstück",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wohnmobil bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Privatwagen bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenhaus bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hobbyraum bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Zeltmaterial im Sommer",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Campingausrüstung bei Hitze",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:75a0fdd055d2",
+        "area_wp_page_id_oct13": 119,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Haus & Kellerschutz",
+            "node_id": "core:subarea:28d8087df57279b8",
+            "wp_page_id_oct13": 143
+          },
+          {
+            "name": "Hochwasserschutz & Folgen",
+            "node_id": "core:subarea:927eb3aa17e7e630",
+            "wp_page_id_oct13": 159
+          },
+          {
+            "name": "Warnung & private Vorbereitung",
+            "node_id": "core:subarea:r3-3305deb0d7ee3356",
+            "wp_page_id_oct13": 256
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 12,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Haus & Kellerschutz",
+            "node_id": "core:subarea:28d8087df57279b8",
+            "wp_id_at_last_readback": 143,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Hochwasserschutz & Folgen",
+            "node_id": "core:subarea:927eb3aa17e7e630",
+            "wp_id_at_last_readback": 159,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Warnung & private Vorbereitung",
+            "node_id": "core:subarea:r3-3305deb0d7ee3356",
+            "wp_id_at_last_readback": 256,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Mobile Hochwassersperren",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Tiefgarage bei Starkregen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Hangrutschungen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenböschungen schützen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Uferbefestigung am Privatgrundstück",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenmauern bei Unterspülung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Gartenwege bei Unterspülung",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Ladenlokal bei Hochwasser",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Friseursalon bei Hochwasser",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "area_type": "EXISTING_AREA_PROTECTED",
+      "existing_20261013": {
+        "area_page_node_id": "core:area:9a10ea2cb38a",
+        "area_wp_page_id_oct13": 121,
+        "existing_children": 3,
+        "menu_direct_links": [
+          {
+            "name": "Außenanlagen & Schäden",
+            "node_id": "core:subarea:51d4e47d1437c0fb",
+            "wp_page_id_oct13": 147
+          },
+          {
+            "name": "Dach, Fenster & PV",
+            "node_id": "core:subarea:fad7c82a242f2c16",
+            "wp_page_id_oct13": 182
+          },
+          {
+            "name": "Unwetterwarnung & Vorbereitung",
+            "node_id": "core:subarea:r3-60f298fde2616ca0",
+            "wp_page_id_oct13": 266
+          }
+        ],
+        "menu_more_visible": false
+      },
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 4,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Außenanlagen & Schäden",
+            "node_id": "core:subarea:51d4e47d1437c0fb",
+            "wp_id_at_last_readback": 147,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Dach, Fenster & PV",
+            "node_id": "core:subarea:fad7c82a242f2c16",
+            "wp_id_at_last_readback": 182,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          },
+          {
+            "type": "EXISTING_PAGE3",
+            "name": "Unwetterwarnung & Vorbereitung",
+            "node_id": "core:subarea:r3-60f298fde2616ca0",
+            "wp_id_at_last_readback": 266,
+            "link_rule": "RESOLVE_BY_CURRENT_NODE_ID"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "PV-Anlage bei Sturm",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "area_type": "NEW_AREA_C2.2_DRAFT",
+      "existing_20261013": null,
+      "projected_after_separate_approval": {
+        "total_children_if_all_proposals_approved": 10,
+        "maximum_direct_links": 3,
+        "show_more": true,
+        "more_target_rule": "USE_THE_SAME_AREA_CORE_PAGE_ID_FROM_LIVE_NODE_MAP",
+        "all_children_listed_on_area_hub": true,
+        "preview_direct_first3": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Marder im Dach",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Nager an Hausleitungen",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Holzzerstörende Insekten am Haus",
+            "physical_id": null,
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ],
+        "other_children_preview": [
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Marderbiss am Auto",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Nager im Wohnmobil",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Tierschäden am Freizeitboot",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wühlmäuse im Garten",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Vogelschäden an Außentechnik",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wildtierschäden am Garten",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          },
+          {
+            "type": "PROPOSED_PAGE3",
+            "name": "Wildtierschäden an Zäunen",
+            "link_rule": "NO_LINK_UNTIL_ADDED_AND_READBACK"
+          }
+        ]
+      },
+      "never_guess_url": true,
+      "never_show_uninstalled_link": true
+    }
+  ],
+  "next_action": "Before modifying menu renderer, get latest WP node mapping and installed design plugin version, then test 0,1,2,3,4,11,50 cases in actual plugin PHP/render and compare menu target IDs."
+}
