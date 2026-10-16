@@ -4,7 +4,7 @@
   "status": "CONCEPT_ONLY_NOT_IMPORTABLE",
   "source": "127 routing gaps / existing 285 untouched",
   "topic_count": 33,
-  "article_category_count": 99,
+  "article_category_count": 102,
   "capacity_signals_count": 297,
   "all_article_categories_topic_bound": true,
   "topics": [
@@ -76,6 +76,15 @@
             "Dichtband",
             "Anschlussblech",
             "Überprüfung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Materialien & Baualter",
+          "capacity_signals": [
+            "Altbaufenster",
+            "Anschlussband",
+            "Fensterbank"
           ],
           "capacity_min": 3
         }
@@ -532,6 +541,15 @@
             "Wandfeuchte",
             "Rückbau",
             "Sanierungsumfang"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wann Fachhilfe nötig ist",
+          "capacity_signals": [
+            "Feuchtehintergrund",
+            "Schimmel",
+            "Dichtungstausch"
           ],
           "capacity_min": 3
         }
@@ -1180,6 +1198,15 @@
             "Fotobelege"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Versicherung & Reparatur",
+          "capacity_signals": [
+            "Teilkasko",
+            "Belege",
+            "Werkstatt"
+          ],
+          "capacity_min": 3
         }
       ],
       "seo_status": "NOT_PROVIDER_VERIFIED",
@@ -1265,6 +1292,7 @@
   ],
   "qa": {
     "flat_article_category_names_globally_unique": true,
-    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress."
+    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress.",
+    "anti_fixed_three_category_template": "Variable Anzahl thematisch geeigneter Kategorieaspekte; no upper limit; later expansion by SEO engine possible."
   }
 }
