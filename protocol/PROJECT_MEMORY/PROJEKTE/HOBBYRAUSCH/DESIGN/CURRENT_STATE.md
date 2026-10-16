@@ -12,6 +12,17 @@ STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 1.50.660–1.50.663 VISUELL NICHT FR
 - Der danach erarbeitete neue Bildstand ist **nicht verloren** und liegt im Arbeitsbestand weiterhin vor.
 - Kein neues Plugin ist freigegeben.
 
+## Exakter neuer Bildstand
+Nach erneuter Prüfung des historischen 65/65-Stands und des späteren 30er-Neuaufbaus gilt jetzt verbindlich:
+- alter WIP 1.50.653: historisch tatsächlich 65/65 Heroes fertig, aber danach 30 Kategorien visuell verworfen;
+- neues 30er-Einzelquellen-Konzept aktuell: **9/30 echte neue Einzelquellen fertig**;
+- weitere **11/30** besitzen eine exakt wiederhergestellte neue Richtung, aber noch keine eigenständige Einzelquelle;
+- weitere **6/30** sind nur als Teil des neuen Produktionsblocks belegt;
+- weitere **4/30** besitzen keine rekonstruierbare neue Bindung;
+- damit fehlen **21 eigenständige finale Einzelquellen**, nicht 30.
+
+Autoritativer Nachweis: `NEW_CONCEPT_IMAGE_INVENTORY_20261016.md`.
+
 ## Gesicherter neuer Arbeitsbestand
 Unter `/hobby rausch/_working/` vorhanden:
 - 8 eigenständige neue Quelldateien für 7 Kategorien (Miniaturen mit zwei Kandidaten);
@@ -49,4 +60,4 @@ Nicht wieder als fertigen Stand anbieten:
 - 1.50.663.
 
 ## EXAKT EINE NEXT ACTION
-**Den gesicherten neuen Bildbestand weiterverwenden. Keine alte Pluginserie reaktivieren. Erst den vollständigen realen Fotobestand visuell Kategorie für Kategorie fertigstellen und prüfen; danach lokale 1:1-Simulation auf 1.50.650. Erst bei vollständigem visuellen und technischen PASS ein Plugin bauen und anbieten.**
+**Nicht neu anfangen: die 9 fertigen neuen Einzelquellen einfrieren. Als nächstes ausschließlich die 11 bereits exakt gebundenen neuen Richtungen in eigenständige Einzelquellen überführen; danach die 10 wirklich offenen Motivbindungen schließen. Erst bei 30/30 visueller Abnahme lokal 1:1 auf 1.50.650 simulieren und dann Plugin-Kandidat bauen.**
