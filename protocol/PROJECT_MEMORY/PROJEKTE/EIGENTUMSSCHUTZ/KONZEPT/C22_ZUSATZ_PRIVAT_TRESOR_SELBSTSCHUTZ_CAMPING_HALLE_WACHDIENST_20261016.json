@@ -1,0 +1,362 @@
+{
+  "schema": "HB_C22_PRIVATE_PROPERTY_SCOPE_EXTENSIONS",
+  "date": "2026-10-16",
+  "status": "EDITORIAL_DRAFT_NOT_IMPORTABLE",
+  "scope_note": "Nur Privatpersonen und kleine persönlich geführte Unternehmen, Vereine, Stellplätze und Hallen; keine großen Firmen-/Industriegelände. Wach-/Sicherheitsdienste als redaktionelles Thema, Einträge später ausschließlich über separate HivePress-Dienstleister-Säule. Selbstschutzmittel nur sicherheits- und rechtsorientiert, keine Waffenanwendungstechnik.",
+  "topics": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "topic_page": "Tresore",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Tresorarten & Sicherheitsstufen",
+          "capacity_signals": [
+            "Sicherheitsklasse",
+            "Verwendungszweck",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Standort & Verankerung",
+          "capacity_signals": [
+            "Wand",
+            "Boden",
+            "Traglast"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schloss & Zugriff",
+          "capacity_signals": [
+            "Schlüssel",
+            "Code",
+            "Notöffnung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Schadenfall",
+          "capacity_signals": [
+            "Schlossstörung",
+            "Wasserschaden",
+            "Diebstahl"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kauf & Größe",
+          "capacity_signals": [
+            "Innenmaß",
+            "Gewicht",
+            "Wertgegenstände"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "topic_page": "Selbstschutz bei Einbruch",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sicher handeln im Notfall",
+          "capacity_signals": [
+            "Rückzug",
+            "Abstand",
+            "Notruf"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Alarmierung & Nachbarn",
+          "capacity_signals": [
+            "Telefon",
+            "Haushaltsalarm",
+            "Kontaktkette"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sichere Rückzugsorte",
+          "capacity_signals": [
+            "Türsicherung",
+            "Fluchtweg",
+            "Schutzraum"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Rechtliche Grenzen",
+          "capacity_signals": [
+            "Notwehr",
+            "Verhältnismäßigkeit",
+            "Nachbereitung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "topic_page": "Selbstschutzmittel",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Legale Mittel und Grenzen",
+          "capacity_signals": [
+            "Rechtslage",
+            "Erlaubnispflichten",
+            "Öffentlichkeit"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sicher aufbewahren",
+          "capacity_signals": [
+            "Kindersicherung",
+            "Zugriffsrechte",
+            "Unfallvorsorge"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Risiken und Alternativen",
+          "capacity_signals": [
+            "Deeskalation",
+            "Alarm",
+            "Flucht"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Auswahl verantworten",
+          "capacity_signals": [
+            "Schutzbedarf",
+            "Seriosität",
+            "Beratung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "topic_page": "Private Objektbewachung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leistungen von Wachdiensten",
+          "capacity_signals": [
+            "Kontrollgang",
+            "Revierdienst",
+            "Intervention"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Anbieter auswählen",
+          "capacity_signals": [
+            "Qualifikation",
+            "Zuverlässigkeit",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vertrag & Kosten",
+          "capacity_signals": [
+            "Leistungsumfang",
+            "Dokumentation",
+            "Kündigung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Grenzen und Zuständigkeiten",
+          "capacity_signals": [
+            "Zutritt",
+            "Datenschutz",
+            "Polizeikontakt"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "topic_page": "Wohnmobil-Stellplatzschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Stellplatz & Zugang",
+          "capacity_signals": [
+            "Schranke",
+            "Beleuchtung",
+            "Abstellzone"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diebstahlschutz in Abwesenheit",
+          "capacity_signals": [
+            "Türen",
+            "Wegfahrsperre",
+            "Objektkontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fernüberwachung",
+          "capacity_signals": [
+            "Alarm",
+            "Sensortechnik",
+            "Kontaktperson"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Langzeitabstellung",
+          "capacity_signals": [
+            "Batterie",
+            "Reifen",
+            "Schlüsselmanagement"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Stellplatzdienstleister",
+          "capacity_signals": [
+            "Bewachung",
+            "Vertrag",
+            "Schadenbelege"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic_page": "Vereins-Sporthalle",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Zugang zu Sporthallen",
+          "capacity_signals": [
+            "Schließplan",
+            "Schlüssel",
+            "Gastnutzung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Inventar schützen",
+          "capacity_signals": [
+            "Geräte",
+            "Lager",
+            "Umkleiden"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vandalismus vorbeugen",
+          "capacity_signals": [
+            "Außenlicht",
+            "Kontrolle",
+            "Schadensmeldung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Alarmierung und Betreiberpflichten",
+          "capacity_signals": [
+            "Zuständigkeit",
+            "Notruf",
+            "Schadendokumentation"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic_page": "Kleine private Lagerhalle",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Hallen-Zutritt",
+          "capacity_signals": [
+            "Tore",
+            "Schlüssel",
+            "Alarm"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Lagergut sichern",
+          "capacity_signals": [
+            "Inventar",
+            "Wertsachen",
+            "Regale"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Technik und Brandvorsorge",
+          "capacity_signals": [
+            "Beleuchtung",
+            "Elektrik",
+            "Löschmittel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abwesenheit und Kontrolle",
+          "capacity_signals": [
+            "Fernalarm",
+            "Rundgang",
+            "Dienstleister"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "source_origin": "USER_SCOPED_NICHE_REQUIREMENTS__EDITORIAL_DRAFT",
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    }
+  ]
+}
