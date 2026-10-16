@@ -2,76 +2,72 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-11
-STATUS: **1.14.8 / RULE 2.7 / FINAL VERIFIED E2E / LIVE-PASS / SCHWERER WORKFLOW KANN NACH HD-004-LIVEPASS DEAKTIVIERT WERDEN**
+STAND: 2026-10-16
+STATUS: **LIVE 1.14.8 UNVERÄNDERT / 1.14.9 V3-KANDIDAT LOCAL HARD PASS / WORDPRESS-DRY-RUN OFFEN**
 
-## Plugin
+## Produktiver Live-Stand
 
-ID:
-`HD-001-KATEGORIE-WORKFLOW`
-
-Name:
-`Affiliate-Portal Kategorie-Workflow`
-
-Rolle:
-Bearbeitungs-/Research-/Dry-Run-/Sync-/Resume-/Rollback-Werkzeug für Kategorieänderungen.
-
-## Aktuelle technische Wahrheit
-
-Codebasis:
+Version:
 `1.14.8`
 
-Finales Release:
+Release:
 `HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
 
 SHA-256:
 `709134631895a901bcb4fc5f5d71889d317954d9928c0ed20700883990a5a52c`
 
-Produktive Live-Profilrevision:
+Live-Revision:
 `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
 
-Final:
-- 2357 Zielobjekte;
-- 2357 Readback;
+Live:
+- 2357/2357;
 - Frontend valid;
 - 8 Welten;
-- 330/330 Kategorie-Gate;
-- LIVE-PASS.
+- 330/330 Kategorie-Gate.
 
-## Hard-Audit Deaktivierung/Löschen
+## Updatekandidat 1.14.9
 
-Exakter 1.14.8-Quellstand:
-- kein `uninstall.php`;
-- kein `register_uninstall_hook`;
-- kein `register_deactivation_hook`;
-- Kategorien/Seiten/Terms/Metadaten/Target-Snapshot werden beim Deaktivieren nicht gelöscht;
-- WordPress-Löschen der Plugin-Dateien löst nach diesem Quellstand keinen plugin-eigenen Daten-Cleanup aus.
+Artefakt:
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
 
-Dauerhaft notwendige Runtimefunktion aus HD-001:
-- `journal_cat` registrieren;
-- aktiven Target-Snapshot für andere Komponenten lesbar halten.
+SHA-256:
+`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
 
-Diese Funktion wird schlank nach HD-004 ausgelagert.
+Exaktes Plugin-Delta zu 1.14.8:
+- Hauptdatei: nur Version 1.14.8 → 1.14.9;
+- `profiles/hobby-depot-v1.json`: exakt zentraler V3-Zielbaum;
+- keine Workflow-/Writer-/Rollback-/DataForSEO-Codeänderung;
+- keine Dateien hinzugefügt oder entfernt.
 
-## Neuer Betriebsmodus
+V3-Profil-SHA:
+`6d73e5d4d32e91acf6a5c8dd19dc9e23af4a661dc053fa7a752a4ea4668826e7`
 
-Normal:
-- HD-004 aktiv;
-- HD-001 nach Live-Smoke-Test deaktiviert.
+Local QA:
+- 33/33 PHP-Syntax PASS;
+- ZIP-Integrität PASS;
+- TargetTree Validator PASS;
+- Resolve-for-sync PASS;
+- neue deterministische Revision `...+16d1bd25b2adfc26`;
+- Synthetic-Dry-Run PASS;
+- CREATE 282 / ADOPT 3 / UPDATE 2357 / ARCHIVE 0 / DEMOTE 0;
+- Provider Calls 0;
+- Writes 0.
 
-Änderung:
-- HD-001 wieder aktivieren;
-- Delta/Dry-Run/Sync/Readback;
-- anschließend wieder deaktivieren.
+ADOPT-Nachweis:
+- Trainspotting;
+- Modellraketen;
+- Pflanzenbestimmung.
 
-DataForSEO:
-nur SEO-Evidence innerhalb dieses Bearbeitungsworkflows; keine Strukturautorität und kein Dauerbetriebsgrund.
+## DataForSEO
 
-## Wiederherstellung
+Unverändert:
+nur SEO-Evidence; keine Strukturautorität. Der Final-Target-Dry-Run führt 0 Provider-Aufrufe aus.
 
-Exaktes ZIP zusätzlich zentral abgelegt:
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
+## Harte Grenze
+
+1.14.9 ist **kein Live-PASS**. Installation allein synchronisiert nichts. Der vorhandene Final-Target-Weg bleibt:
+Dry-Run → Fingerprint → einmaliger Sync → Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-004 live installieren; danach HD-001 zunächst deaktivieren und Smoke-Test. Noch nicht vor diesem PASS löschen.**
+**1.14.9 installieren/aktivieren und ausschließlich „Finalen Delta-Dry-Run ausführen“. Noch nicht den Sync bestätigen.**
