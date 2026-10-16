@@ -168,3 +168,21 @@ PRÜFUNG:
 
 ERGEBNIS:
 PASS / historischer Bestand erhalten / aktive Arbeitsfläche verkleinert / keine Plugin- oder WordPress-Fachänderung.
+
+
+## HM-006 – Main-Legacy wegen aktivem Hardlock nicht löschen
+
+DATUM:
+2026-10-16
+
+BEFUND:
+Ein physisches Entfernen der alten STARTMASTER-/System-3/4/4A-/K7-/K8-Sicherheitsdateien auf `main` würde das aktive Ruleset `Pferde Atelier Main Hardlock` beschädigen: die verlangten Checks `hardlock` und `hardlock-base` werden von genau dieser geschützten Infrastruktur getragen; `hardlock-base` verbietet deren Änderung.
+
+ENTSCHEIDUNG:
+**NICHT LÖSCHEN.** Keine Schutzschicht umgehen. Der experimentelle Cleanup-Branch wurde auf den unveränderten Main-Stand zurückgesetzt.
+
+AKTIVE ABGRENZUNG:
+Campus-TEXT routet ausschließlich auf K0; K1–K9 sind fachlich/operativ Archiv. Der technisch noch vorhandene Main-Legacybestand besitzt keine aktive Text-Current-/Fallback-Autorität.
+
+ERGEBNIS:
+BLOCKED FÜR PHYSISCHES MAIN-LÖSCHEN / PASS FÜR SICHERE AKTIV-ENTKOPPLUNG.

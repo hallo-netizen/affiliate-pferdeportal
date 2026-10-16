@@ -400,3 +400,15 @@ PRÜFUNG:
 
 BEZUG:
 ARCH-094 / HM-005.
+
+
+### Main-Hardlock-Grenze 2026-10-16
+
+PRÜFUNG:
+Das aktive GitHub-Ruleset `Pferde Atelier Main Hardlock` verlangt auf dem Default-Branch die Statuschecks `hardlock` und `hardlock-base`. Der vertrauenswürdige `hardlock-base` sperrt Änderungen an den alten Workflow-/Control-Sicherheitsdateien ausdrücklich.
+
+FOLGE:
+Der alte technische K1–K8-Unterbau auf `main` wird **nicht blind physisch entfernt**, solange diese Schutzschicht darauf gebunden ist. Ein Test-Cleanup wurde nicht auf `main` übernommen und der temporäre Cleanup-Branch wieder auf `main` zurückgesetzt.
+
+SICHERE LÖSUNG:
+Aktive Campus- und Textnavigation ignoriert diesen Legacy-Unterbau vollständig und routet ausschließlich auf K0. Der alte Main-Bestand bleibt bis zu einer separat beweisbaren Hardlock-Migration nur technischer Legacy-/Schutzbestand, nicht Current oder Fallback.
