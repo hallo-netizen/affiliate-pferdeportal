@@ -55,7 +55,9 @@
     "article_titles_produced": 0,
     "wp_writes": 0,
     "all_127_candidate_release": false,
-    "change_note": "Wallbox is the concrete topic page; Ladeabbrüche is only an intent/aspect, not its own subject page."
+    "change_note": "Wallbox is the concrete topic page; Ladeabbrüche is only an intent/aspect, not its own subject page.",
+    "flat_article_category_names_globally_unique": true,
+    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress."
   },
   "topics": [
     {
@@ -127,7 +129,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Ersatz & Versicherung",
+          "name": "Katalysator ersetzen & versichern",
           "capacity_signals": [
             "Reparaturumfang",
             "Nachweise",
@@ -498,7 +500,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Vernetzung & Alarm",
+          "name": "Rauchmelder vernetzen",
           "capacity_signals": [
             "Funkkopplung",
             "Alarmweiterleitung",
@@ -507,7 +509,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Wartung & Austausch",
+          "name": "Rauchmelder prüfen & ersetzen",
           "capacity_signals": [
             "Prüfknopf",
             "Staub",
@@ -677,7 +679,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Wartung & Austausch",
+          "name": "Brunnenpumpe warten & ersetzen",
           "capacity_signals": [
             "Filter",
             "Winterlager",
@@ -973,7 +975,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Reparatur & Pflege",
+          "name": "Wohnmobil-Dachnähte pflegen",
           "capacity_signals": [
             "Reinigung",
             "Abdichten",
@@ -1134,7 +1136,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Vernetzung & Alarm",
+          "name": "Wassermelder: Funk & Alarm",
           "capacity_signals": [
             "WLAN",
             "Funk",
@@ -1348,7 +1350,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Schäden erkennen",
+          "name": "Sturmschäden an PV erkennen",
           "capacity_signals": [
             "Module",
             "Kabel",
@@ -1399,7 +1401,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Reparatur & Ersatz",
+          "name": "Dachfenster reparieren & ersetzen",
           "capacity_signals": [
             "Nachabdichten",
             "Ersatzteile",
@@ -1805,7 +1807,7 @@
       "topic_owner_scope": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Nager an Hausleitungen",
       "article_categories": [
         {
-          "name": "Schäden erkennen",
+          "name": "Nagerschäden an Leitungen erkennen",
           "capacity_signals": [
             "Bissstellen",
             "Spuren",
@@ -2165,7 +2167,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Reparatur & Ersatz",
+          "name": "Spülkasten abdichten & reparieren",
           "capacity_signals": [
             "Ersatzteil",
             "Unterputz",
@@ -2200,7 +2202,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Betriebsstörungen",
+          "name": "Störungen der Poolfilterpumpe",
           "capacity_signals": [
             "Luft",
             "Verstopfung",
@@ -2209,7 +2211,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Wartung & Winterlager",
+          "name": "Poolfilterpumpe winterfest machen",
           "capacity_signals": [
             "Reinigung",
             "Frostschutz",
@@ -2286,7 +2288,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Schäden dokumentieren",
+          "name": "Glasschäden dokumentieren",
           "capacity_signals": [
             "Spuren",
             "Fotos",
@@ -2295,7 +2297,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Reparatur & Vorsorge",
+          "name": "Verglasung reparieren & absichern",
           "capacity_signals": [
             "Notverglasung",
             "Schutzbeschläge",
@@ -2379,7 +2381,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Notfall & Schaden",
+          "name": "Starkregen in Tiefgarage: Notfall",
           "capacity_signals": [
             "Warnzeit",
             "Fahrzeuge",
