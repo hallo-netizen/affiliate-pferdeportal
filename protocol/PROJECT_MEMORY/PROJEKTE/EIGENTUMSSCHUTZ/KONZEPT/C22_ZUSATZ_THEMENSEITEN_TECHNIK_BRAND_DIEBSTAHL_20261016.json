@@ -4,7 +4,7 @@
   "status": "CONCEPT_ONLY_NOT_IMPORTABLE",
   "source": "V99/V918 routing gaps; existing 285 unchanged",
   "topic_count": 38,
-  "article_category_count": 114,
+  "article_category_count": 118,
   "capacity_signals_count": 342,
   "all_article_categories_topic_bound": true,
   "topics": [
@@ -76,6 +76,15 @@
             "Alarmgrenze",
             "Ausfall",
             "Fernzugriff"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ertragsvergleich & Messfehler",
+          "capacity_signals": [
+            "Referenzertrag",
+            "Zähler",
+            "Sensorwerte"
           ],
           "capacity_min": 3
         }
@@ -458,6 +467,15 @@
             "Wartung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Einbau und Auswahl",
+          "capacity_signals": [
+            "Torgeometrie",
+            "Windlast",
+            "Montage"
+          ],
+          "capacity_min": 3
         }
       ],
       "seo_status": "NOT_PROVIDER_VERIFIED",
@@ -800,6 +818,15 @@
             "Fachprüfung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Ladebetrieb im Carport",
+          "capacity_signals": [
+            "Abstand",
+            "Untergrund",
+            "Stromanschluss"
+          ],
+          "capacity_min": 3
         }
       ],
       "seo_status": "NOT_PROVIDER_VERIFIED",
@@ -950,6 +977,15 @@
             "Sanierungsplanung",
             "Fachgutachten",
             "Trocknung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorläufige Unterbringung",
+          "capacity_signals": [
+            "Notunterkunft",
+            "Schlüssel",
+            "Versorgung"
           ],
           "capacity_min": 3
         }
@@ -1455,6 +1491,7 @@
   ],
   "qa": {
     "flat_article_category_names_globally_unique": true,
-    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress."
+    "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress.",
+    "anti_fixed_three_category_template": "Variable Anzahl thematisch geeigneter Kategorieaspekte; no upper limit; later expansion by SEO engine possible."
   }
 }
