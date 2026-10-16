@@ -127,7 +127,7 @@
               "name": "Video-Türsprechanlage defekt",
               "article_ideas": [
                 "Videobild einer Türsprechanlage ausgefallen: Kamera oder Innenmonitor",
-                "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+                "Nachtsicht der Video-Türsprechanlage gestört: IR-Licht und Reflexionen prüfen lassen",
                 "Außenkamera der Türsprechanlage nach Starkregen prüfen lassen",
                 "Türvideostation hat Bildaussetzer: Leitungsverbindung fachlich untersuchen"
               ],
@@ -217,5 +217,13 @@
   },
   "old_hold_note": "Earlier 3 unpublished V9.4 candidates for Garagentorantrieb, motorized garden gates and intercom are included as hazard families here, not copied as duplicate categories. Their old unapproved entries stay held, not inserted again.",
   "seo_evidence": "DataForSEO export checked 570 terms but no direct keyword verification for proposed longtail names. No search volume or SERP ranking claim.",
-  "risk_note": "Some subtopics may ultimately be joined under one article rather than independent leaf after detailed old R2 content comparisons. No technical release unless editorial signoff."
+  "risk_note": "Some subtopics may ultimately be joined under one article rather than independent leaf after detailed old R2 content comparisons. No technical release unless editorial signoff.",
+  "v9_20_editorial_intent_repairs": [
+    {
+      "leaf": "Video-Türsprechanlage defekt",
+      "old": "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+      "replacement": "Nachtsicht der Video-Türsprechanlage gestört: IR-Licht und Reflexionen prüfen lassen",
+      "rationale": "First article already owns 'no image' fault; new article handles the distinct night-vision image quality issue"
+    }
+  ]
 }
