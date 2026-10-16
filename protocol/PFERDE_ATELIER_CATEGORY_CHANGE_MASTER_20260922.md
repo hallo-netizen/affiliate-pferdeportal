@@ -1387,3 +1387,17 @@ Die bisher bereitgestellten zwei SEO-ZIP-Dateien sind **keine freigegebene Insta
 Unabhängige lokale Regression: 149 vorhandene PPM-Tests mit altem Original und aktualisiertem PPM **seriell** abgeglichen: jeweils 136 PASS, dieselben 13 alten FAIL, **0 neue Regressionen**. Ein zunächst parallel ausgeführter Testlauf erzeugte zwei nicht reproduzierbare Fehlschläge; dieser Parallelvergleich gilt als unzuverlässig und wurde ausdrücklich durch die serielle Gegenprobe ersetzt.
 
 **Release weiterhin NICHT FREIGEGEBEN:** Die produktive GitHub-Arbeitsbindung erwartet weiterhin die bisherige unveränderte PPM-ZIP-Fassung. Der vorhandene PR-Hardlock schützt diesen Laufzeitpfad gegen reguläre Änderungen. Ohne einen zulässigen, gemeinsamen Releasepfad für die bestehenden drei Komponenten darf kein SEO-Update als fertig installierbar zur Produktionsnutzung übergeben werden. Nicht wieder zwei Teilplugins anbieten; keinen Sicherheits-Hardlock umgehen; keinerlei Veröffentlichung.
+
+
+### 29.6 Zwei-Plugin-Kompatibilitätsabschluss (lokal) – 16.10.2026
+
+**Korrektur zu 29.5:** Die dortige Schlussfolgerung, das originale PPM-ZIP müsse zwingend geändert werden, ist durch den nachfolgenden konkreten Positiv-/Negativtest **widerlegt**. Die Produktionsqualität ist dabei nicht verändert worden.
+
+- Der vollständige offizielle PPM-6.7.9-Originalstand bleibt **bytegenau unverändert** (SHA-256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`). Er bleibt damit auch zur vorhandenen GitHub-Bindung identisch; es gibt **kein PPM-Update** für diesen Auftrag.
+- PSTE **0.57.101**: vollständiges bestehendes Plugin, signierte vereinheitlichte Journal-Kategorieentscheidung aus dem bestehenden Vorgänger **0.57.100**, nur korrekter neuer WordPress-Versionsstand.
+- PSERC **0.28.40**: vollständiges bestehendes Plugin, behobene überstrenge **Byteidentitäts-Kopplung** an das PPM-Journal-Manifest. Der bestehende `PSERC_Production_Reader` akzeptiert bei weiterhin **beidseitig kryptografisch geprüften** Vertragsfassungen ausschließlich die exakt verifizierte, additive redaktionelle Journal-Weichen-Änderung; jede andere Abweichung an Kategorieumfang, Typ/Produktionsfähigkeit, Goldbindungen und Release-Policy blockiert. Keine dritte Komponente, keine neue Architektur.
+- Lokal von den **fertigen ZIPs** geprüft: **122/122** PHP-Syntaxdateien; **61/61** originale Compiler-Builddateien hash-/längenrichtig; **21/21** gezielte positive und negative Testfälle; **3/3** Magazinfragen erhalten mit dem **offiziellen unveränderten PPM** freie Planplätze; WordPress-Pluginstart der beiden ZIPs **zusammen mit dem originalen PPM** PASS (Runtime-Integrität PASS, PPM Read-only Draft Capability PASS).
+- Explizite Negativtests: manipulierte PPM-Signatur, falsche PPM-Version und fehlender Vertragsbestandteil werden weiterhin blockiert. Die vorhandenen Keywords bleiben bei fehlender passender Kategorie im bestehenden Rückstellungsweg; keine neue automatische Kategorieerzeugung. `publish_allowed=false`.
+- Grenzen: Dies sind **lokale** Tests, kein Nachweis des tatsächlich installierten WordPress-/MariaDB-Live-Systems. Ein Update erfolgt nur für die **zwei bestehenden SEO-Plugins**; die PPM 6.7.9 bleibt absichtlich unverändert.
+
+**Letzter verbindlicher technischer Befund:** Zwei Plugin-Updates genügen für die aktuelle semantische Journal-Korrektur **bei der autoritativ gebundenen PPM-6.7.9-Originalfassung**. Der frühere behauptete PPM-Releaseblocker gilt damit für diesen Zwei-Plugin-Korrekturweg als behoben. Kein dritter Installer ausgeben.
