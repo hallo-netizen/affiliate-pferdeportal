@@ -1,0 +1,63 @@
+{
+  "schema": "HB_C22_CENTRAL_CATEGORY_PLUGIN_PRE_RELEASE_READBACK_GATE",
+  "version": "1.0",
+  "date": "2026-10-16",
+  "status": "TECHNICAL_HANDOFF_INSTRUCTION_NO_EXECUTION_OR_RELEASE",
+  "contract": "C2.2",
+  "facts": {
+    "latest_verified_wp_post_sync_date": "2026-10-13",
+    "latest_verified_old_objects_546": 546,
+    "protected_legacy_page3": 93,
+    "protected_legacy_content_terms": 285,
+    "proposed_new_concrete_page3": 173,
+    "proposed_new_intent_categories": 569,
+    "latest_wp_revision_after_v99": "UNKNOWN",
+    "installed_design_plugin_live": "UNKNOWN",
+    "installed_category_plugin_live": "UNKNOWN"
+  },
+  "readback_must_supply": {
+    "source": "READ_ONLY_EXPORT_USING_EXISTING_CATEGORY_WORKFLOW__NO_NEW_PLUGIN_OR_DB_TABLE",
+    "revision": "Actual current workflow profile revision and installed category plugin version at collection time",
+    "core_pages": "All active world/area/page3 real WordPress IDs, node IDs, slugs, parent IDs, names, statuses, effective links",
+    "core_categories": "All active WP core category term IDs, canonical node IDs, real taxonomy, slugs, parent IDs, public URL, archive status, connected page3",
+    "posts": "For every old term all currently connected WordPress post IDs and effective URLs; also any multi-term assignment, redirects and canonical metadata",
+    "menu": "Real enabled area/page3 nodes and final hrefs from the live category reader, not alias labels",
+    "assets": "Check affiliate, glossary, design and article breadcrumb links to old IDs and permalinks",
+    "integrity": "No mutations during export; include counts, revision, hash/checksum and timestamp"
+  },
+  "preflight": [
+    "Verify readback is recent and exactly matches active WordPress revision; stale readback => STOP.",
+    "Verify existing historical 93 and 285 node identities and all changed/non-changed object IDs; no silent renames/moves/deletes.",
+    "Separate old coherent 'Graffiti: Schutz & Hilfe' with its three existing intent categories, no duplicate page3.",
+    "For exact subject label old term vs new page3 Wassermelder, Rückstauklappen, Heizungsausfall, Mobile Hochwassersperren: no page3/term dual canonical until post and permalink migration explicitly resolved.",
+    "For Rauchmelder / Vernetzung, Wertsachen & Tresore, Türen & Fenster, no automatic old label conversion; require content-specific owner split.",
+    "Check 173 new page3 real concrete products/sachthemen and 569 topic-bound article categories: each proposed category distinct intent, min3 independent later article potentials; no compulsory FAQ/Beratung/Vergleich.",
+    "No maximum number of child pages or categories; no historical R3 48x3 or V99 4/22/81/364 numeric cap.",
+    "Do not allow SEO volume to suppress a professionally sensible topic.",
+    "Run actual existing APKW_TargetTree and dry-run validators on proposed target; semantic role false-pass must be blocked by editorial approval provenance.",
+    "Dry-run per ADD, UPDATE and links with actual current WP data, compare expected vs actual new post counts/assignments, URLs, breadcrumbs and menu.",
+    "Run negative test where a category is mislabeled as page3, old term ID changes, wrong parent selected, existing post orphaned, 'Weitere' link wrong, expired revision and incomplete readback; require rejection.",
+    "Rollback dry-run and idempotency must leave old 285 terms, 93 pages, and all articles unaffected.",
+    "Only after explicit approval: one writer, one transaction/batch from existing category workflow; full post-write readback. Otherwise never sync."
+  ],
+  "forbidden": [
+    "automatic conversion of term taxonomy to page",
+    "renaming old category to force new page3 name",
+    "deleting or archiving old content due to low volume",
+    "using the 13 October IDs as proof of the current 16 October revision",
+    "creating second category management plugin or datastore",
+    "using design plugin to write WP category",
+    "filling menu teaser with only 3 while hiding the rest of child objects from the hub",
+    "producing new article titles in category phase"
+  ],
+  "test_expectations": {
+    "old_ids_name_slug_parent_preserved": true,
+    "old_post_term_assignments_preserved_until_checked": true,
+    "zero_unapproved_updates": true,
+    "category_role_semantics_checked_manually": true,
+    "expected_menu_area_more_if_future_plan_approved": 35,
+    "expected_menu_area_without_more_if_future_plan_approved": 1,
+    "expected_existing_hivepress_wachdienst_category_not_recreated": true
+  },
+  "explicit_next_action": "Once live readback data exists, execute a non-destructive offline test in the original category plugin, not a direct WordPress import. All historical 285 term ID changes are BLOCKED until their article assignments and URLs have been checked."
+}
