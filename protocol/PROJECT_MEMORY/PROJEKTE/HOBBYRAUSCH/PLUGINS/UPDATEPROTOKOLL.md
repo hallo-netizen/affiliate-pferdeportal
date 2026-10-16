@@ -2918,3 +2918,106 @@ LOCAL:
 
 LIVE:
 OFFEN.
+
+---
+
+## PU-20261016-065 – HD-001 1.14.9 / V3-Struktur-Vollaudit
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+LIVE-BASIS:
+1.14.8 bleibt produktiv unverändert.
+
+KANDIDAT:
+`HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
+
+SHA-256:
+`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
+
+DELTA:
+- Workflow-Code unverändert;
+- nur Pluginversion 1.14.8 → 1.14.9;
+- eingebettetes Zielprofil ersetzt durch zentral auditierten V3-Zielbaum;
+- 8 Hauptwelten unverändert;
+- 370 terminale Hobbyseiten;
+- 2160 unterste CORE-Inhaltskategorien;
+- jede terminale Hobbyseite 5–8 Inhaltskategorien;
+- 2160/2160 grobe 3–5+-Beitragspotenzialprüfung PASS.
+
+STRUKTURDELTA:
+- +285 Nodes = 45 Seiten + 240 Kategorien;
+- 2 fachliche Updates;
+- 0 Removes.
+
+ECHTE HD-001-LOGIK SYNTHETISCH GEGEN VOLLSTÄNDIGE LIVE-BASELINE:
+- PASS;
+- CREATE 282;
+- ADOPT 3;
+- UPDATE 2357;
+- ARCHIVE 0;
+- DEMOTE_EDITORIAL 0;
+- Provider/DataForSEO Calls 0;
+- WordPress-Writes 0.
+
+ADOPT:
+Trainspotting, Modellraketen, Pflanzenbestimmung.
+
+NEUE RESOLVED REVISION:
+`HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+16d1bd25b2adfc26`
+
+LIVE:
+NOCH NICHT SYNCHRONISIEREN. Zuerst echter WordPress-Final-Target-Dry-Run.
+
+---
+
+## PU-20261016-066 – HD-003 1.50.668 / zentrales Registry-Fundament
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+BASIS:
+saubere 1.50.650-Runtime.
+
+VERWORFEN:
+1.50.664–1.50.667; kein weiterer Aufbau auf diesen Live-Fails.
+
+KANDIDAT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_FOUNDATION_LOCALPASS.zip`
+
+SHA-256:
+`0fb575aeddd19aac285188507d0753eaa554b558183d6686c2a900322c865a5a`
+
+ÄNDERUNG:
+- HD-004 wird einzige CORE-Strukturquelle für Hobby-Navigation/Karten;
+- rohe WordPress-get_pages-Kinder entfernt;
+- Page-/Category-Kinder getrennt;
+- letzte Inhaltskategorieebene terminaler Hobbys sichtbar;
+- tiefere Hub2-Ebene Icon/Text statt Fotoflut;
+- Weltbild-Zufallsfallback entfernt;
+- Term-Kinder ebenfalls Registry-gebunden;
+- fehlende Registry fail-closed, kein stiller Rückfall auf 1.50.650.
+
+POS/NEG:
+- absichtlich falsches rohes Trainspotting unter Messen & Analysieren vorhanden;
+- Registry blendet es dort zuverlässig aus;
+- Messen & Analysieren = Bodenanalyse / Elektrochemie / Spektroskopie / Wasseranalyse;
+- Ameisenhaltung = 7 echte Registry-Inhaltskategorien;
+- fehlende Registry → 0 erratene Kinder.
+
+BROWSER:
+echtes Plugin-CSS bei 1440 / 1024 / 768 / 390 px;
+0 horizontaler Overflow;
+0 Fotokarten auf tiefer Ebene.
+
+PAKET:
+- 981 → 984 Dateien;
+- 3 neue versionsgebundene PHP-Dateien;
+- Hauptplugin geändert;
+- 0 Bilder geändert;
+- PHP 58/58 PASS;
+- ZIP-Roundtrip 984/984 PASS.
+
+LIVE:
+Erst nach V3-Struktur-Sync/Readback und HD-004-Runtimeprüfung.
+
