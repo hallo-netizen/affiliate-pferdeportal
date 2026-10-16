@@ -1,0 +1,1266 @@
+{
+  "schema": "HB_C22_ADDITIONAL_CURATED_TOPIC_PAGES_BATCH_A",
+  "date": "2026-10-16",
+  "status": "CONCEPT_ONLY_NOT_IMPORTABLE",
+  "source": "127 routing gaps / existing 285 untouched",
+  "topic_count": 33,
+  "article_category_count": 99,
+  "capacity_signals_count": 297,
+  "all_article_categories_topic_bound": true,
+  "topics": [
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Dacheindeckung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Dachhaut prüfen",
+          "capacity_signals": [
+            "Ziegel",
+            "Anschlusskanten",
+            "Unterdeckung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leckagen eingrenzen",
+          "capacity_signals": [
+            "Regenrichtung",
+            "Feuchteflecken",
+            "Dachaufbauten"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung vorbereiten",
+          "capacity_signals": [
+            "Teiltausch",
+            "Kontrollgang",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Fensteranschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schlagregen-Schutz",
+          "capacity_signals": [
+            "Anschlussfuge",
+            "Fensterbank",
+            "Abdichtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Feuchtezeichen",
+          "capacity_signals": [
+            "Laibung",
+            "Innenputz",
+            "Dämmung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Pflege",
+          "capacity_signals": [
+            "Dichtband",
+            "Anschlussblech",
+            "Überprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Fassadenfugen & Anschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Fugenversagen erkennen",
+          "capacity_signals": [
+            "Risse",
+            "Ablösung",
+            "Durchfeuchtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abdichtungsarten",
+          "capacity_signals": [
+            "Bewegungsfuge",
+            "Materialwechsel",
+            "Anschlussdetail"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Instandsetzung",
+          "capacity_signals": [
+            "Inspektion",
+            "Erneuerung",
+            "Fachprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Sockelabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Feuchteursachen",
+          "capacity_signals": [
+            "Spritzwasser",
+            "Erdkontakt",
+            "Rissbildung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz der Sockelzone",
+          "capacity_signals": [
+            "Putzsystem",
+            "Anschluss",
+            "Entwässerung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung und Kontrolle",
+          "capacity_signals": [
+            "Freilegung",
+            "Trocknung",
+            "Fachabklärung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic_page": "Dachentwässerung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Abläufe & Notüberläufe",
+          "capacity_signals": [
+            "Ablaufquerschnitt",
+            "Notentwässerung",
+            "Starkregen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fehler finden",
+          "capacity_signals": [
+            "Verstopfung",
+            "Anschlussleckage",
+            "Überlaufen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Nachrüstung",
+          "capacity_signals": [
+            "Reinigung",
+            "Kontrollöffnung",
+            "Fachabnahme"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Bilgenwasser im Freizeitboot",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leckstellen erkennen",
+          "capacity_signals": [
+            "Rumpfdurchführung",
+            "Welle",
+            "Schlauch"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bilgenpumpe & Alarm",
+          "capacity_signals": [
+            "Fördermenge",
+            "Schwimmer",
+            "Strom"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Winterlager & Prüfung",
+          "capacity_signals": [
+            "Trockenlager",
+            "Inspektion",
+            "Dichtung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Bootskajüte",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Feuchteursachen an Bord",
+          "capacity_signals": [
+            "Kondenswasser",
+            "Lüftung",
+            "Leckagen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schimmel verhindern",
+          "capacity_signals": [
+            "Entfeuchten",
+            "Heizen",
+            "Materialpflege"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Feuchtefolgen beseitigen",
+          "capacity_signals": [
+            "Polster",
+            "Holzflächen",
+            "Elektrik"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Boot-Wassersystem",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Leitungsfrost",
+          "capacity_signals": [
+            "Entleerung",
+            "Restwasser",
+            "Armaturen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leckwarnung & Wartung",
+          "capacity_signals": [
+            "Schlauch",
+            "Verbindung",
+            "Pumpe"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Winterbetrieb",
+          "capacity_signals": [
+            "Außerbetriebnahme",
+            "Kontrollen",
+            "Wiederinbetriebnahme"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Bootsabdeckung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Regenschutz am Liegeplatz",
+          "capacity_signals": [
+            "Persenning",
+            "Regenablauf",
+            "Befestigung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wassereintritt erkennen",
+          "capacity_signals": [
+            "Scheuerstelle",
+            "Naht",
+            "Kondensation"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Pflege und Austausch",
+          "capacity_signals": [
+            "Trocknung",
+            "Imprägnierung",
+            "Passform"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Poolleitungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Lecks finden",
+          "capacity_signals": [
+            "Druckverlust",
+            "Erdreich",
+            "Anschluss"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Winterbetrieb",
+          "capacity_signals": [
+            "Entleerung",
+            "Frostschutz",
+            "Schacht"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung & Betrieb",
+          "capacity_signals": [
+            "Reparaturstück",
+            "Dichtprüfung",
+            "Wiederbefüllung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Poolbeckenabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Undichte Stellen",
+          "capacity_signals": [
+            "Einströmdüse",
+            "Skimmer",
+            "Folie"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Material & Reparatur",
+          "capacity_signals": [
+            "Beckenart",
+            "Naht",
+            "Abdichtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kontrolle & Kosten",
+          "capacity_signals": [
+            "Wasserstand",
+            "Schadensumfang",
+            "Fachleistung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "topic_page": "Teichfolie",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Undichtigkeiten suchen",
+          "capacity_signals": [
+            "Wasserlinie",
+            "Naht",
+            "Randbereich"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Folie schützen",
+          "capacity_signals": [
+            "Unterlage",
+            "Wurzeln",
+            "Steinauflage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Pflege",
+          "capacity_signals": [
+            "Flicken",
+            "Austausch",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "topic_page": "Hausschwamm im Gebäude",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Befall erkennen",
+          "capacity_signals": [
+            "Holz",
+            "Feuchte",
+            "Verfärbung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ursachen beheben",
+          "capacity_signals": [
+            "Wasserquelle",
+            "Trocknung",
+            "Bauteilprüfung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung mit Fachleuten",
+          "capacity_signals": [
+            "Ausbreitung",
+            "Entfernung",
+            "Nachkontrolle"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "topic_page": "Badewanne abdichten",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Wannenanschluss",
+          "capacity_signals": [
+            "Wandfuge",
+            "Randabdichtung",
+            "Bewegung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ablauf & Überlauf",
+          "capacity_signals": [
+            "Rohrverbindung",
+            "Dichtung",
+            "Wassereintritt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden beseitigen",
+          "capacity_signals": [
+            "Wandfeuchte",
+            "Rückbau",
+            "Sanierungsumfang"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Fassadenverschattung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Sonnenschutzarten",
+          "capacity_signals": [
+            "Außenraffstore",
+            "Markise",
+            "Textilscreen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Montage & Windschutz",
+          "capacity_signals": [
+            "Befestigung",
+            "Windwächter",
+            "Leitungsweg"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wirkung & Bedienung",
+          "capacity_signals": [
+            "Blendung",
+            "Raumtemperatur",
+            "Automatik"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Terrassenbeläge bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Materialverhalten",
+          "capacity_signals": [
+            "Holz",
+            "Verbundstein",
+            "Kunststoff"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden vermeiden",
+          "capacity_signals": [
+            "Ausdehnung",
+            "Fugen",
+            "Beschattung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden beheben",
+          "capacity_signals": [
+            "Verformung",
+            "Riss",
+            "Einzeltausch"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Gartenbäume bei Trockenheit",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Trockenstress erkennen",
+          "capacity_signals": [
+            "Blätter",
+            "Rinde",
+            "Boden"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bewässerung anpassen",
+          "capacity_signals": [
+            "Wurzeltiefe",
+            "Gießring",
+            "Zeitpunkt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bäume schützen",
+          "capacity_signals": [
+            "Mulch",
+            "Baumscheibe",
+            "Baumpflege"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Bodenrisse am Grundstück",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Ursachen einordnen",
+          "capacity_signals": [
+            "Trockenheit",
+            "Bodenart",
+            "Setzung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Gebäudefolgen prüfen",
+          "capacity_signals": [
+            "Fundament",
+            "Wege",
+            "Einfriedung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Sanierung",
+          "capacity_signals": [
+            "Bewässerung",
+            "Entwässerung",
+            "Fachgutachten"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Wohnmobil bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Fahrzeug beschatten",
+          "capacity_signals": [
+            "Stellplatz",
+            "Sonnensegel",
+            "Scheibenschutz"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Innenraum belüften",
+          "capacity_signals": [
+            "Dachlüfter",
+            "Fenster",
+            "Temperaturkontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ausrüstung schützen",
+          "capacity_signals": [
+            "Akkus",
+            "Klebstoffe",
+            "Lebensmittel"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic_page": "Privatwagen bei Hitze",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Standplatz & Abdeckung",
+          "capacity_signals": [
+            "Schatten",
+            "Autoplane",
+            "Windschutzscheibe"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fahrzeugtechnik schonen",
+          "capacity_signals": [
+            "Reifen",
+            "Batterie",
+            "Kühlmittel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Innenraum schützen",
+          "capacity_signals": [
+            "Kunststoff",
+            "Elektronik",
+            "Kindersicherheit"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Hangrutschungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Risiko am Grundstück",
+          "capacity_signals": [
+            "Hangneigung",
+            "Regenmenge",
+            "Risse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Warnzeichen",
+          "capacity_signals": [
+            "Bewegung",
+            "Wasserwege",
+            "Bodenaufbrüche"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sicherung & Fachhilfe",
+          "capacity_signals": [
+            "Entwässerung",
+            "Geotechnik",
+            "Absperrung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Gartenböschungen schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Erosion erkennen",
+          "capacity_signals": [
+            "Abschwemmung",
+            "Rinnen",
+            "Wurzelverlust"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Böschung stabilisieren",
+          "capacity_signals": [
+            "Bepflanzung",
+            "Matten",
+            "Entwässerung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung und Folgen",
+          "capacity_signals": [
+            "Kontrollgang",
+            "Starkregenschaden",
+            "Fachgrenze"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic_page": "Uferbefestigung am Privatgrundstück",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Uferabbrüche",
+          "capacity_signals": [
+            "Auskolkung",
+            "Wellen",
+            "Unterspülung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutzmaßnahmen",
+          "capacity_signals": [
+            "Böschungsbewuchs",
+            "Steinschüttung",
+            "Uferkante"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Recht & Pflege",
+          "capacity_signals": [
+            "Genehmigung",
+            "Unterhalt",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Marderbiss am Auto",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Bissspuren erkennen",
+          "capacity_signals": [
+            "Schlauch",
+            "Kabel",
+            "Dämmung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Marderschutz",
+          "capacity_signals": [
+            "Abschirmung",
+            "Geruch",
+            "Stellplatz"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Vorsorge",
+          "capacity_signals": [
+            "Leitungswechsel",
+            "Motorraumreinigung",
+            "Kontrolle"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Nager im Wohnmobil",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Befall & Spuren",
+          "capacity_signals": [
+            "Kot",
+            "Nester",
+            "Kabel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Winterlager absichern",
+          "capacity_signals": [
+            "Zugänge",
+            "Futterquellen",
+            "Abstellort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden prüfen",
+          "capacity_signals": [
+            "Polster",
+            "Leitungen",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Tierschäden am Freizeitboot",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Eintritt & Nester",
+          "capacity_signals": [
+            "Persenning",
+            "Staufach",
+            "Kajüte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Befall vermeiden",
+          "capacity_signals": [
+            "Abdeckung",
+            "Liegeplatz",
+            "Kontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden beseitigen",
+          "capacity_signals": [
+            "Kabel",
+            "Polster",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Wühlmäuse im Garten",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schadbild",
+          "capacity_signals": [
+            "Wurzel",
+            "Fraßgänge",
+            "Rasen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz der Pflanzen",
+          "capacity_signals": [
+            "Wurzelschutz",
+            "Pflanzkorb",
+            "Flächenpflege"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Umgang mit Befall",
+          "capacity_signals": [
+            "Erkennung",
+            "Fallenrecht",
+            "Vorbeugung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "topic_page": "Vogelschäden an Außentechnik",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Schadenarten",
+          "capacity_signals": [
+            "Nester",
+            "Kot",
+            "Kabel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Technik schützen",
+          "capacity_signals": [
+            "Abdeckung",
+            "Abstand",
+            "Auflagen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reinigung & Wartung",
+          "capacity_signals": [
+            "Anlagenprüfung",
+            "Saisonschutz",
+            "Artenschutz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "topic_page": "Hagelschutz für Privatwagen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Standplatzschutz",
+          "capacity_signals": [
+            "Carport",
+            "Tiefgarage",
+            "Überdachung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abdeckungen wählen",
+          "capacity_signals": [
+            "Hagelplane",
+            "Fixierung",
+            "Material"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schaden und Vorsorge",
+          "capacity_signals": [
+            "Dellen",
+            "Lack",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "topic_page": "Hochwasser am Privatwagen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Überflutungsrisiko",
+          "capacity_signals": [
+            "Parkzone",
+            "Pegelwarnung",
+            "Tiefgarage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sofortverhalten",
+          "capacity_signals": [
+            "Elektrik",
+            "Startversuch",
+            "Bergung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Folgeschäden",
+          "capacity_signals": [
+            "Korrosion",
+            "Innenraum",
+            "Versicherungsnachweis"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "topic_page": "Privatwagen bei Sturm",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Parkschutz",
+          "capacity_signals": [
+            "Baumrisiko",
+            "Hausecke",
+            "Unterstand"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schadensgefahren",
+          "capacity_signals": [
+            "Astbruch",
+            "Trümmer",
+            "Hagel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Notfall & Schaden",
+          "capacity_signals": [
+            "Umparken",
+            "Absperrung",
+            "Fotobelege"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "topic_page": "Obstbäume bei Frost",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Spätfrost erkennen",
+          "capacity_signals": [
+            "Blüte",
+            "Nachtminimum",
+            "Sorten"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Blüten schützen",
+          "capacity_signals": [
+            "Vlies",
+            "Standort",
+            "Temperaturkontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Frostschäden beurteilen",
+          "capacity_signals": [
+            "Austrieb",
+            "Fruchtansatz",
+            "Regeneration"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "topic_page": "Kübelpflanzen bei Frost",
+      "proposal_role": "CONCRETE_PAGE3",
+      "article_categories": [
+        {
+          "name": "Winterquartier",
+          "capacity_signals": [
+            "Licht",
+            "Raumklima",
+            "Luft"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Töpfe schützen",
+          "capacity_signals": [
+            "Wurzelballen",
+            "Isolation",
+            "Standort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wieder auswildern",
+          "capacity_signals": [
+            "Abhärtung",
+            "Gießmenge",
+            "Schäden"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "seo_status": "NOT_PROVIDER_VERIFIED",
+      "wp_status": "CONCEPT_ONLY",
+      "release": false
+    }
+  ]
+}
