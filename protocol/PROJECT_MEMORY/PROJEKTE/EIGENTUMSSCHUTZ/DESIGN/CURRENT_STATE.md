@@ -1,6 +1,9 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+**Navigations-QA-Referenz (nur Datenmodell):** `../KONZEPT/C22_GESAMTBAUM_NAVIGATION_POSITIV_NEGATIV_QUALITAETSPRUEFUNG_20261016.json`: 28/28 konzeptionelle Tests, darunter Flyout 0/1/2/3/4/11/50 und Vollzugriff auf alle Kinder über den Hub. Dies testet **nicht** das echte Designplugin oder die Live-Website.
+
+
 ## C2.2 NAVIGATIONSENTSCHEIDUNG 16.10.2026 – NUR DARSTELLUNG, NICHT KATEGORIEN-SCHREIBER
 Die fachlich bestätigte Darstellung für wachsende Kategoriebäume ist gespeichert in `C22_NAVIGATION_MEHR_SEITEN_3_LINKS_ALLE_ERREICHBAR_20261016.md`. Der C2.2-Entwurf umfasst 36 fachliche Bereiche mit jeweils 4–22 alten+neuen Seite-3-Knoten. **Flyout je Gruppe max. drei Direktlinks; wenn >3 Kinder, immer „Weitere Kategorien“ auf den betreffenden Hub, der ALLE Themen zeigt.** Keine künstliche Kategorieobergrenze, keine vierte Seitenebene und keine eigenen Kategorien-/SEO-/ID-Schreibrechte im Design. Quellen ausschließlich aktive zentrale Kategorie-Revision. **Plugin 0.1.20 lokal dokumentierter 3+Mehr-Fix; Live weiterhin NICHT geprüft.** Design-NEXT ACTION bleibt: echten Flyout-/Hub-/Mobil-/Breadcrumb- und Cache-Readback nach Installation gegen 0/1/2/3/4/viele Kinder prüfen; keine reine Konzeptakte als Pluginrelease ausgeben.
 
