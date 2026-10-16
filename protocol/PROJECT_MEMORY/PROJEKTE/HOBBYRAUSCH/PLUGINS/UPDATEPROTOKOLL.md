@@ -2883,3 +2883,38 @@ ISOLIERTES ARTEFAKT:
 
 CURRENT:
 `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+
+## PU-20261016-064 – HD-003 / Mega-Menü + Hauptweltkopf + Hero→Preview
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+KANDIDAT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
+
+SHA-256:
+`73dfdc40792b1d550aaff6343aab9e9a4ca713988e0aa0c1957825b42ed4e2f9`
+
+ÄNDERUNG:
+- Mega-Menü nicht mehr starre 3er-Grenze; gemeinsame sichtbare Zahl aus kleinstem Direktbestand, aktuell 5;
+- bei größeren Welten `Mehr Kategorien`, genau eine zusätzliche kompakte Orientierungsebene;
+- Hauptwelt-Hero/Textkopf responsive repariert: Desktop nebeneinander, <=1100 px gestapelt, Mobil kompakt;
+- 65/65 Kategorievorschauen aus den jeweils aktuellen Hub2-Hero-Dateien neu abgeleitet.
+
+HARD SCOPE:
+- keine Kategorienstruktur geändert;
+- keine Hero-Datei geändert;
+- kein Hub2-Mapping geändert;
+- keine Affiliate-/Routing-/Taxonomieänderung.
+
+LOCAL:
+- 65 Preview-WEBP geändert;
+- 65/65 Preview 200×107;
+- 0 Hero-WEBP geändert;
+- 58/58 PHP-Syntax PASS;
+- Mega-Menü Desktop/Tablet 8/8 gleiche Grundhöhe;
+- ZIP-Integrität + Roundtrip PASS.
+
+LIVE:
+OFFEN.
