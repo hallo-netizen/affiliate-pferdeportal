@@ -1,0 +1,970 @@
+{
+  "schema": "HB-V9.18-CENTRAL-CATEGORY-OFFICE-EDITORIAL-CONSOLIDATION",
+  "date": "2026-10-16",
+  "status": "STAGED_NOT_IMPORTABLE_SEO_SEMANTIC_NOT_APPROVED",
+  "editorial_authority": "../KONZEPT/CURRENT_STATE.md",
+  "technical_authority": "KATEGORIEN/CURRENT_STATE.md",
+  "baseline": "Original 6 worlds 31 areas 93 subareas 285 CORE leaves unchanged; V99 4 areas 22 subareas 81 leaves remain a separate prior proposal, no implied new WP write here.",
+  "sources": [
+    "KONZEPT/V9_10_VANDALISMUS_GEBAEUDE_2_UNTERBEREICHE_6_ENDKATEGORIEN_30_IDEEN_NICHT_IMPORTIEREN_20261015.json",
+    "KONZEPT/V9_12_BAD_PV_WARMWASSER_PUMPEN_FROST_21_ENDKATEGORIEN_20261016.json",
+    "KONZEPT/V9_13_TORTECHNIK_HOFLADEN_16_ENDKATEGORIEN_64_IDEEN_NICHT_IMPORTIEREN_20261016.json",
+    "KONZEPT/V9_17_KLEINBETRIEBE_TIEFGARAGE_3_ENDKATEGORIEN_20261016.json",
+    "KONZEPT/V9_16_ALLE_93_UNTERBEREICHE_EINZELPRUEFUNG_20261016.json",
+    "KATEGORIEN/V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json",
+    "KONZEPT/R3_V8_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md"
+  ],
+  "summary": {
+    "new_full_area_candidates": 1,
+    "new_subarea_candidates": 11,
+    "new_leaf_candidates": 46,
+    "new_article_ideas": 214,
+    "additions_to_existing_subareas": 3,
+    "additional_would_be_total_leaf_candidates_if_all_staged_approved": 127
+  },
+  "hard_contract": [
+    "Only append genuinely differentiated topics; category counts are NOT targets or upper limits.",
+    "No category discarded or merged for low, null or unavailable DataForSEO search volume.",
+    "No existing names IDs parents slugs URLs or article ownership changed automatically.",
+    "Keyword evidence 51/570 returned; V9.15 name aliases are only suggestions, not automatic renames.",
+    "Before import: full article-title semantic collision and owner check against available 1130 of 1136 historical titles, actual WP readback, positive/negative tests and rollback.",
+    "Do NOT create plugin ZIP from this unapproved candidate set."
+  ],
+  "new_intermediate_groups": [
+    {
+      "source": "V9.10",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "parent_id": "core:area:4611320db640",
+      "subarea": "Private Wohnräume & Einbauten",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 3
+    },
+    {
+      "source": "V9.10",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "parent_id": "core:area:4611320db640",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 3
+    },
+    {
+      "source": "V9.12",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "parent_id": "core:area:d0e7877ce32c",
+      "subarea": "Bad & Küche",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 5
+    },
+    {
+      "source": "V9.12",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "parent_id": "core:area:e3d4d2f00002",
+      "subarea": "PV & Ladetechnik",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.12",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "parent_id": "core:area:f03faeefbce4",
+      "subarea": "Warmwasser & Boiler",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.12",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "parent_id": "core:area:2252b23b56f6",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.12",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "parent_id": "core:area:341ee911ae13",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "mode": "ADD_SUBAREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.13",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "parent_id": "core:world:technik-und-ausfalle",
+      "subarea": "Garagentore & Antriebe",
+      "mode": "NEW_AREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.13",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "parent_id": "core:world:technik-und-ausfalle",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "mode": "NEW_AREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.13",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "parent_id": "core:world:technik-und-ausfalle",
+      "subarea": "Türsprechanlagen & Öffner",
+      "mode": "NEW_AREA",
+      "leaf_count": 4
+    },
+    {
+      "source": "V9.13",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "parent_id": "core:area:d71aef44a98c",
+      "subarea": "Hofläden & Selbstbedienung",
+      "mode": "NEW_SUBAREA",
+      "leaf_count": 4
+    }
+  ],
+  "new_leaves": [
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Innenwände & Decken beschädigt",
+      "article_ideas": [
+        "Mutwillige Beschädigungen an Tapeten von üblichen Gebrauchsspuren unterscheiden",
+        "Schlag- und Kratzspuren in Innenputz fachgerecht instand setzen lassen",
+        "Beschmierte Wände in einer vermieteten Wohnung materialschonend reinigen",
+        "Widerstandsfähige Wandbeläge für gefährdete privat genutzte Räume vergleichen",
+        "Beschädigte Deckenbekleidungen nach vorsätzlichen Eingriffen fachlich prüfen lassen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Bodenbeläge & Wohnraumtreppen",
+      "article_ideas": [
+        "Mutwillige Parkettkratzer von gewöhnlicher Abnutzung abgrenzen",
+        "Vorsätzlich beschädigtes Vinyl oder Laminat fachgerecht instand setzen lassen",
+        "Herausgebrochene Bodenfliesen nach Sachbeschädigung austauschen lassen",
+        "Beschädigte Treppenstufen in privaten Wohnbereichen vor weiterer Nutzung prüfen lassen",
+        "Robuste Bodenbeläge für oft beschädigte Ferienwohnungen vergleichen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Einbauküchen & festes Wohninventar",
+      "article_ideas": [
+        "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+        "Kratzer und Schlagstellen an Küchenarbeitsplatten materialgerecht behandeln",
+        "Herausgerissene Scharniere an Einbauschränken fachgerecht befestigen lassen",
+        "Einbaugeräte nach mutwilligen Stößen vor Wiederinbetriebnahme prüfen lassen",
+        "Kratzfeste Küchenfronten und robuste Beschläge für vermietete Wohnungen vergleichen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Heizräume & Heizkreisverteiler",
+      "article_ideas": [
+        "Unbefugten Zutritt zu Heizungsräumen im kleinen Wohnhaus erschweren",
+        "Manipulationsspuren am Heizkreisverteiler ohne Eingriff in die Anlage dokumentieren",
+        "Beschädigte Abdeckungen und Verschlüsse an Heizkreisverteilern ersetzen lassen",
+        "Heizungsregelung nach vermuteter Fremdverstellung fachlich überprüfen lassen",
+        "Zuständigkeiten und Schlüsselverwaltung für gemeinschaftliche Heizräume organisieren"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Innenverteiler & Sicherungskästen",
+      "article_ideas": [
+        "Innenliegende Elektroverteiler im kleinen Mehrfamilienhaus vor unbefugtem Zugriff schützen",
+        "Äußere Manipulationsspuren an Sicherungskästen ohne Öffnen erkennen",
+        "Beschädigte Türen und Verschlüsse von Elektroverteilungen fachgerecht ersetzen lassen",
+        "Zugang zu Zählerschränken in Hausfluren sicher organisieren",
+        "Elektroanlage nach mutwilliger Beschädigung erst nach Fachprüfung wieder nutzen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "area_parent_id": "core:area:4611320db640",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.10",
+      "name": "Wasserabsperrungen & Technikschränke",
+      "article_ideas": [
+        "Zugängliche Wasserabsperrungen im Wohnhaus gegen unbefugte Bedienung schützen",
+        "Beschädigte Wasserzähler-Schränke im Innenraum sicher instand setzen lassen",
+        "Vorsätzliche Beschädigung von Wasserleitungen von natürlichem Verschleiß fachlich abgrenzen",
+        "Abschließbare Technikschränke für Wasserinstallationen vergleichen",
+        "Nach absichtlichem Wasseraustritt in Technikräumen weitere Gebäudeschäden begrenzen lassen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "area_parent_id": "core:area:d0e7877ce32c",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Dusche undicht",
+      "article_ideas": [
+        "Dusche undicht: Dichtfuge und Abdichtung fachlich unterscheiden",
+        "Wasser unter der bodengleichen Dusche erkennen",
+        "Undichte Duschwanne: Ablauf und Anschlüsse prüfen lassen",
+        "Feuchteschäden hinter Duschwänden rechtzeitig feststellen",
+        "Nach einer Duschabdichtung Dichtheit und Wiederherstellung kontrollieren lassen"
+      ],
+      "seo_boundary": "Bad/Duschbereich; allgemeine Rohrleitung und Wassermelder bleiben alte Owner."
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "area_parent_id": "core:area:d0e7877ce32c",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Badewanne undicht",
+      "article_ideas": [
+        "Badewannenablauf undicht: Warnzeichen und Wasserschaden erkennen",
+        "Wasser tritt hinter der Badewanne aus: Ursachen fachlich eingrenzen",
+        "Dichtung am Wannenüberlauf auf Undichtigkeit prüfen lassen",
+        "Badewannenrand: Silikonfuge oder Bauwerksabdichtung als Ursache unterscheiden",
+        "Versteckte Feuchte unter eingebauter Wanne untersuchen lassen"
+      ],
+      "seo_boundary": "Badewannenwanne und Anschlüsse, nicht WC oder generischer Rohrbruch."
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "area_parent_id": "core:area:d0e7877ce32c",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Spülkasten undicht",
+      "article_ideas": [
+        "Spülkasten läuft ständig: Verschleiß oder undichte Dichtung unterscheiden",
+        "Unterputzspülkasten undicht: Anzeichen hinter der Vorwand erkennen",
+        "Wasserschaden durch WC-Spülkasten dokumentieren",
+        "WC-Zulauf und Füllventil nach wiederholtem Nachtropfen prüfen lassen",
+        "Abdichtung undichtes WC-Becken: Dichtung gegen Verbindungsleck abgrenzen"
+      ],
+      "seo_boundary": "WC-Spülkasten/-Anschluss; allgemeine Wasserschäden bleiben Besitzer."
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "area_parent_id": "core:area:d0e7877ce32c",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Siphon & Waschbecken",
+      "article_ideas": [
+        "Siphon tropft unter dem Waschbecken: Verbindung oder Materialschaden",
+        "Eckventil undicht: Wasser unter Waschbecken sicher abstellen lassen",
+        "Wasser im Waschtischunterschrank früh erkennen",
+        "Waschbeckenablauf nach Reinigung auf Undichtigkeit prüfen",
+        "Waschtischbefestigung nach Wassereintritt auf Folgeschäden prüfen lassen"
+      ],
+      "seo_boundary": "Waschtischsiphon/-Eckventil; keine allgemeine Rohrnetz-Wartung."
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "area_parent_id": "core:area:d0e7877ce32c",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Küchenspüle & Armaturen",
+      "article_ideas": [
+        "Wasser unter der Küchenspüle: typische Leckstellen lokalisieren lassen",
+        "Küchenarmatur tropft am Sockel: Anschluss oder Dichtung unterscheiden",
+        "Schadhafte Küchen-Eckventile rechtzeitig austauschen lassen",
+        "Aufgequollene Küchenunterschränke nach verdecktem Wasserleck beurteilen",
+        "Spülbeckenablauf bei langsamer Leckage prüfen und abdichten lassen"
+      ],
+      "seo_boundary": "Spülbecken/Armaturen und Folgen an Küche; kein Geschirrspüler-Haushaltsgeräteschutz."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "area_parent_id": "core:area:e3d4d2f00002",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "PV-Kabel & Steckverbinder",
+      "article_ideas": [
+        "PV-Gleichstromleitungen auf Brandschutzrisiken fachlich prüfen lassen",
+        "Beschädigte Solar-Steckverbinder: Warnzeichen für Kontaktwärme",
+        "PV-Kabel an Dachkanten vor Scheuern und Überhitzung schützen lassen",
+        "Nach Wartungsarbeiten an PV-Steckverbindern Fachkontrolle organisieren",
+        "Brandrisiko an DC-Trennstellen: Fachbetrieb für Kontrolle auswählen"
+      ],
+      "seo_boundary": "Brand-/Schmorfolgen PV-DC; Wechselrichter-Ertragsfehler gehören Technik."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "area_parent_id": "core:area:e3d4d2f00002",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Wechselrichter: Brandschutz",
+      "article_ideas": [
+        "Wechselrichter mit ausreichender Wärmeabfuhr montieren lassen",
+        "Schmorgeruch am PV-Wechselrichter: Anlage sicher außer Betrieb nehmen lassen",
+        "Brandlasten rund um Wechselrichter im Haus reduzieren",
+        "Wärmestau an Wechselrichtergehäusen fachlich beurteilen lassen",
+        "Wechselrichter nach Hitzeschaden vor Wiederbetrieb kontrollieren lassen"
+      ],
+      "seo_boundary": "Feuer/Überhitzung, nicht V9.9 Wechselrichterfehler oder PV-Monitoring."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "area_parent_id": "core:area:e3d4d2f00002",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Heimspeicher: Brandschutz",
+      "article_ideas": [
+        "Batteriespeicher-Aufstellort: Brandschutz und Herstellerabstände prüfen",
+        "Beschädigten Heimspeicher nach Hitze- oder Rauchwarnung fachlich absichern lassen",
+        "Batteriespeicher im Keller: Fluchtweg und Belüftung beurteilen lassen",
+        "Rauch- und Wärmewarnung in Räumen mit Heimspeichern vergleichen",
+        "Heimspeicher nach Wasserschaden vor Wiederbetrieb fachlich untersuchen lassen"
+      ],
+      "seo_boundary": "Brandschutz/Brandgefahr, nicht V9.9 Speicherfehlermeldungen oder Notstrom."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "area_parent_id": "core:area:e3d4d2f00002",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Wallbox: Brandrisiken",
+      "article_ideas": [
+        "Schmorgeruch an Wallbox oder Ladestecker: Fachprüfung veranlassen",
+        "Kontaktwärme am Ladeanschluss eines Privatwagens erkennen lassen",
+        "Brennbare Lagergüter rund um private Wallboxen vermeiden",
+        "Wallbox-Leitung und Schutzorgane nach Installationsänderungen fachlich kontrollieren",
+        "Ladeplatz nach Brandschaden erst nach elektrotechnischer Prüfung nutzen"
+      ],
+      "seo_boundary": "Feuer und Hitze, nicht Wallbox Ladeabbruch oder E-Auto Batteriebrand."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "area_parent_id": "core:area:f03faeefbce4",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Durchlauferhitzer defekt",
+      "article_ideas": [
+        "Durchlauferhitzer liefert kein Warmwasser: mögliche Störursachen einordnen",
+        "Temperaturschwankungen am Durchlauferhitzer fachlich prüfen lassen",
+        "Elektrischer Durchlauferhitzer schaltet ab: Anzeigen für den Fachbetrieb festhalten",
+        "Warmwasser nur an einer Zapfstelle gestört: Gerät oder Armatur unterscheiden",
+        "Durchlauferhitzer nach Stromausfall auf sichere Funktion prüfen lassen"
+      ],
+      "seo_boundary": "Gerätebetriebsstörung, nicht Gasinstallation oder Wasseraustritt."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "area_parent_id": "core:area:f03faeefbce4",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Warmwasserspeicher defekt",
+      "article_ideas": [
+        "Warmwasserspeicher heizt nicht mehr: Regler oder Heizsystem unterscheiden",
+        "Zu wenig Warmwasser aus dem Boiler: Dimensionierung und Defekt trennen",
+        "Temperaturbegrenzung am Warmwasserspeicher fachlich überprüfen",
+        "Defekte Speicherthermostate an Fachbetrieb melden",
+        "Warmwasserspeicher nach längerer Abschaltung fachgerecht wieder betreiben"
+      ],
+      "seo_boundary": "Boiler-Temperaturbetrieb, nicht Boiler-Leckagen/Wasserhygiene medizinisch."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "area_parent_id": "core:area:f03faeefbce4",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Zirkulationspumpe defekt",
+      "article_ideas": [
+        "Warmwasser-Zirkulationspumpe läuft nicht: Fehlerbild dokumentieren",
+        "Lange Wartezeit auf warmes Wasser: Zirkulation oder Leitungsweg prüfen",
+        "Zeitsteuerung der Warmwasser-Zirkulation bei Störung überprüfen lassen",
+        "Laufgeräusche an Zirkulationspumpen als Verschleißwarnung erkennen",
+        "Pumpe nach längerer Stillstandsphase vom Fachbetrieb prüfen lassen"
+      ],
+      "seo_boundary": "Warmwasserkreislauf, nicht Entwässerungs-Sumpfpumpen."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "area_parent_id": "core:area:f03faeefbce4",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Warmwasserregelung & Fühler",
+      "article_ideas": [
+        "Defekter Temperaturfühler im Boiler: Fehlanzeigen einordnen",
+        "Ungewollt wechselnde Warmwassertemperaturen fachlich untersuchen lassen",
+        "Heizungssteuerung zeigt Speicherfehler: Anzeigen dokumentieren",
+        "Warmwasservorrangschaltung bei Heizungsstörung prüfen lassen",
+        "Defekten Mischregler gegen Verbrühungsgefahr fachlich überprüfen lassen"
+      ],
+      "seo_boundary": "Warmwasserregelung, nicht generische Heizungsalarme."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "area_parent_id": "core:area:2252b23b56f6",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Brunnenpumpe defekt",
+      "article_ideas": [
+        "Brunnenpumpe fördert kein Wasser: Stromversorgung und Wasserstand trennen",
+        "Brunnenpumpe zieht Luft: Anzeichen für Trockenlauf und Förderproblem",
+        "Druckschwankungen an Hausbrunnenpumpen fachlich prüfen lassen",
+        "Brunnenpumpe schaltet ständig ein: Druckschalter kontrollieren lassen",
+        "Brunnenpumpen nach langer Stillstandszeit fachlich prüfen"
+      ],
+      "seo_boundary": "Betriebsstörung; Frostschutz für Brunnenpumpen bleibt Wasser/Frost."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "area_parent_id": "core:area:2252b23b56f6",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Gartenpumpe ohne Druck",
+      "article_ideas": [
+        "Gartenpumpe baut keinen Druck auf: typische Ursachen unterscheiden",
+        "Bewässerungspumpe startet nicht: Schalter und Stromzufuhr prüfen lassen",
+        "Druckverlust an Gartenpumpen von Leckagen in Leitungen unterscheiden",
+        "Trockenlaufschutz bei privater Gartenbewässerung nachrüsten lassen",
+        "Pumpenfilter nach Förderproblemen reinigen und kontrollieren"
+      ],
+      "seo_boundary": "Pumpentechnik/Betrieb; Bewässerungsleitungen/Frost im Wasserbereich."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "area_parent_id": "core:area:2252b23b56f6",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Teichpumpe defekt",
+      "article_ideas": [
+        "Teichpumpe fördert kaum Wasser: Filter oder Motorproblem unterscheiden",
+        "Teichpumpe nach Stromausfall auf Wiederanlauf prüfen",
+        "Teichpumpen im Sommer auf Überhitzung und Blockaden kontrollieren",
+        "Auffällige Laufgeräusche der Teichpumpe fachlich bewerten",
+        "Ersatzpumpe für privaten Gartenteich passend auswählen"
+      ],
+      "seo_boundary": "Teichwasser-Umwälzung, nicht Teichfolie undicht."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "area_parent_id": "core:area:2252b23b56f6",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Poolfilterpumpe defekt",
+      "article_ideas": [
+        "Poolfilterpumpe startet nicht: Strom und Steuerung fachlich prüfen",
+        "Geringer Durchfluss in der Poolfilteranlage: Filter oder Pumpe unterscheiden",
+        "Poolpumpe schaltet vorzeitig ab: Temperatur- und Motorschutz kontrollieren",
+        "Falschluft an der Poolpumpe vom Rohrleck unterscheiden",
+        "Filterpumpe für privaten Pool bei Defekt richtig dimensionieren"
+      ],
+      "seo_boundary": "Poolpumpen-Betrieb; Poolleitungen und Beckenleck gehören Wasser."
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "area_parent_id": "core:area:341ee911ae13",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Obstbäume bei Spätfrost",
+      "article_ideas": [
+        "Spätfrost an Obstblüten: Gefährdung im Privatgarten früh erkennen",
+        "Junge Obstbäume mit Vlies vor Frost schützen",
+        "Frostschäden an Obstbaumknospen nach Kältenacht erkennen",
+        "Frostschutz für empfindliche Obstbäume am Hausstandort planen",
+        "Geschädigte Obstbäume nach Spätfrost richtig beurteilen"
+      ],
+      "seo_boundary": "Obstbäume; keine generische Schnee-/Sturmsicherung."
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "area_parent_id": "core:area:341ee911ae13",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Hecken & Sträucher bei Frost",
+      "article_ideas": [
+        "Frosttrocknis an immergrünen Hecken erkennen",
+        "Wurzelschutz bei frisch gepflanzten Gartensträuchern prüfen",
+        "Wintersonne und Frostschäden an Hecken voneinander unterscheiden",
+        "Frostschäden an Sträuchern erst im Frühjahr beurteilen",
+        "Empfindliche Gartenhecken mit geeigneten Schutzmaterialien abdecken"
+      ],
+      "seo_boundary": "Pflanzensubstanz, nicht mutwillige Garten-Zerstörung."
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "area_parent_id": "core:area:341ee911ae13",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Kübelpflanzen überwintern",
+      "article_ideas": [
+        "Kübelpflanzen auf privater Terrasse gegen Frost schützen",
+        "Isolierende Pflanzgefäße im Winter vergleichen",
+        "Wurzelballen bei Kübelpflanzen vor Durchfrieren bewahren",
+        "Kübelpflanzen im unbeheizten Gartenhaus richtig aufstellen",
+        "Frostschaden oder Trockenheit an überwinterten Pflanzen unterscheiden"
+      ],
+      "seo_boundary": "Kübelpflanzen-Schadensschutz, nicht Gebäudeheizung."
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "area_parent_id": "core:area:341ee911ae13",
+      "parent_mode": "ADD_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.12",
+      "name": "Gewächshaus bei Frost",
+      "article_ideas": [
+        "Gewächshaus im Winter gegen Frost vorbereiten",
+        "Gewächshausheizung bei Frostalarm gegen Ausfall absichern",
+        "Wärmespeicher und Frostschutzvlies im kleinen Gewächshaus vergleichen",
+        "Beschädigte Gewächshausdichtungen vor Kälteperioden prüfen",
+        "Frostschäden an Pflanzen im privaten Gewächshaus dokumentieren"
+      ],
+      "seo_boundary": "Sachschutz bei Frost, nicht Temperatursensor-Störmelder in Technik oder Hagelbruch."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Garagentorantrieb defekt",
+      "article_ideas": [
+        "Garagentorantrieb reagiert nicht: Stromversorgung und Steuerung unterscheiden",
+        "Garagentorantrieb stoppt unterwegs: Hindernis oder Antriebsproblem",
+        "Ungewöhnliche Geräusche beim Garagentorantrieb fachlich einordnen lassen",
+        "Garagentorantrieb nach Netzausfall auf sichere Funktion prüfen lassen"
+      ],
+      "seo_boundary": "Antriebsstörung, kein Einbruchschutz und keine Garagenverriegelung."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Garagentor-Sensoren",
+      "article_ideas": [
+        "Garagentor-Lichtschranke meldet Hindernis ohne Ursache",
+        "Sicherheitskontaktleisten an Garagentoren prüfen lassen",
+        "Tor stoppt kurz vor dem Boden: Endlagen- und Sensoreinstellung fachlich prüfen",
+        "Garagentor-Sicherheitssensor nach Reparatur funktional abnehmen lassen"
+      ],
+      "seo_boundary": "Safety sensing/limits; general drive motor separate."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Garagentor-Notentriegelung",
+      "article_ideas": [
+        "Garagentor bei Stromausfall sicher entriegeln lassen",
+        "Defekte Garagentor-Notentriegelung vor dem Ernstfall prüfen",
+        "Manuelle Torbewegung nach Antriebsausfall gefahrlos vorbereiten",
+        "Notentriegelung bei Garage ohne zweiten Zugang fachlich planen"
+      ],
+      "seo_boundary": "Mechanical emergency override, not smart-lock network offline."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Garagentor-Funksteuerung",
+      "article_ideas": [
+        "Garagentor öffnet nicht per Handsender: Batterie oder Empfänger unterscheiden",
+        "Garagentor-Funkempfänger nach Funkstörungen überprüfen lassen",
+        "Angelerntes Garagentor-Funkgerät reagiert verzögert: Ursachen prüfen",
+        "Defekte Fernbedienung für Garagentor sicher ersetzen lassen"
+      ],
+      "seo_boundary": "Garage remote control troubleshooting, not radio access security audit."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Schiebetorantrieb defekt",
+      "article_ideas": [
+        "Schiebetorantrieb fährt nur ruckweise: Rollen und Antrieb trennen",
+        "Schiebetorantrieb startet nicht: Versorgung und Steuerplatine prüfen lassen",
+        "Endlagenfehler am elektrischen Schiebetor fachlich einstellen lassen",
+        "Einfahrt-Schiebetor nach Frostblockade sicher prüfen lassen"
+      ],
+      "seo_boundary": "Sliding gate mechanism, not burglarproof gate locks."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Drehtorantrieb defekt",
+      "article_ideas": [
+        "Flügeltorantrieb öffnet nur eine Seite: mögliche Störursachen",
+        "Drehtorantrieb bei Gegenwind und mechanischer Blockade prüfen lassen",
+        "Elektrisches Hoftor stoppt beim Zufahren: Anschläge und Kräfte prüfen",
+        "Drehtorsteuerung nach Stromausfall vom Fachbetrieb prüfen lassen"
+      ],
+      "seo_boundary": "Swing gate systems only."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Zufahrtstor-Sensoren",
+      "article_ideas": [
+        "Lichtschranke am Hoftor meldet dauerhaft Hindernis",
+        "Sicherheitskanten an privaten Zufahrtstoren kontrollieren lassen",
+        "Zufahrtstor schließt nach Regen nicht: Sensorfeuchtigkeit fachlich prüfen",
+        "Endlagensensor am Gartentor zeigt falsche Position: Fehlerzeichen dokumentieren"
+      ],
+      "seo_boundary": "Gate obstacle safety sensing, not garage-mounted sensor."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Hoftor-Funksteuerung",
+      "article_ideas": [
+        "Funkfernbedienung für Grundstückstor reagiert unzuverlässig",
+        "Funkempfänger am Schiebetor vor Witterungsschäden prüfen",
+        "Hoftor lässt sich mit Taster, aber nicht per Funk öffnen: Ursache trennen",
+        "Funksteuerung nach Austausch des Torantriebs fachgerecht prüfen lassen"
+      ],
+      "seo_boundary": "Outdoor access gate control, not smart home cloud."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Gegensprechanlage defekt",
+      "article_ideas": [
+        "Türsprechanlage klingelt nicht mehr: Klingeltaster oder Innenstation unterscheiden",
+        "An der Gegensprechanlage kein Ton: Verbindung und Netzteil fachlich prüfen",
+        "Gegensprechanlage im Mehrfamilienhaus ausgefallen: gemeinsame Ursache eingrenzen",
+        "Nach Feuchtigkeitsschaden an Außenstation Funktion prüfen lassen"
+      ],
+      "seo_boundary": "Audio intercom operation, not door camera as burglary deterrence."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Elektrischer Türöffner defekt",
+      "article_ideas": [
+        "Elektrischer Türöffner summt, entriegelt aber nicht",
+        "Türöffner an gemeinsamer Haustür funktioniert nur sporadisch",
+        "Elektrische Türöffner nach Stromausfall auf sichere Funktion prüfen lassen",
+        "Defekter Türöffner: Schließmechanik und Ansteuerung fachlich unterscheiden"
+      ],
+      "seo_boundary": "Strike plate and solenoid, not physical door lock anti-burglary."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Video-Türsprechanlage defekt",
+      "article_ideas": [
+        "Videobild einer Türsprechanlage ausgefallen: Kamera oder Innenmonitor",
+        "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+        "Außenkamera der Türsprechanlage nach Starkregen prüfen lassen",
+        "Türvideostation hat Bildaussetzer: Leitungsverbindung fachlich untersuchen"
+      ],
+      "seo_boundary": "Intercom hardware failure, not CCTV GDPR / security monitoring."
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "area_parent_id": "core:world:technik-und-ausfalle",
+      "parent_mode": "NEW_AREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Smarte Türsteuerung: Ausfall",
+      "article_ideas": [
+        "Smarte Türsteuerung reagiert lokal nicht: Batterie oder Motor trennen",
+        "Elektronisches Türschloss blockiert bei mechanischer Fehlstellung",
+        "Nach Firmwarewechsel klemmt elektronischer Türantrieb: Fachprüfung einplanen",
+        "Türsteuerung nach Motorschaden vor erneuter Nutzung kontrollieren lassen"
+      ],
+      "seo_boundary": "Hard-/firmware fault not existing R3 'Notbetrieb smarter Türschlösser' during offline network."
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "area_parent_id": "core:area:d71aef44a98c",
+      "parent_mode": "NEW_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Hofladen vor Diebstahl",
+      "article_ideas": [
+        "Warendiebstahl im unbesetzten Hofladen reduzieren",
+        "Kassen- und Geldboxen in privaten Hofläden sicherer platzieren",
+        "Zugang und Öffnungszeiten im kleinen Hofladen kontrollieren",
+        "Inventurprotokoll nach wiederholten Fehlbeständen im Hofladen aufbauen"
+      ],
+      "seo_boundary": "Hofladen Warenverlust, not cash after closing generic."
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "area_parent_id": "core:area:d71aef44a98c",
+      "parent_mode": "NEW_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "SB-Verkaufsstände sichern",
+      "article_ideas": [
+        "Verkaufsstand an privater Hofeinfahrt vor Warenentnahme schützen",
+        "Offene Selbstbedienungsstände bei Nacht sicher schließen",
+        "Hinweisschilder und Kamera am SB-Stand rechtlich einordnen",
+        "Bezahlen und Warenfreigabe beim unbesetzten Marktstand sicher gestalten"
+      ],
+      "seo_boundary": "Open stand product theft, not vandalism of structural kiosks."
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "area_parent_id": "core:area:d71aef44a98c",
+      "parent_mode": "NEW_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Warenautomaten vor Diebstahl",
+      "article_ideas": [
+        "Selbstbedienungsautomat gegen Aufbruch am privaten Betrieb sichern",
+        "Warenklappen an einem Automaten auf Manipulation prüfen",
+        "Geldboxen von Hofautomaten gegen Entwendung absichern",
+        "Automatenstandort im Privatbetrieb auf Diebstahlrisiken bewerten"
+      ],
+      "seo_boundary": "Theft of stock/cash; vandalism to vending machine already separate Vandalismus category."
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "area_parent_id": "core:area:d71aef44a98c",
+      "parent_mode": "NEW_SUBAREA",
+      "existing_subarea_id": null,
+      "source": "V9.13",
+      "name": "Abholboxen & Warenausgabe",
+      "article_ideas": [
+        "Abholbox am privaten Hofladen gegen Fremdzugriff sichern",
+        "Warenausgabe mit Code oder Abholnummer gegen Verwechslung schützen",
+        "Unbeaufsichtigte Bestellungen vor Abholung gegen Diebstahl schützen",
+        "Abholschränke im Kleinbetrieb nach wiederholten Entwendungen nachrüsten"
+      ],
+      "seo_boundary": "Small business product pickup, not generic consumer parcel mailboxes."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Brandlasten & Betriebsstrom",
+      "area_parent_id": "core:subarea:r3-54c58b2291237b64",
+      "parent_mode": "ADD_LEAF_EXISTING_SUBAREA",
+      "existing_subarea_id": "core:subarea:r3-54c58b2291237b64",
+      "source": "V9.17",
+      "name": "Brandschutz im Friseursalon",
+      "article_ideas": [
+        "Haarspraydosen und Aerosole im privaten Salon brandsicher lagern",
+        "Föhn und Glätteisen nach Ladenschluss gegen Hitzestau sichern",
+        "Überlastete Steckdosen an Friseurarbeitsplätzen fachlich prüfen",
+        "Brennbare Handtücher und Kosmetikprodukte sicher von Wärmequellen trennen",
+        "Brandschutz im kleinen Friseursalon vor Umbau mit Fachbetrieb prüfen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Hochwasserschutz & Folgen",
+      "area_parent_id": "core:subarea:927eb3aa17e7e630",
+      "parent_mode": "ADD_LEAF_EXISTING_SUBAREA",
+      "existing_subarea_id": "core:subarea:927eb3aa17e7e630",
+      "source": "V9.17",
+      "name": "Läden & Salons bei Hochwasser",
+      "article_ideas": [
+        "Ladenfront und Eingang bei Starkregen vor Wassereintritt schützen",
+        "Mobile Hochwassersperren für kleine ebenerdige Geschäfte vergleichen",
+        "Warenbestände in privaten Ladenlokalen bei Hochwasser schützen",
+        "Elektrogeräte im Friseursalon nach Überflutung fachlich prüfen lassen",
+        "Hochwasserschäden im kleinen Laden für die Versicherung dokumentieren"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Haus & Kellerschutz",
+      "area_parent_id": "core:subarea:28d8087df57279b8",
+      "parent_mode": "ADD_LEAF_EXISTING_SUBAREA",
+      "existing_subarea_id": "core:subarea:28d8087df57279b8",
+      "source": "V9.17",
+      "name": "Tiefgarage bei Starkregen",
+      "article_ideas": [
+        "Tiefgaragenzufahrt bei Starkregen gegen Wasserzufluss sichern",
+        "Tiefgarage läuft nach Gewitter voll: Risiken vor dem Betreten beachten",
+        "Überflutete Tiefgarage: Elektroinstallation nur durch Fachkräfte freigeben lassen",
+        "Ablaufrinnen und Pumpen an kleinen Privat-Tiefgaragen warten lassen",
+        "Tiefgaragenwände nach Überflutung auf Feuchteschäden überprüfen lassen"
+      ],
+      "seo_boundary": "Must be checked against old article owners before activation"
+    }
+  ],
+  "checks": {
+    "duplicates_with_old_leafs": [],
+    "duplicates_with_old_or_proposed_ideas": [],
+    "names_unique": true,
+    "ideas_unique": true,
+    "all_min_three": true,
+    "all_new_subareas_with_min_three": true,
+    "parent_of_3_existing_subarea_additions": true,
+    "all_new_leaf_count_46": true,
+    "all_new_idea_count_214": true,
+    "all_new_subareas_11": true,
+    "existing_categories_not_modified": true,
+    "no_zero_volume_exclusions": true
+  },
+  "questions_for_editorial_owner": [
+    "V9.10 building vandalism: distinct private Wohnräume versus old Gemeinschaftsflure; Sanitärräume parent remains semantically mixed and needs a separate approved restructure.",
+    "V9.12 PV-related fire/heat concerns versus V99 PV operational failure topics.",
+    "V9.12 warm-water regulation versus R3 generic heating system faults.",
+    "V9.13 technical door locks/systems versus existing burglary prevention and SmartHome offline functions.",
+    "V9.17 Tiefgarage versus existing Garagenzufahrt & Hofabläufe (water ingress is not identical but traffic ownership must be checked)."
+  ],
+  "remaining_priority": "Resolve specific semantic owner overlaps, then DataForSEO keyword candidates for unmeasured names by user-authorized existing provider (no implicit spending). Technical plugin changes only after editorial SEO approvals."
+}
