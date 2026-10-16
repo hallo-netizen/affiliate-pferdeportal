@@ -1,6 +1,11 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## C2.2 NAVIGATIONSENTSCHEIDUNG 16.10.2026 – NUR DARSTELLUNG, NICHT KATEGORIEN-SCHREIBER
+Die fachlich bestätigte Darstellung für wachsende Kategoriebäume ist gespeichert in `C22_NAVIGATION_MEHR_SEITEN_3_LINKS_ALLE_ERREICHBAR_20261016.md`. Der C2.2-Entwurf umfasst 36 fachliche Bereiche mit jeweils 4–22 alten+neuen Seite-3-Knoten. **Flyout je Gruppe max. drei Direktlinks; wenn >3 Kinder, immer „Weitere Kategorien“ auf den betreffenden Hub, der ALLE Themen zeigt.** Keine künstliche Kategorieobergrenze, keine vierte Seitenebene und keine eigenen Kategorien-/SEO-/ID-Schreibrechte im Design. Quellen ausschließlich aktive zentrale Kategorie-Revision. **Plugin 0.1.20 lokal dokumentierter 3+Mehr-Fix; Live weiterhin NICHT geprüft.** Design-NEXT ACTION bleibt: echten Flyout-/Hub-/Mobil-/Breadcrumb- und Cache-Readback nach Installation gegen 0/1/2/3/4/viele Kinder prüfen; keine reine Konzeptakte als Pluginrelease ausgeben.
+
+
+
 ## 15.10.2026 – DESIGN 0.1.20 MENU-FIX (LOKAL, NICHT LIVE)
 Vollständiges Designplugin 0.1.20 lokal gebaut als `/mnt/data/HAB_UND_BEWAHR_DESIGN_0.1.20_MEGAMENUE_3_PLUS_WEITERE.zip` (SHA256 `de90faaa83d869f524945acadb15902a418a180780c69cf8308e7f8e9afbc5fb`). Im Flyout bei jedem Bereich höchstens drei Kurzlinks, **nur bei real vorhandenen weiteren Kategorien** Link `Weitere Kategorien`; auf der Bereichsseite weiter alle Unterbereiche sichtbar. Neue reine Anzeigealiasse für V9.9-Umfeld, kein Rename von WP-Bezeichnungen, Slugs, Artikeln, URLs oder Kategorien. PHP-Lint aller Quelldateien PASS, Mock-Menü 2 Kinder = 2 Links / kein Mehr-Link, 5 Kinder = 3 Links / Mehr-Link PASS. **Kein Live-Readback oder Installation durch diese Arbeit.** Einzige nächste Aktion Designbüro: Auf echter Website nach Installation beide Menüfälle prüfen und die HTML-/Cache-Darstellung gegen tatsächliche Kategorien-Kinderzahl bestätigen. Keine Design-/Kategoriearchitektur neu bauen.
 
