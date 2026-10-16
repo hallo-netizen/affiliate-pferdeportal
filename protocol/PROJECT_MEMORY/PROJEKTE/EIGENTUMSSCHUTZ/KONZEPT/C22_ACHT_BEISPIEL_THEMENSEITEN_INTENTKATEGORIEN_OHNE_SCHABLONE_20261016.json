@@ -1,0 +1,435 @@
+{
+  "schema": "HAB_C22_REAL_TOPIC_PAGE_TO_INTENT_CATEGORY_PILOT",
+  "date": "2026-10-16",
+  "status": "EDITORIAL_MODEL_POSITIVE_EXAMPLES_NOT_INSTALLABLE_NOT_SEO_MEASURED",
+  "purpose": "Source-faithful C2.2 feasibility demonstrations only. The article-category choices must stay specific to their topic and may change after actual keyword research; no generic required FAQ/Advice/Comparison scheme.",
+  "contract": {
+    "allow_generic_templates": false,
+    "page3_is_specific_subject": true,
+    "cat_children_same_subject": true,
+    "categories_are_not_products": true,
+    "at_least_three_plausible_future_posts_per_content_category": true,
+    "no_fully_written_article_titles": true,
+    "no_wordpress_changes": true,
+    "no_volume_filter": true,
+    "no_same_five_category_patterns": true
+  },
+  "qa": {
+    "eight_topic_pages": true,
+    "not_uniform_categories": true,
+    "every_intent_cat_at_least_three_angles": true,
+    "no_reused_category_name_within_parent": true,
+    "article_category_names_not_identical_to_topic_page": true,
+    "no_wordpress_writes": true,
+    "no_3_to_5_max": false
+  },
+  "topic_pages": [
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "name": "Garagentor-Funksteuerung",
+      "origin": "V9.18 only proposed",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Handsender & Empfänger",
+          "article_capacity_signals": [
+            "Batterie und Versorgung",
+            "Sender neu anlernen",
+            "Empfängerfehler erkennen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Garagentor-Funksteuerung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Funkprobleme & Reichweite",
+          "article_capacity_signals": [
+            "Störquellen in Garage",
+            "Funkreichweite verbessern",
+            "schwankender Empfang"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Garagentor-Funksteuerung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Kauf & Kompatibilität",
+          "article_capacity_signals": [
+            "Ersatzhandsender vergleichen",
+            "Frequenzsysteme unterscheiden",
+            "Antriebskompatibilität prüfen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Garagentor-Funksteuerung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Bedienung & Sicherheit",
+          "article_capacity_signals": [
+            "versehentliche Toröffnung vermeiden",
+            "Zugriffsrechte für mehrere Nutzer",
+            "Verhalten bei Funkausfall"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Garagentor-Funksteuerung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "name": "Wassermelder",
+      "origin": "EXISTING WordPress category name under broad page3 – protected",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Wassermelder platzieren",
+          "article_capacity_signals": [
+            "Leckstellen in Küche",
+            "Position bei Waschmaschine",
+            "Keller- und Technikraum"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Wassermelder",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Vernetzung & Alarm",
+          "article_capacity_signals": [
+            "WLAN-Alarme",
+            "Funkmeldungen",
+            "Smart-Home-Einbindung"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Wassermelder",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Wassermelder auswählen",
+          "article_capacity_signals": [
+            "Batterie oder Kabel",
+            "Kaufkriterien nach Objekt",
+            "Vergleich von Meldearten"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Wassermelder",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Wartung & Fehlalarm",
+          "article_capacity_signals": [
+            "Sensorkontakte reinigen",
+            "Batterieprüfung",
+            "Fehlalarm nach Feuchtigkeit"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Wassermelder",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "name": "Rauchmelder & Vernetzung",
+      "origin": "EXISTING WordPress category Rauchmelder / Vernetzung – protected",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Installation & Platzierung",
+          "article_capacity_signals": [
+            "Standort im Raum",
+            "Montage an Decken",
+            "Ausstattung mehrerer Etagen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Rauchmelder & Vernetzung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Vernetzte Rauchmelder",
+          "article_capacity_signals": [
+            "Funk-Kopplung",
+            "Auswahl von Vernetzungssystemen",
+            "Verhalten bei Funkausfall"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Rauchmelder & Vernetzung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Fehlalarme & Wartung",
+          "article_capacity_signals": [
+            "Batterien und Laufzeiten",
+            "Staub und Fehlalarm",
+            "Funktionsprüfung und Austausch"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Rauchmelder & Vernetzung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Sicherheit & Auswahl",
+          "article_capacity_signals": [
+            "Eigenschaften bei Kauf",
+            "Anforderungen an Privateigentum",
+            "Einsatz in Ferienwohnungen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Rauchmelder & Vernetzung",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "name": "Dachfenster & Anschlüsse",
+      "origin": "V9.9 draft category; live revision unverified",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Dachfenster undicht",
+          "article_capacity_signals": [
+            "Dichtungen und Wasserpfade",
+            "Anschlussbleche",
+            "Unterscheidung Kondenswasser und Regen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Dachfenster & Anschlüsse",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Dachfenster warten",
+          "article_capacity_signals": [
+            "Dichtungspflege",
+            "Ablaufrinnen reinigen",
+            "Fensterbeschläge kontrollieren"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Dachfenster & Anschlüsse",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Schadensbehebung",
+          "article_capacity_signals": [
+            "Reparaturmöglichkeiten",
+            "Reparaturkosten",
+            "Abdichtung durch Fachbetrieb"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Dachfenster & Anschlüsse",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "name": "Katalysatordiebstahl",
+      "origin": "V9.9 draft topic formerly named Katalysator- & Abgasteilediebstahl",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Diebstahlschutz am Auto",
+          "article_capacity_signals": [
+            "Mechanische Schutzlösungen",
+            "Abstellplatz absichern",
+            "Schutz nach Fahrzeugtyp"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Katalysatordiebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Diebstahl erkennen",
+          "article_capacity_signals": [
+            "typische Warnzeichen",
+            "Schäden am Auspuff",
+            "Sicherung nach der Tat"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Katalysatordiebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Versicherung & Ersatz",
+          "article_capacity_signals": [
+            "Meldung und Nachweise",
+            "Ersatzteilkosten",
+            "Versicherungsabdeckung"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Katalysatordiebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "name": "Heimspeicher-Brandschutz",
+      "origin": "V9.18 draft topic Heimspeicher: Brandschutz",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Sicherer Aufstellort",
+          "article_capacity_signals": [
+            "Platzbedarf und Abstände",
+            "Raum- und Gebäudeeignung",
+            "Brandlasten in der Umgebung"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Heimspeicher-Brandschutz",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Warnung & Überwachung",
+          "article_capacity_signals": [
+            "Warnmelder am Aufstellort",
+            "Sichtbare Störungssignale",
+            "Fachprüfung nach Hitzeanzeichen"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Heimspeicher-Brandschutz",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Schäden & Vorsorge",
+          "article_capacity_signals": [
+            "Schutz vor Wassereintritt",
+            "Prüfung vor Wiederbetrieb",
+            "Versicherungsfragen nach Brandschaden"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Heimspeicher-Brandschutz",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "name": "Tiefgarage bei Starkregen",
+      "origin": "V9.18 draft, historic R2 Garagenzufahrt owner preserved",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Wasserabwehr an Zufahrten",
+          "article_capacity_signals": [
+            "Mobile Sperren",
+            "Oberflächengefälle",
+            "Einläufe und Gräben"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Tiefgarage bei Starkregen",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Abläufe & Rückstau",
+          "article_capacity_signals": [
+            "Rückstauebene",
+            "Bodenabläufe",
+            "Pumpensicherung"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Tiefgarage bei Starkregen",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Nach der Überflutung",
+          "article_capacity_signals": [
+            "Stromfreigabe durch Fachkraft",
+            "Feuchteschäden",
+            "Dokumentation des Schadens"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Tiefgarage bei Starkregen",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "name": "Hofladen vor Diebstahl",
+      "origin": "V9.18 draft topic",
+      "concept_only": true,
+      "article_categories": [
+        {
+          "name": "Warensicherung",
+          "article_capacity_signals": [
+            "Produktpräsentation",
+            "Manipulationsschutz",
+            "Lagerung außerhalb der Öffnungszeiten"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Hofladen vor Diebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Kassen & Bezahlsysteme",
+          "article_capacity_signals": [
+            "Bargeldsicherung",
+            "Zahlungsarten",
+            "Fehlbeträge und Kontrolle"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Hofladen vor Diebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        },
+        {
+          "name": "Selbstbedienung absichern",
+          "article_capacity_signals": [
+            "Abholsysteme",
+            "Zugangsregeln",
+            "Kamera- und Hinweisschilder"
+          ],
+          "minimum_plausible_future_articles": 3,
+          "category_is_bound_only_to_topic": "Hofladen vor Diebstahl",
+          "actual_keyword_volume": "NOT_MEASURED",
+          "is_wordpress_category_created": false
+        }
+      ]
+    }
+  ],
+  "negative_tests_to_apply": [
+    "Reject putting 'Garagentor-Funksteuerung' directly as last WordPress category without checking whether it is a topic page.",
+    "Reject 'FAQ' as a universal forced child to all product pages.",
+    "Reject intent category with only one or two distinct plausible later posts.",
+    "Reject category nested under category.",
+    "Reject fourth page hierarchy level.",
+    "Reject auto-move of existing 'Wassermelder' WP taxonomy term or any existing URL.",
+    "Reject low volume or no keyword return as reason to delete a niche."
+  ],
+  "source_notes": "Pferdeatelier read only category master §1.2. Existing HD-001 has 3 page levels and only flat WP content taxonomy; user C2.2 currently active.",
+  "next_action": "Use same subject page/intents split when reviewing all 93 current topic hubs + 81 V99 + 46 V918. Do not alter original WP categories without live readback and explicit migration safety approval."
+}
