@@ -1,4 +1,11 @@
 ## 16.10.2026 – ABSCHLUSSPRÜFUNG C2.2: ZENTRALE REGISTER NOCH HISTORISCH
+
+## Nachtrag 16.10.2026 – C2.2-Kategorie-/Navigationsfehler und Registerbereinigung
+- **Alte künstliche Dreiergrenze:** In der ersten C2.2-Entwurfsausarbeitung wurden alle neuen konkreten Themenseiten zunächst wieder mit genau drei Contentkategorien versehen. Dies wurde nach fachlicher Prüfung korrigiert: jetziger Gesamtentwurf hat 3/4/5 Artikelkategorien je konkreter Themenseite, ohne Maximalregel. Das ist weiterhin ein redaktioneller Entwurf, kein PASS für 285 historische Kategorien.
+- **Widerspruch im zentralen Zielvertragsregister:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` wurde am 16.10.2026 auf den aktiven C2.2-Vertrag korrigiert; historischer 3–10-Eintrag trägt jetzt ABGELÖST. Dieser konkrete Registerfehler ist damit `CLOSED`. Alte V9-Fehler und nicht bestätigte WordPress-Live-Revision bleiben separat offen.
+- **Verhinderte Namensdubletten:** 52 doppelte neue Artikelkategorielabels in den fünf Entwurfsquellen bereinigt, anschließend die Kollision mit geschützten WordPress-Altkategorien korrigiert. All diese Handlungen betreffen nur GitHub-Fachentwürfe, keine WP-Terminhalte.
+- **Bestand vs. Sollentwurf:** 57/93 bisherige Seite-3-Bündel sind nach erster manueller Prüfung zu breit, 31 thematisch eventuell geeignet und fünf Grenzfälle; nichts automatisch umzubenennen, umzuhängen oder zu löschen. Benötigt identitäts-/URL-sichere Einzelentscheidung.
+
 - Zentraler Zielvertragswegweiser `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` führt den historischen HB-R3/3-bis-10-Vertrag noch mit `STATUS: AKTIV`; dies ist ein nachgewiesener veralteter Registereintrag, **nicht** der gültige Zielvertrag. Verbindlich ist Fassung 2.2 in `KONZEPT/ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`, im Konzept-Current als aktiv geroutet.
 - Der zentrale `FEHLERREGISTER.md` zeigt einen alten V9-/R2-Zwischenstand. Auch dieser Wegweiser ist keine Current-Wahrheit. Autoritative Fehler stehen in dieser Fehlerquelle, Current nur in Konzept-Current.
 - Mehrere Versuche, das zentrale Zielvertragsregister zu korrigieren, wurden vom GitHub-Schreibzugriff mit einer Sicherheitsblockade abgewiesen; **nicht als aktualisiert bezeichnen**. Für die Übergabe: Register-Nachholung BLOCKED bis Schreibzugriff diese Änderung zulässt. Keine zusätzliche Current-Datei anlegen.
