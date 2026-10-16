@@ -1,0 +1,37 @@
+{
+  "contract": "CAMPUS_ACTIVE_BRANCH_REGISTRY_V1",
+  "effective_date": "2026-10-16",
+  "purpose": "Prevent legacy/test branches from being mistaken for current work.",
+  "active": {
+    "campus": {
+      "branch": "hobbyroom/project-memory-campus-v1-20260905",
+      "role": "Campus navigation, project buildings and office Current authorities."
+    },
+    "pferdeatelier_text": {
+      "branch": "konzept0-portal-neutral-20261002",
+      "role": "Only active Pferdeatelier text/article production basis (K0)."
+    },
+    "pferdeatelier_affiliate": {
+      "branch": "affiliate-release-current",
+      "role": "Only Affiliate-Zentrale release/governance branch when routed by AUTORITAETSPLAN."
+    },
+    "main": {
+      "branch": "main",
+      "role": "Repository root/public K0 router and technical repository base; never use legacy K1-K9 state on main as current text authority."
+    }
+  },
+  "hard_rules": [
+    "K1_K9_ARCHIVE_ONLY_NEVER_CURRENT",
+    "ARCHIVE_BRANCH_NEVER_WORKBENCH",
+    "BACKUP_BRANCH_NEVER_WORKBENCH",
+    "UNLISTED_BRANCH_NEVER_CURRENT_OR_FALLBACK_UNLESS_THE_EXACT_CURRENT_AUTHORITY_BINDS_IT_FOR_THE_CURRENT_TASK",
+    "PROJECT_BUILDINGS_MUST_NOT_USE_ANOTHER_PROJECT_BUILDINGS_CURRENT_AS_THEIR_OWN_CURRENT",
+    "WHEN_IN_DOUBT_STOP_AT_ROUTING_AND_READ_AUTORITAETSPLAN_INSTEAD_OF_SEARCHING_BRANCH_HISTORY"
+  ],
+  "archive_research": {
+    "pferdeatelier_k1_k8": "archive/pferdeatelier-textsysteme-k1-k8-20261016",
+    "pferdeatelier_k9_gold": "archive/pferdeatelier-k9-gold-20261016",
+    "campus_pre_cleanup": "archive/campus-current-pre-cleanup-20261016",
+    "k0_pre_cleanup": "archive/k0-production-pre-cleanup-20261016"
+  }
+}
