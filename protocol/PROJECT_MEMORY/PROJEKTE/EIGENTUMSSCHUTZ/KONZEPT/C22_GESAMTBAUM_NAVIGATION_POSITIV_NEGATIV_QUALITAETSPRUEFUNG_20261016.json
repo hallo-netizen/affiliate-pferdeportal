@@ -1,0 +1,227 @@
+{
+  "schema": "HAB_C22_CONCEPT_POSITIVE_NEGATIVE_AND_NAVIGATION_QA",
+  "date": "2026-10-16",
+  "status": "CONCEPT_DATA_QA_ONLY__NO_PHP_PLUGIN_OR_WORDPRESS_RUNTIME_TEST",
+  "sources": [
+    {
+      "path": "KONZEPT/C22_GESAMTBAUM_6_WELTEN_36_BEREICHE_174_THEMEN_573_ARTIKELKATEGORIEN_20261016.json",
+      "verified_blob": "513fa2d33f0018827e776e51acda38ef6620f6a6"
+    },
+    {
+      "path": "KONZEPT/C22_BESTAND_93_SEITEN_285_KATEGORIEN_SACHROLLEN_VORPRUEFUNG_20261016.json",
+      "verified_blob": "1e45ffaa303cf5b67179f7964ca4ff747fe54b1c"
+    },
+    {
+      "path": "KONZEPT/C22_127_ERWEITERUNGEN_OWNER_ROUTING_UND_OFFENE_LUECKEN_20261016.json",
+      "verified_blob": "b14691e01d8c5325fd7e3f3f8f8e5082402cf269"
+    },
+    {
+      "path": "KONZEPT/ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md",
+      "verified_blob": "f197c4fe2635f33107116572e606f290b138b14a"
+    },
+    {
+      "path": "KONZEPT/CURRENT_STATE.md",
+      "verified_blob": "523d94a053d300eb3f830259dee880bc0d7b36af"
+    },
+    {
+      "path": "DESIGN/CURRENT_STATE.md",
+      "verified_blob": "a47d6e63d35936af90ef920f6d70bb54891866f5"
+    },
+    {
+      "path": "KATEGORIEN/CURRENT_STATE.md",
+      "verified_blob": "bfad669c0544f492eca3ddd37449053e87ddf2ca"
+    }
+  ],
+  "qa_summary": {
+    "test_cases": 28,
+    "passed": 28,
+    "failed": 0,
+    "navigation_area_count": 36,
+    "area_counts": [
+      4,
+      22
+    ],
+    "live_status": "NOT_VERIFIED",
+    "legacy_semantic_migration": "OPEN"
+  },
+  "tests": [
+    {
+      "name": "6 original worlds",
+      "pass": true,
+      "details": 6
+    },
+    {
+      "name": "36 areas (31 old + 5 new)",
+      "pass": true,
+      "details": 36
+    },
+    {
+      "name": "93 original page3 preserved",
+      "pass": true,
+      "details": 93
+    },
+    {
+      "name": "285 legacy categories accounted",
+      "pass": true,
+      "details": 285
+    },
+    {
+      "name": "174 new concrete page3",
+      "pass": true,
+      "details": 174
+    },
+    {
+      "name": "573 topic-bound proposed content categories",
+      "pass": true,
+      "details": 573
+    },
+    {
+      "name": "new category labels unique",
+      "pass": true,
+      "details": 573
+    },
+    {
+      "name": "new labels no collision with 285 original terms",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "each topic has >=3 article categories and every category 3 content signals",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "not fixed to three categories",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "127 prior candidates routed",
+      "pass": true,
+      "details": 127
+    },
+    {
+      "name": "21 mixed source scopes split",
+      "pass": true,
+      "details": 21
+    },
+    {
+      "name": "old 93/285 independently triaged",
+      "pass": true,
+      "details": {
+        "TOPIC_MAY_BE_COHERENT__INTENT_CAPACITY_NEEDS_PROOF": 31,
+        "PAGE3_BROAD_MULTIPLE_TOPIC_SUBJECTS__REWORK_CANDIDATE": 57,
+        "EDITORIAL_BOUNDARY_UNCLEAR_REVIEW": 5
+      }
+    },
+    {
+      "name": "no duplicate proposed page3 full paths",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "menu 0 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 0,
+        "more": false,
+        "hubChildren": 0
+      }
+    },
+    {
+      "name": "menu 1 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 1,
+        "more": false,
+        "hubChildren": 1
+      }
+    },
+    {
+      "name": "menu 2 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 2,
+        "more": false,
+        "hubChildren": 2
+      }
+    },
+    {
+      "name": "menu 3 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 3,
+        "more": false,
+        "hubChildren": 3
+      }
+    },
+    {
+      "name": "menu 4 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 3,
+        "more": true,
+        "hubChildren": 4
+      }
+    },
+    {
+      "name": "menu 11 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 3,
+        "more": true,
+        "hubChildren": 11
+      }
+    },
+    {
+      "name": "menu 50 direct 3+More",
+      "pass": true,
+      "details": {
+        "direct": 3,
+        "more": true,
+        "hubChildren": 50
+      }
+    },
+    {
+      "name": "real 36 area hubs do not omit children",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "NEGATIVE duplicate label correctly rejected",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "NEGATIVE under-three capacity correctly rejected",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "NEGATIVE fourth page level rejected by conceptual guard",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "NEGATIVE category-under-category rejected by conceptual guard",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "Current and contract agree with 174/573",
+      "pass": true,
+      "details": true
+    },
+    {
+      "name": "live release correctly not claimed",
+      "pass": true,
+      "details": true
+    }
+  ],
+  "non_claims": [
+    "This QA is NOT a PHP validator run or actual plugin import/dry-run.",
+    "This QA is NOT a real WordPress snapshot, URL redirect test, SEO provider measurement, article topic plan or release.",
+    "Negative cases are data contract checks, not execution of 1.14.8.21.",
+    "Original 285 WP categories and 93 pages remain unchanged."
+  ]
+}
