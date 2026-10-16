@@ -1378,3 +1378,12 @@ Echte Quellen geprüft: PSTE **0.57.98** und PSERC **0.28.37**, jeweils unverän
 - Zusätzlicher negativer Quelltest: Ein falscher, aber anderer gültiger Magazinkategorie-Slug wird von `PSERC_Article_Type_Extension_Registry::verifyTopicBinding()` allein noch nicht gegen die im Nachweis genannte Kategorie abgeglichen. Das spätere Routing-Gate kann zusätzliche Bindungen verlangen. Eine konkrete vollständige Compiler-Regression muss diese Negativprobe enthalten; keinen Gesamtpass allein aus dem frühen Gate behaupten.
 
 **Einzige sichere Umsetzung:** Die ausdrücklich beschlossene redaktionelle Gleichbehandlung im **zuständigen Original-Signierprozess** als neue, autorisierte Revision des bestehenden Journal-Vertrags binden; PSTE und PSERC gegen dieselbe gültige Revision und die echten PPM-Kategorien/Slots vollständig positiv/negativ/E2E prüfen. Keine neue inhaltliche Magazin-Hürde, keine zweite Kategoriequelle, keine Änderung an echten Qualitäts-/Publish-Schutzprüfungen. Bis Signatur + E2E belegt sind: **KEIN INSTALLIERBARER RELEASE**.
+
+
+### 29.5 Korrektur der Update- und Testfreigabe – 16.10.2026
+
+Die bisher bereitgestellten zwei SEO-ZIP-Dateien sind **keine freigegebene Installation**. Ein Test mit den tatsächlichen ZIP-Inhalten zeigt: PSTE 0.57.100 und PSERC 0.28.39 werden bei der alten PPM 6.7.9 vom `PSERC_Production_Reader` mit `PSERC_PPM_EXTENSION_MANIFEST_MISMATCH` blockiert; mit der gemeinsam aktualisierten PPM tritt stattdessen `PRODUCTION_READ_ONLY_NORMAL_DRAFT_CAPABILITY_PASS` ein. Eine dritte Bestandkomponente ist damit für diesen Vertragswechsel technisch betroffen; sie ist kein neues Plugin.
+
+Unabhängige lokale Regression: 149 vorhandene PPM-Tests mit altem Original und aktualisiertem PPM **seriell** abgeglichen: jeweils 136 PASS, dieselben 13 alten FAIL, **0 neue Regressionen**. Ein zunächst parallel ausgeführter Testlauf erzeugte zwei nicht reproduzierbare Fehlschläge; dieser Parallelvergleich gilt als unzuverlässig und wurde ausdrücklich durch die serielle Gegenprobe ersetzt.
+
+**Release weiterhin NICHT FREIGEGEBEN:** Die produktive GitHub-Arbeitsbindung erwartet weiterhin die bisherige unveränderte PPM-ZIP-Fassung. Der vorhandene PR-Hardlock schützt diesen Laufzeitpfad gegen reguläre Änderungen. Ohne einen zulässigen, gemeinsamen Releasepfad für die bestehenden drei Komponenten darf kein SEO-Update als fertig installierbar zur Produktionsnutzung übergeben werden. Nicht wieder zwei Teilplugins anbieten; keinen Sicherheits-Hardlock umgehen; keinerlei Veröffentlichung.
