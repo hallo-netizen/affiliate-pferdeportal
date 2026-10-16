@@ -17,7 +17,9 @@
     "on_binding_change_inspect_delta_only": true,
     "project_buildings_are_strictly_isolated": true,
     "cross_project_current_authority_forbidden": true,
-    "legacy_text_systems_k1_k9_are_archive_only": true
+    "legacy_text_systems_k1_k9_are_archive_only": true,
+    "unlisted_branch_may_not_be_current_or_fallback": true,
+    "archive_or_backup_branch_may_not_be_workbench": true
   },
   "scopes": [
     {
@@ -245,5 +247,6 @@
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/WISSENSDATENBANK/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/WISSENSDATENBANK/HOBBYRAUM.md"
     }
-  ]
+  ],
+  "active_branch_registry": "protocol/PROJECT_MEMORY/ACTIVE_BRANCHES.json"
 }
