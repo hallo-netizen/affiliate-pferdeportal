@@ -1,6 +1,12 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## C2.2 – 566 KATEGORIEN GROB GEPRÜFT; WRITER IM BESTEHENDEN PLUGIN – 16.10.2026
+Die Kategorientragfähigkeit wurde ausdrücklich ausschließlich grob auf mögliche 3–5 spätere verschiedene Beiträge je unterster Kategorie beurteilt; es wurden KEINE Artikel, Artikeltitel oder Redaktionspläne erzeugt. Elf verbliebene enge Label-Grenzfälle sind in der gebündelten Version 1.14.8.27 auf getrennte thematische Perspektiven umformuliert. **172 zusätzliche konkrete Seite3-Themen, 566 neue flache Contentkategorien, fünf neue Schutzbereich-Seiten2**. Die alten 93/285 bleiben geschützt, bereits vorhandene vier Beitragszuordnungen unangetastet. Grobe thematische Plausibilität ist keine tatsächliche Artikel-/Suchvolumen-Recherche; DataForSEO wird nicht erneut kostenpflichtig abgefragt.
+**Technischer Ausführungspfad:** Nur das vorhandene Kategorieplugin 1.14.8.27 enthält explizit bestätigtes 743-Objekt-ADD-only mit ROLLBACK. Siehe `../KATEGORIEN/CURRENT_STATE.md`; tatsächlicher WordPress-Live-ADD-Sync noch nicht durchgeführt. **NEXT ACTION:** Benutzer installiert 1.14.8.27 und bestätigt im C2.2 Adminmenü den Add-only-Live-Sync. Keine Artikelproduktion.
+
+
+
 ## C2.2 TIEFERE BESTANDSKRITIK – 16.10.2026
 Neu `C22_93_SEITEN_ALTE_SAMMELHUBS_KRITISCHE_NACHPRUEFUNG_20261016.json`: gegen die drei tatsächlichen alten Kategorie-Titel pro Seite erneut geprüft. Von 93 geschützten alten Seite3 sind **75** erkennbar zu breite/bisher nicht als C2.2-konform belegte Sammelthemen (zuvor 57 + weitere 18), **12** noch ungeklärt möglicherweise geeignet, **5** ausdrückliche Grenzfälle, **1** thematisch plausibel zu erhaltener Graffiti-Hub – aber auch dort sind tatsächliche Artikelzahl und -Zuordnungen pro alter Contentkategorie noch offen. Das ist eine geschützte redaktionelle Vorprüfung, keine WP-Migration. Acht hochriskante echte Term-ID/Neue-Seite-Fälle hat das zentrale Büro in `../KATEGORIEN/C22_ACHT_PHYSISCHE_ALTTERM_MIGRATIONSFAELLE_WP_ID_GESCHUETZT_20261016.json` dokumentiert.
 **NEXT ACTION unverändert:** die fehlenden alten Artikel-/Intent-Owner je Term auflösen und gegen frischen Live-Readback absichern; weder Bestands-ID noch alte URL überschreiben. Neues Konzept ausschließlich C2.2 korrigiert 173/569, alte 174/573-Dokumente sind nur Revisionsbelege.
