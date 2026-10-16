@@ -1,0 +1,171 @@
+{
+  "schema": "HAB_C22_173_569_REAL_ARCHIVED_WP_IDENTITIES_AND_NAV_QA",
+  "date": "2026-10-16",
+  "status": "CONCEPT_AND_ARCHIVED_SOURCE_QA_ONLY__WP_LIVE_AND_PLUGIN_PHP_STILL_OPEN",
+  "qa": {
+    "test_count": 28,
+    "all_pass": true,
+    "pass": 28,
+    "fail": 0,
+    "archived_wordpress_13oct_verified": true,
+    "actual_live_wordpress_16oct_verified": false,
+    "php_validation_of_new_tree": false,
+    "article_assignments_verified": false
+  },
+  "sources": [
+    "KONZEPT/C22_GESAMTBAUM_KORRIGIERT_173_THEMEN_569_ARTIKELKATEGORIEN_20261016.json",
+    "KONZEPT/C22_285_ALTKATEGORIEN_TERM_ID_ROLLEN_OWNER_MIGRATIONS_MATRIK_20261016.json",
+    "KATEGORIEN/C22_13OKT_POSTSYNC_93_SEITEN_285_WP_IDS_SLUGS_GESCHUETZT_20261016.json",
+    "DESIGN/C22_MENU_31_BESTANDSAREAS_VS_36_ZIELAREAS_3_PLUS_MEHR_20261016.json"
+  ],
+  "tests": [
+    {
+      "name": "all six worlds and 36 areas",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "historical 93 page3 and 285 category objects",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "173 concrete topic-page proposals",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "569 article categories, only one flat level",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "min 3 distinct category intents with 3 capacity hints each",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no fixed three-child cap",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "proposed new article category names unique",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "new proposed article-category names do not reuse protected old WP labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "archived IDs valid",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all 285 owner-matrix entries tied to archive IDs",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "not one legacy object may be automatically mutated",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all 127 prior proposals still routed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Graffiti duplicate page3 rejected",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Graffiti existing valid page and 3 intents preserved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "remaining 4 topic/category exact collision pairs are frozen for migration",
+      "pass": true,
+      "detail": "[{\"name\":\"Heizungsausfall\",\"oldTermId\":241},{\"name\":\"Rückstauklappen\",\"oldTermId\":212},{\"name\":\"Wassermelder\",\"oldTermId\":210},{\"name\":\"Mobile Hochwassersperren\",\"oldTermId\":229}]"
+    },
+    {
+      "name": "13 Oct menu: 31 existing area hubs with 3 existing pages each",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "future menu 35 More, 1 no More",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all area hubs enumerate all proposed children",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no proposed menu link pretends to have WP ID",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "original Wachdienste already in HivePress",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "LIVE / URL / Article link gates remain blocked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE duplicate new category label",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE 2 content directions instead of 3",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE category nested under category",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE unverified WordPress revision",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE forcing More button on exactly 3 children",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE creating Graffiti duplicate page3",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NEGATIVE blind moving old WP term without posts",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "release_blockers": [
+    "Cannot establish whether 1.14.8.21 or V99 already changed current live terms without latest WP profile readback.",
+    "Cannot move old WP term or choose canonical permalink/301 route without post-term links and effective WordPress permalink snapshot.",
+    "Cannot apply a full migrated legacy C2.2 tree until all legacy 285 terms have verified semantic content owners.",
+    "No proof that installed design plugin 0.1.20 links real active nodes correctly after additions.",
+    "No technical PHP plugin validator simulation of corrected 173/569 yet."
+  ],
+  "next_action": "Receive verified current live WP readback and construct one non-destructive change plan in original category plugin only after protected 93/285 migration decisions."
+}
