@@ -1,6 +1,6 @@
 # HOBBY DEPOT – ZENTRALES KATEGORIE-REGISTER
 
-STAND: 2026-10-11  
+STAND: 2026-10-16  
 ROLLE: Datenbindung / KEINE zweite Current-Wahrheit.
 
 ## Aktive Live-Baseline
@@ -23,7 +23,46 @@ Wiederherstellbares HD-001-Release:
 HD-001 SHA-256:
 `709134631895a901bcb4fc5f5d71889d317954d9928c0ed20700883990a5a52c`
 
-## Zielbaum
+## Aktiver WIP-Audit-Kandidat – NOCH NICHT LIVE
+
+Zentral abgelegt:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
+
+SHA-256:
+`6d73e5d4d32e91acf6a5c8dd19dc9e23af4a661dc053fa7a752a4ea4668826e7`
+
+Voll-Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
+
+Status:
+- Live-Baseline bleibt unverändert;
+- 8 Hauptwelten unverändert;
+- 370 terminale Hobbyseiten im Kandidaten;
+- 2160 unterste CORE-Inhaltskategorien;
+- jede terminale Hobbyseite hat 5–8 Inhaltskategorien;
+- keine unterste Inhaltskategorie hat weitere Kategorie-Kinder;
+- grobe 3–5+-Beitragspotenzialprüfung: 2160/2160 PASS;
+- 0 doppelte Node-IDs;
+- 0 doppelte Slugs;
+- 0 fehlende Parents;
+- HD-001-TargetTree-Validator: PASS, 0 Errors, 0 Warnings.
+
+Wichtige Strukturkorrekturen/Erweiterungen:
+- Forschen → Spotting & Verkehr;
+- Forschen → Citizen Science;
+- Forschen → Natur bestimmen;
+- Plane Spotting aus Messen & Analysieren nach Spotting & Verkehr verschoben;
+- Sammeln → Suchen & Finden;
+- Sammeln → Naturfunde sinnvoll erweitert;
+- Fertigen → Modellbau;
+- Gestalten → Miniaturen & Szenen sinnvoll erweitert;
+- Tiere → Wirbellose um Schneckenhaltung erweitert;
+- unterste Kategorie `Quilten` unter Hobby `Quilten` zu `Quiltmuster & Stichführung` präzisiert.
+
+Harte Grenze:
+**Dieser WIP-Kandidat ist kein Live-PASS und darf die aktive Baseline erst nach HD-001 Delta/Dry-Run/Regression/Readback ersetzen.**
+
+## Zielbaum – aktive Live-Baseline
 
 Profil:
 - 2371 Nodes gesamt;
