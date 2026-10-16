@@ -1,0 +1,60 @@
+{
+  "schema": "HAB_C22_EXISTING_PLUGIN_PHP_VALIDATOR_TEST",
+  "date": "2026-10-16",
+  "tested_plugin_version": "1.14.8.21",
+  "origin": "Exact complete ZIP HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.21_MIN3_OHNE_MAX_SEO_PRUEFUNG.zip in active working container, PHP 8.4 local",
+  "source_file": "includes/class-apkw-target-tree.php",
+  "source_comparison": "Exact archived 1.14.8.19 read only; original hardcoded R3 48x3 remains signed historic invariant, V99 min3 no max added",
+  "baseline": "Bundled profile is historically older than current live V99 and not a current WordPress readback. Local test adapted historic pre-R3 areas to at least three third pages before 13+ case. No live plugin execution or WordPress write.",
+  "tests": [
+    {
+      "test": "Bundled original target profile validates",
+      "expected": "VALID",
+      "observed": "VALID",
+      "pass": true
+    },
+    {
+      "test": "SEMANTIC FALSE POSITIVE: changing content-category label to product/topic Garagentor-Funksteuerung and three plausible angles",
+      "expected": "VALID from current code; SEMANTIC ROLE NOT VERIFIED",
+      "observed": "VALID (no semantic subject-page gate)",
+      "pass": true,
+      "issue": "Code cannot distinguish a topic Page 3 from a thematic Article Category."
+    },
+    {
+      "test": "Category only two supporting_intents",
+      "expected": "INVALID CORE_LEAF_ARTICLE_CAPACITY",
+      "observed": "INVALID matching code",
+      "pass": true
+    },
+    {
+      "test": "Content category parent is another category",
+      "expected": "INVALID NODE_CATEGORY_UNDER_CATEGORY",
+      "observed": "INVALID matching code",
+      "pass": true
+    },
+    {
+      "test": "Fourth WordPress page depth",
+      "expected": "INVALID CORE_PAGE_LEVEL_INVALID",
+      "observed": "INVALID matching code",
+      "pass": true
+    },
+    {
+      "test": "Thirteen additional content categories under a three-level page with min3 complete test fixture",
+      "expected": "VALID no maximum limit",
+      "observed": "VALID",
+      "pass": true
+    }
+  ],
+  "pass_count": 6,
+  "fail_count": 0,
+  "semantic_gap": "A category called Garagentor-Funksteuerung with three generic supporting_intents currently passes schema, but C2.2 requires it first be reviewed as a concrete page3 topic and only then actual topic-bounded article category nodes. Existing validator checks structure/counts but not this editorial semantic boundary.",
+  "quality_rules": [
+    "Do NOT auto-rename or move the existing 285 WordPress category objects or their URLs.",
+    "Do NOT start V99 preview/sync with 4/22/81/364 proposal as editorial category role is not confirmed.",
+    "Any repair must remain within the existing central plugin code and existing WP schema, no new component.",
+    "No keyword volume thresholds; DataForSEO only naming/intent evidence with cost consent.",
+    "Intent-category 3-5 later-post potential can be evidenced by short content angles, not hard final article plan."
+  ],
+  "current_live_wp_status": "UNKNOWN; user previously saw HB-V99-ADD WordPress live revision with R3 guard mismatch, fresh readback still required.",
+  "next_action": "Finish category-specific roles/intent-depth in C2.2 target plan and run non-destructive dry run on exact live revision only after positive-negative local tests; never publish a false semantic PASS."
+}
