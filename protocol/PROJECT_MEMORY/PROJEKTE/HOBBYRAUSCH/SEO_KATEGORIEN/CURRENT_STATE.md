@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-11
-STATUS: **RULE 2.7 / 2357 ZIELOBJEKTE LIVE-PASS / KATEGORIE-ZENTRALE EINGERICHTET / HD-004 LOCAL PASS / HD-001-DEAKTIVIERUNG LIVE ZU PRÜFEN**
+STAND: 2026-10-16
+STATUS: **LIVE-BASELINE 2026-10-09 UNVERÄNDERT / V3-VOLLAUDIT-KANDIDAT ZENTRAL ABGELEGT / HD-001 TARGETTREE VALIDATOR PASS / NOCH KEIN LIVE-SYNC**
 
 ## Autoritative Bindung
 
@@ -20,9 +20,8 @@ Technische Plugin-Wahrheiten:
 Finale Live-Evidence:
 `HD001_FINAL_LIVE_ACCEPTANCE_20261009.md`.
 
-## Produktiver Kategorien-Endstand
+## Produktive Live-Baseline – unverändert
 
-Unverändert:
 - Live-Profilrevision `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`;
 - 2371 logische Knoten;
 - 2366 aktive Nodes;
@@ -34,77 +33,77 @@ Unverändert:
 - 330/330 terminale CORE-Seiten im Kategorie-Gate;
 - 1920 aktive CORE-Content-Kategorien.
 
-## Kategorie-Zentrale
+## V3-Voll-Audit-Kandidat – zentral / NOCH NICHT LIVE
 
-Neu zentral gebunden:
-`KATEGORIE_ZENTRALE/REGISTER.md`
-
-Dort sind festgelegt:
-- stabile Node-IDs;
-- Taxonomie-/Objekttypen;
-- Parent-Zuordnung;
-- Live-Revision;
-- Runtime-Snapshot;
-- neutrales Plugin-Zugriffs-API;
-- exaktes HD-001-Wiederherstellungsartefakt.
-
-Zentrale Datenkopien:
-- Zielprofil:
-  `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_RULE27_20261009.json`
-- finaler Live-Readback:
-  `/hobby rausch/KATEGORIE_ZENTRALE/hobby-depot-final-target-readback-20261009-170623-utc.json`
-- HD-001 1.14.8:
-  `/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
-
-## Harte Deaktivierungsprüfung HD-001
-
-Exakter 1.14.8-Quellstand geprüft.
-
-Befund:
-- Deaktivierung löscht den produktiven Kategorienbestand nicht.
-- kein `uninstall.php`;
-- kein `register_uninstall_hook`;
-- kein Deaktivierungs-Cleanup;
-- aktive Snapshot-Optionen bleiben bestehen.
-- DataForSEO ist kein separates dauerhaft notwendiges Strukturplugin.
-- ABER: HD-001 registriert bisher `journal_cat` und stellt seine eigenen Snapshot-Klassen bereit.
-
-Deshalb darf HD-001 nicht einfach ohne Ersatz deaktiviert werden.
-
-## HD-004 Kategorie-Kern
-
-Lokaler Kandidat:
-`HOBBY_DEPOT_KATEGORIE_KERN_HD004_V1.0.0_READONLY_LOCALPASS.zip`
+Kandidat:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
 
 SHA-256:
-`f3be1e10b093a24f41981c9386ce8ca208294bb0583b6bcc4a1f5295fb5c0bfb`
+`6d73e5d4d32e91acf6a5c8dd19dc9e23af4a661dc053fa7a752a4ea4668826e7`
 
-Aufgabe:
-- `journal_cat` registrieren;
-- bestehenden aktiven Snapshot read-only bereitstellen;
-- neutrale API für andere Plugins;
-- keine DataForSEO-Logik;
-- keine Strukturwrites;
-- keine zweite Datenhaltung.
+Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
 
-Lokal:
-PHP / ZIP / Runtime-API / Mapping / Taxonomie / Read-only-Audit PASS.
+Lokaler Befund:
+- 8/8 Hauptwelten unverändert;
+- 370 terminale Hobbyseiten;
+- 2160 unterste CORE-Inhaltskategorien;
+- jede terminale Hobbyseite hat 5–8 Inhaltskategorien;
+- keine unterste Inhaltskategorie hat weitere Kategorie-Kinder;
+- 2160/2160 unterste Inhaltskategorien grob auf mindestens 3–5 vertiefende Beitragsthemen geprüft: PASS;
+- 120 besonders kurze/enge Kategorien zusätzlich manuell semantisch gegengeprüft;
+- 0 doppelte Node-IDs;
+- 0 doppelte Slugs;
+- 0 fehlende Parents;
+- 0 sibling-name-Dubletten;
+- 0 frageartige Artikelüberschriften als Kategorien;
+- HD-001 `APKW_TargetTree::validate`: VALID / 0 Errors / 0 Warnings.
 
-## Wichtig für spätere Änderungen
+Wesentliche Korrekturen:
+- Plane Spotting aus `Messen & Analysieren` nach `Spotting & Verkehr`;
+- `Messen & Analysieren` danach: Wasseranalyse, Bodenanalyse, Spektroskopie, Elektrochemie als Hobby;
+- neue Forschen-Hubs: `Spotting & Verkehr`, `Citizen Science`, `Natur bestimmen`;
+- neue Sammeln-Struktur: `Suchen & Finden` plus Erweiterung `Naturfunde`;
+- `Modellbau` nach erneuter Prüfung unter `Fertigen`, nicht unter Technik;
+- Gestalten `Miniaturen & Szenen` erweitert;
+- Tiere `Wirbellose` um Schneckenhaltung erweitert;
+- tautologische Leaf-Kategorie `Quilten → Quilten` ersetzt durch `Quiltmuster & Stichführung`.
 
-Add / Rename / Move / Merge / Archive bleiben jederzeit möglich.
+Keine automatische Änderung:
+- Asselhaltung / Isopoden-Zucht bleiben vorerst getrennt: Haltung vs Zucht;
+- Münzen / Numismatik bleiben vorerst getrennt: späterer Kannibalisierungscheck;
+- Teichwasser-Mikroskopie / Gewässermikroskopie bleiben vorerst getrennt.
 
-Dafür:
-HD-001 1.14.8 gezielt wieder aktivieren → Delta → lokale POS+NEG-Prüfung → Live-Dry-Run → genau ein Sync → 100%-Readback → wieder deaktivieren.
+## Kategorie-Zentrale
 
-Keine Vollrekonstruktion.
+Verbindliches Register:
+`KATEGORIE_ZENTRALE/REGISTER.md`
+
+Dort liegen:
+- aktive Live-Baseline;
+- V3-Audit-Kandidat;
+- Voll-Audit;
+- HD-001 1.14.8;
+- HD-004 1.0.0;
+- stabile Runtime-/Snapshot-Bindung.
+
+## Harte Betriebsregel
+
+DataForSEO:
+- SEO-/Demand-/Intent-Evidence;
+- **keine Strukturautorität**;
+- darf keine Welt, keinen Parent und keine neue Kategorie erfinden.
+
+Strukturänderungen:
+HD-001 1.14.8 gezielt aktivieren → Delta/Dry-Run → POS+NEG-Regressionsprüfung → genau ein Sync → 100%-Readback.
+
+Frontend/Design:
+muss anschließend ausschließlich den neutralen HD-004-Runtime-Vertrag verwenden und darf keine rohen WordPress-`get_pages()`-Kinder als Strukturwahrheit verwenden.
 
 ## ERSTER OFFENER BLOCKER
 
-**Nur noch der Live-Smoke-Test des schlanken Betriebs.**
+**Der V3-Kandidat ist vollständig lokal validiert, aber noch nicht durch den HD-001-Delta-/Dry-Run gegen die produktive Live-Baseline gelaufen.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-004 1.0.0 installieren/aktivieren → HD-001 zunächst nur deaktivieren → Startseite + Magazin/journal_cat + eine CORE-Welt prüfen.**
-
-Erst bei PASS ist das Löschen der HD-001-Plugin-Dateien freigegeben.
+**V3 gegen die aktive Live-Baseline als HD-001-Delta/Dry-Run prüfen; NOCH KEIN Live-Sync.**
