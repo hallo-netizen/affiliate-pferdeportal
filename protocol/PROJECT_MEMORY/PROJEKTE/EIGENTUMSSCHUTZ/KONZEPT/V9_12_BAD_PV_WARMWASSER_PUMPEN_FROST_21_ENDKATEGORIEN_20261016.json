@@ -1,0 +1,314 @@
+{
+  "schema": "HB-V9-12-FIVE-MEANINGFUL-GAP-BRANCHES-DRAFT",
+  "date": "2026-10-16",
+  "status": "EDITORIAL_PROPOSALS_NOT_DATAFORSEO_VERIFIED_NOT_WP_IMPORTABLE",
+  "contract": "No forced exactly three or maximum. Every leaf has independently substantial article question clusters. Low/missing keyword volume never causes rejection.",
+  "source_bases": [
+    "Original 31 areas /93 subareas/285 leaf taxonomy in HB_KATEGORIEN_V9_ENTWURF...",
+    "KATEGORIEN/V9_9_ZENTRALES_ADD_DELTA_107_KNOTEN_81_KATEGORIEN_364_IDEEN_NICHT_IMPORTIEREN_20261015.json",
+    "KONZEPT/R3_V8_144_KATEGORIEN_432_IDEEN_FACHPLAN_20261013.md",
+    "2026-10-16 actual DataForSEO Germany/de 570 search terms 51 returned: no reliable result for these particular new names"
+  ],
+  "groups": [
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "area_id": "core:area:d0e7877ce32c",
+      "subarea": "Bad & Küche",
+      "kind": "NEW_SUBAREA",
+      "leaves": [
+        {
+          "name": "Dusche undicht",
+          "article_ideas": [
+            "Dusche undicht: Dichtfuge und Abdichtung fachlich unterscheiden",
+            "Wasser unter der bodengleichen Dusche erkennen",
+            "Undichte Duschwanne: Ablauf und Anschlüsse prüfen lassen",
+            "Feuchteschäden hinter Duschwänden rechtzeitig feststellen",
+            "Nach einer Duschabdichtung Dichtheit und Wiederherstellung kontrollieren lassen"
+          ],
+          "seo_boundary": "Bad/Duschbereich; allgemeine Rohrleitung und Wassermelder bleiben alte Owner."
+        },
+        {
+          "name": "Badewanne undicht",
+          "article_ideas": [
+            "Badewannenablauf undicht: Warnzeichen und Wasserschaden erkennen",
+            "Wasser tritt hinter der Badewanne aus: Ursachen fachlich eingrenzen",
+            "Dichtung am Wannenüberlauf auf Undichtigkeit prüfen lassen",
+            "Badewannenrand: Silikonfuge oder Bauwerksabdichtung als Ursache unterscheiden",
+            "Versteckte Feuchte unter eingebauter Wanne untersuchen lassen"
+          ],
+          "seo_boundary": "Badewannenwanne und Anschlüsse, nicht WC oder generischer Rohrbruch."
+        },
+        {
+          "name": "Spülkasten undicht",
+          "article_ideas": [
+            "Spülkasten läuft ständig: Verschleiß oder undichte Dichtung unterscheiden",
+            "Unterputzspülkasten undicht: Anzeichen hinter der Vorwand erkennen",
+            "Wasserschaden durch WC-Spülkasten dokumentieren",
+            "WC-Zulauf und Füllventil nach wiederholtem Nachtropfen prüfen lassen",
+            "Abdichtung undichtes WC-Becken: Dichtung gegen Verbindungsleck abgrenzen"
+          ],
+          "seo_boundary": "WC-Spülkasten/-Anschluss; allgemeine Wasserschäden bleiben Besitzer."
+        },
+        {
+          "name": "Siphon & Waschbecken",
+          "article_ideas": [
+            "Siphon tropft unter dem Waschbecken: Verbindung oder Materialschaden",
+            "Eckventil undicht: Wasser unter Waschbecken sicher abstellen lassen",
+            "Wasser im Waschtischunterschrank früh erkennen",
+            "Waschbeckenablauf nach Reinigung auf Undichtigkeit prüfen",
+            "Waschtischbefestigung nach Wassereintritt auf Folgeschäden prüfen lassen"
+          ],
+          "seo_boundary": "Waschtischsiphon/-Eckventil; keine allgemeine Rohrnetz-Wartung."
+        },
+        {
+          "name": "Küchenspüle & Armaturen",
+          "article_ideas": [
+            "Wasser unter der Küchenspüle: typische Leckstellen lokalisieren lassen",
+            "Küchenarmatur tropft am Sockel: Anschluss oder Dichtung unterscheiden",
+            "Schadhafte Küchen-Eckventile rechtzeitig austauschen lassen",
+            "Aufgequollene Küchenunterschränke nach verdecktem Wasserleck beurteilen",
+            "Spülbeckenablauf bei langsamer Leckage prüfen und abdichten lassen"
+          ],
+          "seo_boundary": "Spülbecken/Armaturen und Folgen an Küche; kein Geschirrspüler-Haushaltsgeräteschutz."
+        }
+      ]
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "area_id": "core:area:e3d4d2f00002",
+      "subarea": "PV & Ladetechnik",
+      "kind": "NEW_SUBAREA",
+      "leaves": [
+        {
+          "name": "PV-Kabel & Steckverbinder",
+          "article_ideas": [
+            "PV-Gleichstromleitungen auf Brandschutzrisiken fachlich prüfen lassen",
+            "Beschädigte Solar-Steckverbinder: Warnzeichen für Kontaktwärme",
+            "PV-Kabel an Dachkanten vor Scheuern und Überhitzung schützen lassen",
+            "Nach Wartungsarbeiten an PV-Steckverbindern Fachkontrolle organisieren",
+            "Brandrisiko an DC-Trennstellen: Fachbetrieb für Kontrolle auswählen"
+          ],
+          "seo_boundary": "Brand-/Schmorfolgen PV-DC; Wechselrichter-Ertragsfehler gehören Technik."
+        },
+        {
+          "name": "Wechselrichter: Brandschutz",
+          "article_ideas": [
+            "Wechselrichter mit ausreichender Wärmeabfuhr montieren lassen",
+            "Schmorgeruch am PV-Wechselrichter: Anlage sicher außer Betrieb nehmen lassen",
+            "Brandlasten rund um Wechselrichter im Haus reduzieren",
+            "Wärmestau an Wechselrichtergehäusen fachlich beurteilen lassen",
+            "Wechselrichter nach Hitzeschaden vor Wiederbetrieb kontrollieren lassen"
+          ],
+          "seo_boundary": "Feuer/Überhitzung, nicht V9.9 Wechselrichterfehler oder PV-Monitoring."
+        },
+        {
+          "name": "Heimspeicher: Brandschutz",
+          "article_ideas": [
+            "Batteriespeicher-Aufstellort: Brandschutz und Herstellerabstände prüfen",
+            "Beschädigten Heimspeicher nach Hitze- oder Rauchwarnung fachlich absichern lassen",
+            "Batteriespeicher im Keller: Fluchtweg und Belüftung beurteilen lassen",
+            "Rauch- und Wärmewarnung in Räumen mit Heimspeichern vergleichen",
+            "Heimspeicher nach Wasserschaden vor Wiederbetrieb fachlich untersuchen lassen"
+          ],
+          "seo_boundary": "Brandschutz/Brandgefahr, nicht V9.9 Speicherfehlermeldungen oder Notstrom."
+        },
+        {
+          "name": "Wallbox: Brandrisiken",
+          "article_ideas": [
+            "Schmorgeruch an Wallbox oder Ladestecker: Fachprüfung veranlassen",
+            "Kontaktwärme am Ladeanschluss eines Privatwagens erkennen lassen",
+            "Brennbare Lagergüter rund um private Wallboxen vermeiden",
+            "Wallbox-Leitung und Schutzorgane nach Installationsänderungen fachlich kontrollieren",
+            "Ladeplatz nach Brandschaden erst nach elektrotechnischer Prüfung nutzen"
+          ],
+          "seo_boundary": "Feuer und Hitze, nicht Wallbox Ladeabbruch oder E-Auto Batteriebrand."
+        }
+      ]
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "area_id": "core:area:f03faeefbce4",
+      "subarea": "Warmwasser & Boiler",
+      "kind": "NEW_SUBAREA",
+      "leaves": [
+        {
+          "name": "Durchlauferhitzer defekt",
+          "article_ideas": [
+            "Durchlauferhitzer liefert kein Warmwasser: mögliche Störursachen einordnen",
+            "Temperaturschwankungen am Durchlauferhitzer fachlich prüfen lassen",
+            "Elektrischer Durchlauferhitzer schaltet ab: Anzeigen für den Fachbetrieb festhalten",
+            "Warmwasser nur an einer Zapfstelle gestört: Gerät oder Armatur unterscheiden",
+            "Durchlauferhitzer nach Stromausfall auf sichere Funktion prüfen lassen"
+          ],
+          "seo_boundary": "Gerätebetriebsstörung, nicht Gasinstallation oder Wasseraustritt."
+        },
+        {
+          "name": "Warmwasserspeicher defekt",
+          "article_ideas": [
+            "Warmwasserspeicher heizt nicht mehr: Regler oder Heizsystem unterscheiden",
+            "Zu wenig Warmwasser aus dem Boiler: Dimensionierung und Defekt trennen",
+            "Temperaturbegrenzung am Warmwasserspeicher fachlich überprüfen",
+            "Defekte Speicherthermostate an Fachbetrieb melden",
+            "Warmwasserspeicher nach längerer Abschaltung fachgerecht wieder betreiben"
+          ],
+          "seo_boundary": "Boiler-Temperaturbetrieb, nicht Boiler-Leckagen/Wasserhygiene medizinisch."
+        },
+        {
+          "name": "Zirkulationspumpe defekt",
+          "article_ideas": [
+            "Warmwasser-Zirkulationspumpe läuft nicht: Fehlerbild dokumentieren",
+            "Lange Wartezeit auf warmes Wasser: Zirkulation oder Leitungsweg prüfen",
+            "Zeitsteuerung der Warmwasser-Zirkulation bei Störung überprüfen lassen",
+            "Laufgeräusche an Zirkulationspumpen als Verschleißwarnung erkennen",
+            "Pumpe nach längerer Stillstandsphase vom Fachbetrieb prüfen lassen"
+          ],
+          "seo_boundary": "Warmwasserkreislauf, nicht Entwässerungs-Sumpfpumpen."
+        },
+        {
+          "name": "Warmwasserregelung & Fühler",
+          "article_ideas": [
+            "Defekter Temperaturfühler im Boiler: Fehlanzeigen einordnen",
+            "Ungewollt wechselnde Warmwassertemperaturen fachlich untersuchen lassen",
+            "Heizungssteuerung zeigt Speicherfehler: Anzeigen dokumentieren",
+            "Warmwasservorrangschaltung bei Heizungsstörung prüfen lassen",
+            "Defekten Mischregler gegen Verbrühungsgefahr fachlich überprüfen lassen"
+          ],
+          "seo_boundary": "Warmwasserregelung, nicht generische Heizungsalarme."
+        }
+      ]
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "area_id": "core:area:2252b23b56f6",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "kind": "NEW_SUBAREA",
+      "leaves": [
+        {
+          "name": "Brunnenpumpe defekt",
+          "article_ideas": [
+            "Brunnenpumpe fördert kein Wasser: Stromversorgung und Wasserstand trennen",
+            "Brunnenpumpe zieht Luft: Anzeichen für Trockenlauf und Förderproblem",
+            "Druckschwankungen an Hausbrunnenpumpen fachlich prüfen lassen",
+            "Brunnenpumpe schaltet ständig ein: Druckschalter kontrollieren lassen",
+            "Brunnenpumpen nach langer Stillstandszeit fachlich prüfen"
+          ],
+          "seo_boundary": "Betriebsstörung; Frostschutz für Brunnenpumpen bleibt Wasser/Frost."
+        },
+        {
+          "name": "Gartenpumpe ohne Druck",
+          "article_ideas": [
+            "Gartenpumpe baut keinen Druck auf: typische Ursachen unterscheiden",
+            "Bewässerungspumpe startet nicht: Schalter und Stromzufuhr prüfen lassen",
+            "Druckverlust an Gartenpumpen von Leckagen in Leitungen unterscheiden",
+            "Trockenlaufschutz bei privater Gartenbewässerung nachrüsten lassen",
+            "Pumpenfilter nach Förderproblemen reinigen und kontrollieren"
+          ],
+          "seo_boundary": "Pumpentechnik/Betrieb; Bewässerungsleitungen/Frost im Wasserbereich."
+        },
+        {
+          "name": "Teichpumpe defekt",
+          "article_ideas": [
+            "Teichpumpe fördert kaum Wasser: Filter oder Motorproblem unterscheiden",
+            "Teichpumpe nach Stromausfall auf Wiederanlauf prüfen",
+            "Teichpumpen im Sommer auf Überhitzung und Blockaden kontrollieren",
+            "Auffällige Laufgeräusche der Teichpumpe fachlich bewerten",
+            "Ersatzpumpe für privaten Gartenteich passend auswählen"
+          ],
+          "seo_boundary": "Teichwasser-Umwälzung, nicht Teichfolie undicht."
+        },
+        {
+          "name": "Poolfilterpumpe defekt",
+          "article_ideas": [
+            "Poolfilterpumpe startet nicht: Strom und Steuerung fachlich prüfen",
+            "Geringer Durchfluss in der Poolfilteranlage: Filter oder Pumpe unterscheiden",
+            "Poolpumpe schaltet vorzeitig ab: Temperatur- und Motorschutz kontrollieren",
+            "Falschluft an der Poolpumpe vom Rohrleck unterscheiden",
+            "Filterpumpe für privaten Pool bei Defekt richtig dimensionieren"
+          ],
+          "seo_boundary": "Poolpumpen-Betrieb; Poolleitungen und Beckenleck gehören Wasser."
+        }
+      ]
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "area_id": "core:area:341ee911ae13",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "kind": "NEW_SUBAREA",
+      "leaves": [
+        {
+          "name": "Obstbäume bei Spätfrost",
+          "article_ideas": [
+            "Spätfrost an Obstblüten: Gefährdung im Privatgarten früh erkennen",
+            "Junge Obstbäume mit Vlies vor Frost schützen",
+            "Frostschäden an Obstbaumknospen nach Kältenacht erkennen",
+            "Frostschutz für empfindliche Obstbäume am Hausstandort planen",
+            "Geschädigte Obstbäume nach Spätfrost richtig beurteilen"
+          ],
+          "seo_boundary": "Obstbäume; keine generische Schnee-/Sturmsicherung."
+        },
+        {
+          "name": "Hecken & Sträucher bei Frost",
+          "article_ideas": [
+            "Frosttrocknis an immergrünen Hecken erkennen",
+            "Wurzelschutz bei frisch gepflanzten Gartensträuchern prüfen",
+            "Wintersonne und Frostschäden an Hecken voneinander unterscheiden",
+            "Frostschäden an Sträuchern erst im Frühjahr beurteilen",
+            "Empfindliche Gartenhecken mit geeigneten Schutzmaterialien abdecken"
+          ],
+          "seo_boundary": "Pflanzensubstanz, nicht mutwillige Garten-Zerstörung."
+        },
+        {
+          "name": "Kübelpflanzen überwintern",
+          "article_ideas": [
+            "Kübelpflanzen auf privater Terrasse gegen Frost schützen",
+            "Isolierende Pflanzgefäße im Winter vergleichen",
+            "Wurzelballen bei Kübelpflanzen vor Durchfrieren bewahren",
+            "Kübelpflanzen im unbeheizten Gartenhaus richtig aufstellen",
+            "Frostschaden oder Trockenheit an überwinterten Pflanzen unterscheiden"
+          ],
+          "seo_boundary": "Kübelpflanzen-Schadensschutz, nicht Gebäudeheizung."
+        },
+        {
+          "name": "Gewächshaus bei Frost",
+          "article_ideas": [
+            "Gewächshaus im Winter gegen Frost vorbereiten",
+            "Gewächshausheizung bei Frostalarm gegen Ausfall absichern",
+            "Wärmespeicher und Frostschutzvlies im kleinen Gewächshaus vergleichen",
+            "Beschädigte Gewächshausdichtungen vor Kälteperioden prüfen",
+            "Frostschäden an Pflanzen im privaten Gewächshaus dokumentieren"
+          ],
+          "seo_boundary": "Sachschutz bei Frost, nicht Temperatursensor-Störmelder in Technik oder Hagelbruch."
+        }
+      ]
+    }
+  ],
+  "qa": {
+    "groups": 5,
+    "leaves": 21,
+    "articles": 105,
+    "each_group_at_least_3": true,
+    "each_leaf_at_least_3": true,
+    "all_new_leaf_names_unique": true,
+    "all_new_title_strings_unique": true,
+    "no_v99_leaf_name_clash": true,
+    "no_exact_old_titles": true,
+    "all_parents_existing": true,
+    "no_old_categories_modified": true
+  },
+  "keyword_evidence": {
+    "existing_measured_relevant_approximations": [
+      "wassermelder",
+      "heizungsausfall",
+      "wallbox defekt"
+    ],
+    "new_names_all_status": "NOT_MEASURED_AS_EXACT_PHRASE; category potential based on topic, not fabricated keyword data",
+    "zero_volume_never_excludes": true
+  },
+  "owner_protection": "Existing terms names IDs slugs assigned pages and URLs remain unchanged. New subareas and leaf candidates only, no implied relocation of historic R2/R3 article titles.",
+  "next_action": "Finish remaining 31-area topic coverage check, compare to V9.10 vandalism proposals and remaining old idea corpus, then request targeted DataForSEO keyword alternatives for names ONLY with explicit cost consent."
+}
