@@ -1,0 +1,273 @@
+{
+  "schema": "HB-V9.15-REAL-SEO-KEYWORD-ALIASES-NO-RENAME",
+  "date": "2026-10-16",
+  "status": "EDITORIAL_MAPPING_ONLY_NOT_IMPORTED",
+  "real_dataforseo_source": {
+    "market": "Germany/de",
+    "source_file": "hab-und-bewahr-dataforseo-kategorienamen.json",
+    "task_id": "10160704-2339-0607-0000-fadc315228b3",
+    "source_result_count": 51,
+    "checked": 570,
+    "caveat": "The measured volume and main_intent are for dataforseo_keyword_reference, NOT necessarily the proposed display alias."
+  },
+  "qa": {
+    "all_proposal_names_exist": true,
+    "aliases_direct_or_related": 21,
+    "evidence_has_no_fake_zero": true,
+    "explicit_protection": true,
+    "new_names_not_auto_renamed": true,
+    "low_volume_preserved": true
+  },
+  "proposal_menu_aliases": [
+    {
+      "current_candidate_name": "Undichte Dacheindeckung",
+      "short_navigation_name_proposal": "Dach undicht",
+      "dataforseo_keyword_reference": "dach undicht",
+      "measured_monthly_volume": 320,
+      "provider_main_intent": "informational",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Direkte Suchphrase deckt den Kern dieser Endkategorie ab.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Schlagregen an Fensteranschlüssen",
+      "short_navigation_name_proposal": "Undichte Fenster",
+      "dataforseo_keyword_reference": "fenster undicht",
+      "measured_monthly_volume": 880,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Natürlichere, breite Formulierung; die Inhalte müssen Fensteranschlüsse als eindeutigen Owner behalten.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Dachrinnen & Fallrohre",
+      "short_navigation_name_proposal": "Dachrinne",
+      "dataforseo_keyword_reference": "dachrinne verstopft",
+      "measured_monthly_volume": 260,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_PARTIAL",
+      "editorial_reason": "Nur Menü-Kurzname, H1 behandelt Dachrinne und Fallrohr gemeinsam; auch 'fallrohr undicht' wurde mit 50 gemessen.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Baulicher Hitzeschutz im Dachgeschoss",
+      "short_navigation_name_proposal": "Dachgeschoss",
+      "dataforseo_keyword_reference": "dachgeschoss hitzeschutz",
+      "measured_monthly_volume": 70,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_SAME_INTENT",
+      "editorial_reason": "Menü-Kurzname; SEO-H1 Hitzeschutz im Dachgeschoss, technische Überhitzungswarnung bleibt R3-Owner.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Wechselrichterstörungen",
+      "short_navigation_name_proposal": "Wechselrichter defekt",
+      "dataforseo_keyword_reference": "wechselrichter defekt",
+      "measured_monthly_volume": 110,
+      "provider_main_intent": "informational",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Prägnanter, suchnaher Fehlerbegriff für genau die Geräteklasse.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Wallbox-Ladeabbrüche",
+      "short_navigation_name_proposal": "Ladeprobleme",
+      "dataforseo_keyword_reference": "wallbox defekt",
+      "measured_monthly_volume": 20,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Nur UI-Kurzname; Suchbegriff ist breiter als Abbruch und darf nicht Wallbox-Brandrisiko absorbieren.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "PKW- & Oldtimerbrände",
+      "short_navigation_name_proposal": "Autobrand",
+      "dataforseo_keyword_reference": "autobrand",
+      "measured_monthly_volume": 320,
+      "provider_main_intent": "informational",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Klares Suchwort; Oldtimerbrand bleibt auf derselben Seite als Unterfall.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Bootsmotor & Kraftstoffbrand",
+      "short_navigation_name_proposal": "Bootsmotorbrand",
+      "dataforseo_keyword_reference": "bootsbrand",
+      "measured_monthly_volume": 140,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Spezifischer Geräte-Owner statt generisch alle Bootsbrände; Keyword ist breiter.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Rauch- & Rußschäden am Gebäude",
+      "short_navigation_name_proposal": "Rauchschäden",
+      "dataforseo_keyword_reference": "brandschaden sanierung",
+      "measured_monthly_volume": 590,
+      "provider_main_intent": "commercial",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Brandschadensanierung hat Nachfrage, aber der konkrete Rauch-/Ruß-Owner muss gegenüber den anderen Brandfolgen begrenzt bleiben.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Leckagen an privaten Poolleitungen",
+      "short_navigation_name_proposal": "Poolleitungen",
+      "dataforseo_keyword_reference": "pool undicht",
+      "measured_monthly_volume": 70,
+      "provider_main_intent": "informational",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Kurzname fürs Menü, nicht das ganze Poolleck-Thema beanspruchen.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Poolbecken & Einbauteile undicht",
+      "short_navigation_name_proposal": "Poolbecken undicht",
+      "dataforseo_keyword_reference": "pool undicht",
+      "measured_monthly_volume": 70,
+      "provider_main_intent": "informational",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Enge Parent-/Leaf-Bindung, separates Owner-Team für Poolrohre und Pumpendefekte.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Gartenteiche & Teichfolien undicht",
+      "short_navigation_name_proposal": "Teichfolie undicht",
+      "dataforseo_keyword_reference": "teichfolie undicht",
+      "measured_monthly_volume": 20,
+      "provider_main_intent": "transactional",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Gemessenes Longtail, andere Teichlecks nur als weitere Artikel innerhalb des Eigentümers.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Katalysator- & Abgasteilediebstahl",
+      "short_navigation_name_proposal": "Katalysatordiebstahl",
+      "dataforseo_keyword_reference": "katalysator diebstahl",
+      "measured_monthly_volume": 30,
+      "provider_main_intent": "informational",
+      "evidence_type": "RELATED_KEYWORD_SAME_INTENT",
+      "editorial_reason": "Aus Suchphrase verständlich gebildeter Kompaktbegriff; Suchvolumen gilt der Referenzphrase, nicht dem Kompositum.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Felgen & Kompletträder gegen Diebstahl",
+      "short_navigation_name_proposal": "Felgendiebstahl",
+      "dataforseo_keyword_reference": "felgen diebstahl",
+      "measured_monthly_volume": 20,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_SAME_INTENT",
+      "editorial_reason": "Kurzer Begriff, Kfz-Teilediebstahl bleibt vom ganzen Fahrzeug getrennt.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Privatwagen & Oldtimer bei Hagel",
+      "short_navigation_name_proposal": "Hagelschaden Auto",
+      "dataforseo_keyword_reference": "hagelschaden auto",
+      "measured_monthly_volume": 2900,
+      "provider_main_intent": "informational",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Klarer Suchbegriff. Vorbeugung und Schadensabwicklung bleiben innerhalb derselben Kategorie.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Überflutete Privatfahrzeuge",
+      "short_navigation_name_proposal": "Wasserschaden Auto",
+      "dataforseo_keyword_reference": "wasserschaden auto",
+      "measured_monthly_volume": 110,
+      "provider_main_intent": "informational",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Konkrete Suchphrase für Wasserschäden an Fahrzeugen, nicht Hauswasserschäden.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Fenster & Fassadenverschattung",
+      "short_navigation_name_proposal": "Sonnenschutz",
+      "dataforseo_keyword_reference": "hitzeschutz haus",
+      "measured_monthly_volume": 50,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Nur Menü-Kurzname; Suchphrase viel breiter als die Fenster-Fassaden-Leistung.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Wohnmobil im Hitzestau",
+      "short_navigation_name_proposal": "Wohnmobil Hitzeschutz",
+      "dataforseo_keyword_reference": "wohnmobil hitzeschutz",
+      "measured_monthly_volume": 50,
+      "provider_main_intent": "transactional",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Objektspezifisch, Zielbereich Schutz vor Hitze in abgestelltem Camper.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Gartenhaus & Hobbyraum bei Hitze",
+      "short_navigation_name_proposal": "Gartenhaus Hitzeschutz",
+      "dataforseo_keyword_reference": "gartenhaus hitzeschutz",
+      "measured_monthly_volume": 10,
+      "provider_main_intent": "transactional",
+      "evidence_type": "DIRECT_KEYWORD_ALTERNATIVE",
+      "editorial_reason": "Trotz niedrigem Suchvolumen behalten; fünf mögliche eigene Artikel bleiben maßgeblich.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Feuchte in der Bootskajüte",
+      "short_navigation_name_proposal": "Feuchte im Boot",
+      "dataforseo_keyword_reference": "schimmel boot",
+      "measured_monthly_volume": 10,
+      "provider_main_intent": "transactional",
+      "evidence_type": "RELATED_KEYWORD_BROADER_INTENT",
+      "editorial_reason": "Verwandter Begriff, aber Schimmel allein verengt die Feuchteabdeckung nicht.",
+      "apply_to_wordpress": false
+    },
+    {
+      "current_candidate_name": "Freizeitboote & Nässe",
+      "short_navigation_name_proposal": "Wasserschäden Boot",
+      "dataforseo_keyword_reference": "boot wassereintritt",
+      "measured_monthly_volume": null,
+      "provider_main_intent": "informational",
+      "evidence_type": "RELATED_KEYWORD_NO_VOLUME",
+      "editorial_reason": "Kein beziffertes Volumen, aber fachlicher Bereich bleibt geschützt.",
+      "apply_to_wordpress": false
+    }
+  ],
+  "existing_problematic_names": [
+    {
+      "live_current": "Sanitärräume & Nebenanlagen",
+      "issue": "Spinde und Nebenraum-Inventar gehören fachlich nicht zwingend zu Sanitärräumen.",
+      "evidence": "sanitäreinrichtungen",
+      "volume": 480,
+      "seo_conclusion": "Keyword belegt den Oberbegriff nicht als Vandalismus-Suchintention; Umgruppierung einzelbelegpflichtig.",
+      "wording": "Sanitärräume",
+      "status": "EDITORIAL_HOLD"
+    },
+    {
+      "live_current": "Nebenraum-Inventar",
+      "issue": "Kunstbegriff ohne nachvollziehbaren konkreten Schutzgegenstand.",
+      "evidence": null,
+      "volume": null,
+      "seo_conclusion": "Kein direkter DataForSEO-Suchintent belegt.",
+      "wording": "Gemeinschaftsräume",
+      "status": "EDITORIAL_HOLD"
+    },
+    {
+      "live_current": "Innenbeleuchtung & Leitsysteme",
+      "issue": "Technische Mischbezeichnung; Treppenhauslicht, Notbeleuchtung und Schilder haben verschiedene Owner.",
+      "evidence": null,
+      "volume": null,
+      "seo_conclusion": "Keine direkte DataForSEO-Messung; Unterthemen semantisch trennen, keine Umbenennung ohne Quellartikelabgleich.",
+      "wording": "Treppenhauslicht",
+      "status": "EDITORIAL_HOLD"
+    },
+    {
+      "live_current": "Äußere Brandeinwirkung auf Privatobjekte",
+      "issue": "Künstliche redaktionelle Fachphrase als Elternkategorie",
+      "evidence": null,
+      "volume": null,
+      "seo_conclusion": "Waldbrand, Funkenflug und Nachbarbrand als getrennte Suchen; kein belegtes Sammel-Keyword.",
+      "wording": "Waldbrand & Nachbarbrand",
+      "status": "EDITORIAL_HOLD"
+    }
+  ],
+  "non_exclusion": "Null/not returned/low measured volume never a reason to delete a category. The short menu term may differ from the page H1 and canonical WordPress category name, which remain unchanged until approved.",
+  "next_action": "Read current front-end short alias mappings to prevent duplicate/conflicting aliases; validate content owners before any new candidate/category name is changed; full SERP-synonym research only by explicit user-authorized provider task."
+}
