@@ -1,3 +1,11 @@
+## 16.10.2026 – ROLLENTRENNUNG: KATEGORIEN VS. ARTIKEL SEO/TEXT (V9.22)
+- **Vormals falsch:** Das Konzept-/Kategorienbüro schrieb für 46 neue Blätter 214 detaillierte Artikelideen und prüfte einzelne künftige Artikelüberschriften gegen tausende alte Artikel – obwohl der Nutzer nur eine **grundsätzliche 3–5-Beiträge-Füllbarkeit der untersten Kategorieebene** verlangt. Es erschwerte und verzögerte die Freigabe durch künstliche Artikel-Owner- und SEO-Textgates.
+- **Korrektur:** Aktiver Zielvertrag 2.1 (16.10.2026) ersetzt die Pflicht zu 3–5 ausformulierten Artikeltiteln durch **ein kurzes 3–5-Themenfeld-Potenzialprofil ausschließlich der untersten Kategorie**; 3+ fachlich sinnvolle direkte Kinder in Zwischenbereichen **ohne Obergrenze**. Detailartikel, Suchfragen, Titel, SEO-Briefs, Textproduktion, Post-Kategorie-Zuordnung sind Aufgabe späterer getrennter SEO-/Text-Plugins. Artikelnotizen aus V9.x bleiben historisch und nicht bindend.
+- **Pferdeatelier ausdrücklich NUR gelesen:** Projektgebäude START_HERE, eigene TEXT-Produktion, separate 4a-Produktionssteuerung, Wissensdatenbank `Rechercheobjekt ≠ Artikel ≠ Kategorie`, SEO-Handoff ohne WP-Kategorie-ID/nachgelagerte Kategorieauflösung. **Nichts im Pferdeatelier geschrieben oder übernommen**.
+- **V9.22 korrekt fachlich nachgearbeitet:** 46/46 zusätzlichen Kategorien 3 allgemeine Themenfelder als grundsätzliche Tragfähigkeitsprüfung, **keine fertigen Artikel**, kein WP-Write. 81 ältere V99-Neublätter noch für diese schlankere Prüfung offen.
+- **Nicht wiederholen:** Kategorien nur deshalb blockieren, weil zwei hypothetische künftige Artikelüberschriften sich ähneln oder der DataForSEO-Dienst keinen Suchvolumenwert liefert. Echte doppelte Kategorie-Owner oder nur 1–2 tragfähige Themenfelder weiterhin fachlich untersuchen.
+- Einzige aktuelle Arbeit und NEXT ACTION: `KONZEPT/CURRENT_STATE.md`, technischer Writer `KATEGORIEN/CURRENT_STATE.md`.
+
 ## HB-ERR-20261016-V918 – Dreierdeckel und SEO-Volumen NICHT wieder einführen
 - **Ursache:** Der R3-Code und die alte V9-Planung erzwangen künstlich Dreiergruppen, obwohl seit 15.10.2026 **mindestens drei und keine Obergrenze** verbindlich ist. Formale 3-von-3-Prüfungen sind KEINE vollständige Sachthemenprüfung.
 
