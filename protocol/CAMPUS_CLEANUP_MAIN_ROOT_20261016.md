@@ -40,3 +40,18 @@ Sicherungsanker:
 - `archive/campus-main-pre-phase3-20261016`.
 
 Hardlock-Nachprüfung Phase 3: erforderlicher PROJECT_MEMORY-Protokollcheck ist im PR gebunden.
+
+
+## Phase 4 – K0 aktive Oberfläche entschlackt
+
+Aus aktivem main entfernt, im Archiv-Snapshot vollständig erhalten:
+- sieben alte K0-Test-/Hardlock-/Rendering-Protokolle vom 03.10.2026;
+- ein unreferenzierter alter DS24-Evidence-Nachweis.
+
+Bewusst erhalten:
+- `K0_START_HERE.md` als aktiver Router;
+- `protocol/K0_MAIN_ROUTER_20261003.md` als knapper Navigationsbeleg;
+- der komplette produktive K0-Stand auf `konzept0-portal-neutral-20261002`.
+
+Sicherungsanker zusätzlich:
+- `archive/campus-main-pre-phase4-20261016`.
