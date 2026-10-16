@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-15
+STAND: 2026-10-16
 STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 1.50.660–1.50.663 VISUELL NICHT FREIGEGEBEN / NEUER BILDSTAND GESICHERT / KEIN PLUGIN VOR VOLLSTÄNDIGER VISUELLER ABNAHME**
 
 ## Aktueller belastbarer Stand
@@ -15,18 +15,19 @@ STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 1.50.660–1.50.663 VISUELL NICHT FR
 ## Exakter neuer Bildstand
 Nach erneuter Prüfung des historischen 65/65-Stands und des späteren 30er-Neuaufbaus gilt jetzt verbindlich:
 - alter WIP 1.50.653: historisch tatsächlich 65/65 Heroes fertig, aber danach 30 Kategorien visuell verworfen;
-- neues 30er-Einzelquellen-Konzept aktuell: **9/30 echte neue Einzelquellen fertig**;
-- weitere **11/30** besitzen eine exakt wiederhergestellte neue Richtung, aber noch keine eigenständige Einzelquelle;
+- neues 30er-Einzelquellen-Konzept aktuell: **19/30 echte neue Einzelquellen fertig**;
+- weitere **1/30** besitzt eine exakt wiederhergestellte neue Richtung, aber noch keine eigenständige Einzelquelle: **Technik & Medien**;
 - weitere **6/30** sind nur als Teil des neuen Produktionsblocks belegt;
 - weitere **4/30** besitzen keine rekonstruierbare neue Bindung;
-- damit fehlen **21 eigenständige finale Einzelquellen**, nicht 30.
+- damit fehlen **11 eigenständige finale Einzelquellen**, nicht 30.
 
-Autoritativer Nachweis: `NEW_CONCEPT_IMAGE_INVENTORY_20261016.md`.
+Autoritativer Nachweis: `NEW_CONCEPT_IMAGE_INVENTORY_19OF30_20261016.md`.
 
 ## Gesicherter neuer Arbeitsbestand
 Unter `/hobby rausch/_working/` vorhanden:
-- 8 eigenständige neue Quelldateien für 7 Kategorien (Miniaturen mit zwei Kandidaten);
-- 11 neue Vorschau-/Sammelbilddateien als Richtungsreferenzen;
+- **19 echte neue Einzelquellen** unter `newconcept-sources/`;
+- zugehörige geprüfte Hero-/Preview-Ableitungen unter `newconcept-stage/`;
+- zusätzlich 11 neue Vorschau-/Sammelbilddateien als historische Richtungsreferenzen;
 - 13 reproduzierbare V2-Referenzcrops;
 - `HOBBY_DEPOT_NEW_IMAGE_STAGE_7_WIP_V2.zip`;
 - `HOBBY_DEPOT_IMAGE_WIP_HANDOFF_7PLUS13_20261015.zip`.
@@ -60,4 +61,4 @@ Nicht wieder als fertigen Stand anbieten:
 - 1.50.663.
 
 ## EXAKT EINE NEXT ACTION
-**Nicht neu anfangen: die 9 fertigen neuen Einzelquellen einfrieren. Als nächstes ausschließlich die 11 bereits exakt gebundenen neuen Richtungen in eigenständige Einzelquellen überführen; danach die 10 wirklich offenen Motivbindungen schließen. Erst bei 30/30 visueller Abnahme lokal 1:1 auf 1.50.650 simulieren und dann Plugin-Kandidat bauen.**
+**Nicht neu anfangen: die 19 fertigen neuen Einzelquellen einfrieren. Als nächstes ausschließlich Technik & Medien als letzte bereits exakt gebundene Richtung in eine eigenständige Einzelquelle überführen; danach die 10 wirklich offenen Motivbindungen schließen. Erst bei 30/30 visueller Abnahme lokal 1:1 auf 1.50.650 simulieren und dann Plugin-Kandidat bauen.**
