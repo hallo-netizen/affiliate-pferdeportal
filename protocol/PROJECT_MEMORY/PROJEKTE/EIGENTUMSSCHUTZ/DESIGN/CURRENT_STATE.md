@@ -1,6 +1,12 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## C2.2 NAVIGATION KORRIGIERT – 16.10.2026 / MEHR-LINK NUR BEI TATSÄCHLICH >3 KINDERN
+Die frühere allgemeine Angabe **36/36 mit Mehr-Link** ist nach Korrektur einer falschen neuen Graffiti-Themenseite **historisch überholt**. Korrigierter Konzeptbaum `../KONZEPT/C22_GESAMTBAUM_KORRIGIERT_173_THEMEN_569_ARTIKELKATEGORIEN_20261016.json`. Archivierter Objekt-ID- und Menüroutingvergleich: `C22_MENU_31_BESTANDSAREAS_VS_36_ZIELAREAS_3_PLUS_MEHR_20261016.json`. Im realen 13.10.-Stand hatten **31/31 Bereichseiten drei Page3-Kinder**, daher jeweils drei direkte Menüpunkte und keinen Mehr-Link. Im **nur zukünftigen Plan** stehen 36 Bereichseiten, **35 mit mehr als drei Kindern** und daher drei Direktlinks + „Weitere Kategorien“, **ein Bereich Fassade & Außenflächen mit genau drei Kindern ohne Mehr-Link**. Auf jeder Hubseite bleiben alle aktiven Unterthemen erreichbar, auch mobil. Designplugin 0.1.20 ist nur lokal dokumentiert: kein realer PHP-/Live-Menü-Abgleich mit dieser neuen Struktur, keine falschen URLs aus Konzeptnamen bauen. Bestehende WordPress-Namen und IDs nicht durch Anzeigealias ersetzen. Bereits vorhandener HivePress-Wachdienst-Term ist kein neuer Design-/Kategorieeintrag.
+**GENAU EINE NEXT ACTION:** Nach echter aktiver WP- und Designplugin-Revision den bestehenden 0.1.20-Menürenderer für 0/1/2/3/4/11/50 Kinder mitsamt richtiger Objekt-ID, Hub-Link, Mobilmenü, Cache und Breadcrumbs prüfen. Keine Designänderung aus dem Fachbaum allein live veröffentlichen.
+
+
+
 **Navigations-QA-Referenz (nur Datenmodell):** `../KONZEPT/C22_GESAMTBAUM_NAVIGATION_POSITIV_NEGATIV_QUALITAETSPRUEFUNG_20261016.json`: 28/28 konzeptionelle Tests, darunter Flyout 0/1/2/3/4/11/50 und Vollzugriff auf alle Kinder über den Hub. Dies testet **nicht** das echte Designplugin oder die Live-Website.
 
 
