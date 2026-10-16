@@ -26,10 +26,10 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 26,
+    "ready_source": 30,
     "bound_new_reference": 0,
-    "confirmed_new_batch_no_exact_motif": 2,
-    "unrecovered_new_binding": 2
+    "confirmed_new_batch_no_exact_motif": 0,
+    "unrecovered_new_binding": 0
   },
   "categories": [
     {
@@ -42,7 +42,7 @@
       "collision_peers": [
         "Moos & Miniaturgärten"
       ],
-      "source_file_id": "file_000000005774821099a58aee3f5d962b",
+      "source_file_id": "file_00000000c6d482109c4b7e47c5f16654",
       "stage_slug": "miniaturen-b"
     },
     {
@@ -55,7 +55,7 @@
       "collision_peers": [
         "Schrift & Lettering"
       ],
-      "source_file_id": "file_0000000091dc82108382ac7605664d57",
+      "source_file_id": "file_0000000013fc8210884c9ff242f54a50",
       "stage_slug": "papierkunst"
     },
     {
@@ -68,7 +68,7 @@
       "collision_peers": [
         "Leder"
       ],
-      "source_file_id": "file_000000009898821192f8819d4397be07",
+      "source_file_id": "file_00000000e93482118ac035eb0d1c543f",
       "stage_slug": "textilgestaltung"
     },
     {
@@ -81,7 +81,7 @@
       "collision_peers": [
         "Schrift & Lettering"
       ],
-      "source_file_id": "file_00000000c30081f59f27c670593d4a56",
+      "source_file_id": "file_000000005f4c81f5b39d436669163487",
       "stage_slug": "malen-zeichnen"
     },
     {
@@ -95,7 +95,7 @@
         "Papierkunst",
         "Malen & Zeichnen"
       ],
-      "source_file_id": "file_000000005d0081f4b87341b9d7342cda",
+      "source_file_id": "file_000000003f4481f4baf6740b4f99bb3b",
       "stage_slug": "schrift-lettering"
     },
     {
@@ -108,7 +108,7 @@
       "collision_peers": [
         "Keramik & Glas"
       ],
-      "source_file_id": "file_000000008b6c820a9287113b751bb241",
+      "source_file_id": "file_000000006a88820aa29a7ad4f42612cf",
       "stage_slug": "guss-formen"
     },
     {
@@ -218,7 +218,7 @@
       "collision_peers": [
         "Wetter & Umwelt"
       ],
-      "source_file_id": "file_00000000521881f49deb5721d6bba808",
+      "source_file_id": "file_00000000efb081f48eebf3c5345885cd",
       "stage_slug": "astronomie"
     },
     {
@@ -351,9 +351,9 @@
     },
     {
       "category": "Wirbellose",
-      "status": "confirmed_new_batch_no_exact_motif",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Aktive Einzelquelle Wirbellose",
+      "source_sha256": "860ecf8bdb7d76948af9cb1b49b9afc8994c5d1c90aac3c577367b7ce754d6f4",
       "hero_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/tiere/wirbellose-v150634.webp",
       "collision_peers": [
@@ -362,7 +362,8 @@
       "reference_file_id": null,
       "reference_file_name": null,
       "reference_cell": null,
-      "stage_slug": "wirbellose"
+      "stage_slug": "wirbellose",
+      "source_file_id": "file_00000000a54081f48a40aa684b59996c"
     },
     {
       "category": "Wind & Drachen",
@@ -382,16 +383,17 @@
     },
     {
       "category": "Klettern & Seil",
-      "status": "confirmed_new_batch_no_exact_motif",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Aktive Einzelquelle Klettern & Seil",
+      "source_sha256": "44abeb660ce2c068beba9059a5bcf72d8cd8bb04da3a71961e7388481be12a16",
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/klettern-seil-v150634.webp",
       "collision_peers": [],
       "reference_file_id": null,
       "reference_file_name": null,
       "reference_cell": null,
-      "stage_slug": "klettern-und-seil"
+      "stage_slug": "klettern-und-seil",
+      "source_file_id": "file_000000006dc88243a18a9681343ad25e"
     },
     {
       "category": "Wasser",
@@ -409,13 +411,14 @@
     },
     {
       "category": "Alltagsobjekte",
-      "status": "unrecovered_new_binding",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Aktive Einzelquelle Alltagsobjekte",
+      "source_sha256": "dc4bbb4727ee179ce97e00cac9dcf0c39b45f4287565cbe59c63968c7514a0c1",
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/alltagsobjekte-v150634.webp",
       "collision_peers": [],
-      "stage_slug": "alltagsobjekte"
+      "stage_slug": "alltagsobjekte",
+      "source_file_id": "file_0000000076608243818a648690391f15"
     },
     {
       "category": "Naturfunde",
@@ -432,15 +435,16 @@
     },
     {
       "category": "Spielzeug & Spiele",
-      "status": "unrecovered_new_binding",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Aktive Einzelquelle Spielzeug & Spiele",
+      "source_sha256": "a0d66186e7d4ba10b85576540ec260eb0ab5dd0f8012fee549b54f896efd7c27",
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/spielzeug-spiele-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/spielzeug-spiele-v150634.webp",
       "collision_peers": [
         "Miniaturen & Szenen"
       ],
-      "stage_slug": "spielzeug-und-spiele"
+      "stage_slug": "spielzeug-und-spiele",
+      "source_file_id": "file_00000000994881f48f9427fab0fa3d07"
     },
     {
       "category": "Münzen & Geld",
@@ -486,6 +490,7 @@
     "ready_source_count_is_21": true,
     "ready_source_count_is_22": true,
     "ready_source_count_is_23": true,
-    "ready_source_count_is_26": true
+    "ready_source_count_is_26": true,
+    "ready_source_count_is_30": true
   }
 }
