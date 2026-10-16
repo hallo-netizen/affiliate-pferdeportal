@@ -26,10 +26,10 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 23,
-    "bound_new_reference": 1,
+    "ready_source": 26,
+    "bound_new_reference": 0,
     "confirmed_new_batch_no_exact_motif": 2,
-    "unrecovered_new_binding": 4
+    "unrecovered_new_binding": 2
   },
   "categories": [
     {
@@ -419,15 +419,16 @@
     },
     {
       "category": "Naturfunde",
-      "status": "unrecovered_new_binding",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Wiederhergestellte neue Einzelquelle Naturfunde 2026-10-15",
+      "source_sha256": "838e987c68721d0ab46138df8ca2dfa8cae3d30ebad33c789293bea2a9e81ad1",
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/naturfunde-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/naturfunde-v150634.webp",
       "collision_peers": [
         "Pilze & Kulturen"
       ],
-      "stage_slug": "naturfunde"
+      "stage_slug": "naturfunde",
+      "source_file_id": "file_0000000014b882109801b2e38d0aef14"
     },
     {
       "category": "Spielzeug & Spiele",
@@ -443,19 +444,20 @@
     },
     {
       "category": "Münzen & Geld",
-      "status": "unrecovered_new_binding",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Wiederhergestellte neue Einzelquelle Münzen & Geld 2026-10-15",
+      "source_sha256": "843c080243a5c74d1cb78bf83fb0bd3cb606d30ced21fac2c998a368fa361523",
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/munzen-geld-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/muenzen-geld-v150634.webp",
       "collision_peers": [],
-      "stage_slug": "munzen-und-geld"
+      "stage_slug": "munzen-und-geld",
+      "source_file_id": "file_00000000ba58824383b6fb2165c4f107"
     },
     {
       "category": "Technik & Medien",
-      "status": "bound_new_reference",
-      "reference": "Kreative Welten im Raster.png / R2C1",
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Wiederhergestellte neue Einzelquelle Technik & Medien 2026-10-15",
+      "source_sha256": "6247b1654e843545d702500b00fd61b4593cfb170ccf680c3c53f63830d395b3",
       "hero_target": "assets/hobby-depot-v150617/subcategories/sammeln/technik-medien-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/sammeln/technik-medien-v150634.webp",
       "collision_peers": [
@@ -464,7 +466,8 @@
       "reference_file_name": "Kreative Welten im Raster.png",
       "reference_cell": "R2C1",
       "reference_file_id": "file_00000000775c81f48afca940c8de63f9",
-      "stage_slug": "technik-und-medien"
+      "stage_slug": "technik-und-medien",
+      "source_file_id": "file_00000000ef90820aa5f5a32a5c50e940"
     }
   ],
   "validation": {
@@ -482,6 +485,7 @@
     "ready_source_count_is_20": true,
     "ready_source_count_is_21": true,
     "ready_source_count_is_22": true,
-    "ready_source_count_is_23": true
+    "ready_source_count_is_23": true,
+    "ready_source_count_is_26": true
   }
 }
