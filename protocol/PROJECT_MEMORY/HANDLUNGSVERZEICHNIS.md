@@ -120,7 +120,7 @@ Keine manuelle Ersatzproduktion.
 
 ## Affiliate-Release
 
-Autorität:
+Autorität ausschließlich auf Branch `affiliate-release-current`:
 `control/release-governance/CURRENT_RELEASE.json`
 `release/affiliate-zentrale/AGENTS.md`
 

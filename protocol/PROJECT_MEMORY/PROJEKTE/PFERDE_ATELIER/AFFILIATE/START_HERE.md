@@ -30,7 +30,7 @@ nach der bestehenden Affiliate-Governance lesen, prüfen und im gebundenen Facha
 Release-Governance umgehen, alte Root-/Stagingstände als neue Autorität behandeln oder Ersatzrouten erfinden.
 
 **ALS NÄCHSTES …**  
-`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `control/release-governance/CURRENT_RELEASE.json`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
 
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
@@ -47,9 +47,9 @@ Release-Governance umgehen, alte Root-/Stagingstände als neue Autorität behand
 
 ## Autoritative Governance
 
-- `release/affiliate-zentrale/AGENTS.md`
-- `control/release-governance/CURRENT_RELEASE.json`
-- `control/release-governance/release_guard.py`
+- `affiliate-release-current:release/affiliate-zentrale/AGENTS.md`
+- `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`
+- `affiliate-release-current:control/release-governance/release_guard.py`
 
 PROJECT_MEMORY ersetzt diese Governance nicht.
 

@@ -6,7 +6,7 @@ Diese Datei enthält **keinen aktuellen Affiliate-Status** mehr.
 
 Einzige aktuelle Zustands-/Release-/Blocker-/NEXT-ACTION-Autorität für das Pferde-Atelier-Affiliatebüro:
 
-`control/release-governance/CURRENT_RELEASE.json`
+`affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`
 
 Routingautorität:
 `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`

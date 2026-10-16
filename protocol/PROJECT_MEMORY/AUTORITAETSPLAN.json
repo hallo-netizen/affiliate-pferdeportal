@@ -53,7 +53,7 @@
     {
       "id": "PFERDE_ATELIER_AFFILIATE",
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/START_HERE.md",
-      "current_authority": "control/release-governance/CURRENT_RELEASE.json",
+      "current_authority": "affiliate-release-current:control/release-governance/CURRENT_RELEASE.json",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/HOBBYRAUM.md"
     },
     {
