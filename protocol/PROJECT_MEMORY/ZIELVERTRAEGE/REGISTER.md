@@ -87,38 +87,54 @@ PFERDE-ANWENDUNG:
 Dieses Register führt **keinen dynamischen LIVE-Stand**. Der historisch belegte Referenz-LIVE-PASS 1.50.472 / V104 bleibt Beleg; den aktuellen belastbaren Projektstand ausschließlich aus `PROJEKTE/PFERDE_ATELIER/DESIGN/CURRENT_STATE.md` lesen.
 
 
-## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
+## ZV-TEXT-001 – STARTMASTER0107 historischer Produktionszielvertrag
 
 TITEL:
 STARTMASTER0107 – VERBINDLICHER ZIELVERTRAG – 05.09.2026
 
 GELTUNGSBEREICH:
-PFERDE_ATELIER / TEXT / STARTMASTER0107
+PFERDE_ATELIER / TEXT / LEGACY K1–K9
 
 STATUS:
-AKTIV
+ABGELÖST
 
 FASSUNG:
 05.09.2026
 
 HAUPTQUELLE:
-`PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md`
+Archiv-Branch `archive/pferdeatelier-textoffice-k1-k9-20261016`.
 
 VERANTWORTLICHER BEREICH:
-`PROJEKTE/PFERDE_ATELIER/TEXT/`
-
-PASS-BEDINGUNG:
-Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
+PFERDE_ATELIER / TEXT / ARCHIV
 
 NACHFOLGER:
-keiner belegt.
+`ZV-TEXT-K0-001`
 
-ERGÄNZENDE TECHNISCHE SYSTEM-4-BINDUNG:
-`isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md`
+## ZV-TEXT-K0-001 – K0 aktuelle Produktionsbasis
 
-ROLLE:
-Dieser System-4-Vertrag präzisiert den technischen Maschinenweg des unveränderten STARTMASTER0107-Produktionsziels. Er ersetzt nicht das fachliche Endziel, sondern bindet dessen aktuelle technische Ausführung bis zur bytegleichen finalen Parent-Chat-Datei.
+TITEL:
+K0 – PORTALNEUTRALE PRODUKTIONSBASIS
 
+GELTUNGSBEREICH:
+PFERDE_ATELIER / TEXT / K0
+
+STATUS:
+AKTIV
+
+FASSUNG:
+K0_PORTAL_NEUTRAL_GOAL_V1
+
+HAUPTQUELLE:
+Branch `konzept0-portal-neutral-20261002` → `K0_GOAL_CONTRACT.json`.
+
+CURRENT:
+Branch `konzept0-portal-neutral-20261002` → `K0_CURRENT_STATE.json`.
+
+PASS-BEDINGUNG:
+Ausschließlich aus dem K0-Zielvertrag und der K0-Current lesen; keine Legacy-Regel als zweite Wahrheit.
+
+NACHFOLGER:
+keiner.
 
 ## ZV-AFFILIATE-OTTO-001 – OTTO/Awin vollautomatische Produkt- und Bannerintegration
 

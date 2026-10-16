@@ -36,8 +36,7 @@ CAMPUS_SINGLE_TRUTH_ENTRY_V1
 
 ## Büroplan
 
-- `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
-- `TEXTSYSTEM_4A/START_HERE.md` → isolierter Universalitäts-/Vereinfachungsprototyp für den vollständigen Artikelworkflow; keine eigene Fach-/Design-/Qualitätsautorität
+- `TEXT/START_HERE.md` → aktuelle K0-basierte Text-/Artikelproduktion
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
 - `WISSENSDATENBANK/START_HERE.md` → zentraler Themenpool, Recherche-Steuerung, Trust-Regeln und tatsächlich recherchierte Wissens-Aktenschränke
 - `DESIGN/START_HERE.md` → Portaldesign
@@ -48,6 +47,11 @@ CAMPUS_SINGLE_TRUTH_ENTRY_V1
 - `TECHNIK/START_HERE.md` → WordPress-/Hosting-Betrieb, Speicher-/Backupdiagnose und sichere technische Wartung ohne Fachinhaltsänderung
 - `PLUGINS/START_HERE.md` → zentraler Plugin-Bestand, Updatekontrolle und isolierte aktuelle Ausgabeartefakte
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+
+## Textsystem-Historie
+
+K1 bis K9 sind abgeschlossen und ausschließlich Archiv-/Recherchebestand. Sie besitzen keine aktive Current-, Start-, Workflow- oder Fallback-Autorität.
+Aktive Produktionsbasis ist ausschließlich K0 über das Büro `TEXT`.
 
 Historische Adresse `PFERDERASSEN/START_HERE.md` bleibt als Weiterweiser zum Aktenschrank `WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/` bestehen.
 

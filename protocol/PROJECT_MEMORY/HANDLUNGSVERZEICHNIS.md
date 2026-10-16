@@ -105,20 +105,18 @@ Bei BLOCKED: stoppen. Keine Alternativroute.
 
 ## Textmaschine / Artikelproduktion
 
-Autorität:
-- Root-`AGENTS.md`
-- aktueller technischer State unter `control/startmaster0107/`
-- gebundene Capsule/Instruction
+Verbindlicher Weg:
+`PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
+→ `AUTORITAETSPLAN.json`
+→ Branch `konzept0-portal-neutral-20261002`
+→ `K0_CURRENT_STATE.json`
+→ `K0_START_HERE.md`.
+
+Aktive Produktionsbasis: **K0**.
+
+K1 bis K9 sind ausschließlich Archiv-/Recherchebestand. Kein STARTMASTER-, System-3/4/4A-, K7-, K8- oder K9-Fallback.
 
 Keine manuelle Ersatzproduktion.
-
-## Text-Regression
-
-Matrix:
-`control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
-
-Runner:
-`control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`
 
 ## Affiliate-Release
 

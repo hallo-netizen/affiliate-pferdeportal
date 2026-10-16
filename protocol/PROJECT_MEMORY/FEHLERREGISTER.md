@@ -11,15 +11,11 @@ Bereich: CAMPUS / ARCHITEKTUR
 Status: AKTIV / Details ausschließlich aus autoritativer Architektur-Fehlerquelle
 Autoritative Fehlerquelle: `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
 
-## TEXT-M01-M39
-Bereich: TEXT  
-Status: REGRESSION-SUITE AKTIV / KEIN OFFENER TECHNISCHER PRE-CODEX-FEHLER  
-Autoritative Fehlerquelle: `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
-
-## TEXT-LIVE-CURRENT
-Bereich: TEXT  
-Status: AKTUELLE FEHLERQUELLE  
-Autoritative Fehlerquelle: `PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
+## PFERDE_ATELIER-TEXT-K0
+Bereich: PFERDE_ATELIER / TEXT
+Status: AKTIV / K0
+Aktuelle Zustands- und Blockerwahrheit ausschließlich: Branch `konzept0-portal-neutral-20261002` → `K0_CURRENT_STATE.json`.
+K1 bis K9: ARCHIVIERT / keine aktive Fehler-, Current- oder Fallback-Autorität.
 
 ## AFFILIATE-RELEASE
 Bereich: AFFILIATE  

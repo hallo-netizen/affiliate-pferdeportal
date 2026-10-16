@@ -1,24 +1,16 @@
-# PFERDE ATELIER – TEXT – CURRENT STATE
+# PFERDE-ATELIER – TEXT – CURRENT POINTER
 
-<!-- POINTER_ONLY_AFTER_TECHNICAL_CURRENT_ROUTING -->
+STATUS: POINTER ONLY / K0
 
-STAND: 2026-09-18
-STATUS: POINTER ONLY – NICHT CURRENT-AUTORITATIV
+Diese Datei ist keine eigene Current-Autorität.
 
-Für PFERDE_ATELIER / TEXT existiert eine stärkere technische Current-Autorität.
+Einzige aktuelle Produktionsautorität:
+`konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json`
 
-## EINZIGE CURRENT-AUTORITÄT
+Öffentlicher Einstieg:
+`main:K0_START_HERE.md`
 
-`control/startmaster0107/CURRENT_STATE.json`
+K1 bis K9 sind archiviert und dürfen weder Current noch Fallback noch Produktionsroute sein.
 
-Diese Campus-Datei enthält deshalb absichtlich:
-- keinen eigenen aktuellen Status;
-- keinen Branch-/Head-Stand;
-- keinen aktuellen Blocker;
-- keine eigene NEXT ACTION.
-
-## PFLICHTWEG
-
-`TEXT/START_HERE.md → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → control/startmaster0107/CURRENT_STATE.json → Frischecheck → NEXT ACTION`
-
-Die frühere M39-Campus-Statuskopie ist abgelöst. M39-/History-Dokumente bleiben ausschließlich Historie/Nachweis und dürfen nicht als aktueller Stand verwendet werden.
+Pflichtweg:
+`TEXT/START_HERE.md → AUTORITAETSPLAN.json → K0_CURRENT_STATE.json → dessen NEXT ACTION`.

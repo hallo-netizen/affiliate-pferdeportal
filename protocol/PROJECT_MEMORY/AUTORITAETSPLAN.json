@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
-  "version": "1.0",
-  "effective_date": "2026-09-25",
+  "version": "1.1",
+  "effective_date": "2026-10-16",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -14,20 +14,17 @@
     "error_registers_are_error_authority_only": true,
     "target_contracts_are_target_authority_only": true,
     "no_full_rediscovery_if_current_binding_fresh": true,
-    "on_binding_change_inspect_delta_only": true
+    "on_binding_change_inspect_delta_only": true,
+    "project_buildings_are_strictly_isolated": true,
+    "cross_project_current_authority_forbidden": true,
+    "legacy_text_systems_k1_k9_are_archive_only": true
   },
   "scopes": [
     {
       "id": "PFERDE_ATELIER_TEXT",
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md",
-      "current_authority": "control/startmaster0107/CURRENT_STATE.json",
+      "current_authority": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md"
-    },
-    {
-      "id": "PFERDE_ATELIER_TEXTSYSTEM_4A",
-      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/START_HERE.md",
-      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/CURRENT_STATE.md",
-      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/HOBBYRAUM.md"
     },
     {
       "id": "PFERDE_ATELIER_PRODUKTVERGLEICH",

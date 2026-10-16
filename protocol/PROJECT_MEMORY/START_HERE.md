@@ -30,9 +30,10 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh zu PB ONE in die Ideenwerkstatt.`
 - `Geh zu PB ONE, Angebote/Flyer.`
 - `Geh ins Pferde-Atelier.`
-- `Geh zu Hobbyrausch.`
-- `Geh zu Hobbyrausch, Büro PLUGINS.`
-- `Geh zu Hobbyrausch, Büro WORDPRESS_TECHNIK.`
+- `Geh zu Hab & Bewahr.`
+- `Geh zu Hobby Depot.`
+- `Geh zu Hobby Depot, Büro PLUGINS.`
+- `Geh zu Hobby Depot, Büro WORDPRESS_TECHNIK.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
 - `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
 - `Geh ins Pferde-Atelier, Büro TECHNIK.`
@@ -40,6 +41,8 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh in den Campus, Bürogebäude Pferde-Atelier, TEXT/SEO. Dort findest du alles für unsere Arbeit.`
 
 Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
+
+**Projektgebäude sind fachlich und operativ strikt getrennt.** Keine Current-, Arbeits- oder Fallback-Route darf unbemerkt in ein anderes Projektgebäude springen.
 
 ## Wichtiger Wegweiser – allgemeingültige Plugins / Bausteine
 

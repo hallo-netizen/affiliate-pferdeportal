@@ -37,9 +37,9 @@ Jede klare natürliche Formulierung wie:
 - „Hauptpförtner.“
 - „geh auf den Campus“
 - „geh ins Pferde-Atelier“
-- „geh zu Hobbyrausch“
-- „geh zu Hobbyrausch PLUGINS“
-- „geh zu Hobbyrausch WORDPRESS_TECHNIK“
+- „geh zu Hobby Depot“
+- „geh zu Hobby Depot PLUGINS“
+- „geh zu Hobby Depot WORDPRESS_TECHNIK“
 - „geh ins Pferde-Atelier TEXT/SEO“
 - „geh ins Pferde-Atelier PRODUKTVERGLEICH“
 - „geh ins Pferde-Atelier TECHNIK“
@@ -54,6 +54,8 @@ direkt dorthin routen, aber dieselbe Pflichtlektüre einhalten.
 
 Wenn etwas mehrdeutig ist:
 **STOPP – NICHT RATEN.**
+
+**Gebäudetrennung:** Keine Current- oder Arbeitsroute eines Projekts darf auf ein anderes Projektgebäude zeigen. Projektübergreifend erlaubt sind ausschließlich ausdrücklich allgemeingültige Campusdienste.
 
 ## Wenn der Nutzer sagt: „Hauptpförtner.“
 
@@ -88,8 +90,10 @@ Unklar:
 ## Campus-Karte
 
 Projektgebäude:
-- `PROJEKTE/PFERDE_ATELIER/`
-- `PROJEKTE/HOBBYRAUSCH/`
+- `PROJEKTE/PFERDE_ATELIER/` → Pferdeatelier
+- `PROJEKTE/HOBBYRAUSCH/` → Hobby Depot
+- `PROJEKTE/EIGENTUMSSCHUTZ/` → Hab & Bewahr
+- `PROJEKTE/MENSCH/`
 
 Projektübergreifend:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/`
@@ -150,7 +154,7 @@ Wenn der Nutzer Produktvergleiche planen, Vergleichskriterien festlegen, konkret
 
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
 
-Wenn der Auftrag dagegen die eigentliche Textproduktion oder den STARTMASTER-/Textmaschinenlauf betrifft:
+Wenn der Auftrag dagegen die eigentliche K0-Textproduktion betrifft:
 `PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
 
 Nicht vermischen.

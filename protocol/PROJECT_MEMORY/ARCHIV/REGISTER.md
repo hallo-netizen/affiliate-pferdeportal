@@ -377,3 +377,23 @@ Die Ampeln bleiben GELB/ROT, bis der Nutzer bestätigt hat, dass das Set auf ein
 Der Export kann fehlende Originale nicht erzeugen.
 Insbesondere bleibt:
 `ARC-PFERDE-DESIGN-20260905` für finale 1.50.472-Rohartefakte ROT.
+
+
+## ARC-PFERDE-TEXT-K1-K9-20261016 – abgeschlossene Textsysteme
+
+STATUS:
+GRÜN FÜR GITHUB-RECHERCHEBESTAND
+
+Archiv-Branches:
+- `archive/pferdeatelier-textoffice-k1-k9-20261016` – Campus-/Aktenstand vor Bereinigung;
+- `archive/pferdeatelier-textsysteme-k1-k8-20261016` – technischer Main-Stand vor Bereinigung;
+- `archive/pferdeatelier-k9-gold-20261016` – ausgewählter K9-Goldstand.
+
+Zusätzlicher unabhängiger Sicherungsort:
+lokales vollständiges GitHub-Backup des Nutzers vom 16.10.2026.
+
+ROLLE:
+Nur Historie/Recherche. Niemals Current, Fallback, Runner- oder Produktionsquelle.
+
+Aktive Produktionsbasis:
+K0 auf Branch `konzept0-portal-neutral-20261002`.
