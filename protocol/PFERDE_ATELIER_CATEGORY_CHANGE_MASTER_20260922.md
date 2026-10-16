@@ -1324,3 +1324,42 @@ Die bestehende Pferdekrankenversicherung, Reithalle, alle sieben Geschwisterkach
 - PPM `6.7.9` und Production Center `1.1.1`: neues Delta nicht vollständig umgesetzt
 
 **Stoppgrenze:** Kein Ersatz von Plugin-CURRENT.zip, kein neues Plugin, keine Freigabe, kein WordPress-Apply ohne aktuelles WordPress-Readback und übereinstimmende Quell-/SHA-/Slot-Bindungen. Fokussierte lokale PASSs sind **kein** Release-PASS.
+
+---
+
+## 29. Redaktioneller Kategorie-Routing-Freeze – 16.10.2026
+
+**Status: FACHLICH FINAL / FROZEN.** Dieser Abschnitt ist die ausdrücklich beschlossene **Klarstellung des bestehenden Pferdeatelier-SEO-/Kategoriekonzepts**, kein neuer Zielvertrag und keine neue Architektur. Die abgeschlossenen technischen Teilverträge in 0A/26/27, die zentrale Kategorienwahrheit und die geschützten Produktionsverträge bleiben unverändert.
+
+### 29.1 Begriffe und genau eine redaktionelle Zuordnungsentscheidung
+
+**Magazin = Journal = redaktioneller Portalbereich.** Diese Bezeichnungen sind für das Pferdeatelier synonym.
+
+Für jedes fachlich geeignete, eigenständige Keyword-/Artikelthema gibt es **genau eine fachliche Eigentümerentscheidung: Hauptnavigation/Fachbereich (oben) oder Magazin/Journal (unten)**. Dabei sind alle **tatsächlich vorhandenen** Fach- und Magazinkategorien gleichberechtigt in derselben Kategorienauswahl zu berücksichtigen. Keine vorhandene Magazinkategorie darf wegen ihres Portalbereichs aus der fachlichen Auswahl ausgeschlossen werden.
+
+Die inhaltliche Grenze:
+- **Oben:** ein konkreter, abgegrenzter Fach-, Produkt-, Anwendungs-, Haltungs-, Versicherungs- oder Lösungsbereich mit eigener vorhandener Themen-/Kategoriestruktur. Hier sind ausdrücklich **auch rein informative Fragen** zulässig; Kaufabsicht ist keine zwingende Voraussetzung.
+- **Unten:** übergreifende, redaktionelle Themen wie Pferdeverhalten, Reiterleben, Geschichte, Personen/Pferde, allgemeines Wissen und andere selbstständige Informationsintentionen, für die **kein spezifischerer passender Fach-Owner** besteht.
+- Die Zuordnung folgt der **dominanten Suchintention und dem fachlich spezifischsten passenden Owner**, nicht einzelnen Schlagwörtern, der bloßen Frageform oder dem Vermarktungsgrad. Ein Artikel darf nicht doppelt oben und unten angelegt werden.
+
+**Nach bereits geklärter redaktioneller Abgrenzung gibt es keine zweite, nur für das Magazin geltende inhaltliche Eintrittsentscheidung.** Das ist eine fachliche Routingvorgabe, **keine** pauschale Freigabe eines Artikels.
+
+### 29.2 Passende Kategorie fehlt – identischer Vorgang oben und unten
+
+Ein gutes, pferderelevantes Thema darf **nicht wegen einer fehlenden Kategorie verloren gehen**, weder im Fachbereich noch im Magazin.
+
+1. Die gesamte aktuelle Kategorienmenge beider Bereiche fachlich prüfen; erst danach gilt eine Kategorie als tatsächlich fehlend.
+2. Fehlt ein eindeutiger passender Owner, Originalkeyword, Suchintention und Themenbefund verlustfrei erhalten und die **bereits bestehende zentrale Kategorienverwaltung** für einen fachlich begründeten Kategorie-Ergänzungsentscheid nutzen.
+3. Eine neue Blattkategorie muss sinnvoll abgegrenzt sein und **mindestens 3–5 unterscheidbare, artikelgenaue Longtail-Themen** tragen können. Verwandte Themen ohne ausreichende Eigenständigkeit gehören in passende bestehende Kategorien; keine künstlichen Mini-Kategorien.
+4. Nach kontrollierter Übernahme der Kategorie in die **einzige autoritative WordPress-/Portal-Kategorienquelle** sowie der erforderlichen bestehenden Compiler-/PPM-Planbindungen die zurückgehaltenen Kandidaten ohne erneute Keyword-Vollrecherche im **bestehenden** Prüfweg erneut verarbeiten.
+5. **Keine automatische WordPress-Taxonomie-Anlage durch PSTE**, keine erfundenen Term-IDs, kein stiller Kategorien-Remap, keine zweite Kategorienquelle. Fehlende Struktur ist ein fortsetzbarer, begründeter Zustand, keine inhaltliche Ablehnung.
+
+Beispiel: Pferdenamen, berühmte Pferde und Filmpferde dürfen, falls dafür keine passende bestehende Magazinkategorie existiert, als begründete Magazin-Kategorieergänzung vorgeschlagen werden, sofern die erforderliche eigenständige Artikelbreite belegt ist.
+
+### 29.3 Unveränderte Freigabegrenzen
+
+Der einheitliche **Kategorie-Routingentscheid** ersetzt **keine** bestehenden Prüfungen für SEO-Intention, fachliche Sicherheit, Dubletten/Kannibalisierung, korrekten Artikeltyp, natürliche Titel, reale vorhandene Kategorien und Slots, signierte PPM-/PSERC-Bindungen, LanguageTool, ENDSTEMPEL oder Nutzer-Publish.
+
+Insbesondere wird mit dieser rein fachlichen Klarstellung **kein signierter Journal-Produktionsvertrag geändert, keine Produktionsfreigabe erteilt und kein Plugin als getestet erklärt**. Ein eventuell nachgelagerter, ausschließlich redaktioneller Doppel-Eintritt ist innerhalb der **bestehenden** Kategorienentscheidung zu beseitigen; echte Sicherheits-/Qualitätsprüfungen bleiben unverändert. Die vorhandenen fünf Handoff-Felder bleiben exakt unverändert.
+
+**Freeze-Regel:** Fachliche Weiche **OBEN / UNTEN** und anschließend **bestehende Kategorie oder zentral kontrollierte Kategorieergänzung** – für beide Seiten identisch. Eine Änderung dieser redaktionellen Grundentscheidung erfordert einen neuen ausdrücklichen Nutzerentscheid. Umsetzung ausschließlich als nachgewiesene Korrektur des bestehenden PSTE/PSERC-Kategoriepfads mit vollständigen Positiv-, Negativ-, Reentry- und Workflowtests.
