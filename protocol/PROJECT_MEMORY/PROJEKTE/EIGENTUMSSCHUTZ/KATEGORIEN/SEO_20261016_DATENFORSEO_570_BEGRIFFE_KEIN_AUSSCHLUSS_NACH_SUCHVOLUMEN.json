@@ -1,0 +1,72 @@
+{
+  "schema": "HB-SEO-VOLUME-NONEXCLUSION-V1",
+  "date": "2026-10-16",
+  "status": "REAL_PROVIDER_RESULT_READ_ONLY_DO_NOT_APPLY_AUTOMATIC_CHANGES",
+  "source": {
+    "uploaded_filename": "hab-und-bewahr-dataforseo-kategorienamen.json",
+    "sha256": "9146640f8827de14cbb8fb2576356c81f00761d3e6adfc48f8dfbd4827b1a28b",
+    "market": "Germany/de",
+    "provider_task_id": "10160704-2339-0607-0000-fadc315228b3",
+    "completed_utc": "2026-10-16T07:04:16+00:00",
+    "profile_revision": "HB-V99-ADD-20261015-81-364",
+    "provider_cost_usd": 0.01812
+  },
+  "audit": {
+    "planned_names_checked": 570,
+    "source_node_refs": 522,
+    "existing_nodes": {
+      "world": 6,
+      "area": 31,
+      "subarea": 93,
+      "leaf": 285
+    },
+    "proposed_v99_nodes": 107,
+    "provider_keywords_returned": 51,
+    "provider_no_result_for_requested_phrases": 519,
+    "provider_volume_null": 4,
+    "provider_volume_numeric_but_below_100": 21,
+    "provider_volume_zero_explicit": 0,
+    "provider_writes_to_categories": 0,
+    "provider_editorial_approved_sha256": null,
+    "results_not_equivalent_to_full_keyword_coverage": true
+  },
+  "hard_rules": [
+    "ABSOLUTELY NO category/archive/delete/move/merge decision because of zero, null, low, or missing SEO search volume. No volume threshold.",
+    "No provider result does NOT mean zero demand; treat as UNKNOWN.",
+    "Provider results for a term may suggest more natural wording, alternate names, search intent, or article angle, never automatic deletion.",
+    "Intermediate category stays if sufficient independently justified subcategories regardless of searched category heading; >=3 real children; unlimited above.",
+    "Leaf category stays if >=3 standalone substantial article intents (more allowed), clear category scope and ownership, regardless of volume.",
+    "Duplicated real search intent may require editorial de-duplication, but any change to an existing category ID, name, slug, URL or article must be individually approved and performed through the central category office.",
+    "SEO-friendly navigation name should be short, German, precise and human-readable; display/menu alias independent from SEO heading and unchanged canonical WP slug.",
+    "DataForSEO may inform an editorial decision but does not auto-mark SEO owner, PASS, approve renaming, or remove content.",
+    "Provider no-results/low-volume and a niche with high topical depth are NOT contradictions."
+  ],
+  "examples": {
+    "no_measurable_volume": [
+      "graffiti vorbeugen",
+      "nach dem einbruch",
+      "boot wassereintritt",
+      "sachbeschädigung haus"
+    ],
+    "measured_low_demand_not_a_delete_reason": [
+      {
+        "keyword": "unbewohnte häuser",
+        "monthly_volume": 10
+      },
+      {
+        "keyword": "teichfolie undicht",
+        "monthly_volume": 20
+      },
+      {
+        "keyword": "katalysator diebstahl",
+        "monthly_volume": 30
+      },
+      {
+        "keyword": "gartenhaus hitzeschutz",
+        "monthly_volume": 10
+      }
+    ]
+  },
+  "release_gate": "KEEP ALL 285 existing CORE categories and 107 V99 candidates untouched during evidence evaluation. No WordPress writes; semantic owner/complete coverage and honest keyword naming review first.",
+  "next_action": "Review all 31 existing areas and 93 existing subareas plus V99 additions for topical completeness; for each category evaluate independent articles and owner boundaries, use real provider data only as naming signal; record KEEP/RENAME_PROPOSAL/ADD_PROPOSAL for editorial review without modifying WordPress."
+}
