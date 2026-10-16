@@ -936,7 +936,7 @@
       "source": "V9.17",
       "name": "Tiefgarage bei Starkregen",
       "article_ideas": [
-        "Tiefgaragenzufahrt bei Starkregen gegen Wasserzufluss sichern",
+        "Rückstau über Bodenabläufe in kleinen Tiefgaragen von Oberflächenwasser unterscheiden lassen",
         "Tiefgarage läuft nach Gewitter voll: Risiken vor dem Betreten beachten",
         "Überflutete Tiefgarage: Elektroinstallation nur durch Fachkräfte freigeben lassen",
         "Ablaufrinnen und Pumpen an kleinen Privat-Tiefgaragen warten lassen",
@@ -998,5 +998,13 @@
     "all_six_negative_rejected": true,
     "thirteen_children_do_not_hit_maximum": true,
     "limits": "Data consistency checks only; not PHP/WordPress simulation, do not misstate as live pass."
+  },
+  "original_686_source_overlap_correction_20261016": {
+    "old_new_title": "Tiefgaragenzufahrt bei Starkregen gegen Wasserzufluss sichern",
+    "existing_original_R2_category": "Garagenzufahrt & Hofabläufe",
+    "existing_original_R2_title": "Tiefgaragenzufahrt an einem Wohnhaus gegen Starkregen schützen",
+    "replacement_new_title": "Rückstau über Bodenabläufe in kleinen Tiefgaragen von Oberflächenwasser unterscheiden lassen",
+    "rule": "Preserve original existing title and owner; replace overlapping draft only. Low volume never grounds category deletion.",
+    "live_wp_changed": false
   }
 }
