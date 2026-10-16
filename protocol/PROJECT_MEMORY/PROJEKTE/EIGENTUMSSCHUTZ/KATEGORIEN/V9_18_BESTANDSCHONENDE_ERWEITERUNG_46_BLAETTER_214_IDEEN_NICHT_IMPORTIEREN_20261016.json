@@ -433,7 +433,7 @@
         "Warmwasserspeicher heizt nicht mehr: Regler oder Heizsystem unterscheiden",
         "Zu wenig Warmwasser aus dem Boiler: Dimensionierung und Defekt trennen",
         "Temperaturbegrenzung am Warmwasserspeicher fachlich überprüfen",
-        "Defekte Speicherthermostate an Fachbetrieb melden",
+        "Ungewöhnliche Boilergeräusche: Verkalkung und technische Defekte unterscheiden lassen",
         "Warmwasserspeicher nach längerer Abschaltung fachgerecht wieder betreiben"
       ],
       "seo_boundary": "Boiler-Temperaturbetrieb, nicht Boiler-Leckagen/Wasserhygiene medizinisch."
@@ -799,7 +799,7 @@
       "name": "Video-Türsprechanlage defekt",
       "article_ideas": [
         "Videobild einer Türsprechanlage ausgefallen: Kamera oder Innenmonitor",
-        "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+        "Nachtsicht der Video-Türsprechanlage gestört: IR-Licht und Reflexionen prüfen lassen",
         "Außenkamera der Türsprechanlage nach Starkregen prüfen lassen",
         "Türvideostation hat Bildaussetzer: Leitungsverbindung fachlich untersuchen"
       ],
@@ -1006,5 +1006,19 @@
     "replacement_new_title": "Rückstau über Bodenabläufe in kleinen Tiefgaragen von Oberflächenwasser unterscheiden lassen",
     "rule": "Preserve original existing title and owner; replace overlapping draft only. Low volume never grounds category deletion.",
     "live_wp_changed": false
-  }
+  },
+  "v9_20_editorial_intent_repairs": [
+    {
+      "leaf": "Video-Türsprechanlage defekt",
+      "old": "Video-Türsprechanlage klingelt, zeigt aber kein Bild: Diagnose vorbereiten",
+      "replacement": "Nachtsicht der Video-Türsprechanlage gestört: IR-Licht und Reflexionen prüfen lassen",
+      "rationale": "First article already owns 'no image' fault; new article handles the distinct night-vision image quality issue"
+    },
+    {
+      "leaf": "Warmwasserspeicher defekt",
+      "old": "Defekte Speicherthermostate an Fachbetrieb melden",
+      "replacement": "Ungewöhnliche Boilergeräusche: Verkalkung und technische Defekte unterscheiden lassen",
+      "rationale": "Third original article covers temperature controls; new article handles mechanical/noise/calcium differential"
+    }
+  ]
 }
