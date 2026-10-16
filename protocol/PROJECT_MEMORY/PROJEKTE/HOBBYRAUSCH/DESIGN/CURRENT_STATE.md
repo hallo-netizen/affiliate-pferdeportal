@@ -16,7 +16,7 @@ STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 30ER-BILDSTAND ERHALTEN / HRD-SCOPE1
 - Kollisionspaare fachlich getrennt;
 - kein Upscaling.
 
-## Finaler Image-only-Kandidat
+## 30er-Neubild-Basis – erhalten, aber nicht mehr aktueller Installationskandidat
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
 
 SHA-256:
@@ -70,10 +70,6 @@ Nicht geändert:
 Der oben genannte ZIP ist für den **30-Kategorien-Image-only-Austausch auf 1.50.650** visuell und technisch PASS.
 Das ist keine Aussage, dass sonstige unabhängige globale Karten-/Design-Backlogs abgeschlossen sind.
 
-## EXAKT EINE NEXT ACTION
-**Image-only-Kandidat 1.50.650 mit den 30 neuen Bildpaaren installieren und danach Live-Readback der 30 betroffenen Kategorien gegen den lokal geprüften Stand durchführen.**
-
-
 ## HRD-SCOPE13 Reparatur
 Verbindliche Sperre: ausschließlich 13 gemeldete Kategorien durften angefasst werden. Alle anderen Kategorien bleiben unverändert.
 
@@ -103,5 +99,5 @@ Nachweis:
 ## HRD HARD RULE
 **Nur die 13 Kategorien aus HRD_SCOPE13_IMAGE_REPAIR_20261016.md dürfen bei dieser Reparatur geändert werden. Alle anderen Kategorien FINGER WEG.**
 
-## EXAKT EINE NEXT ACTION – HRD
-**Live-Readback ausschließlich der 13 reparierten Kategorien. Nur bei einem konkret sichtbaren Restfehler genau diese eine betroffene Kategorie ändern; alle übrigen Kategorien bleiben gesperrt.**
+## EXAKT EINE NEXT ACTION
+**Den HRD-SCOPE13-Kandidaten installieren und danach Live-Readback ausschließlich der 13 reparierten Kategorien durchführen. Nur bei einem konkret sichtbaren Restfehler genau diese eine betroffene Kategorie ändern; alle übrigen Kategorien bleiben gesperrt.**
