@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDSTAND / 30-KATEGORIEN-IMAGE-ONLY-KANDIDAT VISUAL + TECHNICAL PASS / 1.50.660–1.50.663 NICHT VERWENDEN**
+STATUS: **1.50.650 GRUNDSTAND / HRD-SCOPE13 REPAIR LOCALPASS / NUR 13 KATEGORIEN GEÄNDERT / ALLE ANDEREN KATEGORIEN GESPERRT**
 
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
@@ -43,3 +43,41 @@ Nachweis:
 
 ## EXAKT EINE NEXT ACTION
 **Diesen Image-only-Kandidaten auf dem eingefrorenen 1.50.650-Stand installieren; danach Live-Readback der 30 betroffenen Kategorien.**
+
+
+## HRD Scope13 Repair
+Kandidat:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
+
+SHA-256:
+`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
+
+Geändert:
+- exakt 13 Heroes;
+- exakt 13 zugehörige Kategorie-Previews;
+- insgesamt exakt 26 Bilddateien.
+
+Unverändert:
+- sämtliche anderen Kategorien;
+- kompletter 30er-Neubildstand;
+- Mapping;
+- PHP;
+- CSS;
+- Templates;
+- Routing;
+- Kartenlogik;
+- Architektur.
+
+QA:
+- 55/55 PHP byte-identisch;
+- 55/55 PHP-Syntax PASS;
+- 0 hinzugefügt;
+- 0 entfernt;
+- ZIP-Roundtrip PASS;
+- keine Collage als Releasequelle.
+
+Nachweis:
+`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
+
+## EXAKT EINE NEXT ACTION – HRD
+**Diesen Kandidaten installieren und anschließend ausschließlich die 13 HRD-Kategorien live prüfen.**
