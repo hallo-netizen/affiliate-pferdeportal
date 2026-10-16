@@ -1,0 +1,112 @@
+{
+  "schema": "HB-V9.19-214-NEW-ARTICLES-VS-AVAILABLE-HISTORICAL-R2R3",
+  "date": "2026-10-16",
+  "status": "EXACT_TITLE_PASS_SEMANTIC_OWNER_NOT_PASSED",
+  "qa": {
+    "new_titles_tested": 214,
+    "old_r3_and_individually_visible_r2_title_records": 1728,
+    "exact_title_conflicts": 0,
+    "lexical_warning_pairs": 11,
+    "high_similarity_leafs": 2,
+    "r2_all_686_source_not_in_this_search": true,
+    "semantic_owner_gate_STILL_OPEN": true
+  },
+  "lexical_similarity_threshold": 0.46,
+  "top_keyword_overlap_alerts": [
+    {
+      "score": 0.667,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Bootspersennig nach Vandalismus reparieren oder ersetzen"
+    },
+    {
+      "score": 0.667,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Bootspersennig nach Vandalismus reparieren oder ersetzen"
+    },
+    {
+      "score": 0.667,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Bootspersennig nach Vandalismus reparieren oder ersetzen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Verglasung nach Vandalismus reparieren lassen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Warenautomaten vor Diebstahl",
+      "new_title": "Selbstbedienungsautomat gegen Aufbruch am privaten Betrieb sichern",
+      "source": "R2_VISIBLE",
+      "previous_title": "Wohnmobiltüren gegen Aufbruch sichern"
+    }
+  ],
+  "highest_flag_per_new_leaf": [
+    {
+      "score": 0.667,
+      "new_leaf": "Einbauküchen & festes Wohninventar",
+      "new_title": "Beschädigte Küchenfronten nach Vandalismus reparieren oder ersetzen lassen",
+      "source": "R2_VISIBLE",
+      "previous_title": "Beschädigte Bootspersennig nach Vandalismus reparieren oder ersetzen"
+    },
+    {
+      "score": 0.5,
+      "new_leaf": "Warenautomaten vor Diebstahl",
+      "new_title": "Selbstbedienungsautomat gegen Aufbruch am privaten Betrieb sichern",
+      "source": "R2_VISIBLE",
+      "previous_title": "Wohnmobiltüren gegen Aufbruch sichern"
+    }
+  ],
+  "note": "Lexical similarity is only a prompt for manual thematic owner comparison. Different object/danger contexts may be distinct. This does not replace the unavailable six R2 titles, full original 686 R2 phrase corpus or real Google SERP keyword match.",
+  "actions": "Never automatically remove niche category due similarity, low volume or missing provider result. Editor must decide owner; existing URLs locked."
+}
