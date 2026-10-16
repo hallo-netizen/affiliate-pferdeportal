@@ -16,13 +16,15 @@
   ],
   "review_counts": {
     "total": 127,
-    "CONCRETE_PAGE3_TOPIC_PROPOSED": 85,
-    "SPLIT_SCOPE_HOLD": 21,
-    "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC": 21,
-    "pointing_to_curated_topics": 34,
-    "pending_curated_intent_category_groups": 93,
-    "existing_category_protected": 285,
-    "curated_topics_approved": 0
+    "v99": 81,
+    "v918": 46,
+    "concrete_topic_page": 85,
+    "mixed_source_scope_split": 21,
+    "article_intent_under_topic": 21,
+    "source_rows_with_draft_topic_owner": 127,
+    "rows_without_draft_topic_owner": 0,
+    "approved_for_wordpress": 0,
+    "protected_old_wp_cats": 285
   },
   "rows": [
     {
@@ -36,10 +38,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Dacheindeckung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dacheindeckung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dacheindeckung"
+      ]
     },
     {
       "source": "V9.9",
@@ -53,9 +60,14 @@
       "suggested_page3_topic": "Dachfenster & Anschlüsse",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachfenster & Anschlüsse",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachfenster & Anschlüsse"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dachfenster & Anschlüsse"
+      ]
     },
     {
       "source": "V9.9",
@@ -69,9 +81,14 @@
       "suggested_page3_topic": "Flachdachabdichtung",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Flachdachabdichtung",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Flachdachabdichtung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Flachdachabdichtung"
+      ]
     },
     {
       "source": "V9.9",
@@ -87,10 +104,17 @@
         "Gauben abdichten",
         "Kaminanschlüsse abdichten"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Gauben & Anschlüsse",
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Kaminanschlüsse"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gauben & Anschlüsse",
+        "Kaminanschlüsse"
+      ]
     },
     {
       "source": "V9.9",
@@ -103,10 +127,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Fensteranschlüsse",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Fensteranschlüsse"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Fensteranschlüsse"
+      ]
     },
     {
       "source": "V9.9",
@@ -119,10 +148,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Fassadenfugen & Anschlüsse",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Fassadenfugen & Anschlüsse"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Fassadenfugen & Anschlüsse"
+      ]
     },
     {
       "source": "V9.9",
@@ -138,10 +172,17 @@
         "Balkonanschlüsse abdichten",
         "Außentüren abdichten"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Balkonanschlüsse",
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Außentüren"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Balkonanschlüsse",
+        "Außentüren"
+      ]
     },
     {
       "source": "V9.9",
@@ -154,10 +195,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Sockelabdichtung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Sockelabdichtung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Sockelabdichtung"
+      ]
     },
     {
       "source": "V9.9",
@@ -171,9 +217,14 @@
       "suggested_page3_topic": "Dachrinnen & Fallrohre",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachrinnen & Fallrohre",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachrinnen & Fallrohre"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dachrinnen & Fallrohre"
+      ]
     },
     {
       "source": "V9.9",
@@ -186,10 +237,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Dachentwässerung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachentwässerung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dachentwässerung"
+      ]
     },
     {
       "source": "V9.9",
@@ -205,10 +261,17 @@
         "Anbauten abdichten",
         "Wintergartenabdichtung"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Anbauabdichtung",
+        "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Wintergartenabdichtung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Anbauabdichtung",
+        "Wintergartenabdichtung"
+      ]
     },
     {
       "source": "V9.9",
@@ -222,9 +285,14 @@
       "suggested_page3_topic": "Dachgeschoss vor Hitze schützen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Hitze & Trockenheit > Dachgeschoss vor Hitze schützen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Dachgeschoss vor Hitze schützen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dachgeschoss vor Hitze schützen"
+      ]
     },
     {
       "source": "V9.9",
@@ -237,10 +305,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Fassadenverschattung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Fassadenverschattung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Fassadenverschattung"
+      ]
     },
     {
       "source": "V9.9",
@@ -254,9 +327,14 @@
       "suggested_page3_topic": "Wintergarten im Sommer",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Hitze & Trockenheit > Wintergarten im Sommer",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Wintergarten im Sommer"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wintergarten im Sommer"
+      ]
     },
     {
       "source": "V9.9",
@@ -269,10 +347,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Terrassenbeläge bei Hitze",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Terrassenbeläge bei Hitze"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Terrassenbeläge bei Hitze"
+      ]
     },
     {
       "source": "V9.9",
@@ -285,10 +368,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Gartenbäume bei Trockenheit",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Gartenbäume bei Trockenheit"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenbäume bei Trockenheit"
+      ]
     },
     {
       "source": "V9.9",
@@ -301,10 +389,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Bodenrisse am Grundstück",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Bodenrisse am Grundstück"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bodenrisse am Grundstück"
+      ]
     },
     {
       "source": "V9.9",
@@ -318,9 +411,14 @@
       "suggested_page3_topic": "Gartenbewässerung bei Trockenheit",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Hitze & Trockenheit > Gartenbewässerung bei Trockenheit",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Gartenbewässerung bei Trockenheit"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenbewässerung bei Trockenheit"
+      ]
     },
     {
       "source": "V9.9",
@@ -333,10 +431,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Wohnmobil bei Hitze",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Wohnmobil bei Hitze"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wohnmobil bei Hitze"
+      ]
     },
     {
       "source": "V9.9",
@@ -352,10 +455,17 @@
         "Gartenhaus bei Hitze",
         "Hobbyraum bei Hitze"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Gartenhaus bei Hitze",
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Hobbyraum bei Hitze"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenhaus bei Hitze",
+        "Hobbyraum bei Hitze"
+      ]
     },
     {
       "source": "V9.9",
@@ -368,10 +478,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Privatwagen bei Hitze",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Privatwagen bei Hitze"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Privatwagen bei Hitze"
+      ]
     },
     {
       "source": "V9.9",
@@ -387,10 +502,17 @@
         "Zeltmaterial im Sommer",
         "Campingausrüstung bei Hitze"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Zeltmaterial im Sommer",
+        "Wetter & Naturgefahren > Hitze & Trockenheit > Campingausrüstung bei Hitze"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Zeltmaterial im Sommer",
+        "Campingausrüstung bei Hitze"
+      ]
     },
     {
       "source": "V9.9",
@@ -404,9 +526,14 @@
       "suggested_page3_topic": "Wechselrichter-Ausfälle",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wechselrichter-Ausfälle",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wechselrichter-Ausfälle"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wechselrichter-Ausfälle"
+      ]
     },
     {
       "source": "V9.9",
@@ -419,10 +546,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "PV-Module & Strings",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > PV-Module & Strings"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "PV-Module & Strings"
+      ]
     },
     {
       "source": "V9.9",
@@ -435,10 +567,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "PV-Monitoring",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > PV-Monitoring"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "PV-Monitoring"
+      ]
     },
     {
       "source": "V9.9",
@@ -451,10 +588,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Balkonkraftwerk",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Balkonkraftwerk"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Balkonkraftwerk"
+      ]
     },
     {
       "source": "V9.9",
@@ -468,9 +610,14 @@
       "suggested_page3_topic": "Heimspeicher-Störungen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimspeicher-Störungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -483,10 +630,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "PV-Ersatzstromversorgung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > PV-Ersatzstromversorgung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "PV-Ersatzstromversorgung"
+      ]
     },
     {
       "source": "V9.9",
@@ -500,9 +652,14 @@
       "suggested_page3_topic": "Heimspeicher-Störungen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimspeicher-Störungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -516,9 +673,14 @@
       "suggested_page3_topic": "Heimspeicher-Störungen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimspeicher-Störungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -532,9 +694,14 @@
       "suggested_page3_topic": "Wallbox-Ladetechnik",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wallbox-Ladetechnik"
+      ]
     },
     {
       "source": "V9.9",
@@ -548,9 +715,14 @@
       "suggested_page3_topic": "Wallbox-Ladetechnik",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wallbox-Ladetechnik"
+      ]
     },
     {
       "source": "V9.9",
@@ -564,9 +736,14 @@
       "suggested_page3_topic": "Wallbox-Ladetechnik",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wallbox-Ladetechnik"
+      ]
     },
     {
       "source": "V9.9",
@@ -580,9 +757,14 @@
       "suggested_page3_topic": "Wallbox-Ladetechnik",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wallbox-Ladetechnik"
+      ]
     },
     {
       "source": "V9.9",
@@ -595,10 +777,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Bilgenwasser im Freizeitboot",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Bilgenwasser im Freizeitboot"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bilgenwasser im Freizeitboot"
+      ]
     },
     {
       "source": "V9.9",
@@ -611,10 +798,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Bootskajüte",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Bootskajüte"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bootskajüte"
+      ]
     },
     {
       "source": "V9.9",
@@ -627,10 +819,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Boot-Wassersystem",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Boot-Wassersystem"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Boot-Wassersystem"
+      ]
     },
     {
       "source": "V9.9",
@@ -643,10 +840,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Bootsabdeckung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Bootsabdeckung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bootsabdeckung"
+      ]
     },
     {
       "source": "V9.9",
@@ -659,10 +861,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Brandschutz an Leitungsdurchführungen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschutz an Leitungsdurchführungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutz an Leitungsdurchführungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -675,10 +882,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Brandschutzbekleidungen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschutzbekleidungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutzbekleidungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -691,10 +903,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Brandschutz in Abstellräumen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschutz in Abstellräumen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutz in Abstellräumen"
+      ]
     },
     {
       "source": "V9.9",
@@ -707,10 +924,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Hangrutschungen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Hangrutschungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hangrutschungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -723,10 +945,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Gartenböschungen schützen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Gartenböschungen schützen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenböschungen schützen"
+      ]
     },
     {
       "source": "V9.9",
@@ -742,10 +969,17 @@
         "Gartenmauern gegen Unterspülung",
         "Wege gegen Unterspülung"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Gartenmauern bei Unterspülung",
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Gartenwege bei Unterspülung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenmauern bei Unterspülung",
+        "Gartenwege bei Unterspülung"
+      ]
     },
     {
       "source": "V9.9",
@@ -758,10 +992,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Uferbefestigung am Privatgrundstück",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Uferbefestigung am Privatgrundstück"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Uferbefestigung am Privatgrundstück"
+      ]
     },
     {
       "source": "V9.9",
@@ -774,10 +1013,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Heimnetzwerk und Router",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Alarm & Smart Home > Heimnetzwerk und Router"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimnetzwerk und Router"
+      ]
     },
     {
       "source": "V9.9",
@@ -793,10 +1037,17 @@
         "Heimnetzwerk und Router",
         "PoE-Installationen"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Alarm & Smart Home > Heimnetzwerk und Router",
+        "Technik & Ausfälle > Alarm & Smart Home > PoE-Installationen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimnetzwerk und Router",
+        "PoE-Installationen"
+      ]
     },
     {
       "source": "V9.9",
@@ -809,10 +1060,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Smart-Home-Zentrale",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Alarm & Smart Home > Smart-Home-Zentrale"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Smart-Home-Zentrale"
+      ]
     },
     {
       "source": "V9.9",
@@ -825,10 +1081,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Privatwagen-Brandrisiken",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Privatwagen-Brandrisiken"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Privatwagen-Brandrisiken"
+      ]
     },
     {
       "source": "V9.9",
@@ -841,10 +1102,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Elektroauto-Brandschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Elektroauto-Brandschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Elektroauto-Brandschutz"
+      ]
     },
     {
       "source": "V9.9",
@@ -860,10 +1126,17 @@
         "Bootsmotor-Brandschutz",
         "Kraftstoffanlage im Freizeitboot"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Bootsmotor-Brandschutz",
+        "Feuer & Gase > Rauch & Brand > Kraftstoffanlage im Freizeitboot"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bootsmotor-Brandschutz",
+        "Kraftstoffanlage im Freizeitboot"
+      ]
     },
     {
       "source": "V9.9",
@@ -879,10 +1152,17 @@
         "Bootsgasanlage",
         "Bootsküche"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Bootsgasanlage",
+        "Feuer & Gase > Rauch & Brand > Bootsküche"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bootsgasanlage",
+        "Bootsküche"
+      ]
     },
     {
       "source": "V9.9",
@@ -898,10 +1178,17 @@
         "Bordelektrik im Freizeitboot",
         "Bootsakkus"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Bordelektrik im Freizeitboot",
+        "Feuer & Gase > Rauch & Brand > Bootsakkus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bordelektrik im Freizeitboot",
+        "Bootsakkus"
+      ]
     },
     {
       "source": "V9.9",
@@ -914,10 +1201,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Brandschutz im Freizeitboot",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschutz im Freizeitboot"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutz im Freizeitboot"
+      ]
     },
     {
       "source": "V9.9",
@@ -931,9 +1223,14 @@
       "suggested_page3_topic": "Marder im Dach",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Marder im Dach",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Marder im Dach"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Marder im Dach"
+      ]
     },
     {
       "source": "V9.9",
@@ -947,9 +1244,14 @@
       "suggested_page3_topic": "Nager an Hausleitungen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Nager an Hausleitungen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Nager an Hausleitungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Nager an Hausleitungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -963,9 +1265,14 @@
       "suggested_page3_topic": "Holzzerstörende Insekten am Haus",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Holzzerstörende Insekten am Haus",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Holzzerstörende Insekten am Haus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Holzzerstörende Insekten am Haus"
+      ]
     },
     {
       "source": "V9.9",
@@ -978,10 +1285,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Marderbiss am Auto",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Marderbiss am Auto"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Marderbiss am Auto"
+      ]
     },
     {
       "source": "V9.9",
@@ -994,10 +1306,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Nager im Wohnmobil",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Nager im Wohnmobil"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Nager im Wohnmobil"
+      ]
     },
     {
       "source": "V9.9",
@@ -1010,10 +1327,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Tierschäden am Freizeitboot",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Tierschäden am Freizeitboot"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Tierschäden am Freizeitboot"
+      ]
     },
     {
       "source": "V9.9",
@@ -1029,10 +1351,17 @@
         "Wildtierschäden am Garten",
         "Wildtierschäden an Zäunen"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Wildtierschäden am Garten",
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Wildtierschäden an Zäunen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wildtierschäden am Garten",
+        "Wildtierschäden an Zäunen"
+      ]
     },
     {
       "source": "V9.9",
@@ -1045,10 +1374,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Wühlmäuse im Garten",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Wühlmäuse im Garten"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wühlmäuse im Garten"
+      ]
     },
     {
       "source": "V9.9",
@@ -1061,10 +1395,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Vogelschäden an Außentechnik",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Vogelschäden an Außentechnik"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Vogelschäden an Außentechnik"
+      ]
     },
     {
       "source": "V9.9",
@@ -1077,10 +1416,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Rußschäden am Wohnhaus",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Rußschäden am Wohnhaus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Rußschäden am Wohnhaus"
+      ]
     },
     {
       "source": "V9.9",
@@ -1093,10 +1437,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Löschwasserschäden am Haus",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Löschwasserschäden am Haus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Löschwasserschäden am Haus"
+      ]
     },
     {
       "source": "V9.9",
@@ -1109,10 +1458,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Brandschaden am Wohnhaus",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschaden am Wohnhaus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschaden am Wohnhaus"
+      ]
     },
     {
       "source": "V9.9",
@@ -1125,13 +1479,18 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Hausschwamm im Gebäude",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Keller & Rückstau > Hausschwamm im Gebäude"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
       "wordpress_write": false,
       "original_world_in_source": "verschiedene",
       "original_area_in_source": "bestehende fachliche Parents",
-      "owner_route_correction": "Die V99-Quelle hat unspezifischen Platzhalter 'verschiedene'; konkretes Natur-/Feuchteschaden-Thema dem geschützten Wasserbereich zur Fachprüfung zugeordnet, keine WordPress-Änderung."
+      "owner_route_correction": "Die V99-Quelle hat unspezifischen Platzhalter 'verschiedene'; konkretes Natur-/Feuchteschaden-Thema dem geschützten Wasserbereich zur Fachprüfung zugeordnet, keine WordPress-Änderung.",
+      "routed_c22_topic_pages": [
+        "Hausschwamm im Gebäude"
+      ]
     },
     {
       "source": "V9.9",
@@ -1144,10 +1503,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Poolleitungen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Poolleitungen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Poolleitungen"
+      ]
     },
     {
       "source": "V9.9",
@@ -1160,10 +1524,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Poolbeckenabdichtung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Poolbeckenabdichtung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Poolbeckenabdichtung"
+      ]
     },
     {
       "source": "V9.9",
@@ -1176,10 +1545,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Teichfolie",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Teichfolie"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Teichfolie"
+      ]
     },
     {
       "source": "V9.9",
@@ -1193,9 +1567,14 @@
       "suggested_page3_topic": "Katalysatordiebstahl",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Katalysatordiebstahl",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Katalysatordiebstahl"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Katalysatordiebstahl"
+      ]
     },
     {
       "source": "V9.9",
@@ -1208,10 +1587,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Felgendiebstahl",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Felgendiebstahl"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Felgendiebstahl"
+      ]
     },
     {
       "source": "V9.9",
@@ -1224,10 +1608,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Kennzeichendiebstahl",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Kennzeichendiebstahl"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Kennzeichendiebstahl"
+      ]
     },
     {
       "source": "V9.9",
@@ -1240,10 +1629,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Hagelschutz für Privatwagen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Freizeit & Unwetter > Hagelschutz für Privatwagen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hagelschutz für Privatwagen"
+      ]
     },
     {
       "source": "V9.9",
@@ -1256,10 +1650,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Hochwasser am Privatwagen",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Freizeit & Unwetter > Hochwasser am Privatwagen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hochwasser am Privatwagen"
+      ]
     },
     {
       "source": "V9.9",
@@ -1272,10 +1671,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Privatwagen bei Sturm",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Freizeit & Unwetter > Privatwagen bei Sturm"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Privatwagen bei Sturm"
+      ]
     },
     {
       "source": "V9.9",
@@ -1288,10 +1692,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Vegetationsbrand am Grundstück",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Vegetationsbrand am Grundstück"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Vegetationsbrand am Grundstück"
+      ]
     },
     {
       "source": "V9.9",
@@ -1304,10 +1713,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Brandschutz gegen Brandüberschlag",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Brandschutz gegen Brandüberschlag"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutz gegen Brandüberschlag"
+      ]
     },
     {
       "source": "V9.9",
@@ -1320,10 +1734,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Funkenflug an Nebengebäuden",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Rauch & Brand > Funkenflug an Nebengebäuden"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Funkenflug an Nebengebäuden"
+      ]
     },
     {
       "source": "V9.9",
@@ -1337,9 +1756,14 @@
       "suggested_page3_topic": "E-Scooter-Diebstahlschutz",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Einbruch & Diebstahl > Freizeit & Fahrzeuge > E-Scooter-Diebstahlschutz",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Freizeit & Fahrzeuge > E-Scooter-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "E-Scooter-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.9",
@@ -1352,10 +1776,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Elektromobil-Diebstahlschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Elektromobil-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Elektromobil-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -1371,10 +1800,17 @@
         "Innenwandschäden nach Vandalismus",
         "Deckenschäden nach Vandalismus"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Innenwandschäden nach Vandalismus",
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Deckenschäden nach Vandalismus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Innenwandschäden nach Vandalismus",
+        "Deckenschäden nach Vandalismus"
+      ]
     },
     {
       "source": "V9.18",
@@ -1390,10 +1826,17 @@
         "Bodenbelagschäden durch Vandalismus",
         "Treppenschäden durch Vandalismus"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Bodenbelagschäden durch Vandalismus",
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Treppenschäden durch Vandalismus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Bodenbelagschäden durch Vandalismus",
+        "Treppenschäden durch Vandalismus"
+      ]
     },
     {
       "source": "V9.18",
@@ -1409,10 +1852,17 @@
         "Einbauküchenschäden",
         "Festes Wohninventar"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Einbauküchenschäden",
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Einbauschränke vor Vandalismus schützen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Einbauküchenschäden",
+        "Einbauschränke vor Vandalismus schützen"
+      ]
     },
     {
       "source": "V9.18",
@@ -1428,10 +1878,17 @@
         "Heizraum vor Vandalismus schützen",
         "Heizkreisverteiler schützen"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Heizraum vor Vandalismus schützen",
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Heizkreisverteiler schützen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heizraum vor Vandalismus schützen",
+        "Heizkreisverteiler schützen"
+      ]
     },
     {
       "source": "V9.18",
@@ -1444,10 +1901,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Sicherungskasten vor Vandalismus",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Sicherungskasten vor Vandalismus"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Sicherungskasten vor Vandalismus"
+      ]
     },
     {
       "source": "V9.18",
@@ -1463,10 +1925,17 @@
         "Wasserabsperrung vor Manipulation schützen",
         "Technikschränke schützen"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Wasserabsperrung vor Manipulation schützen",
+        "Vandalismus & Zerstörung > Gebäude & Ausstattung > Technikschränke schützen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wasserabsperrung vor Manipulation schützen",
+        "Technikschränke schützen"
+      ]
     },
     {
       "source": "V9.18",
@@ -1480,9 +1949,14 @@
       "suggested_page3_topic": "Dusche undicht",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Dusche undicht",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Dusche undicht"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Dusche undicht"
+      ]
     },
     {
       "source": "V9.18",
@@ -1495,10 +1969,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Badewanne abdichten",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Badewanne abdichten"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Badewanne abdichten"
+      ]
     },
     {
       "source": "V9.18",
@@ -1512,9 +1991,14 @@
       "suggested_page3_topic": "Spülkasten undicht",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Spülkasten undicht",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Spülkasten undicht"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Spülkasten undicht"
+      ]
     },
     {
       "source": "V9.18",
@@ -1530,10 +2014,17 @@
         "Siphon undicht",
         "Waschbecken undicht"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Siphon undicht",
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Waschbecken undicht"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Siphon undicht",
+        "Waschbecken undicht"
+      ]
     },
     {
       "source": "V9.18",
@@ -1549,10 +2040,17 @@
         "Küchenspüle undicht",
         "Küchenarmaturen undicht"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Küchenspüle undicht",
+        "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Küchenarmaturen undicht"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Küchenspüle undicht",
+        "Küchenarmaturen undicht"
+      ]
     },
     {
       "source": "V9.18",
@@ -1565,10 +2063,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "PV-Kabel & Steckverbinder",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Akku & Elektrik > PV-Kabel & Steckverbinder"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "PV-Kabel & Steckverbinder"
+      ]
     },
     {
       "source": "V9.18",
@@ -1581,10 +2084,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Wechselrichter-Brandschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Akku & Elektrik > Wechselrichter-Brandschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wechselrichter-Brandschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -1598,9 +2106,14 @@
       "suggested_page3_topic": "Heimspeicher-Brandschutz",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Feuer & Gase > Akku & Elektrik > Heimspeicher-Brandschutz",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Akku & Elektrik > Heimspeicher-Brandschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Heimspeicher-Brandschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -1613,10 +2126,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Wallbox-Brandschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Akku & Elektrik > Wallbox-Brandschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Wallbox-Brandschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -1629,10 +2147,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Durchlauferhitzer",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Heizung & Temperatur > Durchlauferhitzer"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Durchlauferhitzer"
+      ]
     },
     {
       "source": "V9.18",
@@ -1645,10 +2168,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Warmwasserspeicher",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Heizung & Temperatur > Warmwasserspeicher"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Warmwasserspeicher"
+      ]
     },
     {
       "source": "V9.18",
@@ -1661,10 +2189,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Zirkulationspumpe",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Heizung & Temperatur > Zirkulationspumpe"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Zirkulationspumpe"
+      ]
     },
     {
       "source": "V9.18",
@@ -1677,10 +2210,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Warmwasserspeicher",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Heizung & Temperatur > Warmwasserspeicher"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Warmwasserspeicher"
+      ]
     },
     {
       "source": "V9.18",
@@ -1694,9 +2232,14 @@
       "suggested_page3_topic": "Brunnenpumpe",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Pumpen & Haustechnik > Brunnenpumpe",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Pumpen & Haustechnik > Brunnenpumpe"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brunnenpumpe"
+      ]
     },
     {
       "source": "V9.18",
@@ -1709,10 +2252,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Gartenpumpe",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Pumpen & Haustechnik > Gartenpumpe"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gartenpumpe"
+      ]
     },
     {
       "source": "V9.18",
@@ -1725,10 +2273,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Teichpumpe",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Pumpen & Haustechnik > Teichpumpe"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Teichpumpe"
+      ]
     },
     {
       "source": "V9.18",
@@ -1742,9 +2295,14 @@
       "suggested_page3_topic": "Poolfilterpumpe",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Pumpen & Haustechnik > Poolfilterpumpe",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Pumpen & Haustechnik > Poolfilterpumpe"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Poolfilterpumpe"
+      ]
     },
     {
       "source": "V9.18",
@@ -1757,10 +2315,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Obstbäume bei Frost",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Frost & Schnee > Obstbäume bei Frost"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Obstbäume bei Frost"
+      ]
     },
     {
       "source": "V9.18",
@@ -1776,10 +2339,17 @@
         "Hecken bei Frost",
         "Sträucher bei Frost"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Frost & Schnee > Hecken bei Frost",
+        "Wetter & Naturgefahren > Frost & Schnee > Sträucher bei Frost"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hecken bei Frost",
+        "Sträucher bei Frost"
+      ]
     },
     {
       "source": "V9.18",
@@ -1792,10 +2362,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Kübelpflanzen bei Frost",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Frost & Schnee > Kübelpflanzen bei Frost"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Kübelpflanzen bei Frost"
+      ]
     },
     {
       "source": "V9.18",
@@ -1809,9 +2384,14 @@
       "suggested_page3_topic": "Gewächshaus bei Frost",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Frost & Schnee > Gewächshaus bei Frost",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Frost & Schnee > Gewächshaus bei Frost"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gewächshaus bei Frost"
+      ]
     },
     {
       "source": "V9.18",
@@ -1825,9 +2405,14 @@
       "suggested_page3_topic": "Garagentorantrieb",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Garagentorantrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1841,9 +2426,14 @@
       "suggested_page3_topic": "Garagentorantrieb",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Garagentorantrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1857,9 +2447,14 @@
       "suggested_page3_topic": "Garagentorantrieb",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Garagentorantrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1873,9 +2468,14 @@
       "suggested_page3_topic": "Garagentor-Funksteuerung",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentor-Funksteuerung",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Garagentor-Funksteuerung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Garagentor-Funksteuerung"
+      ]
     },
     {
       "source": "V9.18",
@@ -1889,9 +2489,14 @@
       "suggested_page3_topic": "Schiebetorantrieb",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Schiebetorantrieb",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Schiebetorantrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Schiebetorantrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1904,10 +2509,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Drehtorantrieb",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Drehtorantrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Drehtorantrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1920,10 +2530,15 @@
       "decision": "ARTICLE_CATEGORY_INTENT_UNDER_SINGLE_TOPIC",
       "suggested_page3_topic": "Zufahrtstor-Antrieb",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Zufahrtstor-Antrieb"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Zufahrtstor-Antrieb"
+      ]
     },
     {
       "source": "V9.18",
@@ -1936,10 +2551,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Hoftor-Funksteuerung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Hoftor-Funksteuerung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hoftor-Funksteuerung"
+      ]
     },
     {
       "source": "V9.18",
@@ -1952,10 +2572,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Gegensprechanlage",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Gegensprechanlage"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Gegensprechanlage"
+      ]
     },
     {
       "source": "V9.18",
@@ -1971,10 +2596,17 @@
         "Elektrische Türöffner",
         "Elektronische Türschlösser"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Elektrische Türöffner",
+        "Technik & Ausfälle > Tore & Zugangstechnik > Elektronische Türschlösser"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Elektrische Türöffner",
+        "Elektronische Türschlösser"
+      ]
     },
     {
       "source": "V9.18",
@@ -1988,9 +2620,14 @@
       "suggested_page3_topic": "Video-Türsprechanlage",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Technik & Ausfälle > Tore & Zugangstechnik > Video-Türsprechanlage",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Video-Türsprechanlage"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Video-Türsprechanlage"
+      ]
     },
     {
       "source": "V9.18",
@@ -2003,10 +2640,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Smarte Türsteuerung",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Technik & Ausfälle > Tore & Zugangstechnik > Smarte Türsteuerung"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Smarte Türsteuerung"
+      ]
     },
     {
       "source": "V9.18",
@@ -2020,9 +2662,14 @@
       "suggested_page3_topic": "Hofladen-Diebstahlschutz",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Einbruch & Diebstahl > Kleine Betriebe & Vereine > Hofladen-Diebstahlschutz",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Kleine Betriebe & Vereine > Hofladen-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Hofladen-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -2035,10 +2682,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "SB-Verkaufsstand-Diebstahlschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Kleine Betriebe & Vereine > SB-Verkaufsstand-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "SB-Verkaufsstand-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -2051,10 +2703,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Warenautomat-Diebstahlschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Kleine Betriebe & Vereine > Warenautomat-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Warenautomat-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -2067,10 +2724,15 @@
       "decision": "CONCRETE_PAGE3_TOPIC_PROPOSED",
       "suggested_page3_topic": "Abholbox-Diebstahlschutz",
       "split_review_options": null,
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Einbruch & Diebstahl > Kleine Betriebe & Vereine > Abholbox-Diebstahlschutz"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Abholbox-Diebstahlschutz"
+      ]
     },
     {
       "source": "V9.18",
@@ -2084,9 +2746,14 @@
       "suggested_page3_topic": "Brandschutz im Friseursalon",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Feuer & Gase > Kleine Betriebe & Vereine > Brandschutz im Friseursalon",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Feuer & Gase > Kleine Betriebe & Vereine > Brandschutz im Friseursalon"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Brandschutz im Friseursalon"
+      ]
     },
     {
       "source": "V9.18",
@@ -2102,10 +2769,17 @@
         "Ladenlokal bei Hochwasser",
         "Friseursalon bei Hochwasser"
       ],
-      "is_fully_curated_topic_with_intent_categories": false,
-      "verified_proposed_topic_owner": null,
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "is_fully_curated_topic_with_intent_categories": true,
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Ladenlokal bei Hochwasser",
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Friseursalon bei Hochwasser"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Ladenlokal bei Hochwasser",
+        "Friseursalon bei Hochwasser"
+      ]
     },
     {
       "source": "V9.18",
@@ -2119,10 +2793,15 @@
       "suggested_page3_topic": "Tiefgarage bei Starkregen",
       "split_review_options": null,
       "is_fully_curated_topic_with_intent_categories": true,
-      "verified_proposed_topic_owner": "Wetter & Naturgefahren > Starkregen & Hochwasser > Tiefgarage bei Starkregen",
-      "decision_status": "EDITORIAL_DRAFT_NO_APPROVAL",
-      "wordpress_write": false
+      "verified_proposed_topic_owner": [
+        "Wetter & Naturgefahren > Starkregen & Hochwasser > Tiefgarage bei Starkregen"
+      ],
+      "decision_status": "PROPOSED_TOPIC_ROUTE_COMPLETE__EDITORIAL_QA_PENDING__NO_WP_APPROVAL",
+      "wordpress_write": false,
+      "routed_c22_topic_pages": [
+        "Tiefgarage bei Starkregen"
+      ]
     }
   ],
-  "next_action": "Use the gaps revealed by the 127-row matrix to develop concrete page3 topic + >=3 subject-bounded article categories for every still-open distinct topic, check canonical owners versus 285 existing leaves, then one non-destructive Delta against fresh live readback."
+  "next_action": "Now compare ALL 93/285 protected legacy structure against the 174-topic draft and specifically review canonical category/URL migration. Only after fresh WP readback test a single non-destructive plan in the existing category workflow."
 }
