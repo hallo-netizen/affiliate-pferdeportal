@@ -26,9 +26,9 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 21,
+    "ready_source": 22,
     "bound_new_reference": 1,
-    "confirmed_new_batch_no_exact_motif": 4,
+    "confirmed_new_batch_no_exact_motif": 3,
     "unrecovered_new_binding": 4
   },
   "categories": [
@@ -394,16 +394,17 @@
     },
     {
       "category": "Wasser",
-      "status": "confirmed_new_batch_no_exact_motif",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Neue Einzelquelle Wasser 2026-10-16",
+      "source_sha256": "c89327681fed21e07323437c9e82c82c0f2031a3b831eb58629c8da752a93bb6",
       "hero_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150623.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/bewegen/wasser-v150634.webp",
       "collision_peers": [],
       "reference_file_id": null,
       "reference_file_name": null,
       "reference_cell": null,
-      "stage_slug": "wasser"
+      "stage_slug": "wasser",
+      "source_file_id": "file_000000005bbc81f4aa38639fcf4051b2"
     },
     {
       "category": "Alltagsobjekte",
@@ -478,6 +479,7 @@
     "status_sum_is_30": true,
     "ready_source_count_is_19": true,
     "ready_source_count_is_20": true,
-    "ready_source_count_is_21": true
+    "ready_source_count_is_21": true,
+    "ready_source_count_is_22": true
   }
 }
