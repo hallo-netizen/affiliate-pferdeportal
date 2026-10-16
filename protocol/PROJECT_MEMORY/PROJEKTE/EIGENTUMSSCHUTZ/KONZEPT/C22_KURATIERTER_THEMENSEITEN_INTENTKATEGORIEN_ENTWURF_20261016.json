@@ -54,7 +54,8 @@
     "all_category_min3_signals": true,
     "article_titles_produced": 0,
     "wp_writes": 0,
-    "all_127_candidate_release": false
+    "all_127_candidate_release": false,
+    "change_note": "Wallbox is the concrete topic page; Ladeabbrüche is only an intent/aspect, not its own subject page."
   },
   "topics": [
     {
@@ -1715,9 +1716,9 @@
       "world": "Technik & Ausfälle",
       "area": "PV, Speicher & private Ladeinfrastruktur",
       "area_source": "PROPOSED_AREA_FROM_V9",
-      "topic_page": "Wallbox-Ladeabbrüche",
+      "topic_page": "Wallbox-Ladetechnik",
       "proposal_role": "CONCRETE_PAGE3",
-      "topic_owner_scope": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladeabbrüche",
+      "topic_owner_scope": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladetechnik",
       "article_categories": [
         {
           "name": "Fahrzeug & Kabel",
@@ -1738,19 +1739,17 @@
           "capacity_min": 3
         },
         {
-          "name": "Störungen & Lösungen",
+          "name": "Ladeabbrüche & Fehlerdiagnose",
           "capacity_signals": [
-            "Fehlermeldung",
+            "Fehlermeldungen",
             "Software",
-            "Elektriker"
+            "Elektrofachprüfung"
           ],
           "capacity_min": 3
         }
       ],
-      "exact_label_already_in_source": true,
-      "source_label_matches": [
-        "Wallbox-Ladeabbrüche"
-      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
       "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
       "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
       "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
