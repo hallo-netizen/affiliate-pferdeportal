@@ -26,9 +26,9 @@
   ],
   "counts": {
     "total": 30,
-    "ready_source": 19,
+    "ready_source": 20,
     "bound_new_reference": 1,
-    "confirmed_new_batch_no_exact_motif": 6,
+    "confirmed_new_batch_no_exact_motif": 5,
     "unrecovered_new_binding": 4
   },
   "categories": [
@@ -145,9 +145,9 @@
     },
     {
       "category": "Heimwerken",
-      "status": "confirmed_new_batch_no_exact_motif",
-      "reference": null,
-      "source_sha256": null,
+      "status": "ready_source",
+      "reference": "Neue Einzelquelle Heimwerken 2026-10-16",
+      "source_sha256": "94aaaa147c4ae216e5da4cebab96cc184786610684ea394241c431bc5af1b8fc",
       "hero_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150627.webp",
       "preview_target": "assets/hobby-depot-v150617/subcategories/fertigen/heimwerken-v150634.webp",
       "collision_peers": [
@@ -156,7 +156,8 @@
       "reference_file_id": null,
       "reference_file_name": null,
       "reference_cell": null,
-      "stage_slug": "heimwerken"
+      "stage_slug": "heimwerken",
+      "source_file_id": "file_00000000891c8210a28362d6137a0f17"
     },
     {
       "category": "Keramik & Glas",
@@ -474,6 +475,7 @@
     "all_30_targets_exist_on_150650_base": true,
     "ready_source_count_is_9": true,
     "status_sum_is_30": true,
-    "ready_source_count_is_19": true
+    "ready_source_count_is_19": true,
+    "ready_source_count_is_20": true
   }
 }
