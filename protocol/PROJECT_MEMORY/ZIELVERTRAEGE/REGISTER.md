@@ -373,7 +373,7 @@ TITEL: Hab & Bewahr – fachlich unterscheidbare Kategorieebenen
 
 GELTUNGSBEREICH: EIGENTUMSSCHUTZ / KONZEPT / CORE und angrenzende Portalsäulen
 
-STATUS: AKTIV
+STATUS: ABGELÖST
 
 FASSUNG: 1.0 / 2026-10-13
 
@@ -381,7 +381,26 @@ HAUPTQUELLE: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/ZIELVERTRAG_KATEGORIEN_3_BIS_10_2
 
 VERANTWORTLICHER BEREICH: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/`
 
-PASS-BEDINGUNGEN: Nur aus der Hauptquelle lesen; insbesondere 3–10 direkte Kinder, keine SEO-Dopplung, Bestandsschutz, echte SEO-Freigabe, WordPress-Validator-/URL-/Regressionstest vor Release.
+PASS-BEDINGUNGEN: Historischer Stand. Nicht für aktuelle Kategorieentscheidungen oder Freigaben verwenden.
 
 AKTUELLER STATUS UND GENAU EINE NEXT ACTION: ausschließlich per `AUTORITAETSPLAN.json` aus `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`, **nicht** aus diesem Register.
 
+
+
+## ZV-HB-KONZEPT-C22 – Hab & Bewahr Kategorieaufbau C2.2
+
+TITEL: Hab & Bewahr – konkrete Themenseite und vertiefende Artikelkategorien
+
+GELTUNGSBEREICH: EIGENTUMSSCHUTZ / KONZEPT / CORE
+
+STATUS: AKTIV
+
+FASSUNG: C2.2 / 2026-10-16
+
+HAUPTQUELLE: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`
+
+VERANTWORTLICHER BEREICH: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/`
+
+PASS-BEDINGUNGEN: Drei Seitenebenen, Seite 3 konkretes Produkt/Sachthema; darunter nur dazu passende flache Artikel-/Intentkategorien mit mindestens drei plausiblen späteren Beiträgen je Kategorie. Mindestens drei fachlich sinnvolle direkte Unterkategorien ohne Obergrenze. Keine starre FAQ/Beratung/Vergleich-Schablone, kein Artikeltitel-Zwang, Bestandsschutz und ausschließlich kontrollierte WordPress-Änderung über das zentrale Kategorienbüro. Megamenü-Vorschau begrenzt nur die Anzeige auf drei Direktlinks je Gruppe und lässt weitere über den Bereichshub erreichbar.
+
+AKTUELLER STATUS UND GENAU EINE NEXT ACTION: ausschließlich `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`.
