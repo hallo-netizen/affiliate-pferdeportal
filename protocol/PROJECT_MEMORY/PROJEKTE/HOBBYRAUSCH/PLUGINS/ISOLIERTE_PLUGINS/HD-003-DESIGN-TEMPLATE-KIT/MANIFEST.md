@@ -3,29 +3,36 @@
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-VERSION:
-`1.50.651`
+AKTUELLER BELASTBARER KANDIDAT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
 
-ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.651_HOBBY_DEPOT_HUB2_HERO_LAYOUT_WIDE_SCENES_RESPONSIVE_LOCALPASS.zip`
+BASISVERSION:
+`1.50.650`
 
 SHA-256:
-`ceed21dbc62fd207b891deb5272351c57f31079e22193804546e2dcf6d8f8427`
+`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
+
+AUTORITATIVE QUELLE:
+`PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+FACHNACHWEIS:
+`PROJEKTE/HOBBYRAUSCH/DESIGN/HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
 
 PRÜFSTATUS:
-**LOCAL TESTS VORHANDEN / WORDPRESS-LIVE FAIL / VERWORFEN**
+**LOCAL PASS / LIVE READBACK OFFEN**
 
-LIVE-BEFUND:
-- Hero zu hoch;
-- Hero-Motive teils zu nah / zu detailig;
-- teils unscharf bzw. sichtbar hochskaliert;
-- semantisch falsche Bilder;
-- Claim-Unterstrich verrutscht/zu lang;
-- Unterkategoriebilder weiterhin teils falsch, doppelt/ähnlich oder überfüllt.
+LOKAL BELEGT:
+- nur 13 freigegebene Kategorien verändert;
+- exakt 26 Bilddateien geändert;
+- alle anderen Dateien byte-identisch;
+- Mapping byte-identisch;
+- 55/55 PHP byte-identisch;
+- 55/55 PHP-Syntax PASS;
+- ZIP-Roundtrip PASS.
 
-VERBINDLICH:
-Dieser Stand darf **nicht** als PASS, Deploymentempfehlung oder neue Basis ausgegeben werden.
+LIVE:
+Noch kein Live-PASS. Liveprüfung ausschließlich für die 13 HRD-Kategorien.
 
 CURRENT.zip-STATUS:
-**NICHT IM CAMPUS VORHANDEN.**
-Da kein freigabefähiger aktueller Pluginstand existiert, darf keine neue CURRENT.zip erzeugt/ersetzt werden.
+**OFFEN / IM CAMPUS NICHT VORHANDEN.**
+Das erforderliche isolierte `CURRENT.zip` muss noch exakt aus diesem HRD-SCOPE13-Kandidaten synchronisiert und gegen SHA-256/ZIP-Struktur geprüft werden. Kein veraltetes 1.50.651-Artefakt verwenden und nichts erfinden.
