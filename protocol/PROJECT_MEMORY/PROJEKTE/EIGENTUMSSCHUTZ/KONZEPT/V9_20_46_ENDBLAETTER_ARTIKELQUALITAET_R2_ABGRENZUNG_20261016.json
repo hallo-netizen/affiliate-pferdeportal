@@ -1,0 +1,569 @@
+{
+  "schema": "HB-V9.20-ALL46-OWNER-AND-DEPTH-REVIEW",
+  "date": "2026-10-16",
+  "status": "QUALITY_HOLD_DO_NOT_IMPORT",
+  "contract": {
+    "min_direct_children": 3,
+    "max_direct_children": null,
+    "min_distinct_editorial_articles_per_leaf": 3,
+    "search_volume_exclusion": false,
+    "existing_WP_names_urls_slugs_nodes_frozen": true,
+    "keyword_verification_required_before_alias_autoapply": true
+  },
+  "basis": "V9.18 revised plan, DataForSEO 570/51 provider report, original plugin 1.14.8.9 full 137-leaf/686-article archive read-only and historical R3/R2 crossmatch titles. Original 686 examined for specific object/topic overlaps, not claimed full semantic pairwise 686×214 pass.",
+  "qa": {
+    "all_46_leafs_have_owner_record": true,
+    "all_214_article_ideas_accounted": true,
+    "all_at_least_three_on_paper": true,
+    "some_without_editorial_pass": true,
+    "no_automatic_rejections_due_volume": true,
+    "existing_wordpress_unchanged": true,
+    "versioned_revisions_seen": true
+  },
+  "leaves": [
+    {
+      "name": "Innenwände & Decken beschädigt",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Bodenbeläge & Wohnraumtreppen",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Einbauküchen & festes Wohninventar",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Private Wohnräume & Einbauten",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "TOPIC_BOUNDARY_REVIEW",
+      "detail": "R2 hat Reparatur nach Vandalismus bei Verglasung und Bootspersennig, gleicher Reparaturwortlaut, aber anderes beschädigtes Objekt.",
+      "required_step": "Küchenfronten/Einbaugeräte nur für mutwillige Beschädigung; generische Schadenmeldung nicht doppeln."
+    },
+    {
+      "name": "Heizräume & Heizkreisverteiler",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Innenverteiler & Sicherungskästen",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Wasserabsperrungen & Technikschränke",
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "subarea": "Innenliegende Gebäudeversorgung",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Dusche undicht",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Badewanne undicht",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Spülkasten undicht",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Siphon & Waschbecken",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "OBJECT_BOUNDARY_REVIEW",
+      "detail": "Original R2 hat 'Waschbeckenanschlüsse im kleinen Friseursalon gegen Leckage absichern' bereits.",
+      "required_step": "Wohnungs-Waschtisch und private Saloninstallation nur als unterschiedliche Objekt-/Nutzungskontexte behandeln, keine generischen identischen Siphonartikel duplizieren."
+    },
+    {
+      "name": "Küchenspüle & Armaturen",
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "subarea": "Bad & Küche",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "PV-Kabel & Steckverbinder",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Wechselrichter: Brandschutz",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Heimspeicher: Brandschutz",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Wallbox: Brandrisiken",
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "subarea": "PV & Ladetechnik",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "HAZARD_BOUNDARY_REVIEW",
+      "detail": "Original R2 enthält Wallbox-Diebstahl, Vandalismus und Überspannung; V99 Betriebsstörung. Brandschutz kann eigenständig sein, braucht klare Gefahrenabgrenzung.",
+      "required_step": "Ausschließlich Schmor-/Brandrisiko und sichere Nachsorge; keine Diebstahl-, Überspannungs- oder Diagnoseartikel doppeln."
+    },
+    {
+      "name": "Durchlauferhitzer defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Warmwasserspeicher defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_REVISED_PENDING_SEO",
+      "detail": "Thermostatdefekt und Temperaturbegrenzung waren nahe derselben Regelungsfrage. Thermostat-Titel wurde durch Boilergeräusche/Verkalkung ersetzt.",
+      "required_step": "Keine doppelten Titel für Fühler und Regelung; bestehenden Technik-Owner auf 'Warmwasserregelung & Fühler' abgleichen."
+    },
+    {
+      "name": "Zirkulationspumpe defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Warmwasserregelung & Fühler",
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "subarea": "Warmwasser & Boiler",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Brunnenpumpe defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Gartenpumpe ohne Druck",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Teichpumpe defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Poolfilterpumpe defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "subarea": "Garten-, Pool- & Teichpumpen",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Obstbäume bei Spätfrost",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Hecken & Sträucher bei Frost",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Kübelpflanzen überwintern",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Gewächshaus bei Frost",
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "subarea": "Pflanzen & Gärten bei Frost",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Garagentorantrieb defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Garagentor-Sensoren",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Garagentor-Notentriegelung",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_DEPTH_HOLD",
+      "detail": "Stromausfall entriegeln und nach Antriebsausfall manuell bewegen sind derselbe Kern-Intent; Vorabprüfung, Notentriegelung ohne Nebentür und Störfall müssen belegbar getrennte Beiträge tragen.",
+      "required_step": "Planung/Hardware-Defekt/Störfall als drei unterschiedliche Artikel-Owner ausdrücklich bestätigen; kein weiteres Unterblatt erfinden."
+    },
+    {
+      "name": "Garagentor-Funksteuerung",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Garagentore & Antriebe",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_DEPTH_HOLD",
+      "detail": "Fernbedienung reagiert nicht, Funkempfang gestört und Verzögerungen drohen dieselbe Fehlersuche mehrfach abzubilden.",
+      "required_step": "Handsender/Batterie, Funkstörung/Reichweite, Empfänger/Steuerelektronik als konkrete getrennte Fragen abklären."
+    },
+    {
+      "name": "Schiebetorantrieb defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Drehtorantrieb defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Zufahrtstor-Sensoren",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Hoftor-Funksteuerung",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Einfahrtstore & Zufahrten",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_DEPTH_HOLD",
+      "detail": "Funkfernbedienung unzuverlässig und 'Taster geht, Funk nicht' sind wahrscheinlich Teil derselben Diagnose.",
+      "required_step": "Nässe am Außensender, Strom/Funk/Anlernen und Betriebsstörung nur bei drei eigenständigen Artikeln trennen."
+    },
+    {
+      "name": "Gegensprechanlage defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "HAZARD_BOUNDARY_REVIEW",
+      "detail": "Original R2 'Beschädigte Klingel- und Sprechanlage nach Vandalismus ersetzen' behandelt absichtliche Zerstörung.",
+      "required_step": "V9.18 behandelt ausschließlich technische Funktionsstörung, nicht mutwillige Beschädigung."
+    },
+    {
+      "name": "Elektrischer Türöffner defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_OWNER_HOLD",
+      "detail": "Summen ohne Öffnung, sporadischer Betrieb und Mechanik-vs-Ansteuerung können sich beim gleichen Defekt überlappen.",
+      "required_step": "Elektromechanik, Versorgung/Kontakt, Fehlersymptome bei Netzereignissen redaktionell auf klare Zuordnung prüfen."
+    },
+    {
+      "name": "Video-Türsprechanlage defekt",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_REVISED_PENDING_SEO",
+      "detail": "Ausfallendes Videobild und 'klingelt, zeigt kein Bild' waren doppelter Intent. Zweiter Titel wurde in Nachtsichtstörung/IR-Probleme ersetzt.",
+      "required_step": "Einzelartikel Videobild-Ausfall, Nachtsicht, Nässe, Verkabelung getrennt abgrenzen; keine DataForSEO-Freigabe ohne echte Messung."
+    },
+    {
+      "name": "Smarte Türsteuerung: Ausfall",
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "subarea": "Türsprechanlagen & Öffner",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Hofladen vor Diebstahl",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "SB-Verkaufsstände sichern",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Warenautomaten vor Diebstahl",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Abholboxen & Warenausgabe",
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Hofläden & Selbstbedienung",
+      "proposed_article_ideas": 4,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Brandschutz im Friseursalon",
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "subarea": "Brandlasten & Betriebsstrom",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "OBJECT_BOUNDARY_REVIEW",
+      "detail": "Friseursalons besitzen im ursprünglichen Bestand bereits Einbruch- und Wasserschutzartikel, aber keine explizite Aerosol-/Geräte-Brandprüfung.",
+      "required_step": "Aerosole, thermische Stylinggeräte und Stromlasten als Brandschutz-Owner, nicht Ladenalarm/Salon-Wasser."
+    },
+    {
+      "name": "Läden & Salons bei Hochwasser",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Hochwasserschutz & Folgen",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "PENDING_COMPLETE_OWNER_REVIEW",
+      "detail": "Keine konkrete bisher nachgewiesene Namensdublette. Beitragseigenständigkeit über einfache Textgleichheit hinaus weiter zu prüfen.",
+      "required_step": "Mindestens drei semantisch selbständige Beiträge und Bestands-Owner fachlich belegen; ohne Suchvolumenfilter."
+    },
+    {
+      "name": "Tiefgarage bei Starkregen",
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "subarea": "Haus & Kellerschutz",
+      "proposed_article_ideas": 5,
+      "seo_status": "REAL_DATAFORSEO_FOR_EXACT_LEAF_NOT_VERIFIED",
+      "editorial_flag": "EDITORIAL_REVISED_R2_OWNER_PRESERVED",
+      "detail": "Original R2-Artikel unter 'Garagenzufahrt & Hofabläufe' behandelt Tiefgaragenzufahrt bei Starkregen bereits. Geplanter Artikel zur Zufahrt war deshalb ein klarer Intent-Doppelgänger.",
+      "required_step": "Vorhandenen Altartikel unverändert belassen; im neuen Entwurf ersetzt durch Rückstau vs Oberflächenwasser. Der R3-Owner Garagenzufahrt bleibt geschützt."
+    }
+  ],
+  "r2_source_confirmed_examples": [
+    {
+      "existing_leaf": "Garagenzufahrt & Hofabläufe",
+      "original_R2_title": "Tiefgaragenzufahrt an einem Wohnhaus gegen Starkregen schützen",
+      "consequence": "Overlapping new topic replaced, original article retained."
+    },
+    {
+      "existing_leaf": "Waschbeckenanschlüsse im kleinen Friseursalon",
+      "original_R2_title": "Waschbeckenanschlüsse im kleinen Friseursalon gegen Leckage absichern",
+      "consequence": "Salon object owner preserved; home washbasin content needs separate angle."
+    },
+    {
+      "existing_leaf": "Briefkästen & Klingeln",
+      "original_R2_title": "Beschädigte Klingel- und Sprechanlage nach Vandalismus ersetzen",
+      "consequence": "Technical intercom failure not to duplicate vandalism replacement."
+    },
+    {
+      "existing_leaf": "Garage & Garagentor",
+      "original_R2_title": "Garagentor nachrüsten: Einbruchschutz bei älteren Toren prüfen",
+      "consequence": "Mechanical protection remains with burglar prevention; automation failure stays technology."
+    },
+    {
+      "existing_leaf": "PV & Wallbox Überspannung",
+      "original_R2_title": "Wallbox nach einem Blitzereignis fachgerecht prüfen lassen",
+      "consequence": "Wallbox fire risk new candidate not to duplicate post-lightning inspection."
+    }
+  ],
+  "group_counts": {
+    "PENDING_COMPLETE_OWNER_REVIEW": 34,
+    "TOPIC_BOUNDARY_REVIEW": 1,
+    "OBJECT_BOUNDARY_REVIEW": 2,
+    "HAZARD_BOUNDARY_REVIEW": 2,
+    "EDITORIAL_REVISED_PENDING_SEO": 2,
+    "EDITORIAL_DEPTH_HOLD": 3,
+    "EDITORIAL_OWNER_HOLD": 1,
+    "EDITORIAL_REVISED_R2_OWNER_PRESERVED": 1
+  },
+  "next_action": "Resolve manually flagged content owners and editorial depth using full historic article evidence; choose naturally searched names from real Germany/de data without low-volume pruning; then only approved ADD delta for central category office with current WP revision positive/negative and rollback tests."
+}
