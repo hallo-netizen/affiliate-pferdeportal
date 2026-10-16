@@ -3,80 +3,48 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDSTAND / HRD-SCOPE13 REPAIR LOCALPASS / NUR 13 KATEGORIEN GEÄNDERT / ALLE ANDEREN KATEGORIEN GESPERRT**
+STATUS: **1.50.664 LOCALPASS / MEGA-MENÜ + HAUPTWELTKOPF + HERO→PREVIEW / LIVE READBACK OFFEN**
 
 ## Aktiver Grundstand
-Affiliate Portal Template Kit **1.50.650**.
+Affiliate Portal Template Kit **1.50.650** bleibt die technische Basis. Die HRD-SCOPE13-Bildreparatur ist vollständig enthalten.
 
-## 30er-Neubild-Basis – erhalten, aber durch HRD-SCOPE13-Kandidat überlagert
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
+## Aktueller Kandidat
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
 
 SHA-256:
-`cbc9789925660ada90a32e1d9726c4b6086c9d8308a8d097009573afab66ddc8`
+`73dfdc40792b1d550aaff6343aab9e9a4ca713988e0aa0c1957825b42ed4e2f9`
 
 Library:
-`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
+`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
 
-## Abnahme
-- 30/30 eigenständige neue Quellen visuell PASS;
-- 30/30 Hero-Crops 600×320 PASS;
-- 30/30 Preview-Crops 200×107 PASS;
-- keine Release-Collagen;
-- keine exakten Bilddubletten;
-- keine sichtbare Hochskalierung.
+## Exaktes Delta
+- Mega-Menü: aktuelle gemeinsame Sichtzahl 5 aus dem kleinsten Direktbestand; größere Welten mit `Mehr Kategorien`; genau eine weitere Orientierungsebene;
+- Hauptwelt-Hero/Textkopf responsive repariert: Desktop nebeneinander, <=1100 px gestapelt, Mobil kompakt;
+- 65/65 Ebene-1-Kategorievorschauen direkt aus den jeweils aktuellen Hub2-Hero-Dateien neu abgeleitet;
+- keine Hero-Datei verändert;
+- keine Kategorienstruktur verändert;
+- kein Mapping verändert;
+- keine Affiliate-/Routing-/Taxonomieänderung.
 
-## Lokale Simulation
-- 981 → 981 Dateien;
-- exakt 60 WEBP-Bilddateien geändert;
-- 0 hinzugefügt;
-- 0 entfernt;
-- Mapping byte-identisch;
-- 55/55 PHP byte-identisch und Syntax PASS;
-- ZIP-Roundtrip PASS;
-- fehlendes Ziel und Mappingänderung in Negativtests erkannt.
+## Local QA
+- 65 Preview-WEBP geändert;
+- 0 Hero-WEBP geändert;
+- 65/65 Preview 200×107;
+- 58/58 PHP-Syntax PASS;
+- Mega-Menü 8/8 Desktop/Tablet gleiche Grundhöhe;
+- ZIP-Integrität PASS;
+- ZIP-Roundtrip PASS.
 
-Nachweis:
-`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/NEW_CONCEPT_IMAGE_FINAL_QA_30OF30_20261016.md`
+## Verworfen / nicht verwenden
+- 1.50.660–1.50.663;
+- alte Collage-/Rasterquellen;
+- alte voneinander unabhängige Hero-/Preview-Bildstände.
 
-## Verworfen
-1.50.660–1.50.663 nicht verwenden.
-
-## HRD Scope13 Repair
-Kandidat:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
-
-SHA-256:
-`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
-
-Geändert:
-- exakt 13 Heroes;
-- exakt 13 zugehörige Kategorie-Previews;
-- insgesamt exakt 26 Bilddateien.
-
-Unverändert:
-- sämtliche anderen Kategorien;
-- kompletter 30er-Neubildstand;
-- Mapping;
-- PHP;
-- CSS;
-- Templates;
-- Routing;
-- Kartenlogik;
-- Architektur.
-
-QA:
-- 55/55 PHP byte-identisch;
-- 55/55 PHP-Syntax PASS;
-- 0 hinzugefügt;
-- 0 entfernt;
-- ZIP-Roundtrip PASS;
-- keine Collage als Releasequelle.
-
-Nachweis:
-`protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
+## Live
+**Noch kein Live-PASS.**
 
 ## Isoliertes Campus-Artefakt
-Das geforderte `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist im Campus weiterhin nicht vorhanden. Es darf nicht erfunden oder aus einem veralteten Stand abgeleitet werden. Vor formaler Plugin-Artefaktfreigabe muss exakt der HRD-SCOPE13-Kandidat als CURRENT.zip synchronisiert und gegen SHA-256/ZIP-Struktur geprüft werden.
+`ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist im GitHub-Campus weiterhin nicht vorhanden. Das ändert nichts am lokal verifizierten Kandidaten, muss aber vor formaler isolierter Artefaktfreigabe nachgezogen werden.
 
 ## EXAKT EINE NEXT ACTION
-**Zuerst exakt den HRD-SCOPE13-Kandidaten als isoliertes CURRENT.zip synchronisieren und verifizieren; danach diesen Kandidaten installieren und ausschließlich die 13 HRD-Kategorien live prüfen.**
+**1.50.664 installieren und live Mega-Menü, Hauptweltkopf auf Desktop/Tablet/Mobil sowie 65 Hero→Preview-Bindungen prüfen. Danach erst die nächste Designebene bearbeiten.**
