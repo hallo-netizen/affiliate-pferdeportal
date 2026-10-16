@@ -23,7 +23,8 @@ Aktiver Produktionsweg:
 - Archiv und Backup sind niemals Werkbank.
 
 Historische Recherche:
-- `archive/pferdeatelier-textoffice-k1-k9-20261016`
+- Archivregister: `ARCHIV_REGISTER.md`
+- K1–K8: `archive/pferdeatelier-textsysteme-k1-k8-20261016`
 - K9-Goldstand: `archive/pferdeatelier-k9-gold-20261016`
 
 Die aktuelle Wahrheit selbst liegt nicht in diesem Campus-Dokument, sondern ausschließlich in:
