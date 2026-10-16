@@ -3,62 +3,72 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 1.50.660–1.50.663 VISUELL NICHT FREIGEGEBEN / NEUER BILDSTAND GESICHERT / KEIN PLUGIN VOR VOLLSTÄNDIGER VISUELLER ABNAHME**
+STATUS: **1.50.650 GRUNDSTAND EINGEFROREN / 30/30 NEUE EINZELQUELLEN VISUAL PASS / IMAGE-ONLY-KANDIDAT TECHNISCH PASS / 1.50.660–1.50.663 NICHT VERWENDEN**
 
 ## Aktueller belastbarer Stand
 - Affiliate Portal Template Kit **1.50.650** bleibt der eingefrorene Grundstand.
-- 1.50.660 wurde nachträglich vollständig visuell geprüft und ist **VISUAL FAIL**. Es darf nicht installiert oder als fertiger Fotostand ausgegeben werden.
-- 1.50.661–1.50.663 bleiben ebenfalls **NICHT VERWENDEN**.
-- Der danach erarbeitete neue Bildstand ist **nicht verloren** und liegt im Arbeitsbestand weiterhin vor.
-- Kein neues Plugin ist freigegeben.
+- Die 30 zuvor verworfenen Kategorien sind nach dem neuen Einzelquellen-Konzept jetzt **30/30 vollständig**.
+- Für jede der 30 Kategorien existiert genau eine eigenständige neue Quelle.
+- Alle 30 Quellen wurden als Vollbild sowie im realen Hero-Crop **600×320** und Preview-Crop **200×107** visuell geprüft.
+- Ergebnis: **30/30 VISUAL PASS**.
+- keine Collage-/Rasterquelle im Release;
+- keine exakten Bilddubletten;
+- Kollisionspaare fachlich getrennt;
+- kein Upscaling.
 
-## Exakter neuer Bildstand
-Nach erneuter Prüfung des historischen 65/65-Stands und des späteren 30er-Neuaufbaus gilt jetzt verbindlich:
-- alter WIP 1.50.653: historisch tatsächlich 65/65 Heroes fertig, aber danach 30 Kategorien visuell verworfen;
-- neues 30er-Einzelquellen-Konzept aktuell: **19/30 echte neue Einzelquellen fertig**;
-- weitere **1/30** besitzt eine exakt wiederhergestellte neue Richtung, aber noch keine eigenständige Einzelquelle: **Technik & Medien**;
-- weitere **6/30** sind nur als Teil des neuen Produktionsblocks belegt;
-- weitere **4/30** besitzen keine rekonstruierbare neue Bindung;
-- damit fehlen **11 eigenständige finale Einzelquellen**, nicht 30.
+## Finaler Image-only-Kandidat
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
 
-Autoritativer Nachweis: `NEW_CONCEPT_IMAGE_INVENTORY_19OF30_20261016.md`.
+SHA-256:
+`cbc9789925660ada90a32e1d9726c4b6086c9d8308a8d097009573afab66ddc8`
 
-## Gesicherter neuer Arbeitsbestand
-Unter `/hobby rausch/_working/` vorhanden:
-- **19 echte neue Einzelquellen** unter `newconcept-sources/`;
-- zugehörige geprüfte Hero-/Preview-Ableitungen unter `newconcept-stage/`;
-- zusätzlich 11 neue Vorschau-/Sammelbilddateien als historische Richtungsreferenzen;
-- 13 reproduzierbare V2-Referenzcrops;
-- `HOBBY_DEPOT_NEW_IMAGE_STAGE_7_WIP_V2.zip`;
-- `HOBBY_DEPOT_IMAGE_WIP_HANDOFF_7PLUS13_20261015.zip`.
+Persistiert:
+`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
 
-Die im Nachbarchat fertiggestellten Bilder/Vorschauen sind damit **nicht verloren**. Die Vorschauen sind jedoch nicht automatisch releasefähige Einzelquellen.
+Zusätzlich gesichert:
+`/hobby rausch/releases/HOBBY_DEPOT_NEW_IMAGES_30_STAGE_FINAL.zip`
+SHA-256:
+`12d50d3f9bfc7e62b4f7f04a140c3e07e8e5d7dfdd49e1974187535acd788545`
 
-## Harte Release-Regel
-Ab jetzt gilt zwingend:
+## Lokale 1:1-Simulation auf echter 1.50.650-Basis
+PASS:
+- Dateien vorher/nachher: **981 / 981**;
+- exakt **60** Bilddateien geändert;
+- **0** Dateien hinzugefügt;
+- **0** Dateien entfernt;
+- **0** unerwartete Änderungen;
+- 30 Heroes exakt **600×320**;
+- 30 Previews exakt **200×107**;
+- `hub2-image-map.json` byte-identisch;
+- **55/55 PHP-Dateien byte-identisch**;
+- **55/55 PHP-Syntax PASS**;
+- ZIP-Roundtrip PASS;
+- Negativsimulation fehlendes Ziel erkannt;
+- Negativsimulation Mappingänderung erkannt.
 
-**KEIN Plugin-Angebot und KEIN Downloadlink, bevor der komplette reale Bildsatz visuell geprüft und lokal 1:1 simuliert wurde.**
+Nachweis:
+`NEW_CONCEPT_IMAGE_FINAL_QA_30OF30_20261016.md`
 
-Vor jeder Plugin-Abgabe müssen alle Punkte PASS sein:
-1. jedes sichtbare Bild semantisch zur Kategorie passend;
-2. keine Collage-/Raster-/Bild-im-Bild-Quelle im Release;
-3. keine falschen Wiederholungen oder Motivdubletten;
-4. keine sichtbare Unschärfe / Hochskalierung;
-5. reale Zielausschnitte geprüft;
-6. lokaler Einbau gegen die echte 1.50.650-Basis simuliert;
-7. nur erwartete Bilddateien geändert;
-8. Mapping/PHP/CSS/Templates/Routing/Architektur unverändert;
-9. ZIP-Roundtrip PASS;
-10. erst danach Plugin als Kandidat anbieten.
-
-Technische PASS-Prüfung allein reicht ausdrücklich **nicht** mehr.
-
-## Verworfen
-Nicht wieder als fertigen Stand anbieten:
-- `HOBBY_DEPOT_HERO_REPLACE_ONLY_1.50.660.zip`;
+## Harte Abgrenzung
+Nicht verwenden:
+- 1.50.660;
 - 1.50.661;
 - 1.50.662;
-- 1.50.663.
+- 1.50.663;
+- die verworfene Collage-/Raster-Generierung.
+
+Nicht geändert:
+- PHP;
+- Routing;
+- Templates;
+- CSS;
+- Mapping;
+- Kartenlogik;
+- Architektur/System.
+
+## Release-Einordnung
+Der oben genannte ZIP ist für den **30-Kategorien-Image-only-Austausch auf 1.50.650** visuell und technisch PASS.
+Das ist keine Aussage, dass sonstige unabhängige globale Karten-/Design-Backlogs abgeschlossen sind.
 
 ## EXAKT EINE NEXT ACTION
-**Nicht neu anfangen: die 19 fertigen neuen Einzelquellen einfrieren. Als nächstes ausschließlich Technik & Medien als letzte bereits exakt gebundene Richtung in eine eigenständige Einzelquelle überführen; danach die 10 wirklich offenen Motivbindungen schließen. Erst bei 30/30 visueller Abnahme lokal 1:1 auf 1.50.650 simulieren und dann Plugin-Kandidat bauen.**
+**Image-only-Kandidat 1.50.650 mit den 30 neuen Bildpaaren installieren und danach Live-Readback der 30 betroffenen Kategorien gegen den lokal geprüften Stand durchführen.**
