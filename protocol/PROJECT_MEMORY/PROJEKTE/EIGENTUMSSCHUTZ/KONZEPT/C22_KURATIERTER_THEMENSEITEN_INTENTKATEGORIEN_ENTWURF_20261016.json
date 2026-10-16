@@ -81,7 +81,7 @@
           "capacity_min": 3
         },
         {
-          "name": "Schlüsselübergabe im Ferienhaus",
+          "name": "Ferienhausschlüssel verwalten",
           "capacity_signals": [
             "Übergabe",
             "Notfallzugang",
