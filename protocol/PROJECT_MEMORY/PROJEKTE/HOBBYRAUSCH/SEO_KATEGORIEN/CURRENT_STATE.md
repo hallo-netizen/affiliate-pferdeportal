@@ -3,39 +3,22 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-16
-STATUS: **LIVE-BASELINE 2026-10-09 UNVERÄNDERT / V3-VOLLAUDIT-KANDIDAT ZENTRAL ABGELEGT / HD-001 TARGETTREE VALIDATOR PASS / NOCH KEIN LIVE-SYNC**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V3 2656-KNOTEN-AUDIT PASS / HD-001 1.14.9 LOCAL DRY-RUN PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
-## Autoritative Bindung
+## Live-Baseline
 
-Zielvertrag:
-`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md` – Fassung 2.7.
+Weiterhin produktiv:
+`HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
 
-Zentrale Kategorie-Unterzentrale:
-`KATEGORIE_ZENTRALE/START_HERE.md`
-
-Technische Plugin-Wahrheiten:
-- Bearbeiten/Sync: `../PLUGINS/PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
-- schlanker Runtime-Kern: `../PLUGINS/PLUGIN_AKTEN/HD-004-KATEGORIE-KERN/CURRENT.md`
-
-Finale Live-Evidence:
-`HD001_FINAL_LIVE_ACCEPTANCE_20261009.md`.
-
-## Produktive Live-Baseline – unverändert
-
-- Live-Profilrevision `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`;
-- 2371 logische Knoten;
-- 2366 aktive Nodes;
 - 2357 aktive physische Zielobjekte;
 - 2357/2357 Readback;
-- Runner COMPLETE / `TARGET_TREE_SYNC_AND_READBACK_PASS`;
-- Frontend valid=true;
-- 8 Welten;
-- 330/330 terminale CORE-Seiten im Kategorie-Gate;
-- 1920 aktive CORE-Content-Kategorien.
+- 8 Hauptwelten;
+- 330/330 terminale CORE-Seiten;
+- LIVE-PASS.
 
-## V3-Voll-Audit-Kandidat – zentral / NOCH NICHT LIVE
+## Zentraler V3-Kandidat
 
-Kandidat:
+Profil:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
 
 SHA-256:
@@ -44,66 +27,80 @@ SHA-256:
 Audit:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
 
-Lokaler Befund:
+Delta:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V3_20261016.json`
+
+HD-001 Synthetic-Dry-Run:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_HD001_SYNTHETIC_DRYRUN_V3_20261016.json`
+
+HD-001-Kandidat:
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
+
+ZIP SHA-256:
+`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
+
+## Voll-Audit
+
 - 8/8 Hauptwelten unverändert;
 - 370 terminale Hobbyseiten;
-- 2160 unterste CORE-Inhaltskategorien;
-- jede terminale Hobbyseite hat 5–8 Inhaltskategorien;
-- keine unterste Inhaltskategorie hat weitere Kategorie-Kinder;
-- 2160/2160 unterste Inhaltskategorien grob auf mindestens 3–5 vertiefende Beitragsthemen geprüft: PASS;
-- 120 besonders kurze/enge Kategorien zusätzlich manuell semantisch gegengeprüft;
-- 0 doppelte Node-IDs;
-- 0 doppelte Slugs;
-- 0 fehlende Parents;
-- 0 sibling-name-Dubletten;
-- 0 frageartige Artikelüberschriften als Kategorien;
-- HD-001 `APKW_TargetTree::validate`: VALID / 0 Errors / 0 Warnings.
+- 2160 unterste Inhaltskategorien;
+- je terminaler Hobbyseite 5–8 Inhaltskategorien;
+- 2160/2160 Leafs grob mit mindestens 3–5 vertiefenden Beitragsthemen möglich;
+- keine Kategorie unter einer untersten Kategorie;
+- keine fehlenden Parents;
+- keine doppelten Node-IDs/Slugs;
+- keine frageartigen Artikelüberschriften als Kategorien;
+- HD-001 Validator: 0 Errors / 0 Warnings.
 
-Wesentliche Korrekturen:
-- Plane Spotting aus `Messen & Analysieren` nach `Spotting & Verkehr`;
-- `Messen & Analysieren` danach: Wasseranalyse, Bodenanalyse, Spektroskopie, Elektrochemie als Hobby;
-- neue Forschen-Hubs: `Spotting & Verkehr`, `Citizen Science`, `Natur bestimmen`;
-- neue Sammeln-Struktur: `Suchen & Finden` plus Erweiterung `Naturfunde`;
-- `Modellbau` nach erneuter Prüfung unter `Fertigen`, nicht unter Technik;
-- Gestalten `Miniaturen & Szenen` erweitert;
-- Tiere `Wirbellose` um Schneckenhaltung erweitert;
-- tautologische Leaf-Kategorie `Quilten → Quilten` ersetzt durch `Quiltmuster & Stichführung`.
+Fachlich korrigiert/ergänzt:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen;
+- Plane Spotting aus Messen & Analysieren heraus;
+- Suchen & Finden;
+- Modellbau unter Fertigen;
+- Miniaturen & Szenen ergänzt;
+- Naturfunde ergänzt;
+- Schneckenhaltung ergänzt;
+- Quilten-Leaf präzisiert.
 
-Keine automatische Änderung:
-- Asselhaltung / Isopoden-Zucht bleiben vorerst getrennt: Haltung vs Zucht;
-- Münzen / Numismatik bleiben vorerst getrennt: späterer Kannibalisierungscheck;
-- Teichwasser-Mikroskopie / Gewässermikroskopie bleiben vorerst getrennt.
+Bewusst nicht automatisch zusammengelegt:
+- Asselhaltung / Isopoden-Zucht;
+- Münzen / Numismatik;
+- Teichwasser-Mikroskopie / Gewässermikroskopie.
 
-## Kategorie-Zentrale
+## Echte HD-001-Logik lokal simuliert
 
-Verbindliches Register:
-`KATEGORIE_ZENTRALE/REGISTER.md`
+Resolved Profile:
+- Revision `...+16d1bd25b2adfc26`;
+- 2656 logische Knoten;
+- Validator PASS.
 
-Dort liegen:
-- aktive Live-Baseline;
-- V3-Audit-Kandidat;
-- Voll-Audit;
-- HD-001 1.14.8;
-- HD-004 1.0.0;
-- stabile Runtime-/Snapshot-Bindung.
+Vollständige synthetische Live-Baseline + Altseiten:
+- CREATE 282;
+- ADOPT 3;
+- UPDATE 2357;
+- ARCHIVE 0;
+- DEMOTE_EDITORIAL 0;
+- 0 Provider-/DataForSEO-Aufrufe;
+- 0 Writes im Dry-Run.
 
-## Harte Betriebsregel
+ADOPT statt Dublette:
+Trainspotting, Modellraketen und Pflanzenbestimmung.
 
-DataForSEO:
-- SEO-/Demand-/Intent-Evidence;
-- **keine Strukturautorität**;
-- darf keine Welt, keinen Parent und keine neue Kategorie erfinden.
+## Betriebsregel
 
-Strukturänderungen:
-HD-001 1.14.8 gezielt aktivieren → Delta/Dry-Run → POS+NEG-Regressionsprüfung → genau ein Sync → 100%-Readback.
+DataForSEO = SEO-/Demand-/Intent-Evidence, **keine Strukturautorität**.
 
-Frontend/Design:
-muss anschließend ausschließlich den neutralen HD-004-Runtime-Vertrag verwenden und darf keine rohen WordPress-`get_pages()`-Kinder als Strukturwahrheit verwenden.
+Live-Änderungen ausschließlich:
+HD-001 → echter WordPress-Dry-Run → Fingerprint PASS → exakt ein Sync → 100%-Readback.
+
+Frontend/Design liest danach ausschließlich HD-004 und niemals rohe `get_pages()`-Kinder als Strukturwahrheit.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der V3-Kandidat ist vollständig lokal validiert, aber noch nicht durch den HD-001-Delta-/Dry-Run gegen die produktive Live-Baseline gelaufen.**
+**Der echte kostenlose HD-001-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
 
 ## EXAKT EINE NEXT ACTION
 
-**V3 gegen die aktive Live-Baseline als HD-001-Delta/Dry-Run prüfen; NOCH KEIN Live-Sync.**
+**HD-001 1.14.9 installieren/aktivieren und im bestehenden Menü „Finaler Zielbaum“ ausschließlich den Dry-Run ausführen. Noch NICHT synchronisieren.**
