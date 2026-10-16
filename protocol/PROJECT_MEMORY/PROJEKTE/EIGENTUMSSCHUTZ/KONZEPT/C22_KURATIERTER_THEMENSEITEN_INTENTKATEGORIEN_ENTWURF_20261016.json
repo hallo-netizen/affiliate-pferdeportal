@@ -1,0 +1,2402 @@
+{
+  "schema": "HB_C22_EDITORIAL_TOPIC_PAGE_INTENT_CATEGORY_CATALOGUE",
+  "date": "2026-10-16",
+  "status": "DRAFT_EDITORIALLY_CURATED_NON_IMPORTABLE__DO_NOT_SYNC",
+  "contract": "C2.2",
+  "purpose": "Konkrete THEMENSEITEN und je drei fachlich spezifische mögliche ARTIKELKATEGORIEN (nicht Produkte/Teile als Kategorien). Drei knappe thematische Kapazitätshinweise je Kategorie, keine fertigen Artikeltitel und keine Artikelproduktion.",
+  "source_baseline": {
+    "third_pages": 93,
+    "protected_wp_categories": 285,
+    "v99_draft_categories": 81,
+    "v918_draft_categories": 46
+  },
+  "risk_flags": [
+    "Existing 93 legacy page3 and 285 WP terms unchanged; semantic migration requires later separate per-object decisions.",
+    "The 81+46 source candidates are not all thereby approved or mapped; remaining items must be explicitly reviewed.",
+    "All proposed page3 topics and categories require owner/SEO check before sync.",
+    "Provider measurement for these proposed names not established.",
+    "LIVE WordPress revision after V99 is UNKNOWN."
+  ],
+  "qa": {
+    "curated_topic_pages": 55,
+    "curated_article_categories": 165,
+    "capacity_signals": 495,
+    "existing_areas_touched": 31,
+    "all_existing_areas": 31,
+    "new_areas": [
+      {
+        "area_key": "Wasser & Feuchtigkeit | Dach & Gebäudehülle gegen Feuchtigkeit",
+        "proposed_topic_count": 3,
+        "gate_min3": true
+      },
+      {
+        "area_key": "Wetter & Naturgefahren | Hitze & Trockenheit",
+        "proposed_topic_count": 3,
+        "gate_min3": true
+      },
+      {
+        "area_key": "Technik & Ausfälle | PV, Speicher & private Ladeinfrastruktur",
+        "proposed_topic_count": 3,
+        "gate_min3": true
+      },
+      {
+        "area_key": "Wetter & Naturgefahren | Tier- & Schädlingsschäden",
+        "proposed_topic_count": 3,
+        "gate_min3": true
+      },
+      {
+        "area_key": "Technik & Ausfälle | Tore & Zugangstechnik",
+        "proposed_topic_count": 4,
+        "gate_min3": true
+      }
+    ],
+    "all_topic_names_unique_by_owner": true,
+    "all_category_min3_signals": true,
+    "article_titles_produced": 0,
+    "wp_writes": 0,
+    "all_127_candidate_release": false
+  },
+  "topics": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Abwesenheit & Leerstand",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Ferienhaus-Kontrolle",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Abwesenheit & Leerstand > Ferienhaus-Kontrolle",
+      "article_categories": [
+        {
+          "name": "Kontrollgänge",
+          "capacity_signals": [
+            "Turnus",
+            "Vertrauenspersonen",
+            "Dokumentation"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schlüssel & Zutritt",
+          "capacity_signals": [
+            "Übergabe",
+            "Notfallzugang",
+            "Zugangsprotokoll"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Alarm aus der Ferne",
+          "capacity_signals": [
+            "Benachrichtigung",
+            "Fehlalarm",
+            "Reaktion"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Katalysatordiebstahl",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Freizeit & Fahrzeuge > Katalysatordiebstahl",
+      "article_categories": [
+        {
+          "name": "Katalysatorschutz",
+          "capacity_signals": [
+            "Sicherungsteile",
+            "Fahrzeughöhe",
+            "Abstellort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diebstahl feststellen",
+          "capacity_signals": [
+            "Geräuschänderung",
+            "Schadenbild",
+            "Polizeimeldung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ersatz & Versicherung",
+          "capacity_signals": [
+            "Reparaturumfang",
+            "Nachweise",
+            "Erstattung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Garagen & Nebenräume",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Garagentor-Einbruchschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Garagen & Nebenräume > Garagentor-Einbruchschutz",
+      "article_categories": [
+        {
+          "name": "Mechanische Sicherung",
+          "capacity_signals": [
+            "Torverriegelung",
+            "Notentriegelung",
+            "Schwachstellen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Zugang kontrollieren",
+          "capacity_signals": [
+            "Fernbedienungen",
+            "Schlüsselverwaltung",
+            "Fremdzutritt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Nachrüsten & prüfen",
+          "capacity_signals": [
+            "Tortypen",
+            "Montagegrenzen",
+            "Kontrollintervalle"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Garten & Grundstück",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Gartenhaus-Einbruchschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Garten & Grundstück > Gartenhaus-Einbruchschutz",
+      "article_categories": [
+        {
+          "name": "Schlösser & Beschläge",
+          "capacity_signals": [
+            "Türverstärkung",
+            "Scharnierseiten",
+            "Fenstersicherung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wertsachen lagern",
+          "capacity_signals": [
+            "Werkzeug",
+            "Maschinen",
+            "Fahrräder"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Abwesenheit absichern",
+          "capacity_signals": [
+            "Nachbarschaftskontrolle",
+            "Außenlicht",
+            "Alarmierung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Haustürschlösser",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Haus & Wohnung > Haustürschlösser",
+      "article_categories": [
+        {
+          "name": "Schließzylinder wählen",
+          "capacity_signals": [
+            "Sicherheitsmerkmale",
+            "Türmaße",
+            "Schließsysteme"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Einbruchschutz nachrüsten",
+          "capacity_signals": [
+            "Schutzbeschlag",
+            "Zusatzschloss",
+            "Montage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schlüsselverlust & Defekt",
+          "capacity_signals": [
+            "Zylinderwechsel",
+            "Schlüsseldienst",
+            "Sofortmaßnahmen"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Hofladen-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Kleine Betriebe & Vereine > Hofladen-Diebstahlschutz",
+      "article_categories": [
+        {
+          "name": "Bargeld & Waren",
+          "capacity_signals": [
+            "Kassenabschluss",
+            "Wertaufbewahrung",
+            "Inventarkontrolle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Zugänge sichern",
+          "capacity_signals": [
+            "Türschutz",
+            "Fremdschlüssel",
+            "Abschlussroutinen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Überwachung im Kleinbetrieb",
+          "capacity_signals": [
+            "Hinweispflichten",
+            "Kameraorte",
+            "Alarmweitergabe"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "E-Bike-Akkus vor Brand schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > Akku & Elektrik > E-Bike-Akkus vor Brand schützen",
+      "article_categories": [
+        {
+          "name": "Ladeplatz",
+          "capacity_signals": [
+            "Untergrund",
+            "Abstände",
+            "Aufsicht"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Akkuschäden erkennen",
+          "capacity_signals": [
+            "Aufblähung",
+            "Überhitzung",
+            "Sturzfolgen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Lagerung & Entsorgung",
+          "capacity_signals": [
+            "Temperatur",
+            "Ladezustand",
+            "Fachabgabe"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "CO & Gas",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Kohlenmonoxidmelder",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > CO & Gas > Kohlenmonoxidmelder",
+      "article_categories": [
+        {
+          "name": "Melder auswählen",
+          "capacity_signals": [
+            "Normmerkmale",
+            "Sensortyp",
+            "Laufzeit"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Montage & Betrieb",
+          "capacity_signals": [
+            "Raumzuordnung",
+            "Position",
+            "Selbsttest"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Alarm & Störungen",
+          "capacity_signals": [
+            "Alarmverhalten",
+            "Fehlersignale",
+            "Austausch"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Camping",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Gasversorgung im Wohnmobil",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > Camping > Gasversorgung im Wohnmobil",
+      "article_categories": [
+        {
+          "name": "Flaschen & Regler",
+          "capacity_signals": [
+            "Anschluss",
+            "Aufbewahrung",
+            "Wechsel"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Prüfung & Sicherheit",
+          "capacity_signals": [
+            "Dichtheit",
+            "Prüfintervalle",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Gasgeräte unterwegs",
+          "capacity_signals": [
+            "Heizung",
+            "Kocher",
+            "Lüftung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Brandschutz im Friseursalon",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > Kleine Betriebe & Vereine > Brandschutz im Friseursalon",
+      "article_categories": [
+        {
+          "name": "Gefahren im Salon",
+          "capacity_signals": [
+            "Elektrogeräte",
+            "Produkte",
+            "Abstellflächen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Evakuierung & Vorsorge",
+          "capacity_signals": [
+            "Fluchtwege",
+            "Unterweisung",
+            "Erstmaßnahmen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Löschmittel auswählen",
+          "capacity_signals": [
+            "Brandklassen",
+            "Standorte",
+            "Prüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Brandschutz im Friseursalon"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Rauchmelder",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > Rauch & Brand > Rauchmelder",
+      "article_categories": [
+        {
+          "name": "Standort & Montage",
+          "capacity_signals": [
+            "Räume",
+            "Deckenmontage",
+            "Etagen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vernetzung & Alarm",
+          "capacity_signals": [
+            "Funkkopplung",
+            "Alarmweiterleitung",
+            "Gruppenbildung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Austausch",
+          "capacity_signals": [
+            "Prüfknopf",
+            "Staub",
+            "Gerätelebensdauer"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Alarm & Smart Home",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Router bei Stromausfall",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Alarm & Smart Home > Router bei Stromausfall",
+      "article_categories": [
+        {
+          "name": "Netzersatz",
+          "capacity_signals": [
+            "USV",
+            "Strombedarf",
+            "Überbrückungsdauer"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ausfallmeldungen",
+          "capacity_signals": [
+            "Mobilfunk",
+            "Fernüberwachung",
+            "Warnketten"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wiederanlauf",
+          "capacity_signals": [
+            "Routerstart",
+            "Zugangspunkte",
+            "Fehlerbehandlung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Ferienhaus-Fernüberwachung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Fernüberwachung > Ferienhaus-Fernüberwachung",
+      "article_categories": [
+        {
+          "name": "Sensoren & Ereignisse",
+          "capacity_signals": [
+            "Türkontakte",
+            "Wasseralarm",
+            "Temperatur"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Fernzugriff & Datenschutz",
+          "capacity_signals": [
+            "Zugangsrechte",
+            "Übertragungswege",
+            "Datenspeicherung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Alarmreaktion vor Ort",
+          "capacity_signals": [
+            "Kontaktpersonen",
+            "Fehlalarm",
+            "Objektkontrolle"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Heizung & Temperatur",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Heizungsausfall",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Heizung & Temperatur > Heizungsausfall",
+      "article_categories": [
+        {
+          "name": "Ursachen eingrenzen",
+          "capacity_signals": [
+            "Strom",
+            "Zündung",
+            "Regelung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Frostfolgen vermeiden",
+          "capacity_signals": [
+            "Raumtemperatur",
+            "Leitungen",
+            "Abwesenheit"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Meldung & Wiederanlauf",
+          "capacity_signals": [
+            "Fernalarm",
+            "Störmeldung",
+            "Fachprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Heizungsausfall"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Brunnenpumpe",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Pumpen & Haustechnik > Brunnenpumpe",
+      "article_categories": [
+        {
+          "name": "Druck & Förderleistung",
+          "capacity_signals": [
+            "Förderhöhe",
+            "Leitung",
+            "Wassermenge"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Trockenlauf & Defekte",
+          "capacity_signals": [
+            "Ansaugung",
+            "Sensorschutz",
+            "Motor"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Austausch",
+          "capacity_signals": [
+            "Filter",
+            "Winterlager",
+            "Ersatzwahl"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Notstromversorgung fürs Haus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Strom & Notstrom > Notstromversorgung fürs Haus",
+      "article_categories": [
+        {
+          "name": "Gerätebedarf",
+          "capacity_signals": [
+            "Kühlung",
+            "Heizung",
+            "Kommunikation"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Notstromarten",
+          "capacity_signals": [
+            "Powerstation",
+            "Generator",
+            "USV"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sichere Nutzung",
+          "capacity_signals": [
+            "Anschlussgrenzen",
+            "Laufzeit",
+            "Abgase"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Außentechnik",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wallbox vor Sabotage",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Außentechnik > Wallbox vor Sabotage",
+      "article_categories": [
+        {
+          "name": "Zugang & Schutz",
+          "capacity_signals": [
+            "Montageort",
+            "Verriegelung",
+            "Abdeckung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Beschädigungen erkennen",
+          "capacity_signals": [
+            "Kabel",
+            "Stecker",
+            "Gehäuse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schaden & Betrieb",
+          "capacity_signals": [
+            "Fotobelege",
+            "Funktionssperre",
+            "Fachprüfung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Fassade & Außenflächen",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Graffiti entfernen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Fassade & Außenflächen > Graffiti entfernen",
+      "article_categories": [
+        {
+          "name": "Untergrund prüfen",
+          "capacity_signals": [
+            "Putz",
+            "Naturstein",
+            "Glas"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reinigungsverfahren",
+          "capacity_signals": [
+            "Chemisch",
+            "Mechanisch",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Kosten",
+          "capacity_signals": [
+            "Opferschicht",
+            "Imprägnierung",
+            "Schadenmeldung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Graffiti entfernen"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Freizeit & Vandalismus",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Privatwagen vor Vandalismus schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Freizeit & Vandalismus > Privatwagen vor Vandalismus schützen",
+      "article_categories": [
+        {
+          "name": "Parkplatz & Prävention",
+          "capacity_signals": [
+            "Stellplatzwahl",
+            "Beleuchtung",
+            "Sichtbarkeit"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schadensformen",
+          "capacity_signals": [
+            "Lack",
+            "Glas",
+            "Reifen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schadenabwicklung",
+          "capacity_signals": [
+            "Beweise",
+            "Anzeige",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Schaufenster vor Sachbeschädigung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Gebäude & Ausstattung > Schaufenster vor Sachbeschädigung",
+      "article_categories": [
+        {
+          "name": "Glas & Folien",
+          "capacity_signals": [
+            "Verglasung",
+            "Schutzfolie",
+            "Schwachstellen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Außenschutz",
+          "capacity_signals": [
+            "Rollladen",
+            "Beleuchtung",
+            "Kamera"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Nach Schäden",
+          "capacity_signals": [
+            "Notverglasung",
+            "Dokumentation",
+            "Reparatur"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Vereine & Kleingewerbe",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Sportplatz vor Vandalismus schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Vereine & Kleingewerbe > Sportplatz vor Vandalismus schützen",
+      "article_categories": [
+        {
+          "name": "Zaun & Zutritt",
+          "capacity_signals": [
+            "Tore",
+            "Schlüssel",
+            "Schwachstellen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Inventarschutz",
+          "capacity_signals": [
+            "Sporttore",
+            "Geräteschuppen",
+            "Flutlicht"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorfallmanagement",
+          "capacity_signals": [
+            "Meldung",
+            "Beweissicherung",
+            "Instandsetzung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Camping & Freizeitobjekte",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wohnmobil-Dachabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Camping & Freizeitobjekte > Wohnmobil-Dachabdichtung",
+      "article_categories": [
+        {
+          "name": "Nähte & Dichtstoffe",
+          "capacity_signals": [
+            "Material",
+            "Dachaufbauten",
+            "Übergänge"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Feuchtesuche",
+          "capacity_signals": [
+            "Innenraumzeichen",
+            "Messstellen",
+            "Regenwege"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Pflege",
+          "capacity_signals": [
+            "Reinigung",
+            "Abdichten",
+            "Kontrollabstände"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Frost & Abwesenheit",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wasserleitungen im Ferienhaus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Frost & Abwesenheit > Wasserleitungen im Ferienhaus",
+      "article_categories": [
+        {
+          "name": "Winterfest machen",
+          "capacity_signals": [
+            "Entleeren",
+            "Absperrung",
+            "Temperatur"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Frostschaden erkennen",
+          "capacity_signals": [
+            "Druckverlust",
+            "Leckstellen",
+            "Auftauen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Kontrollen in Abwesenheit",
+          "capacity_signals": [
+            "Temperaturmelder",
+            "Ansprechpartner",
+            "Leitungscheck"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Keller & Rückstau",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Rückstauklappen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Keller & Rückstau > Rückstauklappen",
+      "article_categories": [
+        {
+          "name": "Klappentypen",
+          "capacity_signals": [
+            "Einbauort",
+            "Abwasserarten",
+            "Betriebsgrenzen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Prüfung",
+          "capacity_signals": [
+            "Reinigung",
+            "Schließtest",
+            "Verschleiß"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Störungen & Kosten",
+          "capacity_signals": [
+            "Blockade",
+            "Nachrüstung",
+            "Fachservice"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Rückstauklappen"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wasserschutz im Friseursalon",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Kleine Betriebe & Vereine > Wasserschutz im Friseursalon",
+      "article_categories": [
+        {
+          "name": "Wasserstellen",
+          "capacity_signals": [
+            "Waschplätze",
+            "Waschmaschinen",
+            "Leitungen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leckwarnung & Absperren",
+          "capacity_signals": [
+            "Sensorplätze",
+            "Hauptventil",
+            "Alarmreaktion"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Betrieb nach Schaden",
+          "capacity_signals": [
+            "Trocknung",
+            "Dokumentation",
+            "Wiedereröffnung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wassermelder",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Wassermelder",
+      "article_categories": [
+        {
+          "name": "Platzierung im Haus",
+          "capacity_signals": [
+            "Küche",
+            "Keller",
+            "Geräte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vernetzung & Alarm",
+          "capacity_signals": [
+            "WLAN",
+            "Funk",
+            "Smart Home"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Auswahl & Wartung",
+          "capacity_signals": [
+            "Batterien",
+            "Sensorkontakte",
+            "Fehlalarme"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Wassermelder"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Blitz & Überspannung",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Überspannungsschutz im Wohnhaus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Blitz & Überspannung > Überspannungsschutz im Wohnhaus",
+      "article_categories": [
+        {
+          "name": "Schutzstufen",
+          "capacity_signals": [
+            "Grobschutz",
+            "Feinschutz",
+            "Geräte"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Verteilung & Erdung",
+          "capacity_signals": [
+            "Zählerschrank",
+            "Potentialausgleich",
+            "Leitungswege"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden & Nachrüstung",
+          "capacity_signals": [
+            "Defekte",
+            "Prüfung",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Freizeit & Unwetter",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Wohnmobil bei Sturm",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Freizeit & Unwetter > Wohnmobil bei Sturm",
+      "article_categories": [
+        {
+          "name": "Standplatz & Ausrichtung",
+          "capacity_signals": [
+            "Baumrisiko",
+            "Windrichtung",
+            "Untergrund"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Aufbauten sichern",
+          "capacity_signals": [
+            "Markise",
+            "Dachhauben",
+            "Sat-Anlage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden & Verhalten",
+          "capacity_signals": [
+            "Hagel",
+            "Notunterstand",
+            "Schadenmeldung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Winterdienst auf Privatwegen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Frost & Schnee > Winterdienst auf Privatwegen",
+      "article_categories": [
+        {
+          "name": "Räumpflichten",
+          "capacity_signals": [
+            "Eingang",
+            "Gehweg",
+            "Zufahrt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Rutschschutz",
+          "capacity_signals": [
+            "Streugut",
+            "Matten",
+            "Handlauf"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Planung & Haftung",
+          "capacity_signals": [
+            "Abwesenheit",
+            "Beauftragte",
+            "Dokumentation"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Mobile Hochwassersperren",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Starkregen & Hochwasser > Mobile Hochwassersperren",
+      "article_categories": [
+        {
+          "name": "Sperrentypen",
+          "capacity_signals": [
+            "Dammbalken",
+            "Schlauchsysteme",
+            "Barrieren"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Einbau & Dichtheit",
+          "capacity_signals": [
+            "Türen",
+            "Lichtschächte",
+            "Anschlüsse"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Einsatz & Lagerung",
+          "capacity_signals": [
+            "Warnzeit",
+            "Probemontage",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Mobile Hochwassersperren"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "PV-Anlage bei Sturm",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Sturm & Hagel > PV-Anlage bei Sturm",
+      "article_categories": [
+        {
+          "name": "Befestigung & Tragwerk",
+          "capacity_signals": [
+            "Montagesystem",
+            "Dachhaken",
+            "Windlast"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden erkennen",
+          "capacity_signals": [
+            "Module",
+            "Kabel",
+            "Dachhaut"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vorsorge & Fachprüfung",
+          "capacity_signals": [
+            "Inspektion",
+            "Versicherung",
+            "Wiederbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Dachfenster & Anschlüsse",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachfenster & Anschlüsse",
+      "article_categories": [
+        {
+          "name": "Undichtigkeiten finden",
+          "capacity_signals": [
+            "Dichtung",
+            "Anschlussblech",
+            "Kondenswasser"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Pflege",
+          "capacity_signals": [
+            "Regenrinne",
+            "Beschlag",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Ersatz",
+          "capacity_signals": [
+            "Nachabdichten",
+            "Ersatzteile",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Dachfenster & Anschlüsse"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Flachdachabdichtung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Flachdachabdichtung",
+      "article_categories": [
+        {
+          "name": "Fehlerstellen",
+          "capacity_signals": [
+            "Naht",
+            "Anschluss",
+            "Durchdringung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Prüfung & Vorbeugung",
+          "capacity_signals": [
+            "Entwässerung",
+            "Kontrollgang",
+            "Auflast"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung & Kosten",
+          "capacity_signals": [
+            "Materialwahl",
+            "Reparaturumfang",
+            "Fachfirma"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Dachrinnen & Fallrohre",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Dach & Gebäudehülle gegen Feuchtigkeit > Dachrinnen & Fallrohre",
+      "article_categories": [
+        {
+          "name": "Verstopfung & Reinigung",
+          "capacity_signals": [
+            "Laub",
+            "Rinnensieb",
+            "Reinigungszugang"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Leckage & Überlauf",
+          "capacity_signals": [
+            "Gefälle",
+            "Rinnenstoß",
+            "Abfluss"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schutz & Nachrüstung",
+          "capacity_signals": [
+            "Laubschutz",
+            "Haltestellen",
+            "Fallrohrschutz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Dachrinnen & Fallrohre"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Dachgeschoss vor Hitze schützen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Hitze & Trockenheit > Dachgeschoss vor Hitze schützen",
+      "article_categories": [
+        {
+          "name": "Sonnenschutz",
+          "capacity_signals": [
+            "Rollladen",
+            "Verschattung",
+            "Innenblenden"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Raumklima",
+          "capacity_signals": [
+            "Querlüftung",
+            "Nachtkühlung",
+            "Temperaturmessung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bauliche Maßnahmen",
+          "capacity_signals": [
+            "Dämmung",
+            "Fensterglas",
+            "Dachaufbau"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Wintergarten im Sommer",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Hitze & Trockenheit > Wintergarten im Sommer",
+      "article_categories": [
+        {
+          "name": "Verschattung",
+          "capacity_signals": [
+            "Außenmarkise",
+            "Innenrollo",
+            "Automatik"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Lüftung & Kühlung",
+          "capacity_signals": [
+            "Querlüftung",
+            "Dachlüfter",
+            "Temperatursteuerung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Hitzeschäden vermeiden",
+          "capacity_signals": [
+            "Kunststoffe",
+            "Möbel",
+            "Beschläge"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Gartenbewässerung bei Trockenheit",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Hitze & Trockenheit > Gartenbewässerung bei Trockenheit",
+      "article_categories": [
+        {
+          "name": "Wasserbedarf",
+          "capacity_signals": [
+            "Boden",
+            "Pflanzenart",
+            "Standort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bewässerungssysteme",
+          "capacity_signals": [
+            "Tröpfchen",
+            "Zeitschaltuhr",
+            "Regenwasser"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wassersparen",
+          "capacity_signals": [
+            "Mulch",
+            "Gießzeiten",
+            "Bodenschutz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Wechselrichter-Ausfälle",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wechselrichter-Ausfälle",
+      "article_categories": [
+        {
+          "name": "Fehlermeldungen",
+          "capacity_signals": [
+            "Fehlercodes",
+            "Statusanzeigen",
+            "Abschaltungen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Netz & Anschlüsse",
+          "capacity_signals": [
+            "AC-Verbindung",
+            "DC-Stecker",
+            "Netzspannung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Ersatz",
+          "capacity_signals": [
+            "Kühlung",
+            "Service",
+            "Ersatzgerät"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Heimspeicher-Störungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Heimspeicher-Störungen",
+      "article_categories": [
+        {
+          "name": "Ladeprobleme",
+          "capacity_signals": [
+            "Ladestand",
+            "Leistungsgrenze",
+            "Einstellungen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Überwachung & Sicherheit",
+          "capacity_signals": [
+            "Statusanzeigen",
+            "Warnungen",
+            "Temperatur"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wiederanlauf & Service",
+          "capacity_signals": [
+            "Kommunikation",
+            "Prüfung",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "PV, Speicher & private Ladeinfrastruktur",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Wallbox-Ladeabbrüche",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > PV, Speicher & private Ladeinfrastruktur > Wallbox-Ladeabbrüche",
+      "article_categories": [
+        {
+          "name": "Fahrzeug & Kabel",
+          "capacity_signals": [
+            "Stecker",
+            "Freigabe",
+            "Kommunikation"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Hausnetz & Lastmanagement",
+          "capacity_signals": [
+            "Leistungsgrenzen",
+            "Phasen",
+            "Verteilung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Störungen & Lösungen",
+          "capacity_signals": [
+            "Fehlermeldung",
+            "Software",
+            "Elektriker"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Wallbox-Ladeabbrüche"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Marder im Dach",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Marder im Dach",
+      "article_categories": [
+        {
+          "name": "Einstieg & Spuren",
+          "capacity_signals": [
+            "Dachzugang",
+            "Geräusche",
+            "Dämmmaterial"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Vertreiben & Aussperren",
+          "capacity_signals": [
+            "Vergrämung",
+            "Abdichtung",
+            "Zeitpunkt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden & Sanierung",
+          "capacity_signals": [
+            "Dämmung",
+            "Reinigung",
+            "Kosten"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Nager an Hausleitungen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Nager an Hausleitungen",
+      "article_categories": [
+        {
+          "name": "Schäden erkennen",
+          "capacity_signals": [
+            "Bissstellen",
+            "Spuren",
+            "Störungen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Zugänge schließen",
+          "capacity_signals": [
+            "Kabeldurchführung",
+            "Schächte",
+            "Hausanschluss"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Vorbeugung",
+          "capacity_signals": [
+            "Kabeltausch",
+            "Schutzrohr",
+            "Kontrollen"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Tier- & Schädlingsschäden",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Holzzerstörende Insekten am Haus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Tier- & Schädlingsschäden > Holzzerstörende Insekten am Haus",
+      "article_categories": [
+        {
+          "name": "Befall bestimmen",
+          "capacity_signals": [
+            "Bohrlöcher",
+            "Holzmehl",
+            "Holzarten"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Holzbauteile schützen",
+          "capacity_signals": [
+            "Trockenheit",
+            "Oberflächenschutz",
+            "Befallsvermeidung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sanierung & Fachhilfe",
+          "capacity_signals": [
+            "Schadensumfang",
+            "Holzschutz",
+            "Sachverständige"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Holzzerstörende Insekten am Haus"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Garagentor-Funksteuerung",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentor-Funksteuerung",
+      "article_categories": [
+        {
+          "name": "Handsender & Empfänger",
+          "capacity_signals": [
+            "Batterie",
+            "Anlernen",
+            "Empfängerausfall"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Funkprobleme & Reichweite",
+          "capacity_signals": [
+            "Störquelle",
+            "Antenne",
+            "Frequenz"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Auswahl & Sicherheit",
+          "capacity_signals": [
+            "Ersatzsender",
+            "Kompatibilität",
+            "ungewolltes Öffnen"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Garagentor-Funksteuerung"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Garagentorantrieb",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Tore & Zugangstechnik > Garagentorantrieb",
+      "article_categories": [
+        {
+          "name": "Antriebsausfälle",
+          "capacity_signals": [
+            "Strom",
+            "Motor",
+            "Mechanik"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Sicherheitssensoren",
+          "capacity_signals": [
+            "Lichtschranke",
+            "Endlage",
+            "Hindernis"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Notentriegelung & Wartung",
+          "capacity_signals": [
+            "Manuelle Öffnung",
+            "Prüfintervalle",
+            "Verschleiß"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Video-Türsprechanlage",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Tore & Zugangstechnik > Video-Türsprechanlage",
+      "article_categories": [
+        {
+          "name": "Bild & Ton",
+          "capacity_signals": [
+            "Kamera",
+            "Mikrofon",
+            "Übertragung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Türöffner & Zutritt",
+          "capacity_signals": [
+            "Relais",
+            "Ansteuerung",
+            "Fernfreigabe"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Netz & Störungen",
+          "capacity_signals": [
+            "WLAN",
+            "Stromversorgung",
+            "App"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Tore & Zugangstechnik",
+      "area_source": "PROPOSED_AREA_FROM_V9",
+      "topic_page": "Schiebetorantrieb",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Tore & Zugangstechnik > Schiebetorantrieb",
+      "article_categories": [
+        {
+          "name": "Mechanik & Laufweg",
+          "capacity_signals": [
+            "Schiene",
+            "Rollwiderstand",
+            "Hindernis"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Steuerung & Sensoren",
+          "capacity_signals": [
+            "Endschalter",
+            "Fernbedienung",
+            "Sicherheitskontakt"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Ausfall & Notbetrieb",
+          "capacity_signals": [
+            "Manuelle Entriegelung",
+            "Stromausfall",
+            "Ersatzteile"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Akku & Elektrik",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Heimspeicher-Brandschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Feuer & Gase > Akku & Elektrik > Heimspeicher-Brandschutz",
+      "article_categories": [
+        {
+          "name": "Aufstellort & Abstände",
+          "capacity_signals": [
+            "Raumklima",
+            "Brandlast",
+            "Montageort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Warnung & Überwachung",
+          "capacity_signals": [
+            "Statusmeldung",
+            "Temperatur",
+            "Fehlersignale"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schaden & Fachprüfung",
+          "capacity_signals": [
+            "Beschädigung",
+            "Abschalten",
+            "Wiederbetrieb"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Dusche undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Dusche undicht",
+      "article_categories": [
+        {
+          "name": "Dichtung & Fugen",
+          "capacity_signals": [
+            "Wandanschluss",
+            "Ablauf",
+            "Duschwanne"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Feuchteschaden erkennen",
+          "capacity_signals": [
+            "Wand",
+            "Kellerdecke",
+            "Boden"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Kosten",
+          "capacity_signals": [
+            "Abdichtung",
+            "Fachhandwerk",
+            "Schadenmeldung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Dusche undicht"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Leckage & Rohrbruch",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Spülkasten undicht",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wasser & Feuchtigkeit > Leckage & Rohrbruch > Spülkasten undicht",
+      "article_categories": [
+        {
+          "name": "Undichtigkeit erkennen",
+          "capacity_signals": [
+            "Nachlaufen",
+            "Wasserstand",
+            "Dichtung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Bauteile & Wartung",
+          "capacity_signals": [
+            "Schwimmerventil",
+            "Spülventil",
+            "Reinigung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Ersatz",
+          "capacity_signals": [
+            "Ersatzteil",
+            "Unterputz",
+            "Handwerker"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Spülkasten undicht"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Pumpen & Haustechnik",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Poolfilterpumpe",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Technik & Ausfälle > Pumpen & Haustechnik > Poolfilterpumpe",
+      "article_categories": [
+        {
+          "name": "Förderung & Filterdruck",
+          "capacity_signals": [
+            "Filtermedium",
+            "Umwälzung",
+            "Manometer"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Betriebsstörungen",
+          "capacity_signals": [
+            "Luft",
+            "Verstopfung",
+            "Motor"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & Winterlager",
+          "capacity_signals": [
+            "Reinigung",
+            "Frostschutz",
+            "Ersatz"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Frost & Schnee",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Gewächshaus bei Frost",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Frost & Schnee > Gewächshaus bei Frost",
+      "article_categories": [
+        {
+          "name": "Temperatur überwachen",
+          "capacity_signals": [
+            "Messpunkt",
+            "Warnung",
+            "Nachtminimum"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Frostschutz im Gewächshaus",
+          "capacity_signals": [
+            "Heizung",
+            "Vlies",
+            "Lüftung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Pflanzen & Schäden",
+          "capacity_signals": [
+            "Empfindlichkeit",
+            "Frühbeet",
+            "Regeneration"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Gewächshaus bei Frost"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Tür- und Fensterglas bei Vandalismus",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Vandalismus & Zerstörung > Gebäude & Ausstattung > Tür- und Fensterglas bei Vandalismus",
+      "article_categories": [
+        {
+          "name": "Glasbruchschutz",
+          "capacity_signals": [
+            "Folien",
+            "Verglasung",
+            "Einbau"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schäden dokumentieren",
+          "capacity_signals": [
+            "Spuren",
+            "Fotos",
+            "Anzeige"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Reparatur & Vorsorge",
+          "capacity_signals": [
+            "Notverglasung",
+            "Schutzbeschläge",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "E-Scooter-Diebstahlschutz",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Einbruch & Diebstahl > Freizeit & Fahrzeuge > E-Scooter-Diebstahlschutz",
+      "article_categories": [
+        {
+          "name": "Schloss & Befestigung",
+          "capacity_signals": [
+            "Anschlusspunkt",
+            "Schlosstyp",
+            "Standort"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Aufbewahrung & Tracking",
+          "capacity_signals": [
+            "Akku",
+            "Innenraum",
+            "Ortung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Diebstahlfall",
+          "capacity_signals": [
+            "Kennzeichen",
+            "Nachweise",
+            "Versicherung"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": false,
+      "source_label_matches": [],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "area_source": "EXISTING_31_AREA",
+      "topic_page": "Tiefgarage bei Starkregen",
+      "proposal_role": "CONCRETE_PAGE3",
+      "topic_owner_scope": "Wetter & Naturgefahren > Starkregen & Hochwasser > Tiefgarage bei Starkregen",
+      "article_categories": [
+        {
+          "name": "Zufahrtschutz",
+          "capacity_signals": [
+            "Schwelle",
+            "Sperre",
+            "Entwässerungsrinne"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wasserwege & Pumpen",
+          "capacity_signals": [
+            "Gefälle",
+            "Rückstau",
+            "Hebeanlage"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Notfall & Schaden",
+          "capacity_signals": [
+            "Warnzeit",
+            "Fahrzeuge",
+            "Stromsicherheit"
+          ],
+          "capacity_min": 3
+        }
+      ],
+      "exact_label_already_in_source": true,
+      "source_label_matches": [
+        "Tiefgarage bei Starkregen"
+      ],
+      "seo_status": "NAME_NOT_PROVIDER_VERIFIED",
+      "wordpress_status": "DO_NOT_WRITE__LIVE_REVISION_UNKNOWN",
+      "qa_level": "EDITORIAL_CURATED_DRAFT_NOT_RELEASED"
+    }
+  ],
+  "next_action": "Integrate against all existing 93/285 and 127 V9 candidate intents, resolve owner/name collisions and build non-destructive delta only after fresh WordPress readback."
+}
