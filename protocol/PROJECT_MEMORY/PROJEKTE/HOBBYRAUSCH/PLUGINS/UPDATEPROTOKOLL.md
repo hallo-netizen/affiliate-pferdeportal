@@ -2812,3 +2812,74 @@ FACH-CURRENT:
 
 PLUGIN-CURRENT:
 `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+
+## PU-20261016-063 – HD-003 / HRD-SCOPE13 gezielte Bildreparatur
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+PLUGIN:
+Affiliate Portal Template Kit – Hobby Depot Profil.
+
+ART:
+Eigenentwicklung / gezielter Bildreparaturkandidat auf eingefrorener 1.50.650-Basis.
+
+FACHBÜRO:
+`DESIGN`
+
+VON / AUF:
+30er-Neubildbasis auf 1.50.650 → HRD-SCOPE13-Reparaturkandidat auf derselben 1.50.650-Runtime.
+
+WARUM:
+Der Nutzer meldete exakt 13 Kategorien mit verschlechterten/falschen Bildern und ordnete eine harte Sperre an: ausschließlich diese 13 reparieren; alle anderen Kategorien nicht anfassen. Bei mehreren Kategorien war ausdrücklich der frühere Bildstand besser.
+
+ÄNDERUNG:
+- ausschließlich 13 Kategorien repariert;
+- vor Neugenerierung ältere Bildstände geprüft;
+- keine neue Bildgeneration notwendig;
+- 7 frühere gute Vollquellen wiederhergestellt;
+- 2 Kategorien auf bessere 1.50.625-Bilder zurückgesetzt;
+- 4 Kategorien auf bessere WIP-1.50.653-Bilder zurückgesetzt;
+- Hero und Preview je Kategorie gemeinsam ersetzt;
+- keine Collage als Releasequelle.
+
+NICHT GEÄNDERT:
+- sämtliche anderen Kategorien;
+- Mapping;
+- PHP;
+- CSS;
+- Templates;
+- Routing;
+- Kartenlogik;
+- Architektur.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_HRD_SCOPE13_REPAIR_LOCALPASS.zip`
+
+SHA-256:
+`d32805e2747f9df25e722efc7242f4df820bd273f19db2e2b8b97e5b249e1bf4`
+
+POSITIVTEST:
+- exakt 26 Bilddateien geändert = 13 Heroes + 13 Previews;
+- 0 Dateien hinzugefügt;
+- 0 Dateien entfernt;
+- alle übrigen Dateien byte-identisch;
+- Mapping byte-identisch;
+- 55/55 PHP byte-identisch;
+- 55/55 PHP-Syntax PASS;
+- ZIP-Roundtrip PASS.
+
+NEGATIV-/REGRESSION:
+- Hard Scope gegen alle Nicht-13-Kategorien geprüft: keine Änderung;
+- Collage-/falsche Ersatzquelle nicht verwendet;
+- 30er-Neubildbasis außerhalb Scope13 unverändert erhalten.
+
+LIVE-GRENZE:
+Noch kein Live-PASS. Nächster Live-Schritt ausschließlich Readback der 13 HRD-Kategorien.
+
+ISOLIERTES ARTEFAKT:
+`ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist noch nicht synchronisiert. Vor formaler Artefaktfreigabe exakt diesen Kandidaten synchronisieren und SHA/ZIP prüfen.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
