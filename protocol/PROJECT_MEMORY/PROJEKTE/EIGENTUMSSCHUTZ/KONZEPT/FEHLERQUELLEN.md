@@ -1,5 +1,14 @@
 ## HB-ERR-20261016-V918 – Dreierdeckel und SEO-Volumen NICHT wieder einführen
 - **Ursache:** Der R3-Code und die alte V9-Planung erzwangen künstlich Dreiergruppen, obwohl seit 15.10.2026 **mindestens drei und keine Obergrenze** verbindlich ist. Formale 3-von-3-Prüfungen sind KEINE vollständige Sachthemenprüfung.
+
+## 16.10.2026 – V9.20/V9.21 ARTIKELINTENT-QUALITÄT / ALTOWNER
+- **Nachgewiesener Altartikelkonflikt:** Originales R2-Blatt `Garagenzufahrt & Hofabläufe` besitzt bereits den Artikel `Tiefgaragenzufahrt an einem Wohnhaus gegen Starkregen schützen`. Der in V9.17/V9.18 geplante Beitrag `Tiefgaragenzufahrt bei Starkregen gegen Wasserzufluss sichern` bediente dieselbe Suchintention. Entwurfsbeitrag in beiden Quelldateien ersetzt, alter Artikel/WordPress unverändert.
+- **Zwei weitere Textwiederholungen innerhalb der NEUEN Entwürfe** bei Boiler-Temperatur/Thermostat und Video-Sprechanlage Bildausfall/Nachtsicht korrigiert. Explizite inhaltliche Begründung in `V9_20_46_ENDBLAETTER_ARTIKELQUALITAET_R2_ABGRENZUNG_20261016.json`.
+- **Warnung gegen Dreierzahl-Schein-PASS:** Drei neue Tor-/Funkkategorien haben 4 Titel, aber teilweise denselben Fehlersuchintent; deshalb **EDITORIAL_DEPTH_HOLD**, keine Freigabe nur anhand der Artikelanzahl. Insgesamt 12 manuell gekennzeichnete Problem-/Grenzfälle unter 46 Vorschlagsblättern.
+- **Aliasse:** `V9_21_46_KURZE_MENUEALIASE_OHNE_WP_UMBENENNUNG_20261016.json` bietet 46 eindeutige kurze UI-Bezeichnungen, die NICHT als durch echten DataForSEO-Task gemessene Keywordnamen gelten. Lange H1 erlaubt; kein blindes Live-Rename oder neues Plugin.
+- **Nischen-Schutz:** Auch bei DataForSEO 0/null/kein Treffer niemals allein wegen Nachfrage gering löschen, umhängen oder abwerten. Min3 sinnvoll, keine Obergrenze, inhaltlicher Scope vor Keyword-Zählung.
+- **Autorität/Next Action:** ausschließlich `KONZEPT/CURRENT_STATE.md`, technischer Schreibweg ausschließlich `KATEGORIEN/CURRENT_STATE.md`.
+
 - **Nachprüfung heute:** Echter Originaldatenbestand vollständig nach 31/31 Bereichen, 93/93 bestehenden Unterbereichen und 285/285 vorhandenen Blättern einzeln inventarisiert; noch KEIN vollständiger semantischer PASS aller 1136 historischen Artikel.
 - **Konkret ergänzte Themen:** V9.10 6 Blätter/30 Ideen; V9.12 21/105; V9.13 16/64; V9.17 3/15. Im zentralen Büro als **ein einziges Entwurfsdelta V9.18: 46 Blätter/214 Artikelideen** gesichert, 11 sinnvolle neue Unterbereiche und ein eigener Bereich Tore & Zugangstechnik; alle alten IDs/Namen/URLs unverändert.
 - **DataForSEO richtig verwenden:** Aus dem echten Germany/de-Export 570 angefragte Wörter, 51 Treffer nur zur Benennung/Suchintentionshilfe. V9.15 dokumentiert 21 mögliche kurze Anzeige-Aliasse mit jeweils wörtlich genanntem Referenzkeyword (ggf. nur inhaltlich verwandt). 519 Null-/Kein-Treffer sind niemals Kategorie-Verwerfungsgrund.
