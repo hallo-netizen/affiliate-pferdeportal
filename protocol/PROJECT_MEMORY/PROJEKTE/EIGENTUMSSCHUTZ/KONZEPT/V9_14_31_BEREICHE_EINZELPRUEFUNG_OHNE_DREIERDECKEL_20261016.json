@@ -1,0 +1,395 @@
+{
+  "schema": "HB-V9.14-31-AREA-COVERAGE-PASS-BY-AREA",
+  "date": "2026-10-16",
+  "status": "ALL_31_AREA_LEVELS_REVIEWED_BUT_NOT_FULL_SEMANTIC_1136_ARTICLE_PASS",
+  "contract": "At least three meaningful direct child categories, unlimited max. Clear real-world ownership and 3+ different article intents per end leaf. Search volume never disqualifies.",
+  "qa": {
+    "exact_31_original_areas": true,
+    "six_worlds": true,
+    "count_distribution": true,
+    "all_area_ids_unique": true,
+    "all_assessments_substantial": true,
+    "all_old_ids_protected": true,
+    "unlimited_subcategories": true,
+    "no_volume_filter": true
+  },
+  "worldCounts": {
+    "Einbruch & Diebstahl": 6,
+    "Feuer & Gase": 5,
+    "Technik & Ausfälle": 5,
+    "Vandalismus & Zerstörung": 5,
+    "Wasser & Feuchtigkeit": 5,
+    "Wetter & Naturgefahren": 5
+  },
+  "areas": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Abwesenheit & Leerstand",
+      "existing_core_area_id": "core:area:ae6cfd9f4fba",
+      "assessment": "Besitzschutz bei Leerstand, Schlüsselübergabe, Kontrollen und Anwesenheit abgedeckt; Fernüberwachung besitzt separaten Technik-Owner.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Freizeit & Fahrzeuge",
+      "existing_core_area_id": "core:area:19b467511ad1",
+      "assessment": "V99 Fahrzeugteile, Hagel nicht hier sondern Wetter, E-Scooter. Camping-Zubehör als möglicher Einzel-Owner offen.",
+      "new_subarea_candidates_in_record": [
+        "Fahrzeugteile & Zubehördiebstahl"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Garagen & Nebenräume",
+      "existing_core_area_id": "core:area:dfec0af81251",
+      "assessment": "Abstellräume, Werkzeuge, Carports und Keller abgedeckt; Torantrieb-Störung gehört zur neuen Technik-Prüfung.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Garten & Grundstück",
+      "existing_core_area_id": "core:area:ba7182312835",
+      "assessment": "Gartenhäuser, Geräte, Tor- und Wegschutz sowie Paketdiebstahl vorhanden; keine bloße Umformulierung als neue Kategorie.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Haus & Wohnung",
+      "existing_core_area_id": "core:area:6f5aebe4e92b",
+      "assessment": "Fenster, Tür, Tresor und Kamera vorhanden; Einzelfragen zu Beschlägen nur bei eigenständiger Suchintention statt Dublette.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "existing_area_name": "Kleine Betriebe & Vereine",
+      "existing_core_area_id": "core:area:d71aef44a98c",
+      "assessment": "Hofläden und SB-Verkaufsstände in V9.13 ergänzt, von generischen Ladenschließzeiten und Geldkassen abgegrenzt.",
+      "new_subarea_candidates_in_record": [
+        "Hofläden & Selbstbedienung"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Feuer & Gase",
+      "existing_area_name": "Akku & Elektrik",
+      "existing_core_area_id": "core:area:e3d4d2f00002",
+      "assessment": "PV-Leitungen, Wechselrichter, Speicher und Wallbox auf eigenständige Brandgefahren statt Betriebsstörungen geprüft.",
+      "new_subarea_candidates_in_record": [
+        "PV & Ladetechnik"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Feuer & Gase",
+      "existing_area_name": "CO & Gas",
+      "existing_core_area_id": "core:area:cfb8431a47d0",
+      "assessment": "Gasleitungen, CO-Warnung und Luftversorgung vorhanden; Flüssiggas bei kleinen Privatobjekten als ungeprüfter Folgekandidat.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "existing_area_name": "Camping",
+      "existing_core_area_id": "core:area:236d4048ce84",
+      "assessment": "Gas, Akkus, Notausstiege beim Camper vorhanden; Freizeitboot-Brandthemen in V99 innerhalb Rauch & Brand.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "existing_area_name": "Kleine Betriebe & Vereine",
+      "existing_core_area_id": "core:area:bcad8185d370",
+      "assessment": "Spezifische Brandlasten im Friseursalon noch nicht einzeln im R3-Plan abgedeckt; als zusätzliche Leafoption prüfen.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Feuer & Gase",
+      "existing_area_name": "Rauch & Brand",
+      "existing_core_area_id": "core:area:a61eee15af3b",
+      "assessment": "V99 Brandschadensanierung, Brandüberschlag, Privatfahrzeuge und Boote; technischer Name äußere Brandeinwirkung redaktionell ungeeignet.",
+      "new_subarea_candidates_in_record": [
+        "Baulicher Brandschutz im Wohnbestand",
+        "Brände an Privatfahrzeugen & Freizeitbooten",
+        "Brandschäden & Wiederherstellung",
+        "Äußere Brandeinwirkung auf Privatobjekte"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "existing_area_name": "Alarm & Smart Home",
+      "existing_core_area_id": "core:area:e6d091a0c088",
+      "assessment": "Alarmsysteme und Router, V99 Heimnetz; Motorstörungen von Toren gehören nicht erzwungen zu Smart Home.",
+      "new_subarea_candidates_in_record": [
+        "Heimnetz & lokale Kommunikation"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "existing_area_name": "Fernüberwachung",
+      "existing_core_area_id": "core:area:1c0afd6fe7ca",
+      "assessment": "Fernalarm und Überwachung kleiner Objekte vorhanden; doppelte Haus- oder Camper-Überwachung vermeiden.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "existing_area_name": "Heizung & Temperatur",
+      "existing_core_area_id": "core:area:f03faeefbce4",
+      "assessment": "Warmwasserspeicher, Durchlauferhitzer, Zirkulationspumpe und Fühler als getrennte technische Fehlerbilder in V9.12.",
+      "new_subarea_candidates_in_record": [
+        "Warmwasser & Boiler"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "existing_area_name": "Pumpen & Haustechnik",
+      "existing_core_area_id": "core:area:2252b23b56f6",
+      "assessment": "Alte Sumpfpumpen/Entwässerung, neu in V9.12 Brunnen-, Garten-, Poolfilter- und Teichpumpen.",
+      "new_subarea_candidates_in_record": [
+        "Garten-, Pool- & Teichpumpen"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "existing_area_name": "Strom & Notstrom",
+      "existing_core_area_id": "core:area:64303d0ddd32",
+      "assessment": "Stromfehler, USV, Notstrom und Wiederanlauf vorhanden; PV-Speicher-Störung in V99 unter eigenem PV-Bereich.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "existing_area_name": "Außentechnik",
+      "existing_core_area_id": "core:area:6110a347ffcf",
+      "assessment": "Solaranlage, Kamera, Wärmepumpe, Außenverteiler vorhanden; Brand und Defekt klar getrennt.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "existing_area_name": "Fassade & Außenflächen",
+      "existing_core_area_id": "core:area:5a96d921a2a1",
+      "assessment": "Graffiti, Putzschäden, Rollläden und Garteninventar vorhanden; keine künstlichen Kategorien nur nach Materialien.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "existing_area_name": "Freizeit & Vandalismus",
+      "existing_core_area_id": "core:area:ee3952240d8b",
+      "assessment": "Boote, Camper, Fahrzeuge, Spielanlagen und Gartenhaus durch bestehende Owners vertreten.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "existing_area_name": "Gebäude & Ausstattung",
+      "existing_core_area_id": "core:area:4611320db640",
+      "assessment": "V9.10 Wohnräume und innenliegende Versorgung ergänzt; bisheriges Nebenraum-Inventar/Sanitärräume fachlich unscharf.",
+      "new_subarea_candidates_in_record": [
+        "Private Wohnräume & Einbauten",
+        "Innenliegende Gebäudeversorgung"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "existing_area_name": "Vereine & Kleingewerbe",
+      "existing_core_area_id": "core:area:9c3a4ea26d92",
+      "assessment": "Kleine Läden und Vereinstechnik vorhanden; SB-Hofladen-Diebstahl nicht mit Vandalismus vermischen.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "existing_area_name": "Camping & Freizeitobjekte",
+      "existing_core_area_id": "core:area:7efc2329e1f6",
+      "assessment": "V99 Bootsfeuchte, private Pools, Leitungsleckagen und Teichfolien; Pumpendefekte besitzen Technik-Owner.",
+      "new_subarea_candidates_in_record": [
+        "Freizeitboote & Nässe",
+        "Gartenpools & Teichanlagen"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "existing_area_name": "Frost & Abwesenheit",
+      "existing_core_area_id": "core:area:d03822af4a84",
+      "assessment": "Leitungen, leerstehende Häuser, Brunnenpumpen und Außenhähne im Winter vorhanden.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "existing_area_name": "Keller & Rückstau",
+      "existing_core_area_id": "core:area:72f261fdd6ff",
+      "assessment": "Grundwasser, Rückstau, Pumpen und Feuchtesanierung vorhanden; Hausschwamm V99 redaktionell nachweisen.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "existing_area_name": "Kleine Betriebe & Vereine",
+      "existing_core_area_id": "core:area:25271bd55031",
+      "assessment": "Wasserlecks im Salon/Praxis, Betriebsfolgen und Warenbestand abgedeckt; Überflutung von außen gehört Wetter.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "existing_area_name": "Leckage & Rohrbruch",
+      "existing_core_area_id": "core:area:d0e7877ce32c",
+      "assessment": "V9.12 ergänzt fünf konkrete Schadensquellen in Bad und Küche, getrennt von generischen Leitungsleckagen.",
+      "new_subarea_candidates_in_record": [
+        "Bad & Küche"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "existing_area_name": "Blitz & Überspannung",
+      "existing_core_area_id": "core:area:a07232a95f20",
+      "assessment": "Gebäudeblitzschutz, Erdung, PV, Antennen und Datenleitungen abgedeckt; Schadenfolgen mit Technik-Owner abgrenzen.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "existing_area_name": "Freizeit & Unwetter",
+      "existing_core_area_id": "core:area:c7f34e6a2260",
+      "assessment": "V99 geparkte Autos; Camper, Boot, Dachbox, Anhänger im alten R3-Bestand.",
+      "new_subarea_candidates_in_record": [
+        "Geparkte Fahrzeuge bei Unwetter"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "existing_area_name": "Frost & Schnee",
+      "existing_core_area_id": "core:area:341ee911ae13",
+      "assessment": "V9.12 Frostschäden an Obstbäumen, Hecken, Kübelpflanzen und Gewächshäusern statt nur Schnee/Wege.",
+      "new_subarea_candidates_in_record": [
+        "Pflanzen & Gärten bei Frost"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "existing_area_name": "Starkregen & Hochwasser",
+      "existing_core_area_id": "core:area:75a0fdd055d2",
+      "assessment": "Hochwasser-Schutz für kleine Läden, Vereine, Tiefgaragen als weitere Longtail-Lücken prüfen.",
+      "new_subarea_candidates_in_record": [
+        "Hanggrundstücke & Erosion"
+      ],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "EXPANSION_UNDER_SEMANTIC_REVIEW"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "existing_area_name": "Sturm & Hagel",
+      "existing_core_area_id": "core:area:9a10ea2cb38a",
+      "assessment": "Sturm an Haus, PV, Gewächshaus, Garten und Warnung; Autohagel neu unter Freizeit & Unwetter.",
+      "new_subarea_candidates_in_record": [],
+      "category_cap_applied": false,
+      "existing_wp_names_ids_slugs_urls_frozen": true,
+      "status": "NO_NEW_VERIFIED_BRANCH_FROM_THIS_PASS_NOT_CLOSED"
+    }
+  ],
+  "external_new_v99_area_candidates": [
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "name": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "proposal_ref": "proposal:area:wasser-feuchtigkeit--dach-gebaeudehuelle-gegen-feuchtigkeit"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "name": "Hitze & Trockenheit",
+      "proposal_ref": "proposal:area:wetter-naturgefahren--hitze-trockenheit"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "name": "PV, Speicher & private Ladeinfrastruktur",
+      "proposal_ref": "proposal:area:technik-ausfaelle--pv-speicher-private-ladeinfrastruktur"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "name": "Tier- & Schädlingsschäden",
+      "proposal_ref": "proposal:area:wetter-naturgefahren--tier-schaedlingsschaeden"
+    }
+  ],
+  "notes": [
+    "All 31/93/285 categories preserved: no WordPress rename, move, delete or archive.",
+    "No area is declared permanently complete merely because no additional category candidate was admitted.",
+    "Already drafted 2 subareas/6 leaves V9.10 vandalism, 5 subareas/21 leaves V9.12, new technical area 3 subareas/12 leaves plus 1 Hofladen subarea/4 leaves V9.13.",
+    "The Germany/de DataForSEO 51/570 returned entries aid naming only, not completeness or deletion."
+  ]
+}
