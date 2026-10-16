@@ -18,3 +18,23 @@ Prüfung:
 - Wiederherstellung jederzeit aus lokalem Backup oder Archiv-Snapshot möglich.
 
 Ziel: aktive Oberfläche verkleinern, historische Suchtreffer reduzieren, keine Produktionsänderung.
+
+
+## Phase 3 – aktive Oberfläche weiter bereinigt
+
+Zusätzlich aus aktivem main entfernt und ausschließlich über Archiv-Snapshots/Backup erhalten:
+- 5 unreferenzierte historische Protokoll-/Governance-Dateien;
+- kompletter Ordner `isolated_system4a/` (nur historische Nachweise, keine aktive Referenz);
+- kompletter Ordner `recovery/current16-input/` (16 historische Recovery-Artikel, keine aktive Referenz);
+- kompletter `control/startmaster0103/`-Stand (keine aktive Pfadreferenz).
+
+Bewusst NICHT entfernt:
+- `isolated_system4/`, weil aktuelle Required-Check-/Hardlock-Regeln diesen Pfad noch explizit schützen;
+- `control/startmaster0104/` bis `0106/`, weil der aktive Hardlock-Workflow sie noch referenziert;
+- K8-Dateien und die zwei noch von `control/startmaster0107/CURRENT_STATE.json` referenzierten K7/REAL7-Protokolle;
+- aktuelle K0-, Affiliate-, Release-, Workflow- und Pluginquellen.
+
+Sicherungsanker:
+- lokales Nutzerbackup vor Bereinigung;
+- `archive/campus-pre-cleanup-20261016`;
+- `archive/campus-main-pre-phase3-20261016`.
