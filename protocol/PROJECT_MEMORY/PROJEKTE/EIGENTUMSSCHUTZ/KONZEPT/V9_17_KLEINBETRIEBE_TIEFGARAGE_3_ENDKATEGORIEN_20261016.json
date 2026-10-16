@@ -1,0 +1,61 @@
+{
+  "schema": "HB-V9.17-EXISTING-SUBAREA-LEAF-GAPS",
+  "date": "2026-10-16",
+  "status": "PROPOSED_NO_LIVE_WRITE",
+  "rule": "Adding one relevant leaf to an existing intermediate category is permitted; >=3 total existing direct children, no maximum; 3+ article ideas for new leaf.",
+  "leaves": [
+    {
+      "world": "Feuer & Gase",
+      "area": "Kleine Betriebe & Vereine",
+      "parent_subarea": "Brandlasten & Betriebsstrom",
+      "parent_ref": "core:subarea:r3-54c58b2291237b64",
+      "leaf": "Brandschutz im Friseursalon",
+      "ideas": [
+        "Haarspraydosen und Aerosole im privaten Salon brandsicher lagern",
+        "Föhn und Glätteisen nach Ladenschluss gegen Hitzestau sichern",
+        "Überlastete Steckdosen an Friseurarbeitsplätzen fachlich prüfen",
+        "Brennbare Handtücher und Kosmetikprodukte sicher von Wärmequellen trennen",
+        "Brandschutz im kleinen Friseursalon vor Umbau mit Fachbetrieb prüfen"
+      ]
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "parent_subarea": "Hochwasserschutz & Folgen",
+      "parent_ref": "core:subarea:927eb3aa17e7e630",
+      "leaf": "Läden & Salons bei Hochwasser",
+      "ideas": [
+        "Ladenfront und Eingang bei Starkregen vor Wassereintritt schützen",
+        "Mobile Hochwassersperren für kleine ebenerdige Geschäfte vergleichen",
+        "Warenbestände in privaten Ladenlokalen bei Hochwasser schützen",
+        "Elektrogeräte im Friseursalon nach Überflutung fachlich prüfen lassen",
+        "Hochwasserschäden im kleinen Laden für die Versicherung dokumentieren"
+      ]
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "parent_subarea": "Haus & Kellerschutz",
+      "parent_ref": "core:subarea:28d8087df57279b8",
+      "leaf": "Tiefgarage bei Starkregen",
+      "ideas": [
+        "Tiefgaragenzufahrt bei Starkregen gegen Wasserzufluss sichern",
+        "Tiefgarage läuft nach Gewitter voll: Risiken vor dem Betreten beachten",
+        "Überflutete Tiefgarage: Elektroinstallation nur durch Fachkräfte freigeben lassen",
+        "Ablaufrinnen und Pumpen an kleinen Privat-Tiefgaragen warten lassen",
+        "Tiefgaragenwände nach Überflutung auf Feuchteschäden überprüfen lassen"
+      ]
+    }
+  ],
+  "checks": {
+    "three_single_leaves": true,
+    "existing_subarea_parent_refs": true,
+    "old_names_not_overwritten": true,
+    "exact_title_no_overlap": true,
+    "at_least_three_real_ideas": true,
+    "all_titles_unique": true,
+    "only_new_leaves": true
+  },
+  "warning": "Some proposed titles touch existing insurance/general overflow topics; exact article ownership must be proven with original R2/R3 text before adding any leaf.",
+  "search_volume_policy": "No SEO-volume minimum and no absent-result deletion."
+}
