@@ -8,7 +8,7 @@ STATUS: **1.50.650 GRUNDSTAND / HRD-SCOPE13 REPAIR LOCALPASS / NUR 13 KATEGORIEN
 ## Aktiver Grundstand
 Affiliate Portal Template Kit **1.50.650**.
 
-## Freigegebener Image-only-Kandidat
+## 30er-Neubild-Basis – erhalten, aber durch HRD-SCOPE13-Kandidat überlagert
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.650_HOBBY_DEPOT_NEW_IMAGES_30_VISUALPASS.zip`
 
 SHA-256:
@@ -40,10 +40,6 @@ Nachweis:
 
 ## Verworfen
 1.50.660–1.50.663 nicht verwenden.
-
-## EXAKT EINE NEXT ACTION
-**Diesen Image-only-Kandidaten auf dem eingefrorenen 1.50.650-Stand installieren; danach Live-Readback der 30 betroffenen Kategorien.**
-
 
 ## HRD Scope13 Repair
 Kandidat:
@@ -79,5 +75,8 @@ QA:
 Nachweis:
 `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HRD_SCOPE13_IMAGE_REPAIR_20261016.md`
 
-## EXAKT EINE NEXT ACTION – HRD
-**Diesen Kandidaten installieren und anschließend ausschließlich die 13 HRD-Kategorien live prüfen.**
+## Isoliertes Campus-Artefakt
+Das geforderte `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist im Campus weiterhin nicht vorhanden. Es darf nicht erfunden oder aus einem veralteten Stand abgeleitet werden. Vor formaler Plugin-Artefaktfreigabe muss exakt der HRD-SCOPE13-Kandidat als CURRENT.zip synchronisiert und gegen SHA-256/ZIP-Struktur geprüft werden.
+
+## EXAKT EINE NEXT ACTION
+**Zuerst exakt den HRD-SCOPE13-Kandidaten als isoliertes CURRENT.zip synchronisieren und verifizieren; danach diesen Kandidaten installieren und ausschließlich die 13 HRD-Kategorien live prüfen.**
