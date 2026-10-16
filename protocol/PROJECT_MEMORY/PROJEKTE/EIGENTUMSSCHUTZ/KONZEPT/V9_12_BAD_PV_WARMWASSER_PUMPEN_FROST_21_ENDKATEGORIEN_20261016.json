@@ -151,7 +151,7 @@
             "Warmwasserspeicher heizt nicht mehr: Regler oder Heizsystem unterscheiden",
             "Zu wenig Warmwasser aus dem Boiler: Dimensionierung und Defekt trennen",
             "Temperaturbegrenzung am Warmwasserspeicher fachlich überprüfen",
-            "Defekte Speicherthermostate an Fachbetrieb melden",
+            "Ungewöhnliche Boilergeräusche: Verkalkung und technische Defekte unterscheiden lassen",
             "Warmwasserspeicher nach längerer Abschaltung fachgerecht wieder betreiben"
           ],
           "seo_boundary": "Boiler-Temperaturbetrieb, nicht Boiler-Leckagen/Wasserhygiene medizinisch."
@@ -310,5 +310,13 @@
     "zero_volume_never_excludes": true
   },
   "owner_protection": "Existing terms names IDs slugs assigned pages and URLs remain unchanged. New subareas and leaf candidates only, no implied relocation of historic R2/R3 article titles.",
-  "next_action": "Finish remaining 31-area topic coverage check, compare to V9.10 vandalism proposals and remaining old idea corpus, then request targeted DataForSEO keyword alternatives for names ONLY with explicit cost consent."
+  "next_action": "Finish remaining 31-area topic coverage check, compare to V9.10 vandalism proposals and remaining old idea corpus, then request targeted DataForSEO keyword alternatives for names ONLY with explicit cost consent.",
+  "v9_20_editorial_intent_repairs": [
+    {
+      "leaf": "Warmwasserspeicher defekt",
+      "old": "Defekte Speicherthermostate an Fachbetrieb melden",
+      "replacement": "Ungewöhnliche Boilergeräusche: Verkalkung und technische Defekte unterscheiden lassen",
+      "rationale": "Third original article covers temperature controls; new article handles mechanical/noise/calcium differential"
+    }
+  ]
 }
