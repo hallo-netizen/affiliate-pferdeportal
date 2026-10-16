@@ -99,5 +99,39 @@ Nachweis:
 ## HRD HARD RULE
 **Nur die 13 Kategorien aus HRD_SCOPE13_IMAGE_REPAIR_20261016.md dürfen bei dieser Reparatur geändert werden. Alle anderen Kategorien FINGER WEG.**
 
+## Reparaturkandidat 1.50.664 – Menü / Hauptweltkopf / Hero→Preview
+Auf Basis des belastbaren 1.50.650-HRD-SCOPE13-Standes wurde ein eng begrenzter neuer Kandidat gebaut:
+
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
+
+SHA-256:
+`73dfdc40792b1d550aaff6343aab9e9a4ca713988e0aa0c1957825b42ed4e2f9`
+
+Geändert:
+- Mega-Menü: gemeinsame sichtbare Zahl aus kleinstem Direktbestand; aktuell 5; größere Welten danach `Mehr Kategorien`; genau eine zusätzliche Orientierungsebene kompakt sichtbar;
+- Hauptwelt-Hero/Textkopf: Desktop Text/Bild nebeneinander; <=1100 px sauber gestapelt; Mobil kompakt;
+- 65/65 Kategorievorschauen neu direkt aus dem jeweils aktuellen Hub2-Hero abgeleitet.
+
+Nicht geändert:
+- Kategorienstruktur;
+- Hero-Bilder selbst;
+- Hub2-Bildmapping;
+- redaktionelle Texte;
+- Affiliate-/Routing-/Kartenlogik außerhalb dieses Darstellungsdeltas.
+
+Local QA:
+- Ausgang 981 Dateien → Kandidat 984 Dateien;
+- 65 Preview-WEBP geändert;
+- 0 Hero-WEBP geändert;
+- Hauptplugin-Datei geändert;
+- 3 neue versionsgebundene PHP-Dateien;
+- PHP-Syntax 58/58 PASS;
+- 65/65 Previews exakt 200×107;
+- Hero→Preview Bildkorrelation min. 0,988 / Ø 0,996;
+- Mega-Menü Desktop/Tablet: 8/8 gleiche Grundhöhe mit 5 sichtbaren Gruppen;
+- ZIP-Integrität und Roundtrip PASS.
+
+Kein Live-PASS.
+
 ## EXAKT EINE NEXT ACTION
-**Den HRD-SCOPE13-Kandidaten installieren und danach Live-Readback ausschließlich der 13 reparierten Kategorien durchführen. Nur bei einem konkret sichtbaren Restfehler genau diese eine betroffene Kategorie ändern; alle übrigen Kategorien bleiben gesperrt.**
+**Kandidaten 1.50.664 installieren und live genau diese drei Punkte prüfen: Mega-Menü, Hauptwelt-Hero/Textkopf über Desktop/Tablet/Mobil sowie Hero→Kategorievorschau. Danach nächste Designebene festlegen.**
