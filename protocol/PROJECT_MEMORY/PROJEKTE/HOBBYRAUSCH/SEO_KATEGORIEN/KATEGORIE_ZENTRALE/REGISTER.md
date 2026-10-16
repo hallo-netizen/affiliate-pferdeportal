@@ -1,9 +1,9 @@
 # HOBBY DEPOT – ZENTRALES KATEGORIE-REGISTER
 
-STAND: 2026-10-16  
+STAND: 2026-10-16
 ROLLE: Datenbindung / KEINE zweite Current-Wahrheit.
 
-## Aktive Live-Baseline
+## Aktive Live-Baseline – unverändert
 
 Revision:
 `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
@@ -17,15 +17,15 @@ Finaler Zielprofil-Export:
 Zielprofil SHA-256:
 `28647e48efc1bb22c4e9d8cc4c0be204cd2a30c24681c2257afad67d11f6226e`
 
-Wiederherstellbares HD-001-Release:
+Wiederherstellbares HD-001-Live-Release:
 `/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.8_RULE27_FINAL_VERIFIED_E2E_20261009.zip`
 
-HD-001 SHA-256:
+SHA-256:
 `709134631895a901bcb4fc5f5d71889d317954d9928c0ed20700883990a5a52c`
 
-## Aktiver WIP-Audit-Kandidat – NOCH NICHT LIVE
+## V3-Strukturkandidat – zentral / NOCH NICHT LIVE
 
-Zentral abgelegt:
+Zielprofil:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
 
 SHA-256:
@@ -34,82 +34,81 @@ SHA-256:
 Voll-Audit:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
 
-Status:
-- Live-Baseline bleibt unverändert;
-- 8 Hauptwelten unverändert;
-- 370 terminale Hobbyseiten im Kandidaten;
+Strukturdelta:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V3_20261016.json`
+
+Echter HD-001-Synthetic-Dry-Run:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_HD001_SYNTHETIC_DRYRUN_V3_20261016.json`
+
+HD-001-Updatekandidat:
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
+
+HD-001 1.14.9 ZIP SHA-256:
+`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
+
+## V3-Audit-Ergebnis
+
+- 8/8 Hauptwelten unverändert;
+- 2656 logische Knoten im Rohprofil;
+- 370 terminale Hobbyseiten;
 - 2160 unterste CORE-Inhaltskategorien;
 - jede terminale Hobbyseite hat 5–8 Inhaltskategorien;
 - keine unterste Inhaltskategorie hat weitere Kategorie-Kinder;
-- grobe 3–5+-Beitragspotenzialprüfung: 2160/2160 PASS;
+- 2160/2160 unterste Inhaltskategorien grob auf mindestens 3–5 vertiefende Beitragsthemen geprüft: PASS;
 - 0 doppelte Node-IDs;
 - 0 doppelte Slugs;
 - 0 fehlende Parents;
+- 0 sibling-name-Dubletten;
 - HD-001-TargetTree-Validator: PASS, 0 Errors, 0 Warnings.
 
-Wichtige Strukturkorrekturen/Erweiterungen:
+Wichtige Änderungen:
 - Forschen → Spotting & Verkehr;
 - Forschen → Citizen Science;
 - Forschen → Natur bestimmen;
-- Plane Spotting aus Messen & Analysieren nach Spotting & Verkehr verschoben;
+- Plane Spotting aus Messen & Analysieren nach Spotting & Verkehr;
 - Sammeln → Suchen & Finden;
-- Sammeln → Naturfunde sinnvoll erweitert;
+- Sammeln → Naturfunde erweitert;
 - Fertigen → Modellbau;
-- Gestalten → Miniaturen & Szenen sinnvoll erweitert;
+- Gestalten → Miniaturen & Szenen erweitert;
 - Tiere → Wirbellose um Schneckenhaltung erweitert;
-- unterste Kategorie `Quilten` unter Hobby `Quilten` zu `Quiltmuster & Stichführung` präzisiert.
+- Quilten-Leaf präzisiert zu Quiltmuster & Stichführung.
 
-Harte Grenze:
-**Dieser WIP-Kandidat ist kein Live-PASS und darf die aktive Baseline erst nach HD-001 Delta/Dry-Run/Regression/Readback ersetzen.**
+## HD-001-Delta / Synthetic-Dry-Run
 
-## Zielbaum – aktive Live-Baseline
+Strukturell gegen Baseline:
+- ADD 285 = 45 Seiten + 240 Kategorien;
+- UPDATE 2 fachliche Strukturänderungen;
+- REMOVE 0.
 
-Profil:
-- 2371 Nodes gesamt;
-- 2366 aktive Nodes;
-- 2357 aktive physische Zielobjekte;
-- 9 aktive Relations.
+Mit echter HD-001-Dry-Run-Logik gegen synthetische vollständige Baseline:
+- PASS;
+- CREATE 282;
+- ADOPT 3;
+- UPDATE 2357;
+- ARCHIVE 0;
+- DEMOTE_EDITORIAL 0;
+- Provider/DataForSEO Calls 0;
+- WordPress-Strukturwrites 0.
 
-Aktive physische Typen:
-- 416 `page`;
-- 1920 `category`;
-- 13 `journal_cat`;
-- 8 `hp_listing_category`.
+ADOPT-Nachweis:
+- Trainspotting;
+- Modellraketen;
+- Pflanzenbestimmung.
 
-Live-Readback:
-- 2357/2357 geprüft;
-- Runner COMPLETE;
-- Fehler leer;
-- Frontend valid=true;
-- 8 Welten;
-- 330/330 terminale CORE-Seiten im Kategorie-Gate.
+Neue deterministische Zielrevision nach Inventory-Auflösung:
+`HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+16d1bd25b2adfc26`
 
-## Zentrale Runtime-Wahrheit in WordPress
+## Zentrale Runtime-Wahrheit
 
-Der produktive HD-001-Abschluss hat den kompletten aktiven Zielstand bereits in WordPress gespeichert:
+WordPress-Optionen:
+- `apkw_target_tree_active_revision_v1`
+- `apkw_target_tree_active_snapshot_v1`
 
-- Revision:
-  `apkw_target_tree_active_revision_v1`
-- Snapshot:
-  `apkw_target_tree_active_snapshot_v1`
+Andere Plugins lesen diese Wahrheit ausschließlich über HD-004:
+`HOBBY_DEPOT_CATEGORY_REGISTRY_RUNTIME_V1`
 
-Der Snapshot enthält:
-- Nodes mit stabiler `node_id`;
-- Pillar;
-- `object_type` / Taxonomie;
-- Name/Slug;
-- Parent-Zuordnung;
-- aktiven Status;
-- WordPress-Mapping `node_id → object_id/object_type/taxonomy`.
+Keine zweite Strukturwahrheit, keine Design-Sonderlisten, DataForSEO keine Strukturautorität.
 
-**Diese beiden Optionen bleiben auch bei Deaktivierung des schweren HD-001-Plugins bestehen.**
+## Harte Grenze
 
-Andere Plugins greifen NICHT direkt auf APKW-Klassen zu, sondern über den neutralen HD-004-Kategorie-Kern.
-
-## Taxonomie-Ownership
-
-- `category` → WordPress Core
-- `journal_cat` → HD-004 Kategorie-Kern im Normalbetrieb
-- `hp_listing_category` → HivePress
-
-HD-001 bleibt Bearbeitungs-/Synchronisationswerkzeug, nicht notwendiger Dauer-Frontenddienst.
+**Die Live-Baseline bleibt aktiv, bis HD-001 1.14.9 auf WordPress einen echten Live-Dry-Run PASS liefert. Erst danach darf exakt dieser Plan einmal synchronisiert und anschließend 100 % gelesen werden.**
