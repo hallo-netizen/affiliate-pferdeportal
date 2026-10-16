@@ -966,5 +966,37 @@
     "V9.13 technical door locks/systems versus existing burglary prevention and SmartHome offline functions.",
     "V9.17 Tiefgarage versus existing Garagenzufahrt & Hofabläufe (water ingress is not identical but traffic ownership must be checked)."
   ],
-  "remaining_priority": "Resolve specific semantic owner overlaps, then DataForSEO keyword candidates for unmeasured names by user-authorized existing provider (no implicit spending). Technical plugin changes only after editorial SEO approvals."
+  "remaining_priority": "Resolve specific semantic owner overlaps, then DataForSEO keyword candidates for unmeasured names by user-authorized existing provider (no implicit spending). Technical plugin changes only after editorial SEO approvals.",
+  "qa_positive_negative": {
+    "positive": true,
+    "negative_tests": [
+      {
+        "name": "Substantial independent articles below three",
+        "correctly_rejected": true
+      },
+      {
+        "name": "Leaf title duplicated",
+        "correctly_rejected": true
+      },
+      {
+        "name": "Duplicate article title",
+        "correctly_rejected": true
+      },
+      {
+        "name": "One subarea fewer than three direct leaf children",
+        "correctly_rejected": true
+      },
+      {
+        "name": "No volume would exclude categories",
+        "correctly_rejected": true
+      },
+      {
+        "name": "Illegal release without SEO gate",
+        "correctly_rejected": true
+      }
+    ],
+    "all_six_negative_rejected": true,
+    "thirteen_children_do_not_hit_maximum": true,
+    "limits": "Data consistency checks only; not PHP/WordPress simulation, do not misstate as live pass."
+  }
 }
