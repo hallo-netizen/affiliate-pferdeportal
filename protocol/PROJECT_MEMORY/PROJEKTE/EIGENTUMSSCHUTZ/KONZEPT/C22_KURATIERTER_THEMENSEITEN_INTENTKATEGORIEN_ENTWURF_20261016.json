@@ -59,7 +59,8 @@
     "flat_article_category_names_globally_unique": true,
     "rename_pass_20261016": "Review of 22 repeated category labels completed across all four C2.2 draft files; labels made topic-specific. Nothing written to WordPress.",
     "existing_wordpress_term_name_collision_fixed": true,
-    "collision_fix_note": "Previously reused existing WP article category Schlüssel & Zutritt from Haus & Wohnung; narrowed to Ferienhaus."
+    "collision_fix_note": "Previously reused existing WP article category Schlüssel & Zutritt from Haus & Wohnung; narrowed to Ferienhaus.",
+    "anti_fixed_three_category_template": "Variable Anzahl thematisch geeigneter Kategorieaspekte; no upper limit; later expansion by SEO engine possible."
   },
   "topics": [
     {
@@ -94,6 +95,15 @@
             "Benachrichtigung",
             "Fehlalarm",
             "Reaktion"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Dienstleister zur Objektkontrolle",
+          "capacity_signals": [
+            "Leistungsumfang",
+            "Übergabe",
+            "Nachweise"
           ],
           "capacity_min": 3
         }
@@ -138,6 +148,15 @@
             "Erstattung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Teile kennzeichnen",
+          "capacity_signals": [
+            "Markierung",
+            "Dokumentation",
+            "Nachverfolgung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -178,6 +197,15 @@
             "Tortypen",
             "Montagegrenzen",
             "Kontrollintervalle"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Garagentor nach Einbruch",
+          "capacity_signals": [
+            "Schadensbild",
+            "Notverschluss",
+            "Versicherung"
           ],
           "capacity_min": 3
         }
@@ -264,6 +292,24 @@
             "Sofortmaßnahmen"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Schließanlagen & Schlüsselorganisation",
+          "capacity_signals": [
+            "Schließplan",
+            "Schlüsselkopien",
+            "Mehrnutzer"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Mietwohnung & Zylinderwechsel",
+          "capacity_signals": [
+            "Vermieterfragen",
+            "Rückbau",
+            "Schlüsselübergabe"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -306,6 +352,15 @@
             "Alarmweitergabe"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Öffnungszeiten & Selbstbedienung",
+          "capacity_signals": [
+            "Verkaufsautomaten",
+            "Bezahlverfahren",
+            "Aufsicht"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -346,6 +401,15 @@
             "Temperatur",
             "Ladezustand",
             "Fachabgabe"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Brandschutz für Akku-Werkstätten",
+          "capacity_signals": [
+            "Arbeitsplatz",
+            "Beschädigung",
+            "Aufbewahrung"
           ],
           "capacity_min": 3
         }
@@ -432,6 +496,15 @@
             "Lüftung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Gasflaschen sicher transportieren",
+          "capacity_signals": [
+            "Flaschenlage",
+            "Schutzkappe",
+            "Absperrung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -472,6 +545,15 @@
             "Brandklassen",
             "Standorte",
             "Prüfung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Salonprodukte richtig lagern",
+          "capacity_signals": [
+            "Spraydosen",
+            "Chemikalien",
+            "Abstände"
           ],
           "capacity_min": 3
         }
@@ -516,6 +598,24 @@
             "Prüfknopf",
             "Staub",
             "Gerätelebensdauer"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Rauchmelder für Sonderräume",
+          "capacity_signals": [
+            "Feuchträume",
+            "Küche",
+            "Nebenräume"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Rauchmelder im Mehrfamilienhaus",
+          "capacity_signals": [
+            "Verantwortung",
+            "Alarmkette",
+            "Abstimmung"
           ],
           "capacity_min": 3
         }
@@ -644,6 +744,15 @@
             "Fachprüfung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Mieter und Vermieter im Störfall",
+          "capacity_signals": [
+            "Zuständigkeit",
+            "Notdienst",
+            "Schadenmeldung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": true,
@@ -688,6 +797,15 @@
             "Ersatzwahl"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Brunnenpumpe auswählen",
+          "capacity_signals": [
+            "Förderhöhe",
+            "Brunnentiefe",
+            "Strombedarf"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -728,6 +846,15 @@
             "Anschlussgrenzen",
             "Laufzeit",
             "Abgase"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Notstrom für Pflege und Alarm",
+          "capacity_signals": [
+            "Kommunikation",
+            "Medizingerät",
+            "Fernalarm"
           ],
           "capacity_min": 3
         }
@@ -812,6 +939,15 @@
             "Opferschicht",
             "Imprägnierung",
             "Schadenmeldung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Anzeige & Versicherungsfragen",
+          "capacity_signals": [
+            "Beweissicherung",
+            "Schadenskosten",
+            "Reinigungserlaubnis"
           ],
           "capacity_min": 3
         }
@@ -900,6 +1036,15 @@
             "Reparatur"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Notverschluss & Geschäftsbetrieb",
+          "capacity_signals": [
+            "Absperrung",
+            "Provisorium",
+            "Wiederöffnung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -942,6 +1087,15 @@
             "Instandsetzung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Vereinsorganisation",
+          "capacity_signals": [
+            "Zuständigkeit",
+            "Kontrollgänge",
+            "Dienstleister"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -982,6 +1136,15 @@
             "Reinigung",
             "Abdichten",
             "Kontrollabstände"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Dachluken & Aufbauten",
+          "capacity_signals": [
+            "Solarhalter",
+            "Sat-Durchführung",
+            "Dachlüfter"
           ],
           "capacity_min": 3
         }
@@ -1068,6 +1231,15 @@
             "Fachservice"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Rückstau bei Starkregen",
+          "capacity_signals": [
+            "Warnzeichen",
+            "Rückdrücken",
+            "Betrieb"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": true,
@@ -1152,6 +1324,15 @@
             "Batterien",
             "Sensorkontakte",
             "Fehlalarme"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Automatische Wasserabsperrung",
+          "capacity_signals": [
+            "Ventilantrieb",
+            "Leckreaktion",
+            "Fehlsteuerung"
           ],
           "capacity_min": 3
         }
@@ -1324,6 +1505,15 @@
             "Reinigung"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Kosten & Einsatzgrenzen",
+          "capacity_signals": [
+            "Anschaffung",
+            "Wartung",
+            "Überlastung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": true,
@@ -1368,6 +1558,15 @@
             "Wiederbetrieb"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Versicherung & Begutachtung",
+          "capacity_signals": [
+            "Fotobelege",
+            "Sachverständige",
+            "Deckung"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -1408,6 +1607,15 @@
             "Nachabdichten",
             "Ersatzteile",
             "Fachbetrieb"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Dachfenster auswählen",
+          "capacity_signals": [
+            "Dachneigung",
+            "Material",
+            "Dämmwert"
           ],
           "capacity_min": 3
         }
@@ -1452,6 +1660,15 @@
             "Materialwahl",
             "Reparaturumfang",
             "Fachfirma"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Dachterrassen & Nutzlast",
+          "capacity_signals": [
+            "Belagsaufbau",
+            "Anschlussbereiche",
+            "Entwässerung"
           ],
           "capacity_min": 3
         }
@@ -1708,6 +1925,15 @@
             "Fachbetrieb"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Speicher und Wechselrichter abstimmen",
+          "capacity_signals": [
+            "Kompatibilität",
+            "Schnittstelle",
+            "Einstellungen"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -1748,6 +1974,24 @@
             "Fehlermeldungen",
             "Software",
             "Elektrofachprüfung"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wallbox-Auswahl & Nachrüstung",
+          "capacity_signals": [
+            "Leistung",
+            "Stecker",
+            "Fahrzeugtyp"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Wartung & elektrische Sicherheit",
+          "capacity_signals": [
+            "Prüfung",
+            "Feuchte",
+            "Schutzschalter"
           ],
           "capacity_min": 3
         }
@@ -1792,6 +2036,15 @@
             "Kosten"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Recht & tierschonende Abwehr",
+          "capacity_signals": [
+            "Schonzeiten",
+            "Artenschutz",
+            "Fachbetrieb"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -1832,6 +2085,15 @@
             "Kabeltausch",
             "Schutzrohr",
             "Kontrollen"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Schädlingsschutz und Sicherheit",
+          "capacity_signals": [
+            "Zugangsstellen",
+            "Vergrämung",
+            "Fachbetrieb"
           ],
           "capacity_min": 3
         }
@@ -1920,6 +2182,15 @@
             "ungewolltes Öffnen"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Mehrnutzer und Zugriffsrechte",
+          "capacity_signals": [
+            "Handsenderverwaltung",
+            "Verlust",
+            "Sperren"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": true,
@@ -1964,6 +2235,15 @@
             "Verschleiß"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Antrieb auswählen & ersetzen",
+          "capacity_signals": [
+            "Torgewicht",
+            "Antriebstyp",
+            "Montage"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -2004,6 +2284,15 @@
             "WLAN",
             "Stromversorgung",
             "App"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Datenschutz & Speicherfunktionen",
+          "capacity_signals": [
+            "Aufnahme",
+            "Nachbarschaft",
+            "Hinweispflichten"
           ],
           "capacity_min": 3
         }
@@ -2220,6 +2509,15 @@
             "Ersatz"
           ],
           "capacity_min": 3
+        },
+        {
+          "name": "Filterpumpe dimensionieren",
+          "capacity_signals": [
+            "Beckenvolumen",
+            "Laufzeit",
+            "Filtermedium"
+          ],
+          "capacity_min": 3
         }
       ],
       "exact_label_already_in_source": false,
@@ -2260,6 +2558,15 @@
             "Empfindlichkeit",
             "Frühbeet",
             "Regeneration"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Gewächshaus winterfest machen",
+          "capacity_signals": [
+            "Abdichtung",
+            "Wärmespeicher",
+            "Regelung"
           ],
           "capacity_min": 3
         }
@@ -2388,6 +2695,15 @@
             "Warnzeit",
             "Fahrzeuge",
             "Stromsicherheit"
+          ],
+          "capacity_min": 3
+        },
+        {
+          "name": "Absperrung und Zugang",
+          "capacity_signals": [
+            "Torsteuerung",
+            "Fluchtweg",
+            "Warnung"
           ],
           "capacity_min": 3
         }
