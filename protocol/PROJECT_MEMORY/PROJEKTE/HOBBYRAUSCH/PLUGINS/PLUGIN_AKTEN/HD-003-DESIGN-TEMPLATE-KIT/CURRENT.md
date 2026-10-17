@@ -2,63 +2,69 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-16
-STATUS: **1.50.664–1.50.667 VERWORFEN / 1.50.668 REGISTRY-FUNDAMENT LOCAL HARD PASS / LIVE NACH STRUKTUR-SYNC**
+STAND: 2026-10-17
+STATUS: **1.50.664–1.50.667 VERWORFEN / 1.50.668 FULL LOCAL HARD PASS / LIVE READBACK OFFEN**
 
-## Aktiver Grundstand
+## Basis
 
 Affiliate Portal Template Kit **1.50.650** bleibt Ausgangsbasis.
 
 Nicht verwenden:
-- 1.50.664;
-- 1.50.665;
-- 1.50.666;
-- 1.50.667.
-
-Diese Versionen lösten die Live-Probleme Mega-Menü/Kategorietext nicht zuverlässig und dürfen nicht als Basis weitergeführt werden.
+1.50.664 / 1.50.665 / 1.50.666 / 1.50.667.
 
 ## Kandidat 1.50.668
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_FOUNDATION_LOCALPASS.zip`
-
-SHA-256:
-`0fb575aeddd19aac285188507d0753eaa554b558183d6686c2a900322c865a5a`
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_NAV_TEXT_HEROPREVIEW_HARDPASS.zip`
 
 Library:
-`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_FOUNDATION_LOCALPASS.zip`
+`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_NAV_TEXT_HEROPREVIEW_HARDPASS.zip`
+
+SHA-256:
+`ee521c5f8b360c16d641e77507b94b64b93432da701e4760e7c4daa67d9440b6`
 
 QA:
-`/hobby rausch/releases/HOBBY_DEPOT_REGISTRY_FOUNDATION_150668_QA_20261016.json`
+- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_BROWSER_ACCEPTANCE.json`
+- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_FINAL_DIFF.json`
 
-## Aufgabe dieses Kandidaten
+## Enthalten
 
-Nur Fundament:
-- Struktur ausschließlich aus HD-004;
-- rohe WordPress-Altseiten dürfen nicht mehr durchrutschen;
-- terminale `category`-Ebene wird korrekt ausgegeben;
-- Hub2-Unterebene Icon/Text;
-- keine Zufalls-Fotofallbacks;
-- fail-closed ohne Registry.
-
-Nicht enthalten:
-- neuer Mega-Menü-Entwurf;
-- Kategorietext-Redesign;
-- weitere Bildänderungen.
+- Hab-&-Bewahr-Prinzip: Registry als einzige Strukturwahrheit, fail-closed;
+- keine rohen WP-Kinder/Geschwister als Ersatz;
+- Page- und Category-Ebene korrekt;
+- terminale Inhaltskategorien sichtbar;
+- zufälliger Weltbild-Fallback aus aktivem Renderer entfernt;
+- Mega-Menü aus Registry;
+- `Mehr Kategorien` erweitert im selben Flyout;
+- eine zusätzliche Orientierungsebene, kein Vollbaum;
+- Hub2-Text nach Vertrag;
+- 65 bestehende Hero→Preview-Paare synchronisiert.
 
 ## Local Hard QA
 
+- Baseline 330 terminale Hobbyseiten: 0 Renderer-Abweichungen;
+- V3 370 terminale Hobbyseiten / 2160 Leafs: 0 Renderer-Abweichungen;
+- Trainspotting-Negativfall PASS;
+- Ameisenhaltung 7/7 terminale Kategorien PASS;
+- Headless-Browser: 1920 / 1440 / 1101 / 1100 / 1024 / 768 / 761 / 760 / 390 PASS;
+- alle 8 Mega-Menüs PASS;
+- `Mehr Kategorien` PASS;
+- Text-Accordion: Hero-Höhenänderung 0 px;
+- horizontaler Overflow 0;
 - PHP 58/58 PASS;
-- 0 Bilddateien geändert;
-- ZIP-Roundtrip 984/984;
-- absichtliches falsches Trainspotting wird von Registry ausgeschlossen;
-- Ameisenhaltung zeigt 7 Registry-Kategorien;
-- Browser 1440 / 1024 / 768 / 390: 0 horizontaler Overflow;
-- fehlende Registry: fail-closed.
+- ZIP 984/984 Roundtrip PASS;
+- 0 Dateien entfernt;
+- 0 Hero-Dateien verändert.
 
 ## Abhängigkeit
 
-HD-004 muss als Runtime-Wahrheit vorhanden sein. 1.50.668 fällt bewusst **nicht** still auf die alte WordPress-Struktur zurück.
+HD-004 muss als Runtime-Registry vorhanden sein. Bei vorhandener zentraler Revision gibt es bewusst keinen stillen Rückfall auf rohe WordPress-Struktur.
+
+## V3-Grenze
+
+Die fünf neuen direkten V3-Hub2 brauchen vor Live-Freigabe jeweils eigenes Hero + daraus abgeleitete Preview:
+Spotting & Verkehr, Citizen Science, Natur bestimmen, Suchen & Finden, Modellbau.
 
 ## EXAKT EINE NEXT ACTION
 
-**Noch nicht installieren: zuerst V3-Kategorie-Sync + Readback abschließen. Danach HD-004 aktivieren und 1.50.668 als Fundament live prüfen.**
+**HD-004 live bereitstellen; danach 1.50.668 gegen die aktuelle 330er Baseline installieren und ausschließlich Registry/Navi/Mega-Menü/Hub2-Text/terminale Ebene live prüfen. V3 noch nicht synchronisieren.**
