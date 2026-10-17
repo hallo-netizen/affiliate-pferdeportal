@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-17
-STATUS: **1.14.14 / V7.1 BACKEND-LOAD-FIX HARD SIM PASS / ECHTER WORDPRESS-DRY-RUN OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.14.15 / V7.1 DRYRUN-TIMEOUT-FIX HARD E2E-SIM PASS / ECHTER WORDPRESS-DRY-RUN OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -10,13 +10,13 @@ NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
 KANDIDATENVERSION:
-`1.14.14`
+`1.14.15`
 
 LOKAL GEPRÜFTES ARTEFAKT:
-`HD001_V1.14.14_HOBBY_DEPOT_V7_1_BACKEND_LOAD_FIX_HARDPASS.zip`
+`HD001_V1.14.15_HOBBY_DEPOT_V7_1_DRYRUN_TIMEOUT_FIX_HARDPASS.zip`
 
 SHA-256:
-`fdcca9282b0edcb5e0bb557b9f1fc5ec6cfc3c127afb40b6dc531340f653642a`
+`29289c8ef70469d036be42b1d3ce3401a57a15f298201d099263bba9d61f4165`
 
 EINGEBETTETES V7.1-PROFIL SHA-256:
 `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
@@ -29,15 +29,17 @@ FACH-CURRENT:
 
 LOKAL BELEGT:
 - PHP 33/33 PASS;
-- ZIP-Roundtrip 44/44 PASS;
-- Pluginversion 1.14.14;
+- ZIP 47/47 PASS;
 - V7.1 fachlich unverändert;
-- normaler Admin-Aufruf: 0 Seiten-/Term-/Meta-Vollreadback;
-- alter Dry-Run einer früheren Version wird nicht als aktueller Ergebnisblock gezeigt;
-- externes altes 2642er Profil kann den Final-Dry-Run nicht übersteuern;
-- realitätsnahe 2357er Baseline plus Libellen-/Nachtvogel-Altbindung: 3487 Ziele / PASS / keine Kollision;
+- 1.14.14 E2E-Dry-Run lokal 29.8 s / über 11 Mio Term-Metalesungen;
+- 1.14.15 derselbe E2E-Dry-Run lokal 1.11 s / 29115 Term-Metalesungen;
+- 3487 Zielobjekte;
+- CREATE 1126 / ADOPT 3 / UPDATE 2358 / ARCHIVE 1;
+- Libellenbeobachtung und Nachtvogel-Beobachtung korrekt wiederverwendet;
 - Fremdkollision BLOCKED;
-- mehrdeutige Legacy-Bindung BLOCKED;
+- doppelte Legacy-Bindung BLOCKED;
+- normaler Admin-Aufruf ohne Vollreadback;
+- alter Prüflauf wird nicht als aktueller angezeigt;
 - Provider Calls 0;
 - WordPress Structure Writes 0;
 - Dry-Run startet keinen Apply.
@@ -46,4 +48,4 @@ CURRENT.zip:
 **NICHT synchronisiert.**
 
 GRUND:
-Echter WordPress-Dry-Run mit 1.14.14 noch offen.
+Echter WordPress-Dry-Run mit 1.14.15 noch offen.
