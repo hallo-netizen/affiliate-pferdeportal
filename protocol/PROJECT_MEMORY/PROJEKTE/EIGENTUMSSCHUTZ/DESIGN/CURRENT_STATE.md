@@ -1,5 +1,18 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 17.10.2026 – DESIGNPLUGIN 0.1.29 – LOKAL GEPRÜFTE GEZIELTE KORREKTUR (LIVE OFFEN)
+**Current über ältere 0.1.26-/0.1.28-NEXT-ACTION:** Einzig aktuelles Design-Artefakt ist die **vollständige Update-ZIP** in der persönlichen Library: `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.29_FINALE.zip`. Bestehender Pluginordner und Identität unverändert. Gegenüber Ausgangsversion **0.1.28** wurden nur drei bestehende Plugin-Dateien geändert (`assets/style.css`, `includes/world-layout.php`, Haupt-PHP für Versionsnummer/CSS-Cacheversion) und zwei neue separate WebP-Fotos ergänzt; alle weiteren Dateien bytegleich.
+
+**Genau die vier Nutzerkorrekturen:** 1. **Vandalismus** „Fassade & Außenflächen“ und „Vereine & Kleingewerbe“ bekamen nachgewiesen tatsächlich dasselbe Ausgangsbild trotz unterschiedlichem Dateinamen; letzteres erhält jetzt ein echtes anderes scharfes Laden-/Vandalismusmotiv mit eigenem Dateinamen, auch bei abweichender Live-Bereichs-ID. 2. **Technik** „Heizung & Temperatur“ vs. „Pumpen & Haustechnik“ bekamen eine visuell deutlich verschiedene fotografische Szene (Keller mit Pumpe/Haustechnik statt bisherigem Küchenbild). 3. Alle sechs obersten Kategorien erhalten bei Mobilbreite ein echtes rechteckiges **Seitenverhältnis 1,7:1** für Bildkacheln statt des falschen mobilen 1,15:1. 4. Die alte rein blaue **Magazin/Dienstleister**-Linkzeile wird auf den Hauptkategorieseiten gezielt entfernt, ohne die echte Magazin-Ratgeberkachel oder Header/Footer zu ändern; mit zusätzlicher Ausblendung der identifizierten Altklasse `hbdp-footer-shortcuts`. 
+
+**Prüfung:** PHP-Syntax für geänderte Dateien PASS; vier PHP-Zuordnungskombinationen inklusive neuer IDs PASS; fotografische Bildabweichung per Bilddaten geprüft (nicht nur Dateinamen); vier echte Chromium-Lokalansichten (2 betroffene Welten × 390/1440px) PASS mit Fotoauflösung mindestens 1619px, gemessenem Bildkachel-Verhältnis 1,7 und ohne horizontales Scrollen. Im reproduzierten Altlink-Fall wurden beide losen Links entfernt, reguläre Magazin-Kachel blieb. Gesamtes ZIP-Archiv geprüft. **Real-Live-WordPress-Frontend konnte nicht abgerufen werden; deshalb kein LIVE-PASS.**
+
+**GENAU EINE DESIGN-NEXT ACTION:** Bestehendes Designplugin in WordPress mit vollständiger ZIP 0.1.29 aktualisieren und real auf Mobilansicht sowie „Vandalismus“ und „Technik“ kontrollieren. Falls alte Links trotz Update vorhanden sind: echte WordPress-HTML-Quelle und aktivierte Pluginversion ermitteln statt weitere Blindreparatur. Alte ZIPs nur historische Versionen. Kategorieplanung/-IDs, Wasser, Feuer, Einbruch, Wetter, Hero-Bilder und Redaktion unverändert.
+
+---
+
+
+
 ## 17.10.2026 – DESIGN UPDATE 0.1.26 FERTIG LOKAL GEPRÜFT – HAUPTKATEGORIEN
 **Aktuellste DESIGN-Current-Aussage (ältere 0.1.24-/0.1.25-NEXT-ACTION abgelöst):** Das bestehende Plugin **Hab & Bewahr – Design 0.1.26** im unveränderten Ordner `hab-bewahr-design-vorschau` ist als vollständige ZIP bereit, abgelegt in der Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.26_FERTIGE_HAUPTKATEGORIEN.zip`.
 
