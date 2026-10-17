@@ -1,0 +1,849 @@
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-admin.php" "modified/Portal SEO Topic Engine/includes/class-pste-admin.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-10-16 16:01:14.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-10-17 11:55:28.522012708 +0000
+@@ -37,6 +37,7 @@
+                 'pste_review_candidate'=>'reviewCandidate','pste_set_candidate_type'=>'setCandidateType','pste_override_title'=>'overrideTitle','pste_process_context_batch'=>'processContextBatch','pste_repair_price_intents'=>'repairPriceIntents',
+                 'pste_import_existing_evidence_reentry'=>'importExistingEvidenceReentry',
+                 'pste_sandbox_export'=>'sandboxExport','pste_sandbox_review_relevance'=>'sandboxReviewRelevance','pste_sandbox_confirm_internal'=>'sandboxConfirmInternal',
++                'pste_sandbox_recheck_internal'=>'sandboxRecheckInternal',
+             ]);
+         }
+         foreach($actions as $action=>$method)add_action('admin_post_'.$action,[self::class,$method]);
+@@ -325,6 +326,19 @@
+         echo '<div class="notice notice-warning inline"><p><strong>Hauptregel 1:</strong> Diese Sandbox ist vollständig getrennt von Artikeln, Textmaschine, PPM, Compiler, HTML und Design. Sie erzeugt keinen Produktions-Handoff und besitzt keinen Apply-Button.</p></div>';
+         $maintenance=PSTE_Sandbox_Maintenance_Health::snapshot();$maintenanceBad=(string)($maintenance['schedule_status']??'MISSING')!=='SCHEDULED'||in_array((string)($maintenance['run_health']??'UNKNOWN'),['FAIL','OVERDUE'],true);
+         echo '<div class="notice '.($maintenanceBad?'notice-error':'notice-info').' inline"><p><strong>Interne Wiederprüfung:</strong> Zeitplan '.esc_html((string)($maintenance['schedule_status']??'UNKNOWN')).' · Laufstatus '.esc_html((string)($maintenance['run_health']??'UNKNOWN')).(($maintenance['current_error_code']??'')!==''?' · Fehler <code>'.esc_html((string)$maintenance['current_error_code']).'</code>':'').'. Strukturlücken bleiben gespeichert; ein ausgefallener Wartungslauf wird sichtbar protokolliert.</p></div>';
++        $lastRecheck=(array)($maintenance['last_report']??[]);
++        $lastBacklog=is_array($lastRecheck['backlog']??null)?(array)$lastRecheck['backlog']:$lastRecheck;
++        $maintOption=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        $maintOption=is_array($maintOption)?$maintOption:[];
++        $cursor=(array)($maintOption['structure_recheck_v1']??[]);
++        echo '<p><strong>Interne gelbe Fälle:</strong> Nach aktualisierter Kategorie/Regel automatisch, sonst wöchentlich. Unklare Pferde-Relevanz bleibt getrennt gespeichert; externe Recherche nur nach ausdrücklicher Kostenbestätigung über den vorhandenen Prüfblock.</p>';
++        if($cursor)echo '<p><strong>Interne Prüfung:</strong> '.esc_html((string)($cursor['status']??'')).' · '.esc_html((string)($cursor['cursor']??0)).' / '.esc_html((string)($cursor['total']??0)).' gespeichert · zuletzt '.esc_html((string)($cursor['updated_at_utc']??'')).'</p>';
++        if($lastBacklog)echo '<p><small>Letzter Prüflauf: '.esc_html((string)($lastBacklog['status']??'')).' · geprüft '.esc_html((string)($lastBacklog['checked']??0)).' · verändert '.esc_html((string)($lastBacklog['changed']??0)).' · Fehler '.esc_html((string)($lastBacklog['failed']??0)).'</small></p>';
++        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++        wp_nonce_field('pste_sandbox_recheck_internal');
++        echo '<input type="hidden" name="action" value="pste_sandbox_recheck_internal">';
++        submit_button('Interne gelbe Fälle erneut prüfen (kostenfrei)','secondary','submit',false);
++        echo '</form>';
+         echo '<p><strong>Workflow:</strong> V2-Hauptgate → alle blockierten Longtails dauerhaft erhalten → <strong>Relevanz zuerst</strong> anhand realer SEO-/SERP-Evidenz → nur bestätigte relevante Fälle werden danach intern auf Familie, Kategorie und Titelprobe geprüft. Lokaler Portalbegriff, Familiennähe und Ausschlüsse sind vorher ausschließlich Hinweise und niemals ein Relevanzurteil.</p>';
+         echo '<div class="pste-grid">';
+         $internalReviewCount=(int)($c['MATCHER_REVIEW']??0)+(int)($c['PROPOSAL_READY_FOR_REVIEW']??0)+(int)($c['MULTIPLE_FAMILIES_REVIEW']??0)+(int)($c['REVIEW_REQUIRED']??0);
+@@ -356,7 +370,23 @@
+             $extText=PSTE_Semantic_Review_Sandbox::effectiveRelevanceStatusForAdmin($r);$status=(string)($r['status']??'');
+             echo '<tr><td><strong>'.esc_html((string)$r['query']).'</strong><br><small>Volumen: '.esc_html($r['search_volume']===null?'—':(string)$r['search_volume']).'</small></td><td>'.esc_html($localText).'</td><td>'.esc_html($exText).'<br><small>'.esc_html($dataflowStatus==='VERIFIED'?'vollständig gespeichert und Datenfluss verifiziert':'Migration/Verifikation erforderlich').'</small></td><td>'.esc_html($extText);
+             if($ext){$ev=array_slice((array)($ext['evidence']??[]),0,5);if($ev){echo '<details><summary>SERP-Evidenz</summary><ol>';foreach($ev as $e)echo '<li><strong>'.esc_html((string)($e['title']??'' )).'</strong><br><small>'.esc_html((string)($e['domain']??'')).'</small></li>';echo '</ol></details>';}}
+-            echo '</td><td>'.esc_html($names?implode(' / ',$names):'—').'</td><td>'.esc_html((string)($proposal['planning_title_probe']??'—')).'<br><small>'.esc_html((string)($proposal['category_slug']??'')).' '.esc_html((string)($proposal['article_type']??'')).'</small></td><td><code>'.esc_html($status).'</code></td><td>';
++            echo '</td><td>'.esc_html($names?implode(' / ',$names):'—').'</td><td>'.esc_html((string)($proposal['planning_title_probe']??'—')).'<br><small>'.esc_html((string)($proposal['category_slug']??'')).' '.esc_html((string)($proposal['article_type']??'')).'</small></td><td><code>'.esc_html($status).'</code>';
++            // Signed, already persisted sandbox checkpoint – never infer a halt
++            // from the outer review-status label or the Keyword's wording.
++            $workerFlow=(array)($r['worker_flow']??[]);
++            if($dataflowStatus==='VERIFIED'&&$workerFlow){
++                $workerNames=['relevance'=>'Pferdebezug','title'=>'Titel','lane'=>'Fach / Magazin','category'=>'Kategorie'];
++                $halt=(string)($workerFlow['halted_at']??'');
++                $next=(string)($workerFlow['resume_from']??'');
++                $completed=array_values(array_map('strval',(array)($workerFlow['completed_steps']??[])));
++                echo '<br><small><strong>Haltestelle:</strong> '.esc_html($halt===''?'Fertig':($workerNames[$halt]??'Nachprüfung'));
++                if($halt!=='')echo ' · <strong>Nächste offene Prüfung:</strong> '.esc_html($workerNames[$next]??'Nachprüfung');
++                if($completed)echo ' · <strong>erledigt:</strong> '.esc_html(implode(', ',array_map(static fn($step)=>$workerNames[$step]??$step,$completed)));
++                $haltReasons=(array)($workerFlow['halt_reason_codes']??[]);
++                if($halt!==''&&$haltReasons)echo '<br><code>'.esc_html((string)$haltReasons[0]).'</code>';
++                echo '</small>';
++            }
++            echo '</td><td>';
+             $reviewableExternal=((($ext['contract']??'')===PSTE_Sandbox_SEO_Relevance::CONTRACT)||(($ext['contract']??'')==='PSTE_SANDBOX_EXTERNAL_PROVIDER_OUTCOME_V1'&&!empty($ext['reviewable_external_evidence'])))&&(string)($ext['environment']??'')==='production'&&(string)($ext['status']??'')==='UNCERTAIN_REVIEW'&&preg_match('/^[a-f0-9]{64}$/',(string)($ext['response_sha256']??''));
+             $currentAd=(array)($r['relevance_adjudication']??[]);$currentDecision=(string)($currentAd['decision']??'');$manualDecision=in_array($currentDecision,['RELEVANT_FOR_PORTAL','NOT_RELEVANT_FOR_PORTAL'],true)&&in_array((string)($currentAd['decision_source']??''),['EXPLICIT_ADMIN_REVIEW','EXPLICIT_ADMIN_REVIEW_REVISION'],true)&&preg_match('/^[a-f0-9]{64}$/',(string)($currentAd['decision_sha256']??''));$renderedReview=false;
+             if($reviewableExternal&&($status==='UNCERTAIN_REVIEW'||$manualDecision)){
+@@ -1175,6 +1205,25 @@
+         try{$info=PSTE_Semantic_Review_Sandbox::streamExportToResource($tmp,$guard);$size=ftell($tmp);if($size===false||(int)$size!==(int)$info['bytes'])throw new RuntimeException('PSTE_SANDBOX_EXPORT_SIZE_MISMATCH');rewind($tmp);nocache_headers();header('Content-Type: application/json; charset=utf-8');header('Content-Disposition: attachment; filename="pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json"');header('Content-Length: '.(string)$size);fpassthru($tmp);exit;}finally{fclose($tmp);}
+     }
+     public static function sandboxReviewRelevance(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_review_relevance',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$decision=sanitize_text_field((string)($_POST['relevance_decision']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_response_sha256']??'')));$expectedCurrent=strtolower(sanitize_text_field((string)($_POST['expected_current_decision_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_EXPLICIT_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::reviewOrReviseRelevance($id,$decision,$expected,$expectedCurrent,$note,get_current_user_id());self::redirect('review','sandbox_view=1&sandbox_relevance_reviewed=1');}catch(Throwable $e){self::blocked('review',$e);}}
++    public static function sandboxRecheckInternal(): void {
++        // A rejected nonce must not mutate maintenance health at all.
++        try{PSTE_Auth::assertAdmin('pste_sandbox_recheck_internal',(string)($_POST['_wpnonce']??''));}
++        catch(Throwable $e){self::blocked('review',$e);return;}
++        try{
++            PSTE_Plugin::assertReady();
++            PSTE_Sandbox_Maintenance_Health::recordAttempt('SANDBOX_MANUAL_RECHECK');
++            $report=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(true);
++            if((string)($report['status']??'')==='PARTIAL_FAILURE')
++                PSTE_Sandbox_Maintenance_Health::recordFailure('SANDBOX_MANUAL_RECHECK','PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            elseif((string)($report['status']??'')==='IN_PROGRESS')
++                PSTE_Sandbox_Maintenance_Health::recordProgress('SANDBOX_MANUAL_RECHECK',$report);
++            else PSTE_Sandbox_Maintenance_Health::recordSuccess('SANDBOX_MANUAL_RECHECK',$report);
++            self::redirect('review','sandbox_view=1&sandbox_rechecked=1');
++        }catch(Throwable $e){
++            try{PSTE_Sandbox_Maintenance_Health::recordFailure('SANDBOX_MANUAL_RECHECK',(string)$e->getMessage());}catch(Throwable $ignored){}
++            self::blocked('review',$e);
++        }
++    }
+     public static function sandboxConfirmInternal(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_confirm_internal',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_proposal_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_INTERNAL_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::confirmInternalProposalForNormalReentry($id,$expected,$note,get_current_user_id());self::redirect('review','sandbox_view=1&sandbox_internal_confirmed=1');}catch(Throwable $e){self::blocked('review',$e);}}
+     public static function sandboxStartAjax(): void {
+         $level=self::ajaxBoundaryBegin();
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-category-context.php" "modified/Portal SEO Topic Engine/includes/class-pste-category-context.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-category-context.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-category-context.php"	2026-10-17 10:49:25.624299966 +0000
+@@ -88,7 +88,28 @@
+         $seed=self::portalDomainSeedRegistry();$strongPrefixes=(array)($seed['rules']['strong_token_prefixes']??[]);$strongExact=(array)($seed['rules']['strong_exact_tokens']??[]);
+         $queryTokens=PSTE_Family_Identity_V2::tokens($query,false);
+         foreach($queryTokens as $token){
+-            $token=(string)$token;if($token===''||isset($familyTokens[$token]))continue;
++            $token=(string)$token;if($token==='')continue;
++            // A literal portal-domain token in the original query is its own
++            // relevance evidence. A similarly named research family does not erase
++            // the actual query token (e.g. Pferde-OP under a Pferde-OP family).
++            // Retain the existing ban on family-only compound self-proof; only a
++            // configured EXACT seed may survive the family-token overlap.
++            if(isset($familyTokens[$token])){
++                $isConfiguredExact=false;
++                foreach($strongExact as $exact){
++                    $et=PSTE_Family_Identity_V2::tokens((string)$exact,false);
++                    if(count($et)===1&&$token===(string)$et[0]){$isConfiguredExact=true;break;}
++                }
++                // An exact standalone portal-root already present in the seed
++                // prefixes is just as explicit as the exact seeds above.
++                if(!$isConfiguredExact){
++                    foreach($strongPrefixes as $prefix){
++                        $pt=PSTE_Family_Identity_V2::tokens((string)$prefix,false);
++                        if(count($pt)===1&&$token===(string)$pt[0]){$isConfiguredExact=true;break;}
++                    }
++                }
++                if(!$isConfiguredExact)continue;
++            }
+             $isStrong=false;
+             foreach($strongExact as $exact){$et=PSTE_Family_Identity_V2::tokens((string)$exact,false);if(count($et)===1&&$token===(string)$et[0]){$isStrong=true;break;}}
+             if(!$isStrong){foreach($strongPrefixes as $prefix){$pt=PSTE_Family_Identity_V2::tokens((string)$prefix,false);if(count($pt)===1&&strlen((string)$pt[0])>=4&&str_starts_with($token,(string)$pt[0])){$isStrong=true;break;}}}
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php" "modified/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php"	2026-10-17 10:37:33.234372205 +0000
+@@ -10,33 +10,50 @@
+     public const CONTRACT='PSTE_JOURNAL_SEMANTIC_ROUTER_V1_HIGH_CONFIDENCE';
+ 
+     /** Pure classifier used by runtime and tests. @return array<string,mixed> */
+-    public static function classifyQuestion(string $raw): array {
++    public static function classifyQuestion(string $raw,bool $provenProductFamily=false): array {
+         $raw=self::clean($raw);
+         $base=['contract'=>self::CONTRACT,'ok'=>false,'status'=>'NOT_APPLICABLE','category_key'=>'','category_name'=>'','reason_codes'=>[],'raw_query'=>$raw,'write_attempted'=>false];
+         if($raw===''||!class_exists('PSTE_Normalizer')||!PSTE_Normalizer::isQuestion($raw))return self::fail($base,'PSTE_JOURNAL_AUTO_NOT_A_QUESTION');
+         $q=self::lower(PSTE_Normalizer::exactTopicIdentityText($raw));
+         if($q==='')return self::fail($base,'PSTE_JOURNAL_AUTO_EMPTY_NORMALIZED_QUESTION');
+ 
+-        // Direct fact/measurement questions remain FAQ even when they mention a training term.
+-        if(preg_match('/^(?:wie\s+(?:viel|viele|oft|lange|lang|alt|gross|groß|schwer|hoch|breit|schnell)|wann|wo|wer|welche|welcher|welches)\b/u',$q))
+-            return self::fail($base,'PSTE_JOURNAL_AUTO_DIRECT_FACT_QUESTION');
+-
+-        // Journal requires explanatory/training depth, not merely a question mark.
+-        $complex=(bool)preg_match('/(?:\bwas\s+(?:kann|soll|muss)\s+ich\s+tun\b.*\b(?:wenn|falls)\b|\bwas\s+tun\b.*\b(?:wenn|falls)\b|\bwie\s+kann\s+ich\b|\bwarum\b.*\b(?:nicht|kein|keine|reagiert|verweigert|wehrt)\b|\bwie\s+(?:reitet|lenkt|trainiert|arbeitet|uebt|übt|verbessert|korrigiert|fuehrt|führt|gibt|setzt|erarbeitet|lernt|bringt)\b)/u',$q);
+-        if(!$complex)return self::fail($base,'PSTE_JOURNAL_AUTO_COMPLEXITY_NOT_PROVEN');
++        // Single editorial switch: an existing domain-specific category and a verified
++        // question decide whether Journal is suitable. No extra complexity admission.
++        // Genuine product shopping/comparison stays on the original Fach route.
++        if(preg_match('/^(?:was\s+(?:kostet|kosten)\b|welch(?:e|es|er)\s+(?:futter|produkt|sattel|schermaschine|versicherung)\b)/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_PRODUCT_OR_PRICE_INTENT');
++        if(preg_match('/\b(?:testsieger|preisvergleich|kaufberatung|beste|besten|erfahrungen)\b/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_PRODUCT_COMPARISON_INTENT');
++        if($provenProductFamily&&preg_match('/\bvor[\s-]+und[\s-]+nachteile\b/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_EXISTING_FACH_COMPARISON_OWNER');
++        if($provenProductFamily&&preg_match('/\b(?:versicherung|versicherungen|police|tarif|tarife)\b/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_SPECIFIC_INSURANCE_FACH_OWNER');
++        if($provenProductFamily&&preg_match('/^(?:wie\s+(?:viel|viele|oft|lange|lang|alt|gross|groß|schwer|hoch|breit|schnell|teuer)|wann\b|wo\b|wer\b|was\s+(?:ist|sind)\b)/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_MORE_SPECIFIC_FACH_FAMILY');
++        if(!preg_match('/^(?:warum|wieso|weshalb|wie\b|was\b|wann\b|welche\b|welcher\b|welches\b|wo\b|wer\b|sind\b|ist\b|kann\b|können\b|koennen\b|soll\b|sollte\b|muss\b|gibt\b|braucht\b|benötigt\b|benoetigt\b)/u',$q))
++            return self::fail($base,'PSTE_JOURNAL_AUTO_NOT_A_READABLE_QUESTION');
+ 
+         $domains=[];
+-        if(preg_match('/\b(?:zuegel|zuegeln|zügel|zügeln|reiten|reitet|reitweise|reitweisen|reithilfe|reithilfen|hilfengebung|schenkel|sitz|galopp|trab|dressur|longieren|bodenarbeit|springen|springreiten|lenken|aeusseren|äusseren|äußeren|anlehnung|stellung|biegung|parade|paraden)\b/u',$q))$domains['training']='Ausbildung & Reitweisen';
+-        if(preg_match('/\b(?:verhalten|koerpersprache|körpersprache|angst|stress|herde|rangordnung|vertrauen|scheu|scheuen|aggressiv|aggression|ohren|mimik)\b/u',$q))$domains['understanding']='Pferde Verstehen';
+-        if(preg_match('/\b(?:offenstall|boxenhaltung|weidehaltung|herdenhaltung|paddocktrail|paddock\s*trail|haltung|haltungsform|haltungsformen)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
++        if(preg_match('/\b(?:zuegel|zuegeln|zügel|zügeln|reiten|reitet|reitweise|reitweisen|reithilfe|reithilfen|hilfengebung|schenkel|sitz|steigbügel|steigbuegel|galopp|trab|dressur|longieren|bodenarbeit|springen|springreiten|lenken|aeusseren|äusseren|äußeren|anlehnung|stellung|biegung|parade|paraden)\b/u',$q))$domains['training']='Ausbildung & Reitweisen';
++        if(preg_match('/\b(?:verhalten|koerpersprache|körpersprache|angst|stress|herde|rangordnung|vertrauen|scheu|scheuen|aggressiv|aggression|ohren|mimik|wehrt|verweigert)\b/u',$q))$domains['understanding']='Pferde Verstehen';
++        if(preg_match('/\b(?:offenstall|boxenhaltung|weidehaltung|herdenhaltung|paddocktrail|paddock\s*trail|haltung|haltungsform|haltungsformen|stallhaltung)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
++        if(preg_match('/\b(?:salzleckstein|salzlecksteine|heu|heuverzehr|futter|futters|fütterung|fuetterung|füttern|fuettern|fressen|futtern|ernährung|ernaehrung|weidegras|mineralfutter|kraftfutter)\b/u',$q))$domains['feeding']='Pferdeernährung verstehen';
++        if(preg_match('/\b(?:gesundheit|krankheit|krankheiten|lahmheit|kolik|koliken|husten|fieber|entzündung|entzuendung|tierarzt|verletzung|schmerzen|wunde|parasiten)\b/u',$q))$domains['health']='Pferdegesundheit verstehen';
++        if(preg_match('/\b(?:pferderasse|pferderassen|pferdetyp|pferdetypen|warmblut|kaltblut|vollblut|pony|ponys|friese|haflinger|araber)\b/u',$q))$domains['breeds']='Pferderassen & Pferdetypen';
++        if(preg_match('/\b(?:versicherung|versicherungen|pferdeversicherung|pferdeversicherungen|pferderecht|vorschriften|gesetz|gesetze|gesetzlich|haftung|kaufvertrag|stallmiete|stallkosten|unterhaltskosten|finanzierung|recht|steuern|pferdepass)\b/u',$q))$domains['law']='Recht, Finanzen & Organisation';
++        if(preg_match('/\b(?:reitverein|gemeinschaft|reiterleben|reitergruppe|turnieralltag|stallgemeinschaft|pferdefreunde|gemeinschaftsleben)\b/u',$q))$domains['community']='Reiterleben & Community';
++        // A horse mention alone does not prove the generic magazine category.
++        // Preserve unresolved topics for the existing joint category decision,
++        // rather than silently turning unrelated practical/product subjects into Journal.
++        // The signed journal route remains unchanged when a specific domain is proven.
+ 
+         if(count($domains)!==1)return self::fail($base,count($domains)>1?'PSTE_JOURNAL_AUTO_DOMAIN_AMBIGUOUS':'PSTE_JOURNAL_AUTO_DOMAIN_NOT_PROVEN');
+-        $key=(string)array_key_first($domains);$base['ok']=true;$base['status']='HIGH_CONFIDENCE_JOURNAL';$base['category_key']=$key;$base['category_name']=(string)$domains[$key];$base['reason_codes']=['PSTE_JOURNAL_AUTO_COMPLEX_QUESTION_AND_DOMAIN_PROVEN'];return $base;
++        $key=(string)array_key_first($domains);$base['ok']=true;$base['status']='HIGH_CONFIDENCE_JOURNAL';$base['category_key']=$key;$base['category_name']=(string)$domains[$key];$base['reason_codes']=['PSTE_JOURNAL_AUTO_EDITORIAL_INTENT_AND_DOMAIN_PROVEN'];return $base;
+     }
+ 
+     /** Runtime metadata route. @return array<string,mixed> */
+     public static function evaluate(string $raw,array $registry,string $sourceFamilyKey='',string $sourceFamilyName=''): array {
+-        $classification=self::classifyQuestion($raw);
++        $classification=self::classifyQuestion($raw,$sourceFamilyKey!=='');
+         $base=$classification+['article_type'=>'Journal','target_category'=>[],'family_key'=>'','family_name'=>'','normalization'=>[],'intent_profile'=>[],'semantic_consensus'=>[],'title_pipeline'=>[],'title'=>'','target_keyword'=>'','domain_risk'=>[],'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,'article_or_taxonomy_write_attempted'=>false];
+         if(empty($classification['ok']))return $base;
+ 
+@@ -59,7 +76,8 @@
+         // names a horse and no narrower proven family exists, use that literal subject;
+         // do not require editorial titles to repeat a magazine-section label.
+         $literalHorse=(bool)preg_match('/\b(?:pferd|pferde|pferdes|pferden)\b/iu',$raw);
+-        $familyName=$sourceFamilyName!==''?$sourceFamilyName:($literalHorse?'Pferd':(string)$classification['category_name']);
++        $familyName=$sourceFamilyName!==''?$sourceFamilyName:($literalHorse?'Pferd':self::questionSubject($raw,(string)$classification['category_key']));
++        if($familyName==='')return self::fail($base,'PSTE_JOURNAL_AUTO_SUBJECT_NOT_PROVEN');
+         $familyKey=$sourceFamilyKey!==''?$sourceFamilyKey:hash('sha256','PSTE_JOURNAL_AUTO_SCOPE_V1|'.(string)$classification['category_key'].'|'.PSTE_Normalizer::exactTopicIdentityText($raw));
+         $normalization=['contract'=>'PSTE_EDITORIAL_TOPIC_NORMALIZER_V2','raw_query'=>$raw,'raw_query_sha256'=>hash('sha256',$raw),'family'=>$familyName,'normalized_topic'=>rtrim($raw," ?\t\n\r\0\x0B"),'subject_topic'=>$familyName,'semantic_probe'=>PSTE_Editorial_Topic_Normalizer::semanticProbe($raw),'qualifier'=>'','relation'=>'','detected_action'=>'','intent_signals'=>['JOURNAL_COMPLEX_QUESTION'],'status'=>'PASS','reason_codes'=>['PSTE_JOURNAL_AUTO_MEANING_PRESERVED'],'review_flags'=>[],'raw_query_modified'=>false,'write_attempted'=>false];
+         $intent=['contract'=>'PSTE_INTENT_PROFILE_V4_EVIDENCE_BOUND','ok'=>true,'status'=>'PASS','search_intent'=>'EDITORIAL_INFORMATION','primary_user_goal'=>'EDITORIAL_INFORMATION','primary_article_type_candidate'=>'Journal','intent_angle'=>'JOURNAL_COMPLEX_QUESTION','evidence_authority'=>self::CONTRACT,'scope_status'=>'PROVEN','intent_status'=>'PROVEN','raw_query_sha256'=>hash('sha256',$raw),'write_attempted'=>false];
+@@ -72,6 +90,25 @@
+         $base['status']='JOURNAL_AUTO_PASS';$base['ok']=true;$base['article_type']='Journal';$base['target_category']=$target;$base['family_key']=$familyKey;$base['family_name']=$familyName;$base['normalization']=$normalization;$base['intent_profile']=$intent;$base['semantic_consensus']=$semantic;$base['title_pipeline']=$pipeline;$base['title']=$title;$base['target_keyword']=$targetKeyword;$base['reason_codes']=array_values(array_unique(array_merge((array)$classification['reason_codes'],['PSTE_JOURNAL_AUTO_HIGH_CONFIDENCE_PASS'])));return $base;
+     }
+ 
++    /** The title quality gate expects a subject, not the generic Journal section name. */
++    private static function questionSubject(string $raw,string $key): string {
++        $subjects=['training'=>['Longieren','Bodenarbeit','Reiten','Steigbügel','Zügel','Dressur','Galopp','Trab','Springreiten'],
++            'understanding'=>['Herde','Rangordnung','Verhalten','Körpersprache','Vertrauen','Stress','Angst'],
++            'housing'=>['Weidehaltung','Offenstall','Stallhaltung','Paddocktrail','Haltung'],
++            'feeding'=>['Salzleckstein','Heuverzehr','Fütterung','Ernährung','Futter','Heu'],
++            'health'=>['Kolik','Husten','Lahmheit','Gesundheit'],
++            'breeds'=>['Haflinger','Araber','Pony','Pferderassen'],
++            'law'=>['Vorschriften','Pferdepass','Kaufvertrag','Versicherung','Haftung','Kosten'],
++            'community'=>['Reitverein','Stallgemeinschaft','Turnieralltag'],
++            'general'=>['Pferd']];
++        foreach(($subjects[$key]??[]) as $subject){
++            if(preg_match('/\b'.preg_quote($subject,'/').'(?:n|e|s|en)?\b/iu',$raw))return $subject;
++        }
++        // A broad journal section is not a substitute for a subject missing from the query.
++        // Only words actually present in the original question may bind its title.
++        return '';
++    }
++
+     /** @return array<string,mixed> */
+     private static function categorySpec(string $key): array {
+         $d=PSTE_Journal_Article_Type::definition();
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-normal-metadata-path.php" "modified/Portal SEO Topic Engine/includes/class-pste-normal-metadata-path.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-normal-metadata-path.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-normal-metadata-path.php"	2026-10-17 11:23:52.726250957 +0000
+@@ -66,9 +66,34 @@
+         }
+         $base['portal_relevance']='PROVEN';
+ 
++        // Only after relevance PASS may a family become assignment authority.
++        $probe=PSTE_Editorial_Topic_Normalizer::semanticProbe($analysisRaw);
++        $familyKey='';$family=[];$membership=[];$familyResolution=[];
++        $hint=(array)($relevance['family_hint']??[]);
++        $assignmentPreferred=$preferredFamilyKey!==''?$preferredFamilyKey:(string)($hint['family_key']??'');
++        if($assignmentPreferred!==''&&isset($registry['families'][$assignmentPreferred])){
++            $membership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$assignmentPreferred);
++            if(!empty($membership['ok'])){
++                $familyKey=$assignmentPreferred;$family=(array)$registry['families'][$familyKey];
++                $familyResolution=['status'=>'MATCH','source'=>'POST_RELEVANCE_FAMILY_REVALIDATED','winner'=>['family_key'=>$familyKey,'topic_family_name'=>(string)($family['topic_family_name']??'')]];
++            }
++        }
++        if($familyKey===''){
++            $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
++            if(($familyResolution['status']??'')==='MATCH'&&is_array($familyResolution['winner']??null)){
++                $familyKey=(string)($familyResolution['winner']['family_key']??'');$family=(array)($registry['families'][$familyKey]??[]);
++                if($familyKey!==''&&$family)$membership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$familyKey);
++            }
++        }
++        $base['family_resolution']=$familyResolution;$base['family_membership']=$membership;
++        $matchedFamily=$familyKey!==''&&$family&&!empty($membership['ok']);
++        // One category-routing decision point for BOTH proven families and family misses.
++        // The existing signed explicit route takes precedence, then the same Journal
++        // intent route, then the existing Fach route. No new entitlement or registry.
+         // All registered article categories compete before a product-family match can win.
+         // The existing signed extension router is the sole Journal authority: no guessed
+         // category, self-issued approval, changed signature or additional workflow.
++        $verifiedCategory=[];
+         if(class_exists('PSTE_Article_Type_Extension_Router')){
+             $verifiedCategory=PSTE_Article_Type_Extension_Router::evaluateAfterCoreMiss($raw,$baseline,$registry,$relevance,$seoEvidence);
+             if(($verifiedCategory['status']??'')==='EXTENSION_ROUTE_PASS'&&!empty($verifiedCategory['ok'])){
+@@ -86,30 +111,50 @@
+             }
+         }
+ 
+-        // Only after relevance PASS may a family become assignment authority.
+-        $probe=PSTE_Editorial_Topic_Normalizer::semanticProbe($analysisRaw);
+-        $familyKey='';$family=[];$membership=[];$familyResolution=[];
+-        $hint=(array)($relevance['family_hint']??[]);
+-        $assignmentPreferred=$preferredFamilyKey!==''?$preferredFamilyKey:(string)($hint['family_key']??'');
+-        if($assignmentPreferred!==''&&isset($registry['families'][$assignmentPreferred])){
+-            $membership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$assignmentPreferred);
+-            if(!empty($membership['ok'])){
+-                $familyKey=$assignmentPreferred;$family=(array)$registry['families'][$familyKey];
+-                $familyResolution=['status'=>'MATCH','source'=>'POST_RELEVANCE_FAMILY_REVALIDATED','winner'=>['family_key'=>$familyKey,'topic_family_name'=>(string)($family['topic_family_name']??'')]];
++        // One editorial/category switch, for BOTH existing product families and genuine
++        // family misses. The same signed extension and downstream quality gates remain
++        // the only production authority. No separate complexity admission is applied.
++        if(class_exists('PSTE_Journal_Semantic_Router')&&class_exists('PSTE_Article_Type_Extension_Router')){
++            // An existing comparison leaf in the ORIGINAL research family is genuine Fach
++            // category evidence even when the stricter present-day membership cannot yet
++            // recognize a product synonym. It does not grant a Fach match or production
++            // authority: the existing normal route must still validate both.
++            $researchOriginKey=trim((string)($seoEvidence['research_origin_family_key']??''));
++            $researchFamily=(array)($registry['families'][$preferredFamilyKey]??[]);
++            $existingComparisonOwner=!$matchedFamily&&$preferredFamilyKey!==''
++                &&$researchOriginKey!==''&&hash_equals($preferredFamilyKey,$researchOriginKey)
++                &&trim((string)($seoEvidence['research_job_contract']??''))!==''
++                &&(int)($researchFamily['by_type']['vergleich']['term_id']??0)>0
++                &&(bool)preg_match('/\bvor[\s-]+und[\s-]+nachteile\b/iu',$raw);
++            $journalAuto=PSTE_Journal_Semantic_Router::evaluate(
++                $raw,$registry,
++                $matchedFamily?$familyKey:($existingComparisonOwner?$preferredFamilyKey:''),
++                $matchedFamily?(string)($family['topic_family_name']??''):
++                    ($existingComparisonOwner?(string)($researchFamily['topic_family_name']??''):'')
++            );
++            if(($journalAuto['status']??'')==='JOURNAL_AUTO_PASS'&&!empty($journalAuto['ok'])){
++                $route=PSTE_Article_Type_Extension_Router::fromClassifiedJournal($journalAuto,$raw);
++                if(!empty($route['ok']))return self::acceptVerifiedExtension($base,$route,$persistedTitle,$raw,$registry);
++                $base['article_type_extension_routing']=$route;
++                $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
++                return self::withReasons($base,'SANDBOX_REQUIRED',(array)($route['reason_codes']??[]));
+             }
+-        }
+-        if($familyKey===''){
+-            $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
+-            if(($familyResolution['status']??'')==='MATCH'&&is_array($familyResolution['winner']??null)){
+-                $familyKey=(string)($familyResolution['winner']['family_key']??'');$family=(array)($registry['families'][$familyKey]??[]);
+-                if($familyKey!==''&&$family)$membership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$familyKey);
++            // A proved journal intent must not silently become a product FAQ merely
++            // because its real WP category, title validation or signed route is blocked.
++            if(($journalAuto['status']??'')==='HIGH_CONFIDENCE_JOURNAL'
++                &&(string)($journalAuto['category_key']??'')!==''){
++                $base['journal_routing']=$journalAuto;
++                $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
++                return self::withReasons($base,'SANDBOX_REQUIRED',array_values(array_unique(array_merge(
++                    ['PSTE_JOURNAL_INTENT_RETAINED_PENDING_VERIFIED_CATEGORY'],
++                    (array)($journalAuto['reason_codes']??[])
++                ))));
+             }
+         }
+-        $base['family_resolution']=$familyResolution;$base['family_membership']=$membership;
+-        if($familyKey===''||!$family||empty($membership['ok'])){
++        if(!$matchedFamily){
+             // Generic additive extension point. The core miss is never evidence.
+             if(class_exists('PSTE_Article_Type_Extension_Router')){
+-                $extension=PSTE_Article_Type_Extension_Router::evaluateAfterCoreMiss($raw,$baseline,$registry,$relevance,$seoEvidence);
++                $extension=$verifiedCategory;
+                 if(($extension['status']??'')==='EXTENSION_ROUTE_PASS'&&!empty($extension['ok'])){
+                     return self::acceptVerifiedExtension($base,$extension,$persistedTitle,$raw,$registry);
+                 }
+@@ -118,18 +163,6 @@
+                     return self::withReasons($base,'SANDBOX_REQUIRED',array_values(array_unique(array_merge(['PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($extension['reason_codes']??[])))));
+                 }
+             }
+-            // Unified category decision: a verified current Journal category competes before
+-            // a family-miss can become a structure gap. No second Journal admission gate.
+-            if(class_exists('PSTE_Journal_Semantic_Router')&&class_exists('PSTE_Article_Type_Extension_Router')){
+-                $journalAuto=PSTE_Journal_Semantic_Router::evaluate($raw,$registry);
+-                if(($journalAuto['status']??'')==='JOURNAL_AUTO_PASS'&&!empty($journalAuto['ok'])){
+-                    $route=PSTE_Article_Type_Extension_Router::fromClassifiedJournal($journalAuto,$raw);
+-                    if(!empty($route['ok']))return self::acceptVerifiedExtension($base,$route,$persistedTitle,$raw,$registry);
+-                    $base['article_type_extension_routing']=$route;
+-                    $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
+-                    return self::withReasons($base,'SANDBOX_REQUIRED',(array)$route['reason_codes']);
+-                }
+-            }
+             // Sustainable C-lane routing: when the query unambiguously names an existing
+             // portal parent branch but no existing leaf family fits, preserve the miss as a
+             // STRUCTURE_GAP instead of repeatedly sending future terms into an opaque sandbox.
+@@ -148,35 +181,6 @@
+         }
+         $familyName=(string)($family['topic_family_name']??'');$base['family_key']=$familyKey;$base['family_name']=$familyName;
+ 
+-        // Registered Journal exception: complex training/understanding/housing questions may be
+-        // semantically broader than a leaf FAQ. This classifier is conservative, question-mark alone
+-        // is never sufficient, and every routed item still passes the unchanged duplicate/planning gates.
+-        if(class_exists('PSTE_Journal_Semantic_Router')){
+-            $journalAuto=PSTE_Journal_Semantic_Router::evaluate($raw,$registry,$familyKey,$familyName);
+-            if(($journalAuto['status']??'')==='JOURNAL_AUTO_PASS'&&!empty($journalAuto['ok'])){
+-                // The same proven category/intent decision feeds the existing signed
+-                // extension metadata path. It does not create a second editorial gate.
+-                if(class_exists('PSTE_Article_Type_Extension_Router')){
+-                    $e=PSTE_Article_Type_Extension_Router::fromClassifiedJournal($journalAuto,$raw);
+-                    if(!empty($e['ok']))return self::acceptVerifiedExtension($base,$e,$persistedTitle,$raw,$registry);
+-                    $base['article_type_extension_routing']=$e;
+-                }
+-                $base['family_key']=(string)$journalAuto['family_key'];$base['family_name']=(string)$journalAuto['family_name'];
+-                $base['family_resolution']=['status'=>'JOURNAL_AUTO_ROUTE_MATCH','source'=>PSTE_Journal_Semantic_Router::CONTRACT,'winner'=>['family_key'=>(string)$journalAuto['family_key'],'topic_family_name'=>(string)$journalAuto['family_name']]];
+-                $base['family_membership']=['contract'=>'PSTE_JOURNAL_AUTO_SCOPE_V1','status'=>'HIGH_CONFIDENCE_SCOPE_PASS','ok'=>true,'reason_codes'=>(array)($journalAuto['reason_codes']??[]),'write_attempted'=>false];
+-                $base['normalization']=(array)$journalAuto['normalization'];$base['intent_analysis']=(array)$journalAuto['intent_profile'];$base['semantic_consensus']=(array)$journalAuto['semantic_consensus'];$base['intent_profile']=(array)$journalAuto['intent_profile'];
+-                $base['article_type']='Journal';$base['target_category']=(array)$journalAuto['target_category'];$base['title_pipeline']=(array)$journalAuto['title_pipeline'];$base['title']=(string)$journalAuto['title'];$base['target_keyword']=(string)$journalAuto['target_keyword'];$base['domain_risk']=(array)$journalAuto['domain_risk'];$base['journal_routing']=$journalAuto;
+-                $base['title_generated']=$base['title']!=='';$base['title_candidate_only']=false;$base['title_candidate_source']='JOURNAL_AUTO_HIGH_CONFIDENCE';$base['title_candidate_source_sha256']=hash('sha256',$base['title']);
+-                // Preserve any unresolved category/intent mismatch for review. No fallback
+-                // into a merely related category and no production bypass.
+-                $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
+-                return self::withReasons($base,'SANDBOX_REQUIRED',array_values(array_unique(array_merge(
+-                    ['PSTE_JOURNAL_SIGNED_EXTENSION_EVIDENCE_REQUIRED','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],
+-                    (array)($journalAuto['reason_codes']??[])
+-                ))));
+-            }
+-        }
+-
+         // Productwahl is a reviewed candidate type but downstream production is not registered yet.
+         // A newly repaired family match must therefore never silently turn a Productwahl query into
+         // FAQ/Beratung/Vergleich production metadata. Preserve it as an explicit non-producing hold.
+@@ -276,7 +280,7 @@
+         if(empty($semantic['ok'])){$base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';return self::withReasons($base,'SANDBOX_REQUIRED',array_merge(['PSTE_NORMAL_PATH_SEMANTIC_CONSENSUS_NOT_PASS','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($semantic['reason_codes']??[])));}
+ 
+         $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS'];
+-        return $base;
++        return self::attachWorkerFlow($base);
+     }
+ 
+ 
+@@ -315,7 +319,7 @@
+         $base['domain_risk']=(array)$extension['domain_risk'];$base['article_type_extension_routing']=$extension;
+         if(strtolower($type)==='journal')$base['journal_routing']=$extension; // compatibility export only
+         $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS','PSTE_ARTICLE_TYPE_EXTENSION_ROUTE_PASS'];
+-        return $base;
++        return self::attachWorkerFlow($base);
+     }
+ 
+     /** Apply only SEO-topic metadata derived by evaluateRaw(); raw source fields remain byte-identical. */
+@@ -579,5 +583,99 @@
+     public static function payloadMatchesNormalPath(array $payload,array $path): bool {$pathRaw=self::canonicalInputQuery((string)($path['raw_query']??''));$pathSha=(string)($path['raw_query_sha256']??'');if($pathRaw===''||preg_match('/^[a-f0-9]{64}$/',$pathSha)!==1||!hash_equals(hash('sha256',$pathRaw),$pathSha))return false;$record=is_array($payload['query_record']??null)?(array)$payload['query_record']:[];$candidates=[PSTE_Editorializer::sourceQuery($payload),(string)($payload['primary_longtail_query']??''),(string)($payload['canonical_query']??''),(string)($payload['raw_user_question']??''),(string)($record['language_corrected_query']??''),(string)($record['raw_query']??'')];foreach($candidates as $candidate){$candidate=self::canonicalInputQuery((string)$candidate);if($candidate!==''&&hash_equals($candidate,$pathRaw))return true;}return false;}
+     private static function clean(string $v): string {return self::canonicalInputQuery($v);}
+     /** @return array<string,mixed> */
+-    private static function withReasons(array $base,string $status,array $reasons): array {$base['status']=$status;$base['ok']=$status==='NORMAL_PASS';$base['reason_codes']=array_values(array_unique(array_filter(array_map('strval',$reasons))));return $base;}
++    private static function withReasons(array $base,string $status,array $reasons): array {
++        $base['status']=$status;$base['ok']=$status==='NORMAL_PASS';
++        $base['reason_codes']=array_values(array_unique(array_filter(array_map('strval',$reasons))));
++        return self::attachWorkerFlow($base);
++    }
++
++    /**
++     * The four existing decisions in one lossless, ordered handoff record.
++     * This is metadata attached to the current normal path, NOT a new worker,
++     * decision authority, database table or production gate. An unresolved
++     * decision stays in the already-registered Sandbox/structure backlog.
++     * Older stored paths and signatures continue to be revalidated normally.
++     */
++    private static function attachWorkerFlow(array $path): array {
++        $raw=(string)($path['raw_query']??'');
++        $status=(string)($path['status']??'REVIEW_REQUIRED');
++        $reasons=array_values(array_unique(array_map('strval',(array)($path['reason_codes']??[]))));
++        $stages=[];$firstOpen='';
++        $add=static function(string $id,string $decision,string $detail='') use (&$stages,&$firstOpen,$reasons): void {
++            // Only the FIRST open step is reentered. Subsequent steps have no
++            // authority while earlier work remains unresolved.
++            if($firstOpen!==''&&$decision!=='NOT_STARTED')$decision='NOT_STARTED';
++            $stages[$id]=['decision'=>$decision,'detail'=>$detail,'reason_codes'=>in_array($decision,['YELLOW','RED'],true)?$reasons:[]];
++            if($firstOpen===''&&$decision!=='GREEN')$firstOpen=$id;
++        };
++        // Worker 1: existing portal relevance evidence alone decides horse relevance.
++        $relevance=(string)($path['portal_relevance']??'UNPROVEN');
++        $add('relevance',$relevance==='PROVEN'?'GREEN':($raw===''?'RED':'YELLOW'),$relevance);
++
++        // Worker 2: candidate wording is not accepted title authority. The
++        // existing dual-strand title check must have actually passed.
++        $title=(string)($path['title']??'');$pipeline=(array)($path['title_pipeline']??[]);
++        $titlePass=$title!==''&&!empty($pipeline['ok'])&&empty($path['title_candidate_only']);
++        $titleDisposition=$titlePass?'GREEN':($status==='RETAINED_NON_PRODUCING'?'RED':'YELLOW');
++        $add('title',$firstOpen===''?$titleDisposition:'NOT_STARTED',
++            $titlePass?'VALIDATED':($title!==''?'CANDIDATE_REQUIRES_VALIDATION':'TITLE_PENDING'));
++
++        // Worker 3: Journal/Fach is decided exactly once by the normal route.
++        $type=(string)($path['article_type']??'');
++        $lane=$type===''?'':(strcasecmp($type,'Journal')===0?'MAGAZIN':'FACH');
++        $add('lane',$firstOpen===''?($lane!==''?'GREEN':'YELLOW'):'NOT_STARTED',$lane!==''?$lane:'LANE_PENDING');
++
++        // Worker 4: no category guess. A real term in the current WP category
++        // registry is mandatory; structure gaps remain losslessly queued.
++        $target=(array)($path['target_category']??[]);
++        $hasCategory=(int)($target['term_id']??0)>0&&(string)($target['slug']??'')!=='';
++        $add('category',$firstOpen===''?($hasCategory?'GREEN':'YELLOW'):'NOT_STARTED',
++            $hasCategory?(string)$target['slug']:($status==='STRUCTURE_GAP'?'STRUCTURE_GAP':'CATEGORY_PENDING'));
++
++        // The existing normal path remains the sole source of production
++        // eligibility. We never turn a yellow/red decision into a pass.
++        if($status==='NORMAL_PASS'){
++            foreach($stages as $id=>$step){
++                if($step['decision']!=='GREEN')throw new RuntimeException('PSTE_WORKER_SEQUENCE_NORMAL_PASS_INCOMPLETE_'.strtoupper($id));
++            }
++        }
++        // Distinguish the FIRST step still to process from the actual source of
++        // a pre-existing engine hold. The legacy engine can determine a
++        // structure gap before title validation; reporting that as a title
++        // failure would hide the real reason a keyword left the conveyor.
++        $haltedAt='';
++        $hasReason=static function(string $prefix) use($reasons): bool {
++            foreach($reasons as $reason)if(strpos($reason,$prefix)!==false)return true;
++            return false;
++        };
++        if($status==='NORMAL_PASS')$haltedAt='';
++        elseif($relevance!=='PROVEN')$haltedAt='relevance';
++        elseif($status==='STRUCTURE_GAP'||$hasReason('JOURNAL_INTENT_RETAINED_PENDING_VERIFIED_CATEGORY')
++            ||$hasReason('FAMILY_ASSIGNMENT_NOT_PROVEN')||$hasReason('FAMILY_STRUCTURE_'))$haltedAt='category';
++        elseif($hasReason('INTENT_TYPE_BINDING')||$hasReason('TYPE_CONFLICT')
++            ||$hasReason('ARTICLE_TYPE_NOT_PROVEN')||$hasReason('PRODUCT_CHOICE_DOWNSTREAM_NOT_REGISTERED'))$haltedAt='lane';
++        elseif($hasReason('EDITORIAL_DUAL_STRAND_NOT_PASS')||$hasReason('RETAINED_TITLE_CANDIDATE')
++            ||$hasReason('TITLE_PIPELINE')||($pipeline&&!$titlePass))$haltedAt='title';
++        elseif($lane==='')$haltedAt='lane';
++        elseif(!$hasCategory)$haltedAt='category';
++        elseif(!$titlePass)$haltedAt='title';
++        $completed=[];
++        foreach($stages as $id=>$step)if($step['decision']==='GREEN')$completed[]=$id;
++        $path['worker_flow']=[
++            'contract'=>'PSTE_NORMAL_FOUR_STEPS_V1',
++            'steps'=>$stages,
++            'next_step'=>$firstOpen,
++            'halted_at'=>$haltedAt,
++            'halt_reason_codes'=>$status==='NORMAL_PASS'?[]:$reasons,
++            'completed_steps'=>$completed,
++            'resume_from'=>$firstOpen,
++            'checkpoint_recheck_required'=>true,
++            'disposition'=>$status==='NORMAL_PASS'?'GREEN':($status==='RETAINED_NON_PRODUCING'?'RED':'YELLOW'),
++            'storage'=>$status==='STRUCTURE_GAP'?'EXISTING_STRUCTURE_BACKLOG':($status==='SANDBOX_REQUIRED'?'EXISTING_SANDBOX':($status==='NORMAL_PASS'?'NORMAL_PATH':'EXISTING_RETAINED_QUEUE')),
++            'raw_query_sha256'=>$raw!==''?hash('sha256',$raw):'',
++            'article_type_registry_sha256'=>(string)($path['article_type_registry_sha256']??''),
++            'write_attempted'=>false,
++        ];
++        return $path;
++    }
+ }
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-normal-reentry-coordinator.php" "modified/Portal SEO Topic Engine/includes/class-pste-normal-reentry-coordinator.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-normal-reentry-coordinator.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-normal-reentry-coordinator.php"	2026-10-17 11:52:09.664459620 +0000
+@@ -19,13 +19,25 @@
+         foreach(PSTE_Semantic_Review_Sandbox::automaticReentryEnvelopes($limit) as $row){
+             $sandboxId=(string)($row['sandbox_id']??'');$envelope=(array)($row['envelope']??[]);if($sandboxId===''||!$envelope)continue;$reentryChecked++;
+             $envelopeSha=(string)($row['envelope_sha256']??'');
+-            try{$result=PSTE_Repository::applySandboxReentryEnvelope($envelope,$envelopeSha);}
+-            catch(Throwable $e){$code=self::safeCode($e->getMessage());$reentryFailed++;$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'DB_APPLY'];PSTE_Semantic_Review_Sandbox::markNormalReentryFailed($sandboxId,$envelopeSha,$code);continue;}
++            try{
++                // A signed halt cannot be moved to a different worker before reentry.
++                // The current normal path still revalidates today's rules/structure.
++                if((string)($row['checkpoint_error_code']??'')!=='')throw new RuntimeException((string)$row['checkpoint_error_code']);
++                $result=PSTE_Repository::applySandboxReentryEnvelope($envelope,$envelopeSha);
++            }catch(Throwable $e){
++                $code=self::safeCode($e->getMessage());$reentryFailed++;
++                $reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'DB_APPLY'];
++                // An unwriteable/corrupt Sandbox record must not abort all later
++                // independent keywords. Retain its error for the next bounded run.
++                try{PSTE_Semantic_Review_Sandbox::markNormalReentryFailed($sandboxId,$envelopeSha,$code);}
++                catch(Throwable $markError){$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>self::safeCode($markError->getMessage()),'stage'=>'SANDBOX_FAIL_MARK_PENDING_REVIEW'];}
++                continue;
++            }
+             try{PSTE_Semantic_Review_Sandbox::markNormalReentryApplied($sandboxId,$envelopeSha,$result);$reentryApplied++;}
+             catch(Throwable $e){$code=self::safeCode($e->getMessage());$reentryFailed++;$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'SANDBOX_MARK_PENDING_RETRY'];}
+         }
+         $remaining=PSTE_Semantic_Review_Sandbox::automaticReentryEnvelopes(1)!==[];
+-        return ['contract'=>'PSTE_PROVIDER_FREE_EXISTING_POTENTIAL_REENTRY_V1','status'=>'PASS','backlog'=>$backlog,'reentry_checked'=>$reentryChecked,'reentry_applied'=>$reentryApplied,'reentry_failed'=>$reentryFailed,'reentry_failures'=>$reentryFailures,'more_auto_reentry_remaining'=>$remaining,'provider_calls'=>0,'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
++        return ['contract'=>'PSTE_PROVIDER_FREE_EXISTING_POTENTIAL_REENTRY_V1','status'=>$reentryFailed>0?'PARTIAL_FAILURE':'PASS','backlog'=>$backlog,'reentry_checked'=>$reentryChecked,'reentry_applied'=>$reentryApplied,'reentry_failed'=>$reentryFailed,'reentry_failures'=>$reentryFailures,'more_auto_reentry_remaining'=>$remaining,'provider_calls'=>0,'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
+     }
+ 
+     /** Pure/read-only reentry preparation used by runtime and fixtures. @return array<string,mixed> */
+@@ -54,7 +66,9 @@
+             }
+             $reuse=self::processProviderFreeExistingPotentialBatch(25,true);
+             $report=['contract'=>'PSTE_SANDBOX_MAINTENANCE_RUN_V1','backlog'=>(array)($reuse['backlog']??[]),'reentry_checked'=>(int)($reuse['reentry_checked']??0),'reentry_applied'=>(int)($reuse['reentry_applied']??0),'reentry_failed'=>(int)($reuse['reentry_failed']??0),'reentry_failures'=>(array)($reuse['reentry_failures']??[]),'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
+-            if((string)($report['backlog']['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            if((string)($reuse['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_REENTRY_PARTIAL_FAILURE',$report);
++            elseif((string)($report['backlog']['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            elseif((string)($report['backlog']['status']??'')==='IN_PROGRESS')PSTE_Sandbox_Maintenance_Health::recordProgress($trigger,$report);
+             else PSTE_Sandbox_Maintenance_Health::recordSuccess($trigger,$report);
+         }catch(Throwable $e){
+             $code=self::safeCode($e->getMessage());
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-sandbox-maintenance-health.php" "modified/Portal SEO Topic Engine/includes/class-pste-sandbox-maintenance-health.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-sandbox-maintenance-health.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-sandbox-maintenance-health.php"	2026-10-17 11:52:09.664383865 +0000
+@@ -17,6 +17,8 @@
+             // Keep the historical failure as evidence, but it no longer describes current health after READY.
+             $runHealth='PENDING_AFTER_READY';$currentError='';$healthReason='HISTORICAL_PRE_READY_FAILURE_RETAINED_NOT_CURRENT';
+         }elseif($lastStatus==='FAIL'){$runHealth='FAIL';$healthReason='LATEST_RUN_FAILED';}
++        elseif($lastStatus==='RUNNING'&&(string)($stored['last_attempt_at_utc']??'')!==''&&strtotime((string)$stored['last_attempt_at_utc'])!==false
++            &&time()-strtotime((string)$stored['last_attempt_at_utc'])<=2*DAY_IN_SECONDS){$runHealth='RUNNING';$currentError='';$healthReason='PARTIAL_RECHECK_CONTINUES';}
+         elseif($successTs!==false&&time()-$successTs<=2*DAY_IN_SECONDS){$runHealth='PASS';$currentError='';$healthReason='RECENT_SUCCESS';}
+         elseif($successTs!==false){$runHealth='OVERDUE';$currentError='';$healthReason='LAST_SUCCESS_OVERDUE';}
+         elseif((string)($stored['last_attempt_at_utc']??'')!==''){$runHealth=$lastStatus==='RUNNING'?'RUNNING':'FAIL';$healthReason='ATTEMPT_WITHOUT_SUCCESS';}
+@@ -32,6 +34,8 @@
+ 
+     public static function recordAttempt(string $trigger): void {self::write(['last_attempt_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'RUNNING','last_error_code'=>'']);}
+     public static function recordSuccess(string $trigger,array $report): void {self::write(['last_attempt_at_utc'=>(string)(self::current()['last_attempt_at_utc']??gmdate('c')),'last_success_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'PASS','last_error_code'=>'','last_report'=>$report,'consecutive_failures'=>0]);}
++    /** Completed one small slice, NOT the whole Sandbox sweep. */
++    public static function recordProgress(string $trigger,array $report): void {self::write(['last_attempt_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'RUNNING','last_error_code'=>'','last_report'=>$report]);}
+     public static function recordFailure(string $trigger,string $code,array $report=[]): void {$cur=self::current();self::write(['last_attempt_at_utc'=>(string)($cur['last_attempt_at_utc']??gmdate('c')),'last_trigger'=>self::safe($trigger),'last_status'=>'FAIL','last_error_code'=>self::safe($code),'last_report'=>$report,'consecutive_failures'=>(int)($cur['consecutive_failures']??0)+1]);}
+     public static function recordScheduleState(bool $scheduled,string $trigger): void {self::write(['schedule_last_checked_at_utc'=>gmdate('c'),'schedule_last_trigger'=>self::safe($trigger),'schedule_last_status'=>$scheduled?'SCHEDULED':'MISSING']);}
+ 
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-sandbox-record-contract.php" "modified/Portal SEO Topic Engine/includes/class-pste-sandbox-record-contract.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-sandbox-record-contract.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-sandbox-record-contract.php"	2026-10-17 11:22:23.156024975 +0000
+@@ -31,6 +31,13 @@
+         $exclusions=PSTE_Sandbox_Portal_Relevance::exclusionEvidence($query,$registry,$nearest);
+         if(($exclusions['contract']??'')!=='PSTE_SANDBOX_EXCLUSION_EVIDENCE_V1')throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_EXCLUSION_EVIDENCE_INVALID');
+         $flow=self::compactFlow('PSTE_NORMAL_PATH_PLUS_CURRENT_PORTAL_CONTEXT',$query,self::hash($normalPath),$portal,$nearest,$nearestFailures,$exclusions);
++        // Bind the compact worker halt map to the same signed current admission.
++        // Existing records lacking this optional field remain valid/readable.
++        $worker=(array)($normalPath['worker_flow']??[]);
++        if($worker){
++            $flow['worker_checkpoint_sha256']=self::hash($worker);
++            unset($flow['dataflow_sha256']);$flow['dataflow_sha256']=self::hash($flow);
++        }
+         // V2 persists the large diagnostic components exactly once on the record and only their
+         // hashes inside sandbox_dataflow. Carry them transiently from the producer into
+         // applyToRecord(); they are stripped before sandbox_dataflow is persisted.
+@@ -92,6 +99,9 @@
+         foreach(['portal_relevance','nearest_rejected_families','exclusion_evidence'] as $field){$expectedHash=(string)($expected[$field.'_sha256']??'');if(!hash_equals($expectedHash,self::hash($record[$field]??null)))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_RECORD_FIELD_MISMATCH_'.strtoupper($field));}
+         $expectedNearestReasonHash=(string)($expected['nearest_failure_reason_codes_sha256']??'');if(!hash_equals($expectedNearestReasonHash,self::hash(array_values(array_map('strval',(array)($record['nearest_failure_reason_codes']??[]))))))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_RECORD_FIELD_MISMATCH_NEAREST_FAILURE_REASON_CODES');
+         if(!hash_equals((string)$expected['normal_path_sha256'],(string)($stored['normal_path_sha256']??'')))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_NORMAL_PATH_HASH_MISMATCH');
++        if(isset($expected['worker_checkpoint_sha256'])&&
++            !hash_equals((string)$expected['worker_checkpoint_sha256'],(string)($stored['worker_checkpoint_sha256']??'')))
++            throw new RuntimeException('PSTE_SANDBOX_WORKER_CHECKPOINT_REENTRY_MISMATCH');
+         $admissionSha=(string)($record['normal_path_admission_sha256']??'');if($admissionSha!==''&&!hash_equals($admissionSha,self::hash($normalPath)))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_ADMISSION_PATH_MISMATCH');
+         self::verifyComponentBindings($record,$stored);
+         return ['contract'=>'PSTE_SANDBOX_RECORD_DATAFLOW_VERIFY_V2','status'=>'PASS','query_sha256'=>(string)$expected['query_sha256'],'dataflow_sha256'=>(string)$stored['dataflow_sha256'],'write_attempted'=>false,'production_handoff_attempted'=>false];
+@@ -99,14 +109,16 @@
+ 
+     /** @return array<string,mixed> */
+     public static function adminView(array $record): array {
+-        $flow=(array)($record['sandbox_dataflow']??[]);self::assertFlow($flow);self::verifyComponentBindings($record,$flow);
+-        return ['contract'=>self::ADMIN_VIEW_CONTRACT,'sandbox_id'=>(string)($record['sandbox_id']??''),'query'=>(string)($record['query']??''),'search_volume'=>$record['search_volume']??null,'local_matched_terms'=>array_values((array)($record['portal_relevance']['matched_terms']??[])),'portal_relevance'=>(array)($record['portal_relevance']??[]),'exclusion_evidence'=>(array)($record['exclusion_evidence']??[]),'nearest_rejected_families'=>array_values((array)($record['nearest_rejected_families']??[])),'external_relevance'=>$record['external_relevance']??null,'relevance_adjudication'=>$record['relevance_adjudication']??null,'relevance_revision_count'=>count((array)($record['relevance_revision_archive']??[])),'current_relevance_proof'=>$record['current_relevance_proof']??null,'relevance_conflict'=>$record['relevance_conflict']??null,'internal_proposal'=>$record['internal_proposal']??null,'internal_proposal_sha256'=>(string)($record['internal_proposal_sha256']??''),'status'=>(string)($record['status']??''),'workflow_lane'=>(string)($record['workflow_lane']??''),'dataflow_status'=>'VERIFIED','dataflow_sha256'=>(string)$flow['dataflow_sha256'],'write_attempted'=>false,'production_handoff_attempted'=>false];
++        $flow=(array)($record['sandbox_dataflow']??[]);self::assertFlow($flow);self::verifyComponentBindings($record,$flow);self::verifyWorkerCheckpoint($record,$flow);
++        $worker=(array)($record['normal_path_admission_summary']['worker_flow']??[]);
++        return ['worker_flow'=>$worker,'halted_at'=>(string)($worker['halted_at']??''),'resume_from'=>(string)($worker['resume_from']??''),'completed_steps'=>(array)($worker['completed_steps']??[]),'contract'=>self::ADMIN_VIEW_CONTRACT,'sandbox_id'=>(string)($record['sandbox_id']??''),'query'=>(string)($record['query']??''),'search_volume'=>$record['search_volume']??null,'local_matched_terms'=>array_values((array)($record['portal_relevance']['matched_terms']??[])),'portal_relevance'=>(array)($record['portal_relevance']??[]),'exclusion_evidence'=>(array)($record['exclusion_evidence']??[]),'nearest_rejected_families'=>array_values((array)($record['nearest_rejected_families']??[])),'external_relevance'=>$record['external_relevance']??null,'relevance_adjudication'=>$record['relevance_adjudication']??null,'relevance_revision_count'=>count((array)($record['relevance_revision_archive']??[])),'current_relevance_proof'=>$record['current_relevance_proof']??null,'relevance_conflict'=>$record['relevance_conflict']??null,'internal_proposal'=>$record['internal_proposal']??null,'internal_proposal_sha256'=>(string)($record['internal_proposal_sha256']??''),'status'=>(string)($record['status']??''),'workflow_lane'=>(string)($record['workflow_lane']??''),'dataflow_status'=>'VERIFIED','dataflow_sha256'=>(string)$flow['dataflow_sha256'],'write_attempted'=>false,'production_handoff_attempted'=>false];
+     }
+ 
+     /** Validate one persisted current/legacy-contract record without recomputing domain decisions. */
+     public static function verifyStoredRecordSelfConsistency(array $record): array {
+         $flow=(array)($record['sandbox_dataflow']??[]);self::assertFlow($flow);$query=self::clean((string)($record['query']??''));
+         if($query===''||!hash_equals((string)($flow['query_sha256']??''),hash('sha256',$query)))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_STORED_QUERY_MISMATCH');self::verifyComponentBindings($record,$flow);
++        self::verifyWorkerCheckpoint($record,$flow);
+         $normalHash=(string)($flow['normal_path_sha256']??'');if($normalHash!==''){
+             $storedSha=(string)($record['normal_path_admission_sha256']??'');
+             if($storedSha===''){ $admission=(array)($record['normal_path_admission']??[]);if(!$admission||!hash_equals($normalHash,self::hash($admission)))throw new RuntimeException('PSTE_SANDBOX_DATAFLOW_STORED_ADMISSION_PATH_MISMATCH');}
+@@ -134,7 +146,18 @@
+ 
+     /** @return array<string,mixed> */
+     private static function normalPathSummary(array $normalPath): array {
+-        $target=(array)($normalPath['target_category']??[]);return ['contract'=>(string)($normalPath['contract']??''),'status'=>(string)($normalPath['status']??''),'ok'=>!empty($normalPath['ok']),'portal_relevance'=>(string)($normalPath['portal_relevance']??''),'family_key'=>(string)($normalPath['family_key']??''),'family_name'=>(string)($normalPath['family_name']??''),'article_type'=>(string)($normalPath['article_type']??''),'target_category_id'=>(int)($target['term_id']??0),'target_category_name'=>(string)($target['name']??''),'title'=>(string)($normalPath['title']??''),'target_keyword'=>(string)($normalPath['target_keyword']??''),'sandbox_admission_mode'=>(string)($normalPath['sandbox_admission_mode']??''),'reason_codes'=>array_values(array_unique(array_filter(array_map('strval',(array)($normalPath['reason_codes']??[]))))),'write_attempted'=>false];
++        $target=(array)($normalPath['target_category']??[]);return ['contract'=>(string)($normalPath['contract']??''),'status'=>(string)($normalPath['status']??''),'ok'=>!empty($normalPath['ok']),'portal_relevance'=>(string)($normalPath['portal_relevance']??''),'family_key'=>(string)($normalPath['family_key']??''),'family_name'=>(string)($normalPath['family_name']??''),'article_type'=>(string)($normalPath['article_type']??''),'target_category_id'=>(int)($target['term_id']??0),'target_category_name'=>(string)($target['name']??''),'title'=>(string)($normalPath['title']??''),'target_keyword'=>(string)($normalPath['target_keyword']??''),'sandbox_admission_mode'=>(string)($normalPath['sandbox_admission_mode']??''),'worker_flow'=>(array)($normalPath['worker_flow']??[]),'reason_codes'=>array_values(array_unique(array_filter(array_map('strval',(array)($normalPath['reason_codes']??[]))))),'write_attempted'=>false];
++    }
++
++    /** A persisted halt cannot be silently moved to another worker. */
++    private static function verifyWorkerCheckpoint(array $record,array $flow): void {
++        if(!array_key_exists('worker_checkpoint_sha256',$flow))return; // historical records
++        $expected=(string)$flow['worker_checkpoint_sha256'];
++        if(!preg_match('/^[a-f0-9]{64}$/',$expected))throw new RuntimeException('PSTE_SANDBOX_WORKER_CHECKPOINT_HASH_INVALID');
++        $summary=(array)($record['normal_path_admission_summary']??[]);
++        $worker=(array)($summary['worker_flow']??[]);
++        if(!$worker||!hash_equals($expected,self::hash($worker)))
++            throw new RuntimeException('PSTE_SANDBOX_WORKER_CHECKPOINT_TAMPERED');
+     }
+ 
+     /** @return array<int,array<string,mixed>> */
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-semantic-review-sandbox.php" "modified/Portal SEO Topic Engine/includes/class-pste-semantic-review-sandbox.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-semantic-review-sandbox.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-semantic-review-sandbox.php"	2026-10-17 11:54:50.405349779 +0000
+@@ -782,10 +782,19 @@
+     public static function refreshInternalStructureBacklog(bool $force=false): array {
+         PSTE_Plugin::assertReady();$token=self::acquireLock();
+         try{
++            // The existing migrated record store must never be loaded as a legacy monolith.
++            // One automatic/manual invocation advances at most 25 existing Sandbox records.
++            if(class_exists('PSTE_Sandbox_Record_Store')&&PSTE_Sandbox_Record_Store::isComplete())
++                return self::refreshInternalStructureBacklogRecordLocal($force);
+             $store=self::stored();self::assertNoActiveJob($store);
+             $last=(string)($store['last_internal_structure_recheck_at_utc']??'');
+-            if(!$force&&$last!==''&&strtotime($last)!==false&&time()-strtotime($last)<7*DAY_IN_SECONDS)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'source_data_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')throw new RuntimeException('PSTE_SANDBOX_RECHECK_BASELINE_REQUIRED');
++            // Recheck promptly after an actual rule/category change, not only after seven days.
++            // Bind to current existing baseline and existing editorial rules; no new store/worker.
++            $binding=self::internalStructureRecheckBinding($baseline);
++            $previousBinding=(string)($store['last_internal_structure_recheck_binding_sha256']??'');
++            $bindingStillCurrent=$previousBinding!==''&&hash_equals($previousBinding,$binding);
++            if(!$force&&$bindingStillCurrent&&$last!==''&&strtotime($last)!==false&&time()-strtotime($last)<7*DAY_IN_SECONDS)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'source_data_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $registry=PSTE_Article_Type_Registry::build($baseline);$inventory=PSTE_Snapshot::inventory();$checked=0;$changed=0;$failed=0;$failures=[];$now=gmdate('c');
+             $store['last_internal_structure_recheck_attempt_at_utc']=$now;
+             foreach((array)$store['records'] as $id=>$record){
+@@ -809,12 +818,121 @@
+             }
+             $report=['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>$failed===0?'PASS':'PARTIAL_FAILURE','checked'=>$checked,'changed'=>$changed,'failed'=>$failed,'failures'=>$failures,'provider_calls'=>0,'source_data_write_attempted'=>false,'published_or_draft_article_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $store['last_internal_structure_recheck_report']=$report;
+-            if($failed===0)$store['last_internal_structure_recheck_at_utc']=$now;
++            if($failed===0){$store['last_internal_structure_recheck_at_utc']=$now;$store['last_internal_structure_recheck_binding_sha256']=$binding;}
+             self::save($store);
+             return $report;
+         }finally{self::releaseLock($token);}
+     }
+ 
++    /**
++     * Same existing Sandbox planner, bounded by record count. The cursor lives in the
++     * already-present maintenance-health option; no new table, worker or provider.
++     */
++    private static function refreshInternalStructureBacklogRecordLocal(bool $force): array {
++        // Preserve the original 'never recheck during an active Sandbox research job' gate.
++        $header=PSTE_Sandbox_Record_Store::legacyHeader();
++        self::assertNoActiveJob(['job'=>$header['job']??null]);
++        $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++        if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')
++            throw new RuntimeException('PSTE_SANDBOX_RECHECK_BASELINE_REQUIRED');
++        $binding=self::internalStructureRecheckBinding($baseline);
++        $health=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        if(!is_array($health))throw new RuntimeException('PSTE_SANDBOX_RECHECK_HEALTH_INVALID');
++        $progress=is_array($health['structure_recheck_v1']??null)?$health['structure_recheck_v1']:[];
++        if($progress){
++            $expectedHash=self::internalStructureRecheckProgressHash($progress);
++            if(!hash_equals((string)($progress['checkpoint_sha256']??''),$expectedHash))
++                throw new RuntimeException('PSTE_SANDBOX_RECHECK_PROGRESS_HASH_INVALID');
++        }
++        $ids=PSTE_Sandbox_Record_Store::recordIds();$idSetSha=hash('sha256',implode('|',$ids));
++        // If a new retained keyword arrives, an offset alone could skip it in the sorted ID list.
++        // Restart this *one* provider-free scan; never discard or overwrite an existing keyword.
++        $sameRecordSet=(string)($progress['id_set_sha256']??'')!==''&&hash_equals((string)$progress['id_set_sha256'],$idSetSha);
++        $inProgress=(string)($progress['status']??'')==='IN_PROGRESS'&&hash_equals((string)($progress['binding_sha256']??''),$binding)&&$sameRecordSet;
++        $last=(string)($progress['last_completed_at_utc']??'');
++        $doneForCurrentBinding=(string)($progress['binding_sha256']??'')!==''&&hash_equals((string)$progress['binding_sha256'],$binding)&&$sameRecordSet;
++        $due=$force||$inProgress||!$doneForCurrentBinding||$last===''||strtotime($last)===false||time()-(int)strtotime($last)>=7*DAY_IN_SECONDS;
++        if(!$due)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'production_handoff_attempted'=>false,'source_data_write_attempted'=>false];
++        $total=count($ids);
++        $cursor=$inProgress?max(0,(int)($progress['cursor']??0)):0;
++        if($cursor>$total)throw new RuntimeException('PSTE_SANDBOX_RECHECK_CURSOR_OUT_OF_RANGE');
++        $slice=array_slice($ids,$cursor,25);$writes=[];$checked=0;$changed=0;$failed=0;$errors=[];$now=gmdate('c');
++        $registry=PSTE_Article_Type_Registry::build($baseline);$inventory=PSTE_Snapshot::inventory();
++        foreach($slice as $id){
++            $id=(string)$id;$record=PSTE_Sandbox_Record_Store::getRecord($id);
++            if(!in_array((string)($record['status']??''),['STRUCTURE_GAP','MATCHER_REVIEW','PROPOSAL_READY_FOR_REVIEW','REVIEW_REQUIRED'],true))continue;
++            if(self::effectiveRelevanceStatus($record)!=='RELEVANT_FOR_PORTAL')continue;
++            $checked++;$record['last_internal_structure_recheck_attempt_at_utc']=$now;
++            try{
++                $source=self::sourceSummary((string)($record['pool_key']??''));
++                $external=is_array($record['external_relevance']??null)?(array)$record['external_relevance']:[];
++                $external['status']='RELEVANT_FOR_PORTAL';
++                $external['decision_source']=$record['relevance_adjudication']['decision_source']??($external['decision_source']??'STORED_RELEVANCE_EVIDENCE');
++                $proposal=PSTE_Sandbox_Internal_Planner::plan($record,$registry,$baseline,$external,(array)$source['payload'],$inventory);
++                $oldSha=(string)($record['internal_proposal_sha256']??'');$newSha=self::hash($proposal);
++                if(!hash_equals($oldSha,$newSha))$changed++;
++                $history=array_values((array)($record['history']??[]));$history[]=self::event('PERIODIC_INTERNAL_STRUCTURE_RECHECK',(string)($proposal['status']??'REVIEW_REQUIRED'));
++                $record['internal_proposal']=$proposal;$record['internal_proposal_sha256']=$newSha;
++                $record['status']=(string)($proposal['status']??'REVIEW_REQUIRED');$record['workflow_lane']=self::workflowLaneForStatus($record['status']);
++                $record['updated_at_utc']=$now;$record['history']=$history;$record['last_internal_structure_recheck_at_utc']=$now;
++                $record['structure_recheck_health']='PASS';$record['structure_recheck_error_code']='';
++            }catch(Throwable $e){
++                $failed++;$code=self::safeCode($e->getMessage());$errors[]=['sandbox_id'=>$id,'error_code'=>$code];
++                $history=array_values((array)($record['history']??[]));$history[]=self::event('PERIODIC_INTERNAL_STRUCTURE_RECHECK_FAILED',$code);
++                $record['structure_recheck_health']='FAIL';$record['structure_recheck_error_code']=$code;
++                $record['structure_recheck_failure_count']=(int)($record['structure_recheck_failure_count']??0)+1;
++                $record['updated_at_utc']=$now;$record['history']=$history;
++            }
++            $writes[$id]=$record;
++        }
++        // Commit changed records before advancing the cursor. A failed write retries the same slice.
++        if($writes)PSTE_Sandbox_Record_Store::putRecordsBatch($writes);
++        $next=$cursor+count($slice);$complete=$next>=$total;
++        $accChecked=($inProgress?(int)($progress['checked']??0):0)+$checked;
++        $accChanged=($inProgress?(int)($progress['changed']??0):0)+$changed;
++        $accFailed=($inProgress?(int)($progress['failed']??0):0)+$failed;
++        $progress=['status'=>$complete?'COMPLETE':'IN_PROGRESS','binding_sha256'=>$binding,'id_set_sha256'=>$idSetSha,'cursor'=>$next,'total'=>$total,
++            'checked'=>$accChecked,'changed'=>$accChanged,'failed'=>$accFailed,'started_at_utc'=>$inProgress?(string)($progress['started_at_utc']??$now):$now,
++            'last_completed_at_utc'=>$complete?$now:($inProgress?(string)($progress['last_completed_at_utc']??''):''),'updated_at_utc'=>$now];
++        $progress['checkpoint_sha256']=self::internalStructureRecheckProgressHash($progress);
++        $health['structure_recheck_v1']=$progress;
++        update_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,$health,false);
++        $readback=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        $saved=is_array($readback)?(array)($readback['structure_recheck_v1']??[]):[];
++        if(!hash_equals((string)($saved['binding_sha256']??''),$binding)||(int)($saved['cursor']??-1)!==$next
++            ||!hash_equals((string)($saved['checkpoint_sha256']??''),self::internalStructureRecheckProgressHash($saved)))
++            throw new RuntimeException('PSTE_SANDBOX_RECHECK_CURSOR_NOT_SAVED');
++        if(!$complete&&function_exists('wp_schedule_single_event')&&function_exists('wp_next_scheduled')){
++            $nextCron=wp_next_scheduled(PSTE_SANDBOX_INTERNAL_RECHECK_CRON_HOOK);
++            if(!$nextCron||(int)$nextCron-time()>900)
++                wp_schedule_single_event(time()+660,PSTE_SANDBOX_INTERNAL_RECHECK_CRON_HOOK);
++        }
++        return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH',
++            'status'=>$complete?($accFailed===0?'PASS':'PARTIAL_FAILURE'):'IN_PROGRESS',
++            'checked'=>$checked,'changed'=>$changed,'failed'=>$failed,'failures'=>$errors,
++            'total_checked'=>$accChecked,'total_changed'=>$accChanged,'total_failed'=>$accFailed,
++            'cursor'=>$next,'total'=>$total,'complete'=>$complete,
++            'provider_calls'=>0,'source_data_write_attempted'=>false,'published_or_draft_article_write_attempted'=>false,'production_handoff_attempted'=>false];
++    }
++
++    private static function internalStructureRecheckProgressHash(array $progress): string {
++        $parts=[];
++        foreach(['status','binding_sha256','id_set_sha256','cursor','total','checked','changed','failed','started_at_utc','last_completed_at_utc','updated_at_utc'] as $k)
++            $parts[]=(string)($progress[$k]??'');
++        return hash('sha256','PSTE_SANDBOX_EXISTING_RECHECK_PROGRESS_V1|'.implode('|',$parts));
++    }
++
++    /** The existing Sandbox cron checks current categories/rules without a new schedule or table. */
++    private static function internalStructureRecheckBinding(array $baseline): string {
++        return hash('sha256',implode('|',[
++            'PSTE_SANDBOX_RECHECK_DEPENDENCIES_V1',
++            (string)($baseline['structure_sha256']??$baseline['structure_hash']??''),
++            (string)($baseline['protected_category_map_sha256']??''),
++            (string)PSTE_Editorializer::RULESET,
++            defined('PSTE_VERSION')?(string)PSTE_VERSION:'',
++        ]));
++    }
++
+     /** Return only fully proven automatic reentry envelopes; read-only. @return list<array<string,mixed>> */
+     public static function automaticReentryEnvelopes(int $limit=25): array {
+         $out=[];$limit=max(1,min(100,$limit));
+@@ -824,7 +942,12 @@
+             PSTE_Sandbox_Record_Store::forEachRecord(static function(array $record,string $id) use(&$out,$limit): bool {
+                 if((string)($record['status']??'')!=='AUTO_REENTRY_ELIGIBLE')return true;
+                 $proposal=(array)($record['internal_proposal']??[]);$envelope=(array)($proposal['reentry_proposal']??[]);if(($envelope['contract']??'')!=='PSTE_SANDBOX_REENTRY_ENVELOPE_V1'||($envelope['status']??'')!=='AUTO_REENTRY_ELIGIBLE')return true;
+-                $out[]=['sandbox_id'=>$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope)];return count($out)<$limit;
++                $checkpointError='';
++                if(isset($record['sandbox_dataflow']['worker_checkpoint_sha256'])){
++                    try{PSTE_Sandbox_Record_Contract::verifyStoredRecordSelfConsistency($record);}
++                    catch(Throwable $e){$checkpointError='PSTE_SANDBOX_REENTRY_WORKER_CHECKPOINT_INVALID';}
++                }
++                $out[]=['sandbox_id'=>$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope),'checkpoint_error_code'=>$checkpointError];return count($out)<$limit;
+             });
+             return $out;
+         }
+@@ -832,7 +955,12 @@
+         $store=self::stored();
+         foreach((array)$store['records'] as $id=>$record){if(count($out)>=$limit)break;if(!is_array($record)||(string)($record['status']??'')!=='AUTO_REENTRY_ELIGIBLE')continue;
+             $proposal=(array)($record['internal_proposal']??[]);$envelope=(array)($proposal['reentry_proposal']??[]);if(($envelope['contract']??'')!=='PSTE_SANDBOX_REENTRY_ENVELOPE_V1'||($envelope['status']??'')!=='AUTO_REENTRY_ELIGIBLE')continue;
+-            $out[]=['sandbox_id'=>(string)$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope)];}
++            $checkpointError='';
++            if(isset($record['sandbox_dataflow']['worker_checkpoint_sha256'])){
++                try{PSTE_Sandbox_Record_Contract::verifyStoredRecordSelfConsistency($record);}
++                catch(Throwable $e){$checkpointError='PSTE_SANDBOX_REENTRY_WORKER_CHECKPOINT_INVALID';}
++            }
++            $out[]=['sandbox_id'=>(string)$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope),'checkpoint_error_code'=>$checkpointError];}
+         return $out;
+     }
+ 
+diff -ruN "original/Portal SEO Topic Engine/includes/class-pste-topic-policy.php" "modified/Portal SEO Topic Engine/includes/class-pste-topic-policy.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-topic-policy.php"	2026-10-16 15:08:30.000000000 +0000
++++ "modified/Portal SEO Topic Engine/includes/class-pste-topic-policy.php"	2026-10-17 12:05:04.747690765 +0000
+@@ -58,6 +58,21 @@
+         if(PSTE_Normalizer::staleYear($query)!==null||in_array('STALE_YEAR_SPECIFIC_QUERY',$reasons,true))return self::ROLE_STALE;
+         if(in_array('CATEGORY_HEAD_INTENT_COLLISION',$reasons,true))return self::ROLE_HEAD_TERM;
+         if(array_intersect(['EXACT_KEYWORD_VARIANT','EXACT_EDITORIAL_INTENT_VARIANT'],$reasons))return self::ROLE_KEYWORD_VARIANT;
++        // The research-phase discovery label is not a permanent veto. A keyword
++        // with fresh, source-bound GREEN evidence for all four existing decisions
++        // may become an article topic. The ordinary duplication/readiness/age
++        // gates above and compiler/PPM gates below are not changed or bypassed.
++        // Never promote an explicitly DISCOVERY_ONLY, REJECTED or unresolved row.
++        if(!empty($candidate['discovery_only'])&&in_array($status,['PASS','AUTO_RESOLVED','APPROVED'],true)
++            &&$pathStatus==='NORMAL_PASS'&&!empty($path['ok'])&&!empty($path['title_pipeline']['ok'])
++            &&empty($path['title_candidate_only'])&&trim((string)($path['title']??''))!==''
++            &&trim((string)($path['article_type']??''))!==''
++            &&(int)($path['target_category']['term_id']??0)>0
++            &&trim((string)($path['target_category']['slug']??''))!==''
++            &&!empty($candidate['derived_state_authority']['recomputed'])
++            &&class_exists('PSTE_Normal_Metadata_Path')
++            &&PSTE_Normal_Metadata_Path::payloadMatchesNormalPath($candidate,$path))
++            return self::ROLE_ARTICLE_TOPIC;
+         if(!empty($candidate['discovery_only'])){
+             $sources=[];foreach((array)($candidate['evidence']??[]) as $e)$sources[]=(string)($e['source']??'');
+             if(array_intersect(['PAA','PAA_RELATED'],$sources))return self::ROLE_RESEARCH_CLUSTER;
+diff -ruN "original/Portal SEO Topic Engine/portal-seo-topic-engine.php" "modified/Portal SEO Topic Engine/portal-seo-topic-engine.php"
+--- "original/Portal SEO Topic Engine/portal-seo-topic-engine.php"	2026-10-16 16:02:28.000000000 +0000
++++ "modified/Portal SEO Topic Engine/portal-seo-topic-engine.php"	2026-10-17 12:07:12.859339234 +0000
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, bildet brauchbare Titel, ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.102
++ * Version: 0.57.104
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.102');
++define('PSTE_VERSION', '0.57.104');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
