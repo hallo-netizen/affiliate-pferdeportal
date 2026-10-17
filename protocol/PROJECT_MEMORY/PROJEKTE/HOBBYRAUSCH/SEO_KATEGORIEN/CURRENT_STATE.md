@@ -3,100 +3,63 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / 10ER-PILOT V6 FACHLICH + RENDERER + BROWSER PASS / MAGAZIN-ROUTING KALIBRIERT / IDENTITÄTSBINDUNG NEUER HOBBYS NOCH OFFEN / KEIN WORDPRESS-SYNC**
+STATUS: **LIVE NOCH ALTER 330ER SNAPSHOT / V7 CALIBRATED FULL LOCAL PASS / MAGAZIN-WEIRD77 PASS / HD-001 1.14.11 MANUAL-ONLY LOCAL PASS / WORDPRESS-DRY-RUN OFFEN / KEIN SYNC**
 
-## Live-Baseline
+## Live-Wahrheit
 
-Produktiv unverändert:
+Aktiv sichtbar ist weiterhin die alte Revision:
 `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
 
-- 2357 aktive physische Zielobjekte;
-- 2357/2357 Readback;
 - 8 Hauptwelten;
-- 330/330 terminale CORE-Seiten.
+- 330 terminale CORE-Hobbyseiten;
+- V7 ist **noch nicht live**.
 
-## Verbindlicher Zielvertrag
+## Verbindlicher V7-Zielbaum
 
-Jeder HOBBY_HUB wird aus zwei Perspektiven geprüft:
-1. Anfänger/Neuling;
-2. bestehender Nutzer/Fortgeschrittener/Profi.
+Profil:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_V7_CALIBRATED_ROLLOUT_20261017.json`
 
-Pflichtprüfung:
-- Einstieg & Grundlagen sichtbar;
-- FAQ / Häufige Fragen sichtbar;
-- Ausrüstung & Kosten sichtbar, wenn >=3 eigenständige Intents;
-- Praxis/Fachvertiefung sichtbar;
-- Vergleich & Kaufberatung verpflichtend prüfen;
-- jeder sichtbare Leaf mindestens 3 eigenständige Beitragsintentionen;
-- vorhandene gute Leafs werden erweitert/umbenannt/zusammengeführt, nicht durch Standardschema dupliziert.
+SHA-256:
+`a36a7b1b3639b503028d2339c17fcc04ca349769c4f3d2d5dfdb11f8061325fc`
 
-## 10er-Pilot V6 – PASS
+Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_LEAF_ROLLOUT_AUDIT_V7_20261017.json`
 
-Zentral:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_PILOT10_V6_20261017.json`
+Resolved-/HD-001-Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_RESOLVED_V7_AUDIT_20261017.json`
 
-Kalibrierung:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_PILOT10_CALIBRATION_V6_20261017.json`
+V7:
+- 3517 Zielknoten;
+- 381 terminale Hobbyseiten;
+- 381/381 Einstieg/Grundlagen;
+- 381/381 FAQ;
+- 381/381 Ausrüstung/Kosten-Abdeckung;
+- 381/381 Vergleich & Kaufberatung;
+- 381/381 mindestens zwei Fach-/Profi-Vertiefungsleafs;
+- pro Hobby 6–10 sichtbare Content-Leafs;
+- jeder Leaf mindestens 3 eigenständige Beitragsintentionen;
+- keine fehlenden Parents;
+- keine doppelten Node-IDs/Slugs;
+- 0 TargetTree-Errors / 0 Warnings;
+- Registry-/Renderer-Simulation 0 Abweichungen.
 
-Browser:
-`/hobby rausch/releases/HOBBY_DEPOT_BROWSER_ACCEPTANCE_PILOT_V6_20261017.json`
+## Kalibrierte Leaf-Regel
 
-Renderer-Simulation:
-`/hobby rausch/releases/HOBBY_DEPOT_SIM_PILOT_V6_20261017.txt`
+Nicht starr gleich bauen.
 
-Pilot:
-- Buchbinden 7 Leafs;
-- Balance Board 8;
-- Glasmalerei 9;
-- Lasergravieren 9;
-- Fledermausbeobachtung 9;
-- Hydrokultur 8;
-- Riffaquaristik 10;
-- Briefmarken sammeln 8;
-- Geocaching 9;
-- Imkerei 9.
+Verbindlich:
+- bestehende gute Fachleafs bleiben;
+- universelle Nutzerbedürfnisse werden sichtbar abgedeckt;
+- vorhandener Ausrüstungsleaf übernimmt Kosten, wenn sinnvoll, statt Doppelung;
+- FAQ bleibt eigener sichtbarer Bereich;
+- Vergleich & Kaufberatung eigener Leaf nur bei >=3 echten Beratungs-/Vergleichsintents;
+- Pflege, Wartung, Sicherheit, Probleme, Materialien, Methoden, Projekte, Varianten, Orte, Lernen usw. nur als eigener Leaf bei >=3 echten Intents und ohne Doppelowner.
 
-Für alle 10:
-- Anfängerabdeckung PASS;
-- FAQ PASS;
-- Ausrüstung/Kosten PASS;
-- Vergleich & Kaufberatung PASS;
-- mindestens 2 echte Fach-/Profi-Leafs PASS;
-- jeder Leaf >=3 eigenständige Artikelintents PASS.
+## Mega-Struktur V7
 
-Wichtige Pilotkorrektur:
-- Buchbinden: V5-Doppelung `Ausrüstung & Kosten` + `Ausrüstung` zusammengeführt; bestehender stabile Ausrüstungs-Leaf übernimmt Ausrüstung+Kosten;
-- Imkerei: V5-Doppelung `Ausrüstung & Kosten` + `Ausrüstung & Beute` zusammengeführt zu `Ausrüstung, Beuten & Kosten`;
-- universelle Nutzerbedürfnisse müssen sichtbar abgedeckt sein, aber nicht durch doppelte Standardschema-Leafs.
-
-## Vergleich & Kaufberatung
-
-Eigenes Büro:
-`../PRODUKTVERGLEICH/CURRENT_STATE.md`
-
-Regel:
-- Produktgruppen-/Lösungsvergleich;
-- Kaufberatung nach Einsatz, Budget, Erfahrung;
-- konkrete Produkt-/Modellvergleiche;
-- eigener Leaf nur bei >=3 eigenständigen Vergleichs-/Beratungsintents;
-- sonst Integration in Ausrüstung/Kosten oder passenden Fachleaf.
-
-Alle 10 Pilot-Hobbys erfüllen die Schwelle.
-
-## Fertigen / Mega-Struktur – fachlich gelöst
-
-V5 hatte mit Modellbau + Naturmaterial 11 echte Mega-Zwischenbereiche.
-
-V6:
-- stabiler Hub `Holz` wird zu **Holz & Natur**;
-- Besenbinden, Korbflechten, Weidenflechten wechseln von `Naturmaterial` nach `Holz & Natur`;
-- `Naturmaterial` wird archiviert;
-- Modellbau bleibt unter Fertigen;
-- kein Hobby geht verloren.
-
-Ergebnis echte Mega-Zwischenbereiche:
+Echte Mega-Zwischenbereiche:
 - Gestalten 7;
-- Fertigen **10 PASS**;
+- Fertigen 10;
 - Technik 9;
 - Forschen 8;
 - Pflanzen 9;
@@ -104,100 +67,71 @@ Ergebnis echte Mega-Zwischenbereiche:
 - Bewegen 8;
 - Sammeln 9.
 
-Direkte Hobby-/Orientierungsseiten wie Heimwerken/Gärtnern bleiben auf der Weltseite erreichbar, zählen aber nicht als Mega-Menü-Zwischenbereich.
+Fertigen:
+- `Holz` → `Holz & Natur`;
+- Besenbinden, Korbflechten, Weidenflechten dort eingeordnet;
+- alter Hub `Naturmaterial` archiviert;
+- Modellbau bleibt eigener Zwischenbereich;
+- kein Hobby verloren.
 
-## Magazin – kalibriertes Modell
+Direkte Hobby-/Orientierungsseiten wie Heimwerken/Gärtnern bleiben auf der Weltseite, zählen aber nicht als Mega-Zwischenbereich.
 
-Zentral:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_MAGAZIN_ROUTING_V1_20261017.json`
+## Identitäten / Overrides
 
-Die bestehenden 12 Magazin-Kacheln bleiben als Einstiege/Views.
+51/51 neue V7-Hobbyseiten stabil gebunden:
+- 42 an bestehende Master-IDs;
+- 8 neue stabile Master-Identitäten;
+- Sondeln + Metalldetektion bewusst zu einer kanonischen Identität zusammengeführt.
 
-Für kleine/ungewöhnliche echte Hobbys:
-- zunächst **ein kanonischer Hobby-Porträt-Artikel pro Hobbyidentität**;
-- keine Mini-Taxonomie pro schrägem Hobby;
-- zusätzliche Auffindbarkeit über Views/Tags nach Art, Situation, Budget, Saison;
-- keine zweite SEO-Kopie eines CORE-Hobbys.
+Stale Overrides nach Bereinigung:
+**0**
 
-Grobe Art-Views:
-- kreativ & handwerk;
-- technik & tüfteln;
-- natur & forschen;
-- tiere;
-- bewegung & wettkampf;
-- sammeln & suchen;
-- genuss & kurioses;
-- draußen & abenteuer.
+Plane Spotting:
+`Forschen → Spotting & Verkehr`
 
-Explizite Masterliste:
-- 841 Master-Einträge;
-- 77 ausdrücklich als `Besonders schräge Kandidaten / Begriffe` markiert;
-- davon 18 bereits exakt als aktive CORE-Hobbys vorhanden → Magazin nur View/Relation, kein zweiter SEO-Artikel;
-- übrige Kandidaten vor Artikelproduktion Alias-/Subtopic-Prüfung.
+Spotting & Verkehr:
+Plane Spotting · Trainspotting · Ship Spotting · Car Spotting
 
-## Identitätsbindung – noch offener Gate
+## Magazin
 
-Im V6-Pilotbestand existieren 51 aktive neue `core:proposal:*` Hobbyseiten.
+Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_MAGAZIN_WEIRD77_ROUTING_AUDIT_20261017.json`
 
-Befund:
-- 42/51 lassen sich direkt auf vorhandene Hobby-Master-IDs binden;
-- 9 benötigen Intake/Merge:
-  - Trainspotting;
-  - Ship Spotting;
-  - Car Spotting;
-  - Sondeln & Metalldetektion;
-  - Penjing;
-  - Saikei;
-  - Kräuteranbau;
-  - Obst im Kübel;
-  - Terrarienbau.
+- 12 bestehende Magazin-Kacheln bleiben Einstiegs-/View-Struktur;
+- keine zweite konkurrierende Hobby-Taxonomie;
+- pro eigenständigem kleinen/skurrilen Hobby zunächst ein kanonisches Hobby-Porträt;
+- CORE-Hobby im Magazin nur Relation/View, keine zweite SEO-Hobbyseite;
+- 77 ausdrücklich schräge Master-Kandidaten geprüft;
+- 37 CORE_RELATION;
+- 28 PORTRAIT_CANDIDATE;
+- 12 PORTRAIT_ALIAS;
+- 35 eindeutige Porträt-Owner nach Merge;
+- 0 offene Owner-Reviews.
 
-Besonderheit:
-`Sondeln & Metalldetektion` trifft im Master bereits auf getrennte Identitäten `Sondeln` und `Metalldetektion`; hier ist vor Finalisierung eine Merge-/Orientierungsentscheidung nötig.
+## DataForSEO
 
-## Stale-Override-Audit
+Evidence, Keyword-/Fragen-/Clustering-Hilfe.
+Nie Strukturautorität.
 
-Vor Finalprofil müssen 9 Altbindungen korrigiert werden:
-- Korbflechten, Weidenflechten, Besenbinden zeigen noch auf alten Parent `Naturmaterial`;
-- Plane Spotting zeigt im Override noch auf `Messen & Analysieren` statt `Spotting & Verkehr`;
-- Lederprägen, Nachtvogel-Beobachtung, Libellenbeobachtung, Wildbienenhotels, Hummelkästen sind im Alt-Override noch EDITORIAL_TOPIC, obwohl sie im Kandidaten CORE sind.
+## Sicherer HD-001-Kandidat
 
-Kein Massensync vor Bereinigung.
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.11_HOBBY_DEPOT_V7_MANUAL_ONLY_LOCALPASS.zip`
 
-## Technische Pilotprüfung
+SHA-256:
+`d441f36899ce8ef6fd8a47051ea066e24aeb41ac6ec07f28c2cae5c11444311e`
 
-HD-001 TargetTree:
-- valid=true;
-- 0 Errors;
-- 0 Warnings.
-
-Registry-/Design-Vollsimulation:
-- 381 terminale Hobbyseiten;
-- 0 page-child mismatch;
-- 0 category-child mismatch;
-- 0 route/world mismatch;
-- 0 render mismatch;
-- Trainspotting-Negativfall PASS.
-
-Browser:
-1920 / 1440 / 1180 / 1024 / 901 / 900 / 768 / 761 / 760 / 390 px:
-- alle 8 Mega-Menüs;
-- initial 5 gleichmäßige Gruppen;
-- `Mehr Kategorien` zeigt sämtliche echten Zwischenbereiche;
-- kein horizontaler Overflow;
-- direkte Hobbyseiten nicht als Mega-Zwischenbereich;
-- Pilot-Leafs vollständig sichtbar.
-
-## Timeout-Korrektur
-
-HD-001 1.14.9 ist verworfen.
-Sicherer Kandidat:
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.10_MANUAL_ONLY_TIMEOUT_FIX_LOCALPASS.zip`
+- 1.14.9 = verworfen / Timeout-Risiko;
+- 1.14.11 = manual-only;
+- Installation/Aktivierung: 0 Target-Runner-init-hooks, 0 Writes, 0 Schedules, 0 Network;
+- eingebettetes V7-Profil: 3517 Knoten, Hash identisch;
+- ZIP 47/47 PASS;
+- Dry-Run kann keinen Sync starten;
+- Apply bleibt separater bestätigungspflichtiger Weg.
 
 ## ERSTER OFFENER BLOCKER
 
-**Vor Massenausrollung müssen die 51 neuen Proposal-Hobbys an stabile Hobby-Identitäten gebunden und die 9 stale Overrides bereinigt werden.**
+**Der echte manuelle V7-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt. V7 darf vorher nicht synchronisiert werden.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Identitäts-/Override-Bereinigung V6 fertigstellen; danach die im 10er-Pilot bestätigte Leaf-Regel batchweise auf die restlichen HOBBY_HUBs anwenden. Noch kein WordPress-Sync.**
+**Live HD-001 1.14.9 durch 1.14.11 ersetzen und anschließend ausschließlich den manuellen V7-Final-Dry-Run ausführen. Noch keinen Apply/Sync bestätigen.**
