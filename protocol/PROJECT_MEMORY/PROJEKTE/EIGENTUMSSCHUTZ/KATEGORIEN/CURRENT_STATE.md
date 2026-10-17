@@ -1,6 +1,10 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+**Sprach-Nachkorrektur:** Die **91 Vergleichskategorien der alten Themenseiten sind inzwischen individuell nach konkreten Systemen/Produkten/Maßnahmen benannt**. Kein Standard-„Systeme & Lösungen vergleichen“ mehr. Die 91 technischen Vorschlagskennungen wurden mit genau diesen Namen neu berechnet und im `C23_475_ERGAENZUNGEN_GEBUNDENES_FACHDELTA_20261017.json` synchronisiert (Commit `46d61f2a530c0f59eab9ec9536286530a17f7f3f`). **475/475 weltweit verschiedene neue Namen, 475/475 einzigartige logische IDs**, kein WordPress-Write.
+
+
+
 ## 17.10.2026 – NEUESTE KATEGORIEN-PRÜFUNG: 265 THEMEN VOLLSTÄNDIG, 475 NACHHOL-KANDIDATEN
 **Verbindliche Nutzerkorrektur:** Es genügt NICHT, nur die 172 neuen C2.2-Topic-Seiten um FAQ und Vergleiche zu ergänzen. Auch die **93 älteren** WordPress-Seite3-Themen müssen dieselbe individuelle fachliche Qualitätsprüfung erhalten. **FAQ und Beratung sind für ALLE Themen verbindlich**, Vergleiche fast überall, alle anderen Facetten strikt nur bei echtem Mehrwert und grob 3–5 künftig möglichen Beiträgen. Keine Titel/Artikel schreiben oder prüfen. Einsteiger- und Erfahrungsbedarf berücksichtigen. Aktiver Zielvertrag wurde um genau diese jüngste Priorität ergänzt.
 
