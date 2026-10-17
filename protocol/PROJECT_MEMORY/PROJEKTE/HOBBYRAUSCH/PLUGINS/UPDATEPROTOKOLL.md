@@ -3538,3 +3538,62 @@ NEXT:
 Erwartung: 3487 / CREATE 1122 / ADOPT 4 / UPDATE 2361 / UNCHANGED 0 / ARCHIVE 1 / Errors 0.
 Bei Abweichung sofort STOP, kein Sync.
 
+---
+
+## PU-20261017-074 – HD-003 1.50.670 / Mega-Menü zwei Reihen + ausschließlich freigegebene Bildkorrekturen
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+VON / AUF:
+1.50.668 live → 1.50.670 Kandidat.
+
+ANLASS:
+Frontend nach V7.1 zeigte im Mega-Menü zunächst nur fünf Zwischenbereiche. `Spotting & Verkehr`, `Citizen Science` und `Natur bestimmen` wurden erst über `Mehr Kategorien` sichtbar.
+
+NUTZERREGEL:
+- zwei Reihen direkt sind okay;
+- `Mehr Kategorien` erst bei einer dritten Reihe;
+- Unterkategorien leicht größere Schrift;
+- Bildänderungen ausschließlich an den ausdrücklich genannten Kategorien;
+- alle anderen Kategorien tabu.
+
+KORREKTUR MEGA:
+- bestehende 1.50.669-WIP-Regel für echte Zwischenbereiche übernommen;
+- sichtbares Limit 10 statt 5;
+- bei aktuellem V7.1 damit alle 7/10/9/8/9/7/8/9 Zwischenbereiche direkt sichtbar;
+- `Mehr Kategorien` bleibt nur für hypothetisch >10;
+- Heimwerken/Gärtnern bleiben direkte Hobbyseiten und werden nicht zu Mega-Spalten.
+
+BILD-SCOPE:
+Nur 17 freigegebene Bereiche.
+Holz & Natur ausdrücklich nicht geändert.
+
+RÜCKFALLPRÜFUNG:
+1.50.668 gegen 1.50.650, 13 relevante Dateien inklusive Bildmap: 13/13 byte-identisch.
+Damit kein neuer Bild-Rückfall durch 1.50.668; Altprobleme wurden lediglich mitgeführt.
+
+QA:
+- PHP 61/61 PASS;
+- PHP-Registry-Harness V7.1 PASS;
+- Mega-Zahlen 7/10/9/8/9/7/8/9;
+- 17 Hero 600×320;
+- 17 Preview 200×107;
+- 0 exakte/nahe Duplikate im benannten Set;
+- Bildmap nur an 17 freigegebenen Hero-Schlüsseln geändert;
+- Cards-Mapping unverändert;
+- ZIP PASS;
+- Roundtrip 1009/1009 identisch.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.670_HOBBY_DEPOT_MEGA2ROWS_TARGETED_IMAGES_HARDPASS.zip`
+
+SHA-256:
+`9e21fd6c402fbb1a3358a58807db8b28a322a499d8478fbffb375fadbecc0408`
+
+LIVE:
+noch offen.
+
+NEXT:
+1.50.670 installieren → gezielter Frontend-Check der Mega-Menüs und ausschließlich der benannten Bildbereiche.
+
