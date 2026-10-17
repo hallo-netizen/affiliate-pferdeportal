@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
-STAND: 2026-10-09
-STATUS: RULE 2.7 FAIL-CLOSED KANDIDAT LOKAL PASS / CURRENT.zip NICHT SYNCHRONISIERT
+STAND: 2026-10-17
+STATUS: **1.14.12 / V7.1 LOCAL HARD PASS / ECHTER WORDPRESS-DRY-RUN OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -9,39 +9,44 @@ PLUGIN-ID:
 NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
-CODEBASIS:
-`1.14.8`
+KANDIDATENVERSION:
+`1.14.12`
 
 LOKAL GEPRÜFTES ARTEFAKT:
-`HD001_V1.14.8_RULE27_FAILCLOSED_COMPLETE_ONE_SYNC_HARDPASS.zip`
+`HD001_V1.14.12_HOBBY_DEPOT_V7_1_MANUAL_ONLY_LOCALPASS.zip`
 
 SHA-256:
-`0ae09fa5d75656416a0e4e7c1bb4fab74e01e776c2e36b13b8b6734a9efc5c0c`
+`2a0ac6e936628baf7aff3b0ed67bdecd60a9ca9ba23d992396fa4d0abf2b0a5f`
 
-REVISION:
-`HD-TARGET-3P-RULE27-FAILCLOSED-COMPLETE-20261009+bacb614f00854923`
+ZIELPROFIL:
+`HOBBY_DEPOT_TARGET_PROFILE_V7_1_DRYRUNFIX_20261017`
 
-EVIDENCE:
-`../../../SEO_KATEGORIEN/HD001_RULE27_FAILCLOSED_FINAL_LOCAL_ACCEPTANCE_20261009.md`
-
-LOKALE ABNAHME:
-- PHP 33/33 PASS;
-- ZIP-Integrität PASS;
-- Dry-Run 373 CREATE / 0 ADOPT / 1729 UPDATE / 6 ARCHIVE;
-- Full Sync COMPLETE;
-- 2102/2102 Readback;
-- Frontend PASS;
-- 279/279 HOBBY_HUBs PASS;
-- Header PASS;
-- zweiter Dry-Run 2102 UNCHANGED.
-
-CURRENT.zip:
-NICHT synchronisiert.
-
-GRUND:
-Der verfügbare GitHub-Connector kann Text/Git-Objekte schreiben, übernimmt aber keine lokale Binärdatei direkt aus dem Arbeitscontainer. Es wird kein byteidentisches GitHub-Binary erfunden.
+PROFIL-SHA-256:
+`14b7b4b66310ccf19e51e9a4e403628af8705a5ae6f1e14e03f5c87f0991bc7e`
 
 AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
-Dieses Manifest ist nur Artefaktstatus/Evidence, keine zweite Current-Wahrheit.
+FACH-CURRENT:
+`../../../SEO_KATEGORIEN/CURRENT_STATE.md`
+
+LOKAL BELEGT:
+- ZIP 47/47 Dateien PASS;
+- Pluginversion 1.14.12;
+- `APKW_TARGET_TREE_MANUAL_ONLY=true`;
+- Target-Runner-init-hooks 0;
+- Installation/Aktivierung: 0 Writes / 0 Schedules / 0 Network;
+- Resolver: 3517 Zielknoten / 862 Entities / 0 Errors / 0 Warnings;
+- Dry-Run-Simulation gegen alte 330er Baseline: PASS;
+- CREATE 1128 / ADOPT 3 / UPDATE 2356 / ARCHIVE 1;
+- Provider Calls 0;
+- WordPress Structure Writes 0;
+- Dry-Run startet keinen Apply.
+
+CURRENT.zip:
+**NICHT synchronisiert.**
+
+GRUND:
+Der echte WordPress-Dry-Run ist noch offen. Der Campus erhält vor Live-/Release-Abnahme keine erfundene oder unvollständig freigegebene Binärwahrheit.
+
+Dieses Manifest ist Artefaktstatus/Evidence, keine zweite Current-Wahrheit.
