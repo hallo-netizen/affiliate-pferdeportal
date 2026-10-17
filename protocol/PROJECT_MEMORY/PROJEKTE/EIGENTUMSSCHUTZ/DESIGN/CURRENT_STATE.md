@@ -1,5 +1,20 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 17.10.2026 – DESIGN 0.1.30 – KORREKTUR GEPRÜFT, LIVE-ABNAHME OFFEN
+**Aktuelles Artefakt:** Persönliche Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.30_GEPRUEFT.zip` (kompletter bestehender WordPress-Pluginordner). SHA-256 `0d41e99e23d256a07d8a3ee95d13113479a78ee2b79119a6856d90597c38b92c`. Vorversion 0.1.29 wurde lokal entpackt und nur `includes/world-layout.php`, Plugin-Versionsheader sowie vier ergänzende WebP-Dateien geändert; alle anderen Dateien bytegleich, keine Kategorie- oder Inhaltsdaten geschrieben.
+
+**Ursache:** Die früheren „eindeutigen“ Fotos waren mehrfach **inhaltlich identische Bilddaten** trotz verschiedener Dateinamen: `hero-vandalismus-zerstoerung.webp` = `fix-vandalismus-vereine-kleingewerbe-129.webp`, `focus-einfahrt-tor.webp` = `fix-technik-tore-zugang.webp`; weitere Doppelvarianten bei Fassade und Gewerbe. Alte Prüfung verglich nur Namen.
+
+**Korrektur:** In den Hauptwelten **Vandalismus** und **Technik** feste eindeutige Szenen für Fassade/Außenflächen, Vereine/Kleingewerbe und Tore/Zugangstechnik (sowie klare Fallback-Szene für zusätzliche Vandalismus-Themen). Vorhandene themenfremde Fallback-Duplikat-Aliase werden im PHP als dieselbe Bildidentität gewertet, ohne pro Frontend-Aufruf Dateihashes auszurechnen. Restliche vier Hauptwelten unberührt. Veraltete blaue Links **„Magazin / Dienstleister“** haben im aktuellen Template keine direkte Ausgabe; das bisherige einmalige JS war zu eng und ignorierte externe/später geladene Varianten. Nun gezielte globale Paarerkennung nur auf sechs Weltseiten, auch bei verschachtelten Links, außerhalb des Pluginwrappers und bei späterer Einfügung, mit zeitlich begrenztem DOM-Beobachter. Magazin-Ratgeber-Kachel, Header und Footer dürfen nicht entfernt werden. Keine Änderung an CSS, Hero, Struktur, Artikeln oder Werbung.
+
+**Lokale Belege:** 8/8 PHP-Dateien Syntax PASS. Browser-Chromium **vier vollständige lokal gerenderte Weltseiten** (Vandalismus und Technik, je Desktop 1440px/Mobil 390px) PASS: 6/6 Kacheln je Welt vollständig geladen (jede Bilddatei 1619–1916px breit), 1,7:1 Bildverhältnis, keine horizontalen Überläufe, 0 visuell identische Fotos per Bild-Difference-Hash-Vergleich (kleinster Paarabstand 112 bzw. 119), alle alten Link-Paare in vier Varianten einschließlich später Einfügung nicht mehr im Layout, reguläre Magazin-Kachel und Footer erhalten. 0 JS-Seitenfehler. ZIP-Integrität vollständig PASS; Diff gegen 0.1.29 auf genau 2 vorhandene Dateien plus 4 WebP-Zugänge begrenzt. **Keine echte WordPress-Live-Abnahme behaupten**: Remote-Website derzeit von den Tools nicht erreichbar.
+
+**Genau eine DESIGN-NEXT-ACTION:** Bestehendes Designplugin in WordPress mit vollständiger ZIP **0.1.30** als Update installieren, danach auf den echten Hauptkategorieseiten **Vandalismus und Technik** alle Kacheln sowie die alte blaue Leiste nach hartem Reload prüfen. Falls die externe Leiste weiterhin erscheint, DOM-/Pluginquelle live bestimmen, nicht erneut Bildnamen tauschen oder ungeprüft Fixes aneinanderreihen.
+
+---
+
+
+
 ## 17.10.2026 – DESIGNPLUGIN 0.1.29 – LOKAL GEPRÜFTE GEZIELTE KORREKTUR (LIVE OFFEN)
 **Current über ältere 0.1.26-/0.1.28-NEXT-ACTION:** Einzig aktuelles Design-Artefakt ist die **vollständige Update-ZIP** in der persönlichen Library: `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.29_FINALE.zip`. Bestehender Pluginordner und Identität unverändert. Gegenüber Ausgangsversion **0.1.28** wurden nur drei bestehende Plugin-Dateien geändert (`assets/style.css`, `includes/world-layout.php`, Haupt-PHP für Versionsnummer/CSS-Cacheversion) und zwei neue separate WebP-Fotos ergänzt; alle weiteren Dateien bytegleich.
 
