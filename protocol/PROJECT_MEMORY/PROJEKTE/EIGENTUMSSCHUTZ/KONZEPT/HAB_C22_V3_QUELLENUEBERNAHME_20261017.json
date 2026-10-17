@@ -48,7 +48,11 @@
     "faq_proposals_with_concrete_three_manually_grounded_topics": 172,
     "comparison_proposals_with_three_manually_specified_axes": 172,
     "optional_candidates_with_three_topic_based_review_aspects": 103,
-    "status": "FULL_SCOPE_EVIDENCE_DRAFT__NOT_WORDPRESS_APPROVED_AND_NOT_SEO_RESEARCHED"
+    "status": "FULL_SCOPE_EVIDENCE_DRAFT__NOT_WORDPRESS_APPROVED_AND_NOT_SEO_RESEARCHED",
+    "coarse_topic_scope_review": "172_THEMEN_GROB_GESICHTET_NICHT_ALLE_KATEGORIEN_ENDGUELTIG_FREIGEGEBEN",
+    "additional_distinct_category_candidates_20261017": 26,
+    "optional_cost_special_reviews_20261017": 15,
+    "historical_content_evidence_not_article_task": true
   },
   "topics": [
     {
@@ -171,7 +175,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Notfallorganisation & Zuständigkeiten",
+          "independent_value": "Unabhängig von Kontrollgängen: Kontaktketten, Vertretung und Entscheidungen im Ernstfall.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -293,7 +310,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Kontrollberichte & Nachweise",
+          "independent_value": "Leistung und Auswahl stehen bereits; Kontrolle der tatsächlichen Durchführung und nachvollziehbare Nachweise fehlen.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -432,7 +462,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -556,7 +594,12 @@
             "Montage- und Dienstleistungskosten bei GPS-Tracker und Akkuverbrauch",
             "Folge-, Reparatur- und Betriebskosten bei Versicherungsschutz und Ersatzbeschaffung"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Kosten für Sicherung, Ortung und laufende Dienste gehen über Schlossauswahl hinaus.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Einbruch & Diebstahl",
@@ -577,7 +620,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -698,7 +749,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -819,7 +878,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -943,7 +1010,12 @@
             "Montage- und Dienstleistungskosten bei Ortungslösungen für Elektromobile",
             "Folge-, Reparatur- und Betriebskosten bei Wiederbeschaffung und Übergangslösungen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Sicherung, Ortungsdienst und Ersatzaufwand sind verschiedene Kostenfaktoren.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Einbruch & Diebstahl",
@@ -964,7 +1036,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1133,7 +1213,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 5,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1278,7 +1366,12 @@
             "Montage- und Dienstleistungskosten bei Garagennebenzugang und Personentür",
             "Folge-, Reparatur- und Betriebskosten bei Abstimmung mit elektrischen Antrieben"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Mechanische Nachrüstung, Antriebsintegration und fachliche Montage erzeugen eigenständige Kostenfragen.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Einbruch & Diebstahl",
@@ -1300,7 +1393,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1424,7 +1525,12 @@
             "Montage- und Dienstleistungskosten bei Lagerorte für akkubetriebene Gartengeräte",
             "Folge-, Reparatur- und Betriebskosten bei Nachbarschaftshilfe und Zugang zu Kleingartenanlagen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Schutzbeschläge, Einbau und laufender Sicherungsaufwand sind unterschiedlich.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Einbruch & Diebstahl",
@@ -1445,7 +1551,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1611,10 +1725,23 @@
             "Montage- und Dienstleistungskosten bei Zusatzsicherung ohne vollständigen Türtausch",
             "Folge-, Reparatur- und Betriebskosten bei Risiken bei Schlüsselverlust und notwendigem Wechsel"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Zylindertypen, Schließanlagen, Schlüssel und Handwerkerleistungen rechtfertigen eigene Kostenbetrachtung.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 5,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1756,7 +1883,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Tresor & Versicherungsschutz",
+          "independent_value": "Versicherungsanerkennung, Sicherheitsklasse und Nachweispflichten getrennt von der reinen Produktauswahl.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 5,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -1898,7 +2038,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2040,7 +2188,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Übung & sicherer Umgang",
+          "independent_value": "Verantwortlicher Umgang und Grenzen der Anwendung über Auswahl und Recht hinaus.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2207,7 +2368,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Vorgehen nach Diebstahl im Hofladen",
+          "independent_value": "Nach einem Vorfall sind Dokumentation, Schadensabwicklung und Wiederaufnahme des Geschäfts eigene Anliegen.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2352,7 +2526,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2497,7 +2679,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2621,7 +2811,12 @@
             "Montage- und Dienstleistungskosten bei Zulässige Kamerabeobachtung am privaten Standort",
             "Folge-, Reparatur- und Betriebskosten bei Wartung bei klemmenden oder defekten Türen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Abholbox, elektronischer Zugang, Service und Vandalismusschäden bringen unterschiedliche Aufwände.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Einbruch & Diebstahl",
@@ -2642,7 +2837,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2809,7 +3012,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Schlüssel- & Nutzerverwaltung in Vereinshallen",
+          "independent_value": "Wechselnde Gruppen, Berechtigungen und Schlüsselrückgabe über allgemeinen Zugangsschutz hinaus.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Einbruch & Diebstahl",
@@ -2976,7 +3192,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3187,7 +3411,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3338,7 +3570,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Heimspeicher regelmäßig kontrollieren",
+          "independent_value": "Laufende Überprüfung statt Aufstellung, einmaliger Abnahme oder Prüfung nach Schaden.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3440,7 +3685,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3564,10 +3817,23 @@
             "Montage- und Dienstleistungskosten bei Ungewöhnlicher Geruch oder Betriebsgeräusche",
             "Folge-, Reparatur- und Betriebskosten bei Vorgehen nach Abschaltung aus Sicherheitsgründen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Überwachung, Brandschutz-Nachrüstung, fachliche Prüfung und Ersatz sind wirtschaftlich trennbar.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3715,10 +3981,23 @@
             "Montage- und Dienstleistungskosten bei Abschaltungen und Fehlermeldungen",
             "Folge-, Reparatur- und Betriebskosten bei Wartung von Schutztechnik und Gehäuse"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Schutzkomponenten, Prüfung, Montage und Nachrüstung haben unterschiedliche Kostenrollen.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3840,7 +4119,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -3967,7 +4254,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4134,7 +4429,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4329,7 +4632,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 5,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4474,7 +4785,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4619,7 +4938,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Brandschutzbekleidungen richtig einbauen",
+          "independent_value": "Planung und fachgerechte Ausführung statt bloßer Materialwahl und Schadensbehandlung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4758,7 +5090,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -4879,7 +5219,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5021,7 +5369,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5166,7 +5522,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Brandschutz an Bord prüfen & warten",
+          "independent_value": "Wiederkehrende Bereitschaft und Prüfung der Brandschutzausrüstung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5268,7 +5637,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5370,7 +5747,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5537,7 +5922,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5658,7 +6051,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5803,7 +6204,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -5924,7 +6333,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6048,10 +6465,23 @@
             "Montage- und Dienstleistungskosten bei Warn- und Löschtechnik für Motorbereiche",
             "Folge-, Reparatur- und Betriebskosten bei Verhalten bei Rauchentwicklung am Bootsmotor"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Motorraum-Sicherung, Löschtechnik und regelmäßige Kontrolle erzeugen unterscheidbare Kosten.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6202,7 +6632,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6353,7 +6791,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6498,7 +6944,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6619,7 +7073,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Feuer & Gase",
@@ -6770,7 +7232,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -6943,7 +7413,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Router- & Heimnetzwerksicherheit",
+          "independent_value": "Unbefugte Zugriffe und sichere Konfiguration statt allgemeinem Netzausfall.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7045,7 +7528,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Smart-Home-Zugriffsrechte & Datenschutz",
+          "independent_value": "Rechteverwaltung und sichere Fernzugriffe neben Störungsbehebung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7147,7 +7643,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7249,7 +7753,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7410,7 +7922,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7512,7 +8032,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Warmwasserverbrauch & Betriebskosten",
+          "independent_value": "Verbrauch und laufende Wirtschaftlichkeit statt Fehler und Reparatur.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7663,7 +8196,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7814,7 +8355,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -7962,7 +8511,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8110,7 +8667,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8265,7 +8830,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8416,7 +8989,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8518,7 +9099,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8679,7 +9268,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8848,7 +9445,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 5,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -8975,7 +9580,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9123,7 +9736,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9225,7 +9846,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9352,7 +9981,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9500,7 +10137,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9674,10 +10319,23 @@
             "Montage- und Dienstleistungskosten bei Schwache Handsenderbatterie von Empfängerproblem unterscheiden",
             "Folge-, Reparatur- und Betriebskosten bei Eignung für gemeinschaftlich genutzte Garagen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "IN_BESTEHENDE_BERATUNG_ODER_VERGLEICH_INTEGRIEREN",
+            "reason": "Kosten für Handsender, Anlernen und Ersatz sind eher Kauf- und Austauschentscheidung; eigener Kostenbereich grob zu schmal.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -9825,7 +10483,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10023,7 +10689,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 5,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10174,7 +10848,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Schiebetorantrieb einbauen & nachrüsten",
+          "independent_value": "Montage, bauliche Eignung und Nachrüstung statt Betrieb und Störung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10322,7 +11009,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10449,7 +11144,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Zufahrtstor-Antrieb einbauen & nachrüsten",
+          "independent_value": "Einbauplanung und sicherer Umbau statt Bedienung und Sensorfehler.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10604,7 +11312,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10755,7 +11471,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -10876,7 +11600,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Berechtigungen & Nutzerverwaltung",
+          "independent_value": "Mehrpersonennutzung und Zugriffsrechte getrennt von Vernetzung und Technikfehlern.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -11048,10 +11785,23 @@
             "Montage- und Dienstleistungskosten bei Elektrische Versorgung und Verkabelung",
             "Folge-, Reparatur- und Betriebskosten bei Nachrüstung in alten Türzargen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Bauteil, elektrische Anbindung, Nachrüstung und Fachservice unterscheiden sich.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 5,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Technik & Ausfälle",
@@ -11178,7 +11928,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11335,7 +12093,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11437,7 +12203,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11585,7 +12359,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11712,7 +12494,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11814,7 +12604,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -11916,7 +12714,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12018,7 +12824,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12120,7 +12934,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12222,7 +13044,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12324,7 +13154,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12426,7 +13264,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12547,7 +13393,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12649,7 +13503,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12770,7 +13632,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12872,7 +13742,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Vandalismus & Zerstörung",
@@ -12994,7 +13872,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Beleuchtung & Überwachung am Sportplatz",
+          "independent_value": "Präventive Sichtbarkeit und geeignete Überwachung zusätzlich zu Zaun und Inventarschutz.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13167,7 +14058,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13288,7 +14187,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Soforthilfe bei Wassereinbruch an Bord",
+          "independent_value": "Akute Abläufe und Prioritäten statt dauerhafter Pumpenwahl oder Lecksuche.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13427,7 +14339,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13578,7 +14498,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13699,7 +14627,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13820,7 +14756,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -13951,7 +14895,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14078,7 +15030,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Teichfolie verlegen & Randabschlüsse",
+          "independent_value": "Erstverlegung und korrekte Abschlüsse statt Schäden und Reparatur.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14226,7 +15191,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14374,7 +15347,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14525,7 +15506,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14652,7 +15641,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Dacheindeckung auswählen & planen",
+          "independent_value": "Materialeignung, Dachform und langfristige Auswahl statt Schadensbeseitigung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14797,10 +15799,23 @@
             "Montage- und Dienstleistungskosten bei Feuchte Stellen neben dem Fensterrahmen",
             "Folge-, Reparatur- und Betriebskosten bei Fachliche Sanierung bei tiefer Feuchte"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Dichtung, lokale Reparatur und umfassende Anschluss-Sanierung haben unterschiedliche Kostenrahmen.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -14902,7 +15917,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15029,7 +16052,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15156,7 +16187,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15258,7 +16297,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15360,7 +16407,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15462,7 +16517,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15586,10 +16649,23 @@
             "Montage- und Dienstleistungskosten bei Feuchtespuren am Zargenanschluss",
             "Folge-, Reparatur- und Betriebskosten bei Pflege von Rahmenfugen und Beschlägen"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "PRAEZISIEREN_KEINE_AUSWEITUNG_AUF_GESAMTTUERE",
+            "reason": "Als Feuchteschutz-Kosten (Abdichtung, Dichtung, Reparatur) sinnvoll; pauschale Türenanschaffung gehört nicht hierher.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15744,7 +16820,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -15895,7 +16979,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16022,7 +17114,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16144,7 +17244,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Rückstauklappen planen & einbauen",
+          "independent_value": "Einbauort, Voraussetzungen und Umsetzung zusätzlich zu Typen und Wartung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16246,7 +17359,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16373,7 +17494,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16522,7 +17651,12 @@
             "Montage- und Dienstleistungskosten bei WLAN-Warnung und mobile Benachrichtigung",
             "Folge-, Reparatur- und Betriebskosten bei Funktionstest und Fehlalarm nach Feuchteereignis"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Einfachmelder, Funkverbund, Absperrventil und laufender Betrieb unterscheiden sich wirtschaftlich.",
+            "wordpress_write_allowed": false
+          }
         },
         {
           "world": "Wasser & Feuchtigkeit",
@@ -16550,7 +17684,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 4,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16671,7 +17813,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16810,7 +17960,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -16952,7 +18110,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -17073,7 +18239,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -17212,7 +18386,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -17333,7 +18515,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wasser & Feuchtigkeit",
@@ -17439,7 +18629,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -17566,7 +18764,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Überspannungsschutz kontrollieren & erneuern",
+          "independent_value": "Regelmäßige Funktionsfähigkeit und Austausch statt bloßer Erstinstallation.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -17668,7 +18879,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -17792,10 +19011,23 @@
             "Montage- und Dienstleistungskosten bei Abdeckungen für verschiedene Fahrzeuggrößen",
             "Folge-, Reparatur- und Betriebskosten bei Reparaturmethoden nach Hagelschaden"
           ],
-          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
+          "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW",
+          "coarse_overlap_review": {
+            "decision": "BEHALTEN_VORLAEUFIG",
+            "reason": "Abdeckung, Stellplatz, baulicher Hagelschutz und Schadens-/Versicherungsfolgen sind unterschiedliche Kostenansätze.",
+            "wordpress_write_allowed": false
+          }
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -17916,7 +19148,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18038,7 +19278,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18140,7 +19388,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18282,7 +19538,20 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Gewächshausheizung & Energiekosten",
+          "independent_value": "Wiederkehrender Energieaufwand und Wirtschaftlichkeit verschiedener Frostschutzlösungen.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18403,7 +19672,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18524,7 +19801,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18645,7 +19930,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18766,7 +20059,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18893,7 +20194,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -18995,7 +20304,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Wintergarten-Kühlung: Aufwand & Energiekosten",
+          "independent_value": "Betriebs- und Folgekosten verschiedener Kühlverfahren neben Komfort und Verschattung.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19097,7 +20419,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Gartenbewässerung warten & Fehler beheben",
+          "independent_value": "Verstopfungen, Lecks und Instandhaltung über Wassersparen und Systemwahl hinaus.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19199,7 +20534,20 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Fassadenverschattung pflegen & reparieren",
+          "independent_value": "Reinigung, Verschleiß und Austausch statt Materialauswahl und Montage.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19301,7 +20649,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19403,7 +20759,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19505,7 +20869,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19607,7 +20979,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19709,7 +21089,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19811,7 +21199,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -19913,7 +21309,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20015,7 +21419,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20117,7 +21529,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20239,7 +21659,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20387,7 +21815,20 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": {
+          "name": "Schutzanlagen der Tiefgarage prüfen",
+          "independent_value": "Regelmäßige Bereitschaftsprüfung von Sperren, Alarm und Pumpen über die Notfallplanung hinaus.",
+          "coarse_depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+          "wp_action": "NONE"
+        },
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": true,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20489,7 +21930,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20591,7 +22040,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20693,7 +22150,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20795,7 +22260,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -20897,7 +22370,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21024,7 +22505,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21151,7 +22640,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21293,7 +22790,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21441,7 +22946,15 @@
           "three_scopes_are_concrete": "YES__BUT_SEMANTIC_VALUE_STILL_EDITORIAL_REVIEW"
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 3,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21563,7 +23076,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 4,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21665,7 +23186,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21767,7 +23296,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21869,7 +23406,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -21990,7 +23535,15 @@
           "needs_individual_3_article_capacity_check": false
         }
       ],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -22092,7 +23645,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -22194,7 +23755,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -22296,7 +23865,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     },
     {
       "world_wordpress_page1": "Wetter & Naturgefahren",
@@ -22398,7 +23975,15 @@
         }
       ],
       "additional_intent_decisions": [],
-      "no_new_wordpress_pages": true
+      "no_new_wordpress_pages": true,
+      "coarse_topic_depth_review_20261017": {
+        "level": "NUR_EIGENSTAENDIGER_LESERNUTZEN_UND_CA_3_BIS_5_POTENZIAL_KEINE_ARTIKEL",
+        "new_additional_category_candidate": null,
+        "existing_count": 3,
+        "preexisting_additional_candidates": 2,
+        "more_gap_at_coarse_level": false,
+        "approved_for_sync": false
+      }
     }
   ],
   "legacy_285_term_protection": [
@@ -26429,5 +28014,21 @@
     "verified_source_ranges": 27,
     "completed": true,
     "wordpress_sync_authorized": false
+  },
+  "latest_coarse_review": {
+    "date": "2026-10-17",
+    "scope": "172 konkrete WP-Seite3 Themen und derzeitige Unterkategorien",
+    "rule": "Eigenständiger Sinn/Mehrwert plus grobe Plausibilität für mindestens 3 bis 5 spätere Beiträge je WordPress-Artikelkategorie. Keine Artikel/Titel/SEO-Pflicht.",
+    "new_categories_additional": 26,
+    "no_clear_new_gap": 146,
+    "cost_special_checks": 15,
+    "cost_decisions": {
+      "BEHALTEN_VORLAEUFIG": 13,
+      "IN_BESTEHENDE_BERATUNG_ODER_VERGLEICH_INTEGRIEREN": 1,
+      "PRAEZISIEREN_KEINE_AUSWEITUNG_AUF_GESAMTTUERE": 1
+    },
+    "wp_sync_authorized": false,
+    "decision_authority": "EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md",
+    "appendix_evidence": "HAB_C22_GROBE_FACHDELTA_26_THEMEN_20261017.json"
   }
 }
