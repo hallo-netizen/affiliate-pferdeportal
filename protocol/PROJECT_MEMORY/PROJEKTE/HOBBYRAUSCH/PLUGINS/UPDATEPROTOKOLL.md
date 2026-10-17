@@ -3818,3 +3818,67 @@ offen.
 NEXT:
 1.50.674 installieren -> nur Audio & HiFi live prüfen.
 
+---
+
+## PU-20261017-079 – HD-003 1.50.675 / Audio-Hero responsive zentralisiert, Alttextpfad getrennt
+
+REALER AUSLÖSER:
+1.50.674 live zeigte trotz lokalem Desktop-PASS:
+- Text/Claim zu nah am linken Rand;
+- Fullbleed nur bei >1100 px;
+- darunter Bild nicht voll responsive und rechts Leerraum;
+- alten langen Hero-Satz statt neuer Kurzzeile;
+- Claim optisch weiter im alten Layout.
+
+URSACHE:
+- 1.50.674-Fullbleed-CSS nur in min-width:1101;
+- darunter griff alte 600-px-Hub2-Regel;
+- Hero-Intro wurde weiterhin automatisch aus Satz 1 des Langtexts abgeleitet.
+
+KORREKTUR 1.50.675:
+- zentrale wiederverwendbare Klasse hd-hub2-hero-fullbleed;
+- aktuell ausschließlich Audio & HiFi gebunden;
+- >=901 Fullbleed;
+- <=900 gestapelt mit 100-%-Bildbreite;
+- Innenabstand via clamp;
+- Claim audio-spezifisch positioniert;
+- H1 bleibt H1;
+- Kurzzeile explizit vom Langtext getrennt;
+- ein Bild / CSS-only / kein JS / kein Blur / kein Masking.
+
+RESPONSIVE-SIMULATION:
+1440 / 1180 / 1024 / 901 / 900 / 800 / 760 / 600 / 390.
+Alle:
+- overflow 0;
+- media width = hero width.
+
+RENDER-HARNESS:
+- fullbleed class PASS;
+- claim PASS;
+- H1 PASS;
+- short intro PASS;
+- old hero sentence ABSENT;
+- new longcopy PASS;
+- more-link PASS.
+
+REGRESSION:
+901/901 Assets byte-identisch zu 1.50.674.
+Keine andere Kategorie geändert.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_HARDPASS.zip`
+
+SHA-256:
+`aaf1bca2d7b7b55b91f9a15e22e847b67489ceca3faf3d6c1648a6779b636307`
+
+QA:
+- PHP 73/73;
+- Release-Kette ohne aktive 1.50.674-Stale-Referenz;
+- ZIP PASS.
+
+LIVE:
+offen.
+
+NEXT:
+1.50.675 installieren -> Audio & HiFi breit und halbbreit prüfen.
+
