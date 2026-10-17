@@ -3,66 +3,71 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 / 1.50.669 V7.1-MEGA-WIP LOCAL PASS / NICHT RELEASED**
+STATUS: **LIVE 1.50.668 / 1.50.670 TARGETED MEGA+IMAGE FIX LOCAL HARD PASS / LIVE OFFEN**
 
 ## Live
 
 `Affiliate Portal Template Kit 1.50.668` ist aktiv.
 
-Nicht verwenden:
-1.50.664 / 1.50.665 / 1.50.666 / 1.50.667.
+## Einziger Kandidat
 
-## 1.50.669 WIP
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.670_HOBBY_DEPOT_MEGA2ROWS_TARGETED_IMAGES_HARDPASS.zip`
 
-Zweck:
-- Registry bleibt einzige Strukturwahrheit;
-- echte Zwischenbereiche im Mega-Menü;
-- direkte Hobby-/Orientierungsseiten nicht als Mega-Spalten;
-- V7-Struktur korrekt rendern.
+SHA-256:
+`9e21fd6c402fbb1a3358a58807db8b28a322a499d8478fbffb375fadbecc0408`
 
-V7.1-Mega:
-7 / 10 / 9 / 8 / 9 / 7 / 8 / 9.
+## Inhalt
 
-QA:
-- komplette V7-Registry 0 Mismatches;
-- 381 Hobbyseiten;
-- terminale Category-Ebene vollständig;
-- alle 8 Mega-Menüs;
-- Responsive 1920 bis 390 px PASS;
-- kein horizontaler Overflow;
-- PHP 61/61 PASS.
+Mega-Menü:
+- bekannte 1.50.669-Regel für echte Zwischenbereiche übernommen;
+- maximal 10 Zwischenbereiche / zwei Reihen direkt sichtbar;
+- `Mehr Kategorien` erst oberhalb 10;
+- Unterkategorie-Schrift leicht größer.
 
-## Noch offen vor Release
+V7.1-Harness:
+- Gestalten 7;
+- Fertigen 10;
+- Technik 9;
+- Forschen 8;
+- Pflanzen 9;
+- Tiere 7;
+- Bewegen 8;
+- Sammeln 9;
+- Heimwerken und Gärtnern korrekt nicht als Mega-Spalten.
 
-Eigene Hero+Preview-Paare erforderlich für:
-- Spotting & Verkehr;
-- Citizen Science;
-- Natur bestimmen;
-- Suchen & Finden;
-- Modellbau;
-- Holz & Natur.
+Bilder:
+Ausschließlich 17 ausdrücklich freigegebene Bereiche geändert:
+Modellbau; Computer & Retro; Audio & HiFi; Spotting & Verkehr; Citizen Science; Natur bestimmen; Bonsai & Miniatur; Orchideen & Exoten; Zimmerpflanzen; Hydroponik & Indoor; Aquaristik; Terraristik; Münzen & Geld; Papier & Dokumente; Werkzeuge & Geräte; Werbung & Design; Suchen & Finden.
 
-Zusätzlich erforderlich:
-- Holz & Natur erhält ein neues eigenes Hero+Preview-Paar; vorhandenes Holzmotiv ist für die erweiterte Semantik zu eng und damit FAIL.
+**Alle übrigen Kategorien unverändert. Holz & Natur ausdrücklich nicht angefasst.**
 
-Danach:
-- finaler ZIP-Roundtrip;
-- Browser-QA;
-- erst dann Release.
+## Bild-Rückfallprüfung
+
+1.50.668 gegen 1.50.650:
+13/13 relevante Altdateien inklusive zentraler Bildmap byte-identisch.
+
+Folgerung:
+Kein neuer Rückfall durch 1.50.668; die schlechten Motive waren bereits im vorigen Stand enthalten.
+
+## QA
+
+- PHP 61/61 PASS;
+- V7.1-Registry-Harness PASS;
+- zwei Reihen / Limit 10 PASS;
+- vorhandener Browser-Nachweis für 10 sichtbare Spaltenblöcke bis 761 px ohne horizontalen Overflow;
+- 17 Hero+Preview-Paare dimensionsrichtig;
+- Hero-Mapping 17/17;
+- 0 exakte Bildduplikate;
+- 0 Nahduplikate im benannten Set;
+- Cards-Mapping unverändert;
+- außerhalb der freigegebenen Bildbereiche keine Bilddatei geändert;
+- ZIP-Test PASS;
+- Roundtrip 1009/1009 byte-identisch.
 
 ## Isoliertes Artefakt
 
-Pfad:
-`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/`
-
-Kein neues `CURRENT.zip` für 1.50.669.
-
-Grund:
-- 1.50.669 ist WIP, kein Release;
-- exakt sechs Hero+Preview-Paare fehlen bzw. müssen ersetzt werden;
-- vor finalem ZIP sind Bildprüfung, ZIP-Roundtrip und Browser-QA erneut Pflicht;
-- bestehender/fehlender isolierter Artefaktstand darf nicht mit einem unvollständigen WIP überschrieben werden.
+`CURRENT.zip` bleibt bis zum echten Live-Check noch nicht synchronisiert.
 
 ## EXAKT EINE NEXT ACTION
 
-**V7.1-Dry-Run mit HD-001 1.14.12 abwarten und parallel die sechs Bildprüfungen abschließen; 1.50.669 vorher nicht ausliefern.**
+**1.50.670 installieren und ausschließlich die geänderten Mega-/Bildstellen live prüfen.**
