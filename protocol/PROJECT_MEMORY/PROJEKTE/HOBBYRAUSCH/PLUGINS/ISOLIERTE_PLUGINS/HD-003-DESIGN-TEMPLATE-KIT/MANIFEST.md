@@ -1,40 +1,35 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-17
-STATUS: **1.50.673 AUDIO-&-HIFI-PILOT LOCAL HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.50.674 AUDIO-FULLBLEED-BEIGE-HERO LOCAL HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID: `HD-003-DESIGN-TEMPLATE-KIT`
-
-LIVE: `1.50.672`
-
-KANDIDAT:
-`1.50.673`
+LIVE: `1.50.673`
+KANDIDAT: `1.50.674`
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.673_HOBBY_DEPOT_AUDIO_HIFI_HERO_TEXT_PILOT_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.674_HOBBY_DEPOT_AUDIO_HIFI_FULLBLEED_BEIGE_HERO_HARDPASS.zip`
 
 SHA-256:
-`802d16fd6df5ccdd133bb390ff7d1eb7992640eee9f43627b4e58aa0c15846ef`
+`c40e3271bc31c822aeb076f51880d8c2ef222f27ff31a05f29b4dcc0bf2f98e9`
 
 SCOPE:
-nur Audio & HiFi Hero/Text/Kurzzeilen.
+nur Audio-&-HiFi-Hero auf Desktop.
 
 UNVERÄNDERT:
 - 901/901 Assets;
 - alle anderen Kategorien;
-- Mega-Menü-Code;
-- Kategoriebaum;
-- Monetarisierung.
+- Audio-Langtext und Kartenunterzeilen;
+- Mega-Menü;
+- Kategoriebaum.
 
 QA:
-- 161 Wörter Textregel-PASS;
-- 7/7 individuelle Unterzeilen;
-- AF-026 Release-Kette 7/7;
-- Front/Content PASS;
-- Dirty-Overlay PASS;
-- PHP 66/66;
-- ZIP PASS;
-- Roundtrip 1034/1034.
+- PHP 69/69;
+- Release-Kette konsistent;
+- H1 bleibt H1;
+- Header-Beige exakt #f5f1e9;
+- kein Hero-Logo;
+- ZIP PASS.
 
 CURRENT.zip:
-**NICHT synchronisiert**, bis der Audio-Pilot live bestätigt ist.
+**NICHT synchronisiert**, bis Live-PASS vorliegt.
