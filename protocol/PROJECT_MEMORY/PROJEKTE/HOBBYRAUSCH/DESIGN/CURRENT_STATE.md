@@ -88,4 +88,4 @@ Kein Live-PASS ohne:
 
 ## EXAKT EINE NEXT ACTION
 
-**Zuerst den V7-Dry-Run mit HD-001 1.14.11 durchführen. Parallel lokal die fünf neuen Hub2-Hero/Preview-Paare und Holz-&-Natur-Motivprüfung abschließen; erst danach 1.50.669 als Release packen.**
+**Zuerst den V7-Dry-Run mit HD-001 1.14.11 durchführen. Parallel lokal die sechs erforderlichen Hub2-Hero/Preview-Paare abschließen; erst danach 1.50.669 als Release packen.**
