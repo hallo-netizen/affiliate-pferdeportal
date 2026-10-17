@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – KONSOLIDIERTES FACHDELTA: 472 ERGÄNZUNGEN, TECHNISCHER PRE-FLIGHT ALS NÄCHSTES
+Der C2.2-Read-only-Gesamtfachstand wurde **vollständig in GitHub** aktualisiert: `KONZEPT/HAB_C22_V3_QUELLENUEBERNAHME_20261017.json`, letzter Commit `98bff2646ee8788fa69bbf51ab7aa6d29b5c6b86`. Die 26 individuell begründeten Ergänzungsvorschläge und 15 gesonderten Kostenentscheidungen sind **direkt in den 172er-Gesamtstand integriert**. `KONZEPT/HAB_C22_GROBE_FACHDELTA_26_THEMEN_20261017.json` dient nur noch als nachvollziehbarer Prüfbeleg, nicht als zweite Current-Wahrheit.
+
+**Ein vorbereitetes, ausdrücklich NICHT WordPress-schreibendes Vorschlagsdelta** liegt unter `KONZEPT/HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json` (Commit `de5bda638c57ba5a9874d73eee49d36d6b3d526c`). Es enthält **172 themenspezifische FAQ, 172 Vergleiche, 102 vorläufig nützliche sonstige Vertiefungs-Kategorien und 26 zusätzliche, individuell begründete Kategorien = 472**, exakt den 172 vorhandenen neuen konkreten Seite-3-Themen zugeordnet. Eine zu schmale Kostenkategorie bei Garagentor-Funksteuerung ist als eigene neue Kategorie **nicht** im Delta, Kosten an Außentüren werden **nur auf Feuchteschutz** begrenzt. Es wird kein Artikel, keine neue WordPress-Seite und kein neues Plugin angelegt.
+
+**Grobprüfung auf Basis des Nutzermaßstabs:** Entscheidend sind separater Lesernutzen und ungefähr 3–5 mögliche zukünftige Einzelbeiträge; keine einzelnen Artikeltitel, -texte und keine pauschale Pflege/Kosten-Schablone. WordPress-Zielliste auf doppelte Kategorien pro Owner/Elternkontext geprüft: **0 direkte Kollisionen**. Erneuter GitHub-Readback der Vorschlagsdatei: **472/472**, **5/5 bewusst fehlerhafte Testvarianten** abgewiesen (falscher WP-Typ, Verschachtelung, Dublette, unerlaubter Writer, erfundene WP-ID). Bestehende 566 importierte C2.2-Kategorien sowie 93 historische Seite-3-Seiten/285 alte Artikelkategorien und vier bekannte Artikelbindungen im Entwurf unverändert.
+
+**Status:** Fachlicher Vorschlagsstand und Struktur-Tests erstellt; **noch kein WordPress-Live-Readback und keine positive Live-Plugin-Abnahme**. Genau eine verbindliche NEXT ACTION für weitere Arbeit: **aktuellen WordPress-Readback im zuständigen KATEGORIEN-Büro beschaffen und den 472er-Vorschlagsstand gegen echte WP-IDs, historische Bindungen, doppelte Ziele und vorhandene Kategorien als reines Add-/Sicherungsdelta trocken simulieren**. Positive und negative reale Plugin-Tests; erst danach gesonderte Freigabe für den einzigen bestehenden Kategorie-Writer. **Bis dahin kein Import, keine WordPress-Veränderung.** Alte NEXT ACTIONs zur Prüfung konkreter Einzelartikel sind überholt.
+
+---
+
+
+
 ## 17.10.2026 – AKTUELLER FORTSCHRITT: NUR GROBPRÜFUNG DER ARTIKELKATEGORIEN, QUELLEN JETZT IN GITHUB
 **Dieser Abschnitt überschreibt den darunter dokumentierten älteren 102/566-Prüfauftrag und alle Library-als-Speicherort-Aussagen.** Keine erneute Artikelrichtungen-/Einzelartikelprüfung. Nutzermaßstab: Eine Kategorie auf der flachen WordPress-Artikelkategorieebene muss einen klaren eigenständigen Lesernutzen bieten und **grob genügend Breite/Tiefe für mindestens ca. 3–5 spätere Beiträge** haben. Keine Artikeltitel, Einzelartikelprüfungen, Texterstellung oder kostenpflichtige Keywordpflicht. FAQ/Fragen grundsätzlich für alle Themen sinnvoll; Beratungsbedarf ebenfalls grundsätzlich vorhanden; Vergleich nach Sache. Kosten, Pflege, Wartung, Einbau, Bedienung, Probleme usw. **individuell** und nur bei echtem getrenntem Nutzen. Mehrwert statt gleichförmiger Schablone.
 
