@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 UNIVERSAL-USER-NEEDS LOCAL HARD PASS / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 STRUKTURELL PASS / KOMMERZIELLE BERATUNGSABDECKUNG NOCH NICHT KALIBRIERT / 10ER-PILOT + MAGAZIN-MAPPING ALS NÄCHSTER SCHRITT / KEIN WORDPRESS-SYNC**
 
 ## Live-Baseline
 
@@ -13,8 +13,7 @@ Produktiv unverändert:
 - 2357 aktive physische Zielobjekte;
 - 2357/2357 Readback;
 - 8 Hauptwelten;
-- 330/330 terminale CORE-Seiten;
-- LIVE-PASS.
+- 330/330 terminale CORE-Seiten.
 
 ## Zentraler V5-Kandidat
 
@@ -27,91 +26,141 @@ SHA-256:
 Universal-Needs-Audit:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_UNIVERSAL_USER_NEEDS_AUDIT_V5_20261017.json`
 
-V4→V5-Delta:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V4_TO_V5_20261017.json`
+Commercial-Coverage-Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_COMMERCIAL_COVERAGE_AUDIT_V5_20261017.json`
 
-## Verbindlicher Zielvertrag für die Hobby-Ebene
+Pilot-/Magazin-Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_PILOT_AND_MAGAZIN_AUDIT_20261017.md`
 
-Jeder HOBBY_HUB wird aus zwei Perspektiven geprüft:
-1. Anfänger/Neuling braucht Orientierung;
-2. bestehender Nutzer/Fortgeschrittener braucht Vertiefung.
+## Zielvertrag – Hobby-Hub
+
+Jeder HOBBY_HUB muss Anfänger UND erfahrene Nutzer bedienen.
 
 Verbindlich:
-- **Einstieg & Grundlagen = Pflicht als sichtbare Content-Kategorie**;
-- **FAQ / Häufige Fragen = Pflicht als sichtbare Content-Kategorie**;
-- **Ausrüstung & Kosten = Standardpflicht**, sobald mindestens 3 eigenständige Beiträge möglich sind;
-- **Praxis & Vertiefung = Pflicht als Nutzerabdeckung**, eigener Leaf nur wenn nicht bereits durch Fachkategorien abgedeckt;
-- jede Content-Kategorie mindestens 3 eigenständige sinnvolle Beitragsintentionen;
-- keine künstlich leeren Symmetrie-Kategorien.
+- Einstieg & Grundlagen = sichtbare Pflichtkategorie;
+- FAQ / Häufige Fragen = sichtbare Pflichtkategorie;
+- Ausrüstung & Kosten = Standardpflicht bei >=3 eigenständigen Beitragsintentionen;
+- Praxis & Vertiefung = Pflicht als Nutzerabdeckung;
+- jeder sichtbare Content-Leaf mindestens 3 eigenständige sinnvolle Beitragsintentionen.
 
-Ausrüstung & Kosten besitzt in V5 vier klar getrennte Intentfamilien:
-- Was brauche ich? / Grundausstattung;
-- einmalige Anschaffungskosten / Einsteigerbudget;
-- laufende Kosten / Verbrauch / Ersatz;
-- günstig vs. hochwertig / Kauf- und Auswahlfragen.
+V5 erfüllt:
+- 381/381 Einstieg;
+- 381/381 FAQ;
+- 381/381 Ausrüstung & Kosten;
+- 381/381 mindestens zwei fachspezifische Vertiefungsleafs;
+- 381 Hobby-Hubs;
+- 2622 Content-Leafs;
+- 0 fehlende Parents;
+- 0 doppelte IDs/Slugs;
+- HD-001 Validator 0 Errors / 0 Warnings;
+- Registry-Renderer 0 Strukturmismatches.
 
-## V5 Local Hard Pass
+## Neuer Affiliate-Prüfgate – Vergleich & Kaufberatung
 
-- 8/8 Hauptwelten unverändert;
-- 381 terminale Hobbyseiten;
-- 2622 unterste Inhaltskategorien;
-- pro Hobby 6–9 sichtbare Content-Kategorien;
-- Einstieg/Grundlagen: 381/381;
-- FAQ: 381/381;
-- Ausrüstung & Kosten: 381/381;
-- mindestens zwei fachspezifische Vertiefungsleafs: 381/381;
-- keine fehlenden Parents;
-- keine doppelten Node-IDs/Slugs;
-- direkte Welt-Hubs vollständig geordnet;
-- HD-001 TargetTree Validator: 0 Errors / 0 Warnings;
-- Registry-Renderer-Vollsimulation: 0 page/category/type/world/render mismatches;
-- Trainspotting-Negativfall PASS;
-- Ameisenhaltung rendert 8 finale Kategorien inkl. `Ausrüstung & Kosten`;
-- 0 Löschungen gegenüber V4.
+Für jedes Hobby verpflichtend prüfen:
+- Produktgruppe A vs. B / Lösung für Einsatz X;
+- Kaufberatung nach Budget, Erfahrung, Einsatz;
+- konkrete Produkt-/Modellvergleiche.
 
-V5 ergänzt gegenüber V4:
-- 5 fehlende explizite Einstieg-&-Grundlagen-Kategorien:
-  Mikroabenteuer, Longboard Dancing, Tierspuren dokumentieren, Wolkenbeobachtung, Terrarienbau;
-- 381 sichtbare `Ausrüstung & Kosten`-Bereiche.
+Eigener Leaf nur bei mindestens 3 eigenständigen Vergleichs-/Beratungsintents; sonst Integration in `Ausrüstung & Kosten` oder passenden Fachleaf.
 
-## Bereits bestätigte fachliche Erweiterungen
+Aktueller V5-Befund:
+- expliziter Vergleich/Kaufberatung-Leaf: 1/381;
+- damit ist die kommerzielle Beratungsabdeckung noch nicht ausreichend kalibriert.
 
-Enthalten bleiben:
-- Spotting & Verkehr;
-- Citizen Science;
-- Natur bestimmen;
-- Plane Spotting aus Messen & Analysieren heraus;
-- Suchen & Finden;
-- Modellbau unter Fertigen;
-- Miniaturen & Szenen;
-- Naturfunde;
-- Schneckenhaltung;
-- Bonsai & Miniatur → Penjing, Saikei;
-- Leder → Lederprägen, Schuhmacherei;
-- Essbare Pflanzen → Kräuteranbau, Obst im Kübel;
-- Imkerei & Bestäuber → Wildbienenhotels, Hummelkästen;
-- Gehegegestaltung → Paludarium, Terrarienbau.
+Produktvergleich ist im eigenen Projektbüro aktuell noch nicht fachlich ausgearbeitet; deshalb keine künstliche Massenerzeugung vor Pilotprüfung.
 
-## Betriebsregel für zusätzliche Leafs
+## Hobbyspezifische Prüffelder
 
-Pflege, Wartung, Fehler, Sicherheit, Vergleich, Materialien, Projekte, Methoden usw. werden zusätzlich sichtbar, sobald der Bereich mindestens 3 eigenständige sinnvolle Beitragsintentionen besitzt und nicht bereits durch einen bestehenden Fachleaf abgedeckt ist.
+Eigener Leaf nur ab >=3 echten Intents und ohne Doppelung:
+- Materialien / Verbrauch;
+- Pflege / Wartung / Betrieb;
+- Fehler / Probleme / Lösungen;
+- Sicherheit / Recht / Regeln;
+- Techniken / Methoden / Training;
+- Projekte / Ideen;
+- Varianten / Arten / Disziplinen;
+- Orte / Touren / Saison;
+- Kurse / Lernen / Community;
+- Optimierung / Fortgeschritten / Profi;
+- Sammeln / Bestimmen / Echtheit / Wert.
 
-DataForSEO/PAA/Longtails priorisieren konkrete Fragen und Artikelintents, erzeugen aber keine Strukturautorität.
+## Mega-Menü
+
+Designvertrag bleibt:
+- max. 10 direkte sichtbare Hub2 pro Hauptwelt;
+- grafisch zunächst gemeinsame sinnvolle Direktanzahl; aktuell typischerweise 5;
+- restliche Hub2 über `Mehr Kategorien` im selben Flyout;
+- genau eine weitere kompakte Orientierungsebene;
+- kein Vollbaum;
+- keine reale Kategorie darf durch die Anzeigegrenze verloren gehen;
+- Registry = einzige Strukturquelle;
+- vollständige `nav_order` für alle direkten Hub2.
+
+## Magazin
+
+Magazin = eigenständige Editorial-Säule, nicht Restablage und nicht Kopie von CORE.
+
+Bestehende Start-Kacheln:
+1. Hobby finden
+2. Hobby-Ideen & Inspiration
+3. Ungewöhnliche & skurrile Hobbys
+4. Neue Hobbys & Trends
+5. Hobby-Porträts
+6. Menschen & Geschichten
+7. Geschichte & Herkunft
+8. Wissen & Glossar
+9. Vergleiche & Alternativen
+10. Zeit, Budget & Platz
+11. Alter & Lebensphasen
+12. Saison, drinnen & draußen
+
+Befund:
+- Editorial-Struktur existiert;
+- aktuelle Zielzuordnung nutzt sie aber nicht sauber;
+- gefundene Editorial-/Finder-Placements landen pauschal in `editorial:hobbyfinder` statt fachlich in den vorhandenen Kacheln.
+
+Schräge/kleine Hobbys:
+- zunächst ein guter Magazinartikel pro valide Hobbyidentität ausreichend;
+- keine tiefe Parallel-Hobbytaxonomie nötig;
+- zusätzliche Orientierung über Views/Filter/Tags nach Art/Situation;
+- bei ausreichender Tiefe/Kommerzialisierung spätere Promotion derselben hobby_id nach CORE möglich, keine konkurrierende Kopie.
+
+## Verbindlicher 10er-Pilot
+
+Vor Massenausrollung werden exakt diese 10 Hobbys vollständig kalibriert:
+1. Buchbinden
+2. Balance Board
+3. Glasmalerei
+4. Lasergravieren
+5. Fledermausbeobachtung
+6. Hydrokultur
+7. Riffaquaristik
+8. Briefmarken sammeln
+9. Geocaching
+10. Imkerei
+
+Pilot prüft:
+- Anfänger;
+- Profi-/Vertiefung;
+- Ausrüstung/Kosten;
+- Vergleich/Kaufberatung;
+- Produktvergleichspotenzial;
+- hobbiespezifische Zusatzleafs;
+- mindestens 3 echte Artikelintents je Leaf;
+- DataForSEO nur für Fragen/Keywords/Clustering;
+- echten Browser-/Theme-Pfad.
 
 ## Timeout-Korrektur
 
 HD-001 1.14.9 ist verworfen.
-
 Sicherer Kandidat:
 `/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.10_MANUAL_ONLY_TIMEOUT_FIX_LOCALPASS.zip`
 
-SHA-256:
-`f9500d051249b239ca3215754eff54d37244fb80ef612ce54cfd5f722db7f243`
-
 ## ERSTER OFFENER BLOCKER
 
-**Der echte manuelle V5-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
+**Der 10er-Pilot muss gegen Vergleich/Kaufberatung + hobbiespezifische Zusatzleafs vollständig kalibriert werden; parallel muss das Magazin-Mapping aus dem Hobbyfinder-Fallback auf die vorhandenen Editorial-Kacheln korrigiert werden.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Kein Sync. Als Nächstes ausschließlich V5 in HD-001 1.14.10 als manuellen Final-Target-Dry-Run-Kandidaten einbinden und lokal/WordPress-seitig dry-runnen; erst danach über Sync entscheiden.**
+**Noch keinen WordPress-Dry-Run und keinen Sync. Zuerst den 10er-Pilot fachlich vollständig abschließen und die Magazin-Zuordnung kalibrieren; erst danach Regeln einfrieren und auf alle HOBBY_HUBs ausrollen.**
