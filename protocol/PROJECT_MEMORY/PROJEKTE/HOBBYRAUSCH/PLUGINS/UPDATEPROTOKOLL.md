@@ -3021,3 +3021,134 @@ PAKET:
 LIVE:
 Erst nach V3-Struktur-Sync/Readback und HD-004-Runtimeprüfung.
 
+
+
+---
+
+## PU-20261017-067 – HD-001 1.14.12 / V7.1 manual-only Dry-Run-Fix nach 1.14.9-Timeout
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PLUGIN:
+Affiliate-Portal Kategorie-Workflow.
+
+ART:
+Eigenentwicklung / sicherer manueller Dry-Run-Kandidat.
+
+FACHBÜRO:
+`SEO_KATEGORIEN`
+
+VON / AUF:
+live 1.14.9 → Kandidat 1.14.12.
+
+WARUM:
+1.14.9 konnte nach Versionswechsel den Final-Target-Runner auf normalem WordPress-`init` automatisch anstoßen und verursachte beim Nutzer Gateway Timeout.
+Der erste V7-Dry-Run-Test blockierte zusätzlich korrekt, weil historische Kontrollzähler noch auf dem alten 330er Bestand standen.
+
+KORREKTUR:
+- manual-only hart aktiv;
+- 0 Target-Runner-`init`-Hooks;
+- Installation/Aktivierung startet keine Vollbaum-Verarbeitung;
+- V7.1 korrigiert ausschließlich interne Kontrollzähler auf den tatsächlich aufgelösten V7-Endbestand;
+- fachliche V7-Struktur unverändert;
+- Dry-Run und Apply bleiben getrennte Adminwege.
+
+ARTEFAKT:
+`HD001_V1.14.12_HOBBY_DEPOT_V7_1_MANUAL_ONLY_LOCALPASS.zip`
+
+SHA-256:
+`2a0ac6e936628baf7aff3b0ed67bdecd60a9ca9ba23d992396fa4d0abf2b0a5f`
+
+ZIELPROFIL:
+`HOBBY_DEPOT_TARGET_PROFILE_V7_1_DRYRUNFIX_20261017`
+
+PROFIL-SHA:
+`14b7b4b66310ccf19e51e9a4e403628af8705a5ae6f1e14e03f5c87f0991bc7e`
+
+POSITIVTEST:
+- PHP 33/33 PASS;
+- ZIP 47/47 PASS;
+- Pluginversion 1.14.12;
+- manual-only true;
+- Resolver 3517 Knoten / 862 Entities / 0 Errors / 0 Warnings;
+- echter Dry-Run-Algorithmus gegen simulierten alten 330er Livebestand PASS;
+- CREATE 1128 / ADOPT 3 / UPDATE 2356 / ARCHIVE 1;
+- Provider Calls 0;
+- WordPress Structure Writes 0.
+
+NEGATIV-/FAIL-CLOSED:
+- V7 mit falschen historischen Kontrollzählern blockierte statt weiterzulaufen;
+- normaler init-/Aktivierungspfad startet keinen Target-Job;
+- Dry-Run ruft keinen Apply/Sync auf.
+
+LIVE:
+- Nutzer bestätigt weiterhin aktive 1.14.9;
+- echter WordPress-V7.1-Dry-Run mit 1.14.12 noch offen;
+- kein Apply/Sync ausgeführt.
+
+ISOLIERTES ARTEFAKT:
+`ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/CURRENT.zip` noch nicht synchronisiert; Manifest auf 1.14.12 nachgezogen. Kein Release-/Live-PASS vor echtem WordPress-Dry-Run.
+
+ROLLBACK:
+Kein Strukturwrite durch die lokale Simulation. Live bleibt alter 330er Snapshot bis zu ausdrücklich bestätigtem Apply.
+
+---
+
+## PU-20261017-068 – HD-003 1.50.669 WIP / V7.1-Mega-Renderer + Fail-closed-Bildgate
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+PLUGIN:
+Affiliate Portal Template Kit – Hobby Depot Profil.
+
+ART:
+Eigenentwicklung / WIP, **kein Release**.
+
+FACHBÜRO:
+`DESIGN`
+
+VON / AUF:
+live 1.50.668 → WIP 1.50.669.
+
+VORGESCHICHTE:
+1.50.664–1.50.667 wurden nach Liveprüfung verworfen; lokale Teilprüfungen hatten Mega-Menü-/Textfehler nicht zuverlässig abgebildet.
+
+ÄNDERUNG 1.50.669:
+- Registry bleibt einzige Strukturwahrheit;
+- echte Zwischenbereiche = Mega-Spalten;
+- direkte Hobby-/Orientierungsseiten nicht als zusätzliche Mega-Spalten;
+- V7.1-Mega-Zahlen 7 / 10 / 9 / 8 / 9 / 7 / 8 / 9;
+- initial 5 gleichmäßige Gruppen;
+- `Mehr Kategorien` zeigt restliche Zwischenbereiche im selben Flyout;
+- kein Roh-`get_pages()`-Fallback;
+- terminale Content-Kategorieebene bleibt sichtbar.
+
+POSITIV-/REGRESSION:
+- V7/V7.1-Strukturinhalt 381 Hobbyseiten;
+- 0 Struktur-/Route-/Render-Mismatches;
+- alle 8 Mega-Menüs;
+- Browserbreiten 1920 bis 390 px;
+- horizontaler Overflow 0;
+- PHP 61/61 PASS.
+
+NEGATIV:
+- falsches Trainspotting unter Messen & Analysieren ausgeschlossen;
+- fehlende Registry → keine erratenen Kinder;
+- generischer Weltbild-Fallback im aktiven WIP entfernt.
+
+RELEASE-GATE:
+Exakt sechs Hero+Preview-Paare fehlen/ersetzen:
+Spotting & Verkehr; Citizen Science; Natur bestimmen; Suchen & Finden; Modellbau; Holz & Natur.
+
+`Holz & Natur`: vorhandenes Holzmotiv semantisch FAIL / REPLACE_REQUIRED.
+
+ARTEFAKT:
+Kein finaler 1.50.669-ZIP und kein isoliertes `CURRENT.zip`, weil WIP nicht releasefähig ist.
+
+LIVE:
+1.50.668 bleibt aktiv; alter 330er Snapshot bleibt sichtbar. Kein 1.50.669-Live-PASS.
+
+ROLLBACK:
+1.50.668 bleibt letzter aktiver Designstand.
