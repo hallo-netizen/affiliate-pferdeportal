@@ -3,82 +3,103 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.14.9 UNSICHER / 1.14.12 V7.1 MANUAL-ONLY LOCAL HARD PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STATUS: **1.14.12 REALER WORDPRESS-DRY-RUN BLOCKED / URSACHE ISOLIERT / 1.14.13 LOCAL HARD PASS / ECHTER V7.1-WORDPRESS-DRY-RUN OFFEN**
 
-## Live
+## Reales Ergebnis 1.14.12
 
-Vom Nutzer direkt aus WordPress bestätigt:
-`Affiliate-Portal Kategorie-Workflow 1.14.9` ist aktiv.
+Der Nutzer hat HD-001 1.14.12 installiert und den Finalen Delta-Dry-Run ausgeführt.
 
-**1.14.9 ist verworfen.**
-Ursache:
-automatischer Final-Target-Bootstrap konnte nach Versionswechsel auf normalem WordPress-`init` anlaufen und Gateway Timeout verursachen.
+Ergebnis:
+- BLOCKED;
+- 2642 Zielobjekte;
+- CREATE 279;
+- ADOPT 4;
+- UPDATE 2357;
+- UNCHANGED 0;
+- ARCHIVE 0;
+- kein Apply/Sync.
+
+Blockierende Altbindungen:
+- Libellenbeobachtung;
+- Nachtvogel-Beobachtung.
+
+Die 2642 Zielobjekte gehören nicht zum eingebetteten V7.1-Zielstand mit 3487 Zielobjekten. Damit ist belegt, dass beim Final-Dry-Run noch ein alter externer Zielprofilpfad wirksam war.
+
+## Ursache
+
+1.14.12 enthielt zwar bytekorrekt das V7.1-Profil, aber der Final-Dry-Run durfte weiterhin einen extern gesetzten Profilpfad vor dem eingebetteten Profil verwenden.
+
+Zusätzlich erkannte der Migrationspfad frühere `_apkw_target_node_id`-Bindungen der neu stabilisierten Proposal-Hobbyseiten nicht als zulässige Legacy-Bindung.
+
+Dadurch wurden zwei vorhandene Hobbyseiten fälschlich als Fremdkollision behandelt.
 
 ## Einziger Kandidat
 
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.12_HOBBY_DEPOT_V7_1_MANUAL_ONLY_LOCALPASS.zip`
+`HD001_V1.14.13_HOBBY_DEPOT_V7_1_LIVE_COLLISION_FIX_LOCALPASS.zip`
 
 SHA-256:
-`2a0ac6e936628baf7aff3b0ed67bdecd60a9ca9ba23d992396fa4d0abf2b0a5f`
+`c543ac655f12d4fcb0d5cb581b3f8a3410103988655a87bb62bab9cbd9995fa3`
 
-Profil:
-`HOBBY_DEPOT_TARGET_PROFILE_V7_1_DRYRUNFIX_20261017`
+Eingebettetes V7.1-Profil:
+SHA-256:
+`23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
 
-Profil-SHA:
-`14b7b4b66310ccf19e51e9a4e403628af8705a5ae6f1e14e03f5c87f0991bc7e`
+## Fachstand
 
-## Warum V7.1
-
-Der erste echte Dry-Run-Test des V7-Profils blockierte korrekt, weil zwei historische Kontrollzähler noch auf dem alten 330er Stand standen.
-
-V7.1 aktualisiert diese Kontrollzahlen auf den tatsächlich aufgelösten Bestand:
+V7.1 bleibt unverändert:
+- 3517 logische Knoten;
+- 3487 physische Ziele;
 - 862 Entities;
 - 383 CORE Entities;
 - 381 terminale Hobby-Hubs;
-- 2995 Content-Kategorien;
-- 3487 physische Ziele.
+- 2995 Content-Kategorien.
 
-Keine fachliche V7-Struktur wurde dadurch verändert.
+Keine Fachkategorie und keine Strukturentscheidung wurde durch 1.14.13 verändert.
 
-## Safety-QA
+## Korrektur 1.14.13
 
-- PHP 33/33 PASS;
-- ZIP PASS;
-- `APKW_TARGET_TREE_MANUAL_ONLY=true`;
-- Target-Runner-init-hooks 0;
-- Installation/Aktivierung: 0 Writes / 0 Schedules / 0 Network;
-- echter Plugin-Resolver: 3517 Knoten / 862 Entities / 0 Errors / 0 Warnings;
-- Dry-Run ruft keinen Apply auf;
-- Apply/Sync bleibt separater bestätigungspflichtiger Adminweg.
+- Finaler Hobby-Depot-Dry-Run bindet für diesen Weg hart das eingebettete V7.1-Profil;
+- alter externer Profilpfad kann diesen Final-Dry-Run nicht mehr auf den 2642er Stand zurücksetzen;
+- 51 Proposal-Hobbyseiten besitzen ihre frühere Target-Identität zusätzlich als Migrationsbindung;
+- Dry-Run erkennt frühere Target-Bindungen und verwendet die vorhandene Seite weiter;
+- derselbe Wiederverwendungsweg ist auch für einen später ausdrücklich bestätigten Sync vorhanden;
+- fremde Slug-Bindungen blockieren weiterhin;
+- doppelte Legacy-Bindungen blockieren weiterhin;
+- manual-only bleibt unverändert;
+- Dry-Run und Apply bleiben getrennt.
 
-## Echter Dry-Run-Simulations-PASS
+## Lokale Safety-QA
 
-Gegen simulierten alten Live-330er Zielbestand:
-- CREATE 1128;
-- ADOPT 3;
-- UPDATE 2356;
-- ARCHIVE 1;
-- Errors 0;
+PASS:
+- PHP 33/33;
+- ZIP-Roundtrip PASS;
+- V7.1-Zahlen unverändert;
+- externer Altprofil-Override simuliert und abgewehrt;
+- Libellenbeobachtung Altbindung → vorhandene Seite wiederverwendet;
+- Nachtvogel-Beobachtung Altbindung → vorhandene Seite wiederverwendet;
+- alle 51 Proposal-Migrationen zusammen → PASS;
+- echte Fremdkollision → BLOCKED;
+- doppelte Legacy-Bindung → BLOCKED;
 - Provider Calls 0;
-- WordPress Writes 0.
-
-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_V7_1_ACTUAL_DRYRUN_SIM.json`
+- WordPress Structure Writes 0;
+- Dry-Run ruft keinen Apply auf.
 
 ## Isoliertes Artefakt
 
 Pfad:
 `../../ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/`
 
-`CURRENT.zip` ist im GitHub-Campus **noch nicht synchronisiert**.
+`CURRENT.zip` bleibt **noch nicht synchronisiert**.
 
 Grund:
-- der echte WordPress-V7.1-Dry-Run ist noch offen;
-- bis dahin bleibt 1.14.12 ein lokal geprüfter Dry-Run-Kandidat, kein Live-/Release-PASS;
-- keine Binärdatei ohne byteidentischen, vollständig geprüften Stand erfinden.
-
-Manifest muss auf 1.14.12/V7.1 zeigen.
+Der echte WordPress-Dry-Run mit 1.14.13 ist noch offen. Bis dahin ist 1.14.13 ein lokal vollständig geprüfter Reparaturkandidat, kein Live-/Release-PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.14.12 über die aktive 1.14.9 installieren. Danach nur den manuellen Finalen Delta-Dry-Run starten; keinen Apply/Sync bestätigen.**
+**1.14.13 über die aktuell installierte 1.14.12 installieren. Danach nur den Finalen Delta-Dry-Run starten; keinen Apply/Sync bestätigen.**
+
+Direkte Abnahme:
+- Zielobjekte = 3487;
+- keine Kollision für Libellenbeobachtung;
+- keine Kollision für Nachtvogel-Beobachtung;
+- anschließend vollständiges reales Dry-Run-Ergebnis prüfen.
