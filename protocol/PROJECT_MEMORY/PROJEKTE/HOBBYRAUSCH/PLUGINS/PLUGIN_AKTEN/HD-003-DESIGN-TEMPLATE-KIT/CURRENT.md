@@ -3,38 +3,64 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.673 / AUDIO-HERO VISUELL VERWORFEN / 1.50.674 FULLBLEED-BEIGE-HERO LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.674 RESPONSIVE/TEXT FAIL / 1.50.675 CENTRAL AUDIO-HERO FIX LOCAL HARD PASS / LIVE OFFEN**
 
-## Einziger Kandidat
+## Fehler 1.50.674
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.674_HOBBY_DEPOT_AUDIO_HIFI_FULLBLEED_BEIGE_HERO_HARDPASS.zip`
+- Fullbleed nur >1100 px;
+- darunter alter 600-px-Bildpfad;
+- rechter Leerraum bei bestimmten Breiten;
+- Hero-Text links ohne ausreichenden Innenabstand;
+- alte lange Hero-Zeile statt neuer Kurzzeile;
+- Claim optisch noch alter Stand.
+
+## Kandidat
+
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_HARDPASS.zip`
 
 SHA-256:
-`c40e3271bc31c822aeb076f51880d8c2ef222f27ff31a05f29b4dcc0bf2f98e9`
+`aaf1bca2d7b7b55b91f9a15e22e847b67489ceca3faf3d6c1648a6779b636307`
 
-## Scope
+## Korrektur
 
-Nur Audio & HiFi Desktop-Hero:
-- ein durchlaufendes Bild über die gesamte Hero-Breite;
-- linker Übergang exakt in Header-Beige #f5f1e9;
-- Claim + Pinsel bleiben;
-- H1 bleibt H1;
-- kurze Zeile bleibt;
-- kein Logo im Hero;
-- Langtext darunter unverändert;
-- Tablet/Mobil unverändert.
+Zentrale CSS-Klasse `hd-hub2-hero-fullbleed`, aktuell nur Audio zugewiesen.
 
-Keine anderen Kategorien geändert.
-901/901 Assets zu 1.50.673 identisch.
+>=901:
+- Fullbleed;
+- Innenabstand;
+- beige Verlaufsfläche;
+- Claim/H1/Kurzzeile sauber.
+
+<=900:
+- gestapelt;
+- Bild 100 % breit;
+- kein 600-px-Limit.
+
+Hero-Text fest:
+`Klang verstehen, Technik entdecken und selbst bauen.`
+
+Langtext unabhängig davon.
+
+## Performance
+
+- ein Bild;
+- CSS-only;
+- kein JS;
+- kein Blur;
+- kein Masking;
+- keine zusätzliche Abfrage.
 
 ## QA
 
-- PHP 69/69 PASS;
-- aktive 1.50.674-Kette konsistent;
-- keine aktive 1.50.673-Stale-Referenz;
-- H1/Claim/Audio-Scope geprüft;
+- PHP 73/73;
+- Render-Harness PASS;
+- Release-Kette sauber;
+- 901/901 Assets identisch;
+- 1440/1180/1024/901/900/800/760/600/390 px simuliert;
+- 0 Overflow;
+- Bild in allen Fällen volle Hero-Breite;
 - ZIP PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.674 installieren und nur Audio & HiFi live prüfen.**
+**1.50.675 installieren und Audio & HiFi breit + halbbreit prüfen.**
