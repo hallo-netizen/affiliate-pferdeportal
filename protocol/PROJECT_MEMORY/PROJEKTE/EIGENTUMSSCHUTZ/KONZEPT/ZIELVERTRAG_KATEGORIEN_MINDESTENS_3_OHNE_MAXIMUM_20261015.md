@@ -1,6 +1,24 @@
 # HAB & BEWAHR – ZIELVERTRAG KATEGORIEN
 Fassung 2.2 · 16.10.2026 · **AKTIV** · Nachfolger von `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md`.
 
+## Verbindlicher jüngster Nutzernachtrag vom 17.10.2026 – ALLE 265 THEMENSEITEN, NICHT SCHEMA F
+
+**Dieser Nachtrag geht allen älteren widersprechenden Sätzen dieser Datei vor.**
+
+Für **ausnahmslos alle 265 bestehenden konkreten Themenseiten (93 historische R3 und 172 neue C2.2)** gilt die gleiche fachliche Qualitätsprüfung. Es gibt keine Ausnahme „alte Kategorien werden nicht mehr vertieft“. Die bestehende C2.2-Ergänzung mit 172 FAQ/172 Vergleichen und 102+26 individuellen Kategorien deckt **nur** die 172 neuen Themen ab, nicht die 93 alten.
+
+- **FAQ verpflichtend unter jedem Themen-Owner.** Das Themenfeld muss echte Leserfragen in den Mittelpunkt stellen. Keine künstlichen konkreten FAQ-Artikel oder Vorab-Recherche jedes Artikels erforderlich.
+- **Beratung verpflichtend unter jedem Themen-Owner.** Je Thema verständliche Entscheidungs- und Hilfestellung für Neueinsteiger **und** bei Bedarf anspruchsvollere Beratung für erfahrene Nutzer. Eine bereits vorhandene ausreichend breite Auswahl-/Beratungskategorie erfüllt dies, muss **nicht doppelt** angelegt werden.
+- **Vergleiche sehr häufig, möglichst breit** – Produktgruppen, konkrete kaufbare Produkte, Systeme oder Lösungen. Eigene Vergleichskategorie nur bei unabhängigem Mehrwert und genügend Stoff; bei einzelnen normativen Sicherheits- oder Ablauf-Themen kann Vergleich sinnvoll in die Beratung integriert sein. Frühere pauschale Vergleichspflicht gilt insoweit nur, wo fachlich tragfähig.
+- **Alle weiteren Kategorien strikt individuell**: Kosten, laufender Betrieb, Wartung, Pflege, Prüfungen, Fehler, Installation, Vorsorge, Recht, Schadensfall, Organisation, Einsteiger- oder Profi-Bedarf und andere Ideen anhand des **konkreten Themas** auf eigenen Nutzen prüfen. Kein Standardset und keine automatische Mindestzahl dieser Zusatzintents. Ein vorhandener Bereich darf nicht durch leicht abweichenden Namen dupliziert werden.
+- **Grobe Inhaltstiefe genügt:** Eigenständig mindestens ungefähr **drei bis fünf mögliche spätere Beiträge**; keine Prüfung, Nennung oder Erstellung konkreter Artikel/Überschriften und keine SEO-/Keyword-Pflicht. Grauzonen als solche festhalten und den genauen Hängepunkt benennen.
+- **Verständliche Namen:** Kurzes klares Megamenü-Label kann vom verständlicheren vollständigen H1-Seitentitel und von der hilfreichen Einführung abweichen. Jede Kategorie muss für normale Leser erkennbar sein. Bestands-IDs, Slugs und URLs nicht blind zum Zwecke der Textverbesserung umbenennen.
+- Fachliche Grobprüfung und Architektur sind von WordPress-Schreibfreigaben getrennt; **kein dritter Import automatisch**, keine Umhängung oder Löschung vorhandener Terms, Posts oder Seite-IDs.
+
+**Zuständiger GitHub-Fach-/Prüfnachweis:** `../KATEGORIEN/C23_265_THEMEN_EBENENPRUEFUNG_20261017.json`, V3; dynamischer Status und genau eine NEXT ACTION in der jeweiligen `CURRENT_STATE.md`.
+
+---
+
 ## Verbindlicher Nutzernachtrag vom 17.10.2026 zur C2.2-Fassung
 
 Dieser Nachtrag geht widersprechenden älteren Beispielsätzen in derselben Datei vor. Bei jedem konkreten WordPress-Seite-3-Thema sind grundsätzlich **eine individuell zum Thema benannte FAQ-Artikelkategorie sowie eine individuell benannte Vergleichs-Artikelkategorie** vorzusehen. Vergleiche umfassen Produktgruppen und Einsatzfälle ebenso wie spätere konkrete Produktvergleiche; separate Tarif-/Angebotsrechner bleiben eigenständige Landingpages. Weitere Vertiefungskategorien (Beratung, Auswahl, Kosten, Wartung, Installation, Anwendung, Fehlersuche, Sicherheit usw.) sind nur bei eigenständigem Mehrwert vorzuschlagen. Jede Endkategorie muss Stoff für mindestens drei unterscheidbare spätere Beiträge haben, ohne fertig ausgearbeitete Artikeltitel zu verlangen. **Inhaltliche Überschneidungen zwischen unterschiedlichen Themen sind erlaubt; identische publizierte Texte und doppelte kanonische Artikelziele sind zu vermeiden.** Gleiche Kategoriebezeichnung unter anderen Themen ist kein globales fachliches Dublettenverbot, möglichst aber themenspezifisch zu benennen.
