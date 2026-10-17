@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **FACHKONZEPT 2.7 AKTIV / 10ER-PILOT KALIBRIERT / V7.1 FACH-SOLL OPERATIONAL AN SEO_KATEGORIEN ÜBERGEBEN**
+STATUS: **FACHKONZEPT / ZIELVERTRAG 2.8 AKTIV / 10ER-PILOT KALIBRIERT / V7.1 FACH-SOLL OPERATIONAL AN SEO_KATEGORIEN ÜBERGEBEN**
 
 ## Rolle
 
@@ -69,7 +69,7 @@ Fachlogik bestimmt Thema, Parent und Content Capacity; DataForSEO validiert Nach
 
 ## Aktueller Fachstand
 
-10er-Pilot abgeschlossen und auf V7.1 kalibriert.
+Zielvertrag 2.8 aktiv. 10er-Pilot abgeschlossen und auf V7.1 kalibriert.
 Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker stehen ausschließlich in:
 `../SEO_KATEGORIEN/CURRENT_STATE.md`.
 
