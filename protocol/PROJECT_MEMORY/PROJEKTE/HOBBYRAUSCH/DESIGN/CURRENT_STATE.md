@@ -3,59 +3,116 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.673 TECHNISCH PASS / AUDIO-HERO GRAFISCH VERWORFEN / 1.50.674 FULLBLEED-BEIGE-HERO LOCAL HARD PASS / LIVE-PRÜFUNG OFFEN**
+STATUS: **LIVE 1.50.674 VISUELL/RESPONSIVE FAIL / 1.50.675 AUDIO-HERO CENTRAL RESPONSIVE FIX LOCAL HARD PASS / LIVE OFFEN**
 
-## Live-Stand
+## Reales Live-Ergebnis 1.50.674
 
-1.50.673 läuft technisch und die Bildqualität ist bestätigt.
+Vom Nutzer im Frontend belegt:
+- Text/Claim lagen optisch zu dicht am linken Hero-Rand;
+- der Fullbleed-Hero funktionierte nur bei breiten Desktop-Auflösungen;
+- bei kleineren Desktop-/Tabletbreiten fiel die Seite auf die alte begrenzte Bildbreite zurück und ließ rechts Leerraum;
+- unter der H1 stand weiterhin der alte lange Satz statt der freigegebenen Kurzzeile;
+- auch der Claim blieb optisch im alten Layout statt im neuen Hero sauber positioniert.
 
-Grafischer Befund Audio & HiFi:
-- 34/66-Aufteilung wirkt wie zwei getrennte Blöcke;
-- zu viel optische Trennung links/rechts;
-- Hero soll stattdessen als eine zusammenhängende Fläche wirken.
+Ursache:
+1.50.674 hatte den Fullbleed-Fix nur für `min-width:1101px` ergänzt und ließ darunter die alte Hub2-Responsive-Regel weiterlaufen. Zusätzlich wurde der Hero-Einstieg weiterhin automatisch aus dem ersten Satz des langen Kategorietextes gezogen.
 
-## 1.50.674 – nur Audio & HiFi Hero
+## 1.50.675 – zentrale Lösung, aktuell nur an Audio & HiFi gebunden
 
-Keine andere Kategorie geändert.
+Kein neuer Bildsatz, keine andere Kategorie.
 
-Desktop >1100 px:
-- Hero bleibt 320 px hoch;
-- bestehendes scharfes Audio-Hero-Masterbild läuft über die volle Hero-Breite;
-- links blendet das Bild weich in **exakt #f5f1e9** über, identisch zur Header-Hintergrundfarbe;
-- kein Logo im Hero;
-- Claim `Klang, der begeistert.` mit vorhandener Pinselunterstreichung bleibt;
-- `Audio & HiFi` bleibt echte H1;
-- darunter nur die kurze Zeile `Klang verstehen, Technik entdecken und selbst bauen.`;
-- langer 161-Wörter-Kategorietext bleibt darunter;
-- Tablet/Mobil bleiben gestapelt.
+### Hero-Logik
 
-Unverändert:
-- 901/901 Bildassets gegenüber 1.50.673 byte-identisch;
-- Audio-Unterkategorie-Kurzzeilen;
+Neue wiederverwendbare Klasse:
+`hd-hub2-hero-fullbleed`
+
+Aktuell bekommt **nur Audio & HiFi** diese Klasse.
+
+Performance:
+- ein vorhandenes Hero-Bild;
+- kein zweiter Bildrequest;
+- kein JavaScript;
+- kein Blur/Backdrop-Blur;
+- kein Masking;
+- nur CSS-Verlauf;
+- Header-Beige exakt `#f5f1e9`.
+
+### Responsive
+
+>=901 px:
+- Fullbleed-Hero;
+- Bild füllt 100 % der Hero-Breite;
+- Text bekommt echten Innenabstand über `clamp()`;
+- Claim/H1/Kurzzeile liegen auf einer beige auslaufenden Fläche;
+- Bild läuft weich darunter weiter.
+
+<=900 px:
+- stabiler Stapel;
+- Textblock oben;
+- Bild darunter **100 % breit**, ohne 600-px-Maximalbreite und ohne rechten Leerraum.
+
+Getestet:
+1440 / 1180 / 1024 / 901 / 900 / 800 / 760 / 600 / 390 px.
+Ergebnis:
+- horizontaler Overflow 0 bei allen neun Breiten;
+- Bildbreite = Hero-Breite in allen neun Fällen;
+- kein leerer rechter Bereich.
+
+### Text/Claim
+
+Claim bleibt inhaltlich wie freigegeben:
+`Klang, der begeistert.`
+
+Aber Darstellung im Audio-Hero ist jetzt eigenständig angepasst:
+- größer;
+- mit echtem Innenabstand;
+- Pinselunterstreichung bleibt;
+- nicht mehr direkt am linken Außenrand.
+
+H1:
+`Audio & HiFi` bleibt echte H1.
+
+Kurzzeile im Hero jetzt fest und unabhängig vom Langtext:
+`Klang verstehen, Technik entdecken und selbst bauen.`
+
+Der alte Hero-Satz `Du willst Klang selbst gestalten ...` kann im Hero nicht mehr erscheinen.
+
+Der lange Text darunter wurde als eigener 161-Wörter-Text geführt und bleibt vollständig unter dem Hero:
+- Pferdeatelier-Regeln eingehalten;
+- reale Audio-Unterthemen;
+- kein Generator-Schema.
+
+## Scope-Schutz
+
+Unverändert zu 1.50.674:
+- 901/901 Assets byte-identisch;
+- alle anderen Kategorien;
 - Mega-Menü;
-- Kategorien;
-- alle übrigen Hub2-Seiten.
+- Kategoriebaum;
+- Audio-Unterkategorie-Kurzzeilen.
 
 ## QA
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.674_HOBBY_DEPOT_AUDIO_HIFI_FULLBLEED_BEIGE_HERO_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_HARDPASS.zip`
 
 SHA-256:
-`c40e3271bc31c822aeb076f51880d8c2ef222f27ff31a05f29b4dcc0bf2f98e9`
+`aaf1bca2d7b7b55b91f9a15e22e847b67489ceca3faf3d6c1648a6779b636307`
 
 PASS:
-- PHP 69/69;
-- Release-Kette ohne aktive 1.50.673-Stale-Referenz;
-- aktive Profilklasse/Route/Templates 1.50.674 konsistent;
-- H1 im echten Renderer erhalten;
-- Claim/Pinsel erhalten;
-- kein Hero-Logo;
-- Beige exakt #f5f1e9 wie Header;
-- Audio-Scope über `hd-audio-hifi-prototype` begrenzt;
+- PHP 73/73;
+- aktiver Release-Chain-Scan ohne 1.50.674-Stale-Referenz;
+- Render-Harness: Fullbleed-Klasse PASS;
+- Claim PASS;
+- H1 PASS;
+- neue Kurzzeile PASS;
+- alter Hero-Satz im Hero ABSENT;
+- neuer Langtext PASS;
+- 161 Wörter;
 - 901/901 Assets identisch;
+- Browser-Simulation 9 Breiten: 0 Overflow / Bild jeweils volle Hero-Breite;
 - ZIP-Test PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.674 über 1.50.673 installieren und ausschließlich Audio & HiFi im Frontend prüfen.**
+**1.50.675 über 1.50.674 installieren und nur Audio & HiFi bei breitem Fenster sowie einem halbbreiten Fenster prüfen.**
