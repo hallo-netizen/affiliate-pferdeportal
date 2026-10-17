@@ -3597,3 +3597,79 @@ noch offen.
 NEXT:
 1.50.670 installieren → gezielter Frontend-Check der Mega-Menüs und ausschließlich der benannten Bildbereiche.
 
+---
+
+## PU-20261017-075 – HD-003 1.50.671 / Hero-Master-Regel korrigiert, keine Collagen, nur benannter Scope
+
+ANLASS:
+Nutzerprüfung von 1.50.670 zeigte einen Grundfehler im Bildworkflow:
+- Hero-Dateien nur 600×320;
+- auf großen Displays unscharf;
+- mehrere Kategorien zu eng / wie vergrößerte Vorschauausschnitte;
+- Forderung erneut bestätigt: Hero ist Master, Vorschau wird heruntergerechnet; keine Collagen.
+
+1.50.670:
+Bildteil VERWORFEN.
+Mega-Menü-Grundsatz bleibt unverändert.
+
+1.50.671:
+- Hero-Master 1600×853;
+- Preview 600×320 aus exakt demselben Master;
+- keine Collagen;
+- kein Preview-Upscaling;
+- weiter gefasste Szenen bei den ausdrücklich kritisierten Motiven.
+
+SCOPE EXAKT:
+19 Bildbereiche:
+Modellbau;
+Computer & Retro;
+Audio & HiFi;
+Spotting & Verkehr;
+Citizen Science;
+Natur bestimmen;
+Bonsai & Miniatur;
+Zimmerpflanzen;
+Hydroponik & Indoor;
+Terraristik;
+Münzen & Geld;
+Papier & Dokumente;
+Technik & Medien;
+Spielzeug & Spiele;
+Naturfunde;
+Werbung & Design;
+Werkzeuge & Geräte;
+Alltagsobjekte;
+Suchen & Finden.
+
+NICHT ANGEFASST:
+Gestalten komplett;
+Orchideen & Exoten;
+Aquaristik;
+Holz & Natur;
+alle sonstigen Kategorien.
+
+QA:
+- PHP 61/61 PASS;
+- 19/19 Hero 1600×853;
+- 19/19 Preview 600×320;
+- 0 exakte Hero-Duplikate;
+- Hero-Map außerhalb der 19 Schlüssel unverändert;
+- Cards-Map unverändert;
+- Gestalten byte-identisch;
+- Orchideen & Exoten byte-identisch;
+- Klassenlogik gegenüber 1.50.670 außer Versionsbindung identisch;
+- ZIP PASS;
+- Roundtrip 1029/1029 identisch.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.671_HOBBY_DEPOT_SHARP_MASTER_HERO_TARGETED_HARDPASS.zip`
+
+SHA-256:
+`be1e2ed9d82ee290e3744fd23f2c882849e612f768a820868703c50a46c8a606`
+
+LIVE:
+noch offen.
+
+NEXT:
+1.50.671 installieren -> nur die benannten Bildbereiche prüfen.
+
