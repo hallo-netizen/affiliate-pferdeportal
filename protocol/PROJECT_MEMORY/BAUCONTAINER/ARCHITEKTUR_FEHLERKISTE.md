@@ -960,7 +960,7 @@ ARCH-089.
 
 ## BAU-043 – Repository-/Branch-Aufräumung ohne eigene Current-Autorität
 
-STATUS: OPEN / BLOCKED FÜR WEITERE LÖSCHENTSCHEIDUNGEN
+STATUS: CLOSED – 2026-10-17
 
 KURZ:
 Die Campusregel verlangt pro Arbeitsbereich genau eine Current-Autorität. Für die Repository-/Branch-Aufräumung besitzt `AUTORITAETSPLAN.json` aktuell jedoch keinen eigenen Scope und damit keine zuständige Current-Autorität.
@@ -988,3 +988,10 @@ BIS DAHIN:
 BEZUG:
 ARCH-089 / ARCH-094 / HM-007 / `ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`.
 
+
+
+BEHOBEN 2026-10-17:
+- Scope `CAMPUS_REPOSITORY_CLEANUP` in `AUTORITAETSPLAN.json` ergänzt;
+- genau eine Current-Autorität: `protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md`;
+- keine Fach-Current, kein Runner, keine Plugin-/K0-/Affiliate-Logik verändert;
+- Cleanup-Audit darf damit operativ fortgesetzt werden; Löschfreigaben bleiben weiterhin an die dokumentierten Negativprüfungen gebunden.
