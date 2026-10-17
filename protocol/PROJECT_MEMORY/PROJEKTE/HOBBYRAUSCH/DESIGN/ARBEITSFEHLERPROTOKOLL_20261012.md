@@ -805,3 +805,23 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 **Niemals ein Bild-Plugin anbieten, bevor jedes reale Bild visuell geprüft UND der vollständige Plugin-Einbau lokal simuliert wurde. Technische Dateiprüfung allein ist ausdrücklich unzureichend.**
+## AF-043 – AF-026 in 1.50.671 erneut wiederholt: neue Profilklasse, alte aktive Templates
+
+FEHLER:
+1.50.671 lud Hobby_Depot_Profile_V150671, routete aber weiterhin auf die aktiven 1.50.670-Templates. Diese riefen Hobby_Depot_Profile_V150670 auf, obwohl diese Klasse im Paket nicht vorhanden war.
+
+FOLGE:
+WordPress-Fatal / kritischer Fehler auf den gerouteten Hobby-Depot-Seiten.
+
+BELASTBARER NACHWEIS:
+- Fronttemplate: Class "Hobby_Depot_Profile_V150670" not found;
+- Contenttemplate: derselbe Fehler.
+
+URSACHE DER ARBEITSWEISE:
+Der seit AF-026 verbindliche siebenstufige Release-Chain-Test wurde bei 1.50.671 erneut nicht als tatsächlicher Blocker ausgeführt. PHP-Lint und ZIP-Prüfung konnten diesen Klassenkettenfehler nicht erkennen.
+
+KORREKTUR:
+1.50.671 verworfen. 1.50.672 bindet alle sieben aktiven Punkte auf dieselbe Releaseversion und wurde zusätzlich durch reales Ausführen beider aktiven Templates geprüft.
+
+VERMEIDUNGSREGEL – HART:
+Kein Designplugin-ZIP mehr freigeben, bevor der AF-026-Test tatsächlich ausgeführt und protokolliert ist. Beide von route_template() gelieferten Owned-Templates müssen mit der tatsächlich geladenen Profilklasse ausgeführt werden. Zusätzlich muss der vorherige kaputte Release als Negativtest exakt scheitern und der neue Release im Dirty-Overlay-Fall bestehen.
