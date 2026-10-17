@@ -1,6 +1,15 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – NÄCHSTER TECHNISCHER SCHRITT: 472er C2.2-READ-ONLY-DELTA PRE-FLIGHT
+Die fachliche Quelle ist ausschließlich `../KONZEPT/CURRENT_STATE.md`; Arbeitsartefakt der dortigen groben Kategorieprüfung: `../KONZEPT/HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json` mit 172 FAQ, 172 Vergleichen, 102 bedingten weiteren und 26 neuen Kategorien. Alle **472 sind NUR VORSCHLÄGE** ohne echte neue WP-ID/WordPress-Schreibfreigabe, 5 negative Struktursimulationen bestanden.
+
+**GENAU EIN TECHNISCHER NÄCHSTER SCHRITT** ist frischer WordPress-Live-Readback des bereits importierten C2.2-Bestandes, einschließlich realer IDs und bestehender Bindungen. Darauf basiert anschließend ein geschützt simulierter Änderungsplan via dem vorhandenen Kategorieplugin; ohne Readback **keine** Umsetzung, keine alten Objekte löschen/umhängen, keine erneute Einspielung der 743 schon importierten Objekte und kein Zweit-Writer. Echte positive und negative Live-Tests und separate Schreibfreigabe bleiben erforderlich. Keine Artikelproduktion.
+
+---
+
+
+
 ## 17.10.2026 – KATEGORIENBÜRO: FACHSTAND JETZT IN GITHUB, TECHNISCHER WRITER UNVERÄNDERT
 **Neuerer Verweis statt älterem Library-Status:** Der fachliche C2.2-Quellenstand liegt auf dem Campusbranch in `../KONZEPT/HAB_C22_V3_QUELLENUEBERNAHME_20261017.json` (172 neue Themen, 566 importierte Kategorien, 172 FAQ- und 172 Vergleichsvorschläge, 103 vorläufig sinnvolle zusätzliche Kandidaten, 285 geschützte Altterms). Die neue grobe Fachvertiefung `../KONZEPT/HAB_C22_GROBE_FACHDELTA_26_THEMEN_20261017.json` dokumentiert **26 weitere additive Vorschläge**, ausschließlich im Themenkontext auf Mehrwert und mögliche ca. 3–5 spätere Beiträge eingeschätzt. Keine Einzelartikel, keine neue WordPress-Kategorie. **Einzige Autorität für Fachstand und fachliche NEXT ACTION: `../KONZEPT/CURRENT_STATE.md`.** Diese Datei bleibt Autorität ausschließlich für Kategorie-Plugin, WordPress-Schreiber, Readback und Betrieb.
 
