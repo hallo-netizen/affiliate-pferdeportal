@@ -1,0 +1,200 @@
+--- a/includes/class-pste-semantic-review-sandbox.php
++++ b/includes/class-pste-semantic-review-sandbox.php
+@@ -782,6 +782,10 @@
+     public static function refreshInternalStructureBacklog(bool $force=false): array {
+         PSTE_Plugin::assertReady();$token=self::acquireLock();
+         try{
++            // The existing migrated record store must never be loaded as a legacy monolith.
++            // One automatic/manual invocation advances at most 25 existing Sandbox records.
++            if(class_exists('PSTE_Sandbox_Record_Store')&&PSTE_Sandbox_Record_Store::isComplete())
++                return self::refreshInternalStructureBacklogRecordLocal($force);
+             $store=self::stored();self::assertNoActiveJob($store);
+             $last=(string)($store['last_internal_structure_recheck_at_utc']??'');
+             $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')throw new RuntimeException('PSTE_SANDBOX_RECHECK_BASELINE_REQUIRED');
+@@ -820,6 +824,100 @@
+         }finally{self::releaseLock($token);}
+     }
+ 
++    /**
++     * Same existing Sandbox planner, bounded by record count. The cursor lives in the
++     * already-present maintenance-health option; no new table, worker or provider.
++     */
++    private static function refreshInternalStructureBacklogRecordLocal(bool $force): array {
++        // Preserve the original 'never recheck during an active Sandbox research job' gate.
++        $header=PSTE_Sandbox_Record_Store::legacyHeader();
++        self::assertNoActiveJob(['job'=>$header['job']??null]);
++        $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++        if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')
++            throw new RuntimeException('PSTE_SANDBOX_RECHECK_BASELINE_REQUIRED');
++        $binding=self::internalStructureRecheckBinding($baseline);
++        $health=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        if(!is_array($health))throw new RuntimeException('PSTE_SANDBOX_RECHECK_HEALTH_INVALID');
++        $progress=is_array($health['structure_recheck_v1']??null)?$health['structure_recheck_v1']:[];
++        if($progress){
++            $expectedHash=self::internalStructureRecheckProgressHash($progress);
++            if(!hash_equals((string)($progress['checkpoint_sha256']??''),$expectedHash))
++                throw new RuntimeException('PSTE_SANDBOX_RECHECK_PROGRESS_HASH_INVALID');
++        }
++        $inProgress=(string)($progress['status']??'')==='IN_PROGRESS'&&hash_equals((string)($progress['binding_sha256']??''),$binding);
++        $last=(string)($progress['last_completed_at_utc']??'');
++        $doneForCurrentBinding=(string)($progress['binding_sha256']??'')!==''&&hash_equals((string)$progress['binding_sha256'],$binding);
++        $due=$force||$inProgress||!$doneForCurrentBinding||$last===''||strtotime($last)===false||time()-(int)strtotime($last)>=7*DAY_IN_SECONDS;
++        if(!$due)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'production_handoff_attempted'=>false,'source_data_write_attempted'=>false];
++        $ids=PSTE_Sandbox_Record_Store::recordIds();$total=count($ids);
++        $cursor=$inProgress?max(0,(int)($progress['cursor']??0)):0;
++        if($cursor>$total)throw new RuntimeException('PSTE_SANDBOX_RECHECK_CURSOR_OUT_OF_RANGE');
++        $slice=array_slice($ids,$cursor,25);$writes=[];$checked=0;$changed=0;$failed=0;$errors=[];$now=gmdate('c');
++        $registry=PSTE_Article_Type_Registry::build($baseline);$inventory=PSTE_Snapshot::inventory();
++        foreach($slice as $id){
++            $id=(string)$id;$record=PSTE_Sandbox_Record_Store::getRecord($id);
++            if(!in_array((string)($record['status']??''),['STRUCTURE_GAP','MATCHER_REVIEW','PROPOSAL_READY_FOR_REVIEW','REVIEW_REQUIRED'],true))continue;
++            if(self::effectiveRelevanceStatus($record)!=='RELEVANT_FOR_PORTAL')continue;
++            $checked++;$record['last_internal_structure_recheck_attempt_at_utc']=$now;
++            try{
++                $source=self::sourceSummary((string)($record['pool_key']??''));
++                $external=is_array($record['external_relevance']??null)?(array)$record['external_relevance']:[];
++                $external['status']='RELEVANT_FOR_PORTAL';
++                $external['decision_source']=$record['relevance_adjudication']['decision_source']??($external['decision_source']??'STORED_RELEVANCE_EVIDENCE');
++                $proposal=PSTE_Sandbox_Internal_Planner::plan($record,$registry,$baseline,$external,(array)$source['payload'],$inventory);
++                $oldSha=(string)($record['internal_proposal_sha256']??'');$newSha=self::hash($proposal);
++                if(!hash_equals($oldSha,$newSha))$changed++;
++                $history=array_values((array)($record['history']??[]));$history[]=self::event('PERIODIC_INTERNAL_STRUCTURE_RECHECK',(string)($proposal['status']??'REVIEW_REQUIRED'));
++                $record['internal_proposal']=$proposal;$record['internal_proposal_sha256']=$newSha;
++                $record['status']=(string)($proposal['status']??'REVIEW_REQUIRED');$record['workflow_lane']=self::workflowLaneForStatus($record['status']);
++                $record['updated_at_utc']=$now;$record['history']=$history;$record['last_internal_structure_recheck_at_utc']=$now;
++                $record['structure_recheck_health']='PASS';$record['structure_recheck_error_code']='';
++            }catch(Throwable $e){
++                $failed++;$code=self::safeCode($e->getMessage());$errors[]=['sandbox_id'=>$id,'error_code'=>$code];
++                $history=array_values((array)($record['history']??[]));$history[]=self::event('PERIODIC_INTERNAL_STRUCTURE_RECHECK_FAILED',$code);
++                $record['structure_recheck_health']='FAIL';$record['structure_recheck_error_code']=$code;
++                $record['structure_recheck_failure_count']=(int)($record['structure_recheck_failure_count']??0)+1;
++                $record['updated_at_utc']=$now;$record['history']=$history;
++            }
++            $writes[$id]=$record;
++        }
++        // Commit changed records before advancing the cursor. A failed write retries the same slice.
++        if($writes)PSTE_Sandbox_Record_Store::putRecordsBatch($writes);
++        $next=$cursor+count($slice);$complete=$next>=$total;
++        $accChecked=($inProgress?(int)($progress['checked']??0):0)+$checked;
++        $accChanged=($inProgress?(int)($progress['changed']??0):0)+$changed;
++        $accFailed=($inProgress?(int)($progress['failed']??0):0)+$failed;
++        $progress=['status'=>$complete?'COMPLETE':'IN_PROGRESS','binding_sha256'=>$binding,'cursor'=>$next,'total'=>$total,
++            'checked'=>$accChecked,'changed'=>$accChanged,'failed'=>$accFailed,'started_at_utc'=>$inProgress?(string)($progress['started_at_utc']??$now):$now,
++            'last_completed_at_utc'=>$complete?$now:($inProgress?(string)($progress['last_completed_at_utc']??''):''),'updated_at_utc'=>$now];
++        $progress['checkpoint_sha256']=self::internalStructureRecheckProgressHash($progress);
++        $health['structure_recheck_v1']=$progress;
++        update_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,$health,false);
++        $readback=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        $saved=is_array($readback)?(array)($readback['structure_recheck_v1']??[]):[];
++        if(!hash_equals((string)($saved['binding_sha256']??''),$binding)||(int)($saved['cursor']??-1)!==$next
++            ||!hash_equals((string)($saved['checkpoint_sha256']??''),self::internalStructureRecheckProgressHash($saved)))
++            throw new RuntimeException('PSTE_SANDBOX_RECHECK_CURSOR_NOT_SAVED');
++        if(!$complete&&function_exists('wp_schedule_single_event')&&function_exists('wp_next_scheduled')){
++            $nextCron=wp_next_scheduled(PSTE_SANDBOX_INTERNAL_RECHECK_CRON_HOOK);
++            if(!$nextCron||(int)$nextCron-time()>900)
++                wp_schedule_single_event(time()+660,PSTE_SANDBOX_INTERNAL_RECHECK_CRON_HOOK);
++        }
++        return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH',
++            'status'=>$complete?($accFailed===0?'PASS':'PARTIAL_FAILURE'):'IN_PROGRESS',
++            'checked'=>$checked,'changed'=>$changed,'failed'=>$failed,'failures'=>$errors,
++            'total_checked'=>$accChecked,'total_changed'=>$accChanged,'total_failed'=>$accFailed,
++            'cursor'=>$next,'total'=>$total,'complete'=>$complete,
++            'provider_calls'=>0,'source_data_write_attempted'=>false,'published_or_draft_article_write_attempted'=>false,'production_handoff_attempted'=>false];
++    }
++
++    private static function internalStructureRecheckProgressHash(array $progress): string {
++        $parts=[];
++        foreach(['status','binding_sha256','cursor','total','checked','changed','failed','started_at_utc','last_completed_at_utc','updated_at_utc'] as $k)
++            $parts[]=(string)($progress[$k]??'');
++        return hash('sha256','PSTE_SANDBOX_EXISTING_RECHECK_PROGRESS_V1|'.implode('|',$parts));
++    }
++
+     /** The existing Sandbox cron checks current categories/rules without a new schedule or table. */
+     private static function internalStructureRecheckBinding(array $baseline): string {
+         return hash('sha256',implode('|',[
+--- a/includes/class-pste-admin.php
++++ b/includes/class-pste-admin.php
+@@ -37,6 +37,7 @@
+                 'pste_review_candidate'=>'reviewCandidate','pste_set_candidate_type'=>'setCandidateType','pste_override_title'=>'overrideTitle','pste_process_context_batch'=>'processContextBatch','pste_repair_price_intents'=>'repairPriceIntents',
+                 'pste_import_existing_evidence_reentry'=>'importExistingEvidenceReentry',
+                 'pste_sandbox_export'=>'sandboxExport','pste_sandbox_review_relevance'=>'sandboxReviewRelevance','pste_sandbox_confirm_internal'=>'sandboxConfirmInternal',
++                'pste_sandbox_recheck_internal'=>'sandboxRecheckInternal',
+             ]);
+         }
+         foreach($actions as $action=>$method)add_action('admin_post_'.$action,[self::class,$method]);
+@@ -325,6 +326,19 @@
+         echo '<div class="notice notice-warning inline"><p><strong>Hauptregel 1:</strong> Diese Sandbox ist vollständig getrennt von Artikeln, Textmaschine, PPM, Compiler, HTML und Design. Sie erzeugt keinen Produktions-Handoff und besitzt keinen Apply-Button.</p></div>';
+         $maintenance=PSTE_Sandbox_Maintenance_Health::snapshot();$maintenanceBad=(string)($maintenance['schedule_status']??'MISSING')!=='SCHEDULED'||in_array((string)($maintenance['run_health']??'UNKNOWN'),['FAIL','OVERDUE'],true);
+         echo '<div class="notice '.($maintenanceBad?'notice-error':'notice-info').' inline"><p><strong>Interne Wiederprüfung:</strong> Zeitplan '.esc_html((string)($maintenance['schedule_status']??'UNKNOWN')).' · Laufstatus '.esc_html((string)($maintenance['run_health']??'UNKNOWN')).(($maintenance['current_error_code']??'')!==''?' · Fehler <code>'.esc_html((string)$maintenance['current_error_code']).'</code>':'').'. Strukturlücken bleiben gespeichert; ein ausgefallener Wartungslauf wird sichtbar protokolliert.</p></div>';
++        $lastRecheck=(array)($maintenance['last_report']??[]);
++        $lastBacklog=is_array($lastRecheck['backlog']??null)?(array)$lastRecheck['backlog']:$lastRecheck;
++        $maintOption=get_option(PSTE_OPTION_SANDBOX_MAINTENANCE_HEALTH,[]);
++        $maintOption=is_array($maintOption)?$maintOption:[];
++        $cursor=(array)($maintOption['structure_recheck_v1']??[]);
++        echo '<p><strong>Gelbe Fälle:</strong> Automatische interne Nachprüfung bei geänderter Kategorie/Regel, sonst wöchentlich. Keine externen Providerkosten.</p>';
++        if($cursor)echo '<p><strong>Interne Prüfung:</strong> '.esc_html((string)($cursor['status']??'')).' · '.esc_html((string)($cursor['cursor']??0)).' / '.esc_html((string)($cursor['total']??0)).' gespeichert · zuletzt '.esc_html((string)($cursor['updated_at_utc']??'')).'</p>';
++        if($lastBacklog)echo '<p><small>Letzter Prüflauf: '.esc_html((string)($lastBacklog['status']??'')).' · geprüft '.esc_html((string)($lastBacklog['checked']??0)).' · verändert '.esc_html((string)($lastBacklog['changed']??0)).' · Fehler '.esc_html((string)($lastBacklog['failed']??0)).'</small></p>';
++        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++        wp_nonce_field('pste_sandbox_recheck_internal');
++        echo '<input type="hidden" name="action" value="pste_sandbox_recheck_internal">';
++        submit_button('Gelbe Fälle erneut prüfen (ohne Providerkosten)','secondary','submit',false);
++        echo '</form>';
+         echo '<p><strong>Workflow:</strong> V2-Hauptgate → alle blockierten Longtails dauerhaft erhalten → <strong>Relevanz zuerst</strong> anhand realer SEO-/SERP-Evidenz → nur bestätigte relevante Fälle werden danach intern auf Familie, Kategorie und Titelprobe geprüft. Lokaler Portalbegriff, Familiennähe und Ausschlüsse sind vorher ausschließlich Hinweise und niemals ein Relevanzurteil.</p>';
+         echo '<div class="pste-grid">';
+         $internalReviewCount=(int)($c['MATCHER_REVIEW']??0)+(int)($c['PROPOSAL_READY_FOR_REVIEW']??0)+(int)($c['MULTIPLE_FAMILIES_REVIEW']??0)+(int)($c['REVIEW_REQUIRED']??0);
+@@ -1191,6 +1205,25 @@
+         try{$info=PSTE_Semantic_Review_Sandbox::streamExportToResource($tmp,$guard);$size=ftell($tmp);if($size===false||(int)$size!==(int)$info['bytes'])throw new RuntimeException('PSTE_SANDBOX_EXPORT_SIZE_MISMATCH');rewind($tmp);nocache_headers();header('Content-Type: application/json; charset=utf-8');header('Content-Disposition: attachment; filename="pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json"');header('Content-Length: '.(string)$size);fpassthru($tmp);exit;}finally{fclose($tmp);}
+     }
+     public static function sandboxReviewRelevance(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_review_relevance',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$decision=sanitize_text_field((string)($_POST['relevance_decision']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_response_sha256']??'')));$expectedCurrent=strtolower(sanitize_text_field((string)($_POST['expected_current_decision_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_EXPLICIT_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::reviewOrReviseRelevance($id,$decision,$expected,$expectedCurrent,$note,get_current_user_id());self::redirect('review','sandbox_view=1&sandbox_relevance_reviewed=1');}catch(Throwable $e){self::blocked('review',$e);}}
++    public static function sandboxRecheckInternal(): void {
++        // A rejected nonce must not mutate maintenance health at all.
++        try{PSTE_Auth::assertAdmin('pste_sandbox_recheck_internal',(string)($_POST['_wpnonce']??''));}
++        catch(Throwable $e){self::blocked('review',$e);return;}
++        try{
++            PSTE_Plugin::assertReady();
++            PSTE_Sandbox_Maintenance_Health::recordAttempt('SANDBOX_MANUAL_RECHECK');
++            $report=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(true);
++            if((string)($report['status']??'')==='PARTIAL_FAILURE')
++                PSTE_Sandbox_Maintenance_Health::recordFailure('SANDBOX_MANUAL_RECHECK','PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            elseif((string)($report['status']??'')==='IN_PROGRESS')
++                PSTE_Sandbox_Maintenance_Health::recordProgress('SANDBOX_MANUAL_RECHECK',$report);
++            else PSTE_Sandbox_Maintenance_Health::recordSuccess('SANDBOX_MANUAL_RECHECK',$report);
++            self::redirect('review','sandbox_view=1&sandbox_rechecked=1');
++        }catch(Throwable $e){
++            try{PSTE_Sandbox_Maintenance_Health::recordFailure('SANDBOX_MANUAL_RECHECK',(string)$e->getMessage());}catch(Throwable $ignored){}
++            self::blocked('review',$e);
++        }
++    }
+     public static function sandboxConfirmInternal(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_confirm_internal',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_proposal_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_INTERNAL_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::confirmInternalProposalForNormalReentry($id,$expected,$note,get_current_user_id());self::redirect('review','sandbox_view=1&sandbox_internal_confirmed=1');}catch(Throwable $e){self::blocked('review',$e);}}
+     public static function sandboxStartAjax(): void {
+         $level=self::ajaxBoundaryBegin();
+--- a/includes/class-pste-normal-reentry-coordinator.php
++++ b/includes/class-pste-normal-reentry-coordinator.php
+@@ -68,6 +68,7 @@
+             $report=['contract'=>'PSTE_SANDBOX_MAINTENANCE_RUN_V1','backlog'=>(array)($reuse['backlog']??[]),'reentry_checked'=>(int)($reuse['reentry_checked']??0),'reentry_applied'=>(int)($reuse['reentry_applied']??0),'reentry_failed'=>(int)($reuse['reentry_failed']??0),'reentry_failures'=>(array)($reuse['reentry_failures']??[]),'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
+             if((string)($reuse['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_REENTRY_PARTIAL_FAILURE',$report);
+             elseif((string)($report['backlog']['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            elseif((string)($report['backlog']['status']??'')==='IN_PROGRESS')PSTE_Sandbox_Maintenance_Health::recordProgress($trigger,$report);
+             else PSTE_Sandbox_Maintenance_Health::recordSuccess($trigger,$report);
+         }catch(Throwable $e){
+             $code=self::safeCode($e->getMessage());
+--- a/includes/class-pste-sandbox-maintenance-health.php
++++ b/includes/class-pste-sandbox-maintenance-health.php
+@@ -17,6 +17,8 @@
+             // Keep the historical failure as evidence, but it no longer describes current health after READY.
+             $runHealth='PENDING_AFTER_READY';$currentError='';$healthReason='HISTORICAL_PRE_READY_FAILURE_RETAINED_NOT_CURRENT';
+         }elseif($lastStatus==='FAIL'){$runHealth='FAIL';$healthReason='LATEST_RUN_FAILED';}
++        elseif($lastStatus==='RUNNING'&&(string)($stored['last_attempt_at_utc']??'')!==''&&strtotime((string)$stored['last_attempt_at_utc'])!==false
++            &&time()-strtotime((string)$stored['last_attempt_at_utc'])<=2*DAY_IN_SECONDS){$runHealth='RUNNING';$currentError='';$healthReason='PARTIAL_RECHECK_CONTINUES';}
+         elseif($successTs!==false&&time()-$successTs<=2*DAY_IN_SECONDS){$runHealth='PASS';$currentError='';$healthReason='RECENT_SUCCESS';}
+         elseif($successTs!==false){$runHealth='OVERDUE';$currentError='';$healthReason='LAST_SUCCESS_OVERDUE';}
+         elseif((string)($stored['last_attempt_at_utc']??'')!==''){$runHealth=$lastStatus==='RUNNING'?'RUNNING':'FAIL';$healthReason='ATTEMPT_WITHOUT_SUCCESS';}
+@@ -32,6 +34,8 @@
+ 
+     public static function recordAttempt(string $trigger): void {self::write(['last_attempt_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'RUNNING','last_error_code'=>'']);}
+     public static function recordSuccess(string $trigger,array $report): void {self::write(['last_attempt_at_utc'=>(string)(self::current()['last_attempt_at_utc']??gmdate('c')),'last_success_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'PASS','last_error_code'=>'','last_report'=>$report,'consecutive_failures'=>0]);}
++    /** Completed one small slice, NOT the whole Sandbox sweep. */
++    public static function recordProgress(string $trigger,array $report): void {self::write(['last_attempt_at_utc'=>gmdate('c'),'last_trigger'=>self::safe($trigger),'last_status'=>'RUNNING','last_error_code'=>'','last_report'=>$report]);}
+     public static function recordFailure(string $trigger,string $code,array $report=[]): void {$cur=self::current();self::write(['last_attempt_at_utc'=>(string)($cur['last_attempt_at_utc']??gmdate('c')),'last_trigger'=>self::safe($trigger),'last_status'=>'FAIL','last_error_code'=>self::safe($code),'last_report'=>$report,'consecutive_failures'=>(int)($cur['consecutive_failures']??0)+1]);}
+     public static function recordScheduleState(bool $scheduled,string $trigger): void {self::write(['schedule_last_checked_at_utc'=>gmdate('c'),'schedule_last_trigger'=>self::safe($trigger),'schedule_last_status'=>$scheduled?'SCHEDULED':'MISSING']);}
+ 
