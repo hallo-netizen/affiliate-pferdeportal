@@ -3314,3 +3314,83 @@ Noch offen.
 NEXT:
 1.14.14 installieren → Adminseite neu öffnen → ausschließlich Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.
 
+---
+
+## PU-20261017-071 – HD-001 1.14.15 / Dry-Run-Timeout vollständig reproduziert und entfernt
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+1.14.14 → 1.14.15.
+
+REALER AUSLÖSER:
+Der Nutzer meldete nach 1.14.14 erneut Gateway-Timeout.
+
+URSACHE 1.14.14:
+Der Admin-Seitenaufruf war zwar entlastet, aber der eigentliche Final-Dry-Run blieb algorithmisch ungebremst:
+- für jeden der 3487 Zielknoten wurde der gesamte passende Live-Bestand erneut durchsucht und neu indiziert;
+- während der Sortierung wurde die komplette Knotentiefe bei jedem Vergleich erneut aus dem gesamten Zielbaum berechnet.
+
+HARD-E2E-REPRO 1.14.14:
+Ausgang: letzter vollständig synchronisierter 2357er Bestand, die drei bekannten ADOPT-Kandidaten und die beiden real beobachteten Altbindungen Libellenbeobachtung/Nachtvogel-Beobachtung.
+
+Ergebnis:
+- PASS fachlich, aber Laufzeit lokal 29.775 s;
+- get_post_meta 402892;
+- get_term_meta 11530381;
+- get_posts 2;
+- get_terms 6;
+- damit auf dem Live-Hosting klar timeoutgefährdet.
+
+KORREKTUR 1.14.15:
+- Live-Kandidaten genau einmal nach Target-ID, Legacy-Konzept und Slug indizieren;
+- Tiefenwerte einmal vorberechnen und beim Sortieren wiederverwenden;
+- gespeicherten Dry-Run ohne redundantes komplettes Zielprofil ablegen;
+- keine Änderung an Zielstruktur, Navigation, Legacy-Reuse oder Sicherheitsregeln.
+
+HARD-E2E-POSITIV 1.14.15:
+Gleiche Ausgangsdaten:
+- Laufzeit lokal 1.113 s;
+- get_post_meta 6310;
+- get_term_meta 29115;
+- get_posts 2;
+- get_terms 6;
+- PASS;
+- 3517 logisch;
+- 3487 physisch;
+- CREATE 1126;
+- ADOPT 3;
+- UPDATE 2358;
+- ARCHIVE 1;
+- Errors 0;
+- Libellenbeobachtung → vorhandene Altseite UPDATE/reuse;
+- Nachtvogel-Beobachtung → vorhandene Altseite UPDATE/reuse;
+- Trainspotting / Modellraketen / Pflanzenbestimmung → ADOPT.
+
+NEGATIV:
+- fremd gebundener Slug → BLOCKED;
+- doppelte Legacy-Target-Bindung → BLOCKED;
+- alter gespeicherter Prüflauf → nicht als aktueller Nachweis gerendert;
+- normaler Admin-Aufruf → keine Vollprüfung.
+
+ARTEFAKT:
+`HD001_V1.14.15_HOBBY_DEPOT_V7_1_DRYRUN_TIMEOUT_FIX_HARDPASS.zip`
+
+SHA-256:
+`29289c8ef70469d036be42b1d3ce3401a57a15f298201d099263bba9d61f4165`
+
+TECHNIK:
+- PHP 33/33 PASS;
+- ZIP 47/47 PASS;
+- V7.1-Profil SHA unverändert `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`;
+- Provider Calls 0;
+- Dry-Run 0 Strukturwrites;
+- kein automatischer Apply/Sync.
+
+LIVE:
+Noch offen.
+
+NEXT:
+1.14.15 installieren → ausschließlich Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.
+
