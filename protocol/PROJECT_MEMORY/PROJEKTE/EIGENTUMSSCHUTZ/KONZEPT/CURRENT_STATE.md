@@ -1,6 +1,10 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+**Sprach-Nachkorrektur:** Die **91 Vergleichskategorien der alten Themenseiten sind inzwischen individuell nach konkreten Systemen/Produkten/Maßnahmen benannt**. Kein Standard-„Systeme & Lösungen vergleichen“ mehr. Die 91 technischen Vorschlagskennungen wurden mit genau diesen Namen neu berechnet und im `C23_475_ERGAENZUNGEN_GEBUNDENES_FACHDELTA_20261017.json` synchronisiert (Commit `46d61f2a530c0f59eab9ec9536286530a17f7f3f`). **475/475 weltweit verschiedene neue Namen, 475/475 einzigartige logische IDs**, kein WordPress-Write.
+
+
+
 ## 17.10.2026 – VERBINDLICHE NACHHOLPRÜFUNG ÜBER ALLE 265 THEMENSEITEN (NEUESTE FACHWAHRHEIT)
 Auf ausdrückliche Nutzerkorrektur wurde die **gesamte letzte Seitenebene** geprüft: **93 alte R3-Themenseiten + 172 neue C2.2-Themenseiten**. **FAQ und Beratung sind Pflicht** (Beratung nicht doppeln, falls fachlich bereits vorhanden), Vergleich nahezu überall, alle anderen Bereiche (Kosten, Pflege, Wartung, Fehler, Montage, Schadenfall, Organisation etc.) **nur bei unabhängigem Mehrwert und grob ca. 3–5 möglichen späteren Beiträgen**. Anfänger und erfahrene Nutzer in den Beratungsbedarf einbeziehen. Keine Artikel-/Titelkonzeption.
 
