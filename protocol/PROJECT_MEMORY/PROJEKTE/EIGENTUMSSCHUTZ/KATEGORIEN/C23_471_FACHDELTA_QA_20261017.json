@@ -1,0 +1,112 @@
+{
+  "schema": "HB_C23_265_TOPIC_FACETS_QUALITY_GATE_20261017",
+  "date": "2026-10-17",
+  "baseline": {
+    "topics": 265,
+    "legacy_topics": 93,
+    "new_topics": 172,
+    "previously_installed_categories": 1323,
+    "legacy_categories_preserved": 285,
+    "legacy_known_post_bindings": 4
+  },
+  "proposals": {
+    "count": 471,
+    "faq": 93,
+    "beratung": 220,
+    "vergleich": 91,
+    "individual_extra": 67,
+    "contextual_legacy_extras": 63,
+    "contextual_new_extras": 4,
+    "additional_old_comparison_exceptions": 2
+  },
+  "content_rule": "Eigenständig sinnvoller Nutzen und grob ca. 3–5 Beiträge, keine Artikelentwürfe, kein Schema-F-Kosten/Wartung",
+  "quality": {
+    "positive": [],
+    "negative_simulations": [
+      {
+        "case": "MISSING_OLD_TERM",
+        "rejected": true,
+        "why": [
+          "HISTORICAL_PROTECTION"
+        ]
+      },
+      {
+        "case": "PROPOSAL_LOST",
+        "rejected": true,
+        "why": [
+          "ADD_COUNT",
+          "TYPE_COUNTS"
+        ]
+      },
+      {
+        "case": "NEW_ALREADY_IMPORTED",
+        "rejected": true,
+        "why": [
+          "ALREADY_IMPORTED"
+        ]
+      },
+      {
+        "case": "UNKNOWN_OWNER",
+        "rejected": true,
+        "why": [
+          "WRONG_OWNER",
+          "TYPE_COUNTS"
+        ]
+      },
+      {
+        "case": "ILLEGAL_WRITE",
+        "rejected": true,
+        "why": [
+          "UNAUTHORISED_WRITE"
+        ]
+      },
+      {
+        "case": "DUPLICATE_PROPOSAL",
+        "rejected": true,
+        "why": [
+          "ADD_COUNT",
+          "DUPLICATE",
+          "TYPE_COUNTS"
+        ]
+      },
+      {
+        "case": "DUPLICATE_GLOBAL_NAME",
+        "rejected": true,
+        "why": [
+          "DUPLICATE"
+        ]
+      },
+      {
+        "case": "OLD_TERM_ID_TAMPER",
+        "rejected": true,
+        "why": [
+          "LEGACY_ID_DRIFT"
+        ]
+      },
+      {
+        "case": "MISSING_OLDER_OWNER",
+        "rejected": true,
+        "why": [
+          "OWNER_COUNT",
+          "HISTORICAL_PROTECTION"
+        ]
+      }
+    ],
+    "negative_all_pass": true,
+    "global_new_title_collisions": 0,
+    "collision_with_existing_owner": 0,
+    "covered_existing_advice_reused": 45,
+    "old_duplicates_rejected": 30,
+    "new_duplicates_rejected": 17,
+    "remaining_limits": "Dies ist eine fachliche Grobprüfung und eine statische GitHub-Simulation, KEINE WordPress-Live-Installation."
+  },
+  "writer": {
+    "live_write_allowed": false,
+    "no_modification_of_existing_ids_urls_slugs_posts": true,
+    "current_authority": "KATEGORIEN/CURRENT_STATE.md"
+  },
+  "source": {
+    "facet_file": "C23_265_THEMEN_EBENENPRUEFUNG_20261017.json",
+    "source_blob": "040ff00c4a3434c86ff293b6154db87933ec361d"
+  }
+}
