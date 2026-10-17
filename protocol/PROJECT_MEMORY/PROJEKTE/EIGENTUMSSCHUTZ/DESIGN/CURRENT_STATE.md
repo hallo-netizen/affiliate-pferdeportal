@@ -1,4 +1,18 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
+<!-- new current section supersedes older design NEXT ACTIONs -->
+
+## 17.10.2026 – DESIGNSCOPE: UPDATE 0.1.24 MIT SECHS EIGENSTÄNDIGEN HAUPTKATEGORIE-HEROS FERTIG
+**Aktueller Stand vor älteren 0.1.22-/0.1.23-Beschreibungen:** Das bestehende Designplugin im unveränderten Originalordner `hab-bewahr-design-vorschau` wurde vollständig als **0.1.24** erweitert. Sechs verschiedene thematische scharfe Weitwinkelbilder (keine Collagen), sechs individuelle direkte Schutzsätze („du“), lesbarer heller/dunkler Textkontrast, nach Thema unterschiedliche Unterkategoriebilder. Banner befüllt = bei freien Rasterplätzen passend verbreitert (z. B. sechs Themen + ein doppelt breiter Werbeplatz); leer = **keine Besucherausgabe**, Admin sieht markierten Platz. Verkaufbare Werbefläche bleibt separat. Artikelvorschauen nur für echte veröffentlichte Artikel; echter Magazinlink nur am Ratgeberbereich, keine losen Magazin-/Dienstleisterlinks. Der bestehende ausführliche Kategorietext bleibt am Ende.
+
+**Lokale Checks:** 8/8 PHP-Dateien ohne Syntaxfehler; vollständiges 54-Dateien-ZIP auf Integrität geprüft; 80 positive/negative PHP-Ausgabefälle; 12 echte lokale Browseransichten (sechs Desktop 1440, sechs Mobil 390), Text innerhalb des Heroes und ohne horizontalen Überlauf. Alles **LOCAL PASS, WORDPRESS-LIVE OFFEN**; keine echte WP-Liveabnahme behauptet.
+
+**Original-Artefakt:** Persönliche Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.24_HERO_TEXTE_KATEGORIEN.zip`. Ausführlicher Releasebeleg `DESIGN/RELEASE_0124_HERO_TEXTE_KATEGORIEN_20261017.md`. Das vorherige 0.1.23 wurde in dieser Version vollständig weitergeführt, keine neue Pluginidentität, keine Änderungen an Kategorien, WordPress-IDs oder URLs.
+
+**GENAU EINE DESIGN-NEXT ACTION:** Das **vorhandene Designplugin als normales Update auf 0.1.24** installieren und die tatsächlichen sechs Hauptkategorien auf Desktop und Mobil prüfen. Weder Kategorieplugin neu starten noch alte Kategorien nochmals importieren. Die 471 noch offenen C2.3-Ergänzungen bleiben eigenständiger Kategorienauftrag.
+
+---
+
+
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 ## 17.10.2026 – NEUER SPRACHBEFUND AUS 265ER KATEGORIEN-GROBAUDIT: ALTER WP-OWNER 141
