@@ -65,6 +65,20 @@ Gegen simulierten alten Live-330er Zielbestand:
 Audit:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_V7_1_ACTUAL_DRYRUN_SIM.json`
 
+## Isoliertes Artefakt
+
+Pfad:
+`../../ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/`
+
+`CURRENT.zip` ist im GitHub-Campus **noch nicht synchronisiert**.
+
+Grund:
+- der echte WordPress-V7.1-Dry-Run ist noch offen;
+- bis dahin bleibt 1.14.12 ein lokal geprüfter Dry-Run-Kandidat, kein Live-/Release-PASS;
+- keine Binärdatei ohne byteidentischen, vollständig geprüften Stand erfinden.
+
+Manifest muss auf 1.14.12/V7.1 zeigen.
+
 ## EXAKT EINE NEXT ACTION
 
 **1.14.12 über die aktive 1.14.9 installieren. Danach nur den manuellen Finalen Delta-Dry-Run starten; keinen Apply/Sync bestätigen.**
