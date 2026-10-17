@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE ALTER SNAPSHOT / 1.14.12 REALER WORDPRESS-DRY-RUN BLOCKED / URSACHE EXAKT ISOLIERT / 1.14.13 LOCAL HARD PASS / KEIN SYNC**
+STATUS: **LIVE ALTER SNAPSHOT / 1.14.12 REALER DRY-RUN BLOCKED / 1.14.13 WEGEN ADMIN-LAST VERWORFEN / 1.14.14 HARD SIM PASS / KEIN SYNC**
 
 ## Zielvertrag
 
@@ -21,7 +21,7 @@ Verbindlich für die unterste Hobby-Content-Ebene:
 
 ## Verbindlicher V7.1-Zielbaum
 
-V7.1 bleibt fachlich unverändert:
+Fachlich unverändert:
 - 3517 logische Zielknoten;
 - 3487 physische Zielobjekte;
 - 862 aufgelöste Hobbyidentitäten;
@@ -34,105 +34,113 @@ V7.1 bleibt fachlich unverändert:
 - 381/381 Vergleich & Kaufberatung;
 - 381/381 mindestens zwei Fach-/Profi-Vertiefungsbereiche;
 - pro Hobby 6–10 sichtbare Content-Leafs;
-- jeder Leaf mindestens 3 eigenständige Beitragsintentionen;
-- 0 TargetTree-Errors / 0 Warnings;
-- Registry-/Renderer-Simulation 0 Abweichungen.
+- jeder Leaf mindestens 3 eigenständige Beitragsintentionen.
 
-Wichtig:
-Diese Zahlen beschreiben die geprüfte Zielstruktur, nicht ein starres Kategorienmuster.
+## Reales WordPress-Ergebnis 1.14.12
 
-## Reales WordPress-Ergebnis mit HD-001 1.14.12
-
-Der Nutzer hat 1.14.12 installiert und den Finalen Delta-Dry-Run ausgeführt.
-
-Reales Ergebnis:
-- Status BLOCKED;
+Vom Nutzer ausgeführt:
+- BLOCKED;
 - Zielobjekte 2642;
 - CREATE 279;
 - ADOPT 4;
 - UPDATE 2357;
-- UNCHANGED 0;
 - ARCHIVE 0;
 - kein Apply/Sync.
 
 Blocker:
-- Libellenbeobachtung: vorhandene Seite mit demselben Slug war noch an ihre frühere Zielidentität gebunden;
-- Nachtvogel-Beobachtung: vorhandene Seite mit demselben Slug war noch an ihre frühere Zielidentität gebunden.
+- Libellenbeobachtung;
+- Nachtvogel-Beobachtung.
 
-Zusätzlich beweist die Zahl 2642, dass der reale Final-Dry-Run nicht den eingebetteten V7.1-Zielbaum mit 3487 Zielobjekten verwendet hat, sondern noch einen älteren extern gebundenen Zielprofilstand.
+Beide Slugs existieren bereits und tragen noch ihre frühere Target-Bindung.
 
-## Ursache
+## Nachprüfung 1.14.13 – wichtiger neuer Befund
 
-Keine neue Fachstruktur ist nötig.
+1.14.13 ist **verworfen**.
 
-Es liegen genau zwei technische Altbindungsprobleme vor:
+Nicht wegen der Fachstruktur, sondern wegen eines von der lokalen Vorprüfung übersehenen Admin-Lastfehlers:
 
-1. Der Final-Dry-Run akzeptierte weiterhin einen extern gesetzten Zielprofilpfad und konnte dadurch den alten 2642er Stand statt des eingebetteten V7.1-Profils verwenden.
-2. Beim Wechsel der 51 neu stabil gebundenen Proposal-Hobbyseiten auf ihre neue Identität wurde eine vorhandene frühere Target-Bindung nicht als zulässige Legacy-Bindung erkannt. Dadurch wurden bei Libellenbeobachtung und Nachtvogel-Beobachtung vorhandene korrekte Seiten fälschlich als Fremdkollision behandelt.
+Beim bloßen Öffnen der Seite `Finaler Zielbaum` wurde jedes Mal der komplette Frontend-/Struktur-Readback ausgeführt.
 
-## Korrigierter Kandidat HD-001 1.14.13
+1:1-Simulation des echten Admin-Renderpfads mit V7.1:
+- 762 Seitenlesungen;
+- 1524 Seiten-Metalesungen;
+- 2995 Termlesungen;
+- 11980 Term-Metalesungen;
+- zusätzlich Navigation-/URL-Auflösung;
+- alles bereits beim normalen Seitenaufruf, ohne Klick auf Dry-Run.
+
+Das erklärt die vom Nutzer gemeldete extreme Backend-Langsamkeit und die Gateway-Timeout-Gefahr.
+
+Zusätzlich blieb der gespeicherte alte 1.14.12-Dry-Run sichtbar. Dadurch wurden weiterhin 2642 und die alten zwei Kollisionen angezeigt, obwohl dies kein neu ausgeführter 1.14.13-Nachweis war.
+
+## Korrigierter Kandidat 1.14.14
 
 Artefakt:
-`HD001_V1.14.13_HOBBY_DEPOT_V7_1_LIVE_COLLISION_FIX_LOCALPASS.zip`
+`HD001_V1.14.14_HOBBY_DEPOT_V7_1_BACKEND_LOAD_FIX_HARDPASS.zip`
 
 SHA-256:
-`c543ac655f12d4fcb0d5cb581b3f8a3410103988655a87bb62bab9cbd9995fa3`
+`fdcca9282b0edcb5e0bb557b9f1fc5ec6cfc3c127afb40b6dc531340f653642a`
 
-Eingebettetes V7.1-Profil nach Migrationsergänzung:
+V7.1-Profil unverändert:
 SHA-256:
 `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
 
 Korrektur:
-- Finaler Hobby-Depot-Dry-Run verwendet für diesen Pfad hart das eingebettete V7.1-Profil und kann nicht mehr durch den alten externen Profilpfad ersetzt werden;
-- 51 bereits bekannte Proposal-Hobbyseiten besitzen zusätzlich ihre frühere Target-Identität als reine Migrationsbindung;
-- Dry-Run und späterer bestätigter Sync können eine vorhandene Seite über diese frühere Target-Bindung sauber wiederverwenden;
-- eine wirklich fremd gebundene Seite mit gleichem Slug blockiert weiterhin fail-closed;
-- doppelte/mehrdeutige Legacy-Bindungen blockieren weiterhin fail-closed;
-- keine Fachstruktur, keine Leaf-Inhalte und keine Architektur wurden geändert.
+- normaler Admin-Seitenaufruf führt keinen Voll-Readback mehr aus;
+- bereits beim Sync gespeicherter Readback wird nur wiederverwendet;
+- alter gespeicherter Dry-Run einer früheren Pluginversion wird nicht mehr als aktuelles Ergebnis angezeigt;
+- Final-Dry-Run bleibt hart an V7.1 gebunden;
+- Legacy-Bindungen für die 51 Proposal-Hobbyseiten bleiben erhalten;
+- keine Fachstruktur, kein Navigationsmodell und keine Architektur geändert.
 
-## Lokale Prüfung 1.14.13
+## Harte Simulation 1.14.14
 
-PASS:
-- PHP 33/33;
-- ZIP-Roundtrip PASS;
-- V7.1 3517 / 3487 / 862 / 383 / 381 / 2995 unverändert;
-- 381/381 FAQ;
-- 381/381 Vergleich & Kaufberatung;
-- Anfängerabdeckung 381/381;
-- Leaf-Breite 6–10 unverändert;
-- simuliertes altes externes 2642er Profil kann den Final-Dry-Run nicht mehr übersteuern;
-- Libellenbeobachtung wird über ihre frühere Target-Bindung wiederverwendet;
-- Nachtvogel-Beobachtung wird über ihre frühere Target-Bindung wiederverwendet;
-- alle 51 Proposal-Hobbyseiten mit früherer Target-Bindung simuliert: PASS;
-- fremde Slug-Kollision: BLOCKED;
-- mehrdeutige Legacy-Bindung: BLOCKED;
-- Provider Calls 0;
-- WordPress Structure Writes 0;
-- Dry-Run startet keinen Apply.
+Admin-Aufruf mit altem 2642er gespeicherten Ergebnis:
+- Seitenlesungen 0;
+- Seiten-Metalesungen 0;
+- Termlesungen 0;
+- Term-Metalesungen 0;
+- alter 2642er Ergebnisblock wird nicht als aktueller Dry-Run angezeigt;
+- stattdessen Hinweis: alter Prüflauf, neu ausführen.
 
-## Mega-Struktur
+Kompletter V7.1-Dry-Run gegen den letzten vollständig synchronisierten 2357er Bestand plus die beiden real beobachteten alten Target-Seiten:
+- PASS;
+- 3517 logisch;
+- 3487 physisch;
+- 862 Entities;
+- 383 CORE;
+- CREATE 1126;
+- ADOPT 3;
+- UPDATE 2358;
+- ARCHIVE 1;
+- Errors 0;
+- Libellenbeobachtung = vorhandene Altseite wird UPDATE/reuse;
+- Nachtvogel-Beobachtung = vorhandene Altseite wird UPDATE/reuse;
+- Trainspotting / Modellraketen / Pflanzenbestimmung = ADOPT.
 
-Unverändert:
-Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 · Bewegen 8 · Sammeln 9.
+Negativ:
+- wirklich fremd gebundener gleicher Slug = BLOCKED;
+- doppelte Legacy-Target-Bindung = BLOCKED.
 
-## Identitäten / Magazin
+PHP 33/33 PASS.
+ZIP-Roundtrip 44/44 PASS.
 
-Unverändert:
-- 51/51 neue CORE-Hobbyseiten stabil gebunden;
-- stale Overrides 0;
-- Plane Spotting → Spotting & Verkehr;
-- Sondeln + Metalldetektion = eine kanonische Hobbyidentität;
-- Magazin-Audit 77 Kandidaten / 35 eindeutige Porträt-Owner / 0 offene Owner-Reviews.
+## Navigation
+
+Keine neue Navigationsidee und kein Architekturumbau.
+
+Live bleibt weiterhin der alte aktive Snapshot. Deshalb kann die neue V7.1-Navigation noch nicht vollständig sichtbar sein. Der Renderer-/Mega-Menü-Stand bleibt separat unverändert; zuerst muss der V7.1-Dry-Run sauber sein und danach der ausdrücklich bestätigte Sync erfolgen.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der echte WordPress-V7.1-Dry-Run mit HD-001 1.14.13 fehlt.**
+**Echter WordPress-V7.1-Dry-Run mit 1.14.14 fehlt.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-001 1.14.13 über die aktuell installierte 1.14.12 installieren und anschließend ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
+**HD-001 1.14.14 über die aktuell installierte Fassung installieren, Seite `Finaler Zielbaum` neu öffnen und ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
 
-Abnahme direkt danach:
-- Zielobjekte müssen 3487 sein, nicht 2642;
-- die beiden bisherigen Kollisionen Libellenbeobachtung/Nachtvogel-Beobachtung dürfen nicht mehr auftreten;
-- erst dann das vollständige reale Dry-Run-Ergebnis gegen V7.1 prüfen.
+Abnahme:
+- Backend-Seite muss ohne den bisherigen Voll-Readback laden;
+- alter 2642er Prüflauf darf nicht als aktuelles Ergebnis erscheinen;
+- neuer Dry-Run muss 3487 Zielobjekte verwenden;
+- Libellenbeobachtung und Nachtvogel-Beobachtung dürfen nicht mehr als LIVE_COLLISION erscheinen.
