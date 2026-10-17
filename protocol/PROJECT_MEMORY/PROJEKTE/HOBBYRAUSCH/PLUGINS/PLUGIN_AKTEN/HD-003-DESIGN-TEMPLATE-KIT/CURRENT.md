@@ -3,46 +3,50 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **1.50.671 LIVE FATAL / 1.50.672 RELEASE-CHAIN-FIX LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.672 PASS / 1.50.673 AUDIO-&-HIFI-PILOT LOCAL HARD PASS / LIVE OFFEN**
 
-## Fehler 1.50.671
+## Live
 
-Exakt AF-026 wiederholt:
-- geladen: Hobby_Depot_Profile_V150671;
-- geroutet: Templates v150670;
-- Template-Aufruf: Hobby_Depot_Profile_V150670;
-- Klasse nicht vorhanden;
-- Frontend-Fatal reproduziert.
+1.50.672:
+- Frontend-Fatal geschlossen;
+- Audio-&-HiFi-Seite real geladen;
+- Bildstand vom Nutzer akzeptiert.
 
 ## Einziger Kandidat
 
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.672_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX_HARDPASS.zip
-SHA-256: f66e0cb03301dfd8658aeb7de4ebcff059bceb9da0760b048e9be6fa40d8c78d
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.673_HOBBY_DEPOT_AUDIO_HIFI_HERO_TEXT_PILOT_HARDPASS.zip`
 
-## Korrektur
+SHA-256:
+`802d16fd6df5ccdd133bb390ff7d1eb7992640eee9f43627b4e58aa0c15846ef`
 
-Nur Release-Kette:
-- Main 1.50.672;
-- Profilklasse 1.50.672;
-- Profil-RELEASE 1.50.672;
-- Fronttemplate 1.50.672;
-- Contenttemplate 1.50.672;
-- aktive Referenzen konsistent.
+## Scope 1.50.673
 
-Keine Bild-/Mega-Änderung gegenüber 1.50.671.
+Nur Audio & HiFi:
+- Desktop-Hero 34/66 statt 52/48;
+- Bildhöhe bleibt 320 px;
+- kein Blur im Audio-Weißübergang;
+- eigener kurzer Hero-Einstieg;
+- eigener 161-Wörter-Kategorietext nach Pferdeatelier-Regeln;
+- sieben individuelle Unterkategorie-Kurzzeilen.
 
-## Harte QA
+Keine andere Kategorie geändert.
+Bilder/Mega-Menü gegenüber 1.50.672 unverändert.
 
+## QA
+
+- Textregelquelle exakt gelesen;
+- 161 Wörter;
+- reale Audio-Unterthemen בלבד;
+- 7/7 individuelle Unterzeilen;
+- 901/901 Assets byte-identisch;
 - AF-026 7/7 PASS;
-- 1.50.671 negativer Fatal 1:1 reproduziert;
-- 1.50.672 Fronttemplate ausgeführt PASS;
-- 1.50.672 Contenttemplate ausgeführt PASS;
-- Dirty-Overlay 1.50.671 -> 1.50.672 PASS;
-- PHP 63/63;
-- 901/901 Assets byte-identisch zu 1.50.671;
+- Fronttemplate PASS;
+- Contenttemplate PASS;
+- Dirty-Overlay PASS;
+- PHP 66/66;
 - ZIP PASS;
-- Roundtrip 1031/1031 identisch.
+- Roundtrip 1034/1034.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.672 installieren und zuerst den kritischen Frontend-Fehler prüfen.**
+**1.50.673 installieren und nur Audio & HiFi live abnehmen.**
