@@ -3,104 +3,80 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **1.14.12 REAL BLOCKED / 1.14.13 + 1.14.14 VERWORFEN / 1.14.15 HARD E2E-SIM PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STATUS: **1.14.15 REALER DRY-RUN 3487 VOLLSTÄNDIG / 2 ALTBINDUNGEN BLOCKED / KEIN SYNC / WIP-NACHFOLGER VOLLWORKFLOW LOKAL PASS ABER NOCH NICHT 1:1-LIVE-REPLAYED**
 
-## Reale Ausgangslage
+## Reales Ergebnis 1.14.15
 
-1.14.12:
 - BLOCKED;
-- 2642 Zielobjekte;
-- CREATE 279 / ADOPT 4 / UPDATE 2357 / ARCHIVE 0;
-- Kollisionen Libellenbeobachtung und Nachtvogel-Beobachtung;
+- 3487 Zielobjekte;
+- CREATE 1122;
+- ADOPT 4;
+- UPDATE 2359;
+- UNCHANGED 0;
+- ARCHIVE 1;
+- exakt 2 Fehler;
 - kein Apply/Sync.
 
-## Fehlerkette
+Fehler:
+- Hummelkästen;
+- Lederprägen.
 
-1.14.13:
-- Adminseite führte beim bloßen Öffnen Vollreadback aus;
-- verworfen.
+3485 erfolgreiche Zielaktionen + 2 Fehler = 3487. Der echte WordPress-Dry-Run hat damit den gesamten V7.1-Zielbestand abgearbeitet.
 
-1.14.14:
-- Adminseite entlastet;
-- Dry-Run selbst weiterhin zu langsam;
-- harte vollständige Simulation: 29.8 s lokal;
-- 402892 Post-Metalesungen;
-- 11530381 Term-Metalesungen;
-- verworfen.
+## Exakte Ursache
 
-Ursache 1.14.14:
-- Live-Objektindizes wurden für jeden der 3487 Zielknoten erneut aufgebaut;
-- Knotentiefe wurde während der Sortierung bei jedem Vergleich erneut über den gesamten Baum berechnet.
+Hummelkästen live:
+- Objekt 902484;
+- alte Bindung `core:entity:b411cdf2ea6046005a4b`.
 
-## Einziger Kandidat
+Lederprägen live:
+- Objekt 902560;
+- alte Bindung `core:entity:ef539e4fcf98dc1c2437`.
 
-`HD001_V1.14.15_HOBBY_DEPOT_V7_1_DRYRUN_TIMEOUT_FIX_HARDPASS.zip`
+Diese beiden alten Live-Bindungen fehlten in den Legacy-Listen des 1.14.15-Profils.
 
-SHA-256:
-`29289c8ef70469d036be42b1d3ce3401a57a15f298201d099263bba9d61f4165`
+## Kein neuer Release
 
-Profil-SHA:
-`23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
+Es wird noch kein Nachfolger ausgegeben.
 
-## Änderung 1.14.15
+Vor einem neuen ZIP wurde der komplette weitere Workflow lokal durchgespielt. Dabei fiel zusätzlich auf, dass der Sync selbst nach einem erfolgreichen Dry-Run noch unnötig viel Arbeit/Zustandsspeicherung erzeugt hätte.
 
-Nur enger Performance-Fix:
-- Live-Objekte einmal indizieren;
-- Zielknotentiefe einmal vorberechnen;
-- gespeicherten Dry-Run ohne redundantes komplettes Zielprofil ablegen;
-- 1.14.14 Admin-Load-Fix, V7.1-Hardbinding und Legacy-Reuse unverändert übernehmen;
+WIP-Korrekturen ohne Strukturänderung:
+- zwei real belegte Legacy-Bindungen ergänzen;
+- Sync-Knotentiefe/Index cachen;
+- Sync-Zustand pro begrenztem Verarbeitungsschritt statt pro Knoten speichern;
 - keine Fach-, Kategorie-, Navigations- oder Architekturänderung.
 
-## Harte Positivprüfung
+## Vollworkflow-Lokalsimulation
 
-Vollständiger `APKW_TargetTreeDryRun::build()` gegen realitätsnahe 2357er Baseline plus die beiden real beobachteten Altseiten:
+Positiv:
+- Admin-Aufruf ohne Vollscan;
+- Dry-Run 3487 PASS;
+- manueller Sync bis COMPLETE;
+- Readback 3487/3487;
+- Frontend-/Strukturreadback PASS;
+- Header-Navigation PASS;
+- 381/381 terminale Hobbyseiten mit vollständigen Content-Kategorien PASS;
+- ungebundene CORE-Seiten 0;
+- zweiter Dry-Run nach COMPLETE: CREATE 0 / ADOPT 0 / UPDATE 0 / UNCHANGED 3487 / ARCHIVE 0.
 
-1.14.14:
-- 29.775 s;
-- get_post_meta 402892;
-- get_term_meta 11530381.
+Negativ:
+- fremd gebundener Hummelkästen-Slug -> BLOCKED;
+- doppelte alte Hummelkästen-Bindung -> BLOCKED;
+- Live-Drift nach gespeichertem Dry-Run -> Fingerprint ändert sich, alter Plan darf nicht angewendet werden;
+- injizierter Write-Fehler -> ROLLED_BACK; anschließender Dry-Run wieder identisch zum Ausgangsplan PASS;
+- manual-only Bootstrap -> 0 Writes / 0 Schedules / 0 Network.
 
-1.14.15:
-- 1.113 s;
-- get_post_meta 6310;
-- get_term_meta 29115;
-- get_posts 2;
-- get_terms 6.
+Performance:
+- 1.14.14 alter Dry-Run lokal ~29.8 s;
+- 1.14.15 Dry-Run lokal ~1 s;
+- WIP-Vollsync nach Sync-Optimierung lokal COMPLETE in wenigen Sekunden über 3487 Ziele;
+- Statuspersistenz von tausenden Einzelwrites auf begrenzte Batch-Persistenz reduziert.
 
-Ergebnis 1.14.15:
-- PASS;
-- 3487 Zielobjekte;
-- CREATE 1126;
-- ADOPT 3;
-- UPDATE 2358;
-- ARCHIVE 1;
-- Errors 0;
-- Libellenbeobachtung → vorhandene Seite UPDATE/reuse;
-- Nachtvogel-Beobachtung → vorhandene Seite UPDATE/reuse.
+## Grenze des Nachweises
 
-## Harte Negativprüfung
-
-- fremd gebundener Slug → BLOCKED;
-- doppelte Legacy-Target-Bindung → BLOCKED;
-- alter gespeicherter Dry-Run → nicht als aktuell angezeigt;
-- normaler Admin-Aufruf → keine Vollprüfung.
-
-## Technik
-
-- PHP 33/33 PASS;
-- ZIP 47/47 PASS;
-- ZIP-Test ohne Fehler;
-- Dry-Run 0 Strukturwrites;
-- Provider Calls 0;
-- kein Apply/Sync automatisch.
-
-## Isoliertes Artefakt
-
-`CURRENT.zip` bleibt noch nicht synchronisiert.
-
-Grund:
-Der echte WordPress-Dry-Run mit 1.14.15 ist noch offen.
+Noch kein 1:1-Live-Replay, weil der aktuelle reale 1.14.15-Dry-Run nur als Screenshot vorliegt. Für den wortwörtlichen Replay wird dessen JSON-Export benötigt.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.14.15 installieren → ausschließlich Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.**
+**Kein Plugin installieren. Den aktuellen `Finalen Readback als JSON` herunterladen und bereitstellen. Danach 1:1-Replay gegen genau diesen Live-Plan; erst bei PASS wird überhaupt wieder ein Plugin ausgegeben.**
