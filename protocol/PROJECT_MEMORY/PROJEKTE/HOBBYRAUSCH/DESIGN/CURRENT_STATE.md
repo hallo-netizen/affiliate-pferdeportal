@@ -3,123 +3,84 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 VERWORFEN / 1.50.668 REGISTRY + MEGA-MENÜ + HUB2-TEXT + HERO→PREVIEW LOCAL HARD PASS / LIVE READBACK OFFEN**
+STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 VERWORFEN / 1.50.668 REGISTRY-RENDERER LOCAL HARD PASS / LIVE NUTZT NOCH ALTEN 330ER SNAPSHOT / V4 NICHT LIVE**
 
-## Belastbarer Grundstand
+## Live-Erklärung
 
-Affiliate Portal Template Kit **1.50.650** bleibt die saubere Ausgangsbasis inklusive HRD-SCOPE13-Bildreparaturen.
+Affiliate Portal Template Kit **1.50.668** ist installiert, verändert aber die **Strukturinhalte nicht selbst**.
+Es rendert, was HD-004 als aktive zentrale Registry liefert.
 
-Nicht verwenden:
-- 1.50.664;
-- 1.50.665;
-- 1.50.666;
-- 1.50.667.
+Darum war live optisch/inhaltlich vieles unverändert:
+- HD-004 liefert weiterhin den alten 330er Live-Snapshot;
+- V4-Erweiterungen sind noch nicht synchronisiert;
+- `Bonsai & Miniatur → nur Bonsai` stammt aus dem alten zentralen Snapshot;
+- das Mega-Menü kann keine Kategorien anzeigen, die im aktiven Snapshot nicht existieren.
 
-## Gefundene Systemursache
+Die relevante sichtbare 1.50.668-Änderung ist bereits erkennbar:
+terminale `category`-Kinder werden jetzt ausgegeben, z. B. 7/7 unter Ameisenhaltung.
 
-Der alte Designstand las Struktur teilweise über rohe WordPress-`get_pages()`-Kinder.
-Dadurch:
-- konnten Altseiten wie Trainspotting an falschen Stellen erscheinen;
-- blieb die echte terminale `category`-Ebene unsichtbar;
-- wurde die zentrale HD-001/HD-004-Struktur umgangen.
+## Gefundene Mega-Menü-Datenfehler
 
-Zusätzlich existierte ein thematisch unsicherer Weltbild-Fallback.
+Im aktiven/V3-Datenstand fehlt bei 10 direkten Welt-Hubs `nav_order`.
+Dadurch wirkt die sichtbare 5er-Auswahl teilweise willkürlich.
 
-Die Reparatur folgt dem bewährten Hab-&-Bewahr-0.1.20-Prinzip:
-**zentrale Struktur ist einzige Wahrheit; bei vorhandener Revision kein stiller WordPress-/Bundled-Fallback; keine Geschwister als Ersatz-Kinder.**
+V4 korrigiert die Reihenfolge zentral für alle direkten Hubs.
 
-## Kandidat 1.50.668 – LOCAL HARD PASS
+Das Mega-Menü zeigt gemäß Vertrag zunächst bis zu 5 direkte Hubgruppen.
+Weitere direkte Hubgruppen liegen hinter `Mehr Kategorien`.
+Das ist **kein Datenverlust**.
 
-Artefakt:
-`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_NAV_TEXT_HEROPREVIEW_HARDPASS.zip`
+Die zusätzliche Orientierungsebene je sichtbarer Gruppe zeigt kompakt bis zu 4 Links + `Alle Themen`.
+Ein Hub mit nur einem realen Kind zeigt entsprechend nur ein Kind; Beispiel live: Bonsai & Miniatur → Bonsai.
+V4 erweitert diesen Hub zentral auf Bonsai / Penjing / Saikei.
 
-SHA-256:
-`ee521c5f8b360c16d641e77507b94b64b93432da701e4760e7c4daa67d9440b6`
+## Letzte Inhaltskategorie-Ebene
 
-QA:
-- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_BROWSER_ACCEPTANCE.json`
-- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_FINAL_DIFF.json`
+1.50.668 kann Page- und Category-Kinder getrennt aus HD-004 lesen.
+Ameisenhaltung live zeigt bereits:
+- Einstieg & Arten;
+- Formicarium & Nest;
+- Futter & Wasser;
+- Winterruhe & Klima;
+- Kolonie & Pflege;
+- Ausbruchsschutz & Probleme;
+- FAQ / Häufige Fragen.
 
-## Struktur-/Renderer-Reparatur
+Damit ist diese zuvor fehlende Ebene technisch repariert.
 
-- HD-004 Registry = einzige CORE-Strukturquelle;
+## Registry-Prinzip
+
+Wie beim bewährten Hab-&-Bewahr-Fix:
+- zentrale Registry = einzige Strukturwahrheit;
+- keine rohen WordPress-Kinder/Geschwister als Ersatz;
 - zentrale Revision vorhanden + Registry nicht bereit → fail closed;
-- keine rohen `get_pages()`-Kinder als Strukturwahrheit;
-- keine Geschwister-Ersatzlogik;
-- Page- und `category`-Kinder getrennt korrekt;
-- Ameisenhaltung zeigt exakt 7 terminale Inhaltskategorien;
-- absichtlich falsch physisch einsortiertes Trainspotting wird unter Messen & Analysieren ausgeschlossen;
-- V3-Spotting-Hub rendert Plane/Train/Ship/Car Spotting korrekt;
-- Weltbild-Zufallsfallback aus aktivem Renderer entfernt.
+- kein zufälliger Weltbild-Fallback.
 
-Vollsimulation:
-- aktuelle 330er Live-Baseline: 0 Strukturabweichungen;
-- V3 mit 370 terminalen Hobbyseiten / 2160 Leafs: 0 Strukturabweichungen.
+## 1.50.668 Local QA
 
-## Mega-Menü
+- aktuelle 330er Baseline: 0 Strukturabweichungen;
+- V3: 0 Strukturabweichungen;
+- V4 mit 381 terminalen Hobbyseiten / 2236 Leafs: 0 Strukturabweichungen;
+- Trainspotting-Negativfall PASS;
+- Ameisenhaltung 7/7 PASS;
+- PHP 58/58 PASS.
 
-- alle 8 Welten aus Registry;
-- >=761 px alle 8 Hauptwelten in einer Zeile;
-- zunächst grafisch gleichmäßig bis zu 5 direkte Gruppen;
-- genau eine zusätzliche Orientierungsebene;
-- max. 4 Links je sichtbarer Gruppe + `Alle Themen` falls nötig;
-- `Mehr Kategorien` klappt restliche Gruppen im selben Flyout auf;
-- kein Vollbaum / keine zusätzliche Verschachtelung;
-- Mobil eigenes sauberes Verhalten.
+## Bildhinweis
 
-## Hub2-Kategorietext
+Zusätzliche alte Hero-Patchplugins 1.50.659 / 1.50.661 / 1.50.662 sind Übergangsstände und dürfen die Bildwahrheit nicht weiter überlagern.
+1.50.668 enthält die zentrale Hero-/Preview-Logik.
 
-Vertrag umgesetzt:
-- Hero: Schreibschrift-Claim + H1 + kurzer Einstieg;
-- längerer Text **unter** dem Hero;
-- sichtbarer Lead;
-- mittig `Mehr zu <Kategorie> erfahren`;
-- Rest im Aufklapper;
-- Öffnen verändert Hero-Höhe um 0 px;
-- >1100 px Text/Bild nebeneinander;
-- <=1100 px Text → Bild → langer Text darunter.
+## Zentrale V4-Abhängigkeit
 
-## Hero → Kategorievorschau
+V4 ist noch nicht live:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V4_20261017.json`
 
-- 65/65 bestehende direkte Hub2-Previews aus dem jeweils aktuellen Hero neu abgeleitet;
-- Preview exakt 200×107;
-- 65 gemappte Hero-Dateien byte-identisch zum eingefrorenen Ausgangsstand;
-- keine unabhängige zweite Bildquelle.
-
-## Browser-Abnahme lokal
-
-Echter Headless-Browser mit realem Plugin-HTML/CSS:
-- 1920 / 1440 / 1101 / 1100 / 1024 / 768 / 761 / 760 / 390 geprüft;
-- alle 8 Mega-Menüs geprüft;
-- `Mehr Kategorien` positiv/negativ geprüft;
-- kein horizontaler Overflow;
-- 1101 = Desktop-Hero, 1100 = gestapelt;
-- 761 = Desktopnavigation mit 8 Welten, 760 = Mobilmenü;
-- Text-Aufklapper verändert Hero-Höhe um 0 px.
-
-Technik:
-- PHP 58/58 PASS;
-- ZIP PASS;
-- ZIP-Roundtrip 984/984;
-- 0 Dateien entfernt;
-- 0 Hero-Dateien verändert.
-
-## V3-Hinweis
-
-Der V3-Strukturkandidat ist **noch nicht live**.
-Er fügt fünf neue direkte Hub2-Bereiche hinzu:
-- Spotting & Verkehr;
-- Citizen Science;
-- Natur bestimmen;
-- Suchen & Finden;
-- Modellbau.
-
-Bevor diese fünf neuen Hub2 live freigegeben werden, brauchen sie gemäß Bildvertrag jeweils eigenes geprüftes Hero + daraus abgeleitete Preview. Kein generisches Weltbild als stiller Fallback.
+Bevor neue direkte Hub2 live gehen, benötigen sie gemäß Bildvertrag ein eigenes geprüftes Hero + daraus abgeleitete Preview.
 
 ## PASS-GRENZE
 
-**Kein Live-PASS ohne echten WordPress-Readback.**
+Kein Live-PASS ohne echten WordPress-Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**Zuerst HD-004 als Runtime-Registry live bereitstellen und danach 1.50.668 gegen die bestehende 330er Live-Baseline prüfen. V3-Struktur erst nach eigenem Dry-Run und nach Bildern für die fünf neuen Hub2 synchronisieren.**
+**Nicht am CSS weiterdrehen. Erst den sicheren V4-Struktur-Dry-Run gegen WordPress ausführen; danach Registry synchronisieren/readbacken. Erst dann 1.50.668 gegen den neuen zentralen Snapshot erneut live prüfen.**
