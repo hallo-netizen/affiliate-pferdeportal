@@ -289,5 +289,59 @@
     "plugin_upgrade_permitted": false,
     "import_existing_743_again": false,
     "requires_separate_approval": true
+  },
+  "logical_merge_simulation": {
+    "run_date": "2026-10-17",
+    "type": "REIN_LOGISCHER_BEISPIELBAUM_KEIN_ECHTER_WORDPRESS_SYNC",
+    "source": "Nur festgehaltener GitHub-Fachbestand; keine aktuelle Live-Site-Bindung",
+    "wordPress_admin_connection": false,
+    "baseline_categories": {
+      "c22_proposed_imported_566": 566,
+      "historic_285": 285,
+      "total_readonly_assumed": 851
+    },
+    "proposed_category_objects": 472,
+    "final_logical_categories_if_everything_approved": 1323,
+    "unassigned_wp_ids": 472,
+    "min_category_count_per_new_topic_after_proposals": 5,
+    "max_category_count_per_new_topic_after_proposals": 9,
+    "by_world": {
+      "Einbruch & Diebstahl": {
+        "topics": 20,
+        "existing": 74,
+        "proposed": 58
+      },
+      "Feuer & Gase": {
+        "topics": 27,
+        "existing": 88,
+        "proposed": 81
+      },
+      "Technik & Ausfälle": {
+        "topics": 31,
+        "existing": 106,
+        "proposed": 102
+      },
+      "Vandalismus & Zerstörung": {
+        "topics": 16,
+        "existing": 50,
+        "proposed": 35
+      },
+      "Wasser & Feuchtigkeit": {
+        "topics": 34,
+        "existing": 109,
+        "proposed": 95
+      },
+      "Wetter & Naturgefahren": {
+        "topics": 44,
+        "existing": 139,
+        "proposed": 101
+      }
+    },
+    "one_topic_specific_faq_for_all_172": true,
+    "one_topic_specific_comparison_for_all_172": true,
+    "all_legacy_285_records_unchanged": true,
+    "existing_566_records_unchanged": true,
+    "wordpress_operation_executed": false,
+    "warning": "Die 472 sind Vorschläge. 1323 ist eine rechnerische Strukturgröße, kein bestätigter WordPress-Livestand. Ohne aktuelle WP-IDs und Bindungen keine 1:1-Simulation oder Freigabe."
   }
 }
