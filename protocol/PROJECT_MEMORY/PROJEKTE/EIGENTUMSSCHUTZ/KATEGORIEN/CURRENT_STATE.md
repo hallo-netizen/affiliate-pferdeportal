@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – ERNEUTE WORDPRESS-BESTANDSABFRAGE ENTFÄLLT: ORIGINAL C2.2 UND 472 MAPPING GEPRÜFT
+**Verbindliche Nutzerbestätigung:** WordPress wurde seit dem durch uns vorgenommenen C2.2-Import **nicht verändert**. Die erneute Anforderung eines externen Readbacks war ein unnötiger Umweg und ist hiermit für diese Fortsetzung aufgehoben. Basis sind der belegt erfolgreiche Import **743 (5+172+566)**, die 285 geschützten historischen Terms und vier dokumentierten Artikelbindungen. Das bestehende Plugin kann seine aktive Snapshot-Bindung intern selbst vor einem späteren Schreibschritt absichern; kein neuer Benutzerexport nötig.
+
+**Vollständig gegen echte Pluginquelle geprüft:** Original `affiliate-portal-kategorie-workflow` Version **1.14.8.30**, `profiles/hab-und-bewahr-c22-plan.json`: 172 Themenseiten und 566 Artikelkategorien stimmen mit der GitHub-Quelle wort-/pfadidentisch überein. Die 472 Ergänzungen sind unter `C22_472_PLUGIN_GEBUNDENES_ADD_ONLY_MAPPING_20261017.json` mit **genau dem PHP-Plugin-eigenen SHA-256-Kennungsverfahren** je Name, Themenpfad und bestehendem Parent erfasst. 472 eindeutige neue IDs, keine Überschneidung mit bestehendem C2.2, **7/7 Negativtests bestanden**. Keine WordPress-IDs erfunden, keine physischen Objekte verändert.
+
+**Wichtigster technischer Befund:** Die ursprüngliche Importfunktion `APKW_C22_AddOnly::jobs()` setzt hart genau **743 Jobs** voraus und kann die schon bestehenden C2.2-Knoten nicht nochmals anlegen. Daher weder erneut auf Import drücken noch bloß ihre ursprüngliche Profildatei durch die 472er-Kategorien ersetzen. **NEXT ACTION:** Nur das **bestehende** Kategorieplugin gezielt um einen zweiten additiven 472-Kategorien-Durchlauf ergänzen; originale 743 und deren Snapshot-Mapping nicht antasten. Positive/negative lokale Tests gegen Original-Plugincode, dann nach gesonderter Freigabe einmaliger Import. Kein neuer Export, keine neue Architektur, kein zweiter Writer, keine Artikelproduktion.
+
+---
+
+
+
 ## 17.10.2026 – 472er READ-ONLY-VORPRÜFUNG UND LOGISCHE SIMULATION ABGESCHLOSSEN
 **Maßstab:** fachlich sinnvolle, themenspezifische Vertiefung auf der flachen WP-Kategorieebene; grob ausreichend Inhalt für ca. 3–5 unterschiedliche Beiträge. **Keine Einzelartikel, Titel oder Texte.** Kein neues Kategorienplugin und keine Bibliothek als Ablage.
 
