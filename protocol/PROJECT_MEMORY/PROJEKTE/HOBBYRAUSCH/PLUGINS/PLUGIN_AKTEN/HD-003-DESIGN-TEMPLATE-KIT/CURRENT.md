@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 / 1.50.669 V7-MEGA-WIP LOCAL PASS / NICHT RELEASED**
+STATUS: **LIVE 1.50.668 / 1.50.669 V7.1-MEGA-WIP LOCAL PASS / NICHT RELEASED**
 
 ## Live
 
@@ -20,7 +20,7 @@ Zweck:
 - direkte Hobby-/Orientierungsseiten nicht als Mega-Spalten;
 - V7-Struktur korrekt rendern.
 
-V7-Mega:
+V7.1-Mega:
 7 / 10 / 9 / 8 / 9 / 7 / 8 / 9.
 
 QA:
@@ -50,6 +50,19 @@ Danach:
 - Browser-QA;
 - erst dann Release.
 
+## Isoliertes Artefakt
+
+Pfad:
+`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/`
+
+Kein neues `CURRENT.zip` für 1.50.669.
+
+Grund:
+- 1.50.669 ist WIP, kein Release;
+- exakt sechs Hero+Preview-Paare fehlen bzw. müssen ersetzt werden;
+- vor finalem ZIP sind Bildprüfung, ZIP-Roundtrip und Browser-QA erneut Pflicht;
+- bestehender/fehlender isolierter Artefaktstand darf nicht mit einem unvollständigen WIP überschrieben werden.
+
 ## EXAKT EINE NEXT ACTION
 
-**V7-Dry-Run abwarten und parallel die sechs Bildprüfungen abschließen; 1.50.669 vorher nicht ausliefern.**
+**V7.1-Dry-Run mit HD-001 1.14.12 abwarten und parallel die sechs Bildprüfungen abschließen; 1.50.669 vorher nicht ausliefern.**
