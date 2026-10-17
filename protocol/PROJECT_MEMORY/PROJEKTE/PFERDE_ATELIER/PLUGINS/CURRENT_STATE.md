@@ -7,7 +7,7 @@
 
 
 STAND: 2026-09-16
-STATUS: **AKTIV / KEIN CHAT-AKTIVER PLUGIN-BLOCKER**
+STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
@@ -36,6 +36,15 @@ Andere bereits synchronisierte Pluginstände und bestehende Inventarlücken steh
 
 PPA-006, PPA-008 und PPA-009 bleiben als bestehende Artefakt-/Versionsbindungsfragen im Register sichtbar. Sie sind nicht der aktive Arbeitsauftrag dieses Chats.
 
+## SEO-PLUGINSTATUS / BELASTBARE GRENZE – 17.10.2026
+
+- Zuständiger Auftrag: bestehende SEO-Themenengine **PPA-005** und SEO-Compiler **PPA-006**; keine Architekturänderung und kein drittes manuelles Plugin für diese SEO-Korrektur. K0-Autorität für die tatsächliche Artikelproduktion bleibt unberührt.
+- Belegbar vorhandene, lokal unbeschädigte ZIP-Kandidaten: **PSTE 0.57.102** SHA-256 `ddc05f0f2e05ba21a2acd0a139ac2e6788c6fcfb4b1226a75335a2eaea9d3ba5`; **PSERC 0.28.40** SHA-256 `e56c3daac97d90f251acf754d00935fc05469b770a6cefa3ec29f37765c555f5`. Diese lokalen ZIPs sind **kein aktueller technischer Hauptquellen-/Live-/Release-Nachweis** und ersetzen die bisherigen isolierten CURRENT.zip nicht.
+- Letzte überprüfbare Nutzerdiagnose vom **16.10.2026 16:25:40 UTC**, Run `50cdce49-683f-4084-a17a-6c56a72de9f9`: Bestandsautomatik `CANCELLED`, **520/5014**, `PSTE_EXISTING_EVIDENCE_REENTRY_REVIEW_CANDIDATE_MISMATCH`, Provideraufrufe 0. Unabhängiger globaler Compiler: `COMPLETE`, 55 Kandidaten, 1 bereit. Daraus folgt **kein Gesamtworkflow-PASS**.
+- Ursächlich belegte offene Programm-/Datenabweichungen aus lokalem Quellgegencheck: redaktionelle Magazin-Weiche nicht allgemein gleichberechtigt (z. B. „Warum leckt mein Pferd viel am Salzleckstein?“ fälschlich Produkt-FAQ); neun Journal-Kategorien aus zentraler TSV nicht in der historischen WP-Produktionskategorienmenge; Start-/Rückkehrlauf durch einzelnen veralteten Nachweis blockiert; globale Datei-Bereitmeldung kann trotz abgebrochener Bestandsautomatik erscheinen. Der historische Export enthält **4501** Themen, nicht den aktuellen **5014**-Livebestand.
+- **Erster operativer Blocker:** kein frischer, byte-/versionsgebundener **WordPress-/MariaDB-Live-Readback des installierten Zweier-Pluginstands und der vollständigen 5014 Einzelthemen**, daher keine echte 1:1-Gesamtworkflow-Simulation oder Releasefreigabe. Kein neues Plugin freigegeben.
+- Fehler-/Testchronik und Belege: ausschließlich `UPDATEPROTOKOLL.md` Vorgang `PU-20261017-001`; bestehendes Fach-/Kategorie-Routing in `affiliate-release-current:protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md` Abschnitt 29. Diese Pfade sind **keine zweite Current-Autorität**.
+
 ## NEXT ACTION
 
-Keine Pluginbüro-Nachholung aus diesem Chat mehr offen. Fachliche nächste Arbeit liegt aktuell in der Wissensdatenbank bei den Pferderassen-Seitentiteln / Meta-Titles.
+**Genau eine:** Den aktuell installierten PSTE-/PSERC-Quellstand einschließlich der realen vollständigen 5014-Keyword- und Kategorie-/Zustandsdaten aus WordPress/MariaDB **read-only, hash- und versionsgebunden** ermitteln und den echten bestehenden Keyword→Titel→gemeinsame Kategorie→PSERC→PPM→Datei-Ablauf einschließlich Positiv-/Negativ-, Fortsetzungs- und Verlustfreiheitsprüfung auf einer identischen isolierten Kopie verifizieren. Bis zum belegten Gesamt-PASS: **BLOCKED, kein Plugin-Release, kein Auto-Publish**.
