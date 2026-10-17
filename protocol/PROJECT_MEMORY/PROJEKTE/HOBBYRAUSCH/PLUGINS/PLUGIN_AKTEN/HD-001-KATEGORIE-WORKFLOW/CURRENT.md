@@ -3,103 +3,98 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **1.14.12 REALER WORDPRESS-DRY-RUN BLOCKED / URSACHE ISOLIERT / 1.14.13 LOCAL HARD PASS / ECHTER V7.1-WORDPRESS-DRY-RUN OFFEN**
+STATUS: **1.14.12 REAL BLOCKED / 1.14.13 VERWORFEN WEGEN ADMIN-VOLLREADBACK / 1.14.14 HARD SIM PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
-## Reales Ergebnis 1.14.12
+## Reale Ausgangslage
 
-Der Nutzer hat HD-001 1.14.12 installiert und den Finalen Delta-Dry-Run ausgeführt.
-
-Ergebnis:
+1.14.12 realer Final-Dry-Run:
 - BLOCKED;
 - 2642 Zielobjekte;
-- CREATE 279;
-- ADOPT 4;
-- UPDATE 2357;
-- UNCHANGED 0;
-- ARCHIVE 0;
+- CREATE 279 / ADOPT 4 / UPDATE 2357 / ARCHIVE 0;
+- Kollisionen Libellenbeobachtung und Nachtvogel-Beobachtung;
 - kein Apply/Sync.
 
-Blockierende Altbindungen:
-- Libellenbeobachtung;
-- Nachtvogel-Beobachtung.
+## Warum 1.14.13 verworfen ist
 
-Die 2642 Zielobjekte gehören nicht zum eingebetteten V7.1-Zielstand mit 3487 Zielobjekten. Damit ist belegt, dass beim Final-Dry-Run noch ein alter externer Zielprofilpfad wirksam war.
+Die Kollision-/Profilkorrektur war enthalten, aber die Adminseite hatte einen schweren Lastfehler:
 
-## Ursache
+Schon beim normalen Öffnen von `Finaler Zielbaum` rief `render()` den kompletten Frontend-/Struktur-Readback auf.
 
-1.14.12 enthielt zwar bytekorrekt das V7.1-Profil, aber der Final-Dry-Run durfte weiterhin einen extern gesetzten Profilpfad vor dem eingebetteten Profil verwenden.
+1:1-Simulation mit realer V7.1-Größe:
+- get_post: 762;
+- get_post_meta: 1524;
+- get_term: 2995;
+- get_term_meta: 11980;
+- get_posts: 1;
+- zusätzlich tausende URL-Auflösungen.
 
-Zusätzlich erkannte der Migrationspfad frühere `_apkw_target_node_id`-Bindungen der neu stabilisierten Proposal-Hobbyseiten nicht als zulässige Legacy-Bindung.
+Damit ist die gemeldete extreme Backend-Langsamkeit reproduziert.
 
-Dadurch wurden zwei vorhandene Hobbyseiten fälschlich als Fremdkollision behandelt.
+Außerdem blieb ein gespeicherter alter Dry-Run sichtbar, obwohl er aus 1.14.12 stammte.
 
 ## Einziger Kandidat
 
-`HD001_V1.14.13_HOBBY_DEPOT_V7_1_LIVE_COLLISION_FIX_LOCALPASS.zip`
+`HD001_V1.14.14_HOBBY_DEPOT_V7_1_BACKEND_LOAD_FIX_HARDPASS.zip`
 
 SHA-256:
-`c543ac655f12d4fcb0d5cb581b3f8a3410103988655a87bb62bab9cbd9995fa3`
+`fdcca9282b0edcb5e0bb557b9f1fc5ec6cfc3c127afb40b6dc531340f653642a`
 
-Eingebettetes V7.1-Profil:
-SHA-256:
+V7.1-Profil SHA-256:
 `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
 
-## Fachstand
+## Änderungen 1.14.14
 
-V7.1 bleibt unverändert:
-- 3517 logische Knoten;
-- 3487 physische Ziele;
-- 862 Entities;
-- 383 CORE Entities;
-- 381 terminale Hobby-Hubs;
-- 2995 Content-Kategorien.
+Nur enger Reparaturscope:
+- normaler Admin-Render führt keinen Voll-Readback mehr aus;
+- bei COMPLETE wird der bereits vom Sync gespeicherte Readback benutzt;
+- alter gespeicherter Dry-Run einer anderen Pluginversion wird als veraltet markiert und nicht als aktueller Ergebnisblock gerendert;
+- 1.14.13-V7.1-Profilbindung und Legacy-Reuse bleiben unverändert;
+- keine Kategorie-, Navigation-, Fach- oder Architekturänderung.
 
-Keine Fachkategorie und keine Strukturentscheidung wurde durch 1.14.13 verändert.
+## Harte Positiv-/Negativprüfung
 
-## Korrektur 1.14.13
+Admin-Pfad alt:
+- reproduziert 762 + 1524 + 2995 + 11980 Objekt-/Metalesungen.
 
-- Finaler Hobby-Depot-Dry-Run bindet für diesen Weg hart das eingebettete V7.1-Profil;
-- alter externer Profilpfad kann diesen Final-Dry-Run nicht mehr auf den 2642er Stand zurücksetzen;
-- 51 Proposal-Hobbyseiten besitzen ihre frühere Target-Identität zusätzlich als Migrationsbindung;
-- Dry-Run erkennt frühere Target-Bindungen und verwendet die vorhandene Seite weiter;
-- derselbe Wiederverwendungsweg ist auch für einen später ausdrücklich bestätigten Sync vorhanden;
-- fremde Slug-Bindungen blockieren weiterhin;
-- doppelte Legacy-Bindungen blockieren weiterhin;
-- manual-only bleibt unverändert;
-- Dry-Run und Apply bleiben getrennt.
+Admin-Pfad 1.14.14:
+- get_post 0;
+- get_post_meta 0;
+- get_term 0;
+- get_term_meta 0;
+- get_posts 0;
+- alter 2642er Ergebnisblock nicht als aktuell sichtbar.
 
-## Lokale Safety-QA
+V7.1-Dry-Run gegen 2357er Altbestand plus die zwei real beobachteten alten Target-Seiten:
+- PASS;
+- 3487 Zielobjekte;
+- CREATE 1126;
+- ADOPT 3;
+- UPDATE 2358;
+- ARCHIVE 1;
+- Errors 0.
 
-PASS:
-- PHP 33/33;
-- ZIP-Roundtrip PASS;
-- V7.1-Zahlen unverändert;
-- externer Altprofil-Override simuliert und abgewehrt;
-- Libellenbeobachtung Altbindung → vorhandene Seite wiederverwendet;
-- Nachtvogel-Beobachtung Altbindung → vorhandene Seite wiederverwendet;
-- alle 51 Proposal-Migrationen zusammen → PASS;
-- echte Fremdkollision → BLOCKED;
-- doppelte Legacy-Bindung → BLOCKED;
-- Provider Calls 0;
-- WordPress Structure Writes 0;
-- Dry-Run ruft keinen Apply auf.
+Konkrete Reuse-Prüfung:
+- Libellenbeobachtung → UPDATE der vorhandenen alten Target-Seite;
+- Nachtvogel-Beobachtung → UPDATE der vorhandenen alten Target-Seite.
+
+Negativ:
+- fremd gebundener Slug → BLOCKED;
+- doppelte Legacy-Target-Bindung → BLOCKED.
+
+Technik:
+- PHP 33/33 PASS;
+- ZIP-Roundtrip 44/44 PASS;
+- 0 Provider Calls;
+- Dry-Run 0 WordPress-Strukturwrites;
+- Dry-Run startet keinen Apply.
 
 ## Isoliertes Artefakt
 
-Pfad:
-`../../ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/`
-
-`CURRENT.zip` bleibt **noch nicht synchronisiert**.
+`CURRENT.zip` bleibt noch nicht synchronisiert.
 
 Grund:
-Der echte WordPress-Dry-Run mit 1.14.13 ist noch offen. Bis dahin ist 1.14.13 ein lokal vollständig geprüfter Reparaturkandidat, kein Live-/Release-PASS.
+1.14.14 ist lokal hart geprüft, aber der echte WordPress-Dry-Run ist noch offen.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.14.13 über die aktuell installierte 1.14.12 installieren. Danach nur den Finalen Delta-Dry-Run starten; keinen Apply/Sync bestätigen.**
-
-Direkte Abnahme:
-- Zielobjekte = 3487;
-- keine Kollision für Libellenbeobachtung;
-- keine Kollision für Nachtvogel-Beobachtung;
-- anschließend vollständiges reales Dry-Run-Ergebnis prüfen.
+**1.14.14 installieren → Adminseite neu öffnen → nur Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.**
