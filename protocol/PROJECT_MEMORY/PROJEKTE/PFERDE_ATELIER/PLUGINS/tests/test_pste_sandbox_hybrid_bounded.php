@@ -30,7 +30,7 @@ class PSTE_Sandbox_Record_Store {
  public static array $rows=[], $readCounts=[],$writes=[];public static bool $failNextWrite=false;
  public static function isComplete(){return true;}
  public static array $header=['job'=>null];public static function legacyHeader(){return self::$header;}
- public static function recordIds(){return array_keys(self::$rows);}
+ public static function recordIds(){$ids=array_keys(self::$rows);sort($ids,SORT_STRING);return $ids;}
  public static function getRecord($id){self::$readCounts[$id]=(self::$readCounts[$id]??0)+1;return self::$rows[$id];}
  public static function putRecordsBatch($items){if(self::$failNextWrite){self::$failNextWrite=false;throw new RuntimeException('SIMULATED_WRITE_FAILURE');}check(count($items)<=25,'unbounded write');foreach($items as $id=>$row)self::$rows[$id]=$row;self::$writes[]=count($items);}
 }
@@ -46,6 +46,18 @@ check($r1['status']==='IN_PROGRESS'&&$r1['cursor']===25&&$r1['total']===65,'firs
 check(count(PSTE_Sandbox_Record_Store::$readCounts)===25,'first batch read more than 25');
 check(!isset($GLOBALS['option_reads']['pste_legacy_full']),'legacy 58MiB Sandbox was loaded');
 check(count($GLOBALS['single_events'])===1,'automatic continuation not scheduled');
+// Freshly retained keywords appearing during a run may change sort positions.
+// Offset-only continuation would skip them. The bound set must restart safely.
+$idNew='0000000000000000000000000000000000000000000000000000000000000000';
+$idNew=substr($idNew,0,-1).'A'; // distinct before other sorted IDs
+PSTE_Sandbox_Record_Store::$rows[$idNew]=['sandbox_id'=>$idNew,'status'=>'STRUCTURE_GAP','pool_key'=>'new_source','current_relevance_proof'=>['status'=>'RELEVANT_FOR_PORTAL'],'history'=>[]];
+$rChanged=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(false);
+check($rChanged['cursor']===25&&$rChanged['total']===66,'new keyword did not reset bound cursor');
+check((PSTE_Sandbox_Record_Store::$rows[$idNew]['status']??'')==='PROPOSAL_READY_FOR_REVIEW','new keyword skipped on added record');
+unset(PSTE_Sandbox_Record_Store::$rows[$idNew]);
+// Removing the inserted test record also resets the set-bound cursor.
+$rRestart=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(false);
+check($rRestart['cursor']===25&&$rRestart['total']===65,'restored record set not replayed');
 $r2=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(false);
 check($r2['status']==='IN_PROGRESS'&&$r2['cursor']===50,'second batch did not resume');
 $r3=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(false);
@@ -85,4 +97,4 @@ $method=new ReflectionMethod('PSTE_Semantic_Review_Sandbox','internalStructureRe
 $progress['checkpoint_sha256']=$method->invoke(null,$progress);$GLOBALS['options']['pste_health']['structure_recheck_v1']=$progress;
 $r8=PSTE_Semantic_Review_Sandbox::refreshInternalStructureBacklog(false);
 check($r8['status']==='IN_PROGRESS'&&$r8['cursor']===25,'weekly safety net did not restart');
-echo json_encode(['status'=>'PASS','bounded_batch'=>25,'records_retained'=>65,'first_run_status'=>$r1['status'],'partial_status'=>$r3['status'],'category_change'=>'RECHECK_RESTARTED','manual_continuation'=>'PASS','failed_write_cursor_rollback'=>'PASS','tampered_cursor_rejected'=>'PASS','weekly_retry'=>'PASS','active_job_isolation'=>'PASS','legacy_full_reads'=>0,'scheduled_continuations'=>count($GLOBALS['single_events']),'per_record_write_max'=>max(PSTE_Sandbox_Record_Store::$writes)],JSON_PRETTY_PRINT)."\n";
+echo json_encode(['status'=>'PASS','bounded_batch'=>25,'records_retained'=>65,'first_run_status'=>$r1['status'],'partial_status'=>$r3['status'],'category_change'=>'RECHECK_RESTARTED','manual_continuation'=>'PASS','failed_write_cursor_rollback'=>'PASS','tampered_cursor_rejected'=>'PASS','weekly_retry'=>'PASS','active_job_isolation'=>'PASS','new_keyword_rescan'=>'PASS','legacy_full_reads'=>0,'scheduled_continuations'=>count($GLOBALS['single_events']),'per_record_write_max'=>max(PSTE_Sandbox_Record_Store::$writes)],JSON_PRETTY_PRINT)."\n";
