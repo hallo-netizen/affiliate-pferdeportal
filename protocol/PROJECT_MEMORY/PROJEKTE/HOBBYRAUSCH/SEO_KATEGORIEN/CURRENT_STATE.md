@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE ALTER SNAPSHOT / 1.14.15 REALER V7.1-DRY-RUN 3487 VOLL DURCHGELAUFEN ABER 2 ALTBINDUNGEN BLOCKED / KEIN SYNC / NÄCHSTER KANDIDAT NOCH NICHT FREIGEGEBEN**
+STATUS: **1.14.15 REAL BLOCKED / REALER JSON-EXPORT 1:1 REPLAYED / 1.14.16 FULL-WORKFLOW HARD PASS / ECHTER WORDPRESS-DRY-RUN 1.14.16 OFFEN / KEIN SYNC**
 
 ## Zielvertrag
 
@@ -13,14 +13,14 @@ Aktiv:
 Unterste Hobby-Content-Ebene unverändert:
 - kein starres Einheitsschema;
 - Einstieg/Grundlagen und FAQ sichtbar;
-- Vergleich & Kaufberatung je Hobby prüfen, eigener Leaf nur ab >=3 echten Intents;
+- Vergleich & Kaufberatung je Hobby prüfen; eigener Leaf nur ab mindestens 3 echten Intents;
 - Ausrüstung/Kosten sinnvoll abdecken;
 - Pflege, Wartung, Sicherheit, Fehler, Materialien, Methoden, Projekte, Orte, Lernen usw. nur bei fachlichem Sinn und ausreichender Tiefe;
 - Anfänger und Fortgeschrittene müssen beide sinnvoll bedient werden.
 
 ## V7.1-Zielbaum
 
-Unverändert:
+Fachlich unverändert:
 - 3517 logische Zielknoten;
 - 3487 physische Zielobjekte;
 - 862 Hobbyidentitäten;
@@ -36,75 +36,138 @@ Unverändert:
 
 ## Reales WordPress-Ergebnis 1.14.15
 
-Vom Nutzer real ausgeführt:
-- Status BLOCKED;
-- Zielobjekte 3487;
+Der echte Nutzerexport `hobby-depot-final-target-readback-20261017-113602-utc.json` wurde vollständig als Referenz übernommen.
+
+Realer Stand:
+- Plugin 1.14.15;
+- BLOCKED;
+- 3517 logisch / 3487 physisch;
 - CREATE 1122;
 - ADOPT 4;
 - UPDATE 2359;
 - UNCHANGED 0;
 - ARCHIVE 1;
-- EDITORIAL-DEMOTION 0;
+- exakt zwei Fehler;
 - kein Apply/Sync.
 
-Exakt zwei Fehler:
-1. `core:proposal:hummelkaesten` – Slug `hummelkaesten` anderweitig gebunden.
-2. `core:proposal:lederpraegen` – Slug `lederpraegen` anderweitig gebunden.
+Fehler:
+- Hummelkästen;
+- Lederprägen.
 
-Exhaustivitätsnachweis:
-1122 + 4 + 2359 = 3485 erfolgreich klassifizierte Zielobjekte.
-3485 + exakt 2 Fehler = 3487.
-Damit ist der reale Dry-Run über den vollständigen V7.1-Zielbestand gelaufen; es gibt in diesem Lauf keinen versteckten dritten Zielobjekt-Fehler.
+## Exakter 1:1-Replay des realen Exports
 
-Historisch belegte echte alte Live-Bindungen:
-- Hummelkästen Objekt 902484: `core:entity:b411cdf2ea6046005a4b`;
-- Lederprägen Objekt 902560: `core:entity:ef539e4fcf98dc1c2437`.
+Der echte 1.14.15-Lauf wurde nicht mehr nur nach Summen, sondern **Aktion für Aktion** lokal reproduziert.
 
-Im 1.14.15-Profil standen hierfür andere Legacy-IDs. Das ist die konkrete Ursache der beiden realen Kollisionen.
+Ergebnis:
+- 3486/3486 ausgegebene Aktionen identisch;
+- Reihenfolge identisch;
+- Objekt-IDs identisch;
+- Aktionsarten identisch;
+- Mismatch-Gründe identisch;
+- Summen identisch;
+- genau dieselben zwei Fehler;
+- `action_exact = true`;
+- `diffs = []`.
 
-## Vollworkflow-Nachprüfung vor neuem Release
+Damit ist erstmals belegt, dass die lokale Ausgangslage den realen WordPress-Dry-Run vollständig reproduziert.
 
-Es wird ausdrücklich **noch kein neues Plugin freigegeben**.
+## Exakte Ursache der zwei realen Blocker
 
-Die lokale WIP-Reparatur ergänzt nur die zwei real belegten alten Bindungen. Zusätzlich wurde der komplette Weg nach dem Dry-Run getestet, weil sonst der nächste Fehler erst beim Sync sichtbar geworden wäre.
+Historisch belegte alte Live-Bindungen:
+- Hummelkästen, Objekt 902484: `core:entity:b411cdf2ea6046005a4b`;
+- Lederprägen, Objekt 902560: `core:entity:ef539e4fcf98dc1c2437`.
 
-Dabei wurde ein weiterer Performancefehler gefunden und noch vor Release gestoppt:
-- der Sync berechnete Knotentiefe wiederholt neu;
-- der Sync speicherte seinen großen Zustand nach praktisch jedem einzelnen Knoten;
-- dadurch wäre nach einem späteren Dry-Run-PASS die nächste Timeout-/Lastbaustelle wahrscheinlich gewesen.
+Diese beiden tatsächlichen alten IDs fehlten in 1.14.15.
 
-WIP-Korrektur:
-- Knotentiefe/Index einmal vorberechnen;
-- Synczustand nur noch pro begrenztem Verarbeitungsschritt speichern, nicht nach jedem einzelnen Knoten;
-- Fachbaum, Kategorien und Navigation nicht verändert.
+1.14.16 ergänzt ausschließlich diese real belegten Altbindungen. Keine Fachkategorie und keine Navigation wurde geändert.
 
-Lokaler Vollworkflow auf dem vollständigen 3487er Zielbaum:
-- Dry-Run PASS;
-- kompletter Sync COMPLETE;
+## 1.14.16 – kompletter Workflow vor Freigabe simuliert
+
+Dry-Run auf exakt reproduzierter Ausgangslage:
+- PASS;
+- 3487 Zielobjekte;
+- CREATE 1122;
+- ADOPT 4;
+- UPDATE 2361;
+- UNCHANGED 0;
+- ARCHIVE 1;
+- Errors 0;
+- Hummelkästen wird als vorhandene Seite weiterverwendet;
+- Lederprägen wird als vorhandene Seite weiterverwendet.
+
+Danach wurde nicht gestoppt, sondern der komplette Folgeschritt lokal mit dem echten Runner durchgespielt:
+- manueller Sync bis COMPLETE;
 - Readback 3487/3487;
 - Frontend-/Strukturreadback PASS;
 - Header-Navigation PASS;
-- 381/381 Hobby-Hubs PASS;
+- 381/381 Hobbyseiten PASS;
 - ungebundene CORE-Seiten 0;
-- zweiter Dry-Run nach Sync: 3487/3487 UNCHANGED;
-- absichtlich fremde Bindung: BLOCKED;
-- absichtlich doppelte Legacy-Bindung: BLOCKED;
-- absichtlich eingespielter Write-Fehler: ROLLED_BACK; danach ursprünglicher Dry-Run wieder identisch PASS;
-- normaler Admin-Aufruf: kein Vollreadback;
-- automatischer Start: 0 Writes / 0 Schedules / 0 Network.
+- zweiter Dry-Run nach COMPLETE: 3487/3487 UNCHANGED.
 
-Wichtig:
-Diese Vollworkflow-Simulation nutzt den vollständigen V7.1-Baum und die real belegten Altbindungen, ist aber **noch keine wortwörtliche Kopie jedes aktuellen WordPress-Datensatzes**. Für diesen letzten 1:1-Nachweis wird der aktuelle JSON-Export des realen 1.14.15-Dry-Runs benötigt.
+## Negativ- und Fehlerfälle
+
+Geprüft:
+- fremde Hummelkästen-Bindung -> BLOCKED;
+- doppelte Hummelkästen-Altbindung -> BLOCKED;
+- fremde Lederprägen-Bindung -> BLOCKED;
+- doppelte Lederprägen-Altbindung -> BLOCKED;
+- Änderung des Livebestands zwischen Dry-Run und Apply -> Apply wird abgelehnt;
+- absichtlich injizierter Schreibfehler -> ROLLED_BACK;
+- nach Rollback ist der ursprüngliche Dry-Run-Plan wieder exakt identisch;
+- normaler Admin-Aufruf -> kein Vollscan;
+- manual-only Bootstrap -> 0 Writes / 0 Schedules / 0 Network.
+
+## Performance vor Release
+
+Zusätzlich wurde der spätere Syncpfad geprüft. Dabei wurde ein weiterer möglicher Timeout noch **vor** einem Nutzerlauf beseitigt:
+- Knotentiefe wird einmal vorbereitet statt ständig neu berechnet;
+- Live-/Zielindizes werden wiederverwendet;
+- Readback-Zustand wird gebündelt gespeichert;
+- Schreibschritte bleiben aus Rollback-Sicherheitsgründen einzeln abgesichert.
+
+Lokale Lastprüfung:
+- 1.14.14 alter Dry-Run ca. 29.8 s;
+- 1.14.15 optimierter Dry-Run ca. 1 s;
+- 1.14.16 kompletter Sync in begrenzten kurzen Schritten;
+- kein einzelner lokaler Sync-Schritt näherte sich einem Timeout.
+
+## Kandidat
+
+`HD001_V1.14.16_HOBBY_DEPOT_V7_1_EXACT_REPLAY_FULL_WORKFLOW_HARDPASS.zip`
+
+ZIP SHA-256:
+`bbee98fbf9bbfadf49f18bf64e9f64aba1a274b2266a1473ec89d87996654792`
+
+Profil SHA-256:
+`87275396fdd8e2e9d15b0a37a6d17a7a21889825d7cdb3f64f276005c73b99d0`
+
+Paketprüfung:
+- PHP 33/33 PASS;
+- ZIP 44/44 PASS;
+- Unzip PASS;
+- Roundtrip-Dateihashes 44/44 identisch.
 
 ## Navigation
 
 Keine neue Navigationsidee, keine neue Struktur und kein Architekturumbau.
-Live bleibt alter aktiver Snapshot, weil weiterhin kein Sync ausgeführt wurde.
+
+Live bleibt weiterhin der alte aktive Snapshot, weil noch kein V7.1-Sync durchgeführt wurde. Die Navigation darf erst nach echtem 1.14.16-Dry-Run-PASS synchronisiert werden.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der aktuelle reale 1.14.15-Dry-Run-JSON muss gegen den lokal vollständig durchgespielten Reparaturstand 1:1 replayed werden. Vor diesem Nachweis kein neues Plugin an den Nutzer.**
+**Der echte WordPress-Dry-Run mit 1.14.16 fehlt noch.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Aktuellen Button `Finalen Readback als JSON herunterladen` verwenden und genau diese JSON-Datei für den 1:1-Replay bereitstellen. Kein Apply/Sync.**
+**HD-001 1.14.16 installieren und ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
+
+Erwarteter echter Lauf:
+- 3487 Zielobjekte;
+- CREATE 1122;
+- ADOPT 4;
+- UPDATE 2361;
+- UNCHANGED 0;
+- ARCHIVE 1;
+- Errors 0.
+
+Bei jeder Abweichung: sofort stoppen, kein Sync.
