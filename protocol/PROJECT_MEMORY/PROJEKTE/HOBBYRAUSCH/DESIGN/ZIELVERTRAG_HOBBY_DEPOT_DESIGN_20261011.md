@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.4 / 2026-10-16
+FASSUNG: 4.5 / 2026-10-17
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -18,9 +18,10 @@ FASSUNG: 4.4 / 2026-10-16
 
 ## Mega-Menü – verbindliche Darstellungsregel
 - Grundprinzip wie bei den bewährten Pferdeatelier-/H&Parfume-Referenzen: grafisch einheitliche, begrenzte Linkmenge statt beliebig langer Spalten.
-- Die Zahl der direkt sichtbaren Unterkategorien ist **keine starre 3er-/4er-/5er-Regel**. Sie richtet sich nach dem kleinsten sinnvollen Direktbestand der acht Hauptwelten und dem grafisch gleichmäßigen Gesamtbild.
-- Ziel ist: alle geöffneten Mega-Menüs wirken gleichmäßig, ohne unnötige Leerflächen oder einzelne überlange Menüs. Beim aktuellen Zielbaum ist die gemeinsame sichtbare Zahl **5**, weil die kleinste Hauptwelt 5 direkte Unterbereiche besitzt.
-- Existieren darüber hinaus weitere direkte Unterkategorien, folgt am Gruppenende ein klarer Link/Button `Mehr Kategorien`; wenn keine weiteren existieren, `Alle Kategorien`.
+- Auf Desktop dürfen **bis zu 10 direkte Zwischenbereiche sofort sichtbar** sein. Das entspricht maximal **zwei Reihen mit je fünf Bereichen**.
+- `Mehr Kategorien` erscheint erst, wenn für dieselbe Ebene tatsächlich eine **dritte Reihe** nötig wäre, also ab dem 11. direkten Zwischenbereich.
+- Die acht Hauptwelten dürfen dabei unterschiedlich viele direkte Zwischenbereiche zeigen; künstliches Verstecken nur zur optischen Gleichmacherei ist nicht erwünscht.
+- Beim aktuellen V7.1-Zielbaum mit 7/10/9/8/9/7/8/9 Zwischenbereichen sind damit alle direkten Zwischenbereiche ohne `Mehr Kategorien` sichtbar.
 - Beim ersten Hover/Fokus wird neben den direkt sichtbaren Unterkategorien **genau eine weitere sinnvolle Ebene** kompakt als Orientierung gezeigt. Keine weitere Verschachtelung.
 - Keine unbegrenzte Vollbaum-Ausgabe und keine vierte/weitere verschachtelte Ebene im Mega-Menü.
 - Die Begrenzung betrifft nur die Anzeige im Mega-Menü, niemals die reale Kategorienstruktur oder Erreichbarkeit tieferer Kategorien.
