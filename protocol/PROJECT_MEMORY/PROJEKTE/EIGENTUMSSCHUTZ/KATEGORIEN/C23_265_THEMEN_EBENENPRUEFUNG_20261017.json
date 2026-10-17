@@ -37,15 +37,16 @@
     "legacy_faq": 93,
     "legacy_beratung": 93,
     "legacy_comparison": 91,
-    "new_beratung": 129,
+    "new_beratung": 127,
     "individually_rejected_legacy": 30,
     "individual_extra_legacy": 63,
     "individual_extra_new": 4,
-    "total_to_propose": 473,
+    "total_to_propose": 471,
     "individually_rejected_new": 17,
-    "individually_named_legacy_comparisons": 91
+    "individually_named_legacy_comparisons": 91,
+    "new_advice_missing": 127
   },
-  "planned_adds": 473,
+  "planned_adds": 471,
   "owners": [
     {
       "owner_type": "LEGACY_R3_PAGE3",
@@ -4286,8 +4287,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Ferienhaus-Kontrolle: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Ferienhaus-Kontrollen planen und Dienstleister auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4362,8 +4364,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Katalysatordiebstahl: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Katalysator am Auto wirksam vor Diebstahl schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4401,8 +4404,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "E-Scooter-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Passende Diebstahlsicherung für E-Scooter finden",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4438,8 +4442,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Felgendiebstahl: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Felgensicherung und geschützten Stellplatz auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4475,8 +4480,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Kennzeichendiebstahl: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Kennzeichen gegen Diebstahl und Missbrauch absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4513,8 +4519,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Elektromobil-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Elektromobile sicher abstellen und gegen Diebstahl schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4553,8 +4560,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wohnmobil-Stellplatzschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnmobil-Stellplatz für lange Abwesenheit absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4592,8 +4600,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Garagentor-Einbruchschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Garagentor gegen Einbruch sinnvoll nachrüsten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4631,8 +4640,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenhaus-Einbruchschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenhaus sichern: Schlösser, Fenster und Wertsachen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4670,9 +4680,9 @@
           "title": "Haustürschlösser: Häufige Fragen"
         },
         "beratung": {
-          "status": "MISSING__PROPOSE_NEW",
-          "title": "Haustürschlösser: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "status": "COVERED_BY_EXISTING_FACET",
+          "title": "Schließzylinder wählen",
+          "why": "Bereits existierende Auswahlkategorie übernimmt die Beratungsfunktion, keine zusätzliche Kategorie nötig."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4749,8 +4759,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Selbstschutz bei Einbruch: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Sicheres Verhalten und Vorbereitung bei Einbruch",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4829,8 +4840,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hofladen-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Diebstahlschutz für Hofläden passend organisieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4867,8 +4879,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "SB-Verkaufsstand-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Selbstbedienungsstand gegen Diebstahl absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4905,8 +4918,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Warenautomat-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Warenautomat sicher aufstellen und gegen Aufbruch schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4943,8 +4957,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Abholbox-Diebstahlschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Abholbox mit passenden Zugangsrechten und Schutz ausstatten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -4983,8 +4998,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Einbruchschutz für Vereins-Sporthallen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Einbruchschutz für Vereins-Sporthallen richtig planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5022,8 +5038,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Einbruchschutz für kleine private Lagerhallen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Kleine private Lagerhalle wirksam gegen Einbruch absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5140,8 +5157,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "PV-Kabel & Steckverbinder: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "PV-Leitungen brandsicher planen und fachgerecht prüfen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5178,8 +5196,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wechselrichter-Brandschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wechselrichter vor Überhitzung und Brandgefahr schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5217,8 +5236,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wallbox-Brandschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wallbox brandsicher auswählen und installieren lassen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5261,8 +5281,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gasversorgung im Wohnmobil: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnmobil-Gasanlage sicher aufbauen und betreiben",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5417,8 +5438,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Brandschutz an Leitungsdurchführungen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Leitungsdurchführungen brandschutzgerecht ausführen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5493,8 +5515,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Brandschutz in Abstellräumen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Abstellräume nach Brandrisiko sinnvoll absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5530,8 +5553,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Privatwagen-Brandrisiken: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Brandrisiken am abgestellten Privatwagen reduzieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5568,8 +5592,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Elektroauto-Brandschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "E-Auto und Ladeumgebung brandsicher gestalten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5607,8 +5632,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Brandschutz im Freizeitboot: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Brandschutzausrüstung für Freizeitboote planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5644,8 +5670,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Rußschäden am Wohnhaus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Rußschäden nach einem Brand richtig beurteilen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5681,8 +5708,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Löschwasserschäden am Haus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Löschwasserschäden richtig trocknen und sanieren lassen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5721,8 +5749,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Brandschaden am Wohnhaus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnhaus nach Brand sicher wiederherstellen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5758,8 +5787,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Vegetationsbrand am Grundstück: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Grundstück und Nebengebäude vor Vegetationsbrand schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5796,8 +5826,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Brandschutz gegen Brandüberschlag: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Brandüberschlag auf das eigene Gebäude verhindern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5834,8 +5865,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Funkenflug an Nebengebäuden: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Funkenflug bei Schuppen und Nebengebäuden vorbeugen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5872,8 +5904,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bootsmotor-Brandschutz: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Brandschutz für Motorraum und Antrieb am Boot",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -5988,8 +6021,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bootsküche: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Bootsküche brandsicher planen und ausrüsten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6025,8 +6059,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bordelektrik im Freizeitboot: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Sichere Bordelektrik auswählen und nachrüsten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6143,8 +6178,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Smart-Home-Zentrale: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Smart-Home-Zentrale zuverlässig und ausfallsicher einrichten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6180,8 +6216,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "PoE-Installationen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "PoE-Netzwerk für Kameras und Sensoren richtig planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6223,8 +6260,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Ferienhaus-Fernüberwachung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Ferienhausüberwachung mit Alarmkette richtig auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6261,8 +6299,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Heizungsausfall: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Heizungsausfall: Warnung, Frostschutz und Reaktion planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6577,8 +6616,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wechselrichter-Ausfälle: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wechselrichterstörungen einschätzen und Fachhilfe wählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6616,8 +6656,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Heimspeicher-Störungen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Heimspeicherstörungen sicher beurteilen und beheben lassen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6733,8 +6774,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "PV-Monitoring: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "PV-Monitoring aussagekräftig auswählen und einstellen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6770,8 +6812,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Balkonkraftwerk: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Balkonkraftwerk sicher betreiben und bei Störungen handeln",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6808,8 +6851,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "PV-Ersatzstromversorgung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "PV-Ersatzstrom für den eigenen Bedarf planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -6853,8 +6897,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Notstromversorgung fürs Haus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Notstromversorgung für wichtige Hausgeräte dimensionieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7206,8 +7251,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Smarte Türsteuerung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Smarte Türsteuerung sicher auswählen und betreiben",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7284,8 +7330,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Elektronische Türschlösser: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Elektronische Türschlösser sicher nachrüsten und verwalten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7321,8 +7368,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wallbox vor Sabotage: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wallbox gegen Sabotage absichern und Schäden erkennen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7359,8 +7407,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Privatwagen vor Vandalismus schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Privatwagen am Stellplatz vor Vandalismus schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7398,8 +7447,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Schaufenster vor Sachbeschädigung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Schaufenster gegen Glasbruch und Sachbeschädigung absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7436,8 +7486,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Tür- und Fensterglas bei Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Fenster- und Türverglasung vandalismussicher auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7473,8 +7524,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Sicherungskasten vor Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Sicherungskasten vor Fremdzugriff und Manipulation schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7510,8 +7562,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Innenwandschäden nach Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Beschädigte Innenwände fachgerecht instand setzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7547,8 +7600,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Deckenschäden nach Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Deckenschäden beurteilen und sicher reparieren lassen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7584,8 +7638,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bodenbelagschäden durch Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Beschädigte Bodenbeläge fachgerecht erneuern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7621,8 +7676,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Treppenschäden durch Vandalismus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Treppenschäden beurteilen und sichere Reparatur wählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7658,8 +7714,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Einbauküchenschäden: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Einbauküchenschäden reparieren oder ersetzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7695,8 +7752,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Einbauschränke vor Vandalismus schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Einbauschränke gegen Beschädigung und unbefugten Zugriff schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7733,8 +7791,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Heizraum vor Vandalismus schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Heizraum gegen unbefugten Zugang absichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7770,8 +7829,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Heizkreisverteiler schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Heizkreisverteiler vor Manipulation und Beschädigung sichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7807,8 +7867,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wasserabsperrung vor Manipulation schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wasserabsperrungen vor unbefugter Betätigung schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7844,8 +7905,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Technikschränke schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Technikschränke sicher abschließen und überwachen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7883,8 +7945,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Sportplatz vor Vandalismus schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Sportplatz gegen Vandalismus wirksam sichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7961,8 +8024,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bilgenwasser im Freizeitboot: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Bilgenwasserwarnung und Pumpentechnik fürs Boot auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -7998,8 +8062,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bootskajüte: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Feuchte und Schimmel in der Bootskajüte verhindern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8074,8 +8139,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bootsabdeckung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Bootsabdeckung für Liegeplatz und Winterlager auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8111,8 +8177,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Poolleitungen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Poolleitungen sicher verlegen und Leckschäden vorbeugen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8306,8 +8373,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Dachrinnen & Fallrohre: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Dachrinnen und Fallrohre richtig auswählen und schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8384,8 +8452,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Fensteranschlüsse: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Fensteranschlüsse gegen Schlagregen sicher abdichten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8421,8 +8490,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Fassadenfugen & Anschlüsse: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Fassadenfugen fachgerecht abdichten und sanieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8497,8 +8567,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Dachabläufe & Notentwässerung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Dachentwässerung und Notabläufe zuverlässig planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8534,8 +8605,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gauben & Anschlüsse: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gauben und Dachanschlüsse dauerhaft regendicht ausführen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8571,8 +8643,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Kaminanschlüsse: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Kaminanschlüsse gegen Regen und Feuchte abdichten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8608,8 +8681,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Balkonanschlüsse: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Balkonanschlüsse fachgerecht sanieren und entwässern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8646,8 +8720,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Außentüren: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Außentüren dauerhaft gegen Schlagregen abdichten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8763,8 +8838,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wasserleitungen im Ferienhaus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Ferienhaus-Wasserleitungen winterfest und frostfrei halten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8803,8 +8879,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Rückstauklappen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Rückstauklappe passend auswählen und richtig einbauen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8840,8 +8917,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hausschwamm im Gebäude: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hausschwamm erkennen und Sanierung fachgerecht beauftragen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8878,8 +8956,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wasserschutz im Friseursalon: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wasserschutz in persönlich geführten Friseursalons planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8955,8 +9034,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Dusche undicht: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Undichte Dusche: geeignete Reparatur und Abdichtung finden",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -8992,8 +9072,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Spülkasten undicht: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Undichten Spülkasten reparieren oder austauschen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9030,8 +9111,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Badewanne abdichten: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Badewanne dauerhaft abdichten: geeignete Lösung wählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9067,8 +9149,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Siphon undicht: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Undichten Siphon richtig ersetzen und anschließen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9104,8 +9187,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Waschbecken undicht: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Waschbeckenanschlüsse sicher abdichten und reparieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9141,8 +9225,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Küchenspüle undicht: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Undichte Küchenspüle reparieren oder erneuern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9218,8 +9303,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Überspannungsschutz im Wohnhaus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Überspannungsschutz im Wohnhaus fachgerecht planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9255,8 +9341,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wohnmobil bei Sturm: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnmobil bei Sturm passend abstellen und sichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9292,9 +9379,9 @@
           "title": "Hagelschutz für Privatwagen: Häufige Fragen"
         },
         "beratung": {
-          "status": "MISSING__PROPOSE_NEW",
-          "title": "Hagelschutz für Privatwagen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "status": "COVERED_BY_EXISTING_FACET",
+          "title": "Abdeckungen wählen",
+          "why": "Bereits existierende Auswahlkategorie übernimmt die Beratungsfunktion, keine zusätzliche Kategorie nötig."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9330,8 +9417,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hochwasser am Privatwagen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hochwasserschäden am Privatwagen vermeiden und reagieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9368,8 +9456,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Privatwagen bei Sturm: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Privatwagen bei Sturm sicher abstellen und Schäden begrenzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9405,8 +9494,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Winterdienst auf Privatwegen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Winterdienst für private Wege sicher organisieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9444,8 +9534,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gewächshaus bei Frost: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gewächshaus sinnvoll gegen Frost ausrüsten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9481,8 +9572,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Obstbäume bei Frost: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Obstblüte gegen Spätfrost schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9518,8 +9610,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Kübelpflanzen bei Frost: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Kübelpflanzen sicher durch den Winter bringen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9555,8 +9648,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hecken bei Frost: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hecken vor Frostschäden schützen und pflegen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9592,8 +9686,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Sträucher bei Frost: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Frostschutz für empfindliche Sträucher wählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9630,8 +9725,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Dachgeschoss vor Hitze schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Dachgeschoss wirkungsvoll gegen Sommerhitze schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9669,8 +9765,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wintergarten im Sommer: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wintergarten wirksam kühlen und verschatten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9707,8 +9804,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenbewässerung bei Trockenheit: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Bewässerung im Garten bedarfsgerecht planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9745,8 +9843,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Fassadenverschattung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Fassadenverschattung passend auswählen und montieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9782,8 +9881,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Terrassenbeläge bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Terrassenbelag für große Hitze richtig auswählen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9819,8 +9919,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenbäume bei Trockenheit: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenbäume bei Trockenheit richtig versorgen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9856,8 +9957,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Bodenrisse am Grundstück: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Bodenrisse am Grundstück fachlich beurteilen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9893,8 +9995,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wohnmobil bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnmobil bei Hitze sicher und angenehm nutzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9930,8 +10033,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Privatwagen bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Privatwagen vor starker Hitze schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -9967,8 +10071,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenhaus bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenhaus gegen Überhitzung sinnvoll nachrüsten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10004,8 +10109,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hobbyraum bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hobbyraum gegen Hitze und Wärmestau schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10041,8 +10147,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Zeltmaterial im Sommer: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Zeltmaterial vor UV-Schäden und Hitze schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10078,8 +10185,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Campingausrüstung bei Hitze: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Campingausrüstung bei Sommerhitze richtig lagern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10116,8 +10224,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Mobile Hochwassersperren: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Mobile Hochwassersperren passend auswählen und einsetzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10156,8 +10265,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Tiefgarage bei Starkregen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Tiefgarage vor Starkregen wirksam schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10193,8 +10303,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Hangrutschungen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hangrutschungen am privaten Grundstück einschätzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10231,8 +10342,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenböschungen schützen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenböschung gegen Erosion stabilisieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10268,8 +10380,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Uferbefestigung am Privatgrundstück: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Uferbefestigung am Privatgrundstück sinnvoll planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10305,8 +10418,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenmauern bei Unterspülung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenmauer bei Unterspülung fachgerecht sichern",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10342,8 +10456,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Gartenwege bei Unterspülung: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenwege gegen Unterspülung dauerhaft befestigen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10380,8 +10495,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Ladenlokal bei Hochwasser: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Kleines Ladenlokal auf Hochwasser vorbereiten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10418,8 +10534,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Friseursalon bei Hochwasser: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Friseursalon bei Hochwasser schützen und wiedereröffnen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10456,8 +10573,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "PV-Anlage bei Sturm: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "PV-Anlage nach Sturm sicher prüfen lassen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10495,8 +10613,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Marder im Dach: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Marder am Haus tiergerecht fernhalten",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10533,8 +10652,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Nager an Hausleitungen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Hausleitungen vor Nagerschäden schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10570,8 +10690,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Holzzerstörende Insekten am Haus: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Holzschädlinge erkennen und Fachsanierung planen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10607,8 +10728,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Marderbiss am Auto: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Marderschutz am Auto auswählen und richtig einsetzen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10644,8 +10766,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Nager im Wohnmobil: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Wohnmobil gegen Nagerbefall im Winterlager schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10681,8 +10804,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Tierschäden am Freizeitboot: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Freizeitboot vor Vogelnestern und Tierschäden schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10718,8 +10842,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wühlmäuse im Garten: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenpflanzen vor Wühlmäusen schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10755,8 +10880,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Vogelschäden an Außentechnik: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Außentechnik vor Vogelschäden schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10793,8 +10919,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wildtierschäden am Garten: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Gartenflächen vor Wildtierschäden schützen",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -10830,8 +10957,9 @@
         },
         "beratung": {
           "status": "MISSING__PROPOSE_NEW",
-          "title": "Wildtierschäden an Zäunen: Beratung & Entscheidungen",
-          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen"
+          "title": "Zäune gegen Wildtierschäden verstärken und reparieren",
+          "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
+          "editorial_review": "Eigenständige Entscheidungshilfe für Einsteiger und bereits sachkundige Leser; grobe Tragfähigkeit von ca. 3–5 Beiträgen plausibel."
         },
         "vergleich": {
           "status": "ALREADY_IMPORTED",
@@ -13569,7 +13697,7 @@
     {
       "owner_key": "c22-topic-index-0",
       "kind": "BERATUNG",
-      "name": "Ferienhaus-Kontrolle: Beratung & Entscheidungen",
+      "name": "Ferienhaus-Kontrollen planen und Dienstleister auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13577,7 +13705,7 @@
     {
       "owner_key": "c22-topic-index-2",
       "kind": "BERATUNG",
-      "name": "Katalysatordiebstahl: Beratung & Entscheidungen",
+      "name": "Katalysator am Auto wirksam vor Diebstahl schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13585,7 +13713,7 @@
     {
       "owner_key": "c22-topic-index-3",
       "kind": "BERATUNG",
-      "name": "E-Scooter-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Passende Diebstahlsicherung für E-Scooter finden",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13593,7 +13721,7 @@
     {
       "owner_key": "c22-topic-index-4",
       "kind": "BERATUNG",
-      "name": "Felgendiebstahl: Beratung & Entscheidungen",
+      "name": "Felgensicherung und geschützten Stellplatz auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13601,7 +13729,7 @@
     {
       "owner_key": "c22-topic-index-5",
       "kind": "BERATUNG",
-      "name": "Kennzeichendiebstahl: Beratung & Entscheidungen",
+      "name": "Kennzeichen gegen Diebstahl und Missbrauch absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13609,7 +13737,7 @@
     {
       "owner_key": "c22-topic-index-6",
       "kind": "BERATUNG",
-      "name": "Elektromobil-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Elektromobile sicher abstellen und gegen Diebstahl schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13617,7 +13745,7 @@
     {
       "owner_key": "c22-topic-index-7",
       "kind": "BERATUNG",
-      "name": "Wohnmobil-Stellplatzschutz: Beratung & Entscheidungen",
+      "name": "Wohnmobil-Stellplatz für lange Abwesenheit absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13625,7 +13753,7 @@
     {
       "owner_key": "c22-topic-index-8",
       "kind": "BERATUNG",
-      "name": "Garagentor-Einbruchschutz: Beratung & Entscheidungen",
+      "name": "Garagentor gegen Einbruch sinnvoll nachrüsten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13633,15 +13761,7 @@
     {
       "owner_key": "c22-topic-index-9",
       "kind": "BERATUNG",
-      "name": "Gartenhaus-Einbruchschutz: Beratung & Entscheidungen",
-      "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
-      "wp_write": false,
-      "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
-    },
-    {
-      "owner_key": "c22-topic-index-10",
-      "kind": "BERATUNG",
-      "name": "Haustürschlösser: Beratung & Entscheidungen",
+      "name": "Gartenhaus sichern: Schlösser, Fenster und Wertsachen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13649,7 +13769,7 @@
     {
       "owner_key": "c22-topic-index-12",
       "kind": "BERATUNG",
-      "name": "Selbstschutz bei Einbruch: Beratung & Entscheidungen",
+      "name": "Sicheres Verhalten und Vorbereitung bei Einbruch",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13657,7 +13777,7 @@
     {
       "owner_key": "c22-topic-index-14",
       "kind": "BERATUNG",
-      "name": "Hofladen-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Diebstahlschutz für Hofläden passend organisieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13665,7 +13785,7 @@
     {
       "owner_key": "c22-topic-index-15",
       "kind": "BERATUNG",
-      "name": "SB-Verkaufsstand-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Selbstbedienungsstand gegen Diebstahl absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13673,7 +13793,7 @@
     {
       "owner_key": "c22-topic-index-16",
       "kind": "BERATUNG",
-      "name": "Warenautomat-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Warenautomat sicher aufstellen und gegen Aufbruch schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13681,7 +13801,7 @@
     {
       "owner_key": "c22-topic-index-17",
       "kind": "BERATUNG",
-      "name": "Abholbox-Diebstahlschutz: Beratung & Entscheidungen",
+      "name": "Abholbox mit passenden Zugangsrechten und Schutz ausstatten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13689,7 +13809,7 @@
     {
       "owner_key": "c22-topic-index-18",
       "kind": "BERATUNG",
-      "name": "Einbruchschutz für Vereins-Sporthallen: Beratung & Entscheidungen",
+      "name": "Einbruchschutz für Vereins-Sporthallen richtig planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13697,7 +13817,7 @@
     {
       "owner_key": "c22-topic-index-19",
       "kind": "BERATUNG",
-      "name": "Einbruchschutz für kleine private Lagerhallen: Beratung & Entscheidungen",
+      "name": "Kleine private Lagerhalle wirksam gegen Einbruch absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13705,7 +13825,7 @@
     {
       "owner_key": "c22-topic-index-22",
       "kind": "BERATUNG",
-      "name": "PV-Kabel & Steckverbinder: Beratung & Entscheidungen",
+      "name": "PV-Leitungen brandsicher planen und fachgerecht prüfen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13713,7 +13833,7 @@
     {
       "owner_key": "c22-topic-index-23",
       "kind": "BERATUNG",
-      "name": "Wechselrichter-Brandschutz: Beratung & Entscheidungen",
+      "name": "Wechselrichter vor Überhitzung und Brandgefahr schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13721,7 +13841,7 @@
     {
       "owner_key": "c22-topic-index-24",
       "kind": "BERATUNG",
-      "name": "Wallbox-Brandschutz: Beratung & Entscheidungen",
+      "name": "Wallbox brandsicher auswählen und installieren lassen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13737,7 +13857,7 @@
     {
       "owner_key": "c22-topic-index-25",
       "kind": "BERATUNG",
-      "name": "Gasversorgung im Wohnmobil: Beratung & Entscheidungen",
+      "name": "Wohnmobil-Gasanlage sicher aufbauen und betreiben",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13745,7 +13865,7 @@
     {
       "owner_key": "c22-topic-index-29",
       "kind": "BERATUNG",
-      "name": "Brandschutz an Leitungsdurchführungen: Beratung & Entscheidungen",
+      "name": "Leitungsdurchführungen brandschutzgerecht ausführen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13753,7 +13873,7 @@
     {
       "owner_key": "c22-topic-index-31",
       "kind": "BERATUNG",
-      "name": "Brandschutz in Abstellräumen: Beratung & Entscheidungen",
+      "name": "Abstellräume nach Brandrisiko sinnvoll absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13761,7 +13881,7 @@
     {
       "owner_key": "c22-topic-index-32",
       "kind": "BERATUNG",
-      "name": "Privatwagen-Brandrisiken: Beratung & Entscheidungen",
+      "name": "Brandrisiken am abgestellten Privatwagen reduzieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13769,7 +13889,7 @@
     {
       "owner_key": "c22-topic-index-33",
       "kind": "BERATUNG",
-      "name": "Elektroauto-Brandschutz: Beratung & Entscheidungen",
+      "name": "E-Auto und Ladeumgebung brandsicher gestalten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13777,7 +13897,7 @@
     {
       "owner_key": "c22-topic-index-34",
       "kind": "BERATUNG",
-      "name": "Brandschutz im Freizeitboot: Beratung & Entscheidungen",
+      "name": "Brandschutzausrüstung für Freizeitboote planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13785,7 +13905,7 @@
     {
       "owner_key": "c22-topic-index-35",
       "kind": "BERATUNG",
-      "name": "Rußschäden am Wohnhaus: Beratung & Entscheidungen",
+      "name": "Rußschäden nach einem Brand richtig beurteilen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13793,7 +13913,7 @@
     {
       "owner_key": "c22-topic-index-36",
       "kind": "BERATUNG",
-      "name": "Löschwasserschäden am Haus: Beratung & Entscheidungen",
+      "name": "Löschwasserschäden richtig trocknen und sanieren lassen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13801,7 +13921,7 @@
     {
       "owner_key": "c22-topic-index-37",
       "kind": "BERATUNG",
-      "name": "Brandschaden am Wohnhaus: Beratung & Entscheidungen",
+      "name": "Wohnhaus nach Brand sicher wiederherstellen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13809,7 +13929,7 @@
     {
       "owner_key": "c22-topic-index-38",
       "kind": "BERATUNG",
-      "name": "Vegetationsbrand am Grundstück: Beratung & Entscheidungen",
+      "name": "Grundstück und Nebengebäude vor Vegetationsbrand schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13817,7 +13937,7 @@
     {
       "owner_key": "c22-topic-index-39",
       "kind": "BERATUNG",
-      "name": "Brandschutz gegen Brandüberschlag: Beratung & Entscheidungen",
+      "name": "Brandüberschlag auf das eigene Gebäude verhindern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13825,7 +13945,7 @@
     {
       "owner_key": "c22-topic-index-40",
       "kind": "BERATUNG",
-      "name": "Funkenflug an Nebengebäuden: Beratung & Entscheidungen",
+      "name": "Funkenflug bei Schuppen und Nebengebäuden vorbeugen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13833,7 +13953,7 @@
     {
       "owner_key": "c22-topic-index-41",
       "kind": "BERATUNG",
-      "name": "Bootsmotor-Brandschutz: Beratung & Entscheidungen",
+      "name": "Brandschutz für Motorraum und Antrieb am Boot",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13841,7 +13961,7 @@
     {
       "owner_key": "c22-topic-index-44",
       "kind": "BERATUNG",
-      "name": "Bootsküche: Beratung & Entscheidungen",
+      "name": "Bootsküche brandsicher planen und ausrüsten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13849,7 +13969,7 @@
     {
       "owner_key": "c22-topic-index-45",
       "kind": "BERATUNG",
-      "name": "Bordelektrik im Freizeitboot: Beratung & Entscheidungen",
+      "name": "Sichere Bordelektrik auswählen und nachrüsten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13857,7 +13977,7 @@
     {
       "owner_key": "c22-topic-index-48",
       "kind": "BERATUNG",
-      "name": "Smart-Home-Zentrale: Beratung & Entscheidungen",
+      "name": "Smart-Home-Zentrale zuverlässig und ausfallsicher einrichten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13865,7 +13985,7 @@
     {
       "owner_key": "c22-topic-index-49",
       "kind": "BERATUNG",
-      "name": "PoE-Installationen: Beratung & Entscheidungen",
+      "name": "PoE-Netzwerk für Kameras und Sensoren richtig planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13881,7 +14001,7 @@
     {
       "owner_key": "c22-topic-index-50",
       "kind": "BERATUNG",
-      "name": "Ferienhaus-Fernüberwachung: Beratung & Entscheidungen",
+      "name": "Ferienhausüberwachung mit Alarmkette richtig auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13889,7 +14009,7 @@
     {
       "owner_key": "c22-topic-index-51",
       "kind": "BERATUNG",
-      "name": "Heizungsausfall: Beratung & Entscheidungen",
+      "name": "Heizungsausfall: Warnung, Frostschutz und Reaktion planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13905,7 +14025,7 @@
     {
       "owner_key": "c22-topic-index-59",
       "kind": "BERATUNG",
-      "name": "Wechselrichter-Ausfälle: Beratung & Entscheidungen",
+      "name": "Wechselrichterstörungen einschätzen und Fachhilfe wählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13913,7 +14033,7 @@
     {
       "owner_key": "c22-topic-index-60",
       "kind": "BERATUNG",
-      "name": "Heimspeicher-Störungen: Beratung & Entscheidungen",
+      "name": "Heimspeicherstörungen sicher beurteilen und beheben lassen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13921,7 +14041,7 @@
     {
       "owner_key": "c22-topic-index-63",
       "kind": "BERATUNG",
-      "name": "PV-Monitoring: Beratung & Entscheidungen",
+      "name": "PV-Monitoring aussagekräftig auswählen und einstellen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13929,7 +14049,7 @@
     {
       "owner_key": "c22-topic-index-64",
       "kind": "BERATUNG",
-      "name": "Balkonkraftwerk: Beratung & Entscheidungen",
+      "name": "Balkonkraftwerk sicher betreiben und bei Störungen handeln",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13937,7 +14057,7 @@
     {
       "owner_key": "c22-topic-index-65",
       "kind": "BERATUNG",
-      "name": "PV-Ersatzstromversorgung: Beratung & Entscheidungen",
+      "name": "PV-Ersatzstrom für den eigenen Bedarf planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13953,7 +14073,7 @@
     {
       "owner_key": "c22-topic-index-66",
       "kind": "BERATUNG",
-      "name": "Notstromversorgung fürs Haus: Beratung & Entscheidungen",
+      "name": "Notstromversorgung für wichtige Hausgeräte dimensionieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13961,7 +14081,7 @@
     {
       "owner_key": "c22-topic-index-75",
       "kind": "BERATUNG",
-      "name": "Smarte Türsteuerung: Beratung & Entscheidungen",
+      "name": "Smarte Türsteuerung sicher auswählen und betreiben",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13969,7 +14089,7 @@
     {
       "owner_key": "c22-topic-index-77",
       "kind": "BERATUNG",
-      "name": "Elektronische Türschlösser: Beratung & Entscheidungen",
+      "name": "Elektronische Türschlösser sicher nachrüsten und verwalten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13977,7 +14097,7 @@
     {
       "owner_key": "c22-topic-index-78",
       "kind": "BERATUNG",
-      "name": "Wallbox vor Sabotage: Beratung & Entscheidungen",
+      "name": "Wallbox gegen Sabotage absichern und Schäden erkennen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13985,7 +14105,7 @@
     {
       "owner_key": "c22-topic-index-79",
       "kind": "BERATUNG",
-      "name": "Privatwagen vor Vandalismus schützen: Beratung & Entscheidungen",
+      "name": "Privatwagen am Stellplatz vor Vandalismus schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -13993,7 +14113,7 @@
     {
       "owner_key": "c22-topic-index-80",
       "kind": "BERATUNG",
-      "name": "Schaufenster vor Sachbeschädigung: Beratung & Entscheidungen",
+      "name": "Schaufenster gegen Glasbruch und Sachbeschädigung absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14001,7 +14121,7 @@
     {
       "owner_key": "c22-topic-index-81",
       "kind": "BERATUNG",
-      "name": "Tür- und Fensterglas bei Vandalismus: Beratung & Entscheidungen",
+      "name": "Fenster- und Türverglasung vandalismussicher auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14009,7 +14129,7 @@
     {
       "owner_key": "c22-topic-index-82",
       "kind": "BERATUNG",
-      "name": "Sicherungskasten vor Vandalismus: Beratung & Entscheidungen",
+      "name": "Sicherungskasten vor Fremdzugriff und Manipulation schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14017,7 +14137,7 @@
     {
       "owner_key": "c22-topic-index-83",
       "kind": "BERATUNG",
-      "name": "Innenwandschäden nach Vandalismus: Beratung & Entscheidungen",
+      "name": "Beschädigte Innenwände fachgerecht instand setzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14025,7 +14145,7 @@
     {
       "owner_key": "c22-topic-index-84",
       "kind": "BERATUNG",
-      "name": "Deckenschäden nach Vandalismus: Beratung & Entscheidungen",
+      "name": "Deckenschäden beurteilen und sicher reparieren lassen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14033,7 +14153,7 @@
     {
       "owner_key": "c22-topic-index-85",
       "kind": "BERATUNG",
-      "name": "Bodenbelagschäden durch Vandalismus: Beratung & Entscheidungen",
+      "name": "Beschädigte Bodenbeläge fachgerecht erneuern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14041,7 +14161,7 @@
     {
       "owner_key": "c22-topic-index-86",
       "kind": "BERATUNG",
-      "name": "Treppenschäden durch Vandalismus: Beratung & Entscheidungen",
+      "name": "Treppenschäden beurteilen und sichere Reparatur wählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14049,7 +14169,7 @@
     {
       "owner_key": "c22-topic-index-87",
       "kind": "BERATUNG",
-      "name": "Einbauküchenschäden: Beratung & Entscheidungen",
+      "name": "Einbauküchenschäden reparieren oder ersetzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14057,7 +14177,7 @@
     {
       "owner_key": "c22-topic-index-88",
       "kind": "BERATUNG",
-      "name": "Einbauschränke vor Vandalismus schützen: Beratung & Entscheidungen",
+      "name": "Einbauschränke gegen Beschädigung und unbefugten Zugriff schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14065,7 +14185,7 @@
     {
       "owner_key": "c22-topic-index-89",
       "kind": "BERATUNG",
-      "name": "Heizraum vor Vandalismus schützen: Beratung & Entscheidungen",
+      "name": "Heizraum gegen unbefugten Zugang absichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14073,7 +14193,7 @@
     {
       "owner_key": "c22-topic-index-90",
       "kind": "BERATUNG",
-      "name": "Heizkreisverteiler schützen: Beratung & Entscheidungen",
+      "name": "Heizkreisverteiler vor Manipulation und Beschädigung sichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14081,7 +14201,7 @@
     {
       "owner_key": "c22-topic-index-91",
       "kind": "BERATUNG",
-      "name": "Wasserabsperrung vor Manipulation schützen: Beratung & Entscheidungen",
+      "name": "Wasserabsperrungen vor unbefugter Betätigung schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14089,7 +14209,7 @@
     {
       "owner_key": "c22-topic-index-92",
       "kind": "BERATUNG",
-      "name": "Technikschränke schützen: Beratung & Entscheidungen",
+      "name": "Technikschränke sicher abschließen und überwachen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14097,7 +14217,7 @@
     {
       "owner_key": "c22-topic-index-93",
       "kind": "BERATUNG",
-      "name": "Sportplatz vor Vandalismus schützen: Beratung & Entscheidungen",
+      "name": "Sportplatz gegen Vandalismus wirksam sichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14105,7 +14225,7 @@
     {
       "owner_key": "c22-topic-index-95",
       "kind": "BERATUNG",
-      "name": "Bilgenwasser im Freizeitboot: Beratung & Entscheidungen",
+      "name": "Bilgenwasserwarnung und Pumpentechnik fürs Boot auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14113,7 +14233,7 @@
     {
       "owner_key": "c22-topic-index-96",
       "kind": "BERATUNG",
-      "name": "Bootskajüte: Beratung & Entscheidungen",
+      "name": "Feuchte und Schimmel in der Bootskajüte verhindern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14121,7 +14241,7 @@
     {
       "owner_key": "c22-topic-index-98",
       "kind": "BERATUNG",
-      "name": "Bootsabdeckung: Beratung & Entscheidungen",
+      "name": "Bootsabdeckung für Liegeplatz und Winterlager auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14129,7 +14249,7 @@
     {
       "owner_key": "c22-topic-index-99",
       "kind": "BERATUNG",
-      "name": "Poolleitungen: Beratung & Entscheidungen",
+      "name": "Poolleitungen sicher verlegen und Leckschäden vorbeugen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14137,7 +14257,7 @@
     {
       "owner_key": "c22-topic-index-104",
       "kind": "BERATUNG",
-      "name": "Dachrinnen & Fallrohre: Beratung & Entscheidungen",
+      "name": "Dachrinnen und Fallrohre richtig auswählen und schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14145,7 +14265,7 @@
     {
       "owner_key": "c22-topic-index-106",
       "kind": "BERATUNG",
-      "name": "Fensteranschlüsse: Beratung & Entscheidungen",
+      "name": "Fensteranschlüsse gegen Schlagregen sicher abdichten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14153,7 +14273,7 @@
     {
       "owner_key": "c22-topic-index-107",
       "kind": "BERATUNG",
-      "name": "Fassadenfugen & Anschlüsse: Beratung & Entscheidungen",
+      "name": "Fassadenfugen fachgerecht abdichten und sanieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14161,7 +14281,7 @@
     {
       "owner_key": "c22-topic-index-109",
       "kind": "BERATUNG",
-      "name": "Dachabläufe & Notentwässerung: Beratung & Entscheidungen",
+      "name": "Dachentwässerung und Notabläufe zuverlässig planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14169,7 +14289,7 @@
     {
       "owner_key": "c22-topic-index-110",
       "kind": "BERATUNG",
-      "name": "Gauben & Anschlüsse: Beratung & Entscheidungen",
+      "name": "Gauben und Dachanschlüsse dauerhaft regendicht ausführen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14177,7 +14297,7 @@
     {
       "owner_key": "c22-topic-index-111",
       "kind": "BERATUNG",
-      "name": "Kaminanschlüsse: Beratung & Entscheidungen",
+      "name": "Kaminanschlüsse gegen Regen und Feuchte abdichten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14185,7 +14305,7 @@
     {
       "owner_key": "c22-topic-index-112",
       "kind": "BERATUNG",
-      "name": "Balkonanschlüsse: Beratung & Entscheidungen",
+      "name": "Balkonanschlüsse fachgerecht sanieren und entwässern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14193,7 +14313,7 @@
     {
       "owner_key": "c22-topic-index-113",
       "kind": "BERATUNG",
-      "name": "Außentüren: Beratung & Entscheidungen",
+      "name": "Außentüren dauerhaft gegen Schlagregen abdichten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14201,7 +14321,7 @@
     {
       "owner_key": "c22-topic-index-116",
       "kind": "BERATUNG",
-      "name": "Wasserleitungen im Ferienhaus: Beratung & Entscheidungen",
+      "name": "Ferienhaus-Wasserleitungen winterfest und frostfrei halten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14209,7 +14329,7 @@
     {
       "owner_key": "c22-topic-index-117",
       "kind": "BERATUNG",
-      "name": "Rückstauklappen: Beratung & Entscheidungen",
+      "name": "Rückstauklappe passend auswählen und richtig einbauen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14217,7 +14337,7 @@
     {
       "owner_key": "c22-topic-index-118",
       "kind": "BERATUNG",
-      "name": "Hausschwamm im Gebäude: Beratung & Entscheidungen",
+      "name": "Hausschwamm erkennen und Sanierung fachgerecht beauftragen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14225,7 +14345,7 @@
     {
       "owner_key": "c22-topic-index-119",
       "kind": "BERATUNG",
-      "name": "Wasserschutz im Friseursalon: Beratung & Entscheidungen",
+      "name": "Wasserschutz in persönlich geführten Friseursalons planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14233,7 +14353,7 @@
     {
       "owner_key": "c22-topic-index-121",
       "kind": "BERATUNG",
-      "name": "Dusche undicht: Beratung & Entscheidungen",
+      "name": "Undichte Dusche: geeignete Reparatur und Abdichtung finden",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14241,7 +14361,7 @@
     {
       "owner_key": "c22-topic-index-122",
       "kind": "BERATUNG",
-      "name": "Spülkasten undicht: Beratung & Entscheidungen",
+      "name": "Undichten Spülkasten reparieren oder austauschen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14249,7 +14369,7 @@
     {
       "owner_key": "c22-topic-index-123",
       "kind": "BERATUNG",
-      "name": "Badewanne abdichten: Beratung & Entscheidungen",
+      "name": "Badewanne dauerhaft abdichten: geeignete Lösung wählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14257,7 +14377,7 @@
     {
       "owner_key": "c22-topic-index-124",
       "kind": "BERATUNG",
-      "name": "Siphon undicht: Beratung & Entscheidungen",
+      "name": "Undichten Siphon richtig ersetzen und anschließen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14265,7 +14385,7 @@
     {
       "owner_key": "c22-topic-index-125",
       "kind": "BERATUNG",
-      "name": "Waschbecken undicht: Beratung & Entscheidungen",
+      "name": "Waschbeckenanschlüsse sicher abdichten und reparieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14273,7 +14393,7 @@
     {
       "owner_key": "c22-topic-index-126",
       "kind": "BERATUNG",
-      "name": "Küchenspüle undicht: Beratung & Entscheidungen",
+      "name": "Undichte Küchenspüle reparieren oder erneuern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14281,7 +14401,7 @@
     {
       "owner_key": "c22-topic-index-128",
       "kind": "BERATUNG",
-      "name": "Überspannungsschutz im Wohnhaus: Beratung & Entscheidungen",
+      "name": "Überspannungsschutz im Wohnhaus fachgerecht planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14289,15 +14409,7 @@
     {
       "owner_key": "c22-topic-index-129",
       "kind": "BERATUNG",
-      "name": "Wohnmobil bei Sturm: Beratung & Entscheidungen",
-      "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
-      "wp_write": false,
-      "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
-    },
-    {
-      "owner_key": "c22-topic-index-130",
-      "kind": "BERATUNG",
-      "name": "Hagelschutz für Privatwagen: Beratung & Entscheidungen",
+      "name": "Wohnmobil bei Sturm passend abstellen und sichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14305,7 +14417,7 @@
     {
       "owner_key": "c22-topic-index-131",
       "kind": "BERATUNG",
-      "name": "Hochwasser am Privatwagen: Beratung & Entscheidungen",
+      "name": "Hochwasserschäden am Privatwagen vermeiden und reagieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14313,7 +14425,7 @@
     {
       "owner_key": "c22-topic-index-132",
       "kind": "BERATUNG",
-      "name": "Privatwagen bei Sturm: Beratung & Entscheidungen",
+      "name": "Privatwagen bei Sturm sicher abstellen und Schäden begrenzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14321,7 +14433,7 @@
     {
       "owner_key": "c22-topic-index-133",
       "kind": "BERATUNG",
-      "name": "Winterdienst auf Privatwegen: Beratung & Entscheidungen",
+      "name": "Winterdienst für private Wege sicher organisieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14329,7 +14441,7 @@
     {
       "owner_key": "c22-topic-index-134",
       "kind": "BERATUNG",
-      "name": "Gewächshaus bei Frost: Beratung & Entscheidungen",
+      "name": "Gewächshaus sinnvoll gegen Frost ausrüsten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14337,7 +14449,7 @@
     {
       "owner_key": "c22-topic-index-135",
       "kind": "BERATUNG",
-      "name": "Obstbäume bei Frost: Beratung & Entscheidungen",
+      "name": "Obstblüte gegen Spätfrost schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14345,7 +14457,7 @@
     {
       "owner_key": "c22-topic-index-136",
       "kind": "BERATUNG",
-      "name": "Kübelpflanzen bei Frost: Beratung & Entscheidungen",
+      "name": "Kübelpflanzen sicher durch den Winter bringen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14353,7 +14465,7 @@
     {
       "owner_key": "c22-topic-index-137",
       "kind": "BERATUNG",
-      "name": "Hecken bei Frost: Beratung & Entscheidungen",
+      "name": "Hecken vor Frostschäden schützen und pflegen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14361,7 +14473,7 @@
     {
       "owner_key": "c22-topic-index-138",
       "kind": "BERATUNG",
-      "name": "Sträucher bei Frost: Beratung & Entscheidungen",
+      "name": "Frostschutz für empfindliche Sträucher wählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14369,7 +14481,7 @@
     {
       "owner_key": "c22-topic-index-139",
       "kind": "BERATUNG",
-      "name": "Dachgeschoss vor Hitze schützen: Beratung & Entscheidungen",
+      "name": "Dachgeschoss wirkungsvoll gegen Sommerhitze schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14377,7 +14489,7 @@
     {
       "owner_key": "c22-topic-index-140",
       "kind": "BERATUNG",
-      "name": "Wintergarten im Sommer: Beratung & Entscheidungen",
+      "name": "Wintergarten wirksam kühlen und verschatten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14385,7 +14497,7 @@
     {
       "owner_key": "c22-topic-index-141",
       "kind": "BERATUNG",
-      "name": "Gartenbewässerung bei Trockenheit: Beratung & Entscheidungen",
+      "name": "Bewässerung im Garten bedarfsgerecht planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14393,7 +14505,7 @@
     {
       "owner_key": "c22-topic-index-142",
       "kind": "BERATUNG",
-      "name": "Fassadenverschattung: Beratung & Entscheidungen",
+      "name": "Fassadenverschattung passend auswählen und montieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14401,7 +14513,7 @@
     {
       "owner_key": "c22-topic-index-143",
       "kind": "BERATUNG",
-      "name": "Terrassenbeläge bei Hitze: Beratung & Entscheidungen",
+      "name": "Terrassenbelag für große Hitze richtig auswählen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14409,7 +14521,7 @@
     {
       "owner_key": "c22-topic-index-144",
       "kind": "BERATUNG",
-      "name": "Gartenbäume bei Trockenheit: Beratung & Entscheidungen",
+      "name": "Gartenbäume bei Trockenheit richtig versorgen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14417,7 +14529,7 @@
     {
       "owner_key": "c22-topic-index-145",
       "kind": "BERATUNG",
-      "name": "Bodenrisse am Grundstück: Beratung & Entscheidungen",
+      "name": "Bodenrisse am Grundstück fachlich beurteilen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14425,7 +14537,7 @@
     {
       "owner_key": "c22-topic-index-146",
       "kind": "BERATUNG",
-      "name": "Wohnmobil bei Hitze: Beratung & Entscheidungen",
+      "name": "Wohnmobil bei Hitze sicher und angenehm nutzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14433,7 +14545,7 @@
     {
       "owner_key": "c22-topic-index-147",
       "kind": "BERATUNG",
-      "name": "Privatwagen bei Hitze: Beratung & Entscheidungen",
+      "name": "Privatwagen vor starker Hitze schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14441,7 +14553,7 @@
     {
       "owner_key": "c22-topic-index-148",
       "kind": "BERATUNG",
-      "name": "Gartenhaus bei Hitze: Beratung & Entscheidungen",
+      "name": "Gartenhaus gegen Überhitzung sinnvoll nachrüsten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14449,7 +14561,7 @@
     {
       "owner_key": "c22-topic-index-149",
       "kind": "BERATUNG",
-      "name": "Hobbyraum bei Hitze: Beratung & Entscheidungen",
+      "name": "Hobbyraum gegen Hitze und Wärmestau schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14457,7 +14569,7 @@
     {
       "owner_key": "c22-topic-index-150",
       "kind": "BERATUNG",
-      "name": "Zeltmaterial im Sommer: Beratung & Entscheidungen",
+      "name": "Zeltmaterial vor UV-Schäden und Hitze schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14465,7 +14577,7 @@
     {
       "owner_key": "c22-topic-index-151",
       "kind": "BERATUNG",
-      "name": "Campingausrüstung bei Hitze: Beratung & Entscheidungen",
+      "name": "Campingausrüstung bei Sommerhitze richtig lagern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14473,7 +14585,7 @@
     {
       "owner_key": "c22-topic-index-152",
       "kind": "BERATUNG",
-      "name": "Mobile Hochwassersperren: Beratung & Entscheidungen",
+      "name": "Mobile Hochwassersperren passend auswählen und einsetzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14481,7 +14593,7 @@
     {
       "owner_key": "c22-topic-index-153",
       "kind": "BERATUNG",
-      "name": "Tiefgarage bei Starkregen: Beratung & Entscheidungen",
+      "name": "Tiefgarage vor Starkregen wirksam schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14489,7 +14601,7 @@
     {
       "owner_key": "c22-topic-index-154",
       "kind": "BERATUNG",
-      "name": "Hangrutschungen: Beratung & Entscheidungen",
+      "name": "Hangrutschungen am privaten Grundstück einschätzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14497,7 +14609,7 @@
     {
       "owner_key": "c22-topic-index-155",
       "kind": "BERATUNG",
-      "name": "Gartenböschungen schützen: Beratung & Entscheidungen",
+      "name": "Gartenböschung gegen Erosion stabilisieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14505,7 +14617,7 @@
     {
       "owner_key": "c22-topic-index-156",
       "kind": "BERATUNG",
-      "name": "Uferbefestigung am Privatgrundstück: Beratung & Entscheidungen",
+      "name": "Uferbefestigung am Privatgrundstück sinnvoll planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14513,7 +14625,7 @@
     {
       "owner_key": "c22-topic-index-157",
       "kind": "BERATUNG",
-      "name": "Gartenmauern bei Unterspülung: Beratung & Entscheidungen",
+      "name": "Gartenmauer bei Unterspülung fachgerecht sichern",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14521,7 +14633,7 @@
     {
       "owner_key": "c22-topic-index-158",
       "kind": "BERATUNG",
-      "name": "Gartenwege bei Unterspülung: Beratung & Entscheidungen",
+      "name": "Gartenwege gegen Unterspülung dauerhaft befestigen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14529,7 +14641,7 @@
     {
       "owner_key": "c22-topic-index-159",
       "kind": "BERATUNG",
-      "name": "Ladenlokal bei Hochwasser: Beratung & Entscheidungen",
+      "name": "Kleines Ladenlokal auf Hochwasser vorbereiten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14537,7 +14649,7 @@
     {
       "owner_key": "c22-topic-index-160",
       "kind": "BERATUNG",
-      "name": "Friseursalon bei Hochwasser: Beratung & Entscheidungen",
+      "name": "Friseursalon bei Hochwasser schützen und wiedereröffnen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14545,7 +14657,7 @@
     {
       "owner_key": "c22-topic-index-161",
       "kind": "BERATUNG",
-      "name": "PV-Anlage bei Sturm: Beratung & Entscheidungen",
+      "name": "PV-Anlage nach Sturm sicher prüfen lassen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14553,7 +14665,7 @@
     {
       "owner_key": "c22-topic-index-162",
       "kind": "BERATUNG",
-      "name": "Marder im Dach: Beratung & Entscheidungen",
+      "name": "Marder am Haus tiergerecht fernhalten",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14561,7 +14673,7 @@
     {
       "owner_key": "c22-topic-index-163",
       "kind": "BERATUNG",
-      "name": "Nager an Hausleitungen: Beratung & Entscheidungen",
+      "name": "Hausleitungen vor Nagerschäden schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14569,7 +14681,7 @@
     {
       "owner_key": "c22-topic-index-164",
       "kind": "BERATUNG",
-      "name": "Holzzerstörende Insekten am Haus: Beratung & Entscheidungen",
+      "name": "Holzschädlinge erkennen und Fachsanierung planen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14577,7 +14689,7 @@
     {
       "owner_key": "c22-topic-index-165",
       "kind": "BERATUNG",
-      "name": "Marderbiss am Auto: Beratung & Entscheidungen",
+      "name": "Marderschutz am Auto auswählen und richtig einsetzen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14585,7 +14697,7 @@
     {
       "owner_key": "c22-topic-index-166",
       "kind": "BERATUNG",
-      "name": "Nager im Wohnmobil: Beratung & Entscheidungen",
+      "name": "Wohnmobil gegen Nagerbefall im Winterlager schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14593,7 +14705,7 @@
     {
       "owner_key": "c22-topic-index-167",
       "kind": "BERATUNG",
-      "name": "Tierschäden am Freizeitboot: Beratung & Entscheidungen",
+      "name": "Freizeitboot vor Vogelnestern und Tierschäden schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14601,7 +14713,7 @@
     {
       "owner_key": "c22-topic-index-168",
       "kind": "BERATUNG",
-      "name": "Wühlmäuse im Garten: Beratung & Entscheidungen",
+      "name": "Gartenpflanzen vor Wühlmäusen schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14609,7 +14721,7 @@
     {
       "owner_key": "c22-topic-index-169",
       "kind": "BERATUNG",
-      "name": "Vogelschäden an Außentechnik: Beratung & Entscheidungen",
+      "name": "Außentechnik vor Vogelschäden schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14617,7 +14729,7 @@
     {
       "owner_key": "c22-topic-index-170",
       "kind": "BERATUNG",
-      "name": "Wildtierschäden am Garten: Beratung & Entscheidungen",
+      "name": "Gartenflächen vor Wildtierschäden schützen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14625,7 +14737,7 @@
     {
       "owner_key": "c22-topic-index-171",
       "kind": "BERATUNG",
-      "name": "Wildtierschäden an Zäunen: Beratung & Entscheidungen",
+      "name": "Zäune gegen Wildtierschäden verstärken und reparieren",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
       "wp_write": false,
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_OHNE_ARTIKELPRUEFUNG"
@@ -14648,6 +14760,12 @@
     "legacy_naming_individual_reviews": 93,
     "legacy_advice_specific_names": 93,
     "legacy_compare_specific_names": 91,
-    "negative_no_generic_legacy_advice": true
+    "negative_no_generic_legacy_advice": true,
+    "new_advice_individually_named": 127,
+    "advice_already_present_not_to_duplicate": [
+      10,
+      130
+    ],
+    "confirmed_owner_count": 265
   }
 }
