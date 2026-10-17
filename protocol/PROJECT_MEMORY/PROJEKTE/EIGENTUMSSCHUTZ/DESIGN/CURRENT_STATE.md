@@ -1,6 +1,23 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – NEUER SPRACHBEFUND AUS 265ER KATEGORIEN-GROBAUDIT: ALTER WP-OWNER 141
+Beim verifizierten alten Owner `Vandalismus & Zerstörung → Außentechnik → PV, Kamera & Beleuchtung` ist die sichtbare Kategoriebenennung unzureichend verständlich. Das Kategoriebüro hat alle 265 alten/neuen Seiten geprüft; **neue Pflichtregel FAQ + Beratung** für jede Seite und nur individuelle weitere Rubriken ist im GitHub-Zielvertrag aktualisiert. Dies ist ein **Fach-/Inhaltsdelta**, KEIN schon installierter Designfix.
+
+**Gezielte Darstellungsvorschläge (noch NICHT live übernommen):**
+- Megamenü-Kurzlabel `PV, Kameras & Licht`
+- H1 `PV-Anlagen, Kameras und Außenbeleuchtung vor Vandalismus schützen`
+- Einführung `Wie Sie Photovoltaikanlagen, Kameras, Leuchten und Leitungen gegen mutwillige Beschädigung und Manipulation sichern.`
+- Bestehende Kategorien unter identischen alten Term-IDs: **205** `Überwachungskameras vor Sabotage schützen`, **273** `PV-Anlagen und Kabel vor Beschädigung schützen`, **304** `Außenbeleuchtung vor Vandalismus schützen`.
+
+**Schutzregel:** Ohne expliziten eigenen Design-Arbeitsschritt **keine Änderung an physischen WordPress-Term-Namen, Slugs, URLs, Seiten-IDs oder Artikelverbindungen**. Kurzlabel/H1/Begleittext dürfen verständlicher sein als historischer Seitentitel; echte SEO-URLs bleiben bestehen. Die 475 noch nicht importierten FAQ/Beratungs-/Vergleichs-/Sonderkategorien sind **nicht durch bloßes Umbenennen im Design herstellbar**.
+
+**Design-NEXT ACTION, nach Fachdeltas gesondert:** Verständliche, identitätserhaltende Label-/Einführungsausgabe in **dem einen bestehenden Designplugin** umsetzen und sichtbaren echten PHP-/HTML-Ausgabeweg lokal positiv/negativ testen; kein doppeltes Designplugin, kein Kategorienimport. Design 0.1.22-Megamenü-Status aus vorherigem Abschnitt bleibt unverändert.
+
+---
+
+
+
 ## 17.10.2026 – AKTUELL: MEGAMENÜ-FEHLER ECHT BEHOBEN IM LOKAL GEPRÜFTEN DESIGNPLUGIN 0.1.22 (NICHT LIVE INSTALLIERT)
 **Auslöser:** Nutzer-Screenshot von 13:15 Uhr nach abgeschlossenen 743+472 Kategorienimporten zeigt im real sichtbaren Wetter-Megamenü nur **fünf Bereichsgruppen in einer Reihe** und **unberechtigtes „Alle Themen“ in allen fünf Spalten und am Welt-Kopf**. Der Screenshot ist ein Live-Frontendbeleg für die Fehler, nicht für eine bereits installierte Korrektur.
 
