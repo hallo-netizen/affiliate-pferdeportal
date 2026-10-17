@@ -958,3 +958,33 @@ REGRESSIONSSCHUTZ:
 BEZUG:
 ARCH-089.
 
+## BAU-043 – Repository-/Branch-Aufräumung ohne eigene Current-Autorität
+
+STATUS: OPEN / BLOCKED FÜR WEITERE LÖSCHENTSCHEIDUNGEN
+
+KURZ:
+Die Campusregel verlangt pro Arbeitsbereich genau eine Current-Autorität. Für die Repository-/Branch-Aufräumung besitzt `AUTORITAETSPLAN.json` aktuell jedoch keinen eigenen Scope und damit keine zuständige Current-Autorität.
+
+BEFUND 2026-10-17:
+- Hausmeister und Cleanup-Protokolle sind ausdrücklich nur Verwaltungs-/Nachweisquellen;
+- `ACTIVE_BRANCHES.json` ist Registry/Schutzliste, keine Current-Autorität;
+- `protocol/CAMPUS_CLEANUP_MAIN_ROOT_20261016.md` ist ausdrücklich Aufräumbeleg, keine Current-Autorität;
+- physischer Branchbestand aktuell 494;
+- Branch-Audit-Checkpoint: 291/467 geprüft, 176 offen;
+- der frühere Sprung von 780 auf 494 Branches ist nicht als eigener Löschvorgang im Hausmeister-/Cleanup-Protokoll nachvollziehbar.
+
+AUSWIRKUNG:
+Ein Folgechat kann zwar den GitHub-Istzustand messen, darf nach der Ein-Wahrheit-Regel aber keine eigene Status-/NEXT-ACTION-Wahrheit aus Registry, Hausmeisterprotokoll und Übergabe zusammensetzen.
+
+KISS-FIX:
+Vor weiteren echten Branch-Löschentscheidungen den bestehenden Campus-Routingstandard minimal ergänzen: genau einen Repository-/Branch-Cleanup-Scope an genau eine Current-Autorität binden. Keine neue Fachlogik, kein neuer Runner, keine Änderung an K0/Affiliate/Plugins.
+
+BIS DAHIN:
+- Audit/Read-only-Prüfung darf als Evidence fortgesetzt werden;
+- keine Löschfreigabe aus `ahead=0` allein;
+- keine aktive Fach-Current verändern;
+- keine Branches/PRs löschen.
+
+BEZUG:
+ARCH-089 / ARCH-094 / HM-007 / `ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`.
+
