@@ -1,6 +1,16 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – 1.14.8.31 LOKAL EINSATZFERTIG GEPRÜFT – ORIGINAL-C2.2, FRONTEND UND FEHLERFÄLLE
+**Verbindlicher aktueller technischer Stand**: kompletter bestehender `affiliate-portal-kategorie-workflow` als **1.14.8.31** für zweiten 472-ADD-only-Lauf fertig entwickelt. Originalprofil `1.14.8.30` unberührt, bestehende 743 C2.2-Objekte nicht erneut importiert. Neuer Nachweis: `PLUGIN_SECOND_WAVE_SOURCE/INTEGRATION_REAL_ORIGINAL_C22_FRONTEND_GESAMTPRUEFUNG_20261017.md`.
+**Erweiterte Integrationstests real am PHP-Code:** ursprünglicher C2.2-`completion_audit()` PASS mit genau 743 Originaljobs sowohl vor als auch nach dem 472er-Lauf; neue `completion_audit()` ebenfalls PASS; alle **472 neuen Begriffe** durch echten `APKW_FrontendStructure::render_page_structure()` als Links an ihren **172 bisherigen konkreten Themenseiten** sichtbar; simulierte SNAP/REV-Speicherunterbrechung vollständig zurückgerollt; weltweit unter 472 neuen Namen **keine identischen** und gegen 566 ursprüngliche C2.2 + 285 alte Begriffe ebenfalls **0 Namenskollisionen**. Plus bereits vorhandene 30-Schreibvorgänge-Rollbackprüfung und 32/32 PHP-Lints. **Nur lokale WordPress-Mockumgebung; kein Live-Test behauptet.**
+
+**Fertig bereitgestelltes vollständiges ZIP** (38 Dateien, 265.246 Bytes, CRC PASS, SHA-256 `6cd47955df14a65d681c7508e1674be94e98cad4dd68df5a6605ce8ef534d933`) unter `PLUGIN_SECOND_WAVE_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.31.zip.b64` und `decode_release.py` im GitHub-Kategorienbüro. Quellcode, Änderungsrezept und manifestierte 472 IDs dort ebenfalls gesichert. **GENAU EINE NEXT ACTION**: Vorhandenes WordPress-Plugin auf diese fertig getestete 1.14.8.31 aktualisieren; danach eingebautes 472er Preflight mit 0 Writes ausführen und die 472 neuen Begriffe nur über separate ausdrückliche Freigabe anlegen. **Keinen** alten 743er-Import wiederholen, nichts neu exportieren, keine Artikel/zweite Pluginarchitektur.
+
+---
+
+
+
 ## 17.10.2026 – AKTUELLSTER PRODUKTIONSSTAND: EXISTIERENDES KATEGORIEPLUGIN 1.14.8.31 MIT 472 ZUSATZKATEGORIEN REAL IMPLEMENTIERT
 **Implementiert und lokal vollständig getestet, noch NICHT live installiert.** Die neue Version 1.14.8.31 entsteht unverändert aus dem vollständigen Originalplugin 1.14.8.30 plus einer separaten **472-category-only-ADD-Wave** im selben `APKW_TargetWriter`-System. 172 bestehende Seite3-Parents; 172 FAQ, 172 Vergleiche, 102 zusätzliche Fachkategorien, 26 neu begründete Bereiche. Grobe Inhaltstragfähigkeit ca. 3–5 mögliche spätere Beiträge, keine Einzelartikelproduktion. Unveränderter Originalbestand 743 erfolgreich importierte Objekte plus 285 historische WordPress-Kategorien mit vier dokumentierten Artikelbindungen. Nutzer hat nach Import keine WordPress-Änderung durchgeführt. **Keinen erneuten Benutzer-Liveexport verlangen.**
 
