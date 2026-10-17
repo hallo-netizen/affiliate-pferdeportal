@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – PLUGIN 1.14.8.31 JETZT ERWEITERT LOKAL INTEGRATIONSGEPRÜFT
+Der bereits vollständig entwickelte und in GitHub gesicherte Kategorieplugin-Build `1.14.8.31` mit **472 zusätzlichen flachen WP-Kategorien** wurde auch gegen den **echten alten C2.2-PHP-Importer** und den **echten APKW-Frontend-Renderer** lokal getestet, nicht nur gegen isolierte Mock-Validatoren. **Original-C2.2-Abschlussprüfung 743/743 PASS vor und nach der zweiten Welle; 472/472 zusätzliche Kategorien in 172 originalen Themenseiten korrekt verlinkt; Recovery nach Zwischenabbruch SNAP/REV PASS; 0 identische Term-Namen gegen die 566 C2.2- und 285 geschützten Altterms.** Alle 32 PHP-Dateien syntaktisch geprüft; 38 Dateien im vollständig CRC-geprüften ZIP. Kein WordPress-Live-Write.
+
+**Einziger aktuelle Releasebeleg** `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/RELEASE_STATUS_20261017.md` plus neue separate Integrationstestdokumentation `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/INTEGRATION_REAL_ORIGINAL_C22_FRONTEND_GESAMTPRUEFUNG_20261017.md`. Vollständiger Build **im GitHub-Kategorienbüro** als `.zip.b64` mit `decode_release.py`, SHA-256 `6cd47955df14a65d681c7508e1674be94e98cad4dd68df5a6605ce8ef534d933`.
+
+**Status:** Fertiges lokal geprüftes Update des **bestehenden** Plugins, keine zweite Architektur, kein neuer WordPress-Export, keine Artikel. **NEXT ACTION:** Installationsschritt der 1.14.8.31 in WordPress, dort ausschließlich separat freizugebende 472er-Welle (kein 743er-Reimport). Echte WordPress-Live-Ausführung/Frontendprüfung bleibt bis Installation ausdrücklich offen.
+
+---
+
+
+
 ## 17.10.2026 – NEUESTE TATSÄCHLICHE UMSETZUNG: PLUGIN 1.14.8.31 MIT 472 ADD-ONLY-KATEGORIEN FERTIG PROGRAMMIERT (LOKAL GEPRÜFT)
 **Die Arbeit ist nicht mehr nur ein Konzept oder Mapping.** Das bestehende WordPress-Kategorieplugin 1.14.8.30 wurde lokal als vollständige Version **1.14.8.31** um die echte zweite Importwelle mit 472 additiven flachen WordPress-Artikelkategorien erweitert. 172 FAQ + 172 Vergleiche + 102 fakultative Vertiefungen + 26 individuelle Ergänzungen. **Keine Einzelartikel, kein Kategorien-Schablonenzwang**; grobe thematische Breite/Tiefe für mindestens ca. 3–5 spätere Beiträge bleibt der inhaltliche Maßstab. Unveränderter Importbestand: 5+172+566=743 alte C2.2-Einspielungen, 285 historische Terms und vier historische Artikelzuordnungen geschützt. Nutzer bestätigt keine eigene WordPress-Änderung; **kein neuer Nutzerexport erforderlich**.
 
