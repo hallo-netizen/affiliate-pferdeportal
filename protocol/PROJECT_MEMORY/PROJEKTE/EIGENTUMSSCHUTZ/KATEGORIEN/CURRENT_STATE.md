@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – C2.3 471-NACHHOLIMPORT: FERTIGES BESTEHENDES PLUGIN 1.14.8.32, LOKAL GESAMTGEPRÜFT
+**Neue aktuelle Arbeitswahrheit, älteren 471/475/490-Konzeptständen und „erst Plugin programmieren“ vorgeordnet:** Das bestehende `affiliate-portal-kategorie-workflow` wurde aus dem **originalen 1.14.8.31-ZIP** vollständig als **1.14.8.32** erweitert. Fertiges vollständiges Installations-ZIP: **308081 Bytes, 40 Dateien/33 PHP-Dateien, SHA256 `e72e30aa6f9394e62d64cfcc29fca7848399dbd9787b619da7d4fd80f170b79e`**. Alles ausschließlich in GitHub-**Kategorienbüro** `C23_THIRD_WAVE_SOURCE/` dauerhaft gespeichert: `RELEASE_STATUS_20261017.md`, originaler neuer PHP-Code, **byteidentisches** 471er-Runtime-Manifest, echter PHP-Integrationstest, vollständiges ZIP als `.zip.b64` plus `decode_release.py`. GitHub-ZIP-Blob wurde mit dem lokalen Releasebytebestand gegengeprüft, 40/40 ZIP-CRC und 33/33 PHP-Lint PASS.
+
+**Verbindlicher Umfang:** 471 tatsächliche noch NICHT live angelegte, fachlich begründete End-Artikelkategorien aus dem GitHub-V4-Stand (93 FAQ, **220 Beratungen**, 91 Vergleiche, 67 individuelle Vertiefungen). 340 bei **93 geschützten alten WP-Seite3-ID-Ownern**, 131 bei bereits vorhandenen C2.2-Themenseiten. 265 alte/neue Themen insgesamt, vorhandene FAQ/Beratung/Vergleich nicht dupliziert. Alle 285 Altterms, 566 ursprünglichen C2.2-Kategorien, 472 bereits live ergänzten Kategorien = **1323** geschützt, einschließlich vier dokumentierter alter Artikel-/Termbindungen. Kein Reimport der 743 + 472 Objekte, keine neuen WP-Seiten, keine Kategorietiefe und keine Artikelproduktion.
+
+**Echte ausgeführte lokale Prüfungen:** 471/471 Kategorieanlagen auf simuliertem WP, echte alte C2.2-743-Auditklasse + echte 472-Auditklasse + echte neue 471-Auditklasse alle PASS nach vollständigem Durchlauf; tatsächlicher `APKW_FrontendStructure`-Renderer zeigt **471/471 Kategorielinks an 220 korrekten Eltern-Themenseiten**. Negativ: 30er-Writeabbruch sicher rückgebaut, unauffindbarer physischer Altseiten-Owner und fehlender Altterm blockieren vor dem Schreiben, SNAP-/REV-Endprüfungsabbruch vollständig zurückgerollt, belegter neuer Term darf NICHT gelöscht werden. **Testgrenze ausdrücklich: lokale WordPress-Mocks, keine Live-Installation und kein unabhängiger echter WP-Live-Endtest.**
+
+**EINZIGE NEXT ACTION:** Normales Update **des vorhandenen zentralen Kategorieplugins** auf 1.14.8.32, danach im bereits bekannten Adminmenü `Portal-Kategorien → C2.2 Kategorien` die separate neue **C2.3-Vorschau für 471** ohne Writes ansehen und den **nur separat explizit bestätigten dritten ADD-only-Import** ausführen; Abschlussmeldung prüfen. Alte 743er und 472er nie erneut starten. Keine neue Bibliothek oder Benutzer-Readbackanforderung. Alte H1/Kacheltitel wie „Kameras & Licht vor Sabotage“ gehören später in **Design**, nicht als stille Änderung bestehender Kategorien.
+
+---
+
+
+
 ## 17.10.2026 – AKTUELL C2.3: ALLE 265 THEMENSEITEN INDIVIDUELL AUF ARTIKELKATEGORIEN GEPRÜFT
 **Fachlicher Ausgangsfehler exakt geklärt:** Beim erfolgreichen Import 743 + 472 wurden FAQ und Vergleiche **nur an den 172 neuen C2.2-Seite3-Themen** ergänzt; die weiterhin sichtbaren 93 alten R3-Seite3-Themen hatten aus dem alten Stand nur 285 traditionelle Artikelkategorien und **0 explizite FAQ/0 Vergleiche**. Nutzer verlangt **FAQ und Beratung bei allen 265**; Vergleich fast überall; Kosten/Wartung/Fehler/Installation/Anwendung nur nach eigenem Sinn und grob genügend Thema für 3–5 spätere Beiträge. Einzelartikel oder Texte sind nicht Gegenstand dieser Arbeit.
 
