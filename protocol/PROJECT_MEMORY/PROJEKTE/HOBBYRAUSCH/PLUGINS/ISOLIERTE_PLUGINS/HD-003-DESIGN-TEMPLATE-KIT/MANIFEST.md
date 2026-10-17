@@ -1,36 +1,51 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
+STAND: 2026-10-17
+STATUS: **LIVE 1.50.668 / 1.50.669 V7.1-WIP LOCAL PASS / NICHT RELEASEFÄHIG / CURRENT.zip NICHT SYNCHRONISIERT**
+
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-AKTUELLER BELASTBARER KANDIDAT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.664_HOBBY_DEPOT_MENU_HUB1_PREVIEW_LOCALPASS.zip`
-
-BASISVERSION:
-`1.50.650`
-
-KANDIDATENVERSION:
-`1.50.664`
-
-SHA-256:
-`73dfdc40792b1d550aaff6343aab9e9a4ca713988e0aa0c1957825b42ed4e2f9`
-
-AUTORITATIVE QUELLE:
-`PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
-
-PRÜFSTATUS:
-**LOCAL PASS / LIVE READBACK OFFEN**
-
-LOKAL BELEGT:
-- Mega-Menü aktuelle Gleichzahl 5;
-- Hauptwelt-Hero/Textkopf Desktop/Tablet/Mobil geprüft;
-- 65/65 Vorschauen aus aktuellem Hero abgeleitet;
-- 0 Hero-Dateien verändert;
-- 58/58 PHP-Syntax PASS;
-- ZIP-Integrität und Roundtrip PASS.
+NAME:
+`Affiliate Portal Template Kit – Hobby Depot Profil`
 
 LIVE:
-Noch kein Live-PASS.
+`1.50.668`
 
-CURRENT.zip-STATUS:
-**OFFEN / IM GITHUB-CAMPUS NICHT VORHANDEN.**
+WIP:
+`1.50.669`
+
+AUTORITATIVE PLUGIN-WAHRHEIT:
+`../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+FACH-CURRENT:
+`../../../DESIGN/CURRENT_STATE.md`
+
+WIP LOCAL QA:
+- Registry = einzige Strukturquelle;
+- komplette V7.1-Struktur ohne Render-/Route-Mismatch;
+- 381 terminale Hobbyseiten;
+- echte Mega-Zwischenbereiche 7 / 10 / 9 / 8 / 9 / 7 / 8 / 9;
+- alle 8 Mega-Menüs lokal responsiv geprüft;
+- 1920 bis 390 px ohne horizontalen Overflow;
+- PHP 61/61 PASS;
+- kein generischer Weltbild-Fallback.
+
+RELEASE-GATE OFFEN:
+exakt sechs Hero+Preview-Paare:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen;
+- Suchen & Finden;
+- Modellbau;
+- Holz & Natur.
+
+`Holz & Natur`: vorhandenes Holzmotiv ist semantisch zu eng → REPLACE_REQUIRED.
+
+CURRENT.zip:
+**NICHT synchronisiert.**
+
+GRUND:
+1.50.669 ist noch WIP. Vor einem isolierten Artefakt sind die sechs Bildpaare, finaler ZIP-Roundtrip, Browser-QA und danach echter Live-Readback erforderlich.
+
+Dieses Manifest ist Artefaktstatus/Evidence, keine zweite Current-Wahrheit.
