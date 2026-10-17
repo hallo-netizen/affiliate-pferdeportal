@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – VERBINDLICHE NACHHOLPRÜFUNG ÜBER ALLE 265 THEMENSEITEN (NEUESTE FACHWAHRHEIT)
+Auf ausdrückliche Nutzerkorrektur wurde die **gesamte letzte Seitenebene** geprüft: **93 alte R3-Themenseiten + 172 neue C2.2-Themenseiten**. **FAQ und Beratung sind Pflicht** (Beratung nicht doppeln, falls fachlich bereits vorhanden), Vergleich nahezu überall, alle anderen Bereiche (Kosten, Pflege, Wartung, Fehler, Montage, Schadenfall, Organisation etc.) **nur bei unabhängigem Mehrwert und grob ca. 3–5 möglichen späteren Beiträgen**. Anfänger und erfahrene Nutzer in den Beratungsbedarf einbeziehen. Keine Artikel-/Titelkonzeption.
+
+**Resultat als GitHub-Fachquelle:** `../KATEGORIEN/C23_265_THEMEN_EBENENPRUEFUNG_20261017.json` V3 mit individuellen Ownern, vorhandener Rubrikstruktur und fachlichen Entscheidungsgründen; kompakter Bericht `../KATEGORIEN/C23_ALLE_265_INHALTSTIEFE_ERGEBNIS_20261017.md`. **475 noch nicht importierte Vorschläge:** 93 FAQ, 222 Beratung, 91 Vergleich und 69 individuelle Vertiefungen (340 alte, 135 neue Owners). 45 zu schwache oder überlappende weitere Ideen ausdrücklich verworfen. Kein standardisiertes Pflege-/Kosten-/Fehler-Schema. Die bereits importierten 743+472 ursprünglichen C2.2-Objekte sind damit NICHT als Konzept vollumfänglich abgeschlossen gewesen; ihre erfolgreiche physische WordPress-Anlage bleibt unberührt.
+
+**Bezeichnungsproblem gesondert erkannt:** unter `Vandalismus & Zerstörung → Außentechnik → PV, Kamera & Beleuchtung` (alte WP-Seite3-ID 141) die unsinnigen Titel „Kameras & Licht vor Sabotage“, „PV-Technik & Kabel“. Die sichtbaren Bezeichnungen und H1 sollen verständlich korrigiert werden, aber **Term-IDs, Slugs und URLs unverändert**. Fachvorschläge und Display-Overrides stehen in V3, noch keine Live-Designänderung.
+
+**GENAU EINE NEXT ACTION:** Das Kategorienbüro setzt den 475er Fachdelta-Katalog mit echter ADD-only-Technik im BESTEHENDEN Kategorieplugin um, testet sicher und holt vor Live-Sync eine getrennte Freigabe ein. Keine neue Kategoriearchitektur und keine Einzelartikelprüfung. Fachliche 265er-Grobprüfung ist dokumentiert; nur neue konkrete fachliche Befunde können sie ändern.
+
+---
+
+
+
 ## 17.10.2026, 13:13 Ortszeit – C2.2-KATEGORIENSTRUKTUR ERFOLGREICH LIVE ERGÄNZT
 **Aktueller Fachstand nach echtem Nutzer-Screenshot, verdrängt ältere Installations- und Freigabeaufträge:** Im WordPress-Admin des bestehenden Kategorieplugins ist die grüne Meldung **„472 Ergänzungen abgeschlossen und geprüft.“** sichtbar. Der frühere grüne **743er-C2.2-Abschluss** (5 neue Schutzbereiche, 172 konkrete Themen, 566 flache Artikelkategorien) bleibt sichtbar. Die 472 zusätzlichen themenbezogenen Artikelkategorien sind damit **laut Live-Plugin erfolgreich importiert und abgeschlossen**: 172 FAQ, 172 Vergleiche, 102 weitere Bereiche und 26 individuelle Vertiefungen. Die **285 historischen Kategorien und 93 alten Themenseiten** werden laut Abschlussprüfung geschützt. Keine Artikel geschrieben und keine vierte Seite- oder verschachtelte Kategorieebene eingeführt.
 **Wichtig:** Die alte NEXT ACTION „Plugin 1.14.8.31 installieren“ bzw. „472er-Import starten“ ist **erledigt**, nicht noch offen. Kein weiterer Export, Reimport, Neuaufbau oder neuer Writer. Dieser Status beruht auf dem sichtbaren Original-Admin-Screenshot und der eigenen Abschlussmeldung des Plugins, nicht auf einem unabhängigen vollständigen DB-Abgleich.
