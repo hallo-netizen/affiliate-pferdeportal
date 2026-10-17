@@ -1,5 +1,20 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 17.10.2026 – DESIGN 0.1.31 – TECHNIK-BILD UND RATGEBERKOPF (LOKAL GEPRÜFT)
+**Current-Artefakt:** Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.31_TECHNIK_RATGEBER_FIX.zip`. Downloadfähige vollständige Original-Plugin-ZIP, `hab-bewahr-design-vorschau`. SHA-256 `d60fd2663635ef3a66cff65434d9568fc15f15e64cdd0db777fead6df06c73a0`. Nur drei ältere Dateien gegenüber 0.1.30 geändert (`assets/style.css`, `includes/world-layout.php`, Plugin-Hauptdatei inklusive CSS-Cache-Version 0.1.31), genau eine neue WebP-Bilddatei. Alle weiteren Dateien unverändert.
+
+**Nutzerbericht:** Screenshot 17.10.2026 19:16–19:17: Technik „Tore & Zugangstechnik“ thematisch unscharfes/unpassendes Foto, Ratgeberüberschrift „Ratgeber & Themen“ am oberen Rand abgeschnitten. Breadcrumbs sollen ausdrücklich **unter** dem Hero bleiben.
+
+**Korrektur:** Spezifisch für Technik „Tore & Zugangstechnik“ ein neues, hochauflösendes, zu den anderen sechs Technikbildern eigenständiges Garten-/Tormotiv (1672×941) im bisherigen 1,7:1-Kachelrahmen. Der Ratgeberabschnitt auf den sechs Hauptwelten erhält die eigene Klasse `hbdp-world-reading-head` statt des gemeinsam genutzten `hbdp-world-section-head`, mit normalem Höhenfluss, sichtbarem Titel und Beschreibung und Mindestabstand zur folgenden Kartenreihe. Kein Hero-/Breadcrumb-/Kategorienimport- oder sonstiger Designumbau. Ausschließlich namensbezogene Technik-Zuordnung ergänzt, unabhängig von alten C2.2-IDs.
+
+**Prüfungen:** PHP 8/8 Syntax PASS; 6 echte lokale Browser-Chromium-Renderings aus dem realen `hbdp_render_world_page`-PHP (Technik mit 7 C2.2-Bereichen, Vandalismus mit 5; je 980/390/1440px). H2 und Beschreibung vollständig innerhalb eigener Kopfbox, Abstand zur folgenden Kachelreihe ≥15px, kein Überlauf; alle Kachelfotos laden mit mindestens 900px Quelle; 7/7 Technik-Fotos visuell verschieden, 5/5 Vandalismus-Fotos visuell verschieden. ZIP Integrität PASS (91 Dateien). Browser mittels gerendertem HTML und eingebetteter realer CSS/Bilddaten, weil Headless-Chromium lokale URL-Navigation systemseitig blockiert. **Die Original-Live-WordPress-Webseite ist nicht erreichbar und nicht live abgenommen.** Lokale Simulation reproduzierte das reale Clipping aus dem Nutzerscreenshot nicht; sie verifiziert die robustere Ausgabe und zeigt die Textzeilen vollständig, ersetzt aber keine Liveabnahme.
+
+**EINE NEXT ACTION:** Bestehendes Designplugin via ZIP 0.1.31 als Update installieren und auf echten Technik-/Vandalismus-Seiten Ratgeberkopf, neue Tore-Kachel, Breadcrumbs und Mobilansicht prüfen. Wenn der Ratgeberkopf live weiterhin angeschnitten wirkt, reale Überlagerung/CSS aus Live-DOM prüfen und nicht blind weitere CSS-Fixes anhängen.
+
+---
+
+
+
 ## 17.10.2026 – DESIGN 0.1.30 – KORREKTUR GEPRÜFT, LIVE-ABNAHME OFFEN
 **Aktuelles Artefakt:** Persönliche Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.30_GEPRUEFT.zip` (kompletter bestehender WordPress-Pluginordner). SHA-256 `0d41e99e23d256a07d8a3ee95d13113479a78ee2b79119a6856d90597c38b92c`. Vorversion 0.1.29 wurde lokal entpackt und nur `includes/world-layout.php`, Plugin-Versionsheader sowie vier ergänzende WebP-Dateien geändert; alle anderen Dateien bytegleich, keine Kategorie- oder Inhaltsdaten geschrieben.
 
