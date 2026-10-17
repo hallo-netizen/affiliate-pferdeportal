@@ -1,6 +1,15 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026, 13:13 Ortszeit – C2.2-KATEGORIENSTRUKTUR ERFOLGREICH LIVE ERGÄNZT
+**Aktueller Fachstand nach echtem Nutzer-Screenshot, verdrängt ältere Installations- und Freigabeaufträge:** Im WordPress-Admin des bestehenden Kategorieplugins ist die grüne Meldung **„472 Ergänzungen abgeschlossen und geprüft.“** sichtbar. Der frühere grüne **743er-C2.2-Abschluss** (5 neue Schutzbereiche, 172 konkrete Themen, 566 flache Artikelkategorien) bleibt sichtbar. Die 472 zusätzlichen themenbezogenen Artikelkategorien sind damit **laut Live-Plugin erfolgreich importiert und abgeschlossen**: 172 FAQ, 172 Vergleiche, 102 weitere Bereiche und 26 individuelle Vertiefungen. Die **285 historischen Kategorien und 93 alten Themenseiten** werden laut Abschlussprüfung geschützt. Keine Artikel geschrieben und keine vierte Seite- oder verschachtelte Kategorieebene eingeführt.
+**Wichtig:** Die alte NEXT ACTION „Plugin 1.14.8.31 installieren“ bzw. „472er-Import starten“ ist **erledigt**, nicht noch offen. Kein weiterer Export, Reimport, Neuaufbau oder neuer Writer. Dieser Status beruht auf dem sichtbaren Original-Admin-Screenshot und der eigenen Abschlussmeldung des Plugins, nicht auf einem unabhängigen vollständigen DB-Abgleich.
+**GENAU EINE NEXT ACTION:** Kategorieaufbau als in WordPress operativ abgeschlossen markieren; bei künftiger konzeptioneller Arbeit ausschließlich neue fachlich begründete Anforderungen bearbeiten. Frontend-Design/Navigation ist separater Arbeitsbereich, nicht erneut Kategorie-Import.
+
+---
+
+
+
 ## 17.10.2026 – PLUGIN 1.14.8.31 JETZT ERWEITERT LOKAL INTEGRATIONSGEPRÜFT
 Der bereits vollständig entwickelte und in GitHub gesicherte Kategorieplugin-Build `1.14.8.31` mit **472 zusätzlichen flachen WP-Kategorien** wurde auch gegen den **echten alten C2.2-PHP-Importer** und den **echten APKW-Frontend-Renderer** lokal getestet, nicht nur gegen isolierte Mock-Validatoren. **Original-C2.2-Abschlussprüfung 743/743 PASS vor und nach der zweiten Welle; 472/472 zusätzliche Kategorien in 172 originalen Themenseiten korrekt verlinkt; Recovery nach Zwischenabbruch SNAP/REV PASS; 0 identische Term-Namen gegen die 566 C2.2- und 285 geschützten Altterms.** Alle 32 PHP-Dateien syntaktisch geprüft; 38 Dateien im vollständig CRC-geprüften ZIP. Kein WordPress-Live-Write.
 
