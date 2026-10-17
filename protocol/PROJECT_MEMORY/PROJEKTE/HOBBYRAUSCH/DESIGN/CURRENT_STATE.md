@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 + ALTER 330ER SNAPSHOT / 1.50.669 V7-MEGA-RENDERER LOCAL PASS / NICHT RELEASED / V7 NICHT LIVE**
+STATUS: **LIVE 1.50.668 + ALTER 330ER SNAPSHOT / 1.50.669 V7.1-MEGA-RENDERER LOCAL PASS / NICHT RELEASED / V7.1 NICHT LIVE**
 
 ## Live-Wahrheit
 
@@ -24,7 +24,7 @@ Mega-Menü unterscheidet jetzt korrekt:
 - echte Zwischenbereiche = Mega-Spalten;
 - direkte Hobbys/Orientierungsseiten wie Heimwerken/Gärtnern = nur Weltseite, keine zusätzliche Mega-Spalte.
 
-V7-Mega-Zahlen:
+V7.1-Mega-Zahlen:
 Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 · Bewegen 8 · Sammeln 9.
 
 Darstellung:
@@ -35,9 +35,9 @@ Darstellung:
 - keine Roh-`get_pages()`-Struktur;
 - Registry fail-closed.
 
-## Local QA V7
+## Local QA V7.1
 
-V7-Profil:
+V7/V7.1-Strukturprofil:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_V7_CALIBRATED_ROLLOUT_20261017.json`
 
 Browser-QA:
@@ -77,7 +77,7 @@ PASS:
 
 1.50.668 enthält die bisherige zentrale Hero-/Preview-Logik.
 
-Vor V7-Live-Sync brauchen neue direkte Hub2 gemäß Bildvertrag eigenes geprüftes Hero + daraus abgeleitete Preview:
+Vor V7.1-Live-Sync brauchen neue direkte Hub2 gemäß Bildvertrag eigenes geprüftes Hero + daraus abgeleitete Preview:
 - Spotting & Verkehr;
 - Citizen Science;
 - Natur bestimmen;
