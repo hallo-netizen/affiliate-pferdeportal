@@ -1,0 +1,29 @@
+--- a/includes/class-pste-normal-metadata-path.php
++++ b/includes/class-pste-normal-metadata-path.php
+@@ -198,9 +198,23 @@
+             $base['domain_risk']=$risk;
+             if(!empty($risk['ok'])){
+                 $base['article_type']=$candidateType;
+-                // Four-step halt is honest: if the already-existing title
+-                // validator has not finished, stop at TITLE, not at category.
+-                // If title is valid but taxonomy ambiguous, stop at CATEGORY.
++                // WORKER 4: The existing complete-tree structure audit is evidence,
++                // not a second category selector. NO_MATCH in the Fach family
++                // index must NOT be confused with a genuinely missing WordPress
++                // category: the Magazine categories are independent of this index.
++                // Only the real term readback in the existing signed Journal/Fach
++                // route may place a finished title in CATEGORY_ROOM_TOPIC_POOL.
++                $base['family_structure_routing']=PSTE_Family_Structure_Router::evaluate(
++                    $analysisRaw,$baseline,$registry,$familyResolution,$relevance
++                );
++                // Bare SEO phrases cannot pass editorial German-title quality
++                // just because the deterministic composer returned a string.
++                // Retain their wording as a candidate for worker 2; never report
++                // it as a finished title or claim an absent category.
++                if(!PSTE_Normalizer::isQuestion($analysisRaw)){
++                    $base['title_precheck_validated']=false;
++                    $base['title_candidate_only']=true;
++                }
+                 $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
+                 return self::withReasons($base,'SANDBOX_REQUIRED',[
+                     !empty($base['title_precheck_validated'])?'PSTE_FOUR_WORKERS_CATEGORY_UNRESOLVED':'PSTE_FOUR_WORKERS_TITLE_UNRESOLVED',
