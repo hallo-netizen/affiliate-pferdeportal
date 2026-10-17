@@ -3,104 +3,123 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 + ALTER 330ER SNAPSHOT / 1.50.669 V7.1-MEGA-RENDERER LOCAL PASS / NICHT RELEASED / V7.1 NICHT LIVE**
+STATUS: **LIVE 1.50.668 / V7.1 FRONTEND SICHTBAR / 1.50.670 TARGETED DESIGN FIX LOCAL HARD PASS / LIVE-PRÜFUNG OFFEN**
 
 ## Live-Wahrheit
 
-WordPress bestätigt:
+WordPress bestätigt weiterhin:
 `Affiliate Portal Template Kit 1.50.668` aktiv.
 
-1.50.668 nutzt HD-004 als Strukturquelle. Solange HD-004 die alte 330er Revision liefert, bleibt der sichtbare Strukturinhalt weitgehend alt.
+Der aktuelle Frontend-Nachweis zeigt inzwischen die neue V7.1-Struktur:
+- terminale Content-Ebene bei Ameisenhaltung sichtbar;
+- Forschen enthält zusätzlich Spotting & Verkehr, Citizen Science und Natur bestimmen, aktuell aber erst nach `Mehr Kategorien`.
 
-Die terminale `category`-Ebene funktioniert bereits; Beispiel Ameisenhaltung zeigt die echte letzte Content-Kategorieebene.
+Damit ist der frühere reine 330er-Anzeigezustand nicht mehr der aktuelle Frontend-Befund.
 
-## Lokaler WIP 1.50.669
+## 1.50.670 – exakt begrenzter Arbeitsumfang
 
-Arbeitsbasis:
-1.50.668.
-
-Änderung:
-Mega-Menü unterscheidet jetzt korrekt:
+Basis:
+1.50.668 plus der bereits geprüfte 1.50.669-WIP-Renderergrundsatz:
 - echte Zwischenbereiche = Mega-Spalten;
-- direkte Hobbys/Orientierungsseiten wie Heimwerken/Gärtnern = nur Weltseite, keine zusätzliche Mega-Spalte.
+- direkte Hobbyseiten wie Heimwerken/Gärtnern = keine künstlichen Mega-Spalten;
+- Registry bleibt einzige Strukturquelle.
 
-V7.1-Mega-Zahlen:
+### Mega-Menü
+
+Neue Darstellungsregel:
+- 5 Spalten;
+- bis zu 10 echte Zwischenbereiche sofort sichtbar = maximal zwei Reihen;
+- `Mehr Kategorien` erst ab dem 11. Bereich / einer nötigen dritten Reihe;
+- Unterkategorie-Schrift leicht vergrößert.
+
+V7.1 ergibt damit direkt sichtbar:
 Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 · Bewegen 8 · Sammeln 9.
 
-Darstellung:
-- initial 5 gleichmäßige Gruppen;
-- `Mehr Kategorien` öffnet restliche echte Zwischenbereiche im selben Flyout;
-- genau eine weitere kompakte Orientierungsebene;
-- kein Vollbaum;
-- keine Roh-`get_pages()`-Struktur;
-- Registry fail-closed.
+Bekannte direkte Hobbyseiten bleiben korrekt ausgeschlossen:
+- Heimwerken bei Fertigen;
+- Gärtnern bei Pflanzen.
 
-## Local QA V7.1
+## Bild-Scope – HARD RULE
 
-V7/V7.1-Strukturprofil:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_V7_CALIBRATED_ROLLOUT_20261017.json`
+**Keine anderen Kategorien anfassen.**
 
-Browser-QA:
-`/hobby rausch/releases/HOBBY_DEPOT_BROWSER_ACCEPTANCE_V7_20261017.json`
+Geändert wurden ausschließlich die vom Nutzer genannten 17 Bereiche:
 
-Renderer-QA:
-`/hobby rausch/releases/HOBBY_DEPOT_SIM_V7_20261017.txt`
+Fertigen:
+- Modellbau.
 
-PASS:
-- 381 Hobbyseiten;
-- komplette terminale Category-Ebene;
-- 0 Struktur-/Route-/Render-Mismatches;
-- Trainspotting-Falschparent ausgeschlossen;
-- alle 8 Mega-Menüs;
-- 1920 / 1440 / 1180 / 1024 / 901 / 900 / 768 / 761 / 760 / 390 px;
-- kein horizontaler Overflow;
-- Fertigen: 10 echte Zwischenbereiche;
-- Pflanzen: direkte Gärtnern-Hobbyseite nicht als Mega-Zwischenbereich;
-- PHP 61/61 PASS.
+Technik:
+- Computer & Retro;
+- Audio & HiFi.
 
-## 1.50.669 Fail-closed QA
+Forschen:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen.
 
-QA:
-`/hobby rausch/releases/HOBBY_DEPOT_1.50.669_WIP_FAILCLOSED_QA.json`
+Pflanzen:
+- Bonsai & Miniatur;
+- Orchideen & Exoten;
+- Zimmerpflanzen;
+- Hydroponik & Indoor.
 
-Bildbriefs:
-`/hobby rausch/releases/HOBBY_DEPOT_V7_HUB2_IMAGE_BRIEFS_20261017.json`
+Tiere:
+- Aquaristik;
+- Terraristik.
+
+Sammeln:
+- Münzen & Geld;
+- Papier & Dokumente;
+- Werkzeuge & Geräte;
+- Werbung & Design;
+- Suchen & Finden.
+
+Für jeden dieser 17 Bereiche:
+- eigenes Hero 600×320;
+- daraus abgeleitete Vorschau 200×107;
+- keine exakten Bildduplikate unter den 17 neuen Heroes;
+- keine Nahduplikate im lokalen Bildvergleich.
+
+**Holz & Natur wurde trotz früherem offenen Bildbrief ausdrücklich NICHT verändert**, weil es in der aktuellen Nutzerfreigabe nicht enthalten war.
+
+## Prüfung auf Bild-Rückfall durch 1.50.668
+
+Explizit geprüft:
+1.50.668 gegen 1.50.650 für die bisher problematischen vorhandenen Bilddateien und die zentrale Bildmap.
+
+Ergebnis:
+- 13/13 geprüfte Dateien byte-identisch;
+- 1.50.668 hat die falschen Bilder nicht neu zurückgespielt;
+- die problematischen Motive waren bereits vorher vorhanden und wurden lediglich unverändert mitgeführt.
+
+## Local QA 1.50.670
 
 PASS:
 - PHP 61/61;
-- Hub2-Weltbild-Fallback im aktiven 1.50.669-Renderer entfernt;
-- exakt 5 neue Hub2 sind noch unmapped: Modellbau, Spotting & Verkehr, Citizen Science, Natur bestimmen, Suchen & Finden;
-- Holz & Natur besitzt zwar ein altes Holzmotiv, dieses ist semantisch zu eng und deshalb REPLACE_REQUIRED;
-- insgesamt exakt 6 neue Hero+Preview-Paare nötig.
+- echter PHP-Registry-Harness mit V7.1: 7/10/9/8/9/7/8/9;
+- sichtbares Limit = 10;
+- Heimwerken/Gärtnern korrekt nicht als Mega-Spalten;
+- vorhandene Browser-QA beweist, dass der bereits geprüfte 10er-expanded-Zustand bei 1920, 1440, 1180, 1024, 901, 900, 768 und 761 px ohne horizontalen Überlauf passt;
+- 17/17 Hero-Größen 600×320;
+- 17/17 Preview-Größen 200×107;
+- 17/17 Hero-Mappings exakt;
+- 0 exakte Bildduplikate;
+- 0 Nahduplikat-Paare im benannten Set;
+- Bildmap außerhalb dieser 17 Hero-Schlüssel unverändert;
+- Cards-Bildmap vollständig unverändert;
+- Paket-Roundtrip 1009/1009 Dateien byte-identisch;
+- ZIP-Test ohne Fehler.
 
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.670_HOBBY_DEPOT_MEGA2ROWS_TARGETED_IMAGES_HARDPASS.zip`
 
-
-1.50.668 enthält die bisherige zentrale Hero-/Preview-Logik.
-
-Vor V7.1-Live-Sync brauchen neue direkte Hub2 gemäß Bildvertrag eigenes geprüftes Hero + daraus abgeleitete Preview:
-- Spotting & Verkehr;
-- Citizen Science;
-- Natur bestimmen;
-- Suchen & Finden;
-- Modellbau.
-
-`Holz & Natur` ist geprüft: das vorhandene Holzwerkstatt-Motiv ist für Holz + Besenbinden + Korbflechten + Weidenflechten zu eng und damit FAIL. Neues eigenes Motiv erforderlich.
-
-Kein generischer Weltbild-Fallback.
-
-## Alte Patchplugins
-
-Hero-Patcher 1.50.659 / 1.50.661 / 1.50.662 sind Übergangsstände und sollen nach kontrollierter Bereinigung nicht parallel die Bildwahrheit überlagern.
+SHA-256:
+`9e21fd6c402fbb1a3358a58807db8b28a322a499d8478fbffb375fadbecc0408`
 
 ## PASS-GRENZE
 
-1.50.669 ist **noch kein Release**.
-Kein Live-PASS ohne:
-- V7.1 WordPress-Dry-Run;
-- Bilder für neue Hub2;
-- finalen ZIP-/Browsercheck;
-- echten Live-Readback.
+Noch kein Live-PASS für 1.50.670.
 
 ## EXAKT EINE NEXT ACTION
 
-**Zuerst den V7.1-Dry-Run mit HD-001 1.14.12 durchführen. Parallel lokal die sechs erforderlichen Hub2-Hero/Preview-Paare abschließen; erst danach 1.50.669 als Release packen.**
+**1.50.670 über 1.50.668 installieren und im Frontend gezielt Forschen-Mega-Menü plus die ausdrücklich genannten Bildbereiche prüfen. Keine weiteren Kategorien ändern.**
