@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – C2.3 NACHHOLKATEGORIEN: 471er KATEGORIEPLUGIN 1.14.8.32 FERTIG UND LOKAL GEPRÜFT
+Nach der Gesamtgrobprüfung aller **265 konkreten Themenseiten** (93 alte/172 neue) sind **471 noch fehlende fachlich hilfreiche Vertiefungskategorien** bestimmt: 93 FAQ für alte Themen, 220 Beratungen (93 alt/127 neu), 91 alte Vergleiche und 67 zusätzliche situativ tragfähige Facetten. FAQ und Beratung überall abgedeckt; Vergleich dort, wo eigenständig hilfreich; weitere Kosten/Pflege/Wartung/Fehler etc. **nur individuell** und bei grob mindestens ca. 3–5 möglichen späteren Einzelartikeln. **Keine konkreten Artikel geprüft oder erstellt.**
+
+**Aktueller technischer Umsetzungsstand:** Das **bestehende** Kategorieplugin ist als vollständiger neuer Build **1.14.8.32** mit C2.3-471-ADD-only-Welle fertig und lokal integrationsgeprüft, nicht installiert. Der einzige Releasebeleg: `../KATEGORIEN/C23_THIRD_WAVE_SOURCE/RELEASE_STATUS_20261017.md`; dort Quellcode, bytegenaues 471er-Manifest, echter Original-743-/472-/471-PHP-Audit+Frontendtest und komplett wiederherstellbares Plugin-ZIP. 471/471 neue Kategorieanlagen und Frontendlinks in lokaler WP-Mockumgebung PASS, alte 1323 Termdaten unverändert, erfolgreiche Fehler-/Rollbacktests. Keine neue Seitenebene oder zweiter Writer. **Kein Live-Import dieser dritten Welle behauptet.**
+
+**EINZIGE NEXT ACTION:** 1.14.8.32 über normales bestehendes Kategorieplugin-Update installieren; im vorhandenen Adminbereich separaten 471er-Dry-Run ausführen und danach nur mit eigener Freigabe einmalig importieren. Die früheren erfolgreichen 743 und 472 Einspielungen dürfen nicht erneut ausgeführt werden. Altbezeichnungen auf Seite3/Term-Kacheln sind ein getrennter **Design-Darstellungsauftrag ohne WP-Term-Umbenennung**.
+
+---
+
+
+
 ## 17.10.2026 – C2.3-GESAMTPRÜFUNG ALLE 265 THEMEN, FAQ & BERATUNG VERBINDLICH
 **Nach Nutzernachtrag:** FAQ und Beratung grundsätzlich bei jedem konkreten Themen-Owner, Vergleiche bei eigenständigem Nutzen nahezu überall. Weitere Aspekte wie Kosten, Wartung, Pflege, häufige Fehler, Einbau, Notfälle, Organisation und Fragen für Anfänger/Erfahrene **individuell**, keine „alle Kategorien gleich“-Schablone. Nur grob eigenständiger Stoff für ca. drei bis fünf spätere Beiträge; **keine Artikelvorschläge oder Texte**. Es geht um alle 93 älteren und 172 neuen Seite3-Themen, zusammen 265, nicht um isolierte Erweiterung eines Teilbestandes.
 
