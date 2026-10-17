@@ -1,9 +1,9 @@
 # ZV-HOBBYRAUSCH-HD001-001 – INTEGRIERTE HOBBY-ARCHITEKTUR BIS FRONTEND
 
-STAND: 2026-10-09
+STAND: 2026-10-17
 STATUS: AKTIV / FACHLICHE NEUAUSRICHTUNG DER CONTENT-EBENE
-FASSUNG: 2.7
-ERSETZT: Fassung 2.6 vom 2026-10-07; davor Fassung 2.5 / 2.4 / 2.3 / 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.8
+ERSETZT: Fassung 2.7 vom 2026-10-09; davor Fassung 2.6 / 2.5 / 2.4 / 2.3 / 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -130,7 +130,7 @@ Jeder HOBBY_HUB wird aus zwei Perspektiven geprüft:
 1. Mensch hört/kennt das Hobby kaum und braucht Orientierung zum Einstieg;
 2. Mensch betreibt das Hobby bereits und sucht fachliche Vertiefung.
 
-Daraus folgen vier universelle Prüffelder:
+Daraus folgen fünf verbindliche Prüffelder:
 
 ### 1. Einstieg & Grundlagen – Pflicht
 Muss als sichtbare Content-Kategorie vorhanden sein.
@@ -166,6 +166,26 @@ Wenn ein Hobby nachweislich keine drei eigenständigen Themen trägt, wird diese
 Erfahrene Nutzer müssen einen sichtbaren Vertiefungspfad haben.
 Wenn bestehende fachliche Kategorien dies bereits leisten (z. B. Training, Tricks & Übungen, Techniken, Projekte, Spezialmethoden), werden diese NICHT dupliziert.
 Nur wenn mindestens 3 eigenständige vertiefende Intents übrig bleiben, entsteht zusätzlich eine eigene Kategorie wie Praxis & Vertiefung / Fachwissen.
+
+### 5. Vergleich & Kaufberatung – verpflichtende Affiliate-Prüfung
+Jeder HOBBY_HUB wird auf reale Kauf-, Auswahl- und Vergleichsintents geprüft.
+
+Eigener sichtbarer Leaf `Vergleich & Kaufberatung` nur, wenn mindestens **3 eigenständige** Beratungs-/Vergleichsintents existieren, z. B.:
+- Produktgruppe/System A vs. B;
+- Kaufberatung nach Budget, Erfahrung oder Einsatz;
+- konkrete Produkt-/Modellvergleiche;
+- günstig vs. hochwertig;
+- welche Lösung für welchen Anwendungsfall.
+
+Wenn weniger als 3 eigenständige Intents existieren:
+- keine künstliche Vergleichskategorie;
+- die Themen werden in `Ausrüstung & Kosten` oder einem passenden Fachleaf geführt.
+
+Keine Doppelowner:
+- Methoden-/Technikvergleich kann im Fachleaf liegen;
+- Produkt-/Kaufentscheidung gehört in die Kaufberatungsabdeckung.
+
+Produktverfügbarkeit erzeugt niemals selbst eine Kategorie. Nutzerintent und fachliche Tragfähigkeit entscheiden.
 
 ## Hobbyspezifische Zusatzkategorien
 
@@ -269,7 +289,7 @@ Der Hobby-Master ist Inventar, nicht eine Aufforderung, jede denkbare Struktur v
 
 Verbindlicher Produktionsweg:
 - bestehende fachlich sinnvolle Kategorien bleiben bestehen;
-- pro HOBBY_HUB zuerst die universellen Lücken Einstieg & Grundlagen, FAQ, Ausrüstung & Kosten sowie der Vertiefungspfad prüfen;
+- pro HOBBY_HUB zuerst Einstieg & Grundlagen, FAQ, Ausrüstung & Kosten, Vertiefungspfad sowie Vergleich & Kaufberatung prüfen;
 - fehlende universelle Bereiche mit mindestens 3 eigenständigen Beitragsintentionen ergänzen;
 - danach mit Fachlogik + DataForSEO nur die wirklich tragfähigen hobbiespezifischen Zusatzbereiche ergänzen;
 - kein künstliches Zusammenpressen auf 3–6 Leafs;
