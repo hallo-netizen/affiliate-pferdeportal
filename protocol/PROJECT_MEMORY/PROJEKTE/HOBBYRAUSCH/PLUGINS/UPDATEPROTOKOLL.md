@@ -3394,3 +3394,58 @@ Noch offen.
 NEXT:
 1.14.15 installieren → ausschließlich Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.
 
+---
+
+## PU-20261017-072 – HD-001 1.14.15 realer 3487er Lauf / Hummelkästen + Lederprägen / Release-Sperre bis 1:1-Replay
+
+REALER WORDPRESS-BEFUND:
+- 1.14.15 ausgeführt;
+- 3487 Zielobjekte;
+- CREATE 1122 / ADOPT 4 / UPDATE 2359 / UNCHANGED 0 / ARCHIVE 1;
+- exakt zwei LIVE_COLLISION:
+  - Hummelkästen;
+  - Lederprägen;
+- kein Apply/Sync.
+
+EXHAUSTIV:
+1122 + 4 + 2359 = 3485.
+3485 + 2 blockierte Zielobjekte = 3487.
+Der reale Dry-Run hat damit den vollständigen V7.1-Zielbestand abgearbeitet.
+
+URSACHE:
+- Hummelkästen live Objekt 902484, alte Target-Bindung `core:entity:b411cdf2ea6046005a4b`;
+- Lederprägen live Objekt 902560, alte Target-Bindung `core:entity:ef539e4fcf98dc1c2437`;
+- diese zwei tatsächlichen alten Live-IDs fehlten in den 1.14.15-Legacy-Listen.
+
+NACHPRÜFUNG VOR JEDEM NEUEN RELEASE:
+Kein neues ZIP an Nutzer ausgegeben.
+Kompletter weiterer Workflow lokal simuliert.
+
+DABEI ZUSÄTZLICH GEFUNDEN:
+Der Syncpfad hätte nach einem erfolgreichen Dry-Run noch unnötig teuer gearbeitet:
+- wiederholte Tiefen-/Indexberechnung;
+- große Sync-State-Persistenz nach praktisch jedem Knoten.
+Dieser WIP-Pfad wurde performance-schonend korrigiert, ohne Fach-/Kategorie-/Navigationsänderung.
+
+VOLLWORKFLOW LOKAL:
+- Dry-Run PASS;
+- Sync COMPLETE;
+- Readback 3487/3487;
+- Frontend/Struktur PASS;
+- Header-Navigation PASS;
+- 381/381 Hobby-Hubs PASS;
+- unbound CORE pages 0;
+- Post-Sync-Dry-Run 3487 UNCHANGED;
+- Fremdkollision BLOCKED;
+- doppelte Legacy-Bindung BLOCKED;
+- Live-Drift verändert Fingerprint;
+- injizierter Write-Fehler ROLLED_BACK, Ausgangs-Dry-Run danach wieder PASS;
+- normaler Admin-Aufruf ohne Vollscan;
+- Bootstrap 0 Writes / 0 Schedules / 0 Network.
+
+RELEASE-GATE:
+Trotz lokalem Vollworkflow kein neues Plugin, solange der aktuelle reale 1.14.15-JSON-Readback nicht wortwörtlich replayed wurde.
+
+NEXT:
+Aktuellen `Finalen Readback als JSON` aus WordPress exportieren und gegen WIP 1:1 replayen. Kein Apply/Sync.
+
