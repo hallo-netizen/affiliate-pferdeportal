@@ -1401,3 +1401,14 @@ Unabhängige lokale Regression: 149 vorhandene PPM-Tests mit altem Original und 
 - Grenzen: Dies sind **lokale** Tests, kein Nachweis des tatsächlich installierten WordPress-/MariaDB-Live-Systems. Ein Update erfolgt nur für die **zwei bestehenden SEO-Plugins**; die PPM 6.7.9 bleibt absichtlich unverändert.
 
 **Letzter verbindlicher technischer Befund:** Zwei Plugin-Updates genügen für die aktuelle semantische Journal-Korrektur **bei der autoritativ gebundenen PPM-6.7.9-Originalfassung**. Der frühere behauptete PPM-Releaseblocker gilt damit für diesen Zwei-Plugin-Korrekturweg als behoben. Kein dritter Installer ausgeben.
+
+
+### 29.7 Gesamtworkflow-Nachprüfung – 17.10.2026
+
+**Historischer DELTA-Nachtrag, kein zweiter CURRENT, keine Zielvertragsänderung.** Der fachliche Freeze 29.1–29.3 bleibt vollständig bestehen. Der in 29.6 dokumentierte lokale Kompatibilitäts-PASS der beiden SEO-Plugins gegen die unveränderte PPM 6.7.9 war **kein End-to-End-PASS** des laufenden WordPress-Bestands und darf nicht so ausgegeben werden.
+
+Der unabhängig nachgeprüfte Kandidat PSTE 0.57.102 ordnet „Warum leckt mein Pferd viel am Salzleckstein?“ noch als `NORMAL_PASS` / `salzlecksteine-faq` / `FAQ` ein; das widerspricht der fachlich gebundenen dominanten redaktionellen Suchabsicht. Der tatsächliche Journal-Erkenner blockiert weitere plausible Magazinthemen bereits vor der gleichberechtigten Kategorienwahl. Der historische WordPress-Export vom 12.10. enthält neun zentral registrierte Journal-Kategorien nicht in der verwendeten Produktionskategorienmenge; die Kategoriebindung muss **am tatsächlichen aktuellen Live-Snapshot** verifiziert werden, statt Term-Verfügbarkeit im Mock vorzugeben.
+
+Letzter dokumentierter Livebeleg 16.10.2026 16:25:40 UTC, Run `50cdce49-683f-4084-a17a-6c56a72de9f9`: Bestandsautomatik `CANCELLED` bei `520/5014`, Fehler `PSTE_EXISTING_EVIDENCE_REENTRY_REVIEW_CANDIDATE_MISMATCH`, Provideraufrufe 0. Getrennt davon der globale Compiler `COMPLETE` mit 55 Kandidaten und 1 `ready`. Das ist **kein** Beleg, dass alle Keywords den fachlich richtigen Kategorie- und Produktionsweg erreicht haben. Historischer kompletter 4501er-Export ersetzt keinen aktuellen 5014er-WordPress-/MariaDB-Readback.
+
+**Status dieses technischen Nachweises: FAIL / OFFEN; keine neue Pluginfreigabe.** Operativer Status und genau eine NEXT ACTION ausschließlich über Campus-Büro `PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`; konkrete Fehler-/Testchronik dort im `UPDATEPROTOKOLL.md` Vorgang `PU-20261017-001`. Kapitel 29 ist ausschließlich eingefrorener Fachvertrag mit Änderungs-/Fehlerhistorie, **keine** zweite aktuelle Statusautorität.
