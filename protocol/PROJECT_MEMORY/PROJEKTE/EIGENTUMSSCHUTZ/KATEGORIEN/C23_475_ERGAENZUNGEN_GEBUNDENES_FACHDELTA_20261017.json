@@ -1,5 +1,5 @@
 {
-  "schema": "HB_C23_475_PURE_ADD_ONLY_NO_WP_WRITE_V1",
+  "schema": "HB_C23_475_PURE_ADD_ONLY_NO_WP_WRITE_V2",
   "date": "2026-10-17",
   "status": "PROPOSED_REVIEWED_FACETS__NOT_IMPORT_PLUGIN",
   "input_github": "KATEGORIEN/C23_265_THEMEN_EBENENPRUEFUNG_20261017.json",
@@ -35,7 +35,10 @@
     "negative_total": 8,
     "all_475_unique_node_ids": true,
     "all_jobs_flat_categories": true,
-    "all_jobs_unassigned_wp_term_ids": true
+    "all_jobs_unassigned_wp_term_ids": true,
+    "reconciled_with_exact_v4_titles": true,
+    "individually_named_legacy_comparisons": 91,
+    "physical_wordpress_term_ids_still_unassigned": true
   },
   "jobs": [
     {
@@ -69,12 +72,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:15d69f513f2531545da9",
+      "node_id": "core:c23:category:27dd5656fa0a23076a6e",
       "owner": "r3-wp-page3-138",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 138,
       "existing_parent_node_id": null,
-      "name": "Unbewohnte Häuser: Systeme & Lösungen vergleichen",
+      "name": "Sicherung und Überwachung leerstehender Häuser vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -129,12 +132,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:265eade63f9a4b8325d5",
+      "node_id": "core:c23:category:f4573b42dcc1c3bc0c4b",
       "owner": "r3-wp-page3-139",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 139,
       "existing_parent_node_id": null,
-      "name": "Eingänge, Glas & Klingeln: Systeme & Lösungen vergleichen",
+      "name": "Schutzbeschläge, Glas und Klingel-Sicherung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -174,12 +177,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:4a1dc890e25cfc7b6d7d",
+      "node_id": "core:c23:category:6e28c88a17c82a386e9a",
       "owner": "r3-wp-page3-140",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 140,
       "existing_parent_node_id": null,
-      "name": "Vereine, Läden & Schäden: Systeme & Lösungen vergleichen",
+      "name": "Vandalismusschutz für Vereinsanlagen und Ladenfronten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -219,12 +222,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:576cf59d9986a5546ef7",
+      "node_id": "core:c23:category:e37a0054ae9275c2e7b5",
       "owner": "r3-wp-page3-141",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 141,
       "existing_parent_node_id": null,
-      "name": "Schutzlösungen für PV, Kameras und Außenlicht vergleichen",
+      "name": "Schutzlösungen für PV-Anlagen, Kameras und Außenleuchten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -279,12 +282,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:9e513045280da80fdc59",
+      "node_id": "core:c23:category:e803eb31ce5875307901",
       "owner": "r3-wp-page3-142",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 142,
       "existing_parent_node_id": null,
-      "name": "Wohnmobil & Wohnwagen: Systeme & Lösungen vergleichen",
+      "name": "Diebstahlsicherungen für Wohnmobil und Wohnwagen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -339,12 +342,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:74b76862a84a3271eb71",
+      "node_id": "core:c23:category:6294080415a9d72f63b0",
       "owner": "r3-wp-page3-143",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 143,
       "existing_parent_node_id": null,
-      "name": "Haus & Kellerschutz: Systeme & Lösungen vergleichen",
+      "name": "Kellerschutz und Hochwassersperren vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -384,12 +387,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:399f244326bde7f44713",
+      "node_id": "core:c23:category:f285906e319291a263f9",
       "owner": "r3-wp-page3-144",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 144,
       "existing_parent_node_id": null,
-      "name": "Stromausfall & Notstrom: Systeme & Lösungen vergleichen",
+      "name": "USV, Stromausfallmelder und Notstromversorgung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -444,12 +447,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:40198779d2ac7e2add92",
+      "node_id": "core:c23:category:7ea58c5b4d9645813e6d",
       "owner": "r3-wp-page3-145",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 145,
       "existing_parent_node_id": null,
-      "name": "Camping, Garten & Boote: Systeme & Lösungen vergleichen",
+      "name": "Sicherung von Campingstellplätzen, Gartenhäusern und Booten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -489,12 +492,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:771088d512448c47d065",
+      "node_id": "core:c23:category:a54bcdcd622ab935ab38",
       "owner": "r3-wp-page3-146",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 146,
       "existing_parent_node_id": null,
-      "name": "Wärmepumpe & Ladepunkte: Systeme & Lösungen vergleichen",
+      "name": "Schutzgehäuse für Wärmepumpen und Wallboxen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -549,12 +552,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0945400ddaf12484b268",
+      "node_id": "core:c23:category:9e27885abebd3efbc930",
       "owner": "r3-wp-page3-147",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 147,
       "existing_parent_node_id": null,
-      "name": "Außenanlagen & Schäden: Systeme & Lösungen vergleichen",
+      "name": "Sturmsicherung für Gartenanlagen und Nebengebäude vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -594,12 +597,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:4c3e2d599cf48ab31406",
+      "node_id": "core:c23:category:5771006c0135d3cdef3f",
       "owner": "r3-wp-page3-148",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 148,
       "existing_parent_node_id": null,
-      "name": "Kohlenmonoxid & Gaswarnung: Systeme & Lösungen vergleichen",
+      "name": "CO- und Gaswarnmelder vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -654,12 +657,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:1640525882c003c81916",
+      "node_id": "core:c23:category:a0700f8aba1fa5b2a0b9",
       "owner": "r3-wp-page3-149",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 149,
       "existing_parent_node_id": null,
-      "name": "Mobile Objekte & Betriebe: Systeme & Lösungen vergleichen",
+      "name": "Fernüberwachung für Camper, Boote und Kleinbetriebe vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -699,12 +702,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:73081718cdef6cc59b5d",
+      "node_id": "core:c23:category:855dc979ae2f42e93a31",
       "owner": "r3-wp-page3-150",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 150,
       "existing_parent_node_id": null,
-      "name": "Pakete & Gartenwerte: Systeme & Lösungen vergleichen",
+      "name": "Paketboxen, Briefkästen und Sicherungslösungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -744,12 +747,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:abd1c9cdd2c9463c2227",
+      "node_id": "core:c23:category:efc6514b0a82bde8f3bf",
       "owner": "r3-wp-page3-151",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 151,
       "existing_parent_node_id": null,
-      "name": "Brandschutz: Kleinobjekte: Systeme & Lösungen vergleichen",
+      "name": "Brandschutzsysteme für kleine Werkstätten und Vereinsräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -804,12 +807,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:5ee59a414a758f78e03c",
+      "node_id": "core:c23:category:27b80116f8a647dbd0d3",
       "owner": "r3-wp-page3-152",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 152,
       "existing_parent_node_id": null,
-      "name": "Garagen & Keller: Systeme & Lösungen vergleichen",
+      "name": "Garagentor-, Kellertür- und Abstellraumsicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -849,12 +852,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d9c136b382b7ddf55851",
+      "node_id": "core:c23:category:b3f27db1b13ae96c2168",
       "owner": "r3-wp-page3-153",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 153,
       "existing_parent_node_id": null,
-      "name": "Blitzschutz & Geräte: Systeme & Lösungen vergleichen",
+      "name": "Blitz- und Überspannungsschutzsysteme vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -909,12 +912,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:8d3aed598d414b2c97d0",
+      "node_id": "core:c23:category:352c115969a69f9e2ebd",
       "owner": "r3-wp-page3-154",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 154,
       "existing_parent_node_id": null,
-      "name": "Winter & Schnee: Systeme & Lösungen vergleichen",
+      "name": "Schnee- und Eisschutzmaßnahmen am Haus vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -969,12 +972,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:288213efb80c57401b84",
+      "node_id": "core:c23:category:e4042445beb315c0a4d7",
       "owner": "r3-wp-page3-155",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 155,
       "existing_parent_node_id": null,
-      "name": "Private Hobbyräume: Systeme & Lösungen vergleichen",
+      "name": "Schlösser und Alarmtechnik für Hobbyräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1014,12 +1017,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:392071ce6430b1591fc8",
+      "node_id": "core:c23:category:409d3b0fe3a9e32e5c97",
       "owner": "r3-wp-page3-156",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 156,
       "existing_parent_node_id": null,
-      "name": "Boote, Trailer & Reitsport: Systeme & Lösungen vergleichen",
+      "name": "Boots-, Trailer- und Anhängersicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1074,12 +1077,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:f854fd925bea8ce08572",
+      "node_id": "core:c23:category:63081f29cec25bc4585d",
       "owner": "r3-wp-page3-157",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 157,
       "existing_parent_node_id": null,
-      "name": "Mechanik & Zugang: Systeme & Lösungen vergleichen",
+      "name": "Tür-, Fenster- und Schließsysteme vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1134,12 +1137,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:bf429f63011cc004466e",
+      "node_id": "core:c23:category:455a6133c2889759613b",
       "owner": "r3-wp-page3-158",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 158,
       "existing_parent_node_id": null,
-      "name": "Graffiti: Schutz & Hilfe: Systeme & Lösungen vergleichen",
+      "name": "Graffitischutz und Entfernungsmethoden vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1194,12 +1197,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:f60804ff6dc9711ed5df",
+      "node_id": "core:c23:category:46c1da4792ba3422ad8f",
       "owner": "r3-wp-page3-159",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 159,
       "existing_parent_node_id": null,
-      "name": "Hochwasserschutz & Folgen: Systeme & Lösungen vergleichen",
+      "name": "Mobile Hochwassersperren und Entwässerungslösungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1254,12 +1257,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:b90ca5fa075888b969a9",
+      "node_id": "core:c23:category:8215658f3f814f625631",
       "owner": "r3-wp-page3-160",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 160,
       "existing_parent_node_id": null,
-      "name": "Alarm & Kamera: Systeme & Lösungen vergleichen",
+      "name": "Alarmanlagen, Bewegungsmelder und Kameras vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1314,12 +1317,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:a9aa0b9a8427f14c45ef",
+      "node_id": "core:c23:category:a3d4509c9eec20fea690",
       "owner": "r3-wp-page3-161",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 161,
       "existing_parent_node_id": null,
-      "name": "Akkus & Werkstätten: Systeme & Lösungen vergleichen",
+      "name": "Brandschutz für Akku-Ladeplätze und Werkstätten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1374,12 +1377,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:942e3ed72240a12aeb48",
+      "node_id": "core:c23:category:700b801f1de5e81279f3",
       "owner": "r3-wp-page3-162",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 162,
       "existing_parent_node_id": null,
-      "name": "Camping, Boote & Garten: Systeme & Lösungen vergleichen",
+      "name": "Unwetterschutz für Camping, Boot und Garten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1419,12 +1422,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:a73b7ef40d9f9b900006",
+      "node_id": "core:c23:category:3db76f40c562a7c7b868",
       "owner": "r3-wp-page3-163",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 163,
       "existing_parent_node_id": null,
-      "name": "Wasserschäden & Folgen: Systeme & Lösungen vergleichen",
+      "name": "Trocknung und Wasserschadensanierung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1464,12 +1467,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d3f9d21b0c1f192650ae",
+      "node_id": "core:c23:category:ce82bce6a35648c68880",
       "owner": "r3-wp-page3-164",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 164,
       "existing_parent_node_id": null,
-      "name": "Heizungs- & Kühlungsalarme: Systeme & Lösungen vergleichen",
+      "name": "Heizungsalarme und Temperaturüberwachung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1524,12 +1527,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:8d03b812632c5c9606ed",
+      "node_id": "core:c23:category:7e941e98b06bb48aa4f3",
       "owner": "r3-wp-page3-165",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 165,
       "existing_parent_node_id": null,
-      "name": "Gartenhäuser, Tore & Geräte: Systeme & Lösungen vergleichen",
+      "name": "Gartenhaus-Schlösser und Sicherungen für Gartengeräte vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1569,12 +1572,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:21955f9856bac009c954",
+      "node_id": "core:c23:category:41b7eaa7834ba2e5a930",
       "owner": "r3-wp-page3-166",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 166,
       "existing_parent_node_id": null,
-      "name": "Feuchtigkeit & Trocknung: Systeme & Lösungen vergleichen",
+      "name": "Kellerabdichtung und Luftentfeuchtung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1629,12 +1632,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0625c12cf4fa153bf093",
+      "node_id": "core:c23:category:1caffc2817f9b3060090",
       "owner": "r3-wp-page3-167",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 167,
       "existing_parent_node_id": null,
-      "name": "Alarm & Kamera ohne Netz: Systeme & Lösungen vergleichen",
+      "name": "Mobilfunk-Backup und Offline-Sicherung für Alarmanlagen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1689,12 +1692,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:80f5246d73c849471f8b",
+      "node_id": "core:c23:category:ba846a3916c4df54a097",
       "owner": "r3-wp-page3-168",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 168,
       "existing_parent_node_id": null,
-      "name": "Stellplätze & Renovierung: Systeme & Lösungen vergleichen",
+      "name": "Zugangsschutz für Privatstellplätze und Baustellen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1734,12 +1737,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:4de34d2762348bd3a06c",
+      "node_id": "core:c23:category:656ee64b67770d328e2f",
       "owner": "r3-wp-page3-169",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 169,
       "existing_parent_node_id": null,
-      "name": "Leckwarnung & Absperrung: Systeme & Lösungen vergleichen",
+      "name": "Wassermelder, Lecksuche und Wasserstopp-Systeme vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1794,12 +1797,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d5433f338bf486b8b9a1",
+      "node_id": "core:c23:category:64280957d93762dca94a",
       "owner": "r3-wp-page3-170",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 170,
       "existing_parent_node_id": null,
-      "name": "Brandschutz im Camper: Systeme & Lösungen vergleichen",
+      "name": "Rauch-, CO- und Gaswarntechnik für Camper vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1854,12 +1857,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0135ba5617fad18f9ebe",
+      "node_id": "core:c23:category:2e985382fb937f51b48b",
       "owner": "r3-wp-page3-171",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 171,
       "existing_parent_node_id": null,
-      "name": "Räder & Privatfahrzeuge: Systeme & Lösungen vergleichen",
+      "name": "Schlösser und Ortung für Fahrräder und Privatfahrzeuge vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1899,12 +1902,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d8205392187ddaaa0c40",
+      "node_id": "core:c23:category:6e26880fae981b19dbd0",
       "owner": "r3-wp-page3-172",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 172,
       "existing_parent_node_id": null,
-      "name": "Frost & Leerstand: Systeme & Lösungen vergleichen",
+      "name": "Frostschutzlösungen für Wasserleitungen bei Leerstand vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -1944,12 +1947,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d40724ba366b2a69e853",
+      "node_id": "core:c23:category:c8d50126b8fea2607e75",
       "owner": "r3-wp-page3-173",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 173,
       "existing_parent_node_id": null,
-      "name": "Kleine Vereine & Plätze: Systeme & Lösungen vergleichen",
+      "name": "Vereinsheim- und Sportplatzsicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2004,12 +2007,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:9164f42f6a2a20999e94",
+      "node_id": "core:c23:category:ecd4d2e70ebccaaf9b1a",
       "owner": "r3-wp-page3-174",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 174,
       "existing_parent_node_id": null,
-      "name": "Wasser in Kleinbetrieben: Systeme & Lösungen vergleichen",
+      "name": "Wasserwarnung und Absperrung für Kleinbetriebe vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2049,12 +2052,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:3642fed01c988073d668",
+      "node_id": "core:c23:category:f7d031634b4bbcf655c0",
       "owner": "r3-wp-page3-175",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 175,
       "existing_parent_node_id": null,
-      "name": "Brandschutz & Löschmittel: Systeme & Lösungen vergleichen",
+      "name": "Rauchwarnmelder und Feuerlöscher vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2109,12 +2112,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:823230ee4f09110dac59",
+      "node_id": "core:c23:category:cb8744a241bc1d651afe",
       "owner": "r3-wp-page3-176",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 176,
       "existing_parent_node_id": null,
-      "name": "Kleinbetriebe & Ateliers: Systeme & Lösungen vergleichen",
+      "name": "Alarm- und Zutrittsschutz für kleine Betriebe vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2169,12 +2172,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:bad728b3d2afb64c9154",
+      "node_id": "core:c23:category:7c75d4c177c2fae83a35",
       "owner": "r3-wp-page3-177",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 177,
       "existing_parent_node_id": null,
-      "name": "Wertsachen & Schadenfall: Systeme & Lösungen vergleichen",
+      "name": "Tresore und sichere Dokumentenaufbewahrung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2229,12 +2232,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:c3ba392949237db81e2d",
+      "node_id": "core:c23:category:ecbe6b86582479c37625",
       "owner": "r3-wp-page3-178",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 178,
       "existing_parent_node_id": null,
-      "name": "Wohnobjekte & Nebenräume: Systeme & Lösungen vergleichen",
+      "name": "Fernüberwachung für Ferienhäuser und Nebenräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2289,12 +2292,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:f038feb30ae449a257b1",
+      "node_id": "core:c23:category:ee494c09be29c86ba952",
       "owner": "r3-wp-page3-179",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 179,
       "existing_parent_node_id": null,
-      "name": "Pumpen & Notbetrieb: Systeme & Lösungen vergleichen",
+      "name": "Pumpenalarme und Notstrom für Pumpen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2349,12 +2352,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:16cea37e3c2fa749e998",
+      "node_id": "core:c23:category:103bed78ef7220daccd1",
       "owner": "r3-wp-page3-180",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 180,
       "existing_parent_node_id": null,
-      "name": "Rückstau & Pumptechnik: Systeme & Lösungen vergleichen",
+      "name": "Rückstauklappen, Hebeanlagen und Kellerpumpen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2409,12 +2412,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:376784af57cdf809cad7",
+      "node_id": "core:c23:category:bc5bbf14e4c45874afd7",
       "owner": "r3-wp-page3-181",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 181,
       "existing_parent_node_id": null,
-      "name": "Feuchtigkeit & Winterlager: Systeme & Lösungen vergleichen",
+      "name": "Feuchteschutz für Camper und Winterlager vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2469,12 +2472,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:c1c5c218a7a151835077",
+      "node_id": "core:c23:category:f9e9874adebde582b267",
       "owner": "r3-wp-page3-182",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 182,
       "existing_parent_node_id": null,
-      "name": "Dach, Fenster & PV: Systeme & Lösungen vergleichen",
+      "name": "Sturm- und Hagelschutz für Dächer, Fenster und PV vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2529,12 +2532,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:c422cf10bb712e06d49c",
+      "node_id": "core:c23:category:e3b6f625eff7752cbca2",
       "owner": "r3-wp-page3-247",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 247,
       "existing_parent_node_id": null,
-      "name": "Wiederanlauf nach Stromausfall: Systeme & Lösungen vergleichen",
+      "name": "Sicheren Wiederanlauf und Notstromlösungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2574,12 +2577,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:643dd54caf48629e5c0c",
+      "node_id": "core:c23:category:f18f4fd631c5a5022c5b",
       "owner": "r3-wp-page3-248",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 248,
       "existing_parent_node_id": null,
-      "name": "Private Freizeit- & Spielanlagen: Systeme & Lösungen vergleichen",
+      "name": "Sicherung von Spielplätzen und privaten Freizeitflächen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2634,12 +2637,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:e56c010702f5addb539d",
+      "node_id": "core:c23:category:96e810cab6c71a88ccba",
       "owner": "r3-wp-page3-249",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 249,
       "existing_parent_node_id": null,
-      "name": "Gasinstallation im Freizeitfahrzeug: Systeme & Lösungen vergleichen",
+      "name": "Gassicherungen und Prüfverfahren im Camper vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2679,12 +2682,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:5ac0358fbcd2e6ad3b7d",
+      "node_id": "core:c23:category:ab583574cefc8eb6634a",
       "owner": "r3-wp-page3-250",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 250,
       "existing_parent_node_id": null,
-      "name": "Kontrolle ungenutzter Sanitärräume: Systeme & Lösungen vergleichen",
+      "name": "Feuchtewarnung und Sanitärkontrolle bei Leerstand vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2739,12 +2742,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0056f5752a645ddcc1a1",
+      "node_id": "core:c23:category:de30db8ec8ca4854575c",
       "owner": "r3-wp-page3-251",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 251,
       "existing_parent_node_id": null,
-      "name": "Verbrennungsluft & Raumlüftung: Systeme & Lösungen vergleichen",
+      "name": "Lüftungs- und Unterdrucksicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2799,12 +2802,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:7548b2116a497412a834",
+      "node_id": "core:c23:category:c94054df2c1a618d0c70",
       "owner": "r3-wp-page3-252",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 252,
       "existing_parent_node_id": null,
-      "name": "Elektroinstallation & Leitungen: Systeme & Lösungen vergleichen",
+      "name": "Leitungsschutz und Brandvorsorge in der Elektroinstallation vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2859,12 +2862,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:39d0ac85ddcf041e640d",
+      "node_id": "core:c23:category:50dd4aaf1771c91494e7",
       "owner": "r3-wp-page3-253",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 253,
       "existing_parent_node_id": null,
-      "name": "Gasleitungen & Absperreinrichtungen: Systeme & Lösungen vergleichen",
+      "name": "Gasabsperrung und Leckwarnung im Wohnhaus vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2919,12 +2922,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0e28b4175aadb6ec903f",
+      "node_id": "core:c23:category:5b904ef8909551f3ff55",
       "owner": "r3-wp-page3-254",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 254,
       "existing_parent_node_id": null,
-      "name": "Geparkte Privatfahrzeuge: Systeme & Lösungen vergleichen",
+      "name": "Schutz vor Sachbeschädigung an Privatfahrzeugen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -2964,12 +2967,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d964196adaeb33846e2d",
+      "node_id": "core:c23:category:596b32207578bf6cf796",
       "owner": "r3-wp-page3-255",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 255,
       "existing_parent_node_id": null,
-      "name": "Sport- & Vereinsinfrastruktur: Systeme & Lösungen vergleichen",
+      "name": "Schutz von Sporttoren, Vereinszäunen und Flutlicht vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3024,12 +3027,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:8a8bff1597744bfc3dab",
+      "node_id": "core:c23:category:60db83aa8268019e2764",
       "owner": "r3-wp-page3-256",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 256,
       "existing_parent_node_id": null,
-      "name": "Warnung & private Vorbereitung: Systeme & Lösungen vergleichen",
+      "name": "Warnsysteme und private Hochwasservorsorge vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3084,12 +3087,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:666a1ef56ec7dee080d3",
+      "node_id": "core:c23:category:875c2111a2a0153179b0",
       "owner": "r3-wp-page3-257",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 257,
       "existing_parent_node_id": null,
-      "name": "Kontrollen & Anwesenheit: Systeme & Lösungen vergleichen",
+      "name": "Kontrollmodelle und Anwesenheitssimulation vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3144,12 +3147,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:8fa366ca889fee66431c",
+      "node_id": "core:c23:category:4f70f3526cbad9eac21c",
       "owner": "r3-wp-page3-258",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 258,
       "existing_parent_node_id": null,
-      "name": "Pumpenwartung & Verschleiß: Systeme & Lösungen vergleichen",
+      "name": "Sumpfpumpen, Rückschlagventile und Wartungslösungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3189,12 +3192,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:337861fe0e411e2bdb55",
+      "node_id": "core:c23:category:0d3d55d4198d0bc10692",
       "owner": "r3-wp-page3-259",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 259,
       "existing_parent_node_id": null,
-      "name": "Tanks & Sanitärleitungen: Systeme & Lösungen vergleichen",
+      "name": "Wassertank- und Leitungsschutz im Wohnmobil vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3249,12 +3252,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:4a2c6d9bd4564c07fc93",
+      "node_id": "core:c23:category:1a9a8dbff1f074167788",
       "owner": "r3-wp-page3-260",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 260,
       "existing_parent_node_id": null,
-      "name": "Vereisung an Außenbauteilen: Systeme & Lösungen vergleichen",
+      "name": "Frostschutz für Türen, Rollläden und Außenabläufe vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3309,12 +3312,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:cbe0c7eca9d8bb99658c",
+      "node_id": "core:c23:category:dfd9e6696908d7c7624c",
       "owner": "r3-wp-page3-261",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 261,
       "existing_parent_node_id": null,
-      "name": "Betriebszugang & Abläufe: Systeme & Lösungen vergleichen",
+      "name": "Schlüsselmanagement und Zugangssteuerung im Kleinbetrieb vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3369,12 +3372,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:1da47bc50eb94dad341a",
+      "node_id": "core:c23:category:f5a191f567c8535b32a5",
       "owner": "r3-wp-page3-262",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 262,
       "existing_parent_node_id": null,
-      "name": "Brandlasten & Betriebsstrom: Systeme & Lösungen vergleichen",
+      "name": "Brandschutztechnik für kleine Betriebsräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3429,12 +3432,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:42293ec5adaae4e495d4",
+      "node_id": "core:c23:category:f0141a25398d8158417e",
       "owner": "r3-wp-page3-263",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 263,
       "existing_parent_node_id": null,
-      "name": "Betriebsfolgen & Bestandsschutz: Systeme & Lösungen vergleichen",
+      "name": "Schadentrocknung und Bestandsschutz für Kleinbetriebe vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3489,12 +3492,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0dbdc0e3204e4a33460c",
+      "node_id": "core:c23:category:a9229f1cdf08b50943bd",
       "owner": "r3-wp-page3-264",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 264,
       "existing_parent_node_id": null,
-      "name": "Alarmkommunikation & Übertragung: Systeme & Lösungen vergleichen",
+      "name": "Alarmübertragung per SIM, Funk und Internet vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3549,12 +3552,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:cbfa017bb5d623be8d92",
+      "node_id": "core:c23:category:f01a82bbdeed9b052acf",
       "owner": "r3-wp-page3-265",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 265,
       "existing_parent_node_id": null,
-      "name": "Winterwege & Verkehrssicherung: Systeme & Lösungen vergleichen",
+      "name": "Winterdienstlösungen und Rutschschutz vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3609,12 +3612,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:3aec0bdeb2d09772c1b4",
+      "node_id": "core:c23:category:d5e36a7c73d4f32e96dc",
       "owner": "r3-wp-page3-266",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 266,
       "existing_parent_node_id": null,
-      "name": "Unwetterwarnung & Vorbereitung: Systeme & Lösungen vergleichen",
+      "name": "Sturmwarnsysteme und Sicherung von Markisen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3669,12 +3672,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:c09acf4aace0a8defaf4",
+      "node_id": "core:c23:category:523bb713e7b19a3f5404",
       "owner": "r3-wp-page3-267",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 267,
       "existing_parent_node_id": null,
-      "name": "Freizeitflächen & mobile Anlagen: Systeme & Lösungen vergleichen",
+      "name": "Sicherung von mobilen Freizeitanlagen bei Sturm vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3714,12 +3717,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:b41f25957c5f7f1221a5",
+      "node_id": "core:c23:category:8e58c22b09cd9e69ebf2",
       "owner": "r3-wp-page3-268",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 268,
       "existing_parent_node_id": null,
-      "name": "Alarmreaktionen & Vertretung: Systeme & Lösungen vergleichen",
+      "name": "Alarmreaktion und Fernkontrolle durch Vertrauenspersonen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3759,12 +3762,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:592cda31ba1bd7079434",
+      "node_id": "core:c23:category:aa8b226eaa35b889cd81",
       "owner": "r3-wp-page3-269",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 269,
       "existing_parent_node_id": null,
-      "name": "Pumpenursachen & Sensorik: Systeme & Lösungen vergleichen",
+      "name": "Pumpensensoren und Trockenlaufschutz vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3819,12 +3822,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:9c18c22eb20ff8cf5786",
+      "node_id": "core:c23:category:29e51b6d3ba4f48082c6",
       "owner": "r3-wp-page3-270",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 270,
       "existing_parent_node_id": null,
-      "name": "Ofen, Kamin & offenes Feuer: Systeme & Lösungen vergleichen",
+      "name": "Kaminbrandschutz und Feuerstellen-Sicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3879,12 +3882,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:16be462fed77bcb16560",
+      "node_id": "core:c23:category:bc46957666aa8374dd3d",
       "owner": "r3-wp-page3-271",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 271,
       "existing_parent_node_id": null,
-      "name": "Regenabdichtung am Freizeitfahrzeug: Systeme & Lösungen vergleichen",
+      "name": "Dichtungsmethoden für Wohnmobile vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3939,12 +3942,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:f676949787a2f4945104",
+      "node_id": "core:c23:category:eaa9e5711dbb2b9d0dfd",
       "owner": "r3-wp-page3-272",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 272,
       "existing_parent_node_id": null,
-      "name": "Oberflächen & Fassadenbauteile: Systeme & Lösungen vergleichen",
+      "name": "Schutzbeschichtungen und Fassadensicherungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -3999,12 +4002,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:3b2f71af9c3bcb390d37",
+      "node_id": "core:c23:category:4cd5fd6343fb9a4d6832",
       "owner": "r3-wp-page3-273",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 273,
       "existing_parent_node_id": null,
-      "name": "Technikräume & Absperrstellen: Systeme & Lösungen vergleichen",
+      "name": "Absperr- und Leckwarntechnik in kleinen Betrieben vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4074,12 +4077,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:30508274d67b63af5768",
+      "node_id": "core:c23:category:cf67ed03f6f8ad26fcf8",
       "owner": "r3-wp-page3-275",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 275,
       "existing_parent_node_id": null,
-      "name": "Erdung & Hausinstallation: Systeme & Lösungen vergleichen",
+      "name": "Erdung und Überspannungsschutz im Haus vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4134,12 +4137,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:8e73f1f6c134ecbb7a6f",
+      "node_id": "core:c23:category:2cb4436ca8632a335939",
       "owner": "r3-wp-page3-276",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 276,
       "existing_parent_node_id": null,
-      "name": "Ladeplätze & Akkuzustand: Systeme & Lösungen vergleichen",
+      "name": "Brandschutz und Ladegeräte für Werkzeugakkus vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4194,12 +4197,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:df2b85c296ac06de810b",
+      "node_id": "core:c23:category:5988ea1a5f97ab54ff34",
       "owner": "r3-wp-page3-277",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 277,
       "existing_parent_node_id": null,
-      "name": "Außenleitungen & Entleerung: Systeme & Lösungen vergleichen",
+      "name": "Frostschutz für Außenwasserleitungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4254,12 +4257,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:fdda759cdec6e09d562d",
+      "node_id": "core:c23:category:3a891edcd19a116fce5f",
       "owner": "r3-wp-page3-278",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 278,
       "existing_parent_node_id": null,
-      "name": "Grundwasser & Kellerbauteile: Systeme & Lösungen vergleichen",
+      "name": "Kellerabdichtung gegen Grundwasser vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4314,12 +4317,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:24785d62d6f7b614d7f6",
+      "node_id": "core:c23:category:e7358627cd69447f2cbc",
       "owner": "r3-wp-page3-279",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 279,
       "existing_parent_node_id": null,
-      "name": "Fahrzeugaufbauten & Transporte: Systeme & Lösungen vergleichen",
+      "name": "Sturmsicherung für Anhänger und Fahrzeugaufbauten vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4374,12 +4377,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:72da84ca50a85f2f804b",
+      "node_id": "core:c23:category:152a5beb35c47655e985",
       "owner": "r3-wp-page3-280",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 280,
       "existing_parent_node_id": null,
-      "name": "Fluchtwege & Personenschutz: Systeme & Lösungen vergleichen",
+      "name": "Lösungen für Fluchtwege und Personenschutz vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4419,12 +4422,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:53d99baf2c8b65fd1611",
+      "node_id": "core:c23:category:c6958bfb7e542e54ba62",
       "owner": "r3-wp-page3-281",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 281,
       "existing_parent_node_id": null,
-      "name": "Mobiles Geschäftsaußeninventar: Systeme & Lösungen vergleichen",
+      "name": "Sicherungen für Verkaufsautomaten und Außenstände vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4479,12 +4482,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:2140c57aa697c07ebe2b",
+      "node_id": "core:c23:category:20472e446125ef1659f8",
       "owner": "r3-wp-page3-282",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 282,
       "existing_parent_node_id": null,
-      "name": "Innenräume & Hausgemeinschaft: Systeme & Lösungen vergleichen",
+      "name": "Schutzlösungen für gemeinschaftliche Innenräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4539,12 +4542,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:88ffd2ce087dfab5be1a",
+      "node_id": "core:c23:category:c01562b7e05072766f5a",
       "owner": "r3-wp-page3-283",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 283,
       "existing_parent_node_id": null,
-      "name": "Zählerkästen & Anschlussleitungen: Systeme & Lösungen vergleichen",
+      "name": "Zählerkastensicherung und Manipulationsschutz vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4599,12 +4602,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:61dc3083fdee6bad33d9",
+      "node_id": "core:c23:category:b22635c561137326c454",
       "owner": "r3-wp-page3-284",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 284,
       "existing_parent_node_id": null,
-      "name": "Gärten & Außenmöblierung: Systeme & Lösungen vergleichen",
+      "name": "Vandalismusschutz für Garteninventar und Einfriedungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4644,12 +4647,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:bcfbdbd11c627fa085f2",
+      "node_id": "core:c23:category:2badd712ccc1877f9c38",
       "owner": "r3-wp-page3-285",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 285,
       "existing_parent_node_id": null,
-      "name": "Fernmeldungen & Regeltechnik: Systeme & Lösungen vergleichen",
+      "name": "Heizungsfernüberwachung und Alarmübertragung vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4704,12 +4707,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:d670d0caddebf58add33",
+      "node_id": "core:c23:category:a1b1de13deed34ef186f",
       "owner": "r3-wp-page3-286",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 286,
       "existing_parent_node_id": null,
-      "name": "Rohrnetz & vorbeugende Wartung: Systeme & Lösungen vergleichen",
+      "name": "Rohrnetz-Kontroll- und Leckwarnverfahren vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4749,12 +4752,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:3c7c909f6011791e2c02",
+      "node_id": "core:c23:category:8009172ec26e35f1a988",
       "owner": "r3-wp-page3-287",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 287,
       "existing_parent_node_id": null,
-      "name": "Carports & Außenlager: Systeme & Lösungen vergleichen",
+      "name": "Carport-, Lagerbox- und Außeninventarschutz vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4809,12 +4812,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:b33b711020f4ce170384",
+      "node_id": "core:c23:category:10db65a16ce498b2ccef",
       "owner": "r3-wp-page3-288",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 288,
       "existing_parent_node_id": null,
-      "name": "Lokaler Smart-Home-Notbetrieb: Systeme & Lösungen vergleichen",
+      "name": "Offline-fähige Smart-Home-Sicherheitslösungen vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4869,12 +4872,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:483425895914be89d259",
+      "node_id": "core:c23:category:8350b85d04474ef845ef",
       "owner": "r3-wp-page3-289",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 289,
       "existing_parent_node_id": null,
-      "name": "Grundstücksgrenzen & Wege: Systeme & Lösungen vergleichen",
+      "name": "Zaun-, Sicht- und Zugangsschutz am Grundstück vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4914,12 +4917,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:18e38a726f25b1514612",
+      "node_id": "core:c23:category:c0d7b6b987899a093ed5",
       "owner": "r3-wp-page3-290",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 290,
       "existing_parent_node_id": null,
-      "name": "Stromfehler & Schutzschalter: Systeme & Lösungen vergleichen",
+      "name": "FI-Schutzschalter und Fehlerdiagnoseverfahren vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -4974,12 +4977,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:1c48c1964254813fdb94",
+      "node_id": "core:c23:category:ac6fc4b8b87208155203",
       "owner": "r3-wp-page3-291",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 291,
       "existing_parent_node_id": null,
-      "name": "Antennen & kleine Solaranlagen: Systeme & Lösungen vergleichen",
+      "name": "Gewitterschutz für Antennen und Balkonkraftwerke vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -5064,12 +5067,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:0a2f1bb1072579a69b7f",
+      "node_id": "core:c23:category:2487b924b2c85e225dc2",
       "owner": "r3-wp-page3-293",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 293,
       "existing_parent_node_id": null,
-      "name": "Temperaturwarnung in Sonderräumen: Systeme & Lösungen vergleichen",
+      "name": "Temperaturmelder für Gewächshäuser und Technikräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
@@ -5124,12 +5127,12 @@
       "requires_wp_import_approval": true
     },
     {
-      "node_id": "core:c23:category:7f0b04e31cf6190a54db",
+      "node_id": "core:c23:category:8333aebd2e46e059208c",
       "owner": "r3-wp-page3-294",
       "role": "R3_OLD_TOPIC_PAGE",
       "existing_wp_page3_id": 294,
       "existing_parent_node_id": null,
-      "name": "Sanitärräume & Nebenanlagen: Systeme & Lösungen vergleichen",
+      "name": "Schutz und Schließsysteme für Sanitärräume vergleichen",
       "kind": "VERGLEICH",
       "reason": "Unterschiedliche Schutzmaßnahmen, Ausstattungen oder Vorgehensweisen gegeneinander abwägen",
       "object_type": "category",
