@@ -1,0 +1,40 @@
+--- a/includes/class-pste-semantic-review-sandbox.php
++++ b/includes/class-pste-semantic-review-sandbox.php
+@@ -784,8 +784,13 @@
+         try{
+             $store=self::stored();self::assertNoActiveJob($store);
+             $last=(string)($store['last_internal_structure_recheck_at_utc']??'');
+-            if(!$force&&$last!==''&&strtotime($last)!==false&&time()-strtotime($last)<7*DAY_IN_SECONDS)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'source_data_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')throw new RuntimeException('PSTE_SANDBOX_RECHECK_BASELINE_REQUIRED');
++            // Recheck promptly after an actual rule/category change, not only after seven days.
++            // Bind to current existing baseline and existing editorial rules; no new store/worker.
++            $binding=self::internalStructureRecheckBinding($baseline);
++            $previousBinding=(string)($store['last_internal_structure_recheck_binding_sha256']??'');
++            $bindingStillCurrent=$previousBinding!==''&&hash_equals($previousBinding,$binding);
++            if(!$force&&$bindingStillCurrent&&$last!==''&&strtotime($last)!==false&&time()-strtotime($last)<7*DAY_IN_SECONDS)return ['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>'NOT_DUE','checked'=>0,'changed'=>0,'failed'=>0,'provider_calls'=>0,'source_data_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $registry=PSTE_Article_Type_Registry::build($baseline);$inventory=PSTE_Snapshot::inventory();$checked=0;$changed=0;$failed=0;$failures=[];$now=gmdate('c');
+             $store['last_internal_structure_recheck_attempt_at_utc']=$now;
+             foreach((array)$store['records'] as $id=>$record){
+@@ -809,10 +814,21 @@
+             }
+             $report=['contract'=>'PSTE_SANDBOX_PERIODIC_RECHECK_V2_HEALTH','status'=>$failed===0?'PASS':'PARTIAL_FAILURE','checked'=>$checked,'changed'=>$changed,'failed'=>$failed,'failures'=>$failures,'provider_calls'=>0,'source_data_write_attempted'=>false,'published_or_draft_article_write_attempted'=>false,'production_handoff_attempted'=>false];
+             $store['last_internal_structure_recheck_report']=$report;
+-            if($failed===0)$store['last_internal_structure_recheck_at_utc']=$now;
++            if($failed===0){$store['last_internal_structure_recheck_at_utc']=$now;$store['last_internal_structure_recheck_binding_sha256']=$binding;}
+             self::save($store);
+             return $report;
+         }finally{self::releaseLock($token);}
++    }
++
++    /** The existing Sandbox cron checks current categories/rules without a new schedule or table. */
++    private static function internalStructureRecheckBinding(array $baseline): string {
++        return hash('sha256',implode('|',[
++            'PSTE_SANDBOX_RECHECK_DEPENDENCIES_V1',
++            (string)($baseline['structure_sha256']??$baseline['structure_hash']??''),
++            (string)($baseline['protected_category_map_sha256']??''),
++            (string)PSTE_Editorializer::RULESET,
++            defined('PSTE_VERSION')?(string)PSTE_VERSION:'',
++        ]));
+     }
+ 
+     /** Return only fully proven automatic reentry envelopes; read-only. @return list<array<string,mixed>> */
