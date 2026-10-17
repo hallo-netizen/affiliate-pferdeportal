@@ -3449,3 +3449,92 @@ Trotz lokalem Vollworkflow kein neues Plugin, solange der aktuelle reale 1.14.15
 NEXT:
 Aktuellen `Finalen Readback als JSON` aus WordPress exportieren und gegen WIP 1:1 replayen. Kein Apply/Sync.
 
+---
+
+## PU-20261017-073 – HD-001 1.14.16 / exakter 1:1-Replay des realen 1.14.15-Readbacks + kompletter Positiv-/Negativ-Vollworkflow
+
+REALER INPUT:
+`hobby-depot-final-target-readback-20261017-113602-utc.json`
+
+1.14.15 REAL:
+- BLOCKED;
+- 3517 logisch / 3487 physisch;
+- CREATE 1122 / ADOPT 4 / UPDATE 2359 / UNCHANGED 0 / ARCHIVE 1;
+- exakt Hummelkästen + Lederprägen als LIVE_COLLISION;
+- kein Apply/Sync.
+
+EXAKTER REPLAY:
+- tatsächlicher 1.14.15-Dry-Run-Code;
+- 3486/3486 Aktionen exakt identisch;
+- Reihenfolge / Objekt-IDs / Actions / Mismatches exakt identisch;
+- Summary exakt identisch;
+- Errors exakt identisch;
+- action_exact=true;
+- diffs=[].
+
+URSACHE:
+- Hummelkästen Objekt 902484 -> tatsächliche Altbindung core:entity:b411cdf2ea6046005a4b;
+- Lederprägen Objekt 902560 -> tatsächliche Altbindung core:entity:ef539e4fcf98dc1c2437;
+- diese beiden realen IDs fehlten in 1.14.15.
+
+1.14.16 KORREKTUR:
+- exakt diese zwei belegten Migrationsbindungen ergänzt;
+- Sync-Tiefensortierung/Indizes vorberechnet;
+- Readback-State gebündelt persistiert;
+- Profil aus laufendem State ausgelagert;
+- Write-State für Rollback-Sicherheit weiter abgesichert;
+- keine Fach-, Kategorie-, Navigations- oder Architekturänderung.
+
+POSITIV VOLLWORKFLOW:
+- Dry-Run PASS;
+- 3487 Ziele;
+- CREATE 1122 / ADOPT 4 / UPDATE 2361 / UNCHANGED 0 / ARCHIVE 1 / Errors 0;
+- tatsächlicher Runner COMPLETE;
+- Readback 3487/3487;
+- Headernavigation PASS / expected_count 112;
+- 381/381 Hobbyseiten PASS;
+- unbound CORE pages 0;
+- Post-Sync-Dry-Run: 3487 UNCHANGED, sonst 0.
+
+NEGATIV:
+- Hummel foreign BLOCKED;
+- Hummel duplicate legacy BLOCKED;
+- Leder foreign BLOCKED;
+- Leder duplicate legacy BLOCKED;
+- Drift zwischen Dry-Run/Apply -> tatsächlicher Apply-Pfad lehnt ab;
+- Write-Failure nach 75 Mutationen -> ROLLBACK_PENDING -> ROLLED_BACK;
+- Ausgangsplan danach exakt wiederhergestellt;
+- Admin render ohne Vollscan;
+- manual-only bootstrap 0 Writes / 0 Schedules / 0 Network.
+
+PERFORMANCE:
+- alter Depth-Sort-Pfad ~24.26 s lokal;
+- gecacht ~0.012 s;
+- Runner in begrenzten kurzen Schritten;
+- kein einzelner lokaler Tick nahe Timeout.
+
+ARTEFAKT:
+`HD001_V1.14.16_HOBBY_DEPOT_V7_1_EXACT_REPLAY_FULL_WORKFLOW_HARDPASS.zip`
+
+ZIP SHA-256:
+`bbee98fbf9bbfadf49f18bf64e9f64aba1a274b2266a1473ec89d87996654792`
+
+PROFIL SHA-256:
+`87275396fdd8e2e9d15b0a37a6d17a7a21889825d7cdb3f64f276005c73b99d0`
+
+QA:
+- PHP 33/33 PASS;
+- ZIP 44/44 PASS;
+- unzip PASS;
+- roundtrip hashes 44/44 exact.
+
+LIVE:
+1.14.16 noch nicht real in WordPress dry-run geprüft.
+CURRENT.zip bleibt nicht synchronisiert.
+Kein Sync/Apply freigegeben.
+
+NEXT:
+1.14.16 installieren -> ausschließlich Finalen Delta-Dry-Run ausführen.
+Erwartung: 3487 / CREATE 1122 / ADOPT 4 / UPDATE 2361 / UNCHANGED 0 / ARCHIVE 1 / Errors 0.
+Bei Abweichung sofort STOP, kein Sync.
+
