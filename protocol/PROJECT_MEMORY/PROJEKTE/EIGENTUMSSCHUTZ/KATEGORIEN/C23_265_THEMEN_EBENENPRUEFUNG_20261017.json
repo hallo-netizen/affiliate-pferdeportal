@@ -40,12 +40,12 @@
     "new_beratung": 129,
     "individually_rejected_legacy": 30,
     "individual_extra_legacy": 63,
-    "individual_extra_new": 6,
-    "total_to_propose": 475,
-    "individually_rejected_new": 15,
+    "individual_extra_new": 4,
+    "total_to_propose": 473,
+    "individually_rejected_new": 17,
     "individually_named_legacy_comparisons": 91
   },
-  "planned_adds": 475,
+  "planned_adds": 473,
   "owners": [
     {
       "owner_type": "LEGACY_R3_PAGE3",
@@ -5596,17 +5596,12 @@
           "title": "Trocknung nach Löschwasserschäden vergleichen"
         }
       },
-      "further_individual_additions": [
-        {
-          "title": "Löschwasserschäden: Sanierungskosten",
-          "independent_value": "Trocknungsaufwand, bauliche Reparatur und Versicherung",
-          "capacity": "GROB_3_BIS_5_PLAUSIBEL__NICHT_ARTIKEL_GEPRUEFT"
-        }
-      ],
+      "further_individual_additions": [],
       "reader_levels": {
         "entry": "Grundverständnis, Auswahl und Grenzen",
         "experienced": "Nachrüstung, Betrieb, Problemlösung"
-      }
+      },
+      "optional_gap_rejected_reason": "Sanierungskosten sind bereits innerhalb 'Sanierung und Versicherung' enthalten. Ein zusätzlicher Kosten-Bereich wäre zu schmal."
     },
     {
       "owner_type": "NEW_C22_PAGE3",
@@ -5716,17 +5711,12 @@
           "title": "Maßnahmen gegen Brandüberschlag vergleichen"
         }
       },
-      "further_individual_additions": [
-        {
-          "title": "Brandüberschlag: Schutz von Anbauten und Außenlager",
-          "independent_value": "Abstände, Bauteile und nachbarschaftliche Risikofaktoren",
-          "capacity": "GROB_3_BIS_5_PLAUSIBEL__NICHT_ARTIKEL_GEPRUEFT"
-        }
-      ],
+      "further_individual_additions": [],
       "reader_levels": {
         "entry": "Grundverständnis, Auswahl und Grenzen",
         "experienced": "Nachrüstung, Betrieb, Problemlösung"
-      }
+      },
+      "optional_gap_rejected_reason": "Anbauten und Außenlager sind Einzelfälle des vorhandenen Bauteilschutzes; kein eigenständiger zusätzlicher Such-Intent."
     },
     {
       "owner_type": "NEW_C22_PAGE3",
@@ -13716,14 +13706,6 @@
       "wp_write": false
     },
     {
-      "owner_key": "c22-topic-index-36",
-      "kind": "INDIVIDUELL",
-      "name": "Löschwasserschäden: Sanierungskosten",
-      "why": "Trocknungsaufwand, bauliche Reparatur und Versicherung",
-      "capacity": "GROB_3_BIS_5_PLAUSIBEL_KEIN_ARTIKELPLAN",
-      "wp_write": false
-    },
-    {
       "owner_key": "c22-topic-index-37",
       "kind": "BERATUNG",
       "name": "Brandschaden am Wohnhaus: Beratung & Entscheidungen",
@@ -13744,14 +13726,6 @@
       "kind": "BERATUNG",
       "name": "Brandschutz gegen Brandüberschlag: Beratung & Entscheidungen",
       "why": "Eigenständige Entscheidungshilfe für Neueinsteiger, sinnvolle Varianten und Erweiterungen",
-      "capacity": "GROB_3_BIS_5_PLAUSIBEL_KEIN_ARTIKELPLAN",
-      "wp_write": false
-    },
-    {
-      "owner_key": "c22-topic-index-39",
-      "kind": "INDIVIDUELL",
-      "name": "Brandüberschlag: Schutz von Anbauten und Außenlager",
-      "why": "Abstände, Bauteile und nachbarschaftliche Risikofaktoren",
       "capacity": "GROB_3_BIS_5_PLAUSIBEL_KEIN_ARTIKELPLAN",
       "wp_write": false
     },
@@ -14576,6 +14550,7 @@
     "v3_critical_revision": "After inspecting EACH of 21 new-topic extra facets alongside ALL already imported sibling labels, 15 proposals were withdrawn (including two demonstrably attached to wrong topics at indices 78/88); 6 distinct extras remain. No schema F, no blind category multiplication.",
     "all_265_owners_reviewed_against_existing_flat_category_names": true,
     "no_wordpress_write": true,
-    "v4_comparison_label_review": "91/91 individual old-page comparison category names specify concrete system/product/method group. Replaces generic 'Systeme & Lösungen vergleichen' naming."
+    "v4_comparison_label_review": "91/91 individual old-page comparison category names specify concrete system/product/method group. Replaces generic 'Systeme & Lösungen vergleichen' naming.",
+    "latest_check": "2 more new-topic extras (indices 36 and 39) rejected because of redundant Sanierung / Bauteilschutz; 265 owners remain, 473 additions are only candidates."
   }
 }
