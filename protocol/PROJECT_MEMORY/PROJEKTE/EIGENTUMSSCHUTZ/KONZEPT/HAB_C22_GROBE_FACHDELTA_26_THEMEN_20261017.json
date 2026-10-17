@@ -251,7 +251,7 @@
   ],
   "other_topics_reviewed_without_additional_clear_gap": 146,
   "quality": {
-    "positive": "26 eindeutige Vorschlaege, je konkreter Themen-Owner und sachlicher Abgrenzungsgrund",
+    "positive": "26 eindeutige Vorschlaege, je konkreter Themen-Owner und sachlicher Abgrenzungsgrund; 15 Kosten-Sonderfälle nach groben Unterschieden beurteilt",
     "negative": "Doppelter Vorschlag im selben Thema wurde im Test erkannt",
     "limits": "Nur redaktionelle Grobeinschaetzung anhand aktueller Fachstruktur, weder Live-Abnahme noch Artikelpruefung",
     "user_approval_required_for_writer": true
@@ -262,5 +262,109 @@
     "Keine WP-Kategorienanlage",
     "Keine Artikelerstellung",
     "Keine kostenpflichtigen SEO-Abfragen"
-  ]
+  ],
+  "optional_cost_overlap_grob_review": {
+    "date": "2026-10-17",
+    "scope": "15 Kostenkandidaten mit zuvor offener Überlappungsprüfung, keine Artikelplanung",
+    "reviewed": 15,
+    "rows": [
+      {
+        "source_topic_index": 3,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Kosten für Sicherung, Ortung und laufende Dienste gehen über Schlossauswahl hinaus.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 6,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Sicherung, Ortungsdienst und Ersatzaufwand sind verschiedene Kostenfaktoren.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 8,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Mechanische Nachrüstung, Antriebsintegration und fachliche Montage erzeugen eigenständige Kostenfragen.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 9,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Schutzbeschläge, Einbau und laufender Sicherungsaufwand sind unterschiedlich.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 10,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Zylindertypen, Schließanlagen, Schlüssel und Handwerkerleistungen rechtfertigen eigene Kostenbetrachtung.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 17,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Abholbox, elektronischer Zugang, Service und Vandalismusschäden bringen unterschiedliche Aufwände.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 23,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Überwachung, Brandschutz-Nachrüstung, fachliche Prüfung und Ersatz sind wirtschaftlich trennbar.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 24,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Schutzkomponenten, Prüfung, Montage und Nachrüstung haben unterschiedliche Kostenrollen.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 41,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Motorraum-Sicherung, Löschtechnik und regelmäßige Kontrolle erzeugen unterscheidbare Kosten.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 67,
+        "result": "IN_BESTEHENDE_BERATUNG_ODER_VERGLEICH_INTEGRIEREN",
+        "independent_value": "Kosten für Handsender, Anlernen und Ersatz sind eher Kauf- und Austauschentscheidung; eigener Kostenbereich grob zu schmal.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 76,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Bauteil, elektrische Anbindung, Nachrüstung und Fachservice unterscheiden sich.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 106,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Dichtung, lokale Reparatur und umfassende Anschluss-Sanierung haben unterschiedliche Kostenrahmen.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 113,
+        "result": "PRAEZISIEREN_KEINE_AUSWEITUNG_AUF_GESAMTTUERE",
+        "independent_value": "Als Feuchteschutz-Kosten (Abdichtung, Dichtung, Reparatur) sinnvoll; pauschale Türenanschaffung gehört nicht hierher.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 120,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Einfachmelder, Funkverbund, Absperrventil und laufender Betrieb unterscheiden sich wirtschaftlich.",
+        "wordpress_action": "NONE"
+      },
+      {
+        "source_topic_index": 130,
+        "result": "BEHALTEN_VORLAEUFIG",
+        "independent_value": "Abdeckung, Stellplatz, baulicher Hagelschutz und Schadens-/Versicherungsfolgen sind unterschiedliche Kostenansätze.",
+        "wordpress_action": "NONE"
+      }
+    ],
+    "counts": {
+      "BEHALTEN_VORLAEUFIG": 13,
+      "IN_BESTEHENDE_BERATUNG_ODER_VERGLEICH_INTEGRIEREN": 1,
+      "PRAEZISIEREN_KEINE_AUSWEITUNG_AUF_GESAMTTUERE": 1
+    },
+    "other_optional_candidates_not_rejudged_here": 88,
+    "warning": "Vorläufige Grobentscheidung, vor Writer-Delta sachlich mit bestehenden Labels und Livebestand abgleichen"
+  }
 }
