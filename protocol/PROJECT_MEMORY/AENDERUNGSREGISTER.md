@@ -1667,3 +1667,15 @@ GitHub-Snapshotbranches plus lokales Komplettbackup vom 16.10.2026 vor der Berei
 
 ENTFERNBAR:
 NEIN – dauerhafte Campusregel.
+
+
+## ARCH-095 – Repository-/Branch-Cleanup besitzt genau eine Current-Autorität
+
+WAS:
+Der campusweite Repository-/Branch-Cleanup ist als Scope `CAMPUS_REPOSITORY_CLEANUP` im Autoritätsplan registriert. Seine einzige aktuelle Stand-/Blocker-/NEXT-ACTION-Wahrheit liegt in `protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md`.
+
+WARUM:
+Registry, Hausmeisterprotokoll, Archivcheckpoint und Chatübergabe sind bewusst keine Current-Autoritäten. Ohne eigenen Cleanup-Current musste ein Folgechat den aktuellen Arbeitsstand aus mehreren Nachweisquellen rekonstruieren und durfte nach der Ein-Wahrheit-Regel keine Löschentscheidung treffen.
+
+GRENZE:
+Keine neue Facharchitektur, kein neuer Runner und keine Änderung an K0, Affiliate, Plugins oder anderen Projektgebäuden. Branchlöschung bleibt nur nach vollständiger Referenz-/Rollen-/Commitprüfung zulässig.
