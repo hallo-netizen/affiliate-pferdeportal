@@ -13,8 +13,9 @@ $rel=PSTE_Portal_Relevance_Gate::evaluateBeforeAssignment($question,$b,$r,(strin
 check(!empty($rel['ok'])&&empty($rel['family_hint']['family_key']), 'Worker 1 independent of DataForSEO family');
 $p=PSTE_Normal_Metadata_Path::applyToPayload($e,$b,(string)($e['research_origin_family_key']??''));$n=$p['normal_metadata_path'];
 check(!empty($n['title_precheck_validated'])&&($n['worker_flow']['steps']['title']['decision']??'')==='GREEN','Worker 2 does not require family assignment');
-check(($n['worker_flow']['halted_at']??'')==='lane'&&($n['worker_flow']['storage']??'')==='EXISTING_SANDBOX','Unclear lane yellow, category not invented');
+check(($n['worker_flow']['steps']['lane']['decision']??'')==='GREEN'&&($n['worker_flow']['halted_at']??'')==='category'&&($n['worker_flow']['storage']??'')==='EXISTING_SANDBOX','Existing dual type checker confirms Fach; category remains yellow without invented term');
 check(($p['production_title']??'')===''&&($p['textmachine_handoff_status']??'')!=='READY_FOR_COMPILER_CAPABILITY_CHECK','No blocked item reaches compiler');
+check(($n['article_type']??'')==='FAQ'&&!empty($n['family_independent_type_evidence']['ok'])&&!empty($n['sandbox_required']),'No family needed for independent FAQ type, unresolved category stays Sandbox');
 $nonHorse=PSTE_Portal_Relevance_Gate::evaluateBeforeAssignment('Kaffeemaschine günstig kaufen',$b,$r);
 check(empty($nonHorse['ok'])&&($nonHorse['status']??'')==='EXTERNAL_REVIEW_REQUIRED','Unrelated keyword remains yellow');
 $bad=['contract'=>'PSTE_PORTAL_RELEVANCE_PROOF_V1','status'=>'RELEVANT_FOR_PORTAL','raw_query_sha256'=>str_repeat('0',64),'family_name'=>''];
