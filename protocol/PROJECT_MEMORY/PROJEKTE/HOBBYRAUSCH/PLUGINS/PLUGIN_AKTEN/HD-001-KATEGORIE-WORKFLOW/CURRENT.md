@@ -3,57 +3,68 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.14.9 UNSICHER / 1.14.11 V7 MANUAL-ONLY LOCAL HARD PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STATUS: **LIVE 1.14.9 UNSICHER / 1.14.12 V7.1 MANUAL-ONLY LOCAL HARD PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
 ## Live
 
-Vom Nutzer am 2026-10-17 direkt aus WordPress bestätigt:
+Vom Nutzer direkt aus WordPress bestätigt:
 `Affiliate-Portal Kategorie-Workflow 1.14.9` ist aktiv.
 
 **1.14.9 ist verworfen.**
-Ursache des Gateway Timeout:
-- automatischer Final-Target-Bootstrap konnte nach Versionswechsel auf normalem WordPress-`init` anlaufen.
+Ursache:
+automatischer Final-Target-Bootstrap konnte nach Versionswechsel auf normalem WordPress-`init` anlaufen und Gateway Timeout verursachen.
 
 ## Einziger Kandidat
 
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.11_HOBBY_DEPOT_V7_MANUAL_ONLY_LOCALPASS.zip`
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.12_HOBBY_DEPOT_V7_1_MANUAL_ONLY_LOCALPASS.zip`
 
 SHA-256:
-`d441f36899ce8ef6fd8a47051ea066e24aeb41ac6ec07f28c2cae5c11444311e`
-
-Enthält exakt:
-`HOBBY_DEPOT_TARGET_PROFILE_V7_CALIBRATED_ROLLOUT_20261017`
-
-Profil-SHA:
-`a36a7b1b3639b503028d2339c17fcc04ca349769c4f3d2d5dfdb11f8061325fc`
+`2a0ac6e936628baf7aff3b0ed67bdecd60a9ca9ba23d992396fa4d0abf2b0a5f`
 
 Profil:
-- 3517 Zielknoten;
-- 381 terminale Hobbys.
+`HOBBY_DEPOT_TARGET_PROFILE_V7_1_DRYRUNFIX_20261017`
+
+Profil-SHA:
+`14b7b4b66310ccf19e51e9a4e403628af8705a5ae6f1e14e03f5c87f0991bc7e`
+
+## Warum V7.1
+
+Der erste echte Dry-Run-Test des V7-Profils blockierte korrekt, weil zwei historische Kontrollzähler noch auf dem alten 330er Stand standen.
+
+V7.1 aktualisiert diese Kontrollzahlen auf den tatsächlich aufgelösten Bestand:
+- 862 Entities;
+- 383 CORE Entities;
+- 381 terminale Hobby-Hubs;
+- 2995 Content-Kategorien;
+- 3487 physische Ziele.
+
+Keine fachliche V7-Struktur wurde dadurch verändert.
 
 ## Safety-QA
 
 - PHP 33/33 PASS;
-- ZIP 47/47 PASS;
-- embedded TargetTree valid;
-- 0 TargetTree Errors;
-- 0 TargetTree Warnings;
+- ZIP PASS;
 - `APKW_TARGET_TREE_MANUAL_ONLY=true`;
-- Target-Runner-init-hooks: 0;
+- Target-Runner-init-hooks 0;
 - Installation/Aktivierung: 0 Writes / 0 Schedules / 0 Network;
-- Final-Dry-Run ruft nur DryRun-Build auf;
-- Apply/Sync ausschließlich separater bestätigungspflichtiger Adminweg.
+- echter Plugin-Resolver: 3517 Knoten / 862 Entities / 0 Errors / 0 Warnings;
+- Dry-Run ruft keinen Apply auf;
+- Apply/Sync bleibt separater bestätigungspflichtiger Adminweg.
 
-## Betriebsregel
+## Echter Dry-Run-Simulations-PASS
 
-Installation/Aktivierung darf keinerlei Vollbaum-Verarbeitung starten.
+Gegen simulierten alten Live-330er Zielbestand:
+- CREATE 1128;
+- ADOPT 3;
+- UPDATE 2356;
+- ARCHIVE 1;
+- Errors 0;
+- Provider Calls 0;
+- WordPress Writes 0.
 
-Dry-Run:
-- lesen/auflösen/vergleichen;
-- keine Writes;
-- kein DataForSEO-Pflichtaufruf;
-- kein Apply.
+Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_V7_1_ACTUAL_DRYRUN_SIM.json`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.14.11 über die aktive 1.14.9 installieren. Danach nur den manuellen Finalen V7-Dry-Run starten; keinen Apply/Sync bestätigen.**
+**1.14.12 über die aktive 1.14.9 installieren. Danach nur den manuellen Finalen Delta-Dry-Run starten; keinen Apply/Sync bestätigen.**
