@@ -1,0 +1,21 @@
+--- a/includes/class-pste-journal-semantic-router.php
++++ b/includes/class-pste-journal-semantic-router.php
+@@ -38,6 +38,18 @@
+         if(preg_match('/\b(?:verhalten|koerpersprache|körpersprache|angst|stress|herde|rangordnung|vertrauen|scheu|scheuen|aggressiv|aggression|ohren|mimik|wehrt|verweigert)\b/u',$q))$domains['understanding']='Pferde Verstehen';
+         if(preg_match('/\b(?:offenstall|boxenhaltung|weidehaltung|herdenhaltung|paddocktrail|paddock\s*trail|haltung|haltungsform|haltungsformen|stallhaltung)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
+         if(preg_match('/\b(?:salzleckstein|salzlecksteine|heu|heuverzehr|futter|futters|fütterung|fuetterung|füttern|fuettern|fressen|futtern|ernährung|ernaehrung|weidegras|mineralfutter|kraftfutter)\b/u',$q))$domains['feeding']='Pferdeernährung verstehen';
++        // These unmistakable horse-feeding subjects do not depend on the
++        // DataForSEO origin family. Later title/term/signature gates stay unchanged.
++        if(!$provenProductFamily && preg_match('/\b(?:haferflocken|hafer|maisflocken|maiscobs|leinöl|leinoel|getreide|heulage|raufutter)\b/u',$q))
++            $domains['feeding']='Pferdeernährung verstehen';
++        // Four-step routing: only when no existing proven Fach family owns the topic,
++        // reuse the same Journal decision for clearly named, horse-specific subject
++        // terms. Do not override existing family FAQ/Vergleich decisions.
++        // A generic Weide mention does not compete with a proven feeding subject.
++        if(!$provenProductFamily){
++            if(!isset($domains['feeding']) && !isset($domains['housing'])
++                && preg_match('/\b(?:weide|weidegang|koppel)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
++        }
+         if(preg_match('/\b(?:gesundheit|krankheit|krankheiten|lahmheit|kolik|koliken|husten|fieber|entzündung|entzuendung|tierarzt|verletzung|schmerzen|wunde|parasiten)\b/u',$q))$domains['health']='Pferdegesundheit verstehen';
+         if(preg_match('/\b(?:pferderasse|pferderassen|pferdetyp|pferdetypen|warmblut|kaltblut|vollblut|pony|ponys|friese|haflinger|araber)\b/u',$q))$domains['breeds']='Pferderassen & Pferdetypen';
+         if(preg_match('/\b(?:versicherung|versicherungen|pferdeversicherung|pferdeversicherungen|pferderecht|vorschriften|gesetz|gesetze|gesetzlich|haftung|kaufvertrag|stallmiete|stallkosten|unterhaltskosten|finanzierung|recht|steuern|pferdepass)\b/u',$q))$domains['law']='Recht, Finanzen & Organisation';
