@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V3 2656-KNOTEN-AUDIT PASS / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V4 2743-KNOTEN-AUDIT PASS / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
 ## Live-Baseline
 
@@ -16,67 +16,88 @@ Produktiv unverändert:
 - 330/330 terminale CORE-Seiten;
 - LIVE-PASS.
 
-## Zentraler V3-Kandidat
+## Zentraler V4-Kandidat
 
 Profil:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V4_20261017.json`
+
+SHA-256:
+`96b09a55047cb43b286a3d2fe4f11232ee98a8c6a0abab7d5818f1d21cb04e27`
 
 Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V4_20261017.json`
 
 Delta:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V3_20261016.json`
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V4_20261017.json`
 
-Synthetic-Dry-Run:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_HD001_SYNTHETIC_DRYRUN_V3_20261016.json`
-
-## Voll-Audit V3
+## Voll-Audit V4
 
 - 8/8 Hauptwelten unverändert;
-- 370 terminale Hobbyseiten;
-- 2160 unterste Inhaltskategorien;
+- 381 terminale Hobbyseiten;
+- 2236 unterste Inhaltskategorien;
 - je terminaler Hobbyseite 5–8 Inhaltskategorien;
-- 2160/2160 Leafs grob mit mindestens 3–5 vertiefenden Beitragsthemen möglich;
-- keine Kategorie unter einer untersten Kategorie;
+- 381/381 mit `FAQ / Häufige Fragen`;
+- unterste Inhaltskategorie hat keine weitere Kategorie darunter;
+- jede unterste Inhaltskategorie muss grob mindestens 3–5 eigenständige Beiträge tragen können;
+- Kosten / Vergleich / Pflege / Ausrüstung sind **keine Pflichtlabels**: eigener Leaf nur wenn das Thema 3–5 eigenständige Beiträge trägt, sonst als Artikel in einem breiteren passenden Leaf;
 - keine fehlenden Parents;
 - keine doppelten Node-IDs/Slugs;
-- HD-001 Validator: 0 Errors / 0 Warnings.
+- kein direkter Hauptwelt-Hub mehr ohne `nav_order`;
+- HD-001 TargetTree Validator: 0 Errors / 0 Warnings;
+- Design-Registry-Vollsimulation: 0 page/category/type/world/render mismatches.
 
-Fachlich korrigiert/ergänzt:
+## Fachliche Korrekturen/Erweiterungen
+
+V3 bleibt enthalten:
 - Spotting & Verkehr;
 - Citizen Science;
 - Natur bestimmen;
 - Plane Spotting aus Messen & Analysieren heraus;
 - Suchen & Finden;
 - Modellbau unter Fertigen;
-- Miniaturen & Szenen ergänzt;
-- Naturfunde ergänzt;
-- Schneckenhaltung ergänzt;
-- Quilten-Leaf zu `Quiltmuster & Stichführung` präzisiert.
+- Miniaturen & Szenen erweitert;
+- Naturfunde erweitert;
+- Schneckenhaltung;
+- Quilten-Leaf = `Quiltmuster & Stichführung`.
 
-Bewusste Watchlist ohne automatische Zusammenlegung:
-- Asselhaltung / Isopoden-Zucht;
-- Münzen / Numismatik;
-- Teichwasser-Mikroskopie / Gewässermikroskopie.
+V4 ergänzt gezielt dünne, fachlich sinnvolle Hubs:
+- Schrift & Lettering → Federkiel-Schreiben;
+- Leder → Lederprägen, Schuhmacherei;
+- Bonsai & Miniatur → Penjing, Saikei;
+- Essbare Pflanzen → Kräuteranbau, Obst im Kübel;
+- Imkerei & Bestäuber → Wildbienenhotels, Hummelkästen;
+- Gehegegestaltung → Paludarium, Terrarienbau.
 
-## Synthetischer HD-001-Dry-Run
+Bewusst **nicht künstlich aufgefüllt**:
+- Smart Home bleibt fokussiert auf Heimautomatisierung;
+- Pilze & Kulturen bleibt Pilzzucht + Speisepilzzucht; Pilzklonen/Substrate sind tiefere Themen, keine künstlichen Geschwister-Hobbys.
 
-- CREATE 282;
-- ADOPT 3;
-- UPDATE 2357;
-- ARCHIVE 0;
-- Provider-/DataForSEO-Aufrufe 0;
-- WordPress-Writes 0.
+## Mega-Menü-Datenursache
 
-ADOPT statt Dublette:
-Trainspotting, Modellraketen, Pflanzenbestimmung.
+Im Live-/V3-Bestand fehlte bei 10 direkten Welt-Hubs `nav_order`.
+Dadurch wurden z. B. bei Pflanzen `Bonsai & Miniatur`, `Gärtnern` und `Moos & Miniaturgärten` vor Kategorien mit echter Reihenfolge sortiert.
+
+V4 setzt für **alle direkten Hubs aller acht Hauptwelten** eine vollständige, eindeutige Reihenfolge.
+
+`Bonsai & Miniatur → nur Bonsai` war kein CSS-Fehler, sondern ein zu dünner zentraler Hub. V4 ergänzt dort Penjing und Saikei.
+
+## Letzte Inhaltskategorie-Ebene
+
+Diese Ebene ist vorhanden und im Registry-Renderer sichtbar.
+Beispiel Ameisenhaltung:
+- Einstieg & Arten;
+- Formicarium & Nest;
+- Futter & Wasser;
+- Winterruhe & Klima;
+- Kolonie & Pflege;
+- Ausbruchsschutz & Probleme;
+- FAQ / Häufige Fragen.
+
+FAQ ist im V4-Kandidaten für 381/381 terminale Hobbyseiten vorhanden.
 
 ## Timeout-Korrektur
 
-**HD-001 1.14.9 ist verworfen.**
-
-Ursache:
-automatischer Final-Target-Bootstrap auf WordPress-`init` nach Versionswechsel.
+HD-001 1.14.9 ist verworfen.
 
 Sicherer Kandidat:
 `/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.10_MANUAL_ONLY_TIMEOUT_FIX_LOCALPASS.zip`
@@ -88,18 +109,18 @@ SHA-256:
 - kein automatischer Runner-Bootstrap;
 - Installation/Aktivierung startet keine Vollbaum-Verarbeitung;
 - Dry-Run nur manuell;
-- Sync getrennt und bestätigungspflichtig.
+- Sync separat bestätigungspflichtig.
 
 ## Betriebsregel
 
 DataForSEO = Evidence, nicht Strukturautorität.
-
-Frontend/Design liest Struktur über HD-004; keine rohen WordPress-`get_pages()`-Kinder als Wahrheit.
+Kategorie-Zentrale = alleinige Strukturwahrheit.
+Design liest ausschließlich HD-004, nicht rohe WordPress-`get_pages()`-Kinder.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der echte manuelle V3-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
+**V4 ist lokal vollständig geprüft, aber noch nicht gegen die echte WordPress-Datenbank als manueller Delta-Dry-Run gelaufen.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Für den V3-Dry-Run ausschließlich HD-001 1.14.10 einsetzen und nur den manuellen Finalen Delta-Dry-Run ausführen. Noch nicht synchronisieren.**
+**Noch keinen Sync. Zuerst HD-001 1.14.10 sicher bereitstellen; danach ausschließlich den manuellen V4-Final-Dry-Run ausführen und Ergebnis gegen das V4-Delta prüfen.**
