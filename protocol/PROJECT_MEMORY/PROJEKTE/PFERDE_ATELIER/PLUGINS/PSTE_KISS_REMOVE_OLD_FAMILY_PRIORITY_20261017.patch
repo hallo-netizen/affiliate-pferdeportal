@@ -1,0 +1,49 @@
+--- a/includes/class-pste-normal-metadata-path.php
++++ b/includes/class-pste-normal-metadata-path.php
+@@ -85,9 +85,8 @@
+         array $base,string $analysisRaw,string $raw,array $baseline,array $registry,
+         string $preferredFamilyKey,array $relevance,array $seoEvidence,string $persistedTitle
+     ): array {
+-        // WORKER 2. A clean title (or title-candidate awaiting existing hard
+-        // checks) is retained even if NO domain family can be identified.
+-        $base=self::validatedTitleBeforeFamilyAssignment($base,$analysisRaw,$registry,$persistedTitle);
++        // Worker 2 has already run exactly once in evaluateRaw(). Do not
++        // recompute or overwrite its finished title while selecting a category.
+         if(empty($base['title'])&&$persistedTitle!==''){
+             $base['title']=$persistedTitle;$base['title_generated']=true;
+             $base['title_candidate_only']=true;$base['title_candidate_source']='STORED_TITLE_AWAITS_HARD_REVALIDATION';
+@@ -100,24 +99,16 @@
+         // support the Fach category, but it never decides whether we continue.
+         $probe=PSTE_Editorial_Topic_Normalizer::semanticProbe($analysisRaw);
+         $familyKey='';$family=[];$membership=[];$familyResolution=[];
+-        $candidateKeys=[];
+-        if($preferredFamilyKey!==''&&isset($registry['families'][$preferredFamilyKey]))$candidateKeys[]=$preferredFamilyKey;
+-        $hintKey=(string)($relevance['family_hint']['family_key']??'');
+-        if($hintKey!==''&&isset($registry['families'][$hintKey]))$candidateKeys[]=$hintKey;
+-        foreach(array_unique($candidateKeys) as $key){
+-            $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
+-            if(empty($test['ok']))continue;
+-            $familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;
+-            $familyResolution=['status'=>'MATCH','source'=>'POST_RELEVANCE_FAMILY_HINT','winner'=>['family_key'=>$key,'topic_family_name'=>(string)($family['topic_family_name']??'')]];
+-            break;
+-        }
+-        if($familyKey===''){
+-            $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
+-            if(($familyResolution['status']??'')==='MATCH'){
+-                $key=(string)($familyResolution['winner']['family_key']??'');
+-                if($key!==''&&isset($registry['families'][$key])){
+-                    $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
+-                    if(!empty($test['ok'])){$familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;}
++        // Worker 4 uses the SINGLE current taxonomy across all categories.
++        // The research-origin family is metadata, never a preferred routing
++        // shortcut. The existing V2 resolver already evaluates every family.
++        $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
++        if(($familyResolution['status']??'')==='MATCH'){
++            $key=(string)($familyResolution['winner']['family_key']??'');
++            if($key!==''&&isset($registry['families'][$key])){
++                $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
++                if(!empty($test['ok'])){
++                    $familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;
+                 }
+             }
+         }
