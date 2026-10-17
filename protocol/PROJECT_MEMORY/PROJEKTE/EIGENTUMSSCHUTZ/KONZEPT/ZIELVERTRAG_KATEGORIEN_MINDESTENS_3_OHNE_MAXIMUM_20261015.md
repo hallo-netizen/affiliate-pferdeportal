@@ -1,4 +1,23 @@
-# HAB & BEWAHR – ZIELVERTRAG KATEGORIEN
+# Verbindliche Nachschärfung 2.3 · 17.10.2026 · Kategorien und Navigation
+
+**Gilt ab sofort und verdrängt widersprechende ältere Passagen dieser Datei.** Der bisherige Hab-&-Bewahr-Fachbaum bleibt unverändert; die Überprüfung ist eine Fehlerlehre und ausdrücklich **kein neuer Kategorieimport**.
+
+1. **Vor jedem Weiterbau die aktuelle Originalquelle lesen.** Ein Projekt hat genau einen gültigen Kategorien-Current und einen gültigen Design-Current. Übergaben, ältere Entwürfe, Register und Tests sind keine Ersatz-Autorität. Nur echte Abweichungen bearbeiten.
+2. **Gesamtbestand statt nur neuen Teilbestand.** Sämtliche alten und neuen letzten Themenseiten fachlich durchgehen, nicht nur die gerade neu importierten. Für Hab & Bewahr: 93 alte + 172 neue = 265. FAQ und **ausreichende** Beratung pro Thema verbindlich; Vergleiche, wenn eigenständig sinnvoll; weitere individuelle Vertiefungen nur bei Mehrwert. Bereits vorhandene ausreichende Intents nicht duplizieren.
+3. **Rollen-/Owner-Gate vor Mengentest.** Welt, Bereich, konkretes Thema als drei **WP-Seitenebenen**, dann genau eine flache `category`-Ebene mit späteren Beiträgen. Keine falsche vierte Seite, keine verschachtelte WP-Inhaltskategorie. Konkretes Sachthema ist kein bloßer Intent-Term. Jede Artikelkategorie bleibt eindeutig beim konkreten Thema.
+4. **Keine falschen Grünmeldungen.** Ein Validator, der nur Zahl, Existenz, Namenseindeutigkeit oder behauptetes Potenzial zählt, ersetzt keine fachliche Einzelprüfung. Sinnvolle grobe Beitrags-Tragfähigkeit (ca. 3–5) genügt; keine konkreten Artikel oder SEO-Detailprüfungen als Kategoriefreigabe.
+5. **Fachliche Anzahl vor Bildschirmraster.** Mindestens drei sinnvolle Kinder, wo der Portalvertrag es verlangt, **keine Höchstzahl**. Im Megamenü je Zeile höchstens fünf *Spalten*, aber beliebig viele nachfolgende Zeilen; je Bereich vier direkt sichtbare gültige Themenlinks, „Alle Themen“ nur bei tatsächlichem Überlauf. Auf der Hubseite müssen alle gültigen Themen erreichbar sein.
+6. **Altbestand bleibt geschützt.** Vor Änderungen alte echte WP-IDs, URL/Slug, Parent, Revision, Artikelbindungen sichern; insbesondere 93/285 historische Objekte und bisherige erfolgreiche 743/472 Einspielungen nicht still umbenennen, umhängen oder erneut importieren. Neue Fachergänzungen nur als getrennte ADD-only-Welle mit Vorprüfung, Negativtests, Sicherung, expliziter Freigabe, Rückbaukontrolle und echtem WordPress-Readback.
+7. **Sichtbarer Ausgabepfad zuerst.** Bevor ein Menüsymptom verändert wird, den tatsächlich aktiven HTML-Renderer identifizieren. Hab & Bewahr verwendet das bestehende Designplugin für sichtbare Mega-/Hub-Navigation, den Kategorie-Workflow für die Daten; Design behebt keine Datenprobleme und Kategorie-Writer behebt nicht blind Designfehler. Realen Snapshot mit Feld `display_name` und Parent-Schema verwenden, Cacheversion prüfen. Auch Mobil-/Rand-/Overflow und Endkategorie ohne Geschwister-Fallback testen.
+8. **Ein Plugin je Zuständigkeit.** Bestehende Plugin-Basename und WordPress-Core intakt lassen; kein parallel installiertes neues Design- oder Kategorieplugin. Geringer DB-/Frontend-Aufwand, keine zusätzliche Banner-Frontend-Abfrage. Globale Layoutregeln gelten für dieselbe Ebene, ändern nicht die Kategoriehierarchie.
+9. **Status nur so stark wie der Beleg.** `FACHPLAN FERTIG`, `LOKAL GETESTET`, `WP-LIVE IMPORTIERT`, `SICHTBARES FRONTEND LIVE GEPRÜFT` getrennt ausweisen. Keine „1:1 live geprüft“-Behauptung bei Mock-/PHP-/Browser-Fixuretests.
+10. **Übertrag auf Folgeportale:** Die ausführliche, anhand tatsächlich protokollierter Fehlversuche zusammengestellte Checkliste steht in `KONZEPT/KATEGORIEN_NAVIGATION_PORTALSTANDARD_FEHLERLEHREN_20261017.md`. Ihre Prüfschritte übernehmen, nicht Hab-&-Bewahr-Zahlen, -Begriffe oder -Hierarchie ungeprüft kopieren.
+
+**Operativer Stand unverändert:** Die fachlich endgültigen **471** C2.3-Ergänzungen sind mit Kategorieplugin **1.14.8.32** lokal geprüft, aber laut aktuellem GitHub-Stand **nicht live importiert**. Die früheren 490/475 sind abgelöst. **Nächste Kategorieaktion bleibt nur der gesonderte 471er WordPress-Import**, nicht erneut entwickeln, nicht alte Wellen starten.
+
+---
+
+# HAB & BEWAHR – ZIELVERTRAG KATEGORIEN (historische Fassung 2.2, gültig nur soweit mit Nachschärfung 2.3 vereinbar)
 Fassung 2.2 · 16.10.2026 · **AKTIV** · Nachfolger von `ZIELVERTRAG_KATEGORIEN_3_BIS_10_20261013.md`.
 
 ## Verbindlicher jüngster Nutzernachtrag vom 17.10.2026 – ALLE 265 THEMENSEITEN, NICHT SCHEMA F
