@@ -3715,3 +3715,64 @@ LIVE: offen.
 
 NEXT:
 1.50.672 installieren -> normale Hobby-Depot-Seite aufrufen -> nur bei Frontend-PASS Bildprüfung fortsetzen.
+
+---
+
+## PU-20261017-077 – HD-003 1.50.673 / Audio-&-HiFi Hero-/Textpilot nach Pferdeatelier-Regeln
+
+AUSGANG:
+1.50.672 real im Frontend funktionsfähig; Nutzer akzeptiert den Bildstand.
+
+NUTZERDELTA:
+- Hero-Bild auf Desktop deutlich breiter bis nahe an die Überschrift;
+- links nur Claim + H1 + kurzer prägnanter Satz;
+- langer Kategorietext darunter;
+- generische `Bei XY geht es um ...`-Schablone beseitigen;
+- Pferdeatelier-Kategorietextregeln exakt übernehmen;
+- Audio & HiFi zuerst als einzelner Pilot;
+- Unterkategorie-Kurzzeilen ebenfalls natürlich und individuell.
+
+TEXTREGELQUELLE:
+`TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`
+SHA `721e3f77d021b3e07e29ed98c9f921d3e0669fa9`.
+
+UMSETZUNG:
+- nur Audio & HiFi;
+- Desktop 34 % Copy / 66 % Bild;
+- Höhe 320 px;
+- <=1100 px bestehende Stapellogik unverändert;
+- eigener Hero-Satz;
+- 161-Wörter-Kategorietext;
+- sieben individuelle Kurzzeilen für die realen Audio-Unterkategorien.
+
+REGRESSION:
+- 901/901 Assets zu 1.50.672 identisch;
+- keine andere Kategorie in Text oder Layout geändert;
+- Mega-Menü-Code unverändert.
+
+QA:
+- Audio Text 161 Wörter;
+- Hero 20 Wörter;
+- sichtbarer Langtext 68 Wörter;
+- Aufklapper 73 Wörter;
+- 7/7 Kurzzeilen eindeutig;
+- AF-026 7/7 PASS;
+- Fronttemplate PASS;
+- Contenttemplate PASS;
+- Dirty-Overlay 1.50.672 -> 1.50.673 PASS;
+- PHP 66/66;
+- ZIP PASS;
+- Roundtrip 1034/1034.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.673_HOBBY_DEPOT_AUDIO_HIFI_HERO_TEXT_PILOT_HARDPASS.zip`
+
+SHA-256:
+`802d16fd6df5ccdd133bb390ff7d1eb7992640eee9f43627b4e58aa0c15846ef`
+
+LIVE:
+offen.
+
+NEXT:
+1.50.673 installieren -> ausschließlich Audio & HiFi live prüfen.
+
