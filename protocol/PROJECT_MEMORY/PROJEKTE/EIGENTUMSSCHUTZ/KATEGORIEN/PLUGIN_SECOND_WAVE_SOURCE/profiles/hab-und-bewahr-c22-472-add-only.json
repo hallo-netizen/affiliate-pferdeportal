@@ -1,0 +1,3790 @@
+{
+  "schema": "APKW_C22_SECOND_WAVE_CATEGORY_ONLY_V1",
+  "source": "HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json",
+  "source_identity": "C22 original 172 topic nodes and 566 category terms",
+  "counts": {
+    "categories": 472,
+    "faq": 172,
+    "comparison": 172,
+    "optional": 102,
+    "additional": 26
+  },
+  "categories": [
+    {
+      "node_id": "core:c22:category:c68e60f1dff0d294f536",
+      "parent_id": "core:c22:topic:ae1321b80cfd002b2ee6",
+      "name": "Ferienhaus-Kontrolle: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Ferienhaus-Kontrolle|Ferienhaus-Kontrolle: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:a4711ee1c6e11799ad91",
+      "parent_id": "core:c22:topic:ae1321b80cfd002b2ee6",
+      "name": "Ferienhaus-Kontrollen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Ferienhaus-Kontrolle|Ferienhaus-Kontrollen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:480b24e91cccdf53d6c3",
+      "parent_id": "core:c22:topic:ae1321b80cfd002b2ee6",
+      "name": "Notfallorganisation & Zuständigkeiten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Ferienhaus-Kontrolle|Notfallorganisation & Zuständigkeiten"
+    },
+    {
+      "node_id": "core:c22:category:34fabd29cee87eb78e9b",
+      "parent_id": "core:c22:topic:27ab29465cd86fca2e89",
+      "name": "Private Objektbewachung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Private Objektbewachung|Private Objektbewachung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:1e5e537f0e8378b8f933",
+      "parent_id": "core:c22:topic:27ab29465cd86fca2e89",
+      "name": "Private Wachdienste und Kontrollmodelle vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Private Objektbewachung|Private Wachdienste und Kontrollmodelle vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:805aee6849d8ba1dacc0",
+      "parent_id": "core:c22:topic:27ab29465cd86fca2e89",
+      "name": "Kontrollberichte & Nachweise",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Abwesenheit & Leerstand|Private Objektbewachung|Kontrollberichte & Nachweise"
+    },
+    {
+      "node_id": "core:c22:category:ccab1575281fb98b2799",
+      "parent_id": "core:c22:topic:198b3c4d93fc953e2c25",
+      "name": "Katalysatordiebstahl: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Katalysatordiebstahl|Katalysatordiebstahl: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3c15f54a61652ad4846b",
+      "parent_id": "core:c22:topic:198b3c4d93fc953e2c25",
+      "name": "Katalysator-Diebstahlschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Katalysatordiebstahl|Katalysator-Diebstahlschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:cc7428290727ed482168",
+      "parent_id": "core:c22:topic:dd93e9d28160740ca435",
+      "name": "E-Scooter-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|E-Scooter-Diebstahlschutz|E-Scooter-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:88bb9445507dbf047438",
+      "parent_id": "core:c22:topic:dd93e9d28160740ca435",
+      "name": "E-Scooter-Schlösser und Ortung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|E-Scooter-Diebstahlschutz|E-Scooter-Schlösser und Ortung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:563daf707f61d75ddbdc",
+      "parent_id": "core:c22:topic:dd93e9d28160740ca435",
+      "name": "E-Scooter-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|E-Scooter-Diebstahlschutz|E-Scooter-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:cb76f23a07244fae50aa",
+      "parent_id": "core:c22:topic:7d0baf5acc5d480bbe9e",
+      "name": "Felgendiebstahl: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Felgendiebstahl|Felgendiebstahl: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ebf8a754d7afaf67e9ca",
+      "parent_id": "core:c22:topic:7d0baf5acc5d480bbe9e",
+      "name": "Felgenschlösser und Radsicherung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Felgendiebstahl|Felgenschlösser und Radsicherung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0bb74e9bf1520eb1a31a",
+      "parent_id": "core:c22:topic:6f4f1ba4847f4347d598",
+      "name": "Kennzeichendiebstahl: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Kennzeichendiebstahl|Kennzeichendiebstahl: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:43f3d3d21d81b0139d5b",
+      "parent_id": "core:c22:topic:6f4f1ba4847f4347d598",
+      "name": "Kennzeichensicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Kennzeichendiebstahl|Kennzeichensicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:11b271f57df9be09645b",
+      "parent_id": "core:c22:topic:2c6c3f764e7f14455d6d",
+      "name": "Elektromobil-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Elektromobil-Diebstahlschutz|Elektromobil-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:df631c6e16886472c194",
+      "parent_id": "core:c22:topic:2c6c3f764e7f14455d6d",
+      "name": "Diebstahlschutz für Elektromobile vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Elektromobil-Diebstahlschutz|Diebstahlschutz für Elektromobile vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:02672e60e0984f5fe3db",
+      "parent_id": "core:c22:topic:2c6c3f764e7f14455d6d",
+      "name": "Elektromobil-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Elektromobil-Diebstahlschutz|Elektromobil-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:d659372cad924922fa89",
+      "parent_id": "core:c22:topic:d62135dc64a59e4fef90",
+      "name": "Wohnmobil-Stellplatzschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Wohnmobil-Stellplatzschutz|Wohnmobil-Stellplatzschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:8a48a12d71f46964166b",
+      "parent_id": "core:c22:topic:d62135dc64a59e4fef90",
+      "name": "Wohnmobil-Stellplätze und Sicherungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Wohnmobil-Stellplatzschutz|Wohnmobil-Stellplätze und Sicherungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a968e5e9ab0b9fbb180d",
+      "parent_id": "core:c22:topic:d62135dc64a59e4fef90",
+      "name": "Wohnmobil-Stellplatzschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Freizeit & Fahrzeuge|Wohnmobil-Stellplatzschutz|Wohnmobil-Stellplatzschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:e91ffe162cce5c71c077",
+      "parent_id": "core:c22:topic:fc995a0e0ce62b351425",
+      "name": "Garagentor-Einbruchschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Garagen & Nebenräume|Garagentor-Einbruchschutz|Garagentor-Einbruchschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ab7a8af6083201436b0e",
+      "parent_id": "core:c22:topic:fc995a0e0ce62b351425",
+      "name": "Garagentor-Sicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Garagen & Nebenräume|Garagentor-Einbruchschutz|Garagentor-Sicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5c35789693068c7bbc67",
+      "parent_id": "core:c22:topic:fc995a0e0ce62b351425",
+      "name": "Garagentor-Einbruchschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Garagen & Nebenräume|Garagentor-Einbruchschutz|Garagentor-Einbruchschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:be7f6567957940a4ab13",
+      "parent_id": "core:c22:topic:25b6d761856ab6b1ce86",
+      "name": "Gartenhaus-Einbruchschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Garten & Grundstück|Gartenhaus-Einbruchschutz|Gartenhaus-Einbruchschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3f792b71325a6fa7bb44",
+      "parent_id": "core:c22:topic:25b6d761856ab6b1ce86",
+      "name": "Gartenhaus-Sicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Garten & Grundstück|Gartenhaus-Einbruchschutz|Gartenhaus-Sicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:86017bb235c88d8457bb",
+      "parent_id": "core:c22:topic:25b6d761856ab6b1ce86",
+      "name": "Gartenhaus-Einbruchschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Garten & Grundstück|Gartenhaus-Einbruchschutz|Gartenhaus-Einbruchschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:4b158bc62b6580fc9f5a",
+      "parent_id": "core:c22:topic:dd9773fd40d59698e11b",
+      "name": "Haustürschlösser: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Haustürschlösser|Haustürschlösser: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:9cd805391c19669a0162",
+      "parent_id": "core:c22:topic:dd9773fd40d59698e11b",
+      "name": "Schließzylinder und Türschlösser vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Haustürschlösser|Schließzylinder und Türschlösser vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:fa2fa22ba5f01f168af6",
+      "parent_id": "core:c22:topic:dd9773fd40d59698e11b",
+      "name": "Haustürschlösser: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Haustürschlösser|Haustürschlösser: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:d222b0a533120ef6da42",
+      "parent_id": "core:c22:topic:0ead498eebaf87a463e9",
+      "name": "Tresore: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Tresore|Tresore: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:cbcacb2a546569565bbc",
+      "parent_id": "core:c22:topic:0ead498eebaf87a463e9",
+      "name": "Tresore und Sicherheitsstufen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Tresore|Tresore und Sicherheitsstufen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:86a6c319271b1dc8c105",
+      "parent_id": "core:c22:topic:0ead498eebaf87a463e9",
+      "name": "Tresor & Versicherungsschutz",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Tresore|Tresor & Versicherungsschutz"
+    },
+    {
+      "node_id": "core:c22:category:d29fe9266aeee452e6c7",
+      "parent_id": "core:c22:topic:0e44ac4b20e9e755a4bc",
+      "name": "Selbstschutz bei Einbruch: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Selbstschutz bei Einbruch|Selbstschutz bei Einbruch: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:801ca2ab5e18d0a37697",
+      "parent_id": "core:c22:topic:0e44ac4b20e9e755a4bc",
+      "name": "Sichere Reaktionen bei Einbruch vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Selbstschutz bei Einbruch|Sichere Reaktionen bei Einbruch vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b785abae5ec4a2f49ce3",
+      "parent_id": "core:c22:topic:4122738f4d56f1fecbe5",
+      "name": "Selbstschutzmittel: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Selbstschutzmittel|Selbstschutzmittel: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7102c9cd2dfdba5a9efe",
+      "parent_id": "core:c22:topic:4122738f4d56f1fecbe5",
+      "name": "Legale Selbstschutz-Alternativen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Selbstschutzmittel|Legale Selbstschutz-Alternativen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:c1c1b8d1224ee00b06ad",
+      "parent_id": "core:c22:topic:4122738f4d56f1fecbe5",
+      "name": "Übung & sicherer Umgang",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Haus & Wohnung|Selbstschutzmittel|Übung & sicherer Umgang"
+    },
+    {
+      "node_id": "core:c22:category:06ca18205c43dcb94762",
+      "parent_id": "core:c22:topic:58ac05df009d3c6251f2",
+      "name": "Hofladen-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Hofladen-Diebstahlschutz|Hofladen-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:efcc24ae02a7aecd4bc6",
+      "parent_id": "core:c22:topic:58ac05df009d3c6251f2",
+      "name": "Hofladen-Sicherungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Hofladen-Diebstahlschutz|Hofladen-Sicherungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:597d1f9cf5e5027711a0",
+      "parent_id": "core:c22:topic:58ac05df009d3c6251f2",
+      "name": "Hofladen-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Hofladen-Diebstahlschutz|Hofladen-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:033cd95666c6e788fa86",
+      "parent_id": "core:c22:topic:58ac05df009d3c6251f2",
+      "name": "Vorgehen nach Diebstahl im Hofladen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Hofladen-Diebstahlschutz|Vorgehen nach Diebstahl im Hofladen"
+    },
+    {
+      "node_id": "core:c22:category:a970d4e08e45299912f3",
+      "parent_id": "core:c22:topic:8709f8d406d8040cdf6b",
+      "name": "SB-Verkaufsstand-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|SB-Verkaufsstand-Diebstahlschutz|SB-Verkaufsstand-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:1bcc0ae2fc555c2082fb",
+      "parent_id": "core:c22:topic:8709f8d406d8040cdf6b",
+      "name": "Sicherung von SB-Verkaufsständen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|SB-Verkaufsstand-Diebstahlschutz|Sicherung von SB-Verkaufsständen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:c903aabb0e2b63d7b059",
+      "parent_id": "core:c22:topic:8709f8d406d8040cdf6b",
+      "name": "SB-Verkaufsstand-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|SB-Verkaufsstand-Diebstahlschutz|SB-Verkaufsstand-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:5e2ddff5529950f1fef4",
+      "parent_id": "core:c22:topic:638d8341b97bd2ff8271",
+      "name": "Warenautomat-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Warenautomat-Diebstahlschutz|Warenautomat-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:06b6b4a0581e15cb03ef",
+      "parent_id": "core:c22:topic:638d8341b97bd2ff8271",
+      "name": "Automaten-Sicherungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Warenautomat-Diebstahlschutz|Automaten-Sicherungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:43758770d263f6944ede",
+      "parent_id": "core:c22:topic:638d8341b97bd2ff8271",
+      "name": "Warenautomat-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Warenautomat-Diebstahlschutz|Warenautomat-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:11291d2f8e32d8cf17ea",
+      "parent_id": "core:c22:topic:4accbb24b0721ad1491f",
+      "name": "Abholbox-Diebstahlschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Abholbox-Diebstahlschutz|Abholbox-Diebstahlschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:dd5f68fe78227af73627",
+      "parent_id": "core:c22:topic:4accbb24b0721ad1491f",
+      "name": "Abholbox-Schließsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Abholbox-Diebstahlschutz|Abholbox-Schließsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:cc2557711893bf2f182d",
+      "parent_id": "core:c22:topic:4accbb24b0721ad1491f",
+      "name": "Abholbox-Diebstahlschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Abholbox-Diebstahlschutz|Abholbox-Diebstahlschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:12acd042667a35580eaa",
+      "parent_id": "core:c22:topic:364885671c073e54224a",
+      "name": "Einbruchschutz für Vereins-Sporthallen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für Vereins-Sporthallen|Einbruchschutz für Vereins-Sporthallen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b3ed7f889e7ae999b5f6",
+      "parent_id": "core:c22:topic:364885671c073e54224a",
+      "name": "Einbruchschutz für kleine Sporthallen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für Vereins-Sporthallen|Einbruchschutz für kleine Sporthallen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4b276020f85dc78d72b1",
+      "parent_id": "core:c22:topic:364885671c073e54224a",
+      "name": "Einbruchschutz für Vereins-Sporthallen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für Vereins-Sporthallen|Einbruchschutz für Vereins-Sporthallen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:d4a9fe3f7bfcf8cd9969",
+      "parent_id": "core:c22:topic:364885671c073e54224a",
+      "name": "Schlüssel- & Nutzerverwaltung in Vereinshallen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für Vereins-Sporthallen|Schlüssel- & Nutzerverwaltung in Vereinshallen"
+    },
+    {
+      "node_id": "core:c22:category:b08c91ab4b7378828a8d",
+      "parent_id": "core:c22:topic:acbc663bb92f854345b2",
+      "name": "Einbruchschutz für kleine private Lagerhallen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für kleine private Lagerhallen|Einbruchschutz für kleine private Lagerhallen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:caccb7ff11eedfaf7aa0",
+      "parent_id": "core:c22:topic:acbc663bb92f854345b2",
+      "name": "Lagerhallen-Sicherungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für kleine private Lagerhallen|Lagerhallen-Sicherungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0a3dd3b9a3c4d5bdc421",
+      "parent_id": "core:c22:topic:acbc663bb92f854345b2",
+      "name": "Einbruchschutz für kleine private Lagerhallen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Einbruch & Diebstahl|Kleine Betriebe & Vereine|Einbruchschutz für kleine private Lagerhallen|Einbruchschutz für kleine private Lagerhallen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:d5919030e0bab6d20a86",
+      "parent_id": "core:c22:topic:53f8f1f3e64b25e35b23",
+      "name": "E-Bike-Akkus vor Brand schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Akku & Elektrik|E-Bike-Akkus vor Brand schützen|E-Bike-Akkus vor Brand schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:631e8311e51fe2c2915c",
+      "parent_id": "core:c22:topic:53f8f1f3e64b25e35b23",
+      "name": "E-Bike-Akku-Brandschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|E-Bike-Akkus vor Brand schützen|E-Bike-Akku-Brandschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ee728986d26a9ef9eb61",
+      "parent_id": "core:c22:topic:53f8f1f3e64b25e35b23",
+      "name": "Ladegeräte & Akkuschutz auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|E-Bike-Akkus vor Brand schützen|Ladegeräte & Akkuschutz auswählen"
+    },
+    {
+      "node_id": "core:c22:category:e3a27684dfd30d385f9f",
+      "parent_id": "core:c22:topic:53f8f1f3e64b25e35b23",
+      "name": "Akkus prüfen & sicher pflegen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|E-Bike-Akkus vor Brand schützen|Akkus prüfen & sicher pflegen"
+    },
+    {
+      "node_id": "core:c22:category:ade74e1b691d9cc233aa",
+      "parent_id": "core:c22:topic:7f191e1ff150db4602bb",
+      "name": "Heimspeicher-Brandschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Heimspeicher-Brandschutz|Heimspeicher-Brandschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:6c77fa91f7761db6bb79",
+      "parent_id": "core:c22:topic:7f191e1ff150db4602bb",
+      "name": "Heimspeicher-Schutzkonzepte vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Heimspeicher-Brandschutz|Heimspeicher-Schutzkonzepte vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:70a30a0c3886d4b3d6ad",
+      "parent_id": "core:c22:topic:7f191e1ff150db4602bb",
+      "name": "Brandschutztechnik für Heimspeicher auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Heimspeicher-Brandschutz|Brandschutztechnik für Heimspeicher auswählen"
+    },
+    {
+      "node_id": "core:c22:category:06034132f44fa55cf617",
+      "parent_id": "core:c22:topic:7f191e1ff150db4602bb",
+      "name": "Heimspeicher-Brandschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Heimspeicher-Brandschutz|Heimspeicher-Brandschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:c15b300d225bb05cea77",
+      "parent_id": "core:c22:topic:7f191e1ff150db4602bb",
+      "name": "Heimspeicher regelmäßig kontrollieren",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Heimspeicher-Brandschutz|Heimspeicher regelmäßig kontrollieren"
+    },
+    {
+      "node_id": "core:c22:category:09e9facdc66aad178d54",
+      "parent_id": "core:c22:topic:2ee1d3b3c84cd6681d56",
+      "name": "PV-Kabel & Steckverbinder: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Akku & Elektrik|PV-Kabel & Steckverbinder|PV-Kabel & Steckverbinder: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f7fe4ea7dfacbb4b7888",
+      "parent_id": "core:c22:topic:2ee1d3b3c84cd6681d56",
+      "name": "PV-Steckverbinder und Leitungsschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|PV-Kabel & Steckverbinder|PV-Steckverbinder und Leitungsschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ccdc5cbe737ab3abda54",
+      "parent_id": "core:c22:topic:3ad4d5061aebde583af7",
+      "name": "Wechselrichter-Brandschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wechselrichter-Brandschutz|Wechselrichter-Brandschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7cf036d20b1f015da02c",
+      "parent_id": "core:c22:topic:3ad4d5061aebde583af7",
+      "name": "Wechselrichter-Brandschutzmaßnahmen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wechselrichter-Brandschutz|Wechselrichter-Brandschutzmaßnahmen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5eb66154353b831b57b8",
+      "parent_id": "core:c22:topic:3ad4d5061aebde583af7",
+      "name": "Wechselrichter-Brandschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wechselrichter-Brandschutz|Wechselrichter-Brandschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:6895802148df10b5d57b",
+      "parent_id": "core:c22:topic:87804d61dd4b8cfa3dc2",
+      "name": "Wallbox-Brandschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wallbox-Brandschutz|Wallbox-Brandschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7147208de0fb260d464c",
+      "parent_id": "core:c22:topic:87804d61dd4b8cfa3dc2",
+      "name": "Wallbox-Schutzfunktionen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wallbox-Brandschutz|Wallbox-Schutzfunktionen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:803cfa7f5e655e0f933d",
+      "parent_id": "core:c22:topic:87804d61dd4b8cfa3dc2",
+      "name": "Sichere Wallbox-Installation planen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wallbox-Brandschutz|Sichere Wallbox-Installation planen"
+    },
+    {
+      "node_id": "core:c22:category:038443aba1a4d9209aa0",
+      "parent_id": "core:c22:topic:87804d61dd4b8cfa3dc2",
+      "name": "Wallbox-Brandschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Akku & Elektrik|Wallbox-Brandschutz|Wallbox-Brandschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:82984a90fcd18352f1d2",
+      "parent_id": "core:c22:topic:68699d699c7c0bdc57bd",
+      "name": "Gasversorgung im Wohnmobil: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Camping|Gasversorgung im Wohnmobil|Gasversorgung im Wohnmobil: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:5906ed2ab6fed7e5a85b",
+      "parent_id": "core:c22:topic:68699d699c7c0bdc57bd",
+      "name": "Wohnmobil-Gassysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Camping|Gasversorgung im Wohnmobil|Wohnmobil-Gassysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:d47341d16e54f9de55a3",
+      "parent_id": "core:c22:topic:5866cc444c3ca1fa4d46",
+      "name": "Kohlenmonoxidmelder: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|CO & Gas|Kohlenmonoxidmelder|Kohlenmonoxidmelder: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:57554a6bb4d65a335ade",
+      "parent_id": "core:c22:topic:5866cc444c3ca1fa4d46",
+      "name": "CO-Melder und Warnfunktionen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|CO & Gas|Kohlenmonoxidmelder|CO-Melder und Warnfunktionen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:78701ca07cb082657ea8",
+      "parent_id": "core:c22:topic:5866cc444c3ca1fa4d46",
+      "name": "CO-Melder prüfen & ersetzen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|CO & Gas|Kohlenmonoxidmelder|CO-Melder prüfen & ersetzen"
+    },
+    {
+      "node_id": "core:c22:category:1e05b63859f4854c6fba",
+      "parent_id": "core:c22:topic:053d59cdc5824203f999",
+      "name": "Brandschutz im Friseursalon: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Kleine Betriebe & Vereine|Brandschutz im Friseursalon|Brandschutz im Friseursalon: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d311c083fba741894fe4",
+      "parent_id": "core:c22:topic:053d59cdc5824203f999",
+      "name": "Brandschutzlösungen für Salons vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Kleine Betriebe & Vereine|Brandschutz im Friseursalon|Brandschutzlösungen für Salons vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:10b515321768df3a90de",
+      "parent_id": "core:c22:topic:053d59cdc5824203f999",
+      "name": "Brandschutz im Friseursalon: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Kleine Betriebe & Vereine|Brandschutz im Friseursalon|Brandschutz im Friseursalon: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:96c48aae2de00cf86932",
+      "parent_id": "core:c22:topic:5e290e70ba3c017fb8d4",
+      "name": "Rauchmelder: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rauchmelder|Rauchmelder: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:6b6571609a8a3e8df465",
+      "parent_id": "core:c22:topic:5e290e70ba3c017fb8d4",
+      "name": "Rauchmelder und Vernetzung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rauchmelder|Rauchmelder und Vernetzung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4b9e54deda4d76603292",
+      "parent_id": "core:c22:topic:5e290e70ba3c017fb8d4",
+      "name": "Rauchmelder auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rauchmelder|Rauchmelder auswählen"
+    },
+    {
+      "node_id": "core:c22:category:c3cdff880b2ffd5f691d",
+      "parent_id": "core:c22:topic:5e290e70ba3c017fb8d4",
+      "name": "Fehlalarme & Störungen bei Rauchmelder",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rauchmelder|Fehlalarme & Störungen bei Rauchmelder"
+    },
+    {
+      "node_id": "core:c22:category:31342aed5a387b144929",
+      "parent_id": "core:c22:topic:4ec07442bff84985a1c8",
+      "name": "Brandschutz an Leitungsdurchführungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz an Leitungsdurchführungen|Brandschutz an Leitungsdurchführungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:cea2b27a982e5d9fcb58",
+      "parent_id": "core:c22:topic:4ec07442bff84985a1c8",
+      "name": "Abschottungen für Leitungsdurchführungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz an Leitungsdurchführungen|Abschottungen für Leitungsdurchführungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:41cb49883bd56557ae16",
+      "parent_id": "core:c22:topic:4ec07442bff84985a1c8",
+      "name": "Brandschutz an Leitungsdurchführungen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz an Leitungsdurchführungen|Brandschutz an Leitungsdurchführungen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:78b880d2b4ad3ca13ae9",
+      "parent_id": "core:c22:topic:170ce56e4d3d226789ea",
+      "name": "Brandschutzbekleidungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutzbekleidungen|Brandschutzbekleidungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:334fd9ff76606872ffba",
+      "parent_id": "core:c22:topic:170ce56e4d3d226789ea",
+      "name": "Brandschutzbekleidungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutzbekleidungen|Brandschutzbekleidungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:6dec3688ceb42ddea388",
+      "parent_id": "core:c22:topic:170ce56e4d3d226789ea",
+      "name": "Brandschutzbekleidungen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutzbekleidungen|Brandschutzbekleidungen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:0ef1605790d7b82b5dc5",
+      "parent_id": "core:c22:topic:170ce56e4d3d226789ea",
+      "name": "Brandschutzbekleidungen richtig einbauen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutzbekleidungen|Brandschutzbekleidungen richtig einbauen"
+    },
+    {
+      "node_id": "core:c22:category:86bb1768c5f04d09e275",
+      "parent_id": "core:c22:topic:c379698c5d07a095fb4f",
+      "name": "Brandschutz in Abstellräumen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz in Abstellräumen|Brandschutz in Abstellräumen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:300114c331e7fcdf822b",
+      "parent_id": "core:c22:topic:c379698c5d07a095fb4f",
+      "name": "Brandschutzmaßnahmen für Abstellräume vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz in Abstellräumen|Brandschutzmaßnahmen für Abstellräume vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1deb9dca0bd8599e2118",
+      "parent_id": "core:c22:topic:ea74bdf45d72c9b47ee8",
+      "name": "Privatwagen-Brandrisiken: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Privatwagen-Brandrisiken|Privatwagen-Brandrisiken: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:036fc97819c2a532dec5",
+      "parent_id": "core:c22:topic:ea74bdf45d72c9b47ee8",
+      "name": "Brandschutz am privaten Auto vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Privatwagen-Brandrisiken|Brandschutz am privaten Auto vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0544cf49c6ca40c43ca0",
+      "parent_id": "core:c22:topic:461344f5776aaec6da6a",
+      "name": "Elektroauto-Brandschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Elektroauto-Brandschutz|Elektroauto-Brandschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:daccead036a2da1dc1c4",
+      "parent_id": "core:c22:topic:461344f5776aaec6da6a",
+      "name": "Schutzkonzepte für Elektroautos vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Elektroauto-Brandschutz|Schutzkonzepte für Elektroautos vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9233ef6d9490e2f33902",
+      "parent_id": "core:c22:topic:a90e411749a792dc6d56",
+      "name": "Brandschutz im Freizeitboot: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz im Freizeitboot|Brandschutz im Freizeitboot: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:032f05c0f767b6da3d78",
+      "parent_id": "core:c22:topic:a90e411749a792dc6d56",
+      "name": "Bootsbrandschutz-Systeme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz im Freizeitboot|Bootsbrandschutz-Systeme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b49c9f8363aed656757b",
+      "parent_id": "core:c22:topic:a90e411749a792dc6d56",
+      "name": "Brandschutz im Freizeitboot: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz im Freizeitboot|Brandschutz im Freizeitboot: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:ecce2c636529185edf6e",
+      "parent_id": "core:c22:topic:a90e411749a792dc6d56",
+      "name": "Brandschutz an Bord prüfen & warten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz im Freizeitboot|Brandschutz an Bord prüfen & warten"
+    },
+    {
+      "node_id": "core:c22:category:b727aec68f3f9b4290b4",
+      "parent_id": "core:c22:topic:d7d9f3fec050210490a4",
+      "name": "Rußschäden am Wohnhaus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rußschäden am Wohnhaus|Rußschäden am Wohnhaus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4383268c68e8d2793e92",
+      "parent_id": "core:c22:topic:d7d9f3fec050210490a4",
+      "name": "Rußreinigung und Sanierungswege vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Rußschäden am Wohnhaus|Rußreinigung und Sanierungswege vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e72c25b897530458c44c",
+      "parent_id": "core:c22:topic:b33221f6c12a15b9bb9e",
+      "name": "Löschwasserschäden am Haus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Löschwasserschäden am Haus|Löschwasserschäden am Haus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:87c1313fe62df05384bb",
+      "parent_id": "core:c22:topic:b33221f6c12a15b9bb9e",
+      "name": "Trocknung nach Löschwasserschäden vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Löschwasserschäden am Haus|Trocknung nach Löschwasserschäden vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:131231516ff33706cc6e",
+      "parent_id": "core:c22:topic:caef381f2e6ddac2f4de",
+      "name": "Brandschaden am Wohnhaus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschaden am Wohnhaus|Brandschaden am Wohnhaus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:687cc5f2f4ae342b16f9",
+      "parent_id": "core:c22:topic:caef381f2e6ddac2f4de",
+      "name": "Sanierungswege nach Hausbrand vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschaden am Wohnhaus|Sanierungswege nach Hausbrand vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:46f9e2103ae8376e541d",
+      "parent_id": "core:c22:topic:caef381f2e6ddac2f4de",
+      "name": "Sanierungskosten nach Wohnhausbrand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschaden am Wohnhaus|Sanierungskosten nach Wohnhausbrand"
+    },
+    {
+      "node_id": "core:c22:category:8293ff90126ecaf904cf",
+      "parent_id": "core:c22:topic:118421f00b19b3c3f6cd",
+      "name": "Vegetationsbrand am Grundstück: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Vegetationsbrand am Grundstück|Vegetationsbrand am Grundstück: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:bea0ec8e61c626ebe96b",
+      "parent_id": "core:c22:topic:118421f00b19b3c3f6cd",
+      "name": "Grundstücksschutz gegen Vegetationsbrand vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Vegetationsbrand am Grundstück|Grundstücksschutz gegen Vegetationsbrand vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:c0b0db11ecf595e0b6d1",
+      "parent_id": "core:c22:topic:fc36751db1d373f15284",
+      "name": "Brandschutz gegen Brandüberschlag: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz gegen Brandüberschlag|Brandschutz gegen Brandüberschlag: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f86b8f7fbea347ff2577",
+      "parent_id": "core:c22:topic:fc36751db1d373f15284",
+      "name": "Maßnahmen gegen Brandüberschlag vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz gegen Brandüberschlag|Maßnahmen gegen Brandüberschlag vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:f4664eafd588c84e59d2",
+      "parent_id": "core:c22:topic:fc36751db1d373f15284",
+      "name": "Brandschutz gegen Brandüberschlag: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Brandschutz gegen Brandüberschlag|Brandschutz gegen Brandüberschlag: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:8925aacb1dba6581b234",
+      "parent_id": "core:c22:topic:f99a4c05b39a3cb731d3",
+      "name": "Funkenflug an Nebengebäuden: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Funkenflug an Nebengebäuden|Funkenflug an Nebengebäuden: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:eaa085825aa39312b825",
+      "parent_id": "core:c22:topic:f99a4c05b39a3cb731d3",
+      "name": "Funkenflugschutz für Nebengebäude vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Funkenflug an Nebengebäuden|Funkenflugschutz für Nebengebäude vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e28d01ad031a084a4eef",
+      "parent_id": "core:c22:topic:32b7d4ab8dc7ebb7bedb",
+      "name": "Bootsmotor-Brandschutz: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsmotor-Brandschutz|Bootsmotor-Brandschutz: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ba6fb0f4ad7ddedbee72",
+      "parent_id": "core:c22:topic:32b7d4ab8dc7ebb7bedb",
+      "name": "Motorraum-Brandschutz auf Booten vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsmotor-Brandschutz|Motorraum-Brandschutz auf Booten vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:01873c45ebe4cd89537b",
+      "parent_id": "core:c22:topic:32b7d4ab8dc7ebb7bedb",
+      "name": "Bootsmotor-Brandschutz: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsmotor-Brandschutz|Bootsmotor-Brandschutz: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:72e111daf9739abcffa0",
+      "parent_id": "core:c22:topic:ca5f7e11e49d5ee8f661",
+      "name": "Kraftstoffanlage im Freizeitboot: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Kraftstoffanlage im Freizeitboot|Kraftstoffanlage im Freizeitboot: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:47caf0748a73eac15fb9",
+      "parent_id": "core:c22:topic:ca5f7e11e49d5ee8f661",
+      "name": "Kraftstoffleitungen und Leckschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Kraftstoffanlage im Freizeitboot|Kraftstoffleitungen und Leckschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:3205635f75be7d4f7019",
+      "parent_id": "core:c22:topic:ca5f7e11e49d5ee8f661",
+      "name": "Kraftstoffleitungen & Armaturen auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Kraftstoffanlage im Freizeitboot|Kraftstoffleitungen & Armaturen auswählen"
+    },
+    {
+      "node_id": "core:c22:category:d0a8d2ed2c940e7dc4a3",
+      "parent_id": "core:c22:topic:ca5f7e11e49d5ee8f661",
+      "name": "Kraftstoffanlage im Freizeitboot: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Kraftstoffanlage im Freizeitboot|Kraftstoffanlage im Freizeitboot: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:e284940c6f366824e954",
+      "parent_id": "core:c22:topic:6a785b2efbbf20ea4fe1",
+      "name": "Bootsgasanlage: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsgasanlage|Bootsgasanlage: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:41a19a8128ad2ed3dd73",
+      "parent_id": "core:c22:topic:6a785b2efbbf20ea4fe1",
+      "name": "Gasversorgung und Warnsysteme an Bord vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsgasanlage|Gasversorgung und Warnsysteme an Bord vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:244aaff3fdd46350f1db",
+      "parent_id": "core:c22:topic:6a785b2efbbf20ea4fe1",
+      "name": "Gaskomponenten im Boot auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsgasanlage|Gaskomponenten im Boot auswählen"
+    },
+    {
+      "node_id": "core:c22:category:f4155f944c55d14356bb",
+      "parent_id": "core:c22:topic:6a785b2efbbf20ea4fe1",
+      "name": "Bootsgasanlage: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsgasanlage|Bootsgasanlage: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:e52369228672f59393a6",
+      "parent_id": "core:c22:topic:edf16ea40a98ea11b4bf",
+      "name": "Bootsküche: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsküche|Bootsküche: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c914140d2efd1dc0d55c",
+      "parent_id": "core:c22:topic:edf16ea40a98ea11b4bf",
+      "name": "Brandschutz in Bootsküchen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsküche|Brandschutz in Bootsküchen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a2f5794d6a368b3f98e3",
+      "parent_id": "core:c22:topic:edf16ea40a98ea11b4bf",
+      "name": "Bootsküche warten & reinigen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsküche|Bootsküche warten & reinigen"
+    },
+    {
+      "node_id": "core:c22:category:28818aa72423e8dfd0a6",
+      "parent_id": "core:c22:topic:bc344bfec4b067173411",
+      "name": "Bordelektrik im Freizeitboot: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bordelektrik im Freizeitboot|Bordelektrik im Freizeitboot: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ad0818de6e0c6f977feb",
+      "parent_id": "core:c22:topic:bc344bfec4b067173411",
+      "name": "Bordelektrik-Schutzsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bordelektrik im Freizeitboot|Bordelektrik-Schutzsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:8cd16aee5f5cd5dbe3c6",
+      "parent_id": "core:c22:topic:39ec5733deb75d8299fa",
+      "name": "Bootsakkus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsakkus|Bootsakkus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d5ac4374d319ad98e766",
+      "parent_id": "core:c22:topic:39ec5733deb75d8299fa",
+      "name": "Bootsakkus und Ladeschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsakkus|Bootsakkus und Ladeschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a45b2538edfe5c866d17",
+      "parent_id": "core:c22:topic:39ec5733deb75d8299fa",
+      "name": "Bootsakkus: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsakkus|Bootsakkus: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:d31547636742aced0b2f",
+      "parent_id": "core:c22:topic:39ec5733deb75d8299fa",
+      "name": "Bootsakkus: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Feuer & Gase|Rauch & Brand|Bootsakkus|Bootsakkus: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:2c7b20d6a0ead19657ca",
+      "parent_id": "core:c22:topic:1b62b0ed610223108907",
+      "name": "Heimnetzwerk und Router: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Heimnetzwerk und Router|Heimnetzwerk und Router: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c69f6764bb642fbe1708",
+      "parent_id": "core:c22:topic:1b62b0ed610223108907",
+      "name": "Router und Ausfallsicherung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Heimnetzwerk und Router|Router und Ausfallsicherung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0ebd43333795e9d56e06",
+      "parent_id": "core:c22:topic:1b62b0ed610223108907",
+      "name": "Heimnetzwerk und Router: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Heimnetzwerk und Router|Heimnetzwerk und Router: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:0764dba86c9cda68b592",
+      "parent_id": "core:c22:topic:1b62b0ed610223108907",
+      "name": "Heimnetzwerk und Router: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Heimnetzwerk und Router|Heimnetzwerk und Router: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:c623643cf70900b4674a",
+      "parent_id": "core:c22:topic:1b62b0ed610223108907",
+      "name": "Router- & Heimnetzwerksicherheit",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Heimnetzwerk und Router|Router- & Heimnetzwerksicherheit"
+    },
+    {
+      "node_id": "core:c22:category:49dc4911a01d7d50e740",
+      "parent_id": "core:c22:topic:dd0e6f074a48cbe03077",
+      "name": "Smart-Home-Zentrale: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Smart-Home-Zentrale|Smart-Home-Zentrale: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:e07b80b54493e214c30e",
+      "parent_id": "core:c22:topic:dd0e6f074a48cbe03077",
+      "name": "Smart-Home-Zentralen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Smart-Home-Zentrale|Smart-Home-Zentralen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:142a8adcff072457b4ca",
+      "parent_id": "core:c22:topic:dd0e6f074a48cbe03077",
+      "name": "Smart-Home-Zugriffsrechte & Datenschutz",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|Smart-Home-Zentrale|Smart-Home-Zugriffsrechte & Datenschutz"
+    },
+    {
+      "node_id": "core:c22:category:d77397f8c002b4452b11",
+      "parent_id": "core:c22:topic:4ef1eda455ed0454a493",
+      "name": "PoE-Installationen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|PoE-Installationen|PoE-Installationen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ece61e4aa1d24953d702",
+      "parent_id": "core:c22:topic:4ef1eda455ed0454a493",
+      "name": "PoE-Versorgungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Alarm & Smart Home|PoE-Installationen|PoE-Versorgungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:902b8673edb11eb1ac1e",
+      "parent_id": "core:c22:topic:f4d0bd9fe9510cf58ffa",
+      "name": "Ferienhaus-Fernüberwachung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Fernüberwachung|Ferienhaus-Fernüberwachung|Ferienhaus-Fernüberwachung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:10524ee87af92b9c207f",
+      "parent_id": "core:c22:topic:f4d0bd9fe9510cf58ffa",
+      "name": "Fernüberwachung von Ferienhäusern vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Fernüberwachung|Ferienhaus-Fernüberwachung|Fernüberwachung von Ferienhäusern vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:88e0cc7101f1634a07f0",
+      "parent_id": "core:c22:topic:0f7226ad0bbc6e43020d",
+      "name": "Heizungsausfall: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Heizungsausfall|Heizungsausfall: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:491756fc6e828d1bbc4e",
+      "parent_id": "core:c22:topic:0f7226ad0bbc6e43020d",
+      "name": "Notlösungen bei Heizungsausfall vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Heizungsausfall|Notlösungen bei Heizungsausfall vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:6af479795e2ea816bb43",
+      "parent_id": "core:c22:topic:3128b7161c50bc6fb79f",
+      "name": "Durchlauferhitzer: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Durchlauferhitzer|Durchlauferhitzer: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:6452b0fefb5106ae4b4d",
+      "parent_id": "core:c22:topic:3128b7161c50bc6fb79f",
+      "name": "Durchlauferhitzer und Ersatzlösungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Durchlauferhitzer|Durchlauferhitzer und Ersatzlösungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:cdb3ef39f78ad88bf38e",
+      "parent_id": "core:c22:topic:3128b7161c50bc6fb79f",
+      "name": "Warmwasserverbrauch & Betriebskosten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Durchlauferhitzer|Warmwasserverbrauch & Betriebskosten"
+    },
+    {
+      "node_id": "core:c22:category:d5181f80ae1322a6ab52",
+      "parent_id": "core:c22:topic:6afcd24d645851d80802",
+      "name": "Warmwasserspeicher: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Warmwasserspeicher|Warmwasserspeicher: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d39d1919b31f64e50832",
+      "parent_id": "core:c22:topic:6afcd24d645851d80802",
+      "name": "Warmwasserspeicher vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Warmwasserspeicher|Warmwasserspeicher vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:d140da19ffdfe5f45811",
+      "parent_id": "core:c22:topic:6afcd24d645851d80802",
+      "name": "Warmwasserspeicher: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Warmwasserspeicher|Warmwasserspeicher: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:1d5fb1c67ecb8f9941f7",
+      "parent_id": "core:c22:topic:6afcd24d645851d80802",
+      "name": "Warmwasserspeicher: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Warmwasserspeicher|Warmwasserspeicher: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:3a68139f9446354fa3e4",
+      "parent_id": "core:c22:topic:fbe54f05e8f089afd72c",
+      "name": "Zirkulationspumpe: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Zirkulationspumpe|Zirkulationspumpe: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:8e728fdaeb08fe3dcbbf",
+      "parent_id": "core:c22:topic:fbe54f05e8f089afd72c",
+      "name": "Zirkulationspumpen und Steuerungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Zirkulationspumpe|Zirkulationspumpen und Steuerungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a35bacd4da8941f742e1",
+      "parent_id": "core:c22:topic:fbe54f05e8f089afd72c",
+      "name": "Zirkulationspumpe: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Zirkulationspumpe|Zirkulationspumpe: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:85a5ce3d10fded788f3c",
+      "parent_id": "core:c22:topic:fbe54f05e8f089afd72c",
+      "name": "Zirkulationspumpe: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Heizung & Temperatur|Zirkulationspumpe|Zirkulationspumpe: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:38e84344a550a67ce244",
+      "parent_id": "core:c22:topic:b1bbfab984605a67380e",
+      "name": "Brunnenpumpe: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Brunnenpumpe|Brunnenpumpe: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:1c2583c92820dfa48f4b",
+      "parent_id": "core:c22:topic:b1bbfab984605a67380e",
+      "name": "Brunnenpumpen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Brunnenpumpe|Brunnenpumpen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:6f5b67b0d293bf259e0d",
+      "parent_id": "core:c22:topic:b1bbfab984605a67380e",
+      "name": "Brunnenpumpe: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Brunnenpumpe|Brunnenpumpe: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:e122db4de1c10268ebe4",
+      "parent_id": "core:c22:topic:3f7fb9a3a6b17f1fba79",
+      "name": "Poolfilterpumpe: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Poolfilterpumpe|Poolfilterpumpe: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2a68206da3b05e030957",
+      "parent_id": "core:c22:topic:3f7fb9a3a6b17f1fba79",
+      "name": "Poolfilterpumpen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Poolfilterpumpe|Poolfilterpumpen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b7f2373ae35aa9288880",
+      "parent_id": "core:c22:topic:3f7fb9a3a6b17f1fba79",
+      "name": "Poolfilterpumpe: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Poolfilterpumpe|Poolfilterpumpe: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:f61b74b4401ace55ca9a",
+      "parent_id": "core:c22:topic:3cd294641f793de1a428",
+      "name": "Gartenpumpe: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Gartenpumpe|Gartenpumpe: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:62826ed70394b39747b8",
+      "parent_id": "core:c22:topic:3cd294641f793de1a428",
+      "name": "Gartenpumpen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Gartenpumpe|Gartenpumpen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0af04f3c1f3006382c66",
+      "parent_id": "core:c22:topic:3cd294641f793de1a428",
+      "name": "Gartenpumpe: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Gartenpumpe|Gartenpumpe: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:dfc8db3993943c402112",
+      "parent_id": "core:c22:topic:3cd294641f793de1a428",
+      "name": "Gartenpumpe: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Gartenpumpe|Gartenpumpe: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:7c6a2a7215657c900bb9",
+      "parent_id": "core:c22:topic:8b320b8b8b72066101b8",
+      "name": "Teichpumpe: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Teichpumpe|Teichpumpe: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ea5fe9b990683025f773",
+      "parent_id": "core:c22:topic:8b320b8b8b72066101b8",
+      "name": "Teichpumpen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Teichpumpe|Teichpumpen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:dd38500eae0ed09e91d8",
+      "parent_id": "core:c22:topic:8b320b8b8b72066101b8",
+      "name": "Teichpumpe: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Teichpumpe|Teichpumpe: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:c6d7249c213337d6f8cd",
+      "parent_id": "core:c22:topic:8b320b8b8b72066101b8",
+      "name": "Teichpumpe: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Pumpen & Haustechnik|Teichpumpe|Teichpumpe: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:6c6c03613436f4caa87d",
+      "parent_id": "core:c22:topic:79633e8ae5dc67540bbc",
+      "name": "Wechselrichter-Ausfälle: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Wechselrichter-Ausfälle|Wechselrichter-Ausfälle: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b7a928ffcad149b63c22",
+      "parent_id": "core:c22:topic:79633e8ae5dc67540bbc",
+      "name": "Wechselrichter ersetzen oder reparieren vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Wechselrichter-Ausfälle|Wechselrichter ersetzen oder reparieren vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:eb7f071ad0cf74aab852",
+      "parent_id": "core:c22:topic:a2ae2f11d51db9581b1d",
+      "name": "Heimspeicher-Störungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Heimspeicher-Störungen|Heimspeicher-Störungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:25efd5c23a96548c1acd",
+      "parent_id": "core:c22:topic:a2ae2f11d51db9581b1d",
+      "name": "Heimspeicher-Service und Ersatz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Heimspeicher-Störungen|Heimspeicher-Service und Ersatz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0746b232a2f1ccbc9486",
+      "parent_id": "core:c22:topic:c337a6e5af5fc41f77d5",
+      "name": "Wallbox-Ladetechnik: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Wallbox-Ladetechnik|Wallbox-Ladetechnik: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:e5106b25dad271350035",
+      "parent_id": "core:c22:topic:c337a6e5af5fc41f77d5",
+      "name": "Wallbox-Ladetechnik vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Wallbox-Ladetechnik|Wallbox-Ladetechnik vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:05f1415b58089c318028",
+      "parent_id": "core:c22:topic:c337a6e5af5fc41f77d5",
+      "name": "Wallbox-Ladetechnik: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Wallbox-Ladetechnik|Wallbox-Ladetechnik: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:2083969c731976ba86e8",
+      "parent_id": "core:c22:topic:a04d985d488fd450aa12",
+      "name": "PV-Module & Strings: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Module & Strings|PV-Module & Strings: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:a60fe41bc0d3ae41162e",
+      "parent_id": "core:c22:topic:a04d985d488fd450aa12",
+      "name": "PV-Module und Stringkonzepte vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Module & Strings|PV-Module und Stringkonzepte vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4513de42dae8ab3342f2",
+      "parent_id": "core:c22:topic:a04d985d488fd450aa12",
+      "name": "Module & Ersatzkomponenten auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Module & Strings|Module & Ersatzkomponenten auswählen"
+    },
+    {
+      "node_id": "core:c22:category:d30e43c9f2d794ead10f",
+      "parent_id": "core:c22:topic:f45079ae2297d0e14ed3",
+      "name": "PV-Monitoring: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Monitoring|PV-Monitoring: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ad148474902657e69b26",
+      "parent_id": "core:c22:topic:f45079ae2297d0e14ed3",
+      "name": "PV-Monitoring-Systeme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Monitoring|PV-Monitoring-Systeme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4f5a1157678d8ba0beaf",
+      "parent_id": "core:c22:topic:f45079ae2297d0e14ed3",
+      "name": "PV-Monitoring überprüfen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Monitoring|PV-Monitoring überprüfen"
+    },
+    {
+      "node_id": "core:c22:category:73d1db3368cb5c6a0237",
+      "parent_id": "core:c22:topic:fe000ae8cd05b86396cd",
+      "name": "Balkonkraftwerk: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Balkonkraftwerk|Balkonkraftwerk: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c1f60348e6ce724310bd",
+      "parent_id": "core:c22:topic:fe000ae8cd05b86396cd",
+      "name": "Balkonkraftwerke vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|Balkonkraftwerk|Balkonkraftwerke vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4fa9536748a15c06c0d8",
+      "parent_id": "core:c22:topic:b0aa430acccb23738174",
+      "name": "PV-Ersatzstromversorgung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Ersatzstromversorgung|PV-Ersatzstromversorgung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c91a9de68b9eab96878d",
+      "parent_id": "core:c22:topic:b0aa430acccb23738174",
+      "name": "PV-Ersatzstromsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Ersatzstromversorgung|PV-Ersatzstromsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:6137f0d0ff9abddab05f",
+      "parent_id": "core:c22:topic:b0aa430acccb23738174",
+      "name": "PV-Ersatzstromversorgung: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|PV, Speicher & private Ladeinfrastruktur|PV-Ersatzstromversorgung|PV-Ersatzstromversorgung: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:772a3d591994cadfb6a3",
+      "parent_id": "core:c22:topic:ea5af52e9bfcf6875fed",
+      "name": "Notstromversorgung fürs Haus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Strom & Notstrom|Notstromversorgung fürs Haus|Notstromversorgung fürs Haus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:da2e44d0556822336d96",
+      "parent_id": "core:c22:topic:ea5af52e9bfcf6875fed",
+      "name": "Notstromsysteme fürs Haus vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Strom & Notstrom|Notstromversorgung fürs Haus|Notstromsysteme fürs Haus vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:54082cd84d290650b242",
+      "parent_id": "core:c22:topic:ea5af52e9bfcf6875fed",
+      "name": "Notstromversorgung fürs Haus: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Strom & Notstrom|Notstromversorgung fürs Haus|Notstromversorgung fürs Haus: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:7654b7e13c43d0ff9c28",
+      "parent_id": "core:c22:topic:3513a735522412660589",
+      "name": "Garagentor-Funksteuerung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentor-Funksteuerung|Garagentor-Funksteuerung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c5d4e840e0cc0a4f8fa6",
+      "parent_id": "core:c22:topic:3513a735522412660589",
+      "name": "Garagentor-Funksysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentor-Funksteuerung|Garagentor-Funksysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:45bac83f980fc9b8f6b8",
+      "parent_id": "core:c22:topic:3513a735522412660589",
+      "name": "Funksteuerung prüfen & instand halten",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentor-Funksteuerung|Funksteuerung prüfen & instand halten"
+    },
+    {
+      "node_id": "core:c22:category:f05379749558673f60f8",
+      "parent_id": "core:c22:topic:3dc8aba50be9d028a980",
+      "name": "Garagentorantrieb: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentorantrieb|Garagentorantrieb: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4c40e8d740457e70d06c",
+      "parent_id": "core:c22:topic:3dc8aba50be9d028a980",
+      "name": "Garagentorantriebe vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentorantrieb|Garagentorantriebe vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:08de3582a6dc4587b0b9",
+      "parent_id": "core:c22:topic:3dc8aba50be9d028a980",
+      "name": "Garagentorantrieb: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Garagentorantrieb|Garagentorantrieb: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:bb4aeed8c2cbe313e183",
+      "parent_id": "core:c22:topic:c3a5e664161e4d9e5a0b",
+      "name": "Video-Türsprechanlage: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Video-Türsprechanlage|Video-Türsprechanlage: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b60901b9e258a1d76176",
+      "parent_id": "core:c22:topic:c3a5e664161e4d9e5a0b",
+      "name": "Video-Türsprechanlagen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Video-Türsprechanlage|Video-Türsprechanlagen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:01c1d7a9d9dd1f52dc8b",
+      "parent_id": "core:c22:topic:c3a5e664161e4d9e5a0b",
+      "name": "Video-Türsprechanlage: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Video-Türsprechanlage|Video-Türsprechanlage: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:c53ffee92ae28e8725c1",
+      "parent_id": "core:c22:topic:c3a5e664161e4d9e5a0b",
+      "name": "Video-Türsprechanlage: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Video-Türsprechanlage|Video-Türsprechanlage: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:19c20e3cc5058f1cd7dc",
+      "parent_id": "core:c22:topic:c3a5e664161e4d9e5a0b",
+      "name": "Video-Türsprechanlage: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Video-Türsprechanlage|Video-Türsprechanlage: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:6aa54afd4e93238675e7",
+      "parent_id": "core:c22:topic:400d063ef71d8ab36014",
+      "name": "Schiebetorantrieb: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Schiebetorantrieb|Schiebetorantrieb: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4dc125dcf65d868a01ab",
+      "parent_id": "core:c22:topic:400d063ef71d8ab36014",
+      "name": "Schiebetorantriebe vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Schiebetorantrieb|Schiebetorantriebe vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a695e47f1ebb12d5b853",
+      "parent_id": "core:c22:topic:400d063ef71d8ab36014",
+      "name": "Schiebetorantrieb: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Schiebetorantrieb|Schiebetorantrieb: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:5239efff198f347a1d3b",
+      "parent_id": "core:c22:topic:400d063ef71d8ab36014",
+      "name": "Schiebetorantrieb: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Schiebetorantrieb|Schiebetorantrieb: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:57986c2d44b4e8525caa",
+      "parent_id": "core:c22:topic:400d063ef71d8ab36014",
+      "name": "Schiebetorantrieb einbauen & nachrüsten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Schiebetorantrieb|Schiebetorantrieb einbauen & nachrüsten"
+    },
+    {
+      "node_id": "core:c22:category:20ba454107b766f78c40",
+      "parent_id": "core:c22:topic:f07aa432228372097729",
+      "name": "Drehtorantrieb: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Drehtorantrieb|Drehtorantrieb: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3537559282e8d3752638",
+      "parent_id": "core:c22:topic:f07aa432228372097729",
+      "name": "Drehtorantriebe vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Drehtorantrieb|Drehtorantriebe vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:bda68653c36da00f0031",
+      "parent_id": "core:c22:topic:f07aa432228372097729",
+      "name": "Drehtorantrieb: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Drehtorantrieb|Drehtorantrieb: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:741f2d9ad4ff1a976968",
+      "parent_id": "core:c22:topic:3d092faca192cc5a7175",
+      "name": "Zufahrtstor-Antrieb: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Zufahrtstor-Antrieb|Zufahrtstor-Antrieb: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7998f6810ef5a4fd6e86",
+      "parent_id": "core:c22:topic:3d092faca192cc5a7175",
+      "name": "Zufahrtstor-Antriebe vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Zufahrtstor-Antrieb|Zufahrtstor-Antriebe vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:417e3862e111fcbd2e1d",
+      "parent_id": "core:c22:topic:3d092faca192cc5a7175",
+      "name": "Zufahrtstor-Antrieb: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Zufahrtstor-Antrieb|Zufahrtstor-Antrieb: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:f011054ff20c6a3c6357",
+      "parent_id": "core:c22:topic:3d092faca192cc5a7175",
+      "name": "Zufahrtstor-Antrieb einbauen & nachrüsten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Zufahrtstor-Antrieb|Zufahrtstor-Antrieb einbauen & nachrüsten"
+    },
+    {
+      "node_id": "core:c22:category:f966481779fc4ef27346",
+      "parent_id": "core:c22:topic:aeff05e181a321e4020f",
+      "name": "Hoftor-Funksteuerung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Hoftor-Funksteuerung|Hoftor-Funksteuerung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:6c0a58a19e274de10e9e",
+      "parent_id": "core:c22:topic:aeff05e181a321e4020f",
+      "name": "Hoftor-Funksysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Hoftor-Funksteuerung|Hoftor-Funksysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:3168bcf7b8334c0ecbe3",
+      "parent_id": "core:c22:topic:aeff05e181a321e4020f",
+      "name": "Hoftor-Funksteuerung: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Hoftor-Funksteuerung|Hoftor-Funksteuerung: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:13bf6eb8bb5eb28abec6",
+      "parent_id": "core:c22:topic:aeff05e181a321e4020f",
+      "name": "Hoftor-Funksteuerung: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Hoftor-Funksteuerung|Hoftor-Funksteuerung: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:8e4c23fc128034c9e2c9",
+      "parent_id": "core:c22:topic:daf54b55e1bb2d643223",
+      "name": "Gegensprechanlage: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Gegensprechanlage|Gegensprechanlage: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:8ac07726b28a7033d9be",
+      "parent_id": "core:c22:topic:daf54b55e1bb2d643223",
+      "name": "Gegensprechanlagen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Gegensprechanlage|Gegensprechanlagen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e06ffef34c28c9a70365",
+      "parent_id": "core:c22:topic:daf54b55e1bb2d643223",
+      "name": "Gegensprechanlage: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Gegensprechanlage|Gegensprechanlage: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:c4e8395cde629ae0a3c1",
+      "parent_id": "core:c22:topic:daf54b55e1bb2d643223",
+      "name": "Gegensprechanlage: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Gegensprechanlage|Gegensprechanlage: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:692848d06949408b7b22",
+      "parent_id": "core:c22:topic:31c60e76f23e0d739e03",
+      "name": "Smarte Türsteuerung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Smarte Türsteuerung|Smarte Türsteuerung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:fa3db38010ccf79ab8fc",
+      "parent_id": "core:c22:topic:31c60e76f23e0d739e03",
+      "name": "Smarte Türsteuerungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Smarte Türsteuerung|Smarte Türsteuerungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a898ac1a06665f5686b6",
+      "parent_id": "core:c22:topic:31c60e76f23e0d739e03",
+      "name": "Berechtigungen & Nutzerverwaltung",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Smarte Türsteuerung|Berechtigungen & Nutzerverwaltung"
+    },
+    {
+      "node_id": "core:c22:category:79c286348258e2c23719",
+      "parent_id": "core:c22:topic:9809901b70e22be8acc5",
+      "name": "Elektrische Türöffner: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektrische Türöffner|Elektrische Türöffner: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f02904f27196809dedb3",
+      "parent_id": "core:c22:topic:9809901b70e22be8acc5",
+      "name": "Elektrische Türöffner vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektrische Türöffner|Elektrische Türöffner vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:27c03614b2d14c2375c1",
+      "parent_id": "core:c22:topic:9809901b70e22be8acc5",
+      "name": "Elektrische Türöffner: Auswahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektrische Türöffner|Elektrische Türöffner: Auswahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:72af6ced42d5ef0fb371",
+      "parent_id": "core:c22:topic:9809901b70e22be8acc5",
+      "name": "Elektrische Türöffner: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektrische Türöffner|Elektrische Türöffner: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:5b6f2c9248a797a293af",
+      "parent_id": "core:c22:topic:9809901b70e22be8acc5",
+      "name": "Elektrische Türöffner: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektrische Türöffner|Elektrische Türöffner: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:798498141865dc5393dd",
+      "parent_id": "core:c22:topic:9fb4c8a4bb247c481b12",
+      "name": "Elektronische Türschlösser: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektronische Türschlösser|Elektronische Türschlösser: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:740c4558b345926081ef",
+      "parent_id": "core:c22:topic:9fb4c8a4bb247c481b12",
+      "name": "Elektronische Türschlösser vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektronische Türschlösser|Elektronische Türschlösser vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b01e1c47ad728db25f20",
+      "parent_id": "core:c22:topic:9fb4c8a4bb247c481b12",
+      "name": "Elektronische Türschlösser: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Technik & Ausfälle|Tore & Zugangstechnik|Elektronische Türschlösser|Elektronische Türschlösser: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:37b19c09f3a9a75e6032",
+      "parent_id": "core:c22:topic:ec43cd8f28f61389afa8",
+      "name": "Wallbox vor Sabotage: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Außentechnik|Wallbox vor Sabotage|Wallbox vor Sabotage: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:8eb87bb17f1ae1ce6177",
+      "parent_id": "core:c22:topic:ec43cd8f28f61389afa8",
+      "name": "Manipulationsschutz an Wallboxen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Außentechnik|Wallbox vor Sabotage|Manipulationsschutz an Wallboxen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:fb71cf6f7c6c02780923",
+      "parent_id": "core:c22:topic:4894ff8fd200b7592039",
+      "name": "Privatwagen vor Vandalismus schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Freizeit & Vandalismus|Privatwagen vor Vandalismus schützen|Privatwagen vor Vandalismus schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f48b1a1e48eb2c4c8779",
+      "parent_id": "core:c22:topic:4894ff8fd200b7592039",
+      "name": "Schutz vor Autovandalismus vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Freizeit & Vandalismus|Privatwagen vor Vandalismus schützen|Schutz vor Autovandalismus vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:3e61541cb1c753623937",
+      "parent_id": "core:c22:topic:1804f8e77029ffe000e0",
+      "name": "Schaufenster vor Sachbeschädigung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Schaufenster vor Sachbeschädigung|Schaufenster vor Sachbeschädigung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:59a2428468194677f973",
+      "parent_id": "core:c22:topic:1804f8e77029ffe000e0",
+      "name": "Schaufenster-Schutzlösungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Schaufenster vor Sachbeschädigung|Schaufenster-Schutzlösungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1117da14f20b7576ef8e",
+      "parent_id": "core:c22:topic:1804f8e77029ffe000e0",
+      "name": "Schaufenster vor Sachbeschädigung: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Schaufenster vor Sachbeschädigung|Schaufenster vor Sachbeschädigung: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:1908054fd56ddf609c98",
+      "parent_id": "core:c22:topic:75d6c743b6647e44dfe6",
+      "name": "Tür- und Fensterglas bei Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Tür- und Fensterglas bei Vandalismus|Tür- und Fensterglas bei Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4344516c5e1e01163168",
+      "parent_id": "core:c22:topic:75d6c743b6647e44dfe6",
+      "name": "Vandalismusschutz für Verglasungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Tür- und Fensterglas bei Vandalismus|Vandalismusschutz für Verglasungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1c75e4d2bcfc83472a67",
+      "parent_id": "core:c22:topic:75d6c743b6647e44dfe6",
+      "name": "Tür- und Fensterglas bei Vandalismus: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Tür- und Fensterglas bei Vandalismus|Tür- und Fensterglas bei Vandalismus: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:34ae31f5e85ef01d50ab",
+      "parent_id": "core:c22:topic:d11c491f3306365b2101",
+      "name": "Sicherungskasten vor Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Sicherungskasten vor Vandalismus|Sicherungskasten vor Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:49c0b39e48b5cb6e85f0",
+      "parent_id": "core:c22:topic:d11c491f3306365b2101",
+      "name": "Sicherungskasten-Sicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Sicherungskasten vor Vandalismus|Sicherungskasten-Sicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:7cb830f43b32da0e18dd",
+      "parent_id": "core:c22:topic:d9d87a07d0f698bae90a",
+      "name": "Innenwandschäden nach Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Innenwandschäden nach Vandalismus|Innenwandschäden nach Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:93bd360a284ab30fd674",
+      "parent_id": "core:c22:topic:d9d87a07d0f698bae90a",
+      "name": "Sanierungsverfahren für Innenwände vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Innenwandschäden nach Vandalismus|Sanierungsverfahren für Innenwände vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:c963f49a0e239d15eef4",
+      "parent_id": "core:c22:topic:5ba413fa916bd1bc5028",
+      "name": "Deckenschäden nach Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Deckenschäden nach Vandalismus|Deckenschäden nach Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:e1a9054360d5e40754b3",
+      "parent_id": "core:c22:topic:5ba413fa916bd1bc5028",
+      "name": "Deckenreparaturverfahren vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Deckenschäden nach Vandalismus|Deckenreparaturverfahren vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5c8854eb5037cf4dc300",
+      "parent_id": "core:c22:topic:55306b4c843dbe3ba178",
+      "name": "Bodenbelagschäden durch Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Bodenbelagschäden durch Vandalismus|Bodenbelagschäden durch Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:37ce880659dbd7a86054",
+      "parent_id": "core:c22:topic:55306b4c843dbe3ba178",
+      "name": "Reparatur von Bodenbelägen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Bodenbelagschäden durch Vandalismus|Reparatur von Bodenbelägen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:c9857f57cb81ef0ec2c0",
+      "parent_id": "core:c22:topic:3cba6658309db0f3612f",
+      "name": "Treppenschäden durch Vandalismus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Treppenschäden durch Vandalismus|Treppenschäden durch Vandalismus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3ec46dfd9e6ebdea2c04",
+      "parent_id": "core:c22:topic:3cba6658309db0f3612f",
+      "name": "Treppenreparatur und Ersatz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Treppenschäden durch Vandalismus|Treppenreparatur und Ersatz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4a2ca67b941919d7428a",
+      "parent_id": "core:c22:topic:f438db725ad52f13dd07",
+      "name": "Einbauküchenschäden: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Einbauküchenschäden|Einbauküchenschäden: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:393bd600a7d439147043",
+      "parent_id": "core:c22:topic:f438db725ad52f13dd07",
+      "name": "Reparatur oder Ersatz von Einbauküchen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Einbauküchenschäden|Reparatur oder Ersatz von Einbauküchen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9ea20298785b94e91714",
+      "parent_id": "core:c22:topic:f298f75c29f3bb729e2e",
+      "name": "Einbauschränke vor Vandalismus schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Einbauschränke vor Vandalismus schützen|Einbauschränke vor Vandalismus schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2a0371b9dde9719e4570",
+      "parent_id": "core:c22:topic:f298f75c29f3bb729e2e",
+      "name": "Sicherungen für Einbauschränke vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Einbauschränke vor Vandalismus schützen|Sicherungen für Einbauschränke vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e20c5315c36f368a62dc",
+      "parent_id": "core:c22:topic:e0fb7409646cb06406e5",
+      "name": "Heizraum vor Vandalismus schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Heizraum vor Vandalismus schützen|Heizraum vor Vandalismus schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2617765cb2bdc2b8ce80",
+      "parent_id": "core:c22:topic:e0fb7409646cb06406e5",
+      "name": "Heizraum-Zutrittskontrollen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Heizraum vor Vandalismus schützen|Heizraum-Zutrittskontrollen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:8f3b2fba1b499ecd101c",
+      "parent_id": "core:c22:topic:0b33e603f09999f7dc36",
+      "name": "Heizkreisverteiler schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Heizkreisverteiler schützen|Heizkreisverteiler schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:597b3dcb9620baf53abb",
+      "parent_id": "core:c22:topic:0b33e603f09999f7dc36",
+      "name": "Heizkreisverteiler-Sicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Heizkreisverteiler schützen|Heizkreisverteiler-Sicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9720f76b33b544e21f7e",
+      "parent_id": "core:c22:topic:264b7630e8901953c3f0",
+      "name": "Wasserabsperrung vor Manipulation schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Wasserabsperrung vor Manipulation schützen|Wasserabsperrung vor Manipulation schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:9b965ee72b4a86e0e2aa",
+      "parent_id": "core:c22:topic:264b7630e8901953c3f0",
+      "name": "Schutz für Wasserabsperrungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Wasserabsperrung vor Manipulation schützen|Schutz für Wasserabsperrungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0152945a5dc1927b6a9a",
+      "parent_id": "core:c22:topic:cad13b384aa700966b54",
+      "name": "Technikschränke schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Technikschränke schützen|Technikschränke schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:90fd1108c16a732caf5d",
+      "parent_id": "core:c22:topic:cad13b384aa700966b54",
+      "name": "Technikschrank-Sicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Gebäude & Ausstattung|Technikschränke schützen|Technikschrank-Sicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:3d52d57b727a94945935",
+      "parent_id": "core:c22:topic:7a0a6cdd7c961d33e7d8",
+      "name": "Sportplatz vor Vandalismus schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Vandalismus & Zerstörung|Vereine & Kleingewerbe|Sportplatz vor Vandalismus schützen|Sportplatz vor Vandalismus schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d1dc94f657e48ae3a019",
+      "parent_id": "core:c22:topic:7a0a6cdd7c961d33e7d8",
+      "name": "Schutzkonzepte für Sportplätze vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Vandalismus & Zerstörung|Vereine & Kleingewerbe|Sportplatz vor Vandalismus schützen|Schutzkonzepte für Sportplätze vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:7c7ca65cf3e67799ed71",
+      "parent_id": "core:c22:topic:7a0a6cdd7c961d33e7d8",
+      "name": "Beleuchtung & Überwachung am Sportplatz",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Vandalismus & Zerstörung|Vereine & Kleingewerbe|Sportplatz vor Vandalismus schützen|Beleuchtung & Überwachung am Sportplatz"
+    },
+    {
+      "node_id": "core:c22:category:00f51b792cec027ee37b",
+      "parent_id": "core:c22:topic:8ed36845d198b8d44914",
+      "name": "Wohnmobil-Dachabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Wohnmobil-Dachabdichtung|Wohnmobil-Dachabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:53de934d942822d498e0",
+      "parent_id": "core:c22:topic:8ed36845d198b8d44914",
+      "name": "Wohnmobil-Dachabdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Wohnmobil-Dachabdichtung|Wohnmobil-Dachabdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1ad7f4e5415925c75c50",
+      "parent_id": "core:c22:topic:8ed36845d198b8d44914",
+      "name": "Dichtstoffe & Abdichtungsmethoden auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Wohnmobil-Dachabdichtung|Dichtstoffe & Abdichtungsmethoden auswählen"
+    },
+    {
+      "node_id": "core:c22:category:b7c06b44c2bcc0462658",
+      "parent_id": "core:c22:topic:8ed36845d198b8d44914",
+      "name": "Wohnmobil-Dachabdichtung: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Wohnmobil-Dachabdichtung|Wohnmobil-Dachabdichtung: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:2d2de54ced88df7fd46e",
+      "parent_id": "core:c22:topic:8500ee4d314c41a653dd",
+      "name": "Bilgenwasser im Freizeitboot: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bilgenwasser im Freizeitboot|Bilgenwasser im Freizeitboot: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3c6137bcda647cfcaf36",
+      "parent_id": "core:c22:topic:8500ee4d314c41a653dd",
+      "name": "Bilgenpumpen und Wasseralarme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bilgenwasser im Freizeitboot|Bilgenpumpen und Wasseralarme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1e3af40b2fa516c9c9bd",
+      "parent_id": "core:c22:topic:8500ee4d314c41a653dd",
+      "name": "Soforthilfe bei Wassereinbruch an Bord",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bilgenwasser im Freizeitboot|Soforthilfe bei Wassereinbruch an Bord"
+    },
+    {
+      "node_id": "core:c22:category:2d08aceb6a015d3dd437",
+      "parent_id": "core:c22:topic:0af86573559593c7de5c",
+      "name": "Bootskajüte: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bootskajüte|Bootskajüte: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c740162c3851f56a95db",
+      "parent_id": "core:c22:topic:0af86573559593c7de5c",
+      "name": "Feuchteschutz in Bootskajüten vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bootskajüte|Feuchteschutz in Bootskajüten vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:99d34ffaceefcce6311f",
+      "parent_id": "core:c22:topic:ce0062f4730b35ca8c96",
+      "name": "Boot-Wassersystem: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Boot-Wassersystem|Boot-Wassersystem: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:5656fface4668bd21366",
+      "parent_id": "core:c22:topic:ce0062f4730b35ca8c96",
+      "name": "Wassersysteme im Freizeitboot vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Boot-Wassersystem|Wassersysteme im Freizeitboot vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:eb5a2029bdde434673d3",
+      "parent_id": "core:c22:topic:ce0062f4730b35ca8c96",
+      "name": "Wassersysteme fürs Boot auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Boot-Wassersystem|Wassersysteme fürs Boot auswählen"
+    },
+    {
+      "node_id": "core:c22:category:a8cecf9762017d7a4e97",
+      "parent_id": "core:c22:topic:ce0062f4730b35ca8c96",
+      "name": "Boot-Wassersystem: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Boot-Wassersystem|Boot-Wassersystem: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:8cfbaf77398d65d0cab4",
+      "parent_id": "core:c22:topic:2f748d544cbb57189a62",
+      "name": "Bootsabdeckung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bootsabdeckung|Bootsabdeckung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:8c8fa6b25eaa45246f1f",
+      "parent_id": "core:c22:topic:2f748d544cbb57189a62",
+      "name": "Bootsabdeckungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Bootsabdeckung|Bootsabdeckungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:379bb9e4396ee623b06a",
+      "parent_id": "core:c22:topic:2aa7a0b968c5a22c6cbf",
+      "name": "Poolleitungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Poolleitungen|Poolleitungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:99975385bb807352647a",
+      "parent_id": "core:c22:topic:2aa7a0b968c5a22c6cbf",
+      "name": "Poolleitungsmaterialien und Frostschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Poolleitungen|Poolleitungsmaterialien und Frostschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:640af05feeaa4e7db983",
+      "parent_id": "core:c22:topic:7965abf760950e087c41",
+      "name": "Poolbeckenabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Poolbeckenabdichtung|Poolbeckenabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ef679e7bbf928a9f65fe",
+      "parent_id": "core:c22:topic:7965abf760950e087c41",
+      "name": "Poolbecken-Abdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Poolbeckenabdichtung|Poolbecken-Abdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:6f9f5abd8764c654d3be",
+      "parent_id": "core:c22:topic:7965abf760950e087c41",
+      "name": "Abdichtungsmaterialien auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Poolbeckenabdichtung|Abdichtungsmaterialien auswählen"
+    },
+    {
+      "node_id": "core:c22:category:b31d389c3080c2ff76b0",
+      "parent_id": "core:c22:topic:cfc86907ef3c5c532243",
+      "name": "Teichfolie: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Teichfolie|Teichfolie: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:13a1f543a0539a9b7875",
+      "parent_id": "core:c22:topic:cfc86907ef3c5c532243",
+      "name": "Teichfolien vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Teichfolie|Teichfolien vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:36f6f4c18c7fda9a82e9",
+      "parent_id": "core:c22:topic:cfc86907ef3c5c532243",
+      "name": "Teichfolien auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Teichfolie|Teichfolien auswählen"
+    },
+    {
+      "node_id": "core:c22:category:bb9143eedd1826688391",
+      "parent_id": "core:c22:topic:cfc86907ef3c5c532243",
+      "name": "Teichfolie verlegen & Randabschlüsse",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wasser & Feuchtigkeit|Camping & Freizeitobjekte|Teichfolie|Teichfolie verlegen & Randabschlüsse"
+    },
+    {
+      "node_id": "core:c22:category:af54a03fe9d1b21e5119",
+      "parent_id": "core:c22:topic:1a2cb2140d6d150c45fe",
+      "name": "Dachfenster & Anschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachfenster & Anschlüsse|Dachfenster & Anschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:684b0996b11ebba3f8ed",
+      "parent_id": "core:c22:topic:1a2cb2140d6d150c45fe",
+      "name": "Dachfenster-Anschlusslösungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachfenster & Anschlüsse|Dachfenster-Anschlusslösungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4ff06cb43b6ce297f32e",
+      "parent_id": "core:c22:topic:1a2cb2140d6d150c45fe",
+      "name": "Dachfenster & Anschlüsse: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachfenster & Anschlüsse|Dachfenster & Anschlüsse: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:8d8fa799fab3a3f7ef20",
+      "parent_id": "core:c22:topic:66945a34d73a94d3d03f",
+      "name": "Flachdachabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Flachdachabdichtung|Flachdachabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:08934cb21c618b79297b",
+      "parent_id": "core:c22:topic:66945a34d73a94d3d03f",
+      "name": "Flachdach-Abdichtungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Flachdachabdichtung|Flachdach-Abdichtungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:43df279a1224a8827ff9",
+      "parent_id": "core:c22:topic:66945a34d73a94d3d03f",
+      "name": "Flachdach-Abdichtungen auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Flachdachabdichtung|Flachdach-Abdichtungen auswählen"
+    },
+    {
+      "node_id": "core:c22:category:2af11af85657d735b1ff",
+      "parent_id": "core:c22:topic:3b99ab1a88ac9e5589e2",
+      "name": "Dachrinnen & Fallrohre: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachrinnen & Fallrohre|Dachrinnen & Fallrohre: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:cdb3969b88f0e0ace07f",
+      "parent_id": "core:c22:topic:3b99ab1a88ac9e5589e2",
+      "name": "Dachrinnenmaterialien und Entwässerung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachrinnen & Fallrohre|Dachrinnenmaterialien und Entwässerung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:8f233773c91b7d176f3e",
+      "parent_id": "core:c22:topic:3b99ab1a88ac9e5589e2",
+      "name": "Materialien und Systeme für Dachrinnen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachrinnen & Fallrohre|Materialien und Systeme für Dachrinnen"
+    },
+    {
+      "node_id": "core:c22:category:23fc22c0357a92a2fc8a",
+      "parent_id": "core:c22:topic:3b99ab1a88ac9e5589e2",
+      "name": "Dachrinnen & Fallrohre: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachrinnen & Fallrohre|Dachrinnen & Fallrohre: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:83d5948c197e93a8304b",
+      "parent_id": "core:c22:topic:18a32808c5a9da63d5a7",
+      "name": "Dacheindeckung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dacheindeckung|Dacheindeckung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2c756c8fd5c34f91b597",
+      "parent_id": "core:c22:topic:18a32808c5a9da63d5a7",
+      "name": "Dacheindeckungen gegen Feuchte vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dacheindeckung|Dacheindeckungen gegen Feuchte vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ba59e2e10fbd594db53d",
+      "parent_id": "core:c22:topic:18a32808c5a9da63d5a7",
+      "name": "Dacheindeckung: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dacheindeckung|Dacheindeckung: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:8da343497d52214d9257",
+      "parent_id": "core:c22:topic:18a32808c5a9da63d5a7",
+      "name": "Dacheindeckung auswählen & planen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dacheindeckung|Dacheindeckung auswählen & planen"
+    },
+    {
+      "node_id": "core:c22:category:d8510a5dd5d7888e761e",
+      "parent_id": "core:c22:topic:0b1480aed9d8831e4985",
+      "name": "Fensteranschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Fensteranschlüsse|Fensteranschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c8ffcfa6c8601a383fc4",
+      "parent_id": "core:c22:topic:0b1480aed9d8831e4985",
+      "name": "Fensteranschluss-Abdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Fensteranschlüsse|Fensteranschluss-Abdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:866f97f8b8fd0770fcf7",
+      "parent_id": "core:c22:topic:0b1480aed9d8831e4985",
+      "name": "Fensteranschlüsse: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Fensteranschlüsse|Fensteranschlüsse: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:95a428c697e9f6563741",
+      "parent_id": "core:c22:topic:5b4942f04f1c87c64502",
+      "name": "Fassadenfugen & Anschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Fassadenfugen & Anschlüsse|Fassadenfugen & Anschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:841e9fb0af79b9a99eb2",
+      "parent_id": "core:c22:topic:5b4942f04f1c87c64502",
+      "name": "Fassadenfugen-Abdichtungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Fassadenfugen & Anschlüsse|Fassadenfugen-Abdichtungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a62d87d6258825d04e5b",
+      "parent_id": "core:c22:topic:12a308a49f1e29b3e582",
+      "name": "Sockelabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Sockelabdichtung|Sockelabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:580d653b68fe8edd7602",
+      "parent_id": "core:c22:topic:12a308a49f1e29b3e582",
+      "name": "Sockel-Abdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Sockelabdichtung|Sockel-Abdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:7123dc7221612554183d",
+      "parent_id": "core:c22:topic:12a308a49f1e29b3e582",
+      "name": "Sockelabdichtung: Materialwahl & Beratung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Sockelabdichtung|Sockelabdichtung: Materialwahl & Beratung"
+    },
+    {
+      "node_id": "core:c22:category:a82bb1b922ca20fa7385",
+      "parent_id": "core:c22:topic:cb6d27b96f99c62b450c",
+      "name": "Dachabläufe & Notentwässerung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachabläufe & Notentwässerung|Dachabläufe & Notentwässerung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7ac7add25a3528d74ed5",
+      "parent_id": "core:c22:topic:cb6d27b96f99c62b450c",
+      "name": "Dachabläufe und Notentwässerung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachabläufe & Notentwässerung|Dachabläufe und Notentwässerung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a6e6b8d6bc0ff6864275",
+      "parent_id": "core:c22:topic:cb6d27b96f99c62b450c",
+      "name": "Dachabläufe & Notentwässerung: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Dachabläufe & Notentwässerung|Dachabläufe & Notentwässerung: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:eb86f95ccb192f789459",
+      "parent_id": "core:c22:topic:cf939c271515a3ff446f",
+      "name": "Gauben & Anschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Gauben & Anschlüsse|Gauben & Anschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:0ec2cb81ef29cb809192",
+      "parent_id": "core:c22:topic:cf939c271515a3ff446f",
+      "name": "Gaubenabdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Gauben & Anschlüsse|Gaubenabdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:37f0dde676ab3c07b109",
+      "parent_id": "core:c22:topic:d259e03a47e36f5748a1",
+      "name": "Kaminanschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Kaminanschlüsse|Kaminanschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:9fdbc70cf4de55a1299c",
+      "parent_id": "core:c22:topic:d259e03a47e36f5748a1",
+      "name": "Kaminanschluss-Abdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Kaminanschlüsse|Kaminanschluss-Abdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5609a774c96053cd9a75",
+      "parent_id": "core:c22:topic:b52ee49052a754b420c2",
+      "name": "Balkonanschlüsse: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Balkonanschlüsse|Balkonanschlüsse: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:22ca3dcf50e2f55b8ad8",
+      "parent_id": "core:c22:topic:b52ee49052a754b420c2",
+      "name": "Balkonabdichtung an Anschlüssen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Balkonanschlüsse|Balkonabdichtung an Anschlüssen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:2b3bf1673fa0bf3c7828",
+      "parent_id": "core:c22:topic:ebcff59e28d0461b9ed9",
+      "name": "Außentüren: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Außentüren|Außentüren: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:86d14dd1c8b31954f207",
+      "parent_id": "core:c22:topic:ebcff59e28d0461b9ed9",
+      "name": "Regenschutz für Außentüren vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Außentüren|Regenschutz für Außentüren vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a1b82dff40d7b853b1eb",
+      "parent_id": "core:c22:topic:ebcff59e28d0461b9ed9",
+      "name": "Feuchteschutz an Außentüren: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Außentüren|Feuchteschutz an Außentüren: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:ccb9beeb0e25cc303d90",
+      "parent_id": "core:c22:topic:e3c07911e5b35f6281a5",
+      "name": "Anbauabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Anbauabdichtung|Anbauabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:9c7612011be4914f7e90",
+      "parent_id": "core:c22:topic:e3c07911e5b35f6281a5",
+      "name": "Abdichtung von Hausanbauten vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Anbauabdichtung|Abdichtung von Hausanbauten vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e2183a82c735ae31d7e0",
+      "parent_id": "core:c22:topic:e3c07911e5b35f6281a5",
+      "name": "Anbaudach-Abdichtung auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Anbauabdichtung|Anbaudach-Abdichtung auswählen"
+    },
+    {
+      "node_id": "core:c22:category:a63743c1f7a850990a13",
+      "parent_id": "core:c22:topic:e3c07911e5b35f6281a5",
+      "name": "Anbauabdichtung: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Anbauabdichtung|Anbauabdichtung: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:7a34275700037da77a33",
+      "parent_id": "core:c22:topic:18505c7c2c90c3bfb5c0",
+      "name": "Wintergartenabdichtung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Wintergartenabdichtung|Wintergartenabdichtung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f28abc87ab91f22f0d38",
+      "parent_id": "core:c22:topic:18505c7c2c90c3bfb5c0",
+      "name": "Wintergarten-Abdichtungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Wintergartenabdichtung|Wintergarten-Abdichtungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:cfc4cb66c09eb134e7f5",
+      "parent_id": "core:c22:topic:18505c7c2c90c3bfb5c0",
+      "name": "Abdichtungssysteme für Wintergärten auswählen",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Wintergartenabdichtung|Abdichtungssysteme für Wintergärten auswählen"
+    },
+    {
+      "node_id": "core:c22:category:a3d45d86b06433298c62",
+      "parent_id": "core:c22:topic:18505c7c2c90c3bfb5c0",
+      "name": "Wintergartenabdichtung: Wartung & Pflege",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Dach & Gebäudehülle gegen Feuchtigkeit|Wintergartenabdichtung|Wintergartenabdichtung: Wartung & Pflege"
+    },
+    {
+      "node_id": "core:c22:category:5e36c805e07866b5a791",
+      "parent_id": "core:c22:topic:651d670b4c5b7ab76620",
+      "name": "Wasserleitungen im Ferienhaus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Frost & Abwesenheit|Wasserleitungen im Ferienhaus|Wasserleitungen im Ferienhaus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:93855c0b7963a2ce87ad",
+      "parent_id": "core:c22:topic:651d670b4c5b7ab76620",
+      "name": "Frostschutzlösungen für Ferienhausleitungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Frost & Abwesenheit|Wasserleitungen im Ferienhaus|Frostschutzlösungen für Ferienhausleitungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:fe7d30f16bb27ce11070",
+      "parent_id": "core:c22:topic:651d670b4c5b7ab76620",
+      "name": "Frostschutz & Reparaturkosten im Ferienhaus",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Frost & Abwesenheit|Wasserleitungen im Ferienhaus|Frostschutz & Reparaturkosten im Ferienhaus"
+    },
+    {
+      "node_id": "core:c22:category:a3858ead8c9ccc1bc773",
+      "parent_id": "core:c22:topic:bd03fb226f1f272f142f",
+      "name": "Rückstauklappen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Keller & Rückstau|Rückstauklappen|Rückstauklappen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:a4ab9ea3cbf2a0a1d318",
+      "parent_id": "core:c22:topic:bd03fb226f1f272f142f",
+      "name": "Rückstauklappen und Rückstauschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Keller & Rückstau|Rückstauklappen|Rückstauklappen und Rückstauschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e8233741adab7ae66698",
+      "parent_id": "core:c22:topic:bd03fb226f1f272f142f",
+      "name": "Rückstauklappen planen & einbauen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wasser & Feuchtigkeit|Keller & Rückstau|Rückstauklappen|Rückstauklappen planen & einbauen"
+    },
+    {
+      "node_id": "core:c22:category:640bc9af42d25252e426",
+      "parent_id": "core:c22:topic:486f7c0411c6ddb914d3",
+      "name": "Hausschwamm im Gebäude: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Keller & Rückstau|Hausschwamm im Gebäude|Hausschwamm im Gebäude: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:841bfb77303b529303ed",
+      "parent_id": "core:c22:topic:486f7c0411c6ddb914d3",
+      "name": "Hausschwammsanierung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Keller & Rückstau|Hausschwamm im Gebäude|Hausschwammsanierung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:29e30d0bde1271c947a4",
+      "parent_id": "core:c22:topic:936373d179e3249ea811",
+      "name": "Wasserschutz im Friseursalon: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Kleine Betriebe & Vereine|Wasserschutz im Friseursalon|Wasserschutz im Friseursalon: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:0667797ed96f67736015",
+      "parent_id": "core:c22:topic:936373d179e3249ea811",
+      "name": "Leckschutz für Friseursalons vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Kleine Betriebe & Vereine|Wasserschutz im Friseursalon|Leckschutz für Friseursalons vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ac98040670aed3f22d01",
+      "parent_id": "core:c22:topic:936373d179e3249ea811",
+      "name": "Wasserschutz im Friseursalon: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Kleine Betriebe & Vereine|Wasserschutz im Friseursalon|Wasserschutz im Friseursalon: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:ff6bcac4576c14326806",
+      "parent_id": "core:c22:topic:eaa526ba7d1c65f0d9e5",
+      "name": "Wassermelder: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Wassermelder|Wassermelder: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7218c8c5f71fc40d27ce",
+      "parent_id": "core:c22:topic:eaa526ba7d1c65f0d9e5",
+      "name": "Wassermelder und Alarmfunktionen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Wassermelder|Wassermelder und Alarmfunktionen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9d183d6cd97fa647c012",
+      "parent_id": "core:c22:topic:eaa526ba7d1c65f0d9e5",
+      "name": "Wassermelder: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Wassermelder|Wassermelder: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:7d767f24e80c659d5051",
+      "parent_id": "core:c22:topic:eaa526ba7d1c65f0d9e5",
+      "name": "Fehlalarme & Störungen bei Wassermelder",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Wassermelder|Fehlalarme & Störungen bei Wassermelder"
+    },
+    {
+      "node_id": "core:c22:category:419bdec62cd3a4519923",
+      "parent_id": "core:c22:topic:4731ec5e75847f957fe6",
+      "name": "Dusche undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Dusche undicht|Dusche undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7022a6bdd27d7f97ccad",
+      "parent_id": "core:c22:topic:4731ec5e75847f957fe6",
+      "name": "Duschabdichtungen und Reparatur vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Dusche undicht|Duschabdichtungen und Reparatur vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:fecef8284551ea03a02c",
+      "parent_id": "core:c22:topic:d39663020886c016b24b",
+      "name": "Spülkasten undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Spülkasten undicht|Spülkasten undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:416fef06d4e5cb98680f",
+      "parent_id": "core:c22:topic:d39663020886c016b24b",
+      "name": "Spülkasten-Reparaturwege vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Spülkasten undicht|Spülkasten-Reparaturwege vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9baf97d101ad810adca1",
+      "parent_id": "core:c22:topic:c2b4402dbeb7bb6a4b38",
+      "name": "Badewanne abdichten: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Badewanne abdichten|Badewanne abdichten: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3a4a8dd7819ecb59ff14",
+      "parent_id": "core:c22:topic:c2b4402dbeb7bb6a4b38",
+      "name": "Badewannen-Abdichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Badewanne abdichten|Badewannen-Abdichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:2bc2a4e5ee1094dba60f",
+      "parent_id": "core:c22:topic:0f0d17b484f5c8a92f19",
+      "name": "Siphon undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Siphon undicht|Siphon undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d443194e440371247601",
+      "parent_id": "core:c22:topic:0f0d17b484f5c8a92f19",
+      "name": "Siphons und Dichtungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Siphon undicht|Siphons und Dichtungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b9a49b40dd59a50e395c",
+      "parent_id": "core:c22:topic:c8a7757c9499d2ac5342",
+      "name": "Waschbecken undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Waschbecken undicht|Waschbecken undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:21d2d1f7754b4ed5afb1",
+      "parent_id": "core:c22:topic:c8a7757c9499d2ac5342",
+      "name": "Waschbecken-Anschlusslösungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Waschbecken undicht|Waschbecken-Anschlusslösungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ba3eeb45902fc5d8215e",
+      "parent_id": "core:c22:topic:56208944ccac260600fc",
+      "name": "Küchenspüle undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Küchenspüle undicht|Küchenspüle undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c3d8574c9adb1c1b0244",
+      "parent_id": "core:c22:topic:56208944ccac260600fc",
+      "name": "Küchenspülen-Dichtsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Küchenspüle undicht|Küchenspülen-Dichtsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:58126416c9d59ef88e69",
+      "parent_id": "core:c22:topic:1ab1f81bb5fb1eb96632",
+      "name": "Küchenarmaturen undicht: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Küchenarmaturen undicht|Küchenarmaturen undicht: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:dab54a64599b4e4ac714",
+      "parent_id": "core:c22:topic:1ab1f81bb5fb1eb96632",
+      "name": "Küchenarmaturen und Dichtsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wasser & Feuchtigkeit|Leckage & Rohrbruch|Küchenarmaturen undicht|Küchenarmaturen und Dichtsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:68ea31a561828668e5d0",
+      "parent_id": "core:c22:topic:87e2e501a765c4eeded8",
+      "name": "Überspannungsschutz im Wohnhaus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Blitz & Überspannung|Überspannungsschutz im Wohnhaus|Überspannungsschutz im Wohnhaus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b8676cf7de116bccba5a",
+      "parent_id": "core:c22:topic:87e2e501a765c4eeded8",
+      "name": "Überspannungsschutz-Systeme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Blitz & Überspannung|Überspannungsschutz im Wohnhaus|Überspannungsschutz-Systeme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:8818fda105ef3d2da0c5",
+      "parent_id": "core:c22:topic:87e2e501a765c4eeded8",
+      "name": "Überspannungsschutz im Wohnhaus: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Blitz & Überspannung|Überspannungsschutz im Wohnhaus|Überspannungsschutz im Wohnhaus: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:11434c9b0422ea4859ba",
+      "parent_id": "core:c22:topic:87e2e501a765c4eeded8",
+      "name": "Überspannungsschutz kontrollieren & erneuern",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Blitz & Überspannung|Überspannungsschutz im Wohnhaus|Überspannungsschutz kontrollieren & erneuern"
+    },
+    {
+      "node_id": "core:c22:category:396d4d1d2efb8e65f855",
+      "parent_id": "core:c22:topic:c9b9e67eddfde8755ac7",
+      "name": "Wohnmobil bei Sturm: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Wohnmobil bei Sturm|Wohnmobil bei Sturm: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:de21cd665ffb005f28a5",
+      "parent_id": "core:c22:topic:c9b9e67eddfde8755ac7",
+      "name": "Sturmschutz für Wohnmobile vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Wohnmobil bei Sturm|Sturmschutz für Wohnmobile vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:3a6edf352b8a25a53ac2",
+      "parent_id": "core:c22:topic:19af0040b7c889d035c4",
+      "name": "Hagelschutz für Privatwagen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Hagelschutz für Privatwagen|Hagelschutz für Privatwagen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4772729ab272fb50fba8",
+      "parent_id": "core:c22:topic:19af0040b7c889d035c4",
+      "name": "Hagelschutz für Autos vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Hagelschutz für Privatwagen|Hagelschutz für Autos vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5af9818316b7f0931428",
+      "parent_id": "core:c22:topic:19af0040b7c889d035c4",
+      "name": "Hagelschutz für Privatwagen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Hagelschutz für Privatwagen|Hagelschutz für Privatwagen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:1ac4779b1aaf8d2603af",
+      "parent_id": "core:c22:topic:ea40e182ae0660bed34f",
+      "name": "Hochwasser am Privatwagen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Hochwasser am Privatwagen|Hochwasser am Privatwagen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:1077afc05c3a56853515",
+      "parent_id": "core:c22:topic:ea40e182ae0660bed34f",
+      "name": "Autos vor Hochwasser schützen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Hochwasser am Privatwagen|Autos vor Hochwasser schützen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b87747840f5962c0c2b2",
+      "parent_id": "core:c22:topic:7975525b6cda05622713",
+      "name": "Privatwagen bei Sturm: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Privatwagen bei Sturm|Privatwagen bei Sturm: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b9f01d75b9e3d9b449c1",
+      "parent_id": "core:c22:topic:7975525b6cda05622713",
+      "name": "Sturmschutz für Privatwagen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Freizeit & Unwetter|Privatwagen bei Sturm|Sturmschutz für Privatwagen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:89cd6e268ff58d7375d5",
+      "parent_id": "core:c22:topic:26fde4278cab1853a179",
+      "name": "Winterdienst auf Privatwegen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Winterdienst auf Privatwegen|Winterdienst auf Privatwegen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:485534ebee041ed9a92f",
+      "parent_id": "core:c22:topic:26fde4278cab1853a179",
+      "name": "Winterdienst-Lösungen für Privatwege vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Winterdienst auf Privatwegen|Winterdienst-Lösungen für Privatwege vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:2c94265d34a41aeda468",
+      "parent_id": "core:c22:topic:55019e94f6643a204e65",
+      "name": "Gewächshaus bei Frost: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Gewächshaus bei Frost|Gewächshaus bei Frost: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b57ad198a69d5c41f20f",
+      "parent_id": "core:c22:topic:55019e94f6643a204e65",
+      "name": "Gewächshaus-Frostschutzsysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Gewächshaus bei Frost|Gewächshaus-Frostschutzsysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1699b1fe6fc1307d6add",
+      "parent_id": "core:c22:topic:55019e94f6643a204e65",
+      "name": "Gewächshausheizung & Energiekosten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Gewächshaus bei Frost|Gewächshausheizung & Energiekosten"
+    },
+    {
+      "node_id": "core:c22:category:58a01088606fddf5d5d4",
+      "parent_id": "core:c22:topic:40f0f75690634fc91893",
+      "name": "Obstbäume bei Frost: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Obstbäume bei Frost|Obstbäume bei Frost: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:859df9bf2e777f9b89ab",
+      "parent_id": "core:c22:topic:40f0f75690634fc91893",
+      "name": "Frostschutz für Obstbäume vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Obstbäume bei Frost|Frostschutz für Obstbäume vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:9d07ea54c9049bea67e8",
+      "parent_id": "core:c22:topic:dfbe54180b406ae742d0",
+      "name": "Kübelpflanzen bei Frost: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Kübelpflanzen bei Frost|Kübelpflanzen bei Frost: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2ef022934765898d88ae",
+      "parent_id": "core:c22:topic:dfbe54180b406ae742d0",
+      "name": "Winterschutz für Kübelpflanzen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Kübelpflanzen bei Frost|Winterschutz für Kübelpflanzen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1c79a08890209a34e7a6",
+      "parent_id": "core:c22:topic:564dd357b75e60df50cf",
+      "name": "Hecken bei Frost: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Hecken bei Frost|Hecken bei Frost: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:159897de407ff82a9495",
+      "parent_id": "core:c22:topic:564dd357b75e60df50cf",
+      "name": "Frostschutz für Hecken vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Hecken bei Frost|Frostschutz für Hecken vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:e2d8987296b566a5850f",
+      "parent_id": "core:c22:topic:5ea7e0b9739f46cdaa60",
+      "name": "Sträucher bei Frost: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Sträucher bei Frost|Sträucher bei Frost: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:7fe0ea778106fd7f4f4b",
+      "parent_id": "core:c22:topic:5ea7e0b9739f46cdaa60",
+      "name": "Strauch-Winterschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Frost & Schnee|Sträucher bei Frost|Strauch-Winterschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:4035437482c96258d323",
+      "parent_id": "core:c22:topic:e8a82a96a5bf89f27086",
+      "name": "Dachgeschoss vor Hitze schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Dachgeschoss vor Hitze schützen|Dachgeschoss vor Hitze schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:821fab6f817504beb5ff",
+      "parent_id": "core:c22:topic:e8a82a96a5bf89f27086",
+      "name": "Dachgeschoss-Hitzeschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Dachgeschoss vor Hitze schützen|Dachgeschoss-Hitzeschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:17e256d1941da015b6d7",
+      "parent_id": "core:c22:topic:e8a82a96a5bf89f27086",
+      "name": "Dachgeschoss vor Hitze schützen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Dachgeschoss vor Hitze schützen|Dachgeschoss vor Hitze schützen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:b305875c6eaf78ddf7a8",
+      "parent_id": "core:c22:topic:8a6b9366104b176c47d5",
+      "name": "Wintergarten im Sommer: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Wintergarten im Sommer|Wintergarten im Sommer: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3306f668fdeca6cb178b",
+      "parent_id": "core:c22:topic:8a6b9366104b176c47d5",
+      "name": "Wintergarten-Kühlkonzepte vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Wintergarten im Sommer|Wintergarten-Kühlkonzepte vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:fae49a1d24fb3d4c2d3d",
+      "parent_id": "core:c22:topic:8a6b9366104b176c47d5",
+      "name": "Wintergarten-Kühlung: Aufwand & Energiekosten",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Wintergarten im Sommer|Wintergarten-Kühlung: Aufwand & Energiekosten"
+    },
+    {
+      "node_id": "core:c22:category:f7524858ea48e6f2b313",
+      "parent_id": "core:c22:topic:f537487e836681c3cc4c",
+      "name": "Gartenbewässerung bei Trockenheit: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenbewässerung bei Trockenheit|Gartenbewässerung bei Trockenheit: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:01c87dac6e540339833e",
+      "parent_id": "core:c22:topic:f537487e836681c3cc4c",
+      "name": "Gartenbewässerungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenbewässerung bei Trockenheit|Gartenbewässerungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5f237d90cf9f28aa1458",
+      "parent_id": "core:c22:topic:f537487e836681c3cc4c",
+      "name": "Gartenbewässerung warten & Fehler beheben",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenbewässerung bei Trockenheit|Gartenbewässerung warten & Fehler beheben"
+    },
+    {
+      "node_id": "core:c22:category:24b26aa79406fce8623e",
+      "parent_id": "core:c22:topic:46906b9a6fb65b1cf5ca",
+      "name": "Fassadenverschattung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Fassadenverschattung|Fassadenverschattung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:1bbf563a8b93b5d671f1",
+      "parent_id": "core:c22:topic:46906b9a6fb65b1cf5ca",
+      "name": "Fassaden-Verschattungssysteme vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Fassadenverschattung|Fassaden-Verschattungssysteme vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:796bd0e90eb9a09dccc3",
+      "parent_id": "core:c22:topic:46906b9a6fb65b1cf5ca",
+      "name": "Fassadenverschattung pflegen & reparieren",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Fassadenverschattung|Fassadenverschattung pflegen & reparieren"
+    },
+    {
+      "node_id": "core:c22:category:18e37c719c642ea589d3",
+      "parent_id": "core:c22:topic:5323344854ba33fb138e",
+      "name": "Terrassenbeläge bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Terrassenbeläge bei Hitze|Terrassenbeläge bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f20149d0a3d697571d8b",
+      "parent_id": "core:c22:topic:5323344854ba33fb138e",
+      "name": "Hitzebeständige Terrassenbeläge vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Terrassenbeläge bei Hitze|Hitzebeständige Terrassenbeläge vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:29d666142b3eef985830",
+      "parent_id": "core:c22:topic:e285dc9bac9190bc38a1",
+      "name": "Gartenbäume bei Trockenheit: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenbäume bei Trockenheit|Gartenbäume bei Trockenheit: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:178c906c1611e0ad8bb1",
+      "parent_id": "core:c22:topic:e285dc9bac9190bc38a1",
+      "name": "Bewässerung für Gartenbäume vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenbäume bei Trockenheit|Bewässerung für Gartenbäume vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:131d7a8a79a29cc4671b",
+      "parent_id": "core:c22:topic:a7f15e8cc47ef9df7552",
+      "name": "Bodenrisse am Grundstück: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Bodenrisse am Grundstück|Bodenrisse am Grundstück: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:6cb37a050b60695b4186",
+      "parent_id": "core:c22:topic:a7f15e8cc47ef9df7552",
+      "name": "Maßnahmen gegen Bodenrisse vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Bodenrisse am Grundstück|Maßnahmen gegen Bodenrisse vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:468c37b7817aa569eecb",
+      "parent_id": "core:c22:topic:f96c376a8da96c6e4c4d",
+      "name": "Wohnmobil bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Wohnmobil bei Hitze|Wohnmobil bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:fc2d01578ebd0cad4d66",
+      "parent_id": "core:c22:topic:f96c376a8da96c6e4c4d",
+      "name": "Hitzeschutz im Wohnmobil vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Wohnmobil bei Hitze|Hitzeschutz im Wohnmobil vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:a50a3c8cfd9f4565c9e1",
+      "parent_id": "core:c22:topic:acb55b51d7a80e879d28",
+      "name": "Privatwagen bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Privatwagen bei Hitze|Privatwagen bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2080acd741bb3e1f7ab0",
+      "parent_id": "core:c22:topic:acb55b51d7a80e879d28",
+      "name": "Hitzeschutz fürs Auto vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Privatwagen bei Hitze|Hitzeschutz fürs Auto vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:2fb64a365cf252967d13",
+      "parent_id": "core:c22:topic:9380cde95e1a475f99bf",
+      "name": "Gartenhaus bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenhaus bei Hitze|Gartenhaus bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b9427ba0935aa1270d3a",
+      "parent_id": "core:c22:topic:9380cde95e1a475f99bf",
+      "name": "Hitzeschutz im Gartenhaus vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Gartenhaus bei Hitze|Hitzeschutz im Gartenhaus vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:8104da17f29fc107c6fe",
+      "parent_id": "core:c22:topic:27069b635dc459b9418b",
+      "name": "Hobbyraum bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Hobbyraum bei Hitze|Hobbyraum bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f3e29fb5fd828de5b9b7",
+      "parent_id": "core:c22:topic:27069b635dc459b9418b",
+      "name": "Hobbyraum-Kühlung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Hobbyraum bei Hitze|Hobbyraum-Kühlung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5284e0d7fd9ba1047968",
+      "parent_id": "core:c22:topic:3e46a10d6f69aa00665d",
+      "name": "Zeltmaterial im Sommer: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Zeltmaterial im Sommer|Zeltmaterial im Sommer: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:275ff232a62b68d3b672",
+      "parent_id": "core:c22:topic:3e46a10d6f69aa00665d",
+      "name": "Zeltstoffe für Hitze und UV vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Zeltmaterial im Sommer|Zeltstoffe für Hitze und UV vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ca68d0b23bd1ecbf1dec",
+      "parent_id": "core:c22:topic:a35b15b190747be54d33",
+      "name": "Campingausrüstung bei Hitze: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Campingausrüstung bei Hitze|Campingausrüstung bei Hitze: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:07b320fda2ab3853cde0",
+      "parent_id": "core:c22:topic:a35b15b190747be54d33",
+      "name": "Hitzeschutz für Campingausrüstung vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Hitze & Trockenheit|Campingausrüstung bei Hitze|Hitzeschutz für Campingausrüstung vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:1ae83fb2e8872b360e94",
+      "parent_id": "core:c22:topic:8d2d4bf3b0a28e563417",
+      "name": "Mobile Hochwassersperren: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Mobile Hochwassersperren|Mobile Hochwassersperren: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:d43557e292572b4849bb",
+      "parent_id": "core:c22:topic:8d2d4bf3b0a28e563417",
+      "name": "Mobile Hochwassersperren vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Mobile Hochwassersperren|Mobile Hochwassersperren vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:d3f070766b90b87cd85e",
+      "parent_id": "core:c22:topic:6ee97fc5333f688f1dd3",
+      "name": "Tiefgarage bei Starkregen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Tiefgarage bei Starkregen|Tiefgarage bei Starkregen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:435cb2c9999e5aa1cda4",
+      "parent_id": "core:c22:topic:6ee97fc5333f688f1dd3",
+      "name": "Starkregenschutz für Tiefgaragen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Tiefgarage bei Starkregen|Starkregenschutz für Tiefgaragen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:434b62bda362d24bcdfa",
+      "parent_id": "core:c22:topic:6ee97fc5333f688f1dd3",
+      "name": "Tiefgarage bei Starkregen: Kosten & Aufwand",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Tiefgarage bei Starkregen|Tiefgarage bei Starkregen: Kosten & Aufwand"
+    },
+    {
+      "node_id": "core:c22:category:dc56d7523b3fb01095a3",
+      "parent_id": "core:c22:topic:6ee97fc5333f688f1dd3",
+      "name": "Schutzanlagen der Tiefgarage prüfen",
+      "type": "category",
+      "intent": "NEUER_BEREICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Tiefgarage bei Starkregen|Schutzanlagen der Tiefgarage prüfen"
+    },
+    {
+      "node_id": "core:c22:category:d950d26ca91261a0f164",
+      "parent_id": "core:c22:topic:96577fb6d8101e8c6591",
+      "name": "Hangrutschungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Hangrutschungen|Hangrutschungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:82c125fe8d5b48d380a8",
+      "parent_id": "core:c22:topic:96577fb6d8101e8c6591",
+      "name": "Grundstückssicherung bei Hangrutschungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Hangrutschungen|Grundstückssicherung bei Hangrutschungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:5fc9b253ad13fc16e95d",
+      "parent_id": "core:c22:topic:a2fcb19da4a0604ed51f",
+      "name": "Gartenböschungen schützen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenböschungen schützen|Gartenböschungen schützen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:95b6497bc4c0fd5d483f",
+      "parent_id": "core:c22:topic:a2fcb19da4a0604ed51f",
+      "name": "Böschungssicherungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenböschungen schützen|Böschungssicherungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:955db5221cdbf0786617",
+      "parent_id": "core:c22:topic:f4a5a4139b6a976be73a",
+      "name": "Uferbefestigung am Privatgrundstück: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Uferbefestigung am Privatgrundstück|Uferbefestigung am Privatgrundstück: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c90e4c24c71d0cc423cf",
+      "parent_id": "core:c22:topic:f4a5a4139b6a976be73a",
+      "name": "Uferbefestigungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Uferbefestigung am Privatgrundstück|Uferbefestigungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ceef0cc3d956e9779129",
+      "parent_id": "core:c22:topic:5c4f28ee3a456edf51e2",
+      "name": "Gartenmauern bei Unterspülung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenmauern bei Unterspülung|Gartenmauern bei Unterspülung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:965c43fe5c29e0c4c2c0",
+      "parent_id": "core:c22:topic:5c4f28ee3a456edf51e2",
+      "name": "Sicherungen für unterspülte Gartenmauern vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenmauern bei Unterspülung|Sicherungen für unterspülte Gartenmauern vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:d468be3d74f6b29c988a",
+      "parent_id": "core:c22:topic:a15d2e7be2ad44203d7c",
+      "name": "Gartenwege bei Unterspülung: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenwege bei Unterspülung|Gartenwege bei Unterspülung: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:b4389205ce87b5dff21f",
+      "parent_id": "core:c22:topic:a15d2e7be2ad44203d7c",
+      "name": "Sanierung unterspülter Gartenwege vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Gartenwege bei Unterspülung|Sanierung unterspülter Gartenwege vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:eb37b773ed6552a97b08",
+      "parent_id": "core:c22:topic:e497ab0b6d09220da681",
+      "name": "Ladenlokal bei Hochwasser: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Ladenlokal bei Hochwasser|Ladenlokal bei Hochwasser: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:106e5ccbb2894afeccd7",
+      "parent_id": "core:c22:topic:e497ab0b6d09220da681",
+      "name": "Hochwasserschutz für Ladenlokale vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Ladenlokal bei Hochwasser|Hochwasserschutz für Ladenlokale vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:b096cad2bd2258d897d8",
+      "parent_id": "core:c22:topic:e497ab0b6d09220da681",
+      "name": "Hochwasserschäden: Kosten im Ladenlokal",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Ladenlokal bei Hochwasser|Hochwasserschäden: Kosten im Ladenlokal"
+    },
+    {
+      "node_id": "core:c22:category:976d253e60e589feb67f",
+      "parent_id": "core:c22:topic:6da3d5695fc87da6b6cf",
+      "name": "Friseursalon bei Hochwasser: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Friseursalon bei Hochwasser|Friseursalon bei Hochwasser: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:ccd3a402450311b23a3f",
+      "parent_id": "core:c22:topic:6da3d5695fc87da6b6cf",
+      "name": "Hochwasserschutz für Friseursalons vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Friseursalon bei Hochwasser|Hochwasserschutz für Friseursalons vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:ff9db3cf65f235815867",
+      "parent_id": "core:c22:topic:6da3d5695fc87da6b6cf",
+      "name": "Hochwasserschäden: Kosten im Friseursalon",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Starkregen & Hochwasser|Friseursalon bei Hochwasser|Hochwasserschäden: Kosten im Friseursalon"
+    },
+    {
+      "node_id": "core:c22:category:bbf1633771586ac4e806",
+      "parent_id": "core:c22:topic:99d7e1fb6546585ba27a",
+      "name": "PV-Anlage bei Sturm: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Sturm & Hagel|PV-Anlage bei Sturm|PV-Anlage bei Sturm: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:bed155cb4f36e28bca74",
+      "parent_id": "core:c22:topic:99d7e1fb6546585ba27a",
+      "name": "Sturmschutz für PV-Anlagen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Sturm & Hagel|PV-Anlage bei Sturm|Sturmschutz für PV-Anlagen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:0563bf169fd85fb099af",
+      "parent_id": "core:c22:topic:2ad7f97866616e1b8300",
+      "name": "Marder im Dach: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Marder im Dach|Marder im Dach: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:420088db64f5a6bbe8b1",
+      "parent_id": "core:c22:topic:2ad7f97866616e1b8300",
+      "name": "Marderschutz am Dach vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Marder im Dach|Marderschutz am Dach vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:2ed96a71cd934ef484cd",
+      "parent_id": "core:c22:topic:2ad7f97866616e1b8300",
+      "name": "Marderschäden: Kosten & Sanierung",
+      "type": "category",
+      "intent": "OPTIONAL",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Marder im Dach|Marderschäden: Kosten & Sanierung"
+    },
+    {
+      "node_id": "core:c22:category:c186dc0449c7f5c4a058",
+      "parent_id": "core:c22:topic:4042eb5ea7d3bf732528",
+      "name": "Nager an Hausleitungen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Nager an Hausleitungen|Nager an Hausleitungen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:cbb41c11309578408c1e",
+      "parent_id": "core:c22:topic:4042eb5ea7d3bf732528",
+      "name": "Nagerschutz an Hausleitungen vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Nager an Hausleitungen|Nagerschutz an Hausleitungen vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:68f6f1e243c63f2b97d7",
+      "parent_id": "core:c22:topic:4e380d4a3c84857bdae0",
+      "name": "Holzzerstörende Insekten am Haus: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Holzzerstörende Insekten am Haus|Holzzerstörende Insekten am Haus: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:de7237b7de8e1c74449b",
+      "parent_id": "core:c22:topic:4e380d4a3c84857bdae0",
+      "name": "Schutz gegen Holzschädlinge vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Holzzerstörende Insekten am Haus|Schutz gegen Holzschädlinge vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:118e53b235edcbe39137",
+      "parent_id": "core:c22:topic:e65abe918541813b3305",
+      "name": "Marderbiss am Auto: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Marderbiss am Auto|Marderbiss am Auto: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:2d8e4292339e433718be",
+      "parent_id": "core:c22:topic:e65abe918541813b3305",
+      "name": "Marderschutz fürs Auto vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Marderbiss am Auto|Marderschutz fürs Auto vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:437095c20d8f63aa3385",
+      "parent_id": "core:c22:topic:5fed08e16d7449cf840d",
+      "name": "Nager im Wohnmobil: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Nager im Wohnmobil|Nager im Wohnmobil: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:4fdc34179f1b67689d5a",
+      "parent_id": "core:c22:topic:5fed08e16d7449cf840d",
+      "name": "Nagerschutz im Wohnmobil vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Nager im Wohnmobil|Nagerschutz im Wohnmobil vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:cb30e3347fd358eb1092",
+      "parent_id": "core:c22:topic:14fb06d2b970ec6058b2",
+      "name": "Tierschäden am Freizeitboot: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Tierschäden am Freizeitboot|Tierschäden am Freizeitboot: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:14fbfb38170cc1eb2fb3",
+      "parent_id": "core:c22:topic:14fb06d2b970ec6058b2",
+      "name": "Tierschutzmaßnahmen für Freizeitboote vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Tierschäden am Freizeitboot|Tierschutzmaßnahmen für Freizeitboote vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:50bd861d3f42db614db9",
+      "parent_id": "core:c22:topic:3bfb8296ac14d26bc45b",
+      "name": "Wühlmäuse im Garten: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wühlmäuse im Garten|Wühlmäuse im Garten: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:3380d44dcaee3842e835",
+      "parent_id": "core:c22:topic:3bfb8296ac14d26bc45b",
+      "name": "Wühlmausschutz vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wühlmäuse im Garten|Wühlmausschutz vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:35d171b179094749d2f9",
+      "parent_id": "core:c22:topic:542f698be44acf79ec02",
+      "name": "Vogelschäden an Außentechnik: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Vogelschäden an Außentechnik|Vogelschäden an Außentechnik: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:c6e0ab45a15c1aeee155",
+      "parent_id": "core:c22:topic:542f698be44acf79ec02",
+      "name": "Vogelschutz an Außentechnik vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Vogelschäden an Außentechnik|Vogelschutz an Außentechnik vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:d79a19840b4d26e265f3",
+      "parent_id": "core:c22:topic:a00a982e9437b43c7ef6",
+      "name": "Wildtierschäden am Garten: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wildtierschäden am Garten|Wildtierschäden am Garten: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:f382bcc9bb4cdd139bef",
+      "parent_id": "core:c22:topic:a00a982e9437b43c7ef6",
+      "name": "Gartenschutz vor Wildtieren vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wildtierschäden am Garten|Gartenschutz vor Wildtieren vergleichen"
+    },
+    {
+      "node_id": "core:c22:category:18277f801b73cab72aed",
+      "parent_id": "core:c22:topic:2b4afd7208b2566a7b0d",
+      "name": "Wildtierschäden an Zäunen: Häufige Fragen",
+      "type": "category",
+      "intent": "FAQ",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wildtierschäden an Zäunen|Wildtierschäden an Zäunen: Häufige Fragen"
+    },
+    {
+      "node_id": "core:c22:category:cf68f0697b2709566a60",
+      "parent_id": "core:c22:topic:2b4afd7208b2566a7b0d",
+      "name": "Zaunsicherung gegen Wildtiere vergleichen",
+      "type": "category",
+      "intent": "VERGLEICH",
+      "full_path": "Wetter & Naturgefahren|Tier- & Schädlingsschäden|Wildtierschäden an Zäunen|Zaunsicherung gegen Wildtiere vergleichen"
+    }
+  ]
+}
