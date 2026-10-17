@@ -1,51 +1,39 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 / 1.50.669 V7.1-WIP LOCAL PASS / NICHT RELEASEFÄHIG / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.50.670 LOCAL HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NOCH NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-NAME:
-`Affiliate Portal Template Kit – Hobby Depot Profil`
-
 LIVE:
 `1.50.668`
 
-WIP:
-`1.50.669`
+KANDIDAT:
+`1.50.670`
 
-AUTORITATIVE PLUGIN-WAHRHEIT:
-`../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.670_HOBBY_DEPOT_MEGA2ROWS_TARGETED_IMAGES_HARDPASS.zip`
 
-FACH-CURRENT:
-`../../../DESIGN/CURRENT_STATE.md`
+SHA-256:
+`9e21fd6c402fbb1a3358a58807db8b28a322a499d8478fbffb375fadbecc0408`
 
-WIP LOCAL QA:
-- Registry = einzige Strukturquelle;
-- komplette V7.1-Struktur ohne Render-/Route-Mismatch;
-- 381 terminale Hobbyseiten;
-- echte Mega-Zwischenbereiche 7 / 10 / 9 / 8 / 9 / 7 / 8 / 9;
-- alle 8 Mega-Menüs lokal responsiv geprüft;
-- 1920 bis 390 px ohne horizontalen Overflow;
-- PHP 61/61 PASS;
-- kein generischer Weltbild-Fallback.
+SCOPE:
+- Mega-Menü bis 10 echte Zwischenbereiche direkt;
+- Unterkategorien leicht größere Schrift;
+- nur 17 ausdrücklich benannte Bildbereiche geändert;
+- alle anderen Bildbereiche unangetastet;
+- Holz & Natur nicht geändert.
 
-RELEASE-GATE OFFEN:
-exakt sechs Hero+Preview-Paare:
-- Spotting & Verkehr;
-- Citizen Science;
-- Natur bestimmen;
-- Suchen & Finden;
-- Modellbau;
-- Holz & Natur.
-
-`Holz & Natur`: vorhandenes Holzmotiv ist semantisch zu eng → REPLACE_REQUIRED.
+QA:
+- PHP 61/61;
+- V7.1 Mega 7/10/9/8/9/7/8/9;
+- Heimwerken/Gärtnern korrekt ausgeschlossen;
+- 17/17 Hero+Preview;
+- 0 benannte Bildduplikate;
+- Cards-Mapping unverändert;
+- ZIP PASS;
+- 1009/1009 Roundtrip identisch.
 
 CURRENT.zip:
-**NICHT synchronisiert.**
-
-GRUND:
-1.50.669 ist noch WIP. Vor einem isolierten Artefakt sind die sechs Bildpaare, finaler ZIP-Roundtrip, Browser-QA und danach echter Live-Readback erforderlich.
-
-Dieses Manifest ist Artefaktstatus/Evidence, keine zweite Current-Wahrheit.
+**NICHT synchronisiert**, bis der echte Frontend-Check von 1.50.670 erfolgt ist.
