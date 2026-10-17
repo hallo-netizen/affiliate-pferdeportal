@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – NEUESTE TATSÄCHLICHE UMSETZUNG: PLUGIN 1.14.8.31 MIT 472 ADD-ONLY-KATEGORIEN FERTIG PROGRAMMIERT (LOKAL GEPRÜFT)
+**Die Arbeit ist nicht mehr nur ein Konzept oder Mapping.** Das bestehende WordPress-Kategorieplugin 1.14.8.30 wurde lokal als vollständige Version **1.14.8.31** um die echte zweite Importwelle mit 472 additiven flachen WordPress-Artikelkategorien erweitert. 172 FAQ + 172 Vergleiche + 102 fakultative Vertiefungen + 26 individuelle Ergänzungen. **Keine Einzelartikel, kein Kategorien-Schablonenzwang**; grobe thematische Breite/Tiefe für mindestens ca. 3–5 spätere Beiträge bleibt der inhaltliche Maßstab. Unveränderter Importbestand: 5+172+566=743 alte C2.2-Einspielungen, 285 historische Terms und vier historische Artikelzuordnungen geschützt. Nutzer bestätigt keine eigene WordPress-Änderung; **kein neuer Nutzerexport erforderlich**.
+
+**Dauerhaft in GitHub und nachprüfbar:** `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/RELEASE_STATUS_20261017.md` als kompletter Releasebeleg und Verzeichnis; `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/includes/class-apkw-c22-472-add-only.php` als echter neuer PHP-Modulcode; `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/profiles/hab-und-bewahr-c22-472-add-only.json` als alle 472 Datensätze; `../KATEGORIEN/PLUGIN_SECOND_WAVE_SOURCE/apply_to_original_1_14_8_30.py` als reproduzierbare Voll-Plugin-Erweiterung, ZIP-Bytes als `.zip.b64` und `decode_release.py` mit SHA-Gate. Vollständiges ZIP: 265.246 Bytes / 38 Dateien, SHA-256 `6cd47955df14a65d681c7508e1674be94e98cad4dd68df5a6605ce8ef534d933`.
+
+**Ausgeführte technische Tests:** 32 PHP-Dateien lint-frei, Manifest/IDs/Kollisionen geprüft; 472/472 Kategorieanlagen unter existierenden 172 Parent-IDs in lokal simuliertem WordPress bestanden, alle 738 alten C22-Themen-/Kategorie-IDs und 285 historische Terms unangetastet. Absichtlich nach 30 Anlagen ausgelöster Schreibabbruch: vollständig aufgeräumt, Alt-Snapshot erhalten. Fehlender Parent blockiert ohne Anlage. **Kein WordPress-Live-Import, keine neue technische Architektur**.
+
+**GENAU EINE NEXT ACTION:** Die fertige **vollständige bestehende Pluginversion 1.14.8.31** über normalen Updateweg in WordPress übernehmen; die alte 743er-C22-Welle NICHT wiederholen. Danach den eingebauten trockenen 472er-Preflight und den separat freizugebenden zweiten Add-only-Durchlauf ausführen. Das ist ein technischer Installations-/Freigabeschritt, keine erneute Konzept-/Bibliotheks-/Benutzer-Readback-Runde. Vor expliziter Schreibfreigabe werden keine WordPress-Kategorien geändert. Ältere gegenteilige NEXT ACTIONs zu WordPress-Neuexport oder Artikelprüfungen sind durch diesen neueren Stand ersetzt.
+
+---
+
+
+
 ## 17.10.2026 – KORREKTUR NACH NUTZERBESTÄTIGUNG: KEIN ERNEUTER WORDPRESS-EXPORT
 **Status quo verbindlich für die Fortsetzung:** Der Nutzer bestätigt ausdrücklich, dass sich WordPress seit dem von uns selbst durchgeführten C2.2-Import nicht verändert hat. Der mehrfach eingeforderte erneute Live-Export ist deshalb **keine NEXT ACTION**. Bereits belegter erfolgreicher Import: **5 neue Schutzbereiche + 172 konkrete Themenseiten + 566 flache Artikelkategorien = 743 Objekte**. Alte 93 Themenseiten, 285 echte WP-Kategorien und vier dokumentierte Artikelbindungen bleiben geschützt.
 
