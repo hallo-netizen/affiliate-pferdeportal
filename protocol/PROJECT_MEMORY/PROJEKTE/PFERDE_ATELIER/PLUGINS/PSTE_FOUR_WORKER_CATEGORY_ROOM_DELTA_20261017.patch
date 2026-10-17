@@ -1,0 +1,227 @@
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-admin.php" "b/includes/class-pste-admin.php"
+--- "a/includes/class-pste-admin.php"	2026-10-17 11:55:28.522012708 +0000
++++ "b/includes/class-pste-admin.php"	2026-10-17 12:29:21.795030226 +0000
+@@ -209,7 +209,9 @@
+     }
+ 
+     private static function renderReview(): void {
++        if(isset($_GET['category_room'])&&(string)$_GET['category_room']==='1'){self::renderCategoryRoom();return;}
+         $rawFilter=sanitize_text_field((string)($_GET['pool_filter']??'attention'));$lowerFilter=strtolower($rawFilter);$filter=in_array($lowerFilter,['attention','all','traffic_red','traffic_yellow','traffic_green'],true)?$lowerFilter:strtoupper(sanitize_key($rawFilter));$allowed=['attention','all','traffic_red','traffic_yellow','traffic_green','PASS','AUTO_RESOLVED','REVIEW_REQUIRED','PROVISIONAL_ACCEPTED','PROVISIONAL_REASSIGN','DISCOVERY_ONLY','BLOCKED_FOR_CATEGORY','APPROVED','REJECTED'];if(!in_array($filter,$allowed,true))$filter='attention';$search=sanitize_text_field((string)($_GET['pool_search']??''));$page=self::reviewReadPage($filter,$search);$rows=$page['items'];$stats=PSTE_Repository::adminTopicPoolStats();$context=PSTE_Context_Refresh::status();
++        echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page='.self::TABS['review']['slug'].'&category_room=1')).'">Kategoriebedarf – fertige Titel ohne Kategorie</a></p>';
+         echo '<h2>Portalweite Themenprüfung</h2><p><strong>Die Ampel zeigt ausschließlich den menschlichen Prüfbedarf.</strong> Rolle, Planungseignung, Kategorie, Artikeltyp und Priorität sind davon getrennt.</p>';
+         if((string)($context['status']??'NOT_STARTED')!=='COMPLETE'){
+             $contextError=(string)($context['error_code']??'');
+@@ -276,7 +278,8 @@
+                 if($filter==='traffic_red'&&$light!=='RED')continue;
+                 if($filter==='traffic_yellow'&&$light!=='YELLOW')continue;
+                 if($filter==='traffic_green'&&$light!=='GREEN')continue;
+-                if(!in_array($filter,['all','attention','traffic_red','traffic_yellow','traffic_green'],true)&&$status!==$filter)continue;
++                if($filter==='category_room'&&(!class_exists('PSTE_Category_Gap')||!PSTE_Category_Gap::readyForCategoryRoom((array)($candidate['normal_metadata_path']??[]))))continue;
++                if(!in_array($filter,['all','attention','traffic_red','traffic_yellow','traffic_green','category_room'],true)&&$status!==$filter)continue;
+                 if($searchNorm!==''&&!str_contains(PSTE_Normalizer::exactTopicIdentityText(PSTE_Editorializer::displayTitle($candidate).' '.implode(' ',array_map(static fn($c)=>(string)($c['category_name']??''),(array)($candidate['found_categories']??[])))),$searchNorm))continue;
+                 $found[]=$candidate;
+             }
+@@ -292,6 +295,27 @@
+         return ['items'=>$found,'next_token'=>$next,'complete'=>$complete,'write_attempted'=>false];
+     }
+ 
++    /** Separate room for finished titles waiting ONLY for a missing category. No Sandbox items. */
++    private static function renderCategoryRoom(): void {
++        $page=self::reviewReadPage('category_room','');
++        echo '<h2>Kategoriebedarf – eigene Warteliste</h2><p>Hier liegen ausschließlich geprüfte Pferdethemen mit bestätigtem Titel und geklärter Fach-/Magazin-Weiche, für die eine passende Kategorie fehlt. Unklare Themen oder Titel bleiben in der Sandbox. Es werden keine Kategorien automatisch angelegt.</p>';
++        echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page='.self::TABS['review']['slug'])).'">Zur Themenprüfung</a></p>';
++        echo '<table class="widefat striped"><thead><tr><th>Fertiger Titel</th><th>Fach / Magazin</th><th>Keyword</th><th>Kategoriebedarf</th></tr></thead><tbody>';
++        foreach((array)$page['items'] as $topic){
++            $path=(array)($topic['normal_metadata_path']??[]);
++            if(!PSTE_Category_Gap::readyForCategoryRoom($path))continue;
++            $lane=(string)($path['article_type']??'');$lane=$lane==='Journal'?'Magazin':'Fachbereich';
++            $proposal=(array)($path['category_gap_proposal']??[]);
++            echo '<tr><td>'.esc_html((string)($path['title']??'')).'</td><td>'.esc_html($lane).'</td><td>'.esc_html((string)($path['raw_query']??'')).'</td><td>'.esc_html((string)($proposal['proposed_name']??'Neue Kategorie prüfen')).'</td></tr>';
++        }
++        if(empty($page['items']))self::emptyRow(4,'Keine passenden fertig geprüften Titel in diesem Ausschnitt.');
++        echo '</tbody></table>';
++        if((string)($page['next_token']??'')!==''){
++            $link=add_query_arg(['page'=>self::TABS['review']['slug'],'category_room'=>'1','pool_cursor'=>(string)$page['next_token']],admin_url('admin.php'));
++            echo '<p><a class="button" href="'.esc_url($link).'">Weitere Kategoriebedarfe</a></p>';
++        }
++    }
++
+     private static function humanReviewReason(array $candidate): string {
+         $codes=(array)($candidate['reason_codes']??[]);$labels=['FAQ_NATURAL_QUESTION_WITHOUT_PUNCTUATION'=>'Natürliche Frage ohne Fragezeichen erkannt','FAQ_RECOMMENDATION_OR_SUPERLATIVE_REVIEW'=>'Empfehlungs-/Vergleichsabsicht erkannt','CONFLICTING_TARGET_ASSIGNMENTS'=>'Mehrere gleich plausible Zielkategorien','ANSWER_EQUIVALENT_EXISTING'=>'Inhalt vermutlich bereits vorhanden','ANSWER_EQUIVALENT_PLANNED'=>'Thema vermutlich bereits geplant','CATEGORY_HEAD_INTENT_COLLISION'=>'Oberbegriff wird bereits durch die Kategorie abgedeckt','STALE_YEAR_SPECIFIC_QUERY'=>'Veralteter Jahresbegriff','CONTEXT_REFRESH_FAILED'=>'Technischer Portalabgleich fehlgeschlagen','CONTEXT_REFRESH_STALE'=>'Bestand änderte sich während des Abgleichs','GLOBAL_IDENTITY_MIGRATION_CONFLICT'=>'Widersprüchliche Altentscheidungen','MERGE_CANDIDATE_REVIEW_REQUIRED'=>'Mögliche Themenzusammenführung prüfen','EXACT_EDITORIAL_INTENT_VARIANT'=>'Gleiche redaktionelle Suchintention bereits als Hauptthema vorhanden','PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN'=>'Portal relevant; interne Zuordnung und redaktionelle Umformulierung ausstehend','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'=>'Zur internen Zuordnung und redaktionellen Umformulierung zwischengespeichert','EDITORIAL_TARGET_CATEGORY_MISSING'=>'Passende vorhandene Zielkategorie fehlt'];foreach($labels as $code=>$label)if(in_array($code,$codes,true))return $label;$status=(string)($candidate['pool_status']??'');if($status==='PROVISIONAL_REASSIGN')return 'Eindeutige Umordnung vorläufig angenommen';if($status==='PROVISIONAL_ACCEPTED')return 'Plausible automatische Einordnung';if($status==='DISCOVERY_ONLY')return 'Kein eigenständiges Produktionsthema';if($status==='BLOCKED_FOR_CATEGORY')return 'Bereits abgedeckt oder für diese Zuordnung ungeeignet';return 'Automatisch eindeutig eingeordnet';
+     }
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-category-gap.php" "b/includes/class-pste-category-gap.php"
+--- "a/includes/class-pste-category-gap.php"	2026-10-16 15:08:30.000000000 +0000
++++ "b/includes/class-pste-category-gap.php"	2026-10-17 12:29:21.787816283 +0000
+@@ -23,5 +23,22 @@
+     }
+     /** @return array<string,mixed> */
+     public static function proposal(string $family,string $familyKey,string $type,array $consensus,array $evidence,string $structureHash,array $registry=[]): array {return self::analyze($family,$familyKey,$type,$consensus,$evidence,$structureHash,$registry,false);}
++    /**
++     * Separate category room = already completed workers 1-3, but no real category.
++     * A mere keyword, unverified editorial proposal or missing family is NOT admitted.
++     * This is stored on the existing topic-pool row, never in the Sandbox.
++     */
++    public static function readyForCategoryRoom(array $path): bool {
++        if((string)($path['status']??'')!=='STRUCTURE_GAP'||(string)($path['portal_relevance']??'')!=='PROVEN')return false;
++        if(empty($path['structure_gap_backlog_required'])||!empty($path['sandbox_required']))return false;
++        $raw=(string)($path['raw_query']??'');$sha=(string)($path['raw_query_sha256']??'');
++        if($raw===''||!preg_match('/^[a-f0-9]{64}$/',$sha)||!hash_equals(hash('sha256',$raw),$sha))return false;
++        if(trim((string)($path['title']??''))===''||empty($path['title_pipeline']['ok'])||!empty($path['title_candidate_only']))return false;
++        if(trim((string)($path['article_type']??''))===''||trim((string)($path['target_keyword']??''))==='')return false;
++        $target=(array)($path['target_category']??[]);
++        if((int)($target['term_id']??0)>0||(string)($target['slug']??'')!=='')return false;
++        return true;
++    }
++
+     private static function json($v): string {$j=function_exists('wp_json_encode')?wp_json_encode($v,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES):json_encode($v,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);return is_string($j)?$j:'';}
+ }
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-journal-semantic-router.php" "b/includes/class-pste-journal-semantic-router.php"
+--- "a/includes/class-pste-journal-semantic-router.php"	2026-10-17 10:37:33.234372205 +0000
++++ "b/includes/class-pste-journal-semantic-router.php"	2026-10-17 12:31:21.811011913 +0000
+@@ -60,7 +60,9 @@
+         $spec=self::categorySpec((string)$classification['category_key']);
+         if(!$spec)return self::fail($base,'PSTE_JOURNAL_AUTO_CATEGORY_SPEC_MISSING');
+         $resolved=self::resolveRuntimeCategory($spec);
+-        if(empty($resolved['ok'])){$base['runtime_category_resolution']=$resolved;return self::fail($base,'PSTE_JOURNAL_AUTO_CATEGORY_NOT_AVAILABLE');}
++        // Preserve the category readback, but do not reject the topic before its title
++        // can pass the unchanged hard title gate. Only NOT_FOUND is real category need.
++        $base['runtime_category_resolution']=$resolved;
+ 
+         $risk=PSTE_Domain_Risk_Gate::evaluate($raw,'Journal');$base['domain_risk']=$risk;
+         if(empty($risk['ok']))return self::fail($base,'PSTE_JOURNAL_AUTO_DOMAIN_RISK_REVIEW');
+@@ -85,6 +87,15 @@
+         $pipeline=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,$familyName,'Journal',$registry,$intent,$targetKeyword,(string)$normalization['normalized_topic']);
+         if(empty($pipeline['ok'])){$base['title_pipeline']=$pipeline;return self::fail($base,'PSTE_JOURNAL_AUTO_TITLE_PIPELINE_NOT_PASS');}
+ 
++        if(empty($resolved['ok'])){
++            if((string)($resolved['status']??'')!=='NOT_FOUND')return self::fail($base,'PSTE_JOURNAL_AUTO_CATEGORY_READBACK_UNCLEAR');
++            $base['status']='CATEGORY_UNAVAILABLE_TITLE_PASS';$base['ok']=false;
++            $base['article_type']='Journal';$base['family_key']=$familyKey;$base['family_name']=$familyName;
++            $base['normalization']=$normalization;$base['intent_profile']=$intent;
++            $base['title_pipeline']=$pipeline;$base['title']=$title;$base['target_keyword']=$targetKeyword;
++            $base['reason_codes']=array_values(array_unique(array_merge((array)$classification['reason_codes'],['PSTE_JOURNAL_AUTO_CATEGORY_NOT_AVAILABLE_TITLE_VALIDATED'])));
++            return $base;
++        }
+         $target=['ok'=>true,'term_id'=>(int)$resolved['term_id'],'name'=>(string)$resolved['name'],'slug'=>(string)$resolved['slug'],'taxonomy'=>'category','article_type'=>'Journal','journal_category'=>true,'topic_family_key'=>$familyKey,'topic_family_name'=>$familyName];
+         $semantic=['contract'=>'PSTE_JOURNAL_AUTO_SEMANTIC_CONSENSUS_V1','status'=>'CONSENSUS_PASS','ok'=>true,'type_consensus'=>true,'category_consensus'=>true,'family_consensus'=>true,'meaning_consensus'=>true,'intent_consensus'=>true,'resolved_article_type'=>'Journal','resolved_category'=>$target,'resolved_family'=>$familyName,'resolved_family_key'=>$familyKey,'reason_codes'=>['PSTE_JOURNAL_AUTO_HIGH_CONFIDENCE_PASS'],'write_attempted'=>false];
+         $base['status']='JOURNAL_AUTO_PASS';$base['ok']=true;$base['article_type']='Journal';$base['target_category']=$target;$base['family_key']=$familyKey;$base['family_name']=$familyName;$base['normalization']=$normalization;$base['intent_profile']=$intent;$base['semantic_consensus']=$semantic;$base['title_pipeline']=$pipeline;$base['title']=$title;$base['target_keyword']=$targetKeyword;$base['reason_codes']=array_values(array_unique(array_merge((array)$classification['reason_codes'],['PSTE_JOURNAL_AUTO_HIGH_CONFIDENCE_PASS'])));return $base;
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-normal-metadata-path.php" "b/includes/class-pste-normal-metadata-path.php"
+--- "a/includes/class-pste-normal-metadata-path.php"	2026-10-17 11:23:52.726250957 +0000
++++ "b/includes/class-pste-normal-metadata-path.php"	2026-10-17 12:42:02.652659700 +0000
+@@ -19,7 +19,7 @@
+             'portal_relevance_gate'=>[],'normalization'=>[],'intent_analysis'=>[],'semantic_consensus'=>[],'intent_profile'=>[],'article_type'=>'','target_category'=>[],
+             'title_pipeline'=>[],'title'=>'','target_keyword'=>'','category_gap_proposal'=>[],'domain_risk'=>[],
+             'reason_codes'=>[],'title_generated'=>false,'title_candidate_only'=>false,'title_candidate_source'=>'','title_candidate_source_sha256'=>'','sandbox_required'=>false,'sandbox_admission_mode'=>'',
+-            'structure_gap_backlog_required'=>false,'retained_non_producing'=>false,
++            'structure_gap_backlog_required'=>false,'category_backlog_required'=>false,'retained_non_producing'=>false,
+             'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,
+             'article_or_taxonomy_write_attempted'=>false,'write_attempted'=>false,
+         ];
+@@ -139,6 +139,28 @@
+                 $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
+                 return self::withReasons($base,'SANDBOX_REQUIRED',(array)($route['reason_codes']??[]));
+             }
++            if(($journalAuto['status']??'')==='CATEGORY_UNAVAILABLE_TITLE_PASS'
++                &&!empty($journalAuto['title_pipeline']['ok']) && (string)($journalAuto['article_type']??'')==='Journal'){
++                $base['journal_routing']=$journalAuto;
++                foreach(['family_key','family_name','normalization','intent_profile','title_pipeline','title','target_keyword','domain_risk','article_type'] as $field)
++                    if(array_key_exists($field,$journalAuto))$base[$field]=$journalAuto[$field];
++                $base['title_generated']=true;$base['title_candidate_only']=false;
++                $base['title_candidate_source']='JOURNAL_VALIDATED_AWAITING_CATEGORY';
++                $base['title_candidate_source_sha256']=hash('sha256',$raw);
++                $base['structure_gap_backlog_required']=true;
++                $gap=PSTE_Category_Gap::proposal(
++                    (string)$journalAuto['family_name'],(string)$journalAuto['family_key'],'Journal',
++                    [],[],(string)($baseline['structure_sha256']??''),$registry
++                );
++                // A missing Magazine section must retain the actual existing semantic
++                // category name, never a fabricated "Journal Pferd" family label.
++                $gap['proposed_name']=(string)($journalAuto['category_name']??'');
++                $gap['proposed_parent_family']='Magazin';
++                $gap['required_article_type']='Journal';
++                $gap['source_category_key']=(string)($journalAuto['category_key']??'');
++                $base['category_gap_proposal']=$gap;
++                return self::withReasons($base,'STRUCTURE_GAP',['PSTE_JOURNAL_VERIFIED_TITLE_WAITING_ONLY_FOR_CATEGORY']);
++            }
+             // A proved journal intent must not silently become a product FAQ merely
+             // because its real WP category, title validation or signed route is blocked.
+             if(($journalAuto['status']??'')==='HIGH_CONFIDENCE_JOURNAL'
+@@ -337,6 +359,9 @@
+         $preferredFamilyKey=($trustedResearch||$trustedReentry)?$providedPreferred:'';
+         $result=self::evaluateRaw($raw,$baseline,$preferredFamilyKey,$relevanceProof,$payload);
+         $result=self::applyManualTitleOverride($payload,$result,$raw,$baseline);
++        // A manual stored-title correction changes worker-2 evidence. Rebind the
++        // category-room decision to the FINAL validated path, never stale title data.
++        $result=self::attachWorkerFlow($result);
+         $payload['normal_metadata_path']=$result;
+         $payload['raw_keyword_preserved']=$raw;$payload['raw_keyword_sha256']=$raw!==''?hash('sha256',$raw):'';
+         $payload['metadata_handoff_fields']=['title','target_keyword','category','article_type','plan_slot'];
+@@ -344,6 +369,7 @@
+         $payload['sandbox_required']=($result['status']??'')==='SANDBOX_REQUIRED';
+         $payload['sandbox_admission_mode']=(string)($result['sandbox_admission_mode']??'');
+         $payload['structure_gap_backlog_required']=!empty($result['structure_gap_backlog_required']);
++        $payload['category_backlog_required']=!empty($result['category_backlog_required']);
+         $payload['retained_non_producing']=!empty($result['retained_non_producing']);
+         $payload['category_gap_proposal']=(array)($result['category_gap_proposal']??[]);
+ 
+@@ -661,6 +687,10 @@
+         elseif(!$titlePass)$haltedAt='title';
+         $completed=[];
+         foreach($stages as $id=>$step)if($step['decision']==='GREEN')$completed[]=$id;
++        // Only completed relevance + VALIDATED title + decided lane without a real
++        // category enter the distinct category room. Ambiguous titles/lane stay Sandbox.
++        $categoryRoom=class_exists('PSTE_Category_Gap')&&PSTE_Category_Gap::readyForCategoryRoom($path);
++        $path['category_backlog_required']=$categoryRoom;
+         $path['worker_flow']=[
+             'contract'=>'PSTE_NORMAL_FOUR_STEPS_V1',
+             'steps'=>$stages,
+@@ -671,7 +701,7 @@
+             'resume_from'=>$firstOpen,
+             'checkpoint_recheck_required'=>true,
+             'disposition'=>$status==='NORMAL_PASS'?'GREEN':($status==='RETAINED_NON_PRODUCING'?'RED':'YELLOW'),
+-            'storage'=>$status==='STRUCTURE_GAP'?'EXISTING_STRUCTURE_BACKLOG':($status==='SANDBOX_REQUIRED'?'EXISTING_SANDBOX':($status==='NORMAL_PASS'?'NORMAL_PATH':'EXISTING_RETAINED_QUEUE')),
++            'storage'=>$categoryRoom?'CATEGORY_ROOM_TOPIC_POOL':($status==='STRUCTURE_GAP'?'EXISTING_STRUCTURE_BACKLOG':($status==='SANDBOX_REQUIRED'?'EXISTING_SANDBOX':($status==='NORMAL_PASS'?'NORMAL_PATH':'EXISTING_RETAINED_QUEUE'))),
+             'raw_query_sha256'=>$raw!==''?hash('sha256',$raw):'',
+             'article_type_registry_sha256'=>(string)($path['article_type_registry_sha256']??''),
+             'write_attempted'=>false,
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-repository.php" "b/includes/class-pste-repository.php"
+--- "a/includes/class-pste-repository.php"	2026-10-16 15:52:00.000000000 +0000
++++ "b/includes/class-pste-repository.php"	2026-10-17 12:33:33.835593375 +0000
+@@ -1504,7 +1504,7 @@
+                 if($canonical!==''&&$poolKey===$canonical&&!empty($group['aliases'])){$aliases=(array)($payload['aliases']??[]);$payload['aliases']=array_values(array_unique(array_filter(array_merge($aliases,(array)$group['aliases']),'strlen')));}
+                 $automatic=self::automaticPoolStatus($payload);$payload['automatic_pool_status']=$automatic;$role=PSTE_Topic_Policy::classifyRole($payload);$context=(string)($row['context_state']??'PENDING');$effective=(string)(($row['manual_status']??'')!==''?$row['manual_status']:$automatic);$planning=PSTE_Topic_Policy::planningSuitability(array_merge($payload,['topic_role'=>$role]),$effective,$context);$payload['topic_role']=$role;$payload['planning_suitability']=$planning;$payload['context_state']=$context;$currentCategory=(int)($payload['target_category_id']??$row['current_category_id']??0);$automaticDecision=$automatic==='AUTO_RESOLVED'?'PASS':(string)($payload['decision']??'REVIEW_REQUIRED');
+                 $normalPath=(array)($payload['normal_metadata_path']??[]);$pathStatus=(string)($normalPath['status']??'');$admissionMode=(string)($normalPath['sandbox_admission_mode']??'');$queueItem=null;$sandboxRequired=0;
+-                if($pathStatus==='STRUCTURE_GAP')$queueItem=['pool_key'=>$poolKey,'mode'=>'INTERNAL','path_status'=>$pathStatus,'normal_path_sha256'=>self::stableValueHash($normalPath),'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_STRUCTURE_GAP_BACKLOG']];
++                if($pathStatus==='STRUCTURE_GAP'&&!PSTE_Category_Gap::readyForCategoryRoom($normalPath))$queueItem=['pool_key'=>$poolKey,'mode'=>'INTERNAL','path_status'=>$pathStatus,'normal_path_sha256'=>self::stableValueHash($normalPath),'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_STRUCTURE_GAP_BACKLOG']];
+                 elseif($pathStatus==='SANDBOX_REQUIRED'&&$admissionMode==='INTERNAL_CLARIFICATION'){$queueItem=['pool_key'=>$poolKey,'mode'=>'INTERNAL','path_status'=>$pathStatus,'normal_path_sha256'=>self::stableValueHash($normalPath),'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_INTERNAL_CLARIFICATION']];$sandboxRequired=1;}
+                 elseif($pathStatus==='SANDBOX_REQUIRED'){$queueItem=['pool_key'=>$poolKey,'mode'=>'EXTERNAL','path_status'=>$pathStatus,'normal_path_sha256'=>self::stableValueHash($normalPath),'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_REQUIRES_EXTERNAL_RELEVANCE']];$sandboxRequired=1;}
+                 $missingTarget=(!empty($payload['editorialization']['eligible'])&&empty($payload['editorialization']['resolved'])&&(string)($payload['editorialization']['reason']??'')==='TARGET_CATEGORY_NOT_FOUND')?1:0;$before=(string)($row['automatic_pool_status']??'');$statusChange=$before!==$automatic?1:0;
+@@ -1619,7 +1619,7 @@
+                 ],['pool_key'=>$poolKey],['%s','%s','%s','%s','%d','%s'],['%s'],'PSTE_EDITORIAL_RULESET_UPDATE_FAILED');
+ 
+                 $normalPath=(array)($payload['normal_metadata_path']??[]);$pathStatus=(string)($normalPath['status']??'');$admissionMode=(string)($normalPath['sandbox_admission_mode']??'');
+-                if($pathStatus==='STRUCTURE_GAP'){$sandboxAdmissions[$poolKey]=['mode'=>'INTERNAL','path'=>$normalPath,'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_STRUCTURE_GAP_BACKLOG']];}
++                if($pathStatus==='STRUCTURE_GAP'&&!PSTE_Category_Gap::readyForCategoryRoom($normalPath)){$sandboxAdmissions[$poolKey]=['mode'=>'INTERNAL','path'=>$normalPath,'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_STRUCTURE_GAP_BACKLOG']];}
+                 elseif($pathStatus==='SANDBOX_REQUIRED'&&$admissionMode==='INTERNAL_CLARIFICATION'){$sandboxAdmissions[$poolKey]=['mode'=>'INTERNAL','path'=>$normalPath,'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_INTERNAL_CLARIFICATION']];$report['sandbox_required']++;}
+                 elseif($pathStatus==='SANDBOX_REQUIRED'){$sandboxAdmissions[$poolKey]=['mode'=>'EXTERNAL','path'=>$normalPath,'reason_codes'=>['PSTE_EDITORIAL_RULESET_REBUILD_REQUIRES_EXTERNAL_RELEVANCE']];$report['sandbox_required']++;}
+                 if($automatic==='AUTO_RESOLVED'){
+diff -ruN '--exclude=*.zip' '--exclude=*.pyc' "a/includes/class-pste-semantic-review-sandbox.php" "b/includes/class-pste-semantic-review-sandbox.php"
+--- "a/includes/class-pste-semantic-review-sandbox.php"	2026-10-17 11:54:50.405349779 +0000
++++ "b/includes/class-pste-semantic-review-sandbox.php"	2026-10-17 12:29:21.791592790 +0000
+@@ -44,6 +44,7 @@
+      */
+     public static function admitFromNormalPath(string $poolKey,array $normalPath,array $diagnostics=[]): array {
+         $status=(string)($normalPath['status']??'');$mode=(string)($normalPath['sandbox_admission_mode']??'');
++        if(class_exists('PSTE_Category_Gap')&&PSTE_Category_Gap::readyForCategoryRoom($normalPath))return ['ok'=>true,'admitted'=>false,'isolated_candidate_failure'=>false,'status'=>'CATEGORY_ROOM_TOPIC_POOL'];
+         if(!in_array($status,['SANDBOX_REQUIRED','STRUCTURE_GAP'],true))return ['ok'=>true,'admitted'=>false,'isolated_candidate_failure'=>false,'status'=>'NOT_REQUIRED'];
+         try{
+             if($status==='STRUCTURE_GAP'||($status==='SANDBOX_REQUIRED'&&$mode==='INTERNAL_CLARIFICATION')){
+@@ -150,7 +151,7 @@
+                 $poolKey=trim((string)($item['pool_key']??''));$normalPath=is_array($item['normal_path']??null)?(array)$item['normal_path']:[];$diagnostics=is_array($item['diagnostics']??null)?(array)$item['diagnostics']:[];
+                 if($poolKey===''||!$normalPath)throw new RuntimeException('PSTE_SANDBOX_RESEARCH_BATCH_ITEM_INVALID');
+                 $status=(string)($normalPath['status']??'');
+-                if(!in_array($status,['SANDBOX_REQUIRED','STRUCTURE_GAP'],true)){$prepared[]=['pool_key'=>$poolKey,'normal_path'=>$normalPath,'diagnostics'=>$diagnostics,'sandbox_id'=>''];continue;}
++                if((class_exists('PSTE_Category_Gap')&&PSTE_Category_Gap::readyForCategoryRoom($normalPath))||!in_array($status,['SANDBOX_REQUIRED','STRUCTURE_GAP'],true)){$prepared[]=['pool_key'=>$poolKey,'normal_path'=>$normalPath,'diagnostics'=>$diagnostics,'sandbox_id'=>''];continue;}
+                 $source=self::sourceSummary($poolKey);$payload=(array)$source['payload'];$query=self::normalPathBoundQuery($normalPath,$payload,'PSTE_SANDBOX_RESEARCH_RECORD_LOCAL_ADMISSION');$id=hash('sha256',$poolKey.'|'.hash('sha256',$query));$expected[$id]=true;
+                 try{$old=PSTE_Sandbox_Record_Store::getRecord($id);$store['records'][$id]=$old;}catch(Throwable $e){if(self::safeCode($e->getMessage())!=='PSTE_SANDBOX_RECORD_STORE_RECORD_MISSING')throw $e;}
+                 $prepared[]=['pool_key'=>$poolKey,'normal_path'=>$normalPath,'diagnostics'=>$diagnostics,'sandbox_id'=>$id];
