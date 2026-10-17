@@ -3152,3 +3152,79 @@ LIVE:
 
 ROLLBACK:
 1.50.668 bleibt letzter aktiver Designstand.
+
+---
+
+## PU-20261017-069 – HD-001 1.14.13 / realen 1.14.12-Dry-Run-Blocker exakt repariert
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PLUGIN:
+Affiliate-Portal Kategorie-Workflow.
+
+ART:
+Eigenentwicklung / enger Reparaturkandidat auf unverändertem V7.1-Fachstand.
+
+FACHBÜRO:
+`SEO_KATEGORIEN`
+
+VON / AUF:
+real getestete 1.14.12 → Kandidat 1.14.13.
+
+REALER BEFUND 1.14.12:
+- Nutzer installierte 1.14.12 und startete ausschließlich den Finalen Delta-Dry-Run;
+- Status BLOCKED;
+- Zielobjekte 2642;
+- CREATE 279 / ADOPT 4 / UPDATE 2357 / UNCHANGED 0 / ARCHIVE 0;
+- LIVE_COLLISION bei Libellenbeobachtung;
+- LIVE_COLLISION bei Nachtvogel-Beobachtung;
+- kein Apply/Sync.
+
+URSACHE:
+- das Plugin enthielt korrekt V7.1 mit 3487 physischen Zielen;
+- der Final-Dry-Run durfte aber weiterhin einen extern gesetzten alten Zielprofilpfad verwenden;
+- der reale 2642er Lauf entspricht diesem alten Profilstand;
+- zusätzlich wurden frühere `_apkw_target_node_id`-Bindungen der neu stabilisierten Proposal-Hobbyseiten nicht als zulässige Migrationsbindung erkannt.
+
+KORREKTUR 1.14.13:
+- Finaler Hobby-Depot-Dry-Run erzwingt für diesen Weg das eingebettete V7.1-Profil;
+- 51 Proposal-Hobbyseiten erhalten ihre frühere Target-Identität als reine Legacy-/Migrationsbindung;
+- Dry-Run-Matcher prüft frühere Target-Bindung vor einer Slug-Kollision;
+- Sync-Matcher besitzt denselben Wiederverwendungsweg für einen später ausdrücklich bestätigten Apply;
+- Fremdkollisionen und mehrdeutige Legacy-Bindungen bleiben fail-closed;
+- keine Fachstruktur, kein Leaf-Inhalt und keine Architektur geändert.
+
+ARTEFAKT:
+`HD001_V1.14.13_HOBBY_DEPOT_V7_1_LIVE_COLLISION_FIX_LOCALPASS.zip`
+
+SHA-256:
+`c543ac655f12d4fcb0d5cb581b3f8a3410103988655a87bb62bab9cbd9995fa3`
+
+EINGEBETTETES PROFIL SHA-256:
+`23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
+
+LOKALER NACHWEIS:
+- PHP 33/33 PASS;
+- ZIP-Roundtrip PASS;
+- V7.1 unverändert: 3517 logisch / 3487 physisch / 862 Entities / 383 CORE / 381 Hobby-Hubs / 2995 Content-Kategorien;
+- 381/381 Einstieg, FAQ, Ausrüstung/Kosten-Abdeckung und Vergleich/Kaufberatung unverändert;
+- 6–10 Content-Leafs je Hobby;
+- externer Altprofil-Override simuliert: Final-Dry-Run bleibt V7.1;
+- Libellenbeobachtung frühere Target-Bindung: REUSE/PASS;
+- Nachtvogel-Beobachtung frühere Target-Bindung: REUSE/PASS;
+- alle 51 Proposal-Altbindungen zusammen: PASS;
+- echte fremde Slug-Kollision: BLOCKED;
+- doppelte Legacy-Bindung: BLOCKED;
+- Provider Calls 0;
+- WordPress Structure Writes 0;
+- Dry-Run startet keinen Apply.
+
+LIVE:
+1.14.13 noch nicht real in WordPress geprüft.
+Kein Sync/Apply freigegeben.
+
+NEXT:
+1.14.13 über die aktuell installierte 1.14.12 installieren → ausschließlich Finalen Delta-Dry-Run ausführen.
+Abnahme: 3487 Zielobjekte, keine beiden bisherigen Kollisionen, danach vollständiges reales Ergebnis prüfen.
+
