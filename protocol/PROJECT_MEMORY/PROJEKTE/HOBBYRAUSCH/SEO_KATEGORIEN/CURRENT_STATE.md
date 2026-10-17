@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V4 STRUKTURELL PASS ABER UNIVERSAL-USER-NEEDS FAIL / V5 KORREKTUR NÖTIG / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 UNIVERSAL-USER-NEEDS LOCAL HARD PASS / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
 ## Live-Baseline
 
@@ -16,26 +16,19 @@ Produktiv unverändert:
 - 330/330 terminale CORE-Seiten;
 - LIVE-PASS.
 
-## V4 – strukturell gültig, fachlich noch NICHT freigegeben
+## Zentraler V5-Kandidat
 
 Profil:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V4_20261017.json`
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V5_20261017.json`
 
-Struktur-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V4_20261017.json`
+SHA-256:
+`76673dc0b0156fe9af4f9de532dcf194a56a179b2cc86abb8a9b7fcb1892b7ef`
 
-Universal-User-Needs-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_UNIVERSAL_USER_NEEDS_AUDIT_V4_20261017.json`
+Universal-Needs-Audit:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_UNIVERSAL_USER_NEEDS_AUDIT_V5_20261017.json`
 
-V4-Struktur:
-- 8/8 Hauptwelten unverändert;
-- 381 terminale Hobbyseiten;
-- 2236 unterste Inhaltskategorien;
-- keine fehlenden Parents;
-- keine doppelten Node-IDs/Slugs;
-- vollständige direkte Hub-`nav_order`;
-- HD-001 Validator 0 Errors / 0 Warnings;
-- Registry-Renderer 0 Strukturmismatches.
+V4→V5-Delta:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V4_TO_V5_20261017.json`
 
 ## Verbindlicher Zielvertrag für die Hobby-Ebene
 
@@ -43,7 +36,7 @@ Jeder HOBBY_HUB wird aus zwei Perspektiven geprüft:
 1. Anfänger/Neuling braucht Orientierung;
 2. bestehender Nutzer/Fortgeschrittener braucht Vertiefung.
 
-Harte Regeln:
+Verbindlich:
 - **Einstieg & Grundlagen = Pflicht als sichtbare Content-Kategorie**;
 - **FAQ / Häufige Fragen = Pflicht als sichtbare Content-Kategorie**;
 - **Ausrüstung & Kosten = Standardpflicht**, sobald mindestens 3 eigenständige Beiträge möglich sind;
@@ -51,31 +44,35 @@ Harte Regeln:
 - jede Content-Kategorie mindestens 3 eigenständige sinnvolle Beitragsintentionen;
 - keine künstlich leeren Symmetrie-Kategorien.
 
-Ausrüstung-&-Kosten umfasst typischerweise:
-- Was brauche ich?;
-- Grundausstattung;
-- Kauf-/Auswahlfragen;
-- Einsteigerbudget;
-- einmalige Kosten;
-- laufende Kosten;
-- günstig vs. hochwertig.
+Ausrüstung & Kosten besitzt in V5 vier klar getrennte Intentfamilien:
+- Was brauche ich? / Grundausstattung;
+- einmalige Anschaffungskosten / Einsteigerbudget;
+- laufende Kosten / Verbrauch / Ersatz;
+- günstig vs. hochwertig / Kauf- und Auswahlfragen.
 
-## V4 Universal-Needs Befund
+## V5 Local Hard Pass
 
-V4 erfüllt diese Regel noch NICHT vollständig:
-- FAQ: 381/381 PASS;
-- expliziter Einstieg/Grundlagen-Pfad: 376/381 PASS;
-- fehlender expliziter Einstieg bei:
-  - Mikroabenteuer;
-  - Longboard Dancing;
-  - Tierspuren dokumentieren;
-  - Wolkenbeobachtung;
-  - Terrarienbau;
-- explizite Kosten-Kategorie: 0/381;
-- 145/381 besitzen zwar bereits Ausrüstungs-/Material-spezifische Fachkategorien, aber der universelle Anfängerblock `Ausrüstung & Kosten` wurde nicht systematisch durchgesetzt;
-- 381/381 besitzen mindestens zwei fachspezifische Vertiefungsleafs.
+- 8/8 Hauptwelten unverändert;
+- 381 terminale Hobbyseiten;
+- 2622 unterste Inhaltskategorien;
+- pro Hobby 6–9 sichtbare Content-Kategorien;
+- Einstieg/Grundlagen: 381/381;
+- FAQ: 381/381;
+- Ausrüstung & Kosten: 381/381;
+- mindestens zwei fachspezifische Vertiefungsleafs: 381/381;
+- keine fehlenden Parents;
+- keine doppelten Node-IDs/Slugs;
+- direkte Welt-Hubs vollständig geordnet;
+- HD-001 TargetTree Validator: 0 Errors / 0 Warnings;
+- Registry-Renderer-Vollsimulation: 0 page/category/type/world/render mismatches;
+- Trainspotting-Negativfall PASS;
+- Ameisenhaltung rendert 8 finale Kategorien inkl. `Ausrüstung & Kosten`;
+- 0 Löschungen gegenüber V4.
 
-**Damit ist V4 KEIN finaler Dry-Run-/Sync-Kandidat.**
+V5 ergänzt gegenüber V4:
+- 5 fehlende explizite Einstieg-&-Grundlagen-Kategorien:
+  Mikroabenteuer, Longboard Dancing, Tierspuren dokumentieren, Wolkenbeobachtung, Terrarienbau;
+- 381 sichtbare `Ausrüstung & Kosten`-Bereiche.
 
 ## Bereits bestätigte fachliche Erweiterungen
 
@@ -95,16 +92,11 @@ Enthalten bleiben:
 - Imkerei & Bestäuber → Wildbienenhotels, Hummelkästen;
 - Gehegegestaltung → Paludarium, Terrarienbau.
 
-## V5-Regel
+## Betriebsregel für zusätzliche Leafs
 
-V5 muss pro Hobby:
-1. Einstieg/Grundlagen sichtbar sicherstellen;
-2. FAQ sichtbar sicherstellen;
-3. Ausrüstung-&-Kosten-Kapazität konkret prüfen;
-4. bei >=3 eigenständigen Intents einen sichtbaren eigenen Kosten-/Ausrüstungsleaf sicherstellen;
-5. bei <3 Intents diese Bedürfnisse klar in Einstieg/Grundlagen integrieren;
-6. Fach-/Praxis-/Profi-Pfade erhalten und nicht durch generische Kategorien verdrängen;
-7. danach vollständigen TargetTree-/Renderer-/Delta-Dry-Run erneut bestehen.
+Pflege, Wartung, Fehler, Sicherheit, Vergleich, Materialien, Projekte, Methoden usw. werden zusätzlich sichtbar, sobald der Bereich mindestens 3 eigenständige sinnvolle Beitragsintentionen besitzt und nicht bereits durch einen bestehenden Fachleaf abgedeckt ist.
+
+DataForSEO/PAA/Longtails priorisieren konkrete Fragen und Artikelintents, erzeugen aber keine Strukturautorität.
 
 ## Timeout-Korrektur
 
@@ -118,8 +110,8 @@ SHA-256:
 
 ## ERSTER OFFENER BLOCKER
 
-**V5 Universal-Needs-Korrektur muss abgeschlossen werden, bevor irgendein neuer WordPress-Dry-Run oder Sync erfolgt.**
+**Der echte manuelle V5-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
 
 ## EXAKT EINE NEXT ACTION
 
-**V4 jetzt NICHT dry-runnen/synchronisieren. Zuerst V5 gegen die verbindlichen Anfänger-/Fortgeschrittenen-Regeln vollständig erzeugen und lokal prüfen.**
+**Kein Sync. Als Nächstes ausschließlich V5 in HD-001 1.14.10 als manuellen Final-Target-Dry-Run-Kandidaten einbinden und lokal/WordPress-seitig dry-runnen; erst danach über Sync entscheiden.**
