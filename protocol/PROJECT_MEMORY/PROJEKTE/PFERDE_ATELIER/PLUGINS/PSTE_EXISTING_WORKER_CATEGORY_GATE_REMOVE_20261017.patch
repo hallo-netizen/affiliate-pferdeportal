@@ -1,0 +1,70 @@
+--- a/includes/class-pste-article-type-extension-router.php	2026-10-16 15:08:30.000000000 +0000
++++ b/includes/class-pste-article-type-extension-router.php	2026-10-17 15:27:43.645904582 +0000
+@@ -105,12 +105,26 @@
+             'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,'article_or_taxonomy_write_attempted'=>false,'write_attempted'=>false];
+         $risk=PSTE_Domain_Risk_Gate::evaluate($raw,$type);$base['domain_risk']=$risk;if(empty($risk['ok']))return self::withReasons($base,'REVIEW_REQUIRED',array_merge(['PSTE_EXTENSION_ROUTER_DOMAIN_RISK_REVIEW'],(array)($risk['reason_codes']??[])));
+         $categorySpec=PSTE_Article_Type_Extension_Registry::categoryBySlug($ext,(string)($proof['category_slug']??''));if(!$categorySpec)return self::withReasons($base,'REVIEW_REQUIRED',['PSTE_EXTENSION_ROUTER_SIGNED_CATEGORY_BINDING_MISSING']);
+-        $resolved=self::resolveRuntimeCategory($categorySpec);$base['runtime_category_resolution']=$resolved;if(empty($resolved['ok']))return self::withReasons($base,'CATEGORY_UNAVAILABLE',array_merge(['PSTE_EXTENSION_ROUTER_RUNTIME_CATEGORY_NOT_CONFIRMED'],(array)($resolved['reason_codes']??[])));
+-        $target=['ok'=>true,'term_id'=>(int)$resolved['term_id'],'name'=>(string)$resolved['name'],'slug'=>(string)$resolved['slug'],'taxonomy'=>'category','article_type'=>$type,'article_type_extension'=>true];
+         $familyName=$provenFamilyName!==''?trim($provenFamilyName):trim((string)($ext['scope_family_name']??'Pferde'));$familyKey=hash('sha256','PSTE_EXTENSION_EXPLICIT_SCOPE_V1|'.self::norm($type).'|'.PSTE_Normalizer::exactTopicIdentityText($raw));
+         $normalization=['contract'=>'PSTE_EDITORIAL_TOPIC_NORMALIZER_V2','raw_query'=>$raw,'raw_query_sha256'=>hash('sha256',$raw),'family'=>$familyName,'normalized_topic'=>rtrim($raw," ?\t\n\r\0\x0B"),'subject_topic'=>$familyName,'semantic_probe'=>PSTE_Editorial_Topic_Normalizer::semanticProbe($raw),'qualifier'=>'','relation'=>'','detected_action'=>'','intent_signals'=>[],'status'=>'PASS','reason_codes'=>['PSTE_EXTENSION_EXPLICIT_SCOPE_MEANING_PRESERVED'],'review_flags'=>[],'raw_query_modified'=>false,'write_attempted'=>false];
+         $intent=self::intentFromProof($raw,$proof,$type);$title=trim((string)($proof['title']??''));$keyword=trim((string)($proof['target_keyword']??''));if($title===''||$keyword==='')return self::withReasons($base,'REVIEW_REQUIRED',['PSTE_EXTENSION_ROUTER_EXPLICIT_TITLE_AND_KEYWORD_REQUIRED']);
+         $pipeline=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,$familyName,$type,$registry,$intent,$keyword,(string)$normalization['normalized_topic']);$base['title_pipeline']=$pipeline;$base['title']=(string)($pipeline['title']??'');$base['target_keyword']=(string)($pipeline['target_keyword']??'');if(empty($pipeline['ok']))return self::withReasons($base,'REVIEW_REQUIRED',array_merge(['PSTE_EXTENSION_ROUTER_EXISTING_TITLE_RULES_NOT_PASS'],self::pipelineReasons($pipeline)));
++        // Worker 2 finishes before worker 4 looks up the actual WordPress term.
++        // A signed, title-validated topic whose ONLY missing fact is that term
++        // belongs in the existing category room, not in the relevance Sandbox.
++        $resolved=self::resolveRuntimeCategory($categorySpec);$base['runtime_category_resolution']=$resolved;
++        if(empty($resolved['ok'])){
++            if(($resolved['status']??'')==='NOT_FOUND'){
++                $base['family_key']=$familyKey;$base['family_name']=$familyName;
++                $base['normalization']=$normalization;$base['intent_profile']=$intent;
++                $base['canonical_plan_category_slug']=(string)($categorySpec['canonical_plan_slug']??'');
++                $base['missing_category_name']=(string)($categorySpec['name']??'');
++                $base['status']='CATEGORY_UNAVAILABLE_TITLE_PASS';
++                return self::withReasons($base,'CATEGORY_UNAVAILABLE_TITLE_PASS',['PSTE_EXTENSION_SIGNED_TITLE_PASS_CATEGORY_NOT_FOUND']);
++            }
++            return self::withReasons($base,'CATEGORY_UNAVAILABLE',array_merge(['PSTE_EXTENSION_ROUTER_RUNTIME_CATEGORY_NOT_CONFIRMED'],(array)($resolved['reason_codes']??[])));
++        }
++        $target=['ok'=>true,'term_id'=>(int)$resolved['term_id'],'name'=>(string)$resolved['name'],'slug'=>(string)$resolved['slug'],'taxonomy'=>'category','article_type'=>$type,'article_type_extension'=>true];
+         $semantic=['contract'=>'PSTE_ARTICLE_TYPE_EXTENSION_CONSENSUS_V1','status'=>'CONSENSUS_PASS','ok'=>true,'type_consensus'=>true,'category_consensus'=>true,'family_consensus'=>true,'resolved_article_type'=>$type,'resolved_category'=>$target,'extension_family_key'=>$familyKey,'extension_family_name'=>$familyName,'canonical_plan_category_slug'=>(string)($categorySpec['canonical_plan_slug']??''),'selection_policy'=>(string)($ext['activation_policy']??''),'extension_evidence_sha256'=>hash('sha256',self::stable($proof)),'other_article_type_routing_consumed'=>false,'write_attempted'=>false,'reason_codes'=>['PSTE_EXTENSION_EXPLICIT_SCOPE_CONSENSUS_PASS']];
+         $base['target_category']=$target;$base['canonical_plan_category_slug']=(string)($categorySpec['canonical_plan_slug']??'');$base['family_key']=$familyKey;$base['family_name']=$familyName;$base['normalization']=$normalization;$base['intent_profile']=$intent;$base['semantic_consensus']=$semantic;$base['ok']=true;$base['status']='EXTENSION_ROUTE_PASS';$base['reason_codes']=['PSTE_EXTENSION_ROUTER_EXPLICIT_EVIDENCE_PASS'];return $base;
+     }
+--- a/includes/class-pste-normal-metadata-path.php	2026-10-17 15:09:56.926237155 +0000
++++ b/includes/class-pste-normal-metadata-path.php	2026-10-17 15:28:16.725800341 +0000
+@@ -123,11 +123,31 @@
+             $base['article_type_extension_routing']=$verified;
+             if(($verified['status']??'')==='EXTENSION_ROUTE_PASS'&&!empty($verified['ok']))
+                 return self::acceptVerifiedExtension($base,$verified,$persistedTitle,$raw,$registry);
+-            if(($verified['status']??'')==='CATEGORY_UNAVAILABLE'){
+-                // Missing taxonomy is not proof that the title is ready. Keep
+-                // the existing internal Sandbox until the title/type are bound.
+-                $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
+-                return self::withReasons($base,'SANDBOX_REQUIRED',['PSTE_FOUR_WORKERS_SIGNED_CATEGORY_UNAVAILABLE_REVIEW']);
++            if(($verified['status']??'')==='CATEGORY_UNAVAILABLE_TITLE_PASS'){
++                // Existing immutable stored-title protection also applies to
++                // category-room cases; do not replace a retained user title
++                // with a different signed extension title without review.
++                if($persistedTitle!==''&&!hash_equals($persistedTitle,(string)($verified['title']??''))){
++                    $base['title']=$persistedTitle;$base['title_generated']=true;
++                    $base['title_candidate_only']=true;$base['title_precheck_validated']=false;
++                    $base['title_pipeline']=[];$base['sandbox_required']=true;
++                    $base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
++                    return self::withReasons($base,'SANDBOX_REQUIRED',['PSTE_RETAINED_TITLE_CANDIDATE_EXTENSION_REVALIDATION_NOT_PASS']);
++                }
++                // Already proved by the existing signed scope AND hard title
++                // pipeline. Only the WordPress category is absent; never move
++                // this complete editorial topic into the ambiguous Sandbox.
++                foreach(['family_key','family_name','normalization','intent_profile','title_pipeline','title','target_keyword','domain_risk','article_type'] as $field)
++                    if(array_key_exists($field,$verified))$base[$field]=$verified[$field];
++                $base['title_generated']=true;$base['title_candidate_only']=false;
++                $base['structure_gap_backlog_required']=true;
++                $gap=PSTE_Category_Gap::proposal((string)($verified['family_name']??''),(string)($verified['family_key']??''),
++                    (string)($verified['article_type']??''),[],[],(string)($baseline['structure_sha256']??''),$registry);
++                $gap['proposed_name']=(string)($verified['missing_category_name']??'');
++                $gap['required_article_type']=(string)($verified['article_type']??'');
++                $gap['source_category_key']=(string)($verified['canonical_plan_category_slug']??'');
++                $base['category_gap_proposal']=$gap;
++                return self::withReasons($base,'STRUCTURE_GAP',['PSTE_FOUR_WORKERS_SIGNED_TITLE_READY_CATEGORY_ABSENT']);
+             }
+         }
+ 
