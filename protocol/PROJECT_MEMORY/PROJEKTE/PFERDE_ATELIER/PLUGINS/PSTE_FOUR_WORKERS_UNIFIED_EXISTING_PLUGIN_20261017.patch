@@ -702,7 +702,7 @@
          $payload['retained_non_producing']=!empty($result['retained_non_producing']);
          $payload['category_gap_proposal']=(array)($result['category_gap_proposal']??[]);
  
-@@ -579,5 +697,87 @@
+@@ -579,5 +697,91 @@
      public static function payloadMatchesNormalPath(array $payload,array $path): bool {$pathRaw=self::canonicalInputQuery((string)($path['raw_query']??''));$pathSha=(string)($path['raw_query_sha256']??'');if($pathRaw===''||preg_match('/^[a-f0-9]{64}$/',$pathSha)!==1||!hash_equals(hash('sha256',$pathRaw),$pathSha))return false;$record=is_array($payload['query_record']??null)?(array)$payload['query_record']:[];$candidates=[PSTE_Editorializer::sourceQuery($payload),(string)($payload['primary_longtail_query']??''),(string)($payload['canonical_query']??''),(string)($payload['raw_user_question']??''),(string)($record['language_corrected_query']??''),(string)($record['raw_query']??'')];foreach($candidates as $candidate){$candidate=self::canonicalInputQuery((string)$candidate);if($candidate!==''&&hash_equals($candidate,$pathRaw))return true;}return false;}
      private static function clean(string $v): string {return self::canonicalInputQuery($v);}
      /** @return array<string,mixed> */
@@ -739,6 +739,10 @@
 +        // Worker 2: candidate wording is not accepted title authority. The
 +        // existing dual-strand title check must have actually passed.
 +        $title=(string)($path['title']??'');$pipeline=(array)($path['title_pipeline']??[]);
++        // The final stored candidate is authoritative: later failed revalidation
++        // must not leave worker 2 falsely marked as previously validated.
++        if(!empty($path['title_precheck_validated'])&&!empty($pipeline)&&empty($pipeline['ok']))
++            $path['title_precheck_validated']=false;
 +        $titlePass=$title!==''&&!empty($pipeline['ok'])&&(empty($path['title_candidate_only'])||!empty($path['title_precheck_validated']));
 +        $titleDisposition=$titlePass?'GREEN':($status==='RETAINED_NON_PRODUCING'?'RED':'YELLOW');
 +        $add('title',$firstOpen===''?$titleDisposition:'NOT_STARTED',
