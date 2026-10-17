@@ -3776,3 +3776,45 @@ offen.
 NEXT:
 1.50.673 installieren -> ausschließlich Audio & HiFi live prüfen.
 
+---
+
+## PU-20261017-078 – HD-003 1.50.674 / Audio-&-HiFi Fullbleed-Hero mit Header-Beige
+
+AUSGANG:
+1.50.673 technisch funktionsfähig, aber der 34/66-Hero wurde grafisch verworfen.
+
+NUTZERENTSCHEIDUNG:
+- Bild soll als eine durchlaufende Hero-Fläche wirken;
+- links weicher Übergang in helles Beige;
+- Beige exakt identisch zum Header;
+- kein Logo im Hero;
+- Claim/Pinsel behalten;
+- Audio & HiFi bleibt H1;
+- kurze Zeile darunter;
+- Langtext darunter.
+
+UMSETZUNG:
+nur Audio & HiFi auf Desktop.
+Bildassets unverändert.
+
+QA:
+- PHP 69/69;
+- aktive 1.50.674-Release-Kette konsistent;
+- keine aktive 1.50.673-Stale-Referenz;
+- H1/Claim/kein Logo geprüft;
+- Beige #f5f1e9;
+- 901/901 Assets identisch;
+- ZIP PASS.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.674_HOBBY_DEPOT_AUDIO_HIFI_FULLBLEED_BEIGE_HERO_HARDPASS.zip`
+
+SHA-256:
+`c40e3271bc31c822aeb076f51880d8c2ef222f27ff31a05f29b4dcc0bf2f98e9`
+
+LIVE:
+offen.
+
+NEXT:
+1.50.674 installieren -> nur Audio & HiFi live prüfen.
+
