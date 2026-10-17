@@ -1,6 +1,15 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – TECHNISCHE BESTANDSSCHUTZ-VORPRÜFUNG (NUR STATUSVERWEIS)
+Zuständiges KATEGORIEN-Büro hat das bestehende **472er Fachdelta ohne WordPress-Schreibzugriff geprüft**: `../KATEGORIEN/C22_472_PREFLIGHT_NUR_GITHUB_20261017.json`. Aus ursprünglicher GitHub-Fachquelle unverändert belegt: 172 Themen, 566 neue vorhandene Artikelkategorien, 285 geschützte Altterms und 4 historische Artikelbindungen; 472 Vorschläge bleiben Vorschläge. **12 von 12 absichtlich fehlerhafte Varianten erfolgreich abgewiesen**. Die rein logische Kombination ergibt theoretisch 1.323 Kategorien insgesamt; es handelt sich ausdrücklich **nicht um ein echtes WordPress-Live-Readback oder 1:1-Plugin-Test**. 16 lexikalische Ähnlichkeitsmeldungen sind keine automatischen Dubletten. Grobe thematische Tragfähigkeit bleibt das einzige Inhaltsmaß, keine Artikelproduktion.
+
+**NEXT ACTION unverändert:** aktueller vollständiger WordPress-Readback über vorhandenes Kategorieplugin, dann ausschließlich gesichertes Delta/Dry-Run; vor echtem Readback **kein Import/keine Pluginfreigabe**.
+
+---
+
+
+
 ## 17.10.2026 – KONSOLIDIERTES FACHDELTA: 472 ERGÄNZUNGEN, TECHNISCHER PRE-FLIGHT ALS NÄCHSTES
 Der C2.2-Read-only-Gesamtfachstand wurde **vollständig in GitHub** aktualisiert: `KONZEPT/HAB_C22_V3_QUELLENUEBERNAHME_20261017.json`, letzter Commit `98bff2646ee8788fa69bbf51ab7aa6d29b5c6b86`. Die 26 individuell begründeten Ergänzungsvorschläge und 15 gesonderten Kostenentscheidungen sind **direkt in den 172er-Gesamtstand integriert**. `KONZEPT/HAB_C22_GROBE_FACHDELTA_26_THEMEN_20261017.json` dient nur noch als nachvollziehbarer Prüfbeleg, nicht als zweite Current-Wahrheit.
 
