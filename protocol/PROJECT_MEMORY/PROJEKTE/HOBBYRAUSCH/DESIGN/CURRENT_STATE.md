@@ -3,84 +3,89 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 VERWORFEN / 1.50.668 REGISTRY-RENDERER LOCAL HARD PASS / LIVE NUTZT NOCH ALTEN 330ER SNAPSHOT / V4 NICHT LIVE**
+STATUS: **LIVE 1.50.668 + ALTER 330ER SNAPSHOT / 1.50.669 V7-MEGA-RENDERER LOCAL PASS / NICHT RELEASED / V7 NICHT LIVE**
 
-## Live-Erklärung
+## Live-Wahrheit
 
-Affiliate Portal Template Kit **1.50.668** ist installiert, verändert aber die **Strukturinhalte nicht selbst**.
-Es rendert, was HD-004 als aktive zentrale Registry liefert.
+WordPress bestätigt:
+`Affiliate Portal Template Kit 1.50.668` aktiv.
 
-Darum war live optisch/inhaltlich vieles unverändert:
-- HD-004 liefert weiterhin den alten 330er Live-Snapshot;
-- V4-Erweiterungen sind noch nicht synchronisiert;
-- `Bonsai & Miniatur → nur Bonsai` stammt aus dem alten zentralen Snapshot;
-- das Mega-Menü kann keine Kategorien anzeigen, die im aktiven Snapshot nicht existieren.
+1.50.668 nutzt HD-004 als Strukturquelle. Solange HD-004 die alte 330er Revision liefert, bleibt der sichtbare Strukturinhalt weitgehend alt.
 
-Die relevante sichtbare 1.50.668-Änderung ist bereits erkennbar:
-terminale `category`-Kinder werden jetzt ausgegeben, z. B. 7/7 unter Ameisenhaltung.
+Die terminale `category`-Ebene funktioniert bereits; Beispiel Ameisenhaltung zeigt die echte letzte Content-Kategorieebene.
 
-## Gefundene Mega-Menü-Datenfehler
+## Lokaler WIP 1.50.669
 
-Im aktiven/V3-Datenstand fehlt bei 10 direkten Welt-Hubs `nav_order`.
-Dadurch wirkt die sichtbare 5er-Auswahl teilweise willkürlich.
+Arbeitsbasis:
+1.50.668.
 
-V4 korrigiert die Reihenfolge zentral für alle direkten Hubs.
+Änderung:
+Mega-Menü unterscheidet jetzt korrekt:
+- echte Zwischenbereiche = Mega-Spalten;
+- direkte Hobbys/Orientierungsseiten wie Heimwerken/Gärtnern = nur Weltseite, keine zusätzliche Mega-Spalte.
 
-Das Mega-Menü zeigt gemäß Vertrag zunächst bis zu 5 direkte Hubgruppen.
-Weitere direkte Hubgruppen liegen hinter `Mehr Kategorien`.
-Das ist **kein Datenverlust**.
+V7-Mega-Zahlen:
+Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 · Bewegen 8 · Sammeln 9.
 
-Die zusätzliche Orientierungsebene je sichtbarer Gruppe zeigt kompakt bis zu 4 Links + `Alle Themen`.
-Ein Hub mit nur einem realen Kind zeigt entsprechend nur ein Kind; Beispiel live: Bonsai & Miniatur → Bonsai.
-V4 erweitert diesen Hub zentral auf Bonsai / Penjing / Saikei.
+Darstellung:
+- initial 5 gleichmäßige Gruppen;
+- `Mehr Kategorien` öffnet restliche echte Zwischenbereiche im selben Flyout;
+- genau eine weitere kompakte Orientierungsebene;
+- kein Vollbaum;
+- keine Roh-`get_pages()`-Struktur;
+- Registry fail-closed.
 
-## Letzte Inhaltskategorie-Ebene
+## Local QA V7
 
-1.50.668 kann Page- und Category-Kinder getrennt aus HD-004 lesen.
-Ameisenhaltung live zeigt bereits:
-- Einstieg & Arten;
-- Formicarium & Nest;
-- Futter & Wasser;
-- Winterruhe & Klima;
-- Kolonie & Pflege;
-- Ausbruchsschutz & Probleme;
-- FAQ / Häufige Fragen.
+V7-Profil:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_V7_CALIBRATED_ROLLOUT_20261017.json`
 
-Damit ist diese zuvor fehlende Ebene technisch repariert.
+Browser-QA:
+`/hobby rausch/releases/HOBBY_DEPOT_BROWSER_ACCEPTANCE_V7_20261017.json`
 
-## Registry-Prinzip
+Renderer-QA:
+`/hobby rausch/releases/HOBBY_DEPOT_SIM_V7_20261017.txt`
 
-Wie beim bewährten Hab-&-Bewahr-Fix:
-- zentrale Registry = einzige Strukturwahrheit;
-- keine rohen WordPress-Kinder/Geschwister als Ersatz;
-- zentrale Revision vorhanden + Registry nicht bereit → fail closed;
-- kein zufälliger Weltbild-Fallback.
+PASS:
+- 381 Hobbyseiten;
+- komplette terminale Category-Ebene;
+- 0 Struktur-/Route-/Render-Mismatches;
+- Trainspotting-Falschparent ausgeschlossen;
+- alle 8 Mega-Menüs;
+- 1920 / 1440 / 1180 / 1024 / 901 / 900 / 768 / 761 / 760 / 390 px;
+- kein horizontaler Overflow;
+- Fertigen: 10 echte Zwischenbereiche;
+- Pflanzen: direkte Gärtnern-Hobbyseite nicht als Mega-Zwischenbereich;
+- PHP 61/61 PASS.
 
-## 1.50.668 Local QA
+## Bilder
 
-- aktuelle 330er Baseline: 0 Strukturabweichungen;
-- V3: 0 Strukturabweichungen;
-- V4 mit 381 terminalen Hobbyseiten / 2236 Leafs: 0 Strukturabweichungen;
-- Trainspotting-Negativfall PASS;
-- Ameisenhaltung 7/7 PASS;
-- PHP 58/58 PASS.
+1.50.668 enthält die bisherige zentrale Hero-/Preview-Logik.
 
-## Bildhinweis
+Vor V7-Live-Sync brauchen neue direkte Hub2 gemäß Bildvertrag eigenes geprüftes Hero + daraus abgeleitete Preview:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen;
+- Suchen & Finden;
+- Modellbau.
 
-Zusätzliche alte Hero-Patchplugins 1.50.659 / 1.50.661 / 1.50.662 sind Übergangsstände und dürfen die Bildwahrheit nicht weiter überlagern.
-1.50.668 enthält die zentrale Hero-/Preview-Logik.
+`Holz & Natur` ist eine Erweiterung des stabilen Holz-Hubs; vorhandenes Holzmotiv muss vor Release gegen die erweiterte Semantik visuell geprüft werden.
 
-## Zentrale V4-Abhängigkeit
+Kein generischer Weltbild-Fallback.
 
-V4 ist noch nicht live:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V4_20261017.json`
+## Alte Patchplugins
 
-Bevor neue direkte Hub2 live gehen, benötigen sie gemäß Bildvertrag ein eigenes geprüftes Hero + daraus abgeleitete Preview.
+Hero-Patcher 1.50.659 / 1.50.661 / 1.50.662 sind Übergangsstände und sollen nach kontrollierter Bereinigung nicht parallel die Bildwahrheit überlagern.
 
 ## PASS-GRENZE
 
-Kein Live-PASS ohne echten WordPress-Readback.
+1.50.669 ist **noch kein Release**.
+Kein Live-PASS ohne:
+- V7 WordPress-Dry-Run;
+- Bilder für neue Hub2;
+- finalen ZIP-/Browsercheck;
+- echten Live-Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**Nicht am CSS weiterdrehen. Erst den sicheren V4-Struktur-Dry-Run gegen WordPress ausführen; danach Registry synchronisieren/readbacken. Erst dann 1.50.668 gegen den neuen zentralen Snapshot erneut live prüfen.**
+**Zuerst den V7-Dry-Run mit HD-001 1.14.11 durchführen. Parallel lokal die fünf neuen Hub2-Hero/Preview-Paare und Holz-&-Natur-Motivprüfung abschließen; erst danach 1.50.669 als Release packen.**
