@@ -2,7 +2,7 @@
   "name": "Hab & Bewahr C2.2 Bestandschutz & 472er Read-only Vorprüfung",
   "date": "2026-10-17",
   "scope": "EIGENTUMSSCHUTZ_KATEGORIEN",
-  "status": "READ_ONLY_PREFLIGHT_PASS__LIVE_WORDPRESS_BLOCKED",
+  "status": "READ_ONLY_PREFLIGHT_PASSED__USER_CONFIRMED_WORDPRESS_UNCHANGED__SECOND_WAVE_WRITER_PENDING",
   "purpose": "Mechanische Freigabesicherheit und grober Kategorie-Abgleich; keine Artikel, keine neue Architektur, keine WordPress-Schreibvorgänge",
   "source_github": {
     "branch": "hobbyroom/project-memory-campus-v1-20260905",
@@ -343,5 +343,20 @@
     "existing_566_records_unchanged": true,
     "wordpress_operation_executed": false,
     "warning": "Die 472 sind Vorschläge. 1323 ist eine rechnerische Strukturgröße, kein bestätigter WordPress-Livestand. Ohne aktuelle WP-IDs und Bindungen keine 1:1-Simulation oder Freigabe."
+  },
+  "latest_binding_clarification": {
+    "date": "2026-10-17",
+    "user_confirms_no_manual_or_external_changes_to_wordpress_since_successful_743_c22_import": true,
+    "original_plugin_profile_exactly_reconciled": {
+      "topic_count": 172,
+      "category_count": 566,
+      "matching_hashes": true
+    },
+    "stable_node_id_mapping_git_path": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C22_472_PLUGIN_GEBUNDENES_ADD_ONLY_MAPPING_20261017.json",
+    "no_new_user_wordpress_readback_needed_for_current_planning": true,
+    "first_wave_743_must_not_be_reimported": true,
+    "needed_next": "Extend existing importer with isolated 472 ADD-only second wave; internally verify bound snapshot at execution, simulate with original plugin, request separate writer approval before sync",
+    "existing_live_preflight_section": "HISTORICAL_OBSERVATION__NOT_NEXT_ACTION",
+    "wordpress_changes_this_turn": 0
   }
 }
