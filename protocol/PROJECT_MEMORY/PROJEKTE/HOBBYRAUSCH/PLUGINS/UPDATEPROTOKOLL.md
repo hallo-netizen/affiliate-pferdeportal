@@ -3672,4 +3672,46 @@ noch offen.
 
 NEXT:
 1.50.671 installieren -> nur die benannten Bildbereiche prüfen.
+---
 
+## PU-20261017-076 – HD-003 1.50.672 / wiederholten AF-026-Frontend-Fatal exakt reproduziert und Release-Kette geschlossen
+
+REALER AUSLÖSER:
+Nach Installation von 1.50.671 zeigte Hobby Depot erneut den WordPress-kritischen Fehler.
+
+EXAKTE URSACHE:
+- Main lud Hobby_Depot_Profile_V150671;
+- route_template() zeigte auf hobby-depot-front-v150670.php / hobby-depot-content-v150670.php;
+- beide Templates riefen Hobby_Depot_Profile_V150670 auf;
+- class-hobby-depot-profile-v150670.php war im 1.50.671-Paket nicht vorhanden;
+- negativer Test reproduziert auf beiden Templates exakt Class "Hobby_Depot_Profile_V150670" not found.
+
+KORREKTUR:
+1.50.672 bindet Header/Version, require, class_exists/init, Profilklasse, RELEASE, Routepfade und beide Template-Klassen vollständig auf 1.50.672.
+
+HARTE AF-026-PRÜFUNG: 7/7 PASS.
+
+POSITIV:
+- Main lädt;
+- Profil lädt;
+- Front-Route korrekt;
+- Fronttemplate ausgeführt PASS;
+- Contenttemplate ausgeführt PASS;
+- Dirty-Overlay 1.50.671 -> 1.50.672 PASS.
+
+SCOPE:
+Keine Bilder und keine Mega-Menü-Logik gegenüber 1.50.671 verändert. 901/901 Assets byte-identisch.
+
+ARTEFAKT:
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.672_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX_HARDPASS.zip
+SHA-256: f66e0cb03301dfd8658aeb7de4ebcff059bceb9da0760b048e9be6fa40d8c78d
+
+QA:
+- PHP 63/63 PASS;
+- ZIP PASS;
+- Roundtrip 1031/1031 identisch.
+
+LIVE: offen.
+
+NEXT:
+1.50.672 installieren -> normale Hobby-Depot-Seite aufrufen -> nur bei Frontend-PASS Bildprüfung fortsetzen.
