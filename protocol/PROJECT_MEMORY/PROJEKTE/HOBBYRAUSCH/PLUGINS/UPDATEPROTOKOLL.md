@@ -3228,3 +3228,89 @@ NEXT:
 1.14.13 über die aktuell installierte 1.14.12 installieren → ausschließlich Finalen Delta-Dry-Run ausführen.
 Abnahme: 3487 Zielobjekte, keine beiden bisherigen Kollisionen, danach vollständiges reales Ergebnis prüfen.
 
+---
+
+## PU-20261017-070 – HD-001 1.14.14 / Admin-Vollreadback reproduziert und entfernt
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+1.14.13 → 1.14.14.
+
+REALER AUSLÖSER:
+Der Nutzer meldete unmittelbar nach dem Pluginwechsel extrem langsames Laden der Adminseite `Finaler Zielbaum` und erneute Gateway-Timeout-Gefahr. Gleichzeitig blieb der alte 2642er BLOCKED-Dry-Run sichtbar.
+
+NACHPRÜFUNG 1.14.13:
+Der Fehler wurde 1:1 im Admin-Renderpfad reproduziert.
+
+Schon beim bloßen Seitenaufruf rief `render()` den kompletten Frontend-/Struktur-Readback auf.
+
+Simulation mit V7.1-Größe:
+- get_post 762;
+- get_post_meta 1524;
+- get_term 2995;
+- get_term_meta 11980;
+- get_posts 1;
+- zusätzliche URL-Auflösungen.
+
+Damit war 1.14.13 trotz vorheriger Teiltests nicht freigabefähig und wird verworfen.
+
+ZWEITER UI-FEHLER:
+Ein gespeicherter Dry-Run aus 1.14.12 wurde nach Pluginwechsel weiterhin als aktuelles Ergebnis dargestellt. Der Nutzer sah deshalb weiterhin 2642 und die alten Kollisionen, obwohl dies kein neuer 1.14.13-Lauf war.
+
+KORREKTUR 1.14.14:
+- normaler Admin-Render führt keinen Vollreadback mehr aus;
+- bei COMPLETE wird ausschließlich der bereits im Sync gespeicherte Readback verwendet;
+- ein gespeicherter Dry-Run einer anderen Pluginversion wird als ALT markiert und nicht als aktueller Ergebnisblock dargestellt;
+- V7.1-Profilbindung und Legacy-Reuse aus 1.14.13 bleiben unverändert;
+- keine Fachstruktur, keine Navigation und keine Architektur geändert.
+
+HARD-SIM ADMIN:
+- get_post 0;
+- get_post_meta 0;
+- get_term 0;
+- get_term_meta 0;
+- get_posts 0;
+- alter 2642er Ergebnisblock nicht als aktuell gerendert.
+
+HARD-SIM DRY-RUN:
+Ausgang: letzter vollständig synchronisierter 2357er Zielbestand plus die zwei real beobachteten weiterhin vorhandenen Alt-Target-Seiten Libellenbeobachtung und Nachtvogel-Beobachtung.
+
+Ergebnis:
+- PASS;
+- 3517 logisch;
+- 3487 physisch;
+- 862 Entities;
+- 383 CORE;
+- CREATE 1126;
+- ADOPT 3;
+- UPDATE 2358;
+- ARCHIVE 1;
+- Errors 0;
+- Libellenbeobachtung vorhandene Altseite → UPDATE/reuse;
+- Nachtvogel-Beobachtung vorhandene Altseite → UPDATE/reuse.
+
+NEGATIV:
+- fremd gebundener Slug → BLOCKED;
+- doppelte Legacy-Target-Bindung → BLOCKED.
+
+ARTEFAKT:
+`HD001_V1.14.14_HOBBY_DEPOT_V7_1_BACKEND_LOAD_FIX_HARDPASS.zip`
+
+SHA-256:
+`fdcca9282b0edcb5e0bb557b9f1fc5ec6cfc3c127afb40b6dc531340f653642a`
+
+TECHNIK:
+- PHP 33/33 PASS;
+- ZIP-Roundtrip 44/44 PASS;
+- V7.1-Profil SHA unverändert `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`;
+- Dry-Run 0 Strukturwrites;
+- kein Apply/Sync automatisch.
+
+LIVE:
+Noch offen.
+
+NEXT:
+1.14.14 installieren → Adminseite neu öffnen → ausschließlich Finalen Delta-Dry-Run ausführen → keinen Apply/Sync.
+
