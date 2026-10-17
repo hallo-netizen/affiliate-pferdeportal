@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
-  "version": "1.1",
-  "effective_date": "2026-10-16",
+  "version": "1.2",
+  "effective_date": "2026-10-17",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -246,6 +246,11 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/WISSENSDATENBANK/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/WISSENSDATENBANK/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/WISSENSDATENBANK/HOBBYRAUM.md"
+    },
+    {
+      "id": "CAMPUS_REPOSITORY_CLEANUP",
+      "start_here": "protocol/PROJECT_MEMORY/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md"
     }
   ],
   "active_branch_registry": "protocol/PROJECT_MEMORY/ACTIVE_BRANCHES.json"
