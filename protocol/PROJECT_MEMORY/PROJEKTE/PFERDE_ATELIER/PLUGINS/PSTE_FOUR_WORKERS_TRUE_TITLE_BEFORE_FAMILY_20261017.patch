@@ -1,0 +1,104 @@
+--- includes/class-pste-normal-metadata-path.php	2026-10-17 12:42:02.652659700 +0000
++++ "/mnt/data/seo_work/four_worker_ordered_candidate/Portal SEO Topic Engine/includes/class-pste-normal-metadata-path.php"	2026-10-17 13:23:06.585563421 +0000
+@@ -18,7 +18,7 @@
+             'article_type_registry_sha256'=>'','family_identity_v2_registry_sha256'=>'',
+             'portal_relevance_gate'=>[],'normalization'=>[],'intent_analysis'=>[],'semantic_consensus'=>[],'intent_profile'=>[],'article_type'=>'','target_category'=>[],
+             'title_pipeline'=>[],'title'=>'','target_keyword'=>'','category_gap_proposal'=>[],'domain_risk'=>[],
+-            'reason_codes'=>[],'title_generated'=>false,'title_candidate_only'=>false,'title_candidate_source'=>'','title_candidate_source_sha256'=>'','sandbox_required'=>false,'sandbox_admission_mode'=>'',
++            'reason_codes'=>[],'title_generated'=>false,'title_precheck_validated'=>false,'title_candidate_only'=>false,'title_candidate_source'=>'','title_candidate_source_sha256'=>'','sandbox_required'=>false,'sandbox_admission_mode'=>'',
+             'structure_gap_backlog_required'=>false,'category_backlog_required'=>false,'retained_non_producing'=>false,
+             'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,
+             'article_or_taxonomy_write_attempted'=>false,'write_attempted'=>false,
+@@ -174,6 +174,12 @@
+             }
+         }
+         if(!$matchedFamily){
++            // Four existing decisions, in order: a missing DataForSEO origin family
++            // must not prevent worker 2 from finishing its independent title review.
++            // This is TITLE evidence only; neither Fach/Journal nor category/type
++            // nor a production slot is inferred. The normal production route still
++            // needs all its existing verified decisions and signatures.
++            $base=self::validatedTitleBeforeFamilyAssignment($base,$raw,$registry,$persistedTitle);
+             // Generic additive extension point. The core miss is never evidence.
+             if(class_exists('PSTE_Article_Type_Extension_Router')){
+                 $extension=$verifiedCategory;
+@@ -194,7 +200,18 @@
+                 $structure=PSTE_Family_Structure_Router::evaluate($raw,$baseline,$registry,$familyResolution,$relevance);
+                 $base['family_structure_routing']=$structure;
+                 if(($structure['status']??'')==='STRUCTURE_GAP'&&!empty($structure['ok'])){
+-                    $base['category_gap_proposal']=$structure;$base['structure_gap_backlog_required']=true;
++                    $base['category_gap_proposal']=$structure;
++                    // Do not call this a missing category: there is no verified
++                    // Fach/Journal decision yet. Keep evidence in the already
++                    // existing internal Sandbox, NOT in finished-title category room.
++                    if(!empty($base['title_precheck_validated'])){
++                        $base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
++                        return self::withReasons($base,'SANDBOX_REQUIRED',array_values(array_unique(array_merge(
++                            ['PSTE_FOUR_STEPS_TITLE_VALIDATED_LANE_PENDING','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],
++                            (array)($structure['reason_codes']??[])
++                        ))));
++                    }
++                    $base['structure_gap_backlog_required']=true;
+                     return self::withReasons($base,'STRUCTURE_GAP',array_values(array_unique(array_merge(['PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_STRUCTURE_GAP','PSTE_STRUCTURE_DECISION_REQUIRED_BEFORE_NORMAL_REENTRY'],(array)($structure['reason_codes']??[])))));
+                 }
+             }
+@@ -306,6 +323,42 @@
+     }
+ 
+ 
++    /** Validate an explicit horse-question title BEFORE a source-family match.
++     *  Reuses the two existing hard title gates (FAQ + Journal) but gives no type,
++     *  category or production authority; a later resolved lane must still pass
++     *  its own unchanged title/intent checks. Nonquestions remain for the existing
++     *  title-candidate or Sandbox process; no invented question or topic.
++     */
++    private static function validatedTitleBeforeFamilyAssignment(array $base,string $raw,array $registry,string $storedTitle): array {
++        if((string)($base['portal_relevance']??'')!=='PROVEN'||!PSTE_Normalizer::isQuestion($raw))return $base;
++        // The title checks need an actual topic subject, not a guessed family.
++        // A literal horse is proven by the original phrase; unknown subjects stay yellow.
++        if(!preg_match('/\b(?:pferd|pferde|pferdes|pferden)\b/iu',$raw))return $base;
++        $title=$storedTitle!==''?$storedTitle:PSTE_Normalizer::canonicalQuestion($raw);
++        $targetKeyword=rtrim($title," ?\t\n\r\0\x0B");
++        if($title===''||$targetKeyword==='')return $base;
++        $checked=[];
++        foreach(['FAQ','Journal'] as $type){
++            $intent=['contract'=>'PSTE_INTENT_PROFILE_V4_EVIDENCE_BOUND','ok'=>true,'status'=>'PASS',
++                'search_intent'=>'EDITORIAL_INFORMATION','primary_user_goal'=>'EDITORIAL_INFORMATION',
++                'primary_article_type_candidate'=>$type,'intent_angle'=>'EDITORIAL_INFORMATION',
++                'evidence_authority'=>'TITLE_ONLY_UNASSIGNED','scope_status'=>'UNPROVEN',
++                'intent_status'=>'UNPROVEN','raw_query_sha256'=>hash('sha256',$raw),'write_attempted'=>false];
++            $intent['profile_sha256']=hash('sha256',self::clean(json_encode($intent,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
++            $check=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,'Pferd',$type,$registry,$intent,$targetKeyword,$targetKeyword);
++            if(empty($check['ok']))return $base;
++            $checked[$type]=$check;
++        }
++        $base['title']=$title;$base['title_generated']=true;
++        // This is verified TITLE evidence, but not a publishable production title
++        // until the genuine normal lane/type/category chain independently passes.
++        $base['title_candidate_only']=true;$base['title_precheck_validated']=true;
++        $base['title_candidate_source']='FOUR_STEPS_TITLE_VALIDATED_LANE_PENDING';
++        $base['title_candidate_source_sha256']=hash('sha256',$title);
++        $base['title_pipeline']=$checked['FAQ'];$base['target_keyword']=$targetKeyword;
++        return $base;
++    }
++
+     /** Existing single verified extension metadata acceptance path. No independent gate or store. */
+     private static function acceptVerifiedExtension(array $base,array $extension,string $persistedTitle,string $raw,array $registry): array {
+         $type=(string)$extension['article_type'];
+@@ -641,7 +694,7 @@
+         // Worker 2: candidate wording is not accepted title authority. The
+         // existing dual-strand title check must have actually passed.
+         $title=(string)($path['title']??'');$pipeline=(array)($path['title_pipeline']??[]);
+-        $titlePass=$title!==''&&!empty($pipeline['ok'])&&empty($path['title_candidate_only']);
++        $titlePass=$title!==''&&!empty($pipeline['ok'])&&(empty($path['title_candidate_only'])||!empty($path['title_precheck_validated']));
+         $titleDisposition=$titlePass?'GREEN':($status==='RETAINED_NON_PRODUCING'?'RED':'YELLOW');
+         $add('title',$firstOpen===''?$titleDisposition:'NOT_STARTED',
+             $titlePass?'VALIDATED':($title!==''?'CANDIDATE_REQUIRES_VALIDATION':'TITLE_PENDING'));
+@@ -676,6 +729,7 @@
+         };
+         if($status==='NORMAL_PASS')$haltedAt='';
+         elseif($relevance!=='PROVEN')$haltedAt='relevance';
++        elseif(!empty($path['title_precheck_validated'])&&$lane==='')$haltedAt='lane';
+         elseif($status==='STRUCTURE_GAP'||$hasReason('JOURNAL_INTENT_RETAINED_PENDING_VERIFIED_CATEGORY')
+             ||$hasReason('FAMILY_ASSIGNMENT_NOT_PROVEN')||$hasReason('FAMILY_STRUCTURE_'))$haltedAt='category';
+         elseif($hasReason('INTENT_TYPE_BINDING')||$hasReason('TYPE_CONFLICT')
