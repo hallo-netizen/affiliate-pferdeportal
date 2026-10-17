@@ -412,3 +412,21 @@ Der alte technische K1–K8-Unterbau auf `main` wird **nicht blind physisch entf
 
 SICHERE LÖSUNG:
 Aktive Campus- und Textnavigation ignoriert diesen Legacy-Unterbau vollständig und routet ausschließlich auf K0. Der alte Main-Bestand bleibt bis zu einer separat beweisbaren Hardlock-Migration nur technischer Legacy-/Schutzbestand, nicht Current oder Fallback.
+
+
+### 2026-10-17 – BAU-043: Repository-/Branch-Cleanup an eine Current-Autorität gebunden
+
+BEDARF:
+Der Branch-Cleanup hatte trotz campusweiter Ein-Wahrheit-Regel keinen eigenen Scope und keine Current-Autorität.
+
+KISS-FIX:
+- genau einen Scope `CAMPUS_REPOSITORY_CLEANUP` im bestehenden `AUTORITAETSPLAN.json` ergänzt;
+- genau eine Current-Autorität `protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md` angelegt;
+- bestehende Campus-START_HERE-Tür als Einstieg weiterverwendet;
+- kein neues Büro, kein neuer Runner, keine Fachlogik und keine Änderung an K0/Affiliate/Plugins.
+
+NEGATIVPRÜFUNG:
+Hausmeisterprotokoll, Archivcheckpoint und ACTIVE_BRANCHES bleiben Nachweis/Registry und wurden nicht zu Current-Autoritäten gemacht. PR #518 und Main-Hardlock-Legacy bleiben geschützt.
+
+BEZUG:
+ARCH-095 / BAU-043 / HM-007.
