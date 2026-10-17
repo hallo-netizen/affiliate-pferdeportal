@@ -2,12 +2,12 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-16
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V3 2656-KNOTEN-AUDIT PASS / HD-001 1.14.9 LOCAL DRY-RUN PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
+STAND: 2026-10-17
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V3 2656-KNOTEN-AUDIT PASS / HD-001 1.14.9 VERWORFEN / 1.14.10 MANUAL-ONLY LOCAL PASS / ECHTER WORDPRESS-DRY-RUN OFFEN**
 
 ## Live-Baseline
 
-Weiterhin produktiv:
+Produktiv unverändert:
 `HD-TARGET-3P-RULE27-CATEGORY-GAPFIX-HOBBYFINDER-20261009+0f4dbf59238a7d83`
 
 - 2357 aktive physische Zielobjekte;
@@ -21,25 +21,16 @@ Weiterhin produktiv:
 Profil:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
 
-SHA-256:
-`6d73e5d4d32e91acf6a5c8dd19dc9e23af4a661dc053fa7a752a4ea4668826e7`
-
 Audit:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_FULL_STRUCTURE_AUDIT_V3_20261016.json`
 
 Delta:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGETTREE_DELTA_V3_20261016.json`
 
-HD-001 Synthetic-Dry-Run:
+Synthetic-Dry-Run:
 `/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_HD001_SYNTHETIC_DRYRUN_V3_20261016.json`
 
-HD-001-Kandidat:
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
-
-ZIP SHA-256:
-`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
-
-## Voll-Audit
+## Voll-Audit V3
 
 - 8/8 Hauptwelten unverändert;
 - 370 terminale Hobbyseiten;
@@ -49,7 +40,6 @@ ZIP SHA-256:
 - keine Kategorie unter einer untersten Kategorie;
 - keine fehlenden Parents;
 - keine doppelten Node-IDs/Slugs;
-- keine frageartigen Artikelüberschriften als Kategorien;
 - HD-001 Validator: 0 Errors / 0 Warnings.
 
 Fachlich korrigiert/ergänzt:
@@ -62,45 +52,54 @@ Fachlich korrigiert/ergänzt:
 - Miniaturen & Szenen ergänzt;
 - Naturfunde ergänzt;
 - Schneckenhaltung ergänzt;
-- Quilten-Leaf präzisiert.
+- Quilten-Leaf zu `Quiltmuster & Stichführung` präzisiert.
 
-Bewusst nicht automatisch zusammengelegt:
+Bewusste Watchlist ohne automatische Zusammenlegung:
 - Asselhaltung / Isopoden-Zucht;
 - Münzen / Numismatik;
 - Teichwasser-Mikroskopie / Gewässermikroskopie.
 
-## Echte HD-001-Logik lokal simuliert
+## Synthetischer HD-001-Dry-Run
 
-Resolved Profile:
-- Revision `...+16d1bd25b2adfc26`;
-- 2656 logische Knoten;
-- Validator PASS.
-
-Vollständige synthetische Live-Baseline + Altseiten:
 - CREATE 282;
 - ADOPT 3;
 - UPDATE 2357;
 - ARCHIVE 0;
-- DEMOTE_EDITORIAL 0;
-- 0 Provider-/DataForSEO-Aufrufe;
-- 0 Writes im Dry-Run.
+- Provider-/DataForSEO-Aufrufe 0;
+- WordPress-Writes 0.
 
 ADOPT statt Dublette:
-Trainspotting, Modellraketen und Pflanzenbestimmung.
+Trainspotting, Modellraketen, Pflanzenbestimmung.
+
+## Timeout-Korrektur
+
+**HD-001 1.14.9 ist verworfen.**
+
+Ursache:
+automatischer Final-Target-Bootstrap auf WordPress-`init` nach Versionswechsel.
+
+Sicherer Kandidat:
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.10_MANUAL_ONLY_TIMEOUT_FIX_LOCALPASS.zip`
+
+SHA-256:
+`f9500d051249b239ca3215754eff54d37244fb80ef612ce54cfd5f722db7f243`
+
+1.14.10:
+- kein automatischer Runner-Bootstrap;
+- Installation/Aktivierung startet keine Vollbaum-Verarbeitung;
+- Dry-Run nur manuell;
+- Sync getrennt und bestätigungspflichtig.
 
 ## Betriebsregel
 
-DataForSEO = SEO-/Demand-/Intent-Evidence, **keine Strukturautorität**.
+DataForSEO = Evidence, nicht Strukturautorität.
 
-Live-Änderungen ausschließlich:
-HD-001 → echter WordPress-Dry-Run → Fingerprint PASS → exakt ein Sync → 100%-Readback.
-
-Frontend/Design liest danach ausschließlich HD-004 und niemals rohe `get_pages()`-Kinder als Strukturwahrheit.
+Frontend/Design liest Struktur über HD-004; keine rohen WordPress-`get_pages()`-Kinder als Wahrheit.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der echte kostenlose HD-001-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
+**Der echte manuelle V3-Dry-Run gegen die aktuelle WordPress-Datenbank fehlt noch.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-001 1.14.9 installieren/aktivieren und im bestehenden Menü „Finaler Zielbaum“ ausschließlich den Dry-Run ausführen. Noch NICHT synchronisieren.**
+**Für den V3-Dry-Run ausschließlich HD-001 1.14.10 einsetzen und nur den manuellen Finalen Delta-Dry-Run ausführen. Noch nicht synchronisieren.**
