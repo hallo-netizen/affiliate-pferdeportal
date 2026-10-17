@@ -58,7 +58,22 @@ PASS:
 - Pflanzen: direkte Gärtnern-Hobbyseite nicht als Mega-Zwischenbereich;
 - PHP 61/61 PASS.
 
-## Bilder
+## 1.50.669 Fail-closed QA
+
+QA:
+`/hobby rausch/releases/HOBBY_DEPOT_1.50.669_WIP_FAILCLOSED_QA.json`
+
+Bildbriefs:
+`/hobby rausch/releases/HOBBY_DEPOT_V7_HUB2_IMAGE_BRIEFS_20261017.json`
+
+PASS:
+- PHP 61/61;
+- Hub2-Weltbild-Fallback im aktiven 1.50.669-Renderer entfernt;
+- exakt 5 neue Hub2 sind noch unmapped: Modellbau, Spotting & Verkehr, Citizen Science, Natur bestimmen, Suchen & Finden;
+- Holz & Natur besitzt zwar ein altes Holzmotiv, dieses ist semantisch zu eng und deshalb REPLACE_REQUIRED;
+- insgesamt exakt 6 neue Hero+Preview-Paare nötig.
+
+
 
 1.50.668 enthält die bisherige zentrale Hero-/Preview-Logik.
 
@@ -69,7 +84,7 @@ Vor V7-Live-Sync brauchen neue direkte Hub2 gemäß Bildvertrag eigenes geprüft
 - Suchen & Finden;
 - Modellbau.
 
-`Holz & Natur` ist eine Erweiterung des stabilen Holz-Hubs; vorhandenes Holzmotiv muss vor Release gegen die erweiterte Semantik visuell geprüft werden.
+`Holz & Natur` ist geprüft: das vorhandene Holzwerkstatt-Motiv ist für Holz + Besenbinden + Korbflechten + Weidenflechten zu eng und damit FAIL. Neues eigenes Motiv erforderlich.
 
 Kein generischer Weltbild-Fallback.
 
