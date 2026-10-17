@@ -3,112 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.672 FRONTEND/FOTOS PASS / 1.50.673 AUDIO-&-HIFI-HERO+TEXT-PILOT LOCAL HARD PASS / LIVE-PILOTPRÜFUNG OFFEN**
+STATUS: **LIVE 1.50.673 TECHNISCH PASS / AUDIO-HERO GRAFISCH VERWORFEN / 1.50.674 FULLBLEED-BEIGE-HERO LOCAL HARD PASS / LIVE-PRÜFUNG OFFEN**
 
-## Live-Stand 1.50.672
+## Live-Stand
 
-Vom Nutzer im echten Frontend bestätigt:
-- kritischer 1.50.671-Fatal behoben;
-- Audio-&-HiFi-Seite lädt normal;
-- die zuletzt korrigierten Bilder werden als passend akzeptiert.
+1.50.673 läuft technisch und die Bildqualität ist bestätigt.
 
-Damit ist 1.50.672 der aktuelle funktionierende Live-Stand.
+Grafischer Befund Audio & HiFi:
+- 34/66-Aufteilung wirkt wie zwei getrennte Blöcke;
+- zu viel optische Trennung links/rechts;
+- Hero soll stattdessen als eine zusammenhängende Fläche wirken.
 
-## Verbindliche Textregeln
+## 1.50.674 – nur Audio & HiFi Hero
 
-Quelle:
-`TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`
-SHA: `721e3f77d021b3e07e29ed98c9f921d3e0669fa9`
-
-Für Hub2-Kategorietexte:
-- ca. 150–200 Wörter;
-- natürliches normales Deutsch;
-- themenspezifische Substanz;
-- keine Generator-/Padding-/Füllsprache;
-- keine generische Schlussformel;
-- konkrete Orientierung;
-- Anfänger und Fortgeschrittene berücksichtigen;
-- nur reale Unterthemen nennen;
-- direkte du-Ansprache, wenn natürlich;
-- sichtbarer Lead -> `Mehr zu <Kategorie> erfahren` -> Rest im Aufklapper.
-
-## 1.50.673 – nur Audio & HiFi als Pilot
-
-**Keine andere Kategorie textlich oder im Hero-Layout verändert.**
-**Alle 901 Bildassets gegenüber 1.50.672 byte-identisch.**
-
-### Hero-Layout Audio & HiFi
+Keine andere Kategorie geändert.
 
 Desktop >1100 px:
-- links 34 %: Claim + H1 + exakt ein kurzer individueller Einstieg;
-- rechts 66 %: vorhandenes scharfes Hero-Masterbild;
-- Hero-Höhe bleibt 320 px;
-- vorhandener Weißübergang bleibt, aber ohne zusätzliche Blur-Wirkung;
-- langer Kategorietext bleibt vollständig unter dem Hero.
+- Hero bleibt 320 px hoch;
+- bestehendes scharfes Audio-Hero-Masterbild läuft über die volle Hero-Breite;
+- links blendet das Bild weich in **exakt #f5f1e9** über, identisch zur Header-Hintergrundfarbe;
+- kein Logo im Hero;
+- Claim `Klang, der begeistert.` mit vorhandener Pinselunterstreichung bleibt;
+- `Audio & HiFi` bleibt echte H1;
+- darunter nur die kurze Zeile `Klang verstehen, Technik entdecken und selbst bauen.`;
+- langer 161-Wörter-Kategorietext bleibt darunter;
+- Tablet/Mobil bleiben gestapelt.
 
-<=1100 px:
-- unverändert gestapelt: Text oben, Bild darunter, Langtext danach.
+Unverändert:
+- 901/901 Bildassets gegenüber 1.50.673 byte-identisch;
+- Audio-Unterkategorie-Kurzzeilen;
+- Mega-Menü;
+- Kategorien;
+- alle übrigen Hub2-Seiten.
 
-### Hero-Kurztext
-
-`Du willst Klang selbst gestalten und Technik wirklich verstehen – von Lautsprechern und Verstärkern bis zu Plattenspielern, Synthesizern und Eurorack.`
-
-Keine Schablone `Bei Audio & HiFi geht es um ...`.
-
-### Langer Audio-&-HiFi-Kategorietext
-
-- 161 Wörter;
-- reale Unterthemen: Lautsprecherbau, HiFi-Selbstbau, Plattenspieler restaurieren, Röhrenverstärker bauen, Synthesizer bauen, Eurorack, Effektpedale bauen;
-- Einsteiger + Fortgeschrittene;
-- relevante Sicherheit bei Röhren-/Netzspannung;
-- keine künstlichen Unterthemen;
-- kein generischer Abschluss.
-
-Render:
-- Hero-Satz: 20 Wörter;
-- sichtbarer Text darunter: 68 Wörter;
-- Aufklapper: 73 Wörter.
-
-### Audio-&-HiFi-Unterkategorien – individuelle Kurzzeilen
-
-Nur auf dieser Pilotseite:
-- Effektpedale bauen -> Eigene Sounds löten, testen und verfeinern.
-- Eurorack -> Module kombinieren und ein eigenes Klangsystem aufbauen.
-- HiFi-Selbstbau -> Komponenten auswählen und dein Setup selbst entwickeln.
-- Lautsprecherbau -> Gehäuse, Chassis und Weichen sinnvoll abstimmen.
-- Plattenspieler restaurieren -> Mechanik pflegen, justieren und wieder sauber spielen lassen.
-- Röhrenverstärker bauen -> Schaltung, Bauteile und Sicherheit im Blick behalten.
-- Synthesizer bauen -> Klangerzeugung verstehen und eigene Schaltungen ausprobieren.
-
-## Mega-Menü
-
-Zielvertrag 4.5 nachgezogen:
-- bis 10 direkte Zwischenbereiche / zwei Reihen sofort sichtbar;
-- `Mehr Kategorien` erst ab 11 / nötiger dritter Reihe;
-- aktueller V7.1-Stand 7/10/9/8/9/7/8/9 damit vollständig direkt sichtbar.
-
-## Local QA 1.50.673
+## QA
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.673_HOBBY_DEPOT_AUDIO_HIFI_HERO_TEXT_PILOT_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.674_HOBBY_DEPOT_AUDIO_HIFI_FULLBLEED_BEIGE_HERO_HARDPASS.zip`
 
 SHA-256:
-`802d16fd6df5ccdd133bb390ff7d1eb7992640eee9f43627b4e58aa0c15846ef`
+`c40e3271bc31c822aeb076f51880d8c2ef222f27ff31a05f29b4dcc0bf2f98e9`
 
 PASS:
-- Audio-Textvertrag 161 Wörter;
-- 7/7 individuelle Audio-Unterzeilen;
-- keine doppelte Audio-Unterzeile;
-- Audio-Prototypklasse real gerendert;
-- 901/901 Assets zu 1.50.672 byte-identisch;
-- AF-026 Release-Kette 7/7 PASS;
-- Fronttemplate ausgeführt PASS;
-- Contenttemplate ausgeführt PASS;
-- Dirty-Overlay 1.50.672 -> 1.50.673 PASS;
-- PHP 66/66;
-- ZIP-Test PASS;
-- Roundtrip 1034/1034 identisch.
+- PHP 69/69;
+- Release-Kette ohne aktive 1.50.673-Stale-Referenz;
+- aktive Profilklasse/Route/Templates 1.50.674 konsistent;
+- H1 im echten Renderer erhalten;
+- Claim/Pinsel erhalten;
+- kein Hero-Logo;
+- Beige exakt #f5f1e9 wie Header;
+- Audio-Scope über `hd-audio-hifi-prototype` begrenzt;
+- 901/901 Assets identisch;
+- ZIP-Test PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.673 über 1.50.672 installieren und ausschließlich Audio & HiFi prüfen: Hero-Breite/Weißraum, kurzer Hero-Satz, Langtext und die sieben Karten-Unterzeilen.**
+**1.50.674 über 1.50.673 installieren und ausschließlich Audio & HiFi im Frontend prüfen.**
