@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – C2.3-GESAMTPRÜFUNG ALLE 265 THEMEN, FAQ & BERATUNG VERBINDLICH
+**Nach Nutzernachtrag:** FAQ und Beratung grundsätzlich bei jedem konkreten Themen-Owner, Vergleiche bei eigenständigem Nutzen nahezu überall. Weitere Aspekte wie Kosten, Wartung, Pflege, häufige Fehler, Einbau, Notfälle, Organisation und Fragen für Anfänger/Erfahrene **individuell**, keine „alle Kategorien gleich“-Schablone. Nur grob eigenständiger Stoff für ca. drei bis fünf spätere Beiträge; **keine Artikelvorschläge oder Texte**. Es geht um alle 93 älteren und 172 neuen Seite3-Themen, zusammen 265, nicht um isolierte Erweiterung eines Teilbestandes.
+
+**Fachinventur `../KATEGORIEN/C23_265_THEMEN_EBENENPRUEFUNG_20261017.json`:** 265/265 Themen erfasst; 1.323 bereits importierte Alt- und C2.2-Artikelkategorien bleiben. Fehlende FAQ 93 (alte Themen); fehlende Beratung 93 alt + 127 neu (45 neue Themen haben bereits wirksame Beratung); Vergleich 91 alte, 172 neue sind schon befüllt. 67 individuelle weitere Kategorien vorgeschlagen; 47 unpassende/überlappende weitere Ideen verworfen. Insgesamt **471 nur konzeptionelle Ergänzungskandidaten**, nicht angelegt. 93 alte Beratungen und 91 Vergleiche sowie 127 neue Beratungen individuell sinnvoll benannt. Zwei alte Sicherheits-/Fluchtorganisationsthemen erhalten Vergleichsaspekte innerhalb der Beratung statt künstlicher eigener Vergleichskategorie. Qualität und 9/9 Fehlerfälle: `../KATEGORIEN/C23_471_FACHDELTA_QA_20261017.json`.
+
+**Darstellung:** Displayname darf sich aus Lesbarkeit/SEO vom kurzen Menülabel unterscheiden, ohne IDs/Slugs/URLs zu ändern. Beispiel WP-Seite3 141 bislang „PV, Kamera & Beleuchtung“, vorgeschlagene H1 „PV-Anlagen, Kameras und Außenbeleuchtung vor Vandalismus schützen“, Kurzlabel „PV, Kameras & Licht“, Begleittext erklärt betroffene Anlagen und Schutzproblem. Kein vorhandener Term wird stillschweigend umbenannt. Die bestehende Designplugin-Ausgabe ist technisch getrennt vom Kategorienwriter.
+
+**NEXT ACTION:** Die fachlich geprüften 471 Ergänzungen im einzigen vorhandenen Kategorieplugin als dritte ADD-only-Welle sicher abbilden, lokal mit positiven und negativen Fällen testen; WordPress-Schreibfreigabe separat. Kein erneuter 743-/472-Import und kein Artikelworkflow.
+
+---
+
+
+
 **Sprach-Nachkorrektur:** Die **91 Vergleichskategorien der alten Themenseiten sind inzwischen individuell nach konkreten Systemen/Produkten/Maßnahmen benannt**. Kein Standard-„Systeme & Lösungen vergleichen“ mehr. Die 91 technischen Vorschlagskennungen wurden mit genau diesen Namen neu berechnet und im `C23_475_ERGAENZUNGEN_GEBUNDENES_FACHDELTA_20261017.json` synchronisiert (Commit `46d61f2a530c0f59eab9ec9536286530a17f7f3f`). **475/475 weltweit verschiedene neue Namen, 475/475 einzigartige logische IDs**, kein WordPress-Write.
 
 
