@@ -1,0 +1,56 @@
+--- a/includes/class-pste-normal-metadata-path.php
++++ b/includes/class-pste-normal-metadata-path.php
+@@ -66,7 +66,15 @@
+         }
+         $base['portal_relevance']='PROVEN';
+ 
+-        // Only after relevance PASS may a family become assignment authority.
++        // WORKER 2: title evidence is independent of DataForSEO's research family.
++        // A failed or absent family must not prevent the same established title
++        // pipeline from validating the original wording. This alone never grants
++        // article type, category, plan slot, or publish permission.
++        $base=self::validatedTitleBeforeFamilyAssignment($base,$analysisRaw,$registry,$persistedTitle);
++
++        // WORKERS 3+4: family is one optional piece of category evidence.
++        // Only after relevance and the independent title check may a family
++        // influence the existing Fach/Journal/category route.
+         $probe=PSTE_Editorial_Topic_Normalizer::semanticProbe($analysisRaw);
+         $familyKey='';$family=[];$membership=[];$familyResolution=[];
+         $hint=(array)($relevance['family_hint']??[]);
+@@ -174,12 +182,8 @@
+             }
+         }
+         if(!$matchedFamily){
+-            // Four existing decisions, in order: a missing DataForSEO origin family
+-            // must not prevent worker 2 from finishing its independent title review.
+-            // This is TITLE evidence only; neither Fach/Journal nor category/type
+-            // nor a production slot is inferred. The normal production route still
+-            // needs all its existing verified decisions and signatures.
+-            $base=self::validatedTitleBeforeFamilyAssignment($base,$raw,$registry,$persistedTitle);
++            // The independent title worker has already run above, regardless of
++            // the research family's result. A miss is not a rejection decision.
+             // Generic additive extension point. The core miss is never evidence.
+             if(class_exists('PSTE_Article_Type_Extension_Router')){
+                 $extension=$verifiedCategory;
+--- a/includes/class-pste-portal-relevance-gate.php
++++ b/includes/class-pste-portal-relevance-gate.php
+@@ -17,6 +17,19 @@
+      */
+     public static function evaluateBeforeAssignment(string $raw,array $baseline,array $registry,string $preferredFamilyKey='',array $proof=[]): array {
+         $raw=self::clean($raw);$hintKey='';$hintName='';$hintMembership=[];$hintResolution=[];
++        // Worker 1 must run without first demanding a research-family match.
++        // The existing independent portal-context proof is sufficient; only
++        // genuinely unclear cases ask the former family-evidence fallback.
++        // Bound proofs keep the original family-aware verification unchanged.
++        if(!$proof){
++            $independent=self::evaluate($raw,'',$baseline);
++            if(!empty($independent['ok'])||($independent['status']??'')==='BLOCKED'){
++                $independent['decision_order']='PORTAL_RELEVANCE_FIRST';
++                $independent['family_hint']=['evidence_only'=>true,'family_key'=>'','family_name'=>'',
++                    'resolution'=>[],'membership'=>[],'assignment_authority'=>false];
++                return $independent;
++            }
++        }
+         $probe=PSTE_Editorial_Topic_Normalizer::semanticProbe($raw);
+         if($preferredFamilyKey!==''&&isset($registry['families'][$preferredFamilyKey])){
+             $hintMembership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$raw,$registry,$preferredFamilyKey);
