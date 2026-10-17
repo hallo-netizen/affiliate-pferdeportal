@@ -1,0 +1,266 @@
+{
+  "schema": "HAB_C22_GROBE_FACHDELTA_V1",
+  "date": "2026-10-17",
+  "scope": "EIGENTUMSSCHUTZ_KONZEPT",
+  "role": "FACHLICHER_ERGAENZUNGSENTWURF_NUR_GITHUB",
+  "base_source": "HAB_C22_V3_QUELLENUEBERNAHME_20261017.json",
+  "contract": {
+    "measure": "Sinnvolle eigenständige Kategorien unter konkreter Seite3; grobe Tragfähigkeit für mindestens ca. 3-5 spätere Einzelbeiträge; keine Einzelartikel, Texte oder Titel",
+    "faq": "Fragen zu jedem Thema grundsätzlich sinnvoll",
+    "advice": "Beratungsbedarf überall grundsätzlich vorhanden; eigene Kategorie wenn eigenständig tragfähig",
+    "compare": "Vergleiche dort mit eigenem Nutzen, im gültigen Vertrag je Thema vorgesehen",
+    "others": "Kosten, Wartung, Installation, Pflege, Fehlersuche etc. nur abhängig vom Sachverhalt",
+    "wp_levels": "Drei page Ebenen und darunter eine flache category Ebene",
+    "no_wordpress_write": true
+  },
+  "source_counts": {
+    "topics": 172,
+    "existing_categories": 566,
+    "faq_candidates": 172,
+    "comparison_candidates": 172,
+    "kept_optional_candidates": 103,
+    "discarded_optional_candidates": 63,
+    "protected_historic_terms": 285
+  },
+  "additional_proposals": [
+    {
+      "source_topic_index": 0,
+      "topic_wp_page3": "Ferienhaus-Kontrolle",
+      "name": "Notfallorganisation & Zuständigkeiten",
+      "independent_reader_value": "Unabhängig von Kontrollgängen: Kontaktketten, Vertretung und Entscheidungen im Ernstfall.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 1,
+      "topic_wp_page3": "Private Objektbewachung",
+      "name": "Kontrollberichte & Nachweise",
+      "independent_reader_value": "Leistung und Auswahl stehen bereits; Kontrolle der tatsächlichen Durchführung und nachvollziehbare Nachweise fehlen.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 11,
+      "topic_wp_page3": "Tresore",
+      "name": "Tresor & Versicherungsschutz",
+      "independent_reader_value": "Versicherungsanerkennung, Sicherheitsklasse und Nachweispflichten getrennt von der reinen Produktauswahl.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 13,
+      "topic_wp_page3": "Selbstschutzmittel",
+      "name": "Übung & sicherer Umgang",
+      "independent_reader_value": "Verantwortlicher Umgang und Grenzen der Anwendung über Auswahl und Recht hinaus.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 14,
+      "topic_wp_page3": "Hofladen-Diebstahlschutz",
+      "name": "Vorgehen nach Diebstahl im Hofladen",
+      "independent_reader_value": "Nach einem Vorfall sind Dokumentation, Schadensabwicklung und Wiederaufnahme des Geschäfts eigene Anliegen.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 18,
+      "topic_wp_page3": "Einbruchschutz für Vereins-Sporthallen",
+      "name": "Schlüssel- & Nutzerverwaltung in Vereinshallen",
+      "independent_reader_value": "Wechselnde Gruppen, Berechtigungen und Schlüsselrückgabe über allgemeinen Zugangsschutz hinaus.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 21,
+      "topic_wp_page3": "Heimspeicher-Brandschutz",
+      "name": "Heimspeicher regelmäßig kontrollieren",
+      "independent_reader_value": "Laufende Überprüfung statt Aufstellung, einmaliger Abnahme oder Prüfung nach Schaden.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 30,
+      "topic_wp_page3": "Brandschutzbekleidungen",
+      "name": "Brandschutzbekleidungen richtig einbauen",
+      "independent_reader_value": "Planung und fachgerechte Ausführung statt bloßer Materialwahl und Schadensbehandlung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 34,
+      "topic_wp_page3": "Brandschutz im Freizeitboot",
+      "name": "Brandschutz an Bord prüfen & warten",
+      "independent_reader_value": "Wiederkehrende Bereitschaft und Prüfung der Brandschutzausrüstung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 47,
+      "topic_wp_page3": "Heimnetzwerk und Router",
+      "name": "Router- & Heimnetzwerksicherheit",
+      "independent_reader_value": "Unbefugte Zugriffe und sichere Konfiguration statt allgemeinem Netzausfall.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 48,
+      "topic_wp_page3": "Smart-Home-Zentrale",
+      "name": "Smart-Home-Zugriffsrechte & Datenschutz",
+      "independent_reader_value": "Rechteverwaltung und sichere Fernzugriffe neben Störungsbehebung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 52,
+      "topic_wp_page3": "Durchlauferhitzer",
+      "name": "Warmwasserverbrauch & Betriebskosten",
+      "independent_reader_value": "Verbrauch und laufende Wirtschaftlichkeit statt Fehler und Reparatur.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 70,
+      "topic_wp_page3": "Schiebetorantrieb",
+      "name": "Schiebetorantrieb einbauen & nachrüsten",
+      "independent_reader_value": "Montage, bauliche Eignung und Nachrüstung statt Betrieb und Störung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 72,
+      "topic_wp_page3": "Zufahrtstor-Antrieb",
+      "name": "Zufahrtstor-Antrieb einbauen & nachrüsten",
+      "independent_reader_value": "Einbauplanung und sicherer Umbau statt Bedienung und Sensorfehler.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 75,
+      "topic_wp_page3": "Smarte Türsteuerung",
+      "name": "Berechtigungen & Nutzerverwaltung",
+      "independent_reader_value": "Mehrpersonennutzung und Zugriffsrechte getrennt von Vernetzung und Technikfehlern.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 93,
+      "topic_wp_page3": "Sportplatz vor Vandalismus schützen",
+      "name": "Beleuchtung & Überwachung am Sportplatz",
+      "independent_reader_value": "Präventive Sichtbarkeit und geeignete Überwachung zusätzlich zu Zaun und Inventarschutz.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 95,
+      "topic_wp_page3": "Bilgenwasser im Freizeitboot",
+      "name": "Soforthilfe bei Wassereinbruch an Bord",
+      "independent_reader_value": "Akute Abläufe und Prioritäten statt dauerhafter Pumpenwahl oder Lecksuche.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 101,
+      "topic_wp_page3": "Teichfolie",
+      "name": "Teichfolie verlegen & Randabschlüsse",
+      "independent_reader_value": "Erstverlegung und korrekte Abschlüsse statt Schäden und Reparatur.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 105,
+      "topic_wp_page3": "Dacheindeckung",
+      "name": "Dacheindeckung auswählen & planen",
+      "independent_reader_value": "Materialeignung, Dachform und langfristige Auswahl statt Schadensbeseitigung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 117,
+      "topic_wp_page3": "Rückstauklappen",
+      "name": "Rückstauklappen planen & einbauen",
+      "independent_reader_value": "Einbauort, Voraussetzungen und Umsetzung zusätzlich zu Typen und Wartung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 128,
+      "topic_wp_page3": "Überspannungsschutz im Wohnhaus",
+      "name": "Überspannungsschutz kontrollieren & erneuern",
+      "independent_reader_value": "Regelmäßige Funktionsfähigkeit und Austausch statt bloßer Erstinstallation.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 134,
+      "topic_wp_page3": "Gewächshaus bei Frost",
+      "name": "Gewächshausheizung & Energiekosten",
+      "independent_reader_value": "Wiederkehrender Energieaufwand und Wirtschaftlichkeit verschiedener Frostschutzlösungen.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 140,
+      "topic_wp_page3": "Wintergarten im Sommer",
+      "name": "Wintergarten-Kühlung: Aufwand & Energiekosten",
+      "independent_reader_value": "Betriebs- und Folgekosten verschiedener Kühlverfahren neben Komfort und Verschattung.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 141,
+      "topic_wp_page3": "Gartenbewässerung bei Trockenheit",
+      "name": "Gartenbewässerung warten & Fehler beheben",
+      "independent_reader_value": "Verstopfungen, Lecks und Instandhaltung über Wassersparen und Systemwahl hinaus.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 142,
+      "topic_wp_page3": "Fassadenverschattung",
+      "name": "Fassadenverschattung pflegen & reparieren",
+      "independent_reader_value": "Reinigung, Verschleiß und Austausch statt Materialauswahl und Montage.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    },
+    {
+      "source_topic_index": 153,
+      "topic_wp_page3": "Tiefgarage bei Starkregen",
+      "name": "Schutzanlagen der Tiefgarage prüfen",
+      "independent_reader_value": "Regelmäßige Bereitschaftsprüfung von Sperren, Alarm und Pumpen über die Notfallplanung hinaus.",
+      "depth_estimate": "GROB_PLAUSIBEL_3_BIS_5",
+      "decision": "KANDIDAT_KEINE_WP_AENDERUNG"
+    }
+  ],
+  "cost_candidates_for_extra_overlap_check": [
+    3,
+    6,
+    8,
+    9,
+    10,
+    17,
+    23,
+    24,
+    41,
+    67,
+    76,
+    106,
+    113,
+    120,
+    130
+  ],
+  "other_topics_reviewed_without_additional_clear_gap": 146,
+  "quality": {
+    "positive": "26 eindeutige Vorschlaege, je konkreter Themen-Owner und sachlicher Abgrenzungsgrund",
+    "negative": "Doppelter Vorschlag im selben Thema wurde im Test erkannt",
+    "limits": "Nur redaktionelle Grobeinschaetzung anhand aktueller Fachstruktur, weder Live-Abnahme noch Artikelpruefung",
+    "user_approval_required_for_writer": true
+  },
+  "excluded_actions": [
+    "Keine weiteren WP-Seitenebenen",
+    "Keine verschachtelten Kategorien",
+    "Keine WP-Kategorienanlage",
+    "Keine Artikelerstellung",
+    "Keine kostenpflichtigen SEO-Abfragen"
+  ]
+}
