@@ -169,8 +169,8 @@ REGEL:
 Kein neues Bildrelease ohne manuelle semantische Zuordnung aller sichtbaren Hero-/Kindmotive und lokale visuelle Simulation der realen Ausschnitte.
 
 
-## Aktuell erster Blocker
-**Kein lokaler Bild-/Mapping-Blocker mehr. Offen ist ausschließlich der Live-Readback des HRD-SCOPE13-Kandidaten für die 13 erlaubten Kategorien. Alle anderen Kategorien sind gesperrt.**
+## Historischer Blockerstand 2026-10-16
+Der damalige HRD-SCOPE13-Live-Readback ist durch die spätere 1.50.668/V7.1-Arbeit als operativer NEXT-ACTION-Stand überholt. Aktuellen Blocker ausschließlich aus `CURRENT_STATE.md` lesen.
 
 
 
@@ -247,3 +247,76 @@ NACHWEIS:
 
 OFFEN:
 Live-Readback ausschließlich der 13 Kategorien. Kein allgemeiner Bildumbau.
+
+
+---
+
+## HRD-071 – 1.50.664–1.50.667 als lokal PASS ausgegeben, live aber Mega-Menü/Text weiter falsch
+STATUS: **CONTAINED / 1.50.664–1.50.667 VERWORFEN**
+
+LIVE-BEFUND:
+- Mega-Menü saß zeitweise an falscher Headerposition;
+- sichtbare Kategorien/Unterkategorien waren unvollständig bzw. falsch begrenzt;
+- `Mehr Kategorien` verhielt sich nicht wie vereinbart;
+- Kategorietextdarstellung blieb trotz behauptetem Fix sichtbar falsch;
+- mehrere lokale PASS-Aussagen waren damit nicht ausreichend E2E belegt.
+
+URSACHE:
+Die lokale Prüfung bildete den realen WordPress-/Plugin-/CSS-/Datenpfad nicht vollständig ab. Teilweise wurden Layout- und Strukturprobleme synthetisch getrennt geprüft, obwohl sie live gemeinsam wirken.
+
+KORREKTUR:
+- 1.50.664–1.50.667 vollständig verworfen;
+- Neuaufbau vom sauberen 1.50.650-Grundstand;
+- Registry-/Fail-closed-Prinzip aus dem bewährten Hab-&-Bewahr-Fix übernommen;
+- echte Browserprüfung mit realem Plugin-HTML/CSS und mehreren Breiten als Pflicht.
+
+REGEL:
+Kein PASS/Uploadkandidat aus Teiltest oder synthetischer Geometrie. Real relevanter Pfad positiv und negativ simulieren.
+
+## HRD-072 – Rohe WordPress-Kinder statt zentraler Registry / letzte Kategorieebene und falsche Altseiten
+STATUS: **LOCAL CLOSED 1.50.668 / LIVE TEILWEISE BELEGT / V7.1-LIVE OFFEN**
+
+BEFUND:
+- Trainspotting konnte als alter/fremder WordPress-Knoten unter `Messen & Analysieren` auftauchen;
+- terminale `category`-Kinder unter Hobbys wurden durch reine Seitenabfragen nicht zuverlässig sichtbar;
+- Beispiel Ameisenhaltung: letzte Inhaltskategorieebene war zuvor nicht vollständig dargestellt;
+- thematisch unsichere Bildfallbacks konnten falsche Kartenmotive erzeugen.
+
+ROOT CAUSE:
+Design nutzte teilweise rohe WordPress-`get_pages()`-Kinder statt der zentralen HD-004-Registry als einzige Strukturwahrheit.
+
+FIX 1.50.668:
+- HD-004 Registry = einzige CORE-Strukturquelle;
+- Page- und Category-Kinder getrennt;
+- keine Geschwister-/Roh-WP-Ersatzkinder;
+- Registry fehlt bei vorhandener Revision → fail closed;
+- Weltbild-Zufallsfallback entfernt.
+
+POS/NEG:
+- absichtlich falsches Trainspotting unter Messen & Analysieren wird ausgeschlossen;
+- fehlende Registry erzeugt 0 erratene Kinder;
+- Ameisenhaltung zeigt live die terminale Content-Ebene.
+
+OFFEN:
+V7.1 ist noch nicht live synchronisiert; vollständiger Live-Readback folgt erst nach dem echten HD-001-Dry-Run und späterem Apply.
+
+## HRD-073 – 1.50.669 V7.1 neue Hub2 ohne freigegebene Bildpaare
+STATUS: **OPEN / RELEASE BLOCKED**
+
+LOKALER WIP:
+1.50.669 rendert die V7.1-Mega-/Registry-Struktur lokal korrekt.
+
+RELEASE-GATE:
+Exakt sechs Hero+Preview-Paare fehlen bzw. müssen ersetzt werden:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen;
+- Suchen & Finden;
+- Modellbau;
+- Holz & Natur.
+
+`Holz & Natur`:
+vorhandenes Holzwerkstatt-Motiv ist für Holz + Besenbinden + Korbflechten + Weidenflechten semantisch zu eng → REPLACE_REQUIRED.
+
+REGEL:
+Kein generischer Weltbild-Fallback. Kein 1.50.669-Release vor semantischer Sichtprüfung aller sechs Paare, finalem ZIP-Roundtrip und erneuter Browser-QA.
