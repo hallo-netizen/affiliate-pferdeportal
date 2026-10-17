@@ -1,0 +1,71 @@
+--- a/includes/class-pste-normal-reentry-coordinator.php
++++ b/includes/class-pste-normal-reentry-coordinator.php
+@@ -19,13 +19,25 @@
+         foreach(PSTE_Semantic_Review_Sandbox::automaticReentryEnvelopes($limit) as $row){
+             $sandboxId=(string)($row['sandbox_id']??'');$envelope=(array)($row['envelope']??[]);if($sandboxId===''||!$envelope)continue;$reentryChecked++;
+             $envelopeSha=(string)($row['envelope_sha256']??'');
+-            try{$result=PSTE_Repository::applySandboxReentryEnvelope($envelope,$envelopeSha);}
+-            catch(Throwable $e){$code=self::safeCode($e->getMessage());$reentryFailed++;$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'DB_APPLY'];PSTE_Semantic_Review_Sandbox::markNormalReentryFailed($sandboxId,$envelopeSha,$code);continue;}
++            try{
++                // A signed halt cannot be moved to a different worker before reentry.
++                // The current normal path still revalidates today's rules/structure.
++                if((string)($row['checkpoint_error_code']??'')!=='')throw new RuntimeException((string)$row['checkpoint_error_code']);
++                $result=PSTE_Repository::applySandboxReentryEnvelope($envelope,$envelopeSha);
++            }catch(Throwable $e){
++                $code=self::safeCode($e->getMessage());$reentryFailed++;
++                $reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'DB_APPLY'];
++                // An unwriteable/corrupt Sandbox record must not abort all later
++                // independent keywords. Retain its error for the next bounded run.
++                try{PSTE_Semantic_Review_Sandbox::markNormalReentryFailed($sandboxId,$envelopeSha,$code);}
++                catch(Throwable $markError){$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>self::safeCode($markError->getMessage()),'stage'=>'SANDBOX_FAIL_MARK_PENDING_REVIEW'];}
++                continue;
++            }
+             try{PSTE_Semantic_Review_Sandbox::markNormalReentryApplied($sandboxId,$envelopeSha,$result);$reentryApplied++;}
+             catch(Throwable $e){$code=self::safeCode($e->getMessage());$reentryFailed++;$reentryFailures[]=['sandbox_id'=>$sandboxId,'error_code'=>$code,'stage'=>'SANDBOX_MARK_PENDING_RETRY'];}
+         }
+         $remaining=PSTE_Semantic_Review_Sandbox::automaticReentryEnvelopes(1)!==[];
+-        return ['contract'=>'PSTE_PROVIDER_FREE_EXISTING_POTENTIAL_REENTRY_V1','status'=>'PASS','backlog'=>$backlog,'reentry_checked'=>$reentryChecked,'reentry_applied'=>$reentryApplied,'reentry_failed'=>$reentryFailed,'reentry_failures'=>$reentryFailures,'more_auto_reentry_remaining'=>$remaining,'provider_calls'=>0,'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
++        return ['contract'=>'PSTE_PROVIDER_FREE_EXISTING_POTENTIAL_REENTRY_V1','status'=>$reentryFailed>0?'PARTIAL_FAILURE':'PASS','backlog'=>$backlog,'reentry_checked'=>$reentryChecked,'reentry_applied'=>$reentryApplied,'reentry_failed'=>$reentryFailed,'reentry_failures'=>$reentryFailures,'more_auto_reentry_remaining'=>$remaining,'provider_calls'=>0,'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
+     }
+ 
+     /** Pure/read-only reentry preparation used by runtime and fixtures. @return array<string,mixed> */
+@@ -54,7 +66,8 @@
+             }
+             $reuse=self::processProviderFreeExistingPotentialBatch(25,true);
+             $report=['contract'=>'PSTE_SANDBOX_MAINTENANCE_RUN_V1','backlog'=>(array)($reuse['backlog']??[]),'reentry_checked'=>(int)($reuse['reentry_checked']??0),'reentry_applied'=>(int)($reuse['reentry_applied']??0),'reentry_failed'=>(int)($reuse['reentry_failed']??0),'reentry_failures'=>(array)($reuse['reentry_failures']??[]),'production_handoff_created_by_sandbox'=>false,'article_or_taxonomy_write_attempted_by_sandbox'=>false];
+-            if((string)($report['backlog']['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
++            if((string)($reuse['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_REENTRY_PARTIAL_FAILURE',$report);
++            elseif((string)($report['backlog']['status']??'')==='PARTIAL_FAILURE')PSTE_Sandbox_Maintenance_Health::recordFailure($trigger,'PSTE_SANDBOX_BACKLOG_PARTIAL_FAILURE',$report);
+             else PSTE_Sandbox_Maintenance_Health::recordSuccess($trigger,$report);
+         }catch(Throwable $e){
+             $code=self::safeCode($e->getMessage());
+--- a/includes/class-pste-semantic-review-sandbox.php
++++ b/includes/class-pste-semantic-review-sandbox.php
+@@ -824,7 +824,12 @@
+             PSTE_Sandbox_Record_Store::forEachRecord(static function(array $record,string $id) use(&$out,$limit): bool {
+                 if((string)($record['status']??'')!=='AUTO_REENTRY_ELIGIBLE')return true;
+                 $proposal=(array)($record['internal_proposal']??[]);$envelope=(array)($proposal['reentry_proposal']??[]);if(($envelope['contract']??'')!=='PSTE_SANDBOX_REENTRY_ENVELOPE_V1'||($envelope['status']??'')!=='AUTO_REENTRY_ELIGIBLE')return true;
+-                $out[]=['sandbox_id'=>$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope)];return count($out)<$limit;
++                $checkpointError='';
++                if(isset($record['sandbox_dataflow']['worker_checkpoint_sha256'])){
++                    try{PSTE_Sandbox_Record_Contract::verifyStoredRecordSelfConsistency($record);}
++                    catch(Throwable $e){$checkpointError='PSTE_SANDBOX_REENTRY_WORKER_CHECKPOINT_INVALID';}
++                }
++                $out[]=['sandbox_id'=>$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope),'checkpoint_error_code'=>$checkpointError];return count($out)<$limit;
+             });
+             return $out;
+         }
+@@ -832,7 +837,12 @@
+         $store=self::stored();
+         foreach((array)$store['records'] as $id=>$record){if(count($out)>=$limit)break;if(!is_array($record)||(string)($record['status']??'')!=='AUTO_REENTRY_ELIGIBLE')continue;
+             $proposal=(array)($record['internal_proposal']??[]);$envelope=(array)($proposal['reentry_proposal']??[]);if(($envelope['contract']??'')!=='PSTE_SANDBOX_REENTRY_ENVELOPE_V1'||($envelope['status']??'')!=='AUTO_REENTRY_ELIGIBLE')continue;
+-            $out[]=['sandbox_id'=>(string)$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope)];}
++            $checkpointError='';
++            if(isset($record['sandbox_dataflow']['worker_checkpoint_sha256'])){
++                try{PSTE_Sandbox_Record_Contract::verifyStoredRecordSelfConsistency($record);}
++                catch(Throwable $e){$checkpointError='PSTE_SANDBOX_REENTRY_WORKER_CHECKPOINT_INVALID';}
++            }
++            $out[]=['sandbox_id'=>(string)$id,'envelope'=>$envelope,'envelope_sha256'=>self::hash($envelope),'checkpoint_error_code'=>$checkpointError];}
+         return $out;
+     }
+ 
