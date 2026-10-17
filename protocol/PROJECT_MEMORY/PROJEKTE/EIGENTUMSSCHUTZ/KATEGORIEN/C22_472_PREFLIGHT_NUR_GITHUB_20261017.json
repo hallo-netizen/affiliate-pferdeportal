@@ -1,0 +1,293 @@
+{
+  "name": "Hab & Bewahr C2.2 Bestandschutz & 472er Read-only Vorprüfung",
+  "date": "2026-10-17",
+  "scope": "EIGENTUMSSCHUTZ_KATEGORIEN",
+  "status": "READ_ONLY_PREFLIGHT_PASS__LIVE_WORDPRESS_BLOCKED",
+  "purpose": "Mechanische Freigabesicherheit und grober Kategorie-Abgleich; keine Artikel, keine neue Architektur, keine WordPress-Schreibvorgänge",
+  "source_github": {
+    "branch": "hobbyroom/project-memory-campus-v1-20260905",
+    "source_path": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/HAB_C22_V3_QUELLENUEBERNAHME_20261017.json",
+    "source_blob_sha": "2936ed064c7a308a4f02f07599cee0aa7aae8cb7",
+    "proposal_path": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json",
+    "proposal_blob_sha": "4e0623370c0c0af25ff12e1ae30298d52b7d6e7d"
+  },
+  "verified_source": {
+    "theme_pages": 172,
+    "imported_categories_on_paper": 566,
+    "protected_legacy_categories": 285,
+    "protected_historical_article_term_links": 4,
+    "category_add_candidates": 472,
+    "groups": {
+      "FAQ": 172,
+      "VERGLEICH": 172,
+      "OPTIONAL": 102,
+      "NEUER_BEREICH": 26
+    },
+    "zero_exact_owner_name_duplicates": true
+  },
+  "preflight_qa": {
+    "positive_errors": [],
+    "negative_tests_count": 12,
+    "negative_all_blocked": true,
+    "negative_tests": [
+      {
+        "name": "EXISTING_CATEGORY_LOST",
+        "correctly_blocked": true,
+        "causes": [
+          "SOURCE_172_566_NOT_INTACT",
+          "EXISTING_566_CHANGED"
+        ]
+      },
+      {
+        "name": "LEGACY_ID_CHANGED",
+        "correctly_blocked": true,
+        "causes": [
+          "LEGACY_IDENTITIES_CHANGED"
+        ]
+      },
+      {
+        "name": "LEGACY_URL_CHANGED",
+        "correctly_blocked": true,
+        "causes": [
+          "LEGACY_IDENTITIES_CHANGED"
+        ]
+      },
+      {
+        "name": "LEGACY_POST_BINDING_LOST",
+        "correctly_blocked": true,
+        "causes": [
+          "LEGACY_IDENTITIES_CHANGED"
+        ]
+      },
+      {
+        "name": "PROPOSAL_REMOVED",
+        "correctly_blocked": true,
+        "causes": [
+          "COUNT_472",
+          "KIND_COUNT_WRONG"
+        ]
+      },
+      {
+        "name": "PROPOSAL_DOUBLED",
+        "correctly_blocked": true,
+        "causes": [
+          "COUNT_472",
+          "CATEGORY_NAME_DUPLICATE_IN_OWNER",
+          "KIND_COUNT_WRONG"
+        ]
+      },
+      {
+        "name": "OWNER_CHANGED",
+        "correctly_blocked": true,
+        "causes": [
+          "OWNER_PATH_INVALID"
+        ]
+      },
+      {
+        "name": "CATEGORY_NESTED",
+        "correctly_blocked": true,
+        "causes": [
+          "PROPOSAL_TYPE_OR_WRITE_INVALID"
+        ]
+      },
+      {
+        "name": "FAKE_WP_ID",
+        "correctly_blocked": true,
+        "causes": [
+          "PROPOSAL_TYPE_OR_WRITE_INVALID"
+        ]
+      },
+      {
+        "name": "PAGE4",
+        "correctly_blocked": true,
+        "causes": [
+          "EXISTING_566_CHANGED",
+          "INVALID_CATEGORY_DEPTH"
+        ]
+      },
+      {
+        "name": "WRITER_ACTIVATED",
+        "correctly_blocked": true,
+        "causes": [
+          "PROPOSAL_TYPE_OR_WRITE_INVALID"
+        ]
+      },
+      {
+        "name": "RULE_DISABLED",
+        "correctly_blocked": true,
+        "causes": [
+          "UNAUTHORISED_WRITE_RULE"
+        ]
+      }
+    ],
+    "source_protection_comparison": "V3-Original IDs, Slugs, URLs, Post-Term-Bindungen und alle 566 Bestandskategorien mit GitHub-Source-Baseline abgeglichen"
+  },
+  "semantic_warnings": {
+    "lexical_overlaps": 16,
+    "interpretation": "Alle Ähnlichkeiten sind nur Hinweise; themenbezogener Mehrwert und spätere 3–5-Artikel-Möglichkeit grob beurteilen, nicht nach Textähnlichkeit Kategorien löschen.",
+    "warnings": [
+      {
+        "world": "Einbruch & Diebstahl",
+        "area": "Freizeit & Fahrzeuge",
+        "subject": "Felgendiebstahl",
+        "new": "Felgenschlösser und Radsicherung vergleichen",
+        "old": "Radsicherung",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Feuer & Gase",
+        "area": "Rauch & Brand",
+        "subject": "Rauchmelder",
+        "new": "Rauchmelder: Häufige Fragen",
+        "old": "Rauchmelder vernetzen",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Feuer & Gase",
+        "area": "Rauch & Brand",
+        "subject": "Rauchmelder",
+        "new": "Rauchmelder: Häufige Fragen",
+        "old": "Rauchmelder für Sonderräume",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Feuer & Gase",
+        "area": "Rauch & Brand",
+        "subject": "Rauchmelder",
+        "new": "Rauchmelder: Häufige Fragen",
+        "old": "Rauchmelder im Mehrfamilienhaus",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Technik & Ausfälle",
+        "area": "Pumpen & Haustechnik",
+        "subject": "Brunnenpumpe",
+        "new": "Brunnenpumpe: Häufige Fragen",
+        "old": "Brunnenpumpe auswählen",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Technik & Ausfälle",
+        "area": "Pumpen & Haustechnik",
+        "subject": "Brunnenpumpe",
+        "new": "Brunnenpumpe: Kosten & Aufwand",
+        "old": "Brunnenpumpe auswählen",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Technik & Ausfälle",
+        "area": "Pumpen & Haustechnik",
+        "subject": "Poolfilterpumpe",
+        "new": "Poolfilterpumpe: Häufige Fragen",
+        "old": "Störungen der Poolfilterpumpe",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Technik & Ausfälle",
+        "area": "Pumpen & Haustechnik",
+        "subject": "Poolfilterpumpe",
+        "new": "Poolfilterpumpe: Kosten & Aufwand",
+        "old": "Störungen der Poolfilterpumpe",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Technik & Ausfälle",
+        "area": "PV, Speicher & private Ladeinfrastruktur",
+        "subject": "Balkonkraftwerk",
+        "new": "Balkonkraftwerk: Häufige Fragen",
+        "old": "Balkonkraftwerk-Störungen",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wasser & Feuchtigkeit",
+        "area": "Leckage & Rohrbruch",
+        "subject": "Wassermelder",
+        "new": "Wassermelder: Häufige Fragen",
+        "old": "Wassermelder und Absperrventile",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wasser & Feuchtigkeit",
+        "area": "Leckage & Rohrbruch",
+        "subject": "Wassermelder",
+        "new": "Wassermelder: Kosten & Aufwand",
+        "old": "Wassermelder und Absperrventile",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wasser & Feuchtigkeit",
+        "area": "Leckage & Rohrbruch",
+        "subject": "Dusche undicht",
+        "new": "Duschabdichtungen und Reparatur vergleichen",
+        "old": "Reparatur & Kosten",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wetter & Naturgefahren",
+        "area": "Frost & Schnee",
+        "subject": "Hecken bei Frost",
+        "new": "Hecken bei Frost: Häufige Fragen",
+        "old": "Hecken gegen Frost schützen",
+        "lexical_overlap": 0.67,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wetter & Naturgefahren",
+        "area": "Frost & Schnee",
+        "subject": "Sträucher bei Frost",
+        "new": "Strauch-Winterschutz vergleichen",
+        "old": "Winterschutz",
+        "lexical_overlap": 0.5,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wetter & Naturgefahren",
+        "area": "Starkregen & Hochwasser",
+        "subject": "Tiefgarage bei Starkregen",
+        "new": "Tiefgarage bei Starkregen: Häufige Fragen",
+        "old": "Starkregen in Tiefgarage: Notfall",
+        "lexical_overlap": 0.67,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      },
+      {
+        "world": "Wetter & Naturgefahren",
+        "area": "Starkregen & Hochwasser",
+        "subject": "Tiefgarage bei Starkregen",
+        "new": "Tiefgarage bei Starkregen: Kosten & Aufwand",
+        "old": "Starkregen in Tiefgarage: Notfall",
+        "lexical_overlap": 0.67,
+        "interpretation": "NUR_AEHNLICHKEIT__NICHT_AUTOMATISCH_DOPPELT"
+      }
+    ]
+  },
+  "live_preflight": {
+    "accessible_now": false,
+    "attempted_sources": [
+      "Öffentliche WP-REST-Leseoberfläche hab-und-bewahr.de/wp-json/wp/v2",
+      "WordPress-Website"
+    ],
+    "reliable_current_readback_received": false,
+    "missing": "Aktuelle aktive Kategorieplugin-Revision, reale WordPress-Seiten-IDs und 566 Kategorie-Term-IDs, URL/Slug/Parent, Artikel-/Term-Zuordnungen, historische Altdaten",
+    "gate_result": "FAIL_CLOSED",
+    "not_a_live_wp_simulation": true,
+    "what_next": "Mit dem bestehenden Kategorieplugin aktuellen WP-Readback erfassen und dann erst reale 472er-ID-/Mapping-/Dubletten-Prüfung gegen Live-Daten; ohne frischen Readback kein Writer-Delta."
+  },
+  "release": {
+    "word_press_sync_permitted": false,
+    "plugin_upgrade_permitted": false,
+    "import_existing_743_again": false,
+    "requires_separate_approval": true
+  }
+}
