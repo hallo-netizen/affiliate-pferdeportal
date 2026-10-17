@@ -1,4 +1,17 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
+
+## 17.10.2026 – DESIGN UPDATE 0.1.26 FERTIG LOKAL GEPRÜFT – HAUPTKATEGORIEN
+**Aktuellste DESIGN-Current-Aussage (ältere 0.1.24-/0.1.25-NEXT-ACTION abgelöst):** Das bestehende Plugin **Hab & Bewahr – Design 0.1.26** im unveränderten Ordner `hab-bewahr-design-vorschau` ist als vollständige ZIP bereit, abgelegt in der Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.26_FERTIGE_HAUPTKATEGORIEN.zip`.
+
+**Behobene tatsächliche Mängel:** Bilder nach konkreten ersten Schutzbereichen statt zufälligem Namen/Fallback; 900px+ für alle geprüften Kachelbilder, keine zwei gleichen Foto-Dateien innerhalb derselben Hauptkategorie; thematisch eigenständige Hero-Bilder aus 0.1.24 erhalten; Kachelradius genau 2px; keine lose blaue „Magazin / Dienstleister“-Zeile; echte Magazin-Kachel (nur wenn URL vorhanden); Ratgeberbereich bleibt auch ohne veröffentlichte Beiträge sichtbar, dann echte weiterführende Themen-URLs statt vorgetäuschter Artikel; bei publizierten Posts werden echte Beiträge gezeigt. Keine gleichen Navigationsbilder unmittelbar nochmal als Ratgeber-Teaser; automatische Banner und verkaufbare Partneranzeigen bleiben getrennt, öffentlich nur bei Inhalt, leere Platzhalter nur für Administratoren. Footer „Design-Prototyp“-Hinweis entfernt. **Kein automatisches Veröffentlichen von Demo-Beiträgen durch Plugin-Aktivierung.** Browser-/CSS-Versionen auf 0.1.26 erhöht, damit Updates nicht altes CSS verwenden.
+
+**Prüfung:** 8/8 PHP-Dateien Syntax bestanden; 192 positive/negative PHP-Ausgabekombinationen über sechs Schutzwelten mit Admin/öffentlichem Benutzer, Banner, Partner und Beiträgen/Magazin; 12 browsergerenderte lokale Ansichten (6 Desktop mit 1440px, 6 Mobil mit 390px) samt Bildlade-/Breiten-/2px-Prüfungen bestanden; Archiv-Integrität bestanden. Bei der Bildprüfung wurden frühere 352–629px-Illustrationen entdeckt und als Kachelquellen ersetzt. **Keine Live-WordPress-Abnahme behaupten.** Der Dateibestand umfasst 44 WebP-Dateien (nicht alle sind Kategorie-Bilder). Das Testmuster nutzte den belegten R3-Fallback-Stand (31 Bereichskacheln); der aktuelle Live-C2.2-Baum muss nach Installation mit seinen zusätzlichen Bereichen real geprüft werden. Die Renderinglogik enthält eindeutige Fallbacks für neue IDs. Keine Kategorie-/Link-/WP-Daten geschrieben.
+
+**Genau eine DESIGN-NEXT ACTION:** In WordPress das **bestehende** Designplugin als Update mit ZIP 0.1.26 installieren und auf **allen sechs realen Hauptkategorieseiten** die Fotos (auch neue C2.2-Bereiche), Header, Ratgeber, Banner/Partner und Mobilansicht gegen tatsächlichen Frontend-HTML prüfen. Kein erneuter Kategorienimport durch das Designbüro.
+
+---
+
+
 <!-- new current section supersedes older design NEXT ACTIONs -->
 
 ## 17.10.2026 – DESIGNSCOPE: UPDATE 0.1.24 MIT SECHS EIGENSTÄNDIGEN HAUPTKATEGORIE-HEROS FERTIG
