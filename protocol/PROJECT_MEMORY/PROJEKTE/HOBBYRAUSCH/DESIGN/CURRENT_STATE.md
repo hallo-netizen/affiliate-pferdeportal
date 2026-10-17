@@ -2,79 +2,124 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-16
-STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 LIVE VERWORFEN / 1.50.668 REGISTRY-FUNDAMENT LOCAL HARD PASS / STRUKTUR-LIVEPASS ZUERST**
+STAND: 2026-10-17
+STATUS: **1.50.650 GRUNDBASIS / 1.50.664–1.50.667 VERWORFEN / 1.50.668 REGISTRY + MEGA-MENÜ + HUB2-TEXT + HERO→PREVIEW LOCAL HARD PASS / LIVE READBACK OFFEN**
 
 ## Belastbarer Grundstand
 
-Affiliate Portal Template Kit **1.50.650** bleibt die saubere technische Ausgangsbasis inklusive der bestätigten Bildreparaturen.
+Affiliate Portal Template Kit **1.50.650** bleibt die saubere Ausgangsbasis inklusive HRD-SCOPE13-Bildreparaturen.
 
-Die Zwischenstände **1.50.664, 1.50.665, 1.50.666 und 1.50.667 sind nicht freigegeben**:
-- Mega-Menü live falsch;
-- Kategorietext live nicht korrekt;
-- Strukturquelle im Design grundlegend falsch;
-- deshalb nicht weiterverwenden.
+Nicht verwenden:
+- 1.50.664;
+- 1.50.665;
+- 1.50.666;
+- 1.50.667.
 
 ## Gefundene Systemursache
 
-1.50.650 las Hobby-Unterseiten mit rohem WordPress-`get_pages()`.
-Folgen:
-- alte/fremde WordPress-Seiten konnten in Karten/Navigation erscheinen;
-- echte `category`-Kinder terminaler Hobbyseiten waren unsichtbar;
-- die zentrale HD-001/HD-004-Struktur wurde umgangen.
+Der alte Designstand las Struktur teilweise über rohe WordPress-`get_pages()`-Kinder.
+Dadurch:
+- konnten Altseiten wie Trainspotting an falschen Stellen erscheinen;
+- blieb die echte terminale `category`-Ebene unsichtbar;
+- wurde die zentrale HD-001/HD-004-Struktur umgangen.
 
-Zusätzlich existierte ein Weltbild-Fallback, der bei fehlendem exaktem Kartenbild ein thematisch fremdes Bild liefern konnte.
+Zusätzlich existierte ein thematisch unsicherer Weltbild-Fallback.
 
-## Registry-Fundament 1.50.668 – LOCAL HARD PASS
+Die Reparatur folgt dem bewährten Hab-&-Bewahr-0.1.20-Prinzip:
+**zentrale Struktur ist einzige Wahrheit; bei vorhandener Revision kein stiller WordPress-/Bundled-Fallback; keine Geschwister als Ersatz-Kinder.**
+
+## Kandidat 1.50.668 – LOCAL HARD PASS
 
 Artefakt:
-`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_FOUNDATION_LOCALPASS.zip`
+`/hobby rausch/releases/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.668_HOBBY_DEPOT_REGISTRY_NAV_TEXT_HEROPREVIEW_HARDPASS.zip`
 
 SHA-256:
-`0fb575aeddd19aac285188507d0753eaa554b558183d6686c2a900322c865a5a`
+`ee521c5f8b360c16d641e77507b94b64b93432da701e4760e7c4daa67d9440b6`
 
 QA:
-`/hobby rausch/releases/HOBBY_DEPOT_REGISTRY_FOUNDATION_150668_QA_20261016.json`
+- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_BROWSER_ACCEPTANCE.json`
+- `/hobby rausch/releases/HOBBY_DEPOT_1.50.668_FINAL_DIFF.json`
 
-Exaktes Delta zu 1.50.650:
-- 981 → 984 Dateien;
-- 3 neue versionsgebundene PHP-Dateien;
-- Hauptplugin geändert;
-- 0 Dateien entfernt;
-- 0 Bilddateien verändert;
-- PHP 58/58 PASS;
-- ZIP-Roundtrip 984/984 byte-identisch.
+## Struktur-/Renderer-Reparatur
+
+- HD-004 Registry = einzige CORE-Strukturquelle;
+- zentrale Revision vorhanden + Registry nicht bereit → fail closed;
+- keine rohen `get_pages()`-Kinder als Strukturwahrheit;
+- keine Geschwister-Ersatzlogik;
+- Page- und `category`-Kinder getrennt korrekt;
+- Ameisenhaltung zeigt exakt 7 terminale Inhaltskategorien;
+- absichtlich falsch physisch einsortiertes Trainspotting wird unter Messen & Analysieren ausgeschlossen;
+- V3-Spotting-Hub rendert Plane/Train/Ship/Car Spotting korrekt;
+- Weltbild-Zufallsfallback aus aktivem Renderer entfernt.
+
+Vollsimulation:
+- aktuelle 330er Live-Baseline: 0 Strukturabweichungen;
+- V3 mit 370 terminalen Hobbyseiten / 2160 Leafs: 0 Strukturabweichungen.
+
+## Mega-Menü
+
+- alle 8 Welten aus Registry;
+- >=761 px alle 8 Hauptwelten in einer Zeile;
+- zunächst grafisch gleichmäßig bis zu 5 direkte Gruppen;
+- genau eine zusätzliche Orientierungsebene;
+- max. 4 Links je sichtbarer Gruppe + `Alle Themen` falls nötig;
+- `Mehr Kategorien` klappt restliche Gruppen im selben Flyout auf;
+- kein Vollbaum / keine zusätzliche Verschachtelung;
+- Mobil eigenes sauberes Verhalten.
+
+## Hub2-Kategorietext
+
+Vertrag umgesetzt:
+- Hero: Schreibschrift-Claim + H1 + kurzer Einstieg;
+- längerer Text **unter** dem Hero;
+- sichtbarer Lead;
+- mittig `Mehr zu <Kategorie> erfahren`;
+- Rest im Aufklapper;
+- Öffnen verändert Hero-Höhe um 0 px;
+- >1100 px Text/Bild nebeneinander;
+- <=1100 px Text → Bild → langer Text darunter.
+
+## Hero → Kategorievorschau
+
+- 65/65 bestehende direkte Hub2-Previews aus dem jeweils aktuellen Hero neu abgeleitet;
+- Preview exakt 200×107;
+- 65 gemappte Hero-Dateien byte-identisch zum eingefrorenen Ausgangsstand;
+- keine unabhängige zweite Bildquelle.
+
+## Browser-Abnahme lokal
+
+Echter Headless-Browser mit realem Plugin-HTML/CSS:
+- 1920 / 1440 / 1101 / 1100 / 1024 / 768 / 761 / 760 / 390 geprüft;
+- alle 8 Mega-Menüs geprüft;
+- `Mehr Kategorien` positiv/negativ geprüft;
+- kein horizontaler Overflow;
+- 1101 = Desktop-Hero, 1100 = gestapelt;
+- 761 = Desktopnavigation mit 8 Welten, 760 = Mobilmenü;
+- Text-Aufklapper verändert Hero-Höhe um 0 px.
 
 Technik:
-- HD-004 Registry ist einzige CORE-Strukturquelle;
-- keine rohen `get_pages()`-Kinder mehr für Hobby-Navigation/Karten;
-- Page- und Category-Kinder getrennt korrekt;
-- letzte Ebene unter terminalen Hobbyseiten wird sichtbar;
-- tiefe Hub2-Ebene = Icon/Text statt Fotoflut;
-- Weltbild-Zufallsfallback entfernt;
-- auch Term-Kinder lesen Registry;
-- fehlt Registry: fail-closed, **kein stiller Rückfall auf 1.50.650**.
+- PHP 58/58 PASS;
+- ZIP PASS;
+- ZIP-Roundtrip 984/984;
+- 0 Dateien entfernt;
+- 0 Hero-Dateien verändert.
 
-## Positiv-/Negativsimulation
+## V3-Hinweis
 
-Synthetischer WordPress-Bestand enthält absichtlich falsches Trainspotting unter Messen & Analysieren.
+Der V3-Strukturkandidat ist **noch nicht live**.
+Er fügt fünf neue direkte Hub2-Bereiche hinzu:
+- Spotting & Verkehr;
+- Citizen Science;
+- Natur bestimmen;
+- Suchen & Finden;
+- Modellbau.
 
-PASS:
-- rohes WordPress sieht Trainspotting;
-- Registry-Renderer blendet es dort aus;
-- Messen & Analysieren = Bodenanalyse / Elektrochemie als Hobby / Spektroskopie / Wasseranalyse;
-- Ameisenhaltung = 7 echte Inhaltskategorien;
-- Spotting & Verkehr = Car / Plane / Ship / Trainspotting;
-- 0 Fotokarten auf der tiefen Ebene;
-- fehlende Registry → 0 erratene Kinder.
+Bevor diese fünf neuen Hub2 live freigegeben werden, brauchen sie gemäß Bildvertrag jeweils eigenes geprüftes Hero + daraus abgeleitete Preview. Kein generisches Weltbild als stiller Fallback.
 
-Browser mit echtem Plugin-CSS:
-1440 / 1024 / 768 / 390 px PASS, 0 horizontaler Overflow.
+## PASS-GRENZE
 
-## Wichtig
-
-1.50.668 repariert bewusst **noch nicht** das gescheiterte Mega-Menü oder den Kategorietext. Erst Struktur-Livepass, dann Design Ebene für Ebene.
+**Kein Live-PASS ohne echten WordPress-Readback.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Zuerst V3-Struktur über HD-001 echten WordPress-Dry-Run und anschließend kontrollierten Sync/Readback freigeben. Danach HD-004 + 1.50.668 live als Fundament prüfen. Erst danach Mega-Menü und Kategorietext neu aufbauen.**
+**Zuerst HD-004 als Runtime-Registry live bereitstellen und danach 1.50.668 gegen die bestehende 330er Live-Baseline prüfen. V3-Struktur erst nach eigenem Dry-Run und nach Bildern für die fünf neuen Hub2 synchronisieren.**
