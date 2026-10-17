@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE ALTER SNAPSHOT / 1.14.12 REALER DRY-RUN BLOCKED / 1.14.13 WEGEN ADMIN-LAST VERWORFEN / 1.14.14 HARD SIM PASS / KEIN SYNC**
+STATUS: **LIVE ALTER SNAPSHOT / 1.14.12 REAL BLOCKED / 1.14.13 UND 1.14.14 VERWORFEN / 1.14.15 HARD E2E-SIM PASS / KEIN SYNC**
 
 ## Zielvertrag
 
@@ -17,14 +17,14 @@ Verbindlich für die unterste Hobby-Content-Ebene:
 - Vergleich & Kaufberatung wird bei jedem Hobby geprüft; eigener Leaf nur bei mindestens 3 eigenständigen Beratungs-/Vergleichsintents;
 - Ausrüstung/Kosten wird sinnvoll abgedeckt, ohne künstliche Doppelung;
 - Pflege, Wartung, Sicherheit, Fehler, Materialien, Methoden, Projekte, Orte, Lernen usw. nur, wenn sie fachlich zum Hobby passen, mindestens 3 eigenständige Intents tragen und keinen vorhandenen Bereich duplizieren;
-- Anfänger und Fortgeschrittene müssen beide einen sichtbaren, sinnvollen Pfad erhalten.
+- Anfänger und Fortgeschrittene müssen beide einen sichtbaren sinnvollen Pfad erhalten.
 
 ## Verbindlicher V7.1-Zielbaum
 
 Fachlich unverändert:
 - 3517 logische Zielknoten;
 - 3487 physische Zielobjekte;
-- 862 aufgelöste Hobbyidentitäten;
+- 862 Hobbyidentitäten;
 - 383 CORE-Identitäten;
 - 381 terminale Hobbyseiten;
 - 2995 sichtbare CORE-Content-Kategorien;
@@ -36,111 +36,99 @@ Fachlich unverändert:
 - pro Hobby 6–10 sichtbare Content-Leafs;
 - jeder Leaf mindestens 3 eigenständige Beitragsintentionen.
 
-## Reales WordPress-Ergebnis 1.14.12
+## Reale Ausgangslage
 
-Vom Nutzer ausgeführt:
+1.14.12 wurde real ausgeführt:
 - BLOCKED;
-- Zielobjekte 2642;
+- 2642 Zielobjekte;
 - CREATE 279;
 - ADOPT 4;
 - UPDATE 2357;
 - ARCHIVE 0;
-- kein Apply/Sync.
+- kein Apply/Sync;
+- Kollisionen Libellenbeobachtung und Nachtvogel-Beobachtung.
 
-Blocker:
-- Libellenbeobachtung;
-- Nachtvogel-Beobachtung.
+## Verworfen
 
-Beide Slugs existieren bereits und tragen noch ihre frühere Target-Bindung.
+### 1.14.13
+Verworfen, weil der normale Admin-Seitenaufruf einen vollständigen Frontend-/Struktur-Readback auslöste.
 
-## Nachprüfung 1.14.13 – wichtiger neuer Befund
+### 1.14.14
+Der Admin-Seitenaufruf wurde entlastet, aber der **Dry-Run selbst** war weiterhin zu teuer.
 
-1.14.13 ist **verworfen**.
+Harte E2E-Simulation des vollständigen V7.1-Dry-Runs mit dem letzten 2357er Bestand plus den beiden real beobachteten Altbindungen:
+- Laufzeit lokal: **29.8 s**;
+- get_post_meta: **402892**;
+- get_term_meta: **11530381**;
+- Ursache: der komplette Livebestand wurde für jeden Zielknoten erneut indiziert und die komplette Knotentiefe bei jedem Sortiervergleich neu berechnet.
 
-Nicht wegen der Fachstruktur, sondern wegen eines von der lokalen Vorprüfung übersehenen Admin-Lastfehlers:
+Damit ist die Timeout-Ursache der 1.14.14 reproduziert. 1.14.14 ist verworfen.
 
-Beim bloßen Öffnen der Seite `Finaler Zielbaum` wurde jedes Mal der komplette Frontend-/Struktur-Readback ausgeführt.
-
-1:1-Simulation des echten Admin-Renderpfads mit V7.1:
-- 762 Seitenlesungen;
-- 1524 Seiten-Metalesungen;
-- 2995 Termlesungen;
-- 11980 Term-Metalesungen;
-- zusätzlich Navigation-/URL-Auflösung;
-- alles bereits beim normalen Seitenaufruf, ohne Klick auf Dry-Run.
-
-Das erklärt die vom Nutzer gemeldete extreme Backend-Langsamkeit und die Gateway-Timeout-Gefahr.
-
-Zusätzlich blieb der gespeicherte alte 1.14.12-Dry-Run sichtbar. Dadurch wurden weiterhin 2642 und die alten zwei Kollisionen angezeigt, obwohl dies kein neu ausgeführter 1.14.13-Nachweis war.
-
-## Korrigierter Kandidat 1.14.14
+## Einziger Kandidat 1.14.15
 
 Artefakt:
-`HD001_V1.14.14_HOBBY_DEPOT_V7_1_BACKEND_LOAD_FIX_HARDPASS.zip`
+`HD001_V1.14.15_HOBBY_DEPOT_V7_1_DRYRUN_TIMEOUT_FIX_HARDPASS.zip`
 
 SHA-256:
-`fdcca9282b0edcb5e0bb557b9f1fc5ec6cfc3c127afb40b6dc531340f653642a`
+`29289c8ef70469d036be42b1d3ce3401a57a15f298201d099263bba9d61f4165`
 
 V7.1-Profil unverändert:
-SHA-256:
 `23c707b38f1892703f959c5374b736c7b85fa4db56023a22e987debdc215911f`
 
-Korrektur:
-- normaler Admin-Seitenaufruf führt keinen Voll-Readback mehr aus;
-- bereits beim Sync gespeicherter Readback wird nur wiederverwendet;
-- alter gespeicherter Dry-Run einer früheren Pluginversion wird nicht mehr als aktuelles Ergebnis angezeigt;
-- Final-Dry-Run bleibt hart an V7.1 gebunden;
-- Legacy-Bindungen für die 51 Proposal-Hobbyseiten bleiben erhalten;
-- keine Fachstruktur, kein Navigationsmodell und keine Architektur geändert.
+Änderung ausschließlich Performance:
+- Live-Bestand wird einmal indiziert statt tausendfach neu;
+- Knotentiefe wird einmal berechnet statt bei jedem Sortiervergleich;
+- gespeicherter Dry-Run enthält nicht mehr zusätzlich das komplette Zielprofil;
+- Admin-Lastfix und Legacy-Reuse aus 1.14.14 bleiben erhalten;
+- keine Kategorie, kein Leaf, keine Navigation und keine Architektur geändert.
 
-## Harte Simulation 1.14.14
+## Harte E2E-Simulation 1.14.15
 
-Admin-Aufruf mit altem 2642er gespeicherten Ergebnis:
-- Seitenlesungen 0;
-- Seiten-Metalesungen 0;
-- Termlesungen 0;
-- Term-Metalesungen 0;
-- alter 2642er Ergebnisblock wird nicht als aktueller Dry-Run angezeigt;
-- stattdessen Hinweis: alter Prüflauf, neu ausführen.
-
-Kompletter V7.1-Dry-Run gegen den letzten vollständig synchronisierten 2357er Bestand plus die beiden real beobachteten alten Target-Seiten:
-- PASS;
+Gleiche Ausgangsdaten wie bei 1.14.14:
+- Laufzeit lokal: **1.11 s** statt 29.8 s;
+- get_post_meta: **6310** statt 402892;
+- get_term_meta: **29115** statt 11530381;
 - 3517 logisch;
 - 3487 physisch;
-- 862 Entities;
-- 383 CORE;
 - CREATE 1126;
 - ADOPT 3;
 - UPDATE 2358;
 - ARCHIVE 1;
 - Errors 0;
-- Libellenbeobachtung = vorhandene Altseite wird UPDATE/reuse;
-- Nachtvogel-Beobachtung = vorhandene Altseite wird UPDATE/reuse;
-- Trainspotting / Modellraketen / Pflanzenbestimmung = ADOPT.
+- Libellenbeobachtung: vorhandene Altseite wird korrekt weiterverwendet;
+- Nachtvogel-Beobachtung: vorhandene Altseite wird korrekt weiterverwendet;
+- Trainspotting / Modellraketen / Pflanzenbestimmung: ADOPT.
 
-Negativ:
-- wirklich fremd gebundener gleicher Slug = BLOCKED;
-- doppelte Legacy-Target-Bindung = BLOCKED.
+Negativtests:
+- fremd gebundener gleicher Slug: BLOCKED;
+- doppelte Legacy-Target-Bindung: BLOCKED.
 
-PHP 33/33 PASS.
-ZIP-Roundtrip 44/44 PASS.
+Admin-Aufruf:
+- alter 2642er Prüflauf wird nicht als aktueller Nachweis angezeigt;
+- keine Seiten-/Term-Vollprüfung beim bloßen Aufruf.
+
+Technik:
+- PHP 33/33 PASS;
+- ZIP 47/47 PASS;
+- Provider Calls 0;
+- Dry-Run 0 WordPress-Strukturwrites;
+- kein automatischer Apply/Sync.
 
 ## Navigation
 
-Keine neue Navigationsidee und kein Architekturumbau.
+Keine neue Navigationsidee und kein Umbau.
 
-Live bleibt weiterhin der alte aktive Snapshot. Deshalb kann die neue V7.1-Navigation noch nicht vollständig sichtbar sein. Der Renderer-/Mega-Menü-Stand bleibt separat unverändert; zuerst muss der V7.1-Dry-Run sauber sein und danach der ausdrücklich bestätigte Sync erfolgen.
+Live zeigt weiterhin den alten aktiven Snapshot. Die V7.1-Navigation wird erst nach einem sauberen echten Dry-Run und anschließend ausdrücklich bestätigtem Sync aktiv.
 
 ## ERSTER OFFENER BLOCKER
 
-**Echter WordPress-V7.1-Dry-Run mit 1.14.14 fehlt.**
+**Echter WordPress-V7.1-Dry-Run mit 1.14.15 fehlt.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-001 1.14.14 über die aktuell installierte Fassung installieren, Seite `Finaler Zielbaum` neu öffnen und ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
+**1.14.15 über die aktuell installierte Fassung installieren und ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
 
 Abnahme:
-- Backend-Seite muss ohne den bisherigen Voll-Readback laden;
-- alter 2642er Prüflauf darf nicht als aktuelles Ergebnis erscheinen;
-- neuer Dry-Run muss 3487 Zielobjekte verwenden;
-- Libellenbeobachtung und Nachtvogel-Beobachtung dürfen nicht mehr als LIVE_COLLISION erscheinen.
+- neuer Dry-Run nutzt 3487 Zielobjekte;
+- keine LIVE_COLLISION bei Libellenbeobachtung/Nachtvogel-Beobachtung;
+- kein Gateway Timeout.
