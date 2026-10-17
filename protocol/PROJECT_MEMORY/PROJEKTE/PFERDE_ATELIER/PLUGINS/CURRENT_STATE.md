@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-09-16
+STAND: 2026-10-17 (SEO-Nachtrag; ältere Fachstände nicht neu geprüft)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
@@ -32,9 +32,9 @@ Andere bereits synchronisierte Pluginstände und bestehende Inventarlücken steh
 
 `PPA-013` war eine irrtümlich angelegte zweite ID für `Pferde Atelier Design`. Kanonische ID ist `PPA-002`. Die alte PPA-013-Kopie wurde aus dem aktiven Plugin-Schrank entfernt und unter `/Campus-Plugins/PFERDE_ATELIER/ARCHIV/PPA-013` abgelegt. Sie ist **nicht CURRENT**.
 
-## OFFENE INVENTARLÜCKEN – NICHT CHAT-AKTIV
+## OFFENE INVENTARLÜCKEN
 
-PPA-006, PPA-008 und PPA-009 bleiben als bestehende Artefakt-/Versionsbindungsfragen im Register sichtbar. Sie sind nicht der aktive Arbeitsauftrag dieses Chats.
+PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute als SEO-Plugin-Arbeit betroffen; **kein neuer kanonischer Release belegt**. PPA-008 und PPA-009: offene Inventarlücken, nicht Gegenstand dieser SEO-Arbeit.
 
 ## SEO-PLUGINSTATUS / BELASTBARE GRENZE – 17.10.2026
 
