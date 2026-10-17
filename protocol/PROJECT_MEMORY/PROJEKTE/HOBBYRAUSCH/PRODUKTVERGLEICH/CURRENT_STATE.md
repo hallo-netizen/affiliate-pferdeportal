@@ -3,85 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **KONZEPT AKTIV / 10ER-PILOT KALIBRIERT / MASSENAUSROLLUNG NOCH NICHT FREIGEGEBEN**
+STATUS: **KONZEPT AKTIV / 10ER-PILOT KALIBRIERT / V7.1 AUF 381/381 HOBBYS LOKAL AUSGEROLLT / LIVE NOCH NICHT SYNCHRONISIERT**
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PRODUKTVERGLEICH`.
 
-## Grundprinzip
+## Verbindliche Regel
 
-Hobby Depot ist ein Affiliate-Portal. Deshalb wird für **jeden HOBBY_HUB** verpflichtend geprüft, ob echte Kauf-/Vergleichsintentionen existieren.
+Für jeden HOBBY_HUB wird Kauf-/Vergleichsbedarf geprüft.
 
-Es gibt zwei unterschiedliche Vergleichstypen:
+Zwei Vergleichstypen:
+1. Produktgruppen-/Lösungsvergleich;
+2. konkrete Produkt-/Modellvergleiche.
 
-1. **Produktgruppen-/Lösungsvergleich**
-   - Welche Produktgruppe eignet sich für Einsatz X?
-   - System A oder B?
-   - günstig vs. hochwertig;
-   - Anfänger vs. Fortgeschrittene;
-   - Variante/Technik A vs. B.
+Ein eigener sichtbarer Leaf `Vergleich & Kaufberatung` existiert nur bei mindestens **3 eigenständigen Vergleichs-/Beratungsintents**.
 
-2. **Konkreter Produkt-/Modellvergleich**
-   - konkrete Geräte/Modelle/Marken gegeneinander;
-   - objektive Merkmale;
-   - Einsatzbereiche;
-   - Preis-/Leistungs- und Eignungsunterschiede.
-
-## Strukturregel
-
-`Vergleich & Kaufberatung` wird als eigener sichtbarer Content-Leaf angelegt, wenn mindestens **3 eigenständige Vergleichs-/Beratungsintents** existieren.
-
-Wenn weniger als 3 eigenständige Intents existieren:
+Bei weniger als 3:
 - keine künstliche Kategorie;
-- Vergleichs-/Beratungsthemen leben in `Ausrüstung & Kosten` oder einem passenden Fachleaf.
+- Themen liegen in `Ausrüstung & Kosten` oder einem passenden Fachleaf.
 
-Keine Doppelowner:
-- technische Methodenvergleiche können z. B. bei `Techniken & Praxis` liegen;
-- Produkt-/Kaufentscheidung gehört zu `Vergleich & Kaufberatung`.
+Kein Doppelowner:
+- Methodenvergleich kann im Fachleaf liegen;
+- Kauf-/Produktauswahl gehört zu `Vergleich & Kaufberatung`.
 
-## Verbindlicher 10er-Pilot
+## Kalibrierung und Rollout
 
-Bei allen 10 Pilot-Hobbys sind mindestens 3 eigenständige Kauf-/Vergleichsintents vorhanden:
+Der 10er-Pilot wurde fachlich kalibriert:
+Buchbinden · Balance Board · Glasmalerei · Lasergravieren · Fledermausbeobachtung · Hydrokultur · Riffaquaristik · Briefmarken sammeln · Geocaching · Imkerei.
 
-- Buchbinden;
-- Balance Board;
-- Glasmalerei;
-- Lasergravieren;
-- Fledermausbeobachtung;
-- Hydrokultur;
-- Riffaquaristik;
-- Briefmarken sammeln;
-- Geocaching;
-- Imkerei.
+Danach wurde dieselbe Regel lokal auf den vollständigen V7.1-CORE-Bestand angewandt.
 
-Damit ist `Vergleich & Kaufberatung` für diese 10 als eigener Leaf fachlich PASS.
+Aktueller lokaler V7.1-Befund:
+- 381/381 terminale Hobbyseiten geprüft;
+- 381/381 besitzen dokumentierte >=3 Beratungs-/Vergleichsintents;
+- 381/381 besitzen deshalb im aktuellen V7.1-Kandidaten `Vergleich & Kaufberatung`;
+- vorhandene gute Ausrüstungs-/Fachleafs wurden nicht durch Standardschema dupliziert;
+- konkrete Produkte erzeugen niemals selbst die Kategorie.
 
-Beispiele:
-- Buchbinden: Set vs. Einzelwerkzeuge / Pressen / Schneidwerkzeuge;
-- Balance Board: Boardtypen / Anfänger-vs.-Fortgeschritten / Materialien;
-- Lasergravieren: Diode vs. CO2 vs. Faser / Leistungsklassen / Zubehör;
-- Riffaquaristik: Beleuchtung / Abschäumer / Strömungspumpen;
-- Imkerei: Beutensysteme / Schleudern / Schutzkleidung.
+Struktur-/Live-Wahrheit bleibt bei:
+`../SEO_KATEGORIEN/CURRENT_STATE.md`.
 
 ## Affiliate-Bindung
 
 Vergleichsartikel dürfen Affiliate-Produkte enthalten, aber:
+- Nutzerintent entscheidet;
 - Produktverfügbarkeit erzeugt keine Kategorie;
-- fachlicher Nutzerintent entscheidet;
-- konkrete Produkte werden regelmäßig aktualisiert;
-- Produktgruppenvergleich und konkrete Produktvergleiche bleiben redaktionell sauber unterscheidbar.
+- konkrete Produktdaten müssen aktualisierbar bleiben;
+- Produktgruppenvergleich und konkrete Produktvergleiche bleiben redaktionell unterscheidbar.
 
-## PASS-Grenze
+## ERSTER OFFENER BLOCKER
 
-Kein Massenausrollen eines Vergleichs-Leafs nur wegen des Standardschemas.
-
-Pro Hobby:
-- mindestens 3 echte Intents;
-- klare Abgrenzung zu Ausrüstung/Kosten und Fachleafs;
-- keine Kannibalisierung;
-- dann erst eigener Leaf.
+**V7.1 ist noch nicht live synchronisiert; echter WordPress-Dry-Run steht aus.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Nach dem 10er-Pilot dieselbe Vergleichs-/Kaufberatungsprüfung batchweise auf die restlichen HOBBY_HUBs anwenden; nur PASS-Hobbys erhalten den eigenen Leaf.**
+**Keine weitere Vergleichsstruktur bauen. Dem operativen V7.1-Dry-Run aus `../SEO_KATEGORIEN/CURRENT_STATE.md` folgen.**
