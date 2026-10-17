@@ -3,47 +3,33 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.668 / V7.1 FRONTEND SICHTBAR / 1.50.670 TARGETED DESIGN FIX LOCAL HARD PASS / LIVE-PRÜFUNG OFFEN**
+STATUS: **MEGA-MENÜ 1.50.670 GRUNDSATZ BLEIBT / 1.50.670 BILDTEIL VERWORFEN / 1.50.671 SHARP-MASTER-IMAGE-FIX LOCAL HARD PASS / LIVE-PRÜFUNG OFFEN**
 
-## Live-Wahrheit
+## Ausgangspunkt
 
-WordPress bestätigt weiterhin:
-`Affiliate Portal Template Kit 1.50.668` aktiv.
+Der letzte Frontend-Test zeigte:
+- Mega-Menü-Grundsatz aus 1.50.670 ist fachlich richtig: bis 10 echte Zwischenbereiche = zwei sichtbare Reihen, `Mehr Kategorien` erst oberhalb 10;
+- Bildteil 1.50.670 ist dagegen verworfen.
 
-Der aktuelle Frontend-Nachweis zeigt inzwischen die neue V7.1-Struktur:
-- terminale Content-Ebene bei Ameisenhaltung sichtbar;
-- Forschen enthält zusätzlich Spotting & Verkehr, Citizen Science und Natur bestimmen, aktuell aber erst nach `Mehr Kategorien`.
+Konkreter Fehler 1.50.670:
+- die neuen Hero-Dateien waren nur 600×320;
+- dadurch wurden sie auf großen/Retina-Displays sichtbar weich;
+- mehrere Motive waren zu eng bzw. wie vergrößerte Vorschau-Ausschnitte;
+- besonders Modellbau, Technik, Pflanzen sowie Sammeln;
+- Suchen & Finden / Werbung & Design / Werkzeuge & Geräte waren in der kleinen Darstellung nicht klar genug lesbar.
 
-Damit ist der frühere reine 330er-Anzeigezustand nicht mehr der aktuelle Frontend-Befund.
+## HARTE BILDREGEL AB 1.50.671
 
-## 1.50.670 – exakt begrenzter Arbeitsumfang
+- Hero = einziges Masterbild;
+- Mastergröße 1600×853;
+- Vorschau wird ausschließlich aus demselben Hero nach unten auf 600×320 gerechnet;
+- niemals Vorschau -> Hero hochskalieren;
+- keine Collagen;
+- klare vollständige Szene statt unlesbarem Makro-/Detailausschnitt.
 
-Basis:
-1.50.668 plus der bereits geprüfte 1.50.669-WIP-Renderergrundsatz:
-- echte Zwischenbereiche = Mega-Spalten;
-- direkte Hobbyseiten wie Heimwerken/Gärtnern = keine künstlichen Mega-Spalten;
-- Registry bleibt einzige Strukturquelle.
-
-### Mega-Menü
-
-Neue Darstellungsregel:
-- 5 Spalten;
-- bis zu 10 echte Zwischenbereiche sofort sichtbar = maximal zwei Reihen;
-- `Mehr Kategorien` erst ab dem 11. Bereich / einer nötigen dritten Reihe;
-- Unterkategorie-Schrift leicht vergrößert.
-
-V7.1 ergibt damit direkt sichtbar:
-Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 · Bewegen 8 · Sammeln 9.
-
-Bekannte direkte Hobbyseiten bleiben korrekt ausgeschlossen:
-- Heimwerken bei Fertigen;
-- Gärtnern bei Pflanzen.
-
-## Bild-Scope – HARD RULE
+## Exakter Scope 1.50.671
 
 **Keine anderen Kategorien anfassen.**
-
-Geändert wurden ausschließlich die vom Nutzer genannten 17 Bereiche:
 
 Fertigen:
 - Modellbau.
@@ -59,67 +45,76 @@ Forschen:
 
 Pflanzen:
 - Bonsai & Miniatur;
-- Orchideen & Exoten;
 - Zimmerpflanzen;
 - Hydroponik & Indoor.
 
+Unverändert:
+- Orchideen & Exoten.
+
 Tiere:
-- Aquaristik;
 - Terraristik.
 
-Sammeln:
+Unverändert:
+- Aquaristik.
+
+Sammeln – alle 9 aktuellen Zwischenbereiche:
 - Münzen & Geld;
 - Papier & Dokumente;
-- Werkzeuge & Geräte;
+- Technik & Medien;
+- Spielzeug & Spiele;
+- Naturfunde;
 - Werbung & Design;
+- Werkzeuge & Geräte;
+- Alltagsobjekte;
 - Suchen & Finden.
 
-Für jeden dieser 17 Bereiche:
-- eigenes Hero 600×320;
-- daraus abgeleitete Vorschau 200×107;
-- keine exakten Bildduplikate unter den 17 neuen Heroes;
-- keine Nahduplikate im lokalen Bildvergleich.
+Gestalten und alle nicht genannten Bereiche bleiben komplett unangetastet.
 
-**Holz & Natur wurde trotz früherem offenen Bildbrief ausdrücklich NICHT verändert**, weil es in der aktuellen Nutzerfreigabe nicht enthalten war.
+## Mega-Menü
 
-## Prüfung auf Bild-Rückfall durch 1.50.668
+Keine neue Änderung gegenüber 1.50.670:
+- 5 Spalten;
+- bis 10 Zwischenbereiche direkt = maximal zwei Reihen;
+- `Mehr Kategorien` erst ab 11;
+- Unterkategorie-Schrift leicht größer;
+- Heimwerken/Gärtnern bleiben direkte Hobbyseiten und keine künstlichen Mega-Spalten.
 
-Explizit geprüft:
-1.50.668 gegen 1.50.650 für die bisher problematischen vorhandenen Bilddateien und die zentrale Bildmap.
-
-Ergebnis:
-- 13/13 geprüfte Dateien byte-identisch;
-- 1.50.668 hat die falschen Bilder nicht neu zurückgespielt;
-- die problematischen Motive waren bereits vorher vorhanden und wurden lediglich unverändert mitgeführt.
-
-## Local QA 1.50.670
-
-PASS:
-- PHP 61/61;
-- echter PHP-Registry-Harness mit V7.1: 7/10/9/8/9/7/8/9;
-- sichtbares Limit = 10;
-- Heimwerken/Gärtnern korrekt nicht als Mega-Spalten;
-- vorhandene Browser-QA beweist, dass der bereits geprüfte 10er-expanded-Zustand bei 1920, 1440, 1180, 1024, 901, 900, 768 und 761 px ohne horizontalen Überlauf passt;
-- 17/17 Hero-Größen 600×320;
-- 17/17 Preview-Größen 200×107;
-- 17/17 Hero-Mappings exakt;
-- 0 exakte Bildduplikate;
-- 0 Nahduplikat-Paare im benannten Set;
-- Bildmap außerhalb dieser 17 Hero-Schlüssel unverändert;
-- Cards-Bildmap vollständig unverändert;
-- Paket-Roundtrip 1009/1009 Dateien byte-identisch;
-- ZIP-Test ohne Fehler.
+## 1.50.671 – Local QA
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.670_HOBBY_DEPOT_MEGA2ROWS_TARGETED_IMAGES_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.671_HOBBY_DEPOT_SHARP_MASTER_HERO_TARGETED_HARDPASS.zip`
 
 SHA-256:
-`9e21fd6c402fbb1a3358a58807db8b28a322a499d8478fbffb375fadbecc0408`
+`be1e2ed9d82ee290e3744fd23f2c882849e612f768a820868703c50a46c8a606`
+
+PASS:
+- 61/61 PHP;
+- 19/19 Hero-Master 1600×853;
+- 19/19 Vorschauen 600×320 aus den jeweiligen Masterbildern;
+- 0 exakte Hero-Duplikate;
+- 0 Collage-Dateien neu eingebaut;
+- Hero-Map nur an exakt diesen 19 Schlüsseln geändert;
+- Cards-Map vollständig unverändert;
+- Orchideen & Exoten byte-identisch;
+- Gestalten-Bildbestand byte-identisch;
+- Klassenlogik gegenüber 1.50.670 unverändert, nur Versionsbindung;
+- ZIP-Test PASS;
+- Roundtrip 1029/1029 byte-identisch.
+
+Interne visuelle Kontrolle:
+- Modellbau weiter herausgezoomt, vollständige Werkstatt-/Modellszene;
+- Computer & Retro weiter;
+- Audio & HiFi weiter;
+- Spotting/Citizen Science/Natur bestimmen als scharfe große Szenen;
+- Bonsai & Miniatur neue eigenständige Szene;
+- Zimmerpflanzen und Hydroponik nicht mehr derselbe Frau-/Gestik-/Hintergrund-Ausschnitt;
+- Terraristik scharfes eigenes Terrarium;
+- Sammeln komplett neue scharfe Master, inklusive deutlich weiterer Szenen für Werbung & Design, Werkzeuge & Geräte und Suchen & Finden.
 
 ## PASS-GRENZE
 
-Noch kein Live-PASS für 1.50.670.
+Noch kein Live-PASS für 1.50.671.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.670 über 1.50.668 installieren und im Frontend gezielt Forschen-Mega-Menü plus die ausdrücklich genannten Bildbereiche prüfen. Keine weiteren Kategorien ändern.**
+**1.50.671 installieren und im Frontend ausschließlich die genannten Bildbereiche prüfen. Mega-Menü-Grundsatz nicht erneut umbauen.**
