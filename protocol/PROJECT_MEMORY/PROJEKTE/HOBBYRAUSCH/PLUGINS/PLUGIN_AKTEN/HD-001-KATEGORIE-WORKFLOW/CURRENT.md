@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-16
-STATUS: **LIVE 1.14.8 UNVERÄNDERT / 1.14.9 V3-KANDIDAT LOCAL HARD PASS / WORDPRESS-DRY-RUN OFFEN**
+STAND: 2026-10-17
+STATUS: **LIVE 1.14.8 UNVERÄNDERT / 1.14.9 VERWORFEN (AUTO-BOOTSTRAP/TIMEOUT) / 1.14.10 MANUAL-ONLY LOCAL HARD PASS / WORDPRESS-DRY-RUN OFFEN**
 
 ## Produktiver Live-Stand
 
@@ -25,49 +25,53 @@ Live:
 - 8 Welten;
 - 330/330 Kategorie-Gate.
 
-## Updatekandidat 1.14.9
+## Verworfen: 1.14.9
+
+1.14.9 darf **nicht erneut installiert** werden.
+
+Gefundene Ursache des Gateway Timeout:
+- `APKW_TARGET_TREE_MANUAL_ONLY = false`;
+- nach Versionswechsel konnte der Runner bereits auf normalem WordPress-`init` den Final-Target-Workflow automatisch anstoßen;
+- dadurch konnte Installation/Aktivierung einen schweren Dry-Run/Sync-Pfad starten.
+
+## Sicherer Kandidat 1.14.10
 
 Artefakt:
-`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.9_HOBBY_DEPOT_V3_STRUCTURE_DRYRUN_LOCALPASS.zip`
+`/hobby rausch/KATEGORIE_ZENTRALE/HD001_V1.14.10_MANUAL_ONLY_TIMEOUT_FIX_LOCALPASS.zip`
 
 SHA-256:
-`a498c84e2f98ce386acbfb04eb1fee0b77c90d33b51cc1b557f477812bd165a3`
+`f9500d051249b239ca3215754eff54d37244fb80ef612ce54cfd5f722db7f243`
 
-Exaktes Plugin-Delta zu 1.14.8:
-- Hauptdatei: nur Version 1.14.8 → 1.14.9;
-- `profiles/hobby-depot-v1.json`: exakt zentraler V3-Zielbaum;
-- keine Workflow-/Writer-/Rollback-/DataForSEO-Codeänderung;
-- keine Dateien hinzugefügt oder entfernt.
-
-V3-Profil-SHA:
-`6d73e5d4d32e91acf6a5c8dd19dc9e23af4a661dc053fa7a752a4ea4668826e7`
+Sicherheitsänderung:
+- Manual-only hart aktiv;
+- kein automatischer WordPress-`init`-Bootstrap des Final-Target-Runners;
+- Installation/Aktivierung lädt/verarbeitet nicht automatisch den Vollbaum;
+- Dry-Run nur nach explizitem manuellen Start;
+- Dry-Run startet keinen Sync;
+- Apply/Sync bleibt separater bestätigungspflichtiger Weg.
 
 Local QA:
-- 33/33 PHP-Syntax PASS;
+- PHP 33/33 PASS;
 - ZIP-Integrität PASS;
-- TargetTree Validator PASS;
-- Resolve-for-sync PASS;
-- neue deterministische Revision `...+16d1bd25b2adfc26`;
-- Synthetic-Dry-Run PASS;
-- CREATE 282 / ADOPT 3 / UPDATE 2357 / ARCHIVE 0 / DEMOTE 0;
-- Provider Calls 0;
-- Writes 0.
+- Aktivierung/normaler Admin-Aufruf: 0 automatische Strukturarbeit;
+- Dry-Run: 0 DataForSEO-Calls, 0 Writes;
+- V3-Target Validator PASS.
 
-ADOPT-Nachweis:
-- Trainspotting;
-- Modellraketen;
-- Pflanzenbestimmung.
+## V3-Kategorienkandidat
+
+Zentral:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V3_20261016.json`
+
+- 2656 logische Knoten;
+- 8 Hauptwelten unverändert;
+- 370 terminale Hobbyseiten;
+- 2160 unterste Inhaltskategorien;
+- CREATE 282 / ADOPT 3 / UPDATE 2357 / ARCHIVE 0 im synthetischen Dry-Run.
 
 ## DataForSEO
 
-Unverändert:
-nur SEO-Evidence; keine Strukturautorität. Der Final-Target-Dry-Run führt 0 Provider-Aufrufe aus.
-
-## Harte Grenze
-
-1.14.9 ist **kein Live-PASS**. Installation allein synchronisiert nichts. Der vorhandene Final-Target-Weg bleibt:
-Dry-Run → Fingerprint → einmaliger Sync → Readback.
+Nur SEO-/Demand-/Intent-Evidence; keine Strukturautorität.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.14.9 installieren/aktivieren und ausschließlich „Finalen Delta-Dry-Run ausführen“. Noch nicht den Sync bestätigen.**
+**Wenn der V3-Live-Dry-Run ausgeführt werden soll: ausschließlich HD-001 1.14.10 verwenden und zuerst nur den manuellen Finalen Delta-Dry-Run ausführen. Noch keinen Sync bestätigen.**
