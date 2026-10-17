@@ -1,3 +1,10 @@
+## HBD-DESIGN-20261017-MEGA – Renderingquelle, bedingte Mehrlinks und Seitenrand
+STATUS: **TEILWEISE LOCAL CLOSED, LIVE OFFEN**.
+Beleg: Nutzer-Live-HTML der Seite „Frost & Abwesenheit“, 16.10., referenziert `hab-bewahr-design-vorschau` 0.1.19. Hauptnavigation `hbdp-mainnav` und Hub-Kacheln `hbdp-tile` stammen aus dem Designplugin. Der vorher fälschlich reparierte Kategorie-Plugin-Renderer war nicht an der sichtbaren Ausgabe beteiligt. Original `templates/site.php` fallback `if(!$children && $parent)$children=hbdp_children($parent['id']);` gab Endkategorien fälschlich Geschwister als Kinder. Original-Megamenü vereinte alte R3/V99 und C22-Nodes ohne Kanonisierung, teilweise doppelte Frost- und vier V99/C22-Areas.
+Korrektur: Designplugin 0.1.20, bestehender Plugin-Ordner, lokal getesteter Canonical-Render aller 6 Welten, 36 Bereiche, 265 alten/neuen Topics und 851 Kategoriearchive. 0.1.21 änderte ausschließlich Desktop-CSS: in Chromium bei 1200px Zeilenabstand 52px → 32px; Menü ca. 82px niedriger. **Lokal PASS, keinesfalls Live-PASS behaupten.**
+Neu vom Nutzer per Screenshot 17.10. gemeldet: Megamenü am Seitenrand **abgeschnitten**; `Alle Themen`/`Weitere Kategorien` erscheinen auch ohne zusätzliche ausgeblendete Kinder. Im aktuellen Renderer wird ein Mehrlink bedingungslos ausgegeben. Nutzer hat ausdrücklich festgelegt: 5 Bereiche/Welt, 4 Themen/Bereich; ein Überblicks-/Mehrlink darf **nur bei realem Überschuss** erscheinen. Abschneiden an Viewportkante muss korrigiert und desktop/tablet/mobile realitätsnah geprüft werden. Alte Zielvertragsangaben von 3 Links wurden durch Nutzernachtrag C2.2 vom 17.10. abgelöst.
+REST: beide Designfehler **OPEN**, nicht durch 0.1.21-CSS-Abstandsfix gelöst. Vor jeder Pluginfreigabe echten Design-Renderer prüfen; keine Änderung/Sync an der Kategorie-Datenbank durch Design. Tatsächlich installierte Version nach letzter Nutzer-Screenshot nicht unabhängig live ausgelesen.
+
 # EIGENTUMSSCHUTZ – DESIGN – FEHLERQUELLEN
 
 STAND: 2026-10-14
