@@ -1,30 +1,40 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-17
-STATUS: **1.50.672 RELEASE-CHAIN-FATAL-FIX LOCAL HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.50.673 AUDIO-&-HIFI-PILOT LOCAL HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
-PLUGIN-ID: HD-003-DESIGN-TEMPLATE-KIT
-KANDIDAT: 1.50.672
-ARTEFAKT: AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.672_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX_HARDPASS.zip
-SHA-256: f66e0cb03301dfd8658aeb7de4ebcff059bceb9da0760b048e9be6fa40d8c78d
+PLUGIN-ID: `HD-003-DESIGN-TEMPLATE-KIT`
 
-ÄNDERUNG:
-nur konsistente 1.50.672-Release-Kette.
+LIVE: `1.50.672`
+
+KANDIDAT:
+`1.50.673`
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.673_HOBBY_DEPOT_AUDIO_HIFI_HERO_TEXT_PILOT_HARDPASS.zip`
+
+SHA-256:
+`802d16fd6df5ccdd133bb390ff7d1eb7992640eee9f43627b4e58aa0c15846ef`
+
+SCOPE:
+nur Audio & HiFi Hero/Text/Kurzzeilen.
 
 UNVERÄNDERT:
-- alle 901 Assets gegenüber 1.50.671;
-- Bildscope;
-- Hero-Master/Preview;
-- Mega-Menü;
-- übrige Kategorien.
+- 901/901 Assets;
+- alle anderen Kategorien;
+- Mega-Menü-Code;
+- Kategoriebaum;
+- Monetarisierung.
 
 QA:
-- AF-026 7/7;
-- 1.50.671 Fatal reproduziert;
-- Front- und Contenttemplate 1.50.672 ausgeführt PASS;
+- 161 Wörter Textregel-PASS;
+- 7/7 individuelle Unterzeilen;
+- AF-026 Release-Kette 7/7;
+- Front/Content PASS;
 - Dirty-Overlay PASS;
-- PHP 63/63;
+- PHP 66/66;
 - ZIP PASS;
-- Roundtrip 1031/1031.
+- Roundtrip 1034/1034.
 
-CURRENT.zip: **NICHT synchronisiert**, bis echter Frontend-PASS vorliegt.
+CURRENT.zip:
+**NICHT synchronisiert**, bis der Audio-Pilot live bestätigt ist.
