@@ -825,3 +825,22 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL – HART:
 Kein Designplugin-ZIP mehr freigeben, bevor der AF-026-Test tatsächlich ausgeführt und protokolliert ist. Beide von route_template() gelieferten Owned-Templates müssen mit der tatsächlich geladenen Profilklasse ausgeführt werden. Zusätzlich muss der vorherige kaputte Release als Negativtest exakt scheitern und der neue Release im Dirty-Overlay-Fall bestehen.
+
+## AF-044 – 1.50.674 nur auf breitem Desktop simuliert; responsive Altpfad und Textableitung übersehen
+
+FEHLER:
+1.50.674 wurde als Fullbleed-Hero-Kandidat freigegeben, obwohl die neue Regel nur oberhalb 1100 px wirkte. Darunter blieb die alte Hub2-Regel mit begrenzter Bildbreite aktiv. Gleichzeitig wurde der Hero-Einstieg weiterhin aus dem ersten Satz des langen Kategorietextes erzeugt.
+
+FOLGE:
+- bei bestimmten Fensterbreiten rechter Leerraum / nicht vollbreites Bild;
+- Text/Claim wirkten wieder wie alter Stand;
+- freigegebene Kurzzeile erschien nicht;
+- Nutzer musste denselben Responsive-/Renderfehler erneut live finden.
+
+KORREKTUR:
+1.50.674 verworfen.
+1.50.675 trennt Hero-Kurztext und Langtext technisch, führt eine zentrale Fullbleed-Klasse ein und simuliert den Hero bei 1440, 1180, 1024, 901, 900, 800, 760, 600 und 390 px.
+
+VERMEIDUNGSREGEL – HART:
+Kein Hub2-Hero-Release mehr nur mit einem Desktop-Screenshot oder reinem CSS-Stringcheck. Vor Release müssen mindestens breite Desktop-, schmale Desktop-/Tablet- und Mobilbreite mit dem tatsächlich gerenderten HTML simuliert werden. Dabei sind Bildbreite, horizontaler Overflow, Innenabstand, Claim, H1 und Hero-Kurztext explizit zu prüfen. Der Hero-Kurztext darf nicht implizit aus dem Langtext abgeleitet werden, wenn ein eigener freigegebener Kurztext existiert.
+
