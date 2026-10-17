@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 STRUKTURELL PASS / KOMMERZIELLE BERATUNGSABDECKUNG NOCH NICHT KALIBRIERT / 10ER-PILOT + MAGAZIN-MAPPING ALS NÄCHSTER SCHRITT / KEIN WORDPRESS-SYNC**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 UNIVERSAL-NEEDS PASS, ABER NOCH NICHT FINAL / FERTIGEN-MEGA 11>10 + VERGLEICH/BERATUNG + MAGAZIN-MAPPING OFFEN / 10ER-PILOT NÄCHSTER SCHRITT / KEIN WORDPRESS-SYNC**
 
 ## Live-Baseline
 
@@ -87,6 +87,18 @@ Eigener Leaf nur ab >=3 echten Intents und ohne Doppelung:
 
 ## Mega-Menü
 
+Exakter V5-Zählstand der **aktiven echten Zwischenbereiche** (direkte terminale Hobbys wie Heimwerken/Gärtnern nicht als Mega-Zwischenbereich gezählt):
+- Gestalten 7;
+- Fertigen **11 → FAIL, Zielvertrag max. 10**;
+- Technik 9;
+- Forschen 8;
+- Pflanzen 9;
+- Tiere 7;
+- Bewegen 8;
+- Sammeln 9.
+
+Fertigen wurde durch die sinnvolle Ergänzung `Modellbau` wieder zu breit. Das ist ein **Fachstrukturproblem**, kein CSS-Problem. Vor Rollout muss exakt ein sauberer Weg auf <=10 gefunden werden, ohne Modellbau zurück nach Technik zu verschieben und ohne Hobbys zu verlieren.
+
 Designvertrag bleibt:
 - max. 10 direkte sichtbare Hub2 pro Hauptwelt;
 - grafisch zunächst gemeinsame sinnvolle Direktanzahl; aktuell typischerweise 5;
@@ -159,7 +171,7 @@ Sicherer Kandidat:
 
 ## ERSTER OFFENER BLOCKER
 
-**Der 10er-Pilot muss gegen Vergleich/Kaufberatung + hobbiespezifische Zusatzleafs vollständig kalibriert werden; parallel muss das Magazin-Mapping aus dem Hobbyfinder-Fallback auf die vorhandenen Editorial-Kacheln korrigiert werden.**
+**Drei fachliche Gates sind offen: Fertigen von 11 auf <=10 Mega-Zwischenbereiche bringen; 10er-Pilot gegen Vergleich/Kaufberatung + hobbiespezifische Zusatzleafs kalibrieren; Magazin-Mapping aus dem Hobbyfinder-Fallback auf die vorhandenen Editorial-Kacheln korrigieren.**
 
 ## EXAKT EINE NEXT ACTION
 
