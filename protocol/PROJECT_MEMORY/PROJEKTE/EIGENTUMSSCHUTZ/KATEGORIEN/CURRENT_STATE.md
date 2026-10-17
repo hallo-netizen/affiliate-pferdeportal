@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – AKTUELLSTER PRODUKTIONSSTAND: EXISTIERENDES KATEGORIEPLUGIN 1.14.8.31 MIT 472 ZUSATZKATEGORIEN REAL IMPLEMENTIERT
+**Implementiert und lokal vollständig getestet, noch NICHT live installiert.** Die neue Version 1.14.8.31 entsteht unverändert aus dem vollständigen Originalplugin 1.14.8.30 plus einer separaten **472-category-only-ADD-Wave** im selben `APKW_TargetWriter`-System. 172 bestehende Seite3-Parents; 172 FAQ, 172 Vergleiche, 102 zusätzliche Fachkategorien, 26 neu begründete Bereiche. Grobe Inhaltstragfähigkeit ca. 3–5 mögliche spätere Beiträge, keine Einzelartikelproduktion. Unveränderter Originalbestand 743 erfolgreich importierte Objekte plus 285 historische WordPress-Kategorien mit vier dokumentierten Artikelbindungen. Nutzer hat nach Import keine WordPress-Änderung durchgeführt. **Keinen erneuten Benutzer-Liveexport verlangen.**
+
+**GitHub-Büroquelle:** `PLUGIN_SECOND_WAVE_SOURCE/RELEASE_STATUS_20261017.md` (vollständige Releaseprovenienz und Tests); neuer Modulcode `PLUGIN_SECOND_WAVE_SOURCE/includes/class-apkw-c22-472-add-only.php`, echtes 472er Laufzeitmanifest unter `.../profiles/hab-und-bewahr-c22-472-add-only.json`, reproduzierbarer Original-Plugin-Patch `.../apply_to_original_1_14_8_30.py`; installierbares ZIP ist bytegenau unter `.../HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.31.zip.b64` mit `decode_release.py` abgelegt. SHA-256 ZIP: `6cd47955df14a65d681c7508e1674be94e98cad4dd68df5a6605ce8ef534d933`. Diese GitHub-Quellen, nicht die Bibliothek, sind die einzige Ablage für diesen Weiterbau.
+
+**Prüfstand:** 32/32 PHP-Syntax, 472/472 lokale WordPress-Mock-Anlagen, echte SHA-256-Knotenbindung an 172 bestehende C22-Parents, 7/7 Mapping-Negativtests, nach Fehler bei 30 Neuanlagen sicherer vollständiger Rollback ohne alte Objekte anzufassen; fehlender Parent vor jedem WordPress-Write blockiert. Positive UI-/WordPress-Live-Funktion wurde nicht behauptet. Separate einmalige echte WordPress-Schreibfreigabe ist unverändert erforderlich.
+
+**GENAU EINE NEXT ACTION:** Bestehendes Plugin einmal auf die **fertige Version 1.14.8.31** aktualisieren, NICHT auf irgendein neues Plugin wechseln und die 743er-Importtaste NICHT erneut betätigen. Danach unter `Portal-Kategorien → C2.2 Kategorien` die integrierte 472er-Trockenprüfung prüfen; Freigabe/Import nur per separater Bestätigung. Bis dahin keine WordPress-Änderungen. Alte „erst wieder exportieren“-/„erst Artikel prüfen“-Anweisungen sind überholt.
+
+---
+
+
+
 ## 17.10.2026 – ERNEUTE WORDPRESS-BESTANDSABFRAGE ENTFÄLLT: ORIGINAL C2.2 UND 472 MAPPING GEPRÜFT
 **Verbindliche Nutzerbestätigung:** WordPress wurde seit dem durch uns vorgenommenen C2.2-Import **nicht verändert**. Die erneute Anforderung eines externen Readbacks war ein unnötiger Umweg und ist hiermit für diese Fortsetzung aufgehoben. Basis sind der belegt erfolgreiche Import **743 (5+172+566)**, die 285 geschützten historischen Terms und vier dokumentierten Artikelbindungen. Das bestehende Plugin kann seine aktive Snapshot-Bindung intern selbst vor einem späteren Schreibschritt absichern; kein neuer Benutzerexport nötig.
 
