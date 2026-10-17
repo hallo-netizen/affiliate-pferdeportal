@@ -186,3 +186,37 @@ Campus-TEXT routet ausschließlich auf K0; K1–K9 sind fachlich/operativ Archiv
 
 ERGEBNIS:
 BLOCKED FÜR PHYSISCHES MAIN-LÖSCHEN / PASS FÜR SICHERE AKTIV-ENTKOPPLUNG.
+
+## HM-007 – Branch-Audit nach physischer GitHub-Bereinigung
+
+DATUM:
+2026-10-17
+
+AUFTRAG:
+Die nach der Campus-/Main-Bereinigung verbliebenen GitHub-Branches systematisch prüfen, ohne aktive, archivierte, Backup-, PR-, Gold-, Fallback-, Security- oder Hardlock-Stände blind zu löschen.
+
+FRISCHER STAND:
+- physische Branches: **494**;
+- aktive Registry: **4**;
+- `archive/*`: **21**;
+- `backup/*`: **1**;
+- offener PR: **#518** auf `fix/banner-import-basis-20261006`;
+- initiale Prüfmenge nach diesen harten Schutzfiltern: **467**.
+
+PRÜFUNG DIESES CHATS:
+- **291/467** Branches gegen die jeweils passende aktive Linie verglichen;
+- **47** davon mit `ahead=0`;
+- **244** mit weiterhin mindestens einem eigenen Commit;
+- **176** noch nicht ancestry-geprüft;
+- `ahead=0` ausdrücklich nicht als Löschfreigabe behandelt;
+- keine Branch-Löschung durchgeführt.
+
+BESONDERER BEFUND:
+Der zuvor dokumentierte Bestand von 780 physischen Branches ist auf 494 gefallen. Der reale Delta-Abbau um 286 Branches ist im vorhandenen Hausmeister-/Cleanup-Protokoll nicht als eigener Löschvorgang nachvollziehbar dokumentiert. Deshalb daraus keine zusätzliche Löschannahme ableiten.
+
+DETAILBELEG:
+`protocol/PROJECT_MEMORY/ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`
+
+ERGEBNIS:
+OFFEN / Audit sauber fortsetzbar / **keine Löschfreigabe** für die 47 `ahead=0`-Treffer ohne zweite Referenz-/Rollenprüfung.
+
