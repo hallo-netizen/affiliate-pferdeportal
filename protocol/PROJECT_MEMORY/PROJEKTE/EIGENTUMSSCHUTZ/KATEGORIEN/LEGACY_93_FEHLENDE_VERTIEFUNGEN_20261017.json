@@ -1,0 +1,3103 @@
+{
+  "schema": "HB_C22_OLDER_93_TOPIC_LEVEL_FACET_COVERAGE_AUDIT_20261017",
+  "created": "2026-10-17",
+  "status": "CONFIRMED_FACHLICHE_COVERAGE_GAP__NO_WORDPRESS_WRITE",
+  "source_blob": "2936ed064c7a308a4f02f07599cee0aa7aae8cb7",
+  "summary": {
+    "old_topic_pages": 93,
+    "old_wp_categories": 285,
+    "old_page3_with_explicit_faq": 0,
+    "old_page3_with_explicit_comparison": 0,
+    "new_topic_pages_with_faq_comparison": 172,
+    "original_472_added_only_under_new_topic_pages": true
+  },
+  "cause": "The original 472 extra category jobs use only the 172 newly created C22 topic parent node IDs. Older 93 page3 IDs are a different R3 node namespace; no facet categories are attached to them.",
+  "hard_rules": [
+    "Keine WP-Seite4",
+    "Genau eine flache WP-category-Ebene unter Seite3",
+    "Alle 285 Altterms und Post-Bindungen schützen",
+    "Keine automatische FAQ/Preis/Pflege-Schablone, sondern je Owner Nutzen und genügend Tiefe grob prüfen",
+    "Neue Kategorieanlage nur über bestehendes Kategorieplugin nach Tests und eigener WordPress-Freigabe"
+  ],
+  "prioritized_evidence": {
+    "page3_wp_id": 141,
+    "page3_name": "PV, Kamera & Beleuchtung",
+    "existing_categories": [
+      {
+        "term_id": 205,
+        "name": "Kameras & Licht vor Sabotage",
+        "slug": "vandalismus-u-gebaude-und-aussta-kameras-und-licht-vor-sab-29",
+        "url": "https://hab-und-bewahr.de/category/vandalismus-u-gebaude-und-aussta-kameras-und-licht-vor-sab-29/",
+        "post_bindings": []
+      },
+      {
+        "term_id": 273,
+        "name": "PV-Technik & Kabel",
+        "slug": "vandalismus-und-zers-auentechnik-pv-technik-und-kabel-120",
+        "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-auentechnik-pv-technik-und-kabel-120/",
+        "post_bindings": []
+      },
+      {
+        "term_id": 304,
+        "name": "Außenbeleuchtung schützen",
+        "slug": "hab-auenbeleuchtung-schutzen-151",
+        "url": "https://hab-und-bewahr.de/category/hab-auenbeleuchtung-schutzen-151/",
+        "post_bindings": []
+      }
+    ],
+    "suggested_display_title": "PV-Anlagen, Kameras und Außenbeleuchtung vor Vandalismus schützen",
+    "suggested_short_menu_title": "PV, Kameras & Licht",
+    "faq_scope": "Sabotage, Beschädigung, Zugänglichkeit, Schutz für Leitungen und montierte Geräte",
+    "comparisons_scope": "Mechanischer Schutz, überwachte Sicherungen, Gehäuse, Leitungsführung, Schutz für Licht und Kameras",
+    "maintenance_scope": "Regelmäßige Prüfung von Befestigung, Gehäuse, Strom- und Datenleitungen, Funktionsbereitschaft",
+    "not_an_article_plan": true
+  },
+  "owners": [
+    {
+      "existing_wp_page3_id": 138,
+      "existing_wp_page3_name": "Unbewohnte Häuser",
+      "existing_categories": [
+        {
+          "term_id": 196,
+          "name": "Ferienhaus-Einbruchschutz",
+          "slug": "einbruch-und-abwesenheit-und-le-ferienhaus-einbruchschutz-15",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-abwesenheit-und-le-ferienhaus-einbruchschutz-15/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 257,
+          "name": "Schlüsselübergabe im Ferienhaus",
+          "slug": "einbruch-und-diebstahl-abwesenheit-und-leer-schlusselubergabe-im-fer-104",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-abwesenheit-und-leer-schlusselubergabe-im-fer-104/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 270,
+          "name": "Leerstehendes Wohnhaus",
+          "slug": "einbruch-und-diebsta-abwesenheit-und-leer-leerstehendes-wohnhaus-117",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebsta-abwesenheit-und-leer-leerstehendes-wohnhaus-117/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 139,
+      "existing_wp_page3_name": "Eingänge, Glas & Klingeln",
+      "existing_categories": [
+        {
+          "term_id": 203,
+          "name": "Glas gegen Vandalismus",
+          "slug": "vandalismus-u-gebaude-und-aussta-glas-gegen-vandalismus-26",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-gebaude-und-aussta-glas-gegen-vandalismus-26/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 204,
+          "name": "Briefkästen & Klingeln",
+          "slug": "vandalismus-u-gebaude-und-aussta-briefkasten-und-klingeln-28",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-gebaude-und-aussta-briefkasten-und-klingeln-28/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 271,
+          "name": "Türen & Tore schützen",
+          "slug": "vandalismus-und-zers-gebaude-und-ausstatt-turen-und-tore-schutze-118",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-gebaude-und-ausstatt-turen-und-tore-schutze-118/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 140,
+      "existing_wp_page3_name": "Vereine, Läden & Schäden",
+      "existing_categories": [
+        {
+          "term_id": 208,
+          "name": "Kleine Vereinsanlagen",
+          "slug": "vandalismus-u-vereine-und-kleing-kleine-vereinsanlagen-36",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-vereine-und-kleing-kleine-vereinsanlagen-36/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 209,
+          "name": "Schaufenster & Ladenfront",
+          "slug": "vandalismus-u-vereine-und-kleing-schaufenster-und-ladenfro-37",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-vereine-und-kleing-schaufenster-und-ladenfro-37/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 260,
+          "name": "Vandalismusschäden dokumentieren",
+          "slug": "vandalismus-und-zersto-freizeit-vereine-und-vandalismusschaden-dokum-107",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zersto-freizeit-vereine-und-vandalismusschaden-dokum-107/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 276,
+          "name": "Werkstatt & Lager vor Sachschäden",
+          "slug": "vandalismus-und-zers-vereine-und-kleingew-werkstatt-und-lager-vo-123",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-vereine-und-kleingew-werkstatt-und-lager-vo-123/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 141,
+      "existing_wp_page3_name": "PV, Kamera & Beleuchtung",
+      "existing_categories": [
+        {
+          "term_id": 205,
+          "name": "Kameras & Licht vor Sabotage",
+          "slug": "vandalismus-u-gebaude-und-aussta-kameras-und-licht-vor-sab-29",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-gebaude-und-aussta-kameras-und-licht-vor-sab-29/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 273,
+          "name": "PV-Technik & Kabel",
+          "slug": "vandalismus-und-zers-auentechnik-pv-technik-und-kabel-120",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-auentechnik-pv-technik-und-kabel-120/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 304,
+          "name": "Außenbeleuchtung schützen",
+          "slug": "hab-auenbeleuchtung-schutzen-151",
+          "url": "https://hab-und-bewahr.de/category/hab-auenbeleuchtung-schutzen-151/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 142,
+      "existing_wp_page3_name": "Wohnmobil & Wohnwagen",
+      "existing_categories": [
+        {
+          "term_id": 189,
+          "name": "Camping & Wohnmobil",
+          "slug": "einbruch-und-freizeit-und-mobil-camping-und-wohnmobil-8",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-freizeit-und-mobil-camping-und-wohnmobil-8/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 190,
+          "name": "Wohnwagen & Stellplätze",
+          "slug": "einbruch-und-freizeit-und-mobil-wohnwagen-und-stellplatze-9",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-freizeit-und-mobil-wohnwagen-und-stellplatze-9/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 294,
+          "name": "Camperfenster & Dachluken",
+          "slug": "hab-camperfenster-und-dachluken-141",
+          "url": "https://hab-und-bewahr.de/category/hab-camperfenster-und-dachluken-141/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 143,
+      "existing_wp_page3_name": "Haus & Kellerschutz",
+      "existing_categories": [
+        {
+          "term_id": 227,
+          "name": "Türen & Lichtschächte",
+          "slug": "wetter-und-na-starkregen-und-hoc-turen-und-lichtschachte-65",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-starkregen-und-hoc-turen-und-lichtschachte-65/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 228,
+          "name": "Keller vor Starkregen",
+          "slug": "wetter-und-na-starkregen-und-hoc-keller-vor-starkregen-66",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-starkregen-und-hoc-keller-vor-starkregen-66/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 311,
+          "name": "Garagenzufahrt & Hofabläufe",
+          "slug": "hab-garagenzufahrt-und-hofablaufe-158",
+          "url": "https://hab-und-bewahr.de/category/hab-garagenzufahrt-und-hofablaufe-158/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 144,
+      "existing_wp_page3_name": "Stromausfall & Notstrom",
+      "existing_categories": [
+        {
+          "term_id": 238,
+          "name": "Stromausfallmelder",
+          "slug": "technik-und-a-strom-und-notstrom-stromausfallmelder-80",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-strom-und-notstrom-stromausfallmelder-80/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 239,
+          "name": "USV für Haus & Router",
+          "slug": "technik-und-a-strom-und-notstrom-usv-fur-haus-und-router-81",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-strom-und-notstrom-usv-fur-haus-und-router-81/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 240,
+          "name": "Notstrom für Privathäuser",
+          "slug": "technik-und-a-strom-und-notstrom-notstrom-fur-privathauser-82",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-strom-und-notstrom-notstrom-fur-privathauser-82/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 145,
+      "existing_wp_page3_name": "Camping, Garten & Boote",
+      "existing_categories": [
+        {
+          "term_id": 207,
+          "name": "Vandalismus am Campingstellplatz",
+          "slug": "vandalismus-u-freizeitobjekte-vandalismus-am-campingste-34",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-freizeitobjekte-vandalismus-am-campingste-34/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 274,
+          "name": "Gartenhaus gegen Vandalismus",
+          "slug": "vandalismus-und-zers-freizeitobjekte-gartenhaus-gegen-vanda-121",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-freizeitobjekte-gartenhaus-gegen-vanda-121/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 275,
+          "name": "Boot & Trailer vor Vandalismus",
+          "slug": "vandalismus-und-zers-freizeitobjekte-boot-und-trailer-vor-v-122",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-freizeitobjekte-boot-und-trailer-vor-v-122/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 146,
+      "existing_wp_page3_name": "Wärmepumpe & Ladepunkte",
+      "existing_categories": [
+        {
+          "term_id": 206,
+          "name": "Außentechnik vor Vandalismus",
+          "slug": "vandalismus-u-aussentechnik-aussentechnik-vor-vandali-30",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-aussentechnik-aussentechnik-vor-vandali-30/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 272,
+          "name": "Wallbox & Ladekabel",
+          "slug": "vandalismus-und-zers-auentechnik-wallbox-und-ladekabel-119",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-und-zers-auentechnik-wallbox-und-ladekabel-119/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 303,
+          "name": "Wärmepumpe vor Sabotage",
+          "slug": "hab-warmepumpe-vor-sabotage-150",
+          "url": "https://hab-und-bewahr.de/category/hab-warmepumpe-vor-sabotage-150/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 147,
+      "existing_wp_page3_name": "Außenanlagen & Schäden",
+      "existing_categories": [
+        {
+          "term_id": 231,
+          "name": "Außenanlagen bei Sturm",
+          "slug": "wetter-und-na-sturm-und-hagel-aussenanlagen-bei-sturm-70",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-sturm-und-hagel-aussenanlagen-bei-sturm-70/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 264,
+          "name": "Schäden nach Unwetter",
+          "slug": "wetter-und-naturgefahr-sturm-und-hagel-schaden-nach-unwetter-111",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-naturgefahr-sturm-und-hagel-schaden-nach-unwetter-111/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 314,
+          "name": "Bäume & Astbruch",
+          "slug": "hab-baume-und-astbruch-161",
+          "url": "https://hab-und-bewahr.de/category/hab-baume-und-astbruch-161/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 344,
+          "name": "Gewächshäuser bei Sturm",
+          "slug": "hab-gewachshauser-bei-sturm-exp",
+          "url": "https://hab-und-bewahr.de/category/hab-gewachshauser-bei-sturm-exp/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 148,
+      "existing_wp_page3_name": "Kohlenmonoxid & Gaswarnung",
+      "existing_categories": [
+        {
+          "term_id": 221,
+          "name": "Kohlenmonoxidwarnung",
+          "slug": "feuer-und-gas-co-und-gas-kohlenmonoxidwarnung-56",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-co-und-gas-kohlenmonoxidwarnung-56/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 222,
+          "name": "Gaswarnmelder",
+          "slug": "feuer-und-gas-co-und-gas-gaswarnmelder-57",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-co-und-gas-gaswarnmelder-57/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 283,
+          "name": "Kamin & Heizungsabgase",
+          "slug": "feuer-und-gase-co-und-gas-kamin-und-heizungsabga-130",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gase-co-und-gas-kamin-und-heizungsabga-130/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 149,
+      "existing_wp_page3_name": "Mobile Objekte & Betriebe",
+      "existing_categories": [
+        {
+          "term_id": 247,
+          "name": "Camper & Stellplatz fernüberwachen",
+          "slug": "technik-und-a-fernuberwachung-un-camper-und-stellplatz-fer-93",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-fernuberwachung-un-camper-und-stellplatz-fer-93/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 265,
+          "name": "Kleine Betriebe fernüberwachen",
+          "slug": "technik-und-ausfalle-fernuberwachung-und-kleine-betriebe-fernuber-112",
+          "url": "https://hab-und-bewahr.de/category/technik-und-ausfalle-fernuberwachung-und-kleine-betriebe-fernuber-112/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 319,
+          "name": "Boote fernüberwachen",
+          "slug": "hab-boote-fernuberwachen-166",
+          "url": "https://hab-und-bewahr.de/category/hab-boote-fernuberwachen-166/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 150,
+      "existing_wp_page3_name": "Pakete & Gartenwerte",
+      "existing_categories": [
+        {
+          "term_id": 194,
+          "name": "Pakete & Briefkästen",
+          "slug": "einbruch-und-garten-und-grundst-pakete-und-briefkasten-13",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garten-und-grundst-pakete-und-briefkasten-13/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 195,
+          "name": "Diebstahl an Außentechnik",
+          "slug": "einbruch-und-garten-und-grundst-diebstahl-an-aussentechni-14",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garten-und-grundst-diebstahl-an-aussentechni-14/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 298,
+          "name": "Gartenmöbel & Grillgeräte",
+          "slug": "hab-gartenmobel-und-grillgerate-145",
+          "url": "https://hab-und-bewahr.de/category/hab-gartenmobel-und-grillgerate-145/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 151,
+      "existing_wp_page3_name": "Brandschutz: Kleinobjekte",
+      "existing_categories": [
+        {
+          "term_id": 226,
+          "name": "Brandschutz kleiner Objekte",
+          "slug": "feuer-und-gas-kleine-betriebe-un-brandschutz-kleiner-objek-64",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-kleine-betriebe-un-brandschutz-kleiner-objek-64/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 286,
+          "name": "Kleines Vereinsheim & Brandschutz",
+          "slug": "feuer-und-gase-kleine-betriebe-und-kleines-vereinsheim-un-133",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gase-kleine-betriebe-und-kleines-vereinsheim-un-133/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 310,
+          "name": "Werkstatt & Akkulager",
+          "slug": "hab-werkstatt-und-akkulager-157",
+          "url": "https://hab-und-bewahr.de/category/hab-werkstatt-und-akkulager-157/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 152,
+      "existing_wp_page3_name": "Garagen & Keller",
+      "existing_categories": [
+        {
+          "term_id": 187,
+          "name": "Garage & Garagentor",
+          "slug": "einbruch-und-garage-keller-und-garage-und-garagentor-5",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garage-keller-und-garage-und-garagentor-5/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 267,
+          "name": "Kellertüren & Abstellräume",
+          "slug": "einbruch-und-diebsta-garage-keller-und-ne-kellerturen-und-abstel-114",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebsta-garage-keller-und-ne-kellerturen-und-abstel-114/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 249,
+          "name": "Fahrradkeller & Kellerabteile",
+          "slug": "einbruch-und-garage-keller-und-fahrradkeller-und-kellera-96",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garage-keller-und-fahrradkeller-und-kellera-96/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 153,
+      "existing_wp_page3_name": "Blitzschutz & Geräte",
+      "existing_categories": [
+        {
+          "term_id": 234,
+          "name": "Blitzschutz am Wohnhaus",
+          "slug": "wetter-und-na-blitz-und-uberspan-blitzschutz-am-wohnhaus-75",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-blitz-und-uberspan-blitzschutz-am-wohnhaus-75/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 289,
+          "name": "PV & Wallbox Überspannung",
+          "slug": "wetter-und-naturgefa-blitz-und-uberspannu-pv-und-wallbox-uberspa-136",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-naturgefa-blitz-und-uberspannu-pv-und-wallbox-uberspa-136/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 315,
+          "name": "Überspannung im Haus",
+          "slug": "hab-uberspannung-im-haus-162",
+          "url": "https://hab-und-bewahr.de/category/hab-uberspannung-im-haus-162/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 154,
+      "existing_wp_page3_name": "Winter & Schnee",
+      "existing_categories": [
+        {
+          "term_id": 233,
+          "name": "Schneelast auf Dächern",
+          "slug": "wetter-und-na-frost-und-schnee-schneelast-auf-dachern-73",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-frost-und-schnee-schneelast-auf-dachern-73/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 287,
+          "name": "Schnee & Eis am Grundstück",
+          "slug": "wetter-und-naturgefa-frost-und-schnee-schnee-und-eis-am-grun-134",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-naturgefa-frost-und-schnee-schnee-und-eis-am-grun-134/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 288,
+          "name": "Ferienhaus bei Frost & Schnee",
+          "slug": "wetter-und-naturgefa-frost-und-schnee-ferienhaus-bei-frost-u-135",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-naturgefa-frost-und-schnee-ferienhaus-bei-frost-u-135/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 155,
+      "existing_wp_page3_name": "Private Hobbyräume",
+      "existing_categories": [
+        {
+          "term_id": 188,
+          "name": "Schuppen & Hobbyraum",
+          "slug": "einbruch-und-garage-keller-und-schuppen-und-hobbyraum-7",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garage-keller-und-schuppen-und-hobbyraum-7/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 268,
+          "name": "Hobbywerkstatt & Geräteraum",
+          "slug": "einbruch-und-diebsta-garage-keller-und-ne-hobbywerkstatt-und-ger-115",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebsta-garage-keller-und-ne-hobbywerkstatt-und-ger-115/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 293,
+          "name": "Zugang zur Hobbywerkstatt",
+          "slug": "hab-zugang-zur-hobbywerkstatt-140",
+          "url": "https://hab-und-bewahr.de/category/hab-zugang-zur-hobbywerkstatt-140/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 156,
+      "existing_wp_page3_name": "Boote, Trailer & Reitsport",
+      "existing_categories": [
+        {
+          "term_id": 191,
+          "name": "Boot, Außenborder & Trailer",
+          "slug": "einbruch-und-freizeit-und-mobil-boot-aussenborder-und-tra-10",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-freizeit-und-mobil-boot-aussenborder-und-tra-10/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 269,
+          "name": "Reitsport & Pferdeanhänger",
+          "slug": "einbruch-und-diebsta-freizeit-und-mobile-pferdeanhanger-und-sat-116",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebsta-freizeit-und-mobile-pferdeanhanger-und-sat-116/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 295,
+          "name": "Liegeplatz & Steganlage",
+          "slug": "hab-liegeplatz-und-steganlage-142",
+          "url": "https://hab-und-bewahr.de/category/hab-liegeplatz-und-steganlage-142/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 157,
+      "existing_wp_page3_name": "Mechanik & Zugang",
+      "existing_categories": [
+        {
+          "term_id": 183,
+          "name": "Türen & Fenster",
+          "slug": "einbruch-und-haus-und-wohnung-turen-und-fenster-1",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-haus-und-wohnung-turen-und-fenster-1/",
+          "post_bindings": [
+            {
+              "post_id": 238,
+              "category_term_id": 183,
+              "post_status": "publish",
+              "post_permalink": "https://hab-und-bewahr.de/demo-haustuer-gegen-einbruch-sichern/"
+            }
+          ]
+        },
+        {
+          "term_id": 185,
+          "name": "Schlüssel & Zutritt",
+          "slug": "einbruch-und-haus-und-wohnung-schlussel-und-zutritt-3",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-haus-und-wohnung-schlussel-und-zutritt-3/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 266,
+          "name": "Mietwohnung ohne Bohren",
+          "slug": "einbruch-und-diebsta-haus-und-wohnung-mietwohnung-ohne-bohre-113",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebsta-haus-und-wohnung-mietwohnung-ohne-bohre-113/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 158,
+      "existing_wp_page3_name": "Graffiti: Schutz & Hilfe",
+      "existing_categories": [
+        {
+          "term_id": 201,
+          "name": "Graffiti vorbeugen",
+          "slug": "vandalismus-u-fassade-und-aussen-graffiti-vorbeugen-23",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-fassade-und-aussen-graffiti-vorbeugen-23/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 202,
+          "name": "Graffiti entfernen",
+          "slug": "vandalismus-u-fassade-und-aussen-graffiti-entfernen-24",
+          "url": "https://hab-und-bewahr.de/category/vandalismus-u-fassade-und-aussen-graffiti-entfernen-24/",
+          "post_bindings": [
+            {
+              "post_id": 239,
+              "category_term_id": 202,
+              "post_status": "publish",
+              "post_permalink": "https://hab-und-bewahr.de/demo-graffiti-an-der-fassade-entfernen/"
+            }
+          ]
+        },
+        {
+          "term_id": 302,
+          "name": "Graffitischäden & Kosten",
+          "slug": "hab-graffitischaden-und-kosten-149",
+          "url": "https://hab-und-bewahr.de/category/hab-graffitischaden-und-kosten-149/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 159,
+      "existing_wp_page3_name": "Hochwasserschutz & Folgen",
+      "existing_categories": [
+        {
+          "term_id": 229,
+          "name": "Mobile Hochwassersperren",
+          "slug": "wetter-und-na-starkregen-und-hoc-mobile-hochwassersperren-67",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-starkregen-und-hoc-mobile-hochwassersperren-67/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 252,
+          "name": "Grundstücksentwässerung",
+          "slug": "wetter-und-na-starkregen-und-hoc-grundstucksentwasserung-99",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-starkregen-und-hoc-grundstucksentwasserung-99/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 312,
+          "name": "Haustechnik im Hochwasser",
+          "slug": "hab-haustechnik-im-hochwasser-159",
+          "url": "https://hab-und-bewahr.de/category/hab-haustechnik-im-hochwasser-159/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 160,
+      "existing_wp_page3_name": "Alarm & Kamera",
+      "existing_categories": [
+        {
+          "term_id": 184,
+          "name": "Alarm & Überwachung",
+          "slug": "einbruch-und-haus-und-wohnung-alarm-und-uberwachung-2",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-haus-und-wohnung-alarm-und-uberwachung-2/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 254,
+          "name": "Kameras & Datenschutz",
+          "slug": "einbruch-und-diebstahl-haus-und-wohnung-kameras-und-datenschutz-101",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-haus-und-wohnung-kameras-und-datenschutz-101/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 292,
+          "name": "Bewegungsmelder & Licht",
+          "slug": "hab-bewegungsmelder-und-licht-139",
+          "url": "https://hab-und-bewahr.de/category/hab-bewegungsmelder-und-licht-139/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 161,
+      "existing_wp_page3_name": "Akkus & Werkstätten",
+      "existing_categories": [
+        {
+          "term_id": 223,
+          "name": "E-Bike-Akku-Brandschutz",
+          "slug": "feuer-und-gas-akku-und-elektrik-e-bike-akku-brandschutz-59",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-akku-und-elektrik-e-bike-akku-brandschutz-59/",
+          "post_bindings": [
+            {
+              "post_id": 241,
+              "category_term_id": 223,
+              "post_status": "publish",
+              "post_permalink": "https://hab-und-bewahr.de/demo-e-bike-akkus-sicher-lagern/"
+            }
+          ]
+        },
+        {
+          "term_id": 224,
+          "name": "Lithium-Akkus & Powerstations",
+          "slug": "feuer-und-gas-akku-und-elektrik-lithium-akkus-und-powerst-60",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-akku-und-elektrik-lithium-akkus-und-powerst-60/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 284,
+          "name": "Garage & private Werkstatt",
+          "slug": "feuer-und-gase-akku-und-elektrik-garage-und-private-wer-131",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gase-akku-und-elektrik-garage-und-private-wer-131/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 162,
+      "existing_wp_page3_name": "Camping, Boote & Garten",
+      "existing_categories": [
+        {
+          "term_id": 235,
+          "name": "Sturm & Hagel beim Camping",
+          "slug": "wetter-und-na-freizeitobjekte-sturm-und-hagel-beim-camp-77",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-freizeitobjekte-sturm-und-hagel-beim-camp-77/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 236,
+          "name": "Boote im Winterlager",
+          "slug": "wetter-und-na-freizeitobjekte-boote-im-winterlager-78",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-freizeitobjekte-boote-im-winterlager-78/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 237,
+          "name": "Gartenhaus bei Unwetter",
+          "slug": "wetter-und-na-freizeitobjekte-gartenhaus-bei-unwetter-79",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-freizeitobjekte-gartenhaus-bei-unwetter-79/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 163,
+      "existing_wp_page3_name": "Wasserschäden & Folgen",
+      "existing_categories": [
+        {
+          "term_id": 261,
+          "name": "Wasserschaden nach Rohrbruch",
+          "slug": "wasser-und-feuchtigkei-leckage-und-rohrbruc-wasserschaden-nach-rohrb-108",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigkei-leckage-und-rohrbruc-wasserschaden-nach-rohrb-108/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 277,
+          "name": "Haushaltsgeräte & Wasserschutz",
+          "slug": "wasser-und-feuchtigk-leckage-und-rohrbruc-haushaltsgerate-und-wa-124",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigk-leckage-und-rohrbruc-haushaltsgerate-und-wa-124/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 306,
+          "name": "Schadenmeldung & Versicherung",
+          "slug": "hab-schadenmeldung-und-versicherung-153",
+          "url": "https://hab-und-bewahr.de/category/hab-schadenmeldung-und-versicherung-153/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 164,
+      "existing_wp_page3_name": "Heizungs- & Kühlungsalarme",
+      "existing_categories": [
+        {
+          "term_id": 241,
+          "name": "Heizungsausfall",
+          "slug": "technik-und-a-heizung-und-temper-heizungsausfall-83",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-heizung-und-temper-heizungsausfall-83/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 242,
+          "name": "Kühl- & Gefrieralarm",
+          "slug": "technik-und-a-heizung-und-temper-kuhl-und-gefrieralarm-85",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-heizung-und-temper-kuhl-und-gefrieralarm-85/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 290,
+          "name": "Frostwächter & Temperaturen",
+          "slug": "technik-und-ausfalle-heizung-und-temperat-frostwachter-und-tempe-137",
+          "url": "https://hab-und-bewahr.de/category/technik-und-ausfalle-heizung-und-temperat-frostwachter-und-tempe-137/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 165,
+      "existing_wp_page3_name": "Gartenhäuser, Tore & Geräte",
+      "existing_categories": [
+        {
+          "term_id": 193,
+          "name": "Gartenhaus / Schrebergarten",
+          "slug": "einbruch-und-garten-und-grundst-gartenhaus-schrebergarten-12",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-garten-und-grundst-gartenhaus-schrebergarten-12/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 256,
+          "name": "Mähroboter gegen Diebstahl",
+          "slug": "einbruch-und-diebstahl-garten-und-grundstuc-mahroboter-gegen-diebsta-103",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-garten-und-grundstuc-mahroboter-gegen-diebsta-103/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 297,
+          "name": "Gartenmaschinen & Werkzeug",
+          "slug": "hab-gartenmaschinen-und-werkzeug-144",
+          "url": "https://hab-und-bewahr.de/category/hab-gartenmaschinen-und-werkzeug-144/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 402,
+          "name": "Gartentore & Zaunsicherung",
+          "slug": "hab-gartentore-und-zaunsicherung-exp",
+          "url": "https://hab-und-bewahr.de/category/hab-gartentore-und-zaunsicherung-exp/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 166,
+      "existing_wp_page3_name": "Feuchtigkeit & Trocknung",
+      "existing_categories": [
+        {
+          "term_id": 214,
+          "name": "Kellerfeuchte & Schimmel",
+          "slug": "wasser-und-fe-keller-und-rucksta-kellerfeuchte-und-schimme-45",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-keller-und-rucksta-kellerfeuchte-und-schimme-45/",
+          "post_bindings": [
+            {
+              "post_id": 240,
+              "category_term_id": 214,
+              "post_status": "publish",
+              "post_permalink": "https://hab-und-bewahr.de/demo-feuchtigkeit-im-keller-erkennen/"
+            }
+          ]
+        },
+        {
+          "term_id": 279,
+          "name": "Trocknung nach Wasserschaden",
+          "slug": "wasser-und-feuchtigk-keller-und-ruckstau-trocknung-nach-wassers-126",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigk-keller-und-ruckstau-trocknung-nach-wassers-126/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 307,
+          "name": "Kellerabdichtung & Ursachen",
+          "slug": "hab-kellerabdichtung-und-ursachen-154",
+          "url": "https://hab-und-bewahr.de/category/hab-kellerabdichtung-und-ursachen-154/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 343,
+          "name": "Keller-Luftentfeuchter",
+          "slug": "hab-keller-luftentfeuchter-exp",
+          "url": "https://hab-und-bewahr.de/category/hab-keller-luftentfeuchter-exp/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 167,
+      "existing_wp_page3_name": "Alarm & Kamera ohne Netz",
+      "existing_categories": [
+        {
+          "term_id": 244,
+          "name": "Alarmanlage bei Stromausfall",
+          "slug": "technik-und-a-alarm-internet-und-alarmanlage-bei-stromausf-89",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-alarm-internet-und-alarmanlage-bei-stromausf-89/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 245,
+          "name": "Offline-Sicherheitssysteme",
+          "slug": "technik-und-a-alarm-internet-und-offline-sicherheitssystem-90",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-alarm-internet-und-offline-sicherheitssystem-90/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 317,
+          "name": "Router & Mobilfunk-Backup",
+          "slug": "hab-router-und-mobilfunk-backup-164",
+          "url": "https://hab-und-bewahr.de/category/hab-router-und-mobilfunk-backup-164/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 168,
+      "existing_wp_page3_name": "Stellplätze & Renovierung",
+      "existing_categories": [
+        {
+          "term_id": 197,
+          "name": "Private Stellflächen",
+          "slug": "einbruch-und-abwesenheit-und-le-private-stellflachen-17",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-abwesenheit-und-le-private-stellflachen-17/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 250,
+          "name": "Private Renovierungsbaustellen",
+          "slug": "einbruch-und-abwesenheit-und-le-private-renovierungsbaust-97",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-abwesenheit-und-le-private-renovierungsbaust-97/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 299,
+          "name": "Stellplatz-Zutritt",
+          "slug": "hab-stellplatz-zutritt-146",
+          "url": "https://hab-und-bewahr.de/category/hab-stellplatz-zutritt-146/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 169,
+      "existing_wp_page3_name": "Leckwarnung & Absperrung",
+      "existing_categories": [
+        {
+          "term_id": 210,
+          "name": "Wassermelder",
+          "slug": "wasser-und-fe-leckage-und-rohrbr-wassermelder-39",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-leckage-und-rohrbr-wassermelder-39/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 211,
+          "name": "Wasserstopp & Geräteschutz",
+          "slug": "wasser-und-fe-leckage-und-rohrbr-wasserstopp-und-geratesch-40",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-leckage-und-rohrbr-wasserstopp-und-geratesch-40/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 305,
+          "name": "Rohrdruck & Lecksuche",
+          "slug": "hab-rohrdruck-und-lecksuche-152",
+          "url": "https://hab-und-bewahr.de/category/hab-rohrdruck-und-lecksuche-152/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 170,
+      "existing_wp_page3_name": "Brandschutz im Camper",
+      "existing_categories": [
+        {
+          "term_id": 225,
+          "name": "Rauch, CO & Gas beim Camping",
+          "slug": "feuer-und-gas-camping-rauch-co-und-gas-beim-cam-62",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-camping-rauch-co-und-gas-beim-cam-62/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 285,
+          "name": "Camping-Akkus & Ladegeräte",
+          "slug": "feuer-und-gase-camping-camping-akkus-und-lade-132",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gase-camping-camping-akkus-und-lade-132/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 309,
+          "name": "Gasflaschen & Kocher im Camper",
+          "slug": "hab-gasflaschen-und-kocher-im-camper-156",
+          "url": "https://hab-und-bewahr.de/category/hab-gasflaschen-und-kocher-im-camper-156/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 171,
+      "existing_wp_page3_name": "Räder & Privatfahrzeuge",
+      "existing_categories": [
+        {
+          "term_id": 192,
+          "name": "Fahrräder & E-Bikes",
+          "slug": "einbruch-und-freizeit-und-mobil-fahrrader-und-e-bikes-11",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-freizeit-und-mobil-fahrrader-und-e-bikes-11/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 253,
+          "name": "Motorräder & Privat-Anhänger",
+          "slug": "einbruch-und-freizeit-und-mobil-motorrader-und-privat-anh-100",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-freizeit-und-mobil-motorrader-und-privat-anh-100/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 296,
+          "name": "Oldtimer & Privatwagen",
+          "slug": "hab-oldtimer-und-privatwagen-143",
+          "url": "https://hab-und-bewahr.de/category/hab-oldtimer-und-privatwagen-143/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 172,
+      "existing_wp_page3_name": "Frost & Leerstand",
+      "existing_categories": [
+        {
+          "term_id": 215,
+          "name": "Wasserleitungen gegen Frost",
+          "slug": "wasser-und-fe-frost-und-abwesenh-wasserleitungen-gegen-fro-46",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-frost-und-abwesenh-wasserleitungen-gegen-fro-46/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 216,
+          "name": "Ferienhaus & Wasserschäden",
+          "slug": "wasser-und-fe-frost-und-abwesenh-ferienhaus-und-wasserscha-47",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-frost-und-abwesenh-ferienhaus-und-wasserscha-47/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 262,
+          "name": "Schimmel im Ferienhaus",
+          "slug": "wasser-und-feuchtigkei-frost-und-abwesenhei-schimmel-im-ferienhaus-109",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigkei-frost-und-abwesenhei-schimmel-im-ferienhaus-109/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 173,
+      "existing_wp_page3_name": "Kleine Vereine & Plätze",
+      "existing_categories": [
+        {
+          "term_id": 199,
+          "name": "Vereinsheim & Clubhaus",
+          "slug": "einbruch-und-kleine-betriebe-un-vereinsheim-und-clubhaus-21",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-kleine-betriebe-un-vereinsheim-und-clubhaus-21/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 200,
+          "name": "Kleine Vereinsplätze & Schuppen",
+          "slug": "einbruch-und-kleine-betriebe-un-kleine-vereinsplatze-und-22",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-kleine-betriebe-un-kleine-vereinsplatze-und-22/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 301,
+          "name": "Sportgerät & Platzinventar",
+          "slug": "hab-sportgerat-und-platzinventar-148",
+          "url": "https://hab-und-bewahr.de/category/hab-sportgerat-und-platzinventar-148/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 174,
+      "existing_wp_page3_name": "Wasser in Kleinbetrieben",
+      "existing_categories": [
+        {
+          "term_id": 218,
+          "name": "Wasser in kleinen Betriebsräumen",
+          "slug": "wasser-und-fe-kleine-objekte-bet-wasser-in-kleinen-betrieb-52",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-kleine-objekte-bet-wasser-in-kleinen-betrieb-52/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 281,
+          "name": "Leckagen im kleinen Vereinsheim",
+          "slug": "wasser-und-feuchtigk-kleine-objekte-betri-leckagen-im-kleinen-ve-128",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigk-kleine-objekte-betri-leckagen-im-kleinen-ve-128/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 308,
+          "name": "Wasserschutz im Privatsalon",
+          "slug": "hab-wasserschutz-im-privatsalon-155",
+          "url": "https://hab-und-bewahr.de/category/hab-wasserschutz-im-privatsalon-155/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 175,
+      "existing_wp_page3_name": "Brandschutz & Löschmittel",
+      "existing_categories": [
+        {
+          "term_id": 219,
+          "name": "Rauchmelder / Vernetzung",
+          "slug": "feuer-und-gas-rauch-und-brand-rauchmelder-vernetzung-54",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-rauch-und-brand-rauchmelder-vernetzung-54/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 220,
+          "name": "Feuerlöscher & Löschmittel",
+          "slug": "feuer-und-gas-rauch-und-brand-feuerloscher-und-loschmit-55",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-rauch-und-brand-feuerloscher-und-loschmit-55/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 251,
+          "name": "Küchen- & Fettbrand",
+          "slug": "feuer-und-gas-rauch-und-brand-kuchen-und-fettbrand-98",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gas-rauch-und-brand-kuchen-und-fettbrand-98/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 282,
+          "name": "Elektrische Küchenbrandgefahren",
+          "slug": "feuer-und-gase-rauch-und-brand-elektrische-kuchenbran-129",
+          "url": "https://hab-und-bewahr.de/category/feuer-und-gase-rauch-und-brand-elektrische-kuchenbran-129/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 176,
+      "existing_wp_page3_name": "Kleinbetriebe & Ateliers",
+      "existing_categories": [
+        {
+          "term_id": 198,
+          "name": "Kleine Laden- & Praxisräume",
+          "slug": "einbruch-und-kleine-betriebe-un-kleine-laden-und-praxisra-19",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-kleine-betriebe-un-kleine-laden-und-praxisra-19/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 259,
+          "name": "Werkstatt & Atelier gegen Diebstahl",
+          "slug": "einbruch-und-diebstahl-kleine-betriebe-und-werkstatt-und-atelier-ge-106",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-kleine-betriebe-und-werkstatt-und-atelier-ge-106/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 300,
+          "name": "Salon & Ladenlokal",
+          "slug": "hab-salon-und-ladenlokal-147",
+          "url": "https://hab-und-bewahr.de/category/hab-salon-und-ladenlokal-147/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 177,
+      "existing_wp_page3_name": "Wertsachen & Schadenfall",
+      "existing_categories": [
+        {
+          "term_id": 186,
+          "name": "Wertsachen & Tresore",
+          "slug": "einbruch-und-haus-und-wohnung-wertsachen-und-tresore-4",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-haus-und-wohnung-wertsachen-und-tresore-4/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 255,
+          "name": "Dokumente & Datenträger schützen",
+          "slug": "einbruch-und-diebstahl-haus-und-wohnung-dokumente-und-datentrage-102",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-haus-und-wohnung-dokumente-und-datentrage-102/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 258,
+          "name": "Nach dem Einbruch",
+          "slug": "einbruch-und-diebstahl-haus-und-wohnung-nach-dem-einbruch-105",
+          "url": "https://hab-und-bewahr.de/category/einbruch-und-diebstahl-haus-und-wohnung-nach-dem-einbruch-105/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 178,
+      "existing_wp_page3_name": "Wohnobjekte & Nebenräume",
+      "existing_categories": [
+        {
+          "term_id": 246,
+          "name": "Ferienhaus fernüberwachen",
+          "slug": "technik-und-a-fernuberwachung-un-ferienhaus-fernuberwachen-92",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-fernuberwachung-un-ferienhaus-fernuberwachen-92/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 248,
+          "name": "Nebenobjekte fernüberwachen",
+          "slug": "technik-und-a-fernuberwachung-un-nebenobjekte-fernuberwach-94",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-fernuberwachung-un-nebenobjekte-fernuberwach-94/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 318,
+          "name": "Gartenhaus fernüberwachen",
+          "slug": "hab-gartenhaus-fernuberwachen-165",
+          "url": "https://hab-und-bewahr.de/category/hab-gartenhaus-fernuberwachen-165/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 179,
+      "existing_wp_page3_name": "Pumpen & Notbetrieb",
+      "existing_categories": [
+        {
+          "term_id": 243,
+          "name": "Pumpen-Störmeldungen",
+          "slug": "technik-und-a-pumpen-und-haustec-pumpen-stormeldungen-86",
+          "url": "https://hab-und-bewahr.de/category/technik-und-a-pumpen-und-haustec-pumpen-stormeldungen-86/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 291,
+          "name": "Sumpfpumpen-Ausfallalarme",
+          "slug": "technik-und-ausfalle-pumpen-und-haustechn-sumpfpumpen-ausfallala-138",
+          "url": "https://hab-und-bewahr.de/category/technik-und-ausfalle-pumpen-und-haustechn-sumpfpumpen-ausfallala-138/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 316,
+          "name": "Notstrom für Pumpen",
+          "slug": "hab-notstrom-fur-pumpen-163",
+          "url": "https://hab-und-bewahr.de/category/hab-notstrom-fur-pumpen-163/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 180,
+      "existing_wp_page3_name": "Rückstau & Pumptechnik",
+      "existing_categories": [
+        {
+          "term_id": 212,
+          "name": "Rückstauklappen",
+          "slug": "wasser-und-fe-keller-und-rucksta-ruckstauklappen-42",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-keller-und-rucksta-ruckstauklappen-42/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 213,
+          "name": "Hebeanlagen & Rückstau",
+          "slug": "wasser-und-fe-keller-und-rucksta-hebeanlagen-und-ruckstau-43",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-keller-und-rucksta-hebeanlagen-und-ruckstau-43/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 278,
+          "name": "Pumpensumpf & Kellerschutz",
+          "slug": "wasser-und-feuchtigk-keller-und-ruckstau-pumpensumpf-und-keller-125",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigk-keller-und-ruckstau-pumpensumpf-und-keller-125/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 181,
+      "existing_wp_page3_name": "Feuchtigkeit & Winterlager",
+      "existing_categories": [
+        {
+          "term_id": 217,
+          "name": "Feuchtigkeit beim Camping",
+          "slug": "wasser-und-fe-camping-und-freize-feuchtigkeit-beim-camping-49",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-fe-camping-und-freize-feuchtigkeit-beim-camping-49/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 263,
+          "name": "Wasseranlage im Winterlager",
+          "slug": "wasser-und-feuchtigkei-freizeit-und-kleinob-wasseranlage-im-winterla-110",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigkei-freizeit-und-kleinob-wasseranlage-im-winterla-110/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 280,
+          "name": "Vorzelt & Dichtheitsprobleme",
+          "slug": "wasser-und-feuchtigk-camping-und-freizeit-vorzelt-und-dichtheits-127",
+          "url": "https://hab-und-bewahr.de/category/wasser-und-feuchtigk-camping-und-freizeit-vorzelt-und-dichtheits-127/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 401,
+          "name": "Feuchte im Gartenhaus",
+          "slug": "hab-feuchte-im-gartenhaus-exp",
+          "url": "https://hab-und-bewahr.de/category/hab-feuchte-im-gartenhaus-exp/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 182,
+      "existing_wp_page3_name": "Dach, Fenster & PV",
+      "existing_categories": [
+        {
+          "term_id": 230,
+          "name": "Dach & Fenster bei Sturm",
+          "slug": "wetter-und-na-sturm-und-hagel-dach-und-fenster-bei-stur-69",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-sturm-und-hagel-dach-und-fenster-bei-stur-69/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 232,
+          "name": "PV-Anlagen bei Sturm",
+          "slug": "wetter-und-na-sturm-und-hagel-pv-anlagen-bei-sturm-71",
+          "url": "https://hab-und-bewahr.de/category/wetter-und-na-sturm-und-hagel-pv-anlagen-bei-sturm-71/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 313,
+          "name": "Wintergarten & Glasdach",
+          "slug": "hab-wintergarten-und-glasdach-160",
+          "url": "https://hab-und-bewahr.de/category/hab-wintergarten-und-glasdach-160/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 247,
+      "existing_wp_page3_name": "Wiederanlauf nach Stromausfall",
+      "existing_categories": [
+        {
+          "term_id": 497,
+          "name": "Kühlgeräte nach Netzausfall",
+          "slug": "r3-kuehlgeraete-nach-netzausfall-aa78c537",
+          "url": "https://hab-und-bewahr.de/category/r3-kuehlgeraete-nach-netzausfall-aa78c537/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 537,
+          "name": "Heizungsneustart nach Stromausfall",
+          "slug": "r3-heizungsneustart-nach-stromausfall-f6e47d2f",
+          "url": "https://hab-und-bewahr.de/category/r3-heizungsneustart-nach-stromausfall-f6e47d2f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 519,
+          "name": "Verbraucher beim Wiederanlauf",
+          "slug": "r3-verbraucher-beim-wiederanlauf-cfe78dfe",
+          "url": "https://hab-und-bewahr.de/category/r3-verbraucher-beim-wiederanlauf-cfe78dfe/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 248,
+      "existing_wp_page3_name": "Private Freizeit- & Spielanlagen",
+      "existing_categories": [
+        {
+          "term_id": 528,
+          "name": "Spielgeräte vor Vandalismus",
+          "slug": "r3-spielgeraete-vor-vandalismus-de816099",
+          "url": "https://hab-und-bewahr.de/category/r3-spielgeraete-vor-vandalismus-de816099/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 522,
+          "name": "Private Grill- & Rastbereiche",
+          "slug": "r3-private-grill-rastbereiche-d638cc84",
+          "url": "https://hab-und-bewahr.de/category/r3-private-grill-rastbereiche-d638cc84/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 500,
+          "name": "Kleingarten-Gemeinschaftsflächen",
+          "slug": "r3-kleingarten-gemeinschaftsflaechen-af0018e1",
+          "url": "https://hab-und-bewahr.de/category/r3-kleingarten-gemeinschaftsflaechen-af0018e1/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 249,
+      "existing_wp_page3_name": "Gasinstallation im Freizeitfahrzeug",
+      "existing_categories": [
+        {
+          "term_id": 468,
+          "name": "Feste Gasinstallationen im Camper",
+          "slug": "r3-feste-gasinstallationen-im-camper-7810616b",
+          "url": "https://hab-und-bewahr.de/category/r3-feste-gasinstallationen-im-camper-7810616b/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 506,
+          "name": "Gasheizung & Abgasführung im Camper",
+          "slug": "r3-gasheizung-abgasfuehrung-im-camper-b6e7b9cd",
+          "url": "https://hab-und-bewahr.de/category/r3-gasheizung-abgasfuehrung-im-camper-b6e7b9cd/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 470,
+          "name": "Gasprüfungen im Freizeitfahrzeug",
+          "slug": "r3-gaspruefungen-im-freizeitfahrzeug-7957cfe6",
+          "url": "https://hab-und-bewahr.de/category/r3-gaspruefungen-im-freizeitfahrzeug-7957cfe6/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 250,
+      "existing_wp_page3_name": "Kontrolle ungenutzter Sanitärräume",
+      "existing_categories": [
+        {
+          "term_id": 421,
+          "name": "Feuchtekontrolle bei Leerstand",
+          "slug": "r3-feuchtekontrolle-bei-leerstand-2569449d",
+          "url": "https://hab-und-bewahr.de/category/r3-feuchtekontrolle-bei-leerstand-2569449d/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 413,
+          "name": "Abflüsse bei längerer Nichtnutzung",
+          "slug": "r3-abfluesse-bei-laengerer-nichtnutzung-179db0c3",
+          "url": "https://hab-und-bewahr.de/category/r3-abfluesse-bei-laengerer-nichtnutzung-179db0c3/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 408,
+          "name": "Wasserzähler & Absperrkontrolle",
+          "slug": "r3-wasserzaehler-absperrkontrolle-0e99b0a2",
+          "url": "https://hab-und-bewahr.de/category/r3-wasserzaehler-absperrkontrolle-0e99b0a2/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 251,
+      "existing_wp_page3_name": "Verbrennungsluft & Raumlüftung",
+      "existing_categories": [
+        {
+          "term_id": 422,
+          "name": "Verbrennungsluft bei Gasgeräten",
+          "slug": "r3-verbrennungsluft-bei-gasgeraeten-27841cdd",
+          "url": "https://hab-und-bewahr.de/category/r3-verbrennungsluft-bei-gasgeraeten-27841cdd/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 404,
+          "name": "Abluftanlagen & Unterdruck",
+          "slug": "r3-abluftanlagen-unterdruck-031dc098",
+          "url": "https://hab-und-bewahr.de/category/r3-abluftanlagen-unterdruck-031dc098/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 456,
+          "name": "Luftzufuhr bei Kaminbetrieb",
+          "slug": "r3-luftzufuhr-bei-kaminbetrieb-62efa87d",
+          "url": "https://hab-und-bewahr.de/category/r3-luftzufuhr-bei-kaminbetrieb-62efa87d/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 252,
+      "existing_wp_page3_name": "Elektroinstallation & Leitungen",
+      "existing_categories": [
+        {
+          "term_id": 496,
+          "name": "Steckdosen & Mehrfachverteiler",
+          "slug": "r3-steckdosen-mehrfachverteiler-a98a0ef2",
+          "url": "https://hab-und-bewahr.de/category/r3-steckdosen-mehrfachverteiler-a98a0ef2/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 495,
+          "name": "Elektroleitungen & Schmorstellen",
+          "slug": "r3-elektroleitungen-schmorstellen-a82f4272",
+          "url": "https://hab-und-bewahr.de/category/r3-elektroleitungen-schmorstellen-a82f4272/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 510,
+          "name": "Kabelbrände im Wohnbereich",
+          "slug": "r3-kabelbraende-im-wohnbereich-bd5abd8a",
+          "url": "https://hab-und-bewahr.de/category/r3-kabelbraende-im-wohnbereich-bd5abd8a/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 253,
+      "existing_wp_page3_name": "Gasleitungen & Absperreinrichtungen",
+      "existing_categories": [
+        {
+          "term_id": 478,
+          "name": "Gasanschlüsse im Wohnhaus",
+          "slug": "r3-gasanschluesse-im-wohnhaus-87633095",
+          "url": "https://hab-und-bewahr.de/category/r3-gasanschluesse-im-wohnhaus-87633095/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 471,
+          "name": "Gasleitungen in Nebenräumen",
+          "slug": "r3-gasleitungen-in-nebenraeumen-7ce906f5",
+          "url": "https://hab-und-bewahr.de/category/r3-gasleitungen-in-nebenraeumen-7ce906f5/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 460,
+          "name": "Gasabsperrung & Armaturen",
+          "slug": "r3-gasabsperrung-armaturen-6a992d79",
+          "url": "https://hab-und-bewahr.de/category/r3-gasabsperrung-armaturen-6a992d79/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 254,
+      "existing_wp_page3_name": "Geparkte Privatfahrzeuge",
+      "existing_categories": [
+        {
+          "term_id": 474,
+          "name": "Sachbeschädigung an Privatwagen",
+          "slug": "r3-sachbeschaedigung-an-privatwagen-8031d3cd",
+          "url": "https://hab-und-bewahr.de/category/r3-sachbeschaedigung-an-privatwagen-8031d3cd/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 445,
+          "name": "Motorräder & Roller vor Vandalismus",
+          "slug": "r3-motorraeder-roller-vor-vandalismus-5076b4b4",
+          "url": "https://hab-und-bewahr.de/category/r3-motorraeder-roller-vor-vandalismus-5076b4b4/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 489,
+          "name": "Oldtimer & Sammlerfahrzeuge",
+          "slug": "r3-oldtimer-sammlerfahrzeuge-9a904d36",
+          "url": "https://hab-und-bewahr.de/category/r3-oldtimer-sammlerfahrzeuge-9a904d36/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 255,
+      "existing_wp_page3_name": "Sport- & Vereinsinfrastruktur",
+      "existing_categories": [
+        {
+          "term_id": 427,
+          "name": "Sporttore & Spielfeldinventar",
+          "slug": "r3-sporttore-spielfeldinventar-3287077a",
+          "url": "https://hab-und-bewahr.de/category/r3-sporttore-spielfeldinventar-3287077a/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 486,
+          "name": "Vereinszäune & Absperrungen",
+          "slug": "r3-vereinszaeune-absperrungen-966c6248",
+          "url": "https://hab-und-bewahr.de/category/r3-vereinszaeune-absperrungen-966c6248/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 529,
+          "name": "Flutlicht & Platztechnik",
+          "slug": "r3-flutlicht-platztechnik-e7e73ff1",
+          "url": "https://hab-und-bewahr.de/category/r3-flutlicht-platztechnik-e7e73ff1/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 256,
+      "existing_wp_page3_name": "Warnung & private Vorbereitung",
+      "existing_categories": [
+        {
+          "term_id": 542,
+          "name": "Warnsysteme bei Starkregen",
+          "slug": "r3-warnsysteme-bei-starkregen-fb2766be",
+          "url": "https://hab-und-bewahr.de/category/r3-warnsysteme-bei-starkregen-fb2766be/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 490,
+          "name": "Hausrat vor Hochwasser",
+          "slug": "r3-hausrat-vor-hochwasser-9bcee31f",
+          "url": "https://hab-und-bewahr.de/category/r3-hausrat-vor-hochwasser-9bcee31f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 488,
+          "name": "Notfallunterlagen bei Hochwasser",
+          "slug": "r3-notfallunterlagen-bei-hochwasser-9734a9c7",
+          "url": "https://hab-und-bewahr.de/category/r3-notfallunterlagen-bei-hochwasser-9734a9c7/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 257,
+      "existing_wp_page3_name": "Kontrollen & Anwesenheit",
+      "existing_categories": [
+        {
+          "term_id": 541,
+          "name": "Private Objektkontrollen",
+          "slug": "r3-private-objektkontrollen-fa3f56f7",
+          "url": "https://hab-und-bewahr.de/category/r3-private-objektkontrollen-fa3f56f7/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 453,
+          "name": "Post & Zustellung bei Leerstand",
+          "slug": "r3-post-zustellung-bei-leerstand-5cae4c47",
+          "url": "https://hab-und-bewahr.de/category/r3-post-zustellung-bei-leerstand-5cae4c47/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 435,
+          "name": "Anwesenheitssimulation",
+          "slug": "r3-anwesenheitssimulation-3ec423ab",
+          "url": "https://hab-und-bewahr.de/category/r3-anwesenheitssimulation-3ec423ab/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 258,
+      "existing_wp_page3_name": "Pumpenwartung & Verschleiß",
+      "existing_categories": [
+        {
+          "term_id": 483,
+          "name": "Wartung von Sumpfpumpen",
+          "slug": "r3-wartung-von-sumpfpumpen-94061c4f",
+          "url": "https://hab-und-bewahr.de/category/r3-wartung-von-sumpfpumpen-94061c4f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 412,
+          "name": "Rückschlagventile an Hauspumpen",
+          "slug": "r3-rueckschlagventile-an-hauspumpen-14013ee2",
+          "url": "https://hab-und-bewahr.de/category/r3-rueckschlagventile-an-hauspumpen-14013ee2/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 501,
+          "name": "Ersatzpumpen für Hausentwässerung",
+          "slug": "r3-ersatzpumpen-fuer-hausentwaesserung-aff1678a",
+          "url": "https://hab-und-bewahr.de/category/r3-ersatzpumpen-fuer-hausentwaesserung-aff1678a/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 259,
+      "existing_wp_page3_name": "Tanks & Sanitärleitungen",
+      "existing_categories": [
+        {
+          "term_id": 540,
+          "name": "Frischwassertank & Undichtigkeit",
+          "slug": "r3-frischwassertank-undichtigkeit-f850a5bd",
+          "url": "https://hab-und-bewahr.de/category/r3-frischwassertank-undichtigkeit-f850a5bd/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 469,
+          "name": "Abwassertank & Leckage",
+          "slug": "r3-abwassertank-leckage-7902e24f",
+          "url": "https://hab-und-bewahr.de/category/r3-abwassertank-leckage-7902e24f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 475,
+          "name": "Wasserpumpen im Camper",
+          "slug": "r3-wasserpumpen-im-camper-82d8b1e8",
+          "url": "https://hab-und-bewahr.de/category/r3-wasserpumpen-im-camper-82d8b1e8/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 260,
+      "existing_wp_page3_name": "Vereisung an Außenbauteilen",
+      "existing_categories": [
+        {
+          "term_id": 448,
+          "name": "Rollläden & Jalousien im Frost",
+          "slug": "r3-rolllaeden-jalousien-im-frost-5417fae6",
+          "url": "https://hab-und-bewahr.de/category/r3-rolllaeden-jalousien-im-frost-5417fae6/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 430,
+          "name": "Vereiste Türschlösser",
+          "slug": "r3-vereiste-tuerschloesser-3b3f23b8",
+          "url": "https://hab-und-bewahr.de/category/r3-vereiste-tuerschloesser-3b3f23b8/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 424,
+          "name": "Gefrorene Außenentwässerung",
+          "slug": "r3-gefrorene-aussenentwaesserung-2c7c11aa",
+          "url": "https://hab-und-bewahr.de/category/r3-gefrorene-aussenentwaesserung-2c7c11aa/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 261,
+      "existing_wp_page3_name": "Betriebszugang & Abläufe",
+      "existing_categories": [
+        {
+          "term_id": 406,
+          "name": "Schlüsselmanagement im Kleingewerbe",
+          "slug": "r3-schluesselmanagement-im-kleingewerbe-07dc62dc",
+          "url": "https://hab-und-bewahr.de/category/r3-schluesselmanagement-im-kleingewerbe-07dc62dc/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 411,
+          "name": "Kassen & Bargeld nach Ladenschluss",
+          "slug": "r3-kassen-bargeld-nach-ladenschluss-13171382",
+          "url": "https://hab-und-bewahr.de/category/r3-kassen-bargeld-nach-ladenschluss-13171382/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 538,
+          "name": "Liefer- & Fremdzutritte",
+          "slug": "r3-liefer-fremdzutritte-f7b83758",
+          "url": "https://hab-und-bewahr.de/category/r3-liefer-fremdzutritte-f7b83758/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 262,
+      "existing_wp_page3_name": "Brandlasten & Betriebsstrom",
+      "existing_categories": [
+        {
+          "term_id": 419,
+          "name": "Brennbare Waren & Dekoration",
+          "slug": "r3-brennbare-waren-dekoration-2152e155",
+          "url": "https://hab-und-bewahr.de/category/r3-brennbare-waren-dekoration-2152e155/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 439,
+          "name": "Steckdosen im kleinen Gewerbe",
+          "slug": "r3-steckdosen-im-kleinen-gewerbe-43f9d2b9",
+          "url": "https://hab-und-bewahr.de/category/r3-steckdosen-im-kleinen-gewerbe-43f9d2b9/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 511,
+          "name": "Maschinenbrand in Kleinwerkstätten",
+          "slug": "r3-maschinenbrand-in-kleinwerkstaetten-bf02dd0d",
+          "url": "https://hab-und-bewahr.de/category/r3-maschinenbrand-in-kleinwerkstaetten-bf02dd0d/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 263,
+      "existing_wp_page3_name": "Betriebsfolgen & Bestandsschutz",
+      "existing_categories": [
+        {
+          "term_id": 482,
+          "name": "Warenbestände & Wasserschaden",
+          "slug": "r3-warenbestaende-wasserschaden-9230f55f",
+          "url": "https://hab-und-bewahr.de/category/r3-warenbestaende-wasserschaden-9230f55f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 465,
+          "name": "Trocknung kleiner Ladenflächen",
+          "slug": "r3-trocknung-kleiner-ladenflaechen-74745c21",
+          "url": "https://hab-und-bewahr.de/category/r3-trocknung-kleiner-ladenflaechen-74745c21/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 539,
+          "name": "Schimmel in kleinen Vereinsräumen",
+          "slug": "r3-schimmel-in-kleinen-vereinsraeumen-f81a69f5",
+          "url": "https://hab-und-bewahr.de/category/r3-schimmel-in-kleinen-vereinsraeumen-f81a69f5/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 264,
+      "existing_wp_page3_name": "Alarmkommunikation & Übertragung",
+      "existing_categories": [
+        {
+          "term_id": 461,
+          "name": "Alarmübertragungswege & Standards",
+          "slug": "r3-alarmuebertragungswege-standards-6e7a28f2",
+          "url": "https://hab-und-bewahr.de/category/r3-alarmuebertragungswege-standards-6e7a28f2/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 415,
+          "name": "SIM-Karten für Alarmmelder",
+          "slug": "r3-sim-karten-fuer-alarmmelder-19be50b6",
+          "url": "https://hab-und-bewahr.de/category/r3-sim-karten-fuer-alarmmelder-19be50b6/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 464,
+          "name": "Ausbleibende Push-Benachrichtigungen",
+          "slug": "r3-ausbleibende-push-benachrichtigungen-73e93c8d",
+          "url": "https://hab-und-bewahr.de/category/r3-ausbleibende-push-benachrichtigungen-73e93c8d/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 265,
+      "existing_wp_page3_name": "Winterwege & Verkehrssicherung",
+      "existing_categories": [
+        {
+          "term_id": 463,
+          "name": "Räumpflichten auf Privatwegen",
+          "slug": "r3-raeumpflichten-auf-privatwegen-71a9bcc5",
+          "url": "https://hab-und-bewahr.de/category/r3-raeumpflichten-auf-privatwegen-71a9bcc5/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 466,
+          "name": "Glatteis an Garagenzufahrten",
+          "slug": "r3-glatteis-an-garagenzufahrten-771ac07c",
+          "url": "https://hab-und-bewahr.de/category/r3-glatteis-an-garagenzufahrten-771ac07c/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 536,
+          "name": "Rutschschutz an Hauseingängen",
+          "slug": "r3-rutschschutz-an-hauseingaengen-f3e9525f",
+          "url": "https://hab-und-bewahr.de/category/r3-rutschschutz-an-hauseingaengen-f3e9525f/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 266,
+      "existing_wp_page3_name": "Unwetterwarnung & Vorbereitung",
+      "existing_categories": [
+        {
+          "term_id": 454,
+          "name": "Sturmwarnungen verstehen",
+          "slug": "r3-sturmwarnungen-verstehen-5f46aba4",
+          "url": "https://hab-und-bewahr.de/category/r3-sturmwarnungen-verstehen-5f46aba4/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 431,
+          "name": "Sicherung ausfahrbarer Markisen",
+          "slug": "r3-sicherung-ausfahrbarer-markisen-3b48e73b",
+          "url": "https://hab-und-bewahr.de/category/r3-sicherung-ausfahrbarer-markisen-3b48e73b/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 487,
+          "name": "Mobile Gegenstände vor Sturm",
+          "slug": "r3-mobile-gegenstaende-vor-sturm-9681ab11",
+          "url": "https://hab-und-bewahr.de/category/r3-mobile-gegenstaende-vor-sturm-9681ab11/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 267,
+      "existing_wp_page3_name": "Freizeitflächen & mobile Anlagen",
+      "existing_categories": [
+        {
+          "term_id": 442,
+          "name": "Spielgeräte bei Sturm",
+          "slug": "r3-spielgeraete-bei-sturm-4d38456f",
+          "url": "https://hab-und-bewahr.de/category/r3-spielgeraete-bei-sturm-4d38456f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 477,
+          "name": "Kleingartenlauben bei Hagel",
+          "slug": "r3-kleingartenlauben-bei-hagel-8704f999",
+          "url": "https://hab-und-bewahr.de/category/r3-kleingartenlauben-bei-hagel-8704f999/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 443,
+          "name": "Mobile Zäune bei Starkwind",
+          "slug": "r3-mobile-zaeune-bei-starkwind-4d7cbfaa",
+          "url": "https://hab-und-bewahr.de/category/r3-mobile-zaeune-bei-starkwind-4d7cbfaa/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 268,
+      "existing_wp_page3_name": "Alarmreaktionen & Vertretung",
+      "existing_categories": [
+        {
+          "term_id": 533,
+          "name": "Fernalarm an Vertrauenspersonen",
+          "slug": "r3-fernalarm-an-vertrauenspersonen-eb51f029",
+          "url": "https://hab-und-bewahr.de/category/r3-fernalarm-an-vertrauenspersonen-eb51f029/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 403,
+          "name": "Fehlalarme aus der Ferne prüfen",
+          "slug": "r3-fehlalarme-aus-der-ferne-pruefen-022db021",
+          "url": "https://hab-und-bewahr.de/category/r3-fehlalarme-aus-der-ferne-pruefen-022db021/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 491,
+          "name": "Eskalationspläne bei Fernüberwachung",
+          "slug": "r3-eskalationsplaene-bei-fernueberwachung-a11805d9",
+          "url": "https://hab-und-bewahr.de/category/r3-eskalationsplaene-bei-fernueberwachung-a11805d9/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 269,
+      "existing_wp_page3_name": "Pumpenursachen & Sensorik",
+      "existing_categories": [
+        {
+          "term_id": 434,
+          "name": "Blockierte Pumpenzuläufe",
+          "slug": "r3-blockierte-pumpenzulaeufe-3dec24f7",
+          "url": "https://hab-und-bewahr.de/category/r3-blockierte-pumpenzulaeufe-3dec24f7/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 407,
+          "name": "Störungen an Schwimmerschaltern",
+          "slug": "r3-stoerungen-an-schwimmerschaltern-0aef4c53",
+          "url": "https://hab-und-bewahr.de/category/r3-stoerungen-an-schwimmerschaltern-0aef4c53/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 518,
+          "name": "Trockenlaufschutz für Pumpen",
+          "slug": "r3-trockenlaufschutz-fuer-pumpen-cf2a9fdd",
+          "url": "https://hab-und-bewahr.de/category/r3-trockenlaufschutz-fuer-pumpen-cf2a9fdd/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 270,
+      "existing_wp_page3_name": "Ofen, Kamin & offenes Feuer",
+      "existing_categories": [
+        {
+          "term_id": 509,
+          "name": "Schornsteinbrand & Rußablagerung",
+          "slug": "r3-schornsteinbrand-russablagerung-bc9f755e",
+          "url": "https://hab-und-bewahr.de/category/r3-schornsteinbrand-russablagerung-bc9f755e/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 429,
+          "name": "Kaminofen & Sicherheitsabstände",
+          "slug": "r3-kaminofen-sicherheitsabstaende-37d105c4",
+          "url": "https://hab-und-bewahr.de/category/r3-kaminofen-sicherheitsabstaende-37d105c4/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 513,
+          "name": "Offene Feuerstellen im Garten",
+          "slug": "r3-offene-feuerstellen-im-garten-c69392e9",
+          "url": "https://hab-und-bewahr.de/category/r3-offene-feuerstellen-im-garten-c69392e9/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 271,
+      "existing_wp_page3_name": "Regenabdichtung am Freizeitfahrzeug",
+      "existing_categories": [
+        {
+          "term_id": 535,
+          "name": "Wohnmobil-Dachnähte & Abdichtung",
+          "slug": "r3-wohnmobil-dachnaehte-abdichtung-f1b00d09",
+          "url": "https://hab-und-bewahr.de/category/r3-wohnmobil-dachnaehte-abdichtung-f1b00d09/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 432,
+          "name": "Staufächer & Außenklappen",
+          "slug": "r3-staufaecher-aussenklappen-3cc043f1",
+          "url": "https://hab-und-bewahr.de/category/r3-staufaecher-aussenklappen-3cc043f1/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 410,
+          "name": "Dachluken & Feuchteeintritt",
+          "slug": "r3-dachluken-feuchteeintritt-0f839417",
+          "url": "https://hab-und-bewahr.de/category/r3-dachluken-feuchteeintritt-0f839417/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 272,
+      "existing_wp_page3_name": "Oberflächen & Fassadenbauteile",
+      "existing_categories": [
+        {
+          "term_id": 437,
+          "name": "Fassadenputz & Oberflächenschäden",
+          "slug": "r3-fassadenputz-oberflaechenschaeden-42c3a2c1",
+          "url": "https://hab-und-bewahr.de/category/r3-fassadenputz-oberflaechenschaeden-42c3a2c1/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 462,
+          "name": "Verkleidungen & Außendämmung",
+          "slug": "r3-verkleidungen-aussendaemmung-6fb5e647",
+          "url": "https://hab-und-bewahr.de/category/r3-verkleidungen-aussendaemmung-6fb5e647/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 447,
+          "name": "Außenrollläden vor Vandalismus",
+          "slug": "r3-aussenrolllaeden-vor-vandalismus-536f47f9",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenrolllaeden-vor-vandalismus-536f47f9/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 273,
+      "existing_wp_page3_name": "Technikräume & Absperrstellen",
+      "existing_categories": [
+        {
+          "term_id": 405,
+          "name": "Wassertechnikräume im Kleingewerbe",
+          "slug": "r3-wassertechnikraeume-im-kleingewerbe-05a275ad",
+          "url": "https://hab-und-bewahr.de/category/r3-wassertechnikraeume-im-kleingewerbe-05a275ad/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 441,
+          "name": "Wasserschutz an Praxisgeräten",
+          "slug": "r3-wasserschutz-an-praxisgeraeten-4cd88f95",
+          "url": "https://hab-und-bewahr.de/category/r3-wasserschutz-an-praxisgeraeten-4cd88f95/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 520,
+          "name": "Hauptabsperrung kleiner Betriebe",
+          "slug": "r3-hauptabsperrung-kleiner-betriebe-d395e7ed",
+          "url": "https://hab-und-bewahr.de/category/r3-hauptabsperrung-kleiner-betriebe-d395e7ed/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 274,
+      "existing_wp_page3_name": "Betriebsorganisation & Fluchtwege",
+      "existing_categories": [
+        {
+          "term_id": 485,
+          "name": "Fluchtwege in kleinen Läden",
+          "slug": "r3-fluchtwege-in-kleinen-laeden-953dd32f",
+          "url": "https://hab-und-bewahr.de/category/r3-fluchtwege-in-kleinen-laeden-953dd32f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 502,
+          "name": "Brandschutzunterweisung im Verein",
+          "slug": "r3-brandschutzunterweisung-im-verein-b3054a51",
+          "url": "https://hab-und-bewahr.de/category/r3-brandschutzunterweisung-im-verein-b3054a51/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 444,
+          "name": "Notfallpläne für Kleingewerbe",
+          "slug": "r3-notfallplaene-fuer-kleingewerbe-4ef1f642",
+          "url": "https://hab-und-bewahr.de/category/r3-notfallplaene-fuer-kleingewerbe-4ef1f642/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 275,
+      "existing_wp_page3_name": "Erdung & Hausinstallation",
+      "existing_categories": [
+        {
+          "term_id": 459,
+          "name": "Potentialausgleich im Wohnhaus",
+          "slug": "r3-potentialausgleich-im-wohnhaus-6a573c1c",
+          "url": "https://hab-und-bewahr.de/category/r3-potentialausgleich-im-wohnhaus-6a573c1c/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 544,
+          "name": "Überspannung im Zählerschrank",
+          "slug": "r3-ueberspannung-im-zaehlerschrank-fd26fe31",
+          "url": "https://hab-und-bewahr.de/category/r3-ueberspannung-im-zaehlerschrank-fd26fe31/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 451,
+          "name": "Datenleitungen & Überspannung",
+          "slug": "r3-datenleitungen-ueberspannung-57cf6ea6",
+          "url": "https://hab-und-bewahr.de/category/r3-datenleitungen-ueberspannung-57cf6ea6/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 276,
+      "existing_wp_page3_name": "Ladeplätze & Akkuzustand",
+      "existing_categories": [
+        {
+          "term_id": 479,
+          "name": "Ladeplätze für Werkzeugakkus",
+          "slug": "r3-ladeplaetze-fuer-werkzeugakkus-91eb7331",
+          "url": "https://hab-und-bewahr.de/category/r3-ladeplaetze-fuer-werkzeugakkus-91eb7331/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 494,
+          "name": "Akku-Ladegeräte & Defekte",
+          "slug": "r3-akku-ladegeraete-defekte-a4f52fcb",
+          "url": "https://hab-und-bewahr.de/category/r3-akku-ladegeraete-defekte-a4f52fcb/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 526,
+          "name": "Beschädigte Akkus & Entsorgung",
+          "slug": "r3-beschaedigte-akkus-entsorgung-db9c878c",
+          "url": "https://hab-und-bewahr.de/category/r3-beschaedigte-akkus-entsorgung-db9c878c/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 277,
+      "existing_wp_page3_name": "Außenleitungen & Entleerung",
+      "existing_categories": [
+        {
+          "term_id": 473,
+          "name": "Außenwasserhähne & Frost",
+          "slug": "r3-aussenwasserhaehne-frost-7f65eced",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenwasserhaehne-frost-7f65eced/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 521,
+          "name": "Gartenbewässerung winterfest machen",
+          "slug": "r3-gartenbewaesserung-winterfest-machen-d44b88ac",
+          "url": "https://hab-und-bewahr.de/category/r3-gartenbewaesserung-winterfest-machen-d44b88ac/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 499,
+          "name": "Frostschutz für Brunnenpumpen",
+          "slug": "r3-frostschutz-fuer-brunnenpumpen-adaebc65",
+          "url": "https://hab-und-bewahr.de/category/r3-frostschutz-fuer-brunnenpumpen-adaebc65/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 278,
+      "existing_wp_page3_name": "Grundwasser & Kellerbauteile",
+      "existing_categories": [
+        {
+          "term_id": 414,
+          "name": "Kellerwände bei Grundwasser",
+          "slug": "r3-kellerwaende-bei-grundwasser-17ed5f91",
+          "url": "https://hab-und-bewahr.de/category/r3-kellerwaende-bei-grundwasser-17ed5f91/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 472,
+          "name": "Feuchte Bodenplatten",
+          "slug": "r3-feuchte-bodenplatten-7db94bca",
+          "url": "https://hab-und-bewahr.de/category/r3-feuchte-bodenplatten-7db94bca/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 418,
+          "name": "Kellerfensterschächte & Nässe",
+          "slug": "r3-kellerfensterschaechte-naesse-1d40d71f",
+          "url": "https://hab-und-bewahr.de/category/r3-kellerfensterschaechte-naesse-1d40d71f/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 279,
+      "existing_wp_page3_name": "Fahrzeugaufbauten & Transporte",
+      "existing_categories": [
+        {
+          "term_id": 476,
+          "name": "Anhänger bei Sturm",
+          "slug": "r3-anhaenger-bei-sturm-839297b9",
+          "url": "https://hab-und-bewahr.de/category/r3-anhaenger-bei-sturm-839297b9/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 523,
+          "name": "Dachboxen bei Unwetter",
+          "slug": "r3-dachboxen-bei-unwetter-d68e9eb4",
+          "url": "https://hab-und-bewahr.de/category/r3-dachboxen-bei-unwetter-d68e9eb4/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 426,
+          "name": "Fahrradträger bei Starkwind",
+          "slug": "r3-fahrradtraeger-bei-starkwind-309b612a",
+          "url": "https://hab-und-bewahr.de/category/r3-fahrradtraeger-bei-starkwind-309b612a/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 280,
+      "existing_wp_page3_name": "Fluchtwege & Personenschutz",
+      "existing_categories": [
+        {
+          "term_id": 449,
+          "name": "Fluchtwege im Privathaus",
+          "slug": "r3-fluchtwege-im-privathaus-5598c25f",
+          "url": "https://hab-und-bewahr.de/category/r3-fluchtwege-im-privathaus-5598c25f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 436,
+          "name": "Brandschutztüren im Wohnbereich",
+          "slug": "r3-brandschutztueren-im-wohnbereich-405df600",
+          "url": "https://hab-und-bewahr.de/category/r3-brandschutztueren-im-wohnbereich-405df600/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 467,
+          "name": "Evakuierung mit Hilfebedarf",
+          "slug": "r3-evakuierung-mit-hilfebedarf-780b6ccf",
+          "url": "https://hab-und-bewahr.de/category/r3-evakuierung-mit-hilfebedarf-780b6ccf/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 281,
+      "existing_wp_page3_name": "Mobiles Geschäftsaußeninventar",
+      "existing_categories": [
+        {
+          "term_id": 438,
+          "name": "Verkaufsautomaten im Außenraum",
+          "slug": "r3-verkaufsautomaten-im-aussenraum-43b742cb",
+          "url": "https://hab-und-bewahr.de/category/r3-verkaufsautomaten-im-aussenraum-43b742cb/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 527,
+          "name": "Paket- & Lieferstationen",
+          "slug": "r3-paket-lieferstationen-de013b24",
+          "url": "https://hab-und-bewahr.de/category/r3-paket-lieferstationen-de013b24/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 458,
+          "name": "Außenverkaufsstände",
+          "slug": "r3-aussenverkaufsstaende-670a4a88",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenverkaufsstaende-670a4a88/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 282,
+      "existing_wp_page3_name": "Innenräume & Hausgemeinschaft",
+      "existing_categories": [
+        {
+          "term_id": 428,
+          "name": "Gemeinschaftsflure & Treppenhäuser",
+          "slug": "r3-gemeinschaftsflure-treppenhaeuser-355b638f",
+          "url": "https://hab-und-bewahr.de/category/r3-gemeinschaftsflure-treppenhaeuser-355b638f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 530,
+          "name": "Innenbeleuchtung & Leitsysteme",
+          "slug": "r3-innenbeleuchtung-leitsysteme-e81d2f25",
+          "url": "https://hab-und-bewahr.de/category/r3-innenbeleuchtung-leitsysteme-e81d2f25/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 508,
+          "name": "Gemeinschaftskeller & Waschräume",
+          "slug": "r3-gemeinschaftskeller-waschraeume-b9a038ef",
+          "url": "https://hab-und-bewahr.de/category/r3-gemeinschaftskeller-waschraeume-b9a038ef/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 283,
+      "existing_wp_page3_name": "Zählerkästen & Anschlussleitungen",
+      "existing_categories": [
+        {
+          "term_id": 481,
+          "name": "Außenzähler & Messstellen",
+          "slug": "r3-aussenzaehler-messstellen-92290984",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenzaehler-messstellen-92290984/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 457,
+          "name": "Stromkästen & Außenverteiler",
+          "slug": "r3-stromkaesten-aussenverteiler-65d39c9c",
+          "url": "https://hab-und-bewahr.de/category/r3-stromkaesten-aussenverteiler-65d39c9c/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 517,
+          "name": "Freiliegende Hausanschlüsse",
+          "slug": "r3-freiliegende-hausanschluesse-cdc50c9f",
+          "url": "https://hab-und-bewahr.de/category/r3-freiliegende-hausanschluesse-cdc50c9f/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 284,
+      "existing_wp_page3_name": "Gärten & Außenmöblierung",
+      "existing_categories": [
+        {
+          "term_id": 503,
+          "name": "Mauern & Einfriedungen",
+          "slug": "r3-mauern-einfriedungen-b42838d0",
+          "url": "https://hab-und-bewahr.de/category/r3-mauern-einfriedungen-b42838d0/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 524,
+          "name": "Bepflanzung & Grünflächen",
+          "slug": "r3-bepflanzung-gruenflaechen-d84a3366",
+          "url": "https://hab-und-bewahr.de/category/r3-bepflanzung-gruenflaechen-d84a3366/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 546,
+          "name": "Garteninventar & Outdoor-Möbel",
+          "slug": "r3-garteninventar-outdoor-moebel-fe7d7ed7",
+          "url": "https://hab-und-bewahr.de/category/r3-garteninventar-outdoor-moebel-fe7d7ed7/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 285,
+      "existing_wp_page3_name": "Fernmeldungen & Regeltechnik",
+      "existing_categories": [
+        {
+          "term_id": 492,
+          "name": "Heizungsalarme über Mobilfunk",
+          "slug": "r3-heizungsalarme-ueber-mobilfunk-a193114b",
+          "url": "https://hab-und-bewahr.de/category/r3-heizungsalarme-ueber-mobilfunk-a193114b/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 515,
+          "name": "Störungen an Heizungssteuerungen",
+          "slug": "r3-stoerungen-an-heizungssteuerungen-cc197d47",
+          "url": "https://hab-und-bewahr.de/category/r3-stoerungen-an-heizungssteuerungen-cc197d47/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 480,
+          "name": "Heizungs-Sicherheitsabschaltungen",
+          "slug": "r3-heizungs-sicherheitsabschaltungen-920a819d",
+          "url": "https://hab-und-bewahr.de/category/r3-heizungs-sicherheitsabschaltungen-920a819d/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 286,
+      "existing_wp_page3_name": "Rohrnetz & vorbeugende Wartung",
+      "existing_categories": [
+        {
+          "term_id": 493,
+          "name": "Leitungskorrosion im Haus",
+          "slug": "r3-leitungskorrosion-im-haus-a2e7032a",
+          "url": "https://hab-und-bewahr.de/category/r3-leitungskorrosion-im-haus-a2e7032a/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 543,
+          "name": "Druckprobleme & Druckschläge",
+          "slug": "r3-druckprobleme-druckschlaege-fcebe99e",
+          "url": "https://hab-und-bewahr.de/category/r3-druckprobleme-druckschlaege-fcebe99e/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 505,
+          "name": "Rohrverbindungen & Dichtstellen",
+          "slug": "r3-rohrverbindungen-dichtstellen-b4f1712e",
+          "url": "https://hab-und-bewahr.de/category/r3-rohrverbindungen-dichtstellen-b4f1712e/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 287,
+      "existing_wp_page3_name": "Carports & Außenlager",
+      "existing_categories": [
+        {
+          "term_id": 440,
+          "name": "Carport-Fahrzeugschutz",
+          "slug": "r3-carport-fahrzeugschutz-456cf8ec",
+          "url": "https://hab-und-bewahr.de/category/r3-carport-fahrzeugschutz-456cf8ec/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 446,
+          "name": "Außenboxen & Lagerkisten",
+          "slug": "r3-aussenboxen-lagerkisten-50b60697",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenboxen-lagerkisten-50b60697/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 534,
+          "name": "Mobile Aufbauten & Dachboxen",
+          "slug": "r3-mobile-aufbauten-dachboxen-ef9d7ee9",
+          "url": "https://hab-und-bewahr.de/category/r3-mobile-aufbauten-dachboxen-ef9d7ee9/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 288,
+      "existing_wp_page3_name": "Lokaler Smart-Home-Notbetrieb",
+      "existing_categories": [
+        {
+          "term_id": 514,
+          "name": "Offline-Szenen im Smart Home",
+          "slug": "r3-offline-szenen-im-smart-home-c78da46a",
+          "url": "https://hab-und-bewahr.de/category/r3-offline-szenen-im-smart-home-c78da46a/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 425,
+          "name": "Notbetrieb smarter Türschlösser",
+          "slug": "r3-notbetrieb-smarter-tuerschloesser-2e3227f7",
+          "url": "https://hab-und-bewahr.de/category/r3-notbetrieb-smarter-tuerschloesser-2e3227f7/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 532,
+          "name": "Sicherheitsupdates von Alarmsystemen",
+          "slug": "r3-sicherheitsupdates-von-alarmsystemen-ea5e6ff3",
+          "url": "https://hab-und-bewahr.de/category/r3-sicherheitsupdates-von-alarmsystemen-ea5e6ff3/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 289,
+      "existing_wp_page3_name": "Grundstücksgrenzen & Wege",
+      "existing_categories": [
+        {
+          "term_id": 531,
+          "name": "Grenzüberwachung im Garten",
+          "slug": "r3-grenzueberwachung-im-garten-e9b136c0",
+          "url": "https://hab-und-bewahr.de/category/r3-grenzueberwachung-im-garten-e9b136c0/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 416,
+          "name": "Einsehbarkeit & Sichtachsen",
+          "slug": "r3-einsehbarkeit-sichtachsen-1b7dcfef",
+          "url": "https://hab-und-bewahr.de/category/r3-einsehbarkeit-sichtachsen-1b7dcfef/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 516,
+          "name": "Wegführung & Zugangsbereiche",
+          "slug": "r3-wegfuehrung-zugangsbereiche-cc528d49",
+          "url": "https://hab-und-bewahr.de/category/r3-wegfuehrung-zugangsbereiche-cc528d49/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 290,
+      "existing_wp_page3_name": "Stromfehler & Schutzschalter",
+      "existing_categories": [
+        {
+          "term_id": 455,
+          "name": "FI-Schutzschalter & Auslösungen",
+          "slug": "r3-fi-schutzschalter-ausloesungen-5fdc044a",
+          "url": "https://hab-und-bewahr.de/category/r3-fi-schutzschalter-ausloesungen-5fdc044a/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 420,
+          "name": "Phasenausfall im Wohnhaus",
+          "slug": "r3-phasenausfall-im-wohnhaus-234b8e5e",
+          "url": "https://hab-und-bewahr.de/category/r3-phasenausfall-im-wohnhaus-234b8e5e/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 417,
+          "name": "Störungen im Sicherungskasten",
+          "slug": "r3-stoerungen-im-sicherungskasten-1b8b34e8",
+          "url": "https://hab-und-bewahr.de/category/r3-stoerungen-im-sicherungskasten-1b8b34e8/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 291,
+      "existing_wp_page3_name": "Antennen & kleine Solaranlagen",
+      "existing_categories": [
+        {
+          "term_id": 450,
+          "name": "Balkonkraftwerke bei Gewitter",
+          "slug": "r3-balkonkraftwerke-bei-gewitter-55c989b9",
+          "url": "https://hab-und-bewahr.de/category/r3-balkonkraftwerke-bei-gewitter-55c989b9/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 525,
+          "name": "Antennen & Blitzschutz",
+          "slug": "r3-antennen-blitzschutz-d93490cd",
+          "url": "https://hab-und-bewahr.de/category/r3-antennen-blitzschutz-d93490cd/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 512,
+          "name": "Außenkabel & Blitzfolgen",
+          "slug": "r3-aussenkabel-blitzfolgen-c2e9a72f",
+          "url": "https://hab-und-bewahr.de/category/r3-aussenkabel-blitzfolgen-c2e9a72f/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 292,
+      "existing_wp_page3_name": "Fluchtwege & Verhalten im Brandfall",
+      "existing_categories": [
+        {
+          "term_id": 409,
+          "name": "Notausstiege im Wohnwagen",
+          "slug": "r3-notausstiege-im-wohnwagen-0f37931f",
+          "url": "https://hab-und-bewahr.de/category/r3-notausstiege-im-wohnwagen-0f37931f/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 433,
+          "name": "Löschmittel im Freizeitfahrzeug",
+          "slug": "r3-loeschmittel-im-freizeitfahrzeug-3d3fed47",
+          "url": "https://hab-und-bewahr.de/category/r3-loeschmittel-im-freizeitfahrzeug-3d3fed47/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 423,
+          "name": "Brandnotfälle auf Campingplätzen",
+          "slug": "r3-brandnotfaelle-auf-campingplaetzen-29ff06e4",
+          "url": "https://hab-und-bewahr.de/category/r3-brandnotfaelle-auf-campingplaetzen-29ff06e4/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 293,
+      "existing_wp_page3_name": "Temperaturwarnung in Sonderräumen",
+      "existing_categories": [
+        {
+          "term_id": 498,
+          "name": "Gewächshaus-Temperaturalarme",
+          "slug": "r3-gewaechshaus-temperaturalarme-ac7f0248",
+          "url": "https://hab-und-bewahr.de/category/r3-gewaechshaus-temperaturalarme-ac7f0248/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 545,
+          "name": "Temperaturmelder im Technikraum",
+          "slug": "r3-temperaturmelder-im-technikraum-fdef3e5e",
+          "url": "https://hab-und-bewahr.de/category/r3-temperaturmelder-im-technikraum-fdef3e5e/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 507,
+          "name": "Überhitzung im Dachgeschoss",
+          "slug": "r3-ueberhitzung-im-dachgeschoss-b7991e8c",
+          "url": "https://hab-und-bewahr.de/category/r3-ueberhitzung-im-dachgeschoss-b7991e8c/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    },
+    {
+      "existing_wp_page3_id": 294,
+      "existing_wp_page3_name": "Sanitärräume & Nebenanlagen",
+      "existing_categories": [
+        {
+          "term_id": 484,
+          "name": "Sanitäreinrichtungen",
+          "slug": "r3-sanitaereinrichtungen-95230e2c",
+          "url": "https://hab-und-bewahr.de/category/r3-sanitaereinrichtungen-95230e2c/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 452,
+          "name": "Schließfächer & Aufbewahrung",
+          "slug": "r3-schliessfaecher-aufbewahrung-5b8dac17",
+          "url": "https://hab-und-bewahr.de/category/r3-schliessfaecher-aufbewahrung-5b8dac17/",
+          "post_bindings": []
+        },
+        {
+          "term_id": 504,
+          "name": "Nebenraum-Inventar",
+          "slug": "r3-nebenraum-inventar-b459b463",
+          "url": "https://hab-und-bewahr.de/category/r3-nebenraum-inventar-b459b463/",
+          "post_bindings": []
+        }
+      ],
+      "has_explicit_faq": false,
+      "has_explicit_comparison": false,
+      "legacy_preserve": true,
+      "editorial_action": "NEEDS_TOPIC_SCOPED_FACET_CURATION_NOT_AUTOMATIC_TEMPLATE",
+      "wordpress_write_allowed": false
+    }
+  ]
+}
