@@ -1,6 +1,20 @@
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – 472er READ-ONLY-VORPRÜFUNG UND LOGISCHE SIMULATION ABGESCHLOSSEN
+**Maßstab:** fachlich sinnvolle, themenspezifische Vertiefung auf der flachen WP-Kategorieebene; grob ausreichend Inhalt für ca. 3–5 unterschiedliche Beiträge. **Keine Einzelartikel, Titel oder Texte.** Kein neues Kategorienplugin und keine Bibliothek als Ablage.
+
+**Aktuell auf GitHub gespeichert:** `KATEGORIEN/C22_472_PREFLIGHT_NUR_GITHUB_20261017.json` (GitHub Commit `8408b302ab03c3393ad76accbc484f0b1037ae7f`). Vergleich mit verbindlichem Fachvorschlag `../KONZEPT/HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json` und Fachbestand `../KONZEPT/HAB_C22_V3_QUELLENUEBERNAHME_20261017.json`.
+**Nachgewiesener GitHub-Strukturstand:** 172 konkrete Themen, 566 vorhandene neue Artikelkategorien, 285 historisch geschützte Kategorien mit vier nachgewiesenen Post-Term-Links, 472 zusätzliche Kategorie-Vorschläge (172 FAQ, 172 Vergleich, 102 weitere, 26 neue). **12/12 gezielte Negativtests bestanden**; darunter verlorene Bestandskategorie, verlorener Alt-Term, geänderte alte URL, verlorene Artikelbindung, doppelte Kategorie, falscher Themen-Owner, verschachtelte Kategorie, erfundene neue WordPress-ID und unerlaubter Schreibversuch. **16 bloße Namensähnlichkeiten** als fachliche Hinweise, nicht als automatische Dubletten behandelt.
+
+**Rein logische Nicht-Live-Simulation:** 566 + 285 = **851** bereits fachlich dokumentierte Kategorien; nach späterer Zustimmung zu allen 472 Vorschlägen rechnerisch **1.323 Kategorien**. Pro neuem konkreten Thema rechnerisch 5–9 vertiefende Artikelkategorien; keine künstliche Höchstgrenze. **Keine realen WP-IDs erzeugt, nichts gelöscht, nichts geschrieben**. Diese Zahl ist kein WordPress-Livestand und kein Beweis der tatsächlichen Pluginfunktion.
+
+**HARTER BLOCKER für jede WordPress-Aktion:** Aktueller verifizierter WordPress-Live-Readback nach C2.2 mit realen IDs, aktiver Kategorieplugin-Revision, Slugs/URLs, Parent-Mapping und Post-Term-Bindungen liegt weiterhin nicht vor. Öffentliche WP-REST-Endpunkte waren für diesen Lauf nicht erreichbar; daher keine behauptete 1:1-Live-Simulation. **GENAU EINE NEXT ACTION:** Mit dem **vorhandenen** Kategorieplugin den aktuellen WordPress-Readback beschaffen und die 472 Vorschläge gegen echte Live-Objekte sowie die geschützten 851 Bestands-Terms prüfbar abgleichen. Erst danach Writer-Dry-Run, getrennte Freigabe und ggf. einmaliger Sync. **Kein zweiter Writer, keine Re-Imports der vorhandenen 743 C2.2-Objekte.**
+
+---
+
+
+
 ## 17.10.2026 – NÄCHSTER TECHNISCHER SCHRITT: 472er C2.2-READ-ONLY-DELTA PRE-FLIGHT
 Die fachliche Quelle ist ausschließlich `../KONZEPT/CURRENT_STATE.md`; Arbeitsartefakt der dortigen groben Kategorieprüfung: `../KONZEPT/HAB_C22_472_ERGAENZUNGEN_NUR_FACHDELTA_20261017.json` mit 172 FAQ, 172 Vergleichen, 102 bedingten weiteren und 26 neuen Kategorien. Alle **472 sind NUR VORSCHLÄGE** ohne echte neue WP-ID/WordPress-Schreibfreigabe, 5 negative Struktursimulationen bestanden.
 
