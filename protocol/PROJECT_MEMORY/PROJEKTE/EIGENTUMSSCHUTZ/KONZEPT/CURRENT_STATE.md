@@ -1,6 +1,19 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 17.10.2026 – KORREKTUR NACH NUTZERBESTÄTIGUNG: KEIN ERNEUTER WORDPRESS-EXPORT
+**Status quo verbindlich für die Fortsetzung:** Der Nutzer bestätigt ausdrücklich, dass sich WordPress seit dem von uns selbst durchgeführten C2.2-Import nicht verändert hat. Der mehrfach eingeforderte erneute Live-Export ist deshalb **keine NEXT ACTION**. Bereits belegter erfolgreicher Import: **5 neue Schutzbereiche + 172 konkrete Themenseiten + 566 flache Artikelkategorien = 743 Objekte**. Alte 93 Themenseiten, 285 echte WP-Kategorien und vier dokumentierte Artikelbindungen bleiben geschützt.
+
+**Original-Plugin abgeglichen:** Das vollständige Kategorieplugin **1.14.8.30** enthält `profiles/hab-und-bewahr-c22-plan.json`. Exakter Vergleich von allen 172 (Welt|Bereich|Thema) und 566 (Welt|Bereich|Thema|Artikelkategorie) mit dem GitHub-Fachstand ergibt **beidseitig identische vollständige SHA-256-Namenslisten**. Keine neuen Datenquellen und kein zweiter WordPress-Schreiber notwendig.
+
+**Neue fachliche Ergänzungen:** 472 schon fachlich auf Mehrwert und grobe Tragfähigkeit geprüfte Vorschläge (172 FAQ, 172 Vergleiche, 102 weitere, 26 zusätzliche), ohne konkrete Artikelplanung. Technische Zuordnung zur **echten bestehenden C2.2-Plugin-Kennungslogik** liegt in `../KATEGORIEN/C22_472_PLUGIN_GEBUNDENES_ADD_ONLY_MAPPING_20261017.json`. Alle 472 Parent-Kennungen verweisen auf vorhandene Themen. **7/7 Negativtests** für falsche Zuordnung, Doppelungen und unerlaubte Schreibwirkung bestanden. Keine IDs, Eltern, Slugs oder Artikelverbindungen des Bestandes verändert. Die ursprüngliche C2.2-Importfunktion ist exakt auf **743** ursprüngliche Objekte festgelegt; sie darf keinesfalls nochmals gestartet oder blind für 472 erweitert werden.
+
+**GENAU EINE NEXT ACTION:** Im bestehenden Kategorieplugin einen **separat gesicherten additiven zweiten Durchlauf** für die 472 neuen flachen Kategorien vorbereiten und mit dem bekannten unveränderten C2.2-Baselinebestand trocken testen. Dabei die bereits vorhandene interne Plugin-Snapshot-/Completion-Prüfung direkt nutzen; **keinen neuen Benutzerexport/Readback anfordern**. Nur nach bestandener positiver/negativer Plugin-Prüfung und eigener Schreibfreigabe synchronisieren. WordPress wurde in diesem Arbeitslauf nicht verändert.
+
+---
+
+
+
 ## 17.10.2026 – TECHNISCHE BESTANDSSCHUTZ-VORPRÜFUNG (NUR STATUSVERWEIS)
 Zuständiges KATEGORIEN-Büro hat das bestehende **472er Fachdelta ohne WordPress-Schreibzugriff geprüft**: `../KATEGORIEN/C22_472_PREFLIGHT_NUR_GITHUB_20261017.json`. Aus ursprünglicher GitHub-Fachquelle unverändert belegt: 172 Themen, 566 neue vorhandene Artikelkategorien, 285 geschützte Altterms und 4 historische Artikelbindungen; 472 Vorschläge bleiben Vorschläge. **12 von 12 absichtlich fehlerhafte Varianten erfolgreich abgewiesen**. Die rein logische Kombination ergibt theoretisch 1.323 Kategorien insgesamt; es handelt sich ausdrücklich **nicht um ein echtes WordPress-Live-Readback oder 1:1-Plugin-Test**. 16 lexikalische Ähnlichkeitsmeldungen sind keine automatischen Dubletten. Grobe thematische Tragfähigkeit bleibt das einzige Inhaltsmaß, keine Artikelproduktion.
 
