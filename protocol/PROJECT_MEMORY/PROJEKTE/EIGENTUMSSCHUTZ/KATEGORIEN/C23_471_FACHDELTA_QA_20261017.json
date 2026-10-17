@@ -108,5 +108,16 @@
   "source": {
     "facet_file": "C23_265_THEMEN_EBENENPRUEFUNG_20261017.json",
     "source_blob": "040ff00c4a3434c86ff293b6154db87933ec361d"
+  },
+  "design_renderer_local_check": {
+    "plugin": "Hab & Bewahr Design 0.1.22",
+    "actual_function": "hbdp_canonical_children",
+    "test_method": "Exact function source extracted from currently supplied PHP; isolated PHP test with synthetic page3/term children, no WordPress writes",
+    "legacy_topic_with_three_original_plus_four_new": "PASS_7_OF_7_VISIBLE",
+    "new_topic_with_eight_children": "PASS_8_OF_8_VISIBLE",
+    "nested_category_archive_terminal": "PASS_NO_CHILDREN",
+    "unknown_topic": "PASS_NO_CHILDREN",
+    "limit": "Does not prove live WP after 471 import; 471 not yet installed",
+    "conclusion": "No page3 category-card truncation in current design function; absent FAQ on legacy page3 is missing imported category objects, not a 3-card limit"
   }
 }
