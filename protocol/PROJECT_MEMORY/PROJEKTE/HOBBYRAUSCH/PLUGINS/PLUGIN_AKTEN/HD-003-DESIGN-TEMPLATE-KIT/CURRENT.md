@@ -34,15 +34,16 @@ QA:
 
 ## Noch offen vor Release
 
-Eigene Hero+Preview-Paare für:
+Eigene Hero+Preview-Paare erforderlich für:
 - Spotting & Verkehr;
 - Citizen Science;
 - Natur bestimmen;
 - Suchen & Finden;
-- Modellbau.
+- Modellbau;
+- Holz & Natur.
 
-Zusätzlich visuell prüfen:
-- Holz & Natur gegen vorhandenes Holzmotiv.
+Zusätzlich erforderlich:
+- Holz & Natur erhält ein neues eigenes Hero+Preview-Paar; vorhandenes Holzmotiv ist für die erweiterte Semantik zu eng und damit FAIL.
 
 Danach:
 - finaler ZIP-Roundtrip;
