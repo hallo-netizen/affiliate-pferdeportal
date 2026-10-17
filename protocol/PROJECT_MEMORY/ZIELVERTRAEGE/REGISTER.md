@@ -338,7 +338,7 @@ STATUS:
 AKTIV
 
 FASSUNG:
-2.7 / 2026-10-09
+2.8 / 2026-10-17
 
 HAUPTQUELLE:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
@@ -347,7 +347,7 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert. Vollständig und ausschließlich aus der Hauptquelle Fassung 2.7 lesen. Aktuellen Arbeits-/LIVE-Status ausschließlich aus der zuständigen `SEO_KATEGORIEN/CURRENT_STATE.md` lesen.
+Nicht hier dupliziert. Vollständig und ausschließlich aus der Hauptquelle Fassung 2.8 lesen. Aktuellen Arbeits-/LIVE-Status ausschließlich aus der zuständigen `SEO_KATEGORIEN/CURRENT_STATE.md` lesen.
 
 NACHFOLGER:
 keiner belegt.
