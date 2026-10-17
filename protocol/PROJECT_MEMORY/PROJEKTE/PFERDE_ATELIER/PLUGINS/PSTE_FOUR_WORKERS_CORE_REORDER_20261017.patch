@@ -32,6 +32,39 @@
              // Generic additive extension point. The core miss is never evidence.
              if(class_exists('PSTE_Article_Type_Extension_Router')){
                  $extension=$verifiedCategory;
+@@ -191,6 +195,32 @@
+                     return self::withReasons($base,'SANDBOX_REQUIRED',array_values(array_unique(array_merge(['PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($extension['reason_codes']??[])))));
+                 }
+             }
++            // WORKER 3: the already existing independent two-strand article-type
++            // consensus is allowed to decide Fach intent even without a DataForSEO
++            // family. It NEVER invents a category or a planning permission. The
++            // upstream title must already be GREEN; uncertain risk stays yellow.
++            if(!empty($base['title_precheck_validated'])&&class_exists('PSTE_Semantic_Classifier')){
++                $typeOnly=PSTE_Semantic_Classifier::classifyTypeOnly($analysisRaw,$registry);
++                $base['family_independent_type_evidence']=$typeOnly;
++                $resolvedType=trim((string)($typeOnly['resolved_article_type']??''));
++                if(!empty($typeOnly['ok'])&&$resolvedType!==''
++                    &&PSTE_Article_Type_Registry::canonicalType($resolvedType)!=='journal'){
++                    $risk=PSTE_Domain_Risk_Gate::evaluate($analysisRaw,$resolvedType);
++                    $base['domain_risk']=$risk;
++                    if(!empty($risk['ok'])){
++                        $base['article_type']=$resolvedType;
++                        // Worker 4 must now check an actual registered category.
++                        // A family miss does NOT prove the category is absent;
++                        // therefore do not misfile it in the finished-title room.
++                        $base['sandbox_required']=true;
++                        $base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';
++                        return self::withReasons($base,'SANDBOX_REQUIRED',[
++                            'PSTE_FOUR_WORKERS_TYPE_CONFIRMED_CATEGORY_UNRESOLVED',
++                            'PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'
++                        ]);
++                    }
++                }
++            }
+             // Sustainable C-lane routing: when the query unambiguously names an existing
+             // portal parent branch but no existing leaf family fits, preserve the miss as a
+             // STRUCTURE_GAP instead of repeatedly sending future terms into an opaque sandbox.
 --- a/includes/class-pste-portal-relevance-gate.php
 +++ b/includes/class-pste-portal-relevance-gate.php
 @@ -17,6 +17,19 @@
