@@ -96,11 +96,11 @@ Hero-Patcher 1.50.659 / 1.50.661 / 1.50.662 sind Übergangsstände und sollen na
 
 1.50.669 ist **noch kein Release**.
 Kein Live-PASS ohne:
-- V7 WordPress-Dry-Run;
+- V7.1 WordPress-Dry-Run;
 - Bilder für neue Hub2;
 - finalen ZIP-/Browsercheck;
 - echten Live-Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**Zuerst den V7-Dry-Run mit HD-001 1.14.11 durchführen. Parallel lokal die sechs erforderlichen Hub2-Hero/Preview-Paare abschließen; erst danach 1.50.669 als Release packen.**
+**Zuerst den V7.1-Dry-Run mit HD-001 1.14.12 durchführen. Parallel lokal die sechs erforderlichen Hub2-Hero/Preview-Paare abschließen; erst danach 1.50.669 als Release packen.**
