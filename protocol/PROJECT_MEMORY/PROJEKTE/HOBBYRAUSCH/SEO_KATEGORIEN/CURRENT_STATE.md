@@ -5,6 +5,14 @@
 STAND: 2026-10-17
 STATUS: **LIVE NOCH ALTER 330ER SNAPSHOT / V7.1 FULL LOCAL + ECHTER DRY-RUN-SIM PASS / MAGAZIN-WEIRD77 PASS / HD-001 1.14.12 MANUAL-ONLY LOCAL HARD PASS / WORDPRESS-DRY-RUN OFFEN / KEIN SYNC**
 
+## Zielvertrag
+
+Aktiv:
+`ZV-HOBBYRAUSCH-HD001-001` – Fassung **2.8 / 2026-10-17**.
+
+Neu gegenüber 2.7:
+`Vergleich & Kaufberatung` ist verbindliche Affiliate-Prüfung je HOBBY_HUB; eigener Leaf nur ab mindestens 3 eigenständigen Beratungs-/Vergleichsintents, sonst Integration ohne künstliche Doppelung.
+
 ## Live-Wahrheit
 
 Aktiv sichtbar ist weiterhin die alte 330er Revision.
