@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE-BASELINE UNVERÄNDERT / V5 UNIVERSAL-NEEDS PASS, ABER NOCH NICHT FINAL / FERTIGEN-MEGA 11>10 + VERGLEICH/BERATUNG + MAGAZIN-MAPPING OFFEN / 10ER-PILOT NÄCHSTER SCHRITT / KEIN WORDPRESS-SYNC**
+STATUS: **LIVE-BASELINE UNVERÄNDERT / 10ER-PILOT V6 FACHLICH + RENDERER + BROWSER PASS / MAGAZIN-ROUTING KALIBRIERT / IDENTITÄTSBINDUNG NEUER HOBBYS NOCH OFFEN / KEIN WORDPRESS-SYNC**
 
 ## Live-Baseline
 
@@ -15,81 +15,88 @@ Produktiv unverändert:
 - 8 Hauptwelten;
 - 330/330 terminale CORE-Seiten.
 
-## Zentraler V5-Kandidat
+## Verbindlicher Zielvertrag
 
-Profil:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_AUDIT_CANDIDATE_V5_20261017.json`
+Jeder HOBBY_HUB wird aus zwei Perspektiven geprüft:
+1. Anfänger/Neuling;
+2. bestehender Nutzer/Fortgeschrittener/Profi.
 
-SHA-256:
-`76673dc0b0156fe9af4f9de532dcf194a56a179b2cc86abb8a9b7fcb1892b7ef`
+Pflichtprüfung:
+- Einstieg & Grundlagen sichtbar;
+- FAQ / Häufige Fragen sichtbar;
+- Ausrüstung & Kosten sichtbar, wenn >=3 eigenständige Intents;
+- Praxis/Fachvertiefung sichtbar;
+- Vergleich & Kaufberatung verpflichtend prüfen;
+- jeder sichtbare Leaf mindestens 3 eigenständige Beitragsintentionen;
+- vorhandene gute Leafs werden erweitert/umbenannt/zusammengeführt, nicht durch Standardschema dupliziert.
 
-Universal-Needs-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_UNIVERSAL_USER_NEEDS_AUDIT_V5_20261017.json`
+## 10er-Pilot V6 – PASS
 
-Commercial-Coverage-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_COMMERCIAL_COVERAGE_AUDIT_V5_20261017.json`
+Zentral:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_TARGET_PROFILE_PILOT10_V6_20261017.json`
 
-Pilot-/Magazin-Audit:
-`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_PILOT_AND_MAGAZIN_AUDIT_20261017.md`
+Kalibrierung:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_PILOT10_CALIBRATION_V6_20261017.json`
 
-## Zielvertrag – Hobby-Hub
+Browser:
+`/hobby rausch/releases/HOBBY_DEPOT_BROWSER_ACCEPTANCE_PILOT_V6_20261017.json`
 
-Jeder HOBBY_HUB muss Anfänger UND erfahrene Nutzer bedienen.
+Renderer-Simulation:
+`/hobby rausch/releases/HOBBY_DEPOT_SIM_PILOT_V6_20261017.txt`
 
-Verbindlich:
-- Einstieg & Grundlagen = sichtbare Pflichtkategorie;
-- FAQ / Häufige Fragen = sichtbare Pflichtkategorie;
-- Ausrüstung & Kosten = Standardpflicht bei >=3 eigenständigen Beitragsintentionen;
-- Praxis & Vertiefung = Pflicht als Nutzerabdeckung;
-- jeder sichtbare Content-Leaf mindestens 3 eigenständige sinnvolle Beitragsintentionen.
+Pilot:
+- Buchbinden 7 Leafs;
+- Balance Board 8;
+- Glasmalerei 9;
+- Lasergravieren 9;
+- Fledermausbeobachtung 9;
+- Hydrokultur 8;
+- Riffaquaristik 10;
+- Briefmarken sammeln 8;
+- Geocaching 9;
+- Imkerei 9.
 
-V5 erfüllt:
-- 381/381 Einstieg;
-- 381/381 FAQ;
-- 381/381 Ausrüstung & Kosten;
-- 381/381 mindestens zwei fachspezifische Vertiefungsleafs;
-- 381 Hobby-Hubs;
-- 2622 Content-Leafs;
-- 0 fehlende Parents;
-- 0 doppelte IDs/Slugs;
-- HD-001 Validator 0 Errors / 0 Warnings;
-- Registry-Renderer 0 Strukturmismatches.
+Für alle 10:
+- Anfängerabdeckung PASS;
+- FAQ PASS;
+- Ausrüstung/Kosten PASS;
+- Vergleich & Kaufberatung PASS;
+- mindestens 2 echte Fach-/Profi-Leafs PASS;
+- jeder Leaf >=3 eigenständige Artikelintents PASS.
 
-## Neuer Affiliate-Prüfgate – Vergleich & Kaufberatung
+Wichtige Pilotkorrektur:
+- Buchbinden: V5-Doppelung `Ausrüstung & Kosten` + `Ausrüstung` zusammengeführt; bestehender stabile Ausrüstungs-Leaf übernimmt Ausrüstung+Kosten;
+- Imkerei: V5-Doppelung `Ausrüstung & Kosten` + `Ausrüstung & Beute` zusammengeführt zu `Ausrüstung, Beuten & Kosten`;
+- universelle Nutzerbedürfnisse müssen sichtbar abgedeckt sein, aber nicht durch doppelte Standardschema-Leafs.
 
-Für jedes Hobby verpflichtend prüfen:
-- Produktgruppe A vs. B / Lösung für Einsatz X;
-- Kaufberatung nach Budget, Erfahrung, Einsatz;
-- konkrete Produkt-/Modellvergleiche.
+## Vergleich & Kaufberatung
 
-Eigener Leaf nur bei mindestens 3 eigenständigen Vergleichs-/Beratungsintents; sonst Integration in `Ausrüstung & Kosten` oder passenden Fachleaf.
+Eigenes Büro:
+`../PRODUKTVERGLEICH/CURRENT_STATE.md`
 
-Aktueller V5-Befund:
-- expliziter Vergleich/Kaufberatung-Leaf: 1/381;
-- damit ist die kommerzielle Beratungsabdeckung noch nicht ausreichend kalibriert.
+Regel:
+- Produktgruppen-/Lösungsvergleich;
+- Kaufberatung nach Einsatz, Budget, Erfahrung;
+- konkrete Produkt-/Modellvergleiche;
+- eigener Leaf nur bei >=3 eigenständigen Vergleichs-/Beratungsintents;
+- sonst Integration in Ausrüstung/Kosten oder passenden Fachleaf.
 
-Produktvergleich ist im eigenen Projektbüro aktuell noch nicht fachlich ausgearbeitet; deshalb keine künstliche Massenerzeugung vor Pilotprüfung.
+Alle 10 Pilot-Hobbys erfüllen die Schwelle.
 
-## Hobbyspezifische Prüffelder
+## Fertigen / Mega-Struktur – fachlich gelöst
 
-Eigener Leaf nur ab >=3 echten Intents und ohne Doppelung:
-- Materialien / Verbrauch;
-- Pflege / Wartung / Betrieb;
-- Fehler / Probleme / Lösungen;
-- Sicherheit / Recht / Regeln;
-- Techniken / Methoden / Training;
-- Projekte / Ideen;
-- Varianten / Arten / Disziplinen;
-- Orte / Touren / Saison;
-- Kurse / Lernen / Community;
-- Optimierung / Fortgeschritten / Profi;
-- Sammeln / Bestimmen / Echtheit / Wert.
+V5 hatte mit Modellbau + Naturmaterial 11 echte Mega-Zwischenbereiche.
 
-## Mega-Menü
+V6:
+- stabiler Hub `Holz` wird zu **Holz & Natur**;
+- Besenbinden, Korbflechten, Weidenflechten wechseln von `Naturmaterial` nach `Holz & Natur`;
+- `Naturmaterial` wird archiviert;
+- Modellbau bleibt unter Fertigen;
+- kein Hobby geht verloren.
 
-Exakter V5-Zählstand der **aktiven echten Zwischenbereiche** (direkte terminale Hobbys wie Heimwerken/Gärtnern nicht als Mega-Zwischenbereich gezählt):
+Ergebnis echte Mega-Zwischenbereiche:
 - Gestalten 7;
-- Fertigen **11 → FAIL, Zielvertrag max. 10**;
+- Fertigen **10 PASS**;
 - Technik 9;
 - Forschen 8;
 - Pflanzen 9;
@@ -97,71 +104,89 @@ Exakter V5-Zählstand der **aktiven echten Zwischenbereiche** (direkte terminale
 - Bewegen 8;
 - Sammeln 9.
 
-Fertigen wurde durch die sinnvolle Ergänzung `Modellbau` wieder zu breit. Das ist ein **Fachstrukturproblem**, kein CSS-Problem. Vor Rollout muss exakt ein sauberer Weg auf <=10 gefunden werden, ohne Modellbau zurück nach Technik zu verschieben und ohne Hobbys zu verlieren.
+Direkte Hobby-/Orientierungsseiten wie Heimwerken/Gärtnern bleiben auf der Weltseite erreichbar, zählen aber nicht als Mega-Menü-Zwischenbereich.
 
-Designvertrag bleibt:
-- max. 10 direkte sichtbare Hub2 pro Hauptwelt;
-- grafisch zunächst gemeinsame sinnvolle Direktanzahl; aktuell typischerweise 5;
-- restliche Hub2 über `Mehr Kategorien` im selben Flyout;
-- genau eine weitere kompakte Orientierungsebene;
-- kein Vollbaum;
-- keine reale Kategorie darf durch die Anzeigegrenze verloren gehen;
-- Registry = einzige Strukturquelle;
-- vollständige `nav_order` für alle direkten Hub2.
+## Magazin – kalibriertes Modell
 
-## Magazin
+Zentral:
+`/hobby rausch/KATEGORIE_ZENTRALE/HOBBY_DEPOT_MAGAZIN_ROUTING_V1_20261017.json`
 
-Magazin = eigenständige Editorial-Säule, nicht Restablage und nicht Kopie von CORE.
+Die bestehenden 12 Magazin-Kacheln bleiben als Einstiege/Views.
 
-Bestehende Start-Kacheln:
-1. Hobby finden
-2. Hobby-Ideen & Inspiration
-3. Ungewöhnliche & skurrile Hobbys
-4. Neue Hobbys & Trends
-5. Hobby-Porträts
-6. Menschen & Geschichten
-7. Geschichte & Herkunft
-8. Wissen & Glossar
-9. Vergleiche & Alternativen
-10. Zeit, Budget & Platz
-11. Alter & Lebensphasen
-12. Saison, drinnen & draußen
+Für kleine/ungewöhnliche echte Hobbys:
+- zunächst **ein kanonischer Hobby-Porträt-Artikel pro Hobbyidentität**;
+- keine Mini-Taxonomie pro schrägem Hobby;
+- zusätzliche Auffindbarkeit über Views/Tags nach Art, Situation, Budget, Saison;
+- keine zweite SEO-Kopie eines CORE-Hobbys.
+
+Grobe Art-Views:
+- kreativ & handwerk;
+- technik & tüfteln;
+- natur & forschen;
+- tiere;
+- bewegung & wettkampf;
+- sammeln & suchen;
+- genuss & kurioses;
+- draußen & abenteuer.
+
+Explizite Masterliste:
+- 841 Master-Einträge;
+- 77 ausdrücklich als `Besonders schräge Kandidaten / Begriffe` markiert;
+- davon 18 bereits exakt als aktive CORE-Hobbys vorhanden → Magazin nur View/Relation, kein zweiter SEO-Artikel;
+- übrige Kandidaten vor Artikelproduktion Alias-/Subtopic-Prüfung.
+
+## Identitätsbindung – noch offener Gate
+
+Im V6-Pilotbestand existieren 51 aktive neue `core:proposal:*` Hobbyseiten.
 
 Befund:
-- Editorial-Struktur existiert;
-- aktuelle Zielzuordnung nutzt sie aber nicht sauber;
-- gefundene Editorial-/Finder-Placements landen pauschal in `editorial:hobbyfinder` statt fachlich in den vorhandenen Kacheln.
+- 42/51 lassen sich direkt auf vorhandene Hobby-Master-IDs binden;
+- 9 benötigen Intake/Merge:
+  - Trainspotting;
+  - Ship Spotting;
+  - Car Spotting;
+  - Sondeln & Metalldetektion;
+  - Penjing;
+  - Saikei;
+  - Kräuteranbau;
+  - Obst im Kübel;
+  - Terrarienbau.
 
-Schräge/kleine Hobbys:
-- zunächst ein guter Magazinartikel pro valide Hobbyidentität ausreichend;
-- keine tiefe Parallel-Hobbytaxonomie nötig;
-- zusätzliche Orientierung über Views/Filter/Tags nach Art/Situation;
-- bei ausreichender Tiefe/Kommerzialisierung spätere Promotion derselben hobby_id nach CORE möglich, keine konkurrierende Kopie.
+Besonderheit:
+`Sondeln & Metalldetektion` trifft im Master bereits auf getrennte Identitäten `Sondeln` und `Metalldetektion`; hier ist vor Finalisierung eine Merge-/Orientierungsentscheidung nötig.
 
-## Verbindlicher 10er-Pilot
+## Stale-Override-Audit
 
-Vor Massenausrollung werden exakt diese 10 Hobbys vollständig kalibriert:
-1. Buchbinden
-2. Balance Board
-3. Glasmalerei
-4. Lasergravieren
-5. Fledermausbeobachtung
-6. Hydrokultur
-7. Riffaquaristik
-8. Briefmarken sammeln
-9. Geocaching
-10. Imkerei
+Vor Finalprofil müssen 9 Altbindungen korrigiert werden:
+- Korbflechten, Weidenflechten, Besenbinden zeigen noch auf alten Parent `Naturmaterial`;
+- Plane Spotting zeigt im Override noch auf `Messen & Analysieren` statt `Spotting & Verkehr`;
+- Lederprägen, Nachtvogel-Beobachtung, Libellenbeobachtung, Wildbienenhotels, Hummelkästen sind im Alt-Override noch EDITORIAL_TOPIC, obwohl sie im Kandidaten CORE sind.
 
-Pilot prüft:
-- Anfänger;
-- Profi-/Vertiefung;
-- Ausrüstung/Kosten;
-- Vergleich/Kaufberatung;
-- Produktvergleichspotenzial;
-- hobbiespezifische Zusatzleafs;
-- mindestens 3 echte Artikelintents je Leaf;
-- DataForSEO nur für Fragen/Keywords/Clustering;
-- echten Browser-/Theme-Pfad.
+Kein Massensync vor Bereinigung.
+
+## Technische Pilotprüfung
+
+HD-001 TargetTree:
+- valid=true;
+- 0 Errors;
+- 0 Warnings.
+
+Registry-/Design-Vollsimulation:
+- 381 terminale Hobbyseiten;
+- 0 page-child mismatch;
+- 0 category-child mismatch;
+- 0 route/world mismatch;
+- 0 render mismatch;
+- Trainspotting-Negativfall PASS.
+
+Browser:
+1920 / 1440 / 1180 / 1024 / 901 / 900 / 768 / 761 / 760 / 390 px:
+- alle 8 Mega-Menüs;
+- initial 5 gleichmäßige Gruppen;
+- `Mehr Kategorien` zeigt sämtliche echten Zwischenbereiche;
+- kein horizontaler Overflow;
+- direkte Hobbyseiten nicht als Mega-Zwischenbereich;
+- Pilot-Leafs vollständig sichtbar.
 
 ## Timeout-Korrektur
 
@@ -171,8 +196,8 @@ Sicherer Kandidat:
 
 ## ERSTER OFFENER BLOCKER
 
-**Drei fachliche Gates sind offen: Fertigen von 11 auf <=10 Mega-Zwischenbereiche bringen; 10er-Pilot gegen Vergleich/Kaufberatung + hobbiespezifische Zusatzleafs kalibrieren; Magazin-Mapping aus dem Hobbyfinder-Fallback auf die vorhandenen Editorial-Kacheln korrigieren.**
+**Vor Massenausrollung müssen die 51 neuen Proposal-Hobbys an stabile Hobby-Identitäten gebunden und die 9 stale Overrides bereinigt werden.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Noch keinen WordPress-Dry-Run und keinen Sync. Zuerst den 10er-Pilot fachlich vollständig abschließen und die Magazin-Zuordnung kalibrieren; erst danach Regeln einfrieren und auf alle HOBBY_HUBs ausrollen.**
+**Identitäts-/Override-Bereinigung V6 fertigstellen; danach die im 10er-Pilot bestätigte Leaf-Regel batchweise auf die restlichen HOBBY_HUBs anwenden. Noch kein WordPress-Sync.**
