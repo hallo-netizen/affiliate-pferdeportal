@@ -3,71 +3,67 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.680 WORDPRESS-FRONTEND OHNE FATAL / VISUELLER READBACK: HERO-UPSCALING + RESPONSIVE-AUSSCHNITT FALSCH / 1.50.681 GEBAUT UND LOKAL POSITIV+NEGATIV+VISUELL GEPRÜFT / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.681 LIVE-READBACK VISUELL NICHT ABGENOMMEN / METALL-ALTERNATIVE 1.50.682 GEBAUT UND LOKAL GEPRÜFT / NUR METALL-PILOT / WORDPRESS-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.8 / 2026-10-18**
 
-## REALER READBACK 1.50.680
+## REALER READBACK 1.50.681
 
-Nutzer-Readback:
-- Hobby-Depot-Seiten laden wieder ohne den 1.50.679-Fatal;
-- Hub2-Heroes wirken unscharf, weil 600×320-Quellen durch `object-fit:cover` über den ganzen Hero hochskaliert und gecroppt wurden;
-- Desktop und Mobil zeigten dadurch unterschiedliche Bildausschnitte;
-- Texte inhaltlich akzeptiert;
-- Textdarstellung unter dem Hero zu luftig, insbesondere durch zwei sichtbare Absätze/Leerzeile.
+Nutzerbefund:
+- Hero auf Metall wirkt weiterhin zu nah/zu stark beschnitten;
+- Ursache ist nicht ein anderes Motiv: das Metall-Kategoriebild `metall-v150634.webp` ist die 200×107-Ableitung aus `metall-v150627.webp`;
+- der Hero nutzt dieselbe 600×320-Szene, aber die linke Beige-/Fade-Überlagerung verdeckt einen großen Teil der Szene und lässt das Motiv dadurch wie gezoomt wirken;
+- sichtbarer Metall-Text wirkt weiterhin wie zwei Blöcke; gewünschtes Ziel ist ein einziger kompakter Fließtext ohne Leerzeile.
 
-## 1.50.681 – KORREKTUR
+## ALTERNATIVE 1.50.682 – NUR METALL
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.681_HOBBY_DEPOT_NOZOOM_COMPACT_TEXT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.682_METALL_ALT_WHITE_FRAME_PILOT.zip`
 
 SHA-256:
-`37ac20a8f6d00e6b3ab8501b186c3087867b0c397d4d33d0d14df1ae84b85e9d`
+`4f9e23ff92aaeddcacc0c1f1b051c207a7b238b15dc53f2181de855099925b72`
 
-Hero:
-- einheitliches Bildformat **600:320** auf Desktop, Tablet und Mobil;
-- `object-fit:contain` statt `cover`;
-- keine Quelle wird über ihre native Breite hochskaliert;
-- 600×320-Quellen maximal 600 px breit;
-- 1600×853-Master werden nur heruntergerechnet;
-- gleicher vollständiger Bildausschnitt auf allen Breakpoints;
-- weicher Beige-Verlauf am linken Bildrand bleibt;
-- Desktop dynamischer Textschutz bleibt 35–48 %, bei 901–1180 px 42–58 %;
-- Mobil-H1 darf natürlich umbrechen statt abgeschnitten zu werden.
+Pilotaufbau:
+- ausschließlich Seite `Metall`;
+- Hero rechts bindet ausdrücklich das Original `subcategories/fertigen/metall-v150627.webp` (600×320), aus dem das Kategoriebild abgeleitet ist;
+- komplettes Motiv sichtbar;
+- kein Zoom/Crop;
+- keine Beige-/Weiß-Verlaufsüberlagerung über dem Bild;
+- links reines Weiß;
+- Text- und Bildhälfte gemeinsam in einem dünnen 1-px-Rahmen;
+- Desktop nebeneinander, Mobil gestapelt;
+- Textwortlaut unverändert;
+- sichtbarer Lead wird vor Ausgabe whitespace-normalisiert und als genau ein `p` gerendert; keine Leerzeile/`br`.
 
-Kategorietext:
-- Wortlaut der 69 Texte unverändert;
-- sichtbarer Lead bleibt im vorhandenen Umfang ca. 45–64 Wörter;
-- Lead wird als **ein zusammenhängender Absatz** gerendert, keine künstliche Leerzeile;
-- vertikale Abstände verkleinert;
-- kleiner Chevron näher am Text;
-- kein zusätzlicher Kasten;
-- kein zusätzlicher sichtbarer Text nötig.
+Alle anderen 68 Hub2 bleiben auf 1.50.681-Darstellung.
 
-## QA 1.50.681
+## QA 1.50.682
 
-- aus exakter 1.50.680 gebaut;
-- ZIP PASS;
+- aus exakter 1.50.681 gebaut;
 - PHP 90/90 PASS;
-- aktive Release-Kette V150681 PASS;
-- reale Front-Route → V150681 PASS;
-- reale Content-Route → V150681 PASS;
-- Front-/Contenttemplate positiv mit V150681 PASS;
-- Negativtest mit nur V150680 scheitert erwartungsgemäß auf fehlender V150681-Klasse;
-- Paketdelta gegen 1.50.680: **1 Datei geändert + 3 neue Dateien + 0 entfernt**;
+- ZIP PASS;
+- aktive Route Front V150682 PASS;
+- aktive Route Content V150682 PASS;
+- beide Templates positiv mit V150682 PASS;
+- Negativtest gegen nur V150681 erwartungsgemäß FAIL;
+- Dirty-Overlay 1.50.681 → 1.50.682 aktive Kette PASS;
 - 901/901 Bildassets byte-identisch;
-- 69/69 Hub2-Text-/Renderprüfung PASS;
-- Inline-Chromium-Test mit echten 600×320- und 1600×853-Bildern bei 1440/1024/901/900/760/390 px PASS;
-- dabei keine Bildbreite über 600 px, keine Quelle über Natural Width, Bildverhältnis durchgehend 600:320, kein horizontaler Overflow.
+- Metall-Heroquelle exakt 600×320, gerendert maximal 600×320;
+- Desktop 1440/1024/901 PASS;
+- Mobil 900/390 PASS;
+- Copy-Hintergrund Weiß PASS;
+- Fade-Pseudoelemente aus PASS;
+- Außenrahmen 1 px PASS;
+- Desktop kein Text/Bild-Overlap PASS;
+- sichtbarer Metall-Lead: 1 Absatz, 0 `br`, Margin oben/unten 0.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.681 installieren und Imkerei & Bestäuber sowie zwei weitere Hub2 auf Desktop und Mobil gegen den Nutzer-Screenshot prüfen: Bild scharf, kompletter identischer Ausschnitt, Text kompakt ohne Leerzeile.**
+**1.50.682 installieren und ausschließlich Metall auf Desktop und Mobil beurteilen: Ist die Alternative mit weißem Textfeld, vollständigem Originalmotiv und dünnem Rahmen die bessere zentrale Hub2-Richtung?**
 
 ## NICHT ANFASSEN
 
-- Textinhalte nicht neu schreiben;
-- Bilddateien nicht hochskalieren;
-- Kategoriebaum nicht ändern;
-- Mega-Menü nicht ändern;
-- keine neue Architektur.
+- noch keine Übertragung auf die anderen 68 Hub2;
+- keine neuen Bilder;
+- Textinhalte nicht ändern;
+- Mega-Menü/Kategoriebaum nicht ändern.
