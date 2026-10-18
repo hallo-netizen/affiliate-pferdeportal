@@ -3921,3 +3921,40 @@ NACHWEIS:
 NEXT:
 diese korrigierte Repack-ZIP hochladen; WordPress muss jetzt das vorhandene Affiliate Portal Template Kit zum Ersetzen erkennen.
 
+---
+
+## PU-20261018-081 – HD-003 1.50.676 / Audio-Claim höher, Abstand größer, Unterstrich kurz
+
+REALER BEFUND 1.50.675:
+- Claim zu nah an H1;
+- Claim soll höher;
+- Pinselunterstrich deutlich zu lang.
+
+URSACHE:
+Claim war als Flex-Kind quer gestreckt. Der absolute Pinselunterstrich bezog sich dadurch auf die gestreckte Breite statt auf die tatsächliche Claim-Textbreite.
+
+KORREKTUR:
+- align-self:flex-start;
+- width:max-content;
+- Unterstrich 74 %;
+- Desktop Claim -12 px;
+- größerer Abstand zur H1;
+- Mobil Claim -6 px;
+- keine Bild-/Text-/Kategorieänderung.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.676_HOBBY_DEPOT_AUDIO_CLAIM_SPACING_UNDERLINE_FIX_HARDPASS.zip`
+
+SHA-256:
+`7c898eaeac166e21e47ecfa946baa4ff217f462e5145a9485ec272647186ca82`
+
+QA:
+- PHP 75/75;
+- 901/901 Assets identisch;
+- Release-Kette sauber;
+- WordPress-Pluginwurzel korrekt;
+- ZIP PASS.
+
+LIVE:
+offen.
+
