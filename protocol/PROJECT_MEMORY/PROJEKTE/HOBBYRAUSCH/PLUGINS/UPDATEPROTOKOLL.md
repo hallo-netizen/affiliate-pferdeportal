@@ -3882,3 +3882,42 @@ offen.
 NEXT:
 1.50.675 installieren -> Audio & HiFi breit und halbbreit prüfen.
 
+---
+
+## PU-20261018-080 – HD-003 1.50.675 / Installer-Packaging korrigiert
+
+REALER BEFUND:
+WordPress bot beim Upload der ersten 1.50.675-ZIP keine Überinstallation des bestehenden Plugins an.
+
+EXAKTE URSACHE:
+Die ZIP begann direkt mit Plugin-Dateien wie `pferde-template-kit.php`, `includes/`, `assets/`.
+Der notwendige äußere Pluginordner `affiliate-portal-template-kit/` fehlte.
+
+VERGLEICH:
+1.50.674 korrekt:
+- `affiliate-portal-template-kit/`
+- `affiliate-portal-template-kit/pferde-template-kit.php`
+
+erste 1.50.675 falsch:
+- `pferde-template-kit.php` direkt an ZIP-Wurzel.
+
+KORREKTUR:
+Keine Codeänderung.
+Exakt dieselben 1041 Innendateien wurden unter den korrekten bestehenden Pluginordner gepackt.
+
+NEUES ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_REPACKED_HARDPASS.zip`
+
+SHA-256:
+`356a8e9861f0c018e42620d311eb9985f48279b3a5d1ed26be321c63ddfa24bd`
+
+NACHWEIS:
+- 1041/1041 Innendateien byte-identisch zur technisch geprüften 1.50.675;
+- Top-Level-Ordner exakt `affiliate-portal-template-kit/`;
+- Main-Datei exakt `affiliate-portal-template-kit/pferde-template-kit.php`;
+- Plugin Header Version 1.50.675;
+- ZIP-Test ohne Fehler.
+
+NEXT:
+diese korrigierte Repack-ZIP hochladen; WordPress muss jetzt das vorhandene Affiliate Portal Template Kit zum Ersetzen erkennen.
+
