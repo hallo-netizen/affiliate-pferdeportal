@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-18 (PSTE 0.57.106 lokaler Installations-/Fortschrittsstatus PASS; Live-E2E weiterhin nicht geprüft)
+STAND: 2026-10-18 (PSTE 0.57.107 installierbar, lokaler Fortsetzungs-/Kettenregressions-PASS; Live-E2E offen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
@@ -72,6 +72,13 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - **Fehler-/Fortsetzungs-Reproduktion mit exaktem originalen Queue-Code und 5014 synthetischen unveränderlichen Fingerprint-Zeilen:** 4880 geprüfter und bestätigter Präfix → Weiterführung exakt 4880/5014 ohne Rücksetzen PASS; bei verändertem Altpräfix sichere Ablehnung ohne Write PASS; gezielter Aufruf der Append-Only-Funktion **ohne neuen Zeilenanhang** reproduziert exakt `PSTE_EXISTING_ONLY_COMPLETED_AUDIT_CHANGED_PROGRESS_PRESERVED` und schreibt keinen neuen Queue-Status. Synthetische Zeilen sind **nicht** die echten 5014 WordPress-Zeilen.
 - **Ergebnis:** Isolierte PHP-Komponenten- und Kettenbeweiskontrolle = PASS. **Vollständiger realer WP/MariaDB-→PSTE-Automatik-→PSERC-Neucompiler-→K0→PPM-Draft-Readback-E2E = NICHT BESTANDEN / NICHT DURCHGEFÜHRT.** Keine 0.57.107, kein weiteres ungetestetes Installationspaket; keine gefährliche Umgehung der Quellen-/Hashsperre. Die aktuelle 0.57.106 darf nicht als Gesamtproduktions-Freigabe bezeichnet werden.
 - **Eine NEXT ACTION weiterhin:** read-only Live-Binding des tatsächlich gespeicherten Queue-Status und Receipt/Checkpoint-Fingerprints gegen die aktuellen Werte; daraus präzise entweder bestehende 4880er Queue sicher fortsetzen oder den tatsächlich veränderten Teil **ohne** Verlust der gespeicherten Entscheidungen kontrolliert behandeln. Vor diesem Nachweis **kein erneuter Vollscan und keine weitere ZIP als angeblich endgültiger Fix**.
+
+## 18.10.2026 – 0.57.107: sichere automatische Fortsetzung / vollständiger lokaler Kopplungsnachtest
+- **Installierbare ZIP**: `/Pferdeatelier/PFERDEATELIER_SEO_THEMENENGINE_0.57.107_SICHERE_FORTSETZUNG.zip`, 570629 Bytes, SHA-256 `628bb4cb0352c85b58a34a5d4ddc1b0b44f269cc9342c9f961a31fba0be27460`. Aus realer 0.57.106 mit genau zwei veränderten Dateien: `includes/class-pste-admin.php` und Versionskopf; 115 von 117 Dateien original-byteidentisch, einschließlich **der kompletten signierten Queue-/Prüf- und Fach/Magazin-Entscheidungslogik**. Keine neue Tabelle, Architektur oder zusätzliche Regel.
+- **Quellfehler im Produktions-AJAX behoben:** Der Status der Queue wurde bislang vor dem Portal-Preflight gelesen und danach trotz möglicher zwischenzeitlicher Queue-Änderung weiterverwendet. Jetzt wird der autoritative gespeicherte Queue-Status nach Preflight und unmittelbar vor einem Neustart erneut read-only abgefragt; eine nachweislich aktive Existing-Only-Queue wird fortgesetzt, **nicht** neu angelegt. Der reproduzierte signierte Beleg-Ablehnungsfehler darf nicht zu `GESTOPPT` führen, wenn inzwischen eine gültige alte `RUNNING`-Queue mit gespeichertem 4880er Präfix vorliegt. Bei echtem Beleg-Widerspruch bleibt die Ablehnung bestehen; kein Autoritäts-Bypass.
+- **Anzeige:** Ein wirklich `BLOCKED` markierter Server-Driver wird nicht mehr als gesundes `RUNNING` präsentiert.
+- **Lokal durchgeführt:** 79/79 PHP-Syntaxprüfungen, 117/117 ZIP-Integrität, echter Bootstrap/Aktivierung/Update einer bestehenden READY-Installation in WordPress-Mocks ohne Datenmigration oder Produktionsschreiben, acht alte Statusfälle und acht neue harte Positiv-/Negativ-Fälle zur 4880er Race-/Checkpoint-Erhaltung, echter Originalqueue-Hash-/Präfixnachweis mit synthetischen 5014 Zeilen (gültiger Fortsatz/ungültige geänderte Originalzeilen/kein Doppelstart), realer PSTE→PSERC→K0→PPM-6.7.9 PHP-Ketten- und Negativtest mit vorhandenen sieben genehmigten Paketen. **Lokal PASS; nicht Live-WP-/MariaDB-5014-E2E.** 
+- **Gültigkeit:** Dieser Fix beseitigt unnötige, auf veralteten AJAX-Zwischenständen beruhende Neuinitialisierungen und falsche Stopps, aber **kann bei tatsächlich veränderten Belegfingerprints ohne gültigen Live-Readback keinen alten 4880er Fortschritt unbesehen freigeben**. Bestehende gespeicherte Entscheidungen bleiben erhalten, Produktion wird nicht autoritätslos freigegeben.
 
 ## NEXT ACTION
 
