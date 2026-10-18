@@ -4594,3 +4594,35 @@ QA:
 
 NEXT:
 1.50.688 installieren und Kettenhemd-Seite visuell prüfen. Meta-Titel erst im danach geplanten eigenen SEO-Schritt.
+
+
+---
+
+## PU-20261018-095 – HD-003 1.50.689 / Kettenhemd Reihenfolge + H1 einzeilig
+
+NUTZERENTSCHEIDUNG:
+- Banner direkt unter den Introtext;
+- alle 8 Kacheln ohne Produktunterbrechung zusammenhalten;
+- Produkte/Empfehlungen erst unter den Kacheln;
+- passende Beiträge danach;
+- H1 `Kettenhemd flechten` ohne Umbruch.
+
+SCOPE:
+Nur Kettenhemd-Pilot. Meta-Titel, WP-Titel/Slug/URL, Hub2 und andere Detail-Hubs bleiben unverändert.
+
+AUSLIEFERUNG:
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.689.zip`
+- einmaliger fail-closed Delta-Updater für exakt 1.50.688;
+- Backup der angefassten 1.50.688-Dateien;
+- V150689 Profil + Front-/Contenttemplate neu;
+- Main erst nach erfolgreichem Schreiben umgestellt;
+- Readback und Selbst-Deaktivierung.
+
+QA:
+- ZIP integrity PASS;
+- PHP lint PASS;
+- hard assertions PASS;
+- GitHub Actions Run 39139756377 SUCCESS.
+
+NEXT:
+Delta installieren/aktivieren; danach Kettenhemd real prüfen: Banner → 8 Kacheln → Empfehlungen → Beiträge und einzeilige H1.
