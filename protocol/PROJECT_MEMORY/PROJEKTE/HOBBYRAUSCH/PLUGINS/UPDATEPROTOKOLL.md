@@ -4068,3 +4068,56 @@ FOLGE:
 NEXT:
 1.50.678 im echten lokalen Plugin-Renderweg mit geladenem Audio-Hero positiv und negativ simulieren. Erst danach über WordPress-Installation entscheiden.
 
+
+
+---
+
+## PU-20261018-085 – HD-003 / portalweiter Hub2-Hero- und Textrollout vorbereitet
+
+NUTZERENTSCHEIDUNG:
+- Audio-&-HiFi-Hero als Zielbild abgenommen;
+- dynamische Fullbleed-Hero-Regel auf alle Kategorien derselben Hub2-Ebene ausweiten;
+- bisherige schematische Hub2-Kategorietexte verwerfen;
+- Pferdeatelier-Textregeln für alle Hub2 verbindlich;
+- ungefähr ein Drittel des 150–200-Wörter-Texts sichtbar, niemals mehr als die Hälfte;
+- Rest minimalistisch aufklappbar;
+- sichtbarer Text `Mehr zu <Kategorie> erfahren` entfällt;
+- kleiner Chevron/Pfeil reicht, Screenreader-Beschriftung bleibt;
+- Aufklapper näher an den Text;
+- kein zusätzlicher Seitenendtext auf Hub2.
+
+AKTUELLER SCOPE:
+69 aktive Hub2-Seiten aus dem aktuellen V7.1-Zielbaum.
+
+TEXTARBEIT:
+- 69/69 individuelle Hub2-Texte vorbereitet;
+- 150–174 Wörter je Gesamttext;
+- 45–64 Wörter sichtbarer Lead;
+- Audio & HiFi inhaltlich auf dem bereits individuellen Stand belassen und nur kompakter geteilt;
+- alte feste `Bei <Kategorie> geht es um …`-Generatorlogik im vorbereiteten Kandidatenpfad entfernt.
+
+HERO-ROLLOUT:
+- Audio-Regel zentral für alle Hub2 vorgesehen;
+- Desktop dynamischer Textschutz 35–48 %;
+- 901–1180 px 42–58 %;
+- H1/Claim/Kurzzeile Desktop einzeilig;
+- <=900 px gestapelt;
+- CSS-only, keine neue Frontend-/DB-Abfrage.
+
+QA:
+Der vorbereitete 1.50.679-Codeweg wurde synthetisch auf der zugänglichen 1.50.668-Quellkopie geprüft:
+- PHP-Lint ohne Fehler;
+- 69/69 Hub2-Render ohne Fehler;
+- alte Schablone im Renderpfad nicht vorhanden;
+- sichtbarer `Mehr zu …`-Text nicht vorhanden;
+- zugängliche Aufklappbeschriftung vorhanden;
+- Release-Kette im Testaufbau auf 1.50.679 geschlossen.
+
+WICHTIGE GRENZE:
+Diese synthetische Prüfung ist kein Release-PASS und kein installierbares Artefakt. Die exakten 1.50.678-Paketbytes konnten im aktuellen Arbeitsweg nicht materialisiert werden. Ein Paket auf älterer Basis würde spätere Bild-/Hero-/Responsive-Korrekturen riskieren und wird deshalb nicht freigegeben.
+
+ZIELVERTRAG:
+ZV-HOBBYRAUSCH-DESIGN-001 auf Fassung 4.7 nachgezogen.
+
+NEXT:
+1.50.679 ausschließlich aus der exakten 1.50.678-Quelle bauen und danach positiv/negativ/regressiv lokal prüfen. Vorher kein WordPress-Upload.
