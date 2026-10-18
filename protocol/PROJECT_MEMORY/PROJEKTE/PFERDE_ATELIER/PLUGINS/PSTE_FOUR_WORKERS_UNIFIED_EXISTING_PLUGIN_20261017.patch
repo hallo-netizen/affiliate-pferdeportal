@@ -601,7 +601,7 @@
  
          // Productwahl is a reviewed candidate type but downstream production is not registered yet.
          // A newly repaired family match must therefore never silently turn a Productwahl query into
-@@ -276,9 +300,95 @@
+@@ -276,9 +300,109 @@
          if(empty($semantic['ok'])){$base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';return self::withReasons($base,'SANDBOX_REQUIRED',array_merge(['PSTE_NORMAL_PATH_SEMANTIC_CONSENSUS_NOT_PASS','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($semantic['reason_codes']??[])));}
  
          $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS'];
@@ -651,13 +651,27 @@
 +            $title=$storedTitle!==''?$storedTitle:PSTE_Normalizer::canonicalQuestion($raw);
 +            $keyword=rtrim($title," ?\t\n\r\0\x0B");
 +            if($title===''||$keyword==='')return $base;
-+            $checked=[];
++            $checked=[];$pipeline=[];
 +            foreach(['FAQ','Journal'] as $type){
 +                $check=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,$subject,$type,$registry,$intent,$keyword,$keyword);
 +                if(!empty($check['ok']))$checked[$type]=$check;
++                $pipeline=$check;
 +            }
-+            if(!$checked)return $base;
-+            $pipeline=reset($checked);
++            if($checked)$pipeline=reset($checked);
++            elseif($storedTitle===''){
++                // Reuse the EXISTING title composer instead of discarding a
++                // relevant question merely because its raw wording was poor.
++                $typeHint=PSTE_Semantic_Classifier::classifyTypeOnly($raw,$registry);
++                $type=(!empty($typeHint['ok'])&&trim((string)($typeHint['resolved_article_type']??''))!=='')
++                    ?(string)$typeHint['resolved_article_type']:'FAQ';
++                $built=PSTE_Title_Pipeline::build(
++                    ['raw_query'=>$raw,'language_corrected_query'=>$raw],$subject,$type,$registry,[],$intent
++                );
++                if(!empty($built['ok'])&&trim((string)($built['title']??''))!==''){
++                    $pipeline=$built;$title=(string)$built['title'];
++                    $keyword=(string)($built['target_keyword']??'');
++                }
++            }
 +        }else{
 +            // A stored title is never silently replaced. For a raw phrase the
 +            // *existing* composer is now called without a research-family gate.
@@ -698,7 +712,7 @@
  
      /** Existing single verified extension metadata acceptance path. No independent gate or store. */
      private static function acceptVerifiedExtension(array $base,array $extension,string $persistedTitle,string $raw,array $registry): array {
-@@ -315,7 +425,7 @@
+@@ -315,7 +439,7 @@
          $base['domain_risk']=(array)$extension['domain_risk'];$base['article_type_extension_routing']=$extension;
          if(strtolower($type)==='journal')$base['journal_routing']=$extension; // compatibility export only
          $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS','PSTE_ARTICLE_TYPE_EXTENSION_ROUTE_PASS'];
@@ -707,7 +721,7 @@
      }
  
      /** Apply only SEO-topic metadata derived by evaluateRaw(); raw source fields remain byte-identical. */
-@@ -333,6 +443,9 @@
+@@ -333,6 +457,9 @@
          $preferredFamilyKey=($trustedResearch||$trustedReentry)?$providedPreferred:'';
          $result=self::evaluateRaw($raw,$baseline,$preferredFamilyKey,$relevanceProof,$payload);
          $result=self::applyManualTitleOverride($payload,$result,$raw,$baseline);
@@ -717,14 +731,14 @@
          $payload['normal_metadata_path']=$result;
          $payload['raw_keyword_preserved']=$raw;$payload['raw_keyword_sha256']=$raw!==''?hash('sha256',$raw):'';
          $payload['metadata_handoff_fields']=['title','target_keyword','category','article_type','plan_slot'];
-@@ -340,5 +453,6 @@
+@@ -340,5 +467,6 @@
          $payload['sandbox_required']=($result['status']??'')==='SANDBOX_REQUIRED';
          $payload['sandbox_admission_mode']=(string)($result['sandbox_admission_mode']??'');         $payload['structure_gap_backlog_required']=!empty($result['structure_gap_backlog_required']);
 +        $payload['category_backlog_required']=!empty($result['category_backlog_required']);
          $payload['retained_non_producing']=!empty($result['retained_non_producing']);
          $payload['category_gap_proposal']=(array)($result['category_gap_proposal']??[]);
  
-@@ -579,5 +693,91 @@
+@@ -579,5 +707,91 @@
      public static function payloadMatchesNormalPath(array $payload,array $path): bool {$pathRaw=self::canonicalInputQuery((string)($path['raw_query']??''));$pathSha=(string)($path['raw_query_sha256']??'');if($pathRaw===''||preg_match('/^[a-f0-9]{64}$/',$pathSha)!==1||!hash_equals(hash('sha256',$pathRaw),$pathSha))return false;$record=is_array($payload['query_record']??null)?(array)$payload['query_record']:[];$candidates=[PSTE_Editorializer::sourceQuery($payload),(string)($payload['primary_longtail_query']??''),(string)($payload['canonical_query']??''),(string)($payload['raw_user_question']??''),(string)($record['language_corrected_query']??''),(string)($record['raw_query']??'')];foreach($candidates as $candidate){$candidate=self::canonicalInputQuery((string)$candidate);if($candidate!==''&&hash_equals($candidate,$pathRaw))return true;}return false;}
      private static function clean(string $v): string {return self::canonicalInputQuery($v);}
      /** @return array<string,mixed> */
