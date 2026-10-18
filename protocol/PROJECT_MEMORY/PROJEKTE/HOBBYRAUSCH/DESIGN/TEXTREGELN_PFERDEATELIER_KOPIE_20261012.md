@@ -33,9 +33,13 @@ Nicht übernommen werden Pferdeatelier-Farben, Layout, Icons oder die Pferdeatel
 ## Hobby-Depot-Darstellung
 Die **Darstellung** stammt ausdrücklich **nicht** aus Pferdeatelier, sondern bleibt beim akzeptierten Buch-&-Papier-Aufbau:
 
-**sichtbarer Lead → „Mehr zu <Kategorie> erfahren“ → restlicher Text im Aufklapper.**
+**ein sichtbarer Fließtextblock von ungefähr 45–60 Wörtern → kleiner Chevron/Pfeil → restlicher Text im Aufklapper.**
 
-Kein zusätzlicher zweiter Erklärungstext unter dem Aufklapper.
+- Der sichtbare Teil bleibt **ein Absatz ohne künstliche Leerzeile**.
+- Kein sichtbarer Pflichtsatz `Mehr zu <Kategorie> erfahren`.
+- Kein zusätzlicher Dekokasten; Kompaktheit entsteht durch einen durchgehenden Textblock und kleine Abstände.
+- Kein zusätzlicher zweiter Erklärungstext unter dem Aufklapper.
+- Mehr sichtbarer Text ist nicht automatisch besser; der Lead soll bereits informieren, aber die Seite kompakt halten.
 
 ## Bindung
 Diese Regel gilt für die Kategorietexte der Hub2-/Ebene-2-Seiten im Hobby Depot. Status, Release und NEXT ACTION bleiben ausschließlich in `DESIGN/CURRENT_STATE.md`.
