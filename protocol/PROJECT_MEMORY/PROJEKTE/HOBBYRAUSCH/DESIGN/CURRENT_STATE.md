@@ -3,9 +3,9 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.689 KETTENHEMD LIVE ABGENOMMEN / 1.50.690 DETAIL-LEVEL-ROLLOUT GEBAUT / GEMEINSAMER SEITEN-RENDERER OHNE KETTENHEMD-SONDERZWEIG / BUILD-QA PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 DETAIL-ROLLOUT GEBAUT / 1.50.691 STARTSEITEN-BILDUPDATE GEBAUT / HERO-BILDER HAUPTKATEGORIEN UNVERÄNDERT / WORDPRESS-READBACK OFFEN**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.2 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.3 / 2026-10-18**
 
 ## KANDIDAT 1.50.687
 
@@ -256,3 +256,32 @@ QA:
 ## EXAKT EINE NEXT ACTION
 
 **1.50.690 installieren und außer Kettenhemd mindestens zwei weitere Detail-Hubs sowie einen der direkten Category-Term-Fälle real prüfen.**
+
+
+## KANDIDAT 1.50.691 – STARTSEITE
+
+Artefakt:
+`HOBBY_DEPOT_STARTSEITE_UPDATE_1.50.691.zip`
+
+SHA-256:
+`9b0ab3086a757461905b363e7af2a865ac1a6684fea65cd597bac53dd9ac6cd8`
+
+Umsetzung:
+- 8 neue ruhige Startseitenbilder für Gestalten/Fertigen/Technik/Forschen/Pflanzen/Tiere/Bewegen/Sammeln;
+- 1400×620 WebP, jeweils aus freigegebenem neuem Motiv;
+- Startseitenkarten verwenden eigene Bildquelle `start-world-v150691/<slug>.webp`;
+- `world_hero_asset()` bleibt unverändert und versorgt weiterhin die Hauptkategorie-Heros;
+- vorhandener Affiliate-Querbanner wird direkt unter die 8 Hobbywelten verschoben;
+- weitere Startseitenmodule bleiben in ihrer Reihenfolge erhalten;
+- kleines One-shot-Update auf harter Basis 1.50.690, mit Backup und Selbstdeaktivierung.
+
+QA:
+- PHP-Lint PASS;
+- ZIP-Test PASS;
+- 8/8 WebP vorhanden;
+- alle 8 Bilder 1400×620;
+- Startseiten-/Heroquellen technisch getrennt;
+- Hero-Schutzcheck im Updater enthalten.
+
+NEXT:
+**1.50.691 installieren und nur die Startseite prüfen.**
