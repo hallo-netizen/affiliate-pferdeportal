@@ -1,0 +1,44 @@
+name: HD690 Build
+on:
+  push:
+    branches:
+      - hobbyroom/hd690-detail-rollout-20261018
+permissions:
+  contents: write
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/hd690-detail-rollout-20261018
+      - name: PHP lint
+        run: php -l build/hobby-depot-template-kit-update-150690/hobby-depot-template-kit-update-150690.php
+      - name: Hard assertions
+        run: |
+          f=build/hobby-depot-template-kit-update-150690/hobby-depot-template-kit-update-150690.php
+          grep -F "Version: 1.0.0" "$f"
+          grep -F "Version: 1.50.690" "$f"
+          grep -F "if (\$page instanceof WP_Post) {" "$f"
+          grep -F "hd-catlevel-banner-first-v150690" "$f"
+          grep -F "hd-catlevel-grid-all-v150690" "$f"
+          grep -F "render_category_level_post_previews_v150687(\$page, 4)" "$f"
+          ! grep -F "if (\$slug_v150689 === 'kettenhemdflechten') {" "$f"
+      - name: Build ZIP
+        run: |
+          rm -f artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip
+          mkdir -p artifacts
+          cd build
+          zip -qr ../artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip hobby-depot-template-kit-update-150690
+          cd ..
+          unzip -t artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip
+          sha256sum artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip > artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.sha256.txt
+      - name: Commit artifact
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.sha256.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "Build HD690 detail-level rollout updater"
+          git push
