@@ -844,3 +844,25 @@ KORREKTUR:
 VERMEIDUNGSREGEL – HART:
 Kein Hub2-Hero-Release mehr nur mit einem Desktop-Screenshot oder reinem CSS-Stringcheck. Vor Release müssen mindestens breite Desktop-, schmale Desktop-/Tablet- und Mobilbreite mit dem tatsächlich gerenderten HTML simuliert werden. Dabei sind Bildbreite, horizontaler Overflow, Innenabstand, Claim, H1 und Hero-Kurztext explizit zu prüfen. Der Hero-Kurztext darf nicht implizit aus dem Langtext abgeleitet werden, wenn ein eigener freigegebener Kurztext existiert.
 
+## AF-045 – 1.50.675 ZIP ohne bestehenden Plugin-Wurzelordner gepackt
+
+FEHLER:
+Die erste 1.50.675-ZIP enthielt die Plugin-Dateien direkt an der ZIP-Wurzel statt unter `affiliate-portal-template-kit/`.
+
+FOLGE:
+WordPress konnte den Upload nicht als dieselbe vorhandene Plugin-Installation erkennen und bot daher keine normale Überinstallation des bestehenden Template-Kits an.
+
+URSACHE:
+Beim Packen wurde der **Inhalt** des Pluginordners gezippt statt der Pluginordner selbst.
+
+KORREKTUR:
+Keine Codeänderung. Die exakt gleichen 1041 Dateien wurden neu unter `affiliate-portal-template-kit/` gepackt. Innendateien 1041/1041 byte-identisch.
+
+VERMEIDUNGSREGEL – HART:
+Vor jedem WordPress-Plugin-Release zusätzlich zum Code-/ZIP-Test den Installer-Pfad gegen die letzte real installierbare Version prüfen:
+1. identischer Top-Level-Pluginordner;
+2. identische Main-Datei relativ zu diesem Ordner;
+3. Plugin-Header vorhanden;
+4. simulierter Overlay-Pfad entspricht exakt `wp-content/plugins/<bestehender-pluginordner>/...`.
+Ein ZIP-Test allein reicht nicht.
+
