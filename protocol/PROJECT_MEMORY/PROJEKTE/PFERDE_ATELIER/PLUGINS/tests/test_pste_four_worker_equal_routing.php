@@ -20,6 +20,21 @@ foreach([
     check(!empty($classified['ok'])&&($classified['category_key']??'')===$expectedDomain,
         'magazine category depends on the question, not DataForSEO family: '.$expectedDomain);
 }
+// End-to-end within the same existing PHP classes: a misleading DataForSEO
+// source-family hint must not change the category selected from live registry terms.
+$registry=PSTE_Article_Type_Registry::build($b);
+$familyKeys=array_keys((array)($registry['families']??[]));
+check(count($familyKeys)>1,'full registry contains multiple distinct Fach families for negative routing tests');
+$reference=PSTE_Normal_Metadata_Path::evaluateRaw('Sind Haferflocken für Pferde geeignet?',$b);
+foreach([$familyKeys[0],$familyKeys[count($familyKeys)-1]] as $wrongFamily){
+    $withHint=PSTE_Normal_Metadata_Path::evaluateRaw('Sind Haferflocken für Pferde geeignet?',$b,$wrongFamily);
+    check(($withHint['status']??'')===($reference['status']??'')
+        &&($withHint['article_type']??'')===($reference['article_type']??'')
+        &&($withHint['target_category']['slug']??'')===($reference['target_category']['slug']??''),
+        'old source-family priority cannot alter the final Magazin category');
+}
+check(empty(PSTE_Journal_Semantic_Router::classifyQuestion('Was kostet ein Sattel für Pferde?')['ok']),
+    'removing obsolete family gates did not allow shopping-intent Magazin misclassification');
 $feed=result('Sind Haferflocken für Pferde geeignet?');check($feed['status']==='NORMAL_PASS'&&($feed['target_category']['slug']??'')==='pferdeernaehrung-verstehen'&&$feed['article_type']==='Journal','familyless horse feed -> verified real journal category');
 check(($feed['worker_flow']['disposition']??'')==='GREEN','all four workers GREEN with real category');
 $housing=result('Wie lange soll man Pferde auf die Weide lassen?');check($housing['status']==='NORMAL_PASS'&&($housing['target_category']['slug']??'')==='alltags-pferde-haltungsformen','familyless grazing -> housing');
