@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.674 RESPONSIVE/TEXT FAIL / 1.50.675 CENTRAL AUDIO-HERO FIX LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.674 / 1.50.675 CODE PASS / ERSTE ZIP NICHT ÜBERINSTALLIERBAR / KORREKTE REPACK-ZIP PASS / LIVE OFFEN**
 
 ## Fehler 1.50.674
 
@@ -16,10 +16,10 @@ STATUS: **LIVE 1.50.674 RESPONSIVE/TEXT FAIL / 1.50.675 CENTRAL AUDIO-HERO FIX L
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_REPACKED_HARDPASS.zip`
 
 SHA-256:
-`aaf1bca2d7b7b55b91f9a15e22e847b67489ceca3faf3d6c1648a6779b636307`
+`356a8e9861f0c018e42620d311eb9985f48279b3a5d1ed26be321c63ddfa24bd`
 
 ## Korrektur
 
@@ -52,6 +52,11 @@ Langtext unabhängig davon.
 
 ## QA
 
+- erster 1.50.675-Installer verworfen: Plugin-Wurzelordner fehlte;
+- Repack: Top-Level `affiliate-portal-template-kit/` wie 1.50.674;
+- Main-Datei: `affiliate-portal-template-kit/pferde-template-kit.php`;
+- 1041/1041 Innendateien byte-identisch;
+- ZIP-Test ohne Fehler;
 - PHP 73/73;
 - Render-Harness PASS;
 - Release-Kette sauber;
