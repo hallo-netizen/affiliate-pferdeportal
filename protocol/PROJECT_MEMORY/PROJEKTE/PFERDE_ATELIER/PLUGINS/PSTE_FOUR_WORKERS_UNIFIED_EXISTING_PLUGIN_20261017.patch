@@ -615,10 +615,10 @@
 +            $checked=[];
 +            foreach(['FAQ','Journal'] as $type){
 +                $check=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,$subject,$type,$registry,$intent,$keyword,$keyword);
-+                if(empty($check['ok']))return $base;
-+                $checked[$type]=$check;
++                if(!empty($check['ok']))$checked[$type]=$check;
 +            }
-+            $pipeline=$checked['FAQ'];
++            if(!$checked)return $base;
++            $pipeline=reset($checked);
 +        }else{
 +            // A stored title is never silently replaced. For a raw phrase the
 +            // *existing* composer is now called without a research-family gate.
