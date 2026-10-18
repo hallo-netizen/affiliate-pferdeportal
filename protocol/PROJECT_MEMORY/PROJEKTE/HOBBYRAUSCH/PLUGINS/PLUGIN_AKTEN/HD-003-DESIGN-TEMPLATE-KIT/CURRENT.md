@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.688 LIVE / 1.50.689 DELTA-UPDATER GEBAUT + ZIP/PHP/HARD-ASSERTIONS PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 ONE-SHOT-ROLLOUT GEBAUT / QA PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
@@ -129,3 +129,35 @@ QA:
 ## EXAKT EINE NEXT ACTION
 
 **1.50.689 Delta installieren/aktivieren und Kettenhemd frontendseitig abnehmen.**
+
+
+## Kandidat 1.50.690
+
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip`
+
+SHA-256:
+`fcbc01893df451e56527cdcf90e6f7364cfa24d7afbc4556b69bc9b215c19809`
+
+Scope:
+- Basis exakt 1.50.689;
+- Kettenhemd-Sonderzweig aus dem gemeinsamen Detail-Seitenrenderer entfernt;
+- abgenommene Reihenfolge wird dort Standard:
+  Banner direkt nach Text → alle Kacheln geschlossen → Empfehlungen → bis zu 4 Beiträge → bestehender weiterer Werbeplatz;
+- Backup vor Schreibvorgang;
+- One-shot-Updater deaktiviert sich danach selbst.
+
+QA:
+- PHP lint PASS;
+- Hard assertions PASS;
+- ZIP PASS;
+- Build PASS;
+- exakte 1.50.689-Preflight-Hardchecks;
+- Readback-Hardchecks auf 1.50.690.
+
+Offen:
+- echter WordPress-Readback;
+- separate Bestätigung der 16 direkten Category-Term-Knoten, deren eigener Runtimepfad im Quellpatch nicht geraten wird.
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.690 installieren und mehrere andere Detail-Hubs plus einen direkten Term-Fall lesen.**
