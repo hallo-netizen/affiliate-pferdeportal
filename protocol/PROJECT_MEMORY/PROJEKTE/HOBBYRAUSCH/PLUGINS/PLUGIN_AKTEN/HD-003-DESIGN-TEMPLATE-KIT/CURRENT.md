@@ -3,43 +3,37 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.681 VISUELL NICHT ABGENOMMEN / 1.50.682 METALL-ALTERNATIVPILOT GEBAUT / LOKAL POSITIV+NEGATIV+VISUELL PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.683 METALL-PILOT GEBAUT / RELEASEKETTE POSITIV+NEGATIV PASS / VISUELLER METALL-TEST PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.682_METALL_ALT_WHITE_FRAME_PILOT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.683_METALL_SCENE_MASTER_CARDTEXT_PILOT.zip`
 
 SHA-256:
-`4f9e23ff92aaeddcacc0c1f1b051c207a7b238b15dc53f2181de855099925b72`
+`96315f620599527093fc8d9a6c380159b33bcf0b33dbbfc42dbc214c8580ec0a`
 
 ## Scope
 
-Nur `Metall`:
-- Originalquelle des Kategoriebilds als Hero: `metall-v150627.webp`, 600×320;
-- kein Crop/Zoom;
-- kein Übergang/Fade über dem Bild;
-- Textbereich Weiß;
-- gesamter Hero mit dünnem Rahmen;
-- Desktop Bild rechts / Text links;
-- Mobil gestapelt, gleiches vollständiges Motiv;
-- sichtbarer Lead ein Absatz ohne Leerzeile.
-
-Alle übrigen Hub2 unverändert gegenüber 1.50.681.
+Nur Metall:
+- hochauflösender 2070×760-Szenenmaster derselben Bildquelle;
+- Desktop horizontal vollständig erhalten, nur vertikal beschnitten;
+- kein Upscaling;
+- Mobil dieselbe Szene;
+- aktueller beige/fade Hero mit Text auf gleicher Höhe bleibt;
+- fünf Metall-Kartenuntertitel individuell statt Welt-Schablone.
 
 ## QA
 
-- PHP 90/90 PASS;
+- PHP 93/93 PASS;
 - ZIP PASS;
-- Route/Template V150682 positiv PASS;
-- Negativtest V150681 PASS;
-- Dirty Overlay PASS;
-- 901/901 Assets identisch;
-- Browser 1440/1024/901/900/390 PASS;
-- Bild 600×320 nativ, kein Upscaling;
-- kein Fade;
-- 1-px-Rahmen;
-- Metall-Lead genau 1 Absatz / 0 br / 0 Margin.
+- Route/Template V150683 positiv PASS;
+- Negativtest V150682 PASS;
+- 893 bestehende Bildassets unverändert;
+- 1 neuer Metall-Master;
+- Browser 1440/1180/1024/901/900/760/390 PASS;
+- kein seitlicher Desktop-Crop;
+- kein horizontaler Overflow.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.682 installieren und nur Metall visuell abnehmen oder verwerfen.**
+**1.50.683 installieren und Metall real abnehmen.**
