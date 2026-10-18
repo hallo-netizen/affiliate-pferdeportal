@@ -3,65 +3,81 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.677 / AUDIO-&-HIFI-HERO NUTZERSEITIG ABGENOMMEN / PORTALWEITER HUB2-ROLLOUT 1.50.679 VORBEREITET / FINALPAKET OFFEN / KEIN LIVE-UPLOAD**
+STATUS: **LIVE 1.50.677 / 1.50.679 AUS EXAKTER 1.50.678 GEBAUT / TEXT+RENDER 69/69 PASS / BILDQUALITÄTS-READBACK OFFEN / KEIN LIVE-PASS**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.7 / 2026-10-18**
 
-## AKTUELLER BELASTBARER STAND
+## AKTUELLER KANDIDAT 1.50.679
 
-Die an Audio & HiFi entwickelte Hero-Regel ist vom Nutzer als Zielbild abgenommen und wird auf alle aktuell **69 Hub2-Seiten derselben Ebene** ausgeweitet:
-- Hero-Bild Fullbleed;
-- dynamischer Beige-/Textschutz statt starrem Bild/Text-Verhältnis;
-- Desktop ca. 35–48 %, bei 901–1180 px ca. 42–58 % Textschutz;
-- H1, Claim und kurzer Satz auf Desktop einzeilig;
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.679_HOBBY_DEPOT_ALL_HUB2_TEXT_HERO_ROLLOUT.zip`
+
+SHA-256:
+`721a7843c862cc59b47d80e51035d589220a56ecf4a5a8caad2307e921801f4d`
+
+1.50.679 wurde aus dem **exakten 1.50.678-Paket** gebaut. Keine Rekonstruktion auf älterem Stand.
+
+## PORTALWEITER HUB2-ROLLOUT
+
+Für alle aktuell **69 Hub2-Seiten**:
+- die bestehende dynamische Fullbleed-Hero-Regel aus 1.50.678 wird zentral verwendet;
+- Audio & HiFi ist keine Sonderbindung mehr;
+- Desktop Textschutz 35–48 %, bei 901–1180 px 42–58 %;
+- H1, Claim und Kurzzeile Desktop einzeilig;
 - <=900 px gestapelt;
-- CSS-only, keine zusätzliche Frontend-/DB-Abfrage.
+- CSS-only, keine neue Frontend-/DB-Abfrage;
+- keine doppelte neue Hero-CSS über die bestehende 1.50.678-Regel gelegt.
 
-Die bisherigen Hub2-Kategorietexte sind in großen Teilen schematisch erzeugt und werden nicht übernommen.
+## TEXTE
 
-## TEXTROLLOUT
+Die alte feste Hub2-Generator-Schablone ist im aktiven Kandidatenpfad entfernt.
 
-Verbindlich:
-- 150–200 Wörter je Hub2 nach den kopierten Pferdeatelier-Textregeln;
-- eigenständig redigiert und themenspezifisch, keine feste Generator-/Satzschablone;
-- sichtbarer Lead ungefähr ein Drittel des Texts, niemals mehr als die Hälfte;
-- Rest aufklappbar;
+69/69 aktuelle Hub2 haben eigenständig redigierte Texte:
+- 150–174 Wörter je Gesamttext;
+- sichtbare Leads 45–64 Wörter, ungefähr ein Drittel und nie mehr als die Hälfte;
+- echter Informationswert bereits im sichtbaren Lead;
+- Rest über kleinen Chevron/Pfeil;
 - kein sichtbarer Satz `Mehr zu <Kategorie> erfahren`;
-- kleiner Chevron/Pfeil direkt unter dem Lead, geöffnet nach oben;
 - Screenreader-Beschriftung bleibt erhalten;
-- kein zusätzlicher redaktioneller Seitenendtext.
+- kein zusätzlicher Seitenendtext.
 
-Für die 69 aktuellen Hub2-Slugs ist ein vollständiger individueller Textkorpus vorbereitet:
-- 69/69 Kategorien;
-- Gesamttexte 150–174 Wörter;
-- sichtbare Leads 45–64 Wörter;
-- Audio & HiFi bleibt inhaltlich auf dem bereits individuell überarbeiteten Stand und wird nur kompakter auf ungefähr ein Drittel sichtbaren Text aufgeteilt.
+Audio & HiFi bleibt inhaltlich auf dem bereits individuell überarbeiteten Stand; sichtbar sind jetzt 48 von 162 Wörtern.
 
-## TECHNISCHER STAND
+## QA
 
-1.50.678 bleibt der letzte vollständig gebaute Kandidat aus dem Audio-Pilot.
-Der neue 1.50.679-Rollout ist logisch und synthetisch auf der zugänglichen 1.50.668-Quellbasis geprüft:
-- 69/69 Hub2 gerendert;
-- alte `Bei <Kategorie> geht es um …`-Schablone im Kandidatenpfad entfernt;
-- individueller Hero-Kurztext und individueller Langtext je Hub2;
-- Chevron-Aufklapper ohne sichtbares `Mehr zu …`;
-- Release-Kette auf 1.50.679 im Testaufbau konsistent;
-- PHP-Lint ohne Fehler.
+PASS:
+- Paketwurzel korrekt;
+- ZIP-Test PASS;
+- PHP 84/84 PASS;
+- aktive 1.50.679-Releasekette PASS;
+- positiver Template-Ausführungstest PASS;
+- negativer Test mit nur alter 1.50.678-Klasse scheitert erwartungsgemäß;
+- 69/69 Hub2-Render PASS;
+- unbekannter Hub2 erzeugt keine alte Textschablone;
+- 901/901 Bildassets gegenüber 1.50.678 byte-identisch;
+- 69/69 Hub2 haben ein eigenes vorhandenes Hero-Asset;
+- 69/69 Hero-Pfade eindeutig;
+- kein Welt-/Fallback-Hero.
 
-**Das ist ausdrücklich noch kein Release-PASS.** Die exakten 1.50.678-Paketbytes sind im aktuellen Arbeitsweg nicht materialisierbar; deshalb wurde kein älterer Paketstand als vermeintliche 1.50.679 freigegeben.
+## OFFENER BILDQUALITÄTS-PUNKT
+
+Beim vollständigen Asset-Audit:
+- 19 Hub2-Heroes liegen als 1600×853-Master vor;
+- 50 bestehende Hub2-Heroes liegen noch in 600×320 vor.
+
+Diese 50 Dateien stammen unverändert aus 1.50.678. Da die Fullbleed-Regel nun portalweit greift, ist für diese Bilder ein echter WordPress-Readback auf Schärfe zwingend. Sichtbares Hochskalieren darf nach Zielvertrag nicht als finaler PASS akzeptiert werden.
 
 ## ERSTER OFFENER BLOCKER
 
-Der vorbereitete 1.50.679-Rollout muss auf der **exakten 1.50.678-Quellbasis** gebaut werden, damit die späteren Hero-Master-, Release- und Responsive-Korrekturen garantiert erhalten bleiben.
+Portalweiter visueller WordPress-Readback von 1.50.679, insbesondere der 50 bestehenden 600×320-Heroes.
 
 ## EXAKT EINE NEXT ACTION
 
-**Den vorbereiteten 1.50.679-Rollout auf die exakte 1.50.678-Quelle anwenden und danach lokal positiv, negativ und regressiv prüfen; erst danach ein WordPress-Uploadkandidat.**
+**1.50.679 als Testkandidat installieren und mehrere kurze sowie lange Hub2-Titel plus mindestens einen 600×320- und einen 1600×853-Hero auf Desktop, mittlerer Breite und Mobil prüfen. Bei sichtbarer Unschärfe der 600×320-Heroes anschließend nur diese Bildmaster ersetzen; Text- und Layoutlogik nicht erneut umbauen.**
 
 ## NICHT ANFASSEN
 
 - Mega-Menü nicht erneut umbauen;
 - Kategoriebaum nicht ändern;
-- keine alten Bildstände zurückholen;
+- keine alte Textschablone reaktivieren;
 - kein zusätzlicher Hub2-Seitenendtext;
 - keine neue Architektur.
