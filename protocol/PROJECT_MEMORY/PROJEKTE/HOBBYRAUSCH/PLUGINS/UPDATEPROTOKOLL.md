@@ -4276,3 +4276,51 @@ SHA-256:
 
 NEXT:
 1.50.681 installieren und WordPress-Readback von Imkerei & Bestäuber plus zwei weiteren Hub2 auf Desktop/Mobil.
+
+
+---
+
+## PU-20261018-089 – HD-003 1.50.682 / Metall Alternative: Original-Kategorieszene + Weiß + Rahmen
+
+NUTZERIDEE:
+Eine einzelne Hub2-Kategorie als Gegenentwurf testen:
+- dasselbe Originalmotiv wie beim Kategoriebild;
+- links reines Weiß;
+- kein Verlauf;
+- kompletter Hero in dünnem Rahmen.
+
+PRÜFUNG METALL:
+- Kategorievorschau `metall-v150634.webp`: 200×107;
+- per Bildvergleich als Ableitung aus `metall-v150627.webp`: 600×320 bestätigt;
+- 1.50.681-Hero nutzte bereits diese Szene, verdeckte aber links einen großen Teil durch Copy/Fade-Überlagerung; dadurch wirkte das Motiv live gezoomt.
+
+UMSETZUNG:
+- nur Metall bekommt Pilotklasse `hd-hub2-alt-framed`;
+- Heroquelle explizit `metall-v150627.webp`;
+- keine Überlagerung/kein Fade;
+- Weiß links;
+- dünner 1-px-Außenrahmen;
+- Desktop nebeneinander, Mobil gestapelt;
+- sichtbarer Metall-Lead hart auf einen Absatz normalisiert.
+
+QA:
+- PHP 90/90 PASS;
+- ZIP PASS;
+- Releasekette/Route/Template positiv PASS;
+- Negativ V150681 PASS;
+- Dirty Overlay PASS;
+- 901/901 Assets unverändert;
+- Browser 1440/1024/901/900/390 PASS;
+- Bild nativ 600×320, vollständig sichtbar, kein Upscaling;
+- Fade aus;
+- Text/Bild kein Overlap;
+- Lead 1 p / 0 br / Margins 0.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.682_METALL_ALT_WHITE_FRAME_PILOT.zip`
+
+SHA-256:
+`4f9e23ff92aaeddcacc0c1f1b051c207a7b238b15dc53f2181de855099925b72`
+
+NEXT:
+Nur Metall live vergleichen. Keine Portalübertragung vor Nutzerentscheidung.
