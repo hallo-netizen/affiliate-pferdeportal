@@ -4706,3 +4706,33 @@ QA:
 
 NEXT:
 Vollpaket 1.50.691 regulär über das bestehende Affiliate Portal Template Kit installieren und Startseite prüfen.
+
+
+---
+
+## PU-20261018-097 – HD-003 1.50.692 / Schuhmacherei-Textpilot
+
+AUFTRAG:
+Vor dem Gesamtrollout einen realen Musterfall zeigen, der die verschärften Textregeln beweist.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
+
+SHA-256:
+`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
+
+UMSETZUNG:
+- vollständiges normales Template Kit auf Basis 1.50.691;
+- nur Schuhmacherei als Pilot;
+- neuer 51-Wort-Lead: Was ist das Hobby, was macht man, was ist typisch;
+- 164 Wörter Gesamttext ohne Navigations-/Generatorphrasen;
+- Überschrift `Mehr zur Schuhmacherei`;
+- neun fachlich konkrete Kacheluntertitel;
+- heller Petrolblock für den sichtbaren Lead;
+- keine Änderung an Startseitenbildern, Hauptkategorie-Heros oder übrigen Hobbytexten.
+
+QA:
+PHP 120/120 PASS, ZIP PASS, V150692-Kette PASS.
+
+NEXT:
+Schuhmacherei live abnehmen, danach erst Gesamtbestand nach derselben redaktionellen Logik neu schreiben.
