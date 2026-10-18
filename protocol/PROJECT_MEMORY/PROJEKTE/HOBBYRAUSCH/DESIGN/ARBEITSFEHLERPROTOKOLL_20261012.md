@@ -922,3 +922,34 @@ KORREKTUR:
 VERMEIDUNGSREGEL – HART:
 Ein Screenshot-/Browser-Harness zählt nur als Visual-PASS, wenn alle für die Änderung maßgeblichen echten Assets tatsächlich geladen sind und der komplette Zielbereich sichtbar ist. Abgeschnittene Elemente oder nicht geladene Hero-Bilder sind automatisch FAIL. Zusätzlich bleibt die projektweite Pflicht zu positiver UND negativer lokaler Simulation bestehen.
 
+
+
+## AF-049 – 1.50.679 wiederholt bereits bekannten Versionsketten-Fatal
+
+FEHLER:
+1.50.679 wurde freigegeben, obwohl die aktive Profilklasse V150679 in `route_template()` weiterhin die V150678-Templates zurückgab. Diese Templates riefen wiederum `Hobby_Depot_Profile_V150678` auf.
+
+FOLGE:
+Nach Installation zeigte WordPress auf Hobby-Depot-Seiten den kritischen Fehler.
+
+WARUM DIE VORHERIGE PRÜFUNG FALSCH WAR:
+Der behauptete `Release-Kette PASS` prüfte nicht den tatsächlich von `route_template()` gelieferten Front- und Content-Pfad. Damit wurde genau die bereits aus AF-043/AF-026 bekannte Fehlerklasse erneut durchgelassen.
+
+KORREKTUR:
+1.50.680 repariert ausschließlich die aktive Versionskette:
+- Main V150680;
+- Profilklasse V150680;
+- Fronttemplate V150680;
+- Contenttemplate V150680;
+- Templates rufen V150680 auf.
+
+NACHWEIS:
+- reale Front-Route → V150680 PASS;
+- reale Content-Route → V150680 PASS;
+- beide Templates mit ausschließlich V150680 ausgeführt PASS;
+- Negativtest mit ausschließlich V150679 scheitert erwartungsgemäß;
+- 901/901 Bilder unverändert;
+- Delta zu 1.50.679 nur 1 geänderte + 3 neue Dateien.
+
+VERMEIDUNGSREGEL – BEREITS VORHANDEN, NICHT NEU:
+Die bestehende AF-043/AF-026-Regel war ausreichend. Der Fehler entstand, weil sie nicht tatsächlich ausgeführt wurde. Kein neuer Regelaufbau. Künftig gilt weiterhin: der echte `route_template()`-Rückgabepfad und beide zurückgegebenen Templates müssen mit der tatsächlich geladenen Profilklasse positiv und mit der vorherigen Klasse negativ ausgeführt werden.
