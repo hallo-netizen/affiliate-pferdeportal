@@ -1,5 +1,18 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – DESIGN 0.1.32 – LOKAL GEPRÜFTER FIX FÜR VOLLBREITE TRENNLINIE AM RATGEBERKOPF
+**Neuester Stand für den Designscope:** Vollständiges WordPress-Plugin im **identischen Pluginordner** `hab-bewahr-design-vorschau`, Library-Download `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.32_TRENNLINIE_FIX.zip` (16 MB), SHA-256 `09b3eaee6c170bd9d358c60f93c626bbb1a220b98ca1ca2b6c43c2094993470f`. Im Vergleich zur Version 0.1.31 **ausschließlich** `assets/style.css` (gezielte Korrektur der durchlaufenden Trennlinie am Ratgeberkopf) sowie `hab-bewahr-design-vorschau.php` (Pluginheader + Style Cacheversion 0.1.32) verändert. Kein Bild, keine Seite, kein Content, keine Kategorien, keine Breadcrumb-Position verändert.
+
+**Befund:** Auf Nutzer-Screenshot der realen Website vom 17.10.2026 19:40 ist eine hauchdünne horizontale Linie (#ececec) **außerhalb des zentralen Contentbereichs auf gesamter Bildschirmbreite**, genau auf Höhe des H2 "Ratgeber & Themen", zu erkennen. Die 0.1.31-CSS-Quelldatei enthält an diesem Abschnitt kein eigenes border-top; reale Website aus den verfügbaren Werkzeugen nicht zugänglich (Web Open und Container DNS scheitern), darum **wirklich auslösender fremder DOM-Selektor NICHT belegt**. Nicht behaupten, zwei Templates kollidieren. Da identisches Vollbreiten-Trennlinien-Symptom mit Browser-CSS-Reproduktion lokal simuliert werden kann, wurde **nur auf den Weltseiten** der Ratgeberkopf auf einer bis zur Viewportbreite reichenden weißen Hintergrundebene gerendert; die zugehörigen border/pseudo-Elemente auf dem Ratgeberbereich werden zurückgesetzt. Alle anderen Seiten, Rubriken und Elemente unangetastet.
+
+**Prüfung:** 6 synthetische Chromium-Browserfälle (before/after bei 390, 980, 1440px). Reproduzierte Fremdlinie: bei 390/980px links am Rand #ececec sichtbar, nach 0.1.32 weiß #fff; keine horizontalen Überläufe (scrollWidth=Viewportbreite); Ratgeberkopf, Texte, Kacheln weiter vorhanden. PHP-Lint alle PHP-Dateien bestanden; vollständiges ZIP auf Dateiintegrität getestet. **Live-Abnahme ausstehend!** Ein künstlich nachgestellter Trenner belegt nicht dessen tatsächlichen Ursprung auf der WordPress-Live-Seite.
+
+**EINZIGE DESIGN-NEXT ACTION:** Bestehendes Designplugin mit ZIP 0.1.32 aktualisieren; Screenshot der echten Seite Feuer/Gase auf die Vollbreitenlinie prüfen. Falls weiter vorhanden: Ursache auf Live-WordPress-Server (CSS/DOM konkurrierender Styles) ermitteln, nicht behaupten, lokale Simulation sei Live-PASS.
+
+---
+
+
+
 ## 17.10.2026 – DESIGN 0.1.31 – TECHNIK-BILD UND RATGEBERKOPF (LOKAL GEPRÜFT)
 **Current-Artefakt:** Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.31_TECHNIK_RATGEBER_FIX.zip`. Downloadfähige vollständige Original-Plugin-ZIP, `hab-bewahr-design-vorschau`. SHA-256 `d60fd2663635ef3a66cff65434d9568fc15f15e64cdd0db777fead6df06c73a0`. Nur drei ältere Dateien gegenüber 0.1.30 geändert (`assets/style.css`, `includes/world-layout.php`, Plugin-Hauptdatei inklusive CSS-Cache-Version 0.1.31), genau eine neue WebP-Bilddatei. Alle weiteren Dateien unverändert.
 
