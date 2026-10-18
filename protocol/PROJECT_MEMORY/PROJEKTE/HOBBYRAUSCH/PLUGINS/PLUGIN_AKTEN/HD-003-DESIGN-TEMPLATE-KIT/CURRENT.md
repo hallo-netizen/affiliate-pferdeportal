@@ -3,48 +3,40 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.683 METALL ABGENOMMEN / 1.50.684 69-HUB2-ROLLOUT GEBAUT / LOKAL POSITIV+NEGATIV+RESPONSIVE PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.684 HERO-VISUELL FAIL / 1.50.685 GEBAUT / KERAMIK-&-GLAS PFLICHTTEST + RELEASEKETTE PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.684_HOBBY_DEPOT_ALL_HUB2_SCENE_MASTER_CARDTEXT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.685_HERO_SCENE_VISIBILITY_FIX.zip`
 
 SHA-256:
-`2756075151e1996ceaa72e9057e85f1af42c181f6356867accae0ffbd43a8920`
+`a72b7baa257b09d3fc2f4112bdcb25e03bdbe8d6d120ae0d60764ee53f6c7b1e`
 
 ## Scope
 
-Portalweit für alle 69 Hub2:
-- akzeptierte Metall-Hero-Logik;
-- Original-/Master-Szenerie horizontal erhalten;
-- Desktop nur vertikaler Zuschnitt;
+Nur Hub2-Hero:
+- Masterbilder unverändert;
+- Bildfeld 72 % statt 70 %;
+- Übergangsüberdeckung stark reduziert;
+- Szene horizontal erhalten;
+- nur vertikaler Crop;
 - kein Upscaling;
-- Mobil dieselbe Szene;
-- 69 statisch gebundene Masterdateien;
-- 328 individuelle Unterkategorie-Kurzzeilen;
-- generischer Hub2-Welt-Untertitel-Fallback entfernt.
-
-Masterquellen:
-- 45 größere wiedergefundene Originalquellen derselben Szene;
-- 19 vorhandene 1600×853-Heroquellen;
-- 5 native 600-px-Quellen mit hartem 600-px-Ausgabelimit.
+- Mobil gleicher Masterausschnitt.
 
 ## QA
 
-- PHP 96/96 PASS;
-- Front-/Contentroute V150684 PASS;
-- beide Templates positiv V150684 PASS;
-- Negativ gegen ausschließlich V150683 erwartungsgemäß FAIL;
-- Dirty Overlay 1.50.683 → 1.50.684 PASS;
+- PHP 99/99 PASS;
+- Front-/Contentroute V150685 PASS;
+- beide Templates positiv PASS;
+- Negativtest gegen V150684 erwartungsgemäß FAIL;
 - 69/69 Hub2-Render PASS;
-- 328/328 Kartenzeilen PASS;
-- Browser 42/42 repräsentative Responsive-Fälle PASS;
-- 69/69 Master rechnerisch: kein Upscaling, kein seitlicher Desktop-Crop;
-- bestehende Bilder 894/894 byte-identisch;
-- Paketdelta: 1 bestehende Datei geändert / 72 neu / 0 entfernt;
+- 276/276 Desktop-Geometriechecks PASS;
+- 49/49 Browserfälle PASS;
+- Keramik & Glas explizit 1440/1180/1024/901/900/760/390 PASS;
 - ZIP PASS;
-- Roundtrip 1136/1136 byte-identisch.
+- Roundtrip 1139/1139 PASS;
+- Delta: 1 geändert / 3 neu / 0 entfernt.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.684 installieren und portalweiten WordPress-Readback durchführen.**
+**1.50.685 installieren und Keramik & Glas real abnehmen.**
