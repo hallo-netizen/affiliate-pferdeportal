@@ -4626,3 +4626,48 @@ QA:
 
 NEXT:
 Delta installieren/aktivieren; danach Kettenhemd real prüfen: Banner → 8 Kacheln → Empfehlungen → Beiträge und einzeilige H1.
+
+
+---
+
+## PU-20261018-095 – HD-003 1.50.690 / abgenommenen Kettenhemd-Ablauf auf Detail-Seitenrenderer ausrollen
+
+NUTZERFREIGABE:
+Kettenhemd flechten 1.50.689 = PASS.
+
+ABGENOMMENER STANDARD:
+- Banner direkt unter dem Text;
+- Unterkategorien ohne Affiliate-Unterbrechung als geschlossener Block;
+- Affiliate-Produkte/Empfehlungen erst danach;
+- danach 3–4 passende Beiträge;
+- sichtbare Kettenhemd-H1 ohne künstlichen Umbruch.
+
+UMSETZUNG:
+- One-shot-Updater auf harter Basis 1.50.689;
+- Kettenhemd-only-Bedingung im gemeinsamen `render_category_level_body_v150687` wird exakt einmal entfernt;
+- damit gilt der abgenommene Ablauf für alle WP_Post-basierten Detail-Hubs dieses Renderers;
+- neue Profil-/Templatekette V150690;
+- Backup + Readback + Selbstdeaktivierung.
+
+ARTEFAKT:
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip`
+
+SHA-256:
+`fcbc01893df451e56527cdcf90e6f7364cfa24d7afbc4556b69bc9b215c19809`
+
+QA:
+- PHP lint PASS;
+- Build/Hard assertions PASS;
+- ZIP integrity PASS;
+- 1.50.689-Preflight PASS in Source-Contract;
+- Runtime-Replacement count muss exakt 1 sein;
+- 1.50.690-Readback-Hardchecks eingebaut.
+
+NICHT GERATEN:
+Die 16 zusätzlich dokumentierten direkten Category-Term-Knoten werden nicht ohne verifizierten Term-Renderer als PASS behauptet. Nach Installation einen solchen Term-Fall real lesen.
+
+ZIELVERTRAG:
+ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.2.
+
+NEXT:
+1.50.690 installieren; zwei andere Detail-Hubs + einen direkten Category-Term-Fall prüfen.
