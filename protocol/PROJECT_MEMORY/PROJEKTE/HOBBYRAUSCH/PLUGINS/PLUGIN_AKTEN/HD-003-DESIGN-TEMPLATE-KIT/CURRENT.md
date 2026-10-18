@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.677 / 1.50.678 DYNAMIC TEXTSAFE HERO LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.677 / 1.50.678 GEBAUT / VISUELLE E2E-PRÜFUNG OFFEN / KEIN RELEASE-PASS**
 
 ## Kandidat
 
@@ -34,6 +34,7 @@ Keine Bilddatei geändert.
 
 ## QA
 
+Code/Paket:
 - PHP 81/81 PASS;
 - Release-Kette PASS;
 - 901 Assets unverändert;
@@ -41,6 +42,13 @@ Keine Bilddatei geändert.
 - ZIP PASS;
 - Roundtrip 1050/1050.
 
+## OFFENER TESTBLOCKER
+
+Die vorhandene lokale Visual-Simulation ist nicht als Hard-PASS verwertbar:
+- Claim im Testbild angeschnitten;
+- Hero-Bild im Harness nicht geladen;
+- Positiv-/Negativ-E2E des realen Renderpfads nicht vollständig dokumentiert.
+
 ## EXAKT EINE NEXT ACTION
 
-**1.50.678 installieren und Audio & HiFi prüfen.**
+**1.50.678 vollständig lokal mit real geladenem Hero-Bild positiv/negativ simulieren. Vorher kein Upload in WordPress.**
