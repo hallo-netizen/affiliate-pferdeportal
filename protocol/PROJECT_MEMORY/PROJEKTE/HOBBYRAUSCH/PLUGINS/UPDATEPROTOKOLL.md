@@ -4434,3 +4434,45 @@ Fassung 5.0.
 
 NEXT:
 1.50.685 installieren; zuerst Keramik & Glas real prüfen.
+
+
+---
+
+## PU-20261018-092 – HD-003 1.50.686 / Kettenhemdflechten Pilot für nächste Ebene
+
+NUTZERENTSCHEIDUNG:
+Die nächste Ebene soll kompakter werden. Als Pilot dient Kettenhemdflechten:
+- kein Hero-Bild;
+- oben mittig Icon + H1 + hochwertiger aufklappbarer Text;
+- Unterkategorien testweise im 4er-Raster;
+- Affiliate-Produkte/Banner früher zwischen den Inhalten;
+- Beitragsvorschauen bleiben.
+
+UMSETZUNG:
+- 162-Wörter-Fachtext, davon 45 sichtbar;
+- 8 Unterkategorien mit individuellen Kurzzeilen;
+- Reihenfolge:
+  4 Unterkategorien → category_product_1..3 → 4 Unterkategorien → product_after_category_tiles → 3 Beiträge → bestehender Werbeplatz;
+- Desktop 4er-Raster, Tablet 2er, Mobil 1er;
+- keine neuen Affiliate-Slotnamen erfunden.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.686_KETTENHEMDFLECHTEN_MIXED_LEVEL_PILOT.zip`
+
+SHA-256:
+`0fef7c270977c01e986adf82ee00f56b5602f699e12799fb18cfc1c28b919e4d`
+
+QA:
+- PHP 102/102 PASS;
+- ZIP PASS;
+- Main/Profil/Route/Templates V150686 PASS;
+- positive Templateausführung PASS;
+- V150685-Negativtest erwartungsgemäß FAIL;
+- echter Pilotrender: kein Hero, 1 H1, 8 Karten;
+- Reihenfolge der Module PASS;
+- Browser 1440/1024/390 ohne Overflow;
+- Delta zu 1.50.685: 1 geändert + 3 neu + 0 entfernt;
+- Roundtrip 1142/1142 byte-identisch.
+
+NEXT:
+1.50.686 installieren und nur Kettenhemdflechten real prüfen. Keine Portalübertragung vor Abnahme.
