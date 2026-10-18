@@ -3998,3 +3998,48 @@ QA:
 
 LIVE:
 offen.
+---
+
+## PU-20261018-083 – HD-003 1.50.678 / dynamischer Beige-Bereich nach Schriftblockbreite
+
+LIVE-BEFUND 1.50.677:
+- starres 3/4-Bildziel zu aggressiv;
+- H1 kann bei breitem Fenster umbrechen;
+- Textblock soll etwas höher;
+- Kurzzeile muss einzeilig bleiben.
+
+ENTSCHEIDUNG:
+Nicht überall starres 40/60. Stattdessen dynamischer, begrenzter Textschutzbereich.
+
+UMSETZUNG:
+- CSS-only;
+- Hero-Bild bleibt 100-%-Fullbleed;
+- Text-/Beigezone width:max-content;
+- Desktop min 35 %, max 48 %;
+- 901–1180 min 42 %, max 58 %;
+- eigener Fade-Pseudo direkt am dynamischen Textbereich;
+- H1/Claim/Kurzzeile nowrap;
+- Block über Padding ca. 10 px höher;
+- <=900 gestapelt wie zuvor.
+
+PERFORMANCE:
+Kein JS, keine Messroutine, kein zusätzlicher Request, keine Abfrage.
+
+REGRESSION:
+- 901/901 Assets identisch;
+- keine andere Kategorie verändert.
+
+ARTEFAKT:
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
+
+SHA-256:
+33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
+
+QA:
+- PHP 81/81;
+- Release-Kette PASS;
+- ZIP PASS;
+- Roundtrip 1050/1050.
+
+LIVE:
+offen.
