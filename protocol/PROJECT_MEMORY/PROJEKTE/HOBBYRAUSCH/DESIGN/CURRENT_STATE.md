@@ -3,91 +3,65 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.677 / 1.50.678 GEBAUT / LOCAL-HARD-PASS ZURÜCKGEZOGEN / VISUELLE E2E-PRÜFUNG OFFEN / KEIN LIVE-UPLOAD**
+STATUS: **LIVE 1.50.677 / AUDIO-&-HIFI-HERO NUTZERSEITIG ABGENOMMEN / PORTALWEITER HUB2-ROLLOUT 1.50.679 VORBEREITET / FINALPAKET OFFEN / KEIN LIVE-UPLOAD**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.6 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.7 / 2026-10-18**
 
-## Reales Live-Ergebnis 1.50.677
+## AKTUELLER BELASTBARER STAND
 
-- Bildanteil mit starrem 3/4-Ziel zu aggressiv;
-- H1 konnte bei breitem Fenster umbrechen;
-- Textblock soll als Ganzes etwas höher;
-- Kurzzeile bleibt einzeilig;
-- Beige-Bereich soll sich sinnvoll an die tatsächliche Textbreite anpassen statt überall starr gleich breit zu sein.
+Die an Audio & HiFi entwickelte Hero-Regel ist vom Nutzer als Zielbild abgenommen und wird auf alle aktuell **69 Hub2-Seiten derselben Ebene** ausgeweitet:
+- Hero-Bild Fullbleed;
+- dynamischer Beige-/Textschutz statt starrem Bild/Text-Verhältnis;
+- Desktop ca. 35–48 %, bei 901–1180 px ca. 42–58 % Textschutz;
+- H1, Claim und kurzer Satz auf Desktop einzeilig;
+- <=900 px gestapelt;
+- CSS-only, keine zusätzliche Frontend-/DB-Abfrage.
 
-## 1.50.678 – zentrale dynamische Fullbleed-Regel
+Die bisherigen Hub2-Kategorietexte sind in großen Teilen schematisch erzeugt und werden nicht übernommen.
 
-Performance:
-- reine CSS-Lösung;
-- kein JavaScript;
-- keine Laufzeitmessung;
-- kein zusätzlicher Bildrequest;
-- keine neue Datenbank-/Frontend-Abfrage.
+## TEXTROLLOUT
 
-Mechanik:
-- bestehendes Hero-Bild bleibt fullbleed über 100 %;
-- Beige-/Textbereich folgt der tatsächlichen Breite des Schriftblocks;
-- auf Desktop min. 35 %, max. 48 %;
-- bei 901–1180 px min. 42 %, max. 58 %;
-- der Übergang ins Bild hängt als reiner CSS-Verlauf direkt an diesem dynamischen Textbereich;
-- H1, Claim und Kurzzeile bleiben auf Desktop nowrap;
-- kompletter Schriftblock ca. 10 px höher über angepasste Innenabstände;
-- <=900 px bleibt die stabile gestapelte Variante.
+Verbindlich:
+- 150–200 Wörter je Hub2 nach den kopierten Pferdeatelier-Textregeln;
+- eigenständig redigiert und themenspezifisch, keine feste Generator-/Satzschablone;
+- sichtbarer Lead ungefähr ein Drittel des Texts, niemals mehr als die Hälfte;
+- Rest aufklappbar;
+- kein sichtbarer Satz `Mehr zu <Kategorie> erfahren`;
+- kleiner Chevron/Pfeil direkt unter dem Lead, geöffnet nach oben;
+- Screenreader-Beschriftung bleibt erhalten;
+- kein zusätzlicher redaktioneller Seitenendtext.
 
-Die zentrale Klasse ist weiterhin nur an Audio & HiFi gebunden, bis der Pilot live bestätigt ist.
+Für die 69 aktuellen Hub2-Slugs ist ein vollständiger individueller Textkorpus vorbereitet:
+- 69/69 Kategorien;
+- Gesamttexte 150–174 Wörter;
+- sichtbare Leads 45–64 Wörter;
+- Audio & HiFi bleibt inhaltlich auf dem bereits individuell überarbeiteten Stand und wird nur kompakter auf ungefähr ein Drittel sichtbaren Text aufgeteilt.
 
-Unverändert:
-- 901/901 Assets;
-- alle anderen Kategorien;
-- Mega-Menü;
-- Kategoriebaum;
-- Audio-Langtext und Karten.
+## TECHNISCHER STAND
 
-## QA
+1.50.678 bleibt der letzte vollständig gebaute Kandidat aus dem Audio-Pilot.
+Der neue 1.50.679-Rollout ist logisch und synthetisch auf der zugänglichen 1.50.668-Quellbasis geprüft:
+- 69/69 Hub2 gerendert;
+- alte `Bei <Kategorie> geht es um …`-Schablone im Kandidatenpfad entfernt;
+- individueller Hero-Kurztext und individueller Langtext je Hub2;
+- Chevron-Aufklapper ohne sichtbares `Mehr zu …`;
+- Release-Kette auf 1.50.679 im Testaufbau konsistent;
+- PHP-Lint ohne Fehler.
 
-Artefakt:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
-
-SHA-256:
-33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
-
-PASS (nur Code/Paket):
-- PHP 81/81;
-- aktive Release-Kette vollständig 1.50.678;
-- keine aktive 1.50.677-Routen-/Klassenreferenz;
-- H1 nowrap auf Desktop;
-- Kurzzeile nowrap;
-- dynamische Copy-Zone mit min/max Grenzen;
-- 901/901 Assets identisch;
-- WordPress-Pluginwurzel korrekt;
-- ZIP-Test PASS;
-- Roundtrip 1050/1050 byte-identisch.
-
-## Abschluss-Nachprüfung des bisherigen Local-PASS
-
-Die vorhandenen lokalen 1.50.678-Screenshots wurden erneut direkt geprüft.
-
-Befund:
-- Claim im Visual-Harness oben sichtbar angeschnitten;
-- Hero-Bild im Harness nicht tatsächlich geladen/gerendert;
-- damit wurde der reale Bild/Text-Übergang nicht belastbar visuell geprüft;
-- dokumentierte lokale Positiv- UND Negativ-E2E-Prüfung des realen Pfads fehlt.
-
-**1.50.678 ist deshalb noch kein freigegebener Upload-/Deploymentkandidat.**
+**Das ist ausdrücklich noch kein Release-PASS.** Die exakten 1.50.678-Paketbytes sind im aktuellen Arbeitsweg nicht materialisierbar; deshalb wurde kein älterer Paketstand als vermeintliche 1.50.679 freigegeben.
 
 ## ERSTER OFFENER BLOCKER
 
-Belastbare lokale visuelle E2E-Simulation mit tatsächlich geladenem Hero-Bild fehlt. Dabei ist zu klären, ob das angeschnittene Claim ein echter CSS-Fehler oder ein Harnessfehler ist.
+Der vorbereitete 1.50.679-Rollout muss auf der **exakten 1.50.678-Quellbasis** gebaut werden, damit die späteren Hero-Master-, Release- und Responsive-Korrekturen garantiert erhalten bleiben.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.678 im echten lokalen Plugin-Renderweg mit geladenem Audio-Hero positiv und negativ simulieren; Claim, H1, Kurzsatz, dynamische Beigezone, Bildübergang und Responsive-Breiten prüfen. Erst bei vollständigem PASS darf die Installation in WordPress empfohlen werden.**
+**Den vorbereiteten 1.50.679-Rollout auf die exakte 1.50.678-Quelle anwenden und danach lokal positiv, negativ und regressiv prüfen; erst danach ein WordPress-Uploadkandidat.**
 
 ## NICHT ANFASSEN
 
-- keine anderen Kategorien;
-- keine neuen Bilder;
 - Mega-Menü nicht erneut umbauen;
 - Kategoriebaum nicht ändern;
-- Audio-Langtext und Karten nicht erneut schreiben;
+- keine alten Bildstände zurückholen;
+- kein zusätzlicher Hub2-Seitenendtext;
 - keine neue Architektur.
