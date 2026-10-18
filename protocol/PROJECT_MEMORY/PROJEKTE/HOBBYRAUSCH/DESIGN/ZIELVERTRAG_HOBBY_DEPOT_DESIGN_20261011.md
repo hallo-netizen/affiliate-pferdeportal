@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.8 / 2026-10-18
+FASSUNG: 4.9 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -62,13 +62,13 @@ FASSUNG: 4.8 / 2026-10-18
 - Breadcrumb oben.
 
 ### Hero – Aufbau
-- **Desktop ab 901 px:** Hero bleibt eine gemeinsame Beige-/Bildfläche. Das Bild steht rechts in einem festen **600:320-Format**, bleibt vollständig sichtbar und wird **nicht gezoomt oder gecroppt**. Eine 600×320-Quelle darf niemals breiter als 600 px dargestellt werden; größere Master werden nur heruntergerechnet. Links liegen Claim + H1 + kurzer Einsteigertext auf Header-Beige mit weichem Übergang ins Bild.
+- **Desktop ab 901 px:** Hero bleibt eine gemeinsame Beige-/Bildfläche wie beim abgenommenen Metall-Pilot. Rechts wird für jede Hub2-Seite der **bestmögliche vorhandene Original-/Masterstand derselben Szenerie** verwendet. Die horizontale Szene bleibt vollständig erhalten; der flachere Hero darf **nur oben und unten** beschneiden. Kein Hineinzoomen in einen kleineren Bildausschnitt.
 - Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
 - Diese zentrale Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
 - **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
 - Der gesamte Schriftblock steht mit ausreichendem Innenabstand und etwas höher im Hero; nichts klebt am linken Rand.
-- **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter im **gleichen 600:320-Format** wie Desktop, maximal in nativer Breite; längerer Kategorietext erst danach.
-- Der Hero darf die Seite nicht dominieren. Desktop, Tablet und Mobil verwenden denselben Bildausschnitt und dasselbe 600:320-Verhältnis; nur die Anordnung wechselt von nebeneinander zu gestapelt. Kein künstliches Hochskalieren.
+- **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, darunter **dieselbe Szenerie desselben Masters**. Mobil darf nicht auf einen anderen Ausschnitt wechseln; das Bild bleibt innerhalb seiner nativen Auflösung.
+- Der Hero darf die Seite nicht dominieren. Desktop, Tablet und Mobil verwenden denselben Szenenmaster; nur die Anordnung wechselt. **Kein künstliches Hochskalieren.** Wenn nur eine 600-px-Quelle vorhanden ist, wird ihre Ausgabebreite auf höchstens 600 px begrenzt.
 - Hero-Bilder müssen als **breite Landschafts-/Stilleben-Szene** funktionieren: Thema sofort erkennbar, Hauptmotiv vollständig sichtbar, genügend Abstand, kein Makro-/Detailcrop.
 - Keine unscharfen oder sichtbar hochskalierten Quellen. Ein Bild darf nur verwendet werden, wenn seine reale Auflösung für die tatsächliche Ausgabefläche ausreicht.
 - Wenn kein geeignetes vorhandenes Motiv existiert: **kein falscher Fallback**. Dann bleibt der Bildslot für die Arbeitsfreigabe als fehlend markiert bzw. es wird gezielt ein neues, optimiertes Motiv erzeugt; niemals thematisch falsches Bild nur zum Füllen.
@@ -130,7 +130,7 @@ Für jede der aktuell 69 Hub2-Seiten:
 ### Unterkategoriekarten
 - jede tatsächlich vorhandene direkte Unterkategorie erhält eine **Fotokarte**;
 - kein Icon-Rückfall;
-- jede Karte erhält unter dem Titel eine kurze sinnvolle Orientierungszeile wie bei Buch & Papier;
+- jede Karte erhält unter dem Titel eine **kurze, konkrete und themenspezifische Inhaltszeile** wie beim abgenommenen Metall-Pilot; sie sagt, worum es dort tatsächlich geht;
 - jedes Bild muss inhaltlich **zur konkreten Unterkategorie** passen;
 - kein generischer Welt-Pool-Fallback;
 - innerhalb derselben Hub2-Seite keine doppelten Bilddateien und keine offensichtlich identischen Motive;
@@ -168,7 +168,7 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - natürliche Überschrift `Weiter in <Thema>` / `Weitere Kategorien`.
 - Kartentitel 15 px.
 - Untertitel nur mit echtem Orientierungswert.
-- kein generischer Fülltext.
+- kein generischer Fülltext; insbesondere keine Welt-Schablonen wie `loslegen`, `ausprobieren`, `praktische Einstiege` oder pauschales `verstehen`; für die aktuell vorhandenen Unterkategorien werden individuelle Zeilen gebunden. Bei einer später neu hinzukommenden, noch nicht redigierten Karte ist **leer besser als ein generischer Fallback**.
 
 ## Monetarisierung
 - Affiliate-Produkte nie zwischen Unterkategorie-Reihen.
