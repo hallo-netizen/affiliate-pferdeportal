@@ -1,45 +1,35 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
-STAND: 2026-10-17
-STATUS: **1.50.675 CODE HARD PASS / ERSTE ZIP PACKAGING FAIL / KORREKTE REPACK-ZIP HARD PASS / LIVE-CHECK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STAND: 2026-10-18
+STATUS: **1.50.676 AUDIO CLAIM/SPACING/UNDERLINE LOCAL HARD PASS / LIVE-CHECK OFFEN**
 
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 LIVE:
-`1.50.674`
-
-KANDIDAT:
 `1.50.675`
 
+KANDIDAT:
+`1.50.676`
+
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_REPACKED_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.676_HOBBY_DEPOT_AUDIO_CLAIM_SPACING_UNDERLINE_FIX_HARDPASS.zip`
 
 SHA-256:
-`356a8e9861f0c018e42620d311eb9985f48279b3a5d1ed26be321c63ddfa24bd`
+`7c898eaeac166e21e47ecfa946baa4ff217f462e5145a9485ec272647186ca82`
 
 SCOPE:
-nur Audio-&-HiFi-Hero/Texttrennung.
+nur Audio-&-HiFi-Claim/Unterstrich/Abstand.
 
 UNVERÄNDERT:
 - 901/901 Assets;
 - alle anderen Kategorien;
+- Hero-/Responsive-Grundlogik;
 - Mega-Menü;
-- Kategoriebaum;
-- Monetarisierung.
+- Kategoriebaum.
 
 QA:
-- PHP 73/73;
-- Render-Harness PASS;
-- 9 responsive Breiten PASS;
-- 0 Overflow;
-- Release-Kette sauber;
+- PHP 75/75;
+- Release-Kette PASS;
+- WordPress-Pluginwurzel korrekt;
 - ZIP PASS.
-
-CURRENT.zip:
-**NICHT synchronisiert**, bis Live-PASS vorliegt.
-
-INSTALLER-KORREKTUR:
-- ursprüngliche 1.50.675-ZIP hatte keinen äußeren `affiliate-portal-template-kit/`-Ordner und konnte deshalb nicht als bestehendes Plugin ersetzt werden;
-- Repack enthält denselben Pluginordner und dieselbe Main-Datei wie 1.50.674;
-- 1041/1041 Innendateien inhaltlich identisch zur geprüften 1.50.675.
