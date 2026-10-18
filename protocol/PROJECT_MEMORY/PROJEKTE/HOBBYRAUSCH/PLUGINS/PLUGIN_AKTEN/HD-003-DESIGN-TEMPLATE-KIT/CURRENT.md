@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.691 VOLLSTÄNDIGES NORMALES TEMPLATE-KIT GEBAUT / PHP+ZIP+RELEASEKETTE PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.692 SCHUHMACHEREI-TEXTPILOT GEBAUT / 1.50.691 BASIS ENTHALTEN / PHP+ZIP PASS / LIVE-ABNAHME OFFEN**
 
 ## Kandidat
 
@@ -187,3 +187,29 @@ QA:
 
 NEXT:
 **Bestehendes Affiliate Portal Template Kit mit 1.50.691 überschreiben und Startseite real prüfen.**
+
+
+## 1.50.692 – Schuhmacherei-Textpilot
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
+
+SHA-256:
+`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
+
+Scope:
+- normales vollständiges Template Kit;
+- nur Schuhmacherei textlich/visuell als Musterfall geändert;
+- Lead 51 Wörter, Gesamttext 164 Wörter;
+- Zwischenüberschrift `Mehr zur Schuhmacherei`;
+- 9 konkrete Kacheluntertitel;
+- heller Petrolblock nur für den sichtbaren Schuhmacherei-Lead;
+- andere Hobbys noch **nicht** massenhaft umgeschrieben.
+
+QA:
+- PHP 120/120 PASS;
+- ZIP PASS;
+- aktive Releasekette V150692 PASS.
+
+NEXT:
+**Pilot live prüfen. Gesamtrollout erst nach Abnahme.**
