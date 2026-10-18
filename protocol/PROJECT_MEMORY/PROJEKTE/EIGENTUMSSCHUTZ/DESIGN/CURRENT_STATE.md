@@ -1,5 +1,21 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – STRIKTER SEMANTIK-/SCHÄRFENACHHOLTEST: NOCH KEINE FOTO-FREIGABE
+
+**KEIN NEUES INSTALLIERBARES PLUGIN.** WP-Design 0.1.42 bleibt bisheriger veröffentlichter Basisstand. Noch offene vollständige Bildaufgabe: 265 konkrete C23 Themen in 36 Ebene-2-Bereichen; nicht bloß 93 Legacy-R3-Themen.
+
+**Neue tatsächlich ausgeführte Prüfung:** Die 265 Kachelmotive wurden in sechs Fotokontaktblättern betrachtet. Dabei 59 offensichtlich sachfremde Bilder ausdrücklich per Themenname, vorheriger Fotodatei und Grund abgelehnt (siehe SEMANTIC_IMAGE_REJECTIONS.json); zusätzlich 14 klar unscharfe Altbilder mit optischer Variance-of-Laplacian-Nachprüfung (<300 bei 350x200px) abgelehnt, darunter das häufig vom Nutzer gemeldete 900px-Tresorbild und mehrere alte Magazin- und Fokusfotos. Eine frühere PHP-Prüfung, die gerade das schlechte Tresorbild als Pflicht vorschrieb, wurde in der QA-Werkbank korrigiert. Vier echte separate neu erzeugte 803–805px-Kachel-Szenen (leerstehendes Haus, gesichertes Elektromobil, Katalysator, Paketbox) ohne künstliches Upscaling als VORLÄUFIG eingebunden. Auflösung für hohe DPR weiterhin individuell prüfen.
+
+**Harter Bestandsstand nach ehrlichem Audit:** 265 Thementitel, davon 82 mit Fotodatei im lokalen strengeren Mapping, **183 ohne Foto** (110 bereits fehlend, 59 als falsch erkannt, 14 sichtbar unscharf). Von den 82 weiteren haben 11 nativen Bildbreitenwert <900px; Freigabe aller 82 nicht behauptet. Exakte SHA-256-Bildidentitäten innerhalb derselben Kategorie: 0 Duplikate der noch belegten Bilder. Eine technische PHP-Simulation mit den 265 Themen über 36 Seiten (Admin/Gast) und Chromium 36 Desktop + 5 Mobil: keine gebrochenen Bilder oder Rahmenüberläufe; dies prüft NICHT die semantische Eignung.
+
+**Einzige aktuelle Bildprüfquelle:** Library /Eigentumsschutz/Design/HBD_BILDER_GESAMTPRUEFUNG_265_NICHT_INSTALLIEREN.zip mit 265-Zeilen-Audit CSV+JSON, sechs Kontaktblättern, 59 dokumentierten semantischen Ablehnungen, 14 Schärfeablehnungen und vier separat gespeicherten Motivkandidaten. Keine WordPress-Dateien im ZIP, **NICHT INSTALLIEREN**. Keine Datenbank, keine Kategorien und kein Live-WordPress geändert.
+
+**Genau eine NEXT ACTION:** Die 183 leeren Themen aus diesem bestätigten Audit mit jeweils passenden nativen Fotomotiven versorgen, kleine/noch ungeprüfte 82 Bilddateien nach tatsächlicher Kachelauflösung und Fachinhalt bewerten; erst bei 265/265 Bild- und Browser-PASS ein einziges installierbares Designplugin freigeben. Bildgenerierung im Gespräch lieferte teils Website-Mockups statt Einzelfotos, so dass keine solche Datei übernommen wurde. Containerzugriff auf externe Fotodienste ist derzeit durch DNS blockiert – ausgerechnet deshalb kein unbestätigtes Foto als passend ausgeben.
+
+---
+
+
+
 ## 18.10.2026 – BILDERARBEIT FORTGESETZT, ABER NICHT FERTIG – KEIN PLUGIN RELEASE
 
 **Ausgangsbestand weiterhin WP-Design 0.1.42**. Keine Installation und keine Public-Release-Version aus dieser Arbeit. Versuch, 121 unzureichende Originalfotomotive zu beschaffen: öffentliche Direktdownloads von Commons/Unsplash aus Container-Runtime aktuell DNS-technisch nicht erreichbar; Bildgenerierung lieferte bei mehreren Durchläufen erneut fälschlich Website-Mockups und keine Kategorienfotos. Solche Mockups wurden nicht als Assets übernommen. Ein Fotobogen mit genau vier brauchbaren Einzelszenen wurde in **vier separate WebP-Dateien in 768×512 px Originalauflösung** geteilt: Rückstauklappen, Dachrinnen & Fallrohre, Garagentorantrieb, Rauchmelder. Sie sind NICHT hochskaliert. Sie sind thematisch plausibel, erreichen aber den konservativen QS-Richtwert 900px Quellbreite noch nicht; also keine finale Freigabe.
