@@ -4671,3 +4671,38 @@ ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.2.
 
 NEXT:
 1.50.690 installieren; zwei andere Detail-Hubs + einen direkten Category-Term-Fall prüfen.
+
+
+---
+
+## PU-20261018-096 – HD-003 1.50.691 / vollständiges normales Template-Kit statt One-shot-Updater
+
+NUTZERENTSCHEIDUNG:
+Die Startseitenänderung soll als normales Affiliate Portal Template Kit installiert werden, damit WordPress den bestehenden Pluginordner regulär ersetzen/überschreiben kann. Kein separates Einmal-Plugin.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.691_STARTSEITE_RUHIGE_WELTBILDER.zip`
+
+SHA-256:
+`984356b9eaadb6ad2954c14bb026d4a380afdf00e06caccef5bec5be2f7288b0`
+
+UMSETZUNG:
+- vollständiger Pluginroot `affiliate-portal-template-kit/`;
+- 1.50.689 Kettenhemd-Änderung enthalten;
+- 1.50.690 Detail-Level-Rollout enthalten;
+- aktive Kette auf V150691;
+- 8 neue ruhige Startseiten-Weltbilder;
+- Startseitenkarten auf neue Bildquelle umgestellt;
+- Hauptkategorie-Heros ausdrücklich unverändert;
+- bestehender Querbanner direkt hinter die acht Hobbywelten verschoben.
+
+QA:
+- PHP 117/117 PASS;
+- ZIP PASS;
+- Releasekette V150691 PASS;
+- Front-/Contenttemplates V150691 PASS;
+- Hero-Funktion gegen rekonstruierten 1.50.690-Stand unverändert;
+- Roundtrip 1166/1166 byte-identisch.
+
+NEXT:
+Vollpaket 1.50.691 regulär über das bestehende Affiliate Portal Template Kit installieren und Startseite prüfen.
