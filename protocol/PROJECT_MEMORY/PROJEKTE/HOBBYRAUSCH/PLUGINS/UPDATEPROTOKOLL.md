@@ -3957,4 +3957,44 @@ QA:
 
 LIVE:
 offen.
+---
 
+## PU-20261018-082 – HD-003 1.50.677 / Audio-Bild breiter, Unterstrich textlang, Kurzzeile einzeilig
+
+LIVE-BEFUND 1.50.676:
+- Höhe des Claims okay;
+- Unterstrich zu kurz;
+- Bild soll noch breiter wirken, ungefähr drei Viertel;
+- Kurzzeile unter H1 soll niemals umbrechen.
+
+UMSETZUNG:
+- Claimposition nicht verändert;
+- Pinselunterstrich 98 % der echten Claim-Breite;
+- Fullbleed-Bild bleibt 100-%-Hintergrund;
+- Copy-/Verlaufszone >1180 px auf 30 %, 901–1180 px auf 35 % reduziert;
+- Bildposition 58/60 %;
+- Hero-Kurzzeile width:max-content + white-space:nowrap;
+- Mobile-Schrift skaliert bis min. 9 px nur zur Sicherung der Einzeiligkeit.
+
+PERFORMANCE:
+CSS-only, kein JS, kein Bildrequest, keine neue Abfrage.
+
+REGRESSION:
+- 901/901 Assets unverändert;
+- alle anderen Kategorien unverändert;
+- Mega-Menü unverändert.
+
+ARTEFAKT:
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.677_HOBBY_DEPOT_AUDIO_IMAGE_3Q_SINGLELINE_FIX_HARDPASS.zip
+
+SHA-256:
+e0b5b6819f91c7e43b2f6929a04ef97d83d51db34404d87b39506aff9f9c5f16
+
+QA:
+- PHP 78/78;
+- Release-Kette PASS;
+- ZIP PASS;
+- Roundtrip 1047/1047.
+
+LIVE:
+offen.
