@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-18
-STATUS: **1.50.678 DYNAMIC TEXTSAFE HERO LOCAL HARD PASS / LIVE-CHECK OFFEN**
+STATUS: **1.50.678 GEBAUT / CODE-PASS / VISUELLE E2E-PRÜFUNG OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -27,9 +27,16 @@ UNVERÄNDERT:
 - Mega-Menü;
 - Kategoriebaum.
 
-QA:
+QA CODE/PAKET:
 - PHP 81/81;
 - Release-Kette PASS;
 - WordPress-Pluginwurzel korrekt;
 - ZIP PASS;
 - Roundtrip 1050/1050.
+
+VISUELLE FREIGABE:
+- bisheriger Local-Hard-PASS zurückgezogen;
+- Claim im vorhandenen Harness angeschnitten;
+- Hero-Bild im Harness nicht geladen;
+- vollständige lokale Positiv-/Negativ-E2E-Prüfung noch offen;
+- daher kein Release-/Live-PASS und keine Synchronisierung von CURRENT.zip.
