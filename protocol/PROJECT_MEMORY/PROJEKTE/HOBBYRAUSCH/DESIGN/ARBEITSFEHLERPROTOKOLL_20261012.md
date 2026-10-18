@@ -953,3 +953,21 @@ NACHWEIS:
 
 VERMEIDUNGSREGEL – BEREITS VORHANDEN, NICHT NEU:
 Die bestehende AF-043/AF-026-Regel war ausreichend. Der Fehler entstand, weil sie nicht tatsächlich ausgeführt wurde. Kein neuer Regelaufbau. Künftig gilt weiterhin: der echte `route_template()`-Rückgabepfad und beide zurückgegebenen Templates müssen mit der tatsächlich geladenen Profilklasse positiv und mit der vorherigen Klasse negativ ausgeführt werden.
+
+
+## AF-050 – Masterbild korrekt, aber Übergang verdeckte die Szene und erzeugte erneut Zoom-Eindruck
+
+FEHLER:
+1.50.684 verwendete bei Keramik & Glas zwar den korrekten hochauflösenden Szenenmaster und schnitt rechnerisch nur oben/unten. Trotzdem verdeckte der linke Textbereich mit einem sehr breiten Verlauf einen großen Teil der Bildszene.
+
+FOLGE:
+Im echten WordPress-Readback war nur ein enger Rest der Szene klar sichtbar. Das Ergebnis wirkte damit erneut wie ein hineingezoomter Ausschnitt, obwohl die Datei selbst horizontal nicht gecroppt war.
+
+URSACHE:
+Die lokale Prüfung bewertete nur Bildgeometrie und Seitencrop. Sie prüfte nicht ausreichend, wie viel der horizontalen Szene **nach Text-/Verlaufsüberlagerung tatsächlich sichtbar** bleibt.
+
+KORREKTUR:
+1.50.685 lässt die Masterdateien unverändert, verbreitert das Bildfeld leicht und verkürzt den Übergang stark. Keramik & Glas ist verpflichtender Sichtfall.
+
+VERMEIDUNGSREGEL:
+Bei Hero-Abnahme reicht `0 seitlicher Crop` technisch nicht. Zusätzlich muss die **sichtbare** Szene nach Text-/Fade-Overlay geprüft werden. Ein formal vorhandener Bildbereich, der vom Overlay verdeckt wird, zählt nicht als erhaltene Szenerie.
