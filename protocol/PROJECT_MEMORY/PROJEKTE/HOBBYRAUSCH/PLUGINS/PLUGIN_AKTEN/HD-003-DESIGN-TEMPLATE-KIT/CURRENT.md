@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 ONE-SHOT-ROLLOUT GEBAUT / QA PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.691 VOLLSTÄNDIGES NORMALES TEMPLATE-KIT GEBAUT / PHP+ZIP+RELEASEKETTE PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
@@ -161,3 +161,29 @@ Offen:
 ## EXAKT EINE NEXT ACTION
 
 **1.50.690 installieren und mehrere andere Detail-Hubs plus einen direkten Term-Fall lesen.**
+
+
+## Vollpaket 1.50.691
+
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.691_STARTSEITE_RUHIGE_WELTBILDER.zip`
+
+SHA-256:
+`984356b9eaadb6ad2954c14bb026d4a380afdf00e06caccef5bec5be2f7288b0`
+
+Kein separates Updater-Plugin:
+- normales `affiliate-portal-template-kit/`;
+- WordPress kann das bestehende Plugin regulär ersetzen/überschreiben;
+- aktive Releasekette vollständig V150691;
+- 1.50.690 Detail-Rollout enthalten;
+- 8 neue Startseitenbilder;
+- Hauptkategorie-Heros unverändert;
+- Querbanner direkt unter Hobbywelten.
+
+QA:
+- PHP 117/117 PASS;
+- ZIP PASS;
+- Main/Profile/Templates V150691 PASS;
+- Roundtrip 1166/1166 PASS.
+
+NEXT:
+**Bestehendes Affiliate Portal Template Kit mit 1.50.691 überschreiben und Startseite real prüfen.**
