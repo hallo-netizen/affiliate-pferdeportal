@@ -170,3 +170,34 @@ QA:
 ## EXAKT EINE NEXT ACTION
 
 **1.50.688 installieren und Kettenhemd flechten real prüfen: H1-Zeilenumbruch, Kartenwirkung, kurze Untertitel, `Rund ums Kettenhemd` und `Empfehlungen`. Meta-Titel danach separat.**
+
+
+## KANDIDAT 1.50.689 – KETTENHEMD REIHENFOLGE + EINZEILIGE H1
+
+Auslieferung:
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.689.zip`
+
+Art:
+**kleines einmaliges Delta-Update für die exakt installierte 1.50.688**. Es prüft den 1.50.688-Stand hart, legt ein Backup der vier angefassten Dateien an, schreibt V150689 als neue Profil-/Templatekette, schaltet die Main erst zuletzt um und deaktiviert sich anschließend selbst.
+
+Nur Kettenhemd-Pilot:
+- sichtbare H1 jetzt **einzeilig `Kettenhemd flechten`**, kein Umbruch;
+- gespeicherter WordPress-Titel, Slug und URL unverändert;
+- Meta-Titel unverändert;
+- direkt nach Intro/Text: vorhandener Banner;
+- danach `Rund ums Kettenhemd` mit allen **8 Kacheln als geschlossener Block**, keine Produktunterbrechung;
+- danach `Empfehlungen` mit den vorhandenen Affiliate-Produkten;
+- danach bis zu 4 passende Beitragsvorschauen;
+- bestehender späterer Werbe-/Dienstleisterplatz bleibt danach.
+
+QA des Updatepakets:
+- ZIP-Integrität PASS;
+- PHP-Lint PASS;
+- harte Paketassertions PASS;
+- GitHub Actions Run 39139756377: SUCCESS;
+- Update ist fail-closed: passt der installierte 1.50.688-Quellstand nicht exakt, wird vor der Umschaltung abgebrochen;
+- WordPress-Live-Readback nach Anwendung ist noch offen.
+
+## EXAKT EINE NEXT ACTION
+
+**Delta-Update 1.50.689 installieren + aktivieren und Kettenhemd flechten real prüfen: H1 einzeilig sowie Reihenfolge Banner → 8 Kacheln → Empfehlungen → Beiträge.**
