@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.7 / 2026-10-18
+FASSUNG: 4.8 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -62,13 +62,13 @@ FASSUNG: 4.7 / 2026-10-18
 - Breadcrumb oben.
 
 ### Hero – Aufbau
-- **Desktop ab 901 px:** das scharfe Hero-Masterbild läuft als eine zusammenhängende Fullbleed-Fläche über den Hero; links liegt Claim + H1 + kurzer Einsteigertext auf einem hellen Beige, das exakt der Header-Hintergrundfarbe entspricht und weich ins Bild ausläuft.
+- **Desktop ab 901 px:** Hero bleibt eine gemeinsame Beige-/Bildfläche. Das Bild steht rechts in einem festen **600:320-Format**, bleibt vollständig sichtbar und wird **nicht gezoomt oder gecroppt**. Eine 600×320-Quelle darf niemals breiter als 600 px dargestellt werden; größere Master werden nur heruntergerechnet. Links liegen Claim + H1 + kurzer Einsteigertext auf Header-Beige mit weichem Übergang ins Bild.
 - Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
-- Diese dynamische Fullbleed-Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
+- Diese zentrale Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
 - **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
 - Der gesamte Schriftblock steht mit ausreichendem Innenabstand und etwas höher im Hero; nichts klebt am linken Rand.
-- **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter über die volle verfügbare Breite, längerer Kategorietext erst danach.
-- Der Hero darf die Seite nicht dominieren. Auf kleineren Breiten darf kein Bild künstlich hochskaliert oder in eine zu große Hero-Höhe gezwungen werden.
+- **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter im **gleichen 600:320-Format** wie Desktop, maximal in nativer Breite; längerer Kategorietext erst danach.
+- Der Hero darf die Seite nicht dominieren. Desktop, Tablet und Mobil verwenden denselben Bildausschnitt und dasselbe 600:320-Verhältnis; nur die Anordnung wechselt von nebeneinander zu gestapelt. Kein künstliches Hochskalieren.
 - Hero-Bilder müssen als **breite Landschafts-/Stilleben-Szene** funktionieren: Thema sofort erkennbar, Hauptmotiv vollständig sichtbar, genügend Abstand, kein Makro-/Detailcrop.
 - Keine unscharfen oder sichtbar hochskalierten Quellen. Ein Bild darf nur verwendet werden, wenn seine reale Auflösung für die tatsächliche Ausgabefläche ausreicht.
 - Wenn kein geeignetes vorhandenes Motiv existiert: **kein falscher Fallback**. Dann bleibt der Bildslot für die Arbeitsfreigabe als fehlend markiert bzw. es wird gezielt ein neues, optimiertes Motiv erzeugt; niemals thematisch falsches Bild nur zum Füllen.
@@ -105,11 +105,14 @@ Es werden **nur die redaktionellen Textregeln** aus Pferdeatelier übernommen:
 - nur reale vorhandene Unterthemen nennen.
 
 Hobby-Depot-Darstellung:
-**sichtbarer Lead → `Mehr zu <Kategorie> erfahren` → restlicher Text im Aufklapper.**
+**ein kompakter sichtbarer Fließtextblock von ungefähr 45–60 Wörtern → kleiner Chevron/Pfeil → restlicher Text im Aufklapper.**
+- der sichtbare Lead ist **ein einziger Absatz ohne künstliche Leerzeile**;
+- kein sichtbarer Pflichttext `Mehr zu <Kategorie> erfahren`;
+- kein zusätzlicher Kasten nur zur Dekoration;
 - kein zusätzlicher zweiter Erklärungstext;
-- der Text steht unter dem Hero;
+- der Text steht direkt unter dem Hero mit kompakten Innenabständen;
 - beim Öffnen darf sich die Hero-Bildgröße nicht verändern;
-- ausreichend echter Text bleibt bereits ohne Aufklappen sichtbar.
+- mehr Vorschautext ist nicht Ziel: der sichtbare Teil soll informieren, aber die Seite nicht unnötig verlängern.
 
 ### Hero-Bildregeln – semantisch
 Für jede der aktuell 69 Hub2-Seiten:
