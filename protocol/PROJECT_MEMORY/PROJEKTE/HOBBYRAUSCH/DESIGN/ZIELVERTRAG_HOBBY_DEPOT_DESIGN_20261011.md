@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.9 / 2026-10-18
+FASSUNG: 5.0 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -62,7 +62,7 @@ FASSUNG: 4.9 / 2026-10-18
 - Breadcrumb oben.
 
 ### Hero – Aufbau
-- **Desktop ab 901 px:** Hero bleibt eine gemeinsame Beige-/Bildfläche wie beim abgenommenen Metall-Pilot. Rechts wird für jede Hub2-Seite der **bestmögliche vorhandene Original-/Masterstand derselben Szenerie** verwendet. Die horizontale Szene bleibt vollständig erhalten; der flachere Hero darf **nur oben und unten** beschneiden. Kein Hineinzoomen in einen kleineren Bildausschnitt.
+- **Desktop ab 901 px:** Hero bleibt eine gemeinsame Beige-/Bildfläche wie beim abgenommenen Metall-Pilot. Rechts wird für jede Hub2-Seite der **bestmögliche vorhandene Original-/Masterstand derselben Szenerie** verwendet. Die Bildfläche bleibt breit (ca. 72 % des Hero, begrenzt durch die native Bildbreite). Die horizontale Szene bleibt vollständig erhalten; der flachere Hero darf **nur oben und unten** beschneiden. Kein Hineinzoomen in einen kleineren Bildausschnitt.
 - Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
 - Diese zentrale Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
 - **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
@@ -72,7 +72,7 @@ FASSUNG: 4.9 / 2026-10-18
 - Hero-Bilder müssen als **breite Landschafts-/Stilleben-Szene** funktionieren: Thema sofort erkennbar, Hauptmotiv vollständig sichtbar, genügend Abstand, kein Makro-/Detailcrop.
 - Keine unscharfen oder sichtbar hochskalierten Quellen. Ein Bild darf nur verwendet werden, wenn seine reale Auflösung für die tatsächliche Ausgabefläche ausreicht.
 - Wenn kein geeignetes vorhandenes Motiv existiert: **kein falscher Fallback**. Dann bleibt der Bildslot für die Arbeitsfreigabe als fehlend markiert bzw. es wird gezielt ein neues, optimiertes Motiv erzeugt; niemals thematisch falsches Bild nur zum Füllen.
-- Der linke Weißverlauf darf das Motiv nicht zerstören und darf keine zusätzliche Unschärfe vortäuschen.
+- Der linke Beige-/Weißverlauf darf das Motiv nicht zerstören, nicht großflächig verdecken und keine zusätzliche Unschärfe vortäuschen. Er überlappt nur eine schmale Bildkante; die breite Szene muss sichtbar bleiben.
 - Hero-Rundung zurückhaltend, maximal wie im akzeptierten Buch-&-Papier-Stand.
 
 ### Hero – Claim
