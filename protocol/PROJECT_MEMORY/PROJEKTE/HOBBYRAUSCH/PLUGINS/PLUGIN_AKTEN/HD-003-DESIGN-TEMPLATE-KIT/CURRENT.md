@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.688 KETTENHEMD-KACHELREFINEMENT GEBAUT / RELEASEKETTE+ROUNDTRIP PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.688 LIVE / 1.50.689 DELTA-UPDATER GEBAUT + ZIP/PHP/HARD-ASSERTIONS PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
@@ -98,3 +98,34 @@ QA:
 ## EXAKT EINE NEXT ACTION
 
 **1.50.688 installieren und Kettenhemd-Seite visuell abnehmen.**
+
+
+## Kandidat 1.50.689
+
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.689.zip`
+
+Scope nur Kettenhemd:
+- H1 `Kettenhemd flechten` einzeilig;
+- Banner direkt unter Intro;
+- 8 Kacheln ohne Affiliate-Unterbrechung;
+- Empfehlungen/Produkte unter allen Kacheln;
+- passende Beiträge danach;
+- Meta-Titel, Slug, URL, Hub2 und andere Detail-Hubs unverändert.
+
+Auslieferung:
+- fail-closed Delta-Updater für exakt 1.50.688;
+- Backup vor Schreibzugriff;
+- neue V150689-Dateien zuerst;
+- Main-Umschaltung zuletzt;
+- Readback im Updater;
+- Updater deaktiviert sich nach erfolgreicher Anwendung.
+
+QA:
+- ZIP integrity PASS;
+- PHP lint PASS;
+- hard assertions PASS;
+- GitHub Actions Run 39139756377 SUCCESS.
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.689 Delta installieren/aktivieren und Kettenhemd frontendseitig abnehmen.**
