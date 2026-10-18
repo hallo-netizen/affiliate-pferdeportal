@@ -262,7 +262,7 @@
  
          $risk=PSTE_Domain_Risk_Gate::evaluate($raw,'Journal');$base['domain_risk']=$risk;
          if(empty($risk['ok']))return self::fail($base,'PSTE_JOURNAL_AUTO_DOMAIN_RISK_REVIEW');
-@@ -59,7 +90,8 @@
+@@ -59,7 +82,8 @@
          // names a horse and no narrower proven family exists, use that literal subject;
          // do not require editorial titles to repeat a magazine-section label.
          $literalHorse=(bool)preg_match('/\b(?:pferd|pferde|pferdes|pferden)\b/iu',$raw);
@@ -272,7 +272,7 @@
          $familyKey=$sourceFamilyKey!==''?$sourceFamilyKey:hash('sha256','PSTE_JOURNAL_AUTO_SCOPE_V1|'.(string)$classification['category_key'].'|'.PSTE_Normalizer::exactTopicIdentityText($raw));
          $normalization=['contract'=>'PSTE_EDITORIAL_TOPIC_NORMALIZER_V2','raw_query'=>$raw,'raw_query_sha256'=>hash('sha256',$raw),'family'=>$familyName,'normalized_topic'=>rtrim($raw," ?\t\n\r\0\x0B"),'subject_topic'=>$familyName,'semantic_probe'=>PSTE_Editorial_Topic_Normalizer::semanticProbe($raw),'qualifier'=>'','relation'=>'','detected_action'=>'','intent_signals'=>['JOURNAL_COMPLEX_QUESTION'],'status'=>'PASS','reason_codes'=>['PSTE_JOURNAL_AUTO_MEANING_PRESERVED'],'review_flags'=>[],'raw_query_modified'=>false,'write_attempted'=>false];
          $intent=['contract'=>'PSTE_INTENT_PROFILE_V4_EVIDENCE_BOUND','ok'=>true,'status'=>'PASS','search_intent'=>'EDITORIAL_INFORMATION','primary_user_goal'=>'EDITORIAL_INFORMATION','primary_article_type_candidate'=>'Journal','intent_angle'=>'JOURNAL_COMPLEX_QUESTION','evidence_authority'=>self::CONTRACT,'scope_status'=>'PROVEN','intent_status'=>'PROVEN','raw_query_sha256'=>hash('sha256',$raw),'write_attempted'=>false];
-@@ -67,9 +99,37 @@
+@@ -67,9 +91,37 @@
          $pipeline=PSTE_Title_Pipeline::validateExistingTitle($title,$raw,$familyName,'Journal',$registry,$intent,$targetKeyword,(string)$normalization['normalized_topic']);
          if(empty($pipeline['ok'])){$base['title_pipeline']=$pipeline;return self::fail($base,'PSTE_JOURNAL_AUTO_TITLE_PIPELINE_NOT_PASS');}
  
@@ -562,7 +562,7 @@
  
          // Productwahl is a reviewed candidate type but downstream production is not registered yet.
          // A newly repaired family match must therefore never silently turn a Productwahl query into
-@@ -276,9 +304,95 @@
+@@ -276,9 +292,95 @@
          if(empty($semantic['ok'])){$base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';return self::withReasons($base,'SANDBOX_REQUIRED',array_merge(['PSTE_NORMAL_PATH_SEMANTIC_CONSENSUS_NOT_PASS','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($semantic['reason_codes']??[])));}
  
          $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS'];
@@ -659,7 +659,7 @@
  
      /** Existing single verified extension metadata acceptance path. No independent gate or store. */
      private static function acceptVerifiedExtension(array $base,array $extension,string $persistedTitle,string $raw,array $registry): array {
-@@ -315,7 +429,7 @@
+@@ -315,7 +417,7 @@
          $base['domain_risk']=(array)$extension['domain_risk'];$base['article_type_extension_routing']=$extension;
          if(strtolower($type)==='journal')$base['journal_routing']=$extension; // compatibility export only
          $base['ok']=true;$base['status']='NORMAL_PASS';$base['reason_codes']=['PSTE_NORMAL_METADATA_PATH_PASS','PSTE_ARTICLE_TYPE_EXTENSION_ROUTE_PASS'];
@@ -668,7 +668,7 @@
      }
  
      /** Apply only SEO-topic metadata derived by evaluateRaw(); raw source fields remain byte-identical. */
-@@ -333,6 +447,9 @@
+@@ -333,6 +435,9 @@
          $preferredFamilyKey=($trustedResearch||$trustedReentry)?$providedPreferred:'';
          $result=self::evaluateRaw($raw,$baseline,$preferredFamilyKey,$relevanceProof,$payload);
          $result=self::applyManualTitleOverride($payload,$result,$raw,$baseline);
@@ -678,14 +678,14 @@
          $payload['normal_metadata_path']=$result;
          $payload['raw_keyword_preserved']=$raw;$payload['raw_keyword_sha256']=$raw!==''?hash('sha256',$raw):'';
          $payload['metadata_handoff_fields']=['title','target_keyword','category','article_type','plan_slot'];
-@@ -340,5 +457,6 @@
+@@ -340,5 +445,6 @@
          $payload['sandbox_required']=($result['status']??'')==='SANDBOX_REQUIRED';
          $payload['sandbox_admission_mode']=(string)($result['sandbox_admission_mode']??'');         $payload['structure_gap_backlog_required']=!empty($result['structure_gap_backlog_required']);
 +        $payload['category_backlog_required']=!empty($result['category_backlog_required']);
          $payload['retained_non_producing']=!empty($result['retained_non_producing']);
          $payload['category_gap_proposal']=(array)($result['category_gap_proposal']??[]);
  
-@@ -579,5 +697,91 @@
+@@ -579,5 +685,91 @@
      public static function payloadMatchesNormalPath(array $payload,array $path): bool {$pathRaw=self::canonicalInputQuery((string)($path['raw_query']??''));$pathSha=(string)($path['raw_query_sha256']??'');if($pathRaw===''||preg_match('/^[a-f0-9]{64}$/',$pathSha)!==1||!hash_equals(hash('sha256',$pathRaw),$pathSha))return false;$record=is_array($payload['query_record']??null)?(array)$payload['query_record']:[];$candidates=[PSTE_Editorializer::sourceQuery($payload),(string)($payload['primary_longtail_query']??''),(string)($payload['canonical_query']??''),(string)($payload['raw_user_question']??''),(string)($record['language_corrected_query']??''),(string)($record['raw_query']??'')];foreach($candidates as $candidate){$candidate=self::canonicalInputQuery((string)$candidate);if($candidate!==''&&hash_equals($candidate,$pathRaw))return true;}return false;}
      private static function clean(string $v): string {return self::canonicalInputQuery($v);}
      /** @return array<string,mixed> */
