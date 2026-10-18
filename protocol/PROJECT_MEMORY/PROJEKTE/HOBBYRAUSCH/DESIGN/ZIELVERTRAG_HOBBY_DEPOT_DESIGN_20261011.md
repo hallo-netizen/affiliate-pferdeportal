@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 5.1 / 2026-10-18
+FASSUNG: 5.2 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -165,15 +165,24 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 9. Regression der live bestätigten Text-/Grundaufteilung.
 
 ## Nächste Kategorieebene / Detail-Hubs
-- Referenz ist der vom Nutzer auf den ersten Blick abgenommene Pilot **Kettenhemdflechten 1.50.686**.
+- Referenz ist der vom Nutzer ausdrücklich abgenommene Stand **Kettenhemd flechten 1.50.689**.
 - Auf dieser Ebene **kein Hero-Bild**.
 - Oben kompakter, mittig geführter Kopf: thematisch passendes Icon, H1, hochwertiger Kategorietext.
 - Text nach denselben redaktionellen Regeln: **150–200 Wörter**, konkret, fachlich, keine Generator-/Padding-Sprache.
 - Davon ungefähr **45–60 Wörter sichtbar**, Rest über kleinen Chevron aufklappbar.
 - Desktop Unterkategorien im **4er-Raster**, Tablet 2, Mobil 1.
-- Inhalte und Monetarisierung werden bewusst gemischt: **erste 4 Unterkategorien → vorhandene Kategorie-Produkte → restliche Unterkategorien → vorhandener Banner → 3–4 Beitragsvorschauen → vorhandener weiterer Werbe-/Dienstleisterplatz**.
-- Keine neuen Affiliate-Slottypen erfinden; vorhandene Slots lediglich sinnvoll früher platzieren.
+- Verbindliche Reihenfolge nach Abnahme 1.50.689: **Kopf/Text → vorhandener kompakter Banner → alle Unterkategorien als geschlossener, nicht durch Werbung unterbrochener Block → vorhandene Kategorie-Produkte unter der kompletten Kachelgruppe → 3–4 passende Beitragsvorschauen mit Bild → vorhandener weiterer Werbe-/Dienstleisterplatz**.
+- Keine neuen Affiliate-Slottypen erfinden; vorhandene Slots lediglich in der abgenommenen Reihenfolge platzieren. **Affiliate-Produkte niemals mehr zwischen zwei Unterkategorie-Reihen.**
 - Beitragsvorschauen mit Bild; Ziel **mindestens 3, bevorzugt 4**, sobald passende Beiträge vorhanden sind.
+
+### Detail-H1 und Abschnittsüberschriften
+- Sichtbare H1 natürlich schreiben: z. B. **Kettenhemd flechten**, nicht das unnatürliche zusammengeschriebene `Kettenhemdflechten`.
+- Keine absichtlich eingebauten Zeilenumbrüche in der H1; der abgenommene Pilot zeigt den Titel kompakt in einer Zeile.
+- URL/Slug und gespeicherter SEO-/WordPress-Titel werden durch diese reine Frontenddarstellung nicht automatisch geändert.
+- Kleine Überschrift über den Kacheln darf die H1 nicht stumpf wiederholen.
+- Wo eine natürliche thematische Kurzform redigiert ist, darf sie verwendet werden (Pilot: **Rund ums Kettenhemd**); sonst neutral **Themen im Überblick**.
+- Produktbereich heißt neutral **Empfehlungen**.
+- Meta-Titel werden separat im späteren SEO-Schritt behandelt und nicht still durch Designänderungen verändert.
 
 ### Icons der letzten Kategorieebene
 - Icons werden **zentral semantisch gesteuert**, nicht pro Seite zufällig gewählt.
