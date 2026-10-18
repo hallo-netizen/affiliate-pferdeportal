@@ -3,87 +3,121 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.685 HUB2-STAND NUTZERSEITIG AUF DEN ERSTEN BLICK OK / 1.50.686 KETTENHEMDFLECHTEN-PILOT FÜR NÄCHSTE EBENE GEBAUT / LOKAL POSITIV+NEGATIV+RESPONSIVE PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.686 KETTENHEMDFLECHTEN-PILOT NUTZERSEITIG AUF DEN ERSTEN BLICK OK / 1.50.687 GLEICHE DETAIL-EBENE PORTALWEIT AUSGEROLLT / ZENTRALE LAST-LEVEL-ICONS / 4 KETTENHEMD-DUMMYBEITRÄGE / LOKAL PASS / WORDPRESS-READBACK OFFEN**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.0 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.1 / 2026-10-18**
 
-## PILOT NÄCHSTE EBENE – KETTENHEMDFLECHTEN
-
-Nutzerentscheidung für die Detailprüfung:
-- auf dieser tieferen Ebene **kein Hero-Bild**;
-- oben kompakter, mittig geführter Textkopf mit Icon und H1;
-- hochwertiger Text nach den bestehenden 150–200-Wörter-Regeln;
-- nur ein kurzer Teil sichtbar, Rest über kleinen Chevron aufklappbar;
-- darunter Unterkategorien kompakter;
-- Desktop testweise **4er-Raster**;
-- Affiliate-Produkte und Banner nicht mehr als großer Block erst am Seitenende, sondern früher zwischen den Inhalten;
-- Beitragsvorschauen bleiben enthalten.
-
-## KANDIDAT 1.50.686
+## KANDIDAT 1.50.687
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.686_KETTENHEMDFLECHTEN_MIXED_LEVEL_PILOT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.687_CATEGORY_LEVEL_ROLLOUT_ICONS_DUMMY_POSTS.zip`
 
 SHA-256:
-`0fef7c270977c01e986adf82ee00f56b5602f699e12799fb18cfc1c28b919e4d`
+`9a881f3b3b7cf25ab2cfdc5f9a2c62b878fa5cc7513ba8678524f98b7464235b`
 
-Nur die Seite `kettenhemdflechten` ist als Pilot verändert.
+## SCOPE – GLEICHE LOGISCHE EBENE WIE KETTENHEMDFLECHTEN
 
-### Aufbau
+Aktueller Zielbaum:
+- **379 Page-Knoten** auf dieser Ebene;
+- zusätzlich **16 direkte Category-Term-Knoten** derselben logischen Ebene;
+- insgesamt **395** Detail-Hubs;
+- unter den 379 Page-Knoten aktuell **2.979 letzte Kategorien**.
 
-1. Breadcrumb
-2. Ketten-/Ring-Icon
-3. H1 `Kettenhemdflechten`
-4. 162-Wörter-Fachtext:
-   - 45 Wörter sichtbar
-   - 117 Wörter aufklappbar
-   - kein Hero-Bild
-5. erste 4 Unterkategorien im 4er-Raster
-6. drei vorhandene `category_product_1..3`-Affiliateplätze
-7. restliche 4 Unterkategorien im 4er-Raster
-8. Banner `product_after_category_tiles`
-9. drei Beitragsvorschauen
-10. vorhandener Werbe-/Dienstleisterplatz danach
+Für diese Ebene gilt jetzt zentral:
+- kein Hero-Bild;
+- kompakter mittiger Kopf mit thematischem Icon + H1;
+- 150–200-Wörter-Fachtext nach den bestehenden Textregeln;
+- 45–62 Wörter sichtbar, Rest per Chevron;
+- Desktop 4er-Raster, Tablet 2er, Mobil 1er;
+- vorhandene Produkte/Banner früher zwischen den Inhalten;
+- bis zu 4 passende Beitragsvorschauen mit Bild;
+- keine neuen Affiliate-Slottypen.
 
-Unterkategorien:
-- Einstieg & Grundlagen
-- Ausrüstung & Kosten
-- Vergleich & Kaufberatung
-- Formen & Übergänge
-- Grundmuster
-- Projekte & Finish
-- Ringe & Werkzeuge
-- FAQ / Häufige Fragen
+## TEXTE
 
-Für alle acht sind kurze konkrete Orientierungszeilen gebunden.
+- 395/395 Texte vorhanden;
+- Wortumfang **150–170**;
+- sichtbare Leads **45–62 Wörter**;
+- 395/395 Volltexte unterschiedlich;
+- Kettenhemdflechten bleibt inhaltlich auf dem abgenommenen 162-Wörter-Pilottext;
+- offensichtliche Fachfehler der ersten automatischen Rohfassung wurden vor Release nachbearbeitet, insbesondere Genuss/Fermentation sowie Aquaristik, Imkerei, Ameisen/Insekten und Gehegebau.
+
+## ZENTRALE ICON-STEUERUNG LETZTE KATEGORIEEBENE
+
+Keine zufällige/hash-basierte Iconwahl mehr.
+
+Semantische Rollen werden zentral auf Icons abgebildet, unter anderem:
+- FAQ;
+- Vergleich/Kaufberatung;
+- Einstieg/Grundlagen;
+- Ausrüstung/Kosten;
+- Werkzeuge;
+- Materialien;
+- Muster;
+- Sicherheit;
+- Pflege/Probleme;
+- Dokumentation;
+- Aufbewahrung;
+- Bestimmung/Messen;
+- Arten/Sorten;
+- Klima;
+- Futter;
+- Standort;
+- Technik;
+- Projekt/Finish;
+- Farbe;
+- Vorbereitung;
+- Bau/Montage;
+- Elektronik;
+- Wasser;
+- Pflanzen.
+
+Damit erhält z. B. **FAQ portalweit dasselbe FAQ-Icon** und Vergleich/Kaufberatung dasselbe Vergleichs-Icon.
+
+Für nicht explizit klassifizierte letzte Kategorien wird der fachliche Eltern-/Themenkontext verwendet; keine zufällig wechselnden Icons.
+
+## KETTENHEMDFLECHTEN – 4 DUMMYBEITRÄGE
+
+1. `Kettenhemdflechten: Ringe sauber öffnen und schließen`
+2. `European 4-in-1: Das Grundmuster sauber aufbauen`
+3. `Welche Ringe und Zangen passen für den Einstieg?`
+4. `Kanten und Abschlüsse am Kettengeflecht sauber fertigstellen`
+
+Eigenschaften:
+- als veröffentlichte Dummy-Posts angelegt;
+- jeweils einer passenden Kettenhemd-Unterkategorie zugeordnet;
+- jeweils mit Beitragsbild;
+- Seeder idempotent;
+- Vorschauabfrage zieht maximal 4 Beiträge aus den direkten Unterkategorien.
 
 ## QA
 
-- aus exakter 1.50.685-Basis gebaut;
-- PHP **102/102 PASS**;
+- PHP **105/105 PASS**;
+- reale Front-Route → V150687 PASS;
+- reale Content-Route → V150687 PASS;
+- beide V150687-Templates positiv ausgeführt PASS;
+- Negativtest mit ausschließlich V150686 scheitert erwartungsgemäß;
+- Kettenhemd-Pilotrender: kein Hero, 1 H1, 8 Karten PASS;
+- zentrale Iconrollen FAQ / Vergleich / Grundlagen / Ausrüstung geprüft;
+- 4 Dummy-Posts + 4 Kategoriebindungen + 4 Featured Images PASS;
+- zweiter Seedlauf erzeugt keine Duplikate;
+- Postpreview-Abfrage: Limit 4 und alle 8 direkten Kettenhemd-Unterkategorien als Quelle PASS;
+- Copy-Coverage: 395/395 PASS;
+- 379 Pages + 16 direkte Terms PASS;
+- 2.979 letzte Kategorien im Scope;
+- Delta zu 1.50.686: **1 bestehende Datei geändert + 4 Dateien neu + 0 entfernt**;
+- Dirty Overlay 1.50.686 → 1.50.687 aktive Kette PASS;
 - ZIP PASS;
-- aktive Main-/Klassen-/Templatekette vollständig V150686;
-- Front-/Contenttemplate positiv mit V150686 PASS;
-- Negativtest mit ausschließlich V150685 scheitert erwartungsgemäß;
-- echter Kettenhemd-Renderpfad: PASS;
-- kein Hero im Pilot;
-- genau 1 H1;
-- 8/8 Unterkategorien;
-- Reihenfolge `4 Themen → Produkte → 4 Themen → Banner → Beiträge` PASS;
-- 3 vorhandene Kategorie-Produktplätze eingebunden;
-- Standard-Kategorie-Intro wird im Pilot nicht zusätzlich gerendert;
-- Browser 1440 / 1024 / 390: kein horizontaler Overflow;
-- Desktop 4 Karten pro Reihe, Tablet 2, Mobil 1;
-- Delta zu 1.50.685: **1 bestehende Datei geändert + 3 neue Dateien + 0 entfernt**;
-- ZIP-Roundtrip **1142/1142 byte-identisch**.
+- Roundtrip **1146/1146 byte-identisch**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.686 installieren und ausschließlich Kettenhemdflechten prüfen: Kopfbereich ohne Hero, Textkompaktheit, 4er-Raster und die neue Mischung aus Kategorien / Produkten / Banner / Beiträgen.**
+**1.50.687 installieren und zuerst Kettenhemdflechten prüfen: 4 Dummy-Beiträge mit Bildern, neue zentrale Icons und gemischte Seitenreihenfolge. Danach zwei weitere Detail-Hubs derselben Ebene stichprobenartig prüfen.**
 
 ## NICHT ANFASSEN
 
-- noch keine Übertragung auf die übrigen Seiten dieser Ebene;
-- Hub2-Heroes nicht erneut ändern;
+- Hub2-Hero-Logik nicht erneut ändern;
 - Kategoriebaum nicht ändern;
-- keine zusätzlichen Affiliate-Slots erfinden.
+- keine neuen Affiliate-Slottypen;
+- keine zufällige Iconwahl;
+- Dummy-Beiträge nicht als finale Fachartikel behandeln.
