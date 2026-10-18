@@ -3,9 +3,9 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.687 DETAIL-EBENE AUSGEROLLT / 1.50.688 KETTENHEMD-KACHELREFINEMENT GEBAUT / LOKAL POSITIV+NEGATIV PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.689 KETTENHEMD LIVE ABGENOMMEN / 1.50.690 DETAIL-LEVEL-ROLLOUT GEBAUT / GEMEINSAMER SEITEN-RENDERER OHNE KETTENHEMD-SONDERZWEIG / BUILD-QA PASS / WORDPRESS-READBACK OFFEN**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.1 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.2 / 2026-10-18**
 
 ## KANDIDAT 1.50.687
 
@@ -201,3 +201,58 @@ QA des Updatepakets:
 ## EXAKT EINE NEXT ACTION
 
 **Delta-Update 1.50.689 installieren + aktivieren und Kettenhemd flechten real prüfen: H1 einzeilig sowie Reihenfolge Banner → 8 Kacheln → Empfehlungen → Beiträge.**
+
+
+## 1.50.689 – NUTZERABNAHME
+
+Der Nutzer hat Kettenhemd flechten ausdrücklich als PASS bestätigt.
+
+Abgenommene Reihenfolge:
+1. kompakter Kopf + Text;
+2. Banner direkt unter dem Text;
+3. komplette Unterkategorie-Kachelgruppe ohne Affiliate-Unterbrechung;
+4. Empfehlungen / Affiliate-Produkte;
+5. passende Beiträge;
+6. weiterer bestehender Werbe-/Dienstleisterplatz.
+
+Zusätzlich abgenommen:
+- sichtbare H1 `Kettenhemd flechten` ohne künstlichen Zeilenumbruch;
+- `Rund ums Kettenhemd`;
+- größere/dezent dominantere Kacheln;
+- kurze sachliche Unterzeilen;
+- `Empfehlungen` als neutrale Produktüberschrift;
+- Meta-Titel weiterhin separat/offen.
+
+## KANDIDAT 1.50.690 – ROLLOUT
+
+Artefakt:
+`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip`
+
+SHA-256:
+`fcbc01893df451e56527cdcf90e6f7364cfa24d7afbc4556b69bc9b215c19809`
+
+Technik:
+- bewusst wieder kleines One-shot-Update wegen gemessener langsamer Plugin-Installation;
+- harte Basis: vorhandenes Template Kit exakt 1.50.689;
+- legt Backup der vier geänderten 1.50.689-Dateien an;
+- erzeugt Profil/Templates 1.50.690;
+- entfernt den Kettenhemd-only-Zweig aus dem gemeinsamen `render_category_level_body_v150687`;
+- der abgenommene Ablauf läuft danach für alle WP_Post-basierten Detail-Hubs dieses gemeinsamen Renderers;
+- Banner → kompletter Kategorienblock → Empfehlungen → bis zu 4 Beiträge → bestehender Rental-/Werbeplatz;
+- Kettenhemd bleibt dabei identisch im abgenommenen Stand.
+
+Nicht behauptet:
+- die 16 zusätzlich dokumentierten direkten Category-Term-Knoten sind durch den Quellpatch nicht separat als eigener Term-Renderer verifiziert. Dafür ist nach Installation ein echter WordPress-Readback nötig; kein Raten.
+
+QA:
+- Updater-PHP-Lint PASS;
+- Hard assertions PASS;
+- ZIP-Integrität PASS;
+- Build-Workflow PASS;
+- Kettenhemd-Sonderbedingung wird zur Laufzeit exakt einmal ersetzt;
+- Releasekette 1.50.689 → 1.50.690 hart geprüft;
+- SHA oben aus erzeugtem Build-Artefakt.
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.690 installieren und außer Kettenhemd mindestens zwei weitere Detail-Hubs sowie einen der direkten Category-Term-Fälle real prüfen.**
