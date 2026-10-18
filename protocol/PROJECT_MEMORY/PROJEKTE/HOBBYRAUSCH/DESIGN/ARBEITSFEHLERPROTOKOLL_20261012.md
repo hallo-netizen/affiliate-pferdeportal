@@ -880,3 +880,23 @@ KORREKTUR:
 VERMEIDUNGSREGEL:
 Pseudo-Elemente mit prozentualer Breite dürfen in Flex-Spalten nicht auf einem gestreckten Inline-Element basieren. Vor Freigabe muss die reale Elementbreite des Claim-Wrappers explizit gebunden sein.
 
+## AF-047 – starres 3/4-Bildziel drängte in den Textbereich; H1 konnte live umbrechen
+
+FEHLER:
+Der 1.50.677-Pilot reduzierte den geschützten Text-/Beigebereich zu stark zugunsten eines ungefähr 3/4 breiten Bildanteils. Im echten Frontend konnte dadurch die H1 `Audio & HiFi` umbrechen; gleichzeitig war die Bildfläche im Verhältnis zur Textlesbarkeit zu aggressiv.
+
+FOLGE:
+Die zentrale Gestaltungsregel `H1 auf Desktop einzeilig` war nicht zuverlässig erfüllt. Ein starres Verhältnis ist für unterschiedlich lange Kategorienamen ungeeignet.
+
+KORREKTUR:
+1.50.678 ersetzt das starre Verhältnis durch einen zentralen dynamischen Textschutzbereich ohne JavaScript:
+- Breite folgt dem realen Schriftblock;
+- Desktop begrenzt auf ca. 35–48 %;
+- 901–1180 px begrenzt auf ca. 42–58 %;
+- H1, Claim und Kurzzeile nowrap;
+- kompletter Schriftblock etwas höher;
+- <=900 px gestapelte Variante.
+
+VERMEIDUNGSREGEL – HART:
+Bei Hub2-Heroes kein starres Bild/Text-Verhältnis als Portalregel verwenden, wenn unterschiedlich lange H1 vorkommen. Der Textschutzbereich muss zentral begrenzt dynamisch sein; H1 und Hero-Kurztext müssen vor Release bei kurzen und langen Titeln gegen Umbruch geprüft werden. Kein JavaScript-/DOM-Messweg dafür einführen, solange CSS genügt.
+
