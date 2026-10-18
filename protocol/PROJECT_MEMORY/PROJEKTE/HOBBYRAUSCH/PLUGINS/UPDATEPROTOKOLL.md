@@ -4217,3 +4217,62 @@ SHA-256:
 
 NEXT:
 1.50.680 installieren und realen WordPress-Frontend-Readback durchführen.
+
+
+---
+
+## PU-20261018-088 – HD-003 1.50.681 / Hero-Zoom entfernt, Bildformat vereinheitlicht, Kategorietext kompakter
+
+REALER NUTZER-READBACK 1.50.680:
+- Frontend wieder erreichbar;
+- alle Hub2-Heroes optisch unscharf;
+- Ursache: 600×320-Bilder wurden per Cover auf die komplette Hero-Fläche hochskaliert und zusätzlich gecroppt;
+- Mobil zeigte dadurch einen anderen Ausschnitt als Desktop;
+- Textinhalt akzeptiert, Darstellung darunter zu luftig.
+
+ENTSCHEIDUNG:
+- keine Bilddatei künstlich aufblasen;
+- vorhandene 600×320-Bilder maximal nativ darstellen;
+- ein Bildformat 600:320 für Desktop/Tablet/Mobil;
+- vollständiger Bildausschnitt statt Zoom/Crop;
+- größere Master nur herunterrechnen;
+- sichtbarer Kategorietext als ein durchgehender Absatz ohne Leerzeile;
+- kein Extra-Kasten und kein zusätzlicher Vorschautext; vorhandene ca. 45–64 Wörter reichen.
+
+UMSETZUNG 1.50.681:
+- zentrale Hero-CSS bereinigt statt weitere Zoom-Regel darüberzulegen;
+- `object-fit:contain`;
+- Bildbreite max. 600 px;
+- gleicher 600:320-Container auf allen Breakpoints;
+- Beige-Fade am linken Bildrand;
+- Mobile-H1 darf umbrechen und wird nicht abgeschnitten;
+- Hub2-Lead als ein `p`, Abstände reduziert, Chevron näher am Text.
+
+DELTA:
+- geändert: `pferde-template-kit.php`;
+- neu: V150681-Profilklasse + Front-/Contenttemplate;
+- entfernt: 0;
+- 901/901 Assets byte-identisch;
+- Textwortlaut unverändert.
+
+QA:
+- PHP 90/90 PASS;
+- ZIP PASS;
+- reale Front-/Contentroute V150681 PASS;
+- Template positiv V150681 PASS;
+- Template negativ mit nur V150680 erwartungsgemäß FAIL;
+- 69/69 Hub2-Render PASS;
+- Chromium-Inline-Sichtprüfung mit echten Assets bei 1440/1024/901/900/760/390 PASS;
+- 600×320-Quellen nie breiter als 600 px;
+- 1600×853-Master nur verkleinert;
+- 600:320-Verhältnis auf Desktop und Mobil identisch;
+- kein horizontaler Overflow.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.681_HOBBY_DEPOT_NOZOOM_COMPACT_TEXT.zip`
+
+SHA-256:
+`37ac20a8f6d00e6b3ab8501b186c3087867b0c397d4d33d0d14df1ae84b85e9d`
+
+NEXT:
+1.50.681 installieren und WordPress-Readback von Imkerei & Bestäuber plus zwei weiteren Hub2 auf Desktop/Mobil.
