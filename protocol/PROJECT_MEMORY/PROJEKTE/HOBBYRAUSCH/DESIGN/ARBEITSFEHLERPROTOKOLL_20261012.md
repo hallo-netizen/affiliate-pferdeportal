@@ -866,3 +866,17 @@ Vor jedem WordPress-Plugin-Release zusätzlich zum Code-/ZIP-Test den Installer-
 4. simulierter Overlay-Pfad entspricht exakt `wp-content/plugins/<bestehender-pluginordner>/...`.
 Ein ZIP-Test allein reicht nicht.
 
+## AF-046 – Claim als Flex-Kind gestreckt, dadurch Pinselunterstrich viel zu lang
+
+FEHLER:
+Im 1.50.675-Fullbleed-Hero war der Claim ein Flex-Kind ohne eigenes align-self/width. Dadurch streckte ihn der Flex-Container quer über die Copy-Fläche. Der Pinselunterstrich mit prozentualer Breite wurde deshalb viel länger als der sichtbare Claimtext.
+
+FOLGE:
+Unterstrich optisch stark überzogen; Claim/H1-Abstand wirkte gedrängt.
+
+KORREKTUR:
+1.50.676 setzt für den Fullbleed-Claim `align-self:flex-start` und `width:max-content`. Der Unterstrich wird zusätzlich auf 74 % der echten Claimbreite begrenzt. Claim wird etwas nach oben gesetzt und der Abstand zur H1 vergrößert.
+
+VERMEIDUNGSREGEL:
+Pseudo-Elemente mit prozentualer Breite dürfen in Flex-Spalten nicht auf einem gestreckten Inline-Element basieren. Vor Freigabe muss die reale Elementbreite des Claim-Wrappers explizit gebunden sein.
+
