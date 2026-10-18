@@ -1,5 +1,19 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – ERWEITERTE 265-FOTOPRÜFUNG, KEIN NEUES PLUGIN
+
+**Aktueller validierter Befund:** 265 Themen in 36 Bereichsseiten; 117 ohne Bild, 4 zusätzlich mit **nur 603–605px** nativer Quellbreite und deshalb als ungeeignet eingestuft (Felgendiebstahl, Wertsachen & Schadenfall, E-Bike-Akkus vor Brand schützen, Rauchmelder). Somit mindestens **121 nicht abnahmefähige Fotozuordnungen**, während 144 vorhandene Bilder zwar >=900px messen, aber **noch nicht inhaltlich einzeln freigegeben** wurden. Frühere Zahl „117 fehlende“ war unvollständig, weil die vier klein aufgelösten Montagezuschnitte fälschlich als hochauflösend gezählt wurden.
+
+**Neue harte Prüfquelle:** Gesamtthemen-CSV mit Welt, Bereich, Thema, Bilddatei, nativer Pixelbreite, SHA-256 und dHash, offenem Fehlercode, visueller Freigabe; Qualitätsauswertung und reproduzierbares Python-Prüfskript. Auditpaket in Library: `/Eigentumsschutz/Design/HBD_FOTOAUSWAHL_265_QA_KEIN_PLUGIN.zip`, SHA256 `07fb7b2068d8e10195f0608f8a60bc4d4f34ac5b2ca12c3713df2d1f4797aa19`. **Dieses Paket ist NICHT als WordPress-Plugin installierbar.** Keine bisherige Live-ZIP überschrieben oder installiert.
+
+**Zusatzprüfung:** Wiederverwendung unter *derselben* Bereichsseite wurde anhand Dateiinhalts-Hash und 64-Bit-dHash<=3 untersucht; im aktuellen Auditbestand keine exakten oder fast identischen Kachelfotos auf derselben Seite gefunden. Dies ersetzt aber keine fachliche Bildkontrolle und auch nicht die übergreifende Hero-/Kachel-Bindungsprüfung. Blick auf alle bisherigen Versionen 0.1.23–0.1.42: keine Reserve passender zusätzlicher Originalfotos gegenüber dem Prüfstand. Externe Bildsuche kann Motive finden, aber urheberrechtliche Nutzbarkeit und zuverlässiger Download sind **nicht geklärt**. Bildgenerierungsaufrufe erzeugten statt benötigter Einzelfotos wieder Website-Mockups; solche Mockups wurden **nicht** als Fotoquelle verwendet.
+
+**EINE NEXT ACTION:** Mindestens 121 fehlende/unzureichende Einzelfotos tatsächlich in hoher Originalauflösung und mit zur realen Themenüberschrift erkennbarer Szenerie bereitstellen, dann alle 265 visuell/inhaltlich prüfen; **erst anschließend** ein gemeinsames installierbares Designplugin neu bauen. Keine weiteren kosmetisch anders benannten „fertigen“ ZIPs vorher.
+
+---
+
+
+
 ## 18.10.2026 – KEIN NEUER RELEASE: GESAMTE BILDPRÜFUNG NOCH OFFEN – NICHT INSTALLIEREN
 **Korrigierter aktueller DESIGN-Stand:** Die Aussagen früherer Versionen 0.1.37–0.1.42, alle Kategoriebilder seien fertig oder bildinhaltlich geprüft, waren falsch. Der Nutzer verlangt eine **vollständige visuelle und fachliche Prüfung sämtlicher 265 Kacheln über alle 36 Bereichsseiten** und ausdrücklich **keine weiteren halbfertigen Plugin-ZIPs**. Deshalb bleibt das offiziell auslieferbare Plugin maximal Version **0.1.42**; **KEIN neuer Release ist freigegeben**.
 
