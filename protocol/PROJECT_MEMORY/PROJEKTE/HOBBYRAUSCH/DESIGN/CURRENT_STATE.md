@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-17
-STATUS: **LIVE 1.50.674 VISUELL/RESPONSIVE FAIL / 1.50.675 AUDIO-HERO CENTRAL RESPONSIVE FIX LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.674 VISUELL/RESPONSIVE FAIL / 1.50.675 CODE PASS / ERSTE ZIP FALSCH GEPACKT / KORREKT REPACKAGED / LIVE OFFEN**
 
 ## Reales Live-Ergebnis 1.50.674
 
@@ -94,12 +94,15 @@ Unverändert zu 1.50.674:
 ## QA
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_REPACKED_HARDPASS.zip`
 
 SHA-256:
-`aaf1bca2d7b7b55b91f9a15e22e847b67489ceca3faf3d6c1648a6779b636307`
+`356a8e9861f0c018e42620d311eb9985f48279b3a5d1ed26be321c63ddfa24bd`
 
 PASS:
+- erste 1.50.675-ZIP als INSTALLER VERWORFEN: äußerer Pluginordner fehlte;
+- korrigierte ZIP enthält exakt `affiliate-portal-template-kit/` und `affiliate-portal-template-kit/pferde-template-kit.php` wie 1.50.674;
+- 1041/1041 Innendateien byte-identisch zur technisch geprüften 1.50.675;
 - PHP 73/73;
 - aktiver Release-Chain-Scan ohne 1.50.674-Stale-Referenz;
 - Render-Harness: Fullbleed-Klasse PASS;
