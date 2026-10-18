@@ -1,5 +1,19 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – NACHHOLPRÜFUNG DER ZAHLEN: 173 BILDER WAREN BEREITS ZUGEORDNET, NICHT 82
+
+**Korrektur eines irreführenden Statusberichts:** Das tatsächlich vorhandene und freigegebene Designplugin 0.1.42 enthält **173 von 265 Themen mit zugeordnetem Bild**, **92 ohne Bild**. Die spätere strenge Audit-Datei enthält nur **82 bebilderte und 183 unbebilderte**. Dies sind **verschiedene Maßstäbe und Prüfschritte**, NICHT 91 physisch verschwundene Bilddateien. Exakt nachgewiesene Transformation der Zuordnungen: 72 früher und weiterhin leer; 20 zuvor leere nachträglich bebildert; 62 vorher und nachher bebildert; **111 zuvor bebilderte auf Leer gesetzt**, davon 45 mit explizitem fachlichem Motivfehler, 12 mit expliziter Bildunschärfe und 54 mit dem unzureichend präzisen Grund „REQUIRES_ORIGINAL_SUBJECT_PHOTO“. Andersartige Gesamttabellen der letzten Nachrichten waren nicht als aktuelle WP-Dateibestandszahlen zu verstehen.
+
+**Die 54 nicht präzise begründeten Wegnahmen wurden über drei neue Fotokontaktbögen und die konkreten Themen gesichtet**, nicht als verloren betrachtet. Wichtiges belastbares Gegenbeispiel: **„Vandalismus & Zerstörung → Fassade & Außenflächen → Graffiti: Schutz & Hilfe“** hatte ein sachlich eindeutiges Graffiti-Szenenfoto `scene-graffiti.webp` (bereits vorhanden, keine neue Bildgenerierung erforderlich), das in der strengeren Bildprüfung unverständlicherweise leer blieb; dieses Motiv ist jetzt in einer **nicht produktiven provisorischen Zuordnung wiederhergestellt**. Automatischer Test: alle tatsächlich belegten Bilddateien aus den verfügbaren 0.1.42- und Prüfarchiven erfolgreich gelesen, Bilddaten dekodiert, pro Bereich keine SHA-256-identischen Motive. Nun **83 provisorisch bebilderte, 182 leer**, davon sind die weiteren 82 Motive keinesfalls alle fachredaktionell freigegeben. Mehrere der 53 übrigen aus der 54er-Nachprüfung sind offensichtlich themenfremd, z. B. Torfoto bei PV-Monitoring, graffitierter Laden bei Hochwasser; sie nicht blind restaurieren.
+
+**Abgelegte belegte Arbeit:** Library `/Eigentumsschutz/Design/HBD_ABGLEICH_173_ZU_82_KORREKTUR_KEIN_PLUGIN.zip` SHA256 `7b6710968378234f429e3f9c84386a5022c4be432b231844f97e19803d6bdbd4`. Enthält genaue 265-Datensatz-Mappingdifferenz, provisorische Mapping-Daten, drei Kontaktbögen und Prüfnotiz. **KEIN WordPress-Plugin, nicht installieren.** Die originalen 0.1.42-Bilddateien sind unangetastet.
+
+**EINE NEXT ACTION:** Auf Grundlage **aller 173 vorhandenen alten Zuordnungen und der geprüften Alternativen** nur tatsächlich unbrauchbare Motiv-/Schärfefälle ersetzen. Weitere sichere Rückgewinnungen vorhandener Bilder gezielt dokumentieren und die noch wirklich fehlenden themenspezifischen Szenen beschaffen. Erst ein vollständiges Ergebnis auf allen 265 Themen in einer einzigen installierbaren ZIP veröffentlichen. Frühere pauschale „fast alles fehlt“-Darstellung nicht wiederholen; kein weiterer kosmetischer Blindfix.
+
+---
+
+
+
 ## 18.10.2026 – STRIKTER SEMANTIK-/SCHÄRFENACHHOLTEST: NOCH KEINE FOTO-FREIGABE
 
 **KEIN NEUES INSTALLIERBARES PLUGIN.** WP-Design 0.1.42 bleibt bisheriger veröffentlichter Basisstand. Noch offene vollständige Bildaufgabe: 265 konkrete C23 Themen in 36 Ebene-2-Bereichen; nicht bloß 93 Legacy-R3-Themen.
