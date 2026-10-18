@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 5.0 / 2026-10-18
+FASSUNG: 5.1 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -163,6 +163,25 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 7. Responsive Desktop/Tablet/Mobil;
 8. Claim-Unterstrich;
 9. Regression der live bestätigten Text-/Grundaufteilung.
+
+## Nächste Kategorieebene / Detail-Hubs
+- Referenz ist der vom Nutzer auf den ersten Blick abgenommene Pilot **Kettenhemdflechten 1.50.686**.
+- Auf dieser Ebene **kein Hero-Bild**.
+- Oben kompakter, mittig geführter Kopf: thematisch passendes Icon, H1, hochwertiger Kategorietext.
+- Text nach denselben redaktionellen Regeln: **150–200 Wörter**, konkret, fachlich, keine Generator-/Padding-Sprache.
+- Davon ungefähr **45–60 Wörter sichtbar**, Rest über kleinen Chevron aufklappbar.
+- Desktop Unterkategorien im **4er-Raster**, Tablet 2, Mobil 1.
+- Inhalte und Monetarisierung werden bewusst gemischt: **erste 4 Unterkategorien → vorhandene Kategorie-Produkte → restliche Unterkategorien → vorhandener Banner → 3–4 Beitragsvorschauen → vorhandener weiterer Werbe-/Dienstleisterplatz**.
+- Keine neuen Affiliate-Slottypen erfinden; vorhandene Slots lediglich sinnvoll früher platzieren.
+- Beitragsvorschauen mit Bild; Ziel **mindestens 3, bevorzugt 4**, sobald passende Beiträge vorhanden sind.
+
+### Icons der letzten Kategorieebene
+- Icons werden **zentral semantisch gesteuert**, nicht pro Seite zufällig gewählt.
+- Gleiche Themenrolle erhält portalweit dasselbe Icon, unabhängig vom Elternstrang.
+- Beispiele: FAQ immer FAQ-Icon; Vergleich/Kaufberatung immer Vergleich-Icon; Einstieg/Grundlagen immer Grundlagen-Icon; Ausrüstung/Kosten immer Ausrüstungs-Icon.
+- Weitere Rollen wie Material, Werkzeug, Sicherheit, Pflege, Dokumentation, Klima, Futter, Technik, Projekt/Finish usw. werden ebenso zentral gebunden.
+- **Kein Hash-/Zufallsprinzip** zur Iconauswahl.
+- Wenn eine letzte Kategorie noch keine eigene semantische Rolle besitzt, wird ein fachlich passender Eltern-/Themenkontext verwendet; kein beliebig wechselndes Zufallsicon.
 
 ## Karten
 - natürliche Überschrift `Weiter in <Thema>` / `Weitere Kategorien`.
