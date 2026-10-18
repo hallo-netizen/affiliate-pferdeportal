@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.5 / 2026-10-17
+FASSUNG: 4.6 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -62,10 +62,12 @@ FASSUNG: 4.5 / 2026-10-17
 - Breadcrumb oben.
 
 ### Hero – Aufbau
-- **Desktop >1100 px:** links Schreibschrift-Claim + H1 + kurzer direkter Einsteigertext; rechts ein breites, klar erkennbares Hero-Bild.
-- **Tablet / mittlere Breiten <=1100 px:** Claim + H1 + kurzer Einsteigertext oben; Hero-Bild darunter; längerer Kategorietext erst danach.
-- **Mobil:** dieselbe gestapelte Logik, kompakter.
-- Der Hero darf die Seite nicht dominieren. Ein vollbreites 600×320-Bild darf auf Tablet/Mobil **nicht ungeprüft hochskaliert** werden, wenn dadurch ein übergroßer Hero entsteht.
+- **Desktop ab 901 px:** das scharfe Hero-Masterbild läuft als eine zusammenhängende Fullbleed-Fläche über den Hero; links liegt Claim + H1 + kurzer Einsteigertext auf einem hellen Beige, das exakt der Header-Hintergrundfarbe entspricht und weich ins Bild ausläuft.
+- Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
+- **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
+- Der gesamte Schriftblock steht mit ausreichendem Innenabstand und etwas höher im Hero; nichts klebt am linken Rand.
+- **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter über die volle verfügbare Breite, längerer Kategorietext erst danach.
+- Der Hero darf die Seite nicht dominieren. Auf kleineren Breiten darf kein Bild künstlich hochskaliert oder in eine zu große Hero-Höhe gezwungen werden.
 - Hero-Bilder müssen als **breite Landschafts-/Stilleben-Szene** funktionieren: Thema sofort erkennbar, Hauptmotiv vollständig sichtbar, genügend Abstand, kein Makro-/Detailcrop.
 - Keine unscharfen oder sichtbar hochskalierten Quellen. Ein Bild darf nur verwendet werden, wenn seine reale Auflösung für die tatsächliche Ausgabefläche ausreicht.
 - Wenn kein geeignetes vorhandenes Motiv existiert: **kein falscher Fallback**. Dann bleibt der Bildslot für die Arbeitsfreigabe als fehlend markiert bzw. es wird gezielt ein neues, optimiertes Motiv erzeugt; niemals thematisch falsches Bild nur zum Füllen.
@@ -76,7 +78,8 @@ FASSUNG: 4.5 / 2026-10-17
 - Über der H1 steht pro Hub2 ein kurzer individueller, natürlicher, leicht frecher Claim.
 - Schreibschrift und beige Pinselkurve orientieren sich **exakt am akzeptierten Buch-&-Papier-Stand**.
 - Pinselstrich bleibt unter dem Claim, mit sauberem Abstand; nicht nach oben verrutschen.
-- Pinselstrich darf nicht deutlich über den sichtbaren Claim hinauslaufen; keine überlange Vollbreiten-Linie.
+- Pinselstrich darf nicht deutlich über den sichtbaren Claim hinauslaufen; Ziel ist ungefähr die sichtbare Claim-Textlänge, keine überlange Vollbreiten-Linie.
+- Claim, H1 und Kurztext bilden einen gemeinsamen Schriftblock; vertikale Abstände werden zentral gesteuert.
 - Claim-Größe und -Position nicht pro Kategorie willkürlich skalieren.
 
 ### Hero – kurzer Einstieg
