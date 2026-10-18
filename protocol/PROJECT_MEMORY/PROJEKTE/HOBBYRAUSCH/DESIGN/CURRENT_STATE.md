@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.677 / DYNAMISCHER TEXTSICHERER HERO 1.50.678 LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.677 / 1.50.678 GEBAUT / LOCAL-HARD-PASS ZURÜCKGEZOGEN / VISUELLE E2E-PRÜFUNG OFFEN / KEIN LIVE-UPLOAD**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.6 / 2026-10-18**
 
@@ -51,7 +51,7 @@ AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPAS
 SHA-256:
 33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
 
-PASS:
+PASS (nur Code/Paket):
 - PHP 81/81;
 - aktive Release-Kette vollständig 1.50.678;
 - keine aktive 1.50.677-Routen-/Klassenreferenz;
@@ -63,6 +63,31 @@ PASS:
 - ZIP-Test PASS;
 - Roundtrip 1050/1050 byte-identisch.
 
+## Abschluss-Nachprüfung des bisherigen Local-PASS
+
+Die vorhandenen lokalen 1.50.678-Screenshots wurden erneut direkt geprüft.
+
+Befund:
+- Claim im Visual-Harness oben sichtbar angeschnitten;
+- Hero-Bild im Harness nicht tatsächlich geladen/gerendert;
+- damit wurde der reale Bild/Text-Übergang nicht belastbar visuell geprüft;
+- dokumentierte lokale Positiv- UND Negativ-E2E-Prüfung des realen Pfads fehlt.
+
+**1.50.678 ist deshalb noch kein freigegebener Upload-/Deploymentkandidat.**
+
+## ERSTER OFFENER BLOCKER
+
+Belastbare lokale visuelle E2E-Simulation mit tatsächlich geladenem Hero-Bild fehlt. Dabei ist zu klären, ob das angeschnittene Claim ein echter CSS-Fehler oder ein Harnessfehler ist.
+
 ## EXAKT EINE NEXT ACTION
 
-**1.50.678 über 1.50.677 installieren und Audio & HiFi breit sowie halbbreit prüfen.**
+**1.50.678 im echten lokalen Plugin-Renderweg mit geladenem Audio-Hero positiv und negativ simulieren; Claim, H1, Kurzsatz, dynamische Beigezone, Bildübergang und Responsive-Breiten prüfen. Erst bei vollständigem PASS darf die Installation in WordPress empfohlen werden.**
+
+## NICHT ANFASSEN
+
+- keine anderen Kategorien;
+- keine neuen Bilder;
+- Mega-Menü nicht erneut umbauen;
+- Kategoriebaum nicht ändern;
+- Audio-Langtext und Karten nicht erneut schreiben;
+- keine neue Architektur.
