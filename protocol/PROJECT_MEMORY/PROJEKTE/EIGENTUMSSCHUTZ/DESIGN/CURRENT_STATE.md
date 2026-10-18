@@ -1,5 +1,23 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – DESIGN 0.1.42: 72 Bildunterschriften redaktionell getrennt, lokaler Test
+
+**Aktueller Designstand:** Vorhandenes vollständiges Designplugin 0.1.42, Library /Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.42_BILDUNTERSCHRIFTEN_TEXTQUALITAET.zip, SHA-256 c6e841d0cee82ee5b2505aa604ed975dbde1f24e65cc220de47d6ac93d2bd49d.
+
+**Konkreter Fehler 0.1.41:** Bei Haus & Wohnung stammt der Satz „Lass die Eignung von Zylinder, Türblatt, Bandseite und Rahmen zusammen prüfen.“ aus sections[1].detail und wurde fälschlich als Bildunterschrift wiederholt. Der Algorithmus kopierte über alle 36 Seiten jeweils ganze Fließtextsätze unter 72 Fachtextbilder. Verschiedene Sätze waren noch lange keine lesenswerten Beschriftungen.
+
+**Korrektur:** Den konkret falschen Satz im Fließtext durch verständliche Beschreibung des Zusammenwirkens von Schlosszylinder, Beschlag, Schließblech, Türbändern und Rahmen ersetzt. Auch eine holprige Garagentor-Formulierung überarbeitet. Je Bereich zwei eigens verfasste, kurze Bildüberschriften und zwei sachbezogene Kurzunterschriften, zusammen 72 individuelle Paare. PHP benutzt nun eigene editorial_photo_titles und editorial_captions, kopiert keine künstlich langen Detailsätze. Sonstige Texte, Bilder, Produktplätze, Kategorien und Startseite unberührt.
+
+**Lokaler Nachweis:** Original-PHP-Renderer 36/36 Seiten mit dokumentierten 265 Kategorien in Admin- und Gastmodus, 72/72 unterschiedliche neue Untertitel; Chromium 36 Desktop- und 5 Mobilseiten ohne Bildbruch oder seitlichen Überlauf. Haus & Wohnung gerendert mit 'Das Haus als Ganzes sichern' und 'Türen und Fenster im Blick', beanstandeter Satz fehlt. PHP-Syntax PASS und ZIP CRC PASS; gegenüber 0.1.41 exakt 3 vorhandene Dateien geändert, 151 ZIP-Pfade sonst byteidentisch.
+
+**Offen:** KEINE echte WordPress-Liveabnahme, KEINE vollumfängliche fachredaktionelle Gesamtabnahme sämtlicher Textabsätze, die 92 fotolosen Themen aus 0.1.41 bleiben offen. Alte pauschale FERTIG-Aussagen bleiben unzutreffend.
+
+**Genau eine Next Action:** Plugin 0.1.42 installieren, echte zwei Bildunterschriften auf Haus & Wohnung prüfen; weitere Texte/Bilder erst mit verlässlicher Sichtabnahme freigeben.
+
+---
+
+
+
 ## 18.10.2026 – DESIGN 0.1.41 – 265 REAL DOKUMENTIERTE SEITE3-THEMEN STATT 93 FALSCHER MOCKS; BILDPRÜFUNG AUSSTEHENDE 92 OFFEN
 
 **Wahrheit/Korrektur zu 0.1.39 und 0.1.40:** Der C23-Kategorienbestand `KATEGORIEN/C23_265_THEMEN_EBENENPRUEFUNG_20261017.json` enthält **93 historische + 172 ergänzte = 265 konkrete Seite3-Themen**, verteilt auf genau **36 Bereichsseiten**. Das Designplugin hat bisher fast nur die 93 R3-Themen aus `nodes.json` berücksichtigt und die neuen 172 durch keywordgetriebene Restbild-Pools bedient. Dadurch entstehen zahlreiche inhaltlich falsche Kachelfotos. **Behauptungen „alle Kachelmotive geprüft“ aus Versionen 0.1.37–0.1.40 waren nicht gerechtfertigt.** Die alte Bildlogik darf nicht weiterverwendet werden.
