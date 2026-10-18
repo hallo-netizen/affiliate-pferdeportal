@@ -4476,3 +4476,74 @@ QA:
 
 NEXT:
 1.50.686 installieren und nur Kettenhemdflechten real prüfen. Keine Portalübertragung vor Abnahme.
+
+
+---
+
+## PU-20261018-093 – HD-003 1.50.687 / Detail-Ebene portalweit + zentrale Icons + Kettenhemd-Dummybeiträge
+
+NUTZERFREIGABE:
+Kettenhemdflechten 1.50.686 auf den ersten Blick okay. Pilotdesign auf alle Kategorien derselben logischen Ebene ausweiten.
+
+ZUSATZENTSCHEIDUNG:
+Icons der letzten Kategorieebene zentral semantisch steuern. Gleiche Themenrolle portalweit = gleiches Icon. Beispiel FAQ überall gleich. Aktuelle zufällige/unpassende Icons verwerfen.
+
+SCOPE:
+- 379 Page-Knoten derselben Ebene wie Kettenhemdflechten;
+- 16 direkte Category-Term-Knoten derselben logischen Ebene;
+- 395 Detail-Hubs insgesamt;
+- 2.979 letzte Kategorien unter den 379 Pages.
+
+DESIGN:
+- kein Hero-Bild;
+- mittiger Icon-/H1-/Textkopf;
+- 150–200 Wörter;
+- 45–62 Wörter sichtbar, Rest Chevron;
+- 4er-Raster Desktop, 2 Tablet, 1 Mobil;
+- erste 4 Unterkategorien → vorhandene Kategorie-Produkte → restliche Unterkategorien → vorhandener Banner → bis zu 4 Beiträge → vorhandener weiterer Werbeplatz.
+
+TEXT:
+- 395/395 Texte;
+- 150–170 Wörter;
+- 395/395 Volltexte unterschiedlich;
+- Fachnachprüfung vor Release insbesondere für Genuss/Fermentation und Tierbereiche.
+
+ICONS:
+- zentrale Rollenregistry;
+- FAQ, Vergleich, Grundlagen, Ausrüstung, Werkzeuge, Material, Sicherheit, Pflege, Dokumentation, Klima, Futter, Standort, Technik, Projekt/Finish usw.;
+- kein Hash-/Zufallsprinzip;
+- unbekannte Rolle fällt fachlich auf Eltern-/Themenkontext zurück.
+
+KETTENHEMDFLECHTEN DUMMYPOSTS:
+- 4 veröffentlichte Layout-Testbeiträge;
+- 4 passende Unterkategoriezuordnungen;
+- 4 Featured Images;
+- Seeder idempotent;
+- Vorschauabfrage Limit 4 aus direkten Unterkategorien.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.687_CATEGORY_LEVEL_ROLLOUT_ICONS_DUMMY_POSTS.zip`
+
+SHA-256:
+`9a881f3b3b7cf25ab2cfdc5f9a2c62b878fa5cc7513ba8678524f98b7464235b`
+
+QA:
+- PHP 105/105 PASS;
+- reale Front-/Contentroute V150687 PASS;
+- beide Templates positiv PASS;
+- Negativtest V150686 PASS;
+- Kettenhemd-Render PASS;
+- zentrale Iconrollen geprüft;
+- Copy-Coverage 395/395;
+- 4/4 Dummybeiträge/Kategorien/Bilder PASS;
+- Seeder zweiter Lauf ohne Duplikate PASS;
+- Delta zu 1.50.686: 1 bestehende Datei geändert + 4 neu + 0 entfernt;
+- Dirty Overlay 1.50.686 → 1.50.687 PASS;
+- ZIP PASS;
+- Roundtrip 1146/1146 byte-identisch.
+
+ZIELVERTRAG:
+ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.1.
+
+NEXT:
+1.50.687 installieren. Zuerst Kettenhemdflechten mit 4 Beitragsvorschauen und zentralen Icons prüfen, danach zwei weitere Detail-Hubs derselben Ebene.
