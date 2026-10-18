@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 5.2 / 2026-10-18
+FASSUNG: 5.3 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -211,3 +211,12 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 
 ## PASS
 Kein Live-PASS ohne echten WordPress-Readback.
+
+
+## Startseite – Hobbywelten-Bilder ab 1.50.691
+- Nur die acht Startseiten-Kategoriebilder werden neu gefasst.
+- Hauptkategorie-Heros bleiben unverändert.
+- Bildsprache: deutlich ruhiger, leerer, klarer; wenige Objekte, klare Hauptidee, viel freie Fläche, keine repetitiven Personenposen.
+- Startseitenweltbilder dürfen als ruhige Stillleben/Freisteller-nahe Szenen funktionieren.
+- Weltkarte und Hauptkategorie-Hero müssen nicht dieselbe Bilddatei teilen.
+- Reihenfolge Startseite: Hero → 8 Hobbywelten → vorhandener Querbanner → weitere Startseitenmodule.
