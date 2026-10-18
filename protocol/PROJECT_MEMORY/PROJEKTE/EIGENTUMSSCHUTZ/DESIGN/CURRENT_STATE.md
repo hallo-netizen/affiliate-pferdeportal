@@ -1,5 +1,20 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – KEIN NEUER RELEASE: GESAMTE BILDPRÜFUNG NOCH OFFEN – NICHT INSTALLIEREN
+**Korrigierter aktueller DESIGN-Stand:** Die Aussagen früherer Versionen 0.1.37–0.1.42, alle Kategoriebilder seien fertig oder bildinhaltlich geprüft, waren falsch. Der Nutzer verlangt eine **vollständige visuelle und fachliche Prüfung sämtlicher 265 Kacheln über alle 36 Bereichsseiten** und ausdrücklich **keine weiteren halbfertigen Plugin-ZIPs**. Deshalb bleibt das offiziell auslieferbare Plugin maximal Version **0.1.42**; **KEIN neuer Release ist freigegeben**.
+
+**Tatsächliche begonnene Gesamtarbeit:** Vorhandenes 0.1.42-ZIP entpackt. Die 265 exakt bekannten C23-Themen aus der bisherigen `data/area-image-mapping-v1.json` gegen die 36 real dokumentierten Bereichsseiten gelesen. Die Assets der bisherigen 0.1.42 sind mehrheitlich aus nur wenigen Haus-, Garage-, Tor-, Wasser- und Technikfotos mehrfach recycelt, teils sachlich völlig falsch (etwa Elektrotechnikbild für Rohrnetz; Gartenbild für Fahrzeugteile; Werkstattbild für Brandrisiken). Auf Basis eines fotografischen Kontaktbogens eine **strengere provisorische Zuordnung** ausgearbeitet. Vier zusätzliche echte Einzelfotos aus einer getrennten KI-Fotoproduktion (aus 2×2 Produktionsbogen zu Einzeldateien geschnitten) für Schadensdokumentation, Felgenschutz, E-Bike-Ladeplatz und Rauchmelder erzeugt. Weiterhin ist bei 117/265 Themen kein ausreichend glaubwürdiges individuelles Foto zugeordnet. **Die 148 zugeordneten Fotos sind noch redaktionelle Kandidaten, nicht inhaltlich einzeln gegen alle 265 Motive freigegeben.** Auch 148 nicht als finalen Foto-PASS deklarieren.
+
+**Artefakt bewusst NUR als interne unfreigegebene Prüfwerkbank abgelegt:** `/Eigentumsschutz/Design/HBD_BILDERPRUEFUNG_ENTWURF_NICHT_INSTALLIEREN_20261018.zip`. **NICHT ALS WORDPRESS-PLUGIN INSTALLIEREN.** Enthält 0.1.42-Quellstand mit provisorischer Mapping-Datei, vier neue Bilddateien, `data/area-photo-audit-status.json` mit allen fehlenden Titeln sowie drei reproduzierbare Prüfskripte und reale QA-Ergebnisdateien. SHA256 `cd8c6f6aac022ec55f1d9a4dcba1f0b1523dc180eacbdaf2b6f971527eb6976a`. Kein WordPress-DB-/Inhalts-Write ausgeführt, kein Live-Test behauptet.
+
+**Nur technische QA dieses Entwurfs:** PHP-Renderer aller 36 Bereiche gegen vollständige 265-Themen-Teststruktur mit Gast/Admin PASS, 72 unterschiedliche bestehende Captiontexte, 36 Chromium-Ansichten bei 980px plus fünf Mobil bei 390px PASS für Bildlade- und Rahmenchecks; **148 aktuell bebilderte Kacheln, 117 fotolose Kacheln**. Die neuen vier ausgeschnittenen Quellfotos messen nativ ca. 603×355 Pixel im richtigen 1,7:1-Verhältnis – keine Upscalingbehauptung; eine Prüfung auf hohe DPR-Werte ist noch offen. Diese Tests sagen **nichts** über die Gesamt-Eignung jedes Motivs aus.
+
+**Harter Restauftrag / einzig nächste Arbeit:** Für alle 265 konkreten Kacheltitel **echte inhaltlich passende und eigenständige Bilder beschaffen/generieren**, auch die derzeit 117 ohne Foto. Jedes Motiv einzeln anhand des tatsächlichen Titels auf Thema, Schärfe, Szene/Ausschnitt und Nicht-Wiederholung innerhalb der betreffenden Ebene-2-Seite freigeben, danach mit realem PHP-Renderer und Mobile/Desktop im Browser umfassend testen. Alle 36 Bereiche vollständig; erst dann **ein einziges** finales aktualisiertes Designplugin als installierbare ZIP freigeben. Keine umbenannten gleichen Bilder, keine visuell sachfremden Fallbacks, keine leeren Kacheln als fertig ausgeben. Text-/Kategorieplugins unverändert.
+
+---
+
+
+
 ## 18.10.2026 – DESIGN 0.1.42: 72 Bildunterschriften redaktionell getrennt, lokaler Test
 
 **Aktueller Designstand:** Vorhandenes vollständiges Designplugin 0.1.42, Library /Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.42_BILDUNTERSCHRIFTEN_TEXTQUALITAET.zip, SHA-256 c6e841d0cee82ee5b2505aa604ed975dbde1f24e65cc220de47d6ac93d2bd49d.
