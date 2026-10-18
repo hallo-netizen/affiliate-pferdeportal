@@ -63,7 +63,8 @@ FASSUNG: 4.7 / 2026-10-18
 
 ### Hero – Aufbau
 - **Desktop ab 901 px:** das scharfe Hero-Masterbild läuft als eine zusammenhängende Fullbleed-Fläche über den Hero; links liegt Claim + H1 + kurzer Einsteigertext auf einem hellen Beige, das exakt der Header-Hintergrundfarbe entspricht und weich ins Bild ausläuft.
-- Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.\n- Diese dynamische Fullbleed-Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
+- Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
+- Diese dynamische Fullbleed-Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
 - **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
 - Der gesamte Schriftblock steht mit ausreichendem Innenabstand und etwas höher im Hero; nichts klebt am linken Rand.
 - **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter über die volle verfügbare Breite, längerer Kategorietext erst danach.
@@ -178,4 +179,4 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - keine neue Architektur.
 
 ## PASS
-Kein Live-PASS ohne echten WordPress-Readback.\n
+Kein Live-PASS ohne echten WordPress-Readback.
