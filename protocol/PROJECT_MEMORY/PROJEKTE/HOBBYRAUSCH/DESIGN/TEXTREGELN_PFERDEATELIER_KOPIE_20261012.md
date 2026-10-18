@@ -43,3 +43,21 @@ Die **Darstellung** stammt ausdrücklich **nicht** aus Pferdeatelier, sondern bl
 
 ## Bindung
 Diese Regel gilt für die Kategorietexte der Hub2-/Ebene-2-Seiten im Hobby Depot. Status, Release und NEXT ACTION bleiben ausschließlich in `DESIGN/CURRENT_STATE.md`.
+
+
+## Präzisierung 2026-10-18 – Detail-Hobbyseiten
+
+Für die Detail-Hobbyseiten gilt zusätzlich hart:
+
+1. Der **sichtbare Lead** umfasst ungefähr **45–60 Wörter** und beantwortet für einen Leser ohne Vorwissen zuerst:
+   - Was ist dieses Hobby?
+   - Was macht man dabei konkret?
+   - Was ist dafür typisch bzw. wodurch unterscheidet es sich?
+2. Der sichtbare Lead enthält **keine Seitennavigation und keine Aufzählung interner Unterkategorien**. Formulierungen wie „Eigene Bereiche behandeln …“, „Für die Orientierung findest du …“ oder „Konkreter wird es bei …“ sind verboten.
+3. Der aufgeklappte Text führt den Gedanken **inhaltlich zusammenhängend** fort. Er erklärt typische Arbeitsweisen, Materialien, Werkzeuge, Abläufe, Unterschiede oder Einstiegshürden nur dort, wo sie fachlich wirklich zum Hobby gehören.
+4. Der Langtext darf **keine Liste der vorhandenen Kacheln in Satzform** sein. Die Kacheln stehen unter dem Text und müssen nicht im Fließtext nacherzählt werden.
+5. Jeder Absatz braucht eine erkennbare innere Logik. Aneinandergereihte Einzelhinweise ohne Zusammenhang sind nicht zulässig.
+6. Kachel-Untertitel sind **konkret und fachlich**. Verboten sind kalte Generatorphrasen wie „sinnvoll vergleichen“, „realistisch planen“, „sicher einordnen“, „konkret vertiefen“, „gezielt steuern“ oder gleichartige austauschbare Handlungsfloskeln.
+7. Ein Kachel-Untertitel nennt stattdessen den tatsächlichen Inhalt des Teilbereichs, z. B. Materialien, Werkzeuge, Arbeitsschritte, Bauformen, Techniken oder typische Probleme.
+8. Die Zwischenüberschrift über den Kacheln beschreibt das **Weitergehen in die Tiefe**, nicht eine bloße Übersicht. Bevorzugt wird eine natürliche themenspezifische Formulierung; ein neutraler Fallback darf „Mehr zu <Hobby>“ sein.
+9. Keine Massenproduktion aus Satzbausteinen. Wiederkehrende Satzanfänge, wiederkehrende Schlussformeln und austauschbare Absatzgerüste sind als Regelverstoß zu behandeln.
