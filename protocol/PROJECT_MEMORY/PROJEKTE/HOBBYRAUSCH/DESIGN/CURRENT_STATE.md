@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.686 KETTENHEMDFLECHTEN-PILOT NUTZERSEITIG AUF DEN ERSTEN BLICK OK / 1.50.687 GLEICHE DETAIL-EBENE PORTALWEIT AUSGEROLLT / ZENTRALE LAST-LEVEL-ICONS / 4 KETTENHEMD-DUMMYBEITRÄGE / LOKAL PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.687 DETAIL-EBENE AUSGEROLLT / 1.50.688 KETTENHEMD-KACHELREFINEMENT GEBAUT / LOKAL POSITIV+NEGATIV PASS / WORDPRESS-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.1 / 2026-10-18**
 
@@ -121,3 +121,52 @@ Eigenschaften:
 - keine neuen Affiliate-Slottypen;
 - keine zufällige Iconwahl;
 - Dummy-Beiträge nicht als finale Fachartikel behandeln.
+
+
+## KANDIDAT 1.50.688 – KETTENHEMD-KACHELREFINEMENT
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.688_KETTENHEMD_CARD_REFINEMENT.zip`
+
+SHA-256:
+`a57ba6a8ec158191276673d309825787cfc0ec6d0c192bed358a97e193cac843`
+
+Umsetzung:
+- sichtbare H1 auf Kettenhemd-Seite: `Kettenhemd` / `flechten` zweizeilig; gespeicherter Titel, URL und Slug unverändert;
+- Kachelabschnitt nicht mehr `Weiter in Kettenhemdflechten`, sondern `Rund ums Kettenhemd`;
+- für andere Detail-Hubs neutraler Fallback `Themen im Überblick` statt unmittelbarer H1-Dopplung;
+- Produktabschnitt `Passende Ausrüstung` → neutral `Empfehlungen`;
+- Kettenhemd-Kacheln deutlich lesbarer: Titel 16 px, Untertitel 12,5 px, größere Icons und etwas mehr Kartenhöhe;
+- Kettenhemd-Unterzeilen auf reine Sachinformation gekürzt;
+- Frontend-Label `FAQ / Häufige Fragen` → `Häufige Fragen`;
+- Meta-Titel ausdrücklich NICHT geändert;
+- harte Ausgaberegel: sichtbare Kachel-/Kurztexte dieser Detail-Ebene beginnen mit Großbuchstaben; bekannte Marken-Schreibweisen eBay/iPhone/iPad werden nicht zerstört.
+
+Kettenhemd-Unterzeilen:
+- Einstieg & Grundlagen → `Material, Ringmaße und erste Handgriffe`
+- Ausrüstung & Kosten → `Zangen, Ringe und Grundausstattung`
+- Vergleich & Kaufberatung → `Materialien, Ringtypen und Sets`
+- Formen & Übergänge → `Flächen, Kanten und Verbindungen`
+- Grundmuster → `Flechtmuster und Aufbau`
+- Projekte & Finish → `Abschlüsse, Kanten und Finish`
+- Ringe & Werkzeuge → `Ringgrößen, Drahtstärken und Zangen`
+- Häufige Fragen → `Typische Probleme und Lösungen`
+
+QA:
+- PHP 108/108 PASS;
+- Front-/Contentroute V150688 PASS;
+- beide V150688-Templates positiv PASS;
+- Negativtest nur mit V150687 erwartungsgemäß FAIL;
+- Kettenhemd-Render: H1-Split PASS;
+- Abschnittstitel PASS;
+- 8/8 Karten PASS;
+- FAQ-Frontendtitel PASS;
+- alte Füll-Endungen im Kettenhemd-Kartenpfad entfernt PASS;
+- Großschreibungsregel mit Negativfall `alte Stilkonsolen...` → `Alte Stilkonsolen...` PASS;
+- Delta zu 1.50.687: 1 bestehende Datei geändert + 3 neu + 0 entfernt;
+- ZIP PASS;
+- Roundtrip 1149/1149 byte-identisch.
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.688 installieren und Kettenhemd flechten real prüfen: H1-Zeilenumbruch, Kartenwirkung, kurze Untertitel, `Rund ums Kettenhemd` und `Empfehlungen`. Meta-Titel danach separat.**
