@@ -2,70 +2,42 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-17
-STATUS: **LIVE 1.50.674 / 1.50.675 CODE PASS / ERSTE ZIP NICHT ÜBERINSTALLIERBAR / KORREKTE REPACK-ZIP PASS / LIVE OFFEN**
-
-## Fehler 1.50.674
-
-- Fullbleed nur >1100 px;
-- darunter alter 600-px-Bildpfad;
-- rechter Leerraum bei bestimmten Breiten;
-- Hero-Text links ohne ausreichenden Innenabstand;
-- alte lange Hero-Zeile statt neuer Kurzzeile;
-- Claim optisch noch alter Stand.
+STAND: 2026-10-18
+STATUS: **LIVE 1.50.675 / CLAIM-SPACING-FAIL / 1.50.676 LOCAL HARD PASS / LIVE OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.675_HOBBY_DEPOT_AUDIO_HIFI_RESPONSIVE_FULLBLEED_FIX_REPACKED_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.676_HOBBY_DEPOT_AUDIO_CLAIM_SPACING_UNDERLINE_FIX_HARDPASS.zip`
 
 SHA-256:
-`356a8e9861f0c018e42620d311eb9985f48279b3a5d1ed26be321c63ddfa24bd`
+`7c898eaeac166e21e47ecfa946baa4ff217f462e5145a9485ec272647186ca82`
 
 ## Korrektur
 
-Zentrale CSS-Klasse `hd-hub2-hero-fullbleed`, aktuell nur Audio zugewiesen.
+Nur Audio & HiFi:
+- Claim nicht mehr Flex-Stretch;
+- Breite = tatsächliche Textbreite;
+- Unterstrich 74 % der Claimbreite;
+- Claim höher;
+- mehr Abstand zur H1.
 
->=901:
-- Fullbleed;
-- Innenabstand;
-- beige Verlaufsfläche;
-- Claim/H1/Kurzzeile sauber.
-
-<=900:
-- gestapelt;
-- Bild 100 % breit;
-- kein 600-px-Limit.
-
-Hero-Text fest:
-`Klang verstehen, Technik entdecken und selbst bauen.`
-
-Langtext unabhängig davon.
-
-## Performance
-
-- ein Bild;
-- CSS-only;
-- kein JS;
-- kein Blur;
-- kein Masking;
-- keine zusätzliche Abfrage.
+Unverändert:
+- 901/901 Assets;
+- Hero-Bild;
+- H1;
+- Kurzsatz;
+- Langtext;
+- Responsive-Fullbleed;
+- alle anderen Kategorien.
 
 ## QA
 
-- erster 1.50.675-Installer verworfen: Plugin-Wurzelordner fehlte;
-- Repack: Top-Level `affiliate-portal-template-kit/` wie 1.50.674;
-- Main-Datei: `affiliate-portal-template-kit/pferde-template-kit.php`;
-- 1041/1041 Innendateien byte-identisch;
-- ZIP-Test ohne Fehler;
-- PHP 73/73;
-- Render-Harness PASS;
-- Release-Kette sauber;
-- 901/901 Assets identisch;
-- 1440/1180/1024/901/900/800/760/600/390 px simuliert;
-- 0 Overflow;
-- Bild in allen Fällen volle Hero-Breite;
+- PHP 75/75;
+- Release-Kette PASS;
+- keine aktive 1.50.675-Stale-Referenz;
+- korrekt packbarer WordPress-Pluginordner;
 - ZIP PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.675 installieren und Audio & HiFi breit + halbbreit prüfen.**
+**1.50.676 installieren und Audio & HiFi prüfen.**
