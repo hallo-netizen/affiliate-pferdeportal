@@ -1,0 +1,29 @@
+name: HD689 Extract Source
+on:
+  push:
+    branches:
+      - hobbyroom/hd689-updater-artifact-20261018
+permissions:
+  contents: write
+jobs:
+  extract:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/hd689-updater-artifact-20261018
+      - name: Extract updater source
+        run: |
+          rm -rf /tmp/hd689src
+          mkdir -p /tmp/hd689src tmp
+          unzip -q artifacts/HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.689.zip -d /tmp/hd689src
+          cp /tmp/hd689src/hobby-depot-template-kit-update-150689/hobby-depot-template-kit-update-150689.php tmp/hd689-updater-source.php
+      - name: Commit extracted source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tmp/hd689-updater-source.php
+          git diff --cached --quiet && exit 0
+          git commit -m "Extract HD689 updater source for rollout"
+          git push
