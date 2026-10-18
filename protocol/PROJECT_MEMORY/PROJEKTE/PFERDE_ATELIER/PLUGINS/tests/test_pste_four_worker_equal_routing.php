@@ -8,6 +8,18 @@ foreach(glob(PSTE_DIR.'includes/*.php') as $p)require_once $p;
 $d=json_decode(file_get_contents('/mnt/data/pferde-seo-audit/_SEO_EXPORT_ARBEITSKOPIE_20261016.txt'),true,512,JSON_THROW_ON_ERROR);$b=$d['site_baseline'];
 function result(string $q,bool $categoryAvailable=true):array{global $d,$b;$GLOBALS['term_exists']=$categoryAvailable;$c=null;foreach($d['candidates'] as $x)if(($x['primary_longtail_query']??'')===$q){$c=$x;break;}if(!$c)$c=['primary_longtail_query'=>$q];return PSTE_Normal_Metadata_Path::applyToPayload($c,$b,(string)($c['research_origin_family_key']??''))['normal_metadata_path'];}
 function check(bool $b,string $why):void{if(!$b)throw new RuntimeException('FAIL '.$why);echo "PASS $why\n";}
+// KISS regression: the historic research-family flag must no longer be part of
+// the Magazine classifier's argument contract or its admission decisions.
+check((new ReflectionMethod(PSTE_Journal_Semantic_Router::class,'classifyQuestion'))->getNumberOfParameters()===1,'old family admission switch removed');
+foreach([
+    'Sind Haferflocken für Pferde geeignet?'=>'feeding',
+    'Wie lange soll man Pferde auf die Weide lassen?'=>'housing',
+    'Warum fressen Pferde auf der Weide so viel Heu?'=>'feeding',
+] as $question=>$expectedDomain){
+    $classified=PSTE_Journal_Semantic_Router::classifyQuestion($question);
+    check(!empty($classified['ok'])&&($classified['category_key']??'')===$expectedDomain,
+        'magazine category depends on the question, not DataForSEO family: '.$expectedDomain);
+}
 $feed=result('Sind Haferflocken für Pferde geeignet?');check($feed['status']==='NORMAL_PASS'&&($feed['target_category']['slug']??'')==='pferdeernaehrung-verstehen'&&$feed['article_type']==='Journal','familyless horse feed -> verified real journal category');
 check(($feed['worker_flow']['disposition']??'')==='GREEN','all four workers GREEN with real category');
 $housing=result('Wie lange soll man Pferde auf die Weide lassen?');check($housing['status']==='NORMAL_PASS'&&($housing['target_category']['slug']??'')==='alltags-pferde-haltungsformen','familyless grazing -> housing');
