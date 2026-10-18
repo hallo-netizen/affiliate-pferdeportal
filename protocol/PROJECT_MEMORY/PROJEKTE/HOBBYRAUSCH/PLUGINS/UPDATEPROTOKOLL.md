@@ -4385,3 +4385,52 @@ ZV-HOBBYRAUSCH-DESIGN-001 auf Fassung 4.9 nachgezogen.
 
 NEXT:
 1.50.684 installieren und WordPress-Readback über mehrere Hub2/Welten. Kein weiterer Architektur- oder Textumbau vor diesem Readback.
+
+
+---
+
+## PU-20261018-091 – HD-003 1.50.685 / echte Hero-Szenerie sichtbar erhalten
+
+LIVE-BEFUND 1.50.684:
+Keramik & Glas zeigte trotz korrektem Szenenmaster weiterhin einen optisch vergrößerten/engen Hero-Ausschnitt.
+
+URSACHE:
+Nicht die Bildquelle war falsch. Der Master enthielt die volle horizontale Szene. Aber der linke Textblock plus 130–170 px Übergang verdeckte einen zu großen Teil des rechts liegenden Bildes. Dadurch wirkte die verbleibende sichtbare Szene erneut wie hineingezoomt.
+
+FIX:
+- Bildfeld ca. 72 % des Hero;
+- native Breite bleibt harte Obergrenze;
+- keine Bilddatei geändert;
+- horizontaler Inhalt vollständig;
+- nur oben/unten Crop;
+- Übergang Desktop auf ca. 64 px reduziert;
+- 901–1180 px auf ca. 56 px reduziert;
+- Mobil unverändert vollständiges Masterverhältnis.
+
+KERAMIK-&-GLAS-PFLICHTTEST:
+Original 1672×941 → Master 1672×614 nur vertikal beschnitten.
+1440/1180/1024/901: 0 Seitencrop, 0 Upscaling.
+900/760/390: gleiche vollständige Szene.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.685_HERO_SCENE_VISIBILITY_FIX.zip`
+
+SHA-256:
+`a72b7baa257b09d3fc2f4112bdcb25e03bdbe8d6d120ae0d60764ee53f6c7b1e`
+
+QA:
+- PHP 99/99 PASS;
+- Route/Template V150685 positiv PASS;
+- V150684-Negativtest PASS;
+- 69/69 Hub2-Render PASS;
+- 276/276 Desktop-Geometriechecks PASS;
+- 49/49 Browserfälle PASS;
+- ZIP PASS;
+- Roundtrip 1139/1139 PASS;
+- Delta zu 1.50.684: 1 geändert, 3 neu, 0 entfernt.
+
+ZIELVERTRAG:
+Fassung 5.0.
+
+NEXT:
+1.50.685 installieren; zuerst Keramik & Glas real prüfen.
