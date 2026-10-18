@@ -186,12 +186,11 @@
  }
 --- a/includes/class-pste-journal-semantic-router.php
 +++ b/includes/class-pste-journal-semantic-router.php
-@@ -10,40 +10,71 @@
+@@ -10,40 +10,63 @@
      public const CONTRACT='PSTE_JOURNAL_SEMANTIC_ROUTER_V1_HIGH_CONFIDENCE';
  
      /** Pure classifier used by runtime and tests. @return array<string,mixed> */
--    public static function classifyQuestion(string $raw): array {
-+    public static function classifyQuestion(string $raw,bool $provenProductFamily=false): array {
+     public static function classifyQuestion(string $raw): array {
          $raw=self::clean($raw);
          $base=['contract'=>self::CONTRACT,'ok'=>false,'status'=>'NOT_APPLICABLE','category_key'=>'','category_name'=>'','reason_codes'=>[],'raw_query'=>$raw,'write_attempted'=>false];
          if($raw===''||!class_exists('PSTE_Normalizer')||!PSTE_Normalizer::isQuestion($raw))return self::fail($base,'PSTE_JOURNAL_AUTO_NOT_A_QUESTION');
@@ -212,12 +211,6 @@
 +            return self::fail($base,'PSTE_JOURNAL_AUTO_PRODUCT_OR_PRICE_INTENT');
 +        if(preg_match('/\b(?:testsieger|preisvergleich|kaufberatung|beste|besten|erfahrungen)\b/u',$q))
 +            return self::fail($base,'PSTE_JOURNAL_AUTO_PRODUCT_COMPARISON_INTENT');
-+        if($provenProductFamily&&preg_match('/\bvor[\s-]+und[\s-]+nachteile\b/u',$q))
-+            return self::fail($base,'PSTE_JOURNAL_AUTO_EXISTING_FACH_COMPARISON_OWNER');
-+        if($provenProductFamily&&preg_match('/\b(?:versicherung|versicherungen|police|tarif|tarife)\b/u',$q))
-+            return self::fail($base,'PSTE_JOURNAL_AUTO_SPECIFIC_INSURANCE_FACH_OWNER');
-+        if($provenProductFamily&&preg_match('/^(?:wie\s+(?:viel|viele|oft|lange|lang|alt|gross|groß|schwer|hoch|breit|schnell|teuer)|wann\b|wo\b|wer\b|was\s+(?:ist|sind)\b)/u',$q))
-+            return self::fail($base,'PSTE_JOURNAL_AUTO_MORE_SPECIFIC_FACH_FAMILY');
 +        if(!preg_match('/^(?:warum|wieso|weshalb|wie\b|was\b|wann\b|welche\b|welcher\b|welches\b|wo\b|wer\b|sind\b|ist\b|kann\b|können\b|koennen\b|soll\b|sollte\b|muss\b|gibt\b|braucht\b|benötigt\b|benoetigt\b)/u',$q))
 +            return self::fail($base,'PSTE_JOURNAL_AUTO_NOT_A_READABLE_QUESTION');
  
@@ -231,16 +224,14 @@
 +        if(preg_match('/\b(?:salzleckstein|salzlecksteine|heu|heuverzehr|futter|futters|fütterung|fuetterung|füttern|fuettern|fressen|futtern|ernährung|ernaehrung|weidegras|mineralfutter|kraftfutter)\b/u',$q))$domains['feeding']='Pferdeernährung verstehen';
 +        // These unmistakable horse-feeding subjects do not depend on the
 +        // DataForSEO origin family. Later title/term/signature gates stay unchanged.
-+        if(!$provenProductFamily && preg_match('/\b(?:haferflocken|hafer|maisflocken|maiscobs|leinöl|leinoel|getreide|heulage|raufutter)\b/u',$q))
++        if(preg_match('/\b(?:haferflocken|hafer|maisflocken|maiscobs|leinöl|leinoel|getreide|heulage|raufutter)\b/u',$q))
 +            $domains['feeding']='Pferdeernährung verstehen';
 +        // Four-step routing: only when no existing proven Fach family owns the topic,
 +        // reuse the same Journal decision for clearly named, horse-specific subject
 +        // terms. Do not override existing family FAQ/Vergleich decisions.
 +        // A generic Weide mention does not compete with a proven feeding subject.
-+        if(!$provenProductFamily){
-+            if(!isset($domains['feeding']) && !isset($domains['housing'])
-+                && preg_match('/\b(?:weide|weidegang|koppel)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
-+        }
++        if(!isset($domains['feeding']) && !isset($domains['housing'])
++            && preg_match('/\b(?:weide|weidegang|koppel)\b/u',$q))$domains['housing']='Alltags-Pferde-Haltungsformen';
 +        if(preg_match('/\b(?:gesundheit|krankheit|krankheiten|lahmheit|kolik|koliken|husten|fieber|entzündung|entzuendung|tierarzt|verletzung|schmerzen|wunde|parasiten)\b/u',$q))$domains['health']='Pferdegesundheit verstehen';
 +        if(preg_match('/\b(?:pferderasse|pferderassen|pferdetyp|pferdetypen|warmblut|kaltblut|vollblut|pony|ponys|friese|haflinger|araber)\b/u',$q))$domains['breeds']='Pferderassen & Pferdetypen';
 +        if(preg_match('/\b(?:versicherung|versicherungen|pferdeversicherung|pferdeversicherungen|pferderecht|vorschriften|gesetz|gesetze|gesetzlich|haftung|kaufvertrag|stallmiete|stallkosten|unterhaltskosten|finanzierung|recht|steuern|pferdepass)\b/u',$q))$domains['law']='Recht, Finanzen & Organisation';
@@ -257,8 +248,7 @@
  
      /** Runtime metadata route. @return array<string,mixed> */
      public static function evaluate(string $raw,array $registry,string $sourceFamilyKey='',string $sourceFamilyName=''): array {
--        $classification=self::classifyQuestion($raw);
-+        $classification=self::classifyQuestion($raw,$sourceFamilyKey!=='');
+         $classification=self::classifyQuestion($raw);
          $base=$classification+['article_type'=>'Journal','target_category'=>[],'family_key'=>'','family_name'=>'','normalization'=>[],'intent_profile'=>[],'semantic_consensus'=>[],'title_pipeline'=>[],'title'=>'','target_keyword'=>'','domain_risk'=>[],'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,'article_or_taxonomy_write_attempted'=>false];
          if(empty($classification['ok']))return $base;
  
@@ -277,7 +267,7 @@
          // do not require editorial titles to repeat a magazine-section label.
          $literalHorse=(bool)preg_match('/\b(?:pferd|pferde|pferdes|pferden)\b/iu',$raw);
 -        $familyName=$sourceFamilyName!==''?$sourceFamilyName:($literalHorse?'Pferd':(string)$classification['category_name']);
-+        $familyName=$sourceFamilyName!==''?$sourceFamilyName:($literalHorse?'Pferd':self::questionSubject($raw,(string)$classification['category_key']));
++        $familyName=$literalHorse?'Pferd':self::questionSubject($raw,(string)$classification['category_key']);
 +        if($familyName==='')return self::fail($base,'PSTE_JOURNAL_AUTO_SUBJECT_NOT_PROVEN');
          $familyKey=$sourceFamilyKey!==''?$sourceFamilyKey:hash('sha256','PSTE_JOURNAL_AUTO_SCOPE_V1|'.(string)$classification['category_key'].'|'.PSTE_Normalizer::exactTopicIdentityText($raw));
          $normalization=['contract'=>'PSTE_EDITORIAL_TOPIC_NORMALIZER_V2','raw_query'=>$raw,'raw_query_sha256'=>hash('sha256',$raw),'family'=>$familyName,'normalized_topic'=>rtrim($raw," ?\t\n\r\0\x0B"),'subject_topic'=>$familyName,'semantic_probe'=>PSTE_Editorial_Topic_Normalizer::semanticProbe($raw),'qualifier'=>'','relation'=>'','detected_action'=>'','intent_signals'=>['JOURNAL_COMPLEX_QUESTION'],'status'=>'PASS','reason_codes'=>['PSTE_JOURNAL_AUTO_MEANING_PRESERVED'],'review_flags'=>[],'raw_query_modified'=>false,'write_attempted'=>false];
@@ -695,7 +685,7 @@
          $payload['normal_metadata_path']=$result;
          $payload['raw_keyword_preserved']=$raw;$payload['raw_keyword_sha256']=$raw!==''?hash('sha256',$raw):'';
          $payload['metadata_handoff_fields']=['title','target_keyword','category','article_type','plan_slot'];
-@@ -340,6 +457,7 @@
+@@ -340,5 +457,6 @@
          $payload['sandbox_required']=($result['status']??'')==='SANDBOX_REQUIRED';
          $payload['sandbox_admission_mode']=(string)($result['sandbox_admission_mode']??'');         $payload['structure_gap_backlog_required']=!empty($result['structure_gap_backlog_required']);
 +        $payload['category_backlog_required']=!empty($result['category_backlog_required']);
