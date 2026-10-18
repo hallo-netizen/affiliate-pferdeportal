@@ -4171,3 +4171,49 @@ Code/Text/Render ist lokal belastbar. Portalweiter visueller Bild-PASS bleibt of
 
 NEXT:
 1.50.679 als Testkandidat installieren. Bei sichtbarer Unschärfe nur die betroffenen 600×320-Hero-Master ersetzen; Text- und Layoutlogik nicht erneut umbauen.
+
+
+---
+
+## PU-20261018-087 – HD-003 1.50.680 / wiederholten Releaseketten-Fatal aus 1.50.679 repariert
+
+REALER BEFUND:
+Nach Installation von 1.50.679 kritischer WordPress-Fehler.
+
+EXAKTE URSACHE:
+- Main → `Hobby_Depot_Profile_V150679`;
+- V150679 `route_template()` → V150678-Templates;
+- V150678-Templates → `Hobby_Depot_Profile_V150678`;
+- aktive Versionskette damit gemischt.
+
+KORREKTUR:
+KISS, keine Funktionsänderung:
+- Main 1.50.680;
+- neue Profilklasse V150680 aus exakt V150679;
+- Route auf neue Front-/Contenttemplates V150680;
+- beide Templates rufen ausschließlich V150680.
+
+DELTA:
+- 1 Datei geändert: `pferde-template-kit.php`;
+- 3 Dateien neu: Profilklasse + 2 Templates;
+- 0 entfernt;
+- 901/901 Bildassets identisch;
+- Texte/Hero/Mega/Kategoriebaum unverändert.
+
+QA:
+- PHP 87/87 PASS;
+- ZIP PASS;
+- reale Front-Route PASS;
+- reale Content-Route PASS;
+- beide Templates positiv mit V150680 ausgeführt PASS;
+- beide Templates negativ mit nur V150679 erwartungsgemäß FAIL;
+- Paketdelta exakt geprüft.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.680_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX.zip`
+
+SHA-256:
+`ed34fece94970fc5be1ddd9c4116f1cb5029360a99515484a2656f19b307b40a`
+
+NEXT:
+1.50.680 installieren und realen WordPress-Frontend-Readback durchführen.
