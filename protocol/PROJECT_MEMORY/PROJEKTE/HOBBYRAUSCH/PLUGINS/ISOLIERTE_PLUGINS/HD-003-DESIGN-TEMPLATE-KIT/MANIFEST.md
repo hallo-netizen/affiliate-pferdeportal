@@ -1,38 +1,35 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-18
-STATUS: **1.50.677 AUDIO IMAGE-3Q/SINGLELINE LOCAL HARD PASS / LIVE-CHECK OFFEN**
+STATUS: **1.50.678 DYNAMIC TEXTSAFE HERO LOCAL HARD PASS / LIVE-CHECK OFFEN**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
 LIVE:
-1.50.676
-
-KANDIDAT:
 1.50.677
 
+KANDIDAT:
+1.50.678
+
 ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.677_HOBBY_DEPOT_AUDIO_IMAGE_3Q_SINGLELINE_FIX_HARDPASS.zip
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
 
 SHA-256:
-e0b5b6819f91c7e43b2f6929a04ef97d83d51db34404d87b39506aff9f9c5f16
+33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
 
 SCOPE:
-nur Audio-&-HiFi-Hero-Feintuning.
+Audio-&-HiFi-Hero-Pilot: dynamischer Beige-/Textbereich, nowrap H1/Kurzzeile, Block höher.
 
 UNVERÄNDERT:
 - 901/901 Assets;
 - alle anderen Kategorien;
 - Mega-Menü;
-- Kategoriebaum;
-- Audio-Langtext/Karten.
+- Kategoriebaum.
 
 QA:
-- PHP 78/78;
+- PHP 81/81;
 - Release-Kette PASS;
-- Unterstrich 98 %;
-- Kurzzeile nowrap;
 - WordPress-Pluginwurzel korrekt;
 - ZIP PASS;
-- Roundtrip 1047/1047.
+- Roundtrip 1050/1050.
