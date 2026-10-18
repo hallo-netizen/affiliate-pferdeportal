@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 DETAIL-ROLLOUT GEBAUT / 1.50.691 VOLLSTÄNDIGES TEMPLATE-KIT GEBAUT / STARTSEITE RUHIGE WELTBILDER + QUERBANNER / HAUPTKATEGORIE-HEROS UNVERÄNDERT / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.691 VOLLPAKET GEBAUT / 1.50.692 SCHUHMACHEREI-TEXTPILOT GEBAUT / TEXTREGELN VERSCHÄRFT / GESAMTROLLOUT ERST NACH PILOTABNAHME**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.3 / 2026-10-18**
 
@@ -320,3 +320,35 @@ QA:
 
 NEXT:
 **Das vollständige 1.50.691 als normales Update über das bestehende Affiliate Portal Template Kit installieren/überschreiben und Startseite prüfen.**
+
+
+## 1.50.692 – SCHUHMACHEREI-TEXTPILOT
+
+Zweck:
+Vor dem Umschreiben des gesamten Detailbestands wird **nur Schuhmacherei** als verbindlicher Musterfall umgesetzt.
+
+Pilotänderungen:
+- sichtbarer Lead: 51 Wörter, erklärt für völlige Anfänger, was Schuhmacherei ist, was man dabei macht und was typisch ist;
+- Gesamttext: 164 Wörter, logisch zusammenhängend, ohne Kacheln in Satzform nachzuerzählen;
+- verbotene Generatorphrasen im Schuhmacherei-Text entfernt;
+- Zwischenüberschrift: `Mehr zur Schuhmacherei`;
+- alle neun Schuhmacherei-Kacheluntertitel fachlich konkret neu formuliert;
+- sichtbarer Lead nur bei Schuhmacherei als ruhiger hell-petrolfarbener Block;
+- Kettenhemd, Startseite, Hauptkategorie-Heros und alle anderen Hobbytexte bleiben in diesem Pilot unangetastet.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
+
+SHA-256:
+`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
+
+QA:
+- PHP 120/120 PASS;
+- ZIP-Integrität PASS;
+- aktive Main-/Profil-/Template-Kette V150692 PASS;
+- Schuhmacherei Lead 51 Wörter;
+- Schuhmacherei Gesamttext 164 Wörter;
+- verbotene Altphrasen im Pilottext: 0 Treffer.
+
+NEXT:
+**Schuhmacherei real ansehen und Text-/Blocklogik abnehmen. Erst danach dieselbe Qualitätslogik auf den Gesamtbestand anwenden.**
