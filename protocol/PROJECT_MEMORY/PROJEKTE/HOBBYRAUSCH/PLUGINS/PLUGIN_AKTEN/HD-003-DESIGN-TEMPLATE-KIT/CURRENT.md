@@ -3,47 +3,49 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.679 LIVE-VERSUCH FATAL / 1.50.680 RELEASEKETTEN-FIX GEBAUT / LOKAL POSITIV+NEGATIV PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.680 FRONTEND-WIEDERHERSTELLUNG BESTÄTIGT / 1.50.681 NO-ZOOM + KOMPAKTER TEXT GEBAUT / LOKAL POSITIV+NEGATIV+VISUELL PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.680_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.681_HOBBY_DEPOT_NOZOOM_COMPACT_TEXT.zip`
 
 SHA-256:
-`ed34fece94970fc5be1ddd9c4116f1cb5029360a99515484a2656f19b307b40a`
+`37ac20a8f6d00e6b3ab8501b186c3087867b0c397d4d33d0d14df1ae84b85e9d`
 
-## Fehler 1.50.679
+## Scope
 
-Aktive 1.50.679-Profilklasse routete noch auf die 1.50.678-Templates. Diese riefen die 1.50.678-Profilklasse auf. Dadurch entstand der reale WordPress-Fatal.
+Nur Hub2-Darstellung:
+- Hero-Bild nicht mehr gezoomt/cropped;
+- festes 600:320-Verhältnis auf allen Breakpoints;
+- 600px-Bilder nie über 600px dargestellt;
+- größere Master nur verkleinert;
+- weicher Beigeübergang erhalten;
+- sichtbarer Kategorietext ein Absatz ohne Leerzeile;
+- Abstände und Chevron kompakter.
 
-## Fix 1.50.680
-
-Nur die Versionskette repariert:
-- Main 1.50.680;
-- Profilklasse V150680;
-- Route Front → Template V150680;
-- Route Content → Template V150680;
-- beide Templates rufen ausschließlich Profilklasse V150680.
-
-Unverändert:
-- 69 Hub2-Texte;
-- Hero-/Fullbleed-Logik;
+Keine Änderung:
 - 901 Bildassets;
+- Textwortlaut;
+- 69 Hub2-Zuordnungen;
 - Mega-Menü;
 - Kategoriebaum.
 
 ## QA
 
-- PHP 87/87 PASS;
+- PHP 90/90 PASS;
 - ZIP PASS;
-- Front-Route real PASS;
-- Content-Route real PASS;
-- Fronttemplate real mit V150680 PASS;
-- Contenttemplate real mit V150680 PASS;
-- Negativtest mit ausschließlich V150679 scheitert an V150680 wie erwartet;
-- Delta zu 1.50.679: 1 Datei geändert, 3 Dateien neu, 0 entfernt;
-- 901/901 Bildassets identisch.
+- Route Front V150681 PASS;
+- Route Content V150681 PASS;
+- beide Templates positiv PASS;
+- beide Templates negativ gegen V150680 erwartungsgemäß FAIL;
+- 69/69 Hub2-Render PASS;
+- Paketdelta: 1 geändert / 3 neu / 0 entfernt;
+- 901/901 Assets identisch;
+- visueller Inline-Chromium-Test 1440/1024/901/900/760/390 PASS;
+- echte 600px-Quelle: gerendert maximal 600px;
+- echter 1600px-Master: gerendert maximal 600px;
+- gleiches 600:320-Bildformat Desktop/Mobil.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.680 installieren und realen WordPress-Frontend-Readback durchführen.**
+**1.50.681 installieren und WordPress-Readback von Schärfe, identischem Bildausschnitt und kompakter Textdarstellung durchführen.**
