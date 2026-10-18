@@ -5,6 +5,8 @@
 STAND: 2026-10-18
 STATUS: **LIVE 1.50.677 / DYNAMISCHER TEXTSICHERER HERO 1.50.678 LOCAL HARD PASS / LIVE OFFEN**
 
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.6 / 2026-10-18**
+
 ## Reales Live-Ergebnis 1.50.677
 
 - Bildanteil mit starrem 3/4-Ziel zu aggressiv;
