@@ -309,3 +309,49 @@ In `PSTE_FOUR_WORKERS_UNIFIED_EXISTING_PLUGIN_20261017.patch` ist die alte Reihe
 ### 18.10.2026 – weiterer KISS-Abbau: unzulässigen Doppel-Titelzwang entfernt
 Im **gleichen** `PSTE_FOUR_WORKERS_UNIFIED_EXISTING_PLUGIN_20261017.patch` wurde eine alte falsche Vorabregel gelöscht: Der Titelarbeiter erzwang vor der Fach-/Magazin-Entscheidung gleichzeitig `PSTE_Title_Pipeline::validateExistingTitle(...,'FAQ',...)` **UND** `...,'Journal',...` und hielt ein Thema schon dann an, wenn nur einer dieser beiden Typ-Checks ablehnte. Jetzt genügt für den typunabhängigen zweiten Arbeitsschritt ein bereits bestehender erfolgreicher Titelnachweis in **einem** der beiden Typen; der tatsächlich ausgewählte Fach-/Magazin-Pfad führt seine endgültige Typ-/Signatur-/Risiko-/Kategorieprüfung weiterhin unabhängig unverändert durch. **Entfernt** ist der falsche doppelte Admission-Block, nicht die Qualitätsprüfung; keine neue Regel, keine neuen Tabellen/Klassen oder Vorzugsfamilien. Quelle: Commit `274ec9423662f3a46cbf7777cda52dabad7db0f0`, Patch-Blob `6fd0008a6797752f4cd1eaae70f434761598ec22`.
 Beleg: 13 Dateien / 38 Diff-Hunks ohne widersprüchliche Basiskontexte, korrekte Header-/Zeilenzählung und exakte In-Memory-Transformation PASS; alte `if(empty($check['ok']))return $base;`-Doppelabbruchregel im resultierenden Teil nachweislich weg. **Keine ausgeführte PHP-Regression gegen vollständiges Original, keine 5014-E2E-Abnahme; kein Release.** Autoritative Current-/NEXT-ACTION weiter nur `CURRENT_STATE.md`.
+
+### 18.10.2026 – zentraler Automatik-Controller: Testquellstand ohne Release
+**Ausgangspunkt (bytegebunden)** PSTE 0.57.107, ZIP SHA256 `628bb4cb0352c85b58a34a5d4ddc1b0b44f269cc9342c9f961a31fba0be27460`. **Nur bestehende Datei** `includes/class-pste-admin.php`. Arbeitsdatei SHA256 `b5434b6cde72ad8118fd39bb3b070fc548b7618731e480ffd4711754da6f1362`.
+Zwei **bestehende widersprüchliche Altverzweigungen entfernt**: kompletter Existing-Only-Queue-Worker darf bei bereits abgeschlossenem Kontext nicht auf JEDEM AJAX-Schritt erneut durch den mutierenden Portal-Preflight; Status `COMPLETE` darf nach ungültigem Abschlussbeleg nicht in `startExistingOnly()` (Append-Neustart) fallen. Alle alten Queue-/Semantik-/Hash-/PSERC-/K0-/PPM-Prüfungen bleiben unverändert. Genau **ein** Controller, keine zusätzliche Arbeiterübergabe.
+Reproduzierbarer Mindestdiff in dem tatsächlichen 0.57.107-Controller:
+```diff
+@@ -485,8 +485,19 @@
+-            $preflight=self::productionAutoPortalPreflightStep($queue);
+-            if($preflight){self::ajaxSuccess(self::productionAutoState(),$level);return;}
++            $context=PSTE_Context_Refresh::status();
++            $existingBound=is_array($queue)&&!empty($queue['existing_only'])&&
++                in_array((string)($queue['status']??''),
++                    ['RUNNING','PAUSED_ERROR','OUTCOME_UNKNOWN','COMPLETE'],true)&&
++                (string)($context['status']??'')==='COMPLETE';
++            if(!$existingBound){
++                $preflight=self::productionAutoPortalPreflightStep($queue);
++                if($preflight){self::ajaxSuccess(self::productionAutoState(),$level);return;}
++            }
+@@ -516,26 +527,24 @@
+-            $auditCurrent=PSTE_Breadth_Research_Queue::existingOnlyAuditCurrent();
+-            if(!$auditCurrent){
+-                $auditCurrent=PSTE_Breadth_Research_Queue::reuseCompletedAuditForEditorialPlanOnly();
+-            }
+-            if(!$auditCurrent){
+-                $latest=PSTE_Breadth_Research_Queue::peek();
+-                if(is_array($latest)&&!empty($latest['existing_only'])&&
+-                    in_array((string)($latest['status']??''),['RUNNING','PAUSED_ERROR','OUTCOME_UNKNOWN'],true)){
++            $latest=PSTE_Breadth_Research_Queue::peek();
++            if(is_array($latest)&&!empty($latest['existing_only'])&&
++                (string)($latest['status']??'')==='COMPLETE'){
++                if(!PSTE_Breadth_Research_Queue::existingOnlyAuditCurrent()&&
++                    !PSTE_Breadth_Research_Queue::reuseCompletedAuditForEditorialPlanOnly())
++                    throw new RuntimeException('PSTE_PRODUCTION_COMPLETED_AUDIT_EVIDENCE_NOT_CURRENT');
++            }else{
++                if(is_array($latest)&&in_array((string)($latest['status']??''),
++                    ['RUNNING','PAUSED_ERROR','OUTCOME_UNKNOWN'],true)){
+                     self::ajaxSuccess(self::productionAutoState(),$level);return;
+                 }
+-                PSTE_Breadth_Research_Queue::startExistingOnly(200,PSTE_Plugin::settings());PSTE_Research_Driver::kick(0,'PRODUCTION_AUTOMATION_START_EXISTING');
++                PSTE_Breadth_Research_Queue::startExistingOnly(200,PSTE_Plugin::settings());
++                PSTE_Research_Driver::kick(0,'PRODUCTION_AUTOMATION_START_EXISTING');
+                 self::ajaxSuccess(self::productionAutoState(),$level);return;
+             }
+```
+**Ausgeführt**: 79/79 PHP Syntax PASS, 16 Originaladmin-AJAX-Assertions (mit explizitem WP-/PSERC-Mock) PASS, 24 originale PSTE→PSERC→K0→PPM-Quellvertrag-Assertions PASS, 7 originale Queue-Fingerprint-/5014-Synthetik-Assertions PASS, 8 weitere Admin-Testfälle PASS. Beim ersten neuen Test wurde ein Testvorbereitungsfehler (nicht zurückgesetztes Mock-Auditflag) erkannt, korrigiert, und **alle Tests neu vollständig PASS**. Positive Checkpoints 4880/5014 bleiben erhalten; negative geänderte/ungültige Prüfnachweise erzeugen keine neue Queue und keine Produktionsfreigabe.
+**BLOCKED**, weil der Live-WordPress-Screenshot 5014/5014 + `PSTE_EXISTING_ONLY_COMPLETED_AUDIT_CHANGED_PROGRESS_PRESERVED` zeigte, der signierte Ist-Datenbankreceipt/Checkpoint-Fingerprint aber nicht lokal vorliegt. Damit ist **kein 1:1-Gesamtworkflow-PASS** belegbar, keine installierte Korrektur/Release. Bei echtem Belegdrift würde der geänderte Controller **sicher blockieren**; er erfindet keinen Pass. Nicht als fertige Pluginversion anbieten.
