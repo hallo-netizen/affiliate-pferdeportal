@@ -1,5 +1,29 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – WICHTIGE RÜCKNAHME DER ALTEN "ALLE FOTOS GEPRÜFT"-AUSSAGE; DESIGN 0.1.40 NUR HAUS & WOHNUNG
+
+**Das frühere "alle 36 Bereiche bildinhaltlich geprüft/PASS" bei 0.1.39 war falsch.** Nutzer-Livescreenshot 18.10.2026 12:53 zeigt auf der realen WordPress-Seite `Einbruch & Diebstahl → Haus & Wohnung` **SIEBEN** konkrete Kachelthemen, während die vorherige QA genau diese Seite nur gegen DREI Kinder aus `nodes.json` simulierte. Konkret zu sehen: "Tresore" mit Torfoto, "Selbstschutz bei Einbruch" mit Fahrzeug/Wohnmobil, "Selbstschutzmittel" mit Werkstatt, "Alarm & Kamera" mit allgemeinem Nacht-Haus. Die frühere Prüfung auf Bild-Laden, Bildgröße und Nicht-Duplikate war KEINE fachliche Motivprüfung und darf nie mehr als solche behauptet werden.
+
+**Ursache verifiziert im bestehenden Code:** `includes/area-design-prototype.php` `hbdp_area_child_photo` nutzt für nicht genau bekannte Kachelthemen eine generische `topic_fallbacks`/Bereichsfoto-Liste; die Bildzuweisung hängt zudem von der Reihenfolge der Themenkarten und bereits verwendeten Bildidentitäten ab. Ein technisch geladenes Bild kann dadurch inhaltlich offenkundig falsch sein.
+
+**Gezieltes Update 0.1.40 NUR für diesen einen Bereich:** Komplettes originales Designplugin in `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.40_HAUS_WOHNUNG_BILDER_REALTEST.zip` (SHA-256 `68e9894c84b9f315d00519c25f96def0c8e0182d6643583a78a043a131708c2e`, 30.346.963 Bytes). Gegenüber 0.1.39 **genau zwei bestehende Dateien geändert:** Plugin-Hauptdatei (Versions-/Asset-Cache), `includes/area-design-prototype.php`; **zwei** neue WebP-Motive (neuer deutlicher Hauseingang mit Sicherheitstechnik, neues Szenenfoto eines tragbaren Personenalarms im Eingangsbereich). **Alle anderen 35 Ebene-2-Seiten, sechs Welten, Startseite und vorhandene Bilder/Fachtexte unverändert.** Bildauswahl für die sieben live sichtbaren Titel per Name und exakter Elternwelt fest, ohne Verwendung generischer Zufalls-/Fallbackfotos:
+- Haustürschlösser → `new-door.webp` (echte Eingangstür)
+- Tresore → `home-focus-wertsachen.webp` (sichtbarer Tresor/Wertsachen)
+- Selbstschutz bei Einbruch → `area-selbstschutz-bei-einbruch.webp` (Hauseingang mit Kamera/Türcode)
+- Selbstschutzmittel → `area-selbstschutzmittel-personenalarm.webp` (Personenalarm/Schlüssel im Zuhause)
+- Mechanik & Zugang → `new-gate.webp` (gesichertes Zugangstor)
+- Alarm & Kamera → `magazin-einbruch.webp` (sichtbare Kamera)
+- Wertsachen & Schadenfall → `fix-130-vandal-fassade.webp` (sichtbare beschädigte Glasscheibe/Fassade – **Schadenfall-Aspekt**, nicht Tresor; redaktionelle Motivwahl kann bei echter Sichtprüfung noch verbessert werden).
+Bei unbekanntem weiteren Kachelthema **in exakt diesem Bereich** kein falsches Bild, sondern eine normale Kachel ohne Foto. Die beiden vorhandenen neuen Foto-Assets sind echte 1672×941-Pixel-Fotos (kein Upscaling). Kein neuer Fremdserver im WordPress-Frontend.
+
+**Lokale Tests, korrekt begrenzt:** 9/9 PHP-Syntax, PHP-Rendering aller 36 Alt-Snapshot-Bereichsseiten ohne PHP-Fehler (dies ist KEINE Motiv-Fachabnahme); gesonderte PHP-Simulation mit **exakt 7 aus dem Nutzerscreenshot gelesenen Titeln**, 7/7 explizite Dateizuordnungen und ein unbekannter Negativfall ohne beliebiges Bild; 3 echte Chromium-Ansichten dieses 7er-Falls (390/980/1440 Pixel), jeweils 7 Bilder vorhanden/geladen, rechteckiger Rahmen, 0 Überlauf, ZIP-Integrität vollständig PASS. Bilder wurden von Hand anhand des siebenfachen Kontaktblatts angesehen, aber diese lokale Prüfung ersetzt **nicht** die tatsächliche WP-Ansicht und ist keine behauptete fachliche Gesamtfreigabe aller 36 Bereiche. Insbesondere die vielen C2.2-Kinder auf anderen Bereichsseiten bedürfen nachweislich noch echter semantischer Überprüfung.
+
+**GENAU EINE DESIGN-NEXT ACTION:** Bestehendes Designplugin mit 0.1.40 aktualisieren und **zunächst die tatsächlich betroffene Seite Haus & Wohnung** gegen den Screenshots-Bestand begutachten. Anschließend aus der echten Live-Kategorienstruktur die vollständigen C2.2-Kindernamen je Bereich für eine eigene Gesamt-Motivabnahme ziehen. Nicht mehr pauschal "alle 36 Bilder überprüft" sagen, solange der tatsächliche Live-Snapshot und die Semantik nicht zusammen geprüft wurden.
+
+---
+
+
+
 ## 18.10.2026 – DESIGN 0.1.39 – STARTSEITEN-/BEREICHSFOTOS UND AUSFÜHRLICHE FACHINHALTE – LOCAL PASS
 **Aktuellster DESIGNSCOPE-Stand:** Vollständiges WordPress-Update des bisherigen Plugins `hab-bewahr-design-vorschau` in persönlicher Library `/Eigentumsschutz/Design/HAB_UND_BEWAHR_DESIGN_0.1.39_BILDER_TEXTE_KORREKTUR.zip`. SHA-256 `56c2417a475d72b2ee109db56b6a8df86c2994840b8fb2d8c44a6ad3019e39cc`; 29.932.864 Bytes; 148 ZIP-Einträge; CRC-Integrität PASS. Baseline 0.1.38: **9 vorhandene Dateien geändert, 25 neue Bilddateien**, 0 entfernt. Keine WordPress-DB-/Kategorie-Schreiboperationen.
 **Nutzerfehler:** Unscharfe bzw. unpassende Startseiten-Schutzobjektfotos, Bilder teils außerhalb des Kachelrahmens; Foto auf Startseite soll exakt das Foto auf der verlinkten Zielkategorie sein; farblich abweichender Hero-Verlauf; auf Ebene 2 unpassende Themenfotos und nicht entsprechend Ebene 1 eingerahmte Fachtextbilder, zu kurze Fachtexte.
