@@ -3,71 +3,64 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.676 / AUDIO-HERO FEINTUNING 1.50.677 LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **LIVE 1.50.677 / DYNAMISCHER TEXTSICHERER HERO 1.50.678 LOCAL HARD PASS / LIVE OFFEN**
 
-## Reales Live-Ergebnis 1.50.676
+## Reales Live-Ergebnis 1.50.677
 
-Vom Nutzer bestätigt:
-- Hero-Höhe jetzt okay;
-- Claim sitzt vertikal grundsätzlich richtig;
-- Pinselunterstrich ist jetzt zu kurz;
-- Bild soll noch deutlich breiter wirken, Ziel ungefähr drei Viertel der Hero-Fläche;
-- die kurze Zeile unter der H1 soll in jedem Fall einzeilig bleiben.
+- Bildanteil mit starrem 3/4-Ziel zu aggressiv;
+- H1 konnte bei breitem Fenster umbrechen;
+- Textblock soll als Ganzes etwas höher;
+- Kurzzeile bleibt einzeilig;
+- Beige-Bereich soll sich sinnvoll an die tatsächliche Textbreite anpassen statt überall starr gleich breit zu sein.
 
-## 1.50.677 – nur Audio & HiFi
-
-Keine andere Kategorie geändert.
-
-Korrektur:
-- Unterstrich auf ca. Claim-Textlänge: 98 % der realen Claim-Breite;
-- bestehende Claim-Höhe/Position bleibt unverändert;
-- Bildanteil optisch verbreitert:
-  - >1180 px Text-/Verlaufszone 30 %;
-  - 901–1180 px Text-/Verlaufszone 35 %;
-  - Bild liegt weiterhin als ein einziges Fullbleed-Masterbild über 100 % des Hero;
-- Bildposition leicht nach links verschoben, damit mehr Motiv sichtbar bleibt;
-- Kurzzeile unter H1: white-space nowrap, kein Umbruch;
-- Mobil-Schrift skaliert nur soweit, dass die Zeile ebenfalls einzeilig bleibt;
-- <=900 px bleibt der stabile gestapelte Weg mit 100-%-Bildbreite.
+## 1.50.678 – zentrale dynamische Fullbleed-Regel
 
 Performance:
-- kein neues Bild;
-- kein zusätzlicher Request;
+- reine CSS-Lösung;
 - kein JavaScript;
-- kein Blur/Masking;
-- nur zentrale CSS-Regel in der vorhandenen Fullbleed-Klasse.
+- keine Laufzeitmessung;
+- kein zusätzlicher Bildrequest;
+- keine neue Datenbank-/Frontend-Abfrage.
+
+Mechanik:
+- bestehendes Hero-Bild bleibt fullbleed über 100 %;
+- Beige-/Textbereich folgt der tatsächlichen Breite des Schriftblocks;
+- auf Desktop min. 35 %, max. 48 %;
+- bei 901–1180 px min. 42 %, max. 58 %;
+- der Übergang ins Bild hängt als reiner CSS-Verlauf direkt an diesem dynamischen Textbereich;
+- H1, Claim und Kurzzeile bleiben auf Desktop nowrap;
+- kompletter Schriftblock ca. 10 px höher über angepasste Innenabstände;
+- <=900 px bleibt die stabile gestapelte Variante.
+
+Die zentrale Klasse ist weiterhin nur an Audio & HiFi gebunden, bis der Pilot live bestätigt ist.
 
 Unverändert:
-- Hero-Bilddatei;
-- H1;
-- Claimtext;
-- Kurztext-Wortlaut;
-- Langtext;
-- Karten;
-- Mega-Menü;
+- 901/901 Assets;
 - alle anderen Kategorien;
-- 901/901 Assets.
+- Mega-Menü;
+- Kategoriebaum;
+- Audio-Langtext und Karten.
 
 ## QA
 
 Artefakt:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.677_HOBBY_DEPOT_AUDIO_IMAGE_3Q_SINGLELINE_FIX_HARDPASS.zip
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
 
 SHA-256:
-e0b5b6819f91c7e43b2f6929a04ef97d83d51db34404d87b39506aff9f9c5f16
+33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
 
 PASS:
-- PHP 78/78;
-- aktive Release-Kette vollständig 1.50.677;
-- keine aktive 1.50.676-Routen-/Klassenreferenz;
-- Unterstrich 98 % der Claim-Breite;
-- Desktop-Copy-/Verlaufszone 30/35 %;
-- Kurzzeile explizit nowrap;
-- 901 Assets unverändert;
+- PHP 81/81;
+- aktive Release-Kette vollständig 1.50.678;
+- keine aktive 1.50.677-Routen-/Klassenreferenz;
+- H1 nowrap auf Desktop;
+- Kurzzeile nowrap;
+- dynamische Copy-Zone mit min/max Grenzen;
+- 901/901 Assets identisch;
 - WordPress-Pluginwurzel korrekt;
 - ZIP-Test PASS;
-- Roundtrip 1047/1047 byte-identisch.
+- Roundtrip 1050/1050 byte-identisch.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.677 über 1.50.676 installieren und nur Audio & HiFi prüfen: Unterstrichlänge, breiteres Bild und einzeilige Kurzzeile.**
+**1.50.678 über 1.50.677 installieren und Audio & HiFi breit sowie halbbreit prüfen.**
