@@ -4324,3 +4324,64 @@ SHA-256:
 
 NEXT:
 Nur Metall live vergleichen. Keine Portalübertragung vor Nutzerentscheidung.
+
+
+---
+
+## PU-20261018-090 – HD-003 1.50.684 / Metall-Standard auf alle 69 Hub2 ausgerollt
+
+NUTZERFREIGABE:
+Metall 1.50.683 wurde für Hero-Bild und Text/Kartenwirkung abgenommen.
+
+VERBINDLICHE BILDREGEL:
+- aktuelles Hero-Prinzip bleibt;
+- Claim + H1 + Kurzsatz links auf gleicher Höhe wie das Bild;
+- pro Hub2 bestmöglichen Original-/Masterstand derselben vorhandenen Szenerie verwenden;
+- horizontalen Bildinhalt erhalten;
+- Hero nur durch oberen/unteren Beschnitt flacher machen;
+- kein seitlicher Zoom/Crop;
+- kein Upscaling;
+- Mobil dieselbe Szene.
+
+MASTERROLLOUT:
+- 69/69 aktive Hub2 mit statischem Szenenmaster;
+- 45 aus größeren wiedergefundenen Originalquellen derselben Szene;
+- 19 aus bereits vorhandenen 1600×853-Heroquellen;
+- 5 nur nativ 600 px vorhanden: saatgut-zucht, rollen-balance, wurf-ziel, team-wettkampf, geschick-tricks.
+Für diese fünf: maximale Ausgabebreite 600 px, keine Vergrößerung.
+
+KARTENUNTERTITEL:
+- 328/328 aktuell vorhandene direkte Unterkategoriekarten erhalten eine eigene konkrete Kurzzeile;
+- 328 Zeilen eindeutig;
+- generische Welt-Fallbacks entfernt;
+- keine Hub2-Fallbacktexte mit loslegen / ausprobieren / praktische Einstiege / pauschalem verstehen;
+- spätere neue, noch nicht redigierte Karte: reale manuelle Kurzzeile oder leer, kein Generator-Fülltext.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.684_HOBBY_DEPOT_ALL_HUB2_SCENE_MASTER_CARDTEXT.zip`
+
+SHA-256:
+`2756075151e1996ceaa72e9057e85f1af42c181f6356867accae0ffbd43a8920`
+
+QA:
+- exakte 1.50.683-Basis;
+- PHP 96/96 PASS;
+- reale Front-/Contentroute V150684 PASS;
+- beide aktiven Templates positiv mit V150684 ausgeführt PASS;
+- Negativtest mit ausschließlich V150683 erwartungsgemäß FAIL;
+- Dirty Overlay 1.50.683 → 1.50.684 PASS;
+- 69/69 Hub2-Render PASS;
+- 328/328 Kartenuntertitel PASS;
+- alle 69 Masterdimensionen bei 1440/1180/1024/901 geprüft: 0 Upscaling, 0 seitlicher-Crop-Risiko;
+- Browser mit realen Assets 1440/1180/1024/901/900/760/390: 42/42 PASS;
+- 600-px-Sonderfall auch bei 900/760 nicht vergrößert;
+- bestehende Bildassets 894/894 byte-identisch;
+- Delta: 1 bestehende Datei geändert, 72 Dateien neu, 0 entfernt;
+- ZIP PASS;
+- Roundtrip 1136/1136 byte-identisch.
+
+ZIELVERTRAG:
+ZV-HOBBYRAUSCH-DESIGN-001 auf Fassung 4.9 nachgezogen.
+
+NEXT:
+1.50.684 installieren und WordPress-Readback über mehrere Hub2/Welten. Kein weiterer Architektur- oder Textumbau vor diesem Readback.
