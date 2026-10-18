@@ -4547,3 +4547,50 @@ ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.1.
 
 NEXT:
 1.50.687 installieren. Zuerst Kettenhemdflechten mit 4 Beitragsvorschauen und zentralen Icons prüfen, danach zwei weitere Detail-Hubs derselben Ebene.
+
+
+---
+
+## PU-20261018-094 – HD-003 1.50.688 / Kettenhemd-Kacheln klarer, kürzer, ohne H1-Dopplung
+
+NUTZERBEFUND:
+- `Weiter in Kettenhemdflechten` direkt unter H1 `Kettenhemdflechten` wirkt doppelt/holprig;
+- Kacheltitel und Untertitel zu klein;
+- Untertitel enthalten unnötige Endungen wie `sicher kennenlernen`, `sinnvoll zusammenstellen`, `praktisch einsetzen`, `richtig auswählen`;
+- `Passende Ausrüstung` passt als Überschrift nicht zu jeder Kategorie;
+- sichtbare Kurztexte dürfen niemals klein beginnen;
+- H1 soll sichtbar natürlich `Kettenhemd flechten` statt zusammengeschrieben wirken;
+- Meta-Titel später separat, jetzt ausdrücklich nicht verändern.
+
+UMSETZUNG:
+- gespeicherter WP-Titel/Slug/URL unverändert;
+- sichtbare Kettenhemd-H1 zweizeilig: `Kettenhemd` / `flechten`;
+- Kettenhemd-Kachelabschnitt: `Rund ums Kettenhemd`;
+- andere Detail-Hubs: neutral `Themen im Überblick`, solange keine natürlich redigierte Kurzform gebunden ist;
+- Produktabschnitt detail-level: `Empfehlungen`;
+- Karten min. 98 px, größere ruhige Icons, Titel 16 px, Untertitel 12,5 px;
+- dezente stärkere Kontur/Schatten, kein schrilles Design;
+- Kettenhemd-Unterzeilen auf Sachkern gekürzt;
+- FAQ-Frontendlabel `Häufige Fragen`;
+- zentrale Ausgabeprüfung hebt den ersten Buchstaben sichtbarer Kurztexte an; eBay/iPhone/iPad ausgenommen.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.688_KETTENHEMD_CARD_REFINEMENT.zip`
+
+SHA-256:
+`a57ba6a8ec158191276673d309825787cfc0ec6d0c192bed358a97e193cac843`
+
+QA:
+- PHP 108/108 PASS;
+- V150688 Front-/Contentroute PASS;
+- Templates positiv PASS;
+- Negativtest nur V150687 erwartungsgemäß FAIL;
+- Render: H1-Split / Rund ums Kettenhemd / 8 Karten / Häufige Fragen / Kurztexte PASS;
+- Füll-Endungen im Kettenhemd-Kartenpfad 0;
+- Großschreibung Negativfall PASS;
+- Delta: 1 bestehende Datei geändert + 3 neu + 0 entfernt;
+- ZIP PASS;
+- Roundtrip 1149/1149 byte-identisch.
+
+NEXT:
+1.50.688 installieren und Kettenhemd-Seite visuell prüfen. Meta-Titel erst im danach geplanten eigenen SEO-Schritt.
