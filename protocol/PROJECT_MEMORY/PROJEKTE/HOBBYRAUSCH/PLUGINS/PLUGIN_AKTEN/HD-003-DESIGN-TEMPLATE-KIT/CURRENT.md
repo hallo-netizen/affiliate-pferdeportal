@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.687 DETAIL-LEVEL-ROLLOUT GEBAUT / 395 OBJEKTE / ZENTRALE LAST-LEVEL-ICONS / 4 KETTENHEMD-DUMMYPOSTS / RELEASEKETTE+ROUNDTRIP PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.688 KETTENHEMD-KACHELREFINEMENT GEBAUT / RELEASEKETTE+ROUNDTRIP PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
@@ -66,3 +66,35 @@ Kein Zufalls-/Hash-Icon.
 ## EXAKT EINE NEXT ACTION
 
 **1.50.687 installieren und Kettenhemdflechten plus zwei weitere Seiten derselben Ebene real lesen.**
+
+
+## Kandidat 1.50.688
+
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.688_KETTENHEMD_CARD_REFINEMENT.zip`
+
+SHA-256:
+`a57ba6a8ec158191276673d309825787cfc0ec6d0c192bed358a97e193cac843`
+
+Scope:
+- Kettenhemd-H1 sichtbar als `Kettenhemd` + `flechten`;
+- Kettenhemd-Karten größer/deutlicher, aber dezent;
+- Untertitel stark gekürzt;
+- FAQ-Frontendtitel gekürzt;
+- Detail-Level-Produkttitel neutral `Empfehlungen`;
+- Detail-Level-Kachelüberschrift ohne H1-Dopplung;
+- zentrale Großschreibungsregel für sichtbare Kurztexte;
+- Meta-Titel unverändert.
+
+QA:
+- PHP 108/108 PASS;
+- reale V150688-Route PASS;
+- Templates positiv PASS;
+- V150687-Negativtest PASS;
+- Renderassertions PASS;
+- Delta 1 geändert / 3 neu / 0 entfernt;
+- ZIP PASS;
+- Roundtrip 1149/1149 PASS.
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.688 installieren und Kettenhemd-Seite visuell abnehmen.**
