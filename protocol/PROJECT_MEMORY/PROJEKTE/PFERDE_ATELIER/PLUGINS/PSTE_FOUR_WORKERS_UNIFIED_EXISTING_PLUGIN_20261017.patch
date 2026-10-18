@@ -323,7 +323,7 @@
              'five_field_handoff_created'=>false,'production_handoff_attempted'=>false,
              'article_or_taxonomy_write_attempted'=>false,'write_attempted'=>false,
          ];
-@@ -66,116 +66,144 @@
+@@ -66,116 +66,132 @@
          }
          $base['portal_relevance']='PROVEN';
  
@@ -358,18 +358,16 @@
 +        // by missing research families. The existing signature/quality gates are used
 +        // unchanged after the four decisions, before any production handoff.
 +        return self::evaluateFourWorkersAfterRelevance(
-+            $base,$analysisRaw,$raw,$baseline,$registry,$preferredFamilyKey,$relevance,$seoEvidence,$persistedTitle
++            $base,$analysisRaw,$raw,$baseline,$registry,$relevance,$seoEvidence,$persistedTitle
 +        );
 +    }
 +
 +    /** Existing classes, same source, one ordered conveyor. No new persistence or worker. */
 +    private static function evaluateFourWorkersAfterRelevance(
 +        array $base,string $analysisRaw,string $raw,array $baseline,array $registry,
-+        string $preferredFamilyKey,array $relevance,array $seoEvidence,string $persistedTitle
++        array $relevance,array $seoEvidence,string $persistedTitle
 +    ): array {
-+        // WORKER 2. A clean title (or title-candidate awaiting existing hard
-+        // checks) is retained even if NO domain family can be identified.
-+        $base=self::validatedTitleBeforeFamilyAssignment($base,$analysisRaw,$registry,$persistedTitle);
++        // Worker 2 already ran once; no repeated title pass during category selection.
 +        if(empty($base['title'])&&$persistedTitle!==''){
 +            $base['title']=$persistedTitle;$base['title_generated']=true;
 +            $base['title_candidate_only']=true;$base['title_candidate_source']='STORED_TITLE_AWAITS_HARD_REVALIDATION';
@@ -390,30 +388,25 @@
 -                $familyKey=$assignmentPreferred;$family=(array)$registry['families'][$familyKey];
 -                $familyResolution=['status'=>'MATCH','source'=>'POST_RELEVANCE_FAMILY_REVALIDATED','winner'=>['family_key'=>$familyKey,'topic_family_name'=>(string)($family['topic_family_name']??'')]];
 -            }
-+        $candidateKeys=[];
-+        if($preferredFamilyKey!==''&&isset($registry['families'][$preferredFamilyKey]))$candidateKeys[]=$preferredFamilyKey;
-+        $hintKey=(string)($relevance['family_hint']['family_key']??'');
-+        if($hintKey!==''&&isset($registry['families'][$hintKey]))$candidateKeys[]=$hintKey;
-+        foreach(array_unique($candidateKeys) as $key){
-+            $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
-+            if(empty($test['ok']))continue;
-+            $familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;
-+            $familyResolution=['status'=>'MATCH','source'=>'POST_RELEVANCE_FAMILY_HINT','winner'=>['family_key'=>$key,'topic_family_name'=>(string)($family['topic_family_name']??'')]];
-+            break;
-         }
-         if($familyKey===''){
-             $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
+-        }
+-        if($familyKey===''){
+-            $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
 -            if(($familyResolution['status']??'')==='MATCH'&&is_array($familyResolution['winner']??null)){
 -                $familyKey=(string)($familyResolution['winner']['family_key']??'');$family=(array)($registry['families'][$familyKey]??[]);
 -                if($familyKey!==''&&$family)$membership=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$familyKey);
-+            if(($familyResolution['status']??'')==='MATCH'){
-+                $key=(string)($familyResolution['winner']['family_key']??'');
-+                if($key!==''&&isset($registry['families'][$key])){
-+                    $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
-+                    if(!empty($test['ok'])){$familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;}
+-            }
+-        }
++        // Original DataForSEO family labels are only evidence, never preferred routing.
++        $familyResolution=PSTE_Family_Identity_V2::resolve($probe!==''?$probe:$analysisRaw,$registry);
++        if(($familyResolution['status']??'')==='MATCH'){
++            $key=(string)($familyResolution['winner']['family_key']??'');
++            if($key!==''&&isset($registry['families'][$key])){
++                $test=PSTE_Family_Membership::evaluate($probe!==''?$probe:$analysisRaw,$registry,$key);
++                if(!empty($test['ok'])){
++                    $familyKey=$key;$family=(array)$registry['families'][$key];$membership=$test;
 +                }
-             }
-         }
++            }
++        }
          $base['family_resolution']=$familyResolution;$base['family_membership']=$membership;
 -        if($familyKey===''||!$family||empty($membership['ok'])){
 -            // Generic additive extension point. The core miss is never evidence.
