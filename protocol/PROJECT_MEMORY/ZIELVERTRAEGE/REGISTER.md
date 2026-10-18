@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-10-17
+STAND: 2026-10-18
 
 ## Pflichtfelder
 
