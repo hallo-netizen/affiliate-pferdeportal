@@ -3,37 +3,48 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.683 METALL-PILOT GEBAUT / RELEASEKETTE POSITIV+NEGATIV PASS / VISUELLER METALL-TEST PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.683 METALL ABGENOMMEN / 1.50.684 69-HUB2-ROLLOUT GEBAUT / LOKAL POSITIV+NEGATIV+RESPONSIVE PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.683_METALL_SCENE_MASTER_CARDTEXT_PILOT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.684_HOBBY_DEPOT_ALL_HUB2_SCENE_MASTER_CARDTEXT.zip`
 
 SHA-256:
-`96315f620599527093fc8d9a6c380159b33bcf0b33dbbfc42dbc214c8580ec0a`
+`2756075151e1996ceaa72e9057e85f1af42c181f6356867accae0ffbd43a8920`
 
 ## Scope
 
-Nur Metall:
-- hochauflösender 2070×760-Szenenmaster derselben Bildquelle;
-- Desktop horizontal vollständig erhalten, nur vertikal beschnitten;
+Portalweit für alle 69 Hub2:
+- akzeptierte Metall-Hero-Logik;
+- Original-/Master-Szenerie horizontal erhalten;
+- Desktop nur vertikaler Zuschnitt;
 - kein Upscaling;
 - Mobil dieselbe Szene;
-- aktueller beige/fade Hero mit Text auf gleicher Höhe bleibt;
-- fünf Metall-Kartenuntertitel individuell statt Welt-Schablone.
+- 69 statisch gebundene Masterdateien;
+- 328 individuelle Unterkategorie-Kurzzeilen;
+- generischer Hub2-Welt-Untertitel-Fallback entfernt.
+
+Masterquellen:
+- 45 größere wiedergefundene Originalquellen derselben Szene;
+- 19 vorhandene 1600×853-Heroquellen;
+- 5 native 600-px-Quellen mit hartem 600-px-Ausgabelimit.
 
 ## QA
 
-- PHP 93/93 PASS;
+- PHP 96/96 PASS;
+- Front-/Contentroute V150684 PASS;
+- beide Templates positiv V150684 PASS;
+- Negativ gegen ausschließlich V150683 erwartungsgemäß FAIL;
+- Dirty Overlay 1.50.683 → 1.50.684 PASS;
+- 69/69 Hub2-Render PASS;
+- 328/328 Kartenzeilen PASS;
+- Browser 42/42 repräsentative Responsive-Fälle PASS;
+- 69/69 Master rechnerisch: kein Upscaling, kein seitlicher Desktop-Crop;
+- bestehende Bilder 894/894 byte-identisch;
+- Paketdelta: 1 bestehende Datei geändert / 72 neu / 0 entfernt;
 - ZIP PASS;
-- Route/Template V150683 positiv PASS;
-- Negativtest V150682 PASS;
-- 893 bestehende Bildassets unverändert;
-- 1 neuer Metall-Master;
-- Browser 1440/1180/1024/901/900/760/390 PASS;
-- kein seitlicher Desktop-Crop;
-- kein horizontaler Overflow.
+- Roundtrip 1136/1136 byte-identisch.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.683 installieren und Metall real abnehmen.**
+**1.50.684 installieren und portalweiten WordPress-Readback durchführen.**
