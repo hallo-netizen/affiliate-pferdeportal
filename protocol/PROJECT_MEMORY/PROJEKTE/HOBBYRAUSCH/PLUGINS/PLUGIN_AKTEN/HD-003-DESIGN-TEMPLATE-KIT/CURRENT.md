@@ -3,47 +3,46 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LIVE 1.50.677 / 1.50.678 LETZTER GEBAUTER KANDIDAT / 1.50.679 HUB2-ROLLOUT VORBEREITET / KEIN RELEASE-PASS**
+STATUS: **LIVE 1.50.677 / 1.50.679 AUS EXAKTER 1.50.678 GEBAUT / CODE+RENDER PASS / VISUELLER BILD-READBACK OFFEN / KEIN RELEASE-PASS**
 
-## Letzter gebauter Kandidat
+## Kandidat
 
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.679_HOBBY_DEPOT_ALL_HUB2_TEXT_HERO_ROLLOUT.zip`
 
 SHA-256:
-33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
+`721a7843c862cc59b47d80e51035d589220a56ecf4a5a8caad2307e921801f4d`
 
-Der frühere Local-Hard-PASS bleibt zurückgezogen.
-
-## Neuer verbindlicher Scope 1.50.679
+## Scope
 
 Alle aktuell **69 Hub2-Seiten**:
-- Audio-&-HiFi-Fullbleed-/dynamische Beige-Regel portalweit;
-- Desktop H1, Claim und Kurzzeile einzeilig;
-- <=900 px gestapelt;
-- 69 eigenständig redigierte 150–200-Wörter-Kategorietexte statt Generator-Schablone;
-- sichtbar ungefähr ein Drittel, nie mehr als die Hälfte;
-- Rest über kleinen Chevron/Pfeil aufklappbar;
-- kein sichtbarer `Mehr zu <Kategorie> erfahren`-Text;
-- zugängliche Screenreader-Beschriftung bleibt;
-- kein Hub2-Seitenendtext.
+- bestehende dynamische 1.50.678-Fullbleed-Regel portalweit gebunden;
+- 69 individuelle 150–200-Wörter-Texte statt Generator-Schablone;
+- ungefähr ein Drittel sichtbar, nie mehr als die Hälfte;
+- Chevron statt sichtbarem `Mehr zu … erfahren`;
+- Screenreader-Beschriftung bleibt;
+- kein zusätzlicher Seitenendtext.
 
-## QA DES VORBEREITETEN ROLLOUTS
+## QA
 
-Synthetische Kompatibilitätsprüfung:
-- 69/69 aktuelle Hub2-Slugs getroffen;
-- Texte 150–174 Wörter;
-- sichtbare Leads 45–64 Wörter;
-- PHP-Lint ohne Fehler;
-- 69/69 Test-Render ohne Fehler;
-- alte feste Textschablone im Kandidatenpfad entfernt;
-- Release-Kette im Testaufbau auf 1.50.679 geschlossen.
+- aus exakter 1.50.678 gebaut;
+- ZIP PASS;
+- PHP 84/84 PASS;
+- Release-Kette PASS;
+- Template positiv PASS;
+- Template negativ PASS;
+- 69/69 Hub2-Render PASS;
+- 901/901 Assets byte-identisch;
+- 69 eindeutige vorhandene Hub2-Heroes;
+- 0 Fallback-Heroes.
 
-Diese Prüfung lief bewusst nur auf einer zugänglichen älteren Quellkopie und ist **kein installierbarer Release-Nachweis**.
+Asset-Auflösung:
+- 19 × 1600×853;
+- 50 × 600×320.
 
-## OFFENER RELEASE-BLOCKER
+## OFFENER TESTBLOCKER
 
-Finales 1.50.679 muss aus dem exakten 1.50.678-Paket gebaut werden. Ein Neuaufbau auf älterer Quelle würde spätere Hero-/Bild-/Responsive-Korrekturen riskieren und ist verboten.
+Die 50 vorhandenen 600×320-Heroes müssen im portalweiten Fullbleed-Einsatz real in WordPress auf Schärfe geprüft werden. Kein Bild darf als finaler PASS gelten, wenn es sichtbar hochskaliert/unscharf wird.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.679 auf exakter 1.50.678-Quellbasis bauen und anschließend Positiv-/Negativ-/Regressionstest des realen Plugin-Renderpfads durchführen. Vorher kein WordPress-Upload.**
+**1.50.679 installieren und den portalweiten Hero-/Textrollout visuell lesen; bei unscharfen 600×320-Heroes nur deren Masterbilder ersetzen.**
