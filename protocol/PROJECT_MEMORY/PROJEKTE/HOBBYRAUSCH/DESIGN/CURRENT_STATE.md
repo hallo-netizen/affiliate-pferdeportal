@@ -3,65 +3,71 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **LETZTER FUNKTIONIERENDER LIVE-STAND 1.50.677 / 1.50.679 LIVE-VERSUCH FATAL / 1.50.680 RELEASEKETTEN-FIX GEBAUT UND LOKAL POSITIV+NEGATIV GEPRÜFT / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.680 WORDPRESS-FRONTEND OHNE FATAL / VISUELLER READBACK: HERO-UPSCALING + RESPONSIVE-AUSSCHNITT FALSCH / 1.50.681 GEBAUT UND LOKAL POSITIV+NEGATIV+VISUELL GEPRÜFT / WORDPRESS-READBACK OFFEN**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.7 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 4.8 / 2026-10-18**
 
-## REALER LIVE-BEFUND 1.50.679
+## REALER READBACK 1.50.680
 
-Nach Installation von 1.50.679 zeigte WordPress auf den Hobby-Depot-Seiten einen kritischen Fehler.
+Nutzer-Readback:
+- Hobby-Depot-Seiten laden wieder ohne den 1.50.679-Fatal;
+- Hub2-Heroes wirken unscharf, weil 600×320-Quellen durch `object-fit:cover` über den ganzen Hero hochskaliert und gecroppt wurden;
+- Desktop und Mobil zeigten dadurch unterschiedliche Bildausschnitte;
+- Texte inhaltlich akzeptiert;
+- Textdarstellung unter dem Hero zu luftig, insbesondere durch zwei sichtbare Absätze/Leerzeile.
 
-Exakte Ursache:
-- Main lud `Hobby_Depot_Profile_V150679`;
-- deren `route_template()` zeigte noch auf `hobby-depot-front-v150678.php` und `hobby-depot-content-v150678.php`;
-- diese Templates riefen `Hobby_Depot_Profile_V150678` auf;
-- damit war die aktive Versionskette erneut gemischt.
-
-Das ist derselbe bereits bekannte Fehlertyp wie AF-043/AF-026. Die frühere 1.50.679-Aussage `Release-Kette PASS` war falsch und ist zurückgezogen.
-
-## REPARATUR 1.50.680
+## 1.50.681 – KORREKTUR
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.680_HOBBY_DEPOT_RELEASE_CHAIN_FATAL_FIX.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.681_HOBBY_DEPOT_NOZOOM_COMPACT_TEXT.zip`
 
 SHA-256:
-`ed34fece94970fc5be1ddd9c4116f1cb5029360a99515484a2656f19b307b40a`
+`37ac20a8f6d00e6b3ab8501b186c3087867b0c397d4d33d0d14df1ae84b85e9d`
 
-KISS-Delta gegenüber 1.50.679:
-- geändert: nur `pferde-template-kit.php`;
-- neu: `class-hobby-depot-profile-v150680.php`;
-- neu: `hobby-depot-front-v150680.php`;
-- neu: `hobby-depot-content-v150680.php`;
-- keine Datei entfernt;
+Hero:
+- einheitliches Bildformat **600:320** auf Desktop, Tablet und Mobil;
+- `object-fit:contain` statt `cover`;
+- keine Quelle wird über ihre native Breite hochskaliert;
+- 600×320-Quellen maximal 600 px breit;
+- 1600×853-Master werden nur heruntergerechnet;
+- gleicher vollständiger Bildausschnitt auf allen Breakpoints;
+- weicher Beige-Verlauf am linken Bildrand bleibt;
+- Desktop dynamischer Textschutz bleibt 35–48 %, bei 901–1180 px 42–58 %;
+- Mobil-H1 darf natürlich umbrechen statt abgeschnitten zu werden.
+
+Kategorietext:
+- Wortlaut der 69 Texte unverändert;
+- sichtbarer Lead bleibt im vorhandenen Umfang ca. 45–64 Wörter;
+- Lead wird als **ein zusammenhängender Absatz** gerendert, keine künstliche Leerzeile;
+- vertikale Abstände verkleinert;
+- kleiner Chevron näher am Text;
+- kein zusätzlicher Kasten;
+- kein zusätzlicher sichtbarer Text nötig.
+
+## QA 1.50.681
+
+- aus exakter 1.50.680 gebaut;
+- ZIP PASS;
+- PHP 90/90 PASS;
+- aktive Release-Kette V150681 PASS;
+- reale Front-Route → V150681 PASS;
+- reale Content-Route → V150681 PASS;
+- Front-/Contenttemplate positiv mit V150681 PASS;
+- Negativtest mit nur V150680 scheitert erwartungsgemäß auf fehlender V150681-Klasse;
+- Paketdelta gegen 1.50.680: **1 Datei geändert + 3 neue Dateien + 0 entfernt**;
 - 901/901 Bildassets byte-identisch;
-- Texte, Hero-Logik, Kategoriebaum und Mega-Menü unverändert.
-
-Aktive Kette:
-- Main → V150680-Klasse;
-- V150680 `route_template()` → V150680-Templates;
-- V150680-Templates → `Hobby_Depot_Profile_V150680`.
-
-## QA
-
-- ZIP-Test PASS;
-- PHP 87/87 PASS;
-- Main-Version/Require/Classbindung PASS;
-- realer `route_template()`-Positivtest: Front → V150680 PASS;
-- realer `route_template()`-Positivtest: Content → V150680 PASS;
-- beide V150680-Templates mit ausschließlich V150680-Klasse ausgeführt: PASS;
-- Negativtest: nur V150679-Klasse vorhanden → beide V150680-Templates scheitern erwartungsgemäß auf fehlender V150680-Klasse;
-- Paketdelta gegen 1.50.679 exakt 1 geänderte + 3 neue Dateien;
-- keine Bildänderung.
+- 69/69 Hub2-Text-/Renderprüfung PASS;
+- Inline-Chromium-Test mit echten 600×320- und 1600×853-Bildern bei 1440/1024/901/900/760/390 px PASS;
+- dabei keine Bildbreite über 600 px, keine Quelle über Natural Width, Bildverhältnis durchgehend 600:320, kein horizontaler Overflow.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.680 in WordPress über 1.50.679 installieren und eine Hobby-Depot-Start-/Kategorieseite aufrufen. Erst bei Frontend-PASS geht die visuelle Prüfung der 69 Hub2 weiter.**
+**1.50.681 installieren und Imkerei & Bestäuber sowie zwei weitere Hub2 auf Desktop und Mobil gegen den Nutzer-Screenshot prüfen: Bild scharf, kompletter identischer Ausschnitt, Text kompakt ohne Leerzeile.**
 
 ## NICHT ANFASSEN
 
-- Texte nicht erneut ändern;
-- Bilder nicht ändern;
-- Hero-/CSS-Regel nicht ändern;
-- Mega-Menü nicht ändern;
+- Textinhalte nicht neu schreiben;
+- Bilddateien nicht hochskalieren;
 - Kategoriebaum nicht ändern;
-- keine Architekturänderung.
+- Mega-Menü nicht ändern;
+- keine neue Architektur.
