@@ -4043,3 +4043,28 @@ QA:
 
 LIVE:
 offen.
+
+---
+
+## PU-20261018-084 – Abschluss-Nachprüfung 1.50.678 / bisheriger Local-Hard-PASS zurückgezogen
+
+NACHPRÜFUNG:
+Die im Arbeitsstand vorhandenen 1.50.678-Visual-Screenshots wurden im Rahmen der verbindlichen Abschlussprüfung erneut direkt geprüft.
+
+BEFUND:
+- Claim im lokalen Harness oben sichtbar angeschnitten;
+- Hero-Bild im lokalen Harness nicht tatsächlich geladen/gerendert;
+- der reale Bild/Text-Übergang war damit nicht belastbar visuell geprüft;
+- eine vollständige lokale positive UND negative E2E-Simulation des realen Renderpfads ist nicht dokumentiert.
+
+FOLGE:
+- 1.50.678 bleibt technisch gebaut;
+- Code-/Paketprüfungen bleiben gültig;
+- Bezeichnung LOCAL HARD PASS wird zurückgezogen;
+- kein Upload-/Deploymentkandidat;
+- kein CURRENT.zip-Sync;
+- kein Live-PASS.
+
+NEXT:
+1.50.678 im echten lokalen Plugin-Renderweg mit geladenem Audio-Hero positiv und negativ simulieren. Erst danach über WordPress-Installation entscheiden.
+
