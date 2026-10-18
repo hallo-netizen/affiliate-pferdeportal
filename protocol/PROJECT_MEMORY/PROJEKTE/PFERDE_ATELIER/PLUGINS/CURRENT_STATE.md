@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-18 (PSTE 0.57.107 installierbar, lokaler Fortsetzungs-/Kettenregressions-PASS; Live-E2E offen)
+STAND: 2026-10-18 (PSTE 0.57.107 letzter installierbarer Stand; KISS-Vier-Dateien-Arbeitskopie nur lokal geprüft, nicht ausgeliefert; 5014er WordPress-Gesamt-E2E offen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
