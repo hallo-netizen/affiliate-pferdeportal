@@ -4121,3 +4121,53 @@ ZV-HOBBYRAUSCH-DESIGN-001 auf Fassung 4.7 nachgezogen.
 
 NEXT:
 1.50.679 ausschließlich aus der exakten 1.50.678-Quelle bauen und danach positiv/negativ/regressiv lokal prüfen. Vorher kein WordPress-Upload.
+
+
+---
+
+## PU-20261018-086 – HD-003 1.50.679 / 69 Hub2 aus exakter 1.50.678 gebaut
+
+QUELLBASIS:
+Exaktes Artefakt 1.50.678 materialisiert und als einzige Buildbasis verwendet.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.679_HOBBY_DEPOT_ALL_HUB2_TEXT_HERO_ROLLOUT.zip`
+
+SHA-256:
+`721a7843c862cc59b47d80e51035d589220a56ecf4a5a8caad2307e921801f4d`
+
+UMSETZUNG:
+- bestehende dynamische Fullbleed-Hero-Regel aus 1.50.678 auf alle 69 aktiven Hub2 gebunden;
+- keine doppelte Hero-CSS-Schicht ergänzt;
+- 69 eigenständig redigierte Hub2-Texte statt alter Generator-Schablone;
+- 150–174 Wörter je Text;
+- 45–64 Wörter sichtbarer Lead;
+- Audio & HiFi 162 Wörter gesamt / 48 sichtbar;
+- Rest über kleinen Chevron;
+- sichtbarer `Mehr zu <Kategorie> erfahren`-Text entfernt;
+- zugängliche Screenreader-Beschriftung erhalten;
+- Aufklapper näher an den Lead gesetzt;
+- zwei bei der Negativprüfung gefundene generische Claims (`Holz & Natur`, `Hydroponik & Indoor`) durch explizite Claims ersetzt.
+
+QA:
+- ZIP PASS;
+- PHP 84/84 PASS;
+- aktive Release-Kette 1.50.679 PASS;
+- positiver Template-Test PASS;
+- negativer Template-Test mit nur alter 1.50.678-Klasse scheitert erwartungsgemäß;
+- 69/69 Hub2-Render PASS;
+- unbekannter Hub2 erzeugt keine alte Textschablone;
+- 901/901 Assets gegenüber 1.50.678 byte-identisch;
+- 69/69 eigene Hero-Pfade;
+- 0 Welt-/Fallback-Heroes;
+- 0 doppelte Hero-Pfade.
+
+BILD-AUDIT:
+- 19 Heroes 1600×853;
+- 50 Heroes 600×320.
+
+FOLGE:
+Code/Text/Render ist lokal belastbar. Portalweiter visueller Bild-PASS bleibt offen, weil die 50 vorhandenen 600×320-Heroes im neuen Fullbleed-Einsatz real auf Schärfe gelesen werden müssen.
+
+NEXT:
+1.50.679 als Testkandidat installieren. Bei sichtbarer Unschärfe nur die betroffenen 600×320-Hero-Master ersetzen; Text- und Layoutlogik nicht erneut umbauen.
