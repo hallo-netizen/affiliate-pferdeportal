@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – TEXTREGELN AUS PFERDEATELIER
 
-STAND: 2026-10-12
+STAND: 2026-10-18
 ROLLE: **Verbindliche redaktionelle Textregel für Hobby-Depot-Kategorietexte. Keine zweite Current-Autorität.**
 
 ## Quelle
