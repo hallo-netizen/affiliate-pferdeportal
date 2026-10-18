@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 DETAIL-ROLLOUT GEBAUT / 1.50.691 STARTSEITEN-BILDUPDATE GEBAUT / HERO-BILDER HAUPTKATEGORIEN UNVERÄNDERT / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.689 KETTENHEMD LIVE PASS / 1.50.690 DETAIL-ROLLOUT GEBAUT / 1.50.691 VOLLSTÄNDIGES TEMPLATE-KIT GEBAUT / STARTSEITE RUHIGE WELTBILDER + QUERBANNER / HAUPTKATEGORIE-HEROS UNVERÄNDERT / WORDPRESS-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.3 / 2026-10-18**
 
@@ -285,3 +285,38 @@ QA:
 
 NEXT:
 **1.50.691 installieren und nur die Startseite prüfen.**
+
+
+## 1.50.691 – NORMALES VOLLSTÄNDIGES TEMPLATE-KIT
+
+Der zuvor gebaute One-shot-Updater wird für die Nutzerinstallation verworfen, weil der Nutzer ausdrücklich den gewohnten WordPress-Überschreibweg möchte.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.691_STARTSEITE_RUHIGE_WELTBILDER.zip`
+
+SHA-256:
+`984356b9eaadb6ad2954c14bb026d4a380afdf00e06caccef5bec5be2f7288b0`
+
+Eigenschaften:
+- normales Pluginroot `affiliate-portal-template-kit/`;
+- vollständiger Pluginbestand;
+- aktiver Main-/Profil-/Template-Stand 1.50.691;
+- enthält den 1.50.689-Kettenhemd-Stand und den 1.50.690-Detailseiten-Rollout;
+- 8 neue ruhige Startseiten-Weltbilder;
+- Startseitenkarten verwenden die neuen Bilder;
+- Hauptkategorie-Heroquelle unverändert;
+- Querbanner direkt nach den acht Hobbywelten und vor den weiteren Startseitenmodulen.
+
+QA:
+- PHP **117/117 PASS**;
+- ZIP-Integrität PASS;
+- korrekter WordPress-Pluginroot PASS;
+- aktive Main-Kette V150691 PASS;
+- aktive Front-/Contenttemplate-Kette V150691 PASS;
+- Startseitenbildquelle `start-world-v150691` PASS;
+- Bannerreihenfolge `world_cards → affiliate_banner → editorial_cards` PASS;
+- Hauptkategorie-Hero-Funktion gegenüber rekonstruiertem 1.50.690 byte-identisch;
+- ZIP-Roundtrip **1166/1166 byte-identisch**.
+
+NEXT:
+**Das vollständige 1.50.691 als normales Update über das bestehende Affiliate Portal Template Kit installieren/überschreiben und Startseite prüfen.**
