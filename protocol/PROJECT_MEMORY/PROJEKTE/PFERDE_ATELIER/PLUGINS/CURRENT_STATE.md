@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-18 (KISS-Quellpatch-Stand; installierter Live-Pluginstand nicht neu geprüft)
+STAND: 2026-10-18 (installierbarer lokaler KISS-Testkandidat PSTE 0.57.105 gebaut; Live weiterhin nicht geprüft)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
@@ -31,6 +31,13 @@ Andere bereits synchronisierte Pluginstände und bestehende Inventarlücken steh
 ## KORREKTUR PPA-013
 
 `PPA-013` war eine irrtümlich angelegte zweite ID für `Pferde Atelier Design`. Kanonische ID ist `PPA-002`. Die alte PPA-013-Kopie wurde aus dem aktiven Plugin-Schrank entfernt und unter `/Campus-Plugins/PFERDE_ATELIER/ARCHIV/PPA-013` abgelegt. Sie ist **nicht CURRENT**.
+
+## PPA-005 NEUER LOKALER TESTKANDIDAT – 18.10.2026
+
+- **Tatsächlicher, aus bestehendem Original gebauter WordPress-Plugin-ZIP-Kandidat**: Library `/Pferdeatelier/PFERDEATELIER_SEO_THEMENENGINE_0.57.105_KISS_LOKALTEST.zip` (kein bloßer Patch), SHA-256 `f202f396b3d2c2e7e3c3be2b32680be03531319d7a7f6e3cb53c487b745aae6e`, 569786 Bytes.
+- Bytegenaue Ausgangsquelle: PSTE 0.57.102, SHA-256 `ddc05f0f2e05ba21a2acd0a139ac2e6788c6fcfb4b1226a75335a2eaea9d3ba5`, aus vorhandener Pferdeatelier-Bibliothek erfolgreich lokal gelesen. **117/117 Originaldateien vorhanden, genau vier bestehende PHP-Dateien geändert**: Hauptdatei (Version), Normal-Metadata-Path, Journal-Semantic-Router und Article-Type-Extension-Router. Alle anderen Bytes bleiben unverändert. Kein neues Plugin oder Tabellenumbau.
+- Lokal geprüft: PHP-8.4-Syntax sämtlicher 79 PHP-Dateien, fehlerfreie ZIP-Integrität, echte alte Titel- und Signaturklassen mit WordPress-Kategoriereadback-Stubs; Positivtests bestehender Fach-/Magazin-Kategorien, falscher Familienhinweis, echte fehlende Kategorie ausschließlich nach Titel-PASS, kein Produktionshandoff bei fehlender Kategorie; Negativtests Relevanz, Preis-/Vergleichsintention und Medizin-Risikohalt.
+- **Nur lokaler Testkandidat**, nicht installiert, keine vollständige WordPress-/MariaDB-5014-E2E-Prüfung, **keine Live-Freigabe**. Den bisherigen Quellpatch nicht zusätzlich auf diesen bereits gebauten Kandidaten anwenden. PSERC und PPM unberührt.
 
 ## OFFENE INVENTARLÜCKEN
 
