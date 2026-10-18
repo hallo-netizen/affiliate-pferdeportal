@@ -1,5 +1,19 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 18.10.2026 – BILDERARBEIT FORTGESETZT, ABER NICHT FERTIG – KEIN PLUGIN RELEASE
+
+**Ausgangsbestand weiterhin WP-Design 0.1.42**. Keine Installation und keine Public-Release-Version aus dieser Arbeit. Versuch, 121 unzureichende Originalfotomotive zu beschaffen: öffentliche Direktdownloads von Commons/Unsplash aus Container-Runtime aktuell DNS-technisch nicht erreichbar; Bildgenerierung lieferte bei mehreren Durchläufen erneut fälschlich Website-Mockups und keine Kategorienfotos. Solche Mockups wurden nicht als Assets übernommen. Ein Fotobogen mit genau vier brauchbaren Einzelszenen wurde in **vier separate WebP-Dateien in 768×512 px Originalauflösung** geteilt: Rückstauklappen, Dachrinnen & Fallrohre, Garagentorantrieb, Rauchmelder. Sie sind NICHT hochskaliert. Sie sind thematisch plausibel, erreichen aber den konservativen QS-Richtwert 900px Quellbreite noch nicht; also keine finale Freigabe.
+
+**Neuer reproduzierbarer Stagingtest**: 36 Bereiche, 265 konkrete C23-Kindthemen im echten PHP-Renderer, 151 Fotos geladen/zugeordnet, 114 Kacheln ohne Foto, darunter sieben (vier alte + drei zusätzliche neue) mit Quellbreite unter 900px. Momentan **mindestens 121 nicht voll qualifizierte Bilder/Zuordnungen**. Die vier Rohkandidaten sind in einem Bereich nützliche Zwischenergebnisse, aber sie reduzieren den konservativen Freigabeblock derzeit nicht. Zudem sind die 144 bestehenden ausreichenden Originalgrößen noch fachlich einzeln zu kontrollieren. Weder 'fertig' noch 'PASS alle 265' behaupten.
+
+**Statuspaket sichern**: Library `/Eigentumsschutz/Design/HBD_BILDER_STAGE_20261018_NICHT_INSTALLIEREN.zip`, SHA256 `36a4b8f704746be8a33e2770a99ff593ea9f1b1fe2590fb6ff1d2ddccd63cad5`. Kein WP-ZIP, sondern nur vier Bildkandidaten, Stand-Mapping, komplette 265-Zeilen-CSV, QA-Zähler und README mit NICHT INSTALLIEREN.
+
+**EINE NEXT ACTION**: Beschaffung/Erzeugung tatsächlich passender Einzel-Hochauflösungsfotos für die 114 noch komplett unbebilderten Themen, plus verbesserte Originalauflösung für sieben unter 900px und fachliche Einzelprüfung aller bereits zugeordneten Kachelmotive. Erst danach exakt EIN installierbares, lokal und visuell vollständig geprüftes Update des bestehenden Designplugins bauen. Keine neuen falschen Pools oder Blind-ZIP-Freigaben.
+
+---
+
+
+
 ## 18.10.2026 – ERWEITERTE 265-FOTOPRÜFUNG, KEIN NEUES PLUGIN
 
 **Aktueller validierter Befund:** 265 Themen in 36 Bereichsseiten; 117 ohne Bild, 4 zusätzlich mit **nur 603–605px** nativer Quellbreite und deshalb als ungeeignet eingestuft (Felgendiebstahl, Wertsachen & Schadenfall, E-Bike-Akkus vor Brand schützen, Rauchmelder). Somit mindestens **121 nicht abnahmefähige Fotozuordnungen**, während 144 vorhandene Bilder zwar >=900px messen, aber **noch nicht inhaltlich einzeln freigegeben** wurden. Frühere Zahl „117 fehlende“ war unvollständig, weil die vier klein aufgelösten Montagezuschnitte fälschlich als hochauflösend gezählt wurden.
