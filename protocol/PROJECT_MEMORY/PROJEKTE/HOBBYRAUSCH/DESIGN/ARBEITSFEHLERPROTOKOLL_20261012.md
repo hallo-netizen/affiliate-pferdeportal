@@ -900,3 +900,25 @@ KORREKTUR:
 VERMEIDUNGSREGEL – HART:
 Bei Hub2-Heroes kein starres Bild/Text-Verhältnis als Portalregel verwenden, wenn unterschiedlich lange H1 vorkommen. Der Textschutzbereich muss zentral begrenzt dynamisch sein; H1 und Hero-Kurztext müssen vor Release bei kurzen und langen Titeln gegen Umbruch geprüft werden. Kein JavaScript-/DOM-Messweg dafür einführen, solange CSS genügt.
 
+## AF-048 – 1.50.678 als Local-Hard-PASS geführt, obwohl Visual-Harness den realen Hero nicht vollständig prüfte
+
+FEHLER:
+Der 1.50.678-Stand wurde zunächst als LOCAL HARD PASS dokumentiert. Bei der Abschluss-Nachprüfung zeigte der vorhandene lokale Screenshot jedoch zwei nicht erfüllte Abnahmebedingungen:
+- Claim oben sichtbar angeschnitten;
+- das eigentliche Hero-Bild wurde im Harness nicht geladen/gerendert.
+
+Damit war der reale Bild/Text-Übergang nicht sichtbar geprüft. Zusätzlich fehlt eine dokumentierte lokale Positiv- UND Negativ-E2E-Simulation des real relevanten Renderpfads.
+
+FOLGE:
+Der Hard-PASS war nicht belastbar und hätte nicht als Upload-/Deploymentfreigabe verwendet werden dürfen.
+
+KORREKTUR:
+- Hard-PASS zurückgezogen;
+- 1.50.678 bleibt nur gebauter technischer Stand;
+- Current, Plugin-Current und Manifest auf VISUELLE E2E-PRÜFUNG OFFEN korrigiert;
+- CURRENT.zip bleibt unverändert;
+- vor Live-Installation muss der tatsächliche Plugin-Renderweg mit geladenem Hero-Bild positiv und negativ geprüft werden.
+
+VERMEIDUNGSREGEL – HART:
+Ein Screenshot-/Browser-Harness zählt nur als Visual-PASS, wenn alle für die Änderung maßgeblichen echten Assets tatsächlich geladen sind und der komplette Zielbereich sichtbar ist. Abgeschnittene Elemente oder nicht geladene Hero-Bilder sind automatisch FAIL. Zusätzlich bleibt die projektweite Pflicht zu positiver UND negativer lokaler Simulation bestehen.
+
