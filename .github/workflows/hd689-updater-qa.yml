@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - hobbyroom/hd689-updater-artifact-20261018
+  pull_request:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
 jobs:
   qa:
     runs-on: ubuntu-latest
