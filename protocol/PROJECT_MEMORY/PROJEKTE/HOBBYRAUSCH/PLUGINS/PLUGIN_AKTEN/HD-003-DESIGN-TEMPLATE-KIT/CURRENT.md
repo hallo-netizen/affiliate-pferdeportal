@@ -3,42 +3,66 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-18
-STATUS: **1.50.686 KETTENHEMDFLECHTEN-PILOT GEBAUT / RELEASEKETTE + REALER PILOTRENDER + RESPONSIVE PASS / WORDPRESS-READBACK OFFEN**
+STATUS: **1.50.687 DETAIL-LEVEL-ROLLOUT GEBAUT / 395 OBJEKTE / ZENTRALE LAST-LEVEL-ICONS / 4 KETTENHEMD-DUMMYPOSTS / RELEASEKETTE+ROUNDTRIP PASS / WORDPRESS-READBACK OFFEN**
 
 ## Kandidat
 
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.686_KETTENHEMDFLECHTEN_MIXED_LEVEL_PILOT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.687_CATEGORY_LEVEL_ROLLOUT_ICONS_DUMMY_POSTS.zip`
 
 SHA-256:
-`0fef7c270977c01e986adf82ee00f56b5602f699e12799fb18cfc1c28b919e4d`
+`9a881f3b3b7cf25ab2cfdc5f9a2c62b878fa5cc7513ba8678524f98b7464235b`
 
 ## Scope
 
-Nur `kettenhemdflechten`:
-- kein Hero-Bild;
-- Icon + H1 + 162-Wörter-Fachtext;
-- 45 Wörter sichtbar, Rest per Chevron;
-- 8 Unterkategorien als 4+4-Karten;
-- Produkte nach der ersten 4er-Reihe;
-- Banner nach der zweiten 4er-Reihe;
-- danach 3 Beitragsvorschauen und bestehender Werbeplatz.
+Vom abgenommenen Kettenhemdflechten-Pilot auf die komplette gleiche logische Ebene:
+- 379 Page-Knoten;
+- 16 direkte Category-Term-Knoten;
+- 395 Detail-Hubs insgesamt;
+- 2.979 letzte Kategorien unter den Page-Knoten.
 
-Keine neuen Affiliate-Slots: genutzt werden ausschließlich die vorhandenen drei Kategorie-Produktplätze und der vorhandene Kategorie-Bannerplatz.
+Darstellung:
+- kein Hero;
+- Icon + H1 + 150–200-Wörter-Text;
+- 45–62 Wörter sichtbar;
+- 4/2/1-Kartenraster;
+- Produkte nach der ersten 4er-Reihe;
+- Banner nach dem restlichen Kategorienblock;
+- bis zu 4 Beitragsvorschauen;
+- bestehender weiterer Werbeplatz danach.
+
+## Zentrale Icons
+
+Semantische, portalweite Registry für die letzte Kategorieebene.
+FAQ, Vergleich/Kaufberatung, Grundlagen, Ausrüstung usw. erhalten überall dieselbe Rollen-Iconbindung.
+Kein Zufalls-/Hash-Icon.
+
+## Kettenhemd-Dummybeiträge
+
+4 veröffentlichte Testbeiträge mit:
+- passender Unterkategorie;
+- Featured Image;
+- idempotentem Seeder;
+- realer 4er-Beitragsvorschau.
 
 ## QA
 
-- PHP 102/102 PASS;
+- PHP 105/105 PASS;
+- V150687 Front-/Contentroute PASS;
+- Templates positiv PASS;
+- Negativtest V150686 PASS;
+- Kettenhemd-Render PASS;
+- 395/395 Copy-Coverage;
+- Textumfang 150–170 Wörter;
+- Leads 45–62 Wörter;
+- 395 unterschiedliche Texte;
+- 4/4 Dummy-Posts, Kategorien und Bilder;
+- Seeder idempotent PASS;
+- Postpreview Limit 4 PASS;
+- Delta zu 1.50.686: 1 geändert / 4 neu / 0 entfernt;
+- Dirty Overlay PASS;
 - ZIP PASS;
-- reale V150686-Kette PASS;
-- positiver Template-Test PASS;
-- Negativtest V150685 PASS;
-- Pilot-Render 8/8 Karten PASS;
-- Reihenfolge der gemischten Module PASS;
-- Browser 1440 / 1024 / 390 ohne Overflow;
-- 4 / 2 / 1 Karten je Reihe nach Breakpoint;
-- Delta: 1 geändert / 3 neu / 0 entfernt;
-- Roundtrip 1142/1142 PASS.
+- Roundtrip 1146/1146 PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.686 installieren und Kettenhemdflechten visuell abnehmen oder korrigieren.**
+**1.50.687 installieren und Kettenhemdflechten plus zwei weitere Seiten derselben Ebene real lesen.**
