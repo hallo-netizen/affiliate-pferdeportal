@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 4.6 / 2026-10-18
+FASSUNG: 4.7 / 2026-10-18
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -45,7 +45,7 @@ FASSUNG: 4.6 / 2026-10-18
 - nur semantisch passende reale Zielkategorien.
 
 ## Hub-/Unterkategorie-Bilder Ebene 1
-- alle 65 direkten Unterkategorien besitzen kontrollierte Motive;
+- alle aktuell 69 direkten Hub2-Unterkategorien besitzen kontrollierte Motive;
 - die Kategorievorschau wird aus dem jeweils aktuellen Hub2-Hero derselben Kategorie abgeleitet; Hero und Vorschau dürfen nicht aus unterschiedlichen Bildständen stammen;
 - Thema auf den ersten Blick verständlich;
 - kein unnötiger Lupen-/Makroeindruck;
@@ -58,12 +58,12 @@ FASSUNG: 4.6 / 2026-10-18
 
 ## Kategorieebene 2 / Hub2
 - Der akzeptierte Buch-&-Papier-Stand **1.50.645** bleibt die visuelle Referenz für Karten, Claim-Stil und Grundcharakter.
-- Der in 1.50.650 live bestätigte **Textinhalt** und die dort bestätigte **Grundaufteilung** sind eingefroren; Bild- und Hero-Fehler dürfen diese Bereiche nicht erneut verändern.
+- Die bestätigte **Grundaufteilung** bleibt erhalten. Die alten schematisch erzeugten Hub2-Texte sind ausdrücklich **nicht** eingefroren und werden durch eigenständig redigierte Texte nach den verbindlichen Textregeln ersetzt.
 - Breadcrumb oben.
 
 ### Hero – Aufbau
 - **Desktop ab 901 px:** das scharfe Hero-Masterbild läuft als eine zusammenhängende Fullbleed-Fläche über den Hero; links liegt Claim + H1 + kurzer Einsteigertext auf einem hellen Beige, das exakt der Header-Hintergrundfarbe entspricht und weich ins Bild ausläuft.
-- Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.
+- Der geschützte Beige-/Textbereich ist **nicht starr**: er richtet sich nach der tatsächlichen Breite des Schriftblocks, bleibt aber innerhalb zentraler Grenzen. Desktop: mindestens ca. 35 %, maximal ca. 48 %; 901–1180 px: mindestens ca. 42 %, maximal ca. 58 %.\n- Diese dynamische Fullbleed-Hero-Regel gilt verbindlich für **alle aktuell 69 Hub2-Seiten derselben Ebene**; Audio & HiFi ist keine dauerhafte Sonderlösung mehr.
 - **H1 und kurzer Hero-Einstieg bleiben auf Desktop einzeilig.** Ein Umbruch der H1 ist nicht zulässig. Der kurze Einstieg darf nicht durch extrem kleine Schrift erzwungen werden; bevor das nötig würde, wechselt die Darstellung in die gestapelte Variante.
 - Der gesamte Schriftblock steht mit ausreichendem Innenabstand und etwas höher im Hero; nichts klebt am linken Rand.
 - **Bis 900 px:** stabile gestapelte Darstellung: Claim + H1 + kurzer Einsteigertext oben, Bild darunter über die volle verfügbare Breite, längerer Kategorietext erst danach.
@@ -111,7 +111,7 @@ Hobby-Depot-Darstellung:
 - ausreichend echter Text bleibt bereits ohne Aufklappen sichtbar.
 
 ### Hero-Bildregeln – semantisch
-Für jede der 65 Hub2-Seiten:
+Für jede der aktuell 69 Hub2-Seiten:
 - eigenes thematisch passendes Hero-Motiv;
 - Szene weiter herausgezoomt;
 - klare Szenerie / Stilleben statt angeschnittenem Detail;
