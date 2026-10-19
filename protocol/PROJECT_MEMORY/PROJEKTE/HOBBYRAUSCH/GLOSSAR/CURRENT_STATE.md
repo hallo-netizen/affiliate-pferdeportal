@@ -3,65 +3,96 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **KONZEPT PASS / BÜRO EINGERICHTET / QUELLBINDUNG 1.4.0 OFFEN / NICHT INSTALLIEREN**
+STATUS: **HOBBY-DEPOT GLOSSAR CORE 1.0.0 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
 
-## Aktueller belastbarer Stand
+## Entscheidung
 
-Ein Glossar ist für Hobby Depot fachlich und SEO-seitig sinnvoll, sofern es als echtes Fachwörterbuch geführt wird und keine bestehenden Hobby-/Kategorie-/Ratgeberintents dupliziert.
+Ein Glossar ist für Hobby Depot sinnvoll, wenn es als echtes Fachwörterbuch geführt wird und keine bestehenden Hobby-, Kategorie- oder Ratgeberintents dupliziert.
 
-Das aktive Hobby-Depot-Konzept enthält bereits den Editorial-Einstieg **„Wissen & Glossar“**. Das Glossar ist deshalb keine neue Portalsäule, sondern eine konkretisierte Funktion innerhalb der bestehenden EDITORIAL-/Wissenslogik.
+Der bereits bestehende Editorial-Einstieg **„Wissen & Glossar“** wird als zentrale Glossar-Hauptseite verwendet.
 
-## Übernommenes Grundkonzept
+## SEO-Vertrag – zentral sammeln
 
-Vom Pferde-Atelier werden ausschließlich Struktur und Arbeitsprinzip übernommen:
+Verbindlich:
+- alle veröffentlichten Glossarbegriffe werden auf **einer zentralen Glossar-Hauptseite** gesammelt;
+- dort: Suche, A–Z, Filter nach den acht Hobbywelten und Pagination;
+- Filter-/Such-/Pagination-Varianten sind keine eigenen SEO-Zielseiten;
+- sie werden noindex behandelt und kanonisch auf die zentrale Glossar-Hauptseite zurückgeführt;
+- pro echtem Fachbegriff gibt es höchstens eine indexierbare Einzelbegriffsseite;
+- Themenwelt/Filter erzeugt keine zweite Taxonomie und keinen zweiten SEO-Owner;
+- Synonyme sind Aliase, keine zweiten Seiten;
+- bestehende Hobby-/Hub-/Kategorie-/Ratgeberintents werden nicht als Glossarseite kopiert;
+- optional verweist ein Begriff auf genau eine starke bestehende Hauptseite.
 
-- ein Begriff = ein Datensatz;
-- Synonyme = Aliase, keine zweiten Seiten;
-- eigene Glossarseite nur für echte Fachbegriffe;
-- keine Kopie großer Hobby-, Hub-, Kategorie- oder Ratgeberseiten;
-- genau eine primäre Hobbywelt;
-- mindestens ein verwandter Begriff;
-- optional genau eine starke passende Hauptseite;
-- CORE-/Hobbyseite vor Magazin-Fallback;
-- 150–200 Wörter als bewährter redaktioneller Rahmen, nicht als SEO-Zwang;
-- Kurzdefinition, Erklärung, Abgrenzung, Quellen, SEO-Titel, Meta-Description;
-- kontrollierte Draft-Produktion;
-- kein Auto-Publish;
-- kein autonomer Cron-/Discovery-/Loopback-Produktionsweg;
-- Reviewbedarf statt automatischer Textänderung.
+Damit bleibt die bestehende Hobby-Depot-Grundregel erhalten: **pro primärem Suchintent genau ein SEO-Owner.**
 
-## Hobby-Depot-spezifische Anpassung
+## Installationskandidat
+
+Plugin:
+**Hobby Depot Glossar Core 1.0.0**
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+
+SHA-256:
+`90debeaf31e8a95ad449c7fe355f1ea3862ab9342feaf5d1fdc700b323a50e59`
+
+Persistente Arbeitskopie:
+`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+
+## Herkunft / Bereinigung
+
+Belegt als fachliche Referenz:
+- Pferde Atelier Glossar Core 1.4.0;
+- dessen aktueller sicherer Manager-/Draft-/Review-Vertrag.
+
+Zusätzlich wurde der echte neutrale Universal-Glossary-Engine-Quellstand aus dem geprüften 0.2.7-Actions-Artefakt verwendet.
+
+Wichtig:
+Die exakten Pferde-1.4.0-Bytes waren nicht als kopierbares Paket erreichbar. Deshalb ist 1.0.0 **kein vorgetäuschter byteidentischer Klon**, sondern eine saubere Hobby-Depot-Fassung aus neutralem Quellkern + aktuellem belegtem Funktionsvertrag.
+
+Entfernt/nicht übernommen:
+- Pferdebegriffe;
+- Pferde-Themenwelten/-IDs/-URLs;
+- Pferde-Design;
+- alte autonome Discovery-/Cron-/Loopback-Produktion;
+- Auto-Publish.
+
+## Hobby-Depot-Regeln
 
 Primäre Themenwelten:
 **Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**
 
-Fachdaten und Quellen liegen nicht im Plugin, sondern in der Hobby-Depot-Wissensdatenbank.
+Produktionsweg:
+`Begriffspool → Intent-/Dublettenprüfung → Recherche + Text → Validator → WordPress-Draft → Readback → Freigabe`
 
-Bestehender Editorial-Einstieg:
-`Wissen & Glossar`
+Batch:
+maximal 25 Begriffe.
 
-Kein Pferde-Inhalt wird übernommen.
+Pflicht:
+Kurzdefinition, 150–200 Wörter Fachtext, genau eine Hobbywelt, verwandte Begriffe, Quellen, individueller SEO-Titel, Meta-Description, Prüfdatum und Prüfintervall 6/12/24 Monate.
 
-## Plugin-Quellbindung
+Kein Auto-Publish.
 
-Bewährte Pferde-Installation:
-- Plugin: Universal Glossary Engine / „Pferde Atelier Glossar Core“
-- installierte Version: **1.4.0**
-- bekannte technische Zielquelle: `UNIVERSAL_GLOSSARY_ENGINE_1.4.0_SAFE_MANAGER_RELATIONS_REVIEW_INSTALLIEREN.zip`
-- bekannte SHA-256: `fb75ff8044eff4383ba44dd6389b1aa97ff16ab500445037ce2d5819f2335231`
+## Lokale QA
 
-Die exakten 1.4.0-Pluginbytes sind im aktuell erreichbaren Campus-/Library-Bestand nicht als kopierbares Artefakt gebunden. Deshalb wurde **kein Ersatzplugin aus einer älteren Version gebaut**.
+- PHP-Lint: **7/7 PASS**;
+- ZIP-Integrität: **PASS**;
+- Pferde-/Horse-/pa_breed-Code: **0**;
+- WordPress-Scheduler/Cron-Produktion: **0**;
+- zentrale Hauptseitenbindung vorhanden;
+- Filtervarianten noindex + Canonical zur Hauptseite;
+- Taxonomie nicht öffentlich/indexierbar;
+- Draft-Batchvertrag vorhanden.
 
 ## Installation Hobby Depot
 
-Im frischen Hobby-Depot-Systemstand vom 2026-10-18 ist kein `universal-glossary-engine` aktiv belegt.
+Noch nicht installiert.
 
-**Nicht aktiv; eine bestehende Installation ist im vorliegenden Systemreport nicht belegt. In diesem Arbeitsschritt wurde nichts installiert.**
+## ERSTER OFFENER BLOCKER
 
-## Erster offener Blocker
-
-Exakten 1.4.0-Quell-/ZIP-Stand bytegenau binden und danach Pferde-spezifische Reste im Code prüfen.
+Echter WordPress-Installations- und Frontend-Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**Exakte Universal-Glossary-Engine-1.4.0-Bytes binden; danach daraus eine neue eindeutig versionierte Hobby-Depot-Konfiguration bauen und lokal positiv/negativ prüfen, bevor irgendeine WordPress-Installation erfolgt.**
+**HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip im Hobby Depot installieren, noch keine Massenbefüllung starten und zuerst zentrale Glossar-Seite + einen Testbegriff positiv/negativ prüfen.**
