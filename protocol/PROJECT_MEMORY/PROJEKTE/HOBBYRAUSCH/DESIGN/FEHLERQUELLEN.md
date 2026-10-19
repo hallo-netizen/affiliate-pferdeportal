@@ -323,24 +323,30 @@ Kein generischer Weltbild-Fallback. Kein 1.50.669-Release vor semantischer Sicht
 
 
 ## HRD-074 – Detail-Hobbytexte trotz klarer Regeln als Generator-Schablone produziert
-STATUS: **LOCAL CLOSED 1.50.693 / LIVE-READBACK OFFEN**
+STATUS: **LOCAL CLOSED 1.50.695 / LIVE-READBACK OFFEN**
 
 BEFUND:
-Im bestehenden Detail-Hobbytextbestand treten wiederkehrende Generatorformulierungen und wiederkehrende Absatzgerüste auf, u. a. nach dem Muster `Konkreter wird es ...`, `Für die Orientierung ...` oder `Zur Vertiefung ...`. Zusätzlich sind kalte Kachelfloskeln wie `sinnvoll vergleichen`, `realistisch planen`, `sicher einordnen` oder `konkret vertiefen` vorhanden. Der Abschnittstitel `Themen im Überblick` beschreibt diese vertiefende Ebene ebenfalls falsch.
+1.50.693 wurde trotz formaler Checks redaktionell verworfen: künstliche Anmoderationen, unzureichende Definition unbekannter Begriffe und ein nur auf Schuhmacherei begrenzter Farbrahmen verletzten die Text-/Gestaltungsregeln.
 
-URSACHE:
-Die vorhandene Regel gegen Generator-/Padding-Sprache wurde bei der Massenproduktion nicht tatsächlich durchgesetzt. Unterschiedliche Volltexte und korrekte Wortzahlen sind kein Qualitätsnachweis, wenn Satzanfänge, Absatzlogik und Kacheluntertitel weiterhin schablonenhaft sind.
+BENCHMARK:
+1.50.694 wurde vom Nutzer ausdrücklich als sehr gut freigegeben. Die acht Pflanzen-Pilottexte sind verbindliche redaktionelle Benchmark.
 
-KORREKTURBINDUNG:
-- sichtbarer Lead 45–60 Wörter: Was ist das Hobby, was macht man, was ist typisch;
-- keine Navigation/Kachelliste im Lead;
-- aufgeklappter Text als zusammenhängende fachliche Vertiefung;
-- natürliche Tiefenüberschrift; neutral höchstens `Mehr zu <Hobby>`, nicht `Themen im Überblick`;
-- Kacheluntertitel nur konkrete Sachinhalte;
-- kein Massentausch einzelner Floskeln gegen neue Floskeln.
+KORREKTUR 1.50.695:
+- vollständiger Neu-/Weiterrollout auf 395/395 Detail-Hubs auf Basis der 1.50.694-Benchmark;
+- Benchmarktexte unverändert;
+- erster Satz erklärt das Hobby/den Begriff;
+- Lead 45–60 Wörter;
+- Aufklapptext 150–193 Wörter zusätzlich, zwei Absätze;
+- direkte natürliche Ansprache;
+- keine verbotenen Füll-/Generatorphrasen;
+- keine doppelten ersten Sätze;
+- keine identischen Sätze auf drei oder mehr Seiten;
+- Kacheluntertitel ohne bloße Titelwiederholung;
+- heller Petrol-/Türkisblock allgemein für Detail-Leads.
 
-PILOT / ROLLOUT:
-1.50.692 setzte Schuhmacherei als Musterfall um. Nach Nutzerbestätigung wurde 1.50.693 auf 395/395 Detail-Hubs ausgerollt. Lead 45–60 Wörter; aufklappbarer Text 150–187 Wörter zusätzlich zum Lead; zwei Absätze; kurze content-only Kacheluntertitel. Lokaler Regel-/Wiederholungs-/Semantikcheck, PHP 123/123 und Positiv-/Negativ-Render-E2E PASS.
+QA:
+PHP 123/123 PASS; 8-Welten-Render-Harness PASS; 971/971 Bilddateien byte-identisch; ZIP PASS.
 
 OFFEN:
-Echter WordPress-Frontend-Readback von 1.50.693. Kein Live-PASS raten.
+Echter WordPress-Live-Readback von 1.50.695. Kein Live-PASS raten.
+
