@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 5.4 / 2026-10-19
+FASSUNG: 5.5 / 2026-10-19
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -168,10 +168,9 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - Referenz ist der vom Nutzer ausdrücklich abgenommene Stand **Kettenhemd flechten 1.50.689**.
 - Auf dieser Ebene **kein Hero-Bild**.
 - Oben kompakter, mittig geführter Kopf: thematisch passendes Icon, H1, hochwertiger Kategorietext.
-- Text nach denselben redaktionellen Regeln: **150–200 Wörter**, konkret, fachlich, keine Generator-/Padding-Sprache.
 - Der **sichtbare Lead umfasst ungefähr 45–60 Wörter** und erklärt für jemanden ohne Vorwissen zuerst: **Was ist dieses Hobby? Was macht man dabei? Was ist typisch dafür bzw. wodurch unterscheidet es sich?**
 - Der sichtbare Lead enthält **keine Navigation, keine Kachelliste und keine Meta-Sätze**. Er darf als ruhiger, heller Petrol-/Türkisblock hinterlegt werden; dieser Block kennzeichnet die kurze Einsteigererklärung und ist kein zusätzlicher Dekotext.
-- Der aufgeklappte Rest führt denselben Gedanken redaktionell fort und vertieft Arbeitsweise, Material, Werkzeuge, Ablauf, Unterschiede, Aufwand oder typische Probleme nur dort, wo sie fachlich wirklich passen.
+- Der aufgeklappte Rest umfasst **zusätzlich zum Lead ca. 150–200 Wörter**, führt denselben Gedanken redaktionell fort und vertieft Arbeitsweise, Material, Werkzeuge, Ablauf, Unterschiede, Aufwand oder typische Probleme nur dort, wo sie fachlich wirklich passen. Er wird je nach Inhalt in **ein bis zwei Absätze** gegliedert; direkte **du**-Ansprache gilt für den gesamten Fließtext.
 - Desktop Unterkategorien im **4er-Raster**, Tablet 2, Mobil 1.
 - Verbindliche Reihenfolge nach Abnahme 1.50.689: **Kopf/Text → vorhandener kompakter Banner → alle Unterkategorien als geschlossener, nicht durch Werbung unterbrochener Block → vorhandene Kategorie-Produkte unter der kompletten Kachelgruppe → 3–4 passende Beitragsvorschauen mit Bild → vorhandener weiterer Werbe-/Dienstleisterplatz**.
 - Keine neuen Affiliate-Slottypen erfinden; vorhandene Slots lediglich in der abgenommenen Reihenfolge platzieren. **Affiliate-Produkte niemals mehr zwischen zwei Unterkategorie-Reihen.**
