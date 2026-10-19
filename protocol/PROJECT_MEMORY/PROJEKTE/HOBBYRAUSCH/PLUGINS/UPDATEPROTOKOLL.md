@@ -4804,3 +4804,51 @@ Kein Live-PASS. Echter WordPress-Frontend-Readback steht aus.
 
 NEXT:
 1.50.693 regulär installieren und repräsentative Detail-Hubs plus direkten Category-Term live prüfen.
+
+
+---
+
+## PU-20261019-100 – HD-003 1.50.695 / vollständiger 395er Benchmark-Textrollout
+
+AUFTRAG:
+Nach Freigabe von 1.50.694 als redaktionelle Benchmark den gesamten Detail-Hub-Bestand fertigstellen, ohne die Generatorfehler aus 1.50.693 zu übernehmen.
+
+BENCHMARK:
+- 1.50.694;
+- insbesondere Bromelien, Tillandsien, Kakteen, Sukkulenten, Lithops, Hydrokultur, Mooskultur und fleischfressende Pflanzen;
+- diese Benchmarktexte bleiben im finalen Bestand exakt unverändert.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
+
+SHA-256:
+`8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
+
+UMSETZUNG:
+- 395/395 Detail-Hubs;
+- sichtbarer Lead 45–60 Wörter;
+- unbekannte Begriffe direkt erklärt;
+- Aufklapptext 150–193 Wörter zusätzlich zum Lead;
+- zwei Absätze je Vertiefung;
+- natürliche direkte Ansprache;
+- heller Petrol-/Türkisblock allgemein;
+- Kacheluntertitel nur mit echtem Zusatznutzen;
+- kein `Themen im Überblick`-Fallback;
+- Schuhmacherei-Lead unverändert.
+
+QA:
+- 10/10 Pilot-/Benchmarktexte exakt unverändert;
+- 0 verbotene Generator-/Füllphrasen;
+- 0 doppelte erste Sätze;
+- 0 identische Sätze auf 3+ Seiten;
+- 0 Custom-Untertitel-Echos;
+- PHP 123/123 PASS;
+- repräsentativer Render-Harness über alle 8 Welten PASS;
+- 971/971 bestehende Bilddateien byte-identisch zu 1.50.694;
+- ZIP-Integrität PASS.
+
+LIVE-GRENZE:
+Kein Live-PASS. Echter WordPress-Frontend-Readback von 1.50.695 steht aus.
+
+NEXT:
+1.50.695 regulär installieren und repräsentative Detail-Hubs aus allen 8 Welten sowie einen direkten Category-Term live prüfen.
