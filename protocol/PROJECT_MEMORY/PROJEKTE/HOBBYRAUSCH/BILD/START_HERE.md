@@ -1,30 +1,28 @@
-# HOBBYRAUSCH – BÜRO BILD
+# HOBBYRAUSCH – BÜRO BILD / BILDZENTRALE
 
 <!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Bildkonzept und Bildnutzung.
+Zuständiges Hobby-Depot-Büro für Bildkonzept, Bildnutzung und die projektbezogene Anwendung der Allgemeinen Bildzentrale.
 
 **HIER BIST DU RICHTIG, WENN …**  
-dein Auftrag genau in diesen Zuständigkeitsbereich fällt.
+es um Kategorie-/Hub-/Beitragsbilder, Hero-Bilder, Bildquellen, Bildprofile, Bildzuordnung, Bildprüfung oder die Bildzentrale geht.
 
 **DU DARFST …**  
-nach gebundener Current-Autorität in diesem Büro arbeiten.
+den allgemeingültigen Bildzentrale-Kern für Hobby Depot konfigurieren und projektspezifisch prüfen.
 
 **DU DARFST NICHT …**  
-Current-Status an der Tür pflegen, andere Büros überschreiben oder aus Erinnerung raten.
+Pferde-spezifische Batchwege, Rassenlogik, Pferde-Prompts, Pferde-IDs oder sonstige Pferde-Altlasten als Hobby-Depot-Logik übernehmen.
 
 **ALS NÄCHSTES …**  
 `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` → Scope `HOBBYRAUSCH_BILD` → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION.
 
-Vor jeder technischen Aktion: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` prüfen.
+Technische allgemeine Referenz:
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/CURRENT_STATE.md`
 
-Zentrale Leitungen:
-- `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
-- `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+Plugin-Akte Hobby Depot:
+`../PLUGINS/PLUGIN_AKTEN/HD-006-BILDZENTRALE/CURRENT.md`
 
 `HOBBYRAUM.md` ist nur temporäre Ausführungsfläche und keine Current-Wahrheit.
