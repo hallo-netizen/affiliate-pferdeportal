@@ -1,0 +1,48 @@
+{
+  "contract": "HOBBY_DEPOT_BILDZENTRALE_CONFIG_V1",
+  "project_id": "hobby-depot",
+  "source_reference": {
+    "version": "2.7.6",
+    "artifact": "ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip",
+    "sha256": "12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0"
+  },
+  "portal_structure_source": "HOBBY_DEPOT_ACTIVE_CATEGORY_REGISTRY",
+  "primary_worlds": [
+    "Gestalten",
+    "Fertigen",
+    "Technik",
+    "Forschen",
+    "Pflanzen",
+    "Tiere",
+    "Bewegen",
+    "Sammeln"
+  ],
+  "enabled_capabilities": [
+    "posts",
+    "wp_taxonomies",
+    "cpt_hero_optional",
+    "hivepress_taxonomies_optional",
+    "pixabay",
+    "pexels",
+    "magnific",
+    "profiles",
+    "export_import",
+    "readback_fallback",
+    "no_overwrite"
+  ],
+  "forbidden_or_removed": [
+    "pa_breed",
+    "horse_breed_batch",
+    "horse_specific_prompts",
+    "horse_specific_framing",
+    "horse_taxonomy_ids",
+    "horse_urls",
+    "bildertrommel"
+  ],
+  "migration_policy": {
+    "overwrite_existing_images": false,
+    "write_before_source_audit": false,
+    "live_install_before_local_qa": false
+  },
+  "target_version_policy": "MATERIAL_CODE_CHANGE_REQUIRES_NEW_VERSION"
+}
