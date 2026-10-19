@@ -1,22 +1,29 @@
 # HD-005 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-19
-STATUS: **KEIN CURRENT.zip / SOURCE BINDING OPEN**
+STATUS: **1.0.0 LOCAL PASS / LIBRARY-ARTEFAKT VORHANDEN / LIVE OFFEN**
 
 PLUGIN-ID:
 HD-005-GLOSSAR-CORE
 
-Referenzversion:
-1.4.0
+ARTEFAKT:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
 
-Referenz-SHA-256:
-`fb75ff8044eff4383ba44dd6389b1aa97ff16ab500445037ce2d5819f2335231`
+SHA-256:
+`90debeaf31e8a95ad449c7fe355f1ea3862ab9342feaf5d1fdc700b323a50e59`
 
-CURRENT.zip:
-**NICHT ERZEUGT.**
+ABLAGE:
+`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
 
-Grund:
-Die exakten Referenzbytes sind im aktuell erreichbaren Arbeitsbestand nicht vorhanden. Keine ältere oder rekonstruierte Datei als CURRENT.zip ausgeben.
+QA:
+- PHP 7/7 PASS;
+- ZIP PASS;
+- zentrale Glossar-Hauptseite;
+- keine Pferde-Logik;
+- kein Auto-Publish/Cron.
+
+HINWEIS:
+Kein falscher Anspruch auf Byteidentität mit dem Pferde-1.4.0-Paket.
 
 Aktuelle technische Wahrheit:
 `../../PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/CURRENT.md`
