@@ -54,7 +54,7 @@ Der aktuelle Design-/Bildbestand wird nicht automatisch überschrieben.
 
 Der frische Hobby-Depot-Systemstand vom 2026-10-18 zeigt keine aktive Allgemeine Bildzentrale.
 
-**Nicht installiert / kein Installationsauftrag ausgeführt.**
+**Nicht aktiv; eine bestehende Installation ist im vorliegenden Systemreport nicht belegt. In diesem Arbeitsschritt wurde nichts installiert.**
 
 ## Quellgrenze
 
