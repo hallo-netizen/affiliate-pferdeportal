@@ -3,57 +3,46 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.695 GESAMT-TEXTROLLOUT 395/395 LOKAL PASS / LIVE-ABNAHME OFFEN**
+STATUS: **1.50.695 TECHNISCH PASS / REDAKTIONELL NICHT FREIGEGEBEN – WIEDERKEHRENDE SATZBAUSTEINE GEFUNDEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
 ## AKTUELLER BELASTBARER STAND
 
-- Qualitätsbenchmark bleibt **1.50.694**, insbesondere die vom Nutzer freigegebenen Pflanzen-Texte.
-- Vollständiger Folge-Stand **1.50.695** ist lokal gebaut und durch reale Evidence belegt.
-- Detail-Hubs: **395/395**.
-- Masterbestand: **395/395**.
-- 1.50.694-Benchmarktexte: **10/10 exakt erhalten**.
-- Sichtbare Leads: **45–60 Wörter**.
-- Aufklapptexte: **150–193 Wörter**, alle in genau **2 Absätzen**.
-- Verbotene Generator-/Füllphrasen: **0**.
-- Doppelte erste Sätze: **0 Gruppen**.
-- Satzdoppelungen ab 3 Vorkommen: **0 Gruppen**.
-- Kacheluntertitel mit bloßem Titel-Echo: **0**.
-- PHP: **123/123 PASS**.
-- Render-Harness: **8 repräsentative Welten + Benchmark-/Custom-/Generic-Untertitel PASS**.
-- Bildregression: **971/971** vorhandene Bilddateien byte-identisch zu 1.50.694.
-- ZIP-Integrität: **PASS**.
-- Artefakt:
-  `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
-- SHA-256:
-  `8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
-- Größe: **58,152,752 Bytes**.
-- Evidence:
-  `HOBBY_DEPOT_TEMPLATE_1.50.695_TEXT_ROLLOUT_EVIDENCE.json`
-- Live-Status: **NOT TESTED / NO LIVE PASS**.
+Direkt am realen 1.50.695-ZIP neu geprüft:
+- SHA-256: `8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`;
+- ZIP-Integrität PASS;
+- 395/395 Textdatensätze, Keyset exakt gleich 395er Masterbestand;
+- 10/10 Texte aus 1.50.694 exakt erhalten;
+- Leads 45–60 Wörter;
+- Aufklapptexte 150–193 Wörter;
+- 395/395 Aufklapptexte genau 2 Absätze;
+- PHP 123/123 PASS;
+- 971/971 Bilddateien byte-identisch zu 1.50.694;
+- allgemeiner Petrol-Leadblock ist im 1.50.695-CSS vorhanden.
+
+## REDAKTIONELLER FEHLER
+
+Die unabhängige N-Gramm-Prüfung zeigt wiederkehrende Satzbausteine, die gegen die verbindliche Regel „keine Massenproduktion aus Satzbausteinen / keine wiederkehrenden Absatzgerüste“ verstoßen. Beispiele:
+- `zeigt sich viel vom Charakter dieses Hobbys` in 21 Texten;
+- `zeigt sich, was dieses Hobby besonders macht` in 13 Texten;
+- `ein wesentlicher Teil des Hobbys zeigt sich` in 12 Texten;
+- `seinen eigenen Charakter bekommt das Hobby in` in 10 Texten;
+- `seinen besonderen Charakter zeigt das Hobby im` in 10 Texten.
+
+Damit ist die frühere Aussage „1.50.695 redaktionell HARD PASS“ widerrufen.
 
 ## ERSTER OFFENER BLOCKER
 
-Nur noch der echte WordPress-/Frontend-Live-Readback des vollständigen 1.50.695-Rollouts.
+Wiederkehrende Satzbausteine im 395er Textbestand müssen redaktionell entfernt werden, ohne die 1.50.694-Benchmarktexte zu verändern.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.695 regulär installieren und repräsentativ live prüfen: Benchmark-Pflanzen, Gestalten, Fertigen, Technik, Forschen, Tiere, Bewegen, Sammeln sowie mindestens einen direkten Category-Term.**
+**Nur die nachgewiesenen wiederkehrenden Satzbaustein-Gruppen in den betroffenen Texten redaktionell neu formulieren, anschließend vollständige N-Gramm-/Wortlängen-/Benchmark-/PHP-/ZIP-Regressionsprüfung wiederholen.**
 
 ## ARBEITSBINDUNG
 
 - 1.50.694 bleibt Qualitätsbenchmark.
-- Keine Texte neu schreiben, solange kein konkreter Livefehler belegt ist.
+- Keine pauschalen Wortersetzungen.
 - Keine neue Architektur.
-- Kein Rückfall auf 1.50.693.
-- Bei Liveabweichung exakt den betroffenen Render-/Textpfad reproduzieren; nicht raten.
-
-## NICHT ANFASSEN
-
-- Kategoriebaum/HD-001/HD-004;
-- Affiliate-Slotarchitektur;
-- Meta-/SEO-Titel;
-- Startseiten-Weltbilder;
-- Hauptkategorie-Heros;
-- Header/Navigation.
+- 1.50.695 nicht als finalen Uploadkandidaten behandeln.
