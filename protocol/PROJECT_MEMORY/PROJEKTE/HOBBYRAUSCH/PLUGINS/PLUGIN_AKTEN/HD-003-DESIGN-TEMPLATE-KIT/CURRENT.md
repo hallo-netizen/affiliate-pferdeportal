@@ -3,39 +3,52 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.694 10ER-TEXTPILOT LOKAL PASS / LIVE-SICHTPRÜFUNG OFFEN**
+STATUS: **1.50.695 395/395 BENCHMARK-TEXTROLLOUT LOCAL PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.694_TEXT_PILOT_10.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
 
 SHA-256:
-`c37ae7a3f8ffef6ab7ec7aec1e5402945e414ef36c7099914238a74f848c8ceb`
+`8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
 
-Scope:
-- 10 Pilotseiten textlich neu;
-- erster Satz echte Definition/Erklärung;
-- Lead 50–56 Wörter;
-- Aufklapptext 150–167 Wörter in zwei Absätzen;
-- farbiger Detail-Leadblock allgemein;
+Basis / Benchmark:
+- 1.50.694 = vom Nutzer freigegebene redaktionelle Benchmark;
+- 8 Pflanzen-Benchmarktexte unverändert;
+- 1.50.693 bleibt verworfen.
+
+Scope 1.50.695:
+- 395/395 Detail-Hubs;
+- Lead 45–60 Wörter;
+- erster Satz echte Erklärung/Definition;
+- Aufklapptext 150–193 Wörter zusätzlich zum Lead;
+- 2 Absätze;
+- natürliche direkte Ansprache;
+- heller Petrol-/Türkis-Leadblock allgemein;
 - Kacheluntertitel mit Zusatzinformation statt Titelwiederholung;
-- generische Füllformulierungen entfernt;
-- Schuhmacherei unverändert.
+- kein `Themen im Überblick`-Fallback auf dieser Ebene;
+- Schuhmacherei-Lead unverändert.
 
-QA:
-- PHP 120/120 PASS;
-- 10/10 Render-E2E PASS;
-- Schuhmacherei Regression PASS;
-- V150694 Releasekette PASS;
+Lokale QA:
+- 10/10 Benchmarktexte exakt unverändert;
+- verbotene Füll-/Generatorphrasen 0;
+- doppelte erste Sätze 0;
+- identische Sätze auf 3+ Seiten 0;
+- Custom-Untertitel-Echos 0;
+- PHP 123/123 PASS;
+- repräsentativer Render-Harness über alle 8 Welten PASS;
+- 971/971 bestehende Bilddateien byte-identisch zu 1.50.694;
 - ZIP PASS.
 
-ERSTER OFFENER BLOCKER:
-Nutzer-Liveprüfung des 10er-Piloten.
+## ERSTER OFFENER BLOCKER
 
-EXAKT EINE NEXT ACTION:
-**1.50.694 regulär installieren und die 10 Pilotseiten sichtbar prüfen.**
+**Echter WordPress-Live-Readback von 1.50.695 fehlt.**
+
+## EXAKT EINE NEXT ACTION
+
+**1.50.695 regulär installieren und repräsentative Detail-Hubs aus allen 8 Welten plus direkten Category-Term live prüfen.**
 
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
