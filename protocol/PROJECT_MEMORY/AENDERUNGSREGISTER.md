@@ -1679,3 +1679,23 @@ Registry, Hausmeisterprotokoll, Archivcheckpoint und Chatübergabe sind bewusst 
 
 GRENZE:
 Keine neue Facharchitektur, kein neuer Runner und keine Änderung an K0, Affiliate, Plugins oder anderen Projektgebäuden. Branchlöschung bleibt nur nach vollständiger Referenz-/Rollen-/Commitprüfung zulässig.
+
+
+## HOBBYRAUSCH-DESIGN-20261019-M – Hub2-Einstieg folgt derselben Inspirationslogik wie Detail-Hubs
+
+ENTSCHEIDUNG:
+Die 69 Hub2-/Ebene-2-Seiten verwenden im sichtbaren 45–60-Wörter-Lead dasselbe redaktionelle Grundprinzip wie die freigegebenen Detail-Hobbytexte, angepasst an eine Themenfamilie.
+
+WARUM:
+Hobby Depot dient auch der Inspiration. Ein Leser ohne Vorwissen soll im ersten Absatz unmittelbar verstehen, worum es geht, was man in diesem Themenfeld typischerweise macht bzw. welche Hobbys ihn erwarten und warum der Bereich reizvoll sein kann. Fachdetails dürfen diesen Überblick nicht verdrängen.
+
+REGEL:
+- kein Frage-Antwort-Schema;
+- kein starres Punkte-/Satzgerüst;
+- natürliche direkte Ansprache;
+- Definition/Überblick, typische Tätigkeit/Erwartung, Reiz und nötige Materialien/Voraussetzungen werden nur so kombiniert, wie es zum konkreten Thema passt;
+- gute vorhandene Fachinformationen dürfen nicht verloren gehen; falls sie den kompakten Lead überladen würden, werden sie im Aufklapptext erhalten;
+- Qualitätsmaßstab sind die freigegebenen Pflanzen-Texte 1.50.694 und der bestätigte Schrift-&-Lettering-Pilot 1.50.696.
+
+UMSETZUNG:
+Textregel dauerhaft in `PROJEKTE/HOBBYRAUSCH/DESIGN/TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md` präzisiert; Rollout 1.50.698.
