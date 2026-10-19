@@ -1,0 +1,40 @@
+--- a/includes/class-pste-semantic-retriever-a.php
++++ b/includes/class-pste-semantic-retriever-a.php
+@@ -12,7 +12,10 @@
+         $family=self::family($registry,$familyKey);
+         if(!$family)return self::blocked('A_FAMILY_SCOPE_NOT_IN_REGISTRY',$registry,$familyKey,[]);
+         $scores=[];$reasons=[];$available=self::available($family);$intentQuery=self::withoutFamilyPhrase($query,(string)($family['topic_family_name']??''));
+-        if(PSTE_Normalizer::isQuestion($intentQuery))self::score($scores,$reasons,'FAQ',120,'A_QUESTION_MEANING',$available);
++        if(PSTE_Normalizer::isQuestion($intentQuery)){
++            self::score($scores,$reasons,'FAQ',120,'A_QUESTION_MEANING',$available);
++            if($scores)return self::finish($scores,$reasons,$registry,$familyKey,$family);
++        }
+         $alias=self::registryAlias($intentQuery,$registry,$available);if($alias!=='')self::score($scores,$reasons,$alias,110,'A_EXPLICIT_TYPE_ALIAS',$available);
+         foreach(PSTE_Article_Type_Intent_Ontology::strongSignals($intentQuery,$available) as $type)self::score($scores,$reasons,$type,88,'A_EXPLICIT_INTENT_ONTOLOGY_SIGNAL',$available);
+         $ambiguous=PSTE_Article_Type_Intent_Ontology::ambiguousNonSignalHits($intentQuery);
+--- a/includes/class-pste-semantic-retriever-b.php
++++ b/includes/class-pste-semantic-retriever-b.php
+@@ -9,7 +9,10 @@
+         $available=[];foreach((array)($family['by_type']??[]) as $row)$available[]=(string)($row['article_type']??'');
+         $points=[];$why=[];$intentQuery=self::withoutFamilyPhrase($query,(string)($family['topic_family_name']??''));$trim=trim($intentQuery);$firstRaw=(string)(preg_split('/\s+/u',$trim)[0]??'');$first=PSTE_Normalizer::exactTopicIdentityText($firstRaw);
+         $interrogatives=['wie','was','wann','warum','wieso','weshalb','welche','welcher','welches','worauf','wieviel','kann','koennen','darf','duerfen','soll','sollen','muss','muessen','ist','sind','gibt','braucht','brauchen','benoetigt','benoetigen','frieren','friert','tragen','traegt','halten','haelt','schuetzen','schuetzt','passen','passt','verursachen','verursacht','machen','macht','werden','wird','eignen','eignet','reichen','reicht','helfen','hilft','schaden','schadet','waermen','waermt','bleiben','bleibt'];
+-        if(str_ends_with($trim,'?')||in_array($first,$interrogatives,true))self::put($points,$why,'FAQ',121,'B_INTERROGATIVE_SYNTAX',$available);
++        if(str_ends_with($trim,'?')||in_array($first,$interrogatives,true)){
++            self::put($points,$why,'FAQ',121,'B_INTERROGATIVE_SYNTAX',$available);
++            if($points)return self::complete($points,$why,$registry,$familyKey,$family);
++        }
+         $explicit=self::nomenclatureMatch($intentQuery,$registry,$available);if($explicit!=='')self::put($points,$why,$explicit,109,'B_REGISTRY_NOMENCLATURE',$available);
+         foreach(PSTE_Article_Type_Intent_Ontology::strongSignals($intentQuery,$available) as $type)self::put($points,$why,$type,86,'B_EXPLICIT_INTENT_ONTOLOGY_SIGNAL',$available);
+         $ambiguous=PSTE_Article_Type_Intent_Ontology::ambiguousNonSignalHits($intentQuery);
+--- a/includes/class-pste-breadth-research-queue.php
++++ b/includes/class-pste-breadth-research-queue.php
+@@ -907,6 +907,9 @@
+             'includes/class-pste-planning-readiness-gate.php','includes/class-pste-topic-policy.php',
+             'includes/class-pste-title-pipeline.php','includes/class-pste-title-composer.php',
+             'includes/class-pste-cannibalization.php','includes/class-pste-article-type-registry.php',
++            'includes/class-pste-semantic-classifier.php',
++            'includes/class-pste-semantic-retriever-a.php','includes/class-pste-semantic-retriever-b.php',
++            'includes/class-pste-article-type-intent-ontology.php','contracts/article-type-intent-ontology-v2.json',
+             'includes/class-pste-editorializer.php',
+             'includes/class-pste-context-evaluator.php'
+         ];
