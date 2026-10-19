@@ -320,3 +320,27 @@ vorhandenes Holzwerkstatt-Motiv ist für Holz + Besenbinden + Korbflechten + Wei
 
 REGEL:
 Kein generischer Weltbild-Fallback. Kein 1.50.669-Release vor semantischer Sichtprüfung aller sechs Paare, finalem ZIP-Roundtrip und erneuter Browser-QA.
+
+
+## HRD-074 – Detail-Hobbytexte trotz klarer Regeln als Generator-Schablone produziert
+STATUS: **OPEN / SCHUHMACHEREI-PILOT GEBAUT / GESAMTROLLOUT BLOCKIERT**
+
+BEFUND:
+Im bestehenden Detail-Hobbytextbestand treten wiederkehrende Generatorformulierungen und wiederkehrende Absatzgerüste auf, u. a. nach dem Muster `Konkreter wird es ...`, `Für die Orientierung ...` oder `Zur Vertiefung ...`. Zusätzlich sind kalte Kachelfloskeln wie `sinnvoll vergleichen`, `realistisch planen`, `sicher einordnen` oder `konkret vertiefen` vorhanden. Der Abschnittstitel `Themen im Überblick` beschreibt diese vertiefende Ebene ebenfalls falsch.
+
+URSACHE:
+Die vorhandene Regel gegen Generator-/Padding-Sprache wurde bei der Massenproduktion nicht tatsächlich durchgesetzt. Unterschiedliche Volltexte und korrekte Wortzahlen sind kein Qualitätsnachweis, wenn Satzanfänge, Absatzlogik und Kacheluntertitel weiterhin schablonenhaft sind.
+
+KORREKTURBINDUNG:
+- sichtbarer Lead 45–60 Wörter: Was ist das Hobby, was macht man, was ist typisch;
+- keine Navigation/Kachelliste im Lead;
+- aufgeklappter Text als zusammenhängende fachliche Vertiefung;
+- natürliche Tiefenüberschrift; neutral höchstens `Mehr zu <Hobby>`, nicht `Themen im Überblick`;
+- Kacheluntertitel nur konkrete Sachinhalte;
+- kein Massentausch einzelner Floskeln gegen neue Floskeln.
+
+PILOT:
+1.50.692 setzt diese Logik ausschließlich für Schuhmacherei als Musterfall um.
+
+OFFEN:
+Der Pilot besitzt noch keinen dokumentierten vollständigen lokalen Positiv-/Negativ-E2E-Nachweis und keine Nutzer-Liveabnahme. Der Gesamtbestand wird vorher nicht ausgerollt.
