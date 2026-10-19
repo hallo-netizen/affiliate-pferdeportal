@@ -261,3 +261,148 @@ Rolle: reiner Audit-/Evidence-Beleg. Keine Current-, Ziel- oder NEXT-ACTION-Auto
 
 WICHTIG:
 Dieser Checkpoint ersetzt keine Current-Autorität. Der Campus-`AUTORITAETSPLAN.json` besitzt aktuell keinen eigenen Scope für Repository-/Branch-Aufräumung. Dieser Architekturpunkt ist separat als Fehler zu behandeln.
+
+
+---
+
+## Fortsetzung / Abschluss des Branch-Audits – 2026-10-19
+
+Diese Fortsetzung ersetzt **nicht** die Current-Autorität. Sie dokumentiert nur die ausgeführte Prüfung.
+
+### Ancestry-Prüfung der vormals 176 offenen Branches
+
+Ergebnis:
+- geprüft: **176/176**
+- neu `ahead=0`: **44**
+- mit mindestens einem eigenen Commit: **132**
+- noch ungeprüft: **0**
+
+Gesamt über die ursprüngliche Prüfmenge von 467:
+- geprüft: **467/467**
+- `ahead=0`: **91**
+- mit mindestens einem eigenen Commit: **376**
+
+### Zweite Schutzprüfung der 91 Ahead-0-Branches
+
+Frisch geprüft:
+- aktive Registry: nur `main`, Campus, K0, Affiliate;
+- offene PRs: nur #518 / `fix/banner-import-basis-20261006`, keiner der 91 Kandidaten;
+- GitHub-Branchschutz: nur `main` und `article-production`;
+- aktives Ruleset `ARTICLE_PRODUCTION_HARDLOCK`: `article-production` ausdrücklich geschützt;
+- alle im `AUTORITAETSPLAN.json` gebundenen Current-Autoritäten auf die 91 Branchnamen geprüft;
+- exakte Branchnamen im aktuellen Main auf Referenzen geprüft;
+- Releases auf `target_commitish` gegen die 91 Kandidaten geprüft: keine Bindung.
+
+Der frühere Current-Verweis auf `docs/concept-agent-closeout-pr413-20260925` war nur die inzwischen abgearbeitete NEXT ACTION und wurde mit dem Current-Nachzug entfernt.
+
+### Ergebnis – 58 Löschkandidaten nach vollständiger Negativprüfung
+
+- `affiliate-672185-version-separation`
+- `affiliate-v672178-target-identity-rootfix-20261002`
+- `affiliate-v672179-local-hardtest-20261002`
+- `affiliate-v672180-version-only-localproof-20261002`
+- `bridge/text-start-receiver-20260923`
+- `campus-m37-integrated-live-next-20260911`
+- `campus-m37-product-phase-20260911`
+- `campus-m37-truth-update-20260911-check`
+- `campus-m37-truth-update-20260911`
+- `do-not-use`
+- `docs/closeout-kiss-text-start-20260925-correction`
+- `docs/closeout-kiss-text-start-20260925`
+- `feature/k7-github-director-kiss-20260928`
+- `final-repair-107008-20260902`
+- `handoff/concept-agent-16-current-20260922`
+- `k8-fix-real-live-handoff-wordpress-output-20260928`
+- `k8-fix-section-conclusion-balance-20260928`
+- `k10-job-mash-20261002-1256`
+- `k10-job-sperrriemen-sinnvoll-20261002-1256`
+- `k10-job-sperrriemen-verschnallen-20261002-1256`
+- `noop`
+- `ppm679-minimal-binding-fix-20260904`
+- `protocol/closeout-worker-workspace-20260926`
+- `protocol/current-sync-checkpoint38-20260926`
+- `protocol/16er-live-production-progress-20260926`
+- `pste-0.56.13-natural-editorial-title-rootfix-20260827`
+- `startmaster0107-codex-native-bound-action-rootfix-20260901`
+- `docs/concept-agent-closeout-pr413-20260925`
+- `glossar-office-setup`
+- `startmaster0107-codex-offline-freshness-fix-20260831`
+- `startmaster0107-codex-work-branch-proof-rootfix-20260901`
+- `startmaster0107-current-action-kiss-20260901`
+- `startmaster0107-dual-rootfix-action2-20260902`
+- `startmaster0107-dual-rootfix-action3-20260902`
+- `startmaster0107-dual-rootfix-action-20260902`
+- `startmaster0107-dual-rootfix-currentaction-propagation-20260902`
+- `startmaster0107-dual-rootfix-external-run-20260902`
+- `startmaster0107-dual-rootfix-fachpass-clean-20260902`
+- `startmaster0107-dual-rootfix-prepared-binding-20260902`
+- `startmaster0107-dual-rootfix-script-20260902`
+- `startmaster0107-dual-rootfix-sourcebinding-20260902`
+- `startmaster0107-dynamic-handoff-final-sync-20260829`
+- `startmaster0107-h8-rboot-runtime-bind-20260831`
+- `startmaster0107-live-107007`
+- `startmaster0107-networkless-runtime-rootfix-20260901`
+- `startmaster0107-permanent-runtime-rootfix-clean-20260831`
+- `startmaster0107-preflight-bound-package-default-20260901`
+- `startmaster0107-rootfix-capsule-binding-20260829`
+- `startmaster0107-rootfix-final-protocol-20260831`
+- `startmaster0107-rootfix-full-workspace-20260829`
+- `startmaster0107-step-d-rootfix-20260901`
+- `strict-mini-fix-executor-20260903`
+- `system4a-107008-prebind-20260917`
+- `system4a-canonical-bind-20260917`
+- `system4a-point16-finalizer-20260917`
+- `system4/restart-recovery-closeout-20260919`
+- `text-start-source-consume`
+- `v6633-business-gap-proof-recovery-20260828`
+
+### Ergebnis – 33 zurückgestellt / NO DELETE ohne separate Rollenfreigabe
+
+Bei diesen Branches ist Backup-/Fallback-/Gold-/Security-/Hardlock-/Schutzcharakter nicht sicher ausgeschlossen oder es besteht echter Branchschutz. Deshalb keine Löschfreigabe:
+
+- `affiliate-fallback-pre-restfix-20260925`
+- `article-production`
+- `chatgpt-komplettbackup-20260831`
+- `endstempel-github-secret-20260902`
+- `endstempel-handoff-mini-lock-20260903`
+- `endstempel-handoff-rescue-once-20260903`
+- `endstempel-security-hardening-20260902`
+- `fallback/konzept5-frozen-20260926`
+- `finish-startmaster0107-safety-gate-20260829`
+- `hardlock-base-fix-test-path`
+- `k8-verbot-hard-isolation-20260928`
+- `k8-verbot-live-behind-existing-start-20260928`
+- `k8-verbot-remove-final-k7-name-residue-20260928`
+- `konzept-null/current7-endstempel-source`
+- `protocol/closeout-real-worker-blocker-20260926`
+- `protocol/fix-current-status-blocked-20260926`
+- `security/allow-codex-no-origin-20260907`
+- `security/fix-hardlock-base-candidate-worktree-20260907`
+- `security/fix-immutable-hardlock-yaml-20260907`
+- `startmaster0106-production-speed-hardlock`
+- `endstempel-build-capsule-20260902`
+- `h5r-hardlock-bootstrap-20260830`
+- `h8-1-outer-provenance-envelope-20260831`
+- `hobbyroom/goldmaster-de21f6-source-20260907`
+- `hobbyroom/goldmaster-main-reconstruction-20260907`
+- `startmaster0107-immutable-base-hardlock`
+- `startmaster0107-notfall-einlass-hardlock-reset-20260829`
+- `startmaster0107-package-authority-boundary-20260901`
+- `startmaster0107-rootfix-output-lock-final-20260831`
+- `startmaster0107-ruleset-binding-sync`
+- `startmaster0107-step-d-restore-frozen-output-lock-20260902`
+- `system4/restart-recovery-precode-hardlock-main-20260919`
+- `wordpress-signature-entry-lock-20260903`
+
+### Löschstatus
+
+In diesem Audit wurden weiterhin **0 Branches gelöscht**.
+
+Grund:
+Der hier verfügbare GitHub-Zugriff besitzt keine Branch-Ref-Löschfunktion. Die Löschfreigabe ist deshalb als geprüfte Evidence festgehalten; keine Löschung wird behauptet.
+
+### Architekturhinweis
+
+Der ursprüngliche Hinweis dieses Checkpoints, es gebe noch keinen Cleanup-Scope, ist seit 2026-10-17 historisch überholt:
+BAU-043 ist CLOSED; `CAMPUS_REPOSITORY_CLEANUP` besitzt genau eine Current-Autorität:
+`protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md`.
