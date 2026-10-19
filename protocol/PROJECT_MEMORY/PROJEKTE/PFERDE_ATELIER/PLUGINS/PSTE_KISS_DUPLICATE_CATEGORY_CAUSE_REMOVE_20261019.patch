@@ -1,0 +1,49 @@
+--- a/includes/class-pste-article-type-registry.php
++++ b/includes/class-pste-article-type-registry.php
+@@ -58,7 +58,15 @@
+             ];
+             else $types[$canonical]['aliases']=array_values(array_unique(array_merge($types[$canonical]['aliases'],$aliases)));
+             $types[$canonical]['leaf_count']++;
+-            if(isset($families[$familyKey]['by_type'][$canonical]))throw new RuntimeException('PSTE_ARTICLE_TYPE_REGISTRY_DUPLICATE_FAMILY_TYPE');
++            if(isset($families[$familyKey]['by_type'][$canonical])){
++                // More than one real category for the same family/type cannot be chosen by type.
++                // Keep the existing type visible, but never claim any one leaf as an exact match.
++                $families[$familyKey]['by_type'][$canonical]['term_id']=0;
++                $families[$familyKey]['by_type'][$canonical]['slug']='';
++                $families[$familyKey]['by_type'][$canonical]['full_path']='';
++                $byTerm[$id]=$familyKey;$bySlug[$slug]=$familyKey;
++                continue;
++            }
+             $families[$familyKey]['topic_family_name']=$family;
+             $families[$familyKey]['topic_family_key']=$familyKey;
+             $families[$familyKey]['by_type'][$canonical]=[
+@@ -140,7 +148,7 @@
+     /** @return array<string,mixed> */
+     public static function resolve(array $registry,string $familyKey,string $articleType): array {
+         $canonical=self::canonicalType($articleType);$row=$registry['families'][$familyKey]['by_type'][$canonical]??null;
+-        if(!is_array($row))return ['ok'=>false,'reason_code'=>'PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING','family_key'=>$familyKey,'article_type'=>$articleType];
++        if(!is_array($row)||(int)($row['term_id']??0)<=0||(string)($row['slug']??'')==='')return ['ok'=>false,'reason_code'=>'PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING','family_key'=>$familyKey,'article_type'=>$articleType];
+         return array_merge(['ok'=>true],$row);
+     }
+     /** @return list<string> */
+--- a/includes/class-pste-breadth-research-queue.php
++++ b/includes/class-pste-breadth-research-queue.php
+@@ -907,6 +907,7 @@
+             'includes/class-pste-planning-readiness-gate.php','includes/class-pste-topic-policy.php',
+             'includes/class-pste-title-pipeline.php','includes/class-pste-title-composer.php',
+             'includes/class-pste-cannibalization.php','includes/class-pste-article-type-registry.php',
++            'includes/class-pste-category-gap.php',
+             'includes/class-pste-semantic-classifier.php',
+             'includes/class-pste-semantic-retriever-a.php','includes/class-pste-semantic-retriever-b.php',
+             'includes/class-pste-article-type-intent-ontology.php','contracts/article-type-intent-ontology-v2.json',
+--- a/includes/class-pste-category-gap.php
++++ b/includes/class-pste-category-gap.php
+@@ -12,6 +12,8 @@
+             elseif($alreadyCovered)$gap='NO_GAP_ALREADY_COVERED';
+             else $gap='CONTENT_GAP_CANDIDATE';
+         }elseif(!$familyExists)$gap='CATEGORY_GAP_CANDIDATE';
++        elseif(isset($registry['families'][$familyKey]['by_type'][PSTE_Article_Type_Registry::canonicalType($type)])
++            &&(int)($registry['families'][$familyKey]['by_type'][PSTE_Article_Type_Registry::canonicalType($type)]['term_id']??0)===0)$gap='CATEGORY_CHOICE_REQUIRED';
+         else $gap='ARTICLE_TYPE_LEAF_GAP';
+         $proposalType=match($gap){'CATEGORY_GAP_CANDIDATE'=>'MISSING_TOPIC_FAMILY','ARTICLE_TYPE_LEAF_GAP'=>'MISSING_ARTICLE_TYPE_LEAF','ALIAS_OR_NAMING_GAP'=>'TAXONOMY_ALIAS_OR_NAMING_GAP','RETRIEVER_OR_ONTOLOGY_GAP'=>'RETRIEVER_OR_ONTOLOGY_GAP',default=>''};
+         $sourceClasses=[];foreach($evidence as $row){$s=(string)($row['source']??'');if($s!=='')$sourceClasses[$s]=true;}
