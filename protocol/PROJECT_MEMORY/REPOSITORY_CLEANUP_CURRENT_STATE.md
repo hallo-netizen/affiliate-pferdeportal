@@ -27,11 +27,15 @@ Aktive Registry:
 - `affiliate-release-current`
 
 Frisch geprüft vor Abschluss des Audits:
-- physische Branches: **494**
+- physische Branches: **496**
 - offene PRs: ausschließlich **#518 – Fix ADCELL banner import basis**
 - PR-Branch `fix/banner-import-basis-20261006`: geschützt / nicht Teil dieses Cleanup-Auftrags
 - geschützte Branches laut GitHub: `main` und `article-production`
 - Release-Targets: keiner der Audit-Kandidaten ist als Release-`target_commitish` gebunden
+- Delta nach dem 494er Checkpoint: zwei neue Hobby-Branches vom 18.10.2026:
+  - `hobbyroom/hd689-updater-artifact-20261018` → gegenüber Campus **6 eigene Commits**
+  - `hobbyroom/hd690-detail-rollout-20261018` → gegenüber Campus **10 eigene Commits**
+- beide Delta-Branches sind **NO DELETE** und nicht Teil der 58 Löschkandidaten
 
 Branch-Audit-Beleg:
 `protocol/PROJECT_MEMORY/ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`
