@@ -29,9 +29,10 @@ zuständiges Büro → `AUTORITAETSPLAN.json` → genau eine Current-Autorität 
 - `SEO_KATEGORIEN/START_HERE.md` → Suchintentionen, Keyword-Cluster, Kategorien und Seitenstruktur.
 - `TEXT_REDAKTION/START_HERE.md` → Redaktion, Artikelregeln und spätere Textproduktion.
 - `WISSENSDATENBANK/START_HERE.md` → dauerhaftes Fachwissen, Quellen und strukturierte Wissensbestände.
+- `GLOSSAR/START_HERE.md` → Fachwörterbuch, Glossarbegriffe, Glossar-SEO und Glossar-Core.
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleiche, Vergleichslogik und Faktendossiers.
 - `DESIGN/START_HERE.md` → Portaldesign und Darstellung.
-- `BILD/START_HERE.md` → Bildkonzept und Bildnutzung.
+- `BILD/START_HERE.md` → Bildkonzept, Bildnutzung und Hobby-Depot-Anwendung der Allgemeinen Bildzentrale.
 - `AFFILIATE/START_HERE.md` → Affiliate-Partner, Produkte, Zuordnungen und Monetarisierung.
 - `WORDPRESS_TECHNIK/START_HERE.md` → WordPress als schlanke Schaltzentrale, Hosting, Betrieb und technische Wartung.
 - `PLUGINS/START_HERE.md` → zentrales Plugin-Inventar, Plugin-Akten und unveränderte Originalablage.
