@@ -3,67 +3,90 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **2.7.6 REFERENZ GEBUNDEN / HOBBY-DEPOT-ADAPTION WIP / QUELLBYTES OFFEN / NICHT INSTALLIEREN**
+STATUS: **HOBBY DEPOT BILDZENTRALE 1.0.0 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
 
 ## Aktueller belastbarer Stand
 
-Hobby Depot besitzt bereits dieses BILD-Büro. Es wird für die Bildzentrale genutzt; es wird **kein zweites paralleles Bilderzentrale-Büro** angelegt.
+Das vorhandene BILD-Büro bleibt die einzige Hobby-Depot-Bildzentrale. Kein Parallelbüro.
 
-Allgemeiner technischer Referenzstand:
-- Allgemeine Bildzentrale **2.7.6**
-- Referenzartefakt: `ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip`
-- bekannter SHA-256: `12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0`
+Referenz des früheren allgemeinen Systems:
+- Allgemeine Bildzentrale 2.7.6;
+- Pferde-Installation 2.7.6 belegt;
+- exakte 2.7.6-Pluginbytes im aktuell erreichbaren Arbeitsbestand nicht verfügbar.
 
-Pferde-Installation ist als 2.7.6 belegt.
+Deshalb wurde kein angeblicher 2.7.6-Klon konstruiert, sondern eine **saubere Hobby-Depot-Fassung auf Basis des belegten allgemeinen Funktionsvertrags und der aktuellen Hobby-Depot-Designschnittstellen** gebaut.
 
-## Für Hobby Depot übernehmbarer Kern
+## Installationskandidat
 
-- Beitragsbilder;
-- WordPress-Taxonomiebilder;
-- Custom-Post-Type-/Hero-Wege, wenn im Zielprofil benötigt;
-- optionale HivePress-Taxonomien;
+Plugin:
+**Hobby Depot Bildzentrale 1.0.0**
+
+Artefakt:
+`HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip`
+
+SHA-256:
+`bb74d795dffaa6d3ff51d6251d298c04c53ee9a3d75d39c00609afde867c7503`
+
+Persistente Arbeitskopie:
+`/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip`
+
+## Übernommener allgemeiner Kern
+
+- Beiträge/Seiten/CPT über WordPress Featured Image;
+- WordPress-Kategoriebilder;
+- optionale HivePress-Kategoriebilder;
 - Pixabay;
 - Pexels;
 - Magnific;
-- sichere Profile;
-- Export/Import;
-- Readback-Fallback;
-- No-Overwrite-Schutz;
-- vorhandene Bilder nicht ungefragt ersetzen.
+- Mediathek-Zuweisung;
+- URL-Import;
+- Readback nach Bildzuweisung;
+- Rücksetzung bei fehlgeschlagenem Readback;
+- No-Overwrite als Standard;
+- Konfigurationsexport ohne API-Schlüssel.
 
-## Zwingend entfernen/deaktivieren
+## Exakte Hobby-Depot-Designbindung
 
-- `pa_breed`-Sonderweg;
-- serieller 10er-Pferderassen-Batch;
-- Pferderassen-Hero-Migration;
-- Pferde-spezifisches Framing/Prompts;
-- Pferde-Taxonomien, IDs, Labels, URLs und Defaults;
-- **Bildertrommel** nach ausdrücklicher Nutzerfestlegung;
-- sonstige Pferde-Altlasten, die erst im exakten Source-Audit sichtbar werden.
+Frisch gegen Designstand 1.50.699 geprüft:
+- normale WordPress-Kategorien werden über `thumbnail_id` gelesen;
+- HivePress liest die von der Bildzentrale bereitgestellte Option `pabz_taxonomy_image_config_v1`;
+- Standardbindung der neuen Bildzentrale: `hp_listing_category` + `thumbnail_id`.
 
-## Hobby-Depot-Bindung
+Damit wird keine neue Bildschnittstelle erfunden.
 
-Bildziele werden aus der aktiven Hobby-Depot-Struktur abgeleitet, nicht hart codiert.
+## Entfernt / nicht übernommen
 
-Primäre Fachwelten:
-**Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**
+- `pa_breed`;
+- Pferderassen-Batch;
+- Pferderassen-Hero-Sonderlogik;
+- Pferde-Prompts/-Framing;
+- Pferde-Taxonomien/-IDs/-URLs;
+- **Bildertrommel / Random-Rotation**;
+- automatische Massenbilderzeugung;
+- automatische Überschreibung bestehender Bilder;
+- Zugangsdaten.
 
-Der aktuelle Design-/Bildbestand wird nicht automatisch überschrieben.
+Magnific läuft nur nach ausdrücklicher Admin-Aktion und ohne Cron.
+
+## Lokale QA
+
+- PHP-Lint: **PASS**;
+- ZIP-Integrität: **PASS**;
+- `pa_breed` / Horse-Logik: **0**;
+- Scheduler/Cron: **0**;
+- Design-Kompatibilitätsoption vorhanden;
+- WordPress-Kategorie `thumbnail_id`: vorhanden;
+- Pixabay/Pexels/Magnific-Wege vorhanden;
+- No-Overwrite + Readback/Rollback vorhanden.
 
 ## Installation Hobby Depot
 
-Der frische Hobby-Depot-Systemstand vom 2026-10-18 zeigt keine aktive Allgemeine Bildzentrale.
+Noch nicht installiert.
 
-**Nicht aktiv; eine bestehende Installation ist im vorliegenden Systemreport nicht belegt. In diesem Arbeitsschritt wurde nichts installiert.**
+## ERSTER OFFENER BLOCKER
 
-## Quellgrenze
-
-Die exakten 2.7.6-Pluginbytes liegen im aktuell erreichbaren Campus-/Library-Bestand nicht als kopierbares Artefakt vor. Es existieren belastbare Version-/Hash-/Live- und Source-Scan-Belege, aber kein zulässiger vollständiger Quellkörper für einen sicheren Umbau.
-
-## Erster offener Blocker
-
-Exakten 2.7.6-Quell-/ZIP-Stand bytegenau binden.
+Echter WordPress-Installations- und Funktionsreadback.
 
 ## EXAKT EINE NEXT ACTION
 
-**Exakte 2.7.6-Bytes binden und danach einen Source-Audit auf Pferde-Altlasten durchführen; erst anschließend eine neue eindeutig versionierte Hobby-Depot-Fassung ohne pa_breed, Pferde-Prompts und Bildertrommel bauen und lokal testen.**
+**HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip im Hobby Depot installieren und zunächst nur einen bestehenden Mediathek-Test sowie je eine leere WordPress-Kategorie-/Seitenzuweisung prüfen; keine Massenbebilderung starten.**
