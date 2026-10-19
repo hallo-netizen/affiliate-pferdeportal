@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-19
-STATUS: **1.50.693 LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.693 VERWORFEN / KEIN AKTUELLER RELEASEKANDIDAT**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -40,3 +40,10 @@ LIVE-GRENZE:
 
 NEXT:
 Nicht aus diesem Manifest ableiten. Ausschließlich aus der zuständigen Plugin-Current lesen.
+
+
+KORREKTUR 2026-10-19:
+- 1.50.693-HARD-PASS widerrufen.
+- Nutzer-Livebefund: Leads künstlich/anmoderierend, unbekannte Begriffe unzureichend erklärt.
+- Technisch belegt: Farbrahmen nur auf Schuhmacherei-Sonderklasse gebunden.
+- Artefakt 1.50.693 nicht verwenden.
