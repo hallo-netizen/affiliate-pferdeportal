@@ -1699,3 +1699,26 @@ REGEL:
 
 UMSETZUNG:
 Textregel dauerhaft in `PROJEKTE/HOBBYRAUSCH/DESIGN/TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md` präzisiert; Rollout 1.50.698.
+
+
+## HOBBYRAUSCH-DESIGN-20261019-N – Startseite: ein Finder-Weg statt doppelter Entdecken-Route
+
+ENTSCHEIDUNG:
+Der Hero der Hobby-Depot-Startseite führt nur noch zum Hobbyfinder. Der bisherige zusätzliche Button „Hobbys entdecken“ entfällt. Freies Stöbern beginnt unmittelbar darunter bei „Deine Hobbywelten“ und braucht weder eine zweite Seite noch einen zweiten Hero-CTA.
+
+WARUM:
+Die acht Hobbywelten stehen direkt unter dem Hero. Eine zusätzliche „Hobbys entdecken“-Route würde denselben Einstieg doppeln und war zudem nicht belastbar an eine funktionierende Zielseite gebunden. Der Hobbyfinder besitzt dagegen eine eigenständige Aufgabe: Nutzer ohne konkrete Hobbyidee über persönliche Kriterien zu passenden Hobbys führen.
+
+FINDER-LOGIK:
+Kriterien wie drinnen/draußen, alleine/zu zweit/Gruppe, ruhig/aktiv, Zeit, Platz, Kosten/Budget, Saison und Ausrüstungsbedarf sind Eigenschaften desselben zentralen Hobbybestands. Sie dürfen als Filter/Funnel und redaktionelle Einstiege genutzt werden, erzeugen aber nicht automatisch eine zweite Hobbystruktur.
+
+STARTSEITE 1.50.699:
+- „Unsere Hobbywelten“ → „Deine Hobbywelten“;
+- Unterzeile auf „Klick dich rein und finde Hobbys, die zu dir passen.“ gekürzt;
+- „Entdecke unsere Themenbereiche.“ entfernt;
+- „Alle Hobbywelten entdecken“ entfernt;
+- „Zeit, Budget & Platz“ aus Startseiten-Themen entfernt, nicht aus Editorial-/SEO-Bestand;
+- Anbieter bleibt separate DIRECTORY-/HivePress-Säule und Footer-Weg.
+
+GRENZE:
+Keine Änderung an Kategoriebaum, 395 Detail-Hubs, 69 Hub2-Einstiegen, Bildern, Affiliate-Slots oder Meta-/SEO-Titeln. Kein Live-PASS vor WordPress-/Frontend-Readback.
