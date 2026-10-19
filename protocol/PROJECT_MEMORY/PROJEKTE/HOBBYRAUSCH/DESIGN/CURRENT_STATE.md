@@ -3,58 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.692 SCHUHMACHEREI-TEXTPILOT DOKUMENTIERT GEBAUT / STATISCHE QA PASS / VOLLSTÄNDIGE POSITIV-NEGATIV-E2E-PRÜFUNG OFFEN / KEIN GESAMTROLLOUT**
+STATUS: **1.50.693 DETAIL-TEXTROLLOUT 395/395 LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.4 / 2026-10-19**
 
 ## AKTUELLER BELASTBARER STAND
 
-- Letzter ausdrücklich vom Nutzer live abgenommener Detail-Musterfall: **Kettenhemd flechten 1.50.689**.
-- 1.50.690 generalisiert dessen Reihenfolge im gemeinsamen WP_Post-basierten Detailseitenrenderer: **Text → Banner → kompletter Kachelblock → Empfehlungen → bis zu 4 Beiträge → vorhandener weiterer Werbeplatz**.
-- Die zusätzlich dokumentierten **16 direkten Category-Term-Knoten** sind weiterhin nicht als eigener Runtimepfad live verifiziert; kein PASS raten.
-- Vollpaket **1.50.691** wurde gebaut: normale Plugin-Überinstallation, 8 neue ruhige Startseiten-Weltbilder, Querbanner unter den 8 Welten, Hauptkategorie-Heros unverändert. Ein ausdrücklicher Nutzer-Live-PASS für 1.50.691 ist nicht belegt.
-- Der vorhandene Detail-Hobbytextbestand enthält nach Nutzerbefund unzulässige Generator-/Schablonensprache. Autoritative Fehlerquelle: **HRD-074**.
-- Verbindliche Textlogik ab Zielvertrag 5.4:
-  - sichtbarer Lead ca. 45–60 Wörter: **Was ist das Hobby? Was macht man? Was ist typisch?**
-  - Lead ohne Navigation/Kachelauflistung; ruhiger heller Petrol-/Türkisblock zulässig;
-  - aufgeklappter Rest fachlich zusammenhängend;
-  - natürliche Vertiefungsüberschrift; neutral höchstens **Mehr zu <Hobby>**; **Themen im Überblick** entfällt;
-  - Kacheluntertitel konkret-fachlich; keine kalten Generatorfloskeln.
-- Pilot **1.50.692 – Schuhmacherei** ist im Buildstand dokumentiert:
-  - 51-Wort-Einsteigerlead;
-  - 164 Wörter Gesamttext;
-  - Überschrift `Mehr zur Schuhmacherei`;
-  - 9 konkrete Kacheluntertitel;
-  - heller Petrolblock nur im Pilot;
-  - Startseite, Hauptkategorie-Heros und andere Hobbytexte unverändert.
-- Dokumentiertes Artefakt: `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
-- Dokumentierte SHA-256: `c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
-- Dokumentierte statische QA: PHP **120/120**, ZIP PASS, aktive V150692-Kette PASS.
-- **Nicht belegt:** vollständige lokale Positiv- UND Negativ-E2E-Simulation des realen Schuhmacherei-Renderpfads. Deshalb noch keine Deployment-/Live-PASS-Freigabe.
-- Das 1.50.692-Artefakt ist nicht als isoliertes `CURRENT.zip` synchronisiert; das bleibt bis zum vollständigen Hard-PASS korrekt.
+- Schuhmacherei-Pilotstruktur ist vom Nutzer inhaltlich/visuell als Grundlage für den Gesamtrollout bestätigt.
+- Sichtbarer Detail-Hobby-Lead bleibt separat: ca. 45–60 Wörter, erklärt Was ist das Hobby / was macht man / was ist typisch.
+- Aufklappbarer Vertiefungstext: ca. 150–200 Wörter **zusätzlich** zum Lead, direkte du-Ansprache, je nach Inhalt 1–2 Absätze; im aktuellen Rollout 2 Absätze.
+- Kacheluntertitel: kurze konkrete Inhaltsaussage ohne Füllwörter/Füllverben oder Generatorfloskeln.
+- Gesamtrollout **1.50.693** ist lokal gebaut:
+  - 395/395 Detail-Hubs;
+  - Lead 45–60 Wörter;
+  - aufklappbarer Text 150–187 Wörter;
+  - zwei Absätze je aufklappbarem Text;
+  - 0 Regelverstöße gegen die gebundenen Füll-/Generatorphrasen;
+  - 0 interne Textdoppelungen im automatisierten Satzähnlichkeitscheck;
+  - semantische Querfehler aus dem Zwischenstand korrigiert, u. a. falsche Pilz-, Meerwasser- und Fundhinweise.
+- Schuhmacherei-Lead bleibt exakt wie vom Nutzer bestätigt.
+- Kacheltexte wurden auf content-only Kurzfassungen umgestellt; Schuhmacherei besitzt weiterhin neun fachlich konkrete Spezialuntertitel.
+- Lokale Technik-/Regression:
+  - PHP **123/123 PASS**;
+  - Positiv-/Negativ-Render-E2E für Schuhmacherei, Airbrush-Kontrollseite und direkten Category-Term PASS;
+  - Release-/Templatekette V150693 PASS;
+  - 8/8 Startseiten-Weltbilder byte-identisch zu 1.50.691;
+  - Hauptkategorie-Basis unverändert;
+  - verbotene Füllphrasen im 395er Textbestand und Kachelrenderer: 0.
+- Lokales Artefakt:
+  `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.693_DETAIL_TEXT_ROLLOUT_LOCAL_HARD_PASS.zip`
+- SHA-256:
+  `558a345042c9acaa488b01ce543c2f9d7defc4406f5243ee17f90b4363975d54`
+- **Kein Live-PASS:** 1.50.693 ist noch nicht im echten WordPress-Frontend abgenommen.
 
 ## ERSTER OFFENER BLOCKER
 
-Die projektweite Hard Rule verlangt vor Upload/Deployment eine dokumentierte **positive und negative E2E-Simulation des real relevanten Pfads**. Dieser Nachweis ist für 1.50.692 in der aktuellen Evidence noch nicht vorhanden.
+Der vollständige 395er Text-/Kachelrollout ist lokal hart geprüft, aber **noch nicht live sichtbar abgenommen**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.692 lokal über den tatsächlich gerouteten Schuhmacherei-Pfad vollständig positiv und negativ simulieren – inklusive Kontrollseite ohne Pilotänderung, Release-/Templatekette, Leadblock, Text, Vertiefungsüberschrift, 9 Kacheluntertitel sowie Regression von Startseite und Hauptkategorie-Heros. Erst bei PASS das normale Vollplugin zur Nutzer-Sichtabnahme ausgeben.**
+**1.50.693 als normales vollständiges Template-Kit installieren und mehrere repräsentative Detail-Hubs live prüfen: Schuhmacherei, mindestens je ein Hobby aus Gestalten/Fertigen/Technik/Forschen/Pflanzen/Tiere/Bewegen/Sammeln sowie einen direkten Category-Term. Bei Abweichung nicht raten, sondern exakt den Livepfad reproduzieren.**
 
 ## ARBEITSBINDUNG
 
 - Campus-/Dokubranche: `hobbyroom/project-memory-campus-v1-20260905`.
 - Plugin: **HD-003 – Hobby Depot Design / Template Kit**.
-- Fachziel: Zielvertrag 5.4 + verbindliche Textregeln.
-- Gesamtrollout der 395 Detail-Hubs **erst nach Nutzerabnahme des Schuhmacherei-Piloten**.
-- Keine Massen-Wortersetzungen; Texte redaktionell neu schreiben.
+- Keine Massen-Wortersetzungen; Textregeln bleiben redaktionelle Qualitätsgrenze.
 - Kein Architekturumbau.
+- Live bestätigte Header-/Navigations-, Startseiten- und Hauptkategorie-Hero-Bindungen nicht verändern.
 
 ## NICHT ANFASSEN
 
-- live abgenommenen Kettenhemd-Aufbau nicht verändern;
-- Startseiten-Weltbilder 1.50.691 nicht erneut umbauen;
-- Hauptkategorie-Heros unverändert lassen;
-- Kategoriebaum/HD-001/HD-004 nicht verändern;
-- Meta-Titel weiterhin separater späterer SEO-Schritt;
-- keine neuen Affiliate-Slottypen.
+- Kategoriebaum/HD-001/HD-004;
+- Affiliate-Slotarchitektur;
+- Meta-Titel/SEO-Titel;
+- Startseiten-Weltbilder 1.50.691;
+- Hauptkategorie-Heros.
