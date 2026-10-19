@@ -1,33 +1,34 @@
 {
   "contract": "HOBBY_DEPOT_BILDZENTRALE_CONFIG_V1",
   "project_id": "hobby-depot",
-  "source_reference": {
+  "current_candidate": {
+    "version": "1.0.0",
+    "artifact": "HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip",
+    "sha256": "bb74d795dffaa6d3ff51d6251d298c04c53ee9a3d75d39c00609afde867c7503"
+  },
+  "reference_source": {
     "version": "2.7.6",
     "artifact": "ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip",
-    "sha256": "12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0"
+    "sha256": "12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0",
+    "exact_bytes_available": false
   },
-  "portal_structure_source": "HOBBY_DEPOT_ACTIVE_CATEGORY_REGISTRY",
-  "primary_worlds": [
-    "Gestalten",
-    "Fertigen",
-    "Technik",
-    "Forschen",
-    "Pflanzen",
-    "Tiere",
-    "Bewegen",
-    "Sammeln"
-  ],
+  "design_binding": {
+    "wordpress_category_meta_key": "thumbnail_id",
+    "hivepress_taxonomy": "hp_listing_category",
+    "hivepress_image_meta_key": "thumbnail_id",
+    "compatibility_option": "pabz_taxonomy_image_config_v1"
+  },
   "enabled_capabilities": [
-    "posts",
+    "posts_pages_cpt_featured_image",
     "wp_taxonomies",
-    "cpt_hero_optional",
     "hivepress_taxonomies_optional",
     "pixabay",
     "pexels",
-    "magnific",
-    "profiles",
-    "export_import",
-    "readback_fallback",
+    "magnific_explicit_only",
+    "remote_import",
+    "media_assignment",
+    "settings_export_without_secrets",
+    "readback_rollback",
     "no_overwrite"
   ],
   "forbidden_or_removed": [
@@ -37,12 +38,14 @@
     "horse_specific_framing",
     "horse_taxonomy_ids",
     "horse_urls",
-    "bildertrommel"
+    "bildertrommel",
+    "random_rotation",
+    "autonomous_mass_generation",
+    "automatic_overwrite"
   ],
   "migration_policy": {
     "overwrite_existing_images": false,
-    "write_before_source_audit": false,
-    "live_install_before_local_qa": false
-  },
-  "target_version_policy": "MATERIAL_CODE_CHANGE_REQUIRES_NEW_VERSION"
+    "live_install_before_local_qa": false,
+    "mass_run_before_live_single_test": false
+  }
 }
