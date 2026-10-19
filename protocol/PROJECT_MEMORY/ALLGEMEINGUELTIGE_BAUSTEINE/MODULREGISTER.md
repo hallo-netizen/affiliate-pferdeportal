@@ -97,9 +97,9 @@ echter Live-WordPress-Deploymentlauf auf Zielinstallation
 ## MOD-002 – BILDZENTRALE
 
 MODULKLASSE: ALLGEMEINGÜLTIG
-STATUS: allgemeingültiger Modul-Kern; aktueller 2.6.9-Installer + Nullpunkt 069 als Dateien vorhanden; beide Installer byte-identisch; Pferde-LIVE-Version 2.6.9 separat belegt
+STATUS: allgemeingültiger Modul-Kern; allgemeine Current belegt inzwischen Version 2.7.6; Pferde-Installation 2.7.6 zusätzlich durch Systemdiagnose belegt
 HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
-AKTUELL BELEGTER LIVE-STAND: 2.6.9 im Pferde-Atelier
+AKTUELL BELEGTER STAND: 2.7.6; Hobby-Depot-Anwendung wird im vorhandenen Büro `PROJEKTE/HOBBYRAUSCH/BILD/` vorbereitet
 ZWECK:
 - Beiträge
 - WordPress-Taxonomien
@@ -113,15 +113,15 @@ ZWECK:
 ABHÄNGIGKEITEN: WordPress; optionale HivePress-Nutzung; Providerzugänge
 NUTZENDE PROJEKTE:
 - PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/BILD/`
+- HOBBYRAUSCH → `PROJEKTE/HOBBYRAUSCH/BILD/` (Adaption vorbereitet, noch nicht installiert)
 BELEG:
-- allgemeiner Installer 2.6.9
-- Nullpunkt 069
-- Byte-Identität beider 2.6.9-Installer
-- bestehende Nutzerbestätigung LIVE 2.6.9 im Pferde-Atelier
-- Pferde Master 049 / historischer 2.4.9-Codebeleg
-- 2.6.6-Konfigurationsbeleg
+- allgemeine Current: 2.7.6;
+- Referenzartefakt `ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip`;
+- bekannte ZIP-SHA-256 `12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0`;
+- Pferde-Systemdiagnose: aktive Version 2.7.6.
 OFFEN:
-- keine Fachprüfung in diesem Sortierschritt.
+- exakte 2.7.6-Bytes für Hobby-Depot-Source-Audit binden;
+- Pferde-Sonderlogik inklusive pa_breed, Rassenbatch, Pferde-Prompts und Bildertrommel vor Hobby-Depot-Release entfernen/deaktivieren.
 
 ## Projektanwendung
 
@@ -312,3 +312,39 @@ AKTUELLER VERTRAG:
 
 OFFEN:
 Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration sowie spätere produktive Release-/Liveprüfung.
+
+
+## MOD-008 – UNIVERSAL GLOSSAR ENGINE
+
+MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
+
+STATUS:
+Neutraler Glossar-Core wurde technisch projektneutral entwickelt; Pferde Atelier ist die erste reale Anwendung. Auf Pferde Atelier ist Version 1.4.0 installiert. Hobby Depot ist als zweite reale Projektanwendung fachlich vorbereitet, aber der exakte 1.4.0-Quellkörper ist im aktuell erreichbaren Arbeitsbestand noch nicht gebunden.
+
+ZWECK:
+- eigener Glossar-Inhaltstyp;
+- eigene Glossar-Gruppen;
+- Hauptseitenbindung;
+- eigene Begriff-URLs;
+- A–Z, Suche und Filter;
+- strukturierter Draft-Import;
+- SEO-Felder;
+- verwandte Begriffe;
+- optionale Hauptseite;
+- Reviewlogik;
+- kein Auto-Publish.
+
+ERSTE PROJEKTANWENDUNG:
+PFERDE_ATELIER.
+
+ZWEITE PROJEKTANWENDUNG IN VORBEREITUNG:
+HOBBYRAUSCH → `PROJEKTE/HOBBYRAUSCH/GLOSSAR/`.
+
+HISTORISCHE NEUTRALE QUELLLINIE:
+Branch `hobbyroom/glossar-027-release-hardtest-20260913` mit technisch geprüftem 0.2.7-Core.
+
+AKTUELLER PFERDE-REFERENZSTAND:
+Version 1.4.0, Referenzartefakt `UNIVERSAL_GLOSSARY_ENGINE_1.4.0_SAFE_MANAGER_RELATIONS_REVIEW_INSTALLIEREN.zip`, bekannte SHA-256 `fb75ff8044eff4383ba44dd6389b1aa97ff16ab500445037ce2d5819f2335231`.
+
+OFFEN:
+Exakte 1.4.0-Bytes binden und Hobby Depot als zweite reale Anwendung technisch beweisen; erst dann die formale Allgemeingültigkeit hochstufen.
