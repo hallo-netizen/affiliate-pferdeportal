@@ -3,89 +3,69 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.697 HUB2-GESAMTROLLOUT 69/69 LOKAL HARD PASS / LIVE-ABNAHME OFFEN**
+STATUS: **1.50.698 HUB2-EINSTIEGE 69/69 LOKAL PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
 ## AKTUELLER BELASTBARER STAND
 
-- Qualitätsbenchmark bleibt **1.50.694**, insbesondere die vom Nutzer freigegebenen Pflanzen-Texte.
-- Vollständiger Detail-Hub-Textbestand aus 1.50.695 bleibt unverändert: **395/395**.
-- **1.50.696 Schrift & Lettering** wurde vom Nutzer live/inhaltlich als perfekt bestätigt und ist Benchmark für die darüberliegende Hub2-Ebene.
-- Neuer Stand **1.50.697** rollt exakt dieses Prinzip auf **alle 69 Hub2-Kategorien derselben Ebene** aus.
+- Detail-Hobby-Benchmark bleibt **1.50.694**, insbesondere die acht vom Nutzer ausdrücklich freigegebenen Pflanzen-Texte.
+- **1.50.696 Schrift & Lettering** bleibt bestätigte grafische Hub2-Benchmark.
+- Der 1.50.697-Gesamtrollout war formal korrekt, aber mehrere sichtbare Hub2-Leads stiegen zu früh mit Fachdetails ein und erfüllten die gewünschte Inspirations-/Einleitungsfunktion nicht zuverlässig genug.
+- **1.50.698** korrigiert deshalb ausschließlich die sichtbaren Einstiege und die notwendige Informationsbewahrung.
 
-### Text
-- 69/69 Hub2 mit sichtbarem Kurzüberblick im Bereich **45–60 Wörter**.
-- Jeder Kurzüberblick erklärt direkt:
-  - worum es in der Kategorie geht;
-  - was man konkret macht;
-  - typische Werkzeuge/Materialien/Voraussetzungen;
-  - den Reiz bzw. die Besonderheit, soweit natürlich passend.
-- Keine Seiten-/Kurs-/Anmoderationssprache:
-  - `Die Seite …` 0;
-  - `Hier findest du …` 0;
-  - `Hier erfährst du …` 0;
-  - `Hier geht es …` 0;
-  - verbotene Füllphrasen 0.
-- Aufklapptexte: **150–175 Wörter**, 69/69 exakt **2 Absätze**.
-- Direkte natürliche Ansprache.
-- 0 doppelte erste Sätze.
-- 0 exakte Satzdoppelungsgruppen ab 3 Texten.
-- 0 wiederkehrende 6-Wort-N-Gramme in 4+ Hub2-Texten.
-- 0 Absatzanfänge, die in 3+ Hub2-Texten identisch beginnen.
+### 69 Hub2-Einstiege
+- **69/69** sichtbar neu geprüft und redaktionell an die freigegebene Ebene darunter angeglichen.
+- Leadlänge: **47–58 Wörter**.
+- Jeder Lead erklärt ohne Vorrede:
+  - worum es in der Themenfamilie geht;
+  - was man dort typischerweise macht bzw. erwartet;
+  - für welche Interessen der Bereich reizvoll ist;
+  - typische Materialien/Werkzeuge/Voraussetzungen, sofern für den ersten Eindruck sinnvoll.
+- Keine Frage-Antwort-Schablone.
+- Direkte natürliche Ansprache: **69/69**.
+- Fragezeichen im Lead: **0**.
+- verbotene Meta-/Kurs-/Generatorphrasen: **0**.
+- doppelte erste Sätze: **0 Gruppen**.
+- wiederkehrende 6-Wort-N-Gramme in 4+ Leads: **0 Gruppen**.
 
-### Grafik
-- Heller Petrol-/Türkis-Kurzblock aus 1.50.696 jetzt **für alle 69 Hub2-Kategorien**.
-- Bestehendes Hero-/Bildsystem unverändert.
-- **983/983 Assets byte-identisch** zu 1.50.696.
+### Bestehende Informationen
+- Die vorhandenen guten Aufklapptexte wurden als Basis erhalten.
+- Wo ein nützlicher fachlicher Hinweis aus dem bisherigen sichtbaren Lead im neuen Inspirations-Lead nicht mehr sinnvoll Platz hatte, wurde er in den Aufklapper übernommen.
+- **35 Hub2** erhielten dafür explizit je einen Erhaltungssatz.
+- Aufklapptexte danach: **150–192 Wörter**, **69/69 exakt 2 Absätze**.
 
-### Unterkacheln
-- Reale Zielbaumstruktur: **379 direkte Kindseiten** unter den 69 Hub2.
-- **379/379** besitzen jetzt einen expliziten, konkreten Kacheluntertitel.
-- 0 fehlende Untertitel.
-- 0 reine Titelwiederholungen.
-- Untertitellänge: 3–14 Wörter bei 379/379.
-
-### Regression / Technik
-- 69/69 Hub2 realer Intro-Renderharness PASS.
-- 379/379 Untertitel-Renderharness PASS.
-- PHP **129/129 PASS**.
-- 395er Detailtextdatei byte-identisch zu 1.50.696.
+### Grafik / Regression
+- Petrol-/Türkis-Leadblock unverändert nach 1.50.696-Benchmark.
+- Hero-/Bildsystem unverändert.
+- **983/983 Assets unverändert** gegenüber 1.50.697.
+- vollständiger 395er Detail-Hub-Textbestand unverändert.
+- Benchmark-Pilotdatei 1.50.694 unverändert.
+- PHP **132/132 PASS**.
+- Runtime-Reflection-Audit der 69 Hub2-Editorials: **69/69 PASS**.
 - ZIP-Integrität PASS.
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.697_HUB2_TEXT_ROLLOUT_LOCAL_PASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.698_HUB2_INTRO_BENCHMARK.zip`
 
 SHA-256:
-`ac42f7fb06d8aaf7f08709b5362b911c717d35ba7d9b582c50cfa5999b5a5ec0`
+`b665cf5c782bb8835ec923ccb1289e2ff7355b5e57bc0073a38025903a61969c`
 
 GRÖSSE:
-58,403,816 Bytes.
-
-EVIDENCE:
-`HOBBY_DEPOT_TEMPLATE_1.50.697_HUB2_TEXT_ROLLOUT_EVIDENCE.json`
+58,537,086 Bytes.
 
 ## ERSTER OFFENER BLOCKER
 
-Nur noch echter WordPress-/Frontend-Live-Readback des vollständigen 69er Hub2-Rollouts.
+Nur echter WordPress-/Frontend-Readback des 1.50.698-Stands.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.697 regulär installieren und repräsentativ mehrere Hub2 aus allen acht Welten live prüfen, darunter Schrift & Lettering als Benchmark sowie mindestens je eine Kategorie mit wenigen und vielen Unterkacheln.**
+**1.50.698 installieren und repräsentativ mehrere Hub2 aus allen acht Welten lesen; insbesondere prüfen, ob der sichtbare Absatz ohne Vorwissen sofort Thema, Tätigkeit/Erwartung und Reiz verständlich macht und ob die verschobenen Fachdetails im Aufklapper sauber erhalten bleiben.**
 
 ## ARBEITSBINDUNG
 
 - 1.50.694 = redaktionelle Detailtext-Benchmark.
-- 1.50.696 = bestätigte Hub2-Grafik-/Textbenchmark.
-- Keine unnötige Neuschreibung der 395 Detail-Hubs.
+- 1.50.696 = bestätigte Hub2-Grafikbenchmark.
+- Keine Frageenschablonen.
 - Keine neue Architektur.
 - Keine Änderungen an Kategoriebaum, Affiliate-Slotarchitektur, Meta-/SEO-Titeln oder Bildern.
-
-## NICHT ANFASSEN
-
-- Kategoriebaum/HD-001/HD-004;
-- Affiliate-Slotarchitektur;
-- Meta-/SEO-Titel;
-- Startseiten-Weltbilder;
-- Hauptkategorie-Heros;
-- Header/Navigation.
