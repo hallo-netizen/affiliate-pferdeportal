@@ -2,353 +2,59 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-18
-STATUS: **1.50.691 VOLLPAKET GEBAUT / 1.50.692 SCHUHMACHEREI-TEXTPILOT GEBAUT / TEXTREGELN VERSCHÄRFT / GESAMTROLLOUT ERST NACH PILOTABNAHME**
+STAND: 2026-10-19
+STATUS: **1.50.692 SCHUHMACHEREI-TEXTPILOT DOKUMENTIERT GEBAUT / STATISCHE QA PASS / VOLLSTÄNDIGE POSITIV-NEGATIV-E2E-PRÜFUNG OFFEN / KEIN GESAMTROLLOUT**
 
-Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.3 / 2026-10-18**
+Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.4 / 2026-10-19**
 
-## KANDIDAT 1.50.687
+## AKTUELLER BELASTBARER STAND
 
-Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.687_CATEGORY_LEVEL_ROLLOUT_ICONS_DUMMY_POSTS.zip`
+- Letzter ausdrücklich vom Nutzer live abgenommener Detail-Musterfall: **Kettenhemd flechten 1.50.689**.
+- 1.50.690 generalisiert dessen Reihenfolge im gemeinsamen WP_Post-basierten Detailseitenrenderer: **Text → Banner → kompletter Kachelblock → Empfehlungen → bis zu 4 Beiträge → vorhandener weiterer Werbeplatz**.
+- Die zusätzlich dokumentierten **16 direkten Category-Term-Knoten** sind weiterhin nicht als eigener Runtimepfad live verifiziert; kein PASS raten.
+- Vollpaket **1.50.691** wurde gebaut: normale Plugin-Überinstallation, 8 neue ruhige Startseiten-Weltbilder, Querbanner unter den 8 Welten, Hauptkategorie-Heros unverändert. Ein ausdrücklicher Nutzer-Live-PASS für 1.50.691 ist nicht belegt.
+- Der vorhandene Detail-Hobbytextbestand enthält nach Nutzerbefund unzulässige Generator-/Schablonensprache. Autoritative Fehlerquelle: **HRD-074**.
+- Verbindliche Textlogik ab Zielvertrag 5.4:
+  - sichtbarer Lead ca. 45–60 Wörter: **Was ist das Hobby? Was macht man? Was ist typisch?**
+  - Lead ohne Navigation/Kachelauflistung; ruhiger heller Petrol-/Türkisblock zulässig;
+  - aufgeklappter Rest fachlich zusammenhängend;
+  - natürliche Vertiefungsüberschrift; neutral höchstens **Mehr zu <Hobby>**; **Themen im Überblick** entfällt;
+  - Kacheluntertitel konkret-fachlich; keine kalten Generatorfloskeln.
+- Pilot **1.50.692 – Schuhmacherei** ist im Buildstand dokumentiert:
+  - 51-Wort-Einsteigerlead;
+  - 164 Wörter Gesamttext;
+  - Überschrift `Mehr zur Schuhmacherei`;
+  - 9 konkrete Kacheluntertitel;
+  - heller Petrolblock nur im Pilot;
+  - Startseite, Hauptkategorie-Heros und andere Hobbytexte unverändert.
+- Dokumentiertes Artefakt: `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
+- Dokumentierte SHA-256: `c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
+- Dokumentierte statische QA: PHP **120/120**, ZIP PASS, aktive V150692-Kette PASS.
+- **Nicht belegt:** vollständige lokale Positiv- UND Negativ-E2E-Simulation des realen Schuhmacherei-Renderpfads. Deshalb noch keine Deployment-/Live-PASS-Freigabe.
+- Das 1.50.692-Artefakt ist nicht als isoliertes `CURRENT.zip` synchronisiert; das bleibt bis zum vollständigen Hard-PASS korrekt.
 
-SHA-256:
-`9a881f3b3b7cf25ab2cfdc5f9a2c62b878fa5cc7513ba8678524f98b7464235b`
+## ERSTER OFFENER BLOCKER
 
-## SCOPE – GLEICHE LOGISCHE EBENE WIE KETTENHEMDFLECHTEN
-
-Aktueller Zielbaum:
-- **379 Page-Knoten** auf dieser Ebene;
-- zusätzlich **16 direkte Category-Term-Knoten** derselben logischen Ebene;
-- insgesamt **395** Detail-Hubs;
-- unter den 379 Page-Knoten aktuell **2.979 letzte Kategorien**.
-
-Für diese Ebene gilt jetzt zentral:
-- kein Hero-Bild;
-- kompakter mittiger Kopf mit thematischem Icon + H1;
-- 150–200-Wörter-Fachtext nach den bestehenden Textregeln;
-- 45–62 Wörter sichtbar, Rest per Chevron;
-- Desktop 4er-Raster, Tablet 2er, Mobil 1er;
-- vorhandene Produkte/Banner früher zwischen den Inhalten;
-- bis zu 4 passende Beitragsvorschauen mit Bild;
-- keine neuen Affiliate-Slottypen.
-
-## TEXTE
-
-- 395/395 Texte vorhanden;
-- Wortumfang **150–170**;
-- sichtbare Leads **45–62 Wörter**;
-- 395/395 Volltexte unterschiedlich;
-- Kettenhemdflechten bleibt inhaltlich auf dem abgenommenen 162-Wörter-Pilottext;
-- offensichtliche Fachfehler der ersten automatischen Rohfassung wurden vor Release nachbearbeitet, insbesondere Genuss/Fermentation sowie Aquaristik, Imkerei, Ameisen/Insekten und Gehegebau.
-
-## ZENTRALE ICON-STEUERUNG LETZTE KATEGORIEEBENE
-
-Keine zufällige/hash-basierte Iconwahl mehr.
-
-Semantische Rollen werden zentral auf Icons abgebildet, unter anderem:
-- FAQ;
-- Vergleich/Kaufberatung;
-- Einstieg/Grundlagen;
-- Ausrüstung/Kosten;
-- Werkzeuge;
-- Materialien;
-- Muster;
-- Sicherheit;
-- Pflege/Probleme;
-- Dokumentation;
-- Aufbewahrung;
-- Bestimmung/Messen;
-- Arten/Sorten;
-- Klima;
-- Futter;
-- Standort;
-- Technik;
-- Projekt/Finish;
-- Farbe;
-- Vorbereitung;
-- Bau/Montage;
-- Elektronik;
-- Wasser;
-- Pflanzen.
-
-Damit erhält z. B. **FAQ portalweit dasselbe FAQ-Icon** und Vergleich/Kaufberatung dasselbe Vergleichs-Icon.
-
-Für nicht explizit klassifizierte letzte Kategorien wird der fachliche Eltern-/Themenkontext verwendet; keine zufällig wechselnden Icons.
-
-## KETTENHEMDFLECHTEN – 4 DUMMYBEITRÄGE
-
-1. `Kettenhemdflechten: Ringe sauber öffnen und schließen`
-2. `European 4-in-1: Das Grundmuster sauber aufbauen`
-3. `Welche Ringe und Zangen passen für den Einstieg?`
-4. `Kanten und Abschlüsse am Kettengeflecht sauber fertigstellen`
-
-Eigenschaften:
-- als veröffentlichte Dummy-Posts angelegt;
-- jeweils einer passenden Kettenhemd-Unterkategorie zugeordnet;
-- jeweils mit Beitragsbild;
-- Seeder idempotent;
-- Vorschauabfrage zieht maximal 4 Beiträge aus den direkten Unterkategorien.
-
-## QA
-
-- PHP **105/105 PASS**;
-- reale Front-Route → V150687 PASS;
-- reale Content-Route → V150687 PASS;
-- beide V150687-Templates positiv ausgeführt PASS;
-- Negativtest mit ausschließlich V150686 scheitert erwartungsgemäß;
-- Kettenhemd-Pilotrender: kein Hero, 1 H1, 8 Karten PASS;
-- zentrale Iconrollen FAQ / Vergleich / Grundlagen / Ausrüstung geprüft;
-- 4 Dummy-Posts + 4 Kategoriebindungen + 4 Featured Images PASS;
-- zweiter Seedlauf erzeugt keine Duplikate;
-- Postpreview-Abfrage: Limit 4 und alle 8 direkten Kettenhemd-Unterkategorien als Quelle PASS;
-- Copy-Coverage: 395/395 PASS;
-- 379 Pages + 16 direkte Terms PASS;
-- 2.979 letzte Kategorien im Scope;
-- Delta zu 1.50.686: **1 bestehende Datei geändert + 4 Dateien neu + 0 entfernt**;
-- Dirty Overlay 1.50.686 → 1.50.687 aktive Kette PASS;
-- ZIP PASS;
-- Roundtrip **1146/1146 byte-identisch**.
+Die projektweite Hard Rule verlangt vor Upload/Deployment eine dokumentierte **positive und negative E2E-Simulation des real relevanten Pfads**. Dieser Nachweis ist für 1.50.692 in der aktuellen Evidence noch nicht vorhanden.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.687 installieren und zuerst Kettenhemdflechten prüfen: 4 Dummy-Beiträge mit Bildern, neue zentrale Icons und gemischte Seitenreihenfolge. Danach zwei weitere Detail-Hubs derselben Ebene stichprobenartig prüfen.**
+**1.50.692 lokal über den tatsächlich gerouteten Schuhmacherei-Pfad vollständig positiv und negativ simulieren – inklusive Kontrollseite ohne Pilotänderung, Release-/Templatekette, Leadblock, Text, Vertiefungsüberschrift, 9 Kacheluntertitel sowie Regression von Startseite und Hauptkategorie-Heros. Erst bei PASS das normale Vollplugin zur Nutzer-Sichtabnahme ausgeben.**
+
+## ARBEITSBINDUNG
+
+- Campus-/Dokubranche: `hobbyroom/project-memory-campus-v1-20260905`.
+- Plugin: **HD-003 – Hobby Depot Design / Template Kit**.
+- Fachziel: Zielvertrag 5.4 + verbindliche Textregeln.
+- Gesamtrollout der 395 Detail-Hubs **erst nach Nutzerabnahme des Schuhmacherei-Piloten**.
+- Keine Massen-Wortersetzungen; Texte redaktionell neu schreiben.
+- Kein Architekturumbau.
 
 ## NICHT ANFASSEN
 
-- Hub2-Hero-Logik nicht erneut ändern;
-- Kategoriebaum nicht ändern;
-- keine neuen Affiliate-Slottypen;
-- keine zufällige Iconwahl;
-- Dummy-Beiträge nicht als finale Fachartikel behandeln.
-
-
-## KANDIDAT 1.50.688 – KETTENHEMD-KACHELREFINEMENT
-
-Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.688_KETTENHEMD_CARD_REFINEMENT.zip`
-
-SHA-256:
-`a57ba6a8ec158191276673d309825787cfc0ec6d0c192bed358a97e193cac843`
-
-Umsetzung:
-- sichtbare H1 auf Kettenhemd-Seite: `Kettenhemd` / `flechten` zweizeilig; gespeicherter Titel, URL und Slug unverändert;
-- Kachelabschnitt nicht mehr `Weiter in Kettenhemdflechten`, sondern `Rund ums Kettenhemd`;
-- für andere Detail-Hubs neutraler Fallback `Themen im Überblick` statt unmittelbarer H1-Dopplung;
-- Produktabschnitt `Passende Ausrüstung` → neutral `Empfehlungen`;
-- Kettenhemd-Kacheln deutlich lesbarer: Titel 16 px, Untertitel 12,5 px, größere Icons und etwas mehr Kartenhöhe;
-- Kettenhemd-Unterzeilen auf reine Sachinformation gekürzt;
-- Frontend-Label `FAQ / Häufige Fragen` → `Häufige Fragen`;
-- Meta-Titel ausdrücklich NICHT geändert;
-- harte Ausgaberegel: sichtbare Kachel-/Kurztexte dieser Detail-Ebene beginnen mit Großbuchstaben; bekannte Marken-Schreibweisen eBay/iPhone/iPad werden nicht zerstört.
-
-Kettenhemd-Unterzeilen:
-- Einstieg & Grundlagen → `Material, Ringmaße und erste Handgriffe`
-- Ausrüstung & Kosten → `Zangen, Ringe und Grundausstattung`
-- Vergleich & Kaufberatung → `Materialien, Ringtypen und Sets`
-- Formen & Übergänge → `Flächen, Kanten und Verbindungen`
-- Grundmuster → `Flechtmuster und Aufbau`
-- Projekte & Finish → `Abschlüsse, Kanten und Finish`
-- Ringe & Werkzeuge → `Ringgrößen, Drahtstärken und Zangen`
-- Häufige Fragen → `Typische Probleme und Lösungen`
-
-QA:
-- PHP 108/108 PASS;
-- Front-/Contentroute V150688 PASS;
-- beide V150688-Templates positiv PASS;
-- Negativtest nur mit V150687 erwartungsgemäß FAIL;
-- Kettenhemd-Render: H1-Split PASS;
-- Abschnittstitel PASS;
-- 8/8 Karten PASS;
-- FAQ-Frontendtitel PASS;
-- alte Füll-Endungen im Kettenhemd-Kartenpfad entfernt PASS;
-- Großschreibungsregel mit Negativfall `alte Stilkonsolen...` → `Alte Stilkonsolen...` PASS;
-- Delta zu 1.50.687: 1 bestehende Datei geändert + 3 neu + 0 entfernt;
-- ZIP PASS;
-- Roundtrip 1149/1149 byte-identisch.
-
-## EXAKT EINE NEXT ACTION
-
-**1.50.688 installieren und Kettenhemd flechten real prüfen: H1-Zeilenumbruch, Kartenwirkung, kurze Untertitel, `Rund ums Kettenhemd` und `Empfehlungen`. Meta-Titel danach separat.**
-
-
-## KANDIDAT 1.50.689 – KETTENHEMD REIHENFOLGE + EINZEILIGE H1
-
-Auslieferung:
-`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.689.zip`
-
-Art:
-**kleines einmaliges Delta-Update für die exakt installierte 1.50.688**. Es prüft den 1.50.688-Stand hart, legt ein Backup der vier angefassten Dateien an, schreibt V150689 als neue Profil-/Templatekette, schaltet die Main erst zuletzt um und deaktiviert sich anschließend selbst.
-
-Nur Kettenhemd-Pilot:
-- sichtbare H1 jetzt **einzeilig `Kettenhemd flechten`**, kein Umbruch;
-- gespeicherter WordPress-Titel, Slug und URL unverändert;
-- Meta-Titel unverändert;
-- direkt nach Intro/Text: vorhandener Banner;
-- danach `Rund ums Kettenhemd` mit allen **8 Kacheln als geschlossener Block**, keine Produktunterbrechung;
-- danach `Empfehlungen` mit den vorhandenen Affiliate-Produkten;
-- danach bis zu 4 passende Beitragsvorschauen;
-- bestehender späterer Werbe-/Dienstleisterplatz bleibt danach.
-
-QA des Updatepakets:
-- ZIP-Integrität PASS;
-- PHP-Lint PASS;
-- harte Paketassertions PASS;
-- GitHub Actions Run 39139756377: SUCCESS;
-- Update ist fail-closed: passt der installierte 1.50.688-Quellstand nicht exakt, wird vor der Umschaltung abgebrochen;
-- WordPress-Live-Readback nach Anwendung ist noch offen.
-
-## EXAKT EINE NEXT ACTION
-
-**Delta-Update 1.50.689 installieren + aktivieren und Kettenhemd flechten real prüfen: H1 einzeilig sowie Reihenfolge Banner → 8 Kacheln → Empfehlungen → Beiträge.**
-
-
-## 1.50.689 – NUTZERABNAHME
-
-Der Nutzer hat Kettenhemd flechten ausdrücklich als PASS bestätigt.
-
-Abgenommene Reihenfolge:
-1. kompakter Kopf + Text;
-2. Banner direkt unter dem Text;
-3. komplette Unterkategorie-Kachelgruppe ohne Affiliate-Unterbrechung;
-4. Empfehlungen / Affiliate-Produkte;
-5. passende Beiträge;
-6. weiterer bestehender Werbe-/Dienstleisterplatz.
-
-Zusätzlich abgenommen:
-- sichtbare H1 `Kettenhemd flechten` ohne künstlichen Zeilenumbruch;
-- `Rund ums Kettenhemd`;
-- größere/dezent dominantere Kacheln;
-- kurze sachliche Unterzeilen;
-- `Empfehlungen` als neutrale Produktüberschrift;
-- Meta-Titel weiterhin separat/offen.
-
-## KANDIDAT 1.50.690 – ROLLOUT
-
-Artefakt:
-`HOBBY_DEPOT_TEMPLATE_KIT_UPDATE_1.50.690.zip`
-
-SHA-256:
-`fcbc01893df451e56527cdcf90e6f7364cfa24d7afbc4556b69bc9b215c19809`
-
-Technik:
-- bewusst wieder kleines One-shot-Update wegen gemessener langsamer Plugin-Installation;
-- harte Basis: vorhandenes Template Kit exakt 1.50.689;
-- legt Backup der vier geänderten 1.50.689-Dateien an;
-- erzeugt Profil/Templates 1.50.690;
-- entfernt den Kettenhemd-only-Zweig aus dem gemeinsamen `render_category_level_body_v150687`;
-- der abgenommene Ablauf läuft danach für alle WP_Post-basierten Detail-Hubs dieses gemeinsamen Renderers;
-- Banner → kompletter Kategorienblock → Empfehlungen → bis zu 4 Beiträge → bestehender Rental-/Werbeplatz;
-- Kettenhemd bleibt dabei identisch im abgenommenen Stand.
-
-Nicht behauptet:
-- die 16 zusätzlich dokumentierten direkten Category-Term-Knoten sind durch den Quellpatch nicht separat als eigener Term-Renderer verifiziert. Dafür ist nach Installation ein echter WordPress-Readback nötig; kein Raten.
-
-QA:
-- Updater-PHP-Lint PASS;
-- Hard assertions PASS;
-- ZIP-Integrität PASS;
-- Build-Workflow PASS;
-- Kettenhemd-Sonderbedingung wird zur Laufzeit exakt einmal ersetzt;
-- Releasekette 1.50.689 → 1.50.690 hart geprüft;
-- SHA oben aus erzeugtem Build-Artefakt.
-
-## EXAKT EINE NEXT ACTION
-
-**1.50.690 installieren und außer Kettenhemd mindestens zwei weitere Detail-Hubs sowie einen der direkten Category-Term-Fälle real prüfen.**
-
-
-## KANDIDAT 1.50.691 – STARTSEITE
-
-Artefakt:
-`HOBBY_DEPOT_STARTSEITE_UPDATE_1.50.691.zip`
-
-SHA-256:
-`9b0ab3086a757461905b363e7af2a865ac1a6684fea65cd597bac53dd9ac6cd8`
-
-Umsetzung:
-- 8 neue ruhige Startseitenbilder für Gestalten/Fertigen/Technik/Forschen/Pflanzen/Tiere/Bewegen/Sammeln;
-- 1400×620 WebP, jeweils aus freigegebenem neuem Motiv;
-- Startseitenkarten verwenden eigene Bildquelle `start-world-v150691/<slug>.webp`;
-- `world_hero_asset()` bleibt unverändert und versorgt weiterhin die Hauptkategorie-Heros;
-- vorhandener Affiliate-Querbanner wird direkt unter die 8 Hobbywelten verschoben;
-- weitere Startseitenmodule bleiben in ihrer Reihenfolge erhalten;
-- kleines One-shot-Update auf harter Basis 1.50.690, mit Backup und Selbstdeaktivierung.
-
-QA:
-- PHP-Lint PASS;
-- ZIP-Test PASS;
-- 8/8 WebP vorhanden;
-- alle 8 Bilder 1400×620;
-- Startseiten-/Heroquellen technisch getrennt;
-- Hero-Schutzcheck im Updater enthalten.
-
-NEXT:
-**1.50.691 installieren und nur die Startseite prüfen.**
-
-
-## 1.50.691 – NORMALES VOLLSTÄNDIGES TEMPLATE-KIT
-
-Der zuvor gebaute One-shot-Updater wird für die Nutzerinstallation verworfen, weil der Nutzer ausdrücklich den gewohnten WordPress-Überschreibweg möchte.
-
-Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.691_STARTSEITE_RUHIGE_WELTBILDER.zip`
-
-SHA-256:
-`984356b9eaadb6ad2954c14bb026d4a380afdf00e06caccef5bec5be2f7288b0`
-
-Eigenschaften:
-- normales Pluginroot `affiliate-portal-template-kit/`;
-- vollständiger Pluginbestand;
-- aktiver Main-/Profil-/Template-Stand 1.50.691;
-- enthält den 1.50.689-Kettenhemd-Stand und den 1.50.690-Detailseiten-Rollout;
-- 8 neue ruhige Startseiten-Weltbilder;
-- Startseitenkarten verwenden die neuen Bilder;
-- Hauptkategorie-Heroquelle unverändert;
-- Querbanner direkt nach den acht Hobbywelten und vor den weiteren Startseitenmodulen.
-
-QA:
-- PHP **117/117 PASS**;
-- ZIP-Integrität PASS;
-- korrekter WordPress-Pluginroot PASS;
-- aktive Main-Kette V150691 PASS;
-- aktive Front-/Contenttemplate-Kette V150691 PASS;
-- Startseitenbildquelle `start-world-v150691` PASS;
-- Bannerreihenfolge `world_cards → affiliate_banner → editorial_cards` PASS;
-- Hauptkategorie-Hero-Funktion gegenüber rekonstruiertem 1.50.690 byte-identisch;
-- ZIP-Roundtrip **1166/1166 byte-identisch**.
-
-NEXT:
-**Das vollständige 1.50.691 als normales Update über das bestehende Affiliate Portal Template Kit installieren/überschreiben und Startseite prüfen.**
-
-
-## 1.50.692 – SCHUHMACHEREI-TEXTPILOT
-
-Zweck:
-Vor dem Umschreiben des gesamten Detailbestands wird **nur Schuhmacherei** als verbindlicher Musterfall umgesetzt.
-
-Pilotänderungen:
-- sichtbarer Lead: 51 Wörter, erklärt für völlige Anfänger, was Schuhmacherei ist, was man dabei macht und was typisch ist;
-- Gesamttext: 164 Wörter, logisch zusammenhängend, ohne Kacheln in Satzform nachzuerzählen;
-- verbotene Generatorphrasen im Schuhmacherei-Text entfernt;
-- Zwischenüberschrift: `Mehr zur Schuhmacherei`;
-- alle neun Schuhmacherei-Kacheluntertitel fachlich konkret neu formuliert;
-- sichtbarer Lead nur bei Schuhmacherei als ruhiger hell-petrolfarbener Block;
-- Kettenhemd, Startseite, Hauptkategorie-Heros und alle anderen Hobbytexte bleiben in diesem Pilot unangetastet.
-
-Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
-
-SHA-256:
-`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
-
-QA:
-- PHP 120/120 PASS;
-- ZIP-Integrität PASS;
-- aktive Main-/Profil-/Template-Kette V150692 PASS;
-- Schuhmacherei Lead 51 Wörter;
-- Schuhmacherei Gesamttext 164 Wörter;
-- verbotene Altphrasen im Pilottext: 0 Treffer.
-
-NEXT:
-**Schuhmacherei real ansehen und Text-/Blocklogik abnehmen. Erst danach dieselbe Qualitätslogik auf den Gesamtbestand anwenden.**
+- live abgenommenen Kettenhemd-Aufbau nicht verändern;
+- Startseiten-Weltbilder 1.50.691 nicht erneut umbauen;
+- Hauptkategorie-Heros unverändert lassen;
+- Kategoriebaum/HD-001/HD-004 nicht verändern;
+- Meta-Titel weiterhin separater späterer SEO-Schritt;
+- keine neuen Affiliate-Slottypen.
