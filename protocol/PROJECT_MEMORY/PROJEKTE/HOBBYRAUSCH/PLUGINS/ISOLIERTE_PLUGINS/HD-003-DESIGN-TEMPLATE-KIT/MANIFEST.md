@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-19
-STATUS: **1.50.695 LOCAL PASS / LIVE-READBACK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.50.696 SCHRIFT-&-LETTERING-HUB2-PILOT LOCAL PASS / LIVE OFFEN**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -13,35 +13,28 @@ PLUGIN-CURRENT:
 `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
 KANDIDAT:
-1.50.695 – vollständiger 395er Benchmark-Textrollout
+1.50.696 – Schrift & Lettering Hub2-Pilot
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.696_SCHRIFT_LETTERING_PILOT.zip`
 
 SHA-256:
-`8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
+`937cc9c90a2663e8c03ae4e78ca30cc998a09c33880ac508cf59fde541402ba2`
 
 LOKALE QA:
-- 395/395 Detail-Hubs;
-- 10/10 1.50.694-Benchmarktexte exakt unverändert;
-- Lead 45–60 Wörter;
-- Aufklapptext 150–193 Wörter, zwei Absätze;
-- 0 verbotene Generator-/Füllphrasen;
-- 0 doppelte erste Sätze;
-- 0 identische Sätze auf 3+ Seiten;
-- 0 Custom-Kacheluntertitel-Echos;
-- PHP 123/123 PASS;
-- 8-Welten-Render-Harness PASS;
-- 971/971 bestehende Bilddateien byte-identisch;
+- Kurzüberblick 51 Wörter;
+- Aufklapptext 152 Wörter / 2 Absätze;
+- reale 3 Kindseiten vollständig geprüft;
+- positive/negative Renderprüfung PASS;
+- 68 übrige Hub2-Texte unverändert;
+- 395er Detailtextmap unverändert;
+- 983/983 Assets unverändert;
+- PHP 126/126 PASS;
 - ZIP PASS.
 
 LIVE-GRENZE:
 - kein Live-PASS;
-- echter WordPress-Readback steht aus.
-
-ISOLIERTE BINÄRKOPIE:
-- `CURRENT.zip` wurde in diesem Arbeitsschritt nicht synchronisiert;
-- Manifest dokumentiert den lokalen Kandidaten, ist aber keine zweite Release-Wahrheit.
+- Nutzer-Sichtprüfung von Schrift & Lettering steht aus.
 
 NEXT:
-Ausschließlich aus der zuständigen Plugin-Current lesen.
+Nicht aus diesem Manifest ableiten. Ausschließlich aus der zuständigen Plugin-Current lesen.
