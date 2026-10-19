@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-19
-STATUS: **1.50.693 VERWORFEN / KEIN AKTUELLER RELEASEKANDIDAT**
+STATUS: **1.50.695 LOCAL PASS / LIVE-READBACK OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -13,37 +13,35 @@ PLUGIN-CURRENT:
 `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
 KANDIDAT:
-1.50.693 – 395er Detail-Text-/Kachelrollout
+1.50.695 – vollständiger 395er Benchmark-Textrollout
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.693_DETAIL_TEXT_ROLLOUT_LOCAL_HARD_PASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
 
 SHA-256:
-`558a345042c9acaa488b01ce543c2f9d7defc4406f5243ee17f90b4363975d54`
+`8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
 
 LOKALE QA:
 - 395/395 Detail-Hubs;
+- 10/10 1.50.694-Benchmarktexte exakt unverändert;
 - Lead 45–60 Wörter;
-- Aufklapptext 150–187 Wörter, zwei Absätze;
-- 0 Regel-/Füllphrasenfehler;
-- 0 interne Wiederholungsfehler;
+- Aufklapptext 150–193 Wörter, zwei Absätze;
+- 0 verbotene Generator-/Füllphrasen;
+- 0 doppelte erste Sätze;
+- 0 identische Sätze auf 3+ Seiten;
+- 0 Custom-Kacheluntertitel-Echos;
 - PHP 123/123 PASS;
-- Positiv-/Negativ-Render-E2E PASS;
-- direkte Category-Term-Route PASS;
-- V150693 Release-/Templatekette PASS;
-- Startseiten-Weltassets unverändert;
+- 8-Welten-Render-Harness PASS;
+- 971/971 bestehende Bilddateien byte-identisch;
 - ZIP PASS.
 
 LIVE-GRENZE:
 - kein Live-PASS;
-- echter WordPress-Frontend-Readback steht aus.
+- echter WordPress-Readback steht aus.
+
+ISOLIERTE BINÄRKOPIE:
+- `CURRENT.zip` wurde in diesem Arbeitsschritt nicht synchronisiert;
+- Manifest dokumentiert den lokalen Kandidaten, ist aber keine zweite Release-Wahrheit.
 
 NEXT:
-Nicht aus diesem Manifest ableiten. Ausschließlich aus der zuständigen Plugin-Current lesen.
-
-
-KORREKTUR 2026-10-19:
-- 1.50.693-HARD-PASS widerrufen.
-- Nutzer-Livebefund: Leads künstlich/anmoderierend, unbekannte Begriffe unzureichend erklärt.
-- Technisch belegt: Farbrahmen nur auf Schuhmacherei-Sonderklasse gebunden.
-- Artefakt 1.50.693 nicht verwenden.
+Ausschließlich aus der zuständigen Plugin-Current lesen.
