@@ -45,6 +45,19 @@ Die **Darstellung** stammt ausdrücklich **nicht** aus Pferdeatelier, sondern bl
 Diese Regel gilt für die redaktionellen Kategorietexte der Hub2-/Ebene-2-Seiten **und für die Detail-Hobbyseiten der nächsten Ebene** im Hobby Depot. Die Präzisierung für Detail-Hobbyseiten ist dort zusätzlich hart. Status, Release und NEXT ACTION bleiben ausschließlich in `DESIGN/CURRENT_STATE.md`.
 
 
+## Präzisierung 2026-10-19 – harter Einstieg für unbekannte Hobbys
+
+Für den sichtbaren Lead gilt zusätzlich verbindlich:
+
+1. **Der erste Satz erklärt das Hobby selbst.** Bei unbekannten oder erklärungsbedürftigen Begriffen beginnt der Text mit einer einfachen Definition, z. B. „Cyanotypie ist ein fotografisches Druckverfahren …“ oder „Bromelien sind …“. Kein vorgeschalteter Einleitungssatz.
+2. Danach folgen knapp die **typischen Tätigkeiten**: Was machst du tatsächlich bei diesem Hobby?
+3. Wenn es zum Verständnis gehört, nennt der Lead außerdem die wichtigsten **Materialien, Werkzeuge, Voraussetzungen oder den besonderen Reiz** – aber nur das, was für einen ersten Überblick wirklich nötig ist.
+4. Nach dem sichtbaren Lead soll ein Leser, der den Begriff vorher nicht kannte, **ein konkretes Bild davon haben, was das Hobby ist und was man dabei tut**.
+5. Verboten sind Meta-/Kurs-/Anmoderationssätze wie „Wenn du loslegst …“, „Zum Kennenlernen …“, „Am Anfang bekommst du …“, „Hier siehst du schnell …“, „Im Mittelpunkt steht …“ oder ähnliche Sätze, die zunächst nur ankündigen, dass gleich etwas erklärt wird.
+6. **Jeder Satz muss Information tragen.** Ein Satz, den man streichen kann, ohne dass Wissen verloren geht, ist im Lead ein Füllsatz und damit unzulässig.
+7. Natürliche Sprache vor Schema: Nicht jeder Text beginnt gleich und nicht jeder Lead muss dieselben vier Punkte in derselben Reihenfolge abarbeiten. Definition, Tätigkeit, Material/Voraussetzung und Reiz werden so kombiniert, wie es zum konkreten Hobby passt.
+8. Direkte Ansprache ist erwünscht und verbindlich für den Gesamtton, aber sie darf **nicht** dazu führen, dass die Definition künstlich wird. „Cyanotypie ist …“ ist besser als ein gezwungenes „Du machst bei Cyanotypie …“, wenn die sachliche Definition natürlicher klingt.
+
 ## Präzisierung 2026-10-18 – Detail-Hobbyseiten
 
 Für die Detail-Hobbyseiten gilt zusätzlich hart:
