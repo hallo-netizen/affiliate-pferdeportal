@@ -1,5 +1,25 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 19.10.2026 – WEITERARBEIT AUF DEM ORIGINALBESTAND: 20 PRÄZISE ZUORDNUNGSÄNDERUNGEN, KEIN FREIGEGEBENES PLUGIN
+
+**Aktuellster belastbarer Design-Arbeitsstand**: Original 0.1.42 komplett erhalten; ausschließlich `data/area-image-mapping-v1.json` plus 15 in 0.1.42 noch nicht enthaltene, aber **bereits zuvor produzierte/verfügbare Einzel-WebP** für die geprüfte Arbeitsfassung. Über alle 265 Themen in **36** Bereichen aktuell **175 Kacheln mit Foto / 90 ohne Foto**. Das ist kein Beweis für perfekte Bildqualität aller 175 Motive und keine WordPress-Live-Abnahme. Vergleich zum Original `0.1.42`: insgesamt **20 konkret dokumentierte Änderungen** an Foto-Mappingeinträgen, alle anderen unverändert, kein Code-, Text- oder Kategorieumbau.
+
+**Was gegenüber der vorigen 8er-Arbeitsstufe tatsächlich neu geprüft/verbessert wurde:**
+- Zwei bisher leere Themen: `Rauch & Brand → Ofen, Kamin & offenes Feuer` nutzt vorhandene Feuerschale (700×412); `CO & Gas → Kohlenmonoxidmelder` nutzt vorhandenen Wandmelder neben einer Gastherme (768×436); **der exakte Meldertyp ist auf dem Foto nicht beschriftet, daher als fachliche Abnahme noch offen**, nicht als garantiert CO-Modell behaupten.
+- Drei fachlich begründete Motiv-Reallokationen **ohne Doppelbilder**: Das zerbrochene vandalierte Schaufenster wurde der Kategorie `Schaufenster vor Sachbeschädigung` statt `Bodenbelagschäden` zugeordnet; vertrockneter Garten/gestresster Baum zu `Gartenbäume bei Trockenheit` statt `Fassadenverschattung`; überfluteter Keller zu `Wasserschäden & Folgen` statt `Küchenarmaturen undicht`. Die vorher falsch bebilderten Quellthemen sind bewusst fotolos geblieben, kein zufälliges Ersatzfoto.
+- Vier vorher schon im alten Prüfarchiv **vorhandene Einzeldateien mit 803–805 Pixel Quellbreite** wiederverwendet, **keine neue Collage und kein neuer Bildgenerierungsaufruf**: `Katalysatordiebstahl` (Katalysator statt Tor), `Elektromobil-Diebstahlschutz` (gesichertes Elektromobil statt Standardgarage), `Unbewohnte Häuser` (verschlossenes, zugewachsenes Haus), `Pakete & Gartenwerte` (abschließbare Paketbox statt Schadholz-Gartenbild). Letztere vier waren aus dem früheren Archiv `HBD_BILDER_GESAMTPRUEFUNG_265_NICHT_INSTALLIEREN.zip` bereits tatsächlich vorhanden.
+- Vier weitere gedachte Tausche **wegen tatsächlicher Doppelbilder innerhalb derselben Bereichsseite verworfen**; keine unverifizierten Änderungen an diesen Titeln.
+
+**Exakte Nachprüfung dieses Stands:** Reale PHP-Funktion `hbdp_area_child_photo` mit 265 definierten Namen/36 Bereichen ausgeführt, **175 erwartete = 175 gerenderte Motive**, kein unvorhergesehener Fallback. 108 Chromium-HTML/CSS-Kachelsimulationen (36 Bereiche × 390/980/1440px) mit 0 Bildlade-/Rahmen-/Überlauffehlern, alle 9 Plugin-PHP-Dateien Syntax PASS, 0 SHA-identische oder <=3 dHash-nahe Dopplungen innerhalb desselben Bereichs, ZIP auf CRC geprüft. **Diese technische CSS/HTML-Simulation ersetzt keine echte WordPress-Liveprüfung; semantische Einzelkontrolle aller übrigen Zuordnungen weiter offen.** Quellbreiten um 700–805px können bei bestimmten Retina-Szenarien zu gering sein; das Bildthema und die Bildschirmunschärfe müssen zusätzlich kontrolliert werden.
+
+**Fortsetzungs- und Prüfpaket (NICHT WordPress installieren):** `/Eigentumsschutz/Design/HBD_BILDZUORDNUNG_GEPRUEFTE_KORREKTUREN_20261019_NICHT_INSTALLIEREN.zip`, SHA256 `56e237c5f87b1af0405aeec540fef425794f03b651ffcae6ec9287b67f566015`, mit Mapping, 20-Zeilen-Änderungsnachweis, nur den gegenüber Original zusätzlichen Einzelbildern, Laufzeitprüfungen und QA. **Kein neues installierbares Plugin freigegeben.**
+
+**EINE DESIGN-NEXT ACTION:** Von diesen 175 vorhandenen Zuordnungen aus fortsetzen, die 90 bislang unbelegten Themen gegen alle vorhandenen **tatsächlichen einzelnen Originalfotos** prüfen und nur passende Motive übernehmen; daneben die konkret nachgewiesenen offensichtlichen Fehlzuordnungen gezielt korrigieren. Keine pauschale Neuprüfung der gesamten Architektur, keine Collagen, kein Blind-Austausch und kein volles Plugin bis zur belastbaren Bildabnahme.
+
+---
+
+
+
 ## 19.10.2026 – FOTO-KORREKTUR AUF ORIGINALBESTAND, NICHT ALLES NEU: 8 GEZIELTE KORREKTUREN
 
 **Klarstellung:** Ursprüngliches **installierbares** WordPress-Designplugin bleibt **0.1.42** mit 173 konkreten Fotozuordnungen von 265 C23-Themen. Die neueren, 82/83 Bilder enthaltenden Prüfarchive waren eine streng aussortierte, **nicht** produktive Mapping-Variante. Aus 82 darf man nicht schließen, dass physisch fast alle Bilder verschwunden oder neue Fotos nötig seien. Nutzer fordert: Keine Collagen oder neue Fotoerzeugung, ursprüngliche Bilder weitgehend behalten, nur echte Fehler korrigieren.
