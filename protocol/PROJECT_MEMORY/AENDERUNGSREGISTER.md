@@ -1722,3 +1722,37 @@ STARTSEITE 1.50.699:
 
 GRENZE:
 Keine Änderung an Kategoriebaum, 395 Detail-Hubs, 69 Hub2-Einstiegen, Bildern, Affiliate-Slots oder Meta-/SEO-Titeln. Kein Live-PASS vor WordPress-/Frontend-Readback.
+
+
+## HOBBYRAUSCH-GLOSSAR-BILD-20261019-O – Glossar freigegeben, Bildzentrale als vorhandenes BILD-Büro weitergeführt
+
+ENTSCHEIDUNG:
+Hobby Depot erhält ein eigenes Glossar-Büro. Das bereits vorhandene Büro `BILD` wird als zuständiges Bilderzentrale-Büro weitergeführt; kein zweites paralleles Bilderbüro.
+
+WARUM GLOSSAR:
+Das Hobby-Depot-Konzept enthält bereits „Wissen & Glossar“. Ein Glossar ist fachlich und SEO-seitig sinnvoll, wenn es als echtes Fachwörterbuch betrieben wird: eigenständige Fachbegriffe erklären, Nutzerorientierung erhöhen und passende Hauptseiten intern verbinden. Es darf keine bestehenden Hobby-, Hub-, Kategorie- oder Ratgeberintents duplizieren und keine dünne Seitenfabrik werden.
+
+ÜBERNAHME:
+Vom Pferde-Atelier werden beim Glossar Struktur/Workflow und bei der Bildzentrale der allgemeine Kern als Referenz übernommen. Pferde-Fachdaten und Pferde-Sonderlogik werden nicht übernommen.
+
+GLOSSAR:
+- neues Büro `PROJEKTE/HOBBYRAUSCH/GLOSSAR/`;
+- eigener Scope `HOBBYRAUSCH_GLOSSAR`;
+- Plugin-Akte `HD-005-GLOSSAR-CORE`;
+- Referenz: Universal Glossary Engine 1.4.0;
+- Hobby-Depot-Konfiguration vorbereitet;
+- noch kein Installer, weil exakte 1.4.0-Bytes nicht gebunden sind.
+
+BILDZENTRALE:
+- bestehendes Büro `PROJEKTE/HOBBYRAUSCH/BILD/` bleibt einzige Bild-Current;
+- Plugin-Akte `HD-006-BILDZENTRALE`;
+- Referenz: Allgemeine Bildzentrale 2.7.6;
+- allgemeine Funktionen übernehmen;
+- pa_breed, Rassenbatch, Pferde-Prompts/-Framing, Pferde-IDs/-URLs sowie ausdrücklich die Bildertrommel vor Hobby-Depot-Ausgabe entfernen/deaktivieren;
+- noch kein Installer, weil exakte 2.7.6-Bytes nicht gebunden sind.
+
+INSTALLATION:
+Der Hobby-Depot-Systemstand vom 18.10.2026 belegt weder Glossar Core noch Bildzentrale als aktive Plugins. In diesem Arbeitsschritt wurde nichts auf WordPress installiert.
+
+REGEL:
+Keine rekonstruierte Altversion als aktuellen Pluginstand ausgeben. Erst exakte Quellbindung → Altlasten-Audit → neue Version → lokale Positiv-/Negativprüfung → dann Installationskandidat.
