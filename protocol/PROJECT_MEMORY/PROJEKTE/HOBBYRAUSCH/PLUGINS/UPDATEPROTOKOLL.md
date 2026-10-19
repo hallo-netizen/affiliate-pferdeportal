@@ -4852,3 +4852,45 @@ Kein Live-PASS. Echter WordPress-Frontend-Readback von 1.50.695 steht aus.
 
 NEXT:
 1.50.695 regulär installieren und repräsentative Detail-Hubs aus allen 8 Welten sowie einen direkten Category-Term live prüfen.
+
+
+---
+
+## PU-20261019-100 – HD-003 1.50.696 / Schrift & Lettering Hub2-Pilot
+
+AUFTRAG:
+Das bestätigte Text-/Gestaltungsprinzip der Detail-Hubs auf die direkt darüberliegende Hub2-Ebene übertragen, zunächst als vollständiger Pilot für Schrift & Lettering.
+
+UMSETZUNG:
+- 1.50.695 als technische Basis;
+- Schrift & Lettering sichtbarer Kurzüberblick neu: 51 Wörter, direkte Erklärung von Thema, Tätigkeit, Werkzeugen und Reiz;
+- Kurzüberblick im hellen Petrol-/Türkisblock;
+- vorhandenen guten Langtext redaktionell genutzt/ergänzt und auf 152 Wörter in exakt zwei Absätze gebracht;
+- Aufklapper rendert explizite Absätze;
+- reale direkte Kinder geprüft: Federkiel-Schreiben, Kalligrafie, Lettering;
+- alle drei Untertitel liefern ergänzende Information statt Titelwiederholung;
+- keine anderen Hub2-Texte geändert.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.696_SCHRIFT_LETTERING_PILOT.zip`
+
+SHA-256:
+`937cc9c90a2663e8c03ae4e78ca30cc998a09c33880ac508cf59fde541402ba2`
+
+QA:
+- Lead 51 Wörter PASS;
+- Aufklapptext 152 Wörter / 2 Absätze PASS;
+- positive Renderprüfung Schrift & Lettering PASS;
+- negative Kontrollseite Papierkunst PASS;
+- 3/3 reale Unterkacheln + Untertitel PASS;
+- 68 andere Hub2-Editorialtexte unverändert PASS;
+- 395er Detailtextmap unverändert PASS;
+- 983/983 Assets byte-identisch PASS;
+- PHP 126/126 PASS;
+- ZIP PASS.
+
+LIVE-GRENZE:
+Kein Live-PASS. Nutzer-Sichtprüfung steht aus.
+
+NEXT:
+1.50.696 regulär installieren und die vollständige Kategorie Schrift & Lettering prüfen; bei Zustimmung Rollout auf übrige Hub2-Kategorien.
