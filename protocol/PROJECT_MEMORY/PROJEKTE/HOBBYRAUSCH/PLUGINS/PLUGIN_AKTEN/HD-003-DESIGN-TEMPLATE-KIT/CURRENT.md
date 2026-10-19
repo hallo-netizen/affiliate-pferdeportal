@@ -3,32 +3,39 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.693 VERWORFEN / LEAD-REGEL + FARBRAHMEN FEHLERHAFT / NEUAUFBAU ERFORDERLICH**
-
-## AKTUELLER TECHNISCHER STAND
+STATUS: **1.50.694 10ER-TEXTPILOT LOKAL PASS / LIVE-SICHTPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-Letzter belastbarer Musterfall:
-`1.50.692 – Schuhmacherei`
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.694_TEXT_PILOT_10.zip`
 
-Verworfener Rollout:
-`1.50.693 – 395er Detail-Text-Rollout`
+SHA-256:
+`c37ae7a3f8ffef6ab7ec7aec1e5402945e414ef36c7099914238a74f848c8ceb`
 
-Belegte Fehler in 1.50.693:
-- künstliche Lead-Vorsatzschicht mit wiederkehrenden Anmoderationen statt unmittelbarer Hobbyerklärung;
-- bei unbekannten Begriffen fehlt teilweise die Definition im ersten Satz;
-- Farbrahmen nur über Schuhmacherei-Sonderklasse aktiv;
-- deshalb Regelkonformität und lokaler HARD-PASS widerrufen.
+Scope:
+- 10 Pilotseiten textlich neu;
+- erster Satz echte Definition/Erklärung;
+- Lead 50–56 Wörter;
+- Aufklapptext 150–167 Wörter in zwei Absätzen;
+- farbiger Detail-Leadblock allgemein;
+- Kacheluntertitel mit Zusatzinformation statt Titelwiederholung;
+- generische Füllformulierungen entfernt;
+- Schuhmacherei unverändert.
 
-## ERSTER OFFENER BLOCKER
+QA:
+- PHP 120/120 PASS;
+- 10/10 Render-E2E PASS;
+- Schuhmacherei Regression PASS;
+- V150694 Releasekette PASS;
+- ZIP PASS.
 
-395er Detail-Rollout muss auf Basis der bestätigten Schuhmacherei-Logik neu gebaut werden.
+ERSTER OFFENER BLOCKER:
+Nutzer-Liveprüfung des 10er-Piloten.
 
-## EXAKT EINE NEXT ACTION
-
-**395 Detail-Hubs textlich neu aufbauen: erster Satz echte Erklärung/Definition, kompletter sichtbarer Lead 45–60 Wörter mit Tätigkeit/Voraussetzungen/typischem Reiz; Farbrahmen für alle Detail-Leads; Aufklapptext 150–200 Wörter zusätzlich in 1–2 Absätzen; Kacheluntertitel kurz/sachlich. Danach vollständige lokale POS/NEG-/Regression-QA.**
+EXAKT EINE NEXT ACTION:
+**1.50.694 regulär installieren und die 10 Pilotseiten sichtbar prüfen.**
 
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
