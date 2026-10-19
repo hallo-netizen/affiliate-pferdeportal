@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-11
+STAND: 2026-10-19
 STATUS: AKTIV / INVENTAR- UND ROUTING-CURRENT / KEINE KOPIE VON EINZELPLUGIN-STATUS
 
 ## Regel
@@ -42,6 +42,22 @@ schlanker read-only Normalbetriebs-Kern für `journal_cat` + zentrales Kategorie
 
 Fach-Current:
 `../SEO_KATEGORIEN/CURRENT_STATE.md`
+
+## HD-005 – Glossar Core
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/CURRENT.md`
+
+Fach-Current:
+`../GLOSSAR/CURRENT_STATE.md`
+
+## HD-006 – Bildzentrale
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-006-BILDZENTRALE/CURRENT.md`
+
+Fach-Current:
+`../BILD/CURRENT_STATE.md`
 
 ## EXAKT EINE NEXT ACTION
 
