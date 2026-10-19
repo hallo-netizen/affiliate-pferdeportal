@@ -1,7 +1,7 @@
 # ZV-HOBBYRAUSCH-DESIGN-001 – HOBBY DEPOT PORTALDESIGN
 
 STATUS: AKTIV
-FASSUNG: 5.3 / 2026-10-18
+FASSUNG: 5.4 / 2026-10-19
 
 ## Header / Navigation
 - Logo unverändert und linksbündig.
@@ -169,7 +169,9 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - Auf dieser Ebene **kein Hero-Bild**.
 - Oben kompakter, mittig geführter Kopf: thematisch passendes Icon, H1, hochwertiger Kategorietext.
 - Text nach denselben redaktionellen Regeln: **150–200 Wörter**, konkret, fachlich, keine Generator-/Padding-Sprache.
-- Davon ungefähr **45–60 Wörter sichtbar**, Rest über kleinen Chevron aufklappbar.
+- Der **sichtbare Lead umfasst ungefähr 45–60 Wörter** und erklärt für jemanden ohne Vorwissen zuerst: **Was ist dieses Hobby? Was macht man dabei? Was ist typisch dafür bzw. wodurch unterscheidet es sich?**
+- Der sichtbare Lead enthält **keine Navigation, keine Kachelliste und keine Meta-Sätze**. Er darf als ruhiger, heller Petrol-/Türkisblock hinterlegt werden; dieser Block kennzeichnet die kurze Einsteigererklärung und ist kein zusätzlicher Dekotext.
+- Der aufgeklappte Rest führt denselben Gedanken redaktionell fort und vertieft Arbeitsweise, Material, Werkzeuge, Ablauf, Unterschiede, Aufwand oder typische Probleme nur dort, wo sie fachlich wirklich passen.
 - Desktop Unterkategorien im **4er-Raster**, Tablet 2, Mobil 1.
 - Verbindliche Reihenfolge nach Abnahme 1.50.689: **Kopf/Text → vorhandener kompakter Banner → alle Unterkategorien als geschlossener, nicht durch Werbung unterbrochener Block → vorhandene Kategorie-Produkte unter der kompletten Kachelgruppe → 3–4 passende Beitragsvorschauen mit Bild → vorhandener weiterer Werbe-/Dienstleisterplatz**.
 - Keine neuen Affiliate-Slottypen erfinden; vorhandene Slots lediglich in der abgenommenen Reihenfolge platzieren. **Affiliate-Produkte niemals mehr zwischen zwei Unterkategorie-Reihen.**
@@ -180,7 +182,7 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - Keine absichtlich eingebauten Zeilenumbrüche in der H1; der abgenommene Pilot zeigt den Titel kompakt in einer Zeile.
 - URL/Slug und gespeicherter SEO-/WordPress-Titel werden durch diese reine Frontenddarstellung nicht automatisch geändert.
 - Kleine Überschrift über den Kacheln darf die H1 nicht stumpf wiederholen.
-- Wo eine natürliche thematische Kurzform redigiert ist, darf sie verwendet werden (Pilot: **Rund ums Kettenhemd**); sonst neutral **Themen im Überblick**.
+- Die kleine Überschrift über den Kacheln beschreibt das **Weitergehen in die Tiefe**, nicht eine bloße Übersicht. Bevorzugt ist eine natürliche themenspezifische Formulierung (z. B. **Rund ums Kettenhemd**); neutraler Fallback nur **Mehr zu <Hobby>**. **Themen im Überblick** ist für diese Ebene nicht mehr zulässig.
 - Produktbereich heißt neutral **Empfehlungen**.
 - Meta-Titel werden separat im späteren SEO-Schritt behandelt und nicht still durch Designänderungen verändert.
 
@@ -196,7 +198,8 @@ Kein neuer Kandidat ohne lokale Sichtprüfung der realen gerenderten Ausschnitte
 - natürliche Überschrift `Weiter in <Thema>` / `Weitere Kategorien`.
 - Kartentitel 15 px.
 - Untertitel nur mit echtem Orientierungswert.
-- kein generischer Fülltext; insbesondere keine Welt-Schablonen wie `loslegen`, `ausprobieren`, `praktische Einstiege` oder pauschales `verstehen`; für die aktuell vorhandenen Unterkategorien werden individuelle Zeilen gebunden. Bei einer später neu hinzukommenden, noch nicht redigierten Karte ist **leer besser als ein generischer Fallback**.
+- kein generischer Fülltext; insbesondere keine Welt-Schablonen wie `loslegen`, `ausprobieren`, `praktische Einstiege` oder pauschales `verstehen` und keine kalten Generatorphrasen wie `sinnvoll vergleichen`, `realistisch planen`, `sicher einordnen`, `konkret vertiefen` oder `gezielt steuern`.
+- Kacheluntertitel nennen den **tatsächlichen Inhalt** des Teilbereichs: z. B. Materialien, Werkzeuge, Arbeitsschritte, Bauformen, Techniken oder typische Probleme. Bei einer später neu hinzukommenden, noch nicht redigierten Karte ist **leer besser als ein generischer Fallback**.
 
 ## Monetarisierung
 - Affiliate-Produkte nie zwischen Unterkategorie-Reihen.
