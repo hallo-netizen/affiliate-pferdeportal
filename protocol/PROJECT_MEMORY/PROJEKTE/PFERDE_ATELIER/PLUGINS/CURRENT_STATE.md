@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-18 (PSTE 0.57.107 letzter installierbarer Stand; KISS-Vier-Dateien-Arbeitskopie nur lokal geprüft, nicht ausgeliefert; 5014er WordPress-Gesamt-E2E offen)
+STAND: 2026-10-19 (letzte Arbeitskopie Relevanz lokal/kein Release; Testinstallation 0.57.110 fehlerhaft; aktueller 5014er E2E nicht abgenommen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
@@ -246,6 +246,14 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - Patch im selben Büro: `PSTE_KISS_CENTRAL_CATEGORY_ROUTING_20261019.patch` SHA256 `d59abb443bef97a2b3a8e01d0f5615028d09ce2c37bc7da76c92a7b9b036e7a5`, 117/117 isoliert angewendete Dateien bytegleich, 79/79 PHP-Lints. Plus 1000 synthetische zusätzliche Keywords: 1000/1000 ohne Fehler, 51 Kategorie / 92 Klärraum, 0 Write; vorhandene Sandbox-Datenfluss-Hashbindung und 4 vorhandene Positiv-/Negativ-Beispiele bestanden. K0 nicht benutzt.
 - STATUS **BLOCKED / nur Arbeitskopie**, nie als installierbaren Plugin-Release ausgeben. Die echte 5014er Live-Datenkopie fehlt; ausserdem sind die neu getrennten Titelkandidaten noch nicht final freigegeben. Details und genaue Definitionsunterschiede in `UPDATEPROTOKOLL.md`.
 
+## 19.10.2026 – Lokale Pferderelevanzkorrektur, kein Release
+
+- Quelle: PSTE_PFERDERELEVANZ_QUELLFIX_LOKAL_20261019_KEIN_PLUGIN.zip, SHA256 8092f9c53ad54be2f438ebe64ef1f7e8a5e0909258cf9f3dbcd12a39c3db767b. Nur includes/class-pste-category-context.php lokal geändert, noch nicht als Quellstand in GitHub abgelegt.
+- Lokal 4501 historische Keyword-Relevanzentscheidungen: vor 2728 positiv, nach 2749 positiv (+21, 0 Rückstufungen). 1000 synthetische Kombinationen: 500 POS und 500 NEG bestanden. 26 direkte Sonden. PHP-Lint der geänderten Datei PASS.
+- NEGATIV offen: Dressurprüfung für Hunde und Ballett Dressurunterricht fälschlich pferderelevant, Pferdeschwanz als Frisur weiterhin falsch; Olympia-Springpferd wird trotz Pferdebezug nicht erkannt. Deshalb keine Relevanz-Gesamtfreigabe, keine Sonder-Blacklists.
+- Viergruppen-Zahlen 1938 Relevanzprüfung / 209 Titelarbeit / 1930 Kategorieklärung / 424 zugeordnet gehören zum älteren vollen 4501er Test und sind KEIN vollständig neu gerechnetes Ergebnis dieser lokalen Relevanzkorrektur.
+- Testinstallation PSTE 0.57.110: Neuprüfstart bei 0/5014 trotz altem COMPLETE und HTTP 500 bei ca. 2500 in Benutzerbeobachtung; genaue PHP-Ursache nicht belegt. Kein Live-Release, K0/PSERC/PPM nicht verändert.
+
 ## NEXT ACTION
 
-**Genau eine:** Ausschließlich in der bestehenden PSTE-Titel- und zentralen Kategorieweiterleitung die nach bestehendem Precheck geprüften, aber noch ungebundenen Titelkandidaten **ohne künstliche Finalfreigabe** am vorhandenen vollständigen Titelprüfer zur tatsächlichen Endentscheidung bringen und dann eindeutig Kategorie oder vorhandenen Kategorie-Klärraum zuweisen. Keine Einzelfixes, keine zusätzliche Regel/Architektur, keine Arbeit an K0/PSERC/PPM. Danach **denselben vollständigen historischen 4501er Corpus** nach identischen Definitionen erneut durchlaufen lassen; **Abnahme N_FINAL = N_KATEGORIE + N_KLAERRAUM ohne falsche Freigaben**, dann auf einer vollständigen read-only 1:1-Kopie des aktuellen 5014er WordPress-Status inklusive Taxonomie/Queue signiert prüfen. Bis tatsächlichem PASS: BLOCKED, kein Live-Plugin.
+Genau eine: Ausschließlich die zentrale Pferderelevanzentscheidung im vorhandenen PSTE semantisch verbessern. Kontextabhängige eindeutige Pferdethemen erkennen, gleichlautende Fremdthemen zuverlässig ablehnen. Keine Familien- oder Kategoriepflicht bei Relevanz, keine Einzelkeyword-Ausnahmen und keine neue Architektur. Den gleichen historischen 4501er Relevanztest und neue positive/negative Varianten mit echten Negativbeispielen wiederholen. Erst bei bestandenem POS/NEG zum nächsten Fachschritt wechseln; kein installierbares Plugin freigeben.
