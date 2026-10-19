@@ -1,11 +1,25 @@
 # HOBBY DEPOT – GLOSSAR-KONZEPT
 
 STAND: 2026-10-19
-STATUS: FACHLICH FREIGEGEBENE BASIS
+STATUS: **FACHLICH + SEO VERBINDLICH / ZENTRALE SAMMLUNG**
 
 ## Zweck
 
-Das Glossar erklärt Begriffe, die ein Nutzer beim Einstieg oder Vertiefen eines Hobbys kennen muss. Es stärkt Orientierung, interne Verknüpfung und thematische Tiefe, ohne den bestehenden Hobbybaum zu verdoppeln.
+Das Glossar erklärt Fachbegriffe, die Nutzer beim Einstieg oder Vertiefen eines Hobbys verstehen müssen. Es stärkt Orientierung, interne Verknüpfung und thematische Tiefe, ohne den bestehenden Hobbybaum zu verdoppeln.
+
+## Zentrale Sammlung
+
+Es gibt **eine zentrale Glossar-Hauptseite**.
+
+Dort werden alle veröffentlichten Begriffe zusammengeführt:
+- A–Z;
+- Suche;
+- Filter nach Hobbywelt;
+- Pagination.
+
+Die Filter sind nur Ansichten derselben Sammlung. Sie erzeugen keine eigenen Themenwelten und keine konkurrierenden SEO-Seiten.
+
+Ein echter Fachbegriff kann eine eigene Einzelbegriffsseite besitzen.
 
 ## Aufnahmeregel
 
@@ -17,9 +31,22 @@ Nicht als eigene Glossarseite:
 - eine bestehende Hub-/Kategorie-Seite;
 - ein eigenständiges Ratgeberthema;
 - bloße Synonyme;
-- Varianten, die keinen eigenen Erklärungsintent tragen.
+- Varianten ohne eigenen Erklärungsintent.
 
-In diesen Fällen erklärt die bestehende Hauptseite den Begriff; das Glossar darf dorthin verweisen.
+In diesen Fällen bleibt die bestehende Hauptseite SEO-Owner; das Glossar darf dorthin verweisen.
+
+## SEO-Regel
+
+Pro primärem Suchintent gibt es genau einen SEO-Owner.
+
+Daraus folgt:
+- zentrale Glossar-Hauptseite indexierbar;
+- eigenständige echte Fachbegriffe können indexierbar sein;
+- Such-, A–Z-, Hobbywelt- und Pagination-Varianten werden nicht zu zusätzlichen SEO-Ownern;
+- Synonyme erzeugen keine zweite Seite;
+- keine zweite Hobbytaxonomie im Glossar;
+- keine Massenproduktion dünner Begriffseiten;
+- ein Begriff muss echten eigenständigen Nutzwert und klare Abgrenzung besitzen.
 
 ## Datenmodell
 
@@ -42,24 +69,7 @@ Pflicht je Begriff:
 
 ## Themenwelten
 
-- Gestalten
-- Fertigen
-- Technik
-- Forschen
-- Pflanzen
-- Tiere
-- Bewegen
-- Sammeln
-
-## SEO-Grenze
-
-Das Glossar ist kein Seitenmengen-System.
-
-Ein Glossarbegriff darf nur indexierbar werden, wenn:
-1. ein eigenständiger Nutzer-/Suchintent plausibel ist;
-2. der Begriff gegenüber bestehenden Hobby-/Kategorie-/Ratgeberseiten eindeutig abgegrenzt ist;
-3. Inhalt und Quellen einen echten eigenständigen Nutzwert liefern;
-4. keine kannibalisierende Dublette entsteht.
+**Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**
 
 ## Produktion
 
@@ -69,14 +79,14 @@ Kein Auto-Publish. Keine autonome Discovery-/Cron-Produktion.
 
 ## Design
 
-Das funktionale Grundprinzip des Pferde-Ateliers ist übertragbar:
-- Glossar-Hauptseite;
+Funktional:
+- eine Glossar-Hauptseite;
 - A–Z;
 - Suche;
-- Filter nach Themenwelt;
+- Filter nach Hobbywelt;
 - kompakte Begriffskarten;
 - Einzelbegriffsseite;
 - verwandte Begriffe;
 - optional „Mehr zum Thema“.
 
-Farben, Typografie, Header/Footer und Kartenoptik werden ausschließlich aus dem aktuellen Hobby-Depot-Designsystem übernommen, nicht aus dem Pferde-Designplugin.
+Farben, Typografie, Header/Footer und Kartenoptik kommen ausschließlich aus dem Hobby-Depot-Designsystem.
