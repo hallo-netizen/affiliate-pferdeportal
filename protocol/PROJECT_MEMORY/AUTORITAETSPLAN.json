@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
-  "version": "1.2",
-  "effective_date": "2026-10-17",
+  "version": "1.3",
+  "effective_date": "2026-10-19",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -156,6 +156,12 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_GLOSSAR",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GLOSSAR/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GLOSSAR/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GLOSSAR/HOBBYRAUM.md"
     },
     {
       "id": "HOBBYRAUSCH_PRODUKTVERGLEICH",
