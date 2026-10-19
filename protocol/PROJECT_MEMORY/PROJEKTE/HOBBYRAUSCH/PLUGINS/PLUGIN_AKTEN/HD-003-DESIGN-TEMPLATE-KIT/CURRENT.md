@@ -3,43 +3,33 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.695 FULL TEXT ROLLOUT 395/395 LOCAL PASS / LIVE OFFEN**
+STATUS: **1.50.695 TECHNISCH PASS / REDAKTIONELL BLOCKED**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-Artefakt:
+Geprüftes Artefakt:
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
 
 SHA-256:
 `8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
 
-Evidence:
-`HOBBY_DEPOT_TEMPLATE_1.50.695_TEXT_ROLLOUT_EVIDENCE.json`
-
-Scope:
-- 395/395 Detail-Hubs;
-- 10/10 Benchmarktexte aus 1.50.694 exakt erhalten;
-- Leads 45–60 Wörter;
-- Aufklapptexte 150–193 Wörter, zwei Absätze;
-- natürliche direkte Ansprache;
-- keine verbotenen Füll-/Generatorphrasen;
-- keine doppelten Einstiege;
-- keine 3+-Satzdoppelungen;
-- keine Kacheluntertitel mit bloßem Titel-Echo;
-- Bilder gegenüber 1.50.694 unverändert.
-
-QA:
+Technisch frisch verifiziert:
+- ZIP PASS;
+- 395/395 Master-Keyset PASS;
+- 10/10 1.50.694-Benchmarktexte exakt erhalten;
+- Lead 45–60 Wörter;
+- Aufklapptext 150–193 Wörter;
+- 2 Absätze 395/395;
 - PHP 123/123 PASS;
-- Render-Harness 8 Welten + Benchmark/Custom/Generic Subtitle PASS;
-- Bildregression 971/971 byte-identisch PASS;
-- ZIP PASS.
+- 971/971 Bilder byte-identisch zu 1.50.694;
+- allgemeiner Petrol-Leadblock vorhanden.
 
-ERSTER OFFENER BLOCKER:
-Echter WordPress-/Frontend-Live-Readback fehlt.
+Redaktioneller Blocker:
+Mehrere längere Satzbausteine wiederholen sich über viele Texte, u. a. 21x `zeigt sich viel vom Charakter dieses Hobbys`, 13x `zeigt sich, was dieses Hobby besonders macht`, 12x `ein wesentlicher Teil des Hobbys zeigt sich`. Das verletzt die bindende Anti-Schablonen-Regel.
 
 EXAKT EINE NEXT ACTION:
-**1.50.695 regulär installieren und repräsentativ live lesen.**
+**Betroffene Satzbausteine redaktionell neu schreiben und vollständige Regression erneut ausführen.**
 
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
