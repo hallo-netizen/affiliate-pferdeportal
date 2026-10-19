@@ -30,3 +30,8 @@ Kein Live-PASS vor WordPress-Readback.
 
 NEXT:
 Ausschließlich aus der Plugin-Current lesen.
+
+
+CURRENT.zip-SYNC:
+**OFFEN / FORMALER ARTEFAKTRESTPUNKT.**
+Der lokale 1.50.698-ZIP ist SHA-/ZIP-geprüft. Im Campus-Verzeichnis ist aktuell keine `CURRENT.zip` vorhanden; der verfügbare Connector-Schreibweg kann die 58,537,086-Byte-Binärdatei in dieser Sitzung nicht übertragen. Keine Ersatz-/Pointerdatei als `CURRENT.zip` erfinden.
