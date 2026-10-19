@@ -4760,3 +4760,47 @@ KORREKTUR:
 
 NEXT:
 Realen Schuhmacherei-Pfad lokal positiv und negativ E2E simulieren; erst nach PASS Plugin ausgeben und isolierte Ausgabe synchronisieren.
+
+
+---
+
+## PU-20261019-099 – HD-003 1.50.693 / 395er Detail-Text- und Kachelrollout
+
+AUFTRAG:
+Nach bestätigtem Schuhmacherei-Muster dieselbe Ebene vollständig nach den verschärften Textregeln ausrollen; Kacheluntertitel gleichzeitig kürzen.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.693_DETAIL_TEXT_ROLLOUT_LOCAL_HARD_PASS.zip`
+
+SHA-256:
+`558a345042c9acaa488b01ce543c2f9d7defc4406f5243ee17f90b4363975d54`
+
+UMSETZUNG:
+- 395/395 Detail-Hubs;
+- sichtbarer Lead 45–60 Wörter;
+- aufklappbarer Vertiefungstext 150–187 Wörter zusätzlich zum Lead;
+- zwei Absätze je Vertiefungstext;
+- direkte du-Ansprache bzw. natürliche direkte Imperativsprache;
+- keine verbotenen Generator-/Füllphrasen;
+- interne Textdoppelungen gezielt entfernt;
+- semantische Fehlübernahmen aus Zwischenständen korrigiert;
+- Kacheluntertitel auf kurze konkrete Inhaltsaussagen reduziert;
+- Schuhmacherei-Lead unverändert;
+- Startseiten-Weltbilder und Hauptkategorie-Heros unverändert.
+
+QA:
+- 395/395 Regel-/Längen-/Absatzcheck PASS;
+- interner Wiederholungscheck 0 Fehler;
+- PHP 123/123 PASS;
+- Schuhmacherei Positivpfad PASS;
+- Airbrush Kontroll-/Negativpfad PASS;
+- direkter Category-Term PASS;
+- V150693 Release-/Templatekette PASS;
+- 8/8 Startseiten-Weltassets byte-identisch PASS;
+- ZIP-Integrität PASS.
+
+LIVE-GRENZE:
+Kein Live-PASS. Echter WordPress-Frontend-Readback steht aus.
+
+NEXT:
+1.50.693 regulär installieren und repräsentative Detail-Hubs plus direkten Category-Term live prüfen.
