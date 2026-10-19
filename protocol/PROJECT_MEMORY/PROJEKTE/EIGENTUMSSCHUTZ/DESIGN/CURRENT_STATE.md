@@ -1,5 +1,13 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 19.10.2026 – QUELLABGLEICH DES ORIGINALEN 0.1.42 GEGEN JÜNGSTEN REKONZILIATIONSPRÜFSTAND
+
+Exakt mit beiden in der Arbeitsumgebung vorhandenen ZIP-Quell-Dateien und vollständigen 265 Schlüsseln (Welt, Bereich, Thema) verglichen: 0.1.42 hat 173 mit Foto und 92 ohne Foto. Jüngster provisorischer Rekonziliationsstand: 83 mit Foto und 182 ohne Foto. Exakte Übergangstabelle: 110 Foto→leer; 72 leer→leer; 63 Foto→Foto; 20 leer→Foto. Bisherige Angabe 111/62 basierte auf der älteren Strengprüfung VOR der einen Graffiti-Restaurierung und darf NICHT als Zahl des jüngsten Prüfstands bezeichnet werden. Vollständige 265-Zeilen-Quelle gesichert: /Eigentumsschutz/Design/HBD_BILDER_265_QUELLABGLEICH_20261019.csv. Kein neues Plugin gebaut, keine fachliche Freigabe aller Motive und kein WordPress-Livestand behauptet. NEXT ACTION bleibt nach Themenbild sichtgeprüfte Einzelrestaurierung, weder automatische pauschale Restaurierung noch stilles Wegwerfen vorhandener Motive.
+
+---
+
+
+
 ## 18.10.2026 – NACHHOLPRÜFUNG DER ZAHLEN: 173 BILDER WAREN BEREITS ZUGEORDNET, NICHT 82
 
 **Korrektur eines irreführenden Statusberichts:** Das tatsächlich vorhandene und freigegebene Designplugin 0.1.42 enthält **173 von 265 Themen mit zugeordnetem Bild**, **92 ohne Bild**. Die spätere strenge Audit-Datei enthält nur **82 bebilderte und 183 unbebilderte**. Dies sind **verschiedene Maßstäbe und Prüfschritte**, NICHT 91 physisch verschwundene Bilddateien. Exakt nachgewiesene Transformation der Zuordnungen: 72 früher und weiterhin leer; 20 zuvor leere nachträglich bebildert; 62 vorher und nachher bebildert; **111 zuvor bebilderte auf Leer gesetzt**, davon 45 mit explizitem fachlichem Motivfehler, 12 mit expliziter Bildunschärfe und 54 mit dem unzureichend präzisen Grund „REQUIRES_ORIGINAL_SUBJECT_PHOTO“. Andersartige Gesamttabellen der letzten Nachrichten waren nicht als aktuelle WP-Dateibestandszahlen zu verstehen.
