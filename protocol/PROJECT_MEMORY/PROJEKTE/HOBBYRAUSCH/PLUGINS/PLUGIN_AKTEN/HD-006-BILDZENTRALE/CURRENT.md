@@ -3,48 +3,52 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **2.7.6 REFERENZ / HOBBY-DEPOT-ADAPTION VORBEREITET / SOURCE BINDING OPEN / KEIN INSTALLER**
+STATUS: **1.0.0 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
 
 Plugin-ID:
 `HD-006-BILDZENTRALE`
 
-Referenz:
-`Allgemeine Bildzentrale`
+Aktueller Hobby-Depot-Kandidat:
+`HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip`
 
-Referenzversion:
-**2.7.6**
+SHA-256:
+`bb74d795dffaa6d3ff51d6251d298c04c53ee9a3d75d39c00609afde867c7503`
 
-Bekannter Referenzartefakt-Verweis:
-`ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip`
-
-Bekannter ZIP-SHA-256:
-`12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0`
-
-Später belegter Hauptdatei-Source-Scan:
-- `pferde-atelier-bildzentrale.php`
-- 383603 Bytes
-- SHA-256 `984a8d4da6594ffa93e6d4024b57cc6c22c7d1fbfec398177a19b0490c20d89b`
+Persistente Arbeitskopie:
+`/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip`
 
 Fach-Current:
 `../../../BILD/CURRENT_STATE.md`
 
-## Hobby-Depot-Anpassung
+## Herkunft
 
-Allgemeinen Kern behalten.
+Referenz:
+Allgemeine Bildzentrale 2.7.6.
 
-Zwingend entfernen/deaktivieren:
+Die exakten 2.7.6-Bytes waren nicht als kopierbarer Quellkörper erreichbar. Deshalb ist 1.0.0 bewusst eine neu versionierte, bereinigte Hobby-Depot-Fassung auf Basis des belegten allgemeinen Funktionsvertrags und der aktuell real gelesenen Hobby-Depot-Designschnittstellen.
+
+## Entfernt
+
 - pa_breed;
-- Pferderassen-Batch;
+- Rassenbatch;
 - Pferde-Hero-Sonderlogik;
 - Pferde-Prompts/-Framing;
 - Pferde-IDs/-URLs/-Taxonomien;
 - Bildertrommel;
-- weitere Pferde-Altlasten nach vollständigem Source-Audit.
+- automatische Massenläufe;
+- automatische Überschreibung.
 
-## Grenze
+## QA
 
-Exakte 2.7.6-Bytes aktuell nicht als kopierbarer Quellkörper verfügbar. Kein Installer gebaut, keine CURRENT.zip erzeugt.
+- PHP PASS;
+- ZIP PASS;
+- No-Overwrite;
+- Readback/Rollback;
+- Kategorie-thumbnail_id;
+- HivePress-Konfigurationsbindung;
+- Pixabay/Pexels/Magnific;
+- kein Scheduler/Cron.
 
 ## EXAKT EINE NEXT ACTION
 
-**Exakte 2.7.6-Bytes binden, vollständigen Pferde-Altlasten-Audit durchführen und erst danach eine neu versionierte Hobby-Depot-Fassung bauen und lokal prüfen.**
+**1.0.0 installieren und zunächst nur sichere Einzelzuweisungen testen; keine Massenbebilderung.**
