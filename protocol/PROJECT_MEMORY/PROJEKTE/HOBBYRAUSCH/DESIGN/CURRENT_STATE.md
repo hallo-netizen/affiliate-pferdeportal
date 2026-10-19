@@ -3,66 +3,51 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.695 395/395 BENCHMARK-TEXTROLLOUT LOCAL PASS / LIVE-READBACK OFFEN**
+STATUS: **1.50.695 GESAMT-TEXTROLLOUT 395/395 LOKAL PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
 ## AKTUELLER BELASTBARER STAND
 
-- **1.50.694** bleibt die vom Nutzer ausdrücklich freigegebene redaktionelle Benchmark.
-- Maßgebliche Benchmarktexte: Bromelien, Tillandsien, Kakteen, Sukkulenten, Lithops, Hydrokultur, Mooskultur, fleischfressende Pflanzen.
-- **1.50.693 bleibt verworfen** und darf nicht verwendet werden.
-- Der komplette Bestand derselben Detail-Hub-Ebene wurde auf Grundlage von 1.50.694 und den verbindlichen Textregeln neu zusammengeführt:
-  - **395/395 Detail-Hubs** vorhanden;
-  - sichtbarer Lead **45–60 Wörter**;
-  - erster Satz erklärt Hobby/Begriff unmittelbar;
-  - aufklappbarer Vertiefungstext **150–193 Wörter zusätzlich zum Lead**;
-  - **2 Absätze** je Vertiefungstext;
-  - natürliche direkte Ansprache;
-  - **10/10 1.50.694-Pilottexte exakt unverändert** übernommen;
-  - Schuhmacherei-Lead unverändert.
-- Qualitätsprüfung des Gesamtbestands:
-  - verbotene Generator-/Füllphrasen: **0**;
-  - doppelte erste Sätze: **0**;
-  - identische Sätze auf drei oder mehr Seiten: **0**;
-  - Custom-Kacheluntertitel mit bloßer Titelwiederholung: **0**.
-- Gestaltung:
-  - heller Petrol-/Türkisblock gilt für den sichtbaren Detail-Lead allgemein;
-  - kein Rückfall auf Schuhmacherei-Sonderlogik;
-  - Detail-Zwischenüberschrift fällt nicht auf `Themen im Überblick` zurück;
-  - Kacheluntertitel müssen Zusatzinformation tragen; generische Fallbacks sind nicht bloße Titelwiederholung.
-- Lokale Technik-/Regression:
-  - PHP **123/123 PASS**;
-  - repräsentativer Render-Harness über alle 8 Welten PASS;
-  - farbiger Leadblock PASS;
-  - Accordion/2-Absatz-Ausgabe PASS;
-  - Kacheluntertitel-Regression PASS;
-  - **971/971 bestehende Bilddateien byte-identisch zu 1.50.694**;
-  - ZIP-Integrität PASS.
+- Qualitätsbenchmark bleibt **1.50.694**, insbesondere die vom Nutzer freigegebenen Pflanzen-Texte.
+- Vollständiger Folge-Stand **1.50.695** ist lokal gebaut und durch reale Evidence belegt.
+- Detail-Hubs: **395/395**.
+- Masterbestand: **395/395**.
+- 1.50.694-Benchmarktexte: **10/10 exakt erhalten**.
+- Sichtbare Leads: **45–60 Wörter**.
+- Aufklapptexte: **150–193 Wörter**, alle in genau **2 Absätzen**.
+- Verbotene Generator-/Füllphrasen: **0**.
+- Doppelte erste Sätze: **0 Gruppen**.
+- Satzdoppelungen ab 3 Vorkommen: **0 Gruppen**.
+- Kacheluntertitel mit bloßem Titel-Echo: **0**.
+- PHP: **123/123 PASS**.
+- Render-Harness: **8 repräsentative Welten + Benchmark-/Custom-/Generic-Untertitel PASS**.
+- Bildregression: **971/971** vorhandene Bilddateien byte-identisch zu 1.50.694.
+- ZIP-Integrität: **PASS**.
 - Artefakt:
   `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
 - SHA-256:
   `8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
+- Größe: **58,152,752 Bytes**.
 - Evidence:
-  lokaler 395er Regel-/Render-/Regression-Nachweis im 1.50.695-Arbeitsstand.
-- **Kein Live-PASS:** 1.50.695 wurde noch nicht im echten WordPress-Frontend gelesen.
+  `HOBBY_DEPOT_TEMPLATE_1.50.695_TEXT_ROLLOUT_EVIDENCE.json`
+- Live-Status: **NOT TESTED / NO LIVE PASS**.
 
 ## ERSTER OFFENER BLOCKER
 
-Der vollständige Benchmark-Rollout ist lokal geprüft. Es fehlt ausschließlich der **echte WordPress-Live-Readback von 1.50.695**.
+Nur noch der echte WordPress-/Frontend-Live-Readback des vollständigen 1.50.695-Rollouts.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.695 als normales vollständiges Template-Kit installieren und repräsentative Detail-Hubs aus allen 8 Welten plus einen direkten Category-Term live prüfen. Bei Abweichung exakt den Livepfad reproduzieren; nicht raten.**
+**1.50.695 regulär installieren und repräsentativ live prüfen: Benchmark-Pflanzen, Gestalten, Fertigen, Technik, Forschen, Tiere, Bewegen, Sammeln sowie mindestens einen direkten Category-Term.**
 
 ## ARBEITSBINDUNG
 
-- Campus-/Dokubranche: `hobbyroom/project-memory-campus-v1-20260905`.
-- Plugin: **HD-003 – Hobby Depot Design / Template Kit**.
-- 1.50.694 bleibt redaktionelle Benchmark.
+- 1.50.694 bleibt Qualitätsbenchmark.
+- Keine Texte neu schreiben, solange kein konkreter Livefehler belegt ist.
 - Keine neue Architektur.
-- Keine Text-Massenformeln.
-- Kein Live-PASS ohne echten WordPress-Readback.
+- Kein Rückfall auf 1.50.693.
+- Bei Liveabweichung exakt den betroffenen Render-/Textpfad reproduzieren; nicht raten.
 
 ## NICHT ANFASSEN
 
