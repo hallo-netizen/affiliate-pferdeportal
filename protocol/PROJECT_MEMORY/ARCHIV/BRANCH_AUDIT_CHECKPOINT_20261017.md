@@ -406,3 +406,22 @@ Der hier verfügbare GitHub-Zugriff besitzt keine Branch-Ref-Löschfunktion. Die
 Der ursprüngliche Hinweis dieses Checkpoints, es gebe noch keinen Cleanup-Scope, ist seit 2026-10-17 historisch überholt:
 BAU-043 ist CLOSED; `CAMPUS_REPOSITORY_CLEANUP` besitzt genau eine Current-Autorität:
 `protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md`.
+
+
+### Frische-Delta nach Abschlussprüfung – 2026-10-19
+
+Der physische Branchbestand stieg während des Abschlusschecks von **494 auf 496**.
+
+Exakt identifizierte neue Branches:
+- `hobbyroom/hd689-updater-artifact-20261018` → gegenüber Campus **6 eigene Commits**
+- `hobbyroom/hd690-detail-rollout-20261018` → gegenüber Campus **10 eigene Commits**
+
+Beide Branches wurden zusätzlich gegen Main, Campus, K0 und Affiliate verglichen und auf exakte Bindung in allen Hobbyrausch-Current-Autoritäten geprüft.
+
+Ergebnis:
+- beide besitzen eigene Commits;
+- beide sind **NO DELETE**;
+- beide gehören **nicht** zu den 58 Löschkandidaten;
+- physischer Endstand dieses Audits: **496 Branches**.
+
+Die ursprüngliche Prüfmenge von 467 bleibt als abgeschlossener Checkpoint unverändert; die zwei neuen Branches sind ein separat geprüftes Delta.
