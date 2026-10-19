@@ -3,7 +3,17 @@
   "project_id": "hobby-depot",
   "public_label": "Glossar",
   "main_page_binding": "editorial:wissen-glossar",
-  "term_url_base": "glossar",
+  "central_collection": {
+    "enabled": true,
+    "one_main_page": true,
+    "search": true,
+    "az": true,
+    "world_filters": true,
+    "pagination": true,
+    "filter_variants_indexable": false,
+    "filter_variants_canonical_to_main": true
+  },
+  "term_url_base": "glossar/begriff",
   "primary_worlds": [
     "Gestalten",
     "Fertigen",
@@ -37,10 +47,12 @@
     "auto_publish": false
   },
   "seo_gate": {
+    "one_primary_intent_one_owner": true,
     "unique_user_intent_required": true,
     "duplicate_core_intent_blocked": true,
     "duplicate_editorial_intent_blocked": true,
-    "thin_page_blocked": true
+    "thin_page_blocked": true,
+    "taxonomy_archives_indexable": false
   },
   "source_policy": {
     "horse_content_allowed": false,
