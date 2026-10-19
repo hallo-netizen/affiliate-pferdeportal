@@ -1756,3 +1756,29 @@ Der Hobby-Depot-Systemstand vom 18.10.2026 belegt weder Glossar Core noch Bildze
 
 REGEL:
 Keine rekonstruierte Altversion als aktuellen Pluginstand ausgeben. Erst exakte Quellbindung → Altlasten-Audit → neue Version → lokale Positiv-/Negativprüfung → dann Installationskandidat.
+
+
+## HOBBYRAUSCH-GLOSSAR-BILD-20261019-P – Installationskandidaten 1.0.0 + zentrale Glossar-Sammlung
+
+ENTSCHEIDUNG:
+Für Hobby Depot liegen jetzt zwei eigenständig versionierte, lokal geprüfte Installationskandidaten vor: Glossar Core 1.0.0 und Bildzentrale 1.0.0.
+
+GLOSSAR-SEO:
+Alle Begriffe werden über genau eine zentrale Glossar-Hauptseite gesammelt. A–Z, Suche, Hobbyweltfilter und Pagination sind Ansichten dieser Sammlung und keine zusätzlichen SEO-Owner. Filtervarianten werden noindex behandelt und kanonisch auf die Hauptseite zurückgeführt. Eigenständige Fachbegriffe dürfen eine Einzelbegriffsseite besitzen; Synonyme und bereits anderweitig besetzte Hobby-/Hub-/Ratgeberintents erzeugen keine zweite Seite.
+
+GLOSSAR-ARTEFAKT:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+SHA-256 `90debeaf31e8a95ad449c7fe355f1ea3862ab9342feaf5d1fdc700b323a50e59`.
+
+BILDZENTRALE-ARTEFAKT:
+`HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip`
+SHA-256 `bb74d795dffaa6d3ff51d6251d298c04c53ee9a3d75d39c00609afde867c7503`.
+
+BILDZENTRALE-BEREINIGUNG:
+pa_breed, Rassenbatch, Pferde-Prompts/-Framing, Pferde-IDs/-URLs, Bildertrommel/Random-Rotation, autonome Massenläufe und automatische Überschreibung sind nicht Bestandteil der Hobby-Depot-Fassung. Das aktuelle Hobby-Depot-Design wurde real gelesen: WordPress-Kategorien nutzen `thumbnail_id`; HivePress liest die Bildzentrale-Konfiguration `pabz_taxonomy_image_config_v1`.
+
+QUELLGRENZE:
+Die exakten Pferde-Pakete Glossar 1.4.0 und Bildzentrale 2.7.6 waren nicht als kopierbare Bytes erreichbar. Deshalb werden die Hobby-Depot-1.0.0-Kandidaten ausdrücklich nicht als byteidentische Kopien ausgegeben. Glossar basiert auf echtem neutralem UGE-Quellstand plus aktuellem 1.4.0-Vertrag; Bildzentrale auf dem belegten allgemeinen Funktionsvertrag plus realer Hobby-Depot-Designschnittstelle.
+
+LIVE:
+Noch nicht installiert. Kein Live-PASS vor WordPress-Readback.
