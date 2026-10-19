@@ -220,3 +220,43 @@ DETAILBELEG:
 ERGEBNIS:
 OFFEN / Audit sauber fortsetzbar / **keine Löschfreigabe** für die 47 `ahead=0`-Treffer ohne zweite Referenz-/Rollenprüfung.
 
+
+
+## HM-008 – Branch-Audit vollständig abgeschlossen
+
+DATUM:
+2026-10-19
+
+AUFTRAG:
+Den in HM-007 begonnenen Branch-Audit ohne Neuprüfung der bereits erledigten 291 Branches vollständig zu Ende führen und echte Löschkandidaten erst nach der vorgeschriebenen zweiten Schutzprüfung markieren.
+
+FRISCHER STAND VOR ABSCHLUSS:
+- physische Branches: **494**;
+- offene PRs: ausschließlich **#518**;
+- aktive Registry unverändert: `main`, Campus, K0, Affiliate;
+- GitHub-Branchschutz: `main` und `article-production`;
+- `article-production` zusätzlich durch aktives Ruleset `ARTICLE_PRODUCTION_HARDLOCK` geschützt.
+
+PRÜFUNG:
+- restliche **176/176** Branches ancestry-geprüft;
+- davon neu **44** mit `ahead=0`, **132** mit eigenen Commits;
+- Gesamtaudit damit **467/467** abgeschlossen;
+- Gesamt: **91** `ahead=0`, **376** mit eigenen Commits;
+- 91 Ahead-0-Fälle gegen aktive Registry, alle gebundenen Current-Autoritäten, offene PRs, Branchschutz/Rulesets, Main-Referenzen und Release-`target_commitish` geprüft;
+- Main-Hardlock-Legacy nicht angefasst;
+- K0, Affiliate, Plugins und Fachsysteme nicht verändert.
+
+ERGEBNIS:
+- **58** Branches als `LOESCHKANDIDAT_NACH_NEGATIVPRUEFUNG` freigegeben;
+- **33** Branches wegen nicht sicher ausgeschlossener Backup-/Fallback-/Gold-/Security-/Hardlock-/Schutzrolle zurückgestellt;
+- `article-production` ausdrücklich NO DELETE;
+- **0 Branches gelöscht**.
+
+DETAILBELEG:
+`protocol/PROJECT_MEMORY/ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`
+
+WARUM NOCH KEINE LÖSCHUNG:
+Der in diesem Lauf verfügbare GitHub-Zugriff kann Branch-Refs nicht löschen. Es wird deshalb keine Löschung behauptet oder simuliert.
+
+NEXT:
+Vor einem späteren Löschbatch nur Frische-Delta prüfen und anschließend ausschließlich die 58 im Auditcheckpoint freigegebenen Branches löschen.
