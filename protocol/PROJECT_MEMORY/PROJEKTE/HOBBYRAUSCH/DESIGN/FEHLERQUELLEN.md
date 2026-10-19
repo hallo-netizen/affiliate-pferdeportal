@@ -350,3 +350,42 @@ PHP 123/123 PASS; 8-Welten-Render-Harness PASS; 971/971 Bilddateien byte-identis
 OFFEN:
 Echter WordPress-Live-Readback von 1.50.695. Kein Live-PASS raten.
 
+
+
+---
+
+## HRD-075 – Hub2-Einstiege formal korrekt, aber nicht zuverlässig inspirationsgeeignet
+STATUS: **LOCAL CLOSED 1.50.698 / LIVE-READBACK OFFEN**
+
+BEFUND:
+Der 1.50.697-Gesamtrollout erfüllte Wortzahl-, Absatz- und Anti-Floskelprüfungen, aber mehrere sichtbare Hub2-Leads stiegen zu früh mit Fachdetails ein. Für inspirationssuchende Nutzer war dadurch nicht immer sofort klar, worum es in der Themenfamilie geht, was einen dort erwartet und warum der Bereich interessant sein kann.
+
+BENCHMARK:
+- die vom Nutzer ausdrücklich freigegebenen Pflanzen-Texte aus 1.50.694;
+- Schrift & Lettering 1.50.696 als bestätigte Hub2-Grafik-/Textübertragung;
+- verbindliche Textregel `TEXTREGELN_PFERDEATELIER_KOPIE_20261012.md`.
+
+KORREKTUR 1.50.698:
+- 69/69 sichtbare Hub2-Leads redaktionell neu geprüft;
+- natürliche Inspirations-Einleitung statt Fachdetail-Einstieg;
+- 47–58 Wörter;
+- direkte natürliche Ansprache 69/69;
+- keine Fragenliste und kein starres Vier-/Fünf-Punkte-Schema;
+- vorhandene gute Informationen bleiben erhalten;
+- 35 nützliche Fachinformationen aus früheren Leads wurden in den Aufklapper verschoben;
+- Aufklapper 150–192 Wörter, 69/69 exakt zwei Absätze;
+- Petrol-/Türkisblock, Hero-/Bildsystem und 395er Detail-Hub-Texte unverändert.
+
+FRISCHE POSITIV-/NEGATIVPRÜFUNG:
+- POS: `schrift-lettering` liefert den Hub2-Editorialpfad mit Lead und Aufklapptext → PASS.
+- NEG: `bromelien` wird vom Hub2-Editorialpfad ausgeschlossen → PASS.
+- NEG: unbekannter Slug wird fail-closed behandelt → PASS.
+- Runtime-Editorial-Audit: 69/69 PASS.
+- PHP: 132/132 PASS.
+- ZIP-Integrität PASS.
+- 983/983 Assets unverändert.
+- Benchmarkdatei 1.50.694 unverändert.
+- 395er Detailtextdatei unverändert.
+
+OFFEN:
+Echter WordPress-/Frontend-Readback von 1.50.698. Kein Live-PASS raten.
