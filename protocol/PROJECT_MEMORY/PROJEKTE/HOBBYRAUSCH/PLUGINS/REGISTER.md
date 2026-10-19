@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-10-01
+STAND: 2026-10-19
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
 
 ## EINE PLUGIN-WAHRHEIT
@@ -15,38 +15,32 @@ Die einzige aktuelle Plugin-Wahrheit liegt jeweils in:
 ## Bestand
 
 ### HD-001 – Kategorie-Workflow
-
-Plugin:
-`Affiliate-Portal Kategorie-Workflow`
-
-Akte:
-`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/`
-
-Aktuelle Plugin-Wahrheit:
-`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+Plugin: `Affiliate-Portal Kategorie-Workflow`  
+Akte: `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/`
 
 ### HD-002 – Text/SEO
-
-Plugin:
-`Hobby Depot SEO Themenengine`
-
-Akte:
-`PLUGIN_AKTEN/HD-002-TEXT-SEO/`
-
-Aktuelle Plugin-Wahrheit:
-`PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
+Plugin: `Hobby Depot SEO Themenengine`  
+Akte: `PLUGIN_AKTEN/HD-002-TEXT-SEO/`
 
 ### HD-003 – Design / Template Kit
+Plugin: `Affiliate Portal Template Kit – Hobby Depot Profil`  
+Akte: `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/`
 
-Plugin:
-`Affiliate Portal Template Kit – Hobby Depot Profil`
+### HD-004 – Kategorie-Kern
+Plugin: `Hobby Depot Kategorie-Kern`  
+Akte: `PLUGIN_AKTEN/HD-004-KATEGORIE-KERN/`
 
-Akte:
-`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/`
+### HD-005 – Glossar Core
+Plugin: `Universal Glossary Engine – Hobby Depot Anwendung`  
+Akte: `PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/`
 
-Aktuelle Plugin-Wahrheit:
-`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+### HD-006 – Bildzentrale
+Plugin: `Allgemeine Bildzentrale – Hobby Depot Anwendung`  
+Akte: `PLUGIN_AKTEN/HD-006-BILDZENTRALE/`
 
 ## Regel
+
+Für jeden Eintrag gilt:
+`PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md` = einzige technische Plugin-Wahrheit.
 
 Release-Artefakte, Evidence, Historie, ORIGINAL-Ablage und Updateprotokoll sind Nachweis/Archiv und niemals zweite Current-Wahrheit.
