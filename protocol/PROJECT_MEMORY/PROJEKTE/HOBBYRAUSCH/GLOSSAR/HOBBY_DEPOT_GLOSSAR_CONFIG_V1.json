@@ -1,0 +1,52 @@
+{
+  "contract": "HOBBY_DEPOT_GLOSSAR_CONFIG_V1",
+  "project_id": "hobby-depot",
+  "public_label": "Glossar",
+  "main_page_binding": "editorial:wissen-glossar",
+  "term_url_base": "glossar",
+  "primary_worlds": [
+    "Gestalten",
+    "Fertigen",
+    "Technik",
+    "Forschen",
+    "Pflanzen",
+    "Tiere",
+    "Bewegen",
+    "Sammeln"
+  ],
+  "term_model": {
+    "one_term_one_dataset": true,
+    "synonyms_are_aliases": true,
+    "primary_world_required": true,
+    "related_term_required": true,
+    "primary_target_optional": true,
+    "primary_target_priority": [
+      "CORE_HOBBY_OR_HUB",
+      "EDITORIAL_FALLBACK",
+      "NONE"
+    ]
+  },
+  "content": {
+    "short_definition_required": true,
+    "explanation_required": true,
+    "distinction_required": true,
+    "sources_required": true,
+    "seo_title_required": true,
+    "meta_description_required": true,
+    "body_links_allowed": false,
+    "auto_publish": false
+  },
+  "seo_gate": {
+    "unique_user_intent_required": true,
+    "duplicate_core_intent_blocked": true,
+    "duplicate_editorial_intent_blocked": true,
+    "thin_page_blocked": true
+  },
+  "source_policy": {
+    "horse_content_allowed": false,
+    "horse_taxonomies_allowed": false,
+    "horse_urls_allowed": false,
+    "horse_ids_allowed": false,
+    "horse_design_values_allowed": false
+  }
+}
