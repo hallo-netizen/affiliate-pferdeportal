@@ -971,3 +971,23 @@ KORREKTUR:
 
 VERMEIDUNGSREGEL:
 Bei Hero-Abnahme reicht `0 seitlicher Crop` technisch nicht. Zusätzlich muss die **sichtbare** Szene nach Text-/Fade-Overlay geprüft werden. Ein formal vorhandener Bildbereich, der vom Overlay verdeckt wird, zählt nicht als erhaltene Szenerie.
+
+
+## AF-051 – Textregeln formal vorhanden, aber bei Massenproduktion nicht wirksam durchgesetzt
+
+FEHLER:
+Die Detail-Hobbytexte wurden wegen unterschiedlicher Volltexte und korrekter Wortzahlen zu positiv bewertet, obwohl wiederkehrende Generator-Satzanfänge, ähnliche Absatzgerüste und kalte Kachelfloskeln sichtbar blieben.
+
+WARUM DAS FALSCH WAR:
+Duplikatfreiheit und Wortzahl wurden wie redaktionelle Qualität behandelt. Die verbindlichen Regeln `natürliches Deutsch`, `keine Generator-/Padding-Sprache` und `keine generische Schlussformel` wurden dadurch nicht tatsächlich geprüft.
+
+KORREKTUR:
+Nicht einzelne Wörter austauschen. Der Textaufbau wird redaktionell neu gebunden:
+- zuerst für Anfänger erklären, worum es beim Hobby geht, was man macht und was typisch ist;
+- danach fachlich zusammenhängend vertiefen;
+- keine Kacheln im Fließtext nacherzählen;
+- Kacheluntertitel nur sachlich konkret;
+- Zwischenüberschrift führt in die Tiefe statt `Themen im Überblick`.
+
+VERMEIDUNGSREGEL:
+Ein Textbestand darf nicht mehr allein wegen Wortzahl, Einzigartigkeit oder fehlender exakter Dubletten als Text-PASS gelten. Wiederkehrende Satzanfänge, Absatzmuster, Schlussformeln und austauschbare Handlungsfloskeln sind vor Freigabe explizit negativ zu prüfen.
