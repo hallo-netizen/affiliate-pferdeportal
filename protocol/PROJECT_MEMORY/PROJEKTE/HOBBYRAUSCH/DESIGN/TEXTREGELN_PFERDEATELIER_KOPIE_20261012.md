@@ -74,3 +74,19 @@ Für die Detail-Hobbyseiten gilt zusätzlich hart:
 7. Ein Kachel-Untertitel nennt stattdessen den tatsächlichen Inhalt des Teilbereichs, z. B. Materialien, Werkzeuge, Arbeitsschritte, Bauformen, Techniken oder typische Probleme.
 8. Die Zwischenüberschrift über den Kacheln beschreibt das **Weitergehen in die Tiefe**, nicht eine bloße Übersicht. Bevorzugt wird eine natürliche themenspezifische Formulierung; ein neutraler Fallback darf „Mehr zu <Hobby>“ sein.
 9. Keine Massenproduktion aus Satzbausteinen. Wiederkehrende Satzanfänge, wiederkehrende Schlussformeln und austauschbare Absatzgerüste sind als Regelverstoß zu behandeln. Auch innerhalb derselben Seite dürfen sich Aussagen oder Satzmuster nicht unnötig wiederholen.
+
+
+## Präzisierung 2026-10-19 – Hub2 als Inspirations-Einstieg
+
+Für die 69 Hub2-/Ebene-2-Seiten gilt der vom Nutzer bestätigte Schrift-&-Lettering-Stand 1.50.696 zusammen mit den freigegebenen Detail-Hobbytexten als Darstellungs- und Qualitätsmaßstab.
+
+Der sichtbare Lead folgt deshalb auf Hub2 demselben redaktionellen Grundprinzip wie auf der Ebene darunter, angepasst an eine Themenfamilie statt an ein einzelnes Hobby:
+
+1. Der erste Absatz erklärt **sofort und ohne Vorrede, worum es in dieser Themenfamilie überhaupt geht**.
+2. Er vermittelt in natürlichem Fließtext, **was man dort typischerweise macht bzw. welche Art von Hobbys einen erwartet**.
+3. Er macht verständlich, **für wen dieser Bereich interessant sein kann und worin sein besonderer Reiz liegt**. Das darf ausdrücklich implizit und natürlich formuliert werden; keine Frage-Antwort-Schablone und keine Pflichtformel wie „für wen geeignet“.
+4. Typische Materialien, Werkzeuge oder Voraussetzungen werden knapp genannt, wenn sie für den ersten Eindruck wichtig sind.
+5. Der Lead ist **kein Fachdetail-Einstieg**. Spezialwissen darf den Überblick nicht verdrängen.
+6. Gute vorhandene Informationen dürfen beim Umschreiben des sichtbaren Leads **nicht verloren gehen**. Wenn ein nützlicher Detailhinweis nicht mehr in den kompakten Lead passt, wird er im aufklappbaren Text erhalten.
+7. Maßstab ist die Wirkung der freigegebenen Detail-Hobbytexte: Ein inspirationssuchender Leser soll nach dem ersten Absatz verstehen, **was ihn hier erwartet und warum das Thema interessant sein könnte**, ohne erst Fachwissen mitzubringen.
+8. Keine Fragenliste, kein starres Vier- oder Fünf-Punkte-Schema. Der Absatz bleibt natürlicher redaktioneller Text.
