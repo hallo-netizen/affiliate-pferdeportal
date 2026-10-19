@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – TEXTREGELN AUS PFERDEATELIER
 
-STAND: 2026-10-18
+STAND: 2026-10-19
 ROLLE: **Verbindliche redaktionelle Textregel für Hobby-Depot-Kategorietexte. Keine zweite Current-Autorität.**
 
 ## Quelle
@@ -37,12 +37,12 @@ Die **Darstellung** stammt ausdrücklich **nicht** aus Pferdeatelier, sondern bl
 
 - Der sichtbare Teil bleibt **ein Absatz ohne künstliche Leerzeile**.
 - Kein sichtbarer Pflichtsatz `Mehr zu <Kategorie> erfahren`.
-- Kein zusätzlicher Dekokasten; Kompaktheit entsteht durch einen durchgehenden Textblock und kleine Abstände.
+- Kein zusätzlicher **Text-/Dekokasten mit eigener Zusatzcopy**. Auf Detail-Hobbyseiten darf der sichtbare 45–60-Wörter-Lead als ruhiger heller Petrol-/Türkisblock hinterlegt werden, weil er die Einsteigererklärung funktional kennzeichnet.
 - Kein zusätzlicher zweiter Erklärungstext unter dem Aufklapper.
 - Mehr sichtbarer Text ist nicht automatisch besser; der Lead soll bereits informieren, aber die Seite kompakt halten.
 
 ## Bindung
-Diese Regel gilt für die Kategorietexte der Hub2-/Ebene-2-Seiten im Hobby Depot. Status, Release und NEXT ACTION bleiben ausschließlich in `DESIGN/CURRENT_STATE.md`.
+Diese Regel gilt für die redaktionellen Kategorietexte der Hub2-/Ebene-2-Seiten **und für die Detail-Hobbyseiten der nächsten Ebene** im Hobby Depot. Die Präzisierung für Detail-Hobbyseiten ist dort zusätzlich hart. Status, Release und NEXT ACTION bleiben ausschließlich in `DESIGN/CURRENT_STATE.md`.
 
 
 ## Präzisierung 2026-10-18 – Detail-Hobbyseiten
