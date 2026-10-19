@@ -38,3 +38,30 @@
              'includes/class-pste-editorializer.php',
              'includes/class-pste-context-evaluator.php'
          ];
+--- a/includes/class-pste-normal-metadata-path.php
++++ b/includes/class-pste-normal-metadata-path.php
+@@ -199,6 +199,24 @@
+         // SEO intention is established before article-type acceptance. The classifier remains independent and must confirm it.
+         $intentAnalysis=PSTE_Intent_Profile::analyzeBeforeType($analysisRaw,$normalization,$familyName,$seoEvidence);$base['intent_analysis']=$intentAnalysis;
+         if(empty($intentAnalysis['ok'])){$base['sandbox_required']=true;$base['sandbox_admission_mode']='INTERNAL_CLARIFICATION';return self::withReasons($base,'SANDBOX_REQUIRED',array_merge(['PSTE_NORMAL_PATH_INTENT_NOT_PROVEN_BEFORE_TYPE','PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED'],(array)($intentAnalysis['reason_codes']??[])));}
++
++        // A proved topic and a title already validated by the existing title pipeline must
++        // not become an ambiguous article type merely because the matching WP leaf is absent.
++        // Reuse the existing category room; never claim a category or production handoff.
++        $wantedType=(string)($intentAnalysis['primary_article_type_candidate']??'');
++        $typeOnly=PSTE_Semantic_Classifier::classifyTypeOnly($analysisRaw,$registry);
++        if($wantedType!==''&&!empty($typeOnly['ok'])
++            &&PSTE_Article_Type_Registry::canonicalType((string)$typeOnly['resolved_article_type'])===PSTE_Article_Type_Registry::canonicalType($wantedType)
++            &&!PSTE_Article_Type_Registry::resolve($registry,$familyKey,$wantedType)['ok']
++            &&!empty($base['title_precheck_validated'])&&trim((string)($base['title']??''))!==''){
++            $risk=PSTE_Domain_Risk_Gate::evaluate($analysisRaw,$wantedType);$base['domain_risk']=$risk;
++            if(!empty($risk['ok'])){
++                $base['article_type']=$wantedType;$base['title_candidate_only']=false;
++                $base['structure_gap_backlog_required']=true;
++                $base['category_gap_proposal']=PSTE_Category_Gap::proposal($familyName,$familyKey,$wantedType,[],[],(string)($baseline['structure_sha256']??''),$registry);
++                return self::withReasons($base,'STRUCTURE_GAP',['PSTE_SIGNED_TITLE_READY_CATEGORY_ABSENT']);
++            }
++        }
+ 
+         // Historical/proposed article type is intentionally not accepted as an input authority.
+         $semantic=PSTE_Semantic_Classifier::classify($normalized,null,$registry,$familyKey);
