@@ -4944,3 +4944,47 @@ Kein Live-PASS vor echter WordPress-Sichtprüfung.
 
 NEXT:
 1.50.697 installieren und repräsentativ mehrere Hub2 aus allen acht Welten live prüfen.
+
+
+---
+
+## PU-20261019-102 – HD-003 1.50.698 / Hub2-Einstiege an Detail-Hub-Benchmark angeglichen
+
+KORREKTURGRUND:
+1.50.697 erfüllte Wortzahl, Absatz- und Anti-Floskeltests, aber mehrere sichtbare Hub2-Leads begannen zu früh mit Fachdetails. Für inspirationssuchende Nutzer fehlte teilweise der unmittelbare Überblick: Was ist das Themenfeld, was macht man dort und warum könnte es interessant sein?
+
+BENCHMARK:
+- freigegebene Pflanzen-Texte aus 1.50.694;
+- bestätigte Schrift-&-Lettering-Übertragung aus 1.50.696;
+- autoritative Textregel frisch gelesen.
+
+UMSETZUNG:
+- 69/69 sichtbare Hub2-Leads redaktionell neu geprüft;
+- keine Fragenliste, kein neues starres Schema;
+- jeder Lead funktioniert als natürlicher Einleitungsabsatz für Nutzer ohne Vorwissen;
+- 47–58 Wörter;
+- direkte Ansprache 69/69;
+- gute bestehende Aufklapptexte erhalten;
+- 35 nützliche Fachinformationen aus dem bisherigen Lead ausdrücklich in den Aufklapper verschoben, damit durch die stärkere Einleitung nichts verloren geht;
+- Aufklapper danach 150–192 Wörter und weiterhin exakt 2 Absätze;
+- Grafik unverändert: Petrolblock wie 1.50.696.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.698_HUB2_INTRO_BENCHMARK.zip`
+
+SHA-256:
+`b665cf5c782bb8835ec923ccb1289e2ff7355b5e57bc0073a38025903a61969c`
+
+QA:
+- Runtime-Reflection 69/69 PASS;
+- verbotene Phrasen 0;
+- Fragezeichen in Leads 0;
+- doppelte erste Sätze 0;
+- 6-Wort-N-Gramme 4+ 0;
+- PHP 132/132 PASS;
+- 395er Detailtextbestand unverändert;
+- 983/983 Assets unverändert;
+- ZIP PASS.
+
+LIVE:
+Noch kein Live-PASS.
