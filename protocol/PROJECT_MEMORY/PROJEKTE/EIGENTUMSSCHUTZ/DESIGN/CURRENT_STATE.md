@@ -1,5 +1,21 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 19.10.2026 – FOTO-KORREKTUR AUF ORIGINALBESTAND, NICHT ALLES NEU: 8 GEZIELTE KORREKTUREN
+
+**Klarstellung:** Ursprüngliches **installierbares** WordPress-Designplugin bleibt **0.1.42** mit 173 konkreten Fotozuordnungen von 265 C23-Themen. Die neueren, 82/83 Bilder enthaltenden Prüfarchive waren eine streng aussortierte, **nicht** produktive Mapping-Variante. Aus 82 darf man nicht schließen, dass physisch fast alle Bilder verschwunden oder neue Fotos nötig seien. Nutzer fordert: Keine Collagen oder neue Fotoerzeugung, ursprüngliche Bilder weitgehend behalten, nur echte Fehler korrigieren.
+
+**Nachweislich jetzt bearbeitet:** Original 0.1.42 ZIP sauber neu entpackt, volle 173 Fotozuordnungen beibehalten. Acht ausdrücklich anhand vorhandener Einzelbilddateien sichtgeprüfte Zuordnungen verbessert: Selbstschutz bei Einbruch, Tresore, Rauchmelder, Garagentorantrieb, Dachrinnen & Fallrohre, Rückstauklappen, Wohnmobil bei Sturm sowie Graffiti: Schutz & Hilfe. Dazu Bilddateien aus **bestehenden Arbeitsdateien** übernommen; Tresor-Einzelfoto war bereits in der Vorarbeit generiert und wird nur konvertiert, **kein neues Bild erzeugt**. 174/265 Fotozuordnungen danach, da Rauchmelder vorher wirklich leer war. Keine sonstige Kategorie oder Seite verändert. Ursprünglich vorgeschlagene zusätzliche Tauschaktionen für Räder/Privatfahrzeuge, Hausbatterie/Heimspeicher, Schaufenster, Sportplatz und Dürrebäume wurden wegen nachgewiesener **fast identischer Bilder innerhalb desselben Bereichs** NICHT übernommen: dHash <=2 zwischen zwei Motivdateien trotz unterschiedlicher Dateinamen. Keine blinden Korrekturen.
+
+**Technischer Test:** Original CSS/HTML-Kachelstruktur bei 36 Bereichen × 390/980/1440px = **108 echte lokale Chromium-Ansichten**, 0 Bildladefehler, 0 horizontaler Überlauf, 0 Verhältnis-/Rahmenfehler, 0 fehlerhaftes CSS-object-fit bei 174 Bildplätzen. Alle 9 PHP-Dateien Syntaxprüfung PASS. **Dies ist keine Live-WordPress-Abnahme und keine redaktionelle Gesamtabnahme der noch vorhandenen anderen Foto-Motive.** Die früher willkürlich auferlegte 900px-Mindestbreite ist kein Bildqualitätsbeleg: die echte CSS-Kachelbreite und Device Pixel Ratio sind zu berücksichtigen.
+
+**Standartefakt nur für Fortsetzung, NICHT installieren:** `/Eigentumsschutz/Design/HBD_BILDKORREKTUREN_8_VERIFIZIERT_20261019_ARBEITSSTAND.zip` SHA256 `5456269262e674a40b9a70702e0b1c21a1de680b0a52e06de7cfd49d2d22535f`. Enthält nur Mappingdelta auf Original 0.1.42, benötigte bereits vorhandene Bilder und nachvollziehbare QA-Protokolle. Kein neues Designplugin ausgeliefert.
+
+**EINE DESIGN-NEXT ACTION:** Bereits zugeordnete Originalfotos erhalten; weitere nachgewiesene Konfliktpaare/Falschbilder auflösen, ohne gleich die ganze Bildwelt auszusortieren oder Collagen zu generieren. Fehlstellen gezielt kontrollieren. Erst nach klar begrenzter, bestandener Gesamtbildabnahme ein einziges aktualisiertes installierbares Plugin ausgeben.
+
+---
+
+
+
 ## 19.10.2026 – QUELLABGLEICH DES ORIGINALEN 0.1.42 GEGEN JÜNGSTEN REKONZILIATIONSPRÜFSTAND
 
 Exakt mit beiden in der Arbeitsumgebung vorhandenen ZIP-Quell-Dateien und vollständigen 265 Schlüsseln (Welt, Bereich, Thema) verglichen: 0.1.42 hat 173 mit Foto und 92 ohne Foto. Jüngster provisorischer Rekonziliationsstand: 83 mit Foto und 182 ohne Foto. Exakte Übergangstabelle: 110 Foto→leer; 72 leer→leer; 63 Foto→Foto; 20 leer→Foto. Bisherige Angabe 111/62 basierte auf der älteren Strengprüfung VOR der einen Graffiti-Restaurierung und darf NICHT als Zahl des jüngsten Prüfstands bezeichnet werden. Vollständige 265-Zeilen-Quelle gesichert: /Eigentumsschutz/Design/HBD_BILDER_265_QUELLABGLEICH_20261019.csv. Kein neues Plugin gebaut, keine fachliche Freigabe aller Motive und kein WordPress-Livestand behauptet. NEXT ACTION bleibt nach Themenbild sichtgeprüfte Einzelrestaurierung, weder automatische pauschale Restaurierung noch stilles Wegwerfen vorhandener Motive.
