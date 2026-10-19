@@ -4988,3 +4988,42 @@ QA:
 
 LIVE:
 Noch kein Live-PASS.
+
+
+---
+
+## PU-20261019-103 – HD-003 1.50.698 Abschluss-/Nachholprüfung
+
+ANLASS:
+Abschlussprüfung vor Chatübergabe nach HOBBYRAUSCH-Hard-Rule.
+
+FRISCHECHECK:
+- START_HERE und Autoritätsplan frisch gelesen;
+- zuständige Current-Autorität: `PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md`;
+- Plugin-Wahrheit: `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`;
+- lokales Artefakt 1.50.698 und Evidence frisch geprüft.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.698_HUB2_INTRO_BENCHMARK.zip`
+SHA-256:
+`b665cf5c782bb8835ec923ccb1289e2ff7355b5e57bc0073a38025903a61969c`
+Größe:
+58,537,086 Bytes.
+
+FRISCHE QA:
+- ZIP-Integrität PASS;
+- Plugin-Version/Releasekette 1.50.698 PASS;
+- Runtime-Editorial-Audit 69/69 PASS;
+- POS: Schrift & Lettering nutzt Hub2-Editorialpfad → PASS;
+- NEG: Bromelien wird nicht als Hub2 behandelt → PASS;
+- NEG: unbekannter Slug fail-closed → PASS;
+- PHP 132/132 PASS;
+- Benchmarkdatei 1.50.694 SHA-256 `e96c697721549f049d1001592823443186ef649c427c5d3e99ae745297a156e1`;
+- 395er Detailtextdatei SHA-256 `18bce1b3597cc84fb60399883fc8bbb3696c110573a41162b5198665fa7b253d`;
+- 983 Assets gegenüber 1.50.697 unverändert.
+
+FORMALER ARTEFAKTPUNKT:
+Im GitHub-Campus-Verzeichnis `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/` liegt weiterhin nur `MANIFEST.md`; ein `CURRENT.zip` ist dort nicht vorhanden. Der belastbare lokale 1.50.698-ZIP ist vorhanden und geprüft, konnte in dieser Sitzung aber nicht als 58,5-MB-Binärdatei über den verfügbaren Text-/Connector-Schreibweg in den Campus synchronisiert werden. Dies ist ein formaler Plugin-Artefakt-Sync-Restpunkt, kein inhaltlicher/technischer Fehler des ZIPs.
+
+LIVE:
+Kein Live-PASS. Echter WordPress-/Frontend-Readback bleibt offen.
