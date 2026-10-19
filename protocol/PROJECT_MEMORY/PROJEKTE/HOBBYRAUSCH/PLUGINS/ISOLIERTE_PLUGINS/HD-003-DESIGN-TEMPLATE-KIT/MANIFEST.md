@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-19
-STATUS: **1.50.692 PILOT DOKUMENTIERT GEBAUT / STATISCHE QA PASS / HARD POSITIV-NEGATIV-E2E OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STATUS: **1.50.693 LOCAL HARD PASS / LIVE OFFEN**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -13,23 +13,30 @@ PLUGIN-CURRENT:
 `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
 KANDIDAT:
-1.50.692 – Schuhmacherei-Textpilot
+1.50.693 – 395er Detail-Text-/Kachelrollout
 
 ARTEFAKT:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.693_DETAIL_TEXT_ROLLOUT_LOCAL_HARD_PASS.zip`
 
-DOKUMENTIERTE SHA-256:
-`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
+SHA-256:
+`558a345042c9acaa488b01ce543c2f9d7defc4406f5243ee17f90b4363975d54`
 
-DOKUMENTIERTE STATISCHE QA:
-- PHP 120/120 PASS;
-- ZIP PASS;
-- aktive V150692-Kette PASS.
+LOKALE QA:
+- 395/395 Detail-Hubs;
+- Lead 45–60 Wörter;
+- Aufklapptext 150–187 Wörter, zwei Absätze;
+- 0 Regel-/Füllphrasenfehler;
+- 0 interne Wiederholungsfehler;
+- PHP 123/123 PASS;
+- Positiv-/Negativ-Render-E2E PASS;
+- direkte Category-Term-Route PASS;
+- V150693 Release-/Templatekette PASS;
+- Startseiten-Weltassets unverändert;
+- ZIP PASS.
 
-FREIGABESPERRE:
-- vollständige lokale Positiv-/Negativ-E2E-Simulation des real gerouteten Schuhmacherei-Pfads ist noch nicht dokumentiert;
-- Nutzer-Liveabnahme des Piloten fehlt;
-- deshalb kein Release-/Live-PASS und bewusst **keine Synchronisierung von CURRENT.zip**.
+LIVE-GRENZE:
+- kein Live-PASS;
+- echter WordPress-Frontend-Readback steht aus.
 
 NEXT:
 Nicht aus diesem Manifest ableiten. Ausschließlich aus der zuständigen Plugin-Current lesen.
