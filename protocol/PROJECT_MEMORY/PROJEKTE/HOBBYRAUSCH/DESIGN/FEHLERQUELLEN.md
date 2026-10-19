@@ -323,7 +323,7 @@ Kein generischer Weltbild-Fallback. Kein 1.50.669-Release vor semantischer Sicht
 
 
 ## HRD-074 – Detail-Hobbytexte trotz klarer Regeln als Generator-Schablone produziert
-STATUS: **OPEN / SCHUHMACHEREI-PILOT GEBAUT / GESAMTROLLOUT BLOCKIERT**
+STATUS: **LOCAL CLOSED 1.50.693 / LIVE-READBACK OFFEN**
 
 BEFUND:
 Im bestehenden Detail-Hobbytextbestand treten wiederkehrende Generatorformulierungen und wiederkehrende Absatzgerüste auf, u. a. nach dem Muster `Konkreter wird es ...`, `Für die Orientierung ...` oder `Zur Vertiefung ...`. Zusätzlich sind kalte Kachelfloskeln wie `sinnvoll vergleichen`, `realistisch planen`, `sicher einordnen` oder `konkret vertiefen` vorhanden. Der Abschnittstitel `Themen im Überblick` beschreibt diese vertiefende Ebene ebenfalls falsch.
@@ -339,8 +339,8 @@ KORREKTURBINDUNG:
 - Kacheluntertitel nur konkrete Sachinhalte;
 - kein Massentausch einzelner Floskeln gegen neue Floskeln.
 
-PILOT:
-1.50.692 setzt diese Logik ausschließlich für Schuhmacherei als Musterfall um.
+PILOT / ROLLOUT:
+1.50.692 setzte Schuhmacherei als Musterfall um. Nach Nutzerbestätigung wurde 1.50.693 auf 395/395 Detail-Hubs ausgerollt. Lead 45–60 Wörter; aufklappbarer Text 150–187 Wörter zusätzlich zum Lead; zwei Absätze; kurze content-only Kacheluntertitel. Lokaler Regel-/Wiederholungs-/Semantikcheck, PHP 123/123 und Positiv-/Negativ-Render-E2E PASS.
 
 OFFEN:
-Der Pilot besitzt noch keinen dokumentierten vollständigen lokalen Positiv-/Negativ-E2E-Nachweis und keine Nutzer-Liveabnahme. Der Gesamtbestand wird vorher nicht ausgerollt.
+Echter WordPress-Frontend-Readback von 1.50.693. Kein Live-PASS raten.
