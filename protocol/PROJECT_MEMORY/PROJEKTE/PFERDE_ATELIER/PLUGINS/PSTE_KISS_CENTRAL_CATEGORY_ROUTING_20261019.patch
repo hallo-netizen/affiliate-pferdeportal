@@ -1,0 +1,37 @@
+--- a/includes/class-pste-normal-metadata-path.php
++++ b/includes/class-pste-normal-metadata-path.php
+@@ -139,6 +139,24 @@
+         }
+         $base['family_resolution']=$familyResolution;$base['family_membership']=$membership;
+         if($familyKey===''||!$family||empty($membership['ok'])){
++            // After proven portal relevance and the EXISTING hard title pipeline passed,
++            // an unknown family is a category choice, not an editorial-title failure.
++            // Keep title and all unproven category fields unchanged. No new gate or worker.
++            if(!empty($base['title_precheck_validated'])&&trim((string)($base['title']??''))!==''){
++                $typeOnly=PSTE_Semantic_Classifier::classifyTypeOnly($analysisRaw,$registry);
++                if(!empty($typeOnly['ok'])){
++                    $type=(string)($typeOnly['resolved_article_type']??'');
++                    $risk=PSTE_Domain_Risk_Gate::evaluate($analysisRaw,$type);
++                    if($type!==''&&!empty($risk['ok'])){
++                        $base['article_type']=$type;$base['domain_risk']=$risk;
++                        $base['semantic_consensus']=$typeOnly;
++                        // The existing category room is review-only; do not promote a prechecked
++                        // title candidate to a production title before final family/type binding.
++                        $base['structure_gap_backlog_required']=true;
++                        return self::withReasons($base,'STRUCTURE_GAP',['PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN']);
++                    }
++                }
++            }
+             // A proven Magazin subject awaiting medical/title review is not a
+             // missing WordPress category and must not be reclassified as one.
+             if(($journal['status']??'')==='HIGH_CONFIDENCE_JOURNAL'){
+@@ -672,7 +690,8 @@
+         $reasonCodes=(array)($path['reason_codes']??[]);
+         $categoryMissingConfirmed=$status==='STRUCTURE_GAP'&&$titleOk&&$type!==''&&!$hasCategory
+             &&(in_array('PSTE_VALID_JOURNAL_TITLE_CATEGORY_ABSENT',$reasonCodes,true)
+-                ||in_array('PSTE_SIGNED_TITLE_READY_CATEGORY_ABSENT',$reasonCodes,true));
++                ||in_array('PSTE_SIGNED_TITLE_READY_CATEGORY_ABSENT',$reasonCodes,true)
++                ||in_array('PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN',$reasonCodes,true));
+         // STRUCTURE_GAP caused by a missing research family is NOT a missing WP term.
+         $path['category_backlog_required']=$categoryMissingConfirmed;
+         $path['worker_flow']=[
