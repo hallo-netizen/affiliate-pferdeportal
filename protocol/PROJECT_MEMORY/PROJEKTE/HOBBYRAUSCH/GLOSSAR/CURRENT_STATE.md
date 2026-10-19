@@ -56,7 +56,7 @@ Die exakten 1.4.0-Pluginbytes sind im aktuell erreichbaren Campus-/Library-Besta
 
 Im frischen Hobby-Depot-Systemstand vom 2026-10-18 ist kein `universal-glossary-engine` aktiv belegt.
 
-**Nicht installiert / kein Installationsauftrag ausgeführt.**
+**Nicht aktiv; eine bestehende Installation ist im vorliegenden Systemreport nicht belegt. In diesem Arbeitsschritt wurde nichts installiert.**
 
 ## Erster offener Blocker
 
