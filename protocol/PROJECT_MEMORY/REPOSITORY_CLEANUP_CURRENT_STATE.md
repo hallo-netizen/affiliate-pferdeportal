@@ -2,7 +2,7 @@
 
 STATUS: ACTIVE
 SCOPE: CAMPUS_REPOSITORY_CLEANUP
-STAND: 2026-10-17
+STAND: 2026-10-19
 
 ## Auftrag
 
@@ -26,54 +26,67 @@ Aktive Registry:
 - `konzept0-portal-neutral-20261002`
 - `affiliate-release-current`
 
-Frisch verifizierter physischer Bestand:
-- Branches: **494**
-- `archive/*`: **21**
-- `backup/*`: **1**
+Frisch geprüft vor Abschluss des Audits:
+- physische Branches: **494**
 - offene PRs: ausschließlich **#518 – Fix ADCELL banner import basis**
 - PR-Branch `fix/banner-import-basis-20261006`: geschützt / nicht Teil dieses Cleanup-Auftrags
+- geschützte Branches laut GitHub: `main` und `article-production`
+- Release-Targets: keiner der Audit-Kandidaten ist als Release-`target_commitish` gebunden
 
 Branch-Audit-Beleg:
 `protocol/PROJECT_MEMORY/ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`
 
-Auditstand:
-- Ausgangsprüfmenge: **467**
-- bereits geprüft: **291**
-- davon `ahead=0`: **47**
-- davon mit mindestens einem eigenen Commit: **244**
-- noch ungeprüft: **176**
-- Branch-Löschungen im dokumentierten Audit: **0**
+## Auditstand – vollständig
 
-Der frühere Rückgang von 780 auf 494 physische Branches besitzt keinen vollständigen eigenen Löschbeleg. Daraus darf keine zusätzliche Löschannahme abgeleitet werden.
+Ausgangsprüfmenge: **467**
 
-## Erster offener Punkt
+Ancestry-Prüfung:
+- geprüft: **467/467**
+- `ahead=0`: **91**
+- mit mindestens einem eigenen Commit: **376**
+- ungeprüft: **0**
 
-Kein Architekturblocker mehr: BAU-043 ist durch diese eine Current-Autorität und den Scope `CAMPUS_REPOSITORY_CLEANUP` behoben.
+Zweite Schutzprüfung der 91 `ahead=0`-Branches:
+- aktive Registry geprüft
+- alle im `AUTORITAETSPLAN.json` gebundenen Current-Autoritäten geprüft
+- offener PR geprüft
+- aktiver Branchschutz / Rulesets geprüft
+- Release-Bindungen geprüft
+- exakte Branchreferenzen im aktuellen Main geprüft
 
-Operativ offen:
-1. die exakt 176 Branches aus dem Auditcheckpoint ancestry-prüfen;
-2. die 47 vorhandenen `ahead=0`-Treffer zusätzlich auf Referenzen/Rollen prüfen;
-3. erst nach vollständigem Negativnachweis echte Löschkandidaten markieren;
-4. Main-Hardlock-Legacy separat geschützt lassen.
+Ergebnis:
+- **58** Branches: `LOESCHKANDIDAT_NACH_NEGATIVPRUEFUNG`
+- **33** Branches: `NO_DELETE / ROLLE_NICHT_SICHER_AUSGESCHLOSSEN`
+- davon `article-production` ausdrücklich durch aktives GitHub-Ruleset geschützt
+- Branch-Löschungen in diesem dokumentierten Audit weiterhin: **0**
+
+Die exakten beiden Listen stehen ausschließlich im Auditcheckpoint.
+
+Der frühere Rückgang von 780 auf 494 physische Branches besitzt weiterhin keinen vollständigen eigenen Löschbeleg. Daraus wird keine zusätzliche Löschannahme abgeleitet.
 
 ## Genau eine NEXT ACTION
 
-Die **176 ungeprüften Branches** aus
-`protocol/PROJECT_MEMORY/ARCHIV/BRANCH_AUDIT_CHECKPOINT_20261017.md`
-in der dort gespeicherten Reihenfolge gegen die fachlich passende aktive Linie prüfen.
+Vor einem echten Löschbatch den physischen Branchbestand und offene PRs noch einmal frisch gegen diesen Stand prüfen.
 
-Erster Branch:
-`docs/concept-agent-closeout-pr413-20260925`
+Wenn unverändert:
+die **58 im Auditcheckpoint ausdrücklich freigegebenen Löschkandidaten** als Branch-Refs löschen.
 
-Regel:
-`ahead=0` ist nur der erste Filter und niemals allein eine Löschfreigabe.
+Nicht löschen:
+- die **376** Branches mit eigenen Commits;
+- die **33** zurückgestellten Schutz-/Rollenfälle;
+- `main`, Campus, K0, Affiliate;
+- PR #518;
+- Main-Hardlock-Legacy.
+
+Der hier verfügbare GitHub-Zugriff unterstützt keine Branch-Ref-Löschung. Deshalb endet dieser Lauf nach vollständiger Prüfung und verbindlicher Kandidatenliste, nicht mit einer vorgetäuschten Löschung.
 
 ## Frischecheck
 
-Vor einem späteren Löschbatch:
-- physischen Branchbestand und offene PRs frisch prüfen;
-- aktive Registry frisch lesen;
-- bei unverändertem Auditcheckpoint die bereits geprüften 291 Branches **nicht** neu rekonstruieren;
-- nur das Delta seit diesem Current-Stand prüfen.
+Vor Löschung:
+- Branchzahl frisch messen;
+- offene PRs frisch lesen;
+- `ACTIVE_BRANCHES.json` frisch lesen;
+- Auditcheckpoint unverändert prüfen;
+- bei unverändertem Stand keine Ancestry-Prüfung wiederholen, sondern nur Delta prüfen.
 
 CAMPUS_SINGLE_TRUTH_CURRENT_V1
