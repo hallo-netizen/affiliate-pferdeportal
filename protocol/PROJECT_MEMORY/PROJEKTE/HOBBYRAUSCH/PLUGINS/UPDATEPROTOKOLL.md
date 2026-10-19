@@ -4894,3 +4894,53 @@ Kein Live-PASS. Nutzer-Sichtprüfung steht aus.
 
 NEXT:
 1.50.696 regulär installieren und die vollständige Kategorie Schrift & Lettering prüfen; bei Zustimmung Rollout auf übrige Hub2-Kategorien.
+
+
+---
+
+## PU-20261019-101 – HD-003 1.50.697 / kompletter Hub2-Text- und Grafikrollout
+
+NUTZERFREIGABE:
+Schrift & Lettering 1.50.696 = perfekte Benchmark. Auftrag: exakt dieses Prinzip auf alle Kategorien derselben Ebene ausrollen; Grafik- und Textregeln beachten.
+
+UMSETZUNG:
+- 69/69 Hub2-Kategorien;
+- sichtbarer Kurzüberblick 45–60 Wörter;
+- direkte Erklärung von Thema, Tätigkeit, Voraussetzungen/Material und Reiz;
+- Petrol-/Türkis-Kurzblock portalweit auf Hub2;
+- Aufklapptext 150–175 Wörter;
+- 69/69 exakt zwei Absätze;
+- natürliche direkte Ansprache;
+- keine Seiten-/Kurs-/Generatorfloskeln;
+- bestehende gute Langtextsubstanz erhalten und nur dort ergänzt/überarbeitet, wo Länge oder Regelkonformität es verlangten;
+- 379 direkte Kindseiten vollständig geprüft;
+- fehlende konkrete Kacheluntertitel ergänzt;
+- 0 reine Titelwiederholungen.
+
+ARTEFAKT:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.697_HUB2_TEXT_ROLLOUT_LOCAL_PASS.zip`
+
+SHA-256:
+`ac42f7fb06d8aaf7f08709b5362b911c717d35ba7d9b582c50cfa5999b5a5ec0`
+
+QA:
+- 69/69 Hub2-Renderharness PASS;
+- 379/379 Subtitle-Renderharness PASS;
+- Lead 45–60 PASS;
+- More 150–175 PASS;
+- 2 Absätze 69/69 PASS;
+- verbotene Meta-/Generatorphrasen 0;
+- doppelte erste Sätze 0;
+- exakte Satzdoppelungen ab 3 Texten 0;
+- 6-Wort-N-Gramm-Gruppen ab 4 Texten 0;
+- Absatzstart-Gruppen ab 3 Texten 0;
+- PHP 129/129 PASS;
+- 983/983 Assets byte-identisch zu 1.50.696;
+- 395er Detailtextdatei byte-identisch;
+- ZIP PASS.
+
+LIVE-GRENZE:
+Kein Live-PASS vor echter WordPress-Sichtprüfung.
+
+NEXT:
+1.50.697 installieren und repräsentativ mehrere Hub2 aus allen acht Welten live prüfen.
