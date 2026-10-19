@@ -35,11 +35,14 @@ QA:
 - 983/983 Assets unverändert;
 - ZIP PASS.
 
+FORMALER ARTEFAKTSTATUS:
+Der geprüfte lokale 1.50.698-ZIP ist vorhanden und hashverifiziert. Im Campus-Verzeichnis `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/` fehlt jedoch weiterhin die geforderte Binärkopie `CURRENT.zip`; dort liegt nur `MANIFEST.md`. Der verfügbare Connector-Schreibweg kann die 58,5-MB-Binärdatei in dieser Sitzung nicht synchronisieren.
+
 ERSTER OFFENER BLOCKER:
-Echter WordPress-/Frontend-Live-Readback.
+Echter WordPress-/Frontend-Live-Readback. Der formale `CURRENT.zip`-Sync bleibt zusätzlich offen, verändert aber den geprüften Inhalt des lokalen Artefakts nicht.
 
 EXAKT EINE NEXT ACTION:
-**1.50.698 installieren und die sichtbaren Einstiege repräsentativ über alle acht Welten prüfen.**
+**1.50.698 aus dem hashverifizierten Artefakt installieren und die sichtbaren Einstiege repräsentativ über alle acht Welten prüfen; kein Live-PASS vor diesem Readback.**
 
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
