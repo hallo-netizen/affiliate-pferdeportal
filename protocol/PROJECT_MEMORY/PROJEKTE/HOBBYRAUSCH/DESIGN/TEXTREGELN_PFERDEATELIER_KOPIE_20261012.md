@@ -18,7 +18,7 @@ festgelegt.
 Nicht übernommen werden Pferdeatelier-Farben, Layout, Icons oder die Pferdeatelier-Accordion-Darstellung.
 
 ## Verbindliche Textregeln für Hobby Depot
-1. Kategorietext grundsätzlich ca. **150–200 Wörter**.
+1. Auf Detail-Hobbyseiten bezieht sich die Vorgabe **150–200 Wörter ausschließlich auf den aufklappbaren Vertiefungstext**. Der sichtbare Lead von ca. 45–60 Wörtern kommt zusätzlich davor und zählt nicht in diese Wortzahl.
 2. Natürliches, normales Deutsch; direkt verständlich und redaktionell geschrieben.
 3. Themenspezifische Substanz statt austauschbarer Allgemeinplätze.
 4. Keine Generator-Sprache, keine Padding-/Füllsätze und keine Meta-Sätze über Seiten-, Kategorie- oder Datenbankstruktur.
@@ -26,7 +26,7 @@ Nicht übernommen werden Pferdeatelier-Farben, Layout, Icons oder die Pferdeatel
 6. Der Text gibt konkrete Orientierung: Was gehört fachlich zum Thema, welche Kriterien unterscheiden Varianten, was ist für Einsteiger wichtig und worauf achten erfahrene Nutzer.
 7. Nur tatsächlich vorhandene reale Unterthemen dürfen genannt werden; keine künstlich erfundenen Unterthemen.
 8. Material, Ausrüstung, Aufwand, Praxis, Sicherheit oder typische Fehler nur nennen, wenn sie fachlich zum konkreten Thema passen.
-9. Direkte Ansprache mit **du** ist erwünscht, wenn sie natürlich klingt.
+9. Fließtexte werden in **direkter du-Ansprache** geschrieben. Die Ansprache bleibt natürlich und darf auch über direkte Imperativformen erfolgen; keine künstliche Daueransprache.
 10. Kein Keyword-Stapeln und keine SEO-Textwüste.
 11. Der Wortlaut muss als zusammenhängender redaktioneller Text funktionieren. Die Darstellung darf ihn aufteilen, aber weder Text verdoppeln noch zusätzliche Fülltexte erfinden.
 
@@ -54,10 +54,10 @@ Für die Detail-Hobbyseiten gilt zusätzlich hart:
    - Was macht man dabei konkret?
    - Was ist dafür typisch bzw. wodurch unterscheidet es sich?
 2. Der sichtbare Lead enthält **keine Seitennavigation und keine Aufzählung interner Unterkategorien**. Formulierungen wie „Eigene Bereiche behandeln …“, „Für die Orientierung findest du …“ oder „Konkreter wird es bei …“ sind verboten.
-3. Der aufgeklappte Text führt den Gedanken **inhaltlich zusammenhängend** fort. Er erklärt typische Arbeitsweisen, Materialien, Werkzeuge, Abläufe, Unterschiede oder Einstiegshürden nur dort, wo sie fachlich wirklich zum Hobby gehören.
+3. Der aufgeklappte Text führt den Gedanken **inhaltlich zusammenhängend** fort. Er umfasst ca. **150–200 Wörter zusätzlich zum Lead** und erklärt typische Arbeitsweisen, Materialien, Werkzeuge, Abläufe, Unterschiede oder Einstiegshürden nur dort, wo sie fachlich wirklich zum Hobby gehören. Je nach Inhalt wird er in **ein bis zwei Absätze** gegliedert; beim 395er Detail-Hub-Rollout werden zwei Absätze verwendet.
 4. Der Langtext darf **keine Liste der vorhandenen Kacheln in Satzform** sein. Die Kacheln stehen unter dem Text und müssen nicht im Fließtext nacherzählt werden.
 5. Jeder Absatz braucht eine erkennbare innere Logik. Aneinandergereihte Einzelhinweise ohne Zusammenhang sind nicht zulässig.
 6. Kachel-Untertitel sind **konkret und fachlich**. Verboten sind kalte Generatorphrasen wie „sinnvoll vergleichen“, „realistisch planen“, „sicher einordnen“, „konkret vertiefen“, „gezielt steuern“ oder gleichartige austauschbare Handlungsfloskeln.
 7. Ein Kachel-Untertitel nennt stattdessen den tatsächlichen Inhalt des Teilbereichs, z. B. Materialien, Werkzeuge, Arbeitsschritte, Bauformen, Techniken oder typische Probleme.
 8. Die Zwischenüberschrift über den Kacheln beschreibt das **Weitergehen in die Tiefe**, nicht eine bloße Übersicht. Bevorzugt wird eine natürliche themenspezifische Formulierung; ein neutraler Fallback darf „Mehr zu <Hobby>“ sein.
-9. Keine Massenproduktion aus Satzbausteinen. Wiederkehrende Satzanfänge, wiederkehrende Schlussformeln und austauschbare Absatzgerüste sind als Regelverstoß zu behandeln.
+9. Keine Massenproduktion aus Satzbausteinen. Wiederkehrende Satzanfänge, wiederkehrende Schlussformeln und austauschbare Absatzgerüste sind als Regelverstoß zu behandeln. Auch innerhalb derselben Seite dürfen sich Aussagen oder Satzmuster nicht unnötig wiederholen.
