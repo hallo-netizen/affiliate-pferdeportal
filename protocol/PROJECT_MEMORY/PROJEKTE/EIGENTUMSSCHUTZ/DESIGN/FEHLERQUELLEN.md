@@ -1,3 +1,51 @@
+# HBD-DESIGN – Nachgeholtes Fehlerprotokoll Bildzuordnung / Ebene 2 (19.10.2026)
+
+**Rolle dieses Dokuments:** Fehlergeschichte, Ursachen und Nachweise. **Kein Current**. Aktuelle Version, PASS-Status und genau eine NEXT ACTION ausschließlich aus `DESIGN/CURRENT_STATE.md`.
+
+## HBD-DESIGN-BILD-20261019-01 – Fachlich falsche oder unscharfe Kachelbilder
+**Befund:** Mehrere vom Nutzer real gezeigte Ebene-2-Themenbilder thematisch falsch oder unscharf: u. a. `Haus & Wohnung → Tresore` (altes unscharfes Safefoto), `Selbstschutz bei Einbruch` (unpassende Gebäude-/Fahrzeugmotive), `Wertsachen & Schadenfall` (Graffiti statt Schadensdokumentation), `Rauchmelder` (Heizraum-/Wandmelder statt Deckenrauchmelder), weitere fachfremde Bilder. Teilweise wurde ein Ersatzmotiv nur anhand Dateiname oder Stichwort ausgewählt. **Ursache für konkrete alte Fehlzuordnungen:** keywordbasierte/Gruppen-Fallbacks statt eindeutiger Zuordnung zu `Welt::Bereich::Thema`, zusätzlich zu kleiner/schwacher Bildbestand und ein falscher fotografischer Akzeptanztest. Nicht jeder einzelne Fehler hat denselben belegten Grund.
+**Korrektur/Beleg:** Originales Plugin 0.1.42 mit 173/265 bereits belegten Themen NICHT gelöscht. Neuere installierbare 0.1.43 ordnet 186/265 eindeutig zu, 79 ohne Foto statt fremdem Fallback; sieben weitere nicht begründbare Tausche/visuelle Dubletten explizit gestoppt. In 0.1.43 `data/area-image-mapping-v1.json` + 19 bestehende Einzel-Foto-Assets; Haupt-PHP nur Versionierung. Foto-Originale nicht generell neu erzeugt.
+**Test:** Originalfunktion `hbdp_area_child_photo` frisch lokal 265/265 PASS; alle 186 referenzierten Bilddateien im ZIP; technische Chromium-HTML/CSS-Boxentests 108/108 PASS. Negative Tests: unbekanntes Thema führt zu `''`, wiederholt verwendete identische Szene wird unterdrückt; ZIP mit CRC-Test PASS.
+**Status:** **TEILWEISE LOCAL CLOSED / LIVE OFFEN**. Vollständige **redaktionelle** Foto-Eignung aller 186 und 79 fehlende passende Themenbilder sind **OPEN**. Technischer Test = kein Beweis für geeignete Fotomotive.
+
+## HBD-DESIGN-QA-20261019-02 – Falsche „alle Bilder fertig/PASS“-Aussagen und Prüfung falscher Teilmenge
+**Befund:** Wiederholte pauschale Freigaben von 0.1.37–0.1.42 trotz Nutzer-Screenshots mit falschen Bildern. Frühe Tests simulierten bei `Haus & Wohnung` drei statt der **sieben** tatsächlich sichtbaren Unterkategorien. Später wurden 265 Unterthemen mit 36 Bereichen mit bereits weitgehend bebilderten Hero-/Bereichsseiten verwechselt. Der zwischenzeitliche Auditstand 82/265 entstand durch **Aussortieren von Zuordnungen** und ist keine Aussage über verschwundene Dateien.
+**Korrektur/WARUM:** Strikte Trennung von 6 Welten, 36 Ebene-2-Bereichen und 265 Ebene-3-Themen; erneuter Frischecheck des 0.1.43-ZIPs. 0.1.42 hatte 173 Fotozuordnungen; 0.1.43 186. Die anderen 79 Themen sind **nicht automatisch fehlende Heros**. Kein Pauschallöschen, keine pauschale Neu-Bilderstellung.
+**Test:** Aktuelles gesamtes 265er-JSON nach Welt/Bereich/Thema geprüft, 36 unterschiedliche Bereiche, 186 vorhandene Bilddateien; reale WordPress-Kategorien-/Cache-Readbacks und menschliche Einzelmotiv-Freigabe weiterhin nicht vorliegend.
+**Status:** Fehlbericht ausdrücklich **NACHGEHOLT**, umfassende Live-Abnahme **OPEN**.
+
+## HBD-DESIGN-DUP-20261019-03 – Unterschiedliche Dateinamen, optisch gleiche Bilder
+**Befund:** Bei Technik/Vandalismus mehrfaches Verschieben derselben Motive in andere Kacheln statt eigenständiger passender Fotos; Nutzer-Screenshots belegen erneut gleiche Szenen. Dateinamen allein sind kein Identitätsnachweis.
+**Korrektur:** Bildidentität im Bereich über Inhalts-Hash/dHash gegenprüfen; sieben erneute Kandidaten wegen tatsächlicher Dubletten nicht übernehmen; pro Bereich identische Zuordnung beim Rendern unterdrücken.
+**Tests:** Laut lokalem 0.1.43-Releaseprotokoll 0 exakte SHA- oder dHash<=3-Dubletten innerhalb der 36 Bereichen. Negative PHP-Laufzeitkontrolle am 19.10.: zweite gleiche `Tresore`-Bildzuweisung im selben Bereich gibt leer zurück.
+**Status:** **LOCAL CLOSED / LIVE OFFEN**; keine Garantie für echte WordPress-Liveanzeige ohne Caches.
+
+## HBD-DESIGN-TEXT-20261018-04 – Fließtext als falsche Bildunterschrift
+**Befund:** Die redaktionelle Ausgabe kopierte Sätze aus `sections[].detail` als Bildunterschrift; u. a. „Lass die Eignung von Zylinder, Türblatt, Bandseite und Rahmen zusammen prüfen.“. Der Satz ist sprachlich unpassend und vom Nutzer nachgewiesen.
+**Korrektur:** Seit 0.1.42 `editorial_photo_titles` und `editorial_captions` mit 72 eigenständigen Paaren, konkreten beanstandeten Satz überarbeitet. 0.1.43 hat dieselbe Renderlogik.
+**Test:** 0.1.42-Renderebene lokal geprüft; 0.1.43 gegen 0.1.42 im PHP-Renderer unverändert. **Keine vollständige menschliche Redaktion aller Absätze belegt.**
+**Status:** **LOCAL CLOSED / LIVE OFFEN**.
+
+## HBD-DESIGN-UI-20261018-05 – Blaue „Magazin / Dienstleister“-Leiste samt Trennlinie
+**Befund:** Wiederholte Live-Screenshots zeigen blau/weiße Altleiste und Rahmen/Trennlinie, trotz gegenteiliger Aussagen aus lokalen Tests.
+**Nachgewiesene alte Codeursache:** parallele historische Inline-Linkbereinigung entfernte teils nur innere Links, ließ Border-Container stehen; Startseite hatte Cleaner zunächst gar nicht eingebunden. 0.1.36 und 0.1.38 bereinigten diese in demselben Designplugin lokal.
+**Test:** CSS-/DOM-Nachstelltests lokal; **kein aktueller echter Live-WordPress-DOM-Readback**, auch nicht für 0.1.43.
+**Status:** **LOCAL CLOSED / LIVE OFFEN**.
+
+## HBD-DESIGN-LAYOUT-20261018-06 – Hero-Crop, Formate, Startseiten- und Fachtextbildrahmen
+**Befund:** Vom Nutzer beanstandet: aufgezoomte/unscharfe Heroes, Mobile-Formatabweichungen, randlose/übergroße Fachtextbilder, Startseitenhero-Body-Breiten- und Farbkanten. Wiederholte Screenshots beweisen, dass frühere „PASS“-Behauptungen die echte Darstellung nicht ausreichend deckten.
+**Korrektur:** 0.1.36 Body-Heros/Breadcrumbs, 0.1.38 kleinere Fachtextbilder und Startseiten-Hero/Blockbreiten, 0.1.39 Bildrahmen und Texte, 0.1.43 lässt CSS/JS/Templates gegenüber 0.1.42 unverändert.
+**Test:** lokale Browser-CSS-Kachelansichten, nicht alle Live-Bereiche auf realer WP-Instanz.
+**Status:** **LOCAL TEILPASS / LIVE OFFEN**. Kein abschließender Nutzer-PASS für alle Seiten.
+
+## HBD-DESIGN-GRENZE-20261019-07 – Unzulässige Collagen statt Einzelmotivfotos
+**Befund:** Während Fotoarbeit entstanden mehrfach Webseiten-Mockups und mehrteilige Collagen statt geforderter Szenenfotos, wodurch keine brauchbare Abnahme der Zielbilddatei entstand.
+**Entscheidung/WARUM:** Für bestehendes Designplugin nur bereits vorhandene, inhaltlich geprüfte **Einzelfotos** verwenden; keine Collagen als Kachelfotos, keine Blind-Upgrades durch Upscaling. Der neueste 0.1.43-Release hat laut geprüftem ZIP-Diff ausschließlich einzelne bereits vorhandene Fotos ergänzt, kein neues Bild generiert.
+**Status:** **LOCAL CLOSED für 0.1.43, zukünftiger Regressionstest verpflichtend**.
+
+---
+
+
 ## HBD-DESIGN-20261017-MEGA – Renderingquelle, bedingte Mehrlinks und Seitenrand
 STATUS: **TEILWEISE LOCAL CLOSED, LIVE OFFEN**.
 Beleg: Nutzer-Live-HTML der Seite „Frost & Abwesenheit“, 16.10., referenziert `hab-bewahr-design-vorschau` 0.1.19. Hauptnavigation `hbdp-mainnav` und Hub-Kacheln `hbdp-tile` stammen aus dem Designplugin. Der vorher fälschlich reparierte Kategorie-Plugin-Renderer war nicht an der sichtbaren Ausgabe beteiligt. Original `templates/site.php` fallback `if(!$children && $parent)$children=hbdp_children($parent['id']);` gab Endkategorien fälschlich Geschwister als Kinder. Original-Megamenü vereinte alte R3/V99 und C22-Nodes ohne Kanonisierung, teilweise doppelte Frost- und vier V99/C22-Areas.
