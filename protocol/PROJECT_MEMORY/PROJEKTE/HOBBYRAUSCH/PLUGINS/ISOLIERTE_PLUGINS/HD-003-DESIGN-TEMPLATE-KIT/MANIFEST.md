@@ -1,42 +1,35 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
-STAND: 2026-10-18
-STATUS: **1.50.678 GEBAUT / CODE-PASS / VISUELLE E2E-PRÜFUNG OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
+STAND: 2026-10-19
+STATUS: **1.50.692 PILOT DOKUMENTIERT GEBAUT / STATISCHE QA PASS / HARD POSITIV-NEGATIV-E2E OFFEN / CURRENT.zip NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
-LIVE:
-1.50.677
+FACH-CURRENT:
+`PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md`
+
+PLUGIN-CURRENT:
+`PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
 KANDIDAT:
-1.50.678
+1.50.692 – Schuhmacherei-Textpilot
 
 ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.678_HOBBY_DEPOT_DYNAMIC_TEXTSAFE_HERO_HARDPASS.zip
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.692_SCHUHMACHEREI_TEXT_PILOT.zip`
 
-SHA-256:
-33e35ef638c3564b03343deda6d420f20a85bb387949d017cc75f1d2d9f629f5
+DOKUMENTIERTE SHA-256:
+`c9a45879b268c60d2d825be0225bfe0d1e03f37f219dd6282498c53b75e2d86a`
 
-SCOPE:
-Audio-&-HiFi-Hero-Pilot: dynamischer Beige-/Textbereich, nowrap H1/Kurzzeile, Block höher.
-
-UNVERÄNDERT:
-- 901/901 Assets;
-- alle anderen Kategorien;
-- Mega-Menü;
-- Kategoriebaum.
-
-QA CODE/PAKET:
-- PHP 81/81;
-- Release-Kette PASS;
-- WordPress-Pluginwurzel korrekt;
+DOKUMENTIERTE STATISCHE QA:
+- PHP 120/120 PASS;
 - ZIP PASS;
-- Roundtrip 1050/1050.
+- aktive V150692-Kette PASS.
 
-VISUELLE FREIGABE:
-- bisheriger Local-Hard-PASS zurückgezogen;
-- Claim im vorhandenen Harness angeschnitten;
-- Hero-Bild im Harness nicht geladen;
-- vollständige lokale Positiv-/Negativ-E2E-Prüfung noch offen;
-- daher kein Release-/Live-PASS und keine Synchronisierung von CURRENT.zip.
+FREIGABESPERRE:
+- vollständige lokale Positiv-/Negativ-E2E-Simulation des real gerouteten Schuhmacherei-Pfads ist noch nicht dokumentiert;
+- Nutzer-Liveabnahme des Piloten fehlt;
+- deshalb kein Release-/Live-PASS und bewusst **keine Synchronisierung von CURRENT.zip**.
+
+NEXT:
+Nicht aus diesem Manifest ableiten. Ausschließlich aus der zuständigen Plugin-Current lesen.
