@@ -3,33 +3,40 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.50.695 TECHNISCH PASS / REDAKTIONELL BLOCKED**
+STATUS: **1.50.696 SCHRIFT-&-LETTERING-HUB2-PILOT LOKAL PASS / LIVE-SICHTPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-Geprüftes Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.695_FULL_TEXT_ROLLOUT_LOCAL_PASS.zip`
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.696_SCHRIFT_LETTERING_PILOT.zip`
 
 SHA-256:
-`8afd735e7cdd918e2daa60c62dbd5a029b168d8b06e6fd566c56fc0758dc6f8a`
+`937cc9c90a2663e8c03ae4e78ca30cc998a09c33880ac508cf59fde541402ba2`
 
-Technisch frisch verifiziert:
-- ZIP PASS;
-- 395/395 Master-Keyset PASS;
-- 10/10 1.50.694-Benchmarktexte exakt erhalten;
-- Lead 45–60 Wörter;
-- Aufklapptext 150–193 Wörter;
-- 2 Absätze 395/395;
-- PHP 123/123 PASS;
-- 971/971 Bilder byte-identisch zu 1.50.694;
-- allgemeiner Petrol-Leadblock vorhanden.
+Scope:
+- Basis 1.50.695 vollständig erhalten;
+- ausschließlich Hub2 **Schrift & Lettering** redaktionell/grafisch als Pilot angepasst;
+- sichtbarer Kurzüberblick 51 Wörter im Petrol-/Türkisblock;
+- Aufklapptext 152 Wörter, exakt 2 Absätze;
+- direkte natürliche Ansprache;
+- drei reale Kinder Federkiel-Schreiben / Kalligrafie / Lettering vollständig gegen Untertitelmapping geprüft;
+- 68 andere Hub2-Editorialtexte unverändert;
+- 395er Detailtextmap unverändert;
+- 983/983 Assets unverändert.
 
-Redaktioneller Blocker:
-Mehrere längere Satzbausteine wiederholen sich über viele Texte, u. a. 21x `zeigt sich viel vom Charakter dieses Hobbys`, 13x `zeigt sich, was dieses Hobby besonders macht`, 12x `ein wesentlicher Teil des Hobbys zeigt sich`. Das verletzt die bindende Anti-Schablonen-Regel.
+QA:
+- positive Renderprüfung Schrift & Lettering PASS;
+- negative Kontrolle Papierkunst PASS;
+- PHP 126/126 PASS;
+- aktive V150696 Release-/Templatekette PASS;
+- ZIP PASS.
+
+ERSTER OFFENER BLOCKER:
+Nutzer-Liveprüfung der vollständigen Kategorie Schrift & Lettering.
 
 EXAKT EINE NEXT ACTION:
-**Betroffene Satzbausteine redaktionell neu schreiben und vollständige Regression erneut ausführen.**
+**1.50.696 installieren und Schrift & Lettering vollständig sichtbar prüfen.**
 
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
