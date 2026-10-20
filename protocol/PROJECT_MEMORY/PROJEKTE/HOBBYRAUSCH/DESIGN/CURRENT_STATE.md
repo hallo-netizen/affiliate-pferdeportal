@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **1.50.700 NATIVER FOOTER-HANDOFF LOKAL PASS / LIVE-ABNAHME OFFEN**
+STATUS: **1.50.701 FOOTER-RUNTIME-HOTFIX LOKAL PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -47,43 +47,52 @@ Konzeptbindung:
 - Vergleich gegen 1.50.698: **0 unerwartete Änderungen an vorhandenen Dateien**;
 - bestehende 1.50.698-Fach-/Text-/Bildbasis nicht umgebaut.
 
-### Footer-Handoff 1.50.700
-Der Screenshot-/Codeabgleich vom 20.10.2026 hat belegt, dass 1.50.699 zusätzlich zum nativen Theme-/Astra-Footer einen eigenen dunklen Hobby-Depot-Footer über `wp_footer -> render_footer` ausgab. Dadurch existierten zwei Footer-Eigentümer gleichzeitig.
+### Korrektur 1.50.701 – Footer-Runtime
 
-1.50.700 entfernt ausschließlich diesen einen aktiven Hook. Der restliche Hobby-Depot-Designstand bleibt unverändert. Der native WordPress-/Astra-Footer ist damit wieder alleiniger Footer-Eigentümer und kann durch die Footer-Umzugshilfe mit Menüs/Seiten/Widgets bestückt werden.
+1.50.700 war fehlerhaft und ist verworfen. Exakte Ursache: Die Hauptdatei lud die neu benannte Klasse `Hobby_Depot_Profile_V150700`, während die weiterhin gerouteten Templates `hobby-depot-front-v150699.php` und `hobby-depot-content-v150699.php` weiterhin `Hobby_Depot_Profile_V150699` aufriefen. Ergebnis im Frontend: Fatal Error / „Class Hobby_Depot_Profile_V150699 not found“.
 
-Lokale QA:
-- PHP-Lint: **136/136 PASS**;
-- Hook-Differenz 1.50.699 → 1.50.700: **exakt 1 entfernt** (`wp_footer -> render_footer`, Priorität 5);
-- zusätzliche/geänderte Hooks: **0**;
-- Footer-Umzug 1.1.1 bindet die exportierten Footer-Widgets an `footer-widget-*`: **PASS**;
-- Footer-Umzug 1.1.1 schreibt keine Astra-Settings: **PASS**;
+1.50.701 basiert deshalb wieder direkt auf dem funktionierenden 1.50.699-Runtimevertrag. Klassenname, Klassendatei und beide gerouteten Templates bleiben unverändert auf V150699 gebunden. Nur die Pluginversionsnummer ist 1.50.701.
+
+Footerlogik 1.50.701:
+- vorhandener Hobby-Depot-Brandblock bleibt;
+- vorhandene Hobby-Depot-Einstiege Hobbyfinder / Magazin / Anbieter bleiben erhalten;
+- importierte WordPress-Menüs `Informationen`, `Rechtliches` und `footer-anzeigen` werden direkt aus WordPress gelesen und im Designfooter ausgegeben;
+- Magazin wird dedupliziert;
+- kein erneuter Footer-Import für die Anzeige erforderlich, sofern Seiten/Menüs bereits importiert sind;
+- 1.50.700 wurde aus der Library entfernt.
+
+Lokale QA 1.50.701:
+- PHP-Lint: **135/135 PASS**;
+- Runtime-Klassenbindung Hauptdatei → Klasse → Fronttemplate → Contenttemplate: **PASS**;
+- reproduzierter 1.50.700-Fatal: **in 1.50.701 ausgeschlossen**;
+- Footer-Runtime-Harness mit importierten Menüs: Brand / Hobbyfinder / Magazin / Anbieter / Werben / Rechtliches / Anzeigenmarkt: **8/8 PASS**;
+- geänderte Dateien gegenüber 1.50.699: Hauptdatei (nur Versionsnummer), aktuelle Hobby-Depot-Klasse (nur Footer-Datenquelle/-Darstellung), Evidence-Datei;
 - ZIP-Integrität: **PASS**.
 
 ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.700_NATIVE_FOOTER_HANDOFF_LOCALPASS.zip
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.701_FOOTER_RUNTIME_HOTFIX_LOCALPASS.zip
 
 SHA-256:
-6a3e936db91f3a6ab7aba6af66bc6a86b308ca1cbf7c6478b3be7224d44e02c3
+7b1793f661452f05de29fd1dddc0389b8874924ee1eb4b676404590dbd8b6d3a
 
 GRÖSSE:
-58,801,072 Bytes.
-
+58,671,462 Bytes.
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-/Frontend-Readback des 1.50.700-Stands nach einmaligem Footer-Import. Kein Live-PASS aus lokaler QA ableiten.
+Echter WordPress-/Frontend-Readback des 1.50.701-Stands. Kein Live-PASS aus lokaler QA ableiten.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.700 installieren, danach Footer-Umzug 1.1.1 einmal mit der bereinigten Hobby-Depot-JSON ausführen und im Frontend prüfen, dass nur noch der native Footer erscheint und die vier importierten Footer-Bereiche sichtbar sind. Danach Footer-Umzug wieder entfernen.**
+**1.50.701 installieren und Frontend neu laden. Prüfen, dass der Fatal verschwunden ist und der Designfooter die bereits importierten Menüs Informationen, Rechtliches und Anzeigenmarkt zusätzlich zu Hobbyfinder / Magazin / Anbieter ausgibt. Keinen erneuten Import starten.**
 
 ## ARBEITSBINDUNG
 
 - 1.50.694 = redaktionelle Detailtext-Benchmark.
 - 1.50.696 = bestätigte Hub2-Grafikbenchmark.
 - 1.50.698 = bestätigter lokaler Hub2-Textstand, in 1.50.699 unverändert.
-- 1.50.699 = Startseitenfassung vor Footer-Handoff.
-- 1.50.700 = aktueller Designstand; identisch zu 1.50.699 außer Entfernung des zusätzlichen eigenen Footer-Render-Hooks.
+- 1.50.699 = letzte funktionierende Basis vor Footer-Arbeit.
+- 1.50.700 = **verworfen** wegen Runtime-Klassen-/Template-Mismatch.
+- 1.50.701 = aktueller Designstand; 1.50.699-Runtimebindung bleibt erhalten, Footer liest zusätzlich die bereits importierten Menüs.
 - Keine neue Architektur.
 - Keine Änderungen an Kategoriebaum, Affiliate-Slotarchitektur, Meta-/SEO-Titeln oder Bildern.
 - Header-/Responsive-Navigation und Pferdeatelier-Footer sind separate nächste Designblöcke nach der Startseiten-Sichtprüfung.
