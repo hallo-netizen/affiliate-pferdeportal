@@ -1,5 +1,11 @@
 # HBD-DESIGN – Nachgeholtes Fehlerprotokoll Bildzuordnung / Ebene 2 (19.10.2026)
 
+## HB-DES-20261020-INS-01 – 7. Welt bricht wegen festem 6-Spalten-Desktop-CSS um
+**Realbeleg:** Nutzer-Screenshot 20.10.2026 18:54, Desktop-Menü mit 6 alten Welten oben, „Versicherungen“ in eigener zweiter Zeile und aufgeklapptem 5-Bereiche-Menü darunter.
+**Quellcodebeleg:** gespeicherte originale Designplugin-ZIP 0.1.57 (explizit NICHT installierter Bilder-WIP): `templates/site.php` erzeugt Welt-Navigation per dynamischer Weltliste, `hbdp_main_navigation` rendert Megamenü bis 5 Spalten und zeigt 4 direkte R3 pro R2 + „Alle Themen“ beim Überlauf, aber `assets/style.css` erzwingt Desktop `.hbdp-mainnav{grid-template-columns:repeat(6,minmax(0,1fr))}`. Die sechs Spalten sind kein inhaltliches Sechs-Welten-Limit.
+**Korrekturgrenze:** Im tatsächlich installierten bestehenden DESIGNplugin Desktop-Header mit exakt 7 Spalten/geeigneter Schriftbreite reparieren; ursprünglichen Mobilregeln, fünf Megamenüspalten und Hub-Klickpfade beibehalten. Nicht durchs Kategorieplugin CSS überschreiben, kein Zweitplugin, kein blindes Installieren des unfertigen Design-0.1.57-Bilderpakets.
+**Status:** Ursache am archivierten Quellstand + Screenshot belegt, aktuelle physische Designplugin-Version und WP-Frontend-Regression nach Korrektur OFFEN.
+
 **Rolle dieses Dokuments:** Fehlergeschichte, Ursachen und Nachweise. **Kein Current**. Aktuelle Version, PASS-Status und genau eine NEXT ACTION ausschließlich aus `DESIGN/CURRENT_STATE.md`.
 
 ## HBD-DESIGN-BILD-20261019-01 – Fachlich falsche oder unscharfe Kachelbilder
