@@ -5027,3 +5027,106 @@ Im GitHub-Campus-Verzeichnis `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/` lie
 
 LIVE:
 Kein Live-PASS. Echter WordPress-/Frontend-Readback bleibt offen.
+
+---
+## PU-20261020-001 – HD-007 Hobbyregister Core 1.0.0
+
+ART:
+Neues Eigenplugin / read-only WordPress-Laufzeitprojektion.
+
+VON / AUF:
+nicht vorhanden → 1.0.0.
+
+FACHBÜRO:
+HOBBYRAUSCH / WISSENSDATENBANK.
+
+WARUM:
+Der vollständige zentrale Hobbybestand mit 862 kanonischen Hobbyidentitäten, 54 Traits und 4 Kurzprofilfeldern muss im WordPress-Frontend lesbar sein, ohne eine zweite fachliche Hobby-Datenbank anzulegen.
+
+QUELLE / BINDUNG:
+- Fachautorität: `../WISSENSDATENBANK/CURRENT_STATE.md`;
+- zentraler Register-SHA-256: `4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`;
+- Release-Artefakt: `HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.0.0_READONLY_LOCALPASS.zip`;
+- Artefakt-SHA-256: `3887c914b5193f35e1ac5297fa96e2917d0d70effaae51de59501de0d3dcb8ba`;
+- Quellbranch/Commit des Builds ist in der vorhandenen Plugin-Current nicht separat gebunden; deshalb wird hier keiner erfunden.
+
+SCHNITTSTELLE:
+`hd_hobbyregister_ready()`, `hd_hobbyregister_records()`, `hd_hobbyregister_get()`, `hd_hobbyregister_get_by_name()`, `hd_hobbyregister_finder_rows()`.
+
+HARTE GRENZEN:
+read-only; keine DB-Writes; keine Tabellen; kein Cron; kein Netzwerk; keine Kategorie-/SEO-Writes; keine Auto-Produktion.
+
+TESTS / HASH-REUSE:
+Der lokale Release-ZIP wurde in der Abschlussprüfung erneut SHA-identisch zum autoritativen Artefakt geprüft. Vorhandene lokale Evidence darf daher wiederverwendet werden:
+- PHP 2/2 PASS;
+- Runtime 862/862 PASS;
+- ZIP PASS;
+- Write-Audit 0;
+- Cron 0;
+- Netzwerk 0.
+
+NEGATIV / FAIL-CLOSED:
+HD-003 darf ohne ready HD-007 keine zweite Hobbyliste verwenden; Finder zeigt neutralen Einrichtungszustand statt Fatal/Fallback.
+
+ROLLBACK:
+HD-007 deaktivieren/entfernen. Zentrale Fachdaten bleiben unverändert; HD-003 muss fail-closed bleiben.
+
+LIVE:
+OFFEN. Keine Live-Abnahme.
+
+ISOLIERTE PLUGINABLAGE:
+`ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip` fehlt noch. Das ist vor Liveinstallation nachzuholen; kein Pointer/Platzhalter als ZIP erfinden.
+
+---
+## PU-20261020-002 – HD-003 Hobby Depot Design 1.50.704
+
+ART:
+Eigenplugin-Update / Hobbyfinder-Runtime.
+
+VON / AUF:
+1.50.703 → 1.50.704.
+
+FACHBÜROS:
+HOBBYRAUSCH / DESIGN + WISSENSDATENBANK.
+
+WARUM:
+Der freigegebene visuelle Hobbyfinder soll den vollständigen zentralen Hobbybestand nutzen. Das Design darf keine eigene 862er-Hobbykopie persistieren, sondern liest ausschließlich HD-007.
+
+QUELLE / BINDUNG:
+- direkte Basis: 1.50.703;
+- Release-Artefakt: `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`;
+- SHA-256: `558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`;
+- lokaler Abschluss-Hashcheck 2026-10-20: identisch;
+- Quellbranch/Commit des Builds ist in der vorhandenen Plugin-Current nicht separat gebunden; deshalb wird hier keiner erfunden.
+
+ÄNDERUNG:
+- eigener Content-Route für `hobbyfinder`;
+- 8-Schritt-Funnel;
+- Ranking/harte Filter/„Überrasch mich“;
+- Ergebnis-Karten mit Passungswert, Gründen und 4 Kurzprofilfeldern;
+- Daten ausschließlich über HD-007;
+- echte Ziel-URLs ausschließlich über HD-004;
+- keine erfundenen URLs;
+- kein zweiter Hobbybestand.
+
+TESTS / HASH-REUSE:
+Hash-identischer Release-ZIP; vorhandene lokale Evidence:
+- PHP 135/135 PASS;
+- Diff gegen 1.50.703 exakt 3 Dateien;
+- Runtime/Profile 862/862 PASS;
+- Route PASS;
+- fehlendes HD-007 fail-closed PASS;
+- Finder-JavaScript Syntax PASS;
+- ZIP PASS.
+
+NEGATIV:
+Fehlendes/nicht-ready HD-007 → neutraler Einrichtungszustand; keine zweite Hobbyliste. Fehlende CORE-Zielauflösung → kein erfundener CTA.
+
+ROLLBACK:
+Auf 1.50.703 zurückgehen; HD-007 kann unabhängig deaktiviert werden. Zentraler Hobbybestand bleibt unberührt.
+
+LIVE:
+OFFEN. Echter WordPress-/Frontend-Readback fehlt.
+
+ISOLIERTE PLUGINABLAGE:
+Das vorhandene HD-003-Manifest steht noch auf 1.50.699; `CURRENT.zip` fehlt. Vor Liveinstallation auf 1.50.704 synchronisieren und Manifest aktualisieren.
