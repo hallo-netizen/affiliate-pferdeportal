@@ -1,3 +1,38 @@
+## HB-INS-20261020-01 – Falscher DataForSEO-Backendpfad
+**STATUS: CLOSED für die beiden Originalabfragen; kein neuer Recherchelauf nötig.**
+FEHLER: Nutzer wurde zunächst auf `Portal-Kategorien → SEO-Namen prüfen` verwiesen und aufgefordert, den DataForSEO-Zugang erneut zu überprüfen.
+BEWIESENE URSACHE: `APKW_Category_SEO_Audit::profile/plan` arbeitet am aktuellen fest gebundenen CORE-Profil, nicht am neuen unimportierten Versicherungs-Seedinput. Der vorhandene `class-apkw-final-target-admin.php` enthält bereits **`Portal-Kategorien → DataForSEO Recherche`** mit JSON-Upload, kostenlosem Preflight und gesonderter kostenpflichtiger Ausführung.
+KORREKTUR: Exakte Germany/de Keyword-Overview-JSONs mit 68 und 70 Seeds über vorhandenen Rechercheweg benutzt.
+NACHWEIS: Zwei vom Nutzer gelieferte Originalproviderexporte vom 20.10.2026, 68/62 (0,01944 USD) und 70/66 (0,01992 USD), HTTP 200 / Status 20000. Kein Pluginumbau nötig.
+
+## HB-INS-20261020-02 – Keywordmessung mit Discovery/Vollständigkeit verwechselt
+**STATUS: PARTIAL CLOSED / FACHLICHE VOLLSTÄNDIGKEIT UND SEO-ARTIKELRECHERCHE NOCH OFFEN.**
+FEHLER: Der erste 68er-Keyword-Overview wurde als weitreichende Kategorienrecherche nahegelegt, obwohl nur bekannte Eingaben gemessen wurden.
+BEWIESENE URSACHE: Genutzter Endpoint `/v3/dataforseo_labs/google/keyword_overview/live` und die tatsächlichen Request-Arrays lieferten ausschließlich Keyword Overview; keine Keyword Ideas/Suggestions/organische SERP-Vollständigkeitsprüfung.
+KORREKTUR: Zusätzliche 70 deduplizierte manuell recherchierte Seeds, zweiter echter DataForSEO-Lauf; Synonyme und Nebenpolicen einzeln geroutet. Nicht behaupten, die gesamten 105 Versicherungs-Owner seien Discovery-vollständig oder 945 Titel SEO-abgenommen.
+NACHWEIS: Originalproviderexporte; `VERSICHERUNGEN_138_FACHENTWURF_105_R3_20261020.json`; `VERSICHERUNGEN_105_GESAMTPLAN_945_IDEEN_20261020.md`. Ein SEO-Volumen 0/null bleibt keine automatische Streichbedingung.
+
+## HB-INS-20261020-03 – 471er-Importmodul für neue Versicherungsseiten fehlinterpretiert
+**STATUS: LOCAL CLOSED (FALSCHE ROUTE ERKANNT) / VERSICHERUNGS-WP-INTEGRATION BLOCKED BIS GEPRÜFTEM ADAPTER.**
+FEHLER: Die bestehende C2.3-471er-Importfunktion wurde zunächst pauschal als Pfad für alle neuen Versicherungsseiten nahegelegt.
+BEWIESENE URSACHE: Das tatsächliche `includes/class-apkw-c23-471-add-only.php` ist auf 471 Blattkategorien **unter 265 bestehenden physischen R3-Ownern** gebunden und prüft diesen alten Livebestand. Es erzeugt **keine** neue R1/R2/R3-Versicherungswelt.
+KORREKTUR: Keine Zweckentfremdung; 433 neue Versicherungsobjekte nur als ADD-only-Prüfvorlage gespeichert. **Künftige Umsetzung ausschließlich im vorhandenen zentralen Kategorieplugin nach Prüfung seiner tatsächlichen Erweiterbarkeit; kein Parallelplugin.**
+NACHWEIS: `KATEGORIEN/C23_THIRD_WAVE_SOURCE/includes/class-apkw-c23-471-add-only.php`, `KATEGORIEN/CURRENT_STATE.md`, `KONZEPT/VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json`. Noch kein Plugin- oder WordPress-Live-Dry-Run für diese 433.
+
+## HB-INS-20261020-04 – Artikelideen-Titeltest nicht mit SEO-/Fachendfreigabe gleichsetzen
+**STATUS: OPEN / EDITORIAL-SEED, KEIN WP-RELEASE.**
+FEHLER/RISIKO: Die Zahlen 315 Beitragskategorien und 945 voneinander unterschiedliche Artikelideen können einen nicht belegten redaktionellen End-PASS suggerieren.
+URSACHE: Der aktuelle lokale Validator prüft Struktur, numerische Mindesttiefe, eindeutige Owner-/Slug-Bindung und exakte Titeldoppelungen, **nicht** die fachliche Notwendigkeit aller Kategorien, organische SERP, Textsubstanz oder Tarifbedingungen.
+KORREKTUR: `VERSICHERUNGEN_105_GESAMTPLAN_945_IDEEN_20261020.md` und `KONZEPT/CURRENT_STATE.md` kennzeichnen alle Kategorien und Artikel als **vorgeschlagen/nicht importfreigegeben**; vor Live-Änderungen fachlicher und technischer Freigabepfad.
+NACHWEIS: 105/315/945 lokal erneut gezählt; sechs negative Manipulationstests der 433er Kandidatenvorlage PASS_BLOCKED. **Nicht durchgeführt:** echter WP-Live-Readback, ZIP-/Plugin-Integration der Versicherungs-433, organische SERP-Artikeltitelvalidierung.
+
+## HB-INS-20261020-05 – JSON-Übergabeartefakt nur lokal statt dauerhaft im Campus
+**STATUS: CLOSED für die Sicherung / VERWENDUNG ALS WP-IMPORT BLEIBT BLOCKED.**
+FEHLER: `HAB_BEWAHR_VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json` existierte nach der 105er-Planung zunächst nur in der lokalen Chat-Laufzeit, nicht im GitHub-Konzeptbüro; ein neuer Chat hätte die vollständigen Parentbindungen nicht direkt abrufen können.
+URSACHE: Persistierung des Strukturbelegs war beim ersten Durchlauf nicht erfolgt.
+KORREKTUR: Aus der **bereits dauerhaften GitHub**-Quelldatei `VERSICHERUNGEN_105_GESAMTPLAN_945_IDEEN_20261020.md` unabhängig 105/315/945 eingelesen und die rein additive 433er-Vorlage mit ihren Parent-Ownern erneut erzeugt und in derselben Konzeptablage unter `VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json` gespeichert. Keine zweite Current-Autorität.
+NACHWEIS: GitHub-Commit `df6bc8dfdaedd4ba3c3e375d514fafb5da801d5c`; 433/433 Strukturbelege, 6/6 gezielte Negativfälle lokal abgewiesen. Die GitHub-Prüfvorlage ist **nicht** behauptet byteidentisch mit der vormals lokalen JSON-Arbeitskopie.
+
 ## HB-C22-20261017-INTENT-QA – Fachlich falscher PASS, Pflichtintents nicht abgesichert
 STATUS: **OPEN / KEIN FACHRELEASE / KEIN LIVE-WRITE**.
 FEHLER: Alle 566 importierten C2.2-Kategorien hatten `capacity_status=PLAUSIBLE_PROVISIONAL`, `indicators=[]`. Der C2.2-Fachvalidator nahm Zahl und behauptetes Beitrags-Potenzial als ausreichenden PASS; eine themenspezifische 3–5-Beitragsrichtungen-Eignung wurde nicht geprüft. Gleiche FAQ-Labels unter unterschiedlichen Seite-3-Ownern wurden durch einen globalen Namensvergleich fälschlich als Dublette gemeldet. Historisch fehlten FAQ und Vergleiche als konkrete Kategorien vollständig. Fachliche Zweifachrolle Seite3/WP-`category` wurde zeitweise verwechselt.
