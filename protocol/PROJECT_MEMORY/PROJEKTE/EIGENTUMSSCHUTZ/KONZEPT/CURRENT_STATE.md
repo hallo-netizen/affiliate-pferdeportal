@@ -1,3 +1,10 @@
+## 20.10.2026 – 94ER-VERSICHERUNGS-BEGLEITWELT: ORIGINALPLUGIN-UPDATE IN GITHUB GESICHERT (TECHNISCHE ERGÄNZUNG)
+**Der fachliche 94er-Kompaktplan bleibt unverändert.** Das zuständige Kategorienbüro hat das vollständige vorhandene Kategorieplugin aus 1.14.8.32 als eigenständige neue **Version 1.14.8.33** ergänzt, nicht als Zweitplugin: 26 neue Seiten, 68 flache Kategorien. GitHub-Pfad `KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip`, 394395 Bytes, 43 Dateien, 34 PHP; 39 alte Dateien byteidentisch. Originalklasse für WordPress-Schreibvorgänge lokal mit ADD-only-PHP in positiven/negativen Mocks erfolgreich getestet. Nur technischer Kandidat, kein Live-Test/Import/WordPress-Write; die sichtbare Megamenügestaltung des Designplugins ist ein getrennter Schritt.
+**Fachlicher Zwang bleibt:** alle 105 alten Versicherungsarten erhalten, 28 spezifische Arten allenfalls später Einzelbeiträge im Redaktionsplan, nicht hier. **Harte Importreihenfolge:** zunächst offene 471er-Bestandskategorien (C2.3) vollständig abschließen und prüfen; voriger 94er-Preflight blockiert andernfalls.
+**GENAU EINE NEXT ACTION:** Technische Live-Bestandsprüfung der 471er-Welle und Pluginversion, bevor das vollständige aktualisierte Kategorieplugin auf WordPress installiert und dort der **schreibfreie** Versicherungs-Preflight gestartet wird. Kein Realimport vor gesonderter Freigabe. Keine neue Themenrecherche.
+
+---
+
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
