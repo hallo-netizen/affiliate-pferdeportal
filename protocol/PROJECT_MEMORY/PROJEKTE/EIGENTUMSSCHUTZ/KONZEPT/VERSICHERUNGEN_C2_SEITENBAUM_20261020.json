@@ -1,0 +1,2893 @@
+{
+  "schema": "HAB_VERSICHERUNGEN_C2_PAGE_TREE_RESEARCH_ONLY_V1",
+  "created": "2026-10-20",
+  "status": "RESEARCH_CANDIDATE_NO_DATAFORSEO_NO_WP_WRITE",
+  "contract": {
+    "base": "EXISTING_7TH_MAIN_WORLD_IN_CURRENT_CATEGORY_PLUGIN",
+    "r1": "Versicherungen",
+    "r2": "Bereichsseite (mindestens drei direkte konkrete Themen)",
+    "r3": "jeweils genau eine benannte Versicherung/Versicherungsart",
+    "article_categories": "flache WordPress-Beitragskategorien nach individuellem Nutzen; mindestens drei mögliche Artikel je Endkategorie als spätere Fachprüfung",
+    "one_owner_per_topic": true,
+    "strict_no_duplicate_intent": true,
+    "low_or_missing_search_volume_never_automatic_exclusion": true,
+    "research_location": "Deutschland/de",
+    "tool": "Portal-Kategorien → SEO-Namen prüfen (bestehender DataForSEO-Pfad)",
+    "no_automatic_api_charge": true,
+    "no_wordpress_writes": true,
+    "no_new_category_architecture": true
+  },
+  "areas": [
+    {
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "r2_page_label": "Wohnen & Bauen",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:hausratversicherung",
+        "hb:versicherungen:wohngebaudeversicherung",
+        "hb:versicherungen:glasversicherung",
+        "hb:versicherungen:photovoltaikversicherung",
+        "hb:versicherungen:bauleistungsversicherung",
+        "hb:versicherungen:feuerrohbauversicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "r2_page_label": "Mobilität",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:kfz-versicherung",
+        "hb:versicherungen:motorradversicherung",
+        "hb:versicherungen:mopedversicherung",
+        "hb:versicherungen:wohnmobilversicherung",
+        "hb:versicherungen:wohnwagenversicherung",
+        "hb:versicherungen:fahrradversicherung",
+        "hb:versicherungen:e-scooter-versicherung",
+        "hb:versicherungen:bootsversicherung",
+        "hb:versicherungen:oldtimerversicherung",
+        "hb:versicherungen:anhanger-versicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "r2_page_label": "Haftung & Recht",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:privathaftpflichtversicherung",
+        "hb:versicherungen:haus-und-grundbesitzerhaftpflichtversicherung",
+        "hb:versicherungen:gewasserschadenhaftpflichtversicherung",
+        "hb:versicherungen:bauherrenhaftpflichtversicherung",
+        "hb:versicherungen:jagdhaftpflichtversicherung",
+        "hb:versicherungen:rechtsschutzversicherung",
+        "hb:versicherungen:verkehrsrechtsschutzversicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "r2_page_label": "Gesundheit & Pflege",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:gesetzliche-krankenversicherung",
+        "hb:versicherungen:private-krankenversicherung",
+        "hb:versicherungen:zahnzusatzversicherung",
+        "hb:versicherungen:krankenhauszusatzversicherung",
+        "hb:versicherungen:ambulante-zusatzversicherung",
+        "hb:versicherungen:pflegezusatzversicherung",
+        "hb:versicherungen:krankentagegeldversicherung",
+        "hb:versicherungen:krankenhaustagegeldversicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "r2_page_label": "Arbeitskraft & Einkommen",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:berufsunfahigkeitsversicherung",
+        "hb:versicherungen:erwerbsunfahigkeitsversicherung",
+        "hb:versicherungen:grundfahigkeitsversicherung",
+        "hb:versicherungen:dienstunfahigkeitsversicherung",
+        "hb:versicherungen:schwere-krankheiten-versicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "r2_page_label": "Leben & Alter",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:risikolebensversicherung",
+        "hb:versicherungen:kapitallebensversicherung",
+        "hb:versicherungen:fondsgebundene-lebensversicherung",
+        "hb:versicherungen:private-rentenversicherung",
+        "hb:versicherungen:riester-rentenversicherung",
+        "hb:versicherungen:basisrentenversicherung",
+        "hb:versicherungen:betriebliche-direktversicherung",
+        "hb:versicherungen:gesetzliche-rentenversicherung",
+        "hb:versicherungen:sterbegeldversicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "r2_page_label": "Reisen & Freizeit",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:reiserucktrittsversicherung",
+        "hb:versicherungen:reiseabbruchversicherung",
+        "hb:versicherungen:reisegepackversicherung",
+        "hb:versicherungen:auslandskrankenversicherung",
+        "hb:versicherungen:campingversicherung",
+        "hb:versicherungen:sportgerateversicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:tiere",
+      "r2_page_label": "Tiere",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:tierhalterhaftpflichtversicherung",
+        "hb:versicherungen:tierkrankenversicherung",
+        "hb:versicherungen:tier-op-versicherung"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "r2_page_label": "Kleine Betriebe",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:betriebshaftpflichtversicherung",
+        "hb:versicherungen:berufshaftpflichtversicherung",
+        "hb:versicherungen:vermogensschadenhaftpflichtversicherung",
+        "hb:versicherungen:geschaftsinhaltsversicherung",
+        "hb:versicherungen:betriebsunterbrechungsversicherung",
+        "hb:versicherungen:cyberversicherung-fur-kleinbetriebe",
+        "hb:versicherungen:firmenrechtsschutzversicherung",
+        "hb:versicherungen:gewerbegebaudeversicherung",
+        "hb:versicherungen:elektronikversicherung-fur-betriebe",
+        "hb:versicherungen:transportversicherung-fur-betriebe",
+        "hb:versicherungen:kreditversicherung-fur-betriebe"
+      ]
+    },
+    {
+      "area_key": "hb:versicherungen:area:finanzielle-risiken",
+      "r2_page_label": "Finanzielle Risiken",
+      "requires_min_3": true,
+      "topic_owner_keys": [
+        "hb:versicherungen:restschuldversicherung",
+        "hb:versicherungen:mietkautionsversicherung",
+        "hb:versicherungen:mietausfallversicherung"
+      ]
+    }
+  ],
+  "topic_pages": [
+    {
+      "owner_key": "hb:versicherungen:hausratversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Hausratversicherung",
+      "seo_seed": "hausratversicherung",
+      "alternate_keywords": [
+        "hausratversicherung kosten",
+        "hausratversicherung vergleich",
+        "hausratversicherung leistungen",
+        "hausratversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Hausratversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Hausratversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Hausratversicherung: Versicherte Sachen und Wertsachen",
+          "scope": "Versicherte Sachen und Wertsachen"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Hausratversicherung: Einbruch-, Leitungswasser- und Brandschäden",
+          "scope": "Einbruch-, Leitungswasser- und Brandschäden"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:wohngebaudeversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Wohngebäudeversicherung",
+      "seo_seed": "wohngebäudeversicherung",
+      "alternate_keywords": [
+        "wohngebäudeversicherung kosten",
+        "wohngebäudeversicherung vergleich",
+        "wohngebäudeversicherung leistungen",
+        "wohngebäudeversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Wohngebäudeversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Wohngebäudeversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohngebäudeversicherung: Gebäudebestandteile und Nebengebäude",
+          "scope": "Gebäudebestandteile und Nebengebäude"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohngebäudeversicherung: Sturm, Leitungswasser und Wiederaufbau",
+          "scope": "Sturm, Leitungswasser und Wiederaufbau"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:glasversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Glasversicherung",
+      "seo_seed": "glasversicherung",
+      "alternate_keywords": [
+        "glasversicherung kosten",
+        "glasversicherung vergleich",
+        "glasversicherung leistungen",
+        "glasversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Glasversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Glasversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Glasversicherung: Gebäude- und Mobiliarverglasung",
+          "scope": "Gebäude- und Mobiliarverglasung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Glasversicherung: Glasbruch, Ausschlüsse und Selbstbehalt",
+          "scope": "Glasbruch, Ausschlüsse und Selbstbehalt"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:photovoltaikversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Photovoltaikversicherung",
+      "seo_seed": "photovoltaikversicherung",
+      "alternate_keywords": [
+        "photovoltaikversicherung kosten",
+        "photovoltaikversicherung vergleich",
+        "photovoltaikversicherung leistungen",
+        "photovoltaikversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Photovoltaikversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Photovoltaikversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Photovoltaikversicherung: PV-Schäden und Ertragsausfall",
+          "scope": "PV-Schäden und Ertragsausfall"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Photovoltaikversicherung: Speicher, Wechselrichter und besondere Risiken",
+          "scope": "Speicher, Wechselrichter und besondere Risiken"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:bauleistungsversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Bauleistungsversicherung",
+      "seo_seed": "bauleistungsversicherung",
+      "alternate_keywords": [
+        "bauleistungsversicherung kosten",
+        "bauleistungsversicherung vergleich",
+        "bauleistungsversicherung leistungen",
+        "bauleistungsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Bauleistungsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Bauleistungsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bauleistungsversicherung: Bauschäden während der Bauphase",
+          "scope": "Bauschäden während der Bauphase"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bauleistungsversicherung: Rohbau, Material und Bauablauf",
+          "scope": "Rohbau, Material und Bauablauf"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:feuerrohbauversicherung",
+      "area_key": "hb:versicherungen:area:wohnen-und-bauen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Feuerrohbauversicherung",
+      "seo_seed": "feuerrohbauversicherung",
+      "alternate_keywords": [
+        "feuerrohbauversicherung kosten",
+        "feuerrohbauversicherung vergleich",
+        "feuerrohbauversicherung leistungen",
+        "feuerrohbauversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Feuerrohbauversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Feuerrohbauversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Feuerrohbauversicherung: Brand-, Blitz- und Explosionsschutz im Rohbau",
+          "scope": "Brand-, Blitz- und Explosionsschutz im Rohbau"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Feuerrohbauversicherung: Einbindung in spätere Wohngebäudeversicherung",
+          "scope": "Einbindung in spätere Wohngebäudeversicherung"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:kfz-versicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Kfz-Versicherung",
+      "seo_seed": "kfz-versicherung",
+      "alternate_keywords": [
+        "kfz-versicherung kosten",
+        "kfz-versicherung vergleich",
+        "kfz-versicherung leistungen",
+        "kfz-versicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Kfz-Versicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Kfz-Versicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kfz-Versicherung: Kfz-Haftpflicht und Schadenfreiheitsklasse",
+          "scope": "Kfz-Haftpflicht und Schadenfreiheitsklasse"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kfz-Versicherung: Teilkasko, Vollkasko und Fahrerschutz",
+          "scope": "Teilkasko, Vollkasko und Fahrerschutz"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:motorradversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Motorradversicherung",
+      "seo_seed": "motorradversicherung",
+      "alternate_keywords": [
+        "motorradversicherung kosten",
+        "motorradversicherung vergleich",
+        "motorradversicherung leistungen",
+        "motorradversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Motorradversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Motorradversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Motorradversicherung: Saisonkennzeichen und Haftpflicht",
+          "scope": "Saisonkennzeichen und Haftpflicht"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Motorradversicherung: Diebstahl, Teilkasko und Unfallschäden",
+          "scope": "Diebstahl, Teilkasko und Unfallschäden"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:mopedversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Mopedversicherung",
+      "seo_seed": "mopedversicherung",
+      "alternate_keywords": [
+        "mopedversicherung kosten",
+        "mopedversicherung vergleich",
+        "mopedversicherung leistungen",
+        "mopedversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Mopedversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Mopedversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mopedversicherung: Versicherungskennzeichen und Saison",
+          "scope": "Versicherungskennzeichen und Saison"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mopedversicherung: Haftpflicht und optionale Teilkasko",
+          "scope": "Haftpflicht und optionale Teilkasko"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:wohnmobilversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Wohnmobilversicherung",
+      "seo_seed": "wohnmobilversicherung",
+      "alternate_keywords": [
+        "wohnmobilversicherung kosten",
+        "wohnmobilversicherung vergleich",
+        "wohnmobilversicherung leistungen",
+        "wohnmobilversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Wohnmobilversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Wohnmobilversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohnmobilversicherung: Ausbau, Zubehör und Inventar",
+          "scope": "Ausbau, Zubehör und Inventar"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohnmobilversicherung: Fahrzeugschäden und Nutzung im Ausland",
+          "scope": "Fahrzeugschäden und Nutzung im Ausland"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:wohnwagenversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Wohnwagenversicherung",
+      "seo_seed": "wohnwagenversicherung",
+      "alternate_keywords": [
+        "wohnwagenversicherung kosten",
+        "wohnwagenversicherung vergleich",
+        "wohnwagenversicherung leistungen",
+        "wohnwagenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Wohnwagenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Wohnwagenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohnwagenversicherung: Stand- und Fahrbetrieb",
+          "scope": "Stand- und Fahrbetrieb"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Wohnwagenversicherung: Vorzelt, Ausstattung und Hagelschäden",
+          "scope": "Vorzelt, Ausstattung und Hagelschäden"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:fahrradversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Fahrradversicherung",
+      "seo_seed": "fahrradversicherung",
+      "alternate_keywords": [
+        "fahrradversicherung kosten",
+        "fahrradversicherung vergleich",
+        "fahrradversicherung leistungen",
+        "fahrradversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Fahrradversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Fahrradversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Fahrradversicherung: Diebstahl von Rad und Zubehör",
+          "scope": "Diebstahl von Rad und Zubehör"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Fahrradversicherung: Beschädigungen, Verschleiß und E-Bike-Akku",
+          "scope": "Beschädigungen, Verschleiß und E-Bike-Akku"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:e-scooter-versicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "E-Scooter-Versicherung",
+      "seo_seed": "e-scooter-versicherung",
+      "alternate_keywords": [
+        "e-scooter-versicherung kosten",
+        "e-scooter-versicherung vergleich",
+        "e-scooter-versicherung leistungen",
+        "e-scooter-versicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "E-Scooter-Versicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "E-Scooter-Versicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "E-Scooter-Versicherung: Versicherungsplakette und Haftpflicht",
+          "scope": "Versicherungsplakette und Haftpflicht"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "E-Scooter-Versicherung: Diebstahl und Sachschaden",
+          "scope": "Diebstahl und Sachschaden"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:bootsversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Bootsversicherung",
+      "seo_seed": "bootsversicherung",
+      "alternate_keywords": [
+        "bootsversicherung kosten",
+        "bootsversicherung vergleich",
+        "bootsversicherung leistungen",
+        "bootsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Bootsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Bootsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bootsversicherung: Bootshaftpflicht, Kasko und Revier",
+          "scope": "Bootshaftpflicht, Kasko und Revier"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bootsversicherung: Winterlager, Transport und Zubehör",
+          "scope": "Winterlager, Transport und Zubehör"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:oldtimerversicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Oldtimerversicherung",
+      "seo_seed": "oldtimerversicherung",
+      "alternate_keywords": [
+        "oldtimerversicherung kosten",
+        "oldtimerversicherung vergleich",
+        "oldtimerversicherung leistungen",
+        "oldtimerversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Oldtimerversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Oldtimerversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Oldtimerversicherung: Wertgutachten und Sammlerfahrzeuge",
+          "scope": "Wertgutachten und Sammlerfahrzeuge"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Oldtimerversicherung: Nutzungslimits und Schadenersatz",
+          "scope": "Nutzungslimits und Schadenersatz"
+        }
+      ],
+      "independence_gate": "CHECK_EIGENSTAENDIGKEIT",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:anhanger-versicherung",
+      "area_key": "hb:versicherungen:area:mobilitat",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Anhänger-Versicherung",
+      "seo_seed": "anhänger-versicherung",
+      "alternate_keywords": [
+        "anhänger-versicherung kosten",
+        "anhänger-versicherung vergleich",
+        "anhänger-versicherung leistungen",
+        "anhänger-versicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Anhänger-Versicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Anhänger-Versicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Anhänger-Versicherung: Anhänger-Haftpflicht und Zulassung",
+          "scope": "Anhänger-Haftpflicht und Zulassung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Anhänger-Versicherung: Diebstahl, Teilkasko und Standrisiken",
+          "scope": "Diebstahl, Teilkasko und Standrisiken"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:privathaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Privathaftpflichtversicherung",
+      "seo_seed": "privathaftpflichtversicherung",
+      "alternate_keywords": [
+        "privathaftpflichtversicherung kosten",
+        "privathaftpflichtversicherung vergleich",
+        "privathaftpflichtversicherung leistungen",
+        "privathaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Privathaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Privathaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Privathaftpflichtversicherung: Personen-, Sach- und Vermögensschäden",
+          "scope": "Personen-, Sach- und Vermögensschäden"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Privathaftpflichtversicherung: Mietsachschäden und Gefälligkeit",
+          "scope": "Mietsachschäden und Gefälligkeit"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:haus-und-grundbesitzerhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "seo_seed": "haus- und grundbesitzerhaftpflichtversicherung",
+      "alternate_keywords": [
+        "haus- und grundbesitzerhaftpflichtversicherung kosten",
+        "haus- und grundbesitzerhaftpflichtversicherung vergleich",
+        "haus- und grundbesitzerhaftpflichtversicherung leistungen",
+        "haus- und grundbesitzerhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Haftungsfälle rund ums Gebäude",
+          "scope": "Haftungsfälle rund ums Gebäude"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Vermietung, Wege und Verkehrssicherung",
+          "scope": "Vermietung, Wege und Verkehrssicherung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:gewasserschadenhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Gewässerschadenhaftpflichtversicherung",
+      "seo_seed": "gewässerschadenhaftpflichtversicherung",
+      "alternate_keywords": [
+        "gewässerschadenhaftpflichtversicherung kosten",
+        "gewässerschadenhaftpflichtversicherung vergleich",
+        "gewässerschadenhaftpflichtversicherung leistungen",
+        "gewässerschadenhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Gewässerschadenhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Gewässerschadenhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gewässerschadenhaftpflichtversicherung: Öltanks und Leckagen",
+          "scope": "Öltanks und Leckagen"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gewässerschadenhaftpflichtversicherung: Bodensanierung und Umweltschäden",
+          "scope": "Bodensanierung und Umweltschäden"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:bauherrenhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Bauherrenhaftpflichtversicherung",
+      "seo_seed": "bauherrenhaftpflichtversicherung",
+      "alternate_keywords": [
+        "bauherrenhaftpflichtversicherung kosten",
+        "bauherrenhaftpflichtversicherung vergleich",
+        "bauherrenhaftpflichtversicherung leistungen",
+        "bauherrenhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Bauherrenhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Bauherrenhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bauherrenhaftpflichtversicherung: Haftungsrisiken der Baustelle",
+          "scope": "Haftungsrisiken der Baustelle"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Bauherrenhaftpflichtversicherung: Eigenleistungen und Sicherungspflichten",
+          "scope": "Eigenleistungen und Sicherungspflichten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:jagdhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Jagdhaftpflichtversicherung",
+      "seo_seed": "jagdhaftpflichtversicherung",
+      "alternate_keywords": [
+        "jagdhaftpflichtversicherung kosten",
+        "jagdhaftpflichtversicherung vergleich",
+        "jagdhaftpflichtversicherung leistungen",
+        "jagdhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Jagdhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Jagdhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Jagdhaftpflichtversicherung: Haftung bei Jagdausübung",
+          "scope": "Haftung bei Jagdausübung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Jagdhaftpflichtversicherung: Jagdwaffen, Hunde und Revier",
+          "scope": "Jagdwaffen, Hunde und Revier"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:rechtsschutzversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Rechtsschutzversicherung",
+      "seo_seed": "rechtsschutzversicherung",
+      "alternate_keywords": [
+        "rechtsschutzversicherung kosten",
+        "rechtsschutzversicherung vergleich",
+        "rechtsschutzversicherung leistungen",
+        "rechtsschutzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Rechtsschutzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Rechtsschutzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Rechtsschutzversicherung: Privat-, Berufs- und Wohnrechtsschutz",
+          "scope": "Privat-, Berufs- und Wohnrechtsschutz"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Rechtsschutzversicherung: Wartezeiten, Deckung und Kosten",
+          "scope": "Wartezeiten, Deckung und Kosten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:verkehrsrechtsschutzversicherung",
+      "area_key": "hb:versicherungen:area:haftung-und-recht",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Verkehrsrechtsschutzversicherung",
+      "seo_seed": "verkehrsrechtsschutzversicherung",
+      "alternate_keywords": [
+        "verkehrsrechtsschutzversicherung kosten",
+        "verkehrsrechtsschutzversicherung vergleich",
+        "verkehrsrechtsschutzversicherung leistungen",
+        "verkehrsrechtsschutzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Verkehrsrechtsschutzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Verkehrsrechtsschutzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Verkehrsrechtsschutzversicherung: Streit nach Unfällen und Bußgeldverfahren",
+          "scope": "Streit nach Unfällen und Bußgeldverfahren"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Verkehrsrechtsschutzversicherung: Mitversicherung und Kostenübernahme",
+          "scope": "Mitversicherung und Kostenübernahme"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:gesetzliche-krankenversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Gesetzliche Krankenversicherung",
+      "seo_seed": "gesetzliche krankenversicherung",
+      "alternate_keywords": [
+        "gesetzliche krankenversicherung kosten",
+        "gesetzliche krankenversicherung vergleich",
+        "gesetzliche krankenversicherung leistungen",
+        "gesetzliche krankenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Gesetzliche Krankenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Gesetzliche Krankenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gesetzliche Krankenversicherung: Beitragssatz und Zusatzbeitrag",
+          "scope": "Beitragssatz und Zusatzbeitrag"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gesetzliche Krankenversicherung: Kassenleistungen und Kassenwechsel",
+          "scope": "Kassenleistungen und Kassenwechsel"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:private-krankenversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Private Krankenversicherung",
+      "seo_seed": "private krankenversicherung",
+      "alternate_keywords": [
+        "private krankenversicherung kosten",
+        "private krankenversicherung vergleich",
+        "private krankenversicherung leistungen",
+        "private krankenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Private Krankenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Private Krankenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Private Krankenversicherung: Vollversicherung, Tarif und Alterungsrückstellung",
+          "scope": "Vollversicherung, Tarif und Alterungsrückstellung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Private Krankenversicherung: Selbstbehalt, Beiträge und Tarifwechsel",
+          "scope": "Selbstbehalt, Beiträge und Tarifwechsel"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:zahnzusatzversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Zahnzusatzversicherung",
+      "seo_seed": "zahnzusatzversicherung",
+      "alternate_keywords": [
+        "zahnzusatzversicherung kosten",
+        "zahnzusatzversicherung vergleich",
+        "zahnzusatzversicherung leistungen",
+        "zahnzusatzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Zahnzusatzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Zahnzusatzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Zahnzusatzversicherung: Zahnersatz, Implantate und Prophylaxe",
+          "scope": "Zahnersatz, Implantate und Prophylaxe"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Zahnzusatzversicherung: Wartezeiten und Leistungsstaffeln",
+          "scope": "Wartezeiten und Leistungsstaffeln"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:krankenhauszusatzversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Krankenhauszusatzversicherung",
+      "seo_seed": "krankenhauszusatzversicherung",
+      "alternate_keywords": [
+        "krankenhauszusatzversicherung kosten",
+        "krankenhauszusatzversicherung vergleich",
+        "krankenhauszusatzversicherung leistungen",
+        "krankenhauszusatzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Krankenhauszusatzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Krankenhauszusatzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankenhauszusatzversicherung: Wahlleistungen im Krankenhaus",
+          "scope": "Wahlleistungen im Krankenhaus"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankenhauszusatzversicherung: Einbettzimmer und Chefarztbehandlung",
+          "scope": "Einbettzimmer und Chefarztbehandlung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:ambulante-zusatzversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Ambulante Zusatzversicherung",
+      "seo_seed": "ambulante zusatzversicherung",
+      "alternate_keywords": [
+        "ambulante zusatzversicherung kosten",
+        "ambulante zusatzversicherung vergleich",
+        "ambulante zusatzversicherung leistungen",
+        "ambulante zusatzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Ambulante Zusatzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Ambulante Zusatzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Ambulante Zusatzversicherung: Sehhilfen und Heilpraktikerleistungen",
+          "scope": "Sehhilfen und Heilpraktikerleistungen"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Ambulante Zusatzversicherung: Erstattungslimits und Wartezeiten",
+          "scope": "Erstattungslimits und Wartezeiten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:pflegezusatzversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Pflegezusatzversicherung",
+      "seo_seed": "pflegezusatzversicherung",
+      "alternate_keywords": [
+        "pflegezusatzversicherung kosten",
+        "pflegezusatzversicherung vergleich",
+        "pflegezusatzversicherung leistungen",
+        "pflegezusatzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Pflegezusatzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Pflegezusatzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Pflegezusatzversicherung: Pflegetagegeld und Pflegekosten",
+          "scope": "Pflegetagegeld und Pflegekosten"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Pflegezusatzversicherung: Pflegegrade und Leistungsbedingungen",
+          "scope": "Pflegegrade und Leistungsbedingungen"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:krankentagegeldversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Krankentagegeldversicherung",
+      "seo_seed": "krankentagegeldversicherung",
+      "alternate_keywords": [
+        "krankentagegeldversicherung kosten",
+        "krankentagegeldversicherung vergleich",
+        "krankentagegeldversicherung leistungen",
+        "krankentagegeldversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Krankentagegeldversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Krankentagegeldversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankentagegeldversicherung: Einkommen bei längerer Arbeitsunfähigkeit",
+          "scope": "Einkommen bei längerer Arbeitsunfähigkeit"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankentagegeldversicherung: Karenzzeit, Tagessatz und Nachweise",
+          "scope": "Karenzzeit, Tagessatz und Nachweise"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:krankenhaustagegeldversicherung",
+      "area_key": "hb:versicherungen:area:gesundheit-und-pflege",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Krankenhaustagegeldversicherung",
+      "seo_seed": "krankenhaustagegeldversicherung",
+      "alternate_keywords": [
+        "krankenhaustagegeldversicherung kosten",
+        "krankenhaustagegeldversicherung vergleich",
+        "krankenhaustagegeldversicherung leistungen",
+        "krankenhaustagegeldversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Krankenhaustagegeldversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Krankenhaustagegeldversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankenhaustagegeldversicherung: Tagessatz bei stationärem Aufenthalt",
+          "scope": "Tagessatz bei stationärem Aufenthalt"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Krankenhaustagegeldversicherung: Beginn, Ausschlüsse und Verwendungszweck",
+          "scope": "Beginn, Ausschlüsse und Verwendungszweck"
+        }
+      ],
+      "independence_gate": "CHECK_EIGENSTAENDIGKEIT",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:berufsunfahigkeitsversicherung",
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Berufsunfähigkeitsversicherung",
+      "seo_seed": "berufsunfähigkeitsversicherung",
+      "alternate_keywords": [
+        "berufsunfähigkeitsversicherung kosten",
+        "berufsunfähigkeitsversicherung vergleich",
+        "berufsunfähigkeitsversicherung leistungen",
+        "berufsunfähigkeitsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Berufsunfähigkeitsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Berufsunfähigkeitsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Berufsunfähigkeitsversicherung: Leistungsprüfung und Berufsbegriff",
+          "scope": "Leistungsprüfung und Berufsbegriff"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Berufsunfähigkeitsversicherung: Gesundheitsfragen und Nachversicherung",
+          "scope": "Gesundheitsfragen und Nachversicherung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:erwerbsunfahigkeitsversicherung",
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Erwerbsunfähigkeitsversicherung",
+      "seo_seed": "erwerbsunfähigkeitsversicherung",
+      "alternate_keywords": [
+        "erwerbsunfähigkeitsversicherung kosten",
+        "erwerbsunfähigkeitsversicherung vergleich",
+        "erwerbsunfähigkeitsversicherung leistungen",
+        "erwerbsunfähigkeitsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Erwerbsunfähigkeitsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Erwerbsunfähigkeitsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Erwerbsunfähigkeitsversicherung: Leistung bei fehlender Erwerbsfähigkeit",
+          "scope": "Leistung bei fehlender Erwerbsfähigkeit"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Erwerbsunfähigkeitsversicherung: Unterschied zur Berufsunfähigkeit",
+          "scope": "Unterschied zur Berufsunfähigkeit"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:grundfahigkeitsversicherung",
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Grundfähigkeitsversicherung",
+      "seo_seed": "grundfähigkeitsversicherung",
+      "alternate_keywords": [
+        "grundfähigkeitsversicherung kosten",
+        "grundfähigkeitsversicherung vergleich",
+        "grundfähigkeitsversicherung leistungen",
+        "grundfähigkeitsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Grundfähigkeitsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Grundfähigkeitsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Grundfähigkeitsversicherung: Versicherte Grundfähigkeiten",
+          "scope": "Versicherte Grundfähigkeiten"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Grundfähigkeitsversicherung: Leistungsauslöser und Ausschlüsse",
+          "scope": "Leistungsauslöser und Ausschlüsse"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:dienstunfahigkeitsversicherung",
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Dienstunfähigkeitsversicherung",
+      "seo_seed": "dienstunfähigkeitsversicherung",
+      "alternate_keywords": [
+        "dienstunfähigkeitsversicherung kosten",
+        "dienstunfähigkeitsversicherung vergleich",
+        "dienstunfähigkeitsversicherung leistungen",
+        "dienstunfähigkeitsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Dienstunfähigkeitsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Dienstunfähigkeitsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Dienstunfähigkeitsversicherung: Dienstunfähigkeitsklausel bei Beamten",
+          "scope": "Dienstunfähigkeitsklausel bei Beamten"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Dienstunfähigkeitsversicherung: Absicherung vor und nach Verbeamtung",
+          "scope": "Absicherung vor und nach Verbeamtung"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:schwere-krankheiten-versicherung",
+      "area_key": "hb:versicherungen:area:arbeitskraft-und-einkommen",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Schwere-Krankheiten-Versicherung",
+      "seo_seed": "schwere-krankheiten-versicherung",
+      "alternate_keywords": [
+        "schwere-krankheiten-versicherung kosten",
+        "schwere-krankheiten-versicherung vergleich",
+        "schwere-krankheiten-versicherung leistungen",
+        "schwere-krankheiten-versicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Schwere-Krankheiten-Versicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Schwere-Krankheiten-Versicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Schwere-Krankheiten-Versicherung: Versicherte Diagnosen und Einmalzahlung",
+          "scope": "Versicherte Diagnosen und Einmalzahlung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Schwere-Krankheiten-Versicherung: Leistungskatalog und Wartezeit",
+          "scope": "Leistungskatalog und Wartezeit"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:risikolebensversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Risikolebensversicherung",
+      "seo_seed": "risikolebensversicherung",
+      "alternate_keywords": [
+        "risikolebensversicherung kosten",
+        "risikolebensversicherung vergleich",
+        "risikolebensversicherung leistungen",
+        "risikolebensversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Risikolebensversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Risikolebensversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Risikolebensversicherung: Versicherungssumme und Hinterbliebene",
+          "scope": "Versicherungssumme und Hinterbliebene"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Risikolebensversicherung: Gesundheitsfragen und Laufzeit",
+          "scope": "Gesundheitsfragen und Laufzeit"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:kapitallebensversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Kapitallebensversicherung",
+      "seo_seed": "kapitallebensversicherung",
+      "alternate_keywords": [
+        "kapitallebensversicherung kosten",
+        "kapitallebensversicherung vergleich",
+        "kapitallebensversicherung leistungen",
+        "kapitallebensversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Kapitallebensversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Kapitallebensversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kapitallebensversicherung: Todesfallschutz und Sparanteil",
+          "scope": "Todesfallschutz und Sparanteil"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kapitallebensversicherung: Kosten, Garantien und Vertragswechsel",
+          "scope": "Kosten, Garantien und Vertragswechsel"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:fondsgebundene-lebensversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Fondsgebundene Lebensversicherung",
+      "seo_seed": "fondsgebundene lebensversicherung",
+      "alternate_keywords": [
+        "fondsgebundene lebensversicherung kosten",
+        "fondsgebundene lebensversicherung vergleich",
+        "fondsgebundene lebensversicherung leistungen",
+        "fondsgebundene lebensversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Fondsgebundene Lebensversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Fondsgebundene Lebensversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Fondsgebundene Lebensversicherung: Fondsanlage und Versicherungsanteil",
+          "scope": "Fondsanlage und Versicherungsanteil"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Fondsgebundene Lebensversicherung: Anlagerisiken, Kosten und Auszahlung",
+          "scope": "Anlagerisiken, Kosten und Auszahlung"
+        }
+      ],
+      "independence_gate": "CHECK_EIGENSTAENDIGKEIT",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:private-rentenversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Private Rentenversicherung",
+      "seo_seed": "private rentenversicherung",
+      "alternate_keywords": [
+        "private rentenversicherung kosten",
+        "private rentenversicherung vergleich",
+        "private rentenversicherung leistungen",
+        "private rentenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Private Rentenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Private Rentenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Private Rentenversicherung: Rentenbeginn und Auszahlungsformen",
+          "scope": "Rentenbeginn und Auszahlungsformen"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Private Rentenversicherung: Garantie, Kosten und Hinterbliebene",
+          "scope": "Garantie, Kosten und Hinterbliebene"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:riester-rentenversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Riester-Rentenversicherung",
+      "seo_seed": "riester-rentenversicherung",
+      "alternate_keywords": [
+        "riester-rentenversicherung kosten",
+        "riester-rentenversicherung vergleich",
+        "riester-rentenversicherung leistungen",
+        "riester-rentenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Riester-Rentenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Riester-Rentenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Riester-Rentenversicherung: Förderung und Zulagen",
+          "scope": "Förderung und Zulagen"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Riester-Rentenversicherung: Auszahlung, Wohn-Riester und Vertragswechsel",
+          "scope": "Auszahlung, Wohn-Riester und Vertragswechsel"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:basisrentenversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Basisrentenversicherung",
+      "seo_seed": "basisrentenversicherung",
+      "alternate_keywords": [
+        "basisrentenversicherung kosten",
+        "basisrentenversicherung vergleich",
+        "basisrentenversicherung leistungen",
+        "basisrentenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Basisrentenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Basisrentenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Basisrentenversicherung: Steuervorteile und Beitragsgestaltung",
+          "scope": "Steuervorteile und Beitragsgestaltung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Basisrentenversicherung: Rentenphase und eingeschränkte Verfügung",
+          "scope": "Rentenphase und eingeschränkte Verfügung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:betriebliche-direktversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Betriebliche Direktversicherung",
+      "seo_seed": "betriebliche direktversicherung",
+      "alternate_keywords": [
+        "betriebliche direktversicherung kosten",
+        "betriebliche direktversicherung vergleich",
+        "betriebliche direktversicherung leistungen",
+        "betriebliche direktversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Betriebliche Direktversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Betriebliche Direktversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebliche Direktversicherung: Entgeltumwandlung und Arbeitgeberzuschuss",
+          "scope": "Entgeltumwandlung und Arbeitgeberzuschuss"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebliche Direktversicherung: Arbeitgeberwechsel und Auszahlung",
+          "scope": "Arbeitgeberwechsel und Auszahlung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:gesetzliche-rentenversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Gesetzliche Rentenversicherung",
+      "seo_seed": "gesetzliche rentenversicherung",
+      "alternate_keywords": [
+        "gesetzliche rentenversicherung kosten",
+        "gesetzliche rentenversicherung vergleich",
+        "gesetzliche rentenversicherung leistungen",
+        "gesetzliche rentenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Gesetzliche Rentenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Gesetzliche Rentenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gesetzliche Rentenversicherung: Rentenanspruch und Beitragszeiten",
+          "scope": "Rentenanspruch und Beitragszeiten"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gesetzliche Rentenversicherung: Altersrente und Erwerbsminderungsrente",
+          "scope": "Altersrente und Erwerbsminderungsrente"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:sterbegeldversicherung",
+      "area_key": "hb:versicherungen:area:leben-und-alter",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Sterbegeldversicherung",
+      "seo_seed": "sterbegeldversicherung",
+      "alternate_keywords": [
+        "sterbegeldversicherung kosten",
+        "sterbegeldversicherung vergleich",
+        "sterbegeldversicherung leistungen",
+        "sterbegeldversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Sterbegeldversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Sterbegeldversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Sterbegeldversicherung: Auszahlung im Todesfall",
+          "scope": "Auszahlung im Todesfall"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Sterbegeldversicherung: Wartezeit und Kosten",
+          "scope": "Wartezeit und Kosten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:reiserucktrittsversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Reiserücktrittsversicherung",
+      "seo_seed": "reiserücktrittsversicherung",
+      "alternate_keywords": [
+        "reiserücktrittsversicherung kosten",
+        "reiserücktrittsversicherung vergleich",
+        "reiserücktrittsversicherung leistungen",
+        "reiserücktrittsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Reiserücktrittsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Reiserücktrittsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reiserücktrittsversicherung: Versicherte Rücktrittsgründe",
+          "scope": "Versicherte Rücktrittsgründe"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reiserücktrittsversicherung: Erstattung, Fristen und Selbstbeteiligung",
+          "scope": "Erstattung, Fristen und Selbstbeteiligung"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:reiseabbruchversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Reiseabbruchversicherung",
+      "seo_seed": "reiseabbruchversicherung",
+      "alternate_keywords": [
+        "reiseabbruchversicherung kosten",
+        "reiseabbruchversicherung vergleich",
+        "reiseabbruchversicherung leistungen",
+        "reiseabbruchversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Reiseabbruchversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Reiseabbruchversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reiseabbruchversicherung: Außerplanmäßige Rückreise",
+          "scope": "Außerplanmäßige Rückreise"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reiseabbruchversicherung: Zusatzkosten und Reiseunterbrechung",
+          "scope": "Zusatzkosten und Reiseunterbrechung"
+        }
+      ],
+      "independence_gate": "CHECK_BAUSTEIN",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:reisegepackversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Reisegepäckversicherung",
+      "seo_seed": "reisegepäckversicherung",
+      "alternate_keywords": [
+        "reisegepäckversicherung kosten",
+        "reisegepäckversicherung vergleich",
+        "reisegepäckversicherung leistungen",
+        "reisegepäckversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Reisegepäckversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Reisegepäckversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reisegepäckversicherung: Verlust, Diebstahl und Beschädigung",
+          "scope": "Verlust, Diebstahl und Beschädigung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Reisegepäckversicherung: Wertsachen, Belege und Obergrenzen",
+          "scope": "Wertsachen, Belege und Obergrenzen"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:auslandskrankenversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Auslandskrankenversicherung",
+      "seo_seed": "auslandskrankenversicherung",
+      "alternate_keywords": [
+        "auslandskrankenversicherung kosten",
+        "auslandskrankenversicherung vergleich",
+        "auslandskrankenversicherung leistungen",
+        "auslandskrankenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Auslandskrankenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Auslandskrankenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Auslandskrankenversicherung: Akute Krankheit und Behandlung im Ausland",
+          "scope": "Akute Krankheit und Behandlung im Ausland"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Auslandskrankenversicherung: Rücktransport und Reisedauer",
+          "scope": "Rücktransport und Reisedauer"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:campingversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Campingversicherung",
+      "seo_seed": "campingversicherung",
+      "alternate_keywords": [
+        "campingversicherung kosten",
+        "campingversicherung vergleich",
+        "campingversicherung leistungen",
+        "campingversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Campingversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Campingversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Campingversicherung: Campingausrüstung und Stellplatzrisiken",
+          "scope": "Campingausrüstung und Stellplatzrisiken"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Campingversicherung: Zelt, Vorzelt und Zubehör",
+          "scope": "Zelt, Vorzelt und Zubehör"
+        }
+      ],
+      "independence_gate": "CHECK_PRODUKTDEFINITION",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:sportgerateversicherung",
+      "area_key": "hb:versicherungen:area:reisen-und-freizeit",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Sportgeräteversicherung",
+      "seo_seed": "sportgeräteversicherung",
+      "alternate_keywords": [
+        "sportgeräteversicherung kosten",
+        "sportgeräteversicherung vergleich",
+        "sportgeräteversicherung leistungen",
+        "sportgeräteversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Sportgeräteversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Sportgeräteversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Sportgeräteversicherung: Sportausrüstung auf Reisen und zuhause",
+          "scope": "Sportausrüstung auf Reisen und zuhause"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Sportgeräteversicherung: Diebstahl, Bruch und Transport",
+          "scope": "Diebstahl, Bruch und Transport"
+        }
+      ],
+      "independence_gate": "CHECK_PRODUKTDEFINITION",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:tierhalterhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:tiere",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Tierhalterhaftpflichtversicherung",
+      "seo_seed": "tierhalterhaftpflichtversicherung",
+      "alternate_keywords": [
+        "tierhalterhaftpflichtversicherung kosten",
+        "tierhalterhaftpflichtversicherung vergleich",
+        "tierhalterhaftpflichtversicherung leistungen",
+        "tierhalterhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Tierhalterhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Tierhalterhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tierhalterhaftpflichtversicherung: Hund und Pferd als Haftungsrisiko",
+          "scope": "Hund und Pferd als Haftungsrisiko"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tierhalterhaftpflichtversicherung: Mietsachschäden und Fremdhüter",
+          "scope": "Mietsachschäden und Fremdhüter"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:tierkrankenversicherung",
+      "area_key": "hb:versicherungen:area:tiere",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Tierkrankenversicherung",
+      "seo_seed": "tierkrankenversicherung",
+      "alternate_keywords": [
+        "tierkrankenversicherung kosten",
+        "tierkrankenversicherung vergleich",
+        "tierkrankenversicherung leistungen",
+        "tierkrankenversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Tierkrankenversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Tierkrankenversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tierkrankenversicherung: Ambulante und stationäre Behandlung",
+          "scope": "Ambulante und stationäre Behandlung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tierkrankenversicherung: Erstattung, Wartezeit und Tieralter",
+          "scope": "Erstattung, Wartezeit und Tieralter"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:tier-op-versicherung",
+      "area_key": "hb:versicherungen:area:tiere",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Tier-OP-Versicherung",
+      "seo_seed": "tier-op-versicherung",
+      "alternate_keywords": [
+        "tier-op-versicherung kosten",
+        "tier-op-versicherung vergleich",
+        "tier-op-versicherung leistungen",
+        "tier-op-versicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Tier-OP-Versicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Tier-OP-Versicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tier-OP-Versicherung: Operationsbegriff und Narkose",
+          "scope": "Operationsbegriff und Narkose"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Tier-OP-Versicherung: Nachbehandlung, Wartezeit und Ausschlüsse",
+          "scope": "Nachbehandlung, Wartezeit und Ausschlüsse"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:betriebshaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Betriebshaftpflichtversicherung",
+      "seo_seed": "betriebshaftpflichtversicherung",
+      "alternate_keywords": [
+        "betriebshaftpflichtversicherung kosten",
+        "betriebshaftpflichtversicherung vergleich",
+        "betriebshaftpflichtversicherung leistungen",
+        "betriebshaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Betriebshaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Betriebshaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebshaftpflichtversicherung: Personen- und Sachschäden im Betrieb",
+          "scope": "Personen- und Sachschäden im Betrieb"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebshaftpflichtversicherung: Mitarbeitende, Mietsachen und Tätigkeiten",
+          "scope": "Mitarbeitende, Mietsachen und Tätigkeiten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:berufshaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Berufshaftpflichtversicherung",
+      "seo_seed": "berufshaftpflichtversicherung",
+      "alternate_keywords": [
+        "berufshaftpflichtversicherung kosten",
+        "berufshaftpflichtversicherung vergleich",
+        "berufshaftpflichtversicherung leistungen",
+        "berufshaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Berufshaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Berufshaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Berufshaftpflichtversicherung: Berufsbedingte Haftungsfälle",
+          "scope": "Berufsbedingte Haftungsfälle"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Berufshaftpflichtversicherung: Berufsspezifische Bedingungen und Nachhaftung",
+          "scope": "Berufsspezifische Bedingungen und Nachhaftung"
+        }
+      ],
+      "independence_gate": "CHECK_UEBERSCHNEIDUNG",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:vermogensschadenhaftpflichtversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Vermögensschadenhaftpflichtversicherung",
+      "seo_seed": "vermögensschadenhaftpflichtversicherung",
+      "alternate_keywords": [
+        "vermögensschadenhaftpflichtversicherung kosten",
+        "vermögensschadenhaftpflichtversicherung vergleich",
+        "vermögensschadenhaftpflichtversicherung leistungen",
+        "vermögensschadenhaftpflichtversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Vermögensschadenhaftpflichtversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Vermögensschadenhaftpflichtversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Vermögensschadenhaftpflichtversicherung: Echte Vermögensschäden",
+          "scope": "Echte Vermögensschäden"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Vermögensschadenhaftpflichtversicherung: Beratungsfehler, Haftungsumfang und Kosten",
+          "scope": "Beratungsfehler, Haftungsumfang und Kosten"
+        }
+      ],
+      "independence_gate": "CHECK_UEBERSCHNEIDUNG",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:geschaftsinhaltsversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Geschäftsinhaltsversicherung",
+      "seo_seed": "geschäftsinhaltsversicherung",
+      "alternate_keywords": [
+        "geschäftsinhaltsversicherung kosten",
+        "geschäftsinhaltsversicherung vergleich",
+        "geschäftsinhaltsversicherung leistungen",
+        "geschäftsinhaltsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Geschäftsinhaltsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Geschäftsinhaltsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Geschäftsinhaltsversicherung: Waren, Einrichtung und Technik",
+          "scope": "Waren, Einrichtung und Technik"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Geschäftsinhaltsversicherung: Einbruch, Wasser und Feuer",
+          "scope": "Einbruch, Wasser und Feuer"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:betriebsunterbrechungsversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Betriebsunterbrechungsversicherung",
+      "seo_seed": "betriebsunterbrechungsversicherung",
+      "alternate_keywords": [
+        "betriebsunterbrechungsversicherung kosten",
+        "betriebsunterbrechungsversicherung vergleich",
+        "betriebsunterbrechungsversicherung leistungen",
+        "betriebsunterbrechungsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Betriebsunterbrechungsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Betriebsunterbrechungsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebsunterbrechungsversicherung: Ertragsausfall nach Sachschaden",
+          "scope": "Ertragsausfall nach Sachschaden"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Betriebsunterbrechungsversicherung: Haftzeit und Fixkosten",
+          "scope": "Haftzeit und Fixkosten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:cyberversicherung-fur-kleinbetriebe",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Cyberversicherung für Kleinbetriebe",
+      "seo_seed": "cyberversicherung für kleinbetriebe",
+      "alternate_keywords": [
+        "cyberversicherung für kleinbetriebe kosten",
+        "cyberversicherung für kleinbetriebe vergleich",
+        "cyberversicherung für kleinbetriebe leistungen",
+        "cyberversicherung für kleinbetriebe schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Cyberversicherung für Kleinbetriebe: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Cyberversicherung für Kleinbetriebe: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Cyberversicherung für Kleinbetriebe: Hackerangriff und Datenwiederherstellung",
+          "scope": "Hackerangriff und Datenwiederherstellung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Cyberversicherung für Kleinbetriebe: Betriebsstillstand und Krisenhilfe",
+          "scope": "Betriebsstillstand und Krisenhilfe"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:firmenrechtsschutzversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Firmenrechtsschutzversicherung",
+      "seo_seed": "firmenrechtsschutzversicherung",
+      "alternate_keywords": [
+        "firmenrechtsschutzversicherung kosten",
+        "firmenrechtsschutzversicherung vergleich",
+        "firmenrechtsschutzversicherung leistungen",
+        "firmenrechtsschutzversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Firmenrechtsschutzversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Firmenrechtsschutzversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Firmenrechtsschutzversicherung: Arbeits- und Vertragsstreitigkeiten",
+          "scope": "Arbeits- und Vertragsstreitigkeiten"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Firmenrechtsschutzversicherung: Deckung, Wartezeit und anwaltliche Kosten",
+          "scope": "Deckung, Wartezeit und anwaltliche Kosten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:gewerbegebaudeversicherung",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Gewerbegebäudeversicherung",
+      "seo_seed": "gewerbegebäudeversicherung",
+      "alternate_keywords": [
+        "gewerbegebäudeversicherung kosten",
+        "gewerbegebäudeversicherung vergleich",
+        "gewerbegebäudeversicherung leistungen",
+        "gewerbegebäudeversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Gewerbegebäudeversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Gewerbegebäudeversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gewerbegebäudeversicherung: Betriebsgebäude und bauliche Bestandteile",
+          "scope": "Betriebsgebäude und bauliche Bestandteile"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Gewerbegebäudeversicherung: Elementarschäden und Wiederaufbau",
+          "scope": "Elementarschäden und Wiederaufbau"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:elektronikversicherung-fur-betriebe",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Elektronikversicherung für Betriebe",
+      "seo_seed": "elektronikversicherung für betriebe",
+      "alternate_keywords": [
+        "elektronikversicherung für betriebe kosten",
+        "elektronikversicherung für betriebe vergleich",
+        "elektronikversicherung für betriebe leistungen",
+        "elektronikversicherung für betriebe schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Elektronikversicherung für Betriebe: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Elektronikversicherung für Betriebe: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Elektronikversicherung für Betriebe: Geräteausfall und Bedienfehler",
+          "scope": "Geräteausfall und Bedienfehler"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Elektronikversicherung für Betriebe: Daten, mobile Geräte und Ersatz",
+          "scope": "Daten, mobile Geräte und Ersatz"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:transportversicherung-fur-betriebe",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Transportversicherung für Betriebe",
+      "seo_seed": "transportversicherung für betriebe",
+      "alternate_keywords": [
+        "transportversicherung für betriebe kosten",
+        "transportversicherung für betriebe vergleich",
+        "transportversicherung für betriebe leistungen",
+        "transportversicherung für betriebe schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Transportversicherung für Betriebe: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Transportversicherung für Betriebe: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Transportversicherung für Betriebe: Ware im Versand und auf dem Transport",
+          "scope": "Ware im Versand und auf dem Transport"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Transportversicherung für Betriebe: Diebstahl, Bruch und Lieferwege",
+          "scope": "Diebstahl, Bruch und Lieferwege"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:kreditversicherung-fur-betriebe",
+      "area_key": "hb:versicherungen:area:kleine-betriebe",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Kreditversicherung für Betriebe",
+      "seo_seed": "kreditversicherung für betriebe",
+      "alternate_keywords": [
+        "kreditversicherung für betriebe kosten",
+        "kreditversicherung für betriebe vergleich",
+        "kreditversicherung für betriebe leistungen",
+        "kreditversicherung für betriebe schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Kreditversicherung für Betriebe: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Kreditversicherung für Betriebe: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kreditversicherung für Betriebe: Forderungsausfall und Bonitätsprüfung",
+          "scope": "Forderungsausfall und Bonitätsprüfung"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Kreditversicherung für Betriebe: Entschädigungsquote und Selbstbehalt",
+          "scope": "Entschädigungsquote und Selbstbehalt"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:restschuldversicherung",
+      "area_key": "hb:versicherungen:area:finanzielle-risiken",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Restschuldversicherung",
+      "seo_seed": "restschuldversicherung",
+      "alternate_keywords": [
+        "restschuldversicherung kosten",
+        "restschuldversicherung vergleich",
+        "restschuldversicherung leistungen",
+        "restschuldversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Restschuldversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Restschuldversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Restschuldversicherung: Kreditraten bei Tod oder Arbeitsunfähigkeit",
+          "scope": "Kreditraten bei Tod oder Arbeitsunfähigkeit"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Restschuldversicherung: Leistungsausschlüsse und Vertragskosten",
+          "scope": "Leistungsausschlüsse und Vertragskosten"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:mietkautionsversicherung",
+      "area_key": "hb:versicherungen:area:finanzielle-risiken",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Mietkautionsversicherung",
+      "seo_seed": "mietkautionsversicherung",
+      "alternate_keywords": [
+        "mietkautionsversicherung kosten",
+        "mietkautionsversicherung vergleich",
+        "mietkautionsversicherung leistungen",
+        "mietkautionsversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Mietkautionsversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Mietkautionsversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mietkautionsversicherung: Kautionsbürgschaft und Mietverhältnis",
+          "scope": "Kautionsbürgschaft und Mietverhältnis"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mietkautionsversicherung: Gebühren, Rückgriff und Vertragsende",
+          "scope": "Gebühren, Rückgriff und Vertragsende"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    },
+    {
+      "owner_key": "hb:versicherungen:mietausfallversicherung",
+      "area_key": "hb:versicherungen:area:finanzielle-risiken",
+      "page_level": "SEITE3_KONKRETE_VERSICHERUNG",
+      "name": "Mietausfallversicherung",
+      "seo_seed": "mietausfallversicherung",
+      "alternate_keywords": [
+        "mietausfallversicherung kosten",
+        "mietausfallversicherung vergleich",
+        "mietausfallversicherung leistungen",
+        "mietausfallversicherung schadensfall"
+      ],
+      "suggested_article_category_facets": [
+        {
+          "type": "FAQ",
+          "name": "Mietausfallversicherung: Häufige Fragen",
+          "scope": "Begriffe, grundlegende Entscheidungen und typische Missverständnisse"
+        },
+        {
+          "type": "BERATUNG",
+          "name": "Mietausfallversicherung: Auswahl & Beratung",
+          "scope": "Wer braucht den Schutz, welcher Leistungsumfang und welche Abgrenzung ist sinnvoll?"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mietausfallversicherung: Mietrückstände und Vermieterrisiken",
+          "scope": "Mietrückstände und Vermieterrisiken"
+        },
+        {
+          "type": "INDIVIDUELL",
+          "name": "Mietausfallversicherung: Schadenmeldung und Leistungsgrenzen",
+          "scope": "Schadenmeldung und Leistungsgrenzen"
+        }
+      ],
+      "independence_gate": "COARSE_OK_REVIEW_WITH_SEO",
+      "editorial_status": "HYPOTHESE__RESEARCH_REQUIRED",
+      "wp_page_id": null,
+      "wp_taxonomy_write": false
+    }
+  ],
+  "review_cases": [
+    {
+      "owner_key": "hb:versicherungen:glasversicherung",
+      "name": "Glasversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:photovoltaikversicherung",
+      "name": "Photovoltaikversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:feuerrohbauversicherung",
+      "name": "Feuerrohbauversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:oldtimerversicherung",
+      "name": "Oldtimerversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "owner_key": "hb:versicherungen:verkehrsrechtsschutzversicherung",
+      "name": "Verkehrsrechtsschutzversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:krankenhaustagegeldversicherung",
+      "name": "Krankenhaustagegeldversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "owner_key": "hb:versicherungen:dienstunfahigkeitsversicherung",
+      "name": "Dienstunfähigkeitsversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:fondsgebundene-lebensversicherung",
+      "name": "Fondsgebundene Lebensversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "owner_key": "hb:versicherungen:reiseabbruchversicherung",
+      "name": "Reiseabbruchversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "owner_key": "hb:versicherungen:campingversicherung",
+      "name": "Campingversicherung",
+      "reason": "CHECK_PRODUKTDEFINITION"
+    },
+    {
+      "owner_key": "hb:versicherungen:sportgerateversicherung",
+      "name": "Sportgeräteversicherung",
+      "reason": "CHECK_PRODUKTDEFINITION"
+    },
+    {
+      "owner_key": "hb:versicherungen:berufshaftpflichtversicherung",
+      "name": "Berufshaftpflichtversicherung",
+      "reason": "CHECK_UEBERSCHNEIDUNG"
+    },
+    {
+      "owner_key": "hb:versicherungen:vermogensschadenhaftpflichtversicherung",
+      "name": "Vermögensschadenhaftpflichtversicherung",
+      "reason": "CHECK_UEBERSCHNEIDUNG"
+    }
+  ],
+  "finder": {
+    "location": "Magazin",
+    "entrypoints": [
+      "Versicherungs-Hauptseite",
+      "Startseite",
+      "passende Fachbeiträge"
+    ],
+    "result_target": "genau ein Versicherungs-Owner, mit nachvollziehbaren möglichen Alternativen",
+    "advice_level": "allgemeine Orientierung, keine individuelle Tarifberatung",
+    "link_source": "bestehende zentrale Banner-/Affiliate-Verwaltung"
+  },
+  "release_gate": "NICHT_IMPORTIERBAR; ERST DATAFORSEO / FACHAUDIT / LIVE WP SNAPSHOT / BESTEHENDER DRY RUN / EXPLIZITE SCHREIBFREIGABE"
+}
