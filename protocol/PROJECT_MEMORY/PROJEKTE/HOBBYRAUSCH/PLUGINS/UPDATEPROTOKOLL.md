@@ -5130,3 +5130,43 @@ OFFEN. Echter WordPress-/Frontend-Readback fehlt.
 
 ISOLIERTE PLUGINABLAGE:
 Das vorhandene HD-003-Manifest steht noch auf 1.50.699; `CURRENT.zip` fehlt. Vor Liveinstallation auf 1.50.704 synchronisieren und Manifest aktualisieren.
+
+
+---
+## PU-20261020-003 – HD-003 1.50.705 Hobbyfinder Design
+
+ART:
+Design-Update des bestehenden Hobbyfinders, keine neue Architektur.
+
+VON / AUF:
+1.50.704 → 1.50.705.
+
+LIVE-BASIS:
+1.50.704 nach Korrektur der WordPress-Seitenroute auf /hobbyfinder/ im echten Frontend sichtbar; kompletter Finder-Durchlauf vom Nutzer als funktionierend bestätigt.
+
+UMSETZUNG:
+- Portal-Grün/Petrol statt blauem Finder-Sonderfarbschema;
+- Linien-Icon auf jeder Antwortkachel;
+- grüne aktive Auswahl;
+- kompakter Hero + H1 „Finde dein Hobby“;
+- Zur Startseite + Neu starten auf allen Finder-Zuständen;
+- vorhandene echte Kategorie-/Zielbilder auf Ergebniskarten, wenn auflösbar;
+- kein erfundenes Bild und keine erfundene URL.
+
+ARTEFAKT:
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.705_HOBBYFINDER_DESIGN_LOCALPASS.zip
+SHA-256: e56a3b170a888c876ece8e60969be52746a4245b464946d7af1912bc7eb067e5
+Größe: 58,685,530 Bytes.
+
+QA:
+- PHP 135/135 PASS;
+- JavaScript Syntax PASS;
+- Runtime 862/862 PASS;
+- Rankingfunktion gegenüber 1.50.704 unverändert;
+- 41/41 Auswahloptionen mit Icon;
+- Bildauflösung 3/3 Positivtest;
+- Negativtest ohne erfundenes Ziel/Bild PASS;
+- ZIP PASS.
+
+LIVE:
+1.50.705 noch offen. Nächster Schritt: nur HD-003 aktualisieren und /hobbyfinder/ visuell prüfen.
