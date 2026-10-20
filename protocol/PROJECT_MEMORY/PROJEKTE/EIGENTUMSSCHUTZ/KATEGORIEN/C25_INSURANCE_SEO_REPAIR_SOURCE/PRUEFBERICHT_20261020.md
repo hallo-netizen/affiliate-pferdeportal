@@ -1,0 +1,35 @@
+# Versicherungen – Nachweis der originalen Kategorielogik und C2.5-Keyword-Korrektur (20.10.2026)
+
+## Beweiskette: real geprüfte Quellen (nicht aus einer Vermutung)
+- `KONZEPT/ZIELVERTRAG_KATEGORIEN_MINDESTENS_3_OHNE_MAXIMUM_20261015.md`: **R1 WP-Seite → R2 WP-Seite → R3 WP-Seite → genau eine flache WP-`category` → künftiger Beitrag**; FAQ und Beratung beim R3-Owner verpflichtend, andere Endfacetten nur bei eigenständigem Sinn; keine vierte WordPress-Seite, kein Kategorie-Unterterm.
+- `KONZEPT/KATEGORIEN_NAVIGATION_PORTALSTANDARD_FEHLERLEHREN_20261017.md`: echte ursprüngliche 6 Welten/36 Bereiche/265 konkrete Themenseiten; Alt-IDs, Slugs, URLs und Post-Term-Bindungen schützen; Originalrenderer prüfen; Sichtnavigation ist **Designplugin**, Kategorieplugin schreibt die zentrale Struktur.
+- `KONZEPT/C22_GESAMTBAUM_KORRIGIERT_173_THEMEN_569_ARTIKELKATEGORIEN_20261016.json`: sechs getrennte Welten, fachliche R2-Bereiche, echte alte R3-Beispiele mit drei spezifischen Termen, u.a. **Einbruch & Diebstahl → Abwesenheit & Leerstand → Unbewohnte Häuser → Ferienhaus-Einbruchschutz/Leerstehendes Wohnhaus/Schlüsselübergabe im Ferienhaus**. Historischer Konzeptstand, nicht aktuelle WordPress-Import-Autorität.
+- `DESIGN/C22_NAVIGATION_MEHR_SEITEN_3_LINKS_ALLE_ERREICHBAR_20261016.md` und aus der originalen, gespeicherten Design-0.1.57-Plugin-ZIP die tatsächlichen Dateien `templates/site.php`, `assets/style.css`: **fünf Megamenü-Spalten je Reihe**, **vier direkt verlinkte R3 je Bereich**, bei weiteren echten R3 nur **Alle Themen** zum R2-Hub, dort müssen alle Links erreichbar sein. Im sichtbaren Screenshot steht Versicherungen in zweiter Headerzeile; Design-Quell-CSS enthält weiterhin Desktop `.hbdp-mainnav{grid-template-columns:repeat(6,minmax(0,1fr))}`. Sichtbarer Menüumbruch ist **ein separat zu behebender Designplugin-Fehler**, nicht durch weitere Kategorien zu verdecken. Die benutzte 0.1.57-ZIP ist ein dokumentierter NICHT-installierter Design-Arbeitsstand: nicht als aktive Version behaupten.
+- `KATEGORIEN/C24_INSURANCE_94_SOURCE/profiles/hab-und-bewahr-insurance-94.json`: 105 reale Versicherungsarten, aber nur 20 künstlich zusammengelegte generische R3-Seiten. Frühere scheinbar grüne lokalen Demo-Mocks sind NICHT Beleg für fachlich echte SEO-Struktur.
+- **Echte, vorhandene** DataForSEO-Dateien der User-Library: `hab-bewahr-dataforseo-overview-20261020-125821-utc.json` (68 Abfragen, 62 Ergebniszeilen, $0.01944) und `hab-bewahr-dataforseo-overview-20261020-132010-utc.json` (70 Abfragen, 66 Ergebniszeilen, $0.01992). Resultate Deutschland/de. Die Rohdaten wurden in dieser Sitzung mit files.read/files.find eingesehen und 45 konkrete R3-Begriffe samt Volumen aus den Ergebniszeilen übernommen. **Nur Keyword-Overview, keine SERP-/Artikel- oder Keyword-Ideen-Recherche; kein neuer kostenpflichtiger Provider-Aufruf.** Beim exakt eingegebenen Begriff Haus- und Grundbesitzerhaftpflichtversicherung keine eigene Ergebniszeile; daraus folgt kein Ausschluss/Nullvolumen.
+
+## Vorher / nachher: nur die siebte Hauptwelt
+| WP-Rolle | Fehlerhafte importierte C2.4 | Korrigierte C2.5 |
+|---|---:|---:|
+| R1 Versicherungen | 1 | 1, physische WP-ID geschützt |
+| R2 Bereichshubs | 5 künstlich breite Labels | 5 thematisch benannte Bereiche, vorhandene 5 WP-IDs erhalten |
+| R3 konkrete keywordbezogene WP-Seiten | 20 generische Mischthemen | **46 konkrete Versicherungs-Keywords**, 20 alte WP-IDs sicher revidiert + 26 neue |
+| Flache Beitragskategorien unter R3 | 68 thematisch generisch | **138 konkrete unterste Kategorien**, 68 alte Term-IDs sicher revidiert + 70 neue |
+| Bereits beschlossene Versicherungsarten | 105 | 105/105 genau einem R3 zugeordnet, 66 Spezialformen für spätere redaktionelle Einzelbeiträge |
+| Sechs andere Hauptwelten | alt | **null Änderungen** |
+
+**Endstand Gesamt der siebten Welt: 52 WordPress-Seiten, 138 flache Terms = 190 Objekte, nicht 190 Neuanlagen.** In einer inhaltlich vergleichbaren Größenordnung zu einer einzelnen bestehenden Hauptwelt, nicht zu allen sechs zusammen. 45/46 R3 haben exakt gemessene Keywordzeilen, kein künstlicher Ausschluss nach Suchvolumen. FAQ/Beratung erst unter der spezifischen Versicherung (z.B. Hausratversicherung: Häufige Fragen, Hausratversicherung: Beratung).
+
+## Technische Originalprüfung und aktuelle Grenze
+- Basis **bestehendes** Kategorieplugin 1.14.8.34, Original-Basename `affiliate-portal-kategorie-workflow`, kein Zweitplugin.
+- `C25_INSURANCE_SEO_REPAIR_SOURCE/includes/class-apkw-insurance-seo-repair.php` + `profiles/hab-und-bewahr-insurance-seo-repair.json` = echte C2.5-Korrektur, PHP 8.4 syntaktisch geprüft.
+- Lokaler Test verwendet originalen `APKW_TargetWriter` aus der vorhandenen Plugin-ZIP sowie die **echten** alten 94 und neuen 190 Manifestdaten; validiert: schreibfreier Preflight, 6 unveränderte Alt-Welten, 26+68 bestehende Versicherungs-IDs erhalten, 26+70 neue WordPress-Objekte, 190/190 aktiver neuer Snapshot, Metadaten aus Originalkontrakt, entdeckte Kollision, inzwischen bearbeitete Seite/belegte Term-Kategorie blockiert, absichtlicher Schreibfehler und vollständiger Rückbau. PASS. Nicht behauptet: echter WordPress-Core-Livetest, aktives Designplugin-Live-HTML oder SEO-Einzeltitelprüfung.
+- ZIP `HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.36_KEYWORD_KORREKTUR.zip`, 343909 Bytes, **SHA256 `645b67fd3baabb7a053a3934a92299c0d7fe68acddde618ec5f89cacae0da281`**, 46 ZIP-Einträge, 35 PHP-Dateien Lint PASS, 42 von 43 Originaldateien aus 1.14.8.34 byteidentisch, nur Bootstrap plus neue PHP/JSON/Hinweis-Dateien.
+- Alte Version **1.14.8.35 durch 1.14.8.36 ersetzt** (Vollständigkeit der originalen _apkw_*-Metadaten auch für neue Knoten geprüft).
+- Realimport nur, wenn nach Update zu 1.14.8.36 die neue **schreibfreie** Funktion `Portal-Kategorien → Versicherungen SEO` **PASS** zeigt und der Nutzer anschließend **gesondert** freigibt. Bei WordPress-Änderungen an den 94 importierten Objekten FAIL-CLOSED. Keine automatischen Aktionen durch Plugin-Aktualisierung.
+
+## Zwei weiterhin getrennte Baustellen
+1. **Kategorieplugin C2.5** – wird mit sicherem 190er Reparaturlauf auf konkrete Keyword-Struktur umgestellt; Altwelten geschützt. Aktuelle Simulation PASS, WordPress-Echtschreibung/Import offen.
+2. **Designplugin Navigation** – reale Screenshot-Beobachtung Versicherungen in zweiter Headerzeile, sechs Desktop-Spalten in gespeicherten PHP/CSS nachgewiesen. Erst auf wirklich installiertem Designplugin-Quellstand korrigieren. **Nicht** durch CSS-Injektion im Kategorieplugin, nicht durch Installation einer als NICHT INSTALLIEREN markierten unfertigen 0.1.57-ZIP.
+
+**EINE NEXT ACTION zur sicheren WP-Fertigstellung:** Die vorhandene WordPress-Kategorieplugin-Identität mit 1.14.8.36 aktualisieren und dort die schreibfreie **Versicherungen SEO**-Vorschau prüfen. Danach separat die Korrektur auslösen und den sichtbaren Renderer abnehmen. Header-CSS bleibt getrennt im Designbüro.
