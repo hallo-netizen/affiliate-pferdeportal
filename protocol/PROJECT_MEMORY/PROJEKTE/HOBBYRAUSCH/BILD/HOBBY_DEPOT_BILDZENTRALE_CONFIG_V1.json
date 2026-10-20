@@ -2,11 +2,11 @@
   "contract": "HOBBY_DEPOT_BILDZENTRALE_CONFIG_V1",
   "project_id": "hobby-depot",
   "current_candidate": {
-    "version": "2.7.7",
-    "artifact": "HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip",
-    "zip_sha256": "c27eff9a48007a5317832cf3d6f539d49856a1e6edaf92eebd1bfdb89e030ab7",
-    "source_php_sha256": "5126d57a1a04d75e561bf7eab35227e176a04352eb70f587a4f392e463331b38",
-    "source_php_bytes": 317483
+    "version": "2.7.8",
+    "artifact": "HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip",
+    "zip_sha256": "d9d8caad4c2f4057fee30f9d21607376fa110d82defed8c0f759e5c202b83342",
+    "source_php_sha256": "edda98383add25fc2d02bf35bfff433b2c5ded332cc21a0fc43a82577e6004ec",
+    "source_php_bytes": 320401
   },
   "verified_original": {
     "version": "2.7.6",
@@ -62,5 +62,29 @@
     "overwrite_existing_images": false,
     "live_install_before_local_qa": false,
     "mass_run_before_live_single_test": false
+  },
+  "prompt_policy": {
+    "version": "hobby-depot-1.1",
+    "central_binding": true,
+    "article_context": [
+      "title",
+      "excerpt",
+      "first_120_words_of_content"
+    ],
+    "prefer_activity": true,
+    "prefer_human_action": [
+      "hands",
+      "arms",
+      "active_person"
+    ],
+    "uncluttered": true,
+    "no_collage": true,
+    "no_text_logo_watermark": true,
+    "applies_to": [
+      "articles",
+      "wordpress_categories",
+      "post_type_hero",
+      "hivepress"
+    ]
   }
 }
