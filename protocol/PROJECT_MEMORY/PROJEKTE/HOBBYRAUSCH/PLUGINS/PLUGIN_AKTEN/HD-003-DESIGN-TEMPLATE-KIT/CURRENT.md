@@ -3,67 +3,73 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **1.50.704 HOBBYFINDER RUNTIME LOCAL HARD PASS / ISOLIERTE CURRENT.ZIP-SYNC OFFEN / LIVE DANACH**
+STATUS: **1.50.705 HOBBYFINDER DESIGN LOCAL HARD PASS / LIVE-DESIGN-READBACK OFFEN**
 
 Plugin-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`
-
-Library:
-`/Hobby Depot/Plugin-Büro/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.705_HOBBYFINDER_DESIGN_LOCALPASS.zip`
 
 SHA-256:
-`558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`
+`e56a3b170a888c876ece8e60969be52746a4245b464946d7af1912bc7eb067e5`
 
 Größe:
-58,681,497 Bytes.
+58,685,530 Bytes.
 
 ## Basis
 
-- direkte Basis: 1.50.703;
+- direkte Basis: **1.50.704**;
 - stabile Klasse bleibt `Hobby_Depot_Profile_V150699`;
-- keine Template-/Klassenumbenennung;
-- Footer-/Serviceseitenfix 1.50.703 bleibt unverändert;
-- Kategorie-/Bild-/Affiliate-/SEO-Struktur unverändert.
+- Finder-Datenlogik und Ranking unverändert;
+- HD-007 bleibt einzige read-only Hobbyregister-Laufzeitquelle;
+- keine zweite Hobby-Datenhaltung;
+- Kategorie-/Affiliate-/Footer-/SEO-Struktur unverändert.
 
-## Finder-Vertrag
+## Live-Baseline 1.50.704
 
-- Slug `hobbyfinder` = eigener HD-003-Content-Route;
-- Datensätze ausschließlich über HD-007 read-only API;
-- keine persistente Hobbykopie in HD-003;
-- exakt 862 Datensätze erforderlich, sonst fail-closed;
-- echte Zielobjekte ausschließlich über HD-004 `hd_category_registry_resolve()`;
-- keine erfundenen Ziel-URLs;
-- Ergebnis-Karte: Passungswert + Gründe + Was ist das? + Was macht man? + Was braucht man? + Der Reiz.
+Nutzer-Readback 2026-10-20:
+- HD-007 + HD-003 1.50.704 installiert;
+- ursprüngliche WordPress-Seite lag unter `/magazin/hobbyfinder/` und wurde deshalb nicht als Finder-Route gerendert;
+- Seite auf die vorgesehene Route `/hobbyfinder/` gestellt;
+- Finder erschien danach im Frontend;
+- kompletter 8-Schritte-Durchlauf inklusive Ergebnisse funktionierte laut Nutzer.
 
-## Lokale QA
+Damit ist die 1.50.704-Funktionalität live grundsätzlich bestätigt. Der nachfolgende Stand 1.50.705 ist ausschließlich Design-/Bildverbesserung.
 
-- PHP 135/135 PASS;
-- Diff gegen 1.50.703: exakt 3 Dateien;
-- Runtime 862/862 PASS;
-- Profile 862/862 PASS;
-- Route PASS;
-- fehlendes HD-007 fail-closed PASS;
-- gerendertes JavaScript Syntax PASS;
-- ZIP PASS.
+## Neu 1.50.705
+
+- Finder-Akzent nutzt die bestehende Portal-Farbvariable Grün/Petrol statt der separaten blauen Finder-Farbe;
+- aktive Auswahlkarten grün markiert;
+- jede Antwortkachel besitzt ein schlichtes semantisches Linien-Icon;
+- erster Schritt erhält kompaktes Hero-Bild;
+- Hauptüberschrift gekürzt auf **„Finde dein Hobby“**;
+- auf allen Finder-Zuständen stehen **„Zur Startseite“** und **„Neu starten“** zur Verfügung;
+- Ergebniskarten verwenden vorhandene echte Ziel-/Kategorie-Bilder, wenn über das bestehende Zielobjekt auflösbar;
+- fehlt ein reales Bild, wird keine Bild-URL erfunden; neutraler vorhandener Welt-Icon-Fallback;
+- echte Ziel-URLs weiterhin ausschließlich über `hd_category_registry_resolve()`.
+
+## Lokale QA 1.50.705
+
+- PHP-Lint: **135/135 PASS**;
+- JavaScript Syntax: **PASS**;
+- Finder-Runtime-Datensätze: **862/862 PASS**;
+- Score-/Ranking-Funktion gegenüber 1.50.704 byte-identisch: **PASS**;
+- Antwortoptionen mit Icon-Zuordnung: **41/41 PASS**;
+- Kategorie-Bildauflösung Positivtest: **3/3 PASS**;
+- nicht auflösbares Ziel: keine erfundene URL und kein erfundenes Bild: **PASS**;
+- ZIP-Integrität: **PASS**;
+- gegenüber 1.50.704 geändert: Hauptplugin-Version, stabile Profilklasse/Finderbereich, Evidence-Datei.
 
 ## ISOLIERTE CAMPUS-ABLAGE
 
-Das Manifest unter
-`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
-ist auf 1.50.704 aktualisiert; eine `CURRENT.zip` ist dort weiterhin nicht vorhanden.
-
-Der lokale 1.50.704-Release-ZIP wurde in der Abschlussprüfung 2026-10-20 erneut gegen den autoritativen SHA-256 geprüft und ist identisch:
-`558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`.
-
-Keine Ersatz-/Pointerdatei darf als `CURRENT.zip` ausgegeben werden.
+Das Manifest wird auf 1.50.705 aktualisiert.
+Eine echte `CURRENT.zip` ist im GitHub-Campus weiterhin nicht vorhanden; keine Pointerdatei als Ersatz anlegen.
 
 ## ERSTER OFFENER BLOCKER
 
-**Isolierte Campus-Ausgabekopie 1.50.704 `CURRENT.zip` fehlt. Das MANIFEST ist auf 1.50.704 aktualisiert.**
+**Echter WordPress-/Frontend-Readback von HD-003 1.50.705.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Nach dem HD-007-Artefaktsync die hash-identische HD-003-1.50.704-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` synchronisieren. Das MANIFEST ist bereits auf 1.50.704 aktualisiert. Erst danach Liveinstallation/Frontend-Readback.**
+**HD-003 1.50.705 über die installierte 1.50.704-Version installieren/aktualisieren und danach `/hobbyfinder/` visuell prüfen. HD-007 nicht ändern.**
