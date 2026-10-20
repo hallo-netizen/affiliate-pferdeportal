@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **ZENTRALE HOBBY-KLASSIFIKATION V1 ANGELEGT / 54 EIGENSCHAFTEN / 862 IDENTITÄTEN REGISTRIERT / WERTEBEFÜLLUNG OFFEN**
+STATUS: **ZENTRALE HOBBY-KLASSIFIKATION V1 / 20ER-PILOT VOLL KLASSIFIZIERT / 54 EIGENSCHAFTEN GETESTET / MASSENBEFÜLLUNG NOCH OFFEN**
 
 ## Rolle
 
@@ -94,10 +94,28 @@ Kombinationsbegriffe wie „wenig Zeit“ werden aus Grundmerkmalen abgeleitet u
 - schräge Testidentitäten (u. a. Lockpicking, Mushroom Spore Printing, Koji-Kultivierung, Räuchermischungen komponieren): **vorhanden PASS**;
 - Eigenschaftswerte wurden **nicht aus Namen geraten**; aktuell 862/862 `PENDING_REVIEW`.
 
+## 20er-Pilot 2026-10-20
+
+Vollständig klassifiziert:
+3D-Bogenschießen, 3D-Druck, Amateurastronomie, Amateurfunk, Ameisenhaltung, Buchbinden, Filzen, Wabikusa, Lockpicking, Koji-Kultivierung, Mushroom Spore Printing, Parfüm komponieren, Magnetfischen, Geocaching, Wandern, Stricken, Imkerei, Malen, Drohnenfotografie, Goldwaschen.
+
+Ergebnis:
+- 20 Hobbys × 54 Eigenschaften = **1080 schema-valide Zuordnungen**;
+- jede der 54 Eigenschaften zeigt im Pilot mindestens zwei unterschiedliche Ausprägungen;
+- keine Eigenschaft ist im Pilot vollständig wirkungslos;
+- schwach getestete Bereiche: gruppenabhängige Hobbys, Wettbewerb, öffentliche Aufführung, laute Werkstatt, Wassersport;
+- deshalb vor dem Einfrieren des Schemas noch ein gezielter Gegenprobe-Satz nötig.
+
+Persistenter Audit:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_PILOT20_AUDIT_V1.json`
+
+Register-SHA nach Pilot:
+`55d6a0d0281affb1342f63fa7cbf591951a76077c29036e97920c52c3378fbdd`
+
 ## ERSTER OFFENER BLOCKER
 
-Die 54 Eigenschaften sind strukturell festgelegt, aber die tatsächlichen Hobbywerte sind noch nicht fachlich geprüft befüllt.
+Der 20er-Pilot ist vollständig befüllt. Vor der Massenklassifikation fehlen noch gezielte Gegenproben für im Pilot unterrepräsentierte Hobbytypen.
 
 ## EXAKT EINE NEXT ACTION
 
-**Einen bewusst breit gewählten 20-Hobby-Pilot fachlich klassifizieren, die 54 Merkmale an real sehr unterschiedlichen Hobbys testen und danach erst den Eigenschaftskatalog einfrieren bzw. korrigieren. Anschließend die 6–8 Finderfragen aus den bewährten Merkmalen ableiten.**
+**Einen kleinen gezielten Gegenprobe-Satz für gruppenabhängige, wettbewerbliche, öffentliche, laute und wassergebundene Hobbys klassifizieren. Danach Schema einfrieren und erst dann die 842 übrigen Hobbyidentitäten systematisch befüllen.**
