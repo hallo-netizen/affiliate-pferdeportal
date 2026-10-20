@@ -269,6 +269,15 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - Artefakt (KEIN Plugin) Library `/Pferdeatelier/TempVerify/PFERDEATELIER_PFERDERELEVANZ_KONTEXT_DEFINITION_20261020_KEIN_PLUGIN.zip`; SHA256 `b096bf68324edc1ceb7528c0651f360b4f87151169f08f10dbd186676f2e80e3`. Enthält 31 Fallbewertungen, 28 Positivkontrollen, PHP-Gegentest und Ergebnisse.
 - **BLOCKED unverändert.** Keine PHP-Fachlogik geändert, keine WP-Installation, keine Kategorien/Titel/Produktion/K0/PSERC/PPM verändert. NEXT ACTION bleibt ausschließlich zentrale Pferderelevanz semantisch generalisiert korrigieren und historisch + adversarial POS/NEG wiederholen.
 
+## 20.10.2026 – Portalneutraler Relevanz-/CSV-Vertrag V1 (Definition + QA, kein Plugin)
+
+- Nutzerziel: **eine allgemeine Relevanzentscheidung für jedes Themenportal**, mit ausschließlich austauschbarem Portal-Themenprofil; kein Hardcoding von Pferdewörtern im zentralen Entscheidungsprinzip. In der existierenden PSTE-Version ist dies **noch nicht erreicht**.
+- Verbindliche fachliche Abfolge: unverändertes Originalkeyword samt Recherchequelle → tatsächlichen Suchgegenstand und Kontextrolle ermitteln → gegen den Umfang des Portals halten → **JA / NEIN / UNKLAR** mit knapper Begründung. Unklar = bestehender Relevanzprüfweg, keine automatische gebührenpflichtige Nachrecherche. Familie/Kategorie/Titel kein Relevanzkriterium. Derselbe Suchbegriff kann für mehrere Portale relevant sein.
+- CSV ist nur ein wiederverwendbares **Daten-/QA-Format**, **keine neue DB oder operative CSV-Pflicht**: PORTAL_PROFIL_V1.csv (4 Profile); RELEVANZ_CSV_VERTRAG_V1.csv (12 Felder, 3 Demo-Datensätze); RELEVANZ_QA_TESTFAELLE_V1.csv (53 fachlich definierte Erwartungen); Ist-Vergleich und README.
+- Mit unveränderter realer PHP-Kontextklasse und 4 austauschbaren Testprofilen **44 Fälle wiederholt**, davon **27 PASS / 17 FAIL** (Pferdeatelier 6 Fehler, Hab & Bewahr 5, Hobbyrausch 4, Gaumen Atelier 2). Ein nicht automatisch positives Ergebnis ist derzeit nur REVIEW, kein sicheres NEIN. Die neun zusätzlichen QA-Fälle noch nicht gegen PHP geprüft.
+- QA-Archiv (kein WordPress-Plugin): Library /Pferdeatelier/TempVerify/PFERDEATELIER_PORTALNEUTRALER_RELEVANZ_CSV_VERTRAG_20261020_KEIN_PLUGIN.zip, SHA256 0bf39b404dbc945c8e3a122b475e83473a5c49f4ee0462c4559af68fb3766d81.
+- **BLOCKED:** Portalneutraler Zielvertrag definiert, tatsächliche generische semantische Software nicht implementiert/bestanden. Nur Relevanz bearbeiten, keine Titel-, Kategorie-, K0-, PSERC-, PPM- oder Publish-Änderungen.
+
 ## NEXT ACTION
 
 Genau eine: Ausschließlich die zentrale Pferderelevanzentscheidung im vorhandenen PSTE semantisch verbessern. Kontextabhängige eindeutige Pferdethemen erkennen, gleichlautende Fremdthemen zuverlässig ablehnen. Keine Familien- oder Kategoriepflicht bei Relevanz, keine Einzelkeyword-Ausnahmen und keine neue Architektur. Den gleichen historischen 4501er Relevanztest und neue positive/negative Varianten mit echten Negativbeispielen wiederholen. Erst bei bestandenem POS/NEG zum nächsten Fachschritt wechseln; kein installierbares Plugin freigeben.
