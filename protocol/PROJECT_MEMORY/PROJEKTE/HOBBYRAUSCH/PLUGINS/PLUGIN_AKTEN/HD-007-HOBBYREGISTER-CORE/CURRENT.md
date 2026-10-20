@@ -63,10 +63,17 @@ Die im Plugin enthaltene JSON-Datei ist eine hashgebundene Laufzeitprojektion ex
 - Scheduler/Cron: **0**;
 - Netzwerkpfad: **0**.
 
+## Integrationsbindung
+
+Geprüfter Designkandidat:
+`HD-003 1.50.704`
+
+HD-003 liest die Finder-Daten ausschließlich über diese API. Das Design enthält keine persistente 862er-Hobbykopie.
+
 ## ERSTER OFFENER BLOCKER
 
 Echte WordPress-Installation/Aktivierung fehlt.
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-007 1.0.0 als zentrale read-only Hobbyregister-Laufzeitquelle installieren und danach HD-003 Finder ausschließlich über diese API anbinden.**
+**HD-007 1.0.0 installieren/aktivieren und danach den bereits lokal geprüften HD-003-Kandidaten 1.50.704 installieren; anschließend echter Frontend-Readback.**
