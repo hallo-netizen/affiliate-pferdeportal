@@ -3,18 +3,18 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KLASSIFIKATIONSSCHEMA 1.1 / 805 VON 862 HOBBYS VOLL GEPRÜFT / 57 OFFEN**
+STATUS: **HOBBYREGISTER-KLASSIFIKATION COMPLETE / 862 VON 862 REVIEWED / 0 OFFEN**
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_WISSENSDATENBANK`.
 
-Der feste Registervertrag liegt in:
+Fester Registervertrag:
 `HOBBYREGISTER.md`
 
 ## Eine zentrale Datenwahrheit
 
-Persistente Daten:
+Persistente zentrale Daten:
 - `/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATIONSREGISTER_V1.json`
 - `/Hobby Depot/Hobby-Klassifikation/HOBBY_EIGENSCHAFTEN_SCHEMA_V1.json`
 - `/Hobby Depot/Hobby-Klassifikation/HOBBY_KURZPROFIL_SCHEMA_V1.json`
@@ -23,34 +23,47 @@ Finder, Magazin, SEO-Views und Design führen keinen eigenen Hobbybestand.
 
 ## Datenvertrag
 
-- 862 kanonische Hobbyidentitäten;
-- 54 Eigenschaften in 8 Gruppen;
-- Schema-Version 1.1 eingefroren;
-- je vollständig geprüftem Hobby: 54/54 Traits + 4/4 Kurzprofilfelder;
+- **862** kanonische Hobbyidentitäten;
+- **54** Eigenschaften in 8 Gruppen;
+- Schema-Version **1.1** eingefroren;
+- je Hobby **54/54 Traits**;
+- je Hobby **4/4 Kurzprofilfelder**:
+  - Was ist das?
+  - Was macht man?
+  - Was braucht man?
+  - Was ist der Reiz?
 - Kurzprofil ist Präsentationsinhalt, keine Filtereigenschaft;
-- unbekannte Werte werden nicht als `false` geraten;
 - Aliasnamen erzeugen keine zweite Hobbyidentität.
 
-Kurzprofilfelder:
-- Was ist das?
-- Was macht man?
-- Was braucht man?
-- Was ist der Reiz?
+## Finaler geprüfter Stand
 
-## Geprüfter Ist-Stand
+Zentrales Register:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATIONSREGISTER_V1.json`
 
-Letzter zentral gespeicherter Registerstand:
-- Library-Version: **19**;
-- REVIEWED: **805/862**;
-- PENDING_REVIEW: **57/862**;
-- Kurzprofile REVIEWED: **805/862**;
-- letzter abgeschlossener Batch: **016**;
-- Batch 016: **50 Hobbys**;
-- Batch-016-QA: 54/54 Traits + 4/4 Kurzprofilfelder PASS;
-- Register-SHA-256: `6dced4d59347d71aba4b72cdbe1c40144a9f1edce1fe55ade96cad0170ae6923`;
-- Audit: `/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_BATCH016_AUDIT.json`.
+Ergebnis:
+- REVIEWED: **862/862**;
+- PENDING_REVIEW: **0/862**;
+- Kurzprofile REVIEWED: **862/862**;
+- eindeutige Registry-IDs: **PASS**;
+- eindeutige kanonische Namen: **PASS**;
+- 54 Traits je Hobby: **PASS**;
+- alle Traitwerte gegen Schema 1.1: **PASS**;
+- alle Kurzprofile 4/4: **PASS**;
+- Gesamtfehler: **0**.
 
-Die zuvor vorhandenen mehrfach angehängten Satzreste am Dateiende waren reine Current-Datei-Beschädigung und sind hiermit entfernt. Der zentrale JSON-Registerbestand war davon nicht betroffen.
+Finaler Register-SHA-256:
+`4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`
+
+Schlussbatches:
+- Batch 017: 50 Hobbys, 855/862, Audit `HOBBY_KLASSIFIKATION_BATCH017_AUDIT.json`;
+- Batch 018: 7 Hobbys, 862/862, Audit `HOBBY_KLASSIFIKATION_BATCH018_AUDIT.json`.
+
+Gesamtprüfung:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_COMPLETE_AUDIT.json`
+
+## Current-Datei-Reparatur
+
+Die zuvor mehrfach angehängten Satzreste am Dateiende waren eine reine Beschädigung dieser Statusdatei. Sie wurden entfernt. Der zentrale JSON-Registerbestand war davon nicht betroffen.
 
 ## Hobbyfinder
 
@@ -64,8 +77,8 @@ Grundoptik und Ablauf wurden vom Nutzer positiv bestätigt.
 
 ## ERSTER OFFENER BLOCKER
 
-**57 Hobbyidentitäten sind noch nicht vollständig klassifiziert und haben noch kein geprüftes Kurzprofil.**
+**Kein Klassifikationsblocker mehr.** Der vollständige 862er-Bestand ist zentral klassifiziert.
 
 ## EXAKT EINE NEXT ACTION
 
-**Die restlichen 57 Hobbyidentitäten in den Schlussbatches 017 und 018 nach Schema 1.1 vollständig klassifizieren, zentral speichern, Gesamt-QA über 862/862 ausführen und den Current-Stand auf COMPLETE setzen.**
+**Den Hobbyfinder-Prototyp auf den vollständigen zentralen 862er-Bestand umstellen und anschließend Ranking/Ergebnisdarstellung mit dem Vollbestand positiv und negativ prüfen.**
