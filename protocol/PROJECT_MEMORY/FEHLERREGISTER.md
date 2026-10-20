@@ -112,3 +112,8 @@ Bereich: PFERDE_ATELIER / PLUGINS / PPA-005 + PPA-006
 Status: OFFEN / Gesamtworkflow nicht abgenommen  
 Autoritative Fehler-/Testchronik: `PROJEKTE/PFERDE_ATELIER/PLUGINS/UPDATEPROTOKOLL.md`, Vorgang `PU-20261017-001`.  
 Einziger operativer Current-/Blocker-/NEXT-ACTION-Stand: `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`.
+
+## EIGENTUMSSCHUTZ-VERSICHERUNGEN-20261020
+Bereich: EIGENTUMSSCHUTZ / KONZEPT / neue Versicherungswelt.
+Status: Konzept lokal geprüft, WordPress-Aufnahme und Live-Import noch nicht freigegeben. Historische Fehlerdetails und Zustände ausschließlich in `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md` unter HB-INS-20261020-01 bis 05.
+Current und genau eine aktuelle NEXT ACTION ausschließlich aus `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`.
