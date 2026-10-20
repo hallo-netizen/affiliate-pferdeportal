@@ -1,6 +1,21 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 20.10.2026 – VERSICHERUNGEN: KORRIGIERT AUF KOMPAKTE BEGLEIT-HAUPTKATEGORIE (NEUESTE AUTORITÄT)
+**Nutzerentscheidung vorgegeben, nicht neu auswerten:** Hab & Bewahr ist weiterhin ein Portal zum Eigentumsschutz. Versicherungen sind **genau eine ergänzende siebte Hauptwelt**, KEIN eigenständiges Versicherungsportal. Die zuvor ausdrücklich beschlossenen Themen **einschließlich Rente, Leben und Kapital** bleiben vollständig erhalten. Keine erneute allgemeine Versicherungsfachrecherche, kein Themenausschluss nach Portalbezug, keine Artikelplanung.
+
+**Fachliche Strukturkorrektur:** Der alte Versicherungsentwurf mit 1 R1 + 12 R2 + 105 R3 + 358 flachen Kategorien = **476 vorgeschlagenen Objekten** war unverhältnismäßig groß und ist als künftige Importvorlage **ABGELÖST / NICHT AUSFÜHREN**. Der neue Kompaktplan umfasst **1 R1 + 5 R2 + 20 gebündelte R3 + 68 flache Endkategorien = 94 vorgeschlagene Objekte (26 Seiten + 68 Kategorien)**. 105/105 alte Einzelversicherungen sind **exakt einmal** einer der 20 Themen-/Sammelseiten zugeordnet. 28 ausgesprochen schmale Spezialpolicen sind ausdrücklich als **künftige Einzelbeitrags-Kandidaten** im jeweiligen Themenowner gekennzeichnet; konkrete Artikelentscheidung und Titel nur später durch SEO/Redaktionsplan. R1→R2→R3→flache WP-`category` unverändert. FAQ und Beratung je Sammelseite sinnvoll, andere Endkategorien individuell und grob auf 3–5 künftige Beitragsperspektiven geprüft. Auch 20 Sammelseiten und 68 Kategorien sind **fachliche Vorschläge, keine Pflichtquoten für künftigen Ausbau**.
+
+**Fünf Bereiche:** Haus & Werte; Mobilität & Freizeit; Haftung & Gemeinschaft; Gesundheit & Vorsorge; Betrieb & Finanzen. Vier gebündelte Themenseiten pro Bereich. Insbesondere gesetzliche/private Kranken-, Arbeitskraft-, Renten-, Lebens- und Kapitalabsicherung bewusst erhalten, auch wenn kein enger Eigentumsbezug besteht.
+
+**Quellen:** `KONZEPT/VERSICHERUNGEN_KOMPAKT_26_SEITEN_68_KATEGORIEN_105_THEMEN_20261020.json` ist die **einzige neue ausführliche fachliche Kandidatenquelle** (keine zusätzliche Current-Autorität); `KONZEPT/VERSICHERUNGEN_KOMPAKT_94_STRUKTURTEST_20261020.json` belegt positiven Datenstrukturtest und 10/10 korrekt blockierte absichtlich defekte Varianten. Dies ist **keine** echte PHP-Plugin-/WordPress-Simulation. Alte 433er-, 476er- und Zwischen-481er-Vorlagen nur historisch; **niemals importieren**.
+
+**Technisch:** Kein WP-Import, keine Pluginänderung, keine neuen DataForSEO-Kosten, keine Artikel oder Artikeltitel. Die bestehenden 265 R3-Seiten des Eigentumsschutzportals, alle dokumentierten 1323 Alt-Kategorienterme und historische Wellen 743/472/471 bleiben unangetastet. Live-Readback/Slugkollisionen und die aktive Pluginversion fehlen weiter.
+
+**GENAU EINE NEXT ACTION:** Die **94er-Kompaktvorlage** am Original des bestehenden `affiliate-portal-kategorie-workflow` (nicht am alten 471er-Kategorienmodul) als separate, ausschließlich additive neue Versicherungswelt integrieren, lokal mit positiven und negativen echten WP-/Plugin-Mocks prüfen und erst dann ein vollständiges installationsfertiges ZIP und kostenlosen WP-Preflight bereitstellen. Reale Installation/Import **nur nach gesonderter Nutzerfreigabe**. Die 476er-Vorlage darf nicht mehr zum technischen Auftrag werden.
+
+---
+
 ## 20.10.2026 – VERSICHERUNGEN: FACHLICHE KATEGORIENKORREKTUR NACH NUTZERKLARSTELLUNG (AKTUELL)
 **Ziel und Grenze:** Kategoriebüro prüft ausschließlich je Versicherungsseite und je letzter Inhaltskategorie das grobe Potenzial für etwa 3–5 eigenständige spätere Beiträge. **Keine Artikelideen, keine Überschriften, keine Texterstellung, keine SEO-Artikelprüfung**. Wiederkehrende FAQ und Beratung sind inhaltlich oft sinnvoll und daher in allen 105 Versicherungsseiten nach ihrem groben Stofffeld berücksichtigt; darüber hinaus sind Zusatzkategorien ausschließlich individuell begründet. Keine starren Anzahlen und keine mechanische dritte Kategorie.
 
