@@ -2058,7 +2058,7 @@
           "proof_fields": [
             "Reisedauer",
             "Geltungsraum",
-            "Rücktransport"
+            "Vorerkrankungen"
           ]
         },
         {
@@ -2233,8 +2233,8 @@
           "label": "FAQ",
           "proof_fields": [
             "Gerätearten",
-            "Transport",
-            "Deckungsort"
+            "Versicherungsort",
+            "Deckungsumfang"
           ]
         },
         {
