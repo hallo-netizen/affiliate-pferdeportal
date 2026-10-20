@@ -51,9 +51,9 @@ Größe:
 
 ## ISOLIERTE CAMPUS-ABLAGE
 
-Das vorhandene Manifest unter
+Das Manifest unter
 `../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
-steht noch auf 1.50.699; eine `CURRENT.zip` ist dort nicht vorhanden.
+ist auf 1.50.704 aktualisiert; eine `CURRENT.zip` ist dort weiterhin nicht vorhanden.
 
 Der lokale 1.50.704-Release-ZIP wurde in der Abschlussprüfung 2026-10-20 erneut gegen den autoritativen SHA-256 geprüft und ist identisch:
 `558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`.
