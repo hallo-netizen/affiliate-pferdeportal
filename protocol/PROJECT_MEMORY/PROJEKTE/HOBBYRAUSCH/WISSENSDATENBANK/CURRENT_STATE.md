@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 30 HOBBYS GEPRÜFT / 832 OFFEN / HOBBYFINDER FUNNEL V1 LOKAL GETESTET**
+STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 30 HOBBYS GEPRÜFT / KURZPROFIL-SCHEMA V1 AKTIV / 832 KLASSIFIKATIONEN OFFEN**
 
 ## Rolle
 
@@ -142,10 +142,37 @@ Klickbarer Prototyp:
 
 Funnel: 8 Schritte – Motivation, Sozialform, Ort, Zeit, Budget, Platz, Aktivität, Verbindlichkeit. Die übrigen Traits bleiben Hintergrundlogik bzw. Feinfilter. Vier unterschiedliche Testprofile lieferten vier unterschiedliche Top-Treffer.
 
+## Zentrales Kurzprofil für Ergebnis-/Hobbykarten
+
+Neu verbindlich:
+Jede kanonische Hobbyidentität besitzt zusätzlich zu den Filter-Traits einen **separaten Präsentationsblock**. Dieser ist ausdrücklich **keine Filtereigenschaft**.
+
+Schema:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KURZPROFIL_SCHEMA_V1.json`
+
+Pflichtfelder:
+- `what_is_it` = Was ist das?
+- `what_do_you_do` = Was macht man?
+- `what_do_you_need` = Was braucht man?
+- `appeal` = Was ist der Reiz?
+
+Stil:
+kurz, konkret, keine Füllwörter, keine Werbesprache, keine Wiederholung des Hobbynamens.
+
+Stand:
+- Struktur bei **862/862** Hobbydatensätzen vorhanden;
+- **30/862** Kurzprofile fachlich formuliert;
+- **832/862** bleiben `PENDING_PROFILE`, bis das jeweilige Hobby regulär bearbeitet wird;
+- Kurzprofilwerte werden nicht aus dem Hobbynamen automatisch erzeugt.
+
+Finder-Prototyp:
+`/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_PROTOTYP_V1.html`
+zeigt die vier Kurzprofilfelder nun direkt auf den Ergebniskarten.
+
 ## ERSTER OFFENER BLOCKER
 
-Die zentrale Logik ist belastbar; **832 Hobbyidentitäten sind noch nicht fachlich klassifiziert**. Der UI-Prototyp ist noch nicht vom Nutzer gestalterisch abgenommen.
+Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **832 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Die restlichen 832 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren. Unklare Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation. Parallel darf der UI-Prototyp erst nach Nutzerfeedback gestalterisch weiterentwickelt werden.**
+**Die restlichen 832 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
