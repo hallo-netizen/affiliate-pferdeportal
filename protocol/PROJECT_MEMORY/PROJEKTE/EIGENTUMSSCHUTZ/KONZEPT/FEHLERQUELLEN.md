@@ -6,6 +6,13 @@ KORREKTUR: Beschlossene Inhalte inklusive Renten-, Lebens- und Kapitalversicheru
 NACHWEIS: `KONZEPT/VERSICHERUNGEN_KOMPAKT_26_SEITEN_68_KATEGORIEN_105_THEMEN_20261020.json`; `KONZEPT/VERSICHERUNGEN_KOMPAKT_94_STRUKTURTEST_20261020.json`, 105/105 exakt einmal abgedeckt, 10/10 datenbezogene Negativfälle blockiert.
 GRENZE: Diese Prüfungen validieren den neuen Plan, nicht die Live-Installation. Noch kein neues WP-/Plugin-Release, kein Import, kein kostenpflichtiger Provider-Aufruf.
 
+## HB-INS-20261020-09 – 3er-Facetten-Schablone unter allen 46 Versicherungs-R3 statt notwendiger fachlicher Tiefe
+**Fehler:** Der 1.14.8.36-SEO-Reparaturlauf korrigierte 46 R3 auf reale Keywords, erzeugte darunter aber pauschal exakt `Häufige Fragen`, `Beratung`, ein allgemeines Schaden-/Leistungsfeld. Vorhandene 138 Endkategorien allein blieben sachlich unvollständig. Zielvertrag ist keine Anzahl-Schablone.
+**Korrektur:** 46/46 individuell fachlich geprüft, 185 **konkret benannte**, intent-abgegrenzte Endkategorien mit drei unabhängigen groben Inhaltsachsen zusätzlich ausgearbeitet; neue Gesamtzahl 323 (keine weiteren Seiten oder Ebene). Add-only 1.14.8.37 mit tatsächlichem Original-TargetWriter lokal positiv/negativ inkl. Rückbau geprüft. Altbestand unverändert.
+**Wichtige SEO-Grenze:** DataForSEO-Overview des 20.10. belegt die 45 R3-Topbegriffe; für die neu benannten 185 Subkategorien liegt KEINE separate Provider-Keywordmessung vor. Nicht als bewiesene Suchvolumen ausgeben. Keine automatische API-Kostenfreigabe.
+**Belege:** `../KATEGORIEN/C26_INSURANCE_DEPTH_SOURCE/PRUEFBERICHT_20261020.md` sowie Manifest und PHP-Klasse dort.
+**Status:** Fachliche Liste und vollständiges ZIP 1.14.8.37 bereit, WP-Echtimport noch OFFEN.
+
 ## HB-INS-20261020-08 – Durch Zahlenreduktion konkrete Keyword-Ebene zerstört
 **Befund:** 94er-C2.4-Import real durchgeführt, Nutzer-Screenshot belegt 7. Welt im Frontend. Unter R2 „Betrieb & Finanzen“ erschienen Sammel-R3 „Ausfall & Mitarbeitende“, „Betriebliche Sachwerte“, „Haftung & Recht im Betrieb“ statt suchbezogener Versicherungsarten. FAQ/Beratung wurden auf einer thematisch zu groben Ebene erzeugt. Technisch grüner Lauf prüfte das falsche Fachkonzept.
 **Gesicherte Ursache:** Der Plan 1/5/20/68 hatte 105 konkrete Versicherungen zu nur 20 allgemeinen R3-Seiten zusammengezogen – anders als die sechs Bestandswelten R1→R2→konkretes R3→flache Artikelkategorie. Der vorhandene DataForSEO-Overview von 2026-10-20 wurde nur als Begriffsliste behandelt und bei der endgültigen R3-Auswahl ignoriert.
