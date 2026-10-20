@@ -1,4 +1,4 @@
-name: Hab Bewahr Insurance ZIP Transfer
+name: Hab Bewahr Insurance ZIP Transfer and SEO Manifest
 on:
   push:
     branches:
@@ -32,5 +32,12 @@ jobs:
         with:
           name: hab-und-bewahr-kategorie-workflow-1-14-8-33
           path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip
+          if-no-files-found: error
+          retention-days: 1
+      - name: Publish exact keyword insurance correction profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: hab-und-bewahr-insurance-seo-repair-manifest
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/VERSICHERUNGEN_SEO_KORREKTUR_52_SEITEN_138_ENDKATEGORIEN_105_ARTEN_20261020.json
           if-no-files-found: error
           retention-days: 1
