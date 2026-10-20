@@ -3,9 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **SEO-TRENNUNG FEST / CORE 1.0.2 DESIGN-PROBE LOCAL PASS / 6 PROBEBEGRIFFE VORBEREITET / LIVE OFFEN**
-
-## Entscheidung
+STATUS: **CORE 1.0.4 ROUTENFIX LOCAL PASS / KANONISCHE URL FEST / LIVE OFFEN**ntscheidung
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -114,7 +112,31 @@ Persistente Arbeitskopie:
 - Taxonomie nicht öffentlich/indexierbar;
 - Draft-Batchvertrag vorhanden.
 
+## ROUTENFIX 1.0.4
+
+Kanonische Glossar-Hauptseite:
+`/magazin/wissen-glossar/`
+
+Die fehlerhafte 1.0.3-Logik mit eigener Root-Seite `/glossar/` ist entfernt. 1.0.4 bindet ausschließlich die bestehende Magazinstruktur. Fehlt die Unterseite, wird nur `wissen-glossar` als Kind der vorhandenen `magazin`-Seite angelegt. Keine zweite Glossar-Haupt-URL.
+
+Begriff-URLs:
+`/magazin/wissen-glossar/begriff/<slug>/`
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.4_KANONISCHE_URL_INSTALLIEREN.zip`
+
+SHA-256:
+`587b7be7813a2c136c2b32bc20699519bad9f01d41faf0b5ff064e4d03ea8c52`
+
+PHP-Lint 7/7 PASS; ZIP-Integrität PASS.
+
 ## ERSTER OFFENER BLOCKER
+
+Echter WordPress-Live-Readback der kanonischen URL nach Installation von 1.0.4.
+
+## EXAKT EINE NEXT ACTION
+
+**1.0.4 über die vorhandene Glossar-Version installieren und ausschließlich https://hobby-depot.de/magazin/wissen-glossar/ prüfen.**
 
 Finales Hobby-Depot-Glossar-Design noch nicht auf Basis des bestätigten Sicherheit-Glossars umgesetzt.
 
