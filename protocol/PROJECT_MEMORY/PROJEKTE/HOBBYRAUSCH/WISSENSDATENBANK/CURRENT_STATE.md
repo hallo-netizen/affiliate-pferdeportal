@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KLASSIFIKATIONSSCHEMA 1.1 / 505 HOBBYS VOLL GEPRÜFT / KURZPROFILE 505/862 / 357 OFFEN**
+STATUS: **KLASSIFIKATIONSSCHEMA 1.1 / 555 HOBBYS VOLL GEPRÜFT / KURZPROFILE 555/862 / 307 OFFEN**
 
 ## Rolle
 
@@ -209,10 +209,19 @@ Finder-Prototyp nutzt nun **55** vollständig klassifizierte Hobbys und zeigt au
 - Register-SHA: `28898b8506cd32ce18879086f44c3da4704b6618f45935670175f7451548ae01`;
 - Audit: `/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_BATCH010_AUDIT.json`.
 
+## Klassifikationsbatch 011
+
+- 50 Hobbys zusätzlich REVIEWED;
+- Gesamtstand **555/862**;
+- offen **307/862**;
+- 54/54 Traits + 4/4 Kurzprofilfelder je Hobby PASS;
+- Register-SHA: `a6c1dbdd1d1bab668151ad90a589ee56b1f45f8732523c7664592a3cbdbff2dd`;
+- Audit: `/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_BATCH011_AUDIT.json`.
+
 ## ERSTER OFFENER BLOCKER
 
-Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **357 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
+Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **307 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Die restlichen 357 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
+**Die restlichen 307 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
