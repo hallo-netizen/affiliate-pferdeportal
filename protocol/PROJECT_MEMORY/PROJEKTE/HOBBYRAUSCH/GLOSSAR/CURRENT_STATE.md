@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **HOBBY-DEPOT GLOSSAR CORE 1.0.0 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
+STATUS: **HOBBY-DEPOT GLOSSAR CORE 1.0.1 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
 
 ## Entscheidung
 
@@ -29,16 +29,16 @@ Damit bleibt die bestehende Hobby-Depot-Grundregel erhalten: **pro primärem Suc
 ## Installationskandidat
 
 Plugin:
-**Hobby Depot Glossar Core 1.0.0**
+**Hobby Depot Glossar Core 1.0.1**
 
 Artefakt:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
 
 SHA-256:
-`90debeaf31e8a95ad449c7fe355f1ea3862ab9342feaf5d1fdc700b323a50e59`
+`b686655bc2571548248fe278c4a74e7db927503f92900c9a661d173b6d04329a`
 
 Persistente Arbeitskopie:
-`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
 
 ## Herkunft / Bereinigung
 
@@ -49,7 +49,7 @@ Belegt als fachliche Referenz:
 Zusätzlich wurde der echte neutrale Universal-Glossary-Engine-Quellstand aus dem geprüften 0.2.7-Actions-Artefakt verwendet.
 
 Wichtig:
-Die exakten Pferde-1.4.0-Bytes waren nicht als kopierbares Paket erreichbar. Deshalb ist 1.0.0 **kein vorgetäuschter byteidentischer Klon**, sondern eine saubere Hobby-Depot-Fassung aus neutralem Quellkern + aktuellem belegtem Funktionsvertrag.
+Die exakten Pferde-1.4.0-Bytes waren nicht als kopierbares Paket erreichbar. Deshalb ist 1.0.1 **kein vorgetäuschter byteidentischer Klon**, sondern eine saubere Hobby-Depot-Fassung aus neutralem Quellkern + aktuellem belegtem Funktionsvertrag.
 
 Entfernt/nicht übernommen:
 - Pferdebegriffe;
@@ -78,6 +78,7 @@ Kein Auto-Publish.
 
 - PHP-Lint: **7/7 PASS**;
 - ZIP-Integrität: **PASS**;
+- WordPress-Paketstruktur: **PASS** – exakt ein oberster Plugin-Ordner; Plugin-Hauptdatei direkt darin;
 - Pferde-/Horse-/pa_breed-Code: **0**;
 - WordPress-Scheduler/Cron-Produktion: **0**;
 - zentrale Hauptseitenbindung vorhanden;
@@ -87,7 +88,7 @@ Kein Auto-Publish.
 
 ## Installation Hobby Depot
 
-Noch nicht installiert.
+Noch nicht installiert. Der erste 1.0.0-Upload wurde von WordPress wegen einer fehlerhaften ZIP-Verpackung abgelehnt; der Code selbst war syntaktisch gültig. In 1.0.1 ist ausschließlich die Paketstruktur korrigiert.
 
 ## ERSTER OFFENER BLOCKER
 
@@ -95,4 +96,4 @@ Echter WordPress-Installations- und Frontend-Readback.
 
 ## EXAKT EINE NEXT ACTION
 
-**HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip im Hobby Depot installieren, noch keine Massenbefüllung starten und zuerst zentrale Glossar-Seite + einen Testbegriff positiv/negativ prüfen.**
+**HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip im Hobby Depot installieren, noch keine Massenbefüllung starten und zuerst zentrale Glossar-Seite + einen Testbegriff positiv/negativ prüfen.**
