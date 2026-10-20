@@ -483,3 +483,8 @@ Reproduzierbarer Mindestdiff in dem tatsächlichen 0.57.107-Controller:
 - Gegenproben 500 POS: 487 PASS/13 offen, 500 NEG: 500 nicht auto-positiv, Sonder-15 POS: 15 PASS, Sonder-31 NEG: 17 PASS/**14 falsch auto-positiv**. 79/79 PHP-Lints PASS, Patch dry-run und bytegenaue Anwendung PASS. Gegenversuch mit aggressiverer `für`-Sperre wegen acht historischer Rückstufungen verworfen, nicht übernommen.
 - QA ZIP `/Pferdeatelier/TempVerify/PSTE_PFERDERELEVANZ_SEMANTIK_QA_20261020_KEIN_PLUGIN.zip`, SHA256 `33df3a40752ab76226d3ef81010fb6430aabd07410d156b8f4fbf9b41854f8b2`. Enthält reproduzierbare Quellen und sämtliche testrelevanten Gegenbeispiele; ausdrücklich kein Installationsplugin.
 - **Keine semantische Freigabe**, keine Nebenthemen bearbeiten. NEXT ACTION ausschließlich allgemeine Sprach-/Bedeutungsprüfung des vorhandenen Relevanzentscheids verbessern, Positiv-/Negativtests erneut. Kein Keyword-Sonderregel-Flicken.
+
+### 20.10.2026 – Kontextdefinition schwieriger Fremdthemen – zum laufenden PU-20261017-001
+- Nur Testerwartungen definiert: 31 spezielle Fremdtests (27 NOT_PFERD, 4 REVIEW), 28 positive Kontrollen; systematische Unterscheidung Suchziel, Bedeutung, Tätigkeit/Ort, Menschennutzung. Keine zusätzlichen Produktionsregeln/Blacklist.
+- Unveränderte letzte PHP-Klasse lokal in 14 Kontrastfällen getestet: 8 PASS, 6 FAIL, sodass keine Freigabe beansprucht wird.
+- Nur QA-ZIP `/Pferdeatelier/TempVerify/PFERDEATELIER_PFERDERELEVANZ_KONTEXT_DEFINITION_20261020_KEIN_PLUGIN.zip` (SHA256 `b096bf68324edc1ceb7528c0651f360b4f87151169f08f10dbd186676f2e80e3`). Status BLOCKED, eine NEXT ACTION Pferderelevanzsemantik; alles andere unverändert.
