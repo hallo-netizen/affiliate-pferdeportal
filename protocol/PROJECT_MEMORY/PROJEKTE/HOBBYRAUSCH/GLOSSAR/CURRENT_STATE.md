@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **CORE 1.0.4 ROUTENFIX LOCAL PASS / KANONISCHE URL FEST / LIVE OFFEN**ntscheidung
+STATUS: **CORE 1.0.6 ROUTENKONFLIKT REPRODUZIERT + LOCAL HTTP HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -112,23 +112,35 @@ Persistente Arbeitskopie:
 - Taxonomie nicht öffentlich/indexierbar;
 - Draft-Batchvertrag vorhanden.
 
-## ROUTENFIX 1.0.4
+## ROUTENFIX 1.0.6 – REPRODUZIERT + HARD PASS
 
-Kanonische Glossar-Hauptseite:
+Kanonische URL:
 `/magazin/wissen-glossar/`
 
-Die fehlerhafte 1.0.3-Logik mit eigener Root-Seite `/glossar/` ist entfernt. 1.0.4 bindet ausschließlich die bestehende Magazinstruktur. Fehlt die Unterseite, wird nur `wissen-glossar` als Kind der vorhandenen `magazin`-Seite angelegt. Keine zweite Glossar-Haupt-URL.
+Der echte Konflikt mit dem aktuellen Hobby-Depot-Design 1.50.705 wurde lokal reproduziert:
+- Glossar 1.0.5 wählte zuerst das Glossar-Template;
+- das Designplugin übernahm danach mit `template_include` Priorität 99999;
+- Ergebnis: `hobby-depot-front-v150699.php` = Startseite.
 
-Begriff-URLs:
-`/magazin/wissen-glossar/begriff/<slug>/`
+1.0.6 bedient deshalb ausschließlich die exakte Glossar-Route bereits in `template_redirect`, also vor dem Design-Template-Router.
+
+Lokale HTTP-Integrationssimulation mit den echten beiden Plugin-Codebasen:
+- `/magazin/wissen-glossar/` → 200, Glossar JA, Startseite NEIN: PASS
+- ohne Schluss-Slash → Glossar JA: PASS
+- mit Such-Query → Glossar JA: PASS
+- doppelter Pfad → Glossar NEIN: PASS
+- alte `/glossar/`-Route → Glossar NEIN: PASS
+- Startseite `/` → Startseite JA, Glossar NEIN: PASS
+- PHP 8/8 Syntax PASS
+- ZIP-Integrität PASS
 
 Artefakt:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.4_KANONISCHE_URL_INSTALLIEREN.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.6_ROUTE_CONFLICT_HARDPASS_INSTALLIEREN.zip`
 
 SHA-256:
-`587b7be7813a2c136c2b32bc20699519bad9f01d41faf0b5ff064e4d03ea8c52`
+`be9f98f4dabd2728985f7252a77c5e617038cf3905914df597742eeb80e60e3f`
 
-PHP-Lint 7/7 PASS; ZIP-Integrität PASS.
+Wichtig: Das ist ein lokaler Integrations-Hard-Pass, noch kein Live-Pass.
 
 ## ERSTER OFFENER BLOCKER
 
@@ -136,10 +148,4 @@ Echter WordPress-Live-Readback der kanonischen URL nach Installation von 1.0.4.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.4 über die vorhandene Glossar-Version installieren und ausschließlich https://hobby-depot.de/magazin/wissen-glossar/ prüfen.**
-
-Finales Hobby-Depot-Glossar-Design noch nicht auf Basis des bestätigten Sicherheit-Glossars umgesetzt.
-
-## EXAKT EINE NEXT ACTION
-
-**Glossar-Frontend von Hobby Depot auf das bewährte Sicherheit-Design angleichen, ohne Begriffe massenhaft zu produzieren; danach mit 1–2 echten Testbegriffen SEO-Owner-Regel, Textvertrag und Darstellung gemeinsam abnehmen.**
+**1.0.6 über die vorhandene Glossar-Version installieren und ausschließlich https://hobby-depot.de/magazin/wissen-glossar/ live prüfen. Keine weitere Version vor diesem Readback.**
