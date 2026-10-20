@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **ORIGINAL PFERDEATELIER 2.7.6 BYTEGENAU VERIFIZIERT / HOBBY DEPOT 2.7.7 DARAUS ABGELEITET / LOCAL PASS / LIVE OFFEN**
+STATUS: **ORIGINAL PFERDEATELIER 2.7.6 BYTEGENAU VERIFIZIERT / HOBBY DEPOT 2.7.8 DARAUS ABGELEITET / LOCAL PASS / LIVE OFFEN**
 
 ## Korrektur
 
@@ -33,24 +33,32 @@ Unveränderte Beweiskopie im Hobby-Depot-Bildbüro:
 ## Aktueller Hobby-Depot-Kandidat
 
 Plugin:
-**Hobby Depot Bildzentrale 2.7.7**
+**Hobby Depot Bildzentrale 2.7.8**
 
 Artefakt:
-`HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip`
+`HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
 
 ZIP SHA-256:
-`c27eff9a48007a5317832cf3d6f539d49856a1e6edaf92eebd1bfdb89e030ab7`
+`d9d8caad4c2f4057fee30f9d21607376fa110d82defed8c0f759e5c202b83342`
 
 Hauptdatei:
-- Größe: **317483 Bytes**
-- SHA-256: `5126d57a1a04d75e561bf7eab35227e176a04352eb70f587a4f392e463331b38`
+- Größe: **320401 Bytes**
+- SHA-256: `edda98383add25fc2d02bf35bfff433b2c5ded332cc21a0fc43a82577e6004ec`
 
 Ablagen:
-- `/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip`
-- `/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip`
+- `/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
+- `/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
 
 Nachweis:
-`/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_2.7.7_NACHWEIS.md`
+`/Hobby Depot/Bildzentrale/HOBBY_DEPOT_BILDZENTRALE_2.7.8_NACHWEIS.md`
+
+## Bildprompt 2.7.8
+
+Der gemeinsam festgelegte Hobby-Depot-Grundprompt ist jetzt zentral verbindlich. Er fordert ein klares, ruhiges, nicht überladenes Hauptmotiv; Tätigkeit vor Objekt, wenn sinnvoll; Menschen/Hände/Arme zur Verdeutlichung der Tätigkeit; keine dekorativen Personen; keine Collagen, Split-Bilder, Schrift, Logos oder Wasserzeichen.
+
+Bei Beiträgen wird das konkrete Bildthema weiterhin automatisch aus dem Inhalt abgeleitet, jetzt ausdrücklich aus **Titel + Kurztext + bis zu 120 Wörtern Beitragsinhalt**. Für WordPress-Kategorien, Post-Type-Heros und HivePress wird dieselbe zentrale Bildregel zusätzlich vor die jeweiligen Profilregeln gesetzt.
+
+Lokaler Positivtest Holzschnitzen: Titel/Kurztext/Inhalt/Hände-Regel/nicht-überladen-Regel PASS; erzeugter Prompt 2874/3000 Zeichen.
 
 ## Exakter Delta-Grundsatz
 
@@ -129,7 +137,9 @@ Der eindeutig belegte Pferde-Sonderautomatismus `pa_breed` ist vollständig entf
 - Pferdeatelier/Pferd/Horse/`pa_breed`/Rasse/Breed/Equestrian im Zielcode: 0;
 - feste ID 9120: 0;
 - alter Pferdeatelier-Admin-/REST-Slug: 0;
-- allgemeine Kernwege gegen Original: PASS.
+- allgemeine Kernwege gegen Original: PASS;
+- Delta 2.7.7 → 2.7.8: 10 geänderte/neue Funktionen, ausschließlich Prompt-/Themenableitung plus Export-Versionswert;
+- WordPress-Paketstruktur 2.7.8: PASS.
 
 ## Installation
 
@@ -141,4 +151,4 @@ Echter WordPress-Installations- und Funktionsreadback im Hobby Depot.
 
 ## EXAKT EINE NEXT ACTION
 
-**Nur `HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip` installieren und zuerst Backend, Provider-Verbindungen, einen Beitrag und eine leere Kategorie positiv/negativ prüfen. Keine Massenbebilderung starten.**
+**Nur `HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip` installieren und zuerst Backend, Provider-Verbindungen, einen Beitrag und eine leere Kategorie positiv/negativ prüfen. Keine Massenbebilderung starten.**
