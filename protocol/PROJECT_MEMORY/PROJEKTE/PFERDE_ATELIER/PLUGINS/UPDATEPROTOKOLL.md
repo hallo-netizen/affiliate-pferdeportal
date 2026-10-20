@@ -488,3 +488,9 @@ Reproduzierbarer Mindestdiff in dem tatsächlichen 0.57.107-Controller:
 - Nur Testerwartungen definiert: 31 spezielle Fremdtests (27 NOT_PFERD, 4 REVIEW), 28 positive Kontrollen; systematische Unterscheidung Suchziel, Bedeutung, Tätigkeit/Ort, Menschennutzung. Keine zusätzlichen Produktionsregeln/Blacklist.
 - Unveränderte letzte PHP-Klasse lokal in 14 Kontrastfällen getestet: 8 PASS, 6 FAIL, sodass keine Freigabe beansprucht wird.
 - Nur QA-ZIP `/Pferdeatelier/TempVerify/PFERDEATELIER_PFERDERELEVANZ_KONTEXT_DEFINITION_20261020_KEIN_PLUGIN.zip` (SHA256 `b096bf68324edc1ceb7528c0651f360b4f87151169f08f10dbd186676f2e80e3`). Status BLOCKED, eine NEXT ACTION Pferderelevanzsemantik; alles andere unverändert.
+
+### 20.10.2026 – Portalneutraler Relevanz-/CSV-Vertrag V1 – Nachweis innerhalb PU-20261017-001
+- Portalneutraler Relevanz-Zielvertrag: Portalprofil beschreibt Umfang; Original-Keyword mit Recherchequelle; Entscheidung JA/NEIN/UNKLAR. Nur QA/CSV-Definition, keine neue DB, Freigabegate oder Architektur.
+- 53 menschlich definierte QA-Fälle; 44 tatsächlich mit der unveränderten originalen PHP-Funktion und vier Testprofilen erneut ausgewertet: 27 PASS/17 FAIL. Pferdeatelier 6, Hab & Bewahr 5, Hobbyrausch 4, Gaumen Atelier 2 Fehler. Weitere neun Fälle noch nicht gegen PHP ausgeführt.
+- QA-Paket: /Pferdeatelier/TempVerify/PFERDEATELIER_PORTALNEUTRALER_RELEVANZ_CSV_VERTRAG_20261020_KEIN_PLUGIN.zip SHA256 0bf39b404dbc945c8e3a122b475e83473a5c49f4ee0462c4559af68fb3766d81 (Profile, CSV-Ergebnisvertrag, Fallproben, Ist-Vergleich, README).
+- Status weiterhin BLOCKED. Nächster Schritt ausschließlich die bestehende zentrale Relevanzbewertung semantisch und portalneutral vereinheitlichen und Positiv/Negativ testen. Kein Plugin-Release.
