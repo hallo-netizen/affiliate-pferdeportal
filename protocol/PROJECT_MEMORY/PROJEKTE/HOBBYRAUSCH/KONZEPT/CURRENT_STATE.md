@@ -136,4 +136,4 @@ Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker steh
 
 ## EXAKT EINE NEXT ACTION
 
-**Klickbaren Hobbyfinder-Prototyp V1 gestalterisch/bedienerisch abnehmen. Bis dahin keine WordPress-Implementierung des Finders. Die bestehende V7.1-SEO-Struktur bleibt davon unberührt.**
+**Der Prototyp ist gestalterisch/bedienerisch vom Nutzer positiv bestätigt und mit dem vollständigen 862er-Bestand lokal positiv/negativ geprüft. Nächster Konzeptschritt ist ausschließlich die WordPress-Umsetzung auf Basis des zentralen Hobbyregisters; keine zweite Hobby-Datenbank und keine Änderung der V7.1-SEO-Struktur.**
