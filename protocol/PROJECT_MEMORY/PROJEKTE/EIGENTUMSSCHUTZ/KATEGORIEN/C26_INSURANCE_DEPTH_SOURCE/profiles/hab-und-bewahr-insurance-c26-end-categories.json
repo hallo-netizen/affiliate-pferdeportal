@@ -103,13 +103,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:hausratversicherung-hausratversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:hausratversicherung-hausratversicherung-vergleichen",
+      "key": "INS-C26:TERM:hausratversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:hausratversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:hausratversicherung",
       "owner_title": "Hausratversicherung",
-      "name": "Hausratversicherung: Hausratversicherung vergleichen",
-      "short_label": "Hausratversicherung vergleichen",
-      "slug": "vs-hausratversicherung-hausratversicherung-vergleichen",
+      "name": "Hausratversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-hausratversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -198,13 +198,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:wohngebaudeversicherung-wohngebaudeversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:wohngebaudeversicherung-wohngebaudeversicherung-vergleichen",
+      "key": "INS-C26:TERM:wohngebaudeversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:wohngebaudeversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:wohngebaudeversicherung",
       "owner_title": "Wohngebäudeversicherung",
-      "name": "Wohngebäudeversicherung: Wohngebäudeversicherung vergleichen",
-      "short_label": "Wohngebäudeversicherung vergleichen",
-      "slug": "vs-wohngebaudeversicherung-wohngebaudeversicherung-vergleichen",
+      "name": "Wohngebäudeversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-wohngebaudeversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -255,13 +255,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:bauleistungsversicherung-bauleistungsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:bauleistungsversicherung-bauleistungsversicherung-vergleichen",
+      "key": "INS-C26:TERM:bauleistungsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:bauleistungsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:bauleistungsversicherung",
       "owner_title": "Bauleistungsversicherung",
-      "name": "Bauleistungsversicherung: Bauleistungsversicherung vergleichen",
-      "short_label": "Bauleistungsversicherung vergleichen",
-      "slug": "vs-bauleistungsversicherung-bauleistungsversicherung-vergleichen",
+      "name": "Bauleistungsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-bauleistungsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -407,13 +407,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:elektronikversicherung-elektronikversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:elektronikversicherung-elektronikversicherung-vergleichen",
+      "key": "INS-C26:TERM:elektronikversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:elektronikversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:elektronikversicherung",
       "owner_title": "Elektronikversicherung",
-      "name": "Elektronikversicherung: Elektronikversicherung vergleichen",
-      "short_label": "Elektronikversicherung vergleichen",
-      "slug": "vs-elektronikversicherung-elektronikversicherung-vergleichen",
+      "name": "Elektronikversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-elektronikversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -483,13 +483,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:kfz-versicherung-kfz-versicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:kfz-versicherung-kfz-versicherung-vergleichen",
+      "key": "INS-C26:TERM:kfz-versicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:kfz-versicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:kfz-versicherung",
       "owner_title": "Kfz-Versicherung",
-      "name": "Kfz-Versicherung: Kfz-Versicherung vergleichen",
-      "short_label": "Kfz-Versicherung vergleichen",
-      "slug": "vs-kfz-versicherung-kfz-versicherung-vergleichen",
+      "name": "Kfz-Versicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-kfz-versicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -578,13 +578,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:fahrradversicherung-fahrradversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:fahrradversicherung-fahrradversicherung-vergleichen",
+      "key": "INS-C26:TERM:fahrradversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:fahrradversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:fahrradversicherung",
       "owner_title": "Fahrradversicherung",
-      "name": "Fahrradversicherung: Fahrradversicherung vergleichen",
-      "short_label": "Fahrradversicherung vergleichen",
-      "slug": "vs-fahrradversicherung-fahrradversicherung-vergleichen",
+      "name": "Fahrradversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-fahrradversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -692,13 +692,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:wohnmobilversicherung-wohnmobilversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:wohnmobilversicherung-wohnmobilversicherung-vergleichen",
+      "key": "INS-C26:TERM:wohnmobilversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:wohnmobilversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:wohnmobilversicherung",
       "owner_title": "Wohnmobilversicherung",
-      "name": "Wohnmobilversicherung: Wohnmobilversicherung vergleichen",
-      "short_label": "Wohnmobilversicherung vergleichen",
-      "slug": "vs-wohnmobilversicherung-wohnmobilversicherung-vergleichen",
+      "name": "Wohnmobilversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-wohnmobilversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -768,13 +768,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:motorradversicherung-motorradversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:motorradversicherung-motorradversicherung-vergleichen",
+      "key": "INS-C26:TERM:motorradversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:motorradversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:motorradversicherung",
       "owner_title": "Motorradversicherung",
-      "name": "Motorradversicherung: Motorradversicherung vergleichen",
-      "short_label": "Motorradversicherung vergleichen",
-      "slug": "vs-motorradversicherung-motorradversicherung-vergleichen",
+      "name": "Motorradversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-motorradversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -825,13 +825,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:bootsversicherung-bootsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:bootsversicherung-bootsversicherung-vergleichen",
+      "key": "INS-C26:TERM:bootsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:bootsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:bootsversicherung",
       "owner_title": "Bootsversicherung",
-      "name": "Bootsversicherung: Bootsversicherung vergleichen",
-      "short_label": "Bootsversicherung vergleichen",
-      "slug": "vs-bootsversicherung-bootsversicherung-vergleichen",
+      "name": "Bootsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-bootsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -901,13 +901,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:reiserucktrittsversicherung-reiserucktrittsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:reiserucktrittsversicherung-reiserucktrittsversicherung-vergleichen",
+      "key": "INS-C26:TERM:reiserucktrittsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:reiserucktrittsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:reiserucktrittsversicherung",
       "owner_title": "Reiserücktrittsversicherung",
-      "name": "Reiserücktrittsversicherung: Reiserücktrittsversicherung vergleichen",
-      "short_label": "Reiserücktrittsversicherung vergleichen",
-      "slug": "vs-reiserucktrittsversicherung-reiserucktrittsversicherung-vergleichen",
+      "name": "Reiserücktrittsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-reiserucktrittsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -977,13 +977,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:auslandskrankenversicherung-auslandskrankenversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:auslandskrankenversicherung-auslandskrankenversicherung-vergleichen",
+      "key": "INS-C26:TERM:auslandskrankenversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:auslandskrankenversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:auslandskrankenversicherung",
       "owner_title": "Auslandskrankenversicherung",
-      "name": "Auslandskrankenversicherung: Auslandskrankenversicherung vergleichen",
-      "short_label": "Auslandskrankenversicherung vergleichen",
-      "slug": "vs-auslandskrankenversicherung-auslandskrankenversicherung-vergleichen",
+      "name": "Auslandskrankenversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-auslandskrankenversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1072,13 +1072,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:privathaftpflichtversicherung-privathaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:privathaftpflichtversicherung-privathaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:privathaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:privathaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:privathaftpflichtversicherung",
       "owner_title": "Privathaftpflichtversicherung",
-      "name": "Privathaftpflichtversicherung: Privathaftpflichtversicherung vergleichen",
-      "short_label": "Privathaftpflichtversicherung vergleichen",
-      "slug": "vs-privathaftpflichtversicherung-privathaftpflichtversicherung-vergleichen",
+      "name": "Privathaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-privathaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1148,13 +1148,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:rechtsschutzversicherung-rechtsschutzversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:rechtsschutzversicherung-rechtsschutzversicherung-vergleichen",
+      "key": "INS-C26:TERM:rechtsschutzversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:rechtsschutzversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:rechtsschutzversicherung",
       "owner_title": "Rechtsschutzversicherung",
-      "name": "Rechtsschutzversicherung: Rechtsschutzversicherung vergleichen",
-      "short_label": "Rechtsschutzversicherung vergleichen",
-      "slug": "vs-rechtsschutzversicherung-rechtsschutzversicherung-vergleichen",
+      "name": "Rechtsschutzversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-rechtsschutzversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1224,13 +1224,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:bauherrenhaftpflichtversicherung-bauherrenhaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:bauherrenhaftpflichtversicherung-bauherrenhaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:bauherrenhaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:bauherrenhaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
       "owner_title": "Bauherrenhaftpflichtversicherung",
-      "name": "Bauherrenhaftpflichtversicherung: Bauherrenhaftpflichtversicherung vergleichen",
-      "short_label": "Bauherrenhaftpflichtversicherung vergleichen",
-      "slug": "vs-bauherrenhaftpflichtversicherung-bauherrenhaftpflichtversicherung-vergleichen",
+      "name": "Bauherrenhaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-bauherrenhaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1414,13 +1414,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:hundehaftpflichtversicherung-hundehaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:hundehaftpflichtversicherung-hundehaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:hundehaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:hundehaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:hundehaftpflichtversicherung",
       "owner_title": "Hundehaftpflichtversicherung",
-      "name": "Hundehaftpflichtversicherung: Hundehaftpflichtversicherung vergleichen",
-      "short_label": "Hundehaftpflichtversicherung vergleichen",
-      "slug": "vs-hundehaftpflichtversicherung-hundehaftpflichtversicherung-vergleichen",
+      "name": "Hundehaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-hundehaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1471,13 +1471,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:pferdehaftpflichtversicherung-pferdehaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:pferdehaftpflichtversicherung-pferdehaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:pferdehaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:pferdehaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:pferdehaftpflichtversicherung",
       "owner_title": "Pferdehaftpflichtversicherung",
-      "name": "Pferdehaftpflichtversicherung: Pferdehaftpflichtversicherung vergleichen",
-      "short_label": "Pferdehaftpflichtversicherung vergleichen",
-      "slug": "vs-pferdehaftpflichtversicherung-pferdehaftpflichtversicherung-vergleichen",
+      "name": "Pferdehaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-pferdehaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1585,13 +1585,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:tierkrankenversicherung-tierkrankenversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:tierkrankenversicherung-tierkrankenversicherung-vergleichen",
+      "key": "INS-C26:TERM:tierkrankenversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:tierkrankenversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:tierkrankenversicherung",
       "owner_title": "Tierkrankenversicherung",
-      "name": "Tierkrankenversicherung: Tierkrankenversicherung vergleichen",
-      "short_label": "Tierkrankenversicherung vergleichen",
-      "slug": "vs-tierkrankenversicherung-tierkrankenversicherung-vergleichen",
+      "name": "Tierkrankenversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-tierkrankenversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1908,13 +1908,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:zahnzusatzversicherung-zahnzusatzversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:zahnzusatzversicherung-zahnzusatzversicherung-vergleichen",
+      "key": "INS-C26:TERM:zahnzusatzversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:zahnzusatzversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:zahnzusatzversicherung",
       "owner_title": "Zahnzusatzversicherung",
-      "name": "Zahnzusatzversicherung: Zahnzusatzversicherung vergleichen",
-      "short_label": "Zahnzusatzversicherung vergleichen",
-      "slug": "vs-zahnzusatzversicherung-zahnzusatzversicherung-vergleichen",
+      "name": "Zahnzusatzversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-zahnzusatzversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -1965,13 +1965,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:krankenhauszusatzversicherung-krankenhauszusatzversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:krankenhauszusatzversicherung-krankenhauszusatzversicherung-vergleichen",
+      "key": "INS-C26:TERM:krankenhauszusatzversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:krankenhauszusatzversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:krankenhauszusatzversicherung",
       "owner_title": "Krankenhauszusatzversicherung",
-      "name": "Krankenhauszusatzversicherung: Krankenhauszusatzversicherung vergleichen",
-      "short_label": "Krankenhauszusatzversicherung vergleichen",
-      "slug": "vs-krankenhauszusatzversicherung-krankenhauszusatzversicherung-vergleichen",
+      "name": "Krankenhauszusatzversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-krankenhauszusatzversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2041,13 +2041,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:krankentagegeldversicherung-krankentagegeldversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:krankentagegeldversicherung-krankentagegeldversicherung-vergleichen",
+      "key": "INS-C26:TERM:krankentagegeldversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:krankentagegeldversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:krankentagegeldversicherung",
       "owner_title": "Krankentagegeldversicherung",
-      "name": "Krankentagegeldversicherung: Krankentagegeldversicherung vergleichen",
-      "short_label": "Krankentagegeldversicherung vergleichen",
-      "slug": "vs-krankentagegeldversicherung-krankentagegeldversicherung-vergleichen",
+      "name": "Krankentagegeldversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-krankentagegeldversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2117,13 +2117,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:pflegezusatzversicherung-pflegezusatzversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:pflegezusatzversicherung-pflegezusatzversicherung-vergleichen",
+      "key": "INS-C26:TERM:pflegezusatzversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:pflegezusatzversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:pflegezusatzversicherung",
       "owner_title": "Pflegezusatzversicherung",
-      "name": "Pflegezusatzversicherung: Pflegezusatzversicherung vergleichen",
-      "short_label": "Pflegezusatzversicherung vergleichen",
-      "slug": "vs-pflegezusatzversicherung-pflegezusatzversicherung-vergleichen",
+      "name": "Pflegezusatzversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-pflegezusatzversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2193,13 +2193,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:berufsunfahigkeitsversicherung-berufsunfahigkeitsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:berufsunfahigkeitsversicherung-berufsunfahigkeitsversicherung-vergleichen",
+      "key": "INS-C26:TERM:berufsunfahigkeitsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:berufsunfahigkeitsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:berufsunfahigkeitsversicherung",
       "owner_title": "Berufsunfähigkeitsversicherung",
-      "name": "Berufsunfähigkeitsversicherung: Berufsunfähigkeitsversicherung vergleichen",
-      "short_label": "Berufsunfähigkeitsversicherung vergleichen",
-      "slug": "vs-berufsunfahigkeitsversicherung-berufsunfahigkeitsversicherung-vergleichen",
+      "name": "Berufsunfähigkeitsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-berufsunfahigkeitsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2288,13 +2288,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:unfallversicherung-unfallversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:unfallversicherung-unfallversicherung-vergleichen",
+      "key": "INS-C26:TERM:unfallversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:unfallversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:unfallversicherung",
       "owner_title": "Unfallversicherung",
-      "name": "Unfallversicherung: Unfallversicherung vergleichen",
-      "short_label": "Unfallversicherung vergleichen",
-      "slug": "vs-unfallversicherung-unfallversicherung-vergleichen",
+      "name": "Unfallversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-unfallversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2459,13 +2459,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:private-rentenversicherung-private-rentenversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:private-rentenversicherung-private-rentenversicherung-vergleichen",
+      "key": "INS-C26:TERM:private-rentenversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:private-rentenversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:private-rentenversicherung",
       "owner_title": "Private Rentenversicherung",
-      "name": "Private Rentenversicherung: Private Rentenversicherung vergleichen",
-      "short_label": "Private Rentenversicherung vergleichen",
-      "slug": "vs-private-rentenversicherung-private-rentenversicherung-vergleichen",
+      "name": "Private Rentenversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-private-rentenversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2611,13 +2611,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:risikolebensversicherung-risikolebensversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:risikolebensversicherung-risikolebensversicherung-vergleichen",
+      "key": "INS-C26:TERM:risikolebensversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:risikolebensversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:risikolebensversicherung",
       "owner_title": "Risikolebensversicherung",
-      "name": "Risikolebensversicherung: Risikolebensversicherung vergleichen",
-      "short_label": "Risikolebensversicherung vergleichen",
-      "slug": "vs-risikolebensversicherung-risikolebensversicherung-vergleichen",
+      "name": "Risikolebensversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-risikolebensversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2687,13 +2687,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:kapitallebensversicherung-kapitallebensversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:kapitallebensversicherung-kapitallebensversicherung-vergleichen",
+      "key": "INS-C26:TERM:kapitallebensversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:kapitallebensversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:kapitallebensversicherung",
       "owner_title": "Kapitallebensversicherung",
-      "name": "Kapitallebensversicherung: Kapitallebensversicherung vergleichen",
-      "short_label": "Kapitallebensversicherung vergleichen",
-      "slug": "vs-kapitallebensversicherung-kapitallebensversicherung-vergleichen",
+      "name": "Kapitallebensversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-kapitallebensversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2744,13 +2744,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:betriebshaftpflichtversicherung-betriebshaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:betriebshaftpflichtversicherung-betriebshaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:betriebshaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:betriebshaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:betriebshaftpflichtversicherung",
       "owner_title": "Betriebshaftpflichtversicherung",
-      "name": "Betriebshaftpflichtversicherung: Betriebshaftpflichtversicherung vergleichen",
-      "short_label": "Betriebshaftpflichtversicherung vergleichen",
-      "slug": "vs-betriebshaftpflichtversicherung-betriebshaftpflichtversicherung-vergleichen",
+      "name": "Betriebshaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-betriebshaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2839,13 +2839,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:berufshaftpflichtversicherung-berufshaftpflichtversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:berufshaftpflichtversicherung-berufshaftpflichtversicherung-vergleichen",
+      "key": "INS-C26:TERM:berufshaftpflichtversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:berufshaftpflichtversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:berufshaftpflichtversicherung",
       "owner_title": "Berufshaftpflichtversicherung",
-      "name": "Berufshaftpflichtversicherung: Berufshaftpflichtversicherung vergleichen",
-      "short_label": "Berufshaftpflichtversicherung vergleichen",
-      "slug": "vs-berufshaftpflichtversicherung-berufshaftpflichtversicherung-vergleichen",
+      "name": "Berufshaftpflichtversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-berufshaftpflichtversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2915,13 +2915,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:geschaftsinhaltsversicherung-geschaftsinhaltsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:geschaftsinhaltsversicherung-geschaftsinhaltsversicherung-vergleichen",
+      "key": "INS-C26:TERM:geschaftsinhaltsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:geschaftsinhaltsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:geschaftsinhaltsversicherung",
       "owner_title": "Geschäftsinhaltsversicherung",
-      "name": "Geschäftsinhaltsversicherung: Geschäftsinhaltsversicherung vergleichen",
-      "short_label": "Geschäftsinhaltsversicherung vergleichen",
-      "slug": "vs-geschaftsinhaltsversicherung-geschaftsinhaltsversicherung-vergleichen",
+      "name": "Geschäftsinhaltsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-geschaftsinhaltsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -2972,13 +2972,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:betriebsunterbrechungsversicherung-betriebsunterbrechungsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:betriebsunterbrechungsversicherung-betriebsunterbrechungsversicherung-vergleichen",
+      "key": "INS-C26:TERM:betriebsunterbrechungsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:betriebsunterbrechungsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:betriebsunterbrechungsversicherung",
       "owner_title": "Betriebsunterbrechungsversicherung",
-      "name": "Betriebsunterbrechungsversicherung: Betriebsunterbrechungsversicherung vergleichen",
-      "short_label": "Betriebsunterbrechungsversicherung vergleichen",
-      "slug": "vs-betriebsunterbrechungsversicherung-betriebsunterbrechungsversicherung-vergleichen",
+      "name": "Betriebsunterbrechungsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-betriebsunterbrechungsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3048,13 +3048,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:firmenrechtsschutzversicherung-firmenrechtsschutzversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:firmenrechtsschutzversicherung-firmenrechtsschutzversicherung-vergleichen",
+      "key": "INS-C26:TERM:firmenrechtsschutzversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:firmenrechtsschutzversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:firmenrechtsschutzversicherung",
       "owner_title": "Firmenrechtsschutzversicherung",
-      "name": "Firmenrechtsschutzversicherung: Firmenrechtsschutzversicherung vergleichen",
-      "short_label": "Firmenrechtsschutzversicherung vergleichen",
-      "slug": "vs-firmenrechtsschutzversicherung-firmenrechtsschutzversicherung-vergleichen",
+      "name": "Firmenrechtsschutzversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-firmenrechtsschutzversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3124,13 +3124,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:dundo-versicherung-dundo-versicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:dundo-versicherung-dundo-versicherung-vergleichen",
+      "key": "INS-C26:TERM:dundo-versicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:dundo-versicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:dundo-versicherung",
       "owner_title": "D&O-Versicherung",
-      "name": "D&O-Versicherung: D&O-Versicherung vergleichen",
-      "short_label": "D&O-Versicherung vergleichen",
-      "slug": "vs-dundo-versicherung-dundo-versicherung-vergleichen",
+      "name": "D&O-Versicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-dundo-versicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3200,13 +3200,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:cyberversicherung-cyberversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:cyberversicherung-cyberversicherung-vergleichen",
+      "key": "INS-C26:TERM:cyberversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:cyberversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:cyberversicherung",
       "owner_title": "Cyberversicherung",
-      "name": "Cyberversicherung: Cyberversicherung vergleichen",
-      "short_label": "Cyberversicherung vergleichen",
-      "slug": "vs-cyberversicherung-cyberversicherung-vergleichen",
+      "name": "Cyberversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-cyberversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3295,13 +3295,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:kautionsversicherung-kautionsversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:kautionsversicherung-kautionsversicherung-vergleichen",
+      "key": "INS-C26:TERM:kautionsversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:kautionsversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:kautionsversicherung",
       "owner_title": "Kautionsversicherung",
-      "name": "Kautionsversicherung: Kautionsversicherung vergleichen",
-      "short_label": "Kautionsversicherung vergleichen",
-      "slug": "vs-kautionsversicherung-kautionsversicherung-vergleichen",
+      "name": "Kautionsversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-kautionsversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3371,13 +3371,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:restschuldversicherung-restschuldversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:restschuldversicherung-restschuldversicherung-vergleichen",
+      "key": "INS-C26:TERM:restschuldversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:restschuldversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:restschuldversicherung",
       "owner_title": "Restschuldversicherung",
-      "name": "Restschuldversicherung: Restschuldversicherung vergleichen",
-      "short_label": "Restschuldversicherung vergleichen",
-      "slug": "vs-restschuldversicherung-restschuldversicherung-vergleichen",
+      "name": "Restschuldversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-restschuldversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3447,13 +3447,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:betriebliche-krankenversicherung-betriebliche-krankenversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:betriebliche-krankenversicherung-betriebliche-krankenversicherung-vergleichen",
+      "key": "INS-C26:TERM:betriebliche-krankenversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:betriebliche-krankenversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:betriebliche-krankenversicherung",
       "owner_title": "Betriebliche Krankenversicherung",
-      "name": "Betriebliche Krankenversicherung: Betriebliche Krankenversicherung vergleichen",
-      "short_label": "Betriebliche Krankenversicherung vergleichen",
-      "slug": "vs-betriebliche-krankenversicherung-betriebliche-krankenversicherung-vergleichen",
+      "name": "Betriebliche Krankenversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-betriebliche-krankenversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3523,13 +3523,13 @@
       "existing_categories_unchanged": true
     },
     {
-      "key": "INS-C26:TERM:warenkreditversicherung-warenkreditversicherung-vergleichen",
-      "node_id": "core:leaf:insurance-extra:warenkreditversicherung-warenkreditversicherung-vergleichen",
+      "key": "INS-C26:TERM:warenkreditversicherung-tarife-vergleichen",
+      "node_id": "core:leaf:insurance-extra:warenkreditversicherung-tarife-vergleichen",
       "parent_key": "INS-SEO:R3:warenkreditversicherung",
       "owner_title": "Warenkreditversicherung",
-      "name": "Warenkreditversicherung: Warenkreditversicherung vergleichen",
-      "short_label": "Warenkreditversicherung vergleichen",
-      "slug": "vs-warenkreditversicherung-warenkreditversicherung-vergleichen",
+      "name": "Warenkreditversicherung: Tarife vergleichen",
+      "short_label": "Tarife vergleichen",
+      "slug": "vs-warenkreditversicherung-tarife-vergleichen",
       "taxonomy": "category",
       "wordpress_parent": 0,
       "coarse_independent_directions": [
@@ -3556,7 +3556,7 @@
         "Hausratversicherung: Beiträge & Selbstbeteiligung",
         "Hausratversicherung: Leistungsumfang & Ausschlüsse",
         "Hausratversicherung: Schadensmeldung & Erstattung",
-        "Hausratversicherung: Hausratversicherung vergleichen"
+        "Hausratversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 5,
@@ -3577,7 +3577,7 @@
         "Wohngebäudeversicherung: Beiträge & Kosten",
         "Wohngebäudeversicherung: Leitungswasser & Feuer",
         "Wohngebäudeversicherung: Versicherungsschäden regulieren",
-        "Wohngebäudeversicherung: Wohngebäudeversicherung vergleichen"
+        "Wohngebäudeversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 5,
@@ -3596,7 +3596,7 @@
       "additional_category_names": [
         "Bauleistungsversicherung: Versicherte Bauvorhaben",
         "Bauleistungsversicherung: Kosten & Laufzeit",
-        "Bauleistungsversicherung: Bauleistungsversicherung vergleichen",
+        "Bauleistungsversicherung: Tarife vergleichen",
         "Bauleistungsversicherung: Schadensfall & Abrechnung"
       ],
       "before": 3,
@@ -3636,7 +3636,7 @@
         "Elektronikversicherung: Versicherte Geräte",
         "Elektronikversicherung: Diebstahl & Bedienfehler",
         "Elektronikversicherung: Reparatur & Wertersatz",
-        "Elektronikversicherung: Elektronikversicherung vergleichen"
+        "Elektronikversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -3656,7 +3656,7 @@
         "Kfz-Versicherung: Schadenfreiheitsklasse & Rückstufung",
         "Kfz-Versicherung: Beiträge & Typklassen",
         "Kfz-Versicherung: Fahrerkreis & Nutzung",
-        "Kfz-Versicherung: Kfz-Versicherung vergleichen",
+        "Kfz-Versicherung: Tarife vergleichen",
         "Kfz-Versicherung: Kfz-Schadenregulierung"
       ],
       "before": 3,
@@ -3677,7 +3677,7 @@
         "Fahrradversicherung: E-Bike & Pedelec",
         "Fahrradversicherung: Beiträge & Fahrradwert",
         "Fahrradversicherung: Diebstahlschutz & Nachweise",
-        "Fahrradversicherung: Fahrradversicherung vergleichen"
+        "Fahrradversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -3715,7 +3715,7 @@
       "additional_category_names": [
         "Wohnmobilversicherung: Wohnmobil-Inhalt & Zubehör",
         "Wohnmobilversicherung: Beiträge & Nutzung",
-        "Wohnmobilversicherung: Wohnmobilversicherung vergleichen",
+        "Wohnmobilversicherung: Tarife vergleichen",
         "Wohnmobilversicherung: Diebstahl & Einbruch im Camper"
       ],
       "before": 3,
@@ -3735,7 +3735,7 @@
       "additional_category_names": [
         "Motorradversicherung: Schadenfreiheitsklasse",
         "Motorradversicherung: Saisonkennzeichen & Beiträge",
-        "Motorradversicherung: Motorradversicherung vergleichen"
+        "Motorradversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -3754,7 +3754,7 @@
       "additional_category_names": [
         "Bootsversicherung: Bootshaftpflicht & Kasko",
         "Bootsversicherung: Liegeplatz & Winterlager",
-        "Bootsversicherung: Bootsversicherung vergleichen"
+        "Bootsversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -3774,7 +3774,7 @@
         "Reiserücktrittsversicherung: Versicherte Rücktrittsgründe",
         "Reiserücktrittsversicherung: Fristen & Buchungszeitpunkt",
         "Reiserücktrittsversicherung: Reiserücktrittskosten & Erstattung",
-        "Reiserücktrittsversicherung: Reiserücktrittsversicherung vergleichen"
+        "Reiserücktrittsversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -3794,7 +3794,7 @@
         "Auslandskrankenversicherung: Geltungsbereich & Reisedauer",
         "Auslandskrankenversicherung: Rücktransport & Notfälle",
         "Auslandskrankenversicherung: Beiträge & Vertragsmodelle",
-        "Auslandskrankenversicherung: Auslandskrankenversicherung vergleichen"
+        "Auslandskrankenversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -3815,7 +3815,7 @@
         "Privathaftpflichtversicherung: Familien & Mitversicherte",
         "Privathaftpflichtversicherung: Mietsachschäden & Schlüsselverlust",
         "Privathaftpflichtversicherung: Beiträge & Selbstbeteiligung",
-        "Privathaftpflichtversicherung: Privathaftpflichtversicherung vergleichen"
+        "Privathaftpflichtversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 5,
@@ -3835,7 +3835,7 @@
         "Rechtsschutzversicherung: Privat- & Berufsrechtsschutz",
         "Rechtsschutzversicherung: Miet- & Verkehrsrechtsschutz",
         "Rechtsschutzversicherung: Wartezeit & Selbstbeteiligung",
-        "Rechtsschutzversicherung: Rechtsschutzversicherung vergleichen",
+        "Rechtsschutzversicherung: Tarife vergleichen",
         "Rechtsschutzversicherung: Deckungszusage & Kosten"
       ],
       "before": 3,
@@ -3855,7 +3855,7 @@
       "additional_category_names": [
         "Bauherrenhaftpflichtversicherung: Versicherte Bauherrenrisiken",
         "Bauherrenhaftpflichtversicherung: Deckungssumme & Laufzeit",
-        "Bauherrenhaftpflichtversicherung: Bauherrenhaftpflichtversicherung vergleichen"
+        "Bauherrenhaftpflichtversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -3913,7 +3913,7 @@
         "Hundehaftpflichtversicherung: Versicherungspflicht & Bundesländer",
         "Hundehaftpflichtversicherung: Hundebiss & Fremdschäden",
         "Hundehaftpflichtversicherung: Mitversicherte & Hundebetreuung",
-        "Hundehaftpflichtversicherung: Hundehaftpflichtversicherung vergleichen"
+        "Hundehaftpflichtversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -3932,7 +3932,7 @@
       "additional_category_names": [
         "Pferdehaftpflichtversicherung: Reitbeteiligung & Fremdreiter",
         "Pferdehaftpflichtversicherung: Pferdeschäden & Haftung",
-        "Pferdehaftpflichtversicherung: Pferdehaftpflichtversicherung vergleichen"
+        "Pferdehaftpflichtversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -3954,7 +3954,7 @@
         "Tierkrankenversicherung: Tier-OP-Versicherung",
         "Tierkrankenversicherung: Pferdekranken- & OP-Versicherung",
         "Tierkrankenversicherung: Beiträge & Erstattung",
-        "Tierkrankenversicherung: Tierkrankenversicherung vergleichen"
+        "Tierkrankenversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 6,
@@ -4035,7 +4035,7 @@
         "Zahnzusatzversicherung: Zahnersatz & Implantate",
         "Zahnzusatzversicherung: Zahnreinigung & Vorsorge",
         "Zahnzusatzversicherung: Wartezeiten & laufende Behandlung",
-        "Zahnzusatzversicherung: Zahnzusatzversicherung vergleichen"
+        "Zahnzusatzversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4054,7 +4054,7 @@
       "additional_category_names": [
         "Krankenhauszusatzversicherung: Einbettzimmer & Chefarzt",
         "Krankenhauszusatzversicherung: Beiträge & Gesundheitsfragen",
-        "Krankenhauszusatzversicherung: Krankenhauszusatzversicherung vergleichen"
+        "Krankenhauszusatzversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -4074,7 +4074,7 @@
         "Krankentagegeldversicherung: Höhe des Krankentagegelds",
         "Krankentagegeldversicherung: Karenzzeiten & Arbeitsunfähigkeit",
         "Krankentagegeldversicherung: Krankentagegeld für Selbstständige",
-        "Krankentagegeldversicherung: Krankentagegeldversicherung vergleichen"
+        "Krankentagegeldversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4094,7 +4094,7 @@
         "Pflegezusatzversicherung: Pflegetagegeld & Pflegerente",
         "Pflegezusatzversicherung: Pflegegrad & Leistungsfall",
         "Pflegezusatzversicherung: Beiträge & Gesundheitsfragen",
-        "Pflegezusatzversicherung: Pflegezusatzversicherung vergleichen"
+        "Pflegezusatzversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4114,7 +4114,7 @@
         "Berufsunfähigkeitsversicherung: Gesundheitsprüfung & Antrag",
         "Berufsunfähigkeitsversicherung: BU-Rente & Leistungsdauer",
         "Berufsunfähigkeitsversicherung: Beiträge & Berufsgruppen",
-        "Berufsunfähigkeitsversicherung: Berufsunfähigkeitsversicherung vergleichen",
+        "Berufsunfähigkeitsversicherung: Tarife vergleichen",
         "Berufsunfähigkeitsversicherung: BU für Schüler & Selbstständige"
       ],
       "before": 3,
@@ -4135,7 +4135,7 @@
         "Unfallversicherung: Invaliditätsgrad & Gliedertaxe",
         "Unfallversicherung: Unfallrente & Progression",
         "Unfallversicherung: Unfallversicherung für Kinder & Senioren",
-        "Unfallversicherung: Unfallversicherung vergleichen"
+        "Unfallversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4176,7 +4176,7 @@
         "Private Rentenversicherung: Garantien & Fondsvarianten",
         "Private Rentenversicherung: Rentenbeginn & Auszahlung",
         "Private Rentenversicherung: Beiträge & Steuerfragen",
-        "Private Rentenversicherung: Private Rentenversicherung vergleichen"
+        "Private Rentenversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4216,7 +4216,7 @@
         "Risikolebensversicherung: Versicherungssumme & Laufzeit",
         "Risikolebensversicherung: Gesundheitsprüfung",
         "Risikolebensversicherung: Beiträge & Risikoberufe",
-        "Risikolebensversicherung: Risikolebensversicherung vergleichen"
+        "Risikolebensversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4236,7 +4236,7 @@
         "Kapitallebensversicherung: Rückkaufswert & Kündigung",
         "Kapitallebensversicherung: Garantiezins & Überschüsse",
         "Kapitallebensversicherung: Vertragswechsel & Alternativen",
-        "Kapitallebensversicherung: Kapitallebensversicherung vergleichen"
+        "Kapitallebensversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4255,7 +4255,7 @@
       "additional_category_names": [
         "Betriebshaftpflichtversicherung: Betriebsrisiken & Deckung",
         "Betriebshaftpflichtversicherung: Deckungssummen & Beiträge",
-        "Betriebshaftpflichtversicherung: Betriebshaftpflichtversicherung vergleichen",
+        "Betriebshaftpflichtversicherung: Tarife vergleichen",
         "Betriebshaftpflichtversicherung: Schadenfälle im Betrieb"
       ],
       "before": 3,
@@ -4276,7 +4276,7 @@
         "Berufshaftpflichtversicherung: Berufshaftpflicht für Freiberufler",
         "Berufshaftpflichtversicherung: Vermögensschäden & Deckung",
         "Berufshaftpflichtversicherung: Beiträge & Versicherungssummen",
-        "Berufshaftpflichtversicherung: Berufshaftpflichtversicherung vergleichen"
+        "Berufshaftpflichtversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4296,7 +4296,7 @@
         "Geschäftsinhaltsversicherung: Einbruchdiebstahl & Vandalismus",
         "Geschäftsinhaltsversicherung: Feuer & Leitungswasser",
         "Geschäftsinhaltsversicherung: Versicherungssumme & Unterversicherung",
-        "Geschäftsinhaltsversicherung: Geschäftsinhaltsversicherung vergleichen"
+        "Geschäftsinhaltsversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4315,7 +4315,7 @@
       "additional_category_names": [
         "Betriebsunterbrechungsversicherung: Ertragsausfall & Fixkosten",
         "Betriebsunterbrechungsversicherung: Haftzeit & Versicherungssumme",
-        "Betriebsunterbrechungsversicherung: Betriebsunterbrechungsversicherung vergleichen"
+        "Betriebsunterbrechungsversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 3,
@@ -4335,7 +4335,7 @@
         "Firmenrechtsschutzversicherung: Arbeitsrechtsschutz im Betrieb",
         "Firmenrechtsschutzversicherung: Vertrags- & Steuerrechtsschutz",
         "Firmenrechtsschutzversicherung: Beiträge & Wartezeiten",
-        "Firmenrechtsschutzversicherung: Firmenrechtsschutzversicherung vergleichen"
+        "Firmenrechtsschutzversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4355,7 +4355,7 @@
         "D&O-Versicherung: Managerhaftung & Pflichtverletzungen",
         "D&O-Versicherung: Versicherte Personen & Mandate",
         "D&O-Versicherung: Deckungssumme & Ausschlüsse",
-        "D&O-Versicherung: D&O-Versicherung vergleichen"
+        "D&O-Versicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4375,7 +4375,7 @@
         "Cyberversicherung: Cyberangriffe & Ransomware",
         "Cyberversicherung: Datenschutz & Haftung",
         "Cyberversicherung: IT-Sicherheit & Anforderungen",
-        "Cyberversicherung: Cyberversicherung vergleichen",
+        "Cyberversicherung: Tarife vergleichen",
         "Cyberversicherung: Cyber-Schaden melden"
       ],
       "before": 3,
@@ -4396,7 +4396,7 @@
         "Kautionsversicherung: Mietkaution & Bürgschaft",
         "Kautionsversicherung: Avalkredit & Baugewerbe",
         "Kautionsversicherung: Beiträge & Sicherheiten",
-        "Kautionsversicherung: Kautionsversicherung vergleichen"
+        "Kautionsversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4416,7 +4416,7 @@
         "Restschuldversicherung: Versicherte Kreditrisiken",
         "Restschuldversicherung: Restschuldversicherung Kosten",
         "Restschuldversicherung: Kündigung & Widerruf",
-        "Restschuldversicherung: Restschuldversicherung vergleichen"
+        "Restschuldversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4436,7 +4436,7 @@
         "Betriebliche Krankenversicherung: Budgettarife & Bausteine",
         "Betriebliche Krankenversicherung: Arbeitgeberkosten & Steuern",
         "Betriebliche Krankenversicherung: Mitarbeiteraufnahme & Wechsel",
-        "Betriebliche Krankenversicherung: Betriebliche Krankenversicherung vergleichen"
+        "Betriebliche Krankenversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
@@ -4456,7 +4456,7 @@
         "Warenkreditversicherung: Forderungsausfall & Insolvenz",
         "Warenkreditversicherung: Kreditlimits & Bonitätsprüfung",
         "Warenkreditversicherung: Beiträge & Selbstbehalt",
-        "Warenkreditversicherung: Warenkreditversicherung vergleichen"
+        "Warenkreditversicherung: Tarife vergleichen"
       ],
       "before": 3,
       "added": 4,
