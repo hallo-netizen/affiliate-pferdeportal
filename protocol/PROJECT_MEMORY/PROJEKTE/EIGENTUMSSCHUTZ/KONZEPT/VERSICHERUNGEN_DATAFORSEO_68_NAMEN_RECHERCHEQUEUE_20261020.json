@@ -1,0 +1,643 @@
+{
+  "schema": "HB_VERSICHERUNGEN_DATAFORSEO_READONLY_RESEARCH_SEEDS_V1",
+  "date": "2026-10-20",
+  "source_tree": "VERSICHERUNGEN_C2_SEITENBAUM_20261020.json",
+  "status": "READY_FOR_EXISTING_WORDPRESS_BACKEND_RESEARCH__NOT_SENT_NOT_MEASURED",
+  "mechanism": "Existing Portal-Kategorien → SEO-Namen prüfen (DataForSEO); zuerst prüfen, dass die Adminmaske diese noch nicht importierten Candidate-Begriffe entgegennehmen kann.",
+  "market": "Deutschland/de",
+  "price_authorization": "REQUIRED_BEFORE_PROVIDER_REQUEST",
+  "stage_1_exact_leaf_terms": [
+    {
+      "term": "Hausratversicherung",
+      "owner_key": "hb:versicherungen:hausratversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Wohngebäudeversicherung",
+      "owner_key": "hb:versicherungen:wohngebaudeversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Glasversicherung",
+      "owner_key": "hb:versicherungen:glasversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Photovoltaikversicherung",
+      "owner_key": "hb:versicherungen:photovoltaikversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Bauleistungsversicherung",
+      "owner_key": "hb:versicherungen:bauleistungsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Feuerrohbauversicherung",
+      "owner_key": "hb:versicherungen:feuerrohbauversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Kfz-Versicherung",
+      "owner_key": "hb:versicherungen:kfz-versicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Motorradversicherung",
+      "owner_key": "hb:versicherungen:motorradversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Mopedversicherung",
+      "owner_key": "hb:versicherungen:mopedversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Wohnmobilversicherung",
+      "owner_key": "hb:versicherungen:wohnmobilversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Wohnwagenversicherung",
+      "owner_key": "hb:versicherungen:wohnwagenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Fahrradversicherung",
+      "owner_key": "hb:versicherungen:fahrradversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "E-Scooter-Versicherung",
+      "owner_key": "hb:versicherungen:e-scooter-versicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Bootsversicherung",
+      "owner_key": "hb:versicherungen:bootsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Oldtimerversicherung",
+      "owner_key": "hb:versicherungen:oldtimerversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Anhänger-Versicherung",
+      "owner_key": "hb:versicherungen:anhanger-versicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Privathaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:privathaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:haus-und-grundbesitzerhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Gewässerschadenhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:gewasserschadenhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Bauherrenhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:bauherrenhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Jagdhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:jagdhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Rechtsschutzversicherung",
+      "owner_key": "hb:versicherungen:rechtsschutzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Verkehrsrechtsschutzversicherung",
+      "owner_key": "hb:versicherungen:verkehrsrechtsschutzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Gesetzliche Krankenversicherung",
+      "owner_key": "hb:versicherungen:gesetzliche-krankenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Private Krankenversicherung",
+      "owner_key": "hb:versicherungen:private-krankenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Zahnzusatzversicherung",
+      "owner_key": "hb:versicherungen:zahnzusatzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Krankenhauszusatzversicherung",
+      "owner_key": "hb:versicherungen:krankenhauszusatzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Ambulante Zusatzversicherung",
+      "owner_key": "hb:versicherungen:ambulante-zusatzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Pflegezusatzversicherung",
+      "owner_key": "hb:versicherungen:pflegezusatzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Krankentagegeldversicherung",
+      "owner_key": "hb:versicherungen:krankentagegeldversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Krankenhaustagegeldversicherung",
+      "owner_key": "hb:versicherungen:krankenhaustagegeldversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Berufsunfähigkeitsversicherung",
+      "owner_key": "hb:versicherungen:berufsunfahigkeitsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Erwerbsunfähigkeitsversicherung",
+      "owner_key": "hb:versicherungen:erwerbsunfahigkeitsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Grundfähigkeitsversicherung",
+      "owner_key": "hb:versicherungen:grundfahigkeitsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Dienstunfähigkeitsversicherung",
+      "owner_key": "hb:versicherungen:dienstunfahigkeitsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Schwere-Krankheiten-Versicherung",
+      "owner_key": "hb:versicherungen:schwere-krankheiten-versicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Risikolebensversicherung",
+      "owner_key": "hb:versicherungen:risikolebensversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Kapitallebensversicherung",
+      "owner_key": "hb:versicherungen:kapitallebensversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Fondsgebundene Lebensversicherung",
+      "owner_key": "hb:versicherungen:fondsgebundene-lebensversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Private Rentenversicherung",
+      "owner_key": "hb:versicherungen:private-rentenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Riester-Rentenversicherung",
+      "owner_key": "hb:versicherungen:riester-rentenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Basisrentenversicherung",
+      "owner_key": "hb:versicherungen:basisrentenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Betriebliche Direktversicherung",
+      "owner_key": "hb:versicherungen:betriebliche-direktversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Gesetzliche Rentenversicherung",
+      "owner_key": "hb:versicherungen:gesetzliche-rentenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Sterbegeldversicherung",
+      "owner_key": "hb:versicherungen:sterbegeldversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Reiserücktrittsversicherung",
+      "owner_key": "hb:versicherungen:reiserucktrittsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Reiseabbruchversicherung",
+      "owner_key": "hb:versicherungen:reiseabbruchversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Reisegepäckversicherung",
+      "owner_key": "hb:versicherungen:reisegepackversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Auslandskrankenversicherung",
+      "owner_key": "hb:versicherungen:auslandskrankenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Campingversicherung",
+      "owner_key": "hb:versicherungen:campingversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Sportgeräteversicherung",
+      "owner_key": "hb:versicherungen:sportgerateversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Tierhalterhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:tierhalterhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Tierkrankenversicherung",
+      "owner_key": "hb:versicherungen:tierkrankenversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Tier-OP-Versicherung",
+      "owner_key": "hb:versicherungen:tier-op-versicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Betriebshaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:betriebshaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Berufshaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:berufshaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Vermögensschadenhaftpflichtversicherung",
+      "owner_key": "hb:versicherungen:vermogensschadenhaftpflichtversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Geschäftsinhaltsversicherung",
+      "owner_key": "hb:versicherungen:geschaftsinhaltsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Betriebsunterbrechungsversicherung",
+      "owner_key": "hb:versicherungen:betriebsunterbrechungsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Cyberversicherung für Kleinbetriebe",
+      "owner_key": "hb:versicherungen:cyberversicherung-fur-kleinbetriebe",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Firmenrechtsschutzversicherung",
+      "owner_key": "hb:versicherungen:firmenrechtsschutzversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Gewerbegebäudeversicherung",
+      "owner_key": "hb:versicherungen:gewerbegebaudeversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Elektronikversicherung für Betriebe",
+      "owner_key": "hb:versicherungen:elektronikversicherung-fur-betriebe",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Transportversicherung für Betriebe",
+      "owner_key": "hb:versicherungen:transportversicherung-fur-betriebe",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Kreditversicherung für Betriebe",
+      "owner_key": "hb:versicherungen:kreditversicherung-fur-betriebe",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Restschuldversicherung",
+      "owner_key": "hb:versicherungen:restschuldversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Mietkautionsversicherung",
+      "owner_key": "hb:versicherungen:mietkautionsversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    },
+    {
+      "term": "Mietausfallversicherung",
+      "owner_key": "hb:versicherungen:mietausfallversicherung",
+      "lang": "de",
+      "location": "Germany",
+      "phrase_type": "LEAF_EXACT",
+      "query_stage": 1,
+      "volume_cutoff_for_exclusion": null
+    }
+  ],
+  "stage_2_if_needed": "Nur bei fachlich/semantisch uneindeutigen Begriffen die Varianten aus topic_pages.alternate_keywords separat prüfen; keine ungefragte massenhafte API-Abfrage.",
+  "interpretation_rules": [
+    "Fehlendes Volumen ist kein Grund, eine fachlich tragfähige Versicherung auszuschließen",
+    "SEO-Namensprüfung ist nicht die semantische Owner- oder Produktprüfung",
+    "Deckungsbaustein versus eigenständiger Versicherungsvertrag für CHECK_* klären",
+    "Keine WordPress-Objekte erzeugen, solange DataForSEO-/Fachabnahme und Importfreigabe fehlen"
+  ],
+  "local_checks": {
+    "r2_areas": 10,
+    "r3_topics": 68,
+    "all_r2_minimum_three": true,
+    "unique_exact_seed_terms": true,
+    "unique_wp_owner_keys": true,
+    "all_have_4_possible_article_facets": true,
+    "semantic_review_holds": 13,
+    "existing_265_topic_name_collisions": 0,
+    "wordpress_writes": 0,
+    "provider_calls": 0,
+    "provider_cost": 0
+  }
+}
