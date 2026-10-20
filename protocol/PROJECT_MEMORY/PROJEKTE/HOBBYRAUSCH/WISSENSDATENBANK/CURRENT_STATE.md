@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 55 HOBBYS VOLL GEPRÜFT / KURZPROFILE 55/862 / 807 OFFEN**
+STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 455 HOBBYS VOLL GEPRÜFT / KURZPROFILE 455/862 / 407 OFFEN**
 
 ## Rolle
 
@@ -190,10 +190,20 @@ Register-SHA:
 
 Finder-Prototyp nutzt nun **55** vollständig klassifizierte Hobbys und zeigt auf jeder Ergebniskarte die vier Kurzprofilfelder.
 
+## Klassifikationsbatch 009
+
+- 50 Hobbys zusätzlich REVIEWED;
+- Gesamtstand **455/862**;
+- offen **407/862**;
+- je Hobby 54/54 Traits schema-valide;
+- je Hobby 4/4 Kurzprofilfelder vorhanden;
+- zentraler Register-SHA: `4dd3af722977ac0d62830ad31d7252532d7437574adccf633ecea3c5fb7ecc92`;
+- Audit: `/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_BATCH009_AUDIT.json`.
+
 ## ERSTER OFFENER BLOCKER
 
-Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **807 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
+Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **407 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**nd noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Die restlichen 807 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
+**Die restlichen 407 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine ungeprüfte Auto-Klassifikation.**n kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
