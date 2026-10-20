@@ -1,6 +1,14 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 20.10.2026 – VERIFIZIERTE DATAFORSEO-/IMPORT-ROUTE FÜR VERSICHERUNGEN (KORREKTUR)
+**Prüfung an zuständiger `KATEGORIEN/CURRENT_STATE.md`:** Vorherige Formulierung "kein nutzbarer DataForSEO-Zugang nachgewiesen" war irreführend. Das vorhandene zentrale Kategorieplugin `affiliate-portal-kategorie-workflow` enthält die Klassen `APKW_DataForSEO` und `APKW_Category_SEO_Audit` sowie die WordPress-Backendseite **`Portal-Kategorien → SEO-Namen prüfen`** mit bestehender DataForSEO-Verbindung. Ein **echter** Germany/de-Export wurde am 16.10.2026 dokumentiert: 570 abgefragte Begriffe, 51 Ergebnisbegriffe, $0,01812 Kosten, keine Kategorie-Writes. Die **neuen Versicherungsbegriffe** wurden dadurch NICHT gemessen.
+**Physisch belegter Importstand:** Die 743er und die 472er Kategorien-Ergänzung sind laut WordPress-Abschlussmeldung bereits live; `1.14.8.32` mit 471 Nachholkategorien wurde lokal gebaut/getestet, aber ein Live-Import dieser 471 ist NICHT belegt. Diese Vorgänge nicht erneut starten oder mit Versicherungsarbeit vermischen.
+**GENAU EINE NEXT ACTION für Versicherungen:** Den neuen Versicherungsseitenbaum als nur additive Kandidaten in den **bestehenden** Kategorien-Konzept-Workflow übernehmen, sodass seine kurzen Seitennamen über die **bereits vorhandene** Backend-Funktion `SEO-Namen prüfen` in einer eigenen Germany/de-Abfrage geprüft werden können. Keine fremde API oder neues Plugin einrichten. Kostenpflichtigen Abruf nur nach ausdrücklicher Freigabe. Danach semantische Eigentümer-/Dublettenprüfung und der bestehende Vorschau/Dry-Run/ADD-only-Import; keinen WP-Write vor Freigabe.
+
+---
+
+
 ## 20.10.2026 – VERSICHERUNGEN: ZUSATZHAUPTBEREICH UND FINDER BIS DATAFORSEO VORBEREITET
 Nutzerentscheidung: Vollwertige neue Hauptkategorie **Versicherungen** über alle Sparten, bestehendes Seite/Seite/Themenseite/Kategorie/Beitrag-Prinzip; unterste Themenseite je genau eine konkrete Versicherung; zusätzlich Versicherungsfinder als Magazin-Angebot und Teaser von Start-/Fachseiten; kontextgerechte Versicherungsbanner/-links. Kein extra Kategorie-Writer, keine isolierte Bannerverwaltung.
 **Verbindliches, ausdrücklich noch nicht keywordvalidiertes Arbeitsdokument:** `VERSICHERUNGEN_RESEARCH_VORLAGE_20261020.md`. Enthält fachliche Seed-Taxonomie, eindeutiges Owner/Duplikatprinzip, DataForSEO-Abfragefelder, Finderlogik und Integrationsgrenzen. Kein echtes DataForSEO-Ergebnis oder Backendzugriff nachgewiesen, keine WP-Änderungen, kein Plugin erstellt.
