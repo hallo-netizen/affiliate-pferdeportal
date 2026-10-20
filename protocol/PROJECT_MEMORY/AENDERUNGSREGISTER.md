@@ -1866,3 +1866,10 @@ Aktuelle 2.7.8 liegt im Bildzentrale-Büro und im zentralen Hobby-Depot-Plugin-B
 
 LIVE:
 Noch offen; kein Live-PASS vor WordPress-Readback.
+
+## HB-INS-20261020 – Siebte Versicherungswelt: 138er Keyword-Evidenz, 105er Konzept und geschützte 433er-Übergabe
+BEREICH: EIGENTUMSSCHUTZ / KONZEPT – Versicherungen.
+WAS: Nutzerentscheidung für weitere Hauptkategorie Versicherungen mit unverändertem Seiten-/Kategorieprinzip; zusätzlich neutraler Versicherungsfinder als späterer Magazin- und Startseiteneinstieg. Zwei echte DataForSEO-Keyword-Overview-Abfragen mit 68 + 70 Seeds = 138 Anfragen und 128 Rückgabezeilen, $0,03936 Providerkosten, keine offene Keyword-Ideas-Discovery. 12 Bereichsseiten, 105 individuelle Versicherungs-R3-Kandidaten, 315 flache Beitragskategorien und 945 individuelle, noch nicht SEO-freigegebene Artikelideen in `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/VERSICHERUNGEN_105_GESAMTPLAN_945_IDEEN_20261020.md`. Rein additive **433-Objekte-Vorlage** aus diesem GitHub-Plan in `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json` persistent abgelegt; 6/6 lokale Negativmutationen abgewiesen. Die 433 sind **nicht importierbar**, keine WP-Writes oder neuen Pluginversionen.
+WARUM: Vollständiger Versicherungsbereich ohne parallele WordPress-Taxonomie oder riskante Eingriffe in die bestehenden 265 Themen. Seed-Kontrolle und eindeutige Seitenowner vermeiden offensichtliche Auslassungen/Keyworddoppelungen. Der vorhandene C2.3-471er-Importer ist hart an Altseiten gebunden; für neue Versicherungsseiten muss sein vorhandenes zentrales Plugin auf technische Aufnahmefähigkeit geprüft und nur minimal additiv ergänzt werden. Nicht aus einer bloßen Titelliste eine SEO-Freigabe ableiten.
+BELEG: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md` (einzige Versicherungs-Current); `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md` IDs HB-INS-20261020-01 bis 05; `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md` (separate technische Plugin-Current).
+STATUS: Fach-/Strukturentwurf LOCAL PASS, WordPress-Integration und Live-Freigabe ausstehend. Keine persönliche Bibliothek verwendet.
