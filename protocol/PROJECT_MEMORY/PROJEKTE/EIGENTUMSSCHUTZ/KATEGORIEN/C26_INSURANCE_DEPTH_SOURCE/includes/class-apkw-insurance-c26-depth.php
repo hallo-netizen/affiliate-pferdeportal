@@ -25,7 +25,7 @@ final class APKW_Insurance_C26_Depth {
     private static function profile():array {
         if(self::$profile!==null)return self::$profile;
         $file=APKW_DIR.'profiles/hab-und-bewahr-insurance-c26-end-categories.json';
-        if(!is_readable($file)||hash_file('sha256',$file)!=='0b8a101f4f7c8bfd1ac5291dab54f02cba46c048f84d1497d1354e02b45bd3a0')
+        if(!is_readable($file)||hash_file('sha256',$file)!=='4b1d2f5a85bf9e27d1f56cbbbd92f15ad5f6cece529a07d1e44c20c934e06b72')
             throw new RuntimeException('Versicherungstiefe: Original-Profil fehlt oder wurde verändert.');
         $x=json_decode((string)file_get_contents($file),true);
         if(!is_array($x)||($x['schema']??'')!=='HAB_INSURANCE_C26_END_CATEGORIES_ADD_ONLY_V1')
@@ -76,7 +76,7 @@ final class APKW_Insurance_C26_Depth {
         return 'core:subarea:insurance:'.substr($owner,strlen('INS-SEO:R3:'));
     }
     private static function revision(string $base):string {
-        return $base.'+INS-DEPTH-'.substr('0b8a101f4f7c8bfd1ac5291dab54f02cba46c048f84d1497d1354e02b45bd3a0',0,12);
+        return $base.'+INS-DEPTH-'.substr('4b1d2f5a85bf9e27d1f56cbbbd92f15ad5f6cece529a07d1e44c20c934e06b72',0,12);
     }
     private static function lock():bool {
         $v=(int)get_option(self::LOCK,0);
