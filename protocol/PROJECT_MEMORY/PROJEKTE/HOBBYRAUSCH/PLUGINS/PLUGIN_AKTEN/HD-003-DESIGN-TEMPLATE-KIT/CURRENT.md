@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **1.50.704 HOBBYFINDER RUNTIME LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.704 HOBBYFINDER RUNTIME LOCAL HARD PASS / ISOLIERTE CURRENT.ZIP-SYNC OFFEN / LIVE DANACH**
 
 Plugin-ID:
 HD-003-DESIGN-TEMPLATE-KIT
@@ -49,10 +49,21 @@ Größe:
 - gerendertes JavaScript Syntax PASS;
 - ZIP PASS.
 
+## ISOLIERTE CAMPUS-ABLAGE
+
+Das vorhandene Manifest unter
+`../../ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md`
+steht noch auf 1.50.699; eine `CURRENT.zip` ist dort nicht vorhanden.
+
+Der lokale 1.50.704-Release-ZIP wurde in der Abschlussprüfung 2026-10-20 erneut gegen den autoritativen SHA-256 geprüft und ist identisch:
+`558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`.
+
+Keine Ersatz-/Pointerdatei darf als `CURRENT.zip` ausgegeben werden.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Readback mit aktivem HD-007.
+**Isolierte Campus-Ausgabekopie 1.50.704 `CURRENT.zip` + aktuelles MANIFEST fehlen.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-007 1.0.0 aktivieren, danach HD-003 1.50.704 installieren und den Hobbyfinder real positiv/negativ prüfen.**
+**Nach dem HD-007-Artefaktsync die hash-identische HD-003-1.50.704-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` synchronisieren und das MANIFEST auf 1.50.704 aktualisieren. Erst danach Liveinstallation/Frontend-Readback.**
