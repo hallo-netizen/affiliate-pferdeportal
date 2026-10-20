@@ -1,0 +1,83 @@
+{
+  "contract": "HB_INSURANCE_476_STRUCTURAL_TEST_V1",
+  "date": "2026-10-20",
+  "source": "VERSICHERUNGEN_ADDONLY_476_FACHVORLAGE_20261020.json",
+  "mode": "In-Memory-Datenvalidierung, KEIN WordPress-Mock und KEIN Plugin-Test",
+  "result": "PASS_DATA_STRUCTURE_ONLY",
+  "positive": {
+    "checks": 0,
+    "passed": true
+  },
+  "seven_negative_mutations": [
+    {
+      "name": "duplicate_category_slug",
+      "status": "PASS_BLOCKED",
+      "signal": "TERM_SLUG_COLLISION",
+      "actual_errors": [
+        "TERM_SLUG_COLLISION"
+      ]
+    },
+    {
+      "name": "missing_r3_owner",
+      "status": "PASS_BLOCKED",
+      "signal": "BAD_TERM_OWNER",
+      "actual_errors": [
+        "BAD_TERM_OWNER",
+        "OWNER_COVERAGE"
+      ]
+    },
+    {
+      "name": "category_nested",
+      "status": "PASS_BLOCKED",
+      "signal": "TERM_NOT_FLAT",
+      "actual_errors": [
+        "TERM_NOT_FLAT"
+      ]
+    },
+    {
+      "name": "weak_content_capacity",
+      "status": "PASS_BLOCKED",
+      "signal": "CAPACITY_TOO_WEAK",
+      "actual_errors": [
+        "CAPACITY_TOO_WEAK"
+      ]
+    },
+    {
+      "name": "wrong_page_parent",
+      "status": "PASS_BLOCKED",
+      "signal": "BAD_PARENT",
+      "actual_errors": [
+        "BAD_PARENT",
+        "OLD_PAGE_PROPOSAL_CHANGED"
+      ]
+    },
+    {
+      "name": "existing_page_definition_changed",
+      "status": "PASS_BLOCKED",
+      "signal": "OLD_PAGE_PROPOSAL_CHANGED",
+      "actual_errors": [
+        "OLD_PAGE_PROPOSAL_CHANGED"
+      ]
+    },
+    {
+      "name": "duplicate_wp_term_name",
+      "status": "PASS_BLOCKED",
+      "signal": "TERM_TITLE_COLLISION",
+      "actual_errors": [
+        "TERM_TITLE_COLLISION"
+      ]
+    }
+  ],
+  "protected_existing_wordpress": "NOT_CHECKED_LIVE; no existing page/category IDs supplied, only proposal comparison with 433 history",
+  "source_page_tree_unchanged": true,
+  "provider_calls": 0,
+  "wordpress_writes": 0,
+  "article_generation": 0,
+  "article_title_check": 0,
+  "needs": [
+    "WP-Live-Bestandsreadback",
+    "Original-Plugin-Integration fuer neue R1/R2/R3-Welt",
+    "echte Plugin-PHP-Positiv-/Negativsimulation",
+    "separate ausdrueckliche Importfreigabe"
+  ]
+}
