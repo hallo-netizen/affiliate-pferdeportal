@@ -30,7 +30,8 @@
     "three_independent_article_intents_per_last_category": "FACHPRUEFUNG_AUSSTEHEND",
     "no_import": true,
     "existing_wordpress_objects_not_modified": true,
-    "keyword_overview_not_ideas_search": true
+    "keyword_overview_not_ideas_search": true,
+    "all_original_13_and_new_7_holds_remain_open": true
   },
   "r1": "Versicherungen",
   "r2_areas": [
@@ -1042,5 +1043,59 @@
     "Tierlebensversicherung"
   ],
   "last_action": "138 Begriffe von DataForSEO gemessen und fachlich auf 101 mögliche R3-Seiten ohne eindeutige Namen-Dopplungen aufgeteilt",
-  "next_action": "7 HOLD-Fälle und weitere Grenzfälle fachlich anhand Versicherungsbedingungen aufklären; End-Beitragskategorien mit mindestens 3 unabhängigen Artikelintentionen je Endkategorie festlegen; vor jeglichem WP-Write bestehenden ADD-only Dry-Run gegen aktuellen Live-Bestand durchführen."
+  "next_action": "7 HOLD-Fälle und weitere Grenzfälle fachlich anhand Versicherungsbedingungen aufklären; End-Beitragskategorien mit mindestens 3 unabhängigen Artikelintentionen je Endkategorie festlegen; vor jeglichem WP-Write bestehenden ADD-only Dry-Run gegen aktuellen Live-Bestand durchführen.",
+  "original_13_review_holds": [
+    {
+      "name": "Glasversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Photovoltaikversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Feuerrohbauversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Oldtimerversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "name": "Verkehrsrechtsschutzversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Krankenhaustagegeldversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "name": "Dienstunfähigkeitsversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Fondsgebundene Lebensversicherung",
+      "reason": "CHECK_EIGENSTAENDIGKEIT"
+    },
+    {
+      "name": "Reiseabbruchversicherung",
+      "reason": "CHECK_BAUSTEIN"
+    },
+    {
+      "name": "Campingversicherung",
+      "reason": "CHECK_PRODUKTDEFINITION"
+    },
+    {
+      "name": "Sportgeräteversicherung",
+      "reason": "CHECK_PRODUKTDEFINITION"
+    },
+    {
+      "name": "Berufshaftpflichtversicherung",
+      "reason": "CHECK_UEBERSCHNEIDUNG"
+    },
+    {
+      "name": "Vermögensschadenhaftpflichtversicherung",
+      "reason": "CHECK_UEBERSCHNEIDUNG"
+    }
+  ]
 }
