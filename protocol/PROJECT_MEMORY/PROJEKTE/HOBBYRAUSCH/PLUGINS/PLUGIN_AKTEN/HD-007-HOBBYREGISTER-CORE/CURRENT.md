@@ -83,8 +83,8 @@ Keine Ersatz-/Pointerdatei darf als `CURRENT.zip` ausgegeben werden.
 
 ## ERSTER OFFENER BLOCKER
 
-**Isolierte Campus-Ausgabekopie `CURRENT.zip` + MANIFEST fehlt.**
+**Isolierte Campus-Ausgabekopie `CURRENT.zip` fehlt. Das MANIFEST ist aktuell vorhanden.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Die hash-identische HD-007-1.0.0-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip` synchronisieren und das MANIFEST mit Version, SHA, Quelle und LOCAL-HARD-PASS anlegen. Erst danach WordPress-Installation/Aktivierung.**
+**Die hash-identische HD-007-1.0.0-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip` synchronisieren. Das MANIFEST ist bereits angelegt. Erst danach WordPress-Installation/Aktivierung.**
