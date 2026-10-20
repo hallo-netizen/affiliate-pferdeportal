@@ -2,51 +2,69 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-19
-STATUS: **1.50.699 STARTSEITE/FINDER VEREINFACHT LOCAL PASS / LIVE OFFEN**
+STAND: 2026-10-20
+STATUS: **1.50.703 AKTUELLER DESIGNSTAND / LOCAL PASS / LIVE TEILWEISE VISUELL BESTÄTIGT / VOLL-READBACK OFFEN**
 
 Plugin-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
-Artefakt:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.699_STARTSEITE_FINDER_VEREINFACHT_LOCALPASS.zip
+Aktuelles Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.703_SERVICE_TITLE_NATIVE_FOOTER_FIX_LOCALPASS.zip`
 
 SHA-256:
-291851373f398c25c8c0799ea25569b8c8bf85ae26b7aab7c89de9a4d7862a1a
+`74cb488a891dab9bfff237c3820c05a2cf3dd3651f52a5335e2af671b33ce228`
 
 Größe:
-58,670,083 Bytes.
+58,673,853 Bytes.
 
-Scope:
-- Basis ist der vollständig geprüfte 1.50.698-Stand;
-- 69/69 Hub2-Einstiege und 395 Detail-Hub-Texte unverändert;
-- Hero-Button „Hobbys entdecken“ entfernt;
-- einzig verbleibender Hero-Weg: Hobbyfinder;
-- Finder-Anmoderation „Noch unsicher, was zu dir passt?“;
-- CTA „Hobbyfinder starten →“;
-- „Unsere Hobbywelten“ zu „Deine Hobbywelten“;
-- Unterzeile auf „Klick dich rein und finde Hobbys, die zu dir passen.“ gekürzt;
-- „Entdecke unsere Themenbereiche.“ entfernt;
-- „Alle Hobbywelten entdecken →“ entfernt;
-- „Zeit, Budget & Platz“ nur aus Startseiten-Themen entfernt, Editorial-/SEO-Seite bleibt erhalten;
-- Anbieter bleibt DIRECTORY/HivePress und Footer-Weg;
-- keine Änderung an Kategoriebaum, Bildern, Affiliate-Slots oder Meta-/SEO-Titeln.
+## Rolle
 
-QA:
-- fokussierte Startseitenprüfung 8/8 PASS;
-- PHP 135/135 PASS;
-- Fresh-Unpack PHP 135/135 PASS;
-- ZIP PASS;
-- Vergleich gegen 1.50.698: 0 unerwartete Änderungen an vorhandenen Dateien.
+- zentrale visuelle Hobby-Depot-Darstellung;
+- Header, Startseite, Hub-/Detaildarstellung, Footer und spätere Finder-Oberfläche;
+- **keine eigene Hobby-Datenbank**;
+- Finder darf nur aus dem zentralen Hobbyregister lesen.
 
-FORMALER ARTEFAKTSTATUS:
-Der geprüfte lokale 1.50.699-ZIP ist vorhanden und hashverifiziert. Im Campus-Verzeichnis ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/ fehlt weiterhin die geforderte Binärkopie CURRENT.zip. Keine Ersatz-/Pointerdatei erfinden.
+## Aktueller Stand
 
-ERSTER OFFENER BLOCKER:
-Echter WordPress-/Frontend-Live-Readback. Der formale CURRENT.zip-Sync bleibt zusätzlich offen.
+1.50.703 basiert auf der stabilen 1.50.699-Laufzeitklasse `Hobby_Depot_Profile_V150699`.
+Keine Klassen-/Template-Umbenennung wie beim verworfenen 1.50.700.
 
-EXAKT EINE NEXT ACTION:
-**1.50.699 aus dem hashverifizierten Artefakt installieren und Startseite plus repräsentative Hub2 real prüfen; kein Live-PASS vor diesem Readback.**
+Enthalten:
+- vereinfachte Startseite mit Hobbyfinder als Hero-CTA;
+- 69/69 Hub2-Einstiege unverändert;
+- 395 Detail-Hubs unverändert;
+- Serviceseiten: genau ein Titel + Breadcrumb, kein generischer Zusatzintroblock;
+- ListingHive-`.site-footer` ausgeblendet;
+- eigener Hobby-Depot-Footer;
+- Reihenfolge Rechtliches → Informationen → Anzeigenmarkt;
+- Magazin dedupliziert;
+- Anbieter im Informationsblock entfernt;
+- Hobbyfinder separat.
 
-Fach-Current:
-../../../DESIGN/CURRENT_STATE.md
+## QA
+
+Lokale QA 1.50.703:
+- PHP-Lint 135/135 PASS;
+- 11/11 Serviceseiten-Harness PASS;
+- Footer-Runtime PASS;
+- ListingHive-Selektormatch PASS;
+- ZIP-Integrität PASS.
+
+Live:
+- Nutzer meldete am 2026-10-20, dass der doppelte Footer zunächst nicht mehr sichtbar ist;
+- vollständige Live-Abnahme aller 1.50.703-Punkte wurde noch nicht protokolliert;
+- daher kein pauschales LIVE PASS.
+
+## Verworfen
+
+- 1.50.700: verworfen wegen Runtime-Klassen-/Template-Mismatch;
+- 1.50.701: ersetzt;
+- 1.50.702: ersetzt; Serviceseitentitel fehlten.
+
+## ERSTER OFFENER BLOCKER
+
+Der neue Hobbyfinder muss auf Basis 1.50.703 eingebunden werden, **ohne** die 862 Hobbydatensätze in HD-003 zu duplizieren.
+
+## EXAKT EINE NEXT ACTION
+
+**Eine schlanke zentrale Hobbyregister-Laufzeitschnittstelle bereitstellen und HD-003 darauf lesen lassen. Danach Finder lokal positiv/negativ testen; 1.50.703 sonst unverändert lassen.**
