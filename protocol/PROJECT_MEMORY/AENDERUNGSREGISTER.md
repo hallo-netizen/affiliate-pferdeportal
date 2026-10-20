@@ -1782,3 +1782,26 @@ Die exakten Pferde-Pakete Glossar 1.4.0 und Bildzentrale 2.7.6 waren nicht als k
 
 LIVE:
 Noch nicht installiert. Kein Live-PASS vor WordPress-Readback.
+
+
+## HOBBYRAUSCH-GLOSSAR-20261020-Q – WordPress-Verpackungsfehler 1.0.0 korrigiert
+
+LIVE-BEFUND:
+WordPress meldete beim ersten Glossar-Paket: „Das Paket konnte nicht installiert werden. Es wurden keine gültigen Plugins gefunden.“
+
+URSACHE:
+Der Plugin-Code selbst war syntaktisch gültig. Im ZIP lag jedoch zusätzlich eine README auf Root-Ebene neben dem eigentlichen Pluginordner. Dadurch war der Installationssatz für WordPress nicht eindeutig.
+
+FIX:
+Version 1.0.1, ausschließlich Verpackungsfix:
+- exakt ein oberster Ordner `hobby-depot-glossar/`;
+- Hauptdatei `hobby-depot-glossar.php` direkt darin;
+- README in den Pluginordner verschoben;
+- keine Fach-/SEO-/Managerlogik verändert.
+
+ARTEFAKT:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
+SHA-256 `b686655bc2571548248fe278c4a74e7db927503f92900c9a661d173b6d04329a`.
+
+QA:
+PHP 7/7 PASS, ZIP PASS, WordPress-Paketstruktur PASS.
