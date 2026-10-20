@@ -3,68 +3,56 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **1.50.703 AKTUELLER DESIGNSTAND / LOCAL PASS / LIVE TEILWEISE VISUELL BESTÄTIGT / VOLL-READBACK OFFEN**
+STATUS: **1.50.704 HOBBYFINDER RUNTIME LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
-Aktuelles Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.703_SERVICE_TITLE_NATIVE_FOOTER_FIX_LOCALPASS.zip`
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`
+
+Library:
+`/Hobby Depot/Plugin-Büro/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`
 
 SHA-256:
-`74cb488a891dab9bfff237c3820c05a2cf3dd3651f52a5335e2af671b33ce228`
+`558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`
 
 Größe:
-58,673,853 Bytes.
+58,681,497 Bytes.
 
-## Rolle
+## Basis
 
-- zentrale visuelle Hobby-Depot-Darstellung;
-- Header, Startseite, Hub-/Detaildarstellung, Footer und spätere Finder-Oberfläche;
-- **keine eigene Hobby-Datenbank**;
-- Finder darf nur aus dem zentralen Hobbyregister lesen.
+- direkte Basis: 1.50.703;
+- stabile Klasse bleibt `Hobby_Depot_Profile_V150699`;
+- keine Template-/Klassenumbenennung;
+- Footer-/Serviceseitenfix 1.50.703 bleibt unverändert;
+- Kategorie-/Bild-/Affiliate-/SEO-Struktur unverändert.
 
-## Aktueller Stand
+## Finder-Vertrag
 
-1.50.703 basiert auf der stabilen 1.50.699-Laufzeitklasse `Hobby_Depot_Profile_V150699`.
-Keine Klassen-/Template-Umbenennung wie beim verworfenen 1.50.700.
+- Slug `hobbyfinder` = eigener HD-003-Content-Route;
+- Datensätze ausschließlich über HD-007 read-only API;
+- keine persistente Hobbykopie in HD-003;
+- exakt 862 Datensätze erforderlich, sonst fail-closed;
+- echte Zielobjekte ausschließlich über HD-004 `hd_category_registry_resolve()`;
+- keine erfundenen Ziel-URLs;
+- Ergebnis-Karte: Passungswert + Gründe + Was ist das? + Was macht man? + Was braucht man? + Der Reiz.
 
-Enthalten:
-- vereinfachte Startseite mit Hobbyfinder als Hero-CTA;
-- 69/69 Hub2-Einstiege unverändert;
-- 395 Detail-Hubs unverändert;
-- Serviceseiten: genau ein Titel + Breadcrumb, kein generischer Zusatzintroblock;
-- ListingHive-`.site-footer` ausgeblendet;
-- eigener Hobby-Depot-Footer;
-- Reihenfolge Rechtliches → Informationen → Anzeigenmarkt;
-- Magazin dedupliziert;
-- Anbieter im Informationsblock entfernt;
-- Hobbyfinder separat.
+## Lokale QA
 
-## QA
-
-Lokale QA 1.50.703:
-- PHP-Lint 135/135 PASS;
-- 11/11 Serviceseiten-Harness PASS;
-- Footer-Runtime PASS;
-- ListingHive-Selektormatch PASS;
-- ZIP-Integrität PASS.
-
-Live:
-- Nutzer meldete am 2026-10-20, dass der doppelte Footer zunächst nicht mehr sichtbar ist;
-- vollständige Live-Abnahme aller 1.50.703-Punkte wurde noch nicht protokolliert;
-- daher kein pauschales LIVE PASS.
-
-## Verworfen
-
-- 1.50.700: verworfen wegen Runtime-Klassen-/Template-Mismatch;
-- 1.50.701: ersetzt;
-- 1.50.702: ersetzt; Serviceseitentitel fehlten.
+- PHP 135/135 PASS;
+- Diff gegen 1.50.703: exakt 3 Dateien;
+- Runtime 862/862 PASS;
+- Profile 862/862 PASS;
+- Route PASS;
+- fehlendes HD-007 fail-closed PASS;
+- gerendertes JavaScript Syntax PASS;
+- ZIP PASS.
 
 ## ERSTER OFFENER BLOCKER
 
-Der neue Hobbyfinder muss auf Basis 1.50.703 eingebunden werden, **ohne** die 862 Hobbydatensätze in HD-003 zu duplizieren.
+Echter WordPress-Readback mit aktivem HD-007.
 
 ## EXAKT EINE NEXT ACTION
 
-**Eine schlanke zentrale Hobbyregister-Laufzeitschnittstelle bereitstellen und HD-003 darauf lesen lassen. Danach Finder lokal positiv/negativ testen; 1.50.703 sonst unverändert lassen.**
+**HD-007 1.0.0 aktivieren, danach HD-003 1.50.704 installieren und den Hobbyfinder real positiv/negativ prüfen.**
