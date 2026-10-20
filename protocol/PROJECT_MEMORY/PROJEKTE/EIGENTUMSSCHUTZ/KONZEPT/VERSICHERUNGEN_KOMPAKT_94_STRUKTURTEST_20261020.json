@@ -1,0 +1,106 @@
+{
+  "type": "HAB_UND_BEWAHR_INSURANCE_COMPACT_STRUCTURE_QA_V1",
+  "date": "2026-10-20",
+  "source": "VERSICHERUNGEN_KOMPAKT_26_SEITEN_68_KATEGORIEN_105_THEMEN_20261020.json",
+  "method": "JS-Validierung der GitHub-Daten, KEIN echter WordPress-/Plugin-Test",
+  "positive_result": "PASS",
+  "checks": [
+    "1 R1 / 5 R2 / 20 R3 / 68 flache Kategorie-Kandidaten",
+    "alle 105 bisherigen Versicherungstypen genau einmal und keinem fremden Typ zugewiesen",
+    "3 bis 4 unterste Kategorien pro R3-Seite, jeweils 3 grobe Stoffperspektiven",
+    "keine neuen Artikel oder Artikeltitel",
+    "null kostenpflichtige APIs, null WordPress Writes"
+  ],
+  "negative_mutations": [
+    {
+      "name": "Remove insurance",
+      "expected_block": "SOURCE_INSURANCE_NOT_ONCE",
+      "observed": [
+        "SOURCE_INSURANCE_NOT_ONCE",
+        "COUNT_MISMATCH"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Duplicate assignment",
+      "expected_block": "SOURCE_INSURANCE_NOT_ONCE",
+      "observed": [
+        "SOURCE_INSURANCE_NOT_ONCE",
+        "COUNT_MISMATCH"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Unknown insurance",
+      "expected_block": "NEW_UNAUTHORIZED_INSURANCE",
+      "observed": [
+        "SOURCE_INSURANCE_NOT_ONCE",
+        "NEW_UNAUTHORIZED_INSURANCE"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Bad hierarchy",
+      "expected_block": "R3_PARENT",
+      "observed": [
+        "R3_PARENT"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Unknown coverage owner",
+      "expected_block": "UNKNOWN_COVERAGE_OWNER",
+      "observed": [
+        "UNKNOWN_COVERAGE_OWNER"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Nested category",
+      "expected_block": "NESTED_CATEGORY",
+      "observed": [
+        "NESTED_CATEGORY"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Duplicated term slug",
+      "expected_block": "DUP_TERM_SLUG",
+      "observed": [
+        "DUP_TERM_SLUG"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Capacity not backed",
+      "expected_block": "INSUFFICIENT_COARSE_CAPACITY",
+      "observed": [
+        "INSUFFICIENT_COARSE_CAPACITY"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Article work inserted",
+      "expected_block": "UNAUTHORIZED_ARTICLE_TITLES",
+      "observed": [
+        "UNAUTHORIZED_ARTICLE_TITLES"
+      ],
+      "blocked": true
+    },
+    {
+      "name": "Plugin/WordPress writes claimed",
+      "expected_block": "WRITE_OR_API_CALLS_CLAIMED",
+      "observed": [
+        "WRITE_OR_API_CALLS_CLAIMED"
+      ],
+      "blocked": true
+    }
+  ],
+  "limits": [
+    "Nicht identisch mit Live-WP-Preflight",
+    "Die grobe Kapazitaetspruefung ersetzt keine fachliche/SEO-Freigabe",
+    "28 markierte Einzelbeitrags-Kandidaten sind keine SEO-Redaktionsentscheidung",
+    "Keine aktuelle WP-Datenbank oder Slugkollisionen gegen Live geprueft"
+  ],
+  "protected_old_portal_not_changed": true
+}
