@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **CORE 1.0.6 ROUTENKONFLIKT REPRODUZIERT + LOCAL HTTP HARD PASS / LIVE OFFEN**
+STATUS: **1.0.6 LIVE ROUTE PASS / 1.0.7 PFERDEATELIER-LOGIK LOCAL PASS / DESIGN SPÄTER**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -141,6 +141,34 @@ SHA-256:
 `be9f98f4dabd2728985f7252a77c5e617038cf3905914df597742eeb80e60e3f`
 
 Wichtig: Das ist ein lokaler Integrations-Hard-Pass, noch kein Live-Pass.
+
+
+## 20.10.2026 – Pferdeatelier-Glossarlogik verbindlich übernommen
+
+Frisch geprüft gegen Pferde-Atelier Glossar-Current/Struktur/Manager:
+- Fachtext: **0 Bodylinks**;
+- rechte Spalte: **Hobbywelt → Verwandte Begriffe → optional Mehr zum Thema**;
+- Mehr zum Thema zeigt genau ein starkes vorhandenes Hauptziel (Seite/Kategorie), sonst nichts;
+- Quellen bleiben als Recherche-/Prüfmetadaten gespeichert, werden **nicht öffentlich gerendert**;
+- Synonyme bleiben Metadaten/Aliase und werden **nicht als eigener Frontendblock** ausgegeben;
+- keine erfundenen Related-/Ziel-URLs.
+
+Lokaler Kandidat 1.0.7 baut ausschließlich auf dem live gerouteten 1.0.6 auf und ändert diese Inhalts-/Linklogik, **kein Design**.
+
+Artefakt: `HOBBY_DEPOT_GLOSSAR_CORE_1.0.7_PFERDEATELIER_LOGIK_LOCALPASS.zip`
+SHA-256: `f900ded62a5ea7b6a77a2e8814fc791a34eab0598f8c1c66c4bae1f48a9f30a9`
+
+Lokale Prüfung:
+- PHP 8/8 Syntax PASS;
+- ZIP-Integrität PASS;
+- gerenderte Test-Einzelseite: Hobbywelt PASS;
+- zwei reale Related-Linkplätze PASS;
+- optionaler Hauptziel-Link PASS;
+- Quellen im Frontend 0 PASS;
+- Synonymblock im Frontend 0 PASS;
+- Bodylink im Fachtext 0 PASS.
+
+**Keine Installation jetzt erforderlich.** 1.0.7 bleibt vorbereiteter Kandidat und soll mit der späteren Designänderung gebündelt werden.
 
 ## ERSTER OFFENER BLOCKER
 
