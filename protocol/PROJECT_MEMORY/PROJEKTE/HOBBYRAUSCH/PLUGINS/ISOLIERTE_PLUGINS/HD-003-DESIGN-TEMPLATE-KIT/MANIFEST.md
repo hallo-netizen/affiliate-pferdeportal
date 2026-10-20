@@ -1,36 +1,45 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
-STAND: 2026-10-19
-STATUS: **1.50.699 STARTSEITE/FINDER VEREINFACHT LOCAL PASS / LIVE OFFEN**
+STAND: 2026-10-20
+STATUS: **1.50.704 HOBBYFINDER RUNTIME LOCAL HARD PASS / CURRENT.zip SYNC OFFEN**
 
 PLUGIN-ID:
 HD-003-DESIGN-TEMPLATE-KIT
 
 ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.699_STARTSEITE_FINDER_VEREINFACHT_LOCALPASS.zip
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip
+
+VERSION:
+1.50.704
 
 SHA-256:
-291851373f398c25c8c0799ea25569b8c8bf85ae26b7aab7c89de9a4d7862a1a
+558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc
 
 GRÖSSE:
-58,670,083 Bytes.
+58,681,497 Bytes.
 
-LOKALE QA:
-- Startseitenänderungen 8/8 PASS;
+AUTORITATIVE QUELLE:
+`PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+FACHQUELLE:
+`DESIGN/CURRENT_STATE.md`
+
+BASIS:
+1.50.703.
+
+PRÜFSTATUS:
+- lokaler Release-ZIP im Abschlusscheck 2026-10-20 SHA-identisch;
 - PHP 135/135 PASS;
-- Fresh-Unpack PHP 135/135 PASS;
-- ZIP PASS;
-- 69 Hub2-Einstiege aus 1.50.698 unverändert;
-- 395 Detail-Hubs unverändert;
-- Kategoriebaum/Bilder/Affiliate-Slots/Meta-SEO unverändert;
-- 0 unerwartete Änderungen an vorhandenen Dateien gegen 1.50.698.
+- Diff gegen 1.50.703 exakt 3 Dateien;
+- Runtime/Profile 862/862 PASS;
+- Hobbyfinder-Route PASS;
+- fehlendes HD-007 fail-closed PASS;
+- JavaScript Syntax PASS;
+- ZIP PASS.
 
 LIVE-GRENZE:
-Kein Live-PASS vor WordPress-Readback.
-
-NEXT:
-Ausschließlich aus der Plugin-Current lesen.
+Kein Live-PASS vor WordPress-/Frontend-Readback mit aktivem HD-007.
 
 CURRENT.zip-SYNC:
-**OFFEN / FORMALER ARTEFAKTRESTPUNKT.**
-Der lokale 1.50.699-ZIP ist SHA-/ZIP-geprüft. Im Campus-Verzeichnis ist aktuell keine CURRENT.zip vorhanden. Keine Ersatz-/Pointerdatei als CURRENT.zip erfinden.
+**OFFEN.**
+Keine Pointer-/Textdatei als Ersatz für die echte ZIP verwenden.
