@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **HOBBYREGISTER-KLASSIFIKATION COMPLETE / 862 VON 862 REVIEWED / 0 OFFEN**
+STATUS: **HOBBYREGISTER COMPLETE / 862 VON 862 REVIEWED / HOBBYFINDER-VOLLBESTAND 862 LOKAL PASS**
 
 ## Rolle
 
@@ -75,10 +75,25 @@ Prototyp:
 
 Grundoptik und Ablauf wurden vom Nutzer positiv bestätigt.
 
+Vollbestand:
+- Prototyp nutzt **862/862** zentrale Hobbyidentitäten;
+- **862/862** Kurzprofile vorhanden;
+- JavaScript-Syntax: PASS;
+- 4 stark unterschiedliche Positivprofile: jeweils belastbare Treffer;
+- harte Filter für Sozialform, Ort, Zeit, Budget und Platz gegen alle zulässigen Treffer geprüft: PASS;
+- gezielte Negativtests: **5/5 PASS**;
+- „Überrasch mich“ priorisiert ungewöhnliche/sehr schräge Hobbys wie vorgesehen.
+
+QA:
+`/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FULL_862_QA.json`
+
+QA-SHA-256:
+`718d7e499f5f4729ec8886add6af4b67a2b9d0fe58d080933874aa4ea6dc0e20`
+
 ## ERSTER OFFENER BLOCKER
 
-**Kein Klassifikationsblocker mehr.** Der vollständige 862er-Bestand ist zentral klassifiziert.
+**Kein Daten- oder Finderlogik-Blocker mehr.** Der vollständige 862er-Bestand ist zentral klassifiziert und im Vollbestands-Prototyp geprüft.
 
 ## EXAKT EINE NEXT ACTION
 
-**Den Hobbyfinder-Prototyp auf den vollständigen zentralen 862er-Bestand umstellen und anschließend Ranking/Ergebnisdarstellung mit dem Vollbestand positiv und negativ prüfen.**
+**Den lokal geprüften 862er-Hobbyfinder in die WordPress-/Designstrecke überführen, ohne eine zweite Hobby-Datenbank anzulegen. Vor Liveeinsatz weiterhin lokale Positiv-/Negativtests und danach echten WordPress-Readback durchführen.**
