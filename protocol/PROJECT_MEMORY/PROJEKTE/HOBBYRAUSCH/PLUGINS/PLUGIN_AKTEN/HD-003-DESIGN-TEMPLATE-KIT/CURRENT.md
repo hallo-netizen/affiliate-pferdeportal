@@ -62,8 +62,8 @@ Keine Ersatz-/Pointerdatei darf als `CURRENT.zip` ausgegeben werden.
 
 ## ERSTER OFFENER BLOCKER
 
-**Isolierte Campus-Ausgabekopie 1.50.704 `CURRENT.zip` + aktuelles MANIFEST fehlen.**
+**Isolierte Campus-Ausgabekopie 1.50.704 `CURRENT.zip` fehlt. Das MANIFEST ist auf 1.50.704 aktualisiert.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Nach dem HD-007-Artefaktsync die hash-identische HD-003-1.50.704-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` synchronisieren und das MANIFEST auf 1.50.704 aktualisieren. Erst danach Liveinstallation/Frontend-Readback.**
+**Nach dem HD-007-Artefaktsync die hash-identische HD-003-1.50.704-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` synchronisieren. Das MANIFEST ist bereits auf 1.50.704 aktualisiert. Erst danach Liveinstallation/Frontend-Readback.**
