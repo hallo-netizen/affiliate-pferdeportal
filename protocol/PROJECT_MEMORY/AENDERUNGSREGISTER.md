@@ -1805,3 +1805,32 @@ SHA-256 `b686655bc2571548248fe278c4a74e7db927503f92900c9a661d173b6d04329a`.
 
 QA:
 PHP 7/7 PASS, ZIP PASS, WordPress-Paketstruktur PASS.
+
+
+## HOBBYRAUSCH-BILD-20261020-R – Falsche Bildzentrale 1.0.0 verworfen / echtes Pferdeatelier-Original 2.7.6 gebunden
+
+KORREKTUR:
+Der am 19.10. erzeugte Hobby-Depot-Bildzentrale-Kandidat 1.0.0 war kein belegter Abkömmling des realen Pferdeatelier-Plugins. Er wird nicht weiterverwendet. Die Library-Kopien im Hobby-Depot-Bildbüro und Plugin-Büro wurden entfernt.
+
+ORIGINALBEWEIS:
+Im WPvivid-Pluginbackup vom 24.09.2026 wurde die reale Datei `plugins/pferde-atelier-bildzentrale/pferde-atelier-bildzentrale.php` gefunden.
+Sie ist Version 2.7.6, 383603 Bytes groß und hat SHA-256 `984a8d4da6594ffa93e6d4024b57cc6c22c7d1fbfec398177a19b0490c20d89b`.
+Dieser Hash stimmt exakt mit dem bereits dokumentierten Source-Scan der installierten Pferdeatelier-Bildzentrale überein.
+
+UMSETZUNG:
+Aus genau dieser Originaldatei wurde Hobby Depot Bildzentrale 2.7.7 abgeleitet. Kein Neubau.
+Entfernt wurden pa_breed, der komplette Rassen-Batch, Rassen-/Pferde-Prompts, Pferde-Motivcluster, Pferde-spezifische Such-/Alttext-/Fallbackregeln, ID 9120 sowie Pferdeatelier-Admin-/REST-Slugs.
+Hobby-Depot-Name, HDBZ-Namespace, neutraler Hobby-Prompt und die acht Hobbywelten wurden gebunden.
+
+KERNBEWEIS:
+Nach Namespace-Normalisierung bleiben 134 Originalfunktionen unverändert; alle geprüften kritischen allgemeinen Provider-, Import-, Taxonomie-, CPT-, HivePress-, Readback- und Undo-Wege sind unverändert.
+
+ARTEFAKT:
+`HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip`
+SHA-256 `c27eff9a48007a5317832cf3d6f539d49856a1e6edaf92eebd1bfdb89e030ab7`.
+
+BILDERTROMMEL-GRENZE:
+Im bytegenau verifizierten 2.7.6-Original ist kein eindeutig benannter Code-/UI-Weg „Bildertrommel“/„Bildtrommel“ vorhanden. Deshalb wurde kein allgemeiner Bildweg auf Verdacht entfernt. Diese Aussage ersetzt die frühere unbelegte Behauptung, eine konkrete Random-Rotation sei bereits entfernt worden.
+
+LIVE:
+Noch offen. Kein Live-PASS vor WordPress-Installations-/Funktionsreadback.
