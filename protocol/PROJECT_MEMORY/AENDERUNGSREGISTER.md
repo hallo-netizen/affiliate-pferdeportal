@@ -1,3 +1,5 @@
+# ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
+
 ## HB-C24-INS-20261020-01 – 1.14.8.33 Originalplugin sicher erweitert
 WAS: Gesichertes Kategorieplugin 1.14.8.32 vollständig zu 1.14.8.33 mit 94er Versicherungs-ADD-only-Modul plus echtem 105er-Profil erweitert und als binäres GitHub-ZIP gespeichert (394395 Bytes, 43 Dateien, 34 PHP). 39/40 alte Dateien unverändert, nur Bootstrap minimal ergänzt.
 WARUM: Siebter Hauptbereich muss die bestehende WP-/Kategorielogik weiterverwenden, 471er historische Importwelle vor neuer Welt abschließen, keine Doppelwellen/Bestandsänderungen.
@@ -5,7 +7,7 @@ TEST: PHP-Lint, 94er-Mock mit echtem Original-TargetWriter und Fehler-Rückbau P
 BELEG: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C24_INSURANCE_94_SOURCE/RELEASE_STATUS_20261020.md`.
 STATUS: FERTIGER TECHNISCHER ZIP-KANDIDAT / KEIN LIVE-IMPORT.
 
-# ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
+
 
 ## 20.10.2026 – Versicherungen 94: Nur lokaler PHP-Simulationstest
 WAS: 94er-ADD-only-Klassenprototyp lokal aus 433er-Entwurf korrigiert; WP-Seiten-Slugkollision mit `name` sicherer abgefragt; PHP-Lint PASS. Synthetische WordPress-Stubs prüfen 94 Jobs, 26/68 Anlage, 7-Welten-Revision, Kollisionen, Wiederanlauf-Sperre, absichtlich erzwungenen Rollback einschließlich Schutz der Altrevision.
