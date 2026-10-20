@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 30 HOBBYS GEPRÜFT / KURZPROFIL-SCHEMA V1 AKTIV / 832 KLASSIFIKATIONEN OFFEN**
+STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 55 HOBBYS VOLL GEPRÜFT / KURZPROFILE 55/862 / 807 OFFEN**
 
 ## Rolle
 
@@ -161,18 +161,39 @@ kurz, konkret, keine Füllwörter, keine Werbesprache, keine Wiederholung des Ho
 
 Stand:
 - Struktur bei **862/862** Hobbydatensätzen vorhanden;
-- **30/862** Kurzprofile fachlich formuliert;
-- **832/862** bleiben `PENDING_PROFILE`, bis das jeweilige Hobby regulär bearbeitet wird;
+- **55/862** Kurzprofile fachlich formuliert;
+- **807/862** bleiben `PENDING_PROFILE`, bis das jeweilige Hobby regulär bearbeitet wird;
 - Kurzprofilwerte werden nicht aus dem Hobbynamen automatisch erzeugt.
 
 Finder-Prototyp:
 `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_PROTOTYP_V1.html`
 zeigt die vier Kurzprofilfelder nun direkt auf den Ergebniskarten.
 
+## Regulärer Klassifikationsbatch 001
+
+Am 2026-10-20 wurden weitere **25 Hobbys** vollständig nach Schema 1.1 klassifiziert und gleichzeitig mit dem vierteiligen Kurzprofil versehen.
+
+Stand danach:
+- **55/862** Hobbys vollständig geprüft;
+- **55/862** Kurzprofile REVIEWED;
+- **807/862** offen;
+- je bearbeitetem Hobby **54/54 Traits vorhanden**;
+- alle Traitwerte gegen das zentrale Schema validiert;
+- Kurzprofil je Hobby **4/4 Felder vorhanden**;
+- keine Name-only-Autoklassifikation.
+
+Audit:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_BATCH001_AUDIT.json`
+
+Register-SHA:
+`95c3c9608fff4db87d4540ecc1cbadc698f90bd2290b87cd4dc5629843b0a572`
+
+Finder-Prototyp nutzt nun **55** vollständig klassifizierte Hobbys und zeigt auf jeder Ergebniskarte die vier Kurzprofilfelder.
+
 ## ERSTER OFFENER BLOCKER
 
-Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **832 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
+Die zentrale Logik und Grundoptik des Finder-Prototyps sind vom Nutzer bestätigt. **807 Hobbyidentitäten sind noch nicht fachlich klassifiziert und besitzen noch kein geprüftes Kurzprofil.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Die restlichen 832 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
+**Die restlichen 807 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren und im selben Arbeitsschritt jeweils das vierteilige Kurzprofil erstellen. Unklare Trait-Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation.**
