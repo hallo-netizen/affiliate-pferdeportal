@@ -99,6 +99,16 @@ Bedienprinzip:
 - „Überrasch mich“ erhöht ungewöhnliche/skurrile Treffer;
 - „Feinjustieren“ öffnet weitere Eigenschaften wie Reise, Wetter, Saison, Lärm, Schmutz, Bildschirm, Pflegepflicht usw., ohne den Hauptfunnel aufzublähen.
 
+### Ergebnis-Karte
+
+Jede Finder-Ergebniskarte zeigt zusätzlich zum Passungswert ein zentrales Kurzprofil:
+- **Was ist das?**
+- **Was macht man?**
+- **Was braucht man?**
+- **Was ist der Reiz?**
+
+Diese vier Felder sind **keine Filtermerkmale**. Sie dienen ausschließlich der schnellen Orientierung, besonders bei unbekannten oder ungewöhnlichen Hobbys. Stil: kurz, prägnant, konkret, ohne Füllwörter oder Werbesprache.
+
 Technischer Datenvertrag:
 - 54 zentrale Eigenschaften aus der Wissensdatenbank;
 - harte Ausschlüsse nur bei expliziter Nutzergrenze und belastbarer Klassifikation;
