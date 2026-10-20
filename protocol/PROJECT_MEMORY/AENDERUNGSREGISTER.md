@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## HB-INS-20261020-C26 – Untere Versicherungskategorien vollständig ausgebaut
+WAS: Alle 46 konkreten Versicherungs-R3 einzeln fachlich überprüft; vorhandene 138 Endkategorien um 185 weitere themenspezifische Kategorien (323 insgesamt) ergänzt. HTML-Hierarchie bleibt unverändert: 1 Welt, 5 R2, 46 R3, eine flache Kategorieebene. Originalplugin vollständig auf 1.14.8.37 aktualisiert, 49 Dateien, 36 PHP, SHA256 `f2f66abfd34956ce8d28d6cf4ced56879045ec20eed38dd5e5076a991d4c805a`.
+WARUM: Frühere Schablone 3 Kategorien je R3 war fachlich zu dünn; nötig sind unabhängig sinnvolle unterste Intents, nicht eine vierte WP-Seite.
+BEWEIS: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C26_INSURANCE_DEPTH_SOURCE/PRUEFBERICHT_20261020.md`, 46er Owner-Audit/185er Manifest, echter PHP-TargetWriter Mock: Positiv, 5 negative Fälle und zwei Rollbacks PASS. 45 R3-Keyword-Begriffe vorher von DataForSEO bestätigt, Unterkategorien nicht separat providerverifiziert.
+STATUS: vollständiges Kandidatenplugin im Chat fertig, **kein WP-Live-Import**, keine alten sechs Welten/IDs geändert.
+
 ## HB-INS-20261020-SEO – Versicherungskategorie gemäß Bestandsprinzip korrigiert
 WAS: Echten 6-Welten-Baum und Design-Menürenderer gegen Zielvertrag geprüft. Vorhandene DataForSEO-Exporte (128 Ergebniszeilen) endlich für 46 konkretes Versicherungs-R3 verwendet; 45 exakt gemessen, 1 ohne Ergebnis. 105/105 Policen zugeordnet, 66 davon mögliche spätere Spezialbeiträge. Neue Struktur 1/5/46/138 = 52 Seiten plus 138 flache Terme. Sicherer 94er-Importbestand wird nur innerhalb Versicherung umgestellt, 96 neue Objekte. Originalplugin 1.14.8.36 lokal gebaut, 35 PHP syntaktisch PASS, Writer-Positive/Negative-Rollback PASS.
 WARUM: 94er Fehlimport hatte keywordbasierte dritte WP-Seitenebene durch Mischseiten „Ausfall & Mitarbeitende“ usw. ersetzt und FAQ/Beratung zu früh angesetzt. Sechs alte Welten müssen unverändert bleiben.
