@@ -1,3 +1,5 @@
+# HAB & BEWAHR – KATEGORIEN – CURRENT STATE
+
 ## 20.10.2026 – C2.4: VOLLSTÄNDIGES VERSICHERUNGS-PLUGIN-ZIP 1.14.8.33 ALS KANDIDAT ERSTELLT (NEUESTE TECHNISCHE AUTORITÄT)
 **Rolle:** Einziger aktiver technischer Current im Kategorienbüro. Dieses Kapitel ergänzt den fachlichen Konzept-Current, ändert keine 105er-Sachentscheidungen.
 **Fertiges GitHub-Release:** `KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip`, echtes vollständiges binäres WordPress-Plugin, **394395 Bytes / 43 Dateien / 34 PHP-Dateien**, Git-Blob-SHA1 `c81533d58029dcddde4d88108909d7f31d6f1e67`. Quelltext, reales JSON-Profil und Status: `C24_INSURANCE_94_SOURCE/includes/class-apkw-insurance-94-add-only.php`, `profiles/hab-und-bewahr-insurance-94.json`, `RELEASE_STATUS_20261020.md`. Original 1.14.8.32 aus dem hier archivierten ZIP eingebaut, **39 alte Dateien byteidentisch**, nur Original-Bootstrap um Versionssprung und neue Klasse ergänzt, 3 neue Dateien. **Kein zweites Plugin.** ZIP ist zusätzlich als `.zip.b64` archiviert. Kein WordPress-Write und kein Live-Installationsnachweis.
@@ -9,7 +11,8 @@
 
 ---
 
-# HAB & BEWAHR – KATEGORIEN – CURRENT STATE
+
+
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 ## 17.10.2026 – C2.3 471-NACHHOLIMPORT: FERTIGES BESTEHENDES PLUGIN 1.14.8.32, LOKAL GESAMTGEPRÜFT
