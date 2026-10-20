@@ -1,0 +1,150 @@
+<?php
+if (!defined('ABSPATH')) { exit; }
+
+/** Transactional-ish, resumable target-tree synchronizer. */
+final class APKW_TargetTreeSync {
+    public const CONTRACT='APKW_TARGET_TREE_SYNC_V1';
+    private const STATE_OPT='apkw_target_tree_sync_state_v1';
+    private const ACTIVE_REV_OPT='apkw_target_tree_active_revision_v1';
+    private const ACTIVE_SNAPSHOT_OPT='apkw_target_tree_active_snapshot_v1';
+    private const META_NODE='_apkw_target_node_id';
+    private const META_REV='_apkw_target_revision';
+    private const META_PILLAR='_apkw_target_pillar';
+    private const META_ACTIVE='_apkw_target_active';
+
+    public static function state():?array{$s=function_exists('get_option')?get_option(self::STATE_OPT,null):null;return is_array($s)?$s:null;}
+    public static function reset():void{if(function_exists('delete_option'))delete_option(self::STATE_OPT);}
+    public static function active_revision():string{return function_exists('get_option')?(string)get_option(self::ACTIVE_REV_OPT,''):'';}
+    public static function active_snapshot():array{$x=function_exists('get_option')?get_option(self::ACTIVE_SNAPSHOT_OPT,[]):[];return is_array($x)?$x:[];}
+
+    public static function start(int $user_id,array $profile):array{
+        // Protect every C2.2 ADD-only object from the legacy full-tree
+        // retirement phase. Explicit C2.2 import never calls this method.
+        if(class_exists('APKW_C22_AddOnly') && APKW_C22_AddOnly::owns_runtime())
+            throw new RuntimeException('C2.2 Erweiterung aktiv: alter Komplett-Sync darf keine C2.2-Knoten archivieren.');
+        if($user_id<1)throw new RuntimeException('Target-Tree-Sync benötigt einen Administrator.');
+        $v=APKW_TargetTree::validate($profile);if(empty($v['valid']))throw new RuntimeException('Target-Tree-Profil BLOCKED: '.implode(', ',$v['errors']??[]));
+        if(class_exists('APKW_R3_V8_Finalizer'))APKW_R3_V8_Finalizer::guard_final_target($profile);
+        foreach(['category','journal_cat','hp_listing_category'] as $tax)if(function_exists('taxonomy_exists')&&!taxonomy_exists($tax))throw new RuntimeException('Zieltaxonomie fehlt: '.$tax);
+        $nodes=APKW_TargetTree::sync_nodes($profile);usort($nodes,fn($a,$b)=>self::depth($a,$profile)<=>self::depth($b,$profile)?:strcmp((string)$a['node_id'],(string)$b['node_id']));
+        $state=['contract'=>self::CONTRACT,'status'=>'WRITING','revision'=>APKW_TargetTree::revision($profile),'profile'=>$profile,'node_order'=>array_values(array_map(fn($n)=>(string)$n['node_id'],$nodes)),'write_index'=>0,'retire_order'=>[],'retire_index'=>0,'readback_index'=>0,'mapping'=>[],'rollback_actions'=>[],'summary'=>['node_count'=>count($nodes),'created'=>0,'updated'=>0,'adopted'=>0,'unchanged'=>0,'archived'=>0,'readback_checked'=>0],'error'=>'','started_at_utc'=>gmdate('c'),'user_id'=>$user_id];
+        self::persist($state);return $state;
+    }
+
+    public static function advance(array $state,int $limit=60):array{
+        self::assert_state($state);if(($state['status']??'')!=='WRITING')return $state;$limit=max(1,min(200,$limit));$p=(array)$state['profile'];$idx=APKW_TargetTree::node_index($p);$n=0;
+        try{
+            while($n<$limit&&$state['write_index']<count($state['node_order'])){
+                $id=(string)$state['node_order'][$state['write_index']];if(!isset($idx[$id]))throw new RuntimeException('Target-Knoten fehlt während Sync: '.$id);$r=self::upsert($idx[$id],$p,$state['mapping']);$state['mapping'][$id]=$r['mapping'];if(!empty($r['rollback']))$state['rollback_actions'][]=$r['rollback'];$bucket=(string)($r['bucket']??'unchanged');if(isset($state['summary'][$bucket]))$state['summary'][$bucket]++;$state['write_index']++;$n++;self::persist($state);
+            }
+            if($state['write_index']>=count($state['node_order'])){
+                if(!$state['retire_order']){$targets=array_flip($state['node_order']);$ret=[];foreach(self::managed_objects() as $o){$nid=(string)($o['node_id']??'');if($nid!==''&&isset($targets[$nid]))continue;$ret[]=$o;}$state['retire_order']=$ret;self::persist($state);}
+                while($n<$limit&&$state['retire_index']<count($state['retire_order'])){$o=$state['retire_order'][$state['retire_index']];$r=self::archive_managed($o);if(!empty($r['rollback']))$state['rollback_actions'][]=$r['rollback'];if(!empty($r['changed']))$state['summary']['archived']++;$state['retire_index']++;$n++;self::persist($state);}
+                if($state['retire_index']>=count($state['retire_order'])){
+                    $state['status']='READBACK';$state['readback_index']=0;self::persist($state);
+                }
+            }
+        }catch(Throwable $e){$state['status']='ROLLBACK_PENDING';$state['error']=$e->getMessage();self::persist($state);}
+        return $state;
+    }
+
+    public static function advance_readback(array $state,int $limit=120):array{
+        self::assert_state($state);if(($state['status']??'')!=='READBACK')return $state;$limit=max(1,min(300,$limit));$p=(array)$state['profile'];$idx=APKW_TargetTree::node_index($p);$n=0;
+        try{
+            while($n<$limit&&$state['readback_index']<count($state['node_order'])){$id=(string)$state['node_order'][$state['readback_index']];$rb=self::readback_node($idx[$id]??[],$p,$state['mapping']);if(empty($rb['valid'])){$detail='';if(in_array('name',(array)($rb['mismatches']??[]),true)){$detail=' expected_name='.json_encode((string)($rb['expected']['name']??''),JSON_UNESCAPED_UNICODE).' actual_name='.json_encode((string)($rb['actual']['name']??''),JSON_UNESCAPED_UNICODE);}throw new RuntimeException('Target-Tree-Readback fehlgeschlagen: '.$id.' ['.implode(',',(array)($rb['mismatches']??[])).']'.$detail);}$state['summary']['readback_checked']++;$state['readback_index']++;$n++;self::persist($state);}
+            if($state['readback_index']>=count($state['node_order'])){
+                // Validate relations only after every physical target exists.
+                foreach(APKW_TargetTree::active_nodes($p) as $node)if((string)($node['object_type']??'')==='relation'){$target=(string)($node['target_node_id']??'');if($target===''||!isset($state['mapping'][$target]))throw new RuntimeException('Target-Relation ohne physisches Ziel: '.(string)($node['node_id']??''));}
+                $snapshot=['contract'=>APKW_TargetTree::CONTRACT,'revision'=>(string)$state['revision'],'project'=>(array)($p['project']??[]),'settings'=>(array)($p['settings']??[]),'pillars'=>(array)($p['pillars']??[]),'nodes'=>APKW_TargetTree::active_nodes($p),'entities'=>(array)($p['entities']??[]),'mapping'=>$state['mapping'],'completed_at_utc'=>gmdate('c')];
+                // A target run is not COMPLETE until the staged snapshot itself passes
+                // the complete frontend/readback contract. The staged snapshot is
+                // validated in-memory and is activated only after that PASS.
+                if(!class_exists('APKW_FinalTargetAdmin'))throw new RuntimeException('Finaler Frontend-Readback fehlt.');
+                $front=APKW_FinalTargetAdmin::frontend_readback($snapshot);
+                if(empty($front['valid']))throw new RuntimeException('Target-Frontend-Readback fehlgeschlagen: '.implode(',',(array)($front['errors']??[])));
+                if(function_exists('update_option')){update_option(self::ACTIVE_SNAPSHOT_OPT,$snapshot,false);update_option(self::ACTIVE_REV_OPT,(string)$state['revision'],false);}if(class_exists('APKW_FrontendStructure'))APKW_FrontendStructure::invalidate_cache();$state['frontend_readback']=$front;$state['status']='COMPLETE';$state['completed_at_utc']=gmdate('c');unset($state['profile'],$state['rollback_actions'],$state['retire_order']);self::persist($state);
+            }
+        }catch(Throwable $e){$state['status']='ROLLBACK_PENDING';$state['error']=$e->getMessage();self::persist($state);}
+        return $state;
+    }
+
+    public static function advance_rollback(array $state,int $limit=60):array{
+        self::assert_state($state);if(($state['status']??'')!=='ROLLBACK_PENDING')return $state;$limit=max(1,min(200,$limit));$n=0;try{while($n<$limit&&!empty($state['rollback_actions'])){$a=array_pop($state['rollback_actions']);self::rollback_one($a);$n++;self::persist($state);}if(empty($state['rollback_actions'])){$state['status']='ROLLED_BACK';$state['rolled_back_at_utc']=gmdate('c');if(class_exists('APKW_FrontendStructure'))APKW_FrontendStructure::invalidate_cache();self::persist($state);}}catch(Throwable $e){$state['status']='ROLLBACK_FAILED';$state['error'].=' | Rollback: '.$e->getMessage();self::persist($state);}return $state;
+    }
+
+    public static function resolve_node(string $node_id,string $object_type=''){
+        $s=self::active_snapshot();$m=(array)($s['mapping'][$node_id]??[]);$id=(int)($m['object_id']??0);if($id<1)return null;$type=$object_type!==''?$object_type:(string)($m['object_type']??'');if($type==='page')return function_exists('get_post')?get_post($id):null;$tax=$type!==''?$type:(string)($m['taxonomy']??'');return function_exists('get_term')?get_term($id,$tax):null;
+    }
+
+    private static function upsert(array $n,array $profile,array $mapping):array{
+        $id=(string)$n['node_id'];$type=(string)$n['object_type'];$pillar=(string)$n['pillar'];$block=APKW_TargetTree::managed_block($pillar);$tax=APKW_TargetTree::taxonomy_for_object($type);$parentId=(string)($n['parent_id']??'');$native=self::native_parent_id($parentId,$type,$profile,$mapping);$name=trim((string)$n['display_name']);$slug=(string)$n['slug'];$obj=self::find_existing($n,$block);$revision=APKW_TargetTree::revision($profile);
+        if(!$obj){
+            $ref=null;try{if($type==='page'){$oid=APKW_TargetWriter::target_tree_insert_page(['post_title'=>$name,'post_name'=>$slug,'post_parent'=>$native,'post_status'=>'publish']);$ref=['kind'=>'page','id'=>$oid];}else{$oid=APKW_TargetWriter::target_tree_insert_term($tax,['name'=>$name,'slug'=>$slug,'parent'=>$native]);$ref=['kind'=>'term','id'=>$oid,'taxonomy'=>$tax];}self::write_meta($ref,$n,$revision,$native);return ['mapping'=>self::mapping($ref,$type),'rollback'=>['kind'=>'DELETE','object'=>$ref],'bucket'=>'created'];}catch(Throwable $e){if($ref)APKW_TargetWriter::target_tree_delete_object($ref);throw $e;}
+        }
+        $ref=self::object_ref($obj,$type);$before=self::snapshot($obj,$type);$meta=self::meta_snapshot($ref,$type);$bound=self::meta_for($ref,$type,self::META_NODE);$adopted=$bound==='';$structDiff=self::object_name($obj,$type)!==$name||self::object_slug($obj,$type)!==$slug||self::object_parent($obj,$type)!==$native||($type==='page'&&self::object_status($obj)!=='publish');$metaDiff=!self::meta_matches($ref,$type,$n,$revision,$native);
+        if(!$structDiff&&!$metaDiff)return ['mapping'=>self::mapping($ref,$type),'bucket'=>'unchanged'];$rb=['kind'=>'RESTORE','object'=>$ref,'object_type'=>$type,'before'=>$before,'meta'=>$meta];
+        try{
+            if($type==='page'&&$structDiff)APKW_TargetWriter::target_tree_update_page((int)$ref['id'],['post_title'=>$name,'post_name'=>$slug,'post_parent'=>$native,'post_status'=>'publish']);
+            elseif($type!=='page'&&$structDiff)APKW_TargetWriter::target_tree_update_term((int)$ref['id'],$tax,['name'=>$name,'slug'=>$slug,'parent'=>$native]);
+            self::write_meta($ref,$n,$revision,$native);
+        }catch(Throwable $e){
+            try{self::rollback_one($rb);}catch(Throwable $rollback){throw new RuntimeException('Target-Tree-Upsert fehlgeschlagen und Sofort-Rollback scheiterte: '.$e->getMessage().' | '.$rollback->getMessage(),0,$e);}throw $e;
+        }
+        return ['mapping'=>self::mapping($ref,$type),'rollback'=>$rb,'bucket'=>$adopted?'adopted':'updated'];
+    }
+
+    private static function find_existing(array $n,string $expectedBlock){
+        $id=(string)$n['node_id'];$type=(string)$n['object_type'];$o=self::find_by_meta(self::META_NODE,$id,$type);if($o)return $o;foreach(array_merge([$id],(array)($n['legacy_ids']??[])) as $legacy){$o=self::find_by_meta('_apkw_concept_id',(string)$legacy,$type);if($o)return $o;}
+        $slug=(string)$n['slug'];$o=self::find_by_slug($slug,$type);if(!$o)return null;$ref=self::object_ref($o,$type);$bound=self::meta_for($ref,$type,self::META_NODE);if($bound!==''&&$bound!==$id)throw new RuntimeException('Target-Slug ist anderweitig gebunden: '.$type.'/'.$slug);$visible=self::object_name($o,$type);if(self::norm($visible)!==self::norm((string)$n['display_name']))throw new RuntimeException('Ungebundener Target-Slug kollidiert: '.$type.'/'.$slug);$oldBlock=self::meta_for($ref,$type,'_apkw_portal_block');if($oldBlock!==''&&$oldBlock!==$expectedBlock)throw new RuntimeException('Target-Slug gehört zu anderer Säule: '.$type.'/'.$slug);return $o;
+    }
+
+    private static function archive_managed(array $o):array{
+        $type=(string)($o['object_type']??'');$ref=['kind'=>$type==='page'?'page':'term','id'=>(int)$o['object_id']];if($type!=='page')$ref['taxonomy']=$type;$obj=self::read_ref($ref,$type);if(!$obj)return ['changed'=>false];$before=self::snapshot($obj,$type);$meta=self::meta_snapshot($ref,$type);$active=self::meta_for($ref,$type,self::META_ACTIVE);$block=self::meta_for($ref,$type,'_apkw_portal_block');$changed=false;
+        $rb=['kind'=>'RESTORE','object'=>$ref,'object_type'=>$type,'before'=>$before,'meta'=>$meta];
+        try{
+            if($type==='page'&&self::object_status($obj)!=='draft'){APKW_TargetWriter::target_tree_update_page((int)$ref['id'],['post_status'=>'draft']);$changed=true;}
+            if($active!=='0'){APKW_TargetWriter::target_tree_set_meta($ref,$type,self::META_ACTIVE,'0');$changed=true;}
+            // Prevent legacy frontend from exposing retired taxonomy/page roots.
+            if($block!==''&&self::meta_for($ref,$type,'_apkw_portal_root')!=='0'){APKW_TargetWriter::target_tree_set_meta($ref,$type,'_apkw_portal_root','0');$changed=true;}
+        }catch(Throwable $e){if($changed){try{self::rollback_one($rb);}catch(Throwable $rollback){throw new RuntimeException('Target-Tree-Archivierung fehlgeschlagen und Sofort-Rollback scheiterte: '.$e->getMessage().' | '.$rollback->getMessage(),0,$e);}}throw $e;}
+        return ['changed'=>$changed,'rollback'=>$changed?$rb:null];
+    }
+
+    private static function readback_node(array $n,array $profile,array $mapping):array{
+        if(!$n)return ['valid'=>false,'mismatches'=>['node']];$id=(string)$n['node_id'];$type=(string)$n['object_type'];$m=$mapping[$id]??null;if(!is_array($m))return ['valid'=>false,'mismatches'=>['mapping']];$ref=['kind'=>$type==='page'?'page':'term','id'=>(int)($m['object_id']??0)];if($type!=='page')$ref['taxonomy']=$type;$o=self::read_ref($ref,$type);if(!$o)return ['valid'=>false,'mismatches'=>['object']];$native=self::native_parent_id((string)($n['parent_id']??''),$type,$profile,$mapping);$actual=['name'=>self::object_name($o,$type),'slug'=>self::object_slug($o,$type),'parent'=>self::object_parent($o,$type),'status'=>$type==='page'?self::object_status($o):''];$expected=['name'=>(string)$n['display_name'],'slug'=>(string)$n['slug'],'parent'=>$native,'status'=>$type==='page'?'publish':''];$mis=[];if($actual['name']!==$expected['name'])$mis[]='name';if($actual['slug']!==$expected['slug'])$mis[]='slug';if($actual['parent']!==$expected['parent'])$mis[]='parent';if($type==='page'&&$actual['status']!=='publish')$mis[]='status';if(!self::meta_matches($ref,$type,$n,APKW_TargetTree::revision($profile),$native))$mis[]='meta';return ['valid'=>!$mis,'mismatches'=>$mis,'expected'=>$expected,'actual'=>$actual];
+    }
+
+    private static function write_meta(array $ref,array $n,string $revision,int $nativeParent):void{
+        $type=(string)$n['object_type'];$pillar=(string)$n['pillar'];$block=APKW_TargetTree::managed_block($pillar);$parent=(string)($n['parent_id']??'');$root=$nativeParent===0?'1':'0';$pairs=[self::META_NODE=>(string)$n['node_id'],self::META_REV=>$revision,self::META_PILLAR=>$pillar,self::META_ACTIVE=>'1','_apkw_concept_id'=>(string)$n['node_id'],'_apkw_parent_concept_id'=>$parent,'_apkw_portal_block'=>$block,'_apkw_portal_root'=>$root,'_apkw_seo_seed'=>(string)($n['seo_seed']??''),'_apkw_primary_keyword'=>(string)($n['primary_keyword']??''),'_apkw_intent_key'=>(string)($n['intent_key']??'')];foreach($pairs as $k=>$v){$v=(string)$v;if(self::meta_for($ref,$type,(string)$k)!==$v)APKW_TargetWriter::target_tree_set_meta($ref,$type,(string)$k,$v);}if($type==='page'&&!empty($n['hub_role'])){$v=self::hub_block((string)$n['hub_role']);if(self::meta_for($ref,$type,'_apkw_portal_hub')!==$v)APKW_TargetWriter::target_tree_set_meta($ref,$type,'_apkw_portal_hub',$v);}if($pillar==='editorial'&&$type!=='page'){$extras=['_apkw_magazine_menu_group'=>(string)($n['menu_group']??''),'_apkw_magazine_menu_label'=>(string)($n['menu_group_label']??''),'_apkw_magazine_menu_order'=>(string)((int)($n['menu_group_order']??0))];foreach($extras as $k=>$v)if(self::meta_for($ref,$type,$k)!==$v)APKW_TargetWriter::target_tree_set_meta($ref,$type,$k,$v);}
+    }
+    private static function hub_block(string $role):string{return ['content'=>'content','magazine'=>'magazine','marketplace'=>'marketplace'][$role]??$role;}
+    private static function meta_matches(array $ref,string $type,array $n,string $revision,int $native):bool{return self::meta_for($ref,$type,self::META_NODE)===(string)$n['node_id']&&self::meta_for($ref,$type,self::META_REV)===$revision&&self::meta_for($ref,$type,self::META_PILLAR)===(string)$n['pillar']&&self::meta_for($ref,$type,self::META_ACTIVE)==='1'&&self::meta_for($ref,$type,'_apkw_parent_concept_id')===(string)($n['parent_id']??'')&&self::meta_for($ref,$type,'_apkw_primary_keyword')===(string)($n['primary_keyword']??'')&&self::meta_for($ref,$type,'_apkw_intent_key')===(string)($n['intent_key']??'');}
+
+    private static function native_parent_id(string $parentId,string $type,array $profile,array $mapping):int{if($parentId==='')return 0;$idx=APKW_TargetTree::node_index($profile);if(!isset($idx[$parentId]))return 0;$p=$idx[$parentId];$pt=(string)($p['object_type']??'');if($type==='page'&&$pt!=='page')return 0;if($type!=='page'&&$pt!==$type)return 0;if(isset($mapping[$parentId]['object_id']))return (int)$mapping[$parentId]['object_id'];$found=self::find_by_meta(self::META_NODE,$parentId,$pt);return $found?self::object_id($found,$pt):0;}
+
+    private static function managed_objects():array{
+        $out=[];$seen=[];
+        if(function_exists('get_posts')){$rows=get_posts(['post_type'=>'page','post_status'=>['publish','draft','private','pending'],'posts_per_page'=>-1,'no_found_rows'=>true,'suppress_filters'=>true]);foreach((array)$rows as $p){if(!is_object($p)||empty($p->ID))continue;$id=(int)$p->ID;$nid=(string)get_post_meta($id,self::META_NODE,true);$legacy=(string)get_post_meta($id,'_apkw_concept_id',true);$block=(string)get_post_meta($id,'_apkw_portal_block',true);$hub=(string)get_post_meta($id,'_apkw_portal_hub',true);$targetOnly=defined('APKW_TARGET_TREE_RETIRE_TARGET_BINDINGS_ONLY')&&APKW_TARGET_TREE_RETIRE_TARGET_BINDINGS_ONLY===true;if($targetOnly){if($nid==='')continue;}elseif($nid===''&&$legacy===''&&$block===''&&$hub==='')continue;$key='p'.$id;if(isset($seen[$key]))continue;$seen[$key]=1;$out[]=['node_id'=>$nid,'legacy_id'=>$legacy,'object_type'=>'page','object_id'=>$id];}}
+        if(function_exists('get_terms'))foreach(['category','journal_cat','hp_listing_category'] as $tax){$rows=get_terms(['taxonomy'=>$tax,'hide_empty'=>false,'number'=>0]);if(function_exists('is_wp_error')&&is_wp_error($rows))continue;foreach((array)$rows as $t){if(!is_object($t)||empty($t->term_id))continue;$id=(int)$t->term_id;$nid=(string)get_term_meta($id,self::META_NODE,true);$legacy=(string)get_term_meta($id,'_apkw_concept_id',true);$block=(string)get_term_meta($id,'_apkw_portal_block',true);$targetOnly=defined('APKW_TARGET_TREE_RETIRE_TARGET_BINDINGS_ONLY')&&APKW_TARGET_TREE_RETIRE_TARGET_BINDINGS_ONLY===true;if($targetOnly){if($nid==='')continue;}elseif($nid===''&&$legacy===''&&$block==='')continue;$key=$tax.$id;if(isset($seen[$key]))continue;$seen[$key]=1;$out[]=['node_id'=>$nid,'legacy_id'=>$legacy,'object_type'=>$tax,'object_id'=>$id];}}
+        return $out;
+    }
+
+    private static function find_by_meta(string $key,string $value,string $type){if($value==='')return null;if($type==='page'&&function_exists('get_posts')){$r=get_posts(['post_type'=>'page','post_status'=>['publish','draft','pending','private'],'posts_per_page'=>2,'no_found_rows'=>true,'suppress_filters'=>true,'meta_query'=>[['key'=>$key,'value'=>$value]]]);if(count((array)$r)>1)throw new RuntimeException('Mehrdeutige Target-Seitenbindung: '.$value);return $r[0]??null;}if($type!=='page'&&function_exists('get_terms')){$r=get_terms(['taxonomy'=>$type,'hide_empty'=>false,'number'=>2,'meta_query'=>[['key'=>$key,'value'=>$value]]]);if(function_exists('is_wp_error')&&is_wp_error($r))return null;if(count((array)$r)>1)throw new RuntimeException('Mehrdeutige Target-Termbindung: '.$value);return $r[0]??null;}return null;}
+    private static function find_by_slug(string $slug,string $type){if($type==='page'){if(function_exists('get_posts')){$r=get_posts(['post_type'=>'page','post_status'=>['publish','draft','pending','private'],'posts_per_page'=>2,'no_found_rows'=>true,'suppress_filters'=>true,'post_name__in'=>[$slug]]);if(count((array)$r)>1)throw new RuntimeException('Mehrdeutiger Target-Seiten-Slug: '.$slug);return $r[0]??null;}return null;}return function_exists('get_term_by')?get_term_by('slug',$slug,$type):null;}
+    private static function read_ref(array $ref,string $type){if(($ref['kind']??'')==='page')return function_exists('get_post')?get_post((int)$ref['id']):null;return function_exists('get_term')?get_term((int)$ref['id'],$type):null;}
+    private static function object_ref($x,string $type):array{return $type==='page'?['kind'=>'page','id'=>(int)($x->ID??0)]:['kind'=>'term','id'=>(int)($x->term_id??0),'taxonomy'=>$type];}
+    private static function object_id($x,string $type):int{return $type==='page'?(int)($x->ID??0):(int)($x->term_id??0);}
+    private static function object_name($x,string $type):string{$v=(string)($type==='page'?($x->post_title??''):($x->name??''));$v=function_exists('wp_specialchars_decode')?wp_specialchars_decode($v,ENT_QUOTES):html_entity_decode($v,ENT_QUOTES|ENT_HTML5,'UTF-8');return trim($v);}
+    private static function object_slug($x,string $type):string{return (string)($type==='page'?($x->post_name??''):($x->slug??''));}
+    private static function object_parent($x,string $type):int{return (int)($type==='page'?($x->post_parent??0):($x->parent??0));}
+    private static function object_status($x):string{return (string)($x->post_status??'');}
+    private static function snapshot($x,string $type):array{return ['name'=>self::object_name($x,$type),'slug'=>self::object_slug($x,$type),'parent'=>self::object_parent($x,$type),'status'=>$type==='page'?self::object_status($x):''];}
+    private static function mapping(array $ref,string $type):array{return ['object_id'=>(int)$ref['id'],'object_type'=>$type,'adapter'=>$type==='page'?'wordpress_page':'wordpress_taxonomy','taxonomy'=>$type==='page'?null:$type];}
+    private static function meta_for(array $ref,string $type,string $key):string{return ($ref['kind']??'')==='page'?(string)get_post_meta((int)$ref['id'],$key,true):(string)get_term_meta((int)$ref['id'],$key,true);}
+    private static function meta_snapshot(array $ref,string $type):array{$keys=[self::META_NODE,self::META_REV,self::META_PILLAR,self::META_ACTIVE,'_apkw_concept_id','_apkw_parent_concept_id','_apkw_portal_block','_apkw_portal_root','_apkw_portal_hub','_apkw_seo_seed','_apkw_primary_keyword','_apkw_intent_key','_apkw_magazine_menu_group','_apkw_magazine_menu_label','_apkw_magazine_menu_order'];$o=[];foreach($keys as $k)$o[$k]=self::meta_for($ref,$type,$k);return $o;}
+    private static function rollback_one(array $a):void{$kind=(string)($a['kind']??'');$ref=(array)($a['object']??[]);if(!$ref)return;if($kind==='DELETE'){APKW_TargetWriter::target_tree_delete_object($ref);return;}if($kind!=='RESTORE')return;$type=(string)($a['object_type']??'');$b=(array)($a['before']??[]);if(($ref['kind']??'')==='page')APKW_TargetWriter::target_tree_update_page((int)$ref['id'],['post_title'=>(string)($b['name']??''),'post_name'=>(string)($b['slug']??''),'post_parent'=>(int)($b['parent']??0),'post_status'=>(string)($b['status']??'publish')]);else APKW_TargetWriter::target_tree_update_term((int)$ref['id'],$type,['name'=>(string)($b['name']??''),'slug'=>(string)($b['slug']??''),'parent'=>(int)($b['parent']??0)]);foreach((array)($a['meta']??[]) as $k=>$v)APKW_TargetWriter::target_tree_set_meta($ref,$type,(string)$k,(string)$v);}
+    private static function depth(array $n,array $p):int{$idx=[];foreach((array)($p['nodes']??[]) as $x)if(is_array($x))$idx[(string)($x['node_id']??'')]=$x;$d=0;$id=(string)($n['node_id']??'');$seen=[];while($id!==''&&isset($idx[$id])&&!isset($seen[$id])){$seen[$id]=1;$d++;$id=(string)($idx[$id]['parent_id']??'');}return $d;}
+    private static function norm(string $v):string{$v=html_entity_decode($v,ENT_QUOTES|ENT_HTML5,'UTF-8');$v=preg_replace('/\s+/u',' ',trim($v));return function_exists('mb_strtolower')?mb_strtolower((string)$v,'UTF-8'):strtolower((string)$v);}
+    private static function assert_state(array $s):void{if((string)($s['contract']??'')!==self::CONTRACT)throw new RuntimeException('Target-Tree-State ungültig.');}
+    private static function persist(array $s):void{if(function_exists('update_option'))update_option(self::STATE_OPT,$s,false);}
+}
