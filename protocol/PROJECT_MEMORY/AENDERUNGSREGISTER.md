@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## 20.10.2026 – Versicherungen 94: Nur lokaler PHP-Simulationstest
+WAS: 94er-ADD-only-Klassenprototyp lokal aus 433er-Entwurf korrigiert; WP-Seiten-Slugkollision mit `name` sicherer abgefragt; PHP-Lint PASS. Synthetische WordPress-Stubs prüfen 94 Jobs, 26/68 Anlage, 7-Welten-Revision, Kollisionen, Wiederanlauf-Sperre, absichtlich erzwungenen Rollback einschließlich Schutz der Altrevision.
+WARUM: Der neue kompakte 94er-Fachentwurf darf nur durch minimalen additiven Ausbau des vorhandenen Kategorieplugins realisiert werden.
+EINSCHRÄNKUNG: Noch NICHT im vollständigen 1.14.8.32-Plugin verankert, keine echten Originalplugin-Funktionen getestet, echter 94er-JSON-Plan noch nicht als Runtime-Profil eingebunden, keine echte WordPress-Installation. Lokales Artefakt ausdrücklich NICHT installieren.
+NEXT: In Originalplugin integrieren, volle PHP- und Mockprüfungen auf Original durchführen, vollständiges installierbares ZIP erst dann freigeben.
+
 ## HB-INS-20261020-07 – Begleitwelt Versicherungen auf gesundes Mass reduziert
 WAS: Vollstaendige 105er-Versicherungs-Themenliste ohne Themenverlust in 1 Versicherungswelt, 5 Bereiche, 20 Sammel-Themenseiten und 68 flache Kategorien geroutet. 28 Nischen fuer moegliche spaetere Einzelbeitraege markiert. Vorschlag 26 neue Seiten + 68 Kategorien = 94 Objekte statt 476.
 WARUM: Eine siebte begleitende Hauptkategorie darf nicht zum eigenstaendigen Versicherungsportal auswachsen. Vorheriger Plan verwechselte jeden Versicherungsbegriff mit eigenem WP-Seite3-Owner.
