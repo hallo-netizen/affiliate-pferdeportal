@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **KONZEPT + SEO-TRENNUNG FESTGELEGT / CORE 1.0.1 TECHNISCHE BASIS / DESIGNANPASSUNG OFFEN / LIVE OFFEN**
+STATUS: **SEO-TRENNUNG FEST / CORE 1.0.2 DESIGN-PROBE LOCAL PASS / 6 PROBEBEGRIFFE VORBEREITET / LIVE OFFEN**
 
 ## Entscheidung
 
@@ -104,9 +104,9 @@ Persistente Arbeitskopie:
 
 1.0.1 ist technisch lokal geprüft, enthält aber noch nicht den heute festgelegten finalen Hobby-Depot-Designvertrag aus Sicherheit.
 
-## Lokale Basis-QA 1.0.1
+## Lokale QA 1.0.2
 
-- PHP-Lint: **7/7 PASS**;
+- PHP-Lint: **7/7 PASS**;\n- Design-Prinzip Sicherheit → Hobby Depot: **umgesetzt**;\n- 9 Karten je Seite + 3/2/1-Spalten: **umgesetzt**;
 - ZIP-Integrität: **PASS**;
 - WordPress-Paketstruktur: **PASS**;
 - WordPress-Scheduler/Cron-Produktion: **0**;
