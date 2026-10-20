@@ -297,6 +297,15 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - QA-Archiv (kein Plugin): Library `/Pferdeatelier/TempVerify/PSTE_BEGRIFFSKLAERUNG_KISS_LOCAL_QA_20261020_KEIN_PLUGIN.zip`, SHA256 c6f085cc3814b71ba537cac02d7a6d3a2537bbe21df994f0d88fa35dab4aaace. Enthält Originaldiff, exakt 2 bearbeitete PHP-Dateien, 12 historische Klärfälle, reproduzierbare positive/negative Mocktests, QA-Ergebnis und Grenzen.
 - **Weiter BLOCKED:** Kein vollständiger Live-WordPress-/MariaDB-5014-Abnahmelauf und keine verifizierte mengenmäßig kleine manuelle Warteschlange; deshalb Relevanzschritt nicht als erledigt oder Titelstufe als freigegeben darstellen. K0/PSERC/PPM/Artikel/Publish unverändert.
 
+## 20.10.2026 – harte erneute Relevanz-Abschlussprüfung (kein Release)
+
+- **Erneute unabhängige lokale Ausführung, keine neue Quelländerung:** 79/79 PSTE-PHP-Dateien Syntax PASS, 12/12 geprüfte lokale Formular-/Quellbindungen PASS, 5/5 Sandbox-Mockfälle JA/NEIN und drei Manipulationssperren PASS. Dieselbe gemeinsam vorhandene Relevanz-PHP-Datei in Portaltest und Sandbox-Prüfbaum bytegleich.
+- Original-4501: 2739 automatische Ja-Entscheidungen, 1762 ohne automatische Ja-Bestätigung; **1762 ist weder Zahl der echten Nein-Fälle noch die Zahl manuell zu entscheidender Fälle**. 12 historisch zuvor positive Keywords nur zurückgestellt (0,27 %), nicht gelöscht.
+- Allgemeine Relevanz-Regression: 53 Portalfälle 52 PASS, 1000 einfach POS/NEG 1000 PASS, 15 schwere Pferde-POS 15 PASS, **31 schwere Fremd-NEG nur 24 PASS**; 80 weitere vier-Portal-Holdouts 74 PASS. Vorhandene Fehler bleiben; keine falsche Abnahme.
+- Aktuelle 5014er WordPress-/MariaDB-Daten und echter Backend-Klick nicht zugänglich/abgenommen. Keine nachgewiesen geringe Zahl manueller Prüffälle, keine installierbare Pluginfreigabe, keine Titel- oder Kategoriephase begonnen.
+- Evidence (QA, KEIN Plugin): Library `/Pferdeatelier/TempVerify/PSTE_RELEVANZ_ABSCHLUSSCHECK_20261020_KEIN_PLUGIN.zip`, SHA256 a0897fff02eda8a40dc7570a15e870d2814394810613e0704eb2eea1e3df2f8a.
+- **Zustand unverändert BLOCKED.** KISS: Bestehende Relevanz- und Sandbox-Ja/Nein-Wege beibehalten; zuerst echte Ja/Nein/Unklar-Verteilung aus WordPress rein lesend belegen und verbleibende falsch grüne Fremdthemen mit vorhandener relevanzseitiger Klärung abfangen; erst dann Titel.
+
 ## NEXT ACTION
 
 Genau eine: Die **tatsächlich** unklaren Relevanzfälle im aktuellen 5014er WordPress-Bestand rein lesend anhand der vorhandenen Daten/Entscheidungen getrennt von klaren Neins und Ja-Fällen zählen; den isoliert getesteten vorhandenen Ja/Nein-Sandboxweg anschließend mit echten WordPress-Positiv/Negativfällen inklusive Quellbindung prüfen. Erst wenn der nachgewiesene manuelle Rückstau klein ist und der Relevanzprüfer die bekannten schwierigen negativen Fälle nicht mehr falsch freigibt, darf der nächste Titel-Arbeitsschritt beginnen. Keine Pluginfreigabe oder Änderung an K0/PSERC/PPM/Publish.
