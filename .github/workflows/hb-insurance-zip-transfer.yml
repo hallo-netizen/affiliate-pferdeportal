@@ -1,0 +1,36 @@
+name: Hab Bewahr Insurance ZIP Transfer
+on:
+  push:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+    paths:
+      - .github/workflows/hb-insurance-zip-transfer.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project release
+        uses: actions/checkout@v4
+      - name: Validate released plugin ZIP locally
+        run: |
+          python - <<'PY'
+          import zipfile, pathlib
+          p = pathlib.Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip")
+          assert p.stat().st_size == 394395, p.stat().st_size
+          with zipfile.ZipFile(p) as z:
+              assert len(z.namelist()) == 43
+              assert z.testzip() is None
+              assert 'affiliate-portal-kategorie-workflow/includes/class-apkw-insurance-94-add-only.php' in z.namelist()
+              assert 'affiliate-portal-kategorie-workflow/profiles/hab-und-bewahr-insurance-94.json' in z.namelist()
+          print("Validated 43 files.")
+          PY
+      - name: Publish tested ZIP as conversation-transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hab-und-bewahr-kategorie-workflow-1-14-8-33
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip
+          if-no-files-found: error
+          retention-days: 1
