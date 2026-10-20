@@ -1,3 +1,11 @@
+## HB-INS-20261020-06 – Pauschale Drei-Kategorien-Schablone und fremde Artikelplanung
+**STATUS: FACHLICHER ENTWURF KORRIGIERT / PLUGIN UND LIVE WEITERHIN OFFEN.**
+FEHLER: Bei allen 105 Versicherungsseiten waren pauschal FAQ, Beratung und Leistungen & Praxis eingefügt; zusätzlich wurden 945 konkrete Artikelideen als Prüfnachweis mitgeführt. Das war keine ausreichend individuelle Kategorienprüfung und überschritt die Zuständigkeit.
+WARUM: Zählen dreier Unterkategorien oder dreier hypothetischer Artikeltitel pro Rubrik ersetzt keine Prüfung des eigenen fachlichen Kategorie-Nutzens. Benutzerregel ausdrücklich: nur grob abschätzen, ob die letzte Kategorie etwa 3–5 spätere Beiträge tragen kann.
+KORREKTUR: Alle 105 Owner auf grobe Themenfelder je Kategorie durchgegangen; FAQ/Beratung als regelmäßig sinnvolle Kategorien beibehalten, Sonderkategorien individuell. Fünf schwache Bereiche zusammengefasst. Aus 315 pauschalen Kategorien wurden 358 individuell bestimmte Vorschläge (68×3, 31×4, 6×5). Kein Artikelvorschlag und keine Artikelprüfung in der neuen Kandidatenvorlage.
+NACHWEIS: `KONZEPT/VERSICHERUNGEN_KATEGORIEN_FACHPRUEFUNG_105_OWNER_20261020.json`, `KONZEPT/VERSICHERUNGEN_ADDONLY_476_FACHVORLAGE_20261020.json`, `KONZEPT/VERSICHERUNGEN_476_STRUKTURTEST_20261020.json`. Lokaler Datenstrukturtest 7/7 negative Mutationen abgewehrt; KEIN WordPress/Plugin-Test, keine Fachgarantie für jede spätere SEO-Veröffentlichung.
+SPERRE: Die alten 433er-/481er-Kandidaten werden nicht importiert. Keine C2.3-471er-Wiederverwendung. Erst echtes Pluginverfahren mit Live-Readback und gesonderter Freigabe.
+
 ## HB-INS-20261020-01 – Falscher DataForSEO-Backendpfad
 **STATUS: CLOSED für die beiden Originalabfragen; kein neuer Recherchelauf nötig.**
 FEHLER: Nutzer wurde zunächst auf `Portal-Kategorien → SEO-Namen prüfen` verwiesen und aufgefordert, den DataForSEO-Zugang erneut zu überprüfen.
