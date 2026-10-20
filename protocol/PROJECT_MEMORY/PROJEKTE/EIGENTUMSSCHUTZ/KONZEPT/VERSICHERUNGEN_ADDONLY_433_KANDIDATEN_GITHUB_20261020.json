@@ -1,0 +1,2933 @@
+{
+  "contract": "HAB_INSURANCE_ADDONLY_SCOPE_V1",
+  "status": "READ_ONLY__CANDIDATE_NOT_IMPORTABLE",
+  "source_full_article_ideas": "VERSICHERUNGEN_105_GESAMTPLAN_945_IDEEN_20261020.md",
+  "no_wordpress_writes": true,
+  "old_existing_scope_protected": "265 R3 and 1323 legacy endcategories from category current (NOT fresh live readback)",
+  "pages": [
+    {
+      "key": "INS:R1",
+      "title": "Versicherungen",
+      "level": 1,
+      "parent_key": null
+    },
+    {
+      "key": "INS:R2:arbeitskraft-und-einkommen",
+      "title": "Arbeitskraft & Einkommen",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:berufsunfahigkeitsversicherung",
+      "title": "Berufsunfähigkeitsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:erwerbsunfahigkeitsversicherung",
+      "title": "Erwerbsunfähigkeitsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:grundfahigkeitsversicherung",
+      "title": "Grundfähigkeitsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:dienstunfahigkeitsversicherung",
+      "title": "Dienstunfähigkeitsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:schwere-krankheiten-versicherung",
+      "title": "Schwere-Krankheiten-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:private-unfallversicherung",
+      "title": "Private Unfallversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:kinderinvaliditatsversicherung",
+      "title": "Kinderinvaliditätsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:gesetzliche-unfallversicherung",
+      "title": "Gesetzliche Unfallversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R3:gesetzliche-arbeitslosenversicherung",
+      "title": "Gesetzliche Arbeitslosenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:arbeitskraft-und-einkommen"
+    },
+    {
+      "key": "INS:R2:finanzielle-risiken",
+      "title": "Finanzielle Risiken",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:restschuldversicherung",
+      "title": "Restschuldversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:finanzielle-risiken"
+    },
+    {
+      "key": "INS:R3:mietkautionsversicherung",
+      "title": "Mietkautionsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:finanzielle-risiken"
+    },
+    {
+      "key": "INS:R3:mietausfallversicherung",
+      "title": "Mietausfallversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:finanzielle-risiken"
+    },
+    {
+      "key": "INS:R2:gesundheit-und-pflege",
+      "title": "Gesundheit & Pflege",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:gesetzliche-krankenversicherung",
+      "title": "Gesetzliche Krankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:private-krankenversicherung",
+      "title": "Private Krankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:zahnzusatzversicherung",
+      "title": "Zahnzusatzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:krankenhauszusatzversicherung",
+      "title": "Krankenhauszusatzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:ambulante-zusatzversicherung",
+      "title": "Ambulante Zusatzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:pflegezusatzversicherung",
+      "title": "Pflegezusatzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:krankentagegeldversicherung",
+      "title": "Krankentagegeldversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:krankenhaustagegeldversicherung",
+      "title": "Krankenhaustagegeldversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R3:soziale-pflegeversicherung",
+      "title": "Soziale Pflegeversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:gesundheit-und-pflege"
+    },
+    {
+      "key": "INS:R2:haftung-und-recht",
+      "title": "Haftung & Recht",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:privathaftpflichtversicherung",
+      "title": "Privathaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "title": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:gewasserschadenhaftpflichtversicherung",
+      "title": "Gewässerschadenhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:bauherrenhaftpflichtversicherung",
+      "title": "Bauherrenhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:jagdhaftpflichtversicherung",
+      "title": "Jagdhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:rechtsschutzversicherung",
+      "title": "Rechtsschutzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:verkehrsrechtsschutzversicherung",
+      "title": "Verkehrsrechtsschutzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R3:drohnenhaftpflichtversicherung",
+      "title": "Drohnenhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:haftung-und-recht"
+    },
+    {
+      "key": "INS:R2:kleine-betriebe",
+      "title": "Kleine Betriebe",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:betriebshaftpflichtversicherung",
+      "title": "Betriebshaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:berufshaftpflichtversicherung",
+      "title": "Berufshaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:vermogensschadenhaftpflichtversicherung",
+      "title": "Vermögensschadenhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:geschaftsinhaltsversicherung",
+      "title": "Geschäftsinhaltsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:betriebsunterbrechungsversicherung",
+      "title": "Betriebsunterbrechungsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:cyberversicherung-fur-kleinbetriebe",
+      "title": "Cyberversicherung für Kleinbetriebe",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:firmenrechtsschutzversicherung",
+      "title": "Firmenrechtsschutzversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:gewerbegebaudeversicherung",
+      "title": "Gewerbegebäudeversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:elektronikversicherung-fur-betriebe",
+      "title": "Elektronikversicherung für Betriebe",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:transportversicherung-fur-betriebe",
+      "title": "Transportversicherung für Betriebe",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:kreditversicherung-fur-betriebe",
+      "title": "Kreditversicherung für Betriebe",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:d-und-o-versicherung",
+      "title": "D&O-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:vertrauensschadenversicherung",
+      "title": "Vertrauensschadenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:betriebsschliessungsversicherung",
+      "title": "Betriebsschließungsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:betriebliche-krankenversicherung",
+      "title": "Betriebliche Krankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:gruppenunfallversicherung",
+      "title": "Gruppenunfallversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:maschinenversicherung",
+      "title": "Maschinenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:umwelthaftpflichtversicherung",
+      "title": "Umwelthaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:umweltschadenversicherung",
+      "title": "Umweltschadenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R3:gewerbliche-kautionsversicherung",
+      "title": "Gewerbliche Kautionsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:kleine-betriebe"
+    },
+    {
+      "key": "INS:R2:leben-und-alter",
+      "title": "Leben & Alter",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:risikolebensversicherung",
+      "title": "Risikolebensversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:kapitallebensversicherung",
+      "title": "Kapitallebensversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:fondsgebundene-lebensversicherung",
+      "title": "Fondsgebundene Lebensversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:private-rentenversicherung",
+      "title": "Private Rentenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:riester-rentenversicherung",
+      "title": "Riester-Rentenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:basisrentenversicherung",
+      "title": "Basisrentenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:betriebliche-direktversicherung",
+      "title": "Betriebliche Direktversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:gesetzliche-rentenversicherung",
+      "title": "Gesetzliche Rentenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R3:sterbegeldversicherung",
+      "title": "Sterbegeldversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:leben-und-alter"
+    },
+    {
+      "key": "INS:R2:mobilitat",
+      "title": "Mobilität",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:kfz-versicherung",
+      "title": "Kfz-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:motorradversicherung",
+      "title": "Motorradversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:mopedversicherung",
+      "title": "Mopedversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:wohnmobilversicherung",
+      "title": "Wohnmobilversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:wohnwagenversicherung",
+      "title": "Wohnwagenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:fahrradversicherung",
+      "title": "Fahrradversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:e-scooter-versicherung",
+      "title": "E-Scooter-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:bootsversicherung",
+      "title": "Bootsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:oldtimerversicherung",
+      "title": "Oldtimerversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:anhanger-versicherung",
+      "title": "Anhänger-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:mietwagen-selbstbeteiligungsschutz",
+      "title": "Mietwagen-Selbstbeteiligungsschutz",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R3:drohnenkaskoversicherung",
+      "title": "Drohnenkaskoversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:mobilitat"
+    },
+    {
+      "key": "INS:R2:reisen-und-freizeit",
+      "title": "Reisen & Freizeit",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:reiserucktrittsversicherung",
+      "title": "Reiserücktrittsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R3:reiseabbruchversicherung",
+      "title": "Reiseabbruchversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R3:reisegepackversicherung",
+      "title": "Reisegepäckversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R3:auslandskrankenversicherung",
+      "title": "Auslandskrankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R3:campingversicherung",
+      "title": "Campingversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R3:sportgerateversicherung",
+      "title": "Sportgeräteversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:reisen-und-freizeit"
+    },
+    {
+      "key": "INS:R2:tiere",
+      "title": "Tiere",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:hundehaftpflichtversicherung",
+      "title": "Hundehaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:pferdehaftpflichtversicherung",
+      "title": "Pferdehaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:hunde-op-versicherung",
+      "title": "Hunde-OP-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:katzen-op-versicherung",
+      "title": "Katzen-OP-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:pferde-op-versicherung",
+      "title": "Pferde-OP-Versicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:hundekrankenversicherung",
+      "title": "Hundekrankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:katzenkrankenversicherung",
+      "title": "Katzenkrankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:pferdekrankenversicherung",
+      "title": "Pferdekrankenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R3:pferdelebensversicherung",
+      "title": "Pferdelebensversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:tiere"
+    },
+    {
+      "key": "INS:R2:vereine-und-veranstaltungen",
+      "title": "Vereine & Veranstaltungen",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:vereinshaftpflichtversicherung",
+      "title": "Vereinshaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:vereine-und-veranstaltungen"
+    },
+    {
+      "key": "INS:R3:veranstalterhaftpflichtversicherung",
+      "title": "Veranstalterhaftpflichtversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:vereine-und-veranstaltungen"
+    },
+    {
+      "key": "INS:R3:veranstaltungsausfallversicherung",
+      "title": "Veranstaltungsausfallversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:vereine-und-veranstaltungen"
+    },
+    {
+      "key": "INS:R2:wertsachen-und-technik",
+      "title": "Wertsachen & Technik",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:handyversicherung",
+      "title": "Handyversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:laptopversicherung",
+      "title": "Laptopversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:musikinstrumentenversicherung",
+      "title": "Musikinstrumentenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:schmuckversicherung",
+      "title": "Schmuckversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:kunstversicherung",
+      "title": "Kunstversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:uhrenversicherung",
+      "title": "Uhrenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:brillenversicherung",
+      "title": "Brillenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:horgerateversicherung",
+      "title": "Hörgeräteversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R3:private-cyberversicherung",
+      "title": "Private Cyberversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wertsachen-und-technik"
+    },
+    {
+      "key": "INS:R2:wohnen-und-bauen",
+      "title": "Wohnen & Bauen",
+      "level": 2,
+      "parent_key": "INS:R1"
+    },
+    {
+      "key": "INS:R3:hausratversicherung",
+      "title": "Hausratversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:wohngebaudeversicherung",
+      "title": "Wohngebäudeversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:glasversicherung",
+      "title": "Glasversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:photovoltaikversicherung",
+      "title": "Photovoltaikversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:bauleistungsversicherung",
+      "title": "Bauleistungsversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:feuerrohbauversicherung",
+      "title": "Feuerrohbauversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:ferienhausversicherung",
+      "title": "Ferienhausversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    },
+    {
+      "key": "INS:R3:kleingartenversicherung",
+      "title": "Kleingartenversicherung",
+      "level": 3,
+      "parent_key": "INS:R2:wohnen-und-bauen"
+    }
+  ],
+  "terms": [
+    {
+      "key": "INS:TERM:berufsunfahigkeitsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:berufsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:berufsunfahigkeitsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:berufsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:berufsunfahigkeitsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:berufsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:erwerbsunfahigkeitsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:erwerbsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:erwerbsunfahigkeitsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:erwerbsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:erwerbsunfahigkeitsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:erwerbsunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:grundfahigkeitsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:grundfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:grundfahigkeitsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:grundfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:grundfahigkeitsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:grundfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:dienstunfahigkeitsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:dienstunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:dienstunfahigkeitsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:dienstunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:dienstunfahigkeitsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:dienstunfahigkeitsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schwere-krankheiten-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:schwere-krankheiten-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schwere-krankheiten-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:schwere-krankheiten-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schwere-krankheiten-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:schwere-krankheiten-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-unfallversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:private-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-unfallversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:private-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-unfallversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:private-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kinderinvaliditatsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kinderinvaliditatsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kinderinvaliditatsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kinderinvaliditatsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kinderinvaliditatsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kinderinvaliditatsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-unfallversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gesetzliche-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-unfallversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gesetzliche-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-unfallversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gesetzliche-unfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-arbeitslosenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gesetzliche-arbeitslosenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-arbeitslosenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gesetzliche-arbeitslosenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-arbeitslosenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gesetzliche-arbeitslosenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:restschuldversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:restschuldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:restschuldversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:restschuldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:restschuldversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:restschuldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietkautionsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:mietkautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietkautionsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:mietkautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietkautionsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:mietkautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietausfallversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:mietausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietausfallversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:mietausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietausfallversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:mietausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-krankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gesetzliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-krankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gesetzliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-krankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gesetzliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-krankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:private-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-krankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:private-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-krankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:private-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:zahnzusatzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:zahnzusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:zahnzusatzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:zahnzusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:zahnzusatzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:zahnzusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhauszusatzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:krankenhauszusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhauszusatzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:krankenhauszusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhauszusatzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:krankenhauszusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ambulante-zusatzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:ambulante-zusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ambulante-zusatzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:ambulante-zusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ambulante-zusatzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:ambulante-zusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pflegezusatzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:pflegezusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pflegezusatzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:pflegezusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pflegezusatzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:pflegezusatzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankentagegeldversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:krankentagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankentagegeldversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:krankentagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankentagegeldversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:krankentagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhaustagegeldversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:krankenhaustagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhaustagegeldversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:krankenhaustagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:krankenhaustagegeldversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:krankenhaustagegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:soziale-pflegeversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:soziale-pflegeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:soziale-pflegeversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:soziale-pflegeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:soziale-pflegeversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:soziale-pflegeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:privathaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:privathaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:privathaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:privathaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:privathaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:privathaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:haus-und-grundbesitzerhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:haus-und-grundbesitzerhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:haus-und-grundbesitzerhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewasserschadenhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gewasserschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewasserschadenhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gewasserschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewasserschadenhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gewasserschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauherrenhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:bauherrenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauherrenhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:bauherrenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauherrenhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:bauherrenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:jagdhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:jagdhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:jagdhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:jagdhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:jagdhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:jagdhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:rechtsschutzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:rechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:rechtsschutzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:rechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:rechtsschutzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:rechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:verkehrsrechtsschutzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:verkehrsrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:verkehrsrechtsschutzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:verkehrsrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:verkehrsrechtsschutzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:verkehrsrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:drohnenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:drohnenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:drohnenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebshaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:betriebshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebshaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:betriebshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebshaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:betriebshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:berufshaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:berufshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:berufshaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:berufshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:berufshaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:berufshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vermogensschadenhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:vermogensschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vermogensschadenhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:vermogensschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vermogensschadenhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:vermogensschadenhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:geschaftsinhaltsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:geschaftsinhaltsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:geschaftsinhaltsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:geschaftsinhaltsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:geschaftsinhaltsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:geschaftsinhaltsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsunterbrechungsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:betriebsunterbrechungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsunterbrechungsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:betriebsunterbrechungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsunterbrechungsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:betriebsunterbrechungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:cyberversicherung-fur-kleinbetriebe-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:cyberversicherung-fur-kleinbetriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:cyberversicherung-fur-kleinbetriebe-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:cyberversicherung-fur-kleinbetriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:cyberversicherung-fur-kleinbetriebe-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:cyberversicherung-fur-kleinbetriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:firmenrechtsschutzversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:firmenrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:firmenrechtsschutzversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:firmenrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:firmenrechtsschutzversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:firmenrechtsschutzversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbegebaudeversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gewerbegebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbegebaudeversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gewerbegebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbegebaudeversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gewerbegebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:elektronikversicherung-fur-betriebe-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:elektronikversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:elektronikversicherung-fur-betriebe-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:elektronikversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:elektronikversicherung-fur-betriebe-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:elektronikversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:transportversicherung-fur-betriebe-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:transportversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:transportversicherung-fur-betriebe-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:transportversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:transportversicherung-fur-betriebe-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:transportversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kreditversicherung-fur-betriebe-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kreditversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kreditversicherung-fur-betriebe-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kreditversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kreditversicherung-fur-betriebe-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kreditversicherung-fur-betriebe",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:d-und-o-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:d-und-o-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:d-und-o-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:d-und-o-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:d-und-o-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:d-und-o-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vertrauensschadenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:vertrauensschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vertrauensschadenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:vertrauensschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vertrauensschadenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:vertrauensschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsschliessungsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:betriebsschliessungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsschliessungsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:betriebsschliessungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebsschliessungsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:betriebsschliessungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-krankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:betriebliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-krankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:betriebliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-krankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:betriebliche-krankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gruppenunfallversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gruppenunfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gruppenunfallversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gruppenunfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gruppenunfallversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gruppenunfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:maschinenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:maschinenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:maschinenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:maschinenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:maschinenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:maschinenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umwelthaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:umwelthaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umwelthaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:umwelthaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umwelthaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:umwelthaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umweltschadenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:umweltschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umweltschadenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:umweltschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:umweltschadenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:umweltschadenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbliche-kautionsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gewerbliche-kautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbliche-kautionsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gewerbliche-kautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gewerbliche-kautionsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gewerbliche-kautionsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:risikolebensversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:risikolebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:risikolebensversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:risikolebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:risikolebensversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:risikolebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kapitallebensversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kapitallebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kapitallebensversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kapitallebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kapitallebensversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kapitallebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fondsgebundene-lebensversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:fondsgebundene-lebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fondsgebundene-lebensversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:fondsgebundene-lebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fondsgebundene-lebensversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:fondsgebundene-lebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-rentenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:private-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-rentenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:private-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-rentenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:private-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:riester-rentenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:riester-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:riester-rentenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:riester-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:riester-rentenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:riester-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:basisrentenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:basisrentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:basisrentenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:basisrentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:basisrentenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:basisrentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-direktversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:betriebliche-direktversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-direktversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:betriebliche-direktversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:betriebliche-direktversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:betriebliche-direktversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-rentenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:gesetzliche-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-rentenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:gesetzliche-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:gesetzliche-rentenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:gesetzliche-rentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sterbegeldversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:sterbegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sterbegeldversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:sterbegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sterbegeldversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:sterbegeldversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kfz-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kfz-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kfz-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kfz-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kfz-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kfz-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:motorradversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:motorradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:motorradversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:motorradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:motorradversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:motorradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mopedversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:mopedversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mopedversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:mopedversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mopedversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:mopedversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnmobilversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:wohnmobilversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnmobilversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:wohnmobilversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnmobilversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:wohnmobilversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnwagenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:wohnwagenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnwagenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:wohnwagenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohnwagenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:wohnwagenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fahrradversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:fahrradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fahrradversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:fahrradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:fahrradversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:fahrradversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:e-scooter-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:e-scooter-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:e-scooter-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:e-scooter-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:e-scooter-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:e-scooter-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bootsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:bootsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bootsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:bootsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bootsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:bootsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:oldtimerversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:oldtimerversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:oldtimerversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:oldtimerversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:oldtimerversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:oldtimerversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:anhanger-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:anhanger-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:anhanger-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:anhanger-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:anhanger-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:anhanger-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietwagen-selbstbeteiligungsschutz-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:mietwagen-selbstbeteiligungsschutz",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietwagen-selbstbeteiligungsschutz-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:mietwagen-selbstbeteiligungsschutz",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:mietwagen-selbstbeteiligungsschutz-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:mietwagen-selbstbeteiligungsschutz",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenkaskoversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:drohnenkaskoversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenkaskoversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:drohnenkaskoversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:drohnenkaskoversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:drohnenkaskoversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiserucktrittsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:reiserucktrittsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiserucktrittsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:reiserucktrittsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiserucktrittsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:reiserucktrittsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiseabbruchversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:reiseabbruchversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiseabbruchversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:reiseabbruchversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reiseabbruchversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:reiseabbruchversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reisegepackversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:reisegepackversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reisegepackversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:reisegepackversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:reisegepackversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:reisegepackversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:auslandskrankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:auslandskrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:auslandskrankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:auslandskrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:auslandskrankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:auslandskrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:campingversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:campingversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:campingversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:campingversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:campingversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:campingversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sportgerateversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:sportgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sportgerateversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:sportgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:sportgerateversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:sportgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundehaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:hundehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundehaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:hundehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundehaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:hundehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdehaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:pferdehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdehaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:pferdehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdehaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:pferdehaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hunde-op-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:hunde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hunde-op-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:hunde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hunde-op-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:hunde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzen-op-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:katzen-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzen-op-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:katzen-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzen-op-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:katzen-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferde-op-versicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:pferde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferde-op-versicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:pferde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferde-op-versicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:pferde-op-versicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundekrankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:hundekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundekrankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:hundekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hundekrankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:hundekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzenkrankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:katzenkrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzenkrankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:katzenkrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:katzenkrankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:katzenkrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdekrankenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:pferdekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdekrankenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:pferdekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdekrankenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:pferdekrankenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdelebensversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:pferdelebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdelebensversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:pferdelebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:pferdelebensversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:pferdelebensversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vereinshaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:vereinshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vereinshaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:vereinshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:vereinshaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:vereinshaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstalterhaftpflichtversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:veranstalterhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstalterhaftpflichtversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:veranstalterhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstalterhaftpflichtversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:veranstalterhaftpflichtversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstaltungsausfallversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:veranstaltungsausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstaltungsausfallversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:veranstaltungsausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:veranstaltungsausfallversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:veranstaltungsausfallversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:handyversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:handyversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:handyversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:handyversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:handyversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:handyversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:laptopversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:laptopversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:laptopversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:laptopversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:laptopversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:laptopversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:musikinstrumentenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:musikinstrumentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:musikinstrumentenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:musikinstrumentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:musikinstrumentenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:musikinstrumentenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schmuckversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:schmuckversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schmuckversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:schmuckversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:schmuckversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:schmuckversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kunstversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kunstversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kunstversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kunstversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kunstversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kunstversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:uhrenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:uhrenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:uhrenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:uhrenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:uhrenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:uhrenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:brillenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:brillenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:brillenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:brillenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:brillenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:brillenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:horgerateversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:horgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:horgerateversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:horgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:horgerateversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:horgerateversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-cyberversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:private-cyberversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-cyberversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:private-cyberversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:private-cyberversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:private-cyberversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hausratversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:hausratversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hausratversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:hausratversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:hausratversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:hausratversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohngebaudeversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:wohngebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohngebaudeversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:wohngebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:wohngebaudeversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:wohngebaudeversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:glasversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:glasversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:glasversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:glasversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:glasversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:glasversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:photovoltaikversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:photovoltaikversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:photovoltaikversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:photovoltaikversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:photovoltaikversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:photovoltaikversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauleistungsversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:bauleistungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauleistungsversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:bauleistungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:bauleistungsversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:bauleistungsversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:feuerrohbauversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:feuerrohbauversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:feuerrohbauversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:feuerrohbauversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:feuerrohbauversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:feuerrohbauversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ferienhausversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:ferienhausversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ferienhausversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:ferienhausversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:ferienhausversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:ferienhausversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kleingartenversicherung-faq",
+      "label": "FAQ",
+      "parent_page_key": "INS:R3:kleingartenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kleingartenversicherung-beratung",
+      "label": "Beratung",
+      "parent_page_key": "INS:R3:kleingartenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    },
+    {
+      "key": "INS:TERM:kleingartenversicherung-leistungen-und-praxis",
+      "label": "Leistungen & Praxis",
+      "parent_page_key": "INS:R3:kleingartenversicherung",
+      "term_parent": 0,
+      "post_ideas_min_count": 3
+    }
+  ],
+  "checks": {
+    "areas": 12,
+    "concrete_insurance_topics": 105,
+    "pages": 118,
+    "new_terms": 315,
+    "total_new_objects": 433,
+    "positive": "PASS",
+    "note": "No WordPress core/plugin importer execution; no new write authorization"
+  }
+}
