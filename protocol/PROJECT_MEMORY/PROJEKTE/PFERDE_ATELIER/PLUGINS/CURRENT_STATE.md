@@ -262,6 +262,13 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - QA-Quelle (KEIN Plugin): Library `/Pferdeatelier/TempVerify/PSTE_PFERDERELEVANZ_SEMANTIK_QA_20261020_KEIN_PLUGIN.zip`, SHA256 `33df3a40752ab76226d3ef81010fb6430aabd07410d156b8f4fbf9b41854f8b2`; enthält alten/neuen Ein-Datei-Quellstand, Patch, historische CSV, Testfälle und offene Gegenbeispiele.
 - **Status: BLOCKED.** Nicht aus einfachen synthetischen PASS oder 4501er Quellenprüfung auf semantische Gesamtqualität schließen. Kein neuer Installer. Genau dieselbe NEXT ACTION, nur Pferderelevanz.
 
+## 20.10.2026 – Kontextdefinition schwieriger Fremdthemen (nur QA/Definition, keine Quelländerung)
+
+- Die 31 schwierigen ursprünglichen Negativproben wurden als Bedeutungsfälle ausgearbeitet: **27 offensichtlich fremde Suchabsichten, 4 unklare Bedeutungen**; 28 positive Kontrollen aus bisherigen Proben hinzugefügt. Vier Ursachenklassen: anderes Zielwesen, andere Wortbedeutung, fremde Tätigkeit/bloßer Ort, Nutzung durch Menschen bzw. Händlerkontext. Keine neue programmatische Wortverbotsliste.
+- Lokaler erneuter PHP-Test mit 14 Gegensatzpaar-/Kontrastfragen auf **unverändertem** vorliegenden `class-pste-category-context.php`: **8 korrekt, 6 abweichend**, darunter `Pferdesattel für Hunde` falsch positiv und `Trense für Anfänger` falsch ungeklärt. Dies ist zusätzliche QA-Evidenz und gerade KEIN neuer bestandener Gesamttest.
+- Artefakt (KEIN Plugin) Library `/Pferdeatelier/TempVerify/PFERDEATELIER_PFERDERELEVANZ_KONTEXT_DEFINITION_20261020_KEIN_PLUGIN.zip`; SHA256 `b096bf68324edc1ceb7528c0651f360b4f87151169f08f10dbd186676f2e80e3`. Enthält 31 Fallbewertungen, 28 Positivkontrollen, PHP-Gegentest und Ergebnisse.
+- **BLOCKED unverändert.** Keine PHP-Fachlogik geändert, keine WP-Installation, keine Kategorien/Titel/Produktion/K0/PSERC/PPM verändert. NEXT ACTION bleibt ausschließlich zentrale Pferderelevanz semantisch generalisiert korrigieren und historisch + adversarial POS/NEG wiederholen.
+
 ## NEXT ACTION
 
 Genau eine: Ausschließlich die zentrale Pferderelevanzentscheidung im vorhandenen PSTE semantisch verbessern. Kontextabhängige eindeutige Pferdethemen erkennen, gleichlautende Fremdthemen zuverlässig ablehnen. Keine Familien- oder Kategoriepflicht bei Relevanz, keine Einzelkeyword-Ausnahmen und keine neue Architektur. Den gleichen historischen 4501er Relevanztest und neue positive/negative Varianten mit echten Negativbeispielen wiederholen. Erst bei bestandenem POS/NEG zum nächsten Fachschritt wechseln; kein installierbares Plugin freigeben.
