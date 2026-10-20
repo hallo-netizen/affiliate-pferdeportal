@@ -2,47 +2,62 @@
   "contract": "HOBBY_DEPOT_BILDZENTRALE_CONFIG_V1",
   "project_id": "hobby-depot",
   "current_candidate": {
-    "version": "1.0.0",
-    "artifact": "HOBBY_DEPOT_BILDZENTRALE_1.0.0_INSTALLIEREN.zip",
-    "sha256": "bb74d795dffaa6d3ff51d6251d298c04c53ee9a3d75d39c00609afde867c7503"
+    "version": "2.7.7",
+    "artifact": "HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip",
+    "zip_sha256": "c27eff9a48007a5317832cf3d6f539d49856a1e6edaf92eebd1bfdb89e030ab7",
+    "source_php_sha256": "5126d57a1a04d75e561bf7eab35227e176a04352eb70f587a4f392e463331b38",
+    "source_php_bytes": 317483
   },
-  "reference_source": {
+  "verified_original": {
     "version": "2.7.6",
-    "artifact": "ALLGEMEINE_BILDZENTRALE_2.7.6_RASSEN_BATCH_AUTOMATIK_INSTALLIEREN.zip",
-    "sha256": "12edc4405560ac3b149cf76a0b6e65694337b1533c0ea5e3a777d3b6c98ccbf0",
-    "exact_bytes_available": false
+    "source_backup": "pferde-atelier.de_wpvivid-6e9ec6d805997_2026-09-24-11-08_backup_plugin.part001.zip",
+    "source_path": "plugins/pferde-atelier-bildzentrale/pferde-atelier-bildzentrale.php",
+    "source_php_sha256": "984a8d4da6594ffa93e6d4024b57cc6c22c7d1fbfec398177a19b0490c20d89b",
+    "source_php_bytes": 383603,
+    "exact_bytes_available": true
   },
   "design_binding": {
     "wordpress_category_meta_key": "thumbnail_id",
     "hivepress_taxonomy": "hp_listing_category",
     "hivepress_image_meta_key": "thumbnail_id",
-    "compatibility_option": "pabz_taxonomy_image_config_v1"
+    "compatibility_option": "pabz_taxonomy_image_config_v1",
+    "compatibility_reason": "current Hobby Depot design reads this option read-only"
   },
   "enabled_capabilities": [
-    "posts_pages_cpt_featured_image",
+    "posts",
     "wp_taxonomies",
-    "hivepress_taxonomies_optional",
+    "custom_post_type_hero",
+    "hivepress_taxonomies",
     "pixabay",
     "pexels",
-    "magnific_explicit_only",
-    "remote_import",
-    "media_assignment",
-    "settings_export_without_secrets",
-    "readback_rollback",
-    "no_overwrite"
+    "magnific",
+    "search",
+    "batch",
+    "media_import",
+    "featured_image",
+    "content_image",
+    "settings_export_import",
+    "readback",
+    "undo_rollback",
+    "quality_audit",
+    "license_credits"
   ],
-  "forbidden_or_removed": [
+  "removed_or_rebound": [
     "pa_breed",
-    "horse_breed_batch",
+    "breed_batch",
     "horse_specific_prompts",
-    "horse_specific_framing",
-    "horse_taxonomy_ids",
-    "horse_urls",
-    "bildertrommel",
-    "random_rotation",
-    "autonomous_mass_generation",
-    "automatic_overwrite"
+    "horse_specific_clusters",
+    "horse_specific_search_rules",
+    "horse_specific_alt_text_rules",
+    "horse_specific_filename_fallback",
+    "fixed_test_post_9120",
+    "horse_project_admin_rest_slugs"
   ],
+  "bildertrommel_audit": {
+    "literal_name_found": false,
+    "uniquely_identified_code_path": false,
+    "action": "no generic function deleted by guess"
+  },
   "migration_policy": {
     "overwrite_existing_images": false,
     "live_install_before_local_qa": false,
