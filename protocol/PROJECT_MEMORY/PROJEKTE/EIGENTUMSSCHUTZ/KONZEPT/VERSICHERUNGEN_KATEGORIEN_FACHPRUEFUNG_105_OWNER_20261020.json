@@ -1,0 +1,3774 @@
+{
+  "document": "HAB_UND_BEWAHR_INSURANCE_CATEGORY_CAPACITY_AUDIT_V2",
+  "date": "2026-10-20",
+  "status": "FACHLICHER_NEUENTWURF__NICHT_IMPORTFREIGEGEBEN",
+  "basis": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json",
+  "scope": "Nur Kategoriebau: keine Artikelideen/Titel, keine Contentproduktion, keine SERP-Titelpruefung, keine WordPress-Writes.",
+  "rules": [
+    "FAQ und Beratung sind sinnvolle wiederkehrende Aufgabenbereiche, aber kein starrer 3er- oder 5er-Block.",
+    "Zusatzkategorien nur, wenn thematisch abgrenzbar und eigenstaendig grob 3-5 Beitraege tragen koennen.",
+    "proof_fields sind grobe Themenfelder, NICHT Artikelideen oder Artikelueberschriften.",
+    "Schmale Aspekte im gleichen Themenowner zusammenfassen, statt kuenstliche Kategorien zu erfinden.",
+    "Alle 105 Vorschlaege muessen vor technischer Nutzung noch Grenzfaelle und Kollisionen gegen reale WordPress-Daten bestehen.",
+    "Keine neue DataForSEO-Abfrage und kein Import ohne gesonderte Freigabe."
+  ],
+  "checks": {
+    "owners": 105,
+    "category_candidates": 363,
+    "distribution": {
+      "3": 63,
+      "4": 36,
+      "5": 6
+    },
+    "owner_names_match_105": true,
+    "each_candidate_three_coarse_domains": true,
+    "any_articles_written": false,
+    "wp_imported": false
+  },
+  "owners": [
+    {
+      "insurance": "Bauleistungsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungszweck",
+            "versicherte Bauphase",
+            "Abgrenzung Feuerrohbau"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Bauumfang",
+            "Eigenleistungen",
+            "Deckungswahl"
+          ]
+        },
+        {
+          "label": "Bauschäden & Ersatz",
+          "proof_fields": [
+            "unvorhergesehene Beschädigung",
+            "Materialschäden",
+            "Schadennachweise"
+          ]
+        },
+        {
+          "label": "Baustellen-Sonderfälle",
+          "proof_fields": [
+            "Bauverzug",
+            "Nachträge",
+            "Fremdgewerke"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:bauleistungsversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Ferienhausversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Gebäude",
+            "Inventar",
+            "Leerstand"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Eigennutzung",
+            "Vermietung",
+            "Schutzkombination"
+          ]
+        },
+        {
+          "label": "Abwesenheit & Schäden",
+          "proof_fields": [
+            "spät bemerkte Wasserschäden",
+            "Einbruch",
+            "Sturm"
+          ]
+        },
+        {
+          "label": "Vermietung & Haftung",
+          "proof_fields": [
+            "Gäste",
+            "Vermieterpflichten",
+            "Wechsel der Nutzungsart"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:ferienhausversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Feuerrohbauversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Baubeginn",
+            "Deckungsende",
+            "versicherte Gefahren"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Bauzeit",
+            "Einbindung Wohngebäude",
+            "Abgrenzung Bauleistung"
+          ]
+        },
+        {
+          "label": "Brandfall im Rohbau",
+          "proof_fields": [
+            "Feuerschäden",
+            "Schadenbelege",
+            "Bauverzögerung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:feuerrohbauversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Glasversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Glassorten",
+            "versicherte Flächen",
+            "Abgrenzung Hausrat"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Sonderverglasung",
+            "Selbstbehalt",
+            "Notwendigkeit"
+          ]
+        },
+        {
+          "label": "Glasbruch & Ersatz",
+          "proof_fields": [
+            "Schadenarten",
+            "Reparatur",
+            "Schadenmeldung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:glasversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Hausratversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Hausratbegriff",
+            "Gefahren",
+            "Außenversicherung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Versicherungssumme",
+            "Unterversicherung",
+            "Wertsachen"
+          ]
+        },
+        {
+          "label": "Einbruch & Diebstahl",
+          "proof_fields": [
+            "Einbruchdiebstahl",
+            "Fahrräder",
+            "Raub"
+          ]
+        },
+        {
+          "label": "Wasser & Naturgefahren",
+          "proof_fields": [
+            "Leitungswasser",
+            "Sturm",
+            "Elementarbausteine"
+          ]
+        },
+        {
+          "label": "Schadenabwicklung",
+          "proof_fields": [
+            "Inventarnachweise",
+            "Wertermittlung",
+            "Fristen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:hausratversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Kleingartenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Laube",
+            "Inventar",
+            "Pachtbezug"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Laubenwert",
+            "Kleingartenverein",
+            "Abgrenzung Hausrat"
+          ]
+        },
+        {
+          "label": "Gartenlaube & Schäden",
+          "proof_fields": [
+            "Sturm",
+            "Diebstahl",
+            "Feuer"
+          ]
+        },
+        {
+          "label": "Pacht & Nutzung",
+          "proof_fields": [
+            "Pächterwechsel",
+            "Anbauten",
+            "Gemeinschaftseigentum"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kleingartenversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Photovoltaikversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "PV-Bauteile",
+            "Versicherungsort",
+            "Abgrenzung Wohngebäude"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Dachanlage",
+            "Balkonkraftwerk",
+            "Speicher"
+          ]
+        },
+        {
+          "label": "Technische Schäden",
+          "proof_fields": [
+            "Überspannung",
+            "Wechselrichter",
+            "Tierbiss"
+          ]
+        },
+        {
+          "label": "Ertragsausfall & Wiederherstellung",
+          "proof_fields": [
+            "Ausfallzeit",
+            "Ertragsersatz",
+            "Reparaturnachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:photovoltaikversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Wohngebäudeversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Gebäudeteile",
+            "Gefahren",
+            "Nebengebäude"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gebäudewert",
+            "Neuwert",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Elementarschäden",
+          "proof_fields": [
+            "Hochwasser",
+            "Rückstau",
+            "Erdrutsch"
+          ]
+        },
+        {
+          "label": "Sturm & Wasser",
+          "proof_fields": [
+            "Sturmschäden",
+            "Leitungswasserschäden",
+            "Folgeschäden"
+          ]
+        },
+        {
+          "label": "Sanierung & Schadenfall",
+          "proof_fields": [
+            "Anbauten",
+            "energetische Maßnahmen",
+            "Regulierung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:wohngebaeudeversicherung",
+      "area": "Wohnen & Bauen"
+    },
+    {
+      "insurance": "Anhänger-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Zulassung",
+            "Haftpflicht",
+            "Anhängernutzung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Nutzungsart",
+            "Teil- oder Vollkasko",
+            "Abstellrisiko"
+          ]
+        },
+        {
+          "label": "Haftungsfälle & Diebstahl",
+          "proof_fields": [
+            "angekuppelter Zustand",
+            "abgekuppelter Zustand",
+            "Entwendung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:anhaenger-versicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Bootsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Bootsarten",
+            "Versicherungsgebiet",
+            "Haftpflicht/Kasko"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Bootswert",
+            "Fahrtgebiet",
+            "Liegeplatz"
+          ]
+        },
+        {
+          "label": "Kasko & Havarie",
+          "proof_fields": [
+            "Sturm",
+            "Havarie",
+            "Diebstahl"
+          ]
+        },
+        {
+          "label": "Transport & Winterlager",
+          "proof_fields": [
+            "Landtransport",
+            "Lagerschäden",
+            "Revierwechsel"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:bootsversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Drohnenkaskoversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Kasko/Halterhaftung",
+            "Drohnentypen",
+            "Zubehör"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gerätewert",
+            "Flugzweck",
+            "Deckungsgrenzen"
+          ]
+        },
+        {
+          "label": "Absturz & Diebstahl",
+          "proof_fields": [
+            "Bedienfehler",
+            "Transportverlust",
+            "Schadenreparatur"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:drohnenkaskoversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "E-Scooter-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungspflicht",
+            "Kennzeichen",
+            "Haftung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Haftpflicht oder Kasko",
+            "Nutzungsumfang",
+            "Fahrerkreis"
+          ]
+        },
+        {
+          "label": "Unfall & Entwendung",
+          "proof_fields": [
+            "Fremdschaden",
+            "Diebstahl",
+            "Schadenmeldung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:e-scooter-versicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Fahrradversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Fahrradtyp",
+            "E-Bike",
+            "Abgrenzung Hausrat"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Neuwert",
+            "Sicherheitsvorgaben",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Diebstahl & Raub",
+          "proof_fields": [
+            "Unterwegsdiebstahl",
+            "Schlossregeln",
+            "Nachweise"
+          ]
+        },
+        {
+          "label": "Beschädigung & Technik",
+          "proof_fields": [
+            "Sturz",
+            "Akku",
+            "Reparatur"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:fahrradversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Kfz-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Haftpflicht",
+            "Teilkasko",
+            "Vollkasko"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Fahrerkreis",
+            "Fahrleistung",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Schadenfreiheitsklassen & Kosten",
+          "proof_fields": [
+            "SF-Einstufung",
+            "Beitragsmerkmale",
+            "Rückstufung"
+          ]
+        },
+        {
+          "label": "Unfall & Regulierung",
+          "proof_fields": [
+            "Eigen- oder Fremdschaden",
+            "Werkstattbindung",
+            "Schadenmeldung"
+          ]
+        },
+        {
+          "label": "Vertrag & Fahrzeugwechsel",
+          "proof_fields": [
+            "Zweitwagen",
+            "Fahrzeugtausch",
+            "Kündigungswechsel"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kfz-versicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Mietwagen-Selbstbeteiligungsschutz",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Selbstbeteiligung",
+            "Leihfahrzeug",
+            "Abgrenzung Mietwagenkasko"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Buchungsweg",
+            "Deckelung",
+            "Ausschlüsse"
+          ]
+        },
+        {
+          "label": "Erstattung & Belege",
+          "proof_fields": [
+            "Schadenrechnung",
+            "Vorauszahlung",
+            "Rückforderung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:mietwagen-selbstbeteiligungsschutz",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Mopedversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungskennzeichen",
+            "Versicherungsjahr",
+            "Fahrzeugklassen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Haftpflicht oder Kasko",
+            "Fahrerkreis",
+            "Diebstahlrisiko"
+          ]
+        },
+        {
+          "label": "Unfall & Entwendung",
+          "proof_fields": [
+            "Verkehrsschaden",
+            "Diebstahl",
+            "Schadenmeldung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:mopedversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Motorradversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungspflicht",
+            "Haftpflicht",
+            "Kasko"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Saisonkennzeichen",
+            "Fahrerkreis",
+            "Versicherungsumfang"
+          ]
+        },
+        {
+          "label": "Unfall & Diebstahl",
+          "proof_fields": [
+            "Eigenschaden",
+            "Fremdschaden",
+            "Entwendung"
+          ]
+        },
+        {
+          "label": "Beitrag & Saison",
+          "proof_fields": [
+            "Schadenfreiheitsklasse",
+            "Ruheversicherung",
+            "Saisonwechsel"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:motorradversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Oldtimerversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Oldtimerdefinition",
+            "H-Kennzeichen",
+            "Wertgutachten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Fahrzeugzustand",
+            "Nutzungslimit",
+            "Wertabsicherung"
+          ]
+        },
+        {
+          "label": "Wert & Schäden",
+          "proof_fields": [
+            "Marktwert",
+            "Wiederbeschaffungswert",
+            "Restaurierungsschaden"
+          ]
+        },
+        {
+          "label": "Nutzung & Lagerung",
+          "proof_fields": [
+            "Saison",
+            "Garagierung",
+            "Fahrtenbeschränkungen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:oldtimerversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Wohnmobilversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Haftpflicht",
+            "Kasko",
+            "Ausbau"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Fahrzeugwert",
+            "Reisegebiet",
+            "Abstellzeit"
+          ]
+        },
+        {
+          "label": "Reise & Diebstahl",
+          "proof_fields": [
+            "Einbruch",
+            "Fahrzeugsicherung",
+            "Schaden im Ausland"
+          ]
+        },
+        {
+          "label": "Standzeiten & Zubehör",
+          "proof_fields": [
+            "Überwinterung",
+            "Anbauteile",
+            "Campingausstattung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:wohnmobilversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Wohnwagenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Zulassung",
+            "Haftpflicht",
+            "Kasko"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Standcamping",
+            "Transport",
+            "Schutz für Inventar"
+          ]
+        },
+        {
+          "label": "Stellplatz & Wetter",
+          "proof_fields": [
+            "Sturm",
+            "Hagel",
+            "Langzeitabstellung"
+          ]
+        },
+        {
+          "label": "Diebstahl & Haftung",
+          "proof_fields": [
+            "Entwendung",
+            "Fremdschäden",
+            "Inventarschaden"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:wohnwagenversicherung",
+      "area": "Mobilität"
+    },
+    {
+      "insurance": "Bauherrenhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Bauherrenpflicht",
+            "versicherte Personen",
+            "Bauvorhaben"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Bausumme",
+            "Eigenleistungen",
+            "Laufzeit"
+          ]
+        },
+        {
+          "label": "Baustellenhaftung",
+          "proof_fields": [
+            "Verkehrssicherung",
+            "Drittschäden",
+            "Schadenabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:bauherrenhaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Drohnenhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungspflicht",
+            "Halter",
+            "Flugregeln"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "private/gewerbliche Nutzung",
+            "Geltungsraum",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Fremdschäden & Ansprüche",
+          "proof_fields": [
+            "Sachschaden",
+            "Personenschaden",
+            "Anspruchsabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:drohnenhaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Gewässerschadenhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Heizöltank",
+            "Umweltrisiko",
+            "Deckungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Tankgröße",
+            "Standort",
+            "Haftungsrisiko"
+          ]
+        },
+        {
+          "label": "Austritt & Folgen",
+          "proof_fields": [
+            "Bodenkontamination",
+            "Gewässerschäden",
+            "Sanierungskosten"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gewaesserschadenhaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Eigentümerpflichten",
+            "Objekte",
+            "Abgrenzung Privathaftpflicht"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Vermietung",
+            "Mehrfamilienhaus",
+            "unbebautes Grundstück"
+          ]
+        },
+        {
+          "label": "Verkehrssicherung & Schaden",
+          "proof_fields": [
+            "Glatteis",
+            "herabfallende Bauteile",
+            "Schadenersatz"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Jagdhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Pflichtschutz",
+            "Jagdausübung",
+            "mitversicherte Personen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Revier",
+            "Waffenbezug",
+            "Hunde"
+          ]
+        },
+        {
+          "label": "Jagdunfälle & Haftung",
+          "proof_fields": [
+            "Personenschaden",
+            "Sachschaden",
+            "Hundehaftung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:jagdhaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Privathaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Personen",
+            "Schadenarten",
+            "Deckungssumme"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Familientarif",
+            "besondere Risiken",
+            "Vertragsvergleich"
+          ]
+        },
+        {
+          "label": "Alltagsschäden & Schadenmeldung",
+          "proof_fields": [
+            "Mietsachschäden",
+            "Gefälligkeitsschäden",
+            "Schadenabwehr"
+          ]
+        },
+        {
+          "label": "Zusatzschutz & Grenzen",
+          "proof_fields": [
+            "Schlüsselverlust",
+            "Forderungsausfall",
+            "deliktunfähige Kinder"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:privathaftpflichtversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Rechtsschutzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Rechtsbereiche",
+            "Wartezeiten",
+            "Deckungsfälle"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Privat/Beruf/Wohnen",
+            "Selbstbehalt",
+            "freie Anwaltswahl"
+          ]
+        },
+        {
+          "label": "Rechtsstreit & Kostenübernahme",
+          "proof_fields": [
+            "Deckungsanfrage",
+            "Prozesskosten",
+            "Mediation"
+          ]
+        },
+        {
+          "label": "Vertragsmodule & Ausschlüsse",
+          "proof_fields": [
+            "Arbeitsrecht",
+            "Wohnrecht",
+            "Familienrecht"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:rechtsschutzversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Verkehrsrechtsschutzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Verkehrsteilnahme",
+            "Wartezeiten",
+            "Deckungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Fahrzeughalter",
+            "Familie",
+            "Abgrenzung Rechtsschutz"
+          ]
+        },
+        {
+          "label": "Streit nach Unfall",
+          "proof_fields": [
+            "Bußgeld",
+            "Schadenersatz",
+            "Führerscheinverfahren"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:verkehrsrechtsschutzversicherung",
+      "area": "Haftung & Recht"
+    },
+    {
+      "insurance": "Ambulante Zusatzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "ambulante Leistungen",
+            "Kostenerstattung",
+            "Abgrenzung GKV"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Leistungsbausteine",
+            "Gesundheitsprüfung",
+            "Kosten"
+          ]
+        },
+        {
+          "label": "Rechnungen & Erstattung",
+          "proof_fields": [
+            "Privatrechnung",
+            "Gebührenrahmen",
+            "Eigenanteil"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:ambulante-zusatzversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Gesetzliche Krankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungspflicht",
+            "Mitgliedschaft",
+            "Familienversicherung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kassenwahl",
+            "Zusatzbeitrag",
+            "Leistungsbedarf"
+          ]
+        },
+        {
+          "label": "Leistungen & Anträge",
+          "proof_fields": [
+            "Krankengeld",
+            "Hilfsmittel",
+            "Reha"
+          ]
+        },
+        {
+          "label": "Mitgliedschaft & Wechsel",
+          "proof_fields": [
+            "Jobwechsel",
+            "Studium",
+            "Statuswechsel"
+          ]
+        },
+        {
+          "label": "Widerspruch & Pflegebezug",
+          "proof_fields": [
+            "Leistungsablehnung",
+            "Widerspruch",
+            "Abgrenzung Pflegekasse"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gesetzliche-krankenversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Krankenhaustagegeldversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Tagessatz",
+            "stationärer Aufenthalt",
+            "Abgrenzung Krankentagegeld"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "tatsächlicher Bedarf",
+            "Tagessatzhöhe",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Auszahlung im Krankenhaus",
+          "proof_fields": [
+            "Aufenthaltsnachweis",
+            "Zahlungsbeginn",
+            "Leistungsausschlüsse"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:krankenhaustagegeldversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Krankenhauszusatzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Wahlleistungen",
+            "Zimmer",
+            "Privatarzt"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Einzelzimmer",
+            "Gesundheitsprüfung",
+            "Leistungsgrenzen"
+          ]
+        },
+        {
+          "label": "Behandlung & Rechnung",
+          "proof_fields": [
+            "Arzthonorare",
+            "Klinikwahl",
+            "Erstattung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:krankenhauszusatzversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Krankentagegeldversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Verdienstausfall",
+            "Arbeitsunfähigkeit",
+            "Abgrenzung Krankengeld"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Tagessatz",
+            "Karenzzeit",
+            "Erwerbsstatus"
+          ]
+        },
+        {
+          "label": "Leistung bei Krankheit",
+          "proof_fields": [
+            "Nachweise",
+            "Leistungsbeginn",
+            "Ende der Zahlung"
+          ]
+        },
+        {
+          "label": "Status & Einkommen",
+          "proof_fields": [
+            "Selbstständige",
+            "Arbeitnehmer",
+            "Einkommensänderung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:krankentagegeldversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Pflegezusatzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Pflegegrad",
+            "Leistungsarten",
+            "Abgrenzung Pflichtpflege"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Pflegetagegeld",
+            "Pflegekosten",
+            "Pflegerente"
+          ]
+        },
+        {
+          "label": "Pflegefall & Zahlung",
+          "proof_fields": [
+            "Begutachtung",
+            "Leistungsabruf",
+            "Heimkosten"
+          ]
+        },
+        {
+          "label": "Vertragsdauer & Beitrag",
+          "proof_fields": [
+            "Beitragssteigerung",
+            "Leistungsauslöser",
+            "Kündigungsfolgen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:pflegezusatzversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Private Krankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Zugangsvoraussetzung",
+            "Leistungssystem",
+            "Selbstbeteiligung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Einkommen",
+            "Familienkonstellation",
+            "Tarifwechsel"
+          ]
+        },
+        {
+          "label": "Leistungen & Rechnungen",
+          "proof_fields": [
+            "Arztrechnung",
+            "Erstattung",
+            "Beitragsrückerstattung"
+          ]
+        },
+        {
+          "label": "Beiträge & Alter",
+          "proof_fields": [
+            "Altersrückstellungen",
+            "Beitragsanpassung",
+            "Basistarif"
+          ]
+        },
+        {
+          "label": "Wechsel & Rückkehr",
+          "proof_fields": [
+            "Anbieterwechsel",
+            "interner Tarifwechsel",
+            "Rückkehr GKV"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:private-krankenversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Soziale Pflegeversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungspflicht",
+            "Pflegegrade",
+            "Leistungen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Pflegeantrag",
+            "Eigenanteile",
+            "Entlastungswege"
+          ]
+        },
+        {
+          "label": "Pflegeleistungen & Verfahren",
+          "proof_fields": [
+            "Begutachtung",
+            "Sachleistung",
+            "Pflegegeld"
+          ]
+        },
+        {
+          "label": "Widerspruch & Organisation",
+          "proof_fields": [
+            "Fristen",
+            "Pflegekasse",
+            "Leistungsablehnung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:soziale-pflegeversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Zahnzusatzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Zahnersatz",
+            "Heil- und Kostenplan",
+            "Wartezeiten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Zahnersatzquote",
+            "Zahnzustand",
+            "Beitragsentwicklung"
+          ]
+        },
+        {
+          "label": "Behandlung & Abrechnung",
+          "proof_fields": [
+            "Implantate",
+            "Prophylaxe",
+            "Leistungshöchstgrenzen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:zahnzusatzversicherung",
+      "area": "Gesundheit & Pflege"
+    },
+    {
+      "insurance": "Berufsunfähigkeitsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Berufsunfähigkeit",
+            "abstrakte Verweisung",
+            "Leistungsdefinition"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Rentenhöhe",
+            "Gesundheitsangaben",
+            "Vertragswahl"
+          ]
+        },
+        {
+          "label": "Antrag & Gesundheitsprüfung",
+          "proof_fields": [
+            "Vorerkrankungen",
+            "Risikozuschläge",
+            "Anzeigepflicht"
+          ]
+        },
+        {
+          "label": "Leistungsfall & Nachprüfung",
+          "proof_fields": [
+            "Berufsnachweis",
+            "Leistungsprüfung",
+            "Nachprüfung"
+          ]
+        },
+        {
+          "label": "Vertrag & Lebensphasen",
+          "proof_fields": [
+            "Nachversicherung",
+            "Arbeitswechsel",
+            "Dynamik"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:berufsunfaehigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Dienstunfähigkeitsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Beamtenstatus",
+            "DU-Klausel",
+            "Abgrenzung BU"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Dienstherr",
+            "Versorgungslücke",
+            "Vertragswahl"
+          ]
+        },
+        {
+          "label": "Dienstunfähigkeit & Leistung",
+          "proof_fields": [
+            "Amtsärztliche Feststellung",
+            "Versetzung",
+            "Rentenbeginn"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:dienstunfaehigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Erwerbsunfähigkeitsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Leistungsauslöser",
+            "Erwerbsfähigkeit",
+            "Abgrenzung BU"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Risiko",
+            "Alternativen",
+            "Rentenhöhe"
+          ]
+        },
+        {
+          "label": "Leistungsfall & Berufsfeld",
+          "proof_fields": [
+            "medizinische Prüfung",
+            "Restleistungsfähigkeit",
+            "Leistungsdauer"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:erwerbsunfaehigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Gesetzliche Arbeitslosenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Beitragspflicht",
+            "Arbeitslosengeld",
+            "Voraussetzungen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Meldepflichten",
+            "Anspruchszeiten",
+            "Übergänge"
+          ]
+        },
+        {
+          "label": "Leistungen & Sperrzeiten",
+          "proof_fields": [
+            "Arbeitslosmeldung",
+            "Sperrzeit",
+            "Bemessung"
+          ]
+        },
+        {
+          "label": "Besondere Lebenslagen",
+          "proof_fields": [
+            "Selbstständige",
+            "Befristung",
+            "Teilzeit"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gesetzliche-arbeitslosenversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Gesetzliche Unfallversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Arbeitsunfall",
+            "Wegeunfall",
+            "Berufskrankheit"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Zuständigkeit",
+            "Unfallmeldung",
+            "Leistungswege"
+          ]
+        },
+        {
+          "label": "Reha & Leistungen",
+          "proof_fields": [
+            "Heilbehandlung",
+            "Verletztengeld",
+            "Rente"
+          ]
+        },
+        {
+          "label": "Sondergruppen",
+          "proof_fields": [
+            "Schüler",
+            "ehrenamtlich Tätige",
+            "Selbstständige"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gesetzliche-unfallversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Grundfähigkeitsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Fähigkeiten",
+            "Auslösebedingungen",
+            "Abgrenzung BU"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Tätigkeit",
+            "Fähigkeitenkatalog",
+            "Rentenhöhe"
+          ]
+        },
+        {
+          "label": "Leistungsprüfung",
+          "proof_fields": [
+            "Fähigkeitsverlust",
+            "medizinischer Nachweis",
+            "Leistungsdauer"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:grundfaehigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Kinderinvaliditätsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Invaliditätsschutz",
+            "Krankheiten/Unfälle",
+            "Abgrenzung Unfall"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Familienbedarf",
+            "Rentenmodell",
+            "Vertragsdauer"
+          ]
+        },
+        {
+          "label": "Leistungsfall & Entwicklung",
+          "proof_fields": [
+            "Invaliditätsgrad",
+            "Nachweise",
+            "Übergang ins Erwachsenenalter"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kinderinvaliditaetsversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Private Unfallversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Unfallbegriff",
+            "Invalidität",
+            "Leistungsarten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gefahrenprofil",
+            "Invaliditätssumme",
+            "Progression"
+          ]
+        },
+        {
+          "label": "Invaliditätsleistung",
+          "proof_fields": [
+            "Gliedertaxe",
+            "Fristen",
+            "Gutachten"
+          ]
+        },
+        {
+          "label": "Freizeit & Sonderrisiken",
+          "proof_fields": [
+            "Sport",
+            "Ausland",
+            "Kinder"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:private-unfallversicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Schwere-Krankheiten-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Krankheitskatalog",
+            "Einmalzahlung",
+            "Abgrenzung BU"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Leistungssumme",
+            "Gesundheitsprüfung",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Diagnose & Auszahlung",
+          "proof_fields": [
+            "Definitionen",
+            "Wartezeit",
+            "Nachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:schwere-krankheiten-versicherung",
+      "area": "Arbeitskraft & Einkommen"
+    },
+    {
+      "insurance": "Basisrentenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Rürup-Modell",
+            "steuerliche Behandlung",
+            "Auszahlungsform"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Selbstständige",
+            "Beitragshöhe",
+            "Anlagewahl"
+          ]
+        },
+        {
+          "label": "Sparen & Rentenbeginn",
+          "proof_fields": [
+            "Vertragsbindung",
+            "Beitragsänderung",
+            "Verrentung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:basisrentenversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Betriebliche Direktversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Entgeltumwandlung",
+            "Arbeitgeber",
+            "Bezugsrecht"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Arbeitgeberzuschuss",
+            "Steuern/Abgaben",
+            "Portabilität"
+          ]
+        },
+        {
+          "label": "Jobwechsel & Auszahlung",
+          "proof_fields": [
+            "Arbeitgeberwechsel",
+            "Renteneintritt",
+            "Einmalzahlung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:betriebliche-direktversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Fondsgebundene Lebensversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungs- und Anlageanteil",
+            "Kosten",
+            "Risikoschutz"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Anlagehorizont",
+            "Risikoneigung",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Fonds & Vertragsentwicklung",
+          "proof_fields": [
+            "Fondswechsel",
+            "Marktrisiko",
+            "Wertentwicklung"
+          ]
+        },
+        {
+          "label": "Auszahlung & Kündigung",
+          "proof_fields": [
+            "Rückkaufswert",
+            "Ablaufleistung",
+            "Steuern"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:fondsgebundene-lebensversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Gesetzliche Rentenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Versicherungszeiten",
+            "Rentenarten",
+            "Beitragsstatus"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Renteninformation",
+            "Versorgungslücke",
+            "Frührente"
+          ]
+        },
+        {
+          "label": "Rentenantrag & Bescheid",
+          "proof_fields": [
+            "Kontenklärung",
+            "Antrag",
+            "Widerspruch"
+          ]
+        },
+        {
+          "label": "Erwerbsminderung & Hinterbliebene",
+          "proof_fields": [
+            "Erwerbsminderungsrente",
+            "Witwenrente",
+            "Waisenrente"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gesetzliche-rentenversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Kapitallebensversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Todesfallschutz",
+            "Sparanteil",
+            "Garantie"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Vertragskosten",
+            "Alternativen",
+            "Bezugsrechte"
+          ]
+        },
+        {
+          "label": "Laufzeit & Auszahlung",
+          "proof_fields": [
+            "Ablaufleistung",
+            "Rückkauf",
+            "Beitragsfreistellung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kapitallebensversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Private Rentenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Sparphase",
+            "Rentenfaktor",
+            "Rentenbeginn"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kosten",
+            "Garantien",
+            "Auszahlungsoptionen"
+          ]
+        },
+        {
+          "label": "Vertragsentwicklung & Auszahlung",
+          "proof_fields": [
+            "Entnahme",
+            "Verrentung",
+            "Kündigung"
+          ]
+        },
+        {
+          "label": "Fonds- und Garantievarianten",
+          "proof_fields": [
+            "klassisch",
+            "fondsgebunden",
+            "hybrid"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:private-rentenversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Riester-Rentenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Förderung",
+            "Berechtigung",
+            "Zulagen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Eigenbeitrag",
+            "Familiensituation",
+            "Anbieterwechsel"
+          ]
+        },
+        {
+          "label": "Förderantrag & Auszahlung",
+          "proof_fields": [
+            "Zulagenantrag",
+            "Beitragsprüfung",
+            "Rentenbeginn"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:riester-rentenversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Risikolebensversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Todesfallleistung",
+            "Laufzeit",
+            "Bezugsberechtigte"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Versicherungssumme",
+            "Gesundheitsprüfung",
+            "Partnerabsicherung"
+          ]
+        },
+        {
+          "label": "Vertrag & Todesfall",
+          "proof_fields": [
+            "Nachversicherung",
+            "Leistungsunterlagen",
+            "Bezugsrecht"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:risikolebensversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Sterbegeldversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Todesfallleistung",
+            "Wartezeit",
+            "Leistungsgrenzen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Bestattungskosten",
+            "Alter",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Auszahlung & Vertragsende",
+          "proof_fields": [
+            "Bezugsrecht",
+            "Nachweise",
+            "Beitragslaufzeit"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:sterbegeldversicherung",
+      "area": "Leben & Alter"
+    },
+    {
+      "insurance": "Auslandskrankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Reisedauer",
+            "Geltungsraum",
+            "Rücktransport"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Einzelreise/Jahrestarif",
+            "Vorerkrankungen",
+            "Reiseprofil"
+          ]
+        },
+        {
+          "label": "Behandlung im Ausland",
+          "proof_fields": [
+            "Arztrechnung",
+            "Rücktransport",
+            "Notruf"
+          ]
+        },
+        {
+          "label": "Langzeitreisen & Grenzen",
+          "proof_fields": [
+            "Auslandaufenthalt",
+            "Dauer",
+            "Heimaturlaub"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:auslandskrankenversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Campingversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Campingobjekte",
+            "Standplatz",
+            "Nutzungsart"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Zelt/Wohnwagen",
+            "Langzeitcamping",
+            "Inventarwert"
+          ]
+        },
+        {
+          "label": "Stellplatz & Sachschäden",
+          "proof_fields": [
+            "Sturm",
+            "Diebstahl",
+            "Brand"
+          ]
+        },
+        {
+          "label": "Saison & Abwesenheit",
+          "proof_fields": [
+            "Überwinterung",
+            "Vermietung",
+            "Sicherung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:campingversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Reiseabbruchversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Reiseabbruch",
+            "Mehrkosten",
+            "Abgrenzung Rücktritt"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Reiseart",
+            "Familienbedarf",
+            "versicherte Gründe"
+          ]
+        },
+        {
+          "label": "Reiseunterbrechung & Ersatz",
+          "proof_fields": [
+            "vorzeitige Rückreise",
+            "Nachreisekosten",
+            "Erstattungsnachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:reiseabbruchversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Reisegepäckversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Gepäckbegriff",
+            "Transport",
+            "Geltungsbereich"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Versicherungslücken",
+            "Wertsachen",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Verlust & Beschädigung",
+          "proof_fields": [
+            "Diebstahl",
+            "Fluggepäck",
+            "Belegpflicht"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:reisegepaeckversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Reiserücktrittsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Rücktrittsgründe",
+            "Reisebeginn",
+            "Abgrenzung Abbruch"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Reisepreis",
+            "Selbstbehalt",
+            "Einzelreise/Jahr"
+          ]
+        },
+        {
+          "label": "Stornierung & Nachweise",
+          "proof_fields": [
+            "Erkrankung",
+            "Stornokosten",
+            "Unterlagen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:reiseruecktrittsversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Sportgeräteversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Gerätearten",
+            "Transport",
+            "Deckungsort"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gerätewert",
+            "Sportart",
+            "Haftungsabgrenzung"
+          ]
+        },
+        {
+          "label": "Sport & Transportschäden",
+          "proof_fields": [
+            "Diebstahl",
+            "Unfallschaden",
+            "Transport"
+          ]
+        },
+        {
+          "label": "Lagerung & Sonderrisiken",
+          "proof_fields": [
+            "Vereinslager",
+            "Ausland",
+            "Verleih"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:sportgeraeteversicherung",
+      "area": "Reisen & Freizeit"
+    },
+    {
+      "insurance": "Berufshaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "berufliche Fehler",
+            "Drittschaden",
+            "Abgrenzung Betrieb"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Berufsgruppe",
+            "Deckungssumme",
+            "Leistungsumfang"
+          ]
+        },
+        {
+          "label": "Ansprüche aus Berufstätigkeit",
+          "proof_fields": [
+            "Beratungsfehler",
+            "Nachbesserung",
+            "Anspruchsabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:berufshaftpflichtversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Betriebliche Krankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Arbeitgeberleistung",
+            "Belegschaft",
+            "Leistungsmodelle"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Budgetmodell",
+            "kleines Team",
+            "Lohnabrechnung"
+          ]
+        },
+        {
+          "label": "Mitarbeiterwechsel & Leistungen",
+          "proof_fields": [
+            "Eintritt",
+            "Austritt",
+            "Erstattung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:betriebliche-krankenversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Betriebshaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Betriebsrisiko",
+            "Mitarbeitende",
+            "Fremdschäden"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Betriebsart",
+            "Deckungssumme",
+            "Zusatzbausteine"
+          ]
+        },
+        {
+          "label": "Kunden- und Betriebsschäden",
+          "proof_fields": [
+            "Personenschaden",
+            "Sachschaden",
+            "Anspruchsabwehr"
+          ]
+        },
+        {
+          "label": "Betriebsänderung & Schutz",
+          "proof_fields": [
+            "neue Tätigkeit",
+            "Betriebsstätte",
+            "Subunternehmer"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:betriebshaftpflichtversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Betriebsschließungsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Schließungsgründe",
+            "behördliche Anordnung",
+            "Deckungsgrenze"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Betriebsart",
+            "Leistungsdauer",
+            "Vertragsklauseln"
+          ]
+        },
+        {
+          "label": "Betriebsschließung & Nachweise",
+          "proof_fields": [
+            "Anordnung",
+            "Umsatzentgang",
+            "Mitwirkung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:betriebsschliessungsversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Betriebsunterbrechungsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Sachschadenbezug",
+            "Unterbrechungsdauer",
+            "Ertragsausfall"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Fixkosten",
+            "Haftzeit",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Betriebsstillstand & Ersatz",
+          "proof_fields": [
+            "Umsatzausfall",
+            "fortlaufende Kosten",
+            "Wiederanlauf"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:betriebsunterbrechungsversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Cyberversicherung für Kleinbetriebe",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Cybervorfälle",
+            "Datenrisiko",
+            "Schutzbausteine"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kassensysteme",
+            "Kundendaten",
+            "IT-Dienstleister"
+          ]
+        },
+        {
+          "label": "Angriff & Wiederherstellung",
+          "proof_fields": [
+            "Ransomware",
+            "Datenverlust",
+            "Betriebsstillstand"
+          ]
+        },
+        {
+          "label": "Haftung & Krisendienst",
+          "proof_fields": [
+            "Datenschutzansprüche",
+            "Forensik",
+            "Krisenkommunikation"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:cyberversicherung-fuer-kleinbetriebe",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "D&O-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Organhaftung",
+            "Geschäftsführung",
+            "versicherte Personen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "kleine GmbH",
+            "Managerhaftung",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Haftungsanspruch & Verteidigung",
+          "proof_fields": [
+            "Innenhaftung",
+            "Außenhaftung",
+            "Rechtskosten"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:d-und-o-versicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Elektronikversicherung für Betriebe",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Gerätearten",
+            "versicherte Schäden",
+            "Abgrenzung Geschäftsinhalte"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kassentechnik",
+            "Gerätewert",
+            "Betriebsrisiko"
+          ]
+        },
+        {
+          "label": "Technikausfall & Ersatz",
+          "proof_fields": [
+            "Bedienfehler",
+            "Überspannung",
+            "Reparatur"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:elektronikversicherung-fuer-betriebe",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Firmenrechtsschutzversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Rechtsgebiete",
+            "Wartezeit",
+            "Kostenübernahme"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Personal",
+            "Betriebsräume",
+            "Vertragsstreit"
+          ]
+        },
+        {
+          "label": "Rechtsstreit & Deckung",
+          "proof_fields": [
+            "Arbeitsrecht",
+            "Mietrecht",
+            "Schadenersatz"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:firmenrechtsschutzversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Geschäftsinhaltsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Inventar",
+            "Waren",
+            "versicherte Gefahren"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Warenlager",
+            "Betriebsgröße",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Einbruch & Elementar",
+          "proof_fields": [
+            "Diebstahl",
+            "Wasserschaden",
+            "Sturm"
+          ]
+        },
+        {
+          "label": "Betriebseinrichtung & Nachweise",
+          "proof_fields": [
+            "Inventarlisten",
+            "Neuwert",
+            "Schadenerstattung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:geschaeftsinhaltsversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Gewerbegebäudeversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Betriebsgebäude",
+            "Nebengebäude",
+            "Deckungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Eigentümer",
+            "Bauart",
+            "Gebäudewert"
+          ]
+        },
+        {
+          "label": "Sturm & Wasser",
+          "proof_fields": [
+            "Naturgefahren",
+            "Leitungswasser",
+            "Sanierung"
+          ]
+        },
+        {
+          "label": "Gebäudenutzung & Änderungen",
+          "proof_fields": [
+            "Anbau",
+            "Vermietung",
+            "Nutzungswechsel"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gewerbegebaeudeversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Gewerbliche Kautionsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Bürgschaft",
+            "Auftraggeber",
+            "Bürgschaftsarten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Liquidität",
+            "Sicherheiten",
+            "Auftragsvolumen"
+          ]
+        },
+        {
+          "label": "Bürgschaft & Rückgriff",
+          "proof_fields": [
+            "Vertragserfüllung",
+            "Gewährleistung",
+            "Inanspruchnahme"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gewerbliche-kautionsversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Gruppenunfallversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Gruppen",
+            "Unfallbegriff",
+            "Leistungsarten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kleinstbetrieb",
+            "Mitarbeiterkreis",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Arbeits- und Freizeitunfälle",
+          "proof_fields": [
+            "Arbeitsbezug",
+            "Firmenveranstaltungen",
+            "Invalidität"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:gruppenunfallversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Kreditversicherung für Betriebe",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Forderungsausfall",
+            "Abnehmer",
+            "Deckungsgrenzen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kundenrisiko",
+            "Zahlungsziele",
+            "Umsatzgröße"
+          ]
+        },
+        {
+          "label": "Zahlungsverzug & Ersatz",
+          "proof_fields": [
+            "Insolvenz",
+            "Inkasso",
+            "Entschädigungsberechnung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kreditversicherung-fuer-betriebe",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Maschinenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Maschinentypen",
+            "Sachschaden",
+            "Versicherungssumme"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Maschinenwert",
+            "Produktionsrolle",
+            "Betriebsart"
+          ]
+        },
+        {
+          "label": "Maschinenschäden & Reparatur",
+          "proof_fields": [
+            "Bedienfehler",
+            "Materialschäden",
+            "Reparaturkosten"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:maschinenversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Transportversicherung für Betriebe",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Transportgut",
+            "Transportarten",
+            "Geltungsraum"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "eigener Transport",
+            "Versender",
+            "Verpackung"
+          ]
+        },
+        {
+          "label": "Verlust & Transportschaden",
+          "proof_fields": [
+            "Diebstahl",
+            "Bruch",
+            "Schadenprotokoll"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:transportversicherung-fuer-betriebe",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Umwelthaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Drittschäden",
+            "Haftungsrisiken",
+            "Anlagen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kleinbetrieb",
+            "Stofflagerung",
+            "Deckung"
+          ]
+        },
+        {
+          "label": "Ansprüche & Sanierung",
+          "proof_fields": [
+            "Personenschaden",
+            "Sachschaden",
+            "Gewässerschaden"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:umwelthaftpflichtversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Umweltschadenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Umweltschadenrecht",
+            "öffentlich-rechtliche Pflichten",
+            "Abgrenzung Haftpflicht"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "betriebliche Tätigkeit",
+            "Standortrisiko",
+            "Schutzbedarf"
+          ]
+        },
+        {
+          "label": "Umweltsanierung & Pflichten",
+          "proof_fields": [
+            "Bodenschaden",
+            "Artenschutz",
+            "Sanierungsanordnung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:umweltschadenversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Vermögensschadenhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "echter Vermögensschaden",
+            "Berufsfehler",
+            "Deckungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Beratungsberuf",
+            "Deckungssumme",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Fehlberatung & Anspruch",
+          "proof_fields": [
+            "Fristversäumnis",
+            "Finanzfolgen",
+            "Haftungsabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:vermoegensschadenhaftpflichtversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Vertrauensschadenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Vertrauensperson",
+            "Vermögensschaden",
+            "Betrugsfälle"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Personalzugriff",
+            "Kassenführung",
+            "Vertragsbedingungen"
+          ]
+        },
+        {
+          "label": "Betrug & Aufklärung",
+          "proof_fields": [
+            "Unterschlagung",
+            "Manipulation",
+            "Schadennachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:vertrauensschadenversicherung",
+      "area": "Kleine Betriebe"
+    },
+    {
+      "insurance": "Mietausfallversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Mietausfallgründe",
+            "Vermieterbezug",
+            "Deckungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Vermietungsart",
+            "Einkommensrisiko",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Mietausfall & Anspruch",
+          "proof_fields": [
+            "Zahlungsverzug",
+            "Leerstand",
+            "Nachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:mietausfallversicherung",
+      "area": "Finanzielle Risiken"
+    },
+    {
+      "insurance": "Mietkautionsversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Mietkaution",
+            "Bürgschaft",
+            "Rückgriffsanspruch"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Mieterperspektive",
+            "Kosten",
+            "Barkautionsvergleich"
+          ]
+        },
+        {
+          "label": "Auszug & Inanspruchnahme",
+          "proof_fields": [
+            "Vermieterschaden",
+            "Rückzahlung",
+            "Bürgschaftsfreigabe"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:mietkautionsversicherung",
+      "area": "Finanzielle Risiken"
+    },
+    {
+      "insurance": "Restschuldversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Kreditabsicherung",
+            "versicherte Ereignisse",
+            "Leistungsausschlüsse"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Kreditdauer",
+            "Preis",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Arbeitsausfall & Restschuld",
+          "proof_fields": [
+            "Arbeitslosigkeit",
+            "Arbeitsunfähigkeit",
+            "Todesfallleistung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:restschuldversicherung",
+      "area": "Finanzielle Risiken"
+    },
+    {
+      "insurance": "Brillenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Gläser",
+            "Fassung",
+            "Leistungsgrenzen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Anschaffungskosten",
+            "Ersatzbedarf",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Bruch & Ersatz",
+          "proof_fields": [
+            "Beschädigung",
+            "Verlust",
+            "Erstattung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:brillenversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Handyversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Geräteschutz",
+            "versicherte Gefahren",
+            "Wartezeiten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gerätewert",
+            "Selbstbehalt",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Diebstahl & Defekt",
+          "proof_fields": [
+            "Displayschaden",
+            "Entwendung",
+            "Reparatur"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:handyversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Hörgeräteversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Hörgerät",
+            "Zuzahlung",
+            "Leistungsabgrenzung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gerätepreis",
+            "GKV-Anteil",
+            "Ersatzbedarf"
+          ]
+        },
+        {
+          "label": "Verlust & Reparatur",
+          "proof_fields": [
+            "Defekt",
+            "Verlust",
+            "Rechnungsnachweise"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:hoergeraeteversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Kunstversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Kunstgegenstände",
+            "Versicherungswert",
+            "Deckungsort"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Sammlungswert",
+            "Lagerung",
+            "Wertgutachten"
+          ]
+        },
+        {
+          "label": "Transport & Beschädigung",
+          "proof_fields": [
+            "Leihgabe",
+            "Transport",
+            "Restaurierung"
+          ]
+        },
+        {
+          "label": "Wertnachweis & Erstattung",
+          "proof_fields": [
+            "Marktwert",
+            "Zertifikate",
+            "Schadenbewertung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:kunstversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Laptopversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Geräteumfang",
+            "Unterwegsrisiko",
+            "Leistungsgrenzen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Gerätewert",
+            "beruflich/privat",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Diebstahl & Reparatur",
+          "proof_fields": [
+            "Flüssigkeitsschaden",
+            "Entwendung",
+            "Ersatzwert"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:laptopversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Musikinstrumentenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Instrumentenarten",
+            "Versicherungsort",
+            "Transport"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Instrumentenwert",
+            "Auftritte",
+            "Leihgeräte"
+          ]
+        },
+        {
+          "label": "Auftritt & Transportschäden",
+          "proof_fields": [
+            "Sturz",
+            "Diebstahl",
+            "Flugtransport"
+          ]
+        },
+        {
+          "label": "Lagerung & Wertnachweis",
+          "proof_fields": [
+            "Sammlerwert",
+            "Lagerbedingungen",
+            "Wiederbeschaffung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:musikinstrumentenversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Private Cyberversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Identitätsdiebstahl",
+            "Onlinebetrug",
+            "versicherte Hilfe"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Haushaltsrisiko",
+            "Bank-/Plattformschutz",
+            "Alternativen"
+          ]
+        },
+        {
+          "label": "Onlinebetrug & Unterstützung",
+          "proof_fields": [
+            "Phishing",
+            "Datenmissbrauch",
+            "Rechtsbeistand"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:private-cyberversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Schmuckversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "versicherte Schmuckstücke",
+            "Versicherungssumme",
+            "Abgrenzung Hausrat"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Wertsachenwert",
+            "Safebedingungen",
+            "Auslandsdeckung"
+          ]
+        },
+        {
+          "label": "Verlust & Entwendung",
+          "proof_fields": [
+            "Diebstahl",
+            "Raub",
+            "Schadenbelege"
+          ]
+        },
+        {
+          "label": "Wert & Aufbewahrung",
+          "proof_fields": [
+            "Gutachten",
+            "Schließfach",
+            "Wertanpassung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:schmuckversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Uhrenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Uhrentyp",
+            "Deckungsort",
+            "Abgrenzung Hausrat"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Wert",
+            "Sammlungsbedarf",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Diebstahl & Beschädigung",
+          "proof_fields": [
+            "Raub",
+            "Sturz",
+            "Reparatur"
+          ]
+        },
+        {
+          "label": "Wertnachweise",
+          "proof_fields": [
+            "Kaufbeleg",
+            "Gutachten",
+            "Sammlerwert"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:uhrenversicherung",
+      "area": "Wertsachen & Technik"
+    },
+    {
+      "insurance": "Hunde-OP-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Operationsbegriff",
+            "tarifliche Grenzen",
+            "Wartezeiten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Hundealter",
+            "Rasse",
+            "Selbstbeteiligung"
+          ]
+        },
+        {
+          "label": "Operation & Rechnung",
+          "proof_fields": [
+            "Not-OP",
+            "Nachbehandlung",
+            "Gebührenordnung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:hunde-op-versicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Hundehaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Halterhaftung",
+            "Leinenpflicht",
+            "Versicherungspflicht"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Rasse",
+            "Bundesland",
+            "Hundebetreuung"
+          ]
+        },
+        {
+          "label": "Hundeschäden & Ansprüche",
+          "proof_fields": [
+            "Biss",
+            "Verkehrsunfall",
+            "Fremdsachschaden"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:hundehaftpflichtversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Hundekrankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "ambulant/stationär",
+            "OP-Baustein",
+            "Erstattungsgrenze"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Rasse",
+            "Alter",
+            "Budget"
+          ]
+        },
+        {
+          "label": "Erkrankung & Erstattung",
+          "proof_fields": [
+            "Diagnostik",
+            "Medikamente",
+            "Behandlung"
+          ]
+        },
+        {
+          "label": "Vorsorge & Leistungslimits",
+          "proof_fields": [
+            "Impfung",
+            "Prophylaxe",
+            "Jahreshöchstleistung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:hundekrankenversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Katzen-OP-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "OP-Begriff",
+            "Leistungsgrenze",
+            "Wartezeit"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Freigänger",
+            "Tieralter",
+            "Selbstbehalt"
+          ]
+        },
+        {
+          "label": "Operation & Rechnung",
+          "proof_fields": [
+            "Verletzung",
+            "Narkose",
+            "Nachbehandlung"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:katzen-op-versicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Katzenkrankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Krankheiten",
+            "OP-Anteil",
+            "Erstattung"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Freigänger",
+            "Alter",
+            "Beitrag"
+          ]
+        },
+        {
+          "label": "Behandlung & Erstattung",
+          "proof_fields": [
+            "Diagnostik",
+            "Medikamente",
+            "OP"
+          ]
+        },
+        {
+          "label": "Vorsorge & Grenzen",
+          "proof_fields": [
+            "Impfung",
+            "Zahnversorgung",
+            "Wartezeit"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:katzenkrankenversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Pferde-OP-Versicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Operationen",
+            "Kolik",
+            "Wartezeiten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Pferdealter",
+            "Nutzung",
+            "Budget"
+          ]
+        },
+        {
+          "label": "Operation & Nachsorge",
+          "proof_fields": [
+            "Klinikkosten",
+            "Narkose",
+            "Nachbehandlung"
+          ]
+        },
+        {
+          "label": "Leistungslimits & Ausnahmen",
+          "proof_fields": [
+            "Kolikoperation",
+            "Vorbefunde",
+            "Höchstgrenzen"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:pferde-op-versicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Pferdehaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Tierhalterhaftung",
+            "Fremdreiter",
+            "versicherte Schäden"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Privathaltung",
+            "Beteiligungen",
+            "Deckungssumme"
+          ]
+        },
+        {
+          "label": "Reit- & Haltungsschäden",
+          "proof_fields": [
+            "Weideausbruch",
+            "Personenschaden",
+            "Mietsachschaden"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:pferdehaftpflichtversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Pferdekrankenversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Behandlung",
+            "OP-Anteil",
+            "Erstattungsgrenzen"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Tieralter",
+            "medizinische Historie",
+            "Haltungsweise"
+          ]
+        },
+        {
+          "label": "Tierarzt & Erstattung",
+          "proof_fields": [
+            "Diagnostik",
+            "Medikamente",
+            "Klinik"
+          ]
+        },
+        {
+          "label": "Sonderleistungen & Grenzen",
+          "proof_fields": [
+            "Zähne",
+            "Physiotherapie",
+            "Leistungslimits"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:pferdekrankenversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Pferdelebensversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Todesfall/Untauglichkeit",
+            "versicherter Wert",
+            "Ausschlüsse"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Pferdewert",
+            "Nutzung",
+            "Deckungssumme"
+          ]
+        },
+        {
+          "label": "Todesfall & Entschädigung",
+          "proof_fields": [
+            "Nottötung",
+            "Unfall",
+            "Krankheit"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:pferdelebensversicherung",
+      "area": "Tiere"
+    },
+    {
+      "insurance": "Veranstalterhaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Veranstalterpflicht",
+            "Fremdschäden",
+            "versicherte Helfer"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Besucherzahl",
+            "Veranstaltungsart",
+            "Deckung"
+          ]
+        },
+        {
+          "label": "Veranstaltungsschäden",
+          "proof_fields": [
+            "Personenschaden",
+            "Sachschaden",
+            "Anspruchsabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:veranstalterhaftpflichtversicherung",
+      "area": "Vereine & Veranstaltungen"
+    },
+    {
+      "insurance": "Veranstaltungsausfallversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Ausfallgründe",
+            "Schlechtwetter",
+            "versicherte Kosten"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Veranstaltungstyp",
+            "Budget",
+            "Absageklauseln"
+          ]
+        },
+        {
+          "label": "Absage & Erstattung",
+          "proof_fields": [
+            "Wetter",
+            "behördliche Anordnung",
+            "Künstlerausfall"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:veranstaltungsausfallversicherung",
+      "area": "Vereine & Veranstaltungen"
+    },
+    {
+      "insurance": "Vereinshaftpflichtversicherung",
+      "facets": [
+        {
+          "label": "FAQ",
+          "proof_fields": [
+            "Vereinsaktivitäten",
+            "Mitglieder",
+            "Haftungsumfang"
+          ]
+        },
+        {
+          "label": "Beratung",
+          "proof_fields": [
+            "Vereinsgröße",
+            "Sportbetrieb",
+            "Ehrenamt"
+          ]
+        },
+        {
+          "label": "Vereinsunfälle & Haftung",
+          "proof_fields": [
+            "Veranstaltungen",
+            "Trainingsbetrieb",
+            "Schadenabwehr"
+          ]
+        }
+      ],
+      "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
+      "owner_key": "INS:R3:vereinshaftpflichtversicherung",
+      "area": "Vereine & Veranstaltungen"
+    }
+  ]
+}
