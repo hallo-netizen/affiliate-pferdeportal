@@ -1885,3 +1885,25 @@ WAS: Nutzerentscheidung für weitere Hauptkategorie Versicherungen mit unveränd
 WARUM: Vollständiger Versicherungsbereich ohne parallele WordPress-Taxonomie oder riskante Eingriffe in die bestehenden 265 Themen. Seed-Kontrolle und eindeutige Seitenowner vermeiden offensichtliche Auslassungen/Keyworddoppelungen. Der vorhandene C2.3-471er-Importer ist hart an Altseiten gebunden; für neue Versicherungsseiten muss sein vorhandenes zentrales Plugin auf technische Aufnahmefähigkeit geprüft und nur minimal additiv ergänzt werden. Nicht aus einer bloßen Titelliste eine SEO-Freigabe ableiten.
 BELEG: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md` (einzige Versicherungs-Current); `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md` IDs HB-INS-20261020-01 bis 05; `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/CURRENT_STATE.md` (separate technische Plugin-Current).
 STATUS: Fach-/Strukturentwurf LOCAL PASS, WordPress-Integration und Live-Freigabe ausstehend. Keine persönliche Bibliothek verwendet.
+
+## HOBBYRAUSCH-HOBBYFINDER-20261020-P – Ein zentraler Hobbybestand für Finder und Inspirations-Views
+
+WAS:
+Hobby Depot besitzt genau einen kanonischen Hobbybestand mit 862 Hobbyidentitäten. Jede Identität trägt zentral 54 Eigenschaften in 8 Gruppen sowie vier knappe Präsentationsfelder „Was ist das?“, „Was macht man?“, „Was braucht man?“ und „Was ist der Reiz?“. Der Hobbyfinder ist ein 8-Schritt-Funnel über diesen Bestand. Magazin-/SEO-Einstiege wie „alleine“, „draußen“, „wenig Zeit“, „kleines Budget“ oder „ungewöhnlich“ sind nur Views/Relationen über dieselben Merkmale.
+
+WARUM:
+Nutzer sollen sowohl geführt suchen als auch über Suchmaschinen-/Inspirationsseiten einsteigen können, ohne doppelte Hobbyseiten, konkurrierende Datenhaltung oder widersprüchliche Klassifikationen. Gerade unbekannte/skurrile Hobbys brauchen auf Ergebniskarten eine sofort verständliche Kurzbeschreibung.
+
+TECHNISCHER KISS-WEG:
+- Fachwahrheit bleibt zentral in HOBBYRAUSCH/WISSENSDATENBANK;
+- `HOBBYREGISTER.md` ist nur fester Registervertrag, keine zweite Current-Autorität;
+- HD-007 ist ausschließlich read-only WordPress-Projektion des hashgebundenen Registerstands;
+- HD-003 liest den Finderbestand ausschließlich über HD-007;
+- HD-004 löst vorhandene CORE-Zielobjekte; fehlende Ziele werden nicht erfunden;
+- keine neue Tabelle, kein Cron, kein Netzwerk, keine zweite Hobby-Datenbank.
+
+BELEGTER STAND:
+862/862 Hobbys klassifiziert; 862/862 Kurzprofile; Vollbestands-Finder lokal positiv/negativ geprüft. Live-/WordPress-Readback bleibt separat offen.
+
+REGEL:
+Neue Hobbys und neue Eigenschaften werden ausschließlich im zentralen Hobbyregister/-schema ergänzt. Finder, Design, Magazin und SEO-Views dürfen keine eigene persistente Hobbykopie aufbauen.
