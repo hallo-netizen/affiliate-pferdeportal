@@ -14,10 +14,10 @@
   ],
   "checks": {
     "owners": 105,
-    "category_candidates": 363,
+    "category_candidates": 358,
     "distribution": {
-      "3": 63,
-      "4": 36,
+      "3": 68,
+      "4": 31,
       "5": 6
     },
     "owner_names_match_105": true,
@@ -1928,8 +1928,8 @@
         {
           "label": "Beratung",
           "proof_fields": [
-            "Kosten",
-            "Garantien",
+            "Tarifvarianten",
+            "Kosten und Garantien",
             "Auszahlungsoptionen"
           ]
         },
@@ -1939,14 +1939,6 @@
             "Entnahme",
             "Verrentung",
             "Kündigung"
-          ]
-        },
-        {
-          "label": "Fonds- und Garantievarianten",
-          "proof_fields": [
-            "klassisch",
-            "fondsgebunden",
-            "hybrid"
           ]
         }
       ],
@@ -2585,24 +2577,16 @@
           "label": "Beratung",
           "proof_fields": [
             "Warenlager",
-            "Betriebsgröße",
+            "Betriebseinrichtung",
             "Versicherungssumme"
           ]
         },
         {
-          "label": "Einbruch & Elementar",
+          "label": "Sachschäden & Regulierung",
           "proof_fields": [
             "Diebstahl",
-            "Wasserschaden",
-            "Sturm"
-          ]
-        },
-        {
-          "label": "Betriebseinrichtung & Nachweise",
-          "proof_fields": [
-            "Inventarlisten",
-            "Neuwert",
-            "Schadenerstattung"
+            "Brand und Wasser",
+            "Inventarnachweise"
           ]
         }
       ],
@@ -3217,8 +3201,8 @@
           "label": "Beratung",
           "proof_fields": [
             "Instrumentenwert",
-            "Auftritte",
-            "Leihgeräte"
+            "Aufbewahrung",
+            "Auftrittsnutzung"
           ]
         },
         {
@@ -3227,14 +3211,6 @@
             "Sturz",
             "Diebstahl",
             "Flugtransport"
-          ]
-        },
-        {
-          "label": "Lagerung & Wertnachweis",
-          "proof_fields": [
-            "Sammlerwert",
-            "Lagerbedingungen",
-            "Wiederbeschaffung"
           ]
         }
       ],
@@ -3288,9 +3264,9 @@
         {
           "label": "Beratung",
           "proof_fields": [
-            "Wertsachenwert",
-            "Safebedingungen",
-            "Auslandsdeckung"
+            "Wertnachweise",
+            "Aufbewahrung",
+            "Deckungsgrenzen"
           ]
         },
         {
@@ -3299,14 +3275,6 @@
             "Diebstahl",
             "Raub",
             "Schadenbelege"
-          ]
-        },
-        {
-          "label": "Wert & Aufbewahrung",
-          "proof_fields": [
-            "Gutachten",
-            "Schließfach",
-            "Wertanpassung"
           ]
         }
       ],
@@ -3328,8 +3296,8 @@
         {
           "label": "Beratung",
           "proof_fields": [
-            "Wert",
-            "Sammlungsbedarf",
+            "Wertgutachten",
+            "Aufbewahrung",
             "Selbstbehalt"
           ]
         },
@@ -3339,14 +3307,6 @@
             "Raub",
             "Sturz",
             "Reparatur"
-          ]
-        },
-        {
-          "label": "Wertnachweise",
-          "proof_fields": [
-            "Kaufbeleg",
-            "Gutachten",
-            "Sammlerwert"
           ]
         }
       ],
@@ -3769,6 +3729,38 @@
       "assessment": "FACHLICH_PLAUSIBEL__FEINGRENZE_VOR_IMPORT_PRUEFEN",
       "owner_key": "INS:R3:vereinshaftpflichtversicherung",
       "area": "Vereine & Veranstaltungen"
+    }
+  ],
+  "merge_reviews": [
+    {
+      "owner": "Private Rentenversicherung",
+      "removed": "Fonds- und Garantievarianten",
+      "integrated_into": "Beratung",
+      "why": "Fonds-/Garantiearten sind Teil der Tarifberatung, keine eigenständige zusätzliche Endkategorie."
+    },
+    {
+      "owner": "Schmuckversicherung",
+      "removed": "Wert & Aufbewahrung",
+      "integrated_into": "Beratung",
+      "why": "Gutachten, Wertanpassung und Safe gehören zur Beratung; extra Kategorie überschneidet sich."
+    },
+    {
+      "owner": "Uhrenversicherung",
+      "removed": "Wertnachweise",
+      "integrated_into": "Beratung",
+      "why": "Drei Arten des Wertnachweises bilden keine belastbar eigene Beitragskategorie."
+    },
+    {
+      "owner": "Musikinstrumentenversicherung",
+      "removed": "Lagerung & Wertnachweis",
+      "integrated_into": "Beratung",
+      "why": "Wertbeleg und Lagerbedingungen gehören in die Tarif-/Nutzungsberatung."
+    },
+    {
+      "owner": "Geschäftsinhaltsversicherung",
+      "removed": "Betriebseinrichtung & Nachweise",
+      "integrated_into": "Sachschäden & Regulierung",
+      "why": "Inventarlisten und Schadenbelege sind Teil der Schadensregulierung; gesonderter Intent zu schmal."
     }
   ]
 }
