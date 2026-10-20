@@ -1,0 +1,16 @@
+# Versicherungen – überprüfter Struktur- und Recherchezwischenstand, 20.10.2026
+## Unveränderte Fachregeln
+Neue siebte Hauptkategorie im bereits vorhandenen Kategorieplugin. R2-Bereiche mindestens drei direkte R3-Themen; unterste konkrete Versicherungs-R3-Seite je **eine Versicherungsart**, darunter nur fachlich tragfähige flache Beitragskategorien. Je unterster Beitragskategorie grob >=3 eigenständige spätere Beiträge, ohne Obergrenze. FAQ und Beratung nach bestehendem C2.3-Fachvertrag, übrige Kategorien individuell. Keine zweite Architektur, keine Überarbeitung der alten 265 Eigentumsschutz-Themen, keine erneute 743/472-Importwelle.
+
+## Erstellt und auf Struktur geprüft
+- `VERSICHERUNGEN_C2_SEITENBAUM_20261020.json`: **10** R2-Bereiche, **68** R3-Seitenkandidaten zu konkreten Versicherungen, jeweils eindeutige Owner-ID und vier lediglich vorläufige Facettenvorschläge. 10/10 Bereiche haben mindestens drei direkte R3-Kinder. 68/68 Owner-IDs einzigartig; sämtliche 272 **vorgeschlagenen** Endkategorie-Bezeichner unterschiedlich. Abgleich mit der dokumentierten 265er Eigentumsschutz-R3-Liste: **0 identische Titel**.
+- **13** Grenzfälle noch nicht fachlich freigegeben (Zusatzbausteine, möglicherweise nicht selbstständige Versicherungsprodukte oder Überschneidungen), im JSON jeweils mit CHECK_ markiert. **Nicht** als endgültige eigene Themen installieren.
+- `VERSICHERUNGEN_DATAFORSEO_68_NAMEN_RECHERCHEQUEUE_20261020.json`: exakt **68** eindeutige Germany/de Seedbegriffe (jeweils Versicherungsnamen), 2. Stufe mit Varianten nur bei Bedarf. Keine echten neuen Providerergebnisse. Die 272 vorgeschlagenen Beitragskategorien sind **noch nicht** auf tatsächliche >=3 eigenständige Beiträge redaktionell geprüft; nur Kandidaten.
+
+## Belegter Backend-/Importweg
+- `KATEGORIEN/CURRENT_STATE.md` dokumentiert die tatsächliche bestehende WordPress-Adminseite **Portal-Kategorien → SEO-Namen prüfen** mit DataForSEO-Codepfad sowie die genuine 570-Begriffe-Germany/de-Abfrage vom 16.10.2026.
+- Für den neuen Versicherungsbaum ist **nicht belegt**, dass die aktuelle Maske noch nicht importierte neue Begriffe direkt einlesen oder abfragen kann. Weder eine neue DataForSEO-Rechnung noch eine WordPress-Änderung wurde verursacht.
+- Alte 743 und 472 laut WordPress-Abschluss bereits vorhanden. Die zusätzliche 471er C2.3-Welle (Kategorieplugin 1.14.8.32) steht als separater bereits lokal getesteter, aber **nicht bestätigter Live-Import** offen; diesen nicht erneut und nicht heimlich starten.
+
+## Einziger nächster Schritt für Versicherungen
+Im **bestehenden** Backend **Portal-Kategorien → SEO-Namen prüfen** read-only klären, ob die neue 68er Begriffsqueue schon vor dem Live-Anlegen eines siebten Bereichs abgefragt werden kann. Danach eine **ausdrücklich freigegebene** kostengünstige Erstabfrage Germany/de mit 68 genauen Versicherungsnamen; Provider-Rohantwort sichern, semantische Grenzfälle auflösen und erst danach finaler strukturtreuer Kategorienbaum und Dry-Run des bestehenden Importers. Kein neuer Importweg, keine Vorabkategorien, kein API-Aufruf ohne Freigabe.
