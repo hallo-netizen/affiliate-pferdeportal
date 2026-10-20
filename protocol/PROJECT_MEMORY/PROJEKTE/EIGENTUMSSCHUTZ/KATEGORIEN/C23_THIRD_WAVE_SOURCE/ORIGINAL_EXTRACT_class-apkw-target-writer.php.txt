@@ -1,0 +1,25 @@
+<?php
+if (!defined('ABSPATH')) { exit; }
+
+/** Isolated low-level target tree WordPress writes. */
+final class APKW_TargetWriter {
+    public static function target_tree_insert_page(array $args):int{
+        $args=array_merge(['post_type'=>'page','post_status'=>'publish'], $args);$r=wp_insert_post($args,true);if(is_wp_error($r)||!(int)$r)throw new RuntimeException('Target-Tree-Seite konnte nicht angelegt werden.');return (int)$r;
+    }
+    public static function target_tree_update_page(int $id,array $args):void{
+        $args['ID']=$id;$r=wp_update_post($args,true);if(is_wp_error($r)||!(int)$r)throw new RuntimeException('Target-Tree-Seite konnte nicht aktualisiert werden.');
+    }
+    public static function target_tree_insert_term(string $taxonomy,array $args):int{
+        $name=(string)($args['name']??'');unset($args['name']);$r=wp_insert_term($name,$taxonomy,$args);if(is_wp_error($r)||!(int)($r['term_id']??0))throw new RuntimeException('Target-Tree-Term konnte nicht angelegt werden: '.$taxonomy);return (int)$r['term_id'];
+    }
+    public static function target_tree_update_term(int $id,string $taxonomy,array $args):void{
+        $r=wp_update_term($id,$taxonomy,$args);if(is_wp_error($r))throw new RuntimeException('Target-Tree-Term konnte nicht aktualisiert werden: '.$taxonomy);
+    }
+    public static function target_tree_delete_object(array $ref):void{
+        if(($ref['kind']??'')==='page'){if((int)($ref['id']??0)>0)wp_delete_post((int)$ref['id'],true);return;}
+        $tax=(string)($ref['taxonomy']??'');if((int)($ref['id']??0)>0&&$tax!=='')wp_delete_term((int)$ref['id'],$tax);
+    }
+    public static function target_tree_set_meta(array $ref,string $objectType,string $key,string $value):void{
+        $id=(int)($ref['id']??0);if($id<1)return;if(($ref['kind']??'')==='page'){if($value==='')delete_post_meta($id,$key);else update_post_meta($id,$key,$value);return;}if($value==='')delete_term_meta($id,$key);else update_term_meta($id,$key,$value);
+    }
+}
