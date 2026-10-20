@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-19 (letzte Arbeitskopie Relevanz lokal/kein Release; Testinstallation 0.57.110 fehlerhaft; aktueller 5014er E2E nicht abgenommen)
+STAND: 2026-10-20 (letzte Arbeitskopie Relevanz lokal/kein Release; Testinstallation 0.57.110 fehlerhaft; aktueller 5014er E2E nicht abgenommen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
 ## AUTORITÄT
@@ -253,6 +253,14 @@ PPA-006: ältere Artefakt-/Versionsbindung im `REGISTER.md` noch offen und heute
 - NEGATIV offen: Dressurprüfung für Hunde und Ballett Dressurunterricht fälschlich pferderelevant, Pferdeschwanz als Frisur weiterhin falsch; Olympia-Springpferd wird trotz Pferdebezug nicht erkannt. Deshalb keine Relevanz-Gesamtfreigabe, keine Sonder-Blacklists.
 - Viergruppen-Zahlen 1938 Relevanzprüfung / 209 Titelarbeit / 1930 Kategorieklärung / 424 zugeordnet gehören zum älteren vollen 4501er Test und sind KEIN vollständig neu gerechnetes Ergebnis dieser lokalen Relevanzkorrektur.
 - Testinstallation PSTE 0.57.110: Neuprüfstart bei 0/5014 trotz altem COMPLETE und HTTP 500 bei ca. 2500 in Benutzerbeobachtung; genaue PHP-Ursache nicht belegt. Kein Live-Release, K0/PSERC/PPM nicht verändert.
+
+## 20.10.2026 – lokaler semantischer Pferderelevanz-Gegentest (NICHT FREIGEGEBEN)
+
+- Auftrag ausschließlich zentrale Pferderelevanz; keine Titel-, Kategorien-, WordPress-, Queue-, K0-, PSERC- oder PPM-Änderungen. Aus letzter lokaler Relevanzfassung nur `includes/class-pste-category-context.php` für weiteren isolierten QA-Kandidaten verändert. Kein Plugin-Release, keine Installation, keine GitHub-Quellintegration.
+- 4501/4501 historisch: bisher 2749 auto-positiv, neuer lokaler Kandidat 2751. Drei hinzugewonnen (z. B. Olympia-Springpferd), **eine alte positive Entscheidung „pferdemist als dünger“ nur auf Klärung zurückgestellt**. Keine alte Keywordzeile gelöscht.
+- Neue bewusst schwierige Gegenprüfung: 500 synthetische Pferdethemen 487 positiv/13 noch ungeklärt; 500 synthetische Fremdthemen 500 zurückgehalten; 15 weitere positive Fälle 15 PASS; 31 gemischte negative Fälle **14 fälschlich automatisch positiv**, 17 zurückgehalten. Die vier zuvor nachgewiesenen Fälle sind korrigiert, aber die allgemeinsprachliche Relevanz bleibt unzuverlässig. 79/79 PHP-Syntax PASS; quellgenauer Patch nur gegen letzte lokale Kategorie-Kontext-Version geprüft.
+- QA-Quelle (KEIN Plugin): Library `/Pferdeatelier/TempVerify/PSTE_PFERDERELEVANZ_SEMANTIK_QA_20261020_KEIN_PLUGIN.zip`, SHA256 `33df3a40752ab76226d3ef81010fb6430aabd07410d156b8f4fbf9b41854f8b2`; enthält alten/neuen Ein-Datei-Quellstand, Patch, historische CSV, Testfälle und offene Gegenbeispiele.
+- **Status: BLOCKED.** Nicht aus einfachen synthetischen PASS oder 4501er Quellenprüfung auf semantische Gesamtqualität schließen. Kein neuer Installer. Genau dieselbe NEXT ACTION, nur Pferderelevanz.
 
 ## NEXT ACTION
 
