@@ -1,6 +1,14 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 20.10.2026 – VERSICHERUNGEN: ZUSATZHAUPTBEREICH UND FINDER BIS DATAFORSEO VORBEREITET
+Nutzerentscheidung: Vollwertige neue Hauptkategorie **Versicherungen** über alle Sparten, bestehendes Seite/Seite/Themenseite/Kategorie/Beitrag-Prinzip; unterste Themenseite je genau eine konkrete Versicherung; zusätzlich Versicherungsfinder als Magazin-Angebot und Teaser von Start-/Fachseiten; kontextgerechte Versicherungsbanner/-links. Kein extra Kategorie-Writer, keine isolierte Bannerverwaltung.
+**Verbindliches, ausdrücklich noch nicht keywordvalidiertes Arbeitsdokument:** `VERSICHERUNGEN_RESEARCH_VORLAGE_20261020.md`. Enthält fachliche Seed-Taxonomie, eindeutiges Owner/Duplikatprinzip, DataForSEO-Abfragefelder, Finderlogik und Integrationsgrenzen. Kein echtes DataForSEO-Ergebnis oder Backendzugriff nachgewiesen, keine WP-Änderungen, kein Plugin erstellt.
+**NEXT ACTION nur für neuen Versicherungs-Scope:** Autorisierten bestehenden DataForSEO-Pfad und Kostenkontrolle nachweisen und darauf die erste kontrollierte Seedrecherche ausführen; danach anhand Keywords genau eine Zuordnung je Versicherung und fachlich tiefe letzte Kategorie ermitteln. **Die bereits separat offene 471er C2.3-Installation bleibt unverändert und wird nicht durch diesen Entwurf ausgeführt.**
+
+---
+
+
 ## 17.10.2026 – C2.3 NACHHOLKATEGORIEN: 471er KATEGORIEPLUGIN 1.14.8.32 FERTIG UND LOKAL GEPRÜFT
 Nach der Gesamtgrobprüfung aller **265 konkreten Themenseiten** (93 alte/172 neue) sind **471 noch fehlende fachlich hilfreiche Vertiefungskategorien** bestimmt: 93 FAQ für alte Themen, 220 Beratungen (93 alt/127 neu), 91 alte Vergleiche und 67 zusätzliche situativ tragfähige Facetten. FAQ und Beratung überall abgedeckt; Vergleich dort, wo eigenständig hilfreich; weitere Kosten/Pflege/Wartung/Fehler etc. **nur individuell** und bei grob mindestens ca. 3–5 möglichen späteren Einzelartikeln. **Keine konkreten Artikel geprüft oder erstellt.**
 
