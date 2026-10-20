@@ -1,7 +1,7 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
 ## HB-INS-20261020-C26 – Untere Versicherungskategorien vollständig ausgebaut
-WAS: Alle 46 konkreten Versicherungs-R3 einzeln fachlich überprüft; vorhandene 138 Endkategorien um 185 weitere themenspezifische Kategorien (323 insgesamt) ergänzt. HTML-Hierarchie bleibt unverändert: 1 Welt, 5 R2, 46 R3, eine flache Kategorieebene. Originalplugin vollständig auf 1.14.8.37 aktualisiert, 49 Dateien, 36 PHP, SHA256 `f2f66abfd34956ce8d28d6cf4ced56879045ec20eed38dd5e5076a991d4c805a`.
+WAS: Alle 46 konkreten Versicherungs-R3 einzeln fachlich überprüft; vorhandene 138 Endkategorien um 185 weitere themenspezifische Kategorien (323 insgesamt) ergänzt. HTML-Hierarchie bleibt unverändert: 1 Welt, 5 R2, 46 R3, eine flache Kategorieebene. Originalplugin vollständig auf 1.14.8.37 aktualisiert, 49 Dateien, 36 PHP, SHA256 `ec39080e5350b9f7b3924239376e11580ce7de195a60bb89feafae6152533f98`.
 WARUM: Frühere Schablone 3 Kategorien je R3 war fachlich zu dünn; nötig sind unabhängig sinnvolle unterste Intents, nicht eine vierte WP-Seite.
 BEWEIS: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C26_INSURANCE_DEPTH_SOURCE/PRUEFBERICHT_20261020.md`, 46er Owner-Audit/185er Manifest, echter PHP-TargetWriter Mock: Positiv, 5 negative Fälle und zwei Rollbacks PASS. 45 R3-Keyword-Begriffe vorher von DataForSEO bestätigt, Unterkategorien nicht separat providerverifiziert.
 STATUS: vollständiges Kandidatenplugin im Chat fertig, **kein WP-Live-Import**, keine alten sechs Welten/IDs geändert.
