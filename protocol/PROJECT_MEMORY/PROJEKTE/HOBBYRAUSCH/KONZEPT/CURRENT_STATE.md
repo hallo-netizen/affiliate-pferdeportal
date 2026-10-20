@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **FACHKONZEPT / ZIELVERTRAG 2.8 AKTIV / 10ER-PILOT KALIBRIERT / V7.1 FACH-SOLL OPERATIONAL AN SEO_KATEGORIEN ÜBERGEBEN**
+STATUS: **FACHKONZEPT 2.8 AKTIV / HOBBYFINDER V1 KONZEPT + KLICKBARER PROTOTYP / SEO-STRUKTUR UNVERÄNDERT**
 
 ## Rolle
 
@@ -74,6 +74,45 @@ Entscheidung 2026-10-20:
 - der spätere Finder ist ein geführter Funnel mit nur einem kleinen, trennscharfen Teil der zentral verfügbaren Eigenschaften;
 - zentrale Daten- und Klassifikationswahrheit liegt in `../WISSENSDATENBANK/CURRENT_STATE.md`.
 
+## Hobbyfinder V1 – verbindlicher Konzeptstand
+
+Der Hobbyfinder ist **kein zweites Kategoriesystem**, sondern ein geführter Auswahlweg über den zentralen Hobbybestand.
+
+Geführter Funnel:
+1. Was soll das Hobby geben? – Motivation
+2. alleine / zu zweit / mehrere
+3. drinnen / draußen
+4. Zeit pro Einheit
+5. Einstiegsbudget
+6. verfügbarer Platz
+7. Aktivitätsgrad
+8. Spontanität / Verbindlichkeit
+
+Bedienprinzip:
+- eine Frage pro Bildschirm;
+- große Auswahlkarten statt Checkboxwand;
+- immer eine neutrale/„egal“-Option;
+- sichtbarer Fortschritt;
+- Rücksprung jederzeit;
+- Ergebnis zunächst 6 Hobbykarten;
+- jede Karte zeigt Passungswert + bis zu 3 nachvollziehbare Gründe;
+- „Überrasch mich“ erhöht ungewöhnliche/skurrile Treffer;
+- „Feinjustieren“ öffnet weitere Eigenschaften wie Reise, Wetter, Saison, Lärm, Schmutz, Bildschirm, Pflegepflicht usw., ohne den Hauptfunnel aufzublähen.
+
+Technischer Datenvertrag:
+- 54 zentrale Eigenschaften aus der Wissensdatenbank;
+- harte Ausschlüsse nur bei expliziter Nutzergrenze und belastbarer Klassifikation;
+- UNKNOWN oder low confidence darf nie zum Ausschluss führen;
+- weiche Wünsche verändern nur die Rangfolge.
+
+Parallel bleibt die EDITORIAL-/SEO-Schiene:
+„Hobbys alleine“, „Hobbys draußen“, „Hobbys für wenig Zeit“, „günstige Hobbys“, „wenig Platz“, „ungewöhnliche Hobbys“ usw. sind gespeicherte/redaktionelle Views über dieselben Traits und verlinken auf dieselben kanonischen Hobbyziele.
+
+Artefakte:
+- `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FUNNEL_V1.json`
+- `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FUNNEL_SIMULATION_V1.json`
+- `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_PROTOTYP_V1.html`
+
 ## DataForSEO
 
 DataForSEO ist Evidence und Recherchehilfe, niemals Strukturautorität.
@@ -87,4 +126,4 @@ Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker steh
 
 ## EXAKT EINE NEXT ACTION
 
-**Keine weitere Konzeptänderung. Operative Fortsetzung ausschließlich über die NEXT ACTION in `../SEO_KATEGORIEN/CURRENT_STATE.md`.**
+**Klickbaren Hobbyfinder-Prototyp V1 gestalterisch/bedienerisch abnehmen. Bis dahin keine WordPress-Implementierung des Finders. Die bestehende V7.1-SEO-Struktur bleibt davon unberührt.**
