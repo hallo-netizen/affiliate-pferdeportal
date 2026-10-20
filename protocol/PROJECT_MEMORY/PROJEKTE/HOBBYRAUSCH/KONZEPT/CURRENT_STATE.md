@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-17
+STAND: 2026-10-20
 STATUS: **FACHKONZEPT / ZIELVERTRAG 2.8 AKTIV / 10ER-PILOT KALIBRIERT / V7.1 FACH-SOLL OPERATIONAL AN SEO_KATEGORIEN ÜBERGEBEN**
 
 ## Rolle
@@ -61,6 +61,18 @@ Für kleine/skurrile valide Hobbys:
 - zunächst ein kanonisches Hobby-Porträt je eigenständiger Hobbyidentität;
 - CORE-Hobbys im Magazin nur als Relation/View, keine zweite SEO-Hobbyseite;
 - zusätzliche Views/Tags nach Art, Situation, Budget und Saison.
+
+## Hobbyfinder / zentrale Hobby-Eigenschaften
+
+Entscheidung 2026-10-20:
+- es gibt genau einen zentralen kanonischen Hobbybestand;
+- normale und ungewöhnliche/skurrile Hobbys liegen im selben Bestand;
+- jedes Hobby kann zentral mit einem erweiterbaren Eigenschaftsschema beschrieben werden;
+- Hobbyfinder und Inspirations-/SEO-Views greifen auf dieselben Hobbyidentitäten und Eigenschaften zu;
+- Finder-/SEO-Einstiege erzeugen keine zweite Hobbyseite und keine zweite Hobby-Taxonomie;
+- Eigenschaften wie alleine/Gruppe, drinnen/draußen, Zeit, Budget, Platz, Saison usw. sind Merkmale/Views und nicht automatisch neue CORE-Hauptkategorien;
+- der spätere Finder ist ein geführter Funnel mit nur einem kleinen, trennscharfen Teil der zentral verfügbaren Eigenschaften;
+- zentrale Daten- und Klassifikationswahrheit liegt in `../WISSENSDATENBANK/CURRENT_STATE.md`.
 
 ## DataForSEO
 
