@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## HB-INS-20261020-06 – Einzelprüfung statt Schema F
+WAS: Versicherungs-Kandidatenbaum auf 105 konkrete Seiten mit 358 einzeln grob begründeten flachen Inhaltskategorien korrigiert; 118 Seiten + 358 Kategorien = 476 vorgeschlagene Objekte. Fünf zu schmale bzw. überlappende Unterkategorien zusammengefasst. Alte 433-/481er-Vorlagen nicht importieren.
+WARUM: FAQ und Beratung sind oft sinnvoll, aber starr vorgegebene Zusatzkategorien und 945 vorgeplante Artikelideen verletzen die Aufgabenverteilung; Kategorieprüfung umfasst nur die grobe selbstständige Füllbarkeit (ca. 3–5 später mögliche Beiträge).
+NACHWEIS: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md` und dort genannte Audit-, Kandidaten- und Strukturtestdateien.
+STATUS: Nur fachlicher Prüfvorschlag und strukturelle Datenprüfung, kein Plugin-Release und kein WordPress-Import.
+
 STAND: 2026-10-07
 
 Zweck: **Was wurde geändert – und warum?**
