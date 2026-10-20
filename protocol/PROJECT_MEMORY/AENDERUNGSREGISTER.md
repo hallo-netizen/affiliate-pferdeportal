@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## HB-INS-20261020-SEO – Versicherungskategorie gemäß Bestandsprinzip korrigiert
+WAS: Echten 6-Welten-Baum und Design-Menürenderer gegen Zielvertrag geprüft. Vorhandene DataForSEO-Exporte (128 Ergebniszeilen) endlich für 46 konkretes Versicherungs-R3 verwendet; 45 exakt gemessen, 1 ohne Ergebnis. 105/105 Policen zugeordnet, 66 davon mögliche spätere Spezialbeiträge. Neue Struktur 1/5/46/138 = 52 Seiten plus 138 flache Terme. Sicherer 94er-Importbestand wird nur innerhalb Versicherung umgestellt, 96 neue Objekte. Originalplugin 1.14.8.36 lokal gebaut, 35 PHP syntaktisch PASS, Writer-Positive/Negative-Rollback PASS.
+WARUM: 94er Fehlimport hatte keywordbasierte dritte WP-Seitenebene durch Mischseiten „Ausfall & Mitarbeitende“ usw. ersetzt und FAQ/Beratung zu früh angesetzt. Sechs alte Welten müssen unverändert bleiben.
+GRENZE: 1.14.8.36 Chat-ZIP aktuell noch nicht live installiert, WP-Import nicht begonnen. Eigenständiger Designer-Fehler 7. Welt unter der vorhandenen Sechs-Spalten-Navigation separat im Designplugin.
+BELEG: `PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C25_INSURANCE_SEO_REPAIR_SOURCE/PRUEFBERICHT_20261020.md`.
+
 ## HB-C24-INS-20261020-01 – 1.14.8.33 Originalplugin sicher erweitert
 WAS: Gesichertes Kategorieplugin 1.14.8.32 vollständig zu 1.14.8.33 mit 94er Versicherungs-ADD-only-Modul plus echtem 105er-Profil erweitert und als binäres GitHub-ZIP gespeichert (394395 Bytes, 43 Dateien, 34 PHP). 39/40 alte Dateien unverändert, nur Bootstrap minimal ergänzt.
 WARUM: Siebter Hauptbereich muss die bestehende WP-/Kategorielogik weiterverwenden, 471er historische Importwelle vor neuer Welt abschließen, keine Doppelwellen/Bestandsänderungen.
