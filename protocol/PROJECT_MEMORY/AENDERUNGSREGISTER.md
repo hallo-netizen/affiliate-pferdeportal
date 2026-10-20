@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## HB-INS-20261020-07 – Begleitwelt Versicherungen auf gesundes Mass reduziert
+WAS: Vollstaendige 105er-Versicherungs-Themenliste ohne Themenverlust in 1 Versicherungswelt, 5 Bereiche, 20 Sammel-Themenseiten und 68 flache Kategorien geroutet. 28 Nischen fuer moegliche spaetere Einzelbeitraege markiert. Vorschlag 26 neue Seiten + 68 Kategorien = 94 Objekte statt 476.
+WARUM: Eine siebte begleitende Hauptkategorie darf nicht zum eigenstaendigen Versicherungsportal auswachsen. Vorheriger Plan verwechselte jeden Versicherungsbegriff mit eigenem WP-Seite3-Owner.
+NACHWEIS: `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md` sowie dort genannte 94er-Vorlage und 10 mutierte Strukturtests.
+STATUS: Fachliche Umplanung gespeichert; altes 433/476/481er-Vorhaben technisch gesperrt; noch kein WP-Plugin-Release/Live-Import.
+
 ## HB-INS-20261020-06 – Einzelprüfung statt Schema F
 WAS: Versicherungs-Kandidatenbaum auf 105 konkrete Seiten mit 358 einzeln grob begründeten flachen Inhaltskategorien korrigiert; 118 Seiten + 358 Kategorien = 476 vorgeschlagene Objekte. Fünf zu schmale bzw. überlappende Unterkategorien zusammengefasst. Alte 433-/481er-Vorlagen nicht importieren.
 WARUM: FAQ und Beratung sind oft sinnvoll, aber starr vorgegebene Zusatzkategorien und 945 vorgeplante Artikelideen verletzen die Aufgabenverteilung; Kategorieprüfung umfasst nur die grobe selbstständige Füllbarkeit (ca. 3–5 später mögliche Beiträge).
