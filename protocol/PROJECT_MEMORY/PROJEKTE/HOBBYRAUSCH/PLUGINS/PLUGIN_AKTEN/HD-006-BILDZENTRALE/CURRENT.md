@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **2.7.7 AUS BYTEGENAU VERIFIZIERTEM PFERDEATELIER-ORIGINAL 2.7.6 / LOCAL PASS / LIVE OFFEN**
+STATUS: **2.7.8 AUS BYTEGENAU VERIFIZIERTEM PFERDEATELIER-ORIGINAL 2.7.6 / LOCAL PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-006-BILDZENTRALE`
@@ -24,14 +24,14 @@ Beweis:
 
 ## Aktueller Kandidat
 
-`HOBBY_DEPOT_BILDZENTRALE_2.7.7_AUS_ORIGINAL_2.7.6_BEREINIGT_INSTALLIEREN.zip`
+`HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
 
 ZIP SHA-256:
-`c27eff9a48007a5317832cf3d6f539d49856a1e6edaf92eebd1bfdb89e030ab7`
+`d9d8caad4c2f4057fee30f9d21607376fa110d82defed8c0f759e5c202b83342`
 
 Hauptdatei:
-- 317483 Bytes;
-- SHA-256 `5126d57a1a04d75e561bf7eab35227e176a04352eb70f587a4f392e463331b38`.
+- 320401 Bytes;
+- SHA-256 `edda98383add25fc2d02bf35bfff433b2c5ded332cc21a0fc43a82577e6004ec`.
 
 ## Korrektur
 
@@ -57,6 +57,16 @@ Angepasst:
 Beibehalten:
 - allgemeiner Originalkern; nach Namespace-Normalisierung 134 Funktionen unverändert.
 
+## Bildprompt 2.7.8
+
+- verbindlicher Hobby-Depot-Grundprompt;
+- ruhige, nicht überladene Motive;
+- Tätigkeit bevorzugt;
+- Hände/Arme/handelnde Personen zur Verdeutlichung;
+- Menschen nicht dekorativ;
+- automatische Beitragsableitung aus Titel + Kurztext + bis zu 120 Wörtern Inhalt;
+- Grundregel auch für Kategorie-, Hero- und HivePress-Prompts.
+
 ## QA
 
 - PHP PASS;
@@ -65,7 +75,9 @@ Beibehalten:
 - 0 fehlende Callbacks;
 - 0 fehlende self-calls;
 - 0 Pferde-/Rassen-/Horse-/Breed-/pa_breed-Literale;
-- allgemeine Kernwege gegen Original unverändert PASS.
+- allgemeine Kernwege gegen Original unverändert PASS;
+- lokaler Prompt-Positivtest 2874/3000 Zeichen PASS;
+- 2.7.7 → 2.7.8 Funktionsdelta nur Prompt-/Themenableitung + Versionswert.
 
 ## Bildertrommel
 
@@ -73,4 +85,4 @@ Im verifizierten Original ist kein eindeutiger Code-/UI-Block dieses Namens bele
 
 ## EXAKT EINE NEXT ACTION
 
-**2.7.7 installieren und ausschließlich sichere Einzeltests durchführen; kein Massenlauf vor Live-Readback.**
+**2.7.8 installieren und ausschließlich sichere Einzeltests durchführen; kein Massenlauf vor Live-Readback.**
