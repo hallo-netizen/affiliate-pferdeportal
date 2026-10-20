@@ -1,0 +1,1553 @@
+{
+  "contract": "HB_INSURANCE_94_COMPACT_ADD_ONLY_V1",
+  "status": "FACHLICHE_KOMPAKTFASSUNG__NICHT_IMPORTFREIGEGEBEN",
+  "pages": [
+    {
+      "key": "INS-COMP:R1",
+      "level": "R1",
+      "title": "Versicherungen",
+      "slug": "versicherungen",
+      "parent": null
+    },
+    {
+      "key": "INS-COMP:R2:haus-und-werte",
+      "level": "R2",
+      "title": "Haus & Werte",
+      "slug": "haus-und-werte",
+      "parent": "INS-COMP:R1"
+    },
+    {
+      "key": "INS-COMP:R2:mobilitat-und-freizeit",
+      "level": "R2",
+      "title": "Mobilität & Freizeit",
+      "slug": "mobilitat-und-freizeit",
+      "parent": "INS-COMP:R1"
+    },
+    {
+      "key": "INS-COMP:R2:haftung-und-gemeinschaft",
+      "level": "R2",
+      "title": "Haftung & Gemeinschaft",
+      "slug": "haftung-und-gemeinschaft",
+      "parent": "INS-COMP:R1"
+    },
+    {
+      "key": "INS-COMP:R2:gesundheit-und-vorsorge",
+      "level": "R2",
+      "title": "Gesundheit & Vorsorge",
+      "slug": "gesundheit-und-vorsorge",
+      "parent": "INS-COMP:R1"
+    },
+    {
+      "key": "INS-COMP:R2:betrieb-und-finanzen",
+      "level": "R2",
+      "title": "Betrieb & Finanzen",
+      "slug": "betrieb-und-finanzen",
+      "parent": "INS-COMP:R1"
+    },
+    {
+      "key": "INS-COMP:R3:gebaude-und-immobilien",
+      "level": "R3",
+      "title": "Gebäude & Immobilien",
+      "slug": "gebaude-und-immobilien",
+      "parent": "INS-COMP:R2:haus-und-werte",
+      "coverage_count": 3
+    },
+    {
+      "key": "INS-COMP:R3:bauen-und-anlagen",
+      "level": "R3",
+      "title": "Bauen & Anlagen",
+      "slug": "bauen-und-anlagen",
+      "parent": "INS-COMP:R2:haus-und-werte",
+      "coverage_count": 3
+    },
+    {
+      "key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "level": "R3",
+      "title": "Hausrat & Wertsachen",
+      "slug": "hausrat-und-wertsachen",
+      "parent": "INS-COMP:R2:haus-und-werte",
+      "coverage_count": 6
+    },
+    {
+      "key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "level": "R3",
+      "title": "Geräte & Cyberschutz",
+      "slug": "gerate-und-cyberschutz",
+      "parent": "INS-COMP:R2:haus-und-werte",
+      "coverage_count": 5
+    },
+    {
+      "key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "level": "R3",
+      "title": "Fahrzeuge & Zweiräder",
+      "slug": "fahrzeuge-und-zweirader",
+      "parent": "INS-COMP:R2:mobilitat-und-freizeit",
+      "coverage_count": 8
+    },
+    {
+      "key": "INS-COMP:R3:camping-und-wohnmobile",
+      "level": "R3",
+      "title": "Camping & Wohnmobile",
+      "slug": "camping-und-wohnmobile",
+      "parent": "INS-COMP:R2:mobilitat-und-freizeit",
+      "coverage_count": 3
+    },
+    {
+      "key": "INS-COMP:R3:boote-und-drohnen",
+      "level": "R3",
+      "title": "Boote & Drohnen",
+      "slug": "boote-und-drohnen",
+      "parent": "INS-COMP:R2:mobilitat-und-freizeit",
+      "coverage_count": 3
+    },
+    {
+      "key": "INS-COMP:R3:reisen-und-sport",
+      "level": "R3",
+      "title": "Reisen & Sport",
+      "slug": "reisen-und-sport",
+      "parent": "INS-COMP:R2:mobilitat-und-freizeit",
+      "coverage_count": 5
+    },
+    {
+      "key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "level": "R3",
+      "title": "Privat- & Sonderhaftung",
+      "slug": "privat-und-sonderhaftung",
+      "parent": "INS-COMP:R2:haftung-und-gemeinschaft",
+      "coverage_count": 5
+    },
+    {
+      "key": "INS-COMP:R3:rechtsschutz",
+      "level": "R3",
+      "title": "Rechtsschutz",
+      "slug": "rechtsschutz",
+      "parent": "INS-COMP:R2:haftung-und-gemeinschaft",
+      "coverage_count": 2
+    },
+    {
+      "key": "INS-COMP:R3:tierversicherungen",
+      "level": "R3",
+      "title": "Tierversicherungen",
+      "slug": "tierversicherungen",
+      "parent": "INS-COMP:R2:haftung-und-gemeinschaft",
+      "coverage_count": 9
+    },
+    {
+      "key": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "level": "R3",
+      "title": "Vereine & Veranstaltungen",
+      "slug": "vereine-und-veranstaltungen",
+      "parent": "INS-COMP:R2:haftung-und-gemeinschaft",
+      "coverage_count": 3
+    },
+    {
+      "key": "INS-COMP:R3:krankenversicherung",
+      "level": "R3",
+      "title": "Krankenversicherung",
+      "slug": "krankenversicherung",
+      "parent": "INS-COMP:R2:gesundheit-und-vorsorge",
+      "coverage_count": 2
+    },
+    {
+      "key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "level": "R3",
+      "title": "Zusatzschutz & Pflege",
+      "slug": "zusatzschutz-und-pflege",
+      "parent": "INS-COMP:R2:gesundheit-und-vorsorge",
+      "coverage_count": 7
+    },
+    {
+      "key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "level": "R3",
+      "title": "Arbeitskraft & Unfall",
+      "slug": "arbeitskraft-und-unfall",
+      "parent": "INS-COMP:R2:gesundheit-und-vorsorge",
+      "coverage_count": 9
+    },
+    {
+      "key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "level": "R3",
+      "title": "Leben & Altersvorsorge",
+      "slug": "leben-und-altersvorsorge",
+      "parent": "INS-COMP:R2:gesundheit-und-vorsorge",
+      "coverage_count": 9
+    },
+    {
+      "key": "INS-COMP:R3:betriebliche-sachwerte",
+      "level": "R3",
+      "title": "Betriebliche Sachwerte",
+      "slug": "betriebliche-sachwerte",
+      "parent": "INS-COMP:R2:betrieb-und-finanzen",
+      "coverage_count": 5
+    },
+    {
+      "key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "level": "R3",
+      "title": "Haftung & Recht im Betrieb",
+      "slug": "haftung-und-recht-im-betrieb",
+      "parent": "INS-COMP:R2:betrieb-und-finanzen",
+      "coverage_count": 7
+    },
+    {
+      "key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "level": "R3",
+      "title": "Ausfall & Mitarbeitende",
+      "slug": "ausfall-und-mitarbeitende",
+      "parent": "INS-COMP:R2:betrieb-und-finanzen",
+      "coverage_count": 5
+    },
+    {
+      "key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "level": "R3",
+      "title": "Kredite, Kautionen & Mieten",
+      "slug": "kredite-kautionen-und-mieten",
+      "parent": "INS-COMP:R2:betrieb-und-finanzen",
+      "coverage_count": 6
+    }
+  ],
+  "flat_categories": [
+    {
+      "key": "INS-COMP:TERM:gebaude-und-immobilien-faq",
+      "parent": "INS-COMP:R3:gebaude-und-immobilien",
+      "name": "Gebäude & Immobilien: FAQ",
+      "slug": "vs-gebaude-und-immobilien-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Objektarten",
+        "Versicherungsumfang",
+        "Abgrenzungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gebaude-und-immobilien-beratung",
+      "parent": "INS-COMP:R3:gebaude-und-immobilien",
+      "name": "Gebäude & Immobilien: Beratung",
+      "slug": "vs-gebaude-und-immobilien-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gebäudewert",
+        "Leerstand",
+        "Deckungserweiterungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gebaude-und-immobilien-gebaudeschaden",
+      "parent": "INS-COMP:R3:gebaude-und-immobilien",
+      "name": "Gebäude & Immobilien: Gebäudeschäden",
+      "slug": "vs-gebaude-und-immobilien-gebaudeschaden",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Sturm",
+        "Leitungswasser",
+        "Feuer"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gebaude-und-immobilien-besondere-nutzungen",
+      "parent": "INS-COMP:R3:gebaude-und-immobilien",
+      "name": "Gebäude & Immobilien: Besondere Nutzungen",
+      "slug": "vs-gebaude-und-immobilien-besondere-nutzungen",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Ferienhaus",
+        "Kleingarten",
+        "Vermietung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:bauen-und-anlagen-faq",
+      "parent": "INS-COMP:R3:bauen-und-anlagen",
+      "name": "Bauen & Anlagen: FAQ",
+      "slug": "vs-bauen-und-anlagen-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Bauphasen",
+        "Anlagenumfang",
+        "Versicherungsbeginn"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:bauen-und-anlagen-beratung",
+      "parent": "INS-COMP:R3:bauen-und-anlagen",
+      "name": "Bauen & Anlagen: Beratung",
+      "slug": "vs-bauen-und-anlagen-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Bausumme",
+        "Anlagentechnik",
+        "Abgrenzung zur Gebäudeversicherung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:bauen-und-anlagen-bau-und-anlagenschaden",
+      "parent": "INS-COMP:R3:bauen-und-anlagen",
+      "name": "Bauen & Anlagen: Bau- & Anlagenschäden",
+      "slug": "vs-bauen-und-anlagen-bau-und-anlagenschaden",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Rohbau",
+        "Unvorhergesehenes",
+        "PV-Ausfall"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:hausrat-und-wertsachen-faq",
+      "parent": "INS-COMP:R3:hausrat-und-wertsachen",
+      "name": "Hausrat & Wertsachen: FAQ",
+      "slug": "vs-hausrat-und-wertsachen-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Hausratumfang",
+        "Wertsachen",
+        "Glasdeckung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:hausrat-und-wertsachen-beratung",
+      "parent": "INS-COMP:R3:hausrat-und-wertsachen",
+      "name": "Hausrat & Wertsachen: Beratung",
+      "slug": "vs-hausrat-und-wertsachen-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Versicherungssumme",
+        "Aufbewahrung",
+        "Sonderwerte"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:hausrat-und-wertsachen-diebstahl-und-beschadigung",
+      "parent": "INS-COMP:R3:hausrat-und-wertsachen",
+      "name": "Hausrat & Wertsachen: Diebstahl & Beschädigung",
+      "slug": "vs-hausrat-und-wertsachen-diebstahl-und-beschadigung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Einbruch",
+        "Raub",
+        "Bruch"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:hausrat-und-wertsachen-wert-und-ersatz",
+      "parent": "INS-COMP:R3:hausrat-und-wertsachen",
+      "name": "Hausrat & Wertsachen: Wert & Ersatz",
+      "slug": "vs-hausrat-und-wertsachen-wert-und-ersatz",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gutachten",
+        "Neuwert",
+        "Schadennachweise"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gerate-und-cyberschutz-faq",
+      "parent": "INS-COMP:R3:gerate-und-cyberschutz",
+      "name": "Geräte & Cyberschutz: FAQ",
+      "slug": "vs-gerate-und-cyberschutz-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gerätearten",
+        "Schadenarten",
+        "Digitalschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gerate-und-cyberschutz-beratung",
+      "parent": "INS-COMP:R3:gerate-und-cyberschutz",
+      "name": "Geräte & Cyberschutz: Beratung",
+      "slug": "vs-gerate-und-cyberschutz-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gerätewert",
+        "Selbstbehalt",
+        "Alternativen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:gerate-und-cyberschutz-defekt-und-onlinebetrug",
+      "parent": "INS-COMP:R3:gerate-und-cyberschutz",
+      "name": "Geräte & Cyberschutz: Defekt & Onlinebetrug",
+      "slug": "vs-gerate-und-cyberschutz-defekt-und-onlinebetrug",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Reparatur",
+        "Diebstahl",
+        "Identitätsmissbrauch"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:fahrzeuge-und-zweirader-faq",
+      "parent": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "name": "Fahrzeuge & Zweiräder: FAQ",
+      "slug": "vs-fahrzeuge-und-zweirader-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Fahrzeugklassen",
+        "Versicherungspflicht",
+        "Kaskoschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:fahrzeuge-und-zweirader-beratung",
+      "parent": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "name": "Fahrzeuge & Zweiräder: Beratung",
+      "slug": "vs-fahrzeuge-und-zweirader-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Fahrerkreis",
+        "Fahrzeugwert",
+        "Nutzungsart"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:fahrzeuge-und-zweirader-unfalle-und-haftung",
+      "parent": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "name": "Fahrzeuge & Zweiräder: Unfälle & Haftung",
+      "slug": "vs-fahrzeuge-und-zweirader-unfalle-und-haftung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Personenschäden",
+        "Sachschäden",
+        "Schadenabwicklung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:fahrzeuge-und-zweirader-diebstahl-und-spezialschutz",
+      "parent": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "name": "Fahrzeuge & Zweiräder: Diebstahl & Spezialschutz",
+      "slug": "vs-fahrzeuge-und-zweirader-diebstahl-und-spezialschutz",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Fahrraddiebstahl",
+        "Oldtimerwert",
+        "Mietwagen-Selbstbehalt"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:camping-und-wohnmobile-faq",
+      "parent": "INS-COMP:R3:camping-und-wohnmobile",
+      "name": "Camping & Wohnmobile: FAQ",
+      "slug": "vs-camping-und-wohnmobile-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Wohnfahrzeuge",
+        "Campingobjekte",
+        "Schutzumfang"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:camping-und-wohnmobile-beratung",
+      "parent": "INS-COMP:R3:camping-und-wohnmobile",
+      "name": "Camping & Wohnmobile: Beratung",
+      "slug": "vs-camping-und-wohnmobile-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Standcamping",
+        "Unterwegsnutzung",
+        "Inventar"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:camping-und-wohnmobile-stellplatz-und-reise",
+      "parent": "INS-COMP:R3:camping-und-wohnmobile",
+      "name": "Camping & Wohnmobile: Stellplatz & Reise",
+      "slug": "vs-camping-und-wohnmobile-stellplatz-und-reise",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Überwinterung",
+        "Sturmschäden",
+        "Einbruch"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:boote-und-drohnen-faq",
+      "parent": "INS-COMP:R3:boote-und-drohnen",
+      "name": "Boote & Drohnen: FAQ",
+      "slug": "vs-boote-und-drohnen-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Boots- und Drohnenarten",
+        "Haftung",
+        "Kasko"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:boote-und-drohnen-beratung",
+      "parent": "INS-COMP:R3:boote-und-drohnen",
+      "name": "Boote & Drohnen: Beratung",
+      "slug": "vs-boote-und-drohnen-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Fahrtgebiet",
+        "Flugnutzung",
+        "Wert und Zubehör"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:boote-und-drohnen-unfall-und-schaden",
+      "parent": "INS-COMP:R3:boote-und-drohnen",
+      "name": "Boote & Drohnen: Unfall & Schäden",
+      "slug": "vs-boote-und-drohnen-unfall-und-schaden",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Havarie",
+        "Absturz",
+        "Fremdschaden"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:reisen-und-sport-faq",
+      "parent": "INS-COMP:R3:reisen-und-sport",
+      "name": "Reisen & Sport: FAQ",
+      "slug": "vs-reisen-und-sport-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Reisearten",
+        "Versicherungsdauer",
+        "Abgrenzungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:reisen-und-sport-beratung",
+      "parent": "INS-COMP:R3:reisen-und-sport",
+      "name": "Reisen & Sport: Beratung",
+      "slug": "vs-reisen-und-sport-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Reiseprofil",
+        "Selbstbehalt",
+        "Deckungsumfang"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:reisen-und-sport-rucktritt-und-schaden",
+      "parent": "INS-COMP:R3:reisen-und-sport",
+      "name": "Reisen & Sport: Rücktritt & Schaden",
+      "slug": "vs-reisen-und-sport-rucktritt-und-schaden",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Stornierung",
+        "Reiseabbruch",
+        "Gepäck- und Sportgeräteschäden"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:privat-und-sonderhaftung-faq",
+      "parent": "INS-COMP:R3:privat-und-sonderhaftung",
+      "name": "Privat- & Sonderhaftung: FAQ",
+      "slug": "vs-privat-und-sonderhaftung-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Haftungstatbestände",
+        "mitversicherte Personen",
+        "Deckungsgrenzen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:privat-und-sonderhaftung-beratung",
+      "parent": "INS-COMP:R3:privat-und-sonderhaftung",
+      "name": "Privat- & Sonderhaftung: Beratung",
+      "slug": "vs-privat-und-sonderhaftung-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Eigentümerpflichten",
+        "Bauvorhaben",
+        "Sonderrisiken"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:privat-und-sonderhaftung-schadenersatz-und-pflichten",
+      "parent": "INS-COMP:R3:privat-und-sonderhaftung",
+      "name": "Privat- & Sonderhaftung: Schadenersatz & Pflichten",
+      "slug": "vs-privat-und-sonderhaftung-schadenersatz-und-pflichten",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Verkehrssicherung",
+        "Drittschäden",
+        "Anspruchsabwehr"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:rechtsschutz-faq",
+      "parent": "INS-COMP:R3:rechtsschutz",
+      "name": "Rechtsschutz: FAQ",
+      "slug": "vs-rechtsschutz-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Rechtsgebiete",
+        "Wartezeiten",
+        "Ausschlüsse"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:rechtsschutz-beratung",
+      "parent": "INS-COMP:R3:rechtsschutz",
+      "name": "Rechtsschutz: Beratung",
+      "slug": "vs-rechtsschutz-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Leistungsbausteine",
+        "Selbstbeteiligung",
+        "Verkehrsschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:rechtsschutz-streitfalle-und-kosten",
+      "parent": "INS-COMP:R3:rechtsschutz",
+      "name": "Rechtsschutz: Streitfälle & Kosten",
+      "slug": "vs-rechtsschutz-streitfalle-und-kosten",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Deckungsanfrage",
+        "Anwaltskosten",
+        "Verfahrensarten"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:tierversicherungen-faq",
+      "parent": "INS-COMP:R3:tierversicherungen",
+      "name": "Tierversicherungen: FAQ",
+      "slug": "vs-tierversicherungen-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Tierarten",
+        "Versicherungsarten",
+        "Abgrenzungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:tierversicherungen-beratung",
+      "parent": "INS-COMP:R3:tierversicherungen",
+      "name": "Tierversicherungen: Beratung",
+      "slug": "vs-tierversicherungen-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Tieralter",
+        "Rasse und Nutzung",
+        "Selbstbeteiligung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:tierversicherungen-behandlung-und-op",
+      "parent": "INS-COMP:R3:tierversicherungen",
+      "name": "Tierversicherungen: Behandlung & OP",
+      "slug": "vs-tierversicherungen-behandlung-und-op",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Operationen",
+        "Tierarztkosten",
+        "Erstattungsgrenzen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:tierversicherungen-tierhalterhaftung-und-sonderfalle",
+      "parent": "INS-COMP:R3:tierversicherungen",
+      "name": "Tierversicherungen: Tierhalterhaftung & Sonderfälle",
+      "slug": "vs-tierversicherungen-tierhalterhaftung-und-sonderfalle",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Hundehaftpflicht",
+        "Pferdehaftpflicht",
+        "Todesfallleistung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:vereine-und-veranstaltungen-faq",
+      "parent": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "name": "Vereine & Veranstaltungen: FAQ",
+      "slug": "vs-vereine-und-veranstaltungen-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Vereinstätigkeit",
+        "Veranstaltungsart",
+        "Deckungsrahmen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:vereine-und-veranstaltungen-beratung",
+      "parent": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "name": "Vereine & Veranstaltungen: Beratung",
+      "slug": "vs-vereine-und-veranstaltungen-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Besucherzahl",
+        "Veranstaltungsrisiko",
+        "Vereinsgröße"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:vereine-und-veranstaltungen-haftung-und-ausfall",
+      "parent": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "name": "Vereine & Veranstaltungen: Haftung & Ausfall",
+      "slug": "vs-vereine-und-veranstaltungen-haftung-und-ausfall",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Fremdschäden",
+        "Absagegründe",
+        "Schadenabwicklung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:krankenversicherung-faq",
+      "parent": "INS-COMP:R3:krankenversicherung",
+      "name": "Krankenversicherung: FAQ",
+      "slug": "vs-krankenversicherung-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Mitgliedschaft",
+        "Familienversicherung",
+        "Wechselvoraussetzungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:krankenversicherung-beratung",
+      "parent": "INS-COMP:R3:krankenversicherung",
+      "name": "Krankenversicherung: Beratung",
+      "slug": "vs-krankenversicherung-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "GKV oder PKV",
+        "Beitragsgestaltung",
+        "Familienbedarf"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:krankenversicherung-leistungen-und-wechsel",
+      "parent": "INS-COMP:R3:krankenversicherung",
+      "name": "Krankenversicherung: Leistungen & Wechsel",
+      "slug": "vs-krankenversicherung-leistungen-und-wechsel",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Kassenleistungen",
+        "Tarifwechsel",
+        "Kostenerstattung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:zusatzschutz-und-pflege-faq",
+      "parent": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "name": "Zusatzschutz & Pflege: FAQ",
+      "slug": "vs-zusatzschutz-und-pflege-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Leistungsarten",
+        "Pflegegrade",
+        "Abgrenzung Pflicht- und Zusatzschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:zusatzschutz-und-pflege-beratung",
+      "parent": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "name": "Zusatzschutz & Pflege: Beratung",
+      "slug": "vs-zusatzschutz-und-pflege-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Versorgungslücke",
+        "Gesundheitsprüfung",
+        "Zusatzbausteine"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:zusatzschutz-und-pflege-pflege-und-erstattung",
+      "parent": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "name": "Zusatzschutz & Pflege: Pflege & Erstattung",
+      "slug": "vs-zusatzschutz-und-pflege-pflege-und-erstattung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Pflegegeld",
+        "Zahnersatz",
+        "Tagegeld und Rechnungen"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:arbeitskraft-und-unfall-faq",
+      "parent": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "name": "Arbeitskraft & Unfall: FAQ",
+      "slug": "vs-arbeitskraft-und-unfall-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Arbeitsunfähigkeit",
+        "Invalidität",
+        "Leistungsauslöser"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:arbeitskraft-und-unfall-beratung",
+      "parent": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "name": "Arbeitskraft & Unfall: Beratung",
+      "slug": "vs-arbeitskraft-und-unfall-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Absicherungsbedarf",
+        "Gesundheitsfragen",
+        "Alternative Konzepte"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:arbeitskraft-und-unfall-einkommensausfall",
+      "parent": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "name": "Arbeitskraft & Unfall: Einkommensausfall",
+      "slug": "vs-arbeitskraft-und-unfall-einkommensausfall",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Arbeitslosigkeit",
+        "Berufsunfähigkeit",
+        "Erwerbsminderung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:arbeitskraft-und-unfall-unfall-und-leistungsfall",
+      "parent": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "name": "Arbeitskraft & Unfall: Unfall & Leistungsfall",
+      "slug": "vs-arbeitskraft-und-unfall-unfall-und-leistungsfall",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Unfallfolgen",
+        "Krankheitenkataloge",
+        "Nachweispflichten"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:leben-und-altersvorsorge-faq",
+      "parent": "INS-COMP:R3:leben-und-altersvorsorge",
+      "name": "Leben & Altersvorsorge: FAQ",
+      "slug": "vs-leben-und-altersvorsorge-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Rentenarten",
+        "Lebensversicherung",
+        "Bezugsrechte"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:leben-und-altersvorsorge-beratung",
+      "parent": "INS-COMP:R3:leben-und-altersvorsorge",
+      "name": "Leben & Altersvorsorge: Beratung",
+      "slug": "vs-leben-und-altersvorsorge-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Versorgungslücke",
+        "Anlage- und Beitragsform",
+        "Familienabsicherung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:leben-und-altersvorsorge-rente-und-forderung",
+      "parent": "INS-COMP:R3:leben-und-altersvorsorge",
+      "name": "Leben & Altersvorsorge: Rente & Förderung",
+      "slug": "vs-leben-und-altersvorsorge-rente-und-forderung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "gesetzliche Ansprüche",
+        "Riester und Rürup",
+        "betriebliche Altersvorsorge"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:leben-und-altersvorsorge-kapital-und-todesfallschutz",
+      "parent": "INS-COMP:R3:leben-und-altersvorsorge",
+      "name": "Leben & Altersvorsorge: Kapital & Todesfallschutz",
+      "slug": "vs-leben-und-altersvorsorge-kapital-und-todesfallschutz",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "fondsgebundene Verträge",
+        "Auszahlungsformen",
+        "Risikoleben"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:betriebliche-sachwerte-faq",
+      "parent": "INS-COMP:R3:betriebliche-sachwerte",
+      "name": "Betriebliche Sachwerte: FAQ",
+      "slug": "vs-betriebliche-sachwerte-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gebäude",
+        "Inventar und Geräte",
+        "Transportrisiken"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:betriebliche-sachwerte-beratung",
+      "parent": "INS-COMP:R3:betriebliche-sachwerte",
+      "name": "Betriebliche Sachwerte: Beratung",
+      "slug": "vs-betriebliche-sachwerte-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Betriebsgröße",
+        "Waren- und Maschinenwert",
+        "Deckung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:betriebliche-sachwerte-betriebsschaden",
+      "parent": "INS-COMP:R3:betriebliche-sachwerte",
+      "name": "Betriebliche Sachwerte: Betriebsschäden",
+      "slug": "vs-betriebliche-sachwerte-betriebsschaden",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Einbruch",
+        "Technikausfall",
+        "Transportschaden"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:haftung-und-recht-im-betrieb-faq",
+      "parent": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "name": "Haftung & Recht im Betrieb: FAQ",
+      "slug": "vs-haftung-und-recht-im-betrieb-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Haftungsarten",
+        "Geschäftsführerpflichten",
+        "Rechtsschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:haftung-und-recht-im-betrieb-beratung",
+      "parent": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "name": "Haftung & Recht im Betrieb: Beratung",
+      "slug": "vs-haftung-und-recht-im-betrieb-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Betriebsrisiko",
+        "Deckungssumme",
+        "Gewerbezweige"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:haftung-und-recht-im-betrieb-anspruche-und-verfahren",
+      "parent": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "name": "Haftung & Recht im Betrieb: Ansprüche & Verfahren",
+      "slug": "vs-haftung-und-recht-im-betrieb-anspruche-und-verfahren",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Kundenansprüche",
+        "Umweltfolgen",
+        "Prozesskosten"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:ausfall-und-mitarbeitende-faq",
+      "parent": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "name": "Ausfall & Mitarbeitende: FAQ",
+      "slug": "vs-ausfall-und-mitarbeitende-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Betriebsausfall",
+        "Personenschutz",
+        "Cybervorfälle"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:ausfall-und-mitarbeitende-beratung",
+      "parent": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "name": "Ausfall & Mitarbeitende: Beratung",
+      "slug": "vs-ausfall-und-mitarbeitende-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Kleinbetriebsrisiken",
+        "Haftzeit",
+        "Mitarbeiterabsicherung"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:ausfall-und-mitarbeitende-stillstand-und-wiederanlauf",
+      "parent": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "name": "Ausfall & Mitarbeitende: Stillstand & Wiederanlauf",
+      "slug": "vs-ausfall-und-mitarbeitende-stillstand-und-wiederanlauf",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Umsatzausfall",
+        "Schließung",
+        "IT-Ausfall"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:ausfall-und-mitarbeitende-mitarbeiterschutz",
+      "parent": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "name": "Ausfall & Mitarbeitende: Mitarbeiterschutz",
+      "slug": "vs-ausfall-und-mitarbeitende-mitarbeiterschutz",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Gesundheitsbudget",
+        "Gruppenunfall",
+        "Betrieblicher Zusatzschutz"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:kredite-kautionen-und-mieten-faq",
+      "parent": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "name": "Kredite, Kautionen & Mieten: FAQ",
+      "slug": "vs-kredite-kautionen-und-mieten-faq",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Forderungen",
+        "Mietkautionen",
+        "Kreditrisiken"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:kredite-kautionen-und-mieten-beratung",
+      "parent": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "name": "Kredite, Kautionen & Mieten: Beratung",
+      "slug": "vs-kredite-kautionen-und-mieten-beratung",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Finanzierungsart",
+        "Sicherheiten",
+        "Liquidität"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:kredite-kautionen-und-mieten-forderungsausfall",
+      "parent": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "name": "Kredite, Kautionen & Mieten: Forderungsausfall",
+      "slug": "vs-kredite-kautionen-und-mieten-forderungsausfall",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Insolvenz",
+        "Mietrückstand",
+        "Zahlungsausfall"
+      ]
+    },
+    {
+      "key": "INS-COMP:TERM:kredite-kautionen-und-mieten-burgschaft-und-betrug",
+      "parent": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "name": "Kredite, Kautionen & Mieten: Bürgschaft & Betrug",
+      "slug": "vs-kredite-kautionen-und-mieten-burgschaft-und-betrug",
+      "term_parent": 0,
+      "coarse_capacity_domains": [
+        "Kautionsmodelle",
+        "Vertrauensschaden",
+        "Rückgriff"
+      ]
+    }
+  ],
+  "insurance_coverage": [
+    {
+      "original_insurance": "Wohngebäudeversicherung",
+      "topic_page_key": "INS-COMP:R3:gebaude-und-immobilien",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Ferienhausversicherung",
+      "topic_page_key": "INS-COMP:R3:gebaude-und-immobilien",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Kleingartenversicherung",
+      "topic_page_key": "INS-COMP:R3:gebaude-und-immobilien",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Bauleistungsversicherung",
+      "topic_page_key": "INS-COMP:R3:bauen-und-anlagen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Feuerrohbauversicherung",
+      "topic_page_key": "INS-COMP:R3:bauen-und-anlagen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Photovoltaikversicherung",
+      "topic_page_key": "INS-COMP:R3:bauen-und-anlagen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Hausratversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Glasversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Kunstversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Schmuckversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Uhrenversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Musikinstrumentenversicherung",
+      "topic_page_key": "INS-COMP:R3:hausrat-und-wertsachen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Brillenversicherung",
+      "topic_page_key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Handyversicherung",
+      "topic_page_key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Hörgeräteversicherung",
+      "topic_page_key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Laptopversicherung",
+      "topic_page_key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Private Cyberversicherung",
+      "topic_page_key": "INS-COMP:R3:gerate-und-cyberschutz",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Anhänger-Versicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "E-Scooter-Versicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Fahrradversicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Kfz-Versicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Mietwagen-Selbstbeteiligungsschutz",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Mopedversicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Motorradversicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Oldtimerversicherung",
+      "topic_page_key": "INS-COMP:R3:fahrzeuge-und-zweirader",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Campingversicherung",
+      "topic_page_key": "INS-COMP:R3:camping-und-wohnmobile",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Wohnmobilversicherung",
+      "topic_page_key": "INS-COMP:R3:camping-und-wohnmobile",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Wohnwagenversicherung",
+      "topic_page_key": "INS-COMP:R3:camping-und-wohnmobile",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Bootsversicherung",
+      "topic_page_key": "INS-COMP:R3:boote-und-drohnen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Drohnenkaskoversicherung",
+      "topic_page_key": "INS-COMP:R3:boote-und-drohnen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Drohnenhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:boote-und-drohnen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Auslandskrankenversicherung",
+      "topic_page_key": "INS-COMP:R3:reisen-und-sport",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Reiseabbruchversicherung",
+      "topic_page_key": "INS-COMP:R3:reisen-und-sport",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Reisegepäckversicherung",
+      "topic_page_key": "INS-COMP:R3:reisen-und-sport",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Reiserücktrittsversicherung",
+      "topic_page_key": "INS-COMP:R3:reisen-und-sport",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Sportgeräteversicherung",
+      "topic_page_key": "INS-COMP:R3:reisen-und-sport",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Bauherrenhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gewässerschadenhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Jagdhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Privathaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:privat-und-sonderhaftung",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Rechtsschutzversicherung",
+      "topic_page_key": "INS-COMP:R3:rechtsschutz",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Verkehrsrechtsschutzversicherung",
+      "topic_page_key": "INS-COMP:R3:rechtsschutz",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Hunde-OP-Versicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Hundehaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Hundekrankenversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Katzen-OP-Versicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Katzenkrankenversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Pferde-OP-Versicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Pferdehaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Pferdekrankenversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Pferdelebensversicherung",
+      "topic_page_key": "INS-COMP:R3:tierversicherungen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Veranstalterhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Veranstaltungsausfallversicherung",
+      "topic_page_key": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Vereinshaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:vereine-und-veranstaltungen",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gesetzliche Krankenversicherung",
+      "topic_page_key": "INS-COMP:R3:krankenversicherung",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Private Krankenversicherung",
+      "topic_page_key": "INS-COMP:R3:krankenversicherung",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Ambulante Zusatzversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Krankenhaustagegeldversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Krankenhauszusatzversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Krankentagegeldversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Pflegezusatzversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Soziale Pflegeversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Zahnzusatzversicherung",
+      "topic_page_key": "INS-COMP:R3:zusatzschutz-und-pflege",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Berufsunfähigkeitsversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Dienstunfähigkeitsversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Erwerbsunfähigkeitsversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gesetzliche Arbeitslosenversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gesetzliche Unfallversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Grundfähigkeitsversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Kinderinvaliditätsversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Private Unfallversicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Schwere-Krankheiten-Versicherung",
+      "topic_page_key": "INS-COMP:R3:arbeitskraft-und-unfall",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Basisrentenversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Betriebliche Direktversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Fondsgebundene Lebensversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gesetzliche Rentenversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Kapitallebensversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Private Rentenversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Riester-Rentenversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Risikolebensversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Sterbegeldversicherung",
+      "topic_page_key": "INS-COMP:R3:leben-und-altersvorsorge",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Elektronikversicherung für Betriebe",
+      "topic_page_key": "INS-COMP:R3:betriebliche-sachwerte",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Geschäftsinhaltsversicherung",
+      "topic_page_key": "INS-COMP:R3:betriebliche-sachwerte",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gewerbegebäudeversicherung",
+      "topic_page_key": "INS-COMP:R3:betriebliche-sachwerte",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Maschinenversicherung",
+      "topic_page_key": "INS-COMP:R3:betriebliche-sachwerte",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Transportversicherung für Betriebe",
+      "topic_page_key": "INS-COMP:R3:betriebliche-sachwerte",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Berufshaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Betriebshaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "D&O-Versicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Firmenrechtsschutzversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Umwelthaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Umweltschadenversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Vermögensschadenhaftpflichtversicherung",
+      "topic_page_key": "INS-COMP:R3:haftung-und-recht-im-betrieb",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Betriebliche Krankenversicherung",
+      "topic_page_key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Betriebsschließungsversicherung",
+      "topic_page_key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Betriebsunterbrechungsversicherung",
+      "topic_page_key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Cyberversicherung für Kleinbetriebe",
+      "topic_page_key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Gruppenunfallversicherung",
+      "topic_page_key": "INS-COMP:R3:ausfall-und-mitarbeitende",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Gewerbliche Kautionsversicherung",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Kreditversicherung für Betriebe",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Mietausfallversicherung",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Mietkautionsversicherung",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    },
+    {
+      "original_insurance": "Restschuldversicherung",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "IM_SAMMELTHEMA_BERUECKSICHTIGT"
+    },
+    {
+      "original_insurance": "Vertrauensschadenversicherung",
+      "topic_page_key": "INS-COMP:R3:kredite-kautionen-und-mieten",
+      "placement": "ARTIKEL_BEREICH_PLAUSIBEL__SEO_ENTSCHEIDET"
+    }
+  ]
+}
