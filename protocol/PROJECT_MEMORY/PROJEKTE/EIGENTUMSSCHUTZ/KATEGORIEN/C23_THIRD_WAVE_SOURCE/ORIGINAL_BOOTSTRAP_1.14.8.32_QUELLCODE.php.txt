@@ -1,0 +1,181 @@
+<?php
+/**
+ * Plugin Name: Hab & Bewahr â Kategorie-Workflow
+ * Description: Profilgesteuerter Workflow fÃ¼r CORE, Magazin und HivePress. Hab-&-Bewahr-Zielprofil integriert; kontrollierter Dry-Run vor manueller Synchronisierung.
+ * Version: 1.14.8.32
+ * Requires at least: 6.4
+ * Requires PHP: 8.1
+ * License: GPL-2.0-or-later
+ */
+if (!defined('ABSPATH')) { exit; }
+define('APKW_VERSION','1.14.8.32');
+define('APKW_DIR',plugin_dir_path(__FILE__));
+define('APKW_TARGET_TREE_SYNC_ENABLED',true);
+define('APKW_TARGET_TREE_MANUAL_ONLY',true);
+// One-time, fail-closed profile transition from the EXACT previous Hab-&-Bewahr
+// target. Never replace an edited profile or alter the active site tree here.
+// The existing manual Dry-Run -> confirmation -> sync remains mandatory.
+if (function_exists('add_action')) {
+    add_action('admin_init', static function() {
+        if (!function_exists('current_user_can') || !current_user_can('manage_options')) return;
+        if (!function_exists('get_option') || !function_exists('delete_option')) return;
+        $active=(string)get_option('apkw_target_tree_active_revision_v1','');
+        if ($active!=='HB-SECURITY-6W-31L2-45L3-137LEAF-95SOURCE-20261010+694ac86703ad4160') return;
+        $state=get_option('apkw_target_tree_sync_state_v1',null);
+        if (!is_array($state) || (string)($state['status']??'')!=='COMPLETE') return;
+        $old=get_option('apkw_target_tree_profile_v1',null);
+        if (!is_array($old) || (string)($old['project']['project_id']??'')!=='hab-und-bewahr') return;
+        $json=function_exists('wp_json_encode')
+            ? wp_json_encode($old,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)
+            : json_encode($old,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if (!is_string($json) || !hash_equals(
+            '694ac86703ad4160e643c4829c5e96244243ffe4d39b24a962888dfd8bcf4af7',
+            hash('sha256',$json))) return;
+        delete_option('apkw_target_tree_profile_v1');
+        if (class_exists('APKW_TargetTree')) APKW_TargetTree::reset_cache();
+    }, 4);
+}
+
+// Existing target-profile extension point: on a virgin Hab & Bewahr install,
+// resolve the fully validated bundled target without extra JSON upload.
+// Any previously explicitly imported WordPress profile continues to take precedence.
+if (function_exists('add_filter')) {
+    add_filter('apkw_target_tree_profile_path', static function($candidate) {
+        return trim((string)$candidate) !== '' ? $candidate : APKW_DIR.'profiles/hab-und-bewahr-target.json';
+    }, 10, 1);
+}
+
+
+// Migrate ONLY the precisely known, UNSYNCED 1.14.8.5 bundled target if it was
+// previously imported manually. All other stored profiles keep their priority.
+// This changes an obsolete WP option, NEVER the site structure or the DB schema.
+if (function_exists('add_action')) {
+    add_action('admin_init', static function() {
+        if (function_exists('current_user_can') && !current_user_can('manage_options')) return;
+        if (!function_exists('get_option') || !function_exists('delete_option')) return;
+        if ((string)get_option('apkw_target_tree_active_revision_v1', '') !== '') return;
+        $state = get_option('apkw_target_tree_sync_state_v1', null);
+        if (is_array($state) && in_array((string)($state['status'] ?? ''), ['WRITING','READBACK','ROLLBACK_PENDING','COMPLETE'], true)) return;
+        // The old 1.14.8.5 PASS was for a 2-page-level tree. Do not show
+        // this obsolete snapshot as an actionable new release plan.
+        $oldPlan = get_option('apkw_final_target_plan_v1', null);
+        if (is_array($oldPlan) && str_starts_with((string)($oldPlan['profile_revision'] ?? ''), 'HB-SECURITY-6W-3P-SEO282-20261010+')) {
+            delete_option('apkw_final_target_plan_v1');
+        }
+        $old = get_option('apkw_target_tree_profile_v1', null);
+        // Only an exactly known, UNSYNCED 1.14.8.7 or 1.14.8.8 profile may be retired.
+        // The live attempt was ROLLED_BACK because WordPress canonicalized --
+        // in 28 target slugs; a user-modified or active profile is NEVER touched.
+        if (is_array($old) && (string)($old['project']['revision'] ?? '') === 'HB-SECURITY-6W-31L2-45L3-109LEAF-95SOURCE-20261010') {
+            $encoded = function_exists('wp_json_encode')
+                ? wp_json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                : json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if (is_string($encoded) && (hash_equals(
+                    '9505e03facd2887ab8d0b2e7a1e86cf154323ea92861b821554e64439bda7997',
+                    hash('sha256', $encoded)) ||
+                    hash_equals('82d8a466a7efbce548e2f8cf1e22f5673e02f448d0fc568f477921005b911c6e', hash('sha256',$encoded)))) {
+                delete_option('apkw_target_tree_profile_v1');
+                $plan7 = get_option('apkw_final_target_plan_v1', null);
+                if (is_array($plan7) && str_starts_with(
+                    (string)($plan7['profile_revision'] ?? ''),
+                    'HB-SECURITY-6W-31L2-45L3-109LEAF-95SOURCE-20261010+'))
+                    delete_option('apkw_final_target_plan_v1');
+                if (class_exists('APKW_TargetTree')) APKW_TargetTree::reset_cache();
+            }
+            return;
+        }
+        // Also retire the EXACT previously bundled 1.14.8.6 imported snapshot
+        // only before ANY structural sync. A modified/user-owned profile stays intact.
+        if (is_array($old) && (string)($old['project']['revision'] ?? '') === 'HB-SECURITY-6W-3PAGE-83LEAF-SEO282-20261010') {
+            $oldJson = function_exists('wp_json_encode')
+                ? wp_json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                : json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if (is_string($oldJson) && hash_equals('0dcff410f2e529bec7cf6896d4513474804724c35140a304cbb51971b6593c7e', hash('sha256',$oldJson))) {
+                delete_option('apkw_target_tree_profile_v1');
+                $oldPlan6 = get_option('apkw_final_target_plan_v1',null);
+                if (is_array($oldPlan6) && str_starts_with((string)($oldPlan6['profile_revision'] ?? ''), 'HB-SECURITY-6W-3PAGE-83LEAF-SEO282-20261010+')) delete_option('apkw_final_target_plan_v1');
+                if (class_exists('APKW_TargetTree')) APKW_TargetTree::reset_cache();
+            }
+            return;
+        }
+        if (!is_array($old) || (string)($old['project']['revision'] ?? '') !== 'HB-SECURITY-6W-3P-SEO282-20261010') return;
+        $json = function_exists('wp_json_encode')
+            ? wp_json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            : json_encode($old, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($json) || !hash_equals('42d555449179d1af42dcc9437c93d8fa4e71cdd3c9094ad8a8e3bca2ddebd728', hash('sha256', $json))) return;
+        delete_option('apkw_target_tree_profile_v1');
+        delete_option('apkw_final_target_plan_v1');
+        if (class_exists('APKW_TargetTree')) APKW_TargetTree::reset_cache();
+    }, 5);
+}
+
+
+// One-time read-only STRUCTURE transition routing: only retire the EXACT
+// previous Hab & Bewahr 1.14.8.11 profile override if it is fully synced.
+// The new bundled profile is not applied to WordPress until admin confirms
+// the new 0-write Delta Dry Run. Never touch user-custom profiles.
+if (function_exists('add_action')) {
+    add_action('admin_init', static function() {
+        if (!function_exists('current_user_can') || !current_user_can('manage_options')) return;
+        if (!function_exists('get_option') || !function_exists('delete_option')) return;
+        if ((string)get_option('apkw_target_tree_active_revision_v1','') !==
+            'HB-SECURITY-3PILLAR-STRUCTURE-20261011-FINAL-ONE-RELEASE+de7d513c99ad3352') return;
+        $s = get_option('apkw_target_tree_sync_state_v1',null);
+        if (!is_array($s) || (string)($s['status']??'')!=='COMPLETE') return;
+        $p = get_option('apkw_target_tree_profile_v1',null);
+        if (!is_array($p)) return; // Already loading the bundled profile.
+        if ((string)($p['project']['project_id']??'')!=='hab-und-bewahr' ||
+            (string)($p['project']['revision']??'')!==
+            'HB-SECURITY-3PILLAR-STRUCTURE-20261011-FINAL-ONE-RELEASE') return;
+        $json = function_exists('wp_json_encode')
+            ? wp_json_encode($p,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)
+            : json_encode($p,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if (!is_string($json) || !hash_equals(
+            'de7d513c99ad3352756bd229b2f776f7d3b936bb7d7fdf44f417de3d65dcbb37',
+            hash('sha256',$json))) return;
+        delete_option('apkw_target_tree_profile_v1');
+        delete_option('apkw_final_target_plan_v1');
+        if (class_exists('APKW_TargetTree')) APKW_TargetTree::reset_cache();
+    }, 4);
+}
+
+foreach([
+ 'class-apkw-settings.php','class-apkw-dataforseo.php','class-apkw-run-log.php',
+ 'class-apkw-workspace.php','class-apkw-inventory.php','class-apkw-validator.php',
+ 'class-apkw-concept-builder.php','class-apkw-research.php','class-apkw-research-evidence.php',
+ 'class-apkw-coverage-ledger.php','class-apkw-lifecycle-store.php','class-apkw-r9-lifecycle.php',
+ 'class-apkw-comparator.php','class-apkw-delta-planner.php',
+ 'class-apkw-target-tree.php','class-apkw-target-writer.php','class-apkw-target-tree-dry-run.php',
+ 'class-apkw-target-tree-sync.php','class-apkw-target-tree-runner.php',
+ 'class-apkw-portal-structure.php','class-apkw-frontend-structure.php',
+ 'class-apkw-taxonomies.php','class-apkw-final-target-admin.php',
+ 'class-apkw-serp-review.php','class-apkw-serp-r3.php','class-apkw-r3-v8-finalizer.php'
+] as $file)require_once APKW_DIR.'includes/'.$file;
+APKW_Taxonomies::init();
+APKW_FrontendStructure::init();
+APKW_TargetTreeRunner::init();
+APKW_FinalTargetAdmin::init();
+APKW_SERP_Review::init();
+APKW_R3_SERP_Review::init();
+APKW_R3_V8_Finalizer::init();
+
+require_once APKW_DIR.'includes/class-apkw-v99-add-only.php';
+APKW_V99_AddOnly::init();
+
+// Read-only provider-backed keyword evidence for the entire live CORE category hierarchy.
+require_once APKW_DIR.'includes/class-apkw-category-seo-audit.php';
+APKW_Category_SEO_Audit::init();
+
+// Additive C2.2 category-only review: no database writes, no articles, no provider calls.
+require_once APKW_DIR.'includes/class-apkw-c22-fachpruefung.php';
+APKW_C22_Fachpruefung::init();
+
+// C2.2: explicit resumable ADD-only sync using the established TargetWriter.
+require_once APKW_DIR.'includes/class-apkw-c22-add-only.php';
+APKW_C22_AddOnly::init();
+
+// ADD-only second C2.2 category wave. Never replays the first 743 jobs.
+require_once APKW_DIR.'includes/class-apkw-c22-472-add-only.php';
+APKW_C22_472_AddOnly::init();
+require_once APKW_DIR.'includes/class-apkw-c23-471-add-only.php';
+APKW_C23_471_AddOnly::init();
