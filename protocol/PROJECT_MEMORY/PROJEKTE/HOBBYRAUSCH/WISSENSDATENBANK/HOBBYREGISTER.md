@@ -33,3 +33,16 @@ Persistente zentrale Daten:
 `Hobbyidentität → zentrale Traits → zentrales Kurzprofil → QA → Register speichern → CURRENT_STATE aktualisieren`
 
 Kein anderer Bereich darf diesen Schreibweg durch eine eigene Hobby-Datenbank ersetzen.
+
+
+## WordPress-Laufzeitprojektion
+
+HD-007 `HOBBYREGISTER CORE` ist **keine zweite Datenautorität**. Es ist ausschließlich die read-only WordPress-Laufzeitprojektion des zentralen Registers.
+
+Verbindliche Bindung für 1.0.0:
+- zentraler Register-SHA-256: `4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`;
+- Hobbyidentitäten: 862;
+- Laufzeit-API: `hd_hobbyregister_*`;
+- keine Datenbankwrites, Cronjobs oder Netzwerkaufrufe.
+
+Bei einer späteren Änderung des zentralen Registers muss eine neue HD-007-Laufzeitprojektion explizit gegen den neuen Register-SHA erzeugt und geprüft werden. Eine stille Divergenz ist verboten.
