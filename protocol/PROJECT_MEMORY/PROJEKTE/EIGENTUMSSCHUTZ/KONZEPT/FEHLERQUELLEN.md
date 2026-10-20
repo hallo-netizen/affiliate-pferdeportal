@@ -6,6 +6,13 @@ KORREKTUR: Beschlossene Inhalte inklusive Renten-, Lebens- und Kapitalversicheru
 NACHWEIS: `KONZEPT/VERSICHERUNGEN_KOMPAKT_26_SEITEN_68_KATEGORIEN_105_THEMEN_20261020.json`; `KONZEPT/VERSICHERUNGEN_KOMPAKT_94_STRUKTURTEST_20261020.json`, 105/105 exakt einmal abgedeckt, 10/10 datenbezogene Negativfälle blockiert.
 GRENZE: Diese Prüfungen validieren den neuen Plan, nicht die Live-Installation. Noch kein neues WP-/Plugin-Release, kein Import, kein kostenpflichtiger Provider-Aufruf.
 
+## HB-INS-20261020-08 – Durch Zahlenreduktion konkrete Keyword-Ebene zerstört
+**Befund:** 94er-C2.4-Import real durchgeführt, Nutzer-Screenshot belegt 7. Welt im Frontend. Unter R2 „Betrieb & Finanzen“ erschienen Sammel-R3 „Ausfall & Mitarbeitende“, „Betriebliche Sachwerte“, „Haftung & Recht im Betrieb“ statt suchbezogener Versicherungsarten. FAQ/Beratung wurden auf einer thematisch zu groben Ebene erzeugt. Technisch grüner Lauf prüfte das falsche Fachkonzept.
+**Gesicherte Ursache:** Der Plan 1/5/20/68 hatte 105 konkrete Versicherungen zu nur 20 allgemeinen R3-Seiten zusammengezogen – anders als die sechs Bestandswelten R1→R2→konkretes R3→flache Artikelkategorie. Der vorhandene DataForSEO-Overview von 2026-10-20 wurde nur als Begriffsliste behandelt und bei der endgültigen R3-Auswahl ignoriert.
+**Korrekturbeleg:** `../KATEGORIEN/C25_INSURANCE_SEO_REPAIR_SOURCE/PRUEFBERICHT_20261020.md`, konkreter 105er-Ownerplan, 45 echte Provider-R3-Zeilen, 1 fehlende exakte Ergebniszeile (nicht Null). C2.5 1.14.8.36 Lokalmock mit Originalwriter PASS; 52 Seiten/138 Terms, 94 unveränderte Versicherungsobjekte sicher weiternutzen bzw. kontrolliert korrigieren, 96 neue. Kein Live-WordPresstest.
+**Hard Rule für zukünftige Arbeit:** Fachliche Konzept- und Elternhierarchie **vor** physischem Import an echten exemplarischen R1/R2/R3/Terms und echtem Design-Renderer beweisen, SEO-Titel/Keywords aus vorhandenen Belegen tatsächlich für R3 nutzen. Technische COUNT-PASS ohne fachliches Rollen-Gate nie als Freigabe. Alte 6 Welten unberührt lassen.
+**Status:** Korrektur-ZIP 1.14.8.36 gebaut und lokal getestet, reale Installation/Import OFFEN.
+
 ## HB-INS-20261020-06 – Pauschale Drei-Kategorien-Schablone und fremde Artikelplanung
 **STATUS: FACHLICHER ENTWURF KORRIGIERT / PLUGIN UND LIVE WEITERHIN OFFEN.**
 FEHLER: Bei allen 105 Versicherungsseiten waren pauschal FAQ, Beratung und Leistungen & Praxis eingefügt; zusätzlich wurden 945 konkrete Artikelideen als Prüfnachweis mitgeführt. Das war keine ausreichend individuelle Kategorienprüfung und überschritt die Zuständigkeit.
