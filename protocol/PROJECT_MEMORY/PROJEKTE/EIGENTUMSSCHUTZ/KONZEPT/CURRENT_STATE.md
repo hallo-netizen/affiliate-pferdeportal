@@ -1,6 +1,17 @@
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 20.10.2026 – VERSICHERUNGEN 94: TECHNISCHER PROTOTYP IN LOKALEN MOCKS GEPRÜFT (KEIN RELEASE)
+**Ist:** Auf der *lokalen* Werkbank `/mnt/data/hb_insurance_work/includes/class-apkw-insurance-94-add-only.php` liegt ein 94er-ADD-only-PHP-Klassenkandidat, basierend auf der früheren lokalen 433er-Vorlage; das 433er-Livevorhaben bleibt gesperrt. Manifestvertrag: `HB_INSURANCE_94_COMPACT_ADD_ONLY_V1` mit 26 WP-Seiten, 68 flachen Kategorien und genau 105 beschlossenen Versicherungstyp-Zuordnungen (unter gemeinsamen R3-Eigentümern). Die Kategorieklasse verlangt jeweils drei grobe Inhaltsfelder und **generiert keine Beiträge**. Sie wurde lokal mit PHP 8.4 gelintet, PASS. Ein im 433er-Prototyp unzuverlässiger WP-Seitenslug-Check `post_name__in` ist durch eine einzelne unterstützte `name`-Abfrage je neuem Slug ersetzt.
+
+**Synthetische echte PHP-Ausführung:** Lokal `/mnt/data/hb_insurance_work/tests/test_insurance_94_mock.php` ausgeführt: 94/94 Jobs, 26/26 Seiten, 68/68 Kategorien, Nullschreib-Preflight, bestehender Seitenslug blockiert, bestehender Kategorie-Slug blockiert, zweiter Start blockiert, 94-Objekt-Batch + simulierter Readback erfolgreich, 7 Welten in Snapshot, erzwungener Schreibabbruch bei Job 30 inkl. Rückbau sämtlicher bis dahin neu angelegter Testobjekte, Revision unverändert. **WICHTIGE GRENZE:** Stub-/synthetisches WordPress-Modell, **keine** echte Originalplugin-Integration, keine Tests mit dem Original `APKW_FinalTargetAdmin::frontend_readback`, kein Livebestand geprüft. Der tatsächliche 94er-GitHub-Kandidatenplan wurde **noch nicht physisch als Plugin-Profil kopiert**; Test nutzte Strukturfixture, dessen 105 Arten Platzhalter waren. Deshalb **NICHT INSTALLIEREN** und **KEIN ZIP-RELEASE FREIGEGEBEN**. Lokal erzeugtes ZIP heißt ausdrücklich `HAB_BEWAHR_VERSICHERUNGEN_94_ENTWICKLUNGSSTAND_NICHT_INSTALLIEREN.zip` und enthält ausschließlich Prototyp und Test, kein vollständiges Plugin.
+
+**Keine Änderung der Zielvorgaben:** Alte 476er-/433er-WP-Importverfahren nie starten; kompakte 94er-Struktur fachlich gültiger Kandidat; sechs Bestandswelten unangetastet; sieben-Welten-Megamenü im existierenden Designplugin fachlich separat nach tatsächlichem WP-Readback mit flexiblen Abmessungen statt künstlicher Zusatzkategorien.
+
+**GENAU EINE NEXT ACTION:** Vorhandenes vollständiges zentrale Kategorieplugin-Release `1.14.8.32` anhand Originalarchiv + Originalklassen mit dem lokalen 94er-Importkandidaten und *exaktem* GitHub-Kompaktmanifest verbinden, echte Originalplugin-PHP-/WP-Mocktests positiv/negativ durchführen, verifizierbares **vollständiges** installierbares ZIP bauen. Danach gesonderter WP-Read-only-Preflight und ausdrückliche Nutzerfreigabe für jeden Import. Keine Änderung auf Live-WP.
+
+---
+
 ## 20.10.2026 – VERSICHERUNGEN: KORRIGIERT AUF KOMPAKTE BEGLEIT-HAUPTKATEGORIE (NEUESTE AUTORITÄT)
 **Nutzerentscheidung vorgegeben, nicht neu auswerten:** Hab & Bewahr ist weiterhin ein Portal zum Eigentumsschutz. Versicherungen sind **genau eine ergänzende siebte Hauptwelt**, KEIN eigenständiges Versicherungsportal. Die zuvor ausdrücklich beschlossenen Themen **einschließlich Rente, Leben und Kapital** bleiben vollständig erhalten. Keine erneute allgemeine Versicherungsfachrecherche, kein Themenausschluss nach Portalbezug, keine Artikelplanung.
 
