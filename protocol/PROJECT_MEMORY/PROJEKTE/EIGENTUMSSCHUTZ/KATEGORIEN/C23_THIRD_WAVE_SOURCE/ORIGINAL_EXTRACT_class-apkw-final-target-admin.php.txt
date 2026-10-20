@@ -1,0 +1,325 @@
+<?php
+if (!defined('ABSPATH')) { exit; }
+
+final class APKW_FinalTargetAdmin {
+    public const PAGE_SLUG='apkw-final-target-tree';
+    private const PLAN_OPT='apkw_final_target_plan_v1';
+    private const REPORT_OPT='apkw_final_target_report_v1';
+    private const DFS_OVERVIEW_TTL=900;
+
+    public static function init():void{
+        if(!function_exists('add_action'))return;
+        add_action('admin_menu',[__CLASS__,'menu'],30);
+        add_action('admin_post_apkw_profile_upload',[__CLASS__,'handle_profile_upload']);
+        add_action('admin_post_apkw_dfs_settings',[__CLASS__,'handle_dfs_settings']);
+        add_action('admin_post_apkw_dfs_connection_test',[__CLASS__,'dfs_connection_test']);
+        add_action('admin_post_apkw_dfs_overview_preflight',[__CLASS__,'dfs_overview_preflight_action']);
+        add_action('admin_post_apkw_dfs_overview_execute',[__CLASS__,'dfs_overview_execute_action']);
+        add_action('admin_post_apkw_final_target_dry_run',[__CLASS__,'handle_dry_run']);
+        add_action('admin_post_apkw_final_target_apply',[__CLASS__,'handle_apply']);
+        add_action('admin_post_apkw_final_target_export',[__CLASS__,'handle_export']);
+        add_action('wp_ajax_apkw_final_target_advance',[__CLASS__,'handle_advance']);
+    }
+    public static function menu():void{
+        if(function_exists('add_menu_page'))add_menu_page('Portal-Kategorien','Portal-Kategorien','manage_options',self::PAGE_SLUG,[__CLASS__,'render'],'dashicons-category',62);
+        // Expose the existing profile import and target-tree work area explicitly.
+        // The earlier release only named the DataForSEO submenu, leaving users
+        // searching for a non-existent 'Finaler Zielbaum' menu entry.
+        if(function_exists('add_submenu_page'))add_submenu_page(self::PAGE_SLUG,'Finaler Zielbaum','Finaler Zielbaum','manage_options',self::PAGE_SLUG,[__CLASS__,'render']);
+        if(function_exists('add_submenu_page'))add_submenu_page(self::PAGE_SLUG,'DataForSEO Recherche','DataForSEO Recherche','manage_options',self::PAGE_SLUG.'-research',[__CLASS__,'dfs_research_render']);
+    }
+    public static function handle_dfs_settings():void{
+        self::cap();if(function_exists('check_admin_referer'))check_admin_referer('apkw_dfs_settings');
+        if(!class_exists('APKW_Settings'))wp_die('DataForSEO-Einstellungen nicht verfügbar.');
+        APKW_Settings::save((array)($_POST['apkw_dfs']??[]));
+        self::redirect('dfs-settings-saved');
+    }
+
+    // Restores the existing APKW_DataForSEO::keyword_overview provider and
+    // two-step paid consent path. The research path NEVER creates WordPress structure.
+    public static function dfs_overview_preflight(array $document):array{
+        $endpoint=(string)($document['endpoint']??'');
+        if($endpoint!=='/v3/dataforseo_labs/google/keyword_overview/live')throw new RuntimeException('Nur vorhandene DataForSEO Keyword-Overview-Anfragen sind erlaubt.');
+        $tasks=(array)($document['payload']??[]);
+        if(count($tasks)!==1||!is_array($tasks[0]??null))throw new RuntimeException('Genau eine Keyword-Overview-Aufgabe erforderlich.');
+        $task=$tasks[0];$keywords=(array)($task['keywords']??[]);
+        if(!$keywords||count($keywords)>APKW_DataForSEO::max_overview_keywords())throw new RuntimeException('Keyword-Anzahl: 1–700 erforderlich.');
+        $seen=[];$clean=[];
+        foreach($keywords as $keyword){
+            if(!is_string($keyword)||trim($keyword)===''||strlen($keyword)>250)throw new RuntimeException('Ungültiges Keyword.');
+            $term=preg_replace('/\s+/u',' ',trim($keyword));
+            if($term===null||(function_exists('mb_strlen')?mb_strlen($term,'UTF-8'):strlen($term))<3)throw new RuntimeException('Keyword zu kurz oder ungültig.');
+            $key=function_exists('mb_strtolower')?mb_strtolower($term,'UTF-8'):strtolower($term);
+            if(isset($seen[$key]))throw new RuntimeException('Doppeltes Keyword: '.$term);
+            $seen[$key]=1;$clean[]=$term;
+        }
+        $location=trim((string)($task['location_name']??''));
+        $language=trim((string)($task['language_code']??''));
+        $settings=APKW_Settings::defaults();
+        if($location!==(string)$settings['location_name']||$language!==(string)$settings['language_code'])throw new RuntimeException('Markt/Sprache weichen von den Backend-Einstellungen ab.');
+        if(!empty($task['include_serp_info'])||!empty($task['include_clickstream_data']))throw new RuntimeException('Zusätzliche kostenpflichtige SERP-/Clickstream-Daten nicht freigegeben.');
+        $key=hash('sha256',wp_json_encode(['keywords'=>$clean,'market'=>$location,'language'=>$language],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+        return ['keywords'=>$clean,'count'=>count($clean),'location_name'=>$location,'language_code'=>$language,'sha256'=>$key];
+    }
+    public static function dfs_connection_test():void{
+        self::cap();check_admin_referer('apkw_dfs_connection_test');
+        try{$check=APKW_DataForSEO::test_connection();
+            if(class_exists('APKW_RunLog'))APKW_RunLog::record('DataForSEO Verbindung','PASS','Bestehende API-Verbindung geprüft.',['cost_usd'=>$check['cost_usd']??0]);
+            self::dfs_redirect('connected');
+        }catch(Throwable $e){if(class_exists('APKW_RunLog'))APKW_RunLog::record('DataForSEO Verbindung','BLOCKED',$e->getMessage());wp_die(esc_html($e->getMessage()),'DataForSEO BLOCKED',['response'=>400]);}
+    }
+    public static function dfs_overview_preflight_action():void{
+        self::cap();check_admin_referer('apkw_dfs_overview_preflight');
+        try{
+            $file=(array)($_FILES['apkw_dfs_overview_input']??[]);
+            if((int)($file['error']??99)!==UPLOAD_ERR_OK||(int)($file['size']??0)<2||(int)($file['size']??0)>1048576)throw new RuntimeException('JSON-Datei fehlt oder überschreitet 1 MB.');
+            $raw=file_get_contents((string)($file['tmp_name']??''));
+            $doc=json_decode((string)$raw,true,512,JSON_THROW_ON_ERROR);
+            if(!is_array($doc))throw new RuntimeException('Ungültige Eingabedatei.');
+            $plan=self::dfs_overview_preflight($doc);
+            if(get_option('apkw_dfs_paid_once_'.$plan['sha256'],false)!==false)throw new RuntimeException('Dieselbe Anfrage wurde bereits beansprucht – erneute Berechnung gesperrt.');
+            $token=bin2hex(random_bytes(16));set_transient('apkw_dfs_overview_'.$token,$plan,self::DFS_OVERVIEW_TTL);
+            self::dfs_redirect('preflight', $token);
+        }catch(Throwable $e){if(class_exists('APKW_RunLog'))APKW_RunLog::record('DataForSEO Preflight','BLOCKED',$e->getMessage());wp_die(esc_html($e->getMessage()),'DataForSEO BLOCKED',['response'=>400]);}
+    }
+    public static function dfs_overview_execute_action():void{
+        self::cap();check_admin_referer('apkw_dfs_overview_execute');
+        if((string)($_POST['apkw_dfs_paid_confirm']??'')!=='1')wp_die('Ausdrückliche Kostenfreigabe fehlt.','BLOCKED',['response'=>400]);
+        $token=(string)($_POST['apkw_dfs_token']??'');
+        if(!preg_match('/^[0-9a-f]{32}$/',$token))wp_die('Ungültiger Freigabetoken.','BLOCKED',['response'=>400]);
+        $plan=get_transient('apkw_dfs_overview_'.$token);
+        if(!is_array($plan))wp_die('Vorprüfung abgelaufen. Bitte neu prüfen.','BLOCKED',['response'=>400]);
+        $newplan=self::dfs_overview_preflight(['endpoint'=>'/v3/dataforseo_labs/google/keyword_overview/live','payload'=>[['keywords'=>$plan['keywords'],'location_name'=>$plan['location_name'],'language_code'=>$plan['language_code']]]]);
+        if(!hash_equals((string)($plan['sha256']??''),$newplan['sha256']))wp_die('Keyword-/Marktbindung verändert.','BLOCKED',['response'=>400]);
+        $creds=APKW_Settings::credentials();if((string)($creds['login']??'')===''||(string)($creds['password']??'')==='')wp_die('DataForSEO Zugangsdaten fehlen.','BLOCKED',['response'=>400]);
+        $claim='apkw_dfs_paid_once_'.$newplan['sha256'];
+        if(!add_option($claim,['claimed_at_utc'=>gmdate('c'),'state'=>'SUBMITTED_UNKNOWN_COST'], '',false))wp_die('Diese Anfrage wurde bereits beansprucht. Keine Doppelabrechnung.','BLOCKED',['response'=>400]);
+        delete_transient('apkw_dfs_overview_'.$token);
+        try{
+            // Exact original provider; no Keyword-Ideas path, no category writes.
+            $r=APKW_DataForSEO::keyword_overview($newplan['keywords'],$newplan['location_name'],$newplan['language_code'],false,'apkw-safety-overview-'.substr($newplan['sha256'],0,20));
+            update_option($claim,['claimed_at_utc'=>gmdate('c'),'state'=>'COMPLETED','task_id'=>$r['task_id']??'','cost_usd'=>$r['cost_usd']??null],false);
+            if(class_exists('APKW_RunLog'))APKW_RunLog::record('DataForSEO Overview','PASS','Bestehende Keyword-Overview-Funktion ausgeführt; keine WordPress-Strukturwrites.',['keyword_count'=>$newplan['count'],'event_cost_usd'=>$r['cost_usd']??0,'task_id'=>$r['task_id']??'','sha256'=>$newplan['sha256']]);
+            $report=['contract'=>'APKW_DFS_KEYWORD_OVERVIEW_EXISTING_PROVIDER_V1','input_sha256'=>$newplan['sha256'],'keyword_count'=>$newplan['count'],'world_structure_changed'=>false,'fetched_at_utc'=>gmdate('c'),'dataforseo'=>$r];
+            $json=wp_json_encode($report,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            if(!is_string($json))throw new RuntimeException('DataForSEO Ergebnis konnte nicht serialisiert werden.');
+            if(function_exists('nocache_headers'))nocache_headers();
+            header('Content-Type: application/json; charset=utf-8');
+            header('Content-Disposition: attachment; filename="hab-bewahr-dataforseo-overview-'.gmdate('Ymd-His').'-utc.json"');
+            echo $json;exit;
+        }catch(Throwable $e){
+            update_option($claim,['claimed_at_utc'=>gmdate('c'),'state'=>'INDETERMINATE_CHECK_DATAFORSEO_BEFORE_RETRY','error'=>$e->getMessage()],false);
+            if(class_exists('APKW_RunLog'))APKW_RunLog::record('DataForSEO Overview','BLOCKED','Nach Fehler keine automatische Wiederholung.',['error'=>$e->getMessage(),'sha256'=>$newplan['sha256']]);
+            wp_die('DataForSEO-Abfrage unklar: '.esc_html($e->getMessage()).'. Bitte Anbieterstatus/Kosten vor erneutem Lauf prüfen.','BLOCKED',['response'=>400]);
+        }
+    }
+    private static function dfs_redirect(string $state,string $token=''):void{
+        $url=admin_url('admin.php?page='.self::PAGE_SLUG.'-research&apkw_dfs_state='.$state.($token!==''?'&apkw_dfs_token='.$token:''));
+        wp_safe_redirect($url);exit;
+    }
+    public static function dfs_research_render():void{
+        self::cap();$creds=APKW_Settings::credentials();$defaults=APKW_Settings::defaults();
+        $token=isset($_GET['apkw_dfs_token'])?(string)$_GET['apkw_dfs_token']:'';
+        $plan=preg_match('/^[0-9a-f]{32}$/',$token)?get_transient('apkw_dfs_overview_'.$token):false;
+        echo '<div class="wrap"><h1>DataForSEO – Keyword-Recherche</h1><p>Bestehende HD-001 Keyword-Overview-Funktion. Nur Datenabfrage, niemals automatische Kategorien oder Sync.</p>';
+        echo '<p>Zielmarkt: <strong>'.esc_html((string)$defaults['location_name']).'</strong> · Sprache: <strong>'.esc_html((string)$defaults['language_code']).'</strong> · Zugang: <strong>'.(!empty($creds['login'])&&!empty($creds['password'])?'gespeichert':'fehlt').'</strong></p>';
+        if(($_GET['apkw_dfs_state']??'')==='connected')echo '<div class="notice notice-success inline"><p>Verbindung erfolgreich getestet. Keine kostenpflichtige Keyword-Abfrage gestartet.</p></div>';
+        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="apkw_dfs_connection_test">';wp_nonce_field('apkw_dfs_connection_test');submit_button('Verbindung testen (kostenlos)','secondary');echo '</form>';
+        echo '<h2>1. Vorbereitete Keyword-Datei kostenlos prüfen</h2><p>Das bereitgestellte DataForSEO-Precheck-JSON hochladen. Maximal 700 eindeutige Suchbegriffe, keine Keyword-Ideas-Tiefenabfrage.</p>';
+        echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="apkw_dfs_overview_preflight">';wp_nonce_field('apkw_dfs_overview_preflight');echo '<input type="file" name="apkw_dfs_overview_input" accept=".json,application/json" required>';submit_button('Kostenlosen Prüfplan erstellen','secondary');echo '</form>';
+        if(is_array($plan)){
+            echo '<h2>2. Abfrage ausdrücklich freigeben</h2><p><strong>'.esc_html((string)$plan['count']).' Keywords</strong> · Prüfsumme: <code>'.esc_html((string)$plan['sha256']).'</code>.</p><p>Der Anbieter kann Gebühren berechnen. Der konkrete Betrag ist vor dem Aufruf hier nicht garantiert. <strong>Keine automatische Wiederholung bei Fehlern.</strong></p>';
+            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="apkw_dfs_overview_execute"><input type="hidden" name="apkw_dfs_token" value="'.esc_attr($token).'">';wp_nonce_field('apkw_dfs_overview_execute');echo '<p><label><input type="checkbox" name="apkw_dfs_paid_confirm" value="1" required> Ich gebe diese eine kostenpflichtige DataForSEO-Abfrage frei.</label></p>';submit_button('Einmal abfragen und JSON herunterladen','primary');echo '</form>';
+        }
+        echo '<p>Nach dem Download die Ergebnis-JSON für den Kategorien- und Keyword-Abgleich bereitstellen.</p></div>';
+    }
+    public static function handle_profile_upload():void{
+        self::cap();if(function_exists('check_admin_referer'))check_admin_referer('apkw_profile_upload');
+        $state=APKW_TargetTreeSync::state();
+        if(is_array($state)&&in_array((string)($state['status']??''),['WRITING','READBACK','ROLLBACK_PENDING'],true))wp_die('Profilwechsel während Sync gesperrt.');
+        $file=(array)($_FILES['apkw_profile_file']??[]);
+        if((int)($file['error']??99)!==UPLOAD_ERR_OK||(int)($file['size']??0)>5242880||(int)($file['size']??0)<2)wp_die('Profil-Upload ungültig oder größer als 5 MB.');
+        $raw=file_get_contents((string)$file['tmp_name']);$data=json_decode((string)$raw,true);
+        if(!is_array($data))wp_die('JSON-Profil ungültig.');
+        $validation=APKW_TargetTree::validate($data);
+        if(empty($validation['valid']))wp_die('Profil blockiert: '.esc_html(implode(', ',(array)$validation['errors'])));
+        update_option('apkw_target_tree_profile_v1',$data,false);APKW_TargetTree::reset_cache();
+        if(function_exists('delete_option'))delete_option(self::PLAN_OPT);
+        self::redirect('profile-imported');
+    }
+    private static function cap():void{if(function_exists('current_user_can')&&!current_user_can('manage_options'))wp_die('Keine Berechtigung.');}
+    private static function redirect(string $flag=''):void{$url=function_exists('admin_url')?admin_url('admin.php?page='.self::PAGE_SLUG.($flag!==''?'&apkw_final='.$flag:'')):'admin.php?page='.self::PAGE_SLUG;if(function_exists('wp_safe_redirect')){wp_safe_redirect($url);exit;}header('Location: '.$url);exit;}
+    public static function handle_dry_run():void{
+        self::cap();if(function_exists('check_admin_referer'))check_admin_referer('apkw_final_target_dry_run');
+        try{$plan=APKW_TargetTreeDryRun::build();if(function_exists('update_option'))update_option(self::PLAN_OPT,$plan,false);if(class_exists('APKW_RunLog'))APKW_RunLog::record('Final Target Dry-Run',$plan['valid']?'PASS':'BLOCKED','Finaler Zielbaum gegen Live-Bestand geprüft; keine Writes.',['summary'=>$plan['summary']??[],'errors'=>$plan['errors']??[],'plan_fingerprint'=>$plan['plan_fingerprint']??'']);self::redirect($plan['valid']?'dryrun-pass':'dryrun-blocked');}
+        catch(Throwable $e){if(class_exists('APKW_RunLog'))APKW_RunLog::record('Final Target Dry-Run','BLOCKED','Dry-Run Exception.',['error'=>$e->getMessage()]);if(function_exists('update_option'))update_option(self::PLAN_OPT,['contract'=>APKW_TargetTreeDryRun::CONTRACT,'valid'=>false,'status'=>'BLOCKED','errors'=>[$e->getMessage()],'generated_at_utc'=>gmdate('c')],false);self::redirect('dryrun-blocked');}
+    }
+    public static function handle_apply():void{
+        self::cap();if(function_exists('check_admin_referer'))check_admin_referer('apkw_final_target_apply');if(empty($_POST['apkw_final_target_confirmation']))wp_die('Ausdrückliche Bestätigung fehlt.','BLOCKED',['response'=>400]);
+        $stored=function_exists('get_option')?get_option(self::PLAN_OPT,[]):[];if(!is_array($stored)||empty($stored['valid']))wp_die('Kein gültiger finaler Dry-Run gespeichert.','BLOCKED',['response'=>400]);
+        $token=(string)($_POST['apkw_final_target_token']??'');if($token===''||!hash_equals((string)($stored['plan_fingerprint']??''),$token))wp_die('Dry-Run-Token stimmt nicht.','BLOCKED',['response'=>400]);
+        try{
+            $fresh=APKW_TargetTreeDryRun::build();if(empty($fresh['valid']))throw new RuntimeException('Live-Bestand ist nicht mehr Dry-Run-PASS: '.implode(', ',(array)($fresh['errors']??[])));
+            if(!hash_equals((string)$stored['plan_fingerprint'],(string)$fresh['plan_fingerprint']))throw new RuntimeException('Live-Bestand hat sich seit dem Dry-Run geändert. Bitte neuen Dry-Run ausführen.');
+            $uid=function_exists('get_current_user_id')?(int)get_current_user_id():0;if($uid<1)throw new RuntimeException('Administrator fehlt.');
+            $state=APKW_TargetTreeRunner::start_manual($uid,(array)$fresh['profile']);
+            if(function_exists('update_option'))update_option(self::REPORT_OPT,['status'=>'RUNNING','started_at_utc'=>gmdate('c'),'revision'=>$state['revision']??'','dry_run_fingerprint'=>$fresh['plan_fingerprint'],'summary'=>$fresh['summary']],false);
+            if(class_exists('APKW_RunLog'))APKW_RunLog::record('Final Target Apply','RUNNING','Exakt geprüfter Zielbaum-Sync gestartet.',['revision'=>$state['revision']??'','summary'=>$fresh['summary']]);self::redirect('sync-started');
+        }catch(Throwable $e){if(class_exists('APKW_RunLog'))APKW_RunLog::record('Final Target Apply','BLOCKED','Finaler Sync nicht gestartet.',['error'=>$e->getMessage()]);wp_die(esc_html($e->getMessage()),'Finaler Zielbaum BLOCKED',['response'=>400]);}
+    }
+    public static function handle_advance():void{
+        try{
+            if(function_exists('current_user_can')&&!current_user_can('manage_options'))throw new RuntimeException('Keine Berechtigung.');
+            if(function_exists('check_ajax_referer')&&check_ajax_referer('apkw_final_target_advance',false,false)===false)throw new RuntimeException('Sicherheits-Token abgelaufen. Seite neu laden; der laufende Sync wird aus dem gespeicherten Zustand fortgesetzt.');
+            $prior=APKW_TargetTreeSync::state();
+            if(!is_array($prior)||trim((string)($prior['status']??''))==='')throw new RuntimeException('Kein Target-Tree-Sync vorhanden. Erst gültigen Dry-Run ausführen.');
+            APKW_TargetTreeRunner::tick();$state=APKW_TargetTreeSync::state();$status=(string)($state['status']??'');
+            if($status==='')throw new RuntimeException('Target-Tree-Sync-Zustand fehlt nach Fortschrittsschritt.');
+            $terminal=in_array($status,['COMPLETE','ROLLED_BACK','ROLLBACK_FAILED'],true);$payload=['status'=>$status,'terminal'=>$terminal,'write_index'=>(int)($state['write_index']??0),'write_total'=>count((array)($state['node_order']??[])),'readback_index'=>(int)($state['readback_index']??0),'summary'=>$state['summary']??[],'error'=>(string)($state['error']??'')];if($terminal)$payload['frontend_readback']=self::frontend_readback();if(function_exists('wp_send_json_success'))wp_send_json_success($payload);echo json_encode(['success'=>true,'data'=>$payload]);exit;
+        }catch(Throwable $e){if(function_exists('wp_send_json_error'))wp_send_json_error(['message'=>$e->getMessage()],500);echo json_encode(['success'=>false,'data'=>['message'=>$e->getMessage()]]);exit;}
+    }
+    public static function handle_export():void{
+        self::cap();if(function_exists('check_admin_referer'))check_admin_referer('apkw_final_target_export');
+        $stored=function_exists('get_option')?get_option(self::PLAN_OPT,[]):[];
+        if(!is_array($stored)||!$stored)wp_die('Kein Dry-Run vorhanden.','BLOCKED',['response'=>409]);
+        // Export must be fresh. Before sync: require the identical current plan.
+        // After COMPLETE: the original delta necessarily changes to UNCHANGED,
+        // so require a 100%-read-backed, idempotent active snapshot instead.
+        try{
+            $fresh=APKW_TargetTreeDryRun::build();
+            $sameRevision=hash_equals((string)($stored['profile_revision']??''),(string)($fresh['profile_revision']??''));
+            $sameProfile=hash_equals((string)($stored['profile_sha256']??''),(string)($fresh['profile_sha256']??''));
+            $samePlan=$sameRevision && $sameProfile &&
+                hash_equals((string)($stored['plan_fingerprint']??''),(string)($fresh['plan_fingerprint']??'')) &&
+                (bool)($stored['valid']??false)===(bool)($fresh['valid']??false);
+            $state=class_exists('APKW_TargetTreeSync')?APKW_TargetTreeSync::state():null;
+            $summary=(array)($fresh['summary']??[]);
+            $allUnchanged=!empty($fresh['valid']) &&
+                (int)($summary['CREATE']??-1)===0 && (int)($summary['ADOPT']??-1)===0 &&
+                (int)($summary['UPDATE']??-1)===0 && (int)($summary['ARCHIVE']??-1)===0 &&
+                (int)($summary['UNCHANGED']??-1)===(int)($fresh['structure']['physical_target_objects']??-2);
+            $front=$samePlan?null:self::frontend_readback();
+            $postSyncVerified=!empty($stored['valid']) && $sameRevision && $sameProfile && $allUnchanged &&
+                is_array($state) && (string)($state['status']??'')==='COMPLETE' &&
+                hash_equals((string)($stored['profile_revision']??''),(string)($state['revision']??'')) &&
+                hash_equals((string)($stored['profile_revision']??''),APKW_TargetTreeSync::active_revision()) &&
+                (int)($state['summary']['readback_checked']??-1)===(int)($fresh['structure']['physical_target_objects']??-2) &&
+                !empty($front['valid']);
+            if(!$samePlan&&!$postSyncVerified)
+                throw new RuntimeException('Gespeicherter Dry-Run ist veraltet oder Abschluss-Readback nicht PASS. Bitte neu prüfen.');
+        }catch(Throwable $e){wp_die(esc_html($e->getMessage()),'Finaler Zielbaum BLOCKED',['response'=>409]);return;}
+        $report=APKW_TargetTreeDryRun::public_report($samePlan?$fresh:$stored);
+        if($postSyncVerified && !$samePlan)$report['post_sync_verification']=APKW_TargetTreeDryRun::public_report($fresh);
+        $report['sync_state']=class_exists('APKW_TargetTreeSync')?APKW_TargetTreeSync::state():null;
+        $report['runner_status']=class_exists('APKW_TargetTreeRunner')?APKW_TargetTreeRunner::status():[];
+        $report['frontend_readback']=self::frontend_readback();
+        $json=function_exists('wp_json_encode')?wp_json_encode($report,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES):json_encode($report,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if(!is_string($json))wp_die('Readback konnte nicht serialisiert werden.','BLOCKED',['response'=>500]);
+        if(function_exists('nocache_headers'))nocache_headers();
+        header('Content-Type: application/json; charset=utf-8');
+        header('Content-Disposition: attachment; filename="portal-final-target-readback-'.gmdate('Ymd-His').'-utc.json"');
+        echo $json;exit;
+    }
+    public static function render():void{
+        self::cap();$plan=function_exists('get_option')?get_option(self::PLAN_OPT,[]):[];$state=class_exists('APKW_TargetTreeSync')?APKW_TargetTreeSync::state():null;$runner=class_exists('APKW_TargetTreeRunner')?APKW_TargetTreeRunner::status():[];$front=self::frontend_readback();$running=is_array($state)&&in_array((string)($state['status']??''),['WRITING','READBACK','ROLLBACK_PENDING'],true);$planRevision=is_array($plan)?(string)($plan['profile_revision']??''):'';$stateRevision=is_array($state)?(string)($state['revision']??''):'';$complete=is_array($state)&&(string)($state['status']??'')==='COMPLETE'&&$planRevision!==''&&hash_equals($planRevision,$stateRevision);$staleComplete=is_array($state)&&(string)($state['status']??'')==='COMPLETE'&&!$complete;
+        $base=class_exists('APKW_TargetTree')?APKW_TargetTree::profile():null;
+        $configured=is_array($base);$requiredWorlds=(int)($base['settings']['expected_world_count']??0);
+        $minArticles=(int)($base['settings']['min_article_intents']??0);
+        ?>
+        <div class="wrap"><h1>Finaler Zielbaum</h1><div style="max-width:1100px">
+        <div class="notice notice-info inline"><p><strong>Kontrollierter Ablauf:</strong> fachlich freigegebenes Profil binden, read-only Dry-Run, exakter Delta-Abgleich, einmal synchronisieren, vollständiger Readback. Ohne Profil keine Writes.</p></div>
+        <p><strong>Profil:</strong> <?php echo $configured?'gebunden':'FEHLT – jungfräuliche Installation';?> · <?php echo esc_html((string)$requiredWorlds);?> erwartete Hauptwelten · mindestens <?php echo esc_html((string)$minArticles);?> eigenständige Artikelintents je letzter Kategorie · Navigation nur aus aktivem Target.</p>
+        <?php if($running): ?><div id="apkw-final-progress" class="notice notice-warning inline"><p><strong>Sync läuft automatisch.</strong> Status: <?php echo esc_html((string)($state['status']??''));?> · Schreiben <?php echo esc_html((string)($state['write_index']??0));?> / <?php echo esc_html((string)count((array)($state['node_order']??[])));?> · Readback <?php echo esc_html((string)($state['readback_index']??0));?>.</p></div>
+        <script>(function(){var nonce=<?php echo wp_json_encode(wp_create_nonce('apkw_final_target_advance'));?>,stopped=false;function tick(){if(stopped)return;var body=new URLSearchParams();body.set('action','apkw_final_target_advance');body.set('_ajax_nonce',nonce);fetch(ajaxurl,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:body.toString()}).then(function(r){return r.text().then(function(t){try{return JSON.parse(t);}catch(e){throw new Error('Ungültige Serverantwort (HTTP '+r.status+'): '+String(t||'').replace(/\s+/g,' ').slice(0,300));}});}).then(function(j){if(!j||!j.success)throw new Error((j&&j.data&&j.data.message)||'Finaler Zielbaum-Schritt fehlgeschlagen.');var d=j.data||{},el=document.getElementById('apkw-final-progress');if(el)el.innerHTML='<p><strong>Sync läuft automatisch.</strong> Status: '+String(d.status||'')+' · Schreiben '+String(d.write_index||0)+' / '+String(d.write_total||0)+' · Readback '+String(d.readback_index||0)+'.</p>';if(d.terminal){stopped=true;window.location.reload();return;}setTimeout(tick,350);}).catch(function(e){stopped=true;var el=document.getElementById('apkw-final-progress');if(el){el.className='notice notice-error inline';el.innerHTML='<p>'+String(e.message||e)+'</p>';}});}setTimeout(tick,250);})();</script><?php endif;?>
+        <?php if($complete): ?><div class="notice <?php echo !empty($front['valid'])?'notice-success':'notice-warning';?> inline"><p><strong>Struktur-Sync COMPLETE für diesen Zielstand.</strong> Frontend-/Struktur-Readback: <?php echo !empty($front['valid'])?'PASS':'NOCH NICHT PASS';?>.</p></div><?php elseif($staleComplete): ?><div class="notice notice-info inline"><p><strong>Älterer Struktur-Sync ist COMPLETE.</strong> Der aktuelle Dry-Run gehört zu einem neueren Zielstand und darf nach Bestätigung einmal synchronisiert werden.</p></div><?php endif;?>
+        <h2>DataForSEO – Zugang (keine automatische kostenpflichtige Abfrage)</h2>
+        <?php $dfs=APKW_Settings::credentials();$defaults=APKW_Settings::defaults(); ?>
+        <p>Verbindung: <?php echo $dfs['login']!==''&&$dfs['password']!==''?'Zugangsdaten hinterlegt':'Noch kein Zugang hinterlegt'; ?>. Keine kostenpflichtige Anfrage beim Speichern.</p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>">
+          <input type="hidden" name="action" value="apkw_dfs_settings"><?php wp_nonce_field('apkw_dfs_settings');?>
+          <p><label>Login <input type="text" name="apkw_dfs[login]" value="<?php echo esc_attr((string)$dfs['login']);?>" autocomplete="username"></label></p>
+          <p><label>Passwort (leer lassen = unverändert) <input type="password" name="apkw_dfs[password]" value="" autocomplete="new-password"></label></p>
+          <p><label>Markt <input type="text" name="apkw_dfs[location_name]" value="<?php echo esc_attr((string)$defaults['location_name']);?>"></label> <label>Sprache <input type="text" name="apkw_dfs[language_code]" value="<?php echo esc_attr((string)$defaults['language_code']);?>"></label></p>
+          <?php submit_button('Zugangsdaten speichern','secondary');?>
+        </form>
+
+        <h2>0. Kategorienprofil</h2>
+        <?php if(is_array($base) && (string)($base['project']['project_id']??'')==='hab-und-bewahr'): ?>
+          <p><strong>Hab &amp; Bewahr ist zentral eingebunden.</strong> Profilrevision: <code><?php echo esc_html((string)($base['project']['revision']??''));?></code>. Ein Pluginupdate startet keine automatische Strukturänderung.</p>
+        <?php else: ?><p>Noch kein gültiges Profil gebunden.</p><?php endif; ?>
+        <details><summary>Bereits fachlich freigegebenes JSON-Profil gezielt ersetzen (nur für spätere zentrale Pflege)</summary>
+          <form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="apkw_profile_upload"><?php wp_nonce_field('apkw_profile_upload');?>
+            <input type="file" name="apkw_profile_file" accept="application/json,.json" required>
+            <?php submit_button('Validiertes Profil einlesen (noch kein Sync)','secondary');?>
+          </form>
+        </details>
+        <h2>1. Kostenloser Live-Dry-Run</h2><p>Vergleicht das endgültige Zielprofil mit dem tatsächlichen WordPress-/HivePress-Bestand. <strong>0 Writes, 0 DataForSEO.</strong></p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="apkw_final_target_dry_run"><?php wp_nonce_field('apkw_final_target_dry_run');?><?php submit_button('Finalen Delta-Dry-Run ausführen','primary');?></form>
+        <?php if(is_array($plan)&&!empty($plan)): $sum=(array)($plan['summary']??[]); ?>
+          <h2>Dry-Run-Ergebnis</h2><p><strong>Status:</strong> <?php echo !empty($plan['valid'])?'PASS':'BLOCKED';?> · Zielobjekte: <?php echo esc_html((string)($plan['structure']['physical_target_objects']??0));?> · CREATE <?php echo esc_html((string)($sum['CREATE']??0));?> · ADOPT <?php echo esc_html((string)($sum['ADOPT']??0));?> · UPDATE <?php echo esc_html((string)($sum['UPDATE']??0));?> · UNCHANGED <?php echo esc_html((string)($sum['UNCHANGED']??0));?> · ARCHIVE <?php echo esc_html((string)($sum['ARCHIVE']??0));?></p>
+          <p>Provider-Aufrufe: <strong>0</strong> · Strukturwrites: <strong>0</strong> · Plan-Fingerprint: <code><?php echo esc_html((string)($plan['plan_fingerprint']??''));?></code></p>
+          <?php if(!empty($plan['errors'])):?><div class="notice notice-error inline"><p><?php echo esc_html(implode(' | ',array_map('strval',(array)$plan['errors'])));?></p></div><?php endif;?>
+          <?php if(!empty($plan['valid'])&&!$running&&!$complete): ?>
+            <h2>2. Exakt diesen Plan einmal synchronisieren</h2><form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="apkw_final_target_apply"><input type="hidden" name="apkw_final_target_token" value="<?php echo esc_attr((string)$plan['plan_fingerprint']);?>"><?php wp_nonce_field('apkw_final_target_apply');?><p><label><input type="checkbox" name="apkw_final_target_confirmation" value="1" required> Ich bestätige exakt diesen geprüften Plan. Der Live-Bestand wird vor Start erneut fingerprint-geprüft.</label></p><?php submit_button('Geprüften Zielbaum einmal synchronisieren','primary');?></form>
+          <?php endif;?>
+        <?php endif;?>
+        <?php if($complete): ?><h2>3. Abschluss</h2><p><strong>Sync:</strong> COMPLETE · <strong>Frontend-Readback:</strong> <?php echo !empty($front['valid'])?'PASS':'BLOCKED';?><?php if(!empty($front['errors']))echo ' · '.esc_html(implode(' | ',(array)$front['errors']));?></p><?php endif;?>
+        <?php if(is_array($plan)&&!empty($plan)): ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="apkw_final_target_export"><?php wp_nonce_field('apkw_final_target_export');?><?php submit_button('Finalen Readback als JSON herunterladen','secondary');?></form><?php endif;?>
+        </div></div><?php
+    }
+
+    public static function frontend_readback(?array $staged_snapshot=null):array{
+        if($staged_snapshot!==null){
+            if(!class_exists('APKW_FrontendStructure'))return ['valid'=>false,'errors'=>['FRONTEND_CLASS_MISSING']];
+            $rev=(string)($staged_snapshot['revision']??'');
+            if($rev===''||empty($staged_snapshot['nodes'])||empty($staged_snapshot['mapping']))return ['valid'=>false,'errors'=>['STAGED_FINAL_SNAPSHOT_INVALID']];
+            return APKW_FrontendStructure::with_target_snapshot($staged_snapshot,static fn()=>self::frontend_readback_snapshot($rev,$staged_snapshot));
+        }
+        if(!class_exists('APKW_TargetTreeSync'))return ['valid'=>false,'errors'=>['SYNC_CLASS_MISSING']];
+        $rev=APKW_TargetTreeSync::active_revision();$snap=APKW_TargetTreeSync::active_snapshot();
+        if($rev===''||!is_array($snap)||($snap['revision']??'')!==$rev)return ['valid'=>false,'errors'=>['NO_ACTIVE_FINAL_SNAPSHOT']];
+        return self::frontend_readback_snapshot($rev,$snap);
+    }
+
+    private static function frontend_readback_snapshot(string $rev,array $snap):array{
+        $errors=[];$idx=[];foreach((array)($snap['nodes']??[]) as $n)if(is_array($n))$idx[(string)($n['node_id']??'')]=$n;
+        $map=(array)($snap['mapping']??[]);
+        $expected=(int)($snap['settings']['expected_world_count']??0);$max=(int)($snap['settings']['max_megamenu_children']??0);
+        $worlds=[];$counts=[];
+        foreach($idx as $id=>$n){
+            if((string)($n['status']??'active')!=='active')continue;
+            if(str_starts_with($id,'core:world:')){
+                $worlds[$id]=true;
+                if((string)($n['parent_id']??'')!=='')$errors[]='WORLD_NOT_ROOT:'.$id;
+                if(empty($map[$id]['object_id']))$errors[]='WORLD_MAPPING_MISSING:'.$id;
+            }
+            $par=(string)($n['parent_id']??'');
+            if(str_starts_with($par,'core:world:')&&(string)($n['object_type']??'')==='page')$counts[$par]=1+(int)($counts[$par]??0);
+        }
+        if($expected<1||count($worlds)!==$expected)$errors[]='WORLD_COUNT_MISMATCH';
+        // C2.2 explicitly has NO numeric maximum for actual child nodes.
+        // The menu renderer continues to show max 3 actual links + 'Weitere'.
+        // Keep historic caps only for profiles without C2.2 confirmation.
+        $c22Active=!empty($snap['project']['c22_add_only_base_revision']);
+        foreach($worlds as $id=>$_)if(($counts[$id]??0)===0 || (!$c22Active && ($max<1||($counts[$id]??0)>$max)))
+            $errors[]='MEGAMENU_INVALID:'.$id;
+        foreach(['editorial:hub','directory:hub'] as $id){
+            if(isset($idx[$id])&&empty($map[$id]['object_id']))$errors[]='HUB_MAPPING_MISSING:'.$id;
+        }
+        $header=null;$categories=null;$contentFilter=null;$headerFilter=null;
+        if(class_exists('APKW_FrontendStructure')){
+            $contentFilter=APKW_FrontendStructure::readback_content_filter_registration();
+            if(empty($contentFilter['valid']))$errors[]='CONTENT_FILTER_READBACK_FAILED';
+            $headerFilter=APKW_FrontendStructure::readback_header_filter_registration();
+            if(empty($headerFilter['valid']))$errors[]='HEADER_FILTER_READBACK_FAILED';
+            $header=APKW_FrontendStructure::readback_header_navigation();
+            if(empty($header['valid']))$errors[]='HEADER_NAV_READBACK_FAILED';
+            $categories=APKW_FrontendStructure::readback_terminal_core_categories();
+            if(empty($categories['valid']))$errors[]='CORE_CATEGORIES_READBACK_FAILED';
+        }else $errors[]='FRONTEND_CLASS_MISSING';
+        return ['valid'=>!$errors,'revision'=>$rev,'world_count'=>count($worlds),'errors'=>$errors,
+            'content_filter'=>$contentFilter,'header_filter'=>$headerFilter,'header_navigation'=>$header,
+            'terminal_core_categories'=>$categories,'checked_at_utc'=>gmdate('c')];
+    }
+}
