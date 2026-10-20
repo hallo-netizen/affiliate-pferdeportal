@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **ZENTRALE HOBBY-KLASSIFIKATION V1 / 20ER-PILOT VOLL KLASSIFIZIERT / 54 EIGENSCHAFTEN GETESTET / MASSENBEFÜLLUNG NOCH OFFEN**
+STATUS: **KLASSIFIKATIONSSCHEMA 1.1 EINGEFROREN / 30 HOBBYS GEPRÜFT / 832 OFFEN / HOBBYFINDER FUNNEL V1 LOKAL GETESTET**
 
 ## Rolle
 
@@ -23,9 +23,9 @@ Persistente Datenbasis:
 - Library: `/Hobby Depot/Hobby-Klassifikation/README.md`
 
 Hashes:
-- Schema SHA-256: `eb416346148badb7934ea1bee86c8dffde2f56e0a323c64846a298761b83c592`
-- Register SHA-256: `df5e2d50ff73c7d4c91e94a9faef184738f5918573b89544c03492dc9cda0c97`
-- README SHA-256: `1327d79d262e44f992c4be93b30cf5cc2c59533ffc04f8f8531e12de7f8f6b85`
+- Schema 1.1 SHA-256: `0518309b6cd7e71ee607180291d6a024f8306fefdccd4824718b7fac9784e703`
+- Register nach 30er-Prüfung SHA-256: `198b87b5b939feea57d6638d1dcc00000b2b37c8aef049b2c796103ab4e2fd32`
+- Gegenprüf-Audit SHA-256: `f88201c87e7f5bdd8f007d62523cc572738efe14c028995c3b84b809b3210c23`
 
 ## Datenmodell
 
@@ -92,7 +92,7 @@ Kombinationsbegriffe wie „wenig Zeit“ werden aus Grundmerkmalen abgeleitet u
 - terminale CORE-Hobbyseiten: **381/381 enthalten PASS**;
 - Alias-Dubletten aus altem Master: **entfernt/gebunden PASS**;
 - schräge Testidentitäten (u. a. Lockpicking, Mushroom Spore Printing, Koji-Kultivierung, Räuchermischungen komponieren): **vorhanden PASS**;
-- Eigenschaftswerte wurden **nicht aus Namen geraten**; aktuell 862/862 `PENDING_REVIEW`.
+- Eigenschaftswerte werden **nicht aus Namen geraten**; aktuell **30 geprüft / 832 `PENDING_REVIEW`**.
 
 ## 20er-Pilot 2026-10-20
 
@@ -112,10 +112,40 @@ Persistenter Audit:
 Register-SHA nach Pilot:
 `55d6a0d0281affb1342f63fa7cbf591951a76077c29036e97920c52c3378fbdd`
 
+## 10er-Gegenprobe / Schema 1.1
+
+Zusätzlich vollständig klassifiziert:
+Unterwasserhockey, Bubble Soccer, Drone Soccer, Pen-&-Paper-Rollenspiele, Historical Reenactment, Holzwerken, Kanutouren, RC-Segelboote, Slotcar Racing, Tabletop Wargaming.
+
+Ergebnis:
+- insgesamt **30 Hobbys × 54 Eigenschaften = 1620 geprüfte Zuordnungen**;
+- Gruppenpflicht, zentraler Wettbewerb, öffentliche Ausübung, laute/staubige Werkstatt, Schwimmbad, Gewässer und sehr großer Platzbedarf: **PASS**;
+- echter Modellfehler gefunden und korrigiert: `active_space` vermischte Größe und Ortsart;
+- Schema 1.1 trennt Platzgröße sauber von Ort/Infrastruktur;
+- Sportanlage/Halle, Schwimmbad/Pool und Gewässer als Ortswerte ergänzt;
+- danach vollständige Gegenprobe ohne weiteren Schemafehler: **PASS**;
+- Schema 1.1 ist damit für die Massenklassifikation **eingefroren**.
+
+Audit:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATION_COUNTERCHECK30_AUDIT_V1.json`
+
+## Hobbyfinder V1
+
+Maschinenlesbares Konzept:
+`/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FUNNEL_V1.json`
+
+Lokale Simulation:
+`/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FUNNEL_SIMULATION_V1.json`
+
+Klickbarer Prototyp:
+`/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_PROTOTYP_V1.html`
+
+Funnel: 8 Schritte – Motivation, Sozialform, Ort, Zeit, Budget, Platz, Aktivität, Verbindlichkeit. Die übrigen Traits bleiben Hintergrundlogik bzw. Feinfilter. Vier unterschiedliche Testprofile lieferten vier unterschiedliche Top-Treffer.
+
 ## ERSTER OFFENER BLOCKER
 
-Der 20er-Pilot ist vollständig befüllt. Vor der Massenklassifikation fehlen noch gezielte Gegenproben für im Pilot unterrepräsentierte Hobbytypen.
+Die zentrale Logik ist belastbar; **832 Hobbyidentitäten sind noch nicht fachlich klassifiziert**. Der UI-Prototyp ist noch nicht vom Nutzer gestalterisch abgenommen.
 
 ## EXAKT EINE NEXT ACTION
 
-**Einen kleinen gezielten Gegenprobe-Satz für gruppenabhängige, wettbewerbliche, öffentliche, laute und wassergebundene Hobbys klassifizieren. Danach Schema einfrieren und erst dann die 842 übrigen Hobbyidentitäten systematisch befüllen.**
+**Die restlichen 832 Hobbyidentitäten in kontrollierten Batches nach Schema 1.1 klassifizieren. Unklare Werte bleiben UNKNOWN; keine Name-only-Autoklassifikation. Parallel darf der UI-Prototyp erst nach Nutzerfeedback gestalterisch weiterentwickelt werden.**
