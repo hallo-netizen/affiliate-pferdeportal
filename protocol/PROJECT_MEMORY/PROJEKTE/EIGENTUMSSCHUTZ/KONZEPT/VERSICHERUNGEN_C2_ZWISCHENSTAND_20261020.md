@@ -1,4 +1,8 @@
 # Versicherungen – überprüfter Struktur- und Recherchezwischenstand, 20.10.2026
+
+## Codeprüfung vom 20.10.2026 – korrigierter Rechercheweg
+Die tatsächliche Plugin-Quelldatei `includes/class-apkw-final-target-admin.php` aus dem bestehenden ZIP 1.14.8.32 enthält bereits den Menüpunkt **Portal-Kategorien → DataForSEO Recherche**. Hier werden JSON-Keyworddateien über `apkw_dfs_overview_input` kostenlos vorgeprüft (`dfs_overview_preflight`) und erst nach ausdrücklicher Freigabe einmalig abgefragt (`dfs_overview_execute_action`); danach automatischer JSON-Download. Exaktes fertiges 68er-Uploadformat: `VERSICHERUNGEN_DATAFORSEO_PRECHECK_68_20261020.json`. `SEO-Namen prüfen` ist NICHT dafür gedacht: `APKW_Category_SEO_Audit::profile/plan` liest ausschließlich das derzeit aktive CORE-Profil und feste Alternativen. Erst Upload und Vorprüfung über **DataForSEO Recherche**, danach kontrollierte Abfrage und Ergebnisauswertung. Noch keine neue Provider-Abfrage und kein WordPress-Import ausgeführt.
+
 ## Unveränderte Fachregeln
 Neue siebte Hauptkategorie im bereits vorhandenen Kategorieplugin. R2-Bereiche mindestens drei direkte R3-Themen; unterste konkrete Versicherungs-R3-Seite je **eine Versicherungsart**, darunter nur fachlich tragfähige flache Beitragskategorien. Je unterster Beitragskategorie grob >=3 eigenständige spätere Beiträge, ohne Obergrenze. FAQ und Beratung nach bestehendem C2.3-Fachvertrag, übrige Kategorien individuell. Keine zweite Architektur, keine Überarbeitung der alten 265 Eigentumsschutz-Themen, keine erneute 743/472-Importwelle.
 
