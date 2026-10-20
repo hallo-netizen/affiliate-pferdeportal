@@ -98,6 +98,19 @@ final class APKW_Insurance_94_AddOnly {
             throw new RuntimeException('Versicherung: kein konsistenter aktiver Zielbaum.');
         if((int)($snap['settings']['expected_world_count']??0)!==6)
             throw new RuntimeException('Versicherung: unerwartete Zahl vorhandener Hauptwelten.');
+        // Navigation lives in the existing target snapshot, not in a second menu.
+        $nav=$snap['project']['header_navigation']??null;
+        if(!is_array($nav)||empty($nav['enabled'])||!is_array($nav['roots']??null))
+            throw new RuntimeException('Versicherung: bestehende Headernavigation nicht eindeutig.');
+        $worldRoots=0;
+        foreach($nav['roots'] as $root){
+            $nid=(string)($root['node_id']??'');
+            if($nid==='core:world:insurance')
+                throw new RuntimeException('Versicherung: siebter Hauptbereich bereits im Menü.');
+            if(str_starts_with($nid,'core:world:'))$worldRoots++;
+        }
+        if($worldRoots!==6)
+            throw new RuntimeException('Versicherung: vorhandene sechs Menühauptbereiche nicht nachgewiesen.');
         $s=APKW_TargetTreeSync::state();
         if(in_array((string)($s['status']??''),['WRITING','READBACK','ROLLBACK_PENDING'],true))
             throw new RuntimeException('Versicherung: anderer Zielbaumlauf noch aktiv.');
@@ -220,6 +233,17 @@ final class APKW_Insurance_94_AddOnly {
                 'insurance_add_only'=>true];
             $stage['mapping'][$job['node_id']]=$s['mapping'][$job['node_id']];
         }
+        // ADD only the seventh header root, directly before magazine/directory.
+        // Keep all historic header roots and their order unchanged.
+        $roots=$stage['project']['header_navigation']['roots'];
+        $insert=count($roots);
+        foreach($roots as $i=>$root){
+            if(!str_starts_with((string)($root['node_id']??''),'core:world:')){
+                $insert=$i;break;
+            }
+        }
+        array_splice($roots,$insert,0,[['node_id'=>'core:world:insurance','child_depth'=>1]]);
+        $stage['project']['header_navigation']['roots']=$roots;
         $stage['revision']=self::revision($s['base_revision']);
         $stage['settings']['expected_world_count']=7;
         $stage['project']['insurance_94_applied_at_utc']=gmdate('c');
