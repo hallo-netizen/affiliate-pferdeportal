@@ -59,6 +59,17 @@ Plugin-Wahrheit:
 Fach-Current:
 `../BILD/CURRENT_STATE.md`
 
+## HD-007 – Hobbyregister Core
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`
+
+Rolle:
+schlanker read-only Laufzeitkern für das zentrale Hobbyregister und die Hobbyfinder-Lese-API; keine zweite fachliche Datenhaltung.
+
+Fach-Current:
+`../WISSENSDATENBANK/CURRENT_STATE.md`
+
 ## EXAKT EINE NEXT ACTION
 
 Für die Kategorie-Verschlankung:
