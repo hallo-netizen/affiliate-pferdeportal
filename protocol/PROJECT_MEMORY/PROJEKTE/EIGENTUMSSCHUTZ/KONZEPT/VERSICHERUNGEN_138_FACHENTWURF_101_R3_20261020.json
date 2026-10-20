@@ -1,0 +1,1046 @@
+{
+  "schema": "HAB_UND_BEWAHR_VERSICHERUNGEN_KANDIDATEN_20261020_V2",
+  "state": "NUR_KONZEPT_NICHT_IMPORTIERBAR",
+  "first_source": "VERSICHERUNGEN_C2_SEITENBAUM_20261020.json",
+  "source_dataforseo_exports": [
+    "hab-bewahr-dataforseo-overview-20261020-125821-utc.json",
+    "hab-bewahr-dataforseo-overview-20261020-132010-utc.json"
+  ],
+  "provider_verified": {
+    "first": {
+      "requested": 68,
+      "result_rows": 62,
+      "time_seconds": 0.4075,
+      "cost_usd": 0.01944
+    },
+    "second": {
+      "requested": 70,
+      "result_rows": 66,
+      "time_seconds": 0.4421,
+      "cost_usd": 0.01992
+    },
+    "total_requested": 138,
+    "total_result_rows": 128,
+    "total_no_rows": 10,
+    "total_cost_usd": 0.03936
+  },
+  "rules": {
+    "one_r3_owner_per_insurance": true,
+    "each_r2_has_three_or_more_r3": true,
+    "three_independent_article_intents_per_last_category": "FACHPRUEFUNG_AUSSTEHEND",
+    "no_import": true,
+    "existing_wordpress_objects_not_modified": true,
+    "keyword_overview_not_ideas_search": true
+  },
+  "r1": "Versicherungen",
+  "r2_areas": [
+    {
+      "area": "Arbeitskraft & Einkommen",
+      "count": 9,
+      "owner_names": [
+        "Berufsunfähigkeitsversicherung",
+        "Dienstunfähigkeitsversicherung",
+        "Erwerbsunfähigkeitsversicherung",
+        "Gesetzliche Arbeitslosenversicherung",
+        "Gesetzliche Unfallversicherung",
+        "Grundfähigkeitsversicherung",
+        "Kinderinvaliditätsversicherung",
+        "Private Unfallversicherung",
+        "Schwere-Krankheiten-Versicherung"
+      ]
+    },
+    {
+      "area": "Finanzielle Risiken",
+      "count": 3,
+      "owner_names": [
+        "Mietausfallversicherung",
+        "Mietkautionsversicherung",
+        "Restschuldversicherung"
+      ]
+    },
+    {
+      "area": "Gesundheit & Pflege",
+      "count": 9,
+      "owner_names": [
+        "Ambulante Zusatzversicherung",
+        "Gesetzliche Krankenversicherung",
+        "Krankenhaustagegeldversicherung",
+        "Krankenhauszusatzversicherung",
+        "Krankentagegeldversicherung",
+        "Pflegezusatzversicherung",
+        "Private Krankenversicherung",
+        "Soziale Pflegeversicherung",
+        "Zahnzusatzversicherung"
+      ]
+    },
+    {
+      "area": "Haftung & Recht",
+      "count": 8,
+      "owner_names": [
+        "Bauherrenhaftpflichtversicherung",
+        "Drohnenhaftpflichtversicherung",
+        "Gewässerschadenhaftpflichtversicherung",
+        "Haus- und Grundbesitzerhaftpflichtversicherung",
+        "Jagdhaftpflichtversicherung",
+        "Privathaftpflichtversicherung",
+        "Rechtsschutzversicherung",
+        "Verkehrsrechtsschutzversicherung"
+      ]
+    },
+    {
+      "area": "Kleine Betriebe",
+      "count": 19,
+      "owner_names": [
+        "Berufshaftpflichtversicherung",
+        "Betriebliche Krankenversicherung",
+        "Betriebshaftpflichtversicherung",
+        "Betriebsschließungsversicherung",
+        "Betriebsunterbrechungsversicherung",
+        "Cyberversicherung für Kleinbetriebe",
+        "D&O-Versicherung",
+        "Elektronikversicherung für Betriebe",
+        "Firmenrechtsschutzversicherung",
+        "Geschäftsinhaltsversicherung",
+        "Gewerbegebäudeversicherung",
+        "Gruppenunfallversicherung",
+        "Kreditversicherung für Betriebe",
+        "Maschinenversicherung",
+        "Transportversicherung für Betriebe",
+        "Umwelthaftpflichtversicherung",
+        "Umweltschadenversicherung",
+        "Vermögensschadenhaftpflichtversicherung",
+        "Vertrauensschadenversicherung"
+      ]
+    },
+    {
+      "area": "Leben & Alter",
+      "count": 9,
+      "owner_names": [
+        "Basisrentenversicherung",
+        "Betriebliche Direktversicherung",
+        "Fondsgebundene Lebensversicherung",
+        "Gesetzliche Rentenversicherung",
+        "Kapitallebensversicherung",
+        "Private Rentenversicherung",
+        "Riester-Rentenversicherung",
+        "Risikolebensversicherung",
+        "Sterbegeldversicherung"
+      ]
+    },
+    {
+      "area": "Mobilität",
+      "count": 10,
+      "owner_names": [
+        "Anhänger-Versicherung",
+        "Bootsversicherung",
+        "E-Scooter-Versicherung",
+        "Fahrradversicherung",
+        "Kfz-Versicherung",
+        "Mopedversicherung",
+        "Motorradversicherung",
+        "Oldtimerversicherung",
+        "Wohnmobilversicherung",
+        "Wohnwagenversicherung"
+      ]
+    },
+    {
+      "area": "Reisen & Freizeit",
+      "count": 6,
+      "owner_names": [
+        "Auslandskrankenversicherung",
+        "Campingversicherung",
+        "Reiseabbruchversicherung",
+        "Reisegepäckversicherung",
+        "Reiserücktrittsversicherung",
+        "Sportgeräteversicherung"
+      ]
+    },
+    {
+      "area": "Tiere",
+      "count": 8,
+      "owner_names": [
+        "Hunde-OP-Versicherung",
+        "Hundehaftpflichtversicherung",
+        "Hundekrankenversicherung",
+        "Katzen-OP-Versicherung",
+        "Katzenkrankenversicherung",
+        "Pferde-OP-Versicherung",
+        "Pferdehaftpflichtversicherung",
+        "Pferdekrankenversicherung"
+      ]
+    },
+    {
+      "area": "Vereine & Veranstaltungen",
+      "count": 3,
+      "owner_names": [
+        "Veranstalterhaftpflichtversicherung",
+        "Veranstaltungsausfallversicherung",
+        "Vereinshaftpflichtversicherung"
+      ]
+    },
+    {
+      "area": "Wertsachen & Technik",
+      "count": 9,
+      "owner_names": [
+        "Brillenversicherung",
+        "Handyversicherung",
+        "Hörgeräteversicherung",
+        "Kunstversicherung",
+        "Laptopversicherung",
+        "Musikinstrumentenversicherung",
+        "Private Cyberversicherung",
+        "Schmuckversicherung",
+        "Uhrenversicherung"
+      ]
+    },
+    {
+      "area": "Wohnen & Bauen",
+      "count": 8,
+      "owner_names": [
+        "Bauleistungsversicherung",
+        "Ferienhausversicherung",
+        "Feuerrohbauversicherung",
+        "Glasversicherung",
+        "Hausratversicherung",
+        "Kleingartenversicherung",
+        "Photovoltaikversicherung",
+        "Wohngebäudeversicherung"
+      ]
+    }
+  ],
+  "r3_pages": [
+    {
+      "name": "Hausratversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:hausratversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Wohngebäudeversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:wohngebaudeversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Glasversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:glasversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Photovoltaikversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:photovoltaikversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Bauleistungsversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:bauleistungsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Feuerrohbauversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:feuerrohbauversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kfz-Versicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kfz-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Motorradversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:motorradversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Mopedversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:mopedversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Wohnmobilversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:wohnmobilversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Wohnwagenversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:wohnwagenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Fahrradversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:fahrradversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "E-Scooter-Versicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:e-scooter-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Bootsversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:bootsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Oldtimerversicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:oldtimerversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Anhänger-Versicherung",
+      "area": "Mobilität",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:anhanger-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Privathaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:privathaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:haus-und-grundbesitzerhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gewässerschadenhaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gewasserschadenhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Bauherrenhaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:bauherrenhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Jagdhaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:jagdhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Rechtsschutzversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:rechtsschutzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Verkehrsrechtsschutzversicherung",
+      "area": "Haftung & Recht",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:verkehrsrechtsschutzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gesetzliche Krankenversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gesetzliche-krankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Private Krankenversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:private-krankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Zahnzusatzversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:zahnzusatzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Krankenhauszusatzversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:krankenhauszusatzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Ambulante Zusatzversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:ambulante-zusatzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Pflegezusatzversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:pflegezusatzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Krankentagegeldversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:krankentagegeldversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Krankenhaustagegeldversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:krankenhaustagegeldversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Berufsunfähigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:berufsunfahigkeitsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Erwerbsunfähigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:erwerbsunfahigkeitsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Grundfähigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:grundfahigkeitsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Dienstunfähigkeitsversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:dienstunfahigkeitsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Schwere-Krankheiten-Versicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:schwere-krankheiten-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Risikolebensversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:risikolebensversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kapitallebensversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kapitallebensversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Fondsgebundene Lebensversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:fondsgebundene-lebensversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Private Rentenversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:private-rentenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Riester-Rentenversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:riester-rentenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Basisrentenversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:basisrentenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Betriebliche Direktversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:betriebliche-direktversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gesetzliche Rentenversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gesetzliche-rentenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Sterbegeldversicherung",
+      "area": "Leben & Alter",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:sterbegeldversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Reiserücktrittsversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:reiserucktrittsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Reiseabbruchversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:reiseabbruchversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Reisegepäckversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:reisegepackversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Auslandskrankenversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:auslandskrankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Campingversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:campingversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Sportgeräteversicherung",
+      "area": "Reisen & Freizeit",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:sportgerateversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Betriebshaftpflichtversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:betriebshaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Berufshaftpflichtversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:berufshaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Vermögensschadenhaftpflichtversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:vermogensschadenhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Geschäftsinhaltsversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:geschaftsinhaltsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Betriebsunterbrechungsversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:betriebsunterbrechungsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Cyberversicherung für Kleinbetriebe",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:cyberversicherung-fur-kleinbetriebe",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Firmenrechtsschutzversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:firmenrechtsschutzversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gewerbegebäudeversicherung",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gewerbegebaudeversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Elektronikversicherung für Betriebe",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:elektronikversicherung-fur-betriebe",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Transportversicherung für Betriebe",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:transportversicherung-fur-betriebe",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kreditversicherung für Betriebe",
+      "area": "Kleine Betriebe",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kreditversicherung-fur-betriebe",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Restschuldversicherung",
+      "area": "Finanzielle Risiken",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:restschuldversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Mietkautionsversicherung",
+      "area": "Finanzielle Risiken",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:mietkautionsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Mietausfallversicherung",
+      "area": "Finanzielle Risiken",
+      "source": "original_68",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:mietausfallversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Ferienhausversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:ferienhausversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kleingartenversicherung",
+      "area": "Wohnen & Bauen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kleingartenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Handyversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:handyversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Laptopversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:laptopversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Musikinstrumentenversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:musikinstrumentenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Schmuckversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:schmuckversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kunstversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kunstversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Uhrenversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:uhrenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Brillenversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:brillenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Hörgeräteversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:horgerateversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Private Cyberversicherung",
+      "area": "Wertsachen & Technik",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:private-cyberversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Drohnenhaftpflichtversicherung",
+      "area": "Haftung & Recht",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:drohnenhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Soziale Pflegeversicherung",
+      "area": "Gesundheit & Pflege",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:soziale-pflegeversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Private Unfallversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:private-unfallversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Kinderinvaliditätsversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:kinderinvaliditatsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gesetzliche Unfallversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gesetzliche-unfallversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gesetzliche Arbeitslosenversicherung",
+      "area": "Arbeitskraft & Einkommen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gesetzliche-arbeitslosenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Hundehaftpflichtversicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:hundehaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Pferdehaftpflichtversicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:pferdehaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Hunde-OP-Versicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:hunde-op-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Katzen-OP-Versicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:katzen-op-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Pferde-OP-Versicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:pferde-op-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Hundekrankenversicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:hundekrankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Katzenkrankenversicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:katzenkrankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Pferdekrankenversicherung",
+      "area": "Tiere",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:pferdekrankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "D&O-Versicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:dundo-versicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Vertrauensschadenversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:vertrauensschadenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Betriebsschließungsversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:betriebsschliessungsversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Betriebliche Krankenversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:betriebliche-krankenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Gruppenunfallversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:gruppenunfallversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Maschinenversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:maschinenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Umwelthaftpflichtversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:umwelthaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Umweltschadenversicherung",
+      "area": "Kleine Betriebe",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:umweltschadenversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Vereinshaftpflichtversicherung",
+      "area": "Vereine & Veranstaltungen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:vereinshaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Veranstalterhaftpflichtversicherung",
+      "area": "Vereine & Veranstaltungen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:veranstalterhaftpflichtversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    },
+    {
+      "name": "Veranstaltungsausfallversicherung",
+      "area": "Vereine & Veranstaltungen",
+      "source": "nachrecherche_70",
+      "status": "FACHPRUEFUNG_OFFEN",
+      "owner_key": "hb:versicherungen:veranstaltungsausfallversicherung",
+      "article_categories": "NICHT_ABGENOMMEN"
+    }
+  ],
+  "former_three_generic_animal_owners": [
+    {
+      "name": "Tierhalterhaftpflichtversicherung",
+      "state": "OVERVIEW_KEINE_DOPPELTE_R3_ENDSEITE"
+    },
+    {
+      "name": "Tierkrankenversicherung",
+      "state": "OVERVIEW_KEINE_DOPPELTE_R3_ENDSEITE"
+    },
+    {
+      "name": "Tier-OP-Versicherung",
+      "state": "OVERVIEW_KEINE_DOPPELTE_R3_ENDSEITE"
+    }
+  ],
+  "hold_candidates": [
+    "Bauhelfer-Unfallversicherung",
+    "Elektronikversicherung",
+    "Kautionsversicherung",
+    "Mietwagen-Selbstbeteiligungsversicherung",
+    "Drohnenkaskoversicherung",
+    "Ausbildungsversicherung",
+    "Tierlebensversicherung"
+  ],
+  "last_action": "138 Begriffe von DataForSEO gemessen und fachlich auf 101 mögliche R3-Seiten ohne eindeutige Namen-Dopplungen aufgeteilt",
+  "next_action": "7 HOLD-Fälle und weitere Grenzfälle fachlich anhand Versicherungsbedingungen aufklären; End-Beitragskategorien mit mindestens 3 unabhängigen Artikelintentionen je Endkategorie festlegen; vor jeglichem WP-Write bestehenden ADD-only Dry-Run gegen aktuellen Live-Bestand durchführen."
+}
