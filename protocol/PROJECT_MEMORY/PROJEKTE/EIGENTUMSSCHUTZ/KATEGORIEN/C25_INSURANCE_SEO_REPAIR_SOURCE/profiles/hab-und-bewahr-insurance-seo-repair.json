@@ -1,0 +1,2845 @@
+{
+  "schema": "HB_INSURANCE_SEO_REPAIR_DESIGN_V1",
+  "created": "2026-10-20",
+  "status": "TECHNISCHES_ERSETZUNGSKONZEPT_NO_WP_WRITE_NOT_IMPORT_APPROVED",
+  "source": {
+    "real_c24_profile_sha": "9640dbba394b5b6a04eed1743da4a520c7a617a7",
+    "source_insurance_count": 105,
+    "provider_exports": [
+      "hab-bewahr-dataforseo-overview-20261020-125821-utc.json",
+      "hab-bewahr-dataforseo-overview-20261020-132010-utc.json"
+    ],
+    "provider_result_count": 128,
+    "provider_cost_usd_total": 0.03936,
+    "provider_scope": "2x keyword_overview_de_DE; keyword names only; not keyword ideas"
+  },
+  "contract": {
+    "r1": 1,
+    "r2": 5,
+    "r3": 46,
+    "flat_wordpress_terms": 138,
+    "page_count": 52,
+    "total_nodes": 190,
+    "original_import_nodes_to_repair": 94,
+    "all_original_insurance_types": 105,
+    "keyword_page_types": 46,
+    "rare_coverage_as_later_posts": 66,
+    "never_touch": "Sechs bisherige Hauptwelten, ihre IDs, Slugs, Parentrelationen, Artikel und Kategorien",
+    "technical_path": "Bestehendes Kategorieplugin: separate, abgesicherte Korrektur der neu importierten Versicherungsknoten. Keine Zweitarchitektur.",
+    "navigation": "Bestehendes Designplugin: 5 Bereichsspalten, je max. 4 direkte R3-Links plus Alle Themen; alle 46 auf R2-Hubs erreichbar."
+  },
+  "pages": [
+    {
+      "level": "R1",
+      "title": "Versicherungen",
+      "slug": "versicherungen",
+      "key": "INS-COMP:R1",
+      "parent": null
+    },
+    {
+      "level": "R2",
+      "title": "Hausrat & Gebäude",
+      "slug": "hausrat-und-gebaude",
+      "key": "INS-SEO:R2:hausrat-und-gebaude",
+      "parent": "INS-COMP:R1",
+      "status": "SEO_BEREICHSBEZEICHNUNG_KEINE_VOLUME_BEHAUPTUNG"
+    },
+    {
+      "level": "R3",
+      "title": "Hausratversicherung",
+      "slug": "hausratversicherung",
+      "key": "INS-SEO:R3:hausratversicherung",
+      "parent": "INS-SEO:R2:hausrat-und-gebaude",
+      "verified_search_volume": 49500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Wohngebäudeversicherung",
+      "slug": "wohngebaudeversicherung",
+      "key": "INS-SEO:R3:wohngebaudeversicherung",
+      "parent": "INS-SEO:R2:hausrat-und-gebaude",
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Bauleistungsversicherung",
+      "slug": "bauleistungsversicherung",
+      "key": "INS-SEO:R3:bauleistungsversicherung",
+      "parent": "INS-SEO:R2:hausrat-und-gebaude",
+      "verified_search_volume": 3600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Mietausfallversicherung",
+      "slug": "mietausfallversicherung",
+      "key": "INS-SEO:R3:mietausfallversicherung",
+      "parent": "INS-SEO:R2:hausrat-und-gebaude",
+      "verified_search_volume": 1900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Elektronikversicherung",
+      "slug": "elektronikversicherung",
+      "key": "INS-SEO:R3:elektronikversicherung",
+      "parent": "INS-SEO:R2:hausrat-und-gebaude",
+      "verified_search_volume": 720,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R2",
+      "title": "Fahrzeuge & Reisen",
+      "slug": "fahrzeuge-und-reisen",
+      "key": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "parent": "INS-COMP:R1",
+      "status": "SEO_BEREICHSBEZEICHNUNG_KEINE_VOLUME_BEHAUPTUNG"
+    },
+    {
+      "level": "R3",
+      "title": "Kfz-Versicherung",
+      "slug": "kfz-versicherung",
+      "key": "INS-SEO:R3:kfz-versicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Fahrradversicherung",
+      "slug": "fahrradversicherung",
+      "key": "INS-SEO:R3:fahrradversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "E-Scooter-Versicherung",
+      "slug": "e-scooter-versicherung",
+      "key": "INS-SEO:R3:e-scooter-versicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Wohnmobilversicherung",
+      "slug": "wohnmobilversicherung",
+      "key": "INS-SEO:R3:wohnmobilversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 3600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Motorradversicherung",
+      "slug": "motorradversicherung",
+      "key": "INS-SEO:R3:motorradversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 2900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Bootsversicherung",
+      "slug": "bootsversicherung",
+      "key": "INS-SEO:R3:bootsversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 1000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Reiserücktrittsversicherung",
+      "slug": "reiserucktrittsversicherung",
+      "key": "INS-SEO:R3:reiserucktrittsversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 74000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Auslandskrankenversicherung",
+      "slug": "auslandskrankenversicherung",
+      "key": "INS-SEO:R3:auslandskrankenversicherung",
+      "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
+      "verified_search_volume": 74000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R2",
+      "title": "Haftpflicht & Rechtsschutz",
+      "slug": "haftpflicht-und-rechtsschutz",
+      "key": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "parent": "INS-COMP:R1",
+      "status": "SEO_BEREICHSBEZEICHNUNG_KEINE_VOLUME_BEHAUPTUNG"
+    },
+    {
+      "level": "R3",
+      "title": "Privathaftpflichtversicherung",
+      "slug": "privathaftpflichtversicherung",
+      "key": "INS-SEO:R3:privathaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Rechtsschutzversicherung",
+      "slug": "rechtsschutzversicherung",
+      "key": "INS-SEO:R3:rechtsschutzversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Bauherrenhaftpflichtversicherung",
+      "slug": "bauherrenhaftpflichtversicherung",
+      "key": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 1600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "slug": "haus-und-grundbesitzerhaftpflichtversicherung",
+      "key": "INS-SEO:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": null,
+      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+    },
+    {
+      "level": "R3",
+      "title": "Drohnenhaftpflichtversicherung",
+      "slug": "drohnenhaftpflichtversicherung",
+      "key": "INS-SEO:R3:drohnenhaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 90,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Hundehaftpflichtversicherung",
+      "slug": "hundehaftpflichtversicherung",
+      "key": "INS-SEO:R3:hundehaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 12100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Pferdehaftpflichtversicherung",
+      "slug": "pferdehaftpflichtversicherung",
+      "key": "INS-SEO:R3:pferdehaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 1000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Tierkrankenversicherung",
+      "slug": "tierkrankenversicherung",
+      "key": "INS-SEO:R3:tierkrankenversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 8100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Vereinshaftpflichtversicherung",
+      "slug": "vereinshaftpflichtversicherung",
+      "key": "INS-SEO:R3:vereinshaftpflichtversicherung",
+      "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
+      "verified_search_volume": 720,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R2",
+      "title": "Krankenversicherung & Vorsorge",
+      "slug": "krankenversicherung-und-vorsorge",
+      "key": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "parent": "INS-COMP:R1",
+      "status": "SEO_BEREICHSBEZEICHNUNG_KEINE_VOLUME_BEHAUPTUNG"
+    },
+    {
+      "level": "R3",
+      "title": "Gesetzliche Krankenversicherung",
+      "slug": "gesetzliche-krankenversicherung",
+      "key": "INS-SEO:R3:gesetzliche-krankenversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Private Krankenversicherung",
+      "slug": "private-krankenversicherung",
+      "key": "INS-SEO:R3:private-krankenversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 60500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Zahnzusatzversicherung",
+      "slug": "zahnzusatzversicherung",
+      "key": "INS-SEO:R3:zahnzusatzversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Krankenhauszusatzversicherung",
+      "slug": "krankenhauszusatzversicherung",
+      "key": "INS-SEO:R3:krankenhauszusatzversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Krankentagegeldversicherung",
+      "slug": "krankentagegeldversicherung",
+      "key": "INS-SEO:R3:krankentagegeldversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Pflegezusatzversicherung",
+      "slug": "pflegezusatzversicherung",
+      "key": "INS-SEO:R3:pflegezusatzversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 4400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Berufsunfähigkeitsversicherung",
+      "slug": "berufsunfahigkeitsversicherung",
+      "key": "INS-SEO:R3:berufsunfahigkeitsversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 49500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Unfallversicherung",
+      "slug": "unfallversicherung",
+      "key": "INS-SEO:R3:unfallversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Gesetzliche Rentenversicherung",
+      "slug": "gesetzliche-rentenversicherung",
+      "key": "INS-SEO:R3:gesetzliche-rentenversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 33100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Private Rentenversicherung",
+      "slug": "private-rentenversicherung",
+      "key": "INS-SEO:R3:private-rentenversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 14800,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Betriebliche Altersvorsorge",
+      "slug": "betriebliche-altersvorsorge",
+      "key": "INS-SEO:R3:betriebliche-altersvorsorge",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Risikolebensversicherung",
+      "slug": "risikolebensversicherung",
+      "key": "INS-SEO:R3:risikolebensversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 22200,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Kapitallebensversicherung",
+      "slug": "kapitallebensversicherung",
+      "key": "INS-SEO:R3:kapitallebensversicherung",
+      "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
+      "verified_search_volume": 4400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R2",
+      "title": "Gewerbeversicherungen & Finanzen",
+      "slug": "gewerbeversicherungen-und-finanzen",
+      "key": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "parent": "INS-COMP:R1",
+      "status": "SEO_BEREICHSBEZEICHNUNG_KEINE_VOLUME_BEHAUPTUNG"
+    },
+    {
+      "level": "R3",
+      "title": "Betriebshaftpflichtversicherung",
+      "slug": "betriebshaftpflichtversicherung",
+      "key": "INS-SEO:R3:betriebshaftpflichtversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Berufshaftpflichtversicherung",
+      "slug": "berufshaftpflichtversicherung",
+      "key": "INS-SEO:R3:berufshaftpflichtversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 8100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Geschäftsinhaltsversicherung",
+      "slug": "geschaftsinhaltsversicherung",
+      "key": "INS-SEO:R3:geschaftsinhaltsversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 320,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Betriebsunterbrechungsversicherung",
+      "slug": "betriebsunterbrechungsversicherung",
+      "key": "INS-SEO:R3:betriebsunterbrechungsversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 590,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Firmenrechtsschutzversicherung",
+      "slug": "firmenrechtsschutzversicherung",
+      "key": "INS-SEO:R3:firmenrechtsschutzversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 590,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "D&O-Versicherung",
+      "slug": "dundo-versicherung",
+      "key": "INS-SEO:R3:dundo-versicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 6600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Cyberversicherung",
+      "slug": "cyberversicherung",
+      "key": "INS-SEO:R3:cyberversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 1300,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Kautionsversicherung",
+      "slug": "kautionsversicherung",
+      "key": "INS-SEO:R3:kautionsversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Restschuldversicherung",
+      "slug": "restschuldversicherung",
+      "key": "INS-SEO:R3:restschuldversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 5400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Betriebliche Krankenversicherung",
+      "slug": "betriebliche-krankenversicherung",
+      "key": "INS-SEO:R3:betriebliche-krankenversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 2900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    },
+    {
+      "level": "R3",
+      "title": "Warenkreditversicherung",
+      "slug": "warenkreditversicherung",
+      "key": "INS-SEO:R3:warenkreditversicherung",
+      "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
+      "verified_search_volume": 880,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
+    }
+  ],
+  "flat_categories": [
+    {
+      "name": "Hausratversicherung: Häufige Fragen",
+      "slug": "vs-hausratversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:hausratversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:hausratversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Hausratversicherung: Beratung",
+      "slug": "vs-hausratversicherung-beratung",
+      "key": "INS-SEO:TERM:hausratversicherung-beratung",
+      "parent": "INS-SEO:R3:hausratversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Hausratversicherung: Diebstahl & Schäden",
+      "slug": "vs-hausratversicherung-diebstahl-und-schaden",
+      "key": "INS-SEO:TERM:hausratversicherung-diebstahl-und-schaden",
+      "parent": "INS-SEO:R3:hausratversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Wohngebäudeversicherung: Häufige Fragen",
+      "slug": "vs-wohngebaudeversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:wohngebaudeversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:wohngebaudeversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Wohngebäudeversicherung: Beratung",
+      "slug": "vs-wohngebaudeversicherung-beratung",
+      "key": "INS-SEO:TERM:wohngebaudeversicherung-beratung",
+      "parent": "INS-SEO:R3:wohngebaudeversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Wohngebäudeversicherung: Elementarschäden",
+      "slug": "vs-wohngebaudeversicherung-elementarschaden",
+      "key": "INS-SEO:TERM:wohngebaudeversicherung-elementarschaden",
+      "parent": "INS-SEO:R3:wohngebaudeversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Bauleistungsversicherung: Häufige Fragen",
+      "slug": "vs-bauleistungsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:bauleistungsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:bauleistungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Bauleistungsversicherung: Beratung",
+      "slug": "vs-bauleistungsversicherung-beratung",
+      "key": "INS-SEO:TERM:bauleistungsversicherung-beratung",
+      "parent": "INS-SEO:R3:bauleistungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Bauleistungsversicherung: Bauschäden",
+      "slug": "vs-bauleistungsversicherung-bauschaden",
+      "key": "INS-SEO:TERM:bauleistungsversicherung-bauschaden",
+      "parent": "INS-SEO:R3:bauleistungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Mietausfallversicherung: Häufige Fragen",
+      "slug": "vs-mietausfallversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:mietausfallversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:mietausfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Mietausfallversicherung: Beratung",
+      "slug": "vs-mietausfallversicherung-beratung",
+      "key": "INS-SEO:TERM:mietausfallversicherung-beratung",
+      "parent": "INS-SEO:R3:mietausfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Mietausfallversicherung: Mietausfälle & Leistungen",
+      "slug": "vs-mietausfallversicherung-mietausfalle-und-leistungen",
+      "key": "INS-SEO:TERM:mietausfallversicherung-mietausfalle-und-leistungen",
+      "parent": "INS-SEO:R3:mietausfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Elektronikversicherung: Häufige Fragen",
+      "slug": "vs-elektronikversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:elektronikversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:elektronikversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Elektronikversicherung: Beratung",
+      "slug": "vs-elektronikversicherung-beratung",
+      "key": "INS-SEO:TERM:elektronikversicherung-beratung",
+      "parent": "INS-SEO:R3:elektronikversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Elektronikversicherung: Geräteschäden",
+      "slug": "vs-elektronikversicherung-gerateschaden",
+      "key": "INS-SEO:TERM:elektronikversicherung-gerateschaden",
+      "parent": "INS-SEO:R3:elektronikversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Kfz-Versicherung: Häufige Fragen",
+      "slug": "vs-kfz-versicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:kfz-versicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:kfz-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Kfz-Versicherung: Beratung",
+      "slug": "vs-kfz-versicherung-beratung",
+      "key": "INS-SEO:TERM:kfz-versicherung-beratung",
+      "parent": "INS-SEO:R3:kfz-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Kfz-Versicherung: Haftpflicht & Kasko",
+      "slug": "vs-kfz-versicherung-haftpflicht-und-kasko",
+      "key": "INS-SEO:TERM:kfz-versicherung-haftpflicht-und-kasko",
+      "parent": "INS-SEO:R3:kfz-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Fahrradversicherung: Häufige Fragen",
+      "slug": "vs-fahrradversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:fahrradversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:fahrradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Fahrradversicherung: Beratung",
+      "slug": "vs-fahrradversicherung-beratung",
+      "key": "INS-SEO:TERM:fahrradversicherung-beratung",
+      "parent": "INS-SEO:R3:fahrradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Fahrradversicherung: Diebstahl & Beschädigung",
+      "slug": "vs-fahrradversicherung-diebstahl-und-beschadigung",
+      "key": "INS-SEO:TERM:fahrradversicherung-diebstahl-und-beschadigung",
+      "parent": "INS-SEO:R3:fahrradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "E-Scooter-Versicherung: Häufige Fragen",
+      "slug": "vs-e-scooter-versicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:e-scooter-versicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:e-scooter-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "E-Scooter-Versicherung: Beratung",
+      "slug": "vs-e-scooter-versicherung-beratung",
+      "key": "INS-SEO:TERM:e-scooter-versicherung-beratung",
+      "parent": "INS-SEO:R3:e-scooter-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "E-Scooter-Versicherung: Versicherungspflicht & Schäden",
+      "slug": "vs-e-scooter-versicherung-versicherungspflicht-und-schaden",
+      "key": "INS-SEO:TERM:e-scooter-versicherung-versicherungspflicht-und-schaden",
+      "parent": "INS-SEO:R3:e-scooter-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Wohnmobilversicherung: Häufige Fragen",
+      "slug": "vs-wohnmobilversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:wohnmobilversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:wohnmobilversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Wohnmobilversicherung: Beratung",
+      "slug": "vs-wohnmobilversicherung-beratung",
+      "key": "INS-SEO:TERM:wohnmobilversicherung-beratung",
+      "parent": "INS-SEO:R3:wohnmobilversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Wohnmobilversicherung: Kasko & Standplatz",
+      "slug": "vs-wohnmobilversicherung-kasko-und-standplatz",
+      "key": "INS-SEO:TERM:wohnmobilversicherung-kasko-und-standplatz",
+      "parent": "INS-SEO:R3:wohnmobilversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Motorradversicherung: Häufige Fragen",
+      "slug": "vs-motorradversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:motorradversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:motorradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Motorradversicherung: Beratung",
+      "slug": "vs-motorradversicherung-beratung",
+      "key": "INS-SEO:TERM:motorradversicherung-beratung",
+      "parent": "INS-SEO:R3:motorradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Motorradversicherung: Kasko & Haftung",
+      "slug": "vs-motorradversicherung-kasko-und-haftung",
+      "key": "INS-SEO:TERM:motorradversicherung-kasko-und-haftung",
+      "parent": "INS-SEO:R3:motorradversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Bootsversicherung: Häufige Fragen",
+      "slug": "vs-bootsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:bootsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:bootsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Bootsversicherung: Beratung",
+      "slug": "vs-bootsversicherung-beratung",
+      "key": "INS-SEO:TERM:bootsversicherung-beratung",
+      "parent": "INS-SEO:R3:bootsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Bootsversicherung: Havarie & Diebstahl",
+      "slug": "vs-bootsversicherung-havarie-und-diebstahl",
+      "key": "INS-SEO:TERM:bootsversicherung-havarie-und-diebstahl",
+      "parent": "INS-SEO:R3:bootsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Reiserücktrittsversicherung: Häufige Fragen",
+      "slug": "vs-reiserucktrittsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:reiserucktrittsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:reiserucktrittsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Reiserücktrittsversicherung: Beratung",
+      "slug": "vs-reiserucktrittsversicherung-beratung",
+      "key": "INS-SEO:TERM:reiserucktrittsversicherung-beratung",
+      "parent": "INS-SEO:R3:reiserucktrittsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Reiserücktrittsversicherung: Stornierung & Leistungen",
+      "slug": "vs-reiserucktrittsversicherung-stornierung-und-leistungen",
+      "key": "INS-SEO:TERM:reiserucktrittsversicherung-stornierung-und-leistungen",
+      "parent": "INS-SEO:R3:reiserucktrittsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Auslandskrankenversicherung: Häufige Fragen",
+      "slug": "vs-auslandskrankenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:auslandskrankenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:auslandskrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Auslandskrankenversicherung: Beratung",
+      "slug": "vs-auslandskrankenversicherung-beratung",
+      "key": "INS-SEO:TERM:auslandskrankenversicherung-beratung",
+      "parent": "INS-SEO:R3:auslandskrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Auslandskrankenversicherung: Behandlung & Erstattung",
+      "slug": "vs-auslandskrankenversicherung-behandlung-und-erstattung",
+      "key": "INS-SEO:TERM:auslandskrankenversicherung-behandlung-und-erstattung",
+      "parent": "INS-SEO:R3:auslandskrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Privathaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-privathaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:privathaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:privathaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Privathaftpflichtversicherung: Beratung",
+      "slug": "vs-privathaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:privathaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:privathaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Privathaftpflichtversicherung: Schadenfälle",
+      "slug": "vs-privathaftpflichtversicherung-schadenfalle",
+      "key": "INS-SEO:TERM:privathaftpflichtversicherung-schadenfalle",
+      "parent": "INS-SEO:R3:privathaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Rechtsschutzversicherung: Häufige Fragen",
+      "slug": "vs-rechtsschutzversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:rechtsschutzversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:rechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Rechtsschutzversicherung: Beratung",
+      "slug": "vs-rechtsschutzversicherung-beratung",
+      "key": "INS-SEO:TERM:rechtsschutzversicherung-beratung",
+      "parent": "INS-SEO:R3:rechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Rechtsschutzversicherung: Leistungen & Streitfälle",
+      "slug": "vs-rechtsschutzversicherung-leistungen-und-streitfalle",
+      "key": "INS-SEO:TERM:rechtsschutzversicherung-leistungen-und-streitfalle",
+      "parent": "INS-SEO:R3:rechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Bauherrenhaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-bauherrenhaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:bauherrenhaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Bauherrenhaftpflichtversicherung: Beratung",
+      "slug": "vs-bauherrenhaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:bauherrenhaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Bauherrenhaftpflichtversicherung: Baustellenhaftung",
+      "slug": "vs-bauherrenhaftpflichtversicherung-baustellenhaftung",
+      "key": "INS-SEO:TERM:bauherrenhaftpflichtversicherung-baustellenhaftung",
+      "parent": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-haus-und-grundbesitzerhaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:haus-und-grundbesitzerhaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Beratung",
+      "slug": "vs-haus-und-grundbesitzerhaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:haus-und-grundbesitzerhaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Haus- und Grundbesitzerhaftpflichtversicherung: Verkehrssicherung",
+      "slug": "vs-haus-und-grundbesitzerhaftpflichtversicherung-verkehrssicherung",
+      "key": "INS-SEO:TERM:haus-und-grundbesitzerhaftpflichtversicherung-verkehrssicherung",
+      "parent": "INS-SEO:R3:haus-und-grundbesitzerhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Drohnenhaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-drohnenhaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:drohnenhaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:drohnenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Drohnenhaftpflichtversicherung: Beratung",
+      "slug": "vs-drohnenhaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:drohnenhaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:drohnenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Drohnenhaftpflichtversicherung: Flugbetrieb & Haftung",
+      "slug": "vs-drohnenhaftpflichtversicherung-flugbetrieb-und-haftung",
+      "key": "INS-SEO:TERM:drohnenhaftpflichtversicherung-flugbetrieb-und-haftung",
+      "parent": "INS-SEO:R3:drohnenhaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Hundehaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-hundehaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:hundehaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:hundehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Hundehaftpflichtversicherung: Beratung",
+      "slug": "vs-hundehaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:hundehaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:hundehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Hundehaftpflichtversicherung: Halterhaftung",
+      "slug": "vs-hundehaftpflichtversicherung-halterhaftung",
+      "key": "INS-SEO:TERM:hundehaftpflichtversicherung-halterhaftung",
+      "parent": "INS-SEO:R3:hundehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Pferdehaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-pferdehaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:pferdehaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:pferdehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Pferdehaftpflichtversicherung: Beratung",
+      "slug": "vs-pferdehaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:pferdehaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:pferdehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Pferdehaftpflichtversicherung: Halterhaftung",
+      "slug": "vs-pferdehaftpflichtversicherung-halterhaftung",
+      "key": "INS-SEO:TERM:pferdehaftpflichtversicherung-halterhaftung",
+      "parent": "INS-SEO:R3:pferdehaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Tierkrankenversicherung: Häufige Fragen",
+      "slug": "vs-tierkrankenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:tierkrankenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:tierkrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Tierkrankenversicherung: Beratung",
+      "slug": "vs-tierkrankenversicherung-beratung",
+      "key": "INS-SEO:TERM:tierkrankenversicherung-beratung",
+      "parent": "INS-SEO:R3:tierkrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Tierkrankenversicherung: Behandlung & OP",
+      "slug": "vs-tierkrankenversicherung-behandlung-und-op",
+      "key": "INS-SEO:TERM:tierkrankenversicherung-behandlung-und-op",
+      "parent": "INS-SEO:R3:tierkrankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Vereinshaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-vereinshaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:vereinshaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:vereinshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Vereinshaftpflichtversicherung: Beratung",
+      "slug": "vs-vereinshaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:vereinshaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:vereinshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Vereinshaftpflichtversicherung: Vereins- & Veranstaltungsrisiken",
+      "slug": "vs-vereinshaftpflichtversicherung-vereins-und-veranstaltungsrisiken",
+      "key": "INS-SEO:TERM:vereinshaftpflichtversicherung-vereins-und-veranstaltungsrisiken",
+      "parent": "INS-SEO:R3:vereinshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Gesetzliche Krankenversicherung: Häufige Fragen",
+      "slug": "vs-gesetzliche-krankenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:gesetzliche-krankenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:gesetzliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Gesetzliche Krankenversicherung: Beratung",
+      "slug": "vs-gesetzliche-krankenversicherung-beratung",
+      "key": "INS-SEO:TERM:gesetzliche-krankenversicherung-beratung",
+      "parent": "INS-SEO:R3:gesetzliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Gesetzliche Krankenversicherung: Kassenleistungen",
+      "slug": "vs-gesetzliche-krankenversicherung-kassenleistungen",
+      "key": "INS-SEO:TERM:gesetzliche-krankenversicherung-kassenleistungen",
+      "parent": "INS-SEO:R3:gesetzliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Private Krankenversicherung: Häufige Fragen",
+      "slug": "vs-private-krankenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:private-krankenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:private-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Private Krankenversicherung: Beratung",
+      "slug": "vs-private-krankenversicherung-beratung",
+      "key": "INS-SEO:TERM:private-krankenversicherung-beratung",
+      "parent": "INS-SEO:R3:private-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Private Krankenversicherung: Tarife & Leistungen",
+      "slug": "vs-private-krankenversicherung-tarife-und-leistungen",
+      "key": "INS-SEO:TERM:private-krankenversicherung-tarife-und-leistungen",
+      "parent": "INS-SEO:R3:private-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Zahnzusatzversicherung: Häufige Fragen",
+      "slug": "vs-zahnzusatzversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:zahnzusatzversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:zahnzusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Zahnzusatzversicherung: Beratung",
+      "slug": "vs-zahnzusatzversicherung-beratung",
+      "key": "INS-SEO:TERM:zahnzusatzversicherung-beratung",
+      "parent": "INS-SEO:R3:zahnzusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Zahnzusatzversicherung: Zahnersatz & Leistungen",
+      "slug": "vs-zahnzusatzversicherung-zahnersatz-und-leistungen",
+      "key": "INS-SEO:TERM:zahnzusatzversicherung-zahnersatz-und-leistungen",
+      "parent": "INS-SEO:R3:zahnzusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Krankenhauszusatzversicherung: Häufige Fragen",
+      "slug": "vs-krankenhauszusatzversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:krankenhauszusatzversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:krankenhauszusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Krankenhauszusatzversicherung: Beratung",
+      "slug": "vs-krankenhauszusatzversicherung-beratung",
+      "key": "INS-SEO:TERM:krankenhauszusatzversicherung-beratung",
+      "parent": "INS-SEO:R3:krankenhauszusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Krankenhauszusatzversicherung: Stationäre Leistungen",
+      "slug": "vs-krankenhauszusatzversicherung-stationare-leistungen",
+      "key": "INS-SEO:TERM:krankenhauszusatzversicherung-stationare-leistungen",
+      "parent": "INS-SEO:R3:krankenhauszusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Krankentagegeldversicherung: Häufige Fragen",
+      "slug": "vs-krankentagegeldversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:krankentagegeldversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:krankentagegeldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Krankentagegeldversicherung: Beratung",
+      "slug": "vs-krankentagegeldversicherung-beratung",
+      "key": "INS-SEO:TERM:krankentagegeldversicherung-beratung",
+      "parent": "INS-SEO:R3:krankentagegeldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Krankentagegeldversicherung: Arbeitsausfall & Leistungen",
+      "slug": "vs-krankentagegeldversicherung-arbeitsausfall-und-leistungen",
+      "key": "INS-SEO:TERM:krankentagegeldversicherung-arbeitsausfall-und-leistungen",
+      "parent": "INS-SEO:R3:krankentagegeldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Pflegezusatzversicherung: Häufige Fragen",
+      "slug": "vs-pflegezusatzversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:pflegezusatzversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:pflegezusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Pflegezusatzversicherung: Beratung",
+      "slug": "vs-pflegezusatzversicherung-beratung",
+      "key": "INS-SEO:TERM:pflegezusatzversicherung-beratung",
+      "parent": "INS-SEO:R3:pflegezusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Pflegezusatzversicherung: Pflegeleistungen",
+      "slug": "vs-pflegezusatzversicherung-pflegeleistungen",
+      "key": "INS-SEO:TERM:pflegezusatzversicherung-pflegeleistungen",
+      "parent": "INS-SEO:R3:pflegezusatzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Berufsunfähigkeitsversicherung: Häufige Fragen",
+      "slug": "vs-berufsunfahigkeitsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:berufsunfahigkeitsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:berufsunfahigkeitsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Berufsunfähigkeitsversicherung: Beratung",
+      "slug": "vs-berufsunfahigkeitsversicherung-beratung",
+      "key": "INS-SEO:TERM:berufsunfahigkeitsversicherung-beratung",
+      "parent": "INS-SEO:R3:berufsunfahigkeitsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Berufsunfähigkeitsversicherung: Leistungsfall",
+      "slug": "vs-berufsunfahigkeitsversicherung-leistungsfall",
+      "key": "INS-SEO:TERM:berufsunfahigkeitsversicherung-leistungsfall",
+      "parent": "INS-SEO:R3:berufsunfahigkeitsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Unfallversicherung: Häufige Fragen",
+      "slug": "vs-unfallversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:unfallversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:unfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Unfallversicherung: Beratung",
+      "slug": "vs-unfallversicherung-beratung",
+      "key": "INS-SEO:TERM:unfallversicherung-beratung",
+      "parent": "INS-SEO:R3:unfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Unfallversicherung: Invalidität & Leistungen",
+      "slug": "vs-unfallversicherung-invaliditat-und-leistungen",
+      "key": "INS-SEO:TERM:unfallversicherung-invaliditat-und-leistungen",
+      "parent": "INS-SEO:R3:unfallversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Gesetzliche Rentenversicherung: Häufige Fragen",
+      "slug": "vs-gesetzliche-rentenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:gesetzliche-rentenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:gesetzliche-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Gesetzliche Rentenversicherung: Beratung",
+      "slug": "vs-gesetzliche-rentenversicherung-beratung",
+      "key": "INS-SEO:TERM:gesetzliche-rentenversicherung-beratung",
+      "parent": "INS-SEO:R3:gesetzliche-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Gesetzliche Rentenversicherung: Rentenansprüche",
+      "slug": "vs-gesetzliche-rentenversicherung-rentenanspruche",
+      "key": "INS-SEO:TERM:gesetzliche-rentenversicherung-rentenanspruche",
+      "parent": "INS-SEO:R3:gesetzliche-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Private Rentenversicherung: Häufige Fragen",
+      "slug": "vs-private-rentenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:private-rentenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:private-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Private Rentenversicherung: Beratung",
+      "slug": "vs-private-rentenversicherung-beratung",
+      "key": "INS-SEO:TERM:private-rentenversicherung-beratung",
+      "parent": "INS-SEO:R3:private-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Private Rentenversicherung: Auszahlung & Varianten",
+      "slug": "vs-private-rentenversicherung-auszahlung-und-varianten",
+      "key": "INS-SEO:TERM:private-rentenversicherung-auszahlung-und-varianten",
+      "parent": "INS-SEO:R3:private-rentenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Betriebliche Altersvorsorge: Häufige Fragen",
+      "slug": "vs-betriebliche-altersvorsorge-haufige-fragen",
+      "key": "INS-SEO:TERM:betriebliche-altersvorsorge-haufige-fragen",
+      "parent": "INS-SEO:R3:betriebliche-altersvorsorge",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Betriebliche Altersvorsorge: Beratung",
+      "slug": "vs-betriebliche-altersvorsorge-beratung",
+      "key": "INS-SEO:TERM:betriebliche-altersvorsorge-beratung",
+      "parent": "INS-SEO:R3:betriebliche-altersvorsorge",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Betriebliche Altersvorsorge: Förderung & Ansprüche",
+      "slug": "vs-betriebliche-altersvorsorge-forderung-und-anspruche",
+      "key": "INS-SEO:TERM:betriebliche-altersvorsorge-forderung-und-anspruche",
+      "parent": "INS-SEO:R3:betriebliche-altersvorsorge",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Risikolebensversicherung: Häufige Fragen",
+      "slug": "vs-risikolebensversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:risikolebensversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:risikolebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Risikolebensversicherung: Beratung",
+      "slug": "vs-risikolebensversicherung-beratung",
+      "key": "INS-SEO:TERM:risikolebensversicherung-beratung",
+      "parent": "INS-SEO:R3:risikolebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Risikolebensversicherung: Todesfallschutz",
+      "slug": "vs-risikolebensversicherung-todesfallschutz",
+      "key": "INS-SEO:TERM:risikolebensversicherung-todesfallschutz",
+      "parent": "INS-SEO:R3:risikolebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Kapitallebensversicherung: Häufige Fragen",
+      "slug": "vs-kapitallebensversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:kapitallebensversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:kapitallebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Kapitallebensversicherung: Beratung",
+      "slug": "vs-kapitallebensversicherung-beratung",
+      "key": "INS-SEO:TERM:kapitallebensversicherung-beratung",
+      "parent": "INS-SEO:R3:kapitallebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Kapitallebensversicherung: Ablauf & Auszahlung",
+      "slug": "vs-kapitallebensversicherung-ablauf-und-auszahlung",
+      "key": "INS-SEO:TERM:kapitallebensversicherung-ablauf-und-auszahlung",
+      "parent": "INS-SEO:R3:kapitallebensversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Betriebshaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-betriebshaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:betriebshaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:betriebshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Betriebshaftpflichtversicherung: Beratung",
+      "slug": "vs-betriebshaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:betriebshaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:betriebshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Betriebshaftpflichtversicherung: Betriebsschäden & Haftung",
+      "slug": "vs-betriebshaftpflichtversicherung-betriebsschaden-und-haftung",
+      "key": "INS-SEO:TERM:betriebshaftpflichtversicherung-betriebsschaden-und-haftung",
+      "parent": "INS-SEO:R3:betriebshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Berufshaftpflichtversicherung: Häufige Fragen",
+      "slug": "vs-berufshaftpflichtversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:berufshaftpflichtversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:berufshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Berufshaftpflichtversicherung: Beratung",
+      "slug": "vs-berufshaftpflichtversicherung-beratung",
+      "key": "INS-SEO:TERM:berufshaftpflichtversicherung-beratung",
+      "parent": "INS-SEO:R3:berufshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Berufshaftpflichtversicherung: Berufsfehler & Ansprüche",
+      "slug": "vs-berufshaftpflichtversicherung-berufsfehler-und-anspruche",
+      "key": "INS-SEO:TERM:berufshaftpflichtversicherung-berufsfehler-und-anspruche",
+      "parent": "INS-SEO:R3:berufshaftpflichtversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Geschäftsinhaltsversicherung: Häufige Fragen",
+      "slug": "vs-geschaftsinhaltsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:geschaftsinhaltsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:geschaftsinhaltsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Geschäftsinhaltsversicherung: Beratung",
+      "slug": "vs-geschaftsinhaltsversicherung-beratung",
+      "key": "INS-SEO:TERM:geschaftsinhaltsversicherung-beratung",
+      "parent": "INS-SEO:R3:geschaftsinhaltsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Geschäftsinhaltsversicherung: Inventar & Schäden",
+      "slug": "vs-geschaftsinhaltsversicherung-inventar-und-schaden",
+      "key": "INS-SEO:TERM:geschaftsinhaltsversicherung-inventar-und-schaden",
+      "parent": "INS-SEO:R3:geschaftsinhaltsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Betriebsunterbrechungsversicherung: Häufige Fragen",
+      "slug": "vs-betriebsunterbrechungsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:betriebsunterbrechungsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:betriebsunterbrechungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Betriebsunterbrechungsversicherung: Beratung",
+      "slug": "vs-betriebsunterbrechungsversicherung-beratung",
+      "key": "INS-SEO:TERM:betriebsunterbrechungsversicherung-beratung",
+      "parent": "INS-SEO:R3:betriebsunterbrechungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Betriebsunterbrechungsversicherung: Stillstand & Entschädigung",
+      "slug": "vs-betriebsunterbrechungsversicherung-stillstand-und-entschadigung",
+      "key": "INS-SEO:TERM:betriebsunterbrechungsversicherung-stillstand-und-entschadigung",
+      "parent": "INS-SEO:R3:betriebsunterbrechungsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Firmenrechtsschutzversicherung: Häufige Fragen",
+      "slug": "vs-firmenrechtsschutzversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:firmenrechtsschutzversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:firmenrechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Firmenrechtsschutzversicherung: Beratung",
+      "slug": "vs-firmenrechtsschutzversicherung-beratung",
+      "key": "INS-SEO:TERM:firmenrechtsschutzversicherung-beratung",
+      "parent": "INS-SEO:R3:firmenrechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Firmenrechtsschutzversicherung: Arbeits- & Vertragsstreit",
+      "slug": "vs-firmenrechtsschutzversicherung-arbeits-und-vertragsstreit",
+      "key": "INS-SEO:TERM:firmenrechtsschutzversicherung-arbeits-und-vertragsstreit",
+      "parent": "INS-SEO:R3:firmenrechtsschutzversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "D&O-Versicherung: Häufige Fragen",
+      "slug": "vs-dundo-versicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:dundo-versicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:dundo-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "D&O-Versicherung: Beratung",
+      "slug": "vs-dundo-versicherung-beratung",
+      "key": "INS-SEO:TERM:dundo-versicherung-beratung",
+      "parent": "INS-SEO:R3:dundo-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "D&O-Versicherung: Managerhaftung",
+      "slug": "vs-dundo-versicherung-managerhaftung",
+      "key": "INS-SEO:TERM:dundo-versicherung-managerhaftung",
+      "parent": "INS-SEO:R3:dundo-versicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Cyberversicherung: Häufige Fragen",
+      "slug": "vs-cyberversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:cyberversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:cyberversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Cyberversicherung: Beratung",
+      "slug": "vs-cyberversicherung-beratung",
+      "key": "INS-SEO:TERM:cyberversicherung-beratung",
+      "parent": "INS-SEO:R3:cyberversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Cyberversicherung: Cybervorfälle & Leistung",
+      "slug": "vs-cyberversicherung-cybervorfalle-und-leistung",
+      "key": "INS-SEO:TERM:cyberversicherung-cybervorfalle-und-leistung",
+      "parent": "INS-SEO:R3:cyberversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Kautionsversicherung: Häufige Fragen",
+      "slug": "vs-kautionsversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:kautionsversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:kautionsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Kautionsversicherung: Beratung",
+      "slug": "vs-kautionsversicherung-beratung",
+      "key": "INS-SEO:TERM:kautionsversicherung-beratung",
+      "parent": "INS-SEO:R3:kautionsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Kautionsversicherung: Bürgschaft & Kaution",
+      "slug": "vs-kautionsversicherung-burgschaft-und-kaution",
+      "key": "INS-SEO:TERM:kautionsversicherung-burgschaft-und-kaution",
+      "parent": "INS-SEO:R3:kautionsversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Restschuldversicherung: Häufige Fragen",
+      "slug": "vs-restschuldversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:restschuldversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:restschuldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Restschuldversicherung: Beratung",
+      "slug": "vs-restschuldversicherung-beratung",
+      "key": "INS-SEO:TERM:restschuldversicherung-beratung",
+      "parent": "INS-SEO:R3:restschuldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Restschuldversicherung: Kreditausfall & Leistung",
+      "slug": "vs-restschuldversicherung-kreditausfall-und-leistung",
+      "key": "INS-SEO:TERM:restschuldversicherung-kreditausfall-und-leistung",
+      "parent": "INS-SEO:R3:restschuldversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Betriebliche Krankenversicherung: Häufige Fragen",
+      "slug": "vs-betriebliche-krankenversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:betriebliche-krankenversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:betriebliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Betriebliche Krankenversicherung: Beratung",
+      "slug": "vs-betriebliche-krankenversicherung-beratung",
+      "key": "INS-SEO:TERM:betriebliche-krankenversicherung-beratung",
+      "parent": "INS-SEO:R3:betriebliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Betriebliche Krankenversicherung: Mitarbeiterleistungen",
+      "slug": "vs-betriebliche-krankenversicherung-mitarbeiterleistungen",
+      "key": "INS-SEO:TERM:betriebliche-krankenversicherung-mitarbeiterleistungen",
+      "parent": "INS-SEO:R3:betriebliche-krankenversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    },
+    {
+      "name": "Warenkreditversicherung: Häufige Fragen",
+      "slug": "vs-warenkreditversicherung-haufige-fragen",
+      "key": "INS-SEO:TERM:warenkreditversicherung-haufige-fragen",
+      "parent": "INS-SEO:R3:warenkreditversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Leistungsumfang",
+        "Vertragsbedingungen",
+        "typische Abgrenzungen"
+      ]
+    },
+    {
+      "name": "Warenkreditversicherung: Beratung",
+      "slug": "vs-warenkreditversicherung-beratung",
+      "key": "INS-SEO:TERM:warenkreditversicherung-beratung",
+      "parent": "INS-SEO:R3:warenkreditversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Bedarf und Zielgruppe",
+        "Leistungsauswahl",
+        "Vertrag und Wechsel"
+      ]
+    },
+    {
+      "name": "Warenkreditversicherung: Forderungsausfälle",
+      "slug": "vs-warenkreditversicherung-forderungsausfalle",
+      "key": "INS-SEO:TERM:warenkreditversicherung-forderungsausfalle",
+      "parent": "INS-SEO:R3:warenkreditversicherung",
+      "wordpress_parent": 0,
+      "coarse_fields": [
+        "Vertragsvarianten",
+        "Risikoarten und Leistungsgrenzen",
+        "Praxisfaelle und Unterlagen"
+      ]
+    }
+  ],
+  "insurance_coverage": [
+    {
+      "original_insurance": "Wohngebäudeversicherung",
+      "keyword_owner": "Wohngebäudeversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Ferienhausversicherung",
+      "keyword_owner": "Wohngebäudeversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Kleingartenversicherung",
+      "keyword_owner": "Wohngebäudeversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Bauleistungsversicherung",
+      "keyword_owner": "Bauleistungsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Feuerrohbauversicherung",
+      "keyword_owner": "Bauleistungsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Photovoltaikversicherung",
+      "keyword_owner": "Wohngebäudeversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Hausratversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Glasversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Kunstversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Schmuckversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Uhrenversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Musikinstrumentenversicherung",
+      "keyword_owner": "Hausratversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Brillenversicherung",
+      "keyword_owner": "Private Krankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Handyversicherung",
+      "keyword_owner": "Elektronikversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Hörgeräteversicherung",
+      "keyword_owner": "Private Krankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Laptopversicherung",
+      "keyword_owner": "Elektronikversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Private Cyberversicherung",
+      "keyword_owner": "Cyberversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Anhänger-Versicherung",
+      "keyword_owner": "Kfz-Versicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "E-Scooter-Versicherung",
+      "keyword_owner": "E-Scooter-Versicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Fahrradversicherung",
+      "keyword_owner": "Fahrradversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Kfz-Versicherung",
+      "keyword_owner": "Kfz-Versicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Mietwagen-Selbstbeteiligungsschutz",
+      "keyword_owner": "Kfz-Versicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Mopedversicherung",
+      "keyword_owner": "Motorradversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Motorradversicherung",
+      "keyword_owner": "Motorradversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Oldtimerversicherung",
+      "keyword_owner": "Kfz-Versicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Campingversicherung",
+      "keyword_owner": "Wohnmobilversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Wohnmobilversicherung",
+      "keyword_owner": "Wohnmobilversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Wohnwagenversicherung",
+      "keyword_owner": "Wohnmobilversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Bootsversicherung",
+      "keyword_owner": "Bootsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Drohnenkaskoversicherung",
+      "keyword_owner": "Drohnenhaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Drohnenhaftpflichtversicherung",
+      "keyword_owner": "Drohnenhaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Auslandskrankenversicherung",
+      "keyword_owner": "Auslandskrankenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Reiseabbruchversicherung",
+      "keyword_owner": "Reiserücktrittsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Reisegepäckversicherung",
+      "keyword_owner": "Reiserücktrittsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Reiserücktrittsversicherung",
+      "keyword_owner": "Reiserücktrittsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Sportgeräteversicherung",
+      "keyword_owner": "Fahrradversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Bauherrenhaftpflichtversicherung",
+      "keyword_owner": "Bauherrenhaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Gewässerschadenhaftpflichtversicherung",
+      "keyword_owner": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "keyword_owner": "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Jagdhaftpflichtversicherung",
+      "keyword_owner": "Privathaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Privathaftpflichtversicherung",
+      "keyword_owner": "Privathaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Rechtsschutzversicherung",
+      "keyword_owner": "Rechtsschutzversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Verkehrsrechtsschutzversicherung",
+      "keyword_owner": "Rechtsschutzversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Hunde-OP-Versicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Hundehaftpflichtversicherung",
+      "keyword_owner": "Hundehaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Hundekrankenversicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Katzen-OP-Versicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Katzenkrankenversicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Pferde-OP-Versicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Pferdehaftpflichtversicherung",
+      "keyword_owner": "Pferdehaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Pferdekrankenversicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Pferdelebensversicherung",
+      "keyword_owner": "Tierkrankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Veranstalterhaftpflichtversicherung",
+      "keyword_owner": "Vereinshaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Veranstaltungsausfallversicherung",
+      "keyword_owner": "Vereinshaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Vereinshaftpflichtversicherung",
+      "keyword_owner": "Vereinshaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Gesetzliche Krankenversicherung",
+      "keyword_owner": "Gesetzliche Krankenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Private Krankenversicherung",
+      "keyword_owner": "Private Krankenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Ambulante Zusatzversicherung",
+      "keyword_owner": "Zahnzusatzversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Krankenhaustagegeldversicherung",
+      "keyword_owner": "Krankenhauszusatzversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Krankenhauszusatzversicherung",
+      "keyword_owner": "Krankenhauszusatzversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Krankentagegeldversicherung",
+      "keyword_owner": "Krankentagegeldversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Pflegezusatzversicherung",
+      "keyword_owner": "Pflegezusatzversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Soziale Pflegeversicherung",
+      "keyword_owner": "Pflegezusatzversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Zahnzusatzversicherung",
+      "keyword_owner": "Zahnzusatzversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Berufsunfähigkeitsversicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Dienstunfähigkeitsversicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Erwerbsunfähigkeitsversicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Gesetzliche Arbeitslosenversicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Gesetzliche Unfallversicherung",
+      "keyword_owner": "Unfallversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Grundfähigkeitsversicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Kinderinvaliditätsversicherung",
+      "keyword_owner": "Unfallversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Private Unfallversicherung",
+      "keyword_owner": "Unfallversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Schwere-Krankheiten-Versicherung",
+      "keyword_owner": "Berufsunfähigkeitsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Basisrentenversicherung",
+      "keyword_owner": "Private Rentenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Betriebliche Direktversicherung",
+      "keyword_owner": "Betriebliche Altersvorsorge",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Fondsgebundene Lebensversicherung",
+      "keyword_owner": "Kapitallebensversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Gesetzliche Rentenversicherung",
+      "keyword_owner": "Gesetzliche Rentenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Kapitallebensversicherung",
+      "keyword_owner": "Kapitallebensversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Private Rentenversicherung",
+      "keyword_owner": "Private Rentenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Riester-Rentenversicherung",
+      "keyword_owner": "Private Rentenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Risikolebensversicherung",
+      "keyword_owner": "Risikolebensversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Sterbegeldversicherung",
+      "keyword_owner": "Risikolebensversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Elektronikversicherung für Betriebe",
+      "keyword_owner": "Geschäftsinhaltsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Geschäftsinhaltsversicherung",
+      "keyword_owner": "Geschäftsinhaltsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Gewerbegebäudeversicherung",
+      "keyword_owner": "Geschäftsinhaltsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Maschinenversicherung",
+      "keyword_owner": "Geschäftsinhaltsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Transportversicherung für Betriebe",
+      "keyword_owner": "Geschäftsinhaltsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Berufshaftpflichtversicherung",
+      "keyword_owner": "Berufshaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Betriebshaftpflichtversicherung",
+      "keyword_owner": "Betriebshaftpflichtversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "D&O-Versicherung",
+      "keyword_owner": "D&O-Versicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Firmenrechtsschutzversicherung",
+      "keyword_owner": "Firmenrechtsschutzversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Umwelthaftpflichtversicherung",
+      "keyword_owner": "Betriebshaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Umweltschadenversicherung",
+      "keyword_owner": "Betriebshaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Vermögensschadenhaftpflichtversicherung",
+      "keyword_owner": "Berufshaftpflichtversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Betriebliche Krankenversicherung",
+      "keyword_owner": "Betriebliche Krankenversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Betriebsschließungsversicherung",
+      "keyword_owner": "Betriebsunterbrechungsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Betriebsunterbrechungsversicherung",
+      "keyword_owner": "Betriebsunterbrechungsversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Cyberversicherung für Kleinbetriebe",
+      "keyword_owner": "Cyberversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Gruppenunfallversicherung",
+      "keyword_owner": "Betriebliche Krankenversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Gewerbliche Kautionsversicherung",
+      "keyword_owner": "Kautionsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Kreditversicherung für Betriebe",
+      "keyword_owner": "Warenkreditversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Mietausfallversicherung",
+      "keyword_owner": "Mietausfallversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Mietkautionsversicherung",
+      "keyword_owner": "Kautionsversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    },
+    {
+      "original_insurance": "Restschuldversicherung",
+      "keyword_owner": "Restschuldversicherung",
+      "path": "R3_KONKRETE_KEYWORD_SEITE"
+    },
+    {
+      "original_insurance": "Vertrauensschadenversicherung",
+      "keyword_owner": "Cyberversicherung",
+      "path": "SPAETERER_EINZELBEITRAG_UNTER_KEYWORD_R3__KEIN_ARTIKEL_AUFTRAG"
+    }
+  ],
+  "original_importated_insurance_topics_by_group": {
+    "Gebäude & Immobilien": [
+      "Wohngebäudeversicherung",
+      "Ferienhausversicherung",
+      "Kleingartenversicherung"
+    ],
+    "Bauen & Anlagen": [
+      "Bauleistungsversicherung",
+      "Feuerrohbauversicherung",
+      "Photovoltaikversicherung"
+    ],
+    "Hausrat & Wertsachen": [
+      "Hausratversicherung",
+      "Glasversicherung",
+      "Kunstversicherung",
+      "Schmuckversicherung",
+      "Uhrenversicherung",
+      "Musikinstrumentenversicherung"
+    ],
+    "Geräte & Cyberschutz": [
+      "Brillenversicherung",
+      "Handyversicherung",
+      "Hörgeräteversicherung",
+      "Laptopversicherung",
+      "Private Cyberversicherung"
+    ],
+    "Fahrzeuge & Zweiräder": [
+      "Anhänger-Versicherung",
+      "E-Scooter-Versicherung",
+      "Fahrradversicherung",
+      "Kfz-Versicherung",
+      "Mietwagen-Selbstbeteiligungsschutz",
+      "Mopedversicherung",
+      "Motorradversicherung",
+      "Oldtimerversicherung"
+    ],
+    "Camping & Wohnmobile": [
+      "Campingversicherung",
+      "Wohnmobilversicherung",
+      "Wohnwagenversicherung"
+    ],
+    "Boote & Drohnen": [
+      "Bootsversicherung",
+      "Drohnenkaskoversicherung",
+      "Drohnenhaftpflichtversicherung"
+    ],
+    "Reisen & Sport": [
+      "Auslandskrankenversicherung",
+      "Reiseabbruchversicherung",
+      "Reisegepäckversicherung",
+      "Reiserücktrittsversicherung",
+      "Sportgeräteversicherung"
+    ],
+    "Privat- & Sonderhaftung": [
+      "Bauherrenhaftpflichtversicherung",
+      "Gewässerschadenhaftpflichtversicherung",
+      "Haus- und Grundbesitzerhaftpflichtversicherung",
+      "Jagdhaftpflichtversicherung",
+      "Privathaftpflichtversicherung"
+    ],
+    "Rechtsschutz": [
+      "Rechtsschutzversicherung",
+      "Verkehrsrechtsschutzversicherung"
+    ],
+    "Tierversicherungen": [
+      "Hunde-OP-Versicherung",
+      "Hundehaftpflichtversicherung",
+      "Hundekrankenversicherung",
+      "Katzen-OP-Versicherung",
+      "Katzenkrankenversicherung",
+      "Pferde-OP-Versicherung",
+      "Pferdehaftpflichtversicherung",
+      "Pferdekrankenversicherung",
+      "Pferdelebensversicherung"
+    ],
+    "Vereine & Veranstaltungen": [
+      "Veranstalterhaftpflichtversicherung",
+      "Veranstaltungsausfallversicherung",
+      "Vereinshaftpflichtversicherung"
+    ],
+    "Krankenversicherung": [
+      "Gesetzliche Krankenversicherung",
+      "Private Krankenversicherung"
+    ],
+    "Zusatzschutz & Pflege": [
+      "Ambulante Zusatzversicherung",
+      "Krankenhaustagegeldversicherung",
+      "Krankenhauszusatzversicherung",
+      "Krankentagegeldversicherung",
+      "Pflegezusatzversicherung",
+      "Soziale Pflegeversicherung",
+      "Zahnzusatzversicherung"
+    ],
+    "Arbeitskraft & Unfall": [
+      "Berufsunfähigkeitsversicherung",
+      "Dienstunfähigkeitsversicherung",
+      "Erwerbsunfähigkeitsversicherung",
+      "Gesetzliche Arbeitslosenversicherung",
+      "Gesetzliche Unfallversicherung",
+      "Grundfähigkeitsversicherung",
+      "Kinderinvaliditätsversicherung",
+      "Private Unfallversicherung",
+      "Schwere-Krankheiten-Versicherung"
+    ],
+    "Leben & Altersvorsorge": [
+      "Basisrentenversicherung",
+      "Betriebliche Direktversicherung",
+      "Fondsgebundene Lebensversicherung",
+      "Gesetzliche Rentenversicherung",
+      "Kapitallebensversicherung",
+      "Private Rentenversicherung",
+      "Riester-Rentenversicherung",
+      "Risikolebensversicherung",
+      "Sterbegeldversicherung"
+    ],
+    "Betriebliche Sachwerte": [
+      "Elektronikversicherung für Betriebe",
+      "Geschäftsinhaltsversicherung",
+      "Gewerbegebäudeversicherung",
+      "Maschinenversicherung",
+      "Transportversicherung für Betriebe"
+    ],
+    "Haftung & Recht im Betrieb": [
+      "Berufshaftpflichtversicherung",
+      "Betriebshaftpflichtversicherung",
+      "D&O-Versicherung",
+      "Firmenrechtsschutzversicherung",
+      "Umwelthaftpflichtversicherung",
+      "Umweltschadenversicherung",
+      "Vermögensschadenhaftpflichtversicherung"
+    ],
+    "Ausfall & Mitarbeitende": [
+      "Betriebliche Krankenversicherung",
+      "Betriebsschließungsversicherung",
+      "Betriebsunterbrechungsversicherung",
+      "Cyberversicherung für Kleinbetriebe",
+      "Gruppenunfallversicherung"
+    ],
+    "Kredite, Kautionen & Mieten": [
+      "Gewerbliche Kautionsversicherung",
+      "Kreditversicherung für Betriebe",
+      "Mietausfallversicherung",
+      "Mietkautionsversicherung",
+      "Restschuldversicherung",
+      "Vertrauensschadenversicherung"
+    ]
+  },
+  "quality": {
+    "source_coverage_105_once": true,
+    "keyword_evidence_count": 45,
+    "unmeasured_keywords": [
+      {
+        "area": "Haftpflicht & Rechtsschutz",
+        "keyword": "Haus- und Grundbesitzerhaftpflichtversicherung",
+        "reason": "Provider overview was requested, but no exact result row returned. Never interpret as 0 demand."
+      }
+    ],
+    "errors": [],
+    "keyword_evidence_extract": "Values transcribed from verified file tool output of two 2026-10-20 DataForSEO overview exports, not an API request and not ideas SERP research.",
+    "individual_semantic_routing_corrections": {
+      "Brillenversicherung": "Private Krankenversicherung",
+      "Hörgeräteversicherung": "Private Krankenversicherung",
+      "Private Cyberversicherung": "Cyberversicherung",
+      "Mietkautionsversicherung": "Kautionsversicherung"
+    }
+  }
+}
