@@ -1,6 +1,6 @@
 {
   "contract": "HAB_UND_BEWAHR_INSURANCE_ADD_ONLY_PROPOSAL_V2",
-  "status": "FACHLICHER_PRUEFENTWURF__NICHT_WP_IMPORTIERBAR",
+  "status": "FACHLICHER_PRUEFENTWURF_476_OBJEKTE__NICHT_WP_IMPORTIERBAR",
   "replaces_for_future_planning": "VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json",
   "audit_basis": "VERSICHERUNGEN_KATEGORIEN_FACHPRUEFUNG_105_OWNER_20261020.json",
   "page_source": "VERSICHERUNGEN_ADDONLY_433_OBJEKTE_VORLAGE_20261020.json",
@@ -4071,8 +4071,8 @@
         "wp_term_id": null,
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
-          "Kosten",
-          "Garantien",
+          "Tarifvarianten",
+          "Kosten und Garantien",
           "Auszahlungsoptionen"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
@@ -4090,22 +4090,6 @@
           "Entnahme",
           "Verrentung",
           "Kündigung"
-        ],
-        "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
-      },
-      {
-        "key": "INS:TERM:private-rentenversicherung-fonds-und-garantievarianten",
-        "page3_owner_key": "INS:R3:private-rentenversicherung",
-        "title": "Private Rentenversicherung: Fonds- und Garantievarianten",
-        "short_label": "Fonds- und Garantievarianten",
-        "slug": "private-rentenversicherung-fonds-und-garantievarianten",
-        "term_parent": 0,
-        "wp_term_id": null,
-        "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
-        "coarse_capacity_domains": [
-          "klassisch",
-          "fondsgebunden",
-          "hybrid"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -5080,40 +5064,24 @@
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
           "Warenlager",
-          "Betriebsgröße",
+          "Betriebseinrichtung",
           "Versicherungssumme"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
       {
-        "key": "INS:TERM:geschaeftsinhaltsversicherung-einbruch-und-elementar",
+        "key": "INS:TERM:geschaeftsinhaltsversicherung-sachschaeden-und-regulierung",
         "page3_owner_key": "INS:R3:geschaeftsinhaltsversicherung",
-        "title": "Geschäftsinhaltsversicherung: Einbruch & Elementar",
-        "short_label": "Einbruch & Elementar",
-        "slug": "geschaeftsinhaltsversicherung-einbruch-und-elementar",
+        "title": "Geschäftsinhaltsversicherung: Sachschäden & Regulierung",
+        "short_label": "Sachschäden & Regulierung",
+        "slug": "geschaeftsinhaltsversicherung-sachschaeden-und-regulierung",
         "term_parent": 0,
         "wp_term_id": null,
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
           "Diebstahl",
-          "Wasserschaden",
-          "Sturm"
-        ],
-        "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
-      },
-      {
-        "key": "INS:TERM:geschaeftsinhaltsversicherung-betriebseinrichtung-und-nachweise",
-        "page3_owner_key": "INS:R3:geschaeftsinhaltsversicherung",
-        "title": "Geschäftsinhaltsversicherung: Betriebseinrichtung & Nachweise",
-        "short_label": "Betriebseinrichtung & Nachweise",
-        "slug": "geschaeftsinhaltsversicherung-betriebseinrichtung-und-nachweise",
-        "term_parent": 0,
-        "wp_term_id": null,
-        "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
-        "coarse_capacity_domains": [
-          "Inventarlisten",
-          "Neuwert",
-          "Schadenerstattung"
+          "Brand und Wasser",
+          "Inventarnachweise"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6040,8 +6008,8 @@
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
           "Instrumentenwert",
-          "Auftritte",
-          "Leihgeräte"
+          "Aufbewahrung",
+          "Auftrittsnutzung"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6058,22 +6026,6 @@
           "Sturz",
           "Diebstahl",
           "Flugtransport"
-        ],
-        "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
-      },
-      {
-        "key": "INS:TERM:musikinstrumentenversicherung-lagerung-und-wertnachweis",
-        "page3_owner_key": "INS:R3:musikinstrumentenversicherung",
-        "title": "Musikinstrumentenversicherung: Lagerung & Wertnachweis",
-        "short_label": "Lagerung & Wertnachweis",
-        "slug": "musikinstrumentenversicherung-lagerung-und-wertnachweis",
-        "term_parent": 0,
-        "wp_term_id": null,
-        "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
-        "coarse_capacity_domains": [
-          "Sammlerwert",
-          "Lagerbedingungen",
-          "Wiederbeschaffung"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6151,9 +6103,9 @@
         "wp_term_id": null,
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
-          "Wertsachenwert",
-          "Safebedingungen",
-          "Auslandsdeckung"
+          "Wertnachweise",
+          "Aufbewahrung",
+          "Deckungsgrenzen"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6170,22 +6122,6 @@
           "Diebstahl",
           "Raub",
           "Schadenbelege"
-        ],
-        "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
-      },
-      {
-        "key": "INS:TERM:schmuckversicherung-wert-und-aufbewahrung",
-        "page3_owner_key": "INS:R3:schmuckversicherung",
-        "title": "Schmuckversicherung: Wert & Aufbewahrung",
-        "short_label": "Wert & Aufbewahrung",
-        "slug": "schmuckversicherung-wert-und-aufbewahrung",
-        "term_parent": 0,
-        "wp_term_id": null,
-        "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
-        "coarse_capacity_domains": [
-          "Gutachten",
-          "Schließfach",
-          "Wertanpassung"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6215,8 +6151,8 @@
         "wp_term_id": null,
         "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
         "coarse_capacity_domains": [
-          "Wert",
-          "Sammlungsbedarf",
+          "Wertgutachten",
+          "Aufbewahrung",
           "Selbstbehalt"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
@@ -6234,22 +6170,6 @@
           "Raub",
           "Sturz",
           "Reparatur"
-        ],
-        "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
-      },
-      {
-        "key": "INS:TERM:uhrenversicherung-wertnachweise",
-        "page3_owner_key": "INS:R3:uhrenversicherung",
-        "title": "Uhrenversicherung: Wertnachweise",
-        "short_label": "Wertnachweise",
-        "slug": "uhrenversicherung-wertnachweise",
-        "term_parent": 0,
-        "wp_term_id": null,
-        "action": "ADD_ONLY_AFTER_READBACK_AND_SEPARATE_APPROVAL",
-        "coarse_capacity_domains": [
-          "Kaufbeleg",
-          "Gutachten",
-          "Sammlerwert"
         ],
         "capacity_check": "GROB_PLAUSIBEL_3_THEMENFELDER_KEINE_ARTIKELFREIGABE"
       },
@@ -6900,17 +6820,17 @@
     "new_r1": 1,
     "new_r2": 12,
     "new_r3": 105,
-    "category_count": 363,
-    "total": 481,
+    "category_count": 358,
+    "total": 476,
     "owner_count": 105,
     "category_counts_per_owner": {
-      "3": 63,
-      "4": 36,
+      "3": 68,
+      "4": 31,
       "5": 6
     },
-    "unique_term_slugs": 363,
-    "unique_wp_category_titles": 363,
-    "category_with_three_coarse_fields": 363,
+    "unique_term_slugs": 358,
+    "unique_wp_category_titles": 358,
+    "category_with_three_coarse_fields": 358,
     "positive_structure": "PASS",
     "negative_tests_in_real_plugin": "NOT_EXECUTED",
     "real_wordpress_preflight": "NOT_EXECUTED"
@@ -6920,5 +6840,37 @@
     "Fachliche Kapazitaet nur grob, keine SEO- oder Produkt-/Tarif-Freigabe und keine Artikelplanung.",
     "Nur vorgeschlagene Kategoriebezeichnungen; Hauptplugin und Frontendnavigation muessen vor Freigabe fuer neue Weltseite getestet werden.",
     "Altes 433er-Audit bleibt Historie, wird nicht ausgefuehrt."
+  ],
+  "reviewed_merges": [
+    {
+      "owner": "Private Rentenversicherung",
+      "removed": "Fonds- und Garantievarianten",
+      "integrated_into": "Beratung",
+      "why": "Fonds-/Garantiearten sind Teil der Tarifberatung, keine eigenständige zusätzliche Endkategorie."
+    },
+    {
+      "owner": "Schmuckversicherung",
+      "removed": "Wert & Aufbewahrung",
+      "integrated_into": "Beratung",
+      "why": "Gutachten, Wertanpassung und Safe gehören zur Beratung; extra Kategorie überschneidet sich."
+    },
+    {
+      "owner": "Uhrenversicherung",
+      "removed": "Wertnachweise",
+      "integrated_into": "Beratung",
+      "why": "Drei Arten des Wertnachweises bilden keine belastbar eigene Beitragskategorie."
+    },
+    {
+      "owner": "Musikinstrumentenversicherung",
+      "removed": "Lagerung & Wertnachweis",
+      "integrated_into": "Beratung",
+      "why": "Wertbeleg und Lagerbedingungen gehören in die Tarif-/Nutzungsberatung."
+    },
+    {
+      "owner": "Geschäftsinhaltsversicherung",
+      "removed": "Betriebseinrichtung & Nachweise",
+      "integrated_into": "Sachschäden & Regulierung",
+      "why": "Inventarlisten und Schadenbelege sind Teil der Schadensregulierung; gesonderter Intent zu schmal."
+    }
   ]
 }
