@@ -1834,3 +1834,35 @@ Im bytegenau verifizierten 2.7.6-Original ist kein eindeutig benannter Code-/UI-
 
 LIVE:
 Noch offen. Kein Live-PASS vor WordPress-Installations-/Funktionsreadback.
+
+
+## HOBBYRAUSCH-BILD-20261020-S – Bildzentrale 2.7.8 mit verbindlichem Hobby-Depot-Bildprompt
+
+BASIS:
+Direkte Fortentwicklung der verifizierten Hobby-Depot-Bildzentrale 2.7.7; keine neue Pluginarchitektur.
+
+PROMPTREGEL:
+Der gemeinsam festgelegte Grundprompt ist zentral gebunden:
+- konkretes Thema sofort verständlich;
+- Tätigkeit vor Objekt, wenn sinnvoll;
+- Menschen/Hände/Arme bevorzugt, wenn sie die Tätigkeit verdeutlichen;
+- Menschen nie nur dekorativ;
+- ruhige, klare, nicht überladene Komposition;
+- keine Collage/Split-Bilder/Schrift/Logos/Wasserzeichen;
+- natürliche, glaubwürdige, leicht inspirierende redaktionelle Bildwirkung.
+
+AUTOMATISCHE THEMENABLEITUNG:
+Bei Beiträgen wird das konkrete Bildthema aus Titel, Kurztext und bis zu 120 Wörtern Beitragsinhalt aufgebaut. Die zentrale Grundregel gilt außerdem für WordPress-Kategorien, Post-Type-Heros und HivePress-Prompts.
+
+ARTEFAKT:
+`HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
+SHA-256 `d9d8caad4c2f4057fee30f9d21607376fa110d82defed8c0f759e5c202b83342`.
+
+QA:
+PHP PASS, ZIP PASS, WordPress-Paketstruktur PASS, 0 fehlende Callbacks, 0 fehlende self-calls, 0 Pferdealtlasten-Treffer. Beispiel Holzschnitzen: Titel/Kurztext/Inhalt/Hände/nicht-überladen PASS; 2874/3000 Zeichen.
+
+ABLAGE:
+Aktuelle 2.7.8 liegt im Bildzentrale-Büro und im zentralen Hobby-Depot-Plugin-Büro. 2.7.7 wurde dort als aktueller Installer entfernt; die unveränderte Originalquelle 2.7.6 bleibt als Beweis erhalten.
+
+LIVE:
+Noch offen; kein Live-PASS vor WordPress-Readback.
