@@ -1,3 +1,11 @@
+## HB-INS-20261020-07 – Begleitkategorie irrtümlich zum Vollportal ausgeweitet
+**STATUS: FACHLICHE DIMENSIONIERUNG KORRIGIERT / WP-IMPORT UND PLUGIN-MOCK WEITERHIN OFFEN.**
+FEHLER: Die 7. Hauptkategorie Versicherungen war auf 118 Seiten und 358 weitere Kategorien (476 Objekte) angewachsen und damit dem ursprünglich nur begleitenden Thema unverhältnismäßig groß. Auch der 433er-Vorläufer war bereits zu groß.
+WARUM: Die 105 verschiedenen Versicherungsarten wurden fälschlich mit 105 eigenständigen WordPress-Seite3-Themen gleichgesetzt. Umfangreiche Detailprüfung einzelner Kategorien löste die übergeordnete Portal-Dimensionierung nicht.
+KORREKTUR: Beschlossene Inhalte inklusive Renten-, Lebens- und Kapitalversicherungen **nicht streichen**; alle 105 eindeutig in nur 20 thematischen Sammelseiten unter fünf Bereichsseiten aufnehmen. 28 seltene Typen als künftige Einzelbeitrag-Kandidaten nur routen, ohne Artikel/Titel zu planen. 1+5+20+68=94 vorgesehene Objekte. Die 476/481/433-Importvorlagen sind abgelöst.
+NACHWEIS: `KONZEPT/VERSICHERUNGEN_KOMPAKT_26_SEITEN_68_KATEGORIEN_105_THEMEN_20261020.json`; `KONZEPT/VERSICHERUNGEN_KOMPAKT_94_STRUKTURTEST_20261020.json`, 105/105 exakt einmal abgedeckt, 10/10 datenbezogene Negativfälle blockiert.
+GRENZE: Diese Prüfungen validieren den neuen Plan, nicht die Live-Installation. Noch kein neues WP-/Plugin-Release, kein Import, kein kostenpflichtiger Provider-Aufruf.
+
 ## HB-INS-20261020-06 – Pauschale Drei-Kategorien-Schablone und fremde Artikelplanung
 **STATUS: FACHLICHER ENTWURF KORRIGIERT / PLUGIN UND LIVE WEITERHIN OFFEN.**
 FEHLER: Bei allen 105 Versicherungsseiten waren pauschal FAQ, Beratung und Leistungen & Praxis eingefügt; zusätzlich wurden 945 konkrete Artikelideen als Prüfnachweis mitgeführt. Das war keine ausreichend individuelle Kategorienprüfung und überschritt die Zuständigkeit.
