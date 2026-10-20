@@ -50,8 +50,8 @@
       "slug": "hausratversicherung",
       "key": "INS-SEO:R3:hausratversicherung",
       "parent": "INS-SEO:R2:hausrat-und-gebaude",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 49500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -59,8 +59,8 @@
       "slug": "wohngebaudeversicherung",
       "key": "INS-SEO:R3:wohngebaudeversicherung",
       "parent": "INS-SEO:R2:hausrat-und-gebaude",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -68,8 +68,8 @@
       "slug": "bauleistungsversicherung",
       "key": "INS-SEO:R3:bauleistungsversicherung",
       "parent": "INS-SEO:R2:hausrat-und-gebaude",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 3600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -77,8 +77,8 @@
       "slug": "mietausfallversicherung",
       "key": "INS-SEO:R3:mietausfallversicherung",
       "parent": "INS-SEO:R2:hausrat-und-gebaude",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 1900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -86,8 +86,8 @@
       "slug": "elektronikversicherung",
       "key": "INS-SEO:R3:elektronikversicherung",
       "parent": "INS-SEO:R2:hausrat-und-gebaude",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 720,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R2",
@@ -103,8 +103,8 @@
       "slug": "kfz-versicherung",
       "key": "INS-SEO:R3:kfz-versicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -112,8 +112,8 @@
       "slug": "fahrradversicherung",
       "key": "INS-SEO:R3:fahrradversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -121,8 +121,8 @@
       "slug": "e-scooter-versicherung",
       "key": "INS-SEO:R3:e-scooter-versicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -130,8 +130,8 @@
       "slug": "wohnmobilversicherung",
       "key": "INS-SEO:R3:wohnmobilversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 3600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -139,8 +139,8 @@
       "slug": "motorradversicherung",
       "key": "INS-SEO:R3:motorradversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 2900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -148,8 +148,8 @@
       "slug": "bootsversicherung",
       "key": "INS-SEO:R3:bootsversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 1000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -157,8 +157,8 @@
       "slug": "reiserucktrittsversicherung",
       "key": "INS-SEO:R3:reiserucktrittsversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 74000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -166,8 +166,8 @@
       "slug": "auslandskrankenversicherung",
       "key": "INS-SEO:R3:auslandskrankenversicherung",
       "parent": "INS-SEO:R2:fahrzeuge-und-reisen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 74000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R2",
@@ -183,8 +183,8 @@
       "slug": "privathaftpflichtversicherung",
       "key": "INS-SEO:R3:privathaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -192,8 +192,8 @@
       "slug": "rechtsschutzversicherung",
       "key": "INS-SEO:R3:rechtsschutzversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -201,8 +201,8 @@
       "slug": "bauherrenhaftpflichtversicherung",
       "key": "INS-SEO:R3:bauherrenhaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 1600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -219,8 +219,8 @@
       "slug": "drohnenhaftpflichtversicherung",
       "key": "INS-SEO:R3:drohnenhaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 90,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -228,8 +228,8 @@
       "slug": "hundehaftpflichtversicherung",
       "key": "INS-SEO:R3:hundehaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 12100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -237,8 +237,8 @@
       "slug": "pferdehaftpflichtversicherung",
       "key": "INS-SEO:R3:pferdehaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 1000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -246,8 +246,8 @@
       "slug": "tierkrankenversicherung",
       "key": "INS-SEO:R3:tierkrankenversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 8100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -255,8 +255,8 @@
       "slug": "vereinshaftpflichtversicherung",
       "key": "INS-SEO:R3:vereinshaftpflichtversicherung",
       "parent": "INS-SEO:R2:haftpflicht-und-rechtsschutz",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 720,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R2",
@@ -272,8 +272,8 @@
       "slug": "gesetzliche-krankenversicherung",
       "key": "INS-SEO:R3:gesetzliche-krankenversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -281,8 +281,8 @@
       "slug": "private-krankenversicherung",
       "key": "INS-SEO:R3:private-krankenversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 60500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -290,8 +290,8 @@
       "slug": "zahnzusatzversicherung",
       "key": "INS-SEO:R3:zahnzusatzversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 110000,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -299,8 +299,8 @@
       "slug": "krankenhauszusatzversicherung",
       "key": "INS-SEO:R3:krankenhauszusatzversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -308,8 +308,8 @@
       "slug": "krankentagegeldversicherung",
       "key": "INS-SEO:R3:krankentagegeldversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -317,8 +317,8 @@
       "slug": "pflegezusatzversicherung",
       "key": "INS-SEO:R3:pflegezusatzversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 4400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -326,8 +326,8 @@
       "slug": "berufsunfahigkeitsversicherung",
       "key": "INS-SEO:R3:berufsunfahigkeitsversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 49500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -335,8 +335,8 @@
       "slug": "unfallversicherung",
       "key": "INS-SEO:R3:unfallversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 27100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -344,8 +344,8 @@
       "slug": "gesetzliche-rentenversicherung",
       "key": "INS-SEO:R3:gesetzliche-rentenversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 33100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -353,8 +353,8 @@
       "slug": "private-rentenversicherung",
       "key": "INS-SEO:R3:private-rentenversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 14800,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -362,8 +362,8 @@
       "slug": "betriebliche-altersvorsorge",
       "key": "INS-SEO:R3:betriebliche-altersvorsorge",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 40500,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -371,8 +371,8 @@
       "slug": "risikolebensversicherung",
       "key": "INS-SEO:R3:risikolebensversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 22200,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -380,8 +380,8 @@
       "slug": "kapitallebensversicherung",
       "key": "INS-SEO:R3:kapitallebensversicherung",
       "parent": "INS-SEO:R2:krankenversicherung-und-vorsorge",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 4400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R2",
@@ -397,8 +397,8 @@
       "slug": "betriebshaftpflichtversicherung",
       "key": "INS-SEO:R3:betriebshaftpflichtversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -406,8 +406,8 @@
       "slug": "berufshaftpflichtversicherung",
       "key": "INS-SEO:R3:berufshaftpflichtversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 8100,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -415,8 +415,8 @@
       "slug": "geschaftsinhaltsversicherung",
       "key": "INS-SEO:R3:geschaftsinhaltsversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 320,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -424,8 +424,8 @@
       "slug": "betriebsunterbrechungsversicherung",
       "key": "INS-SEO:R3:betriebsunterbrechungsversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 590,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -433,8 +433,8 @@
       "slug": "firmenrechtsschutzversicherung",
       "key": "INS-SEO:R3:firmenrechtsschutzversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 590,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -442,8 +442,8 @@
       "slug": "dundo-versicherung",
       "key": "INS-SEO:R3:dundo-versicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 6600,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -451,8 +451,8 @@
       "slug": "cyberversicherung",
       "key": "INS-SEO:R3:cyberversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 1300,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -460,8 +460,8 @@
       "slug": "kautionsversicherung",
       "key": "INS-SEO:R3:kautionsversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 9900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -469,8 +469,8 @@
       "slug": "restschuldversicherung",
       "key": "INS-SEO:R3:restschuldversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 5400,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -478,8 +478,8 @@
       "slug": "betriebliche-krankenversicherung",
       "key": "INS-SEO:R3:betriebliche-krankenversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 2900,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     },
     {
       "level": "R3",
@@ -487,8 +487,8 @@
       "slug": "warenkreditversicherung",
       "key": "INS-SEO:R3:warenkreditversicherung",
       "parent": "INS-SEO:R2:gewerbeversicherungen-und-finanzen",
-      "verified_search_volume": null,
-      "keyword_status": "PROVIDER_NO_EXACT_ROW_KEEP_RELEVANCE"
+      "verified_search_volume": 880,
+      "keyword_status": "PROVIDER_EXACT_MATCH_20261020"
     }
   ],
   "flat_categories": [
@@ -2825,193 +2825,15 @@
   },
   "quality": {
     "source_coverage_105_once": true,
-    "keyword_evidence_count": 0,
+    "keyword_evidence_count": 45,
     "unmeasured_keywords": [
       {
-        "area": "Hausrat & Gebäude",
-        "keyword": "Hausratversicherung"
-      },
-      {
-        "area": "Hausrat & Gebäude",
-        "keyword": "Wohngebäudeversicherung"
-      },
-      {
-        "area": "Hausrat & Gebäude",
-        "keyword": "Bauleistungsversicherung"
-      },
-      {
-        "area": "Hausrat & Gebäude",
-        "keyword": "Mietausfallversicherung"
-      },
-      {
-        "area": "Hausrat & Gebäude",
-        "keyword": "Elektronikversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Kfz-Versicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Fahrradversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "E-Scooter-Versicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Wohnmobilversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Motorradversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Bootsversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Reiserücktrittsversicherung"
-      },
-      {
-        "area": "Fahrzeuge & Reisen",
-        "keyword": "Auslandskrankenversicherung"
-      },
-      {
         "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Privathaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Rechtsschutzversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Bauherrenhaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Haus- und Grundbesitzerhaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Drohnenhaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Hundehaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Pferdehaftpflichtversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Tierkrankenversicherung"
-      },
-      {
-        "area": "Haftpflicht & Rechtsschutz",
-        "keyword": "Vereinshaftpflichtversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Gesetzliche Krankenversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Private Krankenversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Zahnzusatzversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Krankenhauszusatzversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Krankentagegeldversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Pflegezusatzversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Berufsunfähigkeitsversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Unfallversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Gesetzliche Rentenversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Private Rentenversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Betriebliche Altersvorsorge"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Risikolebensversicherung"
-      },
-      {
-        "area": "Krankenversicherung & Vorsorge",
-        "keyword": "Kapitallebensversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Betriebshaftpflichtversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Berufshaftpflichtversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Geschäftsinhaltsversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Betriebsunterbrechungsversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Firmenrechtsschutzversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "D&O-Versicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Cyberversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Kautionsversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Restschuldversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Betriebliche Krankenversicherung"
-      },
-      {
-        "area": "Gewerbeversicherungen & Finanzen",
-        "keyword": "Warenkreditversicherung"
+        "keyword": "Haus- und Grundbesitzerhaftpflichtversicherung",
+        "reason": "Provider overview was requested, but no exact result row returned. Never interpret as 0 demand."
       }
     ],
-    "errors": []
+    "errors": [],
+    "keyword_evidence_extract": "Values transcribed from verified file tool output of two 2026-10-20 DataForSEO overview exports, not an API request and not ideas SERP research."
   }
 }
