@@ -3,19 +3,19 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-19
-STATUS: **1.0.0 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
+STATUS: **1.0.1 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
 
 SHA-256:
-`90debeaf31e8a95ad449c7fe355f1ea3862ab9342feaf5d1fdc700b323a50e59`
+`b686655bc2571548248fe278c4a74e7db927503f92900c9a661d173b6d04329a`
 
 Persistente Arbeitskopie:
-`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.0_INSTALLIEREN.zip`
+`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -30,12 +30,17 @@ Die exakten 1.4.0-Bytes waren nicht erreichbar. Verwendet wurden:
 - der belegte aktuelle 1.4.0-Manager-/Draft-/Review-Vertrag;
 - die Hobby-Depot-spezifische Konfiguration.
 
-1.0.0 ist deshalb eine eigenständig versionierte Hobby-Depot-Fassung, kein falsch behaupteter byteidentischer 1.4.0-Klon.
+1.0.1 ist deshalb eine eigenständig versionierte Hobby-Depot-Fassung, kein falsch behaupteter byteidentischer 1.4.0-Klon.
+
+## Verpackungsfix 1.0.1
+
+1.0.0 wurde von WordPress nicht als gültiges Plugin erkannt, weil neben dem eigentlichen Pluginordner eine zusätzliche README auf ZIP-Root-Ebene lag. 1.0.1 enthält exakt einen obersten Pluginordner; keine Fachlogik wurde geändert.
 
 ## QA
 
 - PHP 7/7 PASS;
 - ZIP PASS;
+- WordPress-Paketstruktur PASS;
 - keine Pferde-Fachlogik;
 - kein Cron/Auto-Publish;
 - zentrale Glossar-Sammlung;
@@ -44,4 +49,4 @@ Die exakten 1.4.0-Bytes waren nicht erreichbar. Verwendet wurden:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.0 installieren und Hauptseite + einen Testbegriff real prüfen; erst danach Glossarbestand produzieren.**
+**1.0.1 installieren und Hauptseite + einen Testbegriff real prüfen; erst danach Glossarbestand produzieren.**
