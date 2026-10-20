@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **1.50.702 FOOTER-/SERVICESEITEN-FIX LOKAL PASS / LIVE-ABNAHME OFFEN**
+STATUS: **1.50.703 SERVICE-TITEL + NATIVE-FOOTER-FIX LOKAL PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -47,48 +47,45 @@ Konzeptbindung:
 - Vergleich gegen 1.50.698: **0 unerwartete Änderungen an vorhandenen Dateien**;
 - bestehende 1.50.698-Fach-/Text-/Bildbasis nicht umgebaut.
 
-### Korrektur 1.50.702 – Footer und importierte Serviceseiten
+### Korrektur 1.50.703 – Serviceseitentitel und ListingHive-Footer
 
-1.50.701 beseitigte den Runtime-Fatal, ließ aber zwei Darstellungsfehler offen:
-- der eigene Hobby-Depot-Footer und der Theme-Footer wurden gleichzeitig sichtbar;
-- normale importierte Seiten wie Impressum/Datenschutz/AGB liefen zusätzlich durch den generischen Hobby-Depot-Seitenintro-Renderer und erhielten dadurch einen zweiten Intro-/„Mehr erfahren“-Block vor dem echten Seiteninhalt.
+1.50.702 beseitigte die Zusatz-Intros, entfernte dabei aber zugleich den einzigen sichtbaren Seitentitel der importierten Serviceseiten. Außerdem griff die bisherige Theme-Footer-Ausblendung im realen ListingHive-Frontend nicht zuverlässig.
 
-1.50.702 korrigiert ausschließlich diese Ursachen und die gewünschte Footer-Reihenfolge:
-- eigener Hobby-Depot-Footer bleibt der sichtbare Footer;
-- nativer Theme-Footer `footer#colophon.site-footer` wird im Hobby-Depot-Profil ausgeblendet;
-- Reihenfolge: **Rechtliches → Informationen → Anzeigenmarkt**;
-- Informationen werden nur aus dem importierten Menü gelesen; kein Merge mit alten festen Portal-Links;
-- Magazin dadurch exakt einmal;
-- alter Anbieter-Link entfernt;
-- Hobbyfinder vorerst separat als einzelner Link im Brandblock;
-- 11 importierte Footer-/Serviceseiten werden vom generischen Intro-/„Mehr erfahren“-Renderer ausgenommen und zeigen ihren WordPress-Seiteninhalt damit nur einmal.
+Exakt korrigiert:
+- 11 importierte Serviceseiten erhalten genau einen sichtbaren Titel plus Breadcrumb;
+- kein generischer Introtext und kein „Mehr erfahren“ auf diesen Seiten;
+- importierter Seiteninhalt selbst bleibt unverändert und wird nur einmal ausgegeben;
+- ListingHive-Themefooter `.site-footer` wird im Hobby-Depot-Profil hart ausgeblendet;
+- eigener Hobby-Depot-Footer bleibt sichtbar;
+- Reihenfolge bleibt Rechtliches → Informationen → Anzeigenmarkt;
+- Magazin wird dedupliziert;
+- Anbieter wird aus Informationen herausgefiltert;
+- Hobbyfinder bleibt vorerst separat.
 
-Lokale QA 1.50.702:
+Lokale QA 1.50.703:
 - PHP-Lint: **135/135 PASS**;
-- Footer-Harness: genau ein eigener Footer: **PASS**;
-- Reihenfolge Rechtliches / Informationen / Anzeigenmarkt: **PASS**;
-- Magazin exakt einmal: **PASS**;
-- Anbieter nicht vorhanden: **PASS**;
-- Hobbyfinder exakt einmal separat: **PASS**;
-- 11/11 importierte Seitenslugs ohne zusätzlichen generischen Introblock: **PASS**;
-- Theme-Footer-Hide-Regel: **PASS**;
-- importierte DB-Seiteninhalte selbst nicht verändert.
+- 11/11 Serviceseiten: genau 1 H1, Breadcrumb vorhanden, kein „Mehr erfahren“, kein Zusatz-Intro: **PASS**;
+- Footer-Runtime: genau 1 eigener Footer, Reihenfolge PASS, Magazin 1×, Anbieter 0×, Hobbyfinder 1×: **PASS**;
+- ListingHive-Struktur gegen echten Theme-Code geprüft: Themefooter ist `<footer class="site-footer">`; neue Ausblendung zielt exakt darauf;
+- CSS-Selektormatch gegen ListingHive-Footerstruktur: native Footerbestandteile getroffen, eigener `.hd-footer-v150616` nicht getroffen;
+- geänderte Dateien gegenüber 1.50.702: genau 3 (Hauptdatei Versionswert, aktuelle Hobby-Depot-Klasse, Evidence-Datei);
+- ZIP-Integrität: **PASS**.
 
 ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.702_FOOTER_SERVICEPAGE_FIX_LOCALPASS.zip
+AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.703_SERVICE_TITLE_NATIVE_FOOTER_FIX_LOCALPASS.zip
 
 SHA-256:
-e9670785905041bd4d24cfe5a62138e2d8b9b37572115f6f7d5076481ab15859
+74cb488a891dab9bfff237c3820c05a2cf3dd3651f52a5335e2af671b33ce228
 
 GRÖSSE:
-58,673,102 Bytes.
+58,673,853 Bytes.
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-/Frontend-Readback des 1.50.702-Stands. Kein Live-PASS aus lokaler QA ableiten.
+Echter WordPress-/Frontend-Readback des 1.50.703-Stands. Kein Live-PASS aus lokaler QA ableiten.
 
 ## EXAKT EINE NEXT ACTION
 
-**Nur 1.50.702 über 1.50.701 installieren und Frontend neu laden. Keinen erneuten Footer-Import starten. Prüfen: nur ein Footer; Reihenfolge Rechtliches → Informationen → Anzeigenmarkt; Magazin einmal; Anbieter weg; Hobbyfinder separat; Impressum/AGB/Datenschutz usw. ohne zusätzlichen „Mehr erfahren“-Block und ohne doppelten Inhalt.**
+**Nur 1.50.703 über 1.50.702 installieren und Frontend neu laden. Keinen erneuten Footer-Import starten. Prüfen: Seitentitel auf Impressum/Preise/AGB usw. wieder sichtbar; kein „Mehr erfahren“/Doppelinhalt; nur ein Footer; Reihenfolge Rechtliches → Informationen → Anzeigenmarkt; Magazin einmal; Anbieter weg; Hobbyfinder separat.**
 
 ## ARBEITSBINDUNG
 
@@ -98,7 +95,8 @@ Echter WordPress-/Frontend-Readback des 1.50.702-Stands. Kein Live-PASS aus loka
 - 1.50.699 = letzte funktionierende Basis vor Footer-Arbeit.
 - 1.50.700 = **verworfen** wegen Runtime-Klassen-/Template-Mismatch.
 - 1.50.701 = Runtime-Hotfix, ersetzt durch 1.50.702.
-- 1.50.702 = aktueller Designstand; Footer nur einmal, gewünschte Menüordnung, keine Zusatz-Intros auf importierten Serviceseiten.
+- 1.50.702 = ersetzt; entfernte Zusatz-Intros, aber auch Serviceseitentitel.
+- 1.50.703 = aktueller Designstand; Serviceseitentitel zurück, kein Zusatz-Intro, ListingHive-Footer hart ausgeblendet.
 - Keine neue Architektur.
 - Keine Änderungen an Kategoriebaum, Affiliate-Slotarchitektur, Meta-/SEO-Titeln oder Bildern.
 - Header-/Responsive-Navigation und Pferdeatelier-Footer sind separate nächste Designblöcke nach der Startseiten-Sichtprüfung.
