@@ -1,0 +1,86 @@
+/*
+ * Hab & Bewahr – Headerkorrektur 21.10.2026
+ * Für bestehendes Design; keine neuen Plugins, keine Kategorie- oder Bildänderungen.
+ * Styling-only: sieben Weltlinks, kompakte Topbar, bündige Branding-/Suchzeile.
+ */
+
+/* 1. Der aus dem zentralen Baum vorhandene Versicherungs-Link hat
+      im Originalrenderer ein leeres Kurzlabel. Sichtbar machen;
+      der echte Anker, seine URL und sein aria-label bleiben unverändert. */
+body.hbdp-body .hbdp-navworld[data-world="core:world:insurance"]
+  > summary > a.hbdp-navworld-link:empty::before {
+  content: "Versicherungen";
+}
+
+/* 2. Oberer Ratgeberstreifen: oberhalb von Marke und Suche,
+      statt einer eigenen Zeile unmittelbar vor der Navigation. */
+body.hbdp-body .hbd-header {
+  display: flex;
+  flex-direction: column;
+}
+body.hbdp-body .hbd-header > .hbd-descriptor {
+  order: -1;
+  background: #f7f8f5;
+  border-top: 0;
+  border-bottom: 1px solid #e8ebe5;
+  color: #65745f;
+  margin: 0;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .035em;
+  line-height: 1.35;
+  text-align: center;
+}
+
+/* 3. Logo links und Suche rechts auf die gleiche Innenbreite
+      wie die schmaleren Text-/Themenseiten bringen. */
+body.hbdp-body .hbd-header > .hbd-head-top {
+  width: min(1180px, 74%);
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 23px 0 17px;
+  gap: 28px;
+  box-sizing: border-box;
+}
+body.hbdp-body .hbd-header .hbd-head-top > .hbd-search {
+  flex: 0 1 345px;
+  width: min(345px, 100%);
+  max-width: 345px;
+  margin-left: auto;
+}
+
+/* 4. Alle sieben echten Hauptwelten in einer einzigen Desktop-Zeile.
+      Megamenü und seine bis zu fünf Bereichsspalten bleiben unverändert. */
+@media (min-width: 761px) {
+  body.hbdp-body .hbdp .hbdp-mainnav {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-flow: row;
+    width: 100%;
+  }
+  body.hbdp-body .hbdp .hbdp-navworld > summary {
+    gap: 4px;
+    padding-inline: 4px;
+    min-width: 0;
+    white-space: nowrap;
+    font-size: clamp(.68rem, 1.18vw, .85rem);
+  }
+}
+
+/* Das bewährte mobile Hamburger-Menü bleibt erhalten. */
+@media (max-width: 760px) {
+  body.hbdp-body .hbd-header > .hbd-head-top {
+    width: calc(100% - 30px);
+    max-width: none;
+    margin-inline: auto;
+    padding: 4px 0 12px;
+    gap: 0;
+  }
+  body.hbdp-body .hbd-header .hbd-head-top > .hbd-search {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 560px;
+    margin: 16px 0 0;
+  }
+}
