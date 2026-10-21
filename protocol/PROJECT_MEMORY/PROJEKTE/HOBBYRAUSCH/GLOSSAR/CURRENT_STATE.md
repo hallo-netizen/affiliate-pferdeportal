@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.12 NATIVE HOBBY-DEPOT-BREADCRUMB HARD PASS / LIVE OFFEN**
+STATUS: **1.0.13 LAYOUT + TYPO HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -384,10 +384,39 @@ Artefakt:
 SHA-256:
 `3e464dbd858cb723a85d9ffa9b4c1e8f92abaaa0a3f4423dd36a72526653d536`
 
+## 21.10.2026 – 1.0.13 Layout-/Typokorrektur
+
+Kritische Prüfung gegen den echten Hobby-Depot-Designstand 1.50.705:
+
+- native Hobby-Depot-Inhaltsbreite ist bis **1440 px** (`--hd-content:1440px`);
+- Glossar 1.0.12 war auf **1180 px** begrenzt und deshalb sichtbar schmaler als normale Kategorie-/Hubseiten;
+- Glossar-Hauptseite nutzt ab 1.0.13 exakt die native Inhaltsbreite `min(calc(100% - 72px), var(--hd-content))`;
+- Begriffseite wird bewusst nicht auf volle 1440 px gezogen: Desktop-Lesebreite max. **1240 px**, bei 1024 px Viewport aber exakt dieselbe 952-px-Achse wie die native Seite. Damit keine überlangen Textzeilen auf großen Monitoren;
+- Abstand Breadcrumb → Glossar-Inhalt: Übersicht **14 px**, Begriffseite **16 px**;
+- „Kurz erklärt“-Kasten: zusätzlich **3 px linke Petrol-Linie**;
+- Kurzdefinition **16 px**, Bodytext **16 px**, Sidebar-Links **12.5 px**; Inter bleibt einheitliche Schriftfamilie;
+- mobile Inhaltsbreite an native 24-px-Ränder angepasst;
+- Breadcrumb-Code/Route/Related/Nav unverändert.
+
+Browser-Computed-Style-Hardpass:
+- 1600 px Viewport: Glossar-Übersicht 1440 px breit; Begriffseite 1240 px;
+- 1024 px Viewport: Übersicht 952 px, Begriffseite 952 px;
+- Begriffseite Breadcrumb-Abstand 16 px;
+- linke Kurz-erklärt-Linie 3 px, rgb(15,143,149);
+- Kurzdefinition 16 px; Body 16 px; Sidebarlink 12.5 px.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.13_LAYOUT_TYPO_HARDPASS.zip`
+
+SHA-256:
+`fbc4607cd2e7d1bdf0fd4c63619db3cf51366ed27b239685e4411cf8aea53221`
+
+PHP-Lint PASS; Render-/Strukturtests PASS; ZIP-Integrität PASS.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.12: nur Breadcrumb-Position auf Übersicht und Begriffseite prüfen.
+Echter WordPress-Live-Readback von 1.0.13: Abstand, Breite und Kurz-erklärt-Typografie.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.12 erst jetzt installieren. Danach ausschließlich die Breadcrumbs auf Übersicht und Begriffseite gegen eine normale Hobby-Depot-Seite vergleichen.**
+**1.0.13 über die bestehende Glossar-Version installieren und nur diese vier Punkte live prüfen: Breadcrumb-Abstand, Übersichtsbreite, Kurz-erklärt-Linkslinie, Schriftgröße.**
