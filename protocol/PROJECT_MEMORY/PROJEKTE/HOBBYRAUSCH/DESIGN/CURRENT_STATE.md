@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.50.706 FOOTER FINAL LOCAL HARD PASS / LIVE-READBACK OFFEN**
+STATUS: **1.50.706 LOCAL FOOTER PASS / LIVE KEINE AENDERUNG SICHTBAR / DEPLOYMENT-READBACK BLOCKIERT**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -112,10 +112,25 @@ Größe:
 
 Finder-Logik/-Design aus 1.50.705 wurde durch diesen Footerauftrag nicht verändert.
 
+## LIVE-READBACK 21.10.2026
+
+Nutzer meldet nach Installation von 1.50.706: **Frontend-Footer unverändert**.
+
+Lokale Gegenprüfung der tatsächlich gepackten ZIP:
+- Pluginheader: 1.50.706;
+- Laufzeitklasse: RELEASE 1.50.706;
+- gerenderter Footer enthält **keinen Hobbyfinder-Link**;
+- gerenderter Footer enthält **keinen Zeit/Budget-/Anbieter-Zusatz**;
+- gerenderter Footer enthält **© 2026 Hobby Depot**;
+- Links 14px, Überschriften 15px;
+- ZIP enthält genau diese geänderten Dateien.
+
+Daraus folgt: Der sichtbare Live-Footer kann nicht aus dem lokal geprüften 1.50.706-Render stammen. Vor einem weiteren Build muss deshalb der tatsächlich aktive Live-Pluginstand bzw. ein alter ausgelieferter/cachender Codepfad identifiziert werden. Keine weitere Footer-Version auf Verdacht bauen.
+
 ## ERSTER OFFENER BLOCKER
 
-**Echter WordPress-Live-Readback des 1.50.706-Footers.**
+**Exakter Live-Deployment-Readback: Welche Version/Plugin-Datei von HD-003 wird auf WordPress tatsächlich ausgeführt?**
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.706 über das bestehende Designplugin installieren und nur den Footer auf Desktop/Mobil prüfen: keine untere helle Zusatzleiste, kein Hobbyfinder-Link, größere Links, Copyright im dunklen Footer.**
+**Keine neue ZIP bauen. Zuerst den aktiven WordPress-Pluginstand von „Affiliate Portal Template Kit“ verifizieren (Version und aktiver Pluginpfad). Erst danach Ursache beheben.**
