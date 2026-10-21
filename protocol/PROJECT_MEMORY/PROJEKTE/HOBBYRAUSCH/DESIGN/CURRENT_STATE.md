@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.50.706 LOCAL FOOTER PASS / LIVE KEINE AENDERUNG SICHTBAR / DEPLOYMENT-READBACK BLOCKIERT**
+STATUS: **1.50.707 NEUER RUNTIME-PFAD HARD PASS / LIVE-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -127,10 +127,47 @@ Lokale Gegenprüfung der tatsächlich gepackten ZIP:
 
 Daraus folgt: Der sichtbare Live-Footer kann nicht aus dem lokal geprüften 1.50.706-Render stammen. Vor einem weiteren Build muss deshalb der tatsächlich aktive Live-Pluginstand bzw. ein alter ausgelieferter/cachender Codepfad identifiziert werden. Keine weitere Footer-Version auf Verdacht bauen.
 
+## 1.50.707 – neuer Laufzeitpfad gegen alten Footer-Code
+
+706 war als Pluginversion live aktiv, aber intern weiterhin an die alte Laufzeitklasse/-datei V150699 gebunden. Dadurch konnte 706 allein nicht beweisen, dass wirklich der neue Footer-Codepfad ausgeführt wurde.
+
+1.50.707 erzwingt deshalb einen neuen Runtime-Pfad:
+- neue Datei `class-hobby-depot-profile-v150707.php`;
+- neue Klasse `Hobby_Depot_Profile_V150707`;
+- neue eigene Templates `hobby-depot-front-v150707.php` und `hobby-depot-content-v150707.php`;
+- Hauptplugin referenziert **nicht mehr** V150699;
+- Footer trägt eindeutigen Marker `data-hd-runtime="1.50.707"` und HTML-Kommentar `HD-003 RUNTIME 1.50.707`;
+- Glossar-Runtime-Auflösung wurde mit gleichzeitig deklarierter alter V150699 geprüft und wählt V150707.
+
+Footerinhalt unverändert nach Nutzerentscheidung:
+- kein Hobbyfinder;
+- kein Zeit/Budget-/Anbieter-Zusatz;
+- Copyright im dunklen Footer;
+- größere Footerlinks/Überschriften;
+- Theme-Footer verborgen.
+
+Hard-QA:
+- Footer-Render mit absichtlich enthaltenen unerwünschten Menüpunkten: PASS;
+- neuer Runtime-Marker: PASS;
+- Hauptplugin ohne V150699-Runtime-Referenz: PASS;
+- Front-/Content-Templates auf V150707: PASS;
+- Glossar-Resolver bei gleichzeitig vorhandener V150699: **V150707 PASS**;
+- PHP-Lint **138/138 PASS**;
+- ZIP-Integrität PASS.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.707_FOOTER_RUNTIME_HARDPASS.zip`
+
+SHA-256:
+`ad567c9b4376ed4c5ad06d95406c16957aeff7ce7b4cb9fce313835dc2880006`
+
+Größe:
+58,828,942 Bytes.
+
 ## ERSTER OFFENER BLOCKER
 
-**Exakter Live-Deployment-Readback: Welche Version/Plugin-Datei von HD-003 wird auf WordPress tatsächlich ausgeführt?**
+**Live-Readback von 1.50.707.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Keine neue ZIP bauen. Zuerst den aktiven WordPress-Pluginstand von „Affiliate Portal Template Kit“ verifizieren (Version und aktiver Pluginpfad). Erst danach Ursache beheben.**
+**1.50.707 einmal über das bestehende Designplugin installieren und den Footer neu laden. Wenn der Footer dann nicht geändert ist, stammt er definitiv nicht aus HD-003 und es wird kein weiterer Designbuild erstellt, bevor der externe Footer-Eigentümer identifiziert ist.**
