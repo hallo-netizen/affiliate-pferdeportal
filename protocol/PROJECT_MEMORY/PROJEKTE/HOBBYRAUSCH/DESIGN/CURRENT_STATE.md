@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.50.708 FOOTER THEME-BINDING ROOTFIX LOCAL HARD PASS / LIVE-READBACK OFFEN**
+STATUS: **1.50.709 HD-001 AUTOFOOTER ROOTFIX EXAKT REPRODUZIERT / LIVE-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -164,54 +164,61 @@ SHA-256:
 Größe:
 58,828,942 Bytes.
 
-## 21.10.2026 – Footer-Ursache im Hobby-Depot-Büro gefunden
+## 21.10.2026 – Footer-Ursache exakt nachgewiesen
 
-Die vorher geplante Eigentümer-Diagnose ist **nicht mehr erforderlich**.
+Die vorherige 1.50.708-Annahme „nativer Theme-Footer“ war falsch und wird verworfen.
 
-Konkreter Befund aus den eigenen Hobby-Depot-Komponenten:
-- `FOOTER_UMZUG 1.1.1` importiert nicht nur Seiten und Menüs.
-- Der Importer setzt zusätzlich `nav_menu_locations` für Footer-Locations und bindet Footer-Widgets an Footer-Sidebars.
-- HD-003 rendert parallel den eigenen dunklen Hobby-Depot-Footer.
-- Dadurch existieren zwei Footer-Ausgabepfade: **HD-003 + nativer Theme-Footer**.
-- Die helle Leiste unter dem dunklen Footer stammt damit aus dem durch unseren Importer aktivierten nativen Theme-Footerpfad; kein fremdes neues Plugin ist erforderlich.
+Exakter Befund gegen den aktuellen Hobby-Depot-Stand:
+- HD-001 / `affiliate-portal-kategorie-workflow` 1.14.16 registriert `APKW_FrontendStructure::output_auto_footer` an `wp_footer` mit Priorität 50.
+- Diese Methode gibt `<div class="apkw-auto-footer">` plus eigenes CSS mit `background:#fff`, oberer Border und Abstand aus.
+- Mit dem echten Hobby-Depot-V7.1-Profil reproduziert der aktuelle HD-001-Code exakt zwei Links: `Zeit, Budget & Platz` und `Anbieter`.
+- Die Glossar-Shell rendert zuerst den dunklen HD-003-Footer und ruft danach `wp_footer()` auf. Deshalb erscheint der HD-001-Autofooter sichtbar darunter.
+- Ursache ist damit **HD-001-Autofooter**, nicht Footer-Importer und nicht Theme-Footer.
 
-## 1.50.708 – Source-Rootfix
+## 1.50.709 – eigentlicher Rootfix
 
-Basis: 1.50.707.
+Basis: 1.50.707; die falschen 1.50.708-Theme-Unterdrückungen werden nicht übernommen.
 
-Änderung nur im Hobby-Depot-Designprofil:
-- Footer-Theme-Menülokationen mit `footer` werden im Frontend ausgeblendet;
-- Footer-Widget-Sidebars werden im Frontend geleert;
-- `wp_nav_menu` für Footer-Theme-Locations wird fail-safe unterdrückt;
-- **keine Datenbankänderung**;
-- importierte Menüs/Seiten bleiben erhalten;
-- der dunkle HD-003-Footer liest seine Menüs weiterhin direkt und bleibt vollständig erhalten;
-- neuer Runtime-Pfad V150707 aus 1.50.707 bleibt bestehen, Marker/Release = 1.50.708.
+Änderung:
+- HD-003 registriert am von HD-001 selbst vorgesehenen Filter `apkw_auto_footer_enabled` mit Priorität 9999 und liefert `false`.
+- Dadurch wird nur die automatische sichtbare HD-001-Footer-Ausgabe abgeschaltet.
+- HD-001 `footer_entries()` und Shortcode/API bleiben unverändert verfügbar.
+- keine Kategorie-, Zielbaum-, SEO-, Finder-, Glossar- oder Datenbankänderung.
+- dunkler HD-003-Footer bleibt der einzige sichtbare Footer.
 
-Lokale QA:
-- PHP: **138/138 PASS**;
-- Footer-Menülokation-Unterdrückung: PASS;
-- Footer-Widget-Unterdrückung: PASS;
-- Footer-`wp_nav_menu`-Unterdrückung: PASS;
-- normale Header-/Primary-Menüs bleiben erhalten: PASS;
-- keine DB-Writes in Rootfix-Methoden: PASS;
-- native Footer-Hide-CSS weiter vorhanden: PASS;
-- gegenüber 1.50.707 exakt zwei Runtime-Dateien geändert + Evidence ergänzt;
-- ZIP-Integrität: PASS.
+Exakte Vorher-/Nachher-Simulation mit aktuellem HD-001 1.14.16 und realem V7.1-Profil:
+- Negativkontrolle reproduziert `.apkw-auto-footer`: PASS;
+- weißer Hintergrund + obere Linie: PASS;
+- exakt `Zeit, Budget & Platz`: PASS;
+- exakt `Anbieter`: PASS;
+- exakt zwei Autofooter-Links: PASS;
+- HD-001-Hook `wp_footer`, Priorität 50: PASS;
+- HD-003-Filter `apkw_auto_footer_enabled`, Priorität 9999: PASS;
+- nach Filter: `.apkw-auto-footer` 0 Treffer: PASS;
+- `Zeit, Budget & Platz` 0 Treffer: PASS;
+- `Anbieter`-Autofooterlink 0 Treffer: PASS;
+- dunkler HD-003-Footer exakt einmal: PASS;
+- Hobbyfinder-Footerlink entfernt: PASS;
+- `© 2026 Hobby Depot` vorhanden: PASS.
+
+Weitere QA:
+- Glossar 1.0.13 wählt mit alter V150699 und neuer V150709 exakt V150709: PASS;
+- PHP-Lint: 138/138 PASS;
+- falsche 1.50.708-Theme-Suppressoren nicht enthalten: PASS;
+- ZIP CRC/Fresh-Unpack: PASS.
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.708_FOOTER_THEME_BINDING_ROOTFIX_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.709_HD001_AUTOFOOTER_ROOTFIX_VERIFIED.zip`
 
 SHA-256:
-`b5aa47c48a3e37b3c75bb2af0e1093cf89016f9d1a8d893294bd32657a28c09c`
+`32ed94f5e45b5ae59064b19208ca90d32a74a2e33a8f15c3007bebd7228bf6cb`
 
 Größe:
-58,830,312 Bytes.
-
+58,829,084 Bytes.
 ## ERSTER OFFENER BLOCKER
 
-**Live-Readback von 1.50.708.**
+**Nur noch der echte Live-Readback von 1.50.709.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-003 1.50.708 über die aktive 1.50.706 installieren und nur prüfen, ob unter dem dunklen Footer die weiße Zusatzleiste verschwunden ist und der dunkle Footer vollständig bleibt.**
+**HD-003 1.50.709 über die aktuell aktive Designplugin-Version installieren und prüfen: weiße Leiste `Zeit, Budget & Platz / Anbieter` muss weg sein; dunkler Footer muss mit größerer Schrift, ohne Hobbyfinder und mit Copyright stehen bleiben.**
