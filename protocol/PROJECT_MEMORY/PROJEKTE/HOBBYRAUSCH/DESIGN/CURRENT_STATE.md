@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **FOOTER-EIGENTUEMER LIVE-DIAGNOSE OFFEN / KEIN WEITERER DESIGNBUILD VOR READBACK**
+STATUS: **1.50.708 FOOTER THEME-BINDING ROOTFIX LOCAL HARD PASS / LIVE-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -164,32 +164,54 @@ SHA-256:
 Größe:
 58,828,942 Bytes.
 
-## 21.10.2026 – Footer-Eigentümerprüfung
+## 21.10.2026 – Footer-Ursache im Hobby-Depot-Büro gefunden
 
-Bestätigt:
-- Footer-Umzug/Importer 1.1.1 ist **kein Frontend-/Designrenderer**; nur Import/Export von Seiten, Menüs, Widgets und Bindungen.
-- Dunkler Hobby-Depot-Footer wird durch HD-003 / Affiliate Portal Template Kit gerendert.
-- Die zusätzliche weiße Leiste unter dem dunklen Footer ist damit noch **nicht eindeutig einem Renderer zugeordnet**.
-- Auf der Glossar-Shell wird bei aktivem Hobby-Depot-Profil direkt dessen `render_footer()` ausgegeben und danach `wp_footer()` ausgeführt; der normale Theme-`get_footer()`-Weg ist dort nicht der reguläre Pfad.
-- Statische Altbelege von HD-001 zeigen: Footer-Daten/API ja, Footer-Platzierung/Styling ausdrücklich Designlayer. Aktueller Live-Hookpfad muss deshalb gemessen statt geraten werden.
+Die vorher geplante Eigentümer-Diagnose ist **nicht mehr erforderlich**.
 
-Kein weiterer Footer-Designbuild vor Live-Readback.
+Konkreter Befund aus den eigenen Hobby-Depot-Komponenten:
+- `FOOTER_UMZUG 1.1.1` importiert nicht nur Seiten und Menüs.
+- Der Importer setzt zusätzlich `nav_menu_locations` für Footer-Locations und bindet Footer-Widgets an Footer-Sidebars.
+- HD-003 rendert parallel den eigenen dunklen Hobby-Depot-Footer.
+- Dadurch existieren zwei Footer-Ausgabepfade: **HD-003 + nativer Theme-Footer**.
+- Die helle Leiste unter dem dunklen Footer stammt damit aus dem durch unseren Importer aktivierten nativen Theme-Footerpfad; kein fremdes neues Plugin ist erforderlich.
 
-Passives Diagnoseartefakt:
-`HOBBY_DEPOT_FOOTER_EIGENTUEMER_DIAGNOSE_1.0.0.zip`
+## 1.50.708 – Source-Rootfix
+
+Basis: 1.50.707.
+
+Änderung nur im Hobby-Depot-Designprofil:
+- Footer-Theme-Menülokationen mit `footer` werden im Frontend ausgeblendet;
+- Footer-Widget-Sidebars werden im Frontend geleert;
+- `wp_nav_menu` für Footer-Theme-Locations wird fail-safe unterdrückt;
+- **keine Datenbankänderung**;
+- importierte Menüs/Seiten bleiben erhalten;
+- der dunkle HD-003-Footer liest seine Menüs weiterhin direkt und bleibt vollständig erhalten;
+- neuer Runtime-Pfad V150707 aus 1.50.707 bleibt bestehen, Marker/Release = 1.50.708.
+
+Lokale QA:
+- PHP: **138/138 PASS**;
+- Footer-Menülokation-Unterdrückung: PASS;
+- Footer-Widget-Unterdrückung: PASS;
+- Footer-`wp_nav_menu`-Unterdrückung: PASS;
+- normale Header-/Primary-Menüs bleiben erhalten: PASS;
+- keine DB-Writes in Rootfix-Methoden: PASS;
+- native Footer-Hide-CSS weiter vorhanden: PASS;
+- gegenüber 1.50.707 exakt zwei Runtime-Dateien geändert + Evidence ergänzt;
+- ZIP-Integrität: PASS.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.708_FOOTER_THEME_BINDING_ROOTFIX_HARDPASS.zip`
+
 SHA-256:
-`221693442db3abc563c0e698c9364f735857d0fc29bd93b7f8dc8cd88a1f8fdb`
+`b5aa47c48a3e37b3c75bb2af0e1093cf89016f9d1a8d893294bd32657a28c09c`
 
-Die Diagnose:
-- ändert kein Frontend/CSS;
-- zeichnet nur nach explizitem, signiertem Admin-Aufruf die echten `wp_footer`-/`get_footer`-Callbacks inkl. Reflection-Dateipfad/Owner auf;
-- erfasst aktives Theme/Plugins, Footer-Menüs/Widgets, Hobby-Depot-Profilklasse, APKW_FrontendStructure/footer_entries und OPcache-Einstellungen;
-- exportiert den Bericht als JSON.
+Größe:
+58,830,312 Bytes.
 
 ## ERSTER OFFENER BLOCKER
 
-**Exakter Live-Owner der weißen Footer-Leiste ist noch nicht bewiesen.**
+**Live-Readback von 1.50.708.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Nur die passive Footer-Eigentümer-Diagnose installieren, unter Werkzeuge → Footer-Eigentümer Diagnose die Glossar-Seite einmal erfassen und den erzeugten JSON-Bericht auslesen. Kein Designplugin-Update vorher.**
+**HD-003 1.50.708 über die aktive 1.50.706 installieren und nur prüfen, ob unter dem dunklen Footer die weiße Zusatzleiste verschwunden ist und der dunkle Footer vollständig bleibt.**
