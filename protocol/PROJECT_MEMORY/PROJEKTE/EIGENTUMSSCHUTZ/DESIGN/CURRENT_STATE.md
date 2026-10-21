@@ -1,5 +1,19 @@
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
+## 21.10.2026 – HEADER-DESIGNPLUGIN 0.1.58 ZUM CHAT-DOWNLOAD ERSTELLT (AKTUELLER AUFTRAG)
+**Vollständiges Original-Designplugin als ZIP:** `/mnt/data/HAB_UND_BEWAHR_DESIGN_0.1.58_HEADER_TOPBAR_NAVIGATION.zip`, SHA256 `329df722bcb70eb2380ed9f8691ad1557104e544f104e2f9d14cc67aef6fc365`, 33.804.953 Bytes, originaler Installationsordner `hab-bewahr-design-vorschau`, **165 Dateien / 9 PHP**, ZIP-CRC & 9/9 PHP-Lint PASS. Nutzer erhält direkt Sandbox-ZIP.
+**Explizite Basis:** **letzter nicht als `NICHT INSTALLIEREN` gekennzeichneter veröffentlichter Design-Library-Stand 0.1.44**, nicht der gesonderte **0.1.57-WIP mit 17 weiterhin fehlenden Bildern**. Die vorhandenen 165 Dateien aus 0.1.44 bleiben bis auf genau fünf Header-bezogene Dateien vollständig byteidentisch; weder unfertige Bildmappings noch neue Fotodateien kopiert. **Live installierte Designversion nicht feststellbar, daher keinen sicheren Upgrade-Pfad über eine unbekannte neuere installierte Designversion behaupten.** Vor WP-Update bei installiertem Design >0.1.44 sicherheitsbedingt nicht blind überschreiben.
+**Exakter Headerfix (physisches PHP, kein zusätzlicher CSS-Plugin):**
+1. `templates/site.php` – `hbdp_world_nav_label('core:world:insurance')` gibt echten Linktext `Versicherungen` zurück, Welt-Sortierung um siebten World-ID ergänzt, Navigations-Transient-Key von `0.1.26` auf `0.1.58-header` geändert (alter sechs-Punkte-Cache nicht wiederverwendet).
+2. `assets/style.css` – Hauptnavigations-Grid im Desktop statt sechs nun sieben Spalten ab 761px, schmalere Summary-Abstände; mobile alte Layout-Breakpoints und Megamenü-internen Gruppenspalten bleiben unangetastet.
+3. `includes/class-hb-design-startseite-view.php` – `.hbd-descriptor` vom alten Platz unter Logo/Suche im echten Markup **vor** `.hbd-head-top` versetzt.
+4. `assets/header.css` – Ratgebertext als kompakte Topbar, Header-Logo/Suche auf gleiche 74%-Innenbreite wie sichtbarer Body, Mobile-Regeln übernommen.
+5. `hab-bewahr-design-vorschau.php` – bestehende Pluginidentität, Version 0.1.58 und frische CSS-Cacheversionen.
+**Tests:** Original-ZIP 0.1.44 physisch geöffnet, exakt eine PHP-Nav-Label-/Worldorder-/Cache-Stelle geänd., Body/Header-Markup geprüft, alle außer diesen fünf Dateien bytegleich. ZIP 165/165 und 9/9 PHP-Syntax PASS. Frühere CSS-Demoseite 1024px/390px belegt das Layoutprinzip, ist aber **kein Beweis, dass 0.1.58 in echtem WordPress live abgenommen wurde**. Weiter offen: installierte Designversion, reale Desktop-/Mobilabnahme und evtl. Bildstand-Kompatibilität.
+**NEXT ACTION:** Nur falls installierter Designplugin-Bestand dem belegten 0.1.44-Baseline entspricht, 0.1.58 als **Update des gleichen Plugins** einspielen; dann realen Versicherungs-Header an Desktop/Mobil prüfen. Falls installierte Designversion neuer als 0.1.44 oder anders befüllt, zunächst deren Original-ZIP für einen zielgenauen Fünf-Dateien-Patch verwenden, um keine Bilder zu verlieren.
+
+---
+
 ## 21.10.2026 – HEADER-ZWISCHENKORREKTUR: SIEBEN WELTEN, TOPBAR, BÜNDIGER HEADER (AKTUELLER SONDERAUFTRAG)
 **Nutzer-Screenshot am 21.10.2026:** Header zeigt sechs alte Hauptwelten in einer Zeile; siebte Versicherung besitzt keinen sichtbaren Text und rutscht als leerer Navigationspunkt in Zeile zwei. Claim „Dein Ratgeber für Schutz & Sicherheit“ steht als eigener Streifen direkt vor der Navigation; Logo/Suche sind gegenüber den Text-/Themeninhalten zu weit außen.
 
