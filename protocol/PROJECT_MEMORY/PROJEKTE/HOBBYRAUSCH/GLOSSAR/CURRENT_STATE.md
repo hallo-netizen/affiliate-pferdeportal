@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **1.0.6 LIVE ROUTE PASS / 1.0.7 PFERDEATELIER-LOGIK LOCAL PASS / DESIGN SPÄTER**
+STAND: 2026-10-21
+STATUS: **1.0.6 LIVE ROUTE PASS / PFERDEATELIER-KONZEPT VERBINDLICH ÜBERNOMMEN / DESIGN-UMSETZUNG SPÄTER**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -45,39 +45,59 @@ Ein bereits vergebener SEO-Owner muss später von der SEO-/Textmaschine respekti
 
 Es wird **keine zweite Datenbank** gebaut. Diese Owner-Entscheidung gehört in den bestehenden zentralen Begriffs-/Intentbestand.
 
-## Glossar-Hauptseite – Designvertrag aus Bürogebäude Sicherheit
+## Glossar-Hauptseite – verbindliches Pferdeatelier-Konzept
 
-Die bewährte Glossar-Darstellung aus **Sicherheit** wird für Hobby Depot übernommen und nur farblich/typografisch an Hobby Depot angepasst:
+Die Struktur wird funktional **eins zu eins vom Pferdeatelier** übernommen; nur Farben, Begriffe und Hobbywelten werden später an Hobby Depot angepasst.
 
-- zentrale Seite `/glossar/`;
-- Suchfeld;
-- A–Z-Navigation;
-- Filter nach den acht Hobbywelten;
-- kompakte Karten mit Icon, Begriff, Hobbywelt und kurzer Vorschau;
-- Desktop 3 Karten pro Zeile, Tablet 2, Mobil 1;
-- maximal 9 Karten je Ergebnisseite;
-- Filter, Suche und Pagination erzeugen keine eigenen SEO-Zielseiten;
-- keine Quellenzeilen oder langen Erklärblöcke auf den Karten;
-- keine erfundenen Ziele;
-- echte Glossar-Einzelseite nur wenn der SEO-Owner geklärt und der Begriff fachlich freigegeben ist.
+Reihenfolge:
+1. Breadcrumb mit **Startseite → Magazin → Wissen & Glossar**;
+2. Hero mit Glossar-H1, kurzer Unterzeile und thematischem Bild;
+3. **eigene Glossar-Suche**, die ausschließlich Glossarbegriffe durchsucht;
+4. A–Z-Leiste;
+5. Themenfilter über die acht Hobbywelten **Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**;
+6. breite **Banner-/Anzeigenfläche**;
+7. Überschrift **Alle Glossarbegriffe**;
+8. Begriffskarten;
+9. Pagination oben und unten am Begriffsblock.
 
-Noch nicht freigegebene Kurzansichten dürfen keine indexierbare dünne Ersatzseite werden.
+Pferdeatelier-Referenz frisch geprüft:
+- 16 Begriffe je Seite;
+- Desktop 4 Spalten × 4 Reihen;
+- jede Karte: Begriff + Kurzdefinition + „Zum Begriff“;
+- Pagination statt endloser langer Seite.
 
-## Einzelseite – Inhaltsvertrag
+Für Hobby Depot gilt deshalb ebenfalls verbindlich: **16 Begriffe pro Seite**.
 
-Nur für echte Glossar-Owner:
+Suche, Buchstabenfilter, Themenfilter und Pagination erzeugen keine eigenen konkurrierenden SEO-Owner.
 
-- 150–200 Wörter;
-- kurze Definition;
-- fachliche Einordnung und klare Abgrenzung;
-- genau eine Hobbywelt;
-- verwandte Begriffe;
+## Einzelseite – verbindliches Pferdeatelier-Konzept
+
+Reihenfolge / Aufbau:
+
+- Breadcrumb beginnt immer mit **Startseite** und führt über Magazin/Glossar/Hobbywelt zum Begriff;
+- kleine Rubrik **WISSEN**;
+- H1 = Begriff;
+- direkt darunter farblich abgesetzter **„Kurz erklärt“**-Kasten mit einer knappen Definition;
+- darunter der eigentliche Fachtext mit 150–200 Wörtern;
+- **0 Links im Fließtext**.
+
+Rechte Spalte, feste Reihenfolge:
+1. **Hobbywelt** – verlinkt zur passenden Hobbywelt/Hauptkategorie;
+2. **Verwandte Begriffe** – nur echte vorhandene Glossarbegriffe verlinken;
+3. **Anzeige** – reservierte Banner-/Werbefläche;
+4. **Mehr zum Thema** – Link auf eine passende starke Hauptkategorie/Hauptseite.
+
+Hobby-Depot-Zusatzentscheidung:
+- **„Mehr zum Thema“ ist Pflicht.**
+- Ein Glossarbegriff darf deshalb erst live gehen, wenn eine echte passende Hauptkategorie/Hauptseite zugeordnet ist.
+- keine erfundenen oder schwachen Ersatzlinks.
+
+Nicht öffentlich:
 - Quellen;
-- individueller SEO-Titel und Meta-Description;
-- Prüfdatum und Prüfintervall 6/12/24 Monate;
-- keine künstliche Artikellinkliste;
-- optional genau ein starkes vorhandenes Hauptziel;
-- kein Auto-Publish.
+- Synonyme/Aliase;
+- interne Prüfmetadaten.
+
+Quellen bleiben intern am Datensatz gebunden.
 
 ## Produktionsweg
 
@@ -172,8 +192,8 @@ Lokale Prüfung:
 
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback der kanonischen URL nach Installation von 1.0.4.
+Designumsetzung des jetzt verbindlich festgelegten Pferdeatelier-Glossarkonzepts im Hobby-Depot-Stil.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.6 über die vorhandene Glossar-Version installieren und ausschließlich https://hobby-depot.de/magazin/wissen-glossar/ live prüfen. Keine weitere Version vor diesem Readback.**
+**Noch kein neues Plugin installieren. Als nächstes das Glossar-Design auf Basis dieses festgezogenen Konzepts bauen und erst danach Hauptseite + Einzelseite live abnehmen.**
