@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.50.707 NEUER RUNTIME-PFAD HARD PASS / LIVE-READBACK OFFEN**
+STATUS: **FOOTER-EIGENTUEMER LIVE-DIAGNOSE OFFEN / KEIN WEITERER DESIGNBUILD VOR READBACK**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -164,10 +164,32 @@ SHA-256:
 Größe:
 58,828,942 Bytes.
 
+## 21.10.2026 – Footer-Eigentümerprüfung
+
+Bestätigt:
+- Footer-Umzug/Importer 1.1.1 ist **kein Frontend-/Designrenderer**; nur Import/Export von Seiten, Menüs, Widgets und Bindungen.
+- Dunkler Hobby-Depot-Footer wird durch HD-003 / Affiliate Portal Template Kit gerendert.
+- Die zusätzliche weiße Leiste unter dem dunklen Footer ist damit noch **nicht eindeutig einem Renderer zugeordnet**.
+- Auf der Glossar-Shell wird bei aktivem Hobby-Depot-Profil direkt dessen `render_footer()` ausgegeben und danach `wp_footer()` ausgeführt; der normale Theme-`get_footer()`-Weg ist dort nicht der reguläre Pfad.
+- Statische Altbelege von HD-001 zeigen: Footer-Daten/API ja, Footer-Platzierung/Styling ausdrücklich Designlayer. Aktueller Live-Hookpfad muss deshalb gemessen statt geraten werden.
+
+Kein weiterer Footer-Designbuild vor Live-Readback.
+
+Passives Diagnoseartefakt:
+`HOBBY_DEPOT_FOOTER_EIGENTUEMER_DIAGNOSE_1.0.0.zip`
+SHA-256:
+`221693442db3abc563c0e698c9364f735857d0fc29bd93b7f8dc8cd88a1f8fdb`
+
+Die Diagnose:
+- ändert kein Frontend/CSS;
+- zeichnet nur nach explizitem, signiertem Admin-Aufruf die echten `wp_footer`-/`get_footer`-Callbacks inkl. Reflection-Dateipfad/Owner auf;
+- erfasst aktives Theme/Plugins, Footer-Menüs/Widgets, Hobby-Depot-Profilklasse, APKW_FrontendStructure/footer_entries und OPcache-Einstellungen;
+- exportiert den Bericht als JSON.
+
 ## ERSTER OFFENER BLOCKER
 
-**Live-Readback von 1.50.707.**
+**Exakter Live-Owner der weißen Footer-Leiste ist noch nicht bewiesen.**
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.707 einmal über das bestehende Designplugin installieren und den Footer neu laden. Wenn der Footer dann nicht geändert ist, stammt er definitiv nicht aus HD-003 und es wird kein weiterer Designbuild erstellt, bevor der externe Footer-Eigentümer identifiziert ist.**
+**Nur die passive Footer-Eigentümer-Diagnose installieren, unter Werkzeuge → Footer-Eigentümer Diagnose die Glossar-Seite einmal erfassen und den erzeugten JSON-Bericht auslesen. Kein Designplugin-Update vorher.**
