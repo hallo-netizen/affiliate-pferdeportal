@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.9 PFERDEATELIER 1:1 DESIGN HARD PASS / LIVE OFFEN**
+STATUS: **1.0.10 HOBBY-DEPOT-FARBEN + BREADCRUMBS HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -274,10 +274,48 @@ Lokale Prüfung:
 - Suchbutton nicht gelb PASS;
 - Hero 1432×526 PASS.
 
+## 21.10.2026 – 1.0.10 Korrektur nach Livevergleich
+
+1.0.9 war gestalterisch noch zu stark am Pferdeatelier und die Breadcrumb-Positionen waren falsch.
+
+Korrigiert:
+- Breadcrumbs Hauptseite und Begriffseite separat auf Pferdeatelier-Positionierung kalibriert;
+- Breadcrumb-Schrift größer;
+- komplette Pferdeatelier-Oliv-/Gold-Farbwelt entfernt;
+- komplette Glossar-Typografie auf Hobby-Depot-Inter/Sans umgestellt;
+- Hobby-Depot-Palette: Dunkelpetrol #17313c, Petrol #0f8f95, Tiefpetrol #0a777c, helle Mintflächen #eef8f7;
+- „Kurz erklärt“ und rechte Infokarten mint/grün hinterlegt mit Petrol-Linie;
+- Suchbutton Petrol statt Pferdeatelier-Farbe;
+- aktive Pagination Petrol statt Gold;
+- Begriffsnavigation unten neu: bei nur einem Nachbarn volle Breite ohne leere zweite Karte;
+- verwandte Draft-Begriffe werden für angemeldete Redakteure als Preview-Links sichtbar;
+- bestehender 1.0.6-Routen-Core unverändert.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.10_HOBBYDEPOT_FARBEN_BREADCRUMBS_HARDPASS.zip`
+
+SHA-256:
+`930ad0e38094b3c4c88f70856a96be31accbecf798551df0701306e8453e2de4`
+
+Lokale Hard-QA:
+- kompletter PHP-Lint PASS;
+- ZIP CRC PASS;
+- 27 Render-/Strukturprüfungen PASS;
+- Pferdeatelier-Olive/Gold/Georgia im Plugin: 0 Treffer;
+- Breadcrumb Hauptseite 78px Innenversatz, 13px;
+- Breadcrumb Begriffseite 60px Innenversatz, 13px;
+- H1 Inter 50px / Hobby-Depot-Dunkelpetrol;
+- Kurz-erklärt Hintergrund #eef8f7, Linie #0f8f95;
+- rechte Karten Hintergrund #eef8f7;
+- Suche-Button #0f8f95;
+- Einzel-Nachbar-Navigation volle Breite;
+- Playwright-DOM/Computed-Style-Readback PASS;
+- Core-Datei SHA identisch zu 1.0.9.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.9 auf Hauptseite und Begriffseite.
+Echter WordPress-Live-Readback von 1.0.10 auf Hauptseite und Begriffseite.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.9 über die bestehende Glossar-Version installieren und dieselben zwei Liveansichten erneut mit Pferdeatelier vergleichen.**
+**1.0.10 über die bestehende Glossar-Version installieren und genau Hauptseite + einen Begriff live gegen den Pferdeatelier-Aufbau und die Hobby-Depot-Farbwelt prüfen.**
