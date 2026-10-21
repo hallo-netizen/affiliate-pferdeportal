@@ -6,8 +6,10 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-20 (letzte Arbeitskopie Relevanz lokal/kein Release; Testinstallation 0.57.110 fehlerhaft; aktueller 5014er E2E nicht abgenommen)
+STAND: 2026-10-21 (frischer GitHub-Abgleich; nur lokale PSTE-/PSERC-KISS-QA, kein installierter/verifizierter SEO-Release; echter 5014er WordPress-E2E weiter offen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
+
+ERSTER OFFENER FEHLER: Bestehende zentrale Fach/Magazin-Zuordnung wertet `NO_MATCH` bei unerkannter konkreter Fachfrage teilweise noch als positiven Magazinnachweis; offene sichere Zuordnung gehört in den bestehenden Backend-Klärweg. Weitere Folgefehler und Tests im vorhandenen `UPDATEPROTOKOLL.md` (`PU-20261017-001`).
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
