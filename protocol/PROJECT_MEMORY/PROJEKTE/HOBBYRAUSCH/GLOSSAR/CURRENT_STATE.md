@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.8 PFERDEATELIER-DESIGN LOCAL PASS / LIVE OFFEN**
+STATUS: **1.0.9 PFERDEATELIER 1:1 DESIGN HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -239,10 +239,45 @@ Lokale QA:
 - Core-Routendatei byteidentisch zu 1.0.7;
 - serve_index_route / 404-Handler / Template-Router unverändert zu 1.0.7.
 
+## 21.10.2026 – 1.0.9 Pferdeatelier-Designkorrektur
+
+Nutzer-Livevergleich gegen Pferdeatelier zeigte Abweichungen in 1.0.8. Korrigiert:
+
+- CSS-Variablen gelten jetzt auch auf der Begriffseite; dadurch sind „Kurz erklärt“ und rechte Infokarten tatsächlich farbig hinterlegt;
+- H1 auf Begriffsebene deutlich größer wie in der Pferdeatelier-Referenz;
+- Breadcrumbs größer und wie in der Referenz eingerückt;
+- Hobbywelt im Breadcrumb und in der rechten Spalte führt jetzt **zur Glossar-Filterung derselben Hobbywelt**, nicht aus dem Glossar in die Hauptkategorie;
+- „Mehr zum Thema“ nutzt weiterhin den expliziten Primärlink; fehlt er, wird nur eine tatsächlich vorhandene Hauptseite/Kategorie derselben Hobbywelt als Fallback verwendet;
+- Suche-Button wird hart in Hobby-Depot-Grün/Dunkelgrün gerendert; kein gelber Theme-Override mehr;
+- Begriffseite erhält unten Vorheriger-/Nächster-Begriff-Navigation;
+- neues Glossar-Hero-Bild eingebaut;
+- 16 Begriffe pro Seite unverändert;
+- bestehende Route/Core-Datei byteidentisch zu 1.0.8.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.9_PFERDEATELIER_1ZU1_DESIGN_HARDPASS.zip`
+
+SHA-256:
+`73684a4de1de84ca5a09e75bde84ac760abe02c669502fffd027128583d83840`
+
+Lokale Prüfung:
+- PHP komplett PASS;
+- ZIP-Integrität PASS;
+- Index: Hero/Suche/8 Welten/Banner/16 Karten/Pagination PASS;
+- Single: Breadcrumb/Kurzdefinition/Hobbywelt/Related/Anzeige/Mehr zum Thema PASS;
+- Breadcrumb-Hobbywelt bleibt innerhalb des Glossars PASS;
+- Fallback „Mehr zum Thema“ auf echte Hauptwelt-Seite/Kategorie PASS;
+- Bodylinks 0 PASS;
+- Quellen/Synonyme Frontend 0 PASS;
+- Vorheriger/Nächster Begriff PASS;
+- Single-CSS-Variablen vorhanden PASS;
+- Suchbutton nicht gelb PASS;
+- Hero 1432×526 PASS.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.8: Hauptseite und Begriffseite visuell abnehmen.
+Echter WordPress-Live-Readback von 1.0.9 auf Hauptseite und Begriffseite.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.8 über die bestehende Glossar-Version installieren. Noch keinen Probe-Batch importieren. Zuerst Hauptseite und eine Begriffseite live gestalterisch prüfen.**
+**1.0.9 über die bestehende Glossar-Version installieren und dieselben zwei Liveansichten erneut mit Pferdeatelier vergleichen.**
