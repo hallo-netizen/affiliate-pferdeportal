@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
-  "version": "1.3",
-  "effective_date": "2026-10-19",
+  "version": "1.4",
+  "effective_date": "2026-10-21",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -257,6 +257,24 @@
       "id": "CAMPUS_REPOSITORY_CLEANUP",
       "start_here": "protocol/PROJECT_MEMORY/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_PINTEREST",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PINTEREST/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PINTEREST/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PINTEREST/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PINTEREST",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PINTEREST/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PINTEREST/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PINTEREST/HOBBYRAUM.md"
+    },
+    {
+      "id": "EIGENTUMSSCHUTZ_PINTEREST",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PINTEREST/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PINTEREST/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PINTEREST/HOBBYRAUM.md"
     }
   ],
   "active_branch_registry": "protocol/PROJECT_MEMORY/ACTIVE_BRANCHES.json"

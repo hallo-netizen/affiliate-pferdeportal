@@ -1,5 +1,16 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## PINTEREST-20261021 – Projektbezogene Pinterest-Büros
+
+WAS: Drei Pinterest-Büros mit eigenem Eingang, Fachkonzept, Current und abgeleitetem Hobbyraum in den bestehenden Projektgebäuden Pferdeatelier, Hobby Depot und Hab & Bewahr. Gebäudenavigation sowie Autoritätsplan ergänzt.
+
+WARUM: Projekt- und Marken-Trennung schützt vor Vermischung; gemeinsame technische Automatik nur nach Erfolgstest vermeidet dreifache Entwicklung. Ein eigenständiges Pinterest-Gebäude schafft unnötige Steuerungsebene.
+
+GRENZE: Noch keine Pinterest-Konten erstellt/verbunden; keine Pins veröffentlicht; keine aktive Linkprüfung, kein Eingriff in WordPress, K0, Affiliate, Bildzentrale oder bestehende Produktionslogik.
+
+PRUEFUNG: Je Büro genau eine Current-Autorität, keine fachlichen Cross-Project-Current-Abhängigkeiten; allgemeine Veröffentlichungstechnik noch nicht angelegt.
+
+
 ## HB-INS-20261020-C26 – Untere Versicherungskategorien vollständig ausgebaut
 WAS: Alle 46 konkreten Versicherungs-R3 einzeln fachlich überprüft; vorhandene 138 Endkategorien um 185 weitere themenspezifische Kategorien (323 insgesamt) ergänzt. HTML-Hierarchie bleibt unverändert: 1 Welt, 5 R2, 46 R3, eine flache Kategorieebene. Originalplugin vollständig auf 1.14.8.37 aktualisiert, 49 Dateien, 36 PHP, SHA256 `ec39080e5350b9f7b3924239376e11580ce7de195a60bb89feafae6152533f98`.
 WARUM: Frühere Schablone 3 Kategorien je R3 war fachlich zu dünn; nötig sind unabhängig sinnvolle unterste Intents, nicht eine vierte WP-Seite.

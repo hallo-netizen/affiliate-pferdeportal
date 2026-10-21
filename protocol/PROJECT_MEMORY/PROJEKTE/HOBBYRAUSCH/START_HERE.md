@@ -39,6 +39,7 @@ zuständiges Büro → `AUTORITAETSPLAN.json` → genau eine Current-Autorität 
 - `PRODUKTION/START_HERE.md` → spätere automatisierte Produktionsstrecke und Übergaben.
 - `PRUEFUNG/START_HERE.md` → unabhängige Positiv-/Negativprüfung und Abnahme.
 - `GEMEINSAM/START_HERE.md` → nur echte Hobbyrausch-weit gemeinsame Regeln und Referenzen.
+- `PINTEREST/START_HERE.md` → eigener Pinterest-Auftritt und Marketing für Hobby Depot
 
 ## Zentrale Campus-Dienste – NICHT DUPLIZIEREN
 

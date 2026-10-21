@@ -47,6 +47,7 @@ CAMPUS_SINGLE_TRUTH_ENTRY_V1
 - `TECHNIK/START_HERE.md` → WordPress-/Hosting-Betrieb, Speicher-/Backupdiagnose und sichere technische Wartung ohne Fachinhaltsänderung
 - `PLUGINS/START_HERE.md` → zentraler Plugin-Bestand, Updatekontrolle und isolierte aktuelle Ausgabeartefakte
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+- `PINTEREST/START_HERE.md` → Pinterest-Konzept, Pin-Bilder, Veröffentlichungen und Erfolgskontrolle
 
 ## Textsystem-Historie
 

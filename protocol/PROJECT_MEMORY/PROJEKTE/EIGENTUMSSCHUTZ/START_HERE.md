@@ -16,5 +16,6 @@
 - [Design](DESIGN/START_HERE.md): erste optische Umsetzung, keine Kategorie-/SEO-Strukturänderungen.
 - [Kategorien](KATEGORIEN/START_HERE.md): zentrale WordPress-Kategorienverwaltung, Live-Bindung, Änderungen und neutrale Lese-Schnittstelle für alle Plugins.
 - [Konzept](KONZEPT/START_HERE.md): verbindliche aktuelle Kategorien-/Keyword-Logik, fachliche Duplikatkontrolle und nichtimportierbare Erweiterungsentwürfe.
+- [Pinterest](PINTEREST/START_HERE.md): eigener Pinterest-Auftritt für Hab & Bewahr; zunächst Konzept
 
 Die vorhandenen inhaltlichen Konzeptentscheidungen bleiben fachliche Vorgabe. Für den Arbeitsbereich KONZEPT gilt ausschließlich die per `AUTORITAETSPLAN.json` geroutete `KONZEPT/CURRENT_STATE.md` als zuständige aktuelle Fachwahrheit.

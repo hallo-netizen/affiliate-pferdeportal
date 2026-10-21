@@ -430,3 +430,13 @@ Hausmeisterprotokoll, Archivcheckpoint und ACTIVE_BRANCHES bleiben Nachweis/Regi
 
 BEZUG:
 ARCH-095 / BAU-043 / HM-007.
+
+### 2026-10-21 – Pinterest-Büros
+
+BEDARF: Pinterest für drei eigenständige Marken, ohne dreifachen Automatikbau oder neues Zentralgebäude.
+
+KLEINSTE ÄNDERUNG: Drei projektlokale PINTEREST-Büros (je START_HERE, CURRENT_STATE, HOBBYRAUM, KONZEPT); AUTORITAETSPLAN, drei Gebäudeeingänge und AENDERUNGSREGISTER angepasst.
+
+BEZUG: BAU-001 Ein-Wahrheit-Prinzip; BAU-003: keine Zugangsdaten im öffentlichen Campus.
+
+PRÜFUNG: Eigenständige Current pro Büro, keine Fremdbüroänderung in Fach-/Plugin-Systemen, keine Online-Veröffentlichung und keine aktive Linkprüfung.
