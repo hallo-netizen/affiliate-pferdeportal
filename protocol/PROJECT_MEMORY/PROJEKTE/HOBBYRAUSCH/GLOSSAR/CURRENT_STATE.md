@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.11 NATIVE HOBBY-DEPOT-BREADCRUMBS + GLOSSAR-NAV + RELATED HARD PASS / LIVE OFFEN**
+STATUS: **1.0.12 NATIVE HOBBY-DEPOT-BREADCRUMB HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -350,10 +350,44 @@ Hard-QA:
 - untere Glossarnavigation x=130 Breite=1180 PASS;
 - `class-hdg-core.php` SHA identisch zu 1.0.10, Route unverändert PASS.
 
+## 21.10.2026 – 1.0.12 echte native Hobby-Depot-Breadcrumbs
+
+Ursache der vorherigen Fehlversuche:
+Die Glossar-Versionen kopierten zwar Breadcrumb-CSS, liefen aber weiterhin in einem **anderen Seitenshell/Theme-Wrapper** als normale Hobby-Depot-Seiten. Dadurch konnte die Position trotz gleicher CSS-Werte sichtbar abweichen.
+
+1.0.12 ändert deshalb die Architektur an dieser Stelle minimal und eindeutig:
+- Glossar nutzt jetzt denselben aktiven Hobby-Depot-Header-Renderer wie normale Hobby-Depot-Seiten;
+- denselben Footer-Renderer;
+- denselben äußeren Content-Wrapper `.hd-content-v150616`;
+- Breadcrumb ist wie bei nativen Hobby-Depot-Seiten **das erste Element in diesem Wrapper**;
+- das Glossar-Plugin enthält **0 eigene CSS-Regeln für `.hd-breadcrumb` / `.hd-breadcrumb-wrap`**;
+- Position, Breite, Schrift, Abstand und Farben kommen damit ausschließlich aus dem aktuellen Hobby-Depot-Designplugin;
+- Index und Begriffseite verwenden denselben nativen Shellweg;
+- Routen-Core bleibt byteidentisch zu 1.0.11;
+- Related-Begriffe und untere Glossarnavigation bleiben erhalten.
+
+Beweis gegen aktuellen Designstand 1.50.705 / Profil V150699:
+- natives Design verwendet `.hd-content-v150616` und rendert dort als erstes `render_breadcrumb()`;
+- 1.0.12 verwendet exakt denselben Wrapper und rendert dort als erstes die Glossar-Breadcrumb;
+- natives Breadcrumb-CSS gefunden: Breite `min(calc(100% - 72px), var(--hd-content))`, Margin `18px auto 0`, Schrift `12px`;
+- Plugin-eigene Breadcrumb-CSS-Treffer: **0**;
+- aktiver Design-Header/Footer werden direkt wiederverwendet;
+- PHP-Lint aller 8 PHP-Dateien PASS;
+- ZIP-Integrität PASS;
+- Core-Routendatei byteidentisch zu 1.0.11 PASS;
+- Related sichtbar/unverlinkt falls Ziel noch fehlt PASS;
+- untere Glossarnavigation vorhanden PASS.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.12_NATIVE_BREADCRUMB_HARDPASS.zip`
+
+SHA-256:
+`3e464dbd858cb723a85d9ffa9b4c1e8f92abaaa0a3f4423dd36a72526653d536`
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.11: Hauptseite + Begriffseite.
+Echter WordPress-Live-Readback von 1.0.12: nur Breadcrumb-Position auf Übersicht und Begriffseite prüfen.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.11 über die bestehende Glossar-Version installieren und nur Breadcrumbs, Verwandte Begriffe sowie den unteren Weiterwissen-Bereich live prüfen.**
+**1.0.12 erst jetzt installieren. Danach ausschließlich die Breadcrumbs auf Übersicht und Begriffseite gegen eine normale Hobby-Depot-Seite vergleichen.**
