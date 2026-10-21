@@ -11,6 +11,8 @@ STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BEL
 
 **QA-KLARSTELLUNG 21.10.2026:** Die Aussage „ca. 2.000 Pferde-Relevanzen aktuell ungeklärt“ aus dem alten 4.501er-Replay ist **KEIN Live-Befund**. Der Replay übergab keinerlei gespeicherte Relevanz-/manuelle Belege und nur simulierte WP-Kategorie-IDs; 56 alte PROVEN-Zeilen fielen dadurch auf NOT_PROVEN zurück. Die tatsächliche heutige WP-5.014er-Relevanz-/manuelle Restquote bleibt **NICHT VERIFIZIERT**. Ursächliche Beweisführung: `UPDATEPROTOKOLL.md` Vorgang `PU-20261017-001`. Keine Relevanz-Neuentwicklung aufgrund der falschen Zahl, keine Neuöffnung des Fachkonzepts, kein Release.
 
+**QUELLENINTEGRATION 21.10.2026:** Vier bereits vorhandene PSTE-Quellkorrekturen sind in **einer einzigen lokalen Prüfmontage** zusammengeführt und mit 130 Kategorie-, 205 Zusatz-, 20 Titel-/Compiler-, 10 Missing-Leaf- und 4 manuellen Titelrückführungsfällen sowie 342 PHP-Syntaxprüfungen erfolgreich gegengeprüft. Nachweis: `UPDATEPROTOKOLL.md` Vorgang `PU-20261017-001`, Library `/Pferdeatelier/TempVerify/PFERDEATELIER_KISS_GEMEINSAME_QUELLE_QA_20261021_KEIN_PLUGIN.zip`. **Kein aktueller WordPress-/MariaDB-Readback, kein installierbarer Freigabestand. Die erste fachliche NEXT ACTION unten bleibt UNVERÄNDERT und OFFEN.**
+
 ERSTER OFFENER FEHLER: Bestehende zentrale Fach/Magazin-Zuordnung wertet `NO_MATCH` bei unerkannter konkreter Fachfrage teilweise noch als positiven Magazinnachweis; offene sichere Zuordnung gehört in den bestehenden Backend-Klärweg. Weitere Folgefehler und Tests im vorhandenen `UPDATEPROTOKOLL.md` (`PU-20261017-001`).
 
 ## AUTORITÄT
