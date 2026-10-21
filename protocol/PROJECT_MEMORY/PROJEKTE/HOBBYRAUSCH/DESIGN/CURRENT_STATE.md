@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **1.50.705 HOBBYFINDER DESIGN LOCAL HARD PASS / LIVE-DESIGN-READBACK OFFEN**
+STAND: 2026-10-21
+STATUS: **1.50.706 FOOTER FINAL LOCAL HARD PASS / LIVE-READBACK OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -72,10 +72,50 @@ Größe:
 - **HD-007 1.0.0 bleibt unverändert aktiv**;
 - HD-004 bleibt alleinige Quelle für echte CORE-Zielobjekte/-URLs.
 
+## 1.50.706 – Footer final
+
+1.50.706 basiert bytegenau auf 1.50.705 und ändert ausschließlich:
+- Pluginversion;
+- aktiven Hobby-Depot-Footer in `class-hobby-depot-profile-v150699.php`.
+
+Verbindliche Nutzerentscheidung:
+- bisherige dunkle Footer-Farbwelt bleibt;
+- bestehendes weiß reduziertes Footer-Logo bleibt;
+- Hobbyfinder-Einzellink entfernt;
+- `Zeit, Budget & Platz` und `Anbieter` werden im Footer nicht ausgegeben;
+- alte/Theme-`.footer-navbar` wird ausgeblendet;
+- Linkschrift größer: 14 px;
+- Spaltenüberschriften größer: 15 px;
+- Claim größer: 13.5 px;
+- Copyright mit dynamischer Jahreszahl direkt im dunklen Footer;
+- keine zusätzliche Trennlinie/untere helle Linkleiste.
+
+Lokale Hard-QA:
+- Footer-Render mit absichtlich vorhandenen unerwünschten Menüeinträgen: Filter PASS;
+- Hobbyfinder: 0 Treffer;
+- Zeit/Budget: 0 Treffer;
+- Anbieter als Zusatzlink: 0 Treffer;
+- Rechtliches/Informationen/Anzeigenmarkt vollständig PASS;
+- Copyright `© 2026 Hobby Depot` PASS;
+- gesamte Plugin-PHP-Syntax: **135/135 PASS**;
+- gegenüber 1.50.705 exakt **2 vorhandene Dateien geändert**, keine entfernt;
+- ZIP CRC PASS.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.706_FOOTER_FINAL_HARDPASS.zip`
+
+SHA-256:
+`372833ff90552f708ca3d71b04cb65f7354c1977aaa7fa03108ec6c3ebd8c8e6`
+
+Größe:
+58,685,650 Bytes.
+
+Finder-Logik/-Design aus 1.50.705 wurde durch diesen Footerauftrag nicht verändert.
+
 ## ERSTER OFFENER BLOCKER
 
-**Visuelle Live-Abnahme von 1.50.705 im echten WordPress-Frontend.**
+**Echter WordPress-Live-Readback des 1.50.706-Footers.**
 
 ## EXAKT EINE NEXT ACTION
 
-**Nur HD-003 auf 1.50.705 aktualisieren. Danach `/hobbyfinder/` öffnen und Startbildschirm, grüne Auswahlzustände, Icons, Navigation und Ergebnisbilder prüfen.**
+**1.50.706 über das bestehende Designplugin installieren und nur den Footer auf Desktop/Mobil prüfen: keine untere helle Zusatzleiste, kein Hobbyfinder-Link, größere Links, Copyright im dunklen Footer.**
