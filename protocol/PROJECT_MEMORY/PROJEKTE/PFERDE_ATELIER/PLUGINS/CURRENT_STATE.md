@@ -9,6 +9,8 @@
 STAND: 2026-10-21 (frischer GitHub-Abgleich; nur lokale PSTE-/PSERC-KISS-QA, kein installierter/verifizierter SEO-Release; echter 5014er WordPress-E2E weiter offen)
 STATUS: **AKTIV / SEO-WORKFLOW PPA-005/PPA-006 BLOCKED (LIVE-GESAMTWEG NICHT BELEGT)**
 
+**QA-KLARSTELLUNG 21.10.2026:** Die Aussage „ca. 2.000 Pferde-Relevanzen aktuell ungeklärt“ aus dem alten 4.501er-Replay ist **KEIN Live-Befund**. Der Replay übergab keinerlei gespeicherte Relevanz-/manuelle Belege und nur simulierte WP-Kategorie-IDs; 56 alte PROVEN-Zeilen fielen dadurch auf NOT_PROVEN zurück. Die tatsächliche heutige WP-5.014er-Relevanz-/manuelle Restquote bleibt **NICHT VERIFIZIERT**. Ursächliche Beweisführung: `UPDATEPROTOKOLL.md` Vorgang `PU-20261017-001`. Keine Relevanz-Neuentwicklung aufgrund der falschen Zahl, keine Neuöffnung des Fachkonzepts, kein Release.
+
 ERSTER OFFENER FEHLER: Bestehende zentrale Fach/Magazin-Zuordnung wertet `NO_MATCH` bei unerkannter konkreter Fachfrage teilweise noch als positiven Magazinnachweis; offene sichere Zuordnung gehört in den bestehenden Backend-Klärweg. Weitere Folgefehler und Tests im vorhandenen `UPDATEPROTOKOLL.md` (`PU-20261017-001`).
 
 ## AUTORITÄT
