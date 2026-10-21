@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.10 HOBBY-DEPOT-FARBEN + BREADCRUMBS HARD PASS / LIVE OFFEN**
+STATUS: **1.0.11 NATIVE HOBBY-DEPOT-BREADCRUMBS + GLOSSAR-NAV + RELATED HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -312,10 +312,48 @@ Lokale Hard-QA:
 - Playwright-DOM/Computed-Style-Readback PASS;
 - Core-Datei SHA identisch zu 1.0.9.
 
+## 21.10.2026 – 1.0.11 Breadcrumb/Nav/Related-Korrektur
+
+Nach Nutzer-Livevergleich wurden ausschließlich drei Punkte korrigiert:
+
+1. **Breadcrumbs**
+- nicht mehr nach Pferdeatelier gestaltet;
+- exakt die native Hobby-Depot-Struktur und -Klassen `.hd-breadcrumb-wrap` / `.hd-breadcrumb`;
+- CSS-Regeln für Breite, Top-Abstand, Schriftgröße, Gap, Farben und Current-State textidentisch zum aktuellen Hobby-Depot-Designquellstand;
+- Hauptseite und Begriffseite außerhalb des Glossar-Inhaltscontainers gerendert, dadurch dieselbe Portalachse wie normale Hobby-Depot-Seiten.
+
+2. **Weiterwissen im Glossar**
+- keine Karten mehr;
+- nach Pferdeatelier-Konzept: „Weiterwissen im Glossar“ + „Zur Glossar-Startseite“;
+- darunter Zurück links / Weiter rechts;
+- über die volle Artikelbreite **unterhalb von Text und Sidebar**, nicht nur in der linken Textspalte.
+
+3. **Verwandte Begriffe**
+- vorhandene Begriffe werden verlinkt;
+- noch nicht vorhandene verwandte Begriffe bleiben sichtbar, aber unverlinkt;
+- für zukünftige Batches können zusätzlich exakte `related_terms`-Anzeigenamen gespeichert werden;
+- Test: Kallus → „Veredelung“ sichtbar unverlinkt PASS.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.11_BREADCRUMB_NAV_RELATED_HARDPASS.zip`
+
+SHA-256:
+`701741c8ee2c542c806b897836c84fb3590d5f0ff473c614330c730999b76e1e`
+
+Hard-QA:
+- 26 Render-/Strukturchecks PASS;
+- kompletter PHP-Lint PASS;
+- ZIP-Integrität PASS;
+- Breadcrumb-Regeln textidentisch zum Hobby-Depot-Design PASS;
+- Browser/DOM 1440 px: Breadcrumb x=130 Breite=1180; Glossar-Hauptachse x=130 Breite=1180 PASS;
+- „Verwandte Begriffe / Veredelung“ sichtbar PASS;
+- untere Glossarnavigation x=130 Breite=1180 PASS;
+- `class-hdg-core.php` SHA identisch zu 1.0.10, Route unverändert PASS.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.10 auf Hauptseite und Begriffseite.
+Echter WordPress-Live-Readback von 1.0.11: Hauptseite + Begriffseite.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.10 über die bestehende Glossar-Version installieren und genau Hauptseite + einen Begriff live gegen den Pferdeatelier-Aufbau und die Hobby-Depot-Farbwelt prüfen.**
+**1.0.11 über die bestehende Glossar-Version installieren und nur Breadcrumbs, Verwandte Begriffe sowie den unteren Weiterwissen-Bereich live prüfen.**
