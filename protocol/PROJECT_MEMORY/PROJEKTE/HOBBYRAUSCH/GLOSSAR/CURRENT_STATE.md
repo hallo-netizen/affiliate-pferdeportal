@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.0.6 LIVE ROUTE PASS / PFERDEATELIER-KONZEPT VERBINDLICH ÜBERNOMMEN / DESIGN-UMSETZUNG SPÄTER**
+STATUS: **1.0.8 PFERDEATELIER-DESIGN LOCAL PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -190,10 +190,59 @@ Lokale Prüfung:
 
 **Keine Installation jetzt erforderlich.** 1.0.7 bleibt vorbereiteter Kandidat und soll mit der späteren Designänderung gebündelt werden.
 
+## 21.10.2026 – Glossar-Design 1.0.8
+
+Pferdeatelier-Konzept und -Darstellung wurden funktional übernommen; angepasst wurden ausschließlich Hobby-Depot-Farben, Hobbywelt-Icons und Hobby-Inhalte.
+
+Hauptseite:
+- Breadcrumb Startseite → Magazin → Wissen & Glossar;
+- Hero;
+- reine Glossar-Suche;
+- A–Z;
+- 8 Hobbywelt-Filter;
+- Bannerfläche;
+- 16 Begriffe je Seite = 4 × 4 Desktop;
+- Pagination;
+- Begriffskarte: Titel, Kurzdefinition, „Zum Begriff“.
+
+Einzelseite:
+- Breadcrumb Startseite → Magazin → Wissen & Glossar → Hobbywelt → Begriff;
+- WISSEN-Kicker + H1;
+- „Kurz erklärt“-Kasten;
+- 150–200 Wörter Fachtext;
+- 0 Bodylinks;
+- rechts: Hobbywelt → Verwandte Begriffe → Anzeige → Mehr zum Thema;
+- Quellen/Synonyme nicht öffentlich.
+
+Zusätzlich:
+- Hauptziel ist im Batch nun Pflicht;
+- bestehender, live bestätigter 1.0.6-Routenfix unverändert übernommen.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.8_PFERDEATELIER_DESIGN_LOCALPASS.zip`
+
+SHA-256:
+`ec8b590e00c4d05f5189908cdd8316f22115ecca652026349edbe7e661b1ccd2`
+
+Lokale QA:
+- PHP 8/8 PASS;
+- ZIP-Integrität PASS;
+- 16 Karten/Pagination PASS;
+- 8 Hobbywelt-Filter PASS;
+- Hero/Suche/A–Z/Banner PASS;
+- Breadcrumb Hauptseite PASS;
+- Breadcrumb Einzelseite PASS;
+- Kurzdefinition PASS;
+- Hobbywelt/Related/Anzeige/Mehr zum Thema PASS;
+- Bodylinks entfernt PASS;
+- Quellen/Synonyme Frontend 0 PASS;
+- Core-Routendatei byteidentisch zu 1.0.7;
+- serve_index_route / 404-Handler / Template-Router unverändert zu 1.0.7.
+
 ## ERSTER OFFENER BLOCKER
 
-Designumsetzung des jetzt verbindlich festgelegten Pferdeatelier-Glossarkonzepts im Hobby-Depot-Stil.
+Echter WordPress-Live-Readback von 1.0.8: Hauptseite und Begriffseite visuell abnehmen.
 
 ## EXAKT EINE NEXT ACTION
 
-**Noch kein neues Plugin installieren. Als nächstes das Glossar-Design auf Basis dieses festgezogenen Konzepts bauen und erst danach Hauptseite + Einzelseite live abnehmen.**
+**1.0.8 über die bestehende Glossar-Version installieren. Noch keinen Probe-Batch importieren. Zuerst Hauptseite und eine Begriffseite live gestalterisch prüfen.**
