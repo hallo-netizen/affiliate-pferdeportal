@@ -1,3 +1,11 @@
+## 22.10.2026 – NUTZER-FOTOFEHLER + HEROS ALS EIN EINZIGER KORREKTURBLOCK (NEUER AUFTRAG)
+**Zielvertrag:** Konkrete vom Nutzer gemeldete falsche, fehlende, doppelte und unscharfe Fotos inklusive der beanstandeten Heros zusammen in **einem** vollständigen Update des bestehenden Designplugins korrigieren. **Keine Collagen**; pro Thema einziges scharfes passendes Einzelfoto, keine Dubletten innerhalb derselben Bereichsseite, Kachelmotiv = Ziel-Hero. Die bestehende helle „Heizung & Temperatur“-Panorama-Vorlage beibehalten und einheitlich für R1/R2/R3 nutzen; alte blaue Magazin-/Dienstleister-Zwischenleiste entfernen. Kein Kategorie-/Artikel-/Architekturumbau, keine unbegrenzten Tests. **Verbindliche komplette Liste der konkreten Mängel steht ausschließlich in `DESIGN/FEHLERQUELLEN.md` unter `HBD-DES-20261022-BILDER-USER`.**
+**Tatsächlich verifizierte Quellenlage in diesem Chat:** Die 0.1.63-Pluginversion und deren lokale Tests sind in der vorherigen Current-Version dokumentiert, aber die frühere ZIP-Datei `/mnt/data/HAB_UND_BEWAHR_DESIGN_0.1.63_HELLE_HEROS_R3_MAGAZIN_FIX.zip` liegt in der aktuellen Laufzeit **nicht vor** (nur die Übergabe-Markdown-Datei ist vorhanden); GitHub-Fach-Current enthält das ZIP nicht als editierbare Quelldatei; Suche in den aktuellen Gesprächs-/Projekt-Dateien ergab keinen ZIP-Treffer. **Keine Bildkorrektur und kein WordPress-Live-PASS neu behaupten.**
+**Status:** NEUE KONKRETE FEHLER OFFEN; 0.1.63 LOCAL PASS aus Vorlauf, keine aktuelle Änderungs-ZIP, kein Live-PASS.
+**GENAU EINE NEXT ACTION:** Vollständiges Original-ZIP des bestehenden Designplugins 0.1.63 als physische Arbeitsbasis beschaffen, dann **in einem Arbeitslauf** alle benannten Fotos + Heros minimal korrigieren und nur die betroffenen Seiten kurz prüfen; eine komplette In-Place-Update-ZIP ausgeben, kein zweites Plugin. Nicht die bisherige 0.1.63 unverändert voreilig installieren oder alte Bild-Fertigmeldungen wiederholen.
+
+---
+
 # HAB & BEWAHR – DESIGN – CURRENT STATE
 
 ## 22.10.2026 – DESIGN 0.1.63 VOLLZIP GEBAUT, QUELLCODE ORIGINAL UND ECHTER BROWSER-MOCK GEPRÜFT (AKTUELL)
