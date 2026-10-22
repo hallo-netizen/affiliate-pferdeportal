@@ -389,3 +389,44 @@ FRISCHE POSITIV-/NEGATIVPRÜFUNG:
 
 OFFEN:
 Echter WordPress-/Frontend-Readback von 1.50.698. Kein Live-PASS raten.
+
+
+---
+## HRD-076 – 1.50.710 falscher Runtimepfad
+STATUS: CLOSED / 1.50.710 VERWORFEN
+
+BEFUND:
+Nach Installation von 1.50.710 war die Hobby-Depot-Seite sichtbar beschädigt.
+
+URSACHE:
+1.50.710 stellte den Laufzeit-/Templatepfad auf V150710 um, obwohl die dafür erwarteten Seitentemplates nicht vorhanden waren.
+
+KORREKTUR:
+1.50.710 vollständig verworfen.
+1.50.711 wurde direkt aus dem wieder funktionierenden 1.50.709-Stand gebaut, ohne neue Runtime-/Templatekette.
+
+LIVE:
+1.50.711 stellte die Seite wieder funktionsfähig her.
+
+REGEL:
+Kein neuer Runtime-/Templatepfad ohne vollständige Existenz- und Renderprüfung aller referenzierten Dateien.
+
+---
+## HRD-077 – WordPress-Plugin-Upload HTTP 413 bei HD-003 1.50.712
+STATUS: OPEN / EXTERNER UPLOADBLOCKER
+
+BEFUND:
+Die vollständige 1.50.712 konnte nicht über WordPress installiert werden.
+
+BELASTBARE GRENZEN:
+- WordPress-Medienseite zeigt 128 MB Uploadlimit;
+- 49,6-MB-Voll-Slim-Paket: HTTP 413;
+- 27,46-MB-FULL-SLIM30: HTTP 413;
+- 561-KB-Test-Updater ließ sich hochladen, wurde aber nicht installiert.
+
+FOLGE:
+1.50.712 bleibt lokal geprüft, aber nicht live.
+Live bleibt 1.50.711.
+
+AKTUELLER STATUS/NEXT ACTION:
+Ausschließlich aus DESIGN/CURRENT_STATE.md lesen.
