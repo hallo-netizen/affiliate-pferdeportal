@@ -1,5 +1,11 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
+## HB-DESIGN-20261022-0.1.63 – Fehlende R1-/R3-Hero- und Altleistenkorrektur mit echtem Artefakt nachgeholt
+**WAS:** Frischer Abschlussabgleich gegen Design-Current, tatsächlichen Campus-Branch, Screenshotfehler vom 21.10. und lokal vorhandenes 0.1.63-Voll-ZIP. **Physisch** vorhandenes Originalplugin `HAB_UND_BEWAHR_DESIGN_0.1.63_HELLE_HEROS_R3_MAGAZIN_FIX.zip` (63.614.237 Bytes, SHA256 `934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635`, 284 Einträge); 10/10 PHP-Lint, ZIP-CRC, 284/284 Zip-Sourcevergleich PASS. Gegen 0.1.62: eine neue R3-Renderer-Datei und sechs weitere modifizierte Dateien; vorhandene 265 Schutz- und 46 Versicherungs-Fotobindungen bleiben unverändert. R1 dunkel nach hell; R3 eigenständiger Foto-/H1-Fallback auf echtes R2-Panorama mit Claim im Hero und Icon-Endkategorien; vorhandene historische Magazinstreifenbereinigung auf R3 geladen und isoliert getestet.
+**WARUM:** Die lokal fälschlich als fertig dargestellte 0.1.62 versagte nach den Nutzer-Live-Screenshots an R1-Helligkeit, R3-Heroformat und blauem „Magazin / Dienstleister“-Streifen; die korrekte R2-Benchmark „Heizung & Temperatur“ darf durch Reparaturen nicht verschlechtert werden.
+**BELEGE:** Im aktuellen Design-Current ist 0.1.63 der Kandidat; eigene Details im Design-Fehlerprotokoll `HBD-DES-20261022-01..04`. R3-PHP-Mocks 2/2, Chromium bei 390/1024/1440px 6/6: korrektes Foto und Hero, keine simulierte Altleiste, ein legitimer Magazinlink bleibt. Negativer Echtsystembefund: 0.1.62 ist **LIVE FAIL** nach Screenshots. **0.1.63 ist nur LOCAL PASS / WP-LIVE OFFEN**, insbesondere Original-DOM-Injektor nicht nachgewiesen und R1/R2-Regression in realem WordPress noch offen.
+**GRENZE:** Keine zweite Current, kein neues Plugin, keine Kategorien/SEO/Datenbankänderungen, keine Bibliotheksquelle oder Archiv als Werkbank; das unveränderte ZIP liegt gegenwärtig **nur im Arbeitscontainer** und wurde nicht als dauerhafter GitHub-Binärrelease belegt.
+
 ## PINTEREST-20261021 – Projektbezogene Pinterest-Büros
 
 WAS: Drei Pinterest-Büros mit eigenem Eingang, Fachkonzept, Current und abgeleitetem Hobbyraum in den bestehenden Projektgebäuden Pferdeatelier, Hobby Depot und Hab & Bewahr. Gebäudenavigation sowie Autoritätsplan ergänzt.
