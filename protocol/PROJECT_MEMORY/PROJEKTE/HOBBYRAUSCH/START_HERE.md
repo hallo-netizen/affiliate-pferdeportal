@@ -27,6 +27,7 @@ zuständiges Büro → `AUTORITAETSPLAN.json` → genau eine Current-Autorität 
 - `PROJEKTLEITUNG/START_HERE.md` → Projektsteuerung, Reihenfolge und Übergaben zwischen den Hobbyrausch-Büros.
 - `KONZEPT/START_HERE.md` → Portal-, Geschäfts- und Funktionskonzept.
 - `SEO_KATEGORIEN/START_HERE.md` → Suchintentionen, Keyword-Cluster, Kategorien und Seitenstruktur.
+- `SEO/START_HERE.md` → technische SEO-Metadaten: Title, Meta-Description, Canonical, Indexierung und Social-Metadaten.
 - `TEXT_REDAKTION/START_HERE.md` → Redaktion, Artikelregeln und spätere Textproduktion.
 - `WISSENSDATENBANK/START_HERE.md` → dauerhaftes Fachwissen, Quellen und strukturierte Wissensbestände.
 - `GLOSSAR/START_HERE.md` → Fachwörterbuch, Glossarbegriffe, Glossar-SEO und Glossar-Core.
