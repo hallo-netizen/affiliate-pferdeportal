@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-19
+STAND: 2026-10-22
 STATUS: AKTIV / INVENTAR- UND ROUTING-CURRENT / KEINE KOPIE VON EINZELPLUGIN-STATUS
 
 ## Regel
@@ -69,6 +69,17 @@ schlanker read-only Laufzeitkern für das zentrale Hobbyregister und die Hobbyfi
 
 Fach-Current:
 `../WISSENSDATENBANK/CURRENT_STATE.md`
+
+## HD-008 – SEO-Metadaten
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-008-SEO-METADATEN/CURRENT.md`
+
+Rolle:
+schlanke automatische SEO-Titel-/Meta-Description-Ausgabe.
+
+Fach-Current:
+`../SEO/CURRENT_STATE.md`
 
 ## EXAKT EINE NEXT ACTION
 
