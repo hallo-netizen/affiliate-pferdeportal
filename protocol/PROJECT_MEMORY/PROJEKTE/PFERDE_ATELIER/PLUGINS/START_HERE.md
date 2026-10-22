@@ -15,8 +15,6 @@ Bei frischer unveränderter Current-Bindung: **keine Vollrekonstruktion**.
 Bei belegter Änderung: **nur Delta prüfen**.
 
 
-STAND: 2026-09-13
-STATUS: AKTIV / ERSTINVENTAR + ARTEFAKT-SYNC IM AUFBAU
 
 ## 1-KLICK-ÜBERSICHT
 
