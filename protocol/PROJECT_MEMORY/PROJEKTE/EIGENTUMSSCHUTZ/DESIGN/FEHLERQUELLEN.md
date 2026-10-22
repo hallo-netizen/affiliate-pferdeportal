@@ -1,3 +1,67 @@
+## HBD-DES-20261022-BILDER-USER – Neue konkrete Beanstandungen des Nutzers
+
+**Status: OFFEN / NICHT REPARIERT.** Vom Nutzer gemeldete sichtbare Mängel, kein eigenständiger WordPress-Readback und kein Anspruch, diese Bilder im vorhandenen Plugin schon geändert zu haben. Bearbeitung **zusammen mit den noch nicht live freigegebenen Hero-Korrekturen aus HBD-DES-20261022-01 bis 04**, nur bestehendes Designplugin, keine Collagen, keine neu gestartete Gesamtprüfung. Einzelfotos; keine Bilddublette innerhalb einer Bereichsseite; Kategorienkachel und Ziel-Hero verwenden dieselbe Fotodatei.
+
+**Wortgetreue Fehlerliste nach Nutzerangaben** (Schreibweise im späteren exakten Mapping-Abgleich normalisieren, aber kein Thema blind anlegen):
+
+- Alarm & Kamera – unscharf
+- E-Scooter-Diebstahlschutz – Foto fehlt
+- Tür und Fensterglas bei Vandalismus – beanstandet, Fehlerart nicht genannt
+- PV-Kamera & Beleuchtung – unscharf
+- Dusche undicht – unscharf
+- Feuchtung & Trocknung – unscharf
+- Wohnmobil-Dachabdichtung – falsches Foto und unscharf
+- Freizeitboot-Nässe – Foto fehlt
+- Gartenpools & Teichanlagen – Foto fehlt
+- Kleine Betriebe & Vereine – alle Motive falsch oder doppelt
+- Dachabläufe & Notentwässerung – falsches Foto und unscharf
+- Dacheindeckung – unscharf
+- Bootsmotor-Brandschutz – Foto fehlt
+- Bordelektrik Freizeitboot – falsches Foto
+- Fluchtwege und Personenschutz – falsches Foto
+- Baulicher Brandschutz im Wohnbestand – kein Foto
+- Brände Privatfahrzeuge – kein Foto
+- Brandschäden und Wiederherstellung – kein Foto
+- Äußere Brandeinwirkung auf Privatobjekte – kein Foto
+- Dach Fenster PV – falsches Foto und unscharf
+- Mobile Hochwassersperren – falsch und unscharf
+- Friseursalon bei Hochwasser – falsch
+- Ladenlokal bei Hochwasser – falsch
+- Hanggrundstück Erosion – kein Foto
+- Wohnmobil bei Sturm – Foto fehlt
+- Hochwasser Privatwagen – falsch
+- Privatwagen Sturm – falsch
+- Geparkte Fahrzeuge Unwetter – Foto fehlt
+- Dachgeschoss Hitze – falsch und unscharf
+- Wohnmobil bei Hitze – falsch
+- Marder im Dach – falsch und unscharf
+- Nager Hausleitungen – falsch
+- Insekten im Haus – Foto fehlt
+- Vogelschäden Außentechnik – falsch
+- Wildtierschäden Garten – falsch
+- Wildtierschäden Zäune – falsch
+- Hecken bei Frost – falsch
+- Winterdienst Privatwege – falsch
+- Winter und Schnee – Foto fehlt
+- Notstromversorgung Haus – Foto fehlt
+- Stromausfall und Notstrom – falsch
+- Stromfehler und Schutzschalter – falsch
+- Durchlauferhitzer – Foto fehlt
+- Warmwasserspeicher – falsch
+- Brunnenpumpe – falsch
+- Pumpen und Notbetrieb – falsch und unscharf
+- Pumpenursachen und Sensorik – falsch
+- Heimnetzwerk Router – falsch
+- PoE-Installation – falsch
+- Alarm Kamera ohne Netz – falsch und unscharf
+- Fernüberwachung – ALLE Motive falsch
+- Wallbox Ladetechnik – falsch
+- PV-Ersatzstromversorgung – falsch
+- Gegensprechanlage – falsch und unscharf
+- Smarte Türsteuerung – Foto fehlt
+
+**Umsetzungsgrenze:** kein ZIP 0.1.63 in der gegenwärtigen Gesprächsdateiablage, die in altem Current genannte `/mnt/data/...`-Datei aus einem früheren Lauf ist hier nicht vorhanden; daher bisher keine echten Bild-/Hero-Dateiänderungen möglich. Nicht anhand der Fehlerliste irgendwelche Fotos blind tauschen. Vor Bearbeitung vollständige originale Plugin-ZIP als Ausgangsbasis sicher bereitstellen. Keine persönliche Bibliothek als Werkbank/Current. Ziel: genau EIN vollständiges In-Place-Pluginupdate für alle gemeldeten Bildfehler + Heroes, kurze Positiv-/Negativprüfung an den tatsächlich betroffenen Seiten; keine endlose globale Testfolge.
+
 # HBD-DESIGN – Nachgeholtes Fehlerprotokoll Bildzuordnung / Ebene 2 (19.10.2026)
 
 ## HBD-DES-20261022-01 – R1-Hero zu dunkel statt heller Benchmark
