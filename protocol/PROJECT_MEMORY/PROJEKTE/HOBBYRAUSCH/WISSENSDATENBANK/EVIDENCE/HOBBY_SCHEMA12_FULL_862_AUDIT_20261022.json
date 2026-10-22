@@ -1,0 +1,30 @@
+{
+  "format": "hobby-depot-schema-1.2-full-audit",
+  "date": "2026-10-22",
+  "result": "PASS",
+  "records": 862,
+  "old_property_count": 54,
+  "new_property_count": 57,
+  "new_assignments": 2586,
+  "old_trait_assignments_checked": 46548,
+  "old_trait_assignments_changed": 0,
+  "records_with_57_of_57": 862,
+  "duplicate_registry_ids": 0,
+  "invalid_new_values": 0,
+  "unknown_new_values": 0,
+  "distributions": {
+    "equipment_maintenance": {"keine":156,"gering":467,"mittel":199,"hoch":40},
+    "strength_need": {"1":643,"2":128,"3":47,"4":38,"5":6},
+    "coordination_balance_need": {"1":461,"2":245,"3":73,"4":50,"5":33}
+  },
+  "base_register_sha256": "4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78",
+  "merged_register_candidate_sha256": "05fc1c5d7ab9282a43de2b43372c378f629fac4b71c98b78fe1bec00a4f46179",
+  "schema_1_2_candidate_sha256": "c4e2dc719ee7b017f0da9de08bfa2251124cbbb61894dad42afad1ce758ba68a",
+  "evidence_parts": [
+    "EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_01.json",
+    "EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_02.json",
+    "EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_03.json",
+    "EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_04.json"
+  ],
+  "method": "Cross-classification from the already reviewed 54-trait dataset plus calibrated hobby-specific plausibility rules; no existing trait was rewritten."
+}
