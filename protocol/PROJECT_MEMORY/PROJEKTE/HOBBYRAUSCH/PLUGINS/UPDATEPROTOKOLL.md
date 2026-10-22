@@ -5222,3 +5222,47 @@ Plugin deaktivieren oder entfernen; keine Inhaltsmigration und keine DB-Schemaae
 
 CURRENT:
 PLUGIN_AKTEN/HD-008-SEO-METADATEN/CURRENT.md
+
+
+---
+## PU-20261022-002 – HD-003 Footer 1.50.710–1.50.712 / Recovery + Uploadblocker
+
+PLUGIN-ID:
+HD-003-DESIGN-TEMPLATE-KIT
+
+ART:
+Fehlerkorrektur und Footer-Fortschreibung.
+
+LIVE-BASIS:
+1.50.711.
+
+FEHLER 1.50.710:
+Falscher V150710-Runtime-/Templatepfad beschädigte die Seite live.
+1.50.710 verworfen.
+
+RECOVERY 1.50.711:
+Direkt aus funktionierendem 1.50.709-Stand; keine neue Runtime-/Templatekette; Seite live wieder funktionsfähig.
+
+KANDIDAT 1.50.712:
+Footer-Hintergrund #f5f1e9; Header-Logo-Komponente im Footer; Copyright unterhalb des Footers; keine unerwünschten Zusatzlinks.
+
+ARTEFAKTE:
+- AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FOOTER_EXACT_HEADER_LOGO_LIGHTBG_COPYRIGHT_BELOW.zip
+  SHA-256 be9f6d59f86c5c2f8d0983bdf8013c866c468a7489a1b70037a9deed3dc6eec1
+- AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FULL_SLIM30.zip
+  SHA-256 f1986b60c6628b2e43b6cade32f9ccbd4fe3664bdc8df34a06842f64c68b97e9
+  Groesse 27,463,064 Bytes
+
+LOKALE QA 1.50.712:
+PHP PASS; Seitentemplates gegen 1.50.711 unverändert; Footer-Positiv-/Negativrender PASS; ZIP/Fresh-Unpack PASS.
+
+LIVE-GRENZE:
+49,6 MB und 27,46 MB werden im WordPress-Plugin-Upload mit HTTP 413 abgelehnt.
+561-KB-Test-Updater ließ sich hochladen, wurde nicht installiert.
+Kein Live-PASS für 1.50.712.
+
+ROLLBACK:
+Live 1.50.711 beibehalten.
+
+CURRENT:
+PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
