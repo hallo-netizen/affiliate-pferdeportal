@@ -3,58 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-22
-STATUS: **1.50.712 FOOTER NUR AUF 711-BASIS / EXAKT GEPRÜFT / LIVE-READBACK OFFEN**
+STATUS: **LIVE 1.50.711 / 1.50.712 LOKAL GEPRÜFT / HTTP-413-UPLOADBLOCKER**
 
 Plugin-ID:
-HD-003-DESIGN-TEMPLATE-KIT
+`HD-003-DESIGN-TEMPLATE-KIT`
 
-Artefakt:
+Fach-Current:
+`../../../DESIGN/CURRENT_STATE.md`
+
+## Live
+
+Aktiv und nach Nutzer-Readback funktionsfähig:
+**1.50.711**.
+
+1.50.710 ist verworfen, weil ein falscher V150710-Runtime-/Templatepfad die Seite live beschädigt hat.
+
+## Lokaler Kandidat 1.50.712
+
+Vollartefakt:
 `AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FOOTER_EXACT_HEADER_LOGO_LIGHTBG_COPYRIGHT_BELOW.zip`
-
 SHA-256:
 `be9f6d59f86c5c2f8d0983bdf8013c866c468a7489a1b70037a9deed3dc6eec1`
 
+Vollständige komprimierte Ausgabe:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FULL_SLIM30.zip`
+SHA-256:
+`f1986b60c6628b2e43b6cade32f9ccbd4fe3664bdc8df34a06842f64c68b97e9`
 Größe:
-58,829,246 Bytes.
+27,463,064 Bytes.
 
-## Basis
+Footerziel:
+- Hintergrund `#f5f1e9`;
+- Header-Logo-Komponente im Footer;
+- Copyright unterhalb des Footers;
+- Hobbyfinder / Zeit-Budget-Platz / zusätzlicher Anbieter nicht im Footer.
 
-Direkte Basis ist der wieder funktionierende Stand 1.50.711.
+Lokale QA:
+- PHP-Lint PASS;
+- aktive Seitentemplates gegenüber 1.50.711 unverändert;
+- Footer Positiv-/Negativrender PASS;
+- ZIP/Fresh-Unpack PASS.
 
-Gegen 1.50.711 sind exakt zwei Dateien geändert:
-- `pferde-template-kit.php` – nur Versionsnummer;
-- `includes/class-hobby-depot-profile-v150709.php` – nur Footer-Render/CSS + Release.
+## Upload-/Livegrenze
 
-Die beiden aktiven Seitentemplates bleiben bytegleich:
-- `templates/hobby-depot-front-v150709.php`
-- `templates/hobby-depot-content-v150709.php`
+- 27,46 MB werden im WordPress-Plugin-Upload mit HTTP 413 abgelehnt;
+- WordPress-Medienseite zeigt 128 MB;
+- kleiner 561-KB-Test-Updater ließ sich hochladen, wurde nicht installiert.
 
-Keine Router-/Template-/Seitenlogikänderung.
+1.50.712 ist daher **nicht live**.
 
-## Footer 1.50.712
+## ERSTER OFFENER BLOCKER
 
-- Hintergrund: vorhandene Headerfarbe `#f5f1e9`;
-- Logo: dieselbe Header-Komponente, keine separate Rohbild-Darstellung;
-- Desktop: 220×146 Komponentengeometrie;
-- Tablet: 194×132;
-- Mobil: 196 px Vollbilddarstellung wie Header mobil;
-- Rechtliches / Informationen / Anzeigenmarkt bleiben;
-- Hobbyfinder, Zeit/Budget/Platz und Anbieter-Zusatz bleiben ausgeschlossen;
-- Copyright wird nach `</footer>` in einer separaten weißen Zeile ausgegeben;
-- HD-001-Autofooter bleibt deaktiviert.
-
-## Tests
-
-- PHP-Lint 138/138 PASS;
-- Diff gegen 711 exakt 2 Dateien;
-- aktive Front-/Content-Templates bytegleich zu 711;
-- negativer Footer-Render mit absichtlich eingeschleusten Hobbyfinder/Budget/Anbieter-Einträgen: alle 0 Treffer;
-- Desktop 1440: Footer #f5f1e9, Logo 220×146, Copyright unter Footer;
-- Tablet 900: Logo 194×132;
-- Mobil 390: Logo 196 px, Copyright unter Footer;
-- ZIP CRC PASS;
-- Fresh-Unpack PASS.
+**HTTP 413 verhindert derzeit die reguläre Installation des vollständigen 1.50.712-Pakets über WordPress.**
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.712 installieren und ausschließlich den Footer live prüfen.**
+**Vollständige 1.50.712 über einen funktionierenden Upload-/Serverweg installieren und danach Footer live abnehmen.**
