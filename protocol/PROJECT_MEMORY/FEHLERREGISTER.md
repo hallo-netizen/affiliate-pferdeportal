@@ -1,5 +1,11 @@
 # ZENTRALES FEHLERREGISTER
 
+## EIGENTUMSSCHUTZ-DESIGN-LIVE-20261022
+Bereich: EIGENTUMSSCHUTZ / DESIGN / Hab & Bewahr – Design.
+Status: 0.1.62 durch Live-Screenshots widerlegt; 0.1.63 lokal geprüft, WordPress-Live-Abnahme noch offen.
+**Einzige autoritative Fehlerquelle:** `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/FEHLERQUELLEN.md` → HBD-DES-20261022-01 bis 04.
+**Aktueller Status/Blocker/GENAU EINE NEXT ACTION ausschließlich:** `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/CURRENT_STATE.md`.
+
 STAND: 2026-10-09
 ROLLE: **REINER FEHLER-WEGWEISER**
 
