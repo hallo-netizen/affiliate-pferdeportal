@@ -2,8 +2,8 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 2,
-  "open_reported_items": 53,
+  "completed_in_source_count": 5,
+  "open_reported_items": 50,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -13,16 +13,35 @@
       "area": "Freizeit & Fahrzeuge",
       "topic": "E-Scooter-Diebstahlschutz",
       "old_photo": "new-vehicle.webp",
-      "new_photo": "insurance-e-scooter-versicherung.webp",
-      "proof": "Einzelbild: E-Scooter am Haltebügel mit Schloss; vorhandene Fotodatei; lokale Zuordnungsprüfung"
+      "new_photo": "insurance-e-scooter-versicherung.webp"
     },
     {
       "world": "Vandalismus & Zerstörung",
       "area": "Gebäude & Ausstattung",
       "topic": "Tür- und Fensterglas bei Vandalismus",
       "old_photo": "curated-20261019-16.webp",
-      "new_photo": "new-glass.webp",
-      "proof": "Einzelfoto eines zerstörten Fensters und Graffiti; vorhandene Fotodatei; lokale Zuordnungsprüfung"
+      "new_photo": "new-glass.webp"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic": "Dachabläufe & Notentwässerung",
+      "old_photo": "magazin-wasser.webp",
+      "new_photo": "new-rain.webp"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Starkregen & Hochwasser",
+      "topic": "Ladenlokal bei Hochwasser",
+      "old_photo": "editorial-wasser-und-feuchtigkeit-2.webp",
+      "new_photo": "insurance-betriebsunterbrechungsversicherung.webp"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "topic": "Stromfehler & Schutzschalter",
+      "old_photo": "hero-technik-ausfaelle.webp",
+      "new_photo": "topic-final-erdung.webp"
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -34,5 +53,7 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die restlichen 53 Beanstandungen einschließlich zweier Gruppenmeldungen mit eigens passenden Einzelfotos einzeln beheben; die sechs R2-Hero-Kollisionen mit einzigartigen Fotos lösen und danach nur betroffene Seiten testen."
+  "next": "Die restlichen 53 Beanstandungen einschließlich zweier Gruppenmeldungen mit eigens passenden Einzelfotos einzeln beheben; die sechs R2-Hero-Kollisionen mit einzigartigen Fotos lösen und danach nur betroffene Seiten testen.",
+  "evidence": "265/265 R3 PHP mapping paths resolve; edited R3 target photo equals mapping photo; 5 precise mapping deltas vs original 0.1.63; all assets byte-identical; no collateral topic edits; short dHash category and R2 hero guard. No WordPress live tests.",
+  "warning": "Photographic replacements from same 0.1.63 package. No new photos created. Remaining 50 user issues NOT completed; this is only a WIP. Two attempted image generations resulted in collages and were NOT added."
 }
