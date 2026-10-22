@@ -7,7 +7,7 @@ STATUS: VERBINDLICHER SEITENVERTRAG
 
 Jede Hobbyseite im Register folgt derselben Grundstruktur und wird aus genau einer kanonischen Hobbyidentität, dem zentralen 57er-Eigenschaftsschema und dem vorhandenen 4-Felder-Kurzprofil erzeugt.
 
-Nicht alle 57 Merkmale werden als Tabelle ausgegeben. Sie dienen als gemeinsame Datenbasis, Vergleichslogik und Rohstoff für verständlichen Fließtext.
+Nicht alle 57 Merkmale werden als Tabelle ausgegeben. Sie sind gemeinsame Datenbasis, Vergleichslogik und Rohstoff für verständlichen Fließtext.
 
 ## F1 – Sofort verstehen
 
@@ -29,8 +29,6 @@ Fließtext aus:
 - public_exposure
 - nature_contact
 - competition_role
-
-Ziel: In wenigen Absätzen erklären, welcher Mensch und welche Erwartung typischerweise zu diesem Hobby passen.
 
 ## F3 – Wo und wann kann ich es machen?
 
@@ -72,15 +70,13 @@ Fließtext aus:
 - rental_borrowing
 - equipment_maintenance
 
-Ziel: brauchbarer Einstieg statt Luxusausstattung; laufende Belastung klar von Anschaffung trennen.
-
 ## F6 – Was muss ich können?
 
 Fließtext aus:
 - physical_intensity
 - strength_need
 - endurance_need
-- coordination_balance
+- coordination_balance_need
 - fine_motor_need
 - cognitive_focus
 - patience_precision
@@ -112,13 +108,15 @@ Nur echte Grenzen nennen; keine künstlichen Ausschlüsse und keine Alters-/Gesc
 
 ## F9 – Kompakter Vergleichsblock
 
-Für die schnelle Vergleichbarkeit werden nur die wichtigsten Werte sichtbar verdichtet:
+Für die schnelle Vergleichbarkeit werden sichtbar verdichtet:
 - alleine / gemeinsam
 - drinnen / draußen
 - typische Zeit
 - Einstiegsbudget
 - Platzbedarf
 - körperliche Intensität
+- Kraftbedarf
+- Koordination / Balance
 - Lernkurve
 - Spontanität / Bindung
 - ungewöhnlich / klassisch
