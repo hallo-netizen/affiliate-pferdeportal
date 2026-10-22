@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-21
-STATUS: **1.50.710 FOOTER EXAKTER AKTIVER RENDERER KORRIGIERT / LIVE-READBACK OFFEN**
+STATUS: **1.50.712 FOOTER NUR AUF 711-BASIS / VISUELL + TECHNISCH GEPRÜFT / LIVE OFFEN**
 
 Zielvertrag: **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
@@ -216,10 +216,39 @@ SHA-256:
 
 Größe:
 58,829,071 Bytes.
+## 22.10.2026 – Footer 1.50.712
+
+Nach Fehler in 1.50.710 wurde ausschließlich von der wieder funktionierenden 1.50.711-Basis weitergearbeitet.
+
+Exakte Nutzeranforderung:
+- Footer-Hintergrund ändern;
+- Logo exakt wie oben inklusive Logo-internen Abständen;
+- Copyright unter den Footer.
+
+Umgesetzt:
+- Footer-Hintergrund = Headerfarbe `#f5f1e9`;
+- Footer benutzt dieselbe Header-Logo-Komponente;
+- Copyright liegt außerhalb des Footer-Tags auf Weiß;
+- keine Router-/Template-/Seitenänderung.
+
+Beweise:
+- gegen 711 exakt 2 Dateien geändert;
+- beide aktiven Seitentemplates bytegleich;
+- PHP 138/138 PASS;
+- negativer Menütest PASS;
+- Desktop/Tablet/Mobil mit Browser gerendert und Geometrie geprüft;
+- ZIP/Fresh-Unpack PASS.
+
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FOOTER_EXACT_HEADER_LOGO_LIGHTBG_COPYRIGHT_BELOW.zip`
+
+SHA-256:
+`be9f6d59f86c5c2f8d0983bdf8013c866c468a7489a1b70037a9deed3dc6eec1`
+
 ## ERSTER OFFENER BLOCKER
 
-**Live-Readback von 1.50.710.**
+**Live-Readback von 1.50.712.**
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.710 installieren und nur den dunklen Footer prüfen: Originallogo farbig, Links/Überschriften sichtbar größer, kein Hobbyfinder, kein Zeit/Budget/Anbieter-Zusatz, Copyright bleibt.**
+**1.50.712 installieren und ausschließlich den Footer prüfen.**
