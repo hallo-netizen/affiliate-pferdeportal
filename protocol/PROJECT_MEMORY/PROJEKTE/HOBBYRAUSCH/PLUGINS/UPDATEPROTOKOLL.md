@@ -5170,3 +5170,55 @@ QA:
 
 LIVE:
 1.50.705 noch offen. Nächster Schritt: nur HD-003 aktualisieren und /hobbyfinder/ visuell prüfen.
+
+
+---
+## PU-20261022-001 – HD-008 Hobby Depot SEO 1.0.0
+
+PLUGIN-ID:
+HD-008-SEO-METADATEN
+
+ART:
+Neues Eigenplugin.
+
+FACHBÜRO:
+HOBBYRAUSCH / SEO.
+
+VON / AUF:
+nicht vorhanden → 1.0.0.
+
+WARUM:
+Ein einheitlicher automatischer Metadatenstandard ohne grosse externe SEO-Suite wurde beschlossen.
+
+REGEL:
+- Title: [Originaltitel] - Hobby Depot
+- Description: [Originaltitel] - [erste sinnvolle inhaltsspezifische Kernaussage]
+- manuelle Description darf bewusst ueberschreiben
+
+UMFANG:
+Beiträge, Seiten, öffentliche Custom Post Types und öffentliche Taxonomien.
+Keine Canonical-, Sitemap-, Robots- oder Schema-Aenderung.
+
+ARTEFAKT:
+HOBBY_DEPOT_SEO_1.0.0_META_AUTOMATIK.zip
+
+SHA-256:
+32bceb07a98ddb27f92371316be3395257e195e7fecf7e64f3ce6c2b373c0a33
+
+Groesse:
+4316 Bytes.
+
+TEST:
+ZIP PASS; PHP-Syntax PASS; lokale Positiv-/Negativ-Simulation fuer Beitrag, Kategorie und manuelle Ueberschreibung PASS.
+
+LIVE:
+NICHT INSTALLIERT / kein Live-PASS.
+
+ARTEFAKTSYNC:
+MANIFEST angelegt. Echtes CURRENT.zip im isolierten Campus-Pfad noch offen; keine Ersatzdatei als ZIP erzeugt.
+
+ROLLBACK:
+Plugin deaktivieren oder entfernen; keine Inhaltsmigration und keine DB-Schemaaenderung.
+
+CURRENT:
+PLUGIN_AKTEN/HD-008-SEO-METADATEN/CURRENT.md
