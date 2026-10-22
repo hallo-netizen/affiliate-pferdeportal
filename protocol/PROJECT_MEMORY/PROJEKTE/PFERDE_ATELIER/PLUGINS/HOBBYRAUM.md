@@ -7,25 +7,11 @@
 > Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
 
 
-STAND: 2026-09-16
-STATUS: **FREI**
+## ABGELEITETER AUSFÜHRUNGSWEG
 
-## AKTUELLER STAND
+Nur den von `PLUGINS/CURRENT_STATE.md` freigegebenen Auftrag an dessen technischer Fachquelle bearbeiten. Vor Beginn die tatsächliche aktive Arbeitsbindung prüfen; fehlt sie oder widerspricht sie Current, **BLOCKED** statt aus früheren Hobbyraum-Zwischenständen zu raten.
 
-Die in diesem Chat tatsächlich geänderten Pluginstände sind nachgeprüft und im Pluginbüro protokolliert/synchronisiert:
-- PPA-002 Design 1.50.541 → LIVE PASS;
-- PPA-003 Bildzentrale 2.7.6 → local hard PASS / Pferde-LIVE-Funktion PASS;
-- PPA-012 Universal Glossary Engine 1.4.7 → LIVE PASS;
-- PPA-015 Rassentexte Textpflege 1.1.0 → LIVE PASS / einmaliger Auftrag abgeschlossen.
-
-PPA-014 Speicheranalyse bleibt als separater bestehender LIVE-offener Vorgang sichtbar, ist aber nicht aktive Arbeit dieses Chats.
-
-## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
-
-Keine Pluginbüro-Aktion aus diesem Chat offen.
-
-Bei neuer Pluginänderung:
-Fachbüro → lokale Positiv/Negativ/Regression → ggf. WordPress-LIVE → genau ein PU-Vorgang → CURRENT.zip + MANIFEST → Readback.
+Nach Abschluss Fachnachweise im bestehenden `UPDATEPROTOKOLL.md` dokumentieren und nur nach Freigabe den isolierten Ausgabestand synchronisieren. Diese Ausführungsfläche führt **keinen** eigenen dynamischen Status, Blocker oder NEXT ACTION.
 
 ## NICHT ANFASSEN
 
