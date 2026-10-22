@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
-  "version": "1.4",
-  "effective_date": "2026-10-21",
+  "version": "1.5",
+  "effective_date": "2026-10-22",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -144,6 +144,11 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_SEO",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/CURRENT_STATE.md"
     },
     {
       "id": "HOBBYRAUSCH_TEXT_REDAKTION",
