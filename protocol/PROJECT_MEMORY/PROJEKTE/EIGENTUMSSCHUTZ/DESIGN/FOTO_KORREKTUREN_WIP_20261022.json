@@ -1,0 +1,38 @@
+{
+  "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
+  "original_version": "0.1.63",
+  "user_list_count": 55,
+  "completed_in_source_count": 2,
+  "open_reported_items": 53,
+  "new_plugin_generated": false,
+  "collages_added": false,
+  "wp_live_test": false,
+  "changes": [
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Freizeit & Fahrzeuge",
+      "topic": "E-Scooter-Diebstahlschutz",
+      "old_photo": "new-vehicle.webp",
+      "new_photo": "insurance-e-scooter-versicherung.webp",
+      "proof": "Einzelbild: E-Scooter am Haltebügel mit Schloss; vorhandene Fotodatei; lokale Zuordnungsprüfung"
+    },
+    {
+      "world": "Vandalismus & Zerstörung",
+      "area": "Gebäude & Ausstattung",
+      "topic": "Tür- und Fensterglas bei Vandalismus",
+      "old_photo": "curated-20261019-16.webp",
+      "new_photo": "new-glass.webp",
+      "proof": "Einzelfoto eines zerstörten Fensters und Graffiti; vorhandene Fotodatei; lokale Zuordnungsprüfung"
+    }
+  ],
+  "critical_r2_hero_photo_collisions": [
+    "Bootsmotor-Brandschutz",
+    "Wohnmobil bei Sturm",
+    "Winter & Schnee",
+    "Notstromversorgung fürs Haus",
+    "Durchlauferhitzer",
+    "Smarte Türsteuerung"
+  ],
+  "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
+  "next": "Die restlichen 53 Beanstandungen einschließlich zweier Gruppenmeldungen mit eigens passenden Einzelfotos einzeln beheben; die sechs R2-Hero-Kollisionen mit einzigartigen Fotos lösen und danach nur betroffene Seiten testen."
+}
