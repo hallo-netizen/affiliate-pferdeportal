@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **FACHKONZEPT 2.8 AKTIV / HOBBYFINDER V1 KONZEPT + KLICKBARER PROTOTYP / SEO-STRUKTUR UNVERÄNDERT**
+STAND: 2026-10-22
+STATUS: **FACHKONZEPT 2.8 AKTIV / HOBBYREGISTER-DARSTELLUNG + SEO-GRENZE IN ENTSCHEIDUNG**
 
 ## Rolle
 
@@ -123,6 +123,25 @@ Artefakte:
 - `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_FUNNEL_SIMULATION_V1.json`
 - `/Hobby Depot/Hobby-Klassifikation/HOBBYFINDER_PROTOTYP_V1.html`
 
+## Hobbyregister – Konzeptdelta 2026-10-22
+
+Fest beschlossen:
+- das Hobbyregister soll als eigenständige, hochwertige Übersicht nach dem Strukturprinzip der Pferderassen-Inspiration gedacht werden, aber nicht kopiert werden;
+- Übersicht mit groben Gruppen, Suche/A–Z und Hobbykacheln;
+- alle Hobbyidentitäten gehören grundsätzlich in das Register, damit es als echtes Register funktioniert;
+- Einzelansichten folgen einem einheitlichen Schema-F-Steckbrief mit den vorhandenen zentralen Merkmalen/Kurzprofilen;
+- Nutzer sollen beim Recherchieren im Register auch innerhalb des Registers bleiben;
+- bestehende 862er-Hobbyidentitäten und 54 Traits bleiben die einzige Datenbasis; keine zweite Hobby-Datenbank.
+
+Noch NICHT entschieden:
+- die endgültige SEO-Grenze zwischen bestehenden großen CORE-Hobbyseiten und Register-Steckbriefen;
+- insbesondere ist **nicht** beschlossen, alle Registerprofile auf noindex zu setzen;
+- diese Voll-noindex-Lösung wurde ausdrücklich verworfen, weil Nischenhobbys ohne bestehende Hauptseite (Beispiel: Extrembügeln) über ihre Registerseite ranken können sollen;
+- ebenfalls nicht beschlossen ist eine pauschale Doppelindexierung aller Registerprofile.
+
+Ziel der offenen Entscheidung:
+**eine einfache, nachhaltige Regel, die Nischenprofile indexierbar lässt, aber bei Hobbys mit bestehender starker Hauptseite Kannibalisierung und inhaltliche Doppelung verhindert.**
+
 ## DataForSEO
 
 DataForSEO ist Evidence und Recherchehilfe, niemals Strukturautorität.
@@ -136,4 +155,4 @@ Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker steh
 
 ## EXAKT EINE NEXT ACTION
 
-**Der Prototyp ist gestalterisch/bedienerisch vom Nutzer positiv bestätigt und mit dem vollständigen 862er-Bestand lokal positiv/negativ geprüft. Nächster Konzeptschritt ist ausschließlich die WordPress-Umsetzung auf Basis des zentralen Hobbyregisters; keine zweite Hobby-Datenbank und keine Änderung der V7.1-SEO-Struktur.**
+**Die SEO-/Inhaltsgrenze für Hobbyregister-Einzelprofile verbindlich festlegen: Nischenhobbys müssen ranken können; bestehende starke CORE-Hobbyseiten dürfen durch Registerprofile nicht kannibalisiert werden. Erst danach Registerseiten technisch bauen.**
