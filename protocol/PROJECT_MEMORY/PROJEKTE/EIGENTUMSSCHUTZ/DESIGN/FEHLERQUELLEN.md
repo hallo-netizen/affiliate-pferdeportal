@@ -1,5 +1,30 @@
 # HBD-DESIGN – Nachgeholtes Fehlerprotokoll Bildzuordnung / Ebene 2 (19.10.2026)
 
+## HBD-DES-20261022-01 – R1-Hero zu dunkel statt heller Benchmark
+**Fehler (Nutzer-Live-Screenshot 21.10., 17:42):** Einbruch & Diebstahl ist links dunkelgrau/schwarz. Verbindliche richtige Vorlage: HELLES „Heizung & Temperatur“-Panorama mit H1 und Claim IM Bild.
+**Ursache an 0.1.62 physisch belegt:** `includes/world-layout.php::hbdp_world_hero_tone()` ordnet Einbruch/Wasser/Versicherung weiterhin `dark` zu, gekoppelt an schwarzen CSS-Verlauf.
+**Korrektur 0.1.63 lokal:** Alle sieben R1 `light`; vorhandene Bilddateien und Kategorieknoten byteidentisch. Physisches ZIP SHA256 `934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635`.
+**Test/Status:** PHP-Lint/ZIP, gezielter Quellcodebeleg; **LOCAL CLOSED / LIVE OFFEN**. Kein neuer WP-Screenshot nach 0.1.63.
+
+## HBD-DES-20261022-02 – R3 mit separatem Foto statt R2-Panorama
+**Fehler (Nutzer-Live-Screenshot):** Brunnenpumpe mit großer H1 über abgesetztem Foto; R2 „Heizung & Temperatur“ ist korrekt und soll NICHT umgestaltet werden.
+**Ursache 0.1.62 belegt:** Der `templates/site.php`-Defaultzweig rendert R3 als generischen `hbdp-hub` mit eigenem `hbdp-focus-destination-photo`, während R2 den originalen `hbdp-area-demo-hero`-Renderer hat.
+**Korrektur 0.1.63 lokal:** Zusätzlicher `includes/r3-topic-hero.php` und enger Dispatcher nur für R3 `page` mit R2-Parent; R3 verwendet vorhandenes konkretes Bild und die R2-Panorama-Markupklasse mit H1+Claim im Foto, Beitragskategorien werden mit Icons gezeigt.
+**Test/Status:** PHP-Mock Brunnenpumpe und Hausratversicherung 2/2 PASS; Chromium 390/1024/1440px je R3 = 6/6 PASS, 230/260px, Cover, kein horizontaler Überlauf. **LOCAL CLOSED / LIVE OFFEN**. Vollständige WordPress-R1/R2/R3-Regression nicht belegt.
+
+## HBD-DES-20261022-03 – Blaue Altleiste Magazin/Dienstleister auf R3 trotz alter Fixes
+**Fehler (Nutzer-Live-Screenshot):** Mitten in den Versicherungskategorien noch blaue Zeile „Magazin Dienstleister“, obwohl in älteren Versionen wiederholt als behoben gemeldet.
+**Nachgewiesene Ursache der Fixlücke:** `assets/area-shortcuts-clean.js` war nur auf Home/R1/R2 geladen und prüfte ausschließlich alte Klassennamen; der R3-`hbdp-hub` wurde nicht bedient. **Die ursprüngliche WordPress-Komponente, welche die Leiste injiziert, wurde im tatsächlichen Live-DOM bislang nicht nachgewiesen** – nicht behaupten, sie entfernt zu haben.
+**Korrektur 0.1.63 lokal:** Skript auch auf R3 laden, neue `.hbdp-r3-page`-Wache; nur Container aus EXAKT zwei Altlinks entfernen; zulässige individuelle Magazinlinks und reguläre Inhalte geschützt.
+**Tests/Status:** synthetisch eingefügte Zweilink-Leiste in Chromium entfernt, legitimer Magazinlink bleibt erhalten (6 Browserfälle). **LOCAL TEILPASS / LIVE OFFEN**; DOM-Nachweis und tatsächliche Live-Wiederholungsfreiheit erst nach Installation möglich.
+
+## HBD-DES-20261022-04 – Falsch als abgeschlossen gemeldete globale Hero-Freigabe 0.1.62
+**Fehler:** Lokaler 0.1.62-R2-Versicherungs-Simulationstest wurde als Lösung für „alle Heros und Magazin/Dienstleister“ dargestellt; reale Nutzer-Screenshots widerlegten die globale Aussage. R1- und R3-Routen waren nicht gleichwertig getestet.
+**Korrektur/Warum:** 0.1.63 reproduziert getrennt alte R3 und Versicherungs-R3, prüft eine positive/negative DOM-Leiste und gleiche R2-CSS-Formatierung; ein WordPress-Test der fünf realen repräsentativen Seiten bleibt zwingend. Bereits vorhandene R2-Benchmark unverändert schützen. Kein neues Kategorieplugin, keine neue Theme-Architektur.
+**Status:** Testlücke dokumentiert; **LOCAL TEILPASS / LIVE OFFEN**.
+
+**Aktueller Status und GENAU EINE NEXT ACTION ausschließlich in `DESIGN/CURRENT_STATE.md`. Fehlerquelle ist nur Chronik, niemals Current.**
+
 ## HB-DES-20261020-INS-01 – 7. Welt bricht wegen festem 6-Spalten-Desktop-CSS um
 **Realbeleg:** Nutzer-Screenshot 20.10.2026 18:54, Desktop-Menü mit 6 alten Welten oben, „Versicherungen“ in eigener zweiter Zeile und aufgeklapptem 5-Bereiche-Menü darunter.
 **Quellcodebeleg:** gespeicherte originale Designplugin-ZIP 0.1.57 (explizit NICHT installierter Bilder-WIP): `templates/site.php` erzeugt Welt-Navigation per dynamischer Weltliste, `hbdp_main_navigation` rendert Megamenü bis 5 Spalten und zeigt 4 direkte R3 pro R2 + „Alle Themen“ beim Überlauf, aber `assets/style.css` erzwingt Desktop `.hbdp-mainnav{grid-template-columns:repeat(6,minmax(0,1fr))}`. Die sechs Spalten sind kein inhaltliches Sechs-Welten-Limit.
