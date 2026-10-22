@@ -3,71 +3,69 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-22
-STATUS: META-SCHABLONEN FESTGELEGT / PLUGIN 1.0.0 GEBAUT UND LOKAL GEPRÜFT / NOCH NICHT LIVE INSTALLIERT
+STATUS: **META-SCHABLONEN FESTGELEGT / HD-008 1.0.0 LOKAL GEPRÜFT / NICHT LIVE**
 
-## SEO-Titel
+## Verbindlicher SEO-Titel
 
 Für alle indexierbaren Inhalte:
 
-[Originaltitel] - Hobby Depot
+`[Originaltitel] - Hobby Depot`
 
-- Originaltitel unverändert.
-- Keine individuelle SEO-Umschreibung.
-- Einfacher Bindestrich mit Leerzeichen.
-- Gilt für Beiträge, Seiten, Glossar, Kategorien und weitere indexierbare Inhaltstypen.
+- Originaltitel unverändert;
+- keine individuelle SEO-Umschreibung;
+- einfacher Bindestrich mit Leerzeichen.
 
-## Meta-Description
+## Verbindliche Meta-Description
 
 Grundmuster:
 
-[Originaltitel] - [erste sinnvolle inhaltsspezifische Kernaussage]
+`[Originaltitel] - [erste sinnvolle inhaltsspezifische Kernaussage]`
 
 Quellen-Priorität:
-1. bewusste manuelle SEO-Description, falls vorhanden;
-2. Einleitung oder Excerpt;
+1. bewusste manuelle SEO-Description;
+2. Einleitung/Excerpt;
 3. erster sinnvoller Satz des Hauptinhalts;
-4. bei Kategorien erster sinnvoller Satz der Kategorienbeschreibung bzw. des Intros;
-5. ohne belastbare Textquelle keine künstliche Standardfloskel.
+4. bei Kategorien erster sinnvoller Satz der Beschreibung/des Intros;
+5. ohne belastbare Quelle keine erfundene Standardfloskel.
 
-## Ziel-Automatik
+## HD-008 – Hobby Depot SEO 1.0.0
 
-- Neue Beiträge, Seiten, Glossarbegriffe und Kategorien erhalten die Metadaten automatisch.
-- Titeländerung aktualisiert den SEO-Titel automatisch.
-- Inhalts- oder Einleitungsänderung aktualisiert die automatisch abgeleitete Description.
-- Manuelle Description kann die Automatik später gezielt überschreiben.
-- Keine doppelte Ausgabe von Title, Description oder Canonical.
-
-## Technische Umsetzung
-
-Plugin:
+Artefakt:
 `HOBBY_DEPOT_SEO_1.0.0_META_AUTOMATIK.zip`
 
 SHA-256:
 `32bceb07a98ddb27f92371316be3395257e195e7fecf7e64f3ce6c2b373c0a33`
 
 Größe:
-4.316 Bytes.
+4,316 Bytes.
 
 Umfang:
-- automatische SEO-Titel für öffentliche Beiträge, Seiten, öffentliche Custom Post Types und öffentliche Taxonomien;
-- automatische Meta-Description aus Excerpt/Einleitung/Inhalt bzw. Kategorienbeschreibung;
-- optionale manuelle Meta-Description im Backend;
-- eigener Backend-Hinweis unter Einstellungen → Hobby Depot SEO;
-- keine Änderung an Canonicals, Sitemaps, Robots oder Schema.
+- automatische Titel;
+- automatische Meta-Description;
+- optionale manuelle Description;
+- öffentliche Beiträge/Seiten/Custom Post Types und öffentliche Taxonomien;
+- keine Canonical-/Sitemap-/Robots-/Schema-Änderung in 1.0.0.
 
-Lokale Prüfung:
+Prüfstand:
+- ZIP-Integrität PASS;
 - PHP-Syntax PASS;
-- Beitragstitel PASS;
-- automatische Beitrags-Description PASS;
-- manuelle Description-Überschreibung PASS;
-- Kategorietitel PASS;
-- automatische Kategorie-Description PASS;
-- ZIP-Integrität PASS.
+- lokale Positiv-/Negativ-Simulation für Beitrag/Kategorie und manuelle Überschreibung PASS;
+- echter WordPress-Live-Readback OFFEN.
 
-## Status
+## Hobbyregister-SEO
 
-Plugin fertig und im SEO-Büro abgelegt. Noch nicht live installiert.
+Noch nicht entschieden.
+Keine pauschale noindex-Regel festlegen.
 
-## NEXT ACTION
+Verbindliches Ziel:
+- Nischenhobbys ohne bestehende starke Hauptseite sollen über ihr Registerprofil ranken können;
+- Hobbys mit bestehender starker CORE-Seite dürfen nicht durch ein konkurrierendes Registerprofil kannibalisiert werden;
+- endgültige Regel wird im Konzeptbüro beschlossen und danach hier technisch umgesetzt.
 
-**Nach Wiederherstellung des WordPress-Uploads Plugin 1.0.0 installieren und Frontend-Ausgabe auf einem Beitrag, einer Seite, einem Glossarbegriff und einer Kategorie live prüfen.**
+## ERSTER OFFENER BLOCKER
+
+**HD-008 ist noch nicht live installiert; zusätzlich ist die Hobbyregister-SEO-Grenze fachlich noch offen.**
+
+## EXAKT EINE NEXT ACTION
+
+**Nach der Konzeptentscheidung zur Hobbyregister-SEO-Grenze HD-008 nur um die daraus wirklich nötige Indexierungslogik erweitern; bis dahin 1.0.0 unverändert lassen.**
