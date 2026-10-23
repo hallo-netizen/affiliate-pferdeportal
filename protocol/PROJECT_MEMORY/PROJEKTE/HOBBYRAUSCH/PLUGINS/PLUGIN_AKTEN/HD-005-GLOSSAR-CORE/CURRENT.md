@@ -2,51 +2,54 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-19
-STATUS: **1.0.1 LOCAL PASS / INSTALLATIONSKANDIDAT / LIVE OFFEN**
+STAND: 2026-10-23
+STATUS: **1.0.14 / 100 BEGRIFFE PRODUKTION HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.14_100_BEGRIFFE_PRODUKTION_HARDPASS.zip`
 
 SHA-256:
-`b686655bc2571548248fe278c4a74e7db927503f92900c9a661d173b6d04329a`
-
-Persistente Arbeitskopie:
-`/Hobby Depot/Glossar/HOBBY_DEPOT_GLOSSAR_CORE_1.0.1_INSTALLIEREN.zip`
+`4b998db76541e4654c0ec227b9efb9a28acfb231c8fe769cf4518f94a48eba39`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
 
-## Herkunft
+## Produktionsstand
 
-Pferde-Referenz:
-Universal Glossary Engine / Pferde Atelier Glossar Core 1.4.0.
+- technische Basis: 1.0.13 Layout/Typo Hard Pass;
+- 100 geprüfte Glossarbegriffe;
+- 4 Batches à maximal 25;
+- alle Begriffe Draft-only, kein Auto-Publish;
+- 150–173 Wörter je Fachtext;
+- 0 Bodylinks;
+- echte Hauptziele für „Mehr zum Thema“;
+- Quellen und Synonyme bleiben interne Metadaten;
+- Übergangsregel Kurzdefinition → Fließtext im Validator;
+- einmalige idempotente Übernahme der 100 Entwürfe nach Update;
+- bestehende sechs Pilotbegriffe werden über stabile external_id aktualisiert, nicht verdoppelt.
 
-Die exakten 1.4.0-Bytes waren nicht erreichbar. Verwendet wurden:
-- der echte neutrale Universal-Glossary-Engine-Quellstand aus dem geprüften 0.2.7-Actions-Artefakt;
-- der belegte aktuelle 1.4.0-Manager-/Draft-/Review-Vertrag;
-- die Hobby-Depot-spezifische Konfiguration.
+## Unverändert gegenüber 1.0.13
 
-1.0.1 ist deshalb eine eigenständig versionierte Hobby-Depot-Fassung, kein falsch behaupteter byteidentischer 1.4.0-Klon.
-
-## Verpackungsfix 1.0.1
-
-1.0.0 wurde von WordPress nicht als gültiges Plugin erkannt, weil neben dem eigentlichen Pluginordner eine zusätzliche README auf ZIP-Root-Ebene lag. 1.0.1 enthält exakt einen obersten Pluginordner; keine Fachlogik wurde geändert.
+- Route;
+- Core;
+- Frontend;
+- SEO-Renderer;
+- Templates;
+- Hero;
+- Layout/Breadcrumbs/Typografie.
 
 ## QA
 
-- PHP 7/7 PASS;
-- ZIP PASS;
-- WordPress-Paketstruktur PASS;
-- keine Pferde-Fachlogik;
-- kein Cron/Auto-Publish;
-- zentrale Glossar-Sammlung;
-- Filtervarianten noindex/canonical;
-- Batch max. 25, Draft only.
+- PHP-Lint 8/8 PASS;
+- 100/100 Inhaltsvalidator PASS;
+- keine doppelten term-IDs/Slugs;
+- Übergangsregel 100/100 PASS;
+- ZIP-Integrität PASS;
+- exakt ein Root `hobby-depot-glossar/`.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.1 installieren und Hauptseite + einen Testbegriff real prüfen; erst danach Glossarbestand produzieren.**
+**1.0.14 über den bestehenden Ordner `hobby-depot-glossar` hochladen/überschreiben und WordPress-Admin einmal öffnen, damit die 100 Entwürfe angelegt bzw. aktualisiert werden.**
