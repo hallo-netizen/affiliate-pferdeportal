@@ -3,46 +3,79 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **HD-003 1.50.725 FOOTER LOCAL HARD PASS / HD-007 1.1.2 BREADCRUMB + BANNER LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
+STATUS: **HD-003 1.50.727 + HD-007 1.1.3 GEMEINSAM LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
+## Gemeinsames aktuelles Bundle
+
+`HOBBY_DEPOT_AKTUELL_20261023_MAGAZIN_FOOTER_REGISTER_FINAL.zip`
+
+SHA-256:
+`d7768f3ca81b28d46c18f8c2d7798e5268cf0532e35cd69d95fdeb43fee15612`
+
+Größe:
+2,117,419 Bytes.
+
+Enthält exakt die zwei bestehenden Pluginwurzeln:
+- `affiliate-portal-template-kit/`;
+- `hd-hobbyregister-core/`.
+
+Kein drittes Plugin.
+
+## Magazin
+
+Magazin ist sichtbarer Überbau für:
+- Hobbyfinder;
+- Hobbyregister;
+- Glossar;
+- redaktionelle Magazinbereiche.
+
+Auf der Magazin-Startseite gibt es dafür eine eigene Dreierzeile Hobbyfinder · Hobbyregister · Glossar.
+
 ## Footer
 
-HD-003 1.50.725 bleibt unverändert aktueller Footer-Kandidat.
+Logo ohne die kleine unleserliche Unterzeile im Footer.
+
+Vier gleichmäßige Spalten:
+- Rechtliches: 4;
+- Wissen: Hobbymagazin · Hobbyfinder · Hobbyregister · Glossar;
+- Service: Werben im Hobby Depot · Preise · Kontakt · FAQ;
+- Anzeigenmarkt: 4.
 
 ## Hobbyregister
 
-1.1.2 ist ein kleines Update auf 1.1.1.
+Breadcrumb:
+- Startseite › Magazin › Hobbyregister;
+- Startseite › Magazin › Hobbyregister › Hobby.
 
-Korrigiert:
-- Breadcrumb aus dem 1180-px-Registercontainer herausgezogen;
-- gleiche 900-px-Achse und vertikale Variablen wie beim bewährten Pferdeatelier-Breadcrumb;
-- Detailhierarchie Startseite › Hobbyregister › Hobby;
-- Magazin bewusst nicht im Breadcrumb;
-- „862 Treffer“ auf ungefilterter Startseite entfernt;
-- Trefferzahl bleibt bei echter Filterung;
-- ein vorhandener Affiliate-Bannerplatz auf Übersicht und Detailseite ergänzt.
+Detailseitenleiste nach Pferderassen-Prinzip:
+- Auf einen Blick;
+- Zur gleichen Hobbygruppe mit Bildvorschauen;
+- Button zur Hobbygruppe;
+- Ähnliche Hobbys mit Bildvorschauen;
+- Hobbymagazin-Link.
 
-Affiliate:
-- bestehender Slot `hub_after_cards`;
-- keine neue Affiliate-Architektur.
+Kein zusätzlicher ähnlicher-Hobbys-Block unter dem Text.
 
-Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.2_UPDATE_BREADCRUMB_BANNER.zip`
+Erhalten:
+- acht Fließtextabschnitte;
+- Iconnavigation;
+- Bannerplätze;
+- 862er read-only Register.
 
-SHA-256:
-`d83cb6de965f495e07bdc2746013657f864bda93861bfcd188db63a1287ec96e`
+## QA
 
-QA:
-- Breadcrumb-Achse PASS;
-- Startseite ohne 862 Treffer PASS;
-- gefilterte Trefferzahl PASS;
-- Banner Index/Detail PASS;
-- 8 Textabschnitte erhalten;
-- PHP-Lint/Fresh-Unpack PASS.
+- Bundle Fresh-Unpack PASS;
+- alle 6 PHP-Dateien lint PASS;
+- Bundle enthält exakt 2 Pluginwurzeln;
+- Wissen 4 / Service 4 PASS;
+- Magazin-Dreierzeile PASS;
+- Register-Breadcrumb über Magazin PASS;
+- Sidebar-Relationen PASS;
+- „Ähnliche Hobbys“ nur einmal PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-007 1.1.2 einspielen und Register-Startseite plus ein Detailprofil live auf Breadcrumbposition und Banner prüfen.**
+**Das gemeinsame aktuelle Bundle per Cyberduck einspielen und danach Magazin-Startseite, Footer, Hobbyregister-Startseite und eine Detailseite live prüfen.**
