@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE HD-003 1.50.711 / 1.50.716 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **LIVE HD-003 1.50.711 / 1.50.717 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -13,16 +13,16 @@ Zielvertrag:
 Aktuell live und zuletzt belastbar:
 **HD-003 1.50.711**.
 
-## Lokaler Kandidat 1.50.716
+## Lokaler Kandidat 1.50.717
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.716_UPDATE_MAGAZIN_STARTSEITE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.717_UPDATE_MAGAZIN_STARTSEITE.zip`
 
 SHA-256:
-`072fdbe2fff7b8b4ef32ea3f70f08e1e1de700fb17d784b7e821e2735a1335f1`
+`8e03ce1e5915edd62901494362b70194ce09f971146dbcec424e927db1f46b59`
 
 Größe:
-577,195 Bytes.
+577,238 Bytes.
 
 Das Paket ist ein **UPDATE**, kein Full-Plugin. Hauptordner bleibt immer:
 `affiliate-portal-template-kit`.
@@ -78,10 +78,15 @@ Monetarisierung:
 - keine neue Magazin-/Affiliate-Architektur.
 
 Plugin-Evidence:
-`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.716.md`
+`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.717.md`
 
-Kein Live-PASS für 1.50.716 behaupten.
+Kein Live-PASS für 1.50.717 behaupten.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.716-UPDATE per Cyberduck in den bestehenden Pluginordner einspielen und danach die Magazin-Startseite live abnehmen.**
+**1.50.717-UPDATE per Cyberduck in den bestehenden Pluginordner einspielen und danach die Magazin-Startseite live abnehmen.**
+
+
+## 1.50.717 Routingkorrektur
+
+Die echte Magazinseite läuft unter `/journal/`. 1.50.716 hörte nur auf `magazin` und ließ `journal` zugleich als Service-Seite laufen. 1.50.717 korrigiert genau diese drei Routingstellen; Inhalt/Design/Slots bleiben unverändert.
