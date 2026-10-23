@@ -3,90 +3,78 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE HD-003 1.50.711 / 1.50.717 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **MAGAZIN LIVE-SCREENSHOT AUS 1.50.717 / HD-003 1.50.720 LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
-## Live
+## Aktueller belastbarer Live-Hinweis
 
-Aktuell live und zuletzt belastbar:
-**HD-003 1.50.711**.
+Der Nutzer hat den vorherigen Magazinstand eingespielt; dessen Magazin-Hub ist im Screenshot sichtbar.
+Kein vollständiger Live-Versions-/Runtime-Readback.
 
-## Lokaler Kandidat 1.50.717
+1.50.718 wurde nach visueller Nachprüfung ausdrücklich verworfen.
+
+## Neuer Kandidat 1.50.720
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.717_UPDATE_MAGAZIN_STARTSEITE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.720_UPDATE_MAGAZIN_HUB_UND_ZIELSEITEN_HARDPASS.zip`
 
 SHA-256:
-`8e03ce1e5915edd62901494362b70194ce09f971146dbcec424e927db1f46b59`
+`4d0dc99d9abf056517ee845a0fda3f2260e39a740ef55427fc3d6951bcb8ee90`
 
 Größe:
-577,238 Bytes.
+584,713 Bytes.
 
-Das Paket ist ein **UPDATE**, kein Full-Plugin. Hauptordner bleibt immer:
+UPDATE mit exakt zwei Dateien und festem Hauptordner:
 `affiliate-portal-template-kit`.
 
 ### Magazin-Startseite
 
-Die bereits vorhandene Magazinseite erhält jetzt eine eigene Hub-Darstellung in der bestehenden Hobby-Depot-Designsprache.
+- Body-/Breitenlogik wie bestehende Hobby-Depot-Hubs;
+- Hero basiert direkt auf dem akzeptierten Hub2-Hero-Vertrag;
+- grüne Schreibschrift + vorhandener Brush/Bogen;
+- echter weicher Bildübergang;
+- natürliche Bildmaße gebunden;
+- 12 Bildkacheln;
+- passendere Bildzuordnung;
+- Banner zwischen Beitragsreihen;
+- Produktfläche;
+- Affiliate-Artikel;
+- Rental-Werbefläche.
 
-Exakt die vorhandenen 12 Magazin-Ziele werden verwendet:
-1. Hobbyfinder
-2. Alter & Lebensphasen
-3. Geschichte & Herkunft
-4. Hobby-Porträts
-5. Hobby-Ideen & Inspiration
-6. Menschen & Geschichten
-7. Neue Hobbys & Trends
-8. Saison, drinnen & draußen
-9. Ungewöhnliche & skurrile Hobbys
-10. Vergleiche & Alternativen
-11. Wissen & Glossar
-12. Zeit, Budget & Platz
+### Magazin-Zielseiten
 
-Keine neue Kategorie erfunden oder angelegt.
+Autoritativ sind 12 vorhandene Editorial-Seiten unter dem Magazin-Hub.
 
-Design:
-- großes eigenes Magazin-Hero mit vorhandenem Hobby-Depot-Fotoasset;
-- 12 bebilderte Themenkacheln;
-- Desktop 3 Spalten, Tablet 2, Mobil 2;
-- aktuelle Magazinbeiträge als redaktionelles Kartenraster;
-- gleiche Typografie, Petrolfarbe, Radien und Abstände wie der aktuelle Hobby-Depot-Auftritt.
+Alle erhalten:
+- gleiches Kachelbild als Hero;
+- gleiche Hero-Gestaltung;
+- grünen Brush-Claim;
+- kurzen Hero-Einstieg;
+- darunter grün hinterlegten sichtbaren Absatz;
+- restlichen Text nativ aufklappbar;
+- 150–200 Wörter nach dem bestehenden Kategorietextvertrag;
+- vorhandene echte Editorial-Unteransichten read-only aus der zentralen Registry;
+- Beiträge und Monetarisierung im Magazinvertrag.
 
-Monetarisierung:
-- Bannerfläche über vorhandenen Slot `journal_banner`;
-- Produktfläche über `journal_product_1–3`;
-- Affiliate-Artikel-/Kaufberatungsbereich für entsprechend markierte/erkannte Beiträge;
-- bestehende direkte Werbefläche über Placement `journal`;
-- leere Affiliatebereiche bleiben öffentlich unsichtbar, eingeloggte Admins sehen Prüfvorschauen.
+Hobbyfinder bleibt funktional der bestehende 8-Schritte-Funnel und wird nur visuell in denselben Zielseitenaufbau eingebettet.
 
-### Aus 1.50.715 erhalten
+### QA
 
-- Footer 4 Spalten;
-- PB one öffnet neues Fenster;
-- FAQ-Seite 6 Bereiche / 30 Fragen;
-- kein neues Zusatzplugin.
-
-## Lokale Prüfung
-
-- UPDATE-ZIP exakt 2 Dateien;
 - PHP-Lint PASS;
 - Fresh-Unpack PASS;
-- alle verwendeten Bildpfade vorhanden;
-- vorhandene Journal-Slot-Matrix wiederverwendet;
-- keine neue Magazin-/Affiliate-Architektur.
+- ZIP exakt 2 Dateien;
+- 12/12 Zielseiten-Slugs PASS;
+- 12/12 Bilder vorhanden;
+- 12/12 Texte im 150–200-Wort-Vertrag;
+- Kachelbild = Zielseiten-Hero;
+- zentrale Registry bevorzugt;
+- keine neue Struktur-/Affiliate-Architektur.
 
 Plugin-Evidence:
-`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.717.md`
-
-Kein Live-PASS für 1.50.717 behaupten.
+`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.720.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.717-UPDATE per Cyberduck in den bestehenden Pluginordner einspielen und danach die Magazin-Startseite live abnehmen.**
-
-
-## 1.50.717 Routingkorrektur
-
-Die echte Magazinseite läuft unter `/journal/`. 1.50.716 hörte nur auf `magazin` und ließ `journal` zugleich als Service-Seite laufen. 1.50.717 korrigiert genau diese drei Routingstellen; Inhalt/Design/Slots bleiben unverändert.
+**1.50.720 per Cyberduck einspielen und danach Magazin-Hub sowie exemplarisch Zielseiten Hobby-Porträts, Menschen & Geschichten und Zeit, Budget & Platz visuell abnehmen.**
