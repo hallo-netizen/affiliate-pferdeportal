@@ -3,79 +3,54 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **HD-003 1.50.727 + HD-007 1.1.3 GEMEINSAM LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
+STATUS: **HD-003 1.50.728 + HD-007 1.1.4 ÄNDERUNGSSTUFE 1 LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
-## Gemeinsames aktuelles Bundle
+## Gemeinsames aktuelles Update
 
-`HOBBY_DEPOT_AKTUELL_20261023_MAGAZIN_FOOTER_REGISTER_FINAL.zip`
+`HOBBY_DEPOT_AKTUELL_20261023_AENDERUNGSSTUFE1.zip`
 
 SHA-256:
-`d7768f3ca81b28d46c18f8c2d7798e5268cf0532e35cd69d95fdeb43fee15612`
+`e548be549afe407075c6030c2a96a21813b095da06c9802e8eb96af78c8d645e`
 
 Größe:
-2,117,419 Bytes.
+610,427 Bytes.
 
-Enthält exakt die zwei bestehenden Pluginwurzeln:
-- `affiliate-portal-template-kit/`;
-- `hd-hobbyregister-core/`.
+Enthält exakt vier geänderte Dateien unter den zwei bestehenden Pluginwurzeln:
+- `affiliate-portal-template-kit/`
+- `hd-hobbyregister-core/`
 
-Kein drittes Plugin.
+Kein neues Plugin.
 
-## Magazin
+## Änderungsstufe 1
 
-Magazin ist sichtbarer Überbau für:
-- Hobbyfinder;
-- Hobbyregister;
-- Glossar;
-- redaktionelle Magazinbereiche.
+Footer:
+- Logo kleiner;
+- Hauptlogo vollständig sichtbar;
+- Untertitel des Logoassets weiterhin ausgeblendet.
 
-Auf der Magazin-Startseite gibt es dafür eine eigene Dreierzeile Hobbyfinder · Hobbyregister · Glossar.
+Hobbyregister:
+- Breadcrumb nicht mehr im Registertemplate, sondern auf der serverseitigen Pferdeatelier/Astra-Breadcrumb-Schiene;
+- „Auf einen Blick“ nur Icon + Wert;
+- „Zur gleichen Hobbygruppe“ zweizeilig;
+- gleiche Hobbygruppe und ähnliche Hobbys disjunkt;
+- ähnliche Hobbys ausschließlich außerhalb der primären Hobbygruppe;
+- Gruppenbutton und Hobbymagazin-Button identisch in hellem Petrol.
 
-## Footer
-
-Logo ohne die kleine unleserliche Unterzeile im Footer.
-
-Vier gleichmäßige Spalten:
-- Rechtliches: 4;
-- Wissen: Hobbymagazin · Hobbyfinder · Hobbyregister · Glossar;
-- Service: Werben im Hobby Depot · Preise · Kontakt · FAQ;
-- Anzeigenmarkt: 4.
-
-## Hobbyregister
-
-Breadcrumb:
-- Startseite › Magazin › Hobbyregister;
-- Startseite › Magazin › Hobbyregister › Hobby.
-
-Detailseitenleiste nach Pferderassen-Prinzip:
-- Auf einen Blick;
-- Zur gleichen Hobbygruppe mit Bildvorschauen;
-- Button zur Hobbygruppe;
-- Ähnliche Hobbys mit Bildvorschauen;
-- Hobbymagazin-Link.
-
-Kein zusätzlicher ähnlicher-Hobbys-Block unter dem Text.
-
-Erhalten:
-- acht Fließtextabschnitte;
-- Iconnavigation;
-- Bannerplätze;
-- 862er read-only Register.
+Keine zentrale Datenbankänderung für die Relationsabgrenzung.
 
 ## QA
 
-- Bundle Fresh-Unpack PASS;
-- alle 6 PHP-Dateien lint PASS;
-- Bundle enthält exakt 2 Pluginwurzeln;
-- Wissen 4 / Service 4 PASS;
-- Magazin-Dreierzeile PASS;
-- Register-Breadcrumb über Magazin PASS;
-- Sidebar-Relationen PASS;
-- „Ähnliche Hobbys“ nur einmal PASS.
+- Fresh-Unpack PASS;
+- 4 Paketdateien;
+- PHP-Lint PASS;
+- HD-007 E2E auf 3D-Druck, Geocaching, Buchbinden, Slacklining PASS;
+- kein doppelter Breadcrumb;
+- keine sichtbaren Faktenlabels;
+- keine Relationsüberschneidung.
 
 ## EXAKT EINE NEXT ACTION
 
-**Das gemeinsame aktuelle Bundle per Cyberduck einspielen und danach Magazin-Startseite, Footer, Hobbyregister-Startseite und eine Detailseite live prüfen.**
+**Das aktuelle Update-Bundle per Cyberduck einspielen und danach Footer, Register-Startseite und ein Detailprofil live prüfen.**
