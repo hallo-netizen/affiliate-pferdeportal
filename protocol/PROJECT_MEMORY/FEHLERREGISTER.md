@@ -126,3 +126,10 @@ Einziger operativer Current-/Blocker-/NEXT-ACTION-Stand: `PROJEKTE/PFERDE_ATELIE
 Bereich: EIGENTUMSSCHUTZ / KONZEPT / neue Versicherungswelt.
 Status: Konzept lokal geprüft, WordPress-Aufnahme und Live-Import noch nicht freigegeben. Historische Fehlerdetails und Zustände ausschließlich in `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/FEHLERQUELLEN.md` unter HB-INS-20261020-01 bis 05.
 Current und genau eine aktuelle NEXT ACTION ausschließlich aus `PROJEKTE/EIGENTUMSSCHUTZ/KONZEPT/CURRENT_STATE.md`.
+
+
+## HOBBYRAUSCH-HD007-HOBBYREGISTER-20261023
+Bereich: HOBBYRAUSCH / HOBBYREGISTER / HD-007.
+Status: AKTIV / aktueller Pluginstatus ausschließlich aus der Plugin-Current.
+Autoritative Fehlerquelle: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/FEHLERQUELLEN.md`.
+Aktueller Status/Blocker/GENAU EINE NEXT ACTION ausschließlich: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`.
