@@ -79,6 +79,7 @@ Reihenfolge / Aufbau:
 - H1 = Begriff;
 - direkt darunter farblich abgesetzter **„Kurz erklärt“**-Kasten mit einer knappen Definition;
 - darunter der eigentliche Fachtext mit 150–200 Wörtern;
+- **Übergangsregel:** Der erste Satz des Fachtexts darf die Kurzdefinition weder wörtlich noch sinngleich wiederholen. Er muss stattdessen fließend weiterführen, z. B. mit Anwendung, Kontext, typischer Situation oder Abgrenzung;
 - **0 Links im Fließtext**.
 
 Rechte Spalte, feste Reihenfolge:
