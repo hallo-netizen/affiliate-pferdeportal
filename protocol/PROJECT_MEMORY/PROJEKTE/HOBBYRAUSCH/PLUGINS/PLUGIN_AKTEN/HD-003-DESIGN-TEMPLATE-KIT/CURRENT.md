@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.50.724 FOOTER-MARKENLEISTE LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **1.50.725 FOOTER-LOGO-FIX LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -11,57 +11,46 @@ Plugin-ID:
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
 
-## Basis
-
-1.50.724 baut auf dem zuletzt geprüften 1.50.723-Stand auf.
-Die Magazin-Hardroute und die Breadcrumb-Korrektur bleiben enthalten.
-
-## Kandidat 1.50.724
+## Kandidat 1.50.725
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.724_UPDATE_FOOTER_MARKENLEISTE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.725_UPDATE_FOOTER_LOGO_FIX.zip`
 
 SHA-256:
-`8f45a2541b537db15cd16eea509021857568ddf9bc234fd605ad48c7e6b37e44`
+`4857b6e57d7a8b155e66e8f211843690f0db4066ced0e925740c06cef32575bf`
 
 Größe:
-767,588 Bytes.
+767,585 Bytes.
 
 UPDATE, kein Full-Plugin.
 
-Hauptordner bleibt:
+Hauptordner:
 `affiliate-portal-template-kit/`
 
-Enthalten:
-- `pferde-template-kit.php`;
-- `includes/class-hobby-depot-profile-v150709.php`;
-- vorhandenes Hobby-Depot-Logoasset.
+## Ursache des fehlenden Logos
 
-## Footer
+1.50.724 lieferte das Logoasset zwar mit, erzeugte aber einen doppelt verschachtelten, nicht existierenden Assetpfad.
 
-Neu:
-- schmale Markenleiste oberhalb der Navigation;
-- kleines Hobby-Depot-Logo ca. 132 px;
-- Claim „Hobbys. Ideen. Möglichkeiten.“.
+## Fix
 
-Unverändert:
-- vier Spalten Rechtliches / Wissen / Service / Anzeigenmarkt;
-- kleinere Linkschrift;
-- KI-Hinweis;
-- zentrierter Copyrightbereich;
-- PB one öffnet im neuen Fenster.
+Runtime-Pfad und physischer Pfad sind jetzt identisch:
+`assets/hobby-depot-v150617/logo-variant3-v150616.png`
 
-## QA
+Markenleiste:
+- Hobby-Depot-Logo;
+- Claim „Hobbys. Ideen. Möglichkeiten.“;
+- vier Footer-Spalten darunter;
+- KI-/Copyrightbereich separat.
 
+QA:
+- Asset physisch vorhanden PASS;
+- Pfadbindung PASS;
 - PHP-Lint PASS;
-- Fresh-Unpack PASS;
-- Logo + Claim PASS;
-- vier Footer-Spalten PASS;
-- PB-one target/rel PASS.
+- Fresh-Unpack PASS.
 
 Evidence:
-`EVIDENCE_1.50.724.md`
+`EVIDENCE_1.50.725.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.724-UPDATE per Cyberduck über den bestehenden Ordner `wp-content/plugins/affiliate-portal-template-kit/` zusammenführen und den Footer live prüfen.**
+**1.50.725 per Cyberduck über `wp-content/plugins/affiliate-portal-template-kit/` zusammenführen und Footer live prüfen.**
