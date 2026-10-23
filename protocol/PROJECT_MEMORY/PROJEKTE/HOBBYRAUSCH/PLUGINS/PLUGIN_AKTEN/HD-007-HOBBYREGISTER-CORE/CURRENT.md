@@ -3,68 +3,76 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.1.2 BREADCRUMB + BANNER LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **1.1.3 MAGAZIN-BREADCRUMB + PFERDERASSEN-SIDEBAR-TRANSFER LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 HD-007-HOBBYREGISTER-CORE
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.2_UPDATE_BREADCRUMB_BANNER.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.3_FULL_MAGAZIN_SIDEBAR.zip`
 
 SHA-256:
-`d83cb6de965f495e07bdc2746013657f864bda93861bfcd188db63a1287ec96e`
+`c628730a81579dc70d3141b73ce591292613bb44431ac9c43969f1473d748c31`
 
 Größe:
-22.620 Bytes.
+1,349,148 Bytes.
 
 Hauptordner:
 `hd-hobbyregister-core/`
 
-## Basis
+## Magazin-Hierarchie
 
-1.1.2 ist ein kleines UPDATE auf 1.1.1.
-Die 862er Datenprojektion, acht Fließtextabschnitte, Iconnavigation, Sidebar und Relationslogik bleiben unverändert.
+Registerstart:
+**Startseite › Magazin › Hobbyregister**
 
-## Breadcrumb
+Detailprofil:
+**Startseite › Magazin › Hobbyregister › Hobby**
 
-Jetzt auf eigener 900-px-Achse nach dem bewährten Pferdeatelier-/Universal-Breadcrumb-Prinzip, nicht mehr im 1180-px-Registercontainer.
+Damit bleibt das Register separat im Footer erreichbar, wird in der Nutzerführung aber unter dem Magazin als Überbau eingeordnet.
 
-Detailhierarchie:
-**Startseite › Hobbyregister › Hobby**
+## Detailseitenleiste
 
-Magazin wird nicht zwischengeschaltet, weil Hobbyregister und Magazin eigenständige Säulen sind.
+Nach dem bewährten Pferderassen-Prinzip übertragen:
 
-## Register-Startseite
+1. Auf einen Blick.
+2. Zur gleichen Hobbygruppe:
+   - 3 Bildvorschauen;
+   - Titel;
+   - kurzer Vorschautext;
+   - klickbarer Verweis;
+   - Button zur Hobbygruppe.
+3. Ähnliche Hobbys:
+   - 4 Bildvorschauen;
+   - Titel;
+   - kurzer Vorschautext;
+   - klickbarer Verweis.
+4. Button zum Hobbymagazin.
 
-- ungefiltert kein „862 Treffer“ mehr;
-- bei Suche/A–Z/Gruppe bleibt die Trefferzahl erhalten.
+Der zusätzliche frühere Block „Ähnliche Hobbys“ unter dem Haupttext ist entfernt. Es gibt ihn nur einmal in der linken Spalte.
 
-## Banner
+## Weiterhin erhalten
 
-Bestehender Slot:
-`pp_affiliate_slot / hub_after_cards / portal_context`
-
-Platzierung:
-- einmal nach der Registerliste;
-- einmal nach dem Haupttext eines Detailprofils.
-
-Kein leerer öffentlicher Wrapper bei unbelegtem Slot; eingeloggte Prüffläche bleibt sichtbar.
+- 862er read-only Register;
+- acht Schema-F-Fließtextabschnitte je Detailprofil;
+- Iconnavigation auf der Registerübersicht;
+- ungefilterte Startseite ohne „862 Treffer“;
+- Bannerplatz auf Registerübersicht und Detailseite;
+- keine neue Datenbank / keine DB-Writes.
 
 ## QA
 
 - PHP-Lint PASS;
 - Fresh-Unpack PASS;
-- ZIP exakt 2 Dateien;
-- Core 862/862 unverändert;
-- Breadcrumb-Achse PASS;
-- Startseite ohne 862-Treffer PASS;
-- Filterzählung PASS;
-- Banner Index + Detail PASS;
-- Detail-Fließtext unverändert 8 Abschnitte.
+- Magazin-Breadcrumb PASS;
+- gleiche Hobbygruppe + Bildkarten PASS;
+- Gruppenbutton PASS;
+- ähnliche Hobbys + Bildkarten PASS;
+- „Ähnliche Hobbys“ nur einmal im Detailtemplate PASS;
+- 862er Register/Textsystem erhalten.
 
 Evidence:
-`EVIDENCE_1.1.2.md`
+`EVIDENCE_1.1.3.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.1.2 per Cyberduck über den bestehenden Ordner `wp-content/plugins/hd-hobbyregister-core/` zusammenführen und Register-Startseite plus ein Detailprofil live prüfen.**
+**Gemeinsames Bundle `HOBBY_DEPOT_AKTUELL_20261023_MAGAZIN_FOOTER_REGISTER_FINAL.zip` entpacken und `hd-hobbyregister-core` per Cyberduck über den vorhandenen Ordner unter `wp-content/plugins/` zusammenführen. Danach Registerstart und ein Detailprofil live prüfen.**
