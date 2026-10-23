@@ -1,3 +1,9 @@
+## 23.10.2026 – ZÄHLUNG PRÄZISIERT: 8 FOTOZUORDNUNGEN ≠ 8 ABGESCHLOSSENE BEANSTANDUNGEN
+**Maßgeblicher Stand:** Acht einzelne Bild-Neuzuordnungen in der isolierten 0.1.63-Arbeitsquelle. Davon betreffen sieben jeweils eigenständige Beanstandungen, die jeweils nur lokal korrigiert wurden. Die achte ist lediglich **eine von vier** Kacheln der Gruppenbeanstandung „Fernüberwachung – ALLE falsch“. Diese Gruppe ist NICHT abgeschlossen. Deshalb **48 von 55 Nutzerbeanstandungen noch offen**, darunter beide Mehrthemenblöcke, zusätzlich die echte WordPress-Liveabnahme der Heroes und Bildausgabe. Kein Zwischenplugin, keine Collagen, keine Freigabe. Dokumentation der acht konkreten Deltas: `DESIGN/FOTO_KORREKTUREN_WIP_20261022.json`.
+**EINE NEXT ACTION:** Offene Einzel- und Gruppenmotive mit scharfen fachlich passenden eigenständigen Fotos schließen und die Hero-Darstellung gezielt live prüfen; EIN vollständiges Plugin erst nach Gesamtabschluss bauen.
+
+---
+
 ## 23.10.2026 – AKTUELL: ACHT LOKALE EINZELFOTO-KORREKTUREN, 47 MELDUNGEN OFFEN
 **Auftrag unverändert:** Nutzerliste mit 55 gemeldeten Foto-Problemen inklusive Mehrthemenblöcken und falschen R1/R2/R3-Heros komplett beheben. KEINE Collagen, KEIN Zwischenplugin, nur scharfe, fachlich passende Einzelmotive und Kachel/Herogleichheit. Arbeiten erfolgen isoliert am vollständigen Originalpaket 0.1.63, nicht in WordPress-Live.
 
