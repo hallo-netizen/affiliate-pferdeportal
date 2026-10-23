@@ -2,74 +2,65 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-22
-STATUS: **LIVE 1.50.711 / 1.50.712 LOKAL GEPRÜFT / WORDPRESS-UPLOAD DURCH HTTP 413 BLOCKIERT**
+STAND: 2026-10-23
+STATUS: **LIVE HD-003 1.50.711 / 1.50.713 LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
-## Aktueller belastbarer Stand
+## Live
 
-Live installiert und nach der Reparatur wieder funktionsfähig:
+Aktuell live und zuletzt belastbar:
 **HD-003 1.50.711**.
 
-1.50.710 war fehlerhaft:
-- Runtime-/Templatepfad auf nicht vorhandene V150710-Dateien umgestellt;
-- dadurch Seite im Livebetrieb sichtbar beschädigt;
-- 1.50.710 ist verworfen.
+1.50.710 bleibt verworfen.
 
-1.50.711 wurde direkt aus dem funktionierenden 1.50.709-Stand gebaut:
-- keine neue Runtime;
-- keine neuen Seitentemplates;
-- Footer-only-Reparatur;
-- Seite danach live wieder intakt.
+## Neuer lokaler Kandidat 1.50.713
 
-## 1.50.712 – lokaler Kandidat
+Artefakt:
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.713_FOOTER_4COL_KI_PBONE.zip`
 
-Ziel:
-- Footer-Hintergrund = vorhandene Headerfarbe `#f5f1e9`;
-- Footer verwendet dieselbe Logo-Komponente wie der Header;
-- Copyright außerhalb/unterhalb des Footers;
-- keine unerwünschten Zusatzlinks.
-
-Vollartefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FOOTER_EXACT_HEADER_LOGO_LIGHTBG_COPYRIGHT_BELOW.zip`
 SHA-256:
-`be9f6d59f86c5c2f8d0983bdf8013c866c468a7489a1b70037a9deed3dc6eec1`
-Größe:
-58,829,246 Bytes.
+`c1f000448c9795f1a9bb7806d3191294a49c8b6fffde748b0e5b0707671ab66b`
 
-Abgespeckte vollständige 1.50.712:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FULL_SLIM30.zip`
-SHA-256:
-`f1986b60c6628b2e43b6cade32f9ccbd4fe3664bdc8df34a06842f64c68b97e9`
 Größe:
-27,463,064 Bytes.
+27,471,653 Bytes.
 
-Lokale Prüfung der 1.50.712:
-- gegen 1.50.711 nur Footer-/Versionsdelta;
+Footerziel umgesetzt:
+- Hintergrund bleibt `#f5f1e9`;
+- Footer-Logo entfernt;
+- Desktop vier gleichwertige Spalten;
+- Rechtliches;
+- Wissen: Hobbymagazin / FAQ / Glossar / Hobbyregister;
+- Service: Werben im Hobby Depot / Preise / Kontakt;
+- Anzeigenmarkt;
+- Linkschrift auf 14px verkleinert; Überschriften 16.5px;
+- Copyrightbereich weiß und mittig unter dem Footer;
+- oberhalb klein `* mithilfe von KI erstellt`;
+- darunter `© [Jahr] Hobby Depot | PB one.`;
+- `PB one.` verlinkt auf `https://p-b.one/`;
+- Tablet 2 × 2, Mobil 1 Spalte.
+
+## Lokale Prüfung
+
+- Basis 1.50.712 Full Slim30;
+- gegen Basis exakt zwei bestehende Runtime-Dateien geändert;
 - aktive Seitentemplates unverändert;
-- PHP-Lint PASS;
-- unerwünschte Footerlinks im Negativtest 0 Treffer;
-- Desktop/Tablet/Mobil lokal gerendert;
+- kompletter PHP-Lint: 10/10 PASS;
+- Footer-Positivrender PASS;
+- Negativtests: kein Logo, keine Überschrift Informationen, kein doppelter PB-one-Link;
 - ZIP/Fresh-Unpack PASS.
 
-## Live-/Upload-Grenze
+Plugin-Evidence:
+`../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.713.md`
 
-WordPress zeigt 128 MB Medien-Uploadlimit.
+## Uploadweg
 
-Trotzdem:
-- 49,6-MB-Voll-Slim-Paket: HTTP 413;
-- 27,46-MB-FULL-SLIM30: HTTP 413;
-- 561-KB-Test-Updater ließ sich hochladen, wurde vom Nutzer ausdrücklich **nicht installiert**.
+WordPress-ZIP-Upload großer HD-003-Pakete wurde mit HTTP 413 abgelehnt.
+Der aktuelle Installationsweg ist deshalb Cyberduck/Serverordner.
 
-Damit ist 1.50.712 **nicht live**.
-Kein Live-PASS behaupten.
-
-## ERSTER OFFENER BLOCKER
-
-**Der normale WordPress-Plugin-Upload großer HD-003-Pakete wird aktuell durch HTTP 413 blockiert.**
+Kein Live-PASS für 1.50.713 behaupten.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.712 als vollständiges Plugin über einen funktionierenden Uploadweg/Serverweg installieren und danach ausschließlich den Footer live prüfen.**
+**1.50.713 lokal entpacken → den Ordner `affiliate-portal-template-kit` per Cyberduck nach `wp-content/plugins/` hochladen und den bestehenden gleichnamigen Ordner überschreiben → danach live nur Footer + Plugin-Version prüfen.**
