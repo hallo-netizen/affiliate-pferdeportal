@@ -2,47 +2,86 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **1.0.0 READ-ONLY LOCAL HARD PASS / ISOLIERTE CURRENT.ZIP-SYNC OFFEN / LIVE-INSTALLATION DANACH**
+STAND: 2026-10-23
+STATUS: **1.1.0 HOBBYREGISTER-FRONTEND PROTOTYP LOCAL HARD PASS / LIVE-INSTALLATION OFFEN**
 
 Plugin-ID:
 HD-007-HOBBYREGISTER-CORE
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.0.0_READONLY_LOCALPASS.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.0_FULL_PROTOTYP.zip`
 
 SHA-256:
-`3887c914b5193f35e1ac5297fa96e2917d0d70effaae51de59501de0d3dcb8ba`
+`85c267e999bbb34b56c31003473b0f33fd8589a87dfa4d4fede98d2bca3e1ff0`
 
-Library:
-`/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.0.0_READONLY_LOCALPASS.zip`
+Hauptordner:
+`hd-hobbyregister-core/`
 
-## Zweck
-
-Schlanker read-only WordPress-Laufzeitkern für das **eine zentrale Hobbyregister**.
-
-Er stellt anderen Hobby-Depot-Komponenten ausschließlich Lesezugriff bereit. Er führt keine zweite fachliche Hobby-Wahrheit: fachliche Datenautorität bleibt
+Fachautorität:
 `../../../WISSENSDATENBANK/CURRENT_STATE.md`
-mit dem zentralen Register unter
-`/Hobby Depot/Hobby-Klassifikation/HOBBY_KLASSIFIKATIONSREGISTER_V1.json`.
 
-Die im Plugin enthaltene JSON-Datei ist eine hashgebundene Laufzeitprojektion exakt dieses geprüften Registerstands.
+Textvertrag:
+`../../../WISSENSDATENBANK/HOBBYREGISTER_TEXTREGELN_V1.md`
 
-## Datenstand
+Referenztransfer:
+`../../../WISSENSDATENBANK/HOBBYREGISTER_REFERENZTRANSFER_V1.md`
 
-- 862 kanonische Hobbyidentitäten;
-- 54 Traits je Hobby;
-- 4 Kurzprofilfelder je Hobby;
-- Register-SHA-256:
-  `4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`.
+## Rolle
 
-## Read-only API
+HD-007 bleibt die einzige read-only WordPress-Laufzeitprojektion des zentralen Hobbyregisters.
+Kein Parallelplugin und keine zweite Hobby-Datenbank.
 
-- `hd_hobbyregister_ready()`
-- `hd_hobbyregister_records()`
-- `hd_hobbyregister_get($registry_id)`
-- `hd_hobbyregister_get_by_name($name)`
-- `hd_hobbyregister_finder_rows()`
+## Datenbasis
+
+Hashgebundene Basisprojektion:
+- 862 kanonische Hobbys;
+- 54 unveränderte Basistraits je Hobby;
+- 4/4 Kurzprofilfelder;
+- Basis-SHA `4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`.
+
+Die zentrale Fachautorität ist bereits Schema 1.2 mit 57/57 Traits.
+Für die zwei Volltextproben sind die drei neuen Werte exakt aus der geprüften Schema-1.2-Evidence eingebunden.
+Die vollständige 57er Laufzeitprojektion wird erst vor dem 862er Volltextrollout gebunden; die 54er Basis wurde nicht verändert.
+
+## Frontend 1.1.0
+
+Virtuelle read-only Routen:
+- `/hobbyregister/`;
+- `/hobbyregister/<hobby-slug>/`.
+
+Übersicht:
+- Hero;
+- Suche;
+- A–Z;
+- acht Hobbygruppen;
+- 4-spaltige Hobbykarten;
+- 16 Karten je Seite;
+- Pagination.
+
+Gruppen:
+**Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln.**
+
+Sie werden als Views aus bestehenden Daten abgeleitet, nicht persistent als zweite Taxonomie gespeichert.
+
+Detail:
+- Hero;
+- „Auf einen Blick“;
+- Hobbygruppe;
+- gleiche Hobbygruppe;
+- ähnliche Hobbys;
+- Schema-F-Fließtext;
+- Register-/Magazin-Navigation.
+
+Volltextproben:
+- Buchbinden: 8 Abschnitte / 657 Wörter;
+- Slacklining: 8 Abschnitte / 670 Wörter.
+
+Andere Profile bleiben bis zur Abnahme bewusst kompakt.
+
+## SEO-Schutz im Prototyp
+
+Detailprofile sind vorläufig `noindex,follow`, bis die CORE-vs-REGISTER-Owner-Matrix je Hobby vorliegt.
+Das ist kein finaler Voll-noindex-Vertrag.
 
 ## Harte Grenzen
 
@@ -50,41 +89,25 @@ Die im Plugin enthaltene JSON-Datei ist eine hashgebundene Laufzeitprojektion ex
 - keine eigenen Tabellen;
 - keine Cronjobs;
 - keine Netzwerkaufrufe;
-- keine Kategorie-/SEO-Strukturänderungen;
-- keine Auto-Produktion;
-- Design/Frontend darf nur lesen.
+- keine zweite Hobby-Taxonomie;
+- keine Auto-Massenproduktion vor Text-/Designabnahme.
 
-## Lokale QA
+## QA
 
-- PHP-Lint: **2/2 PASS**;
-- Runtime-Readback: **862/862 PASS**;
-- ZIP-Integrität: **PASS**;
-- statischer Write-Audit: **0** Treffer für Post-/Option-/SQL-Writes;
-- Scheduler/Cron: **0**;
-- Netzwerkpfad: **0**.
+- PHP-Lint 4/4 PASS;
+- Core-ready 862/862 PASS;
+- Register-Basis-SHA unverändert PASS;
+- 862 eindeutige Profilslugs PASS;
+- Gruppenabdeckung 862/862 / unzugeordnet 0;
+- Overview 16 Karten + Pagination PASS;
+- Buchbinden E2E PASS;
+- Slacklining E2E PASS;
+- Pferde-/Rassenbegriffe im ausgelieferten Plugin: 0;
+- Write-/Cron-/Network-Audit PASS.
 
-## Integrationsbindung
-
-Geprüfter Designkandidat:
-`HD-003 1.50.704`
-
-HD-003 liest die Finder-Daten ausschließlich über diese API. Das Design enthält keine persistente 862er-Hobbykopie.
-
-## ISOLIERTE CAMPUS-ABLAGE
-
-Die vorgeschriebene Ausgabekopie
-`../../ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`
-ist im Campus noch nicht vorhanden.
-
-Der lokal vorhandene Release-ZIP wurde in der Abschlussprüfung 2026-10-20 erneut gegen den autoritativen SHA-256 geprüft und ist identisch:
-`3887c914b5193f35e1ac5297fa96e2917d0d70effaae51de59501de0d3dcb8ba`.
-
-Keine Ersatz-/Pointerdatei darf als `CURRENT.zip` ausgegeben werden.
-
-## ERSTER OFFENER BLOCKER
-
-**Isolierte Campus-Ausgabekopie `CURRENT.zip` fehlt. Das MANIFEST ist aktuell vorhanden.**
+Evidence:
+`EVIDENCE_1.1.0.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**Die hash-identische HD-007-1.0.0-ZIP als `PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip` synchronisieren. Das MANIFEST ist bereits angelegt. Erst danach WordPress-Installation/Aktivierung.**
+**1.1.0 als vollständigen Ordner `hd-hobbyregister-core` nach `wp-content/plugins/` hochladen, aktivieren und anschließend Register-Startseite sowie Buchbinden/Slacklining visuell und sprachlich abnehmen.**
