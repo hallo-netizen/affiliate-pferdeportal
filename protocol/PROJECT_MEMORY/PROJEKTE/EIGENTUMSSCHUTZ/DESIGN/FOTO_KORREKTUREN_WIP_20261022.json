@@ -2,8 +2,8 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 8,
-  "open_reported_items": 48,
+  "completed_in_source_count": 10,
+  "open_reported_items": 47,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -66,6 +66,22 @@
       "old_photo": "scene-camping.webp",
       "new_photo": "insurance-wohnmobilversicherung.webp",
       "proof": "Sommerliches Wohnmobil mit ausgefahrener Markise bei Sonne statt altem Regenmotiv"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Haus & Wohnung",
+      "topic": "Alarm & Kamera",
+      "old_photo": "magazin-einbruch.webp",
+      "new_photo": "topic-video-tuersprechanlage.webp",
+      "proof": "Eigenständiges 1672×941-Foto eines Video-Türkamerasystems; Motiv nicht in derselben R2-Bereichsseite verwendet, WordPress-Live offen"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "topic": "Wohnobjekte & Nebenräume",
+      "old_photo": "curated-20261019-02.webp",
+      "new_photo": "topic-video-tuersprechanlage.webp",
+      "proof": "Eigenständiges 1672×941-Foto eines Video-Zugangsgeräts, kein Dublettenmotiv auf der Fernüberwachung-R2-Seite; Fernüberwachung-Gruppenbeanstandung dennoch weiterhin offen"
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -77,15 +93,15 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die verbleibenden 47 Nutzerbeanstandungen einschließlich Mehrfachgruppen und Hero-Problemen nur mit eindeutig passenden scharfen individuellen Fotos beheben, ohne Collagen, ohne Zwischen-ZIP. R2/R3 je betroffenem Motiv gezielt prüfen.",
-  "evidence": "Original-ZIP 0.1.63 SHA256 934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635. Lokales Mapping enthält exakt acht gezielte Foto-Neuzuordnungen bei 265 unveränderten Themenidentitäten. Drei heutige Neubindungen per Einzelansicht, physischer Datei, Auflösung und Area-Sibling-Identität geprüft; 0 neue Dateien, 0 aus Collagen ausgeschnittene Fotoassets, kein Plugin-ZIP.",
-  "warning": "Acht lokale Bild-Neuzuordnungen entsprechen NICHT acht geschlossenen Nutzerbeanstandungen. 'Fernüberwachung – ALLE falsch' umfasst vier Motive; davon ist nur eines neu zugeordnet, die gesamte Gruppenbeanstandung bleibt offen. 48 von 55 Nutzerbeanstandungen somit noch offen. Dazu offene tatsächliche WordPress-Liveabnahme und Hero-Abweichungen; keine Collagen, kein Zwischenplugin.",
+  "next": "Die verbleibenden 47 Meldungen inklusive beiden Gruppen und echten noch falschen R1/R2/R3-Hero-Motiven mit scharfen fachlich zutreffenden Einzelbildern schließen; R2-Kachel und Ziel-Hero gleich; nur kurze betroffene Seitentests; erst dann EIN finales In-Place-Pluginupdate. Keine Collagen, kein Zwischenplugin.",
+  "evidence": "Aus unverändertem Original-ZIP 0.1.63 mit isolierter Arbeitsquelle verglichen: exakt 10 geänderte Foto-Zuordnungen unter 265 vorhandenen Schutzthemen, keine anderen Inhaltsfelder; bei den zwei neuen Einzelmotiven je 1672×941 Pixel, reale Original-Fotodatei, keine Dubletten innerhalb derselben R2-Seite. PHP-Syntax PASS; lokale Kachel-Hero-Gleichheit 20/20 in drei Bereichen. Kein WordPress-Live-Test und keine Plugin-ZIP.",
+  "warning": "Zehn Mapping-Deltas = acht lokal angegangene Einzelbeanstandungen plus zwei von mehreren Motiven der Fernüberwachung-Gruppe; die Gruppe bleibt offen. 47 gemeldete Punkte noch offen, teils umfangreiche Gruppen. Keine neue Photoquelle aus öffentlichen Downloads eingebaut; physische neue Einzelfotos für übrige Spezialthemen weiterhin erforderlich.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
     "reason": "Foto zeigt ein überflutetes Haus, keinen Dachablauf; vorherige Erfolgsbehauptung zurückgenommen",
     "status": "OFFEN"
   },
-  "user_complaints_locally_addressed": 7,
-  "partial_group_mappings": 1
+  "user_complaints_locally_addressed": 8,
+  "partial_group_mappings": 2
 }
