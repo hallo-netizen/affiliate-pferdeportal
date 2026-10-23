@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.0.14 / 100 BEGRIFFE PRODUKTION HARD PASS / LIVE OFFEN**
+STATUS: **1.0.15 / IMPORTFIX / 100 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.14_100_BEGRIFFE_PRODUKTION_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.15_IMPORTFIX_100_BEGRIFFE_HARDPASS.zip`
 
 SHA-256:
-`4b998db76541e4654c0ec227b9efb9a28acfb231c8fe769cf4518f94a48eba39`
+`48f20672cff3d01cb5866469475d773e91602ad3ae2656ef4be1155efc0dd8da`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -52,4 +52,4 @@ Fach-Current:
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.14 über den bestehenden Ordner `hobby-depot-glossar` hochladen/überschreiben und WordPress-Admin einmal öffnen, damit die 100 Entwürfe angelegt bzw. aktualisiert werden.**
+**1.0.15 über den bestehenden Ordner `hobby-depot-glossar` hochladen/überschreiben und WordPress-Admin einmal neu laden.**
