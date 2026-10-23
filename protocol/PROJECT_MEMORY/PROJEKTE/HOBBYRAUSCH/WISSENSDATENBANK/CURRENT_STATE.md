@@ -18,6 +18,12 @@ Eigenschaftsvertrag:
 Register-Seitenvertrag:
 `HOBBYREGISTER_SCHEMA_F_V1.md`
 
+Textvertrag:
+`HOBBYREGISTER_TEXTREGELN_V1.md`
+
+Design-/Referenztransfer:
+`HOBBYREGISTER_REFERENZTRANSFER_V1.md`
+
 ## Zentraler Hobbybestand
 
 - **862** kanonische Hobbyidentitäten;
@@ -79,6 +85,17 @@ Die 57 Merkmale werden als strukturierte Grundlage für verständlichen Fließte
 Der bestehende 8-Schritte-Hauptfunnel bleibt unverändert funktionsfähig.
 Die drei neuen Traits stehen zusätzlich für Feinfilter, Vergleich und Schema F zur Verfügung.
 
+## Frontend-Prototyp 2026-10-23
+
+HD-007 1.1.0 ist lokal als read-only Registerprototyp HARD PASS:
+- vollständige 862er Übersicht;
+- Suche/A–Z/acht Gruppen;
+- virtuelle Profile;
+- zwei vollständige Schema-F-Textproben: Buchbinden und Slacklining.
+
+Die 54er physische Basisprojektion bleibt hash-identisch. Die drei Schema-1.2-Werte der beiden Textproben sind exakt aus der geprüften Evidence gebunden.
+Vor dem 862er Volltextrollout muss HD-007 die vollständige 57er Laufzeitprojektion binden.
+
 ## EXAKT EINE NEXT ACTION
 
-**Die 862 Hobbys gegen die bestehenden CORE-/Hauptseiten abgleichen und je Hobby den SEO-Owner festlegen. Im Zweifel gewinnt die CORE-Hauptseite; das Registerprofil bleibt vollständig im Register, wird aber Google-seitig unterdrückt. Danach Schema-F-Seitenproduktion.**
+**Registerprototyp mit Buchbinden und Slacklining live abnehmen. Danach die 862 Hobbys gegen die bestehenden CORE-/Hauptseiten abgleichen und je Hobby den SEO-Owner festlegen; im Zweifel gewinnt CORE. Erst dann vollständige 57er Laufzeitprojektion + Schema-F-Massenproduktion freigeben.**
