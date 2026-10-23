@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.0.14 / 100 BEGRIFFE PRODUKTION HARD PASS / LIVE OFFEN**
+STATUS: **1.0.15 / IMPORTFIX / 100 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -443,10 +443,32 @@ Lokale QA:
 - ZIP-Integrität PASS;
 - exakt ein Plugin-Root `hobby-depot-glossar/`.
 
+## 23.10.2026 – 1.0.15 Importfix
+
+1.0.14 hatte einen realen Fehler im automatischen Produktionsimport: Ein einzelner vorhandener/abweichender Pilotbegriff beziehungsweise Slug-Konflikt konnte die gesamte 100er-Übernahme lautlos abbrechen.
+
+1.0.15:
+- vorhandene passende Pilotbegriffe werden über term-ID oder Slug übernommen und aktualisiert;
+- der eingebaute Import prüft danach explizit 100/100 Begriffe;
+- Teilstände werden beim nächsten Admin-Aufruf erneut versucht;
+- Erfolg oder konkreter Importfehler wird im Backend angezeigt;
+- Produktionsdaten, Layout, Route, Templates und Frontend bleiben gegenüber 1.0.14 unverändert.
+
+Test:
+- Simulationsfall 6 vorhandene Pilotbegriffe + Produktionsbestand: 6 adoptiert + 94 neu = 100/100 PASS;
+- PHP-Lint komplett PASS;
+- ZIP-Integrität PASS.
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.15_IMPORTFIX_100_BEGRIFFE_HARDPASS.zip`
+
+SHA-256:
+`48f20672cff3d01cb5866469475d773e91602ad3ae2656ef4be1155efc0dd8da`
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.14 nach Installation: einmal prüfen, ob die 100 Entwürfe angelegt wurden und die bestehende Glossardarstellung unverändert bleibt.
+Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossarbegriffe als Entwürfe zeigen; angemeldete Redakteure sehen die Entwürfe auch auf der Glossarübersicht.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.14 über den bestehenden Ordner `hobby-depot-glossar` installieren/überschreiben und im WordPress-Admin einmal das Glossar öffnen.**
+**1.0.15 über den bestehenden Ordner `hobby-depot-glossar` überschreiben und WordPress-Admin einmal neu laden.**
