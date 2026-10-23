@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.50.727 MAGAZIN + FOOTER NAV FINAL LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **1.50.728 FOOTER-LOGO-STAGE1 LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -11,60 +11,43 @@ Plugin-ID:
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
 
-## Kandidat 1.50.727
+## Kandidat 1.50.728
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.727_UPDATE_MAGAZIN_FOOTER_NAV_FINAL.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.728_UPDATE_FOOTER_LOGO_KLEIN.zip`
 
 SHA-256:
-`71cc28631c8f0ecc77197a5cb4597b7eb8b202629f4cec8e7623a785767a51ff`
+`b2aa6d5d042e3df8426505cfb59bcafc118b812681aebcd5b4a008b366fc831f`
 
 Größe:
-768,293 Bytes.
+587,338 Bytes.
+
+UPDATE, kein Full-Plugin.
 
 Hauptordner:
 `affiliate-portal-template-kit/`
 
-## Magazin
-
-Die Magazin-Startseite ist sichtbarer Überbau für Orientierung/Wissen.
-
-Eigene Dreierzeile:
-- Hobbyfinder;
-- Hobbyregister;
-- Glossar.
-
-Die redaktionellen Magazin-Themen bleiben separat darunter.
-
 ## Footer
 
-Markenleiste:
-- Hobby-Depot-Logo;
-- kleine Unterzeile des Logoassets im Footer ausgeblendet;
+Gegenüber 1.50.727:
+- Logo kleiner;
+- Hauptlogo vollständig sichtbar, nicht mehr am unteren Rand abgeschnitten;
+- kleine Unterzeile des Originalassets weiterhin ausgeblendet;
 - kein zusätzlicher Claimtext.
 
-Spalten:
-- Rechtliches: bestehende 4 Einträge;
+Unverändert:
 - Wissen: Hobbymagazin · Hobbyfinder · Hobbyregister · Glossar;
 - Service: Werben im Hobby Depot · Preise · Kontakt · FAQ;
-- Anzeigenmarkt: bestehende 4 Einträge.
+- Magazin-Dreierzeile Hobbyfinder · Hobbyregister · Glossar.
 
-Hobbyfinder ist damit im Footer vorhanden.
-FAQ liegt nicht mehr unter Wissen.
-
-## QA
-
+QA:
 - PHP-Lint PASS;
 - Fresh-Unpack PASS;
-- Wissen exakt 4 Einträge PASS;
-- Service exakt 4 Einträge PASS;
-- Magazin-Dreierzeile PASS;
-- Footer-Logo-Crop PASS;
-- PB-one-Verhalten erhalten.
+- Footer-Assetpfad erhalten.
 
 Evidence:
-`EVIDENCE_1.50.727.md`
+`EVIDENCE_1.50.728.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**Gemeinsames Bundle `HOBBY_DEPOT_AKTUELL_20261023_MAGAZIN_FOOTER_REGISTER_FINAL.zip` entpacken und die beiden vorhandenen Pluginordner per Cyberduck unter `wp-content/plugins/` zusammenführen. Danach Magazin-Startseite, Footer und eine Hobbyregister-Detailseite live prüfen.**
+**Gemeinsames Update-Bundle `HOBBY_DEPOT_AKTUELL_20261023_AENDERUNGSSTUFE1.zip` entpacken und beide vorhandenen Pluginordner per Cyberduck unter `wp-content/plugins/` zusammenführen.**
