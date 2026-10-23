@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **HOBBYREGISTER 862/862 / SCHEMA 1.2 MIT 57 TRAITS VOLLSTÄNDIG GEBUNDEN / 862 SCHEMA-F-TEXTE LOCAL HARD PASS**
+STATUS: **HOBBYREGISTER 862/862 / SCHEMA 1.2 MIT 57 TRAITS / 862 STATISCHE TEXTE VOLLSTÄNDIG**
 
 ## Rolle
 
@@ -21,15 +21,13 @@ Register-Seitenvertrag:
 Textvertrag:
 `HOBBYREGISTER_TEXTREGELN_V1.md`
 
-Design-/Referenztransfer:
-`HOBBYREGISTER_REFERENZTRANSFER_V1.md`
-
 ## Zentraler Hobbybestand
 
 - **862** kanonische Hobbyidentitäten;
 - **57** Eigenschaften in 8 Gruppen;
 - **862/862** Hobbys mit **57/57** klassifizierten Traits;
-- **862/862** Hobbys mit **4/4** Kurzprofilfeldern;
+- **862/862** Hobbys mit statischen Registerartikeln;
+- exakt **8 Abschnitte je Hobby**;
 - Aliasnamen erzeugen keine zweite Hobbyidentität.
 
 ## Schema 1.2
@@ -51,37 +49,36 @@ Basis-54-SHA:
 HD-007-1.2.0-Runtime-SHA:
 `d0d424485e6dbcf65a8332da732d2e342b279f0a1311919149ba8dfcdb93604a`
 
-## Schema-F-Produktion 2026-10-23
+## Texte
 
-HD-007 1.2.0 bindet nun die vollständige 57er Laufzeitprojektion.
-
-Texte:
 - 862/862 statisch eingefroren;
 - exakt 8 Abschnitte je Hobby;
 - 57/57 Trait-IDs im Produktionsgenerator berücksichtigt;
 - Wortumfang 656–761 Wörter;
 - keine Kurzprofil-Fallbacks.
 
-## Bilder
+## Bilder – Fachgrenze
 
-Zentraler Bildplan:
-`/Hobby Depot/Hobby-Klassifikation/HOBBY_PORTRAIT_BILDPLAN_V1.json`
+Der technische Bildproduktions-/Auditstatus wird **nicht** hier als zweite Current-Wahrheit geführt.
 
-Aktuelle Runtime-Darstellung:
-- 862/862 Profile haben eine Bildzuordnung;
-- 328 exakt kuratierte vorhandene Hobby-/CORE-Fotos;
-- 534 fachlich passende vorhandene Themen-Masterbilder.
+Aktuelle technische Autorität:
+`../PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`
 
-Die Themen-Masterbilder ersetzen nicht die im Bildplan vorgesehenen dedizierten neuen Portraitmaster.
+Fachlich verbindlich bleibt:
+- ein kanonisches Hobby je Register-ID;
+- genau ein finales Masterbild pro Hobby;
+- dasselbe Masterbild für Hero + Beitrag;
+- kein Hochskalieren ungeeigneter Quellen;
+- Dubletten/Fehlversuche zählen nicht als final.
 
 ## SEO
 
 Die SEO-Owner-Regel bleibt:
 - dedizierte gleichartige CORE-Seite gewinnt;
 - ohne entsprechende CORE-Seite darf das Registerprofil SEO-Owner werden;
-- Owner-Matrix 862/862 bleibt noch offen;
+- Owner-Matrix 862/862 bleibt offen;
 - bis dahin Prototypschutz noindex,follow.
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-007 1.2.0 live abnehmen. Danach die 862er CORE-vs-REGISTER-Owner-Matrix erstellen und separat entscheiden, welche der im Bildplan vorgesehenen dedizierten Portraitmaster noch neu erzeugt werden.**
+**Wenn die fachliche Registerarbeit wieder aufgenommen wird: die 862er CORE-vs-REGISTER-Owner-Matrix erstellen. Technische Plugin-/Bildaktionen ausschließlich über die HD-007-Current führen.**
