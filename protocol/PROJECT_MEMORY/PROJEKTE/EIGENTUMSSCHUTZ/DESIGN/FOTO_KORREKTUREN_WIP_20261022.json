@@ -2,8 +2,8 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 12,
-  "open_reported_items": 47,
+  "completed_in_source_count": 15,
+  "open_reported_items": 46,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -98,6 +98,30 @@
       "old_photo": "fix-131-technik-tore-zugang.webp",
       "new_photo": "insurance-vereinshaftpflichtversicherung.webp",
       "proof": "Originalfoto einzeln geöffnet: Vereinsheim, Fußballplatz, Trainingsmaterial; 1448×1086; keine identische Datei/Fotoidentität auf derselben R2-Seite."
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic": "Fluchtwege & Personenschutz",
+      "old_photo": "fix-131-technik-tore-zugang.webp",
+      "new_photo": "fix-feuer-kleine-betriebe-vereine.webp",
+      "proof": "Einzelfoto eines Feuerwehrgerätehauses mit erkennbarem grünen Sammelplatzzeichen; gegen lokale R2-Siblings und Bereichs-Hero geprüft"
+    },
+    {
+      "world": "Feuer & Gase",
+      "area": "Rauch & Brand",
+      "topic": "Brandschutz & Löschmittel",
+      "old_photo": "fix-feuer-kleine-betriebe-vereine.webp",
+      "new_photo": "focus-feuer-kleinbetrieb.webp",
+      "proof": "Einzelfoto mit sichtbarem Feuerlöscher im Haus, gezielt freigeräumt, damit Fluchtwege-Foto keine R2-Dublette wird"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Kleine Betriebe & Vereine",
+      "topic": "Wasser in Kleinbetrieben",
+      "old_photo": "new-wet.webp",
+      "new_photo": "insurance-betriebsunterbrechungsversicherung.webp",
+      "proof": "Einzelbild eines überfluteten Ladengeschäfts mit sichtbarem Wasserschaden; Ersatz für bisheriges Haus-Starkregenmotiv; keine Dublette auf eigener R2-Seite"
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -109,15 +133,15 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die verbleibenden 47 gemeldeten Beanstandungen mit scharfen, konkret passenden Einzelfotos inklusive sämtlicher Themen in Kleine Betriebe & Vereine und Fernüberwachung und falschen Hero-Motiven schließen. Keine Collagen, kein Zwischen-Plugin; erst dann vollständige finale In-place-ZIP und kurzer Live-Regressionslauf.",
-  "evidence": "Physischer Originalstand 0.1.63, isolierte Arbeitsquelle: genau 12 Foto-Mapping-Deltas in 265 unveränderten Schutztiteln; +2 echte scharfe Einzelbilder zu Kleinbetrieben/Vereinen aus vollständig bestehenden Assets, gegen 8 Geschwisterbilder der R2-Seite auf Dateihash/Fotoidentität geprüft; PHP Lint PASS, vorhandener R2-Kachel-R3-Hero-Test 20/20 PASS. Keine neue ZIP, keine Collagen.",
-  "warning": "Kleine Betriebe & Vereine ist als Gruppenbeanstandung weiter OFFEN: nur 2 von 9 Themen speziell heute neu bebildert; alle übrigen konkret einzeln gegen fachliche Eignung prüfen. Fernüberwachung ist ebenso offen. 47 von 55 Beanstandungszeilen bleiben offen, da beide Gruppen nicht geschlossen sind; kein WordPress-Live-PASS.",
+  "next": "Übrige 46 Nutzerbeanstandungen samt Gruppen und falschen Heros mit echten scharfen, fachlich passenden Einzelfotos vollständig schließen. Keine fremden oder identischen Motive als Ersatz; Kachel = Ziel-Hero, kurze gezielte Tests; erst anschließend EIN vollständiges In-place-Plugin.",
+  "evidence": "Physische Original-ZIP 0.1.63 SHA256 934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635 frisch gegen isolierte Arbeits-JSON verglichen: exakt 15 Foto-Deltas, 265/265 Themenidentitäten und sämtliche Nichtfotofelder bytewertgleich. Heute drei einzelne Bildänderungen lokal visuell geprüft. 10/10 PHP-Syntax PASS. Ersetzte Fotos sind existierende WebP-Einzelbilder, 0 neue Bilddateien, keine Collagen. Neue Fotopaare R2-Hero/Fotoidentität und Geschwisterkacheln kollisionsfrei.",
+  "warning": "Bildreparaturen sind nur lokal in isolierter Arbeitsquelle und nicht WordPress-live nachgewiesen. 46 von 55 Nutzer-Beanstandungseinträgen bleiben offen, Gruppen enthalten weitere Einzelmotive, keine Bildgenerator-Collagen eingebaut, keine Zwischen-Plugin-ZIP.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
     "reason": "Foto zeigt ein überflutetes Haus, keinen Dachablauf; vorherige Erfolgsbehauptung zurückgenommen",
     "status": "OFFEN"
   },
-  "user_complaints_locally_addressed": 8,
-  "partial_group_mappings": 4
+  "user_complaints_locally_addressed": 9,
+  "partial_group_mappings": 5
 }
