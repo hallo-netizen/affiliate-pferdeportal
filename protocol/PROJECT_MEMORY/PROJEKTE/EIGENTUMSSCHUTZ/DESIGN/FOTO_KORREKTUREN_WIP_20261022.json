@@ -143,5 +143,21 @@
     "status": "OFFEN"
   },
   "user_complaints_locally_addressed": 9,
-  "partial_group_mappings": 5
+  "partial_group_mappings": 5,
+  "physical_actual_photo_deltas": 16,
+  "additional_candidate_pending_review": {
+    "world": "Technik & Ausfälle",
+    "area": "Strom & Notstrom",
+    "topic": "Stromausfall & Notstrom",
+    "old_photo": "focus-waermepumpe.webp",
+    "new_photo": "topic-lokaler-smart-home-notbetrieb.webp",
+    "status": "IN_LOKALER_ARBEITSQUELLE_ABER_NICHT_FINAL_FREIGEGEBEN",
+    "why": "Foto zeigt lokale smarte Notstromanlage; fachliche Aussage für generellen Stromausfall noch nicht ausreichend belegt"
+  },
+  "metadata_only_change": {
+    "topic": "PV, Kamera & Beleuchtung",
+    "photo_unchanged": "magazin-einbruch.webp",
+    "status": "OFFEN – vorheriges Ersatzfoto ohne PV verworfen"
+  },
+  "last_physical_audit": "23.10.2026: 265 Original-Themen gegen ZIP und isolierte Arbeitsdatei indexweise verglichen: 16 geänderte photo-Felder plus 1 bloße Statusänderung; 15 im bisherigen GitHub-Protokoll; keine neue Fotodatei/Collage. Kein Live-PASS."
 }
