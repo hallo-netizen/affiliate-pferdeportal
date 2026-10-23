@@ -23,13 +23,6 @@
       "new_photo": "new-glass.webp"
     },
     {
-      "world": "Wasser & Feuchtigkeit",
-      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
-      "topic": "Dachabläufe & Notentwässerung",
-      "old_photo": "magazin-wasser.webp",
-      "new_photo": "new-rain.webp"
-    },
-    {
       "world": "Wetter & Naturgefahren",
       "area": "Starkregen & Hochwasser",
       "topic": "Ladenlokal bei Hochwasser",
@@ -42,6 +35,13 @@
       "topic": "Stromfehler & Schutzschalter",
       "old_photo": "hero-technik-ausfaelle.webp",
       "new_photo": "topic-final-erdung.webp"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Fernüberwachung",
+      "topic": "Alarmreaktionen & Vertretung",
+      "old_photo": "area-selbstschutzmittel-personenalarm.webp",
+      "new_photo": "topic-alarmkommunikation-und-uebertragung.webp"
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -53,7 +53,13 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die restlichen 53 Beanstandungen einschließlich zweier Gruppenmeldungen mit eigens passenden Einzelfotos einzeln beheben; die sechs R2-Hero-Kollisionen mit einzigartigen Fotos lösen und danach nur betroffene Seiten testen.",
-  "evidence": "265/265 R3 PHP mapping paths resolve; edited R3 target photo equals mapping photo; 5 precise mapping deltas vs original 0.1.63; all assets byte-identical; no collateral topic edits; short dHash category and R2 hero guard. No WordPress live tests.",
-  "warning": "Photographic replacements from same 0.1.63 package. No new photos created. Remaining 50 user issues NOT completed; this is only a WIP. Two attempted image generations resulted in collages and were NOT added."
+  "next": "Die offenen 50 Beanstandungen samt Gruppenmotiven und fehlerhaften R1/R2/R3-Hero-Fotos mit passenden einzelnen Fotos beheben, ohne Collagen/Blindtausch und ohne Zwischen-Plugin; anschließend gezielter Kurztest.",
+  "evidence": "Aus physischer ZIP 0.1.63 neu entpackte und isoliert geänderte JSON: exakt 5 Foto-Mapping-Deltas, kein anderer Fachinhalt geändert, alle fünf Dateien physisch und einzeln visuell geprüft; keine neue oder aus Collage geschnittene Datei; im R2-Identitätsvergleich keine durch diese fünf hinzugekommene identische Themen-Fotodopplung.",
+  "warning": "Diese fünf Zuordnungen sind nur lokal in isolierter Quelle nachgewiesen, keine Live-Abnahme. R3-Kachel/Herogleichheit auf WordPress bleibt offen.",
+  "disqualified_previous_change": {
+    "topic": "Dachabläufe & Notentwässerung",
+    "previous_candidate": "new-rain.webp",
+    "reason": "Foto zeigt ein überflutetes Haus, keinen Dachablauf; vorherige Erfolgsbehauptung zurückgenommen",
+    "status": "OFFEN"
+  }
 }
