@@ -52,9 +52,16 @@ Gestalten 7 · Fertigen 10 · Technik 9 · Forschen 8 · Pflanzen 9 · Tiere 7 �
 
 ## Magazin
 
-EDITORIAL ist eine eigene Informations-/Inspirationssäule, keine Restablage und keine zweite konkurrierende Hobby-Taxonomie.
+EDITORIAL ist fachlich weiterhin eine eigene Informations-/Inspirationssäule, keine Restablage und keine zweite konkurrierende Hobby-Taxonomie.
 
-Die 12 bestehenden Magazin-Einstiege/Views bleiben:
+**Nutzerführung ab 2026-10-23:** Das Hobbymagazin ist der sichtbare Überbau für Orientierung und Wissen. Auf seiner Startseite werden deshalb drei zentrale Werkzeuge gemeinsam hervorgehoben:
+- Hobbyfinder;
+- Hobbyregister;
+- Glossar.
+
+Hobbyfinder, Hobbyregister und Glossar behalten ihre jeweils eigene Funktion und Datenlogik, werden aber aus dem Magazin heraus prominent verlinkt. Im Footer bleiben sie zusätzlich direkt erreichbar.
+
+Die 12 bestehenden redaktionellen Magazin-Einstiege/Views bleiben:
 Hobby finden · Hobby-Ideen & Inspiration · Ungewöhnliche & skurrile Hobbys · Neue Hobbys & Trends · Hobby-Porträts · Menschen & Geschichten · Geschichte & Herkunft · Wissen & Glossar · Vergleiche & Alternativen · Zeit, Budget & Platz · Alter & Lebensphasen · Saison, drinnen & draußen.
 
 Für kleine/skurrile valide Hobbys:
@@ -160,4 +167,4 @@ Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker steh
 
 ## EXAKT EINE NEXT ACTION
 
-**Den bereits gebauten Hobbyregister-Prototyp mit zwei Schema-F-Textproben live abnehmen. Danach die 862er CORE-vs-REGISTER-Owner-Matrix nach der festgelegten Regel erstellen.**
+**Den gemeinsamen Stand HD-003 1.50.727 + HD-007 1.1.3 live auf Magazin-Startseite, Footer und Hobbyregister abnehmen. Danach die 862er CORE-vs-REGISTER-Owner-Matrix nach der festgelegten Regel erstellen.**
