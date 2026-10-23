@@ -3,45 +3,61 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.2.10 GLEICHER HOBBY-DEPOT-CONTAINER / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.2.12 BILDSTATUS ZENTRAL + 14 FINAL-MASTER / LOCAL HARD PASS**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.10_FULL_GLEICHER_HD_CONTAINER.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.12_FULL_BILDSTATUS_14_MASTER.zip`
 
 SHA-256:
-`510c6dbec8a654ee6dde9c0233ca00ff69f6918520548dc97db0fb68ff782962`
+`0dc95757c44424e70111c9dde5644e94a7b881fc44d8127b81d950af469a978d`
 
-## Breite
+## Grundlage / Regression-Schutz
+1.2.12 basiert direkt auf dem zuletzt bestandenen 1.2.10-Stand.
+Am Layout-/Routingcode wurde außer den Versionsmarkern nichts geändert.
 
-Nicht mehr numerisch nachgebaut.
+Erhalten und geprüft:
+- derselbe Hobby-Depot-Container wie 1.2.10;
+- `hd-content-v150616`;
+- `hd-portal-section`;
+- `hd-breadcrumb-wrap`;
+- 862/862 Detailseiten;
+- Registerübersicht;
+- 57 Traits;
+- 862 Artikel.
 
-HD-007 verwendet jetzt dieselben echten Hobby-Depot-Klassen aus HD-003 1.50.729:
-- `hd-content-v150616`
-- `hd-portal-section`
-- `hd-breadcrumb-wrap`
+## Bilder
+Verbindlicher Vertrag:
+- 1 Hobby = 1 finales Masterbild;
+- dasselbe Bild für Hero und Beitrag;
+- 3:2;
+- finales WebP 1500×1000;
+- Dubletten/Fehlversuche zählen nicht.
 
-Lokaler Chromium-Pixeltest gegen HD-003-Kategorie:
-1600/1440/1366/1180/1024/761/760/390 px Viewport.
-Links, rechts und Gesamtbreite jeweils Delta **0 px**.
+Stand:
+- DONE/verifiziert: 14;
+- OPEN: 848;
+- davon 382 vorhandene CORE-Bilder einzeln prüfen;
+- davon 466 neue Master erzeugen.
 
-## Stabilität
+Zentrale Autorität:
+`BILDSTATUS_CURRENT.md`
 
-- 862/862 Detailseiten PASS
-- Registerübersicht PASS
-- 57 Traits PASS
-- 862 Artikel PASS
-- 862 Bildzuordnungen PASS
-- Owned shell PASS
-- PHP/Fresh-Unpack PASS
-- Duplicate-load alt→neu PASS
-- Duplicate-load neu→alt PASS
+Vollständige 862er Liste:
+Library `/Hobby Depot/Hobbyregister/HOBBYREGISTER_BILDSTATUS_CURRENT.json`
+und im Plugin `data/hobby-image-production-status-v1.json`.
 
-Evidence:
-`EVIDENCE_1.2.10.md`
+## QA
+- 14/14 finale Master physisch im Plugin;
+- pro DONE-Hobby genau eine ausgewählte Datei;
+- alle 14 Master als WebP 1500×1000;
+- 862/862 Datenzeilen im Bildstatus;
+- 862/862 Detailseiten lokal gerendert;
+- Registerindex PASS;
+- PHP-Lint PASS;
+- Fresh-Unpack PASS.
 
 ## EXAKT EINE NEXT ACTION
-
-**1.2.10 über den bestehenden aktiven Ordner `hd-hobbyregister-core` kopieren/überschreiben und live nur die Breite gegen eine bestehende Hobby-Depot-Kategorieseite prüfen.**
+**1.2.12 über den bestehenden Ordner `hd-hobbyregister-core` kopieren/überschreiben. Danach mit anderen Hobbyregister-/Glossararbeiten fortfahren; die Bildproduktion kann später exakt aus `BILDSTATUS_CURRENT` wieder aufgenommen werden.**
