@@ -3,50 +3,60 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.1.6 FULL LAYOUT FIX LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.1.7 UI FIX LOCAL HARD PASS / LIVE LOAD STATE OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.6_FULL_LAYOUT_FIX.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.1.7_FULL_UI_FIX.zip`
 
 SHA-256:
-`5c9fdfd0589e32705f2f0eacb596831a035751c455edfb7765919c0e72711ef5`
+`790fd916f06a65d1b6736968148410470536aecedacfac5ce1b2fb5f24877f65`
 
 Größe:
-1,349,468 Bytes.
+1,349,633 Bytes.
 
 Hauptordner:
 `hd-hobbyregister-core/`
 
-## Layout-Fix
+## Diagnose Artikelverlust
 
-- Register-Body nutzt jetzt dieselbe Portalbreite wie Hobby Depot:
-  `width:min(calc(100% - 72px),var(--hd-content,1440px))`.
-- Breadcrumb nutzt dieselbe Breite.
-- Profil-Hero: redundantes kleines Label `HOBBYREGISTER` entfernt.
-- Hero-Inhalt leicht nach oben gezogen.
-- Startseiten-Kicker `HOBBYS VON A BIS Z` bleibt bestehen.
+1.1.6 rendert lokal weiterhin den vollständigen 3D-Druck-Artikel mit 8 Abschnitten.
+Die Layoutänderung selbst entfernt den Artikel nicht.
 
-## Artikelstatus
+Wenn live kein Artikel erscheint, ist der Live-Ladezustand von HD-007 nicht identisch zum geprüften Paket.
+Ein möglicher konkreter Auslöser ist ein kurzfristig fehlender Pluginordner während eines Vollersatzes, wodurch WordPress das Plugin deaktivieren kann.
 
-- 862/862 Profile erzeugen bereits acht Fließtextabschnitte.
-- Final redaktionell ausformuliert sind bisher nur die Musterprofile Buchbinden und Slacklining.
-- Die übrigen Profile verwenden weiterhin den automatischen Schema-F-Textgenerator auf Basis der aktuell physisch gebundenen 54 Basistraits.
-- Die vollständige 57-Trait-Laufzeitprojektion ist noch nicht im Plugin gebunden.
-- Daher gelten die übrigen 860 Texte noch nicht als final redaktionell abgeschlossen.
+## 1.1.7
 
-## QA
+- aktiver A–Z-Buchstabe stark sichtbar;
+- `Alle` als aktiver Zustand ohne Buchstabenfilter;
+- aktive Gruppe deutlicher;
+- gefiltert `X Hobbys` statt `X Treffer`;
+- Pagination oben und unten;
+- `Zur Register-Startseite` statt `Filter zurücksetzen`;
+- Bodybreite / Hero-Fix aus 1.1.6 erhalten.
 
-- PHP-Lint 4/4 PASS.
-- Fresh-Unpack PASS.
-- Portalbreite 1440-Fallback PASS.
-- alter 1180px-Registerwrapper entfernt PASS.
-- Profil-Hero ohne HOBBYREGISTER-Kicker PASS.
-- Startseiten-Kicker erhalten PASS.
-- Hero-Titel nach oben versetzt PASS.
+## E2E
+
+`/hobbyregister/?hr_letter=S`
+- aktive S-Markierung PASS;
+- Count PASS;
+- Pagination oben/unten PASS;
+- Rücklink PASS.
+
+`/hobbyregister/3d-druck/`
+- kompletter Artikel PASS;
+- erster und letzter Abschnitt PASS;
+- 8 Abschnitte PASS;
+- HTML ca. 24 KB.
+
+PHP-Lint/Fresh-Unpack PASS.
+
+Evidence:
+`EVIDENCE_1.1.7.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.1.6 als vollständigen Ordner `hd-hobbyregister-core` ersetzen und live Bodybreite + Hero prüfen. Danach vollständige 57-Trait-Laufzeitprojektion binden und die 862 Detailtexte final produzieren/prüfen.**
+**1.1.7 über den bestehenden aktiven Ordner `wp-content/plugins/hd-hobbyregister-core/` kopieren/überschreiben, ohne den Ordner vorher zu löschen. Danach prüfen, dass `Hobby Depot Hobbyregister Core` in WordPress weiterhin aktiv ist, und Registerstart + ein Profil neu laden.**
