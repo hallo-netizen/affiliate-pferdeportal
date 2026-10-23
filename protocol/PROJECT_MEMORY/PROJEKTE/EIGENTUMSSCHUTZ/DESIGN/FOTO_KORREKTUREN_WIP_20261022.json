@@ -2,7 +2,7 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 10,
+  "completed_in_source_count": 12,
   "open_reported_items": 47,
   "new_plugin_generated": false,
   "collages_added": false,
@@ -82,6 +82,22 @@
       "old_photo": "curated-20261019-02.webp",
       "new_photo": "topic-video-tuersprechanlage.webp",
       "proof": "Eigenständiges 1672×941-Foto eines Video-Zugangsgeräts, kein Dublettenmotiv auf der Fernüberwachung-R2-Seite; Fernüberwachung-Gruppenbeanstandung dennoch weiterhin offen"
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic": "Kleinbetriebe & Ateliers",
+      "old_photo": "curated-20261019-09.webp",
+      "new_photo": "insurance-betriebshaftpflichtversicherung.webp",
+      "proof": "Originalfoto einzeln geöffnet: Inhaber und Kundin an Werkbank im privaten Handwerksatelier; 1672×941; keine identische Datei/Fotoidentität bei den anderen acht Themen dieses R2-Bereichs."
+    },
+    {
+      "world": "Einbruch & Diebstahl",
+      "area": "Kleine Betriebe & Vereine",
+      "topic": "Kleine Vereine & Plätze",
+      "old_photo": "fix-131-technik-tore-zugang.webp",
+      "new_photo": "insurance-vereinshaftpflichtversicherung.webp",
+      "proof": "Originalfoto einzeln geöffnet: Vereinsheim, Fußballplatz, Trainingsmaterial; 1448×1086; keine identische Datei/Fotoidentität auf derselben R2-Seite."
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -93,9 +109,9 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die verbleibenden 47 Meldungen inklusive beiden Gruppen und echten noch falschen R1/R2/R3-Hero-Motiven mit scharfen fachlich zutreffenden Einzelbildern schließen; R2-Kachel und Ziel-Hero gleich; nur kurze betroffene Seitentests; erst dann EIN finales In-Place-Pluginupdate. Keine Collagen, kein Zwischenplugin.",
-  "evidence": "Aus unverändertem Original-ZIP 0.1.63 mit isolierter Arbeitsquelle verglichen: exakt 10 geänderte Foto-Zuordnungen unter 265 vorhandenen Schutzthemen, keine anderen Inhaltsfelder; bei den zwei neuen Einzelmotiven je 1672×941 Pixel, reale Original-Fotodatei, keine Dubletten innerhalb derselben R2-Seite. PHP-Syntax PASS; lokale Kachel-Hero-Gleichheit 20/20 in drei Bereichen. Kein WordPress-Live-Test und keine Plugin-ZIP.",
-  "warning": "Zehn Mapping-Deltas = acht lokal angegangene Einzelbeanstandungen plus zwei von mehreren Motiven der Fernüberwachung-Gruppe; die Gruppe bleibt offen. 47 gemeldete Punkte noch offen, teils umfangreiche Gruppen. Keine neue Photoquelle aus öffentlichen Downloads eingebaut; physische neue Einzelfotos für übrige Spezialthemen weiterhin erforderlich.",
+  "next": "Die verbleibenden 47 gemeldeten Beanstandungen mit scharfen, konkret passenden Einzelfotos inklusive sämtlicher Themen in Kleine Betriebe & Vereine und Fernüberwachung und falschen Hero-Motiven schließen. Keine Collagen, kein Zwischen-Plugin; erst dann vollständige finale In-place-ZIP und kurzer Live-Regressionslauf.",
+  "evidence": "Physischer Originalstand 0.1.63, isolierte Arbeitsquelle: genau 12 Foto-Mapping-Deltas in 265 unveränderten Schutztiteln; +2 echte scharfe Einzelbilder zu Kleinbetrieben/Vereinen aus vollständig bestehenden Assets, gegen 8 Geschwisterbilder der R2-Seite auf Dateihash/Fotoidentität geprüft; PHP Lint PASS, vorhandener R2-Kachel-R3-Hero-Test 20/20 PASS. Keine neue ZIP, keine Collagen.",
+  "warning": "Kleine Betriebe & Vereine ist als Gruppenbeanstandung weiter OFFEN: nur 2 von 9 Themen speziell heute neu bebildert; alle übrigen konkret einzeln gegen fachliche Eignung prüfen. Fernüberwachung ist ebenso offen. 47 von 55 Beanstandungszeilen bleiben offen, da beide Gruppen nicht geschlossen sind; kein WordPress-Live-PASS.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
@@ -103,5 +119,5 @@
     "status": "OFFEN"
   },
   "user_complaints_locally_addressed": 8,
-  "partial_group_mappings": 2
+  "partial_group_mappings": 4
 }
