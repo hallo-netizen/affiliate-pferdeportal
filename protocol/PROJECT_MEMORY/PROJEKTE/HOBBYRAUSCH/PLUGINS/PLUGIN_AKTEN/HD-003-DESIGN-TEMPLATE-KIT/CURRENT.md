@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE 1.50.711 / 1.50.716 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **LIVE 1.50.711 / 1.50.717 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -16,16 +16,16 @@ Fach-Current:
 Aktiv und zuletzt belastbar:
 **1.50.711**.
 
-## Lokaler Kandidat 1.50.716 – UPDATE
+## Lokaler Kandidat 1.50.717 – UPDATE
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.716_UPDATE_MAGAZIN_STARTSEITE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.717_UPDATE_MAGAZIN_STARTSEITE.zip`
 
 SHA-256:
-`072fdbe2fff7b8b4ef32ea3f70f08e1e1de700fb17d784b7e821e2735a1335f1`
+`8e03ce1e5915edd62901494362b70194ce09f971146dbcec424e927db1f46b59`
 
 Größe:
-577,195 Bytes.
+577,238 Bytes.
 
 Enthält unter dem unveränderten Hauptordner `affiliate-portal-template-kit/` exakt:
 - `pferde-template-kit.php`;
@@ -68,10 +68,15 @@ Lokale QA:
 - Banner/Produkte/Affiliate-Artikel integriert.
 
 Evidence:
-`EVIDENCE_1.50.716.md`
+`EVIDENCE_1.50.717.md`
 
-1.50.716 ist **nicht live**.
+1.50.717 ist **nicht live**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.716-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen; die zwei enthaltenen Dateien überschreiben. Danach live ausschließlich Magazin-Startseite, FAQ, Footer/PB-one und Plugin-Version prüfen.**
+**1.50.717-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen; die zwei enthaltenen Dateien überschreiben. Danach live ausschließlich Magazin-Startseite, FAQ, Footer/PB-one und Plugin-Version prüfen.**
+
+
+## 1.50.717 Routingkorrektur
+
+Die echte Magazinseite läuft unter `/journal/`. 1.50.716 hörte nur auf `magazin` und ließ `journal` zugleich als Service-Seite laufen. 1.50.717 korrigiert genau diese drei Routingstellen; Inhalt/Design/Slots bleiben unverändert.
