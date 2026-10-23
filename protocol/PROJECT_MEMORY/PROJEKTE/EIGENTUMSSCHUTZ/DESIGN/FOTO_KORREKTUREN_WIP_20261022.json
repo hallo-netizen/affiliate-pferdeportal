@@ -2,8 +2,8 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 15,
-  "open_reported_items": 46,
+  "completed_in_source_count": 16,
+  "open_reported_items": 45,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -122,6 +122,14 @@
       "old_photo": "new-wet.webp",
       "new_photo": "insurance-betriebsunterbrechungsversicherung.webp",
       "proof": "Einzelbild eines überfluteten Ladengeschäfts mit sichtbarem Wasserschaden; Ersatz für bisheriges Haus-Starkregenmotiv; keine Dublette auf eigener R2-Seite"
+    },
+    {
+      "world": "Technik & Ausfälle",
+      "area": "Strom & Notstrom",
+      "topic": "Stromausfall & Notstrom",
+      "old_photo": "focus-waermepumpe.webp",
+      "new_photo": "topic-lokaler-smart-home-notbetrieb.webp",
+      "proof": "Physisch geöffnetes 1672×941-WebP-Einzelfoto zeigt privates Haus mit Batteriestation und Smart-Home-Zentrale; statt falscher Wärmepumpe. Kein WP-Live-PASS."
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -133,9 +141,9 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Übrige 46 Nutzerbeanstandungen samt Gruppen und falschen Heros mit echten scharfen, fachlich passenden Einzelfotos vollständig schließen. Keine fremden oder identischen Motive als Ersatz; Kachel = Ziel-Hero, kurze gezielte Tests; erst anschließend EIN vollständiges In-place-Plugin.",
-  "evidence": "Physische Original-ZIP 0.1.63 SHA256 934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635 frisch gegen isolierte Arbeits-JSON verglichen: exakt 15 Foto-Deltas, 265/265 Themenidentitäten und sämtliche Nichtfotofelder bytewertgleich. Heute drei einzelne Bildänderungen lokal visuell geprüft. 10/10 PHP-Syntax PASS. Ersetzte Fotos sind existierende WebP-Einzelbilder, 0 neue Bilddateien, keine Collagen. Neue Fotopaare R2-Hero/Fotoidentität und Geschwisterkacheln kollisionsfrei.",
-  "warning": "Bildreparaturen sind nur lokal in isolierter Arbeitsquelle und nicht WordPress-live nachgewiesen. 46 von 55 Nutzer-Beanstandungseinträgen bleiben offen, Gruppen enthalten weitere Einzelmotive, keine Bildgenerator-Collagen eingebaut, keine Zwischen-Plugin-ZIP.",
+  "next": "Für die offenen 45 Beanstandungszeilen samt Gruppen geeignete, unabhängige Einzelfotos finden/erstellen, den jeweils sichtbaren Kachel-/Hero-Pfad abgleichen, erst nach vollständiger Abarbeitung ein einziges vorhandenes Designplugin-Update bauen. Keine Collagen oder Zwischenversionen.",
+  "evidence": "Aktuelle lokale Original-Datei im laufenden Chat physisch geprüft: exakt 16 Photo-Deltas unter allen 265 ursprünglichen Schutzthemen. Stromausfall & Notstrom visuell als einzelnes 1672×941-Foto eines häuslichen Batteriereserve-Geräts bestätigt. Keine neue Fotodatei, keine Collage, keine ZIP und kein Live-PASS.",
+  "warning": "45 der 55 Beanstandungszeilen bleiben als ungelöst/offen dokumentiert; Gruppen können mehrere Fotos umfassen. PV-Ersatzstromversorgung, Dachabläufe, Brunnenpumpe etc. weiterhin ungeklärt, weil im vorhandenen Bestand kein fachlich eigenständiges Motiv ohne Bilddopplung belegbar war. Keine unscharfen oder fremden Ersatzbilder einsetzen.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
@@ -145,15 +153,6 @@
   "user_complaints_locally_addressed": 9,
   "partial_group_mappings": 5,
   "physical_actual_photo_deltas": 16,
-  "additional_candidate_pending_review": {
-    "world": "Technik & Ausfälle",
-    "area": "Strom & Notstrom",
-    "topic": "Stromausfall & Notstrom",
-    "old_photo": "focus-waermepumpe.webp",
-    "new_photo": "topic-lokaler-smart-home-notbetrieb.webp",
-    "status": "IN_LOKALER_ARBEITSQUELLE_ABER_NICHT_FINAL_FREIGEGEBEN",
-    "why": "Foto zeigt lokale smarte Notstromanlage; fachliche Aussage für generellen Stromausfall noch nicht ausreichend belegt"
-  },
   "metadata_only_change": {
     "topic": "PV, Kamera & Beleuchtung",
     "photo_unchanged": "magazin-einbruch.webp",
