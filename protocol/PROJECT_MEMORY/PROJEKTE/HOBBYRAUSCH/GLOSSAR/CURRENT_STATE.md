@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-21
-STATUS: **1.0.13 LAYOUT + TYPO HARD PASS / LIVE OFFEN**
+STAND: 2026-10-23
+STATUS: **1.0.14 / 100 BEGRIFFE PRODUKTION HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -414,10 +414,39 @@ SHA-256:
 
 PHP-Lint PASS; Render-/Strukturtests PASS; ZIP-Integrität PASS.
 
+## 23.10.2026 – 1.0.14 Produktionsbestand 100 Begriffe
+
+Artefakt:
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.14_100_BEGRIFFE_PRODUKTION_HARDPASS.zip`
+
+SHA-256:
+`4b998db76541e4654c0ec227b9efb9a28acfb231c8fe769cf4518f94a48eba39`
+
+Inhalt:
+- 100 geprüfte Glossarbegriffe in 4 Batches à 25;
+- alle Fachtexte 150–173 Wörter;
+- 0 Bodylinks;
+- eindeutige term-IDs und Slugs;
+- Quellen, SEO-Daten, Hobbywelt, Related-Begriffe und echte Hauptziele vorhanden;
+- die sechs Pilotbegriffe wurden inhaltlich korrigiert;
+- neue Validatorregel blockiert zu starke Wiederholung von Kurzdefinition im ersten Fließtextsatz;
+- Produktionsbestand wird beim ersten Admin-Aufruf nach Update einmalig und idempotent als Entwürfe angelegt/aktualisiert;
+- kein Auto-Publish;
+- Layout, Frontend, Templates, Route und Hero gegenüber 1.0.13 unverändert.
+
+Lokale QA:
+- PHP-Lint 8/8 PASS;
+- 100/100 Inhaltsvalidator PASS;
+- Wortbereich 150–173 PASS;
+- Übergangsregel 100/100 PASS;
+- alter Problemsatz-Test blockiert 5/6 alte Wiederholungen wie erwartet;
+- ZIP-Integrität PASS;
+- exakt ein Plugin-Root `hobby-depot-glossar/`.
+
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Live-Readback von 1.0.13: Abstand, Breite und Kurz-erklärt-Typografie.
+Echter WordPress-Live-Readback von 1.0.14 nach Installation: einmal prüfen, ob die 100 Entwürfe angelegt wurden und die bestehende Glossardarstellung unverändert bleibt.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.0.13 über die bestehende Glossar-Version installieren und nur diese vier Punkte live prüfen: Breadcrumb-Abstand, Übersichtsbreite, Kurz-erklärt-Linkslinie, Schriftgröße.**
+**1.0.14 über den bestehenden Ordner `hobby-depot-glossar` installieren/überschreiben und im WordPress-Admin einmal das Glossar öffnen.**
