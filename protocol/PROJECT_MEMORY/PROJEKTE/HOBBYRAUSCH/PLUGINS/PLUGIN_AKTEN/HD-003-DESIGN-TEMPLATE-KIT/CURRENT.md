@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE 1.50.711 / 1.50.715 DELTA LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **LIVE 1.50.711 / 1.50.716 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -16,49 +16,62 @@ Fach-Current:
 Aktiv und zuletzt belastbar:
 **1.50.711**.
 
-## Lokaler Kandidat 1.50.715 – Delta
+## Lokaler Kandidat 1.50.716 – UPDATE
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.715_DELTA_FAQ_PBONE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.716_UPDATE_MAGAZIN_STARTSEITE.zip`
 
 SHA-256:
-`2c6594ee4fae4d37cc9fa43a6e5183e190bcb86ae13db29c924346d73a2ae33a`
+`072fdbe2fff7b8b4ef32ea3f70f08e1e1de700fb17d784b7e821e2735a1335f1`
 
 Größe:
-574,666 Bytes.
+577,195 Bytes.
 
-Enthält exakt:
+Enthält unter dem unveränderten Hauptordner `affiliate-portal-template-kit/` exakt:
 - `pferde-template-kit.php`;
 - `includes/class-hobby-depot-profile-v150709.php`.
 
-Änderungen:
-- PB one öffnet in neuem Fenster mit sicherem `rel`;
-- vorhandene leere Seite `/faq/` erhält die vollständige FAQ-Darstellung;
-- 6 Themenbereiche / 30 Fragen;
-- native aufklappbare `details`-Elemente, kein JavaScript;
-- responsive FAQ-Gestaltung;
-- kurze Antworten in direkter Du-Ansprache;
-- FAQ-Meta-Description-Fallback.
+## Magazin-Startseite
 
-Footer aus 1.50.713 bleibt:
-- vier Spalten Rechtliches / Wissen / Service / Anzeigenmarkt;
-- Logo entfernt;
-- kleinere Linkschrift;
-- Copyright mittig unter dem Footer;
-- KI-Hinweis + PB one.
+Die bestehende Seite `/magazin/` wird als eigene redaktionelle Hobby-Depot-Hubseite gerendert.
+
+Verwendete 12 bestehende Magazin-Ziele:
+Hobbyfinder; Alter & Lebensphasen; Geschichte & Herkunft; Hobby-Porträts; Hobby-Ideen & Inspiration; Menschen & Geschichten; Neue Hobbys & Trends; Saison, drinnen & draußen; Ungewöhnliche & skurrile Hobbys; Vergleiche & Alternativen; Wissen & Glossar; Zeit, Budget & Platz.
+
+Keine neue Magazin-Kategorie angelegt.
+
+Design:
+- eigenes Magazin-Hero;
+- 12 Bildkacheln;
+- gleiche Farb-/Typo-/Kartenlogik wie Hobby Depot;
+- responsive 3 / 2 / 2 Spalten;
+- kein altes Pferde-Journal-Layout.
+
+Monetarisierung:
+- bestehender Slot `journal_banner`;
+- bestehende Slots `journal_product_1–3`;
+- eigener Bereich für erkannte/markierte Affiliate-Artikel;
+- bestehende Rental-Werbefläche Placement `journal`;
+- keine neue Affiliate-Architektur.
+
+1.50.715 bleibt vollständig enthalten:
+- FAQ-Seite;
+- PB one öffnet in neuem Fenster;
+- Footeränderungen.
 
 Lokale QA:
-- exakt 2 Dateien im ZIP;
 - PHP-Lint PASS;
+- ZIP exakt 2 Dateien;
 - Fresh-Unpack PASS;
-- FAQ-Render 6/6 Bereiche und 30/30 Fragen PASS;
-- PB-one-Neues-Fenster PASS.
+- 13/13 verwendete Bildassets vorhanden;
+- Magazin-Sonderroute nur für Slug `magazin`;
+- Banner/Produkte/Affiliate-Artikel integriert.
 
 Evidence:
-`EVIDENCE_1.50.715.md`
+`EVIDENCE_1.50.716.md`
 
-1.50.715 ist **nicht live**.
+1.50.716 ist **nicht live**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.715-Delta lokal entpacken und nur die zwei enthaltenen Dateien in `wp-content/plugins/affiliate-portal-template-kit/` an gleicher Stelle überschreiben. Danach live FAQ + PB-one-Link + Plugin-Version prüfen.**
+**1.50.716-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen; die zwei enthaltenen Dateien überschreiben. Danach live ausschließlich Magazin-Startseite, FAQ, Footer/PB-one und Plugin-Version prüfen.**
