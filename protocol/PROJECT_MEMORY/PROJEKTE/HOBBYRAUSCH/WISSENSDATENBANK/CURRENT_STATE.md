@@ -87,15 +87,16 @@ Die drei neuen Traits stehen zusätzlich für Feinfilter, Vergleich und Schema F
 
 ## Frontend-Prototyp 2026-10-23
 
-HD-007 1.1.0 ist lokal als read-only Registerprototyp HARD PASS:
+HD-007 1.1.1 ist lokal als read-only Registerprototyp HARD PASS:
 - vollständige 862er Übersicht;
-- Suche/A–Z/acht Gruppen;
+- Suche/A–Z/acht Icon-Gruppen;
 - virtuelle Profile;
-- zwei vollständige Schema-F-Textproben: Buchbinden und Slacklining.
+- 862/862 Detailprofile mit acht nichtleeren Schema-F-Fließtextabschnitten;
+- Buchbinden und Slacklining bleiben die redaktionell ausformulierten Musterprofile.
 
-Die 54er physische Basisprojektion bleibt hash-identisch. Die drei Schema-1.2-Werte der beiden Textproben sind exakt aus der geprüften Evidence gebunden.
-Vor dem 862er Volltextrollout muss HD-007 die vollständige 57er Laufzeitprojektion binden.
+Die physische Runtime-Basis bleibt hash-identisch bei 54 Basistraits. Die drei Schema-1.2-Zusatztraits werden nur dort ausgegeben, wo sie in HD-007 bereits explizit gebunden sind; keine Werte werden geraten.
+Vor dem finalen 57/57-Rollout muss HD-007 die vollständige geprüfte Schema-1.2-Laufzeitprojektion binden.
 
 ## EXAKT EINE NEXT ACTION
 
-**Registerprototyp mit Buchbinden und Slacklining live abnehmen. Danach die 862 Hobbys gegen die bestehenden CORE-/Hauptseiten abgleichen und je Hobby den SEO-Owner festlegen; im Zweifel gewinnt CORE. Erst dann vollständige 57er Laufzeitprojektion + Schema-F-Massenproduktion freigeben.**
+**HD-007 1.1.1 live auf Register-Startseite und mehrere normale Detailprofile abnehmen. Danach die vollständige 57er Laufzeitprojektion binden und die 862 Hobbys gegen CORE-/Hauptseiten auf SEO-Owner mappen; im Zweifel gewinnt CORE.**
