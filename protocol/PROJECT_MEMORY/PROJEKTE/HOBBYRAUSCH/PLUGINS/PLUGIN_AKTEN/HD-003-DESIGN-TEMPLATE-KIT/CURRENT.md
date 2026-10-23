@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **MAGAZIN-ZIELSEITEN HARDROUTE 1.50.722 / BREADCRUMBS LIVE BEANSTANDET / 1.50.723 LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **1.50.724 FOOTER-MARKENLEISTE LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -11,39 +11,57 @@ Plugin-ID:
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
 
-## Live-Hinweis
+## Basis
 
-Nach 1.50.722 fehlten auf den Magazin-Zielseiten die Breadcrumbs.
+1.50.724 baut auf dem zuletzt geprüften 1.50.723-Stand auf.
+Die Magazin-Hardroute und die Breadcrumb-Korrektur bleiben enthalten.
 
-## Kandidat 1.50.723
+## Kandidat 1.50.724
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.723_UPDATE_MAGAZIN_BREADCRUMBS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.724_UPDATE_FOOTER_MARKENLEISTE.zip`
 
 SHA-256:
-`d0839a73d42008548f777ba0f2d56975ec0f2acef4f921590894ca8f4472d8d0`
+`8f45a2541b537db15cd16eea509021857568ddf9bc234fd605ad48c7e6b37e44`
 
 Größe:
-586,379 Bytes.
+767,588 Bytes.
 
-UPDATE mit exakt zwei Dateien:
-- `pferde-template-kit.php`
-- `includes/class-hobby-depot-profile-v150709.php`
+UPDATE, kein Full-Plugin.
 
-Fix:
-- Breadcrumb-Erzeugung nutzt auf den 12 Magazin-Zielseiten dieselbe URL-Hardroute wie das Template;
-- Ausgabe: Startseite › Magazin › Zielseite;
-- unabhängig von `is_singular()`.
+Hauptordner bleibt:
+`affiliate-portal-template-kit/`
 
-QA:
-- 12/12 Zielseiten im Hardroute-Failure-Mode PASS;
-- Fresh-Unpack PASS;
+Enthalten:
+- `pferde-template-kit.php`;
+- `includes/class-hobby-depot-profile-v150709.php`;
+- vorhandenes Hobby-Depot-Logoasset.
+
+## Footer
+
+Neu:
+- schmale Markenleiste oberhalb der Navigation;
+- kleines Hobby-Depot-Logo ca. 132 px;
+- Claim „Hobbys. Ideen. Möglichkeiten.“.
+
+Unverändert:
+- vier Spalten Rechtliches / Wissen / Service / Anzeigenmarkt;
+- kleinere Linkschrift;
+- KI-Hinweis;
+- zentrierter Copyrightbereich;
+- PB one öffnet im neuen Fenster.
+
+## QA
+
 - PHP-Lint PASS;
-- ZIP exakt 2 Dateien PASS.
+- Fresh-Unpack PASS;
+- Logo + Claim PASS;
+- vier Footer-Spalten PASS;
+- PB-one target/rel PASS.
 
 Evidence:
-`EVIDENCE_1.50.723.md`
+`EVIDENCE_1.50.724.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.723 per Cyberduck einspielen und eine Magazin-Zielseite live auf Breadcrumb + Hero + Intro prüfen.**
+**1.50.724-UPDATE per Cyberduck über den bestehenden Ordner `wp-content/plugins/affiliate-portal-template-kit/` zusammenführen und den Footer live prüfen.**
