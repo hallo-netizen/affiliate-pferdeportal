@@ -1,3 +1,11 @@
+## HB-DESIGN-20261023-EINZELFOTOS – WAS / WARUM / HARTE GRENZEN
+**WAS (physisch überprüft):** Ausgangspunkt ist das unveränderte komplette Designplugin ZIP 0.1.63 (SHA256 `934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635`). In isolierter Werkbank sind 16 der 265 Schutz-Themen in der Fotodateizuordnung geändert und ein weiteres Thema `PV, Kamera & Beleuchtung` nur als weiterhin offen markiert. `includes/area-design-prototype.php` hat einen minimalen R2/R3-Fotoidentitäts-Abgleich erhalten; originale Fotodateien/übrige Plugin-Dateien sind unverändert. In GitHub `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/FOTO_KORREKTUREN_WIP_20261022.json` die konkrete Mapping-Liste und `HBD_R3_KACHEL_HERO_PARITAET_WIP_20261023.patch` die PHP-Änderung als **Belege**, nicht zweite Current. Kein fertiges neues Plugin und keine WordPress-Live-Installation.
+**WARUM:** Nutzer beanstandet 55 Motivpositionen inklusive Gruppen sowie falsche Heros. Ursprüngliche Fotos waren zum Teil fachlich falsch, unscharf, fehlend oder innerhalb der R2-Seite doppelt; Dateiname und lokaler Techniktest reichen nicht für sachliche Bildfreigabe. Zwischenfotos und wiederholt generierte Collagen verletzten explizite Nutzerregeln und sind ausgeschlossen. Die Quelländerung des Hero-Dublettenschutzes verhindert divergierende Bildentscheidungen, erzeugt aber keine fehlenden Motive.
+**PRÜFUNG:** Original-ZIP SHA/CRC PASS, 265/265 Thema-Schlüssel gleich, genau 16 `photo`- und 17 `status`-Feldänderungen unter den Topics, php lint 10/10, gezielter Kachel-/Hero-Test 20/20; 2 gleiche Bereichs-Hero-Fotos korrekt beidseitig unterdrückt. **WordPress-Live-/Motivgesamtprüfung und finales ZIP OFFEN**.
+**GRENZE:** Noch 45 Nutzer-Meldungspositionen ohne abgeschlossene lokale Korrektur, beide Gruppen nicht geschlossen; nur ein späteres vollständiges in-place Update des existierenden Ordners `hab-bewahr-design-vorschau`, nach vollständiger Einzelbildarbeit. Keine Collagen, keine Bilddopplungen, keine Kategorie-/DB-/Core-/SEO-Eingriffe, kein Archiv/Library als Current oder Werkbank. Maßgebliche einzelne Current-Autorität: `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/CURRENT_STATE.md`. Zielvertrag nicht verändert.
+
+---
+
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
 ## HB-DESIGN-20261022-0.1.63 – Fehlende R1-/R3-Hero- und Altleistenkorrektur mit echtem Artefakt nachgeholt
