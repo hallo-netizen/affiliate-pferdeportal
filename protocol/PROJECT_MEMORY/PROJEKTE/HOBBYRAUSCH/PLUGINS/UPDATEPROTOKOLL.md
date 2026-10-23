@@ -5266,3 +5266,72 @@ Live 1.50.711 beibehalten.
 
 CURRENT:
 PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
+
+
+---
+
+## PU-20261023-001 – HD-007 1.2.13 CORE-Bildprüfung
+
+PLUGIN-ID:
+`HD-007-HOBBYREGISTER-CORE`
+
+PLUGIN:
+`Hobby Depot Hobbyregister Core`
+
+ART:
+Eigenentwicklung / read-only Hobbyregister-Laufzeitkern.
+
+FACHBÜRO:
+WISSENSDATENBANK; Bildprüfung als HD-007-spezifische Produktionsprüfung.
+
+VON / AUF:
+1.2.12 → 1.2.13.
+
+WARUM:
+Die 382 laut zentralem Bildplan vorhandenen CORE-Bildkandidaten mussten vor weiterer Bilderzeugung einzeln darauf geprüft werden, ob sie zum konkreten Hobby passen und ob sie als gemeinsames Hero+Beitrag-Master im verbindlichen Format 1500×1000 ohne Hochskalieren technisch verwendbar sind.
+
+ÄNDERUNG:
+- keine neue Bilderzeugung;
+- 382/382 CORE-Zuordnungen geprüft;
+- 212/212 unterschiedliche Dateien visuell geprüft;
+- 81 semantisch passend, aber technisch zu klein;
+- 301 semantisch unpassend;
+- 0/382 final wiederverwendbar ohne Ersatz/High-Res-Quelle;
+- 14 bereits finale 1500×1000-Master unverändert erhalten;
+- Audit und zentraler Bildproduktionsstatus im Plugin aktualisiert.
+
+ABHÄNGIGKEITEN / SCHNITTSTELLEN:
+HD-003 stellt bestehende Bildkandidaten; HD-007 bleibt read-only für Registerdaten. Keine DB-Writes, kein Cron, kein Netzwerkpfad ergänzt.
+
+ROLLBACK:
+1.2.12 bleibt vorheriger lokaler Stand mit denselben 14 finalen Masterbildern; 1.2.13 ergänzt im Wesentlichen Audit-/Statusdaten.
+
+POSITIVTEST:
+- ZIP SHA-256 `67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`;
+- exakt ein Pluginroot `hd-hobbyregister-core/`;
+- 862 Registerdatensätze;
+- 862 Artikel;
+- 862 Bildzuordnungen;
+- 57 Traits je Hobby;
+- 862/862 Detailseiten lokal gerendert;
+- Registerübersicht PASS;
+- 4/4 PHP-Lint PASS;
+- Fresh-Unpack PASS.
+
+NEGATIVTEST / GRENZEN:
+Keines der 382 zu kleinen CORE-Bilder wurde fälschlich als finales 1500×1000-Master markiert. 301 semantisch unpassende Kandidaten bleiben NOT_FINAL. Kein Hochskalieren.
+
+LIVE:
+1.2.13 noch nicht live abgenommen.
+
+ARTEFAKT:
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.13_FULL_CORE_BILDPRUEFUNG.zip`
+
+SHA-256:
+`67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`
+
+ISOLIERTER CURRENT.zip-SYNC:
+OFFEN/BLOCKED in diesem Chat: Die vorhandenen GitHub-Werkzeuge können den lokalen 5.211.316-Byte-Binärstand nicht ohne vollständige Base64-Übertragung aus dem Arbeitscontainer in GitHub materialisieren. Keine Text-/Pointerdatei wird als ZIP vorgetäuscht.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`
