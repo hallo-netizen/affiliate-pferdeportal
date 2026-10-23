@@ -3,61 +3,54 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.2.12 BILDSTATUS ZENTRAL + 14 FINAL-MASTER / LOCAL HARD PASS**
+STATUS: **1.2.13 CORE-BILDPRÜFUNG ABGESCHLOSSEN / LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.12_FULL_BILDSTATUS_14_MASTER.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.13_FULL_CORE_BILDPRUEFUNG.zip`
 
 SHA-256:
-`0dc95757c44424e70111c9dde5644e94a7b881fc44d8127b81d950af469a978d`
+`67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`
 
-## Grundlage / Regression-Schutz
-1.2.12 basiert direkt auf dem zuletzt bestandenen 1.2.10-Stand.
-Am Layout-/Routingcode wurde außer den Versionsmarkern nichts geändert.
+## Bildstand
 
-Erhalten und geprüft:
-- derselbe Hobby-Depot-Container wie 1.2.10;
-- `hd-content-v150616`;
-- `hd-portal-section`;
-- `hd-breadcrumb-wrap`;
-- 862/862 Detailseiten;
-- Registerübersicht;
-- 57 Traits;
-- 862 Artikel.
+- Gesamt: 862 Hobbys.
+- Final DONE: 14 erzeugte/verifizierte Masterbilder.
+- 382 vorhandene CORE-Kandidaten vollständig geprüft.
+- Davon inhaltlich passend: 81.
+- Davon inhaltlich unpassend: 301.
+- Technisch als gemeinsames 1500×1000-Master für Hero + Beitrag geeignet: 0/382.
+- Grund: kein vorhandener CORE-Kandidat erreicht 1000 px Höhe; Hochskalieren ist laut Bildvertrag verboten.
+- 81 passende CORE-Motive: High-Res-Quelle suchen oder neu erzeugen.
+- 301 unpassende CORE-Motive: neu erzeugen.
+- Noch offene NO_CORE-Fälle: 466.
 
-## Bilder
-Verbindlicher Vertrag:
-- 1 Hobby = 1 finales Masterbild;
-- dasselbe Bild für Hero und Beitrag;
-- 3:2;
-- finales WebP 1500×1000;
-- Dubletten/Fehlversuche zählen nicht.
+Zentrale Dateien im Plugin:
+- `data/hobby-image-production-status-v1.json`
+- `data/core-image-audit-v1.json`
 
-Stand:
-- DONE/verifiziert: 14;
-- OPEN: 848;
-- davon 382 vorhandene CORE-Bilder einzeln prüfen;
-- davon 466 neue Master erzeugen.
+## Weiterhin unverändert
 
-Zentrale Autorität:
-`BILDSTATUS_CURRENT.md`
-
-Vollständige 862er Liste:
-Library `/Hobby Depot/Hobbyregister/HOBBYREGISTER_BILDSTATUS_CURRENT.json`
-und im Plugin `data/hobby-image-production-status-v1.json`.
+- 862/862 Hobbys.
+- 57/57 Traits.
+- 862 statische Artikel.
+- Hobby-Depot-Breiten-/Containerstand aus bestandenem 1.2.10-Stamm.
+- 14 vorhandene finale Masterbilder.
 
 ## QA
-- 14/14 finale Master physisch im Plugin;
-- pro DONE-Hobby genau eine ausgewählte Datei;
-- alle 14 Master als WebP 1500×1000;
-- 862/862 Datenzeilen im Bildstatus;
-- 862/862 Detailseiten lokal gerendert;
-- Registerindex PASS;
-- PHP-Lint PASS;
+
+- 382/382 CORE-Zuordnungen geprüft.
+- 212/212 unterschiedliche CORE-Dateien visuell geprüft.
+- 862/862 Detailseiten PASS.
+- Registerübersicht PASS.
+- PHP-Lint PASS.
 - Fresh-Unpack PASS.
 
+Evidence:
+`EVIDENCE_1.2.13_CORE_IMAGE_AUDIT.md`
+
 ## EXAKT EINE NEXT ACTION
-**1.2.12 über den bestehenden Ordner `hd-hobbyregister-core` kopieren/überschreiben. Danach mit anderen Hobbyregister-/Glossararbeiten fortfahren; die Bildproduktion kann später exakt aus `BILDSTATUS_CURRENT` wieder aufgenommen werden.**
+
+**Live nur Plugin 1.2.13 über den bestehenden Ordner kopieren/überschreiben; danach keine weitere Bildproduktion, bis die nächste Arbeitsstufe bewusst gestartet wird.**
