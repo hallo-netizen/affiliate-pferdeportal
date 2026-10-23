@@ -3,7 +3,7 @@
   "original_version": "0.1.63",
   "user_list_count": 55,
   "completed_in_source_count": 8,
-  "open_reported_items": 47,
+  "open_reported_items": 48,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -79,11 +79,13 @@
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
   "next": "Die verbleibenden 47 Nutzerbeanstandungen einschließlich Mehrfachgruppen und Hero-Problemen nur mit eindeutig passenden scharfen individuellen Fotos beheben, ohne Collagen, ohne Zwischen-ZIP. R2/R3 je betroffenem Motiv gezielt prüfen.",
   "evidence": "Original-ZIP 0.1.63 SHA256 934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635. Lokales Mapping enthält exakt acht gezielte Foto-Neuzuordnungen bei 265 unveränderten Themenidentitäten. Drei heutige Neubindungen per Einzelansicht, physischer Datei, Auflösung und Area-Sibling-Identität geprüft; 0 neue Dateien, 0 aus Collagen ausgeschnittene Fotoassets, kein Plugin-ZIP.",
-  "warning": "Nur isolierte Arbeitsdatei, WordPress-Liveanzeige nicht bestätigt. 47 gemeldete Einträge plus Gruppen und Heros noch offen. Mehrere neue/weitere Fotothemen besitzen unter 0.1.63 keine gesicherte adäquate Ersatzszene. Nicht blind generische Fotos binden.",
+  "warning": "Acht lokale Bild-Neuzuordnungen entsprechen NICHT acht geschlossenen Nutzerbeanstandungen. 'Fernüberwachung – ALLE falsch' umfasst vier Motive; davon ist nur eines neu zugeordnet, die gesamte Gruppenbeanstandung bleibt offen. 48 von 55 Nutzerbeanstandungen somit noch offen. Dazu offene tatsächliche WordPress-Liveabnahme und Hero-Abweichungen; keine Collagen, kein Zwischenplugin.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
     "reason": "Foto zeigt ein überflutetes Haus, keinen Dachablauf; vorherige Erfolgsbehauptung zurückgenommen",
     "status": "OFFEN"
-  }
+  },
+  "user_complaints_locally_addressed": 7,
+  "partial_group_mappings": 1
 }
