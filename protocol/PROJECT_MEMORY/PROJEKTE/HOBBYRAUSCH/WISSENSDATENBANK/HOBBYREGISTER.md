@@ -17,6 +17,8 @@ Persistente Basisdaten:
 Fachverträge:
 - `HOBBY_EIGENSCHAFTEN_SCHEMA_1_2_DELTA.md`
 - `HOBBYREGISTER_SCHEMA_F_V1.md`
+- `HOBBYREGISTER_TEXTREGELN_V1.md`
+- `HOBBYREGISTER_REFERENZTRANSFER_V1.md`
 
 Exakte Schema-1.2-Erweiterungswerte und Audit:
 - `EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_01.json`
@@ -53,3 +55,17 @@ Diese Dateien sind **keine zweite Hobby-Datenbank**: Sie enthalten ausschließli
 
 HD-007 `HOBBYREGISTER CORE` bleibt read-only Projektion.
 Bei einer neuen physischen Registerrevision muss HD-007 explizit gegen deren neuen Register-SHA erzeugt und geprüft werden. Stille Divergenz ist verboten.
+
+
+## Frontend-Prototyp 2026-10-23
+
+HD-007 1.1.0 setzt das Registerprinzip read-only um:
+- 862 Hobbys in einer Übersicht;
+- Suche + A–Z;
+- acht abgeleitete Hobbygruppen;
+- 16 Karten je Seite;
+- virtuelle Detailprofile ohne zweite WordPress-Hobbykopie;
+- gleiche Gruppe + ähnliche Hobbys;
+- Volltextproben Buchbinden und Slacklining.
+
+Bis die SEO-Owner-Matrix je Hobby vorliegt, sind die virtuellen Detailprofile im Prototyp noindex,follow. Das ist ausschließlich ein sicherer Prototypzustand, keine finale Voll-noindex-Regel.
