@@ -3,51 +3,36 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.50.728 FOOTER-LOGO-STAGE1 LOCAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **1.50.729 FULL REPLACEMENT LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
-Fach-Current:
-`../../../DESIGN/CURRENT_STATE.md`
-
-## Kandidat 1.50.728
-
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.728_UPDATE_FOOTER_LOGO_KLEIN.zip`
+`HOBBY_DEPOT_VOLLERSATZ_20261023_HD003_1.50.729_HD007_1.1.5.zip`
 
 SHA-256:
-`b2aa6d5d042e3df8426505cfb59bcafc118b812681aebcd5b4a008b366fc831f`
+`f735f41fa1740904e13428350bef04cb89c34664fbb6e8ff1014b8581b6de046`
 
-Größe:
-587,338 Bytes.
-
-UPDATE, kein Full-Plugin.
-
-Hauptordner:
+HD-003 liegt darin vollständig unter:
 `affiliate-portal-template-kit/`
 
-## Footer
+## Wesentliche Korrektur
 
-Gegenüber 1.50.727:
-- Logo kleiner;
-- Hauptlogo vollständig sichtbar, nicht mehr am unteren Rand abgeschnitten;
-- kleine Unterzeile des Originalassets weiterhin ausgeblendet;
-- kein zusätzlicher Claimtext.
-
-Unverändert:
-- Wissen: Hobbymagazin · Hobbyfinder · Hobbyregister · Glossar;
-- Service: Werben im Hobby Depot · Preise · Kontakt · FAQ;
-- Magazin-Dreierzeile Hobbyfinder · Hobbyregister · Glossar.
+- kein Delta mehr;
+- Footer-Logo mit eigenem physisch zugeschnittenem Asset ohne Unterzeile;
+- keine CSS-Abschneidung des Hauptlogos;
+- Runtime-Marker `HD-003 RUNTIME 1.50.729`;
+- Magazin-/Footer-Navigation aus dem vorherigen Stand bleibt erhalten.
 
 QA:
-- PHP-Lint PASS;
-- Fresh-Unpack PASS;
-- Footer-Assetpfad erhalten.
+- Full-Unpack PASS;
+- Footer-Render PASS;
+- PHP-Lint PASS.
 
 Evidence:
-`EVIDENCE_1.50.728.md`
+`../../EVIDENCE_FULL_REPLACEMENT_20261023.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**Gemeinsames Update-Bundle `HOBBY_DEPOT_AKTUELL_20261023_AENDERUNGSSTUFE1.zip` entpacken und beide vorhandenen Pluginordner per Cyberduck unter `wp-content/plugins/` zusammenführen.**
+**Die beiden bestehenden Pluginordner serverseitig vollständig durch die Ordner aus dem Vollersatz ersetzen und danach Live-Readback durchführen.**
