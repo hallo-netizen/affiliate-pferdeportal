@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **MAGAZIN LIVE-SCREENSHOT AUS 1.50.717 / 1.50.720 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **MAGAZIN LIVE VOR 1.50.721 BEANSTANDET / 1.50.721 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -11,70 +11,64 @@ Plugin-ID:
 Fach-Current:
 `../../../DESIGN/CURRENT_STATE.md`
 
-## Live
+## Live-Hinweis
 
-Der Nutzer hat den vorherigen Magazin-Kandidaten eingespielt; der neue Magazin-Hub ist im Nutzer-Screenshot sichtbar.
-Kein vollständiger technischer Live-PASS/Versions-Readback behauptet.
+Der Nutzer hat den bisherigen Magazinstand live geprüft und zwei konkrete Fehler beanstandet:
+- Werbeflächen waren nicht zwischen den 12 Themenkacheln angeordnet;
+- auf den Magazin-Zielseiten fehlten die erwarteten Hero-Bilder.
 
-1.50.718 ist verworfen und darf nicht verwendet werden.
+1.50.718 bleibt verworfen.
+1.50.720 ist durch 1.50.721 ersetzt.
 
-## Lokaler Kandidat 1.50.720 – UPDATE
+## Lokaler Kandidat 1.50.721 – UPDATE
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.720_UPDATE_MAGAZIN_HUB_UND_ZIELSEITEN_HARDPASS.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.721_UPDATE_MAGAZIN_BANNER_ZIELSEITEN_FIX.zip`
 
 SHA-256:
-`4d0dc99d9abf056517ee845a0fda3f2260e39a740ef55427fc3d6951bcb8ee90`
+`c81f278aec7b4f80a57045269877f5df760d7e97cc4d2bace07e79e1320a93bd`
 
 Größe:
-584,713 Bytes.
+2,103,461 Bytes.
 
-Enthält unter dem unveränderten Hauptordner `affiliate-portal-template-kit/` exakt:
-- `pferde-template-kit.php`
-- `includes/class-hobby-depot-profile-v150709.php`
+Hauptordner unverändert:
+`affiliate-portal-template-kit/`
 
-## Magazin
+### Magazin-Startseite
+- 12 echte Editorial-Zielseiten bleiben unverändert;
+- 6 Kacheln → Journal-Banner volle Breite → 3 Kacheln → direkte Werbefläche volle Breite → 3 Kacheln;
+- keine Themenkachel wird für Werbung geopfert;
+- Root-Beitragsbereich dupliziert den Journal-Banner nicht.
 
-Autoritativ geprüft:
-Die 12 Magazin-Oberziele sind vorhandene Editorial-`page`-Objekte unter dem Magazin-Hub, keine zweite Kategorie-Taxonomie.
+### Zielseiten
+- Kachelbild und Hero greifen auf dieselbe Definition zu;
+- alle 12 verwendeten Bilder werden im UPDATE physisch mitgeliefert;
+- Brush-Asset wird mitgeliefert;
+- Owned-Template plus Content-Fallback sichern die Ausgabe ab;
+- Hero;
+- grüne Schreibschrift/Brush;
+- kurzer Hero-Text;
+- grün hinterlegter Lead;
+- nativer Aufklapper;
+- vorhandene Magazin-Unteransichten/Beiträge und Monetarisierung bleiben erhalten.
 
-1.50.720:
-- Magazin-Startseite im bestehenden Hobby-Depot-Hubdesign;
-- bestehender Hub2-Hero-Vertrag inkl. grüner Schreibschrift, Brush/Bogen und weichem Bildübergang;
-- korrekte natürliche Bildmaße;
-- 12 Bildkacheln;
-- Kachelbild = Hero-Bild der jeweiligen Zielseite;
-- alle 12 vorhandenen Zielseiten gebunden;
-- Zielseiten mit Hero, grün hinterlegtem Lead und Aufklapper;
-- je Zielseite 150–200 Wörter nach bestehendem Textvertrag;
-- zentrale Editorial-Registry wird read-only für Seiten/Unteransichten bevorzugt;
-- Hobbyfinder behält den bestehenden Funnel unter dem einheitlichen Magazin-Hero.
-
-Monetarisierung:
-- `journal_banner` zwischen zwei Beitragsreihen;
-- `journal_product_1–3`;
-- Affiliate-Artikel/Kaufberatung;
-- bestehendes Rental-Placement `journal`.
-
-Erhalten:
-- Footer 4 Spalten;
-- PB one öffnet neues Fenster;
-- FAQ 6 Bereiche / 30 Fragen.
+### Paket
+16 Dateien:
+- 2 PHP;
+- 1 Content-Template;
+- 12 Magazinbilder;
+- 1 Brush.
 
 QA:
 - PHP-Lint PASS;
-- ZIP exakt 2 Dateien;
 - Fresh-Unpack PASS;
-- 12/12 Slugs;
-- 12/12 Bildassets;
-- 12/12 Texte 150–200 Wörter;
-- Registry-/Fallback-Prüfung PASS.
+- 12/12 Bilder physisch vorhanden;
+- exemplarischer Zielseiten-Render vollständig PASS;
+- Bannerpositionen im Kachelfluss PASS.
 
 Evidence:
-`EVIDENCE_1.50.720.md`
-
-1.50.720 ist **nicht live abgenommen**.
+`EVIDENCE_1.50.721.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.720-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen. Danach Magazin-Startseite und zwei bis drei Magazin-Zielseiten live visuell prüfen.**
+**1.50.721 entpacken und den Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen. Danach Magazin-Startseite sowie eine Zielseite live prüfen.**
