@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-22
-STATUS: **HOBBYREGISTER 862/862 / SCHEMA 1.2 MIT 57 TRAITS VOLLSTÄNDIG KLASSIFIZIERT / VOLL-AUDIT PASS / SCHEMA F V1 FEST**
+STAND: 2026-10-23
+STATUS: **HOBBYREGISTER 862/862 / SCHEMA 1.2 MIT 57 TRAITS VOLLSTÄNDIG GEBUNDEN / 862 SCHEMA-F-TEXTE LOCAL HARD PASS**
 
 ## Rolle
 
@@ -32,71 +32,56 @@ Design-/Referenztransfer:
 - **862/862** Hobbys mit **4/4** Kurzprofilfeldern;
 - Aliasnamen erzeugen keine zweite Hobbyidentität.
 
-Die bisherigen 54 Traits wurden bei der Erweiterung nicht verändert.
+## Schema 1.2
 
-## Schema 1.2 – Abschluss 2026-10-22
+Neu:
+- `equipment_maintenance`;
+- `strength_need`;
+- `coordination_balance_need`.
 
-Neu vollständig klassifiziert:
-1. `equipment_maintenance` – Pflege / Wartung der Ausrüstung;
-2. `strength_need` – Kraftbedarf;
-3. `coordination_balance_need` – Koordination / Balance inkl. Hand-Auge-/Ganzkörperkoordination.
+Audit:
+- 2.586/2.586 neue Einzelwerte;
+- 46.548 alte Traitwerte unverändert;
+- 0 ungültige neue Werte;
+- 0 UNKNOWN bei neuen Traits.
 
-Ergebnis:
-- neue Einzelwerte: **2.586/2.586**;
-- alte Traitwerte geprüft: **46.548**;
-- alte Traitwerte verändert: **0**;
-- eindeutige Registry-IDs: **PASS**;
-- 57/57 Traits je Hobby: **PASS**;
-- ungültige neue Werte: **0**;
-- UNKNOWN bei neuen Traits: **0**;
-- Gesamtprüfung: **PASS**.
-
-Vollaudit:
-`EVIDENCE/HOBBY_SCHEMA12_FULL_862_AUDIT_20261022.json`
-
-Exakte neue Traitwerte:
-- `EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_01.json` – 216 Hobbys;
-- `EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_02.json` – 216 Hobbys;
-- `EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_03.json` – 216 Hobbys;
-- `EVIDENCE/HOBBY_SCHEMA12_VALUES_PART_04.json` – 214 Hobbys.
-
-GitHub-Readback:
-- **862** Zeilen;
-- **862** eindeutige Registry-IDs;
-- **0** Dubletten;
-- alle zulässigen Wertemengen vollständig geprüft.
-
-Bestehender 54er Register-SHA:
+Basis-54-SHA:
 `4deb4be2b235db450d58f02485ec40e780fc2671f9dfc6edf8cbbba0f738af78`
 
-Geprüfter zusammengeführter 57er Kandidat:
-`05fc1c5d7ab9282a43de2b43372c378f629fac4b71c98b78fe1bec00a4f46179`
+HD-007-1.2.0-Runtime-SHA:
+`d0d424485e6dbcf65a8332da732d2e342b279f0a1311919149ba8dfcdb93604a`
 
-Geprüftes Schema 1.2:
-`c4e2dc719ee7b017f0da9de08bfa2251124cbbb61894dad42afad1ce758ba68a`
+## Schema-F-Produktion 2026-10-23
 
-## Schema F V1
+HD-007 1.2.0 bindet nun die vollständige 57er Laufzeitprojektion.
 
-Schema F ist fest und gilt für alle 862 Hobbys.
-Die 57 Merkmale werden als strukturierte Grundlage für verständlichen Fließtext, Vergleichsblock und ähnliche Hobbys verwendet; keine 57-Felder-Wand.
+Texte:
+- 862/862 statisch eingefroren;
+- exakt 8 Abschnitte je Hobby;
+- 57/57 Trait-IDs im Produktionsgenerator berücksichtigt;
+- Wortumfang 656–761 Wörter;
+- keine Kurzprofil-Fallbacks.
 
-## Hobbyfinder
+## Bilder
 
-Der bestehende 8-Schritte-Hauptfunnel bleibt unverändert funktionsfähig.
-Die drei neuen Traits stehen zusätzlich für Feinfilter, Vergleich und Schema F zur Verfügung.
+Zentraler Bildplan:
+`/Hobby Depot/Hobby-Klassifikation/HOBBY_PORTRAIT_BILDPLAN_V1.json`
 
-## Frontend-Prototyp 2026-10-23
+Aktuelle Runtime-Darstellung:
+- 862/862 Profile haben eine Bildzuordnung;
+- 328 exakt kuratierte vorhandene Hobby-/CORE-Fotos;
+- 534 fachlich passende vorhandene Themen-Masterbilder.
 
-HD-007 1.1.1 ist lokal als read-only Registerprototyp HARD PASS:
-- vollständige 862er Übersicht;
-- Suche/A–Z/acht Icon-Gruppen;
-- virtuelle Profile;
-- 862/862 Detailprofile mit acht nichtleeren Schema-F-Fließtextabschnitten;
-- Buchbinden und Slacklining bleiben die redaktionell ausformulierten Musterprofile.
+Die Themen-Masterbilder ersetzen nicht die im Bildplan vorgesehenen dedizierten neuen Portraitmaster.
 
-Die physische Runtime-Basis bleibt hash-identisch bei 54 Basistraits. Die drei Schema-1.2-Zusatztraits werden nur dort ausgegeben, wo sie in HD-007 bereits explizit gebunden sind; keine Werte werden geraten.
-Vor dem finalen 57/57-Rollout muss HD-007 die vollständige geprüfte Schema-1.2-Laufzeitprojektion binden.
+## SEO
+
+Die SEO-Owner-Regel bleibt:
+- dedizierte gleichartige CORE-Seite gewinnt;
+- ohne entsprechende CORE-Seite darf das Registerprofil SEO-Owner werden;
+- Owner-Matrix 862/862 bleibt noch offen;
+- bis dahin Prototypschutz noindex,follow.
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-007 1.1.1 live auf Register-Startseite und mehrere normale Detailprofile abnehmen. Danach die vollständige 57er Laufzeitprojektion binden und die 862 Hobbys gegen CORE-/Hauptseiten auf SEO-Owner mappen; im Zweifel gewinnt CORE.**
+**HD-007 1.2.0 live abnehmen. Danach die 862er CORE-vs-REGISTER-Owner-Matrix erstellen und separat entscheiden, welche der im Bildplan vorgesehenen dedizierten Portraitmaster noch neu erzeugt werden.**
