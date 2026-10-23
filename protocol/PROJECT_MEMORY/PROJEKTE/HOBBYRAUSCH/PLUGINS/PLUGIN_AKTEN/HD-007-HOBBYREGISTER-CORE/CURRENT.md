@@ -3,58 +3,49 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.2.6 KOMPILIERTE DATENREPARATUR / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.2.7 STABILE REPARATUR LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.6_FULL_REPARIERT_KOMPILIERT.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.7_FULL_STABIL_REPARIERT.zip`
 
 SHA-256:
-`875b498b2437697c96c35fb7d6899cbb5c7f9af4c66b7c79a4e56d3c92fd9a0c`
+`1019a7b0df6f268caba9acdeaa296a2a12817e1264db43024adaec369517dc7c`
 
 ## Reparatur
 
-Der wiederkehrende Fehler „Hobby nicht gefunden / Artikel weg“ wird am Datenladepfad beseitigt.
+1.2.6 wird vollständig verworfen.
+Rückkehr zum stabilen JSON-Laufzeitsystem.
 
-1.2.6 lädt primär kompiliert:
-- 862 Registerdatensätze;
-- 862 Artikel;
-- 862 Bildzuordnungen;
-- Traitschema.
+Zusätzlich behoben:
+Mehrfach geladene Hobbyregister-Kopien dürfen keine Klassen-/Funktions-Neudeklaration und damit keinen PHP-Fatal mehr verursachen.
 
-Die großen JSON-Dateien sind nur noch Fallback.
-
-## Weiterhin enthalten
+## Inhalt
 
 - 862/862 Hobbys;
 - 57/57 Traits;
-- 862 statische Texte mit je 8 Abschnitten;
-- aktuelle Register-/Profiloberfläche;
+- 862 statische Artikel mit je 8 Abschnitten;
+- 862 Bildzuordnungen;
 - `Selbe Hobbygruppe`;
-- kein Detail-Banner unten.
+- kein Detailbanner unten;
+- Portalbreite `min(calc(100% - 72px),1440px)`.
 
 ## QA
 
-Fresh-Unpack:
-- genau eine Pluginwurzel `hd-hobbyregister-core/`;
-- ready PASS;
-- count 862;
-- 862/862 Profile gerendert;
+- Fresh-Unpack PASS;
+- PHP-Lint 4/4 PASS;
+- 862/862 Slug-/Artikelprüfung PASS;
+- 8 heterogene Detail-Vollrenders PASS;
 - Registerindex PASS;
-- PHP-Lint PASS.
-
-Harter Failover:
-- gesamter JSON-`data/`-Ordner entfernt;
-- ready PASS;
-- count 862;
-- 862/862 Profile gerendert;
-- Registerindex PASS.
+- Doppelplugin alt -> neu PASS;
+- Doppelplugin neu -> alt PASS;
+- kein PHP-Fatal in beiden Lade-Reihenfolgen.
 
 Evidence:
-`EVIDENCE_1.2.6.md`
+`EVIDENCE_1.2.7.md`
 
 ## EXAKT EINE NEXT ACTION
 
-**1.2.6 über den bestehenden aktiven Ordner `hd-hobbyregister-core` kopieren/überschreiben und Registerstart plus ein Detailprofil live prüfen.**
+**1.2.7 über den bestehenden aktiven Ordner `hd-hobbyregister-core` kopieren/überschreiben und zuerst prüfen, dass die Website wieder normal lädt; anschließend Registerstart und ein Detailprofil öffnen.**
