@@ -3,44 +3,61 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **VOLLERSATZ HD-003 1.50.729 + HD-007 1.1.5 LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.729 / HD-007 1.2.0 57 TRAITS + 862 TEXTE LOCAL HARD PASS / LIVE-ABNAHME OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
-## Aktueller belastbarer Kandidat
+## HD-003
 
-`HOBBY_DEPOT_VOLLERSATZ_20261023_HD003_1.50.729_HD007_1.1.5.zip`
+Footer-/Magazinstand bleibt 1.50.729.
+
+## HD-007 1.2.0
+
+Artefakt:
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.0_FULL_57TRAITS_862TEXTE.zip`
 
 SHA-256:
-`f735f41fa1740904e13428350bef04cb89c34664fbb6e8ff1014b8581b6de046`
+`f73e9ae3d09f2339659b3cbfabab98f99758f9513c124e01017481dd401801a1`
 
-Größe:
-28,936,964 Bytes.
+### Breite
 
-Enthält zwei vollständige bestehende Pluginwurzeln:
-- `affiliate-portal-template-kit/`;
-- `hd-hobbyregister-core/`.
+Register und Detailprofile:
+**max. 1180px** statt 1440px.
 
-Kein Delta, kein drittes Plugin.
+### Profil-Hero
 
-## Korrigiert
+- kein langer Kurzprofil-Untertext mehr;
+- kurzer gruppenspezifischer Claim;
+- grüne Schreibschrift;
+- bestehender gelber Brush-Unterstrich;
+- Hobbytitel bleibt Hauptüberschrift.
 
-- Footer-Logo kleiner/vollständig, Unterzeile physisch entfernt;
-- Breadcrumb exakt nach Hobby-Depot-Standard statt falschem Astra-Hook;
-- Auf einen Blick nur Icon + Wert;
-- gleiche Hobbygruppe und ähnliche Hobbys disjunkt;
-- Buttons gleiches helles Petrol;
-- Gruppenüberschrift zweizeilig.
+### Inhalte
+
+- 862/862 Detailprofile;
+- 57/57 Traits;
+- 8 Fließtextabschnitte je Hobby;
+- 656–761 Wörter.
+
+### Bilder
+
+Sichtbare Abdeckung 862/862:
+- 328 exakt kuratierte Hobbyfotos;
+- 534 fachlich zugeordnete Themen-Masterbilder.
+
+Keine Behauptung, dass diese 534 Themenbilder bereits neu erzeugte individuelle Portraitmaster sind.
 
 ## QA
 
-- Fresh-Unpack 954 Dateien;
-- 14/14 PHP-Lint PASS;
-- HD-007 4 E2E-Profile PASS;
-- 862/862 Relationsaudit PASS;
-- HD-003 Footer-Render PASS.
+- 862 × 57 PASS;
+- 46.548 Altwerte unverändert;
+- 862 × 8 Texte PASS;
+- 862 Bildzuordnungen PASS;
+- 7 E2E-Profile PASS;
+- Breite/Claim/Brush PASS;
+- PHP-Lint/Fresh-Unpack PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-**Bestehende zwei Pluginordner vollständig ersetzen, nicht mergen; danach Live-Readback auf Version/HTML-Marker und sichtbare Änderungen.**
+**HD-007 1.2.0 über den bestehenden aktiven Ordner kopieren/überschreiben und Registerstart plus mehrere Detailprofile live prüfen.**
