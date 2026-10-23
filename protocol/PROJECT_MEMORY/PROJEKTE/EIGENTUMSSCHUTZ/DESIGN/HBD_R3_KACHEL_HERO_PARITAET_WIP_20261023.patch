@@ -1,0 +1,14 @@
+--- a/hab-bewahr-design-vorschau/includes/area-design-prototype.php
++++ b/hab-bewahr-design-vorschau/includes/area-design-prototype.php
+@@ -121,7 +121,11 @@
+     if(!hbdp_area_is_level2($area))return '';
+     $spec=hbdp_area_spec_for($area);
+     if(!$spec)return '';
++    // R3 must use exactly the R2 card's photo allocation. R2 reserves its
++    // own hero identity before assigning any child pictures.
++    $hero=hbdp_area_matching_world_photo($area);
+     $used=array();
++    if(hbdp_area_photo_ok($hero))$used[hbdp_area_photo_identity($hero)]=true;
+     foreach(hbdp_children($area['id']) as $child){
+         if(hbdp_nav_url($child)==='')continue;
+         $photo=hbdp_area_child_photo($child,$spec,'',$used);
