@@ -2,8 +2,8 @@
   "rolle": "NUR_WIP_BELEGE_KEIN_ZWEITER_CURRENT_KEIN_PLUGIN",
   "original_version": "0.1.63",
   "user_list_count": 55,
-  "completed_in_source_count": 5,
-  "open_reported_items": 50,
+  "completed_in_source_count": 8,
+  "open_reported_items": 47,
   "new_plugin_generated": false,
   "collages_added": false,
   "wp_live_test": false,
@@ -42,6 +42,30 @@
       "topic": "Alarmreaktionen & Vertretung",
       "old_photo": "area-selbstschutzmittel-personenalarm.webp",
       "new_photo": "topic-alarmkommunikation-und-uebertragung.webp"
+    },
+    {
+      "world": "Wasser & Feuchtigkeit",
+      "area": "Dach & Gebäudehülle gegen Feuchtigkeit",
+      "topic": "Dacheindeckung",
+      "old_photo": "magazin-wetter.webp",
+      "new_photo": "insurance-bauleistungsversicherung.webp",
+      "proof": "Scharfes Einzelfoto mit sichtbar gedecktem Ziegeldach auf Wohnhaus; kein gleiches Motiv in der betroffenen Bereichsübersicht"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Sturm & Hagel",
+      "topic": "Dach, Fenster & PV",
+      "old_photo": "magazin-wetter.webp",
+      "new_photo": "topic-pv-monitoring.webp",
+      "proof": "Scharfes Hausfoto mit Solarmodulen auf Dach und Fensterfront; nicht als Sturmschaden-Foto ausgegeben"
+    },
+    {
+      "world": "Wetter & Naturgefahren",
+      "area": "Hitze & Trockenheit",
+      "topic": "Wohnmobil bei Hitze",
+      "old_photo": "scene-camping.webp",
+      "new_photo": "insurance-wohnmobilversicherung.webp",
+      "proof": "Sommerliches Wohnmobil mit ausgefahrener Markise bei Sonne statt altem Regenmotiv"
     }
   ],
   "critical_r2_hero_photo_collisions": [
@@ -53,9 +77,9 @@
     "Smarte Türsteuerung"
   ],
   "rule": "Keine Collagen, keine Bilddublette innerhalb der Hubseite, keine ZIP/Plugin-Ausgabe bevor alle Nutzerbeanstandungen repariert; R2-Kachel und R3-Hero identisch",
-  "next": "Die offenen 50 Beanstandungen samt Gruppenmotiven und fehlerhaften R1/R2/R3-Hero-Fotos mit passenden einzelnen Fotos beheben, ohne Collagen/Blindtausch und ohne Zwischen-Plugin; anschließend gezielter Kurztest.",
-  "evidence": "Aus physischer ZIP 0.1.63 neu entpackte und isoliert geänderte JSON: exakt 5 Foto-Mapping-Deltas, kein anderer Fachinhalt geändert, alle fünf Dateien physisch und einzeln visuell geprüft; keine neue oder aus Collage geschnittene Datei; im R2-Identitätsvergleich keine durch diese fünf hinzugekommene identische Themen-Fotodopplung.",
-  "warning": "Diese fünf Zuordnungen sind nur lokal in isolierter Quelle nachgewiesen, keine Live-Abnahme. R3-Kachel/Herogleichheit auf WordPress bleibt offen.",
+  "next": "Die verbleibenden 47 Nutzerbeanstandungen einschließlich Mehrfachgruppen und Hero-Problemen nur mit eindeutig passenden scharfen individuellen Fotos beheben, ohne Collagen, ohne Zwischen-ZIP. R2/R3 je betroffenem Motiv gezielt prüfen.",
+  "evidence": "Original-ZIP 0.1.63 SHA256 934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635. Lokales Mapping enthält exakt acht gezielte Foto-Neuzuordnungen bei 265 unveränderten Themenidentitäten. Drei heutige Neubindungen per Einzelansicht, physischer Datei, Auflösung und Area-Sibling-Identität geprüft; 0 neue Dateien, 0 aus Collagen ausgeschnittene Fotoassets, kein Plugin-ZIP.",
+  "warning": "Nur isolierte Arbeitsdatei, WordPress-Liveanzeige nicht bestätigt. 47 gemeldete Einträge plus Gruppen und Heros noch offen. Mehrere neue/weitere Fotothemen besitzen unter 0.1.63 keine gesicherte adäquate Ersatzszene. Nicht blind generische Fotos binden.",
   "disqualified_previous_change": {
     "topic": "Dachabläufe & Notentwässerung",
     "previous_candidate": "new-rain.webp",
