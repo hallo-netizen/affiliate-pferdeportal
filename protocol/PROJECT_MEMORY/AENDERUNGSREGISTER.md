@@ -1959,3 +1959,10 @@ BELEGTER STAND:
 
 REGEL:
 Neue Hobbys und neue Eigenschaften werden ausschließlich im zentralen Hobbyregister/-schema ergänzt. Finder, Design, Magazin und SEO-Views dürfen keine eigene persistente Hobbykopie aufbauen.
+
+
+## HOBBYRAUSCH-HD007-20261023-CORE-BILDPRUEFUNG – 382 vorhandene Kandidaten geprüft
+WAS: Auf Basis des stabilen HD-007-Stamms wurden ohne neue Bilderzeugung alle 382 verbleibenden CORE_TARGET-Zuordnungen einzeln geprüft. 212 unterschiedliche Dateien wurden visuell bewertet. Ergebnis: 81 Motive semantisch passend, 301 unpassend; technisch 0/382 als verbindliches gemeinsames 1500×1000-Hero+Beitrag-Master ohne Hochskalieren geeignet. 14 bereits erzeugte/verifizierte Master bleiben DONE. Pluginstand 1.2.13 enthält den vollständigen Audit und die aktualisierte 862er Bildstatusliste.
+WARUM: Vor weiterer Generierung musste klar getrennt werden, welche vorhandenen Bilder fachlich wiederverwendbar sind und welche neu erzeugt werden müssen. Gleichzeitig darf kein zu kleines Bild durch Hochskalieren als final ausgegeben werden.
+BEWEIS: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/EVIDENCE_1.2.13_CORE_IMAGE_AUDIT.md`; ZIP SHA-256 `67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`; lokale 862/862-Renderprüfung, Registerindex, PHP-Lint und Fresh-Unpack PASS.
+GRENZE: Kein LIVE-PASS für 1.2.13. Keine weitere Bildgenerierung in diesem Lauf. Isolierter GitHub-`CURRENT.zip`-Binärsync bleibt wegen Werkzeuggrenze offen; keine Ersatzdatei vortäuschen. Aktueller technischer Stand/NEXT ACTION ausschließlich aus der HD-007-`CURRENT.md`.
