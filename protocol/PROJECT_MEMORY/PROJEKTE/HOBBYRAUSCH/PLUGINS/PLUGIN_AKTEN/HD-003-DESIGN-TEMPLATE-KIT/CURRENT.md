@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE 1.50.711 / 1.50.717 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **MAGAZIN LIVE-SCREENSHOT AUS 1.50.717 / 1.50.720 UPDATE LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -13,70 +13,68 @@ Fach-Current:
 
 ## Live
 
-Aktiv und zuletzt belastbar:
-**1.50.711**.
+Der Nutzer hat den vorherigen Magazin-Kandidaten eingespielt; der neue Magazin-Hub ist im Nutzer-Screenshot sichtbar.
+Kein vollständiger technischer Live-PASS/Versions-Readback behauptet.
 
-## Lokaler Kandidat 1.50.717 – UPDATE
+1.50.718 ist verworfen und darf nicht verwendet werden.
+
+## Lokaler Kandidat 1.50.720 – UPDATE
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.717_UPDATE_MAGAZIN_STARTSEITE.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.720_UPDATE_MAGAZIN_HUB_UND_ZIELSEITEN_HARDPASS.zip`
 
 SHA-256:
-`8e03ce1e5915edd62901494362b70194ce09f971146dbcec424e927db1f46b59`
+`4d0dc99d9abf056517ee845a0fda3f2260e39a740ef55427fc3d6951bcb8ee90`
 
 Größe:
-577,238 Bytes.
+584,713 Bytes.
 
 Enthält unter dem unveränderten Hauptordner `affiliate-portal-template-kit/` exakt:
-- `pferde-template-kit.php`;
-- `includes/class-hobby-depot-profile-v150709.php`.
+- `pferde-template-kit.php`
+- `includes/class-hobby-depot-profile-v150709.php`
 
-## Magazin-Startseite
+## Magazin
 
-Die bestehende Seite `/magazin/` wird als eigene redaktionelle Hobby-Depot-Hubseite gerendert.
+Autoritativ geprüft:
+Die 12 Magazin-Oberziele sind vorhandene Editorial-`page`-Objekte unter dem Magazin-Hub, keine zweite Kategorie-Taxonomie.
 
-Verwendete 12 bestehende Magazin-Ziele:
-Hobbyfinder; Alter & Lebensphasen; Geschichte & Herkunft; Hobby-Porträts; Hobby-Ideen & Inspiration; Menschen & Geschichten; Neue Hobbys & Trends; Saison, drinnen & draußen; Ungewöhnliche & skurrile Hobbys; Vergleiche & Alternativen; Wissen & Glossar; Zeit, Budget & Platz.
-
-Keine neue Magazin-Kategorie angelegt.
-
-Design:
-- eigenes Magazin-Hero;
+1.50.720:
+- Magazin-Startseite im bestehenden Hobby-Depot-Hubdesign;
+- bestehender Hub2-Hero-Vertrag inkl. grüner Schreibschrift, Brush/Bogen und weichem Bildübergang;
+- korrekte natürliche Bildmaße;
 - 12 Bildkacheln;
-- gleiche Farb-/Typo-/Kartenlogik wie Hobby Depot;
-- responsive 3 / 2 / 2 Spalten;
-- kein altes Pferde-Journal-Layout.
+- Kachelbild = Hero-Bild der jeweiligen Zielseite;
+- alle 12 vorhandenen Zielseiten gebunden;
+- Zielseiten mit Hero, grün hinterlegtem Lead und Aufklapper;
+- je Zielseite 150–200 Wörter nach bestehendem Textvertrag;
+- zentrale Editorial-Registry wird read-only für Seiten/Unteransichten bevorzugt;
+- Hobbyfinder behält den bestehenden Funnel unter dem einheitlichen Magazin-Hero.
 
 Monetarisierung:
-- bestehender Slot `journal_banner`;
-- bestehende Slots `journal_product_1–3`;
-- eigener Bereich für erkannte/markierte Affiliate-Artikel;
-- bestehende Rental-Werbefläche Placement `journal`;
-- keine neue Affiliate-Architektur.
+- `journal_banner` zwischen zwei Beitragsreihen;
+- `journal_product_1–3`;
+- Affiliate-Artikel/Kaufberatung;
+- bestehendes Rental-Placement `journal`.
 
-1.50.715 bleibt vollständig enthalten:
-- FAQ-Seite;
-- PB one öffnet in neuem Fenster;
-- Footeränderungen.
+Erhalten:
+- Footer 4 Spalten;
+- PB one öffnet neues Fenster;
+- FAQ 6 Bereiche / 30 Fragen.
 
-Lokale QA:
+QA:
 - PHP-Lint PASS;
 - ZIP exakt 2 Dateien;
 - Fresh-Unpack PASS;
-- 13/13 verwendete Bildassets vorhanden;
-- Magazin-Sonderroute nur für Slug `magazin`;
-- Banner/Produkte/Affiliate-Artikel integriert.
+- 12/12 Slugs;
+- 12/12 Bildassets;
+- 12/12 Texte 150–200 Wörter;
+- Registry-/Fallback-Prüfung PASS.
 
 Evidence:
-`EVIDENCE_1.50.717.md`
+`EVIDENCE_1.50.720.md`
 
-1.50.717 ist **nicht live**.
+1.50.720 ist **nicht live abgenommen**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.717-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen; die zwei enthaltenen Dateien überschreiben. Danach live ausschließlich Magazin-Startseite, FAQ, Footer/PB-one und Plugin-Version prüfen.**
-
-
-## 1.50.717 Routingkorrektur
-
-Die echte Magazinseite läuft unter `/journal/`. 1.50.716 hörte nur auf `magazin` und ließ `journal` zugleich als Service-Seite laufen. 1.50.717 korrigiert genau diese drei Routingstellen; Inhalt/Design/Slots bleiben unverändert.
+**1.50.720-UPDATE lokal entpacken und den enthaltenen Ordner `affiliate-portal-template-kit` per Cyberduck auf `wp-content/plugins/` ziehen/zusammenführen. Danach Magazin-Startseite und zwei bis drei Magazin-Zielseiten live visuell prüfen.**
