@@ -3,19 +3,19 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.2.0 / 57 TRAITS + 862 STATISCHE TEXTE LOCAL HARD PASS / LIVE-INSTALLATION OFFEN**
+STATUS: **1.2.1 LAYOUT/BILD/ÜBERSCHRIFT-FIX LOCAL HARD PASS / LIVE-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
 Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.0_FULL_57TRAITS_862TEXTE.zip`
+`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.1_FULL_LAYOUT_IMAGE_HEADING_FIX.zip`
 
 SHA-256:
-`f73e9ae3d09f2339659b3cbfabab98f99758f9513c124e01017481dd401801a1`
+`050e7f4a0611cd96adc8cdc4607f6be22a14b848d1f3e97653311231440978f3`
 
 Größe:
-1,722,774 Bytes.
+1,722,789 Bytes.
 
 Hauptordner:
 `hd-hobbyregister-core/`
@@ -65,6 +65,13 @@ Der zentrale Portrait-Bildplan bleibt dafür maßgeblich.
 Evidence:
 `EVIDENCE_1.2.0.md`
 
+## 1.2.1 Korrektur
+
+- Register/Breadcrumb auf 1050px Portalbreite;
+- Überschrift „Zur gleichen Hobbygruppe“ gekürzt auf „Gleiche Hobbygruppe“;
+- beanstandete Geocaching-Hero-Zuordnung von Kletter-/Seilmotiv auf Outdoor-Master korrigiert;
+- 57-Trait- und 862-Text-Stand aus 1.2.0 unverändert erhalten.
+
 ## EXAKT EINE NEXT ACTION
 
-**Den vollständigen Ordner `hd-hobbyregister-core` aus 1.2.0 über den bestehenden aktiven Pluginordner kopieren/überschreiben, ohne ihn vorher zu löschen. Danach Registerstart und mehrere Detailprofile live prüfen.**
+**Den vollständigen Ordner `hd-hobbyregister-core` aus 1.2.1 über den bestehenden aktiven Pluginordner kopieren/überschreiben, ohne ihn vorher zu löschen. Danach Registerbreite, Geocaching-Hero und Sidebar-Überschrift live prüfen.**
