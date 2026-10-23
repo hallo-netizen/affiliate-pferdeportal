@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-22
-STATUS: **FACHKONZEPT 2.8 AKTIV / HOBBYREGISTER-DARSTELLUNG + SEO-GRENZE IN ENTSCHEIDUNG**
+STATUS: **FACHKONZEPT 2.8 AKTIV / HOBBYREGISTER-DARSTELLUNG FEST / SEO-OWNER-REGEL FEST / OWNER-MAPPING OFFEN**
 
 ## Rolle
 
@@ -110,7 +110,7 @@ Jede Finder-Ergebniskarte zeigt zusätzlich zum Passungswert ein zentrales Kurzp
 Diese vier Felder sind **keine Filtermerkmale**. Sie dienen ausschließlich der schnellen Orientierung, besonders bei unbekannten oder ungewöhnlichen Hobbys. Stil: kurz, prägnant, konkret, ohne Füllwörter oder Werbesprache.
 
 Technischer Datenvertrag:
-- 54 zentrale Eigenschaften aus der Wissensdatenbank;
+- 57 zentrale Eigenschaften aus der Wissensdatenbank;
 - harte Ausschlüsse nur bei expliziter Nutzergrenze und belastbarer Klassifikation;
 - UNKNOWN oder low confidence darf nie zum Ausschluss führen;
 - weiche Wünsche verändern nur die Rangfolge.
@@ -131,16 +131,21 @@ Fest beschlossen:
 - alle Hobbyidentitäten gehören grundsätzlich in das Register, damit es als echtes Register funktioniert;
 - Einzelansichten folgen einem einheitlichen Schema-F-Steckbrief mit den vorhandenen zentralen Merkmalen/Kurzprofilen;
 - Nutzer sollen beim Recherchieren im Register auch innerhalb des Registers bleiben;
-- bestehende 862er-Hobbyidentitäten und 54 Traits bleiben die einzige Datenbasis; keine zweite Hobby-Datenbank.
+- bestehende 862er-Hobbyidentitäten und 57 Traits bleiben die einzige Datenbasis; keine zweite Hobby-Datenbank.
 
-Noch NICHT entschieden:
-- die endgültige SEO-Grenze zwischen bestehenden großen CORE-Hobbyseiten und Register-Steckbriefen;
-- insbesondere ist **nicht** beschlossen, alle Registerprofile auf noindex zu setzen;
-- diese Voll-noindex-Lösung wurde ausdrücklich verworfen, weil Nischenhobbys ohne bestehende Hauptseite (Beispiel: Extrembügeln) über ihre Registerseite ranken können sollen;
-- ebenfalls nicht beschlossen ist eine pauschale Doppelindexierung aller Registerprofile.
+SEO-Owner-Regel fest beschlossen:
+- pro Hobby höchstens eine Seite, die Google ernsthaft angeboten bekommt;
+- existiert eine dedizierte CORE-/Hauptseite mit im Kern derselben Hobby-/Suchintention, gewinnt CORE;
+- das Registerprofil bleibt für Nutzer vollständig erreichbar, wird in diesem Fall Google-seitig unterdrückt;
+- existiert keine dedizierte gleichartige CORE-Seite, darf das Registerprofil SEO-Owner sein und indexierbar werden;
+- breite Eltern-/Hauptwelten unterdrücken nicht automatisch jedes Nischenhobby;
+- bei echter Unsicherheit gewinnt konservativ CORE;
+- keine pauschale Doppelindexierung;
+- keine pauschale finale Voll-noindex-Regel.
 
-Ziel der offenen Entscheidung:
-**eine einfache, nachhaltige Regel, die Nischenprofile indexierbar lässt, aber bei Hobbys mit bestehender starker Hauptseite Kannibalisierung und inhaltliche Doppelung verhindert.**
+Noch offen ist ausschließlich die **862er Owner-Zuordnung** nach dieser Regel.
+
+Während des Design-/Textprototyps bleiben Detailprofile vorsorglich noindex,follow. Dieser technische Schutz endet erst nach der Owner-Matrix und ist keine fachliche Endentscheidung.
 
 ## DataForSEO
 
@@ -155,4 +160,4 @@ Die operative, maschinenlesbare Zielstruktur und der echte aktuelle Blocker steh
 
 ## EXAKT EINE NEXT ACTION
 
-**Die SEO-/Inhaltsgrenze für Hobbyregister-Einzelprofile verbindlich festlegen: Nischenhobbys müssen ranken können; bestehende starke CORE-Hobbyseiten dürfen durch Registerprofile nicht kannibalisiert werden. Erst danach Registerseiten technisch bauen.**
+**Den bereits gebauten Hobbyregister-Prototyp mit zwei Schema-F-Textproben live abnehmen. Danach die 862er CORE-vs-REGISTER-Owner-Matrix nach der festgelegten Regel erstellen.**
