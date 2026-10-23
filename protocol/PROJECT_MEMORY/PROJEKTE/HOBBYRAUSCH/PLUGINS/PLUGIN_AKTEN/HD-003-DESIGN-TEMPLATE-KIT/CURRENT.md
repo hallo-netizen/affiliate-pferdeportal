@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **LIVE 1.50.711 / 1.50.714 DELTA LOKAL PASS / CYBERDUCK-INSTALLATION OFFEN**
+STATUS: **LIVE 1.50.711 / 1.50.715 DELTA LOKAL HARD PASS / CYBERDUCK-INSTALLATION OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -13,57 +13,52 @@ Fach-Current:
 
 ## Live
 
-Aktiv und nach Nutzer-Readback funktionsfähig:
+Aktiv und zuletzt belastbar:
 **1.50.711**.
 
-1.50.710 ist verworfen.
-
-## Lokaler Kandidat 1.50.714 – Delta
-
-Basis:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.712_FULL_SLIM30.zip`
+## Lokaler Kandidat 1.50.715 – Delta
 
 Artefakt:
-`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.714_DELTA_PBONE_NEUES_FENSTER.zip`
+`AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.715_DELTA_FAQ_PBONE.zip`
 
 SHA-256:
-`4d7e0c0a7087d6c365783bc9929244a7795389161945d1da99dd28c53b1a90d3`
+`2c6594ee4fae4d37cc9fa43a6e5183e190bcb86ae13db29c924346d73a2ae33a`
 
 Größe:
-570,882 Bytes.
+574,666 Bytes.
 
-Delta gegenüber 1.50.713:
-- `pferde-template-kit.php`: Version 1.50.714;
-- `includes/class-hobby-depot-profile-v150709.php`: PB-one-Link mit `target="_blank" rel="noopener noreferrer"`.
+Enthält exakt:
+- `pferde-template-kit.php`;
+- `includes/class-hobby-depot-profile-v150709.php`.
 
-Footer:
+Änderungen:
+- PB one öffnet in neuem Fenster mit sicherem `rel`;
+- vorhandene leere Seite `/faq/` erhält die vollständige FAQ-Darstellung;
+- 6 Themenbereiche / 30 Fragen;
+- native aufklappbare `details`-Elemente, kein JavaScript;
+- responsive FAQ-Gestaltung;
+- kurze Antworten in direkter Du-Ansprache;
+- FAQ-Meta-Description-Fallback.
+
+Footer aus 1.50.713 bleibt:
+- vier Spalten Rechtliches / Wissen / Service / Anzeigenmarkt;
 - Logo entfernt;
-- vier Spalten: Rechtliches / Wissen / Service / Anzeigenmarkt;
-- Wissen = Hobbymagazin / FAQ / Glossar / Hobbyregister;
-- Service = Werben im Hobby Depot / Preise / Kontakt;
-- Links 14px, Überschriften 16.5px;
+- kleinere Linkschrift;
 - Copyright mittig unter dem Footer;
-- kleiner Hinweis `* mithilfe von KI erstellt`;
-- `© [Jahr] Hobby Depot | PB one.`;
-- PB one. → `https://p-b.one/`.
+- KI-Hinweis + PB one.
 
 Lokale QA:
-- kompletter PHP-Lint 10/10 PASS;
-- nur zwei bestehende Runtime-Dateien gegenüber 1.50.712 geändert;
-- keine Seitentemplates geändert;
-- Footer Positiv-/Negativrender PASS;
-- ZIP/Fresh-Unpack PASS.
+- exakt 2 Dateien im ZIP;
+- PHP-Lint PASS;
+- Fresh-Unpack PASS;
+- FAQ-Render 6/6 Bereiche und 30/30 Fragen PASS;
+- PB-one-Neues-Fenster PASS.
 
 Evidence:
-`EVIDENCE_1.50.713.md`
+`EVIDENCE_1.50.715.md`
 
-## Installation
-
-Der WordPress-ZIP-Uploadweg bleibt wegen HTTP 413 unbrauchbar.
-Der Nutzer arbeitet deshalb über Cyberduck.
-
-1.50.714 ist **nicht live**.
+1.50.715 ist **nicht live**.
 
 ## EXAKT EINE NEXT ACTION
 
-**1.50.714-Delta lokal entpacken und nur die enthaltenen zwei Dateien in den vorhandenen Plugin-Ordner kopieren/überschreiben. Danach PB-one-Link + Plugin-Version live prüfen.**
+**1.50.715-Delta lokal entpacken und nur die zwei enthaltenen Dateien in `wp-content/plugins/affiliate-portal-template-kit/` an gleicher Stelle überschreiben. Danach live FAQ + PB-one-Link + Plugin-Version prüfen.**
