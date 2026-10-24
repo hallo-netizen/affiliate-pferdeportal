@@ -2,55 +2,47 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-23
-STATUS: **1.2.13 CORE-BILDPRÜFUNG ABGESCHLOSSEN / LOCAL HARD PASS / LIVE OFFEN**
+STAND: 2026-10-24
+STATUS: **1.2.15 / REGISTER-DESIGN + BEREICHSSUCHE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
 
-Artefakt:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.13_FULL_CORE_BILDPRUEFUNG.zip`
+Basis:
+**1.2.14** war der tatsächliche jüngste Bildstand vor dieser Änderung.
+
+Aktuelles Bundle:
+`HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
 
 SHA-256:
-`67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`
+`581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
 
-## Bildstand
+Pluginroot:
+`hd-hobbyregister-core/`
 
-- Gesamt: 862 Hobbys.
-- Final DONE: 14 erzeugte/verifizierte Masterbilder.
-- 382 vorhandene CORE-Kandidaten vollständig geprüft.
-- Davon inhaltlich passend: 81.
-- Davon inhaltlich unpassend: 301.
-- Technisch als gemeinsames 1500×1000-Master für Hero + Beitrag geeignet: 0/382.
-- Grund: kein vorhandener CORE-Kandidat erreicht 1000 px Höhe; Hochskalieren ist laut Bildvertrag verboten.
-- 81 passende CORE-Motive: High-Res-Quelle suchen oder neu erzeugen.
-- 301 unpassende CORE-Motive: neu erzeugen.
-- Noch offene NO_CORE-Fälle: 466.
+## Datenstand unverändert
+- 862/862 Hobbys;
+- 57/57 Traits;
+- 862 statische Artikel, jeweils 8 Abschnitte;
+- 24 final verifizierte Masterbilder aus 1.2.14 bleiben erhalten;
+- Bildstatus-/Auditdateien bleiben erhalten.
 
-Zentrale Dateien im Plugin:
-- `data/hobby-image-production-status-v1.json`
-- `data/core-image-audit-v1.json`
-
-## Weiterhin unverändert
-
-- 862/862 Hobbys.
-- 57/57 Traits.
-- 862 statische Artikel.
-- Hobby-Depot-Breiten-/Containerstand aus bestandenem 1.2.10-Stamm.
-- 14 vorhandene finale Masterbilder.
+## 1.2.15
+- Register-Banner vom bisherigen Platz verschoben: direkt zwischen Suche/A–Z und „Hobbygruppen entdecken“;
+- derselbe Bannerplatz gilt automatisch für Übersicht, Suche, Buchstabe, Hobbygruppe und Pagination;
+- Registerübersicht und Einzelprofil erhalten die Schreibschrift mit demselben Brush-Asset;
+- Einzelprofil-Hero: 238 px Desktop / 190 px mobil, damit identisch flach wie die Registerübersicht;
+- Bereichssuche mit AJAX-Vorschau ab 2 Zeichen, max. 8 Treffer;
+- Suchquelle ausschließlich die 862 Hobbyregister-Datensätze; keine Seiten, Magazinbeiträge oder Glossarbegriffe.
 
 ## QA
-
-- 382/382 CORE-Zuordnungen geprüft.
-- 212/212 unterschiedliche CORE-Dateien visuell geprüft.
-- 862/862 Detailseiten PASS.
-- Registerübersicht PASS.
-- PHP-Lint PASS.
-- Fresh-Unpack PASS.
-
-Evidence:
-`EVIDENCE_1.2.13_CORE_IMAGE_AUDIT.md`
+- echter 862er Datenbestand geladen: PASS;
+- Register-Render: Suche → Banner → Hobbygruppen Reihenfolge PASS;
+- Einzelprofil-Render inkl. Brush/Claim und flacher Hero-Höhe PASS;
+- serverseitiger AJAX-Endpunkt: nur Register-URLs PASS;
+- Client-Suchskript mit simuliertem Fetch: PASS;
+- Fresh-Unpack bytegleich zum getesteten Stand;
+- Gesamtbundle PHP 22/22 PASS.
 
 ## EXAKT EINE NEXT ACTION
-
-**Live nur Plugin 1.2.13 über den bestehenden Ordner kopieren/überschreiben; danach keine weitere Bildproduktion, bis die nächste Arbeitsstufe bewusst gestartet wird.**
+**Nur den kanonischen Serverordner `hd-hobbyregister-core` mit dem Bundle-Ordner überschreiben. Keine `-2`/`-3`-Kopie neu erzeugen.**
