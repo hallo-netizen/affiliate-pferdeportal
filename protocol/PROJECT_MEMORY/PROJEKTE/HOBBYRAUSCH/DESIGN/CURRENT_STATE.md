@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.731 / HD-007 1.2.16 / REGISTER-SUCHFELD BREITENFIX / LIVE OFFEN**
+STATUS: **HD-003 1.50.732 / HOBBYFINDER-BANNER + HAUPTSUCHE 4 BEREICHE / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -87,3 +87,16 @@ Aktuelle technische Autorität:
 - Browser-Geometrietest 1600 / 1024 / 760 / 390 px PASS.
 - Artefakt: `HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.16_SEARCH_WIDTH_HARDPASS.zip`
 - SHA-256: `3e5f46b1c2a7183df1b49d987ee8712c7c059eda18507de31de6d2a782cab78a`
+
+
+## 24.10.2026 – HD-003 1.50.732 Hobbyfinder + Hauptsuche
+- Hobbyfinder-Block „Passende Themen“ aus dem oberen Ablauf entfernt und nach den eigentlichen Finder verschoben.
+- Der Block ist redaktionell, nicht Ergebnis des Finder-Scores: Registry-`journal_cat`-Kinder, Fallback `alleine` / `gruppe` / `zu-zweit`.
+- Oben steht stattdessen die vorhandene Magazin-Bannerfläche `journal_banner`.
+- Topnav „Zur Startseite“ / „Neu starten“ bleibt unverändert.
+- globale Hauptsuche jetzt als eigene AJAX-Vorschau analog zum Pferdeatelier-Prinzip.
+- Hobby-Depot-Viererstruktur: Hobbys · Magazin · Glossar · Anzeigen.
+- gruppierte Ergebnis-Vollseite mit identischer Viererstruktur.
+- Bereichssuchen in Hobbyregister/Glossar bleiben davon getrennt.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.732_HOBBYFINDER_BANNER_MAINSEARCH_4BEREICHE_HARDPASS.zip`
+- SHA-256: `67082fab2becb01fc44d69caa059cbd69327d8ceef74308248556a5bea4fd516`
