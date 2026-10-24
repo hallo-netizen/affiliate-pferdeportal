@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.19 / 300 BEGRIFFE / A–Z + THEMENCOVERAGE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.20 / FINALER LÜCKENSCHLUSS / 308 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
 
 SHA-256:
-`d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
+`e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -72,8 +72,8 @@ Fach-Current:
 - Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
 - Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
 - Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
-- SHA-256: `d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
+- SHA-256: `e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
 
 
 ## 24.10.2026 – 1.0.18 AJAX-Fix + 200 Begriffe
@@ -86,9 +86,22 @@ Fach-Current:
 - Wortbereich 151–178 Wörter.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
 - Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
-- SHA-256: `d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
+- SHA-256: `e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
 
 
 ## 1.0.19
 300 Begriffe; A–Z vollständig; alle acht Hobbywelten mindestens 31 Begriffe; 12/12 Batches PASS; Cyberduck-Ordner bleibt `hobby-depot-glossar`.
+
+
+## 24.10.2026 – 1.0.20 finaler Lückenschluss
+- Endbestand: 308 Glossarbegriffe.
+- Mindestabdeckung A–Z: mindestens 5 Begriffe je Buchstabe.
+- Mindestabdeckung Hobbywelten: mindestens 30 Begriffe je Welt; kleinste Welt Tiere = 31.
+- Ergänzt ausschließlich 8 Lückenbegriffe: Jute, Quadrant, Xenolith, Xylem, Yagi-Antenne, Yaw, Yarn Over, Yarn Weight.
+- echte HDG_Manager::validate_batch()-Routine: 13/13 Batches PASS, 308/308 eindeutige IDs und Slugs.
+- Fachtexte 151–178 Wörter.
+- AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
+- PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
+- SHA-256: `e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
