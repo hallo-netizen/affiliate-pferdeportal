@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.736 / SERVICE-SEITEN ABSTAND + PREISE/DISCLAIMER HARD PASS / LIVE OFFEN**
+STATUS: **1.50.737 / SERVICE-BODY VOLLE BREITE + PREISE/DISCLAIMER RHYTHMUS HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.736_SERVICE_PAGES_LAYOUT_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.737_SERVICE_BODY_FULLWIDTH_HARDPASS.zip`
 
 SHA-256:
-`9f395cc4481e758a675536ab592ac2e686a53d2513ad729f92a22e6c7a678a38`
+`7784fa3ae6451edc9b3cca4f5d5d29db6f61aee05084161511e2aa8de56c3de2`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -130,4 +130,17 @@ QA:
 - Disclaimer: importierte `strong + br`-Zwischenüberschriften werden gezielt als Blocküberschriften formatiert; 9/9 erkannt.
 - Test mit dem echten übernommenen Footer-/Kubio-Inhalt durchgeführt.
 - Chromium-Fixture: Tabellen 3/3 volle Inhaltsbreite; Preis-Zwischenüberschriften 6 erkannt; Disclaimer-Zwischenüberschriften 9 erkannt.
+- PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936 Dateien bytegleich.
+
+
+## 1.50.737 – Service-Body volle Breite
+- Ursache aus Live-Screenshots: gerenderte Kubio-Zwischencontainer blieben schmal, weil 1.50.736 zu stark auf bestimmte Klassen zielte.
+- Korrektur ohne Kubio-Klassennamen-Abhängigkeit: jede Containerkette, die echten Text/Überschriften/Listen/Tabellen trägt, wird bis zur `entry-content`-Achse auf 100 % aufgeweitet.
+- gesamte Service-Seiten-Textachse entspricht damit exakt der Hero-/Body-Achse.
+- Preise: alle drei Tabellen 100 % Inhaltsbreite, gleiche linke Kante wie Hero/Body.
+- Zwischenüberschriften werden serverseitig markiert, nicht erst im Browser erraten.
+- Preise: 6 relevante Zwischenüberschriften, jeweils 30 px Abstand oben / 18 px unten.
+- Disclaimer: 9/9 Fett-Zwischenüberschriften, jeweils 30 px oben / 18 px unten.
+- bestehendes Hero-Bild bleibt unverändert.
+- sichtbarer Chromium-Test mit echtem importiertem Preise-/Disclaimer-Inhalt und absichtlich künstlich auf 68/76/82 % verschachtelten Containern: alle Wrapper, Tabellen und Überschriften auf volle 1200-px-Achse gezogen, PASS.
 - PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936 Dateien bytegleich.
