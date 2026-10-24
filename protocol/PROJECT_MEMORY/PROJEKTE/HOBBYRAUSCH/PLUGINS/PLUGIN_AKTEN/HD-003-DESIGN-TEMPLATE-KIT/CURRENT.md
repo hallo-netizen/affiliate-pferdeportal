@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.741 / SERVICE-MINIMALFIX / 1.50.740-TEMPLATE-UMBAU ZURÜCKGEROLLT / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.742 / HIVEPRESS-ROUTEN + SEO-TITEL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.741_SERVICE_MINIMAL_FIX_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.742_HIVEPRESS_ROUTES_SEO_HARDPASS.zip`
 
 SHA-256:
-`26a3ae779971eeba18f11151157c439b89d4b0a124b0f11dc9d3f849d16e7d3c`
+`5db7bedc1fece020f00c01ae36964639add0decb055275491526786e697c9bf1`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -225,3 +225,31 @@ Prüfung:
   - Zwischenüberschriften Desktop 15,5 px = Fließtext, mobil 15 px, Gewicht 700;
 - finales ZIP Fresh-Unpack bytegleich;
 - PHP 11/11 PASS; ZIP CRC PASS; 936 Dateien.
+
+
+## 1.50.742 – Anzeigenmarkt funktional an HivePress-Router gebunden
+- Footer-Anzeigenmarkt verwendet keine importierten festen URLs mehr.
+- "Alle Anzeigen" -> HivePress `listings_view_page`.
+- "Meine Anzeigen" -> HivePress `listings_edit_page`.
+- "Mein Konto" -> HivePress `user_account_page`.
+- "Konto abmelden" -> sicherer WordPress-Logout mit Rückleitung zur Startseite.
+- ausgeloggt: Anzeigenmarkt-Spalte zeigt "Alle Anzeigen" + "Mein Konto"; private Links werden nicht sinnlos angeboten.
+- Fallback für "Alle Anzeigen": konfigurierte HivePress-Seite `hp_page_listings`, danach `hp_listing`-Archiv, erst zuletzt historische `/anzeigenmarkt/`.
+- Seitentitel nach HivePress-Router:
+  - Anzeigenmarkt für Hobbys | Hobby Depot
+  - Meine Anzeigen | Hobby Depot
+  - Mein Konto | Hobby Depot
+  - Anzeige aufgeben | Hobby Depot
+- öffentliche Anzeigenübersicht erhält eigene Meta-Description.
+- keine Designänderung am Anzeigenmarkt in diesem Schritt.
+
+QA:
+- offizieller HivePress-Routervertrag verwendet;
+- Mock-Router Positivtest für alle relevanten Routen PASS;
+- eingeloggter Footer: 4/4 Ziele PASS;
+- ausgeloggter Footer: 2/2 Ziele PASS;
+- Fallback ohne HivePress-Router auf konfigurierte Listings-Seite PASS;
+- gegenüber 1.50.741 nur zwei bestehende Dateien geändert;
+- PHP 11/11 PASS;
+- ZIP CRC PASS;
+- Fresh-Unpack 936/936 Dateien bytegleich.
