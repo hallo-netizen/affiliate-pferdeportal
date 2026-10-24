@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.733 / HAUPTSUCHE VIEWPORT-CLAMP / HD-007 1.2.16 / LIVE OFFEN**
+STATUS: **HD-003 1.50.734 / HAUPTSUCHE FLYOUT + ERGEBNISSEITE HARD PASS / HD-007 1.2.16 / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -108,3 +108,12 @@ Aktuelle technische Autorität:
 - Vier-Bereich-Suchlogik unverändert.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.733_MAINSEARCH_VIEWPORT_FIX_HARDPASS.zip`
 - SHA-256: `d0268782c88e17c5665ee71ae38d564c6600c01e7a6da38e8ce48151f612a9b2`
+
+
+## 24.10.2026 – HD-003 1.50.734 Suchergebnisseite
+- Flyout funktionierte, Enter-Ergebnisseite nicht.
+- Ursache: Ergebnisseiten-Renderer gab HTML zurück, das Template gab diesen Rückgabewert nicht aus.
+- Jetzt echte gruppierte Seite für Teilbegriffe wie „Holz“ mit denselben vier Bereichen wie das Flyout.
+- Routing der eigenen Hauptsuche zusätzlich unabhängig von `is_search()` gehärtet.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.734_SEARCH_RESULTS_PAGE_HARDPASS.zip`
+- SHA-256: `dd275eb536801e7a34bec1aac338fe6c6a6473bd3edf21d93516eba4a9307543`
