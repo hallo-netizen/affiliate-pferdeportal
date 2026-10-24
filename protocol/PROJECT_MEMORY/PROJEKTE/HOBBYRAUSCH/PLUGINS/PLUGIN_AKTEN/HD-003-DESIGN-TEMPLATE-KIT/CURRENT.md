@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.739 / IMPORTIERTE SERVICE-SEITEN STATISCH NORMALISIERT / HARD PASS / LIVE OFFEN**
+STATUS: **1.50.740 / EIGENES SERVICE-TEMPLATE / BODY + TABELLEN VOLLBREITE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.739_STATIC_IMPORTED_SERVICE_NORMALIZATION_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.740_SERVICE_TEMPLATE_BODY_TABLES_HARDPASS.zip`
 
 SHA-256:
-`8fb77e66ff92fb8e48d649ba50274a2298e6651e8c7a0299f09789ec5f0c83e1`
+`133db11baf242e9f9a8d9cc17d8fe482bd13fb50af78c16dec49d67445de4825`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -177,3 +177,21 @@ QA:
   - 6 Preis-Zwischenüberschriften 30 px oben / 18 px unten;
   - 9 Disclaimer-Zwischenüberschriften 30 px oben / 18 px unten.
 - PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936/936 Dateien bytegleich.
+
+
+## 1.50.740 – Service-Seiten aus Theme-/Import-Huelle geloest
+- Live zeigte nach 1.50.739 weiterhin schmale Text-/Tabellenachsen.
+- Ursache: die Server-Normalisierung kam an, aber die Seiten liefen weiterhin durch das normale Theme-Seitentemplate und damit durch dessen schmale Inhaltsachse.
+- Korrektur: eigene schlanke Plugin-Vorlage `templates/hobby-depot-service-v150740.php` fuer alle Service-/Footer-Seiten.
+- Hero und Service-Body verwenden exakt dieselbe Formel/Aussenachse.
+- Zwischenueberschriften werden nicht mehr als h2/h3 erzeugt, sondern als normale Textabsätze mit `strong`: gleiche Schriftgroesse wie Fliesstext, nur fett.
+- Preise: 3/3 Tabellen erhalten volle Service-Body-Breite bereits direkt im gerenderten HTML plus CSS.
+- Tabellen linksbuendig; keine Theme-/Import-Huelle kann die Breite mehr reduzieren.
+- Frisch entpacktes finales ZIP mit echtem importiertem Preise-/Disclaimer-Inhalt geprueft.
+- Geometrie Preise bei 1600: Hero/Main/3 Tabellen jeweils x=200, Breite=1200.
+- Geometrie bei 1100: jeweils x=36, Breite=1028.
+- Geometrie bei 760: jeweils x=12, Breite=736.
+- Geometrie bei 390: jeweils x=12, Breite=366.
+- Zwischenueberschriften Preise 6/6 und Disclaimer 9/9: 15.5 px = Fliesstext, Gewicht 700, 30 px oben / 18 px unten.
+- keine h2/h3-Umwandlung im normalisierten Service-Inhalt.
+- PHP 12/12 PASS; ZIP CRC PASS; Fresh-Unpack 937/937 Dateien bytegleich.
