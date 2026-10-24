@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.734 / HAUPTSUCHE ERGEBNISSEITE HARD PASS / LIVE OFFEN**
+STATUS: **1.50.735 / SERVICE-SEITEN EINHEITLICH / PREISE + DISCLAIMER BEREINIGT / LOCAL PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.734_SEARCH_RESULTS_PAGE_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.735_SERVICE_PAGES_DESIGN_LOCALPASS.zip`
 
 SHA-256:
-`dd275eb536801e7a34bec1aac338fe6c6a6473bd3edf21d93516eba4a9307543`
+`105a806d132aac186313c3e95e87e2791dfe9a31926d2924d4f4553a78d6045a`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -85,3 +85,35 @@ Pluginroot im Bundle:
 - Ohne `hd_header_search` wird keine fremde Suche gekapert.
 - Fresh-Unpack: 936 Dateien Source↔ZIP bytegleich.
 - PHP 11/11 PASS; ZIP CRC PASS.
+
+
+## 1.50.735 – Footer-/Service-Seiten
+Betroffene Seitentypen:
+- Impressum
+- Disclaimer
+- Datenschutz
+- Werbebedingungen / Werb- & Anzeigebedingungen
+- Werben / Werbung im Hobby Depot
+- Preise
+- Kontakt
+- FAQ
+
+Änderungen:
+- ein einheitlicher Service-Hero für alle Seiten;
+- dasselbe bereits vorhandene Asset `hero-masters-v150684/alltagsobjekte.webp` wird wiederverwendet;
+- kein grüner Kicker „Hobby Depot“ mehr;
+- kein Rahmen um den Seitentitel;
+- altes Theme-/Astra-Titelduplikat wird auf diesen Seiten ausgeblendet;
+- Preise: Tabellen und ihre Kubio-/Block-Wrapper werden auf volle Inhaltsbreite gesetzt;
+- Preise: Tabellenzellen, Tabellenkopf und Abstände vereinheitlicht;
+- Preise + Disclaimer: semantische Zwischenüberschriften und alleinstehende Fett-Zeilen erhalten klaren Absatz oberhalb/unterhalb;
+- bestehende Inhalte bleiben unangetastet.
+
+QA:
+- alle Ziel-Slugs als Service-Seite erkannt;
+- vorhandenes Hero-Asset: 1600×587 WebP, ca. 100 KB;
+- PHP 11/11 PASS;
+- CSS-Klammerprüfung PASS;
+- ZIP CRC PASS;
+- Fresh-Unpack Source↔ZIP bytegleich, 936 Dateien;
+- lokaler Chromium-Harness konnte wegen Umgebungsblockade lokaler URLs nicht ausgeführt werden; deshalb bewusst LOCAL PASS, Live-Sichtprüfung offen.
