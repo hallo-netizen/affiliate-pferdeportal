@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.742 / HIVEPRESS-ROUTEN FUNKTIONAL / ANZEIGENMARKT-DESIGN ALS NÄCHSTES**
+STATUS: **HD-003 1.50.743 / ANZEIGENMARKT DESIGN ENTWURF 1 / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -204,3 +204,12 @@ Aktuelle technische Autorität:
 - Design des Anzeigenmarktes bewusst noch nicht verändert.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.742_HIVEPRESS_ROUTES_SEO_HARDPASS.zip`
 - SHA-256: `5db7bedc1fece020f00c01ae36964639add0decb055275491526786e697c9bf1`
+
+
+## 24.10.2026 – Anzeigenmarkt Entwurf 1
+- Root: Überschrift, vereinheitlichte HivePress-Suche, 8 Bildkacheln, Banner.
+- Unterebenen: Icon-Kacheln für direkte Unterkategorien.
+- vorhandene Fotos statt neuer Bildproduktion.
+- HivePress-Funktion bleibt Autorität; Design liegt in HD-003.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
+- SHA-256: `89ced22ad1411a45fca07eca2fa7107681be6e484c2e02c6ae7fa2fcee5a6b76`
