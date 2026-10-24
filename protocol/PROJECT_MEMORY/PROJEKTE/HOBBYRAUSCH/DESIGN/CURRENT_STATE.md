@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.738 / SERVICE-SEITEN KUBIO-RUNTIME HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.739 / SERVICE-SEITEN STATISCH NORMALISIERT / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -162,3 +162,14 @@ Aktuelle technische Autorität:
 - Fresh-Unpack des finalen ZIP identisch erneut simuliert: PASS.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.738_KUBIO_RUNTIME_SERVICE_FIX_HARDPASS.zip`
 - SHA-256: `dae578a359f29ff64ee58e82732b7731278f4283da65fa405c1fad979bef138c`
+
+
+## 24.10.2026 – HD-003 1.50.739
+- Wichtige Korrektur: Kubio ist im Hobby Depot nicht installiert; nur die importierten Seiten stammen aus Kubio.
+- 1.50.738-Runtime-Annahme verworfen.
+- Service-Seiten werden jetzt ausschließlich serverseitig/statisch bereinigt.
+- Disclaimer: 9 echte sichtbare Abschnittsüberschriften.
+- Preise: 6 Abschnittsüberschriften + 3 Tabellen auf voller Body-/Hero-Breite.
+- kein Service-MutationObserver / keine Timer.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.739_STATIC_IMPORTED_SERVICE_NORMALIZATION_HARDPASS.zip`
+- SHA-256: `8fb77e66ff92fb8e48d649ba50274a2298e6651e8c7a0299f09789ec5f0c83e1`
