@@ -5335,3 +5335,62 @@ OFFEN/BLOCKED in diesem Chat: Die vorhandenen GitHub-Werkzeuge können den lokal
 
 CURRENT:
 `PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`
+
+
+---
+
+## PU-20261024-001 – HD-003 1.50.730–1.50.744 Portal-/Anzeigenmarkt-Fortschreibung
+
+PLUGIN-ID:
+`HD-003-DESIGN-TEMPLATE-KIT`
+
+ART:
+Fortschreibung des bestehenden Hobby-Depot-Designplugins; keine zweite Pluginlinie.
+
+FACHBÜRO:
+HOBBYRAUSCH / DESIGN.
+
+VON / AUF:
+1.50.729 → deklarierter Current 1.50.744 über 1.50.730–1.50.743.
+
+WAS / WARUM:
+- zentrale Body-Achse auf 1200 px vereinheitlicht, Header/Footer bewusst unverändert;
+- Magazin→Glossar-Link korrigiert;
+- Hobbyfinder-Banner und Hauptsuche mit vier getrennten Bereichen umgesetzt;
+- Hauptsuch-Flyout viewport-sicher; Enter/Teilbegriffe auf eigener gruppierter Ergebnisseite repariert;
+- Service-/Footer-Seiten vereinheitlicht; mehrere Fehlversuche 1.50.735–1.50.740 dokumentiert, insbesondere falsche Kubio-Runtime-Annahme und unnötiger Service-Template-Umbau; 1.50.741 rollte den Architekturumbau zurück und stellte den KISS-Weg wieder her;
+- 1.50.742 bindet Footer-Anzeigenlinks an echte HivePress-Routen und setzt Anzeigenmarkt-/Konto-SEO-Titel;
+- 1.50.743 ist der erste Anzeigenmarkt-Designentwurf mit Root-Bildkacheln, reiner Anzeigen-Suche, Banner und späteren Icon-Unterebenen;
+- 1.50.744 ist in der Plugin-/Design-Current als Root-only-Fertigstellung dokumentiert: Breadcrumb → Banner → eigener Anzeigenmarkt-Hero → reine Anzeigen-Suche → 8 Fotokacheln → „Aktuelle Anzeigen“ → nativer HivePress-Anzeigenbestand; native doppelte Root-Oberfläche ausgeblendet; zweite Ebene unverändert.
+
+LIVE-BELEGE AUS DIESEM CHAT:
+- zentrale Breiten-/Servicekorrekturen wurden durch Nutzerscreenshots mehrfach widerlegt und nachgezogen; 1.50.741 wurde vom Nutzer anschließend als passend bestätigt;
+- 1.50.743 wurde live sichtbar und vom Nutzer als grundsätzlich vielversprechend bewertet, gleichzeitig wurde die doppelte native HivePress-Root-Oberfläche sichtbar beanstandet;
+- für 1.50.744 liegt in der autoritativen Current nur LOCAL-HARD-PASS/LIVE-OFFEN vor; kein Live-PASS behaupten.
+
+FEHLER-/ROLLBACKKETTE:
+- 1.50.738: falsche Annahme einer aktiven Kubio-Runtime; verworfen, weil Kubio im Hobby Depot nicht installiert ist;
+- 1.50.740: unnötige eigene Service-Seitenschablone; als kritischer Architekturumbau verworfen;
+- 1.50.741: Rückkehr auf minimalen bestehenden Templateweg; Nutzer-Livebestätigung für die beanstandeten Service-Seiten.
+
+ARTEFAKTGRENZE 1.50.744:
+Autoritative Current nennt:
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.744_ANZEIGENMARKT_STARTSEITE_HARDPASS.zip`
+SHA-256:
+`72b048db7516640e19f4432aaf98f5d4fa6ca9cc2fd26964a421e2ac1eece6b8`
+
+Beim Abschluss-Frischecheck am 24.10.2026 waren die 1.50.744-ZIP-Bytes weder im aktuellen Arbeitscontainer noch als Conversation-Artefakt auffindbar. Deshalb konnten SHA/Fresh-Unpack nicht erneut verifiziert und der vorgeschriebene isolierte `CURRENT.zip`-Sync nicht nachgeholt werden. Keine Ersatz-/Pointer-ZIP vortäuschen.
+
+ISOLIERTE PLUGINABLAGE:
+`ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` weiterhin BLOCKED/FEHLEND; Manifest wird auf den aktuellen Blockerstand nachgezogen.
+
+POSITIV-/NEGATIVSTATUS:
+Die in den jeweiligen Evidence-/Current-Einträgen dokumentierten lokalen Prüfungen bleiben Historie. Für den Abschlussstatus gilt wegen fehlender 1.50.744-Bytes: kein neuer Hash-Reuse-PASS und kein Deployment-PASS.
+
+ROLLBACK:
+Letztes in diesem Chat physisch vorhandenes Releaseartefakt:
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`.
+Dies ist keine neue Current-Autorität und ersetzt 1.50.744 nicht; es ist nur der letzte aktuell materialisierte Stand.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
