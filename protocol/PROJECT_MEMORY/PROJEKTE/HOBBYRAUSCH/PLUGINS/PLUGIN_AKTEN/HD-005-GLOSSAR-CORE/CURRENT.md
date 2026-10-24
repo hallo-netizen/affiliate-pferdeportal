@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.0.16 / IMPORT- UND DATEN-HARDPASS / 100 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.17 / 150 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.16_IMPORT_DATEN_HARDPASS_100_BEGRIFFE.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.17_150_BEGRIFFE_HARDPASS.zip`
 
 SHA-256:
-`7f1697e62ac3a20da7d34e3d8fe9c75ee102eadbc764b2591e544114ccebebd5`
+`940d7b60768951c33adac4c05ee39808c7d8c630030190605e3ca4d039b55c8f`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -62,3 +62,15 @@ Fach-Current:
 - Finaler Wortbereich: 150–172 Wörter.
 - Übergangsregel Kurzdefinition → erster Fließtextsatz: PASS; maximale Überschneidung 0,3333 unter Blockiergrenze 0,35.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root hobby-depot-glossar/.
+
+
+## 24.10.2026 – 1.0.17 Produktionsbestand 150 Begriffe
+- 50 neue Glossarbegriffe (101–150) in zwei weiteren 25er-Batches.
+- Themen: Fotografie, Keramik, Holz, Pflanzen, Imkerei, Numismatik, Mikroskopie, Astronomie, Typografie, Elektronik.
+- echte HDG_Manager::validate_batch()-Routine: 6/6 Batches PASS, 150/150 Begriffe PASS.
+- globale Dublettenprüfung: 150 eindeutige external_id, 150 eindeutige Slugs.
+- Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
+- Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
+- Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CORE_1.0.17_150_BEGRIFFE_HARDPASS.zip`
+- SHA-256: `940d7b60768951c33adac4c05ee39808c7d8c630030190605e3ca4d039b55c8f`
