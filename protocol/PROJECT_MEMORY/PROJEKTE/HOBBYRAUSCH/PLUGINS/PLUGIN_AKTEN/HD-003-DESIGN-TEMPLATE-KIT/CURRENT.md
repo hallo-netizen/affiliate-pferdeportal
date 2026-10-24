@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.743 / ANZEIGENMARKT DESIGN ENTWURF 1 / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.744 / ANZEIGENMARKT-STARTSEITE FERTIG / ROOT-ONLY / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.744_ANZEIGENMARKT_STARTSEITE_HARDPASS.zip`
 
 SHA-256:
-`89ced22ad1411a45fca07eca2fa7107681be6e484c2e02c6ae7fa2fcee5a6b76`
+`72b048db7516640e19f4432aaf98f5d4fa6ca9cc2fd26964a421e2ac1eece6b8`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -277,3 +277,14 @@ QA:
 - PHP 11/11 PASS;
 - ZIP CRC PASS;
 - Fresh-Unpack 936/936 Dateien bytegleich.
+
+
+## 1.50.744 – Anzeigenmarkt Startseite abgeschlossen
+- ausschließlich Anzeigenmarkt-Root geändert; Kategorieebenen bleiben vorerst nativ.
+- Reihenfolge: Breadcrumb → Banner → eigener Anzeigenmarkt-Hero → reine Anzeigen-Suche → 8 Fotokacheln → Überschrift „Aktuelle Anzeigen“ → nativer HivePress-Anzeigenbestand.
+- eigener Hero mit `anzeigenmarkt-hero-v150744.webp` (Anzeigenblatt-Motiv, ca. 44 KB).
+- Suche postet direkt auf die HivePress-Listings-Route und trägt `post_type=hp_listing` plus `hd_market_search=1`; `pre_get_posts` erzwingt für diesen Marker ausschließlich veröffentlichte `hp_listing`.
+- doppelte native HivePress-Startoberfläche entfernt: Sidebar/Widgets, native doppelte Suche, native Kategorienliste und nativer Seitentitel auf Root ausgeblendet.
+- eigentlicher HivePress-Listingbestand bleibt sichtbar und wird auf volle 1200-px-Achse gezogen.
+- zweite Ebene bewusst noch nicht umgebaut.
+- PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 938 Dateien bytegleich.
