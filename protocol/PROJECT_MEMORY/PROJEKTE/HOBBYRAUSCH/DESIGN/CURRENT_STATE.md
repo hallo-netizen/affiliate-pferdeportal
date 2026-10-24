@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.731 / HD-007 1.2.15 / BEREICHSSUCHE + REGISTER-DESIGN HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.731 / HD-007 1.2.16 / REGISTER-SUCHFELD BREITENFIX / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -74,3 +74,16 @@ Aktuelle technische Autorität:
 - Daten unverändert: Hobbyregister 862 Hobbys / 57 Traits / 862 Artikel × 8 Abschnitte; Glossar 308 Begriffe / 13 Batches.
 - Bundle: `HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
 - SHA-256: `581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
+
+
+## 24.10.2026 – HD-007 1.2.16 Suchfeld-Breitenfix
+- Live-Screenshot zeigte: Suchzeile selbst war breit, das Input blieb jedoch auf Browser-Standardbreite.
+- Ursache: am Input fehlte `width:100%`; die Grid-Spalte war korrekt.
+- Korrektur ausschließlich im Register:
+  - Input 100 % der verfügbaren Suchspalte;
+  - sichtbares Label „Hobby suchen“ entfernt;
+  - Placeholder „Hobby suchen …“;
+  - AJAX-Vorschau unverändert.
+- Browser-Geometrietest 1600 / 1024 / 760 / 390 px PASS.
+- Artefakt: `HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.16_SEARCH_WIDTH_HARDPASS.zip`
+- SHA-256: `3e5f46b1c2a7183df1b49d987ee8712c7c059eda18507de31de6d2a782cab78a`
