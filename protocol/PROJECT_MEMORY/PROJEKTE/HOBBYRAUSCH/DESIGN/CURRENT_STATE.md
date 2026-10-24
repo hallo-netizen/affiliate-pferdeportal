@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.736 / SERVICE-SEITEN FEINKORREKTUR / LIVE OFFEN**
+STATUS: **HD-003 1.50.737 / SERVICE-SEITEN VOLLE BODY-BREITE / PREISE + DISCLAIMER HARD PASS / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -140,3 +140,14 @@ Aktuelle technische Autorität:
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.736_SERVICE_PAGES_LAYOUT_HARDPASS.zip`
 - SHA-256: `9f395cc4481e758a675536ab592ac2e686a53d2513ad729f92a22e6c7a678a38`
 - QA: PHP 11/11 PASS, ZIP/Fresh-Unpack 936 Dateien bytegleich.
+
+
+## 24.10.2026 – HD-003 1.50.737
+- Service-Seitentext jetzt auf exakt derselben Außenachse wie der Hero.
+- Kubio-Zwischencontainer werden unabhängig von ihren Klassennamen aufgeweitet.
+- Preise: 3/3 Tabellen volle Body-Breite und links bündig.
+- Preise: 6 Abschnittsüberschriften mit 30 px oben / 18 px unten.
+- Disclaimer: 9/9 Abschnittsüberschriften mit 30 px oben / 18 px unten.
+- Chromium-Hardpass mit absichtlich schmalen 68/76/82-%-Wrappern und echtem Importinhalt.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.737_SERVICE_BODY_FULLWIDTH_HARDPASS.zip`
+- SHA-256: `7784fa3ae6451edc9b3cca4f5d5d29db6f61aee05084161511e2aa8de56c3de2`
