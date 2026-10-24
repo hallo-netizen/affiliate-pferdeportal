@@ -1,0 +1,8 @@
+{
+  "contract": "PFERDEATELIER_TITELSTAPEL_V1",
+  "item_id": "40bf0322c0810b49dbdeea10",
+  "proposal_sha256": "8a007c08810b4af5bd77114a0f2e56e6afe94ed2da91f9df4c6632ab76bb3e6e",
+  "decision": "APPROVED",
+  "review_note": "DEMO: separater Prüfschritt, echte unabhängige semantische Abnahme nicht belegt",
+  "reviewer": "CHAT_REVIEWER"
+}
