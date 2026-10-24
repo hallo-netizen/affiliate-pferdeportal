@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.737 / SERVICE-SEITEN VOLLE BODY-BREITE / PREISE + DISCLAIMER HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.738 / SERVICE-SEITEN KUBIO-RUNTIME HARD PASS / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -151,3 +151,14 @@ Aktuelle technische Autorität:
 - Chromium-Hardpass mit absichtlich schmalen 68/76/82-%-Wrappern und echtem Importinhalt.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.737_SERVICE_BODY_FULLWIDTH_HARDPASS.zip`
 - SHA-256: `7784fa3ae6451edc9b3cca4f5d5d29db6f61aee05084161511e2aa8de56c3de2`
+
+
+## 24.10.2026 – HD-003 1.50.738
+- Ursache der wirkungslosen 1.50.736/737 lokal reproduziert: spätes Kubio-DOM überschreibt/ersetzt die zuvor geprüften Container.
+- neuer Runtime-Pass nach DOM-Aufbau statt statischem Klassenraten.
+- Test: echter importierter Preise-/Disclaimer-Inhalt nach 420 ms in 68/76/82-%-Wrapper eingesetzt.
+- Preise: 3 Tabellen = Hero-Breite; 6 Zwischenüberschriften 30/18 px.
+- Disclaimer: 9 Zwischenüberschriften 30/18 px; Textachse = Hero-Achse.
+- Fresh-Unpack des finalen ZIP identisch erneut simuliert: PASS.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.738_KUBIO_RUNTIME_SERVICE_FIX_HARDPASS.zip`
+- SHA-256: `dae578a359f29ff64ee58e82732b7731278f4283da65fa405c1fad979bef138c`
