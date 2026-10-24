@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.735 / SERVICE-SEITEN EINHEITLICH / PREISE + DISCLAIMER BEREINIGT / LOCAL PASS / LIVE OFFEN**
+STATUS: **1.50.736 / SERVICE-SEITEN ABSTAND + PREISE/DISCLAIMER HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.735_SERVICE_PAGES_DESIGN_LOCALPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.736_SERVICE_PAGES_LAYOUT_HARDPASS.zip`
 
 SHA-256:
-`105a806d132aac186313c3e95e87e2791dfe9a31926d2924d4f4553a78d6045a`
+`9f395cc4481e758a675536ab592ac2e686a53d2513ad729f92a22e6c7a678a38`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -117,3 +117,17 @@ QA:
 - ZIP CRC PASS;
 - Fresh-Unpack Source↔ZIP bytegleich, 936 Dateien;
 - lokaler Chromium-Harness konnte wegen Umgebungsblockade lokaler URLs nicht ausgeführt werden; deshalb bewusst LOCAL PASS, Live-Sichtprüfung offen.
+
+
+## 1.50.736 – Service-Seiten Feinkorrektur
+- Hero-Bild bleibt bestehen.
+- Abstand Hero → erster Seiteninhalt zentral reduziert: 18 px Desktop, 16 px mobil.
+- Gilt einheitlich für Impressum, Disclaimer, Datenschutz, Werbebedingungen, Werben, Preise, Kontakt und FAQ.
+- Preise: drei Tabellen inklusive kompletter Kubio-Ahnenkette auf volle Inhaltsbreite gesetzt.
+- Preise: Tabellen links bündig innerhalb der Inhaltsachse; Preis-Spalte bleibt nicht umbrechend.
+- Preise: „Anzeigen in unserem Anzeigenmarkt“, „Redaktionelle Artikel & Advertorials“, „Exklusive Banner“ und alle „Kurzbedingungen“ als echte sichtbare Zwischenüberschriften mit Abstand oben/unten.
+- Inline-Fettungen wie „Anzeige“, „Werbung“, „Advertorial“ bleiben unangetastet.
+- Disclaimer: importierte `strong + br`-Zwischenüberschriften werden gezielt als Blocküberschriften formatiert; 9/9 erkannt.
+- Test mit dem echten übernommenen Footer-/Kubio-Inhalt durchgeführt.
+- Chromium-Fixture: Tabellen 3/3 volle Inhaltsbreite; Preis-Zwischenüberschriften 6 erkannt; Disclaimer-Zwischenüberschriften 9 erkannt.
+- PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936 Dateien bytegleich.
