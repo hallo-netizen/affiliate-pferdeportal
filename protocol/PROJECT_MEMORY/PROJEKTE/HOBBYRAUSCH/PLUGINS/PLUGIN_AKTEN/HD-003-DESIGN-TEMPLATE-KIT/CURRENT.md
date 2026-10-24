@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.738 / KUBIO-RUNTIME SERVICE-FIX HARD PASS / LIVE OFFEN**
+STATUS: **1.50.739 / IMPORTIERTE SERVICE-SEITEN STATISCH NORMALISIERT / HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.738_KUBIO_RUNTIME_SERVICE_FIX_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.739_STATIC_IMPORTED_SERVICE_NORMALIZATION_HARDPASS.zip`
 
 SHA-256:
-`dae578a359f29ff64ee58e82732b7731278f4283da65fa405c1fad979bef138c`
+`8fb77e66ff92fb8e48d649ba50274a2298e6651e8c7a0299f09789ec5f0c83e1`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -159,3 +159,21 @@ QA:
 - Ergebnis nach Runtime: Hero, Site, Outer, Mid, Inner und Tabellen jeweils exakt gleiche x-/Breitenwerte.
 - Derselbe Test erneut auf Fresh-Unpack des finalen ZIP: PASS.
 - PHP 11/11 PASS; ZIP CRC PASS; 936 Dateien Source↔ZIP bytegleich.
+
+
+## 1.50.739 – Korrektur der falschen Kubio-Runtime-Annahme
+- Im Hobby Depot ist Kubio nicht installiert.
+- Die Seiten wurden lediglich aus einer früher mit Kubio erstellten Quelle importiert.
+- Deshalb wurde die in 1.50.738 eingeführte Runtime-/MutationObserver-Nachbehandlung vollständig entfernt.
+- Die importierten Altstrukturen werden jetzt direkt serverseitig im WordPress-Inhaltsrendern normalisiert.
+- Kubio-Blockkommentare werden entfernt.
+- Disclaimer: 9/9 bekannte Fett-Zwischenüberschriften werden in echte Blocküberschriften überführt.
+- Preise: 6/6 relevante Zwischenüberschriften werden statisch markiert; 3/3 Tabellen erhalten eindeutige Klassen.
+- Service-Body, Entry-Content und Tabellen werden zentral auf dieselbe 1200-px-Achse wie der Hero gesetzt.
+- Kein Runtime-JS für diese Service-Seiten; kein MutationObserver; keine Timer.
+- Browser-Simulation mit absichtlich schmalen Theme-Regeln:
+  - Hero / Body / Entry jeweils 1200 px und gleiche x-Kante;
+  - Preise 3/3 Tabellen 1200 px;
+  - 6 Preis-Zwischenüberschriften 30 px oben / 18 px unten;
+  - 9 Disclaimer-Zwischenüberschriften 30 px oben / 18 px unten.
+- PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936/936 Dateien bytegleich.
