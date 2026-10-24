@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.739 / SERVICE-SEITEN STATISCH NORMALISIERT / LIVE OFFEN**
+STATUS: **HD-003 1.50.740 / SERVICE-TEMPLATE VOLLE BODY-/TABELLENBREITE HARD PASS / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -173,3 +173,13 @@ Aktuelle technische Autorität:
 - kein Service-MutationObserver / keine Timer.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.739_STATIC_IMPORTED_SERVICE_NORMALIZATION_HARDPASS.zip`
 - SHA-256: `8fb77e66ff92fb8e48d649ba50274a2298e6651e8c7a0299f09789ec5f0c83e1`
+
+
+## 24.10.2026 – HD-003 1.50.740
+- Service-/Footer-Seiten laufen jetzt ueber eigenes Plugin-Template statt normales Theme-Seitentemplate.
+- Hero, kompletter Text und Preistabellen teilen exakt dieselbe Aussenachse.
+- Preise: 3/3 Tabellen volle Breite und linksbuendig.
+- Zwischenueberschriften sind wieder exakt Fliesstextgroesse, nur fett; 30 px oben / 18 px unten.
+- Frisch entpacktes finales ZIP in Chromium bei 1600 / 1100 / 760 / 390 px vermessen: Achsen identisch.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.740_SERVICE_TEMPLATE_BODY_TABLES_HARDPASS.zip`
+- SHA-256: `133db11baf242e9f9a8d9cc17d8fe482bd13fb50af78c16dec49d67445de4825`
