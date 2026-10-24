@@ -3,14 +3,14 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.730 / ZENTRALE BODY-ACHSE 1200 PX / HEADER + FOOTER UNVERÄNDERT / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.731 / HD-007 1.2.15 / BEREICHSSUCHE + REGISTER-DESIGN HARD PASS / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
 
 ## HD-003
 
-Footer-/Magazinstand bleibt 1.50.729.
+HD-003 steht auf 1.50.731. Die 1200-px-Body-Achse aus 1.50.730 bleibt unverändert; Header und Footer bleiben unberührt.
 
 ## Hobbyregister / HD-007
 
@@ -26,7 +26,7 @@ Lokaler Chromium-Vergleich gegen Hobby-Depot-Kategorie:
 
 Der Nutzer bestätigte diesen sichtbaren Breitenstand anschließend live mit **„pass“**.
 
-HD-007 1.2.13 verändert diesen Layout-/Containerstand nicht.
+HD-007 1.2.15 verändert den zentralen 1200-px-Containerstand nicht.
 
 ## Profil-Hero / Inhalt
 
@@ -61,3 +61,16 @@ Aktuelle technische Autorität:
 - Finales ZIP erneut entpackt und daraus geprüft: PASS.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.730_BODY_1200_HEADER_FOOTER_UNBERUEHRT_HARDPASS.zip`
 - SHA-256: `b31c2528ad049d9974104cd8de35b39cf69bf701efe429104c8c4218bd798279`
+
+
+## 24.10.2026 – Magazinlink / Hobbyregister / Bereichssuchen
+- Hobbymagazin-Kachel „Wissen & Glossar“ führt jetzt kanonisch auf `/magazin/wissen-glossar/`.
+- Hobbyregister HD-007 1.2.15 basiert auf dem tatsächlichen 1.2.14-Bildstand.
+- Register-Banner steht auf Registerübersicht, Suche, Buchstabe, Hobbygruppe und Pagination direkt zwischen Suche/A–Z und „Hobbygruppen entdecken“.
+- Register-Hero: Schreibschrift + handgezeichneter Brush auf Übersicht und Einzelprofil.
+- Einzelprofil-Hero auf dieselbe flache Höhe wie Registerübersicht vereinheitlicht: 238 px Desktop / 190 px mobil.
+- Registersuche: AJAX-Vorschau ab 2 Zeichen, maximal 8 Treffer, ausschließlich aus den 862 Hobbyregister-Datensätzen.
+- Glossarsuche HDG 1.0.25: AJAX-Vorschau ab 2 Zeichen, maximal 8 Treffer, ausschließlich veröffentlichte `hdg_term`; normale Posts und Drafts werden verworfen.
+- Daten unverändert: Hobbyregister 862 Hobbys / 57 Traits / 862 Artikel × 8 Abschnitte; Glossar 308 Begriffe / 13 Batches.
+- Bundle: `HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
+- SHA-256: `581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
