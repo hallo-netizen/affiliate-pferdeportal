@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.0.15 / IMPORTFIX / 100 BEGRIFFE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.16 / IMPORT- UND DATEN-HARDPASS / 100 BEGRIFFE / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.15_IMPORTFIX_100_BEGRIFFE_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CORE_1.0.16_IMPORT_DATEN_HARDPASS_100_BEGRIFFE.zip`
 
 SHA-256:
-`48f20672cff3d01cb5866469475d773e91602ad3ae2656ef4be1155efc0dd8da`
+`7f1697e62ac3a20da7d34e3d8fe9c75ee102eadbc764b2591e544114ccebebd5`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -53,3 +53,12 @@ Fach-Current:
 ## EXAKT EINE NEXT ACTION
 
 **1.0.15 über den bestehenden Ordner `hobby-depot-glossar` hochladen/überschreiben und WordPress-Admin einmal neu laden.**
+
+
+## 24.10.2026 – 1.0.16 Import-/Daten-Hardpass
+- Ursache der 1.0.15-Liveblockade: lokale Vorprüfung hatte nicht exakt dieselbe Wortzählung wie HDG_Manager::validate_batch().
+- 8 Fachtexte mit 148/149 Wörtern korrigiert: Serife, Schrötling, Trittfrequenz, Debouncing, Hot-Swap, Rektaszension, Münzzeichen, Fehlprägung.
+- Direkter Aufruf der echten Plugin-Prüfroutine gegen alle vier eingebauten 25er-Batches: 4/4 PASS, 100/100 PASS.
+- Finaler Wortbereich: 150–172 Wörter.
+- Übergangsregel Kurzdefinition → erster Fließtextsatz: PASS; maximale Überschneidung 0,3333 unter Blockiergrenze 0,35.
+- PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root hobby-depot-glossar/.
