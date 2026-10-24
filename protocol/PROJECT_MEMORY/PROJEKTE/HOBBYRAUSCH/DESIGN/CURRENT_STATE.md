@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.740 / SERVICE-TEMPLATE VOLLE BODY-/TABELLENBREITE HARD PASS / LIVE OFFEN**
+STATUS: **HD-003 1.50.741 / SERVICE-MINIMALFIX / 1.50.740 ARCHITEKTURUMBAU ZURÜCKGEROLLT / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -183,3 +183,14 @@ Aktuelle technische Autorität:
 - Frisch entpacktes finales ZIP in Chromium bei 1600 / 1100 / 760 / 390 px vermessen: Achsen identisch.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.740_SERVICE_TEMPLATE_BODY_TABLES_HARDPASS.zip`
 - SHA-256: `133db11baf242e9f9a8d9cc17d8fe482bd13fb50af78c16dec49d67445de4825`
+
+
+## 24.10.2026 – HD-003 1.50.741
+- eigener Service-Template-/Routing-Umbau aus 1.50.740 vollständig entfernt;
+- Neuaufbau direkt auf 1.50.739, nur zwei bestehende Dateien geändert;
+- normale WordPress-Seitenschablone bleibt erhalten;
+- Zwischenüberschriften = Fließtextgröße + fett, 24 px oben/unten;
+- Preise-Tabellen und Service-Text auf dieselbe innere Achse wie Hero;
+- Browser-Simulation gegen absichtlich schmalen Theme-Container bestanden.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.741_SERVICE_MINIMAL_FIX_HARDPASS.zip`
+- SHA-256: `26a3ae779971eeba18f11151157c439b89d4b0a124b0f11dc9d3f849d16e7d3c`
