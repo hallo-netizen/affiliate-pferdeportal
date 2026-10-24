@@ -430,3 +430,24 @@ Live bleibt 1.50.711.
 
 AKTUELLER STATUS/NEXT ACTION:
 Ausschließlich aus DESIGN/CURRENT_STATE.md lesen.
+
+
+---
+
+## HRD-078 – 1.50.744 Current verweist auf nicht materialisiertes Abschlussartefakt
+STATUS: **OPEN / ARTEFAKT-RECOVERY GATE**
+
+BEFUND:
+Die autoritative HD-003-Current nennt Version 1.50.744 sowie Artefaktname und SHA-256. Beim Abschluss-Frischecheck am 24.10.2026 waren die exakten 1.50.744-ZIP-Bytes jedoch weder im aktuellen Arbeitscontainer noch als Conversation-Artefakt auffindbar. In der isolierten Pluginablage existiert ebenfalls kein `CURRENT.zip`; das Manifest stand noch auf 1.50.705.
+
+FOLGE:
+- 1.50.744 darf nicht erneut als Download/Deployment ausgegeben werden, solange die exakten Bytes nicht wiederhergestellt und gegen den dokumentierten SHA geprüft sind;
+- kein Live-PASS;
+- keine erfundene Rekonstruktion aus Beschreibung oder 1.50.743;
+- keine Text-/Pointerdatei als `CURRENT.zip` vortäuschen.
+
+ZUSATZBEFUND:
+Die HD-003-Current enthielt trotz Status 1.50.744 noch eine veraltete 1.50.731-Dreifach-Bundle-NEXT-ACTION. Diese widersprüchliche NEXT ACTION wird im Abschlusscheck entfernt.
+
+AKTUELLER STATUS / GENAU EINE NEXT ACTION:
+Ausschließlich aus `DESIGN/CURRENT_STATE.md` bzw. der Plugin-Current lesen.
