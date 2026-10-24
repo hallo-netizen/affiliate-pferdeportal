@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.733 / HAUPTSUCHE VIEWPORT-CLAMP / LOCAL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.734 / HAUPTSUCHE ERGEBNISSEITE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.733_MAINSEARCH_VIEWPORT_FIX_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.734_SEARCH_RESULTS_PAGE_HARDPASS.zip`
 
 SHA-256:
-`d0268782c88e17c5665ee71ae38d564c6600c01e7a6da38e8ce48151f612a9b2`
+`dd275eb536801e7a34bec1aac338fe6c6a6473bd3edf21d93516eba4a9307543`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -70,5 +70,18 @@ Pluginroot im Bundle:
 - exakte Screenshot-Geometrie ca. 903 px Viewport / Suchformular links 267 px simuliert: Ergebnis 16–887 px, kein horizontaler Überlauf.
 - Geometriesimulation zusätzlich 1648 / 1366 / 1024 / 761 px PASS.
 - Positionierung läuft vor Loading-State, nach Ajax-Ergebnis und bei Resize.
+- Fresh-Unpack: 936 Dateien Source↔ZIP bytegleich.
+- PHP 11/11 PASS; ZIP CRC PASS.
+
+
+## 1.50.734 – Suchergebnisseite für Enter/Teilbegriffe
+- Live-Fehler: AJAX-Flyout fand z. B. für „Holz“ Treffer, Enter zeigte keine nutzbare Ergebnisseite.
+- Exakte Ursache: `render_search_results_page_v150732()` liefert HTML als Rückgabewert; das Suchtemplate rief die Methode ohne `echo` auf.
+- Korrektur: Suchtemplate gibt den Renderer tatsächlich aus.
+- Zusätzlich wird die markierte Hobby-Depot-Hauptsuche anhand `hd_header_search=1` + `s` geroutet und hängt nicht mehr zwingend an WordPress/ListingHive-`is_search()`.
+- Renderer liest den Suchbegriff primär direkt aus dem markierten GET-Request; `get_search_query()` bleibt Fallback.
+- Dieselben vier Datenhelfer wie im Flyout bleiben maßgeblich: Hobbys | Magazin | Glossar | Anzeigen.
+- Teilbegriff-Harness „Holz“ mit absichtlich `is_search()=false`: eigene Ergebnisseite PASS; Holzschnitzen/Holzwerken/Holzbrandmalerei PASS; irrelevantes Metallgießen ausgeschlossen.
+- Ohne `hd_header_search` wird keine fremde Suche gekapert.
 - Fresh-Unpack: 936 Dateien Source↔ZIP bytegleich.
 - PHP 11/11 PASS; ZIP CRC PASS.
