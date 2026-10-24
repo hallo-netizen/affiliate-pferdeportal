@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.734 / HAUPTSUCHE FLYOUT + ERGEBNISSEITE HARD PASS / HD-007 1.2.16 / LIVE OFFEN**
+STATUS: **HD-003 1.50.735 / SERVICE-SEITEN EINHEITLICH / LIVE-SICHTPRÜFUNG OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -117,3 +117,15 @@ Aktuelle technische Autorität:
 - Routing der eigenen Hauptsuche zusätzlich unabhängig von `is_search()` gehärtet.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.734_SEARCH_RESULTS_PAGE_HARDPASS.zip`
 - SHA-256: `dd275eb536801e7a34bec1aac338fe6c6a6473bd3edf21d93516eba4a9307543`
+
+
+## 24.10.2026 – HD-003 1.50.735 Service-/Footer-Seiten
+- Einheitlicher Bild-Hero für Impressum, Disclaimer, Datenschutz, Werbebedingungen, Werben, Preise, Kontakt und FAQ.
+- Grüner „Hobby Depot“-Kicker entfernt.
+- Titelrahmen entfernt.
+- Preise: Tabellen auf volle Inhaltsbreite, Kubio-/Block-Wrapper um Tabellen neutralisiert.
+- Preise + Disclaimer: fette Zwischenüberschriften mit sauberem Absatz darüber/darunter.
+- vorhandenes neutrales WebP wiederverwendet, kein neues Asset.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.735_SERVICE_PAGES_DESIGN_LOCALPASS.zip`
+- SHA-256: `105a806d132aac186313c3e95e87e2791dfe9a31926d2924d4f4553a78d6045a`
+- QA: PHP 11/11, ZIP/Fresh-Unpack bytegleich; Live-Sichtprüfung nach Upload offen.
