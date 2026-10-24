@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.21 / GLOSSAR-ÜBERSICHT DESIGN + FILTER-NAV HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.22 / DESIGN-RENDER-HARDPASS / 308 BEGRIFFE / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -516,8 +516,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - 12/12 Batches mit der echten HDG-Validierung PASS; 300 eindeutige IDs und Slugs.
 - Fachtexte 150–177 Wörter.
 - Update-Simulation 200→225→250→275→300 PASS; AJAX bleibt bei 200.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 
 ## 24.10.2026 – 1.0.20 finaler Lückenschluss
@@ -529,8 +529,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Fachtexte 151–178 Wörter.
 - AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 
 ## 24.10.2026 – 1.0.21 Glossar-Übersicht Design/Navigation
@@ -546,5 +546,24 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - zweiter Link „Zur Glossar-Startseite“ im unteren Navigationsbereich neben/unter der Pagination.
 - 308 Begriffe und Produktionsdaten unverändert; keine Inhaltsänderung.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+
+
+## 24.10.2026 – 1.0.22 Design-Render-Hardpass
+- 1.0.21 war nur auf Quellcode-Ebene geprüft; 1.0.22 wird zusätzlich als tatsächlich gerenderte Ausgabe geprüft.
+- Vorschautext Kachel: 12.5 px, mit stärkerem Selektor/important gegen Theme-Überschreibung.
+- Link „Zum Begriff“: 11.5 px, ebenfalls gehärtet.
+- Start: „Alle Glossarbegriffe“.
+- Themenfilter: „Begriffe zum Thema <Hobbywelt>“.
+- Buchstabenfilter: „Begriffe mit <Buchstabe>“.
+- Suche: „Suchergebnisse“.
+- öffentliche Begriffsanzahl entfernt.
+- „Zur Glossar-Startseite“ oben und unten.
+- Glossarroute setzt DONOTCACHEPAGE + nocache_headers und trägt HDG_VERSION im HTML zur eindeutigen Deploy-Prüfung.
+- Cyberduck-Paket: alle Dateien frisch datiert.
+- Finales ZIP erneut entpackt und daraus gerendert: Start, Fertigen, J, Suche PASS.
+- Datenbestand unverändert: 13 Batches, 308 Begriffe, 308 eindeutige IDs/Slugs.
+- PHP-Lint 8/8 PASS; ZIP-Integrität PASS; Source/ZIP-Tree bytegleich.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
