@@ -53,3 +53,12 @@ Pluginroot:
 
 ## EXAKT EINE NEXT ACTION
 **Nur den kanonischen Serverordner `hd-hobbyregister-core` mit dem Bundle-Ordner überschreiben. Keine `-2`/`-3`-Kopie neu erzeugen.**
+
+
+## 24.10.2026 – Bildproduktion Wiedereinstieg frisch geprüft
+- Aktiver Server-/Arbeitsstand bleibt HD-007 1.2.16; die Suchfeldkorrektur hat Bilddaten und Assets gegenüber 1.2.14 nicht verändert.
+- `hobby-image-production-status-v1.json`: 862 Gesamt, 24 DONE verifiziert, 838 offen.
+- offene Aufteilung: 79 vorhandene CORE-Motive semantisch passend, aber technisch zu klein; 295 CORE-Motive semantisch verworfen; 464 ohne CORE-Motiv.
+- aktiver abgeschlossener Master-Batch: `HD007_1.2.14_UNIQUE_MASTER_BATCH_02`.
+- 24 finale Masterdateien sind im Plugin vorhanden.
+- Kein neuer Bildbatch wurde beim Design-/Suchfix stillschweigend begonnen; keine Doppelproduktion.
