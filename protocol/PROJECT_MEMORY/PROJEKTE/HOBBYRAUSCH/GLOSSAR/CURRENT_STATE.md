@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.24 / HOVER POSITION HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.25 / EXKLUSIVE AJAX-BEREICHSSUCHE / 308 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -589,3 +589,15 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - PHP-Lint PASS; finales ZIP erneut entpackt und Source/ZIP bytegleich geprüft.
 - Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
 - SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
+
+
+## 24.10.2026 – 1.0.25 exklusive Glossar-AJAX-Suche
+- Pferdeatelier-Suchprinzip übernommen: normales Formular als Fallback, AJAX-Vorschau ab 2 Zeichen, 180-ms-Debounce, AbortController, maximal 8 Vorschläge.
+- Glossar-Suchscope ausschließlich `hdg_term` mit Status `publish`.
+- Normale WordPress-Posts, Seiten und Glossar-Drafts dürfen nicht in der Vorschau erscheinen.
+- Test mit absichtlich eingeschleustem normalem Post und Draft: beide verworfen, PASS.
+- Client-Vorschau mit dem tatsächlich gerenderten Inline-Skript und simuliertem Fetch: PASS.
+- Inhaltsbestand unverändert: 13 Batches, 308 Begriffe, 308 eindeutige IDs/Slugs.
+- Direkter Aufruf der echten privaten `HDG_Manager::validate_batch()`: 13/13 Batches PASS.
+- Bundle: `HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
+- SHA-256: `581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
