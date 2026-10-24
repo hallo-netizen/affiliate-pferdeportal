@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.741 / SERVICE-MINIMALFIX / 1.50.740 ARCHITEKTURUMBAU ZURÜCKGEROLLT / LIVE OFFEN**
+STATUS: **HD-003 1.50.742 / HIVEPRESS-ROUTEN FUNKTIONAL / ANZEIGENMARKT-DESIGN ALS NÄCHSTES**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -194,3 +194,13 @@ Aktuelle technische Autorität:
 - Browser-Simulation gegen absichtlich schmalen Theme-Container bestanden.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.741_SERVICE_MINIMAL_FIX_HARDPASS.zip`
 - SHA-256: `26a3ae779971eeba18f11151157c439b89d4b0a124b0f11dc9d3f849d16e7d3c`
+
+
+## 24.10.2026 – HD-003 1.50.742
+- Footer-Anzeigenmarkt von importierten festen URLs auf echte HivePress-Routen umgestellt.
+- Alle Anzeigen / Meine Anzeigen / Mein Konto / Abmelden funktional getrennt.
+- Browser-/SEO-Titel für Anzeigenmarkt, Konto, eigene Anzeigen und Anzeige aufgeben implementiert.
+- öffentliche Anzeigenübersicht mit eigener Meta-Description.
+- Design des Anzeigenmarktes bewusst noch nicht verändert.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.742_HIVEPRESS_ROUTES_SEO_HARDPASS.zip`
+- SHA-256: `5db7bedc1fece020f00c01ae36964639add0decb055275491526786e697c9bf1`
