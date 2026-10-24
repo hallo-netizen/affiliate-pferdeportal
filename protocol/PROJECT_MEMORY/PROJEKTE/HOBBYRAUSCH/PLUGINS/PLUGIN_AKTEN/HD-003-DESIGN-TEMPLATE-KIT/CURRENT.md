@@ -2,17 +2,17 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-23
-STATUS: **1.50.729 FULL REPLACEMENT LOCAL HARD PASS / LIVE OFFEN**
+STAND: 2026-10-24
+STATUS: **1.50.730 BODY 1200 / HEADER + FOOTER UNVERÄNDERT / LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Artefakt:
-`HOBBY_DEPOT_VOLLERSATZ_20261023_HD003_1.50.729_HD007_1.1.5.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.730_BODY_1200_HEADER_FOOTER_UNBERUEHRT_HARDPASS.zip`
 
 SHA-256:
-`f735f41fa1740904e13428350bef04cb89c34664fbb6e8ff1014b8581b6de046`
+`b31c2528ad049d9974104cd8de35b39cf69bf701efe429104c8c4218bd798279`
 
 HD-003 liegt darin vollständig unter:
 `affiliate-portal-template-kit/`
@@ -36,3 +36,14 @@ Evidence:
 ## EXAKT EINE NEXT ACTION
 
 **Die beiden bestehenden Pluginordner serverseitig vollständig durch die Ordner aus dem Vollersatz ersetzen und danach Live-Readback durchführen.**
+
+
+## 1.50.730 – zentrale Body-Achse
+- Root-`--hd-content` bleibt 1440 px als unveränderte Header-/Footer-Basis.
+- Auf `body.pftk-design-profile-hobby-depot` wird `--hd-content:1200px` gesetzt.
+- `.hd-header-v150616` und `.hd-footer-v150616` setzen lokal wieder `--hd-content:1440px`.
+- Native ListingHive-`.site-content`-Bereiche werden zentral auf max. 1200 px begrenzt und zentriert.
+- Glossar-Single-Altbreite 1240 px wird zentral auf max. 1200 px gekappt.
+- Keine Änderung an Header-/Footer-Layout, Typografie, Navigation oder sichtbaren Inhalten.
+- Finales ZIP: 935 Dateien, ein Root `affiliate-portal-template-kit/`, PHP 10/10 PASS, ZIP PASS, Source/ZIP bytegleich.
+- Browser-Hardpass 1600/1366/1024/760/390: Header/Footer jeweils 0 px Geometriedifferenz zum 1.50.729-Stand; Body bei breiten Viewports 1200 px.
