@@ -2,17 +2,17 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-23
-STATUS: **1.0.18 / AJAX-FIX / 200 BEGRIFFE HARD PASS / LIVE OFFEN**
+STAND: 2026-10-24
+STATUS: **1.0.19 / 300 BEGRIFFE / A–Z + THEMENCOVERAGE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
 
 SHA-256:
-`1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
+`d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -72,8 +72,8 @@ Fach-Current:
 - Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
 - Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
 - Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
-- SHA-256: `1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
+- SHA-256: `d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
 
 
 ## 24.10.2026 – 1.0.18 AJAX-Fix + 200 Begriffe
@@ -86,5 +86,9 @@ Fach-Current:
 - Wortbereich 151–178 Wörter.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
 - Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
-- SHA-256: `1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
+- SHA-256: `d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
+
+
+## 1.0.19
+300 Begriffe; A–Z vollständig; alle acht Hobbywelten mindestens 31 Begriffe; 12/12 Batches PASS; Cyberduck-Ordner bleibt `hobby-depot-glossar`.
