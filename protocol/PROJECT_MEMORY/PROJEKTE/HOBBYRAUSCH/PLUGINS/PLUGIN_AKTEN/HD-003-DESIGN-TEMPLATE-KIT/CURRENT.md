@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.742 / HIVEPRESS-ROUTEN + SEO-TITEL HARD PASS / LIVE OFFEN**
+STATUS: **1.50.743 / ANZEIGENMARKT DESIGN ENTWURF 1 / LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.742_HIVEPRESS_ROUTES_SEO_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
 
 SHA-256:
-`5db7bedc1fece020f00c01ae36964639add0decb055275491526786e697c9bf1`
+`89ced22ad1411a45fca07eca2fa7107681be6e484c2e02c6ae7fa2fcee5a6b76`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -250,6 +250,30 @@ QA:
 - ausgeloggter Footer: 2/2 Ziele PASS;
 - Fallback ohne HivePress-Router auf konfigurierte Listings-Seite PASS;
 - gegenüber 1.50.741 nur zwei bestehende Dateien geändert;
+- PHP 11/11 PASS;
+- ZIP CRC PASS;
+- Fresh-Unpack 936/936 Dateien bytegleich.
+
+
+## 1.50.743 – Anzeigenmarkt Design Entwurf 1
+- bestehende HivePress-Funktion bleibt unverändert;
+- Anzeigenmarkt-Startseite erhält eigenen Hobby-Depot-Einstieg vor dem nativen HivePress-Inhalt;
+- Überschrift + Kurztext + Button „Anzeige aufgeben“;
+- Suche optisch an Hobbyregister/Glossar angelehnt, technisch direkt die echte HivePress-Suche mit `s` + `post_type=hp_listing`;
+- 8 Hauptbereiche als 4×2 Bildkacheln Desktop / 2 Spalten mobil;
+- vorhandene Hobby-Depot-Bildassets werden verwendet, keine neue Bildproduktion;
+- Banner-Slot `anzeigenmarkt_top_banner` eingebunden;
+- auf `hp_listing_category`-Unterebenen direkte Kinder als kompakte Icon-Kacheln;
+- native doppelte HivePress-Kategoriesuche/-kacheln werden nur auf diesen Seiten ausgeblendet;
+- Anzeigen-/Filter-/Konto-/Submit-Funktion von HivePress bleibt unangetastet.
+
+QA:
+- 8/8 Bildkacheln im Root-Renderer;
+- Banner-Slot vorhanden;
+- echte HivePress-Suchparameter vorhanden;
+- Beispiel-Unterebene 4/4 Icon-Kacheln inkl. `_category`-Scope;
+- Desktop/Mobil ohne horizontalen Overflow;
+- gegenüber 1.50.742 nur zwei vorhandene Dateien geändert;
 - PHP 11/11 PASS;
 - ZIP CRC PASS;
 - Fresh-Unpack 936/936 Dateien bytegleich.
