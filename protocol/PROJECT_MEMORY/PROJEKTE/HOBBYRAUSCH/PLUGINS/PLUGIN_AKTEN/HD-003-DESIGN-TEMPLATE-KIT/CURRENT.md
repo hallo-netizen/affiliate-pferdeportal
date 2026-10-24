@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.737 / SERVICE-BODY VOLLE BREITE + PREISE/DISCLAIMER RHYTHMUS HARD PASS / LIVE OFFEN**
+STATUS: **1.50.738 / KUBIO-RUNTIME SERVICE-FIX HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.737_SERVICE_BODY_FULLWIDTH_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.738_KUBIO_RUNTIME_SERVICE_FIX_HARDPASS.zip`
 
 SHA-256:
-`7784fa3ae6451edc9b3cca4f5d5d29db6f61aee05084161511e2aa8de56c3de2`
+`dae578a359f29ff64ee58e82732b7731278f4283da65fa405c1fad979bef138c`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -144,3 +144,18 @@ QA:
 - bestehendes Hero-Bild bleibt unverändert.
 - sichtbarer Chromium-Test mit echtem importiertem Preise-/Disclaimer-Inhalt und absichtlich künstlich auf 68/76/82 % verschachtelten Containern: alle Wrapper, Tabellen und Überschriften auf volle 1200-px-Achse gezogen, PASS.
 - PHP 11/11 PASS; ZIP CRC PASS; Fresh-Unpack 936 Dateien bytegleich.
+
+
+## 1.50.738 – Ursache 1.50.736/737 korrigiert
+- Live-Beobachtung: Breite/Abstände blieben trotz statischer PASS-Tests praktisch unverändert.
+- Ursache: Kubio baut bzw. verändert die finalen Inhaltscontainer nach dem ersten Footer-/CSS-Pass; die bisherigen Fixes liefen zu früh.
+- 1.50.738 misst deshalb nach dem tatsächlichen Kubio-Render gegen den realen Service-Hero und wiederholt die Normalisierung kurzzeitig nach DOM-Änderungen / Load / Resize.
+- keine Kubio-Klassennamen als Voraussetzung.
+- Preise: 3/3 Tabellen werden nachträglich auf exakt dieselbe x-/Breitenachse wie der Hero gesetzt.
+- Preise: 6/6 definierte Fett-Zwischenüberschriften werden am gerenderten DOM erkannt, Blockdarstellung + 30 px oben / 18 px unten.
+- Disclaimer: 9/9 definierte Fett-Zwischenüberschriften analog.
+- Nachfolgendes <br> nach diesen Überschriften wird entfernt, damit der Abstand ausschließlich kontrolliert ist.
+- Test mit echtem importiertem Preise-/Disclaimer-Inhalt; Inhalt absichtlich erst 420 ms später in 68/76/82-%-schmale verschachtelte Container eingesetzt.
+- Ergebnis nach Runtime: Hero, Site, Outer, Mid, Inner und Tabellen jeweils exakt gleiche x-/Breitenwerte.
+- Derselbe Test erneut auf Fresh-Unpack des finalen ZIP: PASS.
+- PHP 11/11 PASS; ZIP CRC PASS; 936 Dateien Source↔ZIP bytegleich.
