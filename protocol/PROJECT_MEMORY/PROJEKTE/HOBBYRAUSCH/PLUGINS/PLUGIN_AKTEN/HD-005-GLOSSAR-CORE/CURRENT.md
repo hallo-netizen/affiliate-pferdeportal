@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.23 / GLOSSAR-STARTLINK HOVER HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.24 / HOVER POSITION HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
 
 SHA-256:
-`ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+`ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -72,8 +72,8 @@ Fach-Current:
 - Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
 - Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
 - Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 
 ## 24.10.2026 – 1.0.18 AJAX-Fix + 200 Begriffe
@@ -86,8 +86,8 @@ Fach-Current:
 - Wortbereich 151–178 Wörter.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
 - Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 
 ## 1.0.19
@@ -103,8 +103,8 @@ Fach-Current:
 - Fachtexte 151–178 Wörter.
 - AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 
 ## 24.10.2026 – 1.0.21 Glossar-Übersicht Design/Navigation
@@ -120,8 +120,8 @@ Fach-Current:
 - zweiter Link „Zur Glossar-Startseite“ im unteren Navigationsbereich neben/unter der Pagination.
 - 308 Begriffe und Produktionsdaten unverändert; keine Inhaltsänderung.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 
 ## 24.10.2026 – 1.0.22 Design-Render-Hardpass
@@ -139,8 +139,8 @@ Fach-Current:
 - Finales ZIP erneut entpackt und daraus gerendert: Start, Fertigen, J, Suche PASS.
 - Datenbestand unverändert: 13 Batches, 308 Begriffe, 308 eindeutige IDs/Slugs.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; Source/ZIP-Tree bytegleich.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
 
 
 ## 24.10.2026 – 1.0.23 Hover Glossar-Startseite
@@ -149,5 +149,17 @@ Fach-Current:
 - Keine sonstige Layout- oder Inhaltsänderung.
 - Gerenderte Ausgabe geprüft: oberer und unterer Startseiten-Link vorhanden; Hover-/Focus-Regeln greifen.
 - PHP-Lint PASS; finales ZIP erneut entpackt und bytegleich gegen Quelldatei geprüft.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
-- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
+
+
+## 24.10.2026 – 1.0.24 Hover-Positionsfix
+- Problem aus 1.0.23 korrigiert: Hover durfte den Text nicht verschieben oder unsichtbar machen.
+- transform vollständig entfernt und mit transform:none!important abgesichert.
+- Textfarbe bleibt im Hover unverändert #17313c.
+- opacity:1 und visibility:visible explizit abgesichert.
+- Hover-Effekt nur noch über Akzent-Unterstreichung/Inset-Linie.
+- Browser-Hardpass mit Chromium/Playwright: oberer Link, unterer Link und Begriffseiten-Link behalten exakt x/y/width/height; Text sichtbar; transform none.
+- PHP-Lint PASS; finales ZIP erneut entpackt und Source/ZIP bytegleich geprüft.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.24_HOVER_POSITION_HARDPASS.zip`
+- SHA-256: `ea7aab69d8d9746f5173f5166dd648a4785eea0bb754dd430f46c93d93e2d506`
