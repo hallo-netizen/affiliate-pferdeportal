@@ -1,48 +1,37 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
-STAND: 2026-10-20
-STATUS: **1.50.705 HOBBYFINDER DESIGN LOCAL HARD PASS / CURRENT.zip SYNC OFFEN**
+STAND: 2026-10-24
+STATUS: **CURRENT.zip BLOCKED / 1.50.744-BYTES NICHT MATERIALISIERT**
 
 PLUGIN-ID:
-HD-003-DESIGN-TEMPLATE-KIT
+`HD-003-DESIGN-TEMPLATE-KIT`
 
-ARTEFAKT:
-AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.705_HOBBYFINDER_DESIGN_LOCALPASS.zip
+AUTORITATIVE PLUGIN-CURRENT:
+`../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
 
-VERSION:
-1.50.705
+AUTORITATIVE FACH-CURRENT:
+`../../../DESIGN/CURRENT_STATE.md`
 
-SHA-256:
-e56a3b170a888c876ece8e60969be52746a4245b464946d7af1912bc7eb067e5
+DEKLARIERTER AKTUELLER STAND:
+Version `1.50.744`
 
-GRÖSSE:
-58,685,530 Bytes.
+In der autoritativen Plugin-Current dokumentiertes Artefakt:
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.744_ANZEIGENMARKT_STARTSEITE_HARDPASS.zip`
 
-AUTORITATIVE QUELLE:
-`PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
-
-FACHQUELLE:
-`DESIGN/CURRENT_STATE.md`
-
-BASIS:
-1.50.704.
-
-PRÜFSTATUS:
-- PHP 135/135 PASS;
-- Runtime 862/862 PASS;
-- Finder-Rankinglogik zu 1.50.704 unverändert;
-- JavaScript Syntax PASS;
-- 41/41 Antwortoptionen mit Icon;
-- Bildauflösung Positivtest 3/3 PASS;
-- kein erfundenes Ziel/Bild bei nicht auflösbarem CORE-Ziel;
-- ZIP PASS.
-
-LIVE-BASIS:
-1.50.704 wurde auf `/hobbyfinder/` vom Nutzer vollständig durchgeklickt und als funktionierend bestätigt.
-
-LIVE-GRENZE:
-1.50.705 selbst ist noch nicht live abgenommen.
+Dokumentierter SHA-256:
+`72b048db7516640e19f4432aaf98f5d4fa6ca9cc2fd26964a421e2ac1eece6b8`
 
 CURRENT.zip-SYNC:
-**OFFEN.**
-Keine Pointer-/Textdatei als Ersatz für die echte ZIP verwenden.
+**BLOCKED.**
+
+Beim Frischecheck 2026-10-24 waren die exakten 1.50.744-ZIP-Bytes weder im aktuellen Arbeitscontainer noch als Conversation-Artefakt auffindbar. Deshalb wurde `CURRENT.zip` nicht erzeugt oder ersetzt.
+
+HARTE REGEL:
+- keine Pointer-/Textdatei als ZIP;
+- keine Rekonstruktion auf Verdacht aus 1.50.743;
+- `CURRENT.zip` erst nach Wiederherstellung der exakten 1.50.744-Bytes und SHA-/ZIP-/Strukturprüfung synchronisieren.
+
+LETZTER IM ABSCHLUSSCHECK MATERIALISIERTER ZIP-STAND:
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
+
+Dieser 1.50.743-Hinweis ist **keine Current-Wahrheit** und kein Rollforward. Er dokumentiert ausschließlich die Materialisierungsgrenze des Abschlusschecks.
