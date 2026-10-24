@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.735 / SERVICE-SEITEN EINHEITLICH / LIVE-SICHTPRÜFUNG OFFEN**
+STATUS: **HD-003 1.50.736 / SERVICE-SEITEN FEINKORREKTUR / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -129,3 +129,14 @@ Aktuelle technische Autorität:
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.735_SERVICE_PAGES_DESIGN_LOCALPASS.zip`
 - SHA-256: `105a806d132aac186313c3e95e87e2791dfe9a31926d2924d4f4553a78d6045a`
 - QA: PHP 11/11, ZIP/Fresh-Unpack bytegleich; Live-Sichtprüfung nach Upload offen.
+
+
+## 24.10.2026 – HD-003 1.50.736
+- Service-Hero bleibt, aber Abstand zum eigentlichen Inhalt auf 18 px Desktop / 16 px mobil reduziert.
+- Preise: Tabellen vollständig über die Inhaltsbreite; verschachtelte Kubio-Hüllen werden mitgezogen.
+- Preise: echte sichtbare Abschnittsüberschriften mit sauberem oberen/unteren Abstand.
+- Disclaimer: importierte Fett-Zeilen mit `<br>` als saubere Abschnittsüberschriften formatiert.
+- Validiert gegen den echten übernommenen Preise-/Disclaimer-Inhalt aus dem Footer-Umzug.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.736_SERVICE_PAGES_LAYOUT_HARDPASS.zip`
+- SHA-256: `9f395cc4481e758a675536ab592ac2e686a53d2513ad729f92a22e6c7a678a38`
+- QA: PHP 11/11 PASS, ZIP/Fresh-Unpack 936 Dateien bytegleich.
