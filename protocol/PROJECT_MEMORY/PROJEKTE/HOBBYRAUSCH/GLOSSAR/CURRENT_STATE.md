@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.20 / FINALER LÜCKENSCHLUSS / 308 BEGRIFFE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.21 / GLOSSAR-ÜBERSICHT DESIGN + FILTER-NAV HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -516,8 +516,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - 12/12 Batches mit der echten HDG-Validierung PASS; 300 eindeutige IDs und Slugs.
 - Fachtexte 150–177 Wörter.
 - Update-Simulation 200→225→250→275→300 PASS; AJAX bleibt bei 200.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
-- SHA-256: `e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
+- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
 
 
 ## 24.10.2026 – 1.0.20 finaler Lückenschluss
@@ -529,5 +529,22 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Fachtexte 151–178 Wörter.
 - AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.20_FINAL_308_LUECKENSCHLUSS_HARDPASS.zip`
-- SHA-256: `e294298d59115173dab9b8124c9e0daa0d74cb23761f23fc73ea68d941cd5567`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
+- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+
+
+## 24.10.2026 – 1.0.21 Glossar-Übersicht Design/Navigation
+- Kachel-Kurzdefinition von 10.5 px auf 11.5 px erhöht.
+- Link „Zum Begriff“ von 9.5 px auf 10.5 px erhöht.
+- Begriffsanzahl auf der öffentlichen Glossarübersicht vollständig entfernt.
+- Überschrift abhängig vom aktiven Zustand:
+  - Start: „Alle Glossarbegriffe“
+  - Hobbywelt: „Begriffe: <Hobbywelt>“
+  - Buchstabe: „Begriffe mit <Buchstabe>“
+  - Suche: „Suchergebnisse“
+- Link „Zur Glossar-Startseite“ rechts in der Kopfzeile über den Kacheln.
+- zweiter Link „Zur Glossar-Startseite“ im unteren Navigationsbereich neben/unter der Pagination.
+- 308 Begriffe und Produktionsdaten unverändert; keine Inhaltsänderung.
+- PHP-Lint 8/8 PASS; ZIP-Integrität PASS.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
+- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
