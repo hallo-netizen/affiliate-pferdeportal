@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.22 / DESIGN-RENDER-HARDPASS / 308 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.23 / GLOSSAR-STARTLINK HOVER HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -516,8 +516,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - 12/12 Batches mit der echten HDG-Validierung PASS; 300 eindeutige IDs und Slugs.
 - Fachtexte 150–177 Wörter.
 - Update-Simulation 200→225→250→275→300 PASS; AJAX bleibt bei 200.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
-- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
 
 
 ## 24.10.2026 – 1.0.20 finaler Lückenschluss
@@ -529,8 +529,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Fachtexte 151–178 Wörter.
 - AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
-- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
 
 
 ## 24.10.2026 – 1.0.21 Glossar-Übersicht Design/Navigation
@@ -546,8 +546,8 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - zweiter Link „Zur Glossar-Startseite“ im unteren Navigationsbereich neben/unter der Pagination.
 - 308 Begriffe und Produktionsdaten unverändert; keine Inhaltsänderung.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
-- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
 
 
 ## 24.10.2026 – 1.0.22 Design-Render-Hardpass
@@ -565,5 +565,15 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Finales ZIP erneut entpackt und daraus gerendert: Start, Fertigen, J, Suche PASS.
 - Datenbestand unverändert: 13 Batches, 308 Begriffe, 308 eindeutige IDs/Slugs.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; Source/ZIP-Tree bytegleich.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
-- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
+
+
+## 24.10.2026 – 1.0.23 Hover Glossar-Startseite
+- Alle Links „Zur Glossar-Startseite“ erhalten einen sichtbaren Hover-/Focus-Effekt.
+- Effekt: Petrol-Farbwechsel, Unterstreichung nimmt Akzentfarbe an, leichte 2px-Bewegung nach rechts.
+- Keine sonstige Layout- oder Inhaltsänderung.
+- Gerenderte Ausgabe geprüft: oberer und unterer Startseiten-Link vorhanden; Hover-/Focus-Regeln greifen.
+- PHP-Lint PASS; finales ZIP erneut entpackt und bytegleich gegen Quelldatei geprüft.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.23_HOVER_HARDPASS.zip`
+- SHA-256: `ba95a5a2919ae4fce30a209c99dac0c3acda19128bd9fd5caf2ab46024931991`
