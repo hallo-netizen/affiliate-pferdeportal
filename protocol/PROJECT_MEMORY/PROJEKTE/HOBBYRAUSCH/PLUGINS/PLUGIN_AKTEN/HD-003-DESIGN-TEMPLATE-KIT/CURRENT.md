@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.50.740 / EIGENES SERVICE-TEMPLATE / BODY + TABELLEN VOLLBREITE HARD PASS / LIVE OFFEN**
+STATUS: **1.50.741 / SERVICE-MINIMALFIX / 1.50.740-TEMPLATE-UMBAU ZURÜCKGEROLLT / LOCAL HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
 
 Aktuelles Artefakt:
-`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.740_SERVICE_TEMPLATE_BODY_TABLES_HARDPASS.zip`
+`HOBBY_DEPOT_HD003_CYBERDUCK_1.50.741_SERVICE_MINIMAL_FIX_HARDPASS.zip`
 
 SHA-256:
-`133db11baf242e9f9a8d9cc17d8fe482bd13fb50af78c16dec49d67445de4825`
+`26a3ae779971eeba18f11151157c439b89d4b0a124b0f11dc9d3f849d16e7d3c`
 
 Pluginroot im Bundle:
 `affiliate-portal-template-kit/`
@@ -195,3 +195,33 @@ QA:
 - Zwischenueberschriften Preise 6/6 und Disclaimer 9/9: 15.5 px = Fliesstext, Gewicht 700, 30 px oben / 18 px unten.
 - keine h2/h3-Umwandlung im normalisierten Service-Inhalt.
 - PHP 12/12 PASS; ZIP CRC PASS; Fresh-Unpack 937/937 Dateien bytegleich.
+
+
+## 1.50.741 – Minimalfix nach kritischem 1.50.740-Umbau
+- 1.50.740 hatte für eine kosmetische Service-Seitenkorrektur eine eigene Plugin-Seitenschablone eingeführt und alle Service-Seiten aus dem normalen WordPress-Template herausgeroutet.
+- Dieser Architekturumbau ist vollständig zurückgerollt.
+- Basis für 1.50.741 ist wieder 1.50.739.
+- Gegenüber 1.50.739 ändern sich nur zwei bestehende Dateien:
+  - `pferde-template-kit.php` – Versionsstand;
+  - `includes/class-hobby-depot-profile-v150709.php` – gezielte Service-Inhaltsnormalisierung/CSS.
+- keine neue Template-Datei;
+- keine neue Route;
+- keine MutationObserver-/Timer-Logik;
+- kein Kubio-Runtime-Code.
+
+Gezielte Änderungen:
+- Disclaimer/Preise-Zwischenüberschriften bleiben normale Textabsätze mit exakt derselben Schriftgröße wie der Fließtext, nur `font-weight:700`;
+- 24 px Abstand oben und unten;
+- Service-Inhalt nutzt eine Full-Bleed-Innenachse: äußerer Wrapper 100vw, innere Padding-Achse exakt wie der Hero;
+- Tabellen Preise 100 % der inneren Hero-Achse, links bündig.
+
+Prüfung:
+- echter importierter Inhalt: Preise 6 Zwischenüberschriften / 3 Tabellen / 0 H2/H3; Disclaimer 9 Zwischenüberschriften / 0 H2/H3;
+- Browser-Simulation in absichtlich schmalem Theme-Container:
+  - 1600 px: Hero/Text/Tabellen x=200, Breite=1200;
+  - 1100 px: x=36, Breite=1028;
+  - 760 px: x=12, Breite=736;
+  - Disclaimer identische Textachse;
+  - Zwischenüberschriften Desktop 15,5 px = Fließtext, mobil 15 px, Gewicht 700;
+- finales ZIP Fresh-Unpack bytegleich;
+- PHP 11/11 PASS; ZIP CRC PASS; 936 Dateien.
