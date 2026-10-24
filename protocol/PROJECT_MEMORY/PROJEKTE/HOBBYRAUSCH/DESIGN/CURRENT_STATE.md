@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.743 / ANZEIGENMARKT DESIGN ENTWURF 1 / LIVE OFFEN**
+STATUS: **HD-003 1.50.744 / ANZEIGENMARKT-STARTSEITE ROOT-ONLY / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -213,3 +213,15 @@ Aktuelle technische Autorität:
 - HivePress-Funktion bleibt Autorität; Design liegt in HD-003.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
 - SHA-256: `89ced22ad1411a45fca07eca2fa7107681be6e484c2e02c6ae7fa2fcee5a6b76`
+
+
+## 24.10.2026 – Anzeigenmarkt Startseite 1.50.744
+- Banner ganz nach oben im Anzeigenmarkt-Inhalt.
+- eigener Hero mit Anzeigenblatt-Foto.
+- Suche hart nur auf HivePress-Anzeigen gescopt.
+- 8 Fotokacheln auf Ebene 1.
+- darunter Überschrift „Aktuelle Anzeigen“ und nur noch der native HivePress-Anzeigenbestand.
+- native Sidebar/Archive/Kategorien/Doppelsuche auf Root entfernt.
+- Kategorieebenen bleiben vorerst unverändert.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.744_ANZEIGENMARKT_STARTSEITE_HARDPASS.zip`
+- SHA-256: `72b048db7516640e19f4432aaf98f5d4fa6ca9cc2fd26964a421e2ac1eece6b8`
