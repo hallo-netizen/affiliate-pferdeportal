@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-23
-STATUS: **1.0.17 / 150 BEGRIFFE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.18 / AJAX-FIX / 200 BEGRIFFE HARD PASS / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CORE_1.0.17_150_BEGRIFFE_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
 
 SHA-256:
-`940d7b60768951c33adac4c05ee39808c7d8c630030190605e3ca4d039b55c8f`
+`1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -72,5 +72,19 @@ Fach-Current:
 - Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
 - Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
 - Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CORE_1.0.17_150_BEGRIFFE_HARDPASS.zip`
-- SHA-256: `940d7b60768951c33adac4c05ee39808c7d8c630030190605e3ca4d039b55c8f`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
+- SHA-256: `1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
+
+
+## 24.10.2026 – 1.0.18 AJAX-Fix + 200 Begriffe
+- Produktionsbestand auf 200 Begriffe erweitert, 8 Batches à 25.
+- Ursache des WordPress-Fehlerwegs abgesichert: admin_init läuft auch bei admin-ajax.php; der gebündelte Import kehrt bei AJAX/Heartbeat und REST jetzt sofort zurück.
+- Pro normalem Admin-Aufruf wird maximal ein 25er-Batch importiert.
+- Simulation mit vorhandenem 150er-Stand: AJAX 150→150 PASS; normale Admin-Aufrufe 150→175→200 PASS.
+- echte HDG_Manager::validate_batch()-Routine: 8/8 Batches PASS, 200/200 PASS.
+- globale Dublettenprüfung: 200 eindeutige external_id, 200 eindeutige Slugs.
+- Wortbereich 151–178 Wörter.
+- PHP-Lint 8/8 PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
+- Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
+- SHA-256: `1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
