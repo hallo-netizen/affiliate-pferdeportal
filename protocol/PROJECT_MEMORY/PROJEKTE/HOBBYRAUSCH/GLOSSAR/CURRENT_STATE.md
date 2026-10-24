@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-23
-STATUS: **1.0.18 / AJAX-FIX / 200 BEGRIFFE HARD PASS / LIVE OFFEN**
+STAND: 2026-10-24
+STATUS: **1.0.19 / 300 BEGRIFFE / A–Z + THEMENCOVERAGE HARD PASS / LIVE OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -507,3 +507,14 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
 - Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.18_AJAX_FIX_200_BEGRIFFE_HARDPASS.zip`
 - SHA-256: `1cd4a40ca9ed0783e5b90d29ea43d3d448577972fb74f4325d9f5927cd8f4fd4`
+
+
+## 24.10.2026 – 1.0.19
+- 300 Glossarbegriffe, 12 Batches à 25.
+- A–Z vollständig.
+- Hobbywelten: Gestalten 47, Fertigen 45, Technik 38, Forschen 40, Pflanzen 35, Tiere 31, Bewegen 32, Sammeln 32.
+- 12/12 Batches mit der echten HDG-Validierung PASS; 300 eindeutige IDs und Slugs.
+- Fachtexte 150–177 Wörter.
+- Update-Simulation 200→225→250→275→300 PASS; AJAX bleibt bei 200.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.19_300_BEGRIFFE_AZ_THEMEN_HARDPASS.zip`
+- SHA-256: `d959e0b3a40069121dc803d23c0bf1fa33f6ac8d4df842018421df7875ea4a74`
