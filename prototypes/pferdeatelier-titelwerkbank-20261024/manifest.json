@@ -1,0 +1,37 @@
+{
+  "contract": "PFERDEATELIER_TITELSTAPEL_V1",
+  "batch_id": "DEMO-24OCT-THREE",
+  "items": [
+    {
+      "pool_key": "demo-pferdegebiss-01",
+      "raw_keyword": "pferd gebiss",
+      "article_type": "Beratung",
+      "category": "Pferdegebisse",
+      "editorial_area": "FACH",
+      "plan_context": "DEMO. Beitragsart und Kategorie als Testvorgabe, nicht als echter WordPress-Stand. Titel soll verständliche Auswahlberatung bieten.",
+      "existing_titles": [],
+      "id": "40bf0322c0810b49dbdeea10"
+    },
+    {
+      "pool_key": "demo-heunetz-02",
+      "raw_keyword": "wie hoch heunetz hängen",
+      "article_type": "FAQ",
+      "category": "Heunetze",
+      "editorial_area": "FACH",
+      "plan_context": "DEMO. Redaktioneller Auftrag: konkrete Frage beantworten, keine vergleichende Produktauswahl.",
+      "existing_titles": [],
+      "id": "b677c4dec438190c6020b968"
+    },
+    {
+      "pool_key": "demo-reitstiefel-03",
+      "raw_keyword": "reitstiefel dressur vergleich",
+      "article_type": "Vergleich",
+      "category": "Reitstiefel",
+      "editorial_area": "FACH",
+      "plan_context": "DEMO. Konkrete Unterschiede gegenüberstellen, keine fiktiven Testsieger behaupten.",
+      "existing_titles": [],
+      "id": "90f2a965cee42c1476d4c831"
+    }
+  ],
+  "manifest_sha256": "a614d40bd5bda8abca4fc0ce0ebad44c8c408b96489f79a3a166734909d4d4ac"
+}
