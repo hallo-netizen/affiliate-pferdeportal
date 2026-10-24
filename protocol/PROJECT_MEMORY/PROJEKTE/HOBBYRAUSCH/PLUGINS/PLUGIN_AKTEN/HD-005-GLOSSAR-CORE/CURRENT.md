@@ -3,16 +3,16 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.21 / GLOSSAR-ÜBERSICHT DESIGN + FILTER-NAV HARD PASS / 308 BEGRIFFE / LIVE OFFEN**
+STATUS: **1.0.22 / DESIGN-RENDER-HARDPASS / 308 BEGRIFFE / LIVE OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
 Aktueller Hobby-Depot-Kandidat:
-`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
+`HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
 
 SHA-256:
-`ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+`1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
@@ -72,8 +72,8 @@ Fach-Current:
 - Fachtexte 150–172 Wörter; 0 Bodylinks; Quellen und Hauptziele vollständig.
 - Update-Simulation mit bereits vorhandenen 100 Begriffen: 100 übernommen/aktualisiert + 50 ergänzt = 150/150 PASS.
 - Layout, Route, Hero und Frontenddarstellung gegenüber 1.0.16 nicht umgebaut.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 
 ## 24.10.2026 – 1.0.18 AJAX-Fix + 200 Begriffe
@@ -86,8 +86,8 @@ Fach-Current:
 - Wortbereich 151–178 Wörter.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
 - Cyberduck-Vertrag: Ordner `hobby-depot-glossar` direkt über den bestehenden Pluginordner kopieren/ersetzen.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 
 ## 1.0.19
@@ -103,8 +103,8 @@ Fach-Current:
 - Fachtexte 151–178 Wörter.
 - AJAX-Sperre bleibt aktiv; Update-Simulation 300→308 in einem normalen Admin-Aufruf PASS.
 - PHP-Lint komplett PASS; ZIP-Integrität PASS; exakt ein Root `hobby-depot-glossar/`.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
 
 
 ## 24.10.2026 – 1.0.21 Glossar-Übersicht Design/Navigation
@@ -120,5 +120,24 @@ Fach-Current:
 - zweiter Link „Zur Glossar-Startseite“ im unteren Navigationsbereich neben/unter der Pagination.
 - 308 Begriffe und Produktionsdaten unverändert; keine Inhaltsänderung.
 - PHP-Lint 8/8 PASS; ZIP-Integrität PASS.
-- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.21_DESIGN_FILTER_NAV_HARDPASS.zip`
-- SHA-256: `ac1be58f3468948907ee9512ff9039b164bc3d5815c1ff41f45398a6ef10cd39`
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
+
+
+## 24.10.2026 – 1.0.22 Design-Render-Hardpass
+- 1.0.21 war nur auf Quellcode-Ebene geprüft; 1.0.22 wird zusätzlich als tatsächlich gerenderte Ausgabe geprüft.
+- Vorschautext Kachel: 12.5 px, mit stärkerem Selektor/important gegen Theme-Überschreibung.
+- Link „Zum Begriff“: 11.5 px, ebenfalls gehärtet.
+- Start: „Alle Glossarbegriffe“.
+- Themenfilter: „Begriffe zum Thema <Hobbywelt>“.
+- Buchstabenfilter: „Begriffe mit <Buchstabe>“.
+- Suche: „Suchergebnisse“.
+- öffentliche Begriffsanzahl entfernt.
+- „Zur Glossar-Startseite“ oben und unten.
+- Glossarroute setzt DONOTCACHEPAGE + nocache_headers und trägt HDG_VERSION im HTML zur eindeutigen Deploy-Prüfung.
+- Cyberduck-Paket: alle Dateien frisch datiert.
+- Finales ZIP erneut entpackt und daraus gerendert: Start, Fertigen, J, Suche PASS.
+- Datenbestand unverändert: 13 Batches, 308 Begriffe, 308 eindeutige IDs/Slugs.
+- PHP-Lint 8/8 PASS; ZIP-Integrität PASS; Source/ZIP-Tree bytegleich.
+- Artefakt: `HOBBY_DEPOT_GLOSSAR_CYBERDUCK_1.0.22_DESIGN_RENDER_HARDPASS.zip`
+- SHA-256: `1c6cd91d002b86a8f28276002202b94cc8219340f410fc9fb514fd14b6e34384`
