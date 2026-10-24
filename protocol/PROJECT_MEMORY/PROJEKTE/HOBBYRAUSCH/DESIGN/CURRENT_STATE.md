@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **HD-003 1.50.732 / HOBBYFINDER-BANNER + HAUPTSUCHE 4 BEREICHE / LIVE OFFEN**
+STATUS: **HD-003 1.50.733 / HAUPTSUCHE VIEWPORT-CLAMP / HD-007 1.2.16 / LIVE OFFEN**
 
 Zielvertrag:
 **ZV-HOBBYRAUSCH-DESIGN-001 Fassung 5.5 / 2026-10-19**
@@ -100,3 +100,11 @@ Aktuelle technische Autorität:
 - Bereichssuchen in Hobbyregister/Glossar bleiben davon getrennt.
 - Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.732_HOBBYFINDER_BANNER_MAINSEARCH_4BEREICHE_HARDPASS.zip`
 - SHA-256: `67082fab2becb01fc44d69caa059cbd69327d8ceef74308248556a5bea4fd516`
+
+
+## 24.10.2026 – HD-003 1.50.733 Suchlayer nicht mehr abgeschnitten
+- Live-Screenshot: vierteilige Hauptsuche lief im geteilten Browser rechts aus dem Viewport.
+- Ergebnislayer wird nun dynamisch auf maximal 1180 px Breite gesetzt und mit 16 px Abstand innerhalb des aktuellen Browserfensters gehalten.
+- Vier-Bereich-Suchlogik unverändert.
+- Artefakt: `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.733_MAINSEARCH_VIEWPORT_FIX_HARDPASS.zip`
+- SHA-256: `d0268782c88e17c5665ee71ae38d564c6600c01e7a6da38e8ce48151f612a9b2`
