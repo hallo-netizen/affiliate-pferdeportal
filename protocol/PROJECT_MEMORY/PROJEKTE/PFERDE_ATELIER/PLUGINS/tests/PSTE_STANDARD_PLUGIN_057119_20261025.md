@@ -1,0 +1,9 @@
+# PSTE 0.57.119 normales WordPress-Plugin — reines Installationspaket, nicht Current
+
+Ausgang: genau eine unveränderte aktuelle QA-Arbeitsfassung im Pferdeatelier-Hobbyraum, `PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip` SHA256 `6a6ef9defae2fc30d59710357f92bb7a5c2ea94cd46ef2eb1dbc56fd6820b41d`. Original-PSTE ZIP SHA256 `292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0`.
+
+Installierbarer Paketname: `PFERDEATELIER_PSTE_0.57.119_WORDPRESS_PLUGIN.zip`, SHA256 `42c307a995c95f9b4e6901d3a4240ec8e525ab564ec32b46ff9e5555962256d6`, dauerhaft in der Library `/Pferdeatelier/INSTALLATIONS_PAKETE/` gesichert. Normaler WordPress-Pluginkopf `Portal SEO Themenengine`, Version `0.57.119`; **keine separate Testversion**, **kein eigener Plugin-Slug**: Top-Level-Ordner ist genau `Portal SEO Topic Engine`, Boot-Datei `portal-seo-topic-engine.php`.
+
+Der zuvor abgeleitete Staging-Kandidat `0.57.119-staging` und dieses normale Paket haben **exakt dieselben 117 Dateien und dieselben sechs PSTE-PHP-Deltas**; binärer Vergleich der beiden ZIP-Inhalte ergibt **nur in der Haupt-Plugin-Datei die beiden Versionsstrings als Unterschiede**. 79/79 PHP Lints PASS, isolierte Original-PHP-Bootstrap-Hooks PASS, simulierte konservative Aktivierung PASS, ein einziger PENDING-Startstatus-Optionswrite. Originaldaten und WordPress-Tabellen werden bei diesem lokalen Isolationstest nicht beschrieben.
+
+**Nicht geprüft/kein Produktionsrelease:** echte WordPress-Paketinstallation und Aktivierung auf Test-/Live-System, echte WP-Migration/DB, K0→signierter PSERC-Compilerplan→PPM 6.7.9→echter WordPress-Entwurf Positiv/Negativ/Wiedereinstieg. Nicht als bestanden ausgeben. Weiterhin ausschließliche QA-Current-Autorität im bestehenden Current; `release_allowed=false`. Keine Programmänderung aus diesem GitHub-PR.
