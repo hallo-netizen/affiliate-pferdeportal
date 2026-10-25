@@ -13,7 +13,7 @@
   "scope": "PFERDE_ATELIER_PLUGINS",
   "artifact_kind": "QA_ONLY_NOT_AN_INSTALLER",
   "artifact_name": "PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip",
-  "artifact_sha256": "55622da70564fb325d746c24abac74d0130211419f1796ed3dc7c2c678914329",
+  "artifact_sha256": "5bf39216a7e86b8bd8ef1332ecc52684ecb4fe55571cf68a561db8db2efb0f3f",
   "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
   "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
   "e2e_status": "NOT_PASSED",
@@ -681,6 +681,16 @@ Diese Bilanz ist aus denselben bereits durchgeführten Original-/Massenprüfunge
 **Native Positiv-/Negativprüfung:** Ein ungeklärter Nicht-Duplikat-Fall: Original `ALREADY_COVERED` → aktuelle QA `RESEARCH_KEYWORD`; `planning=BLOCKED` identisch. Belegte Dublette bleibt `ALREADY_COVERED/NO`; echter fertiger Kandidat bleibt `ARTICLE_TOPIC/YES`; offener Kategorieplatz bleibt `NO`, fehlender WordPress-Kontext bleibt `BLOCKED`. Vollständig entpackte identische aktuelle QA einschließlich aller bisherigen PHP-/84-Journal-/Titel-/Route-/Manipulations-Tests mit neuem Rollen-Gegentest **zweimal PASS** (`bash REPRODUZIEREN.sh`, Exit 0). Unveränderte Original-ZIP-Prüfsummen PSTE `292bb...`, PSERC `b4d53...`. **Keine aktuelle 5.016er Live-Ausbeute oder fertige WordPress-Datei behauptet**, `e2e_status=NOT_PASSED`, `release_allowed=false`.
 
 **Einzige QA-Quelle** weiterhin `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip`, nun SHA256 `55622da70564fb325d746c24abac74d0130211419f1796ed3dc7c2c678914329`, der bisherige ZIP-Inhalt wurde unter genau demselben Pfad aktualisiert; **KEIN INSTALLER**. Der erste offene Mengenverlust von bereits pferderelevanten Keywords zur abgeschlossenen Titel-/Bereichs-/Kategoriefreigabe bleibt NEXT ACTION. Keine neue Live-Zahl vor echtem WordPress-Readback.
+
+## 25.10.2026 – KISS: Dublettenrolle auch im bestehenden Repository nur vom zuständigen Prüfbeweis (QA, nicht installieren)
+
+**Auf die bereits gesicherte QA aufgebaut, KEIN Rücksprung auf alte Fassung.** In `PSTE_Repository` existierten drei weitere überflüssige Rollenentscheidungen, obwohl `PSTE_Topic_Policy::classifyRole` bereits Eigentümer ist: (1) automatische Planungs-Readiness-Demotion schrieb ohne Dublettenbeleg `ALREADY_COVERED` in Payload UND Pooldatenbank, (2) manuelles `BLOCKED_FOR_CATEGORY` wurde ebenso als „bereits abgedeckt“ ausgegeben, (3) Zurücksetzen auf `AUTO` konnte eine gespeicherte manuelle Rollenvergangenheit übernehmen. **Genau diese Zweitentscheidungen entfernt:** an den vorhandenen Stellen denselben bestehenden Policy-Owner aufgerufen. Status `BLOCKED_FOR_CATEGORY`, `NO`/technische Sperre und alle bestehenden Wiederanlauf-/Schreibwachen bleiben unverändert.
+
+**Bestehende Beweiscodes statt neuer Duplikatregel:** `PSTE_Topic_Policy` erkennt nun auch die schon seit langem von `PSTE_Planning_Readiness_Gate` ausgegebenen fünf *konkreten* Dubletten-/Coverage-Reason-Codes (`PRE_TITLE_EXACT_SEO_KEYWORD_DUPLICATE`, `PRE_TITLE_ACTIVE_TITLE_CONTAINS_SOURCE_QUERY`, `PRE_TITLE_ANSWER_EQUIVALENT`, `SAME_PRIMARY_KEYWORD_SCOPE_WITHOUT_DISTINCT_LONGTAIL`, `SAME_LONGTAIL_KEYWORD_SCOPE`). Bloße Planungs-/Longtail-Überlappungsprüfung ohne Dublettenbeleg ist `NICHT ALREADY_COVERED`; echte Dubletten bleiben gesperrt.
+
+**Reale Beleggrenze:** Native PHP-Ausführung der aktuellen Policy-POS/NEG-Fälle und Quellfluss-Vergleich der Repository-Speicherstellen gegen das echte 0.57.118-Original; **kein** ausgeführter Live-WP-MariaDB-Test der Speicherstellen. Der bestehende Gesamt-QA-Replay `bash REPRODUZIEREN.sh` wurde nach der Änderung vollständig ausgeführt, und nach neuem ZIP-Entpacken nochmals **Exit 0**: unveränderte Original-ZIP-Hashchecks, 122 PHP-Lints, 84 Journal POS/NEG/Reentry, Sicherheitsnegative, 2/2 vorheriges synthetisches Export-READY und neue Rollen-Gates PASS. QA-Konzept und alle weiteren PHP-Deltas erhalten, nur **zwei bestehende** PHP-Klassen gegenüber vorigem QA-Stand geändert. K0 und nachgelagerte Artikelproduktion nicht angefasst.
+
+Aktuelle **einzige QA-Datei am unveränderten Ort** `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip`, SHA256 `5bf39216a7e86b8bd8ef1332ecc52684ecb4fe55571cf68a561db8db2efb0f3f`; kein Installer, kein echter WordPress-Dateidownload, `e2e_status=NOT_PASSED`, `release_allowed=false`. Erster verbleibender offener Systempunkt weiter: bereits positiv bewiesene Pferderelevanz → dauerhaft gültige Titel-/Fach-/Magazin-/Kategorieentscheidung auf echten Daten, dann derselbe Workflow bis zur herunterladbaren WP-Datei.
 
 ## NEXT ACTION
 
