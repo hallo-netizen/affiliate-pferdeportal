@@ -1,0 +1,29 @@
+name: Pferdeatelier single active workbench
+
+on:
+  push:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/**'
+      - '.github/workflows/pferdeatelier-single-workbench.yml'
+  pull_request:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/**'
+      - '.github/workflows/pferdeatelier-single-workbench.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  single-current-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject missing, duplicate or invalid current workbench binding
+        run: |
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/tests/guard_active_workbench.py \
+            --current protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md \
+            --metadata-only
