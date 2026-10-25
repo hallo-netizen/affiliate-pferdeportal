@@ -6,8 +6,16 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-24 – aktueller **read-only** Staging-Bildbeleg 09:14 Berlin gegen ursprüngliche Pluginquellen PSTE 0.57.118 / PSERC 0.28.42 und bestehende QA vom 23.10. geprüft; keine neueren echten Einzelrecord-/Serverdaten behauptet.
+STAND: 2026-10-25 – letzte **read-only** Stagingaufnahme weiterhin vom 24.10.; aktuelle byteverifizierte Original-ZIP-/lokale QA-Prüfung am 25.10. (kein neuer WordPress-Livestand). Voriger 09:14 Berlin gegen ursprüngliche Pluginquellen PSTE 0.57.118 / PSERC 0.28.42 und bestehende QA vom 23.10. geprüft; keine neueren echten Einzelrecord-/Serverdaten behauptet.
 STATUS: **BLOCKED / 7 METADATEN-READY (keine sieben fertigen Artikel), Qualität und tatsächlicher K0-/PPM-Draft-E2E nicht freigegeben**.
+
+
+### 25.10.2026 – Aktuelle Originalbytes wieder erreichbar; 5-Dateien-Zentralisierungs-QA (KEIN Release)
+**Frische Quelle:** Originale PSTE 0.57.118 / PSERC 0.28.42 (SHA256 siehe Beleg unten und UPDATEPROTOKOLL.md) jetzt tatsächlich byteverifiziert lokal geöffnet. Projekt-Library enthält die Original-ZIPs; bei direkter Materialisierung zunächst keine freigegebenen Rohbytes, nach unveränderter Library-Prüfkopie über `files.manage_library(source_file_ref)` und deren `files.materialize(raw_file)` jedoch vollständig lesbar. Nutzer muss **nicht** erneut hochladen. Beide unveränderten Originalpakete und Originalgegenläufe 24.10. erfolgreich reproduziert.
+
+**Ein einziger zusammenhängender zentraler Zuständigkeits-QA-Kandidat:** In einer isolierten Kopie wurden genau 2 vorhandene PSTE-Dateien (Repository, Editorializer) und 3 vorhandene PSERC-Dateien (SEO-Reader, Editorial- und Technical-Strand) so verbunden, dass *nach* der initialen Titelentscheidung keine weitere freie Planungs-/Anzeigeumformulierung erfolgt und PSERC die nachweislich ursprüngliche Titel-Familienbindung liest. Original-Titel-Composer und Pipeline **byteunverändert**, K0/PPM/WP unberührt, keine neue Klasse/Regel/Worker/API. Lokale Testergebnisse: 122/122 PHP-Syntax PASS, 10/11 ursprüngliche Titel-/Anzeigekontrollen PASS, PSERC positive und Manipulationsnegative PASS, Originalpaketintegrität PASS und geänderter Compiler durch bestehenden Integritätsschutz erwartungsgemäß BLOCK. **Entscheidender weiterhin FAIL:** alle 7 untersuchten schlechten Titel werden vom ursprünglichen Titelarbeiter noch fälschlich freigegeben. Original-K0/PPM/WordPress-Draft-Gesamtlauf und Reentry fehlen unverändert: STATUS BLOCKED. Kein Installer, keine Pluginversion, keine WordPress-/GitHub-Produktionscodeänderung.
+
+**Wiederholbar hinterlegte Prüfbasis:** `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip` (Library), SHA256 `9eebc45d60609ad674da4c3b77c65263a00a5963811b735d7d72212319b7da7a`. Dort exakte Original-ZIPs mit Prüfsummen, 5 Deltas/Diffs, Prüfprotokolle und getestetes `REPRODUZIEREN.sh`. Der bisherige Zielvertrag und die **einzige bereits unten stehende nächste Aktion bleiben unverändert**.
 
 ## HARTE ABNAHMEREGEL – Nutzerentscheid 24.10.2026 (nicht Produktionscode)
 
