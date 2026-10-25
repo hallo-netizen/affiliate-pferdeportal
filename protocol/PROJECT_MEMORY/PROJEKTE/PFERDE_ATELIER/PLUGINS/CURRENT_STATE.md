@@ -6,6 +6,23 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
+<!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
+```json
+{
+  "contract": "PFERDEATELIER_SINGLE_WORKBENCH_LOCK_V1",
+  "scope": "PFERDE_ATELIER_PLUGINS",
+  "artifact_kind": "QA_ONLY_NOT_AN_INSTALLER",
+  "artifact_name": "PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip",
+  "artifact_sha256": "1974a3762b38f8e131bc0aaa0eb473ef51826df3c2f071d8bf24e8f66eadcbf7",
+  "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
+  "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
+  "e2e_status": "NOT_PASSED",
+  "release_allowed": false
+}
+```
+<!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_END -->
+
+
 STAND: 2026-10-25 – aktuelle byteverifizierte Original-ZIP-/lokale QA-Prüfung vom 25.10.2026; letzter read-only WordPress-Staging-Bildbeleg weiterhin vom 24.10.2026, 09:14 Uhr Berlin. Keine neueren WordPress-Einzelrecord- oder Serverdaten behauptet.
 STATUS: **BLOCKED / 7 METADATEN-READY (keine sieben fertigen Artikel), Qualität und tatsächlicher K0-/PPM-Draft-E2E nicht freigegeben**.
 
