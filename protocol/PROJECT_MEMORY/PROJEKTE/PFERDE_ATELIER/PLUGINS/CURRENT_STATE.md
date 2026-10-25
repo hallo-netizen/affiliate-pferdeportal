@@ -13,7 +13,7 @@
   "scope": "PFERDE_ATELIER_PLUGINS",
   "artifact_kind": "QA_ONLY_NOT_AN_INSTALLER",
   "artifact_name": "PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip",
-  "artifact_sha256": "1974a3762b38f8e131bc0aaa0eb473ef51826df3c2f071d8bf24e8f66eadcbf7",
+  "artifact_sha256": "a3cd90de1b9801d7b4b1fe2d70f000cfc479e18bea7b6823bbaf28c797c1c5a4",
   "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
   "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
   "e2e_status": "NOT_PASSED",
@@ -21,6 +21,9 @@
 }
 ```
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_END -->
+
+**25.10.2026 – Fortsetzung nur aus einer aktiven SHA-gebundenen QA-Fassung (KEIN Installer):** Die bereits an CURRENT gebundene und durch `guard_active_workbench.py` identifizierte ZIP wurde als **einzige** Arbeitsfassung erweitert, Original-ZIPs bleiben dieselben. Acht statt sieben bestehende PHP-Dateien im QA-Delta. **Zentrale funktionale Korrektur:** `PSTE_Journal_Semantic_Router::fail` gibt bei gescheitertem Magazin-Risiko-/Titelpfad nicht länger widersprüchlich `HIGH_CONFIDENCE_JOURNAL` aus, sondern den bereits bestehenden `REVIEW_REQUIRED`. Kein neues Keyword-Verbot, keine neue Kategorie-/Titelregel, keine neue Klasse/Worker/API. **Neue native Beweiskette (84 echte historische Eingabefragen, in den aktuellen echten PSTE-/PSERC-PHP-Dateien neu ausgeführt, keine alten Codeversionen als aktive Grundlage):** Ohne WP-Termdaten `39 REVIEW_REQUIRED`, `45 CATEGORY_UNAVAILABLE_TITLE_PASS`, null irreführende grüne WP-Kategorien; 84/84 Ergebnis-identischer Reentry. Im **ausdrücklich synthetischen** WP-Term-/Slot-Kontrolllauf `45 JOURNAL_AUTO_PASS`, `39 REVIEW_REQUIRED`, 45/45 erhaltene Originaltitel, 45/45 bestätigte PSERC-Editorial-Titelbelege, 45/45 manipulationsgesperrte Titel und 6/6 bestehende Metadaten-Negativsperren. PSERC-Signaturmanifest Original PASS. Alle bisherigen Titel-/Journal-Negativtests, 5001 synthetische Unveränderlichkeitsfälle, 12 originale Batch-Titel und 122 PHP-Lints PASS. Vollständiger unabhängiger Archiv-Replay PASS; `guard_active_workbench.py` unter neuem SHA PASS. **Vier bisherige problematische Titel bleiben weiterhin zu Unrecht frei.** Kein realer neuer WP-Term- und Rohdatensatz, **kein** signierter Original-PSERC-Plan, **kein** K0, **kein** kanonisch verifiziertes Original-PPM 6.7.9, **kein** WP-Draft-E2E; Compiler-Manifestsperre bei QA-Änderungen greift weiterhin. **Release BLOCKED**. Gebundenes QA-Paket unverändert am einzigen Library-Ort `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip`, SHA256 `a3cd90de1b9801d7b4b1fe2d70f000cfc479e18bea7b6823bbaf28c797c1c5a4`; weder neue aktuelle Pluginversion noch anderer Arbeitsraum.
+
 
 
 STAND: 2026-10-25 – aktuelle byteverifizierte Original-ZIP-/lokale QA-Prüfung vom 25.10.2026; letzter read-only WordPress-Staging-Bildbeleg weiterhin vom 24.10.2026, 09:14 Uhr Berlin. Keine neueren WordPress-Einzelrecord- oder Serverdaten behauptet.
