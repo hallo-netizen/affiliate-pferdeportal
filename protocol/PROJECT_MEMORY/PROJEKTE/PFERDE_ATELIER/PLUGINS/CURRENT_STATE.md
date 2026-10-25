@@ -13,7 +13,7 @@
   "scope": "PFERDE_ATELIER_PLUGINS",
   "artifact_kind": "QA_ONLY_NOT_AN_INSTALLER",
   "artifact_name": "PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip",
-  "artifact_sha256": "cd26ac7c494d994bba6deefc56a8655da50fd207e672806f25894680d59c66e3",
+  "artifact_sha256": "55622da70564fb325d746c24abac74d0130211419f1796ed3dc7c2c678914329",
   "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
   "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
   "e2e_status": "NOT_PASSED",
@@ -671,6 +671,16 @@ Diese Bilanz ist aus denselben bereits durchgeführten Original-/Massenprüfunge
 **Erster OFFENER systemischer Übergang:** von einer **bereits positiv entschiedenen Pferderelevanz** zum **dauerhaft gültigen Titel + Fach/Magazin-/Kategorieentscheid**. Nur hier kann der Rückgang **vor** den 395 geeigneten Themen erklärt werden. Bestand bereits positiver, echter Relevanzbelege erhalten; alte Familien-/Kontext-/FAQ-Vorabstopps nicht wieder einführen; keine zweite Titel-/Bereichs-/Kategorieautorität. 395→7 sowie 2→1 Export sind **spätere, getrennte** Stufen und keine Ersatzantwort. Ohne identischen Eingabesnapshot pro Stufe keine erfundene 2.739→395-Quote.
 
 **NO-RESTART-Regel:** Keine erneuten 4.501/5.014/5.016er keywordweisen Vollprüfungen und keine Wiederholung bereits PASS-getesteter Quellgrenzen ohne einen konkret neuen Code-/Datenstand. Zuerst bestehende historische Stufenbelege gruppiert in einer einzigen Statusüberführung vergleichen (JA/NEIN/UNKLAR → Titel → Fach/Magazin → Kategorie → Plan → Download); erste widersprüchlich zuständige Stelle zentral korrigieren; dann nur betroffene Stufen samt Positiv-/Negativ-/Wiedereinstiegsfällen nachtesten. Keine neue Architektur, Worker, Wortliste, Regel oder K0-Arbeit.
+
+## 25.10.2026 – KISS-URSACHE: kein ALREADY_COVERED ohne belegte Dublette (nur bestehende QA)
+
+**Echter, an ORIGINAL PSTE 0.57.118 vs. dieselbe gebundene QA nachgerechneter systemischer Widerspruch:** `PSTE_Topic_Policy::classifyRole` deklarierte jedes fehlgeschlagene `planning_readiness_gate` oder `pre_title_duplicate_gate` allein als `ALREADY_COVERED`, auch wenn keine Dublette belegt wurde. Damit durfte die Rollenanzeige die einmalige Dublettenentscheidung durch die neue unbelegte Fachbehauptung „schon abgedeckt“ ersetzen.
+
+**Ersatzlos entfernt:** Nur die zwei falschen `!ok → ALREADY_COVERED`-Abkürzungen in derselben bestehenden Klasse. Die existierende echte Dubletten-Evidenz in den vorhandenen `coveredCodes` und `gateCovered` entscheidet weiter `ALREADY_COVERED`; ein rein technischer oder fachlicher Plan-Hold wird nicht zur Dublette umgedeutet. **0 neue Klassen, Worker, Rollen, Regeln, Tabellen, externe API oder K0-Änderungen.**
+
+**Native Positiv-/Negativprüfung:** Ein ungeklärter Nicht-Duplikat-Fall: Original `ALREADY_COVERED` → aktuelle QA `RESEARCH_KEYWORD`; `planning=BLOCKED` identisch. Belegte Dublette bleibt `ALREADY_COVERED/NO`; echter fertiger Kandidat bleibt `ARTICLE_TOPIC/YES`; offener Kategorieplatz bleibt `NO`, fehlender WordPress-Kontext bleibt `BLOCKED`. Vollständig entpackte identische aktuelle QA einschließlich aller bisherigen PHP-/84-Journal-/Titel-/Route-/Manipulations-Tests mit neuem Rollen-Gegentest **zweimal PASS** (`bash REPRODUZIEREN.sh`, Exit 0). Unveränderte Original-ZIP-Prüfsummen PSTE `292bb...`, PSERC `b4d53...`. **Keine aktuelle 5.016er Live-Ausbeute oder fertige WordPress-Datei behauptet**, `e2e_status=NOT_PASSED`, `release_allowed=false`.
+
+**Einzige QA-Quelle** weiterhin `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip`, nun SHA256 `55622da70564fb325d746c24abac74d0130211419f1796ed3dc7c2c678914329`, der bisherige ZIP-Inhalt wurde unter genau demselben Pfad aktualisiert; **KEIN INSTALLER**. Der erste offene Mengenverlust von bereits pferderelevanten Keywords zur abgeschlossenen Titel-/Bereichs-/Kategoriefreigabe bleibt NEXT ACTION. Keine neue Live-Zahl vor echtem WordPress-Readback.
 
 ## NEXT ACTION
 
