@@ -7,6 +7,17 @@
 > Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
 
 
+
+## Technischer Einzel-Arbeitsstand
+
+Einzige aktuelle Kandidatenbindung: `PLUGINS/CURRENT_STATE.md`, Abschnitt `PFERDEATELIER_PLUGIN_WORKBENCH_LOCK`. Keine weiteren Arbeitsstände als aktuelle Version verwenden.
+
+Die Datei `tests/guard_active_workbench.py` prüft Dateiname, SHA-256, Quell-ZIPs, Quelländerungen und die tatsächlich ausführbaren Original-PHP-Gegenläufe. Alte, manipulierte oder nicht gebundene Dateien werden abgewiesen. Release bleibt ohne echten Original-Endlauf bis WordPress-Draft gesperrt.
+
+Aufruf aus dem Repository-Hauptverzeichnis: `python3 protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/tests/guard_active_workbench.py --current protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md --artifact <aktuelle-qa-zip>`.
+
+Bei jeder Änderung zuerst mit der einen im Current benannten Arbeitsfassung weiterarbeiten, denselben Gesamtprüflauf wiederholen, diese eine QA-Datei aktualisieren und ihre neue SHA ausschließlich im Current nachführen. Der Originalcode ist Vergleichsmaterial, kein zweiter aktiver Arbeitsstand. Keine alten Fehler erneut als neu entdecken. Keine Einzelkeyword-Reparatur.
+
 ## ABGELEITETER AUSFÜHRUNGSWEG
 
 Nur den von `PLUGINS/CURRENT_STATE.md` freigegebenen Auftrag an dessen technischer Fachquelle bearbeiten. Vor Beginn die tatsächliche aktive Arbeitsbindung prüfen; fehlt sie oder widerspricht sie Current, **BLOCKED** statt aus früheren Hobbyraum-Zwischenständen zu raten.
