@@ -6,7 +6,7 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 
-STAND: 2026-10-25 – letzte **read-only** Stagingaufnahme weiterhin vom 24.10.; aktuelle byteverifizierte Original-ZIP-/lokale QA-Prüfung am 25.10. (kein neuer WordPress-Livestand). Voriger 09:14 Berlin gegen ursprüngliche Pluginquellen PSTE 0.57.118 / PSERC 0.28.42 und bestehende QA vom 23.10. geprüft; keine neueren echten Einzelrecord-/Serverdaten behauptet.
+STAND: 2026-10-25 – aktuelle byteverifizierte Original-ZIP-/lokale QA-Prüfung vom 25.10.2026; letzter read-only WordPress-Staging-Bildbeleg weiterhin vom 24.10.2026, 09:14 Uhr Berlin. Keine neueren WordPress-Einzelrecord- oder Serverdaten behauptet.
 STATUS: **BLOCKED / 7 METADATEN-READY (keine sieben fertigen Artikel), Qualität und tatsächlicher K0-/PPM-Draft-E2E nicht freigegeben**.
 
 
