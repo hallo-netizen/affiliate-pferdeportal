@@ -13,7 +13,7 @@
   "scope": "PFERDE_ATELIER_PLUGINS",
   "artifact_kind": "QA_ONLY_NOT_AN_INSTALLER",
   "artifact_name": "PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip",
-  "artifact_sha256": "5bf39216a7e86b8bd8ef1332ecc52684ecb4fe55571cf68a561db8db2efb0f3f",
+  "artifact_sha256": "597a199dba39836999dff7e7a8cb802eb366b7d12a81daeff32c20eeec07d6e9",
   "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
   "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
   "e2e_status": "NOT_PASSED",
@@ -699,6 +699,17 @@ Aktuelle **einzige QA-Datei am unveränderten Ort** `/Pferdeatelier/PFERDEATELIE
 POS/NEG: drei natürliche typkorrekte Kosten-/Pflegefragen stoppen vor Kategorie, zwei eindeutige FAQ-/Kosten-Aussagetitel-POS bestehen, echte fehlende Kategorie wird getrennt als `STRUCTURE_GAP` gehalten. Original und QA erzeugen **bytegleiche Befund-JSON-Ausgaben** SHA256 `358b48577822ecdd8174d16207185d53f9a117c2ac703e70b97aed8f0092bb22`. Der vorhandene Composer darf **nicht** blind als Rettung auf alle Nicht-FAQ-Fragen losgelassen werden: in der nativen Gegenprobe freigegebenes grammatisch fehlerhaftes `Wie ich eine Pferdedecke pflegen`; andere Fälle werden bereits vom bestehenden Bedeutungs-Gate gestoppt. Keinerlei Zweifel durch neue Einzelwort-Sonderregeln überspielen, keine Grammatikqualität absenken und keine falsch positiven Durchlässe zulassen.
 
 Dauerhaft reproduzierbares Testskript unter `PLUGINS/tests/test_pste_intent_question_type_early_stop.php` (originale PHP-Funktionen, keine DB-Writes, **kein realer WordPress-Live-Test**). Unveränderte einzige QA-SHA256 `5bf39216a7e86b8bd8ef1332ecc52684ecb4fe55571cf68a561db8db2efb0f3f`, kein Installer, `e2e_status=NOT_PASSED`, `release_allowed=false`.
+
+## 25.10.2026 – KISS: Vier wiederholte Fragezeichen-/Artikeltypentscheidungen entfernt (NUR AKTUELLE QA, kein Installer)
+
+**Bestätigter bestehender Zielvertrag gilt für ALLE Fachentscheidungen:** genau eine zuständige fachliche Instanz je Entscheidung, nachgelagert nur technische Vertrags-/Integritätsprüfung; **keine neue Regel** und keine neuen Worker. Aus der bisherigen SHA-gebundenen aktuellen QA `5bf39216a7e86b8bd8ef1332ecc52684ecb4fe55571cf68a561db8db2efb0f3f` wurden lediglich folgende **vier bereits belegte Dopplungen** entfernt:
+- `PSTE_German_Title_Reviewer::review` entscheidet nicht zusätzlich über Nicht-FAQ-Frageform; einzig vorhandener `PSTE_Title_Validator` bleibt der zuständige mechanische Frage-/Typoberflächenentscheider. Unabhängige Grammatikchecks bleiben erhalten.
+- `PSERC_Technical_Strand::evaluate` entscheidet nicht zusätzlich parallel zur vorhandenen `PSERC_Title_Gate::verify` über dieselbe Frage-/Typregel.
+- `PSERC_Compiler::compile` und `PSERC_Compiler::finalizeAllocationRow` entscheiden nach der Slotvergabe nicht nochmals über Frage-/Typzulässigkeit. Bestehender Titelvertrag wird dort weiter unverändert geprüft, einschließlich PPM-Forbidden, Keywordbindung und Sicherheitsprüfung. `question_type_check` wird aus dem bestehenden PSERC-Titelgate gelesen; fehlt das Gate, nicht künstlich PASS.
+
+**Exakter POS/NEG-Gegentest:** Nicht-FAQ-Frage scheitert unverändert an der einen ursprünglichen Titelinstanz; korrekt formulierter Kosten-Aussagetitel bleibt bei Titel- und Compilerprüfung PASS, PPM-FORBIDDEN-Sperre ebenfalls aktiv. Native Original-vs-QA-PHP-Prüfung plus statischer Ausschluss der redundant gebliebenen Compilerzweige. **Unabhängig frisch entpackte vollständige eine QA-ZIP**: `bash REPRODUZIEREN.sh` Exit 0, Original-ZIP-Checksummen PASS, 122 PHP-Lints PASS, Journal/Plan/Signaturmanipulation/Reentry/READY-Synthetik PASS. Einziger aktueller QA-Pfad unverändert `/Pferdeatelier/PFERDEATELIER_TITELZENTRALE_EINE_AUTORITAET_QA_20261025_KEIN_PLUGIN.zip`, neuer SHA256 `597a199dba39836999dff7e7a8cb802eb366b7d12a81daeff32c20eeec07d6e9`; 13 bestehende PHP-Klassen gegenüber byteverifizierten Originalen geändert (nur **drei** in diesem Arbeitsschritt).
+
+**Präzise Grenze:** Der früheste echte Quellkonflikt ist damit **nicht vollständig erledigt**: der alleinige Titelarbeiter kann natürlich formulierte Kosten-/Pflege-Fragetitel bisher noch blockieren bzw. nicht verlässlich in gute natürliche Titel umformen. Der aktuelle WP-Bestand mit 5.016 Themen wurde **nicht** erneut live gerechnet und keine neue Dateiausgabe geprüft. Daher `e2e_status=NOT_PASSED`, `release_allowed=false`; K0 und nachgelagerte Artikelproduktion unangetastet. NEXT ACTION bleibt dieselbe früheste belegte Systemstelle – keine Rückkehr zu alten 4.501er Keyword-Einzeltests oder zum Exportende.
 
 ## NEXT ACTION
 
