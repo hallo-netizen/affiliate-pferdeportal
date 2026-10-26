@@ -59,15 +59,15 @@ jobs:
           python3 - <<'PY'
           import json,os
           from engine.k0_full_rules import verify_live_link_targets
+          from engine.k0_portal_resolver import wordpress_site_for_portal
           portal=json.load(open('/tmp/k0-portal.json'))
+          registry=json.load(open('K0_PORTAL_REGISTRY.json'))
           pid=portal['items'][0]['portal_id']
-          if pid=='pferdeatelier':
-              ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
-              result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de')
-              assert result['status']=='PASS' and result['checked']==3,result
-              print('K0_LIVE_LINK_TARGETS_PASS')
-          else:
-              print('K0_LIVE_LINK_TARGETS_NOT_PFERDEATELIER')
+          site=wordpress_site_for_portal(registry,pid)
+          ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
+          result=verify_live_link_targets(ctx['rule_context'],site)
+          assert result['status']=='PASS' and result['checked']==3,result
+          print('K0_LIVE_LINK_TARGETS_PASS:'+pid)
           PY
 
       - name: Bind unique run instance and prepare canonical writer job
