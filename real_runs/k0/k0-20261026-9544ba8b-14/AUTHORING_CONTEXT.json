@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sperrriemen-faq",
+    "plan_slot": "b592182ed6cd090e86dc776a6afd0f80ead5c439ca80af00c77222a850cbf542",
+    "target_keyword": "Wie heißt der Sperrriemen jetzt",
+    "title": "Wie heißt der Sperrriemen jetzt?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "FN – Sinn und Zweck des Kinnriemens",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/"
+        }
+      ],
+      "claims": [
+        "Der früher umgangssprachlich Sperrriemen genannte Teil des kombinierten Reithalfters heißt laut den deutschen Reitrichtlinien korrekt Kinnriemen.",
+        "Der Kinnriemen soll das Gebiss stabilisieren und nicht das Maul des Pferdes zusperren.",
+        "Das Reithalfter muss Atmen, Kauen und Schlucken ermöglichen; die Zwei-Finger-Regel hilft bei der Prüfung der Verschnallung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie heißt der Sperrriemen jetzt",
+      "topic": "Wie heißt der Sperrriemen jetzt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sperrriemen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie heißt der Sperrriemen jetzt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "FN – Sinn und Zweck des Kinnriemens",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/",
+        "statement": "Der früher umgangssprachlich Sperrriemen genannte Teil des kombinierten Reithalfters heißt laut den deutschen Reitrichtlinien korrekt Kinnriemen.",
+        "evidence_text": "Der früher umgangssprachlich Sperrriemen genannte Teil des kombinierten Reithalfters heißt laut den deutschen Reitrichtlinien korrekt Kinnriemen.",
+        "evidence_text_sha256": "6d1e0a0c334851af097e5c74faa1ed489e24c133e99ed5d96eccc1046427d985",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FN – Sinn und Zweck des Kinnriemens",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/",
+        "statement": "Der Kinnriemen soll das Gebiss stabilisieren und nicht das Maul des Pferdes zusperren.",
+        "evidence_text": "Der Kinnriemen soll das Gebiss stabilisieren und nicht das Maul des Pferdes zusperren.",
+        "evidence_text_sha256": "687b362cab76a7c588d1218694b49d096e49e8db14fef1b36f96bc62ee7acb42",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FN – Sinn und Zweck des Kinnriemens",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/kinnriemen-10-2025/",
+        "statement": "Das Reithalfter muss Atmen, Kauen und Schlucken ermöglichen; die Zwei-Finger-Regel hilft bei der Prüfung der Verschnallung.",
+        "evidence_text": "Das Reithalfter muss Atmen, Kauen und Schlucken ermöglichen; die Zwei-Finger-Regel hilft bei der Prüfung der Verschnallung.",
+        "evidence_text_sha256": "c706637f2e16efc1391c785217375d08fb092ae8561d6473fafe90f7ed608443",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/sperrriemen-faq/",
+        "anchor": "FAQ zu sperrriemen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sperrriemen-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sperrriemen-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/sperrriemen-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/sperrriemen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sperrriemen-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sperrriemen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "sperrriemen",
+      "Wie heißt der",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
