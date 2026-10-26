@@ -21,8 +21,33 @@ jobs:
           root='work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router'
           mapfile -t files < <(find "$root" -type f -name '*.php' -print | sort)
           test "${#files[@]}" -gt 0
-          for f in "${files[@]}"; do php -l "$f"; done
+          failed=0
+          for f in "${files[@]}"; do
+            if ! php -l "$f"; then
+              failed=1
+              echo "TOKEN_BRACE_DIAGNOSTIC $f"
+              php -r '
+                $src=file_get_contents($argv[1]);
+                $tokens=token_get_all($src);
+                $line=1; $stack=[];
+                foreach($tokens as $t){
+                  if(is_array($t)){
+                    $line=$t[2]+substr_count($t[1],"\n");
+                    continue;
+                  }
+                  if($t==="{"){ $stack[]=$line; }
+                  elseif($t==="}"){
+                    if($stack){ array_pop($stack); }
+                    else { echo "UNMATCHED_CLOSE line=$line\n"; }
+                  }
+                  if($t==="\n"){ $line++; }
+                }
+                echo "UNMATCHED_OPEN_LINES=".implode(",", $stack)."\n";
+              ' "$f"
+            fi
+          done
           echo "PHP_LINT_FILES=${#files[@]}"
+          test "$failed" -eq 0
       - name: Blocked horse-domain markers
         shell: bash
         run: |
