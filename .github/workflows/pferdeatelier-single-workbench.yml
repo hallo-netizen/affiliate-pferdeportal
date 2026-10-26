@@ -1,18 +1,16 @@
 name: Pferdeatelier single active workbench
 
+# The Campus branch ruleset requires the job context "single-current-lock"
+# for every pull request into the Campus branch. Do not path-filter this
+# workflow, otherwise unrelated project-building updates can never satisfy
+# the required check.
 on:
   push:
     branches:
       - hobbyroom/project-memory-campus-v1-20260905
-    paths:
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/**'
-      - '.github/workflows/pferdeatelier-single-workbench.yml'
   pull_request:
     branches:
       - hobbyroom/project-memory-campus-v1-20260905
-    paths:
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/**'
-      - '.github/workflows/pferdeatelier-single-workbench.yml'
 
 permissions:
   contents: read
