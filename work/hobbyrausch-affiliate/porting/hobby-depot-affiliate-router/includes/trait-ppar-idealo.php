@@ -241,9 +241,8 @@ trait PPAR_Idealo_Trait {
     }
 
     /**
-     * Canonical portal product supply contract. The asset is shared structurally with
-     * the existing production workflow; idealo reads it directly and never calls the
-     * eBay provider runtime. Only the 311 required physical product concepts are used.
+     * Canonical Hobby Depot product context.
+     * Derived at runtime from the active HD-004 registry; no second portal catalog.
      */
 
     private function idealo_portal_supply_catalog() {
@@ -563,7 +562,7 @@ trait PPAR_Idealo_Trait {
             if (!empty($raw['remove_api_key'])) { $settings['api_key'] = ''; }
         }
         $settings['adspace_id'] = preg_replace('/\D+/', '', (string)($raw['adspace_id'] ?? $old['adspace_id'] ?? ''));
-        $settings['feed_id'] = '2901';
+        $settings['feed_id'] = preg_replace('/\\D+/', '', (string)($raw['feed_id'] ?? $old['feed_id'] ?? ''));
         $new_feed_url = trim((string)($raw['feed_url'] ?? ''));
         if ($new_feed_url !== '') { $settings['feed_url'] = esc_url_raw($new_feed_url); }
         if (!empty($raw['remove_feed_url'])) { $settings['feed_url'] = ''; }
@@ -664,7 +663,7 @@ trait PPAR_Idealo_Trait {
         return array_values($out);
     }
 
-    private function idealo_import_feed_file($path, $source_label = 'iPN Standard Datafeed 2901') {
+    private function idealo_import_feed_file($path, $source_label = 'iPN Standard Datafeed') {
         if (!file_exists($path)) { return new WP_Error('idealo_feed_missing', 'Feed-Datei fehlt.'); }
         @set_time_limit(0); if (function_exists('ignore_user_abort')) { @ignore_user_abort(true); }
         $stream=$this->idealo_open_feed_stream($path); if (is_wp_error($stream)) { return $stream; }
@@ -691,7 +690,7 @@ trait PPAR_Idealo_Trait {
             $rows[]=$row; $matched_concepts[$concept_id]=true; $matched_hubs[(string)($concept['main_hub']??'').'|'.(string)($concept['hub']??'')]=true;
         }
         $this->idealo_stream_close($stream);
-        if (!$rows) { return new WP_Error('idealo_no_matching_rows','Standardfeed enthält nach dem 311er-Portalabgleich keine sicher zuordenbaren Produkte.'); }
+        if (!$rows) { return new WP_Error('idealo_no_matching_rows','Standardfeed enthält nach dem Hobby-Depot-Registry-Abgleich keine sicher zuordenbaren Produkte.'); }
         $mapping=array(
             'external_id'=>array('source'=>'id'),'programme_external_id'=>array('source'=>'__programme_external_id'),'programme_name'=>array('source'=>'__programme_name'),
             'title'=>array('source'=>'product_title'),'image_url'=>array('source'=>'__image_url'),'tracking_url'=>array('source'=>'product_deeplink'),
@@ -701,12 +700,12 @@ trait PPAR_Idealo_Trait {
         $parsed=array('headers'=>array_merge($headers,array('__idealo_concept_id','__idealo_match_score','__idealo_context_score','__currency_eur','__programme_external_id','__programme_name','__price','__image_url')),'mapping'=>$mapping,'delimiter'=>',','rows'=>$rows);
         $import_started_at=time(); $counts=$this->network_sync_upsert_products('idealo',$parsed); $hash=hash_file('sha256',$path); $settings=$this->idealo_settings();
         $settings['last_feed_hash']=$hash?:''; $settings['last_import_started_at']=$import_started_at; $settings['last_import_at']=time(); $settings['last_import_count']=count($rows); $settings['last_matched_concepts']=count($matched_concepts); $settings['last_matched_hubs']=count(array_filter(array_keys($matched_hubs),static function($v){return trim((string)$v,'|')!=='';})); $settings['last_ambiguous_count']=$ambiguous; $settings['last_context_rejected_count']=$context_rejected;
-        $settings['last_message']=sprintf('%s: %d sichere Produkte, %d/311 Produktkonzepte und %d/59 Hub-Familien; %d Feedzeilen geprüft; %d fehlerhaft; %d mehrdeutig verworfen.',$source_label,count($rows),count($matched_concepts),absint($settings['last_matched_hubs']),$seen,$malformed,$ambiguous);
+        $settings['last_message']=sprintf('%s: %d sichere Produkte, %d passende Hobbykonzepte; %d Feedzeilen geprüft; %d fehlerhaft; %d mehrdeutig verworfen.',$source_label,count($rows),count($matched_concepts),$seen,$malformed,$ambiguous);
         update_option(self::OPTION_NETWORK_IDEALO,$settings,false);
         $materialized=$this->idealo_materialize_campaigns(); $settings=$this->idealo_settings();
         if (!is_wp_error($materialized)) { $settings['last_materialized_at']=time(); $settings['last_materialized_count']=absint($materialized['campaigns']??0); $settings['last_materialized_targets']=absint($materialized['targets']??0); update_option(self::OPTION_NETWORK_IDEALO,$settings,false); }
         $this->provider_set_access_state('idealo',$this->idealo_credentials_present($settings)?'connected':'not_configured',$settings['last_message']);
-        return array('status'=>'success','message'=>'idealo-Standardfeed wurde providerisoliert gegen den vollständigen 311er-Portalvertrag geprüft.','counts'=>$counts,'details'=>array('feed_rows_seen'=>$seen,'matching_rows'=>count($rows),'matched_concepts'=>count($matched_concepts),'matched_hubs'=>absint($settings['last_matched_hubs']),'ambiguous_rows'=>$ambiguous,'context_rejected_rows'=>$context_rejected,'malformed_rows'=>$malformed,'source_headers'=>$headers,'required_columns'=>$required,'feed_sha256'=>$hash,'public_activation'=>$this->idealo_campaigns_should_be_active(),'materialized'=>is_wp_error($materialized)?array('error'=>$materialized->get_error_message()):$materialized));
+        return array('status'=>'success','message'=>'idealo-Standardfeed wurde providerisoliert gegen die aktive Hobby-Depot-Registry geprüft.','counts'=>$counts,'details'=>array('feed_rows_seen'=>$seen,'matching_rows'=>count($rows),'matched_concepts'=>count($matched_concepts),'matched_hubs'=>absint($settings['last_matched_hubs']),'ambiguous_rows'=>$ambiguous,'context_rejected_rows'=>$context_rejected,'malformed_rows'=>$malformed,'source_headers'=>$headers,'required_columns'=>$required,'feed_sha256'=>$hash,'public_activation'=>$this->idealo_campaigns_should_be_active(),'materialized'=>is_wp_error($materialized)?array('error'=>$materialized->get_error_message()):$materialized));
     }
 
     private function idealo_target_keys_for_product_slug($product_slug) {
@@ -881,17 +880,14 @@ trait PPAR_Idealo_Trait {
     }
 
     public function idealo_maybe_upgrade_materialization() {
-        if ((string)get_option(self::IDEALO_SCHEMA_OPTION,'0')==='5') { return; }
+        if ((string)get_option(self::IDEALO_SCHEMA_OPTION,'0')==='6') { return; }
         $s=$this->idealo_settings();
-        if ((string)($s['feed_id']??'')==='2747' || trim((string)($s['feed_id']??''))==='') { $s['feed_id']='2901'; }
-        if (strpos((string)($s['feed_url']??''),'feedId=2747')!==false || strpos((string)($s['feed_url']??''),'feedid=2747')!==false) { $s['feed_url']=''; }
         $s['link_strategy']=$this->idealo_sanitize_link_strategy($s['link_strategy']??'hybrid');
+        // Do not inherit source-portal feed/adspace defaults. Existing explicitly
+        // saved Hobby Depot values remain untouched; empty values stay fail-closed.
         update_option(self::OPTION_NETWORK_IDEALO,$s,false);
-        // Re-materialize the existing last-good idealo snapshot once so an upgrade
-        // to the hybrid strategy does not create an avoidable visibility gap while
-        // the first full 2901 refresh is still pending.
         $mat=$this->idealo_materialize_campaigns();
-        update_option(self::IDEALO_SCHEMA_OPTION,'5',false); $this->idealo_sync_campaign_activation();
+        update_option(self::IDEALO_SCHEMA_OPTION,'6',false); $this->idealo_sync_campaign_activation();
     }
 
 
@@ -1255,7 +1251,7 @@ trait PPAR_Idealo_Trait {
 
     /**
      * V6.61.4: iPN image_url is a tracking wrapper. Product cards must load the
-     * real HTTPS image target, not the tracking endpoint. Current feed 2901 wraps
+     * real HTTPS image target, not the tracking endpoint. The configured iPN feed may wrap
      * the real cdn.idealo.com path in trg (sometimes through gfx.productsup.io).
      */
     private function idealo_direct_image_url($url) {
@@ -1403,7 +1399,7 @@ trait PPAR_Idealo_Trait {
             <p><label>iPN API-Key <span class="ppar-saved"><?php echo $external?'über wp-config.php':(trim((string)$s['api_key'])!==''?'gespeichert':'nicht gespeichert'); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[idealo][api_key]" value="" placeholder="leer lassen zum Beibehalten" <?php disabled($external); ?>></label></p>
             <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label> <span class="description">Hobby-Depot-Adspace-ID.</span></p>
             <p><strong>Feed-ID:</strong> <input type="text" name="ppar_provider[idealo][feed_id]" value="<?php echo esc_attr((string)$s['feed_id']); ?>"> <span class="description">Vom Hobby-Depot-iPN-Konto bereitgestellter Feed.</span></p>
-            <p><label>Offizielle iPN-Download-URL für konfigurierter Feed <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
+            <p><label>Offizielle iPN-Download-URL für den konfigurierten Feed <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
             <p><label>Portalweite Affiliate-Ausgabe<br><select name="ppar_provider[idealo][output_mode]"><option value="ebay_only" <?php selected($s['output_mode'],'ebay_only'); ?>>Nur bestehende eBay-/Bestandslogik</option><option value="idealo_only" <?php selected($s['output_mode'],'idealo_only'); ?>>Nur idealo-Ausgabe</option><option value="separate" <?php selected($s['output_mode'],'separate'); ?>>Provider getrennt als Karten</option><option value="combined" <?php selected($s['output_mode'],'combined'); ?>>Gemeinsame Karte bei exakter GTIN, sonst getrennt</option><option value="automatic" <?php selected($s['output_mode'],'automatic'); ?>>Automatisch: gemeinsam bei exakter GTIN, sonst getrennt</option></select></label></p>
             <p><label>idealo-Linkstrategie<br><select name="ppar_provider[idealo][link_strategy]"><option value="hybrid" <?php selected($s['link_strategy'],'hybrid'); ?>>Hybrid (empfohlen): Preisvergleich allein, konkrete idealo-Angebote nur als GTIN-Zusatzbutton</option><option value="products" <?php selected($s['link_strategy'],'products'); ?>>Konkrete idealo-Produkte als eigene Karten</option><option value="comparison" <?php selected($s['link_strategy'],'comparison'); ?>>Nur idealo-Preisvergleichs-/Suchlinks</option></select></label></p>
             <p><label><input type="checkbox" name="ppar_provider[idealo][auto_refresh]" value="1" <?php checked(!empty($s['auto_refresh'])); ?>> Feed automatisch alle zwölf Stunden auf Änderungen prüfen (nur bei gespeicherter Download-URL)</label></p>
