@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "3541d8c5302d384b66fe2cd36bafb33227f8e1b213a8e256064c427907ab5c7d",
+    "target_keyword": "Wie lange hält eine Magnetfelddecke bei einem Pferd",
+    "title": "Wie lange hält eine Magnetfelddecke bei einem Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "equimag – FAQ Magnetfeld-Systeme",
+          "source_url": "https://www.equimag.de/pages/faq-haufige-fragen-zu-equimag-magnetfeld-systemen"
+        }
+      ],
+      "claims": [
+        "Die Zeit, die eine Magnetfelddecke am Pferd liegt, ist nicht dasselbe wie die Programmdauer einer aktiven Magnetfeldbehandlung.",
+        "Bei einem aktiven equimag-System liegen die vorprogrammierten Anwendungszeiten zwischen zwölf und 48 Minuten.",
+        "Für die Lebensdauer der Magnetfelddecke sind Pflege, trockene Elektronik und die Unversehrtheit der Leitungen wichtig; eine einheitliche feste Haltbarkeitsdauer gibt es nicht."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie lange hält eine Magnetfelddecke bei einem Pferd",
+      "topic": "Wie lange hält eine Magnetfelddecke bei einem Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "magnetfelddecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie lange hält eine Magnetfelddecke bei einem Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "equimag – FAQ Magnetfeld-Systeme",
+        "source_url": "https://www.equimag.de/pages/faq-haufige-fragen-zu-equimag-magnetfeld-systemen",
+        "statement": "Die Zeit, die eine Magnetfelddecke am Pferd liegt, ist nicht dasselbe wie die Programmdauer einer aktiven Magnetfeldbehandlung.",
+        "evidence_text": "Die Zeit, die eine Magnetfelddecke am Pferd liegt, ist nicht dasselbe wie die Programmdauer einer aktiven Magnetfeldbehandlung.",
+        "evidence_text_sha256": "468aad84216c09a96a36c1d950af9d4f676a3c454facb6758938d898f3d5dd33",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "equimag – FAQ Magnetfeld-Systeme",
+        "source_url": "https://www.equimag.de/pages/faq-haufige-fragen-zu-equimag-magnetfeld-systemen",
+        "statement": "Bei einem aktiven equimag-System liegen die vorprogrammierten Anwendungszeiten zwischen zwölf und 48 Minuten.",
+        "evidence_text": "Bei einem aktiven equimag-System liegen die vorprogrammierten Anwendungszeiten zwischen zwölf und 48 Minuten.",
+        "evidence_text_sha256": "ddbf0cb52833ad25cd98edd6152f60545769b0c0b960f2663bc0f10a45200059",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "equimag – FAQ Magnetfeld-Systeme",
+        "source_url": "https://www.equimag.de/pages/faq-haufige-fragen-zu-equimag-magnetfeld-systemen",
+        "statement": "Für die Lebensdauer der Magnetfelddecke sind Pflege, trockene Elektronik und die Unversehrtheit der Leitungen wichtig; eine einheitliche feste Haltbarkeitsdauer gibt es nicht.",
+        "evidence_text": "Für die Lebensdauer der Magnetfelddecke sind Pflege, trockene Elektronik und die Unversehrtheit der Leitungen wichtig; eine einheitliche feste Haltbarkeitsdauer gibt es nicht.",
+        "evidence_text_sha256": "5803f9b1febf32c796d2ee6165795dfcf260542e123aabc2b42d0e77420c61d5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/magnetfelddecken-faq/",
+        "anchor": "FAQ zu magnetfelddecken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/magnetfelddecken-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/magnetfelddecken-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/magnetfelddecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/magnetfelddecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/magnetfelddecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "magnetfelddecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "magnetfelddecken",
+      "Wie lange hält",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
