@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdedecken-unterdecken-faq",
+    "plan_slot": "bc0694b8dafe8b8353640b3a6f0abb91030023b6009613f0062b9a4ce5afdd2c",
+    "target_keyword": "Wie heißt die Decke unterm Sattel beim Pferd",
+    "title": "Wie heißt die Decke unterm Sattel beim Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Vetmeduni Wien – Vergleich von Sattelunterlagen",
+          "source_url": "https://phaidra.vetmeduni.ac.at/api/object/o%3A1540/download"
+        }
+      ],
+      "claims": [
+        "Eine Satteldecke liegt zwischen Sattel und Pferderücken und ist in ihrer äußeren Form an den Sattel angepasst.",
+        "Eine Schabracke erfüllt die gleiche Grundfunktion, besitzt aber im Unterschied zur Satteldecke eine rechteckige Grundform.",
+        "Ein zusätzliches Pad kann zwischen Sattel und Sattelunterlage verwendet werden und ersetzt keine passende Sattellage."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie heißt die Decke unterm Sattel beim Pferd",
+      "topic": "Wie heißt die Decke unterm Sattel beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-unterdecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie heißt die Decke unterm Sattel beim Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Vetmeduni Wien – Vergleich von Sattelunterlagen",
+        "source_url": "https://phaidra.vetmeduni.ac.at/api/object/o%3A1540/download",
+        "statement": "Eine Satteldecke liegt zwischen Sattel und Pferderücken und ist in ihrer äußeren Form an den Sattel angepasst.",
+        "evidence_text": "Eine Satteldecke liegt zwischen Sattel und Pferderücken und ist in ihrer äußeren Form an den Sattel angepasst.",
+        "evidence_text_sha256": "553797878a9260bd01df3b7e8e26f018e878c16a4dc774daaed07ab40aa6b818",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Vetmeduni Wien – Vergleich von Sattelunterlagen",
+        "source_url": "https://phaidra.vetmeduni.ac.at/api/object/o%3A1540/download",
+        "statement": "Eine Schabracke erfüllt die gleiche Grundfunktion, besitzt aber im Unterschied zur Satteldecke eine rechteckige Grundform.",
+        "evidence_text": "Eine Schabracke erfüllt die gleiche Grundfunktion, besitzt aber im Unterschied zur Satteldecke eine rechteckige Grundform.",
+        "evidence_text_sha256": "3e04d8d5aa97afff8bc146216c6bd57aef02333edf738f2c44e665041fc853bb",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Vetmeduni Wien – Vergleich von Sattelunterlagen",
+        "source_url": "https://phaidra.vetmeduni.ac.at/api/object/o%3A1540/download",
+        "statement": "Ein zusätzliches Pad kann zwischen Sattel und Sattelunterlage verwendet werden und ersetzt keine passende Sattellage.",
+        "evidence_text": "Ein zusätzliches Pad kann zwischen Sattel und Sattelunterlage verwendet werden und ersetzt keine passende Sattellage.",
+        "evidence_text_sha256": "b12d7fc50d31fbd100749068f51b160b8b4096c7e60b89276cb47c9c6d2c2176",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-unterdecken-faq/",
+        "anchor": "FAQ zu pferdedecken unterdecken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-unterdecken-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-unterdecken-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-unterdecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-unterdecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-unterdecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-unterdecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdedecken-unterdecken",
+      "Wie heißt die",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
