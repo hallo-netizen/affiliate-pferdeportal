@@ -543,8 +543,8 @@ trait PPAR_Output_Objects_Trait {
                     $context = 'journal';
                 } elseif (function_exists('has_shortcode') && has_shortcode($content, 'pferde_atelier_anzeigenmarkt_intro')) {
                     $context = 'anzeigenmarkt';
-                } elseif (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit','affiliate_page_type'))) {
-                    $context = sanitize_key((string) Pferde_Template_Kit::affiliate_page_type($id));
+                } elseif ($this->design_bridge_class() !== '') {
+                    $context = sanitize_key((string) $this->design_bridge_call('affiliate_page_type', array($id), ''));
                 }
                 if ($context === '') { $context = 'page_unclassified'; }
                 $targets[] = array(
@@ -592,8 +592,6 @@ trait PPAR_Output_Objects_Trait {
                     $context = 'glossary_overview';
                 } elseif ($taxonomy === 'category' && sanitize_key((string)($term->slug ?? '')) === 'glossar') {
                     $context = 'glossary_overview';
-                } elseif ($taxonomy === 'category' && ($id === 1482 || in_array(1482,array_map('absint',(array)get_ancestors($id,'category','taxonomy')),true))) {
-                    $context = 'breed_overview';
                 } else {
                     $context = empty($children[$id]) ? 'leaf_category' : 'category_nonleaf';
                 }
@@ -646,16 +644,14 @@ trait PPAR_Output_Objects_Trait {
         if (in_array($adapter, array('wordpress_local','wordpress_multisite'), true)) {
             $matrix = $this->output_with_portal($portal, function($active_portal) {
                 $candidate = array();
-                if (class_exists('Pferde_Template_Kit')) {
-                    $contract = is_callable(array('Pferde_Template_Kit','affiliate_contract_version'))
-                        ? (string) call_user_func(array('Pferde_Template_Kit','affiliate_contract_version'))
-                        : (defined('Pferde_Template_Kit::AFFILIATE_CONTRACT') ? (string) constant('Pferde_Template_Kit::AFFILIATE_CONTRACT') : '');
-                    $profile = is_callable(array('Pferde_Template_Kit','design_profile'))
-                        ? sanitize_key((string) call_user_func(array('Pferde_Template_Kit','design_profile')))
-                        : '';
-                    $profile_contract = is_callable(array('Pferde_Template_Kit','design_profile_contract_version'))
-                        ? (string) call_user_func(array('Pferde_Template_Kit','design_profile_contract_version'))
-                        : '';
+                if ($this->design_bridge_class() !== '') {
+                    $contract = (string) $this->design_bridge_call(
+                        'affiliate_contract_version',
+                        array(),
+                        (string) $this->design_bridge_constant('AFFILIATE_CONTRACT', '')
+                    );
+                    $profile = sanitize_key((string) $this->design_bridge_call('design_profile', array(), ''));
+                    $profile_contract = (string) $this->design_bridge_call('design_profile_contract_version', array(), '');
                     if ($contract === self::CONTRACT_VERSION && $profile === 'hobby_depot' && $profile_contract === '1.0') {
                         $candidate = array(
                             'start_after_topics'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('start'),'upscale_max'=>1.10,'min_fill'=>0.90),
