@@ -1138,7 +1138,7 @@ trait PPAR_Ebay_Trait {
             $strong_domain_hits[] = 'exact_profile:' . sanitize_key((string)($expected_concept['id'] ?? ''));
         }
         $strong_domain_hits = array_values(array_unique($strong_domain_hits));
-        if (!$strong_domain_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Pferde-/Reitsportbezug aus Angebot oder exakt bestaetigtem Pferde-Suchprofil.'); }
+        if (!$strong_domain_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Hobby-Depot-Bezug aus Angebot oder exakt bestätigtem Produktprofil.'); }
 
         $ranked = array();
         $concept_pool = ($expected_kind === 'product' && $expected_concept) ? array($expected_concept) : (array) ($catalog['business_concepts'] ?? array());
@@ -1991,25 +1991,9 @@ trait PPAR_Ebay_Trait {
         $enabled_route_sql = !empty($settings['private_enabled']) && !empty($settings['business_enabled'])
             ? "seller_account_type IN ('INDIVIDUAL','BUSINESS')"
             : (!empty($settings['private_enabled']) ? "seller_account_type='INDIVIDUAL'" : "seller_account_type='BUSINESS'");
-        // Contract changes are background-only and time-bounded, but new strict
-        // equestrian product families and newly blocked media must be recovered
-        // promptly even when their row IDs are high. Pull a tiny priority prepass
-        // independently of the cursor, then continue the ordinary monotonic scan.
-        $priority_rows=array();
-        $priority_catalog=$this->ebay_portal_catalog();
-        $priority_contract_enabled=!is_wp_error($priority_catalog)
-            && (string)($priority_catalog['content_policy']['version']??'')===self::EBAY_CONTENT_POLICY_VERSION
-            && version_compare((string)self::EBAY_CONTENT_POLICY_VERSION,'5.0','>=');
-        if($contract_changed && $priority_contract_enabled){
-            $priority_limit=min(50,$limit);
-            $priority_stale_sql="COALESCE(policy_version,'')<>%s";
-            $priority_args=array(self::EBAY_CONTENT_POLICY_VERSION);
-            if(!empty($settings['business_enabled'])){$priority_stale_sql.=" OR (seller_account_type='BUSINESS' AND COALESCE(classifier_version,'')<>%s)";$priority_args[]=self::EBAY_BUSINESS_CLASSIFIER_VERSION;}
-            $priority_sql_template="SELECT * FROM {$table} WHERE {$enabled_route_sql} AND COALESCE(source_state,'available')<>'ended' AND (".$priority_stale_sql.") AND (LOWER(title) LIKE '%%reithelm%%' OR LOWER(title) LIKE '%%reithose%%' OR LOWER(title) LIKE '%%reithandsch%%' OR LOWER(title) LIKE '%%reitstief%%' OR LOWER(title) LIKE '%%reitschuh%%' OR LOWER(title) LIKE '%%reitweste%%' OR LOWER(title) LIKE '%%reitjacke%%' OR LOWER(title) LIKE '%%kinderbuch%%' OR LOWER(title) LIKE '%%pferdebuch%%' OR LOWER(title) LIKE '%%ponybuch%%' OR LOWER(title) LIKE '%%bilderbuch%%' OR LOWER(title) LIKE '%%malbuch%%' OR LOWER(title) LIKE '%%stickerbuch%%' OR LOWER(source_payload) LIKE '%%categoryname%%buech%%' OR LOWER(source_payload) LIKE '%%categoryname%%büch%%') ORDER BY id ASC LIMIT %d";
-            $priority_args[]=$priority_limit;
-            $priority_sql=call_user_func_array(array($wpdb,'prepare'),array_merge(array($priority_sql_template),$priority_args));
-            $priority_rows=(array)$wpdb->get_results($priority_sql,ARRAY_A);
-        }
+        // Contract changes continue through the ordinary bounded monotonic scan.
+        // No project-specific product family receives hidden priority.
+        $priority_rows = array();
         $priority_ids=array_values(array_filter(array_map(static function($r){return is_array($r)?absint($r['id']??0):0;},$priority_rows)));
         $remaining=max(0,$limit-count($priority_rows));
         $rows=array_values($priority_rows);
@@ -2973,7 +2957,7 @@ trait PPAR_Ebay_Trait {
         return array(
             'aufkleber','sticker','spardose','sparschwein','poster','plakat','tasse','becher','figur','figurine','deko','dekoration',
             'kalender','postkarte','patch','aufnaeher','aufnaher','schluesselanhaenger','schlusselanhanger','keychain','kostuem','kostum',
-            'handyhulle','handyhuelle','miniatur','modellauto','modellpferd','brosche'
+            'handyhulle','handyhuelle','miniatur','modellauto','brosche'
         );
     }
 
@@ -6279,7 +6263,7 @@ trait PPAR_Ebay_Trait {
             'main_hub'=>'Anzeigenmarkt',
             'path'=>'Private Anzeigen > ' . $label,
             'private_bucket_slug'=>$slug,
-            'horse_hits'=>array(),
+            'domain_hits'=>array(),
             'strong_domain_hits'=>array(),
             'hits'=>array(),
             'evidence_hash'=>hash('sha256', (string) ($item['source_hash'] ?? '') . '|manual|' . $term_id),
@@ -9471,13 +9455,13 @@ trait PPAR_Ebay_Trait {
                         if (!is_wp_error($classification)) { $accepted = array('item'=>$candidate,'classification'=>$classification,'rule'=>$rule); break 2; }
                     }
                 }
-                if (!$accepted) { $result = new WP_Error('ebay_no_accepted_item', 'Für ' . $seller_type . ' wurde in den automatischen Pferde-Atelier-Abrufprofilen kein fachlich eindeutig freigegebenes Angebot gefunden.'); break; }
+                if (!$accepted) { $result = new WP_Error('ebay_no_accepted_item', 'Für ' . $seller_type . ' wurde in den automatischen Hobby-Depot-Abrufprofilen kein fachlich eindeutig freigegebenes Angebot gefunden.'); break; }
                 $result[strtolower($seller_type)] = 'pass';
             }
         }
         $settings['last_test'] = is_wp_error($result) ? array('status'=>'failed','tested_at'=>time(),'message'=>$result->get_error_message()) : array_merge(array('status'=>'pass'), $result);
         update_option(self::OPTION_NETWORK_EBAY, $settings, false);
-        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>is_wp_error($result)?'test_failed':'test_passed','message'=>rawurlencode(is_wp_error($result)?$result->get_error_message():'Verbindung, Verkäuferweiche und automatischer Pferde-Atelier-Themenfilter geprüft.')), admin_url('admin.php')));
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>is_wp_error($result)?'test_failed':'test_passed','message'=>rawurlencode(is_wp_error($result)?$result->get_error_message():'Verbindung, Verkäuferweiche und automatischer Hobby-Depot-Themenfilter geprüft.')), admin_url('admin.php')));
         exit;
     }
 
@@ -9700,7 +9684,7 @@ trait PPAR_Ebay_Trait {
             <h1>eBay</h1>
             <p><strong>Runtime:</strong> <code><?php echo esc_html(self::VERSION); ?></code> · Build <code><?php echo esc_html(self::EBAY_RUNTIME_BUILD); ?></code></p>
             <p><strong>Provider-Seite: Status und Steuerung.</strong> Der Seitenaufruf führt keine BUSINESS-/PRIVATE-Fachlogik aus. Der Gesamtlauf wird ausschließlich paketweise über den Heartbeat fortgesetzt; Browser und WordPress-Cron sind dafür nicht erforderlich.</p>
-            <p><strong>Automatischer Heartbeat:</strong> Für Pferde Atelier wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
+            <p><strong>Automatischer Heartbeat:</strong> Für Hobby Depot wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
             <p><strong>Hintergrundarbeit:</strong> <?php echo $worker_last_tick_at ? 'letzter Block '.esc_html(wp_date('d.m.Y H:i:s',$worker_last_tick_at)) : 'noch nicht gestartet'; ?> · technische Pakete <?php echo absint($worker_tick_count); ?> · übersprungene Einzelfehler <?php echo absint($canonical_run['skipped_item_errors_count'] ?? 0); ?>. <strong>Browser kann geschlossen werden.</strong></p>
             <p><strong>Provider-Fachseite.</strong> Zugangsdaten und OAuth-Test liegen zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. <?php echo $this->provider_control_badge('ebay'); ?> <a class="button button-small" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></p>
             <p><strong>Eingangsweiche:</strong> INDIVIDUAL → fachliche HivePress-Unterkategorien direkt unter „Private Anzeigen“ · BUSINESS → Werbemittelbibliothek und ausschließlich providerreine Produktzonen.</p>
@@ -9723,7 +9707,7 @@ trait PPAR_Ebay_Trait {
 
             <section class="postbox" style="padding:18px;max-width:1180px">
                 <h2>2. Portal- und Themenabgleich prüfen</h2>
-                <p>Prüft den fest mitgelieferten vollständigen Pferde-Atelier-Zielkatalog: 8 Hauptbereiche, 59 Bereichsseiten, 329 Produktseiten und 1.124 WordPress-Kategorien. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
+                <p>Prüft den aktuellen Hobby-Depot-Zielkatalog aus der zentralen read-only Kategorie-Registry. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="ppar_ebay_verify_catalog">
                     <?php wp_nonce_field('ppar_ebay_verify_catalog', 'ppar_ebay_nonce'); ?>
@@ -9756,7 +9740,7 @@ trait PPAR_Ebay_Trait {
                         <tr><th>Max. Seiten je Abrufprofil</th><td><input class="small-text" type="number" min="1" max="20" name="ppar_ebay[max_pages_per_profile]" value="<?php echo absint($settings['max_pages_per_profile']); ?>"></td></tr>
                         <tr><th>Max. Requests je Arbeitspaket</th><td><input class="small-text" type="number" min="1" max="40" name="ppar_ebay[max_requests_per_run]" value="<?php echo absint($settings['max_requests_per_run']); ?>"><p class="description">Harte Hintergrundgrenze pro Arbeitspaket. Ein vollständiger Discovery-Lauf setzt danach automatisch am nächsten Profil fort, bis der komplette Katalog einmal abgedeckt ist.</p></td></tr>
                         <tr><th>Zeitbudget je Hintergrundpaket</th><td><input class="small-text" type="number" min="10" max="30" name="ppar_ebay[run_time_budget_seconds]" value="<?php echo absint($settings['run_time_budget_seconds']); ?>"> Sekunden<p class="description">Der Gesamtlauf hat kein synchrones Browser-Zeitlimit mehr. Dieses Budget begrenzt nur ein einzelnes fortsetzbares Arbeitspaket.</p></td></tr>
-                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="28" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt automatisch gegen den vollständigen Pferde-Atelier-Zielkatalog; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
+                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="28" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt automatisch gegen den aktuellen Hobby-Depot-Zielkatalog; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
                     </tbody></table>
                     <?php submit_button('eBay-Betriebsprofil speichern'); ?>
                 </form>
