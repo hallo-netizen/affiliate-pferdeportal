@@ -990,7 +990,7 @@ JS;
      */
 
     public function maybe_repair_v672179_page_banner_target_identity_mismatch() {
-        // Historical Pferdeatelier migration. A fresh Hobby Depot installation
+        // Historical source-portal migration. A fresh Hobby Depot installation
         // must never rewrite output objects using the old portal identity model.
         return;
     }
@@ -1160,14 +1160,12 @@ JS;
      * Platzhalterbild. Keine allgemeine Kampagne wird anhand von Vermutungen
      * ersetzt; echte Partnerbilder behalten Vorrang.
      */
+
     private function is_legacy_placeholder_campaign($campaign) {
-        if (!is_array($campaign)) { return false; }
-        $url = trim((string)($campaign['image_url'] ?? ''));
-        if ($url === '') { return false; }
-        $path = function_exists('wp_parse_url') ? wp_parse_url($url, PHP_URL_PATH) : parse_url($url, PHP_URL_PATH);
-        $basename = strtolower(rawurldecode(basename((string)$path)));
-        return strpos($basename, 'wolfblur-horses-1414889_1920') !== false;
+        // Source-portal placeholders are not part of Hobby Depot.
+        return false;
     }
+
 
     private function hub_placeholder_or_inactive($data, $type, $inactive_source, $placement_index = 1) {
         $settings = $this->get_placeholder_settings();
@@ -2178,7 +2176,7 @@ JS;
         $specificity = (int) $specificity;
         if ($specificity >= 500) { return 4; } // exact topic
         if ($specificity >= 200) { return 3; } // extended topic
-        if ($specificity >= 100) { return 2; } // general horse/shop fallback
+        if ($specificity >= 100) { return 2; } // general shop/portal fallback
         return 1; // technical fallback
     }
 
@@ -3568,7 +3566,7 @@ JS;
      * V6.72.58 – Laufzeit-Themenrang fuer bereits materialisierte Glossar-Banner.
      * Dadurch wirkt die neue semantische Zuordnung sofort nach Plugin-Update und
      * verlangt keinen erneuten Backend-Automatiklauf. Exakte Begriffstreffer sind
-     * staerker als breiter Kontext; generische Pferd-/Bannerwoerter zaehlen nicht.
+     * staerker als breiter Kontext; generische Banner-/Affiliatewoerter zaehlen nicht.
      */
     private function glossary_campaign_runtime_semantic_rank($campaign, $context) {
         if (!is_array($campaign) || sanitize_key((string)($context['post_type'] ?? '')) !== 'uge_term') { return null; }
@@ -3585,14 +3583,14 @@ JS;
             implode(' ',(array)($campaign['match_keywords'] ?? array())),
             (string)($profile['business_label'] ?? ''), implode(' ',(array)($profile['keywords'] ?? array())),
         )));
-        $tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        $tokens = array_values(array_diff($this->output_tokens($evidence), array('banner','anzeige','affiliate')));
         if (!$tokens) { return null; }
         $primary = $this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug'] ?? '')));
         if ($primary !== '') {
             // Exact means the complete distinctive glossary term, not one shared
-            // generic token. The former any-token test made broad horse-shop banners
+            // generic token. The former any-token test made broad shop banners
             // look exact on many unrelated glossary entries and prevented rotation.
-            $generic_exact = array('pferd','pferde','horse','horses','banner','anzeige','affiliate','shop','reiter','reiten');
+            $generic_exact = array('banner','anzeige','affiliate','shop');
             $primary_tokens = array_values(array_diff($this->output_tokens($primary), $generic_exact));
             $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), $generic_exact));
             if ($primary_tokens && $evidence_tokens) {
@@ -3637,7 +3635,7 @@ JS;
 
     /**
      * V6.72.85 – Ziel-URL ist fachliche Evidenz. Ein Banner, dessen echte
-     * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z.B. /reithelme/),
+     * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z.B. eine konkrete Themenseite),
      * gewinnt vor einem nur breiten Themen- oder allgemeinen Fallback. Tracking-
      * URLs werden nur lokal dekodiert; es wird hier kein externer Request gemacht.
      */
@@ -3703,7 +3701,7 @@ JS;
      * angewiesen sein: Titel/Beschreibung/ADCELL-Werbemittelkategorie und lokal
      * dekodierte Zielseite werden direkt gegen das aktuelle Seitenthema geprüft.
      * Nur der aktuelle Seitenbegriff darf die exakte Stufe auslösen; allgemeine
-     * Pferde-/Shopbegriffe reichen ausdrücklich nicht.
+     * Shop-/Affiliatebegriffe reichen ausdrücklich nicht.
      */
     private function banner_runtime_topic_stem($token) {
         $token = strtolower(remove_accents((string) $token));
@@ -3740,7 +3738,6 @@ JS;
         if (!$evidence_stems) { return null; }
 
         $generic = array_fill_keys(array(
-            'pferd','pferde','reiter','reiten','ausrustung','ausruestung','reiterbedarf',
             'shop','online','banner','anzeige','partner','affiliate','angebot','angebote'
         ), true);
         $primary_text = trim((string)($context['primary_slug'] ?? '') . ' ' . (string)($context['primary_name'] ?? ''));
@@ -3925,7 +3922,7 @@ JS;
         }
 
         // Bestehender Artikel-Produktweg: nur zuletzt, nach allen vorhandenen
-        // Themenstufen, automatisch verifizierte Pferde-Angebote als generische
+        // Themenstufen, automatisch verifizierte Produktangebote als generische
         // Produktvorschlaege zulassen. Provider-Quelle, Veto, Health, Frische und
         // Produktqualitaet werden weiterhin in den bestehenden Gates geprueft.
         // Niemals fuer Kategorieslots, Exact-Productwissen oder manuelle Quelle.
@@ -3943,7 +3940,7 @@ JS;
                 && !empty($campaign['product_gtins']);
             if ($verified_ebay || $verified_idealo) {
                 return array('specificity'=>200,'matches'=>0,
-                    'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Pferdeprodukt; oeffentliche Freigabegates bleiben bindend.');
+                    'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Produkt; oeffentliche Freigabegates bleiben bindend.');
             }
         }
         return null;
