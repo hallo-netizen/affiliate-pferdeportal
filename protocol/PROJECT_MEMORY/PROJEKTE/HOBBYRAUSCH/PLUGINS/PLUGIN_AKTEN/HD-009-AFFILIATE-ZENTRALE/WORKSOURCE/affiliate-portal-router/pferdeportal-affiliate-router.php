@@ -6,7 +6,7 @@
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
- * Text Domain: pferdeportal-affiliate-router
+ * Text Domain: hobby-depot-affiliate-router
  */
 
 if (!defined('ABSPATH')) {
@@ -281,10 +281,6 @@ final class Pferdeportal_Affiliate_Router {
         if (!$is_ajax_request) { add_action('init', array($this, 'maybe_upgrade_health_checker'), 6); }
         if (!$is_ajax_request) { add_action('init', array($this, 'ensure_health_cron_schedule'), 20); }
         if (!$is_ajax_request) { add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets')); }
-        // V6.72.104: Breadcrumb-Geometrie gehoert wieder ausschliesslich dem
-        // Designplugin. Affiliate reserviert keinen Layoutplatz mehr. Der bestehende
-        // Journal-Hero-Preload bleibt als reiner Bildhinweis erhalten.
-        if (!$is_ajax_request) { add_action('wp_head', array($this, 'print_journal_hero_preload_v672104'), 1); }
         // Muss auch ausserhalb des Adminbereichs erreichbar sein: eBay validiert
         // diesen HTTPS-Endpunkt per GET-Challenge und sendet danach signierte POSTs.
         if (!$is_ajax_request) {
@@ -299,8 +295,6 @@ final class Pferdeportal_Affiliate_Router {
         // V6.72.42: Glossar-Einzelbanner wird nach dem Designrenderer in die
         // reale Glossar-Single-Struktur eingesetzt. Design/Text bleiben unveraendert.
         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
-        // V6.72.60: Pferderassenartikel erhalten denselben echten Automatikpfad.
-        add_filter('the_content', array($this, 'inject_breed_single_banner'), 41);
         // V6.72.87 KISS: Uebersichts-Banner werden serverseitig direkt vor dem Hauptloop ausgegeben.
         if (!$is_ajax_request) { add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20); }
         // V6.72.90 KISS: Journal am final gerenderten Seiteninhalt einsortieren.
@@ -802,24 +796,6 @@ final class Pferdeportal_Affiliate_Router {
      * V6.72.104: reiner Journal-Hero-Preload. Keine Breadcrumb-, Margin-, Spacer-
      * oder First-Paint-Geometrie im Affiliate-Plugin. Diese gehoert dem Designplugin.
      */
-    public function print_journal_hero_preload_v672104() {
-        if (is_admin() || is_feed() || !(function_exists('is_page') && is_page('journal')) || !class_exists('Pferde_Template_Kit')) {
-            return;
-        }
-        try {
-            $ref = new ReflectionClass('Pferde_Template_Kit');
-            $design_file = $ref->getFileName();
-            if (is_string($design_file) && $design_file !== '') {
-                $hero = plugins_url('assets/journal-v150478/hero.webp', $design_file);
-                if (is_string($hero) && $hero !== '') {
-                    echo '<link rel="preload" as="image" href="' . esc_url($hero) . '" fetchpriority="high">' . "\n";
-                }
-            }
-        } catch (Throwable $e) {
-            // Reiner Performance-Hinweis. Rendering darf davon nie abhaengen.
-        }
-    }
-
     public function enqueue_frontend_assets() {
         if (is_admin()) {
             return;
@@ -1975,30 +1951,6 @@ JS;
         return (string) $content . "\n" . $mobile_banner . $desktop_banner;
     }
 
-    public function inject_breed_single_banner($content) {
-        if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
-        if (!function_exists('is_singular') || !is_singular('pa_breed') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
-        $post_id=absint(get_the_ID());
-        if ($post_id<=0 || get_post_type($post_id)!=='pa_breed' || post_password_required($post_id)) { return $content; }
-        $desktop_slot=$this->render_affiliate_slot($post_id,'breed_single_desktop_banner','portal_context','');
-        $mobile_slot=$this->render_affiliate_slot($post_id,'breed_single_mobile_banner','portal_context','');
-        if (trim((string)$desktop_slot)==='' && trim((string)$mobile_slot)==='') { return $content; }
-        $desktop=trim((string)$desktop_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-desktop-v67259" data-ppar-breed-banner="desktop">'.$desktop_slot.'</div>' : '';
-        $mobile=trim((string)$mobile_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-mobile-v67259" data-ppar-breed-banner="mobile">'.$mobile_slot.'</div>' : '';
-        // Exakt nach dem bestehenden Faktenblock. Desktop bleibt damit in der linken
-        // Rail; mobil wird derselbe DOM-Punkt ueber die bestehende Grid-Reihenfolge
-        // nach dem Lesetext und vor dem mobilen Tail angeordnet.
-        $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v[0-9]+[^"]*"[^>]*>.*?</section>)#is';
-        if (preg_match($pattern,(string)$content)) {
-            $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
-            if (is_string($replaced)&&$replaced!=='') { return $replaced; }
-        }
-        // KISS 6.72.205: bei geaendertem Designanker bleibt derselbe bereits
-        // formatgepruefte Rassenbanner sichtbar und faellt nur auf Inhaltsende.
-        return (string)$content . "\n" . $desktop . $mobile;
-    }
-
     /** V6.72.67 – Query-Kontext fuer bereits definierte Uebersichts-Werbeplaetze. */
     private function affiliate_overview_term_context($term, $taxonomy, $post_type) {
         if (!$term instanceof WP_Term || is_wp_error($term)) { return array(); }
@@ -2023,29 +1975,6 @@ JS;
         );
     }
 
-    private function affiliate_is_breed_overview_category($term) {
-        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
-        $term_id=absint($term->term_id);
-        if ($term_id === 1482) { return true; }
-        return $term_id > 0 && in_array(1482,array_map('absint',(array)get_ancestors($term_id,'category','taxonomy')),true);
-    }
-
-    private function affiliate_is_journal_category($term) {
-        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
-        $id=absint($term->term_id);
-        $slug=sanitize_title((string)$term->slug);
-        // Exakt aus dem aktuell gebundenen Journal-Design 1.50.552 abgeleitet.
-        // Glossar und Pferderassen besitzen eigene Werbeplatz-Vertraege und
-        // werden deshalb in inject_overview_banner_footer vorher abgefangen.
-        $ids=array(1481,1483,1484,1485,1486,1487,1488);
-        $slugs=array(
-            'pferde-verstehen','recht-finanzen-und-organisation','reiterleben-und-community',
-            'alltags-pferde-haltungsformen','pferdegesundheit-verstehen',
-            'pferdeernaehrung-verstehen','ausbildung-und-reitweisen','pferdewissen-grundlagen'
-        );
-        return in_array($id,$ids,true) || in_array($slug,$slugs,true);
-    }
-
     /**
      * V6.72.100 RESTORE – echte Design-Zielpunkte statt Loop-Position.
      * Der Banner wird erst im Footer an die bereits gerenderte, stabile
@@ -2061,26 +1990,11 @@ JS;
             $slot='glossary_overview_banner';
             $selector='.pftk-glossar-group-content-v150481';
             $context=$this->affiliate_overview_term_context($term,'uge_group','uge_group_archive');
-        } elseif (function_exists('is_tax') && is_tax('pa_breed_group')) {
-            $slot='breed_overview_banner';
-            $selector='#pftk-rassen-liste';
-            $context=$this->affiliate_overview_term_context($term,'pa_breed_group','pa_breed_group_archive');
         } elseif (function_exists('is_category') && is_category()) {
             if (sanitize_key((string)$term->slug) === 'glossar') {
                 $slot='glossary_overview_banner';
                 $selector='#pftk-glossar-liste';
                 $context=$this->get_category_archive_context($term);
-            } elseif ($this->affiliate_is_breed_overview_category($term)) {
-                $slot='breed_overview_banner';
-                $selector='#pftk-rassen-liste';
-                $context=$this->get_category_archive_context($term);
-            } elseif ($this->affiliate_is_journal_category($term)) {
-                // Exakt der alte Kategorie-Bannerpfad, nur an den echten aktuellen
-                // Journal-DOM gebunden: nach Karten, vor dem unteren Journalblock.
-                $slot='product_after_category_tiles';
-                $selector='[data-pa433-journal-bottom="1"]';
-                $context=$this->get_category_archive_context($term);
-                $mode='journal_before_bottom';
             }
         }
         if ($slot === '' || $selector === '' || !$context) { return; }
@@ -2118,9 +2032,7 @@ JS;
 
         // V6.72.100: diese Designflaechen besitzen wieder einen einzigen
         // festen Footer-Mount. Der generische loop_end darf dort nicht doppeln.
-        if (sanitize_key((string)$term->slug) === 'glossar'
-            || $this->affiliate_is_breed_overview_category($term)
-            || $this->affiliate_is_journal_category($term)) {
+        if (sanitize_key((string)$term->slug) === 'glossar') {
             return;
         }
 
@@ -3719,14 +3631,14 @@ JS;
             implode(' ',(array)($campaign['match_keywords'] ?? array())),
             (string)($profile['business_label'] ?? ''), implode(' ',(array)($profile['keywords'] ?? array())),
         )));
-        $tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        $tokens = array_values(array_diff($this->output_tokens($evidence), array('banner','anzeige','affiliate')));
         if (!$tokens) { return null; }
         $primary = $this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug'] ?? '')));
         if ($primary !== '') {
             // Exact means the complete distinctive glossary term, not one shared
             // generic token. The former any-token test made broad horse-shop banners
             // look exact on many unrelated glossary entries and prevented rotation.
-            $generic_exact = array('pferd','pferde','horse','horses','banner','anzeige','affiliate','shop','reiter','reiten');
+            $generic_exact = array('banner','anzeige','affiliate','shop');
             $primary_tokens = array_values(array_diff($this->output_tokens($primary), $generic_exact));
             $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), $generic_exact));
             if ($primary_tokens && $evidence_tokens) {
@@ -3751,7 +3663,7 @@ JS;
             implode(' ',array_map(static function($v){return str_replace(array('-','_'),' ',(string)$v);},(array)($context['direct_term_slugs'] ?? array()))),
             (string)($context['haystack'] ?? ''),
         )));
-        $context_tokens = array_values(array_diff($this->output_tokens($context_text), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        $context_tokens = array_values(array_diff($this->output_tokens($context_text), array('banner','anzeige','affiliate')));
         if (!$context_tokens) { return null; }
         $hits=array(); $strong=0;
         foreach($tokens as $et){
@@ -3955,7 +3867,6 @@ JS;
         // Historische neutrale Rassenverteilung bleibt fuer nicht automatisch
         // materialisierte Sonder-/Festzuordnungen unveraendert erhalten.
         if ($required_creative_type === 'banner' && in_array($slot_type, array(
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
         ), true)) {
             return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Sonderpfad ohne Creative-Library-Zielvertrag.');
         }
@@ -4059,7 +3970,7 @@ JS;
         }
 
         // Bestehender Artikel-Produktweg: nur zuletzt, nach allen vorhandenen
-        // Themenstufen, automatisch verifizierte Pferde-Angebote als generische
+        // Themenstufen, automatisch verifizierte Angebote als generische
         // Produktvorschlaege zulassen. Provider-Quelle, Veto, Health, Frische und
         // Produktqualitaet werden weiterhin in den bestehenden Gates geprueft.
         // Niemals fuer Kategorieslots, Exact-Productwissen oder manuelle Quelle.
@@ -4077,7 +3988,7 @@ JS;
                 && !empty($campaign['product_gtins']);
             if ($verified_ebay || $verified_idealo) {
                 return array('specificity'=>200,'matches'=>0,
-                    'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Pferdeprodukt; oeffentliche Freigabegates bleiben bindend.');
+                    'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Produkt; öffentliche Freigabegates bleiben bindend.');
             }
         }
         return null;
@@ -5862,7 +5773,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
 
     private function replace_template_tokens($text, $post_id, $context, $rule) {
         $site_name = get_bloginfo('name');
-        $thema = ($context === 'startseite') ? 'Pferdeportal' : get_the_title($post_id);
+        $thema = ($context === 'startseite') ? 'Hobby Depot' : get_the_title($post_id);
         $replacements = array(
             '{thema}' => $thema,
             '{site_name}' => $site_name,
@@ -6902,7 +6813,7 @@ JS;
         add_submenu_page(null,'Prüfzentrum','Prüfzentrum','manage_options','affiliate-portal-health',array($this,'render_health_center_page'));
         add_submenu_page(null,'Affiliate-Werbemittel bearbeiten','Affiliate-Werbemittel bearbeiten','manage_options','affiliate-portal-campaign-edit',array($this,'render_campaign_edit_page'));
         add_submenu_page(null,'Affiliate-Kampagnen Altansicht','Affiliate-Kampagnen Altansicht','manage_options','affiliate-portal-campaigns-legacy',array($this,'render_central_page'));
-        add_submenu_page(null,'Affiliate Portal Router - Erweitert','Affiliate Portal Router - Erweitert','manage_options','pferde-affiliate-router',array($this,'render_admin_page'));
+        add_submenu_page(null,'Affiliate Portal Router - Erweitert','Affiliate Portal Router - Erweitert','manage_options','hobby-depot-affiliate-router',array($this,'render_admin_page'));
         add_submenu_page(null,'Affiliate Portal Prüfung','Affiliate Portal Prüfung','manage_options','affiliate-portal-router-check',array($this,'render_check_page'));
         add_submenu_page(null,'Affiliate Portal Kontrollzentrum','Affiliate Portal Kontrollzentrum','manage_options','affiliate-portal-kontrollzentrum',array($this,'render_control_center_page'));
     }
@@ -10195,7 +10106,7 @@ JS;
         );
         ?>
         <div class="wrap">
-            <h1>Affiliate Portal Router <small style="font-size:13px;">allgemein / pferde-kompatibel</small></h1>
+            <h1>Affiliate-Zentrale <small style="font-size:13px;">Hobby Depot</small></h1>
             <p><strong>Status:</strong> Version <?php echo esc_html(self::VERSION); ?>. Design definiert Slots. Affiliate füllt passende aktive Slots. Leere Slots bleiben unsichtbar.</p>
             <p><strong>Bedienprinzip:</strong> Formular ist Hauptbedienung. JSON bleibt nur als Experten-/Importmodus erhalten. Kein Rückbau: vorhandene Gruppen und Banner bleiben erhalten.</p>
 
@@ -10652,7 +10563,7 @@ JS;
             $groups_json = isset($_POST['ppar_groups_json']) ? wp_unslash($_POST['ppar_groups_json']) : '[]';
             $decoded = json_decode($groups_json, true);
             if (!is_array($decoded)) {
-                wp_safe_redirect(add_query_arg('ppar_error', 'json', wp_get_referer() ?: admin_url('admin.php?page=pferde-affiliate-router')));
+                wp_safe_redirect(add_query_arg('ppar_error', 'json', wp_get_referer() ?: admin_url('admin.php?page=hobby-depot-affiliate-router')));
                 exit;
             }
         }
@@ -10662,13 +10573,13 @@ JS;
 
         $design_decoded = json_decode($design_rules_json, true);
         if (!is_array($design_decoded)) {
-            wp_safe_redirect(add_query_arg('ppar_error', 'design_json', wp_get_referer() ?: admin_url('admin.php?page=pferde-affiliate-router')));
+            wp_safe_redirect(add_query_arg('ppar_error', 'design_json', wp_get_referer() ?: admin_url('admin.php?page=hobby-depot-affiliate-router')));
             exit;
         }
 
         $template_decoded = json_decode($template_rules_json, true);
         if (!is_array($template_decoded)) {
-            wp_safe_redirect(add_query_arg('ppar_error', 'template_json', wp_get_referer() ?: admin_url('admin.php?page=pferde-affiliate-router')));
+            wp_safe_redirect(add_query_arg('ppar_error', 'template_json', wp_get_referer() ?: admin_url('admin.php?page=hobby-depot-affiliate-router')));
             exit;
         }
         $template_slots_from_form = isset($_POST['ppar_template_affiliate_slots']) && is_array($_POST['ppar_template_affiliate_slots']) ? wp_unslash($_POST['ppar_template_affiliate_slots']) : array();
@@ -10682,11 +10593,11 @@ JS;
 
         $template_validation = $this->validate_template_rules($template_decoded);
         if ($template_validation === 'word_alle') {
-            wp_safe_redirect(add_query_arg('ppar_error', 'template_word_alle', wp_get_referer() ?: admin_url('admin.php?page=pferde-affiliate-router')));
+            wp_safe_redirect(add_query_arg('ppar_error', 'template_word_alle', wp_get_referer() ?: admin_url('admin.php?page=hobby-depot-affiliate-router')));
             exit;
         }
         if ($template_validation !== true) {
-            wp_safe_redirect(add_query_arg('ppar_error', 'template_json', wp_get_referer() ?: admin_url('admin.php?page=pferde-affiliate-router')));
+            wp_safe_redirect(add_query_arg('ppar_error', 'template_json', wp_get_referer() ?: admin_url('admin.php?page=hobby-depot-affiliate-router')));
             exit;
         }
 
@@ -10707,58 +10618,12 @@ JS;
         update_option(self::OPTION_TEMPLATE_RULES_JSON, $pretty_template_json, false);
         update_option(self::OPTION_DESIGN_RULES_JSON, $pretty_design_json, false);
 
-        wp_safe_redirect(add_query_arg('ppar_saved', '1', admin_url('admin.php?page=pferde-affiliate-router')));
+        wp_safe_redirect(add_query_arg('ppar_saved', '1', admin_url('admin.php?page=hobby-depot-affiliate-router')));
         exit;
     }
 
     public static function default_groups_json() {
-        return wp_json_encode(array(
-            array(
-                'id' => 'pferdefutter',
-                'label' => 'Pferdefutter',
-                'active' => false,
-                'match_mode' => 'auto',
-                'workflow_status' => 'offen',
-                'workflow_note' => 'Beispielgruppe; vor produktiver Nutzung an Projektprofil anpassen.',
-                'match_slugs' => array(
-                    'pferdefutter',
-                    'mineralfutter-pferde',
-                    'mash-pferde',
-                    'heucobs-pferde',
-                    'kraftfutter-pferde',
-                    'ergaenzungsfutter-pferde',
-                    'seniorenfutter-pferde'
-                ),
-                'match_keywords' => array(
-                    'pferdefutter',
-                    'mineralfutter',
-                    'mash',
-                    'heucobs',
-                    'kraftfutter',
-                    'ergänzungsfutter',
-                    'seniorenfutter'
-                ),
-                'banners' => array(
-                    array(
-                        'id' => 'pferdefutter_beispiel_inaktiv',
-                        'label' => 'Anzeige',
-                        'active' => false,
-                        'mode' => 'image_link',
-                        'slots' => array('bottom_recommendation', 'mid_content', 'post_bottom_recommendation', 'post_mid_content', 'hub_after_cards', 'category_recommendation'),
-                        'intent' => array('primary_product', 'fallback'),
-                        'priority' => 10,
-                        'match_slugs' => array('pferdefutter'),
-                        'match_keywords' => array('pferdefutter'),
-                        'url' => 'https://example.com/?ref={subid}',
-                        'subid_param' => '',
-                        'image_url' => '',
-                        'title' => 'Pferdefutter online ansehen',
-                        'description' => 'Beispiel ist inaktiv. Hier später echten Awin-/ADCELL-/Shop-Link eintragen.',
-                        'button_text' => 'Zum Shop'
-                    )
-                )
-            )
-        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     public static function default_template_rules_json() {
@@ -10772,9 +10637,9 @@ JS;
                 'show_selected' => true,
                 'show_hint' => true,
                 'show_full_overview' => true,
-                'selected_heading' => 'Beliebte Themen im Pferdeportal',
-                'hint_heading' => 'Weitere Themen im Pferdeportal entdecken',
-                'hint_text' => 'Die angezeigten Bereiche sind nur ein Einstieg. In der vollständigen Übersicht finden Sie alle Themen rund um Haltung, Ernährung, Ausrüstung, Pflege, Gesundheit und Training.',
+                'selected_heading' => 'Beliebte Themen bei Hobby Depot',
+                'hint_heading' => 'Weitere Hobbys und Themen entdecken',
+                'hint_text' => 'Die angezeigten Bereiche sind nur ein Einstieg. In der vollständigen Übersicht finden Sie alle Hobbys und Themenwelten von Hobby Depot.',
                 'button_text' => 'Alle Themenbereiche anzeigen',
                 'button_anchor' => 'alle-themenbereiche',
                 'full_heading' => 'Alle Themenbereiche im Überblick',
@@ -10853,35 +10718,9 @@ JS;
     }
 
     public static function example_minimal_json() {
-        return wp_json_encode(array(
-            array(
-                'id' => 'pferdefutter',
-                'label' => 'Pferdefutter',
-                'active' => true,
-                'match_slugs' => array('pferdefutter', 'mineralfutter-pferde', 'mash-pferde'),
-                'match_keywords' => array('pferdefutter', 'mineralfutter', 'mash'),
-                'banners' => array(
-                    array(
-                        'id' => 'mineralfutter_banner',
-                        'label' => 'Anzeige',
-                        'active' => true,
-                        'mode' => 'image_link',
-                        'slots' => array('post_mid_content', 'post_bottom_recommendation'),
-                        'intent' => array('primary_product'),
-                        'priority' => 50,
-                        'match_slugs' => array('mineralfutter-pferde'),
-                        'match_keywords' => array('mineralfutter'),
-                        'url' => 'https://partnerlink.example/?clickref={subid}',
-                        'subid_param' => '',
-                        'image_url' => 'https://example.com/banner.jpg',
-                        'title' => 'Mineralfutter für Pferde',
-                        'description' => 'Passende Produkte im Partnershop ansehen.',
-                        'button_text' => 'Zum Angebot'
-                    )
-                )
-            )
-        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
+
 }
 
 if (!function_exists('affiliate_portal_upsert_campaign')) {
