@@ -15,7 +15,6 @@ class HDAR_WP_Idealo_Roundtrip {
     use PPAR_Idealo_Trait;
     const OPTION_NETWORK_IDEALO='ppar_network_idealo_v1';
     const CAMPAIGN_POST_TYPE='hdar_test_campaign';
-    const IDEALO_REFRESH_HOOK='hdar_test_idealo_refresh';
     public function provider_set_access_state($provider,$status,$message){ update_option('hdar_test_state_'.$provider, compact('status','message'), false); return true; }
     public function save($raw){ return $this->idealo_provider_access_save(null,'idealo',$raw,'test'); }
 }
