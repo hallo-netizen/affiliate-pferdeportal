@@ -115,8 +115,8 @@ trait PPAR_Output_Objects_Trait {
         foreach ((array) $rows as $row) {
             $scope = sanitize_key((string) ($row['content_scope'] ?? ''));
             $review = sanitize_key((string) ($row['review_status'] ?? ''));
-            $status = ($scope === 'other' || $review === 'rejected') ? 'veto' : ($scope === 'unclear' ? 'review' : 'approved');
-            $this->output_set_portal_decision($this->output_local_portal_key(), (string) ($row['identity_hash'] ?? ''), $status, 'Aus V3.x-Bewertung für das lokale Portal übernommen.');
+            $status = ($scope === 'unclear' && $review !== 'rejected') ? 'review' : 'veto';
+            $this->output_set_portal_decision($this->output_local_portal_key(), (string) ($row['identity_hash'] ?? ''), $status, 'Historische projektfremde Bewertung nicht automatisch für Hobby Depot freigegeben.');
         }
     }
 
@@ -225,10 +225,20 @@ trait PPAR_Output_Objects_Trait {
     public function output_portal_registry() {
         $portals = array();
         $local_key = $this->output_local_portal_key();
+        $domain_terms = array();
+        if (class_exists('HDAR_Hobby_Depot_Source')) {
+            $hdar_catalog = HDAR_Hobby_Depot_Source::catalog();
+            if (!is_wp_error($hdar_catalog)) {
+                foreach ((array)($hdar_catalog['private_bucket_profiles'] ?? array()) as $profile) {
+                    $label = sanitize_text_field((string)($profile['label'] ?? ''));
+                    if ($label !== '') { $domain_terms[] = $label; }
+                }
+            }
+        }
         $local_profile = array(
-            'domain_key' => 'horse',
-            'domain_terms' => array('pferd','pferde','pony','fohlen','reitsport','reiter'),
-            'negative_terms' => array('hund','hunde','katze','katzen','kleintier','kleintiere','vogel','voegel','exoten'),
+            'domain_key' => 'hobby_depot',
+            'domain_terms' => array_values(array_unique($domain_terms)),
+            'negative_terms' => array(),
             'output_types' => array('portal_banner','product_campaign','hivepress_listing'),
             'listing_target_types' => array('hp_listing_category'),
             'banner_target_types' => array('page','category','hp_listing_category'),
@@ -547,7 +557,7 @@ trait PPAR_Output_Objects_Trait {
                 );
             }
         }
-        foreach (array('post'=>'classic_post','uge_term'=>'glossary_single','pa_breed'=>'breed_single') as $post_type => $context) {
+        foreach (array('post'=>'classic_post','uge_term'=>'glossary_single') as $post_type => $context) {
             if (!function_exists('post_type_exists') || !post_type_exists($post_type) || !function_exists('get_posts')) { continue; }
             $posts = get_posts(array('post_type'=>$post_type,'post_status'=>'publish','posts_per_page'=>-1,'orderby'=>'ID','order'=>'ASC'));
             foreach ((array) $posts as $post) {
@@ -629,7 +639,7 @@ trait PPAR_Output_Objects_Trait {
 
     /**
      * Festgeschriebene aktive Slotmatrix aus dem getrennten Design–Affiliate-
-     * Schnittstellenvertrag Pferde Atelier V1.50.387 / Affiliate-Vertrag 1.0.
+     * Schnittstellenvertrag Hobby Depot / Affiliate-Vertrag 1.0.
      * Das Design wird nicht gelesen oder verändert; Vertragsabweichungen bleiben
      * fail-closed. Andere Portale liefern ihre Matrix über den bestehenden Filter.
      */
@@ -648,7 +658,7 @@ trait PPAR_Output_Objects_Trait {
                     $profile_contract = is_callable(array('Pferde_Template_Kit','design_profile_contract_version'))
                         ? (string) call_user_func(array('Pferde_Template_Kit','design_profile_contract_version'))
                         : '';
-                    if ($contract === self::CONTRACT_VERSION && $profile === 'pferde_atelier' && $profile_contract === '1.0') {
+                    if ($contract === self::CONTRACT_VERSION && $profile === 'hobby_depot' && $profile_contract === '1.0') {
                         $candidate = array(
                             'start_after_topics'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('start'),'upscale_max'=>1.10,'min_fill'=>0.90),
                             'hub_grid_card'=>array('creative_type'=>'banner','ratio_min'=>0.80,'ratio_max'=>2.40,'min_width'=>240,'min_height'=>110,'crop'=>'cover','target_types'=>array('page'),'target_contexts'=>array('hub1','hub2')),
@@ -661,11 +671,8 @@ trait PPAR_Output_Objects_Trait {
                             // Quelle fuer automatische Zuordnung UND Backendfilter.
                             'glossary_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>310,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'desktop'),
                             'glossary_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'mobile'),
-                            'breed_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>250,'min_height'=>1,'crop'=>'contain','target_types'=>array('pa_breed','pa_breed_group'),'target_contexts'=>array(),'render_context'=>'breed_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'desktop'),
-                            'breed_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('pa_breed','pa_breed_group'),'target_contexts'=>array(),'render_context'=>'breed_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'mobile'),
                             'post_inline_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>600,'min_height'=>60,'crop'=>'contain','target_types'=>array('post'),'target_contexts'=>array('classic_post'),'upscale_max'=>1.10,'min_fill'=>0.60),
                             'glossary_overview_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('category','uge_group','page'),'target_contexts'=>array('glossary_overview'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'breed_overview_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('category','pa_breed_group','page'),'target_contexts'=>array('breed_overview'),'upscale_max'=>1.10,'min_fill'=>0.90),
                             'hub_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
                             'hub_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
                             'hub_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
@@ -699,11 +706,9 @@ trait PPAR_Output_Objects_Trait {
         $binding = array(
             'kategorien'=>array('label'=>'Kategorien','slots'=>array('hub_after_cards','product_after_category_tiles')),
             'glossarartikel'=>array('label'=>'Glossarartikel','slots'=>array('glossary_single_desktop_banner','glossary_single_mobile_banner')),
-            'pferderassenartikel'=>array('label'=>'Pferderassenartikel','slots'=>array('breed_single_desktop_banner','breed_single_mobile_banner')),
             'klassische_einzelbeitraege'=>array('label'=>'Klassische Einzelbeiträge','slots'=>array('post_inline_banner')),
             'startseite'=>array('label'=>'Startseite','slots'=>array('start_after_topics')),
             'glossar_uebersichten'=>array('label'=>'Glossar-Übersichten','slots'=>array('glossary_overview_banner')),
-            'pferderassen_uebersichten'=>array('label'=>'Pferderassen-Übersichten','slots'=>array('breed_overview_banner')),
         );
         $profiles = array();
         foreach ($binding as $key => $definition) {
@@ -1876,23 +1881,6 @@ trait PPAR_Output_Objects_Trait {
             }
             return array('status'=>'review','confidence'=>0,'reason'=>'Glossar-Werbeplatz freigegeben, aber kein reales Glossarziel als Materialisierungsanker vorhanden.','target'=>null,'source'=>'glossary_anchor_missing');
         }
-        if ($manual_status === 'approved' && $output_type === 'portal_banner' && $werbeplatz_scope === 'pferderassenartikel') {
-            $anchor_target=null;
-            foreach((array)$targets as $candidate_target){
-                if(!is_array($candidate_target)){continue;}
-                $candidate_type=sanitize_key((string)($candidate_target['type']??''));
-                if(!in_array($candidate_type,array('pa_breed_group','pa_breed'),true)){continue;}
-                if(absint($candidate_target['id']??0)<=0||empty($candidate_target['key'])){continue;}
-                if(method_exists($this,'control_target_gate')&&is_wp_error($this->control_target_gate($portal_key,(string)$candidate_target['key']))){continue;}
-                if($anchor_target===null||$candidate_type==='pa_breed_group'){$anchor_target=$candidate_target;}
-                if($candidate_type==='pa_breed_group'){break;}
-            }
-            if(is_array($anchor_target)){
-                $anchor_target['_ppar_breed_neutral_anchor']=1;
-                return array('status'=>'ready','confidence'=>100,'reason'=>'Chefentscheidung: Werbemittel fuer Pferderassenartikel freigegeben; Artikelauswahl erfolgt zur Laufzeit.','target'=>$anchor_target,'alternatives'=>array(),'source'=>'manual_approved_breed_scope');
-            }
-            return array('status'=>'review','confidence'=>0,'reason'=>'Pferderassenartikel freigegeben, aber kein reales Rassenziel als Materialisierungsanker vorhanden.','target'=>null,'source'=>'breed_anchor_missing');
-        }
         $ranked = array();
         foreach ((array) $targets as $target) {
             if (!is_array($target)) {
@@ -2128,7 +2116,7 @@ trait PPAR_Output_Objects_Trait {
         }
         $priority = $creative_type === 'product'
             ? array('hub_product_1','category_product_1','journal_product_1','hub_product_2','category_product_2','journal_product_2','hub_product_3','category_product_3','journal_product_3')
-            : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner','glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card');
+            : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner','glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card');
 
         // V6.72.175: Das gewaehlte Portalziel bestimmt zuerst seinen realen
         // Werbeplatzkontext. Ein explizit passender Hub-/Kategorie-/Journal-Slot
@@ -2732,8 +2720,8 @@ trait PPAR_Output_Objects_Trait {
         $rule = is_array($slot['rule'] ?? null) ? $slot['rule'] : array();
         $automatic_slots = array(
             'hub_after_cards','product_after_category_tiles','start_after_topics',
-            'glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner',
-            'glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
+            'glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner',
+            'glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
         );
         if ($slot_id === '' || !in_array($slot_id, $automatic_slots, true) || !$rule) { return false; }
         $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
