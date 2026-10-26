@@ -277,6 +277,7 @@ final class Hobby_Depot_Affiliate_Router {
     private function __construct() {
         $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
         $this->idealo_register_hooks();
+        $this->amazon_creators_register_hooks();
         $this->digistore24_register_hooks();
         $this->tariff_tools_register_hooks();
         add_action('init', array($this, 'register_campaign_post_type'), 5);
