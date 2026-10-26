@@ -244,5 +244,5 @@ jobs:
           git -C /tmp/campus diff --cached --quiet && { echo "Campus already synchronized."; exit 0; }
           git -C /tmp/campus commit -m "HD-009 Gate 5: installierbaren CURRENT-Kandidaten synchronisieren"
           SYNC_BRANCH="hobbyrausch/hd009-gate5-campus-sync-$GITHUB_RUN_ID"
-          git -C /tmp/campus push origin HEAD:"$SYNC_BRANCH"
+          git -C /tmp/campus push origin HEAD:"refs/heads/$SYNC_BRANCH"
           echo "HD009_SYNC_BRANCH=$SYNC_BRANCH" >> "$GITHUB_ENV"
