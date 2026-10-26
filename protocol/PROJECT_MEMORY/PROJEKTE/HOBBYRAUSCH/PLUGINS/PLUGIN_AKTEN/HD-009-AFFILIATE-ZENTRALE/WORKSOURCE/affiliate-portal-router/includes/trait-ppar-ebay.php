@@ -161,88 +161,19 @@ trait PPAR_Ebay_Trait {
 
     /** V4.2.0 – vollständiger, fest mitgelieferter Pferde-Atelier-Zielkatalog. */
     private function ebay_portal_catalog() {
-        static $catalog = null;
-        if (is_array($catalog)) { return $catalog; }
-        $asset_dir = dirname(__DIR__) . '/assets/';
-        $path = $asset_dir . 'ebay-portal-catalog-v2.json';
-        $source_path = $asset_dir . 'portal-structure-v279.json';
-        if (!is_readable($path) || !is_readable($source_path)) {
-            return new WP_Error('ebay_portal_catalog_missing', 'Pferde-Atelier-eBay-Zielkatalog oder Portalquelle fehlt.');
+        if (!class_exists('HDAR_Hobby_Depot_Source')) {
+            return new WP_Error('hdar_source_adapter_missing', 'Hobby-Depot-Source-Adapter fehlt.');
         }
-        $decoded = json_decode((string) file_get_contents($path), true);
-        if (!is_array($decoded) || (string) ($decoded['schema'] ?? '') !== '2.0') {
-            return new WP_Error('ebay_portal_catalog_invalid', 'Pferde-Atelier-eBay-Zielkatalog ist ungültig.');
+        $catalog = HDAR_Hobby_Depot_Source::catalog();
+        if (is_wp_error($catalog)) { return $catalog; }
+        if (!is_array($catalog)
+            || empty($catalog['product_targets'])
+            || empty($catalog['article_targets'])
+            || empty($catalog['search_rules'])
+            || empty($catalog['business_concepts'])
+            || count((array)($catalog['private_bucket_profiles'] ?? array())) !== 8) {
+            return new WP_Error('hdar_catalog_incomplete', 'Hobby-Depot-Affiliate-Zielkatalog ist unvollständig.');
         }
-        $expected_source_hash = strtolower(sanitize_text_field((string) ($decoded['source_sha256'] ?? '')));
-        $actual_source_hash = hash_file('sha256', $source_path);
-        if (!preg_match('/^[a-f0-9]{64}$/', $expected_source_hash) || !is_string($actual_source_hash) || !hash_equals($expected_source_hash, strtolower($actual_source_hash))) {
-            return new WP_Error('ebay_portal_catalog_source_mismatch', 'Pferde-Atelier-eBay-Zielkatalog stimmt nicht mit der mitgelieferten Portalstruktur überein.');
-        }
-        $counts = is_array($decoded['counts'] ?? null) ? $decoded['counts'] : array();
-        $products = array_values((array) ($decoded['product_targets'] ?? array()));
-        $articles = array_values((array) ($decoded['article_targets'] ?? array()));
-        $rules = array_values((array) ($decoded['search_rules'] ?? array()));
-        $business_concepts = array_values((array) ($decoded['business_concepts'] ?? array()));
-        $business_hub_concepts = array_values((array) ($decoded['business_hub_concepts'] ?? array()));
-
-        // V6.72.173: Katalogintegritaet wird gegen den tatsaechlich mitgelieferten,
-        // bereits per source_sha256 an die Portalstruktur gebundenen Inhalt geprueft.
-        // Historische Gesamtzahlen (329/1124) duerfen legitime Strukturzuwachse nicht
-        // mehr als Fehler klassifizieren. Keine zweite Portalstruktur wird geparst.
-        $actual_counts = array(
-            'main_hubs' => count($rules),
-            'hub_pages' => count($business_hub_concepts),
-            'product_pages' => count($products),
-            'article_categories' => count($articles),
-            'business_concepts' => count($business_concepts),
-            'business_hub_concepts' => count($business_hub_concepts),
-            'business_routable_concepts' => count($business_concepts) + count($business_hub_concepts),
-        );
-        foreach ($actual_counts as $key => $actual) {
-            if (!array_key_exists($key, $counts) || absint($counts[$key]) !== $actual) {
-                return new WP_Error('ebay_portal_catalog_incomplete', 'Pferde-Atelier-eBay-Zielkatalog ist inkonsistent: ' . sanitize_key($key));
-            }
-        }
-        if (!$products || !$articles || !$rules || !$business_concepts || !$business_hub_concepts) {
-            return new WP_Error('ebay_portal_catalog_count_mismatch', 'Pferde-Atelier-eBay-Zielkatalog enthält keine vollständige nutzbare Zielstruktur.');
-        }
-        $allowed_buckets = array('pferde-ponys','sattel-zaumzeug','decken-schutz','stall-weide-haltung','fuetterung-pflege','anhaenger-transport','reitbekleidung-zubehoer','sonstiges');
-        $product_slugs = array();
-        foreach ($products as $target) {
-            if (!is_array($target)) { return new WP_Error('ebay_portal_product_invalid', 'Ungültiges Produktziel im Pferde-Atelier-Katalog.'); }
-            $slug = sanitize_title((string) ($target['slug'] ?? ''));
-            $bucket = sanitize_title((string) ($target['private_bucket_slug'] ?? ''));
-            if ($slug === '' || empty($target['title']) || empty($target['hub']) || empty($target['main_hub']) || !in_array($bucket, $allowed_buckets, true) || isset($product_slugs[$slug])) {
-                return new WP_Error('ebay_portal_product_invalid', 'Unvollständiges, doppeltes oder ungültig geroutetes Produktziel: ' . $slug);
-            }
-            $product_slugs[$slug] = true;
-        }
-        $article_slugs = array();
-        foreach ($articles as $target) {
-            if (!is_array($target)) { return new WP_Error('ebay_portal_article_invalid', 'Ungültiges WordPress-Kategorieziel im Pferde-Atelier-Katalog.'); }
-            $slug = sanitize_title((string) ($target['category_slug'] ?? ''));
-            $product_slug = sanitize_title((string) ($target['product_slug'] ?? ''));
-            if ($slug === '' || empty($target['category_name']) || !isset($product_slugs[$product_slug]) || isset($article_slugs[$slug])) {
-                return new WP_Error('ebay_portal_article_invalid', 'Unvollständige, doppelte oder verwaiste WordPress-Kategorie: ' . $slug);
-            }
-            $article_slugs[$slug] = true;
-        }
-        $rule_ids = array();
-        foreach ($rules as $rule) {
-            $id = sanitize_key((string) ($rule['id'] ?? ''));
-            $bucket = sanitize_title((string) ($rule['target_term_slug'] ?? ''));
-            if ($id === '' || empty($rule['query']) || !in_array($bucket, $allowed_buckets, true) || isset($rule_ids[$id])) {
-                return new WP_Error('ebay_portal_rule_invalid', 'Ungültiges automatisches eBay-Abrufprofil: ' . $id);
-            }
-            $rule_ids[$id] = true;
-        }
-        if (count(array_values(array_filter((array) ($decoded['strong_horse_markers'] ?? array())))) < 10 || empty($decoded['hard_negative_markers'])) {
-            return new WP_Error('ebay_portal_markers_incomplete', 'Fach- oder Ausschlussmarker des eBay-Zielkatalogs fehlen.');
-        }
-        if (count((array) ($decoded['private_bucket_profiles'] ?? array())) !== 8 || count((array) ($decoded['business_concepts'] ?? array())) < 300 || empty($decoded['content_policy']['version'])) {
-            return new WP_Error('ebay_portal_workflow_contract_incomplete', 'eBay-Workflow-V2-Vertrag im Zielkatalog ist unvollständig.');
-        }
-        $catalog = $decoded;
         return $catalog;
     }
 
