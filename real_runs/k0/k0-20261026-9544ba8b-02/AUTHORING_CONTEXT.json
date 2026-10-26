@@ -1,0 +1,162 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "salzlecksteine-faq",
+    "plan_slot": "d9a5ee752916c82501e2dc605aef6cf48b82642c25e455fc3d2a1dd77586e384",
+    "target_keyword": "Warum leckt mein Pferd viel am Salzleckstein",
+    "title": "Warum leckt mein Pferd viel am Salzleckstein?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Gesellschaft für Pferdemedizin",
+          "source_url": "https://gpm-vet.de/de/fachliteratur-kompakt/804-einfluss-der-darreichungsform-auf-die-salzaufnahme-beim-pferd"
+        },
+        {
+          "source_title": "Deutsche Reiterliche Vereinigung – Pferdefütterung",
+          "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern"
+        },
+        {
+          "source_title": "LKV Sachsen – Fütterung des Sportpferdes",
+          "source_url": "https://www.lkvsachsen.de/blog-1/blogbeitrag/artikel/die-fuetterung-des-sportpferdes-was-braucht-es-wirklich/"
+        }
+      ],
+      "claims": [
+        "Natrium wird durch Raufutter allein häufig nicht bedarfsgerecht gedeckt, deshalb kann ein Pferd gezielt Salz suchen.",
+        "Ein Salzleckstein reicht bei normaler Arbeit häufig aus, während starke Schweißverluste zusätzliche Elektrolyte erforderlich machen können.",
+        "Bei erhöhtem Salzbedarf muss zugleich genügend frisches Trinkwasser bereitstehen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum leckt mein Pferd viel am Salzleckstein",
+      "topic": "Warum leckt mein Pferd viel am Salzleckstein?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "salzlecksteine-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum leckt mein Pferd viel am Salzleckstein?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Gesellschaft für Pferdemedizin",
+        "source_url": "https://gpm-vet.de/de/fachliteratur-kompakt/804-einfluss-der-darreichungsform-auf-die-salzaufnahme-beim-pferd",
+        "statement": "Natrium wird durch Raufutter allein häufig nicht bedarfsgerecht gedeckt, deshalb kann ein Pferd gezielt Salz suchen.",
+        "evidence_text": "Natrium wird durch Raufutter allein häufig nicht bedarfsgerecht gedeckt, deshalb kann ein Pferd gezielt Salz suchen.",
+        "evidence_text_sha256": "cd07a096408c21c30530b95a704466fd60aa15d3aa5cd5b1c3c69c815c317690",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Deutsche Reiterliche Vereinigung – Pferdefütterung",
+        "source_url": "https://www.pferdesport-deutschland.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "statement": "Ein Salzleckstein reicht bei normaler Arbeit häufig aus, während starke Schweißverluste zusätzliche Elektrolyte erforderlich machen können.",
+        "evidence_text": "Ein Salzleckstein reicht bei normaler Arbeit häufig aus, während starke Schweißverluste zusätzliche Elektrolyte erforderlich machen können.",
+        "evidence_text_sha256": "b4badf219b7e64d5cd9048eb00b7314a3d7c335e5593710326c90c709dabb5f1",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "LKV Sachsen – Fütterung des Sportpferdes",
+        "source_url": "https://www.lkvsachsen.de/blog-1/blogbeitrag/artikel/die-fuetterung-des-sportpferdes-was-braucht-es-wirklich/",
+        "statement": "Bei erhöhtem Salzbedarf muss zugleich genügend frisches Trinkwasser bereitstehen.",
+        "evidence_text": "Bei erhöhtem Salzbedarf muss zugleich genügend frisches Trinkwasser bereitstehen.",
+        "evidence_text_sha256": "c02f5eaab880fc6d5cb2ee1da95ec23e17b2967a09a95b8ba9377180f8387448",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/salzlecksteine-faq/",
+        "anchor": "salzlecksteine – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/salzlecksteine-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/salzlecksteine-anwendung/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/salzlecksteine-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/salzlecksteine-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/salzlecksteine-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "salzlecksteine-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "salzlecksteine",
+      "Warum leckt mein",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
