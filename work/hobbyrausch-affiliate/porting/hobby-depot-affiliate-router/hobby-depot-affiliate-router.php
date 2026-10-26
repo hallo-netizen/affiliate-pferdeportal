@@ -1893,32 +1893,6 @@ JS;
         // auf das Ende des Glossarinhalts zurueck.
         return (string) $content . "\n" . $mobile_banner . $desktop_banner;
     }
-
-    public function inject_breed_single_banner($content) {
-        if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
-        if (!function_exists('is_singular') || !is_singular('pa_breed') || !in_the_loop() || !is_main_query()) { return $content; }
-        if (strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
-        $post_id=absint(get_the_ID());
-        if ($post_id<=0 || get_post_type($post_id)!=='pa_breed' || post_password_required($post_id)) { return $content; }
-        $desktop_slot=$this->render_affiliate_slot($post_id,'breed_single_desktop_banner','portal_context','');
-        $mobile_slot=$this->render_affiliate_slot($post_id,'breed_single_mobile_banner','portal_context','');
-        if (trim((string)$desktop_slot)==='' && trim((string)$mobile_slot)==='') { return $content; }
-        $desktop=trim((string)$desktop_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-desktop-v67259" data-ppar-breed-banner="desktop">'.$desktop_slot.'</div>' : '';
-        $mobile=trim((string)$mobile_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-mobile-v67259" data-ppar-breed-banner="mobile">'.$mobile_slot.'</div>' : '';
-        // Exakt nach dem bestehenden Faktenblock. Desktop bleibt damit in der linken
-        // Rail; mobil wird derselbe DOM-Punkt ueber die bestehende Grid-Reihenfolge
-        // nach dem Lesetext und vor dem mobilen Tail angeordnet.
-        $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v[0-9]+[^"]*"[^>]*>.*?</section>)#is';
-        if (preg_match($pattern,(string)$content)) {
-            $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
-            if (is_string($replaced)&&$replaced!=='') { return $replaced; }
-        }
-        // KISS 6.72.205: bei geaendertem Designanker bleibt derselbe bereits
-        // formatgepruefte Rassenbanner sichtbar und faellt nur auf Inhaltsende.
-        return (string)$content . "\n" . $desktop . $mobile;
-    }
-
-    /** V6.72.67 – Query-Kontext fuer bereits definierte Uebersichts-Werbeplaetze. */
     private function affiliate_overview_term_context($term, $taxonomy, $post_type) {
         if (!$term instanceof WP_Term || is_wp_error($term)) { return array(); }
         $slugs=array((string)$term->slug); $names=array((string)$term->name); $term_ids=array((int)$term->term_id);
@@ -1940,13 +1914,6 @@ JS;
             'term_ids'=>array_values(array_unique(array_map('intval',$term_ids))),
             'direct_term_slugs'=>array(sanitize_key((string)$term->slug)),
         );
-    }
-
-    private function affiliate_is_breed_overview_category($term) {
-        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
-        $term_id=absint($term->term_id);
-        if ($term_id === 1482) { return true; }
-        return $term_id > 0 && in_array(1482,array_map('absint',(array)get_ancestors($term_id,'category','taxonomy')),true);
     }
 
     private function affiliate_is_journal_category($term) {
@@ -5246,24 +5213,6 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         foreach ($map as $type => $shortcodes) {
             foreach ($shortcodes as $shortcode) {
                 if (has_shortcode($content, $shortcode)) { return $type; }
-            }
-        }
-        return '';
-    }
-
-
-    private function get_design_template_type_from_content($content) {
-        $map = array(
-            'start' => array('pferde_startseite', 'pferde_startseite_only', 'affiliate_portal_startseite'),
-            'hub1' => array('pferde_hub_ebene_1', 'pferde_hauptseite', 'affiliate_portal_hub_1'),
-            'hub2' => array('pferde_hub_ebene_2', 'pferde_hub_auto', 'affiliate_portal_hub_2', 'affiliate_portal_hub_auto'),
-            'category' => array('affiliate_portal_kategorie', 'affiliate_portal_produkt'),
-        );
-        foreach ($map as $type => $shortcodes) {
-            foreach ($shortcodes as $shortcode) {
-                if (has_shortcode($content, $shortcode)) {
-                    return $type;
-                }
             }
         }
         return '';
