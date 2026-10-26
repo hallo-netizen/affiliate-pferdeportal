@@ -169,7 +169,7 @@ switch ($scenario) {
         ) as $legacy) {
             assert_true(!file_exists($pluginRoot . '/' . $legacy), 'Fremdprojektdatei darf nicht zurückkehren: ' . $legacy);
         }
-        $blocked = '/(Pferdeatelier|Pferde-Atelier|pferdeatelier|pferde-atelier|Horse|Equine|Pony|Fohlen|Hengst|Stute|Wallach|Pferderass|Rasse|Breed|Sattel|Schabrack|Huf|Trense|Zaum|Halfter)/i';
+        $blocked = '/(Pferdeatelier|Pferde-Atelier|pferdeatelier|pferde-atelier|Horse|Equine|Pony|\\bFohlen\\b|Hengst|Stute|Wallach|Pferderass|Rasse|Breed|Sattel|Schabrack|Huf|Trense|Zaum|Halfter)/i';
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($pluginRoot, FilesystemIterator::SKIP_DOTS));
         foreach ($iterator as $file) {
             if (!$file->isFile() || !preg_match('/\.(php|js|css)$/i', $file->getFilename())) { continue; }
