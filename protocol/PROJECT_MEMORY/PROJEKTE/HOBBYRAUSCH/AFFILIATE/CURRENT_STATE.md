@@ -80,18 +80,26 @@ Bereits entfernt:
    - Evidence: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
 
 5. **GATE 5 – Installationspaket/CURRENT.zip: PASS**
-   - GitHub-Actions-Lauf `40344179549`: SUCCESS.
+   - GitHub-Actions-Lauf `40372683116`: SUCCESS.
    - Gate-4-Regressionssuite erneut PASS.
    - Fresh-Unpack byte-identisch zur geprüften WORKSOURCE.
    - PHP-Lint 23/23 PASS.
    - frische WordPress-Installation und Plugin-Aktivierung PASS.
    - ohne HD-004-Registry erwartetes fail-closed `hdar_category_registry_unavailable` PASS.
    - mit bereitgestelltem HD-004-Runtimevertrag: 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS.
-   - eBay/idealo-Regressionspfade PASS; kein erfundener Amazon-Adapter.
-   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #572 in den Campus übernommen.
-   - Kandidat: `0.1.1-dev`.
-   - Kandidat SHA-256: `663ff5a77932704ef1e354e37c7591f99046e54f90beb67c03cb63837a155511`.
+   - eBay/idealo-Regressionspfade PASS; Amazon-ASIN-Brücke aus dem idealo-Feed PASS; keine erfundene Amazon-Creators-API.
+   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #578 in den Campus übernommen.
+   - Kandidat: `0.1.2-dev`.
+   - Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`.
    - Verbindungsdaten-Preflight vorhanden: Awin, ADCELL, eBay, idealo und Digistore24 werden auf vollständige Pflichtzugänge geprüft; bei fehlenden Pflichtwerten bleibt LIVE-PASS gesperrt.
+
+## Amazon-ASIN-Brücke
+
+- Quelle: vorhandener idealo-iPN-Feed, Feld `asins_product`.
+- Nur Produkte mit exakt einer gültigen ASIN werden verwendet.
+- Direkter Amazon.de-Produktlink mit Partner-/Tracking-ID.
+- Keine eigene Amazon-Produktsuche und keine erfundene Creators-API.
+- In einer Kategorie-Dreierreihe wird höchstens ein geeigneter idealo-Kandidat auf Amazon umgelegt; nicht mehr starr nur auf Platz 3.
 
 ## Erster offener Blocker
 
@@ -99,4 +107,4 @@ Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten si
 
 ## NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten `0.1.1-dev` manuell in der echten Hobby-Depot-WordPress-Laufzeit installieren. Danach den Verbindungsdaten-Preflight öffnen und sicherstellen, dass alle Pflichtzugänge vollständig sind: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Anschließend Verbindungstests, HD-004-Zielquelle, eBay/idealo und Frontend-/Provider-Readback prüfen. Amazon bleibt ohne belegten realen Adapter `prepared`. Erst nach vollständigem Preflight und Live-Nachweis Live-PASS setzen.
+Den Gate-5-PASS-Kandidaten `0.1.2-dev` manuell in der echten Hobby-Depot-WordPress-Laufzeit installieren. Danach den Verbindungsdaten-Preflight öffnen und sicherstellen, dass alle Pflichtzugänge vollständig sind: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Anschließend Verbindungstests, HD-004-Zielquelle, eBay/idealo und Frontend-/Provider-Readback prüfen. Amazon nutzt ausschließlich eindeutige ASINs aus dem idealo-Feed; Partner-/Tracking-ID bleibt Laufzeitkonfiguration. Erst nach vollständigem Preflight und Live-Nachweis Live-PASS setzen.
