@@ -885,7 +885,7 @@ trait PPAR_Ebay_Trait {
     /**
      * Primaerer Produkttitel vor relationalen Zubehoer-/Kompatibilitaetsphrasen.
      * Damit ist z.B. ein konkreter Produkttitel ein belastbarer direkter
-     * Produkttreffer, waehrend eine reine Zubehörreferenz den Reithelm nur als
+     * Produkttreffer, waehrend eine reine Zubehörreferenz das referenzierte Produkt nur als
      * Bezugsobjekt nennt. Der komplette Titel bleibt fuer Corroboration und
      * Mehrdeutigkeitspruefung erhalten; diese Zone wird nur fuer die direkte
      * Ein-Wort-Leaf-Freigabe verwendet.
@@ -938,7 +938,7 @@ trait PPAR_Ebay_Trait {
     }
 
     /**
-     * An exact discovery profile may use its Pferd-scoped query only as domain
+     * An exact discovery profile may use its exact query only as context
      * context after the real eBay offer independently proves the expected product.
      * The query can never create a product match by itself.
      */
@@ -2729,8 +2729,7 @@ trait PPAR_Ebay_Trait {
         // For "Sperren + lernen", prefer the actual false-product noun over
         // incidental leading words/brands (e.g. "Alter Aufkleber ..." learns
         // "aufkleber", never the dangerously broad token "alter"). A false
-        // product noun that itself opens a compatibility boundary ("Ersatzteil
-        // Reitstiefel ...") must still be learnable instead of collapsing to an
+        // product noun that itself opens a compatibility boundary ("Ersatzteil ...") must still be learnable instead of collapsing to an
         // empty title head.
         foreach ($this->ebay_business_wrong_product_head_tokens() as $wrong_head) {
             if ($first_title_token !== '' && $this->ebay_business_strict_token_present($first_title_token, $wrong_head)) { return sanitize_key($wrong_head); }
@@ -4521,8 +4520,7 @@ trait PPAR_Ebay_Trait {
         // discovery/maintenance workflow. Re-running the complete portal catalog
         // classifier here would make the one-time recovery itself timeout-prone.
 
-        // A reference product in an accessory title (e.g. "Helmtasche für
-        // Reithelm") must never consume a Reithelm slot. Keep the item in the
+        // A reference product in an accessory title (e.g. an accessory-reference title) must never consume a Reithelm slot. Keep the item in the
         // coarse PRIVATE bucket, but give the real accessory its own balance key.
         if($raw){
             $title=sanitize_text_field((string)($raw['title']??$row['title']??''));
@@ -4542,8 +4540,7 @@ trait PPAR_Ebay_Trait {
         if($concept!=='' && strpos($concept,'hub-concept-')!==0){return $concept;}
         // Hub concepts intentionally aggregate several real product types. For
         // PRIVATE inventory balance use the concrete matched alias/hit so that
-        // Reithose, Reitjacke, Reitschuh, Reitweste, ... do not collapse into one
-        // anonymous Reiterbedarf pool.
+        // different concrete product types do not collapse into one anonymous parent pool.
         foreach((array)($class['hits']??array()) as $hit){
             $hit=sanitize_key($this->ebay_topic_text((string)$hit));
             if($hit!==''){return 'private-hit-'.$hit;}
@@ -4598,7 +4595,7 @@ trait PPAR_Ebay_Trait {
                     // candidate 2, and candidate 2 before candidate 3. Only after
                     // three breadth rounds may larger pools gain extra depth. This
                     // prevents large helmet/hose pools from starving smaller but
-                    // valid concepts such as Reitstiefel.
+                    // valid exact concepts.
                     $depth=(int)$i;
                     $row['_capacity_depth']=$depth;
                     $row['_capacity_priority']=$depth < 3
@@ -8321,7 +8318,7 @@ trait PPAR_Ebay_Trait {
         // V6.13: an eBay-marked PRIVATE listing is public only when its durable
         // provider source can still be resolved and audited with the original
         // eBay payload. V6.12 fell back to a title-only check for orphan/legacy
-        // listings. That was fail-open: a listing titled e.g. "Pferdegeschichten
+        // listings. That was fail-open: a listing titled e.g. an unrelated content product
         // fuer Kinder" could stay public even when the only book evidence lived
         // in the no-longer-resolved eBay category "Kinder- & Jugendbuecher".
         // Native HivePress listings never reach this branch because they have no
@@ -8363,7 +8360,7 @@ trait PPAR_Ebay_Trait {
      * Final parent 3x3 selection with category breadth.
      *
      * V6.34: the parent page must not simply show the nine newest listings.
-     * A targeted enrichment (for example Reitstiefel) can create many fresh
+     * A targeted enrichment (for example a narrow source family) can create many fresh
      * posts at once and would otherwise monopolise the whole 3x3 overview even
      * though the underlying 250-item PRIVATE inventory is balanced. We therefore
      * build a small, policy-checked candidate pool per direct PRIVATE child and
@@ -9188,7 +9185,7 @@ trait PPAR_Ebay_Trait {
         }
         $settings['last_test'] = is_wp_error($result) ? array('status'=>'failed','tested_at'=>time(),'message'=>$result->get_error_message()) : array_merge(array('status'=>'pass'), $result);
         update_option(self::OPTION_NETWORK_EBAY, $settings, false);
-        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>is_wp_error($result)?'test_failed':'test_passed','message'=>rawurlencode(is_wp_error($result)?$result->get_error_message():'Verbindung, Verkäuferweiche und automatischer Pferde-Atelier-Themenfilter geprüft.')), admin_url('admin.php')));
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>is_wp_error($result)?'test_failed':'test_passed','message'=>rawurlencode(is_wp_error($result)?$result->get_error_message():'Verbindung, Verkäuferweiche und automatischer Hobby Depot-Themenfilter geprüft.')), admin_url('admin.php')));
         exit;
     }
 
@@ -9339,7 +9336,7 @@ trait PPAR_Ebay_Trait {
 
     /** V6.27 one-time BUSINESS restoration after the V6.26 scope leak. */
 /**
-     * V6.37 PRIVATE supply invariant for Reitstiefel. The old regression tests
+     * V6.37 PRIVATE supply invariant from the source portal. The old regression tests
      * proved classification and balancing only after synthetic boot rows already
      * existed. This live-facing invariant inspects the durable source table and
      * the actually published HivePress listings instead.
@@ -9423,7 +9420,7 @@ trait PPAR_Ebay_Trait {
 
             <section class="postbox" style="padding:18px;max-width:1180px">
                 <h2>1. PRIVATE / HivePress</h2>
-                <p><strong>Deaktiviert.</strong> Für Hobby Depot wird keine Pferdeatelier-HivePress-Struktur übernommen.</p>
+                <p><strong>Deaktiviert.</strong> Für Hobby Depot bleibt PRIVATE/HivePress bis zu einem eigenen Portalvertrag deaktiviert.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="ppar_ebay_setup_categories">
                     <?php wp_nonce_field('ppar_ebay_setup_categories', 'ppar_ebay_nonce'); ?>
