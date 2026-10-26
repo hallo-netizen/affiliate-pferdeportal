@@ -14,8 +14,9 @@
     "Programmdauer",
     "Anwendungszeit",
     "Magnetfeldanwendung",
-    "Leitungen"
+    "Leitungen",
+    "equimag-System"
   ],
-  "revision_count": 6,
+  "revision_count": 7,
   "publish_allowed": false
 }
