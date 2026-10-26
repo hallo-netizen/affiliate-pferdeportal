@@ -5,18 +5,20 @@
   "profiles": [
     {
       "portal_id": "hobby",
-      "display_name": "Hobby",
+      "display_name": "Hobby Depot",
       "category_exact": [
         "discgolf-beratung"
       ],
-      "category_prefixes": []
+      "category_prefixes": [],
+      "wordpress_base_url": null
     },
     {
       "portal_id": "pferdeatelier",
       "display_name": "Pferdeatelier",
       "category_exact": [],
       "category_prefixes": [],
-      "category_git_source": "refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+      "category_git_source": "refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
+      "wordpress_base_url": "https://pferde-atelier.de"
     }
   ]
 }
