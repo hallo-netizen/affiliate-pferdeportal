@@ -88,7 +88,7 @@ Bereits entfernt:
    - ohne HD-004-Registry erwartetes fail-closed `hdar_category_registry_unavailable` PASS.
    - mit bereitgestelltem HD-004-Runtimevertrag: 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS.
    - eBay/idealo-Regressionspfade PASS; Amazon-ASIN-Brücke aus dem idealo-Feed PASS; keine erfundene Amazon-Creators-API.
-   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #574 in den Campus übernommen.
+   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #578 in den Campus übernommen.
    - Kandidat: `0.1.2-dev`.
    - Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`.
    - Verbindungsdaten-Preflight vorhanden: Awin, ADCELL, eBay, idealo und Digistore24 werden auf vollständige Pflichtzugänge geprüft; bei fehlenden Pflichtwerten bleibt LIVE-PASS gesperrt.
