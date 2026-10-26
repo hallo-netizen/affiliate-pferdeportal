@@ -61,15 +61,15 @@ jobs:
           set -euo pipefail
           main="$HD009_SRC/hobby-depot-affiliate-router.php"
           VERSION="$(sed -n 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*//p' "$main" | head -n1 | tr -d '\r')"
-          test "$VERSION" = "0.1.1-dev"
+          test "$VERSION" = "0.1.2-dev"
           rm -rf /tmp/hd009-package /tmp/hd009-unpack
           mkdir -p /tmp/hd009-package /tmp/hd009-unpack
           cp -a "$HD009_SRC" /tmp/hd009-package/affiliate-portal-router
           (
             cd /tmp/hd009-package
-            zip -qr "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" affiliate-portal-router
+            zip -qr "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip" affiliate-portal-router
           )
-          unzip -q "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" -d /tmp/hd009-unpack
+          unzip -q "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip" -d /tmp/hd009-unpack
           test -f /tmp/hd009-unpack/affiliate-portal-router/hobby-depot-affiliate-router.php
           mapfile -t unpack_php < <(find /tmp/hd009-unpack/affiliate-portal-router -type f -name '*.php' -print | sort)
           test "${#unpack_php[@]}" -eq 23
@@ -77,7 +77,7 @@ jobs:
           (cd "$HD009_SRC" && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/source.sha
           (cd /tmp/hd009-unpack/affiliate-portal-router && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/unpack.sha
           diff -u /tmp/source.sha /tmp/unpack.sha
-          sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" | tee /tmp/candidate.sha
+          sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip" | tee /tmp/candidate.sha
           echo "HD009_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "HD009_SHA=$(cut -d' ' -f1 /tmp/candidate.sha)" >> "$GITHUB_ENV"
 
@@ -102,11 +102,36 @@ jobs:
           $WPCLI eval '
             $p = Hobby_Depot_Affiliate_Router::instance()->provider_credentials_preflight();
             if (!is_array($p) || !empty($p["all_required_complete"])) exit(20);
-            foreach (array("awin","adcell","ebay","idealo","digistore24") as $provider) {
+            foreach (array("awin","adcell","ebay","idealo","amazon","digistore24") as $provider) {
               if (empty($p["providers"][$provider]) || !array_key_exists("missing_required", $p["providers"][$provider])) exit(21);
             }
             if (empty($p["providers"]["ebay"]["missing_required"]) || empty($p["providers"]["awin"]["missing_required"])) exit(22);
             echo "HD009_CREDENTIAL_PREFLIGHT_PASS\n";
+          '
+
+          $WPCLI eval '
+            update_option("ppar_amazon_search_v1", array("enabled"=>true,"tracking_id"=>"hobbydepot-21"), false);
+            $sample = array(
+              "id"=>"idealo-test-product",
+              "name"=>"idealo Testprodukt",
+              "title"=>"Testprodukt",
+              "creative_type"=>"product",
+              "network"=>"idealo",
+              "source"=>"idealo_product_feed_v1",
+              "product_identity_source"=>"gtin",
+              "product_gtins"=>array("4000000000000"),
+              "product_asins"=>array("B012345678"),
+              "image_url"=>"https://cdn.idealo.com/test.jpg",
+              "active"=>true,
+              "placements"=>array("category_product_1","category_product_2","category_product_3")
+            );
+            $a = Hobby_Depot_Affiliate_Router::instance()->amazon_product_from_campaign($sample);
+            if (!is_array($a) || ($a["network"] ?? "") !== "amazon") exit(30);
+            if (($a["source"] ?? "") !== "amazon_asin_bridge_v1") exit(31);
+            if (($a["product_asins"][0] ?? "") !== "B012345678") exit(32);
+            if (($a["url"] ?? "") !== "https://www.amazon.de/dp/B012345678/ref=nosim?tag=hobbydepot-21") exit(33);
+            if (($a["price"] ?? "x") !== "") exit(34);
+            echo "HD009_AMAZON_BRIDGE_PASS\n";
           '
 
           $WPCLI eval '
@@ -178,7 +203,7 @@ jobs:
           Datei: CURRENT.zip
           SHA-256: $HD009_SHA
           Source-Branch: hobbyrausch/hd009-affiliate-port-20261026
-          Gate-4-Referenz: a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec
+          Gate-4-Referenz: $GITHUB_SHA
           Gate-5-Run: $GITHUB_RUN_ID
 
           Prüfungen:
@@ -189,7 +214,7 @@ jobs:
           - Plugin-Aktivierung PASS
           - HD-004 fehlt → fail-closed PASS
           - HD-004-Vertrag vorhanden → 8 Welten / 320 Hobbyziele PASS
-          - eBay/idealo geladen, Amazon bleibt ohne erfundenen Adapter PASS
+          - eBay/idealo geladen; Amazon-ASIN-Brücke aus idealo-Feed PASS; keine erfundene Creators-API
           - Verbindungsdaten-Preflight vorhanden; frische Installation blockiert korrekt bei fehlenden Pflichtzugängen
 
           Grenze: kein produktiver Live-Readback, keine Zugangsdaten im Artefakt.
@@ -202,7 +227,7 @@ jobs:
 
           Arbeitsbranch: hobbyrausch/hd009-affiliate-port-20261026
           GitHub-Actions-Lauf: $GITHUB_RUN_ID
-          Kandidat: HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip
+          Kandidat: HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip
           Plugin-Version: $HD009_VERSION
           SHA-256: $HD009_SHA
 
@@ -216,9 +241,10 @@ jobs:
           - HD-009 in WordPress aktiviert und als aktiv bestätigt.
           - ohne HD-004-Registry: erwartetes fail-closed hdar_category_registry_unavailable.
           - mit exakt bereitgestelltem HD-004-Runtimevertrag: 8 Welten, 320 Hobbyseiten, 320 Artikelkategorien.
-          - eBay/idealo-Regressionspfade vorhanden; kein erfundener Amazon-Adapter.
+          - eBay/idealo-Regressionspfade vorhanden; Amazon-ASIN-Brücke mit direktem PartnerNet-Link geprüft; keine erfundene Creators-API.
           - Verbindungsdaten-Preflight erkennt Awin, ADCELL, eBay, idealo und Digistore24 und bleibt ohne Pflichtzugänge fail-closed.
           - keine Zugangsdaten in Quellcode/Manifest/Evidence geschrieben.
+          - Amazon Tracking-ID bleibt Laufzeitkonfiguration; Test verwendet ausschließlich synthetische Test-ID.
 
           Grenze:
           Kein produktiver Hobby-Depot-Live-Readback. Bestehende Provider-Zugangsdaten werden erst als separater WordPress-Laufzeitschritt übernommen.
@@ -229,7 +255,7 @@ jobs:
         with:
           name: HD009-gate5-candidate
           path: |
-            /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip
+            /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip
             /tmp/MANIFEST.md
             /tmp/EVIDENCE_GATE5_20261026.md
           if-no-files-found: error
@@ -248,7 +274,7 @@ jobs:
           target="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE"
           evidence="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md"
           mkdir -p "$target"
-          cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip "$target/CURRENT.zip"
+          cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.2_DEV_GATE5.zip "$target/CURRENT.zip"
           cp /tmp/MANIFEST.md "$target/MANIFEST.md"
           cp /tmp/EVIDENCE_GATE5_20261026.md "$evidence"
           git -C /tmp/campus add \
