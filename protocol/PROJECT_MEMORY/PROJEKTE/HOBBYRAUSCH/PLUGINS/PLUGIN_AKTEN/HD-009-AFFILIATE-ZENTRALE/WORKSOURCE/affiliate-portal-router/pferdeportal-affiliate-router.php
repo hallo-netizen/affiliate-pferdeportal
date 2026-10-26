@@ -31,7 +31,7 @@ require_once __DIR__ . '/includes/trait-ppar-idealo.php';
 require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
 require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 
-final class Pferdeportal_Affiliate_Router {
+final class Hobby_Depot_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
     private $automation_exact_target_rank_request_cache = array();
     private $category_product_slot_control_request_cache = array();
@@ -298,8 +298,7 @@ final class Pferdeportal_Affiliate_Router {
         // V6.72.87 KISS: Uebersichts-Banner werden serverseitig direkt vor dem Hauptloop ausgegeben.
         if (!$is_ajax_request) { add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20); }
         // V6.72.90 KISS: Journal am final gerenderten Seiteninhalt einsortieren.
-        // Die reale /journal/-Seite enthaelt [pferde_journal]; bei Prioritaet 99
-        // ist der Shortcode bereits gerendert. Kein JavaScript/Observer/Timer.
+        // Magazin-Banner wird am final gerenderten Seiteninhalt einsortiert.
         add_filter('the_content', array($this, 'reposition_journal_banner_final_content'), 99);
         add_filter('pftk_hub_grid_affiliate_data', array($this, 'provide_hub_grid_affiliate_data'), 10, 3);
         add_filter('pftk_leaf_category_affiliate_slot_html', array($this, 'provide_leaf_category_affiliate_slot_html'), 10, 4);
@@ -1221,7 +1220,7 @@ JS;
         if ($url === '') { return false; }
         $path = function_exists('wp_parse_url') ? wp_parse_url($url, PHP_URL_PATH) : parse_url($url, PHP_URL_PATH);
         $basename = strtolower(rawurldecode(basename((string)$path)));
-        return strpos($basename, 'wolfblur-horses-1414889_1920') !== false;
+        return false;
     }
 
     private function hub_placeholder_or_inactive($data, $type, $inactive_source, $placement_index = 1) {
@@ -2223,7 +2222,7 @@ JS;
         $specificity = (int) $specificity;
         if ($specificity >= 500) { return 4; } // exact topic
         if ($specificity >= 200) { return 3; } // extended topic
-        if ($specificity >= 100) { return 2; } // general horse/shop fallback
+        if ($specificity >= 100) { return 2; } // allgemeiner Shop-/Portal-Fallback
         return 1; // technical fallback
     }
 
@@ -3600,7 +3599,7 @@ JS;
      * V6.72.58 – Laufzeit-Themenrang fuer bereits materialisierte Glossar-Banner.
      * Dadurch wirkt die neue semantische Zuordnung sofort nach Plugin-Update und
      * verlangt keinen erneuten Backend-Automatiklauf. Exakte Begriffstreffer sind
-     * staerker als breiter Kontext; generische Pferd-/Bannerwoerter zaehlen nicht.
+     * stärker als breiter Kontext; generische Banner-/Shopwörter zählen nicht.
      */
     private function glossary_campaign_runtime_semantic_rank($campaign, $context) {
         if (!is_array($campaign) || sanitize_key((string)($context['post_type'] ?? '')) !== 'uge_term') { return null; }
@@ -10170,7 +10169,7 @@ JS;
                 </table>
 
                 <h2>4. Affiliate-Gruppen und Banner</h2>
-                <p><strong>Hauptbedienung:</strong> Gruppen definieren Themen/Unterthemen. Banner werden passenden Slots und Suchintentionen zugeordnet. Das ist allgemeingültig und nicht pferdespezifisch.</p>
+                <p><strong>Hauptbedienung:</strong> Gruppen definieren Themen/Unterthemen. Banner werden passenden Slots und Suchintentionen zugeordnet.</p>
                 <p class="description">Aktive Gruppen: <?php echo esc_html((string) count($active_groups)); ?> / Gesamtgruppen: <?php echo esc_html((string) count($groups)); ?>.</p>
                 <?php
                 $admin_groups = $groups;
@@ -10677,15 +10676,15 @@ JS;
 
 if (!function_exists('affiliate_portal_upsert_campaign')) {
     function affiliate_portal_upsert_campaign($data) {
-        return Pferdeportal_Affiliate_Router::instance()->upsert_campaign_from_external($data);
+        return Hobby_Depot_Affiliate_Router::instance()->upsert_campaign_from_external($data);
     }
 }
 
-register_activation_hook(__FILE__, array('Pferdeportal_Affiliate_Router', 'activate'));
-register_deactivation_hook(__FILE__, array('Pferdeportal_Affiliate_Router', 'deactivate'));
+register_activation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'activate'));
+register_deactivation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'deactivate'));
 
 // Workflow V2 behält bewusst den live bekannten stabilen Pluginpfad
-// `affiliate-portal-router/pferdeportal-affiliate-router.php`. Der Bootstrap
+// `affiliate-portal-router/hobby-depot-affiliate-router.php`. Der Bootstrap
 // startet weiterhin erst im normalen WordPress-Lauf; Aktivierung und eBay-
 // Hintergrundprozesse bleiben voneinander getrennt.
-Pferdeportal_Affiliate_Router::instance();
+Hobby_Depot_Affiliate_Router::instance();
