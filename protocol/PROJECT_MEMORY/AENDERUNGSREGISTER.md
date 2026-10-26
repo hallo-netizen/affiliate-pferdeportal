@@ -1985,3 +1985,15 @@ DAUERREGEL:
 
 GATE-4-BEFUND:
 Quellstand `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`, GitHub-Actions-Lauf `40319481655`: 23/23 PHP-Lint und alle neun Positiv-/Negativ-/Regression-Szenarien PASS. Kein Live-PASS.
+
+
+## CAMPUS-SINGLE-CURRENT-GUARD-20261026 – erforderlicher single-current-lock für alle Campus-PRs erreichbar
+
+WAS:
+Im bestehenden Workflow `.github/workflows/pferdeatelier-single-workbench.yml` wurden ausschließlich die `paths`-Filter der Push-/Pull-Request-Trigger entfernt. Der Jobkontext `single-current-lock` und sein vorhandener Guard bleiben unverändert.
+
+WARUM:
+Der aktive Campus-Ruleset 25817526 verlangt `single-current-lock` für jeden PR auf `hobbyroom/project-memory-campus-v1-20260905`. Mit dem bisherigen Pferdeatelier-spezifischen Pfadfilter konnte ein Hobbyrausch- oder anderes Campus-Delta den Pflichtstatus gar nicht erzeugen.
+
+GRENZE:
+Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wahrheit. Nur die bestehende Pflichtprüfung wird für alle Änderungen erreichbar gemacht. Fehlerquelle: `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-044.
