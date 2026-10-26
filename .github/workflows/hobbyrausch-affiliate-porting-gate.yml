@@ -153,3 +153,7 @@ jobs:
         run: |
           cd /tmp/hd-wp
           /tmp/wp eval-file "$GITHUB_WORKSPACE/work/hobbyrausch-affiliate/porting/tests/provider-wordpress-roundtrip.php"
+      - name: Run eBay central credential roundtrip in WordPress
+        run: |
+          cd /tmp/hd-wp
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/work/hobbyrausch-affiliate/porting/tests/provider-wordpress-ebay-roundtrip.php"
