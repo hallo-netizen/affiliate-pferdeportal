@@ -1266,7 +1266,7 @@ trait PPAR_Ebay_Trait {
             'client_id' => '',
             'client_secret' => '',
             'epn_campaign_id' => '',
-            'affiliate_reference_prefix' => 'pferde-atelier',
+            'affiliate_reference_prefix' => 'hobby-depot',
             'marketplace_id' => 'EBAY_DE',
             'delivery_country' => 'DE',
             'delivery_postal_code' => '',
@@ -1358,8 +1358,8 @@ trait PPAR_Ebay_Trait {
         $out['client_secret'] = $preserve_secret ? substr(trim((string) ($settings['client_secret'] ?? '')), 0, 255) : '';
         $campaign = preg_replace('/\D+/', '', (string) ($settings['epn_campaign_id'] ?? ''));
         $out['epn_campaign_id'] = strlen($campaign) === 10 ? $campaign : '';
-        $prefix = sanitize_key((string) ($settings['affiliate_reference_prefix'] ?? 'pferde-atelier'));
-        $out['affiliate_reference_prefix'] = $prefix !== '' ? substr($prefix, 0, 60) : 'pferde-atelier';
+        $prefix = sanitize_key((string) ($settings['affiliate_reference_prefix'] ?? 'hobby-depot'));
+        $out['affiliate_reference_prefix'] = $prefix !== '' ? substr($prefix, 0, 60) : 'hobby-depot';
         $out['marketplace_id'] = 'EBAY_DE';
         $out['delivery_country'] = 'DE';
         $out['delivery_postal_code'] = substr(preg_replace('/[^0-9A-Za-z -]/', '', (string) ($settings['delivery_postal_code'] ?? '')), 0, 12);
@@ -2237,25 +2237,8 @@ trait PPAR_Ebay_Trait {
      */
     private function ebay_private_query_variants($rule) {
         $rule = is_array($rule) ? $rule : array();
-        $id = sanitize_key((string) ($rule['id'] ?? ''));
-        $map = array(
-            'pferde-ponys'=>array('Pferd','Pony'),
-            'sattel-zaumzeug'=>array('Pferdesattel','Zaumzeug Pferd','Trense Pferd'),
-            'decken-schutz'=>array('Pferdedecke','Gamaschen Pferd','Fliegendecke Pferd'),
-            'stall-weide-haltung'=>array('Pferdestall','Weidezaun Pferd','Heunetz Pferd'),
-            'fuetterung-pflege'=>array('Pferdefutter','Pferdepflege','Putzzeug Pferd'),
-            'anhaenger-transport'=>array('Pferdeanhänger','Pferdetransport','Transportgamaschen Pferd'),
-            'reitbekleidung-zubehoer'=>array('Reitbekleidung','Reithelm','Reitstiefel','Lederreitstiefel','Dressurstiefel','Reitgummistiefel','Reithose','Reithandschuhe','Reitweste'),
-            'sonstiges'=>array('Pferdezubehör','Reitsport Zubehör'),
-        );
-        $queries = isset($map[$id]) ? $map[$id] : array((string) ($rule['query'] ?? ''));
-        $safe = array();
-        foreach ($queries as $query) {
-            $query = substr(sanitize_text_field((string) $query), 0, 100);
-            if ($query !== '') { $safe[$query] = $query; }
-        }
-        if (!$safe && !empty($rule['query'])) { $safe[(string) $rule['query']] = substr(sanitize_text_field((string) $rule['query']), 0, 100); }
-        return array_values($safe);
+        $query = substr(sanitize_text_field((string)($rule['query'] ?? '')), 0, 100);
+        return $query !== '' ? array($query) : array();
     }
 
     /**
