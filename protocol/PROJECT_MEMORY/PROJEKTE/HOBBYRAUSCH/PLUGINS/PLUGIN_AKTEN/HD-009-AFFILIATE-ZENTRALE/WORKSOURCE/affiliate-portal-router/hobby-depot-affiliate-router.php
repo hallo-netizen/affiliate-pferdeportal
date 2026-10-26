@@ -2024,7 +2024,7 @@ JS;
     /**
      * V6.72.100 RESTORE – echte Design-Zielpunkte statt Loop-Position.
      * Der Banner wird erst im Footer an die bereits gerenderte, stabile
-     * Designstruktur montiert. Damit bleiben Glossar-/Rassen-/Journal-Layouts
+     * Designstruktur montiert. Damit bleiben Glossar-/Journal-Layouts
      * unveraendert und der Banner sitzt wieder am frueheren PASS-Punkt.
      */
     public function inject_overview_banner_footer() {
@@ -4644,7 +4644,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
             // Public product campaigns with explicit automation target keys are
             // fail-closed in campaign_match_rank() for page/category contexts.
             // Apply that exact existing target-rank decision before expensive
-            // campaign_from_post() normalization. Article/glossary/breed contexts
+            // campaign_from_post() normalization. Article/glossary contexts
             // keep their historical fall-through semantics.
             if ($forced_campaign_id_norm === '' && $required_type === 'product' && !$exact_mode) {
                 $record = isset($raw_records[$position]) && is_array($raw_records[$position]) ? $raw_records[$position] : array();
