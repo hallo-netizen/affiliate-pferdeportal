@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "zuegel-faq",
+    "plan_slot": "599dde6fe19dc04d2e5ab0d9f6b12166008b8ddc6f078d352ccc8f76f512d89c",
+    "target_keyword": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert",
+    "title": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "FN – Diagonale Hilfengebung",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/"
+        },
+        {
+          "source_title": "Sprenger – FAQ Pferdesport",
+          "source_url": "https://www.sprenger.de/pages/faq-pferdesport"
+        }
+      ],
+      "claims": [
+        "Bei Wendungen wirken Zügelhilfen im Zusammenspiel mit Schenkel- und Gewichtshilfen, nicht allein durch Ziehen an einer Zügelseite.",
+        "Ein Pferd kann auf Zügelhilfen schlecht reagieren, wenn das Gebiss nicht passend sitzt oder Druck und Unbehagen verursacht.",
+        "Bei Problemen mit Stellung und Biegung warnt die FN davor, einfach stärker am inneren Zügel zu ziehen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert",
+      "topic": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "zuegel-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "FN – Diagonale Hilfengebung",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/",
+        "statement": "Bei Wendungen wirken Zügelhilfen im Zusammenspiel mit Schenkel- und Gewichtshilfen, nicht allein durch Ziehen an einer Zügelseite.",
+        "evidence_text": "Bei Wendungen wirken Zügelhilfen im Zusammenspiel mit Schenkel- und Gewichtshilfen, nicht allein durch Ziehen an einer Zügelseite.",
+        "evidence_text_sha256": "fa4b0f29fbd2b04608da7db21cfb8bc9880279aa1cf087f84fbcd4877525179d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Sprenger – FAQ Pferdesport",
+        "source_url": "https://www.sprenger.de/pages/faq-pferdesport",
+        "statement": "Ein Pferd kann auf Zügelhilfen schlecht reagieren, wenn das Gebiss nicht passend sitzt oder Druck und Unbehagen verursacht.",
+        "evidence_text": "Ein Pferd kann auf Zügelhilfen schlecht reagieren, wenn das Gebiss nicht passend sitzt oder Druck und Unbehagen verursacht.",
+        "evidence_text_sha256": "e5c57ff94033995b772d4f89cb47fa4ae1734e4cba0ba11aa7ad5357a4c14ad0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FN – Diagonale Hilfengebung",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/",
+        "statement": "Bei Problemen mit Stellung und Biegung warnt die FN davor, einfach stärker am inneren Zügel zu ziehen.",
+        "evidence_text": "Bei Problemen mit Stellung und Biegung warnt die FN davor, einfach stärker am inneren Zügel zu ziehen.",
+        "evidence_text_sha256": "73ea3b4cb1d6e8dd80aebbd3cc5e4d4c9c1d2bf863da3eed57e784bbd19a7e33",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/zuegel-faq/",
+        "anchor": "zuegel – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/zuegel-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/zuegel-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/zuegel-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/zuegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/zuegel-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "zuegel-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "zuegel",
+      "Was kann ich",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
