@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-10-19
+STAND: 2026-10-26
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
 
 ## EINE PLUGIN-WAHRHEIT
@@ -37,6 +37,10 @@ Akte: `PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/`
 ### HD-006 – Bildzentrale
 Plugin: `Allgemeine Bildzentrale – Hobby Depot Anwendung`  
 Akte: `PLUGIN_AKTEN/HD-006-BILDZENTRALE/`
+
+### HD-009 – Affiliate-Zentrale
+Plugin: `Hobby Depot Affiliate-Zentrale`  
+Akte: `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/`
 
 ## Regel
 
