@@ -246,8 +246,6 @@ final class Hobby_Depot_Affiliate_Router {
     const OPTION_EBAY_DELETION_STATE = 'ppar_ebay_deletion_state_v1';
     const OPTION_EBAY_DELETION_RECEIPTS = 'ppar_ebay_deletion_receipts_v1';
     const OPTION_HOUSEKEEPING_STATE = 'ppar_housekeeping_state_v1';
-    const AFF043_SNAPSHOT_REL = 'recovery/aff043-historical-product-state-20260915.json';
-    const AFF043_SNAPSHOT_SHA256 = '72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8';
     const ARTICLE_PLAN_META = 'ppar_article_delivery_plan_v1';
     const ARTICLE_PLAN_SCHEMA = '1.5';
     const HEALTH_META = 'ppar_health_data_v1';
@@ -1541,42 +1539,6 @@ JS;
     private function aff039_incident_proven($evidence) {
         foreach ((array)$evidence as $value) { if ($value) { return true; } }
         return false;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private function aff043_snapshot() {
-        $path=__DIR__.DIRECTORY_SEPARATOR.str_replace('/',DIRECTORY_SEPARATOR,self::AFF043_SNAPSHOT_REL);
-        if(!is_file($path)||!is_readable($path)){return new WP_Error('aff043_snapshot_missing','Historischer Produktzustand fehlt.');}
-        $raw=file_get_contents($path); if(!is_string($raw)){return new WP_Error('aff043_snapshot_read_failed','Historischer Produktzustand ist nicht lesbar.');}
-        if(!hash_equals(self::AFF043_SNAPSHOT_SHA256,hash('sha256',$raw))){return new WP_Error('aff043_snapshot_hash_mismatch','Historischer Produktzustand stimmt nicht mit dem gebundenen Hash ueberein.');}
-        $data=json_decode($raw,true); if(!is_array($data)||($data['schema']??'')!=='1.0'||!is_array($data['rows']??null)){return new WP_Error('aff043_snapshot_invalid','Historischer Produktzustand ist ungueltig.');}
-        $rows=array_values($data['rows']);
-        if(count($rows)!==2012){return new WP_Error('aff043_snapshot_count','Historischer Produktzustand hat nicht 2012 Produktkampagnen.');}
-        $ebay=0;$idealo=0;$ebay_active=0;$idealo_active=0;
-        foreach($rows as $row){if(!is_array($row)){return new WP_Error('aff043_snapshot_row_invalid','Historische Produktzeile ist ungueltig.');}$n=sanitize_key((string)($row['network']??''));if($n==='ebay'){$ebay++;if(!empty($row['active']))$ebay_active++;}elseif($n==='idealo'){$idealo++;if(!empty($row['active']))$idealo_active++;}else{return new WP_Error('aff043_snapshot_provider','Unerwarteter Provider im historischen Produktzustand.');}}
-        if($ebay!==922||$idealo!==1090||$ebay_active!==428||$idealo_active!==1090){return new WP_Error('aff043_snapshot_contract','Historische Providerzahlen stimmen nicht mit dem belegten 15.09.-Stand ueberein.');}
-        return array('rows'=>$rows,'sha256'=>self::AFF043_SNAPSHOT_SHA256,'source_sha256'=>(string)($data['source_sha256']??''));
     }
 
 
@@ -3006,7 +2968,7 @@ JS;
     private function portal_structure_product_family_for_category($category_slug) {
         static $map = null;
         static $result_cache = array();
-        $raw_category_slug = (string) $category_slug;
+        $raw_category_slug = (string)$category_slug;
         if (array_key_exists($raw_category_slug, $result_cache)) {
             return $result_cache[$raw_category_slug];
         }
@@ -3014,17 +2976,19 @@ JS;
         if ($category_slug === '') { return $result_cache[$raw_category_slug] = ''; }
         if ($map === null) {
             $map = array();
-            $path = __DIR__ . '/assets/portal-structure-v279.json';
-            $raw = is_readable($path) ? file_get_contents($path) : '';
-            $data = $raw !== '' ? json_decode($raw, true) : null;
-            foreach ((array)($data['categories'] ?? array()) as $row) {
-                if (!is_array($row)) { continue; }
-                $slug = sanitize_key((string)($row['category_slug'] ?? ''));
-                $product = sanitize_key((string)($row['product_slug'] ?? ''));
-                if ($slug !== '' && $product !== '') { $map[$slug] = $product; }
+            if (class_exists('HDAR_Hobby_Depot_Source')) {
+                $catalog = HDAR_Hobby_Depot_Source::catalog();
+                if (!is_wp_error($catalog)) {
+                    foreach ((array)($catalog['article_targets'] ?? array()) as $row) {
+                        if (!is_array($row)) { continue; }
+                        $slug = sanitize_key((string)($row['category_slug'] ?? ''));
+                        $product = sanitize_key((string)($row['product_slug'] ?? ''));
+                        if ($slug !== '' && $product !== '') { $map[$slug] = $product; }
+                    }
+                }
             }
         }
-        return $result_cache[$raw_category_slug] = (string) ($map[$category_slug] ?? '');
+        return $result_cache[$raw_category_slug] = (string)($map[$category_slug] ?? '');
     }
 
     private function get_category_archive_context($term) {
@@ -4182,24 +4146,12 @@ JS;
     }
 
     /**
-     * Incident-only read path for category_product_1..3.
-     * A stale active=0 may be ignored only when the hash-bound 2026-09-15
-     * snapshot proves that this exact auto-managed eBay/idealo campaign was
-     * active before the 6.72.115-6.72.119 incident chain. No state is rewritten.
+     * Hobby Depot inherits no Pferdeatelier incident history.
+     * Historical inactive-campaign exceptions therefore stay disabled.
      */
     private function category_product_incident_historical_active_lookup() {
-        static $lookup = null;
-        if (is_array($lookup)) { return $lookup; }
-        $lookup = array();
-        $snapshot = $this->aff043_snapshot();
-        if (is_wp_error($snapshot)) { return $lookup; }
-        foreach ((array)($snapshot['rows'] ?? array()) as $row) {
-            if (!is_array($row) || empty($row['active'])) { continue; }
-            $network = sanitize_key((string)($row['network'] ?? ''));
-            $auto = $network === 'ebay' ? !empty($row['ebay_auto']) : ($network === 'idealo' ? !empty($row['idealo_auto']) : false);
-            $post_id = absint($row['post_id'] ?? 0);
-            if ($auto && $post_id > 0) { $lookup[$post_id] = $network; }
-        }
+        return array();
+    }
         return $lookup;
     }
 
