@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "2a375cf6be8513675bf3539b1e91fabb8021016282d9de327af426b93b9e1f38",
+    "target_keyword": "Was bringt ein Longiergurt",
+    "title": "Was bringt ein Longiergurt?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "FN – Longieren aber sinnvoll",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/longieren-aber-sinnvoll-08-2019/"
+        },
+        {
+          "source_title": "FN – Grundschule des Pferdes",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/die-grundschule-des-pferdes-teil-2-05-2020/"
+        }
+      ],
+      "claims": [
+        "Ein Longiergurt bietet unterschiedliche Ringe zur Befestigung von Hilfszügeln und für die Arbeit mit Doppellonge oder Langzügeln.",
+        "Ein für die Arbeit ohne Sattel verwendeter Longiergurt muss die Widerristregion frei lassen und passend gepolstert sein.",
+        "Junge Pferde sollten anfangs ohne Hilfszügel longiert werden, um Gleichgewicht und Reaktionen zu entwickeln."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was bringt ein Longiergurt",
+      "topic": "Was bringt ein Longiergurt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was bringt ein Longiergurt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "FN – Longieren aber sinnvoll",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/longieren-aber-sinnvoll-08-2019/",
+        "statement": "Ein Longiergurt bietet unterschiedliche Ringe zur Befestigung von Hilfszügeln und für die Arbeit mit Doppellonge oder Langzügeln.",
+        "evidence_text": "Ein Longiergurt bietet unterschiedliche Ringe zur Befestigung von Hilfszügeln und für die Arbeit mit Doppellonge oder Langzügeln.",
+        "evidence_text_sha256": "f1b478f030b70301e9a85a2cd5ab127a94709d889332f42dadc8d83c0880bf79",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FN – Longieren aber sinnvoll",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/longieren-aber-sinnvoll-08-2019/",
+        "statement": "Ein für die Arbeit ohne Sattel verwendeter Longiergurt muss die Widerristregion frei lassen und passend gepolstert sein.",
+        "evidence_text": "Ein für die Arbeit ohne Sattel verwendeter Longiergurt muss die Widerristregion frei lassen und passend gepolstert sein.",
+        "evidence_text_sha256": "64e4a56c6db7ce9b20ca1054f6b783a9e706fdfd94d1756acbeaae4282ebf268",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FN – Grundschule des Pferdes",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/die-grundschule-des-pferdes-teil-2-05-2020/",
+        "statement": "Junge Pferde sollten anfangs ohne Hilfszügel longiert werden, um Gleichgewicht und Reaktionen zu entwickeln.",
+        "evidence_text": "Junge Pferde sollten anfangs ohne Hilfszügel longiert werden, um Gleichgewicht und Reaktionen zu entwickeln.",
+        "evidence_text_sha256": "e1e1cc8838444db826fc18a653b38034fc1c17faffa0512236a2b2e331adf63d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/longiergurte-faq/",
+        "anchor": "longiergurte – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longiergurte-anwendung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/longiergurte-sicherheit/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/longiergurte-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-anwendung/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-sicherheit/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longiergurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "longiergurte",
+      "Was bringt ein",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
