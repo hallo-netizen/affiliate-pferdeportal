@@ -7,12 +7,15 @@ require_once $root . '/trait-ppar-idealo.php';
 
 class HDAR_WP_Amazon_Roundtrip {
     use HDAR_Amazon_Creators_Trait;
+    const CAMPAIGN_POST_TYPE='hdar_test_campaign';
     public function provider_set_access_state($provider,$status,$message){ update_option('hdar_test_state_'.$provider, compact('status','message'), false); return true; }
     public function save($raw){ return $this->amazon_creators_provider_access_save(null,'amazon',$raw,'test'); }
 }
 class HDAR_WP_Idealo_Roundtrip {
     use PPAR_Idealo_Trait;
     const OPTION_NETWORK_IDEALO='ppar_network_idealo_v1';
+    const CAMPAIGN_POST_TYPE='hdar_test_campaign';
+    const IDEALO_REFRESH_HOOK='hdar_test_idealo_refresh';
     public function provider_set_access_state($provider,$status,$message){ update_option('hdar_test_state_'.$provider, compact('status','message'), false); return true; }
     public function save($raw){ return $this->idealo_provider_access_save(null,'idealo',$raw,'test'); }
 }
