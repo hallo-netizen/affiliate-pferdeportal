@@ -103,7 +103,15 @@ jobs:
           print(d['items'][0]['category'])
           PY
           )"
-          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
+          site_url="$(python3 - <<'PY'
+          import json
+          from engine.k0_portal_resolver import wordpress_site_for_portal
+          portal=json.load(open('/tmp/k0-portal.json'))
+          registry=json.load(open('K0_PORTAL_REGISTRY.json'))
+          print(wordpress_site_for_portal(registry,portal['items'][0]['portal_id']))
+          PY
+          )"
+          curl --fail --location --retry 3 --silent --show-error "$site_url/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
           python3 - <<'PY'
           import json
           rows=json.load(open('/tmp/k0-category.json'))
@@ -169,6 +177,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # The bundled canonical slot registry has only been proven for Pferdeatelier.
+          # Until portal-specific article identity authority exists, never bind a Hobby item to it.
+          python3 - <<'PY'
+          import json
+          pid=json.load(open('/tmp/k0-portal.json'))['items'][0]['portal_id']
+          if pid!='pferdeatelier':
+              raise SystemExit('K0_CANONICAL_ARTICLE_REGISTRY_UNVERIFIED_FOR_PORTAL:'+pid)
+          print('K0_CANONICAL_PORTAL_SCOPE_PASS')
+          PY
           mkdir -p /tmp/k0-binding
           cp k0_canonical_assets/PPM_6.7.9.zip /tmp/k0-binding/ppm679.zip
           cp k0_canonical_assets/PSERC_BINDING.zip /tmp/k0-binding/pserc-binding.zip
