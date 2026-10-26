@@ -186,11 +186,11 @@ def structural_receipts(article):
     # Existing placement rule must require real flowing paragraphs, not detached <nav> anchors.
     paragraph_links=[]
     for section in sections:
-        for paragraph in re.findall(r'(?is)<p\\b[^>]*>.*?</p>',section['body']):
-            without_links=re.sub(r'(?is)<a\\b[^>]*>.*?</a>',' ',paragraph)
+        for paragraph in re.findall(r'(?is)<p\b[^>]*>.*?</p>',section['body']):
+            without_links=re.sub(r'(?is)<a\b[^>]*>.*?</a>',' ',paragraph)
             if len(_words(without_links)) < 5:
                 continue
-            for m in re.finditer(r'(?is)<a\\b([^>]*)>(.*?)</a>',paragraph):
+            for m in re.finditer(r'(?is)<a\b([^>]*)>(.*?)</a>',paragraph):
                 attrs=_attrs('<a '+m.group(1)+'>')
                 paragraph_links.append((section['block'],attrs.get('data-link-role',''),attrs.get('href',''),_plain(m.group(2))))
     inline_ok=(Counter(paragraph_links)==Counter((x['block'],x['role'],x['href'],x['anchor']) for x in links))
