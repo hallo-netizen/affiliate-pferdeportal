@@ -68,16 +68,40 @@ final class HDAR_Hobby_Depot_Source {
         }
 
         $worlds = array();
-        $hobbies = array();
+        $children = array();
         foreach ($nodes as $id => $node) {
+            $parent_id = (string)($node['parent_id'] ?? '');
+            if ($parent_id !== '') {
+                if (!isset($children[$parent_id])) { $children[$parent_id] = array(); }
+                $children[$parent_id][] = $node;
+            }
             if (preg_match('/^core:world:[^:]+$/', $id)) { $worlds[$id] = $node; }
-            if (preg_match('/^core:hobby:[^:]+$/', $id) && (string)($node['object_type'] ?? '') === 'page') { $hobbies[$id] = $node; }
         }
         if (count($worlds) !== 8) {
             return new WP_Error('hdar_world_count_invalid', 'Hobby Depot muss exakt acht aktive CORE-Welten liefern.');
         }
+
+        // Hobbyseiten werden strukturell bestimmt, nicht über historische ID-Präfixe:
+        // aktive CORE-Seite + mindestens eine direkte aktive Content-Kategorie.
+        // Der aktuelle Zielbaum enthält unterschiedliche ID-Familien
+        // (u. a. core:hobby:*, core:entity:* und core:proposal:*).
+        $hobbies = array();
+        foreach ($nodes as $id => $node) {
+            if ((string)($node['object_type'] ?? '') !== 'page') { continue; }
+            $has_direct_category = false;
+            foreach ((array)($children[$id] ?? array()) as $child) {
+                if ((string)($child['object_type'] ?? '') === 'category') {
+                    $has_direct_category = true;
+                    break;
+                }
+            }
+            if ($has_direct_category) { $hobbies[$id] = $node; }
+        }
         if (!$hobbies) {
-            return new WP_Error('hdar_hobby_targets_missing', 'Hobby-Depot-Snapshot enthält keine aktiven CORE-Hobbyseiten.');
+            return new WP_Error('hdar_hobby_targets_missing', 'Hobby-Depot-Snapshot enthält keine strukturell belegten CORE-Hobbyseiten.');
+        }
+        if (count($hobbies) < 300) {
+            return new WP_Error('hdar_hobby_target_count_implausible', 'Hobby-Depot-Snapshot enthält implausibel wenige strukturell belegte Hobbyseiten.');
         }
 
         $product_targets = array();
@@ -137,31 +161,33 @@ final class HDAR_Hobby_Depot_Source {
         }
 
         $article_targets = array();
-        foreach ($nodes as $id => $node) {
-            if ((string)($node['object_type'] ?? '') !== 'category') { continue; }
-            $hobby = self::ancestor($id, $nodes, static function($n, $nid){ return preg_match('/^core:hobby:[^:]+$/', (string)$nid) === 1; });
-            if (!$hobby) { continue; }
+        foreach ($hobbies as $hobby_id => $hobby) {
             $hobby_slug = sanitize_title((string)($hobby['slug'] ?? ''));
             $hobby_title = sanitize_text_field((string)($hobby['display_name'] ?? ''));
-            $slug = sanitize_title((string)($node['slug'] ?? ''));
-            $name = sanitize_text_field((string)($node['display_name'] ?? ''));
-            if ($hobby_slug === '' || $slug === '' || $name === '') { continue; }
-            $world = self::ancestor($id, $nodes, static function($n, $nid){ return preg_match('/^core:world:[^:]+$/', (string)$nid) === 1; });
+            if ($hobby_slug === '' || $hobby_title === '') { continue; }
+            $world = self::ancestor($hobby_id, $nodes, static function($n, $nid){ return preg_match('/^core:world:[^:]+$/', (string)$nid) === 1; });
             $parent_id = (string)($hobby['parent_id'] ?? '');
             $parent = isset($nodes[$parent_id]) ? $nodes[$parent_id] : array();
-            $article_targets[] = array(
-                'category_slug'=>$slug,
-                'category_name'=>$name,
-                'product'=>$hobby_title,
-                'product_slug'=>$hobby_slug,
-                'hub'=>sanitize_text_field((string)($parent['display_name'] ?? '')),
-                'hub_slug'=>sanitize_title((string)($parent['slug'] ?? '')),
-                'main_hub'=>sanitize_text_field((string)($world['display_name'] ?? '')),
-                'main_slug'=>sanitize_title((string)($world['slug'] ?? '')),
-                'theme'=>$name,
-                'path'=>implode(' > ', self::path_labels($id, $nodes)),
-                'node_id'=>$id,
-            );
+            foreach ((array)($children[$hobby_id] ?? array()) as $node) {
+                if ((string)($node['object_type'] ?? '') !== 'category') { continue; }
+                $id = (string)($node['node_id'] ?? '');
+                $slug = sanitize_title((string)($node['slug'] ?? ''));
+                $name = sanitize_text_field((string)($node['display_name'] ?? ''));
+                if ($id === '' || $slug === '' || $name === '') { continue; }
+                $article_targets[] = array(
+                    'category_slug'=>$slug,
+                    'category_name'=>$name,
+                    'product'=>$hobby_title,
+                    'product_slug'=>$hobby_slug,
+                    'hub'=>sanitize_text_field((string)($parent['display_name'] ?? '')),
+                    'hub_slug'=>sanitize_title((string)($parent['slug'] ?? '')),
+                    'main_hub'=>sanitize_text_field((string)($world['display_name'] ?? '')),
+                    'main_slug'=>sanitize_title((string)($world['slug'] ?? '')),
+                    'theme'=>$name,
+                    'path'=>implode(' > ', self::path_labels($id, $nodes)),
+                    'node_id'=>$id,
+                );
+            }
         }
 
         $search_rules = array();
