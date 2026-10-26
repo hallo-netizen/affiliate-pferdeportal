@@ -1913,7 +1913,7 @@ trait PPAR_Creative_Library_Trait {
                         <hr>
                         <h3>Banner händisch einfügen</h3>
                         <p class="description">Für einzelne Banner ohne Sammeldatei. Bild-URL und Tracking-Link sind Pflicht; Ziel-URL, Titel und Maße können zusätzlich angegeben werden.</p>
-                        <p><label><strong>Banner-ID (optional)</strong><br><input type="text" name="manual_banner_external_id" maxlength="191" placeholder="z. B. check24-pferdehalter-01"></label></p>
+                        <p><label><strong>Banner-ID (optional)</strong><br><input type="text" name="manual_banner_external_id" maxlength="191" placeholder="z. B. partner-banner-01"></label></p>
                         <p><label><strong>Titel (optional)</strong><br><input type="text" name="manual_banner_title" maxlength="180"></label></p>
                         <p><label><strong>Bild-URL</strong><br><input type="url" name="manual_banner_image_url" placeholder="https://…"></label></p>
                         <p><label><strong>Tracking-Link</strong><br><input type="url" name="manual_banner_tracking_url" placeholder="https://…"></label></p>
@@ -1955,7 +1955,7 @@ trait PPAR_Creative_Library_Trait {
                     </optgroup>
                 </select></label></p>
                 <div class="ppar-chief-fields">
-                    <label><strong>Begründung (optional bei Themenzuordnung)</strong><input type="text" name="decision_reason" placeholder="z. B. Zielgruppe Pferdehalter besitzt häufig weitere Hoftiere"></label>
+                    <label><strong>Begründung (optional bei Themenzuordnung)</strong><input type="text" name="decision_reason" placeholder="z. B. Zielgruppe passt fachlich zum aktuellen Hobby"></label>
                     <label class="ppar-fixed-field"><strong>Thema / Portalziel</strong><select id="ppar-fixed-target" name="fixed_target_key"><option value="">Portalziel auswählen</option><?php foreach ($fixed_targets as $target_option) : ?><option data-portal="<?php echo esc_attr($target_option['portal_key']); ?>" value="<?php echo esc_attr($target_option['key']); ?>"><?php echo esc_html($target_option['label'] . ' · ' . $target_option['type']); ?></option><?php endforeach; ?></select></label>
                     <label class="ppar-fixed-field"><strong>Fester Designslot (optional)</strong><select id="ppar-fixed-slot" name="fixed_slot_id"><option value="">Slot automatisch bestimmen</option><?php foreach ($fixed_slots as $slot_option) : ?><option data-portal="<?php echo esc_attr($slot_option['portal_key']); ?>" value="<?php echo esc_attr($slot_option['key']); ?>"><?php echo esc_html($slot_option['label']); ?></option><?php endforeach; ?></select></label>
                 </div>
