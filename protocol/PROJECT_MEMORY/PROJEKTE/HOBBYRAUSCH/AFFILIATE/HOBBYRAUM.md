@@ -2,21 +2,22 @@
 
 <!-- DERIVED_EXECUTION_SURFACE_V1 -->
 
-STATUS: FREI
+STATUS: GEBUNDENE AUSFÜHRUNGSFLÄCHE
 
-## 1-KLICK-ÜBERSICHT
+## Auftrag
 
-**WAS IST DAS?**  
-Temporäre Arbeitsfläche des Büros AFFILIATE.
+Ausführung ausschließlich gemäß:
+`CURRENT_STATE.md`
 
-**HIER BIST DU RICHTIG, WENN …**  
-die Current-Autorität für einen konkreten Auftrag ausdrücklich hierher bindet.
+Technischer Workbench:
+- Branch: `hobbyrausch-affiliate-current`
+- Pfad: `work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router/`
 
-**DU DARFST …**  
-den konkret gebundenen Auftrag ausführen.
+Hier wird kein zweiter Current-Status, kein zweiter Blocker und keine zweite NEXT ACTION gepflegt.
 
-**DU DARFST NICHT …**  
-hier einen zweiten Status, zweiten Blocker oder eine zweite NEXT ACTION als Wahrheit pflegen.
+## Arbeitsregel
 
-**ALS NÄCHSTES …**  
-Ohne gebundenen Auftrag zurück zu `CURRENT_STATE.md`.
+Pferdeatelier dient nur als technische Ausgangsbasis.
+Keine Pferde-Fachdaten in Hobby Depot übernehmen.
+Keine Secrets dokumentieren.
+Kein Installationsartefakt erzeugen, solange `CURRENT_STATE.md` den Workbench nicht freigibt.
