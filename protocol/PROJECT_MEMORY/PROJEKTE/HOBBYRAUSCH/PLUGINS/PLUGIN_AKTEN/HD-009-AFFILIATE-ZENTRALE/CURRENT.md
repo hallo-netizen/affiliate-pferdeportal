@@ -42,7 +42,7 @@ Danach entfernt:
 
 - eBay: aktiv implementiert.
 - idealo: aktiv implementiert.
-- Amazon: nur vorbereitet; kein realer Adapter vorhanden.
+- Amazon: ASIN-Brücke aktiv; ASIN kommt ausschließlich aus dem vorhandenen idealo-iPN-Feed. Keine eigene Amazon-Produktsuche.
 - Awin/ADCELL/Digistore24/Direktpartner-Engine bleibt zunächst Bestandteil der technischen Basis und wird nur fachlich bereinigt, nicht blind entfernt.
 
 ## Credentials
@@ -56,10 +56,10 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 - Installationskandidat vorhanden;
 - isoliertes `CURRENT.zip` vorhanden;
 - `MANIFEST.md` + `EVIDENCE_GATE5_20261026.md` vorhanden;
-- GitHub-Actions-Lauf `40344179549`: SUCCESS;
-- Kandidat: `0.1.1-dev`;
-- Kandidat SHA-256: `663ff5a77932704ef1e354e37c7591f99046e54f90beb67c03cb63837a155511`;
-- PR #572 in den Campus gemergt;
+- GitHub-Actions-Lauf `40372683116`: SUCCESS;
+- Kandidat: `0.1.2-dev`;
+- Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`;
+- PR #578 in den Campus gemergt;
 - Verbindungsdaten-Preflight aktiv: fehlende Pflichtzugänge werden namentlich angezeigt und blockieren LIVE-PASS;
 - **kein Liveeinsatz / kein Live-PASS**;
 - keine Hobby-Depot-Produktdaten;
@@ -106,8 +106,16 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
    - HD-004 fehlt → fail-closed PASS;
    - HD-004-Runtimevertrag vorhanden → 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS;
    - eBay/idealo-Regressionspfade PASS;
-   - Amazon weiterhin nur vorbereitet, kein Adapter erfunden;
+   - Amazon-ASIN-Brücke aus idealo-Feed in frischem WordPress PASS; keine Creators-API erfunden;
    - `CURRENT.zip`, `MANIFEST.md`, `EVIDENCE_GATE5_20261026.md` im Campus.
+
+## Amazon-ASIN-Brücke
+
+- idealo liefert GTIN + `asins_product`; HD-009 speichert beides.
+- Bei exakt einer gültigen ASIN kann daraus ein direkter Amazon.de-Produktlink erzeugt werden.
+- Partner-/Tracking-ID wird im Backend eingetragen und vom Preflight geprüft.
+- Keine eigene Amazon-Suche; keine Amazon-Creators-API erfunden.
+- Pro Kategorie-Dreierreihe maximal ein Amazon-Produkt, ohne feste Bindung an Platz 3.
 
 ## ERSTER OFFENER BLOCKER
 
@@ -115,4 +123,4 @@ Produktiver Hobby-Depot-Live-Readback fehlt. Provider-Zugangsdaten wurden absich
 
 ## EXAKT EINE NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten `0.1.1-dev` manuell installieren und danach den Verbindungsdaten-Preflight abarbeiten. Pflichtwerte: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Danach Verbindungstests, HD-004, eBay/idealo und echten Frontend-/Provider-Readback durchführen. Amazon bleibt bis zu einem belegten realen Adapter `prepared`. Kein Live-PASS ohne vollständigen Preflight und Live-Nachweis.
+Den Gate-5-PASS-Kandidaten `0.1.2-dev` manuell installieren und danach den Verbindungsdaten-Preflight abarbeiten. Pflichtwerte: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Danach Verbindungstests, HD-004, eBay/idealo und echten Frontend-/Provider-Readback durchführen. Amazon bleibt bis zu einem belegten realen Adapter `prepared`. Kein Live-PASS ohne vollständigen Preflight und Live-Nachweis.
