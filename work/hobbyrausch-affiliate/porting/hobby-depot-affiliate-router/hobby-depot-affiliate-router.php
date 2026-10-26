@@ -2392,10 +2392,10 @@ JS;
                         } else {
                             $disclosure = $this->get_disclosure_html($content_id);
                         }
-                        $is_category_product_slot = preg_match('/^category_product_[123]$/', $normalized_slot_type);
-                        // V6.61.8: Provider labels must never change category-product card geometry.
-                        // The provider remains represented by its offer button/link; the external
-                        // label row is suppressed for these three fixed product slots only.
+                        $is_category_product_slot = preg_match('/^(?:category|journal)_product_[123]$/', $normalized_slot_type);
+                        // Category and Journal product cards share one fixed geometry. The provider
+                        // remains represented by its offer button/link; no extra label row may
+                        // change the card height.
                         if ($is_category_product_slot || $is_overview_wide_banner_slot) { $label = ''; }
                         if ($is_category_product_slot && $disclosure === '' && trim((string)get_option(self::OPTION_DISCLOSURE, '')) !== '') {
                             $disclosure = '<div class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve" aria-hidden="true">&nbsp;</div>';
@@ -2431,7 +2431,7 @@ JS;
         }
         // V2.4.0: Die fest definierten Banner-/Produktplätze der Produkt- und
         // Kategorieebene dürfen öffentlich niemals Platzhalter ausgeben.
-        if ($this->overview_wide_banner_slot($slot_type) || preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) {
+        if ($this->overview_wide_banner_slot($slot_type) || preg_match('/^(?:category|journal)_product_[123]$/', sanitize_key((string)$slot_type))) {
             return $this->debug_comment('affiliate_no_real_creative', $content_id, $slot_type, '', '');
         }
         $placeholder = $this->render_placeholder_slot($slot_type);
@@ -2549,7 +2549,7 @@ JS;
         // nicht mehr als spaeter verworfener DOM-Text ausgeliefert.
         if ($network === 'ebay'
             && $creative_type === 'product'
-            && preg_match('/^(?:category|hub)_product_[123]$/', $normalized_slot_type)) {
+            && preg_match('/^(?:category|hub|journal)_product_[123]$/', $normalized_slot_type)) {
             $description = '';
         }
         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
@@ -2563,7 +2563,7 @@ JS;
             $description = '';
             $button = 'Mehr erfahren';
         }
-        $category_product_slot = (bool) preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+        $category_product_slot = (bool) preg_match('/^(?:category|journal)_product_[123]$/', sanitize_key((string)$slot_type));
         $category_product_wrap_attr = $category_product_slot
             ? ' data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"'
             : '';
