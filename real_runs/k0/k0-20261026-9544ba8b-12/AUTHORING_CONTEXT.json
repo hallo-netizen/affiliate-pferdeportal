@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "sattelgurte-faq",
+    "plan_slot": "95c90f946bb7ac996f201ae845e4d49b0b0fb3cbca7b44c2a0c68b10e1bf90cf",
+    "target_keyword": "Welcher Sattelgurt für empfindliche Pferde",
+    "title": "Welcher Sattelgurt für empfindliche Pferde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "FN – Sattelgurte",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/"
+        },
+        {
+          "source_title": "FN – Ausrüstung passend und pferdegerecht",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-passend-und-pferdegerecht-03-2021/"
+        }
+      ],
+      "claims": [
+        "Ein Sattelgurt soll in Form und Länge so gewählt werden, dass der Ellenbogen des Pferdes beim Reiten frei beweglich bleibt.",
+        "Anatomisch ausgeschnittene Gurte können bei bestimmten Pferden Reibung am Ellenbogen vermeiden; eine passende Form hängt von Gurtlage und Körperbau ab.",
+        "Zu festes Angurten kann Druck und Verspannungen verursachen; Gurte sollen nur so fest wie nötig angezogen werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welcher Sattelgurt für empfindliche Pferde",
+      "topic": "Welcher Sattelgurt für empfindliche Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "sattelgurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welcher Sattelgurt für empfindliche Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "FN – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "statement": "Ein Sattelgurt soll in Form und Länge so gewählt werden, dass der Ellenbogen des Pferdes beim Reiten frei beweglich bleibt.",
+        "evidence_text": "Ein Sattelgurt soll in Form und Länge so gewählt werden, dass der Ellenbogen des Pferdes beim Reiten frei beweglich bleibt.",
+        "evidence_text_sha256": "b0cff3d8a584b631d6072b747e477010378c2be5cd865ab9bef7227720e1e9c5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FN – Sattelgurte",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/sattelgurte-10-2023/",
+        "statement": "Anatomisch ausgeschnittene Gurte können bei bestimmten Pferden Reibung am Ellenbogen vermeiden; eine passende Form hängt von Gurtlage und Körperbau ab.",
+        "evidence_text": "Anatomisch ausgeschnittene Gurte können bei bestimmten Pferden Reibung am Ellenbogen vermeiden; eine passende Form hängt von Gurtlage und Körperbau ab.",
+        "evidence_text_sha256": "b0b52154a10ca4b6d266b96e70f009b2d9b97beb37c89e23b2ce25d26a6a538b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FN – Ausrüstung passend und pferdegerecht",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausruestung-passend-und-pferdegerecht-03-2021/",
+        "statement": "Zu festes Angurten kann Druck und Verspannungen verursachen; Gurte sollen nur so fest wie nötig angezogen werden.",
+        "evidence_text": "Zu festes Angurten kann Druck und Verspannungen verursachen; Gurte sollen nur so fest wie nötig angezogen werden.",
+        "evidence_text_sha256": "c659a220c235486a2aaa62bca96e2a9bd2e18898f9a2943bc8a177c5abaf5c1c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "FAQ zu sattelgurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/sattelgurte-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "sattelgurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "sattelgurte",
+      "Welcher Sattelgurt für",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
