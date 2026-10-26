@@ -1,0 +1,38 @@
+name: Hobbyrausch HD-009 Gate 4
+
+on:
+  push:
+    branches:
+      - hobbyrausch/hd009-affiliate-port-20261026
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/**'
+      - '.github/workflows/hobbyrausch-hd009-gate4.yml'
+  workflow_dispatch:
+
+jobs:
+  gate4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/affiliate-portal-router'
+          mapfile -t files < <(find "$root" -type f -name '*.php' -print | sort)
+          test "${#files[@]}" -gt 0
+          for f in "${files[@]}"; do php -l "$f"; done
+          echo "PHP_LINT_FILES=${#files[@]}"
+
+      - name: Positive and negative runtime simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          testfile='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/gate4.php'
+          for scenario in             positive             registry_unavailable             snapshot_invalid             world_count             few_hobbies             ebay_failclosed             idealo_failclosed             legacy_regression             amazon_regression
+          do
+            echo "=== $scenario ==="
+            php "$testfile" "$scenario"
+          done
