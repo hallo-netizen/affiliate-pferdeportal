@@ -665,9 +665,9 @@ trait PPAR_Ebay_Trait {
                 return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
             }
         }
-        $strong_horse_hits = array();
-        foreach ((array) ($catalog['strong_horse_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_horse_hits[] = sanitize_text_field((string) $marker); }
+        $strong_domain_hits = array();
+        foreach ((array) ($catalog['strong_domain_markers'] ?? array()) as $marker) {
+            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_domain_hits[] = sanitize_text_field((string) $marker); }
         }
         // V6.26: controlled inherently equestrian product identities are domain
         // evidence themselves. A real listing titled simply "Damen Reitstiefel"
@@ -677,10 +677,10 @@ trait PPAR_Ebay_Trait {
         // are excluded by ebay_business_primary_title_section().
         $private_sections = $this->ebay_business_evidence_sections($item);
         foreach ($this->ebay_business_inherent_domain_hits($catalog, $private_sections) as $marker) {
-            $strong_horse_hits[] = 'product:' . sanitize_text_field((string)$marker);
+            $strong_domain_hits[] = 'product:' . sanitize_text_field((string)$marker);
         }
-        $strong_horse_hits = array_values(array_unique($strong_horse_hits));
-        if (!$strong_horse_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein expliziter Pferde-/Reitsportbezug im realen eBay-Angebot.'); }
+        $strong_domain_hits = array_values(array_unique($strong_domain_hits));
+        if (!$strong_domain_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein expliziter Pferde-/Reitsportbezug im realen eBay-Angebot.'); }
 
         // Workflow V2 root rule: if the real eBay facts identify one canonical
         // product concept unambiguously, PRIVATE uses that concept only to pick
@@ -707,7 +707,7 @@ trait PPAR_Ebay_Trait {
                             'status'=>'ready','score'=>min(100, max(1, absint($concept_match['score'] ?? 100))),
                             'product_slug'=>'','product_title'=>'','hub'=>'Private Anzeigen','main_hub'=>'Anzeigenmarkt',
                             'path'=>'Private Anzeigen > ' . $label,'private_bucket_slug'=>$concept_bucket,
-                            'strong_horse_hits'=>$strong_horse_hits,'hits'=>(array) ($concept_match['hits'] ?? array()),
+                            'strong_domain_hits'=>$strong_domain_hits,'hits'=>(array) ($concept_match['hits'] ?? array()),
                             'evidence_hash'=>hash('sha256', $normalized . '|private-concept-v2|' . $concept_id),
                             'private_match_contract'=>'bucket_v2','private_match_source'=>'canonical_product_concept',
                             'private_product_concept_id'=>$concept_id,
@@ -781,7 +781,7 @@ trait PPAR_Ebay_Trait {
             'main_hub'=>'Anzeigenmarkt',
             'path'=>'Private Anzeigen > ' . (string) $best['label'],
             'private_bucket_slug'=>(string) $best['bucket'],
-            'strong_horse_hits'=>$strong_horse_hits,
+            'strong_domain_hits'=>$strong_domain_hits,
             'hits'=>(array) $best['hits'],
             'evidence_hash'=>hash('sha256', $normalized . '|private-v2|' . (string)$best['bucket']),
             'private_match_contract'=>'bucket_v2',
@@ -1023,14 +1023,13 @@ trait PPAR_Ebay_Trait {
      * context after the real eBay offer independently proves the expected product.
      * The query can never create a product match by itself.
      */
-    private function ebay_business_exact_profile_horse_scope($rule) {
+    private function ebay_business_exact_profile_domain_scope($rule) {
         $rule = is_array($rule) ? $rule : array();
-        if (sanitize_key((string)($rule['business_concept_id'] ?? '')) === '') { return false; }
-        $query = $this->ebay_topic_text((string)($rule['query'] ?? ''));
-        foreach (array('pferd','pferde','pony','ponys','fohlen','horse','horses','equine','equestrian') as $marker) {
-            if ($this->ebay_topic_term_present($query, $marker)) { return true; }
-        }
-        return false;
+        $concept_id = sanitize_key((string)($rule['business_concept_id'] ?? ''));
+        $query = trim((string)($rule['query'] ?? ''));
+        // Domain scope comes from the canonical Hobby-Depot concept binding.
+        // The real listing must still independently prove product identity.
+        return $concept_id !== '' && $query !== '';
     }
 
     /**
@@ -1132,25 +1131,25 @@ trait PPAR_Ebay_Trait {
         $expected_concept = is_array($expected['concept'] ?? null) ? $expected['concept'] : array();
         $expected_kind = sanitize_key((string)($expected['kind'] ?? ''));
         $expected_evidence = $expected_concept ? $this->ebay_business_expected_concept_evidence($expected_concept, $sections) : array('ok'=>false);
-        $exact_profile_scope = $expected_concept && $this->ebay_business_exact_profile_horse_scope($rule);
+        $exact_profile_scope = $expected_concept && $this->ebay_business_exact_profile_domain_scope($rule);
 
-        $strong_horse_hits = array();
-        foreach ((array) ($catalog['strong_horse_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_horse_hits[] = sanitize_text_field((string) $marker); }
+        $strong_domain_hits = array();
+        foreach ((array) ($catalog['strong_domain_markers'] ?? array()) as $marker) {
+            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_domain_hits[] = sanitize_text_field((string) $marker); }
         }
         foreach ($this->ebay_business_inherent_domain_hits($catalog, $sections) as $marker) {
-            $strong_horse_hits[] = 'product:' . sanitize_text_field((string) $marker);
+            $strong_domain_hits[] = 'product:' . sanitize_text_field((string) $marker);
         }
         // V6.18: for an exact catalog profile, the search scope may establish
         // horse-domain context only AFTER real title/aspect/category data proves
         // the expected product concept independently. This fixes the V6.17 gate
         // that rejected most ordinary horse products merely because their title
         // did not repeat the word "Pferd".
-        if (!$strong_horse_hits && $exact_profile_scope && !empty($expected_evidence['ok'])) {
-            $strong_horse_hits[] = 'exact_profile:' . sanitize_key((string)($expected_concept['id'] ?? ''));
+        if (!$strong_domain_hits && $exact_profile_scope && !empty($expected_evidence['ok'])) {
+            $strong_domain_hits[] = 'exact_profile:' . sanitize_key((string)($expected_concept['id'] ?? ''));
         }
-        $strong_horse_hits = array_values(array_unique($strong_horse_hits));
-        if (!$strong_horse_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Pferde-/Reitsportbezug aus Angebot oder exakt bestaetigtem Pferde-Suchprofil.'); }
+        $strong_domain_hits = array_values(array_unique($strong_domain_hits));
+        if (!$strong_domain_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Pferde-/Reitsportbezug aus Angebot oder exakt bestaetigtem Pferde-Suchprofil.'); }
 
         $ranked = array();
         $concept_pool = ($expected_kind === 'product' && $expected_concept) ? array($expected_concept) : (array) ($catalog['business_concepts'] ?? array());
@@ -1248,7 +1247,7 @@ trait PPAR_Ebay_Trait {
             'main_hub'=>sanitize_text_field((string)($primary['main_hub']??'')),
             'path'=>$path,
             'private_bucket_slug'=>sanitize_title((string)($primary['private_bucket_slug']??($best['private_bucket_slug']??''))),
-            'strong_horse_hits'=>$strong_horse_hits,'hits'=>(array)($best['hits']??array()),'hit_sources'=>(array)($best['hit_sources']??array()),
+            'strong_domain_hits'=>$strong_domain_hits,'hits'=>(array)($best['hits']??array()),'hit_sources'=>(array)($best['hit_sources']??array()),
             'evidence_hash'=>hash('sha256',$normalized.'|business-concept-v3|'.sanitize_key((string)($best['id']??''))),
             'business_match_contract'=>'concept_v3',
         );
@@ -2279,31 +2278,9 @@ trait PPAR_Ebay_Trait {
         $concept = is_array($concept) ? $concept : array();
         $title = trim(sanitize_text_field((string)($concept['title'] ?? '')));
         if ($title === '') { return ''; }
-
-        // Keep the complete catalog identity. Removing use-context here caused
-        // systematic discovery starvation (e.g. "Kameras im Stall" became
-        // "Kameras Pferd"; "Desinfektionsmittel für Stall" became
-        // "Desinfektionsmittel Pferd") before the strict classifier ran.
-        $identity = $title;
-
-        $topic = $this->ebay_topic_text($identity);
-        $has_equine_scope = false;
-        foreach (array('pferd','pferde','pony','ponys','fohlen','horse','horses','equine','equestrian') as $marker) {
-            if ($this->ebay_topic_term_present($topic, $marker)) { $has_equine_scope = true; break; }
-        }
-        if (!$has_equine_scope) {
-            $catalog = $this->ebay_portal_catalog();
-            if (!is_wp_error($catalog)) {
-                foreach ((array)($catalog['business_inherent_markers'] ?? array()) as $marker) {
-                    if ($this->ebay_business_strict_token_present($topic, (string)$marker)) {
-                        $has_equine_scope = true;
-                        break;
-                    }
-                }
-            }
-        }
-        $query = $identity . ($has_equine_scope ? '' : ' Pferd');
-        return substr(sanitize_text_field($query), 0, 100);
+        // Hobby Depot searches the exact canonical hobby/product concept.
+        // No project-specific qualifier may be appended.
+        return substr($title, 0, 100);
     }
 
     /**
@@ -6357,7 +6334,7 @@ trait PPAR_Ebay_Trait {
             'path'=>'Private Anzeigen > ' . $label,
             'private_bucket_slug'=>$slug,
             'horse_hits'=>array(),
-            'strong_horse_hits'=>array(),
+            'strong_domain_hits'=>array(),
             'hits'=>array(),
             'evidence_hash'=>hash('sha256', (string) ($item['source_hash'] ?? '') . '|manual|' . $term_id),
             'manual_override'=>true,
