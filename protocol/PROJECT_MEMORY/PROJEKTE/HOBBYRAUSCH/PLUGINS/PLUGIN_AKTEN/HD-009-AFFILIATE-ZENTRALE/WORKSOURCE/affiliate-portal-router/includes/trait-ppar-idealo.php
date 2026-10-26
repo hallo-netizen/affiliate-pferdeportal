@@ -248,31 +248,24 @@ trait PPAR_Idealo_Trait {
     private function idealo_portal_supply_catalog() {
         static $cache = null;
         if (is_array($cache) || is_wp_error($cache)) { return $cache; }
-        $path = dirname(__DIR__) . '/assets/ebay-portal-catalog-v2.json';
-        if (!is_readable($path)) { return $cache = new WP_Error('idealo_portal_catalog_missing', 'Kanonischer Portal-Produktkatalog fehlt.'); }
-        $data = json_decode((string) file_get_contents($path), true);
-        if (!is_array($data)) { return $cache = new WP_Error('idealo_portal_catalog_invalid', 'Kanonischer Portal-Produktkatalog ist ungültig.'); }
-        $contract = is_array($data['business_supply_contract'] ?? null) ? $data['business_supply_contract'] : array();
-        $required_ids = array_values(array_filter(array_map('sanitize_key', (array) ($contract['required_product_concept_ids'] ?? array()))));
-        $required_count = absint($contract['required_count'] ?? 0);
-        if ($required_count !== 311 || count($required_ids) !== 311) {
-            return $cache = new WP_Error('idealo_portal_contract_invalid', 'Portal-Produktvertrag ist nicht der gebundene 311er-Stand.');
+        if (!class_exists('HDAR_Hobby_Depot_Source')) {
+            return $cache = new WP_Error('hdar_source_adapter_missing', 'Hobby-Depot-Source-Adapter fehlt.');
         }
-        $required = array_fill_keys($required_ids, true);
+        $data = HDAR_Hobby_Depot_Source::catalog();
+        if (is_wp_error($data)) { return $cache = $data; }
         $concepts = array();
-        foreach ((array) ($data['business_concepts'] ?? array()) as $concept) {
+        foreach ((array)($data['business_concepts'] ?? array()) as $concept) {
             if (!is_array($concept)) { continue; }
-            $id = sanitize_key((string) ($concept['id'] ?? ''));
-            if ($id === '' || empty($required[$id])) { continue; }
+            $id = sanitize_key((string)($concept['id'] ?? ''));
+            if ($id === '' || isset($concepts[$id])) { continue; }
             $concepts[$id] = $concept;
         }
-        if (count($concepts) !== 311) {
-            return $cache = new WP_Error('idealo_portal_concepts_incomplete', 'Nicht alle 311 gebundenen Produktkonzepte sind im Portal-Katalog vorhanden.');
+        if (!$concepts) {
+            return $cache = new WP_Error('idealo_hobby_depot_concepts_missing', 'Hobby Depot liefert keine Produkt-/Rechercheziele.');
         }
         $data['_idealo_required_concepts'] = $concepts;
-        $data['_idealo_required_ids'] = $required_ids;
-        $cache = $data;
-        return $cache;
+        $data['_idealo_required_ids'] = array_keys($concepts);
+        return $cache = $data;
     }
 
     private function idealo_match_normalize($text) {
