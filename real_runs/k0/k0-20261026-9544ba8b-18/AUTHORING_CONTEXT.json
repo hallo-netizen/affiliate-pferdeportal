@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "zuegel-faq",
+    "plan_slot": "2e3f284f575348c36b27a6fc3be667fed326d605d4fbfdd2d7ccb1712e8bbf55",
+    "target_keyword": "Wie reitet man ein Pferd am äußeren Zügel",
+    "title": "Wie reitet man ein Pferd am äußeren Zügel?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "FN – Diagonale Hilfengebung verstehen",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/"
+        },
+        {
+          "source_title": "FN – Stellung und Biegung",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausbildungstipp-stellung-und-biegung-07-2016/"
+        }
+      ],
+      "claims": [
+        "Beim Reiten auf gebogenen Linien gehört der äußere Zügel zusammen mit dem inneren Schenkel zu den wesentlichen Hilfen.",
+        "Der äußere Zügel soll ein übermäßiges Abknicken des Halses und das Ausweichen über die äußere Schulter begrenzen.",
+        "Der Reiter treibt das Pferd aus der Biegung mit dem inneren Schenkel an den äußeren Zügel heran, statt es am inneren Zügel herumzuziehen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie reitet man ein Pferd am äußeren Zügel",
+      "topic": "Wie reitet man ein Pferd am äußeren Zügel?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "zuegel-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie reitet man ein Pferd am äußeren Zügel?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "FN – Diagonale Hilfengebung verstehen",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/",
+        "statement": "Beim Reiten auf gebogenen Linien gehört der äußere Zügel zusammen mit dem inneren Schenkel zu den wesentlichen Hilfen.",
+        "evidence_text": "Beim Reiten auf gebogenen Linien gehört der äußere Zügel zusammen mit dem inneren Schenkel zu den wesentlichen Hilfen.",
+        "evidence_text_sha256": "23dd9baa9cb86c0836a90dee41a592b7732f653c9de2357641b9a9470e8a84ba",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FN – Diagonale Hilfengebung verstehen",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/diagonale-hilfengebung-verstehen-09-2023/",
+        "statement": "Der äußere Zügel soll ein übermäßiges Abknicken des Halses und das Ausweichen über die äußere Schulter begrenzen.",
+        "evidence_text": "Der äußere Zügel soll ein übermäßiges Abknicken des Halses und das Ausweichen über die äußere Schulter begrenzen.",
+        "evidence_text_sha256": "b7636797447c642dbb4cc8afe53b8e1344319a9fdc92ac5811531e3a687bc537",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FN – Stellung und Biegung",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausbildungstipp-stellung-und-biegung-07-2016/",
+        "statement": "Der Reiter treibt das Pferd aus der Biegung mit dem inneren Schenkel an den äußeren Zügel heran, statt es am inneren Zügel herumzuziehen.",
+        "evidence_text": "Der Reiter treibt das Pferd aus der Biegung mit dem inneren Schenkel an den äußeren Zügel heran, statt es am inneren Zügel herumzuziehen.",
+        "evidence_text_sha256": "aa90753157de67aee340d3e0b8f06abc33906a326ffdb600fec3529ea1aab8f0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/zuegel-faq/",
+        "anchor": "FAQ zu zuegel",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/zuegel-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/zuegel-vergleich/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/zuegel-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/zuegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/zuegel-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "zuegel-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "zuegel",
+      "Wie reitet man",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
