@@ -1462,36 +1462,12 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     private function automation_otto_filtered_feed_binding($advertiser_id) {
-        $advertiser_id = absint($advertiser_id);
-        if ($advertiser_id !== absint(self::OTTO_AWIN_ADVERTISER_ID)) {
-            return new WP_Error('otto_partner_invalid', 'OTTO-Feedbindung wurde für einen anderen Advertiser aufgerufen.');
-        }
-        $network = $this->network_settings('awin');
-        $configured_url = trim((string) ($network['product_feed_url'] ?? ''));
-        $configured_partner_id = absint($network['product_feed_partner_id'] ?? 0);
-        $configured_scope = sanitize_key((string) ($network['product_feed_scope'] ?? ''));
-        if ($configured_url === '' || $configured_partner_id !== $advertiser_id) {
-            return new WP_Error(
-                'otto_filtered_feed_required',
-                'OTTO benötigt einen ausdrücklich gebundenen, in Awin Create-a-Feed auf Pferde-Atelier-relevante Kategorien gefilterten Produktfeed.'
-            );
-        }
-        if ($configured_scope !== 'portal_filtered') {
-            return new WP_Error(
-                'otto_feed_scope_unconfirmed',
-                'Der gebundene OTTO-Feed ist nicht als in Awin fachlich gefilterter Pferde-Atelier-Feed bestätigt.'
-            );
-        }
-        $validated = $this->automation_validate_awin_feed_url($configured_url);
-        if (is_wp_error($validated)) {
-            return $validated;
-        }
-        return array(
-            'url'=>$validated,
-            'name'=>'Gebundener gefilterter OTTO/Awin-Produktfeed',
-            'scope'=>'portal_filtered',
+        return new WP_Error(
+            'otto_hobby_depot_not_configured',
+            'Der alte portalgebundene OTTO-Produktpfad ist für Hobby Depot deaktiviert. Die allgemeine Awin-Anbindung bleibt erhalten.'
         );
     }
+
 
     private function automation_select_awin_feed($snapshot) {
         $snapshot_id = absint($snapshot['external_id'] ?? 0);
@@ -1761,72 +1737,12 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     private function automation_otto_product_relevance_gate($normalized, $details) {
-        if (!is_array($normalized)) {
-            return new WP_Error('otto_relevance_row_invalid', 'OTTO-Produktzeile ist nicht auswertbar.');
-        }
-        if (sanitize_key((string) ($details['feed_scope'] ?? '')) !== 'portal_filtered') {
-            return new WP_Error('otto_product_feed_unfiltered', 'Ungefilterter OTTO-Vollfeed ist für das Pferde Atelier gesperrt.');
-        }
-        foreach (array('ebay_portal_catalog','ebay_content_policy_reason','ebay_business_classify_portal_item_strict') as $method) {
-            if (!method_exists($this, $method)) {
-                return new WP_Error('otto_relevance_contract_missing', 'Gebundener Pferde-Atelier-Relevanzvertrag ist nicht verfügbar.');
-            }
-        }
-
-        $product_type = sanitize_text_field((string) ($normalized['product_type'] ?? ''));
-        $google_category = sanitize_text_field((string) ($normalized['google_product_category'] ?? ''));
-        $brand = sanitize_text_field((string) ($normalized['brand'] ?? ''));
-        $categories = array_values(array_filter(array_unique(array($product_type, $google_category))));
-        $localized_aspects = array();
-        if ($product_type !== '') {
-            $localized_aspects[] = array('name'=>'Produktart','value'=>$product_type);
-        }
-        if ($brand !== '') {
-            $localized_aspects[] = array('name'=>'Marke','value'=>$brand);
-        }
-        // This is not invented product evidence. It records the explicit source
-        // contract: the Awin export itself was restricted to portal-relevant
-        // categories. A concrete product concept must still be independently
-        // carried by title/category/product-type evidence below.
-        $localized_aspects[] = array('name'=>'FeedScope','value'=>'Pferdebedarf');
-
-        $raw = array(
-            'title'=>sanitize_text_field((string) ($normalized['creative_title'] ?? '')),
-            'shortDescription'=>sanitize_textarea_field((string) ($normalized['creative_description'] ?? '')),
-            'categories'=>array_map(static function($name) {
-                return array('categoryName'=>sanitize_text_field((string) $name));
-            }, $categories),
-            'localizedAspects'=>$localized_aspects,
-        );
-        $item = array(
-            'title'=>$raw['title'],
-            'short_description'=>$raw['shortDescription'],
-            'category_names'=>$categories,
-            'raw'=>$raw,
-        );
-
-        $policy_reason = $this->ebay_content_policy_reason($item);
-        if ($policy_reason !== '') {
-            return new WP_Error('otto_product_content_blocked', 'Fachfremdes/gesperrtes OTTO-Produkt: ' . $policy_reason);
-        }
-        $classification = $this->ebay_business_classify_portal_item_strict($item, array());
-        if (is_wp_error($classification)) {
-            return new WP_Error(
-                'otto_product_not_portal_relevant',
-                'OTTO-Produkt passt nicht belastbar in den Pferde-Atelier-Produktkatalog: ' . $classification->get_error_message()
-            );
-        }
-        if (sanitize_key((string) ($classification['business_match_contract'] ?? '')) !== 'concept_v3'
-            || sanitize_title((string) ($classification['product_slug'] ?? '')) === '') {
-            return new WP_Error('otto_product_relevance_ambiguous', 'OTTO-Produkt besitzt kein eindeutiges Pferde-Atelier-Produktziel.');
-        }
-        return array(
-            'product_slug'=>sanitize_title((string) $classification['product_slug']),
-            'product_title'=>sanitize_text_field((string) ($classification['product_title'] ?? '')),
-            'score'=>absint($classification['score'] ?? 0),
-            'contract'=>'awin_otto_prefilter_v1',
+        return new WP_Error(
+            'otto_hobby_depot_not_configured',
+            'Der alte portalgebundene OTTO-Produktpfad ist für Hobby Depot deaktiviert.'
         );
     }
+
 
     private function automation_process_awin_product_batch($job, $snapshot, $details) {
         $file = (string) ($details['feed_file'] ?? '');
@@ -3097,8 +3013,6 @@ trait PPAR_Automation_Suite_Trait {
                 $available[] = 'pa_breed:' . $primary;
             } elseif ($post_type === 'uge_group_archive') {
                 $available[] = 'uge_group:' . $primary;
-            } elseif ($post_type === 'pa_breed_group_archive') {
-                $available[] = 'pa_breed_group:' . $primary;
             }
         }
         $direct_term_slugs = isset($context['_ppar_norm_direct_term_slugs']) && is_array($context['_ppar_norm_direct_term_slugs']) ? $context['_ppar_norm_direct_term_slugs'] : (array) ($context['direct_term_slugs'] ?? array());
@@ -3114,8 +3028,6 @@ trait PPAR_Automation_Suite_Trait {
                 $available[] = 'market:' . $slug;
             } elseif ($post_type === 'uge_term') {
                 $available[] = 'uge_group:' . $slug;
-            } elseif ($post_type === 'pa_breed') {
-                $available[] = 'pa_breed_group:' . $slug;
             }
         }
         // Seiten/Kategorien: aktuelle Zielkante = exakt; echte Vorfahren
@@ -3141,38 +3053,11 @@ trait PPAR_Automation_Suite_Trait {
             }
         }
 
-        // 6.72.90: Portalstruktur besitzt Produktseiten (z.B. /reithelme/) und
-        // redaktionelle WordPress-Kategorien (reithelme-faq, -beratung, ...), die
-        // in WordPress selbst bewusst keine Taxonomie-Eltern haben. Der gebuendelte
-        // Portalstrukturvertrag ist deshalb die autoritative Familienkante.
-        // Bestehende Kampagnen, die bei der Klassifikation auf eine der beiden
-        // Seiten der Familie materialisiert wurden, bleiben ohne Neuimport passend.
-        $family = isset($context['_ppar_norm_product_family_slug']) ? (string) $context['_ppar_norm_product_family_slug'] : sanitize_key((string)($context['product_family_slug'] ?? ''));
-        if ($post_type === 'page' && $primary !== '' && method_exists($this, 'portal_structure_product_family_for_category')) {
-            foreach ($wanted as $wanted_key) {
-                if (!preg_match('/^category:([a-z0-9_-]+)$/', $wanted_key, $m)) { continue; }
-                if ($this->portal_structure_product_family_for_category($m[1]) === $primary) {
-                    return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: page:'.$primary.' <-> '.$wanted_key.'.');
-                }
-            }
-        }
-        if ($post_type === 'category_archive' && $family !== '') {
-            if (in_array('page:'.$family, $wanted, true)) {
-                return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: category:'.$primary.' -> page:'.$family.'.');
-            }
-            if (method_exists($this, 'portal_structure_product_family_for_category')) {
-                foreach ($wanted as $wanted_key) {
-                    if (!preg_match('/^category:([a-z0-9_-]+)$/', $wanted_key, $m)) { continue; }
-                    if ($this->portal_structure_product_family_for_category($m[1]) === $family) {
-                        return array('specificity'=>500,'matches'=>1,'reason'=>'Gleiche Portal-Produktfamilie: '.$family.'.');
-                    }
-                }
-            }
-        }
+        // Hobby Depot hierarchy is supplied by HD-004. No copied source-portal
+        // product-family bridge is evaluated here.
 
         // HivePress-Unterkategorien: aktuelle Kategorie = exakt; ihre
-        // Vorfahren = erweiterter Themenkreis. So gewinnt z.B. Reithelme vor
-        // Reitausruestung, waehrend der Parent nur als zweite Stufe dient.
+        // Vorfahren = erweiterter Themenkreis. Der Parent bleibt nur die zweite Stufe.
         if ($post_type === 'hp_listing_category_archive' && $primary !== '') {
             $primary_key='market:'.$primary;
             if (in_array($primary_key,$wanted,true)) {
