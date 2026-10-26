@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "kappzaum-faq",
+    "plan_slot": "e1514092d38ff50798fd4d5449ebabd519ca5256c1e6e42cbe3553fb599acc63",
+    "target_keyword": "Welchen Kappzaum am besten fürs Pferd",
+    "title": "Welchen Kappzaum am besten fürs Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Kappzäume und Longierhalfter",
+          "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Kappzaeume"
+        },
+        {
+          "source_title": "Krämer – Ratgeber Longieren",
+          "source_url": "https://www.kraemer.at/ratgeber/longieren"
+        }
+      ],
+      "claims": [
+        "Ein Kappzaum muss so angepasst sein, dass das Naseneisen keine Druckspitzen bildet und nicht vom Nasenrücken absteht.",
+        "Eine gute Passform setzt einen ausreichend hoch gelegenen Nasenriemen sowie Anpassbarkeit von Riemen und Genickstück voraus.",
+        "Für die Longenarbeit wird die Longe beim Kappzaum in der Regel am mittleren Ring eingeschnallt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welchen Kappzaum am besten fürs Pferd",
+      "topic": "Welchen Kappzaum am besten fürs Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "kappzaum-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welchen Kappzaum am besten fürs Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Kappzäume und Longierhalfter",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Kappzaeume",
+        "statement": "Ein Kappzaum muss so angepasst sein, dass das Naseneisen keine Druckspitzen bildet und nicht vom Nasenrücken absteht.",
+        "evidence_text": "Ein Kappzaum muss so angepasst sein, dass das Naseneisen keine Druckspitzen bildet und nicht vom Nasenrücken absteht.",
+        "evidence_text_sha256": "df953a561d7f70114f605bad7ea4a2e537de98e195708a04461c9e2881794da5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Kappzäume und Longierhalfter",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Kappzaeume",
+        "statement": "Eine gute Passform setzt einen ausreichend hoch gelegenen Nasenriemen sowie Anpassbarkeit von Riemen und Genickstück voraus.",
+        "evidence_text": "Eine gute Passform setzt einen ausreichend hoch gelegenen Nasenriemen sowie Anpassbarkeit von Riemen und Genickstück voraus.",
+        "evidence_text_sha256": "d54ea66d58792809cfe01819eef226cce5d1acd64a180210e92074a7f8e3bad6",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Ratgeber Longieren",
+        "source_url": "https://www.kraemer.at/ratgeber/longieren",
+        "statement": "Für die Longenarbeit wird die Longe beim Kappzaum in der Regel am mittleren Ring eingeschnallt.",
+        "evidence_text": "Für die Longenarbeit wird die Longe beim Kappzaum in der Regel am mittleren Ring eingeschnallt.",
+        "evidence_text_sha256": "992a29de7f97d0289781baccd1a4065603e8903c563a72770b283a5317c274df",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/kappzaum-faq/",
+        "anchor": "FAQ zu kappzaum",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/kappzaum-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/kappzaum-sicherheit/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/kappzaum-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/kappzaum-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/kappzaum-sicherheit/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "kappzaum-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "kappzaum",
+      "Welchen Kappzaum am",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
