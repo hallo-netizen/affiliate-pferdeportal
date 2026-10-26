@@ -111,7 +111,7 @@ trait PPAR_Output_Objects_Trait {
         }
         global $wpdb;
         $creative_table = $this->creative_library_table();
-        $rows = $wpdb->get_results("SELECT identity_hash, content_scope, review_status FROM {$creative_table} WHERE identity_hash<>'' AND (content_scope IN ('horse','other','unclear') OR review_status IN ('approved','rejected'))", ARRAY_A);
+        $rows = $wpdb->get_results("SELECT identity_hash, content_scope, review_status FROM {$creative_table} WHERE identity_hash<>'' AND (content_scope<>'' OR review_status IN ('approved','rejected'))", ARRAY_A);
         foreach ((array) $rows as $row) {
             $scope = sanitize_key((string) ($row['content_scope'] ?? ''));
             $review = sanitize_key((string) ($row['review_status'] ?? ''));
@@ -539,7 +539,7 @@ trait PPAR_Output_Objects_Trait {
                 }
                 $content = (string) ($page->post_content ?? '');
                 $context = '';
-                if (function_exists('has_shortcode') && (has_shortcode($content, 'pferde_journal') || has_shortcode($content, 'affiliate_portal_journal'))) {
+                if (function_exists('has_shortcode') && has_shortcode($content, 'affiliate_portal_journal')) {
                     $context = 'journal';
                 } elseif (function_exists('has_shortcode') && has_shortcode($content, 'pferde_atelier_anzeigenmarkt_intro')) {
                     $context = 'anzeigenmarkt';
@@ -823,7 +823,7 @@ trait PPAR_Output_Objects_Trait {
             implode(' ', (array) ($partner['domains'] ?? array())),
         )));
         $evidence = trim($specific . ' ' . $this->output_text($partner_text));
-        $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige')));
+        $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), array('banner','anzeige')));
         if (!$evidence_tokens) { return null; }
 
         $ranked = array();
@@ -848,7 +848,7 @@ trait PPAR_Output_Objects_Trait {
                         && (strpos($et, $tt) !== false || strpos($tt, $et) !== false)) {
                         $score += 28; $hits[$tt] = true; continue;
                     }
-                    // Deutscher Wortstamm/Kompositum, z.B. Pferdefutter <-> Fütterung.
+                    // Deutscher Wortstamm-/Kompositumvergleich für fachliche Begriffe.
                     $et5 = substr($et, 0, 5); $tt5 = substr($tt, 0, 5);
                     if (($et5 !== '' && strpos($tt, $et5) !== false) || ($tt5 !== '' && strpos($et, $tt5) !== false)) {
                         $score += 18; $hits[$tt] = true;
@@ -1213,7 +1213,7 @@ trait PPAR_Output_Objects_Trait {
 
             // Schwaechere Evidenz darf den staerkeren Treffer nur innerhalb
             // desselben Strangs praezisieren. Beispiel:
-            // /ausruestung/ -> Schabracken -> Pflege Schabracken.
+            // Exakte Kategoriebindung bleibt über Zielslug und Pfad erhalten.
             if($best_path && $path
                 && count($path)>count($best_path)
                 && array_slice($path,0,count($best_path))===$best_path){
@@ -1302,7 +1302,7 @@ trait PPAR_Output_Objects_Trait {
             $semantic = $this->output_text((string)$tier);
             if ($semantic === '') { continue; }
             $credit = preg_match('/(^|\\s)(kredit|kredite|kreditvergleich|kreditrechner|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
-            $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|versicherungsvergleich|haftpflicht|pferdehaftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
+            $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|versicherungsvergleich|haftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
             if ($credit && !$insurance) { return 'kosten'; }
             if ($insurance && !$credit) { return 'versicherung'; }
             if ($credit && $insurance) { return 'blocked'; }
@@ -2798,7 +2798,7 @@ trait PPAR_Output_Objects_Trait {
         $campaign['match_descendants'] = $manual_fixed_banner ? false : ($general_banner_fallback ? false : $auto_category_banner);
         // V6.72.89: page_id ist ausschliesslich fuer echte Seiten. Eine WordPress-
         // Kategorie-ID darf niemals als Seiten-ID gespeichert werden; sonst geht die
-        // exakte category:<slug>-Bindung fuer normale Kategorien (z. B. Reithelme) verloren.
+        // exakte category:<slug>-Bindung fuer normale Kategorien verloren.
         if ($auto_category_banner && sanitize_key((string)($target['type'] ?? '')) === 'page') {
             $campaign['page_id'] = absint($target['id'] ?? 0);
         }
