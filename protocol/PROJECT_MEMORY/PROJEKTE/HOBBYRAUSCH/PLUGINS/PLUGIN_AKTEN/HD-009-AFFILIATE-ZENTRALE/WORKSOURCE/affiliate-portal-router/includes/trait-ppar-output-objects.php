@@ -541,8 +541,6 @@ trait PPAR_Output_Objects_Trait {
                 $context = '';
                 if (function_exists('has_shortcode') && has_shortcode($content, 'affiliate_portal_journal')) {
                     $context = 'journal';
-                } elseif (function_exists('has_shortcode') && has_shortcode($content, 'pferde_atelier_anzeigenmarkt_intro')) {
-                    $context = 'anzeigenmarkt';
                 } elseif ($this->design_bridge_class() !== '') {
                     $context = sanitize_key((string) $this->design_bridge_call('affiliate_page_type', array($id), ''));
                 }
@@ -3046,8 +3044,8 @@ trait PPAR_Output_Objects_Trait {
                         // sonst bleibt ein technisch gueltiger Glossar-/Rassenbanner
                         // als ganze Kampagne inaktiv, obwohl seine Placements stimmen.
                         $editorial_single_priority = array(
-                            'glossary_single_desktop_banner','breed_single_desktop_banner',
-                            'glossary_single_mobile_banner','breed_single_mobile_banner'
+                            'glossary_single_desktop_banner',
+                            'glossary_single_mobile_banner'
                         );
                         $fallback_slot_ids = array_values(array_unique(array_merge(
                             array_values(array_intersect($editorial_single_priority, $compatible_banner_slots)),
