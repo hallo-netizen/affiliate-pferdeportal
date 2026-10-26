@@ -29,6 +29,7 @@ require_once __DIR__ . '/includes/trait-ppar-awin-programme-gate.php';
 require_once __DIR__ . '/includes/trait-ppar-idealo.php';
 require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
 require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
+require_once __DIR__ . '/includes/trait-hdar-hobby-depot-context.php';
 
 final class Hobby_Depot_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
@@ -118,6 +119,7 @@ final class Hobby_Depot_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
+    use HDAR_Hobby_Depot_Context_Trait;
     const VERSION = '0.1.0-porting';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
@@ -298,13 +300,11 @@ final class Hobby_Depot_Affiliate_Router {
         // V6.72.42: Glossar-Einzelbanner wird nach dem Designrenderer in die
         // reale Glossar-Single-Struktur eingesetzt. Design/Text bleiben unveraendert.
         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
-        // V6.72.60: Pferderassenartikel erhalten denselben echten Automatikpfad.
-        add_filter('the_content', array($this, 'inject_breed_single_banner'), 41);
         // V6.72.87 KISS: Uebersichts-Banner werden serverseitig direkt vor dem Hauptloop ausgegeben.
         if (!$is_ajax_request) { add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20); }
         // V6.72.90 KISS: Journal am final gerenderten Seiteninhalt einsortieren.
-        // Die reale /journal/-Seite enthaelt [pferde_journal]; bei Prioritaet 99
-        // ist der Shortcode bereits gerendert. Kein JavaScript/Observer/Timer.
+        // Die Magazin-Seite wird erst nach dem final gerenderten Inhalt einsortiert.
+        // Kein JavaScript/Observer/Timer.
         add_filter('the_content', array($this, 'reposition_journal_banner_final_content'), 99);
         add_filter('pftk_hub_grid_affiliate_data', array($this, 'provide_hub_grid_affiliate_data'), 10, 3);
         add_filter('pftk_leaf_category_affiliate_slot_html', array($this, 'provide_leaf_category_affiliate_slot_html'), 10, 4);
@@ -801,23 +801,17 @@ final class Hobby_Depot_Affiliate_Router {
      * V6.72.104: reiner Journal-Hero-Preload. Keine Breadcrumb-, Margin-, Spacer-
      * oder First-Paint-Geometrie im Affiliate-Plugin. Diese gehoert dem Designplugin.
      */
+
     public function print_journal_hero_preload_v672104() {
-        if (is_admin() || is_feed() || !(function_exists('is_page') && is_page('journal')) || !class_exists('Pferde_Template_Kit')) {
-            return;
-        }
-        try {
-            $ref = new ReflectionClass('Pferde_Template_Kit');
-            $design_file = $ref->getFileName();
-            if (is_string($design_file) && $design_file !== '') {
-                $hero = plugins_url('assets/journal-v150478/hero.webp', $design_file);
-                if (is_string($hero) && $hero !== '') {
-                    echo '<link rel="preload" as="image" href="' . esc_url($hero) . '" fetchpriority="high">' . "\n";
-                }
-            }
-        } catch (Throwable $e) {
-            // Reiner Performance-Hinweis. Rendering darf davon nie abhaengen.
+        if (is_admin() || is_feed() || !(function_exists('is_page') && is_page('journal'))) { return; }
+        $hero = function_exists('apply_filters')
+            ? (string) apply_filters('hobby_depot_affiliate_journal_hero_preload_url', '')
+            : '';
+        if ($hero !== '') {
+            echo '<link rel="preload" as="image" href="' . esc_url($hero) . '" fetchpriority="high">' . "\n";
         }
     }
+
 
     public function enqueue_frontend_assets() {
         if (is_admin()) {
@@ -992,87 +986,13 @@ JS;
      * verwenden page:<slug>. Beide Formen werden über das reale WordPress-Ziel
      * aufgelöst. Gilt für alle category/leaf-Seiten, nicht für einen einzelnen Slug.
      */
+
     public function maybe_repair_v672179_page_banner_target_identity_mismatch() {
-        if (!is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
-        $done_key = 'ppar_v672179_page_banner_target_identity_replan_done';
-        if ((string) get_option($done_key, '') === 'done') { return; }
-        if (!class_exists('Pferde_Template_Kit')
-            || !is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))
-            || !method_exists($this, 'output_objects_table')
-            || !method_exists($this, 'creative_library_table')
-            || !method_exists($this, 'output_plan_creative')
-            || !method_exists($this, 'output_campaign_by_post_id')
-            || !method_exists($this, 'output_portal_by_key')
-            || !method_exists($this, 'output_portal_targets')
-            || !method_exists($this, 'output_target_key_matches')) { return; }
-
-        global $wpdb;
-        $objects = $this->output_objects_table();
-        $creative = $this->creative_library_table();
-        $rows = $wpdb->get_results(
-            "SELECT id,portal_key,creative_identity_hash,target_key,slot_id,status,campaign_post_id FROM {$objects}"
-            . " WHERE output_type='portal_banner' AND target_type='page'"
-            . " AND slot_id='hub_after_cards' AND status='published' AND campaign_post_id>0 ORDER BY id ASC LIMIT 100",
-            ARRAY_A
-        );
-        if (!is_array($rows)) { return; }
-        $failed = false; $repaired = 0; $checked = 0;
-        foreach ($rows as $object) {
-            $campaign_id = absint($object['campaign_post_id'] ?? 0);
-            $campaign = $campaign_id > 0 ? $this->output_campaign_by_post_id($campaign_id) : null;
-            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
-            $page_id = absint($campaign['page_id'] ?? 0);
-            if ($page_id <= 0 || get_post_type($page_id) !== 'page') { continue; }
-            $design_type = sanitize_key((string) call_user_func(array('Pferde_Template_Kit', 'affiliate_page_type'), $page_id));
-            if (!in_array($design_type, array('category', 'leaf'), true)) { continue; }
-
-            $portal_key = sanitize_key((string) ($object['portal_key'] ?? ''));
-            $portal = $portal_key !== '' ? $this->output_portal_by_key($portal_key, true) : null;
-            if (is_wp_error($portal) || !is_array($portal)) { $failed = true; continue; }
-            $targets = $this->output_portal_targets($portal);
-            if (is_wp_error($targets) || !is_array($targets)) { $failed = true; continue; }
-            $real_target = null;
-            foreach ($targets as $candidate) {
-                if (!is_array($candidate) || sanitize_key((string)($candidate['type'] ?? '')) !== 'page' || absint($candidate['id'] ?? 0) !== $page_id) { continue; }
-                $real_target = $candidate; break;
-            }
-            if (!is_array($real_target)) { $failed = true; continue; }
-            $checked++;
-            if (!$this->output_target_key_matches($real_target, (string)($object['target_key'] ?? ''))) { continue; }
-
-            $identity = strtolower(sanitize_text_field((string) ($object['creative_identity_hash'] ?? '')));
-            if (!preg_match('/^[a-f0-9]{64}$/', $identity)) { continue; }
-            $source = $wpdb->get_row($wpdb->prepare(
-                "SELECT * FROM {$creative} WHERE identity_hash=%s AND creative_type='banner' AND source_status='active' AND availability_state='active' LIMIT 1",
-                $identity
-            ), ARRAY_A);
-            if (!is_array($source)) { continue; }
-            $plan = $this->output_plan_creative($source, true, $portal_key);
-            if (!is_array($plan)) { $failed = true; continue; }
-
-            $replacements = $wpdb->get_results($wpdb->prepare(
-                "SELECT id,target_key,status,campaign_post_id FROM {$objects} WHERE portal_key=%s AND creative_identity_hash=%s"
-                . " AND output_type='portal_banner' AND target_type='page' AND slot_id='product_after_category_tiles' ORDER BY id DESC LIMIT 10",
-                $portal_key, $identity
-            ), ARRAY_A);
-            $replacement_ok = false;
-            foreach ((array)$replacements as $replacement) {
-                $replacement_campaign_id = absint($replacement['campaign_post_id'] ?? 0);
-                if (sanitize_key((string)($replacement['status'] ?? '')) !== 'published' || $replacement_campaign_id <= 0) { continue; }
-                $replacement_campaign = $this->output_campaign_by_post_id($replacement_campaign_id);
-                if (!is_array($replacement_campaign)
-                    || empty($replacement_campaign['active'])
-                    || absint($replacement_campaign['page_id'] ?? 0) !== $page_id) { continue; }
-                if ($this->output_target_key_matches($real_target, (string)($replacement['target_key'] ?? ''))) { $replacement_ok = true; break; }
-            }
-            if (!$replacement_ok) { $failed = true; continue; }
-            $repaired++;
-        }
-        if (!$failed) {
-            update_option($done_key, 'done', false);
-            update_option('ppar_v672179_page_banner_target_identity_replan_result', array('repaired'=>$repaired,'checked'=>$checked,'completed_at'=>time()), false);
-        }
+        // Historical Pferdeatelier migration. A fresh Hobby Depot installation
+        // must never rewrite output objects using the old portal identity model.
+        return;
     }
+
 
     public function register_shortcodes() {
         add_shortcode('pp_affiliate_slot', array($this, 'shortcode_affiliate_slot'));
@@ -2030,27 +1950,10 @@ JS;
     }
 
     private function affiliate_is_journal_category($term) {
-        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
-        $id=absint($term->term_id);
-        $slug=sanitize_title((string)$term->slug);
-        // Exakt aus dem aktuell gebundenen Journal-Design 1.50.552 abgeleitet.
-        // Glossar und Pferderassen besitzen eigene Werbeplatz-Vertraege und
-        // werden deshalb in inject_overview_banner_footer vorher abgefangen.
-        $ids=array(1481,1483,1484,1485,1486,1487,1488);
-        $slugs=array(
-            'pferde-verstehen','recht-finanzen-und-organisation','reiterleben-und-community',
-            'alltags-pferde-haltungsformen','pferdegesundheit-verstehen',
-            'pferdeernaehrung-verstehen','ausbildung-und-reitweisen','pferdewissen-grundlagen'
-        );
-        return in_array($id,$ids,true) || in_array($slug,$slugs,true);
+        if (!$term instanceof WP_Term || is_wp_error($term)) { return false; }
+        return (string) $term->taxonomy === 'journal_cat';
     }
 
-    /**
-     * V6.72.100 RESTORE – echte Design-Zielpunkte statt Loop-Position.
-     * Der Banner wird erst im Footer an die bereits gerenderte, stabile
-     * Designstruktur montiert. Damit bleiben Glossar-/Rassen-/Journal-Layouts
-     * unveraendert und der Banner sitzt wieder am frueheren PASS-Punkt.
-     */
     public function inject_overview_banner_footer() {
         if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return; }
         $term=function_exists('get_queried_object') ? get_queried_object() : null;
@@ -5236,8 +5139,8 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         // nach dem fertig gerenderten Hub-Inhalt angehaengt – nur wenn ein reales
         // Creative existiert und nur wenn der Slot nicht bereits vorhanden ist.
         // Start/Kategorie sowie alle Grid-Karten bleiben unveraendert.
-        if (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))) {
-            $design_type = (string) Pferde_Template_Kit::affiliate_page_type($post_id);
+        $design_type = $this->hd_affiliate_page_type($post_id);
+        if ($design_type !== '') {
             if (in_array($design_type, array('hub1', 'hub2'), true)) {
                 $slot_marker = 'data-ppar-slot="hub_after_cards"';
                 if (strpos((string) $content, $slot_marker) === false) {
@@ -5320,28 +5223,32 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
 
     private function content_has_design_template_shortcode($content) {
         $shortcodes = array(
-            'pferde_startseite',
-            'pferde_startseite_only',
-            'pferde_hub_ebene_1',
-            'pferde_hauptseite',
-            'pferde_hub_ebene_2',
-            'pferde_hub_auto',
             'affiliate_portal_startseite',
             'affiliate_portal_hub_1',
             'affiliate_portal_hub_2',
             'affiliate_portal_hub_auto',
             'affiliate_portal_kategorie',
-            'affiliate_portal_produkt',
-            'pferde_template_oben',
-            'pferde_template_unten',
-            'pferde_banner'
+            'affiliate_portal_produkt'
         );
         foreach ($shortcodes as $shortcode) {
-            if (has_shortcode($content, $shortcode)) {
-                return true;
-            }
+            if (has_shortcode($content, $shortcode)) { return true; }
         }
         return false;
+    }
+
+    private function get_design_template_type_from_content($content) {
+        $map = array(
+            'start' => array('affiliate_portal_startseite'),
+            'hub1' => array('affiliate_portal_hub_1'),
+            'hub2' => array('affiliate_portal_hub_2', 'affiliate_portal_hub_auto'),
+            'category' => array('affiliate_portal_kategorie', 'affiliate_portal_produkt'),
+        );
+        foreach ($map as $type => $shortcodes) {
+            foreach ($shortcodes as $shortcode) {
+                if (has_shortcode($content, $shortcode)) { return $type; }
+            }
+        }
+        return '';
     }
 
 
@@ -5861,7 +5768,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
 
     private function replace_template_tokens($text, $post_id, $context, $rule) {
         $site_name = get_bloginfo('name');
-        $thema = ($context === 'startseite') ? 'Pferdeportal' : get_the_title($post_id);
+        $thema = ($context === 'startseite') ? 'Hobby Depot' : get_the_title($post_id);
         $replacements = array(
             '{thema}' => $thema,
             '{site_name}' => $site_name,
@@ -6038,7 +5945,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         foreach ($active as $plugin_file) {
             $name = isset($plugins[$plugin_file]['Name']) ? (string) $plugins[$plugin_file]['Name'] : $plugin_file;
             $haystack = strtolower($name . ' ' . $plugin_file);
-            if (strpos($haystack, 'pferde startseite') !== false || strpos($haystack, 'pferde template') !== false || strpos($haystack, 'hubseite') !== false || strpos($haystack, 'affiliate template') !== false) {
+            if (strpos($haystack, 'hubseite') !== false || strpos($haystack, 'affiliate template') !== false) {
                 $matches[] = $name;
             }
         }
@@ -7438,7 +7345,7 @@ JS;
             <p><label>Client-ID <span class="ppar-saved"><?php echo esc_html($ebay_client_const ? 'über wp-config.php' : ((string)($ebay['client_id'] ?? '') !== '' ? 'gespeichert' : 'nicht gespeichert')); ?></span><br><input type="text" autocomplete="off" name="ppar_provider[ebay][client_id]" value="<?php echo esc_attr($ebay_client_const ? '' : (string)($ebay['client_id'] ?? '')); ?>" placeholder="<?php echo esc_attr($ebay_client_const ? 'über wp-config.php gesetzt' : ''); ?>"></label></p>
             <p><label>Client-Secret <span class="ppar-saved"><?php echo esc_html($ebay_secret_const ? 'über wp-config.php' : $this->masked_secret_label((string)($ebay['client_secret'] ?? ''))); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[ebay][client_secret]" value="" placeholder="leer lassen zum Beibehalten"></label></p>
             <p><label>EPN-Campaign-ID <span class="ppar-saved"><?php echo esc_html($ebay_campaign_const ? 'über wp-config.php' : ''); ?></span><br><input type="text" inputmode="numeric" maxlength="10" name="ppar_provider[ebay][epn_campaign_id]" value="<?php echo esc_attr($ebay_campaign_const ? '' : (string)($ebay['epn_campaign_id'] ?? '')); ?>" placeholder="10 Ziffern"></label></p>
-            <p><label>Affiliate-Referenz<br><input type="text" name="ppar_provider[ebay][affiliate_reference_prefix]" value="<?php echo esc_attr((string)($ebay['affiliate_reference_prefix'] ?? 'pferde-atelier')); ?>"></label></p>
+            <p><label>Affiliate-Referenz<br><input type="text" name="ppar_provider[ebay][affiliate_reference_prefix]" value="<?php echo esc_attr((string)($ebay['affiliate_reference_prefix'] ?? 'hobby-depot')); ?>"></label></p>
             <?php if (!$ebay_secret_const) : ?><details><summary>Zugangsdaten entfernen</summary><p><label><input type="checkbox" name="ppar_provider[ebay][remove_client_secret]" value="1"> Client-Secret entfernen</label></p></details><?php endif; ?>
             <p><strong>Letzte Zugangsprüfung:</strong> <?php echo !empty($ebay_snapshot['last_checked']) ? esc_html(wp_date('d.m.Y H:i',(int)$ebay_snapshot['last_checked'])) : 'nie'; ?><br><?php echo esc_html((string)($ebay_snapshot['message'] ?? '')); ?></p>
             <div class="ppar-v240-actions"><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button><button class="button" name="ppar_provider_action" value="save_test" <?php disabled(!$ebay_oauth_allowed); ?>>Speichern &amp; OAuth prüfen</button><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-ebay')); ?>">eBay-Fachseite</a><a class="button" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></div>
@@ -8892,23 +8799,12 @@ JS;
 
     private function central_page_type($page_id) {
         $page_id = absint($page_id);
-        if ($page_id <= 0) {
-            return '';
-        }
-        if (class_exists('Pferde_Template_Kit') && method_exists('Pferde_Template_Kit', 'affiliate_page_type')) {
-            return (string) Pferde_Template_Kit::affiliate_page_type($page_id);
-        }
-        $ancestors = get_post_ancestors($page_id);
-        $children = get_pages(array('parent' => $page_id, 'post_status' => 'publish', 'number' => 1));
-        $depth = count((array) $ancestors);
-        if ($depth === 0 && !empty($children)) {
-            return 'hub1';
-        }
-        if ($depth === 1 && !empty($children)) {
-            return 'hub2';
-        }
+        if ($page_id <= 0) { return ''; }
+        $registry_type = $this->hd_affiliate_page_type($page_id);
+        if ($registry_type !== '') { return $registry_type; }
         return '';
     }
+
 
     private function central_hub_pages() {
         $front_id = (int) get_option('page_on_front', 0);
@@ -8977,10 +8873,10 @@ JS;
                 $active_count++;
             }
         }
-        $design_loaded = class_exists('Pferde_Template_Kit');
-        $design_version = $design_loaded && defined('Pferde_Template_Kit::VERSION') ? constant('Pferde_Template_Kit::VERSION') : '';
-        $design_contract = $design_loaded && method_exists('Pferde_Template_Kit', 'affiliate_contract_version') ? (string) Pferde_Template_Kit::affiliate_contract_version() : '';
-        $compatible = $design_loaded && $design_contract === self::CONTRACT_VERSION;
+        $design_loaded = function_exists('has_filter') && (bool) has_filter('hobby_depot_affiliate_page_type');
+        $design_version = '';
+        $design_contract = $design_loaded ? self::CONTRACT_VERSION : '';
+        $compatible = $design_loaded;
         $test_page_id = isset($_GET['ppar_test_page_id']) ? absint($_GET['ppar_test_page_id']) : 0;
         ?>
         <div class="wrap ppar-central">
@@ -10465,7 +10361,7 @@ JS;
                 <h2>7. Shortcodes</h2>
                 <p><code>[affiliate_portal_slot type="post_mid_content" intent="primary_product"]</code></p>
                 <p><code>[pp_affiliate_slot type="mid_content" intent="primary_product"]</code> (Legacy kompatibel)</p>
-                <p><code>[pp_affiliate_slot type="bottom_recommendation" group="pferdefutter"]</code></p>
+                <p><code>[pp_affiliate_slot type="bottom_recommendation" group="hobby"]</code></p>
                 <p><code>[pp_portal_overview]</code> oder <code>[pp_portal_overview context="haupt_hub_ebene_1" part="full"]</code></p>
 
                 <?php submit_button('Einstellungen speichern'); ?>
@@ -10711,54 +10607,9 @@ JS;
     }
 
     public static function default_groups_json() {
-        return wp_json_encode(array(
-            array(
-                'id' => 'pferdefutter',
-                'label' => 'Pferdefutter',
-                'active' => false,
-                'match_mode' => 'auto',
-                'workflow_status' => 'offen',
-                'workflow_note' => 'Beispielgruppe; vor produktiver Nutzung an Projektprofil anpassen.',
-                'match_slugs' => array(
-                    'pferdefutter',
-                    'mineralfutter-pferde',
-                    'mash-pferde',
-                    'heucobs-pferde',
-                    'kraftfutter-pferde',
-                    'ergaenzungsfutter-pferde',
-                    'seniorenfutter-pferde'
-                ),
-                'match_keywords' => array(
-                    'pferdefutter',
-                    'mineralfutter',
-                    'mash',
-                    'heucobs',
-                    'kraftfutter',
-                    'ergänzungsfutter',
-                    'seniorenfutter'
-                ),
-                'banners' => array(
-                    array(
-                        'id' => 'pferdefutter_beispiel_inaktiv',
-                        'label' => 'Anzeige',
-                        'active' => false,
-                        'mode' => 'image_link',
-                        'slots' => array('bottom_recommendation', 'mid_content', 'post_bottom_recommendation', 'post_mid_content', 'hub_after_cards', 'category_recommendation'),
-                        'intent' => array('primary_product', 'fallback'),
-                        'priority' => 10,
-                        'match_slugs' => array('pferdefutter'),
-                        'match_keywords' => array('pferdefutter'),
-                        'url' => 'https://example.com/?ref={subid}',
-                        'subid_param' => '',
-                        'image_url' => '',
-                        'title' => 'Pferdefutter online ansehen',
-                        'description' => 'Beispiel ist inaktiv. Hier später echten Awin-/ADCELL-/Shop-Link eintragen.',
-                        'button_text' => 'Zum Shop'
-                    )
-                )
-            )
-        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
+
 
     public static function default_template_rules_json() {
         return wp_json_encode(array(
@@ -10771,9 +10622,9 @@ JS;
                 'show_selected' => true,
                 'show_hint' => true,
                 'show_full_overview' => true,
-                'selected_heading' => 'Beliebte Themen im Pferdeportal',
-                'hint_heading' => 'Weitere Themen im Pferdeportal entdecken',
-                'hint_text' => 'Die angezeigten Bereiche sind nur ein Einstieg. In der vollständigen Übersicht finden Sie alle Themen rund um Haltung, Ernährung, Ausrüstung, Pflege, Gesundheit und Training.',
+                'selected_heading' => 'Beliebte Themen im Hobby Depot',
+                'hint_heading' => 'Weitere Themen im Hobby Depot entdecken',
+                'hint_text' => 'Die angezeigten Bereiche sind nur ein Einstieg. In der vollständigen Übersicht finden Sie alle Themen des Hobby Depot.',
                 'button_text' => 'Alle Themenbereiche anzeigen',
                 'button_anchor' => 'alle-themenbereiche',
                 'full_heading' => 'Alle Themenbereiche im Überblick',
@@ -10852,48 +10703,5 @@ JS;
     }
 
     public static function example_minimal_json() {
-        return wp_json_encode(array(
-            array(
-                'id' => 'pferdefutter',
-                'label' => 'Pferdefutter',
-                'active' => true,
-                'match_slugs' => array('pferdefutter', 'mineralfutter-pferde', 'mash-pferde'),
-                'match_keywords' => array('pferdefutter', 'mineralfutter', 'mash'),
-                'banners' => array(
-                    array(
-                        'id' => 'mineralfutter_banner',
-                        'label' => 'Anzeige',
-                        'active' => true,
-                        'mode' => 'image_link',
-                        'slots' => array('post_mid_content', 'post_bottom_recommendation'),
-                        'intent' => array('primary_product'),
-                        'priority' => 50,
-                        'match_slugs' => array('mineralfutter-pferde'),
-                        'match_keywords' => array('mineralfutter'),
-                        'url' => 'https://partnerlink.example/?clickref={subid}',
-                        'subid_param' => '',
-                        'image_url' => 'https://example.com/banner.jpg',
-                        'title' => 'Mineralfutter für Pferde',
-                        'description' => 'Passende Produkte im Partnershop ansehen.',
-                        'button_text' => 'Zum Angebot'
-                    )
-                )
-            )
-        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
-}
-
-if (!function_exists('affiliate_portal_upsert_campaign')) {
-    function affiliate_portal_upsert_campaign($data) {
-        return Hobby_Depot_Affiliate_Router::instance()->upsert_campaign_from_external($data);
-    }
-}
-
-register_activation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'activate'));
-register_deactivation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'deactivate'));
-
-// Workflow V2 behält bewusst den live bekannten stabilen Pluginpfad
-// `affiliate-portal-router/hobby-depot-affiliate-router.php`. Der Bootstrap
-// startet weiterhin erst im normalen WordPress-Lauf; Aktivierung und eBay-
-// Hintergrundprozesse bleiben voneinander getrennt.
-Hobby_Depot_Affiliate_Router::instance();
