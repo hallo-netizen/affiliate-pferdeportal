@@ -72,7 +72,20 @@ $ids=get_posts([
  'post_type'=>'ap_campaign','post_status'=>'publish','posts_per_page'=>50,'fields'=>'ids',
  'meta_query'=>[['key'=>'_ppar_idealo_external_key','compare'=>'EXISTS']]
 ]);
-if(!$ids){ hd_e2e_fail('idealo materializer created no campaigns; materialized='.wp_json_encode($result['details']['materialized']??null).' counts='.wp_json_encode($result['counts']??null)); }
+if(!$ids){
+ $tableMethod=$ref->getMethod('network_sync_table'); $tableMethod->setAccessible(true);
+ $table=$tableMethod->invoke($plugin,'products');
+ global $wpdb;
+ $storedRows=$wpdb->get_results("SELECT network,external_key,category,quality_status,last_seen,payload FROM {$table} WHERE network='idealo'",ARRAY_A);
+ $miMethod=$ref->getMethod('idealo_match_index'); $miMethod->setAccessible(true);
+ $mi=$miMethod->invoke($plugin);
+ $targetDiag=[];
+ if(is_array($mi)){
+   $tkMethod=$ref->getMethod('idealo_target_keys_for_concept'); $tkMethod->setAccessible(true);
+   foreach((array)($mi['concepts']??[]) as $cid=>$concept){ $targetDiag[$cid]=$tkMethod->invoke($plugin,$concept); }
+ }
+ hd_e2e_fail('idealo materializer created no campaigns; materialized='.wp_json_encode($result['details']['materialized']??null).' counts='.wp_json_encode($result['counts']??null).' rows='.wp_json_encode($storedRows).' targets='.wp_json_encode($targetDiag));
+}
 
 $product_campaign_id=0;
 foreach($ids as $id){
