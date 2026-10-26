@@ -59,12 +59,12 @@ trait PPAR_Idealo_Trait {
         return array(
             'enabled' => false,
             'api_key' => '',
-            'adspace_id' => '568313',
-            'feed_id' => '2901',
+            'adspace_id' => '',
+            'feed_id' => '',
             'feed_url' => '',
             'output_mode' => 'ebay_only',
             'link_strategy' => 'hybrid',
-            'auto_refresh' => true,
+            'auto_refresh' => false,
             'last_feed_hash' => '',
             'feed_etag' => '',
             'feed_last_modified' => '',
@@ -245,35 +245,118 @@ trait PPAR_Idealo_Trait {
      * the existing production workflow; idealo reads it directly and never calls the
      * eBay provider runtime. Only the 311 required physical product concepts are used.
      */
+
     private function idealo_portal_supply_catalog() {
         static $cache = null;
         if (is_array($cache) || is_wp_error($cache)) { return $cache; }
-        $path = dirname(__DIR__) . '/assets/ebay-portal-catalog-v2.json';
-        if (!is_readable($path)) { return $cache = new WP_Error('idealo_portal_catalog_missing', 'Kanonischer Portal-Produktkatalog fehlt.'); }
-        $data = json_decode((string) file_get_contents($path), true);
-        if (!is_array($data)) { return $cache = new WP_Error('idealo_portal_catalog_invalid', 'Kanonischer Portal-Produktkatalog ist ungültig.'); }
-        $contract = is_array($data['business_supply_contract'] ?? null) ? $data['business_supply_contract'] : array();
-        $required_ids = array_values(array_filter(array_map('sanitize_key', (array) ($contract['required_product_concept_ids'] ?? array()))));
-        $required_count = absint($contract['required_count'] ?? 0);
-        if ($required_count !== 311 || count($required_ids) !== 311) {
-            return $cache = new WP_Error('idealo_portal_contract_invalid', 'Portal-Produktvertrag ist nicht der gebundene 311er-Stand.');
+        if (!function_exists('hd_category_registry_ready') || !hd_category_registry_ready()
+            || !function_exists('hd_category_registry_snapshot')) {
+            return $cache = new WP_Error('idealo_hobby_depot_registry_missing', 'Hobby-Depot-Kategorie-Registry ist nicht bereit.');
         }
-        $required = array_fill_keys($required_ids, true);
+
+        $snapshot = hd_category_registry_snapshot();
+        if (!is_array($snapshot) || empty($snapshot['nodes']) || !is_array($snapshot['nodes'])) {
+            return $cache = new WP_Error('idealo_hobby_depot_registry_invalid', 'Hobby-Depot-Kategorie-Snapshot ist leer oder ungültig.');
+        }
+        $mapping = is_array($snapshot['mapping'] ?? null) ? $snapshot['mapping'] : array();
+        $nodes = array();
+        $children = array();
+        foreach ($snapshot['nodes'] as $node) {
+            if (!is_array($node)) { continue; }
+            $id = trim((string)($node['node_id'] ?? ''));
+            if ($id === '' || sanitize_key((string)($node['status'] ?? 'active')) !== 'active') { continue; }
+            $nodes[$id] = $node;
+            $parent = trim((string)($node['parent_id'] ?? ''));
+            if ($parent !== '') { $children[$parent][] = $id; }
+        }
+
         $concepts = array();
-        foreach ((array) ($data['business_concepts'] ?? array()) as $concept) {
-            if (!is_array($concept)) { continue; }
-            $id = sanitize_key((string) ($concept['id'] ?? ''));
-            if ($id === '' || empty($required[$id])) { continue; }
-            $concepts[$id] = $concept;
+        $product_targets = array();
+        $article_targets = array();
+        foreach ($nodes as $node_id => $node) {
+            if (!preg_match('/^core:entity:[^:]+$/', $node_id)) { continue; }
+            $title = trim((string)($node['display_name'] ?? $node['name'] ?? ''));
+            $slug = sanitize_title((string)($node['slug'] ?? ''));
+            if ($title === '' || $slug === '') { continue; }
+
+            $parent = $nodes[(string)($node['parent_id'] ?? '')] ?? array();
+            $grand = is_array($parent) ? ($nodes[(string)($parent['parent_id'] ?? '')] ?? array()) : array();
+            $map = is_array($mapping[$node_id] ?? null) ? $mapping[$node_id] : array();
+            $page = array(
+                'node_id' => $node_id,
+                'slug' => $slug,
+                'title' => $title,
+                'object_type' => sanitize_key((string)($map['object_type'] ?? $node['object_type'] ?? 'page')),
+                'object_id' => absint($map['object_id'] ?? 0),
+                'hub' => trim((string)($parent['display_name'] ?? $parent['name'] ?? '')),
+                'hub_slug' => sanitize_title((string)($parent['slug'] ?? '')),
+                'main_hub' => trim((string)($grand['display_name'] ?? $grand['name'] ?? '')),
+                'main_slug' => sanitize_title((string)($grand['slug'] ?? '')),
+            );
+            $targets = array($page);
+            $product_targets[$slug] = $page;
+
+            foreach ((array)($children[$node_id] ?? array()) as $child_id) {
+                $child = $nodes[$child_id] ?? null;
+                if (!is_array($child)) { continue; }
+                $child_slug = sanitize_title((string)($child['slug'] ?? ''));
+                $child_name = trim((string)($child['display_name'] ?? $child['name'] ?? ''));
+                if ($child_slug === '' || $child_name === '') { continue; }
+                $child_map = is_array($mapping[$child_id] ?? null) ? $mapping[$child_id] : array();
+                $child_target = array(
+                    'node_id' => $child_id,
+                    'slug' => $child_slug,
+                    'title' => $child_name,
+                    'object_type' => sanitize_key((string)($child_map['object_type'] ?? $child['object_type'] ?? 'category')),
+                    'object_id' => absint($child_map['object_id'] ?? 0),
+                    'hub' => $title,
+                    'hub_slug' => $slug,
+                    'main_hub' => $page['hub'],
+                    'main_slug' => $page['hub_slug'],
+                );
+                $targets[] = $child_target;
+                $article_targets[] = array(
+                    'category_slug' => $child_slug,
+                    'category_name' => $child_name,
+                    'product' => $title,
+                    'product_slug' => $slug,
+                    'hub' => $page['hub'],
+                    'hub_slug' => $page['hub_slug'],
+                    'main_hub' => $page['main_hub'],
+                    'main_slug' => $page['main_slug'],
+                    'node_id' => $child_id,
+                    'object_id' => absint($child_map['object_id'] ?? 0),
+                );
+            }
+
+            $concept_id = 'hd-' . substr(hash('sha256', $node_id), 0, 20);
+            $concepts[$concept_id] = array(
+                'id' => $concept_id,
+                'title' => $title,
+                'normalized_title' => $this->idealo_match_normalize($title),
+                'target_pages' => $targets,
+                'source_node_id' => $node_id,
+            );
         }
-        if (count($concepts) !== 311) {
-            return $cache = new WP_Error('idealo_portal_concepts_incomplete', 'Nicht alle 311 gebundenen Produktkonzepte sind im Portal-Katalog vorhanden.');
+        if (!$concepts) {
+            return $cache = new WP_Error('idealo_hobby_depot_concepts_empty', 'Hobby-Depot-Kategorie-Registry enthält keine aktiven Hobbyziele.');
         }
-        $data['_idealo_required_concepts'] = $concepts;
-        $data['_idealo_required_ids'] = $required_ids;
-        $cache = $data;
-        return $cache;
+
+        return $cache = array(
+            'schema' => 'HOBBY_DEPOT_DYNAMIC_REGISTRY_V1',
+            'revision' => sanitize_text_field((string)($snapshot['revision'] ?? '')),
+            'hard_negative_markers' => array(),
+            'product_targets' => array_values($product_targets),
+            'article_targets' => $article_targets,
+            '_idealo_required_concepts' => $concepts,
+            '_idealo_required_ids' => array_keys($concepts),
+            'counts' => array(
+                'product_concepts' => count($concepts),
+                'article_targets' => count($article_targets),
+            ),
+        );
     }
+
 
     private function idealo_match_normalize($text) {
         $text = remove_accents(wp_strip_all_tags((string) $text));
@@ -321,10 +404,20 @@ trait PPAR_Idealo_Trait {
 
     private function idealo_match_distinct_tokens($text, $primary = false) {
         static $drop = null;
-        if ($drop === null) { $drop = array_fill_keys(array('pferd','pferde','pony','ponys','fohlen','reiter','reiten','reit','reitsport','equestrian','zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal','neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige','grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'), true); }
+        if ($drop === null) {
+            $drop = array_fill_keys(array(
+                'zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte',
+                'set','sets','original','universal','neu','gebraucht','damen','herren',
+                'kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis',
+                'beige','grosse','groesse','size','cm','mm','kg','stuck','stueck',
+                'paar','fur','fuer','mit','ohne'
+            ), true);
+        }
         $tokens = $primary ? $this->idealo_match_primary_tokens($text) : $this->idealo_match_tokens($text);
         $out = array();
-        foreach ($tokens as $token) { if (!isset($drop[$token])) { $out[$token] = true; } }
+        foreach ($tokens as $token) {
+            if (!isset($drop[$token])) { $out[$token] = true; }
+        }
         return array_keys($out);
     }
 
@@ -333,24 +426,51 @@ trait PPAR_Idealo_Trait {
         if (is_array($cache) || is_wp_error($cache)) { return $cache; }
         $catalog = $this->idealo_portal_supply_catalog();
         if (is_wp_error($catalog)) { return $cache = $catalog; }
-        $concepts = array(); $index = array();
-        foreach ((array) $catalog['_idealo_required_concepts'] as $id => $concept) {
-            $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), true);
-            if (!$core) { $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), false); }
-            $stems = array(); foreach ($core as $token) { $stems[$this->idealo_match_stem($token)] = true; }
-            $stems = array_keys($stems); if (!$stems) { continue; }
-            $first_page = is_array(($concept['target_pages'] ?? null)) && !empty($concept['target_pages']) && is_array($concept['target_pages'][0]) ? $concept['target_pages'][0] : array();
-            $hub = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['hub'] ?? '')) as $token) { $hub[$this->idealo_match_stem($token)] = true; }
-            $main = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['main_hub'] ?? '')) as $token) { $main[$this->idealo_match_stem($token)] = true; }
-            $all = array(); foreach ($this->idealo_match_distinct_tokens((string) ($concept['title'] ?? '')) as $token) { $all[$this->idealo_match_stem($token)] = true; }
-            $rel = array_values(array_diff(array_keys($all), $stems));
-            $entry = array('id'=>$id,'title'=>(string)($concept['title']??''),'stems'=>$stems,'hub_stems'=>array_keys($hub),'main_stems'=>array_keys($main),'rel_stems'=>$rel,'main_hub'=>(string)($first_page['main_hub']??''),'hub'=>(string)($first_page['hub']??''),'target_pages'=>(array)($concept['target_pages']??array()));
-            $concepts[$id] = $entry;
-            foreach ($stems as $stem) { if (!isset($index[$stem])) { $index[$stem] = array(); } $index[$stem][$id] = true; }
+
+        $concepts = array();
+        $index = array();
+        foreach ((array)($catalog['_idealo_required_concepts'] ?? array()) as $id => $concept) {
+            if (!is_array($concept)) { continue; }
+            $core = $this->idealo_match_distinct_tokens((string)($concept['title'] ?? ''), true);
+            if (!$core) { $core = $this->idealo_match_distinct_tokens((string)($concept['title'] ?? ''), false); }
+            $stems = array();
+            foreach ($core as $token) { $stems[$this->idealo_match_stem($token)] = true; }
+            $stems = array_keys($stems);
+            if (!$stems) { continue; }
+
+            $first_page = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+            $hub = array();
+            foreach ($this->idealo_match_distinct_tokens((string)($first_page['hub'] ?? '')) as $token) {
+                $hub[$this->idealo_match_stem($token)] = true;
+            }
+            $main = array();
+            foreach ($this->idealo_match_distinct_tokens((string)($first_page['main_hub'] ?? '')) as $token) {
+                $main[$this->idealo_match_stem($token)] = true;
+            }
+            $entry = array(
+                'id' => sanitize_key((string)$id),
+                'title' => (string)($concept['title'] ?? ''),
+                'stems' => $stems,
+                'hub_stems' => array_keys($hub),
+                'main_stems' => array_keys($main),
+                'rel_stems' => array(),
+                'main_hub' => (string)($first_page['main_hub'] ?? ''),
+                'hub' => (string)($first_page['hub'] ?? ''),
+                'target_pages' => (array)($concept['target_pages'] ?? array()),
+                'source_node_id' => (string)($concept['source_node_id'] ?? ''),
+            );
+            $concepts[$entry['id']] = $entry;
+            foreach ($stems as $stem) {
+                if (!isset($index[$stem])) { $index[$stem] = array(); }
+                $index[$stem][$entry['id']] = true;
+            }
         }
-        if (count($concepts) !== 311) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle 311 Produktkonzepte binden.'); }
+        if (!$concepts) {
+            return $cache = new WP_Error('idealo_match_index_empty', 'Hobby-Depot-Matcher konnte keine aktiven Hobbyziele binden.');
+        }
         return $cache = array('concepts'=>$concepts,'index'=>$index,'catalog'=>$catalog);
     }
+
 
     private function idealo_text_has_root($text, $roots) {
         foreach ((array) $roots as $root) { if ($root !== '' && strpos((string)$text, (string)$root) !== false) { return true; } }
@@ -358,60 +478,40 @@ trait PPAR_Idealo_Trait {
     }
 
     private function idealo_match_blocked($text, $catalog) {
-        static $extras = array('bettdecke','bettdecken','kuscheltier','kuscheltiere','hundefutter','katzenfutter','vogelfutter','vogelhaus','vogelhauser','vogelhaeuser','modelleisenbahn','modellfahrzeug','modellfahrzeuge','rc modellbau','kaffeekapseln','kaffeepads','sanitarinstallation','sanitarinstallationen','netzteil','netzwerkzubehor','netzwerkzubehoer','haushaltsspielzeug','badmobel','badmoebel','sneaker','garagentor','torantrieb','zahnpflege','prothesenbox','plueschtier','pluschtier','gaming und spielen',' cats ',' dogs ',' puppy ',' kitten ');
-        $haystack = ' ' . (string) $text . ' ';
-        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $term) { $term=$this->idealo_match_normalize($term); if ($term!=='' && strpos($haystack, ' '.$term.' ')!==false) { return true; } }
-        foreach ($extras as $term) { if (strpos($haystack, (string)$term) !== false) { return true; } }
+        $blocked = function_exists('apply_filters')
+            ? (array) apply_filters('hobby_depot_affiliate_product_block_terms', array(), 'idealo')
+            : array();
+        $haystack = ' ' . $this->idealo_match_normalize((string)$text) . ' ';
+        foreach ($blocked as $term) {
+            $term = $this->idealo_match_normalize((string)$term);
+            if ($term !== '' && strpos($haystack, ' ' . $term . ' ') !== false) { return true; }
+        }
         return false;
     }
 
-    /** Returns 0 = reject; 1..3 = increasingly strong context evidence. */
     private function idealo_match_context_score($concept, $title_n, $main_n, $sub_n, $catalog) {
         $full = trim($title_n . ' ' . $main_n . ' ' . $sub_n);
         if ($this->idealo_match_blocked($full, $catalog)) { return 0; }
-        $strong_roots = array('pferd','pony','fohlen','reit','equestrian','equine','horse','sattel','zaum','halfter','huf','longier','cavaletti','schabrack','gamasch','kappzaum','trense','gebiss','fressbremse','bollengabel','mistboy','stalltafel','pferdedeck');
-        $strong = $this->idealo_text_has_root($full, $strong_roots);
-        $sub_stems = array(); foreach ($this->idealo_match_tokens($sub_n) as $token) { $sub_stems[$this->idealo_match_stem($token)] = true; }
-        $sub_exact = true; foreach ((array)($concept['stems']??array()) as $stem) { if (!isset($sub_stems[$stem])) { $sub_exact=false; break; } }
-        $main_hub = (string) ($concept['main_hub'] ?? '');
-        if (in_array($main_hub, array('Ausrüstung','Training'), true)) {
-            if (!in_array($main_n, array('tierbedarf','sport und outdoor'), true)) { return 0; }
-            if ($sub_exact) { return 3; }
-            return ($strong || $this->idealo_text_has_root($sub_n,array('pferd','reit','sattel','zaum','tierhaar','bollensammler','stalltafel'))) ? 2 : 0;
+
+        $title_stems = array();
+        foreach ($this->idealo_match_tokens($title_n) as $token) {
+            $title_stems[$this->idealo_match_stem($token)] = true;
         }
-        if ($main_hub === 'Gesundheit') {
-            if ($main_n === 'tierbedarf') {
-                if ($sub_exact) { return 3; }
-                return ($strong || $this->idealo_text_has_root($sub_n,array('pferd','tierpflege','tiergesundheit','tierhaar'))) ? 2 : 0;
-            }
-            if ($main_n === 'drogerie und gesundheit') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','equine')) ? 2 : 0; }
-            return 0;
+        foreach ((array)($concept['stems'] ?? array()) as $stem) {
+            if (!isset($title_stems[$stem])) { return 0; }
         }
-        if ($main_hub === 'Fütterung') {
-            if ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) || strpos($sub_n,'pferdefutter')!==false) { return 3; }
-            if ($main_n==='tierbedarf' && ($sub_exact || $this->idealo_text_has_root($title_n,array('weidetrank','thermotrank','heunetz','heubedampf','heurauf','heutasch')))) { return 2; }
-            return 0;
+
+        $category_stems = array();
+        foreach ($this->idealo_match_tokens($main_n . ' ' . $sub_n) as $token) {
+            $category_stems[$this->idealo_match_stem($token)] = true;
         }
-        if ($main_hub === 'Stall') {
-            if (in_array($main_n,array('tierbedarf','haus und garten'),true) && $sub_exact) { return 3; }
-            return ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','stall','weideunterstand','boxen','putzplatz','offenstall','paddock')) || $this->idealo_text_has_root($sub_n,array('stalltafel','bollensammler'))) ? 2 : 0;
+        $context_hits = 0;
+        foreach (array_merge((array)($concept['hub_stems'] ?? array()), (array)($concept['main_stems'] ?? array())) as $stem) {
+            if (isset($category_stems[$stem])) { $context_hits++; }
         }
-        if ($main_hub === 'Weide') {
-            if (in_array($main_n,array('tierbedarf','haus und garten'),true) && $sub_exact) { return 3; }
-            return ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','weide','elektrozaun','koppel','paddock')) || $this->idealo_text_has_root($sub_n,array('weidezaun','rasensamen'))) ? 2 : 0;
-        }
-        if ($main_hub === 'Transport') {
-            $hub_n=$this->idealo_match_normalize((string)($concept['hub']??''));
-            if ($main_n === 'tierbedarf') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','reit','sattel','zaum','halfter','gamasch','horse','equine')) ? 3 : 0; }
-            if (!in_array($hub_n,array('zugfahrzeug','anhangerpflege'),true)) { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) ? 2 : 0; }
-            if ($main_n === 'auto und motorrad') { return ($sub_exact || $this->idealo_text_has_root($title_n.' '.$sub_n,array('anhang','anhaeng','kupplung','reifendruck','unterlegkeil'))) ? 2 : 0; }
-            return 0;
-        }
-        if ($main_hub === 'Wissen') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) ? 2 : 0; }
-        return $strong ? 1 : 0;
+        return $context_hits > 0 ? 3 : 2;
     }
 
-    /** Conservative one-row matcher: no AI/fuzzy product identity and no cross-provider assumption. */
     private function idealo_match_feed_row_to_concept($row) {
         $mi = $this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
         $title = (string) ($row['product_title'] ?? '');
@@ -637,18 +737,10 @@ trait PPAR_Idealo_Trait {
     }
 
     private function idealo_comparison_query_for_concept($concept) {
-        $title = trim((string)($concept['title'] ?? ''));
-        if ($title === '') { return ''; }
-        $main = trim((string)($concept['main_hub'] ?? ''));
-        $normalized = $this->idealo_match_normalize($title);
-        $horse_roots = array('pferd','pony','fohlen','reit','sattel','trense','halfter','huf','weide','stall','longier','cavaletti','schabrack','gamasch','zaum');
-        if ($this->idealo_text_has_root($normalized, $horse_roots)) { return $title; }
-        if ($main === 'Stall') { return $title . ' Pferdestall'; }
-        if ($main === 'Weide') { return $title . ' Pferdeweide'; }
-        if ($main === 'Transport') { return $title . ' Pferdeanhänger'; }
-        if (in_array($main, array('Ausrüstung','Fütterung','Gesundheit','Training'), true)) { return $title . ' Pferd'; }
-        return $title;
+        $title = trim(sanitize_text_field((string)($concept['title'] ?? '')));
+        return $title === '' ? '' : $title;
     }
+
 
     private function idealo_comparison_target_url($concept) {
         $query = $this->idealo_comparison_query_for_concept($concept);
@@ -764,7 +856,7 @@ trait PPAR_Idealo_Trait {
                 if (array_intersect($gtins,array_keys($seen_target_gtins))) { continue; }
                 $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$external_key,'posts_per_page'=>1,'fields'=>'ids')); $post_id=$ids?absint($ids[0]):0;
                 $campaign=$this->central_blank_campaign(); $campaign['id']=sanitize_key('idealo-'.substr(hash('sha256',$external_key),0,20)); $campaign['name']='idealo – '.$title; $campaign['partner']='idealo'; $campaign['creative_type']='product'; $campaign['network']='idealo';
-                $campaign['advertiser_id']='84749'; $campaign['programme_name']='idealo DE'; $campaign['programme_status']='active'; $campaign['programme_status_source']='idealo_ipn_feed'; $campaign['programme_status_checked_at']=time(); $campaign['quality_manual_status']='auto_verified'; $campaign['quality_note']='311er-Portalvertrag + konservatives Kontextmatching + GTIN.'; $campaign['render_mode']='image_link';
+                $campaign['advertiser_id']='84749'; $campaign['programme_name']='idealo DE'; $campaign['programme_status']='active'; $campaign['programme_status_source']='idealo_ipn_feed'; $campaign['programme_status_checked_at']=time(); $campaign['quality_manual_status']='auto_verified'; $campaign['quality_note']='Hobby-Depot-Registry + konservatives Kontextmatching + GTIN.'; $campaign['render_mode']='image_link';
                 $campaign['active']=$should_active; $campaign['assignment_mode']='page_tree'; $campaign['match_descendants']=false; $campaign['automation_target_keys']=$target_keys; $campaign['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
                 $rank=$row['_rank']; $match_score=isset($payload['__idealo_match_score'])?(int)$payload['__idealo_match_score']:0; $campaign['priority']=max(40,min(95,55+(int)min(40,floor($match_score/10)))); $campaign['label']='idealo · Affiliate'; $campaign['title']=$title; $campaign['description']=''; $campaign['button_text']='Bei idealo vergleichen';
                 $campaign['image_url']=$image; $campaign['url']=$tracking; $campaign['target']='_blank'; $campaign['price']=sanitize_text_field((string)($row['price']??'')); $campaign['currency']='EUR'; $campaign['availability']='available'; $campaign['health_check_enabled']=false; $campaign['source']='idealo_product_feed_v1'; $campaign['last_synced']=absint($row['last_seen']??time()); $campaign['external_id']=$external_key; $campaign['product_gtins']=$gtins; $campaign['product_asins']=$asins; $campaign['product_identity_source']='gtin'; $campaign['product_provider']='idealo'; $campaign['idealo_surface_kind']='product';
@@ -778,7 +870,7 @@ trait PPAR_Idealo_Trait {
         foreach ((array)$existing as $id) { $id=absint($id); $key=(string)get_post_meta($id,'_ppar_idealo_external_key',true); $campaign=$this->campaign_from_post(get_post($id)); if (!$campaign) { continue; } $desired=!empty($selected_keys[$key])&&$should_active; if ((bool)$campaign['active']!==$desired) { $campaign['active']=$desired; $this->save_campaign_record($campaign,$id); if (!$desired) { $retired++; } } }
         $this->idealo_sync_campaign_activation();
         if ($saved_count>0 && method_exists($this,'article_plan_bump_campaign_revision')) { $this->article_plan_bump_campaign_revision('idealo_materialized'); }
-        return array('campaigns'=>$saved_count,'targets'=>$targets,'retired'=>$retired,'contract_concepts'=>311,'strategy'=>$this->idealo_link_strategy());
+        return array('campaigns'=>$saved_count,'targets'=>$targets,'retired'=>$retired,'contract_concepts'=>count((array)($mi['concepts'] ?? array())),'strategy'=>$this->idealo_link_strategy());
     }
 
     private function idealo_sync_campaign_activation() {
@@ -1309,13 +1401,13 @@ trait PPAR_Idealo_Trait {
             <input type="hidden" name="action" value="ppar_provider_access_save"><input type="hidden" name="provider" value="idealo"><?php wp_nonce_field('ppar_provider_access_idealo','ppar_provider_nonce'); ?>
             <p><label><input type="checkbox" name="ppar_provider[idealo][enabled]" value="1" <?php checked(!empty($s['enabled'])); ?>> idealo-Verbindung verwenden</label></p>
             <p><label>iPN API-Key <span class="ppar-saved"><?php echo $external?'über wp-config.php':(trim((string)$s['api_key'])!==''?'gespeichert':'nicht gespeichert'); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[idealo][api_key]" value="" placeholder="leer lassen zum Beibehalten" <?php disabled($external); ?>></label></p>
-            <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label> <span class="description">Pferde Atelier: 568313.</span></p>
-            <p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>
-            <p><label>Offizielle iPN-Download-URL für Feed 2901 <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
+            <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label> <span class="description">Hobby-Depot-Adspace-ID.</span></p>
+            <p><strong>Feed-ID:</strong> <input type="text" name="ppar_provider[idealo][feed_id]" value="<?php echo esc_attr((string)$s['feed_id']); ?>"> <span class="description">Vom Hobby-Depot-iPN-Konto bereitgestellter Feed.</span></p>
+            <p><label>Offizielle iPN-Download-URL für konfigurierter Feed <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
             <p><label>Portalweite Affiliate-Ausgabe<br><select name="ppar_provider[idealo][output_mode]"><option value="ebay_only" <?php selected($s['output_mode'],'ebay_only'); ?>>Nur bestehende eBay-/Bestandslogik</option><option value="idealo_only" <?php selected($s['output_mode'],'idealo_only'); ?>>Nur idealo-Ausgabe</option><option value="separate" <?php selected($s['output_mode'],'separate'); ?>>Provider getrennt als Karten</option><option value="combined" <?php selected($s['output_mode'],'combined'); ?>>Gemeinsame Karte bei exakter GTIN, sonst getrennt</option><option value="automatic" <?php selected($s['output_mode'],'automatic'); ?>>Automatisch: gemeinsam bei exakter GTIN, sonst getrennt</option></select></label></p>
             <p><label>idealo-Linkstrategie<br><select name="ppar_provider[idealo][link_strategy]"><option value="hybrid" <?php selected($s['link_strategy'],'hybrid'); ?>>Hybrid (empfohlen): Preisvergleich allein, konkrete idealo-Angebote nur als GTIN-Zusatzbutton</option><option value="products" <?php selected($s['link_strategy'],'products'); ?>>Konkrete idealo-Produkte als eigene Karten</option><option value="comparison" <?php selected($s['link_strategy'],'comparison'); ?>>Nur idealo-Preisvergleichs-/Suchlinks</option></select></label></p>
             <p><label><input type="checkbox" name="ppar_provider[idealo][auto_refresh]" value="1" <?php checked(!empty($s['auto_refresh'])); ?>> Feed automatisch alle zwölf Stunden auf Änderungen prüfen (nur bei gespeicherter Download-URL)</label></p>
-            <p class="description"><strong>Portalabgleich:</strong> Feed 2901 wird streamend gegen den gebundenen 311er-Produktvertrag / 59 Hub-Familien geprüft. Im Hybridmodus wird idealo eigenständig als Produktfamilien-/Preisvergleich verlinkt; konkrete idealo-Angebote erscheinen zusätzlich nur bei exakter GTIN auf einer bereits konkreten Produktkarte.</p>
+            <p class="description"><strong>Portalabgleich:</strong> konfigurierter Feed wird streamend gegen den gebundenen aktiven Hobby-Depot-Registry-Vertrag geprüft. Im Hybridmodus wird idealo eigenständig als Produktfamilien-/Preisvergleich verlinkt; konkrete idealo-Angebote erscheinen zusätzlich nur bei exakter GTIN auf einer bereits konkreten Produktkarte.</p>
             <?php if (!$external): ?><details><summary>Zugangsdaten entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_api_key]" value="1"> API-Key entfernen</label></p></details><?php endif; ?>
             <p><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button> <button class="button" name="ppar_provider_action" value="save_test">Speichern &amp; API prüfen</button></p>
         </form><?php
@@ -1324,11 +1416,11 @@ trait PPAR_Idealo_Trait {
     public function idealo_render_specialist_content($provider,$definition,$contract_version) {
         $s=$this->idealo_settings(); $counts=$this->network_sync_counts('idealo'); ?>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:18px">
-            <section class="postbox" style="padding:18px"><h2>Providerbestand</h2><p><strong>Staged:</strong> <?php echo absint($counts['products']); ?> Produkte<br><strong>PASS:</strong> <?php echo absint($counts['pass']); ?><br><strong>WARN:</strong> <?php echo absint($counts['warn']); ?><br><strong>Materialisiert:</strong> <?php echo absint($s['last_materialized_count']??0); ?> / Ziele <?php echo absint($s['last_materialized_targets']??0); ?><br><strong>Portalabdeckung:</strong> <?php echo absint($s['last_matched_concepts']??0); ?>/311 Konzepte · <?php echo absint($s['last_matched_hubs']??0); ?>/59 Hub-Familien</p></section>
+            <section class="postbox" style="padding:18px"><h2>Providerbestand</h2><p><strong>Staged:</strong> <?php echo absint($counts['products']); ?> Produkte<br><strong>PASS:</strong> <?php echo absint($counts['pass']); ?><br><strong>WARN:</strong> <?php echo absint($counts['warn']); ?><br><strong>Materialisiert:</strong> <?php echo absint($s['last_materialized_count']??0); ?> / Ziele <?php echo absint($s['last_materialized_targets']??0); ?><br><strong>Portalabdeckung:</strong> <?php echo absint($s['last_matched_concepts']??0); ?> Konzepte</p></section>
             <section class="postbox" style="padding:18px"><h2>Partner-API</h2><p><strong>Letzte Prüfung:</strong> <?php echo !empty($s['api_last_checked_at'])?esc_html(wp_date('d.m.Y H:i',(int)$s['api_last_checked_at'])):'noch nicht geprüft'; ?><br><strong>Feedprodukte:</strong> <?php echo absint($s['api_last_product_count']??0); ?><br><strong>Feed-Hash:</strong> <?php echo esc_html((string)($s['api_last_feed_hash']??'')); ?></p><p><?php echo esc_html((string)($s['api_last_message']??'')); ?></p></section>
             <section class="postbox" style="padding:18px"><h2>Ausgabe</h2><p><strong>Modus:</strong> <?php echo esc_html($this->idealo_output_mode()); ?><br><strong>Linkstrategie:</strong> <?php echo esc_html($this->idealo_link_strategy()); ?><br><strong>idealo aktiv:</strong> <?php echo $this->idealo_campaigns_should_be_active()?'ja':'nein'; ?><br><strong>Auto-Refresh:</strong> <?php echo (!empty($s['auto_refresh'])&&trim((string)$s['feed_url'])!=='')?'bereit':'wartet auf Feed-URL'; ?><br><strong>Refresh-Status:</strong> <?php echo esc_html((string)($s['refresh_state']??'idle')); ?><?php if (!empty($s['refresh_last_message'])): ?><br><?php echo esc_html((string)$s['refresh_last_message']); ?><?php endif; ?></p></section>
         </div>
-        <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Feed-Test / Fallback</h2><p>Eine echte <code>.csv.gz</code>-Datei kann für Diagnosezwecke erneut eingelesen werden. Produktiv ist Feed 2901 für den serverseitigen Stream-Abruf vorgesehen. Der Import ersetzt nicht den eBay-Workflow und veröffentlicht nur exakt gemappte idealo-Produkte, wenn idealo und ein entsprechender Ausgabemodus ausdrücklich aktiviert sind.</p><form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_idealo_import_file"><?php wp_nonce_field('ppar_idealo_import_file','ppar_idealo_nonce'); ?><input type="file" name="idealo_feed" accept=".csv,.gz,.csv.gz" required> <?php submit_button('Feed prüfen und staged aktualisieren','secondary','',false); ?></form></section><?php
+        <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Feed-Test / Fallback</h2><p>Eine echte <code>.csv.gz</code>-Datei kann für Diagnosezwecke erneut eingelesen werden. Produktiv ist konfigurierter Feed für den serverseitigen Stream-Abruf vorgesehen. Der Import ersetzt nicht den eBay-Workflow und veröffentlicht nur exakt gemappte idealo-Produkte, wenn idealo und ein entsprechender Ausgabemodus ausdrücklich aktiviert sind.</p><form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_idealo_import_file"><?php wp_nonce_field('ppar_idealo_import_file','ppar_idealo_nonce'); ?><input type="file" name="idealo_feed" accept=".csv,.gz,.csv.gz" required> <?php submit_button('Feed prüfen und staged aktualisieren','secondary','',false); ?></form></section><?php
     }
 
     public function idealo_render_sync_card($provider,$definition,$contract_version) {
