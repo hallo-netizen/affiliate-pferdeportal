@@ -1380,7 +1380,7 @@ body.single-uge_term .ppar-glossary-banner-mobile-v67244{display:none}
  body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image-wrap,body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image{display:block;width:100%;max-width:100%;height:auto}
 }
 
-/* V6.72.51 – Glossar-Werbeblock im bestaetigten Pferde-Atelier-Design. */
+/* V6.72.51 – Glossar-Werbeblock im bestaetigten Hobby Depot-Design. */
 body.single-uge_term .ppar-glossary-affiliate-slot-v67251{
   box-sizing:border-box!important;
   width:100%!important;
@@ -1452,7 +1452,7 @@ body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-
   body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{width:auto!important;max-width:310px!important;max-height:310px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important}
 }
 
-/* V6.72.59 Pferderassenartikel: Affiliate besitzt die einzige produktive Werbeflaeche. */
+/* V6.72.59 Hobbyartikel: Affiliate besitzt die einzige produktive Werbeflaeche. */
 body.single-pa_breed .pftk-breed-affiliate-v150511{display:none!important}
 body.single-pa_breed .ppar-breed-banner-mobile-v67259{display:none!important}
 body.single-pa_breed .ppar-breed-banner-v67259{min-width:0;max-width:100%}
@@ -1480,7 +1480,7 @@ body.single-pa_breed .ppar-breed-banner-desktop-v67259 img{display:block!importa
 }
 
 
-/* V6.72.61 – Pferderassen verwenden exakt das bestätigte Glossar-Anzeigenkonzept. */
+/* V6.72.61 – Hobbyprofile verwenden exakt das bestätigte Glossar-Anzeigenkonzept. */
 body.single-pa_breed .ppar-breed-banner-v67259{min-width:0!important;max-width:100%!important}
 body.single-pa_breed .ppar-breed-affiliate-slot-v67261{
   box-sizing:border-box!important;
@@ -1980,7 +1980,7 @@ body .pftk-journal-v150280 [class*="pftk-journal-banner"]{
 }
 
 
-/* V6.72.82 – Pferde Journal ONLY: bestehender Werbeblock mittig zwischen den Themenkacheln. */
+/* V6.72.82 – Hobby Depot Magazin ONLY: bestehender Werbeblock mittig zwischen den Themenkacheln. */
 .pftk-journal-category-grid-v150280 > .ppar-journal-midgrid-v67282{
     grid-column:1 / -1!important;
     width:100%!important;
