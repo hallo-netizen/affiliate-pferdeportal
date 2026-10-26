@@ -552,7 +552,7 @@ trait PPAR_Output_Objects_Trait {
 
     /**
      * Festgeschriebene aktive Slotmatrix aus dem getrennten Design–Affiliate-
-     * Schnittstellenvertrag Pferde Atelier V1.50.387 / Affiliate-Vertrag 1.0.
+     * Hobby-Depot Design–Affiliate-Schnittstellenvertrag.
      * Das Design wird nicht gelesen oder verändert; Vertragsabweichungen bleiben
      * fail-closed. Andere Portale liefern ihre Matrix über den bestehenden Filter.
      */
