@@ -899,13 +899,16 @@ trait PPAR_Ebay_Run_Trait {
         $checkpoint = is_array($checkpoint) ? $checkpoint : array();
 
         $uuid = $this->ebay_run_new_uuid();
+        $hd_catalog = class_exists('HDAR_Hobby_Depot_Source') ? HDAR_Hobby_Depot_Source::catalog() : null;
+        $catalog_revision = (!is_wp_error($hd_catalog) && is_array($hd_catalog)) ? (string)($hd_catalog['source_revision'] ?? '') : '';
+        $catalog_version = $catalog_revision !== '' ? hash('sha256', $catalog_revision) : '';
         $run = array(
             'schema'=>'1.0','build'=>self::EBAY_RUNTIME_BUILD,'run_uuid'=>$uuid,'status'=>'running','phase'=>'reconcile_local','operation'=>$operation,
             'remote_subphase'=>$operation === 'sync' ? 'discovery' : 'inventory','started_at'=>time(),'updated_at'=>time(),'finished_at'=>0,
             'owner'=>'','lease_expires_at'=>0,'worker_transport'=>'self_drive','orchestrator_contract'=>'self_drive_v1','resume_reason'=>'','resume_at'=>0,'no_progress_count'=>0,'last_progress_at'=>time(),'progress_seq'=>0,'last_transport_tick_at'=>0,'transport_tick_count'=>0,
             'work_block_started_at'=>time(),'work_block_tick_count'=>0,
             'config_snapshot'=>array('seller_routes'=>array('private'=>!empty($settings['private_enabled']),'business'=>!empty($settings['business_enabled'])),'settings'=>$this->ebay_run_settings_snapshot($settings)),
-            'catalog_version'=>hash_file('sha256', __DIR__ . '/../assets/ebay-portal-catalog-v2.json') ?: '',
+            'catalog_version'=>$catalog_version,
             'policy_version'=>self::EBAY_CONTENT_POLICY_VERSION,'private_classifier_version'=>self::EBAY_PRIVATE_CLASSIFIER_VERSION,'business_classifier_version'=>self::EBAY_BUSINESS_CLASSIFIER_VERSION,'progress_contract_version'=>$this->ebay_run_progress_contract_version(),
             'phase_state'=>array(),'coverage'=>array(),'gapfill'=>array('attempts'=>0,'missing'=>array()),'errors'=>array(),'skipped_item_errors_count'=>0,'skipped_item_errors'=>array(),'completed_with_skips'=>0,
             'checkpoint_base_id'=>sanitize_text_field((string)($checkpoint['checkpoint_id'] ?? '')),
