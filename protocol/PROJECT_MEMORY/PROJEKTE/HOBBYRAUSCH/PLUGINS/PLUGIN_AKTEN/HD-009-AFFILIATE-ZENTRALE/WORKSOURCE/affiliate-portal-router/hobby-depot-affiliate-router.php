@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hobby Depot – Affiliate-Zentrale
  * Description: Zentrale Affiliate- und Produktquellenverwaltung für Hobby Depot. Entwicklungsstand – noch kein freigegebener Installationskandidat.
- * Version: 0.1.1-dev
+ * Version: 0.1.2-dev
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -320,6 +320,7 @@ final class Hobby_Depot_Affiliate_Router {
     private function __construct() {
         $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
         $this->idealo_register_hooks();
+        add_action('ppar_affiliate_render_provider_access_card_amazon', array($this, 'amazon_render_access_card'), 10, 3);
         $this->digistore24_register_hooks();
         $this->tariff_tools_register_hooks();
         add_action('init', array($this, 'register_campaign_post_type'), 5);
@@ -874,6 +875,7 @@ final class Hobby_Depot_Affiliate_Router {
       var u=new URL(href,window.location.href),h=String(u.hostname||'').toLowerCase();
       if(h==='ipn.idealo.de'||h.slice(-10)==='.idealo.de')return 'Bei idealo vergleichen';
       if(h==='ebay.de'||h.slice(-8)==='.ebay.de'||h.indexOf('.ebay.')!==-1)return 'Bei eBay ansehen';
+      if(h==='amazon.de'||h.slice(-10)==='.amazon.de')return 'Bei Amazon ansehen';
     }catch(e){}
     return '';
   }
@@ -4770,6 +4772,29 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         }));
     }
 
+    private function amazon_bridge_ranked_candidates($candidates, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        $slot_type = sanitize_key((string) $slot_type);
+        if (!$candidates || !preg_match('/^category_product_[123]$/', $slot_type)) { return $candidates; }
+        if (!method_exists($this, 'amazon_bridge_ready') || !$this->amazon_bridge_ready() || !method_exists($this, 'amazon_product_from_campaign')) {
+            return $candidates;
+        }
+
+        // Ein Amazon-Produkt pro Dreierreihe, aber nicht mehr starr nur auf Platz 3.
+        // Die fachliche Auswahl bleibt unverändert; nur der erste exakt per ASIN
+        // belegte idealo-Kandidat wird auf den direkten Amazon-Link umgelegt.
+        foreach ($candidates as $index => $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign)) { continue; }
+            $amazon = $this->amazon_product_from_campaign($campaign);
+            if (!is_array($amazon)) { continue; }
+            $candidate['campaign'] = $amazon;
+            $candidates[$index] = $candidate;
+            break;
+        }
+        return array_values($candidates);
+    }
+
     private function category_product_provider_mix_v672133($candidates, $slot_type) {
         $candidates = array_values((array) $candidates);
         if (!$candidates || !preg_match('/^category_product_[123]$/', sanitize_key((string) $slot_type))) {
@@ -4889,6 +4914,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
             // intentional as a semantic guard.
             $image_ready = $this->category_product_strict_relevance_tier_v672104($image_ready, $slot_type);
             $image_ready = $this->category_product_provider_mix_v672133($image_ready, $slot_type);
+            $image_ready = $this->amazon_bridge_ranked_candidates($image_ready, $slot_type);
             if (!$image_ready) { continue; }
             $index = $this->category_product_slot_index($slot_type);
             return $index > 0 ? ($image_ready[$index - 1] ?? null) : $image_ready[0];
@@ -4909,6 +4935,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         $candidates = $this->category_product_strict_relevance_tier_v672104($candidates, $slot_type);
         if ($forced_campaign_id === '') {
             $candidates = $this->category_product_provider_mix_v672133($candidates, $slot_type);
+            $candidates = $this->amazon_bridge_ranked_candidates($candidates, $slot_type);
         }
         if (empty($candidates)) { return null; }
         $index = $this->category_product_slot_index($slot_type);
