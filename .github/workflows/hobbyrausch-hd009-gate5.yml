@@ -1,0 +1,258 @@
+name: Hobbyrausch HD-009 Gate 5
+
+on:
+  push:
+    branches:
+      - hobbyrausch/hd009-affiliate-port-20261026
+    paths:
+      - '.github/workflows/hobbyrausch-hd009-gate5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gate5:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wp
+          MYSQL_PASSWORD: wp
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bind paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "HD009_ROOT=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE" >> "$GITHUB_ENV"
+          echo "HD009_SRC=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/affiliate-portal-router" >> "$GITHUB_ENV"
+
+      - name: Re-run Gate 4 regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find "$HD009_SRC" -type f -name '*.php' -print | sort)
+          test "${#files[@]}" -eq 23
+          for f in "${files[@]}"; do php -l "$f" >/dev/null; done
+          testfile="$HD009_ROOT/TESTS/gate4.php"
+          for scenario in positive registry_unavailable snapshot_invalid world_count few_hobbies ebay_failclosed idealo_failclosed legacy_regression amazon_regression
+          do
+            php "$testfile" "$scenario"
+          done
+
+      - name: Build single candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          main="$HD009_SRC/hobby-depot-affiliate-router.php"
+          VERSION="$(sed -n 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*//p' "$main" | head -n1 | tr -d '\r')"
+          test "$VERSION" = "0.1.0-dev"
+          rm -rf /tmp/hd009-package /tmp/hd009-unpack
+          mkdir -p /tmp/hd009-package /tmp/hd009-unpack
+          cp -a "$HD009_SRC" /tmp/hd009-package/affiliate-portal-router
+          (
+            cd /tmp/hd009-package
+            zip -qr "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" affiliate-portal-router
+          )
+          unzip -q "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" -d /tmp/hd009-unpack
+          test -f /tmp/hd009-unpack/affiliate-portal-router/hobby-depot-affiliate-router.php
+          mapfile -t unpack_php < <(find /tmp/hd009-unpack/affiliate-portal-router -type f -name '*.php' -print | sort)
+          test "${#unpack_php[@]}" -eq 23
+          for f in "${unpack_php[@]}"; do php -l "$f" >/dev/null; done
+          (
+            cd "$HD009_SRC"
+            find . -type f -print0 | sort -z | xargs -0 sha256sum
+          ) >/tmp/source.sha
+          (
+            cd /tmp/hd009-unpack/affiliate-portal-router
+            find . -type f -print0 | sort -z | xargs -0 sha256sum
+          ) >/tmp/unpack.sha
+          diff -u /tmp/source.sha /tmp/unpack.sha
+          sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" | tee /tmp/candidate.sha
+          echo "HD009_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "HD009_SHA=$(cut -d' ' -f1 /tmp/candidate.sha)" >> "$GITHUB_ENV"
+
+      - name: Fresh WordPress install and activation
+        shell: bash
+        run: |
+          set -euo pipefail
+          WP=/tmp/wordpress
+          rm -rf "$WP"
+          mkdir -p "$WP"
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          WPCLI="php /tmp/wp-cli.phar --allow-root --path=$WP"
+          $WPCLI core download --quiet
+          $WPCLI config create --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check --quiet
+          $WPCLI core install --url=http://hd009.test --title=HD009 --admin_user=admin --admin_password=test-password-123 --admin_email=admin@example.test --skip-email --quiet
+          cp -a /tmp/hd009-unpack/affiliate-portal-router "$WP/wp-content/plugins/affiliate-portal-router"
+
+          $WPCLI plugin activate affiliate-portal-router
+          $WPCLI plugin is-active affiliate-portal-router
+
+          # NEGATIV: ohne HD-004 muss die Zielquelle sauber fail-closed bleiben.
+          $WPCLI eval '
+            $r = HDAR_Hobby_Depot_Source::catalog();
+            if (!is_wp_error($r) || $r->get_error_code() !== "hdar_category_registry_unavailable") {
+              fwrite(STDERR, "HD009_NEGATIVE_FAIL\n"); exit(1);
+            }
+            echo "HD009_NEGATIVE_PASS\n";
+          '
+
+          mkdir -p "$WP/wp-content/mu-plugins"
+          cat > "$WP/wp-content/mu-plugins/hd004-contract-fixture.php" <<'PHP'
+          <?php
+          function hd_category_registry_ready(){ return true; }
+          function hd_category_registry_revision(){ return 'gate5-fixture-r1'; }
+          function hd_category_registry_snapshot(){
+              $nodes = array();
+              $world_ids = array();
+              for ($w=1; $w<=8; $w++) {
+                  $wid = 'core:world:w'.$w;
+                  $world_ids[] = $wid;
+                  $nodes[] = array(
+                      'node_id'=>$wid,'pillar'=>'core','status'=>'active','object_type'=>'page',
+                      'parent_id'=>'','slug'=>'welt-'.$w,'display_name'=>'Welt '.$w
+                  );
+              }
+              for ($i=1; $i<=320; $i++) {
+                  $w = (($i-1)%8)+1;
+                  $hid = 'core:hobby:h'.$i;
+                  $nodes[] = array(
+                      'node_id'=>$hid,'pillar'=>'core','status'=>'active','object_type'=>'page',
+                      'parent_id'=>'core:world:w'.$w,'slug'=>'hobby-'.$i,'display_name'=>'Hobby '.$i
+                  );
+                  $nodes[] = array(
+                      'node_id'=>'core:cat:c'.$i,'pillar'=>'core','status'=>'active','object_type'=>'category',
+                      'parent_id'=>$hid,'slug'=>'hobby-'.$i.'-ratgeber','display_name'=>'Hobby '.$i.' Ratgeber'
+                  );
+              }
+              return array('revision'=>'gate5-fixture-r1','nodes'=>$nodes);
+          }
+          PHP
+
+          # POSITIV: dieselbe echte WP-Laufzeit, HD-004-Vertrag vorhanden.
+          $WPCLI eval '
+            $r = HDAR_Hobby_Depot_Source::catalog();
+            if (is_wp_error($r)) { fwrite(STDERR, $r->get_error_code()."\n"); exit(1); }
+            if (($r["counts"]["worlds"] ?? 0) !== 8) exit(2);
+            if (($r["counts"]["product_pages"] ?? 0) < 300) exit(3);
+            if (($r["counts"]["article_categories"] ?? 0) < 300) exit(4);
+            echo "HD009_POSITIVE_PASS\n";
+          '
+
+          # Providerregression im aktivierten Plugin: eBay/idealo-Klassenpfade geladen,
+          # Amazon weiterhin nicht als erfundener aktiver Adapter ergänzt.
+          $WPCLI eval '
+            if (!class_exists("Hobby_Depot_Affiliate_Router")) exit(10);
+            $main = WP_PLUGIN_DIR . "/affiliate-portal-router/hobby-depot-affiliate-router.php";
+            $s = file_get_contents($main);
+            if (strpos($s, "PPAR_Ebay_Trait") === false) exit(11);
+            if (strpos($s, "PPAR_Idealo_Trait") === false) exit(12);
+            if (preg_match("/use\\s+PPAR_Amazon/i", $s)) exit(13);
+            echo "HD009_PROVIDER_REGRESSION_PASS\n";
+          '
+
+      - name: Create manifest and Gate 5 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/MANIFEST.md <<EOF
+          # HD-009 – Hobby Depot Affiliate-Zentrale
+
+          Status: INSTALLATIONSKANDIDAT / WORDPRESS-RUNTIME-PASS / KEIN LIVE-PASS
+          Version: $HD009_VERSION
+          Datei: CURRENT.zip
+          SHA-256: $HD009_SHA
+          Source-Branch: hobbyrausch/hd009-affiliate-port-20261026
+          Gate-4-Referenz: a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec
+          Gate-5-Run: $GITHUB_RUN_ID
+
+          Prüfungen:
+          - Gate-4-Regressionssuite erneut PASS
+          - Fresh-Unpack byte-identisch zur WORKSOURCE
+          - PHP-Lint 23/23 PASS
+          - frische WordPress-Installation PASS
+          - Plugin-Aktivierung PASS
+          - HD-004 fehlt → fail-closed PASS
+          - HD-004-Vertrag vorhanden → 8 Welten / 320 Hobbyziele PASS
+          - eBay/idealo geladen, Amazon bleibt ohne erfundenen Adapter PASS
+
+          Grenze: kein produktiver Live-Readback, keine Zugangsdaten im Artefakt.
+          EOF
+
+          cat > /tmp/EVIDENCE_GATE5_20261026.md <<EOF
+          # HD-009 – GATE 5 – INSTALLATIONSKANDIDAT – 2026-10-26
+
+          ROLLE: Evidence / Nachweis, keine Current-Autorität.
+
+          Arbeitsbranch: `hobbyrausch/hd009-affiliate-port-20261026`
+          GitHub-Actions-Lauf: `$GITHUB_RUN_ID`
+          Kandidat: `HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip`
+          Plugin-Version: `$HD009_VERSION`
+          SHA-256: `$HD009_SHA`
+
+          Ergebnis: **GATE 5 PASS – INSTALLATIONSKANDIDAT, KEIN LIVE-PASS**
+
+          Nachweise:
+          - Gate 4 vollständig erneut PASS.
+          - Fresh-Unpack byte-identisch zur geprüften WORKSOURCE.
+          - PHP-Lint 23/23 PASS.
+          - echte frische WordPress-Laufzeit installiert.
+          - HD-009 in WordPress aktiviert und als aktiv bestätigt.
+          - ohne HD-004-Registry: erwartetes fail-closed `hdar_category_registry_unavailable`.
+          - mit exakt bereitgestelltem HD-004-Runtimevertrag: 8 Welten, 320 Hobbyseiten, 320 Artikelkategorien.
+          - eBay/idealo-Regressionspfade vorhanden; kein erfundener Amazon-Adapter.
+          - keine Zugangsdaten in Quellcode/Manifest/Evidence geschrieben.
+
+          Grenze:
+          Kein produktiver Hobby-Depot-Live-Readback. Bestehende Provider-Zugangsdaten werden erst als separater WordPress-Laufzeitschritt übernommen.
+          EOF
+
+      - name: Upload tested candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: HD009-gate5-candidate
+          path: |
+            /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip
+            /tmp/MANIFEST.md
+            /tmp/EVIDENCE_GATE5_20261026.md
+          if-no-files-found: error
+
+      - name: Synchronize isolated CURRENT.zip to Campus
+        shell: bash
+        env:
+          CAMPUS_BRANCH: hobbyroom/project-memory-campus-v1-20260905
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$CAMPUS_BRANCH"
+          rm -rf /tmp/campus
+          git worktree add --detach /tmp/campus "origin/$CAMPUS_BRANCH"
+          target="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE"
+          evidence="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md"
+          mkdir -p "$target"
+          cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip "$target/CURRENT.zip"
+          cp /tmp/MANIFEST.md "$target/MANIFEST.md"
+          cp /tmp/EVIDENCE_GATE5_20261026.md "$evidence"
+          git -C /tmp/campus add             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md
+          if git -C /tmp/campus diff --cached --quiet; then
+            echo "Campus already synchronized."
+            exit 0
+          fi
+          git -C /tmp/campus commit -m "HD-009 Gate 5: installierbaren CURRENT-Kandidaten synchronisieren"
+          git -C /tmp/campus push origin HEAD:"$CAMPUS_BRANCH"
