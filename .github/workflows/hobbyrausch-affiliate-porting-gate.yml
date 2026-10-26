@@ -69,3 +69,21 @@ jobs:
           grep -q 'HDAR_Hobby_Depot_Context_Trait' "$root/hobby-depot-affiliate-router.php"
           grep -q 'HDAR_Amazon_Creators_Trait' "$root/hobby-depot-affiliate-router.php"
           echo 'ADAPTER_GATE=PASS'
+
+  provider-registry-simulation:
+    runs-on: ubuntu-latest
+    needs: static-gate
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - amazon_missing
+          - amazon_valid
+          - ebay_missing
+          - ebay_valid
+          - idealo_missing
+          - idealo_valid
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run provider registry simulation
+        run: php work/hobbyrausch-affiliate/porting/tests/provider-registry-simulation.php "${{ matrix.scenario }}"
