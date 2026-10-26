@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "tuev-beim-pferdeanhaenger-faq",
+    "plan_slot": "af1c6fde3ebc198ee7f61c2ad854009f5bf98451633e724873839e90c54f0004",
+    "target_keyword": "Was prüft der TÜV bei einem Pferdeanhänger",
+    "title": "Was prüft der TÜV bei einem Pferdeanhänger?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "TÜV Rheinland – HU für Anhänger",
+          "source_url": "https://www.tuv.com/germany/de/lp/lp-haupt-und-abgasuntersuchung/distribution-pages/hu-f%C3%BCr-anh%C3%A4nger/"
+        },
+        {
+          "source_title": "Pferderevue – Sicherheitscheck Pferdeanhänger",
+          "source_url": "https://www.pferderevue.at/magazin/ausruestung/2022/sicherheitscheck-pferdeanhaenger--was-sie-vor-der-fahrt-ueberprue.html"
+        }
+      ],
+      "claims": [
+        "Anhänger mit eigenem amtlichem Kennzeichen müssen in Deutschland grundsätzlich alle zwei Jahre zur Hauptuntersuchung.",
+        "Bei der Anhänger-Hauptuntersuchung gehören Rahmen, Beleuchtung, Reifen, Aufhängung und Bremsen zu den geprüften Bereichen.",
+        "Der Zustand des Pferdeanhängerbodens ist ein besonders wichtiger zusätzlicher Sicherheitscheck, der nicht ohne Weiteres durch die Hauptuntersuchung ersetzt wird."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was prüft der TÜV bei einem Pferdeanhänger",
+      "topic": "Was prüft der TÜV bei einem Pferdeanhänger?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "tuev-beim-pferdeanhaenger-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was prüft der TÜV bei einem Pferdeanhänger?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "TÜV Rheinland – HU für Anhänger",
+        "source_url": "https://www.tuv.com/germany/de/lp/lp-haupt-und-abgasuntersuchung/distribution-pages/hu-f%C3%BCr-anh%C3%A4nger/",
+        "statement": "Anhänger mit eigenem amtlichem Kennzeichen müssen in Deutschland grundsätzlich alle zwei Jahre zur Hauptuntersuchung.",
+        "evidence_text": "Anhänger mit eigenem amtlichem Kennzeichen müssen in Deutschland grundsätzlich alle zwei Jahre zur Hauptuntersuchung.",
+        "evidence_text_sha256": "036bd992104ff93a7661aaffb16b33472a4ec1834a9f1403d1837cce767c7fe6",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "TÜV Rheinland – HU für Anhänger",
+        "source_url": "https://www.tuv.com/germany/de/lp/lp-haupt-und-abgasuntersuchung/distribution-pages/hu-f%C3%BCr-anh%C3%A4nger/",
+        "statement": "Bei der Anhänger-Hauptuntersuchung gehören Rahmen, Beleuchtung, Reifen, Aufhängung und Bremsen zu den geprüften Bereichen.",
+        "evidence_text": "Bei der Anhänger-Hauptuntersuchung gehören Rahmen, Beleuchtung, Reifen, Aufhängung und Bremsen zu den geprüften Bereichen.",
+        "evidence_text_sha256": "abcca2e358912402081c3e45a4cca7edbfefd2857bed45d9cb714d774f1bf5bd",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pferderevue – Sicherheitscheck Pferdeanhänger",
+        "source_url": "https://www.pferderevue.at/magazin/ausruestung/2022/sicherheitscheck-pferdeanhaenger--was-sie-vor-der-fahrt-ueberprue.html",
+        "statement": "Der Zustand des Pferdeanhängerbodens ist ein besonders wichtiger zusätzlicher Sicherheitscheck, der nicht ohne Weiteres durch die Hauptuntersuchung ersetzt wird.",
+        "evidence_text": "Der Zustand des Pferdeanhängerbodens ist ein besonders wichtiger zusätzlicher Sicherheitscheck, der nicht ohne Weiteres durch die Hauptuntersuchung ersetzt wird.",
+        "evidence_text_sha256": "20e3e70814fe285e96f40e64997e1c5bb4f6092f5f7823973839e0c40cd2c079",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/tuev-beim-pferdeanhaenger-faq/",
+        "anchor": "tuev beim pferdeanhaenger – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/tuev-beim-pferdeanhaenger-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/tuev-beim-pferdeanhaenger-sicherheit/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/tuev-beim-pferdeanhaenger-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/tuev-beim-pferdeanhaenger-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/tuev-beim-pferdeanhaenger-sicherheit/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "tuev-beim-pferdeanhaenger-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "tuev-beim-pferdeanhaenger",
+      "Was prüft der",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
