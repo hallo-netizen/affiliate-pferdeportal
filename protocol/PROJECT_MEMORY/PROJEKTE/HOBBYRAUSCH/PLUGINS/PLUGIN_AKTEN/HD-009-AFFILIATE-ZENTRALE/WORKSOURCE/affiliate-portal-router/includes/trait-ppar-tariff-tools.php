@@ -421,7 +421,7 @@ trait PPAR_Tariff_Tools_Trait {
                     <tr>
                         <th scope="row"><label for="ppar-tool-name">Rechnername / Typ</label></th>
                         <td>
-                            <input id="ppar-tool-name" name="tool_name" class="regular-text" required value="<?php echo esc_attr($edit ? (string)$edit['name'] : ''); ?>" placeholder="z. B. Kredit oder Pferdehaftpflicht">
+                            <input id="ppar-tool-name" name="tool_name" class="regular-text" required value="<?php echo esc_attr($edit ? (string)$edit['name'] : ''); ?>" placeholder="z. B. Kredit oder Geräteschutz">
                             <p class="description">Beim ersten Speichern erzeugt das Plugin daraus automatisch einen dauerhaften Platzhalter.</p>
                         </td>
                     </tr>
@@ -485,7 +485,7 @@ trait PPAR_Tariff_Tools_Trait {
                 <?php endif; ?>
                 <table class="form-table" role="presentation">
                     <tr><th scope="row"><label for="ppar-textlink-partner">Partner / Programm</label></th><td><input id="ppar-textlink-partner" name="textlink_partner" class="regular-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['partner'] : ''); ?>" placeholder="z. B. LeadAlliance"></td></tr>
-                    <tr><th scope="row"><label for="ppar-textlink-name">Bezeichnung</label></th><td><input id="ppar-textlink-name" name="textlink_name" class="regular-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['name'] : ''); ?>" placeholder="z. B. Pferdeversicherung"></td></tr>
+                    <tr><th scope="row"><label for="ppar-textlink-name">Bezeichnung</label></th><td><input id="ppar-textlink-name" name="textlink_name" class="regular-text" required value="<?php echo esc_attr($text_edit ? (string)$text_edit['name'] : ''); ?>" placeholder="z. B. Geräteversicherung"></td></tr>
                     <tr><th scope="row"><label for="ppar-textlink-code">Kompletter Partnercode (optional)</label></th><td><textarea id="ppar-textlink-code" name="textlink_partner_html" rows="8" class="large-text code" placeholder="&lt;a href=&quot;https://…&quot;&gt;…&lt;img …&gt;&lt;/a&gt;"><?php echo esc_textarea($text_edit ? (string)($text_edit['partner_html'] ?? '') : ''); ?></textarea><p class="description"><strong>Empfohlen, wenn der Partner fertigen Code liefert:</strong> vollständigen Code unverändert einfügen, einschließlich Tracking-Pixel/Bild. Dieser Code hat Vorrang vor den beiden Feldern darunter. Nur vertrauenswürdigen Originalcode des Affiliate-Partners verwenden.</p></td></tr>
                     <tr><th scope="row"><label for="ppar-textlink-text">Sichtbarer Linktext (bei einfachem Link)</label></th><td><input id="ppar-textlink-text" name="textlink_text" class="large-text" value="<?php echo esc_attr($text_edit ? (string)$text_edit['link_text'] : ''); ?>" placeholder="z. B. Pferdeversicherung vergleichen"><p class="description">Nur nötig, wenn kein kompletter Partnercode verwendet wird.</p></td></tr>
                     <tr><th scope="row"><label for="ppar-textlink-url">Affiliate-/Tracking-Link (bei einfachem Link)</label></th><td><input id="ppar-textlink-url" type="url" name="textlink_tracking_url" class="large-text code" value="<?php echo esc_attr($text_edit ? (string)$text_edit['tracking_url'] : ''); ?>" placeholder="https://…"><p class="description">Nur nötig, wenn kein kompletter Partnercode verwendet wird. Der Link wird nicht automatisch verändert oder serverseitig aufgerufen.</p></td></tr>
