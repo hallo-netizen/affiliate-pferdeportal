@@ -157,3 +157,10 @@ jobs:
         run: |
           cd /tmp/hd-wp
           /tmp/wp eval-file "$GITHUB_WORKSPACE/work/hobbyrausch-affiliate/porting/tests/provider-wordpress-ebay-roundtrip.php"
+      - name: Install and activate Hobby Depot Affiliate plugin
+        run: |
+          rm -rf /tmp/hd-wp/wp-content/plugins/hobby-depot-affiliate-router
+          cp -R "$GITHUB_WORKSPACE/work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router" /tmp/hd-wp/wp-content/plugins/hobby-depot-affiliate-router
+          cd /tmp/hd-wp
+          /tmp/wp plugin activate hobby-depot-affiliate-router
+          /tmp/wp plugin status hobby-depot-affiliate-router
