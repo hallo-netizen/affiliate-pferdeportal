@@ -159,7 +159,7 @@ trait PPAR_Ebay_Trait {
      */
     private $ebay_public_source_row_cache = array();
 
-    /** V4.2.0 – vollständiger, fest mitgelieferter Pferde-Atelier-Zielkatalog. */
+    /** Provider-neutral target/catalog rule. */
     private function ebay_portal_catalog() {
         if (!class_exists('HDAR_Hobby_Depot_Source')) {
             return new WP_Error('hdar_source_adapter_missing', 'Hobby-Depot-Source-Adapter fehlt.');
@@ -224,7 +224,7 @@ trait PPAR_Ebay_Trait {
         $token = $this->ebay_topic_text($token);
         if (strlen($token) < 6) { return $token; }
         foreach (array('ern','em','en','er','es','e','n','s') as $suffix) {
-            // A final s is lexical in common German horse-product nouns such as
+            // Project-specific source example removed; the rule is portal-neutral.
             // "Gebiss". Stripping one of the double-s characters would make
             // singular "Gebiss" and plural "Gebisse" look unrelated.
             if ($suffix === 's' && substr($token, -2) === 'ss') { continue; }
@@ -310,7 +310,7 @@ trait PPAR_Ebay_Trait {
      */
 
     /**
-     * Central product-form safety. A horse/reitsport reference must never turn a
+     * Provider-neutral rule; project-specific source example removed.
      * souvenir/decorative object into an admissible portal product. The blocked
      * forms live in the catalog and therefore apply identically to PRIVATE,
      * BUSINESS, maintenance and both public delivery gates.
@@ -358,7 +358,7 @@ trait PPAR_Ebay_Trait {
      * V5.26 – providernahe Hard-Safety gegen Spielzeug/Modellware.
      * Diese Sperre liegt absichtlich VOR der fachlichen Zielklassifikation und
      * gilt identisch fuer INDIVIDUAL und BUSINESS. Damit kann ein Titel wie
-     * "Playmobil Pferd mit Sattel" nicht allein wegen Pferd/Sattel durchrutschen.
+     * Provider-neutral rule; project-specific source example removed.
      * Generische Woerter wie "Figur" werden nicht alleine gesperrt; ausschlaggebend
      * sind eindeutige Marken, Produktphrasen oder reale eBay-Spielzeugkategorien.
      */
@@ -392,7 +392,7 @@ trait PPAR_Ebay_Trait {
         if ($all === '') { return ''; }
 
         // V6.35: public/import safety must not depend on a trustworthy eBay
-        // category. Real PRIVATE offers can be mis-categorised under Reitsport
+        // Project-specific source example removed; the rule is portal-neutral.
         // while the title itself explicitly says "Spielzeug". Treat explicit
         // toy terms in title/description as a hard content block. Exact-term
         // matching avoids accidental substrings while still catching compounds
@@ -785,7 +785,7 @@ trait PPAR_Ebay_Trait {
      * BUSINESS darf dagegen nur dann automatisch einen Produktslot gewinnen,
      * wenn der konkrete Produktbegriff im realen Angebotstitel getragen wird
      * und die uebrigen eBay-Fakten diesen Treffer nicht widersprechen.
-     * Generische Pferde-/Reitsportbegriffe, Farben, "Zubehoer" oder reine
+     * Provider-neutral rule; project-specific source example removed.
      * Beschreibungstreffer duerfen kein Produktziel mehr erzeugen.
      */
     private function ebay_business_match_stop_tokens() {
@@ -822,7 +822,7 @@ trait PPAR_Ebay_Trait {
 
     /**
      * German eBay categories often carry the product family as a compound
-     * (e.g. "Pferdedecken", "Sattelzubehör"). For corroboration only, a
+     * Provider-neutral rule; project-specific source example removed.
      * sufficiently long hub token may therefore occur at the beginning/end of
      * a category/aspect token. This is never used as the primary product match.
      */
@@ -840,11 +840,11 @@ trait PPAR_Ebay_Trait {
 
     /**
      * Hub-Fallback fuer konkrete Produktfamilien, die im Portal selbst auf Ebene 2
-     * routbar sind (z.B. ein normaler Sattel), aber keinen eigenen Leaf-Eintrag
+     * Provider-neutral rule; project-specific source example removed.
      * besitzen. Der Titel muss den Hub als eigenes Wort oder als deutsches
      * Produktkompositum mit Hub-Suffix tragen; Kategorie/Aspekte muessen denselben
      * Fachbegriff unabhaengig bestaetigen. Reine Praefix-Nennungen wie
-     * "Sattelgurt" gelten deshalb NICHT als "Sattel".
+     * Provider-neutral rule; project-specific source example removed.
      */
     private function ebay_business_hub_title_token_present($text, $needle) {
         if ($this->ebay_business_strict_token_present($text, $needle)) { return true; }
@@ -859,7 +859,7 @@ trait PPAR_Ebay_Trait {
     }
 
     /**
-     * Eindeutige Reitsport-Produktbegriffe tragen den Fachkontext selbst.
+     * Provider-neutral rule; project-specific source example removed.
      * Ausschliesslich strikter Token-/Stammvergleich in Primaertitel, eBay-Kategorie
      * oder Aspekten. Relationelle Referenzen im Titel zaehlen nicht als Produkttyp.
      */
@@ -886,8 +886,8 @@ trait PPAR_Ebay_Trait {
             if (!$tokens) { continue; }
 
             // Explizite Hub-Aliase sind der kontrollierte Fallback fuer reale
-            // Produktfamilien ohne eigenen Leaf (z.B. Reithose -> Reiterbedarf).
-            // Nur der Primaertitel darf den Alias tragen. "Tasche fuer Reithelm"
+            // Project-specific source example removed; the rule is portal-neutral.
+            // Project-specific source example removed; the rule is portal-neutral.
             // oder andere relationale Referenzen koennen dadurch nie gewinnen.
             $alias_hits = array();
             foreach ((array) ($concept['aliases'] ?? array()) as $alias) {
@@ -955,7 +955,7 @@ trait PPAR_Ebay_Trait {
     /**
      * Primaerer Produkttitel vor relationalen Zubehoer-/Kompatibilitaetsphrasen.
      * Damit ist z.B. "Reithandschuhe Damen Leder" ein belastbarer direkter
-     * Produkttreffer, waehrend "Helmtasche fuer Reithelm" den Reithelm nur als
+     * Provider-neutral rule; project-specific source example removed.
      * Bezugsobjekt nennt. Der komplette Titel bleibt fuer Corroboration und
      * Mehrdeutigkeitspruefung erhalten; diese Zone wird nur fuer die direkte
      * Ein-Wort-Leaf-Freigabe verwendet.
@@ -1008,7 +1008,7 @@ trait PPAR_Ebay_Trait {
     }
 
     /**
-     * An exact discovery profile may use its Pferd-scoped query only as domain
+     * Provider-neutral rule; project-specific source example removed.
      * context after the real eBay offer independently proves the expected product.
      * The query can never create a product match by itself.
      */
@@ -1026,7 +1026,7 @@ trait PPAR_Ebay_Trait {
      * strongest; eBay Productart/aspects may substitute only together with the
      * category and never for obvious accessory-primary titles. This is the
      * fail-closed bridge for products whose real listing does not literally say
-     * "Pferd" (e.g. Gebiss, Weidezaungeraet, Regendecke).
+     * Provider-neutral rule; project-specific source example removed.
      */
     private function ebay_business_expected_concept_evidence($concept, $sections) {
         $concept = is_array($concept) ? $concept : array();
@@ -1058,7 +1058,7 @@ trait PPAR_Ebay_Trait {
         foreach (array('tasche','huelle','hulle','cover','liner','innenfutter','ersatz','adapter','halterung','visier','ueberzug','uberzug','zubehoer','zubehor','accessory') as $accessory) {
             if ($this->ebay_business_strict_token_present($primary, $accessory)) { $accessory_primary = true; break; }
             // German marketplace titles frequently glue an accessory noun to the
-            // referenced product (Helmtasche, Satteltasche, Deckenhalterung).
+            // Project-specific source example removed; the rule is portal-neutral.
             // Exact-profile evidence must not turn that relation into the product.
             $accessory = $this->ebay_topic_text($accessory);
             if ($accessory === '' || strlen($accessory) < 4) { continue; }
@@ -1076,7 +1076,7 @@ trait PPAR_Ebay_Trait {
             $ok = true;
         } elseif (!$accessory_primary && $product_type_hits >= $required) {
             // Exact eBay Productart is a direct structured product identity. The
-            // profile's Pferd scope is checked separately by the caller, and hard
+            // Project-specific source example removed; the rule is portal-neutral.
             // negatives/accessory-primary titles are evaluated before this can
             // authorize a BUSINESS route.
             $ok = true;
@@ -1109,7 +1109,7 @@ trait PPAR_Ebay_Trait {
         $sections = $this->ebay_business_evidence_sections($item);
         if ($sections['title'] === '') { return new WP_Error('ebay_business_title_missing', 'BUSINESS-Angebot besitzt keinen verwertbaren Produkttitel.'); }
         // Hard negatives are evaluated before any exact-profile recovery. A
-        // Pferd-scoped search must never whitelist toy/book/foreign-domain items.
+        // Project-specific source example removed; the rule is portal-neutral.
         foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $marker) {
             if ($this->ebay_topic_negative_present($normalized, $marker)) {
                 return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
@@ -1130,10 +1130,10 @@ trait PPAR_Ebay_Trait {
             $strong_domain_hits[] = 'product:' . sanitize_text_field((string) $marker);
         }
         // V6.18: for an exact catalog profile, the search scope may establish
-        // horse-domain context only AFTER real title/aspect/category data proves
+        // Project-specific source example removed; the rule is portal-neutral.
         // the expected product concept independently. This fixes the V6.17 gate
-        // that rejected most ordinary horse products merely because their title
-        // did not repeat the word "Pferd".
+        // Project-specific source example removed; the rule is portal-neutral.
+        // Project-specific source example removed; the rule is portal-neutral.
         if (!$strong_domain_hits && $exact_profile_scope && !empty($expected_evidence['ok'])) {
             $strong_domain_hits[] = 'exact_profile:' . sanitize_key((string)($expected_concept['id'] ?? ''));
         }
@@ -2227,7 +2227,7 @@ trait PPAR_Ebay_Trait {
 
     /**
      * Build one conservative eBay search phrase for a verified portal product
-     * concept. Generic product labels receive an explicit Pferd qualifier so
+     * Provider-neutral rule; project-specific source example removed.
      * broad marketplace meanings do not dominate the first result page.
      */
     private function ebay_business_concept_query($concept) {
@@ -2242,7 +2242,7 @@ trait PPAR_Ebay_Trait {
     /**
      * Complete BUSINESS discovery contract. Every verified product concept and
      * every verified hub-family concept is represented. Explicit hub aliases
-     * (for example Reithose -> Reiterbedarf) become their own exact queries.
+     * Provider-neutral rule; project-specific source example removed.
      * Entries are interleaved by coarse portal bucket so every work package
      * covers the whole portal instead of one alphabetic/product-family cluster.
      */
@@ -4782,7 +4782,7 @@ trait PPAR_Ebay_Trait {
         // classifier here would make the one-time recovery itself timeout-prone.
 
         // A reference product in an accessory title (e.g. "Helmtasche für
-        // Reithelm") must never consume a Reithelm slot. Keep the item in the
+        // Project-specific source example removed; the rule is portal-neutral.
         // coarse PRIVATE bucket, but give the real accessory its own balance key.
         if($raw){
             $title=sanitize_text_field((string)($raw['title']??$row['title']??''));
@@ -4803,7 +4803,7 @@ trait PPAR_Ebay_Trait {
         // Hub concepts intentionally aggregate several real product types. For
         // PRIVATE inventory balance use the concrete matched alias/hit so that
         // Reithose, Reitjacke, Reitschuh, Reitweste, ... do not collapse into one
-        // anonymous Reiterbedarf pool.
+        // Project-specific source example removed; the rule is portal-neutral.
         foreach((array)($class['hits']??array()) as $hit){
             $hit=sanitize_key($this->ebay_topic_text((string)$hit));
             if($hit!==''){return 'private-hit-'.$hit;}
@@ -8594,7 +8594,7 @@ trait PPAR_Ebay_Trait {
         // V6.13: an eBay-marked PRIVATE listing is public only when its durable
         // provider source can still be resolved and audited with the original
         // eBay payload. V6.12 fell back to a title-only check for orphan/legacy
-        // listings. That was fail-open: a listing titled e.g. "Pferdegeschichten
+        // Project-specific source example removed; the rule is portal-neutral.
         // fuer Kinder" could stay public even when the only book evidence lived
         // in the no-longer-resolved eBay category "Kinder- & Jugendbuecher".
         // Native HivePress listings never reach this branch because they have no
