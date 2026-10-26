@@ -1,0 +1,162 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "2362d73d0ce49f82c921eba2953109b32a117b88d026d1e70de969210e257934",
+    "target_keyword": "Was bewirkt eine Magnetfelddecke beim Pferd",
+    "title": "Was bewirkt eine Magnetfelddecke beim Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "PubMed – Studie zu statischen Magnetdecken",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/24779912/"
+        },
+        {
+          "source_title": "Systematischer Überblick zur veterinärmedizinischen Elektrotherapie",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9817672/"
+        },
+        {
+          "source_title": "Pilotstudie zu Magnetfeldbehandlung beim Pferd",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12784738/"
+        }
+      ],
+      "claims": [
+        "Eine placebokontrollierte Studie an zehn gesunden Pferden fand bei statischen Magnetdecken keine zusätzlichen messbaren Effekte auf Durchblutung oder Rückentemperatur.",
+        "Ein systematischer Überblick bewertet die klinische Evidenz für Elektrotherapien bei Pferden als bislang nicht ausreichend.",
+        "Eine kleine Pilotstudie mit vier Pferden deutete mögliche Verbesserungen bei Rückenempfindlichkeit an, erlaubt aber keine sichere Wirksamkeitsaussage."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was bewirkt eine Magnetfelddecke beim Pferd",
+      "topic": "Was bewirkt eine Magnetfelddecke beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "magnetfelddecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was bewirkt eine Magnetfelddecke beim Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "PubMed – Studie zu statischen Magnetdecken",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/24779912/",
+        "statement": "Eine placebokontrollierte Studie an zehn gesunden Pferden fand bei statischen Magnetdecken keine zusätzlichen messbaren Effekte auf Durchblutung oder Rückentemperatur.",
+        "evidence_text": "Eine placebokontrollierte Studie an zehn gesunden Pferden fand bei statischen Magnetdecken keine zusätzlichen messbaren Effekte auf Durchblutung oder Rückentemperatur.",
+        "evidence_text_sha256": "1941e7198e9bddf05746bb94046c576aca12b470cd305e5573170424b8b70353",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Systematischer Überblick zur veterinärmedizinischen Elektrotherapie",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9817672/",
+        "statement": "Ein systematischer Überblick bewertet die klinische Evidenz für Elektrotherapien bei Pferden als bislang nicht ausreichend.",
+        "evidence_text": "Ein systematischer Überblick bewertet die klinische Evidenz für Elektrotherapien bei Pferden als bislang nicht ausreichend.",
+        "evidence_text_sha256": "f2a7f124e569cf5a69e5442cf1dad2be95c6f1e411332a5990252cde49c0f6ab",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Pilotstudie zu Magnetfeldbehandlung beim Pferd",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12784738/",
+        "statement": "Eine kleine Pilotstudie mit vier Pferden deutete mögliche Verbesserungen bei Rückenempfindlichkeit an, erlaubt aber keine sichere Wirksamkeitsaussage.",
+        "evidence_text": "Eine kleine Pilotstudie mit vier Pferden deutete mögliche Verbesserungen bei Rückenempfindlichkeit an, erlaubt aber keine sichere Wirksamkeitsaussage.",
+        "evidence_text_sha256": "104539079a739d453805fd226bce4669a948d2847ba457056728745bc3ea5d8a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/magnetfelddecken-faq/",
+        "anchor": "magnetfelddecken – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/magnetfelddecken-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/magnetfelddecken-sicherheit/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/magnetfelddecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/magnetfelddecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/magnetfelddecken-sicherheit/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "magnetfelddecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "magnetfelddecken",
+      "Was bewirkt eine",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
