@@ -2,9 +2,9 @@
 if (!defined('ABSPATH')) { exit; }
 
 /**
- * Provideruebergreifender Deal-Radar. Der erste oeffentliche Scope ist hart auf
- * Reithelme begrenzt. Er liest nur vorhandene Produktdaten und veraendert keinen
- * Provider-Worker. Insbesondere bleibt der eBay-Laufvertrag unangetastet.
+ * Providerübergreifender Deal-Radar für genau ein explizit gebundenes
+ * Hobby-Depot-Produkt-/Hobbyziel. Er liest nur vorhandene Produktdaten und
+ * verändert keinen Provider-Worker.
  */
 final class PPAR_Deal_Radar {
     const OPTION_SETTINGS = 'ppar_deal_radar_settings_v1';
@@ -33,8 +33,8 @@ final class PPAR_Deal_Radar {
 
     private static function defaults() {
         return array(
-            'enabled'=>true,
-            'test_slug'=>'reithelme',
+            'enabled'=>false,
+            'test_slug'=>'',
             'min_discount_pct'=>18.0,
             'min_saving_eur'=>15.0,
             'max_age_hours'=>36,
@@ -46,7 +46,7 @@ final class PPAR_Deal_Radar {
         $saved = is_array($saved) ? $saved : array();
         $s = array_merge(self::defaults(), $saved);
         $s['enabled'] = !empty($s['enabled']);
-        $s['test_slug'] = sanitize_title((string)($s['test_slug'] ?? 'reithelme')) ?: 'reithelme';
+        $s['test_slug'] = sanitize_title((string)($s['test_slug'] ?? ''));
         $s['min_discount_pct'] = min(60, max(10, (float)($s['min_discount_pct'] ?? 18)));
         $s['min_saving_eur'] = min(500, max(5, (float)($s['min_saving_eur'] ?? 15)));
         $s['max_age_hours'] = min(72, max(6, absint($s['max_age_hours'] ?? 36)));
@@ -91,15 +91,27 @@ final class PPAR_Deal_Radar {
         return trim(preg_replace('/\s+/', ' ', (string)$value));
     }
 
-    private static function is_reithelm_product($title) {
-        $title = self::normalize_text($title);
-        if ($title === '') { return false; }
-        $positive = preg_match('/\b(?:reithelm|reithelme|reiterhelm|reiterhelme|reitsporthelm|reitschutzhelm)\b/', $title);
-        if (!$positive) { return false; }
-        foreach (array('tasche','helmtasche','uberzug','ueberzug','cover','halter','wandhalter','koffer','liner','polster','innenfutter','ersatz','ersatzteil','visier','zubehor','zubehoer','bezug') as $blocked) {
-            if (preg_match('/\b'.preg_quote($blocked,'/').'\b/', $title)) { return false; }
+    private static function target_definition() {
+        $s = self::settings();
+        $slug = sanitize_title((string)($s['test_slug'] ?? ''));
+        if ($slug === '' || !class_exists('HDAR_Hobby_Depot_Source')) { return array(); }
+        $catalog = HDAR_Hobby_Depot_Source::catalog();
+        if (is_wp_error($catalog)) { return array(); }
+        foreach ((array)($catalog['product_targets'] ?? array()) as $target) {
+            if (!is_array($target) || sanitize_title((string)($target['slug'] ?? '')) !== $slug) { continue; }
+            $title = sanitize_text_field((string)($target['title'] ?? ''));
+            if ($title === '') { return array(); }
+            return array('slug'=>$slug,'title'=>$title,'normalized'=>self::normalize_text($title));
         }
-        return true;
+        return array();
+    }
+
+    private static function is_target_product($title, $target) {
+        $title = self::normalize_text($title);
+        $needle = self::normalize_text((string)($target['title'] ?? ''));
+        if ($title === '' || $needle === '') { return false; }
+        return strpos(' '.$title.' ', ' '.$needle.' ') !== false
+            || strpos($title, $needle) === 0;
     }
 
     private static function parse_price($raw) {
@@ -148,8 +160,10 @@ final class PPAR_Deal_Radar {
         global $wpdb;
         $table = self::table_name();
         $s = self::settings();
+        $target = self::target_definition();
+        if (!$target) { return array(); }
         $min_seen = time() - absint($s['max_age_hours']) * HOUR_IN_SECONDS;
-        $like = '%reithelm%';
+        $like = '%' . $wpdb->esc_like(strtolower((string)$target['title'])) . '%';
         $sql = $wpdb->prepare(
             "SELECT id,network,external_key,programme_external_id,programme_name,title,image_url,tracking_url,destination_url,price,currency,brand,category,quality_status,payload,last_seen FROM {$table} WHERE quality_status IN ('pass','warn') AND last_seen>=%d AND (LOWER(title) LIKE %s OR LOWER(category) LIKE %s) ORDER BY last_seen DESC LIMIT 250",
             $min_seen, $like, $like
@@ -157,7 +171,7 @@ final class PPAR_Deal_Radar {
         $rows = (array)$wpdb->get_results($sql, ARRAY_A);
         $out = array();
         foreach ($rows as $row) {
-            if (!is_array($row) || !self::is_reithelm_product($row['title'] ?? '')) { continue; }
+            if (!is_array($row) || !self::is_target_product($row['title'] ?? '', $target)) { continue; }
             $provider = self::provider_key($row);
             if ($provider === '') { continue; }
             $price = self::parse_price($row['price'] ?? '');
@@ -315,27 +329,26 @@ final class PPAR_Deal_Radar {
     public static function refresh() {
         $state = self::compute_best(true);
         update_option(self::OPTION_STATE, $state, false);
-        delete_transient('ppar_deal_best_reithelm_v1');
+        delete_transient('ppar_deal_best_hobby_target_v1');
         return $state;
     }
 
     private static function best_current() {
-        $cached = get_transient('ppar_deal_best_reithelm_v1');
+        $cached = get_transient('ppar_deal_best_hobby_target_v1');
         if (is_array($cached)) { return $cached; }
         $state = self::compute_best(false);
-        set_transient('ppar_deal_best_reithelm_v1', $state, 5 * MINUTE_IN_SECONDS);
+        set_transient('ppar_deal_best_hobby_target_v1', $state, 5 * MINUTE_IN_SECONDS);
         return $state;
     }
 
     private static function page_is_test_scope() {
         $s = self::settings();
         if (empty($s['enabled']) || !is_singular()) { return false; }
+        $target = self::target_definition();
+        if (!$target) { return false; }
         $post = get_post();
         if (!$post instanceof WP_Post || (string)$post->post_status !== 'publish') { return false; }
-        $slug = sanitize_title((string)$post->post_name);
-        $title = self::normalize_text((string)$post->post_title);
-        if ($slug === (string)$s['test_slug']) { return true; }
-        return preg_match('/\breithelme?\b/', $title) === 1;
+        return sanitize_title((string)$post->post_name) === (string)$target['slug'];
     }
 
     private static function provider_label($provider) {
@@ -344,7 +357,7 @@ final class PPAR_Deal_Radar {
     }
 
     private static function click_signature($offer_key) {
-        return hash_hmac('sha256', (string)$offer_key.'|reithelme|'.self::CONTRACT_VERSION, wp_salt('auth'));
+        return hash_hmac('sha256', (string)$offer_key.'|'.sanitize_title((string)(self::settings()['test_slug'] ?? '')).'|'.self::CONTRACT_VERSION, wp_salt('auth'));
     }
 
     private static function click_url($candidate) {
@@ -372,7 +385,7 @@ final class PPAR_Deal_Radar {
         if ($key === '' || $sig === '' || !hash_equals(self::click_signature($key), $sig)) {
             wp_die('Ungültiger Angebotslink.', 'Top-Angebot', array('response'=>400));
         }
-        delete_transient('ppar_deal_best_reithelm_v1');
+        delete_transient('ppar_deal_best_hobby_target_v1');
         $state = self::best_current(); $best = is_array($state['best'] ?? null) ? $state['best'] : array();
         if (!$best || !hash_equals((string)($best['offer_key'] ?? ''), $key) || empty($best['url'])) {
             wp_die('Dieses Angebot ist nicht mehr aktuell.', 'Top-Angebot', array('response'=>410));
@@ -449,6 +462,7 @@ final class PPAR_Deal_Radar {
         $raw=isset($_POST['ppar_deal'])&&is_array($_POST['ppar_deal'])?wp_unslash($_POST['ppar_deal']):array();
         $s=self::settings();
         $s['enabled']=!empty($raw['enabled']);
+        $s['test_slug']=sanitize_title((string)($raw['test_slug'] ?? ''));
         $s['min_discount_pct']=min(60,max(10,(float)str_replace(',','.',(string)($raw['min_discount_pct']??$s['min_discount_pct']))));
         $s['min_saving_eur']=min(500,max(5,(float)str_replace(',','.',(string)($raw['min_saving_eur']??$s['min_saving_eur']))));
         $s['max_age_hours']=min(72,max(6,absint($raw['max_age_hours']??$s['max_age_hours'])));
@@ -461,13 +475,13 @@ final class PPAR_Deal_Radar {
         $s=self::settings(); $state=self::refresh(); $best=is_array($state['best']??null)?$state['best']:array(); $sources=self::source_statuses();
         ?>
         <div class="wrap" style="max-width:1180px"><h1>Produktquellen &amp; Deals</h1>
-            <p><strong>Erster Testscope: nur Reithelme.</strong> Kein belastbarer Preisvorteil = kein öffentlicher Angebotsblock.</p>
+            <p><strong>Testscope: genau ein explizit gebundenes Hobby-Depot-Ziel.</strong> Ohne gültigen Ziel-Slug oder belastbaren Preisvorteil gibt es keinen öffentlichen Angebotsblock.</p>
             <?php if (!empty($_GET['saved'])) : ?><div class="notice notice-success"><p>Einstellungen gespeichert und Deal-Radar neu geprüft.</p></div><?php endif; ?>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:18px 0">
                 <?php foreach($sources as $label=>$status): ?><div class="postbox" style="padding:14px"><strong><?php echo esc_html($label); ?></strong><div style="margin-top:6px"><?php echo isset($status['count'])?esc_html(number_format_i18n($status['count']).' Produktzeilen'):'<span class="description">noch keine Produktdaten</span>'; ?></div><?php if(!empty($status['last_seen'])):?><div class="description">zuletzt <?php echo esc_html(wp_date('d.m.Y H:i',$status['last_seen'])); ?></div><?php endif; ?><p class="description"><?php echo esc_html($status['note']); ?></p></div><?php endforeach; ?>
             </div>
-            <section class="postbox" style="padding:18px"><h2>Aktueller Reithelm-Kracher</h2><?php if($best): ?><p><strong><?php echo esc_html($best['title']); ?></strong><br><?php echo esc_html(number_format_i18n($best['price'],2).' € statt Vergleich '.number_format_i18n($best['reference_price'],2).' € · -'.number_format_i18n($best['discount_pct'],1).' % · '.self::provider_label($best['provider'])); ?></p><p class="description">Beleg: <?php echo esc_html($best['evidence_basis']); ?>. Öffentliche Ausgabe nur solange der Kandidat aktuell qualifiziert bleibt.</p><?php else: ?><p><strong>Aktuell kein belastbarer Kracher.</strong></p><p class="description"><?php echo esc_html(number_format_i18n($state['candidate_count']??0).' passende Reithelm-Kandidaten geprüft; '.number_format_i18n($state['qualified_count']??0).' erfüllen die harte Deal-Schwelle.'); ?></p><?php endif; ?></section>
-            <section class="postbox" style="padding:18px"><h2>Testregeln</h2><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_deal_radar_save"><?php wp_nonce_field('ppar_deal_radar_save','ppar_deal_radar_nonce'); ?><p><label><input type="checkbox" name="ppar_deal[enabled]" value="1" <?php checked(!empty($s['enabled'])); ?>> Kracher-Test auf Reithelme aktiv</label></p><p><label>Mindestvorteil in % <input type="number" min="10" max="60" step="0.5" name="ppar_deal[min_discount_pct]" value="<?php echo esc_attr((string)$s['min_discount_pct']); ?>"></label></p><p><label>Mindestersparnis in € <input type="number" min="5" max="500" step="1" name="ppar_deal[min_saving_eur]" value="<?php echo esc_attr((string)$s['min_saving_eur']); ?>"></label></p><p><label>Maximales Datenalter in Stunden <input type="number" min="6" max="72" step="1" name="ppar_deal[max_age_hours]" value="<?php echo esc_attr((string)$s['max_age_hours']); ?>"></label></p><?php submit_button('Speichern & neu prüfen'); ?></form></section>
+            <section class="postbox" style="padding:18px"><h2>Aktueller Deal-Kandidat</h2><?php if($best): ?><p><strong><?php echo esc_html($best['title']); ?></strong><br><?php echo esc_html(number_format_i18n($best['price'],2).' € statt Vergleich '.number_format_i18n($best['reference_price'],2).' € · -'.number_format_i18n($best['discount_pct'],1).' % · '.self::provider_label($best['provider'])); ?></p><p class="description">Beleg: <?php echo esc_html($best['evidence_basis']); ?>. Öffentliche Ausgabe nur solange der Kandidat aktuell qualifiziert bleibt.</p><?php else: ?><p><strong>Aktuell kein belastbarer Kracher.</strong></p><p class="description"><?php echo esc_html(number_format_i18n($state['candidate_count']??0).' passende Kandidaten geprüft; '.number_format_i18n($state['qualified_count']??0).' erfüllen die harte Deal-Schwelle.'); ?></p><?php endif; ?></section>
+            <section class="postbox" style="padding:18px"><h2>Testregeln</h2><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_deal_radar_save"><?php wp_nonce_field('ppar_deal_radar_save','ppar_deal_radar_nonce'); ?><p><label><input type="checkbox" name="ppar_deal[enabled]" value="1" <?php checked(!empty($s['enabled'])); ?>> Deal-Radar für das gebundene Ziel aktiv</label></p><p><label>Hobby-Depot-Ziel-Slug <input type="text" name="ppar_deal[test_slug]" value="<?php echo esc_attr((string)$s['test_slug']); ?>" placeholder="z. B. modellbau"></label></p><p><label>Mindestvorteil in % <input type="number" min="10" max="60" step="0.5" name="ppar_deal[min_discount_pct]" value="<?php echo esc_attr((string)$s['min_discount_pct']); ?>"></label></p><p><label>Mindestersparnis in € <input type="number" min="5" max="500" step="1" name="ppar_deal[min_saving_eur]" value="<?php echo esc_attr((string)$s['min_saving_eur']); ?>"></label></p><p><label>Maximales Datenalter in Stunden <input type="number" min="6" max="72" step="1" name="ppar_deal[max_age_hours]" value="<?php echo esc_attr((string)$s['max_age_hours']); ?>"></label></p><?php submit_button('Speichern & neu prüfen'); ?></form></section>
         </div>
         <?php
     }
