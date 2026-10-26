@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "486a56c78268e8515306028a89b2e868e0fe70b814f887d1b335f925b9794304",
+    "target_keyword": "Wo muss der Longiergurt sitzen",
+    "title": "Wo muss der Longiergurt sitzen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Longiergurte",
+          "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte"
+        }
+      ],
+      "claims": [
+        "Der Longiergurt wird hinter dem Widerrist angelegt, sodass die Schulterbewegung des Pferdes nicht behindert wird.",
+        "Der Gurt muss stabil in seiner Gurtlage bleiben und darf nicht nach vorn in die Ellenbogenbeuge rutschen.",
+        "Eine passende Longiergurtunterlage oder passend gelegte Schabracke schützt den Gurt vor Schweiß; eine starke Polsterung ist bei korrekter Passform nicht automatisch nötig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wo muss der Longiergurt sitzen",
+      "topic": "Wo muss der Longiergurt sitzen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wo muss der Longiergurt sitzen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Longiergurte",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+        "statement": "Der Longiergurt wird hinter dem Widerrist angelegt, sodass die Schulterbewegung des Pferdes nicht behindert wird.",
+        "evidence_text": "Der Longiergurt wird hinter dem Widerrist angelegt, sodass die Schulterbewegung des Pferdes nicht behindert wird.",
+        "evidence_text_sha256": "54a2532a26250af83612098212ce16913cbe310557811429670b06bee193e915",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Longiergurte",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+        "statement": "Der Gurt muss stabil in seiner Gurtlage bleiben und darf nicht nach vorn in die Ellenbogenbeuge rutschen.",
+        "evidence_text": "Der Gurt muss stabil in seiner Gurtlage bleiben und darf nicht nach vorn in die Ellenbogenbeuge rutschen.",
+        "evidence_text_sha256": "1892847216dbd3b1d4f53ffcd33eb8e9082a4275f6ca53fd2a9d626e70eb6c79",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Longiergurte",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+        "statement": "Eine passende Longiergurtunterlage oder passend gelegte Schabracke schützt den Gurt vor Schweiß; eine starke Polsterung ist bei korrekter Passform nicht automatisch nötig.",
+        "evidence_text": "Eine passende Longiergurtunterlage oder passend gelegte Schabracke schützt den Gurt vor Schweiß; eine starke Polsterung ist bei korrekter Passform nicht automatisch nötig.",
+        "evidence_text_sha256": "99452e677419b22739f44a559d5ae6e0511652dc05250360f8ddeaaf66aa4924",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/longiergurte-faq/",
+        "anchor": "FAQ zu longiergurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longiergurte-anwendung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/longiergurte-sicherheit/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/longiergurte-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-anwendung/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-sicherheit/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longiergurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "longiergurte",
+      "Wo muss der",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
