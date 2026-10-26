@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "weidezelt-faq",
+      "plan_slot": "d70b358dc35ffaec56b9e4d038903609d48ab09a845a971be1736fe918edb8ac",
+      "target_keyword": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde",
+      "title": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?"
+    }
+  ],
+  "batch_sha256": "42a193c6822d72d728ff50a67924110d8600615a27dfb6319d329a776b78a49d"
+}

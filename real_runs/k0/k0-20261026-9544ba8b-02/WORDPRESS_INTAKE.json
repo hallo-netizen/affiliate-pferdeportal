@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "salzlecksteine-faq",
+      "plan_slot": "d9a5ee752916c82501e2dc605aef6cf48b82642c25e455fc3d2a1dd77586e384",
+      "target_keyword": "Warum leckt mein Pferd viel am Salzleckstein",
+      "title": "Warum leckt mein Pferd viel am Salzleckstein?"
+    }
+  ],
+  "batch_sha256": "b194b03f1213d7f31d9db855e959459fae00c51ef4cc3df1bd0a33f623605625"
+}

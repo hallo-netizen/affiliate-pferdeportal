@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "2e3f284f575348c36b27a6fc3be667fed326d605d4fbfdd2d7ccb1712e8bbf55",
+      "target_keyword": "Wie reitet man ein Pferd am äußeren Zügel",
+      "title": "Wie reitet man ein Pferd am äußeren Zügel?"
+    }
+  ],
+  "batch_sha256": "ca4ae0dee4d20255fbe466c5adb218b60ecc3058cb21438718b1e48e5c9c8ecb"
+}

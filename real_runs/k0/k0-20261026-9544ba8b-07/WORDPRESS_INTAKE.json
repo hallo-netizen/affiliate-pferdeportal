@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "tuev-beim-pferdeanhaenger-faq",
+      "plan_slot": "af1c6fde3ebc198ee7f61c2ad854009f5bf98451633e724873839e90c54f0004",
+      "target_keyword": "Was prüft der TÜV bei einem Pferdeanhänger",
+      "title": "Was prüft der TÜV bei einem Pferdeanhänger?"
+    }
+  ],
+  "batch_sha256": "030130f2ffcabd87b8da82e47b091724f18b20508d46c78b14500b464b829e06"
+}

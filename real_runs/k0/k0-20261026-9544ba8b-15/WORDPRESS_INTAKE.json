@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "pferdedecken-unterdecken-faq",
+      "plan_slot": "bc0694b8dafe8b8353640b3a6f0abb91030023b6009613f0062b9a4ce5afdd2c",
+      "target_keyword": "Wie heißt die Decke unterm Sattel beim Pferd",
+      "title": "Wie heißt die Decke unterm Sattel beim Pferd?"
+    }
+  ],
+  "batch_sha256": "a5b028b323bdf8b9b159154c0f02a19b909e74f3ebc72cedec1ceaca9729c921"
+}

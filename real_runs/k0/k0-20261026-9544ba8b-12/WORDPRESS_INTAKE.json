@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "95c90f946bb7ac996f201ae845e4d49b0b0fb3cbca7b44c2a0c68b10e1bf90cf",
+      "target_keyword": "Welcher Sattelgurt für empfindliche Pferde",
+      "title": "Welcher Sattelgurt für empfindliche Pferde?"
+    }
+  ],
+  "batch_sha256": "972d78d85cda1c1a8c89f078065949a69b8963552bc47c08269bef9fd52772d4"
+}

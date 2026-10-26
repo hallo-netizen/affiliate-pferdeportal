@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "599dde6fe19dc04d2e5ab0d9f6b12166008b8ddc6f078d352ccc8f76f512d89c",
+      "target_keyword": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert",
+      "title": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert?"
+    }
+  ],
+  "batch_sha256": "c4745e9335efb10086bcf78a5d2620b2889c13145969527c6fc783c63991c24a"
+}

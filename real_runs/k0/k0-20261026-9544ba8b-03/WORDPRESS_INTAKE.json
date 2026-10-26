@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "magnetfelddecken-faq",
+      "plan_slot": "2362d73d0ce49f82c921eba2953109b32a117b88d026d1e70de969210e257934",
+      "target_keyword": "Was bewirkt eine Magnetfelddecke beim Pferd",
+      "title": "Was bewirkt eine Magnetfelddecke beim Pferd?"
+    }
+  ],
+  "batch_sha256": "944f0d922af5602333e13f4b9455081a6f47a4a4793cad461a23d23c81ce84f3"
+}

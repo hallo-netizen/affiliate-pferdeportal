@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "gebisse-faq",
+      "plan_slot": "bc3d7393b7a97e1134b285baa8e4b7b185fbd60bd11e6fb147f494eced49b277",
+      "target_keyword": "Welches Gebiss liegt am ruhigsten im Maul",
+      "title": "Welches Gebiss liegt am ruhigsten im Maul?"
+    }
+  ],
+  "batch_sha256": "d3ae8d0a97ad237121f3b66bde778ccab8ee8a1f679ff65b29aa9c6afb18d91f"
+}

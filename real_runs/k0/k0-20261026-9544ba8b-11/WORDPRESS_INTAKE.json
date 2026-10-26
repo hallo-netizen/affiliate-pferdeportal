@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "kappzaum-faq",
+      "plan_slot": "e1514092d38ff50798fd4d5449ebabd519ca5256c1e6e42cbe3553fb599acc63",
+      "target_keyword": "Welchen Kappzaum am besten fürs Pferd",
+      "title": "Welchen Kappzaum am besten fürs Pferd?"
+    }
+  ],
+  "batch_sha256": "746c45f518232cb0cb74bcd99183aa50fa2a8a1cc6e3d798cc93f6bb49bcab9b"
+}

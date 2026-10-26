@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "longierpeitschen-faq",
+      "plan_slot": "a7c49f239d58cf613fa58de122a6d28ccf00b52eabd8aec4fe078fad2c031c5a",
+      "target_keyword": "Welche Longierpeitsche ist die beste",
+      "title": "Welche Longierpeitsche ist die beste?"
+    }
+  ],
+  "batch_sha256": "723fe5a59c7d64923cf4652d5d8a68ad3a4c1a0ebb20ef62fba001ab16b9ee7b"
+}

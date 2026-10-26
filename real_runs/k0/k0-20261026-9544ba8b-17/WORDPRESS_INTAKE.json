@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "366fc25b0cdd35b0c2f331a8c90c0fa4e4d7c22ab5adb64ba2ccad2e5acf5772",
+      "target_keyword": "Wie lenkt man ein Pferd mit Zügeln",
+      "title": "Wie lenkt man ein Pferd mit Zügeln?"
+    }
+  ],
+  "batch_sha256": "32e63411017fc8bbe2e1e5a739a7d846c1d7e28e802596dee287339b884429f4"
+}

@@ -1,0 +1,143 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 19,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "weidezelt-faq",
+      "plan_slot": "d70b358dc35ffaec56b9e4d038903609d48ab09a845a971be1736fe918edb8ac",
+      "target_keyword": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde",
+      "title": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "salzlecksteine-faq",
+      "plan_slot": "d9a5ee752916c82501e2dc605aef6cf48b82642c25e455fc3d2a1dd77586e384",
+      "target_keyword": "Warum leckt mein Pferd viel am Salzleckstein",
+      "title": "Warum leckt mein Pferd viel am Salzleckstein?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "magnetfelddecken-faq",
+      "plan_slot": "2362d73d0ce49f82c921eba2953109b32a117b88d026d1e70de969210e257934",
+      "target_keyword": "Was bewirkt eine Magnetfelddecke beim Pferd",
+      "title": "Was bewirkt eine Magnetfelddecke beim Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "longiergurte-faq",
+      "plan_slot": "2a375cf6be8513675bf3539b1e91fabb8021016282d9de327af426b93b9e1f38",
+      "target_keyword": "Was bringt ein Longiergurt",
+      "title": "Was bringt ein Longiergurt?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "reitplatzboden-faq",
+      "plan_slot": "7dc45a5968edd83bad389852d073e13fc01b992df5393c244bcc985289470f16",
+      "target_keyword": "Was ist der beste Reitplatzboden",
+      "title": "Was ist der beste Reitplatzboden?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "599dde6fe19dc04d2e5ab0d9f6b12166008b8ddc6f078d352ccc8f76f512d89c",
+      "target_keyword": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert",
+      "title": "Was kann ich tun, wenn mein Pferd nicht auf Zügel reagiert?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "tuev-beim-pferdeanhaenger-faq",
+      "plan_slot": "af1c6fde3ebc198ee7f61c2ad854009f5bf98451633e724873839e90c54f0004",
+      "target_keyword": "Was prüft der TÜV bei einem Pferdeanhänger",
+      "title": "Was prüft der TÜV bei einem Pferdeanhänger?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "longiergurte-faq",
+      "plan_slot": "1a043711a7393a11942ab1ac4bbd3992d99d95ac22c38813c84ad72136917104",
+      "target_keyword": "Welche Größe Longiergurt brauche ich für mein Pferd",
+      "title": "Welche Größe Longiergurt brauche ich für mein Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "longierpeitschen-faq",
+      "plan_slot": "a7c49f239d58cf613fa58de122a6d28ccf00b52eabd8aec4fe078fad2c031c5a",
+      "target_keyword": "Welche Longierpeitsche ist die beste",
+      "title": "Welche Longierpeitsche ist die beste?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "schermaschinen-faq",
+      "plan_slot": "181dd4d1e4766df2fbb88ef7b337fafdebfd6bfb3919ac2555cc5e80b221630d",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "title": "Welche Schermaschine für Pferde ist die leiseste?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "kappzaum-faq",
+      "plan_slot": "e1514092d38ff50798fd4d5449ebabd519ca5256c1e6e42cbe3553fb599acc63",
+      "target_keyword": "Welchen Kappzaum am besten fürs Pferd",
+      "title": "Welchen Kappzaum am besten fürs Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "sattelgurte-faq",
+      "plan_slot": "95c90f946bb7ac996f201ae845e4d49b0b0fb3cbca7b44c2a0c68b10e1bf90cf",
+      "target_keyword": "Welcher Sattelgurt für empfindliche Pferde",
+      "title": "Welcher Sattelgurt für empfindliche Pferde?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "gebisse-faq",
+      "plan_slot": "bc3d7393b7a97e1134b285baa8e4b7b185fbd60bd11e6fb147f494eced49b277",
+      "target_keyword": "Welches Gebiss liegt am ruhigsten im Maul",
+      "title": "Welches Gebiss liegt am ruhigsten im Maul?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "sperrriemen-faq",
+      "plan_slot": "b592182ed6cd090e86dc776a6afd0f80ead5c439ca80af00c77222a850cbf542",
+      "target_keyword": "Wie heißt der Sperrriemen jetzt",
+      "title": "Wie heißt der Sperrriemen jetzt?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "pferdedecken-unterdecken-faq",
+      "plan_slot": "bc0694b8dafe8b8353640b3a6f0abb91030023b6009613f0062b9a4ce5afdd2c",
+      "target_keyword": "Wie heißt die Decke unterm Sattel beim Pferd",
+      "title": "Wie heißt die Decke unterm Sattel beim Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "magnetfelddecken-faq",
+      "plan_slot": "3541d8c5302d384b66fe2cd36bafb33227f8e1b213a8e256064c427907ab5c7d",
+      "target_keyword": "Wie lange hält eine Magnetfelddecke bei einem Pferd",
+      "title": "Wie lange hält eine Magnetfelddecke bei einem Pferd?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "366fc25b0cdd35b0c2f331a8c90c0fa4e4d7c22ab5adb64ba2ccad2e5acf5772",
+      "target_keyword": "Wie lenkt man ein Pferd mit Zügeln",
+      "title": "Wie lenkt man ein Pferd mit Zügeln?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "zuegel-faq",
+      "plan_slot": "2e3f284f575348c36b27a6fc3be667fed326d605d4fbfdd2d7ccb1712e8bbf55",
+      "target_keyword": "Wie reitet man ein Pferd am äußeren Zügel",
+      "title": "Wie reitet man ein Pferd am äußeren Zügel?"
+    },
+    {
+      "article_type": "FAQ",
+      "category": "longiergurte-faq",
+      "plan_slot": "486a56c78268e8515306028a89b2e868e0fe70b814f887d1b335f925b9794304",
+      "target_keyword": "Wo muss der Longiergurt sitzen",
+      "title": "Wo muss der Longiergurt sitzen?"
+    }
+  ],
+  "batch_sha256": "9544ba8b604002eb74826a7966fb0c8fd93d5e6f5df164ee04ae9dbd3b7e5895"
+}

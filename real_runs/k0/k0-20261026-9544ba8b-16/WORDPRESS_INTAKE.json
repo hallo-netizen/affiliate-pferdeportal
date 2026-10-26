@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "magnetfelddecken-faq",
+      "plan_slot": "3541d8c5302d384b66fe2cd36bafb33227f8e1b213a8e256064c427907ab5c7d",
+      "target_keyword": "Wie lange hält eine Magnetfelddecke bei einem Pferd",
+      "title": "Wie lange hält eine Magnetfelddecke bei einem Pferd?"
+    }
+  ],
+  "batch_sha256": "2744f39ef99db4ad5d4fec8385f97450f994354248a34bbe171ce1d3db1f40d2"
+}

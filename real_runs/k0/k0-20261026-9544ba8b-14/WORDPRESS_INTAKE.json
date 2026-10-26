@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "sperrriemen-faq",
+      "plan_slot": "b592182ed6cd090e86dc776a6afd0f80ead5c439ca80af00c77222a850cbf542",
+      "target_keyword": "Wie heißt der Sperrriemen jetzt",
+      "title": "Wie heißt der Sperrriemen jetzt?"
+    }
+  ],
+  "batch_sha256": "8685eddd935070acbba56d9e6d200dafcc06cef0ccb4e6b5492152e15e1cbfd2"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schermaschinen-faq",
+      "plan_slot": "181dd4d1e4766df2fbb88ef7b337fafdebfd6bfb3919ac2555cc5e80b221630d",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "title": "Welche Schermaschine für Pferde ist die leiseste?"
+    }
+  ],
+  "batch_sha256": "8cd8f6d0c6948e9d4fe3831794d0ec1694d02dc50f50dd771ead31dabd06dea3"
+}

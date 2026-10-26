@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "longiergurte-faq",
+      "plan_slot": "1a043711a7393a11942ab1ac4bbd3992d99d95ac22c38813c84ad72136917104",
+      "target_keyword": "Welche Größe Longiergurt brauche ich für mein Pferd",
+      "title": "Welche Größe Longiergurt brauche ich für mein Pferd?"
+    }
+  ],
+  "batch_sha256": "43568dda7d31bc5a74ea85d72c5f5da0d9f109bb645439d00a629eee251d39ab"
+}

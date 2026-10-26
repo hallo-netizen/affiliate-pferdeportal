@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "reitplatzboden-faq",
+      "plan_slot": "7dc45a5968edd83bad389852d073e13fc01b992df5393c244bcc985289470f16",
+      "target_keyword": "Was ist der beste Reitplatzboden",
+      "title": "Was ist der beste Reitplatzboden?"
+    }
+  ],
+  "batch_sha256": "bb114c51a6ab2cad3843bc0e62668c0cdd947ba9a4b59503e60cee7b73d940bf"
+}
