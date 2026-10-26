@@ -80,7 +80,7 @@ Bereits entfernt:
    - Evidence: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
 
 5. **GATE 5 – Installationspaket/CURRENT.zip: PASS**
-   - GitHub-Actions-Lauf `40337386359`: SUCCESS.
+   - GitHub-Actions-Lauf `40344179549`: SUCCESS.
    - Gate-4-Regressionssuite erneut PASS.
    - Fresh-Unpack byte-identisch zur geprüften WORKSOURCE.
    - PHP-Lint 23/23 PASS.
@@ -88,13 +88,15 @@ Bereits entfernt:
    - ohne HD-004-Registry erwartetes fail-closed `hdar_category_registry_unavailable` PASS.
    - mit bereitgestelltem HD-004-Runtimevertrag: 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS.
    - eBay/idealo-Regressionspfade PASS; kein erfundener Amazon-Adapter.
-   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #569 in den Campus übernommen.
-   - Kandidat SHA-256: `457628ebe31735928ca73465ea69ac4da5b5a442693ee1a8c652861432d67c81`.
+   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #572 in den Campus übernommen.
+   - Kandidat: `0.1.1-dev`.
+   - Kandidat SHA-256: `663ff5a77932704ef1e354e37c7591f99046e54f90beb67c03cb63837a155511`.
+   - Verbindungsdaten-Preflight vorhanden: Awin, ADCELL, eBay, idealo und Digistore24 werden auf vollständige Pflichtzugänge geprüft; bei fehlenden Pflichtwerten bleibt LIVE-PASS gesperrt.
 
 ## Erster offener Blocker
 
-Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten sind bewusst nicht im Campus/Quellcode gespeichert und müssen als separater WordPress-Laufzeitschritt übernommen werden.
+Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten sind bewusst nicht im Campus/Quellcode gespeichert und müssen nach der manuellen Installation in der echten WordPress-Laufzeit vorhanden sein. Der neue Preflight blockiert LIVE-PASS, solange Pflichtfelder fehlen.
 
 ## NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten in der echten Hobby-Depot-WordPress-Laufzeit installieren, vorhandene Affiliate-Partner-Zugangsdaten über die bestehenden Laufzeit-/Konfigurationsschnittstellen übernehmen, HD-004-Zielquelle sowie eBay/idealo positiv und fail-closed negativ prüfen und anschließend echten Frontend-/Provider-Readback durchführen. Amazon bleibt ohne belegten realen Adapter `prepared`. Erst nach diesem Nachweis Live-PASS setzen.
+Den Gate-5-PASS-Kandidaten `0.1.1-dev` manuell in der echten Hobby-Depot-WordPress-Laufzeit installieren. Danach den Verbindungsdaten-Preflight öffnen und sicherstellen, dass alle Pflichtzugänge vollständig sind: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Anschließend Verbindungstests, HD-004-Zielquelle, eBay/idealo und Frontend-/Provider-Readback prüfen. Amazon bleibt ohne belegten realen Adapter `prepared`. Erst nach vollständigem Preflight und Live-Nachweis Live-PASS setzen.
