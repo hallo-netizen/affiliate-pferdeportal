@@ -2,7 +2,7 @@ import copy,re,unittest
 
 from engine.k0_full_rules import (
     Blocked, RULE_CONTEXT_CONTRACT, writer_rule_bundle, rule_binding,
-    verify_pre_lt68, verify_final,
+    verify_pre_lt68, verify_final, validate_rule_context, verify_live_link_targets,
 )
 from tests.test_k10 import make_base
 from engine.checkers import structural_receipts
@@ -77,6 +77,73 @@ def with_valid_table(a):
     a['table_decision']={'decision':'INCLUDE_ADDED_VALUE','exception_code':None,'rationale':'Die Tabelle verbindet Hilfsmittel mit eigenständigen Auswahl- und Kontrollpunkten.'}
     a['semantic_rule_results']={'table.value_required_if_present':'PASS'}
     return a
+
+
+class K0LinkRegressionTests(unittest.TestCase):
+    def test_good_links_still_pass_existing_rule_context(self):
+        p,_=package_from_article(make_base())
+        self.assertEqual(validate_rule_context(p['rule_context'],p['identity']),p['rule_context'])
+
+    def test_uninformative_prepared_link_is_blocked(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][1]['anchor']='Weitere Informationen zum Thema'
+        with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_LINK_ANCHOR_UNINFORMATIVE'):
+            validate_rule_context(p['rule_context'],p['identity'])
+
+    def test_category_slug_used_as_faq_anchor_is_blocked(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][0]['anchor']='FAQ zu training'
+        with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_LINK_ANCHOR_UNINFORMATIVE'):
+            validate_rule_context(p['rule_context'],p['identity'])
+
+    def test_not_explicitly_active_cannot_be_self_certified(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['link_registry'][1]['active']=None
+        with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_LINK_REGISTRY_INACTIVE'):
+            validate_rule_context(p['rule_context'],p['identity'])
+
+    def test_live_target_positive_with_published_related_content(self):
+        p,_=package_from_article(make_base())
+        links=p['rule_context']['bound_links']
+        links[0]['href']='/category/zuegel-faq/'
+        links[1]['href']='/category/zuegel-beratung/'
+        links[2]['href']='/artikel/lenken/'
+        calls=[]
+        def categories(url):
+            calls.append(url)
+            slug=url.rsplit('=',1)[-1]
+            return [{'slug':slug,'count':2}]
+        report=verify_live_link_targets(p['rule_context'],'https://example.org',categories,lambda url:'<html><body>Artikel</body></html>')
+        self.assertEqual(report,{'status':'PASS','checked':3})
+        self.assertEqual(len(calls),2)
+
+    def test_live_target_missing_category_blocks_before_writer(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][1]['href']='/category/absent/'
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_CATEGORY_MISSING'):
+            verify_live_link_targets(p['rule_context'],'https://example.org',lambda url: [],lambda url:'<html></html>')
+
+    def test_live_target_empty_related_category_blocks_before_writer(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][1]['href']='/category/empty-beratung/'
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_CATEGORY_EMPTY'):
+            verify_live_link_targets(p['rule_context'],'https://example.org',lambda url:[{'slug':'empty-beratung','count':0}],lambda url:'<html></html>')
+
+    def test_existing_section_placement_rejects_detached_nav_links(self):
+        a=make_base()
+        link='<a data-link-role="semantic_related" href="/training/longieren/">Longieren</a>'
+        self.assertIn(link,a['html'])
+        a['html']=a['html'].replace(link,'Longieren',1)
+        section_end='</section><section data-block="checklist">'
+        self.assertIn(section_end,a['html'])
+        a['html']=a['html'].replace(section_end,'<nav class="ppm-related-nav">'+link+'</nav>'+section_end,1)
+        receipt={x['rule_id']:x for x in structural_receipts(a)}['links.section_placement']
+        self.assertEqual(receipt['status'],'FAIL')
+
+    def test_existing_section_placement_accepts_real_paragraph_links(self):
+        a=make_base()
+        receipt={x['rule_id']:x for x in structural_receipts(a)}['links.section_placement']
+        self.assertEqual(receipt['status'],'PASS')
 
 
 class K0FullRuleChainTests(unittest.TestCase):
