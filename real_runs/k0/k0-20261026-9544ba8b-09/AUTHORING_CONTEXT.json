@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longierpeitschen-faq",
+    "plan_slot": "a7c49f239d58cf613fa58de122a6d28ccf00b52eabd8aec4fe078fad2c031c5a",
+    "target_keyword": "Welche Longierpeitsche ist die beste",
+    "title": "Welche Longierpeitsche ist die beste?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Die richtige Peitsche zur Longenarbeit",
+          "source_url": "https://www.kraemer.de/ratgeber/peitschen-fuer-longenarbeit"
+        }
+      ],
+      "claims": [
+        "Bei der Longenarbeit soll die Peitsche zusammen mit ihrem Schlag die Hinterhand des Pferdes erreichen, ohne dass der Longenführer seine Position verlassen muss.",
+        "Für eine gute Handhabung sind Griff, Schwerpunkt und Gewicht der Longierpeitsche ebenso wichtig wie ihre Reichweite.",
+        "Die Longierpeitsche soll als verlängerter Arm dienen und im Sichtfeld des Pferdes geführt werden, nicht ununterbrochen schwingen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Longierpeitsche ist die beste",
+      "topic": "Welche Longierpeitsche ist die beste?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longierpeitschen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Longierpeitsche ist die beste?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Die richtige Peitsche zur Longenarbeit",
+        "source_url": "https://www.kraemer.de/ratgeber/peitschen-fuer-longenarbeit",
+        "statement": "Bei der Longenarbeit soll die Peitsche zusammen mit ihrem Schlag die Hinterhand des Pferdes erreichen, ohne dass der Longenführer seine Position verlassen muss.",
+        "evidence_text": "Bei der Longenarbeit soll die Peitsche zusammen mit ihrem Schlag die Hinterhand des Pferdes erreichen, ohne dass der Longenführer seine Position verlassen muss.",
+        "evidence_text_sha256": "d275825bcb5acfc4630b1db9842afc8d36ef11df2e7b78a2b77062a533a05f24",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Die richtige Peitsche zur Longenarbeit",
+        "source_url": "https://www.kraemer.de/ratgeber/peitschen-fuer-longenarbeit",
+        "statement": "Für eine gute Handhabung sind Griff, Schwerpunkt und Gewicht der Longierpeitsche ebenso wichtig wie ihre Reichweite.",
+        "evidence_text": "Für eine gute Handhabung sind Griff, Schwerpunkt und Gewicht der Longierpeitsche ebenso wichtig wie ihre Reichweite.",
+        "evidence_text_sha256": "40fe704388b364f1f40da488dc0a94c9a117be6a88d3caff2bd19eae4576a02c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Krämer – Die richtige Peitsche zur Longenarbeit",
+        "source_url": "https://www.kraemer.de/ratgeber/peitschen-fuer-longenarbeit",
+        "statement": "Die Longierpeitsche soll als verlängerter Arm dienen und im Sichtfeld des Pferdes geführt werden, nicht ununterbrochen schwingen.",
+        "evidence_text": "Die Longierpeitsche soll als verlängerter Arm dienen und im Sichtfeld des Pferdes geführt werden, nicht ununterbrochen schwingen.",
+        "evidence_text_sha256": "5c7850f40b0bae549d7585372bcf0f79302da58f2d216abe845994bdc3864a9f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/longierpeitschen-faq/",
+        "anchor": "FAQ zu longierpeitschen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longierpeitschen-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/longierpeitschen-anwendung/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/longierpeitschen-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/longierpeitschen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/longierpeitschen-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longierpeitschen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "longierpeitschen",
+      "Welche Longierpeitsche ist",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
