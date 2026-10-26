@@ -95,6 +95,7 @@ $_POST=[
         ],
     ],
 ];
+$_REQUEST=$_POST;
 
 register_shutdown_function(function() use ($secret){
     $stored=get_option(HDAR_WP_Ebay_Roundtrip::OPTION_NETWORK_EBAY,[]);
