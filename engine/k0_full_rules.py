@@ -74,6 +74,47 @@ def _validate_type_meta(meta,schema):
             if spec.get('unique_items') and len({str(x) for x in val})!=len(val):
                 raise Blocked('K0_RULE_CONTEXT_TYPE_META_DUPLICATE:'+name)
 
+def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
+    """Fail closed on missing targets and empty *related* category archives."""
+    import urllib.parse
+    import urllib.request
+    if not isinstance(base_url,str) or not base_url.startswith('https://'):
+        raise Blocked('K0_LINK_TARGET_SITE_INVALID')
+    if fetch_json is None:
+        def fetch_json(url):
+            with urllib.request.urlopen(url,timeout=15) as response:
+                return json.loads(response.read().decode('utf-8'))
+    if fetch_html is None:
+        def fetch_html(url):
+            with urllib.request.urlopen(url,timeout=15) as response:
+                return response.read().decode('utf-8')
+    for link in (ctx.get('bound_links') or []):
+        role=str(link.get('role') or '')
+        href=str(link.get('href') or '')
+        if not href.startswith('/') or href.startswith('//'):
+            raise Blocked('K0_LINK_TARGET_PATH_INVALID')
+        if href.startswith('/category/'):
+            slug=href.strip('/').split('/')[-1]
+            url=base_url.rstrip('/')+'/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
+            try:
+                rows=fetch_json(url)
+            except Exception as exc:
+                raise Blocked('K0_LINK_TARGET_CATEGORY_UNVERIFIED:'+slug) from exc
+            hits=[row for row in rows if isinstance(row,dict) and row.get('slug')==slug] if isinstance(rows,list) else []
+            if len(hits)!=1:
+                raise Blocked('K0_LINK_TARGET_CATEGORY_MISSING:'+slug)
+            if role!='parent_category' and int(hits[0].get('count') or 0)<1:
+                raise Blocked('K0_LINK_TARGET_CATEGORY_EMPTY:'+slug)
+        else:
+            try:
+                page=fetch_html(base_url.rstrip('/')+href)
+            except Exception as exc:
+                raise Blocked('K0_LINK_TARGET_PAGE_UNVERIFIED:'+href) from exc
+            if not isinstance(page,str) or '<html' not in page.lower():
+                raise Blocked('K0_LINK_TARGET_PAGE_INVALID:'+href)
+    return {'status':'PASS','checked':len(ctx.get('bound_links') or [])}
+
+
 def validate_rule_context(ctx,identity):
     if not isinstance(ctx,dict) or ctx.get('contract')!=RULE_CONTEXT_CONTRACT:
         raise Blocked('K0_RULE_CONTEXT_CONTRACT_INVALID')
@@ -122,6 +163,15 @@ def validate_rule_context(ctx,identity):
         anchor=str(x.get('anchor') or '')
         if not href.startswith('/') or href.startswith('//') or '://' in href or not block or not anchor:
             raise Blocked('K0_RULE_CONTEXT_LINK_INVALID')
+        # A link must say where it leads; an author-supplied registry cannot redeem filler text.
+        normalized=re.sub(r'\s+',' ',anchor.strip().casefold())
+        category_slug=href.rstrip('/').split('/')[-1].casefold()
+        category_words=category_slug.replace('-',' ').replace('_',' ')
+        category_topic=category_words.removesuffix(' faq').strip()
+        if (normalized in {'weitere informationen zum thema','weitere informationen','vertiefende hinweise','mehr dazu','hier klicken'}
+                or normalized==category_topic+' – faq'
+                or normalized=='faq zu '+category_topic):
+            raise Blocked('K0_RULE_CONTEXT_LINK_ANCHOR_UNINFORMATIVE:'+str(x.get('role') or ''))
         blocks.append(block)
     if len(set(blocks))!=len(blocks):
         raise Blocked('K0_RULE_CONTEXT_LINK_BLOCKS_NOT_DISTINCT')
@@ -137,7 +187,7 @@ def validate_rule_context(ctx,identity):
     if not isinstance(registry,list):
         raise Blocked('K0_RULE_CONTEXT_LINK_REGISTRY_MISSING')
     reg={str(x.get('href') or ''):x for x in registry if isinstance(x,dict)}
-    if any(str(x.get('href') or '') not in reg or reg[str(x.get('href') or '')].get('active') is False for x in links):
+    if any(str(x.get('href') or '') not in reg or reg[str(x.get('href') or '')].get('active') is not True for x in links):
         raise Blocked('K0_RULE_CONTEXT_LINK_REGISTRY_INACTIVE')
     runtime_roles=set(ctx.get('runtime_link_roles') or [])
     if runtime_roles!=roles:

@@ -183,6 +183,18 @@ def structural_receipts(article):
     registry={str(x.get('href') or ''):x for x in article.get('link_registry') or []}
     registry_ok=bool(links) and all(x['href'] in registry and registry[x['href']].get('active',True) for x in links)
     placement_ok=bool(bound) and all(any(y['role']==x.get('role') and y['href']==x.get('href') and y['block']==x.get('block') for y in links) for x in bound)
+    # Existing placement rule must require real flowing paragraphs, not detached <nav> anchors.
+    paragraph_links=[]
+    for section in sections:
+        for paragraph in re.findall(r'(?is)<p\b[^>]*>.*?</p>',section['body']):
+            without_links=re.sub(r'(?is)<a\b[^>]*>.*?</a>',' ',paragraph)
+            if len(_words(without_links)) < 5:
+                continue
+            for m in re.finditer(r'(?is)<a\b([^>]*)>(.*?)</a>',paragraph):
+                attrs=_attrs('<a '+m.group(1)+'>')
+                paragraph_links.append((section['block'],attrs.get('data-link-role',''),attrs.get('href',''),_plain(m.group(2))))
+    inline_ok=(Counter(paragraph_links)==Counter((x['block'],x['role'],x['href'],x['anchor']) for x in links))
+    placement_ok=placement_ok and inline_ok
     relative_ok=all(x['href'].startswith('/') and not x['href'].startswith('//') and '://' not in x['href'] for x in links)
     further_ok=sum(1 for x in links if x['role']=='further_information' and x['block']=='further_information')==1
     distributed_ok=(len(links)==len({x['block'] for x in links})) if links else False
@@ -217,7 +229,7 @@ def structural_receipts(article):
       ('structure.text_between_headings_minimum',not between_bad,{'bad':between_bad}),
       ('structure.html_balanced',_html_balanced(html),{}),
       ('links.bound_pairs_exact',bound_ok,{'actual':sorted(actual_pairs),'expected':sorted(expected_pairs)}),
-      ('links.registry_active',registry_ok,{}),('links.section_placement',placement_ok,{}),
+      ('links.registry_active',registry_ok,{}),('links.section_placement',placement_ok,{'inline_paragraph_only':inline_ok}),
       ('links.relative_internal_only',relative_ok,{}),('links.further_information_position',further_ok,{}),
       ('links.distributed_across_blocks',distributed_ok,{}),('links.runtime_roles_bound',runtime_ok,{}),
       ('links.not_clustered_at_end',clustered_ok,{}),('wordpress.semantic_category_binding',category_ok,category),

@@ -52,6 +52,24 @@ jobs:
           print('K0_AUTHORING_PORTAL_PASS')
           PY
 
+      - name: Check real Pferdeatelier link targets before creating writer job
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os
+          from engine.k0_full_rules import verify_live_link_targets
+          portal=json.load(open('/tmp/k0-portal.json'))
+          pid=portal['items'][0]['portal_id']
+          if pid=='pferdeatelier':
+              ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
+              result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de')
+              assert result['status']=='PASS' and result['checked']==3,result
+              print('K0_LIVE_LINK_TARGETS_PASS')
+          else:
+              print('K0_LIVE_LINK_TARGETS_NOT_PFERDEATELIER')
+          PY
+
       - name: Bind unique run instance and prepare canonical writer job
         shell: bash
         run: |
