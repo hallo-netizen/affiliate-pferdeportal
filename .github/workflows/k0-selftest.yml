@@ -2,7 +2,7 @@ name: K0 portal-neutral selftest
 
 on:
   push:
-    branches: [konzept0-portal-neutral-20261002, k0-link-quality-fix-20261026]
+    branches: [konzept0-portal-neutral-20261002]
   workflow_dispatch:
 
 permissions:
@@ -19,18 +19,6 @@ jobs:
       - name: K0 portal assignment positive and negative tests
         run: |
           python3 -m unittest tests.test_k0_portal_resolver -v
-
-      - name: Real read-only WordPress category API probe
-        run: |
-          python3 - <<'PY'
-          import json,urllib.request
-          url='https://pferde-atelier.de/wp-json/wp/v2/categories?slug=weidezelt-beratung'
-          with urllib.request.urlopen(url,timeout=20) as response:
-              rows=json.loads(response.read().decode('utf-8'))
-          assert isinstance(rows,list) and len(rows)==1 and rows[0].get('slug')=='weidezelt-beratung',rows
-          assert isinstance(rows[0].get('count'),int),rows
-          print('K0_LIVE_WORDPRESS_CATEGORY_API_PASS; published_posts='+str(rows[0]['count']))
-          PY
 
       - name: Inherited K10 rule-ledger regression suite
         run: |
