@@ -159,7 +159,7 @@ trait PPAR_Ebay_Trait {
      */
     private $ebay_public_source_row_cache = array();
 
-    /** V4.2.0 – vollständiger, fest mitgelieferter Pferde-Atelier-Zielkatalog. */
+    /** V4.2.0 – dynamischer Hobby-Depot-Zielvertrag aus HD-004. */
 
     private function ebay_portal_catalog() {
         static $catalog = null;
@@ -344,7 +344,7 @@ trait PPAR_Ebay_Trait {
         $token = $this->ebay_topic_text($token);
         if (strlen($token) < 6) { return $token; }
         foreach (array('ern','em','en','er','es','e','n','s') as $suffix) {
-            // A final s is lexical in common German horse-product nouns such as
+            // A final s is lexical in common German product nouns such as
             // "Gebiss". Stripping one of the double-s characters would make
             // singular "Gebiss" and plural "Gebisse" look unrelated.
             if ($suffix === 's' && substr($token, -2) === 'ss') { continue; }
@@ -430,7 +430,7 @@ trait PPAR_Ebay_Trait {
      */
 
     /**
-     * Central product-form safety. A horse/reitsport reference must never turn a
+     * Central product-form safety. A context reference must never turn a
      * souvenir/decorative object into an admissible portal product. The blocked
      * forms live in the catalog and therefore apply identically to PRIVATE,
      * BUSINESS, maintenance and both public delivery gates.
@@ -478,7 +478,7 @@ trait PPAR_Ebay_Trait {
      * V5.26 – providernahe Hard-Safety gegen Spielzeug/Modellware.
      * Diese Sperre liegt absichtlich VOR der fachlichen Zielklassifikation und
      * gilt identisch fuer INDIVIDUAL und BUSINESS. Damit kann ein Titel wie
-     * "Playmobil Pferd mit Sattel" nicht allein wegen Pferd/Sattel durchrutschen.
+     * fachfremde Referenzen nicht allein wegen eines Kontextworts durchrutschen.
      * Generische Woerter wie "Figur" werden nicht alleine gesperrt; ausschlaggebend
      * sind eindeutige Marken, Produktphrasen oder reale eBay-Spielzeugkategorien.
      */
@@ -568,7 +568,7 @@ trait PPAR_Ebay_Trait {
         $id = absint($row['id'] ?? 0);
         if ($id <= 0) { return false; }
         $reason = sanitize_text_field((string) $reason);
-        if ($reason === '') { $reason = 'Spielzeug-/Modellware ist im Pferde-Atelier nicht freigegeben.'; }
+        if ($reason === '') { $reason = 'Vom Hobby-Depot-Produktfilter ausgeschlossen.'; }
         global $wpdb;
         $quarantine_update = array(
             'status'=>'blocked_content','source_state'=>'available','policy_state'=>'blocked','route_state'=>'blocked','output_state'=>'blocked',
@@ -752,7 +752,7 @@ trait PPAR_Ebay_Trait {
 
     /**
      * German eBay categories often carry the product family as a compound
-     * (e.g. "Pferdedecken", "Sattelzubehör"). For corroboration only, a
+     * (e.g. German compound product nouns). For corroboration only, a
      * sufficiently long hub token may therefore occur at the beginning/end of
      * a category/aspect token. This is never used as the primary product match.
      */
@@ -770,11 +770,11 @@ trait PPAR_Ebay_Trait {
 
     /**
      * Hub-Fallback fuer konkrete Produktfamilien, die im Portal selbst auf Ebene 2
-     * routbar sind (z.B. ein normaler Sattel), aber keinen eigenen Leaf-Eintrag
+     * routbar sind (z.B. eine allgemeine Produktfamilie), aber keinen eigenen Leaf-Eintrag
      * besitzen. Der Titel muss den Hub als eigenes Wort oder als deutsches
      * Produktkompositum mit Hub-Suffix tragen; Kategorie/Aspekte muessen denselben
      * Fachbegriff unabhaengig bestaetigen. Reine Praefix-Nennungen wie
-     * "Sattelgurt" gelten deshalb NICHT als "Sattel".
+     * Ein zusammengesetzter Begriff gilt nicht automatisch als sein Oberbegriff.
      */
     private function ebay_business_hub_title_token_present($text, $needle) {
         if ($this->ebay_business_strict_token_present($text, $needle)) { return true; }
@@ -789,7 +789,7 @@ trait PPAR_Ebay_Trait {
     }
 
     /**
-     * Eindeutige Reitsport-Produktbegriffe tragen den Fachkontext selbst.
+     * Eindeutige Produktbegriffe tragen ihren Kontext selbst.
      * Ausschliesslich strikter Token-/Stammvergleich in Primaertitel, eBay-Kategorie
      * oder Aspekten. Relationelle Referenzen im Titel zaehlen nicht als Produkttyp.
      */
@@ -816,8 +816,8 @@ trait PPAR_Ebay_Trait {
             if (!$tokens) { continue; }
 
             // Explizite Hub-Aliase sind der kontrollierte Fallback fuer reale
-            // Produktfamilien ohne eigenen Leaf (z.B. Reithose -> Reiterbedarf).
-            // Nur der Primaertitel darf den Alias tragen. "Tasche fuer Reithelm"
+            // Produktfamilien ohne eigenen Leaf für kontrollierte Produktfamilien.
+            // Nur der Primaertitel darf den Alias tragen. eine reine Zubehörreferenz
             // oder andere relationale Referenzen koennen dadurch nie gewinnen.
             $alias_hits = array();
             foreach ((array) ($concept['aliases'] ?? array()) as $alias) {
@@ -884,8 +884,8 @@ trait PPAR_Ebay_Trait {
 
     /**
      * Primaerer Produkttitel vor relationalen Zubehoer-/Kompatibilitaetsphrasen.
-     * Damit ist z.B. "Reithandschuhe Damen Leder" ein belastbarer direkter
-     * Produkttreffer, waehrend "Helmtasche fuer Reithelm" den Reithelm nur als
+     * Damit ist z.B. ein konkreter Produkttitel ein belastbarer direkter
+     * Produkttreffer, waehrend eine reine Zubehörreferenz den Reithelm nur als
      * Bezugsobjekt nennt. Der komplette Titel bleibt fuer Corroboration und
      * Mehrdeutigkeitspruefung erhalten; diese Zone wird nur fuer die direkte
      * Ein-Wort-Leaf-Freigabe verwendet.
@@ -978,7 +978,7 @@ trait PPAR_Ebay_Trait {
         foreach (array('tasche','huelle','hulle','cover','liner','innenfutter','ersatz','adapter','halterung','visier','ueberzug','uberzug','zubehoer','zubehor','accessory') as $accessory) {
             if ($this->ebay_business_strict_token_present($primary, $accessory)) { $accessory_primary = true; break; }
             // German marketplace titles frequently glue an accessory noun to the
-            // referenced product (Helmtasche, Satteltasche, Deckenhalterung).
+            // referenced product in an accessory title.
             // Exact-profile evidence must not turn that relation into the product.
             $accessory = $this->ebay_topic_text($accessory);
             if ($accessory === '' || strlen($accessory) < 4) { continue; }
@@ -996,7 +996,7 @@ trait PPAR_Ebay_Trait {
             $ok = true;
         } elseif (!$accessory_primary && $product_type_hits >= $required) {
             // Exact eBay Productart is a direct structured product identity. The
-            // profile's Pferd scope is checked separately by the caller, and hard
+            // profile's exact Hobby Depot scope is checked separately by the caller, and hard
             // negatives/accessory-primary titles are evaluated before this can
             // authorize a BUSINESS route.
             $ok = true;
@@ -1826,25 +1826,9 @@ trait PPAR_Ebay_Trait {
         $enabled_route_sql = !empty($settings['private_enabled']) && !empty($settings['business_enabled'])
             ? "seller_account_type IN ('INDIVIDUAL','BUSINESS')"
             : (!empty($settings['private_enabled']) ? "seller_account_type='INDIVIDUAL'" : "seller_account_type='BUSINESS'");
-        // Contract changes are background-only and time-bounded, but new strict
-        // equestrian product families and newly blocked media must be recovered
-        // promptly even when their row IDs are high. Pull a tiny priority prepass
-        // independently of the cursor, then continue the ordinary monotonic scan.
+        // Hobby Depot has no source-domain title priority list. Contract changes
+        // use the ordinary bounded monotonic maintenance scan.
         $priority_rows=array();
-        $priority_catalog=$this->ebay_portal_catalog();
-        $priority_contract_enabled=!is_wp_error($priority_catalog)
-            && (string)($priority_catalog['content_policy']['version']??'')===self::EBAY_CONTENT_POLICY_VERSION
-            && version_compare((string)self::EBAY_CONTENT_POLICY_VERSION,'5.0','>=');
-        if($contract_changed && $priority_contract_enabled){
-            $priority_limit=min(50,$limit);
-            $priority_stale_sql="COALESCE(policy_version,'')<>%s";
-            $priority_args=array(self::EBAY_CONTENT_POLICY_VERSION);
-            if(!empty($settings['business_enabled'])){$priority_stale_sql.=" OR (seller_account_type='BUSINESS' AND COALESCE(classifier_version,'')<>%s)";$priority_args[]=self::EBAY_BUSINESS_CLASSIFIER_VERSION;}
-            $priority_sql_template="SELECT * FROM {$table} WHERE {$enabled_route_sql} AND COALESCE(source_state,'available')<>'ended' AND (".$priority_stale_sql.") AND (LOWER(title) LIKE '%%reithelm%%' OR LOWER(title) LIKE '%%reithose%%' OR LOWER(title) LIKE '%%reithandsch%%' OR LOWER(title) LIKE '%%reitstief%%' OR LOWER(title) LIKE '%%reitschuh%%' OR LOWER(title) LIKE '%%reitweste%%' OR LOWER(title) LIKE '%%reitjacke%%' OR LOWER(title) LIKE '%%kinderbuch%%' OR LOWER(title) LIKE '%%pferdebuch%%' OR LOWER(title) LIKE '%%ponybuch%%' OR LOWER(title) LIKE '%%bilderbuch%%' OR LOWER(title) LIKE '%%malbuch%%' OR LOWER(title) LIKE '%%stickerbuch%%' OR LOWER(source_payload) LIKE '%%categoryname%%buech%%' OR LOWER(source_payload) LIKE '%%categoryname%%büch%%') ORDER BY id ASC LIMIT %d";
-            $priority_args[]=$priority_limit;
-            $priority_sql=call_user_func_array(array($wpdb,'prepare'),array_merge(array($priority_sql_template),$priority_args));
-            $priority_rows=(array)$wpdb->get_results($priority_sql,ARRAY_A);
-        }
         $priority_ids=array_values(array_filter(array_map(static function($r){return is_array($r)?absint($r['id']??0):0;},$priority_rows)));
         $remaining=max(0,$limit-count($priority_rows));
         $rows=array_values($priority_rows);
@@ -2072,7 +2056,7 @@ trait PPAR_Ebay_Trait {
 
     /**
      * Build one conservative eBay search phrase for a verified portal product
-     * concept. Generic product labels receive an explicit Pferd qualifier so
+     * concept. Generic product labels use the exact Hobby Depot concept so
      * broad marketplace meanings do not dominate the first result page.
      */
 
@@ -2730,20 +2714,12 @@ trait PPAR_Ebay_Trait {
     }
 
     private function ebay_business_wrong_product_head_tokens() {
-        $catalog = $this->ebay_portal_catalog();
-        if (!is_wp_error($catalog)) {
-            $policy = is_array($catalog['content_policy'] ?? null) ? $catalog['content_policy'] : array();
-            $terms = array_values(array_unique(array_filter(array_map(array($this, 'ebay_topic_text'), (array)($policy['blocked_primary_product_terms'] ?? array())))));
-            if ($terms) { return $terms; }
-        }
-        // Fail-safe only if the catalog cannot be loaded; normal operation uses
-        // one catalog-driven policy source for both seller routes.
-        return array(
-            'aufkleber','sticker','spardose','sparschwein','poster','plakat','tasse','becher','figur','figurine','deko','dekoration',
-            'kalender','postkarte','patch','aufnaeher','aufnaher','schluesselanhaenger','schlusselanhanger','keychain','kostuem','kostum',
-            'handyhulle','handyhuelle','miniatur','modellauto','modellpferd','brosche'
-        );
+        // Hobby Depot spans many hobby domains, including collecting, modelling
+        // and decorative crafts. No portal-wide product-form blacklist belongs here.
+        // Provider-independent exclusions can be supplied through the central filter.
+        return array();
     }
+
 
     private function ebay_business_title_head_token($title) {
         $normalized_title = $this->ebay_topic_text((string) $title);
@@ -2763,7 +2739,7 @@ trait PPAR_Ebay_Trait {
         foreach ($this->ebay_topic_tokens($primary) as $token) {
             $token = sanitize_key($this->ebay_topic_text((string) $token));
             if ($token === '' || strlen($token) < 4) { continue; }
-            if (in_array($token, array('neu','new','original','premium','profi','xxl','xl','set','paar','damen','herren','kinder','horse','pferd','pferde','alter','alte','altes','antik','antike','vintage'), true)) { continue; }
+            if (in_array($token, array('neu','new','original','premium','profi','xxl','xl','set','paar','damen','herren','kinder','alter','alte','altes','antik','antike','vintage'), true)) { continue; }
             return $token;
         }
         return '';
@@ -2799,91 +2775,46 @@ trait PPAR_Ebay_Trait {
      * Harte Produktart-Vorauswahl. Ein Bezugswort im Titel darf nicht genügen:
      * Spardose/Aufkleber/Poster etc. werden vor dem Ranking blockiert.
      */
+
     private function ebay_business_relevance_report($item, $classification, $rule) {
         $catalog = $this->ebay_portal_catalog();
         if (is_wp_error($catalog)) { return $catalog; }
-        $concept_id = sanitize_key((string) ($classification['product_concept_id'] ?? ''));
+
+        $concept_id = sanitize_key((string)($classification['product_concept_id'] ?? ''));
+        if ($concept_id === '') {
+            return new WP_Error('ebay_business_quality_concept_missing', 'Hobbykonzept für Qualitätsprüfung fehlt.');
+        }
+
         $concept = array();
-        foreach (array('business_concepts','business_hub_concepts') as $field) {
-            foreach ((array) ($catalog[$field] ?? array()) as $candidate) {
-                if (is_array($candidate) && sanitize_key((string) ($candidate['id'] ?? '')) === $concept_id) { $concept = $candidate; break 2; }
+        foreach ((array)($catalog['business_concepts'] ?? array()) as $candidate) {
+            if (is_array($candidate) && sanitize_key((string)($candidate['id'] ?? '')) === $concept_id) {
+                $concept = $candidate;
+                break;
             }
         }
-        if (!$concept) { return new WP_Error('ebay_business_quality_concept_missing', 'Produktkonzept für Qualitätsprüfung fehlt.'); }
+        if (!$concept) {
+            return new WP_Error('ebay_business_quality_concept_missing', 'Hobbykonzept für Qualitätsprüfung fehlt.');
+        }
+
         $sections = $this->ebay_business_evidence_sections($item);
-        if ($concept_id === 'concept-reitstiefel') {
-            $primary_boot = $this->ebay_business_primary_title_section((string)($sections['title'] ?? ''));
-            $structured_boot = $this->ebay_topic_text(trim((string)($sections['category'] ?? '') . ' ' . (string)($sections['product_type'] ?? '') . ' ' . (string)($sections['aspects'] ?? '')));
-            $blocked_boot_heads = array('socke','socken','strumpf','struempfe','stiefeltasche','tasche','beutel','pflege','pflegemittel','pflegeset','schuhpflege','stiefelpflege','ersatzteil','zubehoer','accessory','miniatur','modell','spielzeug','figur','anhaenger','schluesselanhaenger');
-            foreach ($blocked_boot_heads as $blocked_boot) {
-                if ($this->ebay_business_strict_token_present($primary_boot, $blocked_boot)) {
-                    return new WP_Error('ebay_business_reitstiefel_wrong_product', 'Reitstiefel-Sentinel: Titel beschreibt Zubehör/Pflege/Socken/Modell statt eines tragbaren Reitstiefels.');
-                }
-            }
-            foreach (array('tasche','bag','socke','socks','pflege','care','accessory','zubehoer','toy','spielzeug','figur','miniatur','modell') as $blocked_structured) {
-                if ($this->ebay_business_strict_token_present($structured_boot, $blocked_structured)
-                    && !$this->ebay_business_strict_token_present($structured_boot, 'reitstiefel')
-                    && !$this->ebay_business_strict_token_present($structured_boot, 'riding boot')) {
-                    return new WP_Error('ebay_business_reitstiefel_wrong_product', 'Reitstiefel-Sentinel: eBay-Produktart bestätigt kein tragbares Reitstiefel-Produkt.');
-                }
-            }
-            $direct_boot = false;
-            foreach (array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel','riding boot','equestrian boot') as $boot_term) {
-                if ($this->ebay_business_strict_token_present($primary_boot, $boot_term)
-                    || $this->ebay_business_strict_token_present($structured_boot, $boot_term)) { $direct_boot = true; break; }
-            }
-            if (!$direct_boot) {
-                return new WP_Error('ebay_business_reitstiefel_identity_unconfirmed', 'Reitstiefel-Sentinel: reale Angebotsdaten bestätigen die Produktidentität Reitstiefel nicht.');
-            }
+        $verified = $this->ebay_business_expected_concept_evidence($concept, $sections);
+        if (empty($verified['ok'])) {
+            return new WP_Error('ebay_business_relevance_unconfirmed', 'Reale eBay-Angebotsdaten bestätigen den erwarteten Hobbybezug nicht.');
         }
-        $full_title = $this->ebay_topic_text((string) ($sections['title'] ?? ''));
-        $full_title_tokens = preg_split('/\s+/', $full_title);
-        $first_title_token = sanitize_key((string) ($full_title_tokens[0] ?? ''));
-        $primary = $this->ebay_business_primary_title_section((string) ($sections['title'] ?? ''));
-        $blocked_heads = $this->ebay_business_wrong_product_head_tokens();
-        foreach ($blocked_heads as $blocked) {
-            if (($first_title_token !== '' && $this->ebay_business_strict_token_present($first_title_token, $blocked))
-                || $this->ebay_business_strict_token_present($primary, $blocked)) {
-                return new WP_Error('ebay_business_wrong_product_head', 'Titel beschreibt primär „' . sanitize_text_field($blocked) . '“ statt des erwarteten Produkts.');
-            }
-        }
-        $concept_primary = $this->ebay_business_primary_title_section((string) ($concept['title'] ?? ''));
-        $tokens = $this->ebay_business_distinctive_tokens($concept_primary !== '' ? $concept_primary : (string) ($concept['title'] ?? ''));
-        if (!$tokens) { return new WP_Error('ebay_business_quality_tokens_missing', 'Produktkonzept besitzt keine belastbaren Produkttokens.'); }
-        $title_tokens = $this->ebay_topic_tokens($primary);
-        $first_tokens = array_slice(array_values($title_tokens), 0, 4);
-        $first_text = implode(' ', $first_tokens);
-        $head_hits = 0; $structured_hits = 0; $all_title_hits = 0;
-        foreach ($tokens as $token) {
-            if ($this->ebay_business_strict_token_present($first_text, $token)) { $head_hits++; }
-            if ($this->ebay_business_strict_token_present($sections['title'], $token)) { $all_title_hits++; }
-            if ($this->ebay_business_strict_token_present($sections['category'], $token)
-                || $this->ebay_business_strict_token_present($sections['aspects'], $token)
-                || $this->ebay_business_strict_token_present($sections['product_type'], $token)) { $structured_hits++; }
-        }
-        // One distinctive product token in the title head is sufficient after
-        // the strict concept classifier has already passed. Structured eBay facts
-        // are the independent corroboration when the concept is mentioned only
-        // later in a marketing/reference title. This stays broad enough for real
-        // brand/model titles while blocking Spardose/Aufkleber-style false matches.
-        $required = 1;
-        if ($all_title_hits < 1 && $structured_hits < 1) {
-            return new WP_Error('ebay_business_relevance_unconfirmed', 'Produktart wird weder im Titel noch in eBay-Kategorie/Produktmerkmalen bestätigt.');
-        }
-        if ($head_hits < 1 && $structured_hits < 1) {
-            return new WP_Error('ebay_business_reference_only_match', 'Produktbegriff erscheint nur als spätere Referenz; eBay-Kategorie/Produktmerkmale bestätigen die Produktart nicht.');
-        }
-        $classification_score = max(0, min(100, absint($classification['score'] ?? 0)));
-        $relevance = $classification_score;
-        if ($structured_hits >= $required) { $relevance += 6; }
-        if ($head_hits >= $required) { $relevance += 5; }
-        if ($head_hits >= 1 && $structured_hits >= 1) { $relevance += 4; }
+
+        $direct = absint($verified['primary_hits'] ?? 0) + absint($verified['product_type_hits'] ?? 0);
+        $structured = absint($verified['aspect_hits'] ?? 0) + absint($verified['category_hits'] ?? 0);
+        $score = 78 + min(14, $direct * 7) + min(8, $structured * 4);
+
         return array(
-            'score'=>max(0, min(100, $relevance)),
-            'head_hits'=>$head_hits,'structured_hits'=>$structured_hits,'title_hits'=>$all_title_hits,'required'=>$required,
+            'score'=>min(100, $score),
+            'direct_hits'=>$direct,
+            'structured_hits'=>$structured,
+            'required'=>absint($verified['required'] ?? 1),
             'concept_id'=>$concept_id,
         );
     }
+
 
     private function ebay_business_seller_quality_score($item, $settings) {
         $pct = (float) ($item['seller_feedback_percentage'] ?? -1);
@@ -6048,8 +5979,8 @@ trait PPAR_Ebay_Trait {
 
     private function ebay_manual_classification($term, $item, $reason = '') {
         $term_id = absint(is_object($term) ? ($term->term_id ?? 0) : 0);
-        $slug = sanitize_title(is_object($term) ? (string) ($term->slug ?? '') : '');
-        $label = sanitize_text_field(is_object($term) ? (string) ($term->name ?? '') : '');
+        $slug = sanitize_title(is_object($term) ? (string)($term->slug ?? '') : '');
+        $label = sanitize_text_field(is_object($term) ? (string)($term->name ?? '') : '');
         return array(
             'status'=>'ready',
             'score'=>100,
@@ -6059,14 +5990,14 @@ trait PPAR_Ebay_Trait {
             'main_hub'=>'Anzeigenmarkt',
             'path'=>'Private Anzeigen > ' . $label,
             'private_bucket_slug'=>$slug,
-            'horse_hits'=>array(),
-            'strong_horse_hits'=>array(),
+            'domain_hits'=>array(),
             'hits'=>array(),
-            'evidence_hash'=>hash('sha256', (string) ($item['source_hash'] ?? '') . '|manual|' . $term_id),
+            'evidence_hash'=>hash('sha256', (string)($item['source_hash'] ?? '') . '|manual|' . $term_id),
             'manual_override'=>true,
-            'manual_reason'=>sanitize_text_field((string) $reason),
+            'manual_reason'=>sanitize_text_field((string)$reason),
         );
     }
+
 
     private function ebay_store_review_candidate($item, $rule, $seller_type, $error, $settings) {
         $item = is_array($item) ? $item : array();
@@ -6487,16 +6418,7 @@ trait PPAR_Ebay_Trait {
             foreach ($this->ebay_private_query_variants($rule) as $query_index => $query_text) {
                 $profile_rule = $rule;
                 $profile_rule['query'] = $query_text;
-                // V6.27: Reitstiefel variants are constrained to eBay DE's
-                // dedicated riding-boots category. This prevents generic boot
-                // noise while still allowing several independent PRIVATE pools.
-                $qid = sanitize_key((string)($rule['id'] ?? ''));
-                $qnorm = $this->ebay_topic_text($query_text);
-                if ($qid === 'reitbekleidung-zubehoer' && in_array($qnorm, array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel'), true)) {
-                    $profile_rule['category_ids'] = array('183382');
-                }
-                $key = sanitize_key((string)($rule['id'] ?? '')) . '|INDIVIDUAL|q' . ($query_index + 1);
-                $boot_profile = $qid === 'reitbekleidung-zubehoer' && in_array($qnorm, array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel'), true);
+                $boot_profile = false;
                 $profiles[$key] = array(
                     'key'=>$key,'rule'=>$profile_rule,'seller_type'=>'INDIVIDUAL','next'=>'','active'=>true,'pages'=>0,
                     'page_limit'=>$boot_profile ? 3 : 1,'route_limit'=>0,'profile_kind'=>'private_variant',
@@ -9260,7 +9182,7 @@ trait PPAR_Ebay_Trait {
                         if (!is_wp_error($classification)) { $accepted = array('item'=>$candidate,'classification'=>$classification,'rule'=>$rule); break 2; }
                     }
                 }
-                if (!$accepted) { $result = new WP_Error('ebay_no_accepted_item', 'Für ' . $seller_type . ' wurde in den automatischen Pferde-Atelier-Abrufprofilen kein fachlich eindeutig freigegebenes Angebot gefunden.'); break; }
+                if (!$accepted) { $result = new WP_Error('ebay_no_accepted_item', 'Für ' . $seller_type . ' wurde in den automatischen Hobby-Depot-Abrufprofilen kein fachlich eindeutig freigegebenes Angebot gefunden.'); break; }
                 $result[strtolower($seller_type)] = 'pass';
             }
         }
@@ -9422,48 +9344,6 @@ trait PPAR_Ebay_Trait {
      * existed. This live-facing invariant inspects the durable source table and
      * the actually published HivePress listings instead.
      */
-    private function ebay_private_reitstiefel_supply_snapshot($settings = null) {
-        $settings = is_array($settings) ? $this->ebay_normalize_settings($settings, true) : $this->ebay_settings();
-        $out = array('eligible'=>0,'published'=>0,'selected'=>0,'source_item_ids'=>array(),'published_item_ids'=>array());
-        global $wpdb;
-        if (!is_object($wpdb) || !method_exists($wpdb,'get_results')) { return $out; }
-        $table = $this->ebay_items_table();
-        $rows = (array)$wpdb->get_results(
-            "SELECT * FROM {$table} WHERE seller_account_type='INDIVIDUAL' AND source_state='available' AND policy_state='allowed' AND route_state='ready' AND target_term_id>0 ORDER BY last_seen DESC,id DESC LIMIT 5000",
-            ARRAY_A
-        );
-        foreach ($rows as $row) {
-            if (!is_array($row) || !$this->ebay_private_capacity_row_publishable($row,$settings)) { continue; }
-            if ($this->ebay_private_capacity_concept_key($row,$settings) !== 'concept-reitstiefel') { continue; }
-            $item_id = (string)($row['item_id'] ?? '');
-            if ($item_id === '') { continue; }
-            $out['eligible']++;
-            $out['source_item_ids'][$item_id] = 1;
-            $listing_id = absint($row['listing_post_id'] ?? 0);
-            if ($listing_id > 0 && function_exists('get_post_status') && function_exists('get_post_meta')
-                && get_post_status($listing_id) === 'publish'
-                && (string)get_post_meta($listing_id,'_ppar_ebay_item_id',true) === $item_id) {
-                $out['published']++;
-                $out['published_item_ids'][$item_id] = $listing_id;
-            }
-        }
-        $selection = $this->ebay_selection_state_load();
-        foreach ((array)($selection['private_active'] ?? array()) as $item_id=>$flag) {
-            if (isset($out['source_item_ids'][(string)$item_id])) { $out['selected']++; }
-        }
-        $out['source_item_ids'] = array_keys($out['source_item_ids']);
-        $out['published_item_ids'] = array_keys($out['published_item_ids']);
-        return $out;
-    }
-
-    private function ebay_private_reitstiefel_supply_target() { return 3; }
-
-    /** V6.31: supersede incompatible open recovery jobs from older builds.
-     * A plugin update must never remain blocked behind a queued/running state
-     * whose worker code and lock namespace belong to a previous runtime.
-     * Manual/current-build discovery remains untouched.
-     */
-/** Read-only hard-cap drift check. A plugin update itself is never drift. */
     private function ebay_private_public_owned_count() {
         global $wpdb;
         if (!is_object($wpdb) || !isset($wpdb->posts) || !isset($wpdb->postmeta) || !method_exists($wpdb, 'get_var')) { return null; }
@@ -9520,7 +9400,7 @@ trait PPAR_Ebay_Trait {
         $pump_running = false;
         $business_local_state=$this->ebay_business_local_recovery_state_load();
         // Page-performance invariant: normal rendering reads only bounded status
-        // options. Do not rescan thousands of source rows (the old Reitstiefel
+        // options. Do not rescan thousands of source rows (the old source-portal
         // live snapshot alone read up to 5,000 rows on every page view).
         $media_cleanup = get_option(self::OPTION_EBAY_MEDIA_CLEANUP_STATE, array());
         $media_cleanup = is_array($media_cleanup) ? $media_cleanup : array();
@@ -9531,10 +9411,10 @@ trait PPAR_Ebay_Trait {
             <h1>eBay</h1>
             <p><strong>Runtime:</strong> <code><?php echo esc_html(self::VERSION); ?></code> · Build <code><?php echo esc_html(self::EBAY_RUNTIME_BUILD); ?></code></p>
             <p><strong>Provider-Seite: Status und Steuerung.</strong> Der Seitenaufruf führt keine BUSINESS-/PRIVATE-Fachlogik aus. Der Gesamtlauf wird ausschließlich paketweise über den Heartbeat fortgesetzt; Browser und WordPress-Cron sind dafür nicht erforderlich.</p>
-            <p><strong>Automatischer Heartbeat:</strong> Für Pferde Atelier wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
+            <p><strong>Automatischer Heartbeat:</strong> Für Hobby Depot wird der vorhandene Worker-Transport als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
             <p><strong>Hintergrundarbeit:</strong> <?php echo $worker_last_tick_at ? 'letzter Block '.esc_html(wp_date('d.m.Y H:i:s',$worker_last_tick_at)) : 'noch nicht gestartet'; ?> · technische Pakete <?php echo absint($worker_tick_count); ?> · übersprungene Einzelfehler <?php echo absint($canonical_run['skipped_item_errors_count'] ?? 0); ?>. <strong>Browser kann geschlossen werden.</strong></p>
             <p><strong>Provider-Fachseite.</strong> Zugangsdaten und OAuth-Test liegen zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. <?php echo $this->provider_control_badge('ebay'); ?> <a class="button button-small" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></p>
-            <p><strong>Eingangsweiche:</strong> INDIVIDUAL → fachliche HivePress-Unterkategorien direkt unter „Private Anzeigen“ · BUSINESS → Werbemittelbibliothek und ausschließlich providerreine Produktzonen.</p>
+            <p><strong>Hobby-Depot-Betrieb:</strong> BUSINESS → Werbemittelbibliothek und Produktzonen. INDIVIDUAL/Private Anzeigen bleiben bis zu einem eigenen Hobby-Depot-Vertrag deaktiviert.</p>
             <p><strong>eBay-Bilder:</strong> PRIVATE-Angebote werden ab V6.12 ausschließlich über die verifizierte eBay-Bild-URL dargestellt; es werden keine neuen eBay-PRIVATE-Bilder in die WordPress-Mediathek kopiert. <strong>Legacy-Bereinigung:</strong> <?php echo esc_html((string)($media_cleanup['status'] ?? 'wartet')); ?> · gelöscht <?php echo absint($media_cleanup['deleted'] ?? 0); ?> · übersprungen <?php echo absint($media_cleanup['skipped'] ?? 0); ?> · Fehler <?php echo absint($media_cleanup['failed'] ?? 0); ?>.</p>
             <?php if ($notice === 'saved') : ?><div class="notice notice-success inline"><p>Einstellungen gespeichert.</p></div><?php endif; ?>
             <?php if (in_array($notice, array('error','test_failed','sync_failed','refresh_failed','review_failed'), true)) : ?><div class="notice notice-error inline"><p><?php echo esc_html($message ?: 'Vorgang fehlgeschlagen.'); ?></p></div><?php endif; ?>
@@ -9542,8 +9422,8 @@ trait PPAR_Ebay_Trait {
             <?php if (in_array($notice, array('categories','catalog_passed','test_passed','sync_passed','review_saved'), true)) : ?><div class="notice notice-success inline"><p><?php echo esc_html($message ?: 'Vorgang abgeschlossen.'); ?></p></div><?php endif; ?>
 
             <section class="postbox" style="padding:18px;max-width:1180px">
-                <h2>1. HivePress-Bereich einrichten</h2>
-                <p>Erstellt beziehungsweise prüft <strong>Private Anzeigen</strong> und darunter direkt die acht fachlichen Unterkategorien. Die frühere sichtbare Provider-Ebene „eBay-Privatanzeigen“ wird automatisch und ohne Verlust der Listing-Zuordnungen entfernt.</p>
+                <h2>1. PRIVATE / HivePress</h2>
+                <p><strong>Deaktiviert.</strong> Für Hobby Depot wird keine Pferdeatelier-HivePress-Struktur übernommen.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="ppar_ebay_setup_categories">
                     <?php wp_nonce_field('ppar_ebay_setup_categories', 'ppar_ebay_nonce'); ?>
@@ -9554,7 +9434,7 @@ trait PPAR_Ebay_Trait {
 
             <section class="postbox" style="padding:18px;max-width:1180px">
                 <h2>2. Portal- und Themenabgleich prüfen</h2>
-                <p>Prüft den fest mitgelieferten vollständigen Pferde-Atelier-Zielkatalog: 8 Hauptbereiche, 59 Bereichsseiten, 329 Produktseiten und 1.124 WordPress-Kategorien. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
+                <p>Prüft die aktuell aktive Hobby-Depot-Kategorie-Registry (HD-004). Ohne positiven Registry-Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="ppar_ebay_verify_catalog">
                     <?php wp_nonce_field('ppar_ebay_verify_catalog', 'ppar_ebay_nonce'); ?>
@@ -9587,7 +9467,7 @@ trait PPAR_Ebay_Trait {
                         <tr><th>Max. Seiten je Abrufprofil</th><td><input class="small-text" type="number" min="1" max="20" name="ppar_ebay[max_pages_per_profile]" value="<?php echo absint($settings['max_pages_per_profile']); ?>"></td></tr>
                         <tr><th>Max. Requests je Arbeitspaket</th><td><input class="small-text" type="number" min="1" max="40" name="ppar_ebay[max_requests_per_run]" value="<?php echo absint($settings['max_requests_per_run']); ?>"><p class="description">Harte Hintergrundgrenze pro Arbeitspaket. Ein vollständiger Discovery-Lauf setzt danach automatisch am nächsten Profil fort, bis der komplette Katalog einmal abgedeckt ist.</p></td></tr>
                         <tr><th>Zeitbudget je Hintergrundpaket</th><td><input class="small-text" type="number" min="10" max="30" name="ppar_ebay[run_time_budget_seconds]" value="<?php echo absint($settings['run_time_budget_seconds']); ?>"> Sekunden<p class="description">Der Gesamtlauf hat kein synchrones Browser-Zeitlimit mehr. Dieses Budget begrenzt nur ein einzelnes fortsetzbares Arbeitspaket.</p></td></tr>
-                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="28" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt automatisch gegen den vollständigen Pferde-Atelier-Zielkatalog; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
+                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="28" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt gegen die aktive Hobby-Depot-Registry; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
                     </tbody></table>
                     <?php submit_button('eBay-Betriebsprofil speichern'); ?>
                 </form>
