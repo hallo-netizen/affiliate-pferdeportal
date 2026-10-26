@@ -10708,3 +10708,4 @@ JS;
     public static function example_minimal_json() {
         return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
+}
