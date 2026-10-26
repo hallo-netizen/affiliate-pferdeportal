@@ -59,7 +59,7 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 - GitHub-Actions-Lauf `40372683116`: SUCCESS;
 - Kandidat: `0.1.2-dev`;
 - Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`;
-- PR #574 in den Campus gemergt;
+- PR #578 in den Campus gemergt;
 - Verbindungsdaten-Preflight aktiv: fehlende Pflichtzugänge werden namentlich angezeigt und blockieren LIVE-PASS;
 - **kein Liveeinsatz / kein Live-PASS**;
 - keine Hobby-Depot-Produktdaten;
