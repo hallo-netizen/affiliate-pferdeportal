@@ -142,6 +142,39 @@ class K0LinkRegressionTests(unittest.TestCase):
         receipt={x['rule_id']:x for x in structural_receipts(a)}['links.section_placement']
         self.assertEqual(receipt['status'],'FAIL')
 
+    def test_real_approved_article_runs_writer_to_wordpress_batch(self):
+        # Production artifact, not a constructed toy article. LT status comes from
+        # the archived PASS result; the external LT engine is not rerun here.
+        import json,hashlib
+        from pathlib import Path
+        from engine.k0_writer_station import verify as verify_writer
+        from engine.k0_production_gate import verify as production_verify
+        from engine.k0_wordpress_export import build as build_wordpress,verify_export
+        from engine.wordpress_batch_export import combine
+        base=Path('real_runs/k0/k0-20261026-9544ba8b-01')
+        load=lambda name: json.loads((base/name).read_text(encoding='utf-8'))
+        job=load('WRITER_JOB.json')
+        product=load('SEALED_WRITER_PRODUCT.json')
+        intake=load('WORDPRESS_INTAKE.json')
+        original=load('WORDPRESS_SINGLE.json')
+        ident=product['identity']
+        cat=[original['articles'][0]['production_context']['production_plan_item']['quality_binding']['wordpress_category']]
+        portal={'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS','items':[{'portal_id':'pferdeatelier','status':'AUTO_DETECTED','job_identity':ident}]}
+        self.assertEqual(verify_writer(job,product)['status'],'PASS')
+        self.assertEqual(verify_pre_lt68(product,cat)['status'],'READY_FOR_LT68')
+        gate=production_verify(product,portal,cat)
+        self.assertEqual(gate['status'],'PASS')
+        lt={'status':'PASS','finding_count':0,'html_sha256':hashlib.sha256(product['html'].encode('utf-8')).hexdigest()}
+        final=verify_final(product,cat,lt)
+        self.assertEqual(final['status'],'PASS')
+        bindings={'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{ident['plan_slot']:original['articles'][0]['article_id']}}
+        exported=build_wordpress(intake,product,portal,gate,lt,final,bindings,cat)
+        self.assertEqual(verify_export(exported,intake)['status'],'PASS')
+        batch=combine(intake,[exported])
+        self.assertEqual(batch['article_count'],1)
+        self.assertEqual(batch['articles'][0]['body'],product['html'])
+        self.assertFalse(batch['publish_allowed'])
+
     def test_existing_section_placement_accepts_real_paragraph_links(self):
         a=make_base()
         receipt={x['rule_id']:x for x in structural_receipts(a)}['links.section_placement']
