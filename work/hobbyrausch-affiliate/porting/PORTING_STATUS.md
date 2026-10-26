@@ -40,10 +40,20 @@ UPDATED: 2026-10-26
 
 ## Still open before an install candidate
 
-1. Real credential migration/round-trip test in a WordPress test runtime without exposing secrets.
-2. Generic 6.72.276 delta reconciliation where it is portal-neutral; horse/race/banner-specific deltas stay excluded.
-3. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
-4. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
+1. Complete the real credential migration/round-trip gate for all three providers in WordPress runtime (Amazon + idealo PASS; eBay runtime check currently pending).
+2. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
+3. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
+
+## 6.72.276 portal-neutral delta reconciliation
+
+**PASS / no additional source import required.**
+
+The three portal-neutral behaviours documented for the user-tested 6.72.276 delta are already present in the Hobby Depot workbench:
+- Journal product cards use the same fixed geometry as category product cards;
+- offer CTA text resolves by provider (eBay / idealo / Amazon);
+- product/offer buttons use dark green `#35422A` with ochre `#C89214` hover/focus.
+
+Horse-, race- and source-portal-specific banner/content deltas remain excluded by design.
 
 ## Governance note
 
