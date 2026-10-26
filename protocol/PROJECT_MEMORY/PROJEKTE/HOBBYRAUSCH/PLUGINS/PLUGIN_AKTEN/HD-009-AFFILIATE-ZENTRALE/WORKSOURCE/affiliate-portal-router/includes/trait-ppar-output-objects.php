@@ -608,7 +608,7 @@ trait PPAR_Output_Objects_Trait {
     public function output_portal_targets($portal) {
         // V6.72.50 TIMEOUT-Rootfix: Der lokale Zielkatalog ist innerhalb eines
         // Requests unveraenderlich. Vorher wurde er fuer jedes angehakte Creative
-        // erneut komplett aus Seiten, Beitraegen, Glossar, Rassen und Taxonomien
+        // erneut komplett aus Seiten, Beitraegen, Glossar und Taxonomien
         // aufgebaut. Das vervielfachte die Laufzeit der KISS-Aktion und konnte
         // einen Gateway Timeout ausloesen. Cache gilt bewusst nur pro Request.
         static $local_request_cache = array();
@@ -3041,7 +3041,7 @@ trait PPAR_Output_Objects_Trait {
                         // KISS 6.72.206: Editorial-Single-Slots muessen bei
                         // allgemeinen Bannern vor hub_grid_card als Aktivierungsanker
                         // gewinnen. hub_grid_card ist bewusst kein Auto-Publish-Slot;
-                        // sonst bleibt ein technisch gueltiger Glossar-/Rassenbanner
+                        // sonst bleibt ein technisch gueltiger Glossarbanner
                         // als ganze Kampagne inaktiv, obwohl seine Placements stimmen.
                         $editorial_single_priority = array(
                             'glossary_single_desktop_banner',
