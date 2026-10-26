@@ -160,91 +160,142 @@ trait PPAR_Ebay_Trait {
     private $ebay_public_source_row_cache = array();
 
     /** V4.2.0 – vollständiger, fest mitgelieferter Pferde-Atelier-Zielkatalog. */
+
     private function ebay_portal_catalog() {
         static $catalog = null;
-        if (is_array($catalog)) { return $catalog; }
-        $asset_dir = dirname(__DIR__) . '/assets/';
-        $path = $asset_dir . 'ebay-portal-catalog-v2.json';
-        $source_path = $asset_dir . 'portal-structure-v279.json';
-        if (!is_readable($path) || !is_readable($source_path)) {
-            return new WP_Error('ebay_portal_catalog_missing', 'Pferde-Atelier-eBay-Zielkatalog oder Portalquelle fehlt.');
+        if (is_array($catalog) || is_wp_error($catalog)) { return $catalog; }
+        if (!function_exists('hd_category_registry_ready') || !hd_category_registry_ready()
+            || !function_exists('hd_category_registry_snapshot')) {
+            return $catalog = new WP_Error('ebay_hobby_depot_registry_missing', 'Hobby-Depot-Kategorie-Registry ist nicht bereit.');
         }
-        $decoded = json_decode((string) file_get_contents($path), true);
-        if (!is_array($decoded) || (string) ($decoded['schema'] ?? '') !== '2.0') {
-            return new WP_Error('ebay_portal_catalog_invalid', 'Pferde-Atelier-eBay-Zielkatalog ist ungültig.');
-        }
-        $expected_source_hash = strtolower(sanitize_text_field((string) ($decoded['source_sha256'] ?? '')));
-        $actual_source_hash = hash_file('sha256', $source_path);
-        if (!preg_match('/^[a-f0-9]{64}$/', $expected_source_hash) || !is_string($actual_source_hash) || !hash_equals($expected_source_hash, strtolower($actual_source_hash))) {
-            return new WP_Error('ebay_portal_catalog_source_mismatch', 'Pferde-Atelier-eBay-Zielkatalog stimmt nicht mit der mitgelieferten Portalstruktur überein.');
-        }
-        $counts = is_array($decoded['counts'] ?? null) ? $decoded['counts'] : array();
-        $products = array_values((array) ($decoded['product_targets'] ?? array()));
-        $articles = array_values((array) ($decoded['article_targets'] ?? array()));
-        $rules = array_values((array) ($decoded['search_rules'] ?? array()));
-        $business_concepts = array_values((array) ($decoded['business_concepts'] ?? array()));
-        $business_hub_concepts = array_values((array) ($decoded['business_hub_concepts'] ?? array()));
 
-        // V6.72.173: Katalogintegritaet wird gegen den tatsaechlich mitgelieferten,
-        // bereits per source_sha256 an die Portalstruktur gebundenen Inhalt geprueft.
-        // Historische Gesamtzahlen (329/1124) duerfen legitime Strukturzuwachse nicht
-        // mehr als Fehler klassifizieren. Keine zweite Portalstruktur wird geparst.
-        $actual_counts = array(
-            'main_hubs' => count($rules),
-            'hub_pages' => count($business_hub_concepts),
-            'product_pages' => count($products),
-            'article_categories' => count($articles),
-            'business_concepts' => count($business_concepts),
-            'business_hub_concepts' => count($business_hub_concepts),
-            'business_routable_concepts' => count($business_concepts) + count($business_hub_concepts),
+        $snapshot = hd_category_registry_snapshot();
+        if (!is_array($snapshot) || empty($snapshot['nodes']) || !is_array($snapshot['nodes'])) {
+            return $catalog = new WP_Error('ebay_hobby_depot_registry_invalid', 'Hobby-Depot-Kategorie-Snapshot ist leer oder ungültig.');
+        }
+        $mapping = is_array($snapshot['mapping'] ?? null) ? $snapshot['mapping'] : array();
+        $nodes = array(); $children = array();
+        foreach ($snapshot['nodes'] as $node) {
+            if (!is_array($node)) { continue; }
+            $id = trim((string)($node['node_id'] ?? ''));
+            if ($id === '' || sanitize_key((string)($node['status'] ?? 'active')) !== 'active') { continue; }
+            $nodes[$id] = $node;
+            $parent = trim((string)($node['parent_id'] ?? ''));
+            if ($parent !== '') { $children[$parent][] = $id; }
+        }
+
+        $product_targets = array();
+        $article_targets = array();
+        $business_concepts = array();
+        foreach ($nodes as $node_id=>$node) {
+            if (!preg_match('/^core:entity:[^:]+$/', $node_id)) { continue; }
+            $title = trim((string)($node['display_name'] ?? $node['name'] ?? ''));
+            $slug = sanitize_title((string)($node['slug'] ?? ''));
+            if ($title === '' || $slug === '') { continue; }
+
+            $parent = $nodes[(string)($node['parent_id'] ?? '')] ?? array();
+            $grand = is_array($parent) ? ($nodes[(string)($parent['parent_id'] ?? '')] ?? array()) : array();
+            $map = is_array($mapping[$node_id] ?? null) ? $mapping[$node_id] : array();
+            $page = array(
+                'node_id'=>$node_id,
+                'slug'=>$slug,
+                'title'=>$title,
+                'object_type'=>sanitize_key((string)($map['object_type'] ?? $node['object_type'] ?? 'page')),
+                'object_id'=>absint($map['object_id'] ?? 0),
+                'hub'=>trim((string)($parent['display_name'] ?? $parent['name'] ?? '')),
+                'hub_slug'=>sanitize_title((string)($parent['slug'] ?? '')),
+                'main_hub'=>trim((string)($grand['display_name'] ?? $grand['name'] ?? '')),
+                'main_slug'=>sanitize_title((string)($grand['slug'] ?? '')),
+                'private_bucket_slug'=>'',
+            );
+            $targets = array($page);
+            $product_targets[] = $page;
+
+            foreach ((array)($children[$node_id] ?? array()) as $child_id) {
+                $child = $nodes[$child_id] ?? null;
+                if (!is_array($child)) { continue; }
+                $child_slug = sanitize_title((string)($child['slug'] ?? ''));
+                $child_name = trim((string)($child['display_name'] ?? $child['name'] ?? ''));
+                if ($child_slug === '' || $child_name === '') { continue; }
+                $child_map = is_array($mapping[$child_id] ?? null) ? $mapping[$child_id] : array();
+                $targets[] = array(
+                    'node_id'=>$child_id,
+                    'slug'=>$child_slug,
+                    'title'=>$child_name,
+                    'object_type'=>sanitize_key((string)($child_map['object_type'] ?? $child['object_type'] ?? 'category')),
+                    'object_id'=>absint($child_map['object_id'] ?? 0),
+                    'hub'=>$title,
+                    'hub_slug'=>$slug,
+                    'main_hub'=>$page['hub'],
+                    'main_slug'=>$page['hub_slug'],
+                    'private_bucket_slug'=>'',
+                );
+                $article_targets[] = array(
+                    'category_slug'=>$child_slug,
+                    'category_name'=>$child_name,
+                    'product'=>$title,
+                    'product_slug'=>$slug,
+                    'hub'=>$page['hub'],
+                    'hub_slug'=>$page['hub_slug'],
+                    'main_hub'=>$page['main_hub'],
+                    'main_slug'=>$page['main_slug'],
+                    'node_id'=>$child_id,
+                    'object_id'=>absint($child_map['object_id'] ?? 0),
+                );
+            }
+
+            $concept_id = 'hd-' . substr(hash('sha256', $node_id), 0, 20);
+            $business_concepts[] = array(
+                'id'=>$concept_id,
+                'title'=>$title,
+                'concept_kind'=>'product',
+                'target_pages'=>$targets,
+                'source_node_id'=>$node_id,
+                'private_bucket_slug'=>'',
+            );
+        }
+
+        if (!$business_concepts) {
+            return $catalog = new WP_Error('ebay_hobby_depot_concepts_empty', 'Hobby-Depot-Kategorie-Registry enthält keine aktiven Hobbyziele.');
+        }
+        $required_ids = array_values(array_map(static function($concept){
+            return sanitize_key((string)($concept['id'] ?? ''));
+        }, $business_concepts));
+        $source_hash = hash('sha256', wp_json_encode(array(
+            'contract'=>(string)($snapshot['contract'] ?? ''),
+            'revision'=>(string)($snapshot['revision'] ?? ''),
+            'required_ids'=>$required_ids,
+        )));
+
+        $catalog = array(
+            'schema'=>'HOBBY_DEPOT_DYNAMIC_EBAY_V1',
+            'source_sha256'=>$source_hash,
+            'search_rules'=>array(),
+            'product_targets'=>$product_targets,
+            'article_targets'=>$article_targets,
+            'hard_negative_markers'=>array(),
+            'content_policy'=>array('version'=>'hobby-depot-v1'),
+            'private_bucket_profiles'=>array(),
+            'business_inherent_markers'=>array(),
+            'business_concepts'=>$business_concepts,
+            'business_hub_concepts'=>array(),
+            'business_supply_contract'=>array(
+                'required_count'=>count($required_ids),
+                'required_product_concept_ids'=>$required_ids,
+            ),
+            'counts'=>array(
+                'main_hubs'=>0,
+                'hub_pages'=>0,
+                'product_pages'=>count($product_targets),
+                'article_categories'=>count($article_targets),
+                'business_concepts'=>count($business_concepts),
+                'business_hub_concepts'=>0,
+                'business_routable_concepts'=>count($business_concepts),
+            ),
         );
-        foreach ($actual_counts as $key => $actual) {
-            if (!array_key_exists($key, $counts) || absint($counts[$key]) !== $actual) {
-                return new WP_Error('ebay_portal_catalog_incomplete', 'Pferde-Atelier-eBay-Zielkatalog ist inkonsistent: ' . sanitize_key($key));
-            }
-        }
-        if (!$products || !$articles || !$rules || !$business_concepts || !$business_hub_concepts) {
-            return new WP_Error('ebay_portal_catalog_count_mismatch', 'Pferde-Atelier-eBay-Zielkatalog enthält keine vollständige nutzbare Zielstruktur.');
-        }
-        $allowed_buckets = array('pferde-ponys','sattel-zaumzeug','decken-schutz','stall-weide-haltung','fuetterung-pflege','anhaenger-transport','reitbekleidung-zubehoer','sonstiges');
-        $product_slugs = array();
-        foreach ($products as $target) {
-            if (!is_array($target)) { return new WP_Error('ebay_portal_product_invalid', 'Ungültiges Produktziel im Pferde-Atelier-Katalog.'); }
-            $slug = sanitize_title((string) ($target['slug'] ?? ''));
-            $bucket = sanitize_title((string) ($target['private_bucket_slug'] ?? ''));
-            if ($slug === '' || empty($target['title']) || empty($target['hub']) || empty($target['main_hub']) || !in_array($bucket, $allowed_buckets, true) || isset($product_slugs[$slug])) {
-                return new WP_Error('ebay_portal_product_invalid', 'Unvollständiges, doppeltes oder ungültig geroutetes Produktziel: ' . $slug);
-            }
-            $product_slugs[$slug] = true;
-        }
-        $article_slugs = array();
-        foreach ($articles as $target) {
-            if (!is_array($target)) { return new WP_Error('ebay_portal_article_invalid', 'Ungültiges WordPress-Kategorieziel im Pferde-Atelier-Katalog.'); }
-            $slug = sanitize_title((string) ($target['category_slug'] ?? ''));
-            $product_slug = sanitize_title((string) ($target['product_slug'] ?? ''));
-            if ($slug === '' || empty($target['category_name']) || !isset($product_slugs[$product_slug]) || isset($article_slugs[$slug])) {
-                return new WP_Error('ebay_portal_article_invalid', 'Unvollständige, doppelte oder verwaiste WordPress-Kategorie: ' . $slug);
-            }
-            $article_slugs[$slug] = true;
-        }
-        $rule_ids = array();
-        foreach ($rules as $rule) {
-            $id = sanitize_key((string) ($rule['id'] ?? ''));
-            $bucket = sanitize_title((string) ($rule['target_term_slug'] ?? ''));
-            if ($id === '' || empty($rule['query']) || !in_array($bucket, $allowed_buckets, true) || isset($rule_ids[$id])) {
-                return new WP_Error('ebay_portal_rule_invalid', 'Ungültiges automatisches eBay-Abrufprofil: ' . $id);
-            }
-            $rule_ids[$id] = true;
-        }
-        if (count(array_values(array_filter((array) ($decoded['strong_horse_markers'] ?? array())))) < 10 || empty($decoded['hard_negative_markers'])) {
-            return new WP_Error('ebay_portal_markers_incomplete', 'Fach- oder Ausschlussmarker des eBay-Zielkatalogs fehlen.');
-        }
-        if (count((array) ($decoded['private_bucket_profiles'] ?? array())) !== 8 || count((array) ($decoded['business_concepts'] ?? array())) < 300 || empty($decoded['content_policy']['version'])) {
-            return new WP_Error('ebay_portal_workflow_contract_incomplete', 'eBay-Workflow-V2-Vertrag im Zielkatalog ist unvollständig.');
-        }
-        $catalog = $decoded;
         return $catalog;
     }
+
 
     private function ebay_catalog_rules() {
         $cache_allowed = $this->ebay_request_local_read_cache_allowed();
@@ -436,83 +487,24 @@ trait PPAR_Ebay_Trait {
      * version-specific PHP patches. Category/aspect evidence wins over title
      * heuristics; known toy/model signatures remain a secondary hard block.
      */
+
     private function ebay_content_policy_reason($item) {
-        $catalog = $this->ebay_portal_catalog();
-        if (is_wp_error($catalog)) { return 'Content-Policy-Katalog fehlt.'; }
-        $policy = is_array($catalog['content_policy'] ?? null) ? $catalog['content_policy'] : array();
         $item = is_array($item) ? $item : array();
-        $raw = is_array($item['raw'] ?? null) ? $item['raw'] : $item;
-        $title = $this->ebay_topic_text((string) ($raw['title'] ?? ($item['title'] ?? '')));
-        $description = $this->ebay_topic_text((string) ($raw['shortDescription'] ?? ($item['short_description'] ?? '')));
-        $category_parts = array();
-        foreach ((array) ($raw['categories'] ?? array()) as $category) {
-            if (is_array($category)) { $category_parts[] = (string) ($category['categoryName'] ?? ''); }
-        }
-        foreach ((array) ($item['category_names'] ?? array()) as $category_name) { $category_parts[] = (string) $category_name; }
-        $aspect_parts = array();
-        foreach ((array) ($raw['localizedAspects'] ?? array()) as $aspect) {
-            if (!is_array($aspect)) { continue; }
-            $aspect_parts[] = (string) ($aspect['name'] ?? '');
-            $aspect_parts[] = (string) ($aspect['value'] ?? '');
-        }
-        $category_text = $this->ebay_topic_text(implode(' ', $category_parts));
-        $aspect_text = $this->ebay_topic_text(implode(' ', $aspect_parts));
-        $all = trim(implode(' ', array_filter(array($title, $description, $category_text, $aspect_text))));
-        if ($all === '') { return ''; }
-
-        // V6.35: public/import safety must not depend on a trustworthy eBay
-        // category. Real PRIVATE offers can be mis-categorised under Reitsport
-        // while the title itself explicitly says "Spielzeug". Treat explicit
-        // toy terms in title/description as a hard content block. Exact-term
-        // matching avoids accidental substrings while still catching compounds
-        // declared explicitly in the catalog.
-        $offer_text = trim($title . ' ' . $description);
-        foreach ((array) ($policy['blocked_exact_title_terms'] ?? array()) as $marker) {
-            if ($this->ebay_content_policy_exact_term_present($offer_text, $marker)) {
-                return 'Fachfremde Spielzeugware im Angebotstitel erkannt: ' . sanitize_text_field((string) $marker);
+        $evidence = $this->ebay_item_topic_evidence($item);
+        if ($evidence === '') { return ''; }
+        $blocked = function_exists('apply_filters')
+            ? (array) apply_filters('hobby_depot_affiliate_product_block_terms', array(), 'ebay')
+            : array();
+        $normalized = ' ' . $this->ebay_topic_text($evidence) . ' ';
+        foreach ($blocked as $term) {
+            $term = $this->ebay_topic_text((string)$term);
+            if ($term !== '' && strpos($normalized, ' ' . $term . ' ') !== false) {
+                return 'Vom Hobby-Depot-Produktfilter ausgeschlossen: ' . sanitize_text_field((string)$term);
             }
-        }
-        foreach ((array) ($policy['blocked_media_title_phrases'] ?? array()) as $marker) {
-            $needle = $this->ebay_topic_text((string) $marker);
-            if ($needle !== '' && strpos(' ' . $offer_text . ' ', ' ' . $needle . ' ') !== false) {
-                return 'Fachfremdes Buch-/Medienprodukt im Angebotstitel erkannt: ' . sanitize_text_field((string) $marker);
-            }
-        }
-        $blocked_product_head = $this->ebay_content_policy_blocked_product_head($title, $policy);
-        if ($blocked_product_head !== '') {
-            return 'Angebot beschreibt primaer eine nicht freigegebene Produktform: ' . sanitize_text_field($blocked_product_head);
-        }
-
-        // V6.12: hard media gate before ordinary phrase checks. This closes the
-        // live hole where eBay categories such as "Kinder- & Jugendbücher" were
-        // split by "&" and therefore escaped exact phrase matching.
-        $category_media_token = $this->ebay_content_policy_media_token_present(trim($category_text . ' ' . $aspect_text), $policy);
-        if ($category_media_token !== '') {
-            return 'eBay-Kategorie/Merkmal ist fachfremdes Buch-/Medienprodukt: ' . sanitize_text_field($category_media_token);
-        }
-        $offer_media_token = $this->ebay_content_policy_media_token_present(trim($title . ' ' . $description), $policy);
-        if ($offer_media_token !== '') {
-            return 'Fachfremdes Buch-/Medienprodukt erkannt: ' . sanitize_text_field($offer_media_token);
-        }
-
-        foreach ((array) ($policy['blocked_category_phrases'] ?? array()) as $marker) {
-            $needle = $this->ebay_topic_text($marker);
-            if ($needle !== '' && (
-                strpos(' ' . $category_text . ' ', ' ' . $needle . ' ') !== false
-                || strpos(' ' . $aspect_text . ' ', ' ' . $needle . ' ') !== false
-            )) { return 'eBay-Kategorie/Merkmal ist fachfremde Spielzeug-/Modellware: ' . sanitize_text_field((string) $marker); }
-        }
-        foreach ((array) ($policy['blocked_brand_phrases'] ?? array()) as $marker) {
-            if ($this->ebay_content_policy_exact_term_present($all, $marker)) { return 'Spielzeug-/Modellmarke erkannt: ' . sanitize_text_field((string) $marker); }
-        }
-        foreach ((array) ($policy['blocked_title_phrases'] ?? array()) as $marker) {
-            $needle = $this->ebay_topic_text($marker);
-            if ($needle !== '' && strpos(' ' . $all . ' ', ' ' . $needle . ' ') !== false) { return 'Spielzeug-/Modellprodukt erkannt: ' . sanitize_text_field((string) $marker); }
         }
         return '';
     }
 
-    /** Compatibility wrapper for historical callers/tests. */
     private function ebay_toy_filter_reason($item) {
         return $this->ebay_content_policy_reason($item);
     }
@@ -717,164 +709,22 @@ trait PPAR_Ebay_Trait {
      * Search profiles are only a weak prior; real title/category/aspect evidence
      * is mandatory for an automatic route.
      */
-    public function ebay_classify_portal_item($item, $rule) {
-        $catalog = $this->ebay_portal_catalog();
-        if (is_wp_error($catalog)) { return $catalog; }
-        $item = is_array($item) ? $item : array();
-        $rule = is_array($rule) ? $rule : array();
-        $policy_reason = $this->ebay_content_policy_reason($item);
-        if ($policy_reason !== '') { return new WP_Error('ebay_content_policy_blocked', $policy_reason); }
 
-        $evidence = $this->ebay_item_topic_evidence($item);
-        $normalized = $this->ebay_topic_text($evidence);
-        if ($normalized === '') { return new WP_Error('ebay_topic_evidence_missing', 'eBay-Angebot enthaelt keine verwertbare Fachinformation.'); }
-        // Hard negatives always win before any positive product-domain proof.
-        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_negative_present($normalized, $marker)) {
-                return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
-            }
-        }
-        $strong_horse_hits = array();
-        foreach ((array) ($catalog['strong_horse_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_horse_hits[] = sanitize_text_field((string) $marker); }
-        }
-        // V6.26: controlled inherently equestrian product identities are domain
-        // evidence themselves. A real listing titled simply "Damen Reitstiefel"
-        // must not be rejected merely because it does not repeat "Pferd". The
-        // marker list is explicit and hard negatives above still veto Cowboy/
-        // Western/toy/etc. Relation references such as "Helmtasche fuer Reithelm"
-        // are excluded by ebay_business_primary_title_section().
-        $private_sections = $this->ebay_business_evidence_sections($item);
-        foreach ($this->ebay_business_inherent_domain_hits($catalog, $private_sections) as $marker) {
-            $strong_horse_hits[] = 'product:' . sanitize_text_field((string)$marker);
-        }
-        $strong_horse_hits = array_values(array_unique($strong_horse_hits));
-        if (!$strong_horse_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein expliziter Pferde-/Reitsportbezug im realen eBay-Angebot.'); }
-
-        // Workflow V2 root rule: if the real eBay facts identify one canonical
-        // product concept unambiguously, PRIVATE uses that concept only to pick
-        // one of the eight coarse HivePress buckets. It never routes through a
-        // WordPress product page. Generic/unclear items fall back to the coarse
-        // bucket vocabulary below.
-        $concept_match = $this->ebay_business_classify_portal_item_strict($item, $rule);
-        if (!is_wp_error($concept_match) && !empty($concept_match['product_concept_id'])) {
-            $concept_id = sanitize_key((string) $concept_match['product_concept_id']);
-            $concept_collections = array(
-                (array)($catalog['business_concepts'] ?? array()),
-                (array)($catalog['business_hub_concepts'] ?? array()),
-            );
-            foreach ($concept_collections as $concepts) {
-                foreach ($concepts as $concept) {
-                    if (!is_array($concept) || sanitize_key((string) ($concept['id'] ?? '')) !== $concept_id) { continue; }
-                    $primary_page = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
-                    // Target-page metadata is canonical. The derived top-level
-                    // convenience field may be stale after taxonomy moves.
-                    $concept_bucket = sanitize_title((string) ($primary_page['private_bucket_slug'] ?? $concept['private_bucket_slug'] ?? ''));
-                    if ($concept_bucket !== '' && isset($catalog['private_bucket_profiles'][$concept_bucket])) {
-                        $label = sanitize_text_field((string) ($catalog['private_bucket_profiles'][$concept_bucket]['label'] ?? $concept_bucket));
-                        return array(
-                            'status'=>'ready','score'=>min(100, max(1, absint($concept_match['score'] ?? 100))),
-                            'product_slug'=>'','product_title'=>'','hub'=>'Private Anzeigen','main_hub'=>'Anzeigenmarkt',
-                            'path'=>'Private Anzeigen > ' . $label,'private_bucket_slug'=>$concept_bucket,
-                            'strong_horse_hits'=>$strong_horse_hits,'hits'=>(array) ($concept_match['hits'] ?? array()),
-                            'evidence_hash'=>hash('sha256', $normalized . '|private-concept-v2|' . $concept_id),
-                            'private_match_contract'=>'bucket_v2','private_match_source'=>'canonical_product_concept',
-                            'private_product_concept_id'=>$concept_id,
-                        );
-                    }
-                    break 2;
-                }
-            }
-        }
-
-        $sections = $this->ebay_workflow_evidence_sections($item);
-        $profiles = is_array($catalog['private_bucket_profiles'] ?? null) ? $catalog['private_bucket_profiles'] : array();
-        $rule_bucket = sanitize_title((string) ($rule['target_term_slug'] ?? $rule['id'] ?? ''));
-        $ranked = array();
-        foreach ($profiles as $bucket=>$profile) {
-            if (!is_array($profile)) { continue; }
-            $bucket = sanitize_title((string) $bucket);
-            $score = 0; $hits = array(); $real_hits = 0;
-            $phrases = array_values(array_unique(array_filter(array_merge((array) ($profile['strong_phrases'] ?? array()), (array) ($profile['phrases'] ?? array())))));
-            $strong_map = array();
-            foreach ((array) ($profile['strong_phrases'] ?? array()) as $p) { $strong_map[$this->ebay_topic_text($p)] = true; }
-            foreach ($phrases as $phrase) {
-                $norm_phrase = $this->ebay_topic_text($phrase);
-                if ($norm_phrase === '') { continue; }
-                $strong = isset($strong_map[$norm_phrase]);
-                $sources = array();
-                if ($this->ebay_private_phrase_present($sections['title'], $phrase)) { $score += $strong ? 60 : 35; $sources[]='title'; }
-                if ($this->ebay_private_phrase_present($sections['category'], $phrase)) { $score += $strong ? 45 : 28; $sources[]='category'; }
-                if ($this->ebay_private_phrase_present($sections['aspects'], $phrase)) { $score += $strong ? 35 : 22; $sources[]='aspect'; }
-                if (!$sources && $this->ebay_private_phrase_present($sections['description'], $phrase)) { $score += $strong ? 8 : 4; $sources[]='description'; }
-                if ($sources) { $hits[$norm_phrase] = implode('+', $sources); $real_hits++; }
-            }
-
-            if ($bucket === 'pferde-ponys') {
-                $title_animal = false; $category_animal = false;
-                foreach ((array) ($profile['phrases'] ?? array()) as $phrase) {
-                    if ($this->ebay_private_phrase_present($sections['title'], $phrase)) { $title_animal = true; }
-                    if ($this->ebay_private_phrase_present($sections['category'], $phrase)) { $category_animal = true; }
-                }
-                if (!$title_animal || !$category_animal) { $score = 0; $real_hits = 0; }
-                else { $score += 80; }
-            }
-
-            // Search rule is deliberately not evidence; it may only break a close tie.
-            if ($real_hits > 0 && $bucket === $rule_bucket) { $score += 8; }
-            if ($real_hits <= 0) { continue; }
-            $ranked[] = array(
-                'bucket'=>$bucket,
-                'label'=>sanitize_text_field((string) ($profile['label'] ?? $bucket)),
-                'score'=>$score,
-                'min_score'=>max(1, absint($profile['min_score'] ?? 55)),
-                'min_margin'=>max(0, absint($profile['min_margin'] ?? 12)),
-                'hits'=>$hits,
-            );
-        }
-        usort($ranked, static function($a,$b){ return ((int)$b['score'] <=> (int)$a['score']) ?: strcmp((string)$a['bucket'],(string)$b['bucket']); });
-        if (!$ranked) { return new WP_Error('ebay_private_bucket_missing', 'Kein belastbarer Private-Anzeigen-Fachbereich aus realen Angebotsdaten erkannt.'); }
-        $best = $ranked[0]; $second = $ranked[1] ?? null;
-        if ((int) $best['score'] < (int) $best['min_score']) {
-            return new WP_Error('ebay_private_bucket_low_confidence', 'Private-Anzeigen-Fachbereich ist nicht belastbar genug.');
-        }
-        if (is_array($second) && ((int)$best['score'] - (int)$second['score']) < (int)$best['min_margin']) {
-            return new WP_Error('ebay_private_bucket_ambiguous', 'Private-Anzeigen-Fachbereich ist nicht eindeutig genug: ' . sanitize_key((string)$best['bucket']) . ' / ' . sanitize_key((string)$second['bucket']) . '.');
-        }
-        return array(
-            'status'=>'ready',
-            'score'=>min(100, max(1, (int) $best['score'])),
-            'product_slug'=>'',
-            'product_title'=>'',
-            'hub'=>'Private Anzeigen',
-            'main_hub'=>'Anzeigenmarkt',
-            'path'=>'Private Anzeigen > ' . (string) $best['label'],
-            'private_bucket_slug'=>(string) $best['bucket'],
-            'strong_horse_hits'=>$strong_horse_hits,
-            'hits'=>(array) $best['hits'],
-            'evidence_hash'=>hash('sha256', $normalized . '|private-v2|' . (string)$best['bucket']),
-            'private_match_contract'=>'bucket_v2',
-        );
+    private function ebay_classify_portal_item($item, $rule) {
+        // Hobby Depot currently uses eBay exclusively as an affiliate product
+        // source. Automatic PRIVATE/HivePress routing stays fail-closed until a
+        // separate Hobby-Depot marketplace contract is explicitly defined.
+        return new WP_Error('ebay_private_hobby_depot_not_configured', 'Automatische PRIVATE-Zuordnung ist für Hobby Depot nicht freigegeben.');
     }
 
-    /**
-     * V5.28 – fail-closed BUSINESS-Zielklassifikation.
-     *
-     * Die allgemeine Portal-Klassifikation bleibt fuer PRIVATE unveraendert.
-     * BUSINESS darf dagegen nur dann automatisch einen Produktslot gewinnen,
-     * wenn der konkrete Produktbegriff im realen Angebotstitel getragen wird
-     * und die uebrigen eBay-Fakten diesen Treffer nicht widersprechen.
-     * Generische Pferde-/Reitsportbegriffe, Farben, "Zubehoer" oder reine
-     * Beschreibungstreffer duerfen kein Produktziel mehr erzeugen.
-     */
     private function ebay_business_match_stop_tokens() {
         return array_flip(array(
-            'pferd','pferde','pony','ponys','fohlen','reiter','reiten','reit','reitsport','equestrian',
             'zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal',
             'neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige',
             'grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'
         ));
     }
+
 
     private function ebay_business_distinctive_tokens($text) {
         $stop = $this->ebay_business_match_stop_tokens();
@@ -1092,23 +942,12 @@ trait PPAR_Ebay_Trait {
      * context after the real eBay offer independently proves the expected product.
      * The query can never create a product match by itself.
      */
-    private function ebay_business_exact_profile_horse_scope($rule) {
+
+    private function ebay_business_exact_profile_scope($rule) {
         $rule = is_array($rule) ? $rule : array();
-        if (sanitize_key((string)($rule['business_concept_id'] ?? '')) === '') { return false; }
-        $query = $this->ebay_topic_text((string)($rule['query'] ?? ''));
-        foreach (array('pferd','pferde','pony','ponys','fohlen','horse','horses','equine','equestrian') as $marker) {
-            if ($this->ebay_topic_term_present($query, $marker)) { return true; }
-        }
-        return false;
+        return sanitize_key((string)($rule['business_concept_id'] ?? '')) !== '';
     }
 
-    /**
-     * Verify an expected product concept from the offer itself. Primary title is
-     * strongest; eBay Productart/aspects may substitute only together with the
-     * category and never for obvious accessory-primary titles. This is the
-     * fail-closed bridge for products whose real listing does not literally say
-     * "Pferd" (e.g. Gebiss, Weidezaungeraet, Regendecke).
-     */
     private function ebay_business_expected_concept_evidence($concept, $sections) {
         $concept = is_array($concept) ? $concept : array();
         $sections = is_array($sections) ? $sections : array();
@@ -1176,152 +1015,67 @@ trait PPAR_Ebay_Trait {
      * Portal-Zielkatalog. Sie ist absichtlich konservativ: lieber Review als
      * eine fachlich falsche Produktkarte auf einer redaktionellen Seite.
      */
+
     private function ebay_business_classify_portal_item_strict($item, $rule) {
         $catalog = $this->ebay_portal_catalog();
         if (is_wp_error($catalog)) { return $catalog; }
         $item = is_array($item) ? $item : array();
         $rule = is_array($rule) ? $rule : array();
+
         $policy_reason = $this->ebay_content_policy_reason($item);
         if ($policy_reason !== '') { return new WP_Error('ebay_content_policy_blocked', $policy_reason); }
 
-        $evidence = $this->ebay_item_topic_evidence($item);
-        $normalized = $this->ebay_topic_text($evidence);
-        if ($normalized === '') { return new WP_Error('ebay_topic_evidence_missing', 'eBay-Angebot enthaelt keine verwertbare Fachinformation.'); }
         $sections = $this->ebay_business_evidence_sections($item);
-        if ($sections['title'] === '') { return new WP_Error('ebay_business_title_missing', 'BUSINESS-Angebot besitzt keinen verwertbaren Produkttitel.'); }
-        // Hard negatives are evaluated before any exact-profile recovery. A
-        // Pferd-scoped search must never whitelist toy/book/foreign-domain items.
-        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_negative_present($normalized, $marker)) {
-                return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
-            }
+        if (trim((string)($sections['title'] ?? '')) === '') {
+            return new WP_Error('ebay_business_title_missing', 'BUSINESS-Angebot besitzt keinen verwertbaren Produkttitel.');
         }
-
         $expected = $this->ebay_business_expected_concept_from_rule($catalog, $rule);
-        $expected_concept = is_array($expected['concept'] ?? null) ? $expected['concept'] : array();
-        $expected_kind = sanitize_key((string)($expected['kind'] ?? ''));
-        $expected_evidence = $expected_concept ? $this->ebay_business_expected_concept_evidence($expected_concept, $sections) : array('ok'=>false);
-        $exact_profile_scope = $expected_concept && $this->ebay_business_exact_profile_horse_scope($rule);
+        $concept = is_array($expected['concept'] ?? null) ? $expected['concept'] : array();
+        if (!$concept || !$this->ebay_business_exact_profile_scope($rule)) {
+            return new WP_Error('ebay_business_exact_context_missing', 'BUSINESS-Suche besitzt keinen eindeutigen Hobby-Depot-Kontext.');
+        }
 
-        $strong_horse_hits = array();
-        foreach ((array) ($catalog['strong_horse_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_horse_hits[] = sanitize_text_field((string) $marker); }
+        $verified = $this->ebay_business_expected_concept_evidence($concept, $sections);
+        if (empty($verified['ok'])) {
+            return new WP_Error('ebay_business_concept_unconfirmed', 'Reale eBay-Angebotsdaten bestätigen den erwarteten Hobbybezug nicht ausreichend.');
         }
-        foreach ($this->ebay_business_inherent_domain_hits($catalog, $sections) as $marker) {
-            $strong_horse_hits[] = 'product:' . sanitize_text_field((string) $marker);
-        }
-        // V6.18: for an exact catalog profile, the search scope may establish
-        // horse-domain context only AFTER real title/aspect/category data proves
-        // the expected product concept independently. This fixes the V6.17 gate
-        // that rejected most ordinary horse products merely because their title
-        // did not repeat the word "Pferd".
-        if (!$strong_horse_hits && $exact_profile_scope && !empty($expected_evidence['ok'])) {
-            $strong_horse_hits[] = 'exact_profile:' . sanitize_key((string)($expected_concept['id'] ?? ''));
-        }
-        $strong_horse_hits = array_values(array_unique($strong_horse_hits));
-        if (!$strong_horse_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Pferde-/Reitsportbezug aus Angebot oder exakt bestaetigtem Pferde-Suchprofil.'); }
 
-        $ranked = array();
-        $concept_pool = ($expected_kind === 'product' && $expected_concept) ? array($expected_concept) : (array) ($catalog['business_concepts'] ?? array());
-        foreach ($concept_pool as $concept) {
-            if (!is_array($concept)) { continue; }
-            $tokens = $this->ebay_business_distinctive_tokens((string) ($concept['title'] ?? ''));
-            if (!$tokens) { continue; }
-            $title_hits = $primary_title_hits = $category_hits = $aspect_hits = $description_hits = 0;
-            $covered = array(); $hit_tokens = array();
-            foreach ($tokens as $token) {
-                $sources = array();
-                if ($this->ebay_business_strict_token_present($sections['title'], $token)) { $title_hits++; $covered[$token]=true; $sources[]='title'; }
-                if ($this->ebay_business_primary_title_token_present($sections['title'], $token)) { $primary_title_hits++; $sources[]='primary_title'; }
-                if ($this->ebay_business_strict_token_present($sections['category'], $token)) { $category_hits++; $covered[$token]=true; $sources[]='category'; }
-                if ($this->ebay_business_strict_token_present($sections['aspects'], $token)) { $aspect_hits++; $covered[$token]=true; $sources[]='aspect'; }
-                if ($this->ebay_business_strict_token_present($sections['description'], $token)) { $description_hits++; $sources[]='description'; }
-                if ($sources) { $hit_tokens[$token]=implode('+',array_values(array_unique($sources))); }
-            }
-            $token_count = count($tokens);
-            $core_coverage = count($covered);
-            $required_coverage = $token_count <= 1 ? 1 : (int) ceil($token_count * 0.67);
-            $concept_phrase = $this->ebay_topic_text((string) ($concept['title'] ?? ''));
-            $phrase_title = $concept_phrase !== '' && strpos(' ' . $sections['title'] . ' ', ' ' . $concept_phrase . ' ') !== false;
-            $hub_hits = 0;
-            foreach ((array) ($concept['target_pages'] ?? array()) as $page) {
-                foreach (array((string) ($page['hub'] ?? ''), (string) ($page['main_hub'] ?? '')) as $context_label) {
-                    foreach ($this->ebay_business_distinctive_tokens($context_label) as $hub_token) {
-                        if ($this->ebay_business_context_token_present($sections['category'] . ' ' . $sections['aspects'], $hub_token)) { $hub_hits++; }
-                    }
-                }
-            }
-            $is_expected_candidate = $expected_concept
-                && sanitize_key((string)($concept['id'] ?? '')) === sanitize_key((string)($expected_concept['id'] ?? ''))
-                && $exact_profile_scope;
-            $expected_direct_verified = $is_expected_candidate && !empty($expected_evidence['ok']);
-            // Generic/fallback profiles retain full-concept coverage. An exact
-            // profile may use the independently verified product-core evidence
-            // above (e.g. "Heunetze fuer Anhaenger" -> real title "Heunetze").
-            if (!$expected_direct_verified && $core_coverage < $required_coverage) { continue; }
-            // Generic/fallback profiles retain the old conservative title rule.
-            // Only the exact catalog profile may accept Productart/aspect evidence
-            // instead of a literal title token, and only after the independent
-            // expected-concept verifier above passed.
-            if (!$expected_direct_verified && $title_hits < 1) { continue; }
-            if (!$expected_direct_verified && $token_count === 1 && $primary_title_hits < 1) { continue; }
-            $exact_boost = $expected_direct_verified ? 28 : 0;
-            $raw_score = ($phrase_title ? 120 : 0)
-                + ($title_hits * 42) + ($category_hits * 18) + ($aspect_hits * 14) + ($description_hits * 3)
-                + ($core_coverage === $token_count ? 24 : 0) + min(24, $hub_hits * 8) + $exact_boost;
-            $confidence = 55 + min(30, $title_hits * 15) + min(10, ($category_hits + $aspect_hits) * 5)
-                + ($phrase_title ? 10 : 0) + ($core_coverage === $token_count ? 10 : 0)
-                + ($expected_direct_verified ? 20 : 0);
-            $confidence = min(100, $confidence);
-            if ($confidence < 80) { continue; }
-            $concept['raw_score']=$raw_score; $concept['confidence']=$confidence;
-            $concept['hits']=array_keys($hit_tokens); $concept['hit_sources']=$hit_tokens;
-            $ranked[]=$concept;
-        }
-        usort($ranked, static function($a,$b){
-            $cmp=absint($b['raw_score']??0)<=>absint($a['raw_score']??0);
-            if($cmp!==0){return $cmp;}
-            $cmp=absint($b['confidence']??0)<=>absint($a['confidence']??0);
-            return $cmp!==0?$cmp:strnatcasecmp((string)($a['id']??''),(string)($b['id']??''));
-        });
-        // Exact catalog profiles may never drift into a neighbouring product or
-        // hub. Coarse fallback profiles keep the controlled hub fallback.
-        if (!$ranked && $expected_kind === 'hub' && $expected_concept) {
-            $hub_catalog = $catalog;
-            $hub_catalog['business_hub_concepts'] = array($expected_concept);
-            $ranked = $this->ebay_business_hub_concept_candidates($hub_catalog, $sections);
-        } elseif (!$ranked && !$expected_concept) {
-            $ranked = $this->ebay_business_hub_concept_candidates($catalog, $sections);
-        }
-        if (!$ranked) { return new WP_Error('ebay_business_concept_missing', 'Kein belastbarer konkreter Produktbegriff oder routbares Produktfamilien-Ziel im eBay-BUSINESS-Angebot gefunden.'); }
-        $best=$ranked[0]; $second=$ranked[1]??null;
-        if (is_array($second)) {
-            $margin=absint($best['raw_score']??0)-absint($second['raw_score']??0);
-            if ($margin < 25) {
-                return new WP_Error('ebay_business_concept_ambiguous', 'BUSINESS-Produktkonzept ist nicht eindeutig genug: ' . sanitize_key((string)($best['id']??'')) . ' / ' . sanitize_key((string)($second['id']??'')) . '.');
-            }
-        }
-        $pages=array_values(array_filter((array)($best['target_pages']??array()),'is_array'));
-        if (!$pages) { return new WP_Error('ebay_business_concept_target_missing', 'Produktkonzept besitzt kein Portalziel.'); }
-        $primary=$pages[0];
-        $target_slugs=array_values(array_unique(array_filter(array_map(static function($p){return sanitize_title((string)($p['slug']??''));},$pages))));
-        $path=implode(' > ',array_filter(array((string)($primary['main_hub']??''),(string)($primary['hub']??''),(string)($best['title']??''))));
+        $pages = array_values(array_filter((array)($concept['target_pages'] ?? array()), 'is_array'));
+        if (!$pages) { return new WP_Error('ebay_business_concept_target_missing', 'Hobbykonzept besitzt kein Portalziel.'); }
+        $primary = $pages[0];
+        $target_slugs = array_values(array_unique(array_filter(array_map(static function($p){
+            return sanitize_title((string)($p['slug'] ?? ''));
+        }, $pages))));
+        $concept_id = sanitize_key((string)($concept['id'] ?? ''));
+        $path = implode(' > ', array_filter(array(
+            (string)($primary['main_hub'] ?? ''),
+            (string)($primary['hub'] ?? ''),
+            (string)($concept['title'] ?? ''),
+        )));
+        $confidence = min(100, 75
+            + min(15, absint($verified['primary_hits'] ?? 0) * 8)
+            + min(10, (absint($verified['product_type_hits'] ?? 0) + absint($verified['aspect_hits'] ?? 0)) * 5));
+
         return array(
-            'status'=>'ready','score'=>absint($best['confidence']??0),
-            'product_concept_id'=>sanitize_key((string)($best['id']??'')),
-            'concept_kind'=>sanitize_key((string)($best['concept_kind']??'product')),
-            'product_slug'=>sanitize_title((string)($primary['slug']??'')),
+            'status'=>'ready',
+            'score'=>$confidence,
+            'product_concept_id'=>$concept_id,
+            'concept_kind'=>'product',
+            'product_slug'=>sanitize_title((string)($primary['slug'] ?? '')),
             'product_target_slugs'=>$target_slugs,
-            'product_title'=>sanitize_text_field((string)($best['title']??'')),
-            'hub'=>sanitize_text_field((string)($primary['hub']??'')),
-            'main_hub'=>sanitize_text_field((string)($primary['main_hub']??'')),
+            'product_title'=>sanitize_text_field((string)($concept['title'] ?? '')),
+            'hub'=>sanitize_text_field((string)($primary['hub'] ?? '')),
+            'main_hub'=>sanitize_text_field((string)($primary['main_hub'] ?? '')),
             'path'=>$path,
-            'private_bucket_slug'=>sanitize_title((string)($primary['private_bucket_slug']??($best['private_bucket_slug']??''))),
-            'strong_horse_hits'=>$strong_horse_hits,'hits'=>(array)($best['hits']??array()),'hit_sources'=>(array)($best['hit_sources']??array()),
-            'evidence_hash'=>hash('sha256',$normalized.'|business-concept-v3|'.sanitize_key((string)($best['id']??''))),
-            'business_match_contract'=>'concept_v3',
+            'private_bucket_slug'=>'',
+            'domain_hits'=>array('exact_profile:' . $concept_id),
+            'hits'=>(array)($verified['tokens'] ?? array()),
+            'hit_sources'=>array(),
+            'evidence_hash'=>hash('sha256', $this->ebay_topic_text($this->ebay_item_topic_evidence($item)) . '|hobby-depot|' . $concept_id),
+            'business_match_contract'=>'hobby_depot_exact_v1',
         );
     }
+
 
     private function ebay_items_table() {
         global $wpdb;
@@ -1336,7 +1090,7 @@ trait PPAR_Ebay_Trait {
             'client_id' => '',
             'client_secret' => '',
             'epn_campaign_id' => '',
-            'affiliate_reference_prefix' => 'pferde-atelier',
+            'affiliate_reference_prefix' => 'hobby-depot',
             'marketplace_id' => 'EBAY_DE',
             'delivery_country' => 'DE',
             'delivery_postal_code' => '',
@@ -1428,17 +1182,17 @@ trait PPAR_Ebay_Trait {
         $out['client_secret'] = $preserve_secret ? substr(trim((string) ($settings['client_secret'] ?? '')), 0, 255) : '';
         $campaign = preg_replace('/\D+/', '', (string) ($settings['epn_campaign_id'] ?? ''));
         $out['epn_campaign_id'] = strlen($campaign) === 10 ? $campaign : '';
-        $prefix = sanitize_key((string) ($settings['affiliate_reference_prefix'] ?? 'pferde-atelier'));
-        $out['affiliate_reference_prefix'] = $prefix !== '' ? substr($prefix, 0, 60) : 'pferde-atelier';
+        $prefix = sanitize_key((string) ($settings['affiliate_reference_prefix'] ?? 'hobby-depot'));
+        $out['affiliate_reference_prefix'] = $prefix !== '' ? substr($prefix, 0, 60) : 'hobby-depot';
         $out['marketplace_id'] = 'EBAY_DE';
         $out['delivery_country'] = 'DE';
         $out['delivery_postal_code'] = substr(preg_replace('/[^0-9A-Za-z -]/', '', (string) ($settings['delivery_postal_code'] ?? '')), 0, 12);
-        $out['private_enabled'] = !empty($settings['private_enabled']);
+        $out['private_enabled'] = false;
         $out['business_enabled'] = !empty($settings['business_enabled']);
         $out['private_parent_term_id'] = absint($settings['private_parent_term_id'] ?? 0);
         $out['private_root_term_id'] = absint($settings['private_root_term_id'] ?? 0);
         $out['private_post_status'] = 'draft';
-        $out['private_auto_publish'] = !empty($settings['private_auto_publish']);
+        $out['private_auto_publish'] = false;
         $out['private_listing_author_id'] = absint($settings['private_listing_author_id'] ?? 0);
         $out['api_terms_confirmed'] = !empty($settings['api_terms_confirmed']);
         $out['privacy_policy_confirmed'] = !empty($settings['privacy_policy_confirmed']);
@@ -2305,34 +2059,11 @@ trait PPAR_Ebay_Trait {
      * die reale Abdeckung, während die nachgelagerte Fachklassifikation weiter
      * allein über die tatsächlichen Angebotsdaten entscheidet.
      */
+
     private function ebay_private_query_variants($rule) {
-        $rule = is_array($rule) ? $rule : array();
-        $id = sanitize_key((string) ($rule['id'] ?? ''));
-        $map = array(
-            'pferde-ponys'=>array('Pferd','Pony'),
-            'sattel-zaumzeug'=>array('Pferdesattel','Zaumzeug Pferd','Trense Pferd'),
-            'decken-schutz'=>array('Pferdedecke','Gamaschen Pferd','Fliegendecke Pferd'),
-            'stall-weide-haltung'=>array('Pferdestall','Weidezaun Pferd','Heunetz Pferd'),
-            'fuetterung-pflege'=>array('Pferdefutter','Pferdepflege','Putzzeug Pferd'),
-            'anhaenger-transport'=>array('Pferdeanhänger','Pferdetransport','Transportgamaschen Pferd'),
-            'reitbekleidung-zubehoer'=>array('Reitbekleidung','Reithelm','Reitstiefel','Lederreitstiefel','Dressurstiefel','Reitgummistiefel','Reithose','Reithandschuhe','Reitweste'),
-            'sonstiges'=>array('Pferdezubehör','Reitsport Zubehör'),
-        );
-        $queries = isset($map[$id]) ? $map[$id] : array((string) ($rule['query'] ?? ''));
-        $safe = array();
-        foreach ($queries as $query) {
-            $query = substr(sanitize_text_field((string) $query), 0, 100);
-            if ($query !== '') { $safe[$query] = $query; }
-        }
-        if (!$safe && !empty($rule['query'])) { $safe[(string) $rule['query']] = substr(sanitize_text_field((string) $rule['query']), 0, 100); }
-        return array_values($safe);
+        return array();
     }
 
-    /**
-     * Generic BUSINESS fallback query for a coarse rule. V6.17 no longer uses
-     * hand-maintained product exceptions here; exact product discovery is built
-     * from the complete verified portal catalog below.
-     */
     private function ebay_business_query_variants($rule) {
         $rule = is_array($rule) ? $rule : array();
         $query = substr(sanitize_text_field((string)($rule['query'] ?? '')), 0, 100);
@@ -2344,138 +2075,55 @@ trait PPAR_Ebay_Trait {
      * concept. Generic product labels receive an explicit Pferd qualifier so
      * broad marketplace meanings do not dominate the first result page.
      */
+
     private function ebay_business_concept_query($concept) {
         $concept = is_array($concept) ? $concept : array();
         $title = trim(sanitize_text_field((string)($concept['title'] ?? '')));
-        if ($title === '') { return ''; }
-
-        // Keep the complete catalog identity. Removing use-context here caused
-        // systematic discovery starvation (e.g. "Kameras im Stall" became
-        // "Kameras Pferd"; "Desinfektionsmittel für Stall" became
-        // "Desinfektionsmittel Pferd") before the strict classifier ran.
-        $identity = $title;
-
-        $topic = $this->ebay_topic_text($identity);
-        $has_equine_scope = false;
-        foreach (array('pferd','pferde','pony','ponys','fohlen','horse','horses','equine','equestrian') as $marker) {
-            if ($this->ebay_topic_term_present($topic, $marker)) { $has_equine_scope = true; break; }
-        }
-        if (!$has_equine_scope) {
-            $catalog = $this->ebay_portal_catalog();
-            if (!is_wp_error($catalog)) {
-                foreach ((array)($catalog['business_inherent_markers'] ?? array()) as $marker) {
-                    if ($this->ebay_business_strict_token_present($topic, (string)$marker)) {
-                        $has_equine_scope = true;
-                        break;
-                    }
-                }
-            }
-        }
-        $query = $identity . ($has_equine_scope ? '' : ' Pferd');
-        return substr(sanitize_text_field($query), 0, 100);
+        return $title === '' ? '' : substr($title, 0, 100);
     }
 
-    /**
-     * Complete BUSINESS discovery contract. Every verified product concept and
-     * every verified hub-family concept is represented. Explicit hub aliases
-     * (for example Reithose -> Reiterbedarf) become their own exact queries.
-     * Entries are interleaved by coarse portal bucket so every work package
-     * covers the whole portal instead of one alphabetic/product-family cluster.
-     */
     private function ebay_business_catalog_profiles($settings) {
         $catalog = $this->ebay_portal_catalog();
         if (is_wp_error($catalog)) { return array(); }
         $settings = is_array($settings) ? $settings : array();
         if (empty($settings['business_enabled'])) { return array(); }
 
-        $enabled_buckets = array();
-        $bucket_order = array();
-        foreach ((array)($settings['rules'] ?? array()) as $rule) {
-            if (!is_array($rule) || empty($rule['active']) || empty($rule['business'])) { continue; }
-            $bucket = sanitize_title((string)($rule['target_term_slug'] ?? $rule['id'] ?? ''));
-            if ($bucket === '') { continue; }
-            $enabled_buckets[$bucket] = true;
-            if (!in_array($bucket, $bucket_order, true)) { $bucket_order[] = $bucket; }
-        }
-        if (!$enabled_buckets) { return array(); }
-
-        $by_bucket = array();
-        $collections = array(
-            'product'=>(array)($catalog['business_concepts'] ?? array()),
-            'hub'=>(array)($catalog['business_hub_concepts'] ?? array()),
-        );
-        foreach ($collections as $concept_kind => $concepts) {
-            foreach ($concepts as $concept) {
-                if (!is_array($concept)) { continue; }
-                $concept_id = sanitize_key((string)($concept['id'] ?? ''));
-                $primary = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
-                $bucket = sanitize_title((string)($primary['private_bucket_slug'] ?? $concept['private_bucket_slug'] ?? ''));
-                if ($concept_id === '' || $bucket === '' || empty($enabled_buckets[$bucket])) { continue; }
-
-                $query_labels = array((string)($concept['title'] ?? ''));
-                if ($concept_kind === 'hub') {
-                    foreach ((array)($concept['aliases'] ?? array()) as $alias) { $query_labels[] = (string)$alias; }
-                }
-                $query_index = 0;
-                foreach ($query_labels as $label) {
-                    $query = $this->ebay_business_concept_query(array('title'=>$label));
-                    if ($query === '') { continue; }
-                    $query_index++;
-                    if (!isset($by_bucket[$bucket])) { $by_bucket[$bucket] = array(); }
-                    $by_bucket[$bucket][] = array(
-                        'concept'=>$concept,'concept_kind'=>$concept_kind,'query'=>$query,'query_index'=>$query_index,
-                    );
-                }
-            }
-        }
-
-        foreach (array_keys($by_bucket) as $bucket) {
-            if (!in_array($bucket, $bucket_order, true)) { $bucket_order[] = $bucket; }
-        }
-
         $profiles = array();
-        $offset = 0;
-        while (true) {
-            $added = false;
-            foreach ($bucket_order as $bucket) {
-                if (empty($by_bucket[$bucket][$offset])) { continue; }
-                $added = true;
-                $entry = $by_bucket[$bucket][$offset];
-                $concept = (array)$entry['concept'];
-                $concept_id = sanitize_key((string)($concept['id'] ?? ''));
-                $concept_kind = sanitize_key((string)($entry['concept_kind'] ?? 'product'));
-                $query_index = max(1, absint($entry['query_index'] ?? 1));
-                $key = 'business-' . $concept_kind . '|' . $concept_id . '|q' . $query_index;
-                $profiles[$key] = array(
-                    'key'=>$key,
-                    'rule'=>array(
-                        'id'=>$concept_id,
-                        'label'=>sanitize_text_field((string)($concept['title'] ?? '')),
-                        'query'=>(string)$entry['query'],
-                        'target_term_slug'=>$bucket,
-                        'private'=>false,
-                        'business'=>true,
-                        'active'=>true,
-                        'business_concept_id'=>$concept_id,
-                        'business_concept_kind'=>$concept_kind,
-                        'request_limit'=>30,
-                    ),
-                    'seller_type'=>'BUSINESS',
-                    'expected_business_concept_id'=>$concept_id,
-                    'expected_business_concept_kind'=>$concept_kind,
-                    'next'=>'',
+        foreach ((array)($catalog['business_concepts'] ?? array()) as $concept) {
+            if (!is_array($concept)) { continue; }
+            $concept_id = sanitize_key((string)($concept['id'] ?? ''));
+            $query = $this->ebay_business_concept_query($concept);
+            if ($concept_id === '' || $query === '') { continue; }
+            $primary = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+            $key = 'business-product|' . $concept_id . '|q1';
+            $profiles[$key] = array(
+                'key'=>$key,
+                'rule'=>array(
+                    'id'=>$concept_id,
+                    'label'=>sanitize_text_field((string)($concept['title'] ?? '')),
+                    'query'=>$query,
+                    'target_term_slug'=>sanitize_title((string)($primary['slug'] ?? '')),
+                    'private'=>false,
+                    'business'=>true,
                     'active'=>true,
-                    'pages'=>0,
-                    'page_limit'=>1,
-                    'route_limit'=>5,
-                    'profile_kind'=>'business_' . $concept_kind . '_concept',
-                );
-            }
-            if (!$added) { break; }
-            $offset++;
+                    'business_concept_id'=>$concept_id,
+                    'business_concept_kind'=>'product',
+                    'request_limit'=>30,
+                ),
+                'seller_type'=>'BUSINESS',
+                'expected_business_concept_id'=>$concept_id,
+                'expected_business_concept_kind'=>'product',
+                'next'=>'',
+                'active'=>true,
+                'pages'=>0,
+                'page_limit'=>1,
+                'route_limit'=>5,
+                'profile_kind'=>'business_product_concept',
+            );
         }
         return $profiles;
     }
+
 
     public function ebay_build_search_request($rule, $seller_type, $settings = null, $token = 'TEST_TOKEN', $offset = 0) {
         $settings = is_array($settings) ? $this->ebay_normalize_settings($settings, true) : $this->ebay_settings();
@@ -6307,23 +5955,9 @@ trait PPAR_Ebay_Trait {
     }
 
     private function ebay_private_bucket_definitions() {
-        return array(
-            'pferde-ponys'=>'Pferde & Ponys',
-            'sattel-zaumzeug'=>'Sattel & Zaumzeug',
-            'decken-schutz'=>'Decken & Schutz',
-            'stall-weide-haltung'=>'Stall, Weide & Haltung',
-            'fuetterung-pflege'=>'Fütterung & Pflege',
-            'anhaenger-transport'=>'Anhänger & Transport',
-            'reitbekleidung-zubehoer'=>'Reitbekleidung & Zubehör',
-            'sonstiges'=>'Sonstiges',
-        );
+        return array();
     }
 
-    /**
-     * Recover a missing private target from durable evidence. This is used by the
-     * stündlichen getItem refresh so older rows with target_term_id=0 are repaired
-     * instead of failing their HivePress round-trip.
-     */
     private function ebay_recover_private_target_term_id($row, $settings) {
         $row = is_array($row) ? $row : array();
         $settings = is_array($settings) ? $settings : $this->ebay_settings();
