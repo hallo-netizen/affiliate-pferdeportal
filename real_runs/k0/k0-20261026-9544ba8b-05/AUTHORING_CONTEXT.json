@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzboden-faq",
+    "plan_slot": "7dc45a5968edd83bad389852d073e13fc01b992df5393c244bcc985289470f16",
+    "target_keyword": "Was ist der beste Reitplatzboden",
+    "title": "Was ist der beste Reitplatzboden?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Heidelberg Materials – Reitplatzsand",
+          "source_url": "https://www.heidelbergmaterials.de/de/mineralik/produkte/mineralik-fuer-sportanlagenbau/reitplatzsand"
+        },
+        {
+          "source_title": "FLL – Reitplatzempfehlungen",
+          "source_url": "https://www.irbnet.de/daten/rswb/erg_dokument/14079000047_Anlage.pdf"
+        }
+      ],
+      "claims": [
+        "Ein guter Reitplatzboden muss je nach Nutzung sowohl ausreichend trittsicher als auch nachgiebig und wasserdurchlässig sein.",
+        "Die FLL-Reitplatzempfehlungen enthalten technische Anforderungen etwa an Wasserdurchlässigkeit und Eindringtiefe der Tretschicht.",
+        "Unterbau und Entwässerung sind für Reitplätze im Außenbereich ebenso wichtig wie die Wahl des Tretschichtmaterials."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist der beste Reitplatzboden",
+      "topic": "Was ist der beste Reitplatzboden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzboden-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist der beste Reitplatzboden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Heidelberg Materials – Reitplatzsand",
+        "source_url": "https://www.heidelbergmaterials.de/de/mineralik/produkte/mineralik-fuer-sportanlagenbau/reitplatzsand",
+        "statement": "Ein guter Reitplatzboden muss je nach Nutzung sowohl ausreichend trittsicher als auch nachgiebig und wasserdurchlässig sein.",
+        "evidence_text": "Ein guter Reitplatzboden muss je nach Nutzung sowohl ausreichend trittsicher als auch nachgiebig und wasserdurchlässig sein.",
+        "evidence_text_sha256": "1beb334602350271612fabb5c30286a655fc3a62431be2a180f302b2cfb5aa17",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FLL – Reitplatzempfehlungen",
+        "source_url": "https://www.irbnet.de/daten/rswb/erg_dokument/14079000047_Anlage.pdf",
+        "statement": "Die FLL-Reitplatzempfehlungen enthalten technische Anforderungen etwa an Wasserdurchlässigkeit und Eindringtiefe der Tretschicht.",
+        "evidence_text": "Die FLL-Reitplatzempfehlungen enthalten technische Anforderungen etwa an Wasserdurchlässigkeit und Eindringtiefe der Tretschicht.",
+        "evidence_text_sha256": "044a9f59668a986ceff3249fb93fc8d16109b95d9fb089d40ca5456bc18862bc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Heidelberg Materials – Reitplatzsand",
+        "source_url": "https://www.heidelbergmaterials.de/de/mineralik/produkte/mineralik-fuer-sportanlagenbau/reitplatzsand",
+        "statement": "Unterbau und Entwässerung sind für Reitplätze im Außenbereich ebenso wichtig wie die Wahl des Tretschichtmaterials.",
+        "evidence_text": "Unterbau und Entwässerung sind für Reitplätze im Außenbereich ebenso wichtig wie die Wahl des Tretschichtmaterials.",
+        "evidence_text_sha256": "3ba62c92823743e89f08d0c1b9c6a6a2d59286ca0404da10c5256709d90d89ed",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reitplatzboden-faq/",
+        "anchor": "reitplatzboden – FAQ",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/reitplatzboden-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/reitplatzboden-vergleich/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reitplatzboden-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzboden-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzboden-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzboden-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "reitplatzboden",
+      "Was ist der",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
