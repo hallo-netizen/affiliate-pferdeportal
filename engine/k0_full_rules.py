@@ -122,6 +122,15 @@ def validate_rule_context(ctx,identity):
         anchor=str(x.get('anchor') or '')
         if not href.startswith('/') or href.startswith('//') or '://' in href or not block or not anchor:
             raise Blocked('K0_RULE_CONTEXT_LINK_INVALID')
+        # A link must say where it leads; an author-supplied registry cannot redeem filler text.
+        normalized=re.sub(r'\s+',' ',anchor.strip().casefold())
+        category_slug=href.rstrip('/').split('/')[-1].casefold()
+        category_words=category_slug.replace('-',' ').replace('_',' ')
+        if (normalized in {'weitere informationen zum thema','weitere informationen','vertiefende hinweise','mehr dazu','hier klicken'}
+                or normalized==category_words+' – faq'
+                or normalized=='faq zu '+category_words.removesuffix(' faq')
+                or normalized=='faq zu '+category_words):
+            raise Blocked('K0_RULE_CONTEXT_LINK_ANCHOR_UNINFORMATIVE:'+str(x.get('role') or ''))
         blocks.append(block)
     if len(set(blocks))!=len(blocks):
         raise Blocked('K0_RULE_CONTEXT_LINK_BLOCKS_NOT_DISTINCT')
@@ -137,7 +146,7 @@ def validate_rule_context(ctx,identity):
     if not isinstance(registry,list):
         raise Blocked('K0_RULE_CONTEXT_LINK_REGISTRY_MISSING')
     reg={str(x.get('href') or ''):x for x in registry if isinstance(x,dict)}
-    if any(str(x.get('href') or '') not in reg or reg[str(x.get('href') or '')].get('active') is False for x in links):
+    if any(str(x.get('href') or '') not in reg or reg[str(x.get('href') or '')].get('active') is not True for x in links):
         raise Blocked('K0_RULE_CONTEXT_LINK_REGISTRY_INACTIVE')
     runtime_roles=set(ctx.get('runtime_link_roles') or [])
     if runtime_roles!=roles:
