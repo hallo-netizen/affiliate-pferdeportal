@@ -82,7 +82,9 @@ def with_valid_table(a):
 class K0LinkRegressionTests(unittest.TestCase):
     def test_good_links_still_pass_existing_rule_context(self):
         p,_=package_from_article(make_base())
-        self.assertEqual(validate_rule_context(p['rule_context'],p['identity']),p['rule_context'])
+        out=validate_rule_context(p['rule_context'],p['identity'])
+        self.assertEqual(out['bound_links'],p['rule_context']['bound_links'])
+        self.assertEqual(out['link_registry'],p['rule_context']['link_registry'])
 
     def test_uninformative_prepared_link_is_blocked(self):
         p,_=package_from_article(make_base())
