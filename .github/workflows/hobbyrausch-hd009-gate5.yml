@@ -5,6 +5,8 @@ on:
     branches:
       - hobbyrausch/hd009-affiliate-port-20261026
     paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/**'
       - '.github/workflows/hobbyrausch-hd009-gate5.yml'
   workflow_dispatch:
 
@@ -59,15 +61,15 @@ jobs:
           set -euo pipefail
           main="$HD009_SRC/hobby-depot-affiliate-router.php"
           VERSION="$(sed -n 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*//p' "$main" | head -n1 | tr -d '\r')"
-          test "$VERSION" = "0.1.0-dev"
+          test "$VERSION" = "0.1.1-dev"
           rm -rf /tmp/hd009-package /tmp/hd009-unpack
           mkdir -p /tmp/hd009-package /tmp/hd009-unpack
           cp -a "$HD009_SRC" /tmp/hd009-package/affiliate-portal-router
           (
             cd /tmp/hd009-package
-            zip -qr "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" affiliate-portal-router
+            zip -qr "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" affiliate-portal-router
           )
-          unzip -q "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" -d /tmp/hd009-unpack
+          unzip -q "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" -d /tmp/hd009-unpack
           test -f /tmp/hd009-unpack/affiliate-portal-router/hobby-depot-affiliate-router.php
           mapfile -t unpack_php < <(find /tmp/hd009-unpack/affiliate-portal-router -type f -name '*.php' -print | sort)
           test "${#unpack_php[@]}" -eq 23
@@ -75,7 +77,7 @@ jobs:
           (cd "$HD009_SRC" && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/source.sha
           (cd /tmp/hd009-unpack/affiliate-portal-router && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/unpack.sha
           diff -u /tmp/source.sha /tmp/unpack.sha
-          sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" | tee /tmp/candidate.sha
+          sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip" | tee /tmp/candidate.sha
           echo "HD009_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "HD009_SHA=$(cut -d' ' -f1 /tmp/candidate.sha)" >> "$GITHUB_ENV"
 
@@ -96,6 +98,16 @@ jobs:
 
           $WPCLI plugin activate affiliate-portal-router
           $WPCLI plugin is-active affiliate-portal-router
+
+          $WPCLI eval '
+            $p = Hobby_Depot_Affiliate_Router::instance()->provider_credentials_preflight();
+            if (!is_array($p) || !empty($p["all_required_complete"])) exit(20);
+            foreach (array("awin","adcell","ebay","idealo","digistore24") as $provider) {
+              if (empty($p["providers"][$provider]) || !array_key_exists("missing_required", $p["providers"][$provider])) exit(21);
+            }
+            if (empty($p["providers"]["ebay"]["missing_required"]) || empty($p["providers"]["awin"]["missing_required"])) exit(22);
+            echo "HD009_CREDENTIAL_PREFLIGHT_PASS\n";
+          '
 
           $WPCLI eval '
             $r = HDAR_Hobby_Depot_Source::catalog();
@@ -178,6 +190,7 @@ jobs:
           - HD-004 fehlt → fail-closed PASS
           - HD-004-Vertrag vorhanden → 8 Welten / 320 Hobbyziele PASS
           - eBay/idealo geladen, Amazon bleibt ohne erfundenen Adapter PASS
+          - Verbindungsdaten-Preflight vorhanden; frische Installation blockiert korrekt bei fehlenden Pflichtzugängen
 
           Grenze: kein produktiver Live-Readback, keine Zugangsdaten im Artefakt.
           EOF
@@ -189,7 +202,7 @@ jobs:
 
           Arbeitsbranch: hobbyrausch/hd009-affiliate-port-20261026
           GitHub-Actions-Lauf: $GITHUB_RUN_ID
-          Kandidat: HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip
+          Kandidat: HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip
           Plugin-Version: $HD009_VERSION
           SHA-256: $HD009_SHA
 
@@ -204,6 +217,7 @@ jobs:
           - ohne HD-004-Registry: erwartetes fail-closed hdar_category_registry_unavailable.
           - mit exakt bereitgestelltem HD-004-Runtimevertrag: 8 Welten, 320 Hobbyseiten, 320 Artikelkategorien.
           - eBay/idealo-Regressionspfade vorhanden; kein erfundener Amazon-Adapter.
+          - Verbindungsdaten-Preflight erkennt Awin, ADCELL, eBay, idealo und Digistore24 und bleibt ohne Pflichtzugänge fail-closed.
           - keine Zugangsdaten in Quellcode/Manifest/Evidence geschrieben.
 
           Grenze:
@@ -215,7 +229,7 @@ jobs:
         with:
           name: HD009-gate5-candidate
           path: |
-            /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip
+            /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip
             /tmp/MANIFEST.md
             /tmp/EVIDENCE_GATE5_20261026.md
           if-no-files-found: error
@@ -234,7 +248,7 @@ jobs:
           target="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE"
           evidence="/tmp/campus/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md"
           mkdir -p "$target"
-          cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip "$target/CURRENT.zip"
+          cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.1_DEV_GATE5.zip "$target/CURRENT.zip"
           cp /tmp/MANIFEST.md "$target/MANIFEST.md"
           cp /tmp/EVIDENCE_GATE5_20261026.md "$evidence"
           git -C /tmp/campus add \
