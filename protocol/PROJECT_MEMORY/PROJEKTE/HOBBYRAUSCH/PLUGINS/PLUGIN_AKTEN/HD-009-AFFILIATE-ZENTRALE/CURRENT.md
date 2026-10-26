@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-26
-STATUS: PORTIERUNG IN ARBEIT / NICHT INSTALLIERBAR / KEIN RELEASE
+STATUS: GATE 4 LOCAL-CI PASS / GATE 5 OFFEN / KEIN RELEASE
 
 Plugin-ID: HD-009-AFFILIATE-ZENTRALE
 Name: Hobby Depot Affiliate-Zentrale
@@ -83,13 +83,22 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
    - Amazon bleibt vorbereitet; kein Adapter erfunden.
    - Runtime-/WordPress-Beweis folgt erst in Gate 4.
 
-4. **GATE 4 – Positiv/Negativ/Regression:** IN ARBEIT
-5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN; vor Gate 4 verboten.
+4. **GATE 4 – Positiv/Negativ/Regression: PASS**
+   - geprüfter Quellstand: `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`;
+   - GitHub-Actions-Lauf `40319481655`, Job `121560434781`: SUCCESS;
+   - PHP 23/23 PASS;
+   - Positiv HD-004 → HD-009 → eBay/idealo PASS;
+   - Negativ-/fail-closed-Szenarien PASS;
+   - Fremdprojekt-Regression PASS;
+   - Amazon prepared/inaktiv PASS;
+   - Nachweis: `EVIDENCE_GATE4_20261026.md`.
+
+5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN.
 
 ## ERSTER OFFENER BLOCKER
 
-Es fehlt noch der ausführbare Positiv-/Negativ-/Regressionstest der bereinigten HD-009-Arbeitsquelle. Ein statischer PASS ist ausdrücklich kein Installations-PASS.
+Es fehlt ein installierbarer, fresh-unpack-geprüfter HD-009-Kandidat mit realem WordPress-Aktivierungs-/Laufzeitnachweis. Gate 4 ist PASS, aber ausdrücklich noch kein Installations- oder Live-PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-GATE 4 ausführen: bereinigte Hobby-Depot-Zielquelle mit gültigem und ungültigem HD-004-Snapshot testen; eBay-/idealo-Zuordnung positiv und fail-closed negativ prüfen; Regression auf fehlende Fremdprojektdateien und unbeabsichtigte Amazon-Aktivierung prüfen. Erst bei vollständigem PASS Gate 5 vorbereiten.
+GATE 5 ausführen: aus dem Gate-4-PASS-Quellstand genau einen Installationskandidaten bauen; Fresh-Unpack, Pluginstruktur, Version und SHA-256 prüfen; in frischer WordPress-Laufzeit Aktivierung sowie HD-004 positiv/fail-closed negativ und Providerregression testen. Erst danach isoliertes `CURRENT.zip` + `MANIFEST.md` synchronisieren. Kein Live-PASS ohne echten Live-Readback.
