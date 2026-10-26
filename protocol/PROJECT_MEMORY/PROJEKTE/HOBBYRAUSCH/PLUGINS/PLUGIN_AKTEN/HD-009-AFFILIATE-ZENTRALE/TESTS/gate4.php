@@ -184,10 +184,14 @@ switch ($scenario) {
     case 'amazon_regression':
         $registry = file_get_contents($pluginRoot . '/includes/trait-ppar-provider-registry.php');
         $main = file_get_contents($pluginRoot . '/hobby-depot-affiliate-router.php');
-        assert_true(preg_match("/'amazon'\s*=>\s*array\s*\([^)]*'state'\s*=>\s*'prepared'/s", (string)$registry) === 1, 'Amazon muss prepared bleiben');
-        assert_true(strpos((string)$main, 'HDAR_Amazon') === false, 'kein aktiver Amazon-Adapter im Bootstrap');
-        assert_true(!file_exists($pluginRoot . '/includes/trait-hdar-amazon-creators.php'), 'kein erfundener Amazon-Adapter');
-        ok_gate('Amazon remains prepared/inactive');
+        $idealo = file_get_contents($pluginRoot . '/includes/trait-ppar-idealo.php');
+        assert_true(preg_match("/'amazon'\s*=>\s*array\s*\([^)]*'state'\s*=>\s*'active'/s", (string)$registry) === 1, 'Amazon-ASIN-Brücke muss aktiv registriert sein');
+        assert_true(strpos((string)$registry, 'function amazon_product_from_campaign') !== false, 'Amazon-ASIN-Brücke fehlt');
+        assert_true(strpos((string)$registry, 'https://www.amazon.de/dp/') !== false, 'Amazon-Direktlinkformat fehlt');
+        assert_true(strpos((string)$idealo, "'asins_product'") !== false, 'idealo-ASIN-Quelle fehlt');
+        assert_true(strpos((string)$main, 'amazon_bridge_ranked_candidates') !== false, 'Amazon-Brücke ist nicht in die Produktauswahl eingebunden');
+        assert_true(!file_exists($pluginRoot . '/includes/trait-hdar-amazon-creators.php'), 'keine erfundene Amazon-Creators-API');
+        ok_gate('Amazon ASIN bridge regression');
         break;
 
     default:
