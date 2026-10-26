@@ -103,22 +103,11 @@ trait PPAR_Output_Objects_Trait {
     }
 
     private function output_migrate_legacy_scope_decisions($previous_version) {
-        if (version_compare((string) $previous_version, '1.1', '>=')) {
-            return;
-        }
-        if (!method_exists($this, 'creative_library_table')) {
-            return;
-        }
-        global $wpdb;
-        $creative_table = $this->creative_library_table();
-        $rows = $wpdb->get_results("SELECT identity_hash, content_scope, review_status FROM {$creative_table} WHERE identity_hash<>'' AND (content_scope IN ('horse','other','unclear') OR review_status IN ('approved','rejected'))", ARRAY_A);
-        foreach ((array) $rows as $row) {
-            $scope = sanitize_key((string) ($row['content_scope'] ?? ''));
-            $review = sanitize_key((string) ($row['review_status'] ?? ''));
-            $status = ($scope === 'other' || $review === 'rejected') ? 'veto' : ($scope === 'unclear' ? 'review' : 'approved');
-            $this->output_set_portal_decision($this->output_local_portal_key(), (string) ($row['identity_hash'] ?? ''), $status, 'Aus V3.x-Bewertung für das lokale Portal übernommen.');
-        }
+        // Hobby Depot starts with its own portal decisions. No source-portal
+        // content-scope classification is imported automatically.
+        return;
     }
+
 
     private function output_portal_decision($portal_key, $identity_hash) {
         global $wpdb;
@@ -222,101 +211,35 @@ trait PPAR_Output_Objects_Trait {
      * Externe Adapter werden ausschließlich über den Filter registriert; ohne
      * vollständige callbacks werden sie als BLOCKED geführt und nie beschrieben.
      */
+
     public function output_portal_registry() {
         $portals = array();
         $local_key = $this->output_local_portal_key();
         $local_profile = array(
-            'domain_key' => 'horse',
-            'domain_terms' => array('pferd','pferde','pony','fohlen','reitsport','reiter'),
-            'negative_terms' => array('hund','hunde','katze','katzen','kleintier','kleintiere','vogel','voegel','exoten'),
-            'output_types' => array('portal_banner','product_campaign','hivepress_listing'),
-            'listing_target_types' => array('hp_listing_category'),
-            'banner_target_types' => array('page','category','hp_listing_category'),
+            'domain_key' => 'hobby_depot',
+            'domain_terms' => array(),
+            'negative_terms' => array(),
+            'output_types' => array('portal_banner','product_campaign'),
+            'listing_target_types' => array(),
+            'banner_target_types' => array('page','category'),
             'product_target_types' => array('page','category'),
         );
-        $local_profile = apply_filters('ppar_affiliate_local_portal_profile', $local_profile, $local_key, self::PORTAL_ADAPTER_VERSION);
+        $local_profile = apply_filters('hobby_depot_affiliate_local_portal_profile', $local_profile, $local_key, self::PORTAL_ADAPTER_VERSION);
         $local_profile = is_array($local_profile) ? $local_profile : array();
         $portals[$local_key] = array_merge(array(
             'key' => $local_key,
-            'label' => get_bloginfo('name') ?: $local_key,
+            'label' => get_bloginfo('name') ?: 'Hobby Depot',
             'site_url' => home_url('/'),
             'adapter' => 'wordpress_local',
             'adapter_version' => self::PORTAL_ADAPTER_VERSION,
             'enabled' => true,
-            'local' => true,
             'blog_id' => function_exists('get_current_blog_id') ? absint(get_current_blog_id()) : 1,
         ), $local_profile);
 
-        if (function_exists('is_multisite') && is_multisite() && function_exists('get_sites')) {
-            foreach ((array) get_sites(array('number'=>200, 'deleted'=>0, 'spam'=>0, 'archived'=>0)) as $site) {
-                $blog_id = absint($site->blog_id ?? 0);
-                if ($blog_id <= 0 || $blog_id === absint($portals[$local_key]['blog_id'])) {
-                    continue;
-                }
-                $key = sanitize_key('wp-' . $blog_id);
-                $portals[$key] = array(
-                    'key'=>$key,
-                    'label'=>'WordPress-Site ' . $blog_id,
-                    'site_url'=>function_exists('get_home_url') ? get_home_url($blog_id, '/') : '',
-                    'adapter'=>'wordpress_multisite',
-                    'adapter_version'=>self::PORTAL_ADAPTER_VERSION,
-                    'enabled'=>false,
-                    'local'=>false,
-                    'blog_id'=>$blog_id,
-                );
-            }
-        }
-
-        $stored = get_option(self::OPTION_PORTAL_REGISTRY, array());
-        $stored = is_array($stored) ? $stored : array();
-        foreach ($stored as $key => $settings) {
-            $key = sanitize_key((string) $key);
-            if ($key === '' || !isset($portals[$key]) || !is_array($settings)) {
-                continue;
-            }
-            $portals[$key]['enabled'] = !empty($settings['enabled']);
-            foreach (array('domain_key') as $field) {
-                if (isset($settings[$field])) {
-                    $portals[$key][$field] = sanitize_key((string) $settings[$field]);
-                }
-            }
-            foreach (array('domain_terms','negative_terms','output_types','listing_target_types','banner_target_types','product_target_types') as $field) {
-                if (isset($settings[$field]) && is_array($settings[$field])) {
-                    $portals[$key][$field] = array_values(array_unique(array_filter(array_map($field === 'domain_terms' || $field === 'negative_terms' ? 'sanitize_text_field' : 'sanitize_key', $settings[$field]))));
-                }
-            }
-        }
-
         $filtered = apply_filters('ppar_affiliate_portal_registry', $portals, self::PORTAL_ADAPTER_VERSION);
-        if (!is_array($filtered)) {
-            return $portals;
-        }
-        $safe = array();
-        foreach ($filtered as $key => $portal) {
-            if (!is_array($portal)) {
-                continue;
-            }
-            $portal_key = sanitize_key((string) ($portal['key'] ?? $key));
-            $adapter = sanitize_key((string) ($portal['adapter'] ?? ''));
-            $version = (string) ($portal['adapter_version'] ?? '');
-            if ($portal_key === '' || $adapter === '' || $version !== self::PORTAL_ADAPTER_VERSION) {
-                continue;
-            }
-            $portal['key'] = $portal_key;
-            $portal['adapter'] = $adapter;
-            $portal['label'] = sanitize_text_field((string) ($portal['label'] ?? $portal_key));
-            $portal['enabled'] = !empty($portal['enabled']);
-            $portal['domain_key'] = sanitize_key((string) ($portal['domain_key'] ?? ''));
-            foreach (array('domain_terms','negative_terms') as $field) {
-                $portal[$field] = array_values(array_unique(array_filter(array_map('sanitize_text_field', (array) ($portal[$field] ?? array())))));
-            }
-            foreach (array('output_types','listing_target_types','banner_target_types','product_target_types') as $field) {
-                $portal[$field] = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($portal[$field] ?? array())))));
-            }
-            $safe[$portal_key] = $portal;
-        }
-        return $safe;
+        return is_array($filtered) ? $filtered : $portals;
     }
+
 
     private function output_portal_by_key($portal_key, $allow_disabled = false) {
         $portal_key = sanitize_key((string) $portal_key);
@@ -633,94 +556,59 @@ trait PPAR_Output_Objects_Trait {
      * Das Design wird nicht gelesen oder verändert; Vertragsabweichungen bleiben
      * fail-closed. Andere Portale liefern ihre Matrix über den bestehenden Filter.
      */
+
     public function output_slot_matrix($portal) {
-        $adapter = sanitize_key((string) ($portal['adapter'] ?? ''));
+        $adapter = sanitize_key((string)($portal['adapter'] ?? ''));
         if (in_array($adapter, array('wordpress_local','wordpress_multisite'), true)) {
-            $matrix = $this->output_with_portal($portal, function($active_portal) {
-                $candidate = array();
-                if (class_exists('Pferde_Template_Kit')) {
-                    $contract = is_callable(array('Pferde_Template_Kit','affiliate_contract_version'))
-                        ? (string) call_user_func(array('Pferde_Template_Kit','affiliate_contract_version'))
-                        : (defined('Pferde_Template_Kit::AFFILIATE_CONTRACT') ? (string) constant('Pferde_Template_Kit::AFFILIATE_CONTRACT') : '');
-                    $profile = is_callable(array('Pferde_Template_Kit','design_profile'))
-                        ? sanitize_key((string) call_user_func(array('Pferde_Template_Kit','design_profile')))
-                        : '';
-                    $profile_contract = is_callable(array('Pferde_Template_Kit','design_profile_contract_version'))
-                        ? (string) call_user_func(array('Pferde_Template_Kit','design_profile_contract_version'))
-                        : '';
-                    if ($contract === self::CONTRACT_VERSION && $profile === 'pferde_atelier' && $profile_contract === '1.0') {
-                        $candidate = array(
-                            'start_after_topics'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('start'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'hub_grid_card'=>array('creative_type'=>'banner','ratio_min'=>0.80,'ratio_max'=>2.40,'min_width'=>240,'min_height'=>110,'crop'=>'cover','target_types'=>array('page'),'target_contexts'=>array('hub1','hub2')),
-                            'hub_after_cards'=>$this->category_large_banner_rule('hub_after_cards'),
-                            'product_after_category_tiles'=>$this->category_large_banner_rule('product_after_category_tiles'),
-                            'journal_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'anzeigenmarkt_top_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('anzeigenmarkt'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'anzeigenmarkt_category_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('hp_listing_category'),'target_contexts'=>array('hivepress_category'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            // Affiliate-Werbeplatzregister 2026-09-17: dieselben Regeln sind
-                            // Quelle fuer automatische Zuordnung UND Backendfilter.
-                            'glossary_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>310,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'desktop'),
-                            'glossary_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'mobile'),
-                            'breed_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>250,'min_height'=>1,'crop'=>'contain','target_types'=>array('pa_breed','pa_breed_group'),'target_contexts'=>array(),'render_context'=>'breed_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'desktop'),
-                            'breed_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('pa_breed','pa_breed_group'),'target_contexts'=>array(),'render_context'=>'breed_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'mobile'),
-                            'post_inline_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>600,'min_height'=>60,'crop'=>'contain','target_types'=>array('post'),'target_contexts'=>array('classic_post'),'upscale_max'=>1.10,'min_fill'=>0.60),
-                            'glossary_overview_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('category','uge_group','page'),'target_contexts'=>array('glossary_overview'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'breed_overview_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('category','pa_breed_group','page'),'target_contexts'=>array('breed_overview'),'upscale_max'=>1.10,'min_fill'=>0.90),
-                            'hub_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
-                            'hub_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
-                            'hub_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
-                            'category_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
-                            'category_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
-                            'category_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
-                            'journal_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
-                            'journal_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
-                            'journal_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
-                        );
-                    }
-                }
-                $filtered = apply_filters('ppar_affiliate_slot_matrix', $candidate, $active_portal, self::PORTAL_ADAPTER_VERSION);
-                return is_array($filtered) ? $filtered : array();
-            });
-            return is_wp_error($matrix) || !is_array($matrix) ? array() : $matrix;
+            $candidate = array(
+                'start_after_topics'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('start'),'upscale_max'=>1.10,'min_fill'=>0.90),
+                'hub_grid_card'=>array('creative_type'=>'banner','ratio_min'=>0.80,'ratio_max'=>2.40,'min_width'=>240,'min_height'=>110,'crop'=>'cover','target_types'=>array('page'),'target_contexts'=>array('hub1','hub2')),
+                'hub_after_cards'=>$this->category_large_banner_rule('hub_after_cards'),
+                'product_after_category_tiles'=>$this->category_large_banner_rule('product_after_category_tiles'),
+                'journal_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal'),'upscale_max'=>1.10,'min_fill'=>0.90),
+                'glossary_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>310,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'desktop'),
+                'glossary_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_contexts'=>array(),'render_context'=>'glossary_single','upscale_max'=>1.10,'min_fill'=>0.60,'device'=>'mobile'),
+                'post_inline_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>600,'min_height'=>60,'crop'=>'contain','target_types'=>array('post'),'target_contexts'=>array('classic_post'),'upscale_max'=>1.10,'min_fill'=>0.60),
+                'glossary_overview_banner'=>array('creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,'min_width'=>800,'min_height'=>60,'crop'=>'contain','target_types'=>array('category','uge_group','page'),'target_contexts'=>array('glossary_overview'),'upscale_max'=>1.10,'min_fill'=>0.90),
+                'hub_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
+                'hub_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
+                'hub_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('hub1')),
+                'category_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
+                'category_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
+                'category_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page','category'),'target_contexts'=>array('hub2','category','leaf','leaf_category')),
+                'journal_product_1'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
+                'journal_product_2'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
+                'journal_product_3'=>array('creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2.00,'min_width'=>180,'min_height'=>180,'crop'=>'contain','target_types'=>array('page'),'target_contexts'=>array('journal')),
+            );
+            $filtered = apply_filters('hobby_depot_affiliate_slot_matrix', $candidate, $portal, self::PORTAL_ADAPTER_VERSION);
+            return is_array($filtered) ? $filtered : array();
         }
         $callbacks = is_array($portal['callbacks'] ?? null) ? $portal['callbacks'] : array();
         if (empty($callbacks['slots']) || !is_callable($callbacks['slots'])) { return array(); }
         $candidate = call_user_func($callbacks['slots'], $portal, self::PORTAL_ADAPTER_VERSION);
         return is_array($candidate) ? $candidate : array();
     }
-    /**
-     * V6.72.40 – kanonische technische Profile der im Affiliate-Werbeplatzregister
-     * festgelegten Backend-Werbeplaetze. Produktive Ausgabe bleibt getrennt aktivierbar;
-     * der Backendfilter liest die technischen Regeln jedoch nur von hier und erfindet
-     * keine zweite Pixel-/Formatlogik.
-     */
+
     public function output_werbeplatz_filter_profiles($portal) {
         $matrix = $this->output_slot_matrix($portal);
         $binding = array(
             'kategorien'=>array('label'=>'Kategorien','slots'=>array('hub_after_cards','product_after_category_tiles')),
             'glossarartikel'=>array('label'=>'Glossarartikel','slots'=>array('glossary_single_desktop_banner','glossary_single_mobile_banner')),
-            'pferderassenartikel'=>array('label'=>'Pferderassenartikel','slots'=>array('breed_single_desktop_banner','breed_single_mobile_banner')),
             'klassische_einzelbeitraege'=>array('label'=>'Klassische Einzelbeiträge','slots'=>array('post_inline_banner')),
             'startseite'=>array('label'=>'Startseite','slots'=>array('start_after_topics')),
             'glossar_uebersichten'=>array('label'=>'Glossar-Übersichten','slots'=>array('glossary_overview_banner')),
-            'pferderassen_uebersichten'=>array('label'=>'Pferderassen-Übersichten','slots'=>array('breed_overview_banner')),
         );
         $profiles = array();
-        foreach ($binding as $key => $definition) {
+        foreach ($binding as $key=>$definition) {
             $rules = array();
-            foreach ((array) $definition['slots'] as $slot_id) {
-                if (!empty($matrix[$slot_id]) && is_array($matrix[$slot_id])) {
-                    $rules[$slot_id] = $matrix[$slot_id];
-                }
+            foreach ((array)$definition['slots'] as $slot_id) {
+                if (!empty($matrix[$slot_id]) && is_array($matrix[$slot_id])) { $rules[$slot_id] = $matrix[$slot_id]; }
             }
-            // Fail closed: ein sichtbarer Werbeplatz existiert nur, wenn seine
-            // echte Slotregel in derselben produktiven Matrix vorhanden ist.
-            if ($rules) {
-                $profiles[$key] = array('label'=>$definition['label'],'rules'=>$rules);
-            }
+            if ($rules) { $profiles[$key] = array('label'=>$definition['label'],'rules'=>$rules); }
         }
         return $profiles;
     }
+
 
     private function output_text($value) {
         $value = remove_accents(strtolower(wp_strip_all_tags((string) $value)));
@@ -818,7 +706,7 @@ trait PPAR_Output_Objects_Trait {
             implode(' ', (array) ($partner['domains'] ?? array())),
         )));
         $evidence = trim($specific . ' ' . $this->output_text($partner_text));
-        $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige')));
+        $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), array('banner','anzeige')));
         if (!$evidence_tokens) { return null; }
 
         $ranked = array();
@@ -1208,7 +1096,7 @@ trait PPAR_Output_Objects_Trait {
 
             // Schwaechere Evidenz darf den staerkeren Treffer nur innerhalb
             // desselben Strangs praezisieren. Beispiel:
-            // /ausruestung/ -> Schabracken -> Pflege Schabracken.
+            // Oberbereich -> Hobby -> konkrete Unterkategorie.
             if($best_path && $path
                 && count($path)>count($best_path)
                 && array_slice($path,0,count($best_path))===$best_path){
@@ -2810,7 +2698,7 @@ trait PPAR_Output_Objects_Trait {
         $campaign['match_descendants'] = $manual_fixed_banner ? false : ($general_banner_fallback ? false : $auto_category_banner);
         // V6.72.89: page_id ist ausschliesslich fuer echte Seiten. Eine WordPress-
         // Kategorie-ID darf niemals als Seiten-ID gespeichert werden; sonst geht die
-        // exakte category:<slug>-Bindung fuer normale Kategorien (z. B. Reithelme) verloren.
+        // exakte category:<slug>-Bindung fuer normale Kategorien (z. B. eine konkrete Hobbykategorie) verloren.
         if ($auto_category_banner && sanitize_key((string)($target['type'] ?? '')) === 'page') {
             $campaign['page_id'] = absint($target['id'] ?? 0);
         }
