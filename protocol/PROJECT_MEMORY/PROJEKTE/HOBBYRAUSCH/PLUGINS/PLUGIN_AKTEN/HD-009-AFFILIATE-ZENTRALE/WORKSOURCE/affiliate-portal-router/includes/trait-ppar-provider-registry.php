@@ -62,11 +62,11 @@ trait PPAR_Provider_Registry_Trait {
             ),
             'amazon' => array(
                 'label' => 'Amazon',
-                'state' => 'prepared',
-                'access_owner' => 'adapter',
+                'state' => 'active',
+                'access_owner' => 'core',
                 'specialist_menu' => false,
                 'specialist_slug' => 'affiliate-portal-provider-amazon',
-                'capabilities' => array('creatives','outputs','veto'),
+                'capabilities' => array('credentials','connection_test','creatives','outputs','veto'),
             ),
             'idealo' => array(
                 'label' => 'idealo',
@@ -193,6 +193,111 @@ trait PPAR_Provider_Registry_Trait {
         return true;
     }
 
+    private function amazon_settings_defaults() {
+        return array(
+            'enabled' => false,
+            'tracking_id' => '',
+        );
+    }
+
+    private function amazon_tracking_id_valid($tracking_id) {
+        $tracking_id = trim((string) $tracking_id);
+        return $tracking_id !== '' && preg_match('/^[A-Za-z0-9][A-Za-z0-9_-]{0,62}-21$/', $tracking_id) === 1;
+    }
+
+    private function amazon_settings() {
+        $stored = get_option('ppar_amazon_search_v1', array());
+        $stored = is_array($stored) ? $stored : array();
+        $settings = array_merge($this->amazon_settings_defaults(), $stored);
+        if (defined('PPAR_AMAZON_TRACKING_ID') && $this->amazon_tracking_id_valid((string) PPAR_AMAZON_TRACKING_ID)) {
+            $settings['tracking_id'] = trim((string) PPAR_AMAZON_TRACKING_ID);
+        }
+        $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+        return $settings;
+    }
+
+    private function amazon_update_settings($settings) {
+        $settings = array_merge($this->amazon_settings_defaults(), is_array($settings) ? $settings : array());
+        $settings['tracking_id'] = trim(sanitize_text_field((string) ($settings['tracking_id'] ?? '')));
+        $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid($settings['tracking_id']);
+        update_option('ppar_amazon_search_v1', $settings, false);
+        return $this->amazon_settings();
+    }
+
+    public function amazon_bridge_ready() {
+        $settings = $this->amazon_settings();
+        return !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+    }
+
+    private function amazon_campaign_asins($campaign) {
+        $out = array();
+        foreach ((array) ($campaign['product_asins'] ?? array()) as $asin) {
+            $asin = strtoupper(trim((string) $asin));
+            if (preg_match('/^[A-Z0-9]{10}$/', $asin)) { $out[$asin] = $asin; }
+        }
+        return array_values($out);
+    }
+
+    public function amazon_product_from_campaign($campaign) {
+        if (!$this->amazon_bridge_ready() || !is_array($campaign)) { return null; }
+        if (sanitize_key((string) ($campaign['network'] ?? '')) !== 'idealo') { return null; }
+        if (sanitize_key((string) ($campaign['creative_type'] ?? '')) !== 'product') { return null; }
+        if ((string) ($campaign['source'] ?? '') !== 'idealo_product_feed_v1') { return null; }
+        if (sanitize_key((string) ($campaign['product_identity_source'] ?? '')) !== 'gtin') { return null; }
+        $asins = $this->amazon_campaign_asins($campaign);
+        if (count($asins) !== 1) { return null; }
+        $image = esc_url_raw((string) ($campaign['image_url'] ?? ''));
+        if ($image === '' || stripos($image, 'https://') !== 0) { return null; }
+
+        $settings = $this->amazon_settings();
+        $asin = $asins[0];
+        $tracking_id = trim((string) ($settings['tracking_id'] ?? ''));
+        if (!$this->amazon_tracking_id_valid($tracking_id)) { return null; }
+
+        $amazon = $campaign;
+        $amazon['post_id'] = 0;
+        $amazon['id'] = sanitize_key('amazon-' . $asin . '-' . (string) ($campaign['id'] ?? 'product'));
+        $amazon['name'] = 'Amazon – ' . (string) ($campaign['title'] ?? $campaign['name'] ?? $asin);
+        $amazon['partner'] = 'Amazon';
+        $amazon['network'] = 'amazon';
+        $amazon['advertiser_id'] = $tracking_id;
+        $amazon['programme_name'] = 'Amazon PartnerNet';
+        $amazon['programme_status'] = 'active';
+        $amazon['programme_status_source'] = 'amazon_tracking_id';
+        $amazon['programme_status_checked_at'] = time();
+        $amazon['label'] = 'Amazon · Affiliate';
+        $amazon['button_text'] = 'Bei Amazon ansehen';
+        $amazon['url'] = esc_url_raw('https://www.amazon.de/dp/' . rawurlencode($asin) . '/ref=nosim?tag=' . rawurlencode($tracking_id));
+        $amazon['price'] = '';
+        $amazon['availability'] = '';
+        $amazon['seller_name'] = '';
+        $amazon['health_check_enabled'] = false;
+        $amazon['source'] = 'amazon_asin_bridge_v1';
+        $amazon['external_id'] = $asin;
+        $amazon['product_asins'] = array($asin);
+        $amazon['product_provider'] = 'amazon';
+        unset($amazon['_ppar_norm_network'], $amazon['_ppar_runtime_normalized']);
+        return $amazon;
+    }
+
+    public function amazon_render_access_card($provider, $definition, $contract_version) {
+        if (sanitize_key((string) $provider) !== 'amazon') { return; }
+        $settings = $this->amazon_settings();
+        $external = defined('PPAR_AMAZON_TRACKING_ID') && $this->amazon_tracking_id_valid((string) PPAR_AMAZON_TRACKING_ID);
+        ?>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+            <input type="hidden" name="action" value="ppar_provider_access_save">
+            <input type="hidden" name="provider" value="amazon">
+            <?php wp_nonce_field('ppar_provider_access_amazon','ppar_provider_nonce'); ?>
+            <p><label><input type="checkbox" name="ppar_provider[amazon][enabled]" value="1" <?php checked(!empty($settings['enabled'])); ?>> Amazon-Direktlinks verwenden</label></p>
+            <p><label>Partner-/Tracking-ID <span class="ppar-saved"><?php echo esc_html($external ? 'über wp-config.php' : ($this->amazon_tracking_id_valid((string)$settings['tracking_id']) ? 'gespeichert' : 'nicht gespeichert')); ?></span><br>
+            <input type="text" name="ppar_provider[amazon][tracking_id]" value="<?php echo esc_attr($external ? '' : (string)$settings['tracking_id']); ?>" placeholder="<?php echo esc_attr($external ? 'über wp-config.php gesetzt' : 'z. B. hobbydepot-21'); ?>" <?php disabled($external); ?>></label></p>
+            <p class="description">Amazon-Produkte werden nur aus exakt identifizierten idealo-Produkten mit einer eindeutigen ASIN erzeugt. Keine Amazon-Produktsuche, keine erfundenen Artikel.</p>
+            <div class="ppar-v240-actions"><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button><button class="button" name="ppar_provider_action" value="save_test">Speichern &amp; prüfen</button></div>
+        </form>
+        <?php
+    }
+
     private function provider_access_snapshot($provider) {
         $provider = sanitize_key((string) $provider);
         $definition = $this->provider_definition($provider);
@@ -212,6 +317,17 @@ trait PPAR_Provider_Registry_Trait {
             $snapshot['enabled'] = (string) ($definition['state'] ?? '') === 'active';
             $snapshot['status'] = $snapshot['enabled'] ? 'not_required' : 'prepared';
             $snapshot['message'] = $snapshot['enabled'] ? 'Kein externer API-Zugang erforderlich.' : 'Provider ist noch nicht produktiv aktiviert.';
+            return apply_filters('ppar_affiliate_provider_access_snapshot', $snapshot, $provider, $definition, self::PROVIDER_CONTRACT_VERSION);
+        }
+        if ($provider === 'amazon') {
+            $settings = $this->amazon_settings();
+            $snapshot['configured'] = $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+            $snapshot['enabled'] = !empty($settings['enabled']) && $snapshot['configured'];
+            $state = $this->provider_access_state('amazon');
+            $snapshot['status'] = $snapshot['configured'] ? sanitize_key((string) ($state['status'] ?? 'credentials_saved')) : 'not_configured';
+            if ($snapshot['configured'] && in_array($snapshot['status'], array('not_configured','prepared'), true)) { $snapshot['status'] = 'credentials_saved'; }
+            $snapshot['last_checked'] = absint($state['last_checked'] ?? 0);
+            $snapshot['message'] = sanitize_text_field((string) ($state['message'] ?? ''));
             return apply_filters('ppar_affiliate_provider_access_snapshot', $snapshot, $provider, $definition, self::PROVIDER_CONTRACT_VERSION);
         }
         if ($provider === 'awin') {
@@ -301,6 +417,15 @@ trait PPAR_Provider_Registry_Trait {
             ),
         );
 
+        $amazon = $this->amazon_settings();
+        $rows['amazon'] = array(
+            'label' => 'Amazon',
+            'required' => array(
+                'Partner-/Tracking-ID' => $this->amazon_tracking_id_valid((string) ($amazon['tracking_id'] ?? '')),
+            ),
+            'optional' => array(),
+        );
+
         $digistore = method_exists($this, 'digistore24_settings') ? $this->digistore24_settings() : array();
         $digistore_key = method_exists($this, 'digistore24_api_key') ? $this->digistore24_api_key($digistore) : '';
         $rows['digistore24'] = array(
@@ -328,10 +453,6 @@ trait PPAR_Provider_Registry_Trait {
         return array(
             'all_required_complete' => $all_complete,
             'providers' => $rows,
-            'amazon' => array(
-                'state' => 'prepared',
-                'message' => 'Kein realer Amazon-Adapter vorhanden; deshalb keine erfundenen Zugangsdaten.',
-            ),
         );
     }
 
@@ -554,6 +675,22 @@ trait PPAR_Provider_Registry_Trait {
                 }
                 $result = $saved;
             }
+        } elseif ($provider === 'amazon') {
+            $previous = $this->amazon_settings();
+            $settings = $previous;
+            $external = defined('PPAR_AMAZON_TRACKING_ID') && $this->amazon_tracking_id_valid((string) PPAR_AMAZON_TRACKING_ID);
+            if (!$external && array_key_exists('tracking_id', $raw)) {
+                $settings['tracking_id'] = trim(sanitize_text_field((string) ($raw['tracking_id'] ?? '')));
+            }
+            $settings['enabled'] = !empty($raw['enabled']);
+            if ((string) ($settings['tracking_id'] ?? '') !== '' && !$this->amazon_tracking_id_valid((string) $settings['tracking_id'])) {
+                $result = new WP_Error('amazon_tracking_id_invalid', 'Amazon Partner-/Tracking-ID ist ungültig. Für Amazon.de wird eine gültige -21-ID benötigt.');
+            } else {
+                $saved = $this->amazon_update_settings($settings);
+                $configured = $this->amazon_tracking_id_valid((string) ($saved['tracking_id'] ?? ''));
+                $this->provider_set_access_state('amazon', $configured ? 'credentials_saved' : 'not_configured', $configured ? 'Amazon Tracking-ID gespeichert. ASIN-Direktlinks können nach Aktivierung erzeugt werden.' : 'Amazon Tracking-ID fehlt.');
+                $result = $saved;
+            }
         } else {
             $handled = apply_filters('ppar_affiliate_provider_access_save', null, $provider, $raw, self::PROVIDER_CONTRACT_VERSION);
             $result = $handled === null ? new WP_Error('provider_access_handler_missing', 'Für diesen Provider ist noch kein Zugangsdaten-Adapter registriert.') : $handled;
@@ -620,6 +757,16 @@ trait PPAR_Provider_Registry_Trait {
             }
             $this->provider_set_access_state('ebay', 'connected', 'eBay OAuth-Zugang erfolgreich authentifiziert.');
             return array('status'=>'connected');
+        }
+        if ($provider === 'amazon') {
+            $settings = $this->amazon_settings();
+            $tracking_id = trim((string) ($settings['tracking_id'] ?? ''));
+            if (!$this->amazon_tracking_id_valid($tracking_id)) {
+                $this->provider_set_access_state('amazon', 'not_configured', 'Amazon Tracking-ID fehlt oder ist ungültig.');
+                return new WP_Error('amazon_tracking_id_missing', 'Amazon Partner-/Tracking-ID fehlt oder ist ungültig.');
+            }
+            $this->provider_set_access_state('amazon', 'credentials_saved', 'Amazon Tracking-ID geprüft; Direktlinks werden ausschließlich aus eindeutigen ASINs erzeugt.');
+            return array('status'=>'credentials_saved','message'=>'Amazon Tracking-ID geprüft.');
         }
         $handled = apply_filters('ppar_affiliate_provider_access_test', null, $provider, self::PROVIDER_CONTRACT_VERSION);
         return $handled === null ? new WP_Error('provider_access_test_missing', 'Für diesen Provider ist noch kein Verbindungstest registriert.') : $handled;
