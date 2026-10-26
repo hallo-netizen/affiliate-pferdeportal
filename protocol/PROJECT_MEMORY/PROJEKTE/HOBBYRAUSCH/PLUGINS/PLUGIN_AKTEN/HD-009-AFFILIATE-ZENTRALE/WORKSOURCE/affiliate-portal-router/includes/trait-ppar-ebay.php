@@ -507,7 +507,7 @@ trait PPAR_Ebay_Trait {
         $id = absint($row['id'] ?? 0);
         if ($id <= 0) { return false; }
         $reason = sanitize_text_field((string) $reason);
-        if ($reason === '') { $reason = 'Spielzeug-/Modellware ist im Pferde-Atelier nicht freigegeben.'; }
+        if ($reason === '') { $reason = 'Angebot ist durch die zentrale Inhaltsrichtlinie nicht freigegeben.'; }
         global $wpdb;
         $quarantine_update = array(
             'status'=>'blocked_content','source_state'=>'available','policy_state'=>'blocked','route_state'=>'blocked','output_state'=>'blocked',
@@ -666,21 +666,21 @@ trait PPAR_Ebay_Trait {
             }
         }
         $strong_domain_hits = array();
-        foreach ((array) ($catalog['strong_domain_markers'] ?? array()) as $marker) {
-            if ($this->ebay_topic_term_present($normalized, $marker)) { $strong_domain_hits[] = sanitize_text_field((string) $marker); }
-        }
-        // V6.26: controlled inherently equestrian product identities are domain
-        // evidence themselves. A real listing titled simply "Damen Reitstiefel"
-        // must not be rejected merely because it does not repeat "Pferd". The
-        // marker list is explicit and hard negatives above still veto Cowboy/
-        // Western/toy/etc. Relation references such as "Helmtasche fuer Reithelm"
-        // are excluded by ebay_business_primary_title_section().
-        $private_sections = $this->ebay_business_evidence_sections($item);
-        foreach ($this->ebay_business_inherent_domain_hits($catalog, $private_sections) as $marker) {
-            $strong_domain_hits[] = 'product:' . sanitize_text_field((string)$marker);
+        $rule_bucket = sanitize_title((string)($rule['target_term_slug'] ?? $rule['id'] ?? ''));
+        $rule_profile = is_array($catalog['private_bucket_profiles'][$rule_bucket] ?? null)
+            ? $catalog['private_bucket_profiles'][$rule_bucket] : array();
+        foreach (array_values(array_unique(array_filter(array_merge(
+            (array)($rule_profile['strong_phrases'] ?? array()),
+            (array)($rule_profile['phrases'] ?? array())
+        )))) as $phrase) {
+            if ($this->ebay_private_phrase_present($normalized, (string)$phrase)) {
+                $strong_domain_hits[] = sanitize_text_field((string)$phrase);
+            }
         }
         $strong_domain_hits = array_values(array_unique($strong_domain_hits));
-        if (!$strong_domain_hits) { return new WP_Error('ebay_portal_topic_missing', 'Kein expliziter Pferde-/Reitsportbezug im realen eBay-Angebot.'); }
+        if (!$strong_domain_hits) {
+            return new WP_Error('ebay_portal_topic_missing', 'Kein belastbarer Hobby-Depot-Bezug aus den realen Angebotsdaten erkannt.');
+        }
 
         // Workflow V2 root rule: if the real eBay facts identify one canonical
         // product concept unambiguously, PRIVATE uses that concept only to pick
@@ -741,16 +741,6 @@ trait PPAR_Ebay_Trait {
                 if ($sources) { $hits[$norm_phrase] = implode('+', $sources); $real_hits++; }
             }
 
-            if ($bucket === 'pferde-ponys') {
-                $title_animal = false; $category_animal = false;
-                foreach ((array) ($profile['phrases'] ?? array()) as $phrase) {
-                    if ($this->ebay_private_phrase_present($sections['title'], $phrase)) { $title_animal = true; }
-                    if ($this->ebay_private_phrase_present($sections['category'], $phrase)) { $category_animal = true; }
-                }
-                if (!$title_animal || !$category_animal) { $score = 0; $real_hits = 0; }
-                else { $score += 80; }
-            }
-
             // Search rule is deliberately not evidence; it may only break a close tie.
             if ($real_hits > 0 && $bucket === $rule_bucket) { $score += 8; }
             if ($real_hits <= 0) { continue; }
@@ -800,7 +790,6 @@ trait PPAR_Ebay_Trait {
      */
     private function ebay_business_match_stop_tokens() {
         return array_flip(array(
-            'pferd','pferde','pony','ponys','fohlen','reiter','reiten','reit','reitsport','equestrian',
             'zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal',
             'neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige',
             'grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'
@@ -3006,7 +2995,7 @@ trait PPAR_Ebay_Trait {
         foreach ($this->ebay_topic_tokens($primary) as $token) {
             $token = sanitize_key($this->ebay_topic_text((string) $token));
             if ($token === '' || strlen($token) < 4) { continue; }
-            if (in_array($token, array('neu','new','original','premium','profi','xxl','xl','set','paar','damen','herren','kinder','horse','pferd','pferde','alter','alte','altes','antik','antike','vintage'), true)) { continue; }
+            if (in_array($token, array('neu','new','original','premium','profi','xxl','xl','set','paar','damen','herren','kinder','alter','alte','altes','antik','antike','vintage'), true)) { continue; }
             return $token;
         }
         return '';
@@ -3054,31 +3043,6 @@ trait PPAR_Ebay_Trait {
         }
         if (!$concept) { return new WP_Error('ebay_business_quality_concept_missing', 'Produktkonzept für Qualitätsprüfung fehlt.'); }
         $sections = $this->ebay_business_evidence_sections($item);
-        if ($concept_id === 'concept-reitstiefel') {
-            $primary_boot = $this->ebay_business_primary_title_section((string)($sections['title'] ?? ''));
-            $structured_boot = $this->ebay_topic_text(trim((string)($sections['category'] ?? '') . ' ' . (string)($sections['product_type'] ?? '') . ' ' . (string)($sections['aspects'] ?? '')));
-            $blocked_boot_heads = array('socke','socken','strumpf','struempfe','stiefeltasche','tasche','beutel','pflege','pflegemittel','pflegeset','schuhpflege','stiefelpflege','ersatzteil','zubehoer','accessory','miniatur','modell','spielzeug','figur','anhaenger','schluesselanhaenger');
-            foreach ($blocked_boot_heads as $blocked_boot) {
-                if ($this->ebay_business_strict_token_present($primary_boot, $blocked_boot)) {
-                    return new WP_Error('ebay_business_reitstiefel_wrong_product', 'Reitstiefel-Sentinel: Titel beschreibt Zubehör/Pflege/Socken/Modell statt eines tragbaren Reitstiefels.');
-                }
-            }
-            foreach (array('tasche','bag','socke','socks','pflege','care','accessory','zubehoer','toy','spielzeug','figur','miniatur','modell') as $blocked_structured) {
-                if ($this->ebay_business_strict_token_present($structured_boot, $blocked_structured)
-                    && !$this->ebay_business_strict_token_present($structured_boot, 'reitstiefel')
-                    && !$this->ebay_business_strict_token_present($structured_boot, 'riding boot')) {
-                    return new WP_Error('ebay_business_reitstiefel_wrong_product', 'Reitstiefel-Sentinel: eBay-Produktart bestätigt kein tragbares Reitstiefel-Produkt.');
-                }
-            }
-            $direct_boot = false;
-            foreach (array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel','riding boot','equestrian boot') as $boot_term) {
-                if ($this->ebay_business_strict_token_present($primary_boot, $boot_term)
-                    || $this->ebay_business_strict_token_present($structured_boot, $boot_term)) { $direct_boot = true; break; }
-            }
-            if (!$direct_boot) {
-                return new WP_Error('ebay_business_reitstiefel_identity_unconfirmed', 'Reitstiefel-Sentinel: reale Angebotsdaten bestätigen die Produktidentität Reitstiefel nicht.');
-            }
-        }
         $full_title = $this->ebay_topic_text((string) ($sections['title'] ?? ''));
         $full_title_tokens = preg_split('/\s+/', $full_title);
         $first_title_token = sanitize_key((string) ($full_title_tokens[0] ?? ''));
@@ -6198,16 +6162,15 @@ trait PPAR_Ebay_Trait {
     }
 
     private function ebay_private_bucket_definitions() {
-        return array(
-            'pferde-ponys'=>'Pferde & Ponys',
-            'sattel-zaumzeug'=>'Sattel & Zaumzeug',
-            'decken-schutz'=>'Decken & Schutz',
-            'stall-weide-haltung'=>'Stall, Weide & Haltung',
-            'fuetterung-pflege'=>'Fütterung & Pflege',
-            'anhaenger-transport'=>'Anhänger & Transport',
-            'reitbekleidung-zubehoer'=>'Reitbekleidung & Zubehör',
-            'sonstiges'=>'Sonstiges',
-        );
+        $catalog = $this->ebay_portal_catalog();
+        if (is_wp_error($catalog)) { return array(); }
+        $out = array();
+        foreach ((array)($catalog['private_bucket_profiles'] ?? array()) as $slug=>$profile) {
+            $slug = sanitize_title((string)$slug);
+            $label = sanitize_text_field((string)($profile['label'] ?? $slug));
+            if ($slug !== '' && $label !== '') { $out[$slug] = $label; }
+        }
+        return $out;
     }
 
     /**
@@ -6744,16 +6707,7 @@ trait PPAR_Ebay_Trait {
             foreach ($this->ebay_private_query_variants($rule) as $query_index => $query_text) {
                 $profile_rule = $rule;
                 $profile_rule['query'] = $query_text;
-                // V6.27: Reitstiefel variants are constrained to eBay DE's
-                // dedicated riding-boots category. This prevents generic boot
-                // noise while still allowing several independent PRIVATE pools.
-                $qid = sanitize_key((string)($rule['id'] ?? ''));
-                $qnorm = $this->ebay_topic_text($query_text);
-                if ($qid === 'reitbekleidung-zubehoer' && in_array($qnorm, array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel'), true)) {
-                    $profile_rule['category_ids'] = array('183382');
-                }
-                $key = sanitize_key((string)($rule['id'] ?? '')) . '|INDIVIDUAL|q' . ($query_index + 1);
-                $boot_profile = $qid === 'reitbekleidung-zubehoer' && in_array($qnorm, array('reitstiefel','lederreitstiefel','dressurstiefel','reitgummistiefel'), true);
+                $boot_profile = false;
                 $profiles[$key] = array(
                     'key'=>$key,'rule'=>$profile_rule,'seller_type'=>'INDIVIDUAL','next'=>'','active'=>true,'pages'=>0,
                     'page_limit'=>$boot_profile ? 3 : 1,'route_limit'=>0,'profile_kind'=>'private_variant',
@@ -9672,49 +9626,7 @@ trait PPAR_Ebay_Trait {
     }
 
 
-    /** V6.27 one-time BUSINESS restoration after the V6.26 scope leak. */
-/**
-     * V6.37 PRIVATE supply invariant for Reitstiefel. The old regression tests
-     * proved classification and balancing only after synthetic boot rows already
-     * existed. This live-facing invariant inspects the durable source table and
-     * the actually published HivePress listings instead.
-     */
-    private function ebay_private_reitstiefel_supply_snapshot($settings = null) {
-        $settings = is_array($settings) ? $this->ebay_normalize_settings($settings, true) : $this->ebay_settings();
-        $out = array('eligible'=>0,'published'=>0,'selected'=>0,'source_item_ids'=>array(),'published_item_ids'=>array());
-        global $wpdb;
-        if (!is_object($wpdb) || !method_exists($wpdb,'get_results')) { return $out; }
-        $table = $this->ebay_items_table();
-        $rows = (array)$wpdb->get_results(
-            "SELECT * FROM {$table} WHERE seller_account_type='INDIVIDUAL' AND source_state='available' AND policy_state='allowed' AND route_state='ready' AND target_term_id>0 ORDER BY last_seen DESC,id DESC LIMIT 5000",
-            ARRAY_A
-        );
-        foreach ($rows as $row) {
-            if (!is_array($row) || !$this->ebay_private_capacity_row_publishable($row,$settings)) { continue; }
-            if ($this->ebay_private_capacity_concept_key($row,$settings) !== 'concept-reitstiefel') { continue; }
-            $item_id = (string)($row['item_id'] ?? '');
-            if ($item_id === '') { continue; }
-            $out['eligible']++;
-            $out['source_item_ids'][$item_id] = 1;
-            $listing_id = absint($row['listing_post_id'] ?? 0);
-            if ($listing_id > 0 && function_exists('get_post_status') && function_exists('get_post_meta')
-                && get_post_status($listing_id) === 'publish'
-                && (string)get_post_meta($listing_id,'_ppar_ebay_item_id',true) === $item_id) {
-                $out['published']++;
-                $out['published_item_ids'][$item_id] = $listing_id;
-            }
-        }
-        $selection = $this->ebay_selection_state_load();
-        foreach ((array)($selection['private_active'] ?? array()) as $item_id=>$flag) {
-            if (isset($out['source_item_ids'][(string)$item_id])) { $out['selected']++; }
-        }
-        $out['source_item_ids'] = array_keys($out['source_item_ids']);
-        $out['published_item_ids'] = array_keys($out['published_item_ids']);
-        return $out;
-    }
-
-    private function ebay_private_reitstiefel_supply_target() { return 3; }
-
+    /** Historical project-specific supply sentinel removed for Hobby Depot. */
     /** V6.31: supersede incompatible open recovery jobs from older builds.
      * A plugin update must never remain blocked behind a queued/running state
      * whose worker code and lock namespace belong to a previous runtime.
