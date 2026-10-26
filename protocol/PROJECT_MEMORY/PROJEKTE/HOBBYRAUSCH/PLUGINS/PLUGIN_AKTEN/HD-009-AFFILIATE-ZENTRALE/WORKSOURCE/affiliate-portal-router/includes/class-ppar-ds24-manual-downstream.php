@@ -32,7 +32,7 @@ final class PPAR_DS24_Manual_Downstream {
 
     private static function run_after_affiliations($affiliations) {
         if (self::$running || !is_array($affiliations)) { return; }
-        if (!class_exists('Pferdeportal_Affiliate_Router')) { return; }
+        if (!class_exists('Hobby_Depot_Affiliate_Router')) { return; }
         $inventory = get_option(self::INVENTORY_OPTION, array());
         if (!is_array($inventory) || empty($inventory['rows']) || !is_array($inventory['rows'])) { return; }
         if (!self::affiliations_match_inventory($affiliations, $inventory)) { return; }
@@ -59,7 +59,7 @@ final class PPAR_DS24_Manual_Downstream {
         );
 
         try {
-            $router = Pferdeportal_Affiliate_Router::instance();
+            $router = Hobby_Depot_Affiliate_Router::instance();
             $method = new ReflectionMethod($router, 'digistore24_import_vendor_banners');
             $method->setAccessible(true);
 
