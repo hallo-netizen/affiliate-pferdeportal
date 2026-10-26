@@ -421,7 +421,7 @@ trait PPAR_Network_Sync_Trait {
      * V6.72.189 – ADCELL liefert in jedem Werbemittel promotionCategoryId.
      * Live-Validierung belegt getPromotionCategories mit Pflichtparameter programId.
      * Diese Metadaten werden beim Sync gelesen, damit ein Banner fachlich nach
-     * seinem echten Werbemittelthema (z.B. Reithelme) klassifiziert werden kann,
+     * seinem echten Werbemittelthema klassifiziert werden kann,
      * ohne einen Trackinglink aufzurufen und dadurch einen Fake-Klick zu erzeugen.
      */
     private function adcell_api_v2_promotion_categories($program_id) {
