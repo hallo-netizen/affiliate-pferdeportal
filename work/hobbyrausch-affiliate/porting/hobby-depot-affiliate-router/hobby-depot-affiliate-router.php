@@ -30,6 +30,7 @@ require_once __DIR__ . '/includes/trait-ppar-idealo.php';
 require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
 require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 require_once __DIR__ . '/includes/trait-hdar-hobby-depot-context.php';
+require_once __DIR__ . '/includes/trait-hdar-amazon-creators.php';
 
 final class Hobby_Depot_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
@@ -120,6 +121,7 @@ final class Hobby_Depot_Affiliate_Router {
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
     use HDAR_Hobby_Depot_Context_Trait;
+    use HDAR_Amazon_Creators_Trait;
     const VERSION = '0.1.0-porting';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
