@@ -81,7 +81,9 @@ trait HDAR_Amazon_Creators_Trait {
 
     public function amazon_creators_provider_access_save($handled, $provider, $raw, $contract_version) {
         if ($provider !== 'amazon') { return $handled; }
-        $previous = $this->amazon_creators_settings();
+        $stored_previous = get_option('hdar_amazon_creators_v1', array());
+        $stored_previous = is_array($stored_previous) ? $stored_previous : array();
+        $previous = array_merge($this->amazon_creators_defaults(), $stored_previous);
         $raw = is_array($raw) ? $raw : array();
         $saved = $previous;
         $saved['enabled'] = !empty($raw['enabled']);
@@ -90,13 +92,13 @@ trait HDAR_Amazon_Creators_Trait {
         $saved['marketplace'] = in_array($marketplace, $allowed, true) ? $marketplace : 'www.amazon.de';
         $version = trim((string)($raw['credential_version'] ?? $previous['credential_version'] ?? '3.2'));
         $saved['credential_version'] = in_array($version, array('3.1','3.2','3.3'), true) ? $version : '3.2';
-        if (!defined('HDAR_AMAZON_PARTNER_TAG')) {
+        if (!(defined('HDAR_AMAZON_PARTNER_TAG') && HDAR_AMAZON_PARTNER_TAG)) {
             $saved['partner_tag'] = sanitize_text_field((string)($raw['partner_tag'] ?? $previous['partner_tag'] ?? ''));
         }
-        if (!defined('HDAR_AMAZON_CREATORS_CLIENT_ID')) {
+        if (!(defined('HDAR_AMAZON_CREATORS_CLIENT_ID') && HDAR_AMAZON_CREATORS_CLIENT_ID)) {
             $saved['client_id'] = sanitize_text_field((string)($raw['client_id'] ?? $previous['client_id'] ?? ''));
         }
-        if (!defined('HDAR_AMAZON_CREATORS_CLIENT_SECRET')) {
+        if (!(defined('HDAR_AMAZON_CREATORS_CLIENT_SECRET') && HDAR_AMAZON_CREATORS_CLIENT_SECRET)) {
             $secret = trim((string)($raw['client_secret'] ?? ''));
             if ($secret !== '') { $saved['client_secret'] = $secret; }
             if (!empty($raw['remove_client_secret'])) { $saved['client_secret'] = ''; }
@@ -106,7 +108,7 @@ trait HDAR_Amazon_Creators_Trait {
             || (string)($saved['credential_version'] ?? '') !== (string)($previous['credential_version'] ?? '')
             || (string)($saved['partner_tag'] ?? '') !== (string)($previous['partner_tag'] ?? '')
             || (string)($saved['client_id'] ?? '') !== (string)($previous['client_id'] ?? '')
-            || (!defined('HDAR_AMAZON_CREATORS_CLIENT_SECRET') && trim((string)($raw['client_secret'] ?? '')) !== '')
+            || (!(defined('HDAR_AMAZON_CREATORS_CLIENT_SECRET') && HDAR_AMAZON_CREATORS_CLIENT_SECRET) && trim((string)($raw['client_secret'] ?? '')) !== '')
             || !empty($raw['remove_client_secret']);
         if ($credentials_changed) {
             $saved['last_status'] = $this->amazon_creators_credentials_present($saved) ? 'credentials_saved' : 'not_configured';
@@ -116,12 +118,15 @@ trait HDAR_Amazon_Creators_Trait {
                 : 'Amazon-Creators-Zugang noch unvollständig.';
         }
         update_option('hdar_amazon_creators_v1', $saved, false);
+        $resolved = $this->amazon_creators_settings();
+        $ready = $this->amazon_creators_credentials_present($resolved);
         if (method_exists($this, 'provider_set_access_state')) {
             $this->provider_set_access_state('amazon',
-                $this->amazon_creators_credentials_present($saved) ? (string)($saved['last_status'] ?? 'credentials_saved') : 'not_configured',
+                $ready ? (string)($saved['last_status'] ?? 'credentials_saved') : 'not_configured',
                 (string)($saved['last_message'] ?? ''));
         }
-        return $this->amazon_creators_settings();
+        $this->amazon_creators_sync_campaign_activation();
+        return $resolved;
     }
 
     public function amazon_creators_provider_access_test($handled, $provider, $contract_version) {
@@ -134,12 +139,14 @@ trait HDAR_Amazon_Creators_Trait {
             $s['last_message'] = sanitize_text_field($result->get_error_message());
             update_option('hdar_amazon_creators_v1', $s, false);
             if (method_exists($this, 'provider_set_access_state')) { $this->provider_set_access_state('amazon', 'failed', $s['last_message']); }
+            $this->amazon_creators_sync_campaign_activation();
             return $result;
         }
         $s['last_status'] = 'connected';
         $s['last_message'] = 'Amazon Creators API erfolgreich authentifiziert.';
         update_option('hdar_amazon_creators_v1', $s, false);
         if (method_exists($this, 'provider_set_access_state')) { $this->provider_set_access_state('amazon', 'connected', $s['last_message']); }
+        $this->amazon_creators_sync_campaign_activation();
         return array('status'=>'connected','message'=>$s['last_message']);
     }
 
@@ -359,6 +366,28 @@ trait HDAR_Amazon_Creators_Trait {
         return true;
     }
 
+    private function amazon_creators_sync_campaign_activation() {
+        if (!function_exists('get_posts') || !method_exists($this, 'campaign_from_post') || !method_exists($this, 'save_campaign_record')) { return 0; }
+        $desired_active = $this->amazon_creators_campaigns_should_be_active();
+        $ids = get_posts(array(
+            'post_type'=>self::CAMPAIGN_POST_TYPE,
+            'post_status'=>array('publish','draft','private'),
+            'meta_key'=>'_hdar_amazon_auto',
+            'meta_value'=>'1',
+            'posts_per_page'=>-1,
+            'fields'=>'ids',
+        ));
+        $changed = 0;
+        foreach ((array)$ids as $id) {
+            $id = absint($id);
+            $campaign = $this->campaign_from_post(get_post($id));
+            if (!is_array($campaign) || (bool)($campaign['active'] ?? false) === $desired_active) { continue; }
+            $campaign['active'] = $desired_active;
+            if ($this->save_campaign_record($campaign, $id)) { $changed++; }
+        }
+        return $changed;
+    }
+
     private function amazon_creators_campaign_key($concept_id, $asin) {
         return sanitize_key('amazon-' . substr(hash('sha256', sanitize_key((string)$concept_id) . '|' . strtoupper(trim((string)$asin))), 0, 28));
     }
@@ -517,6 +546,7 @@ trait HDAR_Amazon_Creators_Trait {
         $s['last_sync_count'] = $saved_count;
         $s['last_message'] = sprintf('Amazon Creators: %d Hobbykonzepte geprüft, %d Produktkampagnen gespeichert, %d alte Kampagnen deaktiviert.', $processed, $saved_count, $retired);
         update_option('hdar_amazon_creators_v1', $s, false);
+        $this->amazon_creators_sync_campaign_activation();
         if ($saved_count > 0 && method_exists($this, 'article_plan_bump_campaign_revision')) {
             $this->article_plan_bump_campaign_revision('amazon_creators_materialized');
         }
