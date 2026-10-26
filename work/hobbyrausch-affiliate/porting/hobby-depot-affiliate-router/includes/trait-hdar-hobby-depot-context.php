@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) { exit; }
  * Hobby Depot runtime context bridge.
  *
  * Single source for categories: HD-004 read-only registry.
- * No copied category master and no Pferdeatelier fallback.
+ * No copied category master and no source-portal fallback.
  */
 trait HDAR_Hobby_Depot_Context_Trait {
     private function hd_affiliate_registry_ready() {
