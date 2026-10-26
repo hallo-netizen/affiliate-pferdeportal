@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-26
-STATUS: AKTIV / HD-009 PORTIERUNG IN ARBEIT / NICHT INSTALLIERBAR
+STATUS: AKTIV / HD-009 GATE 4 LOCAL-CI PASS / NOCH NICHT INSTALLIERBAR
 
 ## Rolle
 
@@ -69,13 +69,22 @@ Bereits entfernt:
    - alte gelöschte Pferdeprojekt-Dateiquellen sind aus aktiven Pfaden entfernt.
    - Amazon bleibt vorbereitet; kein Adapter erfunden.
 
-4. **GATE 4 – Positiv/Negativ/Regression:** IN ARBEIT
-5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN; vor Gate 4 verboten.
+4. **GATE 4 – Positiv/Negativ/Regression: PASS**
+   - geprüfter Quellstand: `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`;
+   - GitHub-Actions-Lauf `40319481655`, Job `121560434781`: SUCCESS;
+   - PHP-Lint 23/23 PASS;
+   - gültiger HD-004-Snapshot → HD-009 → eBay/idealo PASS;
+   - Registry/Snapshot/Weltzahl/<300-Hobbyziele/eBay/idealo fail-closed NEGATIV PASS;
+   - Fremdprojektdateien/-marker Regression PASS;
+   - Amazon bleibt `prepared` und ohne aktiven Adapter PASS.
+   - Evidence: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
+
+5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN.
 
 ## Erster offener Blocker
 
-Ausführbarer Positiv-/Negativ-/Regressionstest der bereinigten HD-009-Arbeitsquelle fehlt noch.
+Ein installierbarer, fresh-unpack-geprüfter HD-009-Kandidat mit realem WordPress-Aktivierungs-/Laufzeitnachweis und anschließendem isoliertem `CURRENT.zip`/Manifest fehlt noch.
 
 ## NEXT ACTION
 
-GATE 4 ausführen: HD-004-Quellvertrag positiv und fail-closed negativ testen; eBay-/idealo-Zuordnung prüfen; Regression auf entfernte Fremdprojektdateien und nicht aktivierten Amazon-Adapter durchführen. Vor vollständigem PASS kein Installationspaket.
+GATE 5 ausführen: aus dem Gate-4-PASS-Quellstand einen einzigen HD-009-Installationskandidaten bauen, Fresh-Unpack/Pluginstruktur/Version/SHA-256 prüfen und in einer frischen WordPress-Laufzeit aktivieren. Dabei HD-004-Verfügbarkeit positiv und fehlend fail-closed sowie eBay/idealo/Amazon-Status regressiv prüfen. Erst nach vollständigem PASS `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` + `MANIFEST.md` synchronisieren. Kein Live-PASS behaupten.
