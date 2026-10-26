@@ -62,6 +62,29 @@ def _central_category_slugs(source):
         raise Blocked('PORTAL_CATEGORY_SOURCE_EMPTY')
     return slugs
 
+def wordpress_site_for_portal(registry,portal_id):
+    """Resolve only the exact portal's configured WordPress origin; never fall back."""
+    from urllib.parse import urlsplit
+    profiles=registry.get('profiles') if isinstance(registry,dict) else None
+    matches=[p for p in (profiles or []) if isinstance(p,dict) and p.get('portal_id')==portal_id]
+    if len(matches)!=1:
+        raise Blocked('PORTAL_WORDPRESS_PROFILE_NOT_UNIQUE:'+str(portal_id))
+    raw=matches[0].get('wordpress_base_url')
+    if not isinstance(raw,str) or not raw:
+        raise Blocked('PORTAL_WORDPRESS_SITE_NOT_CONFIGURED:'+str(portal_id))
+    parsed=urlsplit(raw)
+    if parsed.scheme!='https' or not parsed.hostname or parsed.path not in ('','/') or parsed.query or parsed.fragment or parsed.username or parsed.password:
+        raise Blocked('PORTAL_WORDPRESS_SITE_INVALID:'+str(portal_id))
+    origin='https://'+parsed.netloc.lower()
+    for p in profiles:
+        if not isinstance(p,dict) or p is matches[0]:
+            continue
+        other=p.get('wordpress_base_url')
+        if isinstance(other,str) and other.rstrip('/').casefold()==origin.casefold():
+            raise Blocked('PORTAL_WORDPRESS_SITE_SHARED:'+str(portal_id))
+    return origin
+
+
 def match_profile(category,profiles):
     hits=[]
     for p in profiles:
