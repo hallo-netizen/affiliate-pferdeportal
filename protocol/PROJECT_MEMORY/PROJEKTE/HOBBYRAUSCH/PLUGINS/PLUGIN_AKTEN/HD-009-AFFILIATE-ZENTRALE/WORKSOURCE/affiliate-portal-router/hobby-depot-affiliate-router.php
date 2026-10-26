@@ -4146,7 +4146,7 @@ JS;
     }
 
     /**
-     * Hobby Depot inherits no Pferdeatelier incident history.
+     * Hobby Depot inherits no foreign-project incident history.
      * Historical inactive-campaign exceptions therefore stay disabled.
      */
     private function category_product_incident_historical_active_lookup() {
