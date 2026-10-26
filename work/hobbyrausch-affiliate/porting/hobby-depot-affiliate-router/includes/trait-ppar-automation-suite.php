@@ -1481,7 +1481,7 @@ trait PPAR_Automation_Suite_Trait {
         $is_otto = $snapshot_id === absint(self::OTTO_AWIN_ADVERTISER_ID);
 
         // OTTO is a very broad merchant. Its generic/default Awin feed must never
-        // become the Pferde-Atelier import source. The operator first creates one
+        // become the Hobby Depot import source. The operator first creates one
         // reusable Awin Create-a-Feed export restricted to portal-relevant
         // categories and binds that exact export here. The local relevance gate
         // below is a second independent safety layer, not a substitute.
