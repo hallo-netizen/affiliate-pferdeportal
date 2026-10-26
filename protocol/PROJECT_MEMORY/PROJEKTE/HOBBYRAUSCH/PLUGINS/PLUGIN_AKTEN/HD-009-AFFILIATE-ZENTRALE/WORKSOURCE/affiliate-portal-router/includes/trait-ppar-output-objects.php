@@ -498,9 +498,9 @@ trait PPAR_Output_Objects_Trait {
         $cache_key = $type . ':' . $id;
         if (array_key_exists($cache_key, $cache)) { return (string) $cache[$cache_key]; }
         $url = '';
-        if (in_array($type, array('page','post','uge_term','pa_breed'), true) && function_exists('get_permalink')) {
+        if (in_array($type, array('page','post','uge_term'), true) && function_exists('get_permalink')) {
             $url = (string) get_permalink($id);
-        } elseif (in_array($type, array('category','hp_listing_category','uge_group','pa_breed_group'), true)
+        } elseif (in_array($type, array('category','hp_listing_category','uge_group'), true)
             && function_exists('get_term') && function_exists('get_term_link')) {
             $term = get_term($id, $type);
             if ($term && !is_wp_error($term)) {
@@ -572,7 +572,7 @@ trait PPAR_Output_Objects_Trait {
                 );
             }
         }
-        foreach (array('category','hp_listing_category','uge_group','pa_breed_group') as $taxonomy) {
+        foreach (array('category','hp_listing_category','uge_group') as $taxonomy) {
             if (!function_exists('taxonomy_exists') || !taxonomy_exists($taxonomy) || !function_exists('get_terms')) { continue; }
             $terms = get_terms(array('taxonomy'=>$taxonomy, 'hide_empty'=>false));
             if (is_wp_error($terms) || !is_array($terms)) { continue; }
@@ -590,8 +590,6 @@ trait PPAR_Output_Objects_Trait {
                     $context = 'hivepress_category';
                 } elseif ($taxonomy === 'uge_group') {
                     $context = 'glossary_overview';
-                } elseif ($taxonomy === 'pa_breed_group') {
-                    $context = 'breed_overview';
                 } elseif ($taxonomy === 'category' && sanitize_key((string)($term->slug ?? '')) === 'glossar') {
                     $context = 'glossary_overview';
                 } elseif ($taxonomy === 'category' && ($id === 1482 || in_array(1482,array_map('absint',(array)get_ancestors($id,'category','taxonomy')),true))) {
@@ -2559,8 +2557,6 @@ trait PPAR_Output_Objects_Trait {
         // ab und es konnte trotz READY-Planung keine aktive Kampagne entstehen.
         if ($type === 'uge_group') { return $slug !== '' ? 'uge_group:' . $slug : ''; }
         if ($type === 'uge_term') { return $slug !== '' ? 'uge_term:' . $slug : ''; }
-        if ($type === 'pa_breed') { return $slug !== '' ? 'pa_breed:' . $slug : ''; }
-        if ($type === 'pa_breed_group') { return $slug !== '' ? 'pa_breed_group:' . $slug : ''; }
         return '';
     }
 
@@ -2817,7 +2813,7 @@ trait PPAR_Output_Objects_Trait {
             ? array()
             : ($stored_banner_targets
                 ? $stored_banner_targets
-                : ($auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key))));
+                : ($auto_targets ? $auto_targets : (!empty($target['_ppar_glossary_neutral_anchor']) ? array() : array($target_key))));
         $compatible_banner_slots = array_values(array_unique(array_filter(array_map('sanitize_key',(array)($classification['_ppar_banner_compatible_slots']??array())))));
         $campaign['placements'] = ($output_type === 'portal_banner' && $compatible_banner_slots)
             ? $compatible_banner_slots
