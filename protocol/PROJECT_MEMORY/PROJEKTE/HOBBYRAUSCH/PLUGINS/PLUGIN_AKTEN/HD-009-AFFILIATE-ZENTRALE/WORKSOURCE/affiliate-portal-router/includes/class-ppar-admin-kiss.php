@@ -135,8 +135,8 @@ final class PPAR_Affiliate_Admin_KISS {
 
 
     private static function render_channel_switches() {
-        if (!class_exists('Pferdeportal_Affiliate_Router')) { return; }
-        $router = Pferdeportal_Affiliate_Router::instance();
+        if (!class_exists('Hobby_Depot_Affiliate_Router')) { return; }
+        $router = Hobby_Depot_Affiliate_Router::instance();
         if (!is_object($router) || !method_exists($router, 'provider_registry') || !method_exists($router, 'provider_channel_snapshot')) { return; }
         $notice = sanitize_key((string) ($_GET['ppar_channel'] ?? ''));
         $message = rawurldecode((string) ($_GET['ppar_channel_message'] ?? ''));
@@ -176,7 +176,7 @@ final class PPAR_Affiliate_Admin_KISS {
         $provider = sanitize_key((string) ($_POST['provider'] ?? ''));
         $mode = sanitize_key((string) ($_POST['mode'] ?? ''));
         check_admin_referer(self::CHANNEL_ACTION . '_' . $provider, 'ppar_channel_nonce');
-        $router = class_exists('Pferdeportal_Affiliate_Router') ? Pferdeportal_Affiliate_Router::instance() : null;
+        $router = class_exists('Hobby_Depot_Affiliate_Router') ? Hobby_Depot_Affiliate_Router::instance() : null;
         if (!is_object($router) || !method_exists($router, 'provider_channel_set_paused') || !in_array($mode, array('pause','resume'), true)) {
             $result = new WP_Error('provider_channel_action_invalid', 'Kanalaktion ist ungültig.');
         } else {
@@ -237,7 +237,7 @@ final class PPAR_Affiliate_Admin_KISS {
     public static function handle_housekeeping_run() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer(self::HOUSEKEEPING_NONCE_ACTION, self::HOUSEKEEPING_NONCE_FIELD);
-        $router = class_exists('Pferdeportal_Affiliate_Router') ? Pferdeportal_Affiliate_Router::instance() : null;
+        $router = class_exists('Hobby_Depot_Affiliate_Router') ? Hobby_Depot_Affiliate_Router::instance() : null;
         if (!is_object($router) || !method_exists($router, 'run_housekeeping')) {
             wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-kiss-system','ppar_housekeeping'=>'failed'), admin_url('admin.php')));
             exit;
@@ -645,16 +645,16 @@ final class PPAR_Affiliate_Admin_KISS {
     }
 
     private static function delegate_idealo($file) {
-        if (!class_exists('Pferdeportal_Affiliate_Router')) { self::import_redirect('failed','Affiliate-Router ist nicht geladen.'); }
+        if (!class_exists('Hobby_Depot_Affiliate_Router')) { self::import_redirect('failed','Affiliate-Router ist nicht geladen.'); }
         $_FILES['idealo_feed'] = $file;
         $_POST['ppar_idealo_nonce'] = wp_create_nonce('ppar_idealo_import_file');
         $_REQUEST['ppar_idealo_nonce'] = $_POST['ppar_idealo_nonce'];
-        Pferdeportal_Affiliate_Router::instance()->handle_idealo_import_file();
+        Hobby_Depot_Affiliate_Router::instance()->handle_idealo_import_file();
         exit;
     }
 
     private static function delegate_creatives($file,$provider,$name) {
-        if (!class_exists('Pferdeportal_Affiliate_Router')) { self::import_redirect('failed','Affiliate-Router ist nicht geladen.'); }
+        if (!class_exists('Hobby_Depot_Affiliate_Router')) { self::import_redirect('failed','Affiliate-Router ist nicht geladen.'); }
         $hash = is_readable((string)$file['tmp_name']) ? hash_file('sha256',(string)$file['tmp_name']) : '';
         $_FILES['creative_file'] = $file;
         $_POST['provider'] = sanitize_key($provider);
@@ -663,7 +663,7 @@ final class PPAR_Affiliate_Admin_KISS {
         $_POST['creative_codes'] = '';
         $_POST['ppar_creative_library_nonce'] = wp_create_nonce('ppar_creative_library_import');
         $_REQUEST['ppar_creative_library_nonce'] = $_POST['ppar_creative_library_nonce'];
-        Pferdeportal_Affiliate_Router::instance()->handle_creative_library_import();
+        Hobby_Depot_Affiliate_Router::instance()->handle_creative_library_import();
         exit;
     }
 
