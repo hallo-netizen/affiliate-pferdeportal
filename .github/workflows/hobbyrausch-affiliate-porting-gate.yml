@@ -87,3 +87,27 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run provider registry simulation
         run: php work/hobbyrausch-affiliate/porting/tests/provider-registry-simulation.php "${{ matrix.scenario }}"
+
+  provider-access-simulation:
+    runs-on: ubuntu-latest
+    needs: static-gate
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - amazon_disabled
+          - amazon_missing_credentials
+          - amazon_unverified
+          - amazon_connected
+          - amazon_paused
+          - idealo_missing_credentials
+          - idealo_valid_credentials
+          - idealo_disabled
+          - idealo_enabled
+          - ebay_missing_credentials
+          - ebay_unconfirmed
+          - ebay_valid
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run provider access simulation
+        run: php work/hobbyrausch-affiliate/porting/tests/provider-access-simulation.php "${{ matrix.scenario }}"
