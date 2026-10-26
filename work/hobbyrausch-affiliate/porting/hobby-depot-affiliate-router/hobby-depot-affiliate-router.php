@@ -2037,7 +2037,6 @@ JS;
             'product_after_category_tiles',
             'category_recommendation',
             'glossary_overview_banner',
-            'breed_overview_banner',
             'journal_banner',
             'anzeigenmarkt_top_banner',
             'anzeigenmarkt_category_banner',
@@ -2378,13 +2377,12 @@ JS;
                         $creative_type = sanitize_key((string)($banner['creative_type'] ?? ''));
                         $is_overview_wide_banner_slot = $this->overview_wide_banner_slot($slot_type);
                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-                        $is_breed_single_slot = in_array($normalized_slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
-                        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot;
+                        $uses_editorial_single_chrome = $is_glossary_single_slot;
                         if ($is_overview_wide_banner_slot) {
                             $disclosure = $this->get_disclosure_html($content_id);
                         } elseif ($uses_editorial_single_chrome) {
-                            // Glossar und Pferderassen erhalten denselben kompakten
-                            // Pflichtblock: Bild, Pflichttext darunter, danach CTA.
+                            // Glossar erhaelt den kompakten Pflichtblock:
+                            // Bild, Pflichttext darunter, danach CTA.
                             // Desktop und Mobil werden technisch parallel gerendert,
                             // deshalb braucht jeder Slot seinen eigenen Pflichttext.
                             $editorial_disclosure_text = 'Werbelink: Bei Kauf erhalten wir ggf. eine Provision.';
@@ -2405,7 +2403,6 @@ JS;
                             : '';
                         if ($is_overview_wide_banner_slot) { $classes[] = 'ppar-overview-wide-banner-slot'; }
                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
-                        if ($is_breed_single_slot) { $classes[] = 'ppar-breed-affiliate-slot-v67261'; $label = ''; }
                         $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="' . esc_attr($slot_type) . '" data-ppar-group="' . esc_attr($group['id'] ?? '') . '"' . $category_product_slot_style . '>';
                         if ($uses_editorial_single_chrome) {
                             $out .= '<h2 class="ppar-glossary-adhead-v67251"><span class="ppar-glossary-adicon-v67251 pftk-gsingle-icon-v150490" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h3l8 5V6l-8 5H4z"/><path d="M7 13l1.5 5h3"/><path d="M18 9.5c1.2 1.4 1.2 3.6 0 5"/></svg></span><span>Anzeige</span></h2>';
@@ -2554,9 +2551,8 @@ JS;
             $description = '';
         }
         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-        $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
         $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
-        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot || $is_classic_post_slot;
+        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
         if ($uses_editorial_single_chrome) {
             // Redaktionelle Einzeltypen verwenden denselben reduzierten Werbeblock:
             // nur Creative + portaltypischer CTA; kein Bannername, Partner-/Gueltigkeits-
@@ -2869,16 +2865,6 @@ JS;
                         $names[] = (string) $ancestor->name;
                         $term_ids[] = (int) $ancestor->term_id;
                     }
-                }
-            }
-        }
-
-        if ($post_type === 'pa_breed' && taxonomy_exists('pa_breed_group')) {
-            $terms=get_the_terms($post_id,'pa_breed_group');
-            if (!is_wp_error($terms) && is_array($terms)) {
-                foreach($terms as $term){
-                    $term_ids[]=(int)$term->term_id; $direct_term_slugs[]=(string)$term->slug;
-                    $slugs[]=(string)$term->slug; $names[]=(string)$term->name;
                 }
             }
         }
@@ -3772,20 +3758,7 @@ JS;
         $glossary_single_banner = $required_creative_type === 'banner'
             && $context_post_type === 'uge_term'
             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-        $breed_single_banner = $required_creative_type === 'banner'
-            && $context_post_type === 'pa_breed'
-            && in_array($slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
-
-        // KISS 6.72.207: Pferderassen-Singles sind grundsaetzlich freie
-        // Bannerplaetze. Format/Technik/Active/Placement wurden bereits vorher
-        // geprueft; Themenzuordnung darf hier nicht sperren oder bevorzugen.
-        if ($breed_single_banner) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Single: freie Wahl aus technisch und formatlich gueltigem Bannerbestand.');
-        }
-
-        // V6.72.186: Eine gespeicherte exakte Zielkante ist auf jeder Ebene
-        // bindend, auch bei Pferderassen. Erst wenn KEIN exakter Treffer existiert,
-        // darf die historische themenneutrale Rassenverteilung greifen.
+        // Eine gespeicherte exakte Zielkante ist auf jeder Ebene bindend.
         $automation_rank = null;
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
             $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
@@ -3815,14 +3788,6 @@ JS;
             }
         }
 
-        // Historische neutrale Rassenverteilung bleibt fuer nicht automatisch
-        // materialisierte Sonder-/Festzuordnungen unveraendert erhalten.
-        if ($required_creative_type === 'banner' && in_array($slot_type, array(
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
-        ), true)) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Sonderpfad ohne Creative-Library-Zielvertrag.');
-        }
-
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
         if (is_array($destination_rank) && (int) ($destination_rank['specificity'] ?? 0) >= 500) { return $destination_rank; }
         $runtime_page_topic_rank = $this->banner_runtime_page_topic_rank($campaign, $context);
@@ -3837,7 +3802,7 @@ JS;
             $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
             if ($required_creative_type !== 'banner'
                 && !$automation_rank
-                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) { return null; }
+                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) { return null; }
         }
 
         $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
@@ -3959,8 +3924,7 @@ JS;
             'category_recommendation','product_after_category_tiles','produkt_recommendation',
             'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
             'journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
-            'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
+            'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner'
         ), true)) { return $cache[$raw] = 'banner'; }
         return $cache[$raw] = '';
     }
@@ -4218,7 +4182,7 @@ JS;
                     ? $this->automation_campaign_exact_target_rank($target_probe, $rank_context)
                     : null;
                 $fill_post_type = (string) $rank_context['_ppar_norm_post_type'];
-                if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
                     continue;
                 }
             }
@@ -4598,7 +4562,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
                     $fill_post_type = is_array($rank_context) && isset($rank_context['_ppar_norm_post_type'])
                         ? (string) $rank_context['_ppar_norm_post_type']
                         : sanitize_key((string) (is_array($rank_context) ? ($rank_context['post_type'] ?? '') : ''));
-                    if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                    if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
                         continue;
                     }
                 }
@@ -5006,7 +4970,6 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
             array('hub_mid_banner', 'template_mid_banner'),
             array('category_recommendation', 'produkt_recommendation', 'template_bottom', 'product_after_category_tiles'),
             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
-            array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'),
         );
         foreach ($groups as $group) { if (in_array($slot_type, $group, true)) { return $cache[$raw] = $group; } }
         return $cache[$raw] = array($slot_type);
@@ -8264,7 +8227,7 @@ JS;
             // bestimmt. Ohne diese Ausnahme wuerde campaign_is_complete() genau
             // diese neutralen Output-Objekte vor dem Ranking aussortieren.
             if (!$assignment_ok && sanitize_key((string)($campaign['source'] ?? '')) === 'output_object_v4') {
-                $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner');
+                $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
                 $placements = array_map('sanitize_key',(array)($campaign['placements'] ?? array()));
                 $assignment_ok = !empty(array_intersect($fill_slots,$placements));
             }
@@ -10166,7 +10129,7 @@ JS;
                             </tr>
                             <tr>
                                 <th scope="row">Gruppen-ID</th>
-                                <td><input type="text" class="regular-text" name="ppar_groups_form[<?php echo esc_attr((string) $g_index); ?>][id]" value="<?php echo esc_attr((string) ($group['id'] ?? '')); ?>" placeholder="z-b-produktgruppe"><p class="description">Technische ID, klein geschrieben, ohne Leerzeichen. Beispiel: gartenmoebel, akku_schrauber, pferdefutter.</p></td>
+                                <td><input type="text" class="regular-text" name="ppar_groups_form[<?php echo esc_attr((string) $g_index); ?>][id]" value="<?php echo esc_attr((string) ($group['id'] ?? '')); ?>" placeholder="z-b-produktgruppe"><p class="description">Technische ID, klein geschrieben, ohne Leerzeichen. Beispiel: gartenmoebel, akku_schrauber, modellbau.</p></td>
                             </tr>
                             <tr>
                                 <th scope="row">Anzeigename</th>
