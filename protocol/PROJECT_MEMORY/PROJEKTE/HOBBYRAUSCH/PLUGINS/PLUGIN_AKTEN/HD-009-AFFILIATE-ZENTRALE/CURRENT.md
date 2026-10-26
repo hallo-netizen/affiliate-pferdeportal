@@ -56,9 +56,11 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 - Installationskandidat vorhanden;
 - isoliertes `CURRENT.zip` vorhanden;
 - `MANIFEST.md` + `EVIDENCE_GATE5_20261026.md` vorhanden;
-- GitHub-Actions-Lauf `40337386359`: SUCCESS;
-- Kandidat SHA-256: `457628ebe31735928ca73465ea69ac4da5b5a442693ee1a8c652861432d67c81`;
-- PR #569 in den Campus gemergt;
+- GitHub-Actions-Lauf `40344179549`: SUCCESS;
+- Kandidat: `0.1.1-dev`;
+- Kandidat SHA-256: `663ff5a77932704ef1e354e37c7591f99046e54f90beb67c03cb63837a155511`;
+- PR #572 in den Campus gemergt;
+- Verbindungsdaten-Preflight aktiv: fehlende Pflichtzugänge werden namentlich angezeigt und blockieren LIVE-PASS;
 - **kein Liveeinsatz / kein Live-PASS**;
 - keine Hobby-Depot-Produktdaten;
 - keine Amazon-Produktrecherche behaupten;
@@ -109,8 +111,8 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 
 ## ERSTER OFFENER BLOCKER
 
-Produktiver Hobby-Depot-Live-Readback fehlt. Provider-Zugangsdaten wurden absichtlich nicht in Quellcode/Campus geschrieben und müssen separat über die vorhandenen WordPress-Laufzeitschnittstellen übernommen werden.
+Produktiver Hobby-Depot-Live-Readback fehlt. Provider-Zugangsdaten wurden absichtlich nicht in Quellcode/Campus geschrieben. Nach manueller Installation müssen sie in der WordPress-Laufzeit vollständig vorhanden sein; der neue Preflight sperrt LIVE-PASS bei fehlenden Pflichtwerten.
 
 ## EXAKT EINE NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten in der echten Hobby-Depot-WordPress-Laufzeit installieren, vorhandene Provider-Zugangsdaten über die bestehenden Konfigurationsschnittstellen übernehmen, HD-004 sowie eBay/idealo positiv und fail-closed negativ prüfen und echten Frontend-/Provider-Readback durchführen. Amazon bleibt bis zu einem belegten realen Adapter `prepared`. Kein Live-PASS ohne diesen Nachweis.
+Den Gate-5-PASS-Kandidaten `0.1.1-dev` manuell installieren und danach den Verbindungsdaten-Preflight abarbeiten. Pflichtwerte: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Danach Verbindungstests, HD-004, eBay/idealo und echten Frontend-/Provider-Readback durchführen. Amazon bleibt bis zu einem belegten realen Adapter `prepared`. Kein Live-PASS ohne vollständigen Preflight und Live-Nachweis.
