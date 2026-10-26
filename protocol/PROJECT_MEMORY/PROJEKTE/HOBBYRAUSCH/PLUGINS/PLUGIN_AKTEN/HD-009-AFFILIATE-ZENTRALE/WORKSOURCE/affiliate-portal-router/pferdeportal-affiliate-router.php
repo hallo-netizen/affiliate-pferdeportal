@@ -2085,7 +2085,6 @@ JS;
             'product_after_category_tiles',
             'category_recommendation',
             'glossary_overview_banner',
-            'breed_overview_banner',
             'journal_banner',
             'anzeigenmarkt_top_banner',
             'anzeigenmarkt_category_banner',
@@ -2426,13 +2425,11 @@ JS;
                         $creative_type = sanitize_key((string)($banner['creative_type'] ?? ''));
                         $is_overview_wide_banner_slot = $this->overview_wide_banner_slot($slot_type);
                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-                        $is_breed_single_slot = in_array($normalized_slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
-                        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot;
+                        $uses_editorial_single_chrome = $is_glossary_single_slot;
                         if ($is_overview_wide_banner_slot) {
                             $disclosure = $this->get_disclosure_html($content_id);
                         } elseif ($uses_editorial_single_chrome) {
-                            // Glossar und Pferderassen erhalten denselben kompakten
-                            // Pflichtblock: Bild, Pflichttext darunter, danach CTA.
+                            // Glossar verwendet den kompakten Pflichtblock: Bild, Pflichttext darunter, danach CTA.
                             // Desktop und Mobil werden technisch parallel gerendert,
                             // deshalb braucht jeder Slot seinen eigenen Pflichttext.
                             $editorial_disclosure_text = 'Werbelink: Bei Kauf erhalten wir ggf. eine Provision.';
@@ -2453,7 +2450,6 @@ JS;
                             : '';
                         if ($is_overview_wide_banner_slot) { $classes[] = 'ppar-overview-wide-banner-slot'; }
                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
-                        if ($is_breed_single_slot) { $classes[] = 'ppar-breed-affiliate-slot-v67261'; $label = ''; }
                         $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="' . esc_attr($slot_type) . '" data-ppar-group="' . esc_attr($group['id'] ?? '') . '"' . $category_product_slot_style . '>';
                         if ($uses_editorial_single_chrome) {
                             $out .= '<h2 class="ppar-glossary-adhead-v67251"><span class="ppar-glossary-adicon-v67251 pftk-gsingle-icon-v150490" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h3l8 5V6l-8 5H4z"/><path d="M7 13l1.5 5h3"/><path d="M18 9.5c1.2 1.4 1.2 3.6 0 5"/></svg></span><span>Anzeige</span></h2>';
@@ -2602,9 +2598,8 @@ JS;
             $description = '';
         }
         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-        $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
         $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
-        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot || $is_classic_post_slot;
+        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
         if ($uses_editorial_single_chrome) {
             // Redaktionelle Einzeltypen verwenden denselben reduzierten Werbeblock:
             // nur Creative + portaltypischer CTA; kein Bannername, Partner-/Gueltigkeits-
@@ -2921,15 +2916,6 @@ JS;
             }
         }
 
-        if ($post_type === 'pa_breed' && taxonomy_exists('pa_breed_group')) {
-            $terms=get_the_terms($post_id,'pa_breed_group');
-            if (!is_wp_error($terms) && is_array($terms)) {
-                foreach($terms as $term){
-                    $term_ids[]=(int)$term->term_id; $direct_term_slugs[]=(string)$term->slug;
-                    $slugs[]=(string)$term->slug; $names[]=(string)$term->name;
-                }
-            }
-        }
 
         if ($post_type === 'page') {
             $ancestors = get_post_ancestors($post_id);
@@ -3636,7 +3622,7 @@ JS;
         $primary = $this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug'] ?? '')));
         if ($primary !== '') {
             // Exact means the complete distinctive glossary term, not one shared
-            // generic token. The former any-token test made broad horse-shop banners
+            // generic token. The former any-token test made breite Shop-Banner
             // look exact on many unrelated glossary entries and prevented rotation.
             $generic_exact = array('banner','anzeige','affiliate','shop');
             $primary_tokens = array_values(array_diff($this->output_tokens($primary), $generic_exact));
@@ -3683,7 +3669,7 @@ JS;
 
     /**
      * V6.72.85 – Ziel-URL ist fachliche Evidenz. Ein Banner, dessen echte
-     * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z.B. /reithelme/),
+     * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z. B. /modellbau/),
      * gewinnt vor einem nur breiten Themen- oder allgemeinen Fallback. Tracking-
      * URLs werden nur lokal dekodiert; es wird hier kein externer Request gemacht.
      */
@@ -3749,7 +3735,7 @@ JS;
      * angewiesen sein: Titel/Beschreibung/ADCELL-Werbemittelkategorie und lokal
      * dekodierte Zielseite werden direkt gegen das aktuelle Seitenthema geprüft.
      * Nur der aktuelle Seitenbegriff darf die exakte Stufe auslösen; allgemeine
-     * Pferde-/Shopbegriffe reichen ausdrücklich nicht.
+     * allgemeine Shopbegriffe reichen ausdrücklich nicht.
      */
     private function banner_runtime_topic_stem($token) {
         $token = strtolower(remove_accents((string) $token));
@@ -3786,7 +3772,6 @@ JS;
         if (!$evidence_stems) { return null; }
 
         $generic = array_fill_keys(array(
-            'pferd','pferde','reiter','reiten','ausrustung','ausruestung','reiterbedarf',
             'shop','online','banner','anzeige','partner','affiliate','angebot','angebote'
         ), true);
         $primary_text = trim((string)($context['primary_slug'] ?? '') . ' ' . (string)($context['primary_name'] ?? ''));
@@ -3821,20 +3806,8 @@ JS;
         $glossary_single_banner = $required_creative_type === 'banner'
             && $context_post_type === 'uge_term'
             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
-        $breed_single_banner = $required_creative_type === 'banner'
-            && $context_post_type === 'pa_breed'
-            && in_array($slot_type, array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
 
-        // KISS 6.72.207: Pferderassen-Singles sind grundsaetzlich freie
-        // Bannerplaetze. Format/Technik/Active/Placement wurden bereits vorher
-        // geprueft; Themenzuordnung darf hier nicht sperren oder bevorzugen.
-        if ($breed_single_banner) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Single: freie Wahl aus technisch und formatlich gueltigem Bannerbestand.');
-        }
-
-        // V6.72.186: Eine gespeicherte exakte Zielkante ist auf jeder Ebene
-        // bindend, auch bei Pferderassen. Erst wenn KEIN exakter Treffer existiert,
-        // darf die historische themenneutrale Rassenverteilung greifen.
+        // Eine gespeicherte exakte Zielkante ist auf jeder Ebene bindend.
         $automation_rank = null;
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
             $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
@@ -3864,12 +3837,6 @@ JS;
             }
         }
 
-        // Historische neutrale Rassenverteilung bleibt fuer nicht automatisch
-        // materialisierte Sonder-/Festzuordnungen unveraendert erhalten.
-        if ($required_creative_type === 'banner' && in_array($slot_type, array(
-        ), true)) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen-Sonderpfad ohne Creative-Library-Zielvertrag.');
-        }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
         if (is_array($destination_rank) && (int) ($destination_rank['specificity'] ?? 0) >= 500) { return $destination_rank; }
@@ -3885,7 +3852,7 @@ JS;
             $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
             if ($required_creative_type !== 'banner'
                 && !$automation_rank
-                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) { return null; }
+                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) { return null; }
         }
 
         $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
@@ -4008,7 +3975,6 @@ JS;
             'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
             'journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
         ), true)) { return $cache[$raw] = 'banner'; }
         return $cache[$raw] = '';
     }
@@ -4266,7 +4232,7 @@ JS;
                     ? $this->automation_campaign_exact_target_rank($target_probe, $rank_context)
                     : null;
                 $fill_post_type = (string) $rank_context['_ppar_norm_post_type'];
-                if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
                     continue;
                 }
             }
@@ -4646,7 +4612,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
                     $fill_post_type = is_array($rank_context) && isset($rank_context['_ppar_norm_post_type'])
                         ? (string) $rank_context['_ppar_norm_post_type']
                         : sanitize_key((string) (is_array($rank_context) ? ($rank_context['post_type'] ?? '') : ''));
-                    if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                    if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
                         continue;
                     }
                 }
@@ -5054,7 +5020,6 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
             array('hub_mid_banner', 'template_mid_banner'),
             array('category_recommendation', 'produkt_recommendation', 'template_bottom', 'product_after_category_tiles'),
             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
-            array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'),
         );
         foreach ($groups as $group) { if (in_array($slot_type, $group, true)) { return $cache[$raw] = $group; } }
         return $cache[$raw] = array($slot_type);
@@ -5232,26 +5197,15 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
 
     private function content_has_design_template_shortcode($content) {
         $shortcodes = array(
-            'pferde_startseite',
-            'pferde_startseite_only',
-            'pferde_hub_ebene_1',
-            'pferde_hauptseite',
-            'pferde_hub_ebene_2',
-            'pferde_hub_auto',
             'affiliate_portal_startseite',
             'affiliate_portal_hub_1',
             'affiliate_portal_hub_2',
             'affiliate_portal_hub_auto',
             'affiliate_portal_kategorie',
-            'affiliate_portal_produkt',
-            'pferde_template_oben',
-            'pferde_template_unten',
-            'pferde_banner'
+            'affiliate_portal_produkt'
         );
         foreach ($shortcodes as $shortcode) {
-            if (has_shortcode($content, $shortcode)) {
-                return true;
-            }
+            if (has_shortcode($content, $shortcode)) { return true; }
         }
         return false;
     }
@@ -5259,16 +5213,14 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
 
     private function get_design_template_type_from_content($content) {
         $map = array(
-            'start' => array('pferde_startseite', 'pferde_startseite_only', 'affiliate_portal_startseite'),
-            'hub1' => array('pferde_hub_ebene_1', 'pferde_hauptseite', 'affiliate_portal_hub_1'),
-            'hub2' => array('pferde_hub_ebene_2', 'pferde_hub_auto', 'affiliate_portal_hub_2', 'affiliate_portal_hub_auto'),
-            'category' => array('affiliate_portal_kategorie', 'affiliate_portal_produkt'),
+            'start' => array('affiliate_portal_startseite'),
+            'hub1' => array('affiliate_portal_hub_1'),
+            'hub2' => array('affiliate_portal_hub_2','affiliate_portal_hub_auto'),
+            'category' => array('affiliate_portal_kategorie','affiliate_portal_produkt'),
         );
         foreach ($map as $type => $shortcodes) {
             foreach ($shortcodes as $shortcode) {
-                if (has_shortcode($content, $shortcode)) {
-                    return $type;
-                }
+                if (has_shortcode($content, $shortcode)) { return $type; }
             }
         }
         return '';
@@ -5950,7 +5902,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         foreach ($active as $plugin_file) {
             $name = isset($plugins[$plugin_file]['Name']) ? (string) $plugins[$plugin_file]['Name'] : $plugin_file;
             $haystack = strtolower($name . ' ' . $plugin_file);
-            if (strpos($haystack, 'pferde startseite') !== false || strpos($haystack, 'pferde template') !== false || strpos($haystack, 'hubseite') !== false || strpos($haystack, 'affiliate template') !== false) {
+            if (strpos($haystack, 'hubseite') !== false || strpos($haystack, 'affiliate template') !== false) {
                 $matches[] = $name;
             }
         }
@@ -7350,7 +7302,7 @@ JS;
             <p><label>Client-ID <span class="ppar-saved"><?php echo esc_html($ebay_client_const ? 'über wp-config.php' : ((string)($ebay['client_id'] ?? '') !== '' ? 'gespeichert' : 'nicht gespeichert')); ?></span><br><input type="text" autocomplete="off" name="ppar_provider[ebay][client_id]" value="<?php echo esc_attr($ebay_client_const ? '' : (string)($ebay['client_id'] ?? '')); ?>" placeholder="<?php echo esc_attr($ebay_client_const ? 'über wp-config.php gesetzt' : ''); ?>"></label></p>
             <p><label>Client-Secret <span class="ppar-saved"><?php echo esc_html($ebay_secret_const ? 'über wp-config.php' : $this->masked_secret_label((string)($ebay['client_secret'] ?? ''))); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[ebay][client_secret]" value="" placeholder="leer lassen zum Beibehalten"></label></p>
             <p><label>EPN-Campaign-ID <span class="ppar-saved"><?php echo esc_html($ebay_campaign_const ? 'über wp-config.php' : ''); ?></span><br><input type="text" inputmode="numeric" maxlength="10" name="ppar_provider[ebay][epn_campaign_id]" value="<?php echo esc_attr($ebay_campaign_const ? '' : (string)($ebay['epn_campaign_id'] ?? '')); ?>" placeholder="10 Ziffern"></label></p>
-            <p><label>Affiliate-Referenz<br><input type="text" name="ppar_provider[ebay][affiliate_reference_prefix]" value="<?php echo esc_attr((string)($ebay['affiliate_reference_prefix'] ?? 'pferde-atelier')); ?>"></label></p>
+            <p><label>Affiliate-Referenz<br><input type="text" name="ppar_provider[ebay][affiliate_reference_prefix]" value="<?php echo esc_attr((string)($ebay['affiliate_reference_prefix'] ?? 'hobby-depot')); ?>"></label></p>
             <?php if (!$ebay_secret_const) : ?><details><summary>Zugangsdaten entfernen</summary><p><label><input type="checkbox" name="ppar_provider[ebay][remove_client_secret]" value="1"> Client-Secret entfernen</label></p></details><?php endif; ?>
             <p><strong>Letzte Zugangsprüfung:</strong> <?php echo !empty($ebay_snapshot['last_checked']) ? esc_html(wp_date('d.m.Y H:i',(int)$ebay_snapshot['last_checked'])) : 'nie'; ?><br><?php echo esc_html((string)($ebay_snapshot['message'] ?? '')); ?></p>
             <div class="ppar-v240-actions"><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button><button class="button" name="ppar_provider_action" value="save_test" <?php disabled(!$ebay_oauth_allowed); ?>>Speichern &amp; OAuth prüfen</button><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-ebay')); ?>">eBay-Fachseite</a><a class="button" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></div>
@@ -8326,7 +8278,7 @@ JS;
             // bestimmt. Ohne diese Ausnahme wuerde campaign_is_complete() genau
             // diese neutralen Output-Objekte vor dem Ranking aussortieren.
             if (!$assignment_ok && sanitize_key((string)($campaign['source'] ?? '')) === 'output_object_v4') {
-                $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner');
+                $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
                 $placements = array_map('sanitize_key',(array)($campaign['placements'] ?? array()));
                 $assignment_ok = !empty(array_intersect($fill_slots,$placements));
             }
@@ -10239,7 +10191,7 @@ JS;
                             </tr>
                             <tr>
                                 <th scope="row">Gruppen-ID</th>
-                                <td><input type="text" class="regular-text" name="ppar_groups_form[<?php echo esc_attr((string) $g_index); ?>][id]" value="<?php echo esc_attr((string) ($group['id'] ?? '')); ?>" placeholder="z-b-produktgruppe"><p class="description">Technische ID, klein geschrieben, ohne Leerzeichen. Beispiel: gartenmoebel, akku_schrauber, pferdefutter.</p></td>
+                                <td><input type="text" class="regular-text" name="ppar_groups_form[<?php echo esc_attr((string) $g_index); ?>][id]" value="<?php echo esc_attr((string) ($group['id'] ?? '')); ?>" placeholder="z-b-produktgruppe"><p class="description">Technische ID, klein geschrieben, ohne Leerzeichen. Beispiel: gartenmoebel, akku_schrauber, modellbau.</p></td>
                             </tr>
                             <tr>
                                 <th scope="row">Anzeigename</th>
@@ -10377,7 +10329,7 @@ JS;
                 <h2>7. Shortcodes</h2>
                 <p><code>[affiliate_portal_slot type="post_mid_content" intent="primary_product"]</code></p>
                 <p><code>[pp_affiliate_slot type="mid_content" intent="primary_product"]</code> (Legacy kompatibel)</p>
-                <p><code>[pp_affiliate_slot type="bottom_recommendation" group="pferdefutter"]</code></p>
+                <p><code>[pp_affiliate_slot type="bottom_recommendation" group="modellbau"]</code></p>
                 <p><code>[pp_portal_overview]</code> oder <code>[pp_portal_overview context="haupt_hub_ebene_1" part="full"]</code></p>
 
                 <?php submit_button('Einstellungen speichern'); ?>
