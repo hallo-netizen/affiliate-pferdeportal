@@ -252,6 +252,89 @@ trait PPAR_Provider_Registry_Trait {
         return apply_filters('ppar_affiliate_provider_access_snapshot', $snapshot, $provider, $definition, self::PROVIDER_CONTRACT_VERSION);
     }
 
+    public function provider_credentials_preflight() {
+        $rows = array();
+
+        $awin = $this->network_settings('awin');
+        $rows['awin'] = array(
+            'label' => 'Awin',
+            'required' => array(
+                'Publisher-ID' => preg_replace('/[^0-9]/', '', (string)($awin['publisher_id'] ?? '')) !== '',
+                'API-Zugriffstoken' => $this->network_secret('awin', 'access_token', $awin) !== '',
+            ),
+            'optional' => array(
+                'Produktfeed-API-Schlüssel' => $this->network_secret('awin', 'feed_api_key', $awin) !== '',
+            ),
+        );
+
+        $adcell = $this->network_settings('adcell');
+        $rows['adcell'] = array(
+            'label' => 'ADCELL',
+            'required' => array(
+                'API-Benutzername' => $this->network_secret('adcell', 'username', $adcell) !== '',
+                'API-Passwort' => $this->network_secret('adcell', 'password', $adcell) !== '',
+            ),
+            'optional' => array(),
+        );
+
+        $ebay = method_exists($this, 'ebay_settings') ? $this->ebay_settings() : array();
+        $rows['ebay'] = array(
+            'label' => 'eBay',
+            'required' => array(
+                'Client-ID' => trim((string)($ebay['client_id'] ?? '')) !== '',
+                'Client-Secret' => trim((string)($ebay['client_secret'] ?? '')) !== '',
+                'EPN-Campaign-ID' => preg_match('/^\d{10}$/', (string)($ebay['epn_campaign_id'] ?? '')) === 1,
+            ),
+            'optional' => array(),
+        );
+
+        $idealo = method_exists($this, 'idealo_settings') ? $this->idealo_settings() : array();
+        $rows['idealo'] = array(
+            'label' => 'idealo',
+            'required' => array(
+                'iPN API-Key' => trim((string)($idealo['api_key'] ?? '')) !== '',
+                'Adspace-ID' => preg_replace('/\D+/', '', (string)($idealo['adspace_id'] ?? '')) !== '',
+                'Feed-ID' => preg_replace('/\D+/', '', (string)($idealo['feed_id'] ?? '')) !== '',
+            ),
+            'optional' => array(
+                'iPN-Feed-URL' => trim((string)($idealo['feed_url'] ?? '')) !== '',
+            ),
+        );
+
+        $digistore = method_exists($this, 'digistore24_settings') ? $this->digistore24_settings() : array();
+        $digistore_key = method_exists($this, 'digistore24_api_key') ? $this->digistore24_api_key($digistore) : '';
+        $rows['digistore24'] = array(
+            'label' => 'Digistore24',
+            'required' => array(
+                'Read-only API-Schlüssel' => trim((string)$digistore_key) !== '',
+            ),
+            'optional' => array(
+                'Affiliate-ID (wird durch den Verbindungstest ermittelt)' => trim((string)($digistore['affiliate_id'] ?? '')) !== '',
+            ),
+        );
+
+        $all_complete = true;
+        foreach ($rows as $key => &$row) {
+            $missing = array();
+            foreach ((array)$row['required'] as $label => $ok) {
+                if (!$ok) { $missing[] = (string)$label; }
+            }
+            $row['missing_required'] = $missing;
+            $row['complete'] = !$missing;
+            if ($missing) { $all_complete = false; }
+        }
+        unset($row);
+
+        return array(
+            'all_required_complete' => $all_complete,
+            'providers' => $rows,
+            'amazon' => array(
+                'state' => 'prepared',
+                'message' => 'Kein realer Amazon-Adapter vorhanden; deshalb keine erfundenen Zugangsdaten.',
+            ),
+        );
+    }
+
     private function provider_status_badge($snapshot) {
         $status = sanitize_key((string) ($snapshot['status'] ?? 'not_configured'));
         if ($status === 'connected') { return '<span class="ppar-network-status ppar-network-ok">Verbunden</span>'; }
