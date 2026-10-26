@@ -64,17 +64,18 @@ Bereits entfernt:
    - fail-closed bei fehlender Registry, ungültigem Snapshot, != 8 CORE-Welten oder < 300 strukturell belegten Hobbyseiten.
    - keine zweite Kategorie-/Produkt-Masterdatenhaltung im Affiliate-Plugin.
 
-3. **GATE 3 – Provider-Recherchepfade:** IN ARBEIT
-   - eBay und idealo gegen die neue Hobby-Depot-Zielquelle end-to-end prüfen.
-   - Amazon bleibt vorbereitet; kein Adapter erfinden.
+3. **GATE 3 – Provider-Recherchepfade: STATIC PASS**
+   - eBay und idealo verwenden die zentrale Hobby-Depot-Zielquelle.
+   - alte gelöschte Pferdeprojekt-Dateiquellen sind aus aktiven Pfaden entfernt.
+   - Amazon bleibt vorbereitet; kein Adapter erfunden.
 
-4. **GATE 4 – Positiv/Negativ/Regression:** OFFEN
+4. **GATE 4 – Positiv/Negativ/Regression:** IN ARBEIT
 5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN; vor Gate 4 verboten.
 
 ## Erster offener Blocker
 
-eBay- und idealo-Recherche-/Zuordnungspfade sind noch nicht vollständig gegen die neue Hobby-Depot-Zielquelle end-to-end geprüft.
+Ausführbarer Positiv-/Negativ-/Regressionstest der bereinigten HD-009-Arbeitsquelle fehlt noch.
 
 ## NEXT ACTION
 
-GATE 3 ausführen: eBay und idealo vollständig gegen `HDAR_Hobby_Depot_Source` prüfen, positive und negative Zuordnungspfade belegen und nur nachgewiesene verbleibende Altannahmen minimal korrigieren.
+GATE 4 ausführen: HD-004-Quellvertrag positiv und fail-closed negativ testen; eBay-/idealo-Zuordnung prüfen; Regression auf entfernte Fremdprojektdateien und nicht aktivierten Amazon-Adapter durchführen. Vor vollständigem PASS kein Installationspaket.
