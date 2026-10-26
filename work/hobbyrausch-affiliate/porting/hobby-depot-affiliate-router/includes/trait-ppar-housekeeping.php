@@ -2,7 +2,6 @@
 if (!defined('ABSPATH')) { exit; }
 
 require_once __DIR__ . '/class-ppar-partner-analytics.php';
-require_once __DIR__ . '/class-ppar-deal-radar.php';
 require_once __DIR__ . '/class-ppar-product-source-plan.php';
 require_once __DIR__ . '/class-ppar-admin-kiss.php';
 require_once __DIR__ . '/class-ppar-ds24-manual-downstream.php';
