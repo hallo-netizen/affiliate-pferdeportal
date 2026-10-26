@@ -1,6 +1,6 @@
 # Hobby Depot Affiliate – Porting Workbench
 
-STATUS: PORTING / SOURCE CLEANUP PASS / AMAZON WIRED / NOT INSTALLABLE
+STATUS: PORTING / SOURCE CLEANUP PASS / AMAZON WIRED / STATIC PASS / PROVIDER SIM PASS / NOT INSTALLABLE
 UPDATED: 2026-10-26
 
 ## Authority and source
@@ -27,14 +27,23 @@ UPDATED: 2026-10-26
 - Amazon secrets are never committed here. Non-empty wp-config constants override stored settings and are not copied back into WordPress options.
 - Existing Amazon campaigns fail closed when the provider is not enabled, not credential-complete, not connection-tested or centrally paused/vetoed.
 
+## Verified gates completed in this porting branch
+
+1. Static/PHP syntax verification after Amazon wiring: **PASS**.
+   - all 23 PHP files lint clean;
+   - blocked horse-domain marker gate PASS;
+   - required Hobby Depot adapter gate PASS.
+2. Positive/negative provider simulations: **PASS**.
+   - registry binding: 6/6 PASS (Amazon/eBay/idealo: valid HD-004 + missing-registry fail-closed);
+   - access/activation boundaries: 12/12 PASS;
+   - total provider simulation matrix: **18/18 PASS**.
+
 ## Still open before an install candidate
 
-1. Static/PHP syntax verification of the latest source after the Amazon wiring.
-2. Positive and negative provider simulations for Amazon, eBay and idealo.
-3. Real credential migration/round-trip test in a WordPress test runtime without exposing secrets.
-4. Generic 6.72.276 delta reconciliation where it is portal-neutral; horse/race/banner-specific deltas stay excluded.
-5. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
-6. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
+1. Real credential migration/round-trip test in a WordPress test runtime without exposing secrets.
+2. Generic 6.72.276 delta reconciliation where it is portal-neutral; horse/race/banner-specific deltas stay excluded.
+3. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
+4. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
 
 ## Governance note
 
