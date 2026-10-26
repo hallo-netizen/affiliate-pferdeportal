@@ -54,8 +54,8 @@ final class PPAR_Affiliate_Source_Plan {
                 'purpose'=>'Preis-/Dealquelle','activation'=>'nach echter Freigabe und bestätigter Schnittstelle',
             ),
             'amazon' => array(
-                'label'=>'Amazon','state'=>'prepared','route'=>'Amazon Associates / zulässiger Produktdatenzugang',
-                'purpose'=>'Produktquelle & Deals','activation'=>'bewusst letzter Rollout; erst nach echtem Zugang',
+                'label'=>'Amazon','state'=>'adapter_ready','route'=>'Amazon Creators API / SearchItems',
+                'purpose'=>'Produktquelle & Deals','activation'=>'nach echtem Creators-API-Zugang, Partner-Tag und positivem Verbindungstest',
             ),
         );
     }
@@ -79,14 +79,14 @@ final class PPAR_Affiliate_Source_Plan {
     public static function extend_provider_registry($registry, $contract_version = '') {
         $registry = is_array($registry) ? $registry : array();
 
-        // Amazon already exists in the core registry. Extend only its prepared
-        // capability contract; the real adapter remains absent until real access exists.
+        // Amazon uses the official Creators API adapter. It remains fail-closed
+        // until real credentials, a marketplace Partner Tag and a connection test exist.
         $amazon = isset($registry['amazon']) && is_array($registry['amazon']) ? $registry['amazon'] : array();
         $registry['amazon'] = array_merge(array(
             'label'=>'Amazon','state'=>'prepared','access_owner'=>'adapter',
             'specialist_menu'=>false,'specialist_slug'=>'affiliate-portal-provider-amazon',
         ), $amazon, array(
-            'state'=>'prepared','access_owner'=>'adapter','specialist_menu'=>false,
+            'state'=>'adapter_ready','access_owner'=>'adapter','specialist_menu'=>false,
             'capabilities'=>array('credentials','connection_test','product_feeds','synchronization','outputs','veto'),
         ));
 
