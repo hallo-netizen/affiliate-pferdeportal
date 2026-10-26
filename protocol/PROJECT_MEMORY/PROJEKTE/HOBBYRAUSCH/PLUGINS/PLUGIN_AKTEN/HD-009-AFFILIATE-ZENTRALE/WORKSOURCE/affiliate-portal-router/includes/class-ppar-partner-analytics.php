@@ -250,7 +250,7 @@ final class PPAR_Partner_Analytics_Admin {
                 <tr>
                     <td><strong><?php echo esc_html((string)$p['label']); ?></strong><?php if (($p['label']??'')==='OTTO') : ?><br><span class="description">über Awin-Advertiserreport</span><?php endif; ?></td>
                     <td><?php echo esc_html((string)$p['type']); ?></td>
-                    <td><strong><?php echo esc_html(number_format_i18n($portal_click_count,0)); ?></strong><br><span class="description">Pferdeatelier-Redirect</span></td>
+                    <td><strong><?php echo esc_html(number_format_i18n($portal_click_count,0)); ?></strong><br><span class="description">Hobby-Depot-Redirect</span></td>
                     <?php $multi_original = !empty($r['details']) && count((array)$r['details']) > 1; ?>
                     <td><?php echo $multi_original ? '<span class="description">siehe Originalzeilen</span>' : self::na($r['clicks']); ?></td>
                     <td><?php echo $multi_original ? '<span class="description">siehe Originalzeilen</span>' : self::na($r['orders']); ?></td>
