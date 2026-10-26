@@ -16,7 +16,7 @@ Arbeitsbranch:
 `hobbyrausch/hd009-affiliate-port-20261026`
 
 Arbeitsquelle:
-`WORKSOURCE/affiliate-portal-router/`
+`hobbyrausch/hd009-affiliate-port-20261026:protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/affiliate-portal-router/`
 
 ## Exakte Ausgangsbasis
 
