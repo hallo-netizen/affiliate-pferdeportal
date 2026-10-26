@@ -49,6 +49,54 @@ final class Hobby_Depot_Affiliate_Router {
     private $ranked_campaign_sanitize_key_request_cache = array();
     private $ranked_campaign_sanitize_text_request_cache = array();
 
+    /**
+     * HD-003 bridge without a hard-coded legacy class name.
+     * The active design class is accepted only when it explicitly identifies
+     * itself as the Hobby Depot design profile and exposes the required API.
+     */
+    private function design_bridge_class() {
+        static $resolved = false;
+        static $resolved_class = '';
+        if ($resolved) { return $resolved_class; }
+        $resolved = true;
+        foreach (get_declared_classes() as $candidate) {
+            if (!is_callable(array($candidate, 'design_profile'))
+                || !is_callable(array($candidate, 'affiliate_page_type'))) { continue; }
+            try {
+                $profile = sanitize_key((string) call_user_func(array($candidate, 'design_profile')));
+            } catch (Throwable $e) {
+                continue;
+            }
+            if ($profile !== 'hobby_depot') { continue; }
+            if ($resolved_class !== '') {
+                // Ambiguous design authority: fail closed.
+                $resolved_class = '';
+                return '';
+            }
+            $resolved_class = (string) $candidate;
+        }
+        return $resolved_class;
+    }
+
+    private function design_bridge_call($method, $args = array(), $default = '') {
+        $class = $this->design_bridge_class();
+        $method = (string) $method;
+        if ($class === '' || $method === '' || !is_callable(array($class, $method))) { return $default; }
+        try {
+            return call_user_func_array(array($class, $method), is_array($args) ? $args : array());
+        } catch (Throwable $e) {
+            return $default;
+        }
+    }
+
+    private function design_bridge_constant($name, $default = '') {
+        $class = $this->design_bridge_class();
+        $name = preg_replace('/[^A-Z0-9_]/', '', strtoupper((string)$name));
+        if ($class === '' || $name === '') { return $default; }
+        $constant = $class . '::' . $name;
+        return defined($constant) ? constant($constant) : $default;
+    }
+
     private function ranked_campaigns_request_cache_allowed() {
         if ((function_exists('is_admin') && is_admin())
             || (defined('DOING_CRON') && DOING_CRON)
@@ -972,8 +1020,7 @@ JS;
         if (!is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
         $done_key = 'ppar_v672179_page_banner_target_identity_replan_done';
         if ((string) get_option($done_key, '') === 'done') { return; }
-        if (!class_exists('Pferde_Template_Kit')
-            || !is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))
+        if ($this->design_bridge_class() === ''
             || !method_exists($this, 'output_objects_table')
             || !method_exists($this, 'creative_library_table')
             || !method_exists($this, 'output_plan_creative')
@@ -999,7 +1046,7 @@ JS;
             if (!is_array($campaign) || empty($campaign['active'])) { continue; }
             $page_id = absint($campaign['page_id'] ?? 0);
             if ($page_id <= 0 || get_post_type($page_id) !== 'page') { continue; }
-            $design_type = sanitize_key((string) call_user_func(array('Pferde_Template_Kit', 'affiliate_page_type'), $page_id));
+            $design_type = sanitize_key((string) $this->design_bridge_call('affiliate_page_type', array($page_id), ''));
             if (!in_array($design_type, array('category', 'leaf'), true)) { continue; }
 
             $portal_key = sanitize_key((string) ($object['portal_key'] ?? ''));
@@ -5112,8 +5159,8 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         // nach dem fertig gerenderten Hub-Inhalt angehaengt – nur wenn ein reales
         // Creative existiert und nur wenn der Slot nicht bereits vorhanden ist.
         // Start/Kategorie sowie alle Grid-Karten bleiben unveraendert.
-        if (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))) {
-            $design_type = (string) Pferde_Template_Kit::affiliate_page_type($post_id);
+        if ($this->design_bridge_class() !== '') {
+            $design_type = (string) $this->design_bridge_call('affiliate_page_type', array($post_id), '');
             if (in_array($design_type, array('hub1', 'hub2'), true)) {
                 $slot_marker = 'data-ppar-slot="hub_after_cards"';
                 if (strpos((string) $content, $slot_marker) === false) {
@@ -8758,8 +8805,9 @@ JS;
         if ($page_id <= 0) {
             return '';
         }
-        if (class_exists('Pferde_Template_Kit') && method_exists('Pferde_Template_Kit', 'affiliate_page_type')) {
-            return (string) Pferde_Template_Kit::affiliate_page_type($page_id);
+        if ($this->design_bridge_class() !== '') {
+            $type = (string) $this->design_bridge_call('affiliate_page_type', array($page_id), '');
+            if ($type !== '') { return $type; }
         }
         $ancestors = get_post_ancestors($page_id);
         $children = get_pages(array('parent' => $page_id, 'post_status' => 'publish', 'number' => 1));
@@ -8840,9 +8888,9 @@ JS;
                 $active_count++;
             }
         }
-        $design_loaded = class_exists('Pferde_Template_Kit');
-        $design_version = $design_loaded && defined('Pferde_Template_Kit::VERSION') ? constant('Pferde_Template_Kit::VERSION') : '';
-        $design_contract = $design_loaded && method_exists('Pferde_Template_Kit', 'affiliate_contract_version') ? (string) Pferde_Template_Kit::affiliate_contract_version() : '';
+        $design_loaded = $this->design_bridge_class() !== '';
+        $design_version = $design_loaded ? (string) $this->design_bridge_constant('VERSION', '') : '';
+        $design_contract = $design_loaded ? (string) $this->design_bridge_call('affiliate_contract_version', array(), '') : '';
         $compatible = $design_loaded && $design_contract === self::CONTRACT_VERSION;
         $test_page_id = isset($_GET['ppar_test_page_id']) ? absint($_GET['ppar_test_page_id']) : 0;
         ?>
