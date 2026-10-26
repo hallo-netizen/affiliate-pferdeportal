@@ -4520,7 +4520,7 @@ trait PPAR_Ebay_Trait {
         // discovery/maintenance workflow. Re-running the complete portal catalog
         // classifier here would make the one-time recovery itself timeout-prone.
 
-        // A reference product in an accessory title (e.g. an accessory-reference title) must never consume a Reithelm slot. Keep the item in the
+        // A reference product in an accessory title (e.g. an accessory-reference title) must never consume the referenced product slot. Keep the item in the
         // coarse PRIVATE bucket, but give the real accessory its own balance key.
         if($raw){
             $title=sanitize_text_field((string)($raw['title']??$row['title']??''));
