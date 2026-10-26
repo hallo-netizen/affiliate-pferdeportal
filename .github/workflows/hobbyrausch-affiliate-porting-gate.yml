@@ -1,0 +1,46 @@
+name: Hobbyrausch Affiliate Porting Gate
+
+on:
+  push:
+    branches:
+      - hobbyrausch-affiliate-current
+    paths:
+      - 'work/hobbyrausch-affiliate/porting/**'
+      - '.github/workflows/hobbyrausch-affiliate-porting-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  static-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router'
+          mapfile -t files < <(find "$root" -type f -name '*.php' -print | sort)
+          test "${#files[@]}" -gt 0
+          for f in "${files[@]}"; do php -l "$f"; done
+          echo "PHP_LINT_FILES=${#files[@]}"
+      - name: Blocked horse-domain markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router'
+          if grep -RniE --include='*.php' --include='*.js' --include='*.css' --include='*.json'             '(Pferdeatelier|Pferde-Atelier|pferdeatelier|pferde-atelier|Schabrack|Satteldeck|Pferderass|Reitsport)' "$root"; then
+            echo 'BLOCKED_SOURCE_MARKER_FOUND'
+            exit 1
+          fi
+          echo 'SOURCE_MARKER_GATE=PASS'
+      - name: Required Hobby Depot adapters
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='work/hobbyrausch-affiliate/porting/hobby-depot-affiliate-router'
+          test -f "$root/includes/trait-hdar-hobby-depot-context.php"
+          test -f "$root/includes/trait-hdar-amazon-creators.php"
+          grep -q 'Hobby Depot Affiliate-Zentrale' "$root/hobby-depot-affiliate-router.php"
+          grep -q 'HDAR_Hobby_Depot_Context_Trait' "$root/hobby-depot-affiliate-router.php"
+          grep -q 'HDAR_Amazon_Creators_Trait' "$root/hobby-depot-affiliate-router.php"
+          echo 'ADAPTER_GATE=PASS'
