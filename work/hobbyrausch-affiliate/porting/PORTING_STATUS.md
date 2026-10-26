@@ -1,6 +1,6 @@
 # Hobby Depot Affiliate – Porting Workbench
 
-STATUS: PORTING / SOURCE CLEANUP PASS / AMAZON WIRED / STATIC PASS / PROVIDER SIM PASS / NOT INSTALLABLE
+STATUS: PORTING / SOURCE CLEANUP PASS / AMAZON WIRED / STATIC PASS / PROVIDER SIM PASS / CREDENTIAL ROUNDTRIP PASS / NOT INSTALLABLE
 UPDATED: 2026-10-26
 
 ## Authority and source
@@ -40,9 +40,17 @@ UPDATED: 2026-10-26
 
 ## Still open before an install candidate
 
-1. Complete the real credential migration/round-trip gate for all three providers in WordPress runtime (Amazon + idealo PASS; eBay runtime check currently pending).
-2. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
-3. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
+1. Full regression/E2E through provider → research/import → campaign → slot/output → frontend readback.
+2. Only after all gates pass: manifest, SHA-256 and isolated installable `CURRENT.zip`.
+
+## WordPress credential round-trip
+
+**PASS for all three target providers.**
+
+- Amazon: real WordPress option write/read, blank resave preserves existing secret, explicit removal clears it.
+- idealo: real WordPress option write/read, blank resave preserves existing API key, explicit removal clears it.
+- eBay: original central `handle_provider_access_save()` executed in WordPress with admin/nonce context; blank resave preserves existing client secret and the built-in round-trip guard passes.
+- Test values are synthetic and are never printed as credentials.
 
 ## 6.72.276 portal-neutral delta reconciliation
 
