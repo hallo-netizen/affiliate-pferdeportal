@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
- * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.211
+ * Plugin Name: Hobby Depot – Affiliate-Zentrale
+ * Description: Zentrale Affiliate- und Produktquellenverwaltung für Hobby Depot. Entwicklungsstand – noch kein freigegebener Installationskandidat.
+ * Version: 0.1.0-dev
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
