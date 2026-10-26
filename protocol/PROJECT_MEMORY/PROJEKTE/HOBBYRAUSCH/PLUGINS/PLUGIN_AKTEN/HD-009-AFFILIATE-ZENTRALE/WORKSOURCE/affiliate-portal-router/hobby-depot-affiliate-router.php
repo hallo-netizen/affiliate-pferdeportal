@@ -7245,6 +7245,17 @@ JS;
         </style>
         <h1>Netzwerke &amp; API</h1>
         <p><strong>Zentrale Zugangsebene.</strong> Hier liegen ausschließlich Providerzugänge, Aktivierung und Verbindungstests. Programme, Feeds, Abrufprofile, Verkäufer-/Partnerlogik und sonstige Betriebsregeln liegen auf der jeweiligen Provider-Fachseite. Neue Provider werden über den Provider-Vertrag <?php echo esc_html(self::PROVIDER_CONTRACT_VERSION); ?> registriert und erscheinen hier ohne Umbau des Steuerkerns.</p>
+        <?php $credential_preflight = method_exists($this, 'provider_credentials_preflight') ? $this->provider_credentials_preflight() : array(); ?>
+        <?php if (empty($credential_preflight['all_required_complete'])) : ?>
+          <div class="notice notice-error inline"><p><strong>Verbindungsdaten-Preflight: unvollständig.</strong> LIVE-PASS ist gesperrt, bis alle Pflichtzugänge vollständig hinterlegt sind.</p>
+          <ul style="margin-left:20px;list-style:disc">
+          <?php foreach ((array)($credential_preflight['providers'] ?? array()) as $preflight_provider) : if (!empty($preflight_provider['complete'])) { continue; } ?>
+            <li><strong><?php echo esc_html((string)($preflight_provider['label'] ?? 'Provider')); ?>:</strong> fehlt: <?php echo esc_html(implode(', ', (array)($preflight_provider['missing_required'] ?? array()))); ?></li>
+          <?php endforeach; ?>
+          </ul></div>
+        <?php else : ?>
+          <div class="notice notice-success inline"><p><strong>Verbindungsdaten-Preflight: vollständig.</strong> Alle vorhandenen Pflichtzugänge sind hinterlegt. Verbindungstests und Live-Readback bleiben trotzdem erforderlich.</p></div>
+        <?php endif; ?>
         <?php if ($provider_notice !== '') : ?><div class="notice notice-success inline"><p><?php echo esc_html($this->provider_label($provider_notice) . ': Zugangsdaten gespeichert.' . ($provider_tested === $provider_notice ? ' Verbindungstest ausgeführt.' : '')); ?></p></div><?php endif; ?>
         <?php if ($provider_error !== '') : ?><div class="notice notice-error inline"><p><?php echo esc_html($provider_error); ?></p></div><?php endif; ?>
         <div class="ppar-v240-grid">
