@@ -849,6 +849,7 @@ final class Hobby_Depot_Affiliate_Router {
       var u=new URL(href,window.location.href),h=String(u.hostname||'').toLowerCase();
       if(h==='ipn.idealo.de'||h.slice(-10)==='.idealo.de')return 'Bei idealo vergleichen';
       if(h==='ebay.de'||h.slice(-8)==='.ebay.de'||h.indexOf('.ebay.')!==-1)return 'Bei eBay ansehen';
+      if(h==='amazon.de'||h.slice(-10)==='.amazon.de'||h==='amazon.co.uk'||h.slice(-13)==='.amazon.co.uk'||h==='amazon.fr'||h.slice(-10)==='.amazon.fr'||h==='amazon.it'||h.slice(-10)==='.amazon.it'||h==='amazon.es'||h.slice(-10)==='.amazon.es'||h==='amazon.nl'||h.slice(-10)==='.amazon.nl'||h==='amazon.be'||h.slice(-10)==='.amazon.be')return 'Bei Amazon ansehen';
     }catch(e){}
     return '';
   }
