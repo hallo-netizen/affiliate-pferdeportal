@@ -38,6 +38,10 @@ Akte: `PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/`
 Plugin: `Allgemeine Bildzentrale – Hobby Depot Anwendung`  
 Akte: `PLUGIN_AKTEN/HD-006-BILDZENTRALE/`
 
+### HD-009 – Affiliate-Zentrale
+Plugin: `Hobby Depot Affiliate-Zentrale`  
+Akte: `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/`
+
 ## Regel
 
 Für jeden Eintrag gilt:
