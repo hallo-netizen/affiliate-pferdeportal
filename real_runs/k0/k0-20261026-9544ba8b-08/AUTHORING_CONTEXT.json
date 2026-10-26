@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "1a043711a7393a11942ab1ac4bbd3992d99d95ac22c38813c84ad72136917104",
+    "target_keyword": "Welche Größe Longiergurt brauche ich für mein Pferd",
+    "title": "Welche Größe Longiergurt brauche ich für mein Pferd?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "BUSSE Helpdesk – Maßanleitung Longiergurte",
+          "source_url": "https://helpdesk.busse-reitsport.de/hc/de/articles/18554296556177-Ma%C3%9Fanleitung-Longiergurte"
+        }
+      ],
+      "claims": [
+        "Die Größe eines Longiergurts wird anhand des Pferdeumfangs an der vorgesehenen Gurtlage und nicht nur nach der üblichen Konfektionsgröße gewählt.",
+        "Beim Messen für Longiergurte von BUSSE beginnt das Maßband ungefähr fünf Zentimeter vor dem Übergang des Widerrists in den Rücken und wird beidseitig um den Pferdekörper geführt.",
+        "Beim speziellen BUSSE-Modell FLEX FIT muss die Länge des verwendeten Kurzgurtes vom gemessenen Pferdeumfang abgezogen werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Größe Longiergurt brauche ich für mein Pferd",
+      "topic": "Welche Größe Longiergurt brauche ich für mein Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Größe Longiergurt brauche ich für mein Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "BUSSE Helpdesk – Maßanleitung Longiergurte",
+        "source_url": "https://helpdesk.busse-reitsport.de/hc/de/articles/18554296556177-Ma%C3%9Fanleitung-Longiergurte",
+        "statement": "Die Größe eines Longiergurts wird anhand des Pferdeumfangs an der vorgesehenen Gurtlage und nicht nur nach der üblichen Konfektionsgröße gewählt.",
+        "evidence_text": "Die Größe eines Longiergurts wird anhand des Pferdeumfangs an der vorgesehenen Gurtlage und nicht nur nach der üblichen Konfektionsgröße gewählt.",
+        "evidence_text_sha256": "0195ed43aefd080444c681ea287a70cb9d7ddeefb8e90b45ec34f459345fb8a5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "BUSSE Helpdesk – Maßanleitung Longiergurte",
+        "source_url": "https://helpdesk.busse-reitsport.de/hc/de/articles/18554296556177-Ma%C3%9Fanleitung-Longiergurte",
+        "statement": "Beim Messen für Longiergurte von BUSSE beginnt das Maßband ungefähr fünf Zentimeter vor dem Übergang des Widerrists in den Rücken und wird beidseitig um den Pferdekörper geführt.",
+        "evidence_text": "Beim Messen für Longiergurte von BUSSE beginnt das Maßband ungefähr fünf Zentimeter vor dem Übergang des Widerrists in den Rücken und wird beidseitig um den Pferdekörper geführt.",
+        "evidence_text_sha256": "030a092aec748fd9a6619b2a51b20a514590cd11868e7491d4b25b0364550bd5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "BUSSE Helpdesk – Maßanleitung Longiergurte",
+        "source_url": "https://helpdesk.busse-reitsport.de/hc/de/articles/18554296556177-Ma%C3%9Fanleitung-Longiergurte",
+        "statement": "Beim speziellen BUSSE-Modell FLEX FIT muss die Länge des verwendeten Kurzgurtes vom gemessenen Pferdeumfang abgezogen werden.",
+        "evidence_text": "Beim speziellen BUSSE-Modell FLEX FIT muss die Länge des verwendeten Kurzgurtes vom gemessenen Pferdeumfang abgezogen werden.",
+        "evidence_text_sha256": "ddbada07856cdd96fde29f85f6a809b5ac413656ef90131e582a2696aef1b04d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/longiergurte-faq/",
+        "anchor": "FAQ zu longiergurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longiergurte-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/longiergurte-anwendung/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/longiergurte-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-anwendung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longiergurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "longiergurte",
+      "Welche Größe Longiergurt",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
