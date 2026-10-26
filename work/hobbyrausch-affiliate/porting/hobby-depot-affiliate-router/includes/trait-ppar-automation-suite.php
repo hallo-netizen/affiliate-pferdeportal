@@ -2928,7 +2928,7 @@ trait PPAR_Automation_Suite_Trait {
 
     public function automation_normalize_target_key($key) {
         $key = strtolower(trim((string) $key));
-        if (!preg_match('/^(page|category|journal|market|uge_group|uge_term|pa_breed|pa_breed_group):([a-z0-9_-]+)$/', $key, $match)) {
+        if (!preg_match('/^(page|category|journal|market|uge_group|uge_term):([a-z0-9_-]+)$/', $key, $match)) {
             return '';
         }
         return $match[1] . ':' . $this->ranked_campaign_sanitize_key_request_cached($match[2]);
@@ -3009,8 +3009,6 @@ trait PPAR_Automation_Suite_Trait {
                 $available[] = 'market:' . $primary;
             } elseif ($post_type === 'uge_term') {
                 $available[] = 'uge_term:' . $primary;
-            } elseif ($post_type === 'pa_breed') {
-                $available[] = 'pa_breed:' . $primary;
             } elseif ($post_type === 'uge_group_archive') {
                 $available[] = 'uge_group:' . $primary;
             }
