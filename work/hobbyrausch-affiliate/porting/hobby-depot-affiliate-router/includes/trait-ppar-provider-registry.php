@@ -412,7 +412,7 @@ trait PPAR_Provider_Registry_Trait {
             if ($secret !== '') { $input['client_secret'] = $secret; }
             if (!empty($raw['remove_client_secret'])) { $input['client_secret'] = ''; }
             $input['epn_campaign_id'] = preg_replace('/\D+/', '', (string) ($raw['epn_campaign_id'] ?? $previous['epn_campaign_id'] ?? ''));
-            $input['affiliate_reference_prefix'] = sanitize_key((string) ($raw['affiliate_reference_prefix'] ?? $previous['affiliate_reference_prefix'] ?? 'pferde-atelier'));
+            $input['affiliate_reference_prefix'] = sanitize_key((string) ($raw['affiliate_reference_prefix'] ?? $previous['affiliate_reference_prefix'] ?? 'hobby-depot'));
             $credentials_changed = (string) ($input['environment'] ?? '') !== (string) ($previous['environment'] ?? '')
                 || (string) ($input['client_id'] ?? '') !== (string) ($previous['client_id'] ?? '')
                 || (string) ($input['epn_campaign_id'] ?? '') !== (string) ($previous['epn_campaign_id'] ?? '')
