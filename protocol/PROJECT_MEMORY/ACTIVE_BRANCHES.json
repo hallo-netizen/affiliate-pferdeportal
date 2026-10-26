@@ -1,6 +1,6 @@
 {
   "contract": "CAMPUS_ACTIVE_BRANCH_REGISTRY_V1",
-  "effective_date": "2026-10-16",
+  "effective_date": "2026-10-26",
   "purpose": "Prevent legacy/test branches from being mistaken for current work.",
   "active": {
     "campus": {
@@ -18,6 +18,10 @@
     "main": {
       "branch": "main",
       "role": "Repository root/public K0 router and technical repository base; never use legacy K1-K9 state on main as current text authority."
+    },
+    "hobbyrausch_affiliate": {
+      "branch": "hobbyrausch/hd009-affiliate-port-20261026",
+      "role": "Technical work branch bound by HOBBYRAUSCH_AFFILIATE Current for HD-009 porting; not a cross-project Current authority."
     }
   },
   "hard_rules": [
