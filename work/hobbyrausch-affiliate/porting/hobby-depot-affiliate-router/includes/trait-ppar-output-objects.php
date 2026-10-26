@@ -411,9 +411,9 @@ trait PPAR_Output_Objects_Trait {
         $cache_key = $type . ':' . $id;
         if (array_key_exists($cache_key, $cache)) { return (string) $cache[$cache_key]; }
         $url = '';
-        if (in_array($type, array('page','post','uge_term','pa_breed'), true) && function_exists('get_permalink')) {
+        if (in_array($type, array('page','post','uge_term'), true) && function_exists('get_permalink')) {
             $url = (string) get_permalink($id);
-        } elseif (in_array($type, array('category','hp_listing_category','uge_group','pa_breed_group'), true)
+        } elseif (in_array($type, array('category','hp_listing_category','uge_group'), true)
             && function_exists('get_term') && function_exists('get_term_link')) {
             $term = get_term($id, $type);
             if ($term && !is_wp_error($term)) {
@@ -452,12 +452,10 @@ trait PPAR_Output_Objects_Trait {
                 }
                 $content = (string) ($page->post_content ?? '');
                 $context = '';
-                if (function_exists('has_shortcode') && (has_shortcode($content, 'pferde_journal') || has_shortcode($content, 'affiliate_portal_journal'))) {
+                if (function_exists('has_shortcode') && has_shortcode($content, 'affiliate_portal_journal')) {
                     $context = 'journal';
-                } elseif (function_exists('has_shortcode') && has_shortcode($content, 'pferde_atelier_anzeigenmarkt_intro')) {
-                    $context = 'anzeigenmarkt';
-                } elseif (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit','affiliate_page_type'))) {
-                    $context = sanitize_key((string) Pferde_Template_Kit::affiliate_page_type($id));
+                } elseif (method_exists($this, 'hd_affiliate_page_type')) {
+                    $context = sanitize_key((string) $this->hd_affiliate_page_type($id));
                 }
                 if ($context === '') { $context = 'page_unclassified'; }
                 $targets[] = array(
@@ -470,7 +468,7 @@ trait PPAR_Output_Objects_Trait {
                 );
             }
         }
-        foreach (array('post'=>'classic_post','uge_term'=>'glossary_single','pa_breed'=>'breed_single') as $post_type => $context) {
+        foreach (array('post'=>'classic_post','uge_term'=>'glossary_single') as $post_type => $context) {
             if (!function_exists('post_type_exists') || !post_type_exists($post_type) || !function_exists('get_posts')) { continue; }
             $posts = get_posts(array('post_type'=>$post_type,'post_status'=>'publish','posts_per_page'=>-1,'orderby'=>'ID','order'=>'ASC'));
             foreach ((array) $posts as $post) {
@@ -485,7 +483,7 @@ trait PPAR_Output_Objects_Trait {
                 );
             }
         }
-        foreach (array('category','hp_listing_category','uge_group','pa_breed_group') as $taxonomy) {
+        foreach (array('category','hp_listing_category','uge_group') as $taxonomy) {
             if (!function_exists('taxonomy_exists') || !taxonomy_exists($taxonomy) || !function_exists('get_terms')) { continue; }
             $terms = get_terms(array('taxonomy'=>$taxonomy, 'hide_empty'=>false));
             if (is_wp_error($terms) || !is_array($terms)) { continue; }
@@ -503,12 +501,8 @@ trait PPAR_Output_Objects_Trait {
                     $context = 'hivepress_category';
                 } elseif ($taxonomy === 'uge_group') {
                     $context = 'glossary_overview';
-                } elseif ($taxonomy === 'pa_breed_group') {
-                    $context = 'breed_overview';
                 } elseif ($taxonomy === 'category' && sanitize_key((string)($term->slug ?? '')) === 'glossar') {
                     $context = 'glossary_overview';
-                } elseif ($taxonomy === 'category' && ($id === 1482 || in_array(1482,array_map('absint',(array)get_ancestors($id,'category','taxonomy')),true))) {
-                    $context = 'breed_overview';
                 } else {
                     $context = empty($children[$id]) ? 'leaf_category' : 'category_nonleaf';
                 }
@@ -731,7 +725,7 @@ trait PPAR_Output_Objects_Trait {
                         && (strpos($et, $tt) !== false || strpos($tt, $et) !== false)) {
                         $score += 28; $hits[$tt] = true; continue;
                     }
-                    // Deutscher Wortstamm/Kompositum, z.B. Pferdefutter <-> Fütterung.
+                    // Deutscher Wortstamm/Kompositum, z.B. Holzarbeit <-> Holzarbeiten.
                     $et5 = substr($et, 0, 5); $tt5 = substr($tt, 0, 5);
                     if (($et5 !== '' && strpos($tt, $et5) !== false) || ($tt5 !== '' && strpos($et, $tt5) !== false)) {
                         $score += 18; $hits[$tt] = true;
@@ -1185,7 +1179,7 @@ trait PPAR_Output_Objects_Trait {
             $semantic = $this->output_text((string)$tier);
             if ($semantic === '') { continue; }
             $credit = preg_match('/(^|\\s)(kredit|kredite|kreditvergleich|kreditrechner|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
-            $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|versicherungsvergleich|haftpflicht|pferdehaftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
+            $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|versicherungsvergleich|haftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
             if ($credit && !$insurance) { return 'kosten'; }
             if ($insurance && !$credit) { return 'versicherung'; }
             if ($credit && $insurance) { return 'blocked'; }
@@ -1764,23 +1758,6 @@ trait PPAR_Output_Objects_Trait {
             }
             return array('status'=>'review','confidence'=>0,'reason'=>'Glossar-Werbeplatz freigegeben, aber kein reales Glossarziel als Materialisierungsanker vorhanden.','target'=>null,'source'=>'glossary_anchor_missing');
         }
-        if ($manual_status === 'approved' && $output_type === 'portal_banner' && $werbeplatz_scope === 'pferderassenartikel') {
-            $anchor_target=null;
-            foreach((array)$targets as $candidate_target){
-                if(!is_array($candidate_target)){continue;}
-                $candidate_type=sanitize_key((string)($candidate_target['type']??''));
-                if(!in_array($candidate_type,array('pa_breed_group','pa_breed'),true)){continue;}
-                if(absint($candidate_target['id']??0)<=0||empty($candidate_target['key'])){continue;}
-                if(method_exists($this,'control_target_gate')&&is_wp_error($this->control_target_gate($portal_key,(string)$candidate_target['key']))){continue;}
-                if($anchor_target===null||$candidate_type==='pa_breed_group'){$anchor_target=$candidate_target;}
-                if($candidate_type==='pa_breed_group'){break;}
-            }
-            if(is_array($anchor_target)){
-                $anchor_target['_ppar_breed_neutral_anchor']=1;
-                return array('status'=>'ready','confidence'=>100,'reason'=>'Chefentscheidung: Werbemittel fuer Pferderassenartikel freigegeben; Artikelauswahl erfolgt zur Laufzeit.','target'=>$anchor_target,'alternatives'=>array(),'source'=>'manual_approved_breed_scope');
-            }
-            return array('status'=>'review','confidence'=>0,'reason'=>'Pferderassenartikel freigegeben, aber kein reales Rassenziel als Materialisierungsanker vorhanden.','target'=>null,'source'=>'breed_anchor_missing');
-        }
         $ranked = array();
         foreach ((array) $targets as $target) {
             if (!is_array($target)) {
@@ -2016,7 +1993,7 @@ trait PPAR_Output_Objects_Trait {
         }
         $priority = $creative_type === 'product'
             ? array('hub_product_1','category_product_1','journal_product_1','hub_product_2','category_product_2','journal_product_2','hub_product_3','category_product_3','journal_product_3')
-            : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner','glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card');
+            : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner','glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card');
 
         // V6.72.175: Das gewaehlte Portalziel bestimmt zuerst seinen realen
         // Werbeplatzkontext. Ein explizit passender Hub-/Kategorie-/Journal-Slot
@@ -2459,8 +2436,6 @@ trait PPAR_Output_Objects_Trait {
         // ab und es konnte trotz READY-Planung keine aktive Kampagne entstehen.
         if ($type === 'uge_group') { return $slug !== '' ? 'uge_group:' . $slug : ''; }
         if ($type === 'uge_term') { return $slug !== '' ? 'uge_term:' . $slug : ''; }
-        if ($type === 'pa_breed') { return $slug !== '' ? 'pa_breed:' . $slug : ''; }
-        if ($type === 'pa_breed_group') { return $slug !== '' ? 'pa_breed_group:' . $slug : ''; }
         return '';
     }
 
@@ -2620,8 +2595,8 @@ trait PPAR_Output_Objects_Trait {
         $rule = is_array($slot['rule'] ?? null) ? $slot['rule'] : array();
         $automatic_slots = array(
             'hub_after_cards','product_after_category_tiles','start_after_topics',
-            'glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner',
-            'glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
+            'glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner',
+            'glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
         );
         if ($slot_id === '' || !in_array($slot_id, $automatic_slots, true) || !$rule) { return false; }
         $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
@@ -2717,7 +2692,7 @@ trait PPAR_Output_Objects_Trait {
             ? array()
             : ($stored_banner_targets
                 ? $stored_banner_targets
-                : ($auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key))));
+                : ($auto_targets ? $auto_targets : (!empty($target['_ppar_glossary_neutral_anchor']) ? array() : array($target_key))));
         $compatible_banner_slots = array_values(array_unique(array_filter(array_map('sanitize_key',(array)($classification['_ppar_banner_compatible_slots']??array())))));
         $campaign['placements'] = ($output_type === 'portal_banner' && $compatible_banner_slots)
             ? $compatible_banner_slots
@@ -2948,14 +2923,11 @@ trait PPAR_Output_Objects_Trait {
                     $targets = $this->output_portal_targets($portal);
                     $matrix = $this->output_slot_matrix($portal);
                     if (!is_wp_error($targets) && !is_wp_error($matrix)) {
-                        // KISS 6.72.206: Editorial-Single-Slots muessen bei
-                        // allgemeinen Bannern vor hub_grid_card als Aktivierungsanker
-                        // gewinnen. hub_grid_card ist bewusst kein Auto-Publish-Slot;
-                        // sonst bleibt ein technisch gueltiger Glossar-/Rassenbanner
-                        // als ganze Kampagne inaktiv, obwohl seine Placements stimmen.
+                        // Editorial-Single-Slots muessen bei allgemeinen Bannern
+                        // vor hub_grid_card als Aktivierungsanker gewinnen.
                         $editorial_single_priority = array(
-                            'glossary_single_desktop_banner','breed_single_desktop_banner',
-                            'glossary_single_mobile_banner','breed_single_mobile_banner'
+                            'glossary_single_desktop_banner',
+                            'glossary_single_mobile_banner'
                         );
                         $fallback_slot_ids = array_values(array_unique(array_merge(
                             array_values(array_intersect($editorial_single_priority, $compatible_banner_slots)),
