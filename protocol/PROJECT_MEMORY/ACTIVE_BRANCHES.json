@@ -1,24 +1,13 @@
 {
   "contract": "CAMPUS_ACTIVE_BRANCH_REGISTRY_V1",
-  "effective_date": "2026-10-16",
+  "effective_date": "2026-10-26",
   "purpose": "Prevent legacy/test branches from being mistaken for current work.",
   "active": {
-    "campus": {
-      "branch": "hobbyroom/project-memory-campus-v1-20260905",
-      "role": "Campus navigation, project buildings and office Current authorities."
-    },
-    "pferdeatelier_text": {
-      "branch": "konzept0-portal-neutral-20261002",
-      "role": "Only active Pferdeatelier text/article production basis (K0)."
-    },
-    "pferdeatelier_affiliate": {
-      "branch": "affiliate-release-current",
-      "role": "Only Affiliate-Zentrale release/governance branch when routed by AUTORITAETSPLAN."
-    },
-    "main": {
-      "branch": "main",
-      "role": "Repository root/public K0 router and technical repository base; never use legacy K1-K9 state on main as current text authority."
-    }
+    "campus": {"branch": "hobbyroom/project-memory-campus-v1-20260905","role": "Campus navigation, project buildings and office Current authorities."},
+    "pferdeatelier_text": {"branch": "konzept0-portal-neutral-20261002","role": "Only active Pferdeatelier text/article production basis (K0)."},
+    "pferdeatelier_affiliate": {"branch": "affiliate-release-current","role": "Only Pferdeatelier Affiliate-Zentrale release/governance branch when routed by AUTORITAETSPLAN."},
+    "hobbyrausch_affiliate": {"branch": "hobbyrausch-affiliate-current","role": "Hobbyrausch/Hobby Depot Affiliate-Zentrale porting workbench; only when bound by HOBBYRAUSCH_AFFILIATE CURRENT_STATE."},
+    "main": {"branch": "main","role": "Repository root/public K0 router and technical repository base; never use legacy K1-K9 state on main as current text authority."}
   },
   "hard_rules": [
     "K1_K9_ARCHIVE_ONLY_NEVER_CURRENT",
