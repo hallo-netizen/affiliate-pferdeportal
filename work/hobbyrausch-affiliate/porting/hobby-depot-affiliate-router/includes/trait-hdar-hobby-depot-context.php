@@ -82,6 +82,43 @@ trait HDAR_Hobby_Depot_Context_Trait {
         return sanitize_text_field($key);
     }
 
+    private function hd_affiliate_registry_target_keys() {
+        static $cache = null;
+        if (is_array($cache)) { return $cache; }
+        $cache = array();
+        if (!$this->hd_affiliate_registry_ready() || !function_exists('hd_category_registry_snapshot')) {
+            return $cache;
+        }
+        $snapshot = hd_category_registry_snapshot();
+        if (!is_array($snapshot) || empty($snapshot['nodes']) || !is_array($snapshot['nodes'])) {
+            return $cache;
+        }
+        foreach ($snapshot['nodes'] as $node) {
+            if (!is_array($node) || sanitize_key((string)($node['status'] ?? 'active')) !== 'active') { continue; }
+            $slug = sanitize_title((string)($node['slug'] ?? ''));
+            if ($slug === '') { continue; }
+            // The registry is the authority; both historical target-key shapes are
+            // accepted because HD-001/HD-004 may materialize the same node as page
+            // or category depending on its portal level.
+            $cache['page:' . $slug] = true;
+            $cache['category:' . $slug] = true;
+        }
+        return $cache;
+    }
+
+    private function hd_affiliate_campaign_targets_registry($campaign) {
+        if (!is_array($campaign)) { return false; }
+        $allowed = $this->hd_affiliate_registry_target_keys();
+        if (!$allowed) { return false; }
+        foreach ((array)($campaign['automation_target_keys'] ?? array()) as $target_key) {
+            $key = method_exists($this, 'automation_normalize_target_key')
+                ? $this->automation_normalize_target_key((string)$target_key)
+                : sanitize_text_field((string)$target_key);
+            if ($key !== '' && isset($allowed[$key])) { return true; }
+        }
+        return false;
+    }
+
     private function hd_affiliate_page_type($object_id) {
         $object_id = absint($object_id);
         $type = '';
