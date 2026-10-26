@@ -49,10 +49,32 @@ Bereits entfernt:
 - idealo: echte aktive Implementierung vorhanden.
 - Amazon: nur `prepared`; laut Quellcode fehlt der reale Adapter bis echter Zugang vorhanden ist.
 
+## Zwischen-Gates – Stand 2026-10-26
+
+1. **GATE 1 – Pferdeatelier-Bereinigung: PASS**
+   - Pferdeatelier-eBay-Zielkatalog entfernt.
+   - Pferdeatelier-Portalstruktur entfernt.
+   - historischer Pferdeatelier-Recovery-Produktbestand entfernt.
+   - verbleibende PHP/JS/CSS-Dateien vollständig auf Pferd/Pferdeatelier/Horse/Equine/Pony/Fohlen/Hengst/Stute/Wallach/Rasse/Breed/Sattel/Schabracke/Huf/Trense/Zaum/Halfter gescannt.
+   - aktive Pferde-Fachlogik: 0 Treffer; letzte reine Rassen-/Breed-Altkommentare entfernt.
+
+2. **GATE 2 – Hobby-Depot-Zielquelle: PASS (Vertrag), LIVE noch nicht geprüft**
+   - `class-hdar-hobby-depot-source.php` nutzt ausschließlich die read-only HD-004-Kategorie-Registry.
+   - verwendete API `hd_category_registry_ready()`, `hd_category_registry_revision()`, `hd_category_registry_snapshot()` stimmt exakt mit `KATEGORIE_ZENTRALE/RUNTIME_API.md` überein.
+   - fail-closed bei fehlender Registry, ungültigem Snapshot, != 8 CORE-Welten oder < 300 strukturell belegten Hobbyseiten.
+   - keine zweite Kategorie-/Produkt-Masterdatenhaltung im Affiliate-Plugin.
+
+3. **GATE 3 – Provider-Recherchepfade:** IN ARBEIT
+   - eBay und idealo gegen die neue Hobby-Depot-Zielquelle end-to-end prüfen.
+   - Amazon bleibt vorbereitet; kein Adapter erfinden.
+
+4. **GATE 4 – Positiv/Negativ/Regression:** OFFEN
+5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN; vor Gate 4 verboten.
+
 ## Erster offener Blocker
 
-Verbleibende Pferdeatelier-spezifische Abhängigkeiten im PHP-/JS-/CSS-Code und die fehlende Hobby-Depot-Zielstruktur sind noch nicht bereinigt.
+eBay- und idealo-Recherche-/Zuordnungspfade sind noch nicht vollständig gegen die neue Hobby-Depot-Zielquelle end-to-end geprüft.
 
 ## NEXT ACTION
 
-Verbleibende Pferde-/Pferdeatelier-Abhängigkeiten dateiweise inventarisieren und aus HD-009 entfernen bzw. durch Hobby-Depot-Zielverträge ersetzen, ohne Provider-/Engine-Logik zu beschädigen.
+GATE 3 ausführen: eBay und idealo vollständig gegen `HDAR_Hobby_Depot_Source` prüfen, positive und negative Zuordnungspfade belegen und nur nachgewiesene verbleibende Altannahmen minimal korrigieren.
