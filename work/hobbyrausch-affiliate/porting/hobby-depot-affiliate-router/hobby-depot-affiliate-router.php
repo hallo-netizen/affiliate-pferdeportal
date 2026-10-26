@@ -3615,7 +3615,7 @@ JS;
             implode(' ',array_map(static function($v){return str_replace(array('-','_'),' ',(string)$v);},(array)($context['direct_term_slugs'] ?? array()))),
             (string)($context['haystack'] ?? ''),
         )));
-        $context_tokens = array_values(array_diff($this->output_tokens($context_text), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        $context_tokens = array_values(array_diff($this->output_tokens($context_text), array('banner','anzeige','affiliate')));
         if (!$context_tokens) { return null; }
         $hits=array(); $strong=0;
         foreach($tokens as $et){
