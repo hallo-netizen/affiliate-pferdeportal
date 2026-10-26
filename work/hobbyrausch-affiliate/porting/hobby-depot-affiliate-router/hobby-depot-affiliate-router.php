@@ -1930,18 +1930,14 @@ JS;
             $slot='glossary_overview_banner';
             $selector='.pftk-glossar-group-content-v150481';
             $context=$this->affiliate_overview_term_context($term,'uge_group','uge_group_archive');
-        } elseif (function_exists('is_tax') && is_tax('pa_breed_group')) {
-            $slot='breed_overview_banner';
-            $selector='#pftk-rassen-liste';
-            $context=$this->affiliate_overview_term_context($term,'pa_breed_group','pa_breed_group_archive');
+        } elseif ((string)$term->taxonomy === 'journal_cat') {
+            $slot='product_after_category_tiles';
+            $selector=(string) apply_filters('hobby_depot_affiliate_overview_mount_selector','',$term,$slot);
+            $context=$this->affiliate_overview_term_context($term,'journal_cat','journal_cat_archive');
         } elseif (function_exists('is_category') && is_category()) {
             if (sanitize_key((string)$term->slug) === 'glossar') {
                 $slot='glossary_overview_banner';
                 $selector='#pftk-glossar-liste';
-                $context=$this->get_category_archive_context($term);
-            } elseif ($this->affiliate_is_breed_overview_category($term)) {
-                $slot='breed_overview_banner';
-                $selector='#pftk-rassen-liste';
                 $context=$this->get_category_archive_context($term);
             } elseif ($this->affiliate_is_journal_category($term)) {
                 // Exakt der alte Kategorie-Bannerpfad, nur an den echten aktuellen
@@ -1988,7 +1984,6 @@ JS;
         // V6.72.100: diese Designflaechen besitzen wieder einen einzigen
         // festen Footer-Mount. Der generische loop_end darf dort nicht doppeln.
         if (sanitize_key((string)$term->slug) === 'glossar'
-            || $this->affiliate_is_breed_overview_category($term)
             || $this->affiliate_is_journal_category($term)) {
             return;
         }
@@ -1997,7 +1992,7 @@ JS;
         // bereits die feste Positionshoheit, darf die alte Loop-End-Ausgabe
         // keinerlei zweiten oder falsch positionierten Block anhaengen.
         $design_owns_slots = (bool) apply_filters(
-            'pftk_leaf_category_design_owns_affiliate_slots',
+            'hobby_depot_leaf_category_design_owns_affiliate_slots',
             false,
             (int) $term->term_id
         );
