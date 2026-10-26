@@ -271,6 +271,263 @@ trait HDAR_Amazon_Creators_Trait {
         return array('status' => 'connected', 'marketplace' => $s['marketplace'], 'partner_tag_present' => true);
     }
 
+    private function amazon_creators_hobby_depot_concepts() {
+        if (!function_exists('hd_category_registry_ready') || !hd_category_registry_ready()
+            || !function_exists('hd_category_registry_snapshot')) {
+            return new WP_Error('amazon_hobby_depot_registry_missing', 'Hobby-Depot-Kategorie-Registry ist nicht bereit.');
+        }
+        $snapshot = hd_category_registry_snapshot();
+        if (!is_array($snapshot) || empty($snapshot['nodes']) || !is_array($snapshot['nodes'])) {
+            return new WP_Error('amazon_hobby_depot_registry_invalid', 'Hobby-Depot-Kategorie-Snapshot ist leer oder ungültig.');
+        }
+        $mapping = is_array($snapshot['mapping'] ?? null) ? $snapshot['mapping'] : array();
+        $nodes = array();
+        $children = array();
+        foreach ($snapshot['nodes'] as $node) {
+            if (!is_array($node)) { continue; }
+            $node_id = trim((string)($node['node_id'] ?? ''));
+            if ($node_id === '' || sanitize_key((string)($node['status'] ?? 'active')) !== 'active') { continue; }
+            $nodes[$node_id] = $node;
+            $parent_id = trim((string)($node['parent_id'] ?? ''));
+            if ($parent_id !== '') { $children[$parent_id][] = $node_id; }
+        }
+        $concepts = array();
+        foreach ($nodes as $node_id => $node) {
+            if (!preg_match('/^core:entity:[^:]+$/', $node_id)) { continue; }
+            $title = trim((string)($node['display_name'] ?? $node['name'] ?? ''));
+            $slug = sanitize_title((string)($node['slug'] ?? ''));
+            if ($title === '' || $slug === '') { continue; }
+            $parent = $nodes[(string)($node['parent_id'] ?? '')] ?? array();
+            $grand = is_array($parent) ? ($nodes[(string)($parent['parent_id'] ?? '')] ?? array()) : array();
+            $map = is_array($mapping[$node_id] ?? null) ? $mapping[$node_id] : array();
+            $targets = array(array(
+                'slug'=>$slug,
+                'title'=>$title,
+                'object_id'=>absint($map['object_id'] ?? 0),
+                'object_type'=>sanitize_key((string)($map['object_type'] ?? $node['object_type'] ?? 'page')),
+                'target_key'=>'page:' . $slug,
+            ));
+            foreach ((array)($children[$node_id] ?? array()) as $child_id) {
+                $child = $nodes[$child_id] ?? null;
+                if (!is_array($child)) { continue; }
+                $child_slug = sanitize_title((string)($child['slug'] ?? ''));
+                $child_title = trim((string)($child['display_name'] ?? $child['name'] ?? ''));
+                if ($child_slug === '' || $child_title === '') { continue; }
+                $child_map = is_array($mapping[$child_id] ?? null) ? $mapping[$child_id] : array();
+                $targets[] = array(
+                    'slug'=>$child_slug,
+                    'title'=>$child_title,
+                    'object_id'=>absint($child_map['object_id'] ?? 0),
+                    'object_type'=>sanitize_key((string)($child_map['object_type'] ?? $child['object_type'] ?? 'category')),
+                    'target_key'=>'category:' . $child_slug,
+                );
+            }
+            $hub_slug = sanitize_title((string)($parent['slug'] ?? ''));
+            $main_slug = sanitize_title((string)($grand['slug'] ?? ''));
+            $target_keys = array('page:' . $slug);
+            if ($hub_slug !== '') { $target_keys[] = 'page:' . $hub_slug; }
+            if ($main_slug !== '') { $target_keys[] = 'page:' . $main_slug; }
+            foreach ($targets as $target) {
+                $key = sanitize_text_field((string)($target['target_key'] ?? ''));
+                if ($key !== '') { $target_keys[] = $key; }
+            }
+            $concepts[] = array(
+                'id'=>'hd-' . substr(hash('sha256', $node_id), 0, 20),
+                'node_id'=>$node_id,
+                'title'=>$title,
+                'slug'=>$slug,
+                'hub'=>trim((string)($parent['display_name'] ?? $parent['name'] ?? '')),
+                'main_hub'=>trim((string)($grand['display_name'] ?? $grand['name'] ?? '')),
+                'target_keys'=>array_values(array_unique(array_filter($target_keys))),
+                'targets'=>$targets,
+            );
+        }
+        usort($concepts, static function($a, $b) {
+            return strcmp((string)($a['node_id'] ?? ''), (string)($b['node_id'] ?? ''));
+        });
+        return $concepts ?: new WP_Error('amazon_hobby_depot_concepts_empty', 'Hobby-Depot-Kategorie-Registry enthält keine aktiven Hobbyziele.');
+    }
+
+    private function amazon_creators_campaigns_should_be_active() {
+        $s = $this->amazon_creators_settings();
+        if (empty($s['enabled']) || !$this->amazon_creators_credentials_present($s)) { return false; }
+        if (method_exists($this, 'provider_access_state')) {
+            $state = $this->provider_access_state('amazon');
+            if (sanitize_key((string)($state['status'] ?? '')) !== 'connected') { return false; }
+        }
+        if (method_exists($this, 'provider_channel_pause_gate') && is_wp_error($this->provider_channel_pause_gate('amazon'))) { return false; }
+        return true;
+    }
+
+    private function amazon_creators_campaign_key($concept_id, $asin) {
+        return sanitize_key('amazon-' . substr(hash('sha256', sanitize_key((string)$concept_id) . '|' . strtoupper(trim((string)$asin))), 0, 28));
+    }
+
+    private function amazon_creators_save_product_campaign($concept, $item) {
+        if (!is_array($concept) || !is_array($item) || !method_exists($this, 'central_blank_campaign')
+            || !method_exists($this, 'save_campaign_record') || !function_exists('get_posts')) {
+            return new WP_Error('amazon_campaign_runtime_missing', 'Amazon-Kampagnenruntime fehlt.');
+        }
+        $concept_id = sanitize_key((string)($concept['id'] ?? ''));
+        $asin = strtoupper(trim((string)($item['external_id'] ?? '')));
+        $title = sanitize_text_field((string)($item['title'] ?? ''));
+        $url = esc_url_raw((string)($item['url'] ?? ''));
+        $image = esc_url_raw((string)($item['image_url'] ?? ''));
+        if ($concept_id === '' || $asin === '' || $title === '' || $url === '' || $image === '') {
+            return new WP_Error('amazon_campaign_item_incomplete', 'Amazon-Produkt ist für eine sichtbare Produktkarte unvollständig.');
+        }
+        $external_key = $concept_id . ':' . $asin;
+        $ids = get_posts(array(
+            'post_type'=>self::CAMPAIGN_POST_TYPE,
+            'post_status'=>array('publish','draft','private'),
+            'meta_key'=>'_hdar_amazon_external_key',
+            'meta_value'=>$external_key,
+            'posts_per_page'=>1,
+            'fields'=>'ids',
+        ));
+        $post_id = $ids ? absint($ids[0]) : 0;
+        $campaign = $this->central_blank_campaign();
+        $campaign['id'] = $this->amazon_creators_campaign_key($concept_id, $asin);
+        $campaign['name'] = 'Amazon – ' . $title;
+        $campaign['partner'] = 'Amazon';
+        $campaign['creative_type'] = 'product';
+        $campaign['network'] = 'amazon';
+        $campaign['programme_name'] = 'Amazon Associates / Creators API';
+        $campaign['programme_status'] = 'active';
+        $campaign['programme_status_source'] = 'amazon_creators_api';
+        $campaign['programme_status_checked_at'] = time();
+        $campaign['quality_manual_status'] = 'auto_verified';
+        $campaign['quality_note'] = 'Hobby-Depot-Registry + Amazon Creators SearchItems + ASIN.';
+        $campaign['render_mode'] = 'image_link';
+        $campaign['active'] = $this->amazon_creators_campaigns_should_be_active();
+        $campaign['assignment_mode'] = 'page_tree';
+        $campaign['match_descendants'] = false;
+        $campaign['automation_target_keys'] = array_values(array_unique(array_filter(array_map('sanitize_text_field', (array)($concept['target_keys'] ?? array())))));
+        $campaign['placements'] = array(
+            'hub_product_1','hub_product_2','hub_product_3',
+            'category_product_1','category_product_2','category_product_3',
+            'journal_product_1','journal_product_2','journal_product_3',
+            'post_bottom_products'
+        );
+        $campaign['priority'] = 92;
+        $campaign['label'] = 'Amazon · Affiliate';
+        $campaign['title'] = $title;
+        $campaign['description'] = '';
+        $campaign['button_text'] = 'Bei Amazon ansehen';
+        $campaign['image_url'] = $image;
+        $campaign['url'] = $url;
+        $campaign['target'] = '_blank';
+        $campaign['price'] = sanitize_text_field((string)($item['price'] ?? ''));
+        $campaign['currency'] = sanitize_text_field((string)($item['currency'] ?? ''));
+        $campaign['availability'] = 'available';
+        $campaign['health_check_enabled'] = false;
+        $campaign['source'] = 'amazon_creators_searchitems_v1';
+        $campaign['last_synced'] = time();
+        $campaign['external_id'] = $asin;
+        $campaign['product_asins'] = array($asin);
+        $campaign['product_gtins'] = array();
+        $campaign['product_identity_source'] = 'asin';
+        $campaign['product_provider'] = 'amazon';
+
+        $saved = $this->save_campaign_record($campaign, $post_id);
+        if (is_wp_error($saved) || !$saved) {
+            return is_wp_error($saved) ? $saved : new WP_Error('amazon_campaign_save_failed', 'Amazon-Produktkampagne konnte nicht gespeichert werden.');
+        }
+        $post_id = absint($saved);
+        update_post_meta($post_id, '_hdar_amazon_auto', 1);
+        update_post_meta($post_id, '_hdar_amazon_external_key', $external_key);
+        update_post_meta($post_id, '_hdar_amazon_concept_id', $concept_id);
+        delete_post_meta($post_id, '_ppar_product_asin');
+        add_post_meta($post_id, '_ppar_product_asin', $asin, false);
+        return $post_id;
+    }
+
+    private function amazon_creators_retire_missing_for_concept($concept_id, $selected_external_keys) {
+        if (!function_exists('get_posts') || !method_exists($this, 'campaign_from_post') || !method_exists($this, 'save_campaign_record')) { return 0; }
+        $concept_id = sanitize_key((string)$concept_id);
+        $selected_external_keys = array_fill_keys(array_map('strval', (array)$selected_external_keys), true);
+        $ids = get_posts(array(
+            'post_type'=>self::CAMPAIGN_POST_TYPE,
+            'post_status'=>array('publish','draft','private'),
+            'meta_key'=>'_hdar_amazon_concept_id',
+            'meta_value'=>$concept_id,
+            'posts_per_page'=>-1,
+            'fields'=>'ids',
+        ));
+        $retired = 0;
+        foreach ((array)$ids as $id) {
+            $id = absint($id);
+            $external_key = (string)get_post_meta($id, '_hdar_amazon_external_key', true);
+            if (isset($selected_external_keys[$external_key])) { continue; }
+            $campaign = $this->campaign_from_post(get_post($id));
+            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+            $campaign['active'] = false;
+            if ($this->save_campaign_record($campaign, $id)) { $retired++; }
+        }
+        return $retired;
+    }
+
+    private function amazon_creators_sync_hobby_depot_products($batch_size = 8) {
+        $s = $this->amazon_creators_settings();
+        if (empty($s['enabled'])) { return new WP_Error('amazon_creators_disabled', 'Amazon Creators API ist für Hobby Depot nicht aktiviert.'); }
+        if (!$this->amazon_creators_credentials_present($s)) { return new WP_Error('amazon_creators_credentials_missing', 'Amazon Creators API: Zugangsdaten fehlen.'); }
+        $state = method_exists($this, 'provider_access_state') ? $this->provider_access_state('amazon') : array();
+        if (sanitize_key((string)($state['status'] ?? $s['last_status'] ?? '')) !== 'connected') {
+            return new WP_Error('amazon_creators_connection_unverified', 'Amazon Creators API muss vor der Produktsynchronisierung erfolgreich geprüft werden.');
+        }
+
+        $concepts = $this->amazon_creators_hobby_depot_concepts();
+        if (is_wp_error($concepts)) { return $concepts; }
+        $count = count($concepts);
+        $batch_size = max(1, min(20, absint($batch_size)));
+        $cursor = absint($s['sync_cursor'] ?? 0);
+        if ($cursor >= $count) { $cursor = 0; }
+        $processed = 0; $searched = 0; $saved_count = 0; $retired = 0; $skipped = 0; $errors = array();
+
+        while ($processed < $batch_size && $processed < $count) {
+            $index = ($cursor + $processed) % $count;
+            $concept = $concepts[$index];
+            $query = trim(sanitize_text_field((string)($concept['title'] ?? '')));
+            if ($query === '') { $processed++; $skipped++; continue; }
+            $items = $this->amazon_creators_search($query, 10);
+            $searched++;
+            if (is_wp_error($items)) {
+                $errors[] = sanitize_text_field($query . ': ' . $items->get_error_message());
+                $processed++;
+                continue;
+            }
+            $selected = array();
+            foreach ((array)$items as $item) {
+                if (!is_array($item)) { continue; }
+                $asin = strtoupper(trim((string)($item['external_id'] ?? '')));
+                if ($asin === '') { continue; }
+                $saved = $this->amazon_creators_save_product_campaign($concept, $item);
+                if (is_wp_error($saved)) { $skipped++; continue; }
+                $selected[] = sanitize_key((string)($concept['id'] ?? '')) . ':' . $asin;
+                $saved_count++;
+            }
+            $retired += $this->amazon_creators_retire_missing_for_concept((string)($concept['id'] ?? ''), $selected);
+            $processed++;
+        }
+
+        $next = ($cursor + $processed) % max(1, $count);
+        $s = $this->amazon_creators_settings();
+        $s['sync_cursor'] = $next;
+        $s['last_sync_at'] = time();
+        $s['last_sync_count'] = $saved_count;
+        $s['last_message'] = sprintf('Amazon Creators: %d Hobbykonzepte geprüft, %d Produktkampagnen gespeichert, %d alte Kampagnen deaktiviert.', $processed, $saved_count, $retired);
+        update_option('hdar_amazon_creators_v1', $s, false);
+        if ($saved_count > 0 && method_exists($this, 'article_plan_bump_campaign_revision')) {
+            $this->article_plan_bump_campaign_revision('amazon_creators_materialized');
+        }
+        return array(
+            'status'=>'success',
+            'message'=>$s['last_message'],
+            'counts'=>array('concepts'=>$processed,'searches'=>$searched,'campaigns'=>$saved_count,'retired'=>$retired,'skipped'=>$skipped,'errors'=>count($errors)),
+            'details'=>array('cursor_before'=>$cursor,'cursor_after'=>$next,'total_concepts'=>$count,'errors'=>array_slice($errors,0,10),'public_activation'=>$this->amazon_creators_campaigns_should_be_active()),
+        );
+    }
+
     public function amazon_creators_sync_dispatch($handled, $network, $operation, $contract_version) {
         if ($network !== 'amazon') { return $handled; }
         if ($operation === 'connection') {
