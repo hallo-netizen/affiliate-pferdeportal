@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hobby Depot – Affiliate-Zentrale
  * Description: Zentrale Affiliate- und Produktquellenverwaltung für Hobby Depot. Entwicklungsstand – noch kein freigegebener Installationskandidat.
- * Version: 0.1.0-dev
+ * Version: 0.1.1-dev
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
