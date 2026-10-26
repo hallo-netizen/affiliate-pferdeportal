@@ -10709,3 +10709,14 @@ JS;
         return wp_json_encode(array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 }
+
+if (!function_exists('affiliate_portal_upsert_campaign')) {
+    function affiliate_portal_upsert_campaign($data) {
+        return Hobby_Depot_Affiliate_Router::instance()->upsert_campaign_from_external($data);
+    }
+}
+
+register_activation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'activate'));
+register_deactivation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'deactivate'));
+
+Hobby_Depot_Affiliate_Router::instance();
