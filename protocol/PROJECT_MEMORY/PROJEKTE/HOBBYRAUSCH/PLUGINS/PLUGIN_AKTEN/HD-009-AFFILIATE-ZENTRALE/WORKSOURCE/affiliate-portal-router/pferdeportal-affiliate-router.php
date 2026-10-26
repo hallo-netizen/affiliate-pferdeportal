@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once __DIR__ . '/includes/class-hdar-hobby-depot-source.php';
 require_once __DIR__ . '/includes/trait-ppar-article-plans.php';
 require_once __DIR__ . '/includes/trait-ppar-network-sync.php';
 require_once __DIR__ . '/includes/trait-ppar-provider-intake.php';
