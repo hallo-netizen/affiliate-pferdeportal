@@ -314,7 +314,7 @@ trait PPAR_Idealo_Trait {
 
     private function idealo_match_distinct_tokens($text, $primary = false) {
         static $drop = null;
-        if ($drop === null) { $drop = array_fill_keys(array('pferd','pferde','pony','ponys','fohlen','reiter','reiten','reit','reitsport','equestrian','zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal','neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige','grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'), true); }
+        if ($drop === null) { $drop = array_fill_keys(array('zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal','neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige','grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'), true); }
         $tokens = $primary ? $this->idealo_match_primary_tokens($text) : $this->idealo_match_tokens($text);
         $out = array();
         foreach ($tokens as $token) { if (!isset($drop[$token])) { $out[$token] = true; } }
@@ -341,7 +341,7 @@ trait PPAR_Idealo_Trait {
             $concepts[$id] = $entry;
             foreach ($stems as $stem) { if (!isset($index[$stem])) { $index[$stem] = array(); } $index[$stem][$id] = true; }
         }
-        if (count($concepts) !== 311) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle 311 Produktkonzepte binden.'); }
+        if (!$concepts || count($concepts) !== count((array)$catalog['_idealo_required_concepts'])) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle Hobby-Depot-Recherchekonzepte binden.'); }
         return $cache = array('concepts'=>$concepts,'index'=>$index,'catalog'=>$catalog);
     }
 
@@ -351,10 +351,11 @@ trait PPAR_Idealo_Trait {
     }
 
     private function idealo_match_blocked($text, $catalog) {
-        static $extras = array('bettdecke','bettdecken','kuscheltier','kuscheltiere','hundefutter','katzenfutter','vogelfutter','vogelhaus','vogelhauser','vogelhaeuser','modelleisenbahn','modellfahrzeug','modellfahrzeuge','rc modellbau','kaffeekapseln','kaffeepads','sanitarinstallation','sanitarinstallationen','netzteil','netzwerkzubehor','netzwerkzubehoer','haushaltsspielzeug','badmobel','badmoebel','sneaker','garagentor','torantrieb','zahnpflege','prothesenbox','plueschtier','pluschtier','gaming und spielen',' cats ',' dogs ',' puppy ',' kitten ');
-        $haystack = ' ' . (string) $text . ' ';
-        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $term) { $term=$this->idealo_match_normalize($term); if ($term!=='' && strpos($haystack, ' '.$term.' ')!==false) { return true; } }
-        foreach ($extras as $term) { if (strpos($haystack, (string)$term) !== false) { return true; } }
+        $haystack = ' ' . (string)$text . ' ';
+        foreach ((array)($catalog['hard_negative_markers'] ?? array()) as $term) {
+            $term = $this->idealo_match_normalize($term);
+            if ($term !== '' && strpos($haystack, ' ' . $term . ' ') !== false) { return true; }
+        }
         return false;
     }
 
@@ -362,46 +363,22 @@ trait PPAR_Idealo_Trait {
     private function idealo_match_context_score($concept, $title_n, $main_n, $sub_n, $catalog) {
         $full = trim($title_n . ' ' . $main_n . ' ' . $sub_n);
         if ($this->idealo_match_blocked($full, $catalog)) { return 0; }
-        $strong_roots = array('pferd','pony','fohlen','reit','equestrian','equine','horse','sattel','zaum','halfter','huf','longier','cavaletti','schabrack','gamasch','kappzaum','trense','gebiss','fressbremse','bollengabel','mistboy','stalltafel','pferdedeck');
-        $strong = $this->idealo_text_has_root($full, $strong_roots);
-        $sub_stems = array(); foreach ($this->idealo_match_tokens($sub_n) as $token) { $sub_stems[$this->idealo_match_stem($token)] = true; }
-        $sub_exact = true; foreach ((array)($concept['stems']??array()) as $stem) { if (!isset($sub_stems[$stem])) { $sub_exact=false; break; } }
-        $main_hub = (string) ($concept['main_hub'] ?? '');
-        if (in_array($main_hub, array('Ausrüstung','Training'), true)) {
-            if (!in_array($main_n, array('tierbedarf','sport und outdoor'), true)) { return 0; }
-            if ($sub_exact) { return 3; }
-            return ($strong || $this->idealo_text_has_root($sub_n,array('pferd','reit','sattel','zaum','tierhaar','bollensammler','stalltafel'))) ? 2 : 0;
+
+        $title_stems = array();
+        foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
+        $required = array_values(array_filter((array)($concept['stems'] ?? array())));
+        if (!$required) { return 0; }
+        foreach ($required as $stem) {
+            if (!isset($title_stems[$stem])) { return 0; }
         }
-        if ($main_hub === 'Gesundheit') {
-            if ($main_n === 'tierbedarf') {
-                if ($sub_exact) { return 3; }
-                return ($strong || $this->idealo_text_has_root($sub_n,array('pferd','tierpflege','tiergesundheit','tierhaar'))) ? 2 : 0;
-            }
-            if ($main_n === 'drogerie und gesundheit') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','equine')) ? 2 : 0; }
-            return 0;
+
+        $category_stems = array();
+        foreach ($this->idealo_match_tokens($main_n . ' ' . $sub_n) as $token) { $category_stems[$this->idealo_match_stem($token)] = true; }
+        $context_hits = 0;
+        foreach (array_merge((array)($concept['hub_stems'] ?? array()), (array)($concept['main_stems'] ?? array())) as $stem) {
+            if (isset($category_stems[$stem])) { $context_hits++; }
         }
-        if ($main_hub === 'Fütterung') {
-            if ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) || strpos($sub_n,'pferdefutter')!==false) { return 3; }
-            if ($main_n==='tierbedarf' && ($sub_exact || $this->idealo_text_has_root($title_n,array('weidetrank','thermotrank','heunetz','heubedampf','heurauf','heutasch')))) { return 2; }
-            return 0;
-        }
-        if ($main_hub === 'Stall') {
-            if (in_array($main_n,array('tierbedarf','haus und garten'),true) && $sub_exact) { return 3; }
-            return ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','stall','weideunterstand','boxen','putzplatz','offenstall','paddock')) || $this->idealo_text_has_root($sub_n,array('stalltafel','bollensammler'))) ? 2 : 0;
-        }
-        if ($main_hub === 'Weide') {
-            if (in_array($main_n,array('tierbedarf','haus und garten'),true) && $sub_exact) { return 3; }
-            return ($this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','weide','elektrozaun','koppel','paddock')) || $this->idealo_text_has_root($sub_n,array('weidezaun','rasensamen'))) ? 2 : 0;
-        }
-        if ($main_hub === 'Transport') {
-            $hub_n=$this->idealo_match_normalize((string)($concept['hub']??''));
-            if ($main_n === 'tierbedarf') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','reit','sattel','zaum','halfter','gamasch','horse','equine')) ? 3 : 0; }
-            if (!in_array($hub_n,array('zugfahrzeug','anhangerpflege'),true)) { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) ? 2 : 0; }
-            if ($main_n === 'auto und motorrad') { return ($sub_exact || $this->idealo_text_has_root($title_n.' '.$sub_n,array('anhang','anhaeng','kupplung','reifendruck','unterlegkeil'))) ? 2 : 0; }
-            return 0;
-        }
-        if ($main_hub === 'Wissen') { return $this->idealo_text_has_root($title_n,array('pferd','pony','fohlen','horse','equine')) ? 2 : 0; }
-        return $strong ? 1 : 0;
+        return $context_hits > 0 ? 3 : 2;
     }
 
     /** Conservative one-row matcher: no AI/fuzzy product identity and no cross-provider assumption. */
@@ -630,17 +607,8 @@ trait PPAR_Idealo_Trait {
     }
 
     private function idealo_comparison_query_for_concept($concept) {
-        $title = trim((string)($concept['title'] ?? ''));
-        if ($title === '') { return ''; }
-        $main = trim((string)($concept['main_hub'] ?? ''));
-        $normalized = $this->idealo_match_normalize($title);
-        $horse_roots = array('pferd','pony','fohlen','reit','sattel','trense','halfter','huf','weide','stall','longier','cavaletti','schabrack','gamasch','zaum');
-        if ($this->idealo_text_has_root($normalized, $horse_roots)) { return $title; }
-        if ($main === 'Stall') { return $title . ' Pferdestall'; }
-        if ($main === 'Weide') { return $title . ' Pferdeweide'; }
-        if ($main === 'Transport') { return $title . ' Pferdeanhänger'; }
-        if (in_array($main, array('Ausrüstung','Fütterung','Gesundheit','Training'), true)) { return $title . ' Pferd'; }
-        return $title;
+        $title = trim(sanitize_text_field((string)($concept['title'] ?? '')));
+        return $title === '' ? '' : $title;
     }
 
     private function idealo_comparison_target_url($concept) {
@@ -1302,13 +1270,13 @@ trait PPAR_Idealo_Trait {
             <input type="hidden" name="action" value="ppar_provider_access_save"><input type="hidden" name="provider" value="idealo"><?php wp_nonce_field('ppar_provider_access_idealo','ppar_provider_nonce'); ?>
             <p><label><input type="checkbox" name="ppar_provider[idealo][enabled]" value="1" <?php checked(!empty($s['enabled'])); ?>> idealo-Verbindung verwenden</label></p>
             <p><label>iPN API-Key <span class="ppar-saved"><?php echo $external?'über wp-config.php':(trim((string)$s['api_key'])!==''?'gespeichert':'nicht gespeichert'); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[idealo][api_key]" value="" placeholder="leer lassen zum Beibehalten" <?php disabled($external); ?>></label></p>
-            <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label> <span class="description">Pferde Atelier: 568313.</span></p>
+            <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label></p>
             <p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>
             <p><label>Offizielle iPN-Download-URL für Feed 2901 <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
             <p><label>Portalweite Affiliate-Ausgabe<br><select name="ppar_provider[idealo][output_mode]"><option value="ebay_only" <?php selected($s['output_mode'],'ebay_only'); ?>>Nur bestehende eBay-/Bestandslogik</option><option value="idealo_only" <?php selected($s['output_mode'],'idealo_only'); ?>>Nur idealo-Ausgabe</option><option value="separate" <?php selected($s['output_mode'],'separate'); ?>>Provider getrennt als Karten</option><option value="combined" <?php selected($s['output_mode'],'combined'); ?>>Gemeinsame Karte bei exakter GTIN, sonst getrennt</option><option value="automatic" <?php selected($s['output_mode'],'automatic'); ?>>Automatisch: gemeinsam bei exakter GTIN, sonst getrennt</option></select></label></p>
             <p><label>idealo-Linkstrategie<br><select name="ppar_provider[idealo][link_strategy]"><option value="hybrid" <?php selected($s['link_strategy'],'hybrid'); ?>>Hybrid (empfohlen): Preisvergleich allein, konkrete idealo-Angebote nur als GTIN-Zusatzbutton</option><option value="products" <?php selected($s['link_strategy'],'products'); ?>>Konkrete idealo-Produkte als eigene Karten</option><option value="comparison" <?php selected($s['link_strategy'],'comparison'); ?>>Nur idealo-Preisvergleichs-/Suchlinks</option></select></label></p>
             <p><label><input type="checkbox" name="ppar_provider[idealo][auto_refresh]" value="1" <?php checked(!empty($s['auto_refresh'])); ?>> Feed automatisch alle zwölf Stunden auf Änderungen prüfen (nur bei gespeicherter Download-URL)</label></p>
-            <p class="description"><strong>Portalabgleich:</strong> Feed 2901 wird streamend gegen den gebundenen 311er-Produktvertrag / 59 Hub-Familien geprüft. Im Hybridmodus wird idealo eigenständig als Produktfamilien-/Preisvergleich verlinkt; konkrete idealo-Angebote erscheinen zusätzlich nur bei exakter GTIN auf einer bereits konkreten Produktkarte.</p>
+            <p class="description"><strong>Portalabgleich:</strong> Der konfigurierte Feed wird streamend gegen den aktuellen Hobby-Depot-Recherchekatalog geprüft. Im Hybridmodus wird idealo eigenständig als Produktfamilien-/Preisvergleich verlinkt; konkrete idealo-Angebote erscheinen zusätzlich nur bei exakter GTIN auf einer bereits konkreten Produktkarte.</p>
             <?php if (!$external): ?><details><summary>Zugangsdaten entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_api_key]" value="1"> API-Key entfernen</label></p></details><?php endif; ?>
             <p><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button> <button class="button" name="ppar_provider_action" value="save_test">Speichern &amp; API prüfen</button></p>
         </form><?php
