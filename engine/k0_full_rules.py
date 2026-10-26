@@ -126,10 +126,10 @@ def validate_rule_context(ctx,identity):
         normalized=re.sub(r'\s+',' ',anchor.strip().casefold())
         category_slug=href.rstrip('/').split('/')[-1].casefold()
         category_words=category_slug.replace('-',' ').replace('_',' ')
+        category_topic=category_words.removesuffix(' faq').strip()
         if (normalized in {'weitere informationen zum thema','weitere informationen','vertiefende hinweise','mehr dazu','hier klicken'}
-                or normalized==category_words+' – faq'
-                or normalized=='faq zu '+category_words.removesuffix(' faq')
-                or normalized=='faq zu '+category_words):
+                or normalized==category_topic+' – faq'
+                or normalized=='faq zu '+category_topic):
             raise Blocked('K0_RULE_CONTEXT_LINK_ANCHOR_UNINFORMATIVE:'+str(x.get('role') or ''))
         blocks.append(block)
     if len(set(blocks))!=len(blocks):
