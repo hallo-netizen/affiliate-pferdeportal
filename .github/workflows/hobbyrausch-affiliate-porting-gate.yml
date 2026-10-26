@@ -164,3 +164,7 @@ jobs:
           cd /tmp/hd-wp
           /tmp/wp plugin activate hobby-depot-affiliate-router
           /tmp/wp plugin status hobby-depot-affiliate-router
+      - name: Run idealo provider to frontend E2E
+        run: |
+          cd /tmp/hd-wp
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/work/hobbyrausch-affiliate/porting/tests/provider-idealo-wordpress-e2e.php"
