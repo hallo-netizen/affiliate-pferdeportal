@@ -1,0 +1,178 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "weidezelt-faq",
+    "plan_slot": "d70b358dc35ffaec56b9e4d038903609d48ab09a845a971be1736fe918edb8ac",
+    "target_keyword": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde",
+    "title": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Gesetze im Internet – Baugesetzbuch § 35",
+          "source_url": "https://www.gesetze-im-internet.de/bbaug/__35.html"
+        },
+        {
+          "source_title": "BauO NRW 2018 – § 78 Fliegende Bauten",
+          "source_url": "https://recht.nrw.de/lrgv/gesetz/01012024-bauordnung-fuer-das-land-nordrhein-westfalen-landesbauordnung-2018-bauo-nrw/"
+        },
+        {
+          "source_title": "Bauportal NRW – Fliegende Bauten",
+          "source_url": "https://bauportal.nrw/glossary-term/176"
+        }
+      ],
+      "claims": [
+        "Im Außenbereich ist ein Bauvorhaben grundsätzlich nur unter den Voraussetzungen des § 35 BauGB zulässig; landwirtschaftliche Betriebe können privilegiert sein.",
+        "Die Einstufung als fliegender Bau setzt voraus, dass die Anlage zum wiederholten Aufstellen und Zerlegen an unterschiedlichen Orten bestimmt ist.",
+        "Die Landesbauordnung Nordrhein-Westfalen sieht für bestimmte kleine fliegende Zelte eine Ausnahme von der Ausführungsgenehmigung vor.",
+        "Eine längere Aufstellung an einem festen Standort muss gesondert darauf geprüft werden, ob eine genehmigungs- oder anzeigebedürftige Anlage vorliegt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde",
+      "topic": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "weidezelt-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Gesetze im Internet – Baugesetzbuch § 35",
+        "source_url": "https://www.gesetze-im-internet.de/bbaug/__35.html",
+        "statement": "Im Außenbereich ist ein Bauvorhaben grundsätzlich nur unter den Voraussetzungen des § 35 BauGB zulässig; landwirtschaftliche Betriebe können privilegiert sein.",
+        "evidence_text": "Im Außenbereich ist ein Bauvorhaben grundsätzlich nur unter den Voraussetzungen des § 35 BauGB zulässig; landwirtschaftliche Betriebe können privilegiert sein.",
+        "evidence_text_sha256": "5a8442651952a2eb35623b9a97e9749a67c3cc93bce2afe03eb1aec8a66c8c85",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "BauO NRW 2018 – § 78 Fliegende Bauten",
+        "source_url": "https://recht.nrw.de/lrgv/gesetz/01012024-bauordnung-fuer-das-land-nordrhein-westfalen-landesbauordnung-2018-bauo-nrw/",
+        "statement": "Die Einstufung als fliegender Bau setzt voraus, dass die Anlage zum wiederholten Aufstellen und Zerlegen an unterschiedlichen Orten bestimmt ist.",
+        "evidence_text": "Die Einstufung als fliegender Bau setzt voraus, dass die Anlage zum wiederholten Aufstellen und Zerlegen an unterschiedlichen Orten bestimmt ist.",
+        "evidence_text_sha256": "233131a96320c551746e1e01441c5a83e15f4918e1767d046bf41ba16033b721",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "BauO NRW 2018 – § 78 Fliegende Bauten",
+        "source_url": "https://recht.nrw.de/lrgv/gesetz/01012024-bauordnung-fuer-das-land-nordrhein-westfalen-landesbauordnung-2018-bauo-nrw/",
+        "statement": "Die Landesbauordnung Nordrhein-Westfalen sieht für bestimmte kleine fliegende Zelte eine Ausnahme von der Ausführungsgenehmigung vor.",
+        "evidence_text": "Die Landesbauordnung Nordrhein-Westfalen sieht für bestimmte kleine fliegende Zelte eine Ausnahme von der Ausführungsgenehmigung vor.",
+        "evidence_text_sha256": "112fce7c8b4eaf764a5c6ca249f0640fb88dbc90f3d69bb4a0cd4a908d407f3d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Bauportal NRW – Fliegende Bauten",
+        "source_url": "https://bauportal.nrw/glossary-term/176",
+        "statement": "Eine längere Aufstellung an einem festen Standort muss gesondert darauf geprüft werden, ob eine genehmigungs- oder anzeigebedürftige Anlage vorliegt.",
+        "evidence_text": "Eine längere Aufstellung an einem festen Standort muss gesondert darauf geprüft werden, ob eine genehmigungs- oder anzeigebedürftige Anlage vorliegt.",
+        "evidence_text_sha256": "b24ac9a4328f7d7ce2b51daf1342934f789b587c5bcb4fbadfb71cfbdc2861ca",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/weidezelt-faq/",
+        "anchor": "Weidezelt und Genehmigung",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/weidezelt-beratung/",
+        "anchor": "Weidezelt richtig auswählen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/weidezelt-installation/",
+        "anchor": "Weidezelt sicher aufstellen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/weidezelt-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/weidezelt-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/weidezelt-installation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "weidezelt-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Weidezelt",
+      "Baugenehmigung",
+      "Außenbereich",
+      "Landwirtschaft",
+      "Fliegende Bauten",
+      "Bauamt"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Ein Überblick über Standort, Nutzung und Bauart trennt die unterschiedlichen Genehmigungsfragen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
