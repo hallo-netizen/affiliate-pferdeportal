@@ -75,17 +75,21 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
    - fail-closed bei fehlender Registry, ungültigem Snapshot, != 8 CORE-Welten oder < 300 strukturell belegten Hobbyseiten.
    - keine zweite Kategorie-/Produkt-Masterdatenhaltung im Affiliate-Plugin.
 
-3. **GATE 3 – Provider-Recherchepfade:** IN ARBEIT
-   - eBay und idealo gegen die neue Hobby-Depot-Zielquelle end-to-end prüfen.
-   - Amazon bleibt vorbereitet; kein Adapter erfinden.
+3. **GATE 3 – Provider-Recherchepfade: STATIC PASS**
+   - eBay und idealo lesen beide `HDAR_Hobby_Depot_Source`.
+   - gelöschte Altquellen `AFF043`, `portal-structure-v279.json` und `ebay-portal-catalog-v2.json` sind aus den aktiven Pfaden entfernt.
+   - Kategorie→Hobby-Zuordnung läuft über `article_targets` aus HD-004.
+   - eBay-`catalog_version` wird aus der HD-004-Registry-Revision gebildet.
+   - Amazon bleibt vorbereitet; kein Adapter erfunden.
+   - Runtime-/WordPress-Beweis folgt erst in Gate 4.
 
-4. **GATE 4 – Positiv/Negativ/Regression:** OFFEN
+4. **GATE 4 – Positiv/Negativ/Regression:** IN ARBEIT
 5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN; vor Gate 4 verboten.
 
 ## ERSTER OFFENER BLOCKER
 
-eBay- und idealo-Recherche-/Zuordnungspfade müssen jetzt gegen die neue Hobby-Depot-Zielquelle vollständig geprüft und bei Bedarf minimal angepasst werden.
+Es fehlt noch der ausführbare Positiv-/Negativ-/Regressionstest der bereinigten HD-009-Arbeitsquelle. Ein statischer PASS ist ausdrücklich kein Installations-PASS.
 
 ## EXAKT EINE NEXT ACTION
 
-GATE 3 ausführen: eBay- und idealo-Recherchepfade vollständig gegen `HDAR_Hobby_Depot_Source` prüfen, Positiv- und Negativpfade belegen und nur echte verbleibende Pferdeportal-Annahmen minimal ersetzen.
+GATE 4 ausführen: bereinigte Hobby-Depot-Zielquelle mit gültigem und ungültigem HD-004-Snapshot testen; eBay-/idealo-Zuordnung positiv und fail-closed negativ prüfen; Regression auf fehlende Fremdprojektdateien und unbeabsichtigte Amazon-Aktivierung prüfen. Erst bei vollständigem PASS Gate 5 vorbereiten.
