@@ -77,6 +77,8 @@ if(!$ids){
  $table=$tableMethod->invoke($plugin,'products');
  global $wpdb;
  $storedRows=$wpdb->get_results("SELECT network,external_key,category,quality_status,last_seen,payload FROM {$table} WHERE network='idealo'",ARRAY_A);
+ $dbError=(string)$wpdb->last_error;
+ $schemaRows=$wpdb->get_results("SHOW CREATE TABLE {$table}",ARRAY_A);
  $miMethod=$ref->getMethod('idealo_match_index'); $miMethod->setAccessible(true);
  $mi=$miMethod->invoke($plugin);
  $targetDiag=[];
@@ -84,7 +86,7 @@ if(!$ids){
    $tkMethod=$ref->getMethod('idealo_target_keys_for_concept'); $tkMethod->setAccessible(true);
    foreach((array)($mi['concepts']??[]) as $cid=>$concept){ $targetDiag[$cid]=$tkMethod->invoke($plugin,$concept); }
  }
- hd_e2e_fail('idealo materializer created no campaigns; materialized='.wp_json_encode($result['details']['materialized']??null).' counts='.wp_json_encode($result['counts']??null).' rows='.wp_json_encode($storedRows).' targets='.wp_json_encode($targetDiag));
+ hd_e2e_fail('idealo materializer created no campaigns; materialized='.wp_json_encode($result['details']['materialized']??null).' counts='.wp_json_encode($result['counts']??null).' rows='.wp_json_encode($storedRows).' db_error='.wp_json_encode($dbError).' schema='.wp_json_encode($schemaRows).' targets='.wp_json_encode($targetDiag));
 }
 
 $product_campaign_id=0;
