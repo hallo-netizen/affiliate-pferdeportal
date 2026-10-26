@@ -4152,8 +4152,6 @@ JS;
     private function category_product_incident_historical_active_lookup() {
         return array();
     }
-        return $lookup;
-    }
 
     private function category_product_incident_inactive_auto_allowed($campaign, $slot_type) {
         if (!is_array($campaign) || !empty($campaign['active'])) { return false; }
