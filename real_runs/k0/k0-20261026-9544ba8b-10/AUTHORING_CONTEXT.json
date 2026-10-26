@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schermaschinen-faq",
+    "plan_slot": "181dd4d1e4766df2fbb88ef7b337fafdebfd6bfb3919ac2555cc5e80b221630d",
+    "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+    "title": "Welche Schermaschine für Pferde ist die leiseste?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Tierbedarf Discount – Schermaschinenvergleich",
+          "source_url": "https://www.tierbedarf-discount.ch/SwkweGuides/detail/articleId/324"
+        }
+      ],
+      "claims": [
+        "Bei einem aktuell veröffentlichten Modellvergleich werden die Heiniger Xplorer und Aesculap Bonum Pro mit jeweils 65 dB(A) als relativ leise Ganzkörperschermaschinen geführt.",
+        "Andere Modelle im Vergleich liegen bei höheren angegebenen Geräuschpegeln, etwa 68 dB(A) bei Xperience 2-Speed und 77 dB(A) bei XplorerPro.",
+        "Die Geräuschangaben gelten für die jeweils aufgeführten Modelle; unterschiedliche Messmethoden und Nutzungsbedingungen können die Vergleichbarkeit begrenzen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "topic": "Welche Schermaschine für Pferde ist die leiseste?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schermaschinen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Schermaschine für Pferde ist die leiseste?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Tierbedarf Discount – Schermaschinenvergleich",
+        "source_url": "https://www.tierbedarf-discount.ch/SwkweGuides/detail/articleId/324",
+        "statement": "Bei einem aktuell veröffentlichten Modellvergleich werden die Heiniger Xplorer und Aesculap Bonum Pro mit jeweils 65 dB(A) als relativ leise Ganzkörperschermaschinen geführt.",
+        "evidence_text": "Bei einem aktuell veröffentlichten Modellvergleich werden die Heiniger Xplorer und Aesculap Bonum Pro mit jeweils 65 dB(A) als relativ leise Ganzkörperschermaschinen geführt.",
+        "evidence_text_sha256": "d31a5dfad19a2589523b5552e1fa7022a5f18f20236e3d3708767c5d6498379e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Tierbedarf Discount – Schermaschinenvergleich",
+        "source_url": "https://www.tierbedarf-discount.ch/SwkweGuides/detail/articleId/324",
+        "statement": "Andere Modelle im Vergleich liegen bei höheren angegebenen Geräuschpegeln, etwa 68 dB(A) bei Xperience 2-Speed und 77 dB(A) bei XplorerPro.",
+        "evidence_text": "Andere Modelle im Vergleich liegen bei höheren angegebenen Geräuschpegeln, etwa 68 dB(A) bei Xperience 2-Speed und 77 dB(A) bei XplorerPro.",
+        "evidence_text_sha256": "2e172cff0b113538f39049840932bb5263a13555c9bb15a5f72d9ab59c5ccf2b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Tierbedarf Discount – Schermaschinenvergleich",
+        "source_url": "https://www.tierbedarf-discount.ch/SwkweGuides/detail/articleId/324",
+        "statement": "Die Geräuschangaben gelten für die jeweils aufgeführten Modelle; unterschiedliche Messmethoden und Nutzungsbedingungen können die Vergleichbarkeit begrenzen.",
+        "evidence_text": "Die Geräuschangaben gelten für die jeweils aufgeführten Modelle; unterschiedliche Messmethoden und Nutzungsbedingungen können die Vergleichbarkeit begrenzen.",
+        "evidence_text_sha256": "5d5e23c66b3bde0ec77e42473bffb3dbb58de4f5e30cb9223b9d37a68a1beed3",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/schermaschinen-faq/",
+        "anchor": "FAQ zu schermaschinen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/schermaschinen-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schermaschinen-vergleich/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/schermaschinen-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/schermaschinen-vergleich/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schermaschinen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "schermaschinen",
+      "Welche Schermaschine für",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
