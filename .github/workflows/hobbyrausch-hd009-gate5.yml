@@ -72,14 +72,8 @@ jobs:
           mapfile -t unpack_php < <(find /tmp/hd009-unpack/affiliate-portal-router -type f -name '*.php' -print | sort)
           test "${#unpack_php[@]}" -eq 23
           for f in "${unpack_php[@]}"; do php -l "$f" >/dev/null; done
-          (
-            cd "$HD009_SRC"
-            find . -type f -print0 | sort -z | xargs -0 sha256sum
-          ) >/tmp/source.sha
-          (
-            cd /tmp/hd009-unpack/affiliate-portal-router
-            find . -type f -print0 | sort -z | xargs -0 sha256sum
-          ) >/tmp/unpack.sha
+          (cd "$HD009_SRC" && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/source.sha
+          (cd /tmp/hd009-unpack/affiliate-portal-router && find . -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/unpack.sha
           diff -u /tmp/source.sha /tmp/unpack.sha
           sha256sum "/tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip" | tee /tmp/candidate.sha
           echo "HD009_VERSION=$VERSION" >> "$GITHUB_ENV"
@@ -103,7 +97,6 @@ jobs:
           $WPCLI plugin activate affiliate-portal-router
           $WPCLI plugin is-active affiliate-portal-router
 
-          # NEGATIV: ohne HD-004 muss die Zielquelle sauber fail-closed bleiben.
           $WPCLI eval '
             $r = HDAR_Hobby_Depot_Source::catalog();
             if (!is_wp_error($r) || $r->get_error_code() !== "hdar_category_registry_unavailable") {
@@ -119,10 +112,8 @@ jobs:
           function hd_category_registry_revision(){ return 'gate5-fixture-r1'; }
           function hd_category_registry_snapshot(){
               $nodes = array();
-              $world_ids = array();
               for ($w=1; $w<=8; $w++) {
                   $wid = 'core:world:w'.$w;
-                  $world_ids[] = $wid;
                   $nodes[] = array(
                       'node_id'=>$wid,'pillar'=>'core','status'=>'active','object_type'=>'page',
                       'parent_id'=>'','slug'=>'welt-'.$w,'display_name'=>'Welt '.$w
@@ -144,7 +135,6 @@ jobs:
           }
           PHP
 
-          # POSITIV: dieselbe echte WP-Laufzeit, HD-004-Vertrag vorhanden.
           $WPCLI eval '
             $r = HDAR_Hobby_Depot_Source::catalog();
             if (is_wp_error($r)) { fwrite(STDERR, $r->get_error_code()."\n"); exit(1); }
@@ -154,8 +144,6 @@ jobs:
             echo "HD009_POSITIVE_PASS\n";
           '
 
-          # Providerregression im aktivierten Plugin: eBay/idealo-Klassenpfade geladen,
-          # Amazon weiterhin nicht als erfundener aktiver Adapter ergänzt.
           $WPCLI eval '
             if (!class_exists("Hobby_Depot_Affiliate_Router")) exit(10);
             $main = WP_PLUGIN_DIR . "/affiliate-portal-router/hobby-depot-affiliate-router.php";
@@ -199,11 +187,11 @@ jobs:
 
           ROLLE: Evidence / Nachweis, keine Current-Autorität.
 
-          Arbeitsbranch: `hobbyrausch/hd009-affiliate-port-20261026`
-          GitHub-Actions-Lauf: `$GITHUB_RUN_ID`
-          Kandidat: `HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip`
-          Plugin-Version: `$HD009_VERSION`
-          SHA-256: `$HD009_SHA`
+          Arbeitsbranch: hobbyrausch/hd009-affiliate-port-20261026
+          GitHub-Actions-Lauf: $GITHUB_RUN_ID
+          Kandidat: HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip
+          Plugin-Version: $HD009_VERSION
+          SHA-256: $HD009_SHA
 
           Ergebnis: **GATE 5 PASS – INSTALLATIONSKANDIDAT, KEIN LIVE-PASS**
 
@@ -213,7 +201,7 @@ jobs:
           - PHP-Lint 23/23 PASS.
           - echte frische WordPress-Laufzeit installiert.
           - HD-009 in WordPress aktiviert und als aktiv bestätigt.
-          - ohne HD-004-Registry: erwartetes fail-closed `hdar_category_registry_unavailable`.
+          - ohne HD-004-Registry: erwartetes fail-closed hdar_category_registry_unavailable.
           - mit exakt bereitgestelltem HD-004-Runtimevertrag: 8 Welten, 320 Hobbyseiten, 320 Artikelkategorien.
           - eBay/idealo-Regressionspfade vorhanden; kein erfundener Amazon-Adapter.
           - keine Zugangsdaten in Quellcode/Manifest/Evidence geschrieben.
@@ -232,7 +220,7 @@ jobs:
             /tmp/EVIDENCE_GATE5_20261026.md
           if-no-files-found: error
 
-      - name: Synchronize isolated CURRENT.zip to Campus
+      - name: Prepare Campus sync branch
         shell: bash
         env:
           CAMPUS_BRANCH: hobbyroom/project-memory-campus-v1-20260905
@@ -249,10 +237,12 @@ jobs:
           cp /tmp/HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_V0.1.0_DEV_GATE5.zip "$target/CURRENT.zip"
           cp /tmp/MANIFEST.md "$target/MANIFEST.md"
           cp /tmp/EVIDENCE_GATE5_20261026.md "$evidence"
-          git -C /tmp/campus add             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md
-          if git -C /tmp/campus diff --cached --quiet; then
-            echo "Campus already synchronized."
-            exit 0
-          fi
+          git -C /tmp/campus add \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE5_20261026.md
+          git -C /tmp/campus diff --cached --quiet && { echo "Campus already synchronized."; exit 0; }
           git -C /tmp/campus commit -m "HD-009 Gate 5: installierbaren CURRENT-Kandidaten synchronisieren"
-          git -C /tmp/campus push origin HEAD:"$CAMPUS_BRANCH"
+          SYNC_BRANCH="hobbyrausch/hd009-gate5-campus-sync-$GITHUB_RUN_ID"
+          git -C /tmp/campus push origin HEAD:"$SYNC_BRANCH"
+          echo "HD009_SYNC_BRANCH=$SYNC_BRANCH" >> "$GITHUB_ENV"
