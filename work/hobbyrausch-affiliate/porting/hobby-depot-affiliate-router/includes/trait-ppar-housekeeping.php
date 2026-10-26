@@ -283,7 +283,6 @@ trait PPAR_Housekeeping_Trait {
 }
 
 PPAR_Partner_Analytics_Admin::bootstrap();
-PPAR_Deal_Radar::bootstrap();
 PPAR_Affiliate_Source_Plan::bootstrap();
 PPAR_Affiliate_Admin_KISS::bootstrap();
 PPAR_DS24_Manual_Downstream::bootstrap();
