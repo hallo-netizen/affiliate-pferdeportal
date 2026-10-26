@@ -995,3 +995,32 @@ BEHOBEN 2026-10-17:
 - genau eine Current-Autorität: `protocol/PROJECT_MEMORY/REPOSITORY_CLEANUP_CURRENT_STATE.md`;
 - keine Fach-Current, kein Runner, keine Plugin-/K0-/Affiliate-Logik verändert;
 - Cleanup-Audit darf damit operativ fortgesetzt werden; Löschfreigaben bleiben weiterhin an die dokumentierten Negativprüfungen gebunden.
+
+
+## BAU-044 – Pflichtcheck single-current-lock war pfadgefiltert
+
+STATUS: CLOSED – 2026-10-26
+
+KURZ:
+Der aktive Ruleset des Campus-Branches verlangt den GitHub-Actions-Status `single-current-lock` für jeden Pull Request. Der zugehörige Workflow `.github/workflows/pferdeatelier-single-workbench.yml` startete jedoch nur bei Änderungen unter `PROJEKTE/PFERDE_ATELIER/PLUGINS/**` oder an der Workflowdatei selbst.
+
+AUSWIRKUNG:
+Projektfremde Campus-Änderungen, darunter die reguläre Hobbyrausch-Affiliate-Current-Nachführung, konnten den vorgeschriebenen Status technisch nicht erzeugen und blieben deshalb trotz korrektem PR-Weg blockiert.
+
+BELEG:
+- Campus-Ruleset 25817526: erforderlicher Status `single-current-lock`;
+- PR #566 erzeugte zunächst nur den nicht erforderlichen `hardlock-base`-Check;
+- der alte PR #564 war aus demselben Grund nicht regulär mergefähig.
+
+KISS-FIX:
+Nur die Pfadfilter des bereits vorhandenen Workflows entfernt. Jobname und vorhandener Workbench-Guard bleiben unverändert. Damit läuft der ohnehin vorgeschriebene `single-current-lock` bei jedem Push/PR auf den Campus-Branch.
+
+NICHT GETAN:
+- kein Ruleset abgeschaltet;
+- kein Pflichtcheck umgangen;
+- kein Bypass;
+- keine neue Current-Autorität;
+- kein Umbau des Fachsystems.
+
+REGRESSIONSSCHUTZ:
+Ein im Branch-Ruleset verpflichtender Statuscheck darf nicht durch Workflow-Pfadfilter für zulässige Änderungen unerreichbar sein.

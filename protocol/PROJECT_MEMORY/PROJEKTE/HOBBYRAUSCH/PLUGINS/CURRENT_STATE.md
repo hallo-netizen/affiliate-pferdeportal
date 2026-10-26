@@ -81,6 +81,17 @@ schlanke automatische SEO-Titel-/Meta-Description-Ausgabe.
 Fach-Current:
 `../SEO/CURRENT_STATE.md`
 
+## HD-009 – Affiliate-Zentrale
+
+Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md`
+
+Rolle:
+bereinigte Hobby-Depot-Portierung der Affiliate-Zentrale; technische Arbeitsquelle branchgebunden, keine Pferdeatelier-Statusübernahme.
+
+Fach-Current:
+`../AFFILIATE/CURRENT_STATE.md`
+
 ## EXAKT EINE NEXT ACTION
 
 Für die Kategorie-Verschlankung:

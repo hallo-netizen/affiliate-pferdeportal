@@ -1966,3 +1966,34 @@ WAS: Auf Basis des stabilen HD-007-Stamms wurden ohne neue Bilderzeugung alle 38
 WARUM: Vor weiterer Generierung musste klar getrennt werden, welche vorhandenen Bilder fachlich wiederverwendbar sind und welche neu erzeugt werden müssen. Gleichzeitig darf kein zu kleines Bild durch Hochskalieren als final ausgegeben werden.
 BEWEIS: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/EVIDENCE_1.2.13_CORE_IMAGE_AUDIT.md`; ZIP SHA-256 `67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`; lokale 862/862-Renderprüfung, Registerindex, PHP-Lint und Fresh-Unpack PASS.
 GRENZE: Kein LIVE-PASS für 1.2.13. Keine weitere Bildgenerierung in diesem Lauf. Isolierter GitHub-`CURRENT.zip`-Binärsync bleibt wegen Werkzeuggrenze offen; keine Ersatzdatei vortäuschen. Aktueller technischer Stand/NEXT ACTION ausschließlich aus der HD-007-`CURRENT.md`.
+
+
+## HOBBYRAUSCH-AFFILIATE-HD009-20261026 – Pferdeatelier-Engine als bereinigte Hobby-Depot-Portierung
+
+WAS:
+Für Hobby Depot wird die vorhandene Pferdeatelier-Affiliate-Zentrale nicht als fremder Projektstatus übernommen, sondern als technische Quellbasis in das neue Eigenplugin `HD-009-AFFILIATE-ZENTRALE` portiert. Die Arbeitsquelle liegt ausschließlich auf `hobbyrausch/hd009-affiliate-port-20261026`.
+
+WARUM:
+Engine, Providerlogik, Kontroll-/Veto-/Output-Logik und Partner-Schnittstellen sind wiederverwendbar; Pferdeatelier-spezifische Zielkataloge, Portalstruktur, Recovery-Bestände, Banner-/Produkt-/Artikelbezüge und Fachlogik dürfen Hobby Depot nicht kontaminieren.
+
+DAUERREGEL:
+- Hobby-Depot-Zielwahrheit ausschließlich über die read-only HD-004-Kategorie-Registry, keine zweite Kategorie-/Produkt-Masterdatenhaltung in HD-009;
+- eBay und idealo verwenden diese zentrale Zielquelle;
+- Amazon bleibt `prepared`, solange kein realer Adapter/Zugang belegt ist; kein Adapter erfinden;
+- Secrets/Zugangsdaten niemals in Campus, Quellcode oder Protokollen speichern; nur vorhandene Laufzeit-Konfigurationsschnittstellen erhalten;
+- kein Installations-/Live-PASS ohne Positiv-, Negativ-, Regression-, Fresh-Unpack- und WordPress-Laufzeitnachweis.
+
+GATE-4-BEFUND:
+Quellstand `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`, GitHub-Actions-Lauf `40319481655`: 23/23 PHP-Lint und alle neun Positiv-/Negativ-/Regression-Szenarien PASS. Kein Live-PASS.
+
+
+## CAMPUS-SINGLE-CURRENT-GUARD-20261026 – erforderlicher single-current-lock für alle Campus-PRs erreichbar
+
+WAS:
+Im bestehenden Workflow `.github/workflows/pferdeatelier-single-workbench.yml` wurden ausschließlich die `paths`-Filter der Push-/Pull-Request-Trigger entfernt. Der Jobkontext `single-current-lock` und sein vorhandener Guard bleiben unverändert.
+
+WARUM:
+Der aktive Campus-Ruleset 25817526 verlangt `single-current-lock` für jeden PR auf `hobbyroom/project-memory-campus-v1-20260905`. Mit dem bisherigen Pferdeatelier-spezifischen Pfadfilter konnte ein Hobbyrausch- oder anderes Campus-Delta den Pflichtstatus gar nicht erzeugen.
+
+GRENZE:
+Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wahrheit. Nur die bestehende Pflichtprüfung wird für alle Änderungen erreichbar gemacht. Fehlerquelle: `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-044.

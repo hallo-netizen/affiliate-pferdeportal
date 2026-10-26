@@ -5394,3 +5394,61 @@ Dies ist keine neue Current-Autorität und ersetzt 1.50.744 nicht; es ist nur de
 
 CURRENT:
 `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`
+
+
+---
+
+## PU-20261026-001 – HD-009 Affiliate-Zentrale Portierung / Gate 4
+
+PLUGIN-ID:
+`HD-009-AFFILIATE-ZENTRALE`
+
+ART:
+Neue Hobby-Depot-Eigenentwicklung als bereinigte Portierung der Pferdeatelier Affiliate-Zentrale.
+
+FACHBÜRO:
+HOBBYRAUSCH / AFFILIATE.
+
+VON / AUF:
+nicht vorhanden → `0.1.0-dev` Arbeitsstand; **kein Release**.
+
+QUELLE / ARBEITSBINDUNG:
+- technische Ausgangsbasis: `affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/`;
+- Pferdeatelier-Ausgangshead bei Übernahme: `7375bc46a57ac4c2ff2a74a6dd4919113defd009`;
+- formaler Pferdeatelier-Kandidat: 6.72.211, dort RELEASE BLOCKED durch AFF-ERR-065;
+- Hobby-Depot-Arbeitsbranch: `hobbyrausch/hd009-affiliate-port-20261026`;
+- Gate-4-geprüfter Quellstand: `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`.
+
+WARUM / ÄNDERUNG:
+- 28/28 Ausgangsquelldateien zunächst byte-identisch übernommen;
+- Pferdeatelier-eBay-Zielkatalog, Portalstruktur und historischer Recovery-Produktbestand entfernt;
+- aktive Pferde-Fachlogik bereinigt;
+- neue read-only Hobby-Depot-Zielquelle über HD-004 Registry;
+- eBay/idealo auf diese Zielquelle gebunden;
+- Amazon bewusst nur `prepared`; kein nicht belegter Adapter;
+- Credentials nicht in Quellkopie/Protokoll geschrieben; vorhandene Konfigurationsmechanismen bleiben.
+
+FEHLER:
+- HD009-ERR-001: verwaiste Recovery-Rückgabe erzeugte PHP-Parsefehler; CLOSED mit Commit `a5fca469dda22d459dd65f040bb8cd872c697982`;
+- HD009-ERR-002: Fremdprojekt-Test traf `fohlen` in `empfohlen`; Test-Fehlalarm, CLOSED mit Commit `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`.
+
+POSITIV-/NEGATIV-/REGRESSIONSTEST:
+GitHub Actions Run `40319481655`, Job `121560434781`: **PASS**.
+- PHP-Lint 23/23;
+- HD-004 gültig → HD-009 → eBay/idealo;
+- Registry fehlt, Snapshot ungültig, Weltzahl falsch, <300 Hobbyziele;
+- eBay/idealo fail-closed;
+- entfernte Fremdprojektdateien/-marker;
+- Amazon prepared/inaktiv.
+
+EVIDENCE:
+`PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
+
+ROLLBACK:
+Noch kein Liveeinsatz. Arbeitsbranch/HD-009-Arbeitskopie kann verworfen werden; Pferdeatelier-Releasebranch wurde nicht verändert.
+
+LIVE / RELEASE:
+**OFFEN.** Kein Installationskandidat, kein `CURRENT.zip`, kein Live-PASS.
+
+NÄCHSTER TECHNISCHER SCHRITT:
+Gate 5 gemäß HD-009-`CURRENT.md`.
