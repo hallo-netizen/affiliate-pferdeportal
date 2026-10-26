@@ -4852,6 +4852,79 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         return null;
     }
 
+    private function journal_product_fallback_candidates_v672275($context, $slot_type) {
+        static $cache = array();
+        $slot_type = sanitize_key((string)$slot_type);
+        if (!preg_match('/^journal_product_[123]$/', $slot_type)) { return array(); }
+        $context_key = md5(wp_json_encode(array(
+            'post_id'=>absint($context['post_id'] ?? 0),
+            'primary_slug'=>sanitize_key((string)($context['primary_slug'] ?? '')),
+            'post_type'=>sanitize_key((string)($context['post_type'] ?? '')),
+            'slot'=>$slot_type,
+        )));
+        if (isset($cache[$context_key])) { return $cache[$context_key]; }
+        if (!method_exists($this, 'hd_affiliate_campaign_targets_registry')) {
+            return $cache[$context_key] = array();
+        }
+
+        $candidates = array();
+        foreach ((array)$this->get_campaigns() as $campaign) {
+            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+            $type = sanitize_key((string)($campaign['creative_type'] ?? ''));
+            $network = sanitize_key((string)($campaign['network'] ?? ''));
+            $source = sanitize_key((string)($campaign['source'] ?? ''));
+            if ($type !== 'product') { continue; }
+
+            // Only provider research paths that are explicitly ported for Hobby Depot.
+            $source_ok = ($network === 'ebay' && $source === 'output_object_v4')
+                || ($network === 'idealo' && $source === 'idealo_product_feed_v1')
+                || ($network === 'amazon' && $source === 'amazon_creators_searchitems_v1');
+            if (!$source_ok) { continue; }
+
+            // 6.72.275 neutral rule: Journal may reuse an already approved category
+            // product, never invent a new thematic assignment just to fill a card.
+            $category_approved = false;
+            foreach (array('category_product_1','category_product_2','category_product_3') as $category_slot) {
+                if ($this->campaign_slot_allowed($campaign, $category_slot)) {
+                    $category_approved = true;
+                    break;
+                }
+            }
+            if (!$category_approved || !$this->hd_affiliate_campaign_targets_registry($campaign)) { continue; }
+
+            $quality = sanitize_key((string)($campaign['quality_manual_status'] ?? 'unknown'));
+            if ($quality === 'rejected') { continue; }
+            if (!$this->campaign_is_complete($campaign)
+                || !$this->rule_is_current($campaign)
+                || !$this->campaign_program_allows_delivery($campaign)
+                || !$this->otto_awin_product_campaign_seller_ready($campaign)
+                || !$this->campaign_control_allows_delivery($campaign, $slot_type)
+                || !$this->campaign_health_allows_delivery($campaign)
+                || !$this->product_campaign_public_image_ready($campaign)) {
+                continue;
+            }
+
+            $candidates[] = array(
+                'campaign'=>$campaign,
+                'specificity'=>150,
+                'matches'=>1,
+                'priority'=>(int)($campaign['priority'] ?? 0),
+                'reason'=>'Journal-Fallback: bereits freigegebenes Hobby-Depot-Kategorieprodukt aus Registry-gebundener Providerrecherche.',
+            );
+        }
+
+        usort($candidates, static function($a, $b) {
+            if ((int)$a['priority'] !== (int)$b['priority']) {
+                return (int)$a['priority'] > (int)$b['priority'] ? -1 : 1;
+            }
+            return strcmp((string)($a['campaign']['id'] ?? ''), (string)($b['campaign']['id'] ?? ''));
+        });
+        if (method_exists($this, 'multiprovider_reorder_candidates')) {
+            $candidates = $this->multiprovider_reorder_candidates($candidates, 'automatic');
+        }
+        return $cache[$context_key] = array_values($candidates);
+    }
+
     private function select_campaign_for_slot($context, $slot_type, $forced_campaign_id = '') {
         $slot_type = sanitize_key((string) $slot_type);
         if ($forced_campaign_id === ''
@@ -4865,6 +4938,28 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         $candidates = $this->category_product_strict_relevance_tier_v672104($candidates, $slot_type);
         if ($forced_campaign_id === '') {
             $candidates = $this->category_product_provider_mix_v672133($candidates, $slot_type);
+        }
+        if ($forced_campaign_id === '' && preg_match('/^journal_product_[123]$/', $slot_type)) {
+            $fallback = $this->journal_product_fallback_candidates_v672275($context, $slot_type);
+            if ($fallback) {
+                $seen = array();
+                foreach ($candidates as $candidate) {
+                    $campaign = is_array($candidate) ? ($candidate['campaign'] ?? array()) : array();
+                    $key = absint($campaign['post_id'] ?? 0) > 0
+                        ? 'post:' . absint($campaign['post_id'])
+                        : 'id:' . sanitize_key((string)($campaign['id'] ?? ''));
+                    if ($key !== 'id:') { $seen[$key] = true; }
+                }
+                foreach ($fallback as $candidate) {
+                    $campaign = is_array($candidate) ? ($candidate['campaign'] ?? array()) : array();
+                    $key = absint($campaign['post_id'] ?? 0) > 0
+                        ? 'post:' . absint($campaign['post_id'])
+                        : 'id:' . sanitize_key((string)($campaign['id'] ?? ''));
+                    if ($key === 'id:' || isset($seen[$key])) { continue; }
+                    $seen[$key] = true;
+                    $candidates[] = $candidate;
+                }
+            }
         }
         if (empty($candidates)) { return null; }
         $index = $this->category_product_slot_index($slot_type);
