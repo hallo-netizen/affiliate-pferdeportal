@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gebisse-faq",
+    "plan_slot": "bc3d7393b7a97e1134b285baa8e4b7b185fbd60bd11e6fb147f494eced49b277",
+    "target_keyword": "Welches Gebiss liegt am ruhigsten im Maul",
+    "title": "Welches Gebiss liegt am ruhigsten im Maul?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Sprenger – FAQ Pferdesport",
+          "source_url": "https://www.sprenger.de/pages/faq-pferdesport"
+        }
+      ],
+      "claims": [
+        "Gebisse mit festen Ringen wie Olivenkopftrensen können ruhiger im Pferdemaul liegen als frei bewegliche Wassertrensenringe.",
+        "Eine starre Stange liegt in der Mundhöhle vergleichsweise ruhig, kann den Druck jedoch stärker auf die Zungenmitte verlagern.",
+        "Auch Größe und Dicke müssen zum Pferdemaul passen; zu dicke Gebisse können ebenso wie zu dünne Beschwerden verursachen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welches Gebiss liegt am ruhigsten im Maul",
+      "topic": "Welches Gebiss liegt am ruhigsten im Maul?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gebisse-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welches Gebiss liegt am ruhigsten im Maul?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Sprenger – FAQ Pferdesport",
+        "source_url": "https://www.sprenger.de/pages/faq-pferdesport",
+        "statement": "Gebisse mit festen Ringen wie Olivenkopftrensen können ruhiger im Pferdemaul liegen als frei bewegliche Wassertrensenringe.",
+        "evidence_text": "Gebisse mit festen Ringen wie Olivenkopftrensen können ruhiger im Pferdemaul liegen als frei bewegliche Wassertrensenringe.",
+        "evidence_text_sha256": "6e05236c35f57106a3d4cdd0e6e3154b9d2a94a23b7d30ae22f3ec8167a30b8f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Sprenger – FAQ Pferdesport",
+        "source_url": "https://www.sprenger.de/pages/faq-pferdesport",
+        "statement": "Eine starre Stange liegt in der Mundhöhle vergleichsweise ruhig, kann den Druck jedoch stärker auf die Zungenmitte verlagern.",
+        "evidence_text": "Eine starre Stange liegt in der Mundhöhle vergleichsweise ruhig, kann den Druck jedoch stärker auf die Zungenmitte verlagern.",
+        "evidence_text_sha256": "0b3a9e93c439ed916aed92326e67b3bcc7fb9b5761db0a1bdd0fdac6f3b62d10",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Sprenger – FAQ Pferdesport",
+        "source_url": "https://www.sprenger.de/pages/faq-pferdesport",
+        "statement": "Auch Größe und Dicke müssen zum Pferdemaul passen; zu dicke Gebisse können ebenso wie zu dünne Beschwerden verursachen.",
+        "evidence_text": "Auch Größe und Dicke müssen zum Pferdemaul passen; zu dicke Gebisse können ebenso wie zu dünne Beschwerden verursachen.",
+        "evidence_text_sha256": "02fad5622195583de14b78f521588649277b3893a09bd1fa945a7b98fd6339f2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/gebisse-faq/",
+        "anchor": "FAQ zu gebisse",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/gebisse-beratung/",
+        "anchor": "Weitere Informationen zum Thema",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-pflege/",
+        "anchor": "Vertiefende Hinweise",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "gebisse-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "gebisse",
+      "Welches Gebiss liegt",
+      "Pferd",
+      "Praxis"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die praktische Übersicht stellt verschiedene Voraussetzungen und Kontrollen verständlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
