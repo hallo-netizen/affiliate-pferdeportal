@@ -1,0 +1,7 @@
+{
+  "schema": "HOBBY_DEPOT_EBAY_CATALOG_V1",
+  "status": "PORTING_EMPTY_FAIL_CLOSED",
+  "portal": "Hobby Depot",
+  "source": "TO_BE_GENERATED_FROM_HOBBYRAUSCH_CURRENT_CATEGORY_STRUCTURE",
+  "note": "Horse-specific catalog intentionally not copied."
+}

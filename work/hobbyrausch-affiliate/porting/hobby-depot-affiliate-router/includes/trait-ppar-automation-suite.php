@@ -1,0 +1,4546 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Providerunabhängiger Automatisierungskern.
+ *
+ * - eine Providerquelle je Auftrag, kleine wiederaufnehmbare Arbeitspakete,
+ * - Awin: Programmdaten, Offers und Enhanced-/CSV-Produktfeed,
+ * - ADCELL: API v2 accepted+active+programId-Allowlist → CSV/Banner/Deeplink, paketweise und fail-closed,
+ * - statische Creatives nur über offiziell dokumentierte Provider-API oder maschinenlesbaren Feed,
+ * - many-to-many Zielkanten gegen den eingebetteten realen Portalbaum,
+ * - automatische Slotvorschläge aus Typ und Abmessungen,
+ * - fail-closed Materialisierung in bestehende, zunächst inaktive Kampagnen,
+ * - keine Änderung an Design, HivePress oder anderen Plugins.
+ */
+trait PPAR_Automation_Suite_Trait {
+    private function automation_edges_table() {
+        global $wpdb;
+        return $wpdb->prefix . 'ppar_target_edges';
+    }
+
+    private function automation_runs_table() {
+        global $wpdb;
+        return $wpdb->prefix . 'ppar_automation_runs';
+    }
+
+    private function automation_jobs_table() {
+        global $wpdb;
+        return $wpdb->prefix . 'ppar_automation_jobs';
+    }
+
+    public function maybe_install_automation_schema() {
+        $installed = (string) get_option(self::OPTION_AUTOMATION_SCHEMA_VERSION, '0');
+        if ($installed === self::AUTOMATION_SCHEMA_VERSION) {
+            return;
+        }
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        global $wpdb;
+        $charset = $wpdb->get_charset_collate();
+        $edges = $this->automation_edges_table();
+        $runs = $this->automation_runs_table();
+        $jobs = $this->automation_jobs_table();
+        dbDelta("CREATE TABLE {$edges} (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            provider varchar(60) NOT NULL,
+            partner_external_id varchar(191) NOT NULL DEFAULT '',
+            asset_identity_hash char(64) NOT NULL,
+            target_type varchar(30) NOT NULL,
+            target_slug varchar(191) NOT NULL,
+            target_path text NOT NULL,
+            score int(10) unsigned NOT NULL DEFAULT 0,
+            edge_status varchar(30) NOT NULL DEFAULT 'review',
+            source varchar(60) NOT NULL DEFAULT 'automatic',
+            updated_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            PRIMARY KEY (id),
+            UNIQUE KEY asset_target (asset_identity_hash, target_type, target_slug),
+            KEY provider_partner (provider(20), partner_external_id(100)),
+            KEY target_lookup (target_type, target_slug(120), edge_status)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$runs} (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            run_uuid char(36) NOT NULL,
+            provider varchar(60) NOT NULL,
+            partner_external_id varchar(191) NOT NULL DEFAULT '',
+            operation varchar(60) NOT NULL,
+            status varchar(30) NOT NULL,
+            started_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            finished_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            imported int(10) unsigned NOT NULL DEFAULT 0,
+            updated int(10) unsigned NOT NULL DEFAULT 0,
+            unchanged int(10) unsigned NOT NULL DEFAULT 0,
+            blocked int(10) unsigned NOT NULL DEFAULT 0,
+            failed int(10) unsigned NOT NULL DEFAULT 0,
+            message text NOT NULL,
+            details longtext NULL,
+            PRIMARY KEY (id),
+            UNIQUE KEY run_uuid (run_uuid),
+            KEY provider_partner (provider(20), partner_external_id(100), started_at)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$jobs} (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            job_uuid char(36) NOT NULL,
+            run_uuid char(36) NOT NULL,
+            provider varchar(60) NOT NULL,
+            partner_external_id varchar(191) NOT NULL DEFAULT '',
+            stage varchar(30) NOT NULL DEFAULT 'programme',
+            status varchar(30) NOT NULL DEFAULT 'queued',
+            cursor_value bigint(20) unsigned NOT NULL DEFAULT 0,
+            offer_page int(10) unsigned NOT NULL DEFAULT 1,
+            retry_count int(10) unsigned NOT NULL DEFAULT 0,
+            not_before bigint(20) unsigned NOT NULL DEFAULT 0,
+            lock_token char(36) NOT NULL DEFAULT '',
+            lock_expires_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            heartbeat_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            counts longtext NULL,
+            details longtext NULL,
+            message text NOT NULL,
+            created_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            updated_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            finished_at bigint(20) unsigned NOT NULL DEFAULT 0,
+            PRIMARY KEY (id),
+            UNIQUE KEY job_uuid (job_uuid),
+            KEY queue_lookup (status, not_before, id),
+            KEY partner_open (provider(20), partner_external_id(100), status)
+        ) {$charset};");
+        update_option(self::OPTION_AUTOMATION_SCHEMA_VERSION, self::AUTOMATION_SCHEMA_VERSION, false);
+    }
+
+    public static function automation_settings_defaults() {
+        return array(
+            'enabled' => true,
+            'schedule' => 'ppar_two_weeks',
+            'executor' => 'wp_cron',
+            'batch_size' => 500,
+            'time_budget' => 20,
+            'request_timeout' => 600,
+        );
+    }
+
+    private function automation_settings() {
+        $saved = get_option(self::OPTION_AUTOMATION_SETTINGS, array());
+        $saved = is_array($saved) ? $saved : array();
+        $merged = wp_parse_args($saved, self::automation_settings_defaults());
+        return array(
+            'enabled' => !empty($merged['enabled']),
+            'schedule' => in_array((string) $merged['schedule'], array('ppar_two_weeks','ppar_three_weeks'), true) ? (string) $merged['schedule'] : 'ppar_two_weeks',
+            'executor' => in_array((string) $merged['executor'], array('server_cron','wp_cron'), true) ? (string) $merged['executor'] : 'wp_cron',
+            'batch_size' => max(100, min(1000, absint($merged['batch_size']))),
+            'time_budget' => max(10, min(25, absint($merged['time_budget']))),
+            'request_timeout' => max(60, min(600, absint($merged['request_timeout']))),
+        );
+    }
+
+    private function automation_stop_legacy_unfiltered_otto_jobs() {
+        $this->maybe_install_automation_schema();
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $jobs = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$table} WHERE provider='awin' AND partner_external_id=%s AND stage='products' AND status IN ('queued','running','retry') ORDER BY id ASC",
+            (string) absint(self::OTTO_AWIN_ADVERTISER_ID)
+        ), ARRAY_A);
+        $stopped = 0;
+        foreach ((array) $jobs as $job) {
+            if (!is_array($job)) {
+                continue;
+            }
+            $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+            if (sanitize_key((string) ($details['feed_scope'] ?? '')) === 'portal_filtered') {
+                continue;
+            }
+            $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
+            $this->automation_fail_job(
+                $job,
+                new WP_Error(
+                    'otto_product_feed_unfiltered',
+                    'Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.'
+                ),
+                $counts,
+                $details
+            );
+            $stopped++;
+        }
+        return $stopped;
+    }
+
+    private function automation_cleanup_legacy_unfiltered_otto_imports() {
+        $this->maybe_install_automation_schema();
+        if (method_exists($this, 'maybe_install_creative_library_schema')) {
+            $this->maybe_install_creative_library_schema();
+        }
+        if (method_exists($this, 'maybe_install_output_objects_schema')) {
+            $this->maybe_install_output_objects_schema();
+        }
+        global $wpdb;
+        $runs_table = $this->automation_runs_table();
+        $library_table = $this->creative_library_table();
+        $edges_table = $this->automation_edges_table();
+        $output_table = method_exists($this, 'output_objects_table') ? $this->output_objects_table() : '';
+        $partner_id = (string) absint(self::OTTO_AWIN_ADVERTISER_ID);
+        $previous = get_option('ppar_otto_legacy_cleanup_v6728', array());
+        $previous = is_array($previous) ? $previous : array();
+        $already_cleaned = array_fill_keys(array_values(array_filter((array) ($previous['cleaned_run_uuids'] ?? array()), 'is_string')), true);
+        $summary = array(
+            'status'=>'no_candidate',
+            'candidate_runs'=>0,
+            'cleaned_runs'=>0,
+            'already_cleaned_runs'=>0,
+            'deleted_products'=>0,
+            'deleted_edges'=>0,
+            'blocked_output_objects'=>0,
+            'blocked_runs'=>array(),
+            'cleaned_run_uuids'=>array_keys($already_cleaned),
+            'checked_at'=>time(),
+        );
+
+        // The terminal run row is the durable provenance authority. Do not depend
+        // on the transient queue row still being present or retaining one exact stage.
+        $runs = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$runs_table} WHERE provider='awin' AND partner_external_id=%s AND operation='queued_partner_sync' AND status='failed' AND message LIKE %s ORDER BY id ASC",
+            $partner_id,
+            'Alter/ungefilterter OTTO-Vollfeed%'
+        ), ARRAY_A);
+        foreach ((array) $runs as $run) {
+            if (!is_array($run)) { continue; }
+            $run_uuid = substr(sanitize_text_field((string) ($run['run_uuid'] ?? '')), 0, 36);
+            if (!preg_match('/^[a-f0-9-]{36}$/i', $run_uuid)) {
+                $summary['blocked_runs'][] = 'invalid-run-uuid';
+                continue;
+            }
+            $details = $this->automation_decode_job_json($run['details'] ?? '', array());
+            if (sanitize_key((string) ($details['feed_scope'] ?? '')) === 'portal_filtered') {
+                continue;
+            }
+            $summary['candidate_runs']++;
+            if (isset($already_cleaned[$run_uuid])) {
+                $summary['already_cleaned_runs']++;
+                continue;
+            }
+            $started_at = absint($run['started_at'] ?? 0);
+            $finished_at = absint($run['finished_at'] ?? 0);
+            $imported = absint($run['imported'] ?? 0);
+            if ($started_at <= 0 || $finished_at < $started_at || $imported <= 0 || absint($run['updated'] ?? 0) !== 0) {
+                $summary['blocked_runs'][] = $run_uuid . ':run-provenance';
+                continue;
+            }
+
+            // New rows created by this failed run are distinguishable from older
+            // unchanged rows because first_seen is immutable across upserts.
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$library_table} WHERE provider='awin' AND partner_external_id=%s AND source_kind='product' AND last_complete_run=%s AND first_seen>=%d AND first_seen<=%d ORDER BY id ASC",
+                $partner_id,
+                $run_uuid,
+                $started_at,
+                $finished_at
+            ), ARRAY_A);
+            $row_count = count((array) $rows);
+            if ($row_count !== $imported) {
+                $summary['blocked_runs'][] = $run_uuid . ':exact-import-count-mismatch:' . $row_count . '/' . $imported;
+                continue;
+            }
+
+            // Full preflight before the first destructive write: a malformed row
+            // can never leave a partially cleaned run.
+            $identities = array();
+            foreach ((array) $rows as $row) {
+                if (!is_array($row) || absint($row['id'] ?? 0) <= 0) {
+                    $summary['blocked_runs'][] = $run_uuid . ':row-invalid';
+                    continue 2;
+                }
+                $identity_hash = strtolower(sanitize_text_field((string) ($row['identity_hash'] ?? '')));
+                if (!preg_match('/^[a-f0-9]{64}$/', $identity_hash)) {
+                    $summary['blocked_runs'][] = $run_uuid . ':identity-invalid';
+                    continue 2;
+                }
+                $identities[absint($row['id'])] = $identity_hash;
+            }
+
+            foreach ((array) $rows as $row) {
+                $row_id = absint($row['id']);
+                $identity_hash = (string) $identities[$row_id];
+                if ($output_table !== '') {
+                    $objects = $wpdb->get_results($wpdb->prepare(
+                        "SELECT * FROM {$output_table} WHERE provider='awin' AND partner_external_id=%s AND creative_identity_hash=%s",
+                        $partner_id,
+                        $identity_hash
+                    ), ARRAY_A);
+                    foreach ((array) $objects as $object) {
+                        if (!is_array($object) || absint($object['id'] ?? 0) <= 0) { continue; }
+                        if (method_exists($this, 'output_deactivate_materialized_object')) {
+                            $this->output_deactivate_materialized_object($object, 'Ungültiger OTTO-Vollfeed-Altimport wurde sicher deaktiviert.');
+                        }
+                        $changed = $wpdb->update($output_table, array(
+                            'status'=>'blocked_source',
+                            'decision_source'=>'legacy_unfiltered_otto_cleanup',
+                            'decision_reason'=>'Quellprodukt gehörte ausschließlich zu einem terminal fehlgeschlagenen ungefilterten OTTO-Lauf.',
+                            'updated_at'=>time(),
+                        ), array('id'=>absint($object['id'])));
+                        if ($changed !== false) {
+                            $summary['blocked_output_objects']++;
+                        }
+                    }
+                }
+                $edge_deleted = $wpdb->query($wpdb->prepare(
+                    "DELETE FROM {$edges_table} WHERE provider='awin' AND partner_external_id=%s AND asset_identity_hash=%s",
+                    $partner_id,
+                    $identity_hash
+                ));
+                if ($edge_deleted !== false) { $summary['deleted_edges'] += absint($edge_deleted); }
+                $deleted = $wpdb->delete($library_table, array(
+                    'id'=>$row_id,
+                    'provider'=>'awin',
+                    'partner_external_id'=>$partner_id,
+                    'source_kind'=>'product',
+                    'last_complete_run'=>$run_uuid,
+                    'first_seen'=>absint($row['first_seen'] ?? 0),
+                ));
+                if ($deleted === false) {
+                    $summary['blocked_runs'][] = $run_uuid . ':delete-failed:' . $row_id;
+                    continue 2;
+                }
+                $summary['deleted_products'] += absint($deleted);
+            }
+            $summary['cleaned_runs']++;
+            $summary['cleaned_run_uuids'][] = $run_uuid;
+            $already_cleaned[$run_uuid] = true;
+        }
+        $summary['cleaned_run_uuids'] = array_values(array_unique($summary['cleaned_run_uuids']));
+        if ($summary['blocked_runs']) {
+            $summary['status'] = 'blocked';
+        } elseif ($summary['cleaned_runs'] > 0) {
+            $summary['status'] = 'pass';
+        } elseif ($summary['already_cleaned_runs'] > 0) {
+            $summary['status'] = 'already_cleaned';
+        }
+        update_option('ppar_otto_legacy_cleanup_v6728', $summary, false);
+        return $summary;
+    }
+
+    public function maybe_apply_automation_safety_upgrade() {
+        $target = '4.1.3';
+        if ((string) get_option(self::OPTION_AUTOMATION_SAFETY_VERSION, '') === $target) {
+            return;
+        }
+        $stopped_unfiltered_otto = $this->automation_stop_legacy_unfiltered_otto_jobs();
+        $cleanup = $this->automation_cleanup_legacy_unfiltered_otto_imports();
+        $settings = $this->automation_settings();
+        if ($stopped_unfiltered_otto > 0 || absint($cleanup['candidate_runs'] ?? 0) > 0) {
+            $settings['enabled'] = false;
+            $settings['executor'] = 'server_cron';
+            update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
+            if (function_exists('wp_clear_scheduled_hook')) {
+                wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+                wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+            }
+        }
+        $settings['batch_size'] = min(500, absint($settings['batch_size']));
+        $settings['time_budget'] = min(20, absint($settings['time_budget']));
+        $settings['request_timeout'] = 600;
+        update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
+        update_option(self::OPTION_AUTOMATION_SAFETY_VERSION, $target, false);
+    }
+
+
+    public function maybe_upgrade_background_schedule_v67264() {
+        $key = 'ppar_background_schedule_upgrade_v67264';
+        if ((string)get_option($key,'') === 'done') { return; }
+        $settings = get_option(self::OPTION_AUTOMATION_SETTINGS, array());
+        $settings = is_array($settings) ? wp_parse_args($settings, self::automation_settings_defaults()) : self::automation_settings_defaults();
+        $cleanup = get_option('ppar_otto_legacy_cleanup_v6728', array());
+        $cleanup = is_array($cleanup) ? $cleanup : array();
+        $blocked = !empty($cleanup['blocked_runs']);
+        $settings['schedule'] = 'ppar_two_weeks';
+        $settings['executor'] = 'wp_cron';
+        if (!$blocked) { $settings['enabled'] = true; }
+        update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
+        update_option($key, 'done', false);
+        $this->reschedule_automation_cron(true);
+    }
+
+    public function automation_cron_schedules($schedules) {
+        if (!isset($schedules['ppar_five_minutes'])) {
+            $schedules['ppar_five_minutes'] = array('interval'=>300, 'display'=>'Alle fünf Minuten');
+        }
+        $day = defined('DAY_IN_SECONDS') ? DAY_IN_SECONDS : 86400;
+        $schedules['ppar_two_weeks'] = array('interval'=>14*$day, 'display'=>'Alle 2 Wochen');
+        $schedules['ppar_three_weeks'] = array('interval'=>21*$day, 'display'=>'Alle 3 Wochen');
+        return $schedules;
+    }
+
+    public function ensure_automation_schedule() {
+        $settings = $this->automation_settings();
+        $dispatch = wp_get_schedule(self::AUTOMATION_CRON_HOOK);
+        $worker = wp_get_schedule(self::AUTOMATION_WORKER_HOOK);
+        $use_wp_cron = !empty($settings['enabled']) && $settings['executor'] === 'wp_cron';
+        if (!$use_wp_cron) {
+            if ($dispatch) {
+                wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+            }
+            if ($worker) {
+                wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+            }
+            return;
+        }
+        if ($dispatch !== $settings['schedule']) {
+            wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+            wp_schedule_event(time() + 300, $settings['schedule'], self::AUTOMATION_CRON_HOOK);
+        }
+        if ($worker !== 'ppar_five_minutes') {
+            wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+            wp_schedule_event(time() + 300, 'ppar_five_minutes', self::AUTOMATION_WORKER_HOOK);
+        }
+        $this->automation_maybe_kick_due_wp_cron();
+    }
+
+    private function automation_maybe_kick_due_wp_cron() {
+        if ((defined('DOING_CRON') && DOING_CRON)
+            || !function_exists('wp_next_scheduled')
+            || !function_exists('spawn_cron')
+            || !$this->automation_has_open_jobs()) {
+            return false;
+        }
+        $next_worker = wp_next_scheduled(self::AUTOMATION_WORKER_HOOK);
+        if ($next_worker === false || absint($next_worker) > time()) {
+            return false;
+        }
+        return (bool) spawn_cron();
+    }
+
+    public function reschedule_automation_cron($force = false) {
+        if ($force) {
+            wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+            wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+        }
+        $this->ensure_automation_schedule();
+    }
+
+    public function handle_automation_save_settings() {
+        if (!current_user_can('manage_options')) {
+            wp_die('Keine Berechtigung.');
+        }
+        check_admin_referer('ppar_automation_save_settings', 'ppar_automation_settings_nonce');
+        $raw = isset($_POST['ppar_automation']) && is_array($_POST['ppar_automation']) ? wp_unslash($_POST['ppar_automation']) : array();
+        $settings = array(
+            'enabled' => !empty($raw['enabled']),
+            'schedule' => in_array((string) ($raw['schedule'] ?? ''), array('ppar_two_weeks','ppar_three_weeks'), true) ? (string) $raw['schedule'] : 'ppar_two_weeks',
+            'executor' => in_array((string) ($raw['executor'] ?? ''), array('server_cron','wp_cron'), true) ? (string) $raw['executor'] : 'wp_cron',
+            'batch_size' => max(100, min(1000, absint($raw['batch_size'] ?? 500))),
+            'time_budget' => max(10, min(25, absint($raw['time_budget'] ?? 20))),
+            'request_timeout' => max(60, min(600, absint($raw['request_timeout'] ?? 600))),
+        );
+        update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
+        $this->reschedule_automation_cron(true);
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-automation','ppar_auto'=>'settings_saved','ppar_message'=>rawurlencode('Automatisierungseinstellungen gespeichert.')), admin_url('admin.php')));
+        exit;
+    }
+
+    private function automation_scheduled_sources() {
+        $sources = array();
+        $awin = $this->network_settings('awin');
+        if (!empty($awin['enabled'])) {
+            // Explicit programme approval is the scheduling truth. A Partner-
+            // Intake snapshot is produced by the job itself and must never be
+            // a bootstrap prerequisite for a newly approved advertiser.
+            $allowed_awin_ids = method_exists($this, 'awin_programme_gate_allowed_advertiser_ids')
+                ? $this->awin_programme_gate_allowed_advertiser_ids()
+                : array();
+            foreach ((array) $allowed_awin_ids as $advertiser_id) {
+                $advertiser_id = absint($advertiser_id);
+                if ($advertiser_id <= 0 || !$this->awin_programme_gate_is_allowed($advertiser_id)) {
+                    continue;
+                }
+                $sources[] = array(
+                    'key' => 'awin:' . $advertiser_id,
+                    'provider' => 'awin',
+                    'partner_external_id' => (string) $advertiser_id,
+                );
+            }
+        }
+        $adcell = $this->network_settings('adcell');
+        if (!empty($adcell['enabled'])) {
+            $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
+            if (!is_wp_error($programmes)) {
+                foreach ((array) $programmes as $program_id => $programme) {
+                    $program_id = absint($program_id ?: ($programme['id'] ?? 0));
+                    if ($program_id <= 0) { continue; }
+                    $sources[] = array(
+                        'key' => 'adcell:' . $program_id,
+                        'provider' => 'adcell',
+                        'partner_external_id' => (string) $program_id,
+                    );
+                }
+            }
+        }
+        $sources = apply_filters('ppar_affiliate_automation_scheduled_sources', $sources, $this->provider_registry(), self::PROVIDER_CONTRACT_VERSION);
+        $sources = array_values(array_filter((array) $sources, function ($source) {
+            if (!is_array($source)) { return false; }
+            $provider = sanitize_key((string) ($source['provider'] ?? ''));
+            if ($provider === '' || !$this->provider_exists($provider) || !$this->provider_supports($provider, 'automation') || trim((string) ($source['partner_external_id'] ?? '')) === '') { return false; }
+            if (method_exists($this, 'provider_channel_pause_gate')) {
+                $channel_gate = $this->provider_channel_pause_gate($provider);
+                if (is_wp_error($channel_gate)) { return false; }
+            }
+            return true;
+        }));
+        usort($sources, static function ($a, $b) {
+            return strcmp((string) ($a['key'] ?? ''), (string) ($b['key'] ?? ''));
+        });
+        return $sources;
+    }
+
+    private function automation_scheduled_source_batch($sources, $cursor) {
+        $sources = array_values(array_filter((array) $sources, function ($source) {
+            if (!is_array($source)) { return false; }
+            $provider = sanitize_key((string) ($source['provider'] ?? ''));
+            return $provider !== ''
+                && $this->provider_exists($provider)
+                && $this->provider_supports($provider, 'automation')
+                && trim((string) ($source['partner_external_id'] ?? '')) !== '';
+        }));
+        if (!$sources) {
+            return array('source'=>array(), 'next_cursor'=>0, 'total'=>0);
+        }
+        $total = count($sources);
+        $cursor = absint($cursor) % $total;
+        return array(
+            'source'=>$sources[$cursor],
+            'next_cursor'=>($cursor + 1) % $total,
+            'total'=>$total,
+        );
+    }
+
+    private function automation_has_open_jobs($provider = '') {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $provider = sanitize_key((string) $provider);
+        if ($provider !== '') {
+            return (bool) $wpdb->get_var($wpdb->prepare(
+                "SELECT id FROM {$table} WHERE provider=%s AND status IN ('queued','running','retry') LIMIT 1",
+                $provider
+            ));
+        }
+        return (bool) $wpdb->get_var("SELECT id FROM {$table} WHERE status IN ('queued','running','retry') LIMIT 1");
+    }
+
+    private function automation_has_due_jobs($provider = '') {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $provider = sanitize_key((string) $provider);
+        $now = time();
+        if ($provider !== '') {
+            return (bool) $wpdb->get_var($wpdb->prepare(
+                "SELECT id FROM {$table} WHERE provider=%s AND ((status IN ('queued','retry') AND not_before<=%d AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d)) LIMIT 1",
+                $provider, $now, $now, $now
+            ));
+        }
+        return (bool) $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$table} WHERE ((status IN ('queued','retry') AND not_before<=%d AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d)) LIMIT 1",
+            $now, $now, $now
+        ));
+    }
+
+    private function automation_next_due_at($provider = '') {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $provider = sanitize_key((string) $provider);
+        if ($provider !== '') {
+            return absint($wpdb->get_var($wpdb->prepare(
+                "SELECT MIN(not_before) FROM {$table} WHERE provider=%s AND status IN ('queued','retry')",
+                $provider
+            )));
+        }
+        return absint($wpdb->get_var("SELECT MIN(not_before) FROM {$table} WHERE status IN ('queued','retry')"));
+    }
+
+    private function automation_has_pending_adcell_assets() {
+        if (!method_exists($this, 'creative_library_table')) {
+            return false;
+        }
+        global $wpdb;
+        $table = $this->creative_library_table();
+        return (bool) $wpdb->get_var(
+            "SELECT id FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') LIMIT 1"
+        );
+    }
+
+    private function automation_verify_adcell_asset_batch($limit = 5) {
+        if (!method_exists($this, 'creative_library_table') || !method_exists($this, 'creative_library_verify_asset_row')) {
+            return 0;
+        }
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $limit = max(1, min(10, absint($limit)));
+        $pending_sql = "image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')";
+        $rows = $wpdb->get_results(
+            "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type='banner' AND {$pending_sql} ORDER BY id ASC LIMIT {$limit}",
+            ARRAY_A
+        );
+        $free_slots = max(0, $limit - count((array)$rows));
+        if ($free_slots > 0) {
+            $product_rows = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type='product' AND {$pending_sql} ORDER BY id ASC LIMIT %d",
+                    $free_slots
+                ),
+                ARRAY_A
+            );
+            $rows = array_merge((array)$rows, (array)$product_rows);
+        }
+        $processed = 0;
+        foreach ((array) $rows as $row) {
+            $this->creative_library_verify_asset_row($row, false, true);
+            $processed++;
+        }
+        return $processed;
+    }
+
+    private function automation_adcell_self_drive_secret() {
+        return hash('sha256', (string) wp_salt('auth') . '|' . (string) home_url('/') . '|adcell-self-drive-v1');
+    }
+
+    private function automation_adcell_self_drive_signature($expires_at, $nonce) {
+        return hash_hmac(
+            'sha256',
+            absint($expires_at) . '|' . sanitize_text_field((string) $nonce),
+            $this->automation_adcell_self_drive_secret()
+        );
+    }
+
+    private function automation_validate_adcell_self_drive_request($expires_at, $nonce, $signature) {
+        $expires_at = absint($expires_at);
+        $nonce = sanitize_text_field((string) $nonce);
+        $signature = sanitize_text_field((string) $signature);
+        if ($expires_at < time() || $expires_at > time() + self::ADCELL_SELF_DRIVE_TOKEN_TTL + 30 || $nonce === '' || $signature === '') {
+            return false;
+        }
+        return hash_equals($this->automation_adcell_self_drive_signature($expires_at, $nonce), $signature);
+    }
+
+    private function automation_dispatch_adcell_self_drive() {
+        if (!$this->automation_has_due_jobs('adcell') && !$this->automation_has_pending_adcell_assets()) {
+            return false;
+        }
+        if (!function_exists('wp_remote_post') || !function_exists('admin_url') || !function_exists('home_url') || !function_exists('wp_parse_url')) {
+            return false;
+        }
+        try {
+            $nonce = bin2hex(random_bytes(24));
+        } catch (Throwable $error) {
+            return false;
+        }
+        $expires_at = time() + max(60, absint(self::ADCELL_SELF_DRIVE_TOKEN_TTL));
+        $endpoint = admin_url('admin-post.php');
+        $home = home_url('/');
+        $u = wp_parse_url($endpoint);
+        $h = wp_parse_url($home);
+        if (!is_array($u) || !is_array($h)) { return false; }
+        $scheme = strtolower((string) ($u['scheme'] ?? ''));
+        $host = strtolower((string) ($u['host'] ?? ''));
+        $home_scheme = strtolower((string) ($h['scheme'] ?? ''));
+        $home_host = strtolower((string) ($h['host'] ?? ''));
+        $port = absint($u['port'] ?? ($scheme === 'https' ? 443 : 80));
+        $home_port = absint($h['port'] ?? ($home_scheme === 'https' ? 443 : 80));
+        if ($scheme !== 'https' || $home_scheme !== 'https' || $host === '' || !hash_equals($home_host, $host) || $port !== $home_port) {
+            return false;
+        }
+        // Der Zielhost wurde oben bereits strikt auf dasselbe HTTPS-Scheme/Host/Port
+        // begrenzt. wp_remote_post vermeidet hier die zusaetzliche Safe-URL-DNS-
+        // Sperre, die legitime Same-Origin-Loopbacks beim Hoster verwerfen kann.
+        $response = wp_remote_post($endpoint, array(
+            'timeout'=>1,
+            'blocking'=>false,
+            'redirection'=>0,
+            'sslverify'=>apply_filters('https_local_ssl_verify', false),
+            'headers'=>array('Cache-Control'=>'no-store'),
+            'body'=>array(
+                'action'=>self::ADCELL_SELF_DRIVE_ACTION,
+                'expires_at'=>$expires_at,
+                'nonce'=>$nonce,
+                'signature'=>$this->automation_adcell_self_drive_signature($expires_at, $nonce),
+            ),
+            'user-agent'=>'Affiliate-Zentrale/' . self::VERSION . '; ' . home_url('/'),
+        ));
+        return !is_wp_error($response);
+    }
+
+    private function automation_schedule_adcell_retry_fallback() {
+        if (!$this->automation_has_open_jobs('adcell') || $this->automation_has_due_jobs('adcell')) {
+            return false;
+        }
+        $next_due = $this->automation_next_due_at('adcell');
+        if ($next_due <= time()) {
+            return false;
+        }
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            return (bool) wp_schedule_single_event($next_due, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+        return true;
+    }
+
+    private function automation_schedule_adcell_batch_worker($delay = 0) {
+        if ($this->automation_has_due_jobs('adcell') || $this->automation_has_pending_adcell_assets()) {
+            return $this->automation_dispatch_adcell_self_drive();
+        }
+        return $this->automation_schedule_adcell_retry_fallback();
+    }
+
+    private function automation_run_adcell_self_drive_iteration() {
+        if ($this->automation_has_due_jobs('adcell')) {
+            return $this->run_automation_worker(true, 'adcell');
+        }
+        if ($this->automation_has_pending_adcell_assets()) {
+            return $this->automation_verify_adcell_asset_batch(5) > 0;
+        }
+        return false;
+    }
+
+    public function run_adcell_batch_worker() {
+        $result = $this->automation_run_adcell_self_drive_iteration();
+        if ($this->automation_has_due_jobs('adcell') || $this->automation_has_pending_adcell_assets()) {
+            $this->automation_dispatch_adcell_self_drive();
+        } else {
+            $this->automation_schedule_adcell_retry_fallback();
+        }
+        return $result;
+    }
+
+    public function handle_adcell_self_drive_worker() {
+        $expires_at = absint($_POST['expires_at'] ?? 0);
+        $nonce = sanitize_text_field((string) ($_POST['nonce'] ?? ''));
+        $signature = sanitize_text_field((string) ($_POST['signature'] ?? ''));
+        if (!$this->automation_validate_adcell_self_drive_request($expires_at, $nonce, $signature)) {
+            status_header(403);
+            exit;
+        }
+        $this->automation_run_adcell_self_drive_iteration();
+        if ($this->automation_has_due_jobs('adcell') || $this->automation_has_pending_adcell_assets()) {
+            $this->automation_dispatch_adcell_self_drive();
+        } else {
+            $this->automation_schedule_adcell_retry_fallback();
+        }
+        status_header(204);
+        exit;
+    }
+
+    public function maybe_resume_adcell_batch_worker() {
+        if (!$this->automation_has_due_jobs('adcell') && !$this->automation_has_pending_adcell_assets()) {
+            return;
+        }
+        $lock_key = 'ppar_adcell_self_drive_dispatch_lock_v1';
+        if (get_transient($lock_key)) {
+            return;
+        }
+        set_transient($lock_key, 1, 30);
+
+        // Harte lokale Rettung fuer den kompletten ADCELL-Lauf: jeder faellige
+        // ADCELL-Schritt wird im aktuellen Request weitergefuehrt. Promotions
+        // bleiben durch automation_claim_next_job() priorisiert; danach folgen
+        // Reconcile/Feed/Abschluss. Damit endet der lokale Fallback nicht nach
+        // dem ersten Promotions-Schritt, wenn Same-Origin-Loopback nicht zustellt.
+        $local_steps = 0;
+        while ($local_steps < 8 && $this->automation_has_due_jobs('adcell')) {
+            $step = $this->run_automation_worker(true, 'adcell');
+            if (is_wp_error($step) || !$step) {
+                break;
+            }
+            $local_steps++;
+        }
+
+        // Eine kleine reale Bildpruefung je Request garantiert Fortschritt auch
+        // dann, wenn der asynchrone Transport beim Hoster nicht zustellt.
+        if ($this->automation_has_pending_adcell_assets()) {
+            $this->automation_verify_adcell_asset_batch(5);
+        }
+
+        if ($this->automation_has_due_jobs('adcell') || $this->automation_has_pending_adcell_assets()) {
+            if (!$this->automation_dispatch_adcell_self_drive()) {
+                $this->automation_schedule_adcell_retry_fallback();
+            }
+        } else {
+            $this->automation_schedule_adcell_retry_fallback();
+        }
+        delete_transient($lock_key);
+    }
+
+    private function automation_cycle_state() {
+        $state = get_option(self::OPTION_AUTOMATION_CYCLE, array());
+        $state = is_array($state) ? $state : array();
+        return array(
+            'remaining'=>max(0, absint($state['remaining'] ?? 0)),
+            'total'=>max(0, absint($state['total'] ?? 0)),
+            'started_at'=>max(0, absint($state['started_at'] ?? 0)),
+        );
+    }
+
+    private function automation_dispatch_due() {
+        $cycle = $this->automation_cycle_state();
+        if ($cycle['remaining'] > 0) {
+            return true;
+        }
+        $settings = $this->automation_settings();
+        $last = absint(get_option(self::OPTION_AUTOMATION_LAST_DISPATCH, 0));
+        $day = defined('DAY_IN_SECONDS') ? DAY_IN_SECONDS : 86400;
+        $interval = $settings['schedule'] === 'ppar_three_weeks' ? 21 * $day : 14 * $day;
+        return $last <= 0 || (time() - $last) >= $interval;
+    }
+
+    private function automation_dispatch_source($source, $manual = false) {
+        $source = is_array($source) ? $source : array();
+        $provider = sanitize_key((string) ($source['provider'] ?? ''));
+        $partner_id = sanitize_text_field((string) ($source['partner_external_id'] ?? ''));
+        if ($provider === '' || !$this->provider_exists($provider) || !$this->provider_supports($provider, 'automation')) {
+            return new WP_Error('automation_provider_invalid', 'Provider ist nicht als Automatisierungsquelle registriert.');
+        }
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate($provider);
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
+        }
+        if ($provider === 'awin') {
+            return $this->automation_enqueue_awin_partner(absint($partner_id));
+        }
+        if ($provider === 'adcell') {
+            return $this->automation_enqueue_adcell_program(absint($partner_id));
+        }
+        if ($provider === 'ebay' && method_exists($this, 'run_ebay_sync')) {
+            $summary = $this->run_ebay_sync((bool) $manual);
+            return is_wp_error($summary) ? $summary : array('immediate'=>true,'provider'=>'ebay','summary'=>$summary);
+        }
+        $result = apply_filters('ppar_affiliate_automation_dispatch', null, $provider, $source, (bool) $manual, self::PROVIDER_CONTRACT_VERSION);
+        return $result === null ? new WP_Error('automation_provider_adapter_missing', 'Für diesen Provider ist kein Automatisierungsadapter registriert.') : $result;
+    }
+
+    /**
+     * Refresh the official scriptable Awin product-feed list once at the start
+     * of a new automation cycle. Failures keep Last-Known-Good feed metadata;
+     * they do not erase the existing list or invent a feed.
+     */
+    /**
+     * Refresh currently joined Awin programmes before source scheduling.
+     * Existing approval records are not changed: new programmes stay pending,
+     * previously approved programmes remain schedulable only while still joined.
+     * Failed refresh keeps Last-Known-Good programme metadata.
+     */
+    private function automation_refresh_awin_programme_list() {
+        $settings = $this->network_settings('awin');
+        if (empty($settings['enabled'])) {
+            return array('status'=>'disabled','count'=>0);
+        }
+        $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
+        $token = $this->network_secret('awin', 'access_token', $settings);
+        if ($publisher_id === '' || $token === '') {
+            return array('status'=>'not_configured','count'=>0);
+        }
+
+        $safe = $this->awin_fetch_current_joined_programmes($settings);
+        if (is_wp_error($safe)) {
+            return $safe;
+        }
+        update_option(self::OPTION_NETWORK_AWIN_PROGRAMMES, $safe, false);
+        return array('status'=>'refreshed','count'=>count($safe));
+    }
+
+    private function automation_refresh_awin_feed_list() {
+        $settings = $this->network_settings('awin');
+        if (empty($settings['enabled'])) {
+            return array('status'=>'disabled','count'=>0);
+        }
+        $feed_key = $this->network_secret('awin', 'feed_api_key', $settings);
+        if ($feed_key === '') {
+            return array('status'=>'not_configured','count'=>0);
+        }
+
+        $feed_url = 'https://productdata.awin.com/datafeed/list/apikey/' . rawurlencode($feed_key);
+        $response = $this->api_response(wp_remote_get($feed_url, array(
+            'timeout'=>25,
+            'redirection'=>2,
+            'headers'=>array('Accept'=>'text/csv,text/plain'),
+            'limit_response_size'=>2097152,
+        )));
+        if (empty($response['ok']) || trim((string) ($response['body'] ?? '')) === '') {
+            return new WP_Error(
+                'awin_feed_list_refresh_failed',
+                'Awin-Feedliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.'
+            );
+        }
+
+        $feeds = $this->parse_awin_feed_list((string) $response['body']);
+        if (!$feeds) {
+            return new WP_Error(
+                'awin_feed_list_empty',
+                'Awin-Feedliste war leer; Last-Known-Good bleibt erhalten.'
+            );
+        }
+        update_option(self::OPTION_NETWORK_AWIN_FEEDS, $feeds, false);
+        return array('status'=>'refreshed','count'=>count($feeds));
+    }
+
+    public function run_scheduled_partner_sync($external_executor = false) {
+        $settings = $this->automation_settings();
+        $expected_executor = $external_executor ? 'server_cron' : 'wp_cron';
+        if (empty($settings['enabled']) || $settings['executor'] !== $expected_executor || $this->automation_has_open_jobs()) {
+            return;
+        }
+
+        $cycle = $this->automation_cycle_state();
+        $new_cycle = $cycle['remaining'] <= 0;
+        if ($new_cycle && !$this->automation_dispatch_due()) {
+            return;
+        }
+        if ($new_cycle) {
+            // Refresh joined programmes first so an explicitly allow_local
+            // advertiser can self-bootstrap without a pre-existing snapshot.
+            $programme_refresh = $this->automation_refresh_awin_programme_list();
+            if (is_wp_error($programme_refresh)) {
+                update_option('ppar_awin_programme_list_refresh_warning_v1', array(
+                    'at'=>time(),
+                    'code'=>$programme_refresh->get_error_code(),
+                    'message'=>$programme_refresh->get_error_message(),
+                ), false);
+            } else {
+                delete_option('ppar_awin_programme_list_refresh_warning_v1');
+            }
+
+            // Official productdata feed list is scriptable. Refresh it before
+            // partner snapshots for the new cycle. On failure keep LKG metadata.
+            $feed_refresh = $this->automation_refresh_awin_feed_list();
+            if (is_wp_error($feed_refresh)) {
+                update_option('ppar_awin_feed_list_refresh_warning_v1', array(
+                    'at'=>time(),
+                    'code'=>$feed_refresh->get_error_code(),
+                    'message'=>$feed_refresh->get_error_message(),
+                ), false);
+            } else {
+                delete_option('ppar_awin_feed_list_refresh_warning_v1');
+            }
+        }
+
+        $sources = $this->automation_scheduled_sources();
+        if (!$sources) {
+            update_option(self::OPTION_AUTOMATION_CURSOR, 0, false);
+            update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
+            return;
+        }
+        if ($new_cycle) {
+            $cycle = array('remaining'=>count($sources),'total'=>count($sources),'started_at'=>time());
+            update_option(self::OPTION_AUTOMATION_LAST_DISPATCH, time(), false);
+        }
+        $batch = $this->automation_scheduled_source_batch(
+            $sources,
+            absint(get_option(self::OPTION_AUTOMATION_CURSOR, 0))
+        );
+        $source = is_array($batch['source'] ?? null) ? $batch['source'] : array();
+        if (!$source) {
+            update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
+            return;
+        }
+        $provider = sanitize_key((string) ($source['provider'] ?? ''));
+        $result = $this->automation_dispatch_source($source, false);
+        if (!is_wp_error($result)) {
+            update_option(self::OPTION_AUTOMATION_CURSOR, absint($batch['next_cursor']), false);
+            $cycle['remaining'] = max(0, absint($cycle['remaining']) - 1);
+            update_option(self::OPTION_AUTOMATION_CYCLE, $cycle, false);
+            // Vollautomatik + Originalstatistik nach jedem echten Providerlauf.
+            if ($provider!=='' && method_exists($this,'partner_analytics_refresh_provider')) { $this->partner_analytics_refresh_provider($provider); }
+            if (!wp_next_scheduled(self::FULL_POOL_WORKER_HOOK)) { wp_schedule_single_event(time()+5,self::FULL_POOL_WORKER_HOOK); }
+        }
+    }
+
+    private function automation_provider_registry() {
+        $out = array();
+        foreach ($this->provider_registry() as $key => $provider) {
+            if (!$this->provider_supports($key, 'automation')) { continue; }
+            $out[$key] = array(
+                'label'=>(string) $provider['label'],
+                'specialist_slug'=>(string) ($provider['specialist_slug'] ?? ''),
+                'adapter_mode'=>in_array($key, array('awin','adcell'), true) ? 'central_queue' : ($key === 'ebay' ? 'provider_runtime' : 'adapter'),
+            );
+        }
+        return apply_filters('ppar_affiliate_automation_provider_registry', $out, self::PROVIDER_CONTRACT_VERSION);
+    }
+
+    private function automation_uuid() {
+        if (function_exists('wp_generate_uuid4')) {
+            return wp_generate_uuid4();
+        }
+        return sprintf('%08x-%04x-%04x-%04x-%012x', mt_rand(), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand());
+    }
+
+    private function automation_insert_run($run_uuid, $provider, $partner_external_id, $operation, $status, $started, $counts, $message, $details = array()) {
+        global $wpdb;
+        $wpdb->insert($this->automation_runs_table(), array(
+            'run_uuid' => sanitize_text_field($run_uuid),
+            'provider' => sanitize_key($provider),
+            'partner_external_id' => sanitize_text_field($partner_external_id),
+            'operation' => sanitize_key($operation),
+            'status' => sanitize_key($status),
+            'started_at' => absint($started),
+            'finished_at' => time(),
+            'imported' => absint($counts['imported'] ?? 0),
+            'updated' => absint($counts['updated'] ?? 0),
+            'unchanged' => absint($counts['unchanged'] ?? 0),
+            'blocked' => absint($counts['blocked'] ?? 0),
+            'failed' => absint($counts['failed'] ?? 0),
+            'message' => sanitize_text_field($message),
+            'details' => wp_json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+        ));
+    }
+
+    private function automation_empty_counts() {
+        return array('imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
+    }
+
+    private function automation_decode_job_json($value, $fallback = array()) {
+        $decoded = json_decode((string) $value, true);
+        return is_array($decoded) ? $decoded : $fallback;
+    }
+
+    private function automation_enqueue_awin_partner($advertiser_id) {
+        $advertiser_id = absint($advertiser_id);
+        if ($advertiser_id <= 0) {
+            return new WP_Error('awin_partner_invalid', 'Ungültige Awin-Advertiser-ID.');
+        }
+        $gate = $this->awin_programme_gate_validate($advertiser_id);
+        if (is_wp_error($gate)) {
+            return $gate;
+        }
+        if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+            $feed_gate = $this->automation_otto_filtered_feed_binding($advertiser_id);
+            if (is_wp_error($feed_gate)) {
+                return $feed_gate;
+            }
+        }
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$table} WHERE provider='awin' AND partner_external_id=%s AND status IN ('queued','running','retry') LIMIT 1",
+            (string) $advertiser_id
+        ));
+        if ($existing) {
+            return new WP_Error('awin_job_exists', 'Für diesen Partner ist bereits ein Lauf vorgemerkt.');
+        }
+        $now = time();
+        $job_uuid = $this->automation_uuid();
+        $run_uuid = $this->automation_uuid();
+        $ok = $wpdb->insert($table, array(
+            'job_uuid'=>$job_uuid,
+            'run_uuid'=>$run_uuid,
+            'provider'=>'awin',
+            'partner_external_id'=>(string) $advertiser_id,
+            'stage'=>'programme',
+            'status'=>'queued',
+            'cursor_value'=>0,
+            'offer_page'=>1,
+            'retry_count'=>0,
+            'not_before'=>$now,
+            'lock_token'=>'',
+            'lock_expires_at'=>0,
+            'heartbeat_at'=>0,
+            'counts'=>wp_json_encode($this->automation_empty_counts()),
+            'details'=>wp_json_encode(array('feed'=>'pending','feed_complete'=>false,'offers_complete'=>false,'static_creatives'=>'not_bound_real_source_required')),
+            'message'=>'Partnerlauf vorgemerkt.',
+            'created_at'=>$now,
+            'updated_at'=>$now,
+            'finished_at'=>0,
+        ));
+        if (!$ok) {
+            return new WP_Error('awin_job_insert_failed', 'Partnerlauf konnte nicht vorgemerkt werden.');
+        }
+        return array('job_id'=>absint($wpdb->insert_id), 'job_uuid'=>$job_uuid, 'run_uuid'=>$run_uuid);
+    }
+
+    private function automation_enqueue_adcell_program($program_id) {
+        $program_id = absint($program_id);
+        if ($program_id <= 0) {
+            return new WP_Error('adcell_program_invalid', 'Ungültige ADCELL-programId.');
+        }
+        $programme = $this->adcell_api_v2_programme($program_id);
+        if (is_wp_error($programme)) { return $programme; }
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$table} WHERE provider='adcell' AND partner_external_id=%s AND status IN ('queued','running','retry') LIMIT 1",
+            (string) $program_id
+        ));
+        if ($existing) {
+            return new WP_Error('adcell_job_exists', 'Für dieses ADCELL-Programm ist bereits ein Lauf vorgemerkt.');
+        }
+        $now = time();
+        $job_uuid = $this->automation_uuid();
+        $run_uuid = $this->automation_uuid();
+        $ok = $wpdb->insert($table, array(
+            'job_uuid'=>$job_uuid,
+            'run_uuid'=>$run_uuid,
+            'provider'=>'adcell',
+            'partner_external_id'=>(string) $program_id,
+            'stage'=>'promotions',
+            'status'=>'queued',
+            'cursor_value'=>0,
+            'offer_page'=>1,
+            'retry_count'=>0,
+            'not_before'=>$now,
+            'lock_token'=>'',
+            'lock_expires_at'=>0,
+            'heartbeat_at'=>0,
+            'counts'=>wp_json_encode($this->automation_empty_counts()),
+            'details'=>wp_json_encode(array(
+                'program_id'=>$program_id,
+                'partner_name'=>sanitize_text_field((string) ($programme['name'] ?? ('ADCELL ' . $program_id))),
+                'csv_available'=>false,
+                'feed_complete'=>false,
+                'banner_complete'=>false,
+                'deeplink_complete'=>false,
+            )),
+            'message'=>'ADCELL-Programmlauf vorgemerkt.',
+            'created_at'=>$now,
+            'updated_at'=>$now,
+            'finished_at'=>0,
+        ));
+        if (!$ok) {
+            return new WP_Error('adcell_job_insert_failed', 'ADCELL-Programmlauf konnte nicht vorgemerkt werden.');
+        }
+        return array('job_id'=>absint($wpdb->insert_id), 'job_uuid'=>$job_uuid, 'run_uuid'=>$run_uuid);
+    }
+
+    /**
+     * Ein gebuendelter Import-Read fuer bereits bekannte ADCELL-Banner.
+     * Kein Frontendpfad und kein N+1: genau eine Abfrage je Programmlauf.
+     */
+    private function automation_adcell_existing_banner_destinations($program_id) {
+        global $wpdb;
+        $program_id = absint($program_id);
+        if ($program_id <= 0 || !method_exists($this, 'creative_library_table')) {
+            return array();
+        }
+        $table = $this->creative_library_table();
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT external_id,destination_url,tracking_url,payload FROM {$table} WHERE provider='adcell' AND partner_external_id=%s AND creative_type='banner'",
+            (string) $program_id
+        ), ARRAY_A);
+        $out = array();
+        foreach ((array) $rows as $row) {
+            $external_id = sanitize_text_field((string) ($row['external_id'] ?? ''));
+            if ($external_id !== '') {
+                $out[$external_id] = $row;
+            }
+        }
+        return $out;
+    }
+
+    private function automation_adcell_banner_rows($program_id, $program_name, $run_uuid) {
+        $items = $this->adcell_api_v2_promotion_items($program_id, 'banner');
+        if (is_wp_error($items)) { return $items; }
+
+        // Basisvertrag: Werbemittelkategorien werden einmal pro Programmlauf
+        // ueber den dafuer vorgesehenen ADCELL-Endpunkt geladen. Die Bannerliste
+        // liefert promotionCategoryId, aber der Kategoriename darf nicht geraten
+        // oder aus einem selbst gebauten Titel abgeleitet werden.
+        $promotion_categories = $this->adcell_api_v2_promotion_categories($program_id);
+        if (is_wp_error($promotion_categories)) {
+            return new WP_Error(
+                'adcell_promotion_categories_unavailable',
+                'ADCELL-Werbemittelkategorien konnten nicht belastbar geladen werden; Bannerimport wird fail-closed abgebrochen.'
+            );
+        }
+        $promotion_categories = is_array($promotion_categories) ? $promotion_categories : array();
+
+        // URL-Konzept: vorhandene Ziel-URLs einmal gebuendelt laden. Ein
+        // unveraenderter Banner erzeugt danach keinen weiteren Ziel-URL-Abruf.
+        $existing_destinations = $this->automation_adcell_existing_banner_destinations($program_id);
+        $rows = array();
+        $blocked = 0;
+        foreach ((array) $items as $item) {
+            if (!is_array($item) || absint($item['programId'] ?? 0) !== absint($program_id)) { $blocked++; continue; }
+            $promotion_id = absint($item['promotionId'] ?? 0);
+            $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
+            $image = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['bannerUrl'] ?? ''));
+            if ($promotion_id <= 0 || $click === '' || $image === '') { $blocked++; continue; }
+
+            // Provider-Rohdatensatz unverkuerzt als JSON mitfuehren. Er wird nur
+            // gespeichert, nicht direkt gerendert. Damit gehen unbekannte oder
+            // spaeter relevante ADCELL-Felder beim Import nicht mehr verloren.
+            $provider_raw_json = wp_json_encode($item, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if (!is_string($provider_raw_json) || $provider_raw_json === '') {
+                $blocked++;
+                continue;
+            }
+
+            $external_id = 'banner-' . $promotion_id;
+            $destination_url = $click;
+            $destination_source = 'tracking_checked';
+            $existing = is_array($existing_destinations[$external_id] ?? null) ? $existing_destinations[$external_id] : array();
+            $same_tracking = $existing && esc_url_raw((string) ($existing['tracking_url'] ?? '')) === $click;
+            if ($same_tracking) {
+                $existing_payload = json_decode((string) ($existing['payload'] ?? ''), true);
+                $existing_payload = is_array($existing_payload) ? $existing_payload : array();
+                $stored_source = sanitize_key((string) ($existing_payload['_destination_source'] ?? ''));
+                $stored_destination = esc_url_raw((string) ($existing['destination_url'] ?? ''));
+                if ($stored_destination !== '' && $stored_destination !== $click
+                    && in_array($stored_source, array('provider_explicit','decoded_tracking','resolved_redirect'), true)) {
+                    $destination_url = $stored_destination;
+                    $destination_source = $stored_source;
+                } elseif ($stored_source === 'tracking_checked') {
+                    $destination_url = $click;
+                    $destination_source = 'tracking_checked';
+                } else {
+                    $existing = array();
+                }
+            }
+            if (!$same_tracking || !$existing) {
+                $resolved = method_exists($this, 'creative_library_resolve_tracking_destination_import')
+                    ? $this->creative_library_resolve_tracking_destination_import($click)
+                    : array('url'=>$click,'source'=>'tracking_checked');
+                $resolved_url = esc_url_raw((string) ($resolved['url'] ?? ''));
+                $resolved_source = sanitize_key((string) ($resolved['source'] ?? 'tracking_checked'));
+                if ($resolved_url !== '') {
+                    $destination_url = $resolved_url;
+                }
+                $destination_source = in_array($resolved_source, array('decoded_tracking','resolved_redirect','tracking_checked'), true)
+                    ? $resolved_source : 'tracking_checked';
+            }
+
+            $category_id = absint($item['promotionCategoryId'] ?? 0);
+            $category_name = sanitize_text_field((string) ($item['promotionCategoryName'] ?? ''));
+            if ($category_name === '' && $category_id > 0 && isset($promotion_categories[$category_id])) {
+                $category_name = sanitize_text_field((string) $promotion_categories[$category_id]);
+            }
+
+            // Nur einen wirklich vom Provider gelieferten Namen als Bannername
+            // uebernehmen. Fehlt er, bleibt creative_title leer; die Bibliothek
+            // darf fuer die reine Anzeige einen neutralen Fallback erzeugen,
+            // dieser wird aber als provider_missing markiert und ist keine
+            // fachliche Aussage ueber das Motiv.
+            $provider_title = '';
+            $title_source = 'provider_missing';
+            foreach (array('bannerName','promotionName','title','name') as $provider_title_key) {
+                $candidate = sanitize_text_field((string) ($item[$provider_title_key] ?? ''));
+                if ($candidate !== '') {
+                    $provider_title = $candidate;
+                    $title_source = 'provider_' . sanitize_key($provider_title_key);
+                    break;
+                }
+            }
+
+            $information = sanitize_textarea_field((string)($item['information'] ?? ''));
+            $description_parts = array_filter(array($information, $category_name!=='' ? 'Werbemittelkategorie: '.$category_name : ''));
+            $tag_parts = array_filter(array('ADCELL Banner', $category_name));
+            $rows[] = array(
+                'creative_id'=>$external_id,
+                'creative_type'=>'banner',
+                'creative_title'=>$provider_title,
+                'title_source'=>$title_source,
+                'creative_description'=>sanitize_textarea_field(implode(' | ',$description_parts)),
+                'creative_tag'=>sanitize_text_field(implode(' | ',$tag_parts)),
+                'information'=>$information,
+                'promotion_category_id'=>$category_id,
+                'promotion_category_name'=>$category_name,
+                'provider_topic_id'=>$category_id > 0 ? (string)$category_id : '',
+                'provider_topic_name'=>$category_name,
+                'provider_topic_source'=>$category_name !== '' ? 'provider_promotion_category' : '',
+                'provider_raw_json'=>$provider_raw_json,
+                'provider_raw_sha256'=>hash('sha256', $provider_raw_json),
+                'image_source'=>$image,
+                'destination_url'=>$destination_url,
+                'tracking_url'=>$click,
+                '_destination_source'=>$destination_source,
+                'width'=>absint($item['width'] ?? 0),
+                'height'=>absint($item['height'] ?? 0),
+                'status'=>'active',
+                '_source_kind'=>'banner',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('rows'=>$rows,'blocked'=>$blocked);
+    }
+
+    private function automation_adcell_deeplink_rows($program_id, $program_name, $run_uuid) {
+        $items = $this->adcell_api_v2_promotion_items($program_id, 'deeplink');
+        if (is_wp_error($items)) { return $items; }
+        $rows = array();
+        $blocked = 0;
+        foreach ((array) $items as $item) {
+            if (!is_array($item) || absint($item['programId'] ?? 0) !== absint($program_id)) { $blocked++; continue; }
+            $promotion_id = absint($item['promotionId'] ?? 0);
+            $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
+            if ($promotion_id <= 0 || $click === '') { $blocked++; continue; }
+            $rows[] = array(
+                'creative_id'=>'deeplink-' . $promotion_id,
+                'creative_type'=>'text',
+                'creative_title'=>sanitize_text_field((string) $program_name . ' Deeplink ' . $promotion_id),
+                'creative_description'=>sanitize_textarea_field((string) ($item['information'] ?? '')),
+                'creative_tag'=>'ADCELL Deeplink',
+                'destination_url'=>$click,
+                'tracking_url'=>$click,
+                'status'=>'active',
+                '_source_kind'=>'deeplink',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('rows'=>$rows,'blocked'=>$blocked);
+    }
+
+    private function automation_claim_next_job($provider = '') {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $now = time();
+        $provider = sanitize_key((string) $provider);
+        if ($provider !== '') {
+            $order = $provider === 'adcell'
+                ? "CASE WHEN stage='promotions' THEN 0 WHEN stage='reconcile' THEN 1 ELSE 2 END, id ASC"
+                : "id ASC";
+            $job = $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$table} WHERE provider=%s AND ((status IN ('queued','retry') AND not_before<=%d AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d)) ORDER BY {$order} LIMIT 1",
+                $provider, $now, $now, $now
+            ), ARRAY_A);
+        } else {
+            $job = $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$table} WHERE ((status IN ('queued','retry') AND not_before<=%d AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d)) ORDER BY id ASC LIMIT 1",
+                $now, $now, $now
+            ), ARRAY_A);
+        }
+        if (!is_array($job) || empty($job['id'])) {
+            return array();
+        }
+        $token = $this->automation_uuid();
+        $updated = $wpdb->query($wpdb->prepare(
+            "UPDATE {$table} SET status='running', lock_token=%s, lock_expires_at=%d, heartbeat_at=%d, updated_at=%d WHERE id=%d AND ((status IN ('queued','retry') AND (lock_expires_at=0 OR lock_expires_at<%d)) OR (status='running' AND lock_expires_at>0 AND lock_expires_at<%d))",
+            $token, $now + 120, $now, $now, absint($job['id']), $now, $now
+        ));
+        if (!$updated) {
+            return array();
+        }
+        $job = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d AND lock_token=%s", absint($job['id']), $token), ARRAY_A);
+        return is_array($job) ? $job : array();
+    }
+
+    private function automation_job_heartbeat($job_id, $lock_token) {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $now = time();
+        $wpdb->query($wpdb->prepare(
+            "UPDATE {$table} SET heartbeat_at=%d, lock_expires_at=%d, updated_at=%d WHERE id=%d AND lock_token=%s",
+            $now, $now + 120, $now, absint($job_id), sanitize_text_field($lock_token)
+        ));
+    }
+
+    private function automation_release_job($job, $stage, $cursor, $offer_page, $counts, $details, $message, $delay = 0) {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $now = time();
+        $wpdb->update($table, array(
+            'stage'=>sanitize_key($stage),
+            'status'=>'queued',
+            'cursor_value'=>max(0, (int) $cursor),
+            'offer_page'=>max(1, absint($offer_page)),
+            'not_before'=>$now + max(0, absint($delay)),
+            'lock_token'=>'',
+            'lock_expires_at'=>0,
+            'heartbeat_at'=>$now,
+            'counts'=>wp_json_encode($counts, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'details'=>wp_json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'message'=>sanitize_text_field($message),
+            'updated_at'=>$now,
+        ), array('id'=>absint($job['id'])));
+    }
+
+    private function automation_cleanup_job_file($details) {
+        $file = isset($details['feed_file']) ? (string) $details['feed_file'] : '';
+        if ($file !== '' && is_file($file)) {
+            @unlink($file);
+        }
+    }
+
+    private function automation_fail_job($job, $error, $counts, $details) {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $retry = absint($job['retry_count'] ?? 0) + 1;
+        $message = is_wp_error($error) ? $error->get_error_message() : sanitize_text_field((string) $error);
+        $error_code = is_wp_error($error) ? sanitize_key((string) $error->get_error_code()) : '';
+        $permanent_gate_error = in_array($error_code, array(
+            'awin_partner_id_missing','awin_partner_portal_missing','awin_partner_not_approved',
+            'awin_partner_other_portal','awin_partner_test_blocked','awin_partner_excluded',
+            'awin_partner_portal_mismatch','awin_partner_not_joined_current',
+            'otto_filtered_feed_required','otto_feed_scope_unconfirmed','otto_product_feed_unfiltered',
+            'otto_relevance_contract_missing'
+        ), true);
+        $now = time();
+        if (!$permanent_gate_error && $retry <= 3) {
+            $delays = array(1=>300, 2=>900, 3=>3600);
+            $wpdb->update($table, array(
+                'status'=>'retry',
+                'retry_count'=>$retry,
+                'not_before'=>$now + $delays[$retry],
+                'lock_token'=>'',
+                'lock_expires_at'=>0,
+                'heartbeat_at'=>$now,
+                'counts'=>wp_json_encode($counts),
+                'details'=>wp_json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'message'=>sanitize_text_field('Wiederholung ' . $retry . '/3: ' . $message),
+                'updated_at'=>$now,
+            ), array('id'=>absint($job['id'])));
+            return;
+        }
+        $counts['failed'] = absint($counts['failed'] ?? 0) + 1;
+        $this->automation_cleanup_job_file($details);
+        $wpdb->update($table, array(
+            'status'=>'failed',
+            'retry_count'=>$retry,
+            'lock_token'=>'',
+            'lock_expires_at'=>0,
+            'heartbeat_at'=>$now,
+            'counts'=>wp_json_encode($counts),
+            'details'=>wp_json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'message'=>sanitize_text_field($message),
+            'updated_at'=>$now,
+            'finished_at'=>$now,
+        ), array('id'=>absint($job['id'])));
+        $this->automation_insert_run(
+            (string) $job['run_uuid'],
+            sanitize_key((string) ($job['provider'] ?? 'awin')),
+            (string) $job['partner_external_id'],
+            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_program_sync' : 'queued_partner_sync',
+            'failed',
+            absint($job['created_at'] ?? $now),
+            $counts,
+            $message,
+            $details
+        );
+    }
+
+    private function automation_complete_job($job, $counts, $details, $status, $message) {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $now = time();
+        $this->automation_cleanup_job_file($details);
+        unset($details['feed_file']);
+        $wpdb->update($table, array(
+            'stage'=>'complete',
+            'status'=>'completed',
+            'lock_token'=>'',
+            'lock_expires_at'=>0,
+            'heartbeat_at'=>$now,
+            'counts'=>wp_json_encode($counts),
+            'details'=>wp_json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'message'=>sanitize_text_field($message),
+            'updated_at'=>$now,
+            'finished_at'=>$now,
+        ), array('id'=>absint($job['id'])));
+        $this->automation_insert_run(
+            (string) $job['run_uuid'],
+            sanitize_key((string) ($job['provider'] ?? 'awin')),
+            (string) $job['partner_external_id'],
+            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_program_sync' : 'queued_partner_sync',
+            sanitize_key($status),
+            absint($job['created_at'] ?? $now),
+            $counts,
+            $message,
+            $details
+        );
+    }
+
+    private function automation_validate_awin_feed_url($url) {
+        $url = esc_url_raw((string) $url);
+        if ($url === '' || !wp_http_validate_url($url)) {
+            return new WP_Error('awin_feed_url_invalid', 'Feed enthält keine gültige Download-URL.');
+        }
+        $parts = wp_parse_url($url);
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        if ($scheme !== 'https' || !in_array($host, array('productdata.awin.com','api.awin.com'), true)) {
+            return new WP_Error('awin_feed_host_blocked', 'Feed-URL stammt nicht von einem freigegebenen Awin-Host.');
+        }
+        if ($host === 'api.awin.com') {
+            $settings = $this->network_settings('awin');
+            $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
+            $path = (string) ($parts['path'] ?? '');
+            if ($publisher_id === '' || strpos($path, '/publishers/' . $publisher_id . '/') !== 0) {
+                return new WP_Error('awin_feed_api_path_blocked', 'Awin-API-Feedpfad gehört nicht zum Publisherkonto.');
+            }
+        }
+        return $url;
+    }
+
+    private function automation_otto_filtered_feed_binding($advertiser_id) {
+        $advertiser_id = absint($advertiser_id);
+        if ($advertiser_id !== absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+            return new WP_Error('otto_partner_invalid', 'OTTO-Feedbindung wurde für einen anderen Advertiser aufgerufen.');
+        }
+        $network = $this->network_settings('awin');
+        $configured_url = trim((string) ($network['product_feed_url'] ?? ''));
+        $configured_partner_id = absint($network['product_feed_partner_id'] ?? 0);
+        $configured_scope = sanitize_key((string) ($network['product_feed_scope'] ?? ''));
+        if ($configured_url === '' || $configured_partner_id !== $advertiser_id) {
+            return new WP_Error(
+                'otto_filtered_feed_required',
+                'OTTO benötigt einen ausdrücklich gebundenen, in Awin Create-a-Feed auf Pferde-Atelier-relevante Kategorien gefilterten Produktfeed.'
+            );
+        }
+        if ($configured_scope !== 'portal_filtered') {
+            return new WP_Error(
+                'otto_feed_scope_unconfirmed',
+                'Der gebundene OTTO-Feed ist nicht als in Awin fachlich gefilterter Pferde-Atelier-Feed bestätigt.'
+            );
+        }
+        $validated = $this->automation_validate_awin_feed_url($configured_url);
+        if (is_wp_error($validated)) {
+            return $validated;
+        }
+        return array(
+            'url'=>$validated,
+            'name'=>'Gebundener gefilterter OTTO/Awin-Produktfeed',
+            'scope'=>'portal_filtered',
+        );
+    }
+
+    private function automation_select_awin_feed($snapshot) {
+        $snapshot_id = absint($snapshot['external_id'] ?? 0);
+        if ($snapshot_id <= 0) {
+            return new WP_Error('awin_feed_partner_missing', 'Partner-Snapshot enthält keine gültige Advertiser-ID.');
+        }
+        $network = $this->network_settings('awin');
+        $configured_url = trim((string) ($network['product_feed_url'] ?? ''));
+        $configured_partner_id = absint($network['product_feed_partner_id'] ?? 0);
+        $configured_scope = sanitize_key((string) ($network['product_feed_scope'] ?? ''));
+        $is_otto = $snapshot_id === absint(self::OTTO_AWIN_ADVERTISER_ID);
+
+        // OTTO is a very broad merchant. Its generic/default Awin feed must never
+        // become the Pferde-Atelier import source. The operator first creates one
+        // reusable Awin Create-a-Feed export restricted to portal-relevant
+        // categories and binds that exact export here. The local relevance gate
+        // below is a second independent safety layer, not a substitute.
+        if ($is_otto) {
+            return $this->automation_otto_filtered_feed_binding($snapshot_id);
+        }
+
+        if ($configured_url !== '' && $configured_partner_id === $snapshot_id) {
+            $validated = $this->automation_validate_awin_feed_url($configured_url);
+            if (is_wp_error($validated)) {
+                return $validated;
+            }
+            return array(
+                'url'=>$validated,
+                'name'=>'Manuell gebundener Awin-Produktfeed',
+                'scope'=>$configured_scope,
+            );
+        }
+        $url_keys = array('download_url','downloadurl','feed_url','feedurl','product_feed_url','productfeedurl','url','download_link','downloadlink','download_uri','downloaduri');
+        $candidates = array();
+        foreach ((array) ($snapshot['feeds'] ?? array()) as $row) {
+            if (!is_array($row)) { continue; }
+            $row_partner_id = 0;
+            foreach (array('merchant_id','advertiser_id') as $id_key) {
+                if (isset($row[$id_key]) && absint($row[$id_key]) > 0) {
+                    $row_partner_id = absint($row[$id_key]);
+                    break;
+                }
+            }
+            if ($row_partner_id > 0 && $row_partner_id !== $snapshot_id) { continue; }
+            $url = '';
+            foreach ($url_keys as $key) {
+                if (!empty($row[$key])) { $url = (string) $row[$key]; break; }
+            }
+            if ($url === '') { continue; }
+            $validated = $this->automation_validate_awin_feed_url($url);
+            if (is_wp_error($validated)) { continue; }
+            $candidates[$validated] = array(
+                'url'=>$validated,
+                'name'=>sanitize_text_field((string) ($row['feed_name'] ?? $row['advertiser_name'] ?? $row['merchant_name'] ?? 'Awin-Produktfeed')),
+                'scope'=>'provider_default',
+            );
+        }
+        if (!$candidates) {
+            return new WP_Error('awin_feed_exact_url_missing', 'Für diese Advertiser-ID ist kein eindeutig zugeordneter Awin-Produktfeed vorhanden.');
+        }
+        if (count($candidates) > 1) {
+            return new WP_Error('awin_feed_ambiguous', 'Für diese Advertiser-ID sind mehrere Produktfeeds vorhanden. Ohne ausdrückliche Auswahl wird kein Produktfeed geraten.');
+        }
+        return reset($candidates);
+    }
+
+    private function automation_private_feed_dir() {
+        $base = rtrim((string) sys_get_temp_dir(), '/\\');
+        if ($base === '' || !is_dir($base) || !is_writable($base)) {
+            return new WP_Error('automation_temp_dir_missing', 'Kein beschreibbares, nicht öffentliches Server-Tempverzeichnis verfügbar.');
+        }
+        $namespace = substr(hash('sha256', (string) ABSPATH), 0, 16);
+        $dir = trailingslashit($base) . 'ppar-automation-private-' . $namespace;
+        if (!is_dir($dir) && !wp_mkdir_p($dir)) {
+            return new WP_Error('automation_feed_dir_failed', 'Privates Arbeitsverzeichnis konnte nicht angelegt werden.');
+        }
+        @chmod($dir, 0700);
+        if (!is_file($dir . '/index.php')) {
+            @file_put_contents($dir . '/index.php', "<?php\nexit;\n");
+        }
+        if (!is_file($dir . '/.htaccess')) {
+            @file_put_contents($dir . '/.htaccess', "Require all denied\nDeny from all\n");
+        }
+        return $dir;
+    }
+
+    private function automation_decompress_if_needed($file) {
+        $fh = @fopen($file, 'rb');
+        $magic = $fh ? fread($fh, 2) : '';
+        if ($fh) {
+            fclose($fh);
+        }
+        if ($magic !== "\x1f\x8b") {
+            return $file;
+        }
+        if (!function_exists('gzopen')) {
+            return new WP_Error('automation_gzip_unsupported', 'GZIP-Feed kann auf diesem Server nicht entpackt werden.');
+        }
+        $out = $file . '.unpacked';
+        $in = @gzopen($file, 'rb');
+        $target = @fopen($out, 'wb');
+        if (!$in || !$target) {
+            if ($in) { gzclose($in); }
+            if ($target) { fclose($target); }
+            @unlink($out);
+            return new WP_Error('automation_gzip_open_failed', 'GZIP-Feed konnte nicht entpackt werden.');
+        }
+        while (!gzeof($in)) {
+            $chunk = gzread($in, 1048576);
+            if ($chunk === false) {
+                gzclose($in);
+                fclose($target);
+                @unlink($out);
+                return new WP_Error('automation_gzip_read_failed', 'GZIP-Feed konnte nicht vollständig gelesen werden.');
+            }
+            fwrite($target, $chunk);
+        }
+        gzclose($in);
+        fclose($target);
+        @unlink($file);
+        return $out;
+    }
+
+    private function automation_download_awin_feed($feed, $job_uuid) {
+        $dir = $this->automation_private_feed_dir();
+        if (is_wp_error($dir)) {
+            return $dir;
+        }
+        $url = $this->automation_validate_awin_feed_url((string) ($feed['url'] ?? ''));
+        if (is_wp_error($url)) {
+            return $url;
+        }
+        $file = trailingslashit($dir) . 'feed-' . preg_replace('/[^a-z0-9-]/i', '', (string) $job_uuid) . '.dat';
+        $settings = $this->automation_settings();
+        $headers = array('Accept'=>'application/x-ndjson,application/json,text/csv,text/plain,application/octet-stream');
+        $parts = wp_parse_url($url);
+        if (strtolower((string) ($parts['host'] ?? '')) === 'api.awin.com') {
+            $network = $this->network_settings('awin');
+            $token = $this->network_secret('awin', 'access_token', $network);
+            if ($token === '') {
+                return new WP_Error('awin_not_configured', 'Awin API-Token fehlt.');
+            }
+            $headers['Authorization'] = 'Bearer ' . $token;
+        }
+        $response = wp_remote_get($url, array(
+            'timeout'=>absint($settings['request_timeout']),
+            'redirection'=>0,
+            'stream'=>true,
+            'filename'=>$file,
+            'headers'=>$headers,
+        ));
+        if (is_wp_error($response)) {
+            @unlink($file);
+            return $response;
+        }
+        $code = (int) wp_remote_retrieve_response_code($response);
+        if ($code !== 200) {
+            @unlink($file);
+            return new WP_Error('awin_feed_http_' . $code, 'Awin Feed HTTP ' . $code . '.');
+        }
+        if (!is_readable($file) || filesize($file) <= 0) {
+            @unlink($file);
+            return new WP_Error('awin_feed_empty_file', 'Awin lieferte keine lesbare Feeddatei.');
+        }
+        $file = $this->automation_decompress_if_needed($file);
+        if (is_wp_error($file)) {
+            return $file;
+        }
+        $handle = @fopen($file, 'rb');
+        if (!$handle) {
+            @unlink($file);
+            return new WP_Error('awin_feed_open_failed', 'Awin-Feeddatei konnte nicht geöffnet werden.');
+        }
+        $first = '';
+        while (($line = fgets($handle)) !== false) {
+            if (trim((string) $line) !== '') {
+                $first = preg_replace('/^\xEF\xBB\xBF/', '', (string) $line);
+                break;
+            }
+        }
+        if ($first === '') {
+            fclose($handle);
+            @unlink($file);
+            return new WP_Error('awin_feed_empty', 'Awin-Feed enthält keine Datenzeilen.');
+        }
+        $json = json_decode(trim($first), true);
+        if (is_array($json)) {
+            $format = 'jsonl';
+            $headers_row = array();
+            $delimiter = '';
+            $cursor = 0;
+        } else {
+            $format = 'csv';
+            $delimiter = $this->network_sync_detect_delimiter($first);
+            $headers_row = str_getcsv(rtrim($first, "\r\n"), $delimiter, '"', '\\');
+            $headers_row = array_map('trim', (array) $headers_row);
+            if (count(array_filter($headers_row, 'strlen')) < 2) {
+                fclose($handle);
+                @unlink($file);
+                return new WP_Error('awin_feed_format_unknown', 'Feedformat konnte nicht sicher erkannt werden.');
+            }
+            $cursor = ftell($handle);
+        }
+        fclose($handle);
+        return array('file'=>$file,'format'=>$format,'headers'=>$headers_row,'delimiter'=>$delimiter,'cursor'=>$cursor,'feed_name'=>(string) ($feed['name'] ?? 'Awin-Produktfeed'));
+    }
+
+    private function automation_download_adcell_feed_url($url, $job_uuid) {
+        $url = $this->adcell_api_v2_validate_csv_url($url);
+        if (is_wp_error($url)) { return $url; }
+        $dir = $this->automation_private_feed_dir();
+        if (is_wp_error($dir)) { return $dir; }
+        $file = trailingslashit($dir) . 'feed-adcell-' . preg_replace('/[^a-z0-9-]/i', '', (string) $job_uuid) . '.dat';
+        $automation = $this->automation_settings();
+        $response = wp_safe_remote_get($url, array(
+            'timeout'=>absint($automation['request_timeout']),
+            'redirection'=>0,
+            'stream'=>true,
+            'filename'=>$file,
+            'headers'=>array('Accept'=>'text/csv,text/plain,application/csv,application/octet-stream'),
+            'limit_response_size'=>104857600,
+        ));
+        if (is_wp_error($response)) { @unlink($file); return $response; }
+        $code = (int) wp_remote_retrieve_response_code($response);
+        if ($code !== 200) { @unlink($file); return new WP_Error('adcell_feed_http_' . $code, 'ADCELL Feed HTTP ' . $code . '.'); }
+        if (!is_readable($file) || filesize($file) <= 0) { @unlink($file); return new WP_Error('adcell_feed_empty_file', 'ADCELL lieferte keine lesbare Feeddatei.'); }
+        $file = $this->automation_decompress_if_needed($file);
+        if (is_wp_error($file)) { return $file; }
+        $handle = @fopen($file, 'rb');
+        if (!$handle) { @unlink($file); return new WP_Error('adcell_feed_open_failed', 'ADCELL-Feeddatei konnte nicht geöffnet werden.'); }
+        $first = '';
+        while (($line = fgets($handle)) !== false) {
+            if (trim((string) $line) !== '') { $first = preg_replace('/^\xEF\xBB\xBF/', '', (string) $line); break; }
+        }
+        if ($first === '') { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_empty', 'ADCELL-Feed enthält keine Datenzeilen.'); }
+        $delimiter = $this->network_sync_detect_delimiter($first);
+        $headers = str_getcsv(rtrim($first, "\r\n"), $delimiter, '"', '\\');
+        $headers = array_map('trim', (array) $headers);
+        if (count(array_filter($headers, 'strlen')) < 2) { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_header_invalid', 'ADCELL-Feed enthält keine brauchbare Kopfzeile.'); }
+        $mapping = $this->network_sync_detect_mapping($headers);
+        foreach (array('external_id','programme_external_id','title','image_url','tracking_url') as $required) {
+            if (empty($mapping[$required]['source'])) { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_mapping_incomplete', 'ADCELL-Feedspalte fehlt: ' . $required . '.'); }
+        }
+        $cursor = ftell($handle);
+        fclose($handle);
+        return array('file'=>$file,'format'=>'csv','headers'=>$headers,'mapping'=>$mapping,'delimiter'=>$delimiter,'cursor'=>$cursor,'feed_name'=>'ADCELL API-v2 CSV-Werbemittel');
+    }
+
+    private function automation_awin_offer_has_next($raw, $page, $page_size, $row_count) {
+        $page = max(1, absint($page));
+        $page_size = max(1, absint($page_size));
+        foreach (array('pagination','pageInfo','page_info','meta') as $key) {
+            if (!isset($raw[$key]) || !is_array($raw[$key])) {
+                continue;
+            }
+            $meta = $raw[$key];
+            $total_pages = absint($meta['totalPages'] ?? $meta['total_pages'] ?? $meta['pageCount'] ?? $meta['page_count'] ?? 0);
+            if ($total_pages > 0) {
+                return $page < $total_pages;
+            }
+            $total = absint($meta['total'] ?? $meta['totalCount'] ?? $meta['total_count'] ?? 0);
+            if ($total > 0) {
+                return ($page * $page_size) < $total;
+            }
+        }
+        return absint($row_count) >= $page_size;
+    }
+
+    private function automation_otto_product_relevance_gate($normalized, $details) {
+        if (!is_array($normalized)) {
+            return new WP_Error('otto_relevance_row_invalid', 'OTTO-Produktzeile ist nicht auswertbar.');
+        }
+        if (sanitize_key((string) ($details['feed_scope'] ?? '')) !== 'portal_filtered') {
+            return new WP_Error('otto_product_feed_unfiltered', 'Ungefilterter OTTO-Vollfeed ist für das Pferde Atelier gesperrt.');
+        }
+        foreach (array('ebay_portal_catalog','ebay_content_policy_reason','ebay_business_classify_portal_item_strict') as $method) {
+            if (!method_exists($this, $method)) {
+                return new WP_Error('otto_relevance_contract_missing', 'Gebundener Pferde-Atelier-Relevanzvertrag ist nicht verfügbar.');
+            }
+        }
+
+        $product_type = sanitize_text_field((string) ($normalized['product_type'] ?? ''));
+        $google_category = sanitize_text_field((string) ($normalized['google_product_category'] ?? ''));
+        $brand = sanitize_text_field((string) ($normalized['brand'] ?? ''));
+        $categories = array_values(array_filter(array_unique(array($product_type, $google_category))));
+        $localized_aspects = array();
+        if ($product_type !== '') {
+            $localized_aspects[] = array('name'=>'Produktart','value'=>$product_type);
+        }
+        if ($brand !== '') {
+            $localized_aspects[] = array('name'=>'Marke','value'=>$brand);
+        }
+        // This is not invented product evidence. It records the explicit source
+        // contract: the Awin export itself was restricted to portal-relevant
+        // categories. A concrete product concept must still be independently
+        // carried by title/category/product-type evidence below.
+        $localized_aspects[] = array('name'=>'FeedScope','value'=>'Pferdebedarf');
+
+        $raw = array(
+            'title'=>sanitize_text_field((string) ($normalized['creative_title'] ?? '')),
+            'shortDescription'=>sanitize_textarea_field((string) ($normalized['creative_description'] ?? '')),
+            'categories'=>array_map(static function($name) {
+                return array('categoryName'=>sanitize_text_field((string) $name));
+            }, $categories),
+            'localizedAspects'=>$localized_aspects,
+        );
+        $item = array(
+            'title'=>$raw['title'],
+            'short_description'=>$raw['shortDescription'],
+            'category_names'=>$categories,
+            'raw'=>$raw,
+        );
+
+        $policy_reason = $this->ebay_content_policy_reason($item);
+        if ($policy_reason !== '') {
+            return new WP_Error('otto_product_content_blocked', 'Fachfremdes/gesperrtes OTTO-Produkt: ' . $policy_reason);
+        }
+        $classification = $this->ebay_business_classify_portal_item_strict($item, array());
+        if (is_wp_error($classification)) {
+            return new WP_Error(
+                'otto_product_not_portal_relevant',
+                'OTTO-Produkt passt nicht belastbar in den Pferde-Atelier-Produktkatalog: ' . $classification->get_error_message()
+            );
+        }
+        if (sanitize_key((string) ($classification['business_match_contract'] ?? '')) !== 'concept_v3'
+            || sanitize_title((string) ($classification['product_slug'] ?? '')) === '') {
+            return new WP_Error('otto_product_relevance_ambiguous', 'OTTO-Produkt besitzt kein eindeutiges Pferde-Atelier-Produktziel.');
+        }
+        return array(
+            'product_slug'=>sanitize_title((string) $classification['product_slug']),
+            'product_title'=>sanitize_text_field((string) ($classification['product_title'] ?? '')),
+            'score'=>absint($classification['score'] ?? 0),
+            'contract'=>'awin_otto_prefilter_v1',
+        );
+    }
+
+    private function automation_process_awin_product_batch($job, $snapshot, $details) {
+        $file = (string) ($details['feed_file'] ?? '');
+        $format = sanitize_key((string) ($details['feed_format'] ?? ''));
+        if ($file === '' || !is_readable($file) || !in_array($format, array('jsonl','csv'), true)) {
+            return new WP_Error('awin_feed_state_invalid', 'Gespeicherter Feed-Arbeitsstand ist ungültig.');
+        }
+        $handle = @fopen($file, 'rb');
+        if (!$handle || fseek($handle, max(0, (int) ($job['cursor_value'] ?? 0))) !== 0) {
+            if ($handle) { fclose($handle); }
+            return new WP_Error('awin_feed_seek_failed', 'Feed-Fortschritt konnte nicht wieder aufgenommen werden.');
+        }
+        $settings = $this->automation_settings();
+        $limit = absint($settings['batch_size']);
+        $deadline = microtime(true) + absint($settings['time_budget']);
+        $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+        $context = array(
+            'provider'=>'awin',
+            'partner_external_id'=>(string) absint($snapshot['external_id'] ?? 0),
+            'partner_name'=>sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
+            'source_kind'=>'product',
+            'run_uuid'=>(string) $job['run_uuid'],
+        );
+        $counts = $this->automation_empty_counts();
+        $processed = 0;
+        $relevant_products = 0;
+        $blocked_products = 0;
+        $headers = is_array($details['feed_headers'] ?? null) ? $details['feed_headers'] : array();
+        $delimiter = (string) ($details['feed_delimiter'] ?? ',');
+        while ($processed < $limit && microtime(true) < $deadline) {
+            if ($format === 'jsonl') {
+                $line = fgets($handle);
+                if ($line === false) {
+                    break;
+                }
+                $line = trim((string) $line);
+                if ($line === '') {
+                    continue;
+                }
+                $row = json_decode($line, true);
+                if (!is_array($row)) {
+                    fclose($handle);
+                    return new WP_Error('jsonl_invalid', 'Ungültige JSONL-Zeile im Produktfeed.');
+                }
+                if (isset($row['error'])) {
+                    fclose($handle);
+                    return new WP_Error('jsonl_incomplete', sanitize_text_field((string) ($row['message'] ?? 'Awin meldete einen unvollständigen Feed.')));
+                }
+            } else {
+                $values = fgetcsv($handle, 0, $delimiter, '"', '\\');
+                if ($values === false) {
+                    break;
+                }
+                if (!array_filter($values, static function ($value) { return trim((string) $value) !== ''; })) {
+                    continue;
+                }
+                $row = array();
+                foreach ($headers as $index => $header) {
+                    $row[(string) $header] = (string) ($values[$index] ?? '');
+                }
+            }
+            $normalized = $this->automation_product_row($row, $snapshot, (string) $job['run_uuid']);
+            if (is_wp_error($normalized)) {
+                $counts['blocked']++;
+                $blocked_products++;
+            } else {
+                if (absint($snapshot['external_id'] ?? 0) === absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+                    $relevance = $this->automation_otto_product_relevance_gate($normalized, $details);
+                    if (is_wp_error($relevance)) {
+                        $counts['blocked']++;
+                        $blocked_products++;
+                        $processed++;
+                        if (($processed % 100) === 0) {
+                            $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']);
+                        }
+                        continue;
+                    }
+                    $normalized['portal_product_slug'] = (string) $relevance['product_slug'];
+                    $normalized['portal_product_title'] = (string) $relevance['product_title'];
+                    $normalized['portal_relevance_score'] = (string) absint($relevance['score']);
+                    $normalized['portal_relevance_contract'] = (string) $relevance['contract'];
+                }
+                $relevant_products++;
+                $counts = $this->automation_merge_counts($counts, $this->automation_import_rows(array($normalized), $context));
+            }
+            $processed++;
+            if (($processed % 100) === 0) {
+                $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']);
+            }
+        }
+        $cursor = ftell($handle);
+        $eof = feof($handle);
+        fclose($handle);
+        return array(
+            'counts'=>$counts,
+            'processed'=>$processed,
+            'relevant'=>$relevant_products,
+            'blocked_products'=>$blocked_products,
+            'cursor'=>$cursor,
+            'complete'=>$eof,
+        );
+    }
+
+    private function automation_process_adcell_product_batch($job, $details, $program_id) {
+        $file = (string) ($details['feed_file'] ?? '');
+        $headers = is_array($details['feed_headers'] ?? null) ? $details['feed_headers'] : array();
+        $mapping = is_array($details['feed_mapping'] ?? null) ? $details['feed_mapping'] : array();
+        $delimiter = (string) ($details['feed_delimiter'] ?? ',');
+        $program_id = absint($program_id);
+        if ($program_id <= 0 || $file === '' || !is_readable($file) || !$headers || !$mapping) {
+            return new WP_Error('adcell_feed_state_invalid', 'Gespeicherter ADCELL-Feed-Arbeitsstand ist ungültig.');
+        }
+        $handle = @fopen($file, 'rb');
+        if (!$handle || fseek($handle, max(0, (int) ($job['cursor_value'] ?? 0))) !== 0) {
+            if ($handle) { fclose($handle); }
+            return new WP_Error('adcell_feed_seek_failed', 'ADCELL-Feed-Fortschritt konnte nicht wieder aufgenommen werden.');
+        }
+        $settings = $this->automation_settings();
+        $limit = absint($settings['batch_size']);
+        $deadline = microtime(true) + absint($settings['time_budget']);
+        $counts = $this->automation_empty_counts();
+        $processed = 0;
+        while ($processed < $limit && microtime(true) < $deadline) {
+            $values = fgetcsv($handle, 0, $delimiter, '"', '\\');
+            if ($values === false) { break; }
+            if (!array_filter($values, static function ($value) { return trim((string) $value) !== ''; })) { continue; }
+            $row = array();
+            foreach ($headers as $index => $header) { $row[(string) $header] = (string) ($values[$index] ?? ''); }
+            $normalized = $this->automation_adcell_product_row($row, $mapping, (string) $job['run_uuid']);
+            if (is_wp_error($normalized) || absint($normalized['_partner_external_id'] ?? 0) !== $program_id) {
+                $counts['blocked']++;
+            } else {
+                unset($normalized['_partner_external_id'], $normalized['_partner_name']);
+                $context = array(
+                    'provider'=>'adcell',
+                    'partner_external_id'=>(string) $program_id,
+                    'partner_name'=>sanitize_text_field((string) ($details['partner_name'] ?? ('ADCELL ' . $program_id))),
+                    'source_kind'=>'product',
+                    'run_uuid'=>(string) $job['run_uuid'],
+                );
+                $counts = $this->automation_merge_counts($counts, $this->automation_import_rows(array($normalized), $context));
+            }
+            $processed++;
+            if (($processed % 100) === 0) { $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']); }
+        }
+        $cursor = ftell($handle);
+        $eof = feof($handle);
+        fclose($handle);
+        return array('counts'=>$counts,'processed'=>$processed,'cursor'=>$cursor,'complete'=>$eof);
+    }
+
+    private function automation_process_adcell_job($job, $counts, $details) {
+        $program_id = absint($job['partner_external_id'] ?? 0);
+        if ($program_id <= 0) { return new WP_Error('adcell_program_invalid', 'ADCELL-Auftrag besitzt keine gültige programId.'); }
+        $programme = $this->adcell_api_v2_programme($program_id);
+        if (is_wp_error($programme)) { return $programme; }
+        $details['program_id'] = $program_id;
+        $details['partner_name'] = sanitize_text_field((string) ($programme['name'] ?? ('ADCELL ' . $program_id)));
+        $stage = sanitize_key((string) ($job['stage'] ?? 'promotions'));
+
+        if ($stage === 'promotions') {
+            $csv_items = $this->adcell_api_v2_promotion_items($program_id, 'csv');
+            if (is_wp_error($csv_items)) { return $csv_items; }
+            $csv_urls = array();
+            foreach ((array) $csv_items as $item) {
+                if (!is_array($item) || absint($item['programId'] ?? 0) !== $program_id) { continue; }
+                $url = $this->adcell_api_v2_validate_csv_url((string) ($item['csvUrl'] ?? ''));
+                if (!is_wp_error($url)) { $csv_urls[$url] = $url; }
+            }
+            if (count($csv_urls) > 1) {
+                return new WP_Error('adcell_csv_ambiguous', 'Mehrere unterschiedliche ADCELL-CSV-Werbemittel für dieselbe programId; keine Quelle wird geraten.');
+            }
+
+            $banner = $this->automation_adcell_banner_rows($program_id, $details['partner_name'], (string) $job['run_uuid']);
+            if (is_wp_error($banner)) { return $banner; }
+            $deeplink = $this->automation_adcell_deeplink_rows($program_id, $details['partner_name'], (string) $job['run_uuid']);
+            if (is_wp_error($deeplink)) { return $deeplink; }
+            $banner_counts = $this->automation_import_rows((array) ($banner['rows'] ?? array()), array(
+                'provider'=>'adcell','partner_external_id'=>(string)$program_id,'partner_name'=>$details['partner_name'],'source_kind'=>'banner','run_uuid'=>(string)$job['run_uuid'],
+            ));
+            $banner_counts['blocked'] = absint($banner_counts['blocked'] ?? 0) + absint($banner['blocked'] ?? 0);
+            $deeplink_counts = $this->automation_import_rows((array) ($deeplink['rows'] ?? array()), array(
+                'provider'=>'adcell','partner_external_id'=>(string)$program_id,'partner_name'=>$details['partner_name'],'source_kind'=>'deeplink','run_uuid'=>(string)$job['run_uuid'],
+            ));
+            $deeplink_counts['blocked'] = absint($deeplink_counts['blocked'] ?? 0) + absint($deeplink['blocked'] ?? 0);
+            $counts = $this->automation_merge_counts($counts, $banner_counts);
+            $counts = $this->automation_merge_counts($counts, $deeplink_counts);
+            $details['banner_complete'] = true;
+            $details['deeplink_complete'] = true;
+            $details['banner_rows'] = count((array) ($banner['rows'] ?? array()));
+            $details['deeplink_rows'] = count((array) ($deeplink['rows'] ?? array()));
+            $details['csv_available'] = count($csv_urls) === 1;
+            $details['csv_url'] = $details['csv_available'] ? (string) reset($csv_urls) : '';
+            if (!$details['csv_available']) {
+                $details['feed_complete'] = false;
+                $this->automation_release_job($job, 'reconcile', 0, 1, $counts, $details, 'ADCELL-Werbemittel verarbeitet; kein eindeutiges CSV-Werbemittel vorhanden. Abgleich folgt.');
+                return true;
+            }
+            $this->automation_release_job($job, 'feed', 0, 1, $counts, $details, 'ADCELL-Werbemittel verarbeitet. API-v2-CSV-Download folgt.');
+            return true;
+        }
+        if ($stage === 'feed') {
+            $download = $this->automation_download_adcell_feed_url((string) ($details['csv_url'] ?? ''), (string) $job['job_uuid']);
+            if (is_wp_error($download)) {
+                $schema_errors = array('adcell_feed_empty','adcell_feed_header_invalid','adcell_feed_mapping_incomplete');
+                if (in_array(sanitize_key((string) $download->get_error_code()), $schema_errors, true)) {
+                    $details['feed_complete'] = false;
+                    $details['feed_schema_error'] = sanitize_text_field((string) $download->get_error_message());
+                    $this->automation_release_job($job, 'reconcile', 0, 1, $counts, $details, 'ADCELL-Banner/Deeplink verarbeitet; optionaler CSV-Produktfeed ist strukturell ungeeignet und blockiert die Bannerausgabe nicht.');
+                    return true;
+                }
+                return $download;
+            }
+            $details['feed'] = sanitize_text_field((string) $download['feed_name']);
+            $details['feed_file'] = (string) $download['file'];
+            $details['feed_format'] = 'csv';
+            $details['feed_headers'] = (array) $download['headers'];
+            $details['feed_mapping'] = (array) $download['mapping'];
+            $details['feed_delimiter'] = (string) $download['delimiter'];
+            $details['products'] = 0;
+            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'ADCELL-CSV-Werbemittel gespeichert. Erstes Produktpaket folgt.');
+            return true;
+        }
+        if ($stage === 'products') {
+            $result = $this->automation_process_adcell_product_batch($job, $details, $program_id);
+            if (is_wp_error($result)) { return $result; }
+            $counts = $this->automation_merge_counts($counts, $result['counts']);
+            $details['products'] = absint($details['products'] ?? 0) + absint($result['processed']);
+            if (!empty($result['complete'])) {
+                $details['feed_complete'] = true;
+                $this->automation_release_job($job, 'reconcile', 0, 1, $counts, $details, 'ADCELL-Produktfeed vollständig verarbeitet. Abgleich folgt.');
+            } else {
+                $this->automation_release_job($job, 'products', absint($result['cursor']), 1, $counts, $details, absint($result['processed']) . ' ADCELL-Produkte verarbeitet; Fortsetzung vorgemerkt.');
+            }
+            return true;
+        }
+        if ($stage === 'reconcile') {
+            $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'banner', (string) $job['run_uuid']);
+            $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'deeplink', (string) $job['run_uuid']);
+            if (!empty($details['feed_complete'])) {
+                $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'product', (string) $job['run_uuid']);
+            }
+            $details['target_edges'] = $this->automation_rebuild_edges('adcell', (string) $program_id);
+            $status = !empty($details['feed_complete']) ? 'success' : 'partial';
+            $message = !empty($details['feed_complete'])
+                ? 'ADCELL-Programmlauf vollständig: CSV, Banner und Deeplink über API v2 verarbeitet.'
+                : 'ADCELL-Programmlauf abgeschlossen: Banner/Deeplink verarbeitet; kein eindeutiges CSV-Werbemittel verfügbar.';
+            $this->automation_complete_job($job, $counts, $details, $status, $message);
+
+            // V6.72.189 URL-Konzept: Erst NACH abgeschlossenem ADCELL-Lauf
+            // liegen neu/geaendert einmalig gepruefte Ziel-URLs dauerhaft in der
+            // Creative-Library. Jetzt genau einmal den Vollpool neu planen; im
+            // Frontend wird die URL weder aufgeloest noch neu klassifiziert.
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION);
+            if (!wp_next_scheduled(self::FULL_POOL_WORKER_HOOK)) {
+                wp_schedule_single_event(time()+1, self::FULL_POOL_WORKER_HOOK);
+            }
+            return true;
+        }
+        return new WP_Error('adcell_stage_invalid', 'Unbekannte ADCELL-Automatisierungsstufe.');
+    }
+
+    /**
+     * Optional real Awin creative source seam.
+     *
+     * This does NOT invent an Awin API. A connector/export adapter may supply
+     * real rows through the filter once such a source is actually available.
+     * Empty input means "not bound" and never deactivates existing banners.
+     */
+    private function automation_awin_static_creative_rows($advertiser_id, $snapshot, $run_uuid) {
+        $advertiser_id = absint($advertiser_id);
+        if ($advertiser_id <= 0) {
+            return new WP_Error('awin_static_creative_advertiser_invalid', 'Ungültige Awin-Advertiser-ID für Bannerquelle.');
+        }
+        $raw = apply_filters(
+            'ppar_affiliate_awin_static_creatives',
+            array(),
+            $advertiser_id,
+            is_array($snapshot) ? $snapshot : array(),
+            self::PROVIDER_CONTRACT_VERSION
+        );
+        if (is_wp_error($raw)) { return $raw; }
+
+        // Adapter may return either a plain non-empty row list or an explicit
+        // envelope. The envelope is required when a real source is bound but
+        // currently returns zero creatives; in that case reconciliation must
+        // be allowed to retire stale banners instead of treating the source as
+        // "not connected".
+        $bound = false;
+        $raw_rows = array();
+        if (is_array($raw) && array_key_exists('bound', $raw)) {
+            $bound = !empty($raw['bound']);
+            if (!$bound) {
+                return array('bound'=>false,'rows'=>array(),'blocked'=>0);
+            }
+            if (!isset($raw['rows']) || !is_array($raw['rows'])) {
+                return new WP_Error('awin_static_creative_rows_invalid', 'Gebundene Awin-Bannerquelle muss rows als Liste liefern.');
+            }
+            $raw_rows = $raw['rows'];
+        } elseif (is_array($raw) && $raw) {
+            $bound = true;
+            $raw_rows = $raw;
+        } else {
+            return array('bound'=>false,'rows'=>array(),'blocked'=>0);
+        }
+
+        $rows = array();
+        $blocked = 0;
+        foreach ($raw_rows as $creative) {
+            if (!is_array($creative)) { $blocked++; continue; }
+            $row_advertiser = absint($creative['advertiser_id'] ?? $creative['merchant_id'] ?? 0);
+            if ($row_advertiser !== $advertiser_id) { $blocked++; continue; }
+
+            $creative_id = sanitize_text_field((string) ($creative['creative_id'] ?? $creative['id'] ?? $creative['banner_id'] ?? ''));
+            $title = sanitize_text_field((string) ($creative['title'] ?? $creative['name'] ?? ''));
+            $image = esc_url_raw((string) ($creative['image_url'] ?? $creative['image_source'] ?? $creative['banner_url'] ?? ''));
+            $destination = esc_url_raw((string) ($creative['destination_url'] ?? $creative['landing_page'] ?? ''));
+            $tracking = esc_url_raw((string) ($creative['tracking_url'] ?? $creative['affiliate_url'] ?? $creative['click_url'] ?? ''));
+            if ($tracking === '' && $destination !== '') {
+                $tracking = $this->automation_awin_tracking_url($advertiser_id, $destination, 'banner-' . $creative_id);
+            }
+            if ($creative_id === '' || $title === '' || $image === '' || $tracking === '') {
+                $blocked++;
+                continue;
+            }
+
+            $rows[] = array(
+                'creative_id'=>$creative_id,
+                'creative_type'=>'banner',
+                'creative_title'=>$title,
+                'creative_description'=>sanitize_textarea_field((string) ($creative['description'] ?? '')),
+                'creative_tag'=>sanitize_text_field((string) ($creative['tags'] ?? $creative['category'] ?? '')),
+                'image_source'=>$image,
+                'destination_url'=>$destination !== '' ? $destination : $tracking,
+                'tracking_url'=>$tracking,
+                'width'=>absint($creative['width'] ?? 0),
+                'height'=>absint($creative['height'] ?? 0),
+                'status'=>sanitize_key((string) ($creative['status'] ?? 'active')) === 'inactive' ? 'inactive' : 'active',
+                '_source_kind'=>'banner',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('bound'=>true,'rows'=>$rows,'blocked'=>$blocked);
+    }
+
+    private function automation_import_awin_static_creatives($advertiser_id, $snapshot, $run_uuid) {
+        $source = $this->automation_awin_static_creative_rows($advertiser_id, $snapshot, $run_uuid);
+        if (is_wp_error($source)) { return $source; }
+        if (empty($source['bound'])) {
+            return array(
+                'bound'=>false,
+                'counts'=>$this->automation_empty_counts(),
+                'imported_rows'=>0,
+                'blocked_rows'=>0,
+            );
+        }
+
+        $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+        $context = array(
+            'provider'=>'awin',
+            'partner_external_id'=>(string) absint($advertiser_id),
+            'partner_name'=>sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
+            'source_kind'=>'banner',
+            'run_uuid'=>sanitize_text_field((string) $run_uuid),
+        );
+        $counts = $this->automation_import_rows((array) ($source['rows'] ?? array()), $context);
+        $counts['blocked'] = absint($counts['blocked'] ?? 0) + absint($source['blocked'] ?? 0);
+
+        $this->automation_reconcile_partner_assets(
+            'awin',
+            (string) absint($advertiser_id),
+            'banner',
+            sanitize_text_field((string) $run_uuid)
+        );
+        return array(
+            'bound'=>true,
+            'counts'=>$counts,
+            'imported_rows'=>count((array) ($source['rows'] ?? array())),
+            'blocked_rows'=>absint($source['blocked'] ?? 0),
+        );
+    }
+
+    private function automation_process_claimed_job($job) {
+        $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
+        $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+        $provider = sanitize_key((string) ($job['provider'] ?? ''));
+        if ($provider === 'adcell') {
+            return $this->automation_process_adcell_job($job, $counts, $details);
+        }
+        $advertiser_id = absint($job['partner_external_id'] ?? 0);
+        $stage = sanitize_key((string) ($job['stage'] ?? 'programme'));
+        if ($advertiser_id <= 0 || $provider !== 'awin') {
+            return new WP_Error('automation_job_invalid', 'Ungültiger Automatisierungsauftrag.');
+        }
+        $gate = $this->awin_programme_gate_validate($advertiser_id);
+        if (is_wp_error($gate)) {
+            return $gate;
+        }
+        if ($stage === 'programme') {
+            $snapshot = $this->partner_intake_probe_partner('awin', $advertiser_id, '', false);
+            if (is_wp_error($snapshot)) {
+                return $snapshot;
+            }
+            $this->partner_intake_store_snapshot('awin', (string) $advertiser_id, $snapshot);
+            $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+            $details['partner_name'] = sanitize_text_field((string) ($programme['name'] ?? 'Awin-Partner'));
+            $this->automation_release_job($job, 'offers', 0, 1, $counts, $details, 'Programmdaten geprüft. Angebote folgen.');
+            return true;
+        }
+        $snapshots = $this->partner_intake_snapshots();
+        $snapshot = isset($snapshots['awin:' . $advertiser_id]) && is_array($snapshots['awin:' . $advertiser_id]) ? $snapshots['awin:' . $advertiser_id] : array();
+        if (!$snapshot) {
+            return new WP_Error('automation_snapshot_missing', 'Partner-Snapshot fehlt.');
+        }
+        if ($stage === 'offers') {
+            $page = max(1, absint($job['offer_page'] ?? 1));
+            $raw = $this->partner_intake_awin_offers($advertiser_id, $page, 200);
+            if (is_wp_error($raw)) {
+                return $raw;
+            }
+            $raw_rows = $this->partner_intake_extract_offer_rows($raw);
+            $offer_rows = array();
+            foreach ($this->partner_intake_normalize_offers($raw, $advertiser_id) as $offer) {
+                $row = $this->automation_offer_row($offer, $snapshot, (string) $job['run_uuid']);
+                if (is_wp_error($row)) {
+                    $counts['blocked']++;
+                } elseif (is_array($row)) {
+                    $offer_rows[] = $row;
+                }
+            }
+            if ($offer_rows) {
+                $context = array(
+                    'provider'=>'awin',
+                    'partner_external_id'=>(string) $advertiser_id,
+                    'partner_name'=>(string) ($details['partner_name'] ?? 'Awin-Partner'),
+                    'source_kind'=>'offer',
+                    'run_uuid'=>(string) $job['run_uuid'],
+                );
+                $counts = $this->automation_merge_counts($counts, $this->automation_import_rows($offer_rows, $context));
+            }
+            $details['offers'] = absint($details['offers'] ?? 0) + count($offer_rows);
+            if ($this->automation_awin_offer_has_next($raw, $page, 200, count($raw_rows))) {
+                if ($page >= 50) {
+                    return new WP_Error('awin_offer_page_limit', 'Sicherheitsgrenze von 50 Angebotsseiten erreicht.');
+                }
+                $this->automation_release_job($job, 'offers', 0, $page + 1, $counts, $details, 'Angebotsseite ' . $page . ' verarbeitet.');
+                return true;
+            }
+            $details['offers_complete'] = true;
+            $this->automation_reconcile_partner_assets('awin', (string) $advertiser_id, 'offer', (string) $job['run_uuid']);
+            $this->automation_release_job($job, 'feed', 0, 1, $counts, $details, 'Angebote vollständig verarbeitet. Produktfeed folgt.');
+            return true;
+        }
+        if ($stage === 'feed') {
+            $feed = $this->automation_select_awin_feed($snapshot);
+            if (is_wp_error($feed)) {
+                if (in_array($feed->get_error_code(), array('awin_feed_exact_url_missing','awin_feed_ambiguous'), true)) {
+                    $details['feed'] = $feed->get_error_code() === 'awin_feed_ambiguous' ? 'blocked_ambiguous' : 'not_available_exact_url';
+                    $details['feed_complete'] = false;
+                    $details['feed_note'] = $feed->get_error_message();
+                    $this->automation_release_job($job, 'finalize', 0, 1, $counts, $details, 'Produktfeed sicher ausgelassen: ' . $feed->get_error_message());
+                    return true;
+                }
+                return $feed;
+            }
+            $download = $this->automation_download_awin_feed($feed, (string) $job['job_uuid']);
+            if (is_wp_error($download)) {
+                return $download;
+            }
+            $details['feed'] = sanitize_text_field((string) $download['feed_name']);
+            $details['feed_file'] = (string) $download['file'];
+            $details['feed_format'] = sanitize_key((string) $download['format']);
+            $details['feed_headers'] = (array) $download['headers'];
+            $details['feed_delimiter'] = (string) $download['delimiter'];
+            $details['feed_scope'] = sanitize_key((string) ($feed['scope'] ?? 'provider_default'));
+            $details['products'] = 0;
+            $details['relevant_products'] = 0;
+            $details['blocked_products'] = 0;
+            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'Feed gespeichert. Erstes gefiltertes Produktpaket folgt.');
+            return true;
+        }
+        if ($stage === 'products') {
+            if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)
+                && sanitize_key((string) ($details['feed_scope'] ?? '')) !== 'portal_filtered') {
+                return new WP_Error(
+                    'otto_product_feed_unfiltered',
+                    'Alter/ungefilterter OTTO-Vollfeed wurde gestoppt. Erst einen in Awin Create-a-Feed fachlich gefilterten Export binden.'
+                );
+            }
+            $result = $this->automation_process_awin_product_batch($job, $snapshot, $details);
+            if (is_wp_error($result)) {
+                return $result;
+            }
+            $counts = $this->automation_merge_counts($counts, $result['counts']);
+            $details['products'] = absint($details['products'] ?? 0) + absint($result['processed']);
+            $details['relevant_products'] = absint($details['relevant_products'] ?? 0) + absint($result['relevant'] ?? 0);
+            $details['blocked_products'] = absint($details['blocked_products'] ?? 0) + absint($result['blocked_products'] ?? 0);
+            $total_scanned = absint($details['products']);
+            $total_relevant = absint($details['relevant_products']);
+            $total_blocked = absint($details['blocked_products']);
+            if (!empty($result['complete'])) {
+                $details['feed_complete'] = true;
+                $this->automation_reconcile_partner_assets('awin', (string) $advertiser_id, 'product', (string) $job['run_uuid']);
+                $this->automation_release_job(
+                    $job,
+                    'finalize',
+                    absint($result['cursor']),
+                    1,
+                    $counts,
+                    $details,
+                    'Produktfeed vollständig geprüft: ' . $total_scanned . ' Feedzeilen; relevant akzeptiert: ' . $total_relevant . '; verworfen/blockiert: ' . $total_blocked . '. Abschlussprüfung folgt.'
+                );
+            } else {
+                $this->automation_release_job(
+                    $job,
+                    'products',
+                    absint($result['cursor']),
+                    1,
+                    $counts,
+                    $details,
+                    $total_scanned . ' Feedzeilen geprüft; relevant akzeptiert: ' . $total_relevant . '; verworfen/blockiert: ' . $total_blocked . '; letztes Paket: ' . absint($result['processed']) . '. Fortsetzung vorgemerkt.'
+                );
+            }
+            return true;
+        }
+        if ($stage === 'finalize') {
+            $creative_result = $this->automation_import_awin_static_creatives(
+                $advertiser_id,
+                $snapshot,
+                (string) $job['run_uuid']
+            );
+            if (is_wp_error($creative_result)) { return $creative_result; }
+            if (!empty($creative_result['bound'])) {
+                $counts = $this->automation_merge_counts($counts, (array) ($creative_result['counts'] ?? array()));
+                $details['static_creatives'] = 'bound_real_source';
+                $details['static_creatives_rows'] = absint($creative_result['imported_rows'] ?? 0);
+                $details['static_creatives_blocked'] = absint($creative_result['blocked_rows'] ?? 0);
+            } else {
+                $details['static_creatives'] = 'not_bound_real_source_required';
+                $details['static_creatives_rows'] = 0;
+                $details['static_creatives_blocked'] = 0;
+            }
+
+            $details['target_edges'] = $this->automation_rebuild_edges('awin', (string) $advertiser_id);
+            $partial = empty($details['feed_complete']);
+            $status = $partial ? 'partial' : 'success';
+            $message = $partial
+                ? 'Partnerlauf abgeschlossen; Angebote vollständig, Produktfeed nicht eindeutig verfügbar.'
+                : 'Partnerlauf vollständig und paketweise abgeschlossen.';
+            if (!empty($creative_result['bound'])) {
+                $message .= ' Reale Awin-Werbemittelquelle wurde mitverarbeitet.';
+            }
+            $this->automation_complete_job($job, $counts, $details, $status, $message);
+            return true;
+        }
+        return new WP_Error('automation_stage_invalid', 'Unbekannte Automatisierungsstufe.');
+    }
+
+    public function run_automation_worker($manual_or_external = false, $provider = '') {
+        $provider = sanitize_key((string) $provider);
+        if (!$manual_or_external) {
+            $settings = $this->automation_settings();
+            if (empty($settings['enabled']) || $settings['executor'] !== 'wp_cron') {
+                return false;
+            }
+        }
+        $job = $this->automation_claim_next_job($provider);
+        if (!$job && !$manual_or_external && $provider === '') {
+            $this->run_scheduled_partner_sync(false);
+            $job = $this->automation_claim_next_job();
+        }
+        if (!$job) {
+            return false;
+        }
+        $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
+        $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+        $job_provider = sanitize_key((string) ($job['provider'] ?? ''));
+        if ($job_provider !== '' && method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate($job_provider);
+            if (is_wp_error($channel_gate)) {
+                $this->automation_release_job($job, sanitize_key((string) ($job['stage'] ?? 'programme')), max(0, (int) ($job['cursor_value'] ?? 0)), max(1, absint($job['offer_page'] ?? 1)), $counts, $details, 'Kanal pausiert; Auftrag bleibt erhalten.', HOUR_IN_SECONDS);
+                return false;
+            }
+        }
+        try {
+            $result = $this->automation_process_claimed_job($job);
+            if (is_wp_error($result)) {
+                $this->automation_fail_job($job, $result, $counts, $details);
+                return $result;
+            }
+            if (!$manual_or_external && !$this->automation_has_open_jobs()) {
+                $this->run_scheduled_partner_sync(false);
+            }
+            return true;
+        } catch (Throwable $error) {
+            $wrapped = new WP_Error('automation_runtime_error', $error->getMessage());
+            $this->automation_fail_job($job, $wrapped, $counts, $details);
+            return $wrapped;
+        }
+    }
+
+    public function handle_automation_process_next() {
+        if (!current_user_can('manage_options')) {
+            wp_die('Keine Berechtigung.');
+        }
+        check_admin_referer('ppar_automation_process_next', 'ppar_automation_process_nonce');
+        $result = $this->run_automation_worker(true);
+        $message = is_wp_error($result) ? $result->get_error_message() : ($result ? 'Ein Arbeitspaket wurde verarbeitet.' : 'Kein fälliges Arbeitspaket vorhanden.');
+        $status = is_wp_error($result) ? 'failed' : 'progress';
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-automation','ppar_auto'=>$status,'ppar_message'=>rawurlencode($message)), admin_url('admin.php')));
+        exit;
+    }
+
+    public function register_automation_cli() {
+        $router = $this;
+        WP_CLI::add_command('ppar automation-tick', static function () use ($router) {
+            $router->maybe_install_automation_schema();
+            $settings = $router->automation_settings();
+            if (empty($settings['enabled'])) {
+                WP_CLI::warning('Affiliate-Automatisierung ist deaktiviert.');
+                return;
+            }
+            if (!$router->automation_has_open_jobs()) {
+                $router->run_scheduled_partner_sync(true);
+            }
+            $result = $router->run_automation_worker(true);
+            if (is_wp_error($result)) {
+                WP_CLI::error($result->get_error_message(), false);
+            } elseif ($result) {
+                WP_CLI::success('Ein Arbeitspaket wurde verarbeitet.');
+            } else {
+                WP_CLI::log('Kein fälliges Arbeitspaket.');
+            }
+        });
+    }
+
+    private function automation_awin_tracking_url($advertiser_id, $destination_url, $clickref = '') {
+        $settings = $this->network_settings('awin');
+        $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
+        $advertiser_id = absint($advertiser_id);
+        $destination_url = esc_url_raw((string) $destination_url);
+        if ($publisher_id === '' || $advertiser_id <= 0 || $destination_url === '') {
+            return '';
+        }
+        $args = array(
+            'awinmid' => $advertiser_id,
+            'awinaffid' => $publisher_id,
+            'ued' => $destination_url,
+        );
+        if ($clickref !== '') {
+            $args['clickref'] = substr(sanitize_key($clickref), 0, 64);
+        }
+        return add_query_arg($args, 'https://www.awin1.com/cread.php');
+    }
+
+    private function automation_awin_flatten_product($row) {
+        if (!is_array($row)) {
+            return array();
+        }
+        $flat = $row;
+        $walk = static function ($value) use (&$walk, &$flat) {
+            if (!is_array($value)) {
+                return;
+            }
+            foreach ($value as $key => $child) {
+                if (is_string($key) && !is_array($child) && !array_key_exists($key, $flat)) {
+                    $flat[$key] = $child;
+                } elseif (is_array($child) && array_keys($child) !== range(0, count($child) - 1)) {
+                    $walk($child);
+                }
+            }
+        };
+        foreach ($row as $value) {
+            if (is_array($value) && array_keys($value) !== range(0, count($value) - 1)) {
+                $walk($value);
+            }
+        }
+        return $flat;
+    }
+
+    private function automation_awin_field($row, $aliases, $default = '') {
+        $normalized = array();
+        foreach ((array) $row as $key => $value) {
+            if (!is_scalar($value)) {
+                continue;
+            }
+            $normalized[$this->network_sync_normalize_header((string) $key)] = (string) $value;
+        }
+        foreach ((array) $aliases as $alias) {
+            $key = $this->network_sync_normalize_header((string) $alias);
+            if (isset($normalized[$key]) && trim($normalized[$key]) !== '') {
+                return trim($normalized[$key]);
+            }
+        }
+        return $default;
+    }
+
+    private function automation_normalize_date($value) {
+        $value = trim((string) $value);
+        if ($value === '') {
+            return '';
+        }
+        $time = strtotime($value);
+        return $time ? gmdate('Y-m-d', $time) : '';
+    }
+
+    private function automation_normalize_price_currency($price, $currency = 'EUR') {
+        $price = trim(sanitize_text_field((string) $price));
+        $currency = strtoupper(trim(sanitize_text_field((string) $currency)));
+        $symbol_map = array('€' => 'EUR', '$' => 'USD', '£' => 'GBP');
+        foreach ($symbol_map as $symbol => $code) {
+            if (strpos($price, $symbol) !== false) {
+                $currency = $code;
+                $price = str_replace($symbol, '', $price);
+                break;
+            }
+        }
+        if (preg_match('/(?:^|\s)(EUR|USD|GBP|CHF|PLN|SEK|NOK|DKK)(?:$|\s)/i', $price, $match)) {
+            $currency = strtoupper($match[1]);
+            $price = preg_replace('/(?:^|\s)' . preg_quote($match[1], '/') . '(?:$|\s)/i', ' ', $price);
+        }
+        $price = trim(preg_replace('/\s+/', ' ', (string) $price));
+        if ($currency === '') {
+            $currency = 'EUR';
+        }
+        return array(
+            'price' => $price,
+            'currency' => substr($currency, 0, 10),
+        );
+    }
+
+    private function automation_product_row($row, $snapshot, $run_uuid) {
+        $advertiser_id = absint($snapshot['external_id'] ?? 0);
+        $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+        $meta_advertiser = absint($row['meta']['advertiser_id'] ?? 0);
+        $row = $this->automation_awin_flatten_product($row);
+        $row_advertiser = absint($this->automation_awin_field($row, array('advertiser_id','merchant_id'), '0'));
+        if (($meta_advertiser > 0 && $meta_advertiser !== $advertiser_id) || ($row_advertiser > 0 && $row_advertiser !== $advertiser_id)) {
+            return new WP_Error('product_partner_mismatch', 'Produktzeile gehört zu einer anderen Awin-Advertiser-ID.');
+        }
+        $title = sanitize_text_field($this->automation_awin_field($row, array('title','product_name','productname','product_title','name')));
+        $destination = esc_url_raw($this->automation_awin_field($row, array('link','mobile_link','merchant_deep_link','destination_url','product_url','url')));
+        $tracking = esc_url_raw($this->automation_awin_field($row, array('aw_deep_link','tracking_url','affiliate_url','click_url','deep_link','deeplink','trackinglink')));
+        $image = esc_url_raw($this->automation_awin_field($row, array('image_link','merchant_image_url','product_image_url','image_url','large_image','image')));
+        $external = sanitize_text_field($this->automation_awin_field($row, array('id','aw_product_id','product_id','merchant_product_id','sku','ean','gtin')));
+        if ($title === '' || $image === '' || $external === '' || ($destination === '' && $tracking === '')) {
+            return new WP_Error('product_incomplete', 'Produkt ohne ID, Titel, Ziel oder Bild blockiert.');
+        }
+        if ($destination === '') {
+            $destination = $tracking;
+        }
+        if ($tracking === '') {
+            $tracking = $this->automation_awin_tracking_url($advertiser_id, $destination, 'product-' . $external);
+        }
+        if ($tracking === '') {
+            return new WP_Error('product_tracking_missing', 'Produkt ohne belastbaren Trackinglink blockiert.');
+        }
+        $category = sanitize_text_field($this->automation_awin_field($row, array('product_type','merchant_category','category_name','product_category','category')));
+        $google = sanitize_text_field($this->automation_awin_field($row, array('google_product_category')));
+        $brand = sanitize_text_field($this->automation_awin_field($row, array('brand','brand_name')));
+        $description = sanitize_textarea_field($this->automation_awin_field($row, array('description','product_description','short_description')));
+        $availability = sanitize_text_field($this->automation_awin_field($row, array('availability','stock_status','in_stock'), 'active'));
+        $availability_key = sanitize_key($availability);
+        $inactive = in_array($availability_key, array('out_of_stock','out_ouf_stock','discontinued','unavailable','inactive','false','0'), true);
+        $price_currency = $this->automation_normalize_price_currency(
+            $this->automation_awin_field($row, array('sale_price','search_price','current_price','price')),
+            $this->automation_awin_field($row, array('currency'), 'EUR')
+        );
+        // The generic Awin schema has no universal marketplace-seller field.
+        // OTTO requires the concrete seller on specific product advertising.
+        // Bind the exact real OTTO feed column through this explicit hook after
+        // inspecting the account feed; until then the value remains empty and
+        // OTTO automatic publication stays fail-closed.
+        $seller_name = sanitize_text_field((string) apply_filters(
+            'ppar_affiliate_awin_product_seller',
+            '',
+            $row,
+            $advertiser_id
+        ));
+        return array(
+            'creative_id' => $external,
+            'creative_type' => 'product',
+            'creative_title' => $title,
+            'creative_description' => $description,
+            'creative_tag' => trim(implode(' | ', array_filter(array($category, $google, $brand)))),
+            'image_source' => $image,
+            'destination_url' => $destination,
+            'tracking_url' => $tracking,
+            'status' => $inactive ? 'inactive' : 'active',
+            'price' => $price_currency['price'],
+            'currency' => $price_currency['currency'],
+            'availability' => $availability,
+            'seller_name' => $seller_name,
+            'brand' => $brand,
+            'product_type' => $category,
+            'google_product_category' => $google,
+            'gtin' => sanitize_text_field($this->automation_awin_field($row, array('gtin','ean'))),
+            // Keep the legacy display/search MPN fallback for compatibility, but
+            // expose a second exact-only field that never treats merchant SKU as
+            // manufacturer identity. Productwissen Exact Match may use only this.
+            'mpn' => sanitize_text_field($this->automation_awin_field($row, array('mpn','sku'))),
+            'exact_mpn' => sanitize_text_field($this->automation_awin_field($row, array('mpn'))),
+            '_source_kind' => 'product',
+            '_run_uuid' => $run_uuid,
+            '_partner_name' => sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
+        );
+    }
+
+    private function automation_adcell_product_row($row, $mapping, $run_uuid) {
+        $external = sanitize_text_field($this->network_sync_mapped_value($row, $mapping, 'external_id'));
+        $partner_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) $this->network_sync_mapped_value($row, $mapping, 'programme_external_id'));
+        $partner_name = sanitize_text_field($this->network_sync_mapped_value($row, $mapping, 'programme_name'));
+        $title = sanitize_text_field($this->network_sync_mapped_value($row, $mapping, 'title'));
+        $image = esc_url_raw($this->network_sync_mapped_value($row, $mapping, 'image_url'));
+        $tracking = esc_url_raw($this->network_sync_mapped_value($row, $mapping, 'tracking_url'));
+        $destination = esc_url_raw($this->network_sync_mapped_value($row, $mapping, 'destination_url'));
+        if ($external === '' || $partner_id === '' || $title === '' || $image === '' || $tracking === '') {
+            return new WP_Error('adcell_product_incomplete', 'ADCELL-Produkt ohne Partner-ID, Produkt-ID, Titel, Bild oder Trackinglink blockiert.');
+        }
+        if ($partner_name === '') {
+            $partner_name = 'ADCELL-Partner ' . $partner_id;
+        }
+        if ($destination === '') {
+            $destination = $tracking;
+        }
+        $price_currency = $this->automation_normalize_price_currency(
+            $this->network_sync_mapped_value($row, $mapping, 'price'),
+            $this->network_sync_mapped_value($row, $mapping, 'currency') ?: 'EUR'
+        );
+        $category = sanitize_text_field($this->network_sync_mapped_value($row, $mapping, 'category'));
+        $brand = sanitize_text_field($this->network_sync_mapped_value($row, $mapping, 'brand'));
+        $availability = sanitize_text_field($this->automation_awin_field($row, array('availability','stock_status','in_stock'), 'active'));
+        $availability_key = sanitize_key($availability);
+        $inactive = in_array($availability_key, array('out_of_stock','out_ouf_stock','discontinued','unavailable','inactive','false','0'), true);
+        return array(
+            'creative_id'=>$external,
+            'creative_type'=>'product',
+            'creative_title'=>$title,
+            'creative_description'=>sanitize_textarea_field($this->automation_awin_field($row, array('description','product_description','short_description'))),
+            'creative_tag'=>trim(implode(' | ', array_filter(array($category, $brand)))),
+            'image_source'=>$image,
+            'destination_url'=>$destination,
+            'tracking_url'=>$tracking,
+            'status'=>$inactive ? 'inactive' : 'active',
+            'price'=>$price_currency['price'],
+            'currency'=>$price_currency['currency'],
+            'availability'=>$availability,
+            'brand'=>$brand,
+            'product_type'=>$category,
+            'google_product_category'=>'',
+            'gtin'=>sanitize_text_field($this->automation_awin_field($row, array('gtin','ean'))),
+            'mpn'=>sanitize_text_field($this->automation_awin_field($row, array('mpn','sku'))),
+            '_source_kind'=>'product',
+            '_run_uuid'=>$run_uuid,
+            '_partner_external_id'=>$partner_id,
+            '_partner_name'=>$partner_name,
+        );
+    }
+
+    private function automation_offer_row($offer, $snapshot, $run_uuid) {
+        $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+        $external_id = absint($offer['external_id'] ?? 0);
+        $title = sanitize_text_field((string) ($offer['title'] ?? ''));
+        $tracking = esc_url_raw((string) ($offer['tracking_url'] ?? ''));
+        $destination = esc_url_raw((string) ($offer['destination_url'] ?? ''));
+        if ($tracking === '' && $destination !== '') {
+            $tracking = $this->automation_awin_tracking_url(absint($snapshot['external_id'] ?? 0), $destination, 'offer-' . $external_id);
+        }
+        if ($external_id <= 0 || $title === '' || $tracking === '') {
+            return new WP_Error('offer_incomplete', 'Angebot ohne ID, Titel oder Trackinglink blockiert.');
+        }
+        $start_date = $this->automation_normalize_date($offer['start_date'] ?? '');
+        $end_date = $this->automation_normalize_date($offer['end_date'] ?? '');
+        $today = gmdate('Y-m-d');
+        $active = !($start_date !== '' && $start_date > $today) && !($end_date !== '' && $end_date < $today);
+        $description = sanitize_textarea_field((string) ($offer['description'] ?? ''));
+        $terms = sanitize_textarea_field((string) ($offer['terms'] ?? ''));
+        if ($terms !== '') {
+            $description = trim($description . "\n" . $terms);
+        }
+        return array(
+            'creative_id' => 'offer-' . $external_id,
+            'creative_type' => 'text',
+            'creative_title' => $title,
+            'creative_description' => $description,
+            'creative_tag' => sanitize_text_field((string) ($offer['type'] ?? 'promotion')),
+            'destination_url' => $destination !== '' ? $destination : $tracking,
+            'tracking_url' => $tracking,
+            'status' => $active ? 'active' : 'inactive',
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'voucher_code' => sanitize_text_field((string) ($offer['voucher_code'] ?? '')),
+            'voucher_exclusive' => !empty($offer['voucher_exclusive']) ? '1' : '0',
+            'voucher_attributable' => !empty($offer['voucher_attributable']) ? '1' : '0',
+            '_source_kind' => 'offer',
+            '_run_uuid' => $run_uuid,
+            '_partner_name' => sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
+        );
+    }
+
+    private function automation_import_rows($rows, $context) {
+        $mapping = $this->creative_library_detect_mapping(array_keys((array) reset($rows)));
+        $counts = array('imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
+        $banner_identity_hashes = array();
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                $counts['failed']++;
+                continue;
+            }
+            $normalized = $this->creative_library_normalize_row($row, $mapping, $context);
+            if (is_wp_error($normalized)) {
+                $counts['blocked']++;
+                continue;
+            }
+            $result = $this->creative_library_upsert($normalized);
+            if (isset($counts[$result])) {
+                $counts[$result]++;
+            } else {
+                $counts['failed']++;
+            }
+            if (sanitize_key((string)($normalized['creative_type']??''))==='banner'
+                && !empty($normalized['identity_hash'])) {
+                $banner_identity_hashes[] = strtolower(sanitize_text_field((string)$normalized['identity_hash']));
+            }
+        }
+
+        // 6.72.199 HARD RULE:
+        // Import -> Ziel-URL/Providerbasis speichern -> Asset technisch prüfen
+        // -> ERST DANACH feste Portalziele speichern.
+        // Bereits verifizierte, bytegleiche Assets dürfen ihre vorhandene
+        // technische Evidence wiederverwenden. Neue/pending Banner bleiben
+        // bis zum Asset-Worker ohne Zielkarte.
+        // Kein N+1: alle betroffenen Banner werden in EINER DB-Abfrage geladen.
+        if ($banner_identity_hashes && method_exists($this,'output_assign_banner_targets_from_destination_once')) {
+            global $wpdb;
+            $banner_identity_hashes=array_values(array_unique(array_filter($banner_identity_hashes,static function($hash){
+                return (bool) preg_match('/^[a-f0-9]{64}$/',$hash);
+            })));
+            if($banner_identity_hashes){
+                $placeholders=implode(',',array_fill(0,count($banner_identity_hashes),'%s'));
+                $query=$wpdb->prepare(
+                    "SELECT * FROM {$this->creative_library_table()} WHERE identity_hash IN ({$placeholders})",
+                    ...$banner_identity_hashes
+                );
+                $stored_rows=$wpdb->get_results($query,ARRAY_A);
+                foreach((array)$stored_rows as $stored_row){
+                    $payload=json_decode((string)($stored_row['payload']??''),true);
+                    $payload=is_array($payload)?$payload:array();
+                    $dimension_state=sanitize_key((string)($payload['_dimension_state']??'pending'));
+                    $requires_verification=method_exists($this,'creative_library_verify_before_assign_banner')
+                        && $this->creative_library_verify_before_assign_banner($stored_row);
+                    $asset_verified=in_array($dimension_state,array('verified','mismatch'),true)
+                        && absint($stored_row['width']??0)>0
+                        && absint($stored_row['height']??0)>0;
+                    if($requires_verification && !$asset_verified){
+                        continue;
+                    }
+                    $this->output_assign_banner_targets_from_destination_once($stored_row);
+                }
+            }
+        }
+
+        // Automation imports must enter the same verified asset/output pipeline as
+        // manual creative imports. Otherwise Awin/ADCELL products remain stranded
+        // as unverified library rows and can never reach automatic target/slot planning.
+        if (($counts['imported'] > 0 || $counts['updated'] > 0)
+            && method_exists($this, 'creative_library_schedule_asset_verification')) {
+            $this->creative_library_schedule_asset_verification(10);
+        }
+        return $counts;
+    }
+
+    private function automation_merge_counts($a, $b) {
+        foreach (array('imported','updated','unchanged','blocked','failed') as $key) {
+            $a[$key] = absint($a[$key] ?? 0) + absint($b[$key] ?? 0);
+        }
+        return $a;
+    }
+
+    private function automation_rebuild_edges($provider, $partner_external_id) {
+        global $wpdb;
+        $library = $this->creative_library_table();
+        $edges = $this->automation_edges_table();
+        $provider = sanitize_key($provider);
+        $partner_external_id = sanitize_text_field($partner_external_id);
+        $wpdb->query($wpdb->prepare(
+            "DELETE FROM {$edges} WHERE provider=%s AND partner_external_id=%s AND source='automatic'",
+            $provider, $partner_external_id
+        ));
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT identity_hash, topic_status, topic_targets FROM {$library} WHERE provider=%s AND partner_external_id=%s AND source_status='active' AND availability_state='active' AND topic_status IN ('auto_verified','auto_review','ambiguous')",
+            $provider, $partner_external_id
+        ), ARRAY_A);
+        $now = time();
+        $count = 0;
+        foreach ($rows as $row) {
+            $targets = json_decode((string) ($row['topic_targets'] ?? ''), true);
+            if (!is_array($targets)) {
+                continue;
+            }
+            foreach ($targets as $target) {
+                if (!is_array($target)) {
+                    continue;
+                }
+                $type = sanitize_key((string) ($target['type'] ?? ''));
+                $slug = sanitize_key((string) ($target['slug'] ?? ''));
+                if (!in_array($type, array('page','category','journal','market'), true) || $slug === '') {
+                    continue;
+                }
+                $data = array(
+                    'provider' => sanitize_key($provider),
+                    'partner_external_id' => sanitize_text_field($partner_external_id),
+                    'asset_identity_hash' => sanitize_text_field((string) $row['identity_hash']),
+                    'target_type' => $type,
+                    'target_slug' => $slug,
+                    'target_path' => sanitize_text_field((string) ($target['path'] ?? $slug)),
+                    'score' => absint($target['score'] ?? 0),
+                    'edge_status' => sanitize_key((string) ($row['topic_status'] ?? 'review')),
+                    'source' => 'automatic',
+                    'updated_at' => $now,
+                );
+                $existing = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$edges} WHERE asset_identity_hash=%s AND target_type=%s AND target_slug=%s", $data['asset_identity_hash'], $type, $slug));
+                if ($existing) {
+                    $wpdb->update($edges, $data, array('id'=>absint($existing)));
+                } else {
+                    $wpdb->insert($edges, $data);
+                }
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+    private function automation_reconcile_partner_assets($provider, $partner_external_id, $source_kind, $run_uuid) {
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT id, missing_count, identity_hash, creative_type FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_kind=%s AND last_complete_run<>%s",
+            sanitize_key($provider), sanitize_text_field($partner_external_id), sanitize_key($source_kind), sanitize_text_field($run_uuid)
+        ), ARRAY_A);
+        foreach ($rows as $row) {
+            $missing = absint($row['missing_count'] ?? 0) + 1;
+            $wpdb->update($table, array(
+                'missing_count'=>$missing,
+                'availability_state'=>$missing >= 2 ? 'inactive_missing' : 'quarantine_missing',
+                'selected'=>0,
+            ), array('id'=>absint($row['id'])));
+
+            // Erst nach dem zweiten vollstaendigen Fehlen gilt das Creative als
+            // bestaetigt nicht mehr verfuegbar. Dann nur seine automatische
+            // Bannerkampagne deaktivieren; manuelle FIXED-Kampagnen bleiben.
+            if($missing>=2
+                && sanitize_key((string)($row['creative_type']??''))==='banner'
+                && method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
+                $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
+                if(preg_match('/^[a-f0-9]{64}$/',$identity)){
+                    $this->creative_library_deactivate_automatic_output_campaigns($identity);
+                }
+            }
+        }
+    }
+
+    /**
+     * V6.72.29 – KISS-Gesamtstart fuer ADCELL.
+     * Ein Klick nimmt alle aktuell allowlisteten, accepted+aktiven Programme.
+     * Bereits laufende Programme werden nicht dupliziert, sondern nur gezaehlt.
+     */
+    private function automation_start_all_adcell_programmes() {
+        $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
+        if (is_wp_error($programmes)) {
+            return $programmes;
+        }
+        $programmes = is_array($programmes) ? $programmes : array();
+        if (!$programmes) {
+            return new WP_Error('adcell_batch_empty', 'Keine freigegebenen accepted+aktiven ADCELL-Programme verfügbar.');
+        }
+        $summary = array(
+            'batch'=>true,
+            'provider'=>'adcell',
+            'total'=>0,
+            'queued'=>0,
+            'already_running'=>0,
+            'failed'=>0,
+            'errors'=>array(),
+        );
+        foreach ($programmes as $program_id => $programme) {
+            $program_id = absint($program_id ?: ($programme['id'] ?? 0));
+            if ($program_id <= 0) {
+                continue;
+            }
+            $summary['total']++;
+            $result = $this->automation_dispatch_source(array(
+                'key'=>'adcell:' . $program_id,
+                'provider'=>'adcell',
+                'partner_external_id'=>(string) $program_id,
+            ), true);
+            if (is_wp_error($result)) {
+                if ($result->get_error_code() === 'adcell_job_exists') {
+                    $summary['already_running']++;
+                } else {
+                    $summary['failed']++;
+                    $summary['errors'][] = $program_id . ': ' . $result->get_error_message();
+                }
+                continue;
+            }
+            $summary['queued']++;
+        }
+        if ($summary['total'] <= 0) {
+            return new WP_Error('adcell_batch_empty', 'Keine gültige ADCELL-programId in der Freigabeliste gefunden.');
+        }
+        if ($summary['queued'] <= 0 && $summary['already_running'] <= 0 && $summary['failed'] > 0) {
+            return new WP_Error('adcell_batch_failed', implode(' | ', array_slice($summary['errors'], 0, 3)));
+        }
+        return $summary;
+    }
+
+    public function handle_automation_full_sync() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_automation_full_sync', 'ppar_automation_nonce');
+        $provider = sanitize_key((string) ($_POST['provider'] ?? ''));
+        $partner_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) ($_POST['partner_external_id'] ?? ''));
+        $adcell_all = $provider === 'adcell' && $partner_id === 'all';
+        if ($provider === '') {
+            $result = new WP_Error('automation_provider_missing', 'Provider fehlt.');
+        } elseif ($adcell_all) {
+            $result = $this->automation_start_all_adcell_programmes();
+        } elseif ($provider === 'adcell' && absint($partner_id) <= 0) {
+            $result = new WP_Error('adcell_program_invalid', 'Für ADCELL muss eine freigegebene programId gewählt werden.');
+        } else {
+            if ($provider === 'ebay' && $partner_id === '') { $partner_id = 'provider'; }
+            $result = $this->automation_dispatch_source(array(
+                'key'=>$provider . ':' . $partner_id,
+                'provider'=>$provider,
+                'partner_external_id'=>$partner_id,
+            ), true);
+        }
+        $immediate = is_array($result) && !empty($result['immediate']);
+        if (!is_wp_error($result) && !$immediate) {
+            if ($adcell_all) {
+                $this->run_automation_worker(true, 'adcell');
+                $this->automation_schedule_adcell_batch_worker(3);
+            } else {
+                $this->run_automation_worker(true);
+            }
+        }
+        $status = is_wp_error($result) ? 'failed' : ($immediate ? 'completed' : 'progress');
+        if (is_wp_error($result)) {
+            $message = $result->get_error_message();
+        } elseif (!empty($result['batch']) && $provider === 'adcell') {
+            $message = sprintf(
+                'ADCELL-Gesamtstart: %d freigegebene Programme geprüft, %d neu vorgemerkt, %d bereits laufend, %d fehlgeschlagen. Direkte ADCELL-Hintergrundkette läuft bis die fällige Warteschlange und die ADCELL-Bildprüfung abgearbeitet sind.',
+                absint($result['total'] ?? 0),
+                absint($result['queued'] ?? 0),
+                absint($result['already_running'] ?? 0),
+                absint($result['failed'] ?? 0)
+            );
+        } else {
+            $message = $immediate ? $this->provider_label($provider) . '-Lauf wurde unmittelbar verarbeitet.' : 'Lauf gestartet; das erste kleine Arbeitspaket wurde verarbeitet.';
+        }
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-automation','ppar_auto'=>$status,'ppar_message'=>rawurlencode($message),'provider'=>$provider,'partner_external_id'=>$partner_id), admin_url('admin.php')));
+        exit;
+    }
+
+    /**
+     * Entfernt ausschließlich die nicht mehr unterstützten Browser-Bridge-Token.
+     * Der Awin-Bannerkatalog wird nicht über Browserautomatisierung oder Scraping bezogen.
+     */
+    public function maybe_cleanup_removed_import_tokens() {
+        if (get_option(self::OPTION_BRIDGE_TOKENS, null) !== null) {
+            delete_option(self::OPTION_BRIDGE_TOKENS);
+        }
+        if (function_exists('delete_user_meta')) {
+            delete_user_meta(get_current_user_id(), 'ppar_last_bridge_token');
+        }
+    }
+
+    /**
+     * V4: Slot- und Formatentscheidungen liegen ausschließlich im zentralen
+     * Ausgabeobjekt-Modell. Die alte globale Bibliothekslogik wurde entfernt,
+     * damit kein zweiter, widersprüchlicher Materialisierungspfad existiert.
+     */
+
+    public function automation_normalize_target_key($key) {
+        $key = strtolower(trim((string) $key));
+        if (!preg_match('/^(page|category|journal|market|uge_group|uge_term|pa_breed|pa_breed_group):([a-z0-9_-]+)$/', $key, $match)) {
+            return '';
+        }
+        return $match[1] . ':' . $this->ranked_campaign_sanitize_key_request_cached($match[2]);
+    }
+
+    /**
+     * V6.72.171: identical target-key sets are common across a product feed.
+     * Their exact target rank is a pure function of target keys + page context.
+     * Cache that result once per normal frontend request; administrative/worker
+     * paths keep the historical call-by-call behavior.
+     */
+    private function automation_campaign_exact_target_rank($campaign, $context) {
+        if (!$this->ranked_campaigns_request_cache_allowed()) {
+            return $this->automation_campaign_exact_target_rank_uncached($campaign, $context);
+        }
+        $campaign = is_array($campaign) ? $campaign : array();
+        $context = is_array($context) ? $context : array();
+        $wanted = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys'])
+            ? array_values(array_filter($campaign['automation_target_keys']))
+            : array();
+        if (!$wanted) { return null; }
+
+        // Only fields read by automation_campaign_exact_target_rank_uncached().
+        $key_context = array(
+            'wanted' => $wanted,
+            'primary_slug' => $context['primary_slug'] ?? '',
+            'post_type' => $context['post_type'] ?? '',
+            'semantic_primary_target_key' => $context['semantic_primary_target_key'] ?? '',
+            'semantic_ancestor_target_keys' => (array)($context['semantic_ancestor_target_keys'] ?? array()),
+            'slot_type' => $context['slot_type'] ?? '',
+            'direct_term_slugs' => (array)($context['direct_term_slugs'] ?? array()),
+            'slugs' => (array)($context['slugs'] ?? array()),
+            'product_family_slug' => $context['product_family_slug'] ?? '',
+            '_ppar_norm_primary_slug' => $context['_ppar_norm_primary_slug'] ?? null,
+            '_ppar_norm_post_type' => $context['_ppar_norm_post_type'] ?? null,
+            '_ppar_norm_semantic_primary_target_key' => $context['_ppar_norm_semantic_primary_target_key'] ?? null,
+            '_ppar_norm_semantic_ancestor_target_keys' => $context['_ppar_norm_semantic_ancestor_target_keys'] ?? null,
+            '_ppar_norm_direct_term_slugs' => $context['_ppar_norm_direct_term_slugs'] ?? null,
+            '_ppar_norm_slugs' => $context['_ppar_norm_slugs'] ?? null,
+            '_ppar_norm_product_family_slug' => $context['_ppar_norm_product_family_slug'] ?? null,
+        );
+        $key = hash('sha256', serialize($key_context));
+        if (array_key_exists($key, $this->automation_exact_target_rank_request_cache)) {
+            $cached = $this->automation_exact_target_rank_request_cache[$key];
+            return is_array($cached) ? $cached : null;
+        }
+        $result = $this->automation_campaign_exact_target_rank_uncached($campaign, $context);
+        $this->automation_exact_target_rank_request_cache[$key] = is_array($result) ? $result : false;
+        return $result;
+    }
+
+    private function automation_campaign_exact_target_rank_uncached($campaign, $context) {
+        // campaign_from_post() already normalizes and de-duplicates these keys when the request campaign snapshot is built.
+        $wanted = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys']) ? array_values(array_filter($campaign['automation_target_keys'])) : array();
+        if (!$wanted) {
+            return null;
+        }
+        $primary = isset($context['_ppar_norm_primary_slug']) ? (string) $context['_ppar_norm_primary_slug'] : $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+        $post_type = isset($context['_ppar_norm_post_type']) ? (string) $context['_ppar_norm_post_type'] : $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
+        $available = array();
+        $semantic_primary = isset($context['_ppar_norm_semantic_primary_target_key']) ? (string) $context['_ppar_norm_semantic_primary_target_key'] : (method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '');
+        $semantic_ancestors = isset($context['_ppar_norm_semantic_ancestor_target_keys']) && is_array($context['_ppar_norm_semantic_ancestor_target_keys']) ? $context['_ppar_norm_semantic_ancestor_target_keys'] : array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array()))));
+        if ($semantic_primary !== '') { $available[] = $semantic_primary; }
+        foreach ($semantic_ancestors as $semantic_key) { $available[] = $semantic_key; }
+        $slot_type = isset($context['slot_type']) ? (string) $context['slot_type'] : '';
+        $slot_type = isset($context['_ppar_norm_post_type']) ? $slot_type : $this->ranked_campaign_sanitize_key_request_cached($slot_type);
+        if ($post_type === 'page' && $slot_type === 'anzeigenmarkt_top_banner') {
+            $available[] = 'market:anzeigenmarkt';
+        }
+        if ($primary !== '') {
+            if ($post_type === 'page') {
+                $available[] = 'page:' . $primary;
+                $available[] = 'journal:' . $primary;
+            } elseif ($post_type === 'category_archive') {
+                $available[] = 'category:' . $primary;
+                $available[] = 'journal:' . $primary;
+            } elseif ($post_type === 'hp_listing_category_archive') {
+                $available[] = 'market:' . $primary;
+            } elseif ($post_type === 'uge_term') {
+                $available[] = 'uge_term:' . $primary;
+            } elseif ($post_type === 'pa_breed') {
+                $available[] = 'pa_breed:' . $primary;
+            } elseif ($post_type === 'uge_group_archive') {
+                $available[] = 'uge_group:' . $primary;
+            } elseif ($post_type === 'pa_breed_group_archive') {
+                $available[] = 'pa_breed_group:' . $primary;
+            }
+        }
+        $direct_term_slugs = isset($context['_ppar_norm_direct_term_slugs']) && is_array($context['_ppar_norm_direct_term_slugs']) ? $context['_ppar_norm_direct_term_slugs'] : (array) ($context['direct_term_slugs'] ?? array());
+        foreach ($direct_term_slugs as $slug) {
+            $slug = isset($context['_ppar_norm_direct_term_slugs']) ? (string) $slug : $this->ranked_campaign_sanitize_key_request_cached((string) $slug);
+            if ($slug === '') {
+                continue;
+            }
+            if ($post_type === 'post') {
+                $available[] = 'category:' . $slug;
+                $available[] = 'journal:' . $slug;
+            } elseif ($post_type === 'hp_listing') {
+                $available[] = 'market:' . $slug;
+            } elseif ($post_type === 'uge_term') {
+                $available[] = 'uge_group:' . $slug;
+            } elseif ($post_type === 'pa_breed') {
+                $available[] = 'pa_breed_group:' . $slug;
+            }
+        }
+        // Seiten/Kategorien: aktuelle Zielkante = exakt; echte Vorfahren
+        // = erweiterter Themenkreis. Das bildet die verbindliche Prioritaet
+        // gleiches Thema -> Themenkreis -> allgemein ohne manuelle Klicks ab.
+        $hierarchy_prefix='';
+        if ($post_type==='page') { $hierarchy_prefix='page:'; }
+        elseif ($post_type==='category_archive') { $hierarchy_prefix='category:'; }
+        if ($hierarchy_prefix!=='' && $primary!=='') {
+            $primary_key=$hierarchy_prefix.$primary;
+            if (in_array($primary_key,$wanted,true)) {
+                return array('specificity'=>520,'matches'=>1,'reason'=>'Exakte Zielkante: '.$primary_key.'.');
+            }
+            $ancestor_keys=array();
+            $context_slugs = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']) ? $context['_ppar_norm_slugs'] : (array)($context['slugs']??array());
+            foreach ($context_slugs as $slug) {
+                $slug=isset($context['_ppar_norm_slugs']) ? (string)$slug : sanitize_key((string)$slug);
+                if ($slug!=='' && $slug!==$primary) { $ancestor_keys[]=$hierarchy_prefix.$slug; }
+            }
+            $ancestor_matches=array_values(array_intersect(array_unique($wanted),array_unique($ancestor_keys)));
+            if ($ancestor_matches) {
+                return array('specificity'=>430,'matches'=>count($ancestor_matches),'reason'=>'Passender uebergeordneter Themenkreis: '.implode(', ',$ancestor_matches).'.');
+            }
+        }
+
+        // 6.72.90: Portalstruktur besitzt Produktseiten (z.B. /reithelme/) und
+        // redaktionelle WordPress-Kategorien (reithelme-faq, -beratung, ...), die
+        // in WordPress selbst bewusst keine Taxonomie-Eltern haben. Der gebuendelte
+        // Portalstrukturvertrag ist deshalb die autoritative Familienkante.
+        // Bestehende Kampagnen, die bei der Klassifikation auf eine der beiden
+        // Seiten der Familie materialisiert wurden, bleiben ohne Neuimport passend.
+        $family = isset($context['_ppar_norm_product_family_slug']) ? (string) $context['_ppar_norm_product_family_slug'] : sanitize_key((string)($context['product_family_slug'] ?? ''));
+        if ($post_type === 'page' && $primary !== '' && method_exists($this, 'portal_structure_product_family_for_category')) {
+            foreach ($wanted as $wanted_key) {
+                if (!preg_match('/^category:([a-z0-9_-]+)$/', $wanted_key, $m)) { continue; }
+                if ($this->portal_structure_product_family_for_category($m[1]) === $primary) {
+                    return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: page:'.$primary.' <-> '.$wanted_key.'.');
+                }
+            }
+        }
+        if ($post_type === 'category_archive' && $family !== '') {
+            if (in_array('page:'.$family, $wanted, true)) {
+                return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: category:'.$primary.' -> page:'.$family.'.');
+            }
+            if (method_exists($this, 'portal_structure_product_family_for_category')) {
+                foreach ($wanted as $wanted_key) {
+                    if (!preg_match('/^category:([a-z0-9_-]+)$/', $wanted_key, $m)) { continue; }
+                    if ($this->portal_structure_product_family_for_category($m[1]) === $family) {
+                        return array('specificity'=>500,'matches'=>1,'reason'=>'Gleiche Portal-Produktfamilie: '.$family.'.');
+                    }
+                }
+            }
+        }
+
+        // HivePress-Unterkategorien: aktuelle Kategorie = exakt; ihre
+        // Vorfahren = erweiterter Themenkreis. So gewinnt z.B. Reithelme vor
+        // Reitausruestung, waehrend der Parent nur als zweite Stufe dient.
+        if ($post_type === 'hp_listing_category_archive' && $primary !== '') {
+            $primary_key='market:'.$primary;
+            if (in_array($primary_key,$wanted,true)) {
+                return array('specificity'=>520,'matches'=>1,'reason'=>'Exakte HivePress-Zielkategorie: '.$primary_key.'.');
+            }
+            $ancestor_keys=array();
+            foreach ((array)($context['slugs']??array()) as $slug) {
+                $slug=sanitize_key((string)$slug);
+                if ($slug!=='' && $slug!==$primary) { $ancestor_keys[]='market:'.$slug; }
+            }
+            $ancestor_matches=array_values(array_intersect(array_unique($wanted),array_unique($ancestor_keys)));
+            if ($ancestor_matches) {
+                return array('specificity'=>430,'matches'=>count($ancestor_matches),'reason'=>'Passender HivePress-Themenkreis: '.implode(', ',$ancestor_matches).'.');
+            }
+        }
+        $matches = array_values(array_intersect(array_unique($wanted), array_unique($available)));
+        if (!$matches) { return null; }
+        if ($semantic_primary !== '' && in_array($semantic_primary, $matches, true)) {
+            return array('specificity'=>560, 'matches'=>count($matches), 'reason'=>'Glossar-Bedeutungshierarchie: exakte passende Hauptseite ' . $semantic_primary . '.');
+        }
+        $ancestor_matches = array_values(array_intersect($semantic_ancestors, $matches));
+        if ($ancestor_matches) {
+            return array('specificity'=>530, 'matches'=>count($matches), 'reason'=>'Glossar-Bedeutungshierarchie: passender uebergeordneter Themenast ' . implode(', ', $ancestor_matches) . '.');
+        }
+        return array('specificity'=>520, 'matches'=>count($matches), 'reason'=>'Exakte automatisierte Zielkante: ' . implode(', ', $matches) . '.');
+    }
+
+    public function handle_automation_materialize() {
+        if (!current_user_can('manage_options')) {
+            wp_die('Keine Berechtigung.');
+        }
+        check_admin_referer('ppar_automation_materialize', 'ppar_materialize_nonce');
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE source_status='active' AND availability_state='active' ORDER BY id ASC LIMIT 100", ARRAY_A);
+        $ok = 0;
+        $blocked = 0;
+        foreach ((array) $rows as $row) {
+            if (!method_exists($this, 'output_plan_creative')) {
+                $blocked++;
+                continue;
+            }
+            $result = $this->output_plan_creative($row, true);
+            $ok += absint($result['drafts'] ?? 0);
+            $blocked += absint($result['blocked'] ?? 0);
+        }
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-automation','ppar_auto'=>'materialized','created'=>$ok,'blocked'=>$blocked), admin_url('admin.php')));
+        exit;
+    }
+
+    /**
+     * V6.72.88 – einmaliger, ressourcenschonender Upgrade-Nachlauf.
+     * 6.72.85+ kann echte ADCELL-Werbemittelkategorien lesen, aber ein Plugin-
+     * Upgrade allein garantiert keinen bereits abgeschlossenen ADCELL-Lauf.
+     * Deshalb wird genau EIN Hintergrundlauf vorgemerkt; keine API im Frontend.
+     */
+    public function maybe_upgrade_adcell_topic_metadata_v67288() {
+        // Seit 6.72.189 ersetzt der neue Ziel-URL-Nachlauf diesen historischen
+        // Kategorien-Nachlauf vollstaendig. Auf Neuinstallationen darf deshalb
+        // nicht zweimal der komplette ADCELL-Bestand gestartet werden.
+        if (version_compare(self::VERSION, '6.72.189', '>=')) { return; }
+        $key = 'ppar_v67288_adcell_topic_resync_state';
+        $state = sanitize_key((string)get_option($key, ''));
+        if (in_array($state, array('scheduled','running','done'), true)) { return; }
+        update_option($key, 'scheduled', false);
+        if (!wp_next_scheduled('ppar_v67288_adcell_topic_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v67288_adcell_topic_resync');
+        }
+    }
+
+    public function run_v67288_adcell_topic_resync() {
+        if (version_compare(self::VERSION, '6.72.189', '>=')) { return; }
+        $key = 'ppar_v67288_adcell_topic_resync_state';
+        update_option($key, 'running', false);
+        $result = $this->automation_start_all_adcell_programmes();
+        if (is_wp_error($result)) {
+            update_option($key, 'retry', false);
+            if (!wp_next_scheduled('ppar_v67288_adcell_topic_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v67288_adcell_topic_resync');
+            }
+            return;
+        }
+        update_option($key, 'done', false);
+        // Die vorhandene ADCELL-Pipeline verarbeitet paketweise. Nach jedem
+        // fertigen Programmlauf setzt 6.72.87+ den Vollpool-Cursor zurueck und
+        // plant erst dann mit den echten Kategorien neu.
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+1, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+    }
+
+
+    /**
+     * V6.72.190 – HARD RULE Nachlauf.
+     * Import -> Ziel-URL -> einmalige feste Portalziel-Zuordnung -> speichern.
+     * Eigener Versionszustand, damit ein alter 6.72.189-done-Status den
+     * KISS-Zielkartenaufbau nicht ueberspringen kann.
+     */
+    public function maybe_upgrade_banner_target_map_v672190() {
+        $key = 'ppar_v672190_banner_target_map_resync_state';
+        $state = sanitize_key((string)get_option($key, ''));
+        if (in_array($state, array('scheduled','running','done'), true)) { return; }
+        update_option($key, 'scheduled', false);
+        if (!wp_next_scheduled('ppar_v672190_banner_target_map_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672190_banner_target_map_resync');
+        }
+    }
+
+    public function run_v672190_banner_target_map_resync() {
+        $key = 'ppar_v672190_banner_target_map_resync_state';
+        update_option($key, 'running', false);
+        $result = $this->automation_start_all_adcell_programmes();
+        if (is_wp_error($result)) {
+            update_option($key, 'retry', false);
+            if (!wp_next_scheduled('ppar_v672190_banner_target_map_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672190_banner_target_map_resync');
+            }
+            return;
+        }
+        update_option($key, 'done', false);
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+1, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+    }
+
+    /**
+     * V6.72.194 – LIVE-KISS Zielkarten-Neuaufbau.
+     *
+     * Anders als der indirekte 6.72.190-ADCELL-Nachlauf arbeitet dieser Worker
+     * direkt auf dem bereits vorhandenen lokalen Bannerbestand:
+     * gespeicherte destination_url -> alte automatische Zielkarte verwerfen ->
+     * feste Zielkarte neu bauen -> nur bei sicherer Karte neu planen.
+     *
+     * Kein Provider-HTTP, kein Frontend-Scan, keine Produktzeilen.
+     */
+    public function maybe_rebuild_banner_target_map_v672194() {
+        if (self::VERSION !== '6.72.194' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state_key = 'ppar_v672194_banner_target_rebuild_state';
+        $cursor_key = 'ppar_v672194_banner_target_rebuild_cursor';
+        $state = sanitize_key((string)get_option($state_key, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            delete_option($cursor_key);
+            delete_option('ppar_v672194_banner_target_rebuild_result');
+            update_option($state_key, 'running', false);
+        }
+        if (!wp_next_scheduled('ppar_v672194_banner_target_rebuild')) {
+            wp_schedule_single_event(time() + 1, 'ppar_v672194_banner_target_rebuild');
+        }
+    }
+
+    public function run_v672194_banner_target_rebuild() {
+        if (self::VERSION !== '6.72.194'
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this, 'creative_library_deactivate_automatic_output_campaigns')) {
+            return;
+        }
+
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $state_key = 'ppar_v672194_banner_target_rebuild_state';
+        $cursor_key = 'ppar_v672194_banner_target_rebuild_cursor';
+        $result_key = 'ppar_v672194_banner_target_rebuild_result';
+        $cursor = absint(get_option($cursor_key, 0));
+        $limit = 50;
+        $deadline = microtime(true) + 12.0;
+        $processed = 0;
+        $mapped_count = 0;
+        $replanned = 0;
+        $deactivated = 0;
+        $no_map = 0;
+        $last = $cursor;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,
+                $limit
+            ), ARRAY_A);
+
+            if (!is_array($rows) || !$rows) {
+                $more = false;
+                break;
+            }
+
+            foreach ($rows as $row) {
+                $row_id = absint($row['id'] ?? 0);
+                $last = max($last, $row_id);
+                $processed++;
+                if ($row_id <= 0) { continue; }
+
+                $identity = strtolower(sanitize_text_field((string)($row['identity_hash'] ?? '')));
+                if (!preg_match('/^[a-f0-9]{64}$/', $identity)) { continue; }
+
+                // Fail-closed zuerst: alte automatisch materialisierte Kampagne
+                // darf waehrend des Neuaufbaus nicht weiter auf einem alten Ziel
+                // sichtbar bleiben. Manuelle/FIXED Kampagnen bleiben unangetastet.
+                $deactivated += absint($this->creative_library_deactivate_automatic_output_campaigns($identity));
+
+                // Ausschliesslich abgeleitete automatische Zielwerte verwerfen.
+                // Manuelle Control-/FIXED-Entscheidungen liegen separat.
+                $wpdb->update($table, array(
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$row_id));
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+
+                // 6.72.199 Basisvertrag: Reconcile darf eine Zielkarte
+                // nicht vor der technischen Bildprüfung erzeugen. Pending/fehlgeschlagene
+                // Assets bleiben nach dem globalen Reset ohne Ziel und ohne Kampagne.
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+
+                if (!$verified) {
+                    if ($dimension_state !== 'failed'
+                        && method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
+                if ($mapped_n <= 0) {
+                    $no_map++;
+                    continue;
+                }
+                $mapped_count += $mapped_n;
+
+                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 100;
+                $row['classified_at'] = time();
+
+                if (method_exists($this, 'output_plan_creative')) {
+                    $plan = $this->output_plan_creative($row, true);
+                    if (is_array($plan) && (absint($plan['active'] ?? 0) > 0 || absint($plan['drafts'] ?? 0) > 0)) {
+                        $replanned++;
+                    }
+                }
+            }
+
+            update_option($cursor_key, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option($result_key, array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'mapped'=>absint($previous['mapped'] ?? 0) + $mapped_count,
+            'replanned'=>absint($previous['replanned'] ?? 0) + $replanned,
+            'deactivated_auto_campaigns'=>absint($previous['deactivated_auto_campaigns'] ?? 0) + $deactivated,
+            'no_map'=>absint($previous['no_map'] ?? 0) + $no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ), false);
+
+        if ($more) {
+            if (!wp_next_scheduled('ppar_v672194_banner_target_rebuild')) {
+                wp_schedule_single_event(time() + 3, 'ppar_v672194_banner_target_rebuild');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key, 'done', false);
+    }
+
+
+    /**
+     * V6.72.195 – deterministischer Banner-Reconcile.
+     *
+     * Unterschied zu allen vorigen Reparaturen:
+     * 1. Zuerst werden ALLE automatisch erzeugten Bannerkampagnen global
+     *    stillgelegt – unabhaengig davon, ob ihr alter Creative-Metakey noch stimmt.
+     * 2. Danach werden ausschliesslich aus der aktuellen Creative-Library und
+     *    deren gespeicherter Zielkarte neue automatische Banner aktiviert.
+     * 3. Der erste Batch laeuft direkt im Backend-Request. WP-Cron ist nur noch
+     *    Fortsetzung fuer grosse Bestaende, nicht Voraussetzung fuer den Start.
+     */
+    public function maybe_reconcile_banner_state_v672195() {
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198','6.72.199','6.72.200'), true) || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+
+        // 6.72.200: neuer fortlaufender Pluginstand fuer den Ziel-URL-Fix.
+        // Ein eigener Marker stellt sicher, dass der vorhandene Bestand nach dem
+        // Upgrade genau einmal mit der korrigierten Landingpage-Aufloesung neu
+        // zugeordnet wird.
+        if (self::VERSION === '6.72.200') {
+            $repair_key = 'ppar_v672200_destination_target_rootfix_done';
+            if ((string)get_option($repair_key, '') === 'yes') {
+                return;
+            }
+            $state_key = 'ppar_v672200_banner_reconcile_state';
+            $prefix = 'ppar_v672200_banner_reconcile_';
+            $state = sanitize_key((string)get_option($state_key, ''));
+            if ($state !== 'running') {
+                foreach (array('cursor','result','reset_done') as $suffix) {
+                    delete_option($prefix . $suffix);
+                }
+                update_option($state_key, 'running', false);
+            }
+            $this->run_v672195_banner_reconcile();
+            if (sanitize_key((string)get_option($state_key, '')) === 'done') {
+                update_option($repair_key, 'yes', false);
+            }
+            return;
+        }
+
+        // 6.72.199 ROOTFIX:
+        // Der bestehende Reconcile-Runner konnte 6.72.199 ausfuehren, sein
+        // admin_init-Einstieg hat 6.72.199 aber versehentlich ausgeschlossen.
+        // Dadurch konnten bereits importierte/verifizierte Live-Banner mit alter
+        // leerer Zielkarte stehenbleiben. Nach abgeschlossenem ADCELL-Basislauf
+        // erzwingen wir genau EINEN frischen Reconcile auf dem vorhandenen
+        // Bestand. Kein neuer Worker, kein Frontend-HTTP, keine neue Logik.
+        if (self::VERSION === '6.72.199') {
+            if (sanitize_key((string)get_option('ppar_v672199_adcell_banner_basis_state', '')) !== 'done') {
+                return;
+            }
+            $repair_key = 'ppar_v672199_destination_target_rootfix_done';
+            if ((string)get_option($repair_key, '') === 'yes') {
+                return;
+            }
+            $state_key = 'ppar_v672199_banner_reconcile_state';
+            $prefix = 'ppar_v672199_banner_reconcile_';
+            $state = sanitize_key((string)get_option($state_key, ''));
+            if ($state !== 'running') {
+                foreach (array('cursor','result','reset_done') as $suffix) {
+                    delete_option($prefix . $suffix);
+                }
+                update_option($state_key, 'running', false);
+            }
+            $this->run_v672195_banner_reconcile();
+            if (sanitize_key((string)get_option($state_key, '')) === 'done') {
+                update_option($repair_key, 'yes', false);
+            }
+            return;
+        }
+
+        $state_key = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_state' : 'ppar_v672195_banner_reconcile_state';
+        $state = sanitize_key((string)get_option($state_key, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            $prefix = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_';
+            delete_option($prefix . 'cursor');
+            delete_option($prefix . 'result');
+            delete_option($prefix . 'reset_done');
+            update_option($state_key, 'running', false);
+        }
+        // Wichtig: nicht nur schedulen. Der Backend-Aufruf fuehrt den ersten
+        // begrenzten Reconcile-Schritt selbst aus.
+        $this->run_v672195_banner_reconcile();
+    }
+
+    public function run_v672195_banner_reconcile() {
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198','6.72.199','6.72.200'), true)
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this, 'creative_library_deactivate_all_automatic_banner_campaigns')) {
+            return;
+        }
+
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $prefix = self::VERSION === '6.72.200'
+            ? 'ppar_v672200_banner_reconcile_'
+            : (self::VERSION === '6.72.199'
+                ? 'ppar_v672199_banner_reconcile_'
+                : (self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_'));
+        $state_key = $prefix . 'state';
+        $cursor_key = $prefix . 'cursor';
+        $result_key = $prefix . 'result';
+        $reset_key = $prefix . 'reset_done';
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+
+        if ((string)get_option($reset_key, '') !== 'yes') {
+            $global_deactivated = absint($this->creative_library_deactivate_all_automatic_banner_campaigns());
+            $previous['global_deactivated_auto_banners'] = absint($previous['global_deactivated_auto_banners'] ?? 0) + $global_deactivated;
+            update_option($result_key, $previous, false);
+            update_option($reset_key, 'yes', false);
+        }
+
+        $last = absint(get_option($cursor_key, 0));
+        $limit = 50;
+        $deadline = microtime(true) + 10.0;
+        $processed = 0;
+        $mapped_count = 0;
+        $replanned = 0;
+        $no_map = 0;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,
+                $limit
+            ), ARRAY_A);
+
+            if (!is_array($rows) || !$rows) {
+                $more = false;
+                break;
+            }
+
+            foreach ($rows as $row) {
+                $row_id = absint($row['id'] ?? 0);
+                $last = max($last, $row_id);
+                $processed++;
+                if ($row_id <= 0) { continue; }
+
+                // topic_targets ist die einzige automatische Zielautoritaet.
+                // Jede abgeleitete Altkarte wird verworfen und frisch aus der
+                // aktuellen Import-/Manuellinformation aufgebaut.
+                $wpdb->update($table, array(
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$row_id));
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+
+                if (!$verified) {
+                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                // KISS-Hardlock: feste Zielkarte erst nach erfolgreicher
+                // technischer Bildprüfung schreiben.
+                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
+                if ($mapped_n <= 0) {
+                    $no_map++;
+                    continue;
+                }
+                $mapped_count += $mapped_n;
+
+                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 100;
+                $row['classified_at'] = time();
+
+                if (method_exists($this, 'output_plan_creative')) {
+                    $plan = $this->output_plan_creative($row, true);
+                    if (is_array($plan) && (absint($plan['active'] ?? 0) > 0 || absint($plan['drafts'] ?? 0) > 0)) {
+                        $replanned++;
+                    }
+                }
+            }
+
+            update_option($cursor_key, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option($result_key, array_merge($previous, array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'mapped'=>absint($previous['mapped'] ?? 0) + $mapped_count,
+            'replanned'=>absint($previous['replanned'] ?? 0) + $replanned,
+            'no_map'=>absint($previous['no_map'] ?? 0) + $no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        )), false);
+
+        if ($more) {
+            if (!wp_next_scheduled('ppar_v672195_banner_reconcile')) {
+                wp_schedule_single_event(time() + 3, 'ppar_v672195_banner_reconcile');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key, 'done', false);
+        if (method_exists($this, 'article_plan_bump_campaign_revision')) {
+            $this->article_plan_bump_campaign_revision('v672195_banner_reconcile_complete');
+        }
+    }
+
+
+    /**
+     * V6.72.201 KISS-Bannervertrag.
+     *
+     * Bestandsumbau in kleinen Batches, ohne globales Abschalten:
+     * - tiefstes belastbares Ziel + Elternpfad neu speichern;
+     * - bestehende Formatregeln bleiben Autoritaet;
+     * - neue Ausgabe zuerst materialisieren, alte wird danach atomar ersetzt;
+     * - nur Banner ohne jede belastbare Zuordnung verlieren ihre alte Automatik.
+     */
+    public function maybe_rebuild_banner_kiss_v672201() {
+        if (self::VERSION !== '6.72.203' || !is_admin()
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+
+        // 6.72.203 PERFORMANCE-KISS:
+        // Adminseiten duerfen keinerlei Bannerarbeit ausfuehren. Sie markieren
+        // nur den Hintergrundlauf und kehren sofort zurueck.
+        $state_key='ppar_v672203_banner_kiss_state';
+        $state=sanitize_key((string)get_option($state_key,''));
+        if($state==='done'){return;}
+        if($state!=='running'){
+            delete_option('ppar_v672203_banner_kiss_cursor');
+            delete_option('ppar_v672203_banner_kiss_result');
+            update_option($state_key,'running',false);
+        }
+        if(!wp_next_scheduled('ppar_v672203_banner_kiss_reconcile')){
+            wp_schedule_single_event(time()+2,'ppar_v672203_banner_kiss_reconcile');
+        }
+    }
+
+    public function run_v672201_banner_kiss_reconcile() {
+        if (self::VERSION !== '6.72.203'
+            || !method_exists($this,'creative_library_table')
+            || !method_exists($this,'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this,'output_plan_creative')) { return; }
+
+        global $wpdb;
+        $table=$this->creative_library_table();
+        $state_key='ppar_v672203_banner_kiss_state';
+        $cursor_key='ppar_v672203_banner_kiss_cursor';
+        $result_key='ppar_v672203_banner_kiss_result';
+        $last=absint(get_option($cursor_key,0));
+        $limit=5;
+        $deadline=microtime(true)+3.0;
+        $processed=0; $mapped_count=0; $replanned=0; $no_map=0; $more=false;
+
+        do {
+            $rows=$wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,$limit
+            ),ARRAY_A);
+            if(!is_array($rows) || !$rows){$more=false;break;}
+
+            foreach($rows as $row){
+                // Harter Worker-Zeitdeckel: nie einen langen Monsterlauf bauen.
+                // Mindestens ein Datensatz darf fertig werden; danach ggf. sauber
+                // im naechsten kleinen Hintergrundlauf fortsetzen.
+                if($processed>0 && microtime(true)>=$deadline){
+                    $more=true;
+                    break;
+                }
+                $row_id=absint($row['id']??0);
+                $last=max($last,$row_id);
+                $processed++;
+                if($row_id<=0){continue;}
+
+                $payload=json_decode((string)($row['payload']??''),true);
+                $payload=is_array($payload)?$payload:array();
+                $dimension_state=sanitize_key((string)($payload['_dimension_state']??''));
+                $verified=in_array($dimension_state,array('verified','mismatch'),true)
+                    && absint($row['width']??0)>0
+                    && absint($row['height']??0)>0;
+                if(!$verified){
+                    if($dimension_state!=='failed' && method_exists($this,'creative_library_schedule_asset_verification')){
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                $mapped=$this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n=absint(is_array($mapped)?($mapped['mapped']??0):0);
+                if($mapped_n>0){
+                    $mapped_count+=$mapped_n;
+                    $targets=is_array($mapped['targets']??null)?$mapped['targets']:array();
+                    $row['topic_targets']=wp_json_encode($targets,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                    $row['topic_score']=100;
+                    $row['topic_status']='auto_verified';
+                    $row['classified_at']=time();
+                } else {
+                    // Kein spezifisches Thema: nicht vorschnell deaktivieren.
+                    // Der bestehende Planer prueft jetzt den vertraglichen
+                    // technisch/formatlich gueltigen allgemeinen Fallback.
+                    $no_map++;
+                    $row['topic_targets']='[]';
+                    $row['topic_score']=0;
+                    $row['topic_status']='no_match';
+                }
+
+                $plan=$this->output_plan_creative($row,true);
+                $planned_ok=is_array($plan) && (absint($plan['active']??0)>0 || absint($plan['drafts']??0)>0);
+                if($planned_ok){
+                    $replanned++;
+                } elseif($mapped_n<=0 && method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
+                    // Weder spezifische Zuordnung noch zulaessiger General-Pool:
+                    // nur dann alte automatische Ausgabe entfernen. FIXED bleibt.
+                    $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
+                    if(preg_match('/^[a-f0-9]{64}$/',$identity)){
+                        $this->creative_library_deactivate_automatic_output_campaigns($identity);
+                    }
+                }
+            }
+
+            update_option($cursor_key,$last,false);
+            $more=$more || count($rows)===$limit;
+        } while(false);
+
+        $previous=get_option($result_key,array());
+        $previous=is_array($previous)?$previous:array();
+        update_option($result_key,array(
+            'processed'=>absint($previous['processed']??0)+$processed,
+            'mapped'=>absint($previous['mapped']??0)+$mapped_count,
+            'replanned'=>absint($previous['replanned']??0)+$replanned,
+            'no_map'=>absint($previous['no_map']??0)+$no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ),false);
+
+        if($more){
+            if(!wp_next_scheduled('ppar_v672203_banner_kiss_reconcile')){
+                wp_schedule_single_event(time()+5,'ppar_v672203_banner_kiss_reconcile');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key,'done',false);
+        if(method_exists($this,'article_plan_bump_campaign_revision')){
+            $this->article_plan_bump_campaign_revision('v672203_banner_kiss_complete');
+        }
+    }
+
+
+    /**
+     * V6.72.199 – Basis-Nachlauf fuer bestehende ADCELL-Banner.
+     *
+     * Der Importvertrag wurde korrigiert: Original-Providerdatensatz bleibt
+     * erhalten und promotionCategoryId wird ueber getPromotionCategories in
+     * den echten Kategorienamen aufgeloest. Dieser Nachlauf sorgt dafuer, dass
+     * nicht nur neue Banner davon profitieren.
+     *
+     * Ablauf:
+     * 1. alle freigegebenen ADCELL-Programme normal neu einlesen;
+     * 2. auf den Abschluss aller ADCELL-Jobs warten;
+     * 3. erst dann alte automatische Bannerkampagnen global stilllegen und
+     *    aus der frisch gespeicherten Bibliothek deterministisch neu aufbauen.
+     * Kein Provider-HTTP im Frontend.
+     */
+    public function maybe_upgrade_adcell_banner_import_basis_v672199() {
+        if (self::VERSION !== '6.72.199'
+            || !is_admin()
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return;
+        }
+        $state_key = 'ppar_v672199_adcell_banner_basis_state';
+        $state = sanitize_key((string) get_option($state_key, ''));
+        if ($state === 'done') {
+            return;
+        }
+        if ($state === '') {
+            delete_option('ppar_v672199_adcell_banner_basis_result');
+            update_option($state_key, 'scheduled', false);
+        }
+        if (!wp_next_scheduled('ppar_v672199_adcell_banner_basis_resync')) {
+            wp_schedule_single_event(time() + 1, 'ppar_v672199_adcell_banner_basis_resync');
+        }
+    }
+
+    private function automation_v672199_schedule_basis_resync($delay) {
+        if (!wp_next_scheduled('ppar_v672199_adcell_banner_basis_resync')) {
+            wp_schedule_single_event(time() + max(1, absint($delay)), 'ppar_v672199_adcell_banner_basis_resync');
+        }
+    }
+
+    public function run_v672199_adcell_banner_basis_resync() {
+        if (self::VERSION !== '6.72.199') {
+            return;
+        }
+
+        $state_key = 'ppar_v672199_adcell_banner_basis_state';
+        $result_key = 'ppar_v672199_adcell_banner_basis_result';
+        $state = sanitize_key((string) get_option($state_key, ''));
+        $result = get_option($result_key, array());
+        $result = is_array($result) ? $result : array();
+
+        if ($state === 'done') {
+            return;
+        }
+
+        // Portale ohne aktiven ADCELL-Zugang haben keinen Altbestand
+        // nachzuziehen. Der Release bleibt dort ohne Provideraufruf abgeschlossen.
+        $settings = method_exists($this, 'network_settings') ? $this->network_settings('adcell') : array();
+        $credentials_present = method_exists($this, 'network_credentials_present')
+            ? $this->network_credentials_present('adcell', $settings) : false;
+        $allowlist = method_exists($this, 'adcell_program_id_allowlist')
+            ? (array) $this->adcell_program_id_allowlist() : array();
+        if (empty($settings['enabled']) || !$credentials_present || !$allowlist) {
+            $result['status'] = 'skipped_no_active_adcell';
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            update_option($state_key, 'done', false);
+            return;
+        }
+
+        if (in_array($state, array('', 'scheduled'), true)) {
+            // Ein beim Upgrade bereits laufender Altjob koennte seine
+            // Promotions-Stufe noch unter dem vorherigen Importvertrag begonnen
+            // haben. Deshalb erst vollstaendig auslaufen lassen und DANACH einen
+            // garantiert frischen 6.72.199-Lauf starten.
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                $result['status'] = 'waiting_preexisting';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'waiting_preexisting', false);
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'retry';
+        }
+
+        if ($state === 'waiting_preexisting') {
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'retry';
+            update_option($state_key, 'retry', false);
+        }
+
+        if ($state === 'retry') {
+            $started_at = time();
+            $result['started_at'] = $started_at;
+            $result['attempt'] = absint($result['attempt'] ?? 0) + 1;
+            $batch = $this->automation_start_all_adcell_programmes();
+            if (is_wp_error($batch)) {
+                $result['status'] = 'retry';
+                $result['error_code'] = sanitize_key((string) $batch->get_error_code());
+                $result['error_message'] = sanitize_text_field((string) $batch->get_error_message());
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'retry', false);
+                $this->automation_v672199_schedule_basis_resync(300);
+                return;
+            }
+            $result['status'] = 'waiting_jobs';
+            $result['batch'] = $batch;
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            update_option($state_key, 'waiting_jobs', false);
+            if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                $this->automation_schedule_adcell_batch_worker(0);
+            }
+            $this->automation_v672199_schedule_basis_resync(10);
+            return;
+        }
+
+        if ($state === 'waiting_jobs') {
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+
+            // Ein endgueltig fehlgeschlagener frischer Programmlauf darf keinen
+            // Reconcile auf teilweise alten Daten ausloesen.
+            global $wpdb;
+            $jobs_table = $this->automation_jobs_table();
+            $failed_jobs = absint($wpdb->get_var($wpdb->prepare(
+                "SELECT COUNT(*) FROM {$jobs_table} WHERE provider='adcell' AND created_at>=%d AND status='failed'",
+                absint($result['started_at'] ?? 0)
+            )));
+            if ($failed_jobs > 0) {
+                $result['failed_jobs'] = $failed_jobs;
+                $result['status'] = 'retry';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'retry', false);
+                $this->automation_v672199_schedule_basis_resync(300);
+                return;
+            }
+
+            // Der frische Providerimport allein reicht nicht: Nach Zielvertrag
+            // muessen neue/pending Assets zuerst technisch geprueft sein.
+            if (method_exists($this, 'automation_has_pending_adcell_assets')
+                && $this->automation_has_pending_adcell_assets()) {
+                $result['status'] = 'waiting_assets';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'waiting_assets', false);
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'ready_reconcile';
+            update_option($state_key, 'ready_reconcile', false);
+        }
+
+        if ($state === 'waiting_assets') {
+            if (method_exists($this, 'automation_has_pending_adcell_assets')
+                && $this->automation_has_pending_adcell_assets()) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $result['status'] = 'assets_complete';
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            $state = 'ready_reconcile';
+            update_option($state_key, 'ready_reconcile', false);
+        }
+
+        if ($state === 'ready_reconcile') {
+            // Erst nach abgeschlossenem Providerimport UND abgeschlossener
+            // technischer Assetpruefung darf neu klassifiziert/materialisiert werden.
+            $prefix = 'ppar_v672199_banner_reconcile_';
+            foreach (array('state','cursor','result','reset_done') as $suffix) {
+                delete_option($prefix . $suffix);
+            }
+            update_option($prefix . 'state', 'running', false);
+            update_option($state_key, 'reconciling', false);
+            $state = 'reconciling';
+        }
+
+        if ($state === 'reconciling') {
+            $this->run_v672195_banner_reconcile();
+            if (sanitize_key((string) get_option('ppar_v672199_banner_reconcile_state', '')) === 'done') {
+                $result = get_option($result_key, array());
+                $result = is_array($result) ? $result : array();
+                $result['status'] = 'done';
+                $result['reconcile'] = get_option('ppar_v672199_banner_reconcile_result', array());
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'done', false);
+                return;
+            }
+            $this->automation_v672199_schedule_basis_resync(10);
+        }
+    }
+
+
+    /**
+     * V6.72.189 – genau ein Upgrade-Nachlauf fuer das URL-Konzept.
+     * Alte 6.72.189-Kategorienzustände duerfen diesen neuen Lauf nicht
+     * unterdruecken; deshalb eigener State- und Hook-Name.
+     * Kein URL- oder Provider-HTTP im Frontend.
+     */
+    public function maybe_upgrade_adcell_destination_url_v672189() {
+        $key = 'ppar_v672189_adcell_destination_url_resync_state';
+        $state = sanitize_key((string)get_option($key, ''));
+        if (in_array($state, array('scheduled','running','done'), true)) { return; }
+        update_option($key, 'scheduled', false);
+        if (!wp_next_scheduled('ppar_v672189_adcell_destination_url_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672189_adcell_destination_url_resync');
+        }
+    }
+
+    public function run_v672189_adcell_destination_url_resync() {
+        $key = 'ppar_v672189_adcell_destination_url_resync_state';
+        update_option($key, 'running', false);
+        $result = $this->automation_start_all_adcell_programmes();
+        if (is_wp_error($result)) {
+            update_option($key, 'retry', false);
+            if (!wp_next_scheduled('ppar_v672189_adcell_destination_url_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672189_adcell_destination_url_resync');
+            }
+            return;
+        }
+        update_option($key, 'done', false);
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+1, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+    }
+
+
+    /**
+     * V6.72.99 RESTORE – exakter Rueckbau des von 6.72.94 geschriebenen
+     * Bannerpool-Zustands. Nur Datensaetze mit dem von 6.72.94 eingefuehrten
+     * Payload-Marker werden angefasst. Danach laeuft wieder der bewaehrte
+     * pre-6.72.94 Slot-/Themenplaner. Keine neue globale Eignungslogik.
+     */
+    public function maybe_restore_v67294_banner_state() {
+        $done_key='ppar_v67299_pre67294_restore_done';
+        if ((string)get_option($done_key,'')==='done') { return; }
+        if (!method_exists($this,'creative_library_table') || !method_exists($this,'output_plan_creative')) { return; }
+        global $wpdb;
+        $table=$this->creative_library_table();
+        $rows=$wpdb->get_results(
+            "SELECT * FROM {$table} WHERE creative_type='banner' AND payload LIKE '%_global_banner_pool_state%' ORDER BY id ASC LIMIT 2000",
+            ARRAY_A
+        );
+        $failed=false;
+        foreach((array)$rows as $row){
+            $payload=json_decode((string)($row['payload']??''),true);
+            if(!is_array($payload) || !array_key_exists('_global_banner_pool_state',$payload)){ continue; }
+            unset($payload['_global_banner_pool_state']);
+            $topic_status=sanitize_key((string)($row['topic_status']??''));
+            $active=sanitize_key((string)($row['source_status']??''))==='active'
+                && sanitize_key((string)($row['availability_state']??''))==='active';
+            $update=array('payload'=>wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+            if($active && $topic_status==='format_blocked'){ $update['topic_status']='auto_verified'; }
+            $ok=$wpdb->update($table,$update,array('id'=>absint($row['id'])));
+            if($ok===false){ $failed=true; continue; }
+            if(!$active){ continue; }
+            $row=array_merge($row,$update);
+            $plan=$this->output_plan_creative($row,true);
+            if(is_wp_error($plan)){ $failed=true; }
+        }
+        if(!$failed){
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION);
+            update_option($done_key,'done',false);
+        }
+    }
+
+
+    /**
+     * V6.72.201 RESTORE – dieselbe enge Konsistenzreparatur mit frischem Marker.
+     * Sie reaktiviert nur weiterhin published Ausgabeobjekte mit weiterhin
+     * aktiver/gültiger Bannerquelle; manuelle Sperren bleiben unangetastet.
+     *
+     * V6.72.100 RESTORE – nur einen nachweislich widerspruechlichen Zustand
+     * reparieren: Ausgabeobjekt ist weiterhin published, die dazu gehoerende
+     * materialisierte Bannerkampagne aber inactive. 6.72.94 konnte genau diesen
+     * Zustand erzeugen. Manuell blockierte/pausierte Objekte sind ausgeschlossen.
+     * Ziel/Slot/Creative werden NICHT neu klassifiziert oder verschoben.
+     */
+    public function maybe_restore_published_banner_campaign_consistency_v672100() {
+        $done_key='ppar_v672201_published_banner_consistency_done';
+        if ((string)get_option($done_key,'')==='done') { return; }
+        if (!method_exists($this,'output_objects_table') || !method_exists($this,'creative_library_table')
+            || !method_exists($this,'output_campaign_by_post_id') || !method_exists($this,'save_campaign_record')) { return; }
+        global $wpdb;
+        $objects=$this->output_objects_table();
+        $creative=$this->creative_library_table();
+        $rows=$wpdb->get_results(
+            "SELECT * FROM {$objects} WHERE output_type='portal_banner' AND status='published' AND campaign_post_id>0 ORDER BY id ASC LIMIT 3000",
+            ARRAY_A
+        );
+        $failed=false;
+        foreach((array)$rows as $object){
+            $campaign_id=absint($object['campaign_post_id']??0);
+            $identity=strtolower(sanitize_text_field((string)($object['creative_identity_hash']??'')));
+            if($campaign_id<=0 || !preg_match('/^[a-f0-9]{64}$/',$identity)){ continue; }
+            $source=$wpdb->get_row($wpdb->prepare(
+                "SELECT id,creative_type,source_status,availability_state FROM {$creative} WHERE identity_hash=%s LIMIT 1",
+                $identity
+            ),ARRAY_A);
+            if(!is_array($source)
+                || sanitize_key((string)($source['creative_type']??''))!=='banner'
+                || sanitize_key((string)($source['source_status']??''))!=='active'
+                || sanitize_key((string)($source['availability_state']??''))!=='active'){ continue; }
+            $campaign=$this->output_campaign_by_post_id($campaign_id);
+            if(!is_array($campaign) || !empty($campaign['active'])){ continue; }
+            $manual=sanitize_key((string)($campaign['quality_manual_status']??''));
+            if(in_array($manual,array('blocked','rejected','veto','paused_manual','blocked_manual'),true)){ continue; }
+            $campaign['active']=true;
+            if(!$this->save_campaign_record($campaign,$campaign_id)){ $failed=true; }
+        }
+        if(!$failed){ update_option($done_key,'done',false); }
+    }
+
+    /**
+     * V6.72.185 KISS – bestehende Banner einmalig in die autoritative
+     * Creative-Library-Zielzuordnung ueberfuehren. Ausschliesslich Banner,
+     * ausschliesslich Hintergrundarbeit, kein Frontend-Scan und keine Provider-
+     * Remoteaufrufe. Produktreihen bleiben unberuehrt.
+     */
+    public function ensure_banner_library_migration_v672185() {
+        if (self::VERSION !== '6.72.185' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state = sanitize_key((string)get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            delete_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
+            update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, 'running', false);
+        }
+        if (!wp_next_scheduled(self::BANNER_LIBRARY_MIGRATION_HOOK)) {
+            wp_schedule_single_event(time() + 1, self::BANNER_LIBRARY_MIGRATION_HOOK);
+        }
+    }
+
+    public function run_banner_library_migration_v672185() {
+        if (self::VERSION !== '6.72.185' || !method_exists($this, 'creative_library_table') || !method_exists($this, 'output_plan_creative')) { return; }
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $cursor = absint(get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, 0));
+        $limit = 50;
+        $processed = 0;
+        $materialized = 0;
+        $last = $cursor;
+        $deadline = microtime(true) + 12.0;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table} WHERE id>%d AND creative_type='banner' AND source_status='active' AND availability_state='active' ORDER BY id ASC LIMIT %d",
+                $last, $limit
+            ), ARRAY_A);
+            if (!is_array($rows) || !$rows) { $more = false; break; }
+            foreach ($rows as $row) {
+                $last = max($last, absint($row['id'] ?? 0));
+                $processed++;
+                if (absint($row['width'] ?? 0) <= 0 || absint($row['height'] ?? 0) <= 0) {
+                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+                // 6.72.184 live-fix: Migration bedeutet echte Neubewertung der
+                // automatischen Bannerkante. Eine bereits gespeicherte alte Kante
+                // darf die reale/decodierte Ziel-URL nicht ueberstimmen.
+                // Nur abgeleitete automatische Fachwerte werden verworfen; manuelle
+                // Control-/FIXED-Entscheidungen liegen separat und bleiben erhalten.
+                $row_id = absint($row['id'] ?? 0);
+                if ($row_id > 0) {
+                    $wpdb->update($table, array(
+                        'topic_score'=>0,
+                        'topic_targets'=>'[]',
+                        'classified_at'=>0,
+                    ), array('id'=>$row_id));
+                    $row['topic_score'] = 0;
+                    $row['topic_targets'] = '[]';
+                    $row['classified_at'] = 0;
+                }
+                $result = $this->output_plan_creative($row, true);
+                if (is_array($result) && absint($result['active'] ?? 0) > 0) { $materialized++; }
+            }
+            update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option('ppar_banner_library_migration_result_v672185', array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option('ppar_banner_library_migration_result_v672185', array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'materialized'=>absint($previous['materialized'] ?? 0) + $materialized,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ), false);
+
+        if ($more) {
+            if (!wp_next_scheduled(self::BANNER_LIBRARY_MIGRATION_HOOK)) {
+                wp_schedule_single_event(time() + 3, self::BANNER_LIBRARY_MIGRATION_HOOK);
+            }
+            return;
+        }
+
+        delete_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
+        update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, 'done', false);
+    }
+
+    /** V6.72.82 – Vollautomatik: der komplette aktive Pool nimmt teil. */
+    public function ensure_full_pool_automation() {
+        $state = (string) get_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, '');
+        $running_state = 'running:' . self::VERSION;
+        if ($state === self::VERSION || $state === $running_state) { return; }
+
+        // V6.72.185 ist bewusst ein reines Banner-Migrationsrelease. Der bisherige
+        // Versionswechsel-Nachlauf ueber den gesamten Creative-Pool (inkl. tausender
+        // Produktzeilen) ist hier unnoetig. Der dedizierte Bannerworker oben ist die
+        // einzige Migration; eBay/Idealo/Produkte werden nicht neu geplant.
+        if (self::VERSION === '6.72.185') {
+            if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::FULL_POOL_WORKER_HOOK); }
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+            update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+            return;
+        }
+
+        // V6.72.175: Ein Cursor gehoert immer exakt zu der Version, die ihn
+        // begonnen hat. Ein offener Cursor der Vorversion darf nach einem Update
+        // niemals den Anfang des aktiven Pools ueberspringen. Der running-Marker
+        // verhindert zugleich, dass normale init-Aufrufe den aktuellen Lauf
+        // immer wieder auf 0 zuruecksetzen.
+        delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+        update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, $running_state, false);
+
+        // Altbestand bereinigen: fruehere Versionen speicherten ein bewusstes
+        // „aus Automatik entfernen“ als review. Der Payload gehoert heute zur
+        // zentralen Control-Tabelle; die alte Kompatibilitaetstabelle besitzt
+        // bewusst keine payload-Spalte.
+        if (method_exists($this,'control_decisions_table')) {
+            global $wpdb;
+            $decisions=$this->control_decisions_table();
+            $wpdb->query(
+                "UPDATE {$decisions} SET status='veto', reason='Werbemittel ausdruecklich aus der Vollautomatik entfernt.', updated_at=" . time()
+                . " WHERE scope_type='creative' AND status='review' AND payload LIKE '%\"removed_from_automation\":1%'"
+            );
+        }
+        // Quellen zuerst neu synchronisieren, damit neue Provider-Metadaten
+        // (u.a. ADCELL-Werbemittelkategorie) vor der Replanung im Pool liegen.
+        // Bewusst derselbe zentrale Sync-Hook, keine neue Provider-Cron-Insel.
+        wp_schedule_single_event(time()+5, self::AUTOMATION_CRON_HOOK, array(false));
+        if (!wp_next_scheduled(self::FULL_POOL_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+90, self::FULL_POOL_WORKER_HOOK);
+        }
+    }
+
+    public function run_full_pool_automation_worker() {
+        global $wpdb;
+        $table=$this->creative_library_table();
+        $cursor=absint(get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR,0));
+        $limit=50;
+        $rows=$wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$table} WHERE id>%d AND source_status='active' AND availability_state='active' ORDER BY id ASC LIMIT %d",
+            $cursor,$limit
+        ),ARRAY_A);
+        $last=$cursor;
+        foreach((array)$rows as $row){
+            $last=max($last,absint($row['id']??0));
+            $creative_type=sanitize_key((string)($row['creative_type']??''));
+            if(in_array($creative_type,array('banner','product'),true) && (absint($row['width']??0)<=0 || absint($row['height']??0)<=0)){
+                if(method_exists($this,'creative_library_schedule_asset_verification')){$this->creative_library_schedule_asset_verification(5);}
+                continue;
+            }
+            if(method_exists($this,'output_plan_creative')){$this->output_plan_creative($row,true);}
+        }
+        update_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR,$last,false);
+        if(count((array)$rows)===$limit){
+            if(!wp_next_scheduled(self::FULL_POOL_WORKER_HOOK)){wp_schedule_single_event(time()+10,self::FULL_POOL_WORKER_HOOK);}
+        }else{
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+            update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION,self::VERSION,false);
+        }
+    }
+
+    public function automation_extend_topic_with_hivepress($topic, $creative) {
+        if (!is_array($topic) || (string) ($topic['status'] ?? '') === 'blocked') {
+            return $topic;
+        }
+        if (!function_exists('taxonomy_exists') || !taxonomy_exists('hp_listing_category') || !function_exists('get_terms')) {
+            return $topic;
+        }
+        $terms = get_terms(array('taxonomy'=>'hp_listing_category','hide_empty'=>false));
+        if (is_wp_error($terms) || !is_array($terms)) {
+            return $topic;
+        }
+        $source = $this->creative_library_text(implode(' ', array(
+            (string) ($creative['title'] ?? ''),
+            (string) ($creative['tags'] ?? ''),
+            (string) ($creative['description'] ?? ''),
+            (string) ($creative['destination_url'] ?? ''),
+        )));
+        $source_tokens = $this->creative_library_tokens($source);
+        if (!$source_tokens) {
+            return $topic;
+        }
+        $candidates = array();
+        foreach ($terms as $term) {
+            if (!is_object($term) || empty($term->slug) || empty($term->name)) {
+                continue;
+            }
+            $name = $this->creative_library_text((string) $term->name);
+            $target_tokens = $this->creative_library_tokens((string) $term->name . ' ' . (string) $term->slug . ' ' . (string) ($term->description ?? ''));
+            $hits = array_values(array_intersect($source_tokens, $target_tokens));
+            $phrase = $name !== '' && strpos(' ' . $source . ' ', ' ' . $name . ' ') !== false;
+            $score = ($phrase ? 75 : 0) + min(24, count($hits) * 8) + (count($hits) >= 2 ? 8 : 0);
+            if ($score < 70) {
+                continue;
+            }
+            $candidates[] = array(
+                'type'=>'market',
+                'slug'=>sanitize_key((string) $term->slug),
+                'path'=>'Anzeigenmarkt > ' . sanitize_text_field((string) $term->name),
+                'score'=>min(100, $score),
+                'reason'=>$hits ? 'Passender HivePress-Kontext: ' . implode(', ', array_slice($hits, 0, 4)) : 'Exakte HivePress-Phrase.',
+                'relation'=>'hivepress_context',
+            );
+        }
+        usort($candidates, static function ($a, $b) { return (int) $a['score'] > (int) $b['score'] ? -1 : 1; });
+        if (!$candidates) {
+            return $topic;
+        }
+        $targets = is_array($topic['targets'] ?? null) ? $topic['targets'] : array();
+        $seen = array();
+        foreach ($targets as $target) {
+            if (is_array($target)) {
+                $seen[(string) ($target['type'] ?? '') . ':' . (string) ($target['slug'] ?? '')] = true;
+            }
+        }
+        foreach (array_slice($candidates, 0, 3) as $candidate) {
+            $key = 'market:' . $candidate['slug'];
+            if (!isset($seen[$key])) {
+                $targets[] = $candidate;
+                $seen[$key] = true;
+            }
+        }
+        $topic['targets'] = $targets;
+        if ((string) ($topic['status'] ?? '') === 'no_match') {
+            $topic['status'] = 'auto_review';
+            $topic['score'] = absint($candidates[0]['score'] ?? 70);
+            $topic['reason'] = 'Nur HivePress-Ziel gefunden; Sichtprüfung erforderlich.';
+        }
+        return $topic;
+    }
+
+    private function automation_recent_runs() {
+        global $wpdb;
+        $table = $this->automation_runs_table();
+        return $wpdb->get_results("SELECT * FROM {$table} ORDER BY id DESC LIMIT 15", ARRAY_A);
+    }
+
+    private function automation_recent_jobs() {
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        return $wpdb->get_results("SELECT * FROM {$table} ORDER BY id DESC LIMIT 15", ARRAY_A);
+    }
+
+    /**
+     * V4.3.1 – WordPress behandelt bereits ein leeres HTML-Attribut `disabled`
+     * als deaktiviert. Deshalb darf das Attribut im positiven Fall überhaupt
+     * nicht an submit_button() übergeben werden.
+     */
+    private function automation_awin_start_button_attributes($selected_snapshot) {
+        if (!is_array($selected_snapshot) || absint($selected_snapshot['external_id'] ?? 0) <= 0) {
+            return array('disabled' => 'disabled');
+        }
+        $advertiser_id = absint($selected_snapshot['external_id'] ?? 0);
+        if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)
+            && is_wp_error($this->automation_otto_filtered_feed_binding($advertiser_id))) {
+            return array('disabled' => 'disabled');
+        }
+        return array();
+    }
+
+    private function render_adcell_automation_page() {
+        $notice = sanitize_key((string) ($_GET['ppar_auto'] ?? ''));
+        $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
+        $programmes = $this->adcell_api_v2_allowlisted_programmes(false);
+        $programmes = is_wp_error($programmes) ? array() : (array) $programmes;
+        $program_id = absint($_GET['partner_external_id'] ?? 0);
+        if ($program_id <= 0 && $programmes) { $program_id = absint(array_key_first($programmes)); }
+        ?>
+        <div class="wrap" style="max-width:1100px"><h1>ADCELL-Automatisierung</h1>
+        <p>Nur explizit freigegebene <code>programId</code>, die im letzten ADCELL-Programmkatalog zugleich <code>accepted</code> und aktiv sind. Beim Start wird der Status erneut live geprüft.</p>
+        <?php if ($notice && $message) : ?><div class="notice <?php echo $notice === 'failed' ? 'notice-error' : 'notice-success'; ?> inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin:18px 0"><h2>Alle freigegebenen Programme synchronisieren</h2>
+        <?php if (!$programmes) : ?><p><strong>BLOCKED:</strong> Keine zwischengespeicherte accepted+aktive programId aus der expliziten Allowlist verfügbar. Zuerst auf der Provider-Synchronisierung Token + Programme prüfen und die Allowlist setzen.</p>
+        <?php else : ?>
+        <p><strong><?php echo esc_html(count($programmes)); ?> Programme</strong> sind aktuell freigegeben. Ein Klick startet alle gemeinsam; bereits laufende Programme werden nicht doppelt gestartet.</p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="adcell"><input type="hidden" name="partner_external_id" value="all"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
+        <p class="description">Gesamtweg: alle freigegebenen accepted+aktiven Programme → API-v2-Werbemittel → Creative-Bibliothek → Prüfung → Relevanz/Slots → automatische Ausgabe.</p>
+        <?php submit_button('Alle freigegebenen ADCELL-Programme synchronisieren','primary'); ?></form>
+        <details style="margin-top:18px"><summary>Einzelprogramm nur für Diagnose</summary><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="adcell"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
+        <p><label>ADCELL-Programm<br><select name="partner_external_id" required style="min-width:360px"><?php foreach ($programmes as $id=>$programme) : $id=absint($id ?: ($programme['id']??0)); if($id<=0){continue;} ?><option value="<?php echo esc_attr($id); ?>" <?php selected($program_id,$id); ?>><?php echo esc_html((string)($programme['name']??('ADCELL '.$id)).' · '.$id); ?></option><?php endforeach; ?></select></label></p>
+        <?php submit_button('Nur dieses Programm starten','secondary'); ?></form></details>
+        <?php endif; ?></section>
+        <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">ADCELL Programme/Allowlist</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation')); ?>">Awin-Automatisierung</a></p>
+        </div><?php
+    }
+
+    public function render_automation_page() {
+        if (!current_user_can('manage_options')) {
+            wp_die('Keine Berechtigung.');
+        }
+        $requested_provider = sanitize_key((string) ($_GET['provider'] ?? ''));
+        if ($requested_provider === 'adcell') {
+            $this->render_adcell_automation_page();
+            return;
+        }
+        if ($requested_provider !== '' && !in_array($requested_provider, array('awin','ebay'), true)) {
+            wp_die('Unbekannter Automatisierungsprovider.');
+        }
+        $snapshots = $this->partner_intake_snapshots();
+        $allowed_snapshots = array_values(array_filter($snapshots, function ($snapshot) {
+            return is_array($snapshot)
+                && sanitize_key((string) ($snapshot['provider'] ?? '')) === 'awin'
+                && $this->awin_programme_gate_is_allowed(absint($snapshot['external_id'] ?? 0));
+        }));
+        $partner_id = sanitize_text_field((string) ($_GET['partner_external_id'] ?? ''));
+        if ($partner_id === '' && $allowed_snapshots) {
+            $first = reset($allowed_snapshots);
+            if (is_array($first)) {
+                $partner_id = sanitize_text_field((string) ($first['external_id'] ?? ''));
+            }
+        }
+        $notice = sanitize_key((string) ($_GET['ppar_auto'] ?? ''));
+        $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
+        $counts = $this->creative_library_count_rows();
+        $automation_settings = $this->automation_settings();
+        $otto_cleanup = get_option('ppar_otto_legacy_cleanup_v6728', array());
+        $otto_cleanup = is_array($otto_cleanup) ? $otto_cleanup : array();
+        $jobs = $this->automation_recent_jobs();
+        $runs = $this->automation_recent_runs();
+        $selected_snapshot = array();
+        foreach ($allowed_snapshots as $snapshot) {
+            if (is_array($snapshot) && sanitize_key((string) ($snapshot['provider'] ?? '')) === 'awin' && (string) ($snapshot['external_id'] ?? '') === (string) $partner_id) {
+                $selected_snapshot = $snapshot;
+                break;
+            }
+        }
+        $awin_feed_check = $selected_snapshot ? $this->automation_select_awin_feed($selected_snapshot) : new WP_Error('awin_feed_partner_missing', 'Partner auswählen.');
+        $awin_feed_ready = !is_wp_error($awin_feed_check);
+        $awin_feed_message = $awin_feed_ready ? 'Produktfeed eindeutig: ' . sanitize_text_field((string) ($awin_feed_check['name'] ?? 'Awin-Produktfeed')) : $awin_feed_check->get_error_message();
+        ?>
+        <div class="wrap" style="max-width:1400px"><h1>Affiliate-Automatisierung</h1>
+        <p>Sichere Paketverarbeitung: ein Partner, <?php echo absint($automation_settings['batch_size']); ?> Produkte je Paket, keine Sofortveröffentlichung.</p>
+        <?php if ($notice && $message) : ?><div class="notice <?php echo $notice === 'failed' ? 'notice-error' : 'notice-success'; ?> inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
+        <?php if ($notice === 'materialized') : ?><div class="notice notice-success inline"><p><?php echo absint($_GET['created'] ?? 0); ?> inaktive Kampagnen vorbereitet; <?php echo absint($_GET['blocked'] ?? 0); ?> blockiert.</p></div><?php endif; ?>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0">
+          <div style="background:#fff;border:1px solid #c3c4c7;padding:18px"><strong style="font-size:24px"><?php echo absint($counts['all']); ?></strong><br>Bibliotheksobjekte</div>
+          <div style="background:#fff;border:1px solid #c3c4c7;padding:18px"><strong style="font-size:24px"><?php echo absint($counts['auto_verified']); ?></strong><br>automatisch sicher</div>
+          <div style="background:#fff;border:1px solid #c3c4c7;padding:18px"><strong style="font-size:24px"><?php echo absint($counts['selected']); ?></strong><br>ausgewählt</div>
+        </div>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>Provider-Orchestrierung</h2><p>Zentrale Automatisierung erkennt alle Provider mit der Fähigkeit <code>automation</code>. Awin/ADCELL verwenden die interne Paketwarteschlange; eBay verwendet seinen eigenen sicheren Providerlauf. Weitere Provider können ihren Adapter registrieren, ohne diesen Kern umzubauen.</p><table class="widefat striped"><thead><tr><th>Provider</th><th>Zugang</th><th>Automatisierung</th><th>Fachseite</th></tr></thead><tbody><?php foreach($this->automation_provider_registry() as $auto_provider=>$auto_def): $snap=$this->provider_access_snapshot($auto_provider); ?><tr><td><strong><?php echo esc_html((string)$auto_def['label']); ?></strong></td><td><?php echo $this->provider_status_badge($snap); ?></td><td><?php echo esc_html((string)$auto_def['adapter_mode']); ?></td><td><?php if(!empty($auto_def['specialist_slug'])): ?><a class="button button-small" href="<?php echo esc_url(admin_url('admin.php?page='.(string)$auto_def['specialist_slug'])); ?>">Öffnen</a><?php else: ?><span class="description">Adaptergesteuert</span><?php endif; ?></td></tr><?php endforeach; ?></tbody></table><?php do_action('ppar_affiliate_render_automation_providers', $this->provider_registry(), self::PROVIDER_CONTRACT_VERSION); ?></section>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>1. Datenlauf starten</h2>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
+        <p><label>Partner<br><select name="partner_external_id" required style="min-width:360px" onchange="window.location.href='<?php echo esc_js(admin_url('admin.php?page=affiliate-portal-automation&partner_external_id=')); ?>'+encodeURIComponent(this.value)" <?php disabled(!$allowed_snapshots); ?>><option value="">Partner auswählen</option><?php foreach ($allowed_snapshots as $snap) : $id=sanitize_text_field((string)($snap['external_id']??'')); $prog=is_array($snap['programme']??null)?$snap['programme']:array(); $name=sanitize_text_field((string)($prog['name']??$snap['submitted_name']??$id)); ?><option value="<?php echo esc_attr($id); ?>" <?php selected($partner_id,$id); ?>><?php echo esc_html('AWIN · '.$name.' · '.$id); ?></option><?php endforeach; ?></select><input type="hidden" name="provider" value="awin"></label></p>
+        <p class="description"><strong>Eingangsweiche:</strong> Nur unter „Awin“ für dieses Portal aktive Partner erscheinen hier.</p>
+        <p class="description"><strong>Produktfeed:</strong> <?php echo esc_html($awin_feed_message); ?> Angebote werden auch ohne Produktfeed verarbeitet.</p>
+        <?php submit_button('Awin-Lauf starten','primary','submit',true,$this->automation_awin_start_button_attributes($selected_snapshot)); ?></form>
+        <?php $ebay_snapshot=$this->provider_access_snapshot('ebay'); $ebay_settings=method_exists($this,'ebay_settings')?$this->ebay_settings():array(); $ebay_ready=!empty($ebay_snapshot['configured'])&&!empty($ebay_settings['contract_confirmed'])&&!empty($ebay_settings['privacy_confirmed']); ?>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:8px"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="ebay"><input type="hidden" name="partner_external_id" value="provider"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?><button class="button" <?php disabled(!$ebay_ready); ?>>eBay-Lauf starten</button><?php if(!$ebay_ready): ?> <span class="description">Zugang oder eBay-Vertrags-/Datenschutzbestätigung noch unvollständig.</span><?php endif; ?></form>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:8px"><input type="hidden" name="action" value="ppar_automation_process_next"><?php wp_nonce_field('ppar_automation_process_next','ppar_automation_process_nonce'); ?><?php submit_button('Nächstes Arbeitspaket verarbeiten','secondary', 'submit', false); ?></form></section>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>2. Auswahl vorbereiten</h2><p>Es entstehen ausschließlich inaktive Kampagnen zur Vorschau.</p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_materialize"><?php wp_nonce_field('ppar_automation_materialize','ppar_materialize_nonce'); ?><?php submit_button('Ausgewählte Creatives portalübergreifend als Entwürfe planen','primary'); ?></form></section>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>Automatische Aktualisierung</h2>
+        <p><strong>OTTO-Sicherheitsbereinigung:</strong> <?php echo esc_html((string) ($otto_cleanup['status'] ?? 'nicht ausgeführt')); ?> · <?php echo absint($otto_cleanup['candidate_runs'] ?? 0); ?> Fehl-Läufe erkannt · <?php echo absint($otto_cleanup['deleted_products'] ?? 0); ?> Altprodukte entfernt · <?php echo absint($otto_cleanup['blocked_output_objects'] ?? 0); ?> Ausgabeobjekte deaktiviert · <?php echo absint($otto_cleanup['deleted_edges'] ?? 0); ?> Zielkanten entfernt.<?php if (!empty($otto_cleanup['blocked_runs'])) : ?> <strong>BLOCKED:</strong> <?php echo esc_html(implode(', ', array_map('sanitize_text_field', (array) $otto_cleanup['blocked_runs']))); ?><?php endif; ?></p>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_save_settings"><?php wp_nonce_field('ppar_automation_save_settings','ppar_automation_settings_nonce'); ?>
+        <p><label><input type="checkbox" name="ppar_automation[enabled]" value="1" <?php checked(!empty($automation_settings['enabled'])); ?>> automatische Synchronisierung aktiv</label></p>
+        <p><label>Ausführung <select name="ppar_automation[executor]"><option value="server_cron" <?php selected($automation_settings['executor'],'server_cron'); ?>>Server-Cron / WP-CLI</option><option value="wp_cron" <?php selected($automation_settings['executor'],'wp_cron'); ?>>WP-Cron-Fallback</option></select></label> <label style="margin-left:18px">Rhythmus <select name="ppar_automation[schedule]"><option value="ppar_two_weeks" <?php selected($automation_settings['schedule'],'ppar_two_weeks'); ?>>alle 2 Wochen</option><option value="ppar_three_weeks" <?php selected($automation_settings['schedule'],'ppar_three_weeks'); ?>>alle 3 Wochen</option></select></label></p>
+        <p><label>Produkte je Paket <input type="number" min="100" max="1000" step="100" name="ppar_automation[batch_size]" value="<?php echo absint($automation_settings['batch_size']); ?>"></label> <label style="margin-left:18px">Zeitbudget <input type="number" min="10" max="25" name="ppar_automation[time_budget]" value="<?php echo absint($automation_settings['time_budget']); ?>"> s</label> <label style="margin-left:18px">Download-Timeout <input type="number" min="60" max="600" step="60" name="ppar_automation[request_timeout]" value="<?php echo absint($automation_settings['request_timeout']); ?>"> s</label></p>
+        <p><code>wp ppar automation-tick</code></p>
+        <?php submit_button('Automatisierung speichern','secondary'); ?></form></section>
+        <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-creative-library')); ?>">Werbemittel auswählen</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-preview')); ?>">Vorschau öffnen</a></p>
+        <h2>Arbeitswarteschlange</h2><table class="widefat striped"><thead><tr><th>Zeit</th><th>Partner</th><th>Stufe</th><th>Status</th><th>Meldung</th></tr></thead><tbody><?php if(!$jobs): ?><tr><td colspan="5">Keine Aufträge.</td></tr><?php else: foreach($jobs as $job): ?><tr><td><?php echo esc_html(wp_date('d.m.Y H:i',absint($job['updated_at']))); ?></td><td><?php echo esc_html($this->provider_label((string)$job['provider']).' · '.(string)$job['partner_external_id']); ?></td><td><?php echo esc_html((string)$job['stage']); ?></td><td><?php echo esc_html((string)$job['status']); ?></td><td><?php echo esc_html((string)$job['message']); ?></td></tr><?php endforeach; endif; ?></tbody></table>
+        <h2>Abgeschlossene Läufe</h2><table class="widefat striped"><thead><tr><th>Zeit</th><th>Partner</th><th>Status</th><th>Importiert</th><th>Aktualisiert</th><th>Blockiert</th><th>Meldung</th></tr></thead><tbody><?php if(!$runs): ?><tr><td colspan="7">Noch kein Lauf.</td></tr><?php else: foreach($runs as $run): ?><tr><td><?php echo esc_html(wp_date('d.m.Y H:i',absint($run['started_at']))); ?></td><td><?php echo esc_html($this->provider_label((string)$run['provider']).' · '.(string)$run['partner_external_id']); ?></td><td><?php echo esc_html((string)$run['status']); ?></td><td><?php echo absint($run['imported']); ?></td><td><?php echo absint($run['updated']); ?></td><td><?php echo absint($run['blocked']); ?></td><td><?php echo esc_html((string)$run['message']); ?></td></tr><?php endforeach; endif; ?></tbody></table>
+        </div><?php
+    }
+
+}
