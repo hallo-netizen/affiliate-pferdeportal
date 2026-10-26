@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-26
-STATUS: AKTIV / HD-009 GATE 4 LOCAL-CI PASS / NOCH NICHT INSTALLIERBAR
+STATUS: AKTIV / HD-009 GATE 5 WORDPRESS-RUNTIME PASS / INSTALLATIONSKANDIDAT VORHANDEN / KEIN LIVE-PASS
 
 ## Rolle
 
@@ -79,12 +79,22 @@ Bereits entfernt:
    - Amazon bleibt `prepared` und ohne aktiven Adapter PASS.
    - Evidence: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
 
-5. **GATE 5 – Installationspaket/CURRENT.zip:** OFFEN.
+5. **GATE 5 – Installationspaket/CURRENT.zip: PASS**
+   - GitHub-Actions-Lauf `40337386359`: SUCCESS.
+   - Gate-4-Regressionssuite erneut PASS.
+   - Fresh-Unpack byte-identisch zur geprüften WORKSOURCE.
+   - PHP-Lint 23/23 PASS.
+   - frische WordPress-Installation und Plugin-Aktivierung PASS.
+   - ohne HD-004-Registry erwartetes fail-closed `hdar_category_registry_unavailable` PASS.
+   - mit bereitgestelltem HD-004-Runtimevertrag: 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS.
+   - eBay/idealo-Regressionspfade PASS; kein erfundener Amazon-Adapter.
+   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #569 in den Campus übernommen.
+   - Kandidat SHA-256: `457628ebe31735928ca73465ea69ac4da5b5a442693ee1a8c652861432d67c81`.
 
 ## Erster offener Blocker
 
-Ein installierbarer, fresh-unpack-geprüfter HD-009-Kandidat mit realem WordPress-Aktivierungs-/Laufzeitnachweis und anschließendem isoliertem `CURRENT.zip`/Manifest fehlt noch.
+Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten sind bewusst nicht im Campus/Quellcode gespeichert und müssen als separater WordPress-Laufzeitschritt übernommen werden.
 
 ## NEXT ACTION
 
-GATE 5 ausführen: aus dem Gate-4-PASS-Quellstand einen einzigen HD-009-Installationskandidaten bauen, Fresh-Unpack/Pluginstruktur/Version/SHA-256 prüfen und in einer frischen WordPress-Laufzeit aktivieren. Dabei HD-004-Verfügbarkeit positiv und fehlend fail-closed sowie eBay/idealo/Amazon-Status regressiv prüfen. Erst nach vollständigem PASS `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` + `MANIFEST.md` synchronisieren. Kein Live-PASS behaupten.
+Den Gate-5-PASS-Kandidaten in der echten Hobby-Depot-WordPress-Laufzeit installieren, vorhandene Affiliate-Partner-Zugangsdaten über die bestehenden Laufzeit-/Konfigurationsschnittstellen übernehmen, HD-004-Zielquelle sowie eBay/idealo positiv und fail-closed negativ prüfen und anschließend echten Frontend-/Provider-Readback durchführen. Amazon bleibt ohne belegten realen Adapter `prepared`. Erst nach diesem Nachweis Live-PASS setzen.
