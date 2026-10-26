@@ -72,7 +72,7 @@ $ids=get_posts([
  'post_type'=>'ap_campaign','post_status'=>'publish','posts_per_page'=>50,'fields'=>'ids',
  'meta_query'=>[['key'=>'_ppar_idealo_external_key','compare'=>'EXISTS']]
 ]);
-if(!$ids){ hd_e2e_fail('idealo materializer created no campaigns'); }
+if(!$ids){ hd_e2e_fail('idealo materializer created no campaigns; materialized='.wp_json_encode($result['details']['materialized']??null).' counts='.wp_json_encode($result['counts']??null)); }
 
 $product_campaign_id=0;
 foreach($ids as $id){
