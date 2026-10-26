@@ -1,0 +1,1991 @@
+.ppar-affiliate-slot {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ppar-affiliate-disclosure {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+    opacity: 0.82;
+}
+
+.ppar-affiliate-label {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.ppar-banner-link {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+}
+
+.ppar-banner-image-wrap {
+    flex: 0 0 auto;
+    max-width: 220px;
+}
+
+.ppar-banner-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.ppar-banner-text {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.ppar-banner-title {
+    display: block;
+    font-size: 1.05rem;
+}
+
+.ppar-banner-description {
+    display: block;
+    line-height: 1.45;
+}
+
+.ppar-banner-button {
+    display: inline-block;
+    margin-top: 0.35rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .ppar-banner-link {
+        display: block;
+    }
+
+    .ppar-banner-image-wrap {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Portal-Template-Router: Auswahl + vollständige Übersicht */
+.ppar-template-router {
+    margin: 2.5rem 0;
+}
+
+.ppar-template-selected,
+.ppar-template-hint,
+.ppar-template-full {
+    margin: 2rem 0;
+}
+
+.ppar-template-heading,
+.ppar-template-hint-heading {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.ppar-template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.ppar-template-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 1px solid currentColor;
+    border-radius: 14px;
+    text-decoration: none;
+    min-height: 100%;
+}
+
+.ppar-template-card-title {
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.ppar-template-card-description {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    opacity: 0.82;
+}
+
+.ppar-template-hint {
+    padding: 1.15rem;
+    border: 1px solid currentColor;
+    border-radius: 16px;
+}
+
+.ppar-template-hint p {
+    margin-top: 0;
+}
+
+.ppar-template-button {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.65rem 0.95rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.ppar-template-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.7rem 1rem;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.ppar-template-list-entry {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid currentColor;
+}
+
+.ppar-template-list-entry span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+/* v0.3.0: bildunabhängiges Grunddesign */
+.ppar-template-router,
+.ppar-affiliate-slot {
+    --ppar-radius: 14px;
+    --ppar-gap: 1rem;
+}
+
+.ppar-template-card,
+.ppar-template-hint,
+.ppar-affiliate-slot {
+    background: color-mix(in srgb, currentColor 3%, transparent);
+}
+
+.ppar-template-card:focus,
+.ppar-template-card:hover,
+.ppar-template-button:focus,
+.ppar-template-button:hover,
+.ppar-banner-link:focus,
+.ppar-banner-link:hover {
+    text-decoration: underline;
+}
+
+.ppar-template-list-entry a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ppar-template-list-entry a:hover,
+.ppar-template-list-entry a:focus {
+    text-decoration: underline;
+}
+
+.ppar-affiliate-slot:empty,
+.ppar-template-router:empty {
+    display: none;
+}
+
+/* V2.2.0: zentral verwaltete Werbeplatz-Platzhalter aus der Mediathek. */
+.ppar-placeholder-slot {
+    background: #fff;
+    border-color: #dcdcde;
+}
+
+.ppar-placeholder-slot .ppar-banner-link,
+.ppar-placeholder-slot .ppar-banner-link-static {
+    display: block;
+}
+
+.ppar-placeholder-slot .ppar-banner-image-wrap {
+    display: block;
+    width: 100%;
+    max-width: none;
+}
+
+.ppar-placeholder-slot .ppar-banner-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.ppar-placeholder-slot .ppar-banner-text {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.85rem;
+}
+
+.ppar-placeholder-slot .ppar-banner-link-static {
+    cursor: default;
+}
+
+
+/* V2.2.17: Startseite als dezente Partner-Vorschau statt riesigem Einzelbanner. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics {
+    margin: 2rem 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+}
+.ppar-start-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+.ppar-start-partner-grid.ppar-start-partner-count-1 {
+    grid-template-columns: minmax(0, calc(50% - 8px));
+    justify-content: center;
+}
+.ppar-start-partner-card {
+    position: relative;
+    display: block;
+    min-height: 176px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    border-top: 5px solid #a7a7a7;
+    border-radius: 22px;
+    background: #fff;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: inherit;
+}
+.ppar-start-partner-card .ppar-banner-image { object-fit: cover; }
+@media (max-width: 767px) {
+    .ppar-start-partner-grid,
+    .ppar-start-partner-grid.ppar-start-partner-count-1 { grid-template-columns: 1fr; }
+    .ppar-start-partner-card { min-height: 150px; }
+}
+
+/* V2.2.19: zwei gleich breite Startseiten-Partnerkacheln; Bild randlos bis an den Kartenrahmen. */
+.ppar-start-partner-grid,
+.ppar-start-partner-grid.ppar-start-partner-count-1,
+.ppar-start-partner-grid.ppar-start-partner-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+}
+.ppar-start-partner-card {
+    display: block;
+    width: 100%;
+    min-height: 176px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    border-top: 5px solid #a7a7a7;
+    border-radius: 22px;
+    background: #fff;
+    line-height: 0;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+.ppar-start-partner-card .ppar-banner-image {
+    object-fit: cover !important;
+    object-position: center !important;
+}
+@media (max-width: 767px) {
+    .ppar-start-partner-grid,
+    .ppar-start-partner-grid.ppar-start-partner-count-1,
+    .ppar-start-partner-grid.ppar-start-partner-count-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* V2.2.20: Partner-Vorschaubilder fuellen die Karten bis zum Rahmen. */
+.ppar-start-partner-card {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+.ppar-start-partner-card .ppar-banner-image {
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 0 !important;
+}
+
+
+/* V2.2.23: Startseiten-Vorschaukacheln behalten den verbindlichen Kartenrahmen.
+   Das Bild liegt ohne Innenabstand direkt an der inneren Rahmenkante. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card {
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: 1px solid #d7d7d7 !important;
+    border-top: 5px solid #a7a7a7 !important;
+    border-radius: 22px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card .ppar-banner-image {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* V2.2.24: Startseiten-Partnerkarten nutzen exakt den sichtbaren
+   Rahmenvertrag der Portal-Kacheln. Der Rahmen sitzt an der Karte,
+   das Bild bleibt ohne Innenabstand, der obere Akzent ist ein eigenes
+   Overlay und kann nicht vom Bild verdeckt werden. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card {
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid #e7ebe7 !important;
+    border-top: 0 !important;
+    border-radius: 22px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-frame-accent {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    height: 5px !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 22px 22px 55% 55% !important;
+    background: #a7a7a7 !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+}
+
+
+/* V2.2.25: Startseite mit drei Werbevorschaukacheln.
+   Desktop: 3 Spalten. Tablet: 2 oben, 1 darunter zentriert.
+   Mobil: untereinander. Die Bildzentrierung bleibt auf allen Breiten erhalten. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    width: 100% !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-banner-image-wrap,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-banner-image {
+    background-position: center center !important;
+    object-position: center center !important;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card:nth-child(3) {
+        grid-column: 1 / -1 !important;
+        max-width: calc(50% - 8px) !important;
+        justify-self: center !important;
+    }
+}
+@media (max-width: 767px) {
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+        grid-template-columns: 1fr !important;
+    }
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card:nth-child(3) {
+        grid-column: auto !important;
+        max-width: none !important;
+        justify-self: stretch !important;
+    }
+}
+
+
+/* V2.4.0: optionale Produktmetadaten. */
+.ppar-banner-meta { display:flex; flex-wrap:wrap; align-items:baseline; gap:.45rem .75rem; }
+.ppar-banner-price { font-size:1.05rem; }
+.ppar-banner-availability { font-size:.86rem; opacity:.78; }
+
+/* V2.5.3: zurückhaltende Einzelbeitrags-Affiliateausgabe ohne Sidebar. */
+.ppar-article-inline-banner {
+    clear: both;
+    margin: 2.25rem 0;
+}
+
+.ppar-article-product-block {
+    clear: both;
+    margin: 3rem 0 0;
+    padding-top: 1.75rem;
+    border-top: 1px solid #e7ebe7;
+}
+
+.ppar-article-section-label {
+    display: block;
+    margin: 0 0 1.15rem;
+    padding-left: 0.8rem;
+    border-left: 3px solid #C89214;
+    color: #35422A;
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.ppar-article-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+    align-items: stretch;
+}
+
+.ppar-article-product-count-1 {
+    grid-template-columns: minmax(0, 370px);
+}
+
+.ppar-article-product-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ppar-article-product-card {
+    min-width: 0;
+    min-height: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7ebe7;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: none;
+    transition: border-color .18s ease, transform .18s ease;
+}
+
+.ppar-article-product-card:hover,
+.ppar-article-product-card:focus-within {
+    border-color: #C89214;
+}
+
+.ppar-article-product-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: #35422A !important;
+    text-decoration: none !important;
+}
+
+.ppar-article-product-link:hover,
+.ppar-article-product-link:focus,
+.ppar-article-product-link:active,
+.ppar-article-product-link * {
+    text-decoration: none !important;
+}
+
+.ppar-article-product-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 190px;
+    padding: 0.9rem;
+    overflow: hidden;
+    background: #f8f8f5;
+    border-bottom: 1px solid #eef0ec;
+}
+
+.ppar-article-product-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    object-fit: contain;
+    object-position: center;
+    border: 0;
+    border-radius: 0;
+}
+
+.ppar-article-product-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1rem;
+}
+
+.ppar-article-product-title {
+    display: -webkit-box;
+    overflow: hidden;
+    color: #C89214;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.ppar-article-product-description {
+    display: -webkit-box;
+    overflow: hidden;
+    color: #5f675d;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.ppar-article-product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.7rem;
+    margin-top: auto;
+    color: #35422A;
+}
+
+.ppar-article-product-price {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.ppar-article-product-availability {
+    color: #687066;
+    font-size: 0.82rem;
+}
+
+.ppar-article-product-cta {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 0.7rem 1rem;
+    border: 1px solid #35422A;
+    border-radius: 0;
+    background: #35422A;
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    transition: background-color .18s ease, border-color .18s ease;
+}
+
+.ppar-article-product-link:hover .ppar-article-product-cta,
+.ppar-article-product-link:focus .ppar-article-product-cta {
+    border-color: #C89214;
+    background: #C89214;
+    color: #fff;
+}
+
+@media (min-width: 761px) and (max-width: 1023px) {
+    .ppar-article-product-grid,
+    .ppar-article-product-count-2,
+    .ppar-article-product-count-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ppar-article-product-count-1 {
+        grid-template-columns: minmax(0, 370px);
+    }
+
+    .ppar-article-product-count-3 .ppar-article-product-card:nth-child(3) {
+        grid-column: 1 / -1;
+        width: min(370px, 100%);
+        justify-self: center;
+    }
+}
+
+@media (max-width: 760px) {
+    .ppar-article-product-grid,
+    .ppar-article-product-count-1,
+    .ppar-article-product-count-2,
+    .ppar-article-product-count-3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ppar-article-product-media {
+        height: 175px;
+    }
+}
+
+/* Automatische Ermittlung des realen Banner-Seitenverhältnisses im Browser. */
+.ppar-banner-format-square .ppar-banner-image-wrap,
+.ppar-banner-format-portrait .ppar-banner-image-wrap {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ppar-banner-size-badge {
+    display: block;
+    margin-top: 0.65rem;
+    color: #687066;
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+/* V2.5.7: Administrator-Testflächen ohne Bild, Hinweis oder Zusatztext. */
+.ppar-article-banner-test-wrap {
+    clear: both;
+    margin: 2.25rem 0;
+}
+
+.ppar-article-banner-test-surface {
+    position: relative;
+    width: 100%;
+    max-width: min(100%, var(--ppar-test-banner-width, 100%));
+    aspect-ratio: var(--ppar-test-banner-ratio, 8 / 1);
+    min-height: 48px;
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px dashed #C89214;
+    background: rgba(200, 146, 20, 0.06);
+}
+
+
+.ppar-article-product-test-surface {
+    min-height: 220px;
+    border-style: dashed;
+    border-color: #C89214;
+    background: rgba(200, 146, 20, 0.04);
+}
+
+/* V6.16: remote eBay PRIVATE images keep one fixed HivePress card geometry.
+   The original eBay image is never cropped: letterboxing stays white. */
+.ppar-ebay-remote-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff;
+}
+
+.ppar-ebay-remote-image > a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.ppar-ebay-remote-image img,
+.ppar-ebay-remote-images img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #fff;
+}
+
+.ppar-ebay-remote-image img {
+    height: 100%;
+}
+
+.ppar-ebay-remote-images {
+    width: 100%;
+    background: #fff;
+}
+
+.ppar-ebay-remote-images img {
+    height: auto;
+    margin: 0 auto;
+}
+
+/* V6.60.0: Multi-Provider-Buttons nur innerhalb bestehender Produktkarten. */
+.ppar-article-product-link--multi,
+.ppar-banner-link--multi {
+    cursor: default;
+}
+
+.ppar-article-product-actions {
+    display: grid;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+.ppar-article-product-offer-button {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid #35422A;
+    border-radius: 0;
+    background: #35422A;
+    color: #fff !important;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none !important;
+    transition: background-color .18s ease, border-color .18s ease;
+}
+
+.ppar-article-product-offer-button:hover,
+.ppar-article-product-offer-button:focus {
+    border-color: #C89214;
+    background: #C89214;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.ppar-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+}
+
+.ppar-banner-offer-button {
+    display: inline-block;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid #35422A;
+    border-radius: 0;
+    background: #35422A;
+    color: #fff !important;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none !important;
+    transition: background-color .18s ease, border-color .18s ease;
+}
+
+.ppar-banner-offer-button:hover,
+.ppar-banner-offer-button:focus {
+    border-color: #C89214;
+    background: #C89214;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* V6.61.12 – consolidated category-product live-DOM geometry.
+   Real renderer/design chain:
+   .is-real[data-pa266-slot="category_product_N"]
+     > .ppar-affiliate-slot[data-ppar-slot="category_product_N"]
+       > .ppar-affiliate-disclosure + .ppar-affiliate-content
+         > .ppar-banner-link[data-ppar-category-product-card="1"]
+           > .ppar-banner-image-wrap + .ppar-banner-text
+   One rule set only: direct rendered-DOM selectors and no inherited row inflation or percentage-height cycle. */
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+}
+.pa255-hub2 .pa255-product.is-real[data-pa255-slot^="category_product_"] {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    align-self: stretch !important;
+    height: auto !important;
+    min-height: 0 !important;
+}
+.pa255-hub2 .pa255-product.is-real[data-pa255-slot^="category_product_"] > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] {
+    height: auto !important;
+}
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-rows: 56px minmax(360px, 1fr) !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 416px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+}
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] > .ppar-affiliate-disclosure {
+    box-sizing: border-box !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    margin: 0 !important;
+    padding: 0 0 8px !important;
+    overflow: visible !important;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] > .ppar-affiliate-disclosure--reserve { visibility: hidden !important; }
+
+.pa272-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa273-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa266-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa255-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve) { width: calc(300% + 36px) !important; }
+.pa272-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa273-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa266-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+.pa255-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve) { width: calc(200% + 18px) !important; }
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] > .ppar-affiliate-label { display:none !important; }
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) > .ppar-affiliate-slot[data-ppar-slot^="category_product_"] > .ppar-affiliate-content {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-row: 2 !important;
+    grid-template-rows: minmax(360px, 1fr) !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 360px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-affiliate-content > .ppar-banner-link[data-ppar-category-product-card="1"] {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-rows: 150px minmax(210px, 1fr) !important;
+    align-self: stretch !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 360px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    line-height: normal !important;
+}
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-link[data-ppar-category-product-card="1"] > .ppar-banner-image-wrap {
+    box-sizing: border-box !important;
+    display: flex !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: center !important;
+    flex: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    line-height: 0 !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-image-wrap > .ppar-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-link[data-ppar-category-product-card="1"] > .ppar-banner-text[data-ppar-category-product-text="1"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    grid-row: 2 !important;
+    flex-direction: column !important;
+    align-self: stretch !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 210px !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 12px 14px 10px !important;
+    overflow: visible !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-title {
+    display: block !important;
+    flex: 0 0 auto !important;
+    min-height: 2.55em !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    font-size: 17px !important;
+    line-height: 1.275 !important;
+    text-align: center !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-description {
+    display: block !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-meta {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin: 4px 0 0 !important;
+    min-height: 18px !important;
+    text-align: center !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-button,
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-actions {
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    margin: auto 0 0 !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-actions { display:grid !important; grid-template-columns:1fr !important; gap:4px !important; }
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-offer-button,
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-button {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    border-radius: 0 !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+}
+:is(.is-real[data-pa266-slot^="category_product_"], .is-real[data-pa255-slot^="category_product_"]) .ppar-banner-button { margin-top:auto !important; }
+
+@media (max-width:900px) and (min-width:621px) {
+    .pa272-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa273-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa266-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa255-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve) { width: calc(200% + 18px) !important; }
+}
+@media (max-width:620px) {
+    .pa272-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa273-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa266-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa255-product-grid.count-3 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa272-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa273-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa266-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve),
+    .pa255-product-grid.count-2 > .is-real:first-child .ppar-affiliate-disclosure:not(.ppar-affiliate-disclosure--reserve) { width:100% !important; }
+}
+
+
+/* V6.61.15 – live DOM-transform rootfix.
+   The portal design runtime decorates .is-real cards after DOMContentLoaded and
+   moves the original .ppar-* markup into a hidden source node. Equal geometry
+   must therefore target the transformed visible shell, not the hidden source.
+   The selectors are intentionally more specific than the later design-runtime
+   rules, so the fix is stable regardless of stylesheet source order. */
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"],
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"],
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"],
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-self: stretch !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"],
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"],
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"],
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"],
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"],
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"],
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"] {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"],
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"],
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"],
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 150px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    overflow: hidden !important;
+}
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] img,
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] img,
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] img,
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] img {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"],
+.pa266-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"],
+.pa272-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"],
+.pa273-product-grid > .pa266-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"] {
+    flex: 0 0 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    margin-top: 9px !important;
+}
+
+/* V6.72.77 – Startseite sowie grosse Bannerplaetze aller Seiten-/Kategorieebenen:
+   sichtbarer Banner ueber die volle verfuegbare Breite, ohne Kartenrahmen,
+   Creative-Text oder Extra-CTA. Kein post-load Invalid-Hide fuer diesen Renderer. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot {
+    box-sizing: border-box !important;
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-align: center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel {
+    display: block !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    opacity: .58 !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link {
+    line-height: 0 !important;
+    text-decoration: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure {
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    opacity: .76 !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-text,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-button {
+    display: none !important;
+}
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot),
+.pa255-network:has(.ppar-overview-wide-banner-slot),
+.pa266-network:has(.ppar-overview-wide-banner-slot),
+.ppar-overview-banner-v67266:has(.ppar-overview-wide-banner-slot) {
+    box-sizing: border-box !important;
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot) > .pa356-ad-label,
+.pa255-network:has(.ppar-overview-wide-banner-slot) > header,
+.pa266-network:has(.ppar-overview-wide-banner-slot) > header {
+    display: none !important;
+}
+
+/* V6.72.37 – grosser Kategorie-Querbanner auf allen Kategorieebenen.
+   Keine Karte, kein Rahmen, keine Text-/CTA-Spalte. Proportional, bevorzugt
+   Downscale; maximal +10 % Upscale wird nur vom Laufzeitpruefer zugelassen. */
+.ppar-affiliate-slot.ppar-category-large-banner-slot {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    text-align: center !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-adlabel {
+    display: block !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.02em !important;
+    text-align: center !important;
+    text-transform: none !important;
+    opacity: 0.58 !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot > .ppar-affiliate-content {
+    box-sizing: border-box !important;
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-link {
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot[data-ppar-large-banner-invalid="1"] {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hub-1 legt historisch noch eine externe Partnerueberschrift um denselben Slot.
+   Fuer den KISS-Querbanner ist nur die kleine Anzeige-Kennzeichnung zulaessig. */
+.pa356-partner.pa359-partner:has(.ppar-category-large-banner-slot) > .pa356-ad-label {
+    display: none !important;
+}
+
+.pa255-network:has(.ppar-category-large-banner-slot) > header,
+.pa266-network:has(.ppar-category-large-banner-slot) > header {
+    display: none !important;
+}
+
+/* V6.72.33 – Hub-2 only: compact cards using the proven equal-height mechanics
+   from the functioning category levels. Keep the compact geometry, but let the
+   visible shell stretch exactly like the proven .pa266/.pa272/.pa273 cards. */
+body .pa255-hub2 .pa255-products .pa255-product-grid {
+    margin-bottom: 0 !important;
+}
+body .pa255-hub2 .pa255-products + .pa255-direct {
+    margin-top: 48px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] {
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"] {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] {
+    box-sizing: border-box !important;
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 auto !important;
+    padding: 10px 14px 6px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-title-v150414="1"] {
+    margin: 10px 14px 4px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-price-v150414="1"] {
+    margin: 0 14px 10px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"] {
+    margin-top: 0 !important;
+}
+
+
+/* V6.72.44 – Glossar-Single: ein fachlicher Werbeplatz, getrennte technische Desktop-/Mobil-Slots. */
+body.single-uge_term .ppar-glossary-rail-v67244{grid-column:2;grid-row:2 / span 2;margin-top:24px;display:flex;min-width:0;flex-direction:column;gap:40px;align-self:start}
+body.single-uge_term .ppar-glossary-rail-v67244>.pftk-gsingle-aside-v150490{grid-column:auto;grid-row:auto;margin-top:0;display:grid;gap:40px;align-self:auto}
+body.single-uge_term .ppar-glossary-banner-v67244>.ppar-affiliate-slot{margin:0;padding:0;border:0;border-radius:0;background:transparent;overflow:visible}
+body.single-uge_term .ppar-glossary-banner-v67244 .ppar-banner-link{display:block}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:block;min-width:0}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{display:block;max-width:310px;margin:0}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{display:block;width:100%;max-width:310px;height:auto;border-radius:0}
+body.single-uge_term .ppar-glossary-banner-mobile-v67244{display:none}
+@media(max-width:840px){
+ body.single-uge_term .ppar-glossary-rail-v67244{display:contents}
+ body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:none!important}
+ body.single-uge_term .ppar-glossary-banner-mobile-v67244{display:block;grid-column:1;grid-row:auto;margin:22px 0 0}
+ body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image-wrap,body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image{display:block;width:100%;max-width:100%;height:auto}
+}
+
+/* Glossar-Werbeblock im bestätigten Portaldesign. */
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251{
+  box-sizing:border-box!important;
+  width:100%!important;
+  padding:19px 20px 17px!important;
+  border:0!important;
+  border-top:2px solid var(--o)!important;
+  border-radius:0!important;
+  background:var(--cream)!important;
+  overflow:hidden!important;
+}
+body.single-uge_term .ppar-glossary-adhead-v67251{
+  display:flex!important;align-items:center!important;gap:10px!important;
+  margin:0 0 12px!important;color:var(--g)!important;
+  font-family:var(--pa-global-title-font,"Cormorant Garamond",Georgia,serif)!important;
+  font-size:25px!important;line-height:1.1!important;font-weight:600!important;
+}
+body.single-uge_term .ppar-glossary-adicon-v67251{display:inline-flex!important;width:26px!important;height:26px!important;flex:0 0 26px!important;align-items:center!important;justify-content:center!important;color:var(--g)!important}
+body.single-uge_term .ppar-glossary-adicon-v67251 svg{display:block!important;width:23px!important;height:23px!important;fill:currentColor!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-content{margin:0!important;padding:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;color:inherit!important;text-decoration:none!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-image-wrap{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;line-height:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-image{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:0!important;border-radius:0!important;object-fit:contain!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-title,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-description,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-label{display:none!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-disclosure{margin:10px 0 0!important;font-size:11px!important;line-height:1.35!important;opacity:.76!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-text{display:block!important;margin:12px 0 0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{
+  box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;min-width:0!important;max-width:none!important;height:40px!important;min-height:40px!important;max-height:40px!important;
+  margin:0!important;padding:0 16px!important;border:1px solid var(--g)!important;border-radius:0!important;
+  background:var(--g)!important;color:#fff!important;font-size:11px!important;line-height:1!important;font-weight:700!important;
+  letter-spacing:.06em!important;text-transform:uppercase!important;text-decoration:none!important;
+}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link:hover .ppar-banner-button,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link:focus-visible .ppar-banner-button{background:var(--o)!important;border-color:var(--o)!important;color:#fff!important}
+@media(max-width:840px){
+ body.single-uge_term .ppar-glossary-affiliate-slot-v67251{padding:15px 14px 14px!important}
+ body.single-uge_term .ppar-glossary-adhead-v67251{font-size:22px!important}
+}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-media-v67251{display:block!important;width:100%!important;margin:0!important;padding:0!important;text-decoration:none!important;line-height:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-cta-wrap-v67251{margin:12px 0 0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251{display:inline-flex!important;text-decoration:none!important}
+\n\n/* V6.72.53 – Glossar LIVE geometry/design rootfix. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:block!important;min-width:0!important;margin:0!important}
+  body.single-uge_term .pftk-gsingle-aside-v150490>.ppar-glossary-banner-desktop-v67244{grid-column:auto!important;grid-row:auto!important;align-self:auto!important}
+}
+body.single-uge_term .ppar-glossary-adhead-v67251{font-size:25px!important;line-height:1.1!important}
+body.single-uge_term .ppar-glossary-adicon-v67251 svg{fill:none!important;stroke:currentColor!important;stroke-width:1.7!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-cta-wrap-v67251,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251{display:flex!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{display:flex!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251:hover .ppar-banner-button,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251:focus-visible .ppar-banner-button{background:var(--o)!important;border-color:var(--o)!important;color:#fff!important}
+@media(max-width:840px){
+  body.single-uge_term .pftk-gsingle-aside-v150490{display:grid!important;gap:22px!important;margin-top:22px!important}
+  body.single-uge_term .ppar-glossary-banner-mobile-v67244{margin:22px 0 0!important}
+  body.single-uge_term .ppar-glossary-adhead-v67251{font-size:25px!important}
+}
+
+
+
+/* V6.72.87 KISS – Glossar Desktop bleibt normal im vorhandenen Aside-Flow. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{position:static!important;right:auto!important;top:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin:0!important}
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{width:auto!important;max-width:310px!important;max-height:310px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important}
+}
+
+/* V6.72.60 – Glossar Desktop banner media centered like confirmed pre-block-change layout. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-media-v67251{
+    display:flex!important;justify-content:center!important;align-items:flex-start!important;width:100%!important;
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{
+    display:flex!important;justify-content:center!important;width:100%!important;max-width:100%!important;margin:0 auto!important;
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{
+    display:block!important;width:auto!important;max-width:100%!important;max-height:310px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important;
+  }
+}
+
+
+/* V6.72.62 – disclosure size normalization + full-width category product cards.
+   Disclosure text follows the proven small centered size from the product-grid
+   example. Product suggestion cards must stretch to the same usable body width
+   as the surrounding content instead of collapsing to narrower card widths. */
+body :is(.pa255-products,.pa266-products,.pa272-products,.pa273-products,.pa255-direct,.pa266-direct,.pa272-direct,.pa273-direct) .ppar-affiliate-disclosure{
+    box-sizing:border-box !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    font-size:10px !important;
+    line-height:1.35 !important;
+    text-align:center !important;
+    opacity:.76 !important;
+}
+
+body :is(.pa255-products,.pa266-products,.pa272-products,.pa273-products,.pa255-network,.pa266-network,.pa272-network,.pa273-network){
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:100% !important;
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid){
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    align-items:stretch !important;
+}
+@media (min-width:901px){
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-3{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+    body .pa255-product-grid.count-2,
+    body .pa266-product-grid.count-2,
+    body .pa272-product-grid.count-2,
+    body .pa273-product-grid.count-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media (max-width:900px) and (min-width:621px){
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-3{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+    body .pa255-product-grid.count-3 > :last-child,
+    body .pa266-product-grid.count-3 > :last-child,
+    body .pa272-product-grid.count-3 > :last-child,
+    body .pa273-product-grid.count-3 > :last-child{grid-column:1 / -1 !important;justify-self:stretch !important;width:100% !important;max-width:none !important}
+    body .pa255-product-grid.count-2,
+    body .pa266-product-grid.count-2,
+    body .pa272-product-grid.count-2,
+    body .pa273-product-grid.count-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media (max-width:620px){
+    body .pa255-product-grid.count-2,
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-2,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-2,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-2,
+    body .pa273-product-grid.count-3{grid-template-columns:minmax(0,1fr) !important}
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid) > .is-real,
+body .pa255-product-grid > .pa255-product.is-real,
+body .pa266-product-grid > .pa266-product.is-real,
+body .pa272-product-grid > .pa266-product.is-real,
+body .pa273-product-grid > .pa266-product.is-real{
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    justify-self:stretch !important;
+}
+
+
+/* Canonical disclosure and true full-body product grids. */
+.ppar-affiliate-disclosure{
+  font-size:10px!important;
+  line-height:1.35!important;
+  text-align:center!important;
+  opacity:.76!important;
+}
+
+/* Product grids: the group itself always occupies the complete surrounding content width. */
+body .pa333-leaf-page .pa272-product-grid,
+body .pa273-product-grid,
+body .pa272-product-grid,
+body .pa266-product-grid,
+body .pa255-product-grid,
+body .pa255-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa266-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa272-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa273-product-grid[data-pftk-affiliate-real-grid-v150414="1"]{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  justify-content:stretch!important;
+}
+@media(min-width:901px){
+ body .pa333-leaf-page .pa272-product-grid.count-1,
+ body .pa255-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:minmax(0,1fr)!important}
+ body .pa333-leaf-page .pa272-product-grid.count-2,
+ body .pa255-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body .pa333-leaf-page .pa272-product-grid.count-3,
+ body .pa255-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid) > :is(.pa255-product,.pa266-product,.is-real){
+  min-width:0!important;
+  width:100%!important;
+  max-width:none!important;
+  justify-self:stretch!important;
+}
+
+/* V6.72.66 – festgelegte Uebersichts-Werbebloecke. */
+.ppar-overview-banner-v67266{display:block;width:100%;max-width:none;margin:24px 0;clear:both}
+.ppar-overview-banner-v67266[hidden]{display:none!important}
+.ppar-overview-banner-v67266>.ppar-affiliate-slot{width:100%;max-width:none;margin:0}
+
+
+/* V6.72.68 – klassische Einzelbeitraege: reduzierter Querformat-Werbeblock wie die
+   anderen redaktionellen Einzeltypen; weiss, rahmenlos, ohne Creative-Linktext. */
+body.single-post .ppar-slot-post_inline_banner.ppar-article-inline-banner{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:2.25rem 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-content{
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-media-v67251,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-image-wrap{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:0!important;
+  text-decoration:none!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-image{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-title,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-description,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-meta,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-seller{
+  display:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251{
+  box-sizing:border-box!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+  width:100%!important;
+  margin:12px 0 0!important;
+  padding:0!important;
+  text-decoration:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-button{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  height:40px!important;
+  min-height:40px!important;
+  max-height:40px!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border:1px solid #35422A!important;
+  border-radius:0!important;
+  background:#35422A!important;
+  color:#fff!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251:hover .ppar-banner-button,
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251:focus-visible .ppar-banner-button{
+  background:#C89214!important;
+  border-color:#C89214!important;
+  color:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-disclosure{
+  margin:8px 0 0!important;
+  padding:0!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  text-align:center!important;
+  opacity:.76!important;
+  background:#fff!important;
+}
+@media(max-width:640px){
+  body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251,
+  body.single-post .ppar-slot-post_inline_banner .ppar-banner-button{
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+
+/* V6.72.78 – nur niedrige Querbanner; CTA im Seitenstil; Journal-Altdesign neutralisiert. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    display:flex!important;
+    justify-content:flex-end!important;
+    width:100%!important;
+    margin:12px 0 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta{
+    box-sizing:border-box!important;
+    display:inline-flex!important;
+    min-height:42px!important;
+    padding:10px 18px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:1px solid #35422A!important;
+    border-radius:4px!important;
+    background:#35422A!important;
+    color:#fff!important;
+    font-size:11px!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.04em!important;
+    text-transform:uppercase!important;
+    text-decoration:none!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner){
+    box-sizing:border-box!important;
+    display:block!important;
+    min-height:0!important;
+    width:100%!important;
+    margin:2rem 0!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-bottom:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    gap:0!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>span,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>header,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>h2,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)>header{
+    display:none!important;
+}
+
+
+/* V6.72.79 – FINAL: alle grossen Uebersichts-Banner wirklich ueber die volle Inhaltsbreite. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link{
+    display:block!important;
+    margin-left:0!important;
+    margin-right:0!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    display:block!important;
+    height:auto!important;
+    object-fit:contain!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    justify-content:flex-end!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+
+
+/* V6.72.80 – DESIGN ONLY. Keine Auswahl-/Filter-/Zuordnungslogik geaendert. */
+/* Der Werbeblock nutzt die komplette Breite seines realen Inhaltscontainers. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    box-sizing:border-box!important;
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    height:auto!important;
+    object-fit:fill!important;
+    object-position:center center!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+}
+/* Redundantes \"Anzeige\" ist komplett entfernt/unterdrueckt. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel{
+    display:none!important;
+}
+/* Pflichttext direkt unter dem Bild, damit keine unnoetige Hoehe entsteht. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure{
+    display:block!important;
+    margin:3px 0 0!important;
+    padding:0!important;
+    min-height:0!important;
+    font-size:10px!important;
+    line-height:1.25!important;
+    text-align:center!important;
+    opacity:.72!important;
+    border:0!important;
+    background:transparent!important;
+}
+/* CTA rechts unter dem Pflichttext; Seitenstil + Hover. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    display:flex!important;
+    width:100%!important;
+    justify-content:flex-end!important;
+    margin:6px 0 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta{
+    display:inline-flex!important;
+    min-height:40px!important;
+    padding:9px 18px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:1px solid #35422A!important;
+    border-radius:2px!important;
+    background:#35422A!important;
+    color:#fff!important;
+    font-size:11px!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.04em!important;
+    text-transform:uppercase!important;
+    text-decoration:none!important;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+/* Alte Journal-Chrome komplett neutralisieren: kein gruener Rand, kein Alt-Header, keine Pseudolinie. */
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner),
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > *,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner){
+    box-shadow:none!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner){
+    box-sizing:border-box!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:2rem 0!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-right:0!important;
+    border-bottom:0!important;
+    border-left:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    outline:0!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)::before,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)::after,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)::before,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    background:none!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > span,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > header,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > h2,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > strong,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > p,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner) > header{
+    display:none!important;
+}
+/* Falls das Journal-Design eine Linie direkt vor/nach dem Banner erzeugt: ebenfalls neutralisieren. */
+body .pftk-journal-v150280 [class*="pftk-journal-banner"]{
+    border-color:transparent!important;
+}
+
+
+/* Magazin: bestehender Werbeblock mittig zwischen den Themenkacheln. */
+.pftk-journal-category-grid-v150280 > .ppar-journal-midgrid-v67282{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:8px 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+}
+
+
+/* V6.72.83 – Journal-Position ROOTFIX: der echte bestehende Bannerblock sitzt als volle Zeile nach der Haelfte der Themenkarten. */
+.ppar-journal-midgrid-v67283{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:12px 0 18px!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-bottom:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    align-self:stretch!important;
+}
+.ppar-journal-midgrid-v67283::before,
+.ppar-journal-midgrid-v67283::after{
+    content:none!important;
+    display:none!important;
+}
+.ppar-journal-midgrid-v67283 > header,
+.ppar-journal-midgrid-v67283 > h2,
+.ppar-journal-midgrid-v67283 > h3,
+.ppar-journal-midgrid-v67283 > span:first-child{
+    display:none!important;
+}
+.ppar-journal-midgrid-v67283 .ppar-affiliate-slot{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+}
+
+
+/* V6.72.99 RESTORE – Journal Desktop: 8 Themenkarten strikt 4 / Banner / 4.
+   Nur visuelle Reihenfolge im bestehenden Grid; Designplugin bleibt unangetastet. */
+@media (min-width:768px){
+  .pftk-journal-category-grid-v150280 > a.pftk-journal-tile-v150478{order:1!important}
+  .pftk-journal-category-grid-v150280 > a.pftk-journal-tile-v150478:nth-of-type(n+5){order:3!important}
+  .pftk-journal-category-grid-v150280 > .ppar-journal-midgrid-v67283{order:2!important}
+}
+
+/* V6.72.100 PASS-RESTORE – exakt belegter Glossar-LIVE-PASS aus 6.72.60/57.
+   Desktop-Anzeige bleibt ausserhalb der Grid-Hoehenberechnung; linker Textfluss
+   darf durch den Werbeblock nicht nach unten gedrueckt werden. */
+@media(min-width:841px){
+  body.single-uge_term .pftk-gsingle-grid-v150490{position:relative!important}
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{
+    display:block!important;position:absolute!important;right:0!important;top:0!important;
+    width:310px!important;max-width:310px!important;margin:0!important;z-index:1!important
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{
+    display:flex!important;justify-content:center!important;width:100%!important;max-width:100%!important;margin:0 auto!important
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{
+    display:block!important;width:auto!important;max-width:100%!important;max-height:310px!important;height:auto!important;
+    margin:0 auto!important;object-fit:contain!important
+  }
+  body.single-uge_term .pftk-gsingle-topic-v150490{will-change:transform}
+}
+@media(max-width:840px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{position:static!important;right:auto!important;top:auto!important;transform:none!important}
+}
+
+/* V6.72.100 – Spezial-Uebersichten nutzen wieder exakt eine volle Querzeile. */
+.ppar-overview-banner-v672100{display:block!important;width:100%!important;max-width:none!important;clear:both!important;margin:24px 0!important}
+.ppar-overview-banner-v672100[hidden]{display:none!important}
