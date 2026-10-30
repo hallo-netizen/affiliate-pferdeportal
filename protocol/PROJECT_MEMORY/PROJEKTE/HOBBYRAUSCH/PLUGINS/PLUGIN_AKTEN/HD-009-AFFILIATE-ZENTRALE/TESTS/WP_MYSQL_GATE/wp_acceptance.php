@@ -183,7 +183,7 @@ if(!str_contains((string)$html,'ppar-affiliate-slot') || !str_contains((string)$
 hd009_gate(true,'original leaf-page design provider renders linked product card');
 $bad=$creatives[0];$bad['identity_hash']=hash('sha256','hd009-negative-new-target');
 $payload=json_decode($bad['payload'],true);
-$payload['ebay_verified_product_slug']='unknown-hobby-999';
+$payload['ebay_verified_product_targets']=['unknown-hobby-999']; // authoritative target array, not the decorative singular slug
 $bad['payload']=wp_json_encode($payload);
 $neg=$app->output_plan_creative($bad,true);
 hd009_gate(empty($neg['active']),'unknown hobby cannot publish');
