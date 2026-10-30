@@ -26,7 +26,7 @@ final class HD009_CI_Design_Fixture {
     public static function design_profile(){return 'hobby_depot';}
     public static function design_profile_contract_version(){return '1.0';}
     public static function affiliate_contract_version(){return '1.0';}
-    public static function affiliate_page_type($post_id){return 'hobby';}
+    public static function affiliate_page_type($post_id){return 'leaf';}
 }
 add_filter('pre_http_request', static function($preempt,$request,$url){
     $host=strtolower((string)parse_url((string)$url, PHP_URL_HOST));
