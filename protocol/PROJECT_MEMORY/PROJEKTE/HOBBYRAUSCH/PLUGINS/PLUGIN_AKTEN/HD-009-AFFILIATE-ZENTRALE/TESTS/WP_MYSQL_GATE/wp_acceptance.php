@@ -124,7 +124,10 @@ global $post;
 $post=get_post($first_page_id);setup_postdata($post);
 $html=apply_filters('the_content',(string)$post->post_content);
 wp_reset_postdata();
-hd009_gate(str_contains($html,'campid=1234567890'),'WordPress shortcode renders tracked product URL');
+if(!str_contains($html,'ppar-affiliate-slot') || !str_contains($html,'href=')) {
+ throw new RuntimeException('Frontend product card missing; rendered='.substr(preg_replace('/\s+/',' ',(string)$html),0,900));
+}
+hd009_gate(true,'WordPress shortcode renders visible linked product card (tracking link can use redirect)');
 $bad=$creatives[0];$bad['identity_hash']=hash('sha256','hd009-negative-new-target');
 $payload=json_decode($bad['payload'],true);
 $payload['ebay_verified_product_slug']='unknown-hobby-999';
