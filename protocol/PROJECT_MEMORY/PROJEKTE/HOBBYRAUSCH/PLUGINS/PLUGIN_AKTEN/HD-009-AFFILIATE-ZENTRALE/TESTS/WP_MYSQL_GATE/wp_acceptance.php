@@ -100,7 +100,8 @@ $count=0;
 foreach($creatives as $creative){
  $r=$app->output_plan_creative($creative,true);
  if(empty($r['active']) || !empty($r['blocked'])) {
-  throw new RuntimeException('Output failure '.($count+1).' '.json_encode($r,JSON_UNESCAPED_UNICODE));
+  $last=$wpdb->get_row('SELECT status, decision_reason, target_key, target_type, slot_id FROM '.$table.' ORDER BY id DESC LIMIT 1',ARRAY_A);
+  throw new RuntimeException('Output failure '.($count+1).' '.json_encode(['result'=>$r,'stored'=>$last],JSON_UNESCAPED_UNICODE));
  }
  $count++;
 }
