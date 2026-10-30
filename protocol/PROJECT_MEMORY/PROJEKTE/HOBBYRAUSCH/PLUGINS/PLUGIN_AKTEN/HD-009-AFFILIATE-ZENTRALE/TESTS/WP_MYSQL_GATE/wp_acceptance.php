@@ -120,6 +120,59 @@ foreach($objects as $o){
  $campaigns[$id]=1;
 }
 hd009_gate(count($campaigns)===320,'320 distinct campaign posts');
+// The original public eBay reader in both plugins requires matching provider
+// source rows; a campaign row alone MUST NOT become publicly deliverable.
+$ebay_schema=new ReflectionMethod($app,'maybe_install_ebay_schema');
+$ebay_schema->invoke($app);
+$ebay_table=$wpdb->prefix.'ppar_ebay_items';
+hd009_gate($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s',$ebay_table))===$ebay_table,'original eBay source table exists in real MySQL');
+$source_rows=0;$first_campaign_id=0;
+foreach(array_keys($campaigns) as $campaign_id) {
+ $campaign=get_post_meta($campaign_id,'ppar_campaign_data',true);
+ $identity=(string)get_post_meta($campaign_id,'_ppar_creative_identity_hash',true);
+ if((int)get_post_meta($campaign_id,'_ppar_ebay_business_auto',true)!==1
+  || (string)get_post_meta($campaign_id,'_ppar_ebay_business_match_contract',true)!=='concept_v3'
+  || !preg_match('/^[a-f0-9]{64}$/',$identity)) {
+  throw new RuntimeException('Original eBay campaign metadata absent on '.$campaign_id);
+ }
+ $now=time();$id=700000+$source_rows;
+ $data=[
+  'portal_key'=>(string)$local['key'],'item_id'=>'v1|'.$id.'|0',
+  'legacy_item_id'=>(string)$id,
+  'seller_account_type'=>'BUSINESS','seller_username'=>'hd009-ci-seller',
+  'route_mode'=>'business','rule_id'=>'hd009-ci','target_term_id'=>0,
+  'listing_post_id'=>0,'creative_identity_hash'=>$identity,
+  'title'=>(string)$campaign['title'],'short_description'=>'','condition_text'=>'',
+  'price_value'=>'39.99','currency'=>'EUR','shipping_value'=>'0',
+  'location_text'=>'','affiliate_url'=>(string)$campaign['url'],
+  'item_web_url'=>'https://www.ebay.de/itm/'.$id,
+  'image_url'=>(string)$campaign['image_url'],'item_end_at'=>0,
+  'source_hash'=>hash('sha256',$identity.'-ci-source'),
+  'source_payload'=>wp_json_encode(['raw'=>['title'=>(string)$campaign['title']]]),
+  'status'=>'active','source_state'=>'available','policy_state'=>'allowed',
+  'route_state'=>'ready','output_state'=>'active','policy_version'=>'',
+  'classifier_version'=>'','source_checked_at'=>$now,
+  'rejection_reason'=>'','last_seen'=>$now,'fresh_until'=>$now+3600,
+  'created_at'=>$now,'updated_at'=>$now
+ ];
+ if(!$wpdb->insert($ebay_table,$data)){throw new RuntimeException('Real eBay source DB insert failed '.$wpdb->last_error);}
+ if(!$first_campaign_id){$first_campaign_id=(int)$campaign_id;}
+ $source_rows++;
+}
+hd009_gate($source_rows===320 && (int)$wpdb->get_var("SELECT COUNT(*) FROM ".$ebay_table." WHERE seller_account_type='BUSINESS' AND source_state='available'")===320,
+ '320 actual BUSINESS source rows stored in real MySQL');
+$source_gate=new ReflectionMethod($app,'ebay_business_campaign_source_allows_delivery');
+$first_campaign=get_post_meta($first_campaign_id,'ppar_campaign_data',true);
+$first_campaign['post_id']=$first_campaign_id;
+hd009_gate($source_gate->invoke($app,$first_campaign)===true,
+ 'original public eBay source security gate allows validated matching row');
+$wpdb->update($ebay_table,['route_state'=>'blocked'],['creative_identity_hash'=>(string)get_post_meta($first_campaign_id,'_ppar_creative_identity_hash',true)]);
+hd009_gate($source_gate->invoke($app,$first_campaign)===false,
+ 'original public eBay source gate denies blocked inventory');
+$wpdb->update($ebay_table,['route_state'=>'ready'],['creative_identity_hash'=>(string)get_post_meta($first_campaign_id,'_ppar_creative_identity_hash',true)]);
+hd009_gate($source_gate->invoke($app,$first_campaign)===true,
+ 'original public eBay source gate restores valid inventory');
+
 // Use the identical template-kit integration that the working reference uses:
  // the design supplies the real page ID; a CLI shortcode has no current page.
 $html=apply_filters('pftk_leaf_page_affiliate_slot_html','',$first_page_id,'category_product_1',
