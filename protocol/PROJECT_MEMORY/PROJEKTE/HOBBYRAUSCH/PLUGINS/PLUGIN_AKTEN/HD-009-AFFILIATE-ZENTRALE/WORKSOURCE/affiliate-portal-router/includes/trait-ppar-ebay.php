@@ -1259,7 +1259,7 @@ trait PPAR_Ebay_Trait {
             'marketplace_id' => 'EBAY_DE',
             'delivery_country' => 'DE',
             'delivery_postal_code' => '',
-            'private_enabled' => true,
+            'private_enabled' => false,
             'business_enabled' => true,
             'private_parent_term_id' => 0,
             'private_root_term_id' => 0,
@@ -1352,7 +1352,7 @@ trait PPAR_Ebay_Trait {
         $out['marketplace_id'] = 'EBAY_DE';
         $out['delivery_country'] = 'DE';
         $out['delivery_postal_code'] = substr(preg_replace('/[^0-9A-Za-z -]/', '', (string) ($settings['delivery_postal_code'] ?? '')), 0, 12);
-        $out['private_enabled'] = !empty($settings['private_enabled']);
+        $out['private_enabled'] = false; // Hobby Depot: BUSINESS only; stored legacy PRIVATE is disabled.
         $out['business_enabled'] = !empty($settings['business_enabled']);
         $out['private_parent_term_id'] = absint($settings['private_parent_term_id'] ?? 0);
         $out['private_root_term_id'] = absint($settings['private_root_term_id'] ?? 0);
@@ -2824,6 +2824,19 @@ trait PPAR_Ebay_Trait {
         $affiliate_url = $this->ebay_valid_http_url($item['itemAffiliateWebUrl'] ?? '');
         if ($affiliate_url === '') {
             return new WP_Error('ebay_affiliate_url_missing', 'itemAffiliateWebUrl fehlt; Ausgabe wird blockiert.');
+        }
+        // Nur von eBay gelieferte HTTPS-Partnerlinks der eigenen EPN-Kampagne zulassen.
+        $affiliate_parts = parse_url($affiliate_url);
+        $affiliate_host = is_array($affiliate_parts) ? strtolower((string)($affiliate_parts['host'] ?? '')) : '';
+        $affiliate_scheme = is_array($affiliate_parts) ? strtolower((string)($affiliate_parts['scheme'] ?? '')) : '';
+        $affiliate_query = array();
+        if (is_array($affiliate_parts)) { parse_str((string)($affiliate_parts['query'] ?? ''), $affiliate_query); }
+        $campaign_id = (string)($settings['epn_campaign_id'] ?? '');
+        if ($affiliate_scheme !== 'https' || !preg_match('/(^|\.)ebay\.(de|com)$/D', $affiliate_host)
+            || !preg_match('/^[0-9]{10}$/D', $campaign_id)
+            || !is_string($affiliate_query['campid'] ?? null)
+            || $affiliate_query['campid'] !== $campaign_id) {
+            return new WP_Error('ebay_affiliate_campaign_invalid', 'eBay-Partnerlink hat keine gueltige eigene EPN-Kampagne.');
         }
         $item_web_url = $this->ebay_valid_http_url($item['itemWebUrl'] ?? '');
         $image_url = $this->ebay_valid_http_url($item['image']['imageUrl'] ?? '');
