@@ -1,0 +1,86 @@
+name: Hobby Depot HD009 REAL WordPress MySQL acceptance - no release
+
+on:
+  push:
+    branches:
+      - hobbyrausch/hd009-affiliate-port-20261026
+    paths:
+      - '.github/workflows/hobbyrausch-hd009-real-wordpress-acceptance.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/WP_MYSQL_GATE/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hd009-disposable-wp-mysql
+  cancel-in-progress: true
+
+jobs:
+  actual_wordpress_mysql:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: hd009_test
+          MYSQL_USER: hd009_test
+          MYSQL_PASSWORD: hd009-ci-only
+          MYSQL_ROOT_PASSWORD: hd009-root-ci-only
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -phd009-root-ci-only"
+          --health-interval=10s --health-timeout=5s --health-retries=15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Bind Hobby Depot paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'SRC=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/affiliate-portal-router' >> "$GITHUB_ENV"
+          echo 'TESTS=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/WP_MYSQL_GATE' >> "$GITHUB_ENV"
+      - name: Hard source and syntax checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(find "$SRC" -name '*.php' -type f | wc -l)
+          test "$count" -eq 23
+          find "$SRC" -name '*.php' -type f -print0 | xargs -0 -n1 php -l >/dev/null
+          php -l "$TESTS/hd009-fixture.php"
+          php -l "$TESTS/wp_acceptance.php"
+          grep -Fq "'required_count'=>count(" "$SRC/includes/class-hdar-hobby-depot-source.php"
+          grep -Fq "'private_enabled' => false" "$SRC/includes/trait-ppar-ebay.php"
+          grep -Fq "ebay_affiliate_campaign_invalid" "$SRC/includes/trait-ppar-ebay.php"
+          echo 'HD009_SOURCE_HARD_GATE_PASS'
+      - name: Install disposable real WordPress and MySQL
+        shell: bash
+        run: |
+          set -euo pipefail
+          WP=/tmp/hd009-wordpress-disposable
+          mkdir -p "$WP/wp-content/plugins" "$WP/wp-content/mu-plugins"
+          curl --fail --location --silent --show-error -o /tmp/hd009-wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          WPCLI="php /tmp/hd009-wp-cli.phar --allow-root --path=$WP"
+          $WPCLI core download --quiet
+          $WPCLI config create --dbname=hd009_test --dbuser=hd009_test --dbpass=hd009-ci-only --dbhost=127.0.0.1:3306 --skip-check --quiet
+          $WPCLI config set HD009_DISPOSABLE_WORDPRESS_TEST true --raw --quiet
+          $WPCLI core install --url=http://hd009.test --title='Disposable Hobby Depot' --admin_user=hd009-admin --admin_password='temporary-test-password' --admin_email=ci@example.test --skip-email --quiet
+          cp "$TESTS/hd009-fixture.php" "$WP/wp-content/mu-plugins/hd009-fixture.php"
+          cp -a "$SRC" "$WP/wp-content/plugins/hobby-depot-affiliate-router"
+          $WPCLI plugin activate hobby-depot-affiliate-router --quiet
+          $WPCLI plugin is-active hobby-depot-affiliate-router
+          echo 'HD009_REAL_WORDPRESS_ACTIVATION_PASS'
+          $WPCLI eval-file "$TESTS/wp_acceptance.php" | tee /tmp/hd009-real-wp-mysql.log
+          grep -Fxq 'HD009_REAL_WP_MYSQL_ACCEPTANCE_PASS' /tmp/hd009-real-wp-mysql.log
+          echo 'HD009_REAL_WORDPRESS_MYSQL_FINAL_PASS'
+      - name: Preserve only test logs - NEVER package the plugin
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: HD009-real-WordPress-MySQL-test-logs-only
+          path: /tmp/hd009-real-wp-mysql.log
+          if-no-files-found: ignore
