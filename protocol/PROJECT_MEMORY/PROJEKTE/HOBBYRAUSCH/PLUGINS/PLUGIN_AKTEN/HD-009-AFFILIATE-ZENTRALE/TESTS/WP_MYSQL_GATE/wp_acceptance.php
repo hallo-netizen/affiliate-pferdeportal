@@ -120,14 +120,14 @@ foreach($objects as $o){
  $campaigns[$id]=1;
 }
 hd009_gate(count($campaigns)===320,'320 distinct campaign posts');
-global $post;
-$post=get_post($first_page_id);setup_postdata($post);
-$html=apply_filters('the_content',(string)$post->post_content);
-wp_reset_postdata();
-if(!str_contains($html,'ppar-affiliate-slot') || !str_contains($html,'href=')) {
- throw new RuntimeException('Frontend product card missing; rendered='.substr(preg_replace('/\s+/',' ',(string)$html),0,900));
+// Use the identical template-kit integration that the working reference uses:
+ // the design supplies the real page ID; a CLI shortcode has no current page.
+$html=apply_filters('pftk_leaf_page_affiliate_slot_html','',$first_page_id,'category_product_1',
+ ['contract'=>Hobby_Depot_Affiliate_Router::CONTRACT_VERSION]);
+if(!str_contains((string)$html,'ppar-affiliate-slot') || !str_contains((string)$html,'href=')) {
+ throw new RuntimeException('Design-provider product card missing; rendered='.substr(preg_replace('/\s+/',' ',(string)$html),0,900));
 }
-hd009_gate(true,'WordPress shortcode renders visible linked product card (tracking link can use redirect)');
+hd009_gate(true,'original leaf-page design provider renders linked product card');
 $bad=$creatives[0];$bad['identity_hash']=hash('sha256','hd009-negative-new-target');
 $payload=json_decode($bad['payload'],true);
 $payload['ebay_verified_product_slug']='unknown-hobby-999';
