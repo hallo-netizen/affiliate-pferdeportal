@@ -18,12 +18,12 @@ hd009_gate(is_array($local)&&!empty($local['key']),'local Hobby Depot output por
 $concepts=(array)$cat['business_concepts'];
 $first=(array)reset($concepts);
 $sample=[
- 'provider'=>'ebay','creative_type'=>'product','source_kind'=>'ebay_business_item',
+ 'provider'=>'ebay','partner_external_id'=>'seller-ci-test','creative_type'=>'product','source_kind'=>'ebay_business_item',
  'identity_hash'=>hash('sha256','hd009-preflight'),'tracking_url'=>'https://www.ebay.de/itm/200001?campid=1234567890',
  'title'=>(string)$first['title'],'source_status'=>'active'
 ];
 $no_credentials=$app->control_partner_gate($sample,$local);
-hd009_gate(is_wp_error($no_credentials),'missing eBay access blocks publication');
+hd009_gate(is_wp_error($no_credentials) && $no_credentials->get_error_code()==='control_provider_credentials_missing','missing eBay credentials block publication for the correct reason');
 update_option('ppar_network_ebay_v1',[
  'enabled'=>true,'business_enabled'=>true,'private_enabled'=>true,
  'client_id'=>'HD009_CI_NONPRODUCTION','client_secret'=>'HD009_CI_NO_REAL_SECRET',
