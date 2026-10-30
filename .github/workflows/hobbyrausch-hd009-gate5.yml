@@ -1,15 +1,7 @@
 name: Hobbyrausch HD-009 Gate 5
 
 on:
-  push:
-    branches:
-      - hobbyrausch/hd009-affiliate-port-20261026
-    paths:
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/WORKSOURCE/**'
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/TESTS/**'
-      - '.github/workflows/hobbyrausch-hd009-gate5.yml'
   workflow_dispatch:
-
 permissions:
   contents: write
 
