@@ -238,6 +238,7 @@ final class HDAR_Hobby_Depot_Source {
             'business_supply_contract'=>array(
                 'version'=>'hdar-1',
                 'required_product_concept_ids'=>array_values(array_map(static function($c){ return (string)$c['id']; }, $business_concepts)),
+                'required_count'=>count($business_concepts),
             ),
         );
         return self::$catalog;
