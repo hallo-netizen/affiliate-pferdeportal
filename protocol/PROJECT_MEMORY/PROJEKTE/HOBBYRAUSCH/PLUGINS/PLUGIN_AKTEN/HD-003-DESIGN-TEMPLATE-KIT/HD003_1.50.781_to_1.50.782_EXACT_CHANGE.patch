@@ -1,0 +1,57 @@
+--- a/affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php
++++ b/affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php
+@@ -8,7 +8,7 @@
+  */
+ final class Hobby_Depot_Profile_V150709 {
+     const PROFILE = 'hobby_depot';
+-    const RELEASE = '1.50.781';
++    const RELEASE = '1.50.782';
+     const RENTAL_OPTION = 'pftk_hobby_rental_slots_v1';
+     const IMAGE_CENTER_OPTION = 'pftk_hd_bildzentrale_zuordnung_v150770';
+     private static $front_rendered = false;
+--- a/affiliate-portal-template-kit/pferde-template-kit.php
++++ b/affiliate-portal-template-kit/pferde-template-kit.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit
+  * Description: Zentrales Template-/Design-Plugin für Affiliateportale mit getrennten Designprofilen. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.781
++ * Version: 1.50.782
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -12,13 +12,13 @@
+ require_once __DIR__ . '/includes/class-hobby-depot-profile-v150709.php';
+ 
+ final class Pferde_Template_Kit {
+-    const VERSION = '1.50.781';
++    const VERSION = '1.50.782';
+     const OPTION_BRAND_MENU_CACHE_GENERATION_V150574 = 'pftk_brand_menu_core_generation_v150574';
+     const OPTION_BRAND_MENU_CACHE_PREFIX_V150574 = 'pftk_brand_menu_core_v150574_';
+     const OPTION_MENU_STRUCTURE_CACHE_V150576 = 'pftk_menu_structure_v150576';
+     const OPTION_CATEGORY_TERMS_CACHE_PREFIX_V150578 = 'pftk_category_terms_v150578_';
+     const AFFILIATE_CONTRACT = '1.0';
+-    const DESIGN_PROFILE = 'pferde_atelier';
++    const DESIGN_PROFILE = 'hobby_depot';
+     const DESIGN_PROFILE_CONTRACT = '1.0';
+     const OPTION_CATEGORY_TEXT_SETTINGS = 'pftk_category_text_settings_v1';
+     const OPTION_BRAND_SETTINGS = 'pftk_brand_settings_v1';
+@@ -113,15 +113,9 @@
+      * Profil abfragen, ohne Pferde-Atelier-Werte hart in ihre Logik einzubauen.
+      */
+     public static function design_profile() {
+-        $default = self::DESIGN_PROFILE;
+-        $host = function_exists('home_url') ? (string)wp_parse_url(home_url('/'), PHP_URL_HOST) : '';
+-        $host = strtolower(trim($host));
+-        if ($host === 'hobby-depot.de' || substr($host, -15) === '.hobby-depot.de') {
+-            $default = 'hobby_depot';
+-        }
+-        $profile = (string)apply_filters('pftk_design_profile', $default);
+-        $profile = sanitize_key($profile);
+-        return $profile !== '' ? $profile : $default;
++        // Dieses Hobby-Depot-Paket ist selbst die autoritative Portalzuordnung.
++        // Kein Domainabgleich und kein automatischer Rueckfall auf Pferdeatelier.
++        return self::DESIGN_PROFILE;
+     }
+ 
+     public static function design_profile_contract_version() {
