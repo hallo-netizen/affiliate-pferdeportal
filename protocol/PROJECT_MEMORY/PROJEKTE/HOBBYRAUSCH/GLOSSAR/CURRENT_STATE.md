@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.25 / EXKLUSIVE AJAX-BEREICHSSUCHE / 308 BEGRIFFE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.25 LAUT BETREIBER AKTIV / 308 BEGRIFFE LOKAL GEPRÜFT / LIVE-FUNKTIONSTEST OFFEN**
 
 Das Hobby-Depot-Glossar wird als echtes Fachwörterbuch geführt und darf keine Hobby-, Kategorie- oder Ratgeberintents duplizieren.
 
@@ -601,3 +601,7 @@ Echter WordPress-Readback nach Installation von 1.0.15: Backend muss 100 Glossar
 - Direkter Aufruf der echten privaten `HDG_Manager::validate_batch()`: 13/13 Batches PASS.
 - Bundle: `HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
 - SHA-256: `581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
+
+## WordPress-Betreiberliste 01.11.2026
+
+Glossar Core **1.0.25** ist laut vollständiger 15-Pluginliste in WordPress aktiv. Der ältere Installationshinweis aus lokalen Testunterlagen ist kein aktueller Arbeitsauftrag; AJAX-, Inhalt- und Frontendfunktionen sind durch die Aktivliste noch nicht funktional geprüft. Keine erneute Installation vor unabhängiger ZIP- und Liveprüfung. Beleg: `../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md`.
