@@ -2131,3 +2131,19 @@ Der User möchte **nur eine fertige, tatsächlich freigegebene Installation**, k
 **Büroablage aktualisiert (dieselben Dateinamen, keine neue Mini-Version):** `/Pferdeatelier/AFFILIATE_BUERO/ARBEIT/AFFILIATE_672284_KISS_KONSOLIDIERTER_ARBEITSSTAND_20261101.patch` SHA256 `5b4c8f5b7f48d43250f853a34d7157f3243a6c912ad308305b9660126556dab9`, `AFFILIATE_672284_KISS_KONSOLIDIERUNG_PRUEFBERICHT_20261101.txt`, `TESTS/AFFILIATE_672284_KISS_KONSOLIDIERTER_TESTNACHWEIS_20261101.zip` SHA256 `cd72306905a2f0a5073eef6d758529809dc90976e40e2a8c19ba071308702815`. ZIP unter TESTS ist nur Prüfnachweis, KEIN WordPress-Installer. 
 
 **Weiterhin keine Release-Freigabe:** Echte WordPress-Produktdatenbank, erfolgreicher DataForSEO-Kontoabruf, aktuelle eBay-/idealo-Feeds und originaler AFF-ERR-065-Live-Nachweis fehlen. `CURRENT_RELEASE.json` bleibt 6.72.211 / `release_allowed=false` und wird nicht verändert. Keine Partnerdaten oder Preise erfunden.
+
+
+### AFF-ERR-065 – Finalisierung 01.11.2026: idealo-Produktkarten-Aktivierung fehlgeschlagen, trotzdem Erfolg (ROT→GRÜN)
+
+**Nutzerregel:** Nur endgültig abgenommenes Plugin zur Installation anbieten, keine weiteren Mini-/Test-Versionen. Ein aktuelles, isoliert getestetes einzelnes Arbeits-Patch für 6.72.284 wird im Affiliate-Büro behalten; GitHub kanonische 6.72.211-Quelle und gesperrter Releasepfad bleiben unverändert.
+
+**Originalmethoden reproduziert:** `idealo_import_feed_file` markierte nach erfolgreichem Feed und Produkt-Speichern den Gesamtvorgang als `success`, obwohl `idealo_sync_campaign_activation` `save_campaign_record`-Fehler beim Aktivieren der eigentlich zu zeigenden Produktkarten still ignorierte. 1:1 PHP-Importer-Gegentest mit realem Methodentext (simuliertem WordPress DB-Speicherfehler): Alt `FAIL importer accepted unsuccessful activation`; normaler Import Alt `PASS`. Nach minimaler KISS-Korrektur: beide Fälle PASS. Die vorhandene Aktivierungsfunktion meldet einen Schreibfehler, die bestehende Importfunktion übernimmt diesen als Importfehler und zeigt ihn in den vorhandenen Einstellungen. Kein neues Cron, keine zusätzlichen Datenbankfelder oder APIs. Direkter Aktivierungs-Positiv-/Negativtest 3 PASS. 
+
+**Kompletter lokaler Gegencheck:** Fresh-Unpack der intern **NICHT als installierbar freigegebenen** 6.72.284-Arbeitskopie 66/66 Dateien, 23/23 PHP-Syntax, 7/66 vorhandene PHP-Dateien geändert; Backend 22/22, DataForSEO-Laufkontrolle 14/14, Original-Worker bis Kategorie- und Artikel-Frontend 27/27, echte Template-Kit-1.50.613-JavaScript-Ausgabe auf Desktop und Mobile jeweils 3 Anbieter-Schaltflächen. Historische WordPress-/Provider-Antworten weiterhin simuliert.
+
+**Einziger dauerhafter Büro-Arbeitsstand, überschrieben statt weiter vervielfacht:**
+- `/Pferdeatelier/AFFILIATE_BUERO/ARBEIT/AFFILIATE_672284_KISS_KONSOLIDIERTER_ARBEITSSTAND_20261101.patch`, SHA256 `d30248f8f0e10c3e41f091cefd37a42f22830f942b14868997d430bce7f30c25`.
+- `AFFILIATE_672284_KISS_KONSOLIDIERUNG_PRUEFBERICHT_20261101.txt`.
+- `TESTS/AFFILIATE_672284_KISS_KONSOLIDIERTER_TESTNACHWEIS_20261101.zip`, SHA256 `30b5c56f46da33f1a404fd570eeecd314951a974466ca93bda973f35d44bacd9`.
+
+**Harte Grenze, kein Freigabe-PASS:** Die reale Website, WordPress-DB, DataForSEO-Konto, die letzten erfolgreichen idealo-/eBay-Produktimporte und die finale Freigabe des alten AFF-ERR-065-Blockers sind weiterhin nicht authentifiziert geprüft. Letzter belegter eBay-GitHub-Heartbeat-Run 41289793270 meldet nach `advanced` und `busy` terminal `failed` trotz grüner Actions-Transportanzeige. `control/release-governance/CURRENT_RELEASE.json` bleibt v6.72.211, `release_allowed=false`. **Kein fertiger Installer; Freigabesystem nicht übergehen.**
