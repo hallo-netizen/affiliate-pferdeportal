@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **HD-003 1.50.790 VOLL-ZIP LOKAL PASS / GITHUB-BINÄRABLAGE UND LIBRARY-SPEICHERUNG OFFEN**
+STATUS: **HD-003 1.50.794 VOM BETREIBER FREIGEGEBEN / GITHUB-PLUGINBÜRO-METADATEN AKTUALISIERT / ZIP-BINÄRDATEI FEHLT**
 
 ## Regel
 
@@ -149,3 +149,7 @@ Die frühere Behauptung, der 1.50.785-Inhalt lasse sich nicht abrufen, ist **üb
 **ZIP-Readback:** SHA-256 `39953565ba8e9d81e5630255f54cee04fe150c54b68b78ad9c5a8ef639dbe9db`; 64.035.283 Bytes. **Kein echter WordPress-Live-PASS**. Die zuletzt bekannte ChatGPT-Library hat Speicherlimit signalisiert; dort ist 1.50.790 nicht als gespeichert verifiziert. Das dokumentierte GitHub-Campus-Protokoll ist **nicht** das Binär-ZIP. Frühere 1.50.789-ZIP und 1.50.787-Library-Backup bleiben erhalten.
 
 **EXAKT NÄCHSTER SCHRITT:** 1.50.790 als *Update des vorhandenen HD-003* installieren; auf einer noch freien mietbaren Werbefläche beide Buttons im echten WordPress-Frontend überprüfen (Ziel-URL, Erreichbarkeit) und eine gebuchte Fläche auf unveränderte Kundenwerbung prüfen. Keine weiteren Pluginänderungen vorher.
+
+## Stand HD-003 1.50.794 (01.11.2026)
+
+Betreiber hat 1.50.794 abgenommen. ZIP lokal vollständig als 65.700.802 Bytes/1290 Dateien geprüft. **GitHub-Binärablage kann durch die zur Verfügung stehenden Aktionen noch nicht durchgeführt werden.** Daher werden trotz hinterlegter Prüfakte **kein Vollzugriff oder Github-ZIP-PASS behauptet**. Ziel-Pfad `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`; Nachweis `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.794.md`.
