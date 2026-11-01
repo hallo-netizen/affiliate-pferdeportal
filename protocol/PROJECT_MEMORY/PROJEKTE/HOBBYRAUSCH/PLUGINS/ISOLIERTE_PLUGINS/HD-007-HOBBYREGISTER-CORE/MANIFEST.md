@@ -1,5 +1,21 @@
 # HD-007 – ISOLIERTER PLUGINSTAND – MANIFEST
 
+## AKTUELLER GITHUB-STAND HD-007 – 01.11.2026
+
+**HD-007 Hobbyregister Core 1.2.17 – durch Betreiber freigegeben; vollständige Installations-ZIP real in GitHub gespeichert.**
+
+- **Autoritative Voll-ZIP:** `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`
+- **GitHub-Release:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd007-1.2.17/HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip
+- **Größe:** 14.834.581 Bytes; **SHA-256:** `433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488`; **Git-Blob:** `cb5ad50cec1eaa71947608aea7c154e0fb86d2b6`.
+- GitHub Actions **41341218204**: 25/25 Originalteile, Größe/Hash/93 ZIP-Einträge inklusive CRC PASS. Vollständiges Pluginroot `hd-hobbyregister-core/`.
+- 862 Hobbyidentitäten/Artikeltexte/Bilder bleiben unverändert; korrigierte Überschriften in Hobbys 862/862. Kein neues Zusatzplugin.
+- **Keine behauptete WordPress-Liveinstallation**: Der zuletzt belegte WordPress-Stand war 1.2.16. Update auf 1.2.17 ist ein offener Betreiber-/Live-Schritt, sofern noch nicht eingespielt.
+
+Frühere Hinweise zu `CURRENT.zip`-Blockaden und älteren Plugin-ZIPs weiter unten sind historisch und gegenüber diesem geprüften GitHub-Stand **überholt**.
+
+---
+
+
 STAND: 2026-10-23
 STATUS: **1.2.13 LOCAL HARD PASS / CURRENT.zip-SYNC BLOCKED**
 
