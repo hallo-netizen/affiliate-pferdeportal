@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **1.50.790 EIGENWERBEBANNER IM BESTEHENDEN VOLLPLUGIN LOKAL POSNEG+PHP+ZIP PASS / LIVE-WP-LINKREADBACK OFFEN / LIBRARY-VOLLZIP NICHT GESICHERT**
+STATUS: **BETREIBER-PASS 1.50.794 / LOKALES VOLLZIP REAL VERIFIZIERT / GITHUB-VOLLZIP FEHLT (UPLOADWEG BLOCKIERT) – NICHT ALS GESPEICHERT AUSGEBEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -103,3 +103,7 @@ Die neue Voll-ZIP wurde **direkt aus der vollständigen 1.50.785** gebaut. Zusä
 **ZIP-Readback:** SHA-256 `39953565ba8e9d81e5630255f54cee04fe150c54b68b78ad9c5a8ef639dbe9db`; 64.035.283 Bytes. **Kein echter WordPress-Live-PASS**. Die zuletzt bekannte ChatGPT-Library hat Speicherlimit signalisiert; dort ist 1.50.790 nicht als gespeichert verifiziert. Das dokumentierte GitHub-Campus-Protokoll ist **nicht** das Binär-ZIP. Frühere 1.50.789-ZIP und 1.50.787-Library-Backup bleiben erhalten.
 
 **EXAKT NÄCHSTER SCHRITT:** 1.50.790 als *Update des vorhandenen HD-003* installieren; auf einer noch freien mietbaren Werbefläche beide Buttons im echten WordPress-Frontend überprüfen (Ziel-URL, Erreichbarkeit) und eine gebuchte Fläche auf unveränderte Kundenwerbung prüfen. Keine weiteren Pluginänderungen vorher.
+
+## Aktuelle Abnahme 1.50.794
+
+Siehe verbindliche, im GitHub-Pluginbüro abgelegte Prüfakte `EVIDENCE_1.50.794.md`. **Die ZIP selbst ist derzeit nicht im GitHub-Pluginbüro.** Frühere 1.50.790-Angaben sind historisch, nicht Current.
