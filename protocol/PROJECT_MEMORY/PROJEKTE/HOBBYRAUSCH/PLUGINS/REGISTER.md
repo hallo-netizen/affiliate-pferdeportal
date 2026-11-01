@@ -50,6 +50,22 @@ Akte: `PLUGIN_AKTEN/HD-008-SEO-METADATEN/`
 Plugin: `Hobby Depot Affiliate-Zentrale`  
 Akte: `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/`
 
+## Weitere in WordPress aktive Plugins (noch ohne eindeutige HD-Plugin-Akte)
+
+Die Betreiberliste vom 01.11.2026 nennt zusätzlich folgende aktive Pluginnamen. Dies sind **nur Namen und Wege zur operativen WordPress-Current**, keine separate technische Current, keine erfundenen HD-IDs und kein Nachweis gespeicherter ZIP-Bytes:
+
+- `Footer-Umzug – Portale` (Projektwerkzeug)
+- `HivePress` (Drittanbieter)
+- `Hobby Depot – FAQ Frontend Fix` (Eigenplugin; eigene HD-ID/Akte noch nicht abgeglichen)
+- `Hobby Depot – Performance Diagnose` (Eigenplugin; eigene HD-ID/Akte noch nicht abgeglichen)
+- `Minimal Coming Soon & Maintenance Mode` (Drittanbieter)
+- `WPForms Lite` (Drittanbieter)
+- `WPvivid Backup Plugin` (Drittanbieter)
+- `Yoast SEO` (Drittanbieter)
+
+Operativer Stand und Versionen: `../WORDPRESS_TECHNIK/CURRENT_STATE.md`; Beleg: `EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
+HD-002 Themenengine, HD-008 SEO-Metadaten und Anzeigenfüller stehen in Campus-Akten, erscheinen aber nicht in der vollständig übermittelten aktiven Pluginliste. Die doppelte HD-008-Kennung bleibt bis zur eindeutigen Zuordnungsprüfung ungelöst.
 ## Regel
 
 Für jeden Eintrag gilt:
