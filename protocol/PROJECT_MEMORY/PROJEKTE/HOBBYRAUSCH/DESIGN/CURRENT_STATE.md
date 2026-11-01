@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **HD-003 1.50.785 AUFGEFUNDEN / CAMPUS-ARTEFAKT UND LIVE-PASS BLOCKED**
+STATUS: **1.50.783 LAUT BETREIBER IN WORDPRESS AKTIV / 1.50.785 NUR AUFGEFUNDEN / CAMPUS-ARTEFAKT UND LIVETEST BLOCKED**
 
 Zielvertrag:
 `ZIELVERTRAG_HOBBY_DEPOT_DESIGN_20261011.md`  
@@ -27,7 +27,7 @@ Historie / WAS+WARUM:
 - Live-PASS für 1.50.744 ist **nicht** belegt.
 
 ## ERSTER OFFENER BLOCKER
-Das in der Plugin-Current dokumentierte 1.50.744-ZIP ist im Abschluss-Frischecheck nicht als Byte-Artefakt auffindbar. Deshalb kein erneuter Hash-/Fresh-Unpack-PASS und kein isolierter `CURRENT.zip`-Sync.
+Der aufgefundene 1.50.785-Kandidat ist weiterhin nicht als echte ZIP unabhängig wiedergeöffnet und nicht in der isolierten Campus-Ablage gesichert. WordPress meldet 1.50.783 als aktiv; ihr realer Dateibestand ist noch nicht mit 1.50.785 verglichen.
 
 ## NICHT ANFASSEN
 - zentrale Hobby-Depot-Body-Achse: 1200 px;
@@ -37,7 +37,9 @@ Das in der Plugin-Current dokumentierte 1.50.744-ZIP ist im Abschluss-Frischeche
 - keine neue Service-Template-/Kubio-Runtime-Architektur.
 
 
-## Favicon / HD-003 Nachholcheck 01.11.2026
+## WordPress-Version und Favicon / Nachholcheck 01.11.2026
+
+- Die Betreiber-Pluginliste beweist als übermittelte Admin-Ansicht: **Affiliate Portal Template Kit 1.50.783 aktiv**. 1.50.785 steht nicht in dieser Liste und darf nicht als installiert behauptet werden. Ein eigener authentifizierter Server-Readback wurde nicht ausgeführt.
 
 - 1.50.785-Vollplugin-Dateieintrag vorhanden, in `/hobby rausch/`, nicht im autoritativen Campus-`ISOLIERTE_PLUGINS`-Zielordner.
 - Die Originalbogen-/H-D-Vorschau ist als vorhandenes Bild lesbar; keine Neugenerierung und kein fremder Schrift-Ersatz.
@@ -47,4 +49,4 @@ Das in der Plugin-Current dokumentierte 1.50.744-ZIP ist im Abschluss-Frischeche
 
 ## EXAKT EINE NEXT ACTION
 
-**Das echte HD-003-Vollplugin 1.50.785 erneut als Rohdatei abrufen und unabhängig prüfen; anschließend nur bei nachgewiesenem PASS in der bestehenden Campus-Pluginakte sichern.** Erst danach Favicon live und Anzeigenmarktänderungen prüfen.
+**Das tatsächlich aktive HD-003 1.50.783 und das aufgefundene 1.50.785-Vollplugin als echte Roh-ZIPs verifizieren und vergleichen.** Erst nach unabhängigem PASS in den Campus übernehmen und Favicon/Anzeigenmarkt live beurteilen; nicht ungeprüft überinstallieren.
