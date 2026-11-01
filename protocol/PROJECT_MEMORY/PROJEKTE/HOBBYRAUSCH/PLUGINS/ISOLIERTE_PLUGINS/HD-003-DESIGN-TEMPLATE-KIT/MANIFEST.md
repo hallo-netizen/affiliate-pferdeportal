@@ -46,3 +46,7 @@ Dieser 1.50.743-Hinweis ist **keine Current-Wahrheit** und kein Rollforward. Er 
 - Weder 1.50.744 noch die GitHub-dokumentierte 1.50.782 wird als aktuelle Version ausgegeben oder anstelle der gefundenen 1.50.785 installiert.
 
 **Speicherung: BLOCKED. Unabhängiges Wiederöffnen: NICHT BESTANDEN (Zugriffsgrenze). Kein Live-PASS.**
+
+## Betreiber-WordPress-Liste 01.11.2026
+
+**Installiert und aktiv gemeldet: 1.50.783.** **1.50.785** bleibt ein nicht unabhängig wiedergeöffneter Datei-Kandidat. Dieses Manifest enthält weiterhin **keine** gültige CURRENT.zip; die alte 1.50.744 ist historische Deklaration und **nicht** die aktive WordPress-Version. Keine neue Prüfsumme oder ZIP-Datei erfunden. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`. Speicherstatus: BLOCKED.
