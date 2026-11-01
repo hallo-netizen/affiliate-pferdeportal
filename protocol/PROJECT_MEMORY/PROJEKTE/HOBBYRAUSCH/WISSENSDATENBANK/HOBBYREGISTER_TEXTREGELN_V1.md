@@ -3,6 +3,23 @@
 STAND: 2026-10-23
 STATUS: BINDING FÜR SCHEMA-F-PRODUKTION
 
+## Verbindliche Korrektur 01.11.2026 – KEIN blindes Einsetzen von Hobbynamen
+
+**Fachlicher Fehlernachweis:** Die ältere Schablone `Passt [Hobby] zu dir?` bzw. `Wo und wann kannst du [Hobby] ausüben?` ist für **Gegenstände** wie „Münzen“ oder „Spielkarten“ semantisch falsch. Eine solche mechanische Verwendung ist ab sofort untersagt.
+
+**Hobbyidentität vs. Tätigkeit:** Der kanonische Hobbyname bleibt unverändert (z. B. **Münzen**). Für fließende Fragen wird dagegen die **aus Name und vorhandenem Kurzprofil begründete Tätigkeit** verwendet (z. B. **Münzen sammeln**). Beispiele:
+- Münzen → „Münzen sammeln – passt das zu dir?“ / „Wo und wann kannst du Münzen sammeln?“
+- Spielkarten → „Spielkarten sammeln – passt das zu dir?“ / „Wo und wann kannst du Spielkarten sammeln?“
+- Sportdrachen → „Lenkdrachen fliegen – passt das zu dir?“ / „Wo und wann kannst du Lenkdrachen fliegen?“
+- Wandern → „Wandern – passt das zu dir?“ / „Wo und wann kannst du wandern?“
+- Bonsai → „Bonsai gestalten und pflegen – passt das zu dir?“ / „Wo und wann kannst du Bonsai gestalten und pflegen?“
+
+**Eine zentrale Sprachentscheidung pro Hobby statt mehrfacher Sonderprüfungen:** Die eindeutigen Zuordnungen stehen für alle **862/862** Registry-IDs in `HOBBYREGISTER_862_UEBERSCHRIFTEN_KORREKTUR_20261101.csv`. Sie sind ein **redaktioneller Korrekturkandidat** und ersetzen nicht die ursprüngliche Hobby-Datenwahrheit. Unterzeichnete Live-Freigabe und wortgetreue Übernahme in die Original-Version HD-007 1.2.16 stehen **noch aus**. Keine stillschweigende Umbenennung, keine neue WordPress-Kategorie, keine zusätzliche Plugin-Engine, keine Änderung des Artikeltexts.
+
+**Abnahme der späteren Pluginübernahme:** dieselben 862 Registry-IDs und Hobby-Label (862/862, 0 Umbenennungen), neue F2/F3 aus der zentralen Zuordnung, alle 8 Überschriften sprachlich kontrolliert, Positiv-/Negativbeispiele, Bild-/Trait-/Bodybestand bytegleich, PHP-Syntax und ZIP-Test, danach tatsächliche WordPress-Frontend-Prüfung. *Ohne diese Prüfungen kein PASS.*
+
+---
+
 ## Zweck
 
 Alle Hobbyregister-Detailtexte folgen demselben fachlichen Aufbau, ohne wie ein Formular oder eine 57-Felder-Liste zu wirken.
@@ -31,10 +48,10 @@ Datenbasis:
 ### 1. Worum geht es bei [Hobby]?
 F1: Was ist das? Was macht man? Was ist der Reiz? Einordnung klassisch/Nische/ungewöhnlich nur, wenn belegt.
 
-### 2. Passt [Hobby] zu dir?
+### 2. [Tätigkeit] – passt das zu dir?
 F2: Motivation, Sozialform, Abhängigkeit von anderen, Tempo, Abwechslung, Öffentlichkeit, Natur, Wettbewerb.
 
-### 3. Wo und wann kannst du [Hobby] ausüben?
+### 3. Wo und wann kannst du [Tätigkeit]?
 F3: Ort, Infrastruktur, Reise, Wetter, Tageslicht, Saison, typische Dauer, Planbarkeit, Häufigkeit, Pausierbarkeit, Projekthorizont.
 
 ### 4. Platz, Alltag und Pflege
