@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-22
-STATUS: AKTIV / INVENTAR- UND ROUTING-CURRENT / KEINE KOPIE VON EINZELPLUGIN-STATUS
+STAND: 2026-11-01
+STATUS: AKTIV / PLUGINABLAGE BLOCKED / INVENTAR- UND ROUTING-CURRENT
 
 ## Regel
 
@@ -92,7 +92,15 @@ bereinigte Hobby-Depot-Portierung der Affiliate-Zentrale; technische Arbeitsquel
 Fach-Current:
 `../AFFILIATE/CURRENT_STATE.md`
 
+
+## Nachholprüfung vom 01.11.2026
+
+Die technisch gültigen Einzelstände bleiben ausschließlich in `PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`. Der konkrete Nachholnachweis steht in `EVIDENCE_PLUGINABLAGE_20261101.md` und ist **keine zweite Current-Autorität**.
+
+**Gesamtablage: BLOCKED.** In den geprüften `ISOLIERTE_PLUGINS`-Ordnern ist nur für HD-009 ein `CURRENT.zip` nachweisbar. Für HD-001, HD-003, HD-004, HD-005, HD-006, HD-007 und HD-008 (SEO-Metadaten) fehlen dort die vollständigen ZIP-Dateien; HD-002 besitzt am geprüften Zielort noch keinen isolierten Ordner. HD-008 Anzeigenfüller besitzt eine zusätzliche Akte mit ungeklärter ID-Kollision.
+
+Bei HD-003 existiert ein Library-Dateieintrag zur **1.50.785**, jedoch konnte dessen ZIP-Inhalt am 01.11.2026 nicht erneut ausgelesen werden. **Keine Beförderung des ungeprüften ZIPs zu Campus-CURRENT, kein Live-PASS.**
+
 ## EXAKT EINE NEXT ACTION
 
-Für die Kategorie-Verschlankung:
-`../SEO_KATEGORIEN/CURRENT_STATE.md` → dortige NEXT ACTION.
+**HD-003 1.50.785 aus einer zulässigen Rohdateiquelle unabhängig wiederöffnen und bytegenau prüfen.** Erst bei echtem ZIP-/Versions-/Hash-PASS darf die vollständige ZIP über den vorgesehenen Campus-Prüfweg als `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` übernommen werden. Weitere Plugin-ZIPs danach nach ihren einzelnen Akten abgleichen; niemals alte Versionen als Ersatz verwenden.

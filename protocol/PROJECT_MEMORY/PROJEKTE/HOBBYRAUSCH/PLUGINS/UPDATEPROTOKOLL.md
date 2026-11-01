@@ -5452,3 +5452,14 @@ LIVE / RELEASE:
 
 NÄCHSTER TECHNISCHER SCHRITT:
 Gate 5 gemäß HD-009-`CURRENT.md`.
+
+
+## 2026-11-01 – Nachholprüfung vollständiges Hobby-Depot-Pluginbüro (Ablage weiterhin BLOCKED)
+
+**Was:** Zentralen Inventarweg und Favicon-Stand HD-003 anhand der real abrufbaren Campus-/Library-Metadaten abgeglichen. Im bestehenden Register fehlende Verweise auf HD-007 und HD-008 SEO-Metadaten ergänzt; bestehende Kollision HD-008 SEO/HD-008 Anzeigenfüller dokumentiert. `PLUGINS/CURRENT_STATE.md`, `DESIGN/CURRENT_STATE.md`, `HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md` und das vorhandene HD-003-MANIFEST auf einen ehrlichen BLOCKED-Stand gebracht; **keine zweite Current-Autorität** eingeführt.
+
+**Warum:** Der neu gefundene 1.50.785-Vollplugin-Dateieintrag lag im allgemeinen Library-Projektordner, nicht im festgelegten Campus-Plugin-Artefaktordner. Die vorhandene ältere Campusdeklaration 1.50.744 und der neuere GitHub-Prüfbeleg 1.50.782 ersetzen nicht die echte aktuelle vollständige ZIP. Rohdatei-Materialisierung der 1.50.785 fehlgeschlagen; daher keinen PASS behauptet, keine ZIP-Kopie vorgetäuscht und kein Downgrade vorgenommen.
+
+**Gesamtbefund:** Campus-`ISOLIERTE_PLUGINS`: HD-009 enthält eine `CURRENT.zip` (610.065 Bytes), weitere geprüfte HD-001/003/004/005/006/007/008-Ordner nur MANIFEST; HD-002 ohne isoliertes Verzeichnis. Details und exakte Fehlertexte im Proof `PLUGINS/EVIDENCE_PLUGINABLAGE_20261101.md`. WordPress-Live-Readback wurde **nicht** durchgeführt.
+
+**NEXT ACTION:** HD-003 1.50.785 aus einer autorisierten Rohdatei-Quelle unabhängig als tatsächliches ZIP wiederabrufen, Byte-/Struktur-/Versions-/Hash-Prüfungen abschließen und erst dann die vollständige ZIP über den vorgesehenen Campus-Branch-/Freigabeweg speichern. Weitere Plugin-Ablagen nach ihren jeweiligen Einzel-Currents nachholen. Gesamtstatus **PLUGINABLAGE: BLOCKED**.

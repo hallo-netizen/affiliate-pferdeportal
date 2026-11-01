@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-10-19
+STAND: 2026-11-01
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
 
 ## EINE PLUGIN-WAHRHEIT
@@ -38,6 +38,14 @@ Akte: `PLUGIN_AKTEN/HD-005-GLOSSAR-CORE/`
 Plugin: `Allgemeine Bildzentrale – Hobby Depot Anwendung`  
 Akte: `PLUGIN_AKTEN/HD-006-BILDZENTRALE/`
 
+### HD-007 – Hobbyregister Core
+Plugin: `Hobby Depot Hobbyregister Core`
+Akte: `PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/`
+
+### HD-008 – SEO-Metadaten
+Plugin: `Hobby Depot SEO`
+Akte: `PLUGIN_AKTEN/HD-008-SEO-METADATEN/`
+
 ### HD-009 – Affiliate-Zentrale
 Plugin: `Hobby Depot Affiliate-Zentrale`  
 Akte: `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/`
@@ -48,3 +56,7 @@ Für jeden Eintrag gilt:
 `PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md` = einzige technische Plugin-Wahrheit.
 
 Release-Artefakte, Evidence, Historie, ORIGINAL-Ablage und Updateprotokoll sind Nachweis/Archiv und niemals zweite Current-Wahrheit.
+
+## Inventarabweichung (Nachholcheck 2026-11-01)
+
+Die zusätzliche bestehende Akte `PLUGIN_AKTEN/HD-008-ANZEIGENFUELLER/` bezeichnet den Anzeigenfüller 1.0.0 ebenfalls als HD-008. Damit sind `HD-008-SEO-METADATEN` und `HD-008-ANZEIGENFUELLER` nicht eindeutig nummeriert. Die beiden Akten bleiben unverändert; eine Umnummerierung oder neue Plugin-ID erfolgt erst nach Prüfung der fachlichen Bindung. Das Register ist weiterhin nur ein Wegweiser; tatsächliche Versionen stehen ausschließlich in den jeweiligen CURRENT.md.
