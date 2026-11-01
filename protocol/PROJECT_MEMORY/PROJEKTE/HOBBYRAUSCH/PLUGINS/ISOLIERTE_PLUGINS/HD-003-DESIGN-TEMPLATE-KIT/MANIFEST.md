@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
-STAND: 2026-10-24
-STATUS: **CURRENT.zip BLOCKED / 1.50.744-BYTES NICHT MATERIALISIERT**
+STAND: 2026-11-01
+STATUS: **CURRENT.zip BLOCKED / NEUER 1.50.785-DATEIFUND, RAW-READBACK NICHT MÖGLICH**
 
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -35,3 +35,14 @@ LETZTER IM ABSCHLUSSCHECK MATERIALISIERTER ZIP-STAND:
 `HOBBY_DEPOT_HD003_CYBERDUCK_1.50.743_ANZEIGENMARKT_DESIGN_ENTWURF1.zip`
 
 Dieser 1.50.743-Hinweis ist **keine Current-Wahrheit** und kein Rollforward. Er dokumentiert ausschließlich die Materialisierungsgrenze des Abschlusschecks.
+
+## Nachholcheck 01.11.2026 – keine Campus-Archivierungsbehauptung
+
+- Neuester aufgefundener Dateieintrag: `/hobby rausch/HOBBY_DEPOT_HD003_1.50.785_ORIGINALLOGO_VERIFIZIERT_VOLLPLUGIN.zip` (Library-Metadaten, **63.407.568 Bytes**).
+- Vorversion 1.50.784 und 1.50.785-Prüfbericht im selben Ablagebereich ebenfalls gefunden.
+- **Kein echter Bytezugriff auf diese ZIP in diesem Prüflauf:** raw-byte materialization verweigert; Textlesen ohne Inhalt. Keine neue Prüfsumme und kein unabhängiger ZIP-/Strukturtest.
+- Separate Vorschau `HOBBY_DEPOT_FAVICON_ORIGINAL_VORSCHAU.png` als Bild lesbar; dies beweist **nicht**, dass die ZIP aus dem Campus wiederöffnungsfähig ist.
+- Im Campus liegt weiterhin **kein** `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`.
+- Weder 1.50.744 noch die GitHub-dokumentierte 1.50.782 wird als aktuelle Version ausgegeben oder anstelle der gefundenen 1.50.785 installiert.
+
+**Speicherung: BLOCKED. Unabhängiges Wiederöffnen: NICHT BESTANDEN (Zugriffsgrenze). Kein Live-PASS.**
