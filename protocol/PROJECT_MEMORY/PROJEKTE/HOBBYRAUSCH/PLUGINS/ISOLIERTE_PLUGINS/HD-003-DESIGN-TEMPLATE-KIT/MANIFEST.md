@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-11-01
-STATUS: **1.50.787 VOLL-ZIP IM LIBRARY-PLUGIN-BÜRO GESICHERT UND UNABHÄNGIG WIEDERGEÖFFNET / GITHUB-CURRENT.zip NOCH NICHT SYNCHRONISIERT**
+STATUS: **HD-003 1.50.790 ZUM INSTALLIEREN ALS CHAT-VOLLZIP / GITHUB-CURRENT.zip WEITER OFFEN**
 
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -91,3 +91,19 @@ Die neue Voll-ZIP wurde **direkt aus der vollständigen 1.50.785** gebaut. Zusä
 **Speicherung Original und Rückfall:** Vollständiges 1.50.787 ZIP im bestehenden Library-Plugin-Büro: `/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_HD003_1.50.787_DESIGNTEST_INTEGRIERT_VOLLPLUGIN.zip`. Unabhängige Original-Rückfallkopie: `/hobby rausch/HOBBY_DEPOT_HD003_1.50.787_DESIGNTEST_INTEGRIERT_RUECKFALLKOPIE.zip`. Beide nach Upload als echte Original-ZIPs getrennt zurückgeladen und wiedergeöffnet, CRC- und Versionsprüfung PASS. 63.807.190 Bytes, SHA-256 für beide: `bba4fbf182393265d7d6e55d77d995e1a2d0338da9a247b585c81304b04380d7`. Vorversion 1.50.786 ist separat im Pluginbüro erhalten. **GitHub `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist weiter nicht synchronisiert; Library-Readback und GitHub-Ablage niemals gleichsetzen.**
 
 **NEXT ACTION:** Die neue vollständige 1.50.787 über die vorhandene HD-003-Installation in WordPress hochladen, direkt im Admin unter Beiträge → Entwürfe den [DESIGNTEST]-Beitrag öffnen und seine Frontend-Vorschau beurteilen. Erst bei echtem Frontend-Readback einen Live-PASS für die Artikelansicht dokumentieren.
+
+## 2026-11-01 – HD-003 Vollplugin 1.50.790: Eigenwerbung auf direkt vermietbaren Bannerplätzen
+
+**Quelle:** echte 1.50.789-Voll-ZIP aus dem aktuellen Pluginstand. Daraus **1.50.790 Voll-ZIP** erstellt, Pluginroot `affiliate-portal-template-kit/` unverändert. Ausgabe im aktuellen Chat: `HOBBY_DEPOT_HD003_1.50.790_EIGENWERBEBANNER_ORIGINALLOGO_VOLLPLUGIN.zip`.
+
+**Genau der beauftragte Umfang:** nur der bestehende `rental_slot($placement)`-Pfad des Designprofils Hobby Depot für *noch nicht gebuchte* direkt vermietbare Werbeflächen, inklusive responsive CSS. Freier Platz zeigt neues Eigenwerbemotiv Modellflugzeug/Werkstatt mit beigem Übergang, originalem aus dem aktiven Plugin geschnittenen Logo ohne Unterzeile, Überschrift „Hier könnte Ihre Werbung stehen“, exakt zwei voneinander unabhängigen HTML-Links „Werbebedingungen“ und „Preise“. Keine weitere Unterzeile, kein grelles Grün. Kein nachgezeichnetes Logo. Die Links werden nur mittels `get_page_by_path` und `get_permalink` aus echten veröffentlichten WP-Seiten aufgelöst: Bedingungen bevorzugt `werbebedingungen`/`werb-anzeigebedingungen` inkl. bekannter Varianten; Preise `preise`. Fehlt eine Zielseite, zeigt der Button seinen deaktivierten Zustand ohne erfundenes Linkziel; der echte WordPress-Pages-Readback ist noch offen.
+
+**Harte Abgrenzung:** Bei aktiv gebuchtem Mietslot mit echter Kundenbild-URL/Ziel-URL bleibt das bisherige Kundenbanner völlig unverändert, ebenso der Provider-Filter `pftk_hobby_rental_slot_html`. Die bereits vorhandene zentrale Einmal-Regel `render_rental_for` bleibt erhalten (maximal ein Mietbanner pro Seite). Kein zweiter Werbebanner-Worker, keine Änderung der Affiliate/Partner-Slots, keine Änderung des Pferdeatelier-Zweiges, von Kategorien, Hero oder Suchfunktion.
+
+**Veränderte Dateien im Vollplugin:** exakt zwei PHP-Dateien (Hauptplugin nur Version, Hobby-Profil Version + Austausch der freien Mietbanner-HTML und Ergänzung ausschließlich dazugehöriger CSS) und zwei neue Assets unter `assets/hobby-depot-v150617/eigenwerbung-v150790/`: `logo-original-ohne-unterzeile.png` als unveränderte Original-Pixel des 640×372-Logos, nur auf 640×315 beschnitten; `modellflugzeug-werkstatt.webp` als Ausschnitt aus dem vom Betreiber freigegebenen Modellflugzeug-Banner, ohne eingebrannte Buttons/Schrift. **1283/1285 alte Originaldateien byteidentisch**, neue ZIP enthält **1287/1287** korrekt lesbare Einträge.
+
+**Simulation/QA:** PHP 13/13 Syntax PASS, ZIP CRC 1287/1287 PASS; Privatmethode `rental_slot` anhand des echten Codes mit WordPress-Stub ausgeführt: freie Fläche hat zwei voneinander verschiedene richtige Links, reservierter Platz verwendet Kundenwerbung statt Eigenbanner, Provider-Override unverändert, fehlende Werbebedingungsseite erzeugt keinen falschen Link, doppelte Mietbannerdarstellung wird blockiert – alles PASS. Visualisierung mittels tatsächlichem gerendertem PHP-/CSS-HTML in Chromium bei Desktop 1200px und Mobil 390px; beide Links vorhanden, kein Überlauf. Vorschauen im aktuellen Chat: `HOBBY_DEPOT_WERBEBANNER_1.50.790_VORSCHAU_1200px.png` und `..._390px.png`.
+
+**ZIP-Readback:** SHA-256 `39953565ba8e9d81e5630255f54cee04fe150c54b68b78ad9c5a8ef639dbe9db`; 64.035.283 Bytes. **Kein echter WordPress-Live-PASS**. Die zuletzt bekannte ChatGPT-Library hat Speicherlimit signalisiert; dort ist 1.50.790 nicht als gespeichert verifiziert. Das dokumentierte GitHub-Campus-Protokoll ist **nicht** das Binär-ZIP. Frühere 1.50.789-ZIP und 1.50.787-Library-Backup bleiben erhalten.
+
+**EXAKT NÄCHSTER SCHRITT:** 1.50.790 als *Update des vorhandenen HD-003* installieren; auf einer noch freien mietbaren Werbefläche beide Buttons im echten WordPress-Frontend überprüfen (Ziel-URL, Erreichbarkeit) und eine gebuchte Fläche auf unveränderte Kundenwerbung prüfen. Keine weiteren Pluginänderungen vorher.
