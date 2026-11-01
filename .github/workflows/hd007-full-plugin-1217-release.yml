@@ -1,0 +1,71 @@
+name: HD007 1.2.17 exact full plugin ZIP
+on:
+  push:
+    branches:
+      - hobbyroom/hd007-1217-binary-package-staging-20261101
+    paths:
+      - .github/workflows/hd007-full-plugin-1217-release.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  assemble-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout approved plugin room
+        uses: actions/checkout@v4
+      - name: Rebuild and verify complete WordPress plugin
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64,hashlib,pathlib,zipfile
+          directory = pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/PACKAGE_PARTS_1.2.17')
+          parts = sorted(directory.glob('part_*.b64'))
+          assert len(parts) == 25, f'Expected 25 source parts, found {len(parts)}'
+          assert [p.name for p in parts] == [f'part_{i:03d}.b64' for i in range(25)]
+          zipname = 'HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip'
+          output = pathlib.Path(zipname)
+          with output.open('wb') as target:
+              for part in parts:
+                  text = ''.join(part.read_text(encoding='utf-8').split())
+                  target.write(base64.b64decode(text, validate=True))
+          assert output.stat().st_size == 14834581, output.stat().st_size
+          digest = hashlib.sha256(output.read_bytes()).hexdigest()
+          assert digest == '433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488', digest
+          with zipfile.ZipFile(output) as z:
+              assert len(z.infolist()) == 93
+              assert z.testzip() is None
+              assert all(p.startswith('hd-hobbyregister-core/') for p in z.namelist())
+              assert any(p.endswith('.php') for p in z.namelist())
+          print('PASS: 14834581 bytes; 93/93 CRC; SHA256',digest)
+          PY
+      - name: Publish complete verified ZIP in GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          f="HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip"
+          tag="hobby-depot-hd007-1.2.17"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --target "${GITHUB_SHA}" --title "Hobby Depot HD007 1.2.17 – 862 korrigierte Registerüberschriften" --notes "Freigegebenes vollständiges WordPress-Plugin HD007. 862 Hobbyidentitäten unverändert, Überschriften korrigiert. SHA256 433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488."
+          fi
+          gh release upload "$tag" "$f" --clobber
+          gh release view "$tag" --json assets --jq '.assets[].name'
+      - name: Commit exact verified ZIP as CURRENT.zip
+        shell: bash
+        run: |
+          set -e
+          dir="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE"
+          cp HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip "$dir/CURRENT.zip"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dir/CURRENT.zip"
+          git commit -m "HD007 1.2.17 save exact full approved CURRENT.zip"
+          git push origin "HEAD:hobbyroom/hd007-1217-binary-package-staging-20261101"
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobby-depot-hd007-1-2-17-full-plugin
+          path: HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip
+          retention-days: 90
+          if-no-files-found: error
