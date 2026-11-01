@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: 15 aktive WordPress-Plugins laut Betreiberliste / Server-Funktionsprüfung offen / keine Installation in diesem Abgleich
+STATUS: **ALT-INVENTAR 15 PLUGINS VOM 01.11. / HD-003 1.50.786 FAVICON+MARKT BETREIBER-PASS / HD-003 1.50.787 NOCH NICHT LIVE**
 
 ## Quelle und Zuständigkeit
 Einzige Current-Autorität für den WordPress-Betriebsstand. Quelle: vom Betreiber am 01.11.2026 gelieferte vollständige Pluginliste, alle Einträge zeigen „Deaktivieren“. Kein eigener authentifizierter WordPress-Readback durchgeführt. Für einzelne Eigenplugins bleibt die jeweilige Plugin-Akte die technische Current-Autorität.
