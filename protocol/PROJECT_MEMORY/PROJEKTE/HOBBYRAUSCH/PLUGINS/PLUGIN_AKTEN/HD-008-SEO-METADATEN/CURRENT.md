@@ -49,10 +49,13 @@ Vorgeschrieben:
 Die echte Binär-ZIP ist noch nicht im Campus synchronisiert.
 Keine Ersatzdatei als CURRENT.zip ausgeben.
 
+## Live-Inventarfrischecheck 01.11.2026
+Das Eigenplugin HD-008 SEO-Metadaten erscheint in der 15-Einträge-Betreiberliste nicht als aktiv; **Yoast SEO 28.7 ist aktiv**. Eine zusätzliche automatische Meta-Ausgabe ohne Kollisionsprüfung könnte doppelte Ausgaben erzeugen. Die HD-008-Akte beschreibt unverändert einen lokalen Kandidaten, nicht das WordPress-Livesystem. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
 ## ERSTER OFFENER BLOCKER
 
 Isolierte CURRENT.zip-Synchronisierung und danach Liveinstallation stehen aus.
 
 ## EXAKT EINE NEXT ACTION
 
-Die hash-identische 1.0.0-ZIP als isolierte CURRENT.zip synchronisieren; erst danach live installieren und Frontend-Readback durchfuehren.
+**Vor jeder Aktivierung von HD-008 SEO-Metadaten die tatsächliche Yoast-Integration und mögliche doppelte Title-/Meta-Ausgaben read-only abgleichen.** Erst nach der Prüfung über den unveränderten Kandidaten und dessen isolierte vollständige Campus-ZIP entscheiden.
