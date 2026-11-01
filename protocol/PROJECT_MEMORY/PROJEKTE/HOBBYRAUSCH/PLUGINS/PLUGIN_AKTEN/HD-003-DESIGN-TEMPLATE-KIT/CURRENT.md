@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **1.50.790 EIGENWERBEBANNER IM BESTEHENDEN VOLLPLUGIN LOKAL POSNEG+PHP+ZIP PASS / LIVE-WP-LINKREADBACK OFFEN / LIBRARY-VOLLZIP NICHT GESICHERT**
+STATUS: **HD-003 1.50.791 EXAKT FREIGEGEBENE BANNERPIXEL IM VOLLPLUGIN / LOKAL ZIP+PHP+CHROMIUM PASS / WORDPRESS-LIVE OFFEN / LIBRARY-SPEICHERLIMIT**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -103,3 +103,17 @@ Die neue Voll-ZIP wurde **direkt aus der vollständigen 1.50.785** gebaut. Zusä
 **ZIP-Readback:** SHA-256 `39953565ba8e9d81e5630255f54cee04fe150c54b68b78ad9c5a8ef639dbe9db`; 64.035.283 Bytes. **Kein echter WordPress-Live-PASS**. Die zuletzt bekannte ChatGPT-Library hat Speicherlimit signalisiert; dort ist 1.50.790 nicht als gespeichert verifiziert. Das dokumentierte GitHub-Campus-Protokoll ist **nicht** das Binär-ZIP. Frühere 1.50.789-ZIP und 1.50.787-Library-Backup bleiben erhalten.
 
 **EXAKT NÄCHSTER SCHRITT:** 1.50.790 als *Update des vorhandenen HD-003* installieren; auf einer noch freien mietbaren Werbefläche beide Buttons im echten WordPress-Frontend überprüfen (Ziel-URL, Erreichbarkeit) und eine gebuchte Fläche auf unveränderte Kundenwerbung prüfen. Keine weiteren Pluginänderungen vorher.
+
+## 2026-11-01 – HD-003 1.50.791: freigegebenes Eigenwerbebanner pixelgenau ohne Zoom/Beschnitt
+
+**Grund der Nachbesserung:** 1.50.790 nahm aus der zuvor abgenommenen Gesamtgrafik rechts einen Bildausschnitt und dehnte ihn per `object-fit:cover` zum Hintergrund. Dadurch entstand ein gezoomtes, von der Freigabe abweichendes Bild. Der Betreiber hat dies ausdrücklich beanstandet. **1.50.790 soll daher durch 1.50.791 ersetzt werden.**
+
+**Exakte Originaldatei:** `/mnt/data/werbebanner_mit_modellflugzeug_und_logo.png` (vom Betreiber abgenommener Entwurf ohne Logo-Untertitel), 2170×725 Pixel, SHA-256 `3cc834d9f67305ce752574b794d834b4b20304ada93eb1518bbae6fd2eb8e579`. Dieses **identische Original-PNG** liegt in 1.50.791 unter `affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png`. Der ZIP-Inhalt wurde unabhängig und bitgleich zur Freigabedatei geprüft. **Kein Crop, Zoom, Farbwechsel, Logo-Neuzeichnen oder neue Beschriftung.**
+
+**Darstellung:** Freigegebenes Gesamtbild komplett in originalem Seitenverhältnis (2170:725), responsive nur proportional skaliert, `object-fit:contain`. Die beiden bereits ins Bild integrierten Buttons sind über **unsichtbare**, exakt passend positionierte Klickflächen verlinkt. Die URLs stammen nur aus real veröffentlichten WordPress-Seiten (`werbebedingungen` bzw. `preise`, mit bekannter vorhandener Pfadauflösung). Bei fehlender Seite wird der entsprechende Hotspot deaktiviert – niemals erfundener Link. Keine erneute sichtbare Button-/Logo-/Textauflage. Kundenbuchungen und `pftk_hobby_rental_slot_html`-Provider-Hook behalten Vorrang; Einmalregel unverändert.
+
+**Unverändert:** 1.285/1.287 ursprüngliche ZIP-Einträge byteidentisch; genau zwei geänderte PHP-Dateien (Version / Mietslot-Eigenwerbung und CSS); genau eine neue **bitidentische** Original-PNG (die zwei alten Assets bleiben unangetastet, werden nicht mehr verwendet). 13/13 PHP-Syntax PASS; 1.288/1.288 ZIP CRC PASS. Mit echter PHP-Klassenmethode Positiv/Negativ getestet: zwei verschiedene korrekte Links, fehlende Bedingungen ohne Link, gebuchte Werbefläche weiterhin Kundenanzeige, Provider-Override weiterhin Vorrang. Chromium-Layoutprüfung 1200px und 390px: gesamtes Bild im Originalverhältnis, kein abgeschnittener Bildbereich, beide Klickzonen über den gezeigten Buttons.
+
+**Downloadbares vollständiges WordPress-Designplugin im aktuellen Chat:** `/mnt/data/HOBBY_DEPOT_HD003_1.50.791_FREIGEGEBENES_BANNER_EXAKT_VOLLPLUGIN.zip` (65.646.341 Bytes, SHA-256 `1266ed354811eec85263a431b15a206904cd2bf148934908bb79a2675a2ccde7`). **Keine erneute Library-Speicherung behaupten:** Der Library-Plugindateispeicher meldete zuletzt sein Speicherlimit. Github-Textprotokoll ist keine Binär-ZIP-Synchronisierung. Kein echter WordPress-Live-PASS für 1.50.791.
+
+**Nächster Schritt:** 1.50.791 als Full-ZIP-Update des vorhandenen HD-003-Plugins installieren. Die frei mietbare Bannerfläche mit der freigegebenen Gesamtgrafik 1:1 abgleichen und beide echten Buttons im WordPress-Frontend prüfen; Kundenwerbung nicht verändern. Keine anderen Bereiche anfassen.
