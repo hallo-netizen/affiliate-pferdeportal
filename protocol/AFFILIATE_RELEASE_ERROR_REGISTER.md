@@ -2023,3 +2023,16 @@ Original-Quelle: unverändertes Arbeits-ZIP `6.72.284`, Original-Datei `includes
 **Ablage und Status:** Testbericht `/Pferdeatelier/AFFILIATE_BUERO/ARBEIT/AFFILIATE_IDEALO_FRISCHE_KISS_GEGENTEST_20261101.md` und Diff `AFFILIATE_IDEALO_FRISCHE_REGEL_KISS_NUR_PATCH_20261101.patch`, unverändertes ZIP 6.72.284. Kein Patch in GitHub-Current übernommen, **kein neuer Release**, die autorisierte GitHub-Basis 6.72.211 und der weiterhin offene FIRST GATE AFF-ERR-065 bleiben unverändert.
 
 **eBay-Ergänzung:** Der terminale `failed`-Status blockiert die unmittelbare Fortsetzung; im Originalcode archiviert `maybe_retire_legacy_terminal_ebay_run_v672167` den Endzustand nach frühestens 24 Stunden, sodass ein neuer fälliger Lauf wieder automatisch beginnen kann. Kein Beleg, dass dieser erneute Versuch erfolgreich ist. Die frühere Kurzformel „nur manueller Neustart“ war daher zu pauschal.
+
+
+### AFF-ERR-065 – Backend-Verschlankung und Partnerstatistik: isolierter Teststand 01.11.2026
+
+Nutzerauftrag 01.11.2026: zentrale lesende Übersicht zur tatsächlichen Produktaktualisierung (eBay/idealo/Amazon) und kompakteres Backend ohne Verlust der Fachfunktionen; auffällige Zahlen im Bereich „Partner & Einnahmen“ kritisch prüfen, nicht raten.
+
+**Originalbefund aus Testpaket 6.72.284:** Die fünf KISS-Menüseiten sind vorhanden, aber lange Formulare/Karten auf einmal sichtbar. Bei Partner & Einnahmen stehen lokale Portal-Redirectklicks neben nur teilweise angebundenen Originalreportwerten von Awin/ADCELL und anderen Anbietern. Mehrere Originalpartnerzeilen und gemischte Währungen werden ausdrücklich NICHT lokal summiert. Echte Liveabweichungen sind mangels Originalabrechnung/WordPress-Readback nicht nachgewiesen; keine Manipulation von Zahlen oder Adaptern.
+
+**Isoliert gebaute vollständige UI-Test-ZIP:** `AFFILIATE_ZENTRALE_6.72.284_BACKEND_UEBERSICHT_KISS_NUR_TEST_20261101.zip`; SHA-256 `c1578be47eaba09a700138f5efcfa89e6c78b903ffedd346c31e89b2eb945ca3`. Im persistenten Plugin-Büro `/Pferdeatelier/AFFILIATE_BUERO/ARBEIT/` samt `AFFILIATE_BACKEND_KISS_PRUEFBERICHT_20261101.txt` und testreproduzierbarem Script unter `TESTS/AFFILIATE_BACKEND_KISS_POS_NEG_20261101.php`.
+
+Änderung ausschließlich an drei bestehenden PHP-Dateien: `class-ppar-admin-kiss.php`, `class-ppar-partner-analytics.php`, `pferdeportal-affiliate-router.php`. Cockpit liest bestehende Zeitstempel, Fehlstatus und geplante Aufgaben ohne Datenmutation. Globale Menüübersicht hat Direktlinks. Selten verwendete Formulare/Partner-Originaldetailtabelle sind per HTML-Details zugänglich. Partner-Kompaktseite unterscheidet ausdrücklich letzten geprüften Abruf, alten Bericht, fehlenden Adapter, eigene Redirectklicks und unabhängige Anbieterzahlen. Unveränderte Reportberechnung und Historie.
+
+**Lokaler Beweis:** frisch entpacktes ZIP, 66/66 Einträge, 63/63 unveränderte Dateien byteidentisch zum Original, 23/23 PHP-Lint PASS, 21/21 positive/negative Status- und Ausgabeprüfungen PASS (WordPress-Stubs). Keine Live-WP-/MariaDB-Prüfung, keine echten Partnerfinanzdaten, keine Freigabe oder Installation. Zusätzlicher zuvor gefundener idealo-Frontend-Button-Fehler ist separat und wird nicht durch diesen UI-Test heimlich geändert. **GitHub-Current bleibt ausdrücklich 6.72.211, AFF-ERR-065 offen, release_allowed=false.**
