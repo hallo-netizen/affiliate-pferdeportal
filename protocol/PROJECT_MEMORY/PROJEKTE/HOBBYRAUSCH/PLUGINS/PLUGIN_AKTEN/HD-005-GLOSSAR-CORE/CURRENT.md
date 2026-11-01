@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.0.25 / EXKLUSIVE AJAX-BEREICHSSUCHE / 308 BEGRIFFE HARD PASS / LIVE OFFEN**
+STATUS: **1.0.25 LAUT WORDPRESS-LISTE AKTIV / LOKALE QA PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
@@ -44,5 +44,10 @@ Fach-Current:
 - Fresh-Unpack bytegleich;
 - Gesamtbundle PHP 22/22 PASS.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 1.0.25 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 1.0.25 ist versionsgleich, aber nicht dadurch funktional live-geprüft. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
-**Bestehenden Ordner `hobby-depot-glossar` mit dem Bundle-Ordner überschreiben.**
+
+**Die laut WordPress-Liste aktive 1.0.25 zunächst im Live-Frontend read-only prüfen und die ZIP-Ablage nachholen; nicht blind durch einen älteren Bundle-Ordner überschreiben.**
