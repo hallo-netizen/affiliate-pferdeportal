@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **HD-003 1.50.790 ORIGINALLOGO-EIGENWERBEBANNER LOKAL PASS / LIVE-ABNAHME OFFEN / ARTIKELDESIGN WEITER ZURÜCKGESTELLT**
+STATUS: **HD-003 1.50.794 BANNER BETREIBER-PASS / LOCAL-ZIP PASS / GITHUB-ZIP NOCH NICHT HOCHGELADEN / ARTIKELDESIGN WEITER OFFEN**
 
 Zielvertrag:
 `ZIELVERTRAG_HOBBY_DEPOT_DESIGN_20261011.md`  
@@ -99,3 +99,7 @@ Die neue Voll-ZIP wurde **direkt aus der vollständigen 1.50.785** gebaut. Zusä
 **ZIP-Readback:** SHA-256 `39953565ba8e9d81e5630255f54cee04fe150c54b68b78ad9c5a8ef639dbe9db`; 64.035.283 Bytes. **Kein echter WordPress-Live-PASS**. Die zuletzt bekannte ChatGPT-Library hat Speicherlimit signalisiert; dort ist 1.50.790 nicht als gespeichert verifiziert. Das dokumentierte GitHub-Campus-Protokoll ist **nicht** das Binär-ZIP. Frühere 1.50.789-ZIP und 1.50.787-Library-Backup bleiben erhalten.
 
 **EXAKT NÄCHSTER SCHRITT:** 1.50.790 als *Update des vorhandenen HD-003* installieren; auf einer noch freien mietbaren Werbefläche beide Buttons im echten WordPress-Frontend überprüfen (Ziel-URL, Erreichbarkeit) und eine gebuchte Fläche auf unveränderte Kundenwerbung prüfen. Keine weiteren Pluginänderungen vorher.
+
+## 1.50.794 Betreiberfreigabe
+
+Die Bannerbuttons wurden nach konkreter Korrektur der Rundungsecken von Nutzer mit „pass“ bestätigt. Genau diese Version nicht neu gestalten. Vollständiges Plugin lokal geprüft; Github-Binärdatei weiterhin nicht in Repository (siehe `../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.794.md`).
