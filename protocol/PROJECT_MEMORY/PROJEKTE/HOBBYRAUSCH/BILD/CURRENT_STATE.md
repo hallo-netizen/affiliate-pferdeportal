@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **ORIGINAL PFERDEATELIER 2.7.6 BYTEGENAU VERIFIZIERT / HOBBY DEPOT 2.7.8 DARAUS ABGELEITET / LOCAL PASS / LIVE OFFEN**
+STATUS: **HOBBY DEPOT 2.7.8 LAUT BETREIBER AKTIV / ORIGINAL-ABLEITUNG LOKAL GEPRÜFT / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 ## Korrektur
 
@@ -143,12 +143,12 @@ Der eindeutig belegte Pferde-Sonderautomatismus `pa_breed` ist vollständig entf
 
 ## Installation
 
-Noch kein LIVE-PASS.
+Die Betreiberliste 01.11.2026 meldet **Hobby Depot Bildzentrale 2.7.8 aktiv**. Daraus folgt weder ein unabhängig erbrachter Live-Funktions-PASS noch ein Nachweis der gespeicherten Campus-Voll-ZIP. Kein erneuter Installationsauftrag.
 
 ## ERSTER OFFENER BLOCKER
 
-Echter WordPress-Installations- und Funktionsreadback im Hobby Depot.
+Echter WordPress-Funktions- und Voll-ZIP-Readback der bereits aktiv gemeldeten 2.7.8.
 
 ## EXAKT EINE NEXT ACTION
 
-**Nur `HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip` installieren und zuerst Backend, Provider-Verbindungen, einen Beitrag und eine leere Kategorie positiv/negativ prüfen. Keine Massenbebilderung starten.**
+**Die in WordPress aktiv gemeldete 2.7.8 read-only kontrollieren, ihre echte Voll-ZIP unabhängig wiederöffnen und im zuständigen Campus-Pluginbüro sichern.** Kein erneuter Blindinstallations- oder Massenbebilderungslauf.
