@@ -151,7 +151,7 @@ Paketprüfung:
 
 Keine neue Navigationsidee, keine neue Struktur und kein Architekturumbau.
 
-Live bleibt weiterhin der alte aktive Snapshot, weil noch kein V7.1-Sync durchgeführt wurde. Die Navigation darf erst nach echtem 1.14.16-Dry-Run-PASS synchronisiert werden.
+Live bleibt weiterhin der alte aktive Snapshot, weil noch kein V7.1-Sync durchgeführt wurde. Die Navigation darf erst nach echtem, zur aktiv gemeldeten 1.14.17 passenden Dry-Run-PASS und anschließender Freigabe synchronisiert werden.
 
 ## Liveversions-Abgleich 01.11.2026
 
