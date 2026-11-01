@@ -2117,3 +2117,17 @@ Der User möchte **nur eine fertige, tatsächlich freigegebene Installation**, k
 **Beweisablage ersetzt existierende Bürodateien (keine weitere Versionsdatei):** `AFFILIATE_672284_KISS_KONSOLIDIERTER_ARBEITSSTAND_20261101.patch` SHA256 `347a960175049a8ce5f49056e13ac3a1f92f11ae26680277091f3e5769fbb27f`; `AFFILIATE_672284_KISS_KONSOLIDIERUNG_PRUEFBERICHT_20261101.txt`; `TESTS/AFFILIATE_672284_KISS_KONSOLIDIERTER_TESTNACHWEIS_20261101.zip` SHA256 `c121953c86daff05c962e4728789d6f93d551b74ca4b33a0e797052c0921d2ec`. Testdateien enthalten originalmethodische Rot-Grün-Reproduktionen.
 
 **Release-Realität:** `control/release-governance/CURRENT_RELEASE.json` bleibt **v6.72.211, release_allowed=false, AFF-ERR-065 OPEN**. Das Programm darf noch nicht als fertiges Live-Plugin bezeichnet werden. Es fehlen authentifizierte tatsächliche WordPress-/DataForSEO-/idealo-/eBay-Erfolgswerte und der offizielle separate idealo-Shop-Tipp-Link; kein ZIP zur Installation freigeben und keine Current-Code- oder Produktionseingriffe auf Verdacht.
+
+
+### AFF-ERR-065 – idealo-Abschlusszeitpunkt tatsächliche Speicherung geprüft (01.11.2026)
+
+**Nur bestehende 6.72.284-Arbeitskopie; keine Installation und kein Release.** Die ursprüngliche vollständige Plugin-Quelle (66 Einträge) wurde gegenüber dem unveränderten aktuellen KISS-Patch und dem einzigen Workflow weitergetestet. Bei `idealo_import_feed_file()` wurden zwei isolierte Originalcode-Gegenfälle erstmals reproduziert:
+
+1. **Snapshot-Schreibfehler**: WordPress speichert den Zeitpunkt `last_import_started_at` nicht, der alte Erfolg bleibt bestehen; der alte Code führt trotzdem Materialisierung und eine unzutreffende Erfolgsrückgabe aus (ROT).
+2. **Endabschluss-Schreibfehler**: WordPress speichert `last_import_at` nach Produktspeicherung nicht, aber der alte Code meldet trotzdem `success` (ROT).
+
+**KISS-Korrektur:** Die bereits vorhandenen WordPress-Optionen werden direkt nach der jeweiligen Speicherung gelesen. Der vorhandene idealo-Import gibt bei einem fehlenden Zeitstempel einen Fehler statt `success` aus. Keine neue Datenbank, kein zweiter Prüflauf, kein zusätzlicher Zeitgeber. Beide Fehler im selben Original-Importer ROT→GRÜN. Vorherige Regression weiter PASS: Erstimport/49h-Reaktivierung, Teilimport mit fehlschreibendem Produkt, Provider-SQL-Fehler (5/5), Backend (22/22), DataForSEO-Status (14/14), Original-Amazon-Worker bis Kategorie/Artikel (27/27), echte Template-Kit-JS-Version 1.50.613 in Chromium mit drei Buttons bei 1280 und 390 px PASS. Frisch entpackte vollständige Arbeits-ZIP 66/66 CRC PASS, 23/23 PHP-Lint PASS. Original-Basis zu Patch replay: **alle 66 Dateien byteidentisch mit Arbeitskopie**.
+
+**Büroablage aktualisiert (dieselben Dateinamen, keine neue Mini-Version):** `/Pferdeatelier/AFFILIATE_BUERO/ARBEIT/AFFILIATE_672284_KISS_KONSOLIDIERTER_ARBEITSSTAND_20261101.patch` SHA256 `5b4c8f5b7f48d43250f853a34d7157f3243a6c912ad308305b9660126556dab9`, `AFFILIATE_672284_KISS_KONSOLIDIERUNG_PRUEFBERICHT_20261101.txt`, `TESTS/AFFILIATE_672284_KISS_KONSOLIDIERTER_TESTNACHWEIS_20261101.zip` SHA256 `cd72306905a2f0a5073eef6d758529809dc90976e40e2a8c19ba071308702815`. ZIP unter TESTS ist nur Prüfnachweis, KEIN WordPress-Installer. 
+
+**Weiterhin keine Release-Freigabe:** Echte WordPress-Produktdatenbank, erfolgreicher DataForSEO-Kontoabruf, aktuelle eBay-/idealo-Feeds und originaler AFF-ERR-065-Live-Nachweis fehlen. `CURRENT_RELEASE.json` bleibt 6.72.211 / `release_allowed=false` und wird nicht verändert. Keine Partnerdaten oder Preise erfunden.
