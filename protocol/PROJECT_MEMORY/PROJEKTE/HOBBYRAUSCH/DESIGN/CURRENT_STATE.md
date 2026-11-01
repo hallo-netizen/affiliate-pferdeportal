@@ -2,8 +2,28 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## AKTUELLER GEMEINSAMER GITHUB-PLUGINSTAND — 01.11.2026
+
+**HD-003 / Affiliate Portal Template Kit: v1.50.794 — Betreiber-PASS.**
+
+**VOLLSTÄNDIGE BINÄRDATEI IST REAL IN GITHUB GESPEICHERT:** `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` (direkt im gemeinsamen Campus-Branch nach Merge). **65.700.802 Bytes**, Git-Blob-ID `678da8560b362d3ef838bc3f787f5c0a3ba7f81f`, SHA-256 `52d7d67149ac09e22b7406ef59421ec7e4110c5d0efb11349e0f5357f8c4aa6f`. Lokal 1.290/1.290 ZIP-CRC PASS; GitHub Release und GitHub Action haben Dateigröße/SHA-256 identisch unabhängig bestätigt. Für weitere Chats **nicht Library, nicht Sandbox und nicht die alte Version** verwenden, sondern `CURRENT.zip` beziehungsweise den GitHub-Release-Download.
+
+**Direkter GitHub-Voll-ZIP-Download:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.794/HOBBY_DEPOT_HD003_1.50.794_HOVER_EXAKTE_BUTTONECKEN_VOLLPLUGIN.zip
+
+**GitHub-Release:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hobby-depot-hd003-1.50.794
+
+**GitHub-Ausführung PASS:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/41331917745
+
+**Designfreigabe:** Das vollständige Original-Bildmotiv blieb 1:1 erhalten. Der Betreiber hat den reparierten Hover-Eckenradius bei 1.50.794 mit „pass“ bestätigt. Der Artikelkopf bleibt für später offen; nicht versehentlich als abgenommen markieren.
+
+**Historische Hinweise unterhalb über vermeintlich fehlende Plugin-Binärdateien waren damals korrekt, sind aber ab diesem aktuellen Stand ÜBERHOLT.** Die beiden älteren Ablagewege haben den Binärtransfer damals nicht erlaubt; der GitHub-eigene Übertragungs- und Veröffentlichungsweg hat nun exakt funktioniert.
+
+**Nächster Schritt:** In weiteren Chats direkt die vollständige GitHub-Binär-ZIP 1.50.794 als Ausgangsbasis laden, Veränderung nur in HD-003, erneut lokal testen und das reale vollständige ZIP aktualisieren. Keine erneuten „kein Pluginzugriff“-Behauptungen ohne konkrete Prüfung des jetzigen `CURRENT.zip` und Release.
+
+
+
 STAND: 2026-11-01
-STATUS: **HD-003 1.50.794 BANNER BETREIBER-PASS / LOCAL-ZIP PASS / GITHUB-ZIP NOCH NICHT HOCHGELADEN / ARTIKELDESIGN WEITER OFFEN**
+STATUS: **HD-003 1.50.794 EIGENWERBEBANNER-HOVER BETREIBER-PASS / ECHTES GITHUB-VOLLPLUGIN CURRENT.zip GESICHERT / ARTIKELDESIGN WEITER OFFEN**
 
 Zielvertrag:
 `ZIELVERTRAG_HOBBY_DEPOT_DESIGN_20261011.md`  
