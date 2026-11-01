@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-26
-STATUS: AKTIV / HD-009 GATE 5 WORDPRESS-RUNTIME PASS / INSTALLATIONSKANDIDAT VORHANDEN / KEIN LIVE-PASS
+STAND: 2026-11-01
+STATUS: **HD-009 0.1.7-dev LAUT BETREIBER AKTIV / 0.1.2-dev NUR ÄLTERER GATE-5-KANDIDAT / AKTUELLE FUNKTION NICHT LIVE GEPRÜFT**
 
 ## Rolle
 
@@ -101,10 +101,14 @@ Bereits entfernt:
 - Keine eigene Amazon-Produktsuche und keine erfundene Creators-API.
 - In einer Kategorie-Dreierreihe wird höchstens ein geeigneter idealo-Kandidat auf Amazon umgelegt; nicht mehr starr nur auf Platz 3.
 
+## Betreiber-Inventarfrischecheck 01.11.2026
+
+Die WordPress-Pluginliste zeigt **Hobby Depot – Affiliate-Zentrale 0.1.7-dev aktiv**. Der vorherige 0.1.2-dev-Gate-5-PASS belegt ausdrücklich **nicht** die produktiv aktive 0.1.7-dev. Ein Downgrade durch Installation von 0.1.2-dev ist gesperrt. Beleg: `../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md`. API-Zugangsdaten bleiben außerhalb des Campus.
+
 ## Erster offener Blocker
 
 Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten sind bewusst nicht im Campus/Quellcode gespeichert und müssen nach der manuellen Installation in der echten WordPress-Laufzeit vorhanden sein. Der neue Preflight blockiert LIVE-PASS, solange Pflichtfelder fehlen.
 
 ## NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten `0.1.2-dev` manuell in der echten Hobby-Depot-WordPress-Laufzeit installieren. Danach den Verbindungsdaten-Preflight öffnen und sicherstellen, dass alle Pflichtzugänge vollständig sind: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Anschließend Verbindungstests, HD-004-Zielquelle, eBay/idealo und Frontend-/Provider-Readback prüfen. Amazon nutzt ausschließlich eindeutige ASINs aus dem idealo-Feed; Partner-/Tracking-ID bleibt Laufzeitkonfiguration. Erst nach vollständigem Preflight und Live-Nachweis Live-PASS setzen.
+**Zunächst die vollständige tatsächlich aktive Affiliate-Version 0.1.7-dev aus der erlaubten Quelle unabhängig öffnen und gegen den älteren Campus-Kandidaten 0.1.2-dev prüfen.** Erst nach Byte-/Funktions-/Regressionstest den Campus-Installerstand korrigieren; anschließend die echten WordPress-Provider-Verbindungen und Frontend-Ausgaben read-only prüfen. Keine Installation der älteren 0.1.2-dev und keine Passwörter im Campus.
