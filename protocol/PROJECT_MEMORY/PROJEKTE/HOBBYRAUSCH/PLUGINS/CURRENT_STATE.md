@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: AKTIV / PLUGINABLAGE BLOCKED / INVENTAR- UND ROUTING-CURRENT
+STATUS: AKTIV / HD-003 1.50.786 LIBRARY-VOLLZIP-READBACK PASS / ISOLIERTE GITHUB-CURRENT.ZIP NOCH OFFEN
 
 ## Regel
 
@@ -108,6 +108,12 @@ Die vollständig übermittelte WordPress-Pluginliste weist **15 aktive Plugins**
 Besonders wichtig: HD-003 **1.50.783 aktiv** (1.50.785 nur unbestätigter ZIP-Kandidat), HD-001 **1.14.17 aktiv** (1.14.16 nur älterer Testkandidat), HD-009 **0.1.7-dev aktiv** (0.1.2-dev nur älterer Campus-Installer). Der FAQ Frontend Fix 1.0.2 und die Performance Diagnose 1.1.0 waren im Register noch nicht verzeichnet und sind als noch nicht gebundene Eigenplugins aufgenommen. **Keine alten Versionen überinstallieren.**
 
 PLUGINABLAGE bleibt BLOCKED, da keine unabhängigen ZIP-/Rohdatei-Readbacks vorliegen. Die Listenaufnahme ist kein Live-Funktions-PASS.
+## Neuer HD-003-Readback 01.11.2026
+
+Die frühere Behauptung, der 1.50.785-Inhalt lasse sich nicht abrufen, ist **überholt**: der vorhandene Library-Dateieintrag wurde über die autorisierte Plugin-Büro-Ablage kopiert, danach ließ sich die vollständige echte 1.50.785 unabhängig öffnen. Auch die aktive Betreiber-ZIP 1.50.783 wurde auf demselben Weg gelesen und verglichen. Die neuen freigegebenen Änderungen wurden als **1.50.786 Vollplugin** umgesetzt und gegen die 1.50.785 geprüft.
+
+**Neue 1.50.786-ZIP inkl. Favicon und Anzeigenmarkt-Banner** liegt im bestehenden Library-Pluginbüro und als getrennte Rückfallkopie vor, beide nach Upload frisch geöffnet und hash-identisch geprüft. Der unveränderte Pluginroot ist `affiliate-portal-template-kit`; 1.281 Einträge, davon 1.271 byte-identisch zu 1.50.785; PHP 11/11 PASS, simulierte Markt-Positiv-/Negativprüfungen PASS. **GitHub `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` weiterhin nicht synchronisiert.** Kein WP-Live-PASS; laut Betreiber bleibt 1.50.783 installiert. Die genaue technische Wahrheit/Byte-Nachweise und Installationsdatei stehen nur in `PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md` und dem zugehörigen MANIFEST.
+
 ## EXAKT EINE NEXT ACTION
 
-**HD-003 1.50.785 aus einer zulässigen Rohdateiquelle unabhängig wiederöffnen und bytegenau prüfen.** Erst bei echtem ZIP-/Versions-/Hash-PASS darf die vollständige ZIP über den vorgesehenen Campus-Prüfweg als `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` übernommen werden. Weitere Plugin-ZIPs danach nach ihren einzelnen Akten abgleichen; niemals alte Versionen als Ersatz verwenden.
+**HD-003 1.50.786-ZIP über die tatsächlich installierte 1.50.783 einspielen und live sowohl Favicon als auch Anzeigenmarkt-Banner zwischen Suche und Kategorie-Kacheln prüfen.** Andere Plugins und Portalbereiche unangetastet. GitHub-Isolations-ZIP bleibt als separater Speicher-Abgleich offen.
