@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **NEUER 1.50.785-DATEIEINTRAG GEFUNDEN / ZIP-BYTES NICHT WIEDERÖFFNET / CAMPUS-CURRENT BLOCKED / LIVE OFFEN**
+STATUS: **1.50.783 laut WordPress-Liste aktiv / 1.50.785 nur ungeprüfter Dateifund / CAMPUS-CURRENT BLOCKED / FUNKTIONS-LIVETEST OFFEN**
 
 Plugin-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -47,6 +47,10 @@ In der vorhandenen Projekt-Dateiablage ist der tatsächliche **Dateieintrag** `/
 
 **Keine Herabstufung auf 1.50.744 oder 1.50.782, kein unechtes CURRENT.zip.** Der neueste aufgefundene Kandidat 1.50.785 bleibt bis zum echten Wiederöffnungs-/Prüf-PASS lediglich **Dateifund, nicht freigegebene Campus-Binärversion**.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 1.50.783 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 1.50.785 ist nicht mit der aktiven WordPress-Version gleichzusetzen. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
 
-**Die echte vollständige ZIP 1.50.785 aus einer autorisierten Rohdateiquelle wiederöffnen, ZIP-Inhalt, Version und Hash unabhängig prüfen.** Erst dann unverändert in die vorgesehene isolierte Campus-Ablage überführen und eine separate Rückfallkopie prüfen. Keine weiteren Designänderungen und keine Live-Freigabe vor diesem Nachweis.
+**Aktive 1.50.783 und aufgefundenen 1.50.785-Vollplugin-Kandidaten unabhängig aus echten Rohdateien öffnen und vergleichen; erst bei nachgewiesenem Test- und ZIP-PASS die vorhandene Campus-Ablage aktualisieren. Nichts auf WordPress überinstallieren.**

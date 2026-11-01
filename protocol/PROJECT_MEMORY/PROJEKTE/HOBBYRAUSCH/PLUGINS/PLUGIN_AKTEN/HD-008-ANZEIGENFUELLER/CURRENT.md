@@ -51,5 +51,9 @@ Nicht übernommen:
 - lokaler Harness: Query-Parsing PASS, INDIVIDUAL akzeptiert, BUSINESS blockiert, erzwungenes und automatisches Kategorien-Mapping PASS.
 - externer Live-eBay-Zugang nicht ohne echte Zugangsdaten getestet.
 
+## WordPress-Liveinventarfrischecheck 01.11.2026
+Der Anzeigenfüller 1.0.0 ist in der vollständig gelieferten Liste der 15 aktiven Plugins nicht aufgeführt. Der ältere installierbare Kandidatenstand bleibt historische Akteninformation, aber es ist kein aktueller Liveeinsatz belegt. Die parallele HD-008-Kennung mit SEO-Metadaten ist weiter offen und wird nicht auf Verdacht umbenannt. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
 ## Nächster Schritt
-Plugin auf Hobby Depot installieren, Zugangsdaten hinterlegen, zunächst 2–3 Suchzeilen mit exaktem Kategorie-Slug als Draft importieren und Ergebnis im HivePress-Anzeigenmarkt prüfen.
+
+**Vor einem Installations- oder Importversuch die kanonische Plugin-ID, den unveränderten Voll-ZIP-Bestand und den realen Liveeinsatz eindeutig abgleichen.** Keine Live-eBay-Aktion und keine Nummernänderung aus dieser Inventaraufnahme.

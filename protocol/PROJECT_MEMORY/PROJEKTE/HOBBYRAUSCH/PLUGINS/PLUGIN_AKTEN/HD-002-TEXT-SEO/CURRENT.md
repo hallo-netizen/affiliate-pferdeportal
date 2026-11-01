@@ -122,17 +122,9 @@ Weitere Fail-closed-Tests:
 Evidence:
 `HDTE_V0.1.4_COMPLETE_WORKFLOW_POS_NEG_EVIDENCE.txt`
 
+## Live-Inventarfrischecheck 01.11.2026
+Die vollständige Betreiber-Pluginliste mit 15 aktiven Plugins enthält die Themenengine **nicht**. Das widerlegt frühere lokale Tests nicht, aber eine aktuell aktive WordPress-Installation ist daraus nicht nachgewiesen. Ohne aktuellen Server-/Paketstand nicht aufgrund des alten NEXT ACTION erneut installieren. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
 ## NEXT ACTION
 
-V0.1.4 installieren.
-
-Danach nur:
-`Hobby Depot Themenengine → Übersicht`
-
-Kein neuer Gesamtbestand.
-Kein neuer Handoff.
-Kein Research-Neustart.
-
-Der gespeicherte BLOCKED-Job wird beim Admin-Aufruf serverseitig validiert und fortgesetzt.
-Live-Abnahme erst bei sichtbarem:
-`Portalabgleich COMPLETE`.
+**Den wirklichen Installations-/Aktivierungsstand der Themenengine anhand eines autorisierten Live-Paket-/Plugin-Readbacks klären, bevor ein 0.1.4-Installer verwendet wird.** Die bisherige lokale 0.1.4-Simulation bleibt dokumentiert; keine Installation oder Gesamt-Neustart aus diesem Inventarabgleich.

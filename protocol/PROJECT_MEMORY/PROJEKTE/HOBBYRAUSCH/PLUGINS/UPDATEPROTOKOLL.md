@@ -5,6 +5,24 @@ ROLLE: HISTORIE / WAS + WARUM + BELEGE, KEINE CURRENT-WAHRHEIT
 Aktuelle Version, Live-Status, Blocker und NEXT ACTION ausschließlich aus der jeweiligen:
 `PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`
 
+## PU-20261101-WP-INVENTAR – Abgleich der tatsächlich aktiven Hobby-Depot-Plugins
+
+**WARUM:** Die vollständige vom Betreiber am 01.11.2026 übermittelte WordPress-Pluginliste nennt 15 aktive Plugins; mehrere technische Plugin-Akten enthielten noch Installationshinweise für ältere Versionen. Quelle/Beleg: `EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
+**WAS:**
+- Operativer WordPress-Current wurde auf 15 angezeigte aktive Pluginversionen aktualisiert; keine erfundenen Server-/Byte-Live-Tests.
+- HD-003: 1.50.783 in WordPress aktiv; gefundener 1.50.785-Kandidat weiter ungetestet und nicht Campus-gesichert.
+- HD-001: 1.14.17 aktiv; 1.14.16 bleibt nur früherer Testkandidat, alte Installationsanweisung gesperrt.
+- HD-009: 0.1.7-dev aktiv; 0.1.2-dev bleibt historisches Campus-CURRENT.zip. Keinen Downgrade.
+- HD-004 1.0.0, HD-005 1.0.25, HD-006 2.7.8, HD-007 1.2.16 laut Liste aktiv; die alten Erstinstallationsanweisungen wurden durch Lesetests/Abgleich ersetzt.
+- HD-002 Themenengine, HD-008 SEO-Metadaten und Anzeigenfüller nicht in der gelieferten Pluginliste; separate ältere Campus-Kandidaten weiter unverändert.
+- FAQ Frontend Fix 1.0.2 und Performance Diagnose 1.1.0 als noch ungebundene aktive Eigenplugins in den Wegweiser aufgenommen. Keine neue Plugin-ID erfunden.
+- Drittanbieter/Werkzeuge in der WordPress-Current erfasst; verfügbare Updates auf HivePress, WPvivid und Yoast ausdrücklich nicht als installiert ausgegeben.
+- HD-008-Kollision unverändert; keine andere Projektstruktur bearbeitet.
+
+**PRÜFUNG UND GRENZE:** Verglichen wurden nur Originaltext der vom Betreiber gelieferten WordPress-Liste und vorhandene Campus-Current/Plugin-Akten; die Änderungen in GitHub sind reine Zustandskorrektur. Keine ZIP-Byteprüfung, kein WordPress-Zugriff, keine Installation, kein funktionaler Live-PASS. **PLUGINABLAGE BLOCKED** bis vollständige ZIP-Readbacks der aktiven Versionen.
+
+---
 ## PU-20261001-001 – HD-001 Kategorie-Workflow
 
 PLUGIN-ID:

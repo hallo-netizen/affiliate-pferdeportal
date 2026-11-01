@@ -1,6 +1,6 @@
 # HD-009 – Hobby Depot Affiliate-Zentrale
 
-Status: INSTALLATIONSKANDIDAT / WORDPRESS-RUNTIME-PASS / KEIN LIVE-PASS
+Status: ALTER INSTALLATIONSKANDIDAT 0.1.2-dev / WORDPRESS-TEST PASS / NICHT AKTIVE 0.1.7-dev / KEIN LIVE-FUNKTIONSPASS
 Version: 0.1.2-dev
 Datei: CURRENT.zip
 SHA-256: a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36
@@ -20,3 +20,7 @@ Prüfungen:
 - Verbindungsdaten-Preflight vorhanden; frische Installation blockiert korrekt bei fehlenden Pflichtzugängen
 
 Grenze: kein produktiver Live-Readback, keine Zugangsdaten im Artefakt.
+
+## Betreiber-WordPress-Liste 01.11.2026
+
+**Aktiv gemeldet: 0.1.7-dev.** Die hier nachgewiesene `CURRENT.zip` ist ausschließlich der frühere **0.1.2-dev**-Kandidat; sie darf nicht als gültiges Abbild der produktiv aktiven 0.1.7-dev ausgegeben oder darüber installiert werden. Eine unabhängig wiedergeöffnete 0.1.7-dev-Voll-ZIP fehlt. Speicherabgleich der aktiven Version: BLOCKED. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`.

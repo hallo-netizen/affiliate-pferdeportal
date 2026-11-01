@@ -2,58 +2,49 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **HOBBYFINDER-RUNTIME LOKAL HARD PASS / LIVE-INSTALLATION OFFEN**
+STAND: 2026-11-01
+STATUS: 15 aktive WordPress-Plugins laut Betreiberliste / Server-Funktionsprüfung offen / keine Installation in diesem Abgleich
 
-## Rolle
+## Quelle und Zuständigkeit
+Einzige Current-Autorität für den WordPress-Betriebsstand. Quelle: vom Betreiber am 01.11.2026 gelieferte vollständige Pluginliste, alle Einträge zeigen „Deaktivieren“. Kein eigener authentifizierter WordPress-Readback durchgeführt. Für einzelne Eigenplugins bleibt die jeweilige Plugin-Akte die technische Current-Autorität.
 
-Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_WORDPRESS_TECHNIK`.
+## Aktive Plugins laut WordPress-Ansicht
+| WordPress-Pluginname | Installierte Version | Zuordnung |
+|---|---|---|
+| Affiliate Portal Template Kit | 1.50.783 | HD-003 |
+| Affiliate-Portal Kategorie-Workflow | 1.14.17 | HD-001 |
+| Footer-Umzug – Portale | 1.1.1 | Werkzeug |
+| HivePress | 1.7.31 | Drittanbieter |
+| Hobby Depot Bildzentrale | 2.7.8 | HD-006 |
+| Hobby Depot Glossar Core | 1.0.25 | HD-005 |
+| Hobby Depot Hobbyregister Core | 1.2.16 | HD-007 |
+| Hobby Depot Kategorie-Kern | 1.0.0 | HD-004 |
+| Hobby Depot – Affiliate-Zentrale | 0.1.7-dev | HD-009 |
+| Hobby Depot – FAQ Frontend Fix | 1.0.2 | ohne HD-ID |
+| Hobby Depot – Performance Diagnose | 1.1.0 | ohne HD-ID |
+| Minimal Coming Soon & Maintenance Mode | 2.45 | Drittanbieter |
+| WPForms Lite | 2.0.3.1 | Drittanbieter |
+| WPvivid Backup Plugin | 0.9.136 | Drittanbieter |
+| Yoast SEO | 28.7 | Drittanbieter |
 
-## Laufzeitarchitektur
+Verfügbare, nicht installierte Updates: HivePress 1.8.1 (aktiv 1.7.31), WPvivid 0.9.139 (aktiv 0.9.136), Yoast SEO 28.8 (aktiv 28.7).
 
-KISS-Vertrag:
-- zentrale fachliche Hobbydaten bleiben im Hobbyregister der Wissensdatenbank;
-- **HD-007 Hobbyregister Core 1.0.0** = schlanke read-only WordPress-Laufzeitprojektion;
-- **HD-003 1.50.704** = Darstellung/Finder und liest HD-007;
-- **HD-004** bleibt zentrale read-only Kategorie-/Objektauflösung;
-- keine neue Tabelle;
-- keine zweite Hobby-Datenbank;
-- keine Cronjobs;
-- kein Netzwerkzugriff;
-- keine Kategorie-Writes.
+## Abweichungen und Arbeitsgrenzen
+- HD-003 Design 1.50.783 aktiv; 1.50.785 ist ein nicht unabhängig wiedergeöffneter Vollplugin-Dateifund, nicht installiert.
+- HD-001 Kategorie-Workflow 1.14.17 aktiv; ältere Akte hat nur 1.14.16 geprüft. Keinen Downgrade vornehmen.
+- HD-009 Affiliate-Zentrale 0.1.7-dev aktiv; archivierter Campus-Kandidat 0.1.2-dev ist älter. Nicht überinstallieren.
+- HD-004 1.0.0, HD-005 1.0.25, HD-006 2.7.8, HD-007 1.2.16 bereits aktiv; lokale Tests sind kein funktionaler WordPress-Live-PASS.
+- FAQ Frontend Fix 1.0.2 und Performance Diagnose 1.1.0 aktiv; noch ohne verifizierte Voll-ZIP im Campus und ohne geklärte HD-ID.
+- HD-002 Themenengine, HD-008 SEO-Metadaten und Anzeigenfüller nicht in den gelieferten 15 Pluginzeilen; keine Behauptung einer Deinstallation. Yoast SEO ist aktiv; parallelen HD-008-Ausgabeweg erst auf Überschneidungen prüfen.
+- Bestandskollision HD-008-SEO versus HD-008-Anzeigenfüller bleibt unverändert und offen.
 
-## HD-007
+Beleg: ../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md (Nachweis, keine zweite Current-Autorität).
 
-Artefakt:
-`/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.0.0_READONLY_LOCALPASS.zip`
-
-SHA:
-`3887c914b5193f35e1ac5297fa96e2917d0d70effaae51de59501de0d3dcb8ba`
-
-Lokale QA:
-862/862 Runtime PASS; PHP 2/2; keine DB-Writes/Cron/Netzwerk; ZIP PASS.
-
-## HD-003 1.50.704
-
-Artefakt:
-`/Hobby Depot/Plugin-Büro/AFFILIATE_PORTAL_TEMPLATE_KIT_1.50.704_HOBBYFINDER_RUNTIME_LOCALPASS.zip`
-
-SHA:
-`558ed2a17cd5123cdad5c7719d2554d64e413f628f29a07a1d06e6b4dca476fc`
-
-Lokale Integration:
-- 862 Finder-Datensätze;
-- 862 Kurzprofile;
-- Finder-Route PASS;
-- fehlendes HD-007 fail-closed PASS;
-- JS Syntax PASS;
-- 383 zentrale CORE-Ziele im Harness auflösbar;
-- keine erfundenen URLs.
+## Historischer lokaler Test (20.10.2026, nicht mehr als aktueller Installationsstand)
+HD-007 1.0.0 und HD-003 1.50.704 waren frühe lokale Hobbyfinder-Tests. Die aktuelle WordPress-Liste zeigt HD-007 1.2.16 und HD-003 1.50.783. Das zentrale Hobbyregister bleibt fachliche Quelle; HD-004 bleibt read-only. Keine neue Architektur.
 
 ## ERSTER OFFENER BLOCKER
-
-Live fehlen Installation/Aktivierung und echter Frontend-Readback.
+Die echten vollständigen aktuellen Plugin-Dateien wurden nicht unabhängig mit dem WordPress-Bestand verglichen. Die 1.50.785-Datei konnte im Nachholcheck nicht als Roh-ZIP geöffnet werden. Die vollständige Campus-Ablage ist BLOCKED.
 
 ## EXAKT EINE NEXT ACTION
-
-**HD-007 1.0.0 installieren/aktivieren → HD-003 1.50.704 installieren → Hobbyfinder real prüfen. Kein HD-001-Sync als Teil dieses Schritts.**
+Die wirklich aktive HD-003-Version 1.50.783 und den aufgefundenen Kandidaten 1.50.785 erst nach autorisiertem Rohdatei-Abruf und unabhängiger ZIP-/Versionsprüfung vergleichen. Keinen alten oder ungeprüften Stand installieren.

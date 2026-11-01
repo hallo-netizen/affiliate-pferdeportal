@@ -101,6 +101,13 @@ Die technisch gültigen Einzelstände bleiben ausschließlich in `PLUGIN_AKTEN/<
 
 Bei HD-003 existiert ein Library-Dateieintrag zur **1.50.785**, jedoch konnte dessen ZIP-Inhalt am 01.11.2026 nicht erneut ausgelesen werden. **Keine Beförderung des ungeprüften ZIPs zu Campus-CURRENT, kein Live-PASS.**
 
+## Live-Inventarfrischecheck 01.11.2026
+
+Die vollständig übermittelte WordPress-Pluginliste weist **15 aktive Plugins** aus. Zuständiger Betriebsstand: `../WORDPRESS_TECHNIK/CURRENT_STATE.md` (eine WordPress-Current); Nachweis: `EVIDENCE_WP_PLUGINLISTE_20261101.md`.
+
+Besonders wichtig: HD-003 **1.50.783 aktiv** (1.50.785 nur unbestätigter ZIP-Kandidat), HD-001 **1.14.17 aktiv** (1.14.16 nur älterer Testkandidat), HD-009 **0.1.7-dev aktiv** (0.1.2-dev nur älterer Campus-Installer). Der FAQ Frontend Fix 1.0.2 und die Performance Diagnose 1.1.0 waren im Register noch nicht verzeichnet und sind als noch nicht gebundene Eigenplugins aufgenommen. **Keine alten Versionen überinstallieren.**
+
+PLUGINABLAGE bleibt BLOCKED, da keine unabhängigen ZIP-/Rohdatei-Readbacks vorliegen. Die Listenaufnahme ist kein Live-Funktions-PASS.
 ## EXAKT EINE NEXT ACTION
 
 **HD-003 1.50.785 aus einer zulässigen Rohdateiquelle unabhängig wiederöffnen und bytegenau prüfen.** Erst bei echtem ZIP-/Versions-/Hash-PASS darf die vollständige ZIP über den vorgesehenen Campus-Prüfweg als `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` übernommen werden. Weitere Plugin-ZIPs danach nach ihren einzelnen Akten abgleichen; niemals alte Versionen als Ersatz verwenden.

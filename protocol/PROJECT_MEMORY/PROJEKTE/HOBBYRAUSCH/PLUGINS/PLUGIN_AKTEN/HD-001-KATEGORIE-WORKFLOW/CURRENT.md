@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-17
-STATUS: **1.14.15 REAL BLOCKED / REALER JSON-EXPORT AKTION-FÜR-AKTION 1:1 REPLAYED / 1.14.16 FULL-WORKFLOW HARD PASS / ECHTER WP-DRY-RUN OFFEN**
+STAND: 2026-11-01
+STATUS: **1.14.17 LAUT BETREIBER AKTIV / 1.14.16 LOKAL GETESTET / 1.14.17-BYTE- UND LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 ## Reale Ausgangslage
 
@@ -131,9 +131,10 @@ Vor Release zusätzlich der Folgeschritt geprüft:
 Grund:
 Der echte WordPress-Dry-Run mit 1.14.16 ist weiterhin offen. Erst wenn der reale Lauf exakt den erwarteten PASS liefert, darf über Sync/Artefakt-Synchronisierung entschieden werden.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 1.14.17 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 1.14.16 ist nicht mit der aktiven WordPress-Version gleichzusetzen. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
 
-**1.14.16 installieren -> nur Finalen Delta-Dry-Run ausführen -> keinen Apply/Sync.**
-
-Erwartung:
-3487 Ziele / CREATE 1122 / ADOPT 4 / UPDATE 2361 / UNCHANGED 0 / ARCHIVE 1 / Errors 0.
+**Aktive 1.14.17 aus dem kanonischen WordPress-Pluginordner und der autorisierten Voll-ZIP bytegenau wiederöffnen und den Unterschied zu 1.14.16 prüfen; erst danach den realen Delta-Dry-Run bewerten. Keinen älteren Kandidaten installieren und keinen Apply/Sync auslösen.**

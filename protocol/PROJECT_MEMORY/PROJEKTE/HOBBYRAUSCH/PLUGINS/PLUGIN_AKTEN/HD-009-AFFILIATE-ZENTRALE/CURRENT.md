@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-26
-STATUS: GATE 5 WORDPRESS-RUNTIME PASS / INSTALLATIONSKANDIDAT VORHANDEN / KEIN LIVE-PASS
+STAND: 2026-11-01
+STATUS: **0.1.7-dev LAUT WORDPRESS-LISTE AKTIV / 0.1.2-dev IST ÄLTERER CAMPUS-TESTKANDIDAT / 0.1.7-dev UNGEPRÜFT / KEIN LIVE-FUNKTIONSPASS**
 
 Plugin-ID: HD-009-AFFILIATE-ZENTRALE
 Name: Hobby Depot Affiliate-Zentrale
@@ -61,7 +61,7 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 - Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`;
 - PR #579 in den Campus gemergt;
 - Verbindungsdaten-Preflight aktiv: fehlende Pflichtzugänge werden namentlich angezeigt und blockieren LIVE-PASS;
-- **kein Liveeinsatz / kein Live-PASS**;
+- **kein Live-Funktions-PASS für den 0.1.2-dev-Kandidaten**;
 - keine Hobby-Depot-Produktdaten;
 - keine Amazon-Produktrecherche behaupten;
 - keine Pferdeatelier-Zielbestände wiederverwenden.
@@ -117,10 +117,13 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 - Keine eigene Amazon-Suche; keine Amazon-Creators-API erfunden.
 - Pro Kategorie-Dreierreihe maximal ein Amazon-Produkt, ohne feste Bindung an Platz 3.
 
+## WordPress-Bestandsabgleich 01.11.2026
+Laut vollständig übermittelter Betreiberliste ist **Hobby Depot – Affiliate-Zentrale 0.1.7-dev aktiv**, nicht 0.1.2-dev. Die Datei `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` belegt bisher nur den früheren **0.1.2-dev**-Testkandidaten. Keine Aussage zum Quell-/Byte-/Funktions-PASS von 0.1.7-dev. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`. Alte Upgrade-Anweisung auf 0.1.2-dev ist als Downgrade gesperrt.
+
 ## ERSTER OFFENER BLOCKER
 
 Produktiver Hobby-Depot-Live-Readback fehlt. Provider-Zugangsdaten wurden absichtlich nicht in Quellcode/Campus geschrieben. Nach manueller Installation müssen sie in der WordPress-Laufzeit vollständig vorhanden sein; der neue Preflight sperrt LIVE-PASS bei fehlenden Pflichtwerten.
 
 ## EXAKT EINE NEXT ACTION
 
-Den Gate-5-PASS-Kandidaten `0.1.2-dev` manuell installieren und danach den Verbindungsdaten-Preflight abarbeiten. Pflichtwerte: Awin Publisher-ID + API-Zugriffstoken; ADCELL API-Benutzername + API-Passwort; eBay Client-ID + Client-Secret + 10-stellige EPN-Campaign-ID; idealo iPN API-Key + Adspace-ID + Feed-ID; Digistore24 Read-only API-Schlüssel. Danach Verbindungstests, HD-004, eBay/idealo und echten Frontend-/Provider-Readback durchführen. Amazon bleibt bis zu einem belegten realen Adapter `prepared`. Kein Live-PASS ohne vollständigen Preflight und Live-Nachweis.
+**Zuerst die aktive 0.1.7-dev aus der autorisierten vollständigen Pluginquelle sichern und unabhängig mit dem Campus-Kandidaten 0.1.2-dev vergleichen.** Erst nach bestandenem Byte-/Positiv-/Negativ-/Regressionstest die geltende Affiliate-Current und isolierte Campus-ZIP nachziehen; danach im echten WordPress-Verbindungsdaten-Preflight und Frontend read-only prüfen. Niemals 0.1.2-dev auf die aktive 0.1.7-dev installieren. Keine Zugangsdaten im GitHub speichern.

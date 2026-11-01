@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-17
-STATUS: **1.14.15 REAL BLOCKED / REALER JSON-EXPORT 1:1 REPLAYED / 1.14.16 FULL-WORKFLOW HARD PASS / ECHTER WORDPRESS-DRY-RUN 1.14.16 OFFEN / KEIN SYNC**
+STAND: 2026-11-01
+STATUS: **1.14.17 LAUT BETREIBER AKTIV / 1.14.16 LOKAL VOLLGESTETET / 1.14.17-VERGLEICH UND REALER DRY-RUN OFFEN / KEIN NEUER SYNC-NACHWEIS**
 
 ## Zielvertrag
 
@@ -151,23 +151,16 @@ Paketprüfung:
 
 Keine neue Navigationsidee, keine neue Struktur und kein Architekturumbau.
 
-Live bleibt weiterhin der alte aktive Snapshot, weil noch kein V7.1-Sync durchgeführt wurde. Die Navigation darf erst nach echtem 1.14.16-Dry-Run-PASS synchronisiert werden.
+Live bleibt weiterhin der alte aktive Snapshot, weil noch kein V7.1-Sync durchgeführt wurde. Die Navigation darf erst nach echtem, zur aktiv gemeldeten 1.14.17 passenden Dry-Run-PASS und anschließender Freigabe synchronisiert werden.
+
+## Liveversions-Abgleich 01.11.2026
+
+Die vollständig übermittelte WordPress-Adminliste zeigt **Affiliate-Portal Kategorie-Workflow 1.14.17 aktiv**. Die früheren 1.14.16-Tests sind kein Beleg für die aktive Version 1.14.17. Der alte Installationshinweis 1.14.16 ist überholt und darf nicht zu einem Downgrade führen. Der V7.1-Sync bleibt ohne aktuellen realen Dry-Run ungeprüft. Beleg: `../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md`.
 
 ## ERSTER OFFENER BLOCKER
 
-**Der echte WordPress-Dry-Run mit 1.14.16 fehlt noch.**
+**Der echte WordPress-Dry-Run und der Quell-/ZIP-Abgleich der aktiven 1.14.17 fehlen.**
 
 ## EXAKT EINE NEXT ACTION
 
-**HD-001 1.14.16 installieren und ausschließlich den Finalen Delta-Dry-Run ausführen. Keinen Apply/Sync bestätigen.**
-
-Erwarteter echter Lauf:
-- 3487 Zielobjekte;
-- CREATE 1122;
-- ADOPT 4;
-- UPDATE 2361;
-- UNCHANGED 0;
-- ARCHIVE 1;
-- Errors 0.
-
-Bei jeder Abweichung: sofort stoppen, kein Sync.
+**Die tatsächlich aktive HD-001 1.14.17 zuerst unabhängig als Vollplugin wiederöffnen, gegen die geprüfte 1.14.16 vergleichen und danach nur einen kontrollierten Delta-Dry-Run durchführen.** Kein Apply/Sync ohne echten, für 1.14.17 validierten Positiv-/Negativ-Nachweis; keinesfalls 1.14.16 als Ersatz installieren.
