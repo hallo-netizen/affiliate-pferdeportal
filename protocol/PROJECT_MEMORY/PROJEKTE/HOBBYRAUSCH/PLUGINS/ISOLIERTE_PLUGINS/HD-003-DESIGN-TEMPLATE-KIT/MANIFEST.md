@@ -1,7 +1,7 @@
 # HD-003 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-11-01
-STATUS: **CURRENT.zip BLOCKED / NEUER 1.50.785-DATEIFUND, RAW-READBACK NICHT MÖGLICH**
+STATUS: **1.50.787 VOLL-ZIP IM LIBRARY-PLUGIN-BÜRO GESICHERT UND UNABHÄNGIG WIEDERGEÖFFNET / GITHUB-CURRENT.zip NOCH NICHT SYNCHRONISIERT**
 
 PLUGIN-ID:
 `HD-003-DESIGN-TEMPLATE-KIT`
@@ -73,3 +73,21 @@ Die neue Voll-ZIP wurde **direkt aus der vollständigen 1.50.785** gebaut. Zusä
 
 **NEXT ACTION:** Die fertig geprüfte **1.50.786 Voll-ZIP** in WordPress über die Plugin-Installation mit Ersetzen der installierten **1.50.783** einspielen, danach das Favicon im echten Browser und die Anzeigenmarkt-Seite (Suche→Banner→Kacheln, leere Banner/Unterseiten) prüfen. Keine zweite Installation, keine Änderung an anderen Portalen. Ein tatsächlicher Live-PASS erst nach WordPress-Readback.
 
+
+## 01.11.2026 – HD-003 1.50.787, Testartikel IN bestehendes Vollplugin integriert
+
+**Abnahme 1.50.786:** Der Betreiber meldet für Favicon und Anzeigenmarkt-Banner „beides pass“. Dies ist Betreiberfeedback, kein von diesem Chat selbst ausgeführter Live-Readback. Die bisher dokumentierte WordPress-Liste mit 1.50.783 ist eine ältere Aufnahme und darf nicht als heutiger Live-Stand ausgegeben werden.
+
+**Neues Full-Plugin 1.50.787:** Basis ist ausschließlich die als echte ZIP erneut geöffnete vollständige 1.50.786. Kein Extra-Plugin, kein zweiter Designweg, keine Veränderung bestehender Kategorie- oder Affiliate-Automatik. Im Hauptplugin Versionswerte aktualisiert und eine einmalige admin_init-Demo-Einbindung ergänzt. Im Hobby-Profil nur Versionswert aktualisiert. Genau zwei Dateien neu im unveränderten Pluginroot:
+- `includes/hobby-depot-design-test-v150787.php` (übernommener Testartikel, keine eigenständige Plugin-Kopfdatei)
+- `assets/hobby-depot-v150787/lenkdrachen-testfoto.jpg` (gleiches lokales Bild wie in der zuvor getesteten Demo-ZIP).
+
+**Fachlichkeit:** Gezielt aus V7.1-Zielbaum `Sportdrachen → Drachen & Leinen` (Slug `sportdrachen-drachen-leinen`; belegt durch die konkreten Inhalte „Zweileiner und Vierleiner unterscheiden“, „Leinen auswählen“, „Drachen nach Windbereich wählen“). [DESIGNTEST] Zweileiner oder Vierleiner: Gutenberg-Überschriften, Foto, Inhaltsverzeichnis, Liste, Tabelle, Textbanner, drei als Platzhalter gekennzeichnete Produktkarten, nur vorhandene interne Querverweise (sonst interne Sprungmarken) und FAQ. Keine behaupteten aktuellen Partnerpreise.
+
+**Import:** Läuft bei erstem berechtigten Backendaufruf nach Austausch der Voll-ZIP automatisch in `admin_init`, weil WordPress bei einem schon aktiven Plugin nach Upgrade keinen Aktivierungshook erneut ausführt. Erzeugt nur einen Entwurf, niemals automatische Veröffentlichung. Bereits vorhandener Demo-Beitrag mit derselben festen Kennung wird wiederverwendet, nicht dupliziert. Nach erfolgreicher Anlage wird eine einmalige Bestandsmarkierung gesetzt. Beim späteren Löschen entsteht **kein neuer** Demo-Beitrag. Ohne Editorberechtigung, im Frontend oder bei Ajax/Cron kein Schreibpfad. Es werden **keine** Kategorien angelegt; vorhandene Leaf-Kategorie wird nur dann zugewiesen, wenn sie existiert.
+
+**Harte lokale Prüfung (kein Server-Livebeweis):** Die echte Voll-ZIP ist gültig, 1.283/1.283 ZIP-Einträge CRC PASS, WordPress-Hauptordner `affiliate-portal-template-kit`, 12/12 PHP-Lint PASS. Vergleich zu 1.50.786: alle 1.279 übrigen Dateien byteidentisch; nur die beiden Plugin-/Profil-PHPs geändert und zwei neue Dateien hinzugefügt. Positiv-/Negativ-Simulation mit tatsächlichem Importcode: Entwurf und korrektes Foto PASS, Kategorie nur bei Existenz PASS, Tabellen/Banner/Produktflächen PASS, keine Rechte → keine Writes PASS, zweiter Admin-Aufruf → keine Dublette PASS, Löschung → kein Neuimport PASS, vorhandener früherer Testartikel → Wiederverwendung statt zweitem Beitrag PASS.
+
+**Speicherung Original und Rückfall:** Vollständiges 1.50.787 ZIP im bestehenden Library-Plugin-Büro: `/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_HD003_1.50.787_DESIGNTEST_INTEGRIERT_VOLLPLUGIN.zip`. Unabhängige Original-Rückfallkopie: `/hobby rausch/HOBBY_DEPOT_HD003_1.50.787_DESIGNTEST_INTEGRIERT_RUECKFALLKOPIE.zip`. Beide nach Upload als echte Original-ZIPs getrennt zurückgeladen und wiedergeöffnet, CRC- und Versionsprüfung PASS. 63.807.190 Bytes, SHA-256 für beide: `bba4fbf182393265d7d6e55d77d995e1a2d0338da9a247b585c81304b04380d7`. Vorversion 1.50.786 ist separat im Pluginbüro erhalten. **GitHub `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist weiter nicht synchronisiert; Library-Readback und GitHub-Ablage niemals gleichsetzen.**
+
+**NEXT ACTION:** Die neue vollständige 1.50.787 über die vorhandene HD-003-Installation in WordPress hochladen, direkt im Admin unter Beiträge → Entwürfe den [DESIGNTEST]-Beitrag öffnen und seine Frontend-Vorschau beurteilen. Erst bei echtem Frontend-Readback einen Live-PASS für die Artikelansicht dokumentieren.
