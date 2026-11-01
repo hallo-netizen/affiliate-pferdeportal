@@ -43,8 +43,13 @@ Beleg: ../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md (Nachweis, keine zweite Cu
 ## Historischer lokaler Test (20.10.2026, nicht mehr als aktueller Installationsstand)
 HD-007 1.0.0 und HD-003 1.50.704 waren frühe lokale Hobbyfinder-Tests. Die aktuelle WordPress-Liste zeigt HD-007 1.2.16 und HD-003 1.50.783. Das zentrale Hobbyregister bleibt fachliche Quelle; HD-004 bleibt read-only. Keine neue Architektur.
 
+## HD-003 Updatekandidat 01.11.2026
+
+Die Betreiberliste enthält weiter HD-003 **1.50.783 aktiv**. Eine neue vollständige **1.50.786-ZIP** enthält das freigegebene Favicon und den zwischen Suche und Kategorie-Kacheln verschobenen Banner der Anzeigenmarkt-Root-Seite. ZIP lokal 1.281/1.281 und 11/11 PHP PASS; beide persistierten Library-Kopien nach Upload erneut komplett geöffnet, Größe/SHA identisch. **Nicht live installiert**. Technische Wahrheit und Bezugswege: `../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`. Keine neue WordPress-Installation behaupten.
+
 ## ERSTER OFFENER BLOCKER
 Die echten vollständigen aktuellen Plugin-Dateien wurden nicht unabhängig mit dem WordPress-Bestand verglichen. Die 1.50.785-Datei konnte im Nachholcheck nicht als Roh-ZIP geöffnet werden. Die vollständige Campus-Ablage ist BLOCKED.
 
 ## EXAKT EINE NEXT ACTION
-Die wirklich aktive HD-003-Version 1.50.783 und den aufgefundenen Kandidaten 1.50.785 erst nach autorisiertem Rohdatei-Abruf und unabhängiger ZIP-/Versionsprüfung vergleichen. Keinen alten oder ungeprüften Stand installieren.
+
+**HD-003 1.50.786 als vollständiges Plugin über die vorhandene WordPress-Installation 1.50.783 einspielen und anschließend Favicon und Banner-Reihenfolge live ablesen.** Live-Readback nicht vorwegnehmen.
