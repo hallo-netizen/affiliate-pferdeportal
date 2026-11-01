@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-11  
-STATUS: **1.0.0 LOCAL HARD PASS / LIVE-INSTALLATION AUSSTEHEND**
+STATUS: **1.0.0 LAUT WORDPRESS-LISTE AKTIV / LOCAL HARD PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 ## Zweck
 
@@ -60,6 +60,10 @@ PASS:
 - statischer Read-only-Audit: keine Kategorie-/Term-/Page-Writes;
 - kein Provider-/DataForSEO-Pfad.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 1.0.0 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 1.0.0 ist versionsgleich, aber nicht dadurch funktional live-geprüft. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
 
-**HD-004 1.0.0 installieren und aktivieren; danach HD-001 zunächst nur deaktivieren und Live-Smoke-Test durchführen.**
+**Die schon aktive 1.0.0 read-only in der echten WordPress-Laufzeit kontrollieren (Registry und Abhängigkeiten). Keine erneute Installation und keine Deaktivierung von HD-001 nur aufgrund des älteren Testplans.**
