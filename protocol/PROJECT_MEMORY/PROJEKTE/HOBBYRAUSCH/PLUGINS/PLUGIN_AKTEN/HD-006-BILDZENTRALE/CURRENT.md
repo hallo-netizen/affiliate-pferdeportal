@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-20
-STATUS: **2.7.8 AUS BYTEGENAU VERIFIZIERTEM PFERDEATELIER-ORIGINAL 2.7.6 / LOCAL PASS / LIVE OFFEN**
+STATUS: **2.7.8 LAUT WORDPRESS-LISTE AKTIV / LOKALE QA PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-006-BILDZENTRALE`
@@ -83,6 +83,10 @@ Beibehalten:
 
 Im verifizierten Original ist kein eindeutiger Code-/UI-Block dieses Namens belegbar. Daher wurde kein allgemeiner Weg auf Verdacht gelöscht.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 2.7.8 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 2.7.8 ist versionsgleich, aber nicht dadurch funktional live-geprüft. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
 
-**2.7.8 installieren und ausschließlich sichere Einzeltests durchführen; kein Massenlauf vor Live-Readback.**
+**Die bereits aktive 2.7.8 read-only prüfen und ihre Voll-ZIP im Campus bytegenau sichern; kein neues Plugin und kein Massenlauf.**
