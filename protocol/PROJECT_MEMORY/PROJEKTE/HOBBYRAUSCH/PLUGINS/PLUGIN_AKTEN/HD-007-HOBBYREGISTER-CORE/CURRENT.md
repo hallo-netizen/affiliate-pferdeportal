@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-24
-STATUS: **1.2.16 / REGISTER-SUCHFELD BREITENFIX / AJAX UNVERÄNDERT / LIVE OFFEN**
+STATUS: **1.2.16 LAUT WORDPRESS-LISTE AKTIV / LOKALE QA PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-007-HOBBYREGISTER-CORE`
@@ -51,8 +51,13 @@ Pluginroot:
 - Fresh-Unpack bytegleich zum getesteten Stand;
 - PHP 4/4 PASS; ZIP CRC PASS; exakt ein Root `hd-hobbyregister-core/`.
 
+## WordPress-Inventarabgleich 01.11.2026
+
+Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 1.2.16 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 1.2.16 ist versionsgleich, aber nicht dadurch funktional live-geprüft. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
+
 ## EXAKT EINE NEXT ACTION
-**Nur den kanonischen Serverordner `hd-hobbyregister-core` mit dem Bundle-Ordner überschreiben. Keine `-2`/`-3`-Kopie neu erzeugen.**
+
+**Die aktive 1.2.16 read-only auf Frontend und Registrierungsfunktion prüfen; keine weitere Ordnerüberschreibung ohne aktuellen Bytevergleich.**
 
 
 ## 24.10.2026 – Bildproduktion Wiedereinstieg frisch geprüft
