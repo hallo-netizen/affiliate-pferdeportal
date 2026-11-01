@@ -1,0 +1,67 @@
+name: HD003 1.50.794 exact full plugin ZIP
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150794-binary-package-staging-20261101
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  assemble-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout plugin room
+        uses: actions/checkout@v4
+      - name: Reconstruct and verify exact approved plugin ZIP
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, hashlib, pathlib, zipfile
+          root = pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/PACKAGE_PARTS_1.50.794')
+          parts = sorted(root.glob('part_*.b64'))
+          assert len(parts) == 22, f'Expected 22 exact parts, got {len(parts)}'
+          output = pathlib.Path('HOBBY_DEPOT_HD003_1.50.794_HOVER_EXAKTE_BUTTONECKEN_VOLLPLUGIN.zip')
+          with output.open('wb') as target:
+              for part in parts:
+                  source = ''.join(part.read_text(encoding='utf-8').split())
+                  target.write(base64.b64decode(source, validate=True))
+          assert output.stat().st_size == 65700802, output.stat().st_size
+          sha256 = hashlib.sha256(output.read_bytes()).hexdigest()
+          assert sha256 == '52d7d67149ac09e22b7406ef59421ec7e4110c5d0efb11349e0f5357f8c4aa6f', sha256
+          with zipfile.ZipFile(output) as z:
+              assert len(z.infolist()) == 1290, len(z.infolist())
+              assert z.testzip() is None
+              assert 'affiliate-portal-template-kit/pferde-template-kit.php' in z.namelist() or any(n.startswith('affiliate-portal-template-kit/') and n.endswith('.php') for n in z.namelist())
+          print(f'FULL ZIP EXACT SHA256 {sha256} SIZE {output.stat().st_size} CRC PASS')
+          PY
+      - name: Publish verified ZIP as permanent GitHub release asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          file="HOBBY_DEPOT_HD003_1.50.794_HOVER_EXAKTE_BUTTONECKEN_VOLLPLUGIN.zip"
+          tag="hobby-depot-hd003-1.50.794"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --target "${GITHUB_SHA}" --title "Hobby Depot HD003 1.50.794 – freigegebenes vollständiges Plugin" --notes "Geprüftes vollständiges WordPress-Plugin. Originaldesign und Hover-Ecken freigegeben. SHA256 52d7d67149ac09e22b7406ef59421ec7e4110c5d0efb11349e0f5357f8c4aa6f."
+          fi
+          gh release upload "$tag" "$file" --clobber
+          gh release view "$tag" --json assets --jq '.assets[].name'
+      - name: Commit actual ZIP into GitHub plugin room on staging branch
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -e
+          dir="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT"
+          cp HOBBY_DEPOT_HD003_1.50.794_HOVER_EXAKTE_BUTTONECKEN_VOLLPLUGIN.zip "$dir/CURRENT.zip"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dir/CURRENT.zip"
+          git commit -m "HD003 1.50.794: save verified full plugin ZIP"
+          git push origin "HEAD:hobbyroom/hd003-150794-binary-package-staging-20261101"
+      - name: Upload additional retrievable workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobby-depot-hd003-1-50-794-full-plugin
+          path: HOBBY_DEPOT_HD003_1.50.794_HOVER_EXAKTE_BUTTONECKEN_VOLLPLUGIN.zip
+          retention-days: 90
+          if-no-files-found: error
