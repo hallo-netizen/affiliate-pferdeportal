@@ -1,0 +1,71 @@
+name: Recover Hobby Depot HD003 campus commit onto clean current base
+on:
+  push:
+    branches:
+      - hobbyroom/hobbydepot-plugin-campus-final-audit-20261102
+    paths:
+      - .github/workflows/hd003-copy-to-clean-campus-20261102.yml
+permissions:
+  contents: write
+jobs:
+  clean-branch-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Copy exactly seven authorized Hobby Depot files to fresh current campus base
+        shell: bash
+        run: |
+          set -euo pipefail
+          FROM=hobbyroom/hobbydepot-plugin-campus-final-audit-20261102
+          TO=hobbyroom/hd003-150798-campus-final-clean-20261102
+          git fetch origin "refs/heads/$FROM:refs/remotes/origin/$FROM" "refs/heads/$TO:refs/remotes/origin/$TO"
+          git checkout -B "$TO" "origin/$TO"
+          cat > /tmp/hd003-allowed-paths.txt <<'PATHS'
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/UPDATEPROTOKOLL.md
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/CURRENT_STATE.md
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md
+          protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WORDPRESS_TECHNIK/CURRENT_STATE.md
+          PATHS
+          git restore --source="origin/$FROM" --staged --worktree -- $(cat /tmp/hd003-allowed-paths.txt)
+          git diff --cached --check
+          python3 - <<'PY'
+          import pathlib,hashlib,subprocess
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/'
+          file=pathlib.Path(root+'PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          assert file.is_file() and file.stat().st_size==65702034
+          assert hashlib.sha256(file.read_bytes()).hexdigest()=='05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8'
+          changed=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          assert len(changed)==7,changed
+          assert all(s.startswith(root) for s in changed),changed
+          assert not any('PFERDE_ATELIER' in s or s.startswith('.github/') for s in changed)
+          print('PASS EXACT CLEAN SCOPE: seven Hobby Depot files, full HD003 ZIP verified')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Hobby Depot: verified HD003 1.50.798 full ZIP and one-current campus sync'
+          git push origin HEAD:"$TO"
+      - name: Independent fresh clone of clean branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/hd003-clean-verify
+          gh repo clone "$GITHUB_REPOSITORY" /tmp/hd003-clean-verify/repo -- --depth 1 --branch hobbyroom/hd003-150798-campus-final-clean-20261102 --single-branch
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          f=Path('/tmp/hd003-clean-verify/repo/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          assert f.is_file() and f.stat().st_size==65702034
+          assert hashlib.sha256(f.read_bytes()).hexdigest()=='05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8'
+          with zipfile.ZipFile(f) as z:
+            assert z.testzip() is None and len(z.namelist())==1290
+            assert 'Version: 1.50.798' in z.read('affiliate-portal-template-kit/pferde-template-kit.php').decode()
+          print('PASS independent new clone from CLEAN campus branch, complete HD003 ZIP')
+          PY
