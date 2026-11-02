@@ -5498,8 +5498,10 @@ Gate 5 gemäß HD-009-`CURRENT.md`.
 
 **NEXT ACTION:** HD-003 1.50.785 aus einer autorisierten Rohdatei-Quelle unabhängig als tatsächliches ZIP wiederabrufen, Byte-/Struktur-/Versions-/Hash-Prüfungen abschließen und erst dann die vollständige ZIP über den vorgesehenen Campus-Branch-/Freigabeweg speichern. Weitere Plugin-Ablagen nach ihren jeweiligen Einzel-Currents nachholen. Gesamtstatus **PLUGINABLAGE: BLOCKED**.
 
-## 02.11.2026 – Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)
+## 02.11.2026 – Korrektur Pluginbüro: ausschließlich Hobby-Depot-Eigenplugins
 
-Fünf vollständige, offiziell veröffentlichte Plugin-ZIP-Dateien in den zuletzt beim Betreiber erfassten Versionen wurden ab WordPress.org heruntergeladen und im bestehenden Hobby-Depot-Pluginbüro gespeichert: HivePress 1.7.31, WPForms Lite 2.0.3.1, WPvivid 0.9.136, Yoast SEO 28.7, Minimal Coming Soon & Maintenance Mode 2.45. SHA/CRC/Originalversion/Pluginroot geprüft, jeweils unveränderte Original-Downloads. Diese Pakete sind Versionssicherungen, kein authentifizierter Live-Server-Snapshot. Keine WordPress-Änderungen. Technische Dateien nur in den jeweiligen MANIFEST.md; ein aktueller Gesamtstatus nur PLUGINS/CURRENT_STATE.md.
+Auf ausdrücklichen Wunsch des Betreibers wurden die fünf zuvor irrtümlich archivierten Original-ZIP-Dateien von WordPress-Fremdplugins samt zugehörigen Manifesten wieder aus der **aktiven GitHub-Pluginablage** entfernt. Weder installierte WordPress-Plugins noch andere Projekte wurden verändert. Die damalige Einlagerung bleibt lediglich in der Git-Versionshistorie nachvollziehbar.
+
+Das Büro führt ausschließlich die von uns selbst entwickelten Hobby-Depot-Plugins einschließlich eigener Projektwerkzeuge Footer-Umzug, FAQ Frontend Fix und Performance Diagnose. HD-003 und HD-007 behalten ihre unabhängig geprüften Voll-ZIPs. Die verbliebenen Eigenplugins müssen aus ihren eigenen Originalquellen vervollständigt werden; ältere Originalversionen werden nicht als aktuelle etikettiert.
 
 ---
