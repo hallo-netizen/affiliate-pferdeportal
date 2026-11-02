@@ -1,0 +1,57 @@
+name: Hobby Depot final campus binary and artifact inventory
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-hd003-campus-final-artifact-audit.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Independent readback of officially merged plugin office and available GitHub artifact candidates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/hobby-audit
+          gh repo clone "$GITHUB_REPOSITORY" /tmp/hobby-audit/official -- --depth 1 --single-branch --branch hobbyroom/project-memory-campus-v1-20260905
+          python3 - <<'PY'
+          import hashlib,zipfile,pathlib,json
+          p=pathlib.Path('/tmp/hobby-audit/official/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          cases=[
+            ('HD-003-DESIGN-TEMPLATE-KIT','1.50.798','05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8',1290),
+            ('HD-007-HOBBYREGISTER-CORE','1.2.17','433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488',93)
+          ]
+          for label,version,sha,n in cases:
+            f=p/label/'CURRENT.zip';data=f.read_bytes()
+            assert hashlib.sha256(data).hexdigest()==sha,(label,'checksum')
+            with zipfile.ZipFile(f) as z:
+              assert z.testzip() is None and len(z.namelist())==n
+              print('CAMPUS_READBACK_PASS',label,'version',version,'size',len(data),'files',n)
+          for d in sorted(p.iterdir()):
+            if not d.is_dir():continue
+            f=d/'CURRENT.zip'
+            if f.exists():
+              with zipfile.ZipFile(f) as z:
+                ok=z.testzip() is None
+                print('CURRENT_FILE',d.name,'size',f.stat().st_size,'sha',hashlib.sha256(f.read_bytes()).hexdigest(),'entries',len(z.namelist()),'integrity',ok)
+            else: print('MISSING_CURRENT',d.name)
+          PY
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/artifacts?per_page=100" > /tmp/hobby-audit/artifacts.json
+          python3 - <<'PY'
+          import json,re
+          pages=json.load(open('/tmp/hobby-audit/artifacts.json'))
+          candidates=[]
+          total=0
+          for p in pages:
+            total+=len(p.get('artifacts') or [])
+            for a in p.get('artifacts') or []:
+              if re.search(r'hobby|hd00|kategorie|glossar|bildzentrale|faq|plugin|wpforms|hivepress',a.get('name',''),re.I):
+                candidates.append({'id':a['id'],'name':a['name'],'bytes':a['size_in_bytes'],'expired':a['expired'],'run':(a.get('workflow_run') or {}).get('id')})
+          print('GITHUB_ARTIFACTS_TOTAL',total,'RELEVANT',len(candidates))
+          for a in candidates[:120]:print('ARTIFACT',json.dumps(a,ensure_ascii=False))
+          PY
