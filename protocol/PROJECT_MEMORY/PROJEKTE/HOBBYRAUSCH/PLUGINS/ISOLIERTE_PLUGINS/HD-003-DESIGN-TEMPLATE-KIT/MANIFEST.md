@@ -12,4 +12,7 @@ Rückfallquelle: https://github.com/hallo-netizen/affiliate-pferdeportal/release
 Rollback-SHA-256: 6b4220080a551a58b7535b1b4ab79d1f0120d05025f74bdb7c6f313c32f90858.
 Testnachweis: GitHub Actions 41463137429 auf dem HD-003-Prüfzweig; Originalrelease herunterladen → Voll-ZIP/PHP prüfen → echte Campus-Datei speichern → neue unabhängige GitHub-Klonung → identisches ZIP erneut öffnen.
 Mac-Entpacknachweis: Actions 41458463056 mit macOS ditto, 1.290/1.290 Dateien byteidentisch.
+Campus-Merge: PR #602, Commit 47031716091eb72ffebe8b99524eba3a5ac7e6a7.
+Unabhängiger Abruf aus dem offiziellen Campus nach Merge: GitHub Actions 41467083409, volle ZIP und SHA/CRC/Version/1.290 Dateien PASS.
+Original-Sicherheitsprüfungen vollständig und unverändert separat PASS: GitHub Actions 41466507457.
 WordPress-Live-Byte-Prüfung: noch offen. Dieses MANIFEST ist keine zweite Status-/NEXT-ACTION-Autorität.
