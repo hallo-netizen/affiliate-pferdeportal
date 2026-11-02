@@ -1,0 +1,13 @@
+--- "a/Portal SEO Topic Engine/includes/class-pste-family-reclassification-v2.php"
++++ "b/Portal SEO Topic Engine/includes/class-pste-family-reclassification-v2.php"
+@@ -256,7 +256,9 @@
+         $targetValid=!empty($target['ok'])&&(int)($target['term_id']??0)>0&&trim((string)($target['name']??''))!==''&&trim((string)($target['slug']??''))!=='';
+         if(in_array($classification,self::APPLY_ELIGIBLE,true)&&!$targetValid){$classification='CONFLICT_REVIEW';$reason[]='PSTE_FAMILY_V2_TARGET_CATEGORY_REQUIRED_FOR_APPLY';}
+         if(($resolution['status']??'')==='NO_MATCH')foreach((array)($resolution['rejection_diagnostics']['nearest_failure_reason_codes']??['PSTE_FAMILY_V2_SUBJECT_HEAD_MISSING']) as $failure)$reason[]='PSTE_FAMILY_V2_FAILED_STAGE_'.preg_replace('/^PSTE_FAMILY_V2_/','',(string)$failure);
+-        $recheckCandidate=$payload;if($newKey!==''){$recheckCandidate['topic_family_key']=$newKey;$recheckCandidate['topic_family_name']=(string)($newFamily['topic_family_name']??'');}if($targetValid){$recheckCandidate['target_category_id']=(int)$target['term_id'];$recheckCandidate['target_category_name']=(string)$target['name'];$recheckCandidate['target_category_slug']=(string)$target['slug'];$recheckCandidate['proposed_article_type']=$articleType;}$cannibalization=class_exists('PSTE_Cannibalization')?PSTE_Cannibalization::decide($recheckCandidate,$inventoryItems,$categoryItems):['decision'=>'NOT_EXECUTED','reason_codes'=>['PSTE_CANNIBALIZATION_CLASS_NOT_LOADED'],'matches'=>[]];
++        // Family reclassification never owns article-coverage decisions.
++        // Reentry through normal planning makes the only binding decision.
++        $cannibalization=['decision'=>'NOT_EXECUTED','reason_codes'=>['PSTE_FAMILY_V2_CANNIBALIZATION_DEFERRED_TO_PLANNING_OWNER'],'matches'=>[]];
+         $before=self::stringifyRow($row);$eligible=in_array($classification,self::APPLY_ELIGIBLE,true)&&!$manual&&$newKey!==''&&$targetValid;
+         $changeId=hash('sha256',(string)($row['pool_key']??'').'|'.self::hash($before).'|'.$classification.'|'.$newKey.'|'.(string)($target['term_id']??0));
+         return [
