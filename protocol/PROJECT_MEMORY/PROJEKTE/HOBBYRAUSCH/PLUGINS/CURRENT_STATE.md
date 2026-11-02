@@ -17,7 +17,7 @@ Letztes vollständiges WordPress-Inventar des Betreibers vom 01.11.2026: 15 akti
 - HD-008-ANZEIGENFUELLER: 1.0.0 Kandidat, nicht aktiv belegt, bisher gleiche Plugin-ID wie SEO; nicht ohne ID-Klärung freigeben. BLOCKED.
 - HD-009-AFFILIATE-ZENTRALE: 0.1.7-dev laut WordPress aktiv; vorhandene Campus-CURRENT.zip enthält nur 0.1.2-dev und ist NICHT aktuell. BLOCKED, keinen Downgrade.
 
-Weitere sieben? Nein: Im letzten WordPress-Snapshot stehen zusätzlich die sieben Einträge Footer-Umzug – Portale 1.1.1, HivePress 1.7.31, FAQ Frontend Fix 1.0.2, Performance Diagnose 1.1.0, Minimal Coming Soon & Maintenance Mode 2.45, WPForms Lite 2.0.3.1, WPvivid Backup Plugin 0.9.136 sowie Yoast SEO 28.7, also **acht zusätzliche Werkzeuge und Drittanbieter**. Keine unabhängigen aktuellen Voll-ZIPs dieser acht sind im HOBBYRAUSCH-Pluginbüro belegt. Auch sie sind für die geforderte vollständige Campus-Gesamtablage BLOCKED.
+Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zusätzlich die Einträge Footer-Umzug – Portale 1.1.1, HivePress 1.7.31, FAQ Frontend Fix 1.0.2, Performance Diagnose 1.1.0, Minimal Coming Soon & Maintenance Mode 2.45, WPForms Lite 2.0.3.1, WPvivid Backup Plugin 0.9.136 sowie Yoast SEO 28.7, also **acht zusätzliche Werkzeuge und Drittanbieter**. Keine unabhängigen aktuellen Voll-ZIPs dieser acht sind im HOBBYRAUSCH-Pluginbüro belegt. Auch sie sind für die geforderte vollständige Campus-Gesamtablage BLOCKED.
 
 ## Geprüfte Quellen / Grenzen
 
