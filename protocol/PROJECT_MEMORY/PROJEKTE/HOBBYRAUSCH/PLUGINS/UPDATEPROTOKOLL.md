@@ -5513,3 +5513,7 @@ Exakt 9.083 Originalbytes aus dem früher ausgelieferten vollständigen ZIP-Pake
 ## 02.11.2026 – HD-004 1.0.0 und FAQ 1.0.2 echte Original-Voll-ZIPs
 
 Exakt früher ausgelieferte vollständige Binärpakete HD-004/Kategorie-Kern 1.0.0 (3.736 Bytes) und FAQ Frontend Fix 1.0.2 (6.193 Bytes) aus Gesprächsdateien erneut geladen. Original-Pluginheader, ZIP-CRC, Größen und SHA-256 lokal PASS. Die Binärdateien wurden ohne Neukompilierung/Neupacken als Git-Originalblobs ins bestehende Hobby-Depot-Pluginbüro übertragen; die Git-Blob-SHA1 stimmt in beiden Fällen mit dem lokal berechneten Original exakt überein. Einzel-Manifeste und Inventar aktualisiert. Keine WordPress-Installation, keine Fremdplugins, keine Änderung an anderen Projekten. Weitere Originale HD-001 1.14.17 und Bildzentrale 2.7.8 sind lokal gefunden und geprüft; ihre GitHub-Binärübernahme ist weiterhin offen.
+
+## 02.11.2026 – Harte Regel: Nur aktuelle Eigenplugin-Pakete
+
+Auf ausdrückliche Weisung wurden die veralteten Dateien HD-009 `CURRENT.zip` (0.1.2-dev) und `MANIFEST.md` aus der aktiven Pluginablage gelöscht. Aktuelle nach WordPress-Inventar zuletzt als aktiv gemeldete HD-009-Version ist 0.1.7-dev. Das echte frühere 0.1.7-dev-Downloadpaket wurde in der persönlichen Dateiablage gefunden, ließ sich aber nicht als vollständiger Rohdaten-Download für GitHub öffnen. Keine frühere Version fälschlich zu CURRENT erklären, kein Plugin ausgedacht oder neu zusammengesetzt. Alle übrigen aktuellen Eigenplugin-ZIPs unangetastet; keine Drittanbieter.

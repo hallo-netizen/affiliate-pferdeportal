@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-01
-STATUS: **0.1.7-dev LAUT WORDPRESS-LISTE AKTIV / 0.1.2-dev IST ÄLTERER CAMPUS-TESTKANDIDAT / 0.1.7-dev UNGEPRÜFT / KEIN LIVE-FUNKTIONSPASS**
+STATUS: **0.1.7-dev LAUT WORDPRESS-LISTE AKTIV. AKTUELLE VOLLPACKUNG IM CAMPUS NOCH NICHT GESICHERT. ALTE 0.1.2-dev-CURRENT.zip MIT MANIFEST AUS DEM AKTIVEN PLUGINBÜRO ENTFERNT.**
 
 Plugin-ID: HD-009-AFFILIATE-ZENTRALE
 Name: Hobby Depot Affiliate-Zentrale
@@ -54,7 +54,7 @@ Ein späterer Live-Transfer bestehender Zugangsdaten ist ein separater Laufzeit-
 ## Freigegebener technischer Kandidatenstand
 
 - Installationskandidat vorhanden;
-- isoliertes `CURRENT.zip` vorhanden;
+- historisches 0.1.2-dev-CURRENT.zip seit dem 02.11.2026 ausdrücklich aus dem aktuellen Pluginbüro entfernt;
 - `MANIFEST.md` + `EVIDENCE_GATE5_20261026.md` vorhanden;
 - GitHub-Actions-Lauf `40372683116`: SUCCESS;
 - Kandidat: `0.1.2-dev`;
