@@ -1,0 +1,244 @@
+diff -U0 -rN "original/Portal SEO Topic Engine/includes/class-pste-admin.php" "source/Portal SEO Topic Engine/includes/class-pste-admin.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-11-02 09:52:08.000000000 +0000
++++ "source/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-11-02 11:47:30.246393896 +0000
+@@ -1852,7 +1851,0 @@
+-                if(!empty($state['category_recovery_origin'])
+-                    &&($result['status']??'')==='FORWARDED'
+-                    &&($result['next_owner']??'')==='CATEGORY_OWNER_OPEN'
+-                    &&empty($result['category_room_stored'])
+-                    &&empty($result['category_assigned']))
+-                    $result=['status'=>'BLOCKED','pool_key'=>$key,
+-                        'error_code'=>'PSTE_CATEGORY_RECOVERY_ROOM_NOT_STORED'];
+@@ -1925,5 +1917,0 @@
+-        $gateReasons=(array)($gate['reason_codes']??[]);
+-        $pre=(array)($gate['pre_title_duplicate_gate']['reason_codes']??[]);
+-        $duplicateEvidence=!empty($gate)&&empty($gate['ok'])
+-            &&($pre||array_filter($gateReasons,static fn($r)=>is_string($r)&&(
+-                str_contains($r,'DUPLICAT')||str_contains($r,'CANNIBAL')||str_contains($r,'EXISTING_SEO_KEYWORD'))));
+@@ -1934,2 +1922,9 @@
+-        if($duplicateEvidence)return 'CANNIBALIZATION_ALREADY_BLOCKED';
+-        if(in_array($planning,['YES','PROVISIONAL'],true)&&in_array($context,['CURRENT','NOT_REQUIRED'],true))return 'PSERC_PLAN_READY';
++        // One routing rule: only the planning owner's FINAL, current PASS can
++        // reach PSERC. A historical duplicate block, missing/invalid receipt or
++        // PROVISIONAL status goes to that SAME owner for a current verdict.
++        // PSERC's stored candidate reader also accepts YES, never PROVISIONAL.
++        if($planning==='YES'&&in_array($context,['CURRENT','NOT_REQUIRED'],true)
++            &&($gate['contract']??'')===PSTE_Planning_Readiness_Gate::CONTRACT
++            &&!empty($gate['ok'])
++            &&(string)($payload['textmachine_handoff_status']??'')==='READY_FOR_COMPILER_CAPABILITY_CHECK')
++            return 'PSERC_PLAN_READY';
+@@ -2031 +2026,7 @@
+-            return ['status'=>'FORWARDED','pool_key'=>$poolKey,'next_owner'=>$next,
++            // Only an actually stored category-room admission or an already
++            // completed plan may be reported as forwarded. Every other unfinished
++            // owner remains visible as HELD; the queue never invents a handoff.
++            $forwarded=$next==='PSERC_PLAN_READY'||($next==='CATEGORY_OWNER_OPEN'&&$categoryRoomStored);
++            return ['status'=>$forwarded?'FORWARDED':'HELD',
++                'error_code'=>$forwarded?'':'PSTE_TITLE_DESK_'. $next.'_HELD',
++                'pool_key'=>$poolKey,'next_owner'=>$next,
+diff -U0 -rN "original/Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php" "source/Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php"	2026-11-02 09:52:08.000000000 +0000
++++ "source/Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php"	2026-11-02 11:47:30.246835501 +0000
+@@ -61 +61 @@
+-    /** Apply only readiness metadata/decision state; never mutate SEO bindings or title surface. */
++    /** Re-evaluate ONLY this owner's coverage decision; never inherit its old blocks. */
+@@ -63,0 +64,32 @@
++        $previous=(array)($candidate['planning_readiness_gate']??[]);
++        $prior=(array)($previous['prior_owner_fields']??[]);
++        $identity=hash('sha256',json_encode($before,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
++        $oldGateOwned=!empty($previous)&&($previous['contract']??'')===self::CONTRACT
++            &&empty($previous['ok'])&&!empty($prior)
++            &&hash_equals($identity,(string)($prior['binding_sha256']??''))
++            &&(string)($candidate['decision']??'')==='BLOCKED'
++            &&!empty($candidate['human_review_required'])&&!empty($candidate['discovery_only'])
++            &&(string)($candidate['candidate_role']??'')==='DISCOVERY_PROBE';
++        if($oldGateOwned){
++            // Restore only fields this gate overrode. Preserve new independent
++            // security errors and all original decisions/keyword/title bindings.
++            foreach(['decision','human_review_required','discovery_only','candidate_role'] as $field){
++                if(array_key_exists($field,$prior))$candidate[$field]=$prior[$field];
++            }
++            $currentReasons=array_values(array_map('strval',(array)($candidate['reason_codes']??[])));
++            $oldGateReasons=array_values(array_map('strval',(array)($previous['reason_codes']??[])));
++            $ownBase=(array)($prior['reason_codes']??[]);
++            $candidate['reason_codes']=array_values(array_unique(array_merge(
++                $ownBase,array_values(array_diff($currentReasons,$oldGateReasons))
++            )));
++        }
++        // A gate may not take over another owner's rejection. If its last result
++        // no longer matches its own stored receipt, the old block remains.
++        $ownerFields=$oldGateOwned?$prior:[
++            'binding_sha256'=>$identity,
++            'decision'=>(string)($candidate['decision']??''),
++            'human_review_required'=>!empty($candidate['human_review_required']),
++            'discovery_only'=>!empty($candidate['discovery_only']),
++            'candidate_role'=>(string)($candidate['candidate_role']??''),
++            'reason_codes'=>array_values(array_map('strval',(array)($candidate['reason_codes']??[]))),
++        ];
+@@ -64,0 +97 @@
++        $gate['prior_owner_fields']=$ownerFields;
+@@ -68,3 +101,2 @@
+-        // Preserve the same diagnostic evidence on PASS and BLOCKED paths. The shared gate owns
+-        // duplicate/cannibalization evidence, but never SEO bindings, title wording or content.
+-        $candidate['reason_codes']=array_values(array_unique(array_merge((array)($candidate['reason_codes']??[]),(array)$gate['reason_codes'])));
++        $candidate['reason_codes']=array_values(array_unique(array_merge(
++            (array)($candidate['reason_codes']??[]),(array)$gate['reason_codes'])));
+@@ -73 +105,3 @@
+-            $candidate['human_review_required']=true;$candidate['discovery_only']=true;$candidate['candidate_role']='DISCOVERY_PROBE';
++            $candidate['human_review_required']=true;
++            $candidate['discovery_only']=true;
++            $candidate['candidate_role']='DISCOVERY_PROBE';
+@@ -75,2 +109 @@
+-        $after=self::bindingSnapshot($candidate);
+-        if($before!==$after)throw new RuntimeException('PSTE_PLANNING_READINESS_GATE_BINDING_DRIFT');
++        if($before!==self::bindingSnapshot($candidate))throw new RuntimeException('PSTE_PLANNING_READINESS_GATE_BINDING_DRIFT');
+diff -U0 -rN "original/Portal SEO Topic Engine/includes/class-pste-repository.php" "source/Portal SEO Topic Engine/includes/class-pste-repository.php"
+--- "original/Portal SEO Topic Engine/includes/class-pste-repository.php"	2026-11-02 09:52:08.000000000 +0000
++++ "source/Portal SEO Topic Engine/includes/class-pste-repository.php"	2026-11-02 11:50:05.270151028 +0000
+@@ -1862,0 +1863,2 @@
++        if(trim((string)($payload['topic_family_key']??''))==='')
++            return ['status'=>'BLOCKED','reason_code'=>'PSTE_STORED_PLAN_FAMILY_MISSING'];
+@@ -1917,0 +1920,7 @@
++        // Context-only coverage notes belong to the retired second verdict.
++        // The one current planning gate below owns all duplicate decisions.
++        $payload['reason_codes']=array_values(array_diff(
++            (array)($payload['reason_codes']??[]),
++            ['ANSWER_EQUIVALENT_EXISTING','ANSWER_EQUIVALENT_PLANNED',
++             'CONTEXT_REFRESH_FAILED','CONTEXT_REFRESH_STALE',
++             'CONTEXT_FAMILY_MISSING','PSTE_CONTEXT_QUERY_MISSING']));
+@@ -1921 +1930 @@
+-            $existing[]=array_merge($planned,['status'=>'draft','source'=>'EDITORIAL_PLAN_READ_ONLY','post_id'=>0]);
++            $existing[]=array_merge($planned,['status'=>'draft','source'=>'EDITORIAL_PLAN','post_id'=>0]);
+@@ -1925,6 +1934,13 @@
+-        // The context reader recognizes already-covered articles and plans, but
+-        // it must not re-run any classification owner.
+-        $context=PSTE_Context_Evaluator::evaluate($candidate,$inventory,$plan,
+-            PSTE_Context_Evaluator::buildIndex($inventory,$plan));
+-        $candidate=(array)$context['payload'];
+-        $contextState=(string)($context['state']??'BLOCKED');
++        // The planning gate above is the ONE coverage/cannibalization owner for
++        // both existing WordPress articles and the editorial plan. A second
++        // Context_Evaluator scan here used to decide the SAME coverage again.
++        // Keep the bound context receipt for readback, using the gate's own
++        // matches instead of repeating the comparison.
++        $candidate['portal_context']=[
++            'inventory_snapshot_sha256'=>(string)($inventory['sha256']??''),
++            'editorial_plan_snapshot_sha256'=>(string)($plan['sha256']??'NOT_AVAILABLE'),
++            'editorial_plan_status'=>(string)($plan['status']??'AVAILABLE'),
++            'matches'=>array_slice((array)($candidate['planning_readiness_gate']['matches']??[]),0,20),
++            'synced_at_utc'=>gmdate('c'),
++        ];
++        $contextState='CURRENT'; // source/family/structure/snapshots checked above
+@@ -1940,0 +1957,9 @@
++        // The category gap held this exact five-field handoff before the
++        // category existed. Only this planning owner may retire that HOLD,
++        // after its own current inventory and duplicate verdict succeeds.
++        // Preserve every other hold (missing contract, quarantine, manual etc.).
++        if($planning==='YES' && $contextState==='CURRENT'
++            && (string)($candidate['textmachine_handoff_status']??'')==='BLOCKED_BEFORE_COMPILER'
++            && (array)($candidate['metadata_handoff_fields']??[])===['title','target_keyword','category','article_type','plan_slot']){
++            $candidate['textmachine_handoff_status']='READY_FOR_COMPILER_CAPABILITY_CHECK';
++        }
+@@ -2439,0 +2465,8 @@
++    /** One K0 routing decision for both the compiler count and its bounded reader.
++     * A corrupt READY row must never be skipped by one reader and emitted by the other. */
++    private static function compilerStoredK0Route(string $json): bool {
++        $candidate=json_decode($json,true);
++        if(!is_array($candidate))throw new RuntimeException('PSTE_COMPILER_READY_TOPIC_PAYLOAD_INVALID');
++        return self::workflowRouteForCandidate($candidate)==='K0';
++    }
++
+@@ -2446 +2479 @@
+-            foreach((array)$rows as $row){$after=max($after,(int)($row['id']??0));$payload=json_decode((string)($row['payload_json']??''),true);if(!is_array($payload))continue;if(self::workflowRouteForCandidate($payload)==='K0')$count++;}
++            foreach((array)$rows as $row){$after=max($after,(int)($row['id']??0));if(self::compilerStoredK0Route((string)($row['payload_json']??'')))$count++;}
+@@ -2458,2 +2491,5 @@
+-        $cursorTime=trim((string)($cursor['last_seen_at']??''));$cursorId=max(0,(int)($cursor['id']??0));$clauses=["planning_suitability='YES'","context_state IN ('CURRENT','NOT_REQUIRED')"];
+-        if($cursorTime!=='')$clauses[]=$wpdb->prepare('(last_seen_at < %s OR (last_seen_at = %s AND id < %d))',$cursorTime,$cursorTime,$cursorId);
++        $cursorId=max(0,(int)($cursor['id']??0));$clauses=["planning_suitability='YES'","context_state IN ('CURRENT','NOT_REQUIRED')"];
++        // The edit timestamp is mutable: using it as a cursor can silently drop
++        // a title when another request updates that row between compiler pages.
++        // The existing primary key is immutable and needs no extra query/table.
++        if($cursorId>0)$clauses[]=$wpdb->prepare('id < %d',$cursorId);
+@@ -2463 +2499 @@
+-        $rows=$wpdb->get_results("SELECT * FROM $table$where ORDER BY last_seen_at DESC,id DESC LIMIT ".(int)$limit,ARRAY_A);
++        $rows=$wpdb->get_results("SELECT * FROM $table$where ORDER BY id DESC LIMIT ".(int)$limit,ARRAY_A);
+@@ -2467 +2503 @@
+-            $rawPayload=json_decode((string)($row['payload_json']??''),true);if(is_array($rawPayload)&&self::workflowRouteForCandidate($rawPayload)!=='K0'){$skippedShort++;continue;}
++            if(!self::compilerStoredK0Route((string)($row['payload_json']??''))){$skippedShort++;continue;}
+@@ -3415,0 +3452,12 @@
++        $binding=(array)($index['__pste_context_index_binding']??[]);
++        if($binding){
++            if(!class_exists('PSTE_Context_Index_Store'))
++                throw new RuntimeException('PSTE_CONTEXT_INDEX_STORE_NOT_LOADED');
++            $inventory=PSTE_Context_Index_Store::inventorySnapshot($binding);
++            // The staged plan is deliberately not kept after index creation;
++            // capture one current, independently hash-bound plan per batch.
++            $currentPlan=PSTE_Snapshot::editorialPlan();
++            if((string)($currentPlan['sha256']??'')!==(string)($plan['sha256']??''))
++                throw new RuntimeException('PSTE_CONTEXT_PLAN_SNAPSHOT_CHANGED');
++            $plan=$currentPlan;
++        }
+@@ -3459,2 +3507,3 @@
+-        if(!self::contextHasReusableOwnerDecision($row,$payload,$structureHash)
+-            ||(string)($payload['normal_metadata_path']['status']??'')!=='NORMAL_PASS'){
++        if((string)($row['manual_status']??'')!==''
++            &&(!self::contextHasReusableOwnerDecision($row,$payload,$structureHash)
++                ||(string)($payload['normal_metadata_path']['status']??'')!=='NORMAL_PASS')){
+@@ -3475 +3524,2 @@
+-        if(is_array($index['__pste_context_index_binding']??null)){
++        if((string)($row['manual_status']??'')!==''
++            &&is_array($index['__pste_context_index_binding']??null)){
+@@ -3479,2 +3529,26 @@
+-        $evaluation=PSTE_Context_Evaluator::evaluate($payload,$inventory,$plan,$rowIndex);
+-        $payload=(array)$evaluation['payload'];
++        if((string)($row['manual_status']??'')===''){
++            // Only the existing planning owner may decide article coverage. It
++            // checks the COMPLETE bound WordPress inventory and editorial plan,
++            // not merely one family shard. Context never grants a second PASS.
++            $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++            $decision=self::storedCategoryPlanningDecision($row,$inventory,$plan,
++                is_array($baseline)?$baseline:[]);
++            if(!in_array((string)($decision['status']??''),['PLAN_READY','HELD'],true)){
++                self::checkedUpdate(self::table('topic_pool'),
++                    ['context_state'=>'BLOCKED','planning_suitability'=>'BLOCKED',
++                     'context_synced_at'=>gmdate('Y-m-d H:i:s')],
++                    ['pool_key'=>$topicKey],['%s','%s','%s'],['%s'],
++                    'PSTE_CONTEXT_STORED_PLANNING_OWNER_BLOCKED');
++                self::assertPoolContextPersisted($topicKey,'BLOCKED');
++                return;
++            }
++            $payload=(array)$decision['payload'];
++            $evaluation=['state'=>(string)$decision['context_state'],
++                'matches'=>(array)($payload['portal_context']['matches']??[]),
++                'payload'=>$payload];
++        }else{
++            // A manual owner is not overruled by the automatic planning owner.
++            // Keep its original read-only reporting path.
++            $evaluation=PSTE_Context_Evaluator::evaluate($payload,$inventory,$plan,$rowIndex);
++            $payload=(array)$evaluation['payload'];
++        }
+@@ -3501,9 +3575,13 @@
+-        $automatic=self::automaticPoolStatus($payload);
+-        $payload['automatic_pool_status']=$automatic;
+-        $effective=(string)(($row['manual_status']??'')!==''?$row['manual_status']:$automatic);
+-        // Exactly one role owner call on an automatic context update. Manual
+-        // decisions keep their recorded role; a missing manual role is derived once.
+-        $role=(string)($row['manual_status']??'')===''
+-            ? PSTE_Topic_Policy::classifyRole($payload)
+-            : (string)($row['topic_role']??PSTE_Topic_Policy::classifyRole($payload));
+-        $planning=PSTE_Topic_Policy::planningSuitability(array_merge($payload,['topic_role'=>$role]),$effective,'CURRENT');
++        if((string)($row['manual_status']??'')===''){
++            // Read the one bound planning verdict; do not classify a second time.
++            $automatic=(string)$decision['automatic_pool_status'];
++            $role=(string)$decision['topic_role'];
++            $planning=(string)$decision['planning_suitability'];
++        }else{
++            $automatic=self::automaticPoolStatus($payload);
++            $payload['automatic_pool_status']=$automatic;
++            $effective=(string)$row['manual_status'];
++            $role=(string)($row['topic_role']??PSTE_Topic_Policy::classifyRole($payload));
++            $planning=PSTE_Topic_Policy::planningSuitability(
++                array_merge($payload,['topic_role'=>$role]),$effective,'CURRENT');
++        }
+@@ -3522,0 +3601 @@
++            if($source==='EDITORIAL_PLAN_READ_ONLY')$source='EDITORIAL_PLAN';
