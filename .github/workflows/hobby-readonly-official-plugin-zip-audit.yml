@@ -1,0 +1,41 @@
+name: Hobby Depot official third party plugin original ZIP read only
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-readonly-official-plugin-zip-audit.yml]
+permissions:
+  contents: read
+jobs:
+  official:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify complete official-version ZIPs without installing or altering WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import urllib.request,pathlib,zipfile,re,hashlib
+          base=pathlib.Path('/tmp/hobby-official');base.mkdir(exist_ok=True)
+          names={'hivepress':'1.7.31','wpforms-lite':'2.0.3.1','wpvivid-backuprestore':'0.9.136','wordpress-seo':'28.7','minimal-coming-soon-maintenance-mode':'2.45'}
+          for slug,ver in names.items():
+            url='https://downloads.wordpress.org/plugin/'+slug+'.'+ver+'.zip'
+            path=base/(slug+'.zip')
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=45) as resp:path.write_bytes(resp.read())
+              with zipfile.ZipFile(path) as z:
+                assert z.testzip() is None
+                entries=z.namelist()
+                assert entries and all(x.startswith(slug+'/') for x in entries)
+                candidates=[]
+                for f in entries:
+                  if not f.endswith('.php') or f.count('/')>2:continue
+                  data=z.read(f)[:8000].decode('utf-8',errors='replace')
+                  m=re.search(r'(?mi)^\s*\*?\s*Version:\s*([0-9][\w.\-]*)',data)
+                  n=re.search(r'(?mi)^\s*\*?\s*Plugin Name:\s*(.*)',data)
+                  if m and n:candidates.append((f,m.group(1),n.group(1)))
+                matches=[x for x in candidates if x[1]==ver]
+                if not matches:raise ValueError('NO EXACT VERSION FOUND: '+str(candidates[:8]))
+                print('EXACT_OFFICIAL_ZIP_PASS',slug,ver,'bytes',len(path.read_bytes()),'files',len(entries),'sha',hashlib.sha256(path.read_bytes()).hexdigest(),'main',matches[:3],'source',url,flush=True)
+            except Exception as e:print('OFFICIAL_UNAVAILABLE',slug,ver,type(e).__name__,str(e)[:350],flush=True)
+          PY
