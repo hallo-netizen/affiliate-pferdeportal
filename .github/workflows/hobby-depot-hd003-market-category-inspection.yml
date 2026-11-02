@@ -1,0 +1,34 @@
+name: Hobby Depot HD003 category archive inspection
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150798-market-category-design-20261102
+    paths:
+      - .github/workflows/hobby-depot-hd003-market-category-inspection.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get exact current plugin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p input
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' --dir input
+      - name: Identify exact category and marketplace styling hooks
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib
+          p='input/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip'
+          with zipfile.ZipFile(p) as z:
+            for f in z.namelist():
+              if not f.endswith('.php'):continue
+              s=z.read(f).decode('utf-8',errors='replace')
+              lines=s.splitlines()
+              for i,line in enumerate(lines):
+                if re.search(r'listing_category|listing-category|hp_listing_category|hivepress|is_market|market.*(render|body|template|style|category)|marketplace',line,re.I):
+                  print("MATCH|%s|%d|%s"%(f,i+1,line[:210].strip()))
+          PY
