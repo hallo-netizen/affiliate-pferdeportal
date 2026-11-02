@@ -1,0 +1,71 @@
+name: Hobby Depot all own plugin original sources recovery audit
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-own-all-original-lookup.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find original own plugin artifacts releases and source trees - read only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,subprocess,re,concurrent.futures
+          repo='hallo-netizen/affiliate-pferdeportal'
+          def api(url):
+            try:
+              r=subprocess.run(['gh','api',url],capture_output=True,text=True,timeout=30)
+              return json.loads(r.stdout) if r.returncode==0 else {}
+            except Exception:return {}
+          arts=[]
+          for page in range(1,11):
+            result=api('repos/'+repo+'/actions/artifacts?per_page=100&page='+str(page))
+            items=result.get('artifacts',[])
+            arts+=items
+            if len(items)<100:break
+          rx=re.compile(r'hobby|kategorie|category|workflow|glossar|bild|photo|image|faq|footer|performance|diagnose|hd00|plugin|affiliate|seo|source|original|hobby-depot|kategorien',re.I)
+          picked=[x for x in arts if rx.search(x.get('name',''))]
+          print('ARTIFACT_COUNTS',len(arts),len(picked),flush=True)
+          for x in picked:
+            print('ARTIFACT_NAME',x['id'],x['name'],x['size_in_bytes'],'expired',x['expired'],'run',x['workflow_run']['id'],flush=True)
+          releases=[]
+          for page in range(1,11):
+            result=api('repos/'+repo+'/releases?per_page=100&page='+str(page))
+            if not isinstance(result,list):break
+            releases+=result
+            if len(result)<100:break
+          print('RELEASE_COUNTS',len(releases),flush=True)
+          for x in releases:
+            tag=x.get('tag_name','')
+            names=';'.join(a.get('name','') for a in x.get('assets',[]))
+            if rx.search(tag+' '+names):
+              print('RELEASE_CANDIDATE',tag,names[:900],flush=True)
+          raw=subprocess.check_output(['git','ls-remote','--heads','origin'],text=True,timeout=60)
+          allrefs=[(s.split()[0],s.split()[1].replace('refs/heads/','')) for s in raw.splitlines()]
+          def source_branch(rec):
+            sha,branch=rec
+            if re.search(r'(?i)^affiliate|pferde|k0-|k[1-9]-|sicherheits|guard|hardlock',branch):return (branch,[])
+            tree=api('repos/'+repo+'/git/trees/'+sha+'?recursive=1')
+            hits=[]
+            for item in tree.get('tree',[]):
+              if item.get('type')!='blob':continue
+              p=item['path'];low=p.lower()
+              if low.endswith(('.zip','.php','.py')) and re.search(r'hobby|bildzentrale|glossar|kategorie-kern|kategorie-workflow|faq-frontend|footer-umzug|performance-diagnose|hobby-depot|hobbyregister|hd00',low):
+                if low.startswith('protocol/project_memory/projekte/pferde_atelier/') or low.startswith('release/affiliate'):continue
+                hits.append(p+'|'+str(item.get('size',0)))
+            return (branch,hits)
+          with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+            items=list(pool.map(source_branch,allrefs))
+          print('SCANNED_BRANCHES',len(items),flush=True)
+          for branch,hits in items:
+            interesting=[h for h in hits if not re.search(r'/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip|/HD-007-HOBBYREGISTER-CORE/CURRENT.zip|/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip|^protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/PLUGIN/ORIGINAL/',h,re.I)]
+            if interesting: print('SOURCE_BRANCH',branch,'::','; '.join(interesting[:35])[:2600],flush=True)
+          PY
