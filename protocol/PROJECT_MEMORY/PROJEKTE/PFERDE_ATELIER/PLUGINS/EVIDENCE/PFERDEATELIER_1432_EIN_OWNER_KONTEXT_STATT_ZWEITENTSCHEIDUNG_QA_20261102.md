@@ -1,0 +1,25 @@
+# Pferdeatelier – tatsächliche KISS-Konsolidierung Context → ein Planning-Owner (02.11.2026)
+
+**QA-Quellstand, kein Plugininstaller, keine WordPress-/K0-/LIVE-Freigabe.**
+
+## Physischer Ursprung und unveränderte Anzahl Plugin-Dateien
+- Echte bereits aus der vorhandenen Library gelesene komplette PSTE 0.57.143.2, ZIP-SHA256 `d75922e84ca0ab8c68937bdef061510abd9f206beb40dbb5d3682b44d99008ea`.
+- Ein kumulierter QA-Patch unter bestehender `/Pferdeatelier/TempVerify/PFERDEATELIER_PSTE_1432_EIN_ZENTRALER_OWNER_GESAMT_QA_20261102.patch`; SHA256 `223d4c6bfda8157c334a8e1785622da591e7cb1722edc3dbc9eef71b5651366c`.
+- **116/116 Originaldateien erhalten, genau 5 vorhandene PHP-Dateien geändert, 111 bytegleich**, alle 78 PHP-Syntax-PASS. Der Patch wurde auf eine neue unveränderte Original-ZIP mit `patch -p1 --fuzz=0` tatsächlich angewendet; **116/116 byteidentisch** zur lokal geprüften Arbeitskopie. Die bereits zuvor geprüfte PSERC-0.28.52-Quellkopie bleibt separat und unverändert, originaler signierter PSERC-Build wird nicht unkontrolliert bearbeitet.
+
+## Zuständigkeit und geänderte Produktionswege
+1. `PSTE_Context_Evaluator` betrachtet vorhandene/geplante Titel und Überschriften **nur noch als Vorschläge/Ähnlichkeitshinweise**. Seine eigenen `ANSWER_EQUIVALENT_EXISTING`/`ANSWER_EQUIVALENT_PLANNED`-Veto-Entscheidungen samt eigenem `PSTE_Normalizer::answerEquivalent` sind entfernt. Ursprüngliches Recherchekeyword statt sprachlich geändertem Titel ist die Eingabe. Veraltete Kontext-Zweitmarker werden aus der neu geprüften Kopie gestrichen; andere Sperrgründe bleiben.
+2. `PSTE_Repository::refreshPortalContextBatch` benutzt den **existierenden** quellengebundenen WordPress-/Editorialplan-Snapshot einmal je bereits vorhandenes kleines Kontextpaket (aktuell 5 Themen) und ruft bei zulässigem Kontext den **einen** `PSTE_Planning_Readiness_Gate::apply` vor persistierter Planung/Rolle auf. Die vorhandene gemeinsame Planprojektion schließt alle Kategorien ein. Keine neue Tabelle, kein Worker, keine zusätzliche WordPress-Artikelsuche pro Thema; bei geänderter oder fehlender Quellen-/Strukturbindung fail-closed.
+3. Die zuvor zusammengefasste PSTE-Compilerquellenfrische und lokale PSERC-Abschluss-/Produktionsstart-Frischeprüfung bleiben im selben fortgesetzten QA-Arbeitsstand. Eindeutige importierte Upstream-Owner-Identitäten bleiben geschützt. Die exportierte `PSTE_Article_Ownership_Gate::evaluate` hat noch einen Legacy-Keywordvergleich; in den aktuell verfügbaren PSERC-Quellen ist kein direkter normaler Laufaufruf auf `PSTE_Compiler_Read_Capability::validateEditorialOwnership` zu sehen, also keine blinde Änderung dieser optionalen externen API.
+
+## Ausgeführte Tests mit echtem Quellcode und ausdrücklich benannten Grenzen
+- **8/8** vorhandene PHP-Regressionen PASS; eine Diagnose erwartete noch die zuvor absichtlich reproduzierte doppelte Kontextentscheidung, diese Test-Erwartung wurde *in der isolierten QA-Kopie* an den jetzt geforderten EIN-Owner-Vertrag angepasst, Originaltests unberührt.
+- **15** neue reine PHP-Positiv-/Negativfälle PASS: andere Kategorie als geplanter Doppelartikel, Kontextvermerk nicht mehr blockierend, unabhängige Fehler weiterhin vorhanden, zentrale Entscheidung sperrt wirklich.
+- **Tatsächlich ausgeführtes Repository-Kontextpaket** mit synthetischen WP-Zeilen und simulierten Schreib-Methoden: unbelegter Rohinhalt bleibt blockiert; falscher Strukturbeleg stoppt vor Schreibzugriff. Beweis nur für fail-closed Negativfall, nicht für reale WordPress-Produktion.
+- **5.014 synthetische Artikelthemen** durch die unveränderten echten PHP-Entscheider: 51 gezielt eingebettete Dubletten vom einen Gate blockiert, 0 Kontext-Zweitveto, keine Provideraufrufe, etwa 0,6–0,7 Sekunden CPU-Lokaltest *ohne* MySQL-Overhead. Das ist nicht der komplette WordPress-Context-Job.
+- **38 bestehende Gesamttestpunkte** mit wirklich lokal geschriebener, sprachlich bearbeiteter und von Disk wieder eingelesener Titel-JSON; Import nur Titel, 2 angenommen, 1 zur Korrektur, Wiederholungen idempotent. PSERC-Quellkompatibilität weiterhin PASS.
+- **Nicht getestet:** echte WordPress-/MySQL-Performance der vorhandenen Snapshot-Lesung 1× pro 5 Themen; echte WP-Titeldatei, tatsächliche MySQL-/PSERC-/K0-E2E, echte Artikel-/Kategorieanlage. Daher **keine Installationsversion freigegeben.**
+
+Ausführlicher Bericht dauerhaft unter `/Pferdeatelier/TempVerify/PFERDEATELIER_PSTE_1432_EIN_OWNER_KISS_GESAMTQA_20261102.md`, SHA256 `e398e450cb1f9a688a8b94b2fa2837c05355bb22b06605a68bcbab97687d1d3e`.
+
+**Nächster einzelner KISS-Schritt:** Mit gebundener echter 143.2-Quelle/Patch die 5er-Kontext-Paketlast und tatsächlichen Quellenwechsel bei einem realistisch maximalen 8-MB-Snapshot ohne WordPress-Installation lokal prüfen. Dann prüfen, dass bei geänderten Quellen der vorhandene Wiederanlauf funktioniert (nicht dauerhaft BLOCKED). Erst bei bestandenem Gesamttest genau EIN kumuliertes, vollständiges Staging-Update; keine neuen Hilfsplugins, keine Liveänderung.
