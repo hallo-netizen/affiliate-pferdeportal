@@ -64,28 +64,28 @@ jobs:
           state=root/'CURRENT_STATE.md'
           old=state.read_text(encoding='utf-8')
           new='''## Original-Hersteller-ZIPs – Ergänzung vom 02.11.2026
-
-Die fünf Original-ZIPs wurden unverändert und vollständig von WordPress.org in die vorhandene isolierte Pluginablage übernommen. Sie entsprechen jeweils genau der aus der letzten WordPress-Betreiberliste dokumentierten **Versionsnummer**, sind aber **keine vom Live-Server ausgelesenen Dateien**. Original-Download, SHA-256, ZIP-CRC, WordPress-Pluginroot und echte PHP-Versionsheader wurden geprüft; unabhängiger GitHub-Readback nach Push ist erforderlich.
-
-- WP-HIVEPRESS / 1.7.31 – ISOLIERTE_PLUGINS/WP-HIVEPRESS/CURRENT.zip
-- WP-WPFORMS-LITE / 2.0.3.1 – ISOLIERTE_PLUGINS/WP-WPFORMS-LITE/CURRENT.zip
-- WP-WPVIVID-BACKUPRESTORE / 0.9.136 – ISOLIERTE_PLUGINS/WP-WPVIVID-BACKUPRESTORE/CURRENT.zip
-- WP-WORDPRESS-SEO / 28.7 – ISOLIERTE_PLUGINS/WP-WORDPRESS-SEO/CURRENT.zip
-- WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE / 2.45 – ISOLIERTE_PLUGINS/WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE/CURRENT.zip
-
-Keines dieser Pakete wurde auf WordPress installiert; die Versionen sind nicht hochgestuft worden. Die tatsächlichen Server-Bytes bleiben separat zu vergleichen.
-
-'''
+          
+          Die fünf Original-ZIPs wurden unverändert und vollständig von WordPress.org in die vorhandene isolierte Pluginablage übernommen. Sie entsprechen jeweils genau der aus der letzten WordPress-Betreiberliste dokumentierten **Versionsnummer**, sind aber **keine vom Live-Server ausgelesenen Dateien**. Original-Download, SHA-256, ZIP-CRC, WordPress-Pluginroot und echte PHP-Versionsheader wurden geprüft; unabhängiger GitHub-Readback nach Push ist erforderlich.
+          
+          - WP-HIVEPRESS / 1.7.31 – ISOLIERTE_PLUGINS/WP-HIVEPRESS/CURRENT.zip
+          - WP-WPFORMS-LITE / 2.0.3.1 – ISOLIERTE_PLUGINS/WP-WPFORMS-LITE/CURRENT.zip
+          - WP-WPVIVID-BACKUPRESTORE / 0.9.136 – ISOLIERTE_PLUGINS/WP-WPVIVID-BACKUPRESTORE/CURRENT.zip
+          - WP-WORDPRESS-SEO / 28.7 – ISOLIERTE_PLUGINS/WP-WORDPRESS-SEO/CURRENT.zip
+          - WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE / 2.45 – ISOLIERTE_PLUGINS/WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE/CURRENT.zip
+          
+          Keines dieser Pakete wurde auf WordPress installiert; die Versionen sind nicht hochgestuft worden. Die tatsächlichen Server-Bytes bleiben separat zu vergleichen.
+          
+          '''.replace('\n          ','\n')
           assert '## Original-Hersteller-ZIPs – Ergänzung' not in old
           state.write_text(old.replace('## Erster offener Blocker',new+'## Erster offener Blocker',1).replace('Keine unabhängigen aktuellen Voll-ZIPs dieser acht sind im HOBBYRAUSCH-Pluginbüro belegt. Auch sie sind für die geforderte vollständige Campus-Gesamtablage BLOCKED.','Für fünf Original-Herstellerdistributionen werden die vollständigen ZIPs oben gesichert; für die übrigen drei Eigenwerkzeuge (Footer, FAQ-Fix, Diagnose) bleiben prüfbare serveridentische Voll-ZIPs offen.'),encoding='utf-8')
           history=root/'UPDATEPROTOKOLL.md'
           h=history.read_text(encoding='utf-8')
           note='''## 02.11.2026 – Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)
-
-Fünf vollständige, offiziell veröffentlichte Plugin-ZIP-Dateien in den zuletzt beim Betreiber erfassten Versionen wurden ab WordPress.org heruntergeladen und im bestehenden Hobby-Depot-Pluginbüro gespeichert: HivePress 1.7.31, WPForms Lite 2.0.3.1, WPvivid 0.9.136, Yoast SEO 28.7, Minimal Coming Soon & Maintenance Mode 2.45. SHA/CRC/Originalversion/Pluginroot geprüft, jeweils unveränderte Original-Downloads. Diese Pakete sind Versionssicherungen, kein authentifizierter Live-Server-Snapshot. Keine WordPress-Änderungen. Technische Dateien nur in den jeweiligen MANIFEST.md; ein aktueller Gesamtstatus nur PLUGINS/CURRENT_STATE.md.
-
----
-'''
+          
+          Fünf vollständige, offiziell veröffentlichte Plugin-ZIP-Dateien in den zuletzt beim Betreiber erfassten Versionen wurden ab WordPress.org heruntergeladen und im bestehenden Hobby-Depot-Pluginbüro gespeichert: HivePress 1.7.31, WPForms Lite 2.0.3.1, WPvivid 0.9.136, Yoast SEO 28.7, Minimal Coming Soon & Maintenance Mode 2.45. SHA/CRC/Originalversion/Pluginroot geprüft, jeweils unveränderte Original-Downloads. Diese Pakete sind Versionssicherungen, kein authentifizierter Live-Server-Snapshot. Keine WordPress-Änderungen. Technische Dateien nur in den jeweiligen MANIFEST.md; ein aktueller Gesamtstatus nur PLUGINS/CURRENT_STATE.md.
+          
+          ---
+          '''.replace('\n          ','\n')
           assert 'Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)' not in h
           history.write_text(h+'\n'+note,encoding='utf-8')
           PY
