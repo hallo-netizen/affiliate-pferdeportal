@@ -1,4 +1,4 @@
-name: Hobby Depot original HD004 and FAQ hardlock test
+name: Hobby Depot current-only original hardlock replay
 on:
   push:
     branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
@@ -24,9 +24,9 @@ jobs:
           import os,json,pathlib,subprocess,yaml
           def git(*args):
               return subprocess.check_output(['git',*args])
-          pr=json.loads(subprocess.check_output(['gh','api','repos/hallo-netizen/affiliate-pferdeportal/pulls/613']))
+          pr=json.loads(subprocess.check_output(['gh','api','repos/hallo-netizen/affiliate-pferdeportal/pulls/614']))
           base=pr['base']['sha']; head=pr['head']['sha']
-          assert pr['changed_files']==6
+          assert pr['changed_files']==5
           subprocess.run(['git','fetch','--no-tags','origin',head],check=True)
           script=git('show','origin/main:control/paul-scope-gate/paul_scope_gate.py')
           d=pathlib.Path('control/paul-scope-gate');d.mkdir(exist_ok=True)
