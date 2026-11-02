@@ -1,51 +1,35 @@
-# HOBBYRAUSCH – PLUGINS – ZENTRALES INVENTAR-CURRENT
+# HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
-Stand: 02.11.2026. Eine technische Current-Autorität je Plugin: PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md. Dieses Dokument ist das zentrale Inventar und enthält keine zweite technische Versions- oder Freigabewahrheit.
+Stand: 02.11.2026. **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
 
-## Bestand und belegte Ablagen
+Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen Plugin-Akte unter `PLUGIN_AKTEN/<Plugin-ID>/CURRENT.md`. Die WordPress-Pluginliste ist ein älterer Betreiberstand vom 01.11.2026; aktuelle Serverdateien wurden nicht selbst ausgelesen.
 
-Letztes vollständiges WordPress-Inventar des Betreibers vom 01.11.2026: 15 aktive Plugins. Seitdem ist nur die Nutzung der neueren HD-003-Designversion anhand der Frontend-Rückmeldung erkennbar; keine erneute vollständige Admin-/Serverinventur.
+## Eigene Plugins / Projektwerkzeuge – laut letzter WordPress-Liste aktiv
 
-- HD-001-KATEGORIE-WORKFLOW: 1.14.17 laut WordPress-Liste; keine aktuelle volle Campus-CURRENT.zip. Nur älterer 1.14.16-Testkandidat belegt. BLOCKED.
-- HD-002-TEXT-SEO: 0.1.4 Testkandidat; am 01.11. nicht als aktiv belegt; keine volle Campus-ZIP. BLOCKED für eventuelle Nutzung.
-- HD-003-DESIGN-TEMPLATE-KIT: neueste überprüfte vollständige ZIP 1.50.798, tatsächliche Bytes im vorgesehenen ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip; GitHub-Neuklonung und Rückfall 1.50.797 geprüft. Technische Details allein im HD-003-CURRENT.md. LIVE-Bytecheck offen.
-- HD-004-KATEGORIE-KERN: 1.0.0 laut letzter Betreiberliste aktiv, keine überprüfte aktuelle Campus-Voll-ZIP. BLOCKED.
-- HD-005-GLOSSAR-CORE: 1.0.25 laut letzter Betreiberliste aktiv, keine überprüfte aktuelle Campus-Voll-ZIP. BLOCKED.
-- HD-006-BILDZENTRALE: 2.7.8 laut letzter Betreiberliste aktiv, keine überprüfte aktuelle Campus-Voll-ZIP. BLOCKED.
-- HD-007-HOBBYREGISTER-CORE: vollständige 1.2.17 GitHub-Campus-CURRENT.zip (14.834.581 Bytes; SHA-256 433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488); zuvor durch GitHub-Readback mit 93/93 Einträgen und CRC geprüft; am 01.11. zuletzt 1.2.16 als WordPress-Stand gemeldet. Autorität: HD-007-CURRENT.md.
-- HD-008-SEO-METADATEN: 1.0.0 Kandidat, nicht aktiv belegt, Campus-ZIP offen; zusätzlich mögliche Yoast-Überschneidung. BLOCKED.
-- HD-008-ANZEIGENFUELLER: 1.0.0 Kandidat, nicht aktiv belegt, bisher gleiche Plugin-ID wie SEO; nicht ohne ID-Klärung freigeben. BLOCKED.
-- HD-009-AFFILIATE-ZENTRALE: 0.1.7-dev laut WordPress aktiv; vorhandene Campus-CURRENT.zip enthält nur 0.1.2-dev und ist NICHT aktuell. BLOCKED, keinen Downgrade.
+| Eigenplugin | Belegter Versionsstand | Stand der ORIGINAL-Sicherung im Pluginbüro |
+|---|---|---|
+| HD-001 – Kategorie-Workflow | 1.14.17 (WordPress-Liste) | Aktuelle Voll-ZIP noch nicht im Büro; ältere 1.14.16 in der Projektkonversation vorhanden |
+| HD-003 – Design / Template Kit | 1.50.798, vom Betreiber im Frontend abgenommen | **Voll-ZIP gesichert, unabhängig geöffnet** |
+| HD-004 – Kategorie-Kern | 1.0.0 | Aktuelle Voll-ZIP noch nicht im Büro |
+| HD-005 – Glossar Core | 1.0.25 | Aktuelle Voll-ZIP noch nicht im Büro |
+| HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
+| HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
+| HD-009 – Affiliate-Zentrale | 0.1.7-dev | Nur die **ältere** Voll-ZIP 0.1.2-dev liegt im Büro; nicht als aktuelle 0.1.7-dev ausgeben |
+| Footer-Umzug – Portale | 1.1.1 | Original-Voll-ZIP in der Projektkonversation nachgewiesen; noch nicht in GitHub gesichert |
+| Hobby Depot – FAQ Frontend Fix | 1.0.2 | Aktuelle Voll-ZIP noch nicht im Büro |
+| Hobby Depot – Performance Diagnose | 1.1.0 | Aktuelle Voll-ZIP noch nicht im Büro |
 
-Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zusätzlich die Einträge Footer-Umzug – Portale 1.1.1, HivePress 1.7.31, FAQ Frontend Fix 1.0.2, Performance Diagnose 1.1.0, Minimal Coming Soon & Maintenance Mode 2.45, WPForms Lite 2.0.3.1, WPvivid Backup Plugin 0.9.136 sowie Yoast SEO 28.7, also **acht zusätzliche Werkzeuge und Drittanbieter**. Für fünf Original-Herstellerdistributionen werden die vollständigen ZIPs oben gesichert; für die übrigen drei Eigenwerkzeuge (Footer, FAQ-Fix, Diagnose) bleiben prüfbare serveridentische Voll-ZIPs offen.
+Zusätzlich existieren eigenentwickelte, **nicht als aktiv belegte Kandidaten**: HD-002 Text/SEO, HD-008 SEO-Metadaten und HD-008 Anzeigenfüller. Ihre bestehenden Akten bleiben erhalten; die doppelte Kennung HD-008 wird ohne gesicherte Zuordnung nicht geändert.
 
-## Geprüfte Quellen / Grenzen
+## Was jetzt tatsächlich gesichert ist
 
-- Projekt-START_HERE und AUTORITAETSPLAN weisen verbindlich in dieses Büro; keine Pferde-Atelier-Scope-Übernahme.
-- Existierende ISOLIERTE_PLUGINS-Ordner und ihre tatsächlichen CURRENT.zip-Bestände über GitHub abgefragt.
-- GitHub-Release-Liste abgeglichen: vollständige neue HD-003-1.50.798 und HD-007-1.2.17 sowie HD-003-Rückfallversion sind auffindbar; keine weiteren aktuellen Plugin-Releases im dortigen Releasebestand.
-- HD-003: GitHub Actions 41463137429 unabhängiger Neuklon-Readback, SHA/Version/1290 ZIP-Dateien PASS. Mac-Test 41458463056 PASS.
-- HD-007: bereits vorhandene ZIP laut früherem Readback, nicht neu installiert.
-- Es wurde kein Plugin auf WordPress installiert, keine Datenbank geändert und kein anderer Pluginstand überschrieben.
-- Die letzte WordPress-Pluginliste ist eine frühere Betreiberansicht; kein selbst ausgeführter aktueller Server-Readback.
-- Frühere Akteninhalte bleiben im Git-Verlauf und UPDATEPROTOKOLL.md erhalten. Keine alte ZIP als aktuelle Voll-ZIP umetikettieren.
+- **HD-003 / 1.50.798:** vollständiges Original-Paket `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`, unabhängig überprüft.
+- **HD-007 / 1.2.17:** vollständiges Original-Paket `ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`, unabhängig überprüft.
+- **HD-009 / 0.1.2-dev:** vollständige ältere Arbeits-/Rückfallfassung, ausdrücklich nicht aktuell.
+- Weitere Originaldownloads sind nachgewiesen, müssen aber erst als echte ZIP-Dateien für genau die betreffenden Eigenplugins im bestehenden Büro abgelegt werden.
 
-## Original-Hersteller-ZIPs – Ergänzung vom 02.11.2026
+**Alle fünf irrtümlich archivierten Fremdplugin-Pakete samt Manifesten sind wieder aus `ISOLIERTE_PLUGINS` entfernt.** Die Entfernung betrifft ausschließlich GitHub. Weder auf WordPress noch an installierten Fremdplugins wurde etwas geändert. Eine historische Git-Versionsspur bleibt erhalten.
 
-Die fünf Original-ZIPs wurden unverändert und vollständig von WordPress.org in die vorhandene isolierte Pluginablage übernommen. Sie entsprechen jeweils genau der aus der letzten WordPress-Betreiberliste dokumentierten **Versionsnummer**, sind aber **keine vom Live-Server ausgelesenen Dateien**. Original-Download, SHA-256, ZIP-CRC, WordPress-Pluginroot und echte PHP-Versionsheader wurden geprüft; unabhängiger GitHub-Readback nach Push ist erforderlich.
+## Einziger nächster Schritt
 
-- WP-HIVEPRESS / 1.7.31 – ISOLIERTE_PLUGINS/WP-HIVEPRESS/CURRENT.zip
-- WP-WPFORMS-LITE / 2.0.3.1 – ISOLIERTE_PLUGINS/WP-WPFORMS-LITE/CURRENT.zip
-- WP-WPVIVID-BACKUPRESTORE / 0.9.136 – ISOLIERTE_PLUGINS/WP-WPVIVID-BACKUPRESTORE/CURRENT.zip
-- WP-WORDPRESS-SEO / 28.7 – ISOLIERTE_PLUGINS/WP-WORDPRESS-SEO/CURRENT.zip
-- WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE / 2.45 – ISOLIERTE_PLUGINS/WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE/CURRENT.zip
-
-Keines dieser Pakete wurde auf WordPress installiert; die Versionen sind nicht hochgestuft worden. Die tatsächlichen Server-Bytes bleiben separat zu vergleichen.
-
-## Erster offener Blocker
-
-**PLUGINABLAGE BLOCKED für das Gesamtprojekt, nicht für HD-003/HD-007.** PR #602 ist offiziell in den Campus gemergt (Commit 47031716091eb72ffebe8b99524eba3a5ac7e6a7). Die vom Campus neu heruntergeladenen vollen ZIP-Dateien wurden in Actions 41467083409 erneut bytegenau auf Größe, SHA-256, ZIP-CRC und Dateibestand geprüft: HD-003 1.50.798 mit 1.290 Dateien PASS; HD-007 1.2.17 mit 93 Dateien PASS. Die weiteren tatsächlich aktiven Plugins besitzen weiterhin keine nachweisbar aktuellen vollständigen Campus-ZIPs. 810 vorhandene GitHub-Actions-Artefakte wurden geprüft: keine passenden weiteren aktuellen Vollpakete. Vorhandene HD-009-CURRENT.zip enthält nur 0.1.2-dev, nicht die zuletzt als aktiv belegte 0.1.7-dev. Keine ältere Version fälschlich freigeben.
-
-## Genau eine NEXT ACTION
-
-**Die noch fehlenden vollständigen Plugin-Verzeichnisse aus der tatsächlich laufenden Hobby-Depot-WordPress-Installation nur lesend beschaffen und mit dem Inventar abgleichen; erst danach die vorhandenen einzelnen Campus-Pluginordner mit echten identischen Voll-ZIPs vervollständigen.** Kein Downgrade, kein Zusatzplugin, keine ChatGPT-Bibliothek.
+**Nur die noch nicht gespeicherten Original-ZIP-Dateien der selbst entwickelten Hobby-Depot-Plugins aus den bisherigen Download-/Originalquellen beschaffen, jede Originalversion prüfen und in die jeweilige bestehende Plugin-Akte übernehmen.** Keine Fremdplugins sichern und keine alte Version als neu ausgeben.
