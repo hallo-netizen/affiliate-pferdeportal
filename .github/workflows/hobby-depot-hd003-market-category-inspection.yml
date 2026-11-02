@@ -28,7 +28,7 @@ jobs:
               if not f.endswith('.php'):continue
               s=z.read(f).decode('utf-8',errors='replace')
               lines=s.splitlines()
-              ranges = [(1,100),(5120,5185),(5231,5260),(7395,7425),(7490,7501)] if 'class-hobby-depot-profile-' in f else ([(3988,4028),(120,230)] if f.endswith('pferde-template-kit.php') else [])
+              ranges = [(6010,6060),(7050,7090),(7280,7305),(7520,7555),(7100,7125)] if 'class-hobby-depot-profile-' in f else []
               for lo,hi in ranges:
                 print('RANGE|'+f+'|'+str(lo)+'-'+str(hi))
                 for j in range(lo,hi+1):
