@@ -1,0 +1,122 @@
+name: Hobby Depot archive five exact official distribution ZIPs to existing plugin office
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-save-five-official-plugin-zips.yml]
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Store independently verified official full ZIPs without replacing current site files
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET=hobbyroom/hobby-depot-five-official-plugin-packages-20261102
+          git fetch origin "refs/heads/$TARGET:refs/remotes/origin/$TARGET"
+          git checkout -B "$TARGET" "origin/$TARGET"
+          python3 - <<'PY'
+          import urllib.request,pathlib,zipfile,re,hashlib
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS')
+          cases={
+            'hivepress':('1.7.31','b33aacfe19485346c5a776b62a847be079099ca16053ccbf90c568d8ce7acfa5',1167,2522559),
+            'wpforms-lite':('2.0.3.1','38fc776cd23a511a93128ba79377c271547c559c6525ece86d9267c3b02379c7',5530,13824221),
+            'wpvivid-backuprestore':('0.9.136','149ea2894a86441dd79baebce94de1c0808064c8a31360abdc112597156f4d58',1855,3221869),
+            'wordpress-seo':('28.7','148b0ae90d90e82fb871bb8524755331d92154d4e30978d752f078416275420e',2404,5096003),
+            'minimal-coming-soon-maintenance-mode':('2.45','5beb18c3d30ea534e30e7df84b3a8d93dafa2d024c68ec7b14dc143f6bc03144',480,19152665)
+          }
+          for slug,(version,sha,total,size) in cases.items():
+            url='https://downloads.wordpress.org/plugin/'+slug+'.'+version+'.zip'
+            with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=60) as resp: data=resp.read()
+            assert len(data)==size,(slug,'size')
+            assert hashlib.sha256(data).hexdigest()==sha,(slug,'sha')
+            folder=root/'ISOLIERTE_PLUGINS'/('WP-'+slug.upper())
+            assert not folder.exists(),'Accidental rewrite '+str(folder)
+            folder.mkdir(parents=True)
+            package=folder/'CURRENT.zip'
+            package.write_bytes(data)
+            with zipfile.ZipFile(package) as z:
+              assert z.testzip() is None and len(z.namelist())==total,(slug,'zip')
+              assert all(n.startswith(slug+'/') for n in z.namelist())
+              headers=[]
+              for n in z.namelist():
+                if n.endswith('.php') and n.count('/')<=2:
+                  header=z.read(n)[:9000].decode('utf-8',errors='replace')
+                  m=re.search(r'(?mi)^\s*\*?\s*Version:\s*([0-9][\w.\-]*)',header)
+                  p=re.search(r'(?mi)^\s*\*?\s*Plugin Name:\s*(.*)',header)
+                  if m and p and m.group(1)==version:headers.append((n,p.group(1).strip()))
+              assert headers,('Missing authoritative plugin header',slug)
+            manifest=folder/'MANIFEST.md'
+            manifest.write_text('# WordPress-Herstellerpaket – '+slug+'\n\n'+
+              'Die originalen, vollständigen ZIP-Bytes des WordPress.org-Releases. **Kein Nachweis identischer Serverdateien.**\n\n'+
+              '- Version: '+version+'\n- Quelle: '+url+'\n- Campusdatei: CURRENT.zip\n'+
+              '- SHA-256: '+sha+'\n- Größe: '+str(size)+' Bytes\n- ZIP-Einträge: '+str(total)+'\n'+
+              '- Echte Plugin-Hauptdatei nach Header-Prüfung: '+', '.join(h[0] for h in headers[:3])+'\n'+
+              '- Test: Originaldownload, Hash, CRC, Pluginroot, Original-Version im PHP-Header PASS.\n'+
+              '- **LIVE-NACHWEIS:** Nicht geprüft, ob die laufenden WordPress-Dateien verändert oder abweichend sind.\n'+
+              '- Betriebsstatus- und Next-Action-Autorität: ../../CURRENT_STATE.md.\n',encoding='utf-8')
+            print('STORED_EXACT_OFFICIAL',slug,version,sha,size,total,flush=True)
+          state=root/'CURRENT_STATE.md'
+          old=state.read_text(encoding='utf-8')
+          new='''## Original-Hersteller-ZIPs – Ergänzung vom 02.11.2026
+
+Die fünf Original-ZIPs wurden unverändert und vollständig von WordPress.org in die vorhandene isolierte Pluginablage übernommen. Sie entsprechen jeweils genau der aus der letzten WordPress-Betreiberliste dokumentierten **Versionsnummer**, sind aber **keine vom Live-Server ausgelesenen Dateien**. Original-Download, SHA-256, ZIP-CRC, WordPress-Pluginroot und echte PHP-Versionsheader wurden geprüft; unabhängiger GitHub-Readback nach Push ist erforderlich.
+
+- WP-HIVEPRESS / 1.7.31 – ISOLIERTE_PLUGINS/WP-HIVEPRESS/CURRENT.zip
+- WP-WPFORMS-LITE / 2.0.3.1 – ISOLIERTE_PLUGINS/WP-WPFORMS-LITE/CURRENT.zip
+- WP-WPVIVID-BACKUPRESTORE / 0.9.136 – ISOLIERTE_PLUGINS/WP-WPVIVID-BACKUPRESTORE/CURRENT.zip
+- WP-WORDPRESS-SEO / 28.7 – ISOLIERTE_PLUGINS/WP-WORDPRESS-SEO/CURRENT.zip
+- WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE / 2.45 – ISOLIERTE_PLUGINS/WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE/CURRENT.zip
+
+Keines dieser Pakete wurde auf WordPress installiert; die Versionen sind nicht hochgestuft worden. Die tatsächlichen Server-Bytes bleiben separat zu vergleichen.
+
+'''
+          assert '## Original-Hersteller-ZIPs – Ergänzung' not in old
+          state.write_text(old.replace('## Erster offener Blocker',new+'## Erster offener Blocker',1).replace('Keine unabhängigen aktuellen Voll-ZIPs dieser acht sind im HOBBYRAUSCH-Pluginbüro belegt. Auch sie sind für die geforderte vollständige Campus-Gesamtablage BLOCKED.','Für fünf Original-Herstellerdistributionen werden die vollständigen ZIPs oben gesichert; für die übrigen drei Eigenwerkzeuge (Footer, FAQ-Fix, Diagnose) bleiben prüfbare serveridentische Voll-ZIPs offen.'),encoding='utf-8')
+          history=root/'UPDATEPROTOKOLL.md'
+          h=history.read_text(encoding='utf-8')
+          note='''## 02.11.2026 – Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)
+
+Fünf vollständige, offiziell veröffentlichte Plugin-ZIP-Dateien in den zuletzt beim Betreiber erfassten Versionen wurden ab WordPress.org heruntergeladen und im bestehenden Hobby-Depot-Pluginbüro gespeichert: HivePress 1.7.31, WPForms Lite 2.0.3.1, WPvivid 0.9.136, Yoast SEO 28.7, Minimal Coming Soon & Maintenance Mode 2.45. SHA/CRC/Originalversion/Pluginroot geprüft, jeweils unveränderte Original-Downloads. Diese Pakete sind Versionssicherungen, kein authentifizierter Live-Server-Snapshot. Keine WordPress-Änderungen. Technische Dateien nur in den jeweiligen MANIFEST.md; ein aktueller Gesamtstatus nur PLUGINS/CURRENT_STATE.md.
+
+---
+'''
+          assert 'Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)' not in h
+          history.write_text(h+'\n'+note,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/
+          git diff --cached --check
+          git commit -m "Hobby Depot: preserve five exact official WordPress plugin ZIPs in existing office"
+          git push origin HEAD:"$TARGET"
+      - name: Reopen five actual ZIPs from a clean fresh GitHub clone
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh repo clone "$GITHUB_REPOSITORY" /tmp/hobby-five-new-clone -- --depth 1 --single-branch --branch hobbyroom/hobby-depot-five-official-plugin-packages-20261102
+          python3 - <<'PY'
+          import pathlib,hashlib,zipfile
+          root=pathlib.Path('/tmp/hobby-five-new-clone/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          sha={
+            'hivepress':'b33aacfe19485346c5a776b62a847be079099ca16053ccbf90c568d8ce7acfa5',
+            'wpforms-lite':'38fc776cd23a511a93128ba79377c271547c559c6525ece86d9267c3b02379c7',
+            'wpvivid-backuprestore':'149ea2894a86441dd79baebce94de1c0808064c8a31360abdc112597156f4d58',
+            'wordpress-seo':'148b0ae90d90e82fb871bb8524755331d92154d4e30978d752f078416275420e',
+            'minimal-coming-soon-maintenance-mode':'5beb18c3d30ea534e30e7df84b3a8d93dafa2d024c68ec7b14dc143f6bc03144'}
+          for slug,h in sha.items():
+            p=root/('WP-'+slug.upper())/'CURRENT.zip'
+            assert p.is_file()
+            assert hashlib.sha256(p.read_bytes()).hexdigest()==h
+            with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              assert all(x.startswith(slug+'/') for x in z.namelist())
+            print('FRESH_GITHUB_REOPEN_PASS',slug,len(p.read_bytes()),flush=True)
+          PY
