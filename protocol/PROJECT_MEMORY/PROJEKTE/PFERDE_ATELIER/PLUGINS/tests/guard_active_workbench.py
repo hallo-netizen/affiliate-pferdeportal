@@ -149,7 +149,7 @@ def main():
     if args.release:
         fail('Nur QA-Arbeitsfassung; kein vollständiger Original-E2E-/WordPress-Entwurf-PASS')
     if args.metadata_only:
-        print('SINGLE_CURRENT_LOCK_OK; SOURCE_BOUND; RELEASE_BLOCKED')
+        print('SINGLE_CURRENT_METADATA_ONLY_OK; EXTERNAL_ORIGINAL_ZIP_NOT_READ; RELEASE_BLOCKED')
         return
     plugin_flags = (args.plugin_original, args.plugin_candidate, args.plugin_delta)
     if any(item is not None for item in plugin_flags):
