@@ -1,0 +1,46 @@
+name: Hobby Depot final merged full plugin office readback
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-final-seven-zip-readback-20261102.yml]
+permissions:
+  contents: read
+jobs:
+  readback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reopen actual merged full ZIPs, checksums and contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh repo clone "$GITHUB_REPOSITORY" /tmp/hobby-readback -- --depth 1 --single-branch --branch hobbyroom/project-memory-campus-v1-20260905
+          python3 - <<'PY'
+          import pathlib,hashlib,zipfile,re
+          root=pathlib.Path('/tmp/hobby-readback/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          checked={
+           'HD-003-DESIGN-TEMPLATE-KIT':('1.50.798','05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8',1290),
+           'HD-007-HOBBYREGISTER-CORE':('1.2.17','433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488',93),
+           'WP-HIVEPRESS':('1.7.31','b33aacfe19485346c5a776b62a847be079099ca16053ccbf90c568d8ce7acfa5',1167),
+           'WP-WPFORMS-LITE':('2.0.3.1','38fc776cd23a511a93128ba79377c271547c559c6525ece86d9267c3b02379c7',5530),
+           'WP-WPVIVID-BACKUPRESTORE':('0.9.136','149ea2894a86441dd79baebce94de1c0808064c8a31360abdc112597156f4d58',1855),
+           'WP-WORDPRESS-SEO':('28.7','148b0ae90d90e82fb871bb8524755331d92154d4e30978d752f078416275420e',2404),
+           'WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE':('2.45','5beb18c3d30ea534e30e7df84b3a8d93dafa2d024c68ec7b14dc143f6bc03144',480)}
+          for k,(v,sha,files) in checked.items():
+            f=root/k/'CURRENT.zip'
+            assert f.is_file(),k+' MISSING'
+            data=f.read_bytes()
+            assert hashlib.sha256(data).hexdigest()==sha,k+' CHANGED'
+            with zipfile.ZipFile(f) as z:
+              assert z.testzip() is None and len(z.namelist())==files,k+' INCOMPLETE'
+              assert len(set(z.namelist()))==len(z.namelist()),k+' DUPLICATE'
+            print('OFFICIAL_CAMPUS_FULL_ZIP_PASS',k,v,len(data),files,flush=True)
+          assert len(checked)==7
+          print('SEVEN_COMPLETE_PACKAGE_READBACK_PASS 7/7',flush=True)
+          old=root/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          assert old.is_file()
+          with zipfile.ZipFile(old) as z:assert z.testzip() is None
+          print('HD009_OLD_STORED_NOT_MATCHING_RECORDED_ACTIVE 0.1.2-dev (1.7-dev not present)',flush=True)
+          PY
