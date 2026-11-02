@@ -1,0 +1,57 @@
+name: HD003 complete security replay
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-hd003-security-replay.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/project-memory-campus-v1-20260905
+          fetch-depth: 1
+      - name: Independently replay all six unmodified security checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet PyYAML
+          git fetch origin main
+          python3 - <<'PY'
+          import os,json,pathlib,subprocess,yaml
+          def git(*args):
+              return subprocess.check_output(['git',*args])
+          pr=json.loads(subprocess.check_output(['gh','api','repos/hallo-netizen/affiliate-pferdeportal/pulls/602']))
+          base=pr['base']['sha']; head=pr['head']['sha']
+          assert pr['changed_files']==7
+          subprocess.run(['git','fetch','--no-tags','origin',head],check=True)
+          script=git('show','origin/main:control/paul-scope-gate/paul_scope_gate.py')
+          d=pathlib.Path('control/paul-scope-gate');d.mkdir(exist_ok=True)
+          (d/'paul_scope_gate.py').write_bytes(script)
+          yamlbytes=git('show','origin/main:.github/workflows/pferde-atelier-immutable-base-hardlock.yml')
+          steps=yaml.safe_load(yamlbytes)['jobs']['hardlock-base']['steps']
+          data={'pull_request':{'body':pr['body']}}
+          event='/tmp/hd003-pr602.json';pathlib.Path(event).write_text(json.dumps(data))
+          env=os.environ.copy();env.update(BASE_SHA=base,HEAD_SHA=head,HEAD_REF=pr['head']['ref'],GITHUB_EVENT_PATH=event)
+          expected=[
+            'Block immutable security paths and Paul PROJECT_MEMORY writes',
+            'Enforce current Paul assignment and technical write scope',
+            'Enforce PROJECT_MEMORY protocol completion',
+            'Enforce monotonic prebound workflow transition',
+            'Run trusted entrance and continuity tests on candidate state',
+            'Assert immutable base hardlock itself is API-free and domain-blind'
+          ]
+          present={s['name']:s for s in steps}
+          for name in expected:
+              step=present[name]
+              print('SECURITY_REPLAY',name,flush=True)
+              r=subprocess.run(['bash','-e','-o','pipefail','-c',step['run']],env=env,capture_output=True,text=True)
+              print(r.stdout[-12000:],flush=True)
+              if r.returncode:
+                  print('SECURITY_FAIL',name,r.stderr[-5000:],flush=True)
+                  raise SystemExit(r.returncode)
+          print('PASS: every original main hardlock step replayed successfully without campus security file changes')
+          PY
