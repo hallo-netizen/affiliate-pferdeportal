@@ -70,6 +70,7 @@ def test_actual_page_renderer(profile):
         php_function(profile, "public static function render_universal_top("),
         php_function(profile, "public static function normalize_service_content_v150741("),
     ]
+    methods = [m.replace("private static function is_owned_content_route(", "public static function is_owned_content_route(", 1) for m in methods]
     php = """<?php
 error_reporting(E_ALL);
 class WP_Post {
