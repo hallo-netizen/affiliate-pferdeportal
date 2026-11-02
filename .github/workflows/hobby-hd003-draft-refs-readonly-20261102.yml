@@ -1,0 +1,35 @@
+name: HD003 read only old draft references 20261102
+on:
+  push:
+    branches: [hobbyroom/audit-draft-linked-pages-20261102]
+    paths: [.github/workflows/hobby-hd003-draft-refs-readonly-20261102.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact HD003 release for old page IDs and URLs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p input
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' --dir input
+          python3 - <<'PY'
+          import zipfile,re
+          p='input/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip'
+          needles=['900001','page_id=3','privacy-policy', 'wp_page_for_privacy_policy', 'werbung-2','\x27werbung\x27','get_page_by_path']
+          with zipfile.ZipFile(p) as z:
+            php=[s for s in z.namelist() if s.endswith('.php')]
+            print('FILE_COUNT',len(php))
+            for filename in php:
+              text=z.read(filename).decode('utf8')
+              lines=text.splitlines()
+              for number,line in enumerate(lines,1):
+                matches=[k for k in needles if k in line]
+                if matches:
+                  print('REF|'+filename+'|'+str(number)+'|'+','.join(matches)+'|'+line.strip()[:500])
+                  if 'get_page_by_path' in matches:
+                    print('CONTEXT',repr('\n'.join(lines[max(0,number-12):number+10])[:1800]))
+          PY
