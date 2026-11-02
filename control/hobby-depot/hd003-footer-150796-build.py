@@ -7,7 +7,7 @@ import tempfile
 import zipfile
 
 BASE = pathlib.Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip")
-DEST = pathlib.Path("dist/HOBBY_DEPOT_HD003_1.50.796_FOOTER_AGB_WERBEBEDINGUNGEN_VOLLPLUGIN.zip")
+DEST = pathlib.Path("dist/HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip")
 MAIN = "affiliate-portal-template-kit/pferde-template-kit.php"
 PROFILE = "affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php"
 EXPECTED_SHA = "52d7d67149ac09e22b7406ef59421ec7e4110c5d0efb11349e0f5357f8c4aa6f"
