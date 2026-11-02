@@ -1,0 +1,49 @@
+name: Hobby Depot search former plugin sources and ZIP archives
+on:
+  push:
+    branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
+    paths: [.github/workflows/hobby-search-original-plugins.yml]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect real preexisting branch file trees without writing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,subprocess,re,concurrent.futures,urllib.parse
+          repo='hallo-netizen/affiliate-pferdeportal'
+          def gh(*args):
+            p=subprocess.run(['gh','api',*args],capture_output=True,text=True)
+            if p.returncode:return None
+            try:return json.loads(p.stdout)
+            except:return None
+          raw=subprocess.check_output(['git','ls-remote','--heads','origin'],text=True)
+          allrefs=[(x.split()[0],x.split()[1].replace('refs/heads/','')) for x in raw.splitlines()]
+          allow=re.compile(r'hobby|glossar|category|kategorie|footer|plugin|seo|bildzent|bild|faq|performance|affiliate|anzeigen|website|wp-',re.I)
+          items=[(sha,name) for sha,name in allrefs if allow.search(name) and not re.search(r'pferdeatelier|pferde-atelier|pferdeportal|k0|konzept|k1|k2|k3',name,re.I)]
+          items=items[:155]
+          print('BRANCHES',len(allrefs),'SCANNED',len(items),flush=True)
+          def probe(rec):
+            sha,branch=rec
+            x=gh('repos/'+repo+'/git/trees/'+sha+'?recursive=1')
+            if not x:return (branch,['ERROR NO TREE'])
+            files=[q for q in x.get('tree',[]) if q.get('type')=='blob']
+            matches=[]
+            for y in files:
+              p=y['path'];p0=p.lower()
+              if p0.endswith('.zip') and ('hobby' in p0 or 'plugin' in p0 or 'footer' in p0 or 'hd00' in p0 or 'bild' in p0):
+                matches.append('ZIP|'+p+'|'+str(y.get('size')))
+              if p0.endswith('.php') and re.search(r'footer-umzug|bildzentrale|glossar-core|kategorie-kern|kategorie-workflow|affiliate-zentrale|hobbyregister|hobby-depot|faq.frontend|performance.diagnose|seo.*metadata|anzeigenfuell',p0):
+                matches.append('PHP|'+p+'|'+str(y.get('size')))
+            return (branch,matches[:50])
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            for branch,match in pool.map(probe,items):
+              if match:print('BRANCH|'+branch+'|'+(';'.join(match))[:4800],flush=True)
+          PY
