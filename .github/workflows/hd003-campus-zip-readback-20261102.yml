@@ -1,0 +1,113 @@
+name: HD003 Hobby Depot 1.50.798 persistent campus ZIP and fresh readback
+on:
+  push:
+    branches:
+      - hobbyroom/hobbydepot-plugin-campus-final-audit-20261102
+    paths:
+      - .github/workflows/hd003-campus-zip-readback-20261102.yml
+permissions:
+  contents: write
+jobs:
+  persist-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+      - name: Fetch full current and rollback from independent durable releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/hd003/now /tmp/hd003/back
+          gh release download hobby-depot-hd003-1.50.798-macos-zip --repo "$GITHUB_REPOSITORY" --pattern HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip --dir /tmp/hd003/now
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip --dir /tmp/hd003/back
+          mv /tmp/hd003/now/*.zip /tmp/hd003/current.zip
+          mv /tmp/hd003/back/*.zip /tmp/hd003/rollback.zip
+      - name: Verify full ZIP SHA and 1290-entry identity with PHP 8.5
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          sources=[
+            ('/tmp/hd003/current.zip','1.50.798','05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8'),
+            ('/tmp/hd003/rollback.zip','1.50.797','6b4220080a551a58b7535b1b4ab79d1f0120d05025f74bdb7c6f313c32f90858')]
+          inventories=[]
+          for path,version,sha in sources:
+            b=Path(path).read_bytes()
+            assert hashlib.sha256(b).hexdigest()==sha,'SOURCE SHA FAILURE'
+            with zipfile.ZipFile(path) as z:
+              assert z.testzip() is None,'ZIP CRC FAIL'
+              names=z.namelist()
+              assert len(names)==len(set(names))==1290
+              assert all(n.startswith('affiliate-portal-template-kit/') for n in names),'UNEXPECTED PLUGIN ROOT'
+              main=z.read('affiliate-portal-template-kit/pferde-template-kit.php').decode('utf-8')
+              profile=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode('utf-8')
+              assert 'Version: '+version in main,'MAIN VERSION FAIL'
+              assert ("const RELEASE = '"+version+"';") in profile,'PROFILE VERSION FAIL'
+              inventories.append({n:hashlib.sha256(z.read(n)).hexdigest() for n in names})
+          assert inventories[0].keys()==inventories[1].keys()
+          changed=[n for n in inventories[0] if inventories[0][n]!=inventories[1][n]]
+          assert set(changed)=={
+            'affiliate-portal-template-kit/pferde-template-kit.php',
+            'affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'},changed
+          print('PASS full original 1.50.798 and rollback 1.50.797; 1290 files; 1288 unchanged; checksums')
+          try:assert hashlib.sha256(Path(sources[0][0]).read_bytes()).hexdigest()=='0'*64
+          except AssertionError:print('PASS negative wrong checksum rejected')
+          else:raise RuntimeError('Negative failed')
+          PY
+          mkdir -p /tmp/hd003/php
+          unzip -q /tmp/hd003/current.zip -d /tmp/hd003/php
+          find /tmp/hd003/php -type f -name '*.php' -print0 | xargs -0 -n1 php -l > /tmp/hd003/lint.txt
+          test "$(grep -c 'No syntax errors detected' /tmp/hd003/lint.txt)" -eq 13
+          echo 'PASS 13 of 13 PHP files syntax on PHP 8.5'
+      - name: Persist actual current ZIP in existing HOBBYRAUSCH plugin office
+        run: |
+          set -euo pipefail
+          F=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          test -f "$F"
+          cp /tmp/hd003/current.zip "$F"
+          sha256sum "$F"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$F"
+          git diff --cached --check
+          git commit -m 'HOBBYRAUSCH HD003: persist verified complete 1.50.798 installation ZIP in existing campus slot'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Fresh independent GitHub clone proves persisted bytes can be reopened
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/hd003/independent
+          gh repo clone "$GITHUB_REPOSITORY" /tmp/hd003/independent/repository -- --depth 1 --branch "$GITHUB_REF_NAME" --single-branch
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          f=Path('/tmp/hd003/independent/repository/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          b=f.read_bytes()
+          assert len(b)==65702034,len(b)
+          assert hashlib.sha256(b).hexdigest()=='05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8'
+          assert b==Path('/tmp/hd003/current.zip').read_bytes()
+          with zipfile.ZipFile(f) as z:
+            assert z.testzip() is None
+            assert len(z.namelist())==1290
+            assert 'Version: 1.50.798' in z.read('affiliate-portal-template-kit/pferde-template-kit.php').decode()
+          print('PASS INDEPENDENT GITHUB REOPEN: original 65,702,034-byte full 1.50.798 ZIP, byte-identical')
+          PY
+          mkdir -p /tmp/hd003/independent/rollback
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' --dir /tmp/hd003/independent/rollback
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          f=next(Path('/tmp/hd003/independent/rollback').glob('*.zip'))
+          assert hashlib.sha256(f.read_bytes()).hexdigest()=='6b4220080a551a58b7535b1b4ab79d1f0120d05025f74bdb7c6f313c32f90858'
+          with zipfile.ZipFile(f) as z:assert z.testzip() is None and len(z.namelist())==1290
+          print('PASS INDEPENDENT ROLLBACK REOPEN 1.50.797')
+          PY
