@@ -16,6 +16,10 @@
   "artifact_sha256": "d7b4da5c87218e788e00e0ca52b12555f647799a5436a473b645d4b043bce417",
   "pste_sha256": "292bb454c1be5a06cfa4936b897a492ffeeca15273920ee5e8a0ab031c0dc2a0",
   "pserc_sha256": "b4d53c882c12a90adc9448ae962a388b76e905208e7b050a3e86b5447822feea",
+  "pste_plugin_office_source": "/Campus-Plugins/PFERDE_ATELIER/PPA-005/CURRENT.zip",
+  "pste_current_source_version": "0.57.164",
+  "pste_current_source_sha256": "8537deaad7e219d33e07732f5b8db7b2284caf90b95010cb01859ceed548c407",
+  "pste_approved_delta_sha256": "70e46bfa7b6e85a228d8cab5e845b9699e62b86ea0b8b831a270d468a288f457",
   "e2e_status": "NOT_PASSED",
   "release_allowed": false
 }
@@ -788,6 +792,10 @@ Historischer Vergleich: Am 23.10. gab es 9 AJAX-HTTP-200 mit 20–25 Sekunden un
 **Verifizierte Identität des benötigten Originals:** PSTE **0.57.164**, ursprünglicher archivierter ZIP-SHA256 `8537deaad7e219d33e07732f5b8db7b2284caf90b95010cb01859ceed548c407`, gemäß originalem `PFERDEATELIER_PSTE_0.57.164_QA_RESULTS_20261102.json`, 116 bestehende Dateien und 78 PHP-Dateien. Ein Dateiname, ein Bericht oder ein synthetisches Ersatzpaket ist **kein** Ersatz für den Original-ZIP-Hash. Der GitHub-Campus-Current enthält den geprüften Patch und einen Ergebnisbeleg, **nicht** das geprüfte vollständige 0.57.164-ZIP. Ohne tatsächlichen Byte-Readback des Originals darf **kein** neues PSTE-ZIP als auf der neuesten Originalfassung beruhend ausgegeben werden.
 
 **Korrekte Ein-Punkt-Fortsetzung:** Exaktes 0.57.164-Original-ZIP über den bereits bestehenden Plugin-Ausgabeschrank / seine nachgewiesene Quelle lesen und SHA256 vor Verwendung prüfen. Dann ausschließlich den unveränderten aktuellen **Drei-Dateien-Patch** auf diese echte Basis anwenden, dessen Anwendung und Plugin-Lauf mit Originalcode POS/NEG/Reentry samt PSERC-K0-Dateigrenze prüfen, Archive erneut entpacken und kontrollieren, erst danach WordPress-Staging-Installer erwägen. **Nicht erneut rekonstruieren, nichts aus älteren Originalen zusammenmischen, K0 nicht verändern.** Bis dahin `e2e_status=NOT_PASSED` und `release_allowed=false`.
+
+### 02.11.2026 – Ein vorhandener Herkunftsnachweis vor jedem PSTE-Installer
+
+**Fester Originalzugang bleibt das bestehende Plugin-Büro**, dort PPA-005 (`/Campus-Plugins/PFERDE_ATELIER/PPA-005/CURRENT.zip`). Keine neue Quelle, kein neues Büro, kein neuer Worker. Der eine bestehende GitHub-Workbench-Guard ist um den technischen Herkunftsnachweis ergänzt und liest die **gleiche** zentrale Current-Bindung oben. Vor einer Paketfreigabe müssen Originaldatei, Original-SHA `8537deaad7e219d33e07732f5b8db7b2284caf90b95010cb01859ceed548c407`, signierter interner Patch-SHA `70e46bfa7b6e85a228d8cab5e845b9699e62b86ea0b8b831a270d468a288f457`, identischer voller Original-Dateisatz und der exakt genehmigte Quellunterschied nachweislich übereinstimmen. Fehlt das Büro-Original physisch, wird ausdrücklich **BLOCKED** geliefert und **niemals** eine ältere Version als Ersatz genommen. GitHub-CI kann nur die zentrale Metadatenbindung prüfen, solange die aktuelle Original-ZIP dort nicht lesbar vorhanden ist; das ist kein Installations-PASS. Der bestehende alte historische QA-Replay bleibt unverändert.
 
 ## NEXT ACTION
 
