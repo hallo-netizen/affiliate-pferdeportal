@@ -1,0 +1,38 @@
+name: Hobby Depot HD-003 1.50.796 Footer Links - Exact ZIP QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150796-footer-fix-20261102
+    paths:
+      - control/hobby-depot/hd003-footer-150796-build.py
+      - .github/workflows/hobby-depot-hd003-footer-150796.yml
+permissions:
+  contents: write
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PHP CLI if needed
+        run: |
+          if ! command -v php >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y php-cli; fi
+      - name: Rebuild and verify precise full ZIP
+        run: |
+          python3 control/hobby-depot/hd003-footer-150796-build.py
+      - name: Upload independently downloadable tested plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobby-depot-hd003-1.50.796-footer-links
+          path: dist/HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish release without touching installed WordPress
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.796 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Hobby Depot HD003 1.50.796 — Footer AGB / Service-Reihenfolge" \
+            --notes "Geprüftes Vollplugin aus der freigegebenen 1.50.794. Nur zwei PHP-Dateien angepasst: Service: Werben im Hobby Depot, Werbebedingungen, Preise, Kontakt, FAQ. Rechtliches: AGB garantiert. Zwei PHP-Dateien verändert; tatsächliche Renderfunktion in zwei Szenarien getestet. Sonstige Plugin-Dateien unverändert. WordPress-Livetest steht noch aus." \
+            "dist/HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip"
