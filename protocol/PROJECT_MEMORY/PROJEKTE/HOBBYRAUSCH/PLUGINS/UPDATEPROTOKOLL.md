@@ -5505,3 +5505,7 @@ Auf ausdrücklichen Wunsch des Betreibers wurden die fünf zuvor irrtümlich arc
 Das Büro führt ausschließlich die von uns selbst entwickelten Hobby-Depot-Plugins einschließlich eigener Projektwerkzeuge Footer-Umzug, FAQ Frontend Fix und Performance Diagnose. HD-003 und HD-007 behalten ihre unabhängig geprüften Voll-ZIPs. Die verbliebenen Eigenplugins müssen aus ihren eigenen Originalquellen vervollständigt werden; ältere Originalversionen werden nicht als aktuelle etikettiert.
 
 ---
+
+## 02.11.2026 – Eigenplugin Footer-Umzug 1.1.1: Original-Bytearchiv
+
+Exakt 9.083 Originalbytes aus dem früher ausgelieferten vollständigen ZIP-Paket mit nachgewiesener SHA-256 in der Hobby-Depot-Eigenpluginablage gespeichert. Keine neue Codeerzeugung; Quellsegmente nach der eigentlichen Speicherung entfernt. ZIP, Original-Pluginheader und SHA PASS. Erneuter unabhängiger GitHub-Download geprüft; keine Änderung auf WordPress oder an Fremdplugins.

@@ -15,7 +15,7 @@ Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen 
 | HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
 | HD-009 – Affiliate-Zentrale | 0.1.7-dev | Nur die **ältere** Voll-ZIP 0.1.2-dev liegt im Büro; nicht als aktuelle 0.1.7-dev ausgeben |
-| Footer-Umzug – Portale | 1.1.1 | Original-Voll-ZIP in der Projektkonversation nachgewiesen; noch nicht in GitHub gesichert |
+| Footer-Umzug – Portale | 1.1.1 | **Original-Voll-ZIP im Pluginbüro gesichert und unabhängig wieder geöffnet** |
 | Hobby Depot – FAQ Frontend Fix | 1.0.2 | Aktuelle Voll-ZIP noch nicht im Büro |
 | Hobby Depot – Performance Diagnose | 1.1.0 | Aktuelle Voll-ZIP noch nicht im Büro |
 
