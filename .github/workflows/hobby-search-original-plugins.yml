@@ -28,7 +28,7 @@ jobs:
           allrefs=[(x.split()[0],x.split()[1].replace('refs/heads/','')) for x in raw.splitlines()]
           allow=re.compile(r'hobby|glossar|category|kategorie|footer|plugin|seo|bildzent|bild|faq|performance|affiliate|anzeigen|website|wp-',re.I)
           items=[(sha,name) for sha,name in allrefs if allow.search(name) and not re.search(r'pferdeatelier|pferde-atelier|pferdeportal|k0|konzept|k1|k2|k3',name,re.I)]
-          items=items[:155]
+          items=[a for a in items if (a[1].startswith(('hobby','glossar','category','footer','plugin','seo','bild','wp','design','performance')))][:350]
           print('BRANCHES',len(allrefs),'SCANNED',len(items),flush=True)
           def probe(rec):
             sha,branch=rec
@@ -38,9 +38,9 @@ jobs:
             matches=[]
             for y in files:
               p=y['path'];p0=p.lower()
-              if p0.endswith('.zip') and ('hobby' in p0 or 'plugin' in p0 or 'footer' in p0 or 'hd00' in p0 or 'bild' in p0):
+              if p0.endswith('.zip') and not p0.startswith('release/affiliate') and ('hobby' in p0 or 'plugin' in p0 or 'footer' in p0 or 'hd00' in p0 or 'bild' in p0 or 'kategorie' in p0):
                 matches.append('ZIP|'+p+'|'+str(y.get('size')))
-              if p0.endswith('.php') and re.search(r'footer-umzug|bildzentrale|glossar-core|kategorie-kern|kategorie-workflow|affiliate-zentrale|hobbyregister|hobby-depot|faq.frontend|performance.diagnose|seo.*metadata|anzeigenfuell',p0):
+              if p0.endswith('.php') and not p0.startswith('release/affiliate') and re.search(r'footer-umzug|bildzentrale|glossar-core|kategorie-kern|kategorie-workflow|hobbyregister|hobby-depot|faq.frontend|performance.diagnose|seo.*metadata|anzeigenfuell',p0):
                 matches.append('PHP|'+p+'|'+str(y.get('size')))
             return (branch,matches[:50])
           with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
