@@ -20,7 +20,7 @@ jobs:
             t=''.join(c for c in unicodedata.normalize('NFKD',t) if not unicodedata.combining(c))
             return '-'.join(re.findall('[a-z0-9]+',t))
           terms="Dioramenmalerei\nMorsefunk\nMini-CNC\nKarnivoren\nSaatgut-Tausch\nSpinnenterrarien\nPilzsubstrate herstellen\nBonsai aus Samen\nFeuerbohren\nModular Origami\nBackgammon\nKupferstich\nWachssiegel\nBetonmöbel\nSmart-Home-Basteln\nPilzklonen\nOrchideenbestäubung\nhistorische Karten\nMikrogrün\nCase-Modding\nB-Movie-Poster\nPyrographie\nNaturmaterial\nRC-Boote\nRC-Fahrzeuge\nHolzmodellbau\nTreibholz\nKugelbahnen\nGarnrollen\nParfümherstellung\nStoffmuster\nScherenschnitt\nExperimente Zuhause\nFüllfederhalter\nTapetenmuster\nHolzverbindungen\nKristallzucht\nTerrarien\nKalträuchern\nSeiltechnik\nTreibholz Sammeln\nRechenschieber\nRadierung\nUrzeitkrebse\nFossilien\nSchokolade Temperieren\nKintsugi\nIntarsien\nGenealogie\nKirigami\nKumihimo\nDorodango\nPapierblumen\nSandbilder\nStreichholzschachteln\nSeeglas\nFliesen\nMilchkefir\nPapierschöpfen\nHandgeschöpftes Papier\nEco Printing\nPapiermodellbau\nNadelbinden\nalte Werkzeuge\nSütterlin\nKlask\nLebensmittel Haltbar Machen\nWasserkefir\nPolstern\nCross-Skating\nLeder & Textil\nMetall & Schmuck\nSchrift & Papier\nElektronik & Funk\nRC-Flug & Drohnen\nInsekten & Wirbellose\nHobby finden\nChainmail\nCustom Keyboards\nHeimrobotik\nEntdecken\nNach Jahreszeit\nNach Situation"
-          terms=terms.split('\\n')
+          terms=terms.split('\n')
           path='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip'
           with zipfile.ZipFile(path) as z:
             assert z.testzip() is None
