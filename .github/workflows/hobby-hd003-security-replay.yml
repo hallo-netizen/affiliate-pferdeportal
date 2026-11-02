@@ -1,4 +1,4 @@
-name: Hobby Depot footer own plugin original six security checks
+name: Hobby Depot original HD004 and FAQ hardlock test
 on:
   push:
     branches: [hobbyroom/hobbydepot-plugin-campus-final-audit-20261102]
@@ -24,9 +24,9 @@ jobs:
           import os,json,pathlib,subprocess,yaml
           def git(*args):
               return subprocess.check_output(['git',*args])
-          pr=json.loads(subprocess.check_output(['gh','api','repos/hallo-netizen/affiliate-pferdeportal/pulls/610']))
+          pr=json.loads(subprocess.check_output(['gh','api','repos/hallo-netizen/affiliate-pferdeportal/pulls/613']))
           base=pr['base']['sha']; head=pr['head']['sha']
-          assert pr['changed_files']==4
+          assert pr['changed_files']==6
           subprocess.run(['git','fetch','--no-tags','origin',head],check=True)
           script=git('show','origin/main:control/paul-scope-gate/paul_scope_gate.py')
           d=pathlib.Path('control/paul-scope-gate');d.mkdir(exist_ok=True)
