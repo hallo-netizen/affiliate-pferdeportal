@@ -32,8 +32,8 @@ Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zus
 
 ## Erster offener Blocker
 
-Mehrere tatsächlich aktive, bereits registrierte Plugins haben **keine unabhängig erneut lesbare Voll-ZIP ihrer installierten Version** im HOBBYRAUSCH-Campus. Für das ganze Projekt ist der Pflichtstatus daher **PLUGINABLAGE BLOCKED**, auch wenn HD-003 und HD-007 einzeln ein geprüftes Vollpaket haben.
+**PLUGINABLAGE BLOCKED.** Die vollständige HD-003 1.50.798 ist im Prüfzweig echt gespeichert und unabhängig wieder geöffnet, aber die Übernahme in den autoritativen Campus-Zweig ist durch die automatische GitHub-Sicherheitsprüfung blockiert: Der Prüflauf verlangt control/paul-scope-gate/paul_scope_gate.py, die auf dem Campus-Zielzweig fehlt (auf main vorhanden). Diesen geschützten Sicherheitsweg hier nicht verändern oder umgehen. PR #602 dokumentiert den exakten Fehler. Danach bleiben weitere aktuelle Voll-ZIP-Lücken des 15-Plugin-Bestands zu bearbeiten.
 
 ## Genau eine NEXT ACTION
 
-**Die fehlenden aktuellen vollständigen Plugin-Dateien aus dem autorisierten WordPress-Pluginbestand ausschließlich lesend erfassen, mit ihren einzelnen Plugin-Akten abgleichen und erst nach echtem Byte-/ZIP-Readback in die bestehenden Pluginbüro-Ablagen übernehmen.** Keine veralteten Kandidaten installieren, keine neuen Plugin-IDs erfinden, keine ChatGPT-Bibliothek verwenden.
+**Die Campus-/Security-Verantwortung muss den bereits bestehenden fehlenden Prüfpfad auf dem vorgesehenen geschützten Weg wiederherstellen, damit PR #602 regulär geprüft und übernommen werden kann.** Keine veralteten Plugins installieren und keine Sicherheitsprüfung umgehen. Anschließend die dokumentierten fehlenden Plugin-Voll-ZIPs unabhängig read-only nachholen.
