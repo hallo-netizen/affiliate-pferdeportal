@@ -28,6 +28,11 @@ jobs:
               if not f.endswith('.php'):continue
               s=z.read(f).decode('utf-8',errors='replace')
               lines=s.splitlines()
+              ranges = [(100,175),(5120,5185),(5231,5260),(7470,7505)] if 'class-hobby-depot-profile-' in f else ([(230,318),(3915,3990),(11210,11282),(14745,14795),(14810,14880)] if f.endswith('pferde-template-kit.php') else [])
+              for lo,hi in ranges:
+                print('RANGE|'+f+'|'+str(lo)+'-'+str(hi))
+                for j in range(lo,hi+1):
+                  if j<=len(lines): print('CODE|'+str(j)+'|'+lines[j-1][:550])
               for i,line in enumerate(lines):
                 if re.search(r'listing_category|listing-category|hp_listing_category|hivepress|is_market|market.*(render|body|template|style|category)|marketplace',line,re.I):
                   print("MATCH|%s|%d|%s"%(f,i+1,line[:210].strip()))
