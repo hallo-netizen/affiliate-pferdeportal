@@ -5509,3 +5509,7 @@ Das Büro führt ausschließlich die von uns selbst entwickelten Hobby-Depot-Plu
 ## 02.11.2026 – Eigenplugin Footer-Umzug 1.1.1: Original-Bytearchiv
 
 Exakt 9.083 Originalbytes aus dem früher ausgelieferten vollständigen ZIP-Paket mit nachgewiesener SHA-256 in der Hobby-Depot-Eigenpluginablage gespeichert. Keine neue Codeerzeugung; Quellsegmente nach der eigentlichen Speicherung entfernt. ZIP, Original-Pluginheader und SHA PASS. Erneuter unabhängiger GitHub-Download geprüft; keine Änderung auf WordPress oder an Fremdplugins.
+
+## 02.11.2026 – HD-004 1.0.0 und FAQ 1.0.2 echte Original-Voll-ZIPs
+
+Exakt früher ausgelieferte vollständige Binärpakete HD-004/Kategorie-Kern 1.0.0 (3.736 Bytes) und FAQ Frontend Fix 1.0.2 (6.193 Bytes) aus Gesprächsdateien erneut geladen. Original-Pluginheader, ZIP-CRC, Größen und SHA-256 lokal PASS. Die Binärdateien wurden ohne Neukompilierung/Neupacken als Git-Originalblobs ins bestehende Hobby-Depot-Pluginbüro übertragen; die Git-Blob-SHA1 stimmt in beiden Fällen mit dem lokal berechneten Original exakt überein. Einzel-Manifeste und Inventar aktualisiert. Keine WordPress-Installation, keine Fremdplugins, keine Änderung an anderen Projekten. Weitere Originale HD-001 1.14.17 und Bildzentrale 2.7.8 sind lokal gefunden und geprüft; ihre GitHub-Binärübernahme ist weiterhin offen.
