@@ -2,6 +2,22 @@
 
 ROLLE: HISTORIE / WAS + WARUM + BELEGE, KEINE CURRENT-WAHRHEIT
 
+## PU-20261102-003 – HD-003 Anzeigenmarkt-Kategorieebenen und dauerhafte Campus-Voll-ZIP
+
+**WARUM:** Die einzelnen HivePress-Kategoriearchive zeigten das ListingHive-Standarddesign statt der bereits freigegebenen Hobby-Depot-Darstellung. Anschließend war die bisherige ZIP auf dem Mac zunächst nicht zu entpacken. Das Campus-Artefakt war außerdem auf dem älteren Stand 1.50.794.
+
+**WAS:** Exakt bestehendes HD-003-Designplugin 1.50.797 → 1.50.798 aus echtem Vollplugin; Kategorien aller Hierarchieebenen erhalten die vorhandene Anzeigenmarkt-Darstellung. Keine Änderung der Anzeigen-/Kategorie-Daten oder am Header/Footer. Eine frisch gepackte Mac-kompatible Voll-ZIP enthält exakt dieselben 1.290 Dateien. Die vollständigen aktuellen Bytes von 1.50.798 wurden im vorhandenen HOBBYRAUSCH-Campus-Pluginordner gespeichert; alte Fassung bleibt in Git-Historie und GitHub-Release.
+
+**Dauerquellen:** aktuelles Paket: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hobby-depot-hd003-1.50.798-macos-zip ; Rollback 1.50.797: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hobby-depot-hd003-1.50.797 .
+
+**Tatsächliche Tests:** funktionaler positiver/negativer Kategorieebenen-Harness in Actions 41457539846; 13/13 PHP unter 8.5.12; 1.288/1.290 Plugin-Einträge zur Vorversion unverändert; 1.290/1.290 vollständiger macOS-ditto-Entpack-/Vergleichstest in Actions 41458463056; 1.50.798 Campus-Speicherung und echte unabhängige Neuklonung mit ZIP-/SHA-/Versionskontrolle sowie Rollback-Readback in Actions 41463137429.
+
+**Grenze:** Im Chat als passend beurteilte Live-Darstellung, aber keine unabhängige autorisierte WordPress-Server-Byteprüfung. Campus-Version erst nach PR-Übernahme verbindlich. Alle anderen Plugins sind von dieser Versionierung unangetastet; offene Voll-ZIP-Lücken in zentralem Inventar nicht als behoben ausgeben.
+
+---
+
+
+
 Aktuelle Version, Live-Status, Blocker und NEXT ACTION ausschließlich aus der jeweiligen:
 `PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`
 
