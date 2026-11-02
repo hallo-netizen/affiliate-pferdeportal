@@ -1,0 +1,11 @@
+--- "a/Portal SEO Topic Engine/includes/class-pste-cannibalization.php"
++++ "b/Portal SEO Topic Engine/includes/class-pste-cannibalization.php"
+@@ -7,7 +7,7 @@
+ 
+     public static function decide(array $candidate,array $inventoryItems,array $categoryItems,array $unusedCalibration=[]): array {
+         $reasons=[];$decision='PASS';$matches=[];
+-        $query=trim(PSTE_Editorializer::sourceQuery($candidate));
++        $query=PSTE_Normal_Metadata_Path::canonicalInputQuery(PSTE_Editorializer::sourceQuery($candidate));
+         $sourceQuery=$query;
+         $approvedTitle=PSTE_Editorializer::displayTitle($candidate);
+         $categoryName=(string)($candidate['target_category_name']??'');
