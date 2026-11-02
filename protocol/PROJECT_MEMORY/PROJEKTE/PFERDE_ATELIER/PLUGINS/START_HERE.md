@@ -2,6 +2,14 @@
 
 <!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
 
+## ERSTER SCHRITT BEI JEDEM CHATWECHSEL: ORIGINAL TATSÄCHLICH LESEN
+
+**Nicht bei GitHub nach einer externen Binärdatei suchen:** Laut verbindlichem `SYNC_VERTRAG.md` liegt `/Campus-Plugins/PFERDE_ATELIER/PPA-005/CURRENT.zip` im **separaten persistenten Plugin-Schrank**, während GitHub nur Steuerung und Inventar enthält.
+
+Vor Aussagen wie „Original vorhanden“, „ich kann das Plugin lesen“, „Original aktuell geprüft“ oder vor Paketbau: die **echte vollständige ZIP im physisch verbundenen Plugin-Schrank** öffnen, alle Einträge prüfen und den SHA256 der tatsächlichen Datei gegen die geltende Current-Bindung abgleichen. Ein in GitHub eingetragener Pfad, eine SHA-Zeichenfolge, ein alter QA-Bericht oder ein erfolgreiches `--metadata-only` beweisen ausdrücklich **keinen Zugriff auf die Binärdatei**.
+
+**Zugriffsdiagnose 02.11.2026:** In der hier verbundenen Files-Library ergab das direkte Öffnen von `/Campus-Plugins/PFERDE_ATELIER/PPA-005` die Meldung `Library path not found`. Das ist eine **fehlende Verbindung zu diesem Ablageort in diesem Arbeitskontext**, **kein** Beweis für gelöschte oder nicht existierende Originaldateien. GitHub-404 ist für diesen separaten Schrank kein Gegenbeweis. Den Standort nicht neu erfinden, keine alten ZIPs als Ersatz und keine zusätzlichen Prüfer-Plugins bauen. **Nur tatsächlichen externen Schrankzugang klären; bis zum physischen Readback kein Installer.** Bei neuem Zugriff erneut prüfen; diesen zeitbezogenen Fehler niemals als dauerhafte Aussage behandeln.
+
 ## HARD RULE – EINE CURRENT-AUTORITÄT
 
 Diese Bürotür ist **nur Navigation**.
