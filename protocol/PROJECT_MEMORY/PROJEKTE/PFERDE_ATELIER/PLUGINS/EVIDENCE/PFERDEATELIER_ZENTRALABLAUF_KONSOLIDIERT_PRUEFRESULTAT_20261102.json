@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "tests": [
+    {
+      "test": "no_changes_6",
+      "expected": 6,
+      "read": 6,
+      "unique": 6,
+      "pages": 4,
+      "pass": true
+    },
+    {
+      "test": "unread_timestamp_newer_6",
+      "expected": 6,
+      "read": 6,
+      "unique": 6,
+      "pages": 4,
+      "pass": true
+    },
+    {
+      "test": "read_timestamp_older_6",
+      "expected": 6,
+      "read": 6,
+      "unique": 6,
+      "pages": 4,
+      "pass": true
+    },
+    {
+      "test": "combined_95",
+      "expected": 95,
+      "read": 95,
+      "unique": 95,
+      "pages": 10,
+      "pass": true
+    },
+    {
+      "test": "combined_5014",
+      "expected": 5014,
+      "read": 5014,
+      "unique": 5014,
+      "pages": 201,
+      "pass": true
+    }
+  ],
+  "parity_252": "252/252",
+  "context_33": "33/33",
+  "pserc_handoff": "PASS",
+  "lint_php": "78/78",
+  "patch_sha256": "70e46bfa7b6e85a228d8cab5e845b9699e62b86ea0b8b831a270d468a288f457",
+  "release": "NOT_INSTALLABLE",
+  "live_wordpress_tested": false,
+  "modified_existing_files": 3,
+  "new_workers": 0,
+  "patch_full_roundtrip_pass": true
+}
