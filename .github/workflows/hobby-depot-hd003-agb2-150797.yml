@@ -1,0 +1,47 @@
+name: Hobby Depot HD003 1.50.797 AGB-2 exact-page layout QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150797-agb2-hero-clean-20261102
+    paths:
+      - control/hobby-depot/hd003-agb2-150797-build.py
+      - .github/workflows/hobby-depot-hd003-agb2-150797.yml
+permissions:
+  contents: write
+jobs:
+  exact-zip-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PHP CLI
+        run: |
+          if ! command -v php >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y php-cli; fi
+      - name: Download exact approved 1.50.796 full ZIP (not old plugin)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p input
+          gh release download hobby-depot-hd003-1.50.796 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip' \
+            --dir input
+      - name: Build and test real AGB-2 output, archive identity and scope
+        run: |
+          python3 control/hobby-depot/hd003-agb2-150797-build.py
+      - name: Upload complete installation ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobby-depot-hd003-agb2-v1-50-797
+          path: dist/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish verified ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.797 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title 'Hobby Depot HD003 1.50.797 — AGB-2 Hero und Textbereinigung' \
+            --notes 'Aus 1.50.796. Nur AGB-2 als echte Service-Seite erkannt: bestehendes Hero-Bild, keine doppelte Introbox/Mehr erfahren; veraltetes Stand Juli 2016 nur in dieser Seitenausgabe entfernt. Footer AGB verweist bevorzugt auf veröffentlichte AGB-2-Seite. Sonstige Seiten und Features unverändert. WP-Livetest steht noch aus.' \
+            dist/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip
