@@ -25,9 +25,11 @@ def patch_profile(source):
         "Only the additional published AGB slug")
     source = one(
         source,
-        "            if (self::is_magazine_root_page_v150717($page)",
+        "            if (self::is_magazine_root_page_v150717($page) || self::is_magazine_target_page_v150719($page) || self::is_hobbyfinder_page($page)) { return true; }\n"
+        "            return self::is_core_page_id(get_queried_object_id());",
         "            if ($page instanceof WP_Post && sanitize_title((string)$page->post_name) === 'agb-2') { return false; }\n"
-        "            if (self::is_magazine_root_page_v150717($page)",
+        "            if (self::is_magazine_root_page_v150717($page) || self::is_magazine_target_page_v150719($page) || self::is_hobbyfinder_page($page)) { return true; }\n"
+        "            return self::is_core_page_id(get_queried_object_id());",
         "Ensure normal WordPress page template, no duplicate category intro")
     source = one(
         source,
