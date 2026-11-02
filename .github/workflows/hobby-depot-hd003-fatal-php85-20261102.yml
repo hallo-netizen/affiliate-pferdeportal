@@ -1,0 +1,57 @@
+name: HD003 fatal PHP 8.5 line 10485 root cause
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-parse-fatal-investigation-20261102
+    paths:
+      - .github/workflows/hobby-depot-hd003-fatal-php85-20261102.yml
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: none
+          coverage: none
+      - name: Verify fatal line in exactly released ZIP versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input
+          cp protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip input/1.50.794.zip
+          gh release download hobby-depot-hd003-1.50.796 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip' --dir input
+          mv input/HOBBY_DEPOT_HD003_1.50.796_FOOTER_RECHTLICHES_SERVICE_FIX_VOLLPLUGIN.zip input/1.50.796.zip
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' --dir input
+          mv input/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip input/1.50.797.zip
+          python3 - <<'PY'
+          import zipfile,hashlib,pathlib,difflib
+          names=['1.50.794','1.50.796','1.50.797']
+          files={}
+          for version in names:
+              archive=pathlib.Path('input')/(version+'.zip')
+              with zipfile.ZipFile(archive) as z:
+                  print('VERSION',version,'ZIP_SHA',hashlib.sha256(archive.read_bytes()).hexdigest(),'CRC',z.testzip(),'ENTRIES',len(z.namelist()))
+                  payload=z.read('affiliate-portal-template-kit/pferde-template-kit.php')
+              target=pathlib.Path('input')/(version+'.php')
+              target.write_bytes(payload)
+              files[version]=payload.decode('utf-8').splitlines()
+              print('PHP MAIN SHA',version,hashlib.sha256(payload).hexdigest(),'LINECOUNT',len(files[version]))
+              print('-----LINES 10480:10489',version,'-----')
+              for i in range(10480,10490):
+                  if i<=len(files[version]):print(i,repr(files[version][i-1]))
+          for a,b in [('1.50.794','1.50.796'),('1.50.796','1.50.797')]:
+              print('MAIN DIFF',a,b)
+              diffs=list(difflib.unified_diff(files[a],files[b],n=1))
+              print('\n'.join(diffs[:100]))
+          PY
+          php -v
+          for version in 1.50.794 1.50.796 1.50.797; do
+            echo "LINT PHP85 $version:"
+            php -l "input/$version.php" || true
+          done
