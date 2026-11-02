@@ -17,7 +17,7 @@ Letztes vollständiges WordPress-Inventar des Betreibers vom 01.11.2026: 15 akti
 - HD-008-ANZEIGENFUELLER: 1.0.0 Kandidat, nicht aktiv belegt, bisher gleiche Plugin-ID wie SEO; nicht ohne ID-Klärung freigeben. BLOCKED.
 - HD-009-AFFILIATE-ZENTRALE: 0.1.7-dev laut WordPress aktiv; vorhandene Campus-CURRENT.zip enthält nur 0.1.2-dev und ist NICHT aktuell. BLOCKED, keinen Downgrade.
 
-Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zusätzlich die Einträge Footer-Umzug – Portale 1.1.1, HivePress 1.7.31, FAQ Frontend Fix 1.0.2, Performance Diagnose 1.1.0, Minimal Coming Soon & Maintenance Mode 2.45, WPForms Lite 2.0.3.1, WPvivid Backup Plugin 0.9.136 sowie Yoast SEO 28.7, also **acht zusätzliche Werkzeuge und Drittanbieter**. Keine unabhängigen aktuellen Voll-ZIPs dieser acht sind im HOBBYRAUSCH-Pluginbüro belegt. Auch sie sind für die geforderte vollständige Campus-Gesamtablage BLOCKED.
+Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zusätzlich die Einträge Footer-Umzug – Portale 1.1.1, HivePress 1.7.31, FAQ Frontend Fix 1.0.2, Performance Diagnose 1.1.0, Minimal Coming Soon & Maintenance Mode 2.45, WPForms Lite 2.0.3.1, WPvivid Backup Plugin 0.9.136 sowie Yoast SEO 28.7, also **acht zusätzliche Werkzeuge und Drittanbieter**. Für fünf Original-Herstellerdistributionen werden die vollständigen ZIPs oben gesichert; für die übrigen drei Eigenwerkzeuge (Footer, FAQ-Fix, Diagnose) bleiben prüfbare serveridentische Voll-ZIPs offen.
 
 ## Geprüfte Quellen / Grenzen
 
@@ -29,6 +29,18 @@ Weitere aktive Werkzeuge/Drittanbieter: Im letzten WordPress-Snapshot stehen zus
 - Es wurde kein Plugin auf WordPress installiert, keine Datenbank geändert und kein anderer Pluginstand überschrieben.
 - Die letzte WordPress-Pluginliste ist eine frühere Betreiberansicht; kein selbst ausgeführter aktueller Server-Readback.
 - Frühere Akteninhalte bleiben im Git-Verlauf und UPDATEPROTOKOLL.md erhalten. Keine alte ZIP als aktuelle Voll-ZIP umetikettieren.
+
+## Original-Hersteller-ZIPs – Ergänzung vom 02.11.2026
+
+Die fünf Original-ZIPs wurden unverändert und vollständig von WordPress.org in die vorhandene isolierte Pluginablage übernommen. Sie entsprechen jeweils genau der aus der letzten WordPress-Betreiberliste dokumentierten **Versionsnummer**, sind aber **keine vom Live-Server ausgelesenen Dateien**. Original-Download, SHA-256, ZIP-CRC, WordPress-Pluginroot und echte PHP-Versionsheader wurden geprüft; unabhängiger GitHub-Readback nach Push ist erforderlich.
+
+- WP-HIVEPRESS / 1.7.31 – ISOLIERTE_PLUGINS/WP-HIVEPRESS/CURRENT.zip
+- WP-WPFORMS-LITE / 2.0.3.1 – ISOLIERTE_PLUGINS/WP-WPFORMS-LITE/CURRENT.zip
+- WP-WPVIVID-BACKUPRESTORE / 0.9.136 – ISOLIERTE_PLUGINS/WP-WPVIVID-BACKUPRESTORE/CURRENT.zip
+- WP-WORDPRESS-SEO / 28.7 – ISOLIERTE_PLUGINS/WP-WORDPRESS-SEO/CURRENT.zip
+- WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE / 2.45 – ISOLIERTE_PLUGINS/WP-MINIMAL-COMING-SOON-MAINTENANCE-MODE/CURRENT.zip
+
+Keines dieser Pakete wurde auf WordPress installiert; die Versionen sind nicht hochgestuft worden. Die tatsächlichen Server-Bytes bleiben separat zu vergleichen.
 
 ## Erster offener Blocker
 

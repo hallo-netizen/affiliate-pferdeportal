@@ -5497,3 +5497,9 @@ Gate 5 gemäß HD-009-`CURRENT.md`.
 **Gesamtbefund:** Campus-`ISOLIERTE_PLUGINS`: HD-009 enthält eine `CURRENT.zip` (610.065 Bytes), weitere geprüfte HD-001/003/004/005/006/007/008-Ordner nur MANIFEST; HD-002 ohne isoliertes Verzeichnis. Details und exakte Fehlertexte im Proof `PLUGINS/EVIDENCE_PLUGINABLAGE_20261101.md`. WordPress-Live-Readback wurde **nicht** durchgeführt.
 
 **NEXT ACTION:** HD-003 1.50.785 aus einer autorisierten Rohdatei-Quelle unabhängig als tatsächliches ZIP wiederabrufen, Byte-/Struktur-/Versions-/Hash-Prüfungen abschließen und erst dann die vollständige ZIP über den vorgesehenen Campus-Branch-/Freigabeweg speichern. Weitere Plugin-Ablagen nach ihren jeweiligen Einzel-Currents nachholen. Gesamtstatus **PLUGINABLAGE: BLOCKED**.
+
+## 02.11.2026 – Voll-ZIP-Nachholung WordPress.org (fünf unveränderte Drittanbieter)
+
+Fünf vollständige, offiziell veröffentlichte Plugin-ZIP-Dateien in den zuletzt beim Betreiber erfassten Versionen wurden ab WordPress.org heruntergeladen und im bestehenden Hobby-Depot-Pluginbüro gespeichert: HivePress 1.7.31, WPForms Lite 2.0.3.1, WPvivid 0.9.136, Yoast SEO 28.7, Minimal Coming Soon & Maintenance Mode 2.45. SHA/CRC/Originalversion/Pluginroot geprüft, jeweils unveränderte Original-Downloads. Diese Pakete sind Versionssicherungen, kein authentifizierter Live-Server-Snapshot. Keine WordPress-Änderungen. Technische Dateien nur in den jeweiligen MANIFEST.md; ein aktueller Gesamtstatus nur PLUGINS/CURRENT_STATE.md.
+
+---
