@@ -1,0 +1,22 @@
+name: HobbyDepot HD007 register topic read-only inventory
+on:
+  push:
+    branches: [hobbyroom/audit-85-draft-hobbyregister-20261102]
+    paths: [.github/workflows/hd007-topic-readonly-inventory.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inventory exact Hobbyregister ZIP without changing anything
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,json,collections
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            print("ZIP_CHECK",z.testzip(),"FILE_COUNT",len(z.namelist()))
+            for f in z.infolist():
+              if not f.is_dir(): print("ENTRY",f.filename,"SIZE",f.file_size)
+          PY
