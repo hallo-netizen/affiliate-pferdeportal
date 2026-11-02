@@ -1,0 +1,53 @@
+name: Hobby Depot HD003 1.50.798 market categories full plugin
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150798-market-category-design-20261102
+    paths:
+      - control/hobby-depot/hd003-market-categories-150798-build.py
+      - .github/workflows/hobby-depot-hd003-market-categories-150798.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  exact-zip-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+      - name: Confirm PHP matches hosting
+        run: |
+          php -v
+          test "$(php -r 'echo PHP_VERSION;')" = 8.5.12
+      - name: Get approved exact full 1.50.797 ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p input
+          gh release download hobby-depot-hd003-1.50.797 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' \
+            --dir input
+      - name: Build and simulate category archive on every level; lint all PHP 8.5.12; verify ZIP
+        run: |
+          python3 control/hobby-depot/hd003-market-categories-150798-build.py
+      - name: Upload full verified installation plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobby-depot-hd003-v1-50-798-market-categories-full
+          path: dist/HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish full verified ZIP (never deploy to WordPress automatically)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.798 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title 'Hobby Depot HD003 1.50.798 — Anzeigenmarkt alle Kategorieebenen' \
+            --notes 'VOLLPLUGIN exakt aus verifiziertem 1.50.797. Alle Hierarchiestufen der hp_listing_category-Taxonomie erhalten den vorhandenen Anzeigenmarkt-Hero, echte Eltern-Breadcrumbs, Kategoriesuche und zentrale 1200px-Seitenachse. Native HivePress-Kategorie-, Anzeigen- und Filterdaten bleiben; keine DB-Mutationen. Sidebar/Standardtitel/Suchduplikat nur auf Anzeigenkategorien verborgen. Alle 13 PHP-Dateien auf PHP 8.5.12 gelintet; kein automatisches WordPress-Deployment. Live-Frontendprüfung nach Installation erforderlich.' \
+            dist/HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip
