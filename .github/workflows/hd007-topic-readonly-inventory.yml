@@ -10,21 +10,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inventory exact Hobbyregister ZIP without changing anything
+      - name: Compare 83 legacy structure topics against current HD007 register
+        shell: bash
         run: |
           python3 - <<'PY'
-          import zipfile,pathlib,json,collections
-          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
-          with zipfile.ZipFile(p) as z:
-            print("ZIP_CHECK",z.testzip(),"FILE_COUNT",len(z.namelist()))
-            for f in z.infolist():
-              if not f.is_dir(): print("ENTRY",f.filename,"SIZE",f.file_size)
-            for filename in ('hobby-register.json', 'hobby-articles-v1.json'):
-              data=json.loads(z.read('hd-hobbyregister-core/data/'+filename))
-              print('DATA', filename, 'TOP_TYPE',type(data).__name__, 'LENGTH',len(data))
-              if isinstance(data,dict):
-                print('KEYS',list(data)[:25])
-                for key,val in data.items():
-                  print('FIELD',key,'TYPE',type(val).__name__,'COUNT',len(val) if hasattr(val,'__len__') else 'NA','SAMPLE',str(val[:1] if isinstance(val,list) else list(val.items())[:1] if isinstance(val,dict) else val)[:1600])
-              else:print('SAMPLE',str(data[:1])[:1900])
+          import zipfile,json,collections,re,unicodedata
+          def norm(t):
+            t=t.lower().replace('ß','ss')
+            t=''.join(c for c in unicodedata.normalize('NFKD',t) if not unicodedata.combining(c))
+            return '-'.join(re.findall('[a-z0-9]+',t))
+          terms="Dioramenmalerei\nMorsefunk\nMini-CNC\nKarnivoren\nSaatgut-Tausch\nSpinnenterrarien\nPilzsubstrate herstellen\nBonsai aus Samen\nFeuerbohren\nModular Origami\nBackgammon\nKupferstich\nWachssiegel\nBetonmöbel\nSmart-Home-Basteln\nPilzklonen\nOrchideenbestäubung\nhistorische Karten\nMikrogrün\nCase-Modding\nB-Movie-Poster\nPyrographie\nNaturmaterial\nRC-Boote\nRC-Fahrzeuge\nHolzmodellbau\nTreibholz\nKugelbahnen\nGarnrollen\nParfümherstellung\nStoffmuster\nScherenschnitt\nExperimente Zuhause\nFüllfederhalter\nTapetenmuster\nHolzverbindungen\nKristallzucht\nTerrarien\nKalträuchern\nSeiltechnik\nTreibholz Sammeln\nRechenschieber\nRadierung\nUrzeitkrebse\nFossilien\nSchokolade Temperieren\nKintsugi\nIntarsien\nGenealogie\nKirigami\nKumihimo\nDorodango\nPapierblumen\nSandbilder\nStreichholzschachteln\nSeeglas\nFliesen\nMilchkefir\nPapierschöpfen\nHandgeschöpftes Papier\nEco Printing\nPapiermodellbau\nNadelbinden\nalte Werkzeuge\nSütterlin\nKlask\nLebensmittel Haltbar Machen\nWasserkefir\nPolstern\nCross-Skating\nLeder & Textil\nMetall & Schmuck\nSchrift & Papier\nElektronik & Funk\nRC-Flug & Drohnen\nInsekten & Wirbellose\nHobby finden\nChainmail\nCustom Keyboards\nHeimrobotik\nEntdecken\nNach Jahreszeit\nNach Situation"
+          terms=terms.split('\\n')
+          path='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip'
+          with zipfile.ZipFile(path) as z:
+            assert z.testzip() is None
+            records=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))['records']
+            articles=json.loads(z.read('hd-hobbyregister-core/data/hobby-articles-v1.json'))
+          print("RECORDS",len(records),"ARTICLES",len(articles),"TERMS",len(terms))
+          assert len(records)==len(articles)==862
+          by_name=collections.defaultdict(list)
+          for r in records:
+            for title in [r.get('canonical_name','')] + (r.get('aliases') or []):
+              if title:by_name[norm(title)].append(r)
+          hits=0;misses=[]
+          for term in terms:
+            match=by_name.get(norm(term),[])
+            if match:
+              hits+=1
+              for r in match:
+                ident=r.get('source_identity') or {}
+                print("TOPIC|"+term+"|EXACT|"+r['canonical_name']+"|"+str(ident.get('current_publication_role'))+"|"+str(ident.get('current_terminal_hobby_page'))+"|"+str(ident.get('target_node_id'))+"|"+r.get('registry_id',''))
+            else:
+              # suggestions only; do not conflate with true coverage
+              rough=[r['canonical_name'] for r in records if norm(term) in norm(r['canonical_name']) or norm(r['canonical_name']) in norm(term) and len(norm(r['canonical_name']))>=6]
+              misses.append(term)
+              print("TOPIC|"+term+"|NO_EXACT_MATCH|"+", ".join(rough[:5]))
+          print("RESULT",hits,"/",len(terms),"exact name/alias registry matches; missing:",", ".join(misses))
           PY
