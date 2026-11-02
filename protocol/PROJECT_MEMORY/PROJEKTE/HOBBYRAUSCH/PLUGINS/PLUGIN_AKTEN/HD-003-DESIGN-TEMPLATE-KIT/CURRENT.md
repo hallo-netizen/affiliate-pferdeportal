@@ -26,8 +26,8 @@ Anzeigenmarkt auf allen Hierarchieebenen von hp_listing_category mit dem Hobby-D
 - Mac-Test: separat 02.11.2026 auf macOS mit ditto entpackt, alle 1.290 Dateien auf identischen Inhalt geprüft: PASS.
 - Dauerablage: GitHub-Branch-Kopie wurde in einer neuen, unabhängigen GitHub-Klonung vollständig geöffnet; ZIP und Rückfallrelease erneut gelesen. GitHub Actions Lauf 41463137429: PASS.
 - Anwender hat die Frontenddarstellung als passend bezeichnet. **Keine Behauptung eines authentifizierten Server-Byte-Readbacks oder eines vollständigen Live-Funktionstests.**
-- Die Campus-Autorität gilt erst nach Übernahme dieses Prüfzweigs in den gebundenen Campus-Zweig; bis dahin ist die ZIP nachgewiesen auf dem Prüfzweig gespeichert.
+- **CAMPUS-MERGE PASS:** PR #602 erfolgreich übernommen (Commit 47031716091eb72ffebe8b99524eba3a5ac7e6a7). Der amtliche Campus-Zweig wurde danach in Actions 41467083409 neu geklont: volle Version 1.50.798, exakt 65.702.034 Bytes, SHA-256 und 1.290/1.290 ZIP-Einträge unabhängig PASS. Die Original-Hardlock-Prüfschritte wurden unverändert und vollständig separat in Actions 41466507457 bestanden. Der alte nicht verpflichtende Security-Job weist weiterhin einen Infrastrukturfehler auf, weil eine vorhandene Prüferdatei nur in main liegt; keine Sicherheitsdatei wurde verändert oder deaktiviert.
 
 ## Genau eine NEXT ACTION
 
-**Nach Übernahme in den Campus die tatsächlich installierte Plugin-Datei auf WordPress read-only gegen die aktuelle 1.50.798 ZIP vergleichen.** Keine Neuinstallation und kein weiterer Umbau auf Verdacht.
+**Die tatsächlich installierte Plugin-Datei auf WordPress read-only gegen die amtliche Campus-1.50.798-ZIP vergleichen.** Keine Neuinstallation und kein weiterer Umbau auf Verdacht.
