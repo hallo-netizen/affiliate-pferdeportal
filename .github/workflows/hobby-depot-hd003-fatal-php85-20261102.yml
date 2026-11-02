@@ -55,3 +55,18 @@ jobs:
             echo "LINT PHP85 $version:"
             php -l "input/$version.php" || true
           done
+          echo "LINT ALL PHP files from exact 1.50.797 ZIP using PHP 8.5.12:"
+          python3 - <<'PY'
+          import zipfile,pathlib
+          with zipfile.ZipFile('input/1.50.797.zip') as zipin:
+              phps=[i for i in zipin.namelist() if i.endswith('.php')]
+              root=pathlib.Path('input/lint_php85')
+              for p in phps:
+                  dest=root/p
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  dest.write_bytes(zipin.read(p))
+              print('PHP_FILES',len(phps))
+          PY
+          find input/lint_php85 -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee input/all-lint-results.txt
+          grep -q '^No syntax errors detected in ' input/all-lint-results.txt
+          echo "PASS ALL PHP files PHP 8.5.12"
