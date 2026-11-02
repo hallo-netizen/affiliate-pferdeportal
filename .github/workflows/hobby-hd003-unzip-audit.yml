@@ -1,0 +1,90 @@
+name: HD003 150798 WordPress ZIP extraction diagnosis
+on:
+  push:
+    branches: [hobbyroom/hd003-150798-zip-extraction-audit-20261102]
+    paths: [.github/workflows/hobby-hd003-unzip-audit.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: zip,zlib
+          coverage: none
+      - name: Download exact published full ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input
+          gh release download hobby-depot-hd003-1.50.797 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip' --dir input
+          gh release download hobby-depot-hd003-1.50.798 --repo "$GITHUB_REPOSITORY" --pattern 'HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip' --dir input
+          mv input/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip input/797.zip
+          mv input/HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip input/798.zip
+          php -r 'echo "PHP ",PHP_VERSION," ZIP ",(extension_loaded("zip")?"yes":"no")," DISK ",disk_free_space("."),PHP_EOL;'
+      - name: Exact archive checks + extract using WordPress-compatible PHP ZipArchive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile,hashlib,collections,os,pathlib
+          for version in ('797','798'):
+            f=pathlib.Path('input')/(version+'.zip')
+            with zipfile.ZipFile(f) as z:
+              info=z.infolist()
+              print('ARCHIVE',version,'bytes',f.stat().st_size,'sha',hashlib.sha256(f.read_bytes()).hexdigest(),'entries',len(info),'uncompressed_total',sum(x.file_size for x in info),'compressed_total',sum(x.compress_size for x in info),'bad_entry',z.testzip())
+              print('METHODS',collections.Counter(x.compress_type for x in info))
+              print('UNIQUE',len(set(x.filename for x in info)),'duplicate',len(info)-len(set(x.filename for x in info)))
+              print('MAX_PATH',max(len(x.filename) for x in info),'MAX_SINGLE',max(x.file_size for x in info))
+              print('ROOTS',collections.Counter(x.filename.split('/')[0] for x in info))
+              assert z.testzip() is None
+              assert len(info)==1290
+          PY
+          cat > input/test.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          foreach (['797','798'] as $v) {
+            $path=__DIR__ . '/' . $v . '.zip';
+            $out=__DIR__ . '/unpacked-' . $v;
+            if (!is_dir($out)) mkdir($out,0755,true);
+            $z=new ZipArchive();
+            $open=$z->open($path,ZipArchive::CHECKCONS);
+            echo "ZIPARCHIVE OPEN {$v}: ";var_export($open);echo " ENTRIES ",($open===true?$z->numFiles:0),"\n";
+            if ($open!==true) throw new RuntimeException('ZipArchive invalid '.$v.' code '.strval($open));
+            $ok=$z->extractTo($out);
+            $message=$z->getStatusString();
+            $z->close();
+            echo "ZIPARCHIVE EXTRACT {$v}: ";var_export($ok);echo " STATUS {$message}\n";
+            if (!$ok) throw new RuntimeException('ZIP archive extraction failed '.$v);
+            $main=$out.'/affiliate-portal-template-kit/pferde-template-kit.php';
+            if (!is_readable($main)) throw new RuntimeException('Not recognized as full plugin ZIP '.$v);
+            echo 'MAIN FILE ', $v, ' BYTES ', filesize($main), ' PHP HEADER ', substr(file_get_contents($main),0,30),"\n";
+          }
+          PHP
+          php input/test.php
+          du -sh input/unpacked-797 input/unpacked-798
+      - name: WordPress PclZip extraction check
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 --max-time 60 https://raw.githubusercontent.com/WordPress/WordPress/master/wp-admin/includes/class-pclzip.php -o input/class-pclzip.php
+          cat > input/test-pclzip.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          require __DIR__.'/class-pclzip.php';
+          $v='798';
+          $zip=new PclZip(__DIR__.'/'.$v.'.zip');
+          $target=__DIR__.'/pclzip-798';
+          if(!is_dir($target))mkdir($target,0755,true);
+          $result=$zip->extract(PCLZIP_OPT_PATH,$target);
+          if($result===0){echo "PCLZIP FAILURE: ".$zip->errorInfo(true)."\n";exit(1);}
+          echo "PCLZIP EXTRACT PASS files ".count($result)."\n";
+          if(!is_readable($target.'/affiliate-portal-template-kit/pferde-template-kit.php'))exit(2);
+          PHP
+          php input/test-pclzip.php
+          du -sh input/pclzip-798
