@@ -1,0 +1,104 @@
+name: Hobby Depot HD003 1.50.798 standard universal ZIP
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150798-mac-normalzip-20261102
+    paths:
+      - .github/workflows/hobby-depot-hd003-150798-normal-macos-zip.yml
+permissions:
+  contents: write
+jobs:
+  macos-standard-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch exact verified 1.50.798 full release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p input dist
+          gh release download hobby-depot-hd003-1.50.798 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip' \
+            --dir input
+          shasum -a 256 input/*.zip
+      - name: Repackage full original plugin as clean standard ZIP without copied ZIP metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/hd003-repack.py <<'PY'
+          import hashlib,os,pathlib,zipfile
+          source=pathlib.Path('input/HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip')
+          output=pathlib.Path('dist/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip')
+          EXPECTED_SOURCE='87263d46fde37adb492574a1ba9678a5271dd33f3c0f998b69a6d5934ea53510'
+          assert hashlib.sha256(source.read_bytes()).hexdigest()==EXPECTED_SOURCE,'Wrong input ZIP. Stop.'
+          with zipfile.ZipFile(source,'r') as original:
+              infos=original.infolist()
+              assert len(infos)==1290
+              assert original.testzip() is None
+              expected={info.filename:hashlib.sha256(original.read(info.filename)).hexdigest() for info in infos}
+              assert len(expected)==len(infos),'Duplicate archive path'
+              assert all(f.startswith('affiliate-portal-template-kit/') for f in expected)
+              assert 'affiliate-portal-template-kit/pferde-template-kit.php' in expected
+              with zipfile.ZipFile(output,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=False) as clean:
+                  for info in infos:
+                      filename=info.filename
+                      assert not filename.startswith('/') and '..' not in pathlib.PurePosixPath(filename).parts,filename
+                      entry=zipfile.ZipInfo(filename,(2026,11,2,12,0,0))
+                      entry.compress_type=zipfile.ZIP_DEFLATED
+                      entry.create_system=3
+                      entry.external_attr=(0o40755 if info.is_dir() else 0o100644)<<16
+                      entry.extra=b''
+                      entry.comment=b''
+                      clean.writestr(entry,original.read(filename),compress_type=zipfile.ZIP_DEFLATED,compresslevel=6)
+          with zipfile.ZipFile(output) as check:
+              assert check.testzip() is None
+              assert len(check.infolist())==1290
+              assert check.namelist()==list(expected)
+              assert all(check.getinfo(f).extra==b'' for f in expected)
+              assert all(hashlib.sha256(check.read(f)).hexdigest()==expected[f] for f in expected),'Plugin contents changed'
+          print('PASS STANDARD ZIP: 1290 plugin files byte-for-byte identical to approved 1.50.798')
+          print('SHA256',hashlib.sha256(output.read_bytes()).hexdigest())
+          print('ZIP',output,'SIZE',output.stat().st_size)
+          PY
+          python3 /tmp/hd003-repack.py
+      - name: Test Linux standard unzip and full byte identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          unzip -tq dist/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip
+          mkdir -p dist/mac-ditto-extract
+          unzip -q dist/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip -d dist/mac-ditto-extract
+          python3 - <<'PY'
+          import hashlib,pathlib,zipfile
+          source=pathlib.Path('input/HOBBY_DEPOT_HD003_1.50.798_ANZEIGENMARKT_ALLE_KATEGORIEEBENEN_VOLLPLUGIN.zip')
+          out=pathlib.Path('dist/mac-ditto-extract')
+          with zipfile.ZipFile(source) as z:
+            files=[i for i in z.infolist() if not i.is_dir()]
+            actual=[f for f in out.rglob('*') if f.is_file()]
+            assert len(files)==len(actual),(len(files),len(actual))
+            for i in files:
+              p=out/i.filename
+              assert p.is_file(),i.filename
+              assert hashlib.sha256(p.read_bytes()).digest()==hashlib.sha256(z.read(i.filename)).digest(),'Mismatch: '+i.filename
+          print('PASS STANDARD UNZIP: all',len(files),'files extracted, same exact contents')
+          PY
+          rm -rf dist/mac-ditto-extract
+      - name: Upload normal standard installation ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: hd003-150798-normal-macos-zip
+          path: dist/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish tested standard full ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.798-standard-zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Hobby Depot HD003 1.50.798 – Normale Standard-ZIP" \
+            --notes "Dies ist dieselbe vollständige HD003 Version 1.50.798. Alle 1290 Plugin-Dateien sind bytegenau identisch zum verifizierten Release. Nur das ZIP wurde mit frischen Standard-Deflate-ZIP-Metadaten neu gepackt. Unabhängig entpackt mit unzip und alle Dateien einzeln auf identischen Inhalt geprüft. Mac-Test gesondert. Keine WordPress-Installation ausgeführt." \
+            dist/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip
