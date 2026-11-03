@@ -1,3 +1,17 @@
+## HBD-DES-20261103-HIVE-184 – Wiederholte Kollision auf HivePress-Filter-Kategorie 331
+
+**Fehlerbild:** Am 03.11.2026 Nutzerscreenshot mit `/?_category=331` zeigt angeschnittene Kategorie-Einleitung/Breadcrumb unter der Portalnavigation. Andere Kategorieebenen müssen denselben bestehenden Layoutpfad benutzen.
+
+**Quelle und Ursache belegt:** Nutzer-Original-ZIP 0.1.183 physisch gegen 0.1.184 verglichen. `includes/hobby-market-profile.php` band das bestehende Korrektur-Skript nur bei `is_tax('hp_listing_category')` ein; bei einer Filteranfrage über `?_category=ID` wurde das Skript nicht geladen. Zusätzlich prüfte `assets/market-category-clearance.js` ausschließlich die native `tax-hp_listing_category`-Klasse statt der bereits zentral verwendeten `hbdp-market-category-request`-Klasse. Beides ist anhand der geänderten Originaldateien nachgewiesen, nicht vermutet. Exakte Live-DOM-Abstandsursache ohne WordPress-Readback weiterhin nicht abschließend verifiziert.
+
+**Minimaländerung:** Derselbe Scriptpfad gilt im lokalen Kandidaten 0.1.184 für beide echten Kategorie-Zugangsarten. Keine neue Vorlage, kein zweiter Filter, kein Nachbau der Suche und keine Änderung an `hp_listing_category` selbst. Nur drei Dateideltas; 423 von 426 übrigen Einträgen byteidentisch.
+
+**Checks:** ZIP-CRC/PHP-Lint 33/33/JS-Syntax PASS und negativer Originalvergleich; `HAB184_PRUEFBERICHT.json` protokolliert 90 lokale Browserfälle. Keine reale WordPress-Installation, kein Live-/Mobil-Readback. **LOCAL CLOSED / LIVE OFFEN.**
+
+**Separater Pflichtblocker:** Für Hab & Bewahr enthält der bestehende Campus-Autoritätsplan noch keine eigene Projekt-PLUGINS-Autorität und keinen bestätigten Voll-ZIP-/Readback-Pfad. Original-ZIP 0.1.183 und Kandidat 0.1.184 im Chatcontainer sind kein Campus-Current. **PLUGINABLAGE BLOCKED**; eine neue Ablagestelle nicht still erfinden.
+
+---
+
 ## 23.10.2026 – ABSCHLUSS-NACHHOLPRÜFUNG DER NUTZERFOTOS (ERGÄNZUNG ZUM BESTEHENDEN HBD-DES-20261022-BILDER-USER)
 **Fehlerquelle, nicht Current.** Der unterhalb historisch noch enthaltene Hinweis `0.1.63-ZIP fehlt` ist **überholt und als falsche Aussage ausdrücklich widerrufen**: Original 0.1.63 ist in aktiver Runtime physisch vorhanden, Prüfsumme `934ff35a16d89ee59f21a0a43564394ffd1b0cbdef2e9ba5f3b4eb6dd45c3635` stimmt. Zugriff in zukünftigen Chats separat nachprüfen.
 
