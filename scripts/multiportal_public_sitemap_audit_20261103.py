@@ -4,6 +4,7 @@ import concurrent.futures
 import collections
 import html.parser
 import json
+import os
 import re
 import time
 import urllib.error
@@ -19,9 +20,11 @@ SITES = {
 }
 BLOCKED = ("/wp-admin", "/wp-login", "/wp-json", "/wp-content", "/wp-includes", "/xmlrpc", "/feed", "/author/", "/account/", "/my-account", "/kasse", "/warenkorb", "/cart", "/checkout")
 EXCLUDED_SUFFIX = (".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif", ".avif", ".css", ".js", ".ico", ".pdf", ".mp4", ".woff", ".txt", ".zip", ".xml")
-MAX_LINK_PAGES = 250
-MAX_SEED_PAGES = 320
-MAX_VALIDATE = 1200
+if os.environ.get("AUDIT_SITE"):
+    SITES = {os.environ["AUDIT_SITE"]: SITES[os.environ["AUDIT_SITE"]]}
+MAX_LINK_PAGES = int(os.environ.get("AUDIT_NAV","110"))
+MAX_SEED_PAGES = int(os.environ.get("AUDIT_SEED","140"))
+MAX_VALIDATE = int(os.environ.get("AUDIT_VERIFY","400"))
 MAX_HTML_BYTES = 1100000
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; SitemapEvidenceAudit/1.0; +https://www.hobby-depot.de)", "Accept": "text/html,application/xml,text/xml;q=0.9,*/*;q=0.8"}
 
