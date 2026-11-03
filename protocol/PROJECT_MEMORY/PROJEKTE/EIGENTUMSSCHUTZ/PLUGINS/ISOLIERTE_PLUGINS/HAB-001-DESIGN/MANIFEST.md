@@ -1,15 +1,17 @@
 # HAB-001-DESIGN – DATEI-MANIFEST
 
-**Status: BLOCKED – kein autoritativ wiederöffneter `CURRENT.zip` vorhanden.**
+**Status: ORIGINAL-`CURRENT.zip` IST IM OFFIZIELLEN GITHUB-PLUGINBÜRO GESPEICHERT.**
 
-Geplanter exakter Campus-Pfad: `protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip`.
+- Plugin: Hab & Bewahr – Design, Original-Pluginordner `hab-bewahr-design-vorschau`.
+- Version: **0.1.184**.
+- Originaler Release-Name: `HAB_UND_BEWAHR_DESIGN_0.1.184_HIVEPRESS_KATEGORIEN_REPARIERT.zip`.
+- Installierbare vollständige Datei: `CURRENT.zip` direkt in diesem Ordner.
+- Originalgröße: **84.339.643 Bytes**.
+- Git-Blob-SHA: `e153339c967cabcc4953ed6fb0882d9792b622fe`.
+- SHA-256 des geprüften Originalarchivs: `76043e5c093058a4d8aff8fd6642307cade951c8267641dc710b8ed70cd323e3`.
+- ZIP: **426 Einträge, CRC PASS**; GitHub-Actions-Run **41687120534** erfolgreich.
+- **PR #625** am 03.11.2026 in den offiziellen Campus-Branch gemergt; `CURRENT.zip` dort anschließend über das GitHub-Verzeichnis mit Originalgröße und Blob-SHA nachgewiesen.
+- Technische Versionsautorität: `../../PLUGIN_AKTEN/HAB-001-DESIGN/CURRENT.md`.
+- WordPress-Liveinstallation: **nicht überprüft**. Keine zweite Pluginidentität und kein älterer Ersatz.
 
-Projekt-Pluginidentität: `hab-bewahr-design-vorschau`; neueste belegte Version: `0.1.184`.
-
-Dokumentierter echter Dateiname: `HAB_UND_BEWAHR_DESIGN_0.1.184_HIVEPRESS_KATEGORIEN_REPARIERT.zip`.
-
-Größe aus vorhandener Evidenz: 84.339.643 Bytes.
-
-SHA-256 aus vorhandener Evidenz: `76043e5c093058a4d8aff8fd6642307cade951c8267641dc710b8ed70cd323e3`.
-
-Nicht als GitHub ZIP hochgeladen; keine unabhängige Campus-Readback-Prüfung möglich. Dies ist ausdrücklich **keine Installationsdatei** und kein Ersatz für die fehlenden ZIP-Bytes. Die einzige Versionsautorität ist `../../PLUGIN_AKTEN/HAB-001-DESIGN/CURRENT.md`.
+Belege: https://github.com/hallo-netizen/affiliate-pferdeportal/pull/625 und https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/41687120534
