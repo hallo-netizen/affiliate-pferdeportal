@@ -2,16 +2,16 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-24
-STATUS: **1.0.25 LAUT WORDPRESS-LISTE AKTIV / LOKALE QA PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
+STAND: 2026-11-03
+STATUS: **1.0.25 LAUT WORDPRESS-LISTE AKTIV / ORIGINALSERVER-ZIP IN GITHUB GESICHERT / LIVE-FUNKTIONSPRÜFUNG OFFEN**
 
 Plugin-ID:
 `HD-005-GLOSSAR-CORE`
 
-Aktuelles Bundle:
+Früheres Entwicklungsbundle (nicht die jetzt gesicherte Serverdatei):
 `HOBBY_DEPOT_DESIGN_SEARCH_BUNDLE_20261024_HD003_1.50.731_HD007_1.2.15_HDG_1.0.25_HARDPASS.zip`
 
-SHA-256:
+SHA-256 des Entwicklungsbundles:
 `581736924531499b589a8349fba3b8bf42ef3ffb3755c0043be35a568d1ef4c8`
 
 Pluginroot:
@@ -19,6 +19,16 @@ Pluginroot:
 
 Fach-Current:
 `../../../GLOSSAR/CURRENT_STATE.md`
+
+## Gesicherte aktuelle Originalserver-ZIP – 03.11.2026
+
+Betreiberdatei: `hobby-depot-glossar.zip`, heruntergeladen aus der installierten WordPress-Instanz.
+GitHub-Current: `../../ISOLIERTE_PLUGINS/HD-005-GLOSSAR-CORE/CURRENT.zip`.
+Version aus Plugin-Hauptdatei: `1.0.25`.
+Original-ZIP: 340.915 Bytes, 63 ZIP-Einträge, vollständig fehlerfrei geöffnet.
+SHA-256: `84b39acec676a29dd23ccbf1a474d19fdac716c50f495cef32c649665194d514`.
+Git-Blob-ID: `a29e27fa20d50b9daf624925b478e61be19d9632` (bytegenau passend zur Originaldatei).
+Die Live-Funktion des Plugins wurde durch die ZIP-Ablage nicht geprüft.
 
 ## Produktionsstand
 - 308 Glossarbegriffe;
@@ -50,4 +60,4 @@ Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version
 
 ## EXAKT EINE NEXT ACTION
 
-**Die laut WordPress-Liste aktive 1.0.25 zunächst im Live-Frontend read-only prüfen und die ZIP-Ablage nachholen; nicht blind durch einen älteren Bundle-Ordner überschreiben.**
+**Die laut WordPress-Liste aktive 1.0.25 im Live-Frontend read-only prüfen. Die vollständige Server-ZIP ist bereits bytegenau im Plugin-Büro gesichert.**

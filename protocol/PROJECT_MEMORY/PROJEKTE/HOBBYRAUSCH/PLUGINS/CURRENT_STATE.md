@@ -11,7 +11,7 @@ Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen 
 | HD-001 – Kategorie-Workflow | 1.14.17 (WordPress-Liste) | Aktuelle Voll-ZIP noch nicht im Büro; ältere 1.14.16 in der Projektkonversation vorhanden |
 | HD-003 – Design / Template Kit | 1.50.798, vom Betreiber im Frontend abgenommen | **Voll-ZIP gesichert, unabhängig geöffnet** |
 | HD-004 – Kategorie-Kern | 1.0.0 | **Original-Voll-ZIP gesichert, unabhängig geprüft** |
-| HD-005 – Glossar Core | 1.0.25 | Aktuelle Voll-ZIP noch nicht im Büro |
+| HD-005 – Glossar Core | 1.0.25 | **Originalserver-ZIP gesichert und bytegenau geprüft (03.11.2026)** |
 | HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
 | HD-009 – Affiliate-Zentrale | 0.1.7-dev zuletzt als aktiv gemeldet | **Aktuelle Original-ZIP nicht im Campus; die alte 0.1.2-dev wurde ausdrücklich entfernt** |
@@ -23,6 +23,7 @@ Zusätzlich existieren eigenentwickelte, **nicht als aktiv belegte Kandidaten**:
 
 ## Was jetzt tatsächlich gesichert ist
 
+- **HD-005 / 1.0.25:** vollständige Original-ZIP vom installierten WordPress-Plugin, 340.915 Bytes, SHA-256 `84b39acec676a29dd23ccbf1a474d19fdac716c50f495cef32c649665194d514`; ZIP geprüft und GitHub-Blob bytegenau verifiziert.
 - **HD-003 / 1.50.798:** vollständiges Original-Paket `ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip`, unabhängig überprüft.
 - **HD-007 / 1.2.17:** vollständiges Original-Paket `ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`, unabhängig überprüft.
 - **HD-004 / 1.0.0:** exakte aktuelle Original-ZIP, 3.736 Bytes, vollständiger Bytevergleich erfolgreich.
