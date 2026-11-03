@@ -1,3 +1,13 @@
+## 2026-11-03 – Hab & Bewahr: isoliertes Eigenplugin-Büro als Campus-Routingvorschlag
+
+**WAS:** Für `EIGENTUMSSCHUTZ` ein eigenes `PLUGINS/`-Büro unter bereits bestehendem Projektgebäude mit `START_HERE`, `CURRENT_STATE`, `HOBBYRAUM`, Inventar, drei technischen Plugin-Akten und isolierten künftigen Voll-ZIP-Orten ergänzt. Autoritätsplan erhält exakt einen neuen `EIGENTUMSSCHUTZ_PLUGINS`-Scope; Gebäudeeingang verlinkt ihn. Keine neue selbstständige Projektstruktur, keine Änderung an existierenden Plugin-Quellen.
+
+**WARUM:** Bisher fehlte die projektgebundene, revisionsfeste Eigenpluginablage; Chat-ZIPs und private Library sind kein Campus-current. Das Büro führt nur drei tatsächlich belegte Eigenpluginlinien, keine WordPress-Fremdplugins oder ungeprüften allgemeinen Affiliate-Stamm. Nicht hochladbare Binär-ZIPs werden **nicht** durch leere oder textbasierte CURRENT.zip ersetzt: PLUGINABLAGE BLOCKED.
+
+**Freigabegrenze:** Campus-Änderung über GitHub-PR, nicht direkt auf geschützten Branch übernommen. Der Nachweis einer tatsächlichen ZIP-Ablage einschließlich unabhängigen Fresh-Download und Live-Installation fehlt.
+
+---
+
 # BAUCONTAINER – BAUPROTOKOLL
 
 STAND: 2026-09-16

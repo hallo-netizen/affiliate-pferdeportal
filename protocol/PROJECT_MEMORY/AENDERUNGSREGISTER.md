@@ -1,3 +1,11 @@
+## HB-PLUGINS-20261103 – Neues Projekt-Pluginbüro für eigene Plugins
+
+**WAS:** `PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/` analog zum bestehenden Campus-Bürosystem eingerichtet, drei eigene Plugins eindeutig inventarisiert, neue isolierte Ablageakten und Autoritätsplan-Eintrag vorbereitet. Nur HAB-001 Design, HAB-002 Kategorie-Workflow, HAB-003 Bildzentrale. Ausgeschlossene Fremdplugins: HivePress, WPForms, Yoast, Akismet, WPvivid und andere Anbieter. Keine falschen `CURRENT.zip`-Attrappen. Regulärer PR statt direkter Änderung des offiziellen Campus.
+
+**WARUM:** Der Nutzer verlangt die zentrale, dauerhafte Verwahrung jeweils der aktuellen eigenen Version; alte ZIPs und fremde Projektpakete dürfen nicht als aktuelles Hab-&-Bewahr-Plugin ausgegeben werden. Tatsächlich verfügbare ZIP-Bytes liegen für Design 0.1.184 im Chat-Container, für Kategorie 1.14.8.37 und Bildzentrale 1.0.0 bislang nur Aktennachweise vor. Der GitHub-Werkzeugpfad kann nicht einfach eine lokale 84-MB-Binärdatei als Blob übertragen; bis zum unabhängigen Campus-Wiederabruf bleibt PLUGINABLAGE BLOCKED.
+
+---
+
 ## HBD-DES-20261103-184 – HivePress-Kategorierouten + Nachholprüfung Campus-Pluginablage
 
 **WAS:** Vom Nutzer am 03.11.2026 gelieferte vollständige Design-ZIP 0.1.183 physisch gegen den lokal erzeugten Reparaturkandidaten 0.1.184 geprüft: 426 ZIP-Einträge, drei Änderungspfade, 423 Bytegleichheiten, ZIP-CRC/PHP 33/33/JS PASS. Archiv- und `?_category=ID`-Kategorien verwenden nach dem Fix denselben bereits vorhandenen Script-/Body-Klassenpfad. Kein WordPress-Live-Test. Die bestehende zuständige Design-Current und die Design-Fehlerquelle erhalten einen explizit als **CAMPUSABLAGE BLOCKED** gekennzeichneten Nachtrag.
