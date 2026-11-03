@@ -1,3 +1,8 @@
+## 03.11.2026 – NACHGEZOGEN: EIGENPLUGIN-BÜRO JETZT OFFIZIELL VORHANDEN
+
+Der unten dokumentierte Befund, dass ein Hab-&-Bewahr-Pluginbüro fehlt, ist nach Merge von PR #619 überholt. Der offizielle Campus hat jetzt den Scope EIGENTUMSSCHUTZ_PLUGINS mit Bürotür, Current, Inventar und drei Plugin-Akten. Die ZIP-Binärdateien sind dort allerdings weiterhin NICHT als unabhängige CURRENT.zip vorhanden. Die Live-Prüfung für Design 0.1.184 ist weiterhin offen. Die ZIP-Ablage wird allein im Büro PLUGINS/CURRENT_STATE.md koordiniert; die älteren Design-/Fotomängel bleiben unberührt.
+
+---
 ## 03.11.2026 – NACHHOLPRÜFUNG KATEGORIE-REPARATUR 0.1.184 – LOCAL PASS, CAMPUSABLAGE BLOCKED, LIVE OFFEN
 
 **Autorität:** Weiterhin genau diese DESIGN/CURRENT_STATE.md auf dem durch den AUTORITAETSPLAN gerouteten Campus-Branch. Dieser neue Nachtrag gilt nur für die tatsächlich geprüfte HivePress-Kategorie-Reparatur. Ältere Abschnitte bleiben Fehler-/Designhistorie; insbesondere die offenen Fotobeanstandungen werden hier NICHT als erledigt erklärt.
