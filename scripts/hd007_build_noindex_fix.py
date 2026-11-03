@@ -44,9 +44,9 @@ with zipfile.ZipFile(ORIGINAL) as z:
     owned=[r for r in rows if (r.get('source_identity',{}).get('current_terminal_hobby_page') is True and
            isinstance(r.get('source_identity',{}).get('target_node_id'),str) and
            r['source_identity']['target_node_id'])]
-    free=[r for r in rows if r not in owned]
+    free=len(rows)-len(owned)
     assert owned and free, 'Both ownership classes must be present'
-    print('REGISTRY',len(rows),'CORE OWNERS',len(owned),'REGISTER INDEXABLE',len(free))
+    print('REGISTRY',len(rows),'CORE OWNERS',len(owned),'REGISTER INDEXABLE',free)
     front=z.read(FRONT).decode('utf-8')
     head_pat=re.compile(r'^    public static function head_meta\(\) \{\n.*?^    \}\n',re.M|re.S)
     front,n=head_pat.subn(lambda _:replacement,front)
@@ -55,13 +55,16 @@ with zipfile.ZipFile(ORIGINAL) as z:
     assert "const VERSION = '1.2.16';" in front
     front=front.replace("1.2.16","1.2.18")
     assert 'const VERSION = '+"'1.2.18';" in front
-    assert front.count('content=\"noindex,follow\"')==1
+    assert front.count('noindex,follow')==1
     main=z.read(MAIN).decode('utf-8')
     assert 'Version: 1.2.17' in main
     main=main.replace('Version: 1.2.17','Version: 1.2.18',1)
     mods={FRONT:front.encode('utf-8'),MAIN:main.encode('utf-8')}
     with zipfile.ZipFile(OUT,'w') as output:
         for member in info:
+            if member.is_dir():
+                output.writestr(member,b'')
+                continue
             contents=mods.get(member.filename)
             if contents is None:contents=z.read(member)
             output.writestr(member,contents)
@@ -69,7 +72,7 @@ with zipfile.ZipFile(ORIGINAL) as z:
         assert rebuilt.testzip() is None
         assert rebuilt.namelist()==z.namelist()
         for member in info:
-            if member.filename not in mods:
+            if member.filename not in mods and not member.is_dir():
                 assert rebuilt.read(member.filename)==z.read(member.filename),'Unwanted modified entry: '+member.filename
         for name in [FRONT,MAIN,REG]:
             p=UNPACK/name
