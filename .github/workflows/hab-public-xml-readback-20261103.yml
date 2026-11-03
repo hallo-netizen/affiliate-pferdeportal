@@ -38,7 +38,7 @@ jobs:
             "/category/einbruch-und-garten-und-grundst-gartenhaus-schrebergarten-12/",
             "/category/einbruch-und-haus-und-wohnung-wertsachen-und-tresore-4/",
             "/category/feuer-und-gase-akku-und-elektrik-garage-und-private-wer-131/",
-            "/glossar/","/listing/"
+            "/glossar/","/listing/","/einbruch-und-diebstahl/","/dienstleister/"
           ]
           root="https://hab-und-bewahr.de"
           for p in paths:
@@ -46,8 +46,8 @@ jobs:
             try:
               with urllib.request.urlopen(req,timeout=12) as r:
                 doc=r.read(500000).decode("utf8","replace")
-                robo=re.findall(r'<meta\\s+[^>]*name=[\\x22\\x27]robots[\\x22\\x27][^>]*>',doc,re.I)
-                canon=re.findall(r'<link\\s+[^>]*rel=[\\x22\\x27]canonical[\\x22\\x27][^>]*>',doc,re.I)
+                robo=re.findall(r'<meta\s+[^>]*name=[\x22\x27]robots[\x22\x27][^>]*>',doc,re.I)
+                canon=re.findall(r'<link\s+[^>]*rel=[\x22\x27]canonical[\x22\x27][^>]*>',doc,re.I)
                 title=re.findall(r'<title[^>]*>(.*?)</title>',doc,re.I|re.S)
                 print("MISSING_TARGET",p,"HTTP",r.status,"FINAL",r.url,"ROBOTS",robo[:3],"X-ROBOTS",r.headers.get("X-Robots-Tag"),"CANONICAL",canon[:2],"TITLE",title[:2],flush=True)
             except Exception as e:
