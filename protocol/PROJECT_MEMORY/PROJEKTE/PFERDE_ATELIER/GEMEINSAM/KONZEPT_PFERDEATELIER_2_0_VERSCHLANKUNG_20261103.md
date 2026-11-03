@@ -44,7 +44,7 @@ WordPress-Website-Zustandsbericht des Betreibers:
 | Phase | Konkrete Arbeit | Zuständigkeit | Erfolgskriterium |
 |---|---|---|---|
 | A – Bestandsplan | Aktuellen WP-Bericht und vorhandene Pluginquellen gegenüberstellen; Funktion → zuständige Komponente; Design-Abhängigkeiten, mögliche Doppelungen und reine Werkzeuge erfassen. Speicheranalyse ergänzen. | Assistenz; Betreiber liefert nur die bereits angekündigte Analyse | Liste **Behalten / Prüfen / Zusammenlegen / Ersetzen / Entfallen** mit konkreten Belegen und ohne voreilige Löschfreigabe |
-| B – Testbasis | Vom Betreiber freigegebene, **separat isolierte** WordPress-Testinstallation herstellen; produktive Daten nur als geschützte Kopie übernehmen; ausgehende E-Mails, Tracking, Cron/Automatik und externe Aktionen auf der Kopie kontrollieren, damit es keine Wirkung auf LIVE gibt. | Gemeinsam bei Einrichtung, Assistenz bei Planung und Tests | Nachgewiesene Trennung und sichere Rückkehrmöglichkeit |
+| B – Testbasis und geplanter Import | Separate WordPress-Testinstallation nutzen; **keine Seiten von Hand neu anlegen**. Originalseiten, Beiträge, Kategorien, Medien, Navigation, erforderliche Einstellungen sowie Anzeigenmarkt-Daten über einen vorher festgelegten kontrollierten Import übernehmen. Plugins/Funktionen nur gezielt und mit Abhängigkeitsprüfung installieren; kein blindes Komplettklonen. E-Mails, Tracking, Cron und externe Aktionen auf der Kopie isolieren. | Gemeinsam bei Übernahme, Assistenz bei Importplanung und Tests | Nachgewiesene Trennung, Vollständigkeit der Inhalte und sichere Rückkehrmöglichkeit |
 | C – Design | Aktuelles Frontend als Vergleichsbasis dokumentieren; identische Vorlagen in einer zentral gesteuerten schlanken Designbasis umsetzen. | Assistenz | Desktop-/Mobilansichten und Interaktionen stimmen überein |
 | D – Funktionen | Bestehende Fachfunktionen auf der Testkopie anbinden; Astra/Kubio nur dann ablösen, wenn die betreffenden Funktionen nachweisbar weiter funktionieren. | Assistenz | Jede bestehende Funktion besteht ihren Test; K0 unverändert |
 | E – Verschlanken | Nachgewiesene Doppelungen, unnötige Frontend-Dateien, dauerhaft aktive Diagnose-/Importwerkzeuge und verwaiste temporäre Daten gezielt reduzieren. | Assistenz, nur Testsystem | Kein Funktionsverlust, geringere technische Last; nichts ohne Rückweg löschen |
@@ -57,6 +57,23 @@ WordPress-Website-Zustandsbericht des Betreibers:
 - **Assistenz:** Aus aktuellen Informationen und vorhandenen Original-Pluginunterlagen zunächst die **eine** konsolidierte Entscheidungsübersicht mit Abhängigkeiten erstellen. Kein Versionsraten.
 - **Später, erst für Phase B:** Gemeinsam eine tatsächlich isolierte Testinstallation bereitstellen. Eine bloße Test-URL ist für die jetzige Konzeptphase nicht erforderlich.
 - **Erst nach harter technischer Prüfung:** Neue Designbasis bauen, Funktionen nachweisen, technische Altlasten entfernen und ggf. LIVE umstellen.
+
+## 5a. Verbindliche Präzisierung nach Prüfung am 03.11.2026
+
+Der Betreiber hat die **leere, isolierte WordPress-Testinstallation** bereits eingerichtet, Grundeinstellungen erledigt, Beispielinhalte/überflüssige Plugins entfernt, HivePress aktiviert und ein HivePress-Theme installiert.
+
+**Korrektur eines falschen Chat-Arbeitsschritts:** Das manuelle Anlegen leerer Seiten namens „Startseite“ und „Anzeigenmarkt“ war **nicht nötig und nicht durch dieses Konzept gedeckt**. Es ist zu unterlassen. Falls die beiden leeren Seiten schon angelegt wurden, vor dem Import prüfen, dass keine doppelten URL-Namen oder Seiten entstehen.
+
+**Import-Regel:** Die bisherigen tatsächlichen Seiten, Beiträge, Kategorien, Bilder und Navigation werden aus der bisherigen WordPress-Seite **übernommen**, mit bestehenden URLs und Inhalt. Die Daten des Anzeigenmarkts und individuelle Design-/Plugin-Einstellungen müssen explizit berücksichtigt werden. Ein einfaches WordPress-XML-Importverfahren ist nicht automatisch ein vollständiger Umzug sämtlicher pluginbezogener Einstellungen/Daten. **Keine pauschale vollständige Datenbank-/Plugin-Kopie**, da das alte System so wiederhergestellt und die Verschlankung unterlaufen würde.
+
+**Korrigierte Reihenfolge ab jetzt:**
+1. Assistenz bestimmt den **konkreten Importumfang und die Quelle jeder Datenart** auf Basis vorhandener LIVE-Plugin- und Projektunterlagen.
+2. Erforderliche Ziel-Funktionen/Seitentypen vorbereiten, ohne das alte Designsystem unkontrolliert zu übernehmen.
+3. **Kontrollierter Import der Originaldaten** auf die isolierte Testinstallation – nicht neu tippen.
+4. Neue schlanke Designbasis auf den importierten Originalseiten entwickeln und mit LIVE vergleichen.
+5. Vollständige Funktions- und Abnahmeprüfung vor irgendeiner Umstellung.
+
+**Nächste Aufgabe des Betreibers:** Keine zusätzlichen Seiten anlegen und zunächst nichts importieren; erst der geprüfte Importfahrplan nennt notwendige konkrete Klicks.
 
 ## 6. Stopp-Regeln
 
