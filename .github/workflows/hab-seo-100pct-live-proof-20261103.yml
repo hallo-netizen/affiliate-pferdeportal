@@ -59,7 +59,10 @@ jobs:
               xml_files[u]=len(found);urls.extend(found)
           except Exception as e:
             problems.append('XML_DISCOVERY_ERROR '+repr(e));children=[]
-          if len(set(urls))!=len(urls):\n            duplicates=[u for u in set(urls) if urls.count(u)>1]\n            print('DUPLICATE_URLS',duplicates)\n            problems.append('DUPLICATES_IN_XML '+str(len(urls)-len(set(urls))))
+          if len(set(urls))!=len(urls):
+            duplicates=[u for u in set(urls) if urls.count(u)>1]
+            print('DUPLICATE_URLS',duplicates)
+            problems.append('DUPLICATES_IN_XML '+str(len(urls)-len(set(urls))))
           check=list(dict.fromkeys(urls+[BASE+p for p in roots+protected]+[listing]))
           with concurrent.futures.ThreadPoolExecutor(max_workers=7) as pool:results=dict(pool.map(page,check))
           http_errors={u:r for u,r in results.items() if u in urls and r['code']!=200}
