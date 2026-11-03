@@ -55,7 +55,7 @@ jobs:
               for i,s in enumerate(lines[:116]):
                 print(f'{i+1:04d}: {s[:380]}')
             for name in z.namelist():
-              if not name.endswith('.json') or 'register' not in name.lower(): continue
+              if not name.endswith('/hobby-register.json'): continue
               print('=====JSON',name,'=====')
               o=json.loads(z.read(name).decode('utf-8'))
               print('TOP TYPE',type(o).__name__,'KEYS',list(o)[:15] if isinstance(o,dict) else len(o))
