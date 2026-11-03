@@ -1,3 +1,13 @@
+## 2026-11-03 – Hab & Bewahr: reiner Nachweis-/Konsistenzabgleich der bestehenden Campus-Büros
+<!-- HAB_GEB_AUDIT_20261103 -->
+**Bedarf:** Die nachweislich abgeschlossene Ablage von drei Original-Plugin-ZIPs wurde in anderen Büroakten noch als Blocker dargestellt. Neue Chats sollen eindeutig zum richtigen Current gelangen.
+
+**Kleinste Änderung:** Sieben bestehende Büros und ihre einheitliche Routingkette verifiziert (21/21 zentrale Dateien, 8/8 Eingangslinien-Links, 246 Projektdateien und 42 Verzeichnisse ohne leere Datei); überholte historische Ablage-/Fehlerangaben mittels neuer datierter Nachträge in den betroffenen Currents und Fehlerregistern richtiggestellt. Drei Original-`CURRENT.zip` physisch im Campus nachgeprüft; GitHub PR #622/#625/#627. Keine Strukturänderung, keine neuen Büros, keine parallele Current, keine anderen Portale.
+
+**Prüfgrenze:** WordPress-Livebetrieb, redaktionelle Bildarbeit und extern gespeicherte historische Glossar-WIP-Dateien nicht durch Campus-Pfadtest bestätigt. Zentraler `AUTORITAETSPLAN.json` blieb unverändert, technische Projekt-Currents bleiben alleinige Statusquelle. Warum und genaue Belege: `AENDERUNGSREGISTER.md`.
+
+---
+
 ## 2026-11-03 – Hab & Bewahr: isoliertes Eigenplugin-Büro als Campus-Routingvorschlag
 
 **WAS:** Für `EIGENTUMSSCHUTZ` ein eigenes `PLUGINS/`-Büro unter bereits bestehendem Projektgebäude mit `START_HERE`, `CURRENT_STATE`, `HOBBYRAUM`, Inventar, drei technischen Plugin-Akten und isolierten künftigen Voll-ZIP-Orten ergänzt. Autoritätsplan erhält exakt einen neuen `EIGENTUMSSCHUTZ_PLUGINS`-Scope; Gebäudeeingang verlinkt ihn. Keine neue selbstständige Projektstruktur, keine Änderung an existierenden Plugin-Quellen.
