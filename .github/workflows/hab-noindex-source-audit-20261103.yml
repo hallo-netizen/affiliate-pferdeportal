@@ -22,6 +22,10 @@ jobs:
           find /tmp/hab-inspect -type f -name '*.php' | sort | sed 's#/tmp/hab-inspect/##' | head -80
           echo '======= ALL ROBOTS / NOINDEX HOOKS ======='
           grep -RnEi 'wp_robots|wpseo_robots|noindex|seo_index_approved|robots.*noindex|robots.*index|sitemap|show_in_search' /tmp/hab-inspect --include='*.php' | head -180 || true
+          echo '======= COMPLETE NOINDEX DECISION FUNCTION ======='
+          nl -ba /tmp/hab-inspect/affiliate-portal-kategorie-workflow/includes/class-apkw-frontend-structure.php | sed -n '1,185p'
+          echo '======= NOINDEX APPROVAL OWNER REFERENCES ======='
+          grep -RnEi 'seo_index_approved|noindex_empty_new_structure|SEO.*Freigabe|SEO.*Approval' /tmp/hab-inspect --include='*.php' | head -100 || true
           echo '======= META APPROVAL AS WRITTEN BY IMPORTERS ======='
           grep -Rn -C 3 '_apkw_seo_index_approved' protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN --include='*.php' | head -95 || true
           echo '======= WORDPRESS PUBLIC HTML TAG PROVENANCE ======='
