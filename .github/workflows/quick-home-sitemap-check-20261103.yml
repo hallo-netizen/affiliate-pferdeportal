@@ -35,7 +35,7 @@ jobs:
             p=q.path or "/"
             if p.startswith(("/wp-admin","/wp-content","/wp-login","/wp-json","/feed","/account")) or "." in p.split("/")[-1]:return None
             return p if p.endswith("/") else p+"/"
-          for base in ["https://www.hobby-depot.de","https://pferde-atelier.de"]:
+          for base in ["https://www.hobby-depot.de","https://pferde-atelier.de","https://hab-und-bewahr.de"]:
             print("\n===== SITE =====",base,flush=True)
             c,u,b=fetch(base+"/sitemap_index.xml")
             t,locs=parse(b)
