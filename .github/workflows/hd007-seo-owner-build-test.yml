@@ -1,0 +1,38 @@
+name: HD007 full plugin SEO owner fix QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd007-noindex-korrektur-20261103
+  pull_request:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+permissions:
+  contents: read
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build complete corrected ZIP from verified original
+        run: python3 scripts/hd007_build_noindex_fix.py
+      - name: Check PHP syntax for every plugin PHP file
+        shell: bash
+        run: |
+          set -euo pipefail
+          find dist/unpacked/hd-hobbyregister-core -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Simulate positive and negative SEO routes on actual 862 records
+        run: php tests/hd007_noindex_assertions.php
+      - name: Check distribution artifact and verification file
+        shell: bash
+        run: |
+          test -s dist/HOBBY_DEPOT_HD007_1.2.18_SEO_OWNER_KORREKTUR_VOLLPLUGIN.zip
+          test -s dist/HD007_1.2.18_TESTBELEG.json
+          python3 -m zipfile -t dist/HOBBY_DEPOT_HD007_1.2.18_SEO_OWNER_KORREKTUR_VOLLPLUGIN.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HD007-1.2.18-SEO-OWNER-KORREKTUR
+          path: |
+            dist/HOBBY_DEPOT_HD007_1.2.18_SEO_OWNER_KORREKTUR_VOLLPLUGIN.zip
+            dist/HD007_1.2.18_TESTBELEG.json
+          if-no-files-found: error
+          retention-days: 30
