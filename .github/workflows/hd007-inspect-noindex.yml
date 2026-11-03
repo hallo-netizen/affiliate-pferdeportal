@@ -1,0 +1,42 @@
+name: HD007 noindex source inspection
+on:
+  push:
+    branches:
+      - hobbyroom/hd007-noindex-korrektur-20261103
+  pull_request:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect original ZIP and find indexability code
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile, hashlib, re
+          from pathlib import Path
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          raw=path.read_bytes()
+          print('ZIP bytes:',len(raw))
+          print('SHA256:',hashlib.sha256(raw).hexdigest())
+          assert hashlib.sha256(raw).hexdigest()=='433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488'
+          with zipfile.ZipFile(path) as z:
+            bad=z.testzip()
+            print('ZIP CRC:', 'PASS' if not bad else 'FAIL '+bad)
+            assert not bad
+            print('FILES:',len(z.infolist()))
+            for entry in z.infolist():
+              if not entry.filename.endswith('.php'): continue
+              contents=z.read(entry).decode('utf-8','replace').splitlines()
+              matches=[i for i,s in enumerate(contents) if re.search('noindex|wp_robots|robots|indexab|canonical|sitemap|rank_math|yoast',s,re.I)]
+              if matches:
+                print('-----',entry.filename,'lines',len(contents),'-----')
+                included=set()
+                for m in matches:
+                  for k in range(max(0,m-9), min(len(contents),m+12)):
+                    included.add(k)
+                for k in sorted(included):
+                  print(f'{k+1:5} {contents[k][:300]}')
+          PY
