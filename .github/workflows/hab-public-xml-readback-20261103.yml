@@ -25,3 +25,5 @@ jobs:
               except Exception as e:
                 print("ERROR",type(e).__name__,str(e))
           PY
+
+# Recheck after public maintenance mode was lifted.
