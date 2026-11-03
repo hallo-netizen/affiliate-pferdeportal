@@ -1,3 +1,13 @@
+## 03.11.2026 – HAB & BEWAHR: GEBÄUDE- UND ABLAGEKONSISTENZ NACHGESCHÄRFT
+<!-- HAB_GEB_AUDIT_20261103 -->
+**WAS:** Offiziellen Campus-Branch `hobbyroom/project-memory-campus-v1-20260905` frisch geprüft. Sieben über `AUTORITAETSPLAN.json` gebundene Hab-&-Bewahr-Büros (AFFILIATE, DESIGN, KATEGORIEN, KONZEPT, PINTEREST, PLUGINS, WISSENSDATENBANK) und jeweils ihre drei vorgesehenen Eingang-/Current-/Ausführungsdateien: **21/21 Pfade vorhanden**. Acht interne Markdown-Navigationslinks in Gebäudeeingang/Büroeingängen auf vorhandene Ziele geprüft: **8/8**. Gesamter Projektordner: **246 Dateien / 42 Ordner ohne 0-Byte-Dateien** (GitHub-Git-Bauminventur; keine Behauptung, alle 246 Inhalte fachlich einzeln geprüft zu haben). Alle drei physischen Hab-Plugin-`CURRENT.zip` anhand offizieller GitHub-Metadaten erneut nachgewiesen: Design **0.1.184** / 84.339.643 Bytes / PR #625; Kategorie **1.14.8.37** / 368.530 Bytes / PR #622; Bildzentrale **1.0.0** / 70.397 Bytes / PR #622. Drei Plugin-Akten bereits PR #627 korrigiert.
+
+**WARUM:** Einige spätere Chats könnten durch ältere Angaben in DESIGN/CURRENT und den Fehlerregistern den längst erledigten Campus-Pluginablage-Blocker wiederholen oder ein altes Glossar-ZIP irrtümlich als aktuelles Designplugin ansehen. Deshalb ausschließlich eindeutige, datierte Nachträge in den betroffenen Fach-Currents (DESIGN, KATEGORIEN, KONZEPT, WISSENSDATENBANK) und Fehlerquellen ergänzt. Kein Umbau von Gebäudeeingängen/Autoritätsplan, keine zweite Current-Datei, keine Änderung am geprüften Fachvertrag und keine WordPress-Live-Installation. AFFILIATE und PINTEREST bleiben konzeptionell/offen und wurden nicht fälschlich als Live freigegeben. 45 Design-Fotomeldungen und separate Live-Tests bleiben offen.
+
+**EINSCHRÄNKUNG:** Die GitHub-Baum-/Pfadprüfung bestätigt die Campusablage, nicht sämtliche älteren Chat-/Arbeitsdateien außerhalb des Campus oder die tatsächliche WordPress-Live-Konfiguration. Im Wissensbüro ist z. B. ein historisch in einer persönlichen Ablage dokumentiertes 100er-Kandidatenarchiv nicht als eigene GitHub-ZIP nachgewiesen. Kein fehlendes Dokument/Plugin erfinden oder aus älteren Arbeitsnotizen neu bauen. Maßgeblicher Projektstatus liegt in den gerouteten Büros; dieser Eintrag ist nur Änderungserklärung.
+
+---
+
 ## HB-PLUGINS-20261103-02 – Pluginbüro offiziell eingebunden, weiterhin ohne echte Voll-ZIP-Ablage
 
 WAS: PR #619 in den Campus-Branch gemergt. Neue Büro-Current, drei technische Plugin-Akten und Routing aus dem offiziellen GitHub-Stand erneut gelesen. Design-Current und Büro-Current nun auf den tatsächlich bestehenden Büroweg korrigiert.
