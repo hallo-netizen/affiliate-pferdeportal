@@ -1,0 +1,42 @@
+name: Hab & Bewahr noindex plugin source evidence
+on:
+  push:
+    branches:
+      - hobbyroom/hab-noindex-source-proof-20261103
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect archived category plugin and published SEO owner policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARCHIVE="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN/C24_INSURANCE_94_SOURCE/HAB_UND_BEWAHR_KATEGORIE_WORKFLOW_1.14.8.33.zip"
+          test -s "$ARCHIVE"
+          mkdir -p /tmp/hab-inspect
+          unzip -q "$ARCHIVE" -d /tmp/hab-inspect
+          echo '======= PLUGIN ZIP FILE LIST (PHP ONLY) ======='
+          find /tmp/hab-inspect -type f -name '*.php' | sort | sed 's#/tmp/hab-inspect/##' | head -80
+          echo '======= ALL ROBOTS / NOINDEX HOOKS ======='
+          grep -RnEi 'wp_robots|wpseo_robots|noindex|seo_index_approved|robots.*noindex|robots.*index|sitemap|show_in_search' /tmp/hab-inspect --include='*.php' | head -180 || true
+          echo '======= META APPROVAL AS WRITTEN BY IMPORTERS ======='
+          grep -Rn -C 3 '_apkw_seo_index_approved' protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/KATEGORIEN --include='*.php' | head -95 || true
+          echo '======= WORDPRESS PUBLIC HTML TAG PROVENANCE ======='
+          python3 - <<'PY'
+          import urllib.request,re
+          base='https://hab-und-bewahr.de'
+          paths=['/','/einbruch-und-diebstahl/','/einbruch-und-diebstahl/einbruch-und-diebstahl-abwesenheit-und-leerstand/','/category/einbruch-und-abwesenheit-und-le-ferienhaus-einbruchschutz-15/','/category/c22-abholbox-diebstahlschutz-haeufige-fragen-11291d2f8e/','/listing/']
+          for path in paths:
+            print('\n===',path,flush=True)
+            try:
+              with urllib.request.urlopen(urllib.request.Request(base+path,headers={'User-Agent':'Mozilla/5.0'}),timeout=15) as r:
+                body=r.read(65000).decode('utf8','replace')
+                head=body.split('</head>',1)[0]
+                print('STATUS',r.status,'URL',r.url,'XROBOTS',r.headers.get('X-Robots-Tag'))
+                for line in re.findall(r'<meta[^>]*(?:robots|generator)[^>]*>|<!-- This site is optimized[^>]*-->|<link[^>]*canonical[^>]*>',head,re.I):
+                  print('META',line[:500])
+            except Exception as e: print('FETCHERROR',repr(e))
+          PY
