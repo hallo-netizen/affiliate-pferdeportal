@@ -96,3 +96,5 @@ jobs:
           name: hab-seo-full-live-proof
           path: hab_seo_full_live_proof.json
           if-no-files-found: warn
+
+# Live recheck after user installed Hab & Bewahr SEO repair on 2026-11-03.
