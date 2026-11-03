@@ -18,6 +18,7 @@ jobs:
           ROOT = "https://www.hobby-depot.de"
           PATHS = [
             "/sitemap_index.xml",
+            "/hobbyregister-sitemap.xml",
             "/hobbyregister/alabasterschnitzen/",
             "/hobbyregister/air-dry-clay/",
             "/hobbyregister/algenkultur/",
