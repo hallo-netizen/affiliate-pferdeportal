@@ -27,3 +27,29 @@ jobs:
           PY
 
 # Recheck after public maintenance mode was lifted.
+
+      - name: Verify seven missing homepage target HTTP robots and canonical
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,html
+          paths=[
+            "/category/einbruch-und-abwesenheit-und-le-ferienhaus-einbruchschutz-15/",
+            "/category/einbruch-und-freizeit-und-mobil-boot-aussenborder-und-tra-10/",
+            "/category/einbruch-und-garten-und-grundst-gartenhaus-schrebergarten-12/",
+            "/category/einbruch-und-haus-und-wohnung-wertsachen-und-tresore-4/",
+            "/category/feuer-und-gase-akku-und-elektrik-garage-und-private-wer-131/",
+            "/glossar/","/listing/"
+          ]
+          root="https://hab-und-bewahr.de"
+          for p in paths:
+            req=urllib.request.Request(root+p,headers={"User-Agent":"Mozilla/5.0"})
+            try:
+              with urllib.request.urlopen(req,timeout=12) as r:
+                doc=r.read(500000).decode("utf8","replace")
+                robo=re.findall(r'<meta\\s+[^>]*name=[\\x22\\x27]robots[\\x22\\x27][^>]*>',doc,re.I)
+                canon=re.findall(r'<link\\s+[^>]*rel=[\\x22\\x27]canonical[\\x22\\x27][^>]*>',doc,re.I)
+                title=re.findall(r'<title[^>]*>(.*?)</title>',doc,re.I|re.S)
+                print("MISSING_TARGET",p,"HTTP",r.status,"FINAL",r.url,"ROBOTS",robo[:3],"X-ROBOTS",r.headers.get("X-Robots-Tag"),"CANONICAL",canon[:2],"TITLE",title[:2],flush=True)
+            except Exception as e:
+              print("MISSING_TARGET",p,"ERROR",type(e).__name__,str(e),flush=True)
+          PY
