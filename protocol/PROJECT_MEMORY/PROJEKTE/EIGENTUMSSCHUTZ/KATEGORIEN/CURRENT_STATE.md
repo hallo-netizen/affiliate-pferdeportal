@@ -1,3 +1,11 @@
+## 03.11.2026 – AKTUELLER GITHUB-ABLAGEABGLEICH (KEIN ERNEUTER PLUGINBAU)
+<!-- HAB_GEB_AUDIT_20261103 -->
+Das **vollständige originale Kategorie-Workflow-Plugin 1.14.8.37** ist jetzt im offiziellen Projekt-Pluginbüro unter `../PLUGINS/ISOLIERTE_PLUGINS/HAB-002-KATEGORIE-WORKFLOW/CURRENT.zip` tatsächlich abrufbar (**368.530 Bytes**, Git-Blob `35651f44ac70ed51e663d5dfaf45094bc9f1e3b2`; PR #622 gemergt). Frühere Angaben „nur Chat-ZIP“ oder „Originalarchiv neu beschaffen“ sind insoweit überholt. **Nicht** anstelle des aktuellen Originals alte C2.3/C2.4/C2.5-ZIPs verwenden; alte Imports nicht wiederholen. Versionsautorität nur im Pluginbüro `../PLUGINS/PLUGIN_AKTEN/HAB-002-KATEGORIE-WORKFLOW/CURRENT.md`.
+
+**Fachliche Current-Entscheidung unverändert:** C2.6 ist lokal geprüft; tatsächliche aktive WordPress-Version, 185er Import und echter Live-Frontend-Stand **sind durch den GitHub-Archivnachweis nicht bestätigt**. Die nachfolgende fachliche NEXT ACTION gilt nur nach frischem WordPress-Readback und notwendiger gesonderter Freigabe. Keine Änderungen an anderen Portalen.
+
+---
+
 # HAB & BEWAHR – KATEGORIEN – CURRENT STATE
 
 ## 20.10.2026 – C2.6 AKTUELL: ALLE 46 VERSICHERUNGEN EINZELN VERTIEFT, PLUGIN 1.14.8.37 FERTIG LOKAL GETESTET
