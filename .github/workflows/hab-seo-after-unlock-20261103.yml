@@ -1,0 +1,26 @@
+name: Hab und Bewahr live SEO after maintenance unlock
+on:
+  push:
+    branches:
+      - hobbyroom/hab-seo-after-unlock-20261103
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      AUDIT_SITE: "HAB & BEWAHR"
+      AUDIT_NAV: "65"
+      AUDIT_SEED: "85"
+      AUDIT_VERIFY: "300"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact live sitemap inventory and site navigation
+        run: python3 -u scripts/multiportal_public_sitemap_audit_20261103.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hab-und-bewahr-public-sitemap-20261103
+          path: multiportal-seo-audit-20261103.json
+          if-no-files-found: warn
