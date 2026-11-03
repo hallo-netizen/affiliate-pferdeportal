@@ -169,3 +169,15 @@ Pferdeatelier besitzt außerdem dynamische Design-/Kategorieausgaben und HivePre
 **Unmittelbar nächster Betreiber-Schritt:** Vor Import sicherstellen, dass nur die **separate Testinstallation** erreichbar ist bzw. dass sie ausreichend zugriffsgeschützt ist; WordPress-Importeur unter **Werkzeuge → Daten importieren → WordPress** installieren, dann Paket 01 nur in der Testinstallation importieren. Autor einem bestehenden Testbenutzer zuweisen; bei Bildern **„Dateianhänge herunterladen und importieren“** auswählen. Die importierten, durch das neue Design noch nicht gerenderten leeren Kategorieseiten sind erwartbar. Bei einem Importfehler stoppen und Fehlerwortlaut prüfen, nicht mehrfach blind importieren.
 
 **Spätere Arbeit:** Fach-Inhaltstypen (Pferderassen, Glossar, Anzeigen, Affiliate-Produkte) mit genau registrierten Typen und ID-/Bild-/Relationen-Abgleich getrennt übernehmen; K0/produktionsaktive Automatik bleibt unberührt. Original-XML bis zum vollständigen Gesamtvergleich erhalten. Keine Änderungen an LIVE.
+
+## 11. Korrektur nach erstem Basisimport – 03.11.2026
+
+**Gemeldetes tatsächliches Ergebnis:** Betreiber sieht nach Import von `pferdeatelier_import_01_basis_20261103.xml` in der Zielinstallation **Kategorien, aber keine Seiten und Beiträge**. Das ist **kein erfolgreicher Import**. Die Ursache ist mangels Importer-Fehlerprotokoll noch nicht bewiesen, darf nicht als sicherer PHP-/Timeoutfehler ausgegeben werden.
+
+**Verifizierte Datei-Reihenfolge:** Das erste Paket ist formal wohlgeformt und enthält 1.176 Kategorien (im Dateikopf), dann **459 Medien-Anhänge**, anschließend **424 Seiten** und erst zuletzt **163 Beiträge**. Ein Importabbruch bei/unter Medienverarbeitung würde exakt zur beobachteten Teilmenge passen; das ist eine **Hypothese**, kein Ursachennachweis.
+
+**Korrekturmaßnahme ohne zusätzliche WordPress-Plugins:** Zwei separate, erneut parser-geprüfte XML-Dateien erstellt, Original-Elemente bytegenau beibehalten, Medien und Kategorie-Stammdaten für diesen Folgeschritt weggelassen:
+- `pferdeatelier_import_02_seiten_20261103.xml`: 424 veröffentlichte Seiten, 868.671 Bytes.
+- `pferdeatelier_import_03_beitraege_20261103.xml`: 163 veröffentlichte Beiträge, 5.195.433 Bytes.
+
+Diese Dateien werden **nur auf der getrennten Testseite** über **Werkzeuge → Daten importieren → WordPress** importiert. Beim Autor den vorhandenen Test-Admin auswählen, **„Dateianhänge herunterladen und importieren“ nicht aktivieren**, zunächst **Seiten, danach Beiträge**. Erfolgsprüfung in **Seiten → Alle Seiten** bzw. **Beiträge → Alle Beiträge**, nicht am öffentlichen Design. Fehlen Inhalte oder erscheint eine Fehlermeldung, **keine Mehrfachimporte**; stattdessen exakten Importer-Ausgabetext prüfen. Bilder und Fach-/Design-Datentypen bleiben für spätere kontrollierte Schritte offen. Die bereits vorhandenen Kategorien werden anhand der Inhaltszuordnungen benutzt.
