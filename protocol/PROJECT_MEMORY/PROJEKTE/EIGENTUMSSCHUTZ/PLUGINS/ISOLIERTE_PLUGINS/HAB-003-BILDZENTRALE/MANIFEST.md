@@ -1,15 +1,12 @@
-# HAB-003-BILDZENTRALE – DATEI-MANIFEST
-
-**Status: BLOCKED – kein autoritativ wiederöffneter `CURRENT.zip` vorhanden.**
-
-Geplanter exakter Campus-Pfad: `protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-003-BILDZENTRALE/CURRENT.zip`.
-
-Projekt-Pluginidentität: `hab-und-bewahr-bildzentrale`; neueste belegte Version: `1.0.0`.
-
-Dokumentierter echter Dateiname: `hab-und-bewahr-bildzentrale.zip`.
-
-Größe aus vorhandener Evidenz: nicht unabhängig bestätigt Bytes.
-
-SHA-256 aus vorhandener Evidenz: `nicht unabhängig bestätigt`.
-
-Nicht als GitHub ZIP hochgeladen; keine unabhängige Campus-Readback-Prüfung möglich. Dies ist ausdrücklich **keine Installationsdatei** und kein Ersatz für die fehlenden ZIP-Bytes. Die einzige Versionsautorität ist `../../PLUGIN_AKTEN/HAB-003-BILDZENTRALE/CURRENT.md`.
+# HAB-003 – Bildzentrale – autoritative Datei
+**CURRENT.zip IST IM GITHUB-CAMPUS GESPEICHERT (PR #622 gemergt am 03.11.2026).**
+- Version: **1.0.0**
+- Installierbares Original-ZIP: `CURRENT.zip`
+- Archivname: `hab-und-bewahr-bildzentrale.zip`
+- Archivgröße: **70397 Bytes**
+- SHA-256 der vorliegenden Originaldatei: `58af0d394752e767b5f0c7d6d9901eeaec921331ab6245144859e3e6626e4559`
+- Git-Blob-SHA: `8b8b3b84b494eb2784181d5bfd6acfb2efceafde`
+- GitHub-Readback nach Merge: Dateigröße und Git-Blob-SHA stimmen mit der lokal ZIP-CRC-geprüften Originaldatei überein.
+- Pluginordner: `hab-und-bewahr-bildzentrale`.
+- Kein behaupteter Live-Einbau. Nur bestehendes Plugin ersetzen; keine neue Pluginlinie.
+- Nachweis: https://github.com/hallo-netizen/affiliate-pferdeportal/pull/622

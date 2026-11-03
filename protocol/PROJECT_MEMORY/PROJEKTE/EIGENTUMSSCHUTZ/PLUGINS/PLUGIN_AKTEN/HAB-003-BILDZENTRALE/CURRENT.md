@@ -1,21 +1,10 @@
-# HAB-003-BILDZENTRALE – TECHNISCHER PLUGIN-CURRENT
-
-**Plugin:** Hab & Bewahr – Bildzentrale
-
-**WordPress-Pluginordner:** `hab-und-bewahr-bildzentrale`
-
-**Neuester nachgewiesener projektbezogener Versionsstand:** 1.0.0
-
-**Originaler vollständiger Release-Name:** `hab-und-bewahr-bildzentrale.zip`
-
-**Dokumentierte Größe:** nicht unabhängig bestätigt Bytes
-
-**SHA-256:** nicht unabhängig bestätigt
-
-**Stand:** DOKUMENTIERTER STAND 1.0.0 / ZIP-READBACK BLOCKED / LIVE OFFEN
-
-**Begründung und Prüfung:** `HAB_UND_BEWAHR_BILDZENTRALE_PRUEFBERICHT.md` vom 30.10. beschreibt ein eigenständiges projektisoliertes vollständiges WordPress-Plugin mit ursprünglicher ZIP-CRC-, PHP- und Mock-Prüfung. Die damals vorgesehene dauerhafte Bildzentrale-Pluginablage scheiterte; ein erneuter Original-ZIP-Byteabruf in dieser Arbeitsumgebung war nicht möglich. Keine eigenmächtige Rückstufung auf ein Hobby-Depot-Pluginkopie; Version und aktuelle ZIP bleiben zu verifizieren.
-
-**Verbindlicher Speicherort:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-003-BILDZENTRALE/CURRENT.zip`. Bis zur realen binären Ablage, unabhängigem Wiederabruf und erneuter ZIP-/Header-/Version-/Hashprüfung **nicht vorhanden, nicht freigegeben**. Das `MANIFEST.md` ist nur Nachweis und darf kein ZIP ersetzen.
-
-**Bestehendes Plugin aktualisieren, niemals Zweitplugin anlegen.** Keine fremden Plugins oder andere Portaldateien als Ersatz verwenden.
+# HAB-003 – Bildzentrale – technischer CURRENT
+**AUTORITATIV: Version 1.0.0 als echtes installierbares CURRENT.zip im offiziellen Hab-&-Bewahr-GitHub-Plugin-Büro.**
+- Quelle: `ISOLIERTE_PLUGINS/HAB-003-BILDZENTRALE/CURRENT.zip`
+- Originalname: `hab-und-bewahr-bildzentrale.zip`
+- Vollständige ZIP: 70397 Bytes, 3 Einträge, CRC-Prüfung lokal bestanden
+- SHA256: `58af0d394752e767b5f0c7d6d9901eeaec921331ab6245144859e3e6626e4559`
+- Git-Blob: `8b8b3b84b494eb2784181d5bfd6acfb2efceafde`
+- Mergebestätigung PR #622, erneuter GitHub-Readback von Größe und Blob durchgeführt
+- Technischer Original-Pluginordner: `hab-und-bewahr-bildzentrale`
+- WordPress-Live-Einbau bleibt UNBESTÄTIGT; kein Ersatz durch ältere Versionen
