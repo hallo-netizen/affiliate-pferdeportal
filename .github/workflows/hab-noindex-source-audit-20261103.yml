@@ -44,3 +44,24 @@ jobs:
                   print('META',line[:500])
             except Exception as e: print('FETCHERROR',repr(e))
           PY
+
+      - name: Verify live plugin version and WordPress REST page content
+        run: |
+          python3 - <<'PY'
+          import urllib.request, json, re
+          base="https://hab-und-bewahr.de"
+          for path in ["/einbruch-und-diebstahl/","/category/einbruch-und-abwesenheit-und-le-ferienhaus-einbruchschutz-15/","/wp-json/wp/v2/pages?slug=einbruch-und-diebstahl&_fields=id,slug,content,title"]:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(base+path,headers={"User-Agent":"Mozilla/5.0"}), timeout=15) as r:
+                text=r.read(300000).decode("utf-8","replace")
+                print("LIVEURL",path,"HTTP",r.status,"CTYPE",r.headers.get("Content-Type"),flush=True)
+                if "wp-json" in path:
+                  try:
+                    pages=json.loads(text)
+                    print("REST_PAGES",[(p.get("id"),p.get("slug"),len(p.get("content",{}).get("rendered","")),p.get("content",{}).get("rendered","")[:230]) for p in pages] if isinstance(pages,list) else str(pages)[:350],flush=True)
+                  except Exception as e:print("REST_ERROR",repr(e),text[:300],flush=True)
+                else:
+                  print("HTML_APKW_VERSIONS",sorted(set(re.findall(r'data-apkw-version=[\\x22\\x27]([^\\x22\\x27]+)',text)))[:12],flush=True)
+                  print("HTML_APKW_PLUGIN_SOURCES",sorted(set(re.findall(r'wp-content/plugins/affiliate-portal-kategorie-workflow/[^\\x22\\x27\\s]+',text)))[:8],flush=True)
+            except Exception as e: print("LIVEURL_ERROR",path,repr(e),flush=True)
+          PY
