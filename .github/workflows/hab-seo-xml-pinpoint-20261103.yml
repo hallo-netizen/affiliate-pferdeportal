@@ -1,0 +1,35 @@
+name: Hab SEO post-install XML pinpoint audit
+on:
+  push:
+    branches: [hobbyroom/hab-seo-after-install-verification-20261103]
+permissions: {contents: read}
+jobs:
+  pinpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Identify exact malformed sitemap and unavailable custom Yoast endpoint
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, xml.etree.ElementTree as ET, re
+          root='https://hab-und-bewahr.de'
+          def fetch(url):
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=15) as f:
+                return f.status,f.url,f.headers.get('Content-Type',''),f.read(200000)
+            except Exception as e:
+              return 0,url,'ERROR',repr(e).encode()
+          src=root+'/sitemap_index.xml'
+          status,final,ctype,body=fetch(src)
+          print('ROOT',status,final,ctype,repr(body[:180]),flush=True)
+          try: urls=[e.text for e in ET.fromstring(body).iter() if e.tag.endswith('loc')]
+          except Exception as e: print('ROOT_PARSE_ERROR',repr(e));urls=[]
+          for u in urls+[root+'/hab-listing-archive-sitemap.xml',root+'/?sitemap=hab-listing-archive']:
+            code,url,typ,body=fetch(u)
+            print('CHILD',u,'CODE',code,'FINAL',url,'TYPE',typ,'BYTES',len(body),'HEAD',repr(body[:180]),flush=True)
+            try:
+              x=ET.fromstring(body);ll=[e.text for e in x.iter() if e.tag.endswith('loc')]
+              print('XML_OK',x.tag.rsplit('}',1)[-1],len(ll),'FIRST',ll[:3],flush=True)
+            except Exception as e:
+              print('XML_ERROR',repr(e),'HEAD500',repr(body[:500]),flush=True)
+          PY
