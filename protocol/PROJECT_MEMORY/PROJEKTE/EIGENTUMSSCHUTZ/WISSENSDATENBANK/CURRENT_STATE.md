@@ -1,3 +1,11 @@
+## 03.11.2026 – ABGRENZUNG ALTER GLOSSAR-DESIGNPAKETE VOM AKTUELLEN PLUGIN
+<!-- HAB_GEB_AUDIT_20261103 -->
+Die unten beschriebenen lokalen Glossar-Prüfstände `0.1.14` bis `0.1.17` sind **historische Teilstände** und nicht die neueste installierbare Hab-&-Bewahr-Designversion. Das aktuelle vollständige Design-Original ist **0.1.184**, real gespeichert in `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip` (84.339.643 Bytes, PR #625). Deshalb keine ältere Glossar-ZIP aus dieser Chronik blind als WordPress-Update installieren. Welche alten Glossarfunktionen in der heutigen 0.1.184 tatsächlich vorhanden und live aktiv sind, bleibt **ohne vollständigen Funktions-/WordPress-Live-Readback offen**; der hier dokumentierte redaktionelle Fachvertrag und die Sperre für ungeprüfte Glossarartikel gelten weiter.
+
+Der im alten Stand genannte Kandidatenbestand (`HAB_UND_BEWAHR_GLOSSAR_100_KANDIDATEN_WIP.zip`) ist als separate persönliche Wissensablage dokumentiert; **eine vollständige Campus-ZIP an diesem Bürostandort ist nicht nachgewiesen**. Das ist kein Beleg für verlorene Daten und kein Anlass, neue Glossarbegriffe zu erfinden. Vor einer künftigen Glossarproduktion vorhandene Akten gesondert physisch abrufen und prüfen; keine Import-/Veröffentlichungsfreigabe durch diesen Hinweis.
+
+---
+
 # HAB & BEWAHR – WISSENSDATENBANK – CURRENT STATE
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 STAND: 2026-10-14
