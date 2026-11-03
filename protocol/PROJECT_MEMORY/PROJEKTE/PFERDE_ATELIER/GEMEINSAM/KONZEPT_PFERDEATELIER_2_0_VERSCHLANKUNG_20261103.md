@@ -66,3 +66,36 @@ WordPress-Website-Zustandsbericht des Betreibers:
 - Dieses Konzept selbst verändert keine Programme, Inhalte, Datenbank, LIVE-Konfiguration, Fach-Current-Dateien oder K0.
 
 **Leitgedanke:** Nicht weiter auf bestehende Schichten draufbauen. Saubere, kleinere technische Basis schaffen und alle vorhandenen Leistungen unverändert erhalten.
+
+
+## 7. Phase A: Tatsächlicher Auswertungsstand vom 03.11.2026
+
+Quellen: WordPress-Website-Zustandsbericht vom 03.11.2026 und **bereits eingegangene** Speicheranalyse `wordpress-speicheranalyse-20261103-114349.json`. Keine erneute Anforderung dieser Dateien.
+
+### Harte Messwerte und Abgrenzung
+
+- Speicheranalyse vollständig abgeschlossen, 33.094 Dateien, **2,53 GB erfasst** (nur untersuchter Dateibestand).
+- Davon **1,83 GB WPvivid-Sicherungen**, 335 MB Uploads, 37,4 MB Kubio, 22,8 MB Astra.
+- WordPress-Website-Zustandsbericht meldet hingegen **10,63 GB für Plugins**. Die Differenz ist **ungeklärt**; sie darf nicht als reale aktuelle Pluginlast oder sicher vorhandener Altbestand ausgegeben werden. Möglich ist ein unterschiedlicher Erfassungszeitpunkt/-umfang; keine unbewiesene Ursachenzuschreibung.
+- Datenbank laut Speicheranalyse ca. **1,19 GB**; vor allem PSTE-Arbeits-/Statusdaten, Optionsspeicher und Affiliate-Produktdaten. Diese sind potentiell funktions-/produktionskritisch und **nicht zur pauschalen Bereinigung freigegeben**.
+- Vorhandenes Performance-Profil dokumentiert Frontend-Dateien und lange Datenbank-/Laufzeitpfade; daraus folgt kein automatischer Verursachernachweis für einzelne Plugins.
+
+### Konsolidierte Entscheidungsgruppen – noch keine Löschfreigabe
+
+| Gruppe | Bestand | Konkrete Maßnahme auf der isolierten Kopie |
+|---|---|---|
+| Zentrale Designsteuerung | Astra, Kubio, Affiliate Portal Template Kit; zusätzlich Breadcrumb-/Formular-/Produktdarstellung | Funktionen und Layoutvorlagen erfassen, identische Ausgabe schrittweise in kleine zentrale Designbasis überführen; bestehende Fachausgaben nicht doppelt umformen |
+| Kritische Fachfunktionen | K0/PPM, PSTE, PSERC, Affiliate-Zentrale, Bildzentrale, Glossar, Pferderassen, Produktwissen | **Unverändert übernehmen**; nur Anbindungen und sichtbare Ausgaben abgleichen; kein Fachlogikumbau |
+| Anzeigenmarkt und Suche | HivePress plus Erweiterungen; zwei Pferde-HivePress-Suchplugins; Relevanssi plus Live-Suche, mögliche Astra-Suche | Zuständigkeiten und tatsächliche Nutzung vergleichen; erst nach positivem Volltest eine nachweisliche Dublette ersetzen/entfernen |
+| Betrieb und Werkzeuge | Performance Diagnose Safe, DBStorage Insights, WordPress Speicheranalyse, eBay Ursachencheck, Reveal IDs, Importer, Exporter | Werkzeugbedarf dokumentieren; nur entbehrliche Dauerausführung entfernen, Diagnose bei Bedarf getrennt verfügbar halten |
+| Backup und Optimierung | WPvivid, All-in-One WP Migration, Pferde Atelier – Komplettsicherung, WP-Optimize | **Keine Löschung von Sicherungen.** Eine verifizierbare Recovery-Methode festlegen; überlappende Automatik erst danach vereinfachen |
+| Allgemein notwendig | WordPress-Core, Yoast, CookieYes, WPForms, Akismet, Google Site Kit und ggf. weitere belegte Schnittstellen | Beibehalten, solange erforderlich; Ladeverhalten auf Testkopie prüfen |
+
+### Konkreter nächster Arbeitsauftrag
+
+1. **Assistenz, jetzt:** Aus vorhandenem WP-Pluginstand, Performance- und Speicherbericht eine Funktion-zu-Plugin-Liste und die Design-Umstellungsschritte ausarbeiten; **keine weiteren Datenuploads vom Betreiber erforderlich**.
+2. **Betreiber, jetzt:** **Nichts** installieren, löschen oder deaktivieren. Die angekündigte Speicheranalyse ist **bereits vorhanden**.
+3. **Erst bei Beginn der Umsetzung:** Eine technisch getrennte Testkopie mit vollständiger Isolierung gegenüber LIVE herstellen (separate Daten, keine produktive Automatik/ausgehenden Effekte). Notwendige einzelne Klicks dann genau benennen.
+4. **Danach:** Design nachbauen, Funktionen/Pflegewege vollständig vergleichen, realistische Vorher-/Nachhermessung. Erst nach Abnahme Umstellung.
+
+**Ungeprüftes bleibt ungeprüft.** Diese Phase-A-Auswertung ist eine Dokumentation, keine technische Installation, kein vollständiger Test und keine Freigabe zum Entfernen eines Plugins.
