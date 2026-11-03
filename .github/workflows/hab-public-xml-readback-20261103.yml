@@ -1,0 +1,27 @@
+name: Raw public Hab und Bewahr site and sitemap verification
+on:
+  push:
+    branches:
+      - hobbyroom/hab-public-response-proof-20261103
+permissions:
+  contents: read
+jobs:
+  read-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch exact public site response, headers and raw XML snippet
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.error
+          for site in ["https://hab-und-bewahr.de","https://www.hab-und-bewahr.de"]:
+            for p in ["/", "/sitemap_index.xml", "/robots.txt","/wp-sitemap.xml"]:
+              print("===== URL =====",site+p,flush=True)
+              try:
+                req=urllib.request.Request(site+p,headers={"User-Agent":"Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=15) as r:
+                  data=r.read(3500)
+                  print("HTTP",r.status,"FINAL",r.url,"CTYPE",r.headers.get("content-type"),"SIZE_HEAD",len(data),"XROBOT",r.headers.get("X-Robots-Tag"))
+                  print("RAW_START",repr(data[:1250]))
+              except Exception as e:
+                print("ERROR",type(e).__name__,str(e))
+          PY
