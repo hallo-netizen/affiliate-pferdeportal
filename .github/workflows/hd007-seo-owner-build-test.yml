@@ -7,7 +7,7 @@ on:
     branches:
       - hobbyroom/project-memory-campus-v1-20260905
 permissions:
-  contents: read
+  contents: write
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -36,3 +36,16 @@ jobs:
             dist/HD007_1.2.18_TESTBELEG.json
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish verified full-plugin release (push branch only)
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create hobby-depot-hd007-1.2.18-seo-owner-fix \
+            dist/HOBBY_DEPOT_HD007_1.2.18_SEO_OWNER_KORREKTUR_VOLLPLUGIN.zip \
+            dist/HD007_1.2.18_TESTBELEG.json \
+            --target "$GITHUB_SHA" \
+            --title "Hobby Depot HD-007 1.2.18 – SEO owner noindex correction" \
+            --notes "Targeted fix for HD-007 noindex. The existing authoritative registry maps 381 CORE hobby pages to noindex, and 481 register-only hobbies remain without the plugin's noindex tag. 862/862 actual records exercised in PHP runtime, all PHP files linted, original archive SHA verified, ZIP CRC verified, 91/93 entries byte-identical; no live WordPress change. Original 1.2.17 remains available."
