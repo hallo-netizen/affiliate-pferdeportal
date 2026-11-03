@@ -1,0 +1,54 @@
+name: Hab Bewahr Design 0.1.184 exact complete plugin ZIP
+on:
+  push:
+    branches:
+      - hobbyroom/hab-plugin-zip-persist-20261103
+    paths:
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/PARTS_0184/part_070.b64
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  reconstruct-original-and-save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact staged source parts
+        uses: actions/checkout@v4
+      - name: Reconstruct and independently validate original ZIP
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, hashlib, pathlib, zipfile
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN')
+          pieces=sorted((root/'PARTS_0184').glob('part_*.b64'))
+          expected=[f'part_{n:03d}.b64' for n in range(71)]
+          got=[p.name for p in pieces]
+          assert got==expected, f'Expected 71 exact parts, got {len(got)}: {got[:2]} ... {got[-2:]}'
+          result=root/'CURRENT.zip'
+          with result.open('wb') as f:
+              for i,part in enumerate(pieces):
+                  encoded=part.read_text(encoding='ascii')
+                  assert len(encoded)==(452860 if i==70 else 1600000), (part.name,len(encoded))
+                  f.write(base64.b64decode(encoded,validate=True))
+          size=result.stat().st_size
+          assert size==84339643, f'Wrong ZIP size: {size}'
+          digest=hashlib.sha256(result.read_bytes()).hexdigest()
+          assert digest=='76043e5c093058a4d8aff8fd6642307cade951c8267641dc710b8ed70cd323e3', digest
+          with zipfile.ZipFile(result) as z:
+              assert len(z.infolist())==426, len(z.infolist())
+              assert z.testzip() is None
+              assert all(n.startswith('hab-bewahr-design-vorschau/') for n in z.namelist())
+              bootstrap=z.read('hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php')
+              assert b'0.1.184' in bootstrap
+          print('PASS: 71/71 parts, 84339643 ZIP bytes, SHA256',digest,'426 CRC PASS, plugin version 0.1.184')
+          PY
+      - name: Save entire independently verified ZIP as exact Git binary
+        shell: bash
+        run: |
+          set -e
+          p="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$p"
+          git commit -m "HAB-001 Design 0.1.184 exact verified full CURRENT.zip"
+          git push origin "HEAD:hobbyroom/hab-plugin-zip-persist-20261103"
