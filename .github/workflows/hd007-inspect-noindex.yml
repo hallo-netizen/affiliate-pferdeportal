@@ -40,3 +40,31 @@ jobs:
                 for k in sorted(included):
                   print(f'{k+1:5} {contents[k][:300]}')
           PY
+      - name: Inspect registration fields and top-level owner integration
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile, json, re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip'
+          with zipfile.ZipFile(path) as z:
+            for e in z.infolist():
+              print('ENTRY',e.filename,e.file_size)
+            for name in [n for n in z.namelist() if n.endswith('class-hd-hobbyregister-frontend.php') or n.endswith('hobby-depot-hobbyregister-core.php')]:
+              print('=====SOURCE',name,'=====')
+              lines=z.read(name).decode('utf-8','replace').splitlines()
+              for i,s in enumerate(lines[:116]):
+                print(f'{i+1:04d}: {s[:380]}')
+            for name in z.namelist():
+              if not name.endswith('.json') or 'register' not in name.lower(): continue
+              print('=====JSON',name,'=====')
+              o=json.loads(z.read(name).decode('utf-8'))
+              print('TOP TYPE',type(o).__name__,'KEYS',list(o)[:15] if isinstance(o,dict) else len(o))
+              rows=o.get('records',[]) if isinstance(o,dict) else o if isinstance(o,list) else []
+              count=0
+              for r in rows:
+                if not isinstance(r,dict): continue
+                if count<12:
+                  print('RECORD',str({k:v for k,v in r.items() if k in ('registry_id','canonical_name','source_identity','seo_owner')})[:700])
+                  count+=1
+              print('RECORDS TOTAL',len(rows))
+          PY
