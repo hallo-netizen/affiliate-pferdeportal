@@ -93,7 +93,7 @@ with zipfile.ZipFile(ORIGINAL) as z:
       'byte_identical_other_entries':len(info)-2,
       'register_records':len(rows),
       'with_core_owner_noindex':len(owned),
-      'without_core_owner_indexable':len(free)
+      'without_core_owner_indexable':free
     }
     (ROOT/'dist/HD007_1.2.18_TESTBELEG.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     print('BUILD PASS',json.dumps(manifest,ensure_ascii=False))
