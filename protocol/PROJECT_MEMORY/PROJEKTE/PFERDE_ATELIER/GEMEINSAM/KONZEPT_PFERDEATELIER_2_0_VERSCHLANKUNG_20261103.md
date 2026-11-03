@@ -53,10 +53,10 @@ WordPress-Website-Zustandsbericht des Betreibers:
 
 ## 5. Was jetzt konkret zu tun ist
 
-- **Betreiber:** Die bereits angekündigte aktuelle Speicheranalyse hochladen. Sonst vorerst **nichts** installieren, deaktivieren, löschen oder exportieren.
-- **Assistenz:** Aus aktuellen Informationen und vorhandenen Original-Pluginunterlagen zunächst die **eine** konsolidierte Entscheidungsübersicht mit Abhängigkeiten erstellen. Kein Versionsraten.
-- **Später, erst für Phase B:** Gemeinsam eine tatsächlich isolierte Testinstallation bereitstellen. Eine bloße Test-URL ist für die jetzige Konzeptphase nicht erforderlich.
-- **Erst nach harter technischer Prüfung:** Neue Designbasis bauen, Funktionen nachweisen, technische Altlasten entfernen und ggf. LIVE umstellen.
+- **Stand:** Speicheranalyse und Pluginbestand eingegangen; leere neue Testinstallation ist laut Betreiber eingerichtet und aufgeräumt; HivePress und passendes Theme bereits installiert. **Nicht erneut anfordern.**
+- **Nächste Betreiberhandlung:** Auf der **alten LIVE-Seite** unter **Werkzeuge → Daten exportieren → Alle Inhalte → Export-Datei herunterladen** eine XML-Datei erzeugen und zur **Inhaltsprüfung** übergeben. Dabei wird auf LIVE nichts gelöscht oder umgestellt. **Noch nicht importieren.**
+- **Nächste Assistenzhandlung:** XML auf tatsächlichen Seiten-/Beitrags-/Kategoriebestand, zusätzliche Seitentypen und dynamische Plugin-Seiten prüfen; vorhandene Pluginakten abgleichen. Daraus einen nachweislich vollständigen, schlanken Importplan ableiten.
+- **Danach:** Originaldaten kontrolliert übernehmen, schlanke Designbasis auf realen Inhalten anfertigen, Fachfunktionen isoliert ergänzen, testen. Keine vollständige Altinstallation kopieren.
 
 ## 5a. Verbindliche Präzisierung nach Prüfung am 03.11.2026
 
@@ -143,3 +143,13 @@ Quellen: WordPress-Website-Zustandsbericht vom 03.11.2026 und **bereits eingegan
 - https://www.ionos.de/hilfe/hosting/click-build-anwendungen/wordpress-installieren/
 - https://www.ionos.de/hilfe/mein-konto/hosting/click-build-daten-exportieren/
 - https://docs.wpvivid.com/overview-staging-free.html
+
+## 9. Prüfung der Reihenfolge – festgelegt am 03.11.2026
+
+**Begründung:** Der offizielle WordPress-Standardexport „Alle Inhalte“ überträgt WordPress-Seiten, Beiträge, Kategorien/Taxonomien, Menüs und exportierbare eigene Inhaltstypen in eine XML-Datei. Er installiert **keine** Plugins und überträgt **keine** Theme-/Plugin-Konfiguration. Exportierbarkeit eigener Inhaltstypen ist konfigurierbar. Medien werden nicht einfach als Binärdateien in diese XML eingebettet; nicht zugeordnete Medien können fehlen. Quelle: https://wordpress.org/documentation/article/tools-export-screen/ und https://learn.wordpress.org/tutorial/tools-import-and-export/ und https://developer.wordpress.org/reference/functions/export_wp/
+
+Pferdeatelier besitzt außerdem dynamische Design-/Kategorieausgaben und HivePress-Erweiterungen: **Eine XML-Datei beweist nicht, dass alle sichtbaren Seiten und Anzeigenmarktfunktionen enthalten sind.** Das ist explizit anhand der XML und Originalpluginquellen zu kontrollieren, bevor sie auf der Testseite importiert wird. Auf LIVE darf K0 nicht verändert werden. Die WordPress-Exportdatei ist eine **Erhebungsquelle, kein blindes vollständiges Migrationspaket**.
+
+**Verbindliche Reihenfolge:** (1) Bestehende Inhalte read-only exportieren und ihren tatsächlichen Umfang prüfen; (2) fehlende Inhalte/Einstellungen der Fachplugins getrennt erfassen; (3) zielgerichtet importieren, ohne bisherige Programme/Designballast zu übernehmen; (4) Design auf importierten Originalinhalten nachbauen; (5) weitere Funktionen übernehmen und durchtesten. **Keine Seiten manuell neu erzeugen, keine Kategorie-Alleinmigration und keine vorzeitige Design-Entwicklung.**
+
+**Jetzt:** Betreiber exportiert **Alle Inhalte** aus der alten LIVE-Installation, lädt die XML-Datei zur Prüfung hoch; **keine Importaktion** auf der neuen Installation. Assistenz prüft dann die tatsächlich enthaltenen Elemente, bevor der nächste Klick angewiesen wird.
