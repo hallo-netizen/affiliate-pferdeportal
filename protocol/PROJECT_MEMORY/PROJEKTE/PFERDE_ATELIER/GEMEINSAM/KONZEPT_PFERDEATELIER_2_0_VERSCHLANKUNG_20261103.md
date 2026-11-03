@@ -153,3 +153,19 @@ Pferdeatelier besitzt außerdem dynamische Design-/Kategorieausgaben und HivePre
 **Verbindliche Reihenfolge:** (1) Bestehende Inhalte read-only exportieren und ihren tatsächlichen Umfang prüfen; (2) fehlende Inhalte/Einstellungen der Fachplugins getrennt erfassen; (3) zielgerichtet importieren, ohne bisherige Programme/Designballast zu übernehmen; (4) Design auf importierten Originalinhalten nachbauen; (5) weitere Funktionen übernehmen und durchtesten. **Keine Seiten manuell neu erzeugen, keine Kategorie-Alleinmigration und keine vorzeitige Design-Entwicklung.**
 
 **Jetzt:** Betreiber exportiert **Alle Inhalte** aus der alten LIVE-Installation, lädt die XML-Datei zur Prüfung hoch; **keine Importaktion** auf der neuen Installation. Assistenz prüft dann die tatsächlich enthaltenen Elemente, bevor der nächste Klick angewiesen wird.
+
+## 10. Eingang des WordPress-Exports und tatsächliche Importentscheidung (03.11.2026)
+
+**Original:** `pferdeatelier.WordPress.2026-11-03.xml` (36 MB, WordPress-WXR 1.2, geprüft).
+
+**Originalbestand:** 6.045 WordPress-Objekte; darin 1.176 WordPress-Kategorien, 426 Seiten (424 veröffentlicht, 1 Entwurf, 1 Papierkorb), 182 Beiträge (163 veröffentlicht, 19 Papierkorb), 459 Bilder/Anhänge, 1.616 Menüeinträge (davon **1.582** im alten Produktnavigation-V4-Menü), 2.857 Affiliate-Kampagnen, 55 Anzeigen, 196 Pferderassen, 184 Glossareinträge; darüber hinaus Designvorlagen und Fach-Taxonomien.
+
+**Wesentliche Architekturbeobachtung:** 411 der 426 Seiten haben keinen eigentlichen Seiteninhalt. Bei 399 Seiten ist der Einleitungstext im Feld `_pftk_category_intro_text` gespeichert und wurde bisher vom Design-Plugin gerendert. Ein unverändertes Design und vollständig sichtbare Seiten setzen deshalb eine neue gezielte Darstellung dieses Feldes voraus. **XML-Import allein ist kein sichtbarer vollständiger Seitenumzug.**
+
+**Import-Paket 01 – erstellt und XML-geprüft:** `pferdeatelier_import_01_basis_20261103.xml` (9.778.884 Bytes). Enthält **genau** 1.176 WordPress-Kategorien, 424 veröffentlichte Seiten, 163 veröffentlichte Beiträge und 459 Medien-Anhänge, jeweils inklusive der zugehörigen Exportmetadaten. Keine Altdesign-Templates, keine riesigen Produkt-Menüs, keine Affiliate-Kampagnen, keine zusätzlichen Fach-Datensätze, keine Papierkorbobjekte. XML auf WXR-Version, vollständig vorhandene Kategorien und Inhaltszahlen validiert. Dies ist ein **Testimport**, kein fertiger Komplettumzug.
+
+**Begründung:** Ein Import aller 6.045 Objekte auf die bloße HivePress-/WordPress-Basis würde alte Designdaten und nicht registrierte Fach-Inhaltstypen ungeprüft vermischen. Die Alt-Produktnavigation muss später aus tatsächlichen Seiten/Kategorien abgeleitet bzw. aus Originalmenüinformationen kontrolliert wiederhergestellt werden, nicht pauschal als 1.582 manuelle Menüelemente mitgenommen werden.
+
+**Unmittelbar nächster Betreiber-Schritt:** Vor Import sicherstellen, dass nur die **separate Testinstallation** erreichbar ist bzw. dass sie ausreichend zugriffsgeschützt ist; WordPress-Importeur unter **Werkzeuge → Daten importieren → WordPress** installieren, dann Paket 01 nur in der Testinstallation importieren. Autor einem bestehenden Testbenutzer zuweisen; bei Bildern **„Dateianhänge herunterladen und importieren“** auswählen. Die importierten, durch das neue Design noch nicht gerenderten leeren Kategorieseiten sind erwartbar. Bei einem Importfehler stoppen und Fehlerwortlaut prüfen, nicht mehrfach blind importieren.
+
+**Spätere Arbeit:** Fach-Inhaltstypen (Pferderassen, Glossar, Anzeigen, Affiliate-Produkte) mit genau registrierten Typen und ID-/Bild-/Relationen-Abgleich getrennt übernehmen; K0/produktionsaktive Automatik bleibt unberührt. Original-XML bis zum vollständigen Gesamtvergleich erhalten. Keine Änderungen an LIVE.
