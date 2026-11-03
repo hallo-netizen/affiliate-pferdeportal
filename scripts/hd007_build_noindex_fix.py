@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Rebuild complete HD-007 from the immutable verified 1.2.17 source ZIP."""
-import hashlib, json, re, zipfile
+import hashlib, json, re, zipfile, copy
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -63,11 +63,11 @@ with zipfile.ZipFile(ORIGINAL) as z:
     with zipfile.ZipFile(OUT,'w') as output:
         for member in info:
             if member.is_dir():
-                output.writestr(member,b'')
+                output.writestr(copy.copy(member),b'')
                 continue
             contents=mods.get(member.filename)
             if contents is None:contents=z.read(member)
-            output.writestr(member,contents)
+            output.writestr(copy.copy(member),contents)
     with zipfile.ZipFile(OUT) as rebuilt:
         assert rebuilt.testzip() is None
         assert rebuilt.namelist()==z.namelist()
