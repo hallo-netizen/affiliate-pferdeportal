@@ -1,3 +1,9 @@
+## 03.11.2026 – HB-PLUGINS-20261103: ABLAGEPROBLEM GESCHLOSSEN / LIVE-STATUS NICHT VERÄNDERT
+<!-- HAB_GEB_AUDIT_20261103 -->
+Der historische Eintrag `HB-PLUGINS-20261103` unten erklärt die frühere Ursache, darf aber **nicht** mehr als gegenwärtiger Blocker gelesen werden. Offizieller Campus bestätigt **3/3 echte ZIPs**: Design **0.1.184** (PR #625; Originalgröße 84.339.643 Bytes), Kategorie-Workflow **1.14.8.37** (PR #622), Bildzentrale **1.0.0** (PR #622). Original-GitHub-Verzeichnis für jede `CURRENT.zip` mit Größe/Blob-SHA gegengeprüft. Die drei veralteten Pluginakten wurden mit PR #627 korrigiert. Einziger aktueller Ablage-Status im `PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/CURRENT_STATE.md`. **Nicht mit Live-Freigabe verwechseln**: WordPress-Abnahme und 45 offene Design-Fotomeldungen sind durch diese Ablage nicht erledigt. Alle übrigen historischen Fehler unterhalb bleiben unverändert.
+
+---
+
 ## HB-PLUGINS-20261103 – Fehlender Projekt-Pluginbüro-Abruf
 
 **Fehler:** Hab & Bewahr hatte in der offiziellen Campus-Route keine eigene Eigenplugin-Ablage. Die aktuellste Design-ZIP 0.1.184 lag nur im Arbeitschat, Kategorie-Workflow 1.14.8.37 und Bildzentrale 1.0.0 waren durch alte Akten/Dateinamen, aber nicht als aktuelle unabhängige Campus-Voll-ZIP belegt.

@@ -1,3 +1,11 @@
+## 03.11.2026 – FRISCHER GEBÄUDE- UND ZIP-ABLAGEABGLEICH (VERBINDLICHER NACHTRAG)
+<!-- HAB_GEB_AUDIT_20261103 -->
+**Tatsächlich aus dem offiziellen Campus erneut geprüft:** Das eigene `EIGENTUMSSCHUTZ/PLUGINS`-Büro ist im Autoritätsplan gebunden. Alle drei vollständigen Plugin-ZIPs sind physisch im offiziellen Branch `hobbyroom/project-memory-campus-v1-20260905` gesichert. **HAB-001-DESIGN 0.1.184** liegt in `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip` (84.339.643 Bytes, Original-Git-Blob `e153339c967cabcc4953ed6fb0882d9792b622fe`, PR #625 gemergt). HAB-002 1.14.8.37 und HAB-003 1.0.0 sind ebenfalls im selben Pluginbüro real vorhanden (PR #622). Die früheren Aussagen in dieser Datei über fehlendes Pluginbüro, fehlenden Autoritäts-Scope oder fehlende GitHub-`CURRENT.zip` sind **historisch überholt** und dürfen nicht wieder als aktuelle Blocker behandelt werden. Maßgebliche Ablagewahrheit ausschließlich `../PLUGINS/CURRENT_STATE.md`; keine zweite Versionsverwaltung hier.
+
+**Nicht dadurch gelöst:** echter WordPress-Live-Einbau, HivePress-Kategorie-Live-Nachprüfung und die gesonderte Bild-/Hero-Facharbeit. Letzter dokumentierter Foto-Prüfstand: 55 Beanstandungspositionen, 10 lokal adressiert, **45 weiterhin offen**; Sammelgruppen zusätzlich einzeln zu prüfen. Bereits vorhandenes Foto-WIP und `FEHLERQUELLEN.md` beachten, keine Collagen oder Zwischen-Plugins. **GENAU EINE FACHLICHE NEXT ACTION unverändert:** zuerst die noch falsche Einzelaufnahme für `PV, Kamera & Beleuchtung` klären und dann die offene Bildliste systematisch weiterbearbeiten. Weder die ZIP-Ablage noch deren Versionsprüfung erneut von vorne beginnen.
+
+---
+
 ## 03.11.2026 – NACHGEZOGEN: EIGENPLUGIN-BÜRO JETZT OFFIZIELL VORHANDEN
 
 Der unten dokumentierte Befund, dass ein Hab-&-Bewahr-Pluginbüro fehlt, ist nach Merge von PR #619 überholt. Der offizielle Campus hat jetzt den Scope EIGENTUMSSCHUTZ_PLUGINS mit Bürotür, Current, Inventar und drei Plugin-Akten. Die ZIP-Binärdateien sind dort allerdings weiterhin NICHT als unabhängige CURRENT.zip vorhanden. Die Live-Prüfung für Design 0.1.184 ist weiterhin offen. Die ZIP-Ablage wird allein im Büro PLUGINS/CURRENT_STATE.md koordiniert; die älteren Design-/Fotomängel bleiben unberührt.

@@ -1,3 +1,9 @@
+## 03.11.2026 – FRISCHEHINWEIS ZUR 1.14.8.37-ABLAGE
+<!-- HAB_GEB_AUDIT_20261103 -->
+Die neueste fachlich hier dokumentierte C2.6-Versicherungsplanung vom 20.10.2026 bleibt unverändert; keine neue Konzeptarbeit und keine erneute Fachrecherche. Die dazu gehörende **vollständige originale Kategorie-Workflow-ZIP 1.14.8.37 ist mittlerweile real im offiziellen Hab-&-Bewahr-Pluginbüro gespeichert**, `../PLUGINS/ISOLIERTE_PLUGINS/HAB-002-KATEGORIE-WORKFLOW/CURRENT.zip` (368.530 Bytes, PR #622). Frühere Hinweise dieser historischen Chronik auf ausschließlich im Chat liegende Installationsarchive sind nicht mehr aktuell. **Ablage-/Versionsautorität:** `../PLUGINS/PLUGIN_AKTEN/HAB-002-KATEGORIE-WORKFLOW/CURRENT.md`. Fachliche NEXT ACTION von C2.6 unverändert; WordPress-Installation/Import ist nicht durch Archivierung nachgewiesen.
+
+---
+
 # HAB & BEWAHR – KONZEPT – CURRENT STATE
 
 ## 20.10.2026 – VERSICHERUNGEN: ENDKATEGORIEN 46/46 EINZELN FERTIG GEPLANT, TECHNISCHES 1.14.8.37 UPDATE

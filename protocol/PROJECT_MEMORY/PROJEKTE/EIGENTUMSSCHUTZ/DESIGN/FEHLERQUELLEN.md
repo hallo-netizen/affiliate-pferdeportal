@@ -1,3 +1,9 @@
+## 03.11.2026 – KORREKTUR DES HISTORISCHEN CAMPUS-ABLAGEBLOCKERS
+<!-- HAB_GEB_AUDIT_20261103 -->
+Die unten vom 03.11. dokumentierte Ursache der **HivePress-Kategorie-Kollision in Design 0.1.183** und deren **lokale Reparatur in 0.1.184** bleibt korrekt; WordPress-Live-Readback und die Bild-/Hero-Fehler bleiben gesondert offen. **Nur die frühere Aussage „kein Hab-&-Bewahr-Pluginbüro/keine Design-CURRENT.zip“ ist erledigt und als aktueller Blocker ausdrücklich widerrufen:** Die komplette geprüfte Design-Original-`CURRENT.zip` **0.1.184** liegt auf dem offiziellen Campus-Branch im eigenen `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/` (84.339.643 Bytes, PR #625 gemergt). Die beiden weiteren Eigenplugins sind ebenfalls physisch abgelegt (PR #622). Einziger lebender Ablage-/Versionsstand `../PLUGINS/CURRENT_STATE.md`; aktuelle Designaufgabe nur `CURRENT_STATE.md`. Die älteren Fehlereinträge unterhalb sind historische Ursachenprotokolle, keine neuen Installationsanweisungen.
+
+---
+
 ## HBD-DES-20261103-HIVE-184 – Wiederholte Kollision auf HivePress-Filter-Kategorie 331
 
 **Fehlerbild:** Am 03.11.2026 Nutzerscreenshot mit `/?_category=331` zeigt angeschnittene Kategorie-Einleitung/Breadcrumb unter der Portalnavigation. Andere Kategorieebenen müssen denselben bestehenden Layoutpfad benutzen.
