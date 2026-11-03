@@ -99,3 +99,30 @@ Quellen: WordPress-Website-Zustandsbericht vom 03.11.2026 und **bereits eingegan
 4. **Danach:** Design nachbauen, Funktionen/Pflegewege vollständig vergleichen, realistische Vorher-/Nachhermessung. Erst nach Abnahme Umstellung.
 
 **Ungeprüftes bleibt ungeprüft.** Diese Phase-A-Auswertung ist eine Dokumentation, keine technische Installation, kein vollständiger Test und keine Freigabe zum Entfernen eines Plugins.
+
+## 8. Nächster verifizierter praktischer Schritt: eigene WordPress-Arbeitsinstallation
+
+**Stand:** 03.11.2026. Die Daten-/Plugininventur und Speicheranalyse liegen bereits vor. Die nächsten technischen Arbeiten dürfen keine Verknüpfung zu K0-LIVE schaffen.
+
+**Entscheidung:** Keine WPvivid-Standard-Staging-Kopie direkt im produktiven WordPress-Pfad: Die freie Staging-Funktion kann nach Herstellerdokumentation WordPress-Dateien unter dem LIVE-Webspace und getrennte Tabellen in derselben LIVE-Datenbank anlegen. Das erfüllt die geforderte strikte Trennung nicht automatisch. Stattdessen eine **neue IONOS-WordPress-Installation mit eigener Installation und eigener Datenbank** aufsetzen; keine Übernahme von LIVE-Daten beim Anlegen.
+
+**Verifizierter IONOS-Click-&-Build-Pfad (Webhosting):**
+1. Im IONOS-Konto anmelden → **Menü → Web-Projekte**.
+2. **Neue Website oder Shop anlegen** wählen.
+3. **WordPress & Mehr** → **Open-Source-Lösungen für Ihre Website mit Click & Build**.
+4. Bereits vorhandenen Webhosting-Vertrag auswählen (keinen kostenpflichtigen Neuvertrag bestellen).
+5. Bei **WordPress → Installieren → WordPress selbst verwalten**.
+6. Projektname **Pferdeatelier-Technik-Test**, neuen eigenen Administrator (Zugangsdaten nicht im Chat teilen).
+7. **Temporäre System-Domain verwenden**; auf keinen Fall `pferde-atelier.de` zuordnen.
+8. Erst wenn keine zusätzliche Bestellung und keine Zuordnung zur LIVE-Domain verlangt wird: **WordPress installieren**. IONOS dokumentiert, dass die nötige Datenbank dabei automatisch erstellt wird.
+9. Unter **Website verwalten → Technische Daten** danach den **separaten Installationsordner und die separate Datenbank** gegenüber LIVE kontrollieren. Bei Übereinstimmung: **STOP**, nichts importieren.
+10. Keine Plugins/K0/Automatik oder produktiven Daten auf der neuen Installation aktivieren, bis der Isolationscheck bestanden ist.
+
+**Betreiber-Aktion jetzt:** Genau diese separate leere Installation anlegen. Keine ZIPs/Datenbanken in ChatGPT hochladen; kein FTP-/Serverzugang teilen. Wenn IONOS nur eine kostenpflichtige Zusatzbestellung anbietet, dort stoppen und keine Bestellung bestätigen.
+
+**Danach führt Assistenz fort:** Testinstallations-Isolation prüfen, schlanke Designbasis vorbereiten, nur benötigte Funktionen kontrolliert übernehmen, Optik und Bedienung gegen LIVE vergleichen.
+
+**Quellen (aktuell geprüft):**
+- https://www.ionos.de/hilfe/hosting/click-build-anwendungen/wordpress-installieren/
+- https://www.ionos.de/hilfe/mein-konto/hosting/click-build-daten-exportieren/
+- https://docs.wpvivid.com/overview-staging-free.html
