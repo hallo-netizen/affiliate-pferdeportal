@@ -1,3 +1,9 @@
+## HB-PLUGINS-20261103-02 – Pluginbüro offiziell eingebunden, weiterhin ohne echte Voll-ZIP-Ablage
+
+WAS: PR #619 in den Campus-Branch gemergt. Neue Büro-Current, drei technische Plugin-Akten und Routing aus dem offiziellen GitHub-Stand erneut gelesen. Design-Current und Büro-Current nun auf den tatsächlich bestehenden Büroweg korrigiert.
+WARUM: Die vorige Büro-Entwurfskennzeichnung war nach dem Merge veraltet; fehlende physische CURRENT.zip-Dateien dürfen aber nicht als erfolgreiche Speicherung dargestellt werden.
+
+---
 ## HB-PLUGINS-20261103 – Neues Projekt-Pluginbüro für eigene Plugins
 
 **WAS:** `PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/` analog zum bestehenden Campus-Bürosystem eingerichtet, drei eigene Plugins eindeutig inventarisiert, neue isolierte Ablageakten und Autoritätsplan-Eintrag vorbereitet. Nur HAB-001 Design, HAB-002 Kategorie-Workflow, HAB-003 Bildzentrale. Ausgeschlossene Fremdplugins: HivePress, WPForms, Yoast, Akismet, WPvivid und andere Anbieter. Keine falschen `CURRENT.zip`-Attrappen. Regulärer PR statt direkter Änderung des offiziellen Campus.
