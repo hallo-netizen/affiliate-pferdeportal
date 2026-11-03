@@ -49,19 +49,20 @@ jobs:
               p.feed(r['body'].decode('utf8','replace'))
             noindex='noindex' in ' '.join(p.robots).lower() or 'noindex' in r['xrobots'].lower()
             return url,{'code':r['code'],'noindex':noindex,'robots':p.robots,'canonical':p.canon,'final':r['final']}
-          problems=[];xml_files={};urls=[]
+          problems=[];xml_files={};xml_members={};urls=[]
           try:
             t,children=xml(BASE+'/sitemap_index.xml')
             if t!='sitemapindex':raise ValueError('ROOT_NOT_SITEMAPINDEX')
             for u in children:
               typ,found=xml(u)
               if typ!='urlset':problems.append('CHILD_NOT_URLSET '+u)
-              xml_files[u]=len(found);urls.extend(found)
+              xml_files[u]=len(found);xml_members[u]=found;urls.extend(found)
           except Exception as e:
             problems.append('XML_DISCOVERY_ERROR '+repr(e));children=[]
           if len(set(urls))!=len(urls):
             duplicates=[u for u in set(urls) if urls.count(u)>1]
             print('DUPLICATE_URLS',duplicates)
+            print('DUPLICATE_SOURCES',[(u,[sm for sm,links in xml_members.items() if u in links]) for u in duplicates])
             problems.append('DUPLICATES_IN_XML '+str(len(urls)-len(set(urls))))
           check=list(dict.fromkeys(urls+[BASE+p for p in roots+protected]+[listing]))
           with concurrent.futures.ThreadPoolExecutor(max_workers=7) as pool:results=dict(pool.map(page,check))
