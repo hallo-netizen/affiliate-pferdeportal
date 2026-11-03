@@ -1,3 +1,23 @@
+## 03.11.2026 – NACHHOLPRÜFUNG KATEGORIE-REPARATUR 0.1.184 – LOCAL PASS, CAMPUSABLAGE BLOCKED, LIVE OFFEN
+
+**Autorität:** Weiterhin genau diese DESIGN/CURRENT_STATE.md auf dem durch den AUTORITAETSPLAN gerouteten Campus-Branch. Dieser neue Nachtrag gilt nur für die tatsächlich geprüfte HivePress-Kategorie-Reparatur. Ältere Abschnitte bleiben Fehler-/Designhistorie; insbesondere die offenen Fotobeanstandungen werden hier NICHT als erledigt erklärt.
+
+**Ausgangspunkt:** Vom Nutzer am 03.11.2026 im Chat vollständig gelieferte Original-ZIP `HAB_UND_BEWAHR_DESIGN_0.1.183_GEMEINSAME_KATEGORIEVORLAGE.zip`, 84.339.581 Bytes, SHA-256 `b9a996e068ea5d3aee40d855e7a2a5dcb9069421401003e052b8ea3d6bbbfe37`, 426 ZIP-Einträge. Keine rekonstruierten Zwischenversionen benutzt.
+
+**Erzeugter lokaler Kandidat:** `HAB_UND_BEWAHR_DESIGN_0.1.184_HIVEPRESS_KATEGORIEN_REPARIERT.zip`, 84.339.643 Bytes, SHA-256 `76043e5c093058a4d8aff8fd6642307cade951c8267641dc710b8ed70cd323e3`, Pluginordner `hab-bewahr-design-vorschau/`, WordPress-Plugin-Header `Hab & Bewahr – Design`, Version `0.1.184`. **Gleiches Plugin, nicht zusätzliches Plugin.** 426/426 ZIP-Einträge, CRC PASS; genau drei Dateien geändert (`assets/market-category-clearance.js`, `hab-bewahr-design-vorschau.php`, `includes/hobby-market-profile.php`), 423 weitere byteidentisch.
+
+**Ursache der sichtbaren Kollision:** Auf HivePress-Filter-URLs `/?_category=331` war die bereits vorhandene Abstandskorrektur in 0.1.183 durch `is_tax('hp_listing_category')` von der Skripteinbindung ausgeschlossen und verlangte im JavaScript die dort fehlende `tax-hp_listing_category`-Body-Klasse. 0.1.184 verwendet den bereits vorhandenen, für native Archiv- und Filter-Kategorien einheitlichen `hbdp-market-category-request`-Erkennungspfad. Keine neue Seitenvorlage/Taxonomie; native Filter und Anzeigen nicht verändert. Der frühere Screenshot zeigt die Kollision; die konkreten Live-DOM-Messwerte des Nutzerservers sind NICHT unabhängig erhoben.
+
+**Nachweise:** Alter/neuer physischer ZIP-Bytevergleich frisch wiederholt (423 identisch, drei definierte Deltas). ZIP-CRC PASS, PHP-Syntax der gesamten 0.1.184: **33/33 PASS**, JavaScript `node --check`: **PASS**. Der vorhandene lokale Prüfbericht `HAB184_PRUEFBERICHT.json` beschreibt sechs PHP-Kategorie-/URL-Varianten (Terms 90/220/331 auf Archiv-/Filter-Weg), vier Negativrouten und 90 lokale Browserfälle einschließlich provozierter Überlagerung, dort als PASS ausgewiesen. Diese Browserfälle wurden bei diesem Abschlussnachtrag nicht erneut ausgeführt. Keine echte WordPress-Installation, kein serverseitiger Live-Readback, kein Live-Rollback. **LOCAL PASS / LIVE OFFEN.**
+
+**Campus-Ablageblocker:** Der frisch gelesene `AUTORITAETSPLAN.json` (v1.6 vom 26.10.) enthält **keinen EIGENTUMSSCHUTZ_PLUGINS-Scope**; der vollständige Campus-Baum `PROJEKTE/EIGENTUMSSCHUTZ/` enthält **kein existentes PLUGINS-Büro oder ISOLIERTE_PLUGINS/CURRENT.zip**. Ein eigenes Design-Plugin-MANIFEST mit bestätigter Campus-Voll-ZIP fehlt ebenfalls. `WORDPRESS_REGISTER.md` ist vom 16.09. und kein heutiges vollständiges Hab-&-Bewahr-Inventar. Das lokal gebaute Chat-ZIP ist daher **NICHT im vorgeschriebenen projektbezogenen Campus-Pluginbüro gesichert**; unabhängiger Campus-Wiederabruf, aktuelle technische Plugin-Current, Projekt-Gesamtinventar und Rollback-Campus-ZIP nicht bestätigt. Keine andere Projektablage, GitHub-Textakte, Chat-Datei, Bibliothek oder Archiv als Ersatz behaupten. **PLUGINABLAGE: BLOCKED.**
+
+**Nicht anfassen:** Schutzwelten, Kategorie-IDs/Slugs, Artikel und Synchronisierung, native HivePress-Filter/Anzeigen, Originalheader/Navigation/Footer, alte Foto-WIP-Meldungen, andere Projektgebäude und Archive.
+
+**GENAU EINE NEXT ACTION:** Durch den zuständigen Campus-Architektur-/Pluginbüro-Freigabeweg den fehlenden autoritativen EIGENTUMSSCHUTZ-Pluginablagepfad nachweislich festlegen und die unveränderte vollständige Design-0.1.184-ZIP dort mit unabhängigem Wiederabruf, MANIFEST/technischer Plugin-Current und tatsächlichem Gesamtinventarabgleich sichern. Bis dahin weder `CAMPUS-CURRENT` noch `LIVE PASS` behaupten.
+
+---
+
 ## 23.10.2026 – ABSCHLUSS-FRISCHECHECK / MASSGEBLICHER NEUSTER STAND
 **Scope und einzige Current-Autorität:** `EIGENTUMSSCHUTZ_DESIGN` auf Branch `hobbyroom/project-memory-campus-v1-20260905`, diese Datei. Ältere datierte Abschnitte darunter sind nur Historie; deren früheren NEXT ACTIONS und Zahlen sind ÜBERHOLT.
 

@@ -1,3 +1,11 @@
+## HB-PLUGINS-20261103 – Fehlender Projekt-Pluginbüro-Abruf
+
+**Fehler:** Hab & Bewahr hatte in der offiziellen Campus-Route keine eigene Eigenplugin-Ablage. Die aktuellste Design-ZIP 0.1.184 lag nur im Arbeitschat, Kategorie-Workflow 1.14.8.37 und Bildzentrale 1.0.0 waren durch alte Akten/Dateinamen, aber nicht als aktuelle unabhängige Campus-Voll-ZIP belegt.
+
+**Weg:** Büro und Route per regulärem PR; ausschließlich drei belegte Hab-Eigenpluginlinien. Leere/ältere/stattdessen textuelle CURRENT.zip verboten. Manifest nur Nachweis. **Status OFFICE-PROPOSAL; PLUGINABLAGE BLOCKED bis tatsächliche ZIP-Bytes, Versions-/Hashprüfung und unabhängiger Readback belegt sind.** Die zuständige NEXT ACTION liegt nur in `PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/CURRENT_STATE.md`.
+
+---
+
 ## EIGENTUMSSCHUTZ-DESIGN-FOTO-20261023
 Bereich: Hab & Bewahr / DESIGN. 55 gemeldete Bildfehler inklusive Mehrthemenbereichen und zugehörigen R1/R2/R3-Heros; Bearbeitung nur lokal, keine Gesamt- oder Live-Freigabe. **Ausschließliche detaillierte Fehlerautorität:** `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/FEHLERQUELLEN.md` → `HBD-DES-FOTO-20261023-01..05`. **Einziger Status/Blocker/GENAU EINE NEXT ACTION:** `PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/CURRENT_STATE.md`. Keine zweite aktuelle Fehlerliste an diesem Ort.
 
