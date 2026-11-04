@@ -1,0 +1,27 @@
+{
+  "contract": "PSTE_MINI_TITLE_POLICY_V1",
+  "version": "1.0.0",
+  "governance_ref": "contracts/intent-first-title-governance-v1.json",
+  "governance_sha256": "34beabd80dd7fb4f6631b660644567a9010a7665111628901b0dedc627d30602",
+  "start_command": "MINI:start",
+  "writer": "may_propose_only_never_approve",
+  "independent_reviewer": "external_account_not_the_writer_signer_private_key_never_in_wordpress_or_chat",
+  "one_quality_check": "independent_reviewer_owns_all_semantic_and_formal_quality_checks",
+  "repair": "return_failed_items_to_writer_then_same_independent_reviewer_checks_again_until_pass",
+  "hard_rules": [
+    "title_not_empty_or_keyword_staccato",
+    "natural_grammatical_german",
+    "no_colon",
+    "no_artificial_template_or_repeated_generic_schema",
+    "one_question_mark_only_at_end",
+    "question_titles_only_if_natural",
+    "qualifiers_and_intent_must_not_change",
+    "no_unsubstantiated_test_or_product_claims",
+    "distinct_titles_for_distinct_search_intents",
+    "no_semantic_duplicate_titles_in_one_batch"
+  ],
+  "quality_release": "signed_only_after_all_items_independently_reviewed_and_repaired",
+  "import": "signature_rule_version_and_source_identity_only_no_second_title_quality_check",
+  "editorial": "not_a_cannibalization_or_production_approval",
+  "k0": "strictly_read_only_inspiration_no_file_or_workflow_changes"
+}
