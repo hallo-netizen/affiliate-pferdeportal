@@ -26,12 +26,18 @@
 
 **Gültigkeit:** Diese Datei ist MINI-Orientierung und keine Änderung der zentralen K0- oder Produktionsautorität.
 
-## Nachkontrolle: mögliche gleiche Suchabsichten
-Die 100er-Datei bleibt unverändert. **Fünf Themenüberschneidungen** sind im vorhandenen redaktionellen SEO-Plan zusammenzuführen bzw. gegenzuprüfen, **nicht** durch neue Mini-Titel oder einen zweiten Titelprüfer künstlich zu trennen:
-- Regendecken allgemein: Datensätze 1 und 8.
-- Wärme bei Fleece-Regendecken: 3 und 19.
+## Gebündelte Endprüfung (06.11.2026)
+
+**100 Original-Keywords / 97 Titel**, 87 JA, 9 VIELLEICHT, 4 NEIN. Rohqueries, Titelabsichten, Entscheidungen und Paketzuordnung vollständig unverändert. Enddatei: `ERGEBNIS_100_TITEL_20261106.json`, Git-Blob `13051feaef974e57a7ec358cccaeb434679e750b`. 23 formale/strukturelle Prüfungen und 11 Positiv-/Negativ-Fälle am bestehenden Prüfer lokal bestanden; **diese lokalen Tests überspringen LanguageTool ausdrücklich**. Der getrennte echte LanguageTool-6.8-Lauf mit allen 97 Titeln (GitHub-Run 42207349100) lieferte 11 erkannte Fachwort-/Eigennamenbefunde, 0 ungeklärte Befunde.
+
+**Sechs mögliche Doppel-Suchabsichten für den bereits vorhandenen Redaktionsplan**, keine Titel- oder Artikelfreigabe:
+- Regendecken allgemein: 1 und 8.
+- Fleece-Regendecken und Wärme: 3 und 19.
 - Günstige Regendecken: 7 und 85.
 - Regendecken im Test/Vergleich: 9, 11 und 86.
 - 0g/ungefütterte Regendecken: 82 und 84.
+- Gebrauchte Pferdeanhänger prüfen und Schwachstellen: 94 und 99.
 
-Die lokale Titel-Formprüfung und die Sprachprüfung bleiben bestanden. **Inhaltliche Dublettenfreiheit ist damit nicht pauschal bestätigt.** Das ist kein neuer Arbeitsweg, sondern eine Korrektur des früher zu weit gefassten PASS. WordPress und K0 nicht verändern.
+**Wichtige, nicht verheimlichte Grenze:** Im privaten Titelprüfer sind Fachwort-Ausnahmen für diese 97 Titel und eine durchgehend automatische ChatGPT↔GitHub-Reparaturrückgabe nicht verifiziert. Ein echter privater 97-Titel-PASS ist deshalb **nicht** behauptet. Reparaturbericht → Korrektur durch Titelworker → erneute Prüfung funktioniert als Ablauf; GitHub schreibt die Korrektur ohne Schreibmodell nicht selbst. Keine zusätzliche Technik, WordPress-Kopplung oder Freischalt-/Sperrrunde anfordern.
+
+**Nur MINI-Qualitätskontrolle.** K0, WordPress und vorhandene Produktionswege unverändert. Die Daten sind Titelvorschläge, keine SEO- oder Produktionsfreigabe.
