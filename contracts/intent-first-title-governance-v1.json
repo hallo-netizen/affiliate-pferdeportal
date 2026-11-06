@@ -1,0 +1,68 @@
+{
+  "contract": "PSTE_INTENT_FIRST_TITLE_GOVERNANCE_V1",
+  "version": "1.5.0",
+  "principles": [
+    "SEO_INTENT_FIRST_BEFORE_ARTICLE_TYPE_TITLE_AND_SLOT",
+    "SEO_EVIDENCE_AND_RAW_SEARCH_QUERY_DEFINE_WHAT_THE_ARTICLE_MUST_ANSWER",
+    "ARTICLE_TYPE_TITLE_AND_PLAN_SLOT_DERIVE_FROM_ONE_BOUND_INTENT",
+    "QUALIFIERS_ARE_SEMANTIC_FOCUS_AND_MUST_NOT_BE_DILUTED",
+    "ONE_SEED_MAY_PRODUCE_MULTIPLE_RESEARCH_BRANCHES_ONLY_WITH_DISTINCT_SEO_EVIDENCE",
+    "SECONDARY_BRANCHES_ARE_RESEARCH_ONLY_NO_AUTO_FANOUT_NO_DIRECT_HANDOFF",
+    "NO_INTENT_REINTERPRETATION_FROM_TITLE_AFTER_BINDING"
+  ],
+  "title_surface": {
+    "special_characters": "FORBIDDEN_EXCEPT_FAQ_TERMINAL_QUESTION_MARK_AND_HISTORICAL_DASH_HYPHEN",
+    "faq_question_mark": "REQUIRED_FOR_FAQ",
+    "nonfaq_question_mark": "FORBIDDEN_EXCEPT_JOURNAL",
+    "natural_german_surface": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+    "keyword_staccato": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+    "phrase_diversity": "PORTAL_WIDE_GENERATION_POLICY_NOT_TEXTMACHINE_BLOCK",
+    "template_spam": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+    "meaning_change_for_style": "FORBIDDEN",
+    "artificial_generator_filler": "HARD_FORBIDDEN",
+    "article_type_intent_visibility": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+    "beratung_repeated_generic_schema": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+    "journal_question_mark": "OPTIONAL_QUESTION_OR_STATEMENT"
+  },
+  "compatibility": {
+    "textmachine": "READ_ONLY_IMMUTABLE_AUTHORITY",
+    "existing_textmachine_rules_are_not_duplicated_AS_SEPARATE_COMPETING_AUTHORITY": true,
+    "portal_rules_may_be_stricter_only_when_non_conflicting": true,
+    "style_rules_must_not_create_downstream_textmachine_blocks": true,
+    "exact_final_handoff_fields": [
+      "title",
+      "target_keyword",
+      "category",
+      "article_type",
+      "plan_slot"
+    ],
+    "hidden_sixth_field_for_intent": false,
+    "intent_internal_binding": "SEMANTIC_SLOT_COMPATIBILITY_AND_INTENT_PROFILE; OPAQUE_PLAN_SLOT_TOKEN_IS_TECHNICAL_IDENTITY_ONLY",
+    "target_keyword": "PREFER_EXISTING_KEYWORD_WORDING_WHEN_NATURAL; ADAPT_INFLECTION_WORD_ORDER_OR_COMPOUNDS_ONLY_WHEN_NEEDED_FOR_CORRECT_MEANING_AND_NATURAL_GERMAN; PRESERVE_SEARCH_INTENT",
+    "raw_query": "PRESERVED_SEPARATELY_AND_NEVER_OVERWRITTEN_BY_TARGET_KEYWORD",
+    "intent_slot_rule": "GENERATED_TITLE_MAY_NOT_CREATE_OR_UPGRADE_CANONICAL_SLOT_INTENT",
+    "mandatory_title_quality_rules_block_upstream_before_handoff": false,
+    "optional_phrase_diversity_remains_nonblocking": true,
+    "title_gate_may_reclassify_article_type": false,
+    "title_gate_may_change_category_or_slot": false,
+    "historical_0039_title_surface_preserved": true,
+    "beratung_repeated_generic_schema_is_hard_block": false,
+    "journal_title_form": "QUESTION_OR_STATEMENT_WITHOUT_FIXED_TEMPLATE"
+  },
+  "rule1": {
+    "content_html_headings_tables_lists_links_prompts_formatting_design_generated_or_modified": false,
+    "wordpress_post_or_taxonomy_write_allowed": false,
+    "textmachine_change_allowed": false
+  },
+  "manual_title_override": {
+    "allowed": true,
+    "scope": "TITLE_ONLY",
+    "same_hard_title_gates_required": false,
+    "intent_reassignment_allowed": false,
+    "article_type_change_allowed": false,
+    "category_change_allowed": false,
+    "plan_slot_change_allowed": false,
+    "canonical_article_identity_change_allowed": false,
+    "content_or_design_change_allowed": false
+  }
+}
