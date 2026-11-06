@@ -1,3 +1,23 @@
+# Codex-Arbeitsbereich: Hobby Depot – nur isolierter Testzweig
+
+## EINMALIGE BRANCH-GEBUNDENE AUSNAHME: Hobby Depot Bildtest
+
+**Nur fuer den Pull Request #632** mit Head-Zweig `hobbyroom/hd003-category-tile-image-audit-20261106` gilt dieser Abschnitt als Startanweisung. Alle K0-/Pferdeatelier-Regeln darunter bleiben fuer alle anderen Zweige und Auftraege unveraendert gueltig.
+
+Wenn und nur wenn der aktuelle Codex-Auftrag nachweislich zu diesem PR #632 und dessen Hobby-Depot-Head-Zweig gehoert:
+
+1. **Keinen Pferdeatelier-Cloud-Startbefehl aufrufen.** Der bestehende `control/cloud-entry-gate/cloud_entry.py` ist exklusiv fuer Pferdeatelier. Seine Dateien, States, Workflows und die K0-Texterstellung duerfen weder ausgefuehrt, noch repariert oder veraendert werden. Das gilt auch fuer `control/`, `isolated_system4/`, `.pferde-capsule/` und alle Projektbereiche ausser Hobby Depot.
+2. Ausschliesslich die Hobby-Depot-Aufgabe in `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CODEX_KATEGORIE_KACHELBILDER_20261106.md` und die zusaetzlichen Hobby-Regeln in `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/AGENTS.md` bearbeiten.
+3. **Schreibrechte nur im Hobby-Bereich** `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/` fuer Protokolle, generierte Bilder und reine Staging-Dateien. Pruefskripte/CI fuer dieses Bildprojekt nur in `scripts/hobby_*` und `.github/workflows/hobby-*` ablegen. Der Original-Pluginstand `PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip` ist **READ ONLY**.
+4. Strikt verboten: Aenderungen an K0, Pferdeatelier-Branch, Campus-Main, fremden Portalen, Plugin-Quellcode, Root-AGENTS, `control/`, WordPress-Live-Instanz oder Produktionsdaten. Auch keine automatischen Merges.
+5. Beim Bilderzeugen **keine externen OpenAI-API-Schluessel** verwenden: nur die eingebaute Codex-Bildgenerierung mit ChatGPT-Anmeldung. 20 Hobbys als 20 getrennte Bildauftraege, jedes genau eine durchgehende Szene, keine Collagen; technische und visuelle QA, Bildintegration nur als getestete Staging-Kopie.
+6. Vor Ergebnis-Meldung mit `python3 scripts/hobby_codex_scope_guard.py` sicherstellen, dass wirklich keine Aenderung ausserhalb der Hobby-Freigabeliste vorliegt. Bei gesperrtem Imagegen oder anderen nicht behebbaren Hindernissen exakt BLOCKED mit Nachweis melden, ohne an Pferdeatelier auszuweichen.
+7. Ergebnisse mit Belegen im PR #632 hinterlassen; die Live-Website bleibt unveraendert.
+
+**Bei jeder anderen Branch-/PR-Zuordnung oder unsicherer Identitaet: STOP, nicht die Hobby-Ausnahme nutzen.** Fuer Pferdeatelier gelten unveraendert die bisherigen folgenden Regeln.
+
+---
+
 # Pferde Atelier – verbindliche Codex-Cloud-Eingangstür
 
 Diese Datei gilt repositoryweit für Codex Cloud.
