@@ -351,6 +351,28 @@ final class PPAR_HB_Integration {
         if (function_exists('get_post_status') && get_post_status($id) !== 'publish') { return ''; }
         return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind);
     }
+    public static function world_banner($html, $node_id = '') {
+        $node_id=(string)$node_id;
+        if (strpos($node_id,'core:world:')!==0) { return $html; }
+        return self::area($html,$node_id,'banner');
+    }
+    /**
+     * Editorial surfaces can have up to two different design slots. The
+     * template may also carry a manually booked banner; retain that priority.
+     * Never create a generic ad on an unrelated WordPress page.
+     */
+    public static function editorial_banner($html, $slot = '', $node_id = '') {
+        if (is_string($html) && trim($html)!=='') { return $html; }
+        $slot=sanitize_key((string)$slot);
+        if (!preg_match('/^(magazin|compass|market)-(start|detail|submit)-[12]$/',$slot)) { return ''; }
+        $node=self::verified_nodes()[(string)$node_id] ?? array();
+        if (($node['type'] ?? '') !== 'page' || !class_exists('Portal_Affiliate_Router')) { return ''; }
+        $id=absint($node['wp_id'] ?? 0);
+        if ($id===0 || (function_exists('get_post_status') && get_post_status($id)!=='publish')) { return ''; }
+        $kind=(strpos($slot,'market-')===0) ? 'market_banner' : 'editorial_banner';
+        return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind);
+    }
+
     public static function area_products($html, $node_id = '') { return self::area($html,$node_id,'products'); }
     public static function area_banner($html, $node_id = '') { return self::area($html,$node_id,'banner'); }
 }
