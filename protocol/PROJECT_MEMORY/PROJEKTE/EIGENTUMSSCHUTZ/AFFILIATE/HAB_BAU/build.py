@@ -120,6 +120,12 @@ for old,new in (
 ):
     exactly(old,new)
 
+# Remaining references to the old PFTK design settings are not a Hab
+# setting contract. Neutralize only those identifiers; not their methods.
+# This includes older fallback/recovery paths that lack add_filter calls.
+assert "pftk_" in body
+body = body.replace("pftk_", "hbdp_")
+
 # Use the project's actual glossary CPT if present, never a horse glossary.
 body=body.replace("is_singular('uge_term')", "is_singular('hbdp_glossar_term')")
 body=body.replace("get_post_type($post_id) !== 'uge_term'", "get_post_type($post_id) !== 'hbdp_glossar_term'")
