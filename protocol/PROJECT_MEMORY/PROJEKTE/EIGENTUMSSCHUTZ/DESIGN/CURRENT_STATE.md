@@ -1,3 +1,19 @@
+## 06.11.2026 – EINHEITLICHES BEITRAGSDESIGN 0.1.189 / FRISCH GEPRÜFTER RELEASE
+<!-- HBD_DESIGN_ARTICLE_CURRENT_0189 -->
+**Scope:** ausschließlich Hab & Bewahr / DESIGN. Maßgebliche technische Plugin-ZIP/Version ist der HAB-001-DESIGN-CURRENT im bestehenden `../PLUGINS`-Büro. Diese DESIGN-Current ist nur fachlich/gestalterisch, keine zweite Pluginversionsautorität.
+
+**Umsetzung:** normale veröffentlichte WordPress-Beiträge statt ausschließlich alter Demos verwenden das einheitliche Design: zwei Spalten Desktop; mobil eine Produktgruppe nach dem ersten Fachabschnitt, ein Banner später; echte Affiliate-Ausgabe nur bei passenden Angeboten, keine doppelten Links, keine öffentlich sichtbaren Dummyprodukte. H1 ohne redundanten 'Ratgeber'-Kicker und ohne wiederholte Kategoriezeile; Navigation über echte Breadcrumbs; H2 mit dezenter Salbeilinie, H3 neutral, einheitlich lesbare Tabellen, Merksatz, normalen Listen, nummerierten Schritten, optionalen Häkchen-Checklisten. Passendes vorhandenes Beitragsfoto bei fünf Musterartikel-Slugs, falls WP-Bild fehlt. Datum und Quellenbereich nicht sichtbar; Quellen redaktionell gespeichert, Yoast-Datumsunterdrückung nur an normalen Beiträgen. Inhalt/Textlänge/SEO/Linkziele werden künftig durch das getrennte Textsystem verantwortet, nicht vom Designplugin.
+
+**Nachweis:** Vollständige Version 0.1.189 (84.349.647 B, 430 Einträge, SHA-256 `947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c`), lokaler PHP 35/35, JS, ZIP CRC und WordPress-Mock, lokaler Browser Desktop/Tablet/Mobil ohne Überlauf; GitHub-Run `42223947280` bestätigt unabhängigen Fernabruf der vollständigen ZIP vom isolierten Releasezweig und bytegleichen Hash sowie die CRC-Prüfung.
+**Grenze:** keine echte WordPress-Liveprüfung, keine tatsächliche aktive Affiliate-Provider-Verbindung bestätigt. Ältere Foto-/Hero-Beschwerden und HivePress-Liveabnahme ausdrücklich **nicht** durch den Beitragsrelease geschlossen.
+**NEXT ACTION (nach geschütztem Campus-Merge):** Design 0.1.189 als Update des bestehenden Plugins in WordPress installieren und normalen Wohnmobilbeitrag + eine R2-Schutzbereichsseite in Desktop/Mobil abnehmen.
+
+**Einmalige Freigabegrenze:** Dieser neue Stand ist zunächst ein Releasezweig zur geschützten Übernahme. Solange nicht gemergt, bleibt auf dem offiziellen Campus 0.1.184 die technische Current-Version. Diese Zeilen werden erst beim Merge fachliche Current-Wahrheit. Aktuelle Arbeit und Testberichte nicht als schon live darstellen.
+
+---
+
+## Historischer Designstand vor Beitragsrelease (03.11.2026)
+
 ## 03.11.2026 – FRISCHER GEBÄUDE- UND ZIP-ABLAGEABGLEICH (VERBINDLICHER NACHTRAG)
 <!-- HAB_GEB_AUDIT_20261103 -->
 **Tatsächlich aus dem offiziellen Campus erneut geprüft:** Das eigene `EIGENTUMSSCHUTZ/PLUGINS`-Büro ist im Autoritätsplan gebunden. Alle drei vollständigen Plugin-ZIPs sind physisch im offiziellen Branch `hobbyroom/project-memory-campus-v1-20260905` gesichert. **HAB-001-DESIGN 0.1.184** liegt in `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip` (84.339.643 Bytes, Original-Git-Blob `e153339c967cabcc4953ed6fb0882d9792b622fe`, PR #625 gemergt). HAB-002 1.14.8.37 und HAB-003 1.0.0 sind ebenfalls im selben Pluginbüro real vorhanden (PR #622). Die früheren Aussagen in dieser Datei über fehlendes Pluginbüro, fehlenden Autoritäts-Scope oder fehlende GitHub-`CURRENT.zip` sind **historisch überholt** und dürfen nicht wieder als aktuelle Blocker behandelt werden. Maßgebliche Ablagewahrheit ausschließlich `../PLUGINS/CURRENT_STATE.md`; keine zweite Versionsverwaltung hier.
