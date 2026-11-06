@@ -1,11 +1,10 @@
-# HAB-004 – vollständige Plugin-ZIP (technisches Manifest)
+# HAB-004 – Affiliate-Voll-ZIP (RC3)
 
-- Name: Hab & Bewahr – Affiliate-Zentrale (Version 0.1.0-rc2)
-- Datei: `CURRENT.zip`, **603.323 Bytes**, 27 ZIP-Dateien, WordPress-Ordner `affiliate-portal-router/`.
-- SHA-256: `014e42b9657eed74b4d2e1f29ea51c6c6bf5c276ec30402011289b3821cbe153`
-- Git-Blob: `077a35ccb3d2f9fc75c646629f183a28acbf342c`
-- Ursprung: **26** originale Dateien aus `EIGENTUMSSCHUTZ/AFFILIATE/NEUTRAL_STAMM` plus **1** originaler Hab-Adapter.
-- Versionsautorität: `../../PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md`.
-- Validierung: GitHub-Run `42246580133`, ursprüngliche Funktionensignaturen alle erhalten, 5 erhaltene Zusatzmodule wieder vollständig gestartet, 90 echte Hook-Typen, drei Bridge-Positiv-/Negativläufe, volle ZIP CRC / PHP / JS und unabhängiger GitHub-Wiederabruf PASS.
-- Klassifizierung: **INSTALLIERBARER KANDIDAT / LIVE NICHT ABGENOMMEN / KEIN BELEG 6.72.306 PARITÄT**.
-- Vorherige RC1-ZIP im isolierten Forschungszweig ist überholt, **nicht** als Current.
+- Archiv: `CURRENT.zip`, 605.196 Bytes, 27 ZIP-Einträge, WordPress-Verzeichnis `affiliate-portal-router/`.
+- Version: **0.1.0-rc3**, Plugin „Hab & Bewahr – Affiliate-Zentrale“.
+- SHA-256: `2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb`.
+- Git-Blob: `b6b19e7a739b70a813c5e9de2e290d98c898156f`.
+- Ursprung: 26 unverändert vollständig übernommene Stammdateien plus eine eigene Hab-Adapterdatei. Vorherige RC2: 24/27 Quell-Dateien bytegleich.
+- Nachweis: GitHub Actions `42252394077`: PHP/JS, 92 registrierte Hook-Typen, sechs Schutzwelten, 285 Artikelkategorien, 13 Produktprofile anhand offiziellen Design-Korpus, Positiv/Negativ, 2 identische Builds, ZIP-CRC, frischer unabhängig heruntergeladener Branch-Readback PASS.
+- Autorität: `../../PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md` und `../../CURRENT_STATE.md`.
+- Status: **Installierbarer Kandidat, nicht live abgenommen**. Automatik standardmäßig aus. Vollparität zu Pferdeatelier 6.72.306 nicht geprüft.

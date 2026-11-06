@@ -1,3 +1,15 @@
+## 06.11.2026 – RC3 BEREINIGUNG / OFFIZIELLE HAB-004-PLUGINABLAGE
+
+**Neue gültige Version:** 0.1.0-rc3, vollständige ZIP im ursprünglichen `../PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` (605.196 Bytes; SHA-256 `2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb`). RC2 unten ist nur Historie.
+
+**Ursache und Korrektur:** Die RC2-Produktlistenprüfung bezog sich ausschließlich auf Produktbegriffe in Seitenüberschriften. Der tatsächliche Design-Kategoriebaum liegt in der bestehenden WordPress-Zielrevision mit 6 Schutzwelten. In RC3 werden 285 Artikelkategorien und 13 klar benannte Produktprofile aus dem offiziellen Design-Nodes-Stand erkannt; nicht pauschal jedes Sicherheitsthema als Produkt deklariert. Die Werbung nutzt die echten gemappten WP-Zielseiten, nie die Pferde- oder Hobby-Quellkataloge. Welt-/Unterbereich-/Magazin-/Anzeigenmarkt- und Artikel-Brücken nach tatsächlichen Designfiltern, 92 reale Boot-Hooks, 24/27 Dateien gegenüber RC2 unverändert, keine Funktionen aus neutraler Engine gelöscht.
+
+**Performance mit Beleg:** Einmaliger, pro Seitenaufruf zwischengespeicherter WP-Seitenindex ersetzt wiederholtes Durchsuchen des gesamten Zielbaums. Keine unbelegte globale Laufzeitverbesserung behauptet. ZIP-Bau zweimal identisch, alle PHP/JS-Tests, 546 Design-Knoten als Testkorpus, negative und positive Tests, SHA + unabhängiger GitHub-Readback PASS (GitHub Run 42252394077).
+
+**Restgrenzen:** noch kein echter WordPress-/Provider-Livetest; eBay-Quellstand 6.72.306 als 66-Datei-Referenz nicht physisch im Hab-Büro, daher keine zugesagte vollständige Parität; Glossar-Einzelseiten ohne echte CPT-Zielbindung bleiben sicher leer statt erfundene Werbung zu zeigen. Automatische Affiliate-Ausgabe standardmäßig inaktiv.
+
+---
+
 ## 06.11.2026 – HAB-004 AFFILIATE – ISOLIERTER WORDPRESS-RELEASE 0.1.0-rc2
 <!-- HAB_AFFILIATE_RC2_20261106 -->
 **Neue Ausgabe im zuständigen eigenen Pluginbüro:** `../PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip`, 27 Dateien, 603.323 Bytes, SHA-256 `014e42b9657eed74b4d2e1f29ea51c6c6bf5c276ec30402011289b3821cbe153`. Build und Prüfquellen ausschließlich auf isoliertem Zweig `hbd-affiliate-port-20261106` in `AFFILIATE/HAB_BAU`; unveränderter fachlicher Originalstamm `NEUTRAL_STAMM` bleibt erhalten.

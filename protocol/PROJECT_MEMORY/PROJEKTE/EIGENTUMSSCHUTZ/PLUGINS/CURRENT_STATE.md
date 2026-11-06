@@ -1,3 +1,13 @@
+## 06.11.2026 – HAB-004 Affiliate RC3: OFFIZIELLER NEUER STAND
+
+Neu ist **nur HAB-004-AFFILIATE**: Version **0.1.0-rc3**, komplette `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` (605.196 Bytes, 27 Dateien), SHA-256 `2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb`, Git-Blob `b6b19e7a739b70a813c5e9de2e290d98c898156f`. Die vorangegangene RC2 ist **historisch** und nicht mehr „CURRENT“. Die drei bestehenden Plugins HAB-001-DESIGN 0.1.189, HAB-002-KATEGORIE-WORKFLOW 1.14.8.37 und HAB-003-BILDZENTRALE 1.0.0 bleiben bytegleich unverändert. Weiterhin **vier vollständige originale WordPress-ZIPs** im bestehenden Pluginbüro.
+
+Verifiziert: GitHub-Run **42252394077** (Dateien/Funktionen der neutralen Engine erhalten, 24/27 Dateien gegenüber RC2 unverändert, 92 Hooks im Starttest, 6 Welten / 285 Kategorien / 13 belegte Produktkategorien aus dem offiziellen HBDP-Designpaket, Positiv- und Negativtests, zweifach bytegleicher Neubau, ZIP-CRC, frischer vollständiger GitHub-ZIP-Readback). **Kein echter WP-Live-PASS**, keine 6.72.306-Gesamtparität, keine Provider-Echtverbindung, keine reale Hosting-Lastmessung. Details und verbindliche Grenzen ausschließlich in `PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md`.
+
+**Nächster operativer Schritt:** RC3 auf Hab & Bewahr kontrolliert installieren und tatsächliche WordPress-Kategorien und Frontend-Ausgabe prüfen; Affiliate-Automatik bleibt bis dahin AUS. Pferdeatelier K0 und andere Portale unangetastet.
+
+---
+
 ## 06.11.2026 – HAB-004-AFFILIATE – neues viertes vollständiges Eigenplugin
 <!-- HAB004_20261106_RELEASENOTE -->
 Im **bestehenden** Hab-&-Bewahr-Pluginbüro ist die ganze installierbare `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` (0.1.0-rc2, 603.323 Bytes, 27 Dateien, SHA-256 `014e42b9657eed74b4d2e1f29ea51c6c6bf5c276ec30402011289b3821cbe153`, Git-Blob `077a35ccb3d2f9fc75c646629f183a28acbf342c`) hinzugekommen. Nachweis: GitHub-Run 42246580133 einschließlich vollem unabhängigen GitHub-Wiederabruf, CRC, PHP/JS-Syntax, 26 originalen Source-Files, unveränderten ursprünglichen Funktionen, fünf zuvor fehlenden Modul-Starts sowie Positiv/Negativprüfungen der Hab-Kategoriebindung. Installationskandidat, **WordPress-Liveprüfung und Prüfung gegen das vollständige Pferdeatelier 6.72.306 Archiv sind NICHT abgeschlossen**. Automatik bleibt in Standardeinstellungen AUS. Nur die eigene Projekt-Binärdatei; kein fremdes Portal, keine Provider-Zugänge importiert.
