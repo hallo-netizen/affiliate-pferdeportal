@@ -1,0 +1,89 @@
+name: Hab & Bewahr Affiliate RC3 tests and independent ZIP release
+on:
+  push:
+    branches: [hbd-affiliate-clean-20261106]
+    paths:
+      - ".github/workflows/hbd-affiliate-clean-20261106.yml"
+      - "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/**"
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test whole plugin and real H&B portal taxonomy
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU"
+          R="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          git fetch --no-tags origin "refs/heads/hobbyroom/project-memory-campus-v1-20260905"
+          mkdir -p "$(dirname "$R")"
+          git show "FETCH_HEAD:$R" > "$R"
+          python3 "$B/build.py"
+          A="$(sha256sum "$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3.zip" | cut -d' ' -f1)"
+          python3 "$B/build.py"
+          B_HASH="$(sha256sum "$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3.zip" | cut -d' ' -f1)"
+          test "$A" = "$B_HASH"
+          echo "HAB_RC3_DETERMINISTIC_BUILD_PASS $A"
+          find "$B/_build/affiliate-portal-router" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          node --check "$B/_build/affiliate-portal-router/assets/frontend.js"
+          php "$B/tests/boot_smoke.php"
+          php "$B/tests/smoke.php" valid
+          php "$B/tests/smoke.php" invalid
+          php "$B/tests/smoke.php" wrong_revision
+          python3 "$B/tests/prepare_real_design.py"
+          php "$B/tests/real_tree_smoke.php" "$B/_build/hb-real-design-nodes-snapshot.json"
+          python3 "$B/tests/verify_rc3.py"
+      - name: Persist full tested RC3 ZIP on release branch
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          B="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU"
+          P="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          RELEASE="hbd-affiliate-rc3-release-20261106"
+          cp "$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3.zip" /tmp/rc3-affiliate.zip
+          if git ls-remote --exit-code --heads origin "$RELEASE" >/dev/null; then
+             git fetch --no-tags origin "refs/heads/$RELEASE"
+             git show "FETCH_HEAD:$P" > /tmp/rc3-existing.zip
+             cmp /tmp/rc3-affiliate.zip /tmp/rc3-existing.zip
+             echo "HAB_RC3_RELEASE_ALREADY_BYTE_IDENTICAL"
+          else
+             git fetch --no-tags origin "refs/heads/hobbyroom/project-memory-campus-v1-20260905:refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905"
+             git switch --create "$RELEASE" "origin/hobbyroom/project-memory-campus-v1-20260905"
+             cp /tmp/rc3-affiliate.zip "$P"
+             git add -- "$P"
+             git -c user.name="Hab Affiliate Tests" -c user.email="actions@users.noreply.github.com" commit -m "H&B: verified independent Affiliate RC3 ZIP"
+             git push origin "HEAD:refs/heads/$RELEASE"
+          fi
+      - name: Fetch full released ZIP from clean repository checkout
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          P="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          mkdir -p /tmp/hab-clean
+          git -C /tmp/hab-clean init -q
+          git -C /tmp/hab-clean remote add origin "https://github.com/${{ github.repository }}.git"
+          AUTH="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -C /tmp/hab-clean -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" fetch -q --depth=1 origin refs/heads/hbd-affiliate-rc3-release-20261106
+          git -C /tmp/hab-clean show "FETCH_HEAD:$P" > /tmp/hab-rc3-readback.zip
+          cmp /tmp/rc3-affiliate.zip /tmp/hab-rc3-readback.zip
+          python3 - <<'PY'
+          import zipfile,hashlib
+          p="/tmp/hab-rc3-readback.zip"
+          with zipfile.ZipFile(p) as z:
+              assert len(z.namelist())==27 and z.testzip() is None
+          print("HAB_RC3_INDEPENDENT_GITHUB_ZIP_READBACK_PASS",hashlib.sha256(open(p,'rb').read()).hexdigest())
+          PY
+      - name: Preserve supplementary ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3.zip
+          retention-days: 30
+          if-no-files-found: error
