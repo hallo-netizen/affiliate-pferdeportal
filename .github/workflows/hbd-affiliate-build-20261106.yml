@@ -1,0 +1,98 @@
+name: Hab & Bewahr Affiliate – isolated source, function parity, ZIP and readback
+on:
+  push:
+    branches: [hbd-affiliate-port-20261106]
+    paths:
+      - ".github/workflows/hbd-affiliate-build-20261106.yml"
+      - "protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/**"
+permissions:
+  contents: write
+jobs:
+  test-and-stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build complete independent plugin and test function parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          B="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU"
+          python3 "$B/build.py"
+          find "$B/_build/affiliate-portal-router" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          node --check "$B/_build/affiliate-portal-router/assets/frontend.js"
+          php "$B/tests/smoke.php" valid
+          php "$B/tests/smoke.php" invalid
+          php "$B/tests/smoke.php" wrong_revision
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,json
+          r=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU')
+          p=r/'HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip'
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None and len(z.namelist())==27
+              assert all(x.startswith('affiliate-portal-router/') for x in z.namelist())
+              names=set(z.namelist())
+              assert 'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php' in names
+          report=json.loads((r/'build_report.json').read_text())
+          assert report['source_files']==26 and report['output_files']==27
+          assert not report['functions_removed']
+          print('HB_AFFILIATE_FULL_ZIP_CRC_AND_FUNCTION_PARITY_PASS',report['sha256'],report['size_bytes'])
+          PY
+      - name: Stage exact full ZIP in protected-review branch
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          B="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU"
+          SRC="$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip"
+          TARGET="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          RELEASE="hbd-affiliate-rc1-release-20261106"
+          CAMPUS="hobbyroom/project-memory-campus-v1-20260905"
+          cp "$SRC" /tmp/hbd-affiliate-verified.zip
+          if git ls-remote --exit-code --heads origin "$RELEASE" >/dev/null; then
+             git fetch --no-tags origin "refs/heads/$RELEASE"
+             git show "FETCH_HEAD:$TARGET" >/tmp/hbd-affiliate-existing.zip
+             cmp -s /tmp/hbd-affiliate-existing.zip /tmp/hbd-affiliate-verified.zip
+             echo "HB_AFFILIATE_EXISTING_RELEASE_BYTES_IDENTICAL"
+          else
+             git fetch --no-tags origin "refs/heads/$CAMPUS:refs/remotes/origin/$CAMPUS"
+             git switch --create "$RELEASE" "origin/$CAMPUS"
+             mkdir -p "$(dirname "$TARGET")"
+             cp /tmp/hbd-affiliate-verified.zip "$TARGET"
+             git add -- "$TARGET"
+             git -c user.name="Hab Affiliate Build" -c user.email="actions@users.noreply.github.com" commit -m "H&B: staged complete isolated Affiliate RC1 candidate"
+             git push origin "HEAD:refs/heads/$RELEASE"
+          fi
+          echo "HB_AFFILIATE_RELEASE_BRANCH_READY"
+      - name: Independent GitHub readback from clean checkout
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          SRC="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip"
+          TARGET="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          mkdir -p /tmp/hbd-affiliate-readback
+          git -C /tmp/hbd-affiliate-readback init -q
+          git -C /tmp/hbd-affiliate-readback remote add origin "https://github.com/${{ github.repository }}.git"
+          AUTH="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -C /tmp/hbd-affiliate-readback -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" fetch -q --depth=1 origin refs/heads/hbd-affiliate-rc1-release-20261106
+          git -C /tmp/hbd-affiliate-readback show "FETCH_HEAD:$TARGET" >/tmp/hbd-affiliate-remote.zip
+          cmp -s "$SRC" /tmp/hbd-affiliate-remote.zip
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from zipfile import ZipFile
+          a=Path('/tmp/hbd-affiliate-remote.zip')
+          with ZipFile(a) as z:
+              assert z.testzip() is None and len(z.infolist())==27
+          print('HB_AFFILIATE_INDEPENDENT_GITHUB_READBACK_PASS',sha256(a.read_bytes()).hexdigest(),a.stat().st_size)
+          PY
+      - name: Keep exact installable candidate for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip
+          retention-days: 30
+          if-no-files-found: error
