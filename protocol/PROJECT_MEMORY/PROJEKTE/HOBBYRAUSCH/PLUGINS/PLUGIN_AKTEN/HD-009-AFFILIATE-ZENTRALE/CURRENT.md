@@ -23,3 +23,8 @@ Der Pluginordner und die Optionen des tatsächlichen installierten Originals sin
 ## Original-Upload 06.11.2026
 
 Die vom Betreiber aus WordPress hochgeladene `affiliate-portal-router.zip` enthält nach tatsächlichem Öffnen die Hobby-Depot-Affiliate-Zentrale **0.1.7-dev**. Dokumentierter vollständiger ZIP-Integritäts- und 23-PHP-Syntax-PASS unter [EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md](EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md). Die Original-ZIP liegt als vollständige bytegleiche Sicherungskopie im Chat vor. **Sie wurde technisch noch nicht als GitHub-ZIP hochgeladen.** Einziges fachliches Affiliate-Büro bleibt `../../../AFFILIATE/`, die zentrale Current-Autorität bleibt dort. Dieses Dokument ist nur die technische Akte.
+
+
+## Testkandidat 0.1.9-dev (noch kein freigegebener Current)
+
+Die 0.1.7-dev Originaldateien wurden vom Betreiber übergeben und als Basis für eine vollständige lokal geprüfte 0.1.9-dev-Test-ZIP verwendet; SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`. **Das vollständige Test-ZIP liegt im Chat**, nicht als GitHub-Binärdatei. Der geprüfte lokale Datei-Patch ist hingegen auf GitHub direkt im bestehenden HD009-Büro gespeichert: [Patch](EVIDENCE/HD009_0.1.7_TO_0.1.9.patch), [Testbericht](EVIDENCE/HD009_TESTKANDIDAT_0.1.9_20261106.md). Nur dieses Hobby-Plugin weiterführen, den bisherigen installierten 0.1.7-Stand nicht ungeprüft ersetzen. Die fachliche Statusautorität bleibt die bestehende `AFFILIATE/CURRENT_STATE.md`, keine zweite Autorität schaffen.
