@@ -47,6 +47,10 @@ jobs:
           test "$(stat -c %s "$SRC")" = "84349647"
           echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  $SRC" | sha256sum -c -
           cp "$SRC" /tmp/hbd-design-0189-certified.zip
+          # The deterministic builder changes the working tree. Restore the
+          # tracked 0.1.184 before moving to the Campus-based release branch.
+          git restore -- "$SRC"
+          test "$(stat -c %s "$SRC")" = "84339643"
           git fetch --no-tags origin "refs/heads/$CAMPUS:refs/remotes/origin/$CAMPUS"
           git switch --create "$RELEASE" "origin/$CAMPUS"
           test "$(stat -c %s "$SRC")" = "84339643"  # still the protected 0.1.184
