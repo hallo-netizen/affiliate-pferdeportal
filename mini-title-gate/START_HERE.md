@@ -19,6 +19,9 @@
 - Reale unabhängige GitHub-Gegenproben im privaten Titelprüfer: [Fehler abgelehnt](https://github.com/hallo-netizen/mini-titelpruefer/actions/runs/42196709788), [Korrektur akzeptiert](https://github.com/hallo-netizen/mini-titelpruefer/actions/runs/42196918970). Private Prüfstelle ist wieder außerhalb des ChatGPT-Zugriffs.
 - K0 und Live-Plugins wurden **nicht geändert**. Keine Produktions-/Kannibalisierungsfreigabe.
 
+
+**Exakte LanguageTool-Fachwortliste für spätere Prüferpflege:** Horseware-Regendecken, Abschwitzfunktion, Wasserführanlagen, Pfriemenschwanz-Eier, Gräsermischung, Heucobs, Schleich-Pferdeanhänger, Deichselabdeckungen, Humbaur-Pferdeanhänger. Dazu die korrekte Eigennamenschreibung „des Westfälischen Warmbluts“ (LanguageTool meldet fälschlich DE_CASE). Nur diese konkret bestätigten Treffer ausnehmen; alle anderen Befunde müssen weiterhin gesperrt bleiben. Diese Ausnahmen sind **im privaten Prüfer noch nicht nachgewiesen**.
+
 **Eine reale Grenze bleibt:** Der private Dauerprüfer kennt die elf Fachwort-Ausnahmen derzeit nicht nachweislich. Seine automatische Rückgabe an den Chat-Titelworker ist nicht eingerichtet. Deshalb gilt der vollständige Sprachtest als **QA der vorliegenden 97 Titel**, nicht als Beweis einer vollständig automatischen Endlosschleife oder eines privaten 97er-PASS. Der Titelworker kann beanstandete Titel hier korrigieren und erneut vorlegen, aber GitHub kann ohne Schreibmodell keine neue Formulierung erfinden. Keine weitere Freischalt-Runde für diesen Chat verlangen.
 
 **Gültigkeit:** Diese Datei ist MINI-Orientierung und keine Änderung der zentralen K0- oder Produktionsautorität.
