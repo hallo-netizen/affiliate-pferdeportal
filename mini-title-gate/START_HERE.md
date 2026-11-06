@@ -25,3 +25,13 @@
 **Eine reale Grenze bleibt:** Der private Dauerprüfer kennt die elf Fachwort-Ausnahmen derzeit nicht nachweislich. Seine automatische Rückgabe an den Chat-Titelworker ist nicht eingerichtet. Deshalb gilt der vollständige Sprachtest als **QA der vorliegenden 97 Titel**, nicht als Beweis einer vollständig automatischen Endlosschleife oder eines privaten 97er-PASS. Der Titelworker kann beanstandete Titel hier korrigieren und erneut vorlegen, aber GitHub kann ohne Schreibmodell keine neue Formulierung erfinden. Keine weitere Freischalt-Runde für diesen Chat verlangen.
 
 **Gültigkeit:** Diese Datei ist MINI-Orientierung und keine Änderung der zentralen K0- oder Produktionsautorität.
+
+## Nachkontrolle: mögliche gleiche Suchabsichten
+Die 100er-Datei bleibt unverändert. **Fünf Themenüberschneidungen** sind im vorhandenen redaktionellen SEO-Plan zusammenzuführen bzw. gegenzuprüfen, **nicht** durch neue Mini-Titel oder einen zweiten Titelprüfer künstlich zu trennen:
+- Regendecken allgemein: Datensätze 1 und 8.
+- Wärme bei Fleece-Regendecken: 3 und 19.
+- Günstige Regendecken: 7 und 85.
+- Regendecken im Test/Vergleich: 9, 11 und 86.
+- 0g/ungefütterte Regendecken: 82 und 84.
+
+Die lokale Titel-Formprüfung und die Sprachprüfung bleiben bestanden. **Inhaltliche Dublettenfreiheit ist damit nicht pauschal bestätigt.** Das ist kein neuer Arbeitsweg, sondern eine Korrektur des früher zu weit gefassten PASS. WordPress und K0 nicht verändern.
