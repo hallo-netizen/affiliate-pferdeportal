@@ -898,3 +898,15 @@ Die aktuelle Ablaufspur enthält 87 `MANUAL_TITLE_OVERRIDE`- und 75 `RETAINED_BA
 ## NEXT ACTION
 
 Am dokumentierten 06.11.-Incident fortsetzen. Die bereits gesicherte Originaldiagnose und den obigen aggregierten Befund verwenden; keine Neuprüfung unveränderter historischer PASS-Stufen und keine erneute Aufforderung zum Diagnoseupload. Zunächst die vollständige tatsächlich passende PSTE-0.57.144.12-Quelle erreichen, dokumentierten Paket-SHA abgleichen und die vorhandenen Reentry-/Relevanz-/Titel-/Kategorie-/Planungsstellen lesen. Dann die gemeinsamen belegten Ursachen in diesen vorhandenen Stellen korrigieren, unnötige doppelte Fachentscheidungen entfernen und mit denselben 87 unveränderten Eingaben sowie aussagekräftigen Negativfällen prüfen. Bis zum realen Quellfix und dessen Nachweisen bleibt der Reparaturauftrag offen; kein Produktions-/LIVE-PASS. Der frühere NEXT-ACTION-Installationsauftrag für PSTE 0.57.143.3 ist für diesen aktuellen Incident überholt und darf nicht erneut als nächster Schritt ausgeführt werden.
+
+
+### 06.11.2026 – KORREKTUR: PASSENDE PSTE-0.57.144.12-ZIP IST JETZT WIRKLICH IM CAMPUS ABGELEGT
+
+**Dieser Abschnitt ersetzt nur die zuvor offene QUELLBESCHAFFUNG im obenstehenden NEXT ACTION.** Der Betreiber hat die echte ZIP erneut hochgeladen; Originaldatei physisch eingelesen, SHA256 `fac094d994276608453ed4a731b49212528fe71184823f3885127e4ee6f16bd9`, 627824 Bytes. Durch GitHub-Binär-Blob erzeugt und in das BESTEHENDE Campus-Pluginbüro geschrieben; PR #644 wurde gemergt. GitHub-Rücklesung vom aktuellen Campus-Branch **PASS**, Git-Blob `e5d709bbb45b3c4c79fd75056db076a2c1ce7cb2`, identisch zu `git hash-object` des Original-Uploads.
+
+**Die vollständig passende originale TEST-Plugin-ZIP liegt ab jetzt hier:**
+`protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PFERDEATELIER_PSTE_0.57.144.12_MINI_ZUM_REDAKTIONSPLAN_NUR_TEST.zip`.
+
+**HARTREGEL FÜR JEDEN FOLGECHAT:** Kein erneutes Fordern der ZIP, kein Spekulieren über GitHub-Zugriff, keine Behauptung »nur Prüfbericht vorhanden«. Stets konkrete Datei im bestehenden Pluginbüro prüfen. Passende Originalquelle existiert jetzt. Dazugehörige zusätzliche Campus-Nachweisdatei `PLUGINS/EVIDENCE/PSTE_05714412_ORIGINAL_ZIP_IM_CAMPUS_20261106.md`.
+
+**AKTUELLER NÄCHSTER SCHRITT:** Mit exakt dieser Originalquelle in bestehenden MINI-/Reentry-/Kategorie-/Planungsstellen die belegten Ursachen beheben. 50 offene Kategorien entsprechend Konzept an das bestehende Redaktionsbüro zur Sammlung/Entscheidung weitergeben, nicht mit erneutem Sprach-/Relevanz-Check verwerfen. Bereits extern belegte JA-Relevanz und Titel korrekt an den vorhandenen fachlichen Owner übergeben, keine inhaltliche Doppelprüfung. 12 Planungssperren mit tatsächlich vorhandenem Plan/Bestand auseinanderhalten; echte Dubletten weiterhin abfangen. Danach in TEST die 87 unveränderten JA-Fälle mit wirklichen WP-Termdaten und Negativfällen durchlaufen lassen; die 9 VIELLEICHT geparkt, 4 NEIN ausgeschlossen. **Noch kein Programmfix und keine LIVE-/K0-Freigabe.**
