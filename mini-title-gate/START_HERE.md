@@ -28,3 +28,15 @@ Die bisherigen Signatur-/WordPress-Verknüpfungsentwürfe gehören **nicht** zu 
 - Frühere 90 Titel mit Doppelpunkt sind in der korrigierten Fassung bereinigt.
 - **Diese Gesamtprüfung ist nicht gleichbedeutend mit einem kompletten unabhängigen LanguageTool- oder semantischen Durchlauf aller 97 Titel in GitHub.** Die zwei echten GitHub-Läufe belegen allein den positiven und negativen Testfall.
 - Ob automatisch wiederholte Texte vom Chat-Titelworker bei einem GitHub-Fund ohne manuellen Transfer entstehen, ist **nicht** technisch eingerichtet. GitHub erstellt einen Reparaturbericht; die eigentliche Korrektur durch den Titelworker ist ein separater Schritt. Keine automatisierte Endlosschleife oder vollständige Sprachqualität behaupten.
+
+## Fortsetzung 06.11.2026 – inhaltliche Vier-Punkte-Reparatur der 100 Titel
+
+- In der bestehenden 100er-Datei wurden die **Titeltexte von genau vier bestehenden Einträgen** gezielt korrigiert. Entscheidungen, Keyword-Rohdaten, Intentbezeichnungen, Batch- und Zeitfelder bleiben unverändert:
+  - `pfriemenschwanz pferd eier`: „Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären“ (Eier-Absicht wieder sichtbar).
+  - `teuerstes pferd deutschland`: „Welches Pferd gilt als das teuerste Deutschlands?“ (einzelnes Rekordpferd statt allgemeiner Preistreiber).
+  - `teuerste pferd der welt`: „Welches Pferd war das teuerste der Welt?“ (Rekordfrage statt Ursachen hoher Preise).
+  - `anhängerkamera pferd`: „Anhängerkameras zur Überwachung beim Pferdetransport auswählen“ (keine unbelegte Sicherheitsgarantie).
+- **100 Datensätze, 97 Titel:** bestehender Prüfcode lokal mit `--skip-lt-for-tests` ausgeführt; Formregeln PASS.
+- **Reparaturdurchlauf:** absichtlich falscher Doppelpunkt wurde abgelehnt, `reparaturauftrag.json` entstand, nach Korrektur PASS. **9 bestehende Tests PASS.**
+- **Ehrliche Grenze:** Kein LanguageTool-6.8-Gesamtlauf über alle 97 Titel in dieser Nachkorrektur, kein automatisches ChatGPT↔GitHub-Rückkopplungssystem, keine unabhängige endgültige semantische Abnahme. Deshalb **nur vorbereitete/korrigierte Titelvorschläge, keine Produktionsfreigabe**.
+- Kein GitHub-Privatrepo-Zugriff angefordert; keine Änderung an K0, WordPress oder bestehenden Plugins. Die Original-Titelregeln bleiben byteidentisch.
