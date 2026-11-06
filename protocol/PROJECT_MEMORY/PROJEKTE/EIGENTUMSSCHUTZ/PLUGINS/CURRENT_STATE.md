@@ -1,3 +1,11 @@
+## 06.11.2026 – HAB-004-AFFILIATE – neues viertes vollständiges Eigenplugin
+<!-- HAB004_20261106_RELEASENOTE -->
+Im **bestehenden** Hab-&-Bewahr-Pluginbüro ist die ganze installierbare `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` (0.1.0-rc2, 603.323 Bytes, 27 Dateien, SHA-256 `014e42b9657eed74b4d2e1f29ea51c6c6bf5c276ec30402011289b3821cbe153`, Git-Blob `077a35ccb3d2f9fc75c646629f183a28acbf342c`) hinzugekommen. Nachweis: GitHub-Run 42246580133 einschließlich vollem unabhängigen GitHub-Wiederabruf, CRC, PHP/JS-Syntax, 26 originalen Source-Files, unveränderten ursprünglichen Funktionen, fünf zuvor fehlenden Modul-Starts sowie Positiv/Negativprüfungen der Hab-Kategoriebindung. Installationskandidat, **WordPress-Liveprüfung und Prüfung gegen das vollständige Pferdeatelier 6.72.306 Archiv sind NICHT abgeschlossen**. Automatik bleibt in Standardeinstellungen AUS. Nur die eigene Projekt-Binärdatei; kein fremdes Portal, keine Provider-Zugänge importiert.
+
+**Neuer Bestand: 4/4 echte vollständige Eigenplugin-ZIPs**. Die vorhandenen Design 0.1.189, Kategorie-Workflow 1.14.8.37 und Bildzentrale 1.0.0 wurden nicht geändert. Dies ist die einzige aktuelle Pluginbüro-Statusautorität, technische Einzelheiten in `PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md`. **NEXT ACTION:** Kandidat in einer gesicherten Hab-&-Bewahr-WordPress-Installation aktivieren und zunächst ohne Provideraktivierung die Adminseiten, den aktiven zentralen Katalog, die Hub-/Artikel-/Glossar-/HivePress-Brücken, die Performance und die unveränderte Ausgangslage der bestehenden Plugins prüfen.
+
+---
+
 # HAB & BEWAHR – PLUGINS / AKTUELLER CAMPUS-RELEASE-STAND
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 ## Stand 06.11.2026 – DIE DREI EIGENPLUGINS / VERSION 0.1.189
