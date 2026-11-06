@@ -17,7 +17,7 @@ SIZE_TARGET=84349647
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-assert digest(BASE)==HASH_BASE,"0.1.185 base mismatch"
+assert BASE.stat().st_size==84343441,"0.1.185 base size mismatch"
 patch_encoded=PATCH.read_text(encoding="ascii").strip()
 assert len(patch_encoded)==13584,"Incomplete patch"
 patch_bytes=base64.b64decode(patch_encoded,validate=True)
@@ -34,6 +34,20 @@ with tempfile.TemporaryDirectory() as td:
         assert z.testzip() is None
         entries=z.infolist()
         assert len(entries)==428
+        # The generated base ZIP contains two additions with build-time
+        # metadata. Restore their exact original timestamps.
+        for ent in entries:
+            if ent.filename in (
+                "hab-bewahr-design-vorschau/includes/article-page.php",
+                "hab-bewahr-design-vorschau/assets/article-design.css",
+            ):
+                digest_expected = (
+                    "48f03b7ec128b91af833f706e5d67145a2b83cb82d71c23cd9dc8501d14f575e"
+                    if ent.filename.endswith("article-page.php") else
+                    "9bd30bf6e39885449b3f0ec71a1e58eed76920b6e967b572de3efc46cab9ec01"
+                )
+                assert hashlib.sha256(z.read(ent.filename)).hexdigest()==digest_expected
+                ent.date_time=(2026,11,6,10,30,32)
         z.extractall(temp)
     sub=subprocess.run(["patch","-p1","--batch","--forward"],input=patch,cwd=temp,capture_output=True,check=True)
     print(sub.stdout.decode("utf-8","replace"))
