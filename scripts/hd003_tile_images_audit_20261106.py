@@ -40,3 +40,20 @@ if p.exists():
             data=json.loads(z.read(found[0]))
             print("HD007_STATUS_STRUCTURE",type(data).__name__,list(data.keys())[:20] if isinstance(data,dict) else "list",flush=True)
             print("HD007_STATUS_BYTES",len(z.read(found[0])),flush=True)
+
+
+# Additional mapping audit: which images are used and how category ownership is resolved.
+with ZipFile(root/"HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip") as z:
+    name="affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php"
+    lines=z.read(name).decode("utf8","replace").splitlines()
+    for i,l in enumerate(lines,1):
+        if re.search(r'hobby-masters|hero-masters|subcategories/|bildarchiv|category_image|category.*image.*map|image.*map.*category|thumbnail_id',l,re.I):
+            print("MAPPING_HIT",i,l.strip()[:370],flush=True)
+    for a,b in [(4600,4760)]:
+        for j in range(a,min(b,len(lines))+1):
+            print("MAPPING_SOURCE",j,lines[j-1][:250],flush=True)
+with ZipFile(root/"HD-007-HOBBYREGISTER-CORE/CURRENT.zip") as z:
+    name=[x for x in z.namelist() if x.endswith("hobby-image-production-status-v1.json")][0]
+    d=json.loads(z.read(name))
+    print("REGISTER_SUMMARY",str(d.get("summary"))[:1000],flush=True)
+    print("REGISTER_ITEM_COUNT",len(d.get("items",[])),flush=True)
