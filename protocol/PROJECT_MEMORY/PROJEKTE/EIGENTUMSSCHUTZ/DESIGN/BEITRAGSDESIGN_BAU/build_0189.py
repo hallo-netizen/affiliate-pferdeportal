@@ -6,7 +6,7 @@ from pathlib import Path
 import base64,hashlib,lzma,subprocess,tempfile,zipfile
 
 HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[2] # EIGENTUMSSCHUTZ
+ROOT=HERE.parents[1] # EIGENTUMSSCHUTZ
 BASE=HERE/"HAB_UND_BEWAHR_DESIGN_0.1.185_BEITRAEGE.zip"
 PATCH=HERE/"patch_0189.xz.b64"
 DEST=ROOT/"PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
