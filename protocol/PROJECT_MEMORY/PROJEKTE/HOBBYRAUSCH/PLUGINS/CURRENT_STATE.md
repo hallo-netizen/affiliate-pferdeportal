@@ -41,3 +41,8 @@ Zusätzlich existieren eigenentwickelte, **nicht als aktiv belegte Kandidaten**:
 ## Nachtrag HD-009 / 06.11.2026
 
 Für **HD-009** ist die originale Version `0.1.7-dev` nun als vollständiger Betreiber-Upload im Chat verfügbar und geprüft (SHA-256 `34c0a9b42c62f71025212bfba3756e48bf4c6ab21fdd000c9894a1ce2bf12cfa`). Die GitHub-Protokollablage ist in `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md` verknüpft. **Die ZIP ist noch nicht im GitHub-Current gespeichert.** Das fachliche Affiliate-Büro unter `../AFFILIATE/` bleibt einzigartig, während das zentrale Pluginbüro die technische Paketablage führt. Nicht als Doppelbüro zählen.
+
+
+## HD-009-Harmonisierung (06.11.2026) – Offen für offizielle GitHub-ZIP
+
+Die originale installierte `0.1.7-dev` wurde aus WordPress geliefert und geprüft. Daraus wurde eine **vollständige** lokal geprüfte `0.1.9-dev`-Test-ZIP erstellt (605.968 Bytes; SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`). Der **vollständige Quellpatch** und sämtliche Testbelege sind unter `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/` im Campus gesichert. Die ZIP selbst wurde noch nicht als Github-Blob hochgeladen; **deshalb kein `CURRENT.zip` und keine finale GitHub-Releasefreigabe vortäuschen**. Das eine fachliche Affiliate-Büro bleibt `../AFFILIATE/`; HD009 ist nur die zugehörige technische Pluginakte.
