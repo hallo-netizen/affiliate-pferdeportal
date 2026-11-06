@@ -285,15 +285,26 @@ final class PPAR_HB_Integration {
         return self::$catalog;
     }
 
+    /**
+     * Technical slot contract from the actual H&B design, using the original
+     * Affiliate engine's slot names. NO provider-specific duplicate logic.
+     */
     public static function slot_matrix($matrix, $portal = array(), $version = '') {
         $matrix = is_array($matrix) ? $matrix : array();
-        // This site only. An external/multisite adapter keeps its own contract.
-        if (($portal['adapter'] ?? '') !== 'wordpress_local' || !self::verified_nodes()) { return $matrix; }
+        if (($portal['adapter'] ?? '') !== 'wordpress_local' || !self::verified_nodes()) {
+            return $matrix;
+        }
         $wide = array(
             'creative_type'=>'banner','ratio_min'=>2.5,'ratio_max'=>12,
             'min_width'=>300,'min_height'=>60,'crop'=>'contain',
             'target_types'=>array('page','category'),
             'target_contexts'=>array(),'upscale_max'=>1.1,'min_fill'=>0.6,
+        );
+        $square=array(
+            'creative_type'=>'banner','ratio_min'=>0.8,'ratio_max'=>2.4,
+            'min_width'=>240,'min_height'=>110,'crop'=>'cover',
+            'target_types'=>array('page'),'target_contexts'=>array('hub1','hub2'),
+            'upscale_max'=>1.1,'min_fill'=>0.65,
         );
         $card = array(
             'creative_type'=>'product','ratio_min'=>0.55,'ratio_max'=>2,
@@ -302,24 +313,36 @@ final class PPAR_HB_Integration {
             'target_contexts'=>array(),
         );
         $slots = array(
-            'start_after_topics'=>$wide,
-            'hub_after_cards'=>$wide,
-            'product_after_category_tiles'=>$wide,
-            'journal_banner'=>$wide,
-            'anzeigenmarkt_top_banner'=>$wide,
-            'anzeigenmarkt_category_banner'=>array_merge($wide,array('target_types'=>array('hp_listing_category'))),
-            'post_inline_banner'=>array_merge($wide,array('target_types'=>array('post'))),
-            'glossary_single_desktop_banner'=>array_merge($wide,array('target_types'=>array('hbdp_glossar_term'),'device'=>'desktop')),
-            'glossary_single_mobile_banner'=>array_merge($wide,array('target_types'=>array('hbdp_glossar_term'),'device'=>'mobile')),
-            'glossary_overview_banner'=>$wide,
-            'post_bottom_products'=>array_merge($card,array('target_types'=>array('post'))),
+            'start_after_topics'=>array_merge($wide,array('target_contexts'=>array('start'))),
+            'hub_grid_card'=>$square,
+            'hub_after_cards'=>array_merge($wide,array('target_contexts'=>array('hub1','hub2'))),
+            'product_after_category_tiles'=>array_merge($wide,array('target_contexts'=>array('hub2','leaf','category','leaf_category'))),
+            'journal_banner'=>array_merge($wide,array('target_contexts'=>array('journal'))),
+            'anzeigenmarkt_top_banner'=>array_merge($wide,array('target_contexts'=>array('anzeigenmarkt'))),
+            'anzeigenmarkt_category_banner'=>array_merge($wide,array(
+                'target_types'=>array('hp_listing_category'),'target_contexts'=>array('hivepress_category'))),
+            'post_inline_banner'=>array_merge($wide,array(
+                'target_types'=>array('post'),'target_contexts'=>array('classic_post'))),
+            'glossary_single_desktop_banner'=>array_merge($wide,array(
+                'target_types'=>array('page','category'),'target_contexts'=>array('glossary_single'),
+                'device'=>'desktop')),
+            'glossary_single_mobile_banner'=>array_merge($wide,array(
+                'target_types'=>array('page','category'),'target_contexts'=>array('glossary_single'),
+                'device'=>'mobile')),
+            'glossary_overview_banner'=>array_merge($wide,array(
+                'target_contexts'=>array('glossary_overview'))),
+            'post_bottom_products'=>array_merge($card,array(
+                'target_types'=>array('post'),'target_contexts'=>array('classic_post'))),
         );
-        foreach (array('hub_product_1','hub_product_2','hub_product_3',
-                       'category_product_1','category_product_2','category_product_3',
-                       'journal_product_1','journal_product_2','journal_product_3') as $slot) {
-            $slots[$slot]=$card;
+        foreach (array('hub_product_1','hub_product_2','hub_product_3') as $slot) {
+            $slots[$slot]=array_merge($card,array('target_contexts'=>array('hub1')));
         }
-        // Never override a separately approved slot rule with a conflicting rule.
+        foreach (array('category_product_1','category_product_2','category_product_3') as $slot) {
+            $slots[$slot]=array_merge($card,array('target_contexts'=>array('hub2','leaf','category','leaf_category')));
+        }
+        foreach (array('journal_product_1','journal_product_2','journal_product_3') as $slot) {
+            $slots[$slot]=array_merge($card,array('target_contexts'=>array('journal')));
+        }
         return array_merge($slots,$matrix);
     }
 
