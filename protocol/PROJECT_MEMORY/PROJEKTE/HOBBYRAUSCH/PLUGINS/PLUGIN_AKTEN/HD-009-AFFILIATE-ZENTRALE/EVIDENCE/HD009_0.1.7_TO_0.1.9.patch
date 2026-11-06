@@ -1,0 +1,151 @@
+diff --git a/hobby_original_clean/affiliate-portal-router/hobby-depot-affiliate-router.php b/hobby_hd009_release_work/affiliate-portal-router/hobby-depot-affiliate-router.php
+index 4554470..ad7ffb9 100644
+--- a/hobby_original_clean/affiliate-portal-router/hobby-depot-affiliate-router.php
++++ b/hobby_hd009_release_work/affiliate-portal-router/hobby-depot-affiliate-router.php
+@@ -1,8 +1,8 @@
+ <?php
+ /**
+  * Plugin Name: Hobby Depot – Affiliate-Zentrale
+- * Description: Zentrale Affiliate- und Produktquellenverwaltung für Hobby Depot. Entwicklungsstand – noch kein freigegebener Installationskandidat.
+- * Version: 0.1.7-dev
++ * Description: Zentrale Affiliate- und Produktquellenverwaltung für Hobby Depot. Gezielt harmonisierte Hobby-Depot-Fassung; Live-Abnahme erforderlich.
++ * Version: 0.1.9-dev
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -30,6 +30,11 @@ require_once __DIR__ . '/includes/trait-ppar-awin-programme-gate.php';
+ require_once __DIR__ . '/includes/trait-ppar-idealo.php';
+ require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
+ require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
++require_once __DIR__ . '/includes/class-ppar-product-source-plan.php';
++require_once __DIR__ . '/includes/class-ppar-admin-kiss.php';
++require_once __DIR__ . '/includes/class-ppar-deal-radar.php';
++require_once __DIR__ . '/includes/class-ppar-partner-analytics.php';
++require_once __DIR__ . '/includes/class-ppar-ds24-manual-downstream.php';
+ 
+ final class Hobby_Depot_Affiliate_Router {
+     private $ranked_campaigns_request_cache = array();
+@@ -10726,3 +10731,8 @@ register_deactivation_hook(__FILE__, array('Hobby_Depot_Affiliate_Router', 'deac
+ // startet weiterhin erst im normalen WordPress-Lauf; Aktivierung und eBay-
+ // Hintergrundprozesse bleiben voneinander getrennt.
+ Hobby_Depot_Affiliate_Router::instance();
++PPAR_Affiliate_Source_Plan::bootstrap();
++PPAR_Affiliate_Admin_KISS::bootstrap();
++PPAR_Deal_Radar::bootstrap();
++PPAR_Partner_Analytics_Admin::bootstrap();
++PPAR_DS24_Manual_Downstream::bootstrap();
+diff --git a/hobby_original_clean/affiliate-portal-router/includes/class-ppar-product-source-plan.php b/hobby_hd009_release_work/affiliate-portal-router/includes/class-ppar-product-source-plan.php
+index 2e93ced..1164b29 100644
+--- a/hobby_original_clean/affiliate-portal-router/includes/class-ppar-product-source-plan.php
++++ b/hobby_hd009_release_work/affiliate-portal-router/includes/class-ppar-product-source-plan.php
+@@ -79,16 +79,15 @@ final class PPAR_Affiliate_Source_Plan {
+     public static function extend_provider_registry($registry, $contract_version = '') {
+         $registry = is_array($registry) ? $registry : array();
+ 
+-        // Amazon already exists in the core registry. Extend only its prepared
+-        // capability contract; the real adapter remains absent until real access exists.
+-        $amazon = isset($registry['amazon']) && is_array($registry['amazon']) ? $registry['amazon'] : array();
+-        $registry['amazon'] = array_merge(array(
+-            'label'=>'Amazon','state'=>'prepared','access_owner'=>'adapter',
+-            'specialist_menu'=>false,'specialist_slug'=>'affiliate-portal-provider-amazon',
+-        ), $amazon, array(
+-            'state'=>'prepared','access_owner'=>'adapter','specialist_menu'=>false,
+-            'capabilities'=>array('credentials','connection_test','product_feeds','synchronization','outputs','veto'),
+-        ));
++        // Keep the existing Hobby Depot Amazon ASIN/tracking bridge intact.
++        // Never downgrade an active provider to a generic prepared adapter.
++        if (!isset($registry['amazon']) || !is_array($registry['amazon'])) {
++            $registry['amazon'] = array(
++                'label'=>'Amazon','state'=>'prepared','access_owner'=>'adapter',
++                'specialist_menu'=>false,'specialist_slug'=>'affiliate-portal-provider-amazon',
++                'capabilities'=>array('credentials','connection_test','product_feeds','synchronization','outputs','veto'),
++            );
++        }
+ 
+         $registry['otto'] = array(
+             'label'=>'OTTO','state'=>'prepared','access_owner'=>'none',
+diff --git a/hobby_original_clean/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php b/hobby_hd009_release_work/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
+index 1012394..f26b573 100644
+--- a/hobby_original_clean/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
++++ b/hobby_hd009_release_work/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
+@@ -408,7 +408,10 @@ trait PPAR_Ebay_Account_Deletion_Trait {
+ 
+     private function ebay_deletion_delete_owned_post($post_id, $identity_hash = '', $item_id = '') {
+         $post_id = absint($post_id);
+-        if ($post_id <= 0 || !function_exists('wp_delete_post')) { return 0; }
++        if ($post_id <= 0) { return 0; }
++        if (!function_exists('wp_delete_post')) {
++            throw new RuntimeException('eBay-Löschung: WordPress-Löschfunktion fehlt.');
++        }
+         $attachment_id = function_exists('get_post_thumbnail_id') ? absint(get_post_thumbnail_id($post_id)) : 0;
+         if ($attachment_id > 0 && function_exists('wp_delete_attachment') && function_exists('get_post_meta')) {
+             $owned_identity = (string) get_post_meta($attachment_id, '_ppar_creative_identity_hash', true);
+@@ -418,7 +421,11 @@ trait PPAR_Ebay_Account_Deletion_Trait {
+             }
+         }
+         $deleted = wp_delete_post($post_id, true);
+-        return $deleted ? 1 : 0;
++        if (!$deleted) {
++            // Never acknowledge a marketplace deletion while an owned post survives.
++            throw new RuntimeException('eBay-Löschung: Ein zugehöriger WordPress-Beitrag konnte nicht gelöscht werden.');
++        }
++        return 1;
+     }
+ 
+     private function ebay_deletion_delete_control_scope($scope_type, $scope_key) {
+@@ -599,8 +606,28 @@ trait PPAR_Ebay_Account_Deletion_Trait {
+         if ($this->ebay_deletion_receipt_seen($notification_hash)) {
+             return new WP_REST_Response(null, 204);
+         }
+-        $counts = $this->ebay_deletion_irreversible_delete((array) $extracted['identifiers']);
++        try {
++            $counts = $this->ebay_deletion_irreversible_delete((array) $extracted['identifiers']);
++        } catch (Throwable $error) {
++            // A failed deletion must remain retryable, without a success receipt.
++            $this->ebay_deletion_update_state(array(
++                'last_notification_at'=>time(),
++                'last_notification_status'=>'failed',
++                'last_error'=>'eBay-Löschung konnte nicht vollständig abgeschlossen werden.',
++            ));
++            return new WP_Error('ebay_deletion_processing_failed',
++                'eBay-Löschung konnte nicht vollständig abgeschlossen werden.', array('status'=>503));
++        }
+         $this->ebay_deletion_store_receipt($notification_hash, $counts);
++        if (!$this->ebay_deletion_receipt_seen($notification_hash)) {
++            $this->ebay_deletion_update_state(array(
++                'last_notification_at'=>time(),
++                'last_notification_status'=>'failed',
++                'last_error'=>'eBay-Löschbestätigung konnte nicht gespeichert werden.',
++            ));
++            return new WP_Error('ebay_deletion_receipt_failed',
++                'eBay-Löschbestätigung konnte nicht gespeichert werden.', array('status'=>503));
++        }
+         $this->ebay_deletion_update_state(array(
+             'last_notification_at' => time(),
+             'last_notification_status' => 'verified',
+diff --git a/hobby_original_clean/affiliate-portal-router/readme.txt b/hobby_hd009_release_work/affiliate-portal-router/readme.txt
+index 07f04b0..854cc95 100644
+--- a/hobby_original_clean/affiliate-portal-router/readme.txt
++++ b/hobby_hd009_release_work/affiliate-portal-router/readme.txt
+@@ -2,7 +2,7 @@
+ Contributors: hobby-depot
+ Requires at least: 6.0
+ Requires PHP: 7.4
+-Stable tag: development
++Stable tag: 0.1.9-dev
+ 
+ == Status ==
+ 
+@@ -21,3 +21,12 @@ Entwicklungs-/Installationskandidat für den kontrollierten Live-Test.
+ == Release-Regel ==
+ 
+ Erst nach vollständiger Bereinigung sowie Positiv-, Negativ- und Regressionstests darf ein Installationskandidat entstehen.
++
++== Gezielte Harmonisierung 0.1.9-dev ==
++
++* Die fünf bereits enthaltenen Zusatzmodule werden einmalig gestartet.
++* Vorhandene Amazon-ASIN-/Tracking-Anbindung aus Hobby Depot bleibt aktiv; kein Downgrade zu einem nur vorbereiteten Amazon-Adapter.
++* eBay-Löschmeldungen werden bei fehlgeschlagener WordPress-Post-Löschung oder nicht gespeicherter Bestätigung nicht als erfolgreich quittiert.
++* HD003/HD004, WordPress-Pluginordner, bestehende Daten und gespeicherte Provider-Einstellungen bleiben erhalten.
++* Ein vollständiger Versionsvergleich zur projektfremden neuesten Referenz konnte nicht abgeschlossen werden. Keine Zusage einer vollständigen Gleichheit.
++* Vor Produktiveinsatz sind Live-Upgrade- und Provider-Prüfungen erforderlich.
