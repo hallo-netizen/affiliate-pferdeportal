@@ -41,3 +41,16 @@
 **Wichtige, nicht verheimlichte Grenze:** Im privaten Titelprüfer sind Fachwort-Ausnahmen für diese 97 Titel und eine durchgehend automatische ChatGPT↔GitHub-Reparaturrückgabe nicht verifiziert. Ein echter privater 97-Titel-PASS ist deshalb **nicht** behauptet. Reparaturbericht → Korrektur durch Titelworker → erneute Prüfung funktioniert als Ablauf; GitHub schreibt die Korrektur ohne Schreibmodell nicht selbst. Keine zusätzliche Technik, WordPress-Kopplung oder Freischalt-/Sperrrunde anfordern.
 
 **Nur MINI-Qualitätskontrolle.** K0, WordPress und vorhandene Produktionswege unverändert. Die Daten sind Titelvorschläge, keine SEO- oder Produktionsfreigabe.
+
+## KISS-Prüfpaket vor dem echten WordPress-Test (06.11.2026)
+
+Die bereits vorhandene lokale PSTE-Testfassung 0.57.144.10 wurde **ausschließlich im bestehenden MINI-Code** und im Plugin-Versionsfeld zu einer TEST-0.57.144.12 weitergeführt. Paket-SHA256: `fac094d994276608453ed4a731b49212528fe71184823f3885127e4ee6f16bd9`. Nur `includes/class-pste-mini-workflow.php` und `portal-seo-topic-engine.php` geändert. Keine Änderung an K0, PSERC oder LIVE.
+
+- Der gespeicherte 100er-Bestand wird strukturell und quellengebunden angenommen; die unabhängige Sprachqualität wird **nicht** in WordPress erneut geprüft.
+- Ein einziger vorhandener Titel je JA-Keyword wird per vorhandener `PSTE_Repository::saveManualTitleOverride` gespeichert. Danach führt **nur die bestehende** `PSTE_Admin::scheduleTitleDeskReentry` denselben Fall in die normale PSTE-Kategorie-/Kontext-/SEO-Entscheidung zurück. 87 primäre Titel; weitere 10 unterschiedliche Ideen bleiben gespeichert und erzeugen **keinen** ungeprüften zweiten Artikel.
+- Gegenprobe: 100 Datensätze, 97 Titelkorrekturen, Quellen-/Intent-/Struktursperren, eingefügter Fehler, Wiederanlauf und idempotente Queue: lokal in PHP bestanden. Der neu gebaute PSTE-Satz hat 125 ZIP-Einträge, 83 PHP-Syntaxprüfungen bestanden.
+- Unveränderter zugehöriger PSERC-TEST 0.28.53: SHA256 `80340faff2323e5ede86ddd095ac3570a53474ae64771df3bec70fb6f6c6f060`, 43 PHP-Dateien ohne Syntaxfehler, Paketintegrität bestätigt. PSTE↔PSERC bestehender Lesevertrag lokal PASS.
+- **Nicht nachgewiesen:** Echte WordPress-/MySQL-Laufzeit, bestehende und fehlende Kategorien, Vollständigkeit des Redaktionsplans, der echte PSERC→K0-Abschluss. Erst TEST mit kompletter Datensicherung. Keine Produktion, keine LIVE-Installation.
+- TEST-PSTE-ZIP wurde zusätzlich in der Gesprächsumgebung exportiert. Das Ablegen der 614-KB-Datei im Library-TempVerify-Schrank **scheiterte am Speicherlimit**, ohne andere Dateien zu löschen. Der 2,9-KB-JSON-Testbericht ist dort gespeichert. Keine `CURRENT.zip` ersetzt, kein Freigabestatus vorgetäuscht.
+
+**Einzige neue Betreiberaktion:** Auf der TEST-Seite `oliver-beil.de` nach Sicherung der bestehenden Pluginversionen die beiden vollständigen TEST-ZIPs aktualisieren, zuerst PSTE 0.57.144.12, danach PSERC 0.28.53. Zuerst nur Versions-/Bootstatus und Anzahl der bereits abgeschlossenen MINI-Keywords ablesen. Falls dort kein 100er-Bestand existiert, **nicht** blind eine historische Datei in fremde Datensätze importieren; Quelle/Kennung erst mit dem Testsystem binden.
