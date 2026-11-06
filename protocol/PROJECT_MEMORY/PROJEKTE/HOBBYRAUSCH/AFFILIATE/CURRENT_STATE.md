@@ -37,3 +37,15 @@ Dateihashes und Vergleichsgrundlage: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-Z
 **Die bereits vorhandene vollständige HD-009-0.1.7-dev-Originalquelle und die vollständige Pferdeatelier-6.72.306-Referenz aus ihrer bestehenden Ablage für den Byte-/Funktionsabgleich materialisieren.** Dann ausschließlich fehlende allgemeine Änderungen auf die bestehende Hobby-Portierung anwenden; Optionen, Providerzugänge, ASIN-Brücke, HD004-Ziele und HD003-Ausgabe erhalten. Positiv/Negativ/Regression und Upgrade prüfen und erst danach genau eine vollständige neue HD009-ZIP als Current führen. Kein Neuaufbau aus Hab RC3 oder dem Pferdeportal; keine Installation einer älteren Version.
 
 WordPress, Providerkonten und Fremdprojekt-Current wurden durch diesen Abgleich nicht verändert. Es wurde kein vollständiger aktueller Hobby-Update-Installer vorgetäuscht.
+
+
+## Fortsetzungsauftrag und Zugriffskontrolle – 06.11.2026
+<!-- HD009_EXECUTION_20261106_SOURCE_ACCESS -->
+
+Der Betreiber hat die gezielte Aktualisierung und Dokumentation im bestehenden Hobby-Depot-Affiliate-Büro ausdrücklich beauftragt. Der vorhandene Dateivergleich bleibt die Grundlage; er wird nicht erneut begonnen. Ziel bleibt genau eine vollständige, geprüfte Aktualisierung der vorhandenen HD009-Pluginlinie.
+
+Erneut geprüft: verbundener GitHub-Campus unverändert auf dem oben dokumentierten Bürostand; die lokal vorhandenen Quellen sind die bereits geprüften älteren Hobby-Stände und die Hab-RC3. Keine neu hinzugekommenen HD009-0.1.7-dev- oder Pferdeatelier-6.72.306-Originalbytes in diesen Zugängen.
+
+Zusätzliche Zugangskontrolle: Es ist derzeit keine WordPress-Verbindung eingerichtet. Die verfügbare WordPress-App ist nicht installiert/verbunden; ein PHP-/Pluginexport über diese App ist außerdem noch nicht als unterstützte Fähigkeit geprüft. Die Suche nach einem direkten ChatGPT-Library-Dateizugriff hat keine passende verfügbare Verbindung ergeben. Eine App-Entdeckung wird nicht als vorhandener Dateizugriff oder als erfolgter Export gewertet.
+
+**Ausführungsstand: durch Originaldateizugriff blockiert.** Büroabgleich und Dokumentation sind gespeichert; die eigentliche Pluginaktualisierung und der abschließende Upgrade-/Funktionsvergleich sind nicht erledigt. Kein neuer Installer und keine neue Versionsnummer erzeugt. Die nächste ausführbare Aktion ist unverändert der lesende Zugriff auf die bereits vorhandenen Originaldateien über eine tatsächlich verfügbare, autorisierte Datei-/WordPress-Verbindung. Erst dann den gespeicherten Delta-Abgleich fortsetzen; keine Grundportierung wiederholen und keine ältere Quelle zur aktuellen Version umetikettieren.
