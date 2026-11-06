@@ -63,3 +63,12 @@ Es gibt **genau ein fachliches Affiliate-Büro** unter `HOBBYRAUSCH/AFFILIATE`; 
 In der tatsächlichen Hobby-0.1.7-Originalquelle liegen fünf Zusatzmodule vor, werden aber nicht geladen/gestartet. Das gezielte Bootstrapping wurde **nur in einer lokalen Arbeitskopie** auf PHP-Syntax und minimalen WordPress-Hook-Aufbau geprüft. Ein blindes Einschalten verursacht eine Amazon-Regression (aktive ASIN-/Tracking-Brücke wird als vorbereitet überschrieben). Auch diese Regression wurde in der Arbeitskopie gezielt verhindert und gegen den bestehenden aktiven Amazon-Registry-Eintrag getestet. Prüfbeleg: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/FIX_DELTA_MODULE_BOOT_20261106.md`.
 
 **Release bleibt offen:** Noch kein vollständiger 6.72.306-Bytevergleich, keine neue Installations-ZIP auf GitHub und keine Liveprüfung. Ziel bleibt genau ein Installationsplugin, ein fachliches Affiliate-Büro, eine HD009-Pluginakte. Die alte Version 0.1.2 nicht wieder als Current einsetzen.
+
+
+## Nachweis zum neuen Testkandidaten 0.1.9-dev / 06.11.2026
+
+Aus der tatsächlich geöffneten und geprüften Hobby-Depot-Server-ZIP `0.1.7-dev` wurde eine vollständige **lokale** Test-ZIP `HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_0.1.9_DEV_HARMONISIERT_TEST.zip` erstellt. SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`; 605.968 Bytes. Der Quellvergleich belegt 4 geänderte und 22 unveränderte Dateien, 23 PHP-Syntaxprüfungen PASS. Die Startlücke bei 5 vorhandenen Modulen, Amazon-Provider-Regression sowie eBay-Falsch-Erfolg bei fehlgeschlagenen Löschungen wurden gezielt repariert und mit isolierten Testfällen geprüft; 88 WordPress-Hooknamen im Offline-Smoke registriert. **Diese Version ist im Chat als Test-ZIP verfügbar, NICHT als binäre GitHub-ZIP abgelegt und NICHT auf WordPress installiert.**
+
+Verbindliche technische Nachweise und der exakte reproduzierbare Patch stehen im vorhandenen Pluginbüro unter `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_TESTKANDIDAT_0.1.9_20261106.md` und `HD009_0.1.7_TO_0.1.9.patch`.
+
+**Freigabegrenze:** Die jüngere vollständige Pferdeatelier-Referenz 6.72.306 war nicht als Quelle für einen umfassenden Dateivergleich verfügbar, daher kein behaupteter vollständiger Paritäts-/Live-PASS. Einzige fachliche Affiliate-Autorität bleibt dieses Büro, das Plugin-Büro verwaltet nur HD009. Keine weiteren Büros, keine zweite installierte Pluginlinie. Der vorhandene `CURRENT.zip`-Platz darf nicht ohne vollständige nachgewiesene Binär-ZIP als freigegeben ausgegeben werden.
