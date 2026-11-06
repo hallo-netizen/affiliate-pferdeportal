@@ -109,6 +109,17 @@ exactly("    public function register_shortcodes() {\n",
 
     public function register_shortcodes() {
 """)
+# Replace the final old theme keys while keeping the existing underlying
+# slot/selection functions. No horse site setting may be consulted.
+for old,new in (
+  ("'pftk_leaf_category_design_owns_affiliate_slots'","'hbdp_leaf_category_design_owns_affiliate_slots'"),
+  ("'pftk_start_blocks'","'hbdp_start_blocks'"),
+  ("'pftk_hub1_blocks'","'hbdp_hub1_blocks'"),
+  ("'pftk_hub2_blocks'","'hbdp_hub2_blocks'"),
+  ("'pftk_category_blocks'","'hbdp_category_blocks'"),
+):
+    exactly(old,new)
+
 # Use the project's actual glossary CPT if present, never a horse glossary.
 body=body.replace("is_singular('uge_term')", "is_singular('hbdp_glossar_term')")
 body=body.replace("get_post_type($post_id) !== 'uge_term'", "get_post_type($post_id) !== 'hbdp_glossar_term'")
