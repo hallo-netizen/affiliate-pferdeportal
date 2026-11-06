@@ -67,7 +67,7 @@ if(PPAR_HB_Integration::area_banner('','unknown')!=='')throw new Exception('Unkn
 if(PPAR_HB_Integration::world_banner('','core:world:0')!=='AREA-banner-100')throw new Exception('World banner missing');
 if(PPAR_HB_Integration::world_banner('','core:cat:0:0')!=='')throw new Exception('World banner should reject category');
 if(PPAR_HB_Integration::editorial_banner('','bad-slot','core:topic:0')!=='')throw new Exception('Unknown editorial slot should reject');
-if(PPAR_HB_Integration::page_for_id(300)['name']!==$products[0])throw new Exception('Page lookup mismatch');
+if(PPAR_HB_Integration::page_for_id(300)['name']!=='Wassermelder')throw new Exception('Page lookup mismatch');
 $matrix=PPAR_HB_Integration::slot_matrix([],['adapter'=>'wordpress_local'],'1.0');
 foreach(['post_bottom_products','post_inline_banner','hub_after_cards','category_product_1','glossary_single_desktop_banner'] as $slot)if(!isset($matrix[$slot]))throw new Exception('Missing slot: '.$slot);
 if(PPAR_HB_Integration::slot_matrix([],['adapter'=>'external_portal'],'1.0')!==[])throw new Exception('External portal slot contamination');
