@@ -2,7 +2,7 @@
 This file applies solely when Codex operates in this directory or below.
 DO NOT touch any of the Pferdeatelier or Hab & Bewahr projects, K0, article-image plugin HD-006, or production WordPress data.
 
-Goal: generate precisely ONE photorealistic standalone scene per proven missing hobby-category slug for the current Hobby Depot design plugin HD-003. A scene must have one cohesive visual subject/activity. Never generate a contact sheet, grid, collage, multi-panel image, montage, labels, logos, or multiple concepts in one image. Never generate more than one new image per target unless the first has been rejected with an explicit reason. Never share an image between different topics. Favor natural activity, including helpful hands, appropriate craft tools, and believable physical actions.
+For Codex's built-in image generation, invoke the official `$imagegen` skill in the ChatGPT-authenticated Codex client. Do not configure or use an API key.\n\nGoal: generate precisely ONE photorealistic standalone scene per proven missing hobby-category slug for the current Hobby Depot design plugin HD-003. A scene must have one cohesive visual subject/activity. Never generate a contact sheet, grid, collage, multi-panel image, montage, labels, logos, or multiple concepts in one image. Never generate more than one new image per target unless the first has been rejected with an explicit reason. Never share an image between different topics. Favor natural activity, including helpful hands, appropriate craft tools, and believable physical actions.
 
 BEFORE generation:
 1. Read the exact current project inventory; inspect the most recent HD-003/current ZIP and the target's WordPress page / media mapping if available.
