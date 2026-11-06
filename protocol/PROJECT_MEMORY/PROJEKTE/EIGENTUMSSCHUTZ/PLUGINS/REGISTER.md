@@ -7,6 +7,7 @@ Dieses Register enthält nur Plugin-Identität und technische Akte; Version, Liv
 | HAB-001-DESIGN | Hab & Bewahr – Design | `PLUGIN_AKTEN/HAB-001-DESIGN/CURRENT.md` |
 | HAB-002-KATEGORIE-WORKFLOW | Hab & Bewahr – Kategorie-Workflow | `PLUGIN_AKTEN/HAB-002-KATEGORIE-WORKFLOW/CURRENT.md` |
 | HAB-003-BILDZENTRALE | Hab & Bewahr – Bildzentrale | `PLUGIN_AKTEN/HAB-003-BILDZENTRALE/CURRENT.md` |
+| HAB-004-AFFILIATE | Hab & Bewahr – Affiliate-Zentrale | `PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md` |
 
 Die originale `hab-bewahr-design-vorschau`-Pluginidentität bleibt bestehen. Auch eine ältere allgemeine Quelle wird nicht als Hab-&-Bewahr-Version umetikettiert.
 
