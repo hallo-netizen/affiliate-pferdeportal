@@ -47,19 +47,46 @@ jobs:
           test "$(stat -c %s "$SRC")" = "84349647"
           echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  $SRC" | sha256sum -c -
           cp "$SRC" /tmp/hbd-design-0189-certified.zip
-          # The deterministic builder changes the working tree. Restore the
-          # tracked 0.1.184 before moving to the Campus-based release branch.
           git restore -- "$SRC"
           test "$(stat -c %s "$SRC")" = "84339643"
           git fetch --no-tags origin "refs/heads/$CAMPUS:refs/remotes/origin/$CAMPUS"
-          git switch --create "$RELEASE" "origin/$CAMPUS"
-          test "$(stat -c %s "$SRC")" = "84339643"  # still the protected 0.1.184
-          cp /tmp/hbd-design-0189-certified.zip "$SRC"
-          echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  $SRC" | sha256sum -c -
-          git add -- "$SRC"
-          git -c user.name="HAB Release Validation" -c user.email="actions@users.noreply.github.com" commit -m "Hab & Bewahr: stage verified full Design 0.1.189 ZIP"
-          git push origin "HEAD:refs/heads/$RELEASE"
-          echo "RELEASE_BRANCH_CREATED=$RELEASE"
+          if git ls-remote --exit-code --heads origin "$RELEASE" >/dev/null; then
+            echo "Existing release branch found. Verifying identical file, no duplicate push."
+            git fetch --no-tags origin "refs/heads/$RELEASE"
+            git show "FETCH_HEAD:$SRC" > /tmp/hbd-release-check.zip
+            cmp -s /tmp/hbd-release-check.zip /tmp/hbd-design-0189-certified.zip
+          else
+            git switch --create "$RELEASE" "origin/$CAMPUS"
+            test "$(stat -c %s "$SRC")" = "84339643"
+            cp /tmp/hbd-design-0189-certified.zip "$SRC"
+            git add -- "$SRC"
+            git -c user.name="HAB Release Validation" -c user.email="actions@users.noreply.github.com" commit -m "Hab & Bewahr: stage verified full Design 0.1.189 ZIP"
+            git push origin "HEAD:refs/heads/$RELEASE"
+          fi
+          echo "Release branch ready: $RELEASE"
+      - name: Independent fresh GitHub download and ZIP readback
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          RELEASE="hbd-design-0189-release-20261106"
+          SRC="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
+          mkdir -p /tmp/hbd-independent-readback
+          git -C /tmp/hbd-independent-readback init -q
+          git -C /tmp/hbd-independent-readback remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          TOKEN64="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git -C /tmp/hbd-independent-readback -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $TOKEN64" fetch -q --depth=1 origin "refs/heads/$RELEASE"
+          git -C /tmp/hbd-independent-readback show "FETCH_HEAD:$SRC" >/tmp/hbd-download-independent.zip
+          test "$(stat -c %s /tmp/hbd-download-independent.zip)" = "84349647"
+          echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  /tmp/hbd-download-independent.zip" | sha256sum -c -
+          python - <<'PY'
+          import zipfile
+          with zipfile.ZipFile("/tmp/hbd-download-independent.zip") as z:
+              assert len(z.infolist()) == 430 and z.testzip() is None
+              assert b"Version: 0.1.189" in z.read("hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php")
+          print("INDEPENDENT_REMOTE_READBACK_PASS")
+          PY
       - name: Retain build as verified complete artifact for protected review
         uses: actions/upload-artifact@v4
         with:
