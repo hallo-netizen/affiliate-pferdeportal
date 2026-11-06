@@ -1,114 +1,39 @@
-# HOBBYRAUSCH – AFFILIATE – CURRENT_STATE
+# HOBBY DEPOT – AFFILIATE – EIN VERBINDLICHER STAND
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-11-01
-STATUS: **HD-009 0.1.7-dev LAUT BETREIBER AKTIV / 0.1.2-dev NUR ÄLTERER GATE-5-KANDIDAT / AKTUELLE FUNKTION NICHT LIVE GEPRÜFT**
+Stand: 06.11.2026. Scope `HOBBYRAUSCH_AFFILIATE`. Diese Datei ist gemäß AUTORITAETSPLAN.json die einzige aktuelle Status- und NEXT-ACTION-Autorität dieses Büros.
 
-## Rolle
+## Aktuell
 
-Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_AFFILIATE`.
+**Einziger durch Betreiberlisten belegter installierter Hobby-Stand: HD-009 0.1.7-dev.** Bereits am 01.11. und erneut am 06.11.2026 als aktiv gemeldet. Die tatsächlichen vollständigen 0.1.7-dev-Bytes wurden in diesem Abgleich nicht geöffnet; aus den gelesenen GitHub-Quellen lässt sich kein aktueller, vollständig abgeglichener Installer dieser Version ableiten.
 
-## Gebundener Auftrag
+**Aktueller geprüfter Update-Installer: noch keiner.** Kein neuer Pluginzweig, keine neue Grundportierung, keine neue Versionsnummer und kein Ersatz aus einem älteren Kandidaten. Der bestehende einzige Pluginablageort bleibt `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`; eine Datei darf dort erst nach echtem Versions-/Quell-/Hashabgleich als Current abgelegt werden. Keine Text-/Pointer-ZIP.
 
-Pferdeatelier-Affiliate-Zentrale als technische Basis nach Hobby Depot portieren.
+## Eindeutige Einordnung der vorhandenen Quellen
 
-Verbindlich:
-- allgemeine Engine, Providerlogik, Kontroll-/Veto-/Output-Logik und Partner-Anbindungen erhalten;
-- Pferdeatelier-spezifische Portal-, Produkt-, Banner-, Artikel-, Taxonomie- und Recovery-Bestände vollständig entfernen;
-- Zugangsdaten niemals in Campus/Quellcode/Protokoll offen speichern; vorhandene Konfigurationsschnittstellen erhalten;
-- eBay- und idealo-Recherche exakt übernehmen und auf Hobby-Depot-Ziele neu anbinden;
-- Amazon nicht erfinden: aktuelle Pferdeatelier-Quelle enthält nur einen vorbereiteten Providervertrag, keinen realen Amazon-Adapter;
-- vor Installationskandidat vollständige Positiv-/Negativ-/Regressionstests.
+| Quelle | Rolle im Hobby-Depot-Büro |
+|---|---|
+| HD-009 0.1.7-dev | Einziger belegter installierter Stand; für den Updatevergleich maßgebliche Originalquelle. Kein behaupteter Funktions-PASS allein durch Installation. |
+| HD-009 0.1.2-dev, Commit 74376bdf3a08dcc731d870e7d7d4678981e0618e | Historischer Test-/Vergleichsstand. Alle 26 Dateien nun tatsächlich gelesen und per Git-Blob geprüft. Kein aktueller Installer und kein Downgradeziel. |
+| Hobby-Arbeitszweig b4ed004cb96c23efaa9788b022c3bfed1107fe90 | Header 0.1.0-porting, nicht installierbar. Nur historische Vergleichsquelle, keine konkurrierende Current-Autorität. |
+| Hab & Bewahr 0.1.0-rc3 | Fremdprojekt-Referenz HAB004. Voll-ZIP physisch geöffnet, 27 Dateien, SHA256 2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb. Bleibt ausschließlich im Hab-Büro. |
+| Pferdeatelier 6.72.306 | Eingefrorene Referenz vom 06.11.; vollständiges 66-Dateien-Paket im geprüften Hobby-Büro nicht materialisiert. Keine behauptete vollständige Feature-Parität. |
 
-## Technische Arbeitsbasis
+## Abgleich ohne erneute Portierung
 
-Arbeitsbranch:
-`hobbyrausch/hd009-affiliate-port-20261026`
+**13 von 26 Dateien der gelesenen Hobby-0.1.2-Quelle sind mit der Hab-RC3 bytegleich.** Dazu gehören Artikelplanung, eBay-Kontolöschungsmodul, Housekeeping und Netzwerk-Synchronisierung. Gleiche Dateien werden nicht erneut portiert. Der belegte ältere Hobby-Arbeitszweig enthält bereits den dokumentierten allgemeinen 6.72.276-Abgleich für Karten-/Buttonverhalten.
 
-Plugin-Akte:
-`../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md`
+Gezielt zu prüfen sind:
+1. **Vorhandene Zusatzmodule starten:** In Hab RC3 werden Produktquellenplan, Admin-KISS, Deal-Radar, Partnerstatistik und DS24-Nachverarbeitung geladen/gestartet. In der gelesenen Hobby-0.1.2-Hauptdatei fehlt dieser Start. Ob 0.1.7-dev ihn bereits enthält, bleibt offen.
+2. **Vorhandene Hobby-Zielquelle bewahren:** HD004 und der geltende HD003-Designvertrag bleiben maßgeblich. Keine Übernahme von Hab-Schutzwelten, Hab-Kategorien oder Hab-Designfiltern. Keine neue Kategorie-Masterhaltung und kein zweiter Cache ohne Bedarfsnachweis.
+3. **Amazon-ASIN-Brücke bewahren:** Die gelesene Hobby-0.1.2-Providerregistry enthält aktive Tracking-/ASIN-Funktionen; die Hab-RC3 führt Amazon nur als vorbereitet. Ein pauschaler Austausch wäre Funktionsverlust. Der experimentelle separate Creators-Adapter des alten Porting-Zweigs wird nicht still zur fertigen Lösung erklärt.
+4. **Neuere Pferde-Fixes nur quellgebunden:** Kontolöschungsmeldungen, Produktplan-/Checkpoint-/Freigabekorrekturen sowie Banner-/Statistikänderungen der 6.72.306-Referenz erst gegen die echte 0.1.7-dev vergleichen. Dokumentierte Absichten oder lokale Fremdprojekt-Tests sind kein übernommener Hobby-Fix.
 
-Ausgangsquelle:
-Branch `affiliate-release-current` →
-`release/affiliate-zentrale/current/affiliate-portal-router/`
+Dateihashes und Vergleichsgrundlage: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/DATEIVERGLEICH_20261106.json`. Frühere Gate-Belege bleiben historische Nachweise. Sie gelten weder automatisch für die installierte 0.1.7-dev noch für eine neue Version.
 
-Ausgangsstand:
-- 28 autoritative Quelldateien byte-identisch in HD-009 WORKSOURCE kopiert;
-- danach ausschließlich in der Hobby-Depot-Arbeitskopie weiterarbeiten;
-- Pferdeatelier-Releasebranch bleibt unverändert.
+## Erster offener Eingang / NEXT ACTION
 
-Bereits entfernt:
-- `assets/ebay-portal-catalog-v2.json`
-- `assets/portal-structure-v279.json`
-- `recovery/aff043-historical-product-state-20260915.json`
+**Die bereits vorhandene vollständige HD-009-0.1.7-dev-Originalquelle und die vollständige Pferdeatelier-6.72.306-Referenz aus ihrer bestehenden Ablage für den Byte-/Funktionsabgleich materialisieren.** Dann ausschließlich fehlende allgemeine Änderungen auf die bestehende Hobby-Portierung anwenden; Optionen, Providerzugänge, ASIN-Brücke, HD004-Ziele und HD003-Ausgabe erhalten. Positiv/Negativ/Regression und Upgrade prüfen und erst danach genau eine vollständige neue HD009-ZIP als Current führen. Kein Neuaufbau aus Hab RC3 oder dem Pferdeportal; keine Installation einer älteren Version.
 
-## Aktueller belastbarer Providerstand
-
-- eBay: echte aktive Implementierung vorhanden.
-- idealo: echte aktive Implementierung vorhanden.
-- Amazon: nur `prepared`; laut Quellcode fehlt der reale Adapter bis echter Zugang vorhanden ist.
-
-## Zwischen-Gates – Stand 2026-10-26
-
-1. **GATE 1 – Pferdeatelier-Bereinigung: PASS**
-   - Pferdeatelier-eBay-Zielkatalog entfernt.
-   - Pferdeatelier-Portalstruktur entfernt.
-   - historischer Pferdeatelier-Recovery-Produktbestand entfernt.
-   - verbleibende PHP/JS/CSS-Dateien vollständig auf Pferd/Pferdeatelier/Horse/Equine/Pony/Fohlen/Hengst/Stute/Wallach/Rasse/Breed/Sattel/Schabracke/Huf/Trense/Zaum/Halfter gescannt.
-   - aktive Pferde-Fachlogik: 0 Treffer; letzte reine Rassen-/Breed-Altkommentare entfernt.
-
-2. **GATE 2 – Hobby-Depot-Zielquelle: PASS (Vertrag), LIVE noch nicht geprüft**
-   - `class-hdar-hobby-depot-source.php` nutzt ausschließlich die read-only HD-004-Kategorie-Registry.
-   - verwendete API `hd_category_registry_ready()`, `hd_category_registry_revision()`, `hd_category_registry_snapshot()` stimmt exakt mit `KATEGORIE_ZENTRALE/RUNTIME_API.md` überein.
-   - fail-closed bei fehlender Registry, ungültigem Snapshot, != 8 CORE-Welten oder < 300 strukturell belegten Hobbyseiten.
-   - keine zweite Kategorie-/Produkt-Masterdatenhaltung im Affiliate-Plugin.
-
-3. **GATE 3 – Provider-Recherchepfade: STATIC PASS**
-   - eBay und idealo verwenden die zentrale Hobby-Depot-Zielquelle.
-   - alte gelöschte Pferdeprojekt-Dateiquellen sind aus aktiven Pfaden entfernt.
-   - Amazon bleibt vorbereitet; kein Adapter erfunden.
-
-4. **GATE 4 – Positiv/Negativ/Regression: PASS**
-   - geprüfter Quellstand: `a1b482e4e1b70163ec48b32dc2bd5780eb5f72ec`;
-   - GitHub-Actions-Lauf `40319481655`, Job `121560434781`: SUCCESS;
-   - PHP-Lint 23/23 PASS;
-   - gültiger HD-004-Snapshot → HD-009 → eBay/idealo PASS;
-   - Registry/Snapshot/Weltzahl/<300-Hobbyziele/eBay/idealo fail-closed NEGATIV PASS;
-   - Fremdprojektdateien/-marker Regression PASS;
-   - Amazon bleibt `prepared` und ohne aktiven Adapter PASS.
-   - Evidence: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE_GATE4_20261026.md`.
-
-5. **GATE 5 – Installationspaket/CURRENT.zip: PASS**
-   - GitHub-Actions-Lauf `40372683116`: SUCCESS.
-   - Gate-4-Regressionssuite erneut PASS.
-   - Fresh-Unpack byte-identisch zur geprüften WORKSOURCE.
-   - PHP-Lint 23/23 PASS.
-   - frische WordPress-Installation und Plugin-Aktivierung PASS.
-   - ohne HD-004-Registry erwartetes fail-closed `hdar_category_registry_unavailable` PASS.
-   - mit bereitgestelltem HD-004-Runtimevertrag: 8 Welten / 320 Hobbyseiten / 320 Artikelkategorien PASS.
-   - eBay/idealo-Regressionspfade PASS; Amazon-ASIN-Brücke aus dem idealo-Feed PASS; keine erfundene Amazon-Creators-API.
-   - isoliertes `CURRENT.zip` + `MANIFEST.md` + Evidence über PR #579 in den Campus übernommen.
-   - Kandidat: `0.1.2-dev`.
-   - Kandidat SHA-256: `a4f21c7f2a8d89b35e085f2ddf0f06f6940c8b6af34734322fcbd7d8b7e37b36`.
-   - Verbindungsdaten-Preflight vorhanden: Awin, ADCELL, eBay, idealo und Digistore24 werden auf vollständige Pflichtzugänge geprüft; bei fehlenden Pflichtwerten bleibt LIVE-PASS gesperrt.
-
-## Amazon-ASIN-Brücke
-
-- Quelle: vorhandener idealo-iPN-Feed, Feld `asins_product`.
-- Nur Produkte mit exakt einer gültigen ASIN werden verwendet.
-- Direkter Amazon.de-Produktlink mit Partner-/Tracking-ID.
-- Keine eigene Amazon-Produktsuche und keine erfundene Creators-API.
-- In einer Kategorie-Dreierreihe wird höchstens ein geeigneter idealo-Kandidat auf Amazon umgelegt; nicht mehr starr nur auf Platz 3.
-
-## Betreiber-Inventarfrischecheck 01.11.2026
-
-Die WordPress-Pluginliste zeigt **Hobby Depot – Affiliate-Zentrale 0.1.7-dev aktiv**. Der vorherige 0.1.2-dev-Gate-5-PASS belegt ausdrücklich **nicht** die produktiv aktive 0.1.7-dev. Ein Downgrade durch Installation von 0.1.2-dev ist gesperrt. Beleg: `../PLUGINS/EVIDENCE_WP_PLUGINLISTE_20261101.md`. API-Zugangsdaten bleiben außerhalb des Campus.
-
-## Erster offener Blocker
-
-Produktiver Hobby-Depot-Live-Readback fehlt. Bestehende Provider-Zugangsdaten sind bewusst nicht im Campus/Quellcode gespeichert und müssen nach der manuellen Installation in der echten WordPress-Laufzeit vorhanden sein. Der neue Preflight blockiert LIVE-PASS, solange Pflichtfelder fehlen.
-
-## NEXT ACTION
-
-**Zunächst die vollständige tatsächlich aktive Affiliate-Version 0.1.7-dev aus der erlaubten Quelle unabhängig öffnen und gegen den älteren Campus-Kandidaten 0.1.2-dev prüfen.** Erst nach Byte-/Funktions-/Regressionstest den Campus-Installerstand korrigieren; anschließend die echten WordPress-Provider-Verbindungen und Frontend-Ausgaben read-only prüfen. Keine Installation der älteren 0.1.2-dev und keine Passwörter im Campus.
+WordPress, Providerkonten und Fremdprojekt-Current wurden durch diesen Abgleich nicht verändert. Es wurde kein vollständiger aktueller Hobby-Update-Installer vorgetäuscht.

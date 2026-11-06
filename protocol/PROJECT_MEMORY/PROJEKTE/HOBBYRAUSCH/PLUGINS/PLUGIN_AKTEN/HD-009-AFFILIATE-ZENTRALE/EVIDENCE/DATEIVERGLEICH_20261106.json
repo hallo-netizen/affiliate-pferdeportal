@@ -1,0 +1,192 @@
+{
+  "hobby_source": "0.1.2-dev; NOT the installed 0.1.7-dev",
+  "hobby_ref": "74376bdf3a08dcc731d870e7d7d4678981e0618e",
+  "hab_source": "0.1.0-rc3; foreign project reference only",
+  "hobby_files_verified": 26,
+  "files": [
+    {
+      "hobby_file": "assets/frontend.css",
+      "hab_file": "assets/frontend.css",
+      "byte_identical": true,
+      "hobby_sha256": "e6425e4e21b9cdb3e270a9b17a346e4292c5f132c003dfde916591920a0343d2",
+      "hab_sha256": "e6425e4e21b9cdb3e270a9b17a346e4292c5f132c003dfde916591920a0343d2"
+    },
+    {
+      "hobby_file": "assets/frontend.js",
+      "hab_file": "assets/frontend.js",
+      "byte_identical": true,
+      "hobby_sha256": "203acdc463075c90d307c6bc7798d4ce56c5d0c4ab9d2a090c7197dcc4b50ae6",
+      "hab_sha256": "203acdc463075c90d307c6bc7798d4ce56c5d0c4ab9d2a090c7197dcc4b50ae6"
+    },
+    {
+      "hobby_file": "hobby-depot-affiliate-router.php",
+      "hab_file": "affiliate-portal-router.php",
+      "byte_identical": false,
+      "hobby_sha256": "43ca00debba9dccce5cf3ab9be2dd96d5b33868adef1a5bb959bba86f3649aa1",
+      "hab_sha256": "5ad17981bf31af9f9f9421fe2a96cf9db66091d930a8200bcae3018537f54749"
+    },
+    {
+      "hobby_file": "includes/class-hdar-hobby-depot-source.php",
+      "hab_file": null,
+      "byte_identical": false,
+      "hobby_sha256": "f4047db9aaf4d805fd1c6bb0e6f378bb978dc10a14852821d2658d12c8e29ff9",
+      "hab_sha256": null
+    },
+    {
+      "hobby_file": "includes/class-ppar-admin-kiss.php",
+      "hab_file": "includes/class-ppar-admin-kiss.php",
+      "byte_identical": false,
+      "hobby_sha256": "846f08d41ca05d04390ebace276710d66a37e56b6f79003ae4fd2a9fec2467a5",
+      "hab_sha256": "2b999528db364e66c27ffd6638cf77bf2db8be365e24268296cdcca55e199acf"
+    },
+    {
+      "hobby_file": "includes/class-ppar-deal-radar.php",
+      "hab_file": "includes/class-ppar-deal-radar.php",
+      "byte_identical": false,
+      "hobby_sha256": "1d54f53761b25b91af1b60faac5f0405c7b51918c587c1b48e81c94cf4a8978b",
+      "hab_sha256": "0887e6bcd161fec7a7f5ef91f63966c8248ab22dcd3674959d37c8fb56540226"
+    },
+    {
+      "hobby_file": "includes/class-ppar-ds24-manual-downstream.php",
+      "hab_file": "includes/class-ppar-ds24-manual-downstream.php",
+      "byte_identical": false,
+      "hobby_sha256": "76ea31c6326d39e3209b10ca3167662fe4b07926702ba1d14d698226efa5ec76",
+      "hab_sha256": "258fa455f5fcdaf346bde876461871b71435a8b4e5abf8c938e32cdc4d6caac2"
+    },
+    {
+      "hobby_file": "includes/class-ppar-partner-analytics.php",
+      "hab_file": "includes/class-ppar-partner-analytics.php",
+      "byte_identical": false,
+      "hobby_sha256": "82161fa0c6ed188bf2cda50366f989601f74e003a6d949968036c4c621c5a43c",
+      "hab_sha256": "921c1f2f563a12f0a2f339aa031140f42d03ec234641cad197c77790218620c1"
+    },
+    {
+      "hobby_file": "includes/class-ppar-product-source-plan.php",
+      "hab_file": "includes/class-ppar-product-source-plan.php",
+      "byte_identical": true,
+      "hobby_sha256": "22c00c85b2e3d0ba11a0740638dce6e028d0352b64d249e777ea203d1b6d3a7c",
+      "hab_sha256": "22c00c85b2e3d0ba11a0740638dce6e028d0352b64d249e777ea203d1b6d3a7c"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-article-plans.php",
+      "hab_file": "includes/trait-ppar-article-plans.php",
+      "byte_identical": true,
+      "hobby_sha256": "8c595ecc715c256aa24c9c1b7d6214b6e091fc503ae7e33b16525b84e10afdd0",
+      "hab_sha256": "8c595ecc715c256aa24c9c1b7d6214b6e091fc503ae7e33b16525b84e10afdd0"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-automation-suite.php",
+      "hab_file": "includes/trait-ppar-automation-suite.php",
+      "byte_identical": false,
+      "hobby_sha256": "cc406805adb33ab8507fbfaf17dda977eede56119391ccaba4ac6b6e44913def",
+      "hab_sha256": "8440c4569ef999682ac1ee444beae63d5055431ddf7ba114a65d899a69bb3063"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-awin-programme-gate.php",
+      "hab_file": "includes/trait-ppar-awin-programme-gate.php",
+      "byte_identical": true,
+      "hobby_sha256": "5434720e72d97895bbef3ec475ba4e159965e13493989371cd8db23180c30f9d",
+      "hab_sha256": "5434720e72d97895bbef3ec475ba4e159965e13493989371cd8db23180c30f9d"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-control-contract.php",
+      "hab_file": "includes/trait-ppar-control-contract.php",
+      "byte_identical": true,
+      "hobby_sha256": "f32753a18cbf2083461bb9270b59e2b202e5f488a266c478a74bb60378a49a63",
+      "hab_sha256": "f32753a18cbf2083461bb9270b59e2b202e5f488a266c478a74bb60378a49a63"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-creative-library.php",
+      "hab_file": "includes/trait-ppar-creative-library.php",
+      "byte_identical": true,
+      "hobby_sha256": "e9e920234543d076adb51b75006b41f4db3d0a0eb95499baa70305493cde0ca5",
+      "hab_sha256": "e9e920234543d076adb51b75006b41f4db3d0a0eb95499baa70305493cde0ca5"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-digistore24.php",
+      "hab_file": "includes/trait-ppar-digistore24.php",
+      "byte_identical": true,
+      "hobby_sha256": "a89f81d7960074a7b8eaf97fbc3dfe65e7cae673d13e4094c21109570c5d730a",
+      "hab_sha256": "a89f81d7960074a7b8eaf97fbc3dfe65e7cae673d13e4094c21109570c5d730a"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-ebay-account-deletion.php",
+      "hab_file": "includes/trait-ppar-ebay-account-deletion.php",
+      "byte_identical": true,
+      "hobby_sha256": "4a82ab0c907496000d6c1a5f278e04d4bb502093a01e60e2bb9f96bc1967ee85",
+      "hab_sha256": "4a82ab0c907496000d6c1a5f278e04d4bb502093a01e60e2bb9f96bc1967ee85"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-ebay-run.php",
+      "hab_file": "includes/trait-ppar-ebay-run.php",
+      "byte_identical": false,
+      "hobby_sha256": "2dcb3b498964d6fbb017ffacdb857f9dc66543b94d02bc5c2c767c673095c511",
+      "hab_sha256": "0765ce6ff0f514288e7682099dddb4454d76dce692dcd2cfc6f4abeba00b0e39"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-ebay.php",
+      "hab_file": "includes/trait-ppar-ebay.php",
+      "byte_identical": false,
+      "hobby_sha256": "89ab9aa9183316f2449057f060a157a23cfe7c63570c2880e14a69b14cba0e82",
+      "hab_sha256": "c9c8e9395a3205d057c3a762d878c1a45d81765a90ba737e25e2096d679da721"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-housekeeping.php",
+      "hab_file": "includes/trait-ppar-housekeeping.php",
+      "byte_identical": true,
+      "hobby_sha256": "0216897c626953919a5adf51f6b7622b2236f88935dde5de26fc79d8eb80b551",
+      "hab_sha256": "0216897c626953919a5adf51f6b7622b2236f88935dde5de26fc79d8eb80b551"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-idealo.php",
+      "hab_file": "includes/trait-ppar-idealo.php",
+      "byte_identical": false,
+      "hobby_sha256": "ffaa433742a3cb12fcd4449eb4254aca354dc7e63b46f782240a1997ffe7f6fc",
+      "hab_sha256": "ac700f6f1762d0235c91d7f770fcc0b4ce3ca2b281027632744590318a2d07a5"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-network-sync.php",
+      "hab_file": "includes/trait-ppar-network-sync.php",
+      "byte_identical": true,
+      "hobby_sha256": "953120ae8cb74d4f2cc32d56cc5f51ccfc19454b33e709f85c826ae0f4a79728",
+      "hab_sha256": "953120ae8cb74d4f2cc32d56cc5f51ccfc19454b33e709f85c826ae0f4a79728"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-output-objects.php",
+      "hab_file": "includes/trait-ppar-output-objects.php",
+      "byte_identical": false,
+      "hobby_sha256": "6b47dee6685ec9165cce6297ba59bc4ec36a4b668221e01ead72749ab59bb642",
+      "hab_sha256": "80e158881aae221dd17eb9f3e344d3bf48b5e4e98f69c36b20147aac51c2bdf9"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-provider-intake.php",
+      "hab_file": "includes/trait-ppar-provider-intake.php",
+      "byte_identical": true,
+      "hobby_sha256": "99cf318e4399eb92ff00234350ec568f9d258bfb383da8c15edf092498638a49",
+      "hab_sha256": "99cf318e4399eb92ff00234350ec568f9d258bfb383da8c15edf092498638a49"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-provider-registry.php",
+      "hab_file": "includes/trait-ppar-provider-registry.php",
+      "byte_identical": false,
+      "hobby_sha256": "ce9ee30a2a366955b21063829bb428a982506eb29e19aee5aabf3be6ef0b1873",
+      "hab_sha256": "68dc531d6959baa0fb13d5cd2430fe2e7f49f6ee476c92e67e04a11d59d915dc"
+    },
+    {
+      "hobby_file": "includes/trait-ppar-tariff-tools.php",
+      "hab_file": "includes/trait-ppar-tariff-tools.php",
+      "byte_identical": true,
+      "hobby_sha256": "e7a4f4ab90be3dcf36558885cbb23b6c6d34aaf08ec94e3e9a2d26cdae9c2498",
+      "hab_sha256": "e7a4f4ab90be3dcf36558885cbb23b6c6d34aaf08ec94e3e9a2d26cdae9c2498"
+    },
+    {
+      "hobby_file": "readme.txt",
+      "hab_file": "readme.txt",
+      "byte_identical": false,
+      "hobby_sha256": "d5de1fb11bc5f5261cdab0e0ff498624ada5668188db4feb28cde8b8a46cb0a4",
+      "hab_sha256": "5fee314562072cd79a5b25ad8de080720060d24d11ced5cfb4fd59522cbcf94b"
+    }
+  ],
+  "unverified_installed_source": "0.1.7-dev",
+  "unavailable_full_pferde_reference": "6.72.306"
+}
