@@ -20,6 +20,7 @@ jobs:
           python3 "$B/build.py"
           find "$B/_build/affiliate-portal-router" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
           node --check "$B/_build/affiliate-portal-router/assets/frontend.js"
+          php "$B/tests/boot_smoke.php"
           php "$B/tests/smoke.php" valid
           php "$B/tests/smoke.php" invalid
           php "$B/tests/smoke.php" wrong_revision
@@ -27,7 +28,7 @@ jobs:
           from pathlib import Path
           import zipfile,json
           r=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU')
-          p=r/'HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip'
+          p=r/'HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip'
           with zipfile.ZipFile(p) as z:
               assert z.testzip() is None and len(z.namelist())==27
               assert all(x.startswith('affiliate-portal-router/') for x in z.namelist())
@@ -45,9 +46,9 @@ jobs:
         run: |
           set -euo pipefail
           B="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU"
-          SRC="$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip"
+          SRC="$B/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip"
           TARGET="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
-          RELEASE="hbd-affiliate-rc1-release-20261106"
+          RELEASE="hbd-affiliate-rc2-release-20261106"
           CAMPUS="hobbyroom/project-memory-campus-v1-20260905"
           cp "$SRC" /tmp/hbd-affiliate-verified.zip
           if git ls-remote --exit-code --heads origin "$RELEASE" >/dev/null; then
@@ -61,7 +62,7 @@ jobs:
              mkdir -p "$(dirname "$TARGET")"
              cp /tmp/hbd-affiliate-verified.zip "$TARGET"
              git add -- "$TARGET"
-             git -c user.name="Hab Affiliate Build" -c user.email="actions@users.noreply.github.com" commit -m "H&B: staged complete isolated Affiliate RC1 candidate"
+             git -c user.name="Hab Affiliate Build" -c user.email="actions@users.noreply.github.com" commit -m "H&B: staged complete isolated Affiliate RC2 candidate"
              git push origin "HEAD:refs/heads/$RELEASE"
           fi
           echo "HB_AFFILIATE_RELEASE_BRANCH_READY"
@@ -71,13 +72,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          SRC="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip"
+          SRC="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip"
           TARGET="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
           mkdir -p /tmp/hbd-affiliate-readback
           git -C /tmp/hbd-affiliate-readback init -q
           git -C /tmp/hbd-affiliate-readback remote add origin "https://github.com/${{ github.repository }}.git"
           AUTH="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
-          git -C /tmp/hbd-affiliate-readback -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" fetch -q --depth=1 origin refs/heads/hbd-affiliate-rc1-release-20261106
+          git -C /tmp/hbd-affiliate-readback -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" fetch -q --depth=1 origin refs/heads/hbd-affiliate-rc2-release-20261106
           git -C /tmp/hbd-affiliate-readback show "FETCH_HEAD:$TARGET" >/tmp/hbd-affiliate-remote.zip
           cmp -s "$SRC" /tmp/hbd-affiliate-remote.zip
           python3 - <<'PY'
@@ -92,7 +93,7 @@ jobs:
       - name: Keep exact installable candidate for download
         uses: actions/upload-artifact@v4
         with:
-          name: HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1
-          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip
+          name: HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/HAB_BAU/HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip
           retention-days: 30
           if-no-files-found: error
