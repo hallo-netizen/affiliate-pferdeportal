@@ -113,7 +113,8 @@ exactly("    public function register_shortcodes() {\n",
 body=body.replace("is_singular('uge_term')", "is_singular('hbdp_glossar_term')")
 body=body.replace("get_post_type($post_id) !== 'uge_term'", "get_post_type($post_id) !== 'hbdp_glossar_term'")
 exactly("Portal_Affiliate_Router::instance();", "PPAR_HB_Integration::bootstrap();\nPortal_Affiliate_Router::instance();")
-exactly("Werbelink: Bei Kauf erhalten wir ggf. eine Provision.", "Anzeige")
+assert body.count("Werbelink: Bei Kauf erhalten wir ggf. eine Provision.") == 3
+body=body.replace("Werbelink: Bei Kauf erhalten wir ggf. eine Provision.", "Anzeige")
 
 # Do not transplant old equestrian examples as product business policies.
 for old,new in (
