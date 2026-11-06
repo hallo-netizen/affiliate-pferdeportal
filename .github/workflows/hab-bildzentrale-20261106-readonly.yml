@@ -1,0 +1,28 @@
+name: Read-only Hab Bildzentrale capability inspection
+on:
+  push:
+    branches: [hobbyroom/bildzentrale-codex-api-free-audit-20261106]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect current original image plugin for generation and provider dependencies
+        run: |
+          python3 - <<'PY'
+          import zipfile,hashlib,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-003-BILDZENTRALE/CURRENT.zip'
+          z=zipfile.ZipFile(p)
+          print('ZIP_VERIFIED',len(z.namelist()),z.testzip(),len(open(p,'rb').read()),hashlib.sha256(open(p,'rb').read()).hexdigest(),flush=True)
+          print('CONTENTS',[(x.filename,x.file_size) for x in z.infolist()],flush=True)
+          for n in z.namelist():
+            if not n.endswith(('.php','.js','.md','.txt')):continue
+            s=z.read(n).decode('utf8','replace')
+            print('FILE',n,'LINES',len(s.splitlines()),flush=True)
+            for i,l in enumerate(s.splitlines()):
+              if re.search(r'generate|image|api|magnific|openai|pixabay|pexels|dall.?e|credential|key|provider|download|queue|import|batch|cron|prompt|curl|wp_remote|upload',l,re.I):
+                if len(l.strip())>230:l=l[:230]
+                print(f'  L{i+1}: {l.strip()}',flush=True)
+          PY
