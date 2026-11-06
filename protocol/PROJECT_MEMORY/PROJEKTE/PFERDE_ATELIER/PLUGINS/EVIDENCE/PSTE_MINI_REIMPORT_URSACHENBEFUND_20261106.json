@@ -1,0 +1,132 @@
+{
+  "contract": "PFERDEATELIER_MINI_REIMPORT_OBSERVATIONS_V1",
+  "evidence_ref": "pste-gesamtdiagnose-2026-11-06.json",
+  "evidence_sha256": "5c2b20cdd13c7624790dd12219d3d473b32ec7bed9539b540e9ca98e512db952",
+  "evidence_git_blob": "6cc0f1757dd91af540878ba2dd880394a2cb7393",
+  "generated_at_utc": "2026-11-06T13:43:56.405Z",
+  "pste_version_reported": "0.57.144.12",
+  "total": 87,
+  "processed": 87,
+  "pass": 7,
+  "held": 78,
+  "blocked": 2,
+  "pending": 0,
+  "last_transport_error": "",
+  "disjoint_primary_groups": [
+    {
+      "count": 50,
+      "kind": "CATEGORY_DECISION_OPEN",
+      "codes": [
+        "PSTE_TITLE_READY_CATEGORY_DECISION_OPEN"
+      ],
+      "observation": "Titel liegt vor; Kategorieentscheidung offen, Planungsprüfung NOT_STORED."
+    },
+    {
+      "count": 7,
+      "kind": "RELEVANCE_EVIDENCE_REQUIRED",
+      "codes": [
+        "PSTE_PORTAL_RELEVANCE_NOT_PROVEN"
+      ],
+      "observation": "Nach Weitergabe erneut Relevanz-/Sandbox-Beleg verlangt."
+    },
+    {
+      "count": 6,
+      "kind": "LANGUAGE_TITLE_REQUIRED",
+      "codes": [
+        "PSTE_LANGUAGE_TITLE_REQUIRED"
+      ],
+      "observation": "Nach Weitergabe weiterhin Sprachtitel verlangt."
+    },
+    {
+      "count": 3,
+      "kind": "TITLE_EVIDENCE_MISMATCH",
+      "codes": [
+        "PSTE_TITLE_WORKER_NEEDS_REWRITE",
+        "PSTE_EXISTING_EVIDENCE_REENTRY_REVIEW_TITLE_MISMATCH"
+      ],
+      "observation": "Nach Weitergabe Abweichung zwischen Titel und vorhandenem Prüfbeleg gemeldet."
+    },
+    {
+      "count": 12,
+      "kind": "PLANNING_GATE_BLOCKED",
+      "codes": [
+        "PRE_TITLE_ACTIVE_TITLE_CONTAINS_SOURCE_QUERY",
+        "BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED",
+        "QUESTION_TITLE_NOT_FAQ",
+        "CATEGORY_HEAD_INTENT_COLLISION",
+        "NON_EDITORIAL_TRANSACTIONAL_QUERY"
+      ],
+      "observation": "Planungssperren 7+2+1+1+1; Legitimität bzw. Doppelprüfung nicht allein aus den Codes entscheidbar."
+    },
+    {
+      "count": 1,
+      "kind": "PRODUCT_CHOICE_RETAINED",
+      "codes": [
+        "PSTE_PRODUCT_CHOICE_CANDIDATE_RETAINED",
+        "PSTE_PRODUCT_CHOICE_DOWNSTREAM_NOT_REGISTERED"
+      ],
+      "observation": "Gesondert beibehalten, kein freier Produktionsweg belegt."
+    },
+    {
+      "count": 1,
+      "kind": "FAMILY_STRUCTURE_GAP",
+      "codes": [
+        "PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_STRUCTURE_GAP"
+      ],
+      "observation": "Strukturlücke gemeldet; reale Taxonomie-/Quellprüfung erforderlich."
+    },
+    {
+      "count": 7,
+      "kind": "PASS",
+      "codes": [
+        "PORTAL_INTERNAL_FAMILY_CONTEXT_CHECKED",
+        "PORTAL_INTERNAL_TOPIC_FREE"
+      ],
+      "observation": "6+1 freigegeben."
+    }
+  ],
+  "exact_reason_occurrences": {
+    "BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED": 2,
+    "PLANNING_READINESS_BLOCK": 12,
+    "PSTE_PORTAL_RELEVANCE_NOT_PROVEN": 7,
+    "PSTE_SANDBOX_REQUIRED_BEFORE_EDITORIALIZATION": 7,
+    "PSTE_PORTAL_RELEVANCE_EXTERNAL_EVIDENCE_REQUIRED": 4,
+    "QUESTION_TITLE_NOT_FAQ": 1,
+    "PORTAL_INTERNAL_FAMILY_CONTEXT_CHECKED": 6,
+    "PRE_TITLE_ACTIVE_TITLE_CONTAINS_SOURCE_QUERY": 7,
+    "PSTE_LANGUAGE_TITLE_REQUIRED": 6,
+    "CATEGORY_HEAD_INTENT_COLLISION": 1,
+    "PSTE_TITLE_WORKER_NEEDS_REWRITE": 3,
+    "PSTE_EXISTING_EVIDENCE_REENTRY_REVIEW_TITLE_MISMATCH": 3,
+    "NON_EDITORIAL_TRANSACTIONAL_QUERY": 1,
+    "PSTE_PRODUCT_CHOICE_CANDIDATE_RETAINED": 1,
+    "PSTE_PRODUCT_CHOICE_DOWNSTREAM_NOT_REGISTERED": 1,
+    "PSTE_TITLE_READY_CATEGORY_DECISION_OPEN": 50,
+    "PORTAL_INTERNAL_TOPIC_FREE": 1,
+    "PSTE_PORTAL_RELEVANCE_FAMILY_EVIDENCE_REQUIRED": 3,
+    "PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_STRUCTURE_GAP": 1,
+    "PSTE_STRUCTURE_DECISION_REQUIRED_BEFORE_NORMAL_REENTRY": 1,
+    "PSTE_FAMILY_STRUCTURE_NO_EXISTING_FAMILY_SEMANTIC_NEIGHBOUR": 1
+  },
+  "recent_trace_counts": {
+    "manual_title_override_writes": 87,
+    "retained_fresh_recomputation_writes": 75,
+    "category_assignment_events": 10
+  },
+  "diagnostic_limits": [
+    "Aggregierte Ursachenanalyse; keine Änderung oder redaktionelle Einzelprüfung eines Titels.",
+    "Die mehrfachen SOURCE/NORMAL_PATH/PLAN_GATE-Codekopien belegen für sich keine mehrfachen Prüferaufrufe.",
+    "Gespeicherte Relevanz-/Titel-Sperren nach Import sind belegt. Exakter Codepfad und Wiederverwendung gegenüber erneuter fachlicher Prüfung sind ohne passende Quelle nicht vollständig unterscheidbar.",
+    "50 offene Kategorieentscheidungen beweisen weder 50 fehlende Kategorien noch einen richtigen oder falschen Kategorienabgleich.",
+    "12 Planungssperren nicht pauschal entfernen; Originalbestand und aktuelle Quelllogik fehlen im Diagnoseexport.",
+    "topic_owner_rerun=false steht im read-only Diagnoseabschnitt und darf nicht als Nachweis eines fehlenden früheren Reentry-Laufs verwendet werden.",
+    "Der separate Source-/Mini-Bericht zum 87/435-Ursachenfix aus der Chatübergabe ist nicht in dieser Diagnose enthalten."
+  ],
+  "source_dependency": {
+    "package_version": "0.57.144.12",
+    "documented_test_zip_sha256": "fac094d994276608453ed4a731b49212528fe71184823f3885127e4ee6f16bd9",
+    "sha_is": "Dokumentierter ZIP-Vergleichswert aus MINI-Commit 1b381c8c0937bd605d56ff3010ec8c4ad8408bb1; installierte Bytes nicht im Diagnoseexport.",
+    "code_changed_in_this_task": false,
+    "wordpress_changed": false
+  }
+}
