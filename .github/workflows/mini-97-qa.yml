@@ -1,0 +1,70 @@
+name: MINI 97 Titel LanguageTool QA (nur Feature-Branch)
+on:
+  push:
+    branches:
+      - feature/mini-title-gate-independent-v1-20261104
+    paths:
+      - mini-title-gate/QA_97_TITEL_ECHTBESTAND_20261106.txt
+      - .github/workflows/mini-97-qa.yml
+permissions:
+  contents: read
+jobs:
+  titel-pruefen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: 97 titles as separated texts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          lines=Path('mini-title-gate/QA_97_TITEL_ECHTBESTAND_20261106.txt').read_text().splitlines()
+          assert len(lines)==97, len(lines)
+          assert all(lines)
+          Path('/tmp/mini-titles.txt').write_text('\n\n'.join(lines),encoding='utf-8')
+          print('TITLE_COUNT=97')
+          PY
+      - name: LanguageTool 6.8 exactly as K0
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/lt68.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/lt68.zip' | sha256sum -c -
+          unzip -q /tmp/lt68.zip -d /tmp/lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+          java -Xmx1024m -jar /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar --json -l de-DE /tmp/mini-titles.txt > /tmp/ltreport.json
+      - name: Attribute findings to titles and print them
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          lines=Path('mini-title-gate/QA_97_TITEL_ECHTBESTAND_20261106.txt').read_text().splitlines()
+          a=json.loads(Path('/tmp/ltreport.json').read_text())
+          text='\n\n'.join(lines)
+          cursor=0;spans=[]
+          for i,line in enumerate(lines):
+            start=cursor;end=start+len(line);spans.append((i,start,end));cursor=end+2
+          findings=[]
+          for match in a.get('matches',[]):
+            off=match.get('offset');leng=match.get('length')
+            idx=next((i for i,start,end in spans if isinstance(off,int) and isinstance(leng,int) and start<=off and off+leng<=end),None)
+            rule=(match.get('rule') or {}).get('id')
+            label=f"TITLE_{idx+1:03d}" if idx is not None else 'CROSS_BOUNDARY'
+            finding={'title':label,'rule':rule,'message':match.get('message'),'text':lines[idx] if idx is not None else ''}
+            findings.append(finding)
+            print(json.dumps(finding,ensure_ascii=False))
+          Path('lt-results.json').write_text(json.dumps({'title_count':97,'match_count':len(findings),'findings':findings},ensure_ascii=False,indent=2),encoding='utf-8')
+          print('LANGUAGETOOL_FINDINGS='+str(len(findings)))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mini-97-languagetool-results
+          path: lt-results.json
+          if-no-files-found: warn
+          retention-days: 14
