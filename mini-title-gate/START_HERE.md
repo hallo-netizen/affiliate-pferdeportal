@@ -1,21 +1,24 @@
-# MINI:start – KISS-Konzept (nur Titel, 06.11.2026)
+# Pferdeatelier MINI:start – Einfacher Titelworkflow
 
-**Zweck:** Fehler bei der Titelerstellung verhindern. **Keine** Absicherung des WordPress-Imports. K0 strikt unverändert.
+**Nur Titelerstellung. K0 wird nicht verändert. Keine externe KI-API. Keine WordPress- oder Signaturlogik.**
 
-## Ein einziger Ablauf
-1. `MINI:start`: vorhandene Original-Titelregeln und Keyword-Daten übernehmen.
-2. Titelworker formuliert Vorschläge, gibt sich **keine eigene Freigabe**.
-3. Getrennter GitHub-Qualitätsprüfer kontrolliert Regeln und Sprache mit LanguageTool 6.8, ohne KI-API.
-4. Fehlerbericht → nur beanstandete Titel verbessern → erneut prüfen. Kein Qualitäts-PASS ohne bestandenen Prüfbericht.
-5. Geprüfte Titel im **bisherigen** redaktionellen Ablauf zurückgeben; WordPress importiert wie bisher. Keine neuen technischen Importfreigaben, Schlüssel oder Signatur-Integration.
+1. **MINI:start** plus die vorhandene WordPress-Rohkeyworddatei.
+2. Relevanz je Keyword **JA / NEIN / VIELLEICHT** entscheiden. Nur für **JA** Titel vorschlagen; mehrere Titel nur für unterschiedliche Suchabsichten.
+3. Titelworker beachtet die **bestehenden unveränderten Titelregeln** aus `TITELREGELN_V1.json` und `contracts/intent-first-title-governance-v1.json`. Der Titelworker darf seine eigenen Ergebnisse nicht freigeben.
+4. Die **getrennte GitHub-Prüfung** kontrolliert Regeln und Sprache mit LanguageTool 6.8. Bei Fehlern: Reparaturbericht → nur beanstandete Titel korrigieren → **dieselbe Prüfung erneut**, bis kein gemeldeter Fehler mehr vorliegt.
+5. Danach **geprüfte Titelideen zurückgeben**, keine SEO-/Produktionsfreigabe. Der bestehende WordPress-Redaktionsplan entscheidet später allein über vorhandene Artikel und Kannibalisierung.
 
-## Geprüfter Iststand
-GitHub-Negativtest: Run 42196709788 lieferte REPAIR_REQUIRED (fehlender Qualitäts-PASS). GitHub-Positivtest: Run 42196918970 lieferte PASS. Diese zwei Fälle beweisen die GitHub-Regel- und Sprachprüfung, **nicht** eine vollautomatische Texterstellung/Reparatur oder eine vollständige fachliche Titelprüfung.
+**Keine zusätzliche Installation, keine Schlüssel, keine Importfreigabe, keine zweite Titelkontrolle.**
 
-**Offene Korrekturen:** GitHub prüft manche Regeln nur formal; Natürlichkeit, Suchabsicht und semantische Doppelungen werden dadurch nicht zuverlässig in allen Fällen erkannt. Die Reparaturtexte werden bisher nicht automatisch in GitHub erzeugt. Erst diese Qualitäts- und Ablaufgrenzen lösen, **ohne neue WordPress- oder GitHub-Freigabeinfrastruktur**.
+## Technisch bestätigt
+- Eigenständiger Prüfer im privaten `hallo-netizen/mini-titelpruefer`; ChatGPT-Zugriff vom Eigentümer wieder entzogen.
+- Reale GitHub-Gegenprobe mit fehlerhaftem Doppelpunkt: `REPAIR_REQUIRED`, Run 42196709788.
+- Reale GitHub-Gegenprobe nach Reparatur: `PASS`, Run 42196918970.
+- Die 100 historisch korrigierten Titel: 97 Vorschläge, 0 Doppelpunkte, 9 lokale Form- und Schleifentests bestanden; **die 100 Titel wurden nicht vollständig mit LanguageTool gegen GitHub geprüft**.
 
-**Altlasten, nicht mehr Teil des Zielkonzepts:** Unterschriften, privater Schlüssel, WordPress-Prüfvertrag und die dazu geplante Kopplung. Entsprechende Felder in der alten `TITELREGELN_V1.json` und frühere QA-Berichte dokumentieren den veralteten Entwurf und sind **keine neuen Arbeitsaufträge**. Die ursprünglichen **fachlichen Titelregeln bleiben gültig**; die Dateien werden nicht ungeprüft umgeschrieben, solange die unabhängige Prüfstelle eine eigene Kopie benutzt.
+## Ehrliche technische Grenze
+GitHub kann die Prüfregeln abarbeiten und Reparaturberichte ausgeben, aber **ohne Schreibmodell/externen Aufruf die Formulierungen nicht selbst neu schreiben**. Die Reparatur erfolgt durch den Titelworker, nicht durch einen unsichtbaren KI-Dienst in GitHub. Sprachliche Natürlichkeit und die exakte Suchabsicht sind mit festen Regeln/LanguageTool nicht lückenlos beweisbar. Keine gegenteilige Behauptung oder künstliche 100-%-Freigabe.
 
-**Grenze:** Ohne GitHub-Zugriff wird der private Prüfer nicht von ChatGPT verändert. Keine erneute Freischalt-/Sperr-Runde verlangen.
+Die bisherigen Signatur-/WordPress-Verknüpfungsentwürfe gehören **nicht** zu diesem Mini-Auftrag. Die ursprünglichen fachlichen Regeln bleiben erhalten; obsolete technische Metadaten im alten JSON sind kein Auftrag zum Aufbau eines Import-Freigabesystems.
 
-Dies ist nur die MINI-Konzeptkorrektur, **keine zweite Current-/NEXT-ACTION-Autorität**, keine Freigabe für K0 oder LIVE.
+**K0, PSERC, Live-Plugins und Produktionssysteme unverändert.**
