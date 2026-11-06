@@ -57,3 +57,7 @@ with ZipFile(root/"HD-007-HOBBYREGISTER-CORE/CURRENT.zip") as z:
     d=json.loads(z.read(name))
     print("REGISTER_SUMMARY",str(d.get("summary"))[:1000],flush=True)
     print("REGISTER_ITEM_COUNT",len(d.get("items",[])),flush=True)
+
+with ZipFile(root/'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as z:
+    code=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode('utf8','replace').splitlines()
+    for j in range(4751,4822): print('CATEGORY_BINDING',j,code[j-1],flush=True)
