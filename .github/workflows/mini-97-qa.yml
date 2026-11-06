@@ -51,18 +51,27 @@ jobs:
           for i,line in enumerate(lines):
             start=cursor;end=start+len(line);spans.append((i,start,end));cursor=end+2
           findings=[]
+          # Exactly recorded horse terms and brand names, as in K0's authoritative-terms exception.
+          authoritative={'Horseware-Regendecken','Abschwitzfunktion','Wasserführanlagen','Pfriemenschwanz-Eier','Gräsermischung','Heucobs','Schleich-Pferdeanhänger','Deichselabdeckungen','Humbaur-Pferdeanhänger'}
           for match in a.get('matches',[]):
             off=match.get('offset');leng=match.get('length')
             idx=next((i for i,start,end in spans if isinstance(off,int) and isinstance(leng,int) and start<=off and off+leng<=end),None)
             rule=(match.get('rule') or {}).get('id')
             label=f"TITLE_{idx+1:03d}" if idx is not None else 'CROSS_BOUNDARY'
             finding={'title':label,'rule':rule,'match':text[off:off+leng] if isinstance(off,int) and isinstance(leng,int) else '', 'suggestions': [v.get('value') for v in match.get('replacements', [])[:3]], 'message':match.get('message'),'text':lines[idx] if idx is not None else ''}
+            token=finding['match']
+            accepted=(rule=='GERMAN_SPELLER_RULE' and token in authoritative) or (rule=='DE_CASE' and token=='Westfälischen' and finding['text']=='Herkunft und Eigenschaften des Westfälischen Warmbluts')
+            finding['recognized_technical_term']=bool(accepted)
             findings.append(finding)
             print(json.dumps(finding,ensure_ascii=False))
-          Path('lt-results.json').write_text(json.dumps({'title_count':97,'match_count':len(findings),'findings':findings},ensure_ascii=False,indent=2),encoding='utf-8')
+          unresolved=[v for v in findings if not v['recognized_technical_term']]
+          Path('lt-results.json').write_text(json.dumps({'title_count':97,'match_count':len(findings),'technical_terminology':len(findings)-len(unresolved),'unresolved':len(unresolved),'findings':findings},ensure_ascii=False,indent=2),encoding='utf-8')
           print('LANGUAGETOOL_FINDINGS='+str(len(findings)))
+          print('LANGUAGETOOL_UNRESOLVED='+str(len(unresolved)))
+          if unresolved: raise SystemExit(2)
           PY
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: mini-97-languagetool-results
           path: lt-results.json
