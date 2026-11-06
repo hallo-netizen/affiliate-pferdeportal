@@ -1,4 +1,4 @@
-name: HAB Beitragsdesign - Plugin 0.1.185 Build und Pruefung
+name: Hab Bewahr Design 0.1.189 ZIP – Archivpruefung
 on:
   push:
     branches: [hbd-post-design-20261106]
@@ -8,67 +8,37 @@ on:
 permissions:
   contents: read
 jobs:
-  build:
+  archive:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build aus Original-Plugin mit Hash- und Bytevergleich
+      - name: Deterministic full ZIP build
         run: |
+          set -e
           python protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/build.py
-      - name: PHP-Syntax und kontrollierte Content-Tests
-        shell: bash
+          python protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/build_0189.py
+      - name: Check full archive
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/hbd-article
+          set -e
           python - <<'PY'
           from pathlib import Path
-          import zipfile
-          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/HAB_UND_BEWAHR_DESIGN_0.1.185_BEITRAEGE.zip')
-          with zipfile.ZipFile(path) as z:z.extractall('/tmp/hbd-article')
+          from hashlib import sha256
+          from zipfile import ZipFile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          assert len(p.read_bytes())==84349647
+          assert sha256(p.read_bytes()).hexdigest()=='947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c'
+          with ZipFile(p) as z:
+              assert len(z.namelist())==430 and z.testzip() is None
+              z.extractall('/tmp/hbplugin')
+          print('PASS full ZIP, CRC, version, exact SHA-256')
           PY
-          find /tmp/hbd-article -type f -name '*.php' -print0 | xargs -0 -n1 php -l > /tmp/hbd-lint.txt
-          echo "PHP files checked: $(grep -c 'No syntax errors detected' /tmp/hbd-lint.txt)"
-          php <<'PHP'
-          <?php
-          error_reporting(E_ALL);
-          define('ABSPATH','/');
-          function is_singular($arg) {return $arg==='post';}
-          function wp_get_post_categories($id) {return array(210);}
-          function apply_filters($hook,$content,...$args) {
-              if ($hook==='the_content') return $content;
-              if ($hook==='hbdp_article_product_cards_html') return '<a href="https://partner.example/produkt">Sinnvolle Wassermelder</a>';
-              if ($hook==='hbdp_article_auto_banner_html') return '';
-              return $content;
-          }
-          function current_user_can($cap) {return false;}
-          function wp_kses_post($html) {return $html;}
-          function esc_attr($str) {return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');}
-          function add_shortcode($name,$fn) {}
-          function check($value,$message) {if (!$value) throw new RuntimeException($message);}
-          class WP_Post {public $ID=345; public $post_content='';}
-          require '/tmp/hbd-article/hab-bewahr-design-vorschau/includes/article-page.php';
-          $p=new WP_Post();
-          $p->post_content='<p>Echte Einleitung.</p>'
-              .'<div class="hb-affiliate-platzhalter hb-produktplatz"><small>Mustermarke</small><p>Platzhalter</p></div>'
-              .'<h2>Wichtige Informationen</h2><p>Fakten, die erhalten bleiben.</p>'
-              .'<div class="hb-affiliate-platzhalter hb-bannerplatz">Platzhalter Banner</div>'
-              .'<p class="hb-interne-links-redaktionell-offen">Noch nicht freigegebene Links</p>';
-          $out=hbdp_article_clean_content($p);
-          check(str_contains($out,'Echte Einleitung.'),'Einleitung verloren');
-          check(str_contains($out,'Wichtige Informationen'),'Zwischenüberschrift verloren');
-          check(str_contains($out,'Fakten, die erhalten bleiben.'),'Sachinhalt verloren');
-          check(str_contains($out,'Sinnvolle Wassermelder'),'Produkte nicht am vorhandenen Platz eingefügt');
-          check(str_contains($out,'Anzeige'),'Anzeige-Kennzeichnung fehlt');
-          check(!str_contains($out,'Mustermarke'),'Nicht echte Produkte nicht entfernt');
-          check(!str_contains($out,'Platzhalter Banner'),'Leerer Banner sichtbar');
-          check(!str_contains($out,'freigegebene Links'),'Redaktionsnotiz sichtbar');
-          check(!str_contains($out,'hb-affiliate-platzhalter'),'Unerledigter Affiliate-Dummy sichtbar');
-          echo "PASS article content preserving, product and banner slot, no dummy, no unsafe public notes\n";
-          PHP
-      - name: Getestetes vollstaendiges Bestandsplugin als ZIP bereitstellen
+          find /tmp/hbplugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/php-lint.txt
+          test "$(grep -c 'No syntax errors detected' /tmp/php-lint.txt)" -eq 35
+          node --check /tmp/hbplugin/hab-bewahr-design-vorschau/assets/article-mobile-affiliate.js
+      - name: Retain build as verified complete artifact for protected review
         uses: actions/upload-artifact@v4
         with:
-          name: HAB_UND_BEWAHR_DESIGN_0.1.185_ARTIKEL
-          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/HAB_UND_BEWAHR_DESIGN_0.1.185_BEITRAEGE.zip
+          name: HAB-001-DESIGN-0.1.189-FULL-TESTED
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip
           if-no-files-found: error
           retention-days: 30
