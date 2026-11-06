@@ -6,7 +6,7 @@ on:
       - '.github/workflows/hbd-post-design-check.yml'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/**'
 permissions:
-  contents: read
+  contents: write
 jobs:
   archive:
     runs-on: ubuntu-latest
@@ -35,6 +35,27 @@ jobs:
           find /tmp/hbplugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/php-lint.txt
           test "$(grep -c 'No syntax errors detected' /tmp/php-lint.txt)" -eq 35
           node --check /tmp/hbplugin/hab-bewahr-design-vorschau/assets/article-mobile-affiliate.js
+      - name: Publish verified full ZIP to isolated Hab release branch
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          SRC="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
+          RELEASE="hbd-design-0189-release-20261106"
+          CAMPUS="hobbyroom/project-memory-campus-v1-20260905"
+          test "$(stat -c %s "$SRC")" = "84349647"
+          echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  $SRC" | sha256sum -c -
+          cp "$SRC" /tmp/hbd-design-0189-certified.zip
+          git fetch --no-tags origin "refs/heads/$CAMPUS:refs/remotes/origin/$CAMPUS"
+          git switch --create "$RELEASE" "origin/$CAMPUS"
+          test "$(stat -c %s "$SRC")" = "84339643"  # still the protected 0.1.184
+          cp /tmp/hbd-design-0189-certified.zip "$SRC"
+          echo "947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c  $SRC" | sha256sum -c -
+          git add -- "$SRC"
+          git -c user.name="HAB Release Validation" -c user.email="actions@users.noreply.github.com" commit -m "Hab & Bewahr: stage verified full Design 0.1.189 ZIP"
+          git push origin "HEAD:refs/heads/$RELEASE"
+          echo "RELEASE_BRANCH_CREATED=$RELEASE"
       - name: Retain build as verified complete artifact for protected review
         uses: actions/upload-artifact@v4
         with:
