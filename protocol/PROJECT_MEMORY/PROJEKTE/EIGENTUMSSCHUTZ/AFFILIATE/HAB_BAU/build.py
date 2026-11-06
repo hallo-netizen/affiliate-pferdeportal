@@ -16,7 +16,7 @@ SOURCE = OFFICE / "NEUTRAL_STAMM" / "affiliate-portal-router"
 BRIDGE = HERE / "includes" / "class-ppar-hab-bewahr-bridge.php"
 WORK = HERE / "_build"
 TARGET = WORK / "affiliate-portal-router"
-OUT = HERE / "HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip"
+OUT = HERE / "HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC3.zip"
 
 if not SOURCE.is_dir() or not BRIDGE.is_file():
     raise RuntimeError("Missing original neutral source / bridge")
@@ -40,7 +40,7 @@ def exactly(old,new):
 exactly("Plugin Name: Portalneutraler Affiliate-Stamm", "Plugin Name: Hab & Bewahr – Affiliate-Zentrale")
 exactly("Description: Portalneutraler Affiliate-Stamm ohne gebundene Portal-Zielquelle. Entwicklungsbasis, nicht für Livebetrieb freigegeben.",
         "Description: Zentrale Affiliate-Verwaltung für Hab & Bewahr mit unabhängiger Zielquelle und bestehenden Provider-Funktionen.")
-exactly("Version: 0.1.0-dev", "Version: 0.1.0-rc2")
+exactly("Version: 0.1.0-dev", "Version: 0.1.0-rc3")
 exactly("Author: OpenAI", "Author: Hab & Bewahr")
 exactly("Text Domain: affiliate-portal-router", "Text Domain: hab-bewahr-affiliate")
 # Restore five original runtime modules whose files existed but whose
@@ -80,35 +80,57 @@ exactly("    public function filter_the_content($content) {\n",
         }
 """)
 exactly("    public function register_shortcodes() {\n",
-"""    /** Safe public bridge to EXISTING article plans; never create fake offers. */
+"""    /** Read the existing approved article campaigns. No demo items or HTTP. */
     public function hab_bw_article_slot($post_id, $kind) {
         $post_id=absint($post_id);
-        if ($post_id < 1 || !$this->is_enabled() || !$this->article_hybrid_enabled()) { return ''; }
+        if ($post_id < 1 || !$this->is_enabled()) { return ''; }
         if (get_post_type($post_id)!=='post' || get_post_status($post_id)!=='publish') { return ''; }
-        $plan=$this->article_plan_get($post_id);
-        if (!is_array($plan) || !$this->article_plan_is_current($post_id,$plan)) { return ''; }
-        if ($kind==='products' && ($plan['products']['status'] ?? '')==='ready') {
-            return $this->article_plan_render_products($post_id,(array)($plan['products']['campaign_post_ids'] ?? array()));
+        // The live Hab template owns placement, not an additional the_content
+        // injection. Hybrid/standard campaign selection stays selectable.
+        if ($this->article_hybrid_enabled()) {
+            $plan=$this->article_plan_get($post_id);
+            if (!is_array($plan) || !$this->article_plan_is_current($post_id,$plan)) { return ''; }
+            if ($kind==='products' && ($plan['products']['status'] ?? '')==='ready') {
+                return $this->article_plan_render_products($post_id,(array)($plan['products']['campaign_post_ids'] ?? array()));
+            }
+            if ($kind==='banner' && in_array(($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+                return $this->article_plan_render_banner_campaign($post_id,absint($plan['banner']['campaign_post_id'] ?? 0));
+            }
+            return '';
         }
-        if ($kind==='banner' && in_array(($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
-            return $this->article_plan_render_banner_campaign($post_id,absint($plan['banner']['campaign_post_id'] ?? 0));
+        // Older manual/automatic campaign setup must keep working if hybrid
+        // plan mode is off; the existing approved selector remains authoritative.
+        if ($kind==='banner') {
+            return $this->render_affiliate_slot($post_id,'post_inline_banner','primary_product','');
+        }
+        if ($kind==='products') {
+            return $this->render_affiliate_slot($post_id,'post_bottom_products','primary_product','');
         }
         return '';
     }
 
-    /** Read existing campaign-selection engine, with real page context. */
+    /** Reuse the existing campaign-selection engine with actual H&B page type. */
     public function hab_bw_area_slot($page_id, $kind) {
         $page_id=absint($page_id);
         if ($page_id < 1 || !$this->is_enabled() || get_post_type($page_id)!=='page'
             || get_post_status($page_id)!=='publish') { return ''; }
         $context=$this->get_content_context($page_id);
-        if ($kind==='banner') {
-            return $this->render_affiliate_slot_for_context($page_id,$context,'product_after_category_tiles','portal_context','');
+        $type=PPAR_HB_Design_Contract::affiliate_page_type($page_id);
+        if ($type==='') { return ''; }
+        if ($kind==='banner' || $kind==='editorial_banner' || $kind==='market_banner') {
+            $slot=$kind==='market_banner' ? 'anzeigenmarkt_top_banner'
+                : ($kind==='editorial_banner' ? 'journal_banner'
+                : ($type==='hub1' ? 'hub_after_cards'
+                : ($type==='start' ? 'start_after_topics' : 'product_after_category_tiles')));
+            return $this->render_affiliate_slot_for_context($page_id,$context,$slot,'portal_context','');
         }
         if ($kind==='products') {
+            if ($type==='hub1') { $prefix='hub_product_'; }
+            elseif ($type==='journal') { $prefix='journal_product_'; }
+            else { $prefix='category_product_'; }
             $html='';
             for ($i=1; $i<=3; $i++) {
-                $part=$this->render_affiliate_slot_for_context($page_id,$context,'category_product_'.$i,'primary_product','');
+                $part=$this->render_affiliate_slot_for_context($page_id,$context,$prefix.$i,'primary_product','');
                 if (trim($part)!=='') { $html.=$part; }
             }
             return $html;
@@ -136,6 +158,9 @@ assert "pftk_" in body
 body = body.replace("pftk_", "hbdp_")
 
 # Use the project's actual glossary CPT if present, never a horse glossary.
+# The H&B glossary is a design-managed repository, not the horse CPT.
+# Preserve the legacy glossary renderer as a dormant compatibility method,
+# and do not claim a fictional hbdp_glossar_term post type.
 body=body.replace("is_singular('uge_term')", "is_singular('hbdp_glossar_term')")
 body=body.replace("get_post_type($post_id) !== 'uge_term'", "get_post_type($post_id) !== 'hbdp_glossar_term'")
 exactly("Portal_Affiliate_Router::instance();",
@@ -163,7 +188,7 @@ readme=TARGET/"readme.txt"
 readme.write_text("""=== Hab & Bewahr – Affiliate-Zentrale ===
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.0-rc2
+Stable tag: 0.1.0-rc3
 
 Complete independent installable candidate built from the 26-file neutral
 affiliate source, preserving every existing source function. Adds local
@@ -219,7 +244,7 @@ with ZipFile(OUT) as z:
     assert len(z.infolist())==27 and z.testzip() is None
     assert b"Plugin Name: Hab & Bewahr" in z.read("affiliate-portal-router/affiliate-portal-router.php")
 manifest={
-  "version":"0.1.0-rc2",
+  "version":"0.1.0-rc3",
   "source":"26 neutral original files from EIGENTUMSSCHUTZ/AFFILIATE/NEUTRAL_STAMM",
   "source_files":len(old_paths),"output_files":len(new_paths),
   "functions_removed":lost,
