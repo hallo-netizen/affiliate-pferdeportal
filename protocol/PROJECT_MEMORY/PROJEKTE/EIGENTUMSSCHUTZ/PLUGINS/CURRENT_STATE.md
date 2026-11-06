@@ -14,6 +14,23 @@
 
 ---
 
+## Verbindlicher Ablageablauf für jedes künftige Plugin-Update (06.11.2026)
+
+**Dieser vorhandene Weg hat mit PR #634 tatsächlich funktioniert; kein neues Plugin, kein zusätzliches Büro und keine Bibliothek.**
+
+1. **Nur das betroffene Plugin aktualisieren:** von seiner originalen `CURRENT.zip` ausgehen; identischen Pluginordner behalten; ganze neue ZIP auf ZIP-CRC, PHP/JS-Syntax, Version, Hash, Dateibestand und unveränderte Fremddateien prüfen.
+2. **Voll-ZIP am vorhandenen Ort aktualisieren:** in einem regulären Freigabezweig vom offiziellen Campus genau `ISOLIERTE_PLUGINS/<ID>/CURRENT.zip` als echte Binärdatei ablegen, technische `PLUGIN_AKTEN/<ID>/CURRENT.md` und Manifest mit Nachweisen aktualisieren. Die anderen zwei Original-ZIPs nicht anfassen.
+3. **Normalen GitHub-PR statt Sonderwege:** `single-current-lock` bestehen lassen, geschützten PR in den offiziellen Campus mergen. Nicht auf reine Chat-Datei, kurzlebiges Actions-Artefakt oder offene PR als Ablageersatz ausweichen.
+4. **Frischer unabhängiger Wiederabruf:** nach dem Merge alle drei aktuellen `CURRENT.zip` aus dem offiziellen Campus separat abrufen und Größe, SHA-256, ZIP-CRC, Pluginversion prüfen; `PLUGINS/CURRENT_STATE.md` als einzige aktuelle Büro-Autorität pflegen. Ohne Readback kein PASS.
+5. **Rollback:** Vorgänger-ZIP bleibt über den vorherigen freigegebenen Git-Commit/PR zugänglich; ein Live-PASS wird nie aus lokalen Tests abgeleitet.
+
+**Nachgewiesene Referenz:** PR #634 enthält echte vollständige Design-ZIP 0.1.189 im bestehenden Büro; GitHub-Actions-Run **42224724306**: unabhängiger frischer Download **aus dem offiziellen Campus** und dreimal `OFFICIAL_CAMPUS_ZIP_READBACK_PASS`:
+Design 0.1.189 (84.349.647 B/430 Einträge), Kategorie-Workflow 1.14.8.37 (368.530 B/49), Bildzentrale 1.0.0 (70.397 B/3). Alle drei SHA-256 und CRC stimmen mit ihren technischen Akten überein.
+
+**Verbleibender fachlicher Schritt:** Der neue Plugin-Code ist noch nicht unabhängig auf der tatsächlichen WordPress-Webseite live geprüft; das ist keine Ablagesperre, sondern gesonderte Abnahme.
+
+---
+
 ## Historische Ablageakte vom 03.11.2026 (durch obere Fassung für Designversion abgelöst)
 
 
