@@ -1,3 +1,16 @@
+## 06.11.2026 – Beitragsrenderer: neue Fehlerkette und lokale Reparatur
+<!-- HBD_ARTICLE_ERRORS_0185_0189 -->
+- **Fehler A, fachlich belegt:** Bisheriges Designplugin 0.1.184 routete nur Beiträge mit `_hbdp_demo=1` über die eigene Vorlage; öffentliche Musterposts liefen im WordPress-Theme. Ab 0.1.185 wird normales `post` in denselben bestehenden Designpfad geführt. Kein zweites Plugin.
+- **Fehler B:** 0.1.185 zeigte ein Datum und hatte keine Unterdrückung von Yoast-Datumsmetadaten. 0.1.186 entfernt Datum in öffentlicher Anzeige und Yoast-Datumsfelder für normale Einzelbeiträge. Google kann Daten aus externen/URL-Hinweisen trotzdem erkennen.
+- **Fehler C:** Einspaltiges Artikeltemplate, Beitragsbild nur bei gesetztem Thumbnail. Ab 0.1.187 zwei Spalten, saubere Produkt-/Bannerplätze und für die fünf Muster-Slugs Fallback auf bestehende passende Einzelfotos. Quellen nur aus sichtbarem HTML entfernt, nicht aus DB.
+- **Fehler D:** Auf Smartphone standen Produkte erst nach kompletter Artikelseite, redundant verlinktes Inhaltsverzeichnis. Ab 0.1.188 Produkte mobil früh nach erstem Fachabschnitt, Banner später; echtes verwandtes Thema statt unnötiger TOC; keine doppelten Angebote.
+- **Fehler E:** Überflüssige 'Ratgeber'-Zeile über H1, zweite Kategoriebeschriftung unter H1, unruhige Absätze/Listen. Ab 0.1.189 entfernt; H2-Markierung dezent, H3 unverziert, Listen semantisch unterschieden und Abstände normiert.
+- **Status zu A–E:** LOCAL CLOSED / LIVE OFFEN. Authentische Datenbank-/WP-Live-Ausgabe bleibt unabhängig zu prüfen; keine pauschale Fehlerfreiheit behaupten.
+- **Archiv-Nachweis:** GitHub-Run `42223947280` baute vollständige 0.1.189 aus dem originalen 0.1.184 plus geprüftem Patch; 430 Einträge, 84.349.647 Bytes, CRC, PHP/JS, unabhängiger GitHub-Wiederabruf der Voll-ZIP PASS.
+- **Getrennte ältere Fehler:** 45 beanstandete R1/R2/R3-Bildpositionen und HivePress-Kategorie-Liveabnahme bleiben weiterhin offen, nicht durch die Beitragskorrektur erledigt.
+
+---
+
 ## 03.11.2026 – KORREKTUR DES HISTORISCHEN CAMPUS-ABLAGEBLOCKERS
 <!-- HAB_GEB_AUDIT_20261103 -->
 Die unten vom 03.11. dokumentierte Ursache der **HivePress-Kategorie-Kollision in Design 0.1.183** und deren **lokale Reparatur in 0.1.184** bleibt korrekt; WordPress-Live-Readback und die Bild-/Hero-Fehler bleiben gesondert offen. **Nur die frühere Aussage „kein Hab-&-Bewahr-Pluginbüro/keine Design-CURRENT.zip“ ist erledigt und als aktueller Blocker ausdrücklich widerrufen:** Die komplette geprüfte Design-Original-`CURRENT.zip` **0.1.184** liegt auf dem offiziellen Campus-Branch im eigenen `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/` (84.339.643 Bytes, PR #625 gemergt). Die beiden weiteren Eigenplugins sind ebenfalls physisch abgelegt (PR #622). Einziger lebender Ablage-/Versionsstand `../PLUGINS/CURRENT_STATE.md`; aktuelle Designaufgabe nur `CURRENT_STATE.md`. Die älteren Fehlereinträge unterhalb sind historische Ursachenprotokolle, keine neuen Installationsanweisungen.
