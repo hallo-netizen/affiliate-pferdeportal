@@ -1,9 +1,78 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-16
+STAND: 2026-11-03 (LIVE-SNAPSHOT aktualisiert; ältere PPA-Artefaktstände als Historie erhalten)
 ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
 
 `ARTEFAKT_SYNC: PASS` gilt nur für real vorhandene isolierte `CURRENT.zip` + Manifest/Hashprüfung. Fachstatus immer im Fachbüro lesen.
+
+## LIVE-Beobachtung vom 03.11.2026 – vollständiger Pluginbestand
+
+Quelle: tatsächlicher WordPress-Systembericht der produktiven Website, Serverzeit **03.11.2026, 11:37 UTC** (nicht GitHub-Dateinamen, nicht Kandidatenversionen). **46 aktiv, 3 inaktiv, insgesamt 49.** Diese Liste ist die datierte **LIVE-Beobachtung**; sie erteilt keine Freigabe, bildet keine physische Plugin-ZIP ab und ersetzt nicht die autoritativen Fachbüros oder `PLUGINS/CURRENT_STATE.md`.
+
+| Plugin (Systembericht) | Installierte Version | LIVE |
+|---|---:|---|
+| Affiliate-Zentrale (Portal-kompatibel) | 6.72.298 | aktiv |
+| Affiliate Portal Template Kit (Pferde-kompatibel) | 1.50.613 | aktiv |
+| Akismet Anti-spam: Spam Protection | 5.7.2 | aktiv |
+| All-in-One WP Migration and Backup | 7.113 | aktiv |
+| Allgemeine Bildzentrale | 2.7.6 | aktiv |
+| Canonical Table Contract V1 | 1.1.0 | aktiv |
+| CookieYes / GDPR Cookie Consent | 3.5.8 | aktiv |
+| DBStorage Insights | 1.2.0 | aktiv |
+| HivePress | 1.8.1 | aktiv |
+| HivePress Authentication | 1.1.5 | aktiv |
+| HivePress Claim Listings | 1.1.5 | aktiv |
+| HivePress Favorites | 1.2.2 | aktiv |
+| HivePress Paid Listings | 1.1.10 | aktiv |
+| HivePress Reviews | 1.4.1 | aktiv |
+| Kubio | 2.9.5 | aktiv |
+| Performance Diagnose Safe | 3.0.0 | aktiv |
+| Pferde Atelier Editorial Guard | 0.1.1-quarantine | aktiv |
+| Pferde Atelier Glossar Core | 1.4.0 | aktiv |
+| Pferde Atelier HivePress Anzeigensuche | 2.1.5-ajax-category-label | aktiv |
+| Pferde Atelier Mail-Absender | 1.0.0 | aktiv |
+| Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs | 1.1.1 | aktiv |
+| Pferdeatelier – eBay Ursachencheck (nur lesen) | 1.0.0 | aktiv |
+| Pferde Atelier – HivePress Anzeigensuche | 1.0.1 | aktiv |
+| Pferde Atelier – Komplettsicherung | 2.1.1 | aktiv |
+| Pferde Atelier – Pferderassen Manager | 0.2.6 | aktiv |
+| Portal Production Center | 1.1.1 | aktiv |
+| Portal Production Link Policy Gate | 1.0.1 | aktiv |
+| Portal Production Machine | 6.7.9 | aktiv |
+| Portal SEO Redaktionsplan Compiler | 0.28.43 | aktiv |
+| Portal SEO Themenengine | 0.57.120 | aktiv |
+| Relevanssi | 4.28.8 | aktiv |
+| Relevanssi Live Ajax Search | 2.6 | aktiv |
+| Reveal IDs | 1.6.3 | aktiv |
+| SEO-Quellpaket Exporter | 1.0.0 | aktiv |
+| Shortcodes Ultimate | 7.9.2 | aktiv |
+| Single Sign-On | 2.3.2 | aktiv |
+| Site Kit by Google | 1.191.0 | aktiv |
+| Universal Product Comparison | 0.8.5-prototype | aktiv |
+| Universal Product Knowledge | 0.5.1-prototype | aktiv |
+| Universal Research & Fill | 1.9.9 | aktiv |
+| WordPress Importer | 0.9.7 | aktiv |
+| WordPress Speicheranalyse | 1.1.0 | aktiv |
+| WP-Optimize - Clean, Compress, Cache | 4.7.0 | aktiv |
+| WPForms Lite | 2.0.3.1 | aktiv |
+| WPvivid Backup Plugin | 0.9.139 | aktiv |
+| Yoast SEO | 28.8 | aktiv |
+| HivePress Geolocation | 1.3.11 | inaktiv |
+| HivePress Messages | 1.4.1 | inaktiv |
+| Pferdeatelier – Affiliate Einzelbeitrag Diagnose (nur lesen) | 1.0.0 | inaktiv |
+
+**Wichtige Korrekturen zur September-Inventur:**
+- Als LIVE installiert bestätigt: Template Kit **1.50.613**, Affiliate-Zentrale **6.72.298**, Themenengine **0.57.120**, Redaktionsplan Compiler **0.28.43**, Bildzentrale **2.7.6**, Pferderassen Manager **0.2.6** (historischer Artefakteintrag **0.2.7** ist **kein** Beweis einer LIVE-Installation).
+- **Nicht** im 03.11.-LIVE-Bericht: LiteSpeed Cache, Blogger-Importer, WP Import Export Lite, Minimal Coming Soon, gesonderter Portal Link Policy Runtime Verifier, gesonderter Portal Category Structure Repair Guard. Ihr früherer Eintrag ist **kein** Nachweis aktueller Installation.
+- **Neu oder bisher nicht in der September-Liste erfasst:** DBStorage Insights, Performance Diagnose Safe, eBay Ursachencheck (read-only), Affiliate Einzelbeitrag Diagnose (inaktiv). Diese gehören in die technische Aufräumprüfung.
+- **Mögliche Vereinfachungen – vor Entfernen erst testen:** reine Audit-/Diagnose-/Importer-/Exporter-Werkzeuge; WPvivid / All-in-One WP Migration / eigenes Komplettsicherungssystem; zwei ähnlich benannte HivePress-Anzeigensuchen; Suche (Relevanssi + Live Ajax), wobei Index und Suchvorschläge unterschiedliche Aufgaben haben können. **Nicht** mehr die im September genannte `LiteSpeed Cache + WP-Optimize`-Doppelung als gegenwärtigen Ist-Zustand behaupten.
+- Freigabestand und Teststand **strikt getrennt**: Themenengine **LIVE 0.57.120**, letzter dokumentierter WordPress-STAGING-Beleg **0.57.144.4**, **0.57.144.5 ausschließlich lokal geprüfte Test-ZIP**, nicht installiert/bestätigt; siehe aktuelle `PLUGINS/CURRENT_STATE.md`. Kein Release daraus ableiten.
+
+### Einordnung der älteren PPA-Artefakte
+
+Die nachfolgenden PPA-001 bis PPA-015-Einträge dokumentieren **Artefaktbindungen und Abgleiche des 16.09.2026**. Ihre Überschriften wie „AKTUELLER STAND“ oder „KANONISCHER STAND“ dürfen **nicht** als Behauptung einer heutigen LIVE-Version gelesen werden. Für heutige Fach-/Release-Entscheidungen immer aktuellen Fach-CURRENT und den tatsächlichen physisch verifizierten Plugin-Schrank prüfen.
+
+---
 
 ## PPA-001 – Affiliate-Zentrale
 - FACHBÜRO: `../AFFILIATE/`
