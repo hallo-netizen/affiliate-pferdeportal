@@ -7,7 +7,7 @@ All original functions remain present; only project bindings change.
 from __future__ import annotations
 from pathlib import Path
 from hashlib import sha256
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile, ZIP_DEFLATED, ZipInfo
 import re, shutil, json, sys
 
 HERE = Path(__file__).resolve().parent
@@ -205,9 +205,16 @@ for p in TARGET.rglob("*"):
     assert not re.search(r"pferde.?atelier|pferde-atelier\.de|hobby.?depot|hobbyrausch|hd-004|pftk_",t),p
     assert not re.search(r"api[_-]?key\s*=\s*['\"][^'\"]{20,}",t),p
 
+# Stable ZIP metadata: no platform checkout mtime or file-owner nondeterminism.
+# Makes repeated builds byte-identical on fresh GitHub runners.
 with ZipFile(OUT,"w",ZIP_DEFLATED,compresslevel=9) as z:
     for path in sorted(p for p in TARGET.rglob("*") if p.is_file()):
-        z.write(path,Path("affiliate-portal-router")/path.relative_to(TARGET))
+        archive_name=(Path("affiliate-portal-router")/path.relative_to(TARGET)).as_posix()
+        zi=ZipInfo(archive_name,date_time=(2026,11,6,12,0,0))
+        zi.compress_type=ZIP_DEFLATED
+        zi.create_system=3
+        zi.external_attr=(0o100644 << 16)
+        z.writestr(zi,path.read_bytes(),compress_type=ZIP_DEFLATED,compresslevel=9)
 with ZipFile(OUT) as z:
     assert len(z.infolist())==27 and z.testzip() is None
     assert b"Plugin Name: Hab & Bewahr" in z.read("affiliate-portal-router/affiliate-portal-router.php")
