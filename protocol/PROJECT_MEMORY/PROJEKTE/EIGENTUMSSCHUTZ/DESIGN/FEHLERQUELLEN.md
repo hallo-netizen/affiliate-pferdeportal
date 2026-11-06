@@ -1,3 +1,13 @@
+## 06.11.2026 – HBD-DESIGN-POST-20261106: Reguläre WordPress-Beiträge fallen aus eigenem Design
+
+**Nutzerbeleg:** Sichtbarer veröffentlichter Wohnmobil-Musterbeitrag ohne Hab-&-Bewahr-Beitragslayout. **Originalursache hart belegt im offiziellen Design-Plugin 0.1.184:** `hbdp_for_query()` schaltet den eigenen Renderer nur für Posts mit `_hbdp_demo=1` frei. Normale veröffentlichte Beiträge bekommen daher keinen eigenen Template-/CSS-Pfad. Das ist **kein** bloßer CSS-Fehler und **nicht** die alte HivePress-Kategorie-Kollision.
+
+**Isolierter Kandidat (nicht WordPress-live):** Design-Plugin 0.1.185 im gleichen Pluginordner, gleiche Pluginidentität, getrennte historische Demoausgabe bleibt erhalten. Für reguläre Posts gemeinsames Artikel-Template mit H1, Text, Listen, Tabellen, Merksatz, Sicherheitswarnung, ggf. Original-Beitragsfoto; Affiliate-Produkt- und Bannerplätze sind als leere Filter-Andockstellen vorbereitet. Vorhandene Muster-Dummys und unfreigegebene Linknotizen bleiben für Gäste unsichtbar. Original 0.1.184 hash-/CRC-geprüft; bei 0.1.185 genau zwei bestehende Dateien geändert und zwei ergänzt, sonst alle 424 Einträge inhaltlich unverändert; 34 PHP-Dateien Syntax PASS, Content-/Platzhaltertest PASS, lokale Responsive-Vorschau PASS. GitHub-Buildlauf 42203166086, Featurebranch `hbd-post-design-20261106`. **LIVE OFFEN – das offizielle Pluginbüro bleibt bei Current 0.1.184.**
+
+**Vor Freigabe:** fünf publizierte Musterbeiträge, andere reguläre Posts, eine Schutzbereichsseite, HivePress und Yoast/Metatitel prüfen. Nie wieder nur alte Demo-Posts als Beweis für das reguläre Beitragsdesign verwenden. Keine zusätzliche Pluginidentität und keine WordPress-Content-/Kategorieänderung.
+
+---
+
 ## 03.11.2026 – KORREKTUR DES HISTORISCHEN CAMPUS-ABLAGEBLOCKERS
 <!-- HAB_GEB_AUDIT_20261103 -->
 Die unten vom 03.11. dokumentierte Ursache der **HivePress-Kategorie-Kollision in Design 0.1.183** und deren **lokale Reparatur in 0.1.184** bleibt korrekt; WordPress-Live-Readback und die Bild-/Hero-Fehler bleiben gesondert offen. **Nur die frühere Aussage „kein Hab-&-Bewahr-Pluginbüro/keine Design-CURRENT.zip“ ist erledigt und als aktueller Blocker ausdrücklich widerrufen:** Die komplette geprüfte Design-Original-`CURRENT.zip` **0.1.184** liegt auf dem offiziellen Campus-Branch im eigenen `../PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/` (84.339.643 Bytes, PR #625 gemergt). Die beiden weiteren Eigenplugins sind ebenfalls physisch abgelegt (PR #622). Einziger lebender Ablage-/Versionsstand `../PLUGINS/CURRENT_STATE.md`; aktuelle Designaufgabe nur `CURRENT_STATE.md`. Die älteren Fehlereinträge unterhalb sind historische Ursachenprotokolle, keine neuen Installationsanweisungen.
