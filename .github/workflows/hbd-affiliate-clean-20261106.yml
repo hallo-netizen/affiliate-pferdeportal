@@ -53,6 +53,10 @@ jobs:
              echo "HAB_RC3_RELEASE_ALREADY_BYTE_IDENTICAL"
           else
              git fetch --no-tags origin "refs/heads/hobbyroom/project-memory-campus-v1-20260905:refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905"
+             # The baseline readback ZIP was placed in an untracked test path.
+             # Remove only that temporary CI working-copy before switching to
+             # the official branch where the original ZIP is tracked.
+             rm -f "$P"
              git switch --create "$RELEASE" "origin/hobbyroom/project-memory-campus-v1-20260905"
              cp /tmp/rc3-affiliate.zip "$P"
              git add -- "$P"
