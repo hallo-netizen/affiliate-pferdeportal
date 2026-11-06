@@ -1,5 +1,21 @@
-# HAB & BEWAHR – PLUGINS – CURRENT STATE
+# HAB & BEWAHR – PLUGINS / AKTUELLER CAMPUS-RELEASE-STAND
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+## Stand 06.11.2026 – DIE DREI EIGENPLUGINS / VERSION 0.1.189
+
+**Versionsautorität:** die drei bestehenden `PLUGIN_AKTEN/<ID>/CURRENT.md`. Physische echte Voll-ZIPs in `ISOLIERTE_PLUGINS/<ID>/CURRENT.zip`; keine zweite Autorität und keine Bibliothek.
+
+1. `HAB-001-DESIGN` **0.1.189**: 84.349.647 Bytes, 430 ZIP-Einträge, SHA-256 `947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c`, Git-Blob `504fccb82f4e9a3b10bb6405b468e1dbd03c62e1`. Voll-ZIP im bestehenden Pfad. GitHub-Run **42223947280**: neuer unabhängiger Abruf direkt vom GitHub-Releasezweig `hbd-design-0189-release-20261106`, ZIP vollständig neu geöffnet, CRC/Hash/Version PASS. Das ist ein GitHub-Artefakt-/Quelltest, **keine WP-Live-Freigabe**. Vorherige 0.1.184 als Rollback unverändert in Git-Historie, PR #625.
+2. `HAB-002-KATEGORIE-WORKFLOW` **1.14.8.37**: 368.530 Bytes, SHA-256 `ec39080e5350b9f7b3924239376e11580ce7de195a60bb89feafae6152533f98`, Blob `35651f44ac70ed51e663d5dfaf45094bc9f1e3b2`, bestehende Voll-ZIP unverändert.
+3. `HAB-003-BILDZENTRALE` **1.0.0**: 70.397 Bytes, SHA-256 `58af0d394752e767b5f0c7d6d9901eeaec921331ab6245144859e3e6626e4559`, Blob `8b8b3b84b494eb2784181d5bfd6acfb2efceafde`, bestehende Voll-ZIP unverändert.
+
+**Status für die drei echten Projekt-Plugins:** ZIP-Archiv/Paket lokal geprüft; separate WordPress-Liveinstallation unbestätigt. **NEXT ACTION:** Design-0.1.189 im bestehenden WordPress-Plugin installieren und je einen normalen Beitrag mobil/desktop und eine Schutzbereichsseite auf tatsächliche Darstellung prüfen. Niemals ein neues Plugin hinzufügen oder K0/andere Portale anfassen.
+
+**Wichtig vor Merge:** Dieser Nachtrag ist auf dem geprüften Releasezweig vorbereitet; er wird erst nach erfolgreicher geschützter Übernahme in den Campus-Hauptzweig zur offiziellen Current-Wahrheit. Kein PR ersetzt den Merge.
+
+---
+
+## Historische Ablageakte vom 03.11.2026 (durch obere Fassung für Designversion abgelöst)
+
 
 ## Stand 03.11.2026 – ABLAGE ABGESCHLOSSEN: 3/3 ORIGINAL-ZIPS IM OFFIZIELLEN PLUGINBÜRO
 
