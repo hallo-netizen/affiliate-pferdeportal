@@ -1,0 +1,15 @@
+name: Hobby Depot HD003 category and tile image inventory
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-category-tile-image-audit-20261106
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read current design image assets without modifying website or ZIP
+        run: python3 -u scripts/hd003_tile_images_audit_20261106.py
