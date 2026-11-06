@@ -13,3 +13,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Read current design image assets without modifying website or ZIP
         run: python3 -u scripts/hd003_tile_images_audit_20261106.py
+      - name: Compute unique actual category image slots versus versioned image files
+        run: python3 -u scripts/hobby_hd003_exact_images_20261106.py
