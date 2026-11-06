@@ -16,7 +16,7 @@ SOURCE = OFFICE / "NEUTRAL_STAMM" / "affiliate-portal-router"
 BRIDGE = HERE / "includes" / "class-ppar-hab-bewahr-bridge.php"
 WORK = HERE / "_build"
 TARGET = WORK / "affiliate-portal-router"
-OUT = HERE / "HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC1.zip"
+OUT = HERE / "HAB_UND_BEWAHR_AFFILIATE_0.1.0_RC2.zip"
 
 if not SOURCE.is_dir() or not BRIDGE.is_file():
     raise RuntimeError("Missing original neutral source / bridge")
@@ -40,11 +40,20 @@ def exactly(old,new):
 exactly("Plugin Name: Portalneutraler Affiliate-Stamm", "Plugin Name: Hab & Bewahr – Affiliate-Zentrale")
 exactly("Description: Portalneutraler Affiliate-Stamm ohne gebundene Portal-Zielquelle. Entwicklungsbasis, nicht für Livebetrieb freigegeben.",
         "Description: Zentrale Affiliate-Verwaltung für Hab & Bewahr mit unabhängiger Zielquelle und bestehenden Provider-Funktionen.")
-exactly("Version: 0.1.0-dev", "Version: 0.1.0-rc1")
+exactly("Version: 0.1.0-dev", "Version: 0.1.0-rc2")
 exactly("Author: OpenAI", "Author: Hab & Bewahr")
 exactly("Text Domain: affiliate-portal-router", "Text Domain: hab-bewahr-affiliate")
+# Restore five original runtime modules whose files existed but whose
+# hook registration was missing in the neutral stem.
+for module in ['class-ppar-product-source-plan.php','class-ppar-admin-kiss.php','class-ppar-deal-radar.php','class-ppar-partner-analytics.php','class-ppar-ds24-manual-downstream.php']:
+    assert (TARGET/'includes'/module).is_file(), module
 exactly("require_once __DIR__ . '/includes/class-ppar-portal-source.php';",
         "require_once __DIR__ . '/includes/class-ppar-portal-source.php';\n"
+        "require_once __DIR__ . '/includes/class-ppar-product-source-plan.php';\n"
+        "require_once __DIR__ . '/includes/class-ppar-admin-kiss.php';\n"
+        "require_once __DIR__ . '/includes/class-ppar-deal-radar.php';\n"
+        "require_once __DIR__ . '/includes/class-ppar-partner-analytics.php';\n"
+        "require_once __DIR__ . '/includes/class-ppar-ds24-manual-downstream.php';\n"
         "require_once __DIR__ . '/includes/class-ppar-hab-bewahr-bridge.php';")
 # The old equestrian-design hooks serve a different theme. Keep their
 # implementation methods byte-for-byte, but never register foreign hooks.
@@ -129,7 +138,14 @@ body = body.replace("pftk_", "hbdp_")
 # Use the project's actual glossary CPT if present, never a horse glossary.
 body=body.replace("is_singular('uge_term')", "is_singular('hbdp_glossar_term')")
 body=body.replace("get_post_type($post_id) !== 'uge_term'", "get_post_type($post_id) !== 'hbdp_glossar_term'")
-exactly("Portal_Affiliate_Router::instance();", "PPAR_HB_Integration::bootstrap();\nPortal_Affiliate_Router::instance();")
+exactly("Portal_Affiliate_Router::instance();",
+    "PPAR_HB_Integration::bootstrap();\n"
+    "PPAR_Affiliate_Source_Plan::bootstrap();\n"
+    "PPAR_Affiliate_Admin_KISS::bootstrap();\n"
+    "PPAR_Deal_Radar::bootstrap();\n"
+    "PPAR_Partner_Analytics_Admin::bootstrap();\n"
+    "PPAR_DS24_Manual_Downstream::bootstrap();\n"
+    "Portal_Affiliate_Router::instance();")
 assert body.count("Werbelink: Bei Kauf erhalten wir ggf. eine Provision.") == 3
 body=body.replace("Werbelink: Bei Kauf erhalten wir ggf. eine Provision.", "Anzeige")
 
@@ -147,7 +163,7 @@ readme=TARGET/"readme.txt"
 readme.write_text("""=== Hab & Bewahr – Affiliate-Zentrale ===
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 0.1.0-rc1
+Stable tag: 0.1.0-rc2
 
 Complete independent installable candidate built from the 26-file neutral
 affiliate source, preserving every existing source function. Adds local
@@ -196,7 +212,7 @@ with ZipFile(OUT) as z:
     assert len(z.infolist())==27 and z.testzip() is None
     assert b"Plugin Name: Hab & Bewahr" in z.read("affiliate-portal-router/affiliate-portal-router.php")
 manifest={
-  "version":"0.1.0-rc1",
+  "version":"0.1.0-rc2",
   "source":"26 neutral original files from EIGENTUMSSCHUTZ/AFFILIATE/NEUTRAL_STAMM",
   "source_files":len(old_paths),"output_files":len(new_paths),
   "functions_removed":lost,
