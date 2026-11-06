@@ -140,7 +140,13 @@ final class PPAR_HB_Integration {
             if (strpos($text, $needle) !== false) {
                 // Word boundaries prevent matching advice/brand fragments.
                 $pattern='~(?<![a-z])'.preg_quote($needle,'~').'(?![a-z])~';
-                if (preg_match($pattern,$text)) { return $canonical; }
+                if (preg_match($pattern,$text,$hit,PREG_OFFSET_CAPTURE)) {
+                    // "SIM-Karten für Alarmmelder" describes accessories, not
+                    // alarm devices. Only a primary product term counts.
+                    $prefix=substr($text,0,(int)$hit[0][1]);
+                    if (preg_match('/\\b(fuer|fur|bei|mit|gegen|von)\\b/',$prefix)) { continue; }
+                    return $canonical;
+                }
             }
         }
         return '';
