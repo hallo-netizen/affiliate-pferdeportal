@@ -56,3 +56,10 @@ Zusätzliche Zugangskontrolle: Es ist derzeit keine WordPress-Verbindung eingeri
 Die vom Betreiber hochgeladene ZIP `affiliate-portal-router.zip` **ist das tatsächliche Hobby-Depot-Plugin 0.1.7-dev**. Datei und 23 PHP-Quelldateien sind geöffnet und auf ZIP-Integrität und PHP-Syntax geprüft worden. Größe: **628291 Bytes**; SHA-256: `34c0a9b42c62f71025212bfba3756e48bf4c6ab21fdd000c9894a1ce2bf12cfa`. Vollständiger Nachweis unter `PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md`. Die heruntergeladene Server-ZIP ist im Chat gesichert, **noch nicht als ZIP in GitHub abgelegt**. Kein neuer Release und keine Live-Installation.
 
 Es gibt **genau ein fachliches Affiliate-Büro** unter `HOBBYRAUSCH/AFFILIATE`; das zugehörige Plugin HD-009 wird technisch im bestehenden `HOBBYRAUSCH/PLUGINS` verwaltet. Das sind keine zwei unabhängigen Affiliate-Büros. Keines löschen und kein weiteres eröffnen. Das Pferdeatelier-Plugin 6.72.306 bleibt eine getrennte Referenz; keine Pferde-Daten oder Zugänge übertragen.
+
+
+## Geprüfter Modul-Delta-Fix / 06.11.2026
+
+In der tatsächlichen Hobby-0.1.7-Originalquelle liegen fünf Zusatzmodule vor, werden aber nicht geladen/gestartet. Das gezielte Bootstrapping wurde **nur in einer lokalen Arbeitskopie** auf PHP-Syntax und minimalen WordPress-Hook-Aufbau geprüft. Ein blindes Einschalten verursacht eine Amazon-Regression (aktive ASIN-/Tracking-Brücke wird als vorbereitet überschrieben). Auch diese Regression wurde in der Arbeitskopie gezielt verhindert und gegen den bestehenden aktiven Amazon-Registry-Eintrag getestet. Prüfbeleg: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/FIX_DELTA_MODULE_BOOT_20261106.md`.
+
+**Release bleibt offen:** Noch kein vollständiger 6.72.306-Bytevergleich, keine neue Installations-ZIP auf GitHub und keine Liveprüfung. Ziel bleibt genau ein Installationsplugin, ein fachliches Affiliate-Büro, eine HD009-Pluginakte. Die alte Version 0.1.2 nicht wieder als Current einsetzen.
