@@ -1,0 +1,44 @@
+name: HAB Beitragsdesign - Quellpruefung
+on:
+  push:
+    branches: [hbd-post-design-20261106]
+    paths:
+      - '.github/workflows/hbd-post-design-check.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BEITRAGSDESIGN_BAU/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Originalplugin und Beitragsrouting lesen
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,re,hashlib
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          assert p.stat().st_size==84339643, 'Unbekannte Plugin-ZIP-Größe'
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='76043e5c093058a4d8aff8fd6642307cade951c8267641dc710b8ed70cd323e3', 'Nicht freigegebener Ausgangsstand'
+          with zipfile.ZipFile(p) as z:
+            assert z.testzip() is None
+            paths=z.namelist()
+            print('PLUGIN FILES:',len(paths))
+            for n in paths:
+              if n.endswith(('.php','.css','.js')): print('FILE',n)
+            patt=re.compile(r'is_singular|is_single|template_include|template_redirect|the_content|the_title|hbdp_article|hbdp_for_query|single.php|single-post|post-template|wp_enqueue_scripts|wp_head|content_width|hbdp-frame',re.I)
+            for n in paths:
+              if not n.endswith(('.php','.css')):continue
+              data=z.read(n).decode('utf-8','replace')
+              rows=data.splitlines()
+              m=[i for i,line in enumerate(rows) if patt.search(line)]
+              if not m:continue
+              print('=== MATCHES',n,'lines',len(rows),'matched',len(m))
+              selected=set()
+              for i in m[:42]:selected.update(range(max(0,i-4),min(len(rows),i+5)))
+              for k in sorted(selected):
+                if k<1 or k>1800:continue
+                print(f'{k+1:04d}: {rows[k][:300]}')
+          PY
