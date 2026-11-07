@@ -141,6 +141,19 @@
             // explicitly be NOT_AVAILABLE, as PSERC's own bound dependency contract allows.
             if(empty($pserc['complete']))throw new RuntimeException('PSERC_PLAN_NOT_PROVEN_COMPLETE');
 
+            // Earlier externally approved slots live in the existing MINI option.
+            // Show them to the same owner on later batches; no shadow database.
+            $mini=self::loadState();$reservations=0;
+            foreach((array)($mini['seo_decisions']??[]) as $key=>$receipt){
+                if(!is_array($receipt)||($receipt['box']??'')!=='FREI')continue;
+                $result['items'][]=['source'=>'MINI_RESERVED',
+                    'pool_key'=>(string)$key,'title'=>(string)($receipt['approved_title']??''),
+                    'raw_query'=>(string)($receipt['raw_query']??''),
+                    'intent_slot'=>(string)($receipt['intent_slot']??''),
+                    'status'=>'PLANNED','intent_summary'=>(string)($receipt['intent_summary']??'')];
+                $reservations++;
+            }
+            $result['sources']['MINI_RESERVED']=['complete'=>true,'item_count'=>$reservations];
             $revisions=(array)($result['sources']??[]);
             $encoded=wp_json_encode(['sources'=>$revisions,'items'=>$result['items']],
                 JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
