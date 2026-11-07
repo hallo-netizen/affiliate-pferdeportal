@@ -1,0 +1,13 @@
+name: HD009 inspect live banner HTML parents before CSS changes
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0118-variant4-amazon-ci-20261107
+    paths:
+      - .github/workflows/hd009-public-banner-dom-qa.yml
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/actual_banner_dom.py
