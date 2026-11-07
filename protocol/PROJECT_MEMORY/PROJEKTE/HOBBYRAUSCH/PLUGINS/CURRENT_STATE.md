@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktuell 07.11.2026: HD009 Affiliate-Zentrale Version 0.1.25** (Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip`, Größe 1.553.090 Bytes, SHA-256 `c82b75f9f485eec43f6b8626ff4a6748f3610c0093e61616d4bdd8d4d62204d0`). Auf allen Kategorieebenen verwenden eigene Amazon-Kreativs acht feste, textfreie Weltbilder statt des Seiten-Heros; „Tiere“ zeigt Terraristik/Insektenumfeld statt Haustiere. Desktop-Kategorie-Werbebanner 6:1, mobil 4,2:1; Original-Amazon-Button, Verlauf, Titel und vorhandene Ausspielplätze bleiben unverändert. Hobbyregister-Quadrat hat wieder echte Bildquelle (bei Bedarf das HD007-Herobild mit anderem Zuschnitt). Eigene Beiträge und Produkt-/Kampagnenlogik unverändert. Voll-ZIP CRC, PHP 24/24, fünf Original-PHP-Fälle, reale Frontend-Simulationen bei 1440/960/390/360 alle bestanden; Live-Installation/Abnahme noch offen. Angaben zu früheren HD009-Versionen darunter historisch.
+
+
+
 **Aktueller Stand 07.11.2026: HD009 Affiliate-Zentrale 0.1.24** (Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.24.zip`, SHA-256 `e1bc7cc4d7ab69bc711c424c3d1a612c4710f66155eba7a401552329a800f3a6`). Belegte Bannerplätze auf Kategorieebenen, im Hobbyregister und auf regulären Artikeln bekommen bei fehlendem genehmigtem Fotomotiv einen Bild-freien, thematischen Amazon-Suchbanner. Für Registerprofile bleibt nur **ein** Affiliate-Foto im Querbanner; Quadrat als gestalteter Themenbanner ohne Bildwiederholung. Bestehende Partner-/Produktzuordnung unverändert. Tests PHP 24/24, CRC, sechs Funktionsfälle und Browser 4 Layouts/4 Breiten PASS; produktive Installation und Vollabnahme noch offen. Ältere HD009-Standangaben unten sind Historie.
 
 
