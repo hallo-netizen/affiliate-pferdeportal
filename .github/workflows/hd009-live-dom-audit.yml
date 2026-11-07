@@ -1,0 +1,59 @@
+name: HD009 live Chromium DOM and CSS diagnosis
+on:
+  push:
+    branches:
+      - 'hobbyroom/hd009-020-live-regression-investigate-20261107'
+    paths:
+      - '.github/workflows/hd009-live-dom-audit.yml'
+permissions:
+  contents: read
+jobs:
+  dom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser inspection tools
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Inspect real banner DOM after scripts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          urls=[
+            "https://hobby-depot.de/hobbyregister/alabasterschnitzen/",
+            "https://hobby-depot.de/hobbyregister/airbrush-modellbau/",
+            "https://hobby-depot.de/gestalten/malen-zeichnen/",
+          ]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width,height in [(1440,900),(390,844)]:
+                  page=browser.new_page(viewport={'width':width,'height':height},device_scale_factor=1)
+                  errors=[]
+                  page.on('pageerror',lambda e:errors.append(str(e)[:240]))
+                  for url in urls:
+                      try:
+                          r=page.goto(url,wait_until='networkidle',timeout=30000)
+                          page.wait_for_timeout(1800)
+                          data=page.evaluate("""() => {
+                              const sels=['.hdr-profile-grid','.hdr-profile-grid aside','.hdar-ci-register-side','.hdar-ci-register-inline','.hdar-ci-amazon-banner','.hdar-ci-amazon-banner-square','.hdar-ci-amazon-banner-wide','.hdar-ci-photo','.hdar-ci-button','.hdar-ci-content','.hdar-ci-label'];
+                              let obj={};
+                              for (const s of sels) {
+                                  obj[s]=[...document.querySelectorAll(s)].slice(0,3).map(x=>{
+                                      let css=getComputedStyle(x),r=x.getBoundingClientRect();
+                                      return {tag:x.tagName,cls:x.className?.toString().slice(0,130),display:css.display,visibility:css.visibility,opacity:css.opacity,position:css.position,offset:Math.round(r.top),size:[Math.round(r.width),Math.round(r.height)],hidden:x.hidden,outer:x.outerHTML.slice(0,250)};
+                                  });
+                              }
+                              const styles=[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>x.href).filter(x=>x.includes('hdar'));
+                              const inlineScripts=[...document.scripts].filter(x=>x.textContent.includes('hdar-ci-register')||x.textContent.includes('hdar-ci-amazon')).map(x=>x.textContent.slice(0,600));
+                              return {title:document.title,styles,inlineScriptsCount:inlineScripts.length,inlineScript: inlineScripts[0] || '', selectors:obj};
+                          }""")
+                          print("REAL_DOM",width,url,"HTTP",r.status if r else 'none',"DATA",json.dumps(data,ensure_ascii=False))
+                          print("SCRIPT_ERRORS",errors[:8])
+                      except Exception as e:
+                          print("DOM_ERROR",width,url,type(e).__name__,str(e)[:500])
+                  page.close()
+              browser.close()
+          PY
