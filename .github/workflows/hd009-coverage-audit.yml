@@ -1,0 +1,51 @@
+name: HD009 actual site and slot contract audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-coverage-variant-20261107']
+    paths: ['.github/workflows/hd009-coverage-audit.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing slots, hooks, live content, and approved photos
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,urllib.request,urllib.parse,xml.etree.ElementTree as E,collections,html,json
+          root=pathlib.Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          with zipfile.ZipFile(root/"HD-009-AFFILIATE-ZENTRALE"/"CURRENT.zip") as z:
+            main=z.read("affiliate-portal-router/hobby-depot-affiliate-router.php").decode()
+            start=z.read("affiliate-portal-router/includes/class-hdar-amazon-start.php").decode()
+            css=z.read("affiliate-portal-router/assets/hdar-amazon-start.css").decode()
+            print("PHP_FILES",[(n,z.getinfo(n).file_size) for n in z.namelist() if n.endswith(".php")])
+            print("MAIN_HOOKS")
+            for pattern in (r"add_(?:action|filter)\([^;]+(?:wp_footer|the_content|init|post_inline|template_redirect|wp_enqueue_scripts|category|post)\b[^;]*",r"function\s+\w*(?:article|post|content|slot|banner|category|context)\w*\("):
+              for m in list(re.finditer(pattern,main,re.I))[:90]:print("HOOK_MATCH",re.sub(r"\s+"," ",m.group()[:260]))
+            for pattern in (r"function (?:overview_wide_banner_slot|render_affiliate_slot|get_context_for_post|build_context|default_template_rules|is_template_enabled|is_enabled|render_category_product)[^(]*\(",r"function render_slot\("):
+              s=main if "render_slot" not in pattern else start
+              for m in list(re.finditer(pattern,s,re.I))[:3]:print("METHOD",pattern,re.sub(r"\s+"," ",s[m.start():m.start()+1800])[:1800])
+            print("STARTFILE relevant terms")
+            for needle in ["function render_slot","function launch_active","post_inline_banner","category_product_1","get_the_post_thumbnail","primary_name","photo"]:
+              print("START_NEEDLE",needle,start.count(needle))
+            print("CSS_TAIL",css[-2500:].replace("\n"," ")[:2400])
+          def get(u):
+            try:
+              request=urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0 Chrome/128"})
+              with urllib.request.urlopen(request,timeout=14) as r:return r.status,r.read(1100000).decode("utf8","replace")
+            except Exception as e:return 0,str(e)
+          sitemap="https://www.hobby-depot.de/page-sitemap.xml"
+          _,xml=get(sitemap)
+          pages=re.findall(r"<loc>(.*?)</loc>",xml)
+          print("SITEMAP_PAGES_COUNT",len(pages))
+          print("SITEMAP_SAMPLE",pages[:18])
+          print("SITEMAP_LAST",pages[-12:])
+          posts=get("https://www.hobby-depot.de/wp-json/wp/v2/posts?per_page=100&_fields=link%2Ccategories%2Cfeatured_media%2Ctitle%2Cslug")
+          print("PUBLIC_POSTS",posts[0],posts[1][:4500])
+          urls=["https://www.hobby-depot.de/","https://www.hobby-depot.de/hobbyregister/","https://www.hobby-depot.de/gestalten/","https://www.hobby-depot.de/gestalten/malen-zeichnen/","https://www.hobby-depot.de/sammeln/","https://www.hobby-depot.de/fertigen/","https://www.hobby-depot.de/hobbyregister/muenzen/","https://www.hobby-depot.de/hobbyregister/alte-kameras-reparieren/","https://www.hobby-depot.de/hobbyregister/alabasterschnitzen/","https://www.hobby-depot.de/kettenhemd-ringe-zangen-auswahl/","https://www.hobby-depot.de/kettenhemd-european-4-in-1/"]
+          for u in urls:
+            code,s=get(u)
+            sl=re.findall(r"data-ppar-slot=[\x22\x27]([^\x22\x27]+)",s)
+            cls=re.findall(r"class=[\x22\x27]([^\x22\x27]*?(?:ppar-slot|hdar-ci-amazon)[^\x22\x27]*)[\x22\x27]",s)
+            print("PAGE",u,"http",code,"banner",s.count('hdar-ci-amazon-banner-wide'),s.count('hdar-ci-amazon-banner-square'),"slots",collections.Counter(sl),"classes",cls[:6],"cssver",re.findall(r'hdar-amazon-start.css[^"\x27 ]+',s)[:1],"feature",s.count("wp-post-image"))
+          PY
