@@ -1,0 +1,316 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
+@@ -583,13 +583,55 @@
+         // Alle vorhandenen Identifikatoren werden in eBay-Rohpayloads strukturiert
+         // und ausschließlich exakt geprüft; keine unsichere Substring-Suche.
+         if ($username !== '' || $user_id !== '' || !empty($identifiers['eiasToken'])) {
+-            $payload_rows = $this->ebay_deletion_db_get_results("SELECT * FROM {$table} WHERE source_payload<>'' AND source_payload<>'{}'");
+-            foreach ((array) $payload_rows as $row) {
+-                $decoded = json_decode((string) ($row['source_payload'] ?? ''), true);
+-                if ($this->ebay_deletion_payload_matches_identifiers($decoded, $identifiers)) {
+-                    $candidate_rows[] = $row;
+-                }
+-            }
++            // Keep the complete exact-match safety check, but never load the
++            // entire eBay source table (historically ~94 MB) into PHP for one
++            // notification. Scan by the primary key in bounded batches; only
++            // matching rows are retained. No new table, index or worker.
++            // The plugin itself stores these payloads as JSON. Ordinary ASCII
++            // account identifiers therefore occur literally in the stored JSON.
++            // SQL LIKE is ONLY a cheap preliminary filter: the authoritative
++            // exact structured match remains below. For unsafe/escaped strings
++            // fall back to the complete bounded scan, never risk missed deletion.
++            $filter_terms = array_values(array_unique(array_filter(array_map(static function ($value) { return is_scalar($value) ? trim((string) $value) : ''; }, array_values($identifiers)))));
++            $can_prefilter = !!$filter_terms && method_exists($wpdb, 'esc_like');
++            foreach ($filter_terms as $value) {
++                if (!preg_match('/^[A-Za-z0-9._@:+\-=]{1,512}$/D', $value)) { $can_prefilter = false; break; }
++            }
++            $prefilter_sql = '';
++            $prefilter_params = array();
++            if ($can_prefilter) {
++                $parts = array();
++                foreach ($filter_terms as $value) {
++                    $parts[] = 'source_payload LIKE %s';
++                    $prefilter_params[] = '%' . $wpdb->esc_like($value) . '%';
++                }
++                $prefilter_sql = ' AND (' . implode(' OR ', $parts) . ')';
++            }
++            $last_scanned_id = 0;
++            do {
++                $previous_id = $last_scanned_id;
++                $payload_rows = $this->ebay_deletion_db_get_results($wpdb->prepare(
++                    "SELECT id,item_id,listing_post_id,creative_identity_hash,source_payload FROM {$table} WHERE id>%d AND source_payload<>'' AND source_payload<>'{}'{$prefilter_sql} ORDER BY id ASC LIMIT 100",
++                    array_merge(array($last_scanned_id), $prefilter_params)
++                ));
++                if ($this->ebay_deletion_sql_failed) { break; }
++                foreach ($payload_rows as $row) {
++                    $last_scanned_id = max($last_scanned_id, absint($row['id'] ?? 0));
++                    $decoded = json_decode((string) ($row['source_payload'] ?? ''), true);
++                    if ($this->ebay_deletion_payload_matches_identifiers($decoded, $identifiers)) {
++                        $candidate_rows[] = $row;
++                    }
++                }
++                if ($payload_rows && $last_scanned_id <= $previous_id) {
++                    $this->ebay_deletion_sql_failed = true;
++                    break; // Cannot safely advance: retry rather than loop forever.
++                }
++            } while (count($payload_rows) === 100);
++        }
++        // Never start any irreversible deletion if the complete candidate
++        // search failed: no subset of results is authoritative.
++        if ($this->ebay_deletion_sql_failed) {
++            return new WP_Error('ebay_deletion_sql_failed', 'eBay-Löschprüfung konnte nicht vollständig gelesen werden; erneuter Versuch erforderlich.');
+         }
+         foreach ((array) $candidate_rows as $row) {
+             $id = absint($row['id'] ?? 0);
+@@ -650,7 +692,27 @@
+         if (!function_exists('get_transient') || !function_exists('set_transient')) { return; }
+         if (get_transient('ppar_ebay_deletion_rearm_guard_v1')) { return; }
+         set_transient('ppar_ebay_deletion_rearm_guard_v1', 1, 60);
+-        if (function_exists('wp_next_scheduled') && wp_next_scheduled(self::EBAY_DELETION_WORKER_HOOK)) { return; }
++        $next = function_exists('wp_next_scheduled') ? wp_next_scheduled(self::EBAY_DELETION_WORKER_HOOK) : false;
++        if ($next !== false) {
++            if (absint($next) >= time() - 180) { return; }
++            // A stale scheduled event is not proof that WP-Cron executes.
++            // Do not enqueue a duplicate event or run deletions in a web request.
++            // Only on an authorized admin request, ask the existing WordPress
++            // cron transport once to pick up its ALREADY due event.  This is
++            // non-blocking and shares WordPress's global cron lock.
++            if (!function_exists('is_admin') || !is_admin()
++                || !function_exists('current_user_can') || !current_user_can('manage_options')) { return; }
++            $keys = $this->ebay_deletion_inbox_keys(1);
++            if (is_wp_error($keys)) { return; }
++            if (empty($keys)) { return; }
++            $kicked = function_exists('spawn_cron') ? (bool) spawn_cron() : false;
++            $this->ebay_deletion_update_state(array(
++                'worker_last_recovery_attempt_at' => time(),
++                'worker_last_recovery_transport' => $kicked ? 'cron_dispatch_sent' : 'cron_dispatch_unavailable',
++            ));
++            return;
++        }
++        // No scheduled event at all: repair the existing single hook only.
+         $keys = $this->ebay_deletion_inbox_keys(1);
+         if (is_array($keys) && !empty($keys)) { $this->ebay_deletion_schedule_inbox(10); }
+     }
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -941,23 +941,26 @@
+         return true;
+     }
+ 
+-    /** Existing authenticated status endpoint; on a proven stalled open run,
+-     * execute ONE existing bounded worker tick. Everything remains on the same
+-     * durable run UUID and checkpoint. Never create a new run from status. */
++    /** The authenticated status poll must never perform a full synchronous
++     * eBay worker package. On a proven stalled run request only the existing
++     * signed non-blocking continuation for the SAME UUID; its lease and progress
++     * checks remain authoritative. No new worker/queue/cron is introduced. */
+     public function run_ebay_admin_ajax_tick() {
+         $run = $this->ebay_run_load();
+         $recovery = 'none';
+         if ($this->ebay_run_stalled($run)) {
+-            $uuid = sanitize_text_field((string)($run['run_uuid']??''));
+-            $result = $this->run_ebay_canonical_worker();
+-            $fresh = $this->ebay_run_load();
+-            $tick = sanitize_key((string)($result['tick_result']??''));
+-            if ($this->ebay_run_is_open($fresh)
+-                && hash_equals($uuid,sanitize_text_field((string)($fresh['run_uuid']??'')))
+-                && in_array($tick,array('advanced','retryable_error'),true)) {
+-                $this->ebay_run_schedule_worker(1);
+-            }
+-            $recovery = $tick === 'advanced' ? 'advanced' : ($tick === 'busy' ? 'busy' : ($tick === 'failed' ? 'failed' : 'checked'));
++            // The status UI polls every 45 seconds. When same-origin loopbacks
++            // are unavailable, retrying on EVERY poll worsens the slowdown.
++            // Keep the existing signed/leased worker; allow at most one recovery
++            // dispatch every five minutes for this exact run UUID.
++            $uuid = sanitize_text_field((string)($run['run_uuid'] ?? ''));
++            $guard = 'ppar_ebay_recovery_' . substr(hash('sha256', $uuid), 0, 20);
++            if (function_exists('get_transient') && get_transient($guard)) {
++                $recovery = 'throttled';
++            } else {
++                if (function_exists('set_transient')) { set_transient($guard, 1, 300); }
++                $recovery = $this->ebay_run_schedule_worker(1) ? 'dispatched' : 'dispatch_failed';
++            }
+             $run = $this->ebay_run_load();
+         }
+         return array(
+@@ -1325,16 +1328,51 @@
+         if(count($objects)>1200){
+             return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>array(),'error_code'=>'business_public_object_bound_exceeded');
+         }
++        // The prior verifier read one source row and one creative for EACH
++        // published output (up to 2,400 separate SQL requests). Read the exact
++        // same indexed identities in two bounded batches; keep the original
++        // source/creative/public/target gates below unchanged.
++        $hashes = array();
++        foreach ($objects as $candidate) {
++            if (is_array($allowed_map) && !isset($allowed_map[absint($candidate['campaign_post_id'] ?? 0)])) { continue; }
++            $hash = strtolower(sanitize_text_field((string)($candidate['creative_identity_hash'] ?? '')));
++            if (preg_match('/^[a-f0-9]{64}$/', $hash)) { $hashes[$hash] = true; }
++        }
++        $sources_by_hash = array(); $creatives_by_hash = array();
++        if ($hashes) {
++            if (!method_exists($this, 'creative_library_table')) {
++                return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>array(),'error_code'=>'business_public_creative_storage_unavailable');
++            }
++            $ids = array_keys($hashes);
++            // At most 1200 hashes, so a single bounded, indexed IN query per
++            // table; no database schema, index or extra verification path.
++            $placeholders = implode(',', array_fill(0, count($ids), '%s'));
++            $sql = $wpdb->prepare("SELECT * FROM {$this->ebay_items_table()} WHERE creative_identity_hash IN ({$placeholders}) AND seller_account_type='BUSINESS' ORDER BY id DESC", $ids);
++            $rows = $wpdb->get_results($sql, ARRAY_A);
++            if (!is_array($rows) || (string)($wpdb->last_error ?? '') !== '') {
++                return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>array(),'error_code'=>'business_public_source_read_failed');
++            }
++            foreach ($rows as $row) {
++                $hash = strtolower((string)($row['creative_identity_hash'] ?? ''));
++                if (isset($hashes[$hash]) && !isset($sources_by_hash[$hash])) { $sources_by_hash[$hash] = $row; }
++            }
++            $sql = $wpdb->prepare("SELECT * FROM {$this->creative_library_table()} WHERE identity_hash IN ({$placeholders}) ORDER BY id DESC", $ids);
++            $rows = $wpdb->get_results($sql, ARRAY_A);
++            if (!is_array($rows) || (string)($wpdb->last_error ?? '') !== '') {
++                return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>array(),'error_code'=>'business_public_creative_read_failed');
++            }
++            foreach ($rows as $row) {
++                $hash = strtolower((string)($row['identity_hash'] ?? ''));
++                if (isset($hashes[$hash]) && !isset($creatives_by_hash[$hash])) { $creatives_by_hash[$hash] = $row; }
++            }
++        }
+         $now=time();
+         foreach($objects as $object){
+             $oid=absint($object['id']??0);$campaign_id=absint($object['campaign_post_id']??0);
+             if(is_array($allowed_map) && !isset($allowed_map[$campaign_id])){continue;}
+             $hash=strtolower(sanitize_text_field((string)($object['creative_identity_hash']??'')));
+             if(!preg_match('/^[a-f0-9]{64}$/',$hash)){$invalid[$oid?:count($invalid)+1]='creative_identity_missing';continue;}
+-            $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",$hash),ARRAY_A);
+-            if ((string)($wpdb->last_error ?? '') !== '') {
+-                return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>$invalid,'error_code'=>'business_public_source_read_failed');
+-            }
++            $row = $sources_by_hash[$hash] ?? null;
+             if(!is_array($row)){$invalid[$oid]='source_missing';continue;}
+             if(sanitize_key((string)($row['status']??''))==='blocked_manual'){$invalid[$oid]='manual_block';continue;}
+             if(sanitize_key((string)($row['source_state']??''))!=='available'){$invalid[$oid]='source_not_available';continue;}
+@@ -1362,11 +1400,7 @@
+             // target_mismatch / 0-of-N result. Keep source freshness/concept
+             // identity authoritative above, then bridge to the exact linked
+             // creative by the immutable identity hash for target verification.
+-            if(!method_exists($this,'creative_library_table')){$invalid[$oid]='creative_storage_unavailable';continue;}
+-            $creative=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->creative_library_table()} WHERE identity_hash=%s ORDER BY id DESC LIMIT 1",$hash),ARRAY_A);
+-            if ((string)($wpdb->last_error ?? '') !== '') {
+-                return array('required'=>count($required),'covered'=>0,'missing'=>$required,'counts'=>array(),'invalid'=>$invalid,'error_code'=>'business_public_creative_read_failed');
+-            }
++            $creative = $creatives_by_hash[$hash] ?? null;
+             if(!is_array($creative)){$invalid[$oid]='creative_missing';continue;}
+             $creative_payload=json_decode((string)($creative['payload']??''),true);$creative_payload=is_array($creative_payload)?$creative_payload:array();
+             if(sanitize_key((string)($creative['provider']??''))!=='ebay'
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -2805,7 +2805,9 @@
+                     'next'=>'',
+                     'active'=>true,
+                     'pages'=>0,
+-                    'page_limit'=>1,
++                    // The second page is a strictly bounded rescue only when
++                    // marketplace-foreign offers crowded out the first one.
++                    'page_limit'=>2,
+                     'route_limit'=>5,
+                     'profile_kind'=>'business_' . $concept_kind . '_concept',
+                 );
+@@ -4070,10 +4072,28 @@
+         sort($prices, SORT_NUMERIC);
+         $median=0.0; $n=count($prices);
+         if($n){$median=$n%2?(float)$prices[(int)floor($n/2)]:(((float)$prices[$n/2-1]+(float)$prices[$n/2])/2.0);}
++        // This group has already passed the entire quality/veto/relevance gate
++        // before sorting. Repeating it for the price median repeats the same
++        // catalog classification and curation reads without adding a decision.
++        // The median only changes the numerical price score and ranking.
+         foreach($group as &$candidate){
+-            $q=$this->ebay_business_quality_assess($candidate['item'],$candidate['classification'],$candidate['rule'],$settings,$median);
+-            if(!is_wp_error($q)){$candidate['quality']=$q;$candidate['item']=$this->ebay_business_item_with_quality($candidate['item'],$q);}
+-            else{$candidate['quality']=array('error'=>sanitize_key((string)$q->get_error_code()));}
++            $q=(array)($candidate['quality']??array());
++            $price_score=$this->ebay_business_price_plausibility_score((float)($candidate['item']['price_value']??0),$median);
++            $q['price']=$price_score;
++            $q['overall']=max(0,min(100,(int)round(
++                (absint($q['relevance']??0)*0.50)
++                +(absint($q['seller']??0)*0.25)
++                +(absint($q['offer']??0)*0.15)
++                +($price_score*0.10)
++            )+absint($q['brand_bonus']??0)));
++            $q['reason']='Relevanz '.absint($q['relevance']??0)
++                .' · Verkäufer '.absint($q['seller']??0)
++                .' · Angebot '.absint($q['offer']??0)
++                .' · Preis '.absint($price_score)
++                .(!empty($q['pinned'])?' · angepinnt':'')
++                .(!empty($q['brand_preferred'])?' · bevorzugte Marke':'');
++            $candidate['quality']=$q;
++            $candidate['item']=$this->ebay_business_item_with_quality($candidate['item'],$q);
+         }
+         unset($candidate);
+         $group=array_values(array_filter($group,static function($c){return is_array($c['quality']??null)&&empty($c['quality']['error']);}));
+@@ -7659,6 +7679,14 @@
+ 
+         $item = $this->ebay_accept_item($raw, $profile['seller_type'], $settings);
+         if (is_wp_error($item)) {
++            // One cause across all product families: foreign/unknown-market
++            // results fill the 30-place discovery page before eligible items
++            // are ever considered. Count only the first-page evidence; never
++            // weaken the existing strict EBAY_DE gate.
++            if (in_array($item->get_error_code(), array('ebay_marketplace_mismatch','ebay_marketplace_missing'), true)
++                && isset($job['current_page']) && is_array($job['current_page'])) {
++                $job['current_page']['marketplace_blocked'] = absint($job['current_page']['marketplace_blocked'] ?? 0) + 1;
++            }
+             $seen_key = $profile['seller_type'] . '|' . ($raw_item_id !== '' ? $raw_item_id : hash('sha256', wp_json_encode($raw)));
+             if (!isset($job['hard_seen'][$seen_key])) {
+                 $job['hard_seen'][$seen_key] = true;
+@@ -8062,7 +8090,17 @@
+                     $page_next = trim((string) ($page['next'] ?? ''));
+                     if (isset($job['profiles'][$profile_key])) {
+                         $profile_page_limit = max(1, absint($job['profiles'][$profile_key]['page_limit'] ?? $max_pages));
+-                        if ($page_next === '' || absint($job['profiles'][$profile_key]['pages'] ?? 0) >= $profile_page_limit) {
++                        $pages_done = absint($job['profiles'][$profile_key]['pages'] ?? 0);
++                        $market_rejections = absint($page['marketplace_blocked'] ?? 0);
++                        // Extra API work is permitted only if the *first* page
++                        // contained mostly foreign/missing-market offers.
++                        // One valid hit must not prevent discovery of the other
++                        // products needed for this portal family. Still at most
++                        // two pages; no extra HTTP for ordinary results.
++                        $market_crowded = $pages_done === 1
++                            && $market_rejections >= max(1, (int) ceil(count($items) / 2));
++                        $effective_limit = $market_crowded ? min(2, $profile_page_limit) : 1;
++                        if ($page_next === '' || $pages_done >= $effective_limit) {
+                             $job['profiles'][$profile_key]['active'] = false;
+                             $summary['profile_stats'][$profile_key]['complete'] = true;
+                             if ($page_next !== '' && absint($job['profiles'][$profile_key]['pages'] ?? 0) >= $profile_page_limit) {
+@@ -8176,6 +8214,7 @@
+                     'items'=>$items,
+                     'index'=>0,
+                     'next'=>trim((string) ($page_data['next'] ?? '')),
++                    'marketplace_blocked'=>0,
+                     'loaded_at'=>time(),
+                 );
+                 unset($job['inflight_profile']);
+@@ -10337,7 +10376,7 @@
+                         var sub=String(d.selection_phase||'');
+                         var cursor=(sub==='business_prune' && Number(d.selection_cursor)>0)
+                             ?' · Bearbeitete Quellen bis Nr. '+Number(d.selection_cursor):'';
+-                        var extra=d.recovery==='advanced'?' · vorhandener Lauf fortgesetzt':'';
++                        var extra=d.recovery==='dispatched'?' · Fortsetzung angefordert, noch nicht bestätigt':(d.recovery==='dispatch_failed'?' · Wiederanlauf-Anfrage fehlgeschlagen':'');
+                         var err=status==='failed'&&d.error_code?' · Fehler '+d.error_code:'';
+                         return 'Live-Status: '+state+' · Phase '+phase+(sub?' / '+sub:'')+
+                           ' · echter Fortschritt Schritt '+(Number(d.progress_seq)||0)+' vor '+fmt(progressAge)+
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -9515,7 +9515,11 @@
+                 <li>Wartende eBay-Benachrichtigungen: <?php echo $ebay_deletion_pending_count < 0 ? 'Status nicht lesbar' : ($ebay_deletion_pending_count >= 201 ? 'mindestens 201' : absint($ebay_deletion_pending_count)); ?></li>
+                 <?php if ($ebay_deletion_pending_count > 0) : ?>
+                   <li>Letzte automatische Bearbeitung: <?php echo !empty($ebay_compliance['worker_last_finished_at']) ? esc_html(wp_date('d.m.Y H:i:s',absint($ebay_compliance['worker_last_finished_at']))) : 'noch keine abgeschlossen'; ?></li>
+-                  <li>Nächster geplanter Lauf: <?php echo $ebay_deletion_worker_next_at > 0 ? esc_html(wp_date('d.m.Y H:i:s',$ebay_deletion_worker_next_at)) : 'nicht geplant'; ?></li>
++                  <li>Nächster geplanter Lauf: <?php echo $ebay_deletion_worker_next_at > 0 ? esc_html(wp_date('d.m.Y H:i:s',$ebay_deletion_worker_next_at)) : 'nicht geplant'; ?><?php if ($ebay_deletion_worker_next_at > 0 && $ebay_deletion_worker_next_at < time() - 180) : ?> · <span class="ppar-hard-block">überfällig – WordPress-Hintergrundlauf nicht bestätigt</span><?php endif; ?></li>
++                  <?php if (!empty($ebay_compliance['worker_last_recovery_attempt_at'])) : ?>
++                    <li>Wiederanlauf-Versuch: <?php echo esc_html(wp_date('d.m.Y H:i:s',absint($ebay_compliance['worker_last_recovery_attempt_at']))); ?> · <?php echo ($ebay_compliance['worker_last_recovery_transport'] ?? '') === 'cron_dispatch_sent' ? 'an WordPress übergeben (Bearbeitung noch nicht bestätigt)' : '<span class="ppar-hard-block">Start nicht erreichbar</span>'; ?></li>
++                  <?php endif; ?>
++                  <?php if (!empty($ebay_compliance['worker_last_started_at']) && empty($ebay_compliance['worker_last_finished_at'])) : ?><li class="ppar-hard-block">Hintergrundbearbeitung gestartet, aber kein Abschluss gespeichert.</li><?php endif; ?>
+                   <?php if (!empty($ebay_compliance['worker_last_error_code'])) : ?>
+                     <li>Letzter Bearbeitungsfehler: <code><?php echo esc_html((string) $ebay_compliance['worker_last_error_code']); ?></code></li>
+                   <?php endif; ?>
