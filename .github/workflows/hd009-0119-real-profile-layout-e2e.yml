@@ -1,4 +1,4 @@
-name: HD009 0.1.19 - real WP placement and stylesheet gate
+name: HD009 0.1.19 - exact stylesheet asset URL diagnostic
 on:
   push:
     branches:
