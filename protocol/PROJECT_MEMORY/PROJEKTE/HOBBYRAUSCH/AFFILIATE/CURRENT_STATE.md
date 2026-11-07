@@ -2,41 +2,30 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-**Stand: 07.11.2026.** Scope `HOBBYRAUSCH_AFFILIATE`. Dieses Büro ist die einzige fachliche Status- und NEXT-ACTION-Autorität; Plugin-Akte im vorhandenen `../PLUGINS/` ist nur technische Ablage.
+**Stand: 07.11.2026.** Scope `HOBBYRAUSCH_AFFILIATE`. Einziges fachliches Affiliate-Büro; die technische HD009-Akte bleibt im vorhandenen Pluginbüro.
 
-## Wo wir stehen
+## Aktueller Pluginstand
 
-- **Einzige aktuelle GitHub-Installations-ZIP:** `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = Hobby Depot – Affiliate-Zentrale **0.1.14-dev**, **708630 Bytes**, SHA-256 `dd7376073c3d9bae80741e4f97cdd7db3e5af4812f80caf88c87ce7da4176d76`, Git-Blob `b048b4de8f223202350db925c9d51c8b2b2b4e82`. Wirkliche Binärdatei auf GitHub gelesen; keine Text-Schein-ZIP.
-- Im echten WordPress zuletzt bestätigt: 0.1.12-dev im Screenshot; Betreiber meldete später ausgeführten DataForSEO-Verbindungstest (Button aus 0.1.13). Die konkrete WordPress-Version und das Testergebnis danach wurden **nicht** unabhängig abgerufen. **0.1.14 noch nicht produktiv installiert**.
-- Ein Plugin, ein Pluginordner `affiliate-portal-router/`, eine einzige aktuelle ZIP; keine neue Affiliate-Engine.
+- **Einzige vollständige GitHub-ZIP:** `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **Hobby Depot Affiliate-Zentrale 0.1.15-dev**, 2.322.493 Bytes, SHA256 `82c03bfc12667a909d583b6617e6f506ca08155057138fb29d3261398aa78153`, Git-Blob `7bafd9f3b3f3090aae507862f816bc2a7c55d3b8`.
+- **WordPress-Installation:** Betreiber hat 0.1.12 im Screenshot und später den DataForSEO-Verbindungstest bestätigt. Welche Upgrade-Version gerade aktiv ist und ob 0.1.15 produktiv funktioniert, ist **nicht live gelesen**.
+- **Ein Pluginordner:** `affiliate-portal-router/`. Kein zusätzliches Plugin oder neuer Affiliate-Bürozweig.
 
-## Was bereits vorhanden und unverändert ist
+## Unveränderte, schon vorhandene Technik
 
-1. Automatische Themen-/Hobby-/Kategorie-/Elternpfad-Auswahl und Slot-/Formatprüfung aus der vorhandenen Pferdeatelier-Affiliate-Engine, an HD004 und HD007 angepasst.
-2. Zentrale Banner-/Creative-Library und vorhandene Werbemittel-/Kampagnen-Automatisierung. Manuelle Chefeingriffe sind Ausnahmen.
-3. Eigenständiger idealo iPN-Feedimport, Adapter, Portal-Matching, zwölfstündige Aktualisierung bei gültiger bestätigter Feed-URL.
-4. Amazon-Trackingbrücke plus unabhängige DataForSEO-Amazon-Recherche und kostenloser Credentials-Test; DataForSEO-Produktabruf kostet erst beim ausdrücklichen Recherchieren.
-5. Vorherige geprüfte eBay-Ursachenfixe aus Pferdeatelier-Referenz 6.72.308, ohne Pferdekataloge oder andere Portaldaten.
+Zentrale Amazon-/idealo-Affiliate-Zentrale, DataForSEO-Amazon-Recherche und kostenloser Verbindungstest, echte idealo-iPN-Feedautomation bei gültigem Zugang, HD004-Kategorie-/Elternpfadzuordnung, HD007-Registerziele, Original-Kampagnen-/Bannerautomatik und Designslots aus HD003. Noch offene idealo-Freischaltung/Feed-Sachlage bleibt unverändert; keine Daten anderer Portale übernehmen.
 
-## Was in 0.1.14 wirklich korrigiert wurde
+## Gezielter Fix 0.1.15 – nur freigegebene Eigenwerbung automatisch zeigen
 
-Der neue Amazon+idealo-Startmodus in 0.1.13 hatte vorhandene **Hub-Bannerflächen pauschal gesperrt** und nur idealo als Banner-Netzwerk zugelassen; sogar eigene lokale Banner waren damit blockiert. Dieser Zusatz-Blocker ist jetzt entfernt. Die **bestehende** Zuordnungsautomatik bleibt unverändert. Im Startmodus sind idealo und bereits über die originale Creative-Library materialisierte **lokale interne Hobby-Banner** zulässig; eBay, OTTO und fremde Kampagnen bleiben gesperrt. Keine neue Banner-Automatik.
+Der Betreiber hat die **freigegebene Original-Eigenwerbung** (Modellflugzeug auf Beige, unverändertes Hobby-Depot-Logo, Überschrift „Hier könnte Ihre Werbung stehen“, zwei Buttons „Werbebedingungen“/„Preise“) bereits im **HD003-Design-Plugin** freigegeben. Das echte Original-PNG `banner-freigabe-originalbild-2170x725.png`, 2170×725, SHA256 `3cc834d9f67305ce752574b794d834b4b20304ada93eb1518bbae6fd2eb8e579`, wurde nun **bitidentisch** in die einzige HD009-ZIP integriert.
 
-Prüfbeleg: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0114_BANNER_STARTMODUS_PRUEFUNG_20261107.md`. 24 PHP-Lint PASS, ZIP-CRC PASS, 10 Offline-Startmodus-Tests PASS, 4 DataForSEO-Testantworten simuliert, GitHub-Binärdatei gelesen. **Kein Live-WordPress-/Provider-PASS.**
+Einziger Zusatz im bisherigen `render_affiliate_slot_for_context`: Nach bestehender richtiger Kampagnenauswahl erscheint das eigene freigegebene Motiv als **Fallback auf freier Querbannerfläche**, maximal einmal pro Seitenaufruf im Amazon+idealo-Startmodus. Bezahlte Kampagnen und bestehende automatische Zuordnung behalten Vorrang. Die beiden unsichtbaren Klickflächen benutzen reale WordPress-Seiten für Werbebedingungen und Preise. Kein manuelles Einfügen, keine zweite Logik, keine neue Tabelle oder Engine.
 
-## Noch offen, ohne Raterei
+Die früher in HD009 angelegten separaten, **nicht abgenommenen** Modellbau-Fotos sind nicht die freigegebene Originalwerbung und werden nicht ausgegeben. Ein passendes **freigegebenes Quadratbanner mit Original-Logo** wurde im aktuellen HD003-Paket nicht gefunden. Es wird nicht erfunden oder ungeprüft veröffentlicht.
 
-- Zwei eigene Modellbau-Entwurfsdateien (Querformat/Quadrat) sind zwar im ZIP, aber noch **nicht im aktiven Werbemittelbestand der zentralen Creative-Library**; nach Motivfreigabe **einmaliger Import**, automatische Verteilung danach. Keine manuelle Zuordnung jeder Seite.
-- DataForSEO-Test wurde vom Betreiber ausgeführt, aber Ergebnis (`Letzte Prüfung: erfolgreich` oder Fehler) ist noch nicht verifiziert.
-- Echte idealo-Hobby-Zugangsdaten, Adspace/Feed/Feed-URL, API PASS, erster sicherer Import und öffentliche idealo-Ausgabe fehlen als Live-Beleg.
-- DataForSEO-Produktsuche ist **derzeit manuell pro WordPress-Ziel**; es gibt keine bestätigte vollautomatische DataForSEO-Recherche für den ganzen Hobbykatalog. Sie wird nicht als bereits vorhanden ausgegeben, und es wird kein kostenpflichtiger Massenlauf gestartet.
+**Tests:** GitHub Actions Run 42372762064 PASS (HD003-Datei-Hash exakt, 24/24 PHP-Lint, 31 ZIP-Einträge CRC PASS); GitHub-ZIP-Binärreadback 2.322.493 Bytes und Blob verifiziert. **Kein behaupteter authentifizierter WordPress-/Browser-Live-PASS**. Prüfbeleg im HD009-Pluginbüro `EVIDENCE/BUILD_0115_APPROVED_ORIGINAL.py`.
 
-## Nächste Schritte (bestehende Backend-Klickpfade)
+## Nächster Schritt
 
-1. **Plugins → Neues Plugin hinzufügen → Plugin hochladen**: die einzige Version 0.1.14 über HD009 aktualisieren und Version/aktiv prüfen.
-2. **Affiliate-Zentrale → Amazon + idealo**: `Letzte Prüfung: erfolgreich` lesen, bei gespeicherten DataForSEO-Daten Login/Passwort leer lassen. `Amazon und idealo als einzige öffentliche Partner verwenden` anhaken → `Einstellungen speichern`.
-3. Auf derselben Seite den festen Link **`Affiliate-Zentrale → idealo`** öffnen. Dort Hobby-eigenen `iPN API-Key`, `Adspace-ID`, `Hobby-Depot-Feed-ID` und die offizielle `iPN-Download-URL` (falls bereits vorhanden) eintragen. `idealo-Verbindung verwenden`, die ausdrückliche Bestätigung für Hobby-Depot-Werte und `Provider getrennt als Karten` setzen. **`Speichern & API prüfen`**. Keine erdachten IDs.
-4. Nach positivem API-Test: `Feed jetzt aktualisieren` nur wenn die echte Feed-URL hinterlegt ist. Der erste Wechsel von Adspace/Feed setzt die automatische Aktualisierung auf AUS; bei erfolgreicher Ersteinrichtung im selben Formular **`Feed automatisch alle zwölf Stunden auf Änderungen prüfen`** erneut aktivieren → `Speichern`.
-5. **Noch keine bezahlte DataForSEO-Massenrecherche.** Erst Ergebnis und relevante Produktziele gegen die echte WordPress-Seite prüfen. Eigene Banner erst nach Motivfreigabe zentral importieren.
+**Einmaliges WordPress-Update über bestehende HD009-Version**: Plugins → Neues Plugin hinzufügen → Plugin hochladen → die aktuelle `CURRENT.zip` als *Ersatz* der vorhandenen Hobby-Depot-Affiliate-Zentrale installieren. Danach im Frontend auf einer tatsächlich freien Querbannerfläche prüfen, dass genau die freigegebene unveränderte Eigenwerbung erscheint, Buttons auf die veröffentlichten Seiten führen und bestehende Kundenslots weiterhin Vorrang haben. Keine manuelle Werbemittelanlage und keine erneute DataForSEO-Konfiguration.
 
-**Keine neuen Büros, keine zusätzliche Engine, keine zweite Plugin-ZIP.**
+Bis zur positiven WordPress-Prüfung nur **technisch geprüfter Upgrade-Kandidat**, keine produktive Freigabe.

@@ -1,13 +1,11 @@
-# HD-009 – Hobby Depot Affiliate-Zentrale – technische Akte
+# HD-009 – Hobby Depot Affiliate-Zentrale – technische Pluginakte
 
-**Eine fachliche Current-Autorität:** `../../../AFFILIATE/CURRENT_STATE.md`. Dieses Dokument ist ausschließlich die technische Plugin-Akte.
+**07.11.2026 – Einzige aktuelle GitHub-Installations-ZIP:** `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`, Version **0.1.15-dev**, 2.322.493 Bytes, SHA256 `82c03bfc12667a909d583b6617e6f506ca08155057138fb29d3261398aa78153`, Blob `7bafd9f3b3f3090aae507862f816bc2a7c55d3b8`, exakt ein Pluginroot `affiliate-portal-router/`.
 
-**Einzige aktuelle GitHub-Installations-ZIP:** `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`, Version **0.1.14-dev**. 708630 Bytes. ZIP-SHA256 `dd7376073c3d9bae80741e4f97cdd7db3e5af4812f80caf88c87ce7da4176d76`, Git-Blob `b048b4de8f223202350db925c9d51c8b2b2b4e82`. Original-Pfad `affiliate-portal-router/hobby-depot-affiliate-router.php` bleibt erhalten.
+**KISS-Korrektur:** Die vorhandene Pferdeatelier-Kategorie-/Elternpfad-/Slot-Automatik wird nicht ersetzt. Die vom Betreiber freigegebene **Original-Hobby-Eigenwerbung** aus HD003 wurde pixelidentisch in die HD009-ZIP übernommen (Original-SHA256 `3cc834d9f67305ce752574b794d834b4b20304ada93eb1518bbae6fd2eb8e579`), ohne Logo-/Text-/Formatänderung. Falls die vorhandene automatische Bannerwahl keine passende echte Kampagne für einen **Querbanner-Slot** ergibt, zeigt die Zentrale die genehmigte Eigenwerbung höchstens einmal pro Seitenaufruf im Amazon+idealo-Startmodus. Beide Linkflächen führen zu realen veröffentlichten Werbebedingungen-/Preiseseiten; keine manuelle Zuordnung und keine neue Architektur.
 
-**Tatsächlicher Fix:** Im neuen Amazon+idealo-Startmodus war die alte zentrale Bannerautomatik in bestimmten Hub- und Werbemittelslots gesperrt. Die reine Startmodus-Sperre wurde korrigiert. Alle vorhandenen Fach-, Elternpfad-, Materialisierungs- und Designplatzprüfungen bleiben in genau derselben Engine. Im Startmodus nur idealo und fachlich/technisch geprüfte lokale interne Eigenbanner. Keine zweite Architektur.
+**Technischer Beleg:** `EVIDENCE/BUILD_0115_APPROVED_ORIGINAL.py`; GitHub Actions Run 42372762064 PASS. 24 PHP-Dateien Syntax-PASS; ZIP-CRC PASS, 31 Dateien, Bild-Hash PASS, Blob/Größe in GitHub unabhängig gelesen.
 
-**Prüfung:** [EVIDENCE/HD009_0114_BANNER_STARTMODUS_PRUEFUNG_20261107.md](EVIDENCE/HD009_0114_BANNER_STARTMODUS_PRUEFUNG_20261107.md). 24 PHP-Lint, 10 Startmodus-Offlineprüfungen, 4 DataForSEO-Offlineantworten und ZIP CRC PASS. GitHub-Binärdatei mit Blob und Größe kontrolliert. Kein behaupteter echter WordPress-/API-Live-PASS.
+**Noch offen:** Echte WordPress-Aktualisierung und Frontend-Abnahme durch Betreiber, idealo-Feedzugang, automatische DataForSEO-Massensuche. Es gibt **kein bestätigtes freigegebenes Quadratbanner** mit Original-Hobby-Logo im aktuellen HD003-Originalpaket; alte Fotoentwürfe bleiben inaktiv. Keine zweite Pluginlinie.
 
-**Offen:** Zwei Modellbau-Entwurfsbilder liegen im ZIP, noch nicht in der ursprünglichen Creative-Library; erst nach Entwurfsfreigabe dort einmal importieren, nicht einzeln je Seite zuordnen. Betreiber hat kostenlosen DataForSEO-Test ausgeführt, exaktes Ergebnis nicht bekannt. idealo-Feedzugang und Live-Import stehen aus. DataForSEO-Produktrecherche bleibt in diesem Stand manuell und kostenpflichtig nach Klick; keine automatische Massensuche.
-
-**Nicht verändern:** HD003, HD004, HD007, andere Portal-/Provider-Konten, Pferdeatelier-Current und vorhandene WordPress-Optionswerte. Vorversionen sind historische Prüfnachweise, keine zweite Current.
+**Verbindliche fachliche Current-Autorität** nur `../../../AFFILIATE/CURRENT_STATE.md`; diese Datei dokumentiert ausschließlich die technische HD009-Akte. Andere Portale/HD003/HD004/HD007 und Partnerzugänge unverändert.
