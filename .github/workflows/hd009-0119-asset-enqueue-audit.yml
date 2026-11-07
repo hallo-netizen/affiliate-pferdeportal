@@ -1,0 +1,11 @@
+name: HD009 current CSS enqueue original-source audit
+on:
+  push:
+    branches: [hobbyroom/hd007-profile-ad-placement-20261107]
+    paths: [.github/workflows/hd009-0119-asset-enqueue-audit.yml]
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/AUDIT_0119_STYLES_ENQUEUE.py
