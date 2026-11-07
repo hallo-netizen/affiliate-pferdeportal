@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktueller Stand 07.11.2026: HD009 Affiliate-Zentrale 0.1.24** (Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.24.zip`, SHA-256 `e1bc7cc4d7ab69bc711c424c3d1a612c4710f66155eba7a401552329a800f3a6`). Belegte Bannerplätze auf Kategorieebenen, im Hobbyregister und auf regulären Artikeln bekommen bei fehlendem genehmigtem Fotomotiv einen Bild-freien, thematischen Amazon-Suchbanner. Für Registerprofile bleibt nur **ein** Affiliate-Foto im Querbanner; Quadrat als gestalteter Themenbanner ohne Bildwiederholung. Bestehende Partner-/Produktzuordnung unverändert. Tests PHP 24/24, CRC, sechs Funktionsfälle und Browser 4 Layouts/4 Breiten PASS; produktive Installation und Vollabnahme noch offen. Ältere HD009-Standangaben unten sind Historie.
+
+
+
 **Aktueller Downloadstand 07.11.2026: HD009 Affiliate-Zentrale 0.1.22 (`HOBBY_DEPOT_AFFILIATE_HD009_0.1.22.zip`) und HD007 Hobbyregister 1.2.20 (`HOBBY_DEPOT_HOBBYREGISTER_HD007_1.2.20.zip`).** Beide vollwertigen Installations-ZIPs liegen zusätzlich byteidentisch als jeweilige `CURRENT.zip` im zugehörigen Büro. 0.1.21 und 1.2.18 sowie alle weiteren früheren Versionen in älteren Abschnitten sind **historisch**. PHP/ZIP-Prüfung bestanden, echte WordPress-Live-Versionen nicht authentifiziert ausgelesen.
 
 
