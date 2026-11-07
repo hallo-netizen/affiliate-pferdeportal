@@ -2,73 +2,42 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-Stand: 06.11.2026. Scope `HOBBYRAUSCH_AFFILIATE`. Diese Datei ist gemäß AUTORITAETSPLAN.json die einzige aktuelle Status- und NEXT-ACTION-Autorität dieses Büros.
+**Stand: 07.11.2026. Einzige fachliche Status-/Release-/NEXT-ACTION-Autorität für `HOBBYRAUSCH_AFFILIATE` gemäß AUTORITAETSPLAN.json.**
 
-## Aktuell
+## 1. Aktueller Stand (nur diese Fassung gilt)
 
-**Installierter Hobby-Stand: HD-009 0.1.7-dev.** Am 01.11. und am 06.11.2026 als aktiv gemeldet. **Der Betreiber hat jetzt das Original-ZIP direkt aus dem WordPress-Pluginordner hochgeladen; alle 23 PHP-Dateien und das ZIP wurden im Chat vom 06.11. geöffnet und geprüft.** Dateinachweis: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md`. Die Original-ZIP-Bytes wurden damit verfügbar, sind aber noch **nicht als GitHub-ZIP archiviert**.
+- **Auf WordPress zuletzt bestätigt installiert:** `Hobby Depot – Affiliate-Zentrale 0.1.7-dev`. Das vollständige Original wurde vom Betreiber am 06.11.2026 aus dem Pluginordner hochgeladen und in der HD009-Akte dokumentiert.
+- **Einzige neu harmonisierte vollständige GitHub-Installations-ZIP:** `Hobby Depot – Affiliate-Zentrale 0.1.10-dev`, abgelegt als
+  `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
+- **Original-ZIP SHA256:** `e8613f742a0c3a9e93b3c335b82b6594e95d61c89fd70f5a33981c73871427f4`, **607784 Bytes**, Git-Blob `8b6732f2b3ec88e390662021ec7e0760da8f6fba`. Der GitHub-Readback der **wirklichen Binärdatei** hat Größe und Blob bestätigt.
+- **Plugin-Hauptdatei:** `affiliate-portal-router/hobby-depot-affiliate-router.php`; Pluginname und Pluginordner bleiben identisch; es wird **kein zweites WordPress-Plugin** installiert.
+- **Status:** technisch geprüfter **Upgrade-Testkandidat**, noch **kein produktiver WordPress-Live-PASS**. Die GitHub-Paketablage ist abgeschlossen, die WordPress-Installation nicht durchgeführt.
 
-**Aktueller geprüfter Update-Installer: noch keiner.** Kein neuer Pluginzweig, keine neue Grundportierung, keine neue Versionsnummer und kein Ersatz aus einem älteren Kandidaten. Der bestehende einzige Pluginablageort bleibt `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`; eine Datei darf dort erst nach echtem Versions-/Quell-/Hashabgleich als Current abgelegt werden. Keine Text-/Pointer-ZIP.
+## 2. Was harmonisiert wurde
 
-## Eindeutige Einordnung der vorhandenen Quellen
+Aus dem tatsächlich gelieferten Hobby-Original 0.1.7 und den vorhandenen geprüften 0.1.9-Deltas wurden die Hobby-Funktionen bewahrt: HD003-Design, HD004-Kategorieziele, Amazon-ASIN-/Tracking-Brücke, vorhandene fünf Zusatzmodule und Provider-Konfiguration. Keine Pferde-Kategorien, keine Pferde-Produktdaten, keine Zugangsdaten und keine parallele Engine übernommen.
 
-| Quelle | Rolle im Hobby-Depot-Büro |
-|---|---|
-| HD-009 0.1.7-dev | Einziger belegter installierter Stand; für den Updatevergleich maßgebliche Originalquelle. Kein behaupteter Funktions-PASS allein durch Installation. |
-| HD-009 0.1.2-dev, Commit 74376bdf3a08dcc731d870e7d7d4678981e0618e | Historischer Test-/Vergleichsstand. Alle 26 Dateien nun tatsächlich gelesen und per Git-Blob geprüft. Kein aktueller Installer und kein Downgradeziel. |
-| Hobby-Arbeitszweig b4ed004cb96c23efaa9788b022c3bfed1107fe90 | Header 0.1.0-porting, nicht installierbar. Nur historische Vergleichsquelle, keine konkurrierende Current-Autorität. |
-| Hab & Bewahr 0.1.0-rc3 | Fremdprojekt-Referenz HAB004. Voll-ZIP physisch geöffnet, 27 Dateien, SHA256 2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb. Bleibt ausschließlich im Hab-Büro. |
-| Pferdeatelier 6.72.306 | Eingefrorene Referenz vom 06.11.; vollständiges 66-Dateien-Paket im geprüften Hobby-Büro nicht materialisiert. Keine behauptete vollständige Feature-Parität. |
+**Neue fachliche Referenz:** Pferdeatelier 6.72.308 vom 07.11.2026, vollständig als gegebener Ursachen-Patch im selben fachlichen Affiliate-Büro dokumentiert: `REFERENZEN/PFERDEATELIER_6.72.308_URSACHENPATCH_NICHT_INSTALLIEREN.patch`. Gezielt für Hobby übernommen:
+1. eBay-Löschprüfung in 100er-Chargen, bei DB-Lesefehler vor Löschung abbrechen.
+2. eBay-Produktabdeckung mit gebündelten Quellen-/Kreativ-Lesevorgängen statt Einzelabfragen.
+3. Keine zweite vollständige Qualitätsprüfung bei reiner Preis-Neuberechnung.
+4. Bedingte zweite eBay-Ergebnisseite nur bei Fremdmarktplatz-Überhang; strikte EBAY_DE-Sperre bleibt bestehen.
 
-## Abgleich ohne erneute Portierung
+Nicht übernommen: abweichende Pferde-Worker-/Cron-Modelle und fremde Produktgruppen. Kein identischer Hobby-Laufpfad, kein zusätzlicher Aufbau.
 
-**13 von 26 Dateien der gelesenen Hobby-0.1.2-Quelle sind mit der Hab-RC3 bytegleich.** Dazu gehören Artikelplanung, eBay-Kontolöschungsmodul, Housekeeping und Netzwerk-Synchronisierung. Gleiche Dateien werden nicht erneut portiert. Der belegte ältere Hobby-Arbeitszweig enthält bereits den dokumentierten allgemeinen 6.72.276-Abgleich für Karten-/Buttonverhalten.
+**Echter Test- und Quellenachweis:** `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0.1.10_HARMONISIERUNG_20261107.md`.
+ZIP-CRC PASS, 23/23 PHP-Syntax PASS, Hauptdateiversion 0.1.10-dev, 26 vollständige Dateien, GitHub-Binär-Readback PASS. Keinerlei wörtliche Pferde-/Hab-Portalmarker in den 26 Dateien.
 
-Gezielt zu prüfen sind:
-1. **Vorhandene Zusatzmodule starten:** In Hab RC3 werden Produktquellenplan, Admin-KISS, Deal-Radar, Partnerstatistik und DS24-Nachverarbeitung geladen/gestartet. In der gelesenen Hobby-0.1.2-Hauptdatei fehlt dieser Start. Ob 0.1.7-dev ihn bereits enthält, bleibt offen.
-2. **Vorhandene Hobby-Zielquelle bewahren:** HD004 und der geltende HD003-Designvertrag bleiben maßgeblich. Keine Übernahme von Hab-Schutzwelten, Hab-Kategorien oder Hab-Designfiltern. Keine neue Kategorie-Masterhaltung und kein zweiter Cache ohne Bedarfsnachweis.
-3. **Amazon-ASIN-Brücke bewahren:** Die gelesene Hobby-0.1.2-Providerregistry enthält aktive Tracking-/ASIN-Funktionen; die Hab-RC3 führt Amazon nur als vorbereitet. Ein pauschaler Austausch wäre Funktionsverlust. Der experimentelle separate Creators-Adapter des alten Porting-Zweigs wird nicht still zur fertigen Lösung erklärt.
-4. **Neuere Pferde-Fixes nur quellgebunden:** Kontolöschungsmeldungen, Produktplan-/Checkpoint-/Freigabekorrekturen sowie Banner-/Statistikänderungen der 6.72.306-Referenz erst gegen die echte 0.1.7-dev vergleichen. Dokumentierte Absichten oder lokale Fremdprojekt-Tests sind kein übernommener Hobby-Fix.
+## 3. Eine eindeutige Bürostruktur
 
-Dateihashes und Vergleichsgrundlage: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/DATEIVERGLEICH_20261106.json`. Frühere Gate-Belege bleiben historische Nachweise. Sie gelten weder automatisch für die installierte 0.1.7-dev noch für eine neue Version.
+- **Einziges fachliches Affiliate-Büro:** `PROJEKTE/HOBBYRAUSCH/AFFILIATE/`, diese `CURRENT_STATE.md` ist die einzige fachliche Release-Wahrheit.
+- **Dazugehöriges technisches Plugin-Büro:** `PROJEKTE/HOBBYRAUSCH/PLUGINS/`, eine HD009-Akte und genau eine aktuelle vollständige `CURRENT.zip` unter `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/`.
+- Die beiden Büros sind verschiedene Zuständigkeiten, **keine zwei Affiliate-Plugins**. Keine neue Bürostruktur eröffnen; nichts fachfremd löschen.
 
-## Erster offener Eingang / NEXT ACTION
+## 4. Nächster Schritt
 
-**Die HD-009-0.1.7-dev-Originalquelle ist im Chat vom 06.11.2026 nun vollständig geöffnet und geprüft; die Original-ZIP noch unverändert im zentralen GitHub-Pluginbüro sichern. Danach die vollständige Pferdeatelier-6.72.306-Referenz für den Byte-/Funktionsabgleich bereitstellen.** Dann ausschließlich fehlende allgemeine Änderungen auf die bestehende Hobby-Portierung anwenden; Optionen, Providerzugänge, ASIN-Brücke, HD004-Ziele und HD003-Ausgabe erhalten. Positiv/Negativ/Regression und Upgrade prüfen und erst danach genau eine vollständige neue HD009-ZIP als Current führen. Kein Neuaufbau aus Hab RC3 oder dem Pferdeportal; keine Installation einer älteren Version.
+**Die vorhandene GitHub-ZIP 0.1.10-dev kontrolliert über die bereits installierte Hobby-Version 0.1.7-dev aktualisieren**, dann den kompletten bestehenden Hobby-Workflow auf echtem WordPress prüfen: Aktivierung, vorhandene Einstellungen, eBay/idealo/Amazon, Import und Produktkarten, Banner/Partnerstatistik, eBay-Löschvorgang. Keine Zugangsdaten in GitHub übertragen. Ohne diesen Live-Test keine Behauptung „produktiv abgenommen“.
 
-WordPress, Providerkonten und Fremdprojekt-Current wurden durch diesen Abgleich nicht verändert. Es wurde kein vollständiger aktueller Hobby-Update-Installer vorgetäuscht.
+Ältere Aussagen aus den früheren Commits über „GitHub-ZIP fehlt“, Version 0.1.2-Current oder 0.1.9-Datei nur im Chat sind **überholte historische Befunde**; die dazugehörigen Beweise bleiben in Git-History und `PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/`, werden nicht als zweite Current-Autorität geführt.
 
-
-## Fortsetzungsauftrag und Zugriffskontrolle – 06.11.2026
-<!-- HD009_EXECUTION_20261106_SOURCE_ACCESS -->
-
-Der Betreiber hat die gezielte Aktualisierung und Dokumentation im bestehenden Hobby-Depot-Affiliate-Büro ausdrücklich beauftragt. Der vorhandene Dateivergleich bleibt die Grundlage; er wird nicht erneut begonnen. Ziel bleibt genau eine vollständige, geprüfte Aktualisierung der vorhandenen HD009-Pluginlinie.
-
-Erneut geprüft: verbundener GitHub-Campus unverändert auf dem oben dokumentierten Bürostand; die lokal vorhandenen Quellen sind die bereits geprüften älteren Hobby-Stände und die Hab-RC3. Keine neu hinzugekommenen HD009-0.1.7-dev- oder Pferdeatelier-6.72.306-Originalbytes in diesen Zugängen.
-
-Zusätzliche Zugangskontrolle: Es ist derzeit keine WordPress-Verbindung eingerichtet. Die verfügbare WordPress-App ist nicht installiert/verbunden; ein PHP-/Pluginexport über diese App ist außerdem noch nicht als unterstützte Fähigkeit geprüft. Die Suche nach einem direkten ChatGPT-Library-Dateizugriff hat keine passende verfügbare Verbindung ergeben. Eine App-Entdeckung wird nicht als vorhandener Dateizugriff oder als erfolgter Export gewertet.
-
-**Neuer Stand nach dem Serverupload vom 06.11.2026:** Der zuvor fehlende lesende Zugriff auf die Hobby-Originalquelle 0.1.7-dev wurde hergestellt. Die eigentliche Übertragung der ZIP-Bytes nach GitHub und die Pluginaktualisierung sind noch nicht erledigt. Kein neuer Installer und keine neue Versionsnummer erzeugt. Die nächste ausführbare Aktion ist unverändert der lesende Zugriff auf die bereits vorhandenen Originaldateien über eine tatsächlich verfügbare, autorisierte Datei-/WordPress-Verbindung. Erst dann den gespeicherten Delta-Abgleich fortsetzen; keine Grundportierung wiederholen und keine ältere Quelle zur aktuellen Version umetikettieren.
-
-
-## Klarstellung zu Original und Büros (nach Serverupload)
-
-Die vom Betreiber hochgeladene ZIP `affiliate-portal-router.zip` **ist das tatsächliche Hobby-Depot-Plugin 0.1.7-dev**. Datei und 23 PHP-Quelldateien sind geöffnet und auf ZIP-Integrität und PHP-Syntax geprüft worden. Größe: **628291 Bytes**; SHA-256: `34c0a9b42c62f71025212bfba3756e48bf4c6ab21fdd000c9894a1ce2bf12cfa`. Vollständiger Nachweis unter `PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md`. Die heruntergeladene Server-ZIP ist im Chat gesichert, **noch nicht als ZIP in GitHub abgelegt**. Kein neuer Release und keine Live-Installation.
-
-Es gibt **genau ein fachliches Affiliate-Büro** unter `HOBBYRAUSCH/AFFILIATE`; das zugehörige Plugin HD-009 wird technisch im bestehenden `HOBBYRAUSCH/PLUGINS` verwaltet. Das sind keine zwei unabhängigen Affiliate-Büros. Keines löschen und kein weiteres eröffnen. Das Pferdeatelier-Plugin 6.72.306 bleibt eine getrennte Referenz; keine Pferde-Daten oder Zugänge übertragen.
-
-
-## Geprüfter Modul-Delta-Fix / 06.11.2026
-
-In der tatsächlichen Hobby-0.1.7-Originalquelle liegen fünf Zusatzmodule vor, werden aber nicht geladen/gestartet. Das gezielte Bootstrapping wurde **nur in einer lokalen Arbeitskopie** auf PHP-Syntax und minimalen WordPress-Hook-Aufbau geprüft. Ein blindes Einschalten verursacht eine Amazon-Regression (aktive ASIN-/Tracking-Brücke wird als vorbereitet überschrieben). Auch diese Regression wurde in der Arbeitskopie gezielt verhindert und gegen den bestehenden aktiven Amazon-Registry-Eintrag getestet. Prüfbeleg: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/FIX_DELTA_MODULE_BOOT_20261106.md`.
-
-**Release bleibt offen:** Noch kein vollständiger 6.72.306-Bytevergleich, keine neue Installations-ZIP auf GitHub und keine Liveprüfung. Ziel bleibt genau ein Installationsplugin, ein fachliches Affiliate-Büro, eine HD009-Pluginakte. Die alte Version 0.1.2 nicht wieder als Current einsetzen.
-
-
-## Nachweis zum neuen Testkandidaten 0.1.9-dev / 06.11.2026
-
-Aus der tatsächlich geöffneten und geprüften Hobby-Depot-Server-ZIP `0.1.7-dev` wurde eine vollständige **lokale** Test-ZIP `HOBBY_DEPOT_AFFILIATE_ZENTRALE_HD009_0.1.9_DEV_HARMONISIERT_TEST.zip` erstellt. SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`; 605.968 Bytes. Der Quellvergleich belegt 4 geänderte und 22 unveränderte Dateien, 23 PHP-Syntaxprüfungen PASS. Die Startlücke bei 5 vorhandenen Modulen, Amazon-Provider-Regression sowie eBay-Falsch-Erfolg bei fehlgeschlagenen Löschungen wurden gezielt repariert und mit isolierten Testfällen geprüft; 88 WordPress-Hooknamen im Offline-Smoke registriert. **Diese Version ist im Chat als Test-ZIP verfügbar, NICHT als binäre GitHub-ZIP abgelegt und NICHT auf WordPress installiert.**
-
-Verbindliche technische Nachweise und der exakte reproduzierbare Patch stehen im vorhandenen Pluginbüro unter `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_TESTKANDIDAT_0.1.9_20261106.md` und `HD009_0.1.7_TO_0.1.9.patch`.
-
-**Freigabegrenze:** Die jüngere vollständige Pferdeatelier-Referenz 6.72.306 war nicht als Quelle für einen umfassenden Dateivergleich verfügbar, daher kein behaupteter vollständiger Paritäts-/Live-PASS. Einzige fachliche Affiliate-Autorität bleibt dieses Büro, das Plugin-Büro verwaltet nur HD009. Keine weiteren Büros, keine zweite installierte Pluginlinie. Der vorhandene `CURRENT.zip`-Platz darf nicht ohne vollständige nachgewiesene Binär-ZIP als freigegeben ausgegeben werden.
+Die formal gesperrte Pferdeatelier-Freigabe bleibt unberührt; keine Änderungen am Pferdeatelier-Produktivplugin.

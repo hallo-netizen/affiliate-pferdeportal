@@ -1,6 +1,6 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
-Stand: 02.11.2026. **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
+Stand: 07.11.2026 (HD-009 aktualisiert; die übrigen Pluginstände behalten ihre zuletzt dokumentierten Prüfdaten). **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
 
 Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen Plugin-Akte unter `PLUGIN_AKTEN/<Plugin-ID>/CURRENT.md`. Die WordPress-Pluginliste ist ein älterer Betreiberstand vom 01.11.2026; aktuelle Serverdateien wurden nicht selbst ausgelesen.
 
@@ -14,7 +14,7 @@ Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen 
 | HD-005 – Glossar Core | 1.0.25 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
-| HD-009 – Affiliate-Zentrale | 0.1.7-dev aktiv gemeldet; hochgeladene Server-ZIP am 06.11. geöffnet und geprüft | **Original-Kopie im Chat vorhanden; GitHub-Original-ZIP noch nicht archiviert; alte 0.1.2-dev aus Current entfernt** |
+| HD-009 – Affiliate-Zentrale | 0.1.7-dev zuletzt auf WordPress installiert gemeldet; **0.1.10-dev als GitHub-Update-ZIP geprüft** | **Vollständige echte CURRENT.zip 607784 Bytes auf GitHub abgelegt und zurückgelesen; noch kein WordPress-Live-PASS** |
 | Footer-Umzug – Portale | 1.1.1 | **Original-Voll-ZIP im Pluginbüro gesichert und unabhängig wieder geöffnet** |
 | Hobby Depot – FAQ Frontend Fix | 1.0.2 | **Original-Voll-ZIP gesichert, unabhängig geprüft** |
 | Hobby Depot – Performance Diagnose | 1.1.0 | Aktuelle Voll-ZIP noch nicht im Büro |
@@ -27,9 +27,9 @@ Zusätzlich existieren eigenentwickelte, **nicht als aktiv belegte Kandidaten**:
 - **HD-007 / 1.2.17:** vollständiges Original-Paket `ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`, unabhängig überprüft.
 - **HD-004 / 1.0.0:** exakte aktuelle Original-ZIP, 3.736 Bytes, vollständiger Bytevergleich erfolgreich.
 - **FAQ Frontend Fix / 1.0.2:** exakte aktuelle Original-ZIP, 6.193 Bytes, vollständiger Bytevergleich erfolgreich.
-- **HD-009 / 0.1.7-dev:** Original vom Betreiber am 06.11.2026 aus WordPress übergeben; ZIP- und PHP-Syntaxprüfung bestanden. Im Chat bytegleich gesichert. GitHub-Original-ZIP muss weiterhin in das bestehende HD-009-Büro übertragen werden; kein altes 0.1.2-dev als Current. Die fachliche Statusautorität liegt ausschließlich in `../AFFILIATE/CURRENT_STATE.md`.
+- **HD-009 / 0.1.10-dev:** aus tatsächlicher 0.1.7-Serverquelle aktualisiert; 26-Dateien-ZIP auf GitHub physisch gesichert, 607784 Bytes, SHA-256 `e8613f742a0c3a9e93b3c335b82b6594e95d61c89fd70f5a33981c73871427f4`, Readback PASS. Das Original bleibt als Nachweis der bisherigen WordPress-Installation 0.1.7 erhalten. Fachliche Statusautorität ausschließlich `../AFFILIATE/CURRENT_STATE.md`.
 - **Neu gefunden:** vollständige früher ausgelieferte Originalpakete HD-001 1.14.17 (529.810 Bytes) und HD-006 Bildzentrale 2.7.8 (66.404 Bytes) lokal bytegenau geprüft. Sie sind noch nicht als neue GitHub-ZIP abgelegt, dürfen also nicht als dort gesichert bezeichnet werden.
-- **Weitere alte Downloads nachgewiesen:** HD-009 0.1.7-dev, Performance-Diagnose 1.1.0 und Design-Such-Bundle mit Glossar 1.0.25 sind im Library-Inventar vorhanden. Der Rohdatenabruf dieser drei Dateien wird derzeit nicht freigegeben; die Bytes wurden daher nicht auf GitHub übertragen.
+- **Weitere ältere Downloads nachgewiesen:** HD-009 0.1.7-dev (Original nun vom Betreiber als WordPress-ZIP verfügbar), Performance-Diagnose 1.1.0 und Design-Such-Bundle mit Glossar 1.0.25. Der frühere Fehlzugriff auf die HD-009-Library-Datei ist für die neue GitHub-Update-ZIP nicht mehr relevant.
 
 **Ausschließlich aktuelle Eigenplugin-Versionen im aktiven Pluginbüro:** Die fünf Fremdplugin-Pakete und die veraltete HD-009 0.1.2-dev-CURRENT.zip samt Manifest sind entfernt. Die Entfernung betrifft ausschließlich GitHub. Weder auf WordPress noch an installierten Fremdplugins wurde etwas geändert. Eine historische Git-Versionsspur bleibt erhalten.
 
@@ -38,11 +38,10 @@ Zusätzlich existieren eigenentwickelte, **nicht als aktiv belegte Kandidaten**:
 **Die bereits gefundenen Original-ZIPs der zuletzt bestätigten eigenen Pluginversionen aus den vorhandenen Downloads unverändert in den Campus übertragen; ausschließlich nach Originalhash-/Versions- und ZIP-Prüfung als CURRENT führen.** Fehlende Rohdaten nicht aus älteren Versionen rekonstruieren.
 
 
-## Nachtrag HD-009 / 06.11.2026
+## HD-009 – aktueller Nachtrag 07.11.2026
 
-Für **HD-009** ist die originale Version `0.1.7-dev` nun als vollständiger Betreiber-Upload im Chat verfügbar und geprüft (SHA-256 `34c0a9b42c62f71025212bfba3756e48bf4c6ab21fdd000c9894a1ce2bf12cfa`). Die GitHub-Protokollablage ist in `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md` verknüpft. **Die ZIP ist noch nicht im GitHub-Current gespeichert.** Das fachliche Affiliate-Büro unter `../AFFILIATE/` bleibt einzigartig, während das zentrale Pluginbüro die technische Paketablage führt. Nicht als Doppelbüro zählen.
+**Fertig als GitHub-Installationsdatei:** `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` Version **0.1.10-dev**; ZIP-Größe 607784 Bytes; SHA-256 `e8613f742a0c3a9e93b3c335b82b6594e95d61c89fd70f5a33981c73871427f4`; GitHub-Blob `8b6732f2b3ec88e390662021ec7e0760da8f6fba`. Das tatsächliche 0.1.7-Original aus WordPress und der jüngere Pferdeatelier-Ursachenpatch 6.72.308 wurden geprüft; passende allgemeine eBay-/Amazon-Hobby-Korrekturen sind integriert.
 
+**Echte Paketdatei:** [CURRENT.zip](ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip). [Manifest](ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md). [Prüfnachweis](PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0.1.10_HARMONISIERUNG_20261107.md).
 
-## HD-009-Harmonisierung (06.11.2026) – Offen für offizielle GitHub-ZIP
-
-Die originale installierte `0.1.7-dev` wurde aus WordPress geliefert und geprüft. Daraus wurde eine **vollständige** lokal geprüfte `0.1.9-dev`-Test-ZIP erstellt (605.968 Bytes; SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`). Der **vollständige Quellpatch** und sämtliche Testbelege sind unter `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/` im Campus gesichert. Die ZIP selbst wurde noch nicht als Github-Blob hochgeladen; **deshalb kein `CURRENT.zip` und keine finale GitHub-Releasefreigabe vortäuschen**. Das eine fachliche Affiliate-Büro bleibt `../AFFILIATE/`; HD009 ist nur die zugehörige technische Pluginakte.
+**Bürovertrag:** Nur ein fachliches Affiliate-Büro `../AFFILIATE/`, genau ein aktuelles HD009-Plugin im bestehenden technischen Pluginbüro. WordPress-Upgrade und echte Provider-Liveabnahme wurden noch nicht durchgeführt. Alte 0.1.2/0.1.9-Protokolle sind Historie, keine zweite Current-ZIP.
