@@ -1,0 +1,65 @@
+name: HD009 regression root-cause audit
+on:
+  push:
+    branches:
+      - 'hobbyroom/hd009-020-live-regression-investigate-20261107'
+    paths:
+      - '.github/workflows/hd009-regression-investigate.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare 0.1.19 and 0.1.20 exact ZIP files and public live HTML
+        shell: bash
+        env:
+          OLD_COMMIT: cd4f954815d614c10ec7163bee79842a815c6887
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from io import BytesIO
+          import subprocess, hashlib, os, re, urllib.request, urllib.error, difflib
+          zpath='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          old=subprocess.check_output(['git','show',os.environ['OLD_COMMIT']+':'+zpath])
+          now=open(zpath,'rb').read()
+          print('OLD_HASH',hashlib.sha256(old).hexdigest(),'NEW_HASH',hashlib.sha256(now).hexdigest())
+          with ZipFile(BytesIO(old)) as A, ZipFile(BytesIO(now)) as B:
+              print('OLD_CRC',A.testzip(),'NEW_CRC',B.testzip())
+              print('ZIP_MEMBERS',len(A.namelist()),len(B.namelist()))
+              names=sorted(set(A.namelist()) | set(B.namelist()))
+              changed=[n for n in names if n not in A.namelist() or n not in B.namelist() or A.read(n)!=B.read(n)]
+              print('CHANGED_FILES',changed)
+              for n in changed:
+                  if not n.endswith(('.php','.css','.js')):continue
+                  l1=A.read(n).decode('utf-8',errors='replace').splitlines()
+                  l2=B.read(n).decode('utf-8',errors='replace').splitlines()
+                  diff=list(difflib.unified_diff(l1,l2,fromfile='old/'+n,tofile='new/'+n))
+                  print('DIFF_START',n,'\n'.join(diff)[:10500])
+              main=B.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode('utf-8',errors='replace')
+              start=B.read('affiliate-portal-router/includes/class-hdar-amazon-start.php').decode('utf-8',errors='replace')
+              for label,s in [('MAIN',main),('AMAZON_START',start)]:
+                  lines=s.splitlines()
+                  for pat in [r'function hdar_ci_register_footer',r'function hdar_ci_amazon_banner',r'function render_affiliate_slot_for_context',r'function is_enabled',r'function hooks',r"VERSION\s*="]:
+                      inds=[i for i,l in enumerate(lines) if re.search(pat,l,re.I)]
+                      for i in inds[:2]:
+                          print('CODE_CONTEXT',label,pat,'LINE',i+1)
+                          for n in range(max(0,i-2),min(len(lines),i+40)):
+                              print(f'{n+1:05}',lines[n][:220])
+              for n in ['affiliate-portal-router/hobby-depot-affiliate-router.php','affiliate-portal-router/includes/class-hdar-amazon-start.php']:
+                  s=B.read(n).decode()
+                  print('ACTIVATION_PATTERN',n,[(w,len(re.findall(w,s,re.I))) for w in ['add_action','register_activation_hook','is_enabled','wp_footer','0.1.19','0.1.20']])
+          for url in ['https://hobby-depot.de/hobbyregister/alabasterschnitzen/','https://hobby-depot.de/hobbyregister/airbrush-modellbau/','https://hobby-depot.de/gestalten/malen-zeichnen/']:
+              try:
+                  req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/128.0 Safari/537.36'})
+                  with urllib.request.urlopen(req,timeout=15) as r:
+                      b=r.read(2000000)
+                      s=b.decode('utf-8',errors='replace')
+                      found={x:s.lower().count(x.lower()) for x in ['hdar-ci-amazon','hdar-ci-register-side','hdar-ci-register-inline','hdar-amazon-start.css','hobby-depot-affiliate-router','hdar','hdr-profile-grid','kosten und ausrüstung','wp-footer']}
+                      matches=re.findall(r'<(?:link|script)[^>]{0,500}?(?:hdar|affiliate)[^>]{0,700}>',s,re.I)
+                      print('LIVE',url,'status',r.status,'bytes',len(b),'found',found,'assets',matches[:8])
+              except Exception as e:
+                  print('LIVE_ERROR',url,type(e).__name__,str(e)[:150])
+          PY
