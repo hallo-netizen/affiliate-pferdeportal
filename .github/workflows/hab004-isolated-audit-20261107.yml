@@ -1,4 +1,4 @@
-name: HAB004 isolated source audit
+name: HAB004 isolated RC11 build and test
 on:
   push:
     branches:
@@ -6,36 +6,10 @@ on:
 permissions:
   contents: read
 jobs:
-  audit:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect original RC10 regression harness and HD009 renderer
+      - name: Build isolated candidate and run end-to-end tests
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          from zipfile import ZipFile
-          import difflib,hashlib
-          r=Path("protocol/PROJECT_MEMORY/PROJEKTE")
-          p={
-          "HAB":r/"EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip",
-          "HD":r/"HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip",
-          "TEST":r/"EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC10/VOLLSTAENDIGE_SIMULATION_TESTBELEGE.zip"}
-          with ZipFile(p["TEST"]) as z:
-           for q in ["full_plugin_harness_rc9.php","full_workflow_rc10.php","test_hab_amazon.php"]:
-            n=next(n for n in z.namelist() if n.endswith(q))
-            lines=z.read(n).decode("utf8").splitlines()
-            print("### HARNESS",n,len(lines))
-            for i,l in enumerate(lines[:160]):print(f"{i+1:4d} {l}")
-          with ZipFile(p["HD"]) as z:
-           names=z.namelist()
-           print("### HOBBY METHODS")
-           for n in names:
-            if n.endswith(".php"):
-             txt=z.read(n).decode("utf8","replace")
-             if "render_affiliate_slot_for_context" in txt:
-              print("Source",n, len(txt),"render keyword occurrences",txt.count("render_affiliate_slot_for_context"))
-             if "hdar_ci_amazon_banner" in txt:
-              print("Amazon banner source",n, len(txt))
-          
-          PY
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/BUILD_RC11.py --output /tmp/hab004_rc11_candidate.zip
