@@ -2,14 +2,28 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-**Stand 07.11.2026 · Affiliate-Zentrale HD009 0.1.18-dev.**
+**Stand 07.11.2026 · Affiliate-Zentrale HD009 0.1.19-dev.**
 
 ## Einziger aktueller Download
 
 - `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`
-- **1.065.228 Bytes · SHA-256 `130681bc1b695cbb95b08d8d9ac2d575e7142027754ffd1bd051065e462bae7f`**.
+- **1.066.241 Bytes · SHA-256 `53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579`**.
 - WordPress-Originalordner `affiliate-portal-router/` bleibt erhalten. **Keine parallele Plugininstallation.**
 - Details und Nachweise im `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md`.
+
+## Hobbyregister – verbindliche neue Anzeigenplätze (0.1.19)
+
+Die HD007-Hobbyregister-Inhalte und das HD003-Design bleiben unverändert. Nur das **vorhandene HD009-Affiliate-Plugin** steuert die Position der beiden Banner auf den Register-Einzelprofilen:
+
+- **Desktop:** `Auf einen Blick` → quadratischer Amazon-Partnerbanner → `Hobbygruppe` → übrige Seitenleistenblöcke.
+- **Zusätzlich im Haupttext:** ein responsiver Querbanner **unmittelbar nach `Kosten und Ausrüstung`**.
+- **Mobil:** zuerst der Hauptartikel (mit einer Inlineanzeige nach `Kosten und Ausrüstung`), **anschließend** die quadratische Seitenleistenanzeige **als erster Block vor der Hobbygruppe**. Nicht direkt ganz oben.
+- Die bereits in 0.1.18 genehmigte **Variante 4** bleibt visuell unverändert.
+- Derselbe native Pferdeatelier-/Hobby-Partner-, Kategorie- und Werbemittelweg bleibt zuständig. Keine zusätzliche Quelle, neuer Import oder neues Plugin.
+
+**Nachweis:** Original-Plugins HD003+HD007+HD009 in realem WordPress mit MariaDB und Browser getestet. Öffentliche Test-Registerseite HTTP 200, Desktop- und Mobil-Anzeigenordnung sowie vollständige Gestaltung, eine Sidebar- und eine Inline-Anzeige pro Profil **PASS**. Einzelwerte und Testbericht in der HD009-`EVIDENCE`.
+
+**Grenze:** Das WordPress-Testsystem ist isoliert; 0.1.19 ist noch nicht auf der echten Hobby-Depot-Webseite installiert oder abgenommen.
 
 ## Verbindlicher Amazon-Eigenbanner nach Auswahl Variante 4
 
