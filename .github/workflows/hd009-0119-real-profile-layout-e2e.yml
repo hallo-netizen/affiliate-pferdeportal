@@ -1,4 +1,4 @@
-name: HD009 0.1.19 - exact stylesheet asset URL diagnostic
+name: HD009 0.1.19 - real local siteurl normalized and CSS layout E2E
 on:
   push:
     branches:
