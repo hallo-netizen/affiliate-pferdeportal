@@ -15,7 +15,7 @@ jobs:
           set -euo pipefail
           git fetch --depth=1 origin affiliate-release-current:refs/remotes/origin/affiliate-release-current
           mkdir -p audit-source/pferde audit-source/hobby audit-source/hab-design audit-source/hab-affiliate
-          git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/affiliate-portal-router.php > audit-source/pferde/affiliate-portal-router.php
+          git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php > audit-source/pferde/affiliate-portal-router.php
           git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.css > audit-source/pferde/frontend.css
           git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.js > audit-source/pferde/frontend.js
           unzip -oq protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip -d audit-source/hobby
