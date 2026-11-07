@@ -25,8 +25,10 @@ replacement="""    public static function apply(array $candidate,array $inventor
         $raw=PSTE_Editorializer::sourceQuery($candidate);
         $receipt=($poolKey!==''&&class_exists('PSTE_Mini_Workflow'))
             ?PSTE_Mini_Workflow::singleOwnerSeoFor($poolKey,$raw):[];
-        if($receipt){
-            $box=(string)$receipt['box'];
+        $miniAwaiting=$poolKey!==''&&class_exists('PSTE_Mini_Workflow')
+            &&PSTE_Mini_Workflow::isMiniTopicAwaitingSeo($poolKey);
+        if($receipt||$miniAwaiting){
+            $box=(string)($receipt['box']??'KLAERUNG');
             $sourceTitle=(string)($receipt['approved_title']??'');
             $candidateTitle=(string)($candidate['production_title']??'');
             if($box==='FREI'&&($sourceTitle===''||!hash_equals($sourceTitle,$candidateTitle)))
