@@ -8,7 +8,6 @@ hd003=root/"PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip"
 main="affiliate-portal-router/hobby-depot-affiliate-router.php"
 css="affiliate-portal-router/assets/hdar-amazon-start.css"
 pairs={
-"affiliate-portal-router/assets/hdar-ci-logo-original.png":"affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150790/logo-original-ohne-unterzeile.png",
 "affiliate-portal-router/assets/hdar-ci-malen-zeichnen.webp":"affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/malen-zeichnen.webp",
 "affiliate-portal-router/assets/hdar-ci-modellbau.webp":"affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/modellbau.webp"}
 with zipfile.ZipFile(path) as z,zipfile.ZipFile(hd003) as design:
