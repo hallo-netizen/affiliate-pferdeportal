@@ -1,4 +1,4 @@
-name: HD009 real WordPress and MariaDB E2E diagnostic
+name: HD009 real WordPress and MariaDB E2E diagnostic - source hook tracing
 on:
   push:
     branches:
