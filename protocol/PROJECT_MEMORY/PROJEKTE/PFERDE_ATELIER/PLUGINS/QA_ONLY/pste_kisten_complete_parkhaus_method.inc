@@ -141,6 +141,39 @@
             // explicitly be NOT_AVAILABLE, as PSERC's own bound dependency contract allows.
             if(empty($pserc['complete']))throw new RuntimeException('PSERC_PLAN_NOT_PROVEN_COMPLETE');
 
+            // The PPM679 runtime Redaktionsplan is ALREADY in WordPress. Read
+            // only its occupied canonical IDs, never write or create a second plan.
+            // PSERC_Slot_Allocator::occupiedCanonicalIds() uses this SAME option.
+            $runtimeOriginal=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+            if($runtimeOriginal!==null&&$runtimeOriginal!==false
+                &&(!is_array($runtimeOriginal)||!is_array($runtimeOriginal['items']??null)))
+                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_INVALID');
+            $runtimeItems=(array)($runtimeOriginal['items']??[]);
+            foreach($runtimeItems as $itemId=>$item){
+                if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
+                $canonical=trim((string)($item['canonical_article_id']??$itemId));
+                if($canonical==='')throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_SLOT_ID_MISSING');
+                $result['items'][]=['source'=>'PPM679_EXISTING_EDITORIAL_RUNTIME',
+                    'canonical_article_id'=>$canonical,
+                    'plan_slot'=>(string)($item['plan_slot_sha256']??$item['plan_slot']??''),
+                    'post_id'=>(int)($item['post_id']??0),
+                    'status'=>(string)($item['status']??'PLANNED'),
+                    'category'=>(string)($item['category_slug']??''),
+                    'article_type'=>(string)($item['article_type']??''),
+                    'target_keyword'=>(string)($item['target_keyword']??''),
+                    'title'=>is_string($item['title']??null)?$item['title']:''];
+            }
+            $runtimeAfter=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+            $beforeRuntime=wp_json_encode($runtimeOriginal,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            $afterRuntime=wp_json_encode($runtimeAfter,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            if(!is_string($beforeRuntime)||!is_string($afterRuntime)
+                ||!hash_equals(hash('sha256',$beforeRuntime),hash('sha256',$afterRuntime)))
+                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_CHANGED_DURING_SCAN');
+            $result['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']=[
+                'complete'=>true,'status'=>$runtimeOriginal===null||$runtimeOriginal===false?'NOT_PRESENT':'PRESENT',
+                'item_count'=>count($runtimeItems),
+                'sha256'=>hash('sha256',$beforeRuntime)];
+
             // Earlier externally approved slots live in the existing MINI option.
             // Show them to the same owner on later batches; no shadow database.
             $mini=self::loadState();$reservations=0;
