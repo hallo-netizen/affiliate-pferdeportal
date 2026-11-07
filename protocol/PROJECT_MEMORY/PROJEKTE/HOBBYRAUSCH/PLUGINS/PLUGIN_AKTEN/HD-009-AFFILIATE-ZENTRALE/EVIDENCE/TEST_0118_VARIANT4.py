@@ -45,7 +45,7 @@ c=entries[css].decode('utf8')
 assert "aspect-ratio:4.2/1" in c and "aspect-ratio:1/1" in c
 assert ".hd-next-partner-banner:has(.hdar-ci-amazon-slot)" in c
 assert "object-fit:contain" in c and "overflow:visible" in c
-assert "Bei Amazon entdecken" in s
+assert "Erhältlich bei Amazon" in s
 assert "Hier könnte Ihre Werbung stehen" not in s
 start=s.index("    private function hdar_ci_amazon_banner(")
 end=s.index("    /** HD007 owns",start)
