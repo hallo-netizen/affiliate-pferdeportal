@@ -1,0 +1,31 @@
+name: HD009 exact shortcode and index contexts
+on:
+  push:
+    branches: ['hobbyroom/hd009-coverage-variant-20261107']
+    paths: ['.github/workflows/hd009-exact-shortcode.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact native shortcode, hook and page context code
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            for k in ['shortcode_affiliate_slot','register_shortcodes','get_content_context','auto_inject_affiliate_slots','hdar_ci_amazon_banner','render_affiliate_slot_for_context']:
+              m=re.search('(?:public|private|protected)?\\s*function\\s+'+k+'\\s*\\(',s)
+              if m:
+                n={'shortcode_affiliate_slot':4200,'register_shortcodes':1500,'get_content_context':12600,'auto_inject_affiliate_slots':3400,'hdar_ci_amazon_banner':7800,'render_affiliate_slot_for_context':11000}[k]
+                print('EXACT',k,s[m.start():m.start()+n],'\nEND_EXACT')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for k in ['integrated_affiliate_components','render_start','render_hub1','render_hub2','render_category_level_body_v150687']:
+              m=re.search('(?:public|private|protected)?\\s*static function\\s+'+k+'\\s*\\(',s)
+              if m:print('HD003_EXACT',k,s[m.start():m.start()+4400],'\nEND_HD003')
+          PY
