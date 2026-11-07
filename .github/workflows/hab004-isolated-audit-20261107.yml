@@ -1,15 +1,30 @@
-name: HAB004 isolated RC11 build and test
+name: HAB004 isolated RC11 verified promotion
 on:
   push:
     branches:
       - hab-004-existing-slot-repair-20261107
 permissions:
-  contents: read
+  contents: write
 jobs:
-  test:
+  test-and-promote:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build isolated candidate and run end-to-end tests
+      - name: Build isolated candidate and test entire original pipeline
         run: |
           python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/BUILD_RC11.py --output /tmp/hab004_rc11_candidate.zip
+      - name: Promote only proven Hab Affiliate ZIP and align plugin office
+        run: |
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/RELEASE_RC11.py /tmp/hab004_rc11_candidate.zip
+          git status --short
+          git config user.name "hab-004-build-automation"
+          git config user.email "hab-004-build-automation@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/CURRENT_STATE.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/CURRENT_STATE.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/PRUEFUNG_BESTEHENDE_AUSGABE_20261107.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/PRUEFBERICHT.md
+          git commit -m "HAB004 RC11: verified existing frontend product slots; release single current zip"
+          git push origin HEAD:refs/heads/hab-004-existing-slot-repair-20261107
