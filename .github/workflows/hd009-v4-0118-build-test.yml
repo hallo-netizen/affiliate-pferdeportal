@@ -1,0 +1,25 @@
+name: HD009 variant 4 build and exact official Amazon DE logo QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0118-variant4-amazon-ci-20261107
+    paths:
+      - .github/workflows/hd009-v4-0118-build-test.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build one complete existing HD009 ZIP with legal original Amazon German brand asset
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/BUILD_0118_VARIANT4.py
+      - name: Run true PHP CI and ZIP positive and negative regression
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/TEST_0118_VARIANT4.py
+      - name: Commit the tested candidate into original office on work branch
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0118_CI_REPORT.txt
+          git commit -m "HD009 0.1.18: approved German Amazon logo, variant4 photo, responsive original banner slot"
+          git push
