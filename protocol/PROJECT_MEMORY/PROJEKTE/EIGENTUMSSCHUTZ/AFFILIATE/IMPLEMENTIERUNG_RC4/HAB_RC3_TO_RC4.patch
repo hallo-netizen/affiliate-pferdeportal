@@ -1,0 +1,144 @@
+--- a/affiliate-portal-router.php
++++ b/affiliate-portal-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Hab & Bewahr – Affiliate-Zentrale
+  * Description: Zentrale Affiliate-Verwaltung für Hab & Bewahr mit unabhängiger Zielquelle und bestehenden Provider-Funktionen.
+- * Version: 0.1.0-rc3
++ * Version: 0.1.1-rc4
+  * Author: Hab & Bewahr
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -34,6 +34,7 @@
+ require_once __DIR__ . '/includes/trait-ppar-ebay-account-deletion.php';
+ require_once __DIR__ . '/includes/trait-ppar-awin-programme-gate.php';
+ require_once __DIR__ . '/includes/trait-ppar-idealo.php';
++require_once __DIR__ . '/includes/trait-ppar-hb-amazon.php';
+ require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
+ require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
+ 
+@@ -171,6 +172,7 @@
+     use PPAR_Ebay_Account_Deletion_Trait;
+     use PPAR_Awin_Programme_Gate_Trait;
+     use PPAR_Idealo_Trait;
++    use PPAR_HB_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+     const VERSION = '6.72.211';
+@@ -326,6 +328,7 @@
+     private function __construct() {
+         $is_ajax_request = (function_exists('wp_doing_ajax') && wp_doing_ajax()) || (defined('DOING_AJAX') && DOING_AJAX);
+         $this->idealo_register_hooks();
++        $this->hb_amazon_register_hooks();
+         $this->digistore24_register_hooks();
+         $this->tariff_tools_register_hooks();
+         add_action('init', array($this, 'register_campaign_post_type'), 5);
+--- a/includes/trait-ppar-idealo.php
++++ b/includes/trait-ppar-idealo.php
+@@ -59,8 +59,8 @@
+         return array(
+             'enabled' => false,
+             'api_key' => '',
+-            'adspace_id' => '568313',
+-            'feed_id' => '2901',
++            'adspace_id' => '',
++            'feed_id' => '',
+             'feed_url' => '',
+             'output_mode' => 'ebay_only',
+             'link_strategy' => 'hybrid',
+@@ -104,6 +104,11 @@
+         $stored = get_option(self::OPTION_NETWORK_IDEALO, array());
+         $stored = is_array($stored) ? $stored : array();
+         $settings = array_merge($this->idealo_settings_defaults(), $stored);
++        // Old neutral-stem defaults belonged to another portal; never authorize them for Hab.
++        if ((string)($settings['adspace_id'] ?? '') === '568313' || (string)($settings['feed_id'] ?? '') === '2901') {
++            $settings['enabled']=false;
++            $settings['auto_refresh']=false;
++        }
+         if (defined('PPAR_IDEALO_API_KEY') && trim((string) PPAR_IDEALO_API_KEY) !== '') {
+             $settings['api_key'] = trim((string) PPAR_IDEALO_API_KEY);
+         }
+@@ -433,7 +438,7 @@
+             if (!empty($raw['remove_api_key'])) { $settings['api_key'] = ''; }
+         }
+         $settings['adspace_id'] = preg_replace('/\D+/', '', (string)($raw['adspace_id'] ?? $old['adspace_id'] ?? ''));
+-        $settings['feed_id'] = '2901';
++        $settings['feed_id'] = preg_replace('/\D+/', '', (string)($raw['feed_id'] ?? $old['feed_id'] ?? ''));
+         $new_feed_url = trim((string)($raw['feed_url'] ?? ''));
+         if ($new_feed_url !== '') { $settings['feed_url'] = esc_url_raw($new_feed_url); }
+         if (!empty($raw['remove_feed_url'])) { $settings['feed_url'] = ''; }
+@@ -534,7 +539,7 @@
+         return array_values($out);
+     }
+ 
+-    private function idealo_import_feed_file($path, $source_label = 'iPN Standard Datafeed 2901') {
++    private function idealo_import_feed_file($path, $source_label = 'Eigener Hab & Bewahr iPN Datafeed') {
+         if (!file_exists($path)) { return new WP_Error('idealo_feed_missing', 'Feed-Datei fehlt.'); }
+         @set_time_limit(0); if (function_exists('ignore_user_abort')) { @ignore_user_abort(true); }
+         $stream=$this->idealo_open_feed_stream($path); if (is_wp_error($stream)) { return $stream; }
+@@ -752,13 +757,11 @@
+     public function idealo_maybe_upgrade_materialization() {
+         if ((string)get_option(self::IDEALO_SCHEMA_OPTION,'0')==='5') { return; }
+         $s=$this->idealo_settings();
+-        if ((string)($s['feed_id']??'')==='2747' || trim((string)($s['feed_id']??''))==='') { $s['feed_id']='2901'; }
+-        if (strpos((string)($s['feed_url']??''),'feedId=2747')!==false || strpos((string)($s['feed_url']??''),'feedid=2747')!==false) { $s['feed_url']=''; }
++        // Hab & Bewahr has no preapproved idealo feed. Preserve only its own configured ID.
++        // Do not rewrite a separate portal's account metadata; require own fresh authorization.
+         $s['link_strategy']=$this->idealo_sanitize_link_strategy($s['link_strategy']??'hybrid');
+         update_option(self::OPTION_NETWORK_IDEALO,$s,false);
+-        // Re-materialize the existing last-good idealo snapshot once so an upgrade
+-        // to the hybrid strategy does not create an avoidable visibility gap while
+-        // the first full 2901 refresh is still pending.
++        // Retain local materialization state without importing a foreign feed on upgrade.
+         $mat=$this->idealo_materialize_campaigns();
+         update_option(self::IDEALO_SCHEMA_OPTION,'5',false); $this->idealo_sync_campaign_activation();
+     }
+@@ -1124,7 +1127,7 @@
+ 
+     /**
+      * V6.61.4: iPN image_url is a tracking wrapper. Product cards must load the
+-     * real HTTPS image target, not the tracking endpoint. Current feed 2901 wraps
++     * real HTTPS image target, not the tracking endpoint. The configured iPN feed wraps
+      * the real cdn.idealo.com path in trg (sometimes through gfx.productsup.io).
+      */
+     private function idealo_direct_image_url($url) {
+@@ -1206,7 +1209,9 @@
+         $current_url=(string)($banner['url'] ?? '');
+         if ($current_url==='') { $current_url=$this->multiprovider_runtime_tracking_url((string)($campaign['url']??''),(string)($campaign['network']??'')); }
+         $base=array('network'=>sanitize_key((string)($campaign['network']??'')),'url'=>$current_url,'label'=>$this->multiprovider_offer_label($campaign['network']??''));
+-        if (!in_array($this->idealo_output_mode(), array('combined','automatic'), true)) { return $current_url!==''?array($base):array(); }
++        if (!in_array($this->idealo_output_mode(), array('combined','automatic'), true)) {
++            return $this->hb_amazon_add_offer($current_url!==''?array($base):array(), $campaign, $context, $slot_type);
++        }
+         $base_gtins=$this->multiprovider_campaign_gtins($campaign);
+         if (!$base_gtins) { return $current_url!==''?array($base):array(); }
+         $offers=array();
+@@ -1228,7 +1233,7 @@
+         }
+         if (!$offers && $current_url!=='') { $offers[$base['network']]=$base; }
+         $order=array('ebay','idealo','amazon'); uksort($offers,static function($a,$b)use($order){$ia=array_search($a,$order,true);$ib=array_search($b,$order,true);$ia=$ia===false?99:$ia;$ib=$ib===false?99:$ib;return $ia<=>$ib;});
+-        return array_values($offers);
++        return $this->hb_amazon_add_offer(array_values($offers), $campaign, $context, $slot_type);
+     }
+ 
+     public function multiprovider_render_offer_buttons($offers,$surface='article') {
+@@ -1271,8 +1276,8 @@
+             <p><label><input type="checkbox" name="ppar_provider[idealo][enabled]" value="1" <?php checked(!empty($s['enabled'])); ?>> idealo-Verbindung verwenden</label></p>
+             <p><label>iPN API-Key <span class="ppar-saved"><?php echo $external?'über wp-config.php':(trim((string)$s['api_key'])!==''?'gespeichert':'nicht gespeichert'); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[idealo][api_key]" value="" placeholder="leer lassen zum Beibehalten" <?php disabled($external); ?>></label></p>
+             <p><label>Adspace-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][adspace_id]" value="<?php echo esc_attr((string)$s['adspace_id']); ?>"></label></p>
+-            <p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>
+-            <p><label>Offizielle iPN-Download-URL für Feed 2901 <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
++            <p><label>Eigene Hab-&amp;-Bewahr-Feed-ID<br><input type="text" inputmode="numeric" name="ppar_provider[idealo][feed_id]" value="<?php echo esc_attr((string)$s['feed_id']); ?>"></label></p>
++            <p><label>Offizielle iPN-Download-URL für den eigenen Feed <span class="ppar-saved"><?php echo trim((string)$s['feed_url'])!==''?'gespeichert':'noch nicht gespeichert'; ?></span><br><input class="large-text" type="password" autocomplete="new-password" name="ppar_provider[idealo][feed_url]" value="" placeholder="leer lassen zum Beibehalten"></label></p><?php if (trim((string)$s['feed_url'])!==''): ?><details><summary>Feed-URL entfernen</summary><p><label><input type="checkbox" name="ppar_provider[idealo][remove_feed_url]" value="1"> gespeicherte Feed-URL entfernen</label></p></details><?php endif; ?>
+             <p><label>Portalweite Affiliate-Ausgabe<br><select name="ppar_provider[idealo][output_mode]"><option value="ebay_only" <?php selected($s['output_mode'],'ebay_only'); ?>>Nur bestehende eBay-/Bestandslogik</option><option value="idealo_only" <?php selected($s['output_mode'],'idealo_only'); ?>>Nur idealo-Ausgabe</option><option value="separate" <?php selected($s['output_mode'],'separate'); ?>>Provider getrennt als Karten</option><option value="combined" <?php selected($s['output_mode'],'combined'); ?>>Gemeinsame Karte bei exakter GTIN, sonst getrennt</option><option value="automatic" <?php selected($s['output_mode'],'automatic'); ?>>Automatisch: gemeinsam bei exakter GTIN, sonst getrennt</option></select></label></p>
+             <p><label>idealo-Linkstrategie<br><select name="ppar_provider[idealo][link_strategy]"><option value="hybrid" <?php selected($s['link_strategy'],'hybrid'); ?>>Hybrid (empfohlen): Preisvergleich allein, konkrete idealo-Angebote nur als GTIN-Zusatzbutton</option><option value="products" <?php selected($s['link_strategy'],'products'); ?>>Konkrete idealo-Produkte als eigene Karten</option><option value="comparison" <?php selected($s['link_strategy'],'comparison'); ?>>Nur idealo-Preisvergleichs-/Suchlinks</option></select></label></p>
+             <p><label><input type="checkbox" name="ppar_provider[idealo][auto_refresh]" value="1" <?php checked(!empty($s['auto_refresh'])); ?>> Feed automatisch alle zwölf Stunden auf Änderungen prüfen (nur bei gespeicherter Download-URL)</label></p>
+@@ -1289,7 +1294,7 @@
+             <section class="postbox" style="padding:18px"><h2>Partner-API</h2><p><strong>Letzte Prüfung:</strong> <?php echo !empty($s['api_last_checked_at'])?esc_html(wp_date('d.m.Y H:i',(int)$s['api_last_checked_at'])):'noch nicht geprüft'; ?><br><strong>Feedprodukte:</strong> <?php echo absint($s['api_last_product_count']??0); ?><br><strong>Feed-Hash:</strong> <?php echo esc_html((string)($s['api_last_feed_hash']??'')); ?></p><p><?php echo esc_html((string)($s['api_last_message']??'')); ?></p></section>
+             <section class="postbox" style="padding:18px"><h2>Ausgabe</h2><p><strong>Modus:</strong> <?php echo esc_html($this->idealo_output_mode()); ?><br><strong>Linkstrategie:</strong> <?php echo esc_html($this->idealo_link_strategy()); ?><br><strong>idealo aktiv:</strong> <?php echo $this->idealo_campaigns_should_be_active()?'ja':'nein'; ?><br><strong>Auto-Refresh:</strong> <?php echo (!empty($s['auto_refresh'])&&trim((string)$s['feed_url'])!=='')?'bereit':'wartet auf Feed-URL'; ?><br><strong>Refresh-Status:</strong> <?php echo esc_html((string)($s['refresh_state']??'idle')); ?><?php if (!empty($s['refresh_last_message'])): ?><br><?php echo esc_html((string)$s['refresh_last_message']); ?><?php endif; ?></p></section>
+         </div>
+-        <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Feed-Test / Fallback</h2><p>Eine echte <code>.csv.gz</code>-Datei kann für Diagnosezwecke erneut eingelesen werden. Produktiv ist Feed 2901 für den serverseitigen Stream-Abruf vorgesehen. Der Import ersetzt nicht den eBay-Workflow und veröffentlicht nur exakt gemappte idealo-Produkte, wenn idealo und ein entsprechender Ausgabemodus ausdrücklich aktiviert sind.</p><form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_idealo_import_file"><?php wp_nonce_field('ppar_idealo_import_file','ppar_idealo_nonce'); ?><input type="file" name="idealo_feed" accept=".csv,.gz,.csv.gz" required> <?php submit_button('Feed prüfen und staged aktualisieren','secondary','',false); ?></form></section><?php
++        <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Feed-Test / Fallback</h2><p>Eine echte <code>.csv.gz</code>-Datei kann für Diagnosezwecke erneut eingelesen werden. Produktiv ist ausschließlich der eigene bestätigte Hab-&amp;-Bewahr-Feed zulässig. Der Import ersetzt nicht den eBay-Workflow und veröffentlicht nur exakt gemappte idealo-Produkte, wenn idealo und ein entsprechender Ausgabemodus ausdrücklich aktiviert sind.</p><form method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_idealo_import_file"><?php wp_nonce_field('ppar_idealo_import_file','ppar_idealo_nonce'); ?><input type="file" name="idealo_feed" accept=".csv,.gz,.csv.gz" required> <?php submit_button('Feed prüfen und staged aktualisieren','secondary','',false); ?></form></section><?php
+     }
+ 
+     public function idealo_render_sync_card($provider,$definition,$contract_version) {
