@@ -37,3 +37,20 @@ jobs:
                     k=src.find(pat)
                     if k>=0:print('IMG_FUNC',pat,src[k:k+2600])
           PY
+
+      - name: Read exact register image resolution and fallback logic
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(root/'HD-007-HOBBYREGISTER-CORE'/'CURRENT.zip') as z:
+            for name in ['hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php','hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php']:
+              s=z.read(name).decode()
+              for match in ['function image_entry(', 'function profile_picture(', 'function hero(', 'function render_profile(', 'function image_url(', 'register_profile_image','image_entry(']:
+                positions=[m.start() for m in re.finditer(re.escape(match),s)]
+                if positions:
+                  i=positions[0]
+                  print('METHOD',name,match,'count',len(positions),s[i:i+5500])
+          PY
