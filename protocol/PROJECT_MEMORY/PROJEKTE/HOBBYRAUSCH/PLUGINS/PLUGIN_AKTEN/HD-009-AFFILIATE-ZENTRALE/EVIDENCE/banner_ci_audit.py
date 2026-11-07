@@ -33,3 +33,14 @@ for plugin,keys in targets.items():
 out=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/BANNER_CI_EXISTING_CODE_AUDIT.txt")
 out.write_text("\n".join(report),encoding="utf8")
 print("AUDIT",len(report),"lines",out,hashlib.sha256(out.read_bytes()).hexdigest())
+
+# Exact HD007 image-entry return shape and route layout; no assumptions.
+regzip=base/"HD-007-HOBBYREGISTER-CORE"/"CURRENT.zip"
+with zipfile.ZipFile(regzip) as z:
+    for file in ("hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php",
+                 "hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php"):
+        c=z.read(file).decode("utf8","replace")
+        for token in ("function image_entry(", "function route(", "function render_profile("):
+            i=c.find(token)
+            if i>=0:
+                out.write_text(out.read_text(encoding="utf8")+"\n\nHD007 EXCERPT "+file+" "+token+"\n"+c[max(0,i-130):i+2450],encoding="utf8")
