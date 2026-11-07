@@ -1,6 +1,6 @@
 Version: 0.1.17-dev
-ZIP bytes: 1175781
-ZIP SHA-256: be07f3c9737a4bf811f0491f884404c265e3c9a43d73046039d19086a70c0b34
+ZIP bytes: 1175835
+ZIP SHA-256: 0fe7363f34c4a24642253da0dc036d1874776d95adb9cfdcf575ff650f50c5d7
 PHP syntax: 24/24 PASS
 ZIP CRC: PASS
 Three original HD003 assets copied unchanged (exact logo, Malen, Modellbau)
@@ -11,3 +11,4 @@ PHP behavior tests run independently in follow-up workflow step.
 WordPress frontend live: NOT YET TESTED.
 
 HD007 readback: canonical_name and exact original image source/path used; known FAIL/OPEN image assignments gated out. Core registry plugin remains unchanged.
+HD007 final profile render: debug/no-output HTML comments are treated as empty, real native provider HTML remains first.
