@@ -1,0 +1,28 @@
+name: HD009 Variant4 complete PHP and Chromium final QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0118-variant4-amazon-ci-20261107
+    paths:
+      - .github/workflows/hd009-v4-0118-final-qa.yml
+permissions:
+  contents: write
+jobs:
+  full-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install --quiet Pillow
+      - name: Keep legal Amazon German asset minimum display size
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/FIX_0118_OFFICIAL_BADGE_MIN_SIZE.py
+      - name: Native PHP banner tests and full ZIP CRC checks
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/TEST_0118_VARIANT4.py
+      - name: Test old 76px HD003 clipping at four actual browser sizes
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/PREVIEW_0118_ACTUAL_SLOT.py
+      - name: Commit verified complete existing single-plugin ZIP
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0118_CI_REPORT.txt protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0118_VARIANT4_*.jpg
+          git commit -m "HD009 0.1.18 final: variant4, Amazon-approved DE logo, responsive native slots and browser QA"
+          git push
