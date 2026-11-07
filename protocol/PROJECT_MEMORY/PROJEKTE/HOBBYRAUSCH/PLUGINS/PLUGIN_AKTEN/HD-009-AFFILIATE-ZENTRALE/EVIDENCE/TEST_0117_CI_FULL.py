@@ -20,6 +20,13 @@ s=entries[main].decode("utf-8")
 assert s.count("Version: 0.1.17-dev")==1
 assert "hdar_approved_rental_banner_fallback" not in s
 assert "hdar_ci_register_footer" in s
+# Original HD007 uses canonical_name (never 'name') and image_entry source/path.
+assert "($register_row['canonical_name'] ?? '')" in s, "register banner topic must use original canonical_name"
+assert "($item['canonical_name'] ?? '')" in s, "register router must match original canonical_name"
+assert "$name=(string)$row['canonical_name'];" in s
+assert "($entry['path'] ?? '')" in s and "($entry['source'] ?? '')" in s
+assert "hd-hobbyregister-core/assets/" in s and "affiliate-portal-template-kit/assets/" in s
+assert "strpos($production, 'OPEN') !== 0" in s, "unapproved HD007 image must not become advertising"
 assert s.count("add_action('wp_footer', array($this, 'hdar_ci_register_footer'), 55);")==1
 assert "overview_wide_banner_campaign_eligible" in s
 assert "'ratio_min'=>5.00,'ratio_max'=>12.00" in s
