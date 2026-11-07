@@ -1,5 +1,7 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktualisierung 07.11.2026 – HD009:** Einzige Affiliate-Voll-ZIP `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.12-dev**, 707639 Bytes, SHA-256 `7ebbea15bb9f1692a949c41cc982489f5be2a2d12695e9342cac7dc8ce1550ae`, Git-Blob `ba3b84f2c891ea8bb4ac8a459438e1b46882f5f6` tatsächlich auf GitHub gespeichert und nachgelesen. Das fachliche Affiliate-Büro bleibt einzigartig: `../AFFILIATE/CURRENT_STATE.md`. **Andere ältere HD009-Zeilen weiter unten sind historische Snapshots und kein konkurrierender Current-Stand.** WordPress-Liveinstallation nicht bestätigt.
+
 Stand: 07.11.2026 (HD-009 aktualisiert; die übrigen Pluginstände behalten ihre zuletzt dokumentierten Prüfdaten). **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
 
 Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen Plugin-Akte unter `PLUGIN_AKTEN/<Plugin-ID>/CURRENT.md`. Die WordPress-Pluginliste ist ein älterer Betreiberstand vom 01.11.2026; aktuelle Serverdateien wurden nicht selbst ausgelesen.
