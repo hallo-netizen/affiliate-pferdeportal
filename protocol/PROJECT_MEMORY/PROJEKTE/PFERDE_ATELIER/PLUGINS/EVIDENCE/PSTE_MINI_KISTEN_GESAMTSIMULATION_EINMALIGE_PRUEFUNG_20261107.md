@@ -45,3 +45,21 @@
 - 100 echte Queries und eigentliche Tests: `QA_ONLY/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json`, `QA_ONLY/test_100_keyword_end_to_end_simulation.php`, `QA_ONLY/test_existing_forward_full_chain.php`.
 
 **Technisches KISS-Fazit:** Das vorgeschlagene System kommt ohne neue Architektur, ohne zweite inhaltliche Prüfung und mit isolierten Fehlern auf den ursprünglichen Einzelstrecken aus. **Die technische Simulation dieser Strecken ist gelungen.** Die Realqualität des externen einzigen SEO-Entscheiders und ein vollständiger installierter WordPress→PSERC→K0-Test sind damit **nicht bewiesen**.
+
+
+## 07.11.2026 – LETZTE GESAMT-QA: Auch der WordPress-Kontextprüfer ist für externe MINI-Themen nur noch DATENLESER
+
+**Bestätigte Ursache:** Nicht nur `PSTE_Planning_Readiness_Gate` und PSERC hatten inhaltliche Zweitvergleiche. Die vorhandene `PSTE_Context_Evaluator::evaluate()` führte zuvor auch für bereits extern entschiedene MINI-Themen nochmals Überschriften- und Titelähnlichkeitsmessungen aus. Dies war eine weitere redundante semantische Arbeit.
+
+**KISS-Änderung:** Der bestehende Kontextprüfer übernimmt für MINI-Themen jetzt nur noch den **aktuellen Inventory-/Redaktionsplan-Versionsstempel** und die unabhängigen Kategorie-/Grundregeln; er ruft **keine** Titel-/Überschriftenähnlichkeitsberechnung auf. Der alte Pfad für noch nicht extern geprüfte historische Themen bleibt erhalten. Der im vorhandenen PSTE-Repository bereits vorhandene Kontextaufruf erhält lediglich die ursprüngliche `pool_key`-Identität – keine neue Klasse, kein weiterer Worker, keine neue Tabelle, kein zusätzlicher SEO-Gate. Quelle: `QA_ONLY/apply_wp_single_owner_gate.py` (bearbeitet nur die bestehenden Klassen).
+
+**Letzter echter PHP-/CI-Check:** GitHub Action `42398575783` **SUCCESS**, nicht bloße Dokumentationsbehauptung:
+- Mini-Kontext: **0 semantische Titel-/Überschriftenvergleiche**, trotzdem unveränderte aktuelle Quellenbindung und unabhängige Kategorie-Sperre; historische Themen laufen weiter auf altem Pfad.
+- Bestehendes PPM679-Redaktionsplan-Optionsfeld mit zwei belegten Artikelplätzen unverändert gelesen; Änderung während des Lesens sperrt FREI.
+- Zwei konkurrierende SEO-Rückimporte: nur einer kann im **selben** bisherigen Optionsfeld den Slot atomar übernehmen; zweiter geht in einen sicheren erneuten Versuch.
+- Erfundenes `BELEGT`-Quellziel wird nur technisch als `KLÄRUNG` behandelt, **keine** zweite semantische Prüfung.
+- **100 echte MINI-Keywords, 87 JA, 9 VIELLEICHT, 4 NEIN, 97 Originaltitel** im simulierten Rückweg unverändert; für die 87 künstlich vorgegebenen externen SEO-Urteile **0** Wiederholungen des WordPress-Kannibalisierungsentscheids. Bestehende `forwardToPlan` mit nachgestellten WP-Daten: GOOD/STALE/ONEBAD **PASS**.
+- **83/83 PSTE-PHP-Dateien Syntax PASS**. Separat lokale PSERC-0.28.54-QA: echter PSERC-Reader, bounded vorhandener Plan-Worker und unveränderte 5-Felder-Grenze gegen K0 **PASS** (PSERC-Original 0.28.53 und K0 unberührt).
+- Die kurzzeitig benötigte GitHub-QA-Workflowdatei wurde **wieder gelöscht**. Die unveränderlichen K0-/Sicherheitsdateien und das Original-Installationsarchiv bleiben unverändert.
+
+**Kein falscher Abschluss:** Der EINZIGE externe semantische SEO-Owner hat die 87 Fälle bisher **nicht** wirklich gegen eine aktuelle vollständige WordPress-Testdatenbank fachlich beurteilt. Alle externen FREI/BELEGT/KLÄRUNG-Entscheidungen in diesen 100er-Proben waren explizit **Testannahmen**. Eine echte autonome WordPress→externe SEO-Prüfung→PSTE→PSERC→K0-Durchlaufprüfung wurde noch nicht ausgeführt. Die einmaligen inhaltlichen Worker-Abnahmekriterien stehen unter `EVIDENCE/PSTE_EINMALIGER_SEO_WORKER_QUALITAETSABNAHME_20261107.md`. **Keine Installation oder Live-/Merge-Freigabe.**
