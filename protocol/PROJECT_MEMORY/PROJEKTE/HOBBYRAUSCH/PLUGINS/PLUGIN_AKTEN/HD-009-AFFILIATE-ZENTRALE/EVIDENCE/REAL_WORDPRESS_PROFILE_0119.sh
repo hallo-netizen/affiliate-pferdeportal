@@ -13,6 +13,11 @@ wp core download --path=/tmp/hobby-real-wp/site --quiet
 cd /tmp/hobby-real-wp/site
 wp config create --dbname=hd009_e2e --dbuser=hd009 --dbpass=onlytest123 --dbhost=localhost --quiet
 wp core install --url=http://127.0.0.1:8989 --title='Hobby Depot Isolated Test' --admin_user=e2e --admin_password=only-test-12345 --admin_email=test@example.invalid --skip-email --quiet
+# WP-CLI installed into a nested /site folder and generated a stale /site in plugin asset URLs.
+# Fix test fixture ONLY, keeping production WordPress untouched.
+wp option update siteurl 'http://127.0.0.1:8989' >/dev/null
+wp option update home 'http://127.0.0.1:8989' >/dev/null
+echo "E2E LOCAL SITE URL $(wp option get siteurl) HOME $(wp option get home)"
 wp theme install twentytwentyfive --activate --quiet
 mkdir -p wp-content/mu-plugins/
 R="$GITHUB_WORKSPACE/protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS"
