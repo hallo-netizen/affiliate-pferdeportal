@@ -1,0 +1,12 @@
+HD009 0.1.19-dev: existing hobbyregister placement only
+ZIP bytes: 1066241
+SHA256: 53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579
+PHP syntax: 24/24 PASS
+ZIP CRC: PASS
+HD007 original verified: facts() first, Hobbygruppe second, full_article uses section h2, responsive grid areas facts/copy/tail.
+Desktop placement facts -> existing sidebar banner -> group.
+Mobile placement entire main article -> existing square sidebar banner (grid-area tail) -> group.
+New inline native post_inline_banner slot after Kosten und Ausruestung full section, not inside paragraphs.
+Native provider/target/format selection unchanged. HD007 and HD003 ZIPs unchanged.
+Stylesheet gate unchanged: only_mode_active aliases launch_active in the ORIGINAL class. Cache key updated to 0.1.19. Local WordPress E2E normalizes home/siteurl to its actual document root.
+Real WordPress DOM test remains a separate QA step; not yet live-installed.
