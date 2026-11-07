@@ -49,3 +49,24 @@ jobs:
             except Exception as e:
               print("LIVE_ERROR",u,type(e).__name__,str(e)[:150])
           PY
+
+      - name: Verify which real blog posts lack banners
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,re,json
+          urls=[
+            'https://www.hobby-depot.de/kettenhemd-ringe-richtig-schliessen/',
+            'https://www.hobby-depot.de/kettenhemd-european-4-in-1/',
+            'https://www.hobby-depot.de/kettenhemd-ringe-zangen-auswahl/',
+            'https://www.hobby-depot.de/kettenhemd-kanten-abschluesse/',
+            'https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',
+            'https://www.hobby-depot.de/hobbyregister/muenzen/',
+          ]
+          for u in urls:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 Chrome/128'}),timeout=16) as r:
+                html=r.read(1500000).decode('utf8','replace')
+                print('POST_AUDIT',r.status,u,'affiliate-slot-count',html.count('ppar-affiliate-slot'),'banner-count',html.count('hdar-ci-amazon-banner-wide')+html.count('hdar-ci-amazon-banner-square'),'shortcode',html.count('data-ppar-slot'),'post-featured-img',('wp-post-image' in html),'title',re.findall(r'<title>(.*?)</title>',html,re.I|re.S)[:1])
+            except Exception as e:
+              print('POST_AUDIT_ERROR',u,type(e).__name__,str(e)[:160])
+          PY
