@@ -11,3 +11,17 @@
 7. **Ausspielung:** Keine fachfremden Treffer, keine erfundenen Produkte oder Preise. Bei unklarer Zuordnung lieber Platz leer. Die vorhandene Seiten-/Kategoriezuordnung und vorhandenen Anzeigenplätze bleiben zuständig. Vor flächiger Umstellung erst einen Pilot mit Produktberatung kontrollieren.
 
 **Aktuell umgesetzt:** Banner-Layout 0.1.20 und allgemeiner Suchlink. **Noch nicht umgesetzt:** Regelbasierter automatischer Wechsel zwischen Such- und konkreten Produktlinks für sämtliche Artikel.
+
+
+## 07.11.2026 – bestätigte Abdeckungslücke und kleinste Lösung (noch nicht produktiv umgesetzt)
+
+**Harte Prüfung:** Hobbyregister „Münzen“ 0 Banner, weil für das bestehende Amazon-Eigenbanner ohne freigegebenes Foto keine Ausgabe erfolgt. Die vier vorhandenen Kettenhemd-Blogbeiträge enthalten ebenfalls 0 Banner; der vorhandene automatische Templateweg behandelt Seiten und Frontseite, nicht normale `post`-Beiträge. Das sind Regeln/Lücken der vorhandenen Ausspielung, kein fehlendes Amazon-Suchziel.
+
+**Zielvertrag für eine zentrale Fallback-Reihenfolge:** 
+1. Bestehenden passenden, verifizierten Partnerbanner oder reale Produktkarte nehmen. Andere Partner, wenn aktiv, später gleichberechtigt.
+2. Wenn leer: thematisch passenden vorhandenen Amazon-Suchbanner mit genehmigtem Bild anzeigen. Keine „XY Hobby Zubehör“-Blindzuordnung, sondern belastbares Hobby-/Ausrüstungsthema.
+3. Wenn kein genehmigtes Bild vorhanden: schlichten bildlosen Themenbanner mit derselben Gestaltung und passender Suchzielgruppe, **keine erfundene Foto-/Preis-/Produktbehauptung**. In vorhandene Slots, nicht in eine neue Engine.
+4. Normale redaktionelle Beiträge über **einen bestehenden Beitrags-Werbeplatz** einhängen, nicht pauschal in Testseiten/Archive; Produktplätze dürfen nur geprüfte Einzelprodukte anzeigen; bei fehlenden Produkten als **deutlich gekennzeichnete Suche nach Ausrüstung** statt scheinbarer Einzelproduktkarte darstellen.
+5. Ohne eindeutiges fachliches Ziel keinen irreführenden Banner, sondern ein nachvollziehbares Leersignal für die zentrale Prüfung. Vor Massenausspielung Test auf 4 Kettenhemd-Beiträgen, Bildlose-Hobbyprofile, Kategorieebenen und Mobil.
+
+Die beschriebenen Schließungen der Lücke sind **noch nicht umgesetzt**, um die funktionierenden Kategorie-/Registeranzeigen nicht ungeprüft zu verändern.
