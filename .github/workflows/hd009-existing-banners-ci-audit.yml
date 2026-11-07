@@ -1,4 +1,4 @@
-name: Audit existing Hobby design and affiliate banners
+name: Audit existing Hobby design and affiliate banners (HD007 register verified)
 on:
   push:
     branches:
