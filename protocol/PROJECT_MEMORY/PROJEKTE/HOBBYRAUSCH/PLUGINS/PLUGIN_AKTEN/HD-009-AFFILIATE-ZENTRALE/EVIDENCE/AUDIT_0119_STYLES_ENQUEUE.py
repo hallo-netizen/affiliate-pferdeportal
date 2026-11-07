@@ -14,3 +14,9 @@ with zipfile.ZipFile(root) as z:
    if "hdar-amazon-start.css" in t[i] or "wp_enqueue_style" in t[i]:
     for j in range(max(0,i-4),min(len(t),i+7)):
      print(f"  + {j+1:5d} {t[j][:420]}")
+
+with zipfile.ZipFile(root) as z:
+    name="affiliate-portal-router/includes/class-hdar-amazon-start.php"
+    lines=z.read(name).decode("utf8").splitlines()
+    for i in list(range(0,105))+list(range(132,147)):
+        print("AMAZON START",i+1,lines[i][:520])
