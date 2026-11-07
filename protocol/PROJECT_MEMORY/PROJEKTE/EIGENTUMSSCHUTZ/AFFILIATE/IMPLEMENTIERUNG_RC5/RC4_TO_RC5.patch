@@ -1,0 +1,62 @@
+--- RC4/affiliate-portal-router.php
++++ RC5/affiliate-portal-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Hab & Bewahr – Affiliate-Zentrale
+  * Description: Zentrale Affiliate-Verwaltung für Hab & Bewahr mit unabhängiger Zielquelle und bestehenden Provider-Funktionen.
+- * Version: 0.1.1-rc4
++ * Version: 0.1.2-rc5
+  * Author: Hab & Bewahr
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -2556,6 +2556,12 @@
+                 }
+             }
+         }
++        // When no real campaign exists, show only a tracked Amazon search link
++        // for an explicitly known Hab product-family category.
++        if ($this->is_enabled()) {
++            $hb_search = $this->hb_amazon_category_search_fallback($context, $slot_type);
++            if ($hb_search !== '') { return $hb_search; }
++        }
+         // V2.4.0: Die fest definierten Banner-/Produktplätze der Produkt- und
+         // Kategorieebene dürfen öffentlich niemals Platzhalter ausgeben.
+         if ($this->overview_wide_banner_slot($slot_type) || preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) {
+--- RC4/includes/trait-ppar-hb-amazon.php
++++ RC5/includes/trait-ppar-hb-amazon.php
+@@ -86,6 +86,25 @@
+         return $offers;
+     }
+ 
++    /** Zero-catalog automatic fallback: a safe category Amazon search, never a fabricated product. */
++    private function hb_amazon_category_search_fallback($context, $slot_type) {
++        if (!$this->hb_amazon_ready() || !is_array($context)) { return ''; }
++        if (sanitize_key((string)$slot_type) !== 'product_after_category_tiles') { return ''; }
++        // A real WP category with a product-family mapping from Hab's own source.
++        if (($context['post_type'] ?? '') !== 'category_archive') { return ''; }
++        $family = sanitize_key((string)($context['product_family_slug'] ?? ''));
++        if ($family === '') { return ''; }
++        $name = sanitize_text_field((string)($context['primary_name'] ?? ''));
++        if ($name === '' || strlen($name) > 150) { return ''; }
++        // Only a verified product-family category. The Amazon search page
++        // may show unrelated offers: do NOT present it as a specific product.
++        $url = 'https://www.amazon.de/s?k=' . rawurlencode($name) . '&tag=' . rawurlencode($this->hb_amazon_tag());
++        return '<div class="ppar-affiliate-slot ppar-slot-product_after_category_tiles ppar-hab-amazon-search" data-ppar-slot="product_after_category_tiles">'
++            . '<div class="ppar-affiliate-label">Anzeige</div>'
++            . '<div class="ppar-affiliate-content"><a href="' . esc_url($url) . '" target="_blank" rel="sponsored nofollow noopener noreferrer">'
++            . 'Passende Angebote bei Amazon suchen</a></div></div>';
++    }
++
+     public function hb_amazon_admin_menu() {
+         if (function_exists('add_submenu_page')) {
+             add_submenu_page('affiliate-portal-zentrale', 'Amazon-Automatik', 'Amazon-Automatik',
+@@ -203,7 +222,8 @@
+             $host = strtolower((string)wp_parse_url($url, PHP_URL_HOST));
+             if (!in_array($host,array('amazon.de','www.amazon.de'),true)) { continue; }
+             if ($this->hb_amazon_normalize_title((string)($item['title'] ?? '')) !== $needle) { continue; }
+-            $asin = strtoupper(trim((string)($item['asin'] ?? '')));
++            // DataForSEO Merchant Amazon Products uses data_asin (not asin).
++            $asin = strtoupper(trim((string)($item['data_asin'] ?? $item['asin'] ?? '')));
+             if (!preg_match('/^[A-Z0-9]{10}$/D',$asin)) {
+                 $asin = preg_match('#/(?:dp|gp/product)/([A-Z0-9]{10})(?:[/?]|$)#i',$url,$m) ? strtoupper($m[1]) : '';
+             }
