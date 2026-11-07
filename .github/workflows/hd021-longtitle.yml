@@ -50,7 +50,7 @@ jobs:
                               assert d['lines']<=2.15,(width,title,d,'Too many lines')
                               assert d['scroll']<=d['visible']+3,(width,title,d,'Horizontally clipped')
                               assert d['scrollHeight']<=d['clientHeight']+3,(width,title,d,'Vertically clipped')
-                              if width>=900:assert d['lines']<1.3,(width,title,d,'Desktop banner should be one line')
+                              if d['contentWidth']>=420:assert d['lines']<1.3,(width,title,d,'Banner with ample title space should be one line')
                       print('FIT',width,repr(title),data)
                   page.close()
               b.close()
