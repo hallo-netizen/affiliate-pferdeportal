@@ -1,3 +1,15 @@
+## 07.11.2026 – HAB-004 RC4 (NEUE EINZIGE CURRENT-VERSION)
+
+HAB-004 0.1.1-rc4: vollständige CURRENT.zip, 616072 Bytes, 28 Einträge, SHA256 c601c1f540fccdd18dde59b7c15fc55cfe53b68a59459d45182a2cf1bcd55017, Git-Blob f3a77efff2cb16de34c91eb0c4ec3b072a3999db (remote Größe und Blob bytegleich geprüft).
+
+Lokal geprüft: PHP Syntax 25/25, 24 Assertions (Positiv/Negativ, Variantenabweichung, falsche Portal-ID, bezahlter POST vs kostenloser GET, Tagesgrenze, keine doppelten Buttons), ZIP CRC, installierbare Original-Pluginwurzel, 25/27 originale Dateien bytegleich. Keine authentifizierte WordPress-Installation oder echte Provider-Verbindung und keine Google-/Frontend-Liveprüfung; nur ein Upgrade-Testkandidat. Die Standardautomatik bleibt deaktiviert. Die anderen drei Hab-Plugins bleiben bytegleich unverändert. Die Versionsangaben zur RC3 weiter unten sind historisch.
+
+Technische Details ausschließlich unter PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md.
+
+Nächster Schritt: nur das bestehende Hab-004-WordPress-Plugin mit CURRENT.zip aktualisieren; Affiliate-Zentrale → Amazon-Automatik öffnen; habundbewahr-21 speichern, Amazon-Produktbuttons einschalten; eigene DataForSEO-Zugangsdaten erst nach Kostenfreigabe eingeben; an einer echten passenden Produktkarte Ziel/Tracking und Slot prüfen. Pferdeatelier und Hobbydepot/K0 unverändert.
+
+---
+
 ## 06.11.2026 – HAB-004 Affiliate RC3: OFFIZIELLER NEUER STAND
 
 Neu ist **nur HAB-004-AFFILIATE**: Version **0.1.0-rc3**, komplette `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` (605.196 Bytes, 27 Dateien), SHA-256 `2e5f6790ab3a64b446e34d132037684ad8fa637f76f43974e2816a1f75bc11eb`, Git-Blob `b6b19e7a739b70a813c5e9de2e290d98c898156f`. Die vorangegangene RC2 ist **historisch** und nicht mehr „CURRENT“. Die drei bestehenden Plugins HAB-001-DESIGN 0.1.189, HAB-002-KATEGORIE-WORKFLOW 1.14.8.37 und HAB-003-BILDZENTRALE 1.0.0 bleiben bytegleich unverändert. Weiterhin **vier vollständige originale WordPress-ZIPs** im bestehenden Pluginbüro.
