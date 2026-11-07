@@ -1,0 +1,53 @@
+name: Hobby Depot eight worlds and banner image mapping audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-generic-image-concept-audit-20261107']
+    paths: ['.github/workflows/hobby-banner-image-map-audit.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Examine real category worlds and existing banner/hero sources
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,re,collections,urllib.request
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+              files=z.namelist()
+              pics=[v for v in files if v.endswith(('.webp','.png','.jpg','.jpeg'))]
+              print("HD003_PICTURES",len(pics))
+              groups=['start-world','hero-masters','subcategories','hero','banner','ci-','image','world']
+              for k in groups:
+                  found=[v for v in pics if k in v.lower()]
+                  print("IMAGEGROUP",k,len(found),"SAMPLE",found[:22])
+              main=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+              for name in ['world_slugs','worlds','world_definitions','render_world_cards','leaf_category_map_v150750','affiliate_page_type','integrated_affiliate_components']:
+                  m=re.search(r'function '+name+r'\s*\(',main)
+                  print("CLASSFUNC",name,main[m.start():m.start()+2400] if m else 'missing')
+              for name in files:
+                  if name.endswith('leaf-category-map-v150750.json'):
+                      data=json.loads(z.read(name))
+                      print('LEAF_MAP_TYPE',type(data).__name__,'COUNT',len(data),'HEAD',str(list(data.items())[:8] if isinstance(data,dict) else data[:8])[:2400])
+                  if name.endswith('category-level-copy-v150687.json'):
+                      data=json.loads(z.read(name))
+                      print('CATEGORY_COPY_HEAD',type(data).__name__,len(data),str(list(data.items())[:5] if isinstance(data,dict) else data[:5])[:1200])
+          with ZipFile(base/'HD-007-HOBBYREGISTER-CORE'/'CURRENT.zip') as z:
+              names=z.namelist()
+              datafiles=[x for x in names if x.endswith('.json')]
+              print('HD007_JSON',len(datafiles),datafiles[:30])
+              imgs=[x for x in names if '/portraits/' in x and x.endswith('.webp')]
+              print('HD007_REGISTER_IMAGES',len(imgs),imgs[:10])
+          for slug in ['gestalten','fertigen','technik','forschen','pflanzen','tiere','bewegen','sammeln']:
+              url='https://www.hobby-depot.de/'+slug+'/'
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 Chrome'}),timeout=10) as resp:
+                      s=resp.read(700000).decode('utf8','replace')
+                      heads=re.findall(r'<h[1-3][^>]*>(.*?)</h[1-3]>',s,re.I|re.S)
+                      heads=[re.sub('<[^>]+>','',h).strip() for h in heads]
+                      print('WORLD_PAGE',slug,resp.status,heads[:15], 'banner',s.count('hdar-ci-amazon-banner-wide'))
+              except Exception as e:print('WORLD_ERROR',slug,type(e).__name__,str(e)[:100])
+          PY
