@@ -1,0 +1,24 @@
+name: PSTE source gates QA temp
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read existing plan gate, context evaluator and store-owner without changes
+        run: |
+          set -euo pipefail
+          unzip -q protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip -d /tmp/z
+          I="/tmp/z/Portal SEO Topic Engine/includes"
+          echo '===GATE===='
+          sed -n '1,260p' "$I/class-pste-planning-readiness-gate.php"
+          echo '===CONTEXT===='
+          grep -nE 'function (evaluate|report|inventory)' "$I/class-pste-context-evaluator.php" || :
+          sed -n '1,220p' "$I/class-pste-context-evaluator.php"
+          echo '===REANALYZE===='
+          grep -nE 'function (reanalyzeRetainedBacklogBatch|automaticPoolStatus|planningSuitability|prepareEditorialPayload)' "$I/class-pste-repository.php" "$I/class-pste-topic-policy.php"
+          echo '===REANALYZE REAL===='
+          sed -n '2490,2820p' "$I/class-pste-repository.php"
