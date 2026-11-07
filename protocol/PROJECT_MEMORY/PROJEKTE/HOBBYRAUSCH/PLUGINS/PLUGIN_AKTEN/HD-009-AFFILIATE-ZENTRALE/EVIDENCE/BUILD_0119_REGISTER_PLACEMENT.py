@@ -99,6 +99,22 @@ assert new.count("public function hdar_ci_register_footer() {")==1
 assert new.count("add_action('wp_footer', array($this, 'hdar_ci_register_footer'), 55);")==1
 assert "hdar-ci-amazon-official" in new and "hdar_approved_rental_banner_fallback" not in new
 files[main]=new.encode("utf8")
+# Existing Amazon house banner stylesheet was only enqueued in the single-partner mode.
+# Real WordPress E2E proved 0.1.18 did not load it on a Hobbyregister profile in normal Amazon+idealo launch mode.
+# Reuse the SAME style handle, extend its native gate and cache-bust current version.
+enqueue_file="affiliate-portal-router/includes/class-hdar-amazon-start.php"
+enqueue=files[enqueue_file].decode("utf8")
+old_enqueue="""        if (self::only_mode_active()) {
+            wp_enqueue_style('hdar-amazon-start', plugins_url('assets/hdar-amazon-start.css', dirname(__FILE__)), array(), '0.1.13');
+        }"""
+new_enqueue="""        if (self::only_mode_active() || self::launch_active()) {
+            wp_enqueue_style('hdar-amazon-start', plugins_url('assets/hdar-amazon-start.css', dirname(__FILE__)), array(), '0.1.19');
+        }"""
+assert enqueue.count(old_enqueue)==1, "Amazon existing stylesheet enqueue condition drift"
+enqueue=enqueue.replace(old_enqueue,new_enqueue,1)
+files[enqueue_file]=enqueue.encode("utf8")
+assert "hdar-amazon-start.css" in enqueue
+
 css=files[css_name].decode("utf8")
 assert "HD009 0.1.18" in css
 css+=r"""
@@ -166,5 +182,6 @@ report.write_text(
 +"Mobile placement entire main article -> existing square sidebar banner (grid-area tail) -> group.\n"
 +"New inline native post_inline_banner slot after Kosten und Ausruestung full section, not inside paragraphs.\n"
 +"Native provider/target/format selection unchanged. HD007 and HD003 ZIPs unchanged.\n"
++"E2E 0.1.18 root cause corrected: existing Amazon banner stylesheet now loads in normal launch_active as well as only_mode; style URL version updated to 0.1.19 to avoid stale caches.\n"
 +"Real WordPress DOM test remains a separate QA step; not yet live-installed.\n")
 print("BUILD PASS VERSION 0.1.19-dev",zip_path.stat().st_size,sha,"PHP",len([n for n in files if n.endswith(".php")]))
