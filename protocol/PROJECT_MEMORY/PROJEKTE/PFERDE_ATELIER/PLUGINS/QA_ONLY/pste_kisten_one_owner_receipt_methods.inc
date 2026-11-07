@@ -83,6 +83,36 @@
         return $state;
     }
 
+    /**
+     * One existing WordPress option, atomically replaced only if it is still
+     * the exact state read before the external verdict was accepted.
+     * Prevents parallel receipts from claiming the same slot without adding
+     * a lock table, second store, or any SEO check.
+     */
+    private static function storeSeoDecisionsIfUnchanged(array $before,array $after): void {
+        global $wpdb;
+        if(!is_object($wpdb)||empty($wpdb->options)
+            ||!method_exists($wpdb,'prepare')||!method_exists($wpdb,'query')
+            ||!function_exists('maybe_serialize'))
+            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_STORAGE_UNAVAILABLE');
+        $old=maybe_serialize($before);
+        $next=maybe_serialize($after);
+        if(!is_string($old)||!is_string($next))
+            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_SERIALIZATION_FAILED');
+        $sql=$wpdb->prepare(
+            "UPDATE {$wpdb->options} SET option_value=%s WHERE option_name=%s AND BINARY option_value=BINARY %s",
+            $next,self::STORE,$old);
+        $changed=$wpdb->query($sql);
+        if($changed!==1||((string)($wpdb->last_error??''))!=='')
+            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_CONFLICT_RELOAD_AND_RETRY');
+        if(function_exists('wp_cache_delete')){
+            wp_cache_delete(self::STORE,'options');
+            wp_cache_delete('alloptions','options');
+        }
+        if(get_option(self::STORE,null)!==$after)
+            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_READBACK_FAILED');
+    }
+
     public static function isMiniTopicAwaitingSeo(string $poolKey): bool {
         $state=self::loadState();
         $v=$state['completed'][$poolKey]??null;
