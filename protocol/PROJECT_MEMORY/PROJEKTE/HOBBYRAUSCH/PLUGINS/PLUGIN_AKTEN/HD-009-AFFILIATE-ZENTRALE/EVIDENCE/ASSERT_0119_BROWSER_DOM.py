@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Proves real WordPress DOM after footer hook and HD007 responsive CSS – desktop and mobile."""
-import subprocess,shutil,re,html,json
+import subprocess,shutil,re,html,json,os
 from pathlib import Path
 chrome=shutil.which("google-chrome") or shutil.which("chromium") or shutil.which("chromium-browser")
 assert chrome,"Chromium is not installed"
@@ -29,6 +29,6 @@ for label,width,height in [("desktop",1420,1000),("mobile",430,900)]:
         assert d["sideRect"][1]<=d["groupRect"][0]+3,(label,"Mobile sidebar ad first below article")
         assert d["sideGridArea"]=="tail",(label,"HD007 mobile layout has facts/copy/tail; ad must be tail")
     report.append(d)
-proof=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt")
+proof=Path(os.environ["GITHUB_WORKSPACE"])/"protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt"
 proof.write_text("\n".join(json.dumps(x,ensure_ascii=False) for x in report)+"\nREAL WordPress+MariaDB+HD007+HD003+HD009 DOM PASS: desktop and mobile after render and CSS\n",encoding="utf8")
 print("PASS all actual WordPress DOM placement checks")
