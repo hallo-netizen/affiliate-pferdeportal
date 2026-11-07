@@ -43,8 +43,8 @@ $state=['completed'=>$completed,'active'=>null,'last_report'=>[],'seo_decisions'
 $GLOBALS['options']['pste_mini_keyword_roundtrip_v1']=$state;
 $snapshot=['complete'=>true,'sha256'=>hash('sha256','synthetic WP + PSTE + PSERC inventory for simulation'),
     'items'=>[['source'=>'WORDPRESS','title'=>'2er Pferdeanhänger',
-        'status'=>'publish','target_keyword'=>'2er pferdeanhänger'],
-        ['source'=>'PSERC_ACTIVE_PLAN','status'=>'HELD','title'=>'Regendecken ohne Füllung']],
+        'id'=>7,'status'=>'publish','target_keyword'=>'2er pferdeanhänger'],
+        ['source'=>'PSERC_ACTIVE_PLAN','seo_topic_id'=>'qa-ungefuettert','status'=>'HELD','title'=>'Regendecken ohne Füllung']],
     'sources'=>['WORDPRESS'=>['complete'=>true],'PSTE_PLAN'=>['complete'=>true],'PSERC_ACTIVE_PLAN'=>['complete'=>true]]];
 $results=[];$expected=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
 $counter=0;$selectedFree='';
@@ -59,10 +59,10 @@ foreach($completed as $key=>$row){
         $box='FREI';$selectedFree=$key;
     }
     if(str_contains($low,'0g')||str_contains($low,'ungefüttert')){
-        $box='BELEGT';$matched='SIMULATED_EXISTING_PLAN_UNGEFUETTERT';
+        $box='BELEGT';$matched='PSERC_ACTIVE_PLAN:qa-ungefuettert';
     }
     if(str_contains($low,'pferdeanhänger 2 pferde')){
-        $box='BELEGT';$matched='SIMULATED_PUBLISHED_2ER_PFERDEANHAENGER';
+        $box='BELEGT';$matched='WORDPRESS:7';
     }
     if($low==='pferd decken'){$box='KLAERUNG';$reason='MEHRDEUTIG_PFERDEZUCHT_ODER_DECKE';}
     $first=(string)($row['titles'][0]['title']??'');
@@ -80,6 +80,15 @@ $updated=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$document,$sna
 $GLOBALS['options']['pste_mini_keyword_roundtrip_v1']=$updated;
 chk(count($updated['seo_decisions'])===87,'single technical receipt import preserves 87 owner verdicts');
 chk(($updated['seo_last_report']['counts']??null)===$expected,'all three carton totals preserved');
+$fake=$document;
+$belegtAt=-1;
+foreach($fake['items'] as $i=>$v)if($v['box']==='BELEGT'){$belegtAt=$i;break;}
+chk($belegtAt>=0,'simulation includes an existing-plan reference case');
+$fake['items'][$belegtAt]['matched_ref']='SIMULATED_UNVERIFIED_ARTICLE';
+$fakeResult=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$fake,$snapshot);
+$badRefKey=(string)$fake['items'][$belegtAt]['pool_key'];
+chk(($fakeResult['seo_decisions'][$badRefKey]['box']??'')==='KLAERUNG',
+    'fabricated BELEGT reference stays in existing clarification, not accepted as proof');
 $verified=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
 foreach($completed as $key=>$row){
     if($row['decision']!=='JA')continue;
