@@ -1,4 +1,4 @@
-name: HD009 variant 4 build and exact official Amazon DE logo QA
+name: HD009 variant 4 build and Amazon DE logo QA - no own logo
 on:
   push:
     branches:
