@@ -50,16 +50,21 @@
                         'type'=>(string)($row['post_type']??''),'status'=>(string)($row['post_status']??''),
                         'slug'=>(string)($row['post_name']??''),'modified_gmt'=>(string)($row['post_modified_gmt']??''),
                         'headings'=>$headings,'content_sha256'=>hash('sha256',$content),
-                        'target_keyword'=>'','categories'=>[]];
+                        'target_keyword'=>'','canonical_article_id'=>'','plan_slot'=>'','categories'=>[]];
                     $index[$id]=count($items)-1;
                 }
                 $idList=implode(',',array_map('intval',$ids));
-                $meta=$wpdb->get_results("SELECT post_id,meta_value FROM {$wpdb->postmeta} ".
-                    "WHERE meta_key='_yoast_wpseo_focuskw' AND post_id IN ($idList) ORDER BY post_id ASC",
+                $meta=$wpdb->get_results("SELECT post_id,meta_key,meta_value FROM {$wpdb->postmeta} ".
+                    "WHERE meta_key IN ('_yoast_wpseo_focuskw','_ppm679_canonical_article_id','_ppm679_plan_slot_sha256') ".
+                    "AND post_id IN ($idList) ORDER BY post_id ASC",
                     defined('ARRAY_A')?ARRAY_A:'ARRAY_A');
                 if(!is_array($meta)||(string)($wpdb->last_error??'')!=='')throw new RuntimeException('WP_SEO_META_READ_FAILED');
                 foreach($meta as $row){if(!is_array($row))$row=(array)$row;$id=(int)($row['post_id']??0);
-                    if(isset($index[$id]))$items[$index[$id]]['target_keyword']=(string)($row['meta_value']??'');}
+                    if(!isset($index[$id]))continue;
+                    $metaKey=(string)($row['meta_key']??'');
+                    if($metaKey==='_yoast_wpseo_focuskw')$items[$index[$id]]['target_keyword']=(string)($row['meta_value']??'');
+                    elseif($metaKey==='_ppm679_canonical_article_id')$items[$index[$id]]['canonical_article_id']=(string)($row['meta_value']??'');
+                    elseif($metaKey==='_ppm679_plan_slot_sha256')$items[$index[$id]]['plan_slot']=(string)($row['meta_value']??'');}
                 $categories=$wpdb->get_results(
                     "SELECT tr.object_id AS post_id,tt.term_id AS category_id,t.name AS category_name ".
                     "FROM {$wpdb->term_relationships} tr ".
@@ -86,7 +91,7 @@
             if((string)($wpdb->last_error??'')!=='')throw new RuntimeException('PSTE_PLAN_COUNT_FAILED');
             $psteCount=0;$last=0;
             while(true){
-                $q=$wpdb->prepare("SELECT id,pool_key,payload_json,planning_suitability,automatic_pool_status ".
+                $q=$wpdb->prepare("SELECT id,pool_key,candidate_id,payload_json,planning_suitability,automatic_pool_status ".
                     "FROM $pool WHERE id>%d AND planning_suitability IN ('YES','PROVISIONAL') ".
                     "ORDER BY id ASC LIMIT 200",$last);
                 $rows=$wpdb->get_results($q,defined('ARRAY_A')?ARRAY_A:'ARRAY_A');
@@ -97,6 +102,7 @@
                     $data=json_decode((string)($row['payload_json']??''),true);
                     if(!is_array($data))throw new RuntimeException('PSTE_PLAN_INVALID_JSON');
                     $result['items'][]=['source'=>'PSTE_PLAN','pool_key'=>(string)($row['pool_key']??''),
+                        'seo_topic_id'=>(string)($row['candidate_id']??$data['candidate_id']??''),
                         'raw_query'=>PSTE_Editorializer::sourceQuery($data),
                         'title'=>(string)($data['production_title']??$data['editorial_title']??''),
                         'target_keyword'=>(string)($data['target_keyword']??''),
