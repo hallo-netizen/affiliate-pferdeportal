@@ -1,36 +1,41 @@
-# HD009 – einziges aktuelles Affiliate-Plugin im Hobby-Depot-GitHub-Büro
+# HD009 – einziges aktuelles Hobby-Depot-Affiliate-Plugin
 
-**07.11.2026 · Hobby Depot Affiliate-Zentrale 0.1.17-dev · ein vollständiger Update-Kandidat.**
-Noch **kein bestätigter WordPress-Live-Test**.
+**07.11.2026 · Hobby Depot Affiliate-Zentrale 0.1.18-dev · fertig gebaut und technisch getestet.**
 
-## Exakte aktuelle ZIP
+- **Einzige Installationsdatei:** `CURRENT.zip`
+- **Größe:** 1.065.228 Bytes
+- **SHA-256:** `130681bc1b695cbb95b08d8d9ac2d575e7142027754ffd1bd051065e462bae7f`
+- **Git-Blob:** `5b4ef7b4277b63ab73d0a0ae690186c272c8bc09`
+- **Original-WordPress-Pluginordner:** `affiliate-portal-router/`, keine zusätzliche Installation und keine zweite Engine.
+- Original-Pferdeatelier-/Hobby-Affiliate-Automatik (Amazon/idealo, Kategorie-/Elternpfad-, Format- und Veto-Logik) bleibt erhalten.
 
-- `CURRENT.zip` – **1.175.854 Bytes**
-- SHA-256: `067a1b2532c2c2c476763269e80e4ccefacfdb073e55f02c182a2a85a43745ca`
-- Git-Blob: `08cf7ede5d518064173c6a6da2c433faaa67d9d9`
-- Unveränderter WordPress-Pluginordner: `affiliate-portal-router/`
-- Unveränderte zentrale Architektur. **Kein zweites Plugin und keine zweite Kampagnenverwaltung.**
+## Verbindlicher CI-Vertrag – Nutzerwahl Variante 4
 
-## CI-Vertrag und Einsatz
+**Keine Hobby-Depot-Logografik**, kein Slogan „Entdecke deine Ausrüstung“.
 
-- **Eigenwerbung für Amazon:** Originales Hobby-Depot-Logo (aus HD003), Montserrat, warmes Beige, dunkle Schrift, petrolfarbener CTA, Kennzeichnung „Anzeige“.
-- **Breiter Querbanner:** proportionaler 6:1-Banner, volle Breite des vorhandenen Contentbereichs; kein willkürlicher Beschnitt des gesamten Banners. Testseite: `https://hobby-depot.de/gestalten/malen-zeichnen/`.
-- **Quadratbanner:** 1:1 für einzelne Hobbyregisterprofile (HD007) und Glossar-Einzelbeiträge (Desktop **und Mobil**), jeweils im bestehenden passenden Ausgabeplatz. Optional normale Beitragsplätze als breiter Banner.
-- **Motive:** Es wird nur das zum jeweiligen Hobby passend vorhandene Bild verwendet. Direkte Originaldateien aus HD003 für „Malen & Zeichnen“ und „Modellbau“ unverändert integriert; HD007-Bildkarte für weitere Hobbyprofile aus tatsächlichem `canonical_name`, `registry_id`, `source`, `path`, einschließlich Ablehnung bekannter FAIL-/OPEN-Bildzuordnungen. Gibt es kein ausreichend passend freigegebenes Motiv, bleibt die Werbung leer.
-- **Ziel:** Kontextbezogene Amazon-Suche nach Ausrüstung/Zubehör für das aktuelle Hobby mit der bereits im WordPress-Backend gespeicherten und geprüften `-21`-Trackingkennung. **Kein erfundenes Einzelprodukt, kein Preis und keine als Produktanzeige ausgegebene Mietwerbung.**
-- **Native Auswahl hat Vorrang:** Bereits freigegebene, fachlich/technisch passende Amazon-/idealo-Kampagnen, Kategorien, Elternpfade, Bannerformat und manuelle Vetos bleiben unangetastet. Eigenbanner nur auf tatsächlich freien Plätzen, keine generische Anzeige für jedes Hobby.
-- **Getrennt:** Die Original-Modellflugzeug-Grafik „Hier könnte Ihre Werbung stehen“ ist ausschließlich Mietwerbung im unveränderten HD003-Designplugin und **nicht** Teil der Affiliate-Anzeigen.
+1. **Kopf:** schmaler warmer Verlauf mit genau dem aktuellen Hobby-Titel, etwa `Airbrush-Modellbau`.
+2. **Bild:** ein großes, vom HD007-/HD003-Fotobestand tatsächlich zum Hobby passendes Bild, ohne Collage. Steht kein fachlich geprüftes Motiv zur Verfügung, kein Eigenbanner.
+3. **Button auf dem Foto:** komplementäres Gelb-Orange, original unmodifiziertes offizielles DE-Werbelogo **„Erhältlich bei Amazon“**, separater Pfeil. Nicht das normale Amazon-Logo: dessen Verwendung in diesem Werbekontext bedarf nach Amazons Richtlinien besonderer Genehmigung. Bei Plätzen kleiner als 178px wird aus Platz-/Mindestgrößengründen auf den zulässigen Text „Bei Amazon entdecken“ umgeschaltet. Das Amazon-Logo wird niemals verfälscht oder kleiner als 140px angezeigt.
+4. **Bannerformat:** Quadrat 1:1 für einzelne Hobbyregister-/Glossar-Seiten, bei normalen Kategorie-/Hubseiten breiter responsiver Banner; mobiles Layout und tatsächliche verfügbare Platzbreite entscheiden die Höhe. Mindesthöhe des breiten Banners 135px (auf kleinen Bildschirmen 145px), damit das Bild sichtbar bleibt.
+5. **Kennzeichnung:** genau ein „Anzeige“-Hinweis. Im bestehenden HD003-Kategorienplatz steht bereits „Anzeige · Partner“; dort wird die innere zweite Kennzeichnung ausgeblendet.
+6. **Ziel:** vorhandene getrackte Amazon-Suchlinks für die konkrete Hobby-Ausrüstung. Der tatsächliche Seitenname wird korrekt aus HTML-Sonderzeichen aufgelöst (z. B. Malen & Zeichnen). Keine erfundenen Produktangebote oder Preise.
+7. **Wahrung der Systemgrenzen:** Mietbanner („Hier könnte Ihre Werbung stehen“) unverändert ausschließlich im HD003-Designplugin; keine neuen Tabellen, Schnittstellen, Bannerkataloge oder Routing-Wege.
 
-## Prüfnachweise
+## Ursächlich nachgewiesener Formatfehler
 
-- Genau **24/24 PHP-Dateien** syntaxgeprüft, ZIP-CRC PASS.
-- **11 echte PHP Positiv-/Negativfälle** zu Querbanner, Quadratformat, echtem Hobbybild, korrektem Amazon-Tracking und Ausgabesperren PASS.
-- Original-Logo und zwei Original-Fotos mit vorhandener HD003-ZIP bitidentisch verglichen.
-- Original-HD007-Register-Schema und Bildfreigaben direkt aus **HD007 CURRENT.zip** gelesen; `canonical_name`-/`source`-/`path`-Korrekturen vor Freigabe mit PHP-Regressionsprüfung bestätigt.
-- Reale Chromium-Vorschau mit CSS und Originalbildern für breite und quadratische Banner PASS; `EVIDENCE/HD009_0117_BANNER_WIDE_CI_PREVIEW.jpg`, `EVIDENCE/HD009_0117_BANNER_SQUARE_CI_PREVIEW.jpg`.
-- Endgültiger Prüfbericht: `EVIDENCE/HD009_0117_CI_SINGLE_RELEASE_REPORT.txt` mit exakt passender ZIP-Größe und Prüfsumme.
-- **Grenze:** Eine Simulation, syntaktische Prüfung oder Browser-Vorschau ist keine Bestätigung der installierten Live-Version oder einer echten Amazon-Provision. Noch kein Live-PASS.
+Öffentliches Hobbydepot-HTML auf `/gestalten/malen-zeichnen/` zeigt `.hd-next-partner-banner` als vorhandenen HD003-Werbeplatz. Die vorhandenen Original-CSS-Regeln erzwingen dort `76px !important` auf Werbeplatz, Kinder und Bilder – daher wurde der alte Querbanner zu einem abgeschnittenen Streifen. Der in HD009 0.1.18 hinzugefügte **eng begrenzte** Stil löst diese Höhe nur bei den eigenen `.hdar-ci-amazon-slot`-Anzeigen, sodass sich der originale Platz in seiner Breite erhalten und in seiner Höhe anpassen kann.
 
-## Nächster genau EINER Schritt
+## Echte Tests
 
-Bestehendes Hobby-Depot-Affiliate-Plugin im WordPress-Backend **einmalig** mit dieser einzigen ZIP ersetzen, dann Querseite `/gestalten/malen-zeichnen/` und ein tatsächlich veröffentlichtes Hobbyregisterprofil, zum Beispiel `/hobbyregister/airbrush-modellbau/` (im HD007-Master belegt), auf korrekte thematische Banner, unverzerrte Formate, echte Ziele und fehlende Doppelungen prüfen. Kein weiteres Plugin und kein manueller Bannerimport.
+- Originale unmodifizierte Amazon-DE-Logo-PNG aus offizieller Amazon-Datei verifiziert; SHA-256 `fb6db85f898078fa6df03740b58d65f431b8a6186c97f6b8a72e95f11b9ab8e5`.
+- **24/24 PHP-Syntaxprüfungen, vollständige ZIP CRC, PHP-Positiv-/Negativtests PASS.**
+- **Chromium-Browser nach echten HD003-76px-Formatregeln:** großes Quadrat 700px PASS, Sidebar-Quadrat 186px PASS, Querformat 770px PASS, schmales Querformat 355px PASS.
+- Sichtprüfungsbilder: `EVIDENCE/HD009_0118_VARIANT4_SQUARE-LARGE.jpg`, `EVIDENCE/HD009_0118_VARIANT4_SQUARE-SIDEBAR.jpg`, `EVIDENCE/HD009_0118_VARIANT4_WIDE-PAGE.jpg`, `EVIDENCE/HD009_0118_VARIANT4_WIDE-MOBILE.jpg`.
+- Detailbericht: `../../PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0118_CI_REPORT.txt`.
+- **Live-WordPress-Installation mit 0.1.18 noch nicht bestätigt.** Die vorherige 0.1.17-Produktivversion zeigte nach Verzögerung tatsächlich beide Banner; diese neue Layoutversion wurde nur isoliert geprüft.
+
+## Nach EINMALIGER Installation prüfen
+
+- `https://hobby-depot.de/gestalten/malen-zeichnen/`: eine Anzeige, vollständiger breiter Titel/Foto/Button, keine abgeschnittene Streifenanzeige.
+- `https://hobby-depot.de/hobbyregister/airbrush-modellbau/`: schmaler Verlauf/Titel und großes Foto mit gelb-oranger CTA im bestehenden Quadratplatz.
+- Bei Browser-Cache ggf. Seite neu laden; keine neuen API-Keys oder DataForSEO-Freigaben notwendig.
