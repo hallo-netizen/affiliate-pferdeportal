@@ -1,12 +1,11 @@
 Version: 0.1.17-dev
-Bytes: 1175514
-SHA-256: 7bf8a90265fd43aa3eae1ef9af2f1edeb7dc5ca9bd1de0ea13b353212a7a11ae
-Files: 33
-PHP: 24/24 PASS
+ZIP bytes: 1175512
+ZIP SHA-256: ffe45301421d6ca2345ade292b472e002d5519ca498c7feb7465eef332999a17
+PHP syntax: 24/24 PASS
 ZIP CRC: PASS
-Three existing HD003 approved original files copied unchanged: logo, Malen hero, Modellbau hero.
-No rental ad fallback.
-Existing partner campaign picker, category/parent-path, slot format, products, glossary and fees stay unchanged.
-New: thematic Amazon discovery banner only on empty native slots, no price/product claims; missing image fails closed.
-New: HD007 register route uses current HD009 renderer as integration point; no extra plugin.
-Actual WP front-end and true Amazon referral clicks NOT tested in this build.
+Three original HD003 assets copied unchanged (exact logo, Malen, Modellbau)
+Native original banner ranking, category/parent-path, idealo, DataForSEO, products and provider filters unchanged.
+New thematic Amazon discovery banner only for completely empty slots; precise topic photo required.
+Wide responsive and square responsive CI; native HD007 register profile hookup; unchanged HD003 rental banners.
+PHP behavior tests run independently in follow-up workflow step.
+WordPress frontend live: NOT YET TESTED.
