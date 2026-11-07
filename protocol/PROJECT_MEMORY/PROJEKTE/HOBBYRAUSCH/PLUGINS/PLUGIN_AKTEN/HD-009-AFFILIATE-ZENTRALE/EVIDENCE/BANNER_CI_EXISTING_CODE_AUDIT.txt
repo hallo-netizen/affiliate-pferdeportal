@@ -210,7 +210,7 @@ ASSET affiliate-portal-router/assets/hdar-ci-malen-zeichnen.webp 168684
 ASSET affiliate-portal-router/assets/hdar-ci-modellbau.webp 139884
 ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-square.webp 58370
 ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-wide.webp 31768
-FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 711919 hits 121
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 712938 hits 122
  352:         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
  1949:     public function inject_glossary_single_banner($content) {
  1958:         $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
@@ -225,22 +225,23 @@ FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 711919 hits 
  2556:         if (is_array($register_row) && class_exists('HD_Hobbyregister_Core_Stable127') &&
  2557:             method_exists('HD_Hobbyregister_Core_Stable127','image_entry')) {
  2558:             $entry = HD_Hobbyregister_Core_Stable127::image_entry((string)($register_row['registry_id'] ?? ''));
- 2606:             !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready() ||
- 2607:             !function_exists('hd_hobbyregister_records')) { return; }
- 2609:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$found)) { return; }
- 2611:         foreach ((array)hd_hobbyregister_records() as $item) {
- 2618:             'post_id'=>0,'post_type'=>'hobbyregister_profile',
- 2624:         $html=$this->render_affiliate_slot_for_context('hobbyregister_'.$slug,$context,'glossary_single_desktop_banner','portal_context','');
- 2625:         if (trim($html)==='') { $html=$this->hdar_ci_amazon_banner($context,'glossary_single_desktop_banner','hobbyregister_'.$slug,$row); }
- 2747:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
- 2749:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
- 3757:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
- 3955:         $glossary_single_banner = $required_creative_type === 'banner'
- 3957:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
- 3984:             if (!$glossary_single_banner) {
- 4126:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
- 5227:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
- 8497:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
+ 2573:                         $photo = plugins_url('hd-hobbyregister-core/assets/' . ltrim($asset_path, '/'));
+ 2619:             !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready() ||
+ 2620:             !function_exists('hd_hobbyregister_records')) { return; }
+ 2622:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$found)) { return; }
+ 2624:         foreach ((array)hd_hobbyregister_records() as $item) {
+ 2631:             'post_id'=>0,'post_type'=>'hobbyregister_profile',
+ 2637:         $html=$this->render_affiliate_slot_for_context('hobbyregister_'.$slug,$context,'glossary_single_desktop_banner','portal_context','');
+ 2638:         if (trim($html)==='') { $html=$this->hdar_ci_amazon_banner($context,'glossary_single_desktop_banner','hobbyregister_'.$slug,$row); }
+ 2760:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2762:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+ 3770:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
+ 3968:         $glossary_single_banner = $required_creative_type === 'banner'
+ 3970:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 3997:             if (!$glossary_single_banner) {
+ 4139:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
+ 5240:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
+ 8510:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
 FILE affiliate-portal-router/includes/class-hdar-amazon-start.php bytes 22711 hits 52
  106:     public static function render_slot($context, $slot_type, $content_id = '') {
  321:         <p><label>Zielart <select name="hdar_target_type"><option value="post">Seite / Hobbyregister / Beitrag</option><option value="term">Kategorie / Glossargruppe</option></select></label>
@@ -831,3 +832,61 @@ HD007 IMAGE JSON hd-hobbyregister-core/data/glossary-image-reserve-v1.json
       "sha256": "cc337b4e23413da88d7f199cf2e868fd6bb08932a30e8df7ce78918216bfc2b3",
       "status": "REJECTED_COLLAGE_KEEP_ONLY_DO_NOT_USE_AS_MASTER",
       "activ
+
+REAL HD007 IMAGE MAP SAMPLES:
+[
+  [
+    "hobby:airbrush-modellbau",
+    {
+      "source": "hd007",
+      "path": "portraits/final-masters/airbrush-modellbau.webp",
+      "status": "FINAL_MASTER_VERIFIED",
+      "topic": "modellbau",
+      "basis": "semantic_keyword",
+      "production_status": "DONE",
+      "production_batch": 1,
+      "portrait_target": "portraits/batch-01/airbrush-modellbau.webp",
+      "photo_brief": "Nahaufnahme eines Modellbauers beim Airbrushen eines neutralen maßstäblichen Modells in einer sauberen Hobbywerkstatt; Airbrush-Pistole, Farbtopf und Abdeckmaterial sichtbar; keine Markenlogos.",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "usage": "hero_and_article",
+      "master_sha256": "ea156934112e0501e46e80971aaca91cc0fe6c3c2924a34a20c10526332d772f"
+    }
+  ],
+  [
+    "hobby:modellbau",
+    {
+      "source": "hd003",
+      "path": "hobby-depot-v150617/hero-masters-v150684/modellbau.webp",
+      "status": "SEMANTIC_MASTER_REUSE",
+      "topic": "modellbau",
+      "basis": "semantic_keyword"
+    }
+  ],
+  [
+    "hobby:malen",
+    null
+  ],
+  [
+    "hobby:acrylmalerei",
+    null
+  ],
+  [
+    "hobby:air-dry-clay",
+    {
+      "source": "hd007",
+      "path": "portraits/final-masters/air-dry-clay.webp",
+      "status": "FINAL_MASTER_VERIFIED",
+      "topic": "heimwerken",
+      "basis": "activity_fallback",
+      "production_status": "DONE",
+      "production_batch": 1,
+      "portrait_target": "portraits/batch-01/air-dry-clay.webp",
+      "photo_brief": "Hände formen eine kleine Schale und eine Figur aus lufttrocknender Modelliermasse auf einem hellen Holztisch; Modellierwerkzeuge und zwei fertige Stücke sichtbar; kein Töpferrad.",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "usage": "hero_and_article",
+      "master_sha256": "685520ad48d010115eb00155fc1aefa25ba4a74e27a87b96236e854062be2de5"
+    }
+  ]
+]
