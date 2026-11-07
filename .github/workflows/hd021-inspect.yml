@@ -1,0 +1,41 @@
+name: Hobby Depot 021 inspect exact current ZIPs
+on:
+  push:
+    branches: ['hobbyroom/hd009-021-banner-hd007-hero-stage-20261107']
+    paths: ['.github/workflows/hd021-inspect.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect HD007 hero markup and HD009 ad markup
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib
+          from pathlib import Path
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          for plugin in ("HD-007-HOBBYREGISTER-CORE","HD-009-AFFILIATE-ZENTRALE"):
+              p=root/plugin/"CURRENT.zip"
+              with zipfile.ZipFile(p) as z:
+                  print("PACKAGE",plugin,len(z.namelist()),hashlib.sha256(p.read_bytes()).hexdigest(),"TESTZIP",z.testzip())
+                  print("FILES",[(v.filename,v.file_size) for v in z.infolist() if v.filename.endswith((".php",".css",".js"))][:40])
+                  for f in z.namelist():
+                      if not f.endswith((".php",".css",".js")):continue
+                      s=z.read(f).decode('utf-8','replace')
+                      lines=s.splitlines()
+                      if plugin.startswith("HD-007"):
+                          matches=[i for i,x in enumerate(lines) if re.search(r"hero|register.?start|start.?seite|entdecke|hobby.?finden|hobby.?register.?index|hero.?title|hero.?subtitle",x,re.I)]
+                          if not matches:continue
+                          print("HD007_FILE",f,"lines",len(lines),"MATCHES",len(matches))
+                          for i in matches[:16]:
+                              print("MATCH",i+1," ".join(lines[max(0,i-2):min(len(lines),i+3)])[:500])
+                      else:
+                          if "hobby-depot-affiliate-router.php" in f:
+                              for marker in ("private function hdar_ci_amazon_banner","public function hdar_ci_register_footer"):
+                                  i=s.find(marker)
+                                  if i>=0:print("HD009_METHOD",marker,"SRC",s[i:i+15000][:15000])
+                          if "hdar-amazon-start.css" in f:
+                              print("HD009_CSS_TAIL",s[-10000:])
+          PY
