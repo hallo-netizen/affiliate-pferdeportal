@@ -1,0 +1,30 @@
+name: HAB existing design photo map check
+on:
+  push:
+    branches: [hab-004-rc11-audit-download-20261107]
+permissions:
+  contents: read
+jobs:
+  photo-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Examine exact original design image mapping
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import json
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'
+          with ZipFile(p) as z:
+              f=[x for x in z.namelist() if x.endswith('/data/area-image-mapping-v1.json')]
+              print('PHOTO_MAPS',f)
+              if not f: raise Exception('mapping missing')
+              d=json.loads(z.read(f[0]))
+              for row in d.get('topics',[])+d.get('additional_exact_live_labels',[]):
+                  if any('leckwarnung' in str(v).lower() or 'wassermelder' in str(v).lower() for v in row.values()):
+                      file=str(row.get('photo',''))
+                      match=[n for n in z.namelist() if n.endswith('/assets/'+file)]
+                      print('MATCHED_TOPIC',row,'EXISTS',bool(match))
+              assets=[n for n in z.namelist() if n.endswith(('.webp','.jpg'))]
+              print('PHOTO_COUNT',len(assets))
+          PY
