@@ -1,0 +1,51 @@
+name: HD Hobby Depot banner coverage and claim audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-023-claim-banner-audit-20261107']
+    paths: ['.github/workflows/hd023-audit.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact current plugins and scan the public website
+        run: |
+          python3 - <<'PY'
+          import zipfile, pathlib,re,hashlib,urllib.request,urllib.parse,xml.etree.ElementTree as ET,json,html,time
+          root=pathlib.Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          j={}
+          for pid in ("HD-009-AFFILIATE-ZENTRALE","HD-007-HOBBYREGISTER-CORE"):
+            p=root/pid/"CURRENT.zip"
+            with zipfile.ZipFile(p) as z:
+              print("CURRENT",pid,hashlib.sha256(p.read_bytes()).hexdigest(),len(z.namelist()),"CRC",z.testzip())
+              if pid.startswith("HD-007"):
+                s=z.read("hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php").decode()
+                for needle in ("Entdecke neue und ungewöhnliche Hobbys.",".hdr-hero:not(.is-profile)"):
+                  print("HD007_CLAIM",needle,s.count(needle))
+              else:
+                s=z.read("affiliate-portal-router/hobby-depot-affiliate-router.php").decode()
+                css=z.read("affiliate-portal-router/assets/hdar-amazon-start.css").decode()
+                for mark in ['private function hdar_ci_amazon_banner','public function hdar_ci_register_footer','private function render_affiliate_slot_for_context','public function auto_inject_template_affiliate_slots']:
+                  i=s.find(mark)
+                  print("SOURCE_METHOD",mark,"LENGTH",len(s))
+                  print(s[i:i+9500] if i>=0 else "not found")
+                print("CSS_WIDE_TAIL",css[-6500:])
+                for key in ['overview_wide_banner_slot','HDAR_Amazon_Start::launch_active','get_the_post_thumbnail_url','No matching photograph','hdar_ci_amazon_banner(']:
+                  print("CONDITION",key,s.count(key))
+          urls=["https://hobby-depot.de/sitemap_index.xml","https://hobby-depot.de/post-sitemap.xml","https://hobby-depot.de/page-sitemap.xml","https://hobby-depot.de/wp-json/wp/v2/posts?per_page=20&_fields=link%2Cslug%2Cstatus","https://hobby-depot.de/hobbyregister/alte-kameras-reparieren/","https://hobby-depot.de/hobbyregister/airbrush-modellbau/","https://hobby-depot.de/hobbyregister/alabasterschnitzen/","https://hobby-depot.de/hobbyregister/buchbinden/","https://hobby-depot.de/hobbyregister/muenzen/","https://hobby-depot.de/gestalten/malen-zeichnen/"]
+          for u in urls:
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 Chrome/128.0'})
+              with urllib.request.urlopen(req,timeout=16) as r:
+                raw=r.read(1200000)
+                s=raw.decode('utf-8','replace')
+                imgs=re.findall(r'<img[^>]+src=["\x27]([^"\x27]+)',s,re.I)
+                print("LIVE_CHECK",r.status,u,"len",len(raw),"banner-count",s.count('hdar-ci-amazon-banner-square'),s.count('hdar-ci-amazon-banner-wide'),"photo-url-count",s.count('hdar-ci-photo'),"image-samples",imgs[:5] if "hobbyregister/" in u else [],"sample",s[:170] if "sitemap" in u or "wp-json" in u else "")
+                if u.endswith('sitemap_index.xml'):
+                  print("SITEMAPS",re.findall(r'<loc>([^<]+)</loc>',s)[:24])
+                if u.endswith('post-sitemap.xml'):
+                  print("POST_LINKS",re.findall(r'<loc>([^<]+)</loc>',s)[:28])
+            except Exception as e:
+              print("LIVE_ERROR",u,type(e).__name__,str(e)[:150])
+          PY
