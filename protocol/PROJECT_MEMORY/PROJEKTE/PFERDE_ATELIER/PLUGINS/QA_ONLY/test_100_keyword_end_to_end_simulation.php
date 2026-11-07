@@ -50,7 +50,7 @@ $results=[];$expected=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
 $counter=0;$selectedFree='';
 foreach($completed as $key=>$row){
     if($row['decision']!=='JA')continue;
-    $raw=(string)$row['raw_query'];$low=mb_strtolower($raw,'UTF-8');
+    $raw=(string)$row['raw_query'];$low=function_exists('mb_strtolower')?mb_strtolower($raw,'UTF-8'):strtolower($raw);
     // Contrived scenario: the SAME EXTERNAL owner gives all semantic outcomes.
     // No PHP keyword heuristics are used to decide this inside the product;
     // the following is TEST DATA only, not a real site verdict.
