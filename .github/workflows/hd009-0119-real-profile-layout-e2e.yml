@@ -1,4 +1,4 @@
-name: HD009 0.1.19 - real local siteurl normalized and CSS layout E2E
+name: HD009 0.1.19 - real DOM and proof archive E2E
 on:
   push:
     branches:
