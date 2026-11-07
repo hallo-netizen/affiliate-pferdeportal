@@ -1,0 +1,77 @@
+--- a/includes/class-pserc-seo-reader.php
++++ b/includes/class-pserc-seo-reader.php
+@@ -131,7 +131,24 @@
+         if ($type==='')$reasons[]='SEO_ARTICLE_TYPE_MISSING';
+         if ($categorySlug==='')$reasons[]=$status==='REASSIGNED'?'SEO_REASSIGNED_CATEGORY_SLUG_UNRESOLVED':'SEO_CATEGORY_SLUG_MISSING';
+         $priority=(float)($candidate['priority_score']??$candidate['metrics']['priority_score']??0.0);
++        // Reuse the ONE existing external SEO owner: technical source and title
++        // binding only; never rejudge the editorial search intent here.
++        $single=[];$key=(string)($candidate['pool_key']??$candidate['global_topic_uuid']??'');
++        $rawQuery=self::firstNonEmptyRawQuery($candidate);
++        $upstream=(array)($candidate['planning_readiness_gate']['external_editorial_receipt']??[]);
++        if(($upstream['contract']??'')==='PSTE_MINI_SEO_DECISIONS_V1'
++            &&($upstream['box']??'')==='FREI'&&$key!==''&&$rawQuery!==''
++            &&class_exists('PSTE_Mini_Workflow')
++            &&method_exists('PSTE_Mini_Workflow','singleOwnerSeoFor')){
++            $stored=(array)PSTE_Mini_Workflow::singleOwnerSeoFor($key,$rawQuery);
++            if(($stored['box']??'')==='FREI'
++                &&hash_equals((string)($upstream['source_sha256']??''),(string)($stored['source_sha256']??''))
++                &&hash_equals((string)($upstream['intent_slot']??''),(string)($stored['intent_slot']??''))
++                &&hash_equals(trim((string)($candidate['production_title']??'')),
++                    (string)($stored['approved_title']??'')))$single=$stored;
++        }
+         $normalized=[
++            'single_external_seo_owner_receipt'=>$single,
+             'pool_key'=>(string)($candidate['pool_key']??$candidate['global_topic_uuid']??''),
+             'candidate_id'=>(string)($candidate['candidate_id']??''),
+             'source_query'=>self::firstNonEmptyRawQuery($candidate),
+--- a/includes/class-pserc-compiler.php
++++ b/includes/class-pserc-compiler.php
+@@ -61,8 +61,13 @@
+                 $review[]=self::review($topic,'BLOCKED_EDITORIAL_STRAND',(array)($editorial['reason_codes']??['EDITORIAL_STRAND_BLOCKED']));continue;
+             }
+ 
+-            // Semantic uniqueness is a separate read-only gate. Canonical plan slots are never
+-            // used as duplicate/cannibalisation evidence and cannot reinterpret the topic.
++            // The external SEO owner already decided this search intent once.
++            // Keep the normal legacy check ONLY for themes without an authentic receipt.
++            $oneOwner=!empty($topic['single_external_seo_owner_receipt']);
++            if($oneOwner){
++                $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
++                    'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
++            }else{
+             $existingSemantic=PSERC_Semantic_Duplicate_Gate::againstExisting($topic,$existing);
+             $topic['semantic_duplicate_gate']=$existingSemantic;
+             if(($existingSemantic['decision']??'PASS')==='BLOCKED_DUPLICATE'){
+@@ -80,6 +85,7 @@
+                 $review[]=self::review($topic,'REVIEW_REQUIRED_SEMANTIC_OVERLAP',(array)($candidateSemantic['reason_codes']??['SEMANTIC_OVERLAP_REVIEW_REQUIRED']),$candidateSemantic);continue;
+             }
+ 
++            } // no external receipt: legacy semantic review completed
+             $keyword=(array)($topic['technical_strand_report']['target_keyword_gate']??[]);$topic['preallocation_keyword']=$keyword;
+             if(($keyword['status']??'')!=='PASS'){$review[]=self::review($topic,'REVIEW_REQUIRED_TARGET_KEYWORD',(array)($keyword['errors']??['TARGET_KEYWORD_BLOCKED']));continue;}
+             $portalEvidence=PSERC_Portal_Topic_Evidence_Gate::evaluate(self::upstreamEvidenceView($topic),$structure);$topic['portal_topic_evidence_gate']=$portalEvidence;
+--- a/includes/class-pserc-plan-compile-job.php
++++ b/includes/class-pserc-plan-compile-job.php
+@@ -136,7 +136,21 @@
+             $technical=PSERC_Technical_Strand::evaluate($topic,(array)$boot['production'],(array)$env['structure'],(array)$env['baseline']);$editorial=PSERC_Editorial_Strand::evaluate($topic);self::decorateTopic($topic,$technical,$editorial);
+             if(empty($technical['ok']))return self::finishReview($job,$topic,(string)($technical['primary_status']??'BLOCKED_TECHNICAL_STRAND'),(array)($technical['reason_codes']??['TECHNICAL_STRAND_BLOCKED']),[],$sortCursor);
+             if(empty($editorial['ok']))return self::finishReview($job,$topic,'BLOCKED_EDITORIAL_STRAND',(array)($editorial['reason_codes']??['EDITORIAL_STRAND_BLOCKED']),[],$sortCursor);
+-            $projection=PSERC_Semantic_Duplicate_Gate::projectTopic($topic);$exact=self::lookupExistingExact($gen,$topic);
++            $projection=PSERC_Semantic_Duplicate_Gate::projectTopic($topic);
++            if(!empty($topic['single_external_seo_owner_receipt'])){
++                // Existing candidate work stage and existing preparation writer.
++                // Empty semantic comparison buckets: no duplicate evaluation AGAIN.
++                $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
++                    'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
++                $work=['topic'=>$topic,'baseline'=>(array)$env['baseline'],
++                    'structure'=>(array)$env['structure'],'sort_cursor'=>$sortCursor,
++                    'projection'=>$projection,'stage'=>'PREPARED','buckets'=>[],
++                    'bucket_pos'=>0,'cursor'=>0,'aggregate'=>
++                        PSERC_Semantic_Duplicate_Gate::newAggregateState('METADATA_CANDIDATES')];
++                PSERC_Plan_Snapshot_Store::putRecord($gen,'candidate_work',0,$work);
++                return [$job,2,1,0];
++            }
++            $exact=self::lookupExistingExact($gen,$topic);
+             if($exact!==null){$agg=PSERC_Semantic_Duplicate_Gate::exactExistingResult($exact);$topic['semantic_duplicate_gate']=$agg;return self::finishReview($job,$topic,'BLOCKED_EXISTING_CONTENT_DUPLICATE',['EXISTING_CONTENT_EXACT_OR_IDENTITY_DUPLICATE'],$agg,$sortCursor);}
+             $work=['topic'=>$topic,'baseline'=>(array)$env['baseline'],'structure'=>(array)$env['structure'],'sort_cursor'=>$sortCursor,'projection'=>$projection,'stage'=>'EXISTING','buckets'=>self::compatibleBuckets($projection,(array)($job['existing_families']??[])),'bucket_pos'=>0,'cursor'=>0,'aggregate'=>PSERC_Semantic_Duplicate_Gate::newAggregateState('EXISTING_CONTENT')];
