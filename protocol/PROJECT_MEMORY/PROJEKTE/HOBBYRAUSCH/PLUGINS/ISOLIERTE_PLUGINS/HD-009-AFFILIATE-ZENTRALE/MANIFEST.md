@@ -1,17 +1,23 @@
-# HD009 – Einzige aktuelle vollständige Hobby-Depot-Affiliate-ZIP
+# Hobby Depot HD009 – einzige aktuelle Affiliate-Plugin-ZIP
 
-Version: **0.1.13-dev** · Stand 07.11.2026
-Plugin: **Hobby Depot – Affiliate-Zentrale**
-Datei: `CURRENT.zip` (WordPress: `affiliate-portal-router/hobby-depot-affiliate-router.php`)
-ZIP: **707164 Bytes**
-ZIP SHA-256: `d6536031f0eca61c15a2d8c754015ed92de3ad474da9a10e961782a076681d43`
-Git-Blob: `fd18e2caea3836a8054189edac67e70c9c6d10b0`
+Stand: **07.11.2026**. Version: **0.1.14-dev** (technisch geprüfter Upgrade-Kandidat, keine Live-Abnahme).
 
-**Änderungen gegenüber 0.1.12:** Manuelle Eigenbanner-Zuordnung und parallelen Banner-Renderer entfernt; vorhandene Pferdeatelier-Bannerautomatik (Thema, Elternpfad, Format und Ziel) wieder für die Ausgabe geöffnet. Kostenfreie DataForSEO-Zugangsprüfung auf der bestehenden Seite `Affiliate-Zentrale → Amazon + idealo` ergänzt. Keine neuen Pluginpfade, keine neuen Tabellen, keine fremden Portal-/Partnerdaten.
+- **Einzige ZIP:** `CURRENT.zip`, **708630 Bytes**
+- SHA-256: `dd7376073c3d9bae80741e4f97cdd7db3e5af4812f80caf88c87ce7da4176d76`
+- Git-Blob-SHA: `b048b4de8f223202350db925c9d51c8b2b2b4e82`
+- WordPress-Pfad: `affiliate-portal-router/hobby-depot-affiliate-router.php`
+- Nur zwei Dateien gegenüber 0.1.13 verändert: Hauptdatei + Readme. Alle 28 weiteren Dateien bytegleich.
+- **Tests:** ZIP CRC PASS, 24/24 PHP-Lint PASS, 10 Startmodus-Tests PASS, 4 kostenlose DataForSEO-Simulationen PASS. Binär-ZIP nach Upload auf GitHub anhand Blob/Größe kontrolliert.
 
-**Tests:** ZIP CRC PASS, 30 Dateien, PHP 24/24 PASS, Offline-Erfolg-/Fehlerfälle des kostenlosen DataForSEO-GET PASS. **Noch kein WordPress-Live-/API-Live-PASS.**
+## Inhalt und Grenzen
 
-**Wichtig:** Die erhaltenen eigenen Modellbau-Motivdateien sind nicht automatisch in den bestehenden Werbemittelbestand eingespielt. Die normale Bannerzuordnung bezieht sich auf tatsächlich vorhandene gültige Werbemittel. Keine zweite Automatisierung entwickeln.
+1. Vorhandene, **nicht neu entwickelte** Pferdeatelier-/Hobby-Bannerautomatik bleibt zuständig für Thema, tiefstes Ziel/Elternpfad, Slot/Format und Ausgabe.
+2. Amazon+idealo-Startmodus lässt idealo sowie bereits fachlich und technisch materialisierte interne Hobby-Eigenbanner zu. Fremde Affiliate-Provider und nicht belegte manuelle Banner bleiben blockiert. Vorher pauschal gesperrte Hub-Bannerplätze sind wieder erreichbar.
+3. Amazon-ASIN-/DataForSEO-Suche, idealo Feed/Import/Cron und Hobby-Kategorien HD004/HD007 bleiben unverändert; keine neue Engine, Tabelle oder Schleife.
+4. Noch **nicht** erledigt: Eigenmotive liegen nur als zwei Dateien im Plugin, **noch nicht als gültige Werbemittel** in der Creative-Library. Kein automatisches Einschalten ungeprüfter Entwürfe.
+5. Der Betreiber hat DataForSEO-Zugangsdaten getestet; das echte Testergebnis ist in diesem Chat nicht belegt. idealo-Feed bleibt bis zur echten Konto-/API-Verifikation offen.
+6. Die DataForSEO-Produktsuche ist in diesem Stand **manuell pro konkretem Ziel und kostenpflichtig**, keine automatische Massensuche. Das ist eine Grenze der aktuellen Funktion, keine behauptete Implementierung.
+7. Eine tatsächliche WordPress-Installation 0.1.14 und live geprüfte öffentliche Ausspielung sind nicht belegt.
 
-Technische Prüfakte: `../../PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0113_NATIVE_BANNER_DATAFORSEO_TEST_20261107.md`.
-Fachliche Current: `../../../AFFILIATE/CURRENT_STATE.md`.
+Fachliche einzige Current-Autorität: `../../../AFFILIATE/CURRENT_STATE.md`.
+Technische Prüfdokumentation: `../../PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0114_BANNER_STARTMODUS_PRUEFUNG_20261107.md`.
