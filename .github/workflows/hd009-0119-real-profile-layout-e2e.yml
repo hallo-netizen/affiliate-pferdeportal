@@ -1,4 +1,4 @@
-name: HD009 0.1.19 - real WP Hobbyregister placements
+name: HD009 0.1.19 - real WP placement and stylesheet gate
 on:
   push:
     branches:
