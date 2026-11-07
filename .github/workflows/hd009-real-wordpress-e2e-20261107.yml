@@ -1,0 +1,17 @@
+name: HD009 real WordPress and MariaDB E2E diagnostic
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0117-real-wp-e2e-audit-20261107
+    paths:
+      - .github/workflows/hd009-real-wordpress-e2e-20261107.yml
+permissions:
+  contents: read
+jobs:
+  actual-local-wordpress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run complete WordPress with MariaDB, HD003, HD007, HD009, HTTP
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/REAL_WORDPRESS_E2E_0117.sh
