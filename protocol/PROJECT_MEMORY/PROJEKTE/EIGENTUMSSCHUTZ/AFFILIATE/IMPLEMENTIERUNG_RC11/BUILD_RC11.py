@@ -160,7 +160,7 @@ def prepare_harness(temp, original, patched, design):
     old="require dirname(__DIR__).'/affiliate-portal-router/affiliate-portal-router.php';"
     assert h.count(old)==1
     h=h.replace(old,'''function get_term($id,$tax='category'){if($tax!=='category'||(int)$id!==201)return null;return (object)['term_id'=>201,'slug'=>'wassermelder','name'=>'Wassermelder','description'=>''];}
-function wp_kses_post($html){return $html;} function esc_url_raw($url){return $url;}
+function wp_kses_post($html){return $html;}
 require dirname(__DIR__).'/hab-design/includes/area-design-prototype.php';
 '''+old)
     marker="echo 'FULL_PLUGIN_ASSERTIONS '.$GLOBALS['assertions'].\"\\n\";"
