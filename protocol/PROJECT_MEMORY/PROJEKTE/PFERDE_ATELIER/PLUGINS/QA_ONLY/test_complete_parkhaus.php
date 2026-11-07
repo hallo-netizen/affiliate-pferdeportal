@@ -2,7 +2,34 @@
 declare(strict_types=1);
 define('ABSPATH','/qa/');
 define('ARRAY_A','ARRAY_A');
-function get_option(string $key,$default=[]){return $default;}
+$GLOBALS['existing_runtime_plan']=[
+    'items'=>[
+        'stored-article-17'=>[
+            'canonical_article_id'=>'stored-article-17',
+            'plan_slot_sha256'=>str_repeat('a',64),
+            'post_id'=>17,'status'=>'PLANNED','category_slug'=>'regendecken',
+            'article_type'=>'Beratung','target_keyword'=>'regendecke pferd 0g',
+            'title'=>'Ungefütterte Regendecken für Pferde'],
+        'stored-article-18'=>[
+            'canonical_article_id'=>'stored-article-18',
+            'plan_slot_sha256'=>str_repeat('b',64),
+            'post_id'=>0,'status'=>'RESERVED','category_slug'=>'pferdeanhaenger',
+            'article_type'=>'FAQ','target_keyword'=>'pferdeanhänger 2 pferde',
+            'title'=>'Pferdeanhänger für zwei Pferde']
+    ]
+];
+$GLOBALS['runtime_plan_reads']=0;
+$GLOBALS['simulate_runtime_plan_change']=false;
+function get_option(string $key,$default=[]){
+    if($key==='ppm679_editorial_plan_runtime_state_v1'){
+        $GLOBALS['runtime_plan_reads']++;
+        $out=$GLOBALS['existing_runtime_plan'];
+        if($GLOBALS['simulate_runtime_plan_change']&&$GLOBALS['runtime_plan_reads']%2===0)
+            $out['items']['stored-article-18']['status']='ALTERED_DURING_SCAN';
+        return $out;
+    }
+    return $default;
+}
 require_once $argv[1] ?? throw new RuntimeException('MINI source required');
 function check(bool $ok,string $label):void{if(!$ok)throw new RuntimeException('FAILED '.$label);echo "PASS $label\n";}
 function get_post_types(array $args,string $format='names'): array {
@@ -88,7 +115,10 @@ final class PSERC_Plan_Dependency_Fingerprint {public static bool $current=true;
 $wpdb=new FakeDb();
 $out=PSTE_Mini_Workflow::readParkhausForMini();
 check($out['complete']===true,'all three existing sources complete');
-check(count($out['items'])===4,'two WP, one PSTE and one PSERC row retained');
+check(count($out['items'])===6,'two WP, one PSTE, one PSERC and two existing editorial runtime slots retained');
+check(($out['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']['item_count']??-1)===2,'existing stored runtime plan read exactly once as one source');
+check(($out['items'][4]['canonical_article_id']??'')==='stored-article-17','existing canonical article slot retained unchanged');
+check(($out['items'][5]['target_keyword']??'')==='pferdeanhänger 2 pferde','existing runtime target keyword retained');
 check(count(array_filter($out['items'],static fn($x)=>($x['source']??'')==='WORDPRESS'))===2,'all relevant WP post types included');
 check($out['items'][1]['status']==='private','private SEO page included');
 check(in_array('Was ist eine ungefütterte Decke?',$out['items'][1]['headings'],true),'heading from full article retained');
@@ -99,6 +129,14 @@ check($out['items'][2]['source']==='PSTE_PLAN'&&$out['items'][3]['source']==='PS
 check($out['items'][3]['status']==='REVIEW_REQUIRED_SEMANTIC_OVERLAP','held PSERC plan retained');
 check($out['items'][2]['seo_topic_id']===$out['items'][3]['seo_topic_id'],'same PSTE and PSERC topic can be recognized as one, without second intent check');
 check(preg_match('/^[a-f0-9]{64}$/D',$out['sha256'])===1,'single snapshot version fingerprint');
+$GLOBALS['runtime_plan_reads']=0;
+$GLOBALS['simulate_runtime_plan_change']=true;
+$out=PSTE_Mini_Workflow::readParkhausForMini();
+check($out['complete']===false
+    &&$out['reason']==='EXISTING_RUNTIME_EDITORIAL_PLAN_CHANGED_DURING_SCAN',
+    'existing editorial runtime mutation blocks freshness, no silent FREE');
+$GLOBALS['simulate_runtime_plan_change']=false;
+$GLOBALS['runtime_plan_reads']=0;
 PSERC_Plan_Dependency_Fingerprint::$current=false;
 $out=PSTE_Mini_Workflow::readParkhausForMini();
 check($out['complete']===false,'stale PSERC source never produces complete parkhouse');
