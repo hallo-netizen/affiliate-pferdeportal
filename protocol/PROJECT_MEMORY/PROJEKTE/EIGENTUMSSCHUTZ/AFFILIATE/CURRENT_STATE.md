@@ -1,3 +1,13 @@
+## 07.11.2026 – HARTER AMAZON-/DATAFORSEO-RC3-ABGLEICH (NACH ORIGINAL-ZIP)
+
+**Prüfbeleg:** [AMAZON_AUTOMATIK_ABGLEICH_20261107.md](AMAZON_AUTOMATIK_ABGLEICH_20261107.md).
+
+**Ergebnis:** Die amtliche Hab-004-RC3-ZIP (605.196 B, SHA `2e5f6790...`) hat die generischen idealo-/Banner-/Output-Wege, aber **kein** DataForSEO-Modul und keine aktive Amazon-Produktrecherche. Die vorhandene Amazon-Providerkarte ist `prepared`, nicht `active`. Die Anwenderforderung bleibt ausdrücklich **vollautomatisch**, **keine** manuellen Einzelkampagnen. PartnerNet-Website und separate Hab-Tracking-ID sind vorhanden. Die ältere Pferdeatelier-Referenz weist eine spätere DataForSEO-/Amazon-Automatik nach; ihre vollständigen Originalbytes waren in diesem Durchlauf trotz Bibliotheksnachweis nicht exportierbar. **Kein ungeprüftes Wiederprogrammieren oder RC4 auf Vermutung.**
+
+**NEXT ACTION:** Vollständiges zugängliches originales Pferdeatelier-Affiliate-ZIP mit Amazon-Automatik gegen eigenständige Hab-RC3-Quelle vergleichen, nur fehlende allgemein wiederverwendbare Funktionen isoliert portieren und vollständig samt WP-/Negativ-/Tracking-Gates testen. Bis dahin keine Pluginaktualisierung und keine Aktivierung von Amazon-Produktanzeigen. eBay/Pferdeatelier/Hobbydepot unverändert.
+
+---
+
 ## 07.11.2026 – AMAZON-/EBAY-EINRICHTUNGSSTAND (AKTUELLE OPERATIVE FORTSETZUNG)
 
 **Verbindlicher Gesprächs-/Kontostand:** [SETUP_EBAY_AMAZON_BANNER_20261107.md](SETUP_EBAY_AMAZON_BANNER_20261107.md). Amazon-Tracking-ID für Hab & Bewahr laut Nutzer **bereits angelegt**; Website-Liste und Anbindung im WP-Plugin noch zu prüfen. Amazon im Plugin „Adapter vorbereitet“, nicht live verbunden. Eigene breite/quadratische Banner sind Designentwürfe, noch keine Produktions-/Amazon-Freigabe. eBay: eigene Hab-EPN-Kampagne im Plugin gespeichert; Zusatz-Keysets für Hobby Depot und Hab & Bewahr beantragt, Ticket 261106-000039, eBay-Rückfrage zur Begründung, Antwortversand noch unbestätigt. **Pferdeatelier-/Hobbydepot-Developer-Einstellungen und Plugins nicht verändern.**
