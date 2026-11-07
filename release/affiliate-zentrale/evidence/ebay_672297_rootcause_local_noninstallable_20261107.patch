@@ -43,7 +43,6 @@
                  $items = array_values((array) ($page_data['items'] ?? array()));
                  $summary['pages']++;
                  $profile['pages'] = absint($profile['pages'] ?? 0) + 1;
-                 $summary['profile_stats'][$profile_key]['pages']++;
 --- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 +++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 @@ -1721,7 +1721,17 @@
