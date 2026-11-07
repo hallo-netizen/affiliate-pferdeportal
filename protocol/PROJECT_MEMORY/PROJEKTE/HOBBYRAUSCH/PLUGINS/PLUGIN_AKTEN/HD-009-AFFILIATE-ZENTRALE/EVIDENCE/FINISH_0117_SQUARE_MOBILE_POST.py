@@ -20,8 +20,12 @@ s=s.replace(old,new,1)
 old="""        $post_id = absint($context['post_id'] ?? 0);"""
 new="""        $post_id = absint($context['post_id'] ?? 0);
         if ($post_id === 0 && is_numeric($content_id)) { $post_id = absint($content_id); }"""
-assert s.count(old)==1
-s=s.replace(old,new,1)
+ci_start=s.index("    private function hdar_ci_amazon_banner(")
+ci_end=s.index("    /** HD007 owns", ci_start)
+ci=s[ci_start:ci_end]
+assert ci.count(old)==1, "Need single post_id occurrence inside own Amazon CI method only"
+ci=ci.replace(old,new,1)
+s=s[:ci_start]+ci+s[ci_end:]
 assert "hdar_approved_rental_banner_fallback" not in s
 assert "Version: 0.1.17-dev" in s
 assert "($register_row['canonical_name'] ?? '')" in s
