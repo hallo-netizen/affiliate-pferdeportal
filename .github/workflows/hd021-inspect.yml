@@ -39,3 +39,26 @@ jobs:
                           if "hdar-amazon-start.css" in f:
                               print("HD009_CSS_TAIL",s[-10000:])
           PY
+
+      - name: Extract actual hero and ad structure
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          base=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          with ZipFile(base/"HD-007-HOBBYREGISTER-CORE"/"CURRENT.zip") as z:
+              s=z.read("hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php").decode()
+              for m in ["private static function hero(","private static function styles(","public static function render_index"]:
+                  i=s.find(m)
+                  print("HD007_METHOD",m,repr(s[i:i+1800]))
+              for selector in [".hdr-hero",".hdr-hero-copy",".hdr-hero h1",".hdr-hero-copy h1",".hdr-hero figure",".hdr-hero.is-profile",".hdr-brush-claim","@media(max-width:820px)","@media(max-width:540px)"]:
+                  matches=[(m.start(),s[m.start():m.start()+550]) for m in re.finditer(re.escape(selector),s)]
+                  print("HD007_SELECTOR",selector, len(matches),[v for i,v in matches[:4]])
+          with ZipFile(base/"HD-009-AFFILIATE-ZENTRALE"/"CURRENT.zip") as z:
+              s=z.read("affiliate-portal-router/hobby-depot-affiliate-router.php").decode()
+              a=s.index("private function hdar_ci_amazon_banner(")
+              b=s.index("public function hdar_ci_register_footer(",a)
+              print("HD009_RENDER",s[a:b][-14000:])
+          PY
