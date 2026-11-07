@@ -71,12 +71,7 @@ AMAZON_MARKUP_NEW = r'''    /** Use only saved verified ASIN/title. The original
         }
         if ($product_card) {
             $index = ($offer_index === null) ? ((int)$match[1]-1) : absint($offer_index);
-            if (!isset($verified[$index])) {
-                if ($index !== 0 || $verified) { return ''; }
-                $search = '<a href="'.esc_url($url).'" target="_blank" rel="sponsored nofollow noopener noreferrer">Passende Angebote bei Amazon suchen</a>';
-                return '<div class="ppar-affiliate-slot ppar-slot-'.$slot_type.' ppar-hab-amazon-search" data-ppar-slot="'.$slot_type.'">'
-                    .'<div class="ppar-affiliate-label">Anzeige</div><div class="ppar-affiliate-content">'.$search.'</div></div>';
-            }
+            if (!isset($verified[$index])) { return ''; }
             $item=$verified[$index];
             $banner=array('mode'=>'image_link','creative_type'=>'product','network'=>'amazon',
                 'url'=>$item['url'],'title'=>$item['title'],'button_text'=>'Bei Amazon ansehen',
