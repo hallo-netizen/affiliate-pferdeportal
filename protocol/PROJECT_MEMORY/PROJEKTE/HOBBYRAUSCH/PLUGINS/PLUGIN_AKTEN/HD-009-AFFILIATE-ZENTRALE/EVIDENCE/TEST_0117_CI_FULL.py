@@ -20,6 +20,8 @@ s=entries[main].decode("utf-8")
 assert s.count("Version: 0.1.17-dev")==1
 assert "hdar_approved_rental_banner_fallback" not in s
 assert "hdar_ci_register_footer" in s
+assert "array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);" in s, "Glossar own banner must be square desktop AND mobile"
+assert "if ($post_id === 0 && is_numeric($content_id))" in s, "Posts use native content ID for right picture"
 # Original HD007 uses canonical_name (never 'name') and image_entry source/path.
 assert "($register_row['canonical_name'] ?? '')" in s, "register banner topic must use original canonical_name"
 assert "($item['canonical_name'] ?? '')" in s, "register router must match original canonical_name"
