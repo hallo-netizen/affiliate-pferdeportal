@@ -1,30 +1,27 @@
-# HD-009 – HOBBY DEPOT AFFILIATE-ZENTRALE – TECHNISCHE AKTE
+# HD-009 – Hobby Depot Affiliate-Zentrale – technische Plugin-Akte
 
-## Genau eine Statusautorität
+**Stand: 07.11.2026**. Dies ist die technische Akte, **keine zweite fachliche Release-/Statusautorität**. Die einzige gültige Current-Wahrheit liegt in [AFFILIATE/CURRENT_STATE.md](../../../AFFILIATE/CURRENT_STATE.md).
 
-Aktueller Stand, Quellenauswahl, offener Eingang und NEXT ACTION ausschließlich in [AFFILIATE/CURRENT_STATE.md](../../../AFFILIATE/CURRENT_STATE.md). Diese technische Akte ist keine zweite Release-/Current-Autorität.
+## Aktuelle technische Datei
 
-Plugin-ID: `HD-009-AFFILIATE-ZENTRALE`.
-Projekt: ausschließlich Hobby Depot. Keine Hab-&-Bewahr- oder Pferdeatelier-Zielbestände.
+- Eigenplugin: `Hobby Depot – Affiliate-Zentrale`, Version **0.1.10-dev** (installierbarer Upgrade-Testkandidat, kein behaupteter Live-PASS).
+- **Einzige freigelegte vollständige GitHub-Paketdatei:** [CURRENT.zip](../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip).
+- Größe **607784 Bytes**, SHA-256 `e8613f742a0c3a9e93b3c335b82b6594e95d61c89fd70f5a33981c73871427f4`.
+- Exakter GitHub-Binär-Readback: Blob `8b6732f2b3ec88e390662021ec7e0760da8f6fba`.
+- `affiliate-portal-router/hobby-depot-affiliate-router.php`, **gleicher Pluginordner wie beim Original**. Kein zweites WP-Plugin.
+- 26 Dateien, 23 PHP-Syntaxprüfungen bestanden, ZIP-Integrität bestanden.
+- Paketmanifest: [MANIFEST](../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md).
 
-## Vorhandene Portierung erhalten
+## Originalquelle und konkrete Übernahmen
 
-Die Portierung vom 26.10.2026 wird weiterverwendet, nicht erneut aufgebaut. Ihr historischer 0.1.2-dev-Teststand entfernte Pferdeatelier-Katalog, Portalstruktur und Recovery-Produktbestand und band eBay/idealo an die HD004-Kategorie-Registry. Die Amazon-ASIN-Brücke verwendet den vorhandenen idealo-Feed und die portalbezogene Tracking-ID. Provider, Partnerdaten und Zugangskonfiguration bleiben getrennt.
+Das tatsächliche vom Betreiber aus WordPress hochgeladene **0.1.7-dev** ist die Ausgangsquelle, nicht die historische 0.1.2-dev oder ein Hab-/Pferdeplugin. Vorheriger 0.1.9-Delta-Fix und aktuelle Pferdeatelier-Ursachenreferenz **6.72.308 vom 07.11.2026** wurden gegen die Hobby-Quelle harmonisiert. Die fünf vorhandenen Module starten, die Amazon-ASIN-/Tracking-Brücke bleibt aktiv; eBay-Löschungen, Quellen-/Kreativdaten-Abfrage, doppeltes Qualitäts-Gate und bedingte Marktplatz-Folgeseite wurden gezielt korrigiert. Hobby-Kategorien HD004, Design HD003, Provideroptionen und bestehende Daten bleiben erhalten.
 
-Historischer Nachweis: [Gate 4](EVIDENCE_GATE4_20261026.md), [Gate 5](EVIDENCE_GATE5_20261026.md), [PR #579](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/579). Diese Nachweise belegen den damaligen 0.1.2-dev-Kandidaten, nicht die später installierte Version. Die alte ZIP wird nicht als aktueller Installer geführt.
+- [Vollständiger Harmonisierungs- und Testbericht](EVIDENCE/HD009_0.1.10_HARMONISIERUNG_20261107.md)
+- [Historischer Ausgangsupload 0.1.7](EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md)
+- [Bereits geprüfter Fix-Patch 0.1.7 → 0.1.9](EVIDENCE/HD009_0.1.7_TO_0.1.9.patch)
 
-## Vergleichsbelege
+**Produktionsstatus:** 0.1.10 ist auf GitHub physisch gesichert, noch nicht auf WordPress installiert oder live geprüft. Die Benutzer-/Partnerzugangsdaten bleiben außerhalb GitHub.
 
-[Dateihashes vom 06.11.2026](EVIDENCE/DATEIVERGLEICH_20261106.json) vergleichen ausdrücklich die tatsächlich verfügbaren historischen Hobby-Quelldateien mit der Hab-RC3. Sie ersetzen weder den Originalabgleich der Installation noch einen vollständigen 6.72.306-Abgleich. Versionsnummern werden nicht zur Rekonstruktion fehlender Quellstände benutzt.
+## Bürozuordnung
 
-Der Pluginordner und die Optionen des tatsächlichen installierten Originals sind vor einem Update aus dessen Bytes zu ermitteln und zu erhalten. Keine Umbenennung anhand eines anderen Arbeitszweigs, kein Verlust gespeicherter Konfiguration, kein Schlüsseltransfer in GitHub.
-
-
-## Original-Upload 06.11.2026
-
-Die vom Betreiber aus WordPress hochgeladene `affiliate-portal-router.zip` enthält nach tatsächlichem Öffnen die Hobby-Depot-Affiliate-Zentrale **0.1.7-dev**. Dokumentierter vollständiger ZIP-Integritäts- und 23-PHP-Syntax-PASS unter [EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md](EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md). Die Original-ZIP liegt als vollständige bytegleiche Sicherungskopie im Chat vor. **Sie wurde technisch noch nicht als GitHub-ZIP hochgeladen.** Einziges fachliches Affiliate-Büro bleibt `../../../AFFILIATE/`, die zentrale Current-Autorität bleibt dort. Dieses Dokument ist nur die technische Akte.
-
-
-## Testkandidat 0.1.9-dev (noch kein freigegebener Current)
-
-Die 0.1.7-dev Originaldateien wurden vom Betreiber übergeben und als Basis für eine vollständige lokal geprüfte 0.1.9-dev-Test-ZIP verwendet; SHA-256 `2e08b52c0f5fd84537683a6a6217a9c62f4ea0025791c0d58a108b9edca90582`. **Das vollständige Test-ZIP liegt im Chat**, nicht als GitHub-Binärdatei. Der geprüfte lokale Datei-Patch ist hingegen auf GitHub direkt im bestehenden HD009-Büro gespeichert: [Patch](EVIDENCE/HD009_0.1.7_TO_0.1.9.patch), [Testbericht](EVIDENCE/HD009_TESTKANDIDAT_0.1.9_20261106.md). Nur dieses Hobby-Plugin weiterführen, den bisherigen installierten 0.1.7-Stand nicht ungeprüft ersetzen. Die fachliche Statusautorität bleibt die bestehende `AFFILIATE/CURRENT_STATE.md`, keine zweite Autorität schaffen.
+Ein einziges fachliches Affiliate-Büro `../../../AFFILIATE/`. Diese technische Akte und die ZIP unter `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/` gehören zum bestehenden allgemeinen Plugin-Büro. Keine zweite Affiliate-Instanz. Die alte 0.1.2-dev ist Historie, nicht Current.
