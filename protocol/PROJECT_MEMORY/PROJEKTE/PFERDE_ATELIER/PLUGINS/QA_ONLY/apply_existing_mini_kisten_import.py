@@ -176,6 +176,13 @@ new_results = """    public static function exportResults(): void {
                 'clarification'=>array_values((array)($state['clarification']??[])),
                 'note'=>'External relevance/title ideas only; NO final SEO/slot clearance.'];
             if(!empty($_POST['include_parkhaus'])){
+                $out['seo_subjects']=[];
+                foreach($state['completed'] as $key=>$row){
+                    if(!is_array($row)||($row['decision']??'')!=='JA')continue;
+                    $raw=(string)($row['raw_query']??'');
+                    $out['seo_subjects'][]=['pool_key'=>(string)$key,'raw_query'=>$raw,
+                        'source_sha256'=>hash('sha256',(string)$key.'|'.$raw)];
+                }
                 $out['parkhaus_snapshot']=self::readParkhausForMini();
                 $out['parkhaus_complete']=!empty($out['parkhaus_snapshot']['complete']);
                 $out['status']='PARKHAUS_FOR_SINGLE_EXTERNAL_SEO_OWNER_NOT_APPROVED';
@@ -196,6 +203,43 @@ replacement = control + """
             echo '<button class="button" type="submit">Redaktionsstand für einmalige SEO-Prüfung exportieren</button></form>';"""
 assert patched.count(control) == 1
 patched = patched.replace(control,replacement)
+
+
+# Reuse the same existing MINI class and authenticated upload handler for the
+# ONE external SEO decision. No second semantic review in WordPress.
+seo_receipt_methods=(ROOT/"QA_ONLY/pste_kisten_one_owner_receipt_methods.inc").read_text(encoding="utf-8")
+assert patched.count(anchor)==1
+patched=patched.replace(anchor,seo_receipt_methods+anchor)
+a="""            $state=self::loadState();
+            $result=self::validateTitleCorrections($state['completed'],$doc);"""
+b="""            $state=self::loadState();
+            if(($doc['contract']??'')==='PSTE_MINI_SEO_DECISIONS_V1'){
+                $snapshot=self::readParkhausForMini(); // one technical freshness check per entire batch
+                $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot);
+                self::storeState($state);
+                wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_seo_imported=1'));exit;
+            }
+            $result=self::validateTitleCorrections($state['completed'],$doc);"""
+assert patched.count(a)==1
+patched=patched.replace(a,b)
+
+a="""            $pre=self::planHandoffPreflight($state['completed'],
+                static fn(string $key): ?array=>$current[$key]??null);"""
+b="""            // Transport only: BELEGT/KLAERUNG have no article claim.
+            $eligible=[];
+            foreach((array)$state['completed'] as $key=>$topic){
+                $proof=self::singleOwnerSeoFor((string)$key,(string)($topic['raw_query']??''));
+                if(($proof['box']??'')!=='FREI')continue;
+                $eligible[$key]=$topic;
+            }
+            $pre=self::planHandoffPreflight($eligible,
+                static fn(string $key): ?array=>$current[$key]??null);"""
+assert patched.count(a)==1
+patched=patched.replace(a,b)
+a="""echo '<input type="hidden" name="action" value="pste_mini_title_repair_import"><label>Korrigierte Titeldatei <input type="file" """
+b="""echo '<input type="hidden" name="action" value="pste_mini_title_repair_import"><label>Korrigierte Titel oder externes SEO-Ergebnis <input type="file" """
+assert patched.count(a)==1
+patched=patched.replace(a,b)
 
 (OUT/"class-pste-mini-workflow.php").write_text(patched,encoding="utf-8")
 (OUT/"PSTE_KISTEN_EIN_IMPORT_OWNER_QA.diff").write_text(
