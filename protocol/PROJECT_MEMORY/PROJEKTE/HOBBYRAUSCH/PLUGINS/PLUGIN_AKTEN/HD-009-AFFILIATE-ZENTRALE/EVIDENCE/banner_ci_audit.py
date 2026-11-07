@@ -44,3 +44,17 @@ with zipfile.ZipFile(regzip) as z:
             i=c.find(token)
             if i>=0:
                 out.write_text(out.read_text(encoding="utf8")+"\n\nHD007 EXCERPT "+file+" "+token+"\n"+c[max(0,i-130):i+2450],encoding="utf8")
+
+with zipfile.ZipFile(regzip) as z:
+    core=z.read("hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php").decode("utf8","replace")
+    front=z.read("hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php").decode("utf8","replace")
+    for name,body,tokens in [
+        ("image_map",core,["function image_map(","function records("]),
+        ("image_entry_use",front,["$entry=HD_Hobbyregister_Core_Stable127::image_entry"])
+    ]:
+        for token in tokens:
+            i=body.find(token)
+            if i>=0:out.write_text(out.read_text(encoding="utf8")+"\n\nMORE HD007 "+name+" "+token+"\n"+body[max(0,i-120):i+2350],encoding="utf8")
+    for n in z.namelist():
+        if n.endswith(".json") and any(t in n for t in ("image","map","portraits")) and z.getinfo(n).file_size<3000000:
+            out.write_text(out.read_text(encoding="utf8")+"\n\nHD007 IMAGE JSON "+n+"\n"+z.read(n).decode("utf8","replace")[:1350],encoding="utf8")
