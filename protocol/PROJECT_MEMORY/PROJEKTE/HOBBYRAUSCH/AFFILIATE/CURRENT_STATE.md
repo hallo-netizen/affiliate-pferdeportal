@@ -1,5 +1,7 @@
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
+**Neueste aktive Download-Wahrheit (07.11.2026): HD009 0.1.21-dev**, 1.067.588 Bytes, SHA-256 `f6dd1cb301dbe661b63a9dd6b7890d0363c3317f025ee8617a94348b6001a002`. Hero-Farbwelt und Verlaufsbanner sind neu. Bestehende Werbeplätze, Link- und Providerlogik sowie DataForSEO bleiben unverändert; Browser-Prüfung PASS, Live-Installation noch offen. Alle 0.1.20-Angaben in den folgenden älteren Abschnitten sind historisch.
+
 **Neu zur Design- und Produktstrategie 0.1.20:** Siehe `BANNER_ZIELREGELN_20261107.md`. Banner-Design ist in der neuen aktuellen Voll-ZIP, DataForSEO-Recherche weiterhin manuell; kein automatischer Produktlinkwechsel. Sonstige ältere Prüfabschnitte unten beschreiben den 0.1.18/0.1.19-Vorläufer.
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->

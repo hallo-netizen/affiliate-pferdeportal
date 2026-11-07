@@ -1,16 +1,11 @@
-# Hobby Depot – HD009 Affiliate-Zentrale – CURRENT
+# HD009 – aktuelle technische Plugin-Akte
 
-**07.11.2026: 0.1.20-dev, einzige Installationsdatei** `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
+**CURRENT: 0.1.21-dev, 07.11.2026.**
 
-- 1.066.589 Bytes, SHA-256: `cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb`.
-- Git-Blob: `9d9ac298c9e32bfc54f81d80e39f1a3560200d8c`.
-- Alte 0.1.19 vom Betreiber auf Desktop sichtbar getestet: Positionen korrekt.
-- **Neu:** Deutlich warmer Verlauf in Kopfzeile von Quadrat- und Querbanner; Button nur 2px abgerundet, kleiner und zurückhaltender; Foto etwas kleiner innerhalb des vorhandenen Bildrahmens. Die original erlaubte Amazon-Grafik bleibt erhalten.
-- Kein Umbau der Seitenpositionen, kein anderes Plugin, keine neue Produkt-/Kampagnenlogik. Nur bestehende CSS, Pluginversion und CSS-Cache angepasst.
-- Quell-ZIP auf Original-Hash geprüft, neue ZIP CRC PASS, 24 PHP-Lint PASS; genau 3 Dateien verändert.
-- DataForSEO-Produktrecherche im aktuellen Plugin vorhanden, **manuell**, nicht als automatischer Feed. Amazon-Zielauswahl derzeit überwiegend Suchlink.
-- **Liveabnahme 0.1.20 offen.** Live-Darstellung erst nach Betreiberinstallation kontrollierbar.
-- Produkt-/Suchlink-Konzept: `../../../AFFILIATE/BANNER_ZIELREGELN_20261107.md`.
-
-**Historischer Nachweis der realen 0.1.19 WordPress-Labortests**:
-`EVIDENCE/HD009_0119_PROFILE_LAYOUT_REPORT.txt`, `EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt`.
+- Voll-ZIP: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`
+- Größe: 1.067.588 Bytes. SHA-256: `f6dd1cb301dbe661b63a9dd6b7890d0363c3317f025ee8617a94348b6001a002`. Blob: `0b82b36560583cee0022d24434a8695e9fe0ab29`.
+- Hero-Design für Quadrat (1:1) und Querbanner (3:1), sanfte Verlaufsüberlagerung statt fester Titelzeile, selbe Farbwelt wie HD007, kleiner originaler Amazon-Button.
+- Skalierbarer Titel anhand Hobby-Länge, lange Titel bei wenig Platz bis zwei Zeilen. Kategorieseite und Inline-Text nutzen dasselbe Querbannerformat.
+- V20-Ausspielung und Amazon-/idealo-/DataForSEO-Logik unverändert. CSS-Cache-Version auf 0.1.21 gesetzt.
+- Quell-ZIP geprüft; neue ZIP CRC PASS, PHP 24/24 PASS, Browser-Simulation auf realen Seiten 1440/900/390/360 PASS, lange Titel bei fünf Breiten PASS.
+- Belege: GitHub Actions 42390844656 (Build & Browser), 42390657764 (lange Titel). Live-Update 0.1.21 noch offen.
