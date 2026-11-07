@@ -1,4 +1,4 @@
-name: HD009 single final all-slot CI QA
+name: HD009 single final all-slot CI QA - scoped post context
 on:
   push:
     branches:
