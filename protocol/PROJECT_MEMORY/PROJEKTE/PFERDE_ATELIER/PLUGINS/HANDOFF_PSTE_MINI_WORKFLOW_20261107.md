@@ -34,3 +34,17 @@
 **NEXT ACTION:** Für den einzigen verbleibenden realen WP-Abgleich einmalig `0.57.144.17` als TEST-ZIP installieren und in `SEO Themenengine → Themenprüfung` vorhandene Schaltfläche `Bereits übergebene Titel nach Plugin-Update erneut prüfen` auslösen, danach `Nur aktuellen Stapelbericht herunterladen (max. 100)`. Kein früherer ZIP-Wechsel und keine Nachweis- oder Keyword-Neuimporte. Nicht ungeprüft weiter an der Relevanzlogik drehen.
 
 **Branch:** `fix/pste-mini-workflow-kiss-20261107`; die Quelle der Test-ZIP ist hier bytegenau archiviert. Produktionssystem K0 bleibt unangetastet.
+
+---
+
+## 07.11.2026 – NEUE GEPRÜFTE FORTSETZUNG: v18 ersetzt v17 im TESTBÜRO
+
+**Realbericht v17:** 29/87 bearbeitet (58 PENDING), 3 PASS, 25 HELD, 1 BLOCKED, 4 bereits erneut festgestellte Relevanzsperren. Kein Endbericht. Die Code-Ursache lag im Repository: ein gültiges MINI-JA wurde weiter nur dann erkannt, wenn der bereits gespeicherte Titel den Marker `LANGUAGE_TITLE_DESK_IMPORT` besaß. Das ist eine weiterhin bestehende Titeldoppelabhängigkeit, NICHT sieben isolierte Keywordfehler.
+
+**KISS-Korrektur v18:** Die Titelbedingung an dieser einzigen bestehenden Übergabestelle entfernt. Der Original-MINI-JA-Beleg wird bei übereinstimmender ursprünglicher Suchfrage immer durch den einen vorhandenen Relevanzprüfer anerkannt. Negativentscheidungen und manipulierte Quellen weiter gesperrt. Keine zusätzlichen Regeln, Klassen, Tabellen oder Producer. Nur zwei bestehende Dateien der v17-ZIP geändert (Repository + Versionsnummer).
+
+**Gegenprobe mit 100 Originalthemen:** 500 Aufrufe des echten Repository-Ablaufs mit jeweils 5 unterschiedlichen Titelzuständen; v17 erkannte nur 87/435 echte JA-Kombinationen, v18 435/435; alle 65 VIELLEICHT-/NEIN-Varianten und geänderte Quelle sicher abgewiesen. Vorherige 898 Kontrollen weiter PASS; 83/83 PHP-Lints; ZIP-Dateiliste identisch. Prüfung benutzte vereinfachtes WordPress-Umfeld, der spätere Kategorie-/Planungsprozess wurde bewusst noch vor Schreiben angehalten – keine Behauptung eines produktiven E2E-Tests.
+
+**AKTUELLE TEST-ZIP:** `INSTALLATIONS_PAKETE/PFERDEATELIER_PSTE_0.57.144.18_KISS_RELEVANZ_OHNE_TITELBEDINGUNG_NUR_TEST.zip`; SHA256 `3b0ce3971326753a44274a4d00b0a329e824df954f35e784db762f5935628abf`; GitHub-Blob `f530c4b95cd75b7296cf14dde056b4c4726fe6b5`. Nachvollziehbare Gegenprobe: `EVIDENCE/PSTE_05714418_KISS_RELEVANCE_INTEGRATION_20261107.md`. **v17 gilt nicht mehr als aktuell.**
+
+**OFFEN:** Reale 87/87 Reanalyse mit v18 im Test-WordPress; dort prüfen, ob echte Relevanzsperren fallen. 59 Struktur-/Kategorien-/Intentfälle, 12 Planungssperren, zwei manuelle Schutzfälle sind nicht durch Titel/Relevanz automatisch freizugeben. Nur 100er-Stapelbericht verwenden; kein 5.016er-Gesamtscan erforderlich. K0/PSERC/Live unangetastet. Ohne neuen WP-Bericht keine definitive Erfolgsmeldung.
