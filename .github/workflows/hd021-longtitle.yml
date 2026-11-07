@@ -1,0 +1,58 @@
+name: HD009 021 long hobby title browser test
+on:
+  push:
+    branches: ['hobbyroom/hd009-021-banner-hd007-hero-stage-20261107']
+    paths: ['.github/workflows/hd021-longtitle.yml']
+permissions: {contents: read}
+jobs:
+  longtitle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify title fit with actual built CSS at five widths
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          z=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(z) as zip:css=zip.read('affiliate-portal-router/assets/hdar-amazon-start.css').decode()
+          titles=['alte Kameras reparieren','historische Modelleisenbahnanlagen bauen','Restaurierung alter mechanischer Spiegelreflexkameras']
+          with sync_playwright() as p:
+              b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width in (1440,900,600,390,360):
+                  page=b.new_page(viewport={'width':width,'height':900})
+                  page.goto('https://hobby-depot.de/hobbyregister/alte-kameras-reparieren/',wait_until='domcontentloaded',timeout=30000)
+                  page.add_style_tag(content=css)
+                  for title in titles:
+                      data=page.evaluate("""(name)=>{
+                        document.querySelectorAll('.hdar-ci-title').forEach(t=>{
+                          t.textContent=name;
+                          const n=[...name].length;
+                          t.style.setProperty('--hdar-title-scale',Math.max(.36,Math.min(1.35,23/Math.max(12,n))).toFixed(3));
+                          t.classList.toggle('hdar-ci-title-long',n>29);
+                        });
+                        return [...document.querySelectorAll('.hdar-ci-amazon-banner')].map(a=>{
+                          const t=a.querySelector('.hdar-ci-title'), cs=getComputedStyle(t),c=a.querySelector('.hdar-ci-content');
+                          const font=parseFloat(cs.fontSize),line=parseFloat(cs.lineHeight);
+                          const tr=t.getBoundingClientRect(),cr=c.getBoundingClientRect();
+                          return {wide:a.classList.contains('hdar-ci-amazon-banner-wide'), font,lines:tr.height/line,
+                            scroll:t.scrollWidth, visible:t.clientWidth, contentWidth:cr.width,titleWidth:tr.width,
+                            height:tr.height,scrollHeight:t.scrollHeight,clientHeight:t.clientHeight,white:cs.whiteSpace,overflow:cs.overflow};
+                        });
+                      }""",title)
+                      for d in data:
+                          if d['wide']:
+                              assert d['lines']<=2.15,(width,title,d,'Too many lines')
+                              assert d['scroll']<=d['visible']+3,(width,title,d,'Horizontally clipped')
+                              assert d['scrollHeight']<=d['clientHeight']+3,(width,title,d,'Vertically clipped')
+                              if width>=900:assert d['lines']<1.3,(width,title,d,'Desktop banner should be one line')
+                      print('FIT',width,repr(title),data)
+                  page.close()
+              b.close()
+          print('LONG_TITLE_RESPONSIVE_PASS')
+          PY
