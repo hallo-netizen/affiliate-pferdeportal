@@ -1,0 +1,9 @@
+Version: 0.1.16-dev
+ZIP bytes: 712675
+ZIP SHA-256: 7f65fae7a3aac98bfb5f9bc7f7673fc726f64f0b3cbf5eb8b5a51c3e4ad40640
+PHP syntax: 24/24 PASS
+ZIP CRC: PASS
+Regression: native banner campaign eligibility, ratio 5..12, categories/parent path, glossary slots retained.
+Removed: incorrect HD003 rental creative fallback from affiliate campaign output.
+HD003 design and reserved rental slots: unchanged.
+WordPress frontend live: NOT TESTED.
