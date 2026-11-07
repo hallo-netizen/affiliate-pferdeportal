@@ -1,0 +1,14 @@
+name: HD009 inspect original officially allowed Amazon DE logo
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0118-variant4-amazon-ci-20261107
+    paths:
+      - .github/workflows/hd009-amazon-approved-de-logo-audit.yml
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify original Amazon official German zip
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/amazon_de_asset_inventory.py
