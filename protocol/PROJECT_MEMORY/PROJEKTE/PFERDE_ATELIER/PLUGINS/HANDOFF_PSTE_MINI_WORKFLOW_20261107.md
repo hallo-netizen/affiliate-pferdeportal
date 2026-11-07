@@ -48,3 +48,9 @@
 **AKTUELLE TEST-ZIP:** `INSTALLATIONS_PAKETE/PFERDEATELIER_PSTE_0.57.144.18_KISS_RELEVANZ_OHNE_TITELBEDINGUNG_NUR_TEST.zip`; SHA256 `3b0ce3971326753a44274a4d00b0a329e824df954f35e784db762f5935628abf`; GitHub-Blob `f530c4b95cd75b7296cf14dde056b4c4726fe6b5`. Nachvollziehbare Gegenprobe: `EVIDENCE/PSTE_05714418_KISS_RELEVANCE_INTEGRATION_20261107.md`. **v17 gilt nicht mehr als aktuell.**
 
 **OFFEN:** Reale 87/87 Reanalyse mit v18 im Test-WordPress; dort prüfen, ob echte Relevanzsperren fallen. 59 Struktur-/Kategorien-/Intentfälle, 12 Planungssperren, zwei manuelle Schutzfälle sind nicht durch Titel/Relevanz automatisch freizugeben. Nur 100er-Stapelbericht verwenden; kein 5.016er-Gesamtscan erforderlich. K0/PSERC/Live unangetastet. Ohne neuen WP-Bericht keine definitive Erfolgsmeldung.
+
+## 07.11.2026 – zusätzlicher nachgewiesener Doppelprüfungsfehler (NICHT released)
+
+Die v18-WordPress-Stapelberichte zeigten den Fehler fortbestehend. Der Codeweg ist jetzt reproduziert: `reanalyzeRetainedBacklogBatch` wertet MINI-JA aus, danach führt `refreshPortalContextForRow` erneut `prepareEditorialPayload` ohne JA aus und bei NORMAL_PASS denselben Planungsgate nochmals. In isolierter QA-Kopie **nur eine bestehende Datei** angepasst. Original: **7 von 87 JA-Themen verlieren Relevanz** beim Refresh, QA: **0 von 87**; **24/24** Testdubletten bleiben gesperrt; **87/87** falsche JA-Suchfragen abgewiesen; **13/13** Nicht-JA nicht autorisiert; 83/83 PHP-Lints PASS. Bericht: `EVIDENCE/PSTE_KISS_QA_BEWEIS_20261107.md`; diff: `EVIDENCE/PSTE_KISS_QA_PATCH_NUR_PRUEFUNG_20261107.diff`.
+
+**Freigabe BLOCKED:** bisher KEIN wirklicher 1:1-WordPress-End-to-End-Test mit aktuellem WP-Datenbankklon, keine Feststellung „alle Doppelprüfungen im gesamten Plugin entfernt“, deshalb noch KEINE neue Installer-ZIP. K0/PSERC unverändert.
