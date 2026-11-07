@@ -1,3 +1,13 @@
+## 07.11.2026 – VERBINDLICHE KISS-SPERRE VOR WEITEREM HAB-004-CODE / KEINE NEUE VERSION
+
+**Dreifachprüfung Pflicht:** Vor jeglicher weiteren Änderung zuerst Pferdeatelier-Originalquelle und Hobbydepot-Originalplugin lesen, dann prüfen, welche Ausgabe bereits im aktuellen HAB-004/HAB-001 vorhanden ist. Keine neue Ausgabe-Architektur, keine zusätzlichen Plugins oder Datenbanken, keine unerprobten Kleinfixes. Vollständiger Quell- und Screenshotabgleich: `AFFILIATE/PRUEFUNG_BESTEHENDE_AUSGABE_20261107.md`.
+
+**Ursache bei „Wassermelder“ im echten Design und Affiliate-Code nachgewiesen:** Das aktuelle HAB-001-Design ruft `hbdp_area_product_cards_html` mit einem Kategorie-Knoten auf; HAB-004s vorhandener Anschluss `PPAR_HB_Integration::area()` verwirft alle Knoten außer `type=page`. Dadurch erscheint bei der Kategorie „Wassermelder“ die vorhandene Empfehlung leer. Die Seite „Leckwarnung & Absperrung“ hat dagegen drei ASIN-Links innerhalb eines selbstgebauten Text-Fallbacks, nicht als reguläre Produktkampagnen. **Grundfunktionen für echte Kategorien-Produktslots und Kampagnenausgabe sind bereits im HAB-004 vorhanden.** Der Fehler liegt primär in der Verbindung/Verwendung.
+
+**Status:** BISHER NUR LESEND GEPRÜFT – NICHT BEHOBEN, KEIN NEUER HAB-004-BUILD, KEINE LIVE-ÄNDERUNG. Für späteren Build zuerst die aktuelle vollständige HD009-ZIP selbst gegen Hab und Pferdeatelier vergleichen und dann einen einzigen End-to-End-Test im echten HAB-001/HAB-004-Hook-Weg bestehen lassen. DataForSEO-Titel und ASIN rechtfertigen keine erfundenen Produktfotos oder Preise.
+
+---
+
 ## 07.11.2026 – HAB-004 RC10, einziger aktueller ZIP-Stand
 **ZIP:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip`, **623469 Bytes**, SHA-256 `f3b6b0ac4fd05310fa32ce68e2715b29d022003ac68f32ceb051443832364ced`, Git-Blob `03a79f162ab37b7913b67106988ea9edd4d3ca30`. Version `0.1.7-rc10`; 28 Dateien, 25 davon gegenüber RC9 byteidentisch. Ausschließlich bestehendes HAB-004 geändert; HAB-001/002/003 und andere Portale nicht angerührt.
 
