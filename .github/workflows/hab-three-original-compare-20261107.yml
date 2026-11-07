@@ -1,0 +1,42 @@
+name: HAB product banner existing sources comparison only
+on:
+  push:
+    branches: [hab-004-rc11-audit-download-20261107]
+permissions:
+  contents: read
+jobs:
+  source-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect three real implementations, read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin affiliate-release-current:refs/remotes/origin/affiliate-release-current
+          mkdir -p audit-source/pferde audit-source/hobby audit-source/hab-design audit-source/hab-affiliate
+          git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/affiliate-portal-router.php > audit-source/pferde/affiliate-portal-router.php
+          git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.css > audit-source/pferde/frontend.css
+          git show origin/affiliate-release-current:release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.js > audit-source/pferde/frontend.js
+          unzip -oq protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip -d audit-source/hobby
+          unzip -oq protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip -d audit-source/hab-affiliate
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          dest=Path('audit-source/hab-design')
+          chosen=[]
+          for i in z.infolist():
+              n=i.filename
+              if n.endswith(('.php','.css','.js')) and i.file_size<2000000:
+                  chosen.append(i)
+                  z.extract(i,dest)
+          print('HAB DESIGN EXTRACT',len(chosen))
+          PY
+          du -sh audit-source
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hab-three-original-implementations
+          path: audit-source
+          retention-days: 2
+          if-no-files-found: error
