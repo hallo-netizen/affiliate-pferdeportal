@@ -1,0 +1,282 @@
+### HD-003-DESIGN-TEMPLATE-KIT
+ZIP exists True
+ZIP files 1290
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/malen-zeichnen.webp 168684
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/modellbau.webp 139884
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/logo-footer-v150729.png 149447
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/logo-variant3-v150616.png 181423
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150634.webp 45224
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150670.webp 14254
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150671.webp 174568
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150616.webp 48706
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150627.webp 10896
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150629.webp 13448
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150634.webp 8008
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150645/logo-variant3-v150645.png 194419
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150758/hobby-masters/battlebots-modellbau.webp 117232
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/einzelfotos/battlebots-modellbau-hero-499dae8fb27d.webp 66950
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-3b4098040d25.webp 24334
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-hero-21609fb830a6.webp 16936
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-kachel-34a245f81a15.webp 20264
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-2f15c7296f5b.webp 23978
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-hero-4d0936f98fa9.webp 15874
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-tile-e3fd284054ac.webp 19360
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/battlebots-modellbau-kachel-988b3de68db3.webp 23340
+ASSET affiliate-portal-template-kit/assets/pferde-atelier-logo-pferd-b.png 92995
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-LOCKED-v150170.webp 60396
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150177.webp 49408
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150187.webp 41566
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150189.png 641220
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150189.webp 41430
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150194.webp 39108
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-flat-v150353.webp 36220
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-v150162.webp 62892
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150790/logo-original-ohne-unterzeile.png 150989
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150790/modellflugzeug-werkstatt.webp 67722
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png 1755351
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150794/button-hover-terms.png 56027
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150794/button-hover-prices.png 8850
+FILE affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php bytes 767757 hits 195
+ 12:     const RENTAL_OPTION = 'pftk_hobby_rental_slots_v1';
+ 784: Wenn du schon weißt, welches Hobby dich interessiert, bist du im Hobbyregister oder in den normalen Hobbybereichen besser aufgehoben. Der Finder ist vor allem für die Situation gedacht, in der du offen bist und verschiedene Möglichkeiten vergleichen möchtest. 
+ 797: Die Beiträge geben deshalb Orientierung für Lebensphasen und Alltagssituationen, ohne Menschen in Schubladen zu stecken. Konkrete Informationen zu einem einzelnen Hobby findest du weiterhin in dessen Hobbyseite oder im Hobbyregister. Hier geht es um die Frage,
+ 827: Besteht zu einem Hobby bereits eine umfangreiche CORE-Seite, wird im Magazin keine zweite konkurrierende Hobbyseite aufgebaut. Dann verweist das Porträt oder ein redaktioneller Beitrag auf den bestehenden Fachbereich. Das Hobbyregister bleibt zusätzlich die ei
+ 842: Die Rubrik ist deshalb bewusst breiter als ein Hobby-Porträt. Sie soll neugierig machen und dir mehrere Wege zeigen. Wenn du anschließend ein konkretes Hobby genauer prüfen möchtest, führen die Beiträge zu den passenden Hobbyseiten oder ins Hobbyregister. Dort
+ 902: Kleine eigenständige Hobbys können hier zunächst über ein Hobby-Porträt vorgestellt werden. Im Hobbyregister bleiben sie trotzdem ganz normal auffindbar und vergleichbar. Wenn ein ungewöhnliches Hobby genügend fachliche Tiefe entwickelt, kann es zusätzlich ein
+ 917: Produktvergleiche innerhalb eines einzelnen Hobbys gehören nicht hierher, sondern in den jeweiligen Fachbereich. Diese Magazinrubrik vergleicht Hobbys, Hobbyarten oder sinnvolle Alternativen miteinander. Für die festen Merkmale einzelner Hobbys bleibt das Hobb
+ 947: Die festen Werte zu einzelnen Hobbys stammen aus dem Hobbyregister. Das Magazin nutzt diese Merkmale, um sinnvolle Gruppen und Alltagssituationen daraus zu machen. So entsteht keine zweite Datenwelt: Das Register beschreibt das einzelne Hobby, diese Rubrik hil
+ 1295:         if (!function_exists('hd_hobbyregister_records') || !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()) { return []; }
+ 1298:         foreach ((array)hd_hobbyregister_records() as $row) {
+ 1322:             // 'noch keine eigene Seite' even with /hobbyregister/anthotypie/ open.
+ 1323:             $url=self::hobbyregister_detail_url_v150768($name);
+ 1425:         // nicht das separate Hobbyregister und nicht das HivePress-Verzeichnis.
+ 1675:         $attachment_id = $post_id > 0 ? absint(get_post_thumbnail_id($post_id)) : 0;
+ 1706:     private static function hero_image_markup() {
+ 1931:     private static function rental_slot($placement) {
+ 1934:         $filtered = apply_filters('pftk_hobby_rental_slot_html', '', $placement);
+ 1952:         $html = self::rental_slot($placement);
+ 1981:                 ['Was ist der Unterschied zwischen Hobbyfinder, Hobbyregister und Hobbymagazin?', 'Der Hobbyfinder hilft dir, passende Hobbys nach deinen Wünschen zu finden. Im Hobbyregister kannst du gezielt stöbern und Hobbys vergleichen. Im Hobbymagazin fin
+ 1988:                 ['Kann ich auch einfach durch alle Hobbys stöbern?', 'Ja. Dafür gibt es das Hobbyregister. Dort kannst du unabhängig vom Hobbyfinder nach Hobbys suchen, stöbern und dich inspirieren lassen.'],
+ 1991:             'Hobbyregister' => [
+ 1992:                 ['Was ist das Hobbyregister?', 'Das Hobbyregister ist die zentrale Übersicht der Hobbys bei Hobby Depot. Dort findest du bekannte, seltene und ungewöhnliche Hobbys an einem Ort.'],
+ 1995:                 ['Warum sind manche Hobbys ausführlicher beschrieben als andere?', 'Einige Hobbys haben bei Hobby Depot zusätzlich eigene Themenbereiche, Artikel oder weiterführende Inhalte. Andere werden zunächst kompakt im Hobbyregister vorgestellt.'],
+ 1996:                 ['Werden neue Hobbys ergänzt?', 'Ja. Das Hobbyregister kann erweitert werden, wenn neue oder bisher fehlende Hobbys sinnvoll dazukommen.'],
+ 2002:                 ['Wo finde ich Anleitungen und Hintergrundwissen?', 'Je nach Thema findest du diese im passenden Hobbybereich oder im Hobbymagazin. Vom Hobbyregister aus führen dich passende Links zu weiterführenden Inhalten.'],
+ 2022:         $html = '<div class="hd-faq-v150715"><p class="hd-faq-intro-v150715">Hier findest du kurze Antworten auf die wichtigsten Fragen rund um Hobby Depot, den Hobbyfinder, das Hobbyregister, unsere Inhalte und den Anzeigenmarkt.</p>';
+ 2051:         $hero = self::hero_image_markup();
+ 3287:         $cards=''; foreach($posts as $post){ if(!$post instanceof WP_Post){continue;} $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large'); $cards.='<article class="hd-post-card">'.($img!==''?'<a class="hd-post-image" href="'.esc_url(get_permalink
+ 3652:             $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large');
+ 3724:             $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large');
+ 3913:             if($thumb>0){set_post_thumbnail((int)$post_id,$thumb);}
+ 4092:      * Neither is a 3:2 Hobbyregister master. HD007 and featured master take priority.
+ 4096:      * Never guess /hobbyregister/<slug>/; on sites without that rewrite it
+ 4130:      * /hobbyregister/<hobby-slug>/; this is not a WordPress page/term.
+ 4133:      * Do not use the bare /hobbyregister/ listing as a hobby destination.
+ 4135:     private static function hobbyregister_detail_url_v150768($canonical_name) {
+ 4136:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()) { return ''; }
+ 4138:         if ($slug === '' || $slug === 'hobbyregister' || !preg_match('/[a-z0-9]/i',$slug)) { return ''; }
+ 4139:         return home_url('/hobbyregister/' . $slug . '/');
+ 4145:         return ['url'=>self::hobbyregister_detail_url_v150768((string)($row['name'] ?? '')), 'image'=>''];
+ 4184:         if (!function_exists('hd_hobbyregister_ready') || !function_exists('hd_hobbyregister_finder_rows')) { return []; }
+ 4185:         if (!hd_hobbyregister_ready()) { return []; }
+ 4186:         $rows = hd_hobbyregister_finder_rows();
+ 4403:         $img = (string)get_the_post_thumbnail_url($post->ID, 'medium_large');
+ 4474:         $html = self::rental_slot('journal');
+ 4482:         $register = self::page_link(['hobbyregister','hobby-register']);
+ 4483:         if ($register === '') { $register = home_url('/hobbyregister/'); }
+ 4488:             ['title'=>'Hobbyregister','text'=>'Stöbere durch alle Hobbys und vergleiche Eigenschaften, Aufwand und Anforderungen.','url'=>$register,'icon'=>'register','cta'=>'Register öffnen'],
+ 4658:             foreach (['/hd-hobbyregister-core*/assets/portraits/final-masters/' . $slug . '.webp',
+ 4659:                       '/hd-hobbyregister-core*/portraits/final-masters/' . $slug . '.webp'] as $pattern) {
+ 4807:         if ($page instanceof WP_Post && function_exists('get_post_thumbnail_id')
+ 4809:             $attachment = (int)get_post_thumbnail_id($page->ID);
+ 4825:     private static function category_hero_image_v150757($page) {
+ 4887:                 $category_hero_image = self::category_hero_image_v150757($page);
+ 4888:                 $has_category_hero = !empty($category_hero_image['html']);
+ 4889:                 if ($has_category_hero) { $out .= self::render_category_hero_v150757($page, $category_hero_image); }
+ 5424:         $register_url = self::page_link(['hobbyregister','hobby-register']);
+ 5425:         if ($register_url === '') { $register_url = home_url('/hobbyregister/'); }
+ 5432:             $make_item('Hobbyregister', $register_url),
+ 5557:         set_post_thumbnail(absint($post_id), absint($attachment_id));
+ 5598:             if(!has_post_thumbnail($post_id)){self::demo_featured_attachment_v150636($post_id,$def['asset'],'Testbeitrag '.($i+1));}
+ 5640:      * Harmonize only the VISIBLE top hero on an actual /hobbyregister/<slug>/ page;
+ 5645:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5646:             || !function_exists('hd_hobbyregister_records')) { return; }
+ 5648:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$hit)) { return; }
+ 5651:         foreach ((array)hd_hobbyregister_records() as $r) {
+ 5698:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5699:             || !function_exists('hd_hobbyregister_records')) { return; }
+ 5701:         if (!preg_match('~^/hobbyregister(?:/[a-z0-9-]+)?/?$~i',$path)) { return; }
+ 5703:         foreach ((array)hd_hobbyregister_records() as $row) {
+ 5737:   var m=u.pathname.match(/^\/hobbyregister\/([a-z0-9-]+)\/?$/i);
+ 5788:   document.querySelectorAll('a[href*="hobbyregister/"]').forEach(function(a){
+ 5839:         if (function_exists('hd_hobbyregister_ready') && hd_hobbyregister_ready()
+ 5840:             && function_exists('hd_hobbyregister_records')) {
+ 5841:             foreach ((array)hd_hobbyregister_records() as $r) {
+ 5883:         echo '<h2>Bild zuordnen</h2><p>Hobby- oder Kategorie-Slug eingeben, Mediathek-Bild wählen und speichern. Danach wird es ohne weitere Einstellungen in Finder, Hobbyregister und Kategorie genutzt.</p>';
+ 5895:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5896:             || !function_exists('hd_hobbyregister_records')) {
+ 5897:             echo '<p>Das Hobbyregister (HD007) ist derzeit nicht verfügbar.</p></div>'; return;
+ 5900:         foreach ((array)hd_hobbyregister_records() as $row) {
+FILE affiliate-portal-template-kit/pferde-template-kit.php bytes 2017649 hits 165
+ 2861:             'hero_image' => '', 'hero_alt' => '', 'hero_url' => '', 'hero_target' => '_self',
+ 3189:         $image = self::media('start', 'hero_image');
+ 3204:         echo '<tr><th scope="row"><label for="pftk_hero_image_174">Hero-Bild</label></th><td><input id="pftk_hero_image_174" type="text" class="regular-text" style="width:min(760px,100%)" name="'.esc_attr($media_name).'[hero_image]" value="'.esc_attr($image).'
+ 3556:             'hero_image' => ['Hero-Bild', 'URL aus der Mediathek'],
+ 3691:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3716:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3836:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3877:         return self::leading_image_block_v150385($image, $type, get_post_thumbnail_id($page_id));
+ 4576:         $img=function_exists('get_the_post_thumbnail_url')?(string)get_the_post_thumbnail_url($post->ID,'medium'):'';
+ 4620:         $hero=function_exists('get_the_post_thumbnail_url')?(string)get_the_post_thumbnail_url($post_id,'full'):''; if($hero==='')$hero=plugin_dir_url(__FILE__).'assets/journal-v150478/pferderassen.webp';
+ 5469:         if (has_post_thumbnail($post_id)) {
+ 5470:             echo get_the_post_thumbnail($post_id, 'medium_large', ['loading' => 'lazy', 'alt' => $title]);
+ 5497:             if (has_post_thumbnail($post_id)) {
+ 5498:                 $out .= get_the_post_thumbnail($post_id, 'medium_large', ['loading' => 'lazy', 'alt' => get_the_title($post_id)]);
+ 5812:         if ($lead && has_post_thumbnail($lead->ID)) {
+ 5813:             echo get_the_post_thumbnail($lead->ID, 'large', ['loading' => 'eager', 'alt' => get_the_title($lead)]);
+ 5825:             if (has_post_thumbnail($lead->ID)) { echo get_the_post_thumbnail($lead->ID, 'large', ['loading' => 'lazy']); }
+ 5839:             if (has_post_thumbnail($post->ID)) { echo get_the_post_thumbnail($post->ID, 'medium_large', ['loading' => 'lazy']); }
+ 9825:         $image = $page_id > 0 ? (string)get_the_post_thumbnail_url($page_id, 'full') : '';
+ 9857:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 10810:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 12446:         if (function_exists('get_the_post_thumbnail') && has_post_thumbnail($post)) {
+ 12447:             $thumb = get_the_post_thumbnail($post, 'large', ['loading' => 'lazy']);
+ 14394:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 14553:         $image = self::media($type, 'hero_image');
+ 14555:             $fallback_image = get_the_post_thumbnail_url(absint(get_queried_object_id()), 'full');
+ 14746:             $image = has_post_thumbnail($post->ID)
+ 14747:                 ? get_the_post_thumbnail($post->ID, 'medium_large', ['loading' => 'lazy', 'alt' => $title])
+ 15253:             $image = get_the_post_thumbnail_url($post->ID, 'large');
+ 15318:         $hero_override = trim((string) self::media('start', 'hero_image'));
+FILE affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php bytes 12554 hits 2
+ 15:     if (function_exists('get_the_post_thumbnail_url')) {
+ 16:         $src = (string)get_the_post_thumbnail_url((int)$post->ID, 'full');
+### HD-007-HOBBYREGISTER-CORE
+ZIP exists True
+ZIP files 93
+ASSET hd-hobbyregister-core/assets/portraits/final-masters/airbrush-modellbau.webp 204268
+FILE hd-hobbyregister-core/templates/hobbyregister.php bytes 878 hits 7
+ 10: <body <?php body_class('hd-owned-content-template-v150709 hd-hobbyregister-owned-shell-v1210'); ?>>
+ 19: <main id="primary" class="site-main hd-content-v150616 hd-hobbyregister-template-v110">
+ 20: <?php echo HD_Hobbyregister_Frontend_Stable127::render_current(); ?>
+FILE hd-hobbyregister-core/hobby-depot-hobbyregister-core.php bytes 1455 hits 14
+ 3:  * Plugin Name: Hobby Depot Hobbyregister Core
+ 4:  * Description: Read-only Laufzeitkern und Frontend-Projektion für das zentrale Hobbyregister von Hobby Depot.
+ 9: require_once __DIR__ . '/includes/class-hd-hobbyregister-core.php';
+ 10: require_once __DIR__ . '/includes/class-hd-hobbyregister-frontend.php';
+ 11: HD_Hobbyregister_Frontend_Stable127::boot();
+ 12: function hd_hobbyregister_127_register_compat_api() {
+ 13:     if (!function_exists('hd_hobbyregister_records')) { function hd_hobbyregister_records() { return HD_Hobbyregister_Core_Stable127::records(); } }
+ 14:     if (!function_exists('hd_hobbyregister_get')) { function hd_hobbyregister_get($registry_id) { return HD_Hobbyregister_Core_Stable127::get($registry_id); } }
+ 15:     if (!function_exists('hd_hobbyregister_get_by_name')) { function hd_hobbyregister_get_by_name($name) { return HD_Hobbyregister_Core_Stable127::get_by_name($name); } }
+ 16:     if (!function_exists('hd_hobbyregister_finder_rows')) { function hd_hobbyregister_finder_rows() { return HD_Hobbyregister_Core_Stable127::finder_rows(); } }
+ 17:     if (!function_exists('hd_hobbyregister_ready')) { function hd_hobbyregister_ready() { return HD_Hobbyregister_Core_Stable127::ready(); } }
+ 19: if (function_exists('add_action')) { add_action('plugins_loaded', 'hd_hobbyregister_127_register_compat_api', PHP_INT_MAX); }
+ 20: else { hd_hobbyregister_127_register_compat_api(); }
+FILE hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php bytes 6892 hits 18
+ 3: final class HD_Hobbyregister_Core_Stable127 {
+ 37:         $candidates = array($current, $plugins . '/hd-hobbyregister-core/data');
+ 38:         foreach ((array)glob($plugins . '/hd-hobbyregister-core*/data') as $candidate) $candidates[] = $candidate;
+FILE hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php bytes 83289 hits 88
+ 4: final class HD_Hobbyregister_Frontend_Stable127 {
+ 6:     const BASE_PATH = 'hobbyregister';
+ 19:         add_action('wp_ajax_hd_hobbyregister_search', [__CLASS__, 'ajax_search']);
+ 20:         add_action('wp_ajax_nopriv_hd_hobbyregister_search', [__CLASS__, 'ajax_search']);
+ 42:         $own = dirname(__DIR__) . '/templates/hobbyregister.php';
+ 57:         if ($route['type'] === 'index') { return 'Hobbyregister | Hobby Depot'; }
+ 76:     private static function asset_url($name) { return plugins_url('assets/' . ltrim($name,'/'), dirname(__DIR__) . '/hobby-depot-hobbyregister-core.php'); }
+ 85:         foreach (HD_Hobbyregister_Core_Stable127::records() as $row) {
+ 163:             $parts[]='<span aria-current="page">Hobbyregister</span>';
+ 165:             $parts[]='<a href="'.esc_url(self::base_url()).'">Hobbyregister</a>';
+ 177:         if (self::route()['type']!=='') { $classes[]='hd-hobbyregister-route'; }
+ 202:         $entry=HD_Hobbyregister_Core_Stable127::image_entry($id);
+ 236:         return '<section class="hdr-hero"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">Hobbys von A bis Z</span><h1>Hobbyregister</h1><p>Entdecke bekannte, seltene und un
+ 268:         foreach (HD_Hobbyregister_Core_Stable127::records() as $row) {
+ 292:         return '<section class="hdr-tools"><form class="hdr-register-search" action="'.esc_url(self::base_url()).'" method="get" data-hdr-ajax-url="'.esc_url(admin_url('admin-ajax.php')).'" data-hdr-nonce="'.esc_attr(wp_create_nonce('hd_hobbyregister_search'))
+ 300:         foreach(HD_Hobbyregister_Core_Stable127::records() as $row){
+ 311:         if(function_exists('check_ajax_referer'))check_ajax_referer('hd_hobbyregister_search','nonce');
+ 318: <script id="hd-hobbyregister-search-v1216">
+ 328:    var body=new URLSearchParams({action:'hd_hobbyregister_search',nonce:form.getAttribute('data-hdr-nonce')||'',q:q});
+ 625:         foreach(HD_Hobbyregister_Core_Stable127::records() as $other){
+ 668:         $static=HD_Hobbyregister_Core_Stable127::article((string)($row['registry_id'] ?? ''));
+ 691:         return self::breadcrumb($name).'<div class="hd-portal-section hdr-wrap" data-hd-register-profile="1.2.16">'.self::hero(true,$row).'<div class="hdr-profile-grid"><aside>'.self::profile_sidebar($row).'</aside><main>'.self::full_article($row).'</main></di
+ 702:         return '<style id="hd-hobbyregister-css-v120">'
+ 703:         .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizin
+### HD-009-AFFILIATE-ZENTRALE
+ZIP exists True
+ZIP files 30
+ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-square.webp 58370
+ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-wide.webp 31768
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 704968 hits 94
+ 352:         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
+ 1948:     public function inject_glossary_single_banner($content) {
+ 1957:         $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
+ 1958:         $mobile_slot = $this->render_affiliate_slot($post_id, 'glossary_single_mobile_banner', 'portal_context', '');
+ 2438:             $own = HDAR_Amazon_Start::render_slot($context, $slot_type, $content_id);
+ 2465:                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2466:                         $uses_editorial_single_chrome = $is_glossary_single_slot;
+ 2490:                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
+ 2641:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2643:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+ 3651:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
+ 3849:         $glossary_single_banner = $required_creative_type === 'banner'
+ 3851:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 3878:             if (!$glossary_single_banner) {
+ 4020:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
+ 5121:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
+ 8391:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
+FILE affiliate-portal-router/includes/class-hdar-amazon-start.php bytes 22711 hits 52
+ 106:     public static function render_slot($context, $slot_type, $content_id = '') {
+ 321:         <p><label>Zielart <select name="hdar_target_type"><option value="post">Seite / Hobbyregister / Beitrag</option><option value="term">Kategorie / Glossargruppe</option></select></label>
+FILE affiliate-portal-router/includes/class-ppar-admin-kiss.php bytes 47100 hits 1
+ 132:         echo '<p class="description">OTTO, Kelkoo, Kaufland, Amazon und ADCocktail erscheinen als vorbereitet, bis ein realer, dokumentierter Zugang vorhanden ist. Es werden keine Schnittstellen geraten.</p>';
+FILE affiliate-portal-router/includes/class-ppar-deal-radar.php bytes 29834 hits 3
+ 155:         return in_array($network, array('idealo','amazon','kelkoo','ebay'), true) ? $network : '';
+ 355:         $map = array('otto'=>'OTTO','idealo'=>'idealo','amazon'=>'Amazon','kelkoo'=>'Kelkoo','ebay'=>'eBay');
+ 441:             'Amazon'=>array('key'=>'amazon','note'=>'fest eingeplant; Adapter noch nicht aktiv'),
+FILE affiliate-portal-router/includes/class-ppar-partner-analytics.php bytes 18558 hits 1
+ 42:             'amazon' => array('label'=>'Amazon','type'=>'Produktquelle','state'=>'prepared','source_network'=>'amazon'),
+FILE affiliate-portal-router/includes/class-ppar-product-source-plan.php bytes 12842 hits 7
+ 56:             'amazon' => array(
+ 57:                 'label'=>'Amazon','state'=>'prepared','route'=>'Amazon Associates / zulässiger Produktdatenzugang',
+ 82:         // Keep the existing Hobby Depot Amazon ASIN/tracking bridge intact.
+ 84:         if (!isset($registry['amazon']) || !is_array($registry['amazon'])) {
+ 85:             $registry['amazon'] = array(
+ 86:                 'label'=>'Amazon','state'=>'prepared','access_owner'=>'adapter',
+ 87:                 'specialist_menu'=>false,'specialist_slug'=>'affiliate-portal-provider-amazon',
+FILE affiliate-portal-router/includes/trait-ppar-creative-library.php bytes 122931 hits 2
+ 1725:             if ($slot_id === 'glossary_single_desktop_banner') { $labels[] = 'Desktop'; }
+ 1726:             if ($slot_id === 'glossary_single_mobile_banner') { $labels[] = 'Mobil'; }
+FILE affiliate-portal-router/includes/trait-ppar-idealo.php bytes 105066 hits 2
+ 1224:         $network=sanitize_key((string)$network); if ($network==='ebay') { return 'Bei eBay ansehen'; } if ($network==='idealo') { return 'Bei idealo vergleichen'; } if ($network==='amazon') { return 'Bei Amazon ansehen'; } return 'Angebot ansehen';
+ 1255:         $order=array('ebay','idealo','amazon'); uksort($offers,static function($a,$b)use($order){$ia=array_search($a,$order,true);$ib=array_search($b,$order,true);$ia=$ia===false?99:$ia;$ib=$ib===false?99:$ib;return $ia<=>$ib;});
+FILE affiliate-portal-router/includes/trait-ppar-output-objects.php bytes 236623 hits 8
+ 558:         foreach (array('post'=>'classic_post','uge_term'=>'glossary_single') as $post_type => $context) {
+ 664:                             'glossary_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>310,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_context
+ 665:                             'glossary_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_context
+ 700:             'glossarartikel'=>array('label'=>'Glossarartikel','slots'=>array('glossary_single_desktop_banner','glossary_single_mobile_banner')),
+ 2111:             : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner','glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner'
+ 2713:             'glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner',
+ 3047:                             'glossary_single_desktop_banner',
+ 3048:                             'glossary_single_mobile_banner'
+FILE affiliate-portal-router/includes/trait-ppar-provider-registry.php bytes 57162 hits 82
+ 63:             'amazon' => array(
+ 64:                 'label' => 'Amazon',
+ 68:                 'specialist_slug' => 'affiliate-portal-provider-amazon',
+ 196:     private function amazon_settings_defaults() {
+ 203:     private function amazon_tracking_id_valid($tracking_id) {
+ 208:     private function amazon_settings() {
+ 209:         $stored = get_option('ppar_amazon_search_v1', array());
+ 211:         $settings = array_merge($this->amazon_settings_defaults(), $stored);
+ 212:         if (defined('PPAR_AMAZON_TRACKING_ID') && $this->amazon_tracking_id_valid((string) PPAR_AMAZON_TRACKING_ID)) {
+ 213:             $settings['tracking_id'] = trim((string) PPAR_AMAZON_TRACKING_ID);
+ 215:         $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+ 219:     private function amazon_update_settings($settings) {
+ 220:         $settings = array_merge($this->amazon_settings_defaults(), is_array($settings) ? $settings : array());
+ 222:         $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid($settings['tracking_id']);
+ 223:         update_option('ppar_amazon_search_v1', $settings, false);
+ 224:         return $this->amazon_settings();
+ 227:     public function amazon_bridge_ready() {
+ 228:         $settings = $this->amazon_settings();
+ 229:         return !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+ 232:     private function amazon_campaign_asins($campaign) {
