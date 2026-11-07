@@ -178,7 +178,8 @@ pass(!str_contains($category_html,' · '),'Category has no bundled Amazon text r
 pass(!str_contains($category_html,'<img'),'No fake product picture');
 pass(count($GLOBALS['remote'])===$before_calls,'Rendering costs zero new API calls');
 pass(hbdp_area_product_markup(['id'=>'not-a-verified-node'])==='','Unknown category fails closed');
-pass(hbdp_area_product_markup(['id'=>'core:c22:topic:1'])!=='','Existing R3 topic page remains active');
+pass(substr_count(hbdp_area_product_markup(['id'=>'core:c22:topic:1']),'data-ppar-category-product-card="1"')===2,'Existing R3 topic has two separate product cards');
+pass(hbdp_area_product_markup(['id'=>'core:category:2'])==='','No saved product: no empty or invented card');
 pass(hbdp_area_product_markup(['id'=>'core:category:1'])===$category_html,'Rendering is deterministic');
 pass(apply_filters('hbdp_area_product_cards_html','<div>Gebuchte Werbung</div>','core:category:1')==='<div>Gebuchte Werbung</div>','Booked design slot takes priority on category');
 $GLOBALS['opts']['ppar_enabled']='0';
