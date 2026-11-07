@@ -9,4 +9,4 @@ Mobile placement entire main article -> existing square sidebar banner (grid-are
 New inline native post_inline_banner slot after Kosten und Ausruestung full section, not inside paragraphs.
 Native provider/target/format selection unchanged. HD007 and HD003 ZIPs unchanged.
 Stylesheet gate unchanged: only_mode_active aliases launch_active in the ORIGINAL class. Cache key updated to 0.1.19. Local WordPress E2E normalizes home/siteurl to its actual document root.
-Real WordPress DOM test remains a separate QA step; not yet live-installed.
+Real isolated WordPress+MariaDB+HD003+HD007+HD009 (0.1.19) Chrome test: DESKTOP and MOBILE both PASS. Evidence: HD009_0119_WP_REAL_BROWSER_PASS.txt. New production version NOT YET INSTALLED.
