@@ -41,3 +41,12 @@ ZIP-CRC PASS, 23/23 PHP-Syntax PASS, Hauptdateiversion 0.1.10-dev, 26 vollständ
 Ältere Aussagen aus den früheren Commits über „GitHub-ZIP fehlt“, Version 0.1.2-Current oder 0.1.9-Datei nur im Chat sind **überholte historische Befunde**; die dazugehörigen Beweise bleiben in Git-History und `PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/`, werden nicht als zweite Current-Autorität geführt.
 
 Die formal gesperrte Pferdeatelier-Freigabe bleibt unberührt; keine Änderungen am Pferdeatelier-Produktivplugin.
+
+
+## Affiliate-Startvertrag aktualisiert – Amazon UND idealo (07.11.2026)
+
+Der Betreiber hat Hobby Depot sowohl im Amazon PartnerNet als auch im idealo Partnernetz als Website registriert; idealo ist bestätigt. **Der Werbestart soll zwei Partner parallel vorsehen, nicht mehr Amazon-only.** Amazon-Produktrecherche über die in Entwicklung befindliche DataForSEO-Anbindung **unabhängig** vom idealo-Feed; idealo-Feed unabhängig von Amazon. Nur bei exakt nachgewiesener Produktidentität gegenseitige Recherche/Abgleich, kein Zwangs-Sync. Fremdpartner noch nicht öffentlich ausspielen, aber ihre gespeicherten Einstellungen erhalten. Eigene Quer- und Quadratbanner bleiben interne Hobby-Motive mit exakter HD004/HD007-Zuordnung.
+
+**Quellprüfung:** Der vorhandene idealo-Adapter erzwingt noch unbelegte feste Werte für Adspace `568313` und Feed `2901`. Diese Werte sind **nicht als Hobby-Depot-Zugang bestätigt** und dürfen nicht blind genutzt werden. Der bisher lokal vorbereitete Amazon-only-Ausgabefilter muss vor dem nächsten HD009-Release auf Amazon+idealo angepasst werden. Details und konkrete Umsetzung unter [START_AMAZON_IDEALO_20261107.md](START_AMAZON_IDEALO_20261107.md).
+
+**Wahrheitsgrenze:** Die einzige offizielle GitHub-Installations-ZIP ist weiterhin HD009 **0.1.10-dev**. Ein neu angepasster Dual-Partner-Installer wurde hier noch **nicht** auf GitHub freigegeben oder auf WordPress installiert. Nächste Aktion: vorhandene HD009-Portierung entsprechend ändern, testen, als einzige vollständige ZIP sichern, danach echte idealo-Hobby-Zugangsdaten ausschließlich in WordPress prüfen. Kein neues Büro oder Plugin.
