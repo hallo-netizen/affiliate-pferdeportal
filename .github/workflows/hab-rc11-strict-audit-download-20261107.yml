@@ -55,8 +55,13 @@ jobs:
           for n in hd_diff:
               assert n.endswith(('.css','.php','.txt')),n
           for n in hdh:
-              if n.endswith('.php') and (n in hdp) and n!='affiliate-portal-router/hobby-depot-affiliate-router.php':
-                  assert hdh[n]==hdp[n],("Hobby business logic modified",n)
+              if n.endswith('.php') and (n in hdp) and hdh[n]!=hdp[n]:
+                  import difflib
+                  before=hdp[n].decode('utf8');after=hdh[n].decode('utf8')
+                  d=list(difflib.unified_diff(before.splitlines(),after.splitlines(),lineterm=''))
+                  print('HOBBY_PHP_MODIFICATION',n,d[:35])
+                  assert n in ('affiliate-portal-router/hobby-depot-affiliate-router.php','affiliate-portal-router/includes/class-hdar-amazon-start.php'),n
+                  assert after.replace('0.1.20','0.1.19')==before,('Hobby PHP changed beyond version/cache',n)
           pferdefile='release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'
           pferde=get_rev(remote,pferdefile).decode('utf8')
           assert 'function provide_leaf_category_affiliate_slot_html(' in pferde
