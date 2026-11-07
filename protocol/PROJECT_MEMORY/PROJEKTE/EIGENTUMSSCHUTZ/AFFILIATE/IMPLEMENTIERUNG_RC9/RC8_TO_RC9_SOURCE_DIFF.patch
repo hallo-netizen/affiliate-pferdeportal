@@ -1,0 +1,26 @@
+--- RC8/includes/class-ppar-hab-bewahr-bridge.php
++++ RC9/includes/class-ppar-hab-bewahr-bridge.php
+@@ -180,8 +180,10 @@
+                 );
+             }
+         }
+-        if (count($worlds) !== 6) {
+-            return new WP_Error('hb_worlds_unexpected', 'Der aktive Hab-&-Bewahr-Bestand muss sechs Schutzwelten enthalten.');
++        // The active category workflow determines the worlds. The seventh
++        // world (Versicherungen) must not disable the other product worlds.
++        if (!$worlds) {
++            return new WP_Error('hb_worlds_missing', 'Keine gültige Hab-&-Bewahr-Hauptwelt gefunden.');
+         }
+ 
+         $seen_concepts = array();
+@@ -269,8 +271,8 @@
+             'schema'=>'hb-active-wp-category-products-v2', 'source_revision'=>$revision,
+             'source_sha256'=>hash('sha256',$revision.'|'.wp_json_encode(array_keys($nodes)).'|'.wp_json_encode($rules)),
+             'counts'=>array(
+-                'worlds'=>6, 'main_hubs'=>6,
+-                'hub_pages'=>max(0,$pages-7),
++                'worlds'=>count($worlds), 'main_hubs'=>count($worlds),
++                'hub_pages'=>max(0,$pages-1-count($worlds)),
+                 'product_pages'=>count($products),
+                 'article_categories'=>count($articles),
+                 'business_concepts'=>count($concepts),
