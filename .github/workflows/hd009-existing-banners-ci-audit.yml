@@ -1,4 +1,4 @@
-name: Audit existing Hobby design and affiliate banners (HD007 image map fully verified)
+name: Audit existing Hobby design and affiliate banners (HD007 image map and approved profile samples verified)
 on:
   push:
     branches:
