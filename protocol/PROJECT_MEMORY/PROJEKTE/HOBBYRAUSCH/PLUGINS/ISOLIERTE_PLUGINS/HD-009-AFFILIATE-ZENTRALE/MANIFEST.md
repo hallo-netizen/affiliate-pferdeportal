@@ -1,18 +1,13 @@
-# HD009 – aktuelle Affiliate-Zentrale Hobby Depot
+# HD009 – Hobby Depot Affiliate-Zentrale – einziges CURRENT
 
-**07.11.2026 – 0.1.20-dev – einzige aktuelle Installationsdatei: CURRENT.zip.**
+**07.11.2026 – 0.1.21-dev.** Installationsdatei: `CURRENT.zip`.
 
-- Vollständige ZIP: 1.066.589 Bytes, SHA-256 `cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb`
-- Git-Blob: `9d9ac298c9e32bfc54f81d80e39f1a3560200d8c`
-- WordPress-Pluginordner unverändert: `affiliate-portal-router/` – vorhandenes Plugin ersetzen.
-- Änderungen gegenüber 0.1.19: **nur** `assets/hdar-amazon-start.css` (Verlaufsbalken in Quadrat und Querformat, Button 2px-Rundung, kleiner und weniger dominant, Bild um 4% zurückgenommen), Pluginkopf-Version, Stylesheet-Cache-Version. Alle anderen ZIP-Dateien sind bytegleich.
-- Quadratbanner weiter nach „Auf einen Blick“, vor „Hobbygruppe“. Querbanner nach „Kosten und Ausrüstung“. Mobil Quadratbanner nach Haupttext. HD003 und HD007 bleiben unverändert.
-- Gleiches zum Hobby passendes Foto wird formatabhängig dargestellt. Kein neues Bild, keine doppelte Werbeautomatik, keine neue Partner- oder Produktlogik.
-- Amazon-Originalgrafik bleibt unverändert und mindestens 140px breit. „Anzeige“ bleibt eindeutig.
-- DataForSEO ist als **manuelle**, kostenpflichtige Admin-Recherche vorbereitet: `/v3/merchant/amazon/products/live/advanced`. API-Zugang und Live-Ergebnis nicht bestätigt; keine automatische Produktempfehlung behaupten.
-- **Gegenprüfung der ZIP 0.1.20:** Quell-ZIP-Hash vor Modifikation geprüft; ZIP-CRC PASS; 24 PHP-Dateien Syntax PASS; nur drei vorgenannte Dateien geändert; DataForSEO-Endpunkt unverändert.
-- **Vorherige 0.1.19:** Lokaler WordPress-/Chromium-Test Desktop/Mobil und Platzierung PASS; anschließend wurden die Platzierungen vom Betreiber auf der Live-Seite bestätigt. Für das neue CSS wurde kein weiterer echter Browser-/Live-Test behauptet.
-- **Live-Update auf 0.1.20 noch offen.** Nach Installation Quadrat + Querbanner auf Desktop und Mobil prüfen.
+- 1.067.588 Bytes, SHA-256 `f6dd1cb301dbe661b63a9dd6b7890d0363c3317f025ee8617a94348b6001a002`, Git-Blob `0b82b36560583cee0022d24434a8695e9fe0ab29`.
+- Full ZIP, unveränderter WordPress-Pluginordner `affiliate-portal-router/` – kein neues Zusatzplugin.
+- **Bannerdesign:** Foto bis zum Rand; warmer Sandton `#f5f1e9` und weicher Hero-Verlauf. Quadrat: Verlauf von oben; Quer: Verlauf von links. Ohne harte Kopfzeile oder Trennlinien. Ein einziges Foto je Thema, zwei Zuschnitte. Amazon-Originalgrafik weiterhin unverändert; Button klein, eckig, mit Randabstand.
+- **Querbanner:** durchgehend Verhältnis 3:1, sowohl in voller Kategorieseitenbreite als auch im Haupttext; skaliert mit Breite. Titelgröße abhängig von Titel-Länge und Werbefläche. Einzeilig bei ausreichend Platz; sehr lange Titel in kleinen Bannern maximal zweizeilig. Quadrat 1:1.
+- Die bestehende Bannerplatzierung bleibt unverändert; keine Änderung an Providerwahl, DataForSEO, Kampagnen, Links oder WordPress-Kategorien. Die Stylesheet-Version wurde für zuverlässige Cache-Aktualisierung auf `0.1.21` erhöht.
+- **Prüfung:** Eingangs-ZIP 0.1.20 auf SHA-256 geprüft; 33/33 ZIP-Einträge erhalten, ZIP CRC PASS, 24/24 PHP-Syntax PASS. Nur CSS, WordPress-Plugin-Version und CSS-Cache-Einbindung sowie responsive Titellängenklasse verändert. Vollständige Browser-Simulation an echten Seiten bei 1440, 900, 390 und 360 Pixeln PASS. Separate Prüfung mit langen Hobbytiteln und fünf Breiten PASS. GitHub Actions: 42390844656, 42390657764.
+- **Live-Installation 0.1.21 und echte optische Abnahme stehen noch aus.**
 
-Fachliche Regel für Kategorien vs. konkrete Produkte:
-`../../../../AFFILIATE/BANNER_ZIELREGELN_20261107.md`. Historiendokumente und die 0.1.19-Tests verbleiben in der Git-Versionsgeschichte/Plugin-Akte.
+Vorversionen 0.1.20 und älter sind Git-Historie, nicht CURRENT.

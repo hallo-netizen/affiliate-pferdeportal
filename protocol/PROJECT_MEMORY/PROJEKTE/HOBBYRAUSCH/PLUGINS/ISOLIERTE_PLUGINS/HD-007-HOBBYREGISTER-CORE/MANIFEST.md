@@ -1,71 +1,12 @@
-# HD-007 – ISOLIERTER PLUGINSTAND – MANIFEST
+# HD007 – Hobbyregister Core – einziges CURRENT
 
-## AKTUELLER GITHUB-STAND HD-007 – 01.11.2026
+**07.11.2026 – 1.2.18.** Installationsdatei: `CURRENT.zip`.
 
-**HD-007 Hobbyregister Core 1.2.17 – durch Betreiber freigegeben; vollständige Installations-ZIP real in GitHub gespeichert.**
+- 14.834.693 Bytes, SHA-256 `1908ff82d348993bb5012fad9357e67a4580170fa40d9710fc03084f26d64935`, Git-Blob `5982a624264f0ce290fc2a6e131d638db1c7de5b`.
+- Vollständiger unveränderter WordPress-Pluginordner `hd-hobbyregister-core/`, kein weiteres Zusatzplugin.
+- **Einzige inhaltliche Änderung:** Hero-Text der Hobbyregister-STARTSEITE gekürzt auf „Entdecke neue und ungewöhnliche Hobbys.“. Mobile Schrift-/Breitenanpassung nur für den Startseiten-Hero; kein abgeschnittener Text.
+- Alle 862 Hobbydatensätze und alle Bilder unverändert. Einzelprofil-Heros, Hobbygruppen, Suche, Inhaltsbereiche und Affiliate-Platzierung bleiben unverändert.
+- **Prüfung:** 1.2.17 ZIP Original-SHA geprüft; 93/93 ZIP-Einträge erhalten, CRC PASS, 4/4 PHP-Syntax PASS; nur 2 PHP-Dateien geändert (Plugin-Version und Register-Frontend). Mobil- und Desktop-Layout-Simulation mit echtem HTML bei 1440, 900, 390 und 360 Pixeln PASS (GitHub Actions 42390844656).
+- **Noch keine produktive WordPress-Installation/Abnahme von 1.2.18.**
 
-- **Autoritative Voll-ZIP:** `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip`
-- **GitHub-Release:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd007-1.2.17/HOBBY_DEPOT_HD007_1.2.17_862_UEBERSCHRIFTEN_KORRIGIERT_VOLLPLUGIN.zip
-- **Größe:** 14.834.581 Bytes; **SHA-256:** `433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488`; **Git-Blob:** `cb5ad50cec1eaa71947608aea7c154e0fb86d2b6`.
-- GitHub Actions **41341218204**: 25/25 Originalteile, Größe/Hash/93 ZIP-Einträge inklusive CRC PASS. Vollständiges Pluginroot `hd-hobbyregister-core/`.
-- 862 Hobbyidentitäten/Artikeltexte/Bilder bleiben unverändert; korrigierte Überschriften in Hobbys 862/862. Kein neues Zusatzplugin.
-- **Keine behauptete WordPress-Liveinstallation**: Der zuletzt belegte WordPress-Stand war 1.2.16. Update auf 1.2.17 ist ein offener Betreiber-/Live-Schritt, sofern noch nicht eingespielt.
-
-Frühere Hinweise zu `CURRENT.zip`-Blockaden und älteren Plugin-ZIPs weiter unten sind historisch und gegenüber diesem geprüften GitHub-Stand **überholt**.
-
----
-
-
-STAND: 2026-10-23
-STATUS: **1.2.13 LOCAL HARD PASS / CURRENT.zip-SYNC BLOCKED**
-
-PLUGIN-ID:
-HD-007-HOBBYREGISTER-CORE
-
-PLUGIN:
-Hobby Depot Hobbyregister Core
-
-AKTUELLER RELEASE-KANDIDAT:
-`HOBBY_DEPOT_HOBBYREGISTER_CORE_HD007_V1.2.13_FULL_CORE_BILDPRUEFUNG.zip`
-
-VERSION:
-1.2.13
-
-SHA-256:
-`67a052dd1f648fd8e1550c326f8efe2ad5c55b4aa75e51397ad0c7ceefcd4d0d`
-
-GRÖSSE:
-5.211.316 Bytes
-
-PAKET:
-- exakt ein oberster Ordner `hd-hobbyregister-core/`;
-- 41 Dateien;
-- 4/4 PHP-Lint PASS;
-- 862 Registerdatensätze;
-- 862 Artikel;
-- 862 Bildzuordnungen;
-- 57 Traits je Hobby;
-- 862/862 Detailseiten lokal gerendert;
-- Registerübersicht PASS;
-- Fresh-Unpack PASS.
-
-BILDPRÜFUNG:
-- 14 finale 1500×1000-Master DONE;
-- 382/382 CORE-Kandidaten geprüft;
-- 81 semantisch passend, aber technisch zu klein;
-- 301 semantisch unpassend;
-- 0/382 final ohne Ersatz/High-Res-Quelle verwendbar;
-- 466 NO_CORE-Fälle weiter offen.
-
-AUTORITATIVE QUELLE:
-`PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/CURRENT.md`
-
-EVIDENCE:
-`PLUGINS/PLUGIN_AKTEN/HD-007-HOBBYREGISTER-CORE/EVIDENCE_1.2.13_CORE_IMAGE_AUDIT.md`
-
-CURRENT.zip-SYNC:
-**BLOCKED.**
-Die in diesem Chat verfügbaren GitHub-Werkzeuge können das lokale 5,2-MB-Binär-ZIP nicht direkt aus dem Arbeitscontainer nach GitHub übertragen, ohne den vollständigen Binärinhalt als Base64 durch den Chatkontext zu schleusen. Das wird nicht vorgetäuscht.
-
-Regel:
-Keine Pointer-, Text- oder Platzhalterdatei als `CURRENT.zip` anlegen. Die alte 1.0.0-Manifestangabe ist hiermit ersetzt; ein echtes `CURRENT.zip` bleibt physisch offen.
+Vorversionen 1.2.17 und älter in Git-Historie erhalten.

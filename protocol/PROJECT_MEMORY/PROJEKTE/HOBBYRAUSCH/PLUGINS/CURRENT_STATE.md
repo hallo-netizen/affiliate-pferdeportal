@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktuelle Hauptstände am 07.11.2026 (einzige CURRENT-ZIPs):** HD009 Affiliate-Zentrale **0.1.21-dev** (1.067.588 Bytes, SHA-256 `f6dd1cb301dbe661b63a9dd6b7890d0363c3317f025ee8617a94348b6001a002`) und HD007 Hobbyregister Core **1.2.18** (14.834.693 Bytes, SHA-256 `1908ff82d348993bb5012fad9357e67a4580170fa40d9710fc03084f26d64935`). Beide vollständig im isolierten Plugin-Büro abgelegt. HD009: neue Hero-Verläufe für Quadrat/Quer, dynamische Titellänge. HD007: kurze mobile Startseiten-Hero-Beschreibung. Beide technisch und im isolierten Browser geprüft. **Liveinstallation beider neuen Versionen offen.**
+
+**Historische Erläuterungen darunter (0.1.20 / 1.2.17 und älter) sind nicht mehr die Download-Wahrheit.**
+
 **Hinweis:** Alle weiteren 0.1.10–0.1.19-Vermerke weiter unten sind Historie und nicht der aktuelle Download.
 
 **Aktualisierung 07.11.2026 – HD009 (einzige CURRENT-Version):** `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.20-dev**, 1.066.589 Bytes, SHA-256 `cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb`, Git-Blob `9d9ac298c9e32bfc54f81d80e39f1a3560200d8c`. Die existierende Pferdeatelier-/Hobby-Automatik bleibt erhalten; Variante-4-Banner wie abgenommen. **Neu:** Desktop-Registeranzeige nach `Auf einen Blick` vor `Hobbygruppe`, ein Querbanner im Haupttext nach `Kosten und Ausrüstung`, mobil Quadratbanner nach Haupttext als erster Seitenleistenblock. **WordPress-/Browser-E2E in 0.1.19 PASS, Positionen vom Betreiber live bestätigt; 0.1.20 CSS-Update ZIP/24 PHP PASS, Liveprüfung noch offen.** Fachliche Statusautorität `../AFFILIATE/CURRENT_STATE.md`, technische `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md`. Alle weiteren alten HD009-Einträge sind Historie.
