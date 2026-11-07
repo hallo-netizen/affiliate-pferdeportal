@@ -10,33 +10,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Trace existing product flow and test harness
+      - name: Inspect original RC10 regression harness and HD009 renderer
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
-          import re
-          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ")
-          with ZipFile(root/"PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip") as z:
-           for fn,methods in {
-            "includes/class-ppar-hab-bewahr-bridge.php":["function area(","function catalog(","function page_for_id("],
-            "includes/trait-ppar-hb-amazon.php":["function hb_amazon_product_family_markup(","function hb_amazon_category_search_fallback(","function hb_amazon_area_product_fallback(","function hb_amazon_direct_url("],
-            "affiliate-portal-router.php":["function hab_bw_area_slot(","function provide_leaf_category_affiliate_slot_html(","function get_category_archive_context(","function render_affiliate_slot_for_context(","function render_banner("]
-           }.items():
-            n=[n for n in z.namelist() if n.endswith("/"+fn)][0]
-            a=z.read(n).decode("utf-8","replace").splitlines()
-            for method in methods:
-             hits=[i for i,line in enumerate(a) if method in line]
-             for i in hits[:2]:
-              print("### METHOD",n,method,i+1)
-              depth=0;started=False
-              for j in range(i,min(len(a),i+180)):
-               line=a[j]
-               print(f"{j+1:5d} {line}")
-               depth+=line.count("{")-line.count("}")
-               started |= ("{" in line)
-               if started and depth<=0:break
-          with ZipFile(root/"AFFILIATE/IMPLEMENTIERUNG_RC10/VOLLSTAENDIGE_SIMULATION_TESTBELEGE.zip") as z:
-           print("### TEST ZIP NAMES",z.namelist())
+          import difflib,hashlib
+          r=Path("protocol/PROJECT_MEMORY/PROJEKTE")
+          p={
+          "HAB":r/"EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip",
+          "HD":r/"HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip",
+          "TEST":r/"EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC10/VOLLSTAENDIGE_SIMULATION_TESTBELEGE.zip"}
+          with ZipFile(p["TEST"]) as z:
+           for q in ["full_plugin_harness_rc9.php","full_workflow_rc10.php","test_hab_amazon.php"]:
+            n=next(n for n in z.namelist() if n.endswith(q))
+            lines=z.read(n).decode("utf8").splitlines()
+            print("### HARNESS",n,len(lines))
+            for i,l in enumerate(lines[:160]):print(f"{i+1:4d} {l}")
+          with ZipFile(p["HD"]) as z:
+           names=z.namelist()
+           print("### HOBBY METHODS")
+           for n in names:
+            if n.endswith(".php"):
+             txt=z.read(n).decode("utf8","replace")
+             if "render_affiliate_slot_for_context" in txt:
+              print("Source",n, len(txt),"render keyword occurrences",txt.count("render_affiliate_slot_for_context"))
+             if "hdar_ci_amazon_banner" in txt:
+              print("Amazon banner source",n, len(txt))
           
           PY
