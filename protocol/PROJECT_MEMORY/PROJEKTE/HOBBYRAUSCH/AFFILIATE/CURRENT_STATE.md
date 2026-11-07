@@ -1,50 +1,29 @@
-# HOBBY DEPOT – AFFILIATE – EINE VERBINDLICHE AKTUELLE FASSUNG
+# HOBBY DEPOT – AFFILIATE – EIN VERBINDLICHER STAND
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-Stand: **07.11.2026**. Scope `HOBBYRAUSCH_AFFILIATE`. Gemäß `AUTORITAETSPLAN.json` die **einzige fachliche Current-/NEXT-ACTION-Autorität** für Affiliate im Hobby-Depot-Bürogebäude.
+Stand: **07.11.2026**. Einzige Status-/NEXT-ACTION-Autorität für `HOBBYRAUSCH_AFFILIATE`.
 
-## 1. Jetzt aktuell
+## Aktuelle Dateien
+- **Einzige aktuelle GitHub-Plugin-ZIP:** `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`, Hobby Depot – Affiliate-Zentrale **0.1.13-dev**.
+- 707164 Bytes; SHA-256 `d6536031f0eca61c15a2d8c754015ed92de3ad474da9a10e961782a076681d43`; Blob `fd18e2caea3836a8054189edac67e70c9c6d10b0`.
+- **In WordPress vom Betreiber nachgewiesen:** 0.1.12-dev, Stand Screenshot 07.11.2026. **0.1.13-dev noch nicht installiert oder mit den echten API-Credentials getestet.**
+- Dieselbe Pluginlinie im bisherigen WP-Pfad `affiliate-portal-router/`, keine zusätzliche Engine/Installation, HD003-/HD004-/HD007-Hobbyverträge bleiben erhalten.
 
-- **Einzige aktuelle vollständige GitHub-Installationsdatei:** **HD-009 Hobby Depot – Affiliate-Zentrale 0.1.12-dev**, `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
-- **GitHub-Readback des tatsächlichen Binärarchivs PASS:** 707639 Bytes, Blob `ba3b84f2c891ea8bb4ac8a459438e1b46882f5f6`. ZIP-SHA256 `7ebbea15bb9f1692a949c41cc982489f5be2a2d12695e9342cac7dc8ce1550ae`. Das ist keine Text-/Pointer-ZIP.
-- **Zuletzt vom Betreiber auf WordPress bestätigt installiert:** Version `0.1.7-dev`; ob dort inzwischen 0.1.10/0.1.12 eingespielt ist, **nicht live nachgesehen**.
-- **Freigabe:** vollständiger lokal technisch getesteter **Upgrade-Kandidat**, **kein produktiver Live-PASS**.
-- Pluginname, WordPress-Pluginordner `affiliate-portal-router/`, Hauptdatei `hobby-depot-affiliate-router.php` bleiben erhalten. **Kein weiteres Affiliate-Plugin**.
+## Was geändert wurde
+- **Automatische Banner-Zuordnung war bereits aus Pferdeatelier kopiert:** Verifizierte Fachrelevanz, tiefstes passendes Ziel plus Elternpfad, vorhandene Slot-/Formatwahl. In 0.1.12 war sie durch eine neue manuelle Eigenbanner-Sonderseite und eine Startmodus-Sperre umgangen. **Der separate manuelle Bannerweg ist in 0.1.13 entfernt, zentrale bestehende Banner-Automatik wieder aktiv.** Die im ZIP erhaltenen eigenentwickelten Motivdateien sind noch nicht automatisch in den zentralen Werbemittelbestand aufgenommen; kein erfundener Live-PASS.
+- **DataForSEO-Zugang:** In der bestehenden Seite `Affiliate-Zentrale → Amazon + idealo` gibt es `DataForSEO-Verbindung kostenlos prüfen`. Ein Klick nutzt den offiziellen kostenfreien Account-GET-Endpunkt, prüft bestehende Credentials, startet keine kostenpflichtige Produktrecherche. Getrennte echte Amazon-Suche bleibt manuell/kostenpflichtig.
+- **Partnerstart:** Nur Amazon und idealo sichtbar, beide unabhängigen Produktwege, keine gemeinsame Produktidentität nur wegen ähnlicher Titel. idealo erfordert die echten Hobby-Depot-Feed- und Adspace-Daten. eBay/OTTO usw. bleiben gespeichert und gesperrt für öffentliche Ausgabe im Startmodus.
+- Vorherige geprüfte 6.72.308-Ursachenfixe des Pferdeatelier-Bestands und Amazon-ASIN-Brücke bleiben unverändert. Keine Reparatur-Schicht über der vorhandenen Automatik.
 
-## 2. Aktueller Startvertrag: Amazon UND idealo
+## Prüfung
+ZIP, 24 PHP-Syntaxprüfungen, native Bannerpfad-Quellprüfung und vier DataForSEO-Offline-Testfälle PASS. Technischer vollständiger Nachweis: `../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0113_NATIVE_BANNER_DATAFORSEO_TEST_20261107.md`.
+**Kein echter WordPress-Live-/Provider-PASS.** DataForSEO-Credentials bleiben ausschließlich in WordPress; keine Zugangsdaten in GitHub oder Chat ablegen.
 
-Der Betreiber hat die Hobby-Depot-Webseite bei beiden Partnern registriert (idealo bestätigt, Amazon-Website-Code vorhanden).
+## Einzige Bürostruktur
+Fachlich `HOBBYRAUSCH/AFFILIATE/`, technisch die zugehörige HD009-Akte und `PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`. Keine doppelten Affiliate-Büros, keine zweite ZIP.
 
-**Amazon und idealo recherchieren unabhängig:**
-
-1. **Amazon:** vorhandene Partner-/ASIN-Brücke plus neue eigene DataForSEO-Merchant-Amazon-Recherche. Nur auf ausdrücklich angeklickte Admin-Suche, danach bewusste ASIN-Freigabe für exakt eine veröffentlichte Hobbyseite; keine ungeprüften Amazon-Bilder oder Preise übernehmen.
-2. **idealo:** eigenständiger vorhandener iPN-Import. Kein fest eingetragener fremder Adspace/Feed. Erst nach Eingabe und Bestätigung der tatsächlichen Hobby-Depot-Adspace-/Feed-ID, erfolgreichem API-Test und neuem Feedimport dürfen idealo-Produkte erscheinen.
-3. **Gemeinsame Regeln:** HD004-Fachziele, Hobbyregister HD007, bestehende HD003-Flächen, tiefstes exaktes Hobbyziel, keine fachfremden Stränge. Produktgleichheit nur mit belastbarem eindeutigen Produktkennzeichen, niemals allein aufgrund ähnlicher Namen. Keine neue Datenhaltung/Engine.
-4. **Einziger öffentlicher Startmodus:** Amazon + idealo; eBay, Otto etc. bleiben konfiguriert, erhalten in diesem Modus aber keine Ausgabe. Kein Daten-/Zugangslöschen.
-5. **Eigenwerbemittel:** eigenes Querbanner und Quadratbanner für passend markierte Hobbyseiten. Modellbau-Originalmotiv (1440×240 / 700×700); sonst neutraler typografischer Banner. Banner verweisen intern zur exakten Hobbyseite.
-
-## 3. Vorgeschichte und erhaltene Fixes
-
-Hobby-0.1.7 Original wurde vom WordPress-Betreiber hochgeladen. 0.1.10 brachte die allgemeinen geprüften Pferdeatelier-Ursachenfixes (Referenz 6.72.308) soweit mit Hobby kompatibel: eBay-Löschprüfung in Chargen, Abdeckung ohne doppelte Einzelabfragen, keine doppelte Qualitätsprüfung, zweite Suchergebnisseite nur bei eBay-Fremdmarkt-Überhang; strenge eBay-Marketplace-Sperre bleibt. Fünf vorhandene Zusatzmodule und Hobby-Amazon-Tracking-Brücke wurden bei der vorherigen Harmonisierung erhalten. **0.1.12 setzt darauf auf und ersetzt diesen Stand nicht durch eine Grundportierung.**
-
-Technischer Original-, Upgrade- und Testnachweis:
-`../PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0.1.12_AMAZON_IDEALO_20261107.md`.
-
-## 4. Die Bürostruktur bleibt exakt eine
-
-- **Fachliches Affiliate-Büro** `PROJEKTE/HOBBYRAUSCH/AFFILIATE/`: dieser Current-Stand, Partnerverfahren, fachliche Entscheidungen.
-- **Zugehöriges Plugin-Büro** `PROJEKTE/HOBBYRAUSCH/PLUGINS/`: technische Akte HD009 und **genau eine** installierbare Affiliate-`CURRENT.zip`.
-- Das sind verschiedene Zuständigkeiten, **keine doppelten Affiliate-Installationen**. Kein drittes Büro, keine zweite ZIP.
-
-## 5. Genau der nächste notwendige Schritt
-
-**In WordPress das bestehende HD009-Plugin kontrolliert auf die geprüfte 0.1.12-ZIP aktualisieren**. Danach ohne Zugangsdaten im Chat:
-
-1. `Affiliate-Zentrale → Netzwerke & API → Amazon`: tatsächliche **Tracking-ID** (nicht Website-Verifizierungs-Code) speichern und `Amazon-Direktlinks verwenden` aktivieren.
-2. `Affiliate-Zentrale → Amazon + idealo`: Startmodus aktivieren; vorhandene echte DataForSEO-API-Zugangsdaten eingeben; eine manuelle Suche für ein konkretes Hobby ausführen und nur passende ASIN auswählen.
-3. `Affiliate-Zentrale → Netzwerke & API → idealo`: echten Hobby-Depot-iPN-API-Key, Adspace- und Feed-ID eintragen; Zugehörigkeit bestätigen; `Speichern & API prüfen`, danach echten Feedimport im separaten idealo-Bereich starten.
-4. Ein konkretes Hobby im Frontend prüfen: eigene Bannerformate, Amazon-Link mit korrekter Tracking-ID, bei frischem idealo-Feed getrennte idealo-Karte, **keine fremden Werbepartner**, keine falschen Kategorien.
-5. Erst nach diesem authentifizierten Live-Test als produktiv abgenommen bezeichnen.
-
-**Keine WordPress-Installation, kein kostenpflichtiger DataForSEO-Aufruf und kein idealo-Import wurden in diesem Campus-Schreibvorgang ausgelöst.**
+## Nächster Klickpfad
+1. WordPress **Plugins → Installierte Plugins**: 0.1.13-dev über bestehende Affiliate-Zentrale aktualisieren, nicht parallel installieren.
+2. **Affiliate-Zentrale → Amazon + idealo**: bei bereits gespeicherten Zugangsdaten **„DataForSEO-Verbindung kostenlos prüfen“** klicken. Nur Verbindungstest, keine bezahlte Recherche.
+3. Banner in **Affiliate-Zentrale → Banner & Werbemittel** über vorhandene zentrale Zuordnung und gültigen Werbemittelbestand prüfen; der gesonderte Punkt „Eigenbanner unabhängig zuordnen“ ist entfallen.

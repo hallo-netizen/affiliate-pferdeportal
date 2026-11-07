@@ -1,6 +1,6 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
-**Aktualisierung 07.11.2026 – HD009:** Einzige Affiliate-Voll-ZIP `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.12-dev**, 707639 Bytes, SHA-256 `7ebbea15bb9f1692a949c41cc982489f5be2a2d12695e9342cac7dc8ce1550ae`, Git-Blob `ba3b84f2c891ea8bb4ac8a459438e1b46882f5f6` tatsächlich auf GitHub gespeichert und nachgelesen. Das fachliche Affiliate-Büro bleibt einzigartig: `../AFFILIATE/CURRENT_STATE.md`. **Andere ältere HD009-Zeilen weiter unten sind historische Snapshots und kein konkurrierender Current-Stand.** WordPress-Liveinstallation nicht bestätigt.
+**Aktualisierung 07.11.2026 – HD009:** Einzige Affiliate-Voll-ZIP `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.13-dev**, 707164 Bytes, SHA-256 `d6536031f0eca61c15a2d8c754015ed92de3ad474da9a10e961782a076681d43`, Git-Blob `fd18e2caea3836a8054189edac67e70c9c6d10b0`. Native automatisierte Banner-/Kategoriezuordnung aus Pferdeatelier wieder unverändert benutzt; separaten manuellen Eigenbannerweg entfernt. Kostenfreier DataForSEO-Verbindungstest hinzugefügt. Fachliche Statusautorität: `../AFFILIATE/CURRENT_STATE.md`. **Historische HD009-Stände weiter unten sind keine aktuelle Releaseautorität.** WordPress-Liveabnahme 0.1.13 offen.
 
 Stand: 07.11.2026 (HD-009 aktualisiert; die übrigen Pluginstände behalten ihre zuletzt dokumentierten Prüfdaten). **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
 
@@ -16,7 +16,7 @@ Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen 
 | HD-005 – Glossar Core | 1.0.25 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
-| HD-009 – Affiliate-Zentrale | 0.1.7-dev zuletzt auf WordPress installiert gemeldet; **0.1.10-dev als GitHub-Update-ZIP geprüft** | **Vollständige echte CURRENT.zip 607784 Bytes auf GitHub abgelegt und zurückgelesen; noch kein WordPress-Live-PASS** |
+| HD-009 – Affiliate-Zentrale | 0.1.12-dev vom Betreiber auf WordPress installiert; **0.1.13-dev GitHub-Update-ZIP** | **Vollständige neue CURRENT.zip (707164 Bytes) im einzigen HD009-Pluginbüro; Live-Test 0.1.13 offen** |
 | Footer-Umzug – Portale | 1.1.1 | **Original-Voll-ZIP im Pluginbüro gesichert und unabhängig wieder geöffnet** |
 | Hobby Depot – FAQ Frontend Fix | 1.0.2 | **Original-Voll-ZIP gesichert, unabhängig geprüft** |
 | Hobby Depot – Performance Diagnose | 1.1.0 | Aktuelle Voll-ZIP noch nicht im Büro |

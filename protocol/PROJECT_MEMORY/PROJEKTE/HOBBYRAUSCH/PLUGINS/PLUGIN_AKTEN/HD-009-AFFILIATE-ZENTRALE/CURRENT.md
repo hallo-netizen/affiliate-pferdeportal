@@ -1,11 +1,11 @@
-# HD-009 – Hobby Depot Affiliate-Zentrale – Technische Akte
+# HD-009 – Hobby Depot Affiliate-Zentrale – technische Pluginakte
 
-**Einzige aktuelle Binärdatei:** `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.12-dev**.
+Technischer Eintrag zur **einzigen** Affiliate-Statusautorität `../../../AFFILIATE/CURRENT_STATE.md`.
 
-GitHub-Binär-Readback: **707639 Bytes**, Blob **ba3b84f2c891ea8bb4ac8a459438e1b46882f5f6**, ZIP SHA256 `7ebbea15bb9f1692a949c41cc982489f5be2a2d12695e9342cac7dc8ce1550ae`. 30 ZIP-Einträge; 24 PHP Syntax PASS; lokale offline funktionale Prüfungen PASS. **WordPress-Liveabnahme ausstehend.**
+Einzige vollständige aktuelle GitHub-ZIP: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`, **0.1.13-dev**. SHA-256 `d6536031f0eca61c15a2d8c754015ed92de3ad474da9a10e961782a076681d43`, 707164 Bytes, Blob `fd18e2caea3836a8054189edac67e70c9c6d10b0`. Normaler Pluginroot `affiliate-portal-router/`.
 
-Für alle fachlichen Entscheidungen gilt ausschließlich `../../../AFFILIATE/CURRENT_STATE.md`. Diese technische Akte ist **keine zweite Current-Autorität**.
+Ursache und Lösung: Die bereits aus Pferdeatelier übernommene zentrale Bannerautomatik (Fachziel/Elternpfad/Slot) lag unverändert im Hobby-Plugin. Die in 0.1.12 eingeführte separate manuelle Eigenbanner-Speicherung und -Ausgabe umging diese Automatik; beides wurde in 0.1.13 entfernt, Startmodus-Blockade aufgehoben. Für gültige Werbemittel gilt der ursprüngliche zentrale Auswahlweg. Erhaltene Motivdateien sind noch nicht als Werbemittel importiert.
 
-Fachlicher Start: Amazon und idealo als getrennte Recherche-/Werbepartner. Neue sichtbare WordPress-Unterseite `Affiliate-Zentrale → Amazon + idealo`; idealo-API-/Feedwerte zwingend Hobby-spezifisch bestätigen, keine Defaults eines früheren Portals. Bestehende HD003-/HD004-/HD007-Bindungen, Amazon-ASIN-Bridge und eBay-Fixes erhalten. Keine parallelen Plugininstallationen.
+Neue Funktion: **kostenloser DataForSEO-Verbindungstest** im bestehenden Menü `Affiliate-Zentrale → Amazon + idealo`, read-only GET `/v3/appendix/user_data`, keine Merchant-Suche, keine Hintergrundroutine, WordPress-Rechte- und Nonce-Schutz. Versionen/Konfiguration anderer Portale unberührt.
 
-Prüfbelege: [HD009 0.1.12 Dualpartner-Start](EVIDENCE/HD009_0.1.12_AMAZON_IDEALO_20261107.md), [Original 0.1.7](EVIDENCE/ORIGINAL_SERVER_0.1.7_20261106.md), [Ursachenfix 0.1.9](EVIDENCE/FIX_DELTA_MODULE_BOOT_20261106.md), [0.1.10 Harmonisierung](EVIDENCE/HD009_0.1.10_HARMONISIERUNG_20261107.md).
+Prüfbericht: [HD009 0.1.13](EVIDENCE/HD009_0113_NATIVE_BANNER_DATAFORSEO_TEST_20261107.md). ZIP/24 PHP-Lint/4 simulierte API-Fälle bestanden. Echtes WordPress-Upgrade und DataForSEO-Loginprüfung ausstehend. Ältere 0.1.12- und 0.1.10-Protokolle sind historisch, nicht aktuelle Installationsversion.
