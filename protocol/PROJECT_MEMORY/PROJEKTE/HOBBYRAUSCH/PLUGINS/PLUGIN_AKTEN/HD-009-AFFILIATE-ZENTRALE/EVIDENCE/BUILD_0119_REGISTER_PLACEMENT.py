@@ -100,14 +100,14 @@ assert new.count("add_action('wp_footer', array($this, 'hdar_ci_register_footer'
 assert "hdar-ci-amazon-official" in new and "hdar_approved_rental_banner_fallback" not in new
 files[main]=new.encode("utf8")
 # Existing Amazon house banner stylesheet was only enqueued in the single-partner mode.
-# Real WordPress E2E proved 0.1.18 did not load it on a Hobbyregister profile in normal Amazon+idealo launch mode.
-# Reuse the SAME style handle, extend its native gate and cache-bust current version.
+# Real WordPress E2E showed that the stylesheet was queued, but the isolated test's siteurl contained an extra /site subpath.
+# Keep SAME native gate and handle; update asset version to prevent stale browser caches.
 enqueue_file="affiliate-portal-router/includes/class-hdar-amazon-start.php"
 enqueue=files[enqueue_file].decode("utf8")
 old_enqueue="""        if (self::only_mode_active()) {
             wp_enqueue_style('hdar-amazon-start', plugins_url('assets/hdar-amazon-start.css', dirname(__FILE__)), array(), '0.1.13');
         }"""
-new_enqueue="""        if (self::only_mode_active() || self::launch_active()) {
+new_enqueue="""        if (self::only_mode_active()) {
             wp_enqueue_style('hdar-amazon-start', plugins_url('assets/hdar-amazon-start.css', dirname(__FILE__)), array(), '0.1.19');
         }"""
 assert enqueue.count(old_enqueue)==1, "Amazon existing stylesheet enqueue condition drift"
@@ -182,6 +182,6 @@ report.write_text(
 +"Mobile placement entire main article -> existing square sidebar banner (grid-area tail) -> group.\n"
 +"New inline native post_inline_banner slot after Kosten und Ausruestung full section, not inside paragraphs.\n"
 +"Native provider/target/format selection unchanged. HD007 and HD003 ZIPs unchanged.\n"
-+"E2E 0.1.18 root cause corrected: existing Amazon banner stylesheet now loads in normal launch_active as well as only_mode; style URL version updated to 0.1.19 to avoid stale caches.\n"
++"Stylesheet gate unchanged: only_mode_active aliases launch_active in the ORIGINAL class. Cache key updated to 0.1.19. Local WordPress E2E normalizes home/siteurl to its actual document root.\n"
 +"Real WordPress DOM test remains a separate QA step; not yet live-installed.\n")
 print("BUILD PASS VERSION 0.1.19-dev",zip_path.stat().st_size,sha,"PHP",len([n for n in files if n.endswith(".php")]))
