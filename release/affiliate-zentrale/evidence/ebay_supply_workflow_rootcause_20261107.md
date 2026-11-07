@@ -1,3 +1,21 @@
+## Aktueller verbindlicher Prüfstand – 7. November, weiterer Abgleich
+
+**LIVE HEUTE:** Am 07.11.2026 um **17:57:55 MEZ** meldete der neueste nachgewiesene GitHub-Heartbeat-Job **128467052872**, Run **42393893808**, unmittelbar `status=failed` mit terminalem Abbruch. Der Github-Eintrag `conclusion=success` ist ausschließlich der funktionierende Übertragungsweg, **kein erfolgreich abgeschlossener eBay-Import**. Die tatsächliche Seitenantwort enthält in dieser Überwachung weiterhin nur `status` und `server_time`, nicht `error_code`, nicht `stopped_reason`.
+
+**LETZTER DIREKTER WORDPRESS-LIVE-BEFUND:** Screenshot 07.11., canonical status `failed`, Code `gapfill_partial_unresumable`, 111/298 physische Pflichtgruppen gedeckt, 187 fehlen; 7926 Quellen geprüft, 267 aktiv/materialisiert. Die konkrete Unterursache ist im Bild nicht enthalten. Der echte aktuelle Plugin-Quellstand und die WordPress-Laufdaten sind nicht per GitHub-Zugang lesbar. Die echte fehlende Unterursache lässt sich nicht aus einem alten Quellpaket ableiten.
+
+**BEREITS ERLEDIGT / NICHT NEU BAUEN:**
+- Nicht-Waren inkl. Pferdehaftpflicht aus eBay-Pflicht und generischen Hub-Suchprofilen in **6.72.303** entfernt. **6.72.307** Reitplatzplaner bewusst als kaufbare physische Familie hinzugefügt, daher 297→298.
+- Begrenzte Suche und separate Marktplatz-Policy, Auswahl, Speicherung, Materialisierung, öffentliche Freigaben, sichere echte Warenlücken, Checkpoint sowie Transport-/Stall-Wiederanlauf mehrfach in 6.72.287–.308 bearbeitet, teils nur lokal. Kein zweites Prüfsystem und keine 100%-Zwangsquote.
+- `EBAY_6.72.308_KISS_URSACHEN_GESAMTPRUEFUNG_20261106.json` dokumentiert die bereits vorhandene **Stall-/Transport-Wiederanlaufkorrektur**: offener stockender Lauf wird höchstens einmal je 300 Sekunden angestoßen. Diese Korrektur betrifft **nicht** automatisch einen bereits endgültig fehlgeschlagenen Suchteil.
+- Die neue spekulative **6.72.297**-Arbeitsreparatur `ebay_672297_rootcause_local_noninstallable_20261107.patch` ist **VERWORFEN**. Sie darf nicht übertragen, freigegeben oder installiert werden.
+
+**EINZIGE TATSÄCHLICH OFFENE URSACHENFRAGE:** Der bestehende 6.72.297-Originalkoordinator speichert beim Terminalfehler die genaue Ursache **schon** unter `canonical_run.errors[-1].details.stopped_reason` und `.scope`. Die vorhandene 6.72.297-Backendanzeige zeigt aus demselben Datensatz aber nur Phase, Build, Auswahlstatus, nicht `stopped_reason`. Der reale 298er-Pluginstand ist nicht identifiziert; deshalb kein behaupteter heutiger Dateifehler. Der generische sichtbare `gapfill_partial_unresumable` ist in Originalcode mit **mindestens fünf verschiedenen Zuständen** reproduzierbar (Abruffehler, unvollständiges Profil, Suchbudget, fehlender Cursor nach Zeitsegment, falscher Scope), kein Beleg für einen einzelnen Abruffehler.
+
+**BIS LIVE-ORIGINALDATEN VORLIEGEN:** Keine weitere Änderung an Import- oder eBay-Gesamtlauf, keine Installation, kein Start/Reset. Danach ausschliesslich gegen exakt dieselbe installierte Quelle den einmalig schon gespeicherten Fehlergrund auswerten und nur falls nötig die *eine* belegte Ursache im bereits bestehenden Workflow beheben; End-to-End einschließlich realer sichtbarer Produktkarte und erlaubter externer Warenlücke prüfen. Historie nicht neu durchlaufen.
+
+---
+
 # Pferdeatelier eBay – bereinigter, versionsgetrennter Gesamtbefund 07.11.2026
 **READ-ONLY-EVIDENCE / KEIN PLUGIN-RELEASE / keine Current-Quelländerung.**
  
