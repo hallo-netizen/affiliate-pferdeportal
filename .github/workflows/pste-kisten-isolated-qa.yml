@@ -1,0 +1,35 @@
+name: PSTE Kistenprinzip isolated source inspection
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-existing-v22:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read protected previous package only (no install, no live WP)
+        shell: bash
+        run: |
+          set -euo pipefail
+          P=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip
+          test -f "$P"
+          unzip -q "$P" -d /tmp/pste-old
+          BASE="/tmp/pste-old/Portal SEO Topic Engine/includes"
+          for f in class-pste-planning-readiness-gate.php class-pste-cannibalization.php class-pste-mini-workflow.php class-pste-snapshot.php class-pste-admin.php class-pste-repository.php; do
+            echo "::group::FUNCTION MAP $f"
+            grep -nE 'function (evaluate|keywordOwnershipCompare|manualArticleBrief|inventory|editorialPlan|exportTitleDesk|preflightTitleDeskImport|scheduleTitleDeskReentry|advanceTitleDeskReentry|processOneTitleDeskReentry|refreshPortalContextForRow|prepareEditorialPayload|reanalyzeRetainedBacklogBatch|attachWorkerFlow)' "$BASE/$f" || true
+            echo "::endgroup::"
+          done
+          echo "::group::COMPLETE PLANNING-GATE & CANNIBALIZATION SOURCE"
+          cat "$BASE/class-pste-planning-readiness-gate.php"
+          cat "$BASE/class-pste-cannibalization.php"
+          echo "::endgroup::"
+          echo "::group::MINI SOURCE"
+          cat "$BASE/class-pste-mini-workflow.php"
+          echo "::endgroup::"
+          echo "::group::SNAPSHOT SOURCE"
+          cat "$BASE/class-pste-snapshot.php"
+          echo "::endgroup::"
