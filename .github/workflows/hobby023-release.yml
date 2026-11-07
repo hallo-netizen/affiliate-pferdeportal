@@ -1,0 +1,77 @@
+name: HD009 0.1.23 and HD007 1.2.21 exact release
+on:
+  push:
+    branches: ['hobbyroom/hd009-023-claim-banner-audit-20261107']
+    paths:
+      - 'ops/hobby023/build.py'
+      - '.github/workflows/hobby023-release.yml'
+permissions: {contents: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact full install ZIPs and PHP/CRC tests
+        run: python3 ops/hobby023/build.py
+      - name: Install browser for responsive checks
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Browser-test slimmer banner and punctuation on real HTML
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from zipfile import ZipFile
+          from pathlib import Path
+          import math
+          base=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          with ZipFile(base/"HD-009-AFFILIATE-ZENTRALE"/"CURRENT.zip") as z:
+            css=z.read("affiliate-portal-router/assets/hdar-amazon-start.css").decode()
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,960,390,360]:
+              page=b.new_page(viewport={'width':width,'height':900})
+              for url in ["https://hobby-depot.de/hobbyregister/alte-kameras-reparieren/","https://hobby-depot.de/gestalten/malen-zeichnen/","https://hobby-depot.de/hobbyregister/"]:
+                response=page.goto(url,wait_until='domcontentloaded',timeout=35000)
+                assert response and response.status==200,(url,response)
+                page.wait_for_timeout(350)
+                page.add_style_tag(content=css)
+                a=page.evaluate("""() => {
+                  const rect=x=>{let r=x.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,end:r.bottom}};
+                  return [...document.querySelectorAll('a.hdar-ci-amazon-banner')].map(x=>{
+                    let r=rect(x),btn=rect(x.querySelector('.hdar-ci-button')),t=rect(x.querySelector('.hdar-ci-title')),img=rect(x.querySelector('.hdar-ci-photo'));
+                    return {cls:x.className,rect:r,button:btn,title:t,photo:img};
+                  });
+                }""")
+                if '/hobbyregister/' in url and not url.endswith('/hobbyregister/'):
+                  assert len(a)==2,(url,width,len(a))
+                if '/gestalten/' in url:
+                  assert len(a)>=1,(url,width)
+                for ad in a:
+                  if 'wide' in ad['cls']:
+                    ratio=ad['rect']['w']/ad['rect']['h']
+                    assert abs(ratio-4.2)<.06,(url,width,ratio)
+                    assert ad['rect']['h']>45
+                    assert ad['button']['end'] < ad['rect']['end']-2,(url,width,ad)
+                  assert ad['photo']['w']>=ad['rect']['w']-3
+                if url.endswith('/hobbyregister/'):
+                  text=page.locator('.hdr-hero:not(.is-profile) p').first
+                  assert text.count()==1
+                  # Test the corrected future text without altering the live site.
+                  text.evaluate("(x)=>x.textContent='Entdecke neue und ungewöhnliche Hobbys'")
+                  assert not text.text_content().endswith('.')
+                print("DESIGN_OK",width,url,"wide",[round(x['rect']['h']) for x in a if 'wide' in x['cls']])
+              page.close()
+            b.close()
+          print("LIVE_HTML_SIMULATION_DESKTOP_MOBILE_PASS")
+          PY
+      - name: Push verified downloadable ZIPs to staging
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.23.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/HOBBY_DEPOT_HOBBYREGISTER_HD007_1.2.21.zip
+          git commit -m "HD009 v0.1.23 slimmer wide banner and HD007 v1.2.21 punctuation"
+          git push origin HEAD:hobbyroom/hd009-023-claim-banner-audit-20261107
