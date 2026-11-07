@@ -1,0 +1,1184 @@
+{
+  "contract": "PSTE_MINI_RESULTS_FOR_EDITORIAL_V1",
+  "created_utc": "2026-11-04T09:22:56+00:00",
+  "count": 100,
+  "items": [
+    {
+      "raw_query": "pferde regendecken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Auswahl",
+          "title": "Regendecken für Pferde passend zu Wetter und Haltung auswählen"
+        },
+        {
+          "intent": "Passform – Beratung",
+          "title": "So sitzt eine Regendecke beim Pferd richtig"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "horseware regendecken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Markenberatung",
+          "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken mit fleece",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Fleecefutter",
+          "title": "Wann ist eine Regendecke mit Fleece für Pferde sinnvoll?"
+        },
+        {
+          "intent": "Anwendung – Wärme",
+          "title": "Regendecken mit Fleece und ihre Wärmeleistung beim Pferd"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken mit abschwitzfunktion",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Funktionsberatung",
+          "title": "So funktionieren Regendecken mit Abschwitzfunktion beim Pferd"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken mit halsteil",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Halsteil",
+          "title": "Wann lohnt sich eine Regendecke mit Halsteil fürs Pferd?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken für ponys",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Pony",
+          "title": "Regendecken für Ponys mit der richtigen Größe und Passform finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "günstige regendecken für pferde",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Preisberatung",
+          "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Grundlagen – Regenschutz",
+          "title": "Die wichtigsten Arten von Regendecken für Pferde im Überblick"
+        },
+        {
+          "intent": "Kaufberatung",
+          "title": "Wie finde ich die richtige Regendecke für mein Pferd?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferde regendecken im test",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Vergleichskriterien – Regenschutz",
+          "title": "Worauf es beim Vergleich von Regendecken für Pferde ankommt"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken sale",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Schnäppchenkauf – Beratung",
+          "title": "Regendecken für Pferde im Sale kaufen und Fehlkäufe vermeiden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken im test",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Vergleichskriterien",
+          "title": "Regendecken für Pferde anhand von Passform und Wetterschutz vergleichen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken imprägnieren",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Pflege – Imprägnierung",
+          "title": "Regendecken fürs Pferd richtig imprägnieren und pflegen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken krämer",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Händlerberatung",
+          "title": "Regendecken von Krämer nach Passform und Ausstattung auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "cavallo regendecken test 2016",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdedecken regendecken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Deckenarten – Grundlagen",
+          "title": "Die Unterschiede zwischen Regendecken und anderen Pferdedecken"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "shetty regendecken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Shetlandpony",
+          "title": "Gut sitzende Regendecken für Shetlandponys finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken reparieren",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Reparatur und Pflege",
+          "title": "Eine beschädigte Regendecke fürs Pferd selbst reparieren"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "Frieren Pferde unter Regendecken?",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Temperatur und Wohlbefinden",
+          "title": "Können Pferde trotz Regendecke frieren?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "Wie warm ist eine Regendecke mit Fleece?",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Wärmeleistung – Fleecefutter",
+          "title": "Wie warm hält eine Regendecke mit Fleece wirklich?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "Kann ich eine Regendecke mit Fleece auf ein nasses Pferd legen?",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Anwendung bei Nässe",
+          "title": "Darf eine Regendecke mit Fleece auf ein nasses Pferd?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "Welche Regendecke mit Abschwitzfunktion ist die beste?",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Abschwitzfunktion",
+          "title": "Welche Regendecke mit Abschwitzfunktion passt zu meinem Pferd?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "Welche Regendecken haben eine Abschwitzfunktion für Pferde?",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Produkteigenschaften – Abschwitzen",
+          "title": "Welche Regendecken für Pferde können auch Feuchtigkeit ableiten?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd metall",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "magnetfeld gamasche pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Produktberatung mit Evidenzeinordnung",
+          "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "solarium pferd selber bauen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Sicherheit – Eigenbau",
+          "title": "Pferdesolarium selber bauen und mögliche Sicherheitsrisiken kennen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "teuerstes pferd deutschland",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Pferdemarkt – Spitzenpreise",
+          "title": "Welches Pferd gilt als das teuerste Deutschlands?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "anhängerkamera pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Transportüberwachung",
+          "title": "Anhängerkameras zur Überwachung beim Pferdetransport auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "bronzefigur pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Geschenk- und Dekorationsberatung",
+          "title": "Eine Pferdefigur aus Bronze als Geschenk oder Dekoration auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "überwachungskamera pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Stallüberwachung",
+          "title": "Eine passende Überwachungskamera für den Pferdestall finden"
+        },
+        {
+          "intent": "Praxis – Installation",
+          "title": "Wo darf ich eine Kamera zur Pferdeüberwachung anbringen?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "transportunternehmen pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Dienstleisterauswahl – Transport",
+          "title": "Ein zuverlässiges Transportunternehmen für Pferde finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wasserführanlage pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gesundheit und Training – Wasserführanlage",
+          "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "lebermoos pferd pilz",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gesundheit – Wirksamkeit kritisch einordnen",
+          "title": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "vom zwerghase bis zum pferd",
+      "decision": "NEIN",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "fliegeneier pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Parasiten – Erkennen und Vorbeugen",
+          "title": "Fliegeneier beim Pferd erkennen und entfernen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "eierstöcke pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Anatomie und Fortpflanzung",
+          "title": "Aufbau und Funktion der Eierstöcke bei der Stute"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd mit laterne",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "kompost einstreu pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Stallmanagement – Kompostierung",
+          "title": "Gebrauchte Pferdeeinstreu richtig kompostieren"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "logo pferd mensch",
+      "decision": "NEIN",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pfriemenschwanz pferd eier",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Parasiten – Pfriemenschwanz",
+          "title": "Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "namensschild pferd selber machen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Anleitung – Stallbeschriftung",
+          "title": "Ein individuelles Namensschild für die Pferdebox selber machen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "west nil virus pferd verbreitung deutschland",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Tiergesundheit – Verbreitung",
+          "title": "Die Verbreitung des West-Nil-Virus bei Pferden in Deutschland"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wassertröge selber bauen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Anleitung – Pferdetränke",
+          "title": "Einen sicheren Wassertrog für Pferde selber bauen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeweiden dünger raiffeisen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Einkauf und Weidedüngung",
+          "title": "Dünger für Pferdeweiden bei Raiffeisen auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "unkraut auf pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidepflege – Unkraut",
+          "title": "Unkraut auf Pferdeweiden erkennen und zurückdrängen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "bäume für pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidegestaltung – Bäume",
+          "title": "Geeignete Bäume als Schattenspender auf Pferdeweiden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "giftpflanzen auf pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidesicherheit – Giftpflanzen",
+          "title": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wassertröge kaufen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Tränke",
+          "title": "Den passenden Wassertrog für Pferde kaufen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wassertröge sandstein",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "beheizbare wassertröge",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Frostschutz",
+          "title": "Beheizbare Wassertröge für Pferde sicher auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "dünger auf pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidepflege – Düngung",
+          "title": "Wann und womit sollte man eine Pferdeweide düngen?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "rasensaat für pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Saatgut – Weideanlage",
+          "title": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "gülle für pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidepflege – Gülledüngung",
+          "title": "Gülle auf Pferdeweiden und mögliche Risiken für Pferde"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "giftige gräser auf pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidesicherheit – Giftgräser",
+          "title": "Giftige Gräser auf Pferdeweiden erkennen und Risiken einschätzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "stein wassertröge",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "mineraldünger für pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weidepflege – Mineraldünger",
+          "title": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "darf man pferdeweiden mit gülle düngen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Weiderecht und Hygiene",
+          "title": "Darf man Pferdeweiden mit Gülle düngen?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wassertröge pirna",
+      "decision": "NEIN",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "antike wassertröge",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wassertröge bepflanzen",
+      "decision": "NEIN",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "wambach pferdeweiden",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "gräsermischung für pferdeweiden",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Saatgut – Mischung",
+          "title": "Die passende Gräsermischung für eine Pferdeweide finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Grundlagen – Pferdehaltung",
+          "title": "Was braucht ein Pferd für eine artgerechte Haltung?"
+        },
+        {
+          "intent": "Verhalten – Grundlagen",
+          "title": "Körpersprache und Herdenverhalten von Pferden verstehen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd kaufen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – eigenes Pferd",
+          "title": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?"
+        },
+        {
+          "intent": "Finanzplanung – Pferdekauf",
+          "title": "Die laufenden Kosten nach dem Pferdekauf realistisch planen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "schimmel pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Fellfarben – Schimmel",
+          "title": "Schimmel als Fellfarbe beim Pferd erkennen"
+        },
+        {
+          "intent": "Farbentwicklung – Schimmel",
+          "title": "Warum verändert sich die Fellfarbe bei Schimmeln?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd zeichnen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Zeichenanleitung – Pferd",
+          "title": "Ein Pferd mit stimmigen Proportionen Schritt für Schritt zeichnen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd malen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Malen – Pferdemotive",
+          "title": "Fellfarben und Bewegung beim Malen von Pferden darstellen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "heuraufe pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Heuraufe",
+          "title": "Die passende Heuraufe für Pferde finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "westfale pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Pferderassen – Westfale",
+          "title": "Herkunft und Eigenschaften des Westfälischen Warmbluts"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd ausmalen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Malvorlagen – Pferde",
+          "title": "Pferde-Malvorlagen für Kinder auswählen und nutzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "strahlfäule pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Hufgesundheit – Strahlfäule",
+          "title": "Strahlfäule beim Pferd erkennen und behandeln lassen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "kolik pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Notfallwissen – Kolik",
+          "title": "Woran erkenne ich eine Kolik beim Pferd und was muss ich tun?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd gamaschen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – Gamaschen",
+          "title": "Gamaschen fürs Pferd sicher anpassen und sinnvoll einsetzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "teuerste pferd der welt",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Pferdemarkt – Rekordpreise",
+          "title": "Welches Pferd war das teuerste der Welt?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "cliparts pferd",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd bodensee",
+      "decision": "VIELLEICHT",
+      "titles": [],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd decken",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Zucht – Bedeckung",
+          "title": "Die Bedeckung einer Stute richtig vorbereiten"
+        },
+        {
+          "intent": "Pferdedecken – Eindecken",
+          "title": "Wann sollte ich mein Pferd eindecken?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd gewicht",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gewicht – Pferdegesundheit",
+          "title": "Das Gewicht eines Pferdes ohne Waage einschätzen"
+        },
+        {
+          "intent": "Gewicht – Richtwerte",
+          "title": "Wie viel wiegt ein Pferd je nach Rasse und Körperbau?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "heucobs pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Fütterung – Heucobs",
+          "title": "Heucobs für Pferde richtig einweichen und füttern"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "apfelschimmel pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Fellfarbe – Apfelschimmel",
+          "title": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferd anatomie",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Anatomie – Körperbau",
+          "title": "Körperbau und Anatomie des Pferdes verständlich erklärt"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "spat beim pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Pferdegesundheit – Spat",
+          "title": "Spat beim Pferd erkennen und tierärztlich abklären lassen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecke pferd 0g",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Deckenberatung – 0 g",
+          "title": "Regendecken ohne Füllung für Pferde richtig einsetzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "fliegen regendecke pferd",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Deckenberatung – Regen und Fliegen",
+          "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecke pferd ungefüttert",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Deckenberatung – ungefüttert",
+          "title": "Ungefütterte Regendecken für Pferde bei Regen und Wind nutzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferde regendecken günstig",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Preisberatung – Regendecken",
+          "title": "Günstige Pferde-Regendecken mit gutem Wetterschutz finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "regendecken für pferde im test",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Vergleichskriterien – Pferdedecken",
+          "title": "Regendecken für Pferde nach Wasserdichtigkeit und Passform vergleichen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "schleich pferdeanhänger",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Spielzeug – Pferdeanhänger",
+          "title": "Schleich-Pferdeanhänger und passendes Zubehör für Spielsets"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "gasdruckfeder pferdeanhänger",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Ersatzteil – Gasdruckfeder",
+          "title": "Die richtige Gasdruckfeder für einen Pferdeanhänger finden"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "böckmann pferdeanhänger gebraucht kaufen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gebrauchtkauf – Böckmann",
+          "title": "Worauf sollte ich beim Kauf eines gebrauchten Böckmann-Pferdeanhängers achten?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "planen pferdeanhänger",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Zubehör – Anhängerplanen",
+          "title": "Passende Planen für Pferdeanhänger auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "deichselabdeckung pferdeanhänger",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Zubehör – Deichselschutz",
+          "title": "Deichselabdeckungen für Pferdeanhänger als Wetterschutz nutzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "humbaur pferdeanhänger",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Markenberatung – Humbaur",
+          "title": "Humbaur-Pferdeanhänger nach Ausstattung und Nutzung vergleichen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger 2 pferde",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – zwei Pferde",
+          "title": "Pferdeanhänger für zwei Pferde nach Platz und Zuladung auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger gebraucht kaufen",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gebrauchtkauf – allgemeine Beratung",
+          "title": "Wie prüfe ich einen gebrauchten Pferdeanhänger vor dem Kauf?"
+        },
+        {
+          "intent": "Gebrauchtkauf – Folgekosten",
+          "title": "Folgekosten beim Kauf eines gebrauchten Pferdeanhängers einschätzen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger gewicht",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Zulassung – Gewicht",
+          "title": "Leergewicht und Zuladung beim Pferdeanhänger verstehen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger 4 pferde",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – vier Pferde",
+          "title": "Pferdeanhänger für vier Pferde und die Anforderungen an das Zugfahrzeug"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger 3 pferde",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Kaufberatung – drei Pferde",
+          "title": "Pferdeanhänger für drei Pferde nach Platzangebot und Gewicht auswählen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger mieten",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Mietberatung – Pferdeanhänger",
+          "title": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger gebraucht",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Gebrauchtkauf – Zustand",
+          "title": "Typische Schwachstellen gebrauchter Pferdeanhänger erkennen"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    },
+    {
+      "raw_query": "pferdeanhänger sirius",
+      "decision": "JA",
+      "titles": [
+        {
+          "intent": "Markenberatung – Sirius",
+          "title": "Sirius-Pferdeanhänger und ihre Ausstattungsvarianten im Überblick"
+        }
+      ],
+      "batch_id": "mini-20261104090118-41963f4f9057",
+      "recorded_utc": "2026-11-04T09:22:43+00:00"
+    }
+  ],
+  "status": "STAGED_NOT_EDITORIALLY_APPROVED",
+  "note": "Dies sind externe Relevanzentscheidungen und Titelideen. Kein Artikelbedarf, kein freier Parkplatz und keine Kannibalisierungsfreiheit wurde hier festgestellt."
+}
