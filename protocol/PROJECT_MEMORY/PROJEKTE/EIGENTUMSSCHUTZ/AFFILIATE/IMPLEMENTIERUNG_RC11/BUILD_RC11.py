@@ -145,6 +145,12 @@ def run(command, *args, cwd=None):
 
 def prepare_harness(temp, original, patched, design):
     with zipfile.ZipFile(OLD_TESTS) as z: z.extractall(temp)
+    # Original RC10 stubs did not require the standard WP renderer's sanitizer.
+    for harness in (temp/'RC10_TESTS').glob('*.php'):
+        src=harness.read_text()
+        assert src.startswith('<?php'),harness
+        src=src.replace('<?php',"<?php\nfunction esc_url_raw($value){return $value;}\n",1)
+        harness.write_text(src)
     with zipfile.ZipFile(design) as z:
         n=next(n for n in z.namelist() if n.endswith("/includes/area-design-prototype.php"))
         dest=temp/"hab-design/includes/area-design-prototype.php"
