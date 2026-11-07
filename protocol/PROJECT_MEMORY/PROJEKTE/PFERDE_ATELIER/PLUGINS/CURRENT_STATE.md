@@ -968,3 +968,16 @@ Nur **PSTE 0.57.144.16** in WordPress-TEST installieren (0.57.144.15 ersetzt), *
 **NEXT ACTION:** Erst nach realer Installation v18 im WordPress-Test den `87/87 COMPLETE`-Stapelbericht mit dem bestehenden kleinen Download auswerten; keine 5.016er-Gesamtdiagnose nötig. Danach die 59 offenen Kategorie/Intent-Fragen und 12 zentralen Planungsprüfungen **als zusammenhängenden Redaktionsworkflow** lösen, ohne echte Dubletten frei zu geben. Zwei fachliche Schutzfälle weiterhin sperren. Keine weitere ZIP wegen Einzelfällen.
 
 **QA-Beleg:** `EVIDENCE/PSTE_05714418_KISS_RELEVANCE_INTEGRATION_20261107.md`. **Übergabe:** `HANDOFF_PSTE_MINI_WORKFLOW_20261107.md`. GitHub-Arbeitsbranch `fix/pste-mini-workflow-kiss-20261107`; PR gegen den bestehenden v17-Testbranch. Release nur nach WordPress-Echtlauf.
+
+
+---
+
+## AKTUELLER ZWISCHENSTAND 07.11.2026 – PSTE 0.57.144.20
+
+**Aktuellstes Test-Paket**: `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.20-NUR-TEST.zip`, SHA-256 `6631dda5298be101e999f5e2c2ec63ce6352545395c83a2cbe9a3832bf6c9f79` (621792 Bytes), aus bestehender Version 0.57.144.19, Version im ZIP: 0.57.144.20. **Diese Version nicht als produktiven Live-Erfolg ausgeben.** Aktuelles Prüfdokument: `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/EVIDENCE/PSTE_05714420_QA_NACHWEIS_ORIGINAL_20261107.md`.
+
+**Belegte gemeinsame Ursache:** 21 von 40 bearbeiteten v19-Themen mit Kategorie-/Artentscheidung offen waren im Normalpfad in der allgemeinen Strukturliste statt dem bestehenden Redaktionsbüro markiert: Der Weg verlangte vor Eintritt in den Entscheidungsraum bereits festgelegtes FACH/MAGAZIN und Artikelart. Die 0.57.144.20-Vereinfachung markiert bereits relevante, titelgeprüfte, nicht sicher zugeordnete Themen stattdessen als `CATEGORY_ROOM_TOPIC_POOL`. **Keine neuen Kategorien, keine neue fachliche Prüfstufe und keine Produktionsfreigabe.**
+
+**Lokale Prüfung des fertigen ZIP:** 87/87 MINI-JA, 87/87 Sprachtitel, 21/21 bekannte Raumzuordnungen, zweimal vollständige bestehende Reanalyse-/Speicherstrecke 87/87, 24/24 künstlich eingespielte echte SEO-Dubletten korrekt gesperrt, 83/83 PHP-Lints. Gegen 0.57.144.19 nur drei Dateien verändert (Normal-Metadaten-Pfad, Admin-Auswertung, Versionsheader). K0 und PSERC unverändert.
+
+**Offen / keinesfalls als erledigt behaupten:** 11 Planungsstopps aus dem echten v19-WordPress-Teilbericht nicht gegen vollständigen Live-Beitragsbestand verifizierbar; 47 von 87 waren noch PENDING. Noch kein neuer echter WordPress-Bericht mit 0.57.144.20. Die verbindliche Dreiwege-Logik Fach OBEN / Magazin UNTEN / vorhandenes Redaktionsbüro bleibt. Bei Weiterarbeit zuerst 0.57.144.20 ZIP/Original-QA/Nachbarstand **aus diesem Büro** laden, dann nur echte neue Live-Evidenz auswerten. Kein Nachprogrammieren ohne vorherige Prüfung des Ist-Codes.
