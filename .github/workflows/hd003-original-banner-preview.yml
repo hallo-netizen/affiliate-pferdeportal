@@ -1,0 +1,42 @@
+name: HD003 retrieve exact approved original banner
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-banner-original-preview-20261107
+permissions:
+  contents: write
+jobs:
+  approved-banner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Extract original banner unchanged
+        run: |
+          python3 - <<'PY'
+          import hashlib, zipfile, pathlib
+          z=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          expected='3cc834d9f67305ce752574b794d834b4b20304ada93eb1518bbae6fd2eb8e579'
+          target='affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png'
+          with zipfile.ZipFile(z) as f:
+              matches=[x for x in f.namelist() if x.endswith('eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png')]
+              assert len(matches)==1, f'Original banner not unique: {matches}'
+              content=f.read(matches[0])
+          actual=hashlib.sha256(content).hexdigest()
+          print(f'Original: {target} ; {len(content)} bytes ; SHA-256: {actual}')
+          assert actual==expected, 'Original approval SHA mismatch: do not substitute'
+          dest=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_ORIGINAL_BANNER_2170x725.png')
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          dest.write_bytes(content)
+          PY
+      - name: Save actual original asset to preview branch
+        run: |
+          git config user.name "hobby-asset-readback"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_ORIGINAL_BANNER_2170x725.png
+          if ! git diff --cached --quiet; then
+            git commit -m "HD003 approved banner: exact SHA-verified original image for review"
+            git push
+          fi
