@@ -1,0 +1,43 @@
+name: HD009 world photo candidates contact sheet
+on:
+  push:
+    branches: ['hobbyroom/hd009-025-flatter-world-images-20261107']
+    paths: ['.github/workflows/hd009-world-contact-sheet.yml']
+permissions: {contents: write}
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate visual audit image from existing HD003 assets
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image,ImageDraw,ImageFont
+          from io import BytesIO
+          from zipfile import ZipFile
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          worlds=['gestalten','fertigen','technik','forschen','pflanzen','tiere','bewegen','sammeln']
+          picks=[('start '+k, f'affiliate-portal-template-kit/assets/hobby-depot-v150617/start-world-v150691/{k}.webp') for k in worlds]
+          for name in ('ameisen-insekten','terraristik','aquaristik','gehegegestaltung'):
+            picks.append((name,f'affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/{name}.webp'))
+          sheet=Image.new('RGB',(1200,((len(picks)+2)//3)*290),'white')
+          with ZipFile(root) as z:
+            for i,(label,path) in enumerate(picks):
+              if path not in z.namelist():
+                print('MISSING',label,path)
+                continue
+              im=Image.open(BytesIO(z.read(path))).convert('RGB')
+              im.thumbnail((382,245))
+              x=i%3*400+9;y=i//3*290+22
+              sheet.paste(im,(x,y));ImageDraw.Draw(sheet).text((x,y-18),label,fill='black')
+          dest=Path('ops/hobby009_025/world-photo-contact-sheet.jpg')
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          sheet.save(dest,quality=79,optimize=True)
+          print('CONTACT_SHEET',dest,dest.stat().st_size)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ops/hobby009_025/world-photo-contact-sheet.jpg
+          git commit -m 'Audit only: eight existing world photos and invertebrate-focused image candidates'
+          git push origin HEAD:hobbyroom/hd009-025-flatter-world-images-20261107
