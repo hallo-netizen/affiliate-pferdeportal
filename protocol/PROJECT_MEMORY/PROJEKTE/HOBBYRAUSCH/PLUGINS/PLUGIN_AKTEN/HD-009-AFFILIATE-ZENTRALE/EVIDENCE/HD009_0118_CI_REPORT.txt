@@ -1,0 +1,11 @@
+HD009 0.1.18-dev – KISS variant 4
+ZIP bytes: 1064955
+SHA256: 5786a726523e7e739e2c24231fb9a2cdecebc49d8f0c327b29e7bdebe84ca6e0
+PHP syntax: 24/24 PASS
+ZIP CRC: PASS
+Original Amazon DE approved 'Erhaeltlich bei Amazon' PNG exact SHA256: fb6db85f898078fa6df03740b58d65f431b8a6186c97f6b8a72e95f11b9ab8e5
+Normal Amazon logo was NOT used because the trademark policy does not allow it in affiliate ads.
+Body: no Hobby Depot logo, no 'Entdecke deine Ausruestung', title bar + large photo + orange CTA with original approved badge and arrow.
+HTML direct audit: existing HD003 .hd-next-partner-banner and forced 76px height; CSS scoped override only when hdar-ci-amazon-slot present.
+The original provider, category, glossary and register logic remains in the existing plugin.
+WordPress live installation still NOT checked.
