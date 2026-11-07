@@ -14,6 +14,21 @@
         if(!isset($document['owner'])||$document['owner']!=='EXTERNAL_SINGLE_SEO_EDITOR')
             throw new RuntimeException('PSTE_MINI_SEO_OWNER_REQUIRED');
         $completed=(array)($state['completed']??[]);
+        // Only check that an external BELEGT reference really identifies an
+        // item in the original, read-only parkhouse. Never re-evaluate its
+        // semantic similarity; that belongs to the ONE external owner.
+        $existingReferences=[];
+        foreach((array)($snapshot['items']??[]) as $existing){
+            if(!is_array($existing))continue;
+            $source=(string)($existing['source']??'');
+            if($source==='')continue;
+            foreach(['id','post_id','pool_key','seo_topic_id','canonical_article_id',
+                'record_index','intent_slot','plan_slot'] as $field){
+                if(!is_scalar($existing[$field]??null))continue;
+                $identifier=trim((string)$existing[$field]);
+                if($identifier!=='')$existingReferences[$source.':'.$identifier]=true;
+            }
+        }
         $updates=[];$clarification=[];$reserved=[];$seen=[];
         foreach((array)($state['seo_decisions']??[]) as $key=>$old){
             if(!is_array($old)||($old['box']??'')!=='FREI')continue;
@@ -54,8 +69,9 @@
                 ||(isset($reserved[$slot])&&$reserved[$slot]!==$key))){
                 $box='KLAERUNG';$item['reason']='FREI_MISSING_OR_CONFLICTING_SOURCE_SLOT';
             }
-            if($box==='BELEGT'&&$match===''){
-                $box='KLAERUNG';$item['reason']='BELEGT_WITHOUT_SOURCE_REFERENCE';
+            if($box==='BELEGT'&&($match===''||!isset($existingReferences[$match]))){
+                $box='KLAERUNG';
+                $item['reason']='BELEGT_REFERENCE_NOT_IN_EXISTING_PARKHAUS';
             }
             if($box==='FREI')$reserved[$slot]=$key;
             $receipt=['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','pool_key'=>$key,
