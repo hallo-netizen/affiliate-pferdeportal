@@ -15,6 +15,11 @@
             throw new RuntimeException('PSTE_MINI_SEO_OWNER_REQUIRED');
         $completed=(array)($state['completed']??[]);
         $updates=[];$clarification=[];$reserved=[];$seen=[];
+        foreach((array)($state['seo_decisions']??[]) as $key=>$old){
+            if(!is_array($old)||($old['box']??'')!=='FREI')continue;
+            $oldSlot=(string)($old['intent_slot']??'');
+            if($oldSlot!=='')$reserved[$oldSlot]=(string)$key;
+        }
         foreach($document['items'] as $item){
             if(!is_array($item))throw new RuntimeException('PSTE_MINI_SEO_RESULT_SHAPE_INVALID');
             $key=(string)($item['pool_key']??'');
@@ -36,7 +41,7 @@
             $match=(string)($item['matched_ref']??'');
             if($box==='FREI'&&($selected===''||($item['approved_title']??'')!==$selected
                 ||trim($intent)===''||!preg_match('/^[a-f0-9]{64}$/D',$slot)
-                ||isset($reserved[$slot]))){
+                ||(isset($reserved[$slot])&&$reserved[$slot]!==$key))){
                 $box='KLAERUNG';$item['reason']='FREI_MISSING_OR_CONFLICTING_SOURCE_SLOT';
             }
             if($box==='BELEGT'&&$match===''){
