@@ -14,6 +14,22 @@ jobs:
         run: |
           set -euo pipefail
           unzip -tq protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip > /dev/null
+      - name: Inspect existing central methods read-only
+        run: |
+          set -euo pipefail
+          unzip -q protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip -d /tmp/inspect-original
+          I="/tmp/inspect-original/Portal SEO Topic Engine/includes"
+          echo "----- NORMAL META SEARCH -----"
+          grep -n "function applyToPayload\|Planning_Readiness_Gate::\|prepareEditorialPayload\|snapshot" "$I/class-pste-normal-metadata-path.php" || :
+          sed -n '1,500p' "$I/class-pste-normal-metadata-path.php"
+          echo "----- REPOSITORY PREPARE -----"
+          sed -n '1810,2010p' "$I/class-pste-repository.php"
+          echo "----- ADMIN PROCESS REENTRY -----"
+          sed -n '2070,2220p' "$I/class-pste-admin.php"
+          echo "----- MINI PARSE AND STATE -----"
+          sed -n '160,460p' "$I/class-pste-mini-workflow.php"
+          echo "----- PSERC INDEX REFERENCES -----"
+          rg -n 'PSERC_|pserc_|PSTE_OPTION_EDITORIAL_PLAN_IMPORT|planning_readiness_gate|source_sha256|planning_suitability' "$I" -g '*.php' | head -200 || :
       - name: Kisten transfer technical checks only; semantic/live E2E are not claimed
         run: |
           set -euo pipefail
