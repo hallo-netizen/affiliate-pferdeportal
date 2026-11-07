@@ -1,0 +1,25 @@
+--- a/includes/class-pste-repository.php
++++ b/includes/class-pste-repository.php
+@@ -3476,7 +3476,8 @@
+         global $wpdb;
+         $payload=json_decode((string)($row['payload_json']??''),true);
+         if(!is_array($payload))throw new RuntimeException('PSTE_TOPIC_PAYLOAD_INVALID');
+-        $payload=self::prepareEditorialPayload($payload);
++        // A context refresh consumes the already checked normal-path decision.
++        // Running the semantic path again here loses MINI's source-bound JA proof.
+         $topicKey=(string)($row['pool_key']??'');
+         if($topicKey==='')throw new RuntimeException('PSTE_TOPIC_KEY_MISSING');
+ 
+@@ -3512,7 +3513,12 @@
+         if(($normal['status']??'')==='NORMAL_PASS'&&!empty($normal['ok'])
+             &&empty($normal['title_candidate_only'])){
+-            $payload=PSTE_Planning_Readiness_Gate::apply($payload,$readCentralInventory(),$categories);
++            // The targeted reentry already ran the same gate against this bound index.
++            // Only the independent full context refresh or a missing result needs a fresh gate.
++            $gate=(array)($payload['planning_readiness_gate']??[]);
++            if(!isset($index['__pste_context_index_binding'])
++                ||($gate['contract']??'')!==PSTE_Planning_Readiness_Gate::CONTRACT)
++                $payload=PSTE_Planning_Readiness_Gate::apply($payload,$readCentralInventory(),$categories);
+         }else{
+             // A historical receipt may never make an unresolved current path planable.
+             unset($payload['planning_readiness_gate'],$payload['pre_title_duplicate_gate']);
