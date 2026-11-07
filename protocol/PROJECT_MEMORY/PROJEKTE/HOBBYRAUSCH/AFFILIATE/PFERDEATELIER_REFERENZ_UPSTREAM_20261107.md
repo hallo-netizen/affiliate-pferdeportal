@@ -8,7 +8,7 @@
 - Sammelpatch vom 06.11.: `PFERDEATELIER_AFFILIATE_6.72.308_KISS_GESAMTURSACHEN_PATCH_NICHT_INSTALLIEREN.patch`.
 - Exakter SHA-256 des Patchs: `e3311d0720a06d1f443e22bb1375688145e3fc0979de1e7ff05394ec635e23fe`. 23.179 Bytes, 316 Zeilen.
 - Patch-Anwendung auf vollständige Original-ZIP lokal erfolgreich (4 PHP-Dateien betroffen; 62 der 66 Plugin-Dateien unverändert).
-- **WICHTIG:** Die Patch-Originalbytes befinden sich weiterhin nur im betreffenden Chat-Arbeitsartefakt und sind **nicht** physisch in diesem GitHub-Büro hochgeladen. Eine Bibliotheksablage in beiden Affiliate-Büros scheiterte am Speicherlimit; daher kein vorgetäuschter Vollbackup-PASS.
+- **GitHub-Referenz inzwischen vollständig gesichert:** `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/REFERENZEN/PFERDEATELIER_6.72.308_URSACHENPATCH_NICHT_INSTALLIEREN.patch` (Originalpatch 23.179 Bytes, SHA-256 `e3311d0720a06d1f443e22bb1375688145e3fc0979de1e7ff05394ec635e23fe`). Nur der vollständige Patch liegt hier, **nicht die gesamte Pferdeatelier-Installations-ZIP**; separate persönliche Bibliotheksablage weiterhin wegen Speicherlimit blockiert.
 
 ## Änderungen (für jedes spätere Fremdprojekt einzeln gegen dessen eigene Quelle prüfen)
 1. `includes/trait-ppar-ebay.php`: Produktgruppensuche mit maximal einer bedingten zweiten Ergebnisseite; eBay-Marktplatz-Gate EBAY_DE unverändert. Zusätzlich redundant wiederholte Qualitätsprüfung aus Preis-Neubewertung entfernt; nur Preisanteil neu berechnet.
