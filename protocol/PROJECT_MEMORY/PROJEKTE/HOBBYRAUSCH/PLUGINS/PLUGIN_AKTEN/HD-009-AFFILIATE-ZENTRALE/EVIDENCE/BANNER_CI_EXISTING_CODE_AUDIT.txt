@@ -1,0 +1,892 @@
+### HD-003-DESIGN-TEMPLATE-KIT
+ZIP exists True
+ZIP files 1290
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/malen-zeichnen.webp 168684
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/modellbau.webp 139884
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/logo-footer-v150729.png 149447
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/logo-variant3-v150616.png 181423
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150634.webp 45224
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150670.webp 14254
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/fertigen/modellbau-v150671.webp 174568
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150616.webp 48706
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150627.webp 10896
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150629.webp 13448
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/gestalten/malen-zeichnen-v150634.webp 8008
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150645/logo-variant3-v150645.png 194419
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150758/hobby-masters/battlebots-modellbau.webp 117232
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/einzelfotos/battlebots-modellbau-hero-499dae8fb27d.webp 66950
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-3b4098040d25.webp 24334
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-hero-21609fb830a6.webp 16936
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/architekturmodellbau-kachel-34a245f81a15.webp 20264
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-2f15c7296f5b.webp 23978
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-hero-4d0936f98fa9.webp 15874
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/automodellbau-tile-e3fd284054ac.webp 19360
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150764/bildarchiv/reserve/battlebots-modellbau-kachel-988b3de68db3.webp 23340
+ASSET affiliate-portal-template-kit/assets/pferde-atelier-logo-pferd-b.png 92995
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-LOCKED-v150170.webp 60396
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150177.webp 49408
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150187.webp 41566
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150189.png 641220
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150189.webp 41430
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-clean-v150194.webp 39108
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-flat-v150353.webp 36220
+ASSET affiliate-portal-template-kit/assets/werbeplatzhalter-startseite-banner-v150162.webp 62892
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150790/logo-original-ohne-unterzeile.png 150989
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150790/modellflugzeug-werkstatt.webp 67722
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png 1755351
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150794/button-hover-terms.png 56027
+ASSET affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150794/button-hover-prices.png 8850
+FILE affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php bytes 767757 hits 195
+ 12:     const RENTAL_OPTION = 'pftk_hobby_rental_slots_v1';
+ 784: Wenn du schon weißt, welches Hobby dich interessiert, bist du im Hobbyregister oder in den normalen Hobbybereichen besser aufgehoben. Der Finder ist vor allem für die Situation gedacht, in der du offen bist und verschiedene Möglichkeiten vergleichen möchtest. 
+ 797: Die Beiträge geben deshalb Orientierung für Lebensphasen und Alltagssituationen, ohne Menschen in Schubladen zu stecken. Konkrete Informationen zu einem einzelnen Hobby findest du weiterhin in dessen Hobbyseite oder im Hobbyregister. Hier geht es um die Frage,
+ 827: Besteht zu einem Hobby bereits eine umfangreiche CORE-Seite, wird im Magazin keine zweite konkurrierende Hobbyseite aufgebaut. Dann verweist das Porträt oder ein redaktioneller Beitrag auf den bestehenden Fachbereich. Das Hobbyregister bleibt zusätzlich die ei
+ 842: Die Rubrik ist deshalb bewusst breiter als ein Hobby-Porträt. Sie soll neugierig machen und dir mehrere Wege zeigen. Wenn du anschließend ein konkretes Hobby genauer prüfen möchtest, führen die Beiträge zu den passenden Hobbyseiten oder ins Hobbyregister. Dort
+ 902: Kleine eigenständige Hobbys können hier zunächst über ein Hobby-Porträt vorgestellt werden. Im Hobbyregister bleiben sie trotzdem ganz normal auffindbar und vergleichbar. Wenn ein ungewöhnliches Hobby genügend fachliche Tiefe entwickelt, kann es zusätzlich ein
+ 917: Produktvergleiche innerhalb eines einzelnen Hobbys gehören nicht hierher, sondern in den jeweiligen Fachbereich. Diese Magazinrubrik vergleicht Hobbys, Hobbyarten oder sinnvolle Alternativen miteinander. Für die festen Merkmale einzelner Hobbys bleibt das Hobb
+ 947: Die festen Werte zu einzelnen Hobbys stammen aus dem Hobbyregister. Das Magazin nutzt diese Merkmale, um sinnvolle Gruppen und Alltagssituationen daraus zu machen. So entsteht keine zweite Datenwelt: Das Register beschreibt das einzelne Hobby, diese Rubrik hil
+ 1295:         if (!function_exists('hd_hobbyregister_records') || !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()) { return []; }
+ 1298:         foreach ((array)hd_hobbyregister_records() as $row) {
+ 1322:             // 'noch keine eigene Seite' even with /hobbyregister/anthotypie/ open.
+ 1323:             $url=self::hobbyregister_detail_url_v150768($name);
+ 1425:         // nicht das separate Hobbyregister und nicht das HivePress-Verzeichnis.
+ 1675:         $attachment_id = $post_id > 0 ? absint(get_post_thumbnail_id($post_id)) : 0;
+ 1706:     private static function hero_image_markup() {
+ 1931:     private static function rental_slot($placement) {
+ 1934:         $filtered = apply_filters('pftk_hobby_rental_slot_html', '', $placement);
+ 1952:         $html = self::rental_slot($placement);
+ 1981:                 ['Was ist der Unterschied zwischen Hobbyfinder, Hobbyregister und Hobbymagazin?', 'Der Hobbyfinder hilft dir, passende Hobbys nach deinen Wünschen zu finden. Im Hobbyregister kannst du gezielt stöbern und Hobbys vergleichen. Im Hobbymagazin fin
+ 1988:                 ['Kann ich auch einfach durch alle Hobbys stöbern?', 'Ja. Dafür gibt es das Hobbyregister. Dort kannst du unabhängig vom Hobbyfinder nach Hobbys suchen, stöbern und dich inspirieren lassen.'],
+ 1991:             'Hobbyregister' => [
+ 1992:                 ['Was ist das Hobbyregister?', 'Das Hobbyregister ist die zentrale Übersicht der Hobbys bei Hobby Depot. Dort findest du bekannte, seltene und ungewöhnliche Hobbys an einem Ort.'],
+ 1995:                 ['Warum sind manche Hobbys ausführlicher beschrieben als andere?', 'Einige Hobbys haben bei Hobby Depot zusätzlich eigene Themenbereiche, Artikel oder weiterführende Inhalte. Andere werden zunächst kompakt im Hobbyregister vorgestellt.'],
+ 1996:                 ['Werden neue Hobbys ergänzt?', 'Ja. Das Hobbyregister kann erweitert werden, wenn neue oder bisher fehlende Hobbys sinnvoll dazukommen.'],
+ 2002:                 ['Wo finde ich Anleitungen und Hintergrundwissen?', 'Je nach Thema findest du diese im passenden Hobbybereich oder im Hobbymagazin. Vom Hobbyregister aus führen dich passende Links zu weiterführenden Inhalten.'],
+ 2022:         $html = '<div class="hd-faq-v150715"><p class="hd-faq-intro-v150715">Hier findest du kurze Antworten auf die wichtigsten Fragen rund um Hobby Depot, den Hobbyfinder, das Hobbyregister, unsere Inhalte und den Anzeigenmarkt.</p>';
+ 2051:         $hero = self::hero_image_markup();
+ 3287:         $cards=''; foreach($posts as $post){ if(!$post instanceof WP_Post){continue;} $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large'); $cards.='<article class="hd-post-card">'.($img!==''?'<a class="hd-post-image" href="'.esc_url(get_permalink
+ 3652:             $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large');
+ 3724:             $img=(string)get_the_post_thumbnail_url($post->ID,'medium_large');
+ 3913:             if($thumb>0){set_post_thumbnail((int)$post_id,$thumb);}
+ 4092:      * Neither is a 3:2 Hobbyregister master. HD007 and featured master take priority.
+ 4096:      * Never guess /hobbyregister/<slug>/; on sites without that rewrite it
+ 4130:      * /hobbyregister/<hobby-slug>/; this is not a WordPress page/term.
+ 4133:      * Do not use the bare /hobbyregister/ listing as a hobby destination.
+ 4135:     private static function hobbyregister_detail_url_v150768($canonical_name) {
+ 4136:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()) { return ''; }
+ 4138:         if ($slug === '' || $slug === 'hobbyregister' || !preg_match('/[a-z0-9]/i',$slug)) { return ''; }
+ 4139:         return home_url('/hobbyregister/' . $slug . '/');
+ 4145:         return ['url'=>self::hobbyregister_detail_url_v150768((string)($row['name'] ?? '')), 'image'=>''];
+ 4184:         if (!function_exists('hd_hobbyregister_ready') || !function_exists('hd_hobbyregister_finder_rows')) { return []; }
+ 4185:         if (!hd_hobbyregister_ready()) { return []; }
+ 4186:         $rows = hd_hobbyregister_finder_rows();
+ 4403:         $img = (string)get_the_post_thumbnail_url($post->ID, 'medium_large');
+ 4474:         $html = self::rental_slot('journal');
+ 4482:         $register = self::page_link(['hobbyregister','hobby-register']);
+ 4483:         if ($register === '') { $register = home_url('/hobbyregister/'); }
+ 4488:             ['title'=>'Hobbyregister','text'=>'Stöbere durch alle Hobbys und vergleiche Eigenschaften, Aufwand und Anforderungen.','url'=>$register,'icon'=>'register','cta'=>'Register öffnen'],
+ 4658:             foreach (['/hd-hobbyregister-core*/assets/portraits/final-masters/' . $slug . '.webp',
+ 4659:                       '/hd-hobbyregister-core*/portraits/final-masters/' . $slug . '.webp'] as $pattern) {
+ 4807:         if ($page instanceof WP_Post && function_exists('get_post_thumbnail_id')
+ 4809:             $attachment = (int)get_post_thumbnail_id($page->ID);
+ 4825:     private static function category_hero_image_v150757($page) {
+ 4887:                 $category_hero_image = self::category_hero_image_v150757($page);
+ 4888:                 $has_category_hero = !empty($category_hero_image['html']);
+ 4889:                 if ($has_category_hero) { $out .= self::render_category_hero_v150757($page, $category_hero_image); }
+ 5424:         $register_url = self::page_link(['hobbyregister','hobby-register']);
+ 5425:         if ($register_url === '') { $register_url = home_url('/hobbyregister/'); }
+ 5432:             $make_item('Hobbyregister', $register_url),
+ 5557:         set_post_thumbnail(absint($post_id), absint($attachment_id));
+ 5598:             if(!has_post_thumbnail($post_id)){self::demo_featured_attachment_v150636($post_id,$def['asset'],'Testbeitrag '.($i+1));}
+ 5640:      * Harmonize only the VISIBLE top hero on an actual /hobbyregister/<slug>/ page;
+ 5645:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5646:             || !function_exists('hd_hobbyregister_records')) { return; }
+ 5648:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$hit)) { return; }
+ 5651:         foreach ((array)hd_hobbyregister_records() as $r) {
+ 5698:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5699:             || !function_exists('hd_hobbyregister_records')) { return; }
+ 5701:         if (!preg_match('~^/hobbyregister(?:/[a-z0-9-]+)?/?$~i',$path)) { return; }
+ 5703:         foreach ((array)hd_hobbyregister_records() as $row) {
+ 5737:   var m=u.pathname.match(/^\/hobbyregister\/([a-z0-9-]+)\/?$/i);
+ 5788:   document.querySelectorAll('a[href*="hobbyregister/"]').forEach(function(a){
+ 5839:         if (function_exists('hd_hobbyregister_ready') && hd_hobbyregister_ready()
+ 5840:             && function_exists('hd_hobbyregister_records')) {
+ 5841:             foreach ((array)hd_hobbyregister_records() as $r) {
+ 5883:         echo '<h2>Bild zuordnen</h2><p>Hobby- oder Kategorie-Slug eingeben, Mediathek-Bild wählen und speichern. Danach wird es ohne weitere Einstellungen in Finder, Hobbyregister und Kategorie genutzt.</p>';
+ 5895:         if (!function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready()
+ 5896:             || !function_exists('hd_hobbyregister_records')) {
+ 5897:             echo '<p>Das Hobbyregister (HD007) ist derzeit nicht verfügbar.</p></div>'; return;
+ 5900:         foreach ((array)hd_hobbyregister_records() as $row) {
+FILE affiliate-portal-template-kit/pferde-template-kit.php bytes 2017649 hits 165
+ 2861:             'hero_image' => '', 'hero_alt' => '', 'hero_url' => '', 'hero_target' => '_self',
+ 3189:         $image = self::media('start', 'hero_image');
+ 3204:         echo '<tr><th scope="row"><label for="pftk_hero_image_174">Hero-Bild</label></th><td><input id="pftk_hero_image_174" type="text" class="regular-text" style="width:min(760px,100%)" name="'.esc_attr($media_name).'[hero_image]" value="'.esc_attr($image).'
+ 3556:             'hero_image' => ['Hero-Bild', 'URL aus der Mediathek'],
+ 3691:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3716:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3836:         $attachment_id = absint(get_post_thumbnail_id($page_id));
+ 3877:         return self::leading_image_block_v150385($image, $type, get_post_thumbnail_id($page_id));
+ 4576:         $img=function_exists('get_the_post_thumbnail_url')?(string)get_the_post_thumbnail_url($post->ID,'medium'):'';
+ 4620:         $hero=function_exists('get_the_post_thumbnail_url')?(string)get_the_post_thumbnail_url($post_id,'full'):''; if($hero==='')$hero=plugin_dir_url(__FILE__).'assets/journal-v150478/pferderassen.webp';
+ 5469:         if (has_post_thumbnail($post_id)) {
+ 5470:             echo get_the_post_thumbnail($post_id, 'medium_large', ['loading' => 'lazy', 'alt' => $title]);
+ 5497:             if (has_post_thumbnail($post_id)) {
+ 5498:                 $out .= get_the_post_thumbnail($post_id, 'medium_large', ['loading' => 'lazy', 'alt' => get_the_title($post_id)]);
+ 5812:         if ($lead && has_post_thumbnail($lead->ID)) {
+ 5813:             echo get_the_post_thumbnail($lead->ID, 'large', ['loading' => 'eager', 'alt' => get_the_title($lead)]);
+ 5825:             if (has_post_thumbnail($lead->ID)) { echo get_the_post_thumbnail($lead->ID, 'large', ['loading' => 'lazy']); }
+ 5839:             if (has_post_thumbnail($post->ID)) { echo get_the_post_thumbnail($post->ID, 'medium_large', ['loading' => 'lazy']); }
+ 9825:         $image = $page_id > 0 ? (string)get_the_post_thumbnail_url($page_id, 'full') : '';
+ 9857:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 10810:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 12446:         if (function_exists('get_the_post_thumbnail') && has_post_thumbnail($post)) {
+ 12447:             $thumb = get_the_post_thumbnail($post, 'large', ['loading' => 'lazy']);
+ 14394:             $image = (string)get_the_post_thumbnail_url($post->ID, 'large');
+ 14553:         $image = self::media($type, 'hero_image');
+ 14555:             $fallback_image = get_the_post_thumbnail_url(absint(get_queried_object_id()), 'full');
+ 14746:             $image = has_post_thumbnail($post->ID)
+ 14747:                 ? get_the_post_thumbnail($post->ID, 'medium_large', ['loading' => 'lazy', 'alt' => $title])
+ 15253:             $image = get_the_post_thumbnail_url($post->ID, 'large');
+ 15318:         $hero_override = trim((string) self::media('start', 'hero_image'));
+FILE affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php bytes 12554 hits 2
+ 15:     if (function_exists('get_the_post_thumbnail_url')) {
+ 16:         $src = (string)get_the_post_thumbnail_url((int)$post->ID, 'full');
+### HD-007-HOBBYREGISTER-CORE
+ZIP exists True
+ZIP files 93
+ASSET hd-hobbyregister-core/assets/portraits/final-masters/airbrush-modellbau.webp 204268
+FILE hd-hobbyregister-core/templates/hobbyregister.php bytes 878 hits 7
+ 10: <body <?php body_class('hd-owned-content-template-v150709 hd-hobbyregister-owned-shell-v1210'); ?>>
+ 19: <main id="primary" class="site-main hd-content-v150616 hd-hobbyregister-template-v110">
+ 20: <?php echo HD_Hobbyregister_Frontend_Stable127::render_current(); ?>
+FILE hd-hobbyregister-core/hobby-depot-hobbyregister-core.php bytes 1455 hits 14
+ 3:  * Plugin Name: Hobby Depot Hobbyregister Core
+ 4:  * Description: Read-only Laufzeitkern und Frontend-Projektion für das zentrale Hobbyregister von Hobby Depot.
+ 9: require_once __DIR__ . '/includes/class-hd-hobbyregister-core.php';
+ 10: require_once __DIR__ . '/includes/class-hd-hobbyregister-frontend.php';
+ 11: HD_Hobbyregister_Frontend_Stable127::boot();
+ 12: function hd_hobbyregister_127_register_compat_api() {
+ 13:     if (!function_exists('hd_hobbyregister_records')) { function hd_hobbyregister_records() { return HD_Hobbyregister_Core_Stable127::records(); } }
+ 14:     if (!function_exists('hd_hobbyregister_get')) { function hd_hobbyregister_get($registry_id) { return HD_Hobbyregister_Core_Stable127::get($registry_id); } }
+ 15:     if (!function_exists('hd_hobbyregister_get_by_name')) { function hd_hobbyregister_get_by_name($name) { return HD_Hobbyregister_Core_Stable127::get_by_name($name); } }
+ 16:     if (!function_exists('hd_hobbyregister_finder_rows')) { function hd_hobbyregister_finder_rows() { return HD_Hobbyregister_Core_Stable127::finder_rows(); } }
+ 17:     if (!function_exists('hd_hobbyregister_ready')) { function hd_hobbyregister_ready() { return HD_Hobbyregister_Core_Stable127::ready(); } }
+ 19: if (function_exists('add_action')) { add_action('plugins_loaded', 'hd_hobbyregister_127_register_compat_api', PHP_INT_MAX); }
+ 20: else { hd_hobbyregister_127_register_compat_api(); }
+FILE hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php bytes 6892 hits 18
+ 3: final class HD_Hobbyregister_Core_Stable127 {
+ 37:         $candidates = array($current, $plugins . '/hd-hobbyregister-core/data');
+ 38:         foreach ((array)glob($plugins . '/hd-hobbyregister-core*/data') as $candidate) $candidates[] = $candidate;
+FILE hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php bytes 83289 hits 88
+ 4: final class HD_Hobbyregister_Frontend_Stable127 {
+ 6:     const BASE_PATH = 'hobbyregister';
+ 19:         add_action('wp_ajax_hd_hobbyregister_search', [__CLASS__, 'ajax_search']);
+ 20:         add_action('wp_ajax_nopriv_hd_hobbyregister_search', [__CLASS__, 'ajax_search']);
+ 42:         $own = dirname(__DIR__) . '/templates/hobbyregister.php';
+ 57:         if ($route['type'] === 'index') { return 'Hobbyregister | Hobby Depot'; }
+ 76:     private static function asset_url($name) { return plugins_url('assets/' . ltrim($name,'/'), dirname(__DIR__) . '/hobby-depot-hobbyregister-core.php'); }
+ 85:         foreach (HD_Hobbyregister_Core_Stable127::records() as $row) {
+ 163:             $parts[]='<span aria-current="page">Hobbyregister</span>';
+ 165:             $parts[]='<a href="'.esc_url(self::base_url()).'">Hobbyregister</a>';
+ 177:         if (self::route()['type']!=='') { $classes[]='hd-hobbyregister-route'; }
+ 202:         $entry=HD_Hobbyregister_Core_Stable127::image_entry($id);
+ 236:         return '<section class="hdr-hero"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">Hobbys von A bis Z</span><h1>Hobbyregister</h1><p>Entdecke bekannte, seltene und un
+ 268:         foreach (HD_Hobbyregister_Core_Stable127::records() as $row) {
+ 292:         return '<section class="hdr-tools"><form class="hdr-register-search" action="'.esc_url(self::base_url()).'" method="get" data-hdr-ajax-url="'.esc_url(admin_url('admin-ajax.php')).'" data-hdr-nonce="'.esc_attr(wp_create_nonce('hd_hobbyregister_search'))
+ 300:         foreach(HD_Hobbyregister_Core_Stable127::records() as $row){
+ 311:         if(function_exists('check_ajax_referer'))check_ajax_referer('hd_hobbyregister_search','nonce');
+ 318: <script id="hd-hobbyregister-search-v1216">
+ 328:    var body=new URLSearchParams({action:'hd_hobbyregister_search',nonce:form.getAttribute('data-hdr-nonce')||'',q:q});
+ 625:         foreach(HD_Hobbyregister_Core_Stable127::records() as $other){
+ 668:         $static=HD_Hobbyregister_Core_Stable127::article((string)($row['registry_id'] ?? ''));
+ 691:         return self::breadcrumb($name).'<div class="hd-portal-section hdr-wrap" data-hd-register-profile="1.2.16">'.self::hero(true,$row).'<div class="hdr-profile-grid"><aside>'.self::profile_sidebar($row).'</aside><main>'.self::full_article($row).'</main></di
+ 702:         return '<style id="hd-hobbyregister-css-v120">'
+ 703:         .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizin
+### HD-009-AFFILIATE-ZENTRALE
+ZIP exists True
+ZIP files 33
+ASSET affiliate-portal-router/assets/hdar-ci-logo-original.png 150989
+ASSET affiliate-portal-router/assets/hdar-ci-malen-zeichnen.webp 168684
+ASSET affiliate-portal-router/assets/hdar-ci-modellbau.webp 139884
+ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-square.webp 58370
+ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-wide.webp 31768
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 712938 hits 122
+ 352:         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
+ 1949:     public function inject_glossary_single_banner($content) {
+ 1958:         $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
+ 1959:         $mobile_slot = $this->render_affiliate_slot($post_id, 'glossary_single_mobile_banner', 'portal_context', '');
+ 2439:             $own = HDAR_Amazon_Start::render_slot($context, $slot_type, $content_id);
+ 2466:                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2467:                         $uses_editorial_single_chrome = $is_glossary_single_slot;
+ 2491:                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
+ 2542:         $square = in_array($slot, array('glossary_single_banner','glossary_single_desktop_banner'), true);
+ 2544:             in_array($slot, array('glossary_single_mobile_banner','post_inline_banner','hub_mid_banner','template_mid_banner'), true);
+ 2549:         if ($topic === '' || in_array(strtolower($topic), array('hobbyregister','glossar','hobby depot','hobbys'), true)) { return ''; }
+ 2556:         if (is_array($register_row) && class_exists('HD_Hobbyregister_Core_Stable127') &&
+ 2557:             method_exists('HD_Hobbyregister_Core_Stable127','image_entry')) {
+ 2558:             $entry = HD_Hobbyregister_Core_Stable127::image_entry((string)($register_row['registry_id'] ?? ''));
+ 2573:                         $photo = plugins_url('hd-hobbyregister-core/assets/' . ltrim($asset_path, '/'));
+ 2619:             !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready() ||
+ 2620:             !function_exists('hd_hobbyregister_records')) { return; }
+ 2622:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$found)) { return; }
+ 2624:         foreach ((array)hd_hobbyregister_records() as $item) {
+ 2631:             'post_id'=>0,'post_type'=>'hobbyregister_profile',
+ 2637:         $html=$this->render_affiliate_slot_for_context('hobbyregister_'.$slug,$context,'glossary_single_desktop_banner','portal_context','');
+ 2638:         if (trim($html)==='') { $html=$this->hdar_ci_amazon_banner($context,'glossary_single_desktop_banner','hobbyregister_'.$slug,$row); }
+ 2760:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2762:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+ 3770:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
+ 3968:         $glossary_single_banner = $required_creative_type === 'banner'
+ 3970:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 3997:             if (!$glossary_single_banner) {
+ 4139:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
+ 5240:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
+ 8510:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
+FILE affiliate-portal-router/includes/class-hdar-amazon-start.php bytes 22711 hits 52
+ 106:     public static function render_slot($context, $slot_type, $content_id = '') {
+ 321:         <p><label>Zielart <select name="hdar_target_type"><option value="post">Seite / Hobbyregister / Beitrag</option><option value="term">Kategorie / Glossargruppe</option></select></label>
+FILE affiliate-portal-router/includes/class-ppar-admin-kiss.php bytes 47100 hits 1
+ 132:         echo '<p class="description">OTTO, Kelkoo, Kaufland, Amazon und ADCocktail erscheinen als vorbereitet, bis ein realer, dokumentierter Zugang vorhanden ist. Es werden keine Schnittstellen geraten.</p>';
+FILE affiliate-portal-router/includes/class-ppar-deal-radar.php bytes 29834 hits 3
+ 155:         return in_array($network, array('idealo','amazon','kelkoo','ebay'), true) ? $network : '';
+ 355:         $map = array('otto'=>'OTTO','idealo'=>'idealo','amazon'=>'Amazon','kelkoo'=>'Kelkoo','ebay'=>'eBay');
+ 441:             'Amazon'=>array('key'=>'amazon','note'=>'fest eingeplant; Adapter noch nicht aktiv'),
+FILE affiliate-portal-router/includes/class-ppar-partner-analytics.php bytes 18558 hits 1
+ 42:             'amazon' => array('label'=>'Amazon','type'=>'Produktquelle','state'=>'prepared','source_network'=>'amazon'),
+FILE affiliate-portal-router/includes/class-ppar-product-source-plan.php bytes 12842 hits 7
+ 56:             'amazon' => array(
+ 57:                 'label'=>'Amazon','state'=>'prepared','route'=>'Amazon Associates / zulässiger Produktdatenzugang',
+ 82:         // Keep the existing Hobby Depot Amazon ASIN/tracking bridge intact.
+ 84:         if (!isset($registry['amazon']) || !is_array($registry['amazon'])) {
+ 85:             $registry['amazon'] = array(
+ 86:                 'label'=>'Amazon','state'=>'prepared','access_owner'=>'adapter',
+ 87:                 'specialist_menu'=>false,'specialist_slug'=>'affiliate-portal-provider-amazon',
+FILE affiliate-portal-router/includes/trait-ppar-creative-library.php bytes 122931 hits 2
+ 1725:             if ($slot_id === 'glossary_single_desktop_banner') { $labels[] = 'Desktop'; }
+ 1726:             if ($slot_id === 'glossary_single_mobile_banner') { $labels[] = 'Mobil'; }
+FILE affiliate-portal-router/includes/trait-ppar-idealo.php bytes 105066 hits 2
+ 1224:         $network=sanitize_key((string)$network); if ($network==='ebay') { return 'Bei eBay ansehen'; } if ($network==='idealo') { return 'Bei idealo vergleichen'; } if ($network==='amazon') { return 'Bei Amazon ansehen'; } return 'Angebot ansehen';
+ 1255:         $order=array('ebay','idealo','amazon'); uksort($offers,static function($a,$b)use($order){$ia=array_search($a,$order,true);$ib=array_search($b,$order,true);$ia=$ia===false?99:$ia;$ib=$ib===false?99:$ib;return $ia<=>$ib;});
+FILE affiliate-portal-router/includes/trait-ppar-output-objects.php bytes 236623 hits 8
+ 558:         foreach (array('post'=>'classic_post','uge_term'=>'glossary_single') as $post_type => $context) {
+ 664:                             'glossary_single_desktop_banner'=>array('creative_type'=>'banner','ratio_min'=>0.50,'ratio_max'=>1.50,'min_width'=>310,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_context
+ 665:                             'glossary_single_mobile_banner'=>array('creative_type'=>'banner','ratio_min'=>2.50,'ratio_max'=>12.00,'min_width'=>300,'min_height'=>1,'crop'=>'contain','target_types'=>array('page','category','uge_term','uge_group'),'target_context
+ 700:             'glossarartikel'=>array('label'=>'Glossarartikel','slots'=>array('glossary_single_desktop_banner','glossary_single_mobile_banner')),
+ 2111:             : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner','glossary_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner'
+ 2713:             'glossary_single_desktop_banner','glossary_single_mobile_banner','post_inline_banner',
+ 3047:                             'glossary_single_desktop_banner',
+ 3048:                             'glossary_single_mobile_banner'
+FILE affiliate-portal-router/includes/trait-ppar-provider-registry.php bytes 57162 hits 82
+ 63:             'amazon' => array(
+ 64:                 'label' => 'Amazon',
+ 68:                 'specialist_slug' => 'affiliate-portal-provider-amazon',
+ 196:     private function amazon_settings_defaults() {
+ 203:     private function amazon_tracking_id_valid($tracking_id) {
+ 208:     private function amazon_settings() {
+ 209:         $stored = get_option('ppar_amazon_search_v1', array());
+ 211:         $settings = array_merge($this->amazon_settings_defaults(), $stored);
+ 212:         if (defined('PPAR_AMAZON_TRACKING_ID') && $this->amazon_tracking_id_valid((string) PPAR_AMAZON_TRACKING_ID)) {
+ 213:             $settings['tracking_id'] = trim((string) PPAR_AMAZON_TRACKING_ID);
+ 215:         $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+ 219:     private function amazon_update_settings($settings) {
+ 220:         $settings = array_merge($this->amazon_settings_defaults(), is_array($settings) ? $settings : array());
+ 222:         $settings['enabled'] = !empty($settings['enabled']) && $this->amazon_tracking_id_valid($settings['tracking_id']);
+ 223:         update_option('ppar_amazon_search_v1', $settings, false);
+ 224:         return $this->amazon_settings();
+ 227:     public function amazon_bridge_ready() {
+ 228:         $settings = $this->amazon_settings();
+ 229:         return !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
+ 232:     private function amazon_campaign_asins($campaign) {
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php function image_entry(
+ if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static function image_entry($registry_id) {
+        $all = self::image_map();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function finder_rows() {
+        $out = array();
+        foreach (self::records() as $row) {
+            $t = array();
+            foreach (($row['traits'] ?? array()) as $id => $assignment) {
+                if (is_array($assignment) && array_key_exists('value', $assignment)) $t[$id] = $assignment['value'];
+            }
+            $p = $row['result_profile'] ?? array();
+            $out[] = array(
+                'registry_id' => $row['registry_id'] ?? '',
+                'name' => $row['canonical_name'] ?? '',
+                'world' => $row['source_identity']['natural_world'] ?? '',
+                'target_node_id' => $row['source_identity']['target_node_id'] ?? null,
+                'traits' => $t,
+                'profile' => array(
+                    'what_is_it' => $p['what_is_it'] ?? '',
+                    'what_do_you_do' => $p['what_do_you_do'] ?? '',
+                    'what_do_you_need' => $p['what_do_you_need'] ?? '',
+                    'appeal' => $p['appeal'] ?? '',
+                ),
+            );
+        }
+        return $out;
+    }
+}
+
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php function route(
+ PHP_URL_PATH) : parse_url($uri, PHP_URL_PATH);
+        return trim(is_string($path) ? $path : '', '/');
+    }
+
+    public static function route() {
+        $path = self::request_path();
+        if ($path === self::BASE_PATH) { return ['type'=>'index','slug'=>'']; }
+        if (strpos($path, self::BASE_PATH . '/') === 0) {
+            $rest = trim(substr($path, strlen(self::BASE_PATH) + 1), '/');
+            if ($rest !== '' && strpos($rest, '/') === false) { return ['type'=>'profile','slug'=>sanitize_title($rest)]; }
+        }
+        return ['type'=>'','slug'=>''];
+    }
+
+    public static function template_include($template) {
+        $route = self::route();
+        if ($route['type'] === '') { return $template; }
+        $own = dirname(__DIR__) . '/templates/hobbyregister.php';
+        return is_readable($own) ? $own : $template;
+    }
+
+    public static function pre_handle_404($preempt, $wp_query) {
+        if (self::route()['type'] === '') { return $preempt; }
+        if (is_object($wp_query)) {
+            if (property_exists($wp_query,'is_404')) { $wp_query->is_404 = false; }
+        }
+        if (function_exists('status_header')) { status_header(200); }
+        return true;
+    }
+
+    public static function document_title($title) {
+        $route = self::route();
+        if ($route['type'] === 'index') { return 'Hobbyregister | Hobby Depot'; }
+        if ($route['type'] === 'profile') {
+            $row = self::record_by_slug($route['slug']);
+            if ($row) { return (string)$row['canonical_name'] . ' – Hobby-Steckbrief | Hobby Depot'; }
+        }
+        return $title;
+    }
+
+    public static function head_meta() {
+        $route = self::route();
+        if ($route['type'] === '') { return; }
+        // Prototyp: Detailprofile bleiben bis zur verbindlichen CORE/REGISTER-Owner-Matrix noindex.
+        if ($route['type'] === 'profile') {
+            echo "<meta name=\"robots\" content=\"noindex,follow\">\n";
+        }
+    }
+
+    private static function base_url() { return home_url('/' . self::BASE_PATH . '/'); }
+    private static function profile_url($row) { return self::base_url() . rawurlencode(self::slug_for_record($row)) . '/'; }
+    private static function asset_url($name) { return plugins_url('assets/' . ltrim($name,'/'), dirname(__DIR__) . '/hobby-depot-hobbyregister-core.php'); }
+
+    private static function slug_for_record($row) {
+        return sanitize_title((string)($row['canonical_name'] ?? ''));
+    }
+
+    private static function build_slug_index() {
+        if (self::$slug_index !== null) { return; }
+    
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php function render_profile(
+er().self::render_groups($f).self::render_cards($rows,$f).'</div>'.self::styles().self::search_script();
+    }
+
+    public static function render_profile($slug) {
+        $row=self::record_by_slug($slug);
+        if(!$row){ if(function_exists('status_header'))status_header(404); return '<div class="hd-portal-section hdr-wrap"><p>Dieses Hobby wurde im Register nicht gefunden.</p></div>'.self::styles(); }
+        $name=(string)$row['canonical_name'];
+        return self::breadcrumb($name).'<div class="hd-portal-section hdr-wrap" data-hd-register-profile="1.2.16">'.self::hero(true,$row).'<div class="hdr-profile-grid"><aside>'.self::profile_sidebar($row).'</aside><main>'.self::full_article($row).'</main></div><div class="hdr-back"><a href="'.esc_url(self::base_url()).'">← Zur Hobbyregister-Startseite</a></div></div>'.self::styles();
+    }
+
+    public static function render_current() {
+        $r=self::route();
+        if($r['type']==='index')return self::render_index();
+        if($r['type']==='profile')return self::render_profile($r['slug']);
+        return '';
+    }
+
+    private static function styles() {
+        return '<style id="hd-hobbyregister-css-v120">'
+        .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizing:border-box;margin-top:18px;padding:0;font-family:Montserrat,Arial,sans-serif}.hdr-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0;padding:0;color:#778085;font-size:12px;line-height:1.4}.hdr-breadcrumb a{color:#667178!important;font-weight:400!important;text-decoration:none!important}.hdr-breadcrumb a:hover,.hdr-breadcrumb a:focus-visible{color:#2f969d!important}.hdr-breadcrumb b{color:#a0a7aa;font-weight:500}.hdr-breadcrumb span[aria-current=page]{color:#39464c;font-weight:650}.hdr-wrap{--petrol:#2f969d;--petrol-dark:#207b82;--ink:#17313c;--muted:#68767b;--cream:#f5f1e9;--line:rgba(49,67,73,.16);box-sizing:border-box;margin-top:5px;margin-bottom:58px;padding:0;color:var(--ink);font-family:Montserrat,Arial,sans-serif}.hdr-wrap *{box-sizing:border-box}.hdr-wrap a{text-decoration:none}'
+        .'.hdr-hero{position:relative;height:238px;overflow:hidden;border:1px solid var(--line);background:var(--cream)}.hdr-hero-copy{position:absolute;z-index:2;top:0;bottom:0;left:0;display:flex;width:46%;padding:clamp(24px,3.6vw,48px);flex-direction:column;justify-content:center;transform:translateY(-6px)}.hdr-her
+
+MORE HD007 image_map function image_map(
+ return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function image_map() {
+        if (self::$image_map === null) {
+            self::$image_map = self::read_json('hobby-image-map-v1.json');
+            if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static function image_entry($registry_id) {
+        $all = self::image_map();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function finder_rows() {
+        $out = array();
+        foreach (self::records() as $row) {
+            $t = array();
+            foreach (($row['traits'] ?? array()) as $id => $assignment) {
+                if (is_array($assignment) && array_key_exists('value', $assignment)) $t[$id] = $assignment['value'];
+            }
+            $p = $row['result_profile'] ?? array();
+            $out[] = array(
+                'registry_id' => $row['registry_id'] ?? '',
+                'name' => $row['canonical_name'] ?? '',
+                'world' => $row['source_identity']['natural_world'] ?? '',
+                'target_node_id' => $row['source_identity']['target_node_id'] ?? null,
+                'traits' => $t,
+                'profile' => array(
+                    'what_is_it' => $p['what_is_it'] ?? '',
+                    'what_do_you_do' => $p['what_do_you_do'] ?? '',
+                    'what_do_you_need' => $p['what_do_you_need'] ?? '',
+                    'appeal' => $p['appeal'] ?? '',
+                ),
+            );
+        }
+        return $out;
+    }
+}
+
+
+MORE HD007 image_map function records(
+data = self::read_json('traits-schema.json');
+        return is_array($data) ? $data : array();
+    }
+    public static function records() {
+        $r = self::register();
+        return isset($r['records']) && is_array($r['records']) ? $r['records'] : array();
+    }
+    private static function index() {
+        if (self::$by_id !== null) return;
+        self::$by_id = array(); self::$by_name = array();
+        foreach (self::records() as $row) {
+            if (!is_array($row)) continue;
+            $id = isset($row['registry_id']) ? (string)$row['registry_id'] : '';
+            $name = isset($row['canonical_name']) ? (string)$row['canonical_name'] : '';
+            if ($id !== '') self::$by_id[$id] = $row;
+            if ($name !== '') self::$by_name[$name] = $row;
+        }
+    }
+    public static function get($registry_id) {
+        self::index();
+        return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+    }
+    public static function get_by_name($name) {
+        self::index();
+        return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+    }
+    public static function count() { return count(self::records()); }
+    public static function ready() {
+        $rows = self::records();
+        if (count($rows) !== 862) return false;
+        foreach ($rows as $row) {
+            if (($row['classification_status'] ?? '') === 'PENDING_REVIEW') return false;
+            if (($row['result_profile']['status'] ?? '') !== 'REVIEWED') return false;
+            if (!isset($row['traits']) || count($row['traits']) !== 57) return false;
+        }
+        return true;
+    }
+    private static $articles = null;
+    private static $image_map = null;
+
+    public static function articles() {
+        if (self::$articles === null) {
+            self::$articles = self::read_json('hobby-articles-v1.json');
+            if (!is_array(self::$articles)) self::$articles = array();
+        }
+        return self::$articles;
+    }
+
+    public static function article($registry_id) {
+        $all = self::articles();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function image_map() {
+        if (self::$image_map === null) {
+            self::$image_map = self::read_json('hobby-image-map-v1.json');
+            if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static
+
+MORE HD007 image_entry_use $entry=HD_Hobbyregister_Core_Stable127::image_entry
+webp';
+    }
+
+    private static function record_image($row) {
+        $id=(string)($row['registry_id'] ?? '');
+        $entry=HD_Hobbyregister_Core_Stable127::image_entry($id);
+        if (is_array($entry)) {
+            $path=trim((string)($entry['path'] ?? ''));
+            $source=(string)($entry['source'] ?? '');
+            if ($path!=='') {
+                if ($source==='hd003' && function_exists('plugins_url')) {
+                    return plugins_url('affiliate-portal-template-kit/assets/'.ltrim($path,'/'));
+                }
+                if ($source==='hd007') return self::asset_url($path);
+            }
+        }
+        return self::asset_url(self::group_asset(self::primary_group($row)));
+    }
+
+    private static function profile_claim($row) {
+        $group=self::primary_group($row);
+        $claims=[
+            'gestalten'=>'Ideen sichtbar machen.',
+            'fertigen'=>'Mit den Händen schaffen.',
+            'technik'=>'Tüfteln. Bauen. Verstehen.',
+            'forschen'=>'Neugier wird Wissen.',
+            'pflanzen'=>'Wachsen lassen.',
+            'tiere'=>'Beobachten. Pflegen. Verstehen.',
+            'bewegen'=>'Bewegung, die fordert.',
+            'sammeln'=>'Finden. Ordnen. Bewahren.',
+        ];
+        return $claims[$group] ?? 'Entdecken. Verstehen. Ausprobieren.';
+    }
+
+    private static function hero($profile=false,$row=null) {
+        if ($profile && is_array($row)) {
+            $claim=self::profile_claim($row);
+            return '<section class="hdr-hero is-profile"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">'.esc_html($claim).'</span><h1>'.esc_html((string)$row['canonical_name']).'</h1></div><figure><img src="'.esc_url(self::record_image($row)).'" alt="'.esc_attr((string)$row['canonical_name']).'" fetchpriority="high" decoding="async"></figure></section>';
+        }
+        return '<section class="hdr-hero"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">Hobbys von A bis Z</span><h1>Hobbyregister</h1><p>Entdecke bekannte, seltene und ungewöhnliche Hobbys. Suche direkt nach einem Namen oder stöbere nach Anfangsbuchstaben und Hobbygruppen.</p></div><figure><img src="'.esc_url(self::asset_url('register-hero.webp')).'" alt="Viele unterschiedliche Hobbys entdecken" fetchpriority="high" decoding="async"></figure></se
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/image-production-batch-01.json
+{
+  "format": "HOBBY_DEPOT_IMAGE_PRODUCTION_BATCH",
+  "version": "1.0",
+  "batch": 1,
+  "date": "2026-10-23",
+  "count": 25,
+  "contract": {
+    "style": "fotorealistische redaktionelle Hobbyfotografie",
+    "ratio": "3:2 landscape",
+    "generation_min_px": "1536x1024",
+    "final_webp_px": "1500x1000",
+    "crop_safe_subject": "center",
+    "rules": [
+      "Hobby auf den ersten Blick erkennbar",
+      "natürliche realistische Beleuchtung",
+      "keine Texte, Wasserzeichen oder realen Markenlogos",
+      "keine dekorative Stockfoto-Szene ohne konkrete Hobbyhandlung",
+      "anatomisch plausible Hände und Werkzeuge",
+      "Hero und Vorschaukarten verwenden dasselbe Mastermotiv"
+    ]
+  },
+  "items": [
+    {
+      "position": 1,
+      "registry_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "target_asset": "portraits/batch-01/air-dry-clay.webp",
+      "photo_brief": "Hände formen eine kleine Schale und eine Figur aus lufttrocknender Modelliermasse auf einem hellen Holztisch; Modellierwerkzeuge und zwei fertige Stücke sichtbar; kein Töpferrad.",
+      "status": "BRIEF_READY"
+    },
+    {
+      "position": 2,
+      "registry_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "target_asset": "portraits/batch-01/airbrush-modellbau.webp",
+      "photo_brief": "Nahaufnahme 
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-image-map-v1.json
+{
+  "hobby:3d-bogenschieen": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/bewegen/wurf-ziel-v150627.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "wurf-ziel",
+    "core_audit_semantic_fit": "FAIL",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_NEW_MASTER_REQUIRED"
+  },
+  "hobby:3d-druck": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/technik/digitale-fertigung-v150623.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "digitale-fertigung",
+    "core_audit_semantic_fit": "PASS",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_HIGHRES_SOURCE_OR_NEW_MASTER"
+  },
+  "hobby:3d-scanning": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/technik/digitale-fertigung-v150627.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "digitale-fertigung",
+    "core_audit_semantic_fit": "FAIL",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_NEW_MASTER_REQUIRED"
+  },
+  "hobby:aeroponik": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/pflanzen/hydro-indoor-v150623.webp",
+    "sta
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/image-production-batch-02-unique.json
+{
+  "format": "HOBBY_DEPOT_UNIQUE_MASTER_BATCH",
+  "version": "1.0",
+  "plugin_version": "1.2.14",
+  "stand": "2026-10-23",
+  "rule": "Exactly one active master per listed hobby; alternatives remain non-active glossary reserve.",
+  "assignments": [
+    {
+      "registry_id": "hobby:fruchtwein-herstellen",
+      "canonical_name": "Fruchtwein herstellen",
+      "master_asset": "portraits/final-masters/fruchtwein-herstellen.webp",
+      "master_sha256": "0ad98d1e7681df4752f4b298852f508d8b38a3f39c7b94433f27d8d1d36b9a2e",
+      "source_file": "rustikale_weinherstellung_in_der_küche.png",
+      "photo_brief": "Beerenwein wird mit Schlauch aus einem Gärgefäß in Flaschen abgezogen; deutliches Fruchtweinmotiv."
+    },
+    {
+      "registry_id": "hobby:cider-herstellen",
+      "canonical_name": "Cider herstellen",
+      "master_asset": "portraits/final-masters/cider-herstellen.webp",
+      "master_sha256": "81bf3e3dab1dc27fc894d0e4e70a4da9afa478790f7c27f9a294136bc91361bf",
+      "source_file": "traditionelle_apfelweinherstellung_im_herbstgarten.png",
+      "photo_brief": "Äpfel werden im Herbstgarten zerkleinert und gepresst; klares Cider-/Apfelweinmotiv."
+    },
+    {
+      "registry_id": "hobby:met-herstellen",
+      "canonical_name": "Met herstellen",
+      "master_asset": "portraits/final-masters/met-herstellen.webp",
+      "master_sh
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-image-production-status-v1.json
+{
+  "format": "HOBBY_DEPOT_HOBBYREGISTER_IMAGE_STATUS",
+  "version": "1.1",
+  "stand": "2026-10-23",
+  "authority": "HD-007-HOBBYREGISTER-CORE / Hobbyregister-Büro",
+  "contract": {
+    "one_hobby_one_final_master": true,
+    "usage": "same master for hero and article",
+    "ratio": "3:2",
+    "final_webp_px": "1500x1000",
+    "duplicates_are_not_final": true,
+    "rejected_attempts_do_not_count_as_done": true
+  },
+  "summary": {
+    "total": 862,
+    "done_verified": 24,
+    "open_total": 838,
+    "core_semantic_pass_but_tech_fail": 79,
+    "core_semantic_fail": 295,
+    "no_core_open_generate_new": 464,
+    "open_locate_highres_or_generate": 79,
+    "open_generate_new_total": 759
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "target_status": "CORE_TARGET",
+      "final_status": "OPEN",
+      "next_action": "GENERATE_NEW_MASTER",
+      "source_strategy": "CORE_REJECTED",
+      "master_asset": null,
+      "master_sha256": null,
+      "usage": "hero_and_article",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "note": "CORE geprüft: Motiv nicht eindeutig passend; neues Masterbild erforderlich."
+    },
+    {
+      "registry_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "target_status": "CORE_TARGET",
+      "final_status": "
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/core-image-audit-v1.json
+{
+  "format": "HOBBY_DEPOT_CORE_IMAGE_AUDIT",
+  "version": "1.0",
+  "stand": "2026-10-23",
+  "scope": "382 remaining CORE_TARGET candidates after Geocaching final master",
+  "method": "visual inspection of all 212 unique referenced image files plus per-hobby semantic assignment check; technical dimension check on every candidate",
+  "master_contract": {
+    "usage": "same master for hero and article",
+    "ratio": "3:2",
+    "final_px": "1500x1000",
+    "never_upscale": true
+  },
+  "summary": {
+    "candidates_total": 382,
+    "unique_image_files_visually_checked": 212,
+    "semantic_pass": 81,
+    "semantic_fail": 301,
+    "technical_pass_for_1500x1000": 0,
+    "technical_fail_for_1500x1000": 382,
+    "final_reuse_without_replacement": 0
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "current_candidate_source": "hd003",
+      "current_candidate_path": "hobby-depot-v150617/subcategories/bewegen/wurf-ziel-v150627.webp",
+      "candidate_px": "600x320",
+      "semantic_fit": "FAIL",
+      "technical_master_fit": "FAIL_MASTER_SPEC",
+      "final_verdict": "NOT_FINAL",
+      "next_action": "GENERATE_NEW_MASTER",
+      "usage_contract": "same master for hero and article",
+      "required_final_px": "1500x1000",
+      "required_ratio": "3:2",
+      "note": "Motiv
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-portrait-image-plan-v1.json
+{
+  "format": "HOBBY_PORTRAIT_BILDPLAN_V1",
+  "created_from": "HOBBY_KLASSIFIKATIONSREGISTER_V1.json",
+  "rule": "CORE target -> reuse existing image; no CORE target -> portrait master image, same source image used for finder preview",
+  "image_contract": {
+    "generation_min_px": "1536x1024",
+    "ratio": "3:2",
+    "final_webp_px": "1500x1000",
+    "finder": "downscale/crop only; never upscale"
+  },
+  "summary": {
+    "records_total": 862,
+    "core_target": 383,
+    "no_core_target": 479,
+    "no_core_target_by_surprise": {
+      "nische": 203,
+      "klassisch": 121,
+      "ungewoehnlich": 129,
+      "sehr_schraeg": 26
+    }
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "surprise_level": "nische",
+      "world": "bewegen",
+      "target_node_id": "core:entity:f7dd32545a74ae8fd56d",
+      "target_status": "CORE_TARGET",
+      "portrait_status": "NOT_NEEDED_CORE",
+      "master_image_status": "REUSE_EXISTING_CORE_IMAGE",
+      "master_contract": null
+    },
+    {
+      "registry_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "surprise_level": "klassisch",
+      "world": "technik",
+      "target_node_id": "core:entity:9de27e2c3115f89c375d",
+      "target_status": "CORE_TARGET",
+      "portrait_status": "NOT_NEEDED_CORE",
+      "master_i
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/glossary-image-reserve-v1.json
+{
+  "format": "HOBBY_DEPOT_GLOSSARY_IMAGE_RESERVE",
+  "version": "1.0",
+  "stand": "2026-10-23",
+  "runtime_use": false,
+  "rule": "Reserve files are not used by the Hobbyregister image map. They are retained only as possible future glossary material.",
+  "count": 31,
+  "items": [
+    {
+      "file": "glossary-candidates/a_bright_rustic_sunlit_still_life_scene_of_homem.webp",
+      "original_source_file": "a_bright_rustic_sunlit_still_life_scene_of_homem.png",
+      "sha256": "b2050828ab9ce04811004b7dca9f2d4c8a906850a3ae0efa58039deef31a285b",
+      "status": "GLOSSARY_RESERVE_NOT_ACTIVE",
+      "active_register_assignment": null
+    },
+    {
+      "file": "glossary-candidates/a_bright_warm_realistic_close_up_still_life_food.webp",
+      "original_source_file": "a_bright_warm_realistic_close_up_still_life_food.png",
+      "sha256": "7fb1ab2b6526dc88bfabc811a07f01664385c34b038ad1d1de613b2d89c32a0f",
+      "status": "GLOSSARY_RESERVE_NOT_ACTIVE",
+      "active_register_assignment": null
+    },
+    {
+      "file": "glossary-candidates/a_bright_warm_rustic_photorealistic_collage_sty.webp",
+      "original_source_file": "a_bright_warm_rustic_photorealistic_collage_sty.png",
+      "sha256": "cc337b4e23413da88d7f199cf2e868fd6bb08932a30e8df7ce78918216bfc2b3",
+      "status": "REJECTED_COLLAGE_KEEP_ONLY_DO_NOT_USE_AS_MASTER",
+      "activ
+
+REAL HD007 IMAGE MAP SAMPLES:
+[
+  [
+    "hobby:airbrush-modellbau",
+    {
+      "source": "hd007",
+      "path": "portraits/final-masters/airbrush-modellbau.webp",
+      "status": "FINAL_MASTER_VERIFIED",
+      "topic": "modellbau",
+      "basis": "semantic_keyword",
+      "production_status": "DONE",
+      "production_batch": 1,
+      "portrait_target": "portraits/batch-01/airbrush-modellbau.webp",
+      "photo_brief": "Nahaufnahme eines Modellbauers beim Airbrushen eines neutralen maßstäblichen Modells in einer sauberen Hobbywerkstatt; Airbrush-Pistole, Farbtopf und Abdeckmaterial sichtbar; keine Markenlogos.",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "usage": "hero_and_article",
+      "master_sha256": "ea156934112e0501e46e80971aaca91cc0fe6c3c2924a34a20c10526332d772f"
+    }
+  ],
+  [
+    "hobby:modellbau",
+    {
+      "source": "hd003",
+      "path": "hobby-depot-v150617/hero-masters-v150684/modellbau.webp",
+      "status": "SEMANTIC_MASTER_REUSE",
+      "topic": "modellbau",
+      "basis": "semantic_keyword"
+    }
+  ],
+  [
+    "hobby:malen",
+    null
+  ],
+  [
+    "hobby:acrylmalerei",
+    null
+  ],
+  [
+    "hobby:air-dry-clay",
+    {
+      "source": "hd007",
+      "path": "portraits/final-masters/air-dry-clay.webp",
+      "status": "FINAL_MASTER_VERIFIED",
+      "topic": "heimwerken",
+      "basis": "activity_fallback",
+      "production_status": "DONE",
+      "production_batch": 1,
+      "portrait_target": "portraits/batch-01/air-dry-clay.webp",
+      "photo_brief": "Hände formen eine kleine Schale und eine Figur aus lufttrocknender Modelliermasse auf einem hellen Holztisch; Modellierwerkzeuge und zwei fertige Stücke sichtbar; kein Töpferrad.",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "usage": "hero_and_article",
+      "master_sha256": "685520ad48d010115eb00155fc1aefa25ba4a74e27a87b96236e854062be2de5"
+    }
+  ]
+]

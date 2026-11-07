@@ -1,0 +1,16 @@
+Version: 0.1.17-dev
+ZIP bytes: 1175854
+ZIP SHA-256: 067a1b2532c2c2c476763269e80e4ccefacfdb073e55f02c182a2a85a43745ca
+PHP syntax: 24/24 PASS
+ZIP CRC: PASS
+Three original HD003 assets copied unchanged (exact logo, Malen, Modellbau)
+Native original banner ranking, category/parent-path, idealo, DataForSEO, products and provider filters unchanged.
+New thematic Amazon discovery banner only for completely empty slots; precise topic photo required.
+Wide responsive and square responsive CI; native HD007 register profile hookup; unchanged HD003 rental banners.
+PHP behavior tests run independently in follow-up workflow step.
+WordPress frontend live: NOT YET TESTED.
+
+HD007 readback: canonical_name and exact original image source/path used; known FAIL/OPEN image assignments gated out. Core registry plugin remains unchanged.
+HD007 final profile render: debug/no-output HTML comments are treated as empty, real native provider HTML remains first.
+CI: own Glossar banner square on both desktop and mobile. Existing native real partner creatives unaffected.
+Optional article featured image: use actual content ID when context post_id absent.
