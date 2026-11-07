@@ -11,11 +11,13 @@ target=Path(sys.argv[2])
 target.parent.mkdir(parents=True, exist_ok=True)
 PLAN="Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php"
 REPO="Portal SEO Topic Engine/includes/class-pste-repository.php"
+CONTEXT="Portal SEO Topic Engine/includes/class-pste-context-evaluator.php"
 with ZipFile(source) as inp:
     files=[(info,inp.read(info.filename)) for info in inp.infolist()]
 data={info.filename:b for info,b in files}
 plan=data[PLAN].decode("utf-8")
 repository=data[REPO].decode("utf-8")
+context=data[CONTEXT].decode("utf-8")
 needle="""    public static function apply(array $candidate,array $inventoryItems,array $categoryItems): array {
         $before=self::bindingSnapshot($candidate);"""
 replacement="""    public static function apply(array $candidate,array $inventoryItems,array $categoryItems): array {
@@ -66,11 +68,42 @@ replacement="""            $working=$payload;
             $working['pool_key']=(string)($row['pool_key']??'');"""
 assert repository.count(needle)==1
 repository=repository.replace(needle,replacement)
-changes={PLAN:plan.encode("utf-8"),REPO:repository.encode("utf-8")}
+# Existing CONTEXT worker records version/provenance only for externally
+# owned MINI topics. It must NOT run a second text/heading similarity loop.
+signature="    public static function evaluate(array $payload, array $inventory, array $plan, array $index): array {"
+assert context.count(signature)==1
+context=context.replace(signature,"    public static function evaluate(array $payload, array $inventory, array $plan, array $index, string $poolKey=''): array {")
+anchor="""        // Missing family means this family-scoped comparison has no matches."""
+contextFast="""        // Once a MINI topic belongs to the single external SEO owner,
+        // this context reader ONLY stamps the existing source versions.
+        // No PSTE_Normalizer::similarity, title comparison or editorial veto.
+        if($poolKey!==''&&class_exists('PSTE_Mini_Workflow')
+            &&PSTE_Mini_Workflow::isMiniTopicAwaitingSeo($poolKey)){
+            $payload['reason_codes']=array_values(array_diff(
+                (array)($payload['reason_codes']??[]),[
+                'ANSWER_EQUIVALENT_EXISTING','ANSWER_EQUIVALENT_PLANNED',
+                'CONTEXT_REFRESH_FAILED','CONTEXT_REFRESH_STALE',
+                'CONTEXT_FAMILY_MISSING','PSTE_CONTEXT_QUERY_MISSING']));
+            $payload['portal_context']=[
+                'inventory_snapshot_sha256'=>(string)($inventory['sha256']??''),
+                'editorial_plan_snapshot_sha256'=>(string)($plan['sha256']??'NOT_AVAILABLE'),
+                'editorial_plan_status'=>(string)($plan['status']??'AVAILABLE'),
+                'matches'=>[], 'synced_at_utc'=>gmdate('c'),
+                'semantic_comparison'=>'NOT_RUN_SINGLE_EXTERNAL_SEO_OWNER'];
+            $payload['context_state']='CURRENT';
+            return ['state'=>'CURRENT','reason_code'=>null,'matches'=>[],'payload'=>$payload];
+        }
+"""
+assert context.count(anchor)==1
+context=context.replace(anchor,contextFast+"\n"+anchor)
+call="        $evaluation=PSTE_Context_Evaluator::evaluate($payload,$inventory,$plan,$rowIndex);"
+assert repository.count(call)==1
+repository=repository.replace(call,"        $evaluation=PSTE_Context_Evaluator::evaluate($payload,$inventory,$plan,$rowIndex,$topicKey);")
+changes={PLAN:plan.encode("utf-8"),REPO:repository.encode("utf-8"),CONTEXT:context.encode("utf-8")}
 with ZipFile(target,"w") as out:
     for info,b in files:
         out.writestr(info,changes.get(info.filename,b))
-for k,new in [(PLAN,plan),(REPO,repository)]:
+for k,new in [(PLAN,plan),(REPO,repository),(CONTEXT,context)]:
     old=data[k].decode("utf-8")
     print("PATCHED",k,"old",len(old),"new",len(new))
     print("DIFF_LINES",len(list(difflib.unified_diff(old.splitlines(),new.splitlines()))))
