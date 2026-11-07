@@ -150,13 +150,17 @@ pserc_reader = (ROOT / "QA_ONLY/pste_kisten_pserc_plan_method.inc").read_text(en
 anchor = "    public static function renderManualBrief(): void {"
 assert patched.count(anchor) == 1
 patched = patched.replace(anchor, pserc_reader + anchor)
+parkhaus_reader = (ROOT / "QA_ONLY/pste_kisten_complete_parkhaus_method.inc").read_text(encoding="utf-8")
+assert patched.count(anchor) == 1
+patched = patched.replace(anchor, parkhaus_reader + anchor)
 # Export the current existing plan with the existing MINI batch; a missing/stale
 # PSERC plan is visibly incomplete and must never count as editorial FREI.
 old = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
                 $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
 new = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
-                $batch['parkhaus_pserc_plan']=self::readExistingPsercPlanForParkhaus();
-                $batch['parkhaus_complete']=false; // WP/PSTE/PSERC overall coverage NOT YET PROVEN.
+                $batch['parkhaus_snapshot']=self::readParkhausForMini();
+                $batch['parkhaus_complete']=!empty($batch['parkhaus_snapshot']['complete']);
+                $batch['parkhaus_sha256']=(string)($batch['parkhaus_snapshot']['sha256']??'');
                 $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
 assert patched.count(old) == 1
 patched = patched.replace(old,new)
