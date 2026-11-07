@@ -204,27 +204,43 @@ FILE hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php bytes 83
  703:         .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizin
 ### HD-009-AFFILIATE-ZENTRALE
 ZIP exists True
-ZIP files 30
+ZIP files 33
+ASSET affiliate-portal-router/assets/hdar-ci-logo-original.png 150989
+ASSET affiliate-portal-router/assets/hdar-ci-malen-zeichnen.webp 168684
+ASSET affiliate-portal-router/assets/hdar-ci-modellbau.webp 139884
 ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-square.webp 58370
 ASSET affiliate-portal-router/assets/hdar-hobby-modellbau-wide.webp 31768
-FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 704968 hits 94
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 711919 hits 121
  352:         add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
- 1948:     public function inject_glossary_single_banner($content) {
- 1957:         $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
- 1958:         $mobile_slot = $this->render_affiliate_slot($post_id, 'glossary_single_mobile_banner', 'portal_context', '');
- 2438:             $own = HDAR_Amazon_Start::render_slot($context, $slot_type, $content_id);
- 2465:                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
- 2466:                         $uses_editorial_single_chrome = $is_glossary_single_slot;
- 2490:                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
- 2641:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
- 2643:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
- 3651:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
- 3849:         $glossary_single_banner = $required_creative_type === 'banner'
- 3851:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
- 3878:             if (!$glossary_single_banner) {
- 4020:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
- 5121:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
- 8391:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
+ 1949:     public function inject_glossary_single_banner($content) {
+ 1958:         $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
+ 1959:         $mobile_slot = $this->render_affiliate_slot($post_id, 'glossary_single_mobile_banner', 'portal_context', '');
+ 2439:             $own = HDAR_Amazon_Start::render_slot($context, $slot_type, $content_id);
+ 2466:                         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2467:                         $uses_editorial_single_chrome = $is_glossary_single_slot;
+ 2491:                         if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
+ 2542:         $square = in_array($slot, array('glossary_single_banner','glossary_single_desktop_banner'), true);
+ 2544:             in_array($slot, array('glossary_single_mobile_banner','post_inline_banner','hub_mid_banner','template_mid_banner'), true);
+ 2549:         if ($topic === '' || in_array(strtolower($topic), array('hobbyregister','glossar','hobby depot','hobbys'), true)) { return ''; }
+ 2556:         if (is_array($register_row) && class_exists('HD_Hobbyregister_Core_Stable127') &&
+ 2557:             method_exists('HD_Hobbyregister_Core_Stable127','image_entry')) {
+ 2558:             $entry = HD_Hobbyregister_Core_Stable127::image_entry((string)($register_row['registry_id'] ?? ''));
+ 2606:             !function_exists('hd_hobbyregister_ready') || !hd_hobbyregister_ready() ||
+ 2607:             !function_exists('hd_hobbyregister_records')) { return; }
+ 2609:         if (!preg_match('~^/hobbyregister/([a-z0-9-]+)/?$~i',$path,$found)) { return; }
+ 2611:         foreach ((array)hd_hobbyregister_records() as $item) {
+ 2618:             'post_id'=>0,'post_type'=>'hobbyregister_profile',
+ 2624:         $html=$this->render_affiliate_slot_for_context('hobbyregister_'.$slug,$context,'glossary_single_desktop_banner','portal_context','');
+ 2625:         if (trim($html)==='') { $html=$this->hdar_ci_amazon_banner($context,'glossary_single_desktop_banner','hobbyregister_'.$slug,$row); }
+ 2747:         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 2749:         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+ 3757:         if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
+ 3955:         $glossary_single_banner = $required_creative_type === 'banner'
+ 3957:             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+ 3984:             if (!$glossary_single_banner) {
+ 4126:             'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
+ 5227:             array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
+ 8497:                 $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner');
 FILE affiliate-portal-router/includes/class-hdar-amazon-start.php bytes 22711 hits 52
  106:     public static function render_slot($context, $slot_type, $content_id = '') {
  321:         <p><label>Zielart <select name="hdar_target_type"><option value="post">Seite / Hobbyregister / Beitrag</option><option value="term">Kategorie / Glossargruppe</option></select></label>
@@ -280,3 +296,126 @@ FILE affiliate-portal-router/includes/trait-ppar-provider-registry.php bytes 571
  228:         $settings = $this->amazon_settings();
  229:         return !empty($settings['enabled']) && $this->amazon_tracking_id_valid((string) ($settings['tracking_id'] ?? ''));
  232:     private function amazon_campaign_asins($campaign) {
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php function image_entry(
+ if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static function image_entry($registry_id) {
+        $all = self::image_map();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function finder_rows() {
+        $out = array();
+        foreach (self::records() as $row) {
+            $t = array();
+            foreach (($row['traits'] ?? array()) as $id => $assignment) {
+                if (is_array($assignment) && array_key_exists('value', $assignment)) $t[$id] = $assignment['value'];
+            }
+            $p = $row['result_profile'] ?? array();
+            $out[] = array(
+                'registry_id' => $row['registry_id'] ?? '',
+                'name' => $row['canonical_name'] ?? '',
+                'world' => $row['source_identity']['natural_world'] ?? '',
+                'target_node_id' => $row['source_identity']['target_node_id'] ?? null,
+                'traits' => $t,
+                'profile' => array(
+                    'what_is_it' => $p['what_is_it'] ?? '',
+                    'what_do_you_do' => $p['what_do_you_do'] ?? '',
+                    'what_do_you_need' => $p['what_do_you_need'] ?? '',
+                    'appeal' => $p['appeal'] ?? '',
+                ),
+            );
+        }
+        return $out;
+    }
+}
+
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php function route(
+ PHP_URL_PATH) : parse_url($uri, PHP_URL_PATH);
+        return trim(is_string($path) ? $path : '', '/');
+    }
+
+    public static function route() {
+        $path = self::request_path();
+        if ($path === self::BASE_PATH) { return ['type'=>'index','slug'=>'']; }
+        if (strpos($path, self::BASE_PATH . '/') === 0) {
+            $rest = trim(substr($path, strlen(self::BASE_PATH) + 1), '/');
+            if ($rest !== '' && strpos($rest, '/') === false) { return ['type'=>'profile','slug'=>sanitize_title($rest)]; }
+        }
+        return ['type'=>'','slug'=>''];
+    }
+
+    public static function template_include($template) {
+        $route = self::route();
+        if ($route['type'] === '') { return $template; }
+        $own = dirname(__DIR__) . '/templates/hobbyregister.php';
+        return is_readable($own) ? $own : $template;
+    }
+
+    public static function pre_handle_404($preempt, $wp_query) {
+        if (self::route()['type'] === '') { return $preempt; }
+        if (is_object($wp_query)) {
+            if (property_exists($wp_query,'is_404')) { $wp_query->is_404 = false; }
+        }
+        if (function_exists('status_header')) { status_header(200); }
+        return true;
+    }
+
+    public static function document_title($title) {
+        $route = self::route();
+        if ($route['type'] === 'index') { return 'Hobbyregister | Hobby Depot'; }
+        if ($route['type'] === 'profile') {
+            $row = self::record_by_slug($route['slug']);
+            if ($row) { return (string)$row['canonical_name'] . ' – Hobby-Steckbrief | Hobby Depot'; }
+        }
+        return $title;
+    }
+
+    public static function head_meta() {
+        $route = self::route();
+        if ($route['type'] === '') { return; }
+        // Prototyp: Detailprofile bleiben bis zur verbindlichen CORE/REGISTER-Owner-Matrix noindex.
+        if ($route['type'] === 'profile') {
+            echo "<meta name=\"robots\" content=\"noindex,follow\">\n";
+        }
+    }
+
+    private static function base_url() { return home_url('/' . self::BASE_PATH . '/'); }
+    private static function profile_url($row) { return self::base_url() . rawurlencode(self::slug_for_record($row)) . '/'; }
+    private static function asset_url($name) { return plugins_url('assets/' . ltrim($name,'/'), dirname(__DIR__) . '/hobby-depot-hobbyregister-core.php'); }
+
+    private static function slug_for_record($row) {
+        return sanitize_title((string)($row['canonical_name'] ?? ''));
+    }
+
+    private static function build_slug_index() {
+        if (self::$slug_index !== null) { return; }
+    
+
+HD007 EXCERPT hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php function render_profile(
+er().self::render_groups($f).self::render_cards($rows,$f).'</div>'.self::styles().self::search_script();
+    }
+
+    public static function render_profile($slug) {
+        $row=self::record_by_slug($slug);
+        if(!$row){ if(function_exists('status_header'))status_header(404); return '<div class="hd-portal-section hdr-wrap"><p>Dieses Hobby wurde im Register nicht gefunden.</p></div>'.self::styles(); }
+        $name=(string)$row['canonical_name'];
+        return self::breadcrumb($name).'<div class="hd-portal-section hdr-wrap" data-hd-register-profile="1.2.16">'.self::hero(true,$row).'<div class="hdr-profile-grid"><aside>'.self::profile_sidebar($row).'</aside><main>'.self::full_article($row).'</main></div><div class="hdr-back"><a href="'.esc_url(self::base_url()).'">← Zur Hobbyregister-Startseite</a></div></div>'.self::styles();
+    }
+
+    public static function render_current() {
+        $r=self::route();
+        if($r['type']==='index')return self::render_index();
+        if($r['type']==='profile')return self::render_profile($r['slug']);
+        return '';
+    }
+
+    private static function styles() {
+        return '<style id="hd-hobbyregister-css-v120">'
+        .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizing:border-box;margin-top:18px;padding:0;font-family:Montserrat,Arial,sans-serif}.hdr-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0;padding:0;color:#778085;font-size:12px;line-height:1.4}.hdr-breadcrumb a{color:#667178!important;font-weight:400!important;text-decoration:none!important}.hdr-breadcrumb a:hover,.hdr-breadcrumb a:focus-visible{color:#2f969d!important}.hdr-breadcrumb b{color:#a0a7aa;font-weight:500}.hdr-breadcrumb span[aria-current=page]{color:#39464c;font-weight:650}.hdr-wrap{--petrol:#2f969d;--petrol-dark:#207b82;--ink:#17313c;--muted:#68767b;--cream:#f5f1e9;--line:rgba(49,67,73,.16);box-sizing:border-box;margin-top:5px;margin-bottom:58px;padding:0;color:var(--ink);font-family:Montserrat,Arial,sans-serif}.hdr-wrap *{box-sizing:border-box}.hdr-wrap a{text-decoration:none}'
+        .'.hdr-hero{position:relative;height:238px;overflow:hidden;border:1px solid var(--line);background:var(--cream)}.hdr-hero-copy{position:absolute;z-index:2;top:0;bottom:0;left:0;display:flex;width:46%;padding:clamp(24px,3.6vw,48px);flex-direction:column;justify-content:center;transform:translateY(-6px)}.hdr-her
