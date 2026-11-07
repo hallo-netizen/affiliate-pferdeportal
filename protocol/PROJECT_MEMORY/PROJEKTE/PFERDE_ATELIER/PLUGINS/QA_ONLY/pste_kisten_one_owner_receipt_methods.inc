@@ -23,14 +23,24 @@
         foreach($document['items'] as $item){
             if(!is_array($item))throw new RuntimeException('PSTE_MINI_SEO_RESULT_SHAPE_INVALID');
             $key=(string)($item['pool_key']??'');
-            if($key===''||isset($seen[$key])||!is_array($completed[$key]??null))
-                throw new RuntimeException('PSTE_MINI_SEO_UNKNOWN_OR_DUPLICATE_TOPIC');
+            if($key===''||isset($seen[$key])||!is_array($completed[$key]??null)){
+                // Unknown/malformed row is not an authorized source. Other rows proceed.
+                $clarification[$key!==''?$key:'UNKNOWN_ROW_'.count($seen)]=[
+                    'pool_key'=>$key,'reason_code'=>'SEO_UNKNOWN_OR_DUPLICATE_SOURCE',
+                    'next_action'=>'REVIEW_BY_SAME_EXTERNAL_SEO_OWNER'];
+                continue;
+            }
             $seen[$key]=true;
             $saved=$completed[$key];$raw=(string)($saved['raw_query']??'');
             if($raw===''||($saved['decision']??'')!=='JA'
                 ||!hash_equals($raw,(string)($item['raw_query']??''))
-                ||!hash_equals(hash('sha256',$key.'|'.$raw),(string)($item['source_sha256']??'')))
-                throw new RuntimeException('PSTE_MINI_SEO_ORIGINAL_SOURCE_BINDING_FAILED');
+                ||!hash_equals(hash('sha256',$key.'|'.$raw),(string)($item['source_sha256']??''))){
+                $clarification[$key]=['pool_key'=>$key,
+                    'reason_code'=>'SEO_ORIGINAL_SOURCE_BINDING_FAILED',
+                    'next_action'=>'REVIEW_BY_SAME_EXTERNAL_SEO_OWNER'];
+                unset($state['seo_decisions'][$key]);
+                continue;
+            }
             $box=(string)($item['box']??'');
             if(!in_array($box,['FREI','BELEGT','KLAERUNG'],true)){
                 $box='KLAERUNG';$item['reason']='EDITORIAL_OUTCOME_MISSING';
