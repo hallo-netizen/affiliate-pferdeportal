@@ -1,0 +1,134 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-repository.php
++++ b/Portal SEO Topic Engine/includes/class-pste-repository.php
+@@ -1277,7 +1277,7 @@
+                 $beforeType=(string)($payload['suggested_article_type']??$payload['proposed_article_type']??'');
+                 $beforeCategory=(int)($payload['target_category_id']??$row['current_category_id']??0);
+                 $beforeTitle=(string)($payload['editorial_title']??'');
+-                $prepared=self::prepareEditorialPayload($payload);
++                $prepared=self::prepareEditorialPayload($payload,$poolKey);
+                 $afterType=(string)($prepared['suggested_article_type']??$prepared['proposed_article_type']??'');
+                 $afterCategory=(int)($prepared['target_category_id']??0);
+                 $afterTitle=(string)($prepared['editorial_title']??'');
+@@ -1476,7 +1476,7 @@
+                 if(!empty($payload['recovery_quarantined'])){
+                     $prepared=self::preserveRecoveryQuarantineForEditorialMigration($payload);
+                 }else{
+-                    $prepared=self::resetEditorialVariantDerivedState(self::prepareEditorialPayload($payload));
++                    $prepared=self::resetEditorialVariantDerivedState(self::prepareEditorialPayload($payload,$poolKey));
+                 }
+                 if(self::rawSourceFields($prepared)!==$rawBefore)throw new RuntimeException('PSTE_EDITORIAL_PREPARE_RAW_SOURCE_MUTATION');
+                 $prepared['editorial_migration_prepare_receipt']=['contract'=>'PSTE_EDITORIAL_MIGRATION_PREPARE_RECEIPT_V1','job_uuid'=>$jobUuid,'ruleset'=>PSTE_Editorializer::RULESET,'raw_source_sha256'=>$rawSha,'recovery_quarantine_preserved'=>!empty($prepared['recovery_quarantined']),'prepared_at_utc'=>gmdate('c')];
+@@ -1591,8 +1591,9 @@
+         foreach($rows as $row){
+             $payload=json_decode((string)($row['payload_json']??''),true);
+             if(!is_array($payload))throw new RuntimeException('PSTE_EDITORIAL_RULESET_PAYLOAD_INVALID');
+-            $payload=self::resetEditorialVariantDerivedState(self::prepareEditorialPayload($payload));
+-            $prepared[(string)$row['pool_key']]=['row'=>$row,'payload'=>$payload];
++            $poolKey=(string)($row['pool_key']??'');
++            $payload=self::resetEditorialVariantDerivedState(self::prepareEditorialPayload($payload,$poolKey));
++            $prepared[$poolKey]=['row'=>$row,'payload'=>$payload];
+             if(!empty($payload['editorialization']['resolved'])&&(string)($payload['editorial_intent_key']??'')!==''){
+                 $groups[(string)$payload['editorial_intent_key']][]=(string)$row['pool_key'];
+             }
+@@ -1848,10 +1849,15 @@
+     }
+     private static function canonicalizeValue($value){if(!is_array($value))return $value;if($value===[])return [];$list=array_keys($value)===range(0,count($value)-1);if($list)return array_map([self::class,'canonicalizeValue'],$value);ksort($value,SORT_STRING);foreach($value as $k=>$v)$value[$k]=self::canonicalizeValue($v);return $value;}
+ 
+-    private static function prepareEditorialPayload(array $payload): array {
++    private static function prepareEditorialPayload(array $payload,string $poolKey=''): array {
+         $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
+         if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')throw new RuntimeException('PSTE_NORMAL_METADATA_PATH_BASELINE_REQUIRED');
+-        return PSTE_Normal_Metadata_Path::applyToPayload($payload,$baseline,(string)($payload['topic_family_key']??''));
++        // A deliberately new semantic run must consume the one original MINI decision.
++        // The regular 100er reentry does not call this method a second time.
++        $proof=[];
++        if($poolKey!==''&&class_exists('PSTE_Mini_Workflow'))
++            $proof=PSTE_Mini_Workflow::approvedRelevanceFor($poolKey,PSTE_Editorializer::sourceQuery($payload));
++        return PSTE_Normal_Metadata_Path::applyToPayload($payload,$baseline,(string)($payload['topic_family_key']??''),$proof);
+     }
+ 
+     private static function recordTopicHistory(string $poolKey,string $action,string $from,string $to,array $details,int $userId): void {
+@@ -3188,7 +3194,7 @@
+             $promoted[]=$key;if($wasPlanning)$revalidated[]=$key;if($isStoredTitleCandidate)$titleCandidatesRevalidated++;
+         }
+         $promoted=array_values(array_unique($promoted));$revalidated=array_values(array_unique($revalidated));$demoted=array_values(array_unique($demoted));$refreshKeys=array_values(array_unique(array_merge($promoted,$nonpassingKeys)));
+-        if($refreshKeys)self::refreshPortalContextForKeysUsingBinding($refreshKeys,$contextBinding,$structureHash);
++        if($refreshKeys)self::refreshPortalContextForKeysUsingBinding($refreshKeys,$contextBinding,$structureHash,true);
+         $usable=[];if($promoted){$quoted=[];foreach($promoted as $key)$quoted[]=$wpdb->prepare('%s',$key);$sql="SELECT pool_key FROM $table WHERE pool_key IN (".implode(',',$quoted).") AND planning_suitability='YES' AND context_state IN ('CURRENT','NOT_REQUIRED') ORDER BY pool_key ASC";$usable=array_values(array_map('strval',(array)$wpdb->get_col($sql)));}
+         return ['contract'=>'PSTE_RETAINED_BACKLOG_REANALYSIS_BATCH_V2_SHARED_READINESS','processed'=>$processed,'promoted'=>count($promoted),'nonpassing_recomputed'=>$nonpassingRecomputed,'context_refreshed'=>count($refreshKeys),'promoted_keys'=>$promoted,'revalidated_current_keys'=>$revalidated,'demoted_current_keys'=>$demoted,'title_candidates_generated'=>count($titleCandidates),'title_candidates'=>$titleCandidates,'title_candidates_revalidated'=>$titleCandidatesRevalidated,'structure_gap_revalidated'=>$structureGapRevalidated,'review_revalidated'=>$reviewRevalidated,'retained_non_producing_revalidated'=>$retainedNonProducingRevalidated,'usable_keys'=>$usable,'cursor'=>$last,'complete'=>count($rows)<$limit,'provider_calls'=>0,'inventory_source'=>'BOUND_CONTEXT_INDEX_STAGE','source_rows_deleted'=>0,'article_or_taxonomy_write_attempted'=>false,'production_handoff_attempted'=>false,'content_or_design_write_attempted'=>false];
+     }
+@@ -3266,12 +3272,12 @@
+     }
+ 
+     /** Targeted context refresh against the immutable already-built context index; no full site scan. */
+-    public static function refreshPortalContextForKeysUsingBinding(array $poolKeys,array $binding,string $structureHash): array {
++    public static function refreshPortalContextForKeysUsingBinding(array $poolKeys,array $binding,string $structureHash,bool $alreadyChecked=false): array {
+         global $wpdb;$poolKeys=array_values(array_unique(array_filter(array_map('strval',$poolKeys))));if(!$poolKeys)return ['processed'=>0,'last_id'=>0];
+         if(($binding['contract']??'')!=='PSTE_CONTEXT_INDEX_RUNTIME_BINDING_V2')throw new RuntimeException('PSTE_CONTEXT_BINDING_INVALID');if($structureHash==='')throw new RuntimeException('PSTE_CONTEXT_STRUCTURE_HASH_MISSING');
+         $rows=self::topicPoolRowsByKeys($poolKeys);
+         $inventory=['contract'=>'PSTE_INVENTORY_SNAPSHOT_V2','sha256'=>(string)($binding['inventory_sha256']??''),'items'=>[]];$plan=['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>'AVAILABLE','sha256'=>(string)($binding['editorial_plan_sha256']??'NOT_AVAILABLE'),'items'=>[]];$index=['__pste_context_index_binding'=>$binding];
+-        $result=self::refreshPortalContextBatch($rows,$inventory,$plan,$index,$structureHash);if((int)($result['processed']??-1)!==count($poolKeys))throw new RuntimeException('PSTE_CONTEXT_TARGETED_BINDING_REFRESH_INCOMPLETE');return $result;
++        $result=self::refreshPortalContextBatch($rows,$inventory,$plan,$index,$structureHash,$alreadyChecked);if((int)($result['processed']??-1)!==count($poolKeys))throw new RuntimeException('PSTE_CONTEXT_TARGETED_BINDING_REFRESH_INCOMPLETE');return $result;
+     }
+ 
+     public static function adminTopicPoolStats(): array {
+@@ -3421,7 +3427,7 @@
+         );
+     }
+ 
+-    public static function refreshPortalContextBatch(array $rows,array $inventory,array $plan,array $index,string $structureHash): array {
++    public static function refreshPortalContextBatch(array $rows,array $inventory,array $plan,array $index,string $structureHash,bool $alreadyChecked=false): array {
+         // No duplicated central pass for the thousands of non-producible research rows.
+         // Materialize full bound inventory ONLY when a real NORMAL_PASS candidate needs
+         // the existing one-owner decision; memoize for the rest of this small batch.
+@@ -3452,7 +3458,7 @@
+         try{
+             foreach($rows as $row){
+                 try{
+-                    self::refreshPortalContextForRow($row,$inventory,$plan,$index,$structureHash,$readCentralInventory,$categories);
++                    self::refreshPortalContextForRow($row,$inventory,$plan,$index,$structureHash,$readCentralInventory,$categories,$alreadyChecked);
+                 }catch(Throwable $rowError){
+                     throw new RuntimeException(
+                         'PSTE_CONTEXT_TOPIC_'.(string)($row['pool_key']??'UNKNOWN').':'.$rowError->getMessage(),
+@@ -3472,13 +3478,24 @@
+         }
+     }
+ 
+-    public static function refreshPortalContextForRow(array $row,array $inventory,array $plan,array $index,string $structureHash,callable $readCentralInventory,array $categories): void {
++    public static function refreshPortalContextForRow(array $row,array $inventory,array $plan,array $index,string $structureHash,callable $readCentralInventory,array $categories,bool $alreadyChecked=false): void {
+         global $wpdb;
+         $payload=json_decode((string)($row['payload_json']??''),true);
+         if(!is_array($payload))throw new RuntimeException('PSTE_TOPIC_PAYLOAD_INVALID');
+-        $payload=self::prepareEditorialPayload($payload);
+         $topicKey=(string)($row['pool_key']??'');
+         if($topicKey==='')throw new RuntimeException('PSTE_TOPIC_KEY_MISSING');
++        if($alreadyChecked){
++            // The current reentry has just stored this normal-path decision against
++            // this exact portal structure. Refresh context only, not the same decision.
++            if((string)($row['context_state']??'')!=='PENDING'
++                ||(string)($row['structure_sha256']??'')!==$structureHash
++                ||(string)($payload['normal_metadata_path']['contract']??'')!==PSTE_Normal_Metadata_Path::CONTRACT)
++                throw new RuntimeException('PSTE_CONTEXT_REENTRY_CHECKED_STATE_INVALID');
++        }else{
++            // Independent context rebuilding may need a new normal decision, but
++            // must not forget the original source-bound MINI-JA when doing so.
++            $payload=self::prepareEditorialPayload($payload,$topicKey);
++        }
+ 
+         $rowIndex=$index;
+         if(is_array($index['__pste_context_index_binding']??null)){
+@@ -3512,7 +3529,13 @@
+         $normal=(array)($payload['normal_metadata_path']??[]);
+         if(($normal['status']??'')==='NORMAL_PASS'&&!empty($normal['ok'])
+             &&empty($normal['title_candidate_only'])){
+-            $payload=PSTE_Planning_Readiness_Gate::apply($payload,$readCentralInventory(),$categories);
++            if($alreadyChecked){
++                // The same inventory was already checked by reanalyzeRetainedBacklogBatch.
++                if((string)($payload['planning_readiness_gate']['contract']??'')!==PSTE_Planning_Readiness_Gate::CONTRACT)
++                    throw new RuntimeException('PSTE_CONTEXT_REENTRY_MISSING_PLANNING_DECISION');
++            }else{
++                $payload=PSTE_Planning_Readiness_Gate::apply($payload,$readCentralInventory(),$categories);
++            }
+         }else{
+             // A historical receipt may never make an unresolved current path planable.
+             unset($payload['planning_readiness_gate'],$payload['pre_title_duplicate_gate']);
