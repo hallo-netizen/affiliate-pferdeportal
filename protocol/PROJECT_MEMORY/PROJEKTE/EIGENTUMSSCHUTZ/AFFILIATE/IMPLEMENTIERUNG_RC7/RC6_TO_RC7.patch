@@ -1,0 +1,283 @@
+--- a/affiliate-portal-router/affiliate-portal-router.php
++++ b/affiliate-portal-router/affiliate-portal-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Hab & Bewahr – Affiliate-Zentrale
+  * Description: Zentrale Affiliate-Verwaltung für Hab & Bewahr mit unabhängiger Zielquelle und bestehenden Provider-Funktionen.
+- * Version: 0.1.3-rc6
++ * Version: 0.1.4-rc7
+  * Author: Hab & Bewahr
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -1114,8 +1114,12 @@
+         if ($this->article_hybrid_enabled()) {
+             $plan=$this->article_plan_get($post_id);
+             if (!is_array($plan) || !$this->article_plan_is_current($post_id,$plan)) { return ''; }
+-            if ($kind==='products' && ($plan['products']['status'] ?? '')==='ready') {
+-                return $this->article_plan_render_products($post_id,(array)($plan['products']['campaign_post_ids'] ?? array()));
++            if ($kind==='products') {
++                if (($plan['products']['status'] ?? '')==='ready') {
++                    $existing=$this->article_plan_render_products($post_id,(array)($plan['products']['campaign_post_ids'] ?? array()));
++                    if (trim((string)$existing)!=='') { return $existing; }
++                }
++                return $this->hb_amazon_article_fallback($post_id);
+             }
+             if ($kind==='banner' && in_array(($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+                 return $this->article_plan_render_banner_campaign($post_id,absint($plan['banner']['campaign_post_id'] ?? 0));
+@@ -1128,7 +1132,11 @@
+             return $this->render_affiliate_slot($post_id,'post_inline_banner','primary_product','');
+         }
+         if ($kind==='products') {
+-            return $this->render_affiliate_slot($post_id,'post_bottom_products','primary_product','');
++            $existing=$this->render_affiliate_slot($post_id,'post_bottom_products','primary_product','');
++            // Debug comments are not visible offers. Keep any real original ad.
++            if (preg_match('/<(?:a|div|section)\b/i',(string)$existing)) { return $existing; }
++            $amazon=$this->hb_amazon_article_fallback($post_id);
++            return $amazon!=='' ? $amazon : $existing;
+         }
+         return '';
+     }
+--- a/affiliate-portal-router/includes/trait-ppar-hb-amazon.php
++++ b/affiliate-portal-router/includes/trait-ppar-hb-amazon.php
+@@ -150,7 +150,7 @@
+         echo '<tr><th>DataForSEO API-Login</th><td><input type="text" name="dfs_login" autocomplete="off" value="'.esc_attr($external ? '' : $s['login']).'" placeholder="'.($external?'über wp-config.php':'API-Login').'"></td></tr>';
+         echo '<tr><th>DataForSEO API-Passwort</th><td><input type="password" name="dfs_password" autocomplete="new-password" value="" placeholder="'.($external?'über wp-config.php':($s['password']!==''?'bereits gespeichert':'API-Passwort')).'"><p class="description">Leer lassen = gespeichertes Passwort beibehalten.</p></td></tr>';
+         echo '</table><p><button type="submit" class="button button-primary">Speichern</button></p></form>';
+-        echo '<h2>Automatischer Ablauf</h2><p>Automatische ASIN-Recherche für bestehende Produktkarten. Wenn noch keine idealo-/eBay-Produkte vorhanden sind, werden nur konkret zugeordnete Produktkategorien aus dem aktiven Hab-&amp;-Bewahr-Katalog recherchiert. Keine Amazon-Bilder, Preise oder Bewertungen aus DataForSEO.</p>';
++        echo '<h2>Automatischer Ablauf</h2><p>Automatische ASIN-Recherche für bestehende Produktkarten, passende veröffentlichte Beiträge und konkret zugeordnete Produktkategorien aus dem aktiven Hab-&amp;-Bewahr-Katalog. Neue Beiträge werden ohne eigenen kostenpflichtigen Speichervorgang beim nächsten Suchlauf berücksichtigt. Keine Amazon-Bilder, Preise oder Bewertungen aus DataForSEO.</p>';
+         if ($this->hb_amazon_dfs_ready($s)) {
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+             wp_nonce_field('ppar_hb_amazon_run','ppar_hb_amazon_run_nonce');
+@@ -164,6 +164,7 @@
+         echo '<p><strong>Letzte Meldung:</strong> '.esc_html((string)($c['message'] ?? 'Noch keine Recherche')).'</p>';
+         echo '<p><strong>Letzte eindeutige ASIN:</strong> '.(!empty($c['last_match_at'])?esc_html(wp_date('d.m.Y H:i',absint($c['last_match_at']))):'noch keine').'</p>';
+         echo '<p><strong>Automatisch geprüfte Hab-Produktkategorien:</strong> '.esc_html((string)count((array)($c['category_checked'] ?? array()))).'</p>';
++        echo '<p><strong>Automatisch geprüfte Beiträge:</strong> '.esc_html((string)count((array)($c['article_checked'] ?? array()))).'</p>';
+         $found=0; foreach ((array)($c['category_products'] ?? array()) as $row) { $found+=count((array)($row['items'] ?? array())); }
+         echo '<p><strong>Gespeicherte Amazon-Einzelproduktlinks:</strong> '.esc_html((string)$found).'</p>';
+         echo '<p><strong>Nächste automatische Prüfung:</strong> '.esc_html($this->hb_amazon_dfs_ready($s) && wp_next_scheduled(self::HB_AMAZON_CRON) ? 'geplant' : 'nicht geplant').'</p>';
+@@ -319,6 +320,156 @@
+                 'category_slug'=>$slug,'source'=>'hab_category');
+         }
+         return null;
++    }
++
++
++    /** Published posts re-use the same Hab category catalog and DataForSEO worker.
++     * The article itself supplies extra query specificity, never a new product catalog.
++     * Return null for general advice, wrong categories or non-commercial content.
++     */
++    private function hb_amazon_article_topic($post) {
++        if (!is_object($post) || empty($post->ID)) { return null; }
++        $id=absint($post->ID);
++        if (!function_exists('get_post_status') || !function_exists('get_post_type') ||
++            get_post_status($id)!=='publish' || get_post_type($id)!=='post') { return null; }
++        if ((string)get_post_meta($id,'_hbdp_article_no_ads',true)==='1' ||
++            (function_exists('hbdp_article_is_urgent') && hbdp_article_is_urgent($post))) { return null; }
++        if (!class_exists('PPAR_Portal_Source') || !method_exists('PPAR_Portal_Source','catalog')) { return null; }
++        $catalog=PPAR_Portal_Source::catalog();
++        if (is_wp_error($catalog) || !is_array($catalog)) { return null; }
++        $products=array();
++        foreach ((array)($catalog['product_targets'] ?? array()) as $row) {
++            $slug=sanitize_key((string)($row['category_slug'] ?? ''));
++            $family=sanitize_text_field((string)($row['title'] ?? ''));
++            if ($slug!=='' && $family!=='' && strlen($family)<=90) { $products[$slug]=$family; }
++        }
++        // Only a direct WordPress category that exists as a product target in
++        // the SAME revision-bound Hab portal catalog can authorize this search.
++        $terms=get_the_terms($id,'category');
++        if (is_wp_error($terms) || !is_array($terms)) { return null; }
++        $title=sanitize_text_field((string)($post->post_title ?? ''));
++        $title=trim(preg_replace('/\s+/u',' ',$title));
++        if (strlen($title)<8 || strlen($title)>180) { return null; }
++        $title_terms=explode(' ',$this->hb_amazon_normalize_title($title));
++        foreach ($terms as $term) {
++            $slug=sanitize_key((string)($term->slug ?? ''));
++            $family=(string)($products[$slug] ?? '');
++            if ($family==='') { continue; }
++            $matched=true;
++            foreach (explode(' ',$this->hb_amazon_normalize_title($family)) as $needle) {
++                if ($needle==='') { continue; }
++                $found=false;
++                foreach ($title_terms as $word) {
++                    if (in_array($word,array($needle,$needle.'n',$needle.'en',$needle.'s'),true)) { $found=true; break; }
++                }
++                if (!$found) { $matched=false; break; }
++            }
++            if (!$matched) { continue; }
++            // Do not submit entire prose passages as shopping searches.
++            $query=strlen($title)<=110 ? $title : $family;
++            $hash=hash('sha256',$this->hb_amazon_normalize_title($query).'|'.$slug);
++            return array('id'=>$id,'title'=>$query,'family'=>$family,
++                'category_slug'=>$slug,'source'=>'hab_article','hash'=>$hash);
++        }
++        return null;
++    }
++
++    /** Bounded scan; new published posts or changed titles/categories are
++     * discovered at later scheduled runs. Saving a post itself causes NO API call.
++     */
++    private function hb_amazon_article_candidate(&$control) {
++        $offset=max(0,absint($control['article_scan_offset'] ?? 0));
++        $posts=get_posts(array('post_type'=>'post','post_status'=>'publish',
++            'posts_per_page'=>100,'offset'=>$offset,'orderby'=>'ID','order'=>'ASC','suppress_filters'=>true));
++        if (!$posts && $offset>0) {
++            $offset=0;
++            $posts=get_posts(array('post_type'=>'post','post_status'=>'publish',
++                'posts_per_page'=>100,'offset'=>0,'orderby'=>'ID','order'=>'ASC','suppress_filters'=>true));
++        }
++        $control['article_scan_offset']=count((array)$posts)<100?0:$offset+100;
++        $checked=(array)($control['article_checked'] ?? array());
++        $saved=(array)($control['article_products'] ?? array());
++        foreach ((array)$posts as $post) {
++            $candidate=$this->hb_amazon_article_topic($post);
++            if (!$candidate) { continue; }
++            $id=$candidate['id'];$hash=$candidate['hash'];
++            if (($saved[$id]['hash'] ?? '')===$hash &&
++                !empty($saved[$id]['items']) && absint($saved[$id]['at'] ?? 0)>time()-14*DAY_IN_SECONDS) { continue; }
++            if (($checked[$id]['hash'] ?? '')===$hash &&
++                absint($checked[$id]['at'] ?? 0)>time()-7*DAY_IN_SECONDS) { continue; }
++            return $candidate;
++        }
++        return null;
++    }
++
++    /** Article results never promise a feature (e.g. without WLAN) unless the
++     * product title actually states it; generic titles still require the family.
++     */
++    private function hb_amazon_article_results($topic,$items) {
++        $found=$this->hb_amazon_category_results((string)$topic['family'],$items);
++        $article_title=$this->hb_amazon_normalize_title((string)$topic['title']);
++        // The normalized title is sorted, so check individual terms rather than a phrase.
++        $words=explode(' ',$article_title);
++        $family_words=explode(' ',$this->hb_amazon_normalize_title((string)$topic['family']));
++        $stop=array('welche','welcher','welches','wie','was','wer','wann','warum','sind','ist',
++            'eine','einen','einem','einer','oder','aber','welchen','gibt','es','den','das','die',
++            'der','mit','ohne','fuer','bei','von','auf','im','am','in','und','als','zum','zur',
++            'richtig','gut','beste','besten','kaufen','vergleich','test','ratgeber','tipps',
++            'im','haus','wohnung','garten','keller','sichern','schuetzen','installieren');
++        $modifiers=array_values(array_filter($words,static function($w) use ($family_words,$stop) {
++            return strlen($w)>=3 && !in_array($w,$family_words,true) && !in_array($w,$stop,true);
++        }));
++        $has_without=in_array('ohne',$words,true);
++        $negative_terms=array_values(array_intersect($modifiers,array('wlan','bohren','kabel','akku','strom','internet','abo')));
++        if ($has_without && !$negative_terms) { return array(); }
++        return array_values(array_filter($found,function($item) use ($modifiers,$has_without,$negative_terms) {
++            $title=' '.$this->hb_amazon_normalize_title((string)($item['title'] ?? '')).' ';
++            if ($has_without) {
++                if (strpos($title,' ohne ')===false) { return false; }
++                foreach ($negative_terms as $term) { if (strpos($title,' '.$term.' ')===false) { return false; } }
++            }
++            if (!$modifiers) { return true; }
++            $one=false;
++            foreach ($modifiers as $term) {
++                $present=strpos($title,' '.$term.' ')!==false;
++                // Numbers and pack sizes must always agree, not just one other word.
++                if (preg_match('/^[0-9]/',$term) && !$present) { return false; }
++                if ($present) { $one=true; }
++            }
++            return $one;
++        }));
++    }
++
++    /** Only render where the EXISTING Hab article product slot has no valid
++     * provider campaign; do not override the original article plan or adverts.
++     */
++    private function hb_amazon_article_fallback($post_id) {
++        if (!$this->hb_amazon_ready() || !function_exists('get_post')) { return ''; }
++        $topic=$this->hb_amazon_article_topic(get_post(absint($post_id)));
++        if (!$topic) { return ''; }
++        $c=get_option(self::HB_AMAZON_CONTROL,array());
++        $article_products=(array)($c['article_products'] ?? array());
++        $saved=(array)($article_products[$topic['id']] ?? array());
++        $items=(($saved['hash'] ?? '')===$topic['hash'] &&
++            absint($saved['at'] ?? 0)>time()-14*DAY_IN_SECONDS)
++            ? (array)($saved['items'] ?? array()) : array();
++        $parts=array();
++        foreach ($items as $item) {
++            $asin=strtoupper(trim((string)($item['asin'] ?? '')));
++            $url=$this->hb_amazon_direct_url($asin);
++            $title=sanitize_text_field((string)($item['title'] ?? ''));
++            if ($url!=='' && $title!=='') {
++                $parts[]='<a href="'.esc_url($url).'" target="_blank" rel="sponsored nofollow noopener noreferrer">'.esc_html($title).'</a>';
++            }
++        }
++        // No invented product if no API result is available yet.
++        if (!$parts) {
++            $url='https://www.amazon.de/s?k='.rawurlencode($topic['title']).'&tag='.rawurlencode($this->hb_amazon_tag());
++            $parts[]='<a href="'.esc_url($url).'" target="_blank" rel="sponsored nofollow noopener noreferrer">Passende Angebote bei Amazon suchen</a>';
++        }
++        return '<div class="ppar-affiliate-slot ppar-hab-amazon-article" data-ppar-slot="post_bottom_products">'
++            . '<div class="ppar-affiliate-label">Anzeige</div>'
++            . '<div class="ppar-affiliate-content">'.implode(' · ',$parts).'</div></div>';
+     }
+ 
+     /** Select only genuine amazon.de organic listings that explicitly name the product family. */
+@@ -378,12 +529,17 @@
+                 if (!$result) { $control['message']='DataForSEO-Auftrag noch in Bearbeitung'; update_option(self::HB_AMAZON_CONTROL,$control,false); return; }
+                 $items = (array)($result[0]['items'] ?? array());
+                 $expected = (string)($control['pending_hash'] ?? '');
+-                $is_category = (string)($control['pending_source'] ?? '') === 'hab_category';
+-                $cid = absint($control['pending_post_id'] ?? 0);
+-                $source = $is_category ? null : $this->campaign_from_post(get_post($cid));
+-                $title = $is_category ? (string)($control['pending_title'] ?? '') : (is_array($source) ? (string)($source['title'] ?? '') : '');
+-                $hash_ok = $title!=='' && hash_equals($expected,hash('sha256',$this->hb_amazon_normalize_title($title)));
+-                $asin = (!$is_category && $hash_ok) ? $this->hb_amazon_exact_match_asin($title,$items) : '';
++                $pending_source=(string)($control['pending_source'] ?? '');
++                $is_category=$pending_source==='hab_category';
++                $is_article=$pending_source==='hab_article';
++                $cid=absint($control['pending_post_id'] ?? 0);
++                $topic=($is_article && $cid>0) ? $this->hb_amazon_article_topic(get_post($cid)) : null;
++                $source=($is_category || $is_article) ? null : $this->campaign_from_post(get_post($cid));
++                $title=($is_category || $is_article) ? (string)($control['pending_title'] ?? '') :
++                    (is_array($source) ? (string)($source['title'] ?? '') : '');
++                $hash_ok=$title!=='' && hash_equals($expected,
++                    $is_article ? (string)($topic['hash'] ?? '') : hash('sha256',$this->hb_amazon_normalize_title($title)));
++                $asin=(!$is_category && !$is_article && $hash_ok) ? $this->hb_amazon_exact_match_asin($title,$items) : '';
+                 if ($is_category) {
+                     $slug=sanitize_key((string)($control['pending_category_slug'] ?? ''));
+                     $found=$hash_ok ? $this->hb_amazon_category_results($title,$items) : array();
+@@ -399,6 +555,21 @@
+                     }
+                     $control['message']=$found ? count($found).' echte Amazon-Produktlinks für Hab-Kategorie gefunden' : 'Keine eindeutigen Amazon-Produktlinks für diese Hab-Kategorie';
+                     if ($found) { $control['last_match_at']=time(); }
++                } elseif ($is_article) {
++                    if ($hash_ok && is_array($topic)) {
++                        $found=$this->hb_amazon_article_results($topic,$items);
++                        $checked=(array)($control['article_checked'] ?? array());
++                        $checked[$cid]=array('hash'=>$expected,'at'=>time());
++                        $control['article_checked']=array_slice($checked,-500,null,true);
++                        $saved=(array)($control['article_products'] ?? array());
++                        // Invalidate any previous article search result on failed recheck.
++                        if ($found) { $saved[$cid]=array('at'=>time(),'hash'=>$expected,'items'=>$found); }
++                        else { unset($saved[$cid]); }
++                        $control['article_products']=array_slice($saved,-250,null,true);
++                        if ($found) { $control['last_match_at']=time(); }
++                        $control['message']=$found ? count($found).' passende Amazon-Links für Beitrag geprüft'
++                            : 'Keine eindeutig passenden Amazon-Produkte für Beitrag';
++                    } else { $control['message']='Beitrag inzwischen geändert oder nicht mehr freigegeben; veraltetes Ergebnis verworfen'; }
+                 } elseif ($asin!=='' && $cid>0 && is_array($source) && !empty($source['active'])) {
+                     $source['product_asins'] = array($asin);
+                     $saved=$this->save_campaign_record($source,$cid);
+@@ -419,8 +590,9 @@
+         }
+         if (absint($control['count'] ?? 0)>=5) { $control['message']='Tagesgrenze: 5 bezahlte Suchaufträge erreicht'; update_option(self::HB_AMAZON_CONTROL,$control,false); return; }
+         $candidate = $this->hb_amazon_dfs_candidate($control);
++        if (!$candidate) { $candidate=$this->hb_amazon_article_candidate($control); }
+         if (!$candidate) { $candidate=$this->hb_amazon_category_candidate($control); }
+-        if (!$candidate) { $control['message']='Keine neuen passenden Produkte oder veröffentlichten Hab-Produktkategorien'; update_option(self::HB_AMAZON_CONTROL,$control,false); return; }
++        if (!$candidate) { $control['message']='Keine neuen passenden Produkte, Beiträge oder Hab-Produktkategorien'; update_option(self::HB_AMAZON_CONTROL,$control,false); return; }
+         // The counter is reserved BEFORE the paid POST; a timeout can still be billable.
+         $control['count']=absint($control['count'] ?? 0)+1;
+         $control['last_attempt_at']=time();
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,7 +1,7 @@
+ === Hab & Bewahr – Affiliate-Zentrale ===
+ Requires at least: 6.0
+ Requires PHP: 7.4
+-Stable tag: 0.1.3-rc6
++Stable tag: 0.1.4-rc7
+ 
+ Complete independent installable candidate built from the 26-file neutral
+ affiliate source, preserving every existing source function. Adds local
