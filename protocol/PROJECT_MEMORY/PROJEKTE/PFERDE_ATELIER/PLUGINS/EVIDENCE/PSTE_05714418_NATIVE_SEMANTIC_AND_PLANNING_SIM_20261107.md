@@ -1,0 +1,15 @@
+# PSTE 0.57.144.18 – überprüfbare lokale Gesamtweg-Simulation – 07.11.2026
+
+**Quellcode/ZIP:** `PFERDEATELIER_PSTE_0.57.144.18_KISS_RELEVANZ_OHNE_TITELBEDINGUNG_NUR_TEST.zip`, SHA256 `3b0ce3971326753a44274a4d00b0a329e824df954f35e784db762f5935628abf`. 121 ZIP-Einträge, 83 PHP-Dateien, ZIP-Integrität PASS. Keine PSERC- oder K0-Dateien enthalten. Vorheriger QA-Bericht: 898 Einzeltests, 435/435 JA bei fünf Titelzuständen, 65/65 nicht-JA nicht als MINI-JA übernommen; allerdings Repository-Lauf dort vor dem eigentlichen Normalpfad abgefangen.
+
+**Verbesserte Simulation – diesmal mit dem echten PHP-Normalpfad und echter Planungsprüfung, ohne Abkürzung dieser Methoden:**
+- Quelle: 100 originale MINI-Eingaben, davon 87 JA und 13 NICHT-JA aus `pste_v17_fixture.json`; 1.165 Kategorien aus dem **mitgelieferten** Portal-Kategorieexport `fixtures/portal-category-map-v1.json`.
+- Klassen des Plugins geladen: tatsächlicher `PSTE_Editorializer::sourceQuery`, `PSTE_Mini_Workflow::approvedRelevanceFor`, `PSTE_Portal_Relevance_Gate`, `PSTE_Normal_Metadata_Path::applyToPayload`, `PSTE_Planning_Readiness_Gate::apply` einschließlich `PSTE_Cannibalization`.
+- Alle **87/87 JA** in echter Semantik-Relevanz als PROVEN, **0** Relevanzsperren, **87/87** bereits geprüfte Titel bytegleich erhalten.
+- Im simulierten Kategorienbestand: **24 NORMAL_PASS**, **63 STRUCTURE_GAP**. NICHT als tatsächliche WordPress-Produktionsquote ausgeben, da Term-IDs simuliert sind.
+- **24/24** absichtlich eingesetzte WordPress-Artikel-Dubletten (identisches SEO-Zielkeyword) vom **echten** Planungsgate blockiert; **24/24** Kontrollläufe mit leerem, nicht widersprechendem WordPress-Artikelbestand ebenfalls durch dasselbe Planungsgate ausgeführt.
+- Keine tatsächlichen WP-Beiträge, Kategorien oder K0-Daten geändert.
+
+**WICHTIGE REICHWEITENGRENZE:** Es wurde **KEINE echte WordPress-Installation mit der aktuellen produktiven WP-Datenbank** verwendet! WordPress-Funktionen und SQL-Datenbankoberfläche sind lokal simuliert; die 1.165 Kategoriebeschreibungen sind reales historisches Plugin-Fixture, aber deren *numerische Term-IDs sind künstlich*, nicht die tatsächlichen WP-IDs. Die 5.016 aktuellen WP-Themen und vorhandenen Seiten-/Beitragsdaten sind nur in aggregierten Nutzer-Diagnosen verfügbar, **kein kompletter WordPress-Datenbank-Snapshot**. Deshalb keine Aussage „alle 87 in WordPress produktionsbereit“ und kein Beweis realer Kategoriezuordnung / echter Kannibalisierung. Auch die vollständige Repository-Schreib-/Kontextaktualisierung wurde nicht vollständig simuliert. Für einen echten 1:1-WP-E2E-Beweis wären ein isolierter Klon plus kopierter echter Datenbank nötig.
+
+**Freigabestand:** ZIP bleibt identisch bei 0.57.144.18. Keine neue Version auf Basis des bestandenen Teilsimulationstests. Ein erneuter WordPress-Stapelbericht würde die tatsächliche Verbesserung belegen; keine neue ZIP-Installation nötig, falls 0.57.144.18 bereits läuft. K0, PSERC und Live-Inhalte unverändert.
