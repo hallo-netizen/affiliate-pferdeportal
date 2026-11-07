@@ -144,6 +144,23 @@ assert patched.count(a) == 1
 patched = patched.replace(a,b)
 assert patched.count("function validateResult(") == 1
 
+# The already existing PSERC active plan is a READ-ONLY SOURCE, not a second
+# semantic reviewer. Add one method in the same MINI class; no extra worker/class.
+pserc_reader = (ROOT / "QA_ONLY/pste_kisten_pserc_plan_method.inc").read_text(encoding="utf-8")
+anchor = "    public static function renderManualBrief(): void {"
+assert patched.count(anchor) == 1
+patched = patched.replace(anchor, pserc_reader + anchor)
+# Export the current existing plan with the existing MINI batch; a missing/stale
+# PSERC plan is visibly incomplete and must never count as editorial FREI.
+old = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
+                $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
+new = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
+                $batch['parkhaus_pserc_plan']=self::readExistingPsercPlanForParkhaus();
+                $batch['parkhaus_complete']=false; // WP/PSTE/PSERC overall coverage NOT YET PROVEN.
+                $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
+assert patched.count(old) == 1
+patched = patched.replace(old,new)
+
 (OUT/"class-pste-mini-workflow.php").write_text(patched,encoding="utf-8")
 (OUT/"PSTE_KISTEN_EIN_IMPORT_OWNER_QA.diff").write_text(
     ''.join(difflib.unified_diff(original.splitlines(True),patched.splitlines(True),
