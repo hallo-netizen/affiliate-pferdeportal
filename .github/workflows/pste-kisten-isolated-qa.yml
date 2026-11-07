@@ -1,4 +1,4 @@
-name: PSTE Kistenprinzip isolated source inspection
+name: PSTE Kistenprinzip QA only
 on:
   push:
     branches: [fix/pste-kisten-einmalige-pruefung-20261107]
@@ -6,40 +6,18 @@ on:
 permissions:
   contents: read
 jobs:
-  inspect-existing-v22:
+  kisten-qa:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Read protected previous package only (no install, no live WP)
-        shell: bash
+      - name: Unchanged baseline package is still readable
         run: |
           set -euo pipefail
-          P=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip
-          test -f "$P"
-          unzip -q "$P" -d /tmp/pste-old
-          BASE="/tmp/pste-old/Portal SEO Topic Engine/includes"
-          for f in class-pste-planning-readiness-gate.php class-pste-cannibalization.php class-pste-mini-workflow.php class-pste-snapshot.php class-pste-admin.php class-pste-repository.php; do
-            echo "::group::FUNCTION MAP $f"
-            grep -nE 'function (evaluate|keywordOwnershipCompare|manualArticleBrief|inventory|editorialPlan|exportTitleDesk|preflightTitleDeskImport|scheduleTitleDeskReentry|advanceTitleDeskReentry|processOneTitleDeskReentry|refreshPortalContextForRow|prepareEditorialPayload|reanalyzeRetainedBacklogBatch|attachWorkerFlow)' "$BASE/$f" || true
-            echo "::endgroup::"
-          done
-          echo "::group::COMPLETE PLANNING-GATE & CANNIBALIZATION SOURCE"
-          cat "$BASE/class-pste-planning-readiness-gate.php"
-          cat "$BASE/class-pste-cannibalization.php"
-          echo "::endgroup::"
-          echo "::group::MINI SOURCE"
-          cat "$BASE/class-pste-mini-workflow.php"
-          echo "::endgroup::"
-          echo "::group::SNAPSHOT SOURCE"
-          cat "$BASE/class-pste-snapshot.php"
-          echo "::endgroup::"
-          echo "::group::MINI FIRST PART"
-          sed -n '1,468p' "$BASE/class-pste-mini-workflow.php"
-          echo "::endgroup::"
-          echo "::group::ADMIN TITLE IMPORT AND EXPORT"
-          sed -n '1720,2230p' "$BASE/class-pste-admin.php"
-          echo "::endgroup::"
-          echo "::group::REPOSITORY REANALYZE AND CONTEXT"
-          sed -n '2860,3060p' "$BASE/class-pste-repository.php"
-          sed -n '3460,3630p' "$BASE/class-pste-repository.php"
-          echo "::endgroup::"
+          unzip -tq protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip > /dev/null
+      - name: Kisten transfer technical checks only; semantic/live E2E are not claimed
+        run: |
+          set -euo pipefail
+          DIR=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          php -l "$DIR/pste_kisten_transfer_v1.php"
+          php -l "$DIR/test_pste_kisten_transfer_v1.php"
+          php "$DIR/test_pste_kisten_transfer_v1.php"
