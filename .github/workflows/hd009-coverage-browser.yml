@@ -1,0 +1,108 @@
+name: HD009 0.1.24 responsive real-site simulation
+on:
+  push:
+    branches: ['hobbyroom/hd009-coverage-variant-20261107']
+    paths: ['.github/workflows/hd009-coverage-browser.yml']
+permissions: {contents: read}
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install headless Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Check exact candidate CSS and DOM on real templates
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json
+          z=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip")
+          with ZipFile(z) as plugin: css=plugin.read("affiliate-portal-router/assets/hdar-amazon-start.css").decode()
+          targets=[
+            ('profile','https://www.hobby-depot.de/hobbyregister/alte-kameras-reparieren/'),
+            ('category_hub','https://www.hobby-depot.de/gestalten/'),
+            ('category_leaf','https://www.hobby-depot.de/fertigen/buch-papier/buchbinden/'),
+            ('article','https://www.hobby-depot.de/kettenhemd-ringe-zangen-auswahl/'),
+          ]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width in (1440,900,390,360):
+                  page=browser.new_page(viewport={'width':width,'height':900})
+                  for kind,url in targets:
+                      res=page.goto(url,wait_until='domcontentloaded',timeout=33000)
+                      assert res and res.status==200,(kind,width)
+                      page.wait_for_timeout(450)
+                      page.add_style_tag(content=css)
+                      if kind=='profile':
+                          data=page.evaluate("""() => {
+                              let sq=document.querySelector('.hdar-ci-amazon-banner-square'),wi=document.querySelector('.hdar-ci-amazon-banner-wide');
+                              if(!sq||!wi)return null;
+                              sq.classList.add('hdar-ci-amazon-banner-text');
+                              sq.querySelector('.hdar-ci-photo>img')?.remove();
+                              sq.querySelector('.hdar-ci-content').insertAdjacentHTML('beforeend','<span class="hdar-ci-subtitle">Passende Ausrüstung entdecken</span>');
+                              return {square:sq.outerHTML.slice(0,600),wide:wi.outerHTML.slice(0,600)};
+                          }""")
+                          assert data,(kind,width,'missing native slots')
+                      else:
+                          # Clone the real ad structure from a live page to avoid synthetic made-up markup.
+                          # Candidate mode uses a real original Amazon badge, but no topic photo.
+                          native=page.evaluate("""() => !!document.querySelector('.hdar-ci-amazon-banner-wide')""")
+                          if not native:
+                              page.goto('https://www.hobby-depot.de/gestalten/malen-zeichnen/',wait_until='domcontentloaded',timeout=33000)
+                              template=page.locator('.hdar-ci-amazon-slot-wide').first.evaluate("(x)=>x.outerHTML")
+                              page.goto(url,wait_until='domcontentloaded',timeout=33000)
+                              page.add_style_tag(content=css)
+                          else: template=page.locator('.hdar-ci-amazon-slot-wide').first.evaluate("(x)=>x.outerHTML")
+                          data=page.evaluate("""({kind,html})=>{
+                              let parent=kind==='article'?document.querySelector('.post__text'):document.querySelector('.hd-content-v150616');
+                              if(!parent)return {error:'missing mount'};
+                              let holder=document.createElement('div');holder.innerHTML=html;
+                              const wrap=holder.firstElementChild;
+                              const ad=wrap.querySelector('.hdar-ci-amazon-banner');
+                              ad.classList.add('hdar-ci-amazon-banner-text');
+                              ad.querySelector('.hdar-ci-photo>img')?.remove();
+                              ad.querySelector('.hdar-ci-title').textContent=kind==='article'?'Kettenhemdflechten':kind==='category_leaf'?'Buchbinden':'Gestalten';
+                              ad.querySelector('.hdar-ci-content').insertAdjacentHTML('beforeend','<span class="hdar-ci-subtitle">Passende Ausrüstung entdecken</span>');
+                              if(kind==='article'){
+                                const ps=parent.querySelectorAll(':scope>p');
+                                if(ps.length)ps[Math.min(ps.length-1,1)].after(wrap);else parent.append(wrap);
+                              }else{parent.append(wrap);}
+                              return {ok:true};
+                          }""",{'kind':kind,'html':template})
+                          assert data.get("ok"),(kind,width,data)
+                      measurements=page.evaluate("""() => {
+                          let b=[...document.querySelectorAll('a.hdar-ci-amazon-banner')];
+                          return b.map(a=>{
+                              const box=x=>{let r=x.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}};
+                              let content=a.querySelector('.hdar-ci-content'),btn=a.querySelector('.hdar-ci-button');
+                              return {type:a.className,box:box(a),photo:box(a.querySelector('.hdar-ci-photo')),
+                                      title:box(a.querySelector('.hdar-ci-title')),button:box(btn),
+                                      subtitle:content.querySelector('.hdar-ci-subtitle')?box(content.querySelector('.hdar-ci-subtitle')):null,
+                                      topicPhotos:a.querySelectorAll('.hdar-ci-photo>img:not(.hdar-ci-amazon-official)').length,
+                                      badgeCount:a.querySelectorAll('.hdar-ci-amazon-official').length};
+                          })
+                      }""")
+                      assert measurements,(kind,width,"empty")
+                      if kind=='profile':
+                          assert len(measurements)==2
+                          assert sum(x['topicPhotos'] for x in measurements)==1,('three photos',width,measurements)
+                      for m in measurements:
+                          box=m['box']
+                          assert box['w']>=100 and box['h']>=35,(kind,width,m)
+                          assert m['photo']['w']>=box['w']-4,(kind,width,m)
+                          assert m['button']['bottom']<=box['bottom']-4,(kind,width,m)
+                          assert m['badgeCount']==1,(kind,width,m)
+                          if 'wide' in m['type']:
+                              assert abs(box['w']/box['h']-4.2)<.08,(kind,width,m)
+                              assert box['right']<=width+6,(kind,width,m,'horizontal overflow')
+                          if m['subtitle'] and 'square' in m['type']:
+                              assert m['subtitle']['bottom']<m['button']['y']-2,(kind,width,m,'overlap')
+                      print('BROWSER_PASS',kind,width,'ads',len(measurements),'photos',sum(x['topicPhotos'] for x in measurements))
+                  page.close()
+              browser.close()
+          print('RESPONSIVE_REAL_TEMPLATE_SIMULATION_PASS')
+          PY
