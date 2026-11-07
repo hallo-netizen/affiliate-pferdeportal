@@ -158,12 +158,44 @@ patched = patched.replace(anchor, parkhaus_reader + anchor)
 old = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
                 $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
 new = """                $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
-                $batch['parkhaus_snapshot']=self::readParkhausForMini();
-                $batch['parkhaus_complete']=!empty($batch['parkhaus_snapshot']['complete']);
-                $batch['parkhaus_sha256']=(string)($batch['parkhaus_snapshot']['sha256']??'');
+                // The relevance worker receives only raw source queries; no giant plan here.
                 $state['active']=$batch;self::storeState($state); // A lost download is retryable."""
 assert patched.count(old) == 1
 patched = patched.replace(old,new)
+
+# ONE existing MINI result export: only the central external SEO owner gets
+# the parkhouse source. The relevance and language workers keep their small
+# unmodified payloads, and ordinary title correction exports remain small.
+new_results = """    public static function exportResults(): void {
+        try {
+            PSTE_Auth::assertAdmin('pste_mini_results_export',(string)($_POST['_wpnonce']??''));
+            $state=self::loadState();
+            $out=['contract'=>'PSTE_MINI_RESULTS_FOR_EDITORIAL_V1','created_utc'=>gmdate('c'),
+                'count'=>count($state['completed']),'items'=>array_values($state['completed']),
+                'status'=>'STAGED_NOT_EDITORIALLY_APPROVED',
+                'clarification'=>array_values((array)($state['clarification']??[])),
+                'note'=>'External relevance/title ideas only; NO final SEO/slot clearance.'];
+            if(!empty($_POST['include_parkhaus'])){
+                $out['parkhaus_snapshot']=self::readParkhausForMini();
+                $out['parkhaus_complete']=!empty($out['parkhaus_snapshot']['complete']);
+                $out['status']='PARKHAUS_FOR_SINGLE_EXTERNAL_SEO_OWNER_NOT_APPROVED';
+            }
+            self::sendJson($out,'pferdeatelier-mini-ergebnisse-'.gmdate('Ymd-His').'.json');
+        }catch(Throwable $e){self::fail($e);}
+    }
+
+"""
+start = patched.index("    public static function exportResults(): void {")
+stop = patched.index("    public static function cancelActive(): void {",start)
+patched = patched[:start]+new_results+patched[stop:]
+# Same existing handler, one additional submit control, no new action/worker.
+control = """            echo '<input type="hidden" name="action" value="pste_mini_results_export"><button class="button" type="submit">Gespeicherte Entscheidungen und Titelideen exportieren</button></form>';"""
+replacement = control + """
+            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_results_export');
+            echo '<input type="hidden" name="action" value="pste_mini_results_export"><input type="hidden" name="include_parkhaus" value="1">';
+            echo '<button class="button" type="submit">Redaktionsstand für einmalige SEO-Prüfung exportieren</button></form>';"""
+assert patched.count(control) == 1
+patched = patched.replace(control,replacement)
 
 (OUT/"class-pste-mini-workflow.php").write_text(patched,encoding="utf-8")
 (OUT/"PSTE_KISTEN_EIN_IMPORT_OWNER_QA.diff").write_text(
