@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install PIL
+        run: python3 -m pip install --quiet --break-system-packages pillow
       - name: Generate visual audit image from existing HD003 assets
         run: |
           python3 - <<'PY'
