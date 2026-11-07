@@ -154,8 +154,15 @@
                 $reservations++;
             }
             $result['sources']['MINI_RESERVED']=['complete'=>true,'item_count'=>$reservations];
-            $revisions=(array)($result['sources']??[]);
-            $encoded=wp_json_encode(['sources'=>$revisions,'items'=>$result['items']],
+            // Version only the original WP/PSTE/PSERC sources. Our own
+            // MINI reservations are transported separately and checked by
+            // existing slot uniqueness. Otherwise importing a FREI decision
+            // would invalidate the very snapshot it just accepted.
+            $sourceRevisions=(array)$result['sources'];
+            unset($sourceRevisions['MINI_RESERVED']);
+            $sourceItems=array_values(array_filter($result['items'],
+                static fn($x)=>is_array($x)&&($x['source']??'')!=='MINI_RESERVED'));
+            $encoded=wp_json_encode(['sources'=>$sourceRevisions,'items'=>$sourceItems],
                 JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
             if(!is_string($encoded))throw new RuntimeException('PARKHAUS_ENCODING_FAILED');
             $result['sha256']=hash('sha256',$encoded);
