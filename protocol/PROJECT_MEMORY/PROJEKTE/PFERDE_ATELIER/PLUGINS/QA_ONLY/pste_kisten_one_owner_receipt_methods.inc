@@ -79,7 +79,8 @@
             ||(string)($saved['decision']??'')!=='JA'||$poolKey===''||$rawQuery===''
             ||!hash_equals((string)($data['raw_query']??''),$rawQuery)
             ||!hash_equals((string)($saved['raw_query']??''),$rawQuery)
-            ||!hash_equals(hash('sha256',$poolKey.'|'.$rawQuery),(string)($data['source_sha256']??'')))
+            ||!hash_equals(hash('sha256',$poolKey.'|'.$rawQuery),(string)($data['source_sha256']??''))
+            ||(($data['box']??'')==='FREI'&&!hash_equals((string)($data['approved_title']??''),(string)($saved['titles'][0]['title']??''))))
             return [];
         return $data;
     }
