@@ -43,3 +43,6 @@
 
 ## Veröffentlichungsregel
 Die getestete EINZEL-Korrektur der MINI-Importfunktion bleibt zusammen mit dem Gesamtziel nur im **Draft/QA-Arbeitsbranch**. Keine Einzel-ZIP, keine Live-Installation und keine Behauptung, die Gesamtarchitektur sei schon fertig. Alle neuen Arbeiten nur innerhalb der vorhandenen Funktionen/Klassen und der einen Test-/Fallback-Trennung.
+
+## GitHub-Schutzkontrolle nach QA (belegt)
+Der endgültige Vergleich gegen den vorherigen Arbeitsbranch zeigt **keine Änderungen an .github/workflows, AGENTS, K0, PSERC oder irgendeinem Installations-ZIP** (nur Dokumentation und QA_ONLY). Die GitHub-PR-Schutzprüfung meldete `PATH_GUARD_PASS`, wurde danach aber durch den bestehenden geschützten Workflow beendet: Die verwendete trusted base enthält `control/paul-scope-gate/paul_scope_gate.py` nicht unter dem erwarteten Pfad. Dieser nicht zur MINI-Fachlogik gehörende Grund ist **kein Beleg eines fachlich bestandenen PR-Hardlocks**. Keine eigenmächtige Änderung oder Umgehung des K0-/Security-Workflows. Draft #682 ausdrücklich nicht mergen.
