@@ -1,0 +1,39 @@
+name: HD009 register world and photo source audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-generic-image-concept-audit-20261107']
+    paths: ['.github/workflows/hd009-register-world-audit.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check image sizes and actual register taxonomy fields
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from PIL import Image
+          from io import BytesIO
+          import json,collections,re
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+              for slug in ['gestalten','fertigen','technik','forschen','pflanzen','tiere','bewegen','sammeln']:
+                  path=f'affiliate-portal-template-kit/assets/hobby-depot-v150617/start-world-v150691/{slug}.webp'
+                  img=Image.open(BytesIO(z.read(path)))
+                  print('WORLD_ASSET',slug,'shape',img.size,'bytes',len(z.read(path)),'mode',img.mode)
+          with ZipFile(base/'HD-007-HOBBYREGISTER-CORE'/'CURRENT.zip') as z:
+              names=z.namelist()
+              p=next(x for x in names if x.endswith('data/hobby-register.json'))
+              d=json.loads(z.read(p))
+              print('REGISTER_TYPE',type(d).__name__,len(d),'SAMPLE',str(d[:2] if isinstance(d,list) else list(d.items())[:2])[:2500])
+              # Find records by case, report their keys and relevant category name.
+              recs=d if isinstance(d,list) else (d.get('hobbies') or d.get('records') or d.get('items') or list(d.values()))
+              for r in recs:
+                  if not isinstance(r,dict):continue
+                  if any(n in str(r).lower() for n in ['münzen','muenzen','alte kameras reparieren','alabasterschnitzen']):
+                      print('REGISTER_MATCH',str(r)[:2000])
+              print('KEY_FREQ',collections.Counter(x for r in recs if isinstance(r,dict) for x in r).most_common(24))
+          PY
