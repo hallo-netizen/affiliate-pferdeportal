@@ -1,0 +1,66 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -7779,20 +7779,34 @@
+ 
+                 $page_data = $this->ebay_search_page($profile['rule'], $profile['seller_type'], $settings, $token, (string) ($profile['next'] ?? ''));
+                 if (is_wp_error($page_data)) {
++                    // Same existing profile/cursor, no second search engine or worker.
++                    // Only transport errors and explicit eBay 429/5xx may be retried.
++                    // Unknown/invalid/policy errors fail immediately with their real cause.
++                    $request_code = sanitize_key((string) $page_data->get_error_code());
++                    $request_message = (string) $page_data->get_error_message();
++                    $transient = $request_code === 'http_request_failed'
++                        || ($request_code === 'ebay_search_failed'
++                            && preg_match('/\bHTTP (?:429|5[0-9]{2})\b/', $request_message));
++                    $retry_count = absint($profile['request_retry_count'] ?? 0);
++                    if ($transient && $retry_count < 2) {
++                        $profile['request_retry_count'] = $retry_count + 1;
++                        unset($job['inflight_profile']);
++                        $job['worker_phase'] = 'fetch_retry_pending';
++                        $this->ebay_sync_job_save($job);
++                        $reschedule = true;
++                        return true; // Existing bounded runner retries exact same page.
++                    }
+                     $summary['technical_blocked']++;
+                     $summary['profile_stats'][$profile_key]['technical_blocked']++;
+                     $this->ebay_summary_reason_add($summary, 'technical', $page_data, (string) $profile['rule']['id'], $profile['seller_type'], $profile_key);
+-                    $summary['errors'][] = array('rule'=>(string) $profile['rule']['id'],'seller_type'=>$profile['seller_type'],'error'=>$page_data->get_error_message(),'code'=>$page_data->get_error_code());
+-                    $summary['profile_stats'][$profile_key]['stopped_reason'] = 'request_error';
+-                    $profile['active'] = false;
++                    $summary['errors'][] = array('rule'=>(string) $profile['rule']['id'],'seller_type'=>$profile['seller_type'],'error'=>$request_message,'code'=>$request_code);
+                     unset($job['inflight_profile']);
+-                    $this->ebay_sync_advance_cursor($job, $profile_key);
+-                    $this->ebay_sync_touch_progress($job, 'request_error');
+                     $this->ebay_sync_job_save($job);
+-                    unset($profile);
+-                    continue;
++                    // A technical failure is NOT proof of absent eBay supply;
++                    // never finish 300 other profiles and pretend it is a safe gap.
++                    return $this->ebay_sync_fail($job, $settings, $page_data);
+                 }
+-
++                $profile['request_retry_count'] = 0;
+                 $items = array_values((array) ($page_data['items'] ?? array()));
+                 $summary['pages']++;
+                 $summary['profile_stats'][$profile_key]['pages']++;
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1721,7 +1721,17 @@
+             $start=$this->ebay_start_sync_job(false,'business_recovery','background');if(is_wp_error($start)){$this->ebay_run_fail($start->get_error_code(),$start->get_error_message());return;}
+         }
+         $this->run_ebay_sync_worker(true);$this->ebay_run_capture_component_state(null,array('discovery'));$job=$this->ebay_sync_job_load();$status=sanitize_key((string)($job['status']??''));
+-        if($status==='failed'){$this->ebay_run_fail('gapfill_discovery_failed','Gezielte BUSINESS-Gap-Fill-Discovery ist fehlgeschlagen.');return;}
++        if($status==='failed'){
++            // Exactly the same error handoff already used by full discovery.
++            // Keep the original provider failure instead of hiding it behind
++            // a generic gapfill error; no new verification or remote request.
++            $error_list=is_array($job['summary']['errors']??null)?$job['summary']['errors']:array();
++            $last=$error_list ? (array)$error_list[count($error_list)-1] : array();
++            $code=sanitize_key((string)($last['code']??$job['failure_reason']??'gapfill_discovery_failed'));
++            $msg=sanitize_text_field((string)($last['error']??$job['failure_reason']??'Gezielte BUSINESS-Gap-Fill-Discovery ist fehlgeschlagen.'));
++            $this->ebay_run_fail($code!==''?$code:'gapfill_discovery_failed',$msg);
++            return;
++        }
+         if($status==='completed'){
+             // Re-run BUSINESS selection through the same run. PRIVATE is frozen
+             // and must not participate in gap-fill.
