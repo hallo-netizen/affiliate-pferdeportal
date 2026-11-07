@@ -1,3 +1,7 @@
+# Abschluss der bisherigen Prüfung: RC11 seit 07.11.2026 im Pluginbüro als CURRENT; Tests bestanden. Die folgende Prüfung dokumentiert den **vorherigen RC10-Ausgangszustand**. Die RC11-Liveabnahme in WordPress ist weiterhin offen.
+
+---
+
 # HAB-004 – Verbindlicher Dreifachabgleich vor jeder Änderung an der Affiliate-Ausgabe
 **Datum:** 07.11.2026. **Status:** LESENDE CODEPRÜFUNG, KEIN PLUGIN-BUILD, KEINE Änderung an HAB-001/002/003/004 und keinen Fremdprojekten.
 
