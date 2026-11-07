@@ -15,3 +15,7 @@ try:
             print("NEIGHBOR",content[max(0,m.start()-1000):m.end()+900].replace("\n"," ")[:2100])
 except Exception as e:
     print("PUBLIC_HTTP_ERROR",type(e).__name__,str(e))
+
+    for rule in ["hd-next-partner-banner{","hd-next-partner-banner>div{","hd-next-partner-banner > div{","hd-next-partner-banner .ppar-affiliate-slot","hd-banner-span-3{"]:
+        for m in list(re.finditer(re.escape(rule),content,re.IGNORECASE))[:4]:
+            print("CSS_RULE",rule,content[max(0,m.start()-80):m.start()+720].replace("\n"," ")[:800])
