@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Pillow for screenshot conversion
+        run: python3 -m pip install --quiet Pillow
       - name: Generate exact HD003 asset previews in headless browser
         run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/PREVIEW_0117_CI_VISUAL.py
       - name: Store audited previews
