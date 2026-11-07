@@ -1,0 +1,25 @@
+name: PSTE Kisten source inspector temporary
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect original handlers, read-only
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS
+          unzip -q "$D/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip" -d /tmp/original
+          I="/tmp/original/Portal SEO Topic Engine/includes"
+          echo '===== MINI HEADER AND METHODS ====='
+          grep -nE '(function (loadState|storeState|createBatch|importKeywords|exportKeywords|exportResults|validateResult|importTitleCorrections|forwardToPlan|approvedRelevanceFor|sendJson)|function renderManualBrief)' "$I/class-pste-mini-workflow.php"
+          echo '===== MINI SOURCE 1-850 ====='
+          sed -n '1,850p' "$I/class-pste-mini-workflow.php"
+          echo '===== PLAN GATE METHODS ====='
+          grep -nE 'function (apply|evaluate|planItemsAsInventory|preTitleDuplicate)' "$I/class-pste-planning-readiness-gate.php"
+          echo '===== ADMIN TITLE REENTRY ====='
+          grep -nE 'function (preflightTitleDeskImport|scheduleTitleDeskReentry|advanceTitleDeskReentry|processOneTitleDeskReentry|exportTitleDesk)' "$I/class-pste-admin.php"
+          sed -n '1950,2230p' "$I/class-pste-admin.php"
