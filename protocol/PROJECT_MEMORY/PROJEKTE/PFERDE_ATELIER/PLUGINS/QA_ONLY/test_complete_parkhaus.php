@@ -50,7 +50,9 @@ final class FakeDb {
             ];
         }
         if(str_contains($sql,'FROM wp_postmeta'))return [
-            ['post_id'=>7,'meta_value'=>'2er pferdeanhänger'],['post_id'=>9,'meta_value'=>'ungefüttert']
+            ['post_id'=>7,'meta_key'=>'_yoast_wpseo_focuskw','meta_value'=>'2er pferdeanhänger'],
+            ['post_id'=>7,'meta_key'=>'_ppm679_canonical_article_id','meta_value'=>'canonical-7'],
+            ['post_id'=>9,'meta_key'=>'_yoast_wpseo_focuskw','meta_value'=>'ungefüttert']
         ];
         if(str_contains($sql,'FROM wp_term_relationships'))return [
             ['post_id'=>7,'category_id'=>234,'category_name'=>'Pferdeanhänger']
@@ -58,7 +60,7 @@ final class FakeDb {
         if(str_contains($sql,'FROM wp_pste_topic_pool')){
             preg_match('/id>(\d+)/',$sql,$m);
             if((int)($m[1]??0)>0)return [];
-            return [['id'=>101,'pool_key'=>'pste-planned-101',
+            return [['id'=>101,'pool_key'=>'pste-planned-101','candidate_id'=>'shared-intent-101',
                 'payload_json'=>json_encode(['raw_query'=>'horseware regendecken',
                     'production_title'=>'Regendecken von Horseware','target_keyword'=>'horseware regendecken',
                     'target_category_name'=>'Regendecken','proposed_article_type'=>'Beratung',
@@ -76,7 +78,7 @@ final class PSERC_Plan_Snapshot_Store {
     public static function verifyHeader(array $header):bool{return ($header['contract']??'')==='PSERC_PLAN_SNAPSHOT_V1';}
     public static function getRecord(string $g,string $k,int $i):?array {
         return self::$missing?null:['status'=>'REVIEW_REQUIRED_SEMANTIC_OVERLAP',
-            'seo_topic_id'=>'pserc-final-1','title'=>['production_title'=>'Günstige Pferdedecken'],
+            'seo_topic_id'=>'shared-intent-101','title'=>['production_title'=>'Günstige Pferdedecken'],
             'target_keyword'=>['value'=>'guenstige pferdedecken'],'article_type'=>'Beratung',
             'category'=>['slug'=>'regendecken'],'canonical_slot'=>null,'intent_profile'=>[]];
     }
@@ -91,8 +93,10 @@ check($out['items'][1]['status']==='private','private SEO page included');
 check(in_array('Was ist eine ungefütterte Decke?',$out['items'][1]['headings'],true),'heading from full article retained');
 check(!array_key_exists('post_content',$out['items'][0]),'article body not duplicated into export');
 check($out['items'][0]['target_keyword']==='2er pferdeanhänger','real SEO target metadata retained');
+check($out['items'][0]['canonical_article_id']==='canonical-7','existing WordPress article identity retained');
 check($out['items'][2]['source']==='PSTE_PLAN'&&$out['items'][3]['source']==='PSERC_ACTIVE_PLAN','both planning sources included');
 check($out['items'][3]['status']==='REVIEW_REQUIRED_SEMANTIC_OVERLAP','held PSERC plan retained');
+check($out['items'][2]['seo_topic_id']===$out['items'][3]['seo_topic_id'],'same PSTE and PSERC topic can be recognized as one, without second intent check');
 check(preg_match('/^[a-f0-9]{64}$/D',$out['sha256'])===1,'single snapshot version fingerprint');
 PSERC_Plan_Dependency_Fingerprint::$current=false;
 $out=PSTE_Mini_Workflow::readParkhausForMini();
