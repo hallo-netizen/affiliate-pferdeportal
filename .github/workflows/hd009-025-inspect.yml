@@ -1,0 +1,33 @@
+name: HD009 025 source inspection
+on:
+  push:
+    branches: ['hobbyroom/hd009-025-flatter-world-images-20261107']
+    paths: ['.github/workflows/hd009-025-inspect.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Examine exact current topic image selector and registry hooks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(root/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            for method in ['hdar_ci_amazon_banner','hdar_ci_register_footer','get_content_context','get_category_archive_context','render_affiliate_slot_for_context']:
+              m=re.search(r'(?:private|public|protected) function '+method+r'\s*\(',s)
+              if not m: continue
+              print('METHOD',method)
+              if method in ('hdar_ci_amazon_banner','hdar_ci_register_footer'):
+                print(s[m.start():m.start()+14000])
+              elif method=='get_content_context':
+                print(s[m.start()+6500:m.start()+10800])
+              elif method=='render_affiliate_slot_for_context':
+                print(s[m.start():m.start()+4000])
+              else:print(s[m.start():m.start()+1900])
+              print('END_METHOD')
+          PY
