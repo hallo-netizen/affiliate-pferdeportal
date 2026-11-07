@@ -1,6 +1,6 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
-**Aktualisierung 07.11.2026 – HD009 (einzige CURRENT-Version):** `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.18-dev**, 1.065.228 Bytes, SHA-256 `130681bc1b695cbb95b08d8d9ac2d575e7142027754ffd1bd051065e462bae7f`, Git-Blob `5b4ef7b4277b63ab73d0a0ae690186c272c8bc09`. Nur der bestehende HD009-Pluginordner. Verbindliche Gestaltung: Variante 4 ohne Hobbydepot-Logo, Titelstreifen, großes Bild, gelb-oranger Button mit original zugelassenem DE-`Erhältlich bei Amazon`-Logo und Pfeil. 4/4 responsive Browserfälle und alle PHP/ZIP-Prüfungen PASS; **WordPress-Liveprüfung der 0.1.18 noch offen**. Fachliche Statusautorität `../AFFILIATE/CURRENT_STATE.md`. **Alle alten HD009-Versionen in diesem Dokument sind historische Notizen, keine aktuelle zweite Installationsdatei.**
+**Aktualisierung 07.11.2026 – HD009 (einzige CURRENT-Version):** `ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` = **0.1.19-dev**, 1.066.241 Bytes, SHA-256 `53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579`, Git-Blob `93c4eca96659a06fbc9a5b7911fa4c1b70ffac93`. Die existierende Pferdeatelier-/Hobby-Automatik bleibt erhalten; Variante-4-Banner wie abgenommen. **Neu:** Desktop-Registeranzeige nach `Auf einen Blick` vor `Hobbygruppe`, ein Querbanner im Haupttext nach `Kosten und Ausrüstung`, mobil Quadratbanner nach Haupttext als erster Seitenleistenblock. **Echter isolierter WordPress-/MariaDB-/Browser-E2E Desktop und Mobile PASS**, ZIP und PHP 24/24 PASS; reale WordPress-Liveinstallation 0.1.19 noch nicht bestätigt. Fachliche Statusautorität `../AFFILIATE/CURRENT_STATE.md`, technische `PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md`. Alle weiteren alten HD009-Einträge sind Historie.
 
 Stand: 07.11.2026 (HD-009 aktualisiert; die übrigen Pluginstände behalten ihre zuletzt dokumentierten Prüfdaten). **Nur selbst entwickelte Hobby-Depot-Plugins und eigene Projektwerkzeuge. Keine Fremdplugins.**
 
@@ -16,7 +16,7 @@ Die technische Einzelwahrheit liegt weiterhin ausschließlich in der jeweiligen 
 | HD-005 – Glossar Core | 1.0.25 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-006 – Bildzentrale | 2.7.8 | Aktuelle Voll-ZIP noch nicht im Büro |
 | HD-007 – Hobbyregister Core | 1.2.16 in WordPress-Liste, 1.2.17 als neuer Stand freigegeben | **Voll-ZIP 1.2.17 gesichert, unabhängig geöffnet; Serverstand nicht separat geprüft** |
-| HD-009 – Affiliate-Zentrale | **0.1.18-dev (aktuelle einzige GitHub-ZIP)**; vorherige installierte Version nur aus dem letzten Betreiberstand bekannt | **CURRENT.zip 1.065.228 Bytes, technischer Test PASS, Live-Abnahme offen** |
+| HD-009 – Affiliate-Zentrale | **0.1.19-dev GitHub CURRENT.zip**, isolierter WordPress-E2E bestanden, Live-Update offen | **Einzige Voll-ZIP 1.066.241 Bytes, Prüfberichte in technischer HD009-Akte** |
 | Footer-Umzug – Portale | 1.1.1 | **Original-Voll-ZIP im Pluginbüro gesichert und unabhängig wieder geöffnet** |
 | Hobby Depot – FAQ Frontend Fix | 1.0.2 | **Original-Voll-ZIP gesichert, unabhängig geprüft** |
 | Hobby Depot – Performance Diagnose | 1.1.0 | Aktuelle Voll-ZIP noch nicht im Büro |
