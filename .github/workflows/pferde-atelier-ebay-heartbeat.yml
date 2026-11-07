@@ -90,7 +90,7 @@ jobs:
               cat "$err" || true
             else
               parsed=$(python3 - "$body" <<'PY' || true
-          import json,sys
+          import json,sys,re
           try:
               raw=open(sys.argv[1],'rb').read().decode('utf-8-sig').strip()
               d=json.loads(raw)
@@ -100,15 +100,16 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
-              print(f"{s} {t}")
+              def safe_code(value):
+                  return value if isinstance(value,str) and re.fullmatch(r'[a-z0-9_-]{1,80}',value) else '-'
+              print(f"{s} {t} {safe_code(d.get('phase'))} {safe_code(d.get('error_code'))}")
           except Exception:
               pass
           PY
               )
 
-              status=${parsed%% *}
-              server_time=${parsed##* }
-              if [ -z "$parsed" ] || [ "$status" = "$server_time" ]; then
+              read -r status server_time phase error_code <<< "$parsed"
+              if [ -z "$parsed" ] || [ -z "$status" ] || [ -z "$server_time" ]; then
                 consecutive_failures=$((consecutive_failures + 1))
                 echo "heartbeat $n invalid v2 response consecutive=$consecutive_failures"
                 head -c 800 "$body" || true
@@ -121,7 +122,11 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  idle|completed|failed|disabled)
+                  failed)
+                    echo "terminal heartbeat status=failed phase=$phase error_code=$error_code; no successor runner required"
+                    exit 1
+                    ;;
+                  idle|completed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
                     ;;
