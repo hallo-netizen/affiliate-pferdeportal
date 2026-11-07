@@ -419,3 +419,415 @@ er().self::render_groups($f).self::render_cards($rows,$f).'</div>'.self::styles(
         return '<style id="hd-hobbyregister-css-v120">'
         .'.hd-hobbyregister-template-v110{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}html body.hd-hobbyregister-route .site-content{padding-top:0!important}.hdr-breadcrumb-wrap{box-sizing:border-box;margin-top:18px;padding:0;font-family:Montserrat,Arial,sans-serif}.hdr-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0;padding:0;color:#778085;font-size:12px;line-height:1.4}.hdr-breadcrumb a{color:#667178!important;font-weight:400!important;text-decoration:none!important}.hdr-breadcrumb a:hover,.hdr-breadcrumb a:focus-visible{color:#2f969d!important}.hdr-breadcrumb b{color:#a0a7aa;font-weight:500}.hdr-breadcrumb span[aria-current=page]{color:#39464c;font-weight:650}.hdr-wrap{--petrol:#2f969d;--petrol-dark:#207b82;--ink:#17313c;--muted:#68767b;--cream:#f5f1e9;--line:rgba(49,67,73,.16);box-sizing:border-box;margin-top:5px;margin-bottom:58px;padding:0;color:var(--ink);font-family:Montserrat,Arial,sans-serif}.hdr-wrap *{box-sizing:border-box}.hdr-wrap a{text-decoration:none}'
         .'.hdr-hero{position:relative;height:238px;overflow:hidden;border:1px solid var(--line);background:var(--cream)}.hdr-hero-copy{position:absolute;z-index:2;top:0;bottom:0;left:0;display:flex;width:46%;padding:clamp(24px,3.6vw,48px);flex-direction:column;justify-content:center;transform:translateY(-6px)}.hdr-her
+
+MORE HD007 image_map function image_map(
+ return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function image_map() {
+        if (self::$image_map === null) {
+            self::$image_map = self::read_json('hobby-image-map-v1.json');
+            if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static function image_entry($registry_id) {
+        $all = self::image_map();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function finder_rows() {
+        $out = array();
+        foreach (self::records() as $row) {
+            $t = array();
+            foreach (($row['traits'] ?? array()) as $id => $assignment) {
+                if (is_array($assignment) && array_key_exists('value', $assignment)) $t[$id] = $assignment['value'];
+            }
+            $p = $row['result_profile'] ?? array();
+            $out[] = array(
+                'registry_id' => $row['registry_id'] ?? '',
+                'name' => $row['canonical_name'] ?? '',
+                'world' => $row['source_identity']['natural_world'] ?? '',
+                'target_node_id' => $row['source_identity']['target_node_id'] ?? null,
+                'traits' => $t,
+                'profile' => array(
+                    'what_is_it' => $p['what_is_it'] ?? '',
+                    'what_do_you_do' => $p['what_do_you_do'] ?? '',
+                    'what_do_you_need' => $p['what_do_you_need'] ?? '',
+                    'appeal' => $p['appeal'] ?? '',
+                ),
+            );
+        }
+        return $out;
+    }
+}
+
+
+MORE HD007 image_map function records(
+data = self::read_json('traits-schema.json');
+        return is_array($data) ? $data : array();
+    }
+    public static function records() {
+        $r = self::register();
+        return isset($r['records']) && is_array($r['records']) ? $r['records'] : array();
+    }
+    private static function index() {
+        if (self::$by_id !== null) return;
+        self::$by_id = array(); self::$by_name = array();
+        foreach (self::records() as $row) {
+            if (!is_array($row)) continue;
+            $id = isset($row['registry_id']) ? (string)$row['registry_id'] : '';
+            $name = isset($row['canonical_name']) ? (string)$row['canonical_name'] : '';
+            if ($id !== '') self::$by_id[$id] = $row;
+            if ($name !== '') self::$by_name[$name] = $row;
+        }
+    }
+    public static function get($registry_id) {
+        self::index();
+        return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+    }
+    public static function get_by_name($name) {
+        self::index();
+        return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+    }
+    public static function count() { return count(self::records()); }
+    public static function ready() {
+        $rows = self::records();
+        if (count($rows) !== 862) return false;
+        foreach ($rows as $row) {
+            if (($row['classification_status'] ?? '') === 'PENDING_REVIEW') return false;
+            if (($row['result_profile']['status'] ?? '') !== 'REVIEWED') return false;
+            if (!isset($row['traits']) || count($row['traits']) !== 57) return false;
+        }
+        return true;
+    }
+    private static $articles = null;
+    private static $image_map = null;
+
+    public static function articles() {
+        if (self::$articles === null) {
+            self::$articles = self::read_json('hobby-articles-v1.json');
+            if (!is_array(self::$articles)) self::$articles = array();
+        }
+        return self::$articles;
+    }
+
+    public static function article($registry_id) {
+        $all = self::articles();
+        return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+    }
+
+    public static function image_map() {
+        if (self::$image_map === null) {
+            self::$image_map = self::read_json('hobby-image-map-v1.json');
+            if (!is_array(self::$image_map)) self::$image_map = array();
+        }
+        return self::$image_map;
+    }
+
+    public static
+
+MORE HD007 image_entry_use $entry=HD_Hobbyregister_Core_Stable127::image_entry
+webp';
+    }
+
+    private static function record_image($row) {
+        $id=(string)($row['registry_id'] ?? '');
+        $entry=HD_Hobbyregister_Core_Stable127::image_entry($id);
+        if (is_array($entry)) {
+            $path=trim((string)($entry['path'] ?? ''));
+            $source=(string)($entry['source'] ?? '');
+            if ($path!=='') {
+                if ($source==='hd003' && function_exists('plugins_url')) {
+                    return plugins_url('affiliate-portal-template-kit/assets/'.ltrim($path,'/'));
+                }
+                if ($source==='hd007') return self::asset_url($path);
+            }
+        }
+        return self::asset_url(self::group_asset(self::primary_group($row)));
+    }
+
+    private static function profile_claim($row) {
+        $group=self::primary_group($row);
+        $claims=[
+            'gestalten'=>'Ideen sichtbar machen.',
+            'fertigen'=>'Mit den Händen schaffen.',
+            'technik'=>'Tüfteln. Bauen. Verstehen.',
+            'forschen'=>'Neugier wird Wissen.',
+            'pflanzen'=>'Wachsen lassen.',
+            'tiere'=>'Beobachten. Pflegen. Verstehen.',
+            'bewegen'=>'Bewegung, die fordert.',
+            'sammeln'=>'Finden. Ordnen. Bewahren.',
+        ];
+        return $claims[$group] ?? 'Entdecken. Verstehen. Ausprobieren.';
+    }
+
+    private static function hero($profile=false,$row=null) {
+        if ($profile && is_array($row)) {
+            $claim=self::profile_claim($row);
+            return '<section class="hdr-hero is-profile"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">'.esc_html($claim).'</span><h1>'.esc_html((string)$row['canonical_name']).'</h1></div><figure><img src="'.esc_url(self::record_image($row)).'" alt="'.esc_attr((string)$row['canonical_name']).'" fetchpriority="high" decoding="async"></figure></section>';
+        }
+        return '<section class="hdr-hero"><div class="hdr-hero-copy"><span class="hdr-brush-claim" style="--hdr-brush:url('.esc_url(self::asset_url('brush-underline.webp')).')">Hobbys von A bis Z</span><h1>Hobbyregister</h1><p>Entdecke bekannte, seltene und ungewöhnliche Hobbys. Suche direkt nach einem Namen oder stöbere nach Anfangsbuchstaben und Hobbygruppen.</p></div><figure><img src="'.esc_url(self::asset_url('register-hero.webp')).'" alt="Viele unterschiedliche Hobbys entdecken" fetchpriority="high" decoding="async"></figure></se
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/image-production-batch-01.json
+{
+  "format": "HOBBY_DEPOT_IMAGE_PRODUCTION_BATCH",
+  "version": "1.0",
+  "batch": 1,
+  "date": "2026-10-23",
+  "count": 25,
+  "contract": {
+    "style": "fotorealistische redaktionelle Hobbyfotografie",
+    "ratio": "3:2 landscape",
+    "generation_min_px": "1536x1024",
+    "final_webp_px": "1500x1000",
+    "crop_safe_subject": "center",
+    "rules": [
+      "Hobby auf den ersten Blick erkennbar",
+      "natürliche realistische Beleuchtung",
+      "keine Texte, Wasserzeichen oder realen Markenlogos",
+      "keine dekorative Stockfoto-Szene ohne konkrete Hobbyhandlung",
+      "anatomisch plausible Hände und Werkzeuge",
+      "Hero und Vorschaukarten verwenden dasselbe Mastermotiv"
+    ]
+  },
+  "items": [
+    {
+      "position": 1,
+      "registry_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "target_asset": "portraits/batch-01/air-dry-clay.webp",
+      "photo_brief": "Hände formen eine kleine Schale und eine Figur aus lufttrocknender Modelliermasse auf einem hellen Holztisch; Modellierwerkzeuge und zwei fertige Stücke sichtbar; kein Töpferrad.",
+      "status": "BRIEF_READY"
+    },
+    {
+      "position": 2,
+      "registry_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "target_asset": "portraits/batch-01/airbrush-modellbau.webp",
+      "photo_brief": "Nahaufnahme 
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-image-map-v1.json
+{
+  "hobby:3d-bogenschieen": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/bewegen/wurf-ziel-v150627.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "wurf-ziel",
+    "core_audit_semantic_fit": "FAIL",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_NEW_MASTER_REQUIRED"
+  },
+  "hobby:3d-druck": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/technik/digitale-fertigung-v150623.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "digitale-fertigung",
+    "core_audit_semantic_fit": "PASS",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_HIGHRES_SOURCE_OR_NEW_MASTER"
+  },
+  "hobby:3d-scanning": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/technik/digitale-fertigung-v150627.webp",
+    "status": "EXACT_CURATED_CORE_CARD",
+    "topic": "digitale-fertigung",
+    "core_audit_semantic_fit": "FAIL",
+    "core_audit_technical_fit": "FAIL_MASTER_SPEC",
+    "core_audit_final_verdict": "NOT_FINAL",
+    "production_status": "OPEN_NEW_MASTER_REQUIRED"
+  },
+  "hobby:aeroponik": {
+    "source": "hd003",
+    "path": "hobby-depot-v150617/subcategories/pflanzen/hydro-indoor-v150623.webp",
+    "sta
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/image-production-batch-02-unique.json
+{
+  "format": "HOBBY_DEPOT_UNIQUE_MASTER_BATCH",
+  "version": "1.0",
+  "plugin_version": "1.2.14",
+  "stand": "2026-10-23",
+  "rule": "Exactly one active master per listed hobby; alternatives remain non-active glossary reserve.",
+  "assignments": [
+    {
+      "registry_id": "hobby:fruchtwein-herstellen",
+      "canonical_name": "Fruchtwein herstellen",
+      "master_asset": "portraits/final-masters/fruchtwein-herstellen.webp",
+      "master_sha256": "0ad98d1e7681df4752f4b298852f508d8b38a3f39c7b94433f27d8d1d36b9a2e",
+      "source_file": "rustikale_weinherstellung_in_der_küche.png",
+      "photo_brief": "Beerenwein wird mit Schlauch aus einem Gärgefäß in Flaschen abgezogen; deutliches Fruchtweinmotiv."
+    },
+    {
+      "registry_id": "hobby:cider-herstellen",
+      "canonical_name": "Cider herstellen",
+      "master_asset": "portraits/final-masters/cider-herstellen.webp",
+      "master_sha256": "81bf3e3dab1dc27fc894d0e4e70a4da9afa478790f7c27f9a294136bc91361bf",
+      "source_file": "traditionelle_apfelweinherstellung_im_herbstgarten.png",
+      "photo_brief": "Äpfel werden im Herbstgarten zerkleinert und gepresst; klares Cider-/Apfelweinmotiv."
+    },
+    {
+      "registry_id": "hobby:met-herstellen",
+      "canonical_name": "Met herstellen",
+      "master_asset": "portraits/final-masters/met-herstellen.webp",
+      "master_sh
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-image-production-status-v1.json
+{
+  "format": "HOBBY_DEPOT_HOBBYREGISTER_IMAGE_STATUS",
+  "version": "1.1",
+  "stand": "2026-10-23",
+  "authority": "HD-007-HOBBYREGISTER-CORE / Hobbyregister-Büro",
+  "contract": {
+    "one_hobby_one_final_master": true,
+    "usage": "same master for hero and article",
+    "ratio": "3:2",
+    "final_webp_px": "1500x1000",
+    "duplicates_are_not_final": true,
+    "rejected_attempts_do_not_count_as_done": true
+  },
+  "summary": {
+    "total": 862,
+    "done_verified": 24,
+    "open_total": 838,
+    "core_semantic_pass_but_tech_fail": 79,
+    "core_semantic_fail": 295,
+    "no_core_open_generate_new": 464,
+    "open_locate_highres_or_generate": 79,
+    "open_generate_new_total": 759
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "target_status": "CORE_TARGET",
+      "final_status": "OPEN",
+      "next_action": "GENERATE_NEW_MASTER",
+      "source_strategy": "CORE_REJECTED",
+      "master_asset": null,
+      "master_sha256": null,
+      "usage": "hero_and_article",
+      "ratio": "3:2",
+      "final_webp_px": "1500x1000",
+      "note": "CORE geprüft: Motiv nicht eindeutig passend; neues Masterbild erforderlich."
+    },
+    {
+      "registry_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "target_status": "CORE_TARGET",
+      "final_status": "
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/core-image-audit-v1.json
+{
+  "format": "HOBBY_DEPOT_CORE_IMAGE_AUDIT",
+  "version": "1.0",
+  "stand": "2026-10-23",
+  "scope": "382 remaining CORE_TARGET candidates after Geocaching final master",
+  "method": "visual inspection of all 212 unique referenced image files plus per-hobby semantic assignment check; technical dimension check on every candidate",
+  "master_contract": {
+    "usage": "same master for hero and article",
+    "ratio": "3:2",
+    "final_px": "1500x1000",
+    "never_upscale": true
+  },
+  "summary": {
+    "candidates_total": 382,
+    "unique_image_files_visually_checked": 212,
+    "semantic_pass": 81,
+    "semantic_fail": 301,
+    "technical_pass_for_1500x1000": 0,
+    "technical_fail_for_1500x1000": 382,
+    "final_reuse_without_replacement": 0
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "current_candidate_source": "hd003",
+      "current_candidate_path": "hobby-depot-v150617/subcategories/bewegen/wurf-ziel-v150627.webp",
+      "candidate_px": "600x320",
+      "semantic_fit": "FAIL",
+      "technical_master_fit": "FAIL_MASTER_SPEC",
+      "final_verdict": "NOT_FINAL",
+      "next_action": "GENERATE_NEW_MASTER",
+      "usage_contract": "same master for hero and article",
+      "required_final_px": "1500x1000",
+      "required_ratio": "3:2",
+      "note": "Motiv
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/hobby-portrait-image-plan-v1.json
+{
+  "format": "HOBBY_PORTRAIT_BILDPLAN_V1",
+  "created_from": "HOBBY_KLASSIFIKATIONSREGISTER_V1.json",
+  "rule": "CORE target -> reuse existing image; no CORE target -> portrait master image, same source image used for finder preview",
+  "image_contract": {
+    "generation_min_px": "1536x1024",
+    "ratio": "3:2",
+    "final_webp_px": "1500x1000",
+    "finder": "downscale/crop only; never upscale"
+  },
+  "summary": {
+    "records_total": 862,
+    "core_target": 383,
+    "no_core_target": 479,
+    "no_core_target_by_surprise": {
+      "nische": 203,
+      "klassisch": 121,
+      "ungewoehnlich": 129,
+      "sehr_schraeg": 26
+    }
+  },
+  "items": [
+    {
+      "registry_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "surprise_level": "nische",
+      "world": "bewegen",
+      "target_node_id": "core:entity:f7dd32545a74ae8fd56d",
+      "target_status": "CORE_TARGET",
+      "portrait_status": "NOT_NEEDED_CORE",
+      "master_image_status": "REUSE_EXISTING_CORE_IMAGE",
+      "master_contract": null
+    },
+    {
+      "registry_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "surprise_level": "klassisch",
+      "world": "technik",
+      "target_node_id": "core:entity:9de27e2c3115f89c375d",
+      "target_status": "CORE_TARGET",
+      "portrait_status": "NOT_NEEDED_CORE",
+      "master_i
+
+HD007 IMAGE JSON hd-hobbyregister-core/data/glossary-image-reserve-v1.json
+{
+  "format": "HOBBY_DEPOT_GLOSSARY_IMAGE_RESERVE",
+  "version": "1.0",
+  "stand": "2026-10-23",
+  "runtime_use": false,
+  "rule": "Reserve files are not used by the Hobbyregister image map. They are retained only as possible future glossary material.",
+  "count": 31,
+  "items": [
+    {
+      "file": "glossary-candidates/a_bright_rustic_sunlit_still_life_scene_of_homem.webp",
+      "original_source_file": "a_bright_rustic_sunlit_still_life_scene_of_homem.png",
+      "sha256": "b2050828ab9ce04811004b7dca9f2d4c8a906850a3ae0efa58039deef31a285b",
+      "status": "GLOSSARY_RESERVE_NOT_ACTIVE",
+      "active_register_assignment": null
+    },
+    {
+      "file": "glossary-candidates/a_bright_warm_realistic_close_up_still_life_food.webp",
+      "original_source_file": "a_bright_warm_realistic_close_up_still_life_food.png",
+      "sha256": "7fb1ab2b6526dc88bfabc811a07f01664385c34b038ad1d1de613b2d89c32a0f",
+      "status": "GLOSSARY_RESERVE_NOT_ACTIVE",
+      "active_register_assignment": null
+    },
+    {
+      "file": "glossary-candidates/a_bright_warm_rustic_photorealistic_collage_sty.webp",
+      "original_source_file": "a_bright_warm_rustic_photorealistic_collage_sty.png",
+      "sha256": "cc337b4e23413da88d7f199cf2e868fd6bb08932a30e8df7ce78918216bfc2b3",
+      "status": "REJECTED_COLLAGE_KEEP_ONLY_DO_NOT_USE_AS_MASTER",
+      "activ
