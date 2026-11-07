@@ -46,6 +46,14 @@ echo "ACTUAL_LEAF_CONTEXT=".json_encode(array_intersect_key($ctx,array_flip(['po
 $fx=$r->getMethod('render_affiliate_slot_for_context');
 $out=$fx->invoke($x,$p,$ctx,'product_after_category_tiles','portal_context','');
 echo "ACTUAL_DIRECT_SLOT=".json_encode(array('bytes'=>strlen($out),'CI'=>strpos($out,'hdar-ci-amazon-banner')!==false,'start'=>substr($out,0,200)))."\n";
+echo "FILTER_ATTACHED ".json_encode(array(
+ 'leaf_hook'=>has_filter('pftk_leaf_page_affiliate_slot_html'),
+ 'cat_hook'=>has_filter('pftk_leaf_category_affiliate_slot_html'),
+ 'register_footer'=>has_action('wp_footer',array($x,'hdar_ci_register_footer')),
+ 'enabled'=>get_option('ppar_enabled'),
+ 'launch'=>HDAR_Amazon_Start::launch_active()))."\n";
+$callback=$x->provide_leaf_page_affiliate_slot_html('',$p,'product_after_category_tiles',array());
+echo "DIRECT_CALLBACK ".json_encode(array('bytes'=>strlen($callback),'CI'=>strpos($callback,'hdar-ci-amazon-banner')!==false,'start'=>substr($callback,0,200)))."\n";
 $filtered=apply_filters('pftk_leaf_page_affiliate_slot_html','',$p,'product_after_category_tiles',array());
 echo "ACTUAL_DESIGN_FILTER=".json_encode(array('bytes'=>strlen($filtered),'CI'=>strpos($filtered,'hdar-ci-amazon-banner')!==false,'start'=>substr($filtered,0,200)))."\n";
 $cg=$r->getMethod('get_content_context')->invoke($x,$g);
@@ -54,12 +62,19 @@ echo "ACTUAL_GLOSS_SLOT=".json_encode(array('bytes'=>strlen($og),'CI'=>strpos($o
 PHP
 echo "E2E STEP: real router/filter context, no synthetic context allowed"
 wp eval-file /tmp/hobby-real-wp/trace.php
-php -S 127.0.0.1:8989 -t /tmp/hobby-real-wp/site >/tmp/hobby-real-wp/server.log 2>&1 &
+cat >/tmp/hobby-real-wp/site/router.php <<'PHP'
+<?php
+$path=parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+$target=__DIR__ . $path;
+if ($path !== '/' && is_file($target)) { return false; }
+require __DIR__ . '/index.php';
+PHP
+php -S 127.0.0.1:8989 -t /tmp/hobby-real-wp/site /tmp/hobby-real-wp/site/router.php >/tmp/hobby-real-wp/server.log 2>&1 &
 sleep 2
 set +e
-curl -fsS --max-time 35 -o /tmp/hobby-real-wp/leaf.html -w "LEAF HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/?page_id=$LEAF"
-curl -fsS --max-time 35 -o /tmp/hobby-real-wp/gloss.html -w "GLOSS HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/?p=$GLOSS&post_type=uge_term"
-curl -fsS --max-time 35 -o /tmp/hobby-real-wp/register.html -w "REGISTER HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/hobbyregister/airbrush-modellbau/"
+curl -fsSL --max-redirs 8 --max-time 35 -o /tmp/hobby-real-wp/leaf.html -w "LEAF HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/?page_id=$LEAF"
+curl -fsSL --max-redirs 8 --max-time 35 -o /tmp/hobby-real-wp/gloss.html -w "GLOSS HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/?p=$GLOSS&post_type=uge_term"
+curl -fsSL --max-redirs 8 --max-time 35 -o /tmp/hobby-real-wp/register.html -w "REGISTER HTTP %{http_code} bytes %{size_download}\n" "http://127.0.0.1:8989/hobbyregister/airbrush-modellbau/"
 set -e
 for key in leaf gloss register; do
   echo "RENDERED_HTML $key:"
